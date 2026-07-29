@@ -122,6 +122,19 @@ main {
 .site-header nav {
   display: flex;
   gap: 0.3rem;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site-header nav::-webkit-scrollbar {
+  display: none;
+}
+
+.site-header nav button,
+.site-header nav a.header-link {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .site-header nav button {
@@ -2282,6 +2295,21 @@ pre {
 .site-footer p {
   color: var(--muted);
   font-size: 0.72rem;
+}
+
+@media (max-width: 1280px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding-bottom: 0.8rem;
+    padding-top: 0.8rem;
+  }
+
+  .site-header nav {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 @media (max-width: 950px) {
