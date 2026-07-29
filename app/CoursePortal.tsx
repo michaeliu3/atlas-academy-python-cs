@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ArcThreeStudio } from "./ArcThreeStudio";
 import { ArcTwoStudio } from "./ArcTwoStudio";
 import { FoundationBlock } from "./FoundationBlock";
@@ -13,207 +13,7 @@ type View =
   | "module"
   | "module2"
   | "arc2"
-  | "arc3"
-  | "diagnostic";
-type Confidence = "low" | "medium" | "high";
-
-type Question = {
-  category: string;
-  prompt: string;
-  code?: string;
-  options: string[];
-  answer: number;
-  explanation: string;
-  misconception: string;
-  connection: string;
-};
-
-const questions: Question[] = [
-  {
-    category: "State & aliasing",
-    prompt: "What does this program print?",
-    code: `a = [[0], [1]]
-b = a[:]
-b[0].append(2)
-b[1] = [9]
-print(a)
-print(b)`,
-    options: [
-      "[[0], [1]] then [[0, 2], [9]]",
-      "[[0, 2], [1]] then [[0, 2], [9]]",
-      "[[0, 2], [9]] then [[0, 2], [9]]",
-      "It raises an exception because nested lists cannot be copied",
-    ],
-    answer: 1,
-    explanation:
-      "The slice creates a new outer list, but both outer lists still reference the same inner lists. Appending mutates the shared first inner list. Reassigning b[1] changes only the second slot of b.",
-    misconception:
-      "A shallow copy makes the outer container independent; it does not recursively duplicate nested objects.",
-    connection:
-      "This same ownership question later governs hash keys, transaction boundaries, and concurrency safety.",
-  },
-  {
-    category: "Functions & state",
-    prompt: "Why can a mutable default argument create order-dependent behavior?",
-    code: `def collect(value, bucket=[]):
-    bucket.append(value)
-    return bucket`,
-    options: [
-      "Python randomly chooses a default on every call",
-      "The default object is created once and reused by calls that omit bucket",
-      "Lists are copied only on even-numbered calls",
-      "Function parameters are global variables",
-    ],
-    answer: 1,
-    explanation:
-      "The default expression is evaluated when the function is defined. Later calls bind bucket to that same list unless a caller supplies another object.",
-    misconception:
-      "A function call creates new parameter bindings, but it does not recreate objects captured in its defaults.",
-    connection:
-      "Hidden shared state is a common cause of flaky tests, cache contamination, and unsafe service handlers.",
-  },
-  {
-    category: "Iteration",
-    prompt: "After next(items) returns 10, what do the two list calls produce?",
-    code: `items = iter([10, 20, 30])
-print(next(items))
-print(list(items))
-print(list(items))`,
-    options: [
-      "[10, 20, 30] and [10, 20, 30]",
-      "[20, 30] and [20, 30]",
-      "[20, 30] and []",
-      "[] and []",
-    ],
-    answer: 2,
-    explanation:
-      "An iterator carries traversal state. The first list call consumes the remaining elements; the second sees an exhausted iterator.",
-    misconception:
-      "An iterable can usually create a fresh iterator. An iterator itself is a one-pass stateful object.",
-    connection:
-      "The distinction becomes essential in streaming pipelines, generators, async streams, and database cursors.",
-  },
-  {
-    category: "Data model",
-    prompt: "Which statement best describes the equality–hashing contract?",
-    options: [
-      "Equal objects must have equal hashes while they are used as keys",
-      "Objects with equal hashes must always be equal",
-      "Every mutable object should define a hash",
-      "Identity and equality are required to be the same",
-    ],
-    answer: 0,
-    explanation:
-      "If a == b, then hash(a) must equal hash(b). The reverse is not required because collisions are possible. A key's hash-relevant state must not change while stored.",
-    misconception:
-      "Hashing narrows the search; equality resolves collisions. Hash equality alone does not establish value equality.",
-    connection:
-      "This contract is the bridge from Python's object model to hash-table correctness and adversarial-input analysis.",
-  },
-  {
-    category: "Algorithms",
-    prompt:
-      "A nested scan compares every unordered pair in a list of n items. What is the tight growth rate?",
-    options: ["Θ(log n)", "Θ(n)", "Θ(n log n)", "Θ(n²)"],
-    answer: 3,
-    explanation:
-      "There are n(n−1)/2 unordered pairs. Constant factors disappear asymptotically, leaving quadratic growth.",
-    misconception:
-      "Two loops are not automatically quadratic, but these loop bounds collectively enumerate a quadratic number of pairs.",
-    connection:
-      "If the goal is only duplicate detection, a hash set can trade additional memory for expected linear-time scanning.",
-  },
-  {
-    category: "Correctness",
-    prompt:
-      "Which loop invariant best supports a left-to-right maximum scan?",
-    options: [
-      "The current maximum equals the final answer before the loop begins",
-      "After processing position i, current_max is the maximum of the processed prefix",
-      "Every unprocessed value is smaller than current_max",
-      "The list is sorted after each iteration",
-    ],
-    answer: 1,
-    explanation:
-      "The invariant describes what is known after each prefix. Initialization, preservation, and termination then connect the local claim to the final result.",
-    misconception:
-      "A useful invariant must be true initially and preserved; it cannot assume facts about unexamined data.",
-    connection:
-      "Invariants later describe data structures, transactions, protocols, and safe concurrent state.",
-  },
-  {
-    category: "Persistence",
-    prompt:
-      "A quiz update writes the score, then crashes before writing mastery status. Which property was missing?",
-    options: [
-      "Caching: every value should remain in memory",
-      "Atomicity: the combined update should happen entirely or not at all",
-      "Compression: both values should occupy fewer bytes",
-      "Parallelism: both writes should run on different CPUs",
-    ],
-    answer: 1,
-    explanation:
-      "The two writes represent one logical state transition. Atomicity prevents other states from observing a half-completed transition.",
-    misconception:
-      "Faster or simultaneous writes do not make the combined operation indivisible.",
-    connection:
-      "The state-transition model from Python becomes the transaction model in databases.",
-  },
-  {
-    category: "Concurrency",
-    prompt: "How can two correct workers lose an increment?",
-    code: `counter = counter + 1`,
-    options: [
-      "Integers occasionally forget their value",
-      "Both workers can read the same old value and then overwrite each other",
-      "Addition is undefined in concurrent programs",
-      "The operating system always executes the statement twice",
-    ],
-    answer: 1,
-    explanation:
-      "The statement contains a read, computation, and write. Their steps can interleave: both workers read 10, both compute 11, and both write 11.",
-    misconception:
-      "A source-code line is not automatically one indivisible machine or runtime operation.",
-    connection:
-      "Concurrency reasoning extends ordinary state traces by considering multiple valid interleavings.",
-  },
-  {
-    category: "Networks",
-    prompt: "Why is automatically retrying a timed-out request sometimes unsafe?",
-    options: [
-      "A timeout proves the server did nothing",
-      "The first request may have succeeded even though its response was lost",
-      "Networks never permit the same request twice",
-      "Retries always corrupt transmitted bytes",
-    ],
-    answer: 1,
-    explanation:
-      "The client knows it did not receive a response; it does not necessarily know whether the server applied the operation. A retry can duplicate a payment or message.",
-    misconception:
-      "Failure to observe success is not proof of failure. Distributed systems must represent uncertainty.",
-    connection:
-      "Idempotency keys and operation design make retries safe under partial failure.",
-  },
-  {
-    category: "Debugging & architecture",
-    prompt:
-      "A report class uses a class-level cache, live HTTP calls, and a bare except that returns None. What is the best first debugging move?",
-    options: [
-      "Rewrite the class with more design patterns",
-      "Add random print statements throughout the project",
-      "Define one failing behavior and isolate it with a controlled dependency",
-      "Catch even more exceptions so the program cannot fail",
-    ],
-    answer: 2,
-    explanation:
-      "A precise failing claim plus a controlled HTTP dependency separates observation from guesswork. It also reveals whether shared cache state affects test order.",
-    misconception:
-      "Architecture changes before diagnosis can erase evidence and introduce new causes.",
-    connection:
-      "This investigation pattern scales from a function to a service: claim, boundary, observation, minimal repair, regression evidence.",
-  },
-];
-
+  | "arc3";
 const arcs = [
   {
     number: "I",
@@ -259,50 +59,10 @@ const arcs = [
 
 export function CoursePortal() {
   const [view, setView] = useState<View>("path");
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [confidences, setConfidences] = useState<
-    Record<number, Confidence>
-  >({});
-  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
-
-  const score = useMemo(
-    () =>
-      questions.reduce(
-        (total, question, index) =>
-          total + (answers[index] === question.answer ? 1 : 0),
-        0,
-      ),
-    [answers],
-  );
-
-  const reviewCategories = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          questions
-            .map((question, index) => ({ question, index }))
-            .filter(
-              ({ question, index }) =>
-                answers[index] !== question.answer ||
-                confidences[index] === "low",
-            )
-            .map(({ question }) => question.category),
-        ),
-      ),
-    [answers, confidences],
-  );
 
   const navigate = (next: View) => {
     setView(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const resetDiagnostic = () => {
-    setQuestionIndex(0);
-    setAnswers({});
-    setConfidences({});
-    setRevealed({});
   };
 
   return (
@@ -355,12 +115,9 @@ export function CoursePortal() {
           >
             Durable software
           </button>
-          <button
-            className={view === "diagnostic" ? "active" : ""}
-            onClick={() => navigate("diagnostic")}
-          >
+          <Link className="header-link" href="/diagnostic">
             Diagnostic
-          </button>
+          </Link>
         </nav>
       </header>
 
@@ -378,12 +135,9 @@ export function CoursePortal() {
               judgment to direct intelligent agents.
             </p>
             <div className="hero-actions">
-              <button
-                className="primary-action"
-                onClick={() => navigate("diagnostic")}
-              >
+              <Link className="primary-action" href="/diagnostic">
                 Begin the diagnostic <span aria-hidden="true">→</span>
-              </button>
+              </Link>
               <button
                 className="text-action"
                 onClick={() => navigate("foundation")}
@@ -484,16 +238,14 @@ export function CoursePortal() {
             <p className="kicker">Your first step</p>
             <h2>Fast answers. Deep diagnosis.</h2>
             <p>
-              Ten multiple-choice questions use carefully designed distractors
-              and confidence ratings to reveal the mental model behind each
-              answer. Every choice teaches.
+              Thirteen multiple-choice investigations pair carefully designed
+              distractors with confidence evidence. Each choice explains the
+              mental model it reveals and routes you to the exact lesson that
+              will strengthen it.
             </p>
-            <button
-              className="primary-action"
-              onClick={() => navigate("diagnostic")}
-            >
+            <Link className="primary-action" href="/diagnostic">
               Start now <span aria-hidden="true">→</span>
-            </button>
+            </Link>
           </section>
         </>
       )}
@@ -674,244 +426,22 @@ current = {"tags": ["databases"]}`}</code>
       {view === "module2" && (
         <ModuleTwoReader
           onBack={() => navigate("foundation")}
-          onDiagnostic={() => navigate("diagnostic")}
+          onDiagnostic={() => window.location.assign("/diagnostic")}
         />
       )}
 
       {view === "arc2" && (
         <ArcTwoStudio
           onOpenFoundation={() => navigate("foundation")}
-          onOpenDiagnostic={() => navigate("diagnostic")}
+          onOpenDiagnostic={() => window.location.assign("/diagnostic")}
         />
       )}
 
       {view === "arc3" && (
         <ArcThreeStudio
           onOpenDataStructures={() => navigate("arc2")}
-          onOpenDiagnostic={() => navigate("diagnostic")}
+          onOpenDiagnostic={() => window.location.assign("/diagnostic")}
         />
-      )}
-
-      {view === "diagnostic" && (
-        <section className="diagnostic-shell">
-          <header className="diagnostic-header">
-            <div>
-              <p className="kicker">Placement studio · 10 questions</p>
-              <h1>Quick to answer. Built to reveal how you think.</h1>
-              <p>
-                Choose an answer and your confidence. The explanation diagnoses
-                the mental model—not just whether the letter was correct.
-              </p>
-            </div>
-            <div className="diagnostic-principle">
-              <strong>No penalty for uncertainty.</strong>
-              <span>
-                A low-confidence correct answer tells us something different
-                from a high-confidence misconception.
-              </span>
-            </div>
-          </header>
-
-          <div className="progress-track" aria-label="Diagnostic progress">
-            <span
-              style={{
-                width: `${Math.min(questionIndex, questions.length) / questions.length * 100}%`,
-              }}
-            />
-          </div>
-
-          {questionIndex < questions.length ? (
-            (() => {
-              const question = questions[questionIndex];
-              const selected = answers[questionIndex];
-              const confidence = confidences[questionIndex];
-              const isRevealed = revealed[questionIndex];
-              const isCorrect = selected === question.answer;
-
-              return (
-                <div className="question-card">
-                  <div className="question-meta">
-                    <span>
-                      Question {questionIndex + 1} of {questions.length}
-                    </span>
-                    <span>{question.category}</span>
-                  </div>
-                  <h2>{question.prompt}</h2>
-                  {question.code && (
-                    <pre>
-                      <code>{question.code}</code>
-                    </pre>
-                  )}
-                  <div className="options" role="radiogroup">
-                    {question.options.map((option, index) => {
-                      const optionCorrect = index === question.answer;
-                      const chosen = selected === index;
-                      const feedbackClass = isRevealed
-                        ? optionCorrect
-                          ? "correct"
-                          : chosen
-                            ? "incorrect"
-                            : ""
-                        : "";
-                      return (
-                        <button
-                          key={option}
-                          className={`${chosen ? "selected" : ""} ${feedbackClass}`}
-                          onClick={() =>
-                            !isRevealed &&
-                            setAnswers((previous) => ({
-                              ...previous,
-                              [questionIndex]: index,
-                            }))
-                          }
-                          role="radio"
-                          aria-checked={chosen}
-                          disabled={isRevealed}
-                        >
-                          <span>{String.fromCharCode(65 + index)}</span>
-                          {option}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {!isRevealed && (
-                    <div className="confidence-row">
-                      <span>How confident are you?</span>
-                      {(["low", "medium", "high"] as Confidence[]).map(
-                        (level) => (
-                          <button
-                            key={level}
-                            className={confidence === level ? "selected" : ""}
-                            onClick={() =>
-                              setConfidences((previous) => ({
-                                ...previous,
-                                [questionIndex]: level,
-                              }))
-                            }
-                          >
-                            {level}
-                          </button>
-                        ),
-                      )}
-                    </div>
-                  )}
-
-                  {isRevealed ? (
-                    <div
-                      className={`answer-panel ${isCorrect ? "correct-panel" : "review-panel"}`}
-                    >
-                      <div className="answer-verdict">
-                        <strong>
-                          {isCorrect
-                            ? "Your model holds here."
-                            : "This reveals a useful gap."}
-                        </strong>
-                        <span>Confidence: {confidence}</span>
-                      </div>
-                      <p>{question.explanation}</p>
-                      <dl>
-                        <div>
-                          <dt>Important distinction</dt>
-                          <dd>{question.misconception}</dd>
-                        </div>
-                        <div>
-                          <dt>Why it matters later</dt>
-                          <dd>{question.connection}</dd>
-                        </div>
-                      </dl>
-                    </div>
-                  ) : (
-                    <button
-                      className="primary-action reveal-button"
-                      disabled={selected === undefined || !confidence}
-                      onClick={() =>
-                        setRevealed((previous) => ({
-                          ...previous,
-                          [questionIndex]: true,
-                        }))
-                      }
-                    >
-                      Reveal the model
-                    </button>
-                  )}
-
-                  <div className="question-nav">
-                    <button
-                      disabled={questionIndex === 0}
-                      onClick={() => setQuestionIndex((index) => index - 1)}
-                    >
-                      ← Previous
-                    </button>
-                    <button
-                      disabled={!isRevealed}
-                      onClick={() => setQuestionIndex((index) => index + 1)}
-                    >
-                      {questionIndex === questions.length - 1
-                        ? "See synthesis →"
-                        : "Next question →"}
-                    </button>
-                  </div>
-                </div>
-              );
-            })()
-          ) : (
-            <div className="results-card">
-              <p className="kicker">Diagnostic synthesis</p>
-              <h2>
-                {score} of {questions.length} mental models held.
-              </h2>
-              <p>
-                The number is only the surface. Your confidence pattern and the
-                categories below determine where explanation or retrieval will
-                help most.
-              </p>
-              <div className="result-scale">
-                <span style={{ width: `${score / questions.length * 100}%` }} />
-              </div>
-              <div className="result-grid">
-                <div>
-                  <strong>Ready to build on</strong>
-                  <p>
-                    Categories answered correctly with medium or high confidence
-                    can move quickly into transfer problems.
-                  </p>
-                </div>
-                <div>
-                  <strong>Review with a counterexample</strong>
-                  {reviewCategories.length ? (
-                    <ul>
-                      {reviewCategories.map((category) => (
-                        <li key={category}>{category}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>No immediate categories flagged. We will verify through code reading.</p>
-                  )}
-                </div>
-              </div>
-              <div className="callout">
-                <strong>What happens next</strong>
-                <p>
-                  The instructor uses these signals to compress familiar
-                  foundations and select targeted code-reading or explanation
-                  work. There is no remedial punishment and no exam ranking.
-                </p>
-              </div>
-              <div className="results-actions">
-                <button className="text-action" onClick={resetDiagnostic}>
-                  Retake diagnostic
-                </button>
-                <button
-                  className="primary-action"
-                  onClick={() => navigate("module")}
-                >
-                  Enter Module 1 →
-                </button>
-              </div>
-            </div>
-          )}
-        </section>
       )}
 
       <footer className="site-footer">

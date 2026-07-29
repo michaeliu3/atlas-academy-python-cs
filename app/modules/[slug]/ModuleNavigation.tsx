@@ -58,7 +58,9 @@ export function ModuleNavigation({
               Module {prerequisite.number}: {prerequisite.title}
             </Link>
           ) : (
-            <Link href="/">Foundation orientation and diagnostic</Link>
+            <Link href="/diagnostic">
+              Foundation placement studio and learning brief
+            </Link>
           )}
         </div>
       ) : null}

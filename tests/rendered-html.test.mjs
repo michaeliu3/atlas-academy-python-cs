@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { diagnosticQuestions } from "../lib/diagnostic-model.js";
 import { extractTableOfContents } from "../lib/heading-ids.js";
 
 async function render(pathname = "/") {
@@ -41,7 +42,32 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Durable software/);
   assert.match(html, /Course library/);
   assert.match(html, /Begin the diagnostic/);
+  assert.match(html, /href="\/diagnostic"/);
+  assert.match(html, /Thirteen multiple-choice investigations/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+});
+
+test("renders the accessible, confidence-aware Module 0 placement studio", async () => {
+  const response = await render("/diagnostic");
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  assert.match(html, /Module 0 Diagnostic · Atlas Academy/);
+  assert.match(html, /Module 0 · 13 reasoning probes/);
+  assert.match(html, /Which pair is correct at the end\?/);
+  assert.match(html, /Choose the model that best predicts the result/);
+  assert.match(html, /No penalty for uncertainty/);
+  assert.match(html, /Restoring saved progress/);
+  assert.match(html, /Answers remain in this browser/);
+  assert.match(html, /type="radio"/);
+  assert.match(html, /<fieldset/);
+  assert.match(html, /<legend/);
+  assert.match(html, /<progress/);
+  assert.match(html, /aria-label="Diagnostic questions"/);
+  assert.match(html, /Reset all answers/);
+  assert.doesNotMatch(html, /role="radiogroup"/);
+  assert.doesNotMatch(html, /window\.confirm/);
 });
 
 test("generated module manifest covers Modules 1–16 exactly once", async () => {
@@ -109,7 +135,7 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /Complete Module 1 workbook/);
   assert.match(html, /Why this module comes first/);
   assert.match(html, /On this page/);
-  assert.match(html, /Foundation orientation and diagnostic/);
+  assert.match(html, /Foundation placement studio and learning brief/);
   assert.match(html, /role="progressbar"/);
   assert.match(html, /aria-valuemin="0"/);
   assert.match(html, /aria-valuemax="100"/);
@@ -146,6 +172,34 @@ test("all generated lessons have valid internal links and math", async () => {
       assert.ok(
         ids.has(fragment),
         `${courseModule.slug} links to missing #${fragment}`,
+      );
+    }
+  }
+});
+
+test("every diagnostic learning route resolves to a published lesson section", async () => {
+  const routesByPath = new Map();
+  for (const question of diagnosticQuestions) {
+    const route = new URL(question.route.href, "http://localhost");
+    const routes = routesByPath.get(route.pathname) ?? [];
+    routes.push({
+      fragment: decodeURIComponent(route.hash.slice(1)),
+      questionId: question.id,
+    });
+    routesByPath.set(route.pathname, routes);
+  }
+
+  for (const [pathname, routes] of routesByPath) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, pathname);
+    const html = await response.text();
+    const ids = new Set(
+      [...html.matchAll(/\sid="([^"]+)"/gu)].map((match) => match[1]),
+    );
+    for (const route of routes) {
+      assert.ok(
+        ids.has(route.fragment),
+        `${route.questionId} links to missing ${pathname}#${route.fragment}`,
       );
     }
   }
