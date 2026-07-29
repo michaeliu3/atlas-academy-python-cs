@@ -1,6 +1,9 @@
 packages:
   - .
 
+# This private site deploys only reviewed, committed lockfile state.
+trustLockfile: true
+
 allowBuilds:
   esbuild: true
   sharp: true
