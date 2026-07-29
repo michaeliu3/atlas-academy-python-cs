@@ -57,15 +57,15 @@ const stages: Array<{
     verb: "Change",
     title: "Architecture under pressure",
     pressure:
-      "A small feature edits CLI, logging, plugins, persistence, orchestration, and tests at once.",
+      "A small change edits parsing, retry, ranking, compatibility output, construction, and tests at once.",
     model:
-      "Change pressures → responsibility → state machine → composed boundaries → reversible refactor.",
+      "PlannerService + immutable PlanSnapshot + distinct BatchEventLoader + LegacyPlanFacade + explicit composition.",
     invariant:
       "Every structural change names preserved observations, one owner, and a rollback route.",
     evidence:
       "Before/after architecture, characterization tests, coherent commit graph, reviewed diff, and bisect predicate.",
     handoff:
-      "The process is understandable and changeable, but its data and executable behavior still die with the checkout.",
+      "The planning path is understandable and changeable, but learning events and executable behavior still die with the process or checkout.",
     accent: "moss",
   },
   {
@@ -81,7 +81,7 @@ const stages: Array<{
     evidence:
       "Golden migrations, corrupt fixtures, interruption timeline, artifact inventory, digest, and clean-environment CLI run.",
     handoff:
-      "A whole snapshot can survive and move, but relationships and competing multi-record updates expose its limits.",
+      "A validated versioned bundle can survive and move, but relationships and competing multi-record updates expose its limits.",
     accent: "saffron",
   },
   {
@@ -91,7 +91,7 @@ const stages: Array<{
     pressure:
       "Redundant records, multi-step invariants, concurrent readers/writers, and crashes make whole-file updates unsafe.",
     model:
-      "Relations + keys + constraints + justified access paths + application-owned transaction boundary.",
+      "ImportValidatedBundle + new EventRepository port + relations + constraints + justified access paths + transaction boundary.",
     invariant:
       "A successful import exposes its run and events together; a failed import exposes neither as committed work.",
     evidence:
@@ -119,21 +119,21 @@ const importRun = [
   },
   {
     label: "Observe",
-    owner: "ImportEvents + RunObserver",
-    known: "The attempt has one run ID and a deliberately bounded signal vocabulary.",
+    owner: "ObservableImportRunner + SignalSink",
+    known: "The terminal ImportSignal has one correlation ID and a deliberately bounded field vocabulary.",
     failure: "Duplicate terminal event, lost correlation, swallowed programming error, or private content leak.",
     evidence: "Captured signal sequence, privacy allowlist, and causal regression.",
   },
   {
     label: "Validate",
-    owner: "Domain + application policy",
-    known: "The bounded batch satisfies value and run-level invariants before durable mutation.",
+    owner: "BatchEventLoader + bundle decoder",
+    known: "A bounded batch and decoded bundle satisfy their declared invariants before durable mutation.",
     failure: "Invalid confidence, duplicate event, unsupported schema, or exceeded batch policy.",
     evidence: "Domain constructors, independent verifier, boundary cases, and stated memory limit.",
   },
   {
     label: "Commit",
-    owner: "EventRepository transaction",
+    owner: "ImportValidatedBundle + EventRepository",
     known: "Run metadata and events become visible as one application operation.",
     failure: "Constraint violation, busy/serialization outcome, mid-write error, or uncertain retry.",
     evidence: "Injected rollback, second-connection visibility, idempotency decision, and engine configuration.",
@@ -337,30 +337,30 @@ export function ArcThreeStudio({
           className="architecture-map"
           aria-label="Atlas dependency architecture"
         >
-          <div className="architecture-node root-node">composition root</div>
-          <div className="architecture-node adapter-node cli-node">CLI</div>
+          <div className="architecture-node root-node">composition roots · M14–M16</div>
+          <div className="architecture-node adapter-node cli-node">Bundle CLI · M15</div>
           <div className="architecture-node adapter-node importer-node">
-            Pipe importer
+            PipeImporter · v1
           </div>
           <div className="architecture-node adapter-node observer-node">
-            Log observer
+            MemorySignals / log sink
           </div>
           <div className="architecture-node adapter-node repository-node">
-            JSON / SQLite
+            SQLite adapter · M16
           </div>
           <div className="architecture-node port-node catalog-node">
-            PluginCatalog
+            EventImporter · RankingPolicy
           </div>
           <div className="architecture-node port-node repo-port-node">
-            EventRepository
+            EventRepository · M16
           </div>
           <div className="architecture-node port-node observer-port-node">
-            RunObserver
+            SignalSink · M13
           </div>
           <div className="architecture-node core-node app-node">
             <span>APPLICATION CORE</span>
-            <strong>ImportEvents</strong>
-            <small>domain values + import policy</small>
+            <strong>PluginCatalog · ObservableImportRunner · PlannerService</strong>
+            <small>PlanSnapshot · BatchEventLoader · ImportValidatedBundle</small>
           </div>
         </div>
       </section>
