@@ -19,7 +19,9 @@ const mono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://atlas-academy-python-cs.openai.site"),
+  metadataBase: new URL(
+    "https://atlas-academy-python-cs.michaelliumingchang.chatgpt.site",
+  ),
   title: "Atlas Academy · Python & Computer Science",
   description:
     "Learn to read, understand, design, debug, and direct intelligent software systems.",

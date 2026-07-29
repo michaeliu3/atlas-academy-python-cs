@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { FoundationBlock } from "./FoundationBlock";
+import { ModuleTwoReader } from "./ModuleTwoReader";
 
-type View = "path" | "module" | "diagnostic";
+type View = "path" | "foundation" | "module" | "module2" | "diagnostic";
 type Confidence = "low" | "medium" | "high";
 
 type Question = {
@@ -311,10 +313,22 @@ export function CoursePortal() {
             Learning path
           </button>
           <button
+            className={view === "foundation" ? "active" : ""}
+            onClick={() => navigate("foundation")}
+          >
+            Foundation
+          </button>
+          <button
             className={view === "module" ? "active" : ""}
             onClick={() => navigate("module")}
           >
             Module 1
+          </button>
+          <button
+            className={view === "module2" ? "active" : ""}
+            onClick={() => navigate("module2")}
+          >
+            Module 2
           </button>
           <button
             className={view === "diagnostic" ? "active" : ""}
@@ -347,9 +361,9 @@ export function CoursePortal() {
               </button>
               <button
                 className="text-action"
-                onClick={() => navigate("module")}
+                onClick={() => navigate("foundation")}
               >
-                Read Module 1
+                Explore the foundation
               </button>
             </div>
             <div className="hero-note">
@@ -457,6 +471,13 @@ export function CoursePortal() {
             </button>
           </section>
         </>
+      )}
+
+      {view === "foundation" && (
+        <FoundationBlock
+          onOpenModuleOne={() => navigate("module")}
+          onOpenModuleTwo={() => navigate("module2")}
+        />
       )}
 
       {view === "module" && (
@@ -617,12 +638,19 @@ current = {"tags": ["databases"]}`}</code>
           <footer className="reader-footer">
             <button
               className="primary-action"
-              onClick={() => navigate("diagnostic")}
+              onClick={() => navigate("module2")}
             >
-              Check the foundation <span aria-hidden="true">→</span>
+              Continue to Module 2 <span aria-hidden="true">→</span>
             </button>
           </footer>
         </article>
+      )}
+
+      {view === "module2" && (
+        <ModuleTwoReader
+          onBack={() => navigate("foundation")}
+          onDiagnostic={() => navigate("diagnostic")}
+        />
       )}
 
       {view === "diagnostic" && (
