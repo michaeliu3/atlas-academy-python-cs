@@ -18,6 +18,7 @@ type ModuleMarkdownProps = {
 };
 
 const languageNames: Readonly<Record<string, string>> = {
+  asm: "Assembly",
   bash: "Shell",
   console: "Console",
   css: "CSS",
@@ -27,6 +28,7 @@ const languageNames: Readonly<Record<string, string>> = {
   mermaid: "Mermaid",
   py: "Python",
   python: "Python",
+  riscv: "RISC-V assembly",
   sql: "SQL",
   text: "Text",
   toml: "TOML",

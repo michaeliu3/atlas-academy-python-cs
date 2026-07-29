@@ -70,21 +70,28 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
   assert.doesNotMatch(html, /window\.confirm/);
 });
 
-test("generated module manifest covers Modules 1–16 exactly once", async () => {
+test("generated module manifest covers Modules 1–17 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 16);
+  assert.equal(manifest.moduleCount, 17);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 16 }, (_, index) => index + 1),
+    Array.from({ length: 17 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 16);
-  assert.equal(manifest.arcs.length, 3);
-  assert.equal(manifest.modules.at(-1).nextSlug, null);
+  assert.equal(new Set(slugs).size, 17);
+  assert.equal(manifest.arcs.length, 4);
+
+  const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
+  const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
+  assert.equal(module17.arcId, "arc-iv");
+  assert.equal(module16.nextSlug, module17.slug);
+  assert.equal(module17.previousSlug, module16.slug);
+  assert.equal(module17.prerequisiteSlug, module16.slug);
+  assert.equal(module17.nextSlug, null);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -121,8 +128,11 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Computation &amp; reasoning/);
   assert.match(html, /Data &amp; algorithms/);
   assert.match(html, /Durable software/);
+  assert.match(html, /Machine &amp; network/);
   assert.match(html, /Values, State, and Execution/);
   assert.match(html, /Relational Data and Transactions/);
+  assert.match(html, /Computer Architecture and the Execution Stack/);
+  assert.match(html, /<dt>17<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -220,4 +230,38 @@ test("renders the finalized relational-transactions workbook", async () => {
   assert.match(html, /Question 8 — Commit, retry, WAL, and backup/);
   assert.match(html, /class="katex-display"/);
   assert.doesNotMatch(html, /katex-error/);
+});
+
+test("renders the finalized computer-architecture workbook", async () => {
+  const response = await render(
+    "/modules/17-computer-architecture-execution-stack",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 17: Computer Architecture and the Execution Stack · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 17 workbook/);
+  assert.match(html, /Bits, width, signedness, and byte order/);
+  assert.match(html, /ISA state and the load\/store contract/);
+  assert.match(html, /Memory hierarchy, cache lines, and locality/);
+  assert.match(html, /I\/O is a boundary, not a single transfer/);
+  assert.match(html, /Runnable Atlas architecture evidence reference/);
+  assert.match(html, /count_due/);
+  assert.match(html, /not the host CPU cache/);
+  assert.match(html, /href="\/downloads\/module17_reference\.py"/);
+  assert.match(html, /Question 8 — Benchmark evidence and causal claims/);
+  assert.match(html, /class="katex-display"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module17_reference.py",
+    import.meta.url,
+  );
+  const reference = await readFile(referenceUrl, "utf8");
+  assert.match(reference, /atlas\.module17\.architecture-evidence\.v2/);
+  assert.match(reference, /first-timed-block-for-condition/);
+  assert.doesNotMatch(reference, /tracemalloc|sys\.getsizeof/);
 });

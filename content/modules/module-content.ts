@@ -15,6 +15,7 @@ import module13 from "./13_specifications_testing_debugging_observability.md?raw
 import module14 from "./14_software_design_and_change.md?raw";
 import module15 from "./15_files_serialization_packaging_delivery.md?raw";
 import module16 from "./16_relational_data_transactions.md?raw";
+import module17 from "./17_computer_architecture_execution_stack.md?raw";
 
 export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "01-values-state-execution": module01,
@@ -33,4 +34,5 @@ export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "14-software-design-and-change": module14,
   "15-files-serialization-packaging-delivery": module15,
   "16-relational-data-transactions": module16,
+  "17-computer-architecture-execution-stack": module17,
 };

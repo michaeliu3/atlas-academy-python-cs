@@ -6,7 +6,7 @@ import { CourseReaderHeader } from "./CourseReaderHeader";
 export const metadata: Metadata = {
   title: "Course Library · Atlas Academy",
   description:
-    "Read the complete connected Python and computer science curriculum, Modules 1–16.",
+    "Read the published connected Python and computer science curriculum, Modules 1–17.",
 };
 
 export default function ModuleLibraryPage() {
@@ -15,7 +15,9 @@ export default function ModuleLibraryPage() {
       <CourseReaderHeader current="library" />
       <div id="main-content" tabIndex={-1}>
         <header className="library-hero">
-          <p className="kicker">The complete reading room · Modules 1–16</p>
+          <p className="kicker">
+            The complete reading room · Modules 1–{moduleManifest.moduleCount}
+          </p>
           <h1>
             One course.
             <em>Every connection visible.</em>
@@ -28,12 +30,12 @@ export default function ModuleLibraryPage() {
           </p>
           <dl className="library-measures" aria-label="Course library scale">
             <div>
-              <dt>16</dt>
+              <dt>{moduleManifest.moduleCount}</dt>
               <dd>connected modules</dd>
             </div>
             <div>
-              <dt>3</dt>
-              <dd>completed arcs</dd>
+              <dt>{moduleManifest.arcs.length}</dt>
+              <dd>published knowledge arcs</dd>
             </div>
             <div>
               <dt>1</dt>

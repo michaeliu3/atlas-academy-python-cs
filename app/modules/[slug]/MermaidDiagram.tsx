@@ -7,9 +7,15 @@ type MermaidDiagramProps = {
 };
 
 function diagramLabel(source: string) {
-  const descriptiveLine = source
+  const lines = source
     .split(/\r?\n/u)
-    .map((line) => line.trim())
+    .map((line) => line.trim());
+  const authoredCaption = lines.find((line) => /^%%\s+\S/u.test(line));
+  if (authoredCaption) {
+    return `Concept diagram: ${authoredCaption.replace(/^%%\s*/u, "").slice(0, 100)}`;
+  }
+
+  const descriptiveLine = lines
     .find((line) => line && !/^(graph|flowchart|sequenceDiagram|classDiagram)\b/iu.test(line));
 
   return descriptiveLine

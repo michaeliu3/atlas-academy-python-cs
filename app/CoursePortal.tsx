@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { ArcFourStudio } from "./ArcFourStudio";
 import { ArcThreeStudio } from "./ArcThreeStudio";
 import { ArcTwoStudio } from "./ArcTwoStudio";
 import { FoundationBlock } from "./FoundationBlock";
@@ -13,7 +14,8 @@ type View =
   | "module"
   | "module2"
   | "arc2"
-  | "arc3";
+  | "arc3"
+  | "arc4";
 const arcs = [
   {
     number: "I",
@@ -114,6 +116,12 @@ export function CoursePortal() {
             onClick={() => navigate("arc3")}
           >
             Durable software
+          </button>
+          <button
+            className={view === "arc4" ? "active" : ""}
+            onClick={() => navigate("arc4")}
+          >
+            Machine & network
           </button>
           <Link className="header-link" href="/diagnostic">
             Diagnostic
@@ -442,6 +450,10 @@ current = {"tags": ["databases"]}`}</code>
           onOpenDataStructures={() => navigate("arc2")}
           onOpenDiagnostic={() => window.location.assign("/diagnostic")}
         />
+      )}
+
+      {view === "arc4" && (
+        <ArcFourStudio onOpenDurableSoftware={() => navigate("arc3")} />
       )}
 
       <footer className="site-footer">

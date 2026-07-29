@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 16,
+  "moduleCount": 17,
   "arcs": [
     {
       "id": "arc-i",
@@ -22,6 +22,13 @@
       "title": "Durable software",
       "range": "Modules 12–16",
       "description": "Turn local reasoning into stable APIs, evidence, maintainable architecture, delivery, and transactions."
+    },
+    {
+      "id": "arc-iv",
+      "numeral": "IV",
+      "title": "Machine & network",
+      "range": "Modules 17–22",
+      "description": "Module 17 opens the machine layer by connecting representation, instructions, processor state, memory hierarchy, and I/O to observable Python behavior."
     }
   ],
   "modules": [
@@ -247,6 +254,20 @@
       "sourceHash": "b80b7cee07b9d42e1afcf498feda08f7de5e4c6e1047911cba67df1be1e933c9",
       "prerequisiteSlug": "15-files-serialization-packaging-delivery",
       "previousSlug": "15-files-serialization-packaging-delivery",
+      "nextSlug": "17-computer-architecture-execution-stack"
+    },
+    {
+      "number": 17,
+      "slug": "17-computer-architecture-execution-stack",
+      "filename": "17_computer_architecture_execution_stack.md",
+      "title": "Computer Architecture and the Execution Stack",
+      "summary": "Arc IV: machine, operating system, and network — from durable Atlas values to bounded explanations of how work becomes state change A Python operation is not a single machine action. It is a semantic request realized through several cont…",
+      "arcId": "arc-iv",
+      "wordCount": 20151,
+      "estimatedMinutes": 96,
+      "sourceHash": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07",
+      "prerequisiteSlug": "16-relational-data-transactions",
+      "previousSlug": "16-relational-data-transactions",
       "nextSlug": null
     }
   ]

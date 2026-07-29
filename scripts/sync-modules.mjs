@@ -14,10 +14,26 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
 const canonicalSourceDirectory = resolve(siteRoot, "..", "modules");
 const outputDirectory = resolve(siteRoot, "content", "modules");
+const canonicalModule17Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module17_reference_candidate.py",
+);
+const publishedModule17Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module17_reference.py",
+);
 const sourceDirectory = await access(canonicalSourceDirectory)
   .then(() => canonicalSourceDirectory)
   .catch(() => outputDirectory);
-const expectedNumbers = Array.from({ length: 16 }, (_, index) => index + 1);
+const publishedThrough = 17;
+const expectedNumbers = Array.from(
+  { length: publishedThrough },
+  (_, index) => index + 1,
+);
 
 const arcs = [
   {
@@ -49,6 +65,16 @@ const arcs = [
       "Turn local reasoning into stable APIs, evidence, maintainable architecture, delivery, and transactions.",
     start: 12,
     end: 16,
+  },
+  {
+    id: "arc-iv",
+    numeral: "IV",
+    title: "Machine & network",
+    range: "Modules 17–22",
+    description:
+      "Module 17 opens the machine layer by connecting representation, instructions, processor state, memory hierarchy, and I/O to observable Python behavior.",
+    start: 17,
+    end: 22,
   },
 ];
 
@@ -126,7 +152,7 @@ if (
   selectedNumbers.some((number, index) => number !== expectedNumbers[index])
 ) {
   throw new Error(
-    `Expected exactly Modules 1–16 in ${sourceDirectory}; found ${selectedNumbers.join(", ")}.`,
+    `Expected exactly Modules 1–${publishedThrough} in ${sourceDirectory}; found ${selectedNumbers.join(", ")}.`,
   );
 }
 
@@ -144,6 +170,20 @@ const modules = [];
 const importLines = [];
 const contentEntries = [];
 let changedFiles = 0;
+
+await mkdir(dirname(publishedModule17Reference), { recursive: true });
+const module17ReferenceSource = await access(canonicalModule17Reference)
+  .then(() => canonicalModule17Reference)
+  .catch(() => publishedModule17Reference);
+const module17Reference = await readFile(module17ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule17Reference,
+    module17Reference,
+  )
+) {
+  changedFiles += 1;
+}
 
 for (const filename of selectedFiles) {
   const number = moduleNumber(filename);
