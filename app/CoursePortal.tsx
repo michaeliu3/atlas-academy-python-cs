@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArcThreeStudio } from "./ArcThreeStudio";
 import { ArcTwoStudio } from "./ArcTwoStudio";
@@ -315,6 +316,9 @@ export function CoursePortal() {
           </span>
         </button>
         <nav aria-label="Course navigation">
+          <Link className="header-link" href="/modules">
+            Course library
+          </Link>
           <button
             className={view === "path" ? "active" : ""}
             onClick={() => navigate("path")}
