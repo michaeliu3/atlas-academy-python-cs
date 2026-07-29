@@ -1,10 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ArcTwoStudio } from "./ArcTwoStudio";
 import { FoundationBlock } from "./FoundationBlock";
 import { ModuleTwoReader } from "./ModuleTwoReader";
 
-type View = "path" | "foundation" | "module" | "module2" | "diagnostic";
+type View =
+  | "path"
+  | "foundation"
+  | "module"
+  | "module2"
+  | "arc2"
+  | "diagnostic";
 type Confidence = "low" | "medium" | "high";
 
 type Question = {
@@ -331,6 +338,12 @@ export function CoursePortal() {
             Module 2
           </button>
           <button
+            className={view === "arc2" ? "active" : ""}
+            onClick={() => navigate("arc2")}
+          >
+            Data structures
+          </button>
+          <button
             className={view === "diagnostic" ? "active" : ""}
             onClick={() => navigate("diagnostic")}
           >
@@ -650,6 +663,13 @@ current = {"tags": ["databases"]}`}</code>
         <ModuleTwoReader
           onBack={() => navigate("foundation")}
           onDiagnostic={() => navigate("diagnostic")}
+        />
+      )}
+
+      {view === "arc2" && (
+        <ArcTwoStudio
+          onOpenFoundation={() => navigate("foundation")}
+          onOpenDiagnostic={() => navigate("diagnostic")}
         />
       )}
 

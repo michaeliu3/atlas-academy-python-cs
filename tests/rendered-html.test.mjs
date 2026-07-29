@@ -32,6 +32,7 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Learn to see the/);
   assert.match(html, /The knowledge spine/);
   assert.match(html, /Less typing\. More ownership\./);
+  assert.match(html, /Data structures/);
   assert.match(html, /Begin the diagnostic/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
