@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ArcThreeStudio } from "./ArcThreeStudio";
 import { ArcTwoStudio } from "./ArcTwoStudio";
 import { FoundationBlock } from "./FoundationBlock";
 import { ModuleTwoReader } from "./ModuleTwoReader";
@@ -11,6 +12,7 @@ type View =
   | "module"
   | "module2"
   | "arc2"
+  | "arc3"
   | "diagnostic";
 type Confidence = "low" | "medium" | "high";
 
@@ -344,6 +346,12 @@ export function CoursePortal() {
             Data structures
           </button>
           <button
+            className={view === "arc3" ? "active" : ""}
+            onClick={() => navigate("arc3")}
+          >
+            Durable software
+          </button>
+          <button
             className={view === "diagnostic" ? "active" : ""}
             onClick={() => navigate("diagnostic")}
           >
@@ -669,6 +677,13 @@ current = {"tags": ["databases"]}`}</code>
       {view === "arc2" && (
         <ArcTwoStudio
           onOpenFoundation={() => navigate("foundation")}
+          onOpenDiagnostic={() => navigate("diagnostic")}
+        />
+      )}
+
+      {view === "arc3" && (
+        <ArcThreeStudio
+          onOpenDataStructures={() => navigate("arc2")}
           onOpenDiagnostic={() => navigate("diagnostic")}
         />
       )}
