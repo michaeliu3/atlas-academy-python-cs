@@ -7,9 +7,21 @@ actually published.
 
 ## Unreleased
 
-- No unreleased course change is recorded here yet. Dependency work remains
-  subject to the tracked transitive-advisory follow-up; it must not be described
-  as a security-clean graph before a compatible, tested remediation lands.
+- No unreleased course change is recorded here yet. The dependency graph must
+  not be described as security-clean while the tracked transitive-advisory
+  follow-up remains open.
+
+## v0.5.1-security (private maintenance milestone)
+
+- Published the private GitHub Release `v0.5.1-security` and refreshed the
+  owner-only Atlas Academy portal as version 18 after protected-main CI
+  completed successfully.
+- Updated the coupled Cloudflare Vite/Wrangler toolchain, moving the affected
+  Miniflare paths to patched Undici, ws, sharp, and esbuild versions where
+  applicable.
+- Kept the remaining Next, Drizzle, and ESLint-related transitive dependency
+  paths explicitly tracked before any broader portal access. This release does
+  not claim a security-clean dependency graph.
 
 ## v0.5-languages (private course milestone)
 
