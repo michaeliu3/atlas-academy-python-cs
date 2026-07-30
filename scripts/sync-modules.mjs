@@ -218,6 +218,30 @@ const publishedModule25Tests = resolve(
   "downloads",
   "test_module25_reference.py",
 );
+const canonicalModule26Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module26_reference.py",
+);
+const publishedModule26Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module26_reference.py",
+);
+const canonicalModule26Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module26_reference.py",
+);
+const publishedModule26Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module26_reference.py",
+);
 const canonicalResearchDirectory = resolve(siteRoot, "..", "research");
 const sourceMapOutputDirectory = resolve(siteRoot, "content", "source-maps");
 const sourceDirectory = await access(canonicalSourceDirectory)
@@ -226,7 +250,7 @@ const sourceDirectory = await access(canonicalSourceDirectory)
 const sourceMapDirectory = await access(canonicalResearchDirectory)
   .then(() => canonicalResearchDirectory)
   .catch(() => sourceMapOutputDirectory);
-const publishedThrough = 25;
+const publishedThrough = 26;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -625,6 +649,32 @@ if (
   await writeIfChanged(
     publishedModule25Tests,
     module25Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module26ReferenceSource = await access(canonicalModule26Reference)
+  .then(() => canonicalModule26Reference)
+  .catch(() => publishedModule26Reference);
+const module26Reference = await readFile(module26ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule26Reference,
+    module26Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module26TestsSource = await access(canonicalModule26Tests)
+  .then(() => canonicalModule26Tests)
+  .catch(() => publishedModule26Tests);
+const module26Tests = await readFile(module26TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule26Tests,
+    module26Tests,
   )
 ) {
   changedFiles += 1;

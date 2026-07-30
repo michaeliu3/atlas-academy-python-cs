@@ -20,6 +20,7 @@ import { SecurityTrustStudio } from "../../SecurityTrustStudio";
 import { LanguageInterpreterStudio } from "../../LanguageInterpreterStudio";
 import { RuntimeEvidenceObservatory } from "../../RuntimeEvidenceObservatory";
 import { EvidenceGroundedStudio } from "../../EvidenceGroundedStudio";
+import { CapstoneDefenseStudio } from "../../CapstoneDefenseStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -107,6 +108,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "25-evidence-grounded-intelligent-systems" && (
           <EvidenceGroundedStudio />
+        )}
+        {slug === "26-systems-capstone-open-source-stewardship" && (
+          <CapstoneDefenseStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
