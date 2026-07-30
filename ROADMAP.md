@@ -17,7 +17,7 @@ or project evidence shows a necessary bridge.
 
 - [x] Module 23 — programming languages, interpreters, bounded evaluation.
 - [x] Module 24 — CPython, performance, and memory evidence.
-- [ ] Module 25 — evidence-grounded intelligent and human-centered systems.
+- [x] Module 25 — evidence-grounded intelligent and human-centered systems.
 - [ ] Module 26 — systems capstone, open-source stewardship, and oral
   architecture defense.
 
@@ -42,7 +42,8 @@ or project evidence shows a necessary bridge.
 5. `v0.5-languages` — Module 23 and its Language Lab.
 6. `v0.5.2-runtime-evidence` — Module 24 and its Runtime Evidence
    Observatory.
-7. `v0.6-capstone` — Modules 25–26, final defense, full repository audit.
+7. `v0.5.3-decision-evidence` — Module 25 and its Next-Step Evidence Studio.
+8. `v0.6-capstone` — Module 26, final defense, full repository audit.
 
 Each milestone requires passing portal/model checks, source attribution review,
 accessibility review, release notes, and a statement of known limitations.
