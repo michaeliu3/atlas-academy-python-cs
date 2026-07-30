@@ -37,21 +37,27 @@ The course privileges reading unfamiliar code, modelling, debugging,
 architectural reasoning, reviewing AI-generated changes, and evidence over
 rote typing or exam drill.
 
-## 60-day Atlas Core: route and release status
+## 60-day Atlas Core: intended route and release status
 
 The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
 days. It is a rigorous connected first pass, not a claim of instant durable
 mastery. The learner route has 36 defined modules: 28 are open on the active
 Core, 2 released synthesis workbooks are clearly labelled previews, and 6
-advanced depth modules are in authoring. The learner route pauses at an
-authoring-only prerequisite rather than silently skipping it. The checked-in
-canonical graph at `content/course/course-graph.v1.json` is the source for
-route order, academic prerequisites, availability, and manifest projections.
+advanced depth modules are in authoring. The checked-in canonical graph at
+`content/course/course-graph.v1.json` is the source for route order, academic
+prerequisites, availability, and manifest projections.
 
-Every module ends with a short constructive oral defense: GPT Live Chat is the
-preferred surface when available, with an equivalent text route. It evaluates
-models, reasoning, boundaries, transfer, and reflection—not speech speed or a
-scripted performance.
+The table below is the **intended full canonical order**, not a claim that
+every scheduled module is available today. The release-aware [60-, 90-, and
+180-day learner route plans](docs/LEARNER_ROUTE_PLANS.md) explain the current
+published-content path, pace selector, bridge and catch-up rules, minimum
+evidence, and the authoring/preview boundary.
+
+Each currently published, non-preview workbook ends with a short constructive
+oral defense: GPT Live Chat is the preferred surface when available, with an
+equivalent text route. It evaluates models, reasoning, boundaries, transfer,
+and reflection—not speech speed or a scripted performance. Preview and
+authoring-only modules are not represented as having completed learner flows.
 
 | Days | Focus |
 |---|---|
@@ -63,7 +69,7 @@ scripted performance.
 | 35–44 | M18–M24 operating, network, trust, language, and runtime boundaries |
 | 45–53 | M32–M36 accelerators, formal limits, classical AI, ML, and learning theory (in authoring) |
 | 54–55 | M25 evidence-grounded, human-centered intelligent systems (released preview until M31–M36 evidence exists) |
-| 56–60 | M26 capstone release and oral architecture defense (released preview until M25 becomes Core-open) |
+| 56–60 | M26 capstone orientation and oral-architecture-defense rehearsal (released preview until M25 becomes Core-open) |
 
 The schedule adapts to diagnostic evidence, difficult concepts, project
 revision, and retrieval needs. At the lower end of the weekly time budget, or
@@ -94,6 +100,7 @@ pnpm check:generated
 pnpm types:worker
 pnpm typecheck
 pnpm lint
+pnpm validate:performance-budget
 pnpm test
 pnpm test:browser
 python -m unittest discover -s public/downloads -p "test_module*_reference.py"
@@ -104,10 +111,18 @@ rendered HTML contracts. The Python suite exercises deterministic, local-only
 teaching models. No model should perform network, filesystem, process,
 database, package, credential, or arbitrary-code operations.
 
-`pnpm test:browser` is the focused Chromium/axe acceptance gate. The GitHub
-Linux run is the release evidence for it; see
+`pnpm test:browser` is the focused Chromium/axe acceptance gate. Only a
+successful, recorded GitHub Linux run for the exact source commit is release
+evidence for it; see
 [browser acceptance](docs/BROWSER_ACCESSIBILITY_ACCEPTANCE.md) for its exact
 scope and the current Windows local-server limitation.
+
+`pnpm validate:performance-budget` inspects the production build's emitted
+client assets and manifest boundaries. It enforces raw-byte limits for the
+client assets, browser-entry static closure, and named code-split studios; it
+does not make a network-speed or real-user-performance claim. See [client
+performance budget](docs/CLIENT_PERFORMANCE_BUDGET.md) for the exact measured
+and unmeasured scope.
 
 `worker-configuration.d.ts` is generated from the checked-in `wrangler.jsonc`
 binding contract and must remain fresh. The type configuration is not evidence

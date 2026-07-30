@@ -7,6 +7,26 @@ actually published.
 
 ## Unreleased
 
+- Added a 20-probe, confidence-aware, local-only intake across Python,
+  algorithms, systems, discrete mathematics, linear algebra, calculus,
+  probability, optimization, and AI/ML reasoning. Its repairs remain inside
+  the canonical graph, disclose direct academic prerequisites, and never
+  unlock authoring-only material; it is formative evidence, not a validated
+  placement instrument.
+- Added honest 60-, 90-, and 180-day route plans, a pace selector, catch-up
+  rules, and minimum learner-evidence expectations. They distinguish current
+  published material from preview and authoring-only boundaries rather than
+  presenting the intended 36-module order as available today.
+- Added an emitted-client-artifact performance budget with reviewed raw-byte,
+  initial-entry, and code-split-studio limits. It is deliberately not a
+  network, device, or real-user-performance claim.
+- Corrected keyboard focus and contrast defects found by the first Linux
+  browser-accessibility attempt. That earlier run remains recorded as failed;
+  a later exact-commit Linux run must pass before browser accessibility is
+  recorded as acceptance evidence.
+- Reconciled existing GitHub Release pages and tag targets in the provenance
+  ledger without rewriting release history. Historical private-deployment
+  assertions remain unverified in that ledger unless separately evidenced.
 - Added the versioned canonical course graph and removed route/navigation
   shortcuts that could bypass M31–M36 before M25/M26 synthesis work.
 - Added a structural module-contract migration gate and a repository-local,
