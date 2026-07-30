@@ -679,6 +679,71 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(style, /focus-visible/);
 });
 
+test("Module 26 preserves its evidence-first capstone flow and local-only boundary", async () => {
+  const studioUrl = new URL("../app/CapstoneDefenseStudio.tsx", import.meta.url);
+  const styleUrl = new URL("../app/CapstoneDefenseStudio.module.css", import.meta.url);
+  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
+  const [studio, style, page] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(styleUrl, "utf8"),
+    readFile(pageUrl, "utf8"),
+  ]);
+
+  const exactInvariant =
+    "A capstone release is a versioned evidence bundle, not a polished demo. Each consequential claim needs a named owner, representation or contract, appropriate test or observation, cost and failure boundary, security/privacy implication, human-impact evaluation, and explicit limitation. Agent-generated work remains an untrusted proposal until independently reviewed and verified.";
+  assert.ok(studio.includes(exactInvariant));
+  assert.match(page, /CapstoneDefenseStudio/);
+  assert.match(page, /slug === "26-systems-capstone-open-source-stewardship"/);
+  assert.match(page, /<CapstoneDefenseStudio \/>/);
+
+  const orderedViewIds = ["brief", "threads", "failure", "patch", "ledger", "board"];
+  for (const viewLabel of [
+    "Release Brief",
+    "System Threads",
+    "Failure Playback",
+    "Red-Team Patch Bay",
+    "Evidence Ledger",
+    "Release Board & Defense",
+  ]) {
+    assert.ok(studio.includes('label: "' + viewLabel + '"'), viewLabel);
+  }
+  for (const [index, viewId] of orderedViewIds.entries()) {
+    const nextViewId = orderedViewIds[index + 1];
+    if (nextViewId) {
+      assert.ok(
+        studio.indexOf('id: "' + viewId + '"') < studio.indexOf('id: "' + nextViewId + '"'),
+        "capstone view order keeps failure and repair before evidence synthesis",
+      );
+    }
+  }
+
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /aria-controls=\{`capstone-panel-\$\{view\.id\}`\}/);
+  assert.match(studio, /id=\{`capstone-panel-\$\{view\.id\}`\}/);
+  assert.match(studio, /hidden=\{!selected\}/);
+  assert.match(studio, /role="group"/);
+  assert.match(studio, /aria-pressed=\{selected\}/);
+  assert.doesNotMatch(studio, /role="radiogroup"/);
+  assert.match(studio, /"ArrowRight"/);
+  assert.match(studio, /"ArrowLeft"/);
+  assert.match(studio, /"Home"/);
+  assert.match(studio, /"End"/);
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /isStudioRecord/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /0<\/b> live learner records/);
+  assert.match(studio, /0<\/b> external calls/);
+  assert.match(studio, /never applies, merges, publishes, or deploys a patch/);
+  assert.doesNotMatch(studio, /window\.confirm/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /focus-visible/);
+});
+
 test("release architecture keeps Notion capture manual and out of the portal runtime", async () => {
   const architectureUrl = new URL("../docs/ARCHITECTURE.md", import.meta.url);
   const privacyUrl = new URL("../docs/PRIVACY.md", import.meta.url);
@@ -1006,19 +1071,19 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–25 exactly once", async () => {
+test("generated module manifest covers Modules 1–26 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 25);
+  assert.equal(manifest.moduleCount, 26);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 25 }, (_, index) => index + 1),
+    Array.from({ length: 26 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 25);
+  assert.equal(new Set(slugs).size, 26);
   assert.equal(manifest.arcs.length, 5);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
@@ -1031,6 +1096,7 @@ test("generated module manifest covers Modules 1–25 exactly once", async () =>
   const module23 = manifest.modules.find((courseModule) => courseModule.number === 23);
   const module24 = manifest.modules.find((courseModule) => courseModule.number === 24);
   const module25 = manifest.modules.find((courseModule) => courseModule.number === 25);
+  const module26 = manifest.modules.find((courseModule) => courseModule.number === 26);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -1064,7 +1130,11 @@ test("generated module manifest covers Modules 1–25 exactly once", async () =>
   assert.equal(module25.arcId, "arc-v");
   assert.equal(module25.previousSlug, module24.slug);
   assert.equal(module25.prerequisiteSlug, module24.slug);
-  assert.equal(module25.nextSlug, null);
+  assert.equal(module25.nextSlug, module26.slug);
+  assert.equal(module26.arcId, "arc-v");
+  assert.equal(module26.previousSlug, module25.slug);
+  assert.equal(module26.prerequisiteSlug, module25.slug);
+  assert.equal(module26.nextSlug, null);
 });
 
 test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
@@ -1127,7 +1197,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Programming Languages, Interpreters &amp; Bounded Evaluation/);
   assert.match(html, /CPython, Performance &amp; Memory Evidence/);
   assert.match(html, /Evidence-Grounded Intelligent &amp; Human-Centered Systems/);
-  assert.match(html, /<dt>25<\/dt>/);
+  assert.match(html, /Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense/);
+  assert.match(html, /<dt>26<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1687,4 +1758,55 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
     referenceTests,
     /test_fixed_scenarios_cover_each_boundary_without_dynamic_input/,
   );
+});
+
+test("renders the systems-capstone workbook and publishes its bounded model", async () => {
+  const response = await render("/modules/26-systems-capstone-open-source-stewardship");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 26: Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 26 workbook/);
+  assert.match(html, /Make the release argument\./);
+  assert.match(html, /Release Brief/);
+  assert.match(html, /Failure Playback/);
+  assert.match(html, /Red-Team Patch Bay/);
+  assert.match(html, /Evidence Ledger/);
+  assert.match(html, /A capstone release is a versioned evidence bundle/);
+  assert.match(html, /Atlas Release Dossier \/ Open-Source Stewardship Track/);
+  assert.match(html, /href="\/downloads\/module26_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module26_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module26_reference.py",
+    import.meta.url,
+  );
+  const testsUrl = new URL(
+    "../public/downloads/test_module26_reference.py",
+    import.meta.url,
+  );
+  const [reference, referenceTests] = await Promise.all([
+    readFile(referenceUrl, "utf8"),
+    readFile(testsUrl, "utf8"),
+  ]);
+  assert.match(reference, /def validate_release_contract/);
+  assert.match(reference, /def trace_dependency_closure/);
+  assert.match(reference, /def replay_incident/);
+  assert.match(reference, /def evaluate_claim_ledger/);
+  assert.match(reference, /def review_change_request/);
+  assert.match(reference, /def decide_release/);
+  assert.match(reference, /ALLOWED_REQUESTED_ACTIONS = frozenset\(\)/);
+  assert.match(reference, /human-impact-review/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module26_reference as model/);
+  assert.match(referenceTests, /test_unknown_or_alias_external_action_is_a_hard_rejection/);
+  assert.match(referenceTests, /test_stale_raw_claims_and_artifacts_cannot_support_the_candidate/);
+  assert.match(referenceTests, /test_missing_raw_human_impact_record_requires_revision/);
 });

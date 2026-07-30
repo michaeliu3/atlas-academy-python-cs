@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 25,
+  "moduleCount": 26,
   "arcs": [
     {
       "id": "arc-i",
@@ -387,6 +387,20 @@
       "sourceHash": "22d5d913da93c99a298f5e8a5b4237d1126a516f67b226c22b8e26f2b0c2bb51",
       "prerequisiteSlug": "24-cpython-performance-memory",
       "previousSlug": "24-cpython-performance-memory",
+      "nextSlug": "26-systems-capstone-open-source-stewardship"
+    },
+    {
+      "number": 26,
+      "slug": "26-systems-capstone-open-source-stewardship",
+      "filename": "26_systems_capstone_open_source_stewardship.md",
+      "title": "Systems Capstone, Open-Source Stewardship & Oral Architecture Defense",
+      "summary": "Bridge: Module 25 ended with a bounded decision-support feature and an evidence packet. This module asks the harder systems question: can that feature live inside a maintained product without borrowing authority from a demo, a green chec…",
+      "arcId": "arc-v",
+      "wordCount": 7809,
+      "estimatedMinutes": 38,
+      "sourceHash": "2437873916c8efbc9cbdfdaae7e1303c4878e1bd8e3a9cb649c02e0a76cba2b2",
+      "prerequisiteSlug": "25-evidence-grounded-intelligent-systems",
+      "previousSlug": "25-evidence-grounded-intelligent-systems",
       "nextSlug": null
     }
   ]

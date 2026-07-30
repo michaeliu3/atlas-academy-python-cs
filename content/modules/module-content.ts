@@ -24,6 +24,7 @@ import module22 from "./22_security_privacy_trust_boundaries.md?raw";
 import module23 from "./23_programming_languages_interpreters.md?raw";
 import module24 from "./24_cpython_performance_memory.md?raw";
 import module25 from "./25_evidence_grounded_intelligent_systems.md?raw";
+import module26 from "./26_systems_capstone_open_source_stewardship.md?raw";
 
 export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "01-values-state-execution": module01,
@@ -51,4 +52,5 @@ export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "23-programming-languages-interpreters": module23,
   "24-cpython-performance-memory": module24,
   "25-evidence-grounded-intelligent-systems": module25,
+  "26-systems-capstone-open-source-stewardship": module26,
 };
