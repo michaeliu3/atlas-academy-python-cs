@@ -5,6 +5,12 @@ import { fileURLToPath } from "node:url";
 import { advancedModuleBridgePath } from "./advanced-module-bridge.mjs";
 import { loadCourseGraph, projectReadableModules } from "./course-graph.mjs";
 import {
+  legacyModuleContractAuditRelativePath,
+  loadLegacyModuleContractAudit,
+  renderLegacyModuleContractAuditReport,
+  validateLegacyModuleContractAudit,
+} from "./validate-legacy-module-contract-audit.mjs";
+import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
@@ -33,6 +39,12 @@ const releaseInputsPath = resolve(
   "content",
   "course",
   "release-inputs.v1.json",
+);
+const legacyModuleContractAuditPath = resolve(siteRoot, legacyModuleContractAuditRelativePath);
+const legacyModuleContractAuditReportPath = resolve(
+  siteRoot,
+  "docs",
+  "LEGACY_MODULE_CONTRACT_AUDIT.md",
 );
 
 function moduleNumber(filename) {
@@ -158,12 +170,18 @@ const modules = [];
 const importLines = [];
 const contentEntries = [];
 const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
+const legacyModuleContractAudit = await loadLegacyModuleContractAudit(siteRoot);
+const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
+  legacyModuleContractAudit,
+  { siteRoot },
+);
 const releaseInputPaths = new Set([
   graphPath,
   performanceBudgetPolicyPath,
   contractPath,
   advancedModuleBridgePath(siteRoot),
   releaseInputPolicyPath(siteRoot),
+  legacyModuleContractAuditPath,
 ]);
 
 for (const projectedModule of projectedModules) {
@@ -242,6 +260,7 @@ for (const projectedModule of projectedModules) {
 await requireFile(contractPath, "Module contract registry");
 await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
+await requireFile(legacyModuleContractAuditPath, "Legacy module-contract audit input");
 for (const path of releaseInputPolicy.downloadPaths) {
   await requireFile(path, "Allowlisted local teaching artifact");
   releaseInputPaths.add(path);
@@ -282,6 +301,10 @@ const changed = await Promise.all([
   writeIfChanged(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`),
   writeIfChanged(moduleContentPath, generatedModuleContent),
   writeIfChanged(releaseInputsPath, `${JSON.stringify(releaseInputs, null, 2)}\n`),
+  writeIfChanged(
+    legacyModuleContractAuditReportPath,
+    renderLegacyModuleContractAuditReport(legacyModuleContractAudit, legacyModuleContractAuditReport),
+  ),
 ]);
 console.log(
   `Synced ${modules.length} modules from checked-in content; ${releaseInputs.inputs.length} hashed release inputs (${changed.filter(Boolean).length} generated files updated).`,

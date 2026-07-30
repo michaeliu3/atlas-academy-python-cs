@@ -10,6 +10,7 @@ const generatedPaths = [
   "content/modules/manifest.json",
   "content/modules/module-content.ts",
   "content/course/release-inputs.v1.json",
+  "docs/LEGACY_MODULE_CONTRACT_AUDIT.md",
 ];
 
 const { stdout } = await execFileAsync(

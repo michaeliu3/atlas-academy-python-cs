@@ -17,6 +17,11 @@ import {
   loadModuleContractEvidenceRegistry,
   validateModuleContractEvidenceRegistry,
 } from "./module-contract-evidence.mjs";
+import {
+  legacyModuleContractAuditRelativePath,
+  loadLegacyModuleContractAudit,
+  validateLegacyModuleContractAudit,
+} from "./validate-legacy-module-contract-audit.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -164,6 +169,15 @@ export async function validateCourseContracts(
   let draftEvidence = null;
 
   try {
+    const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
+    await validateLegacyModuleContractAudit(legacyAudit, { siteRoot });
+  } catch (error) {
+    errors.push(
+      `Legacy module-contract audit must remain a valid canonical evidence inventory: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
     const draftRegistry = await loadModuleContractEvidenceRegistry(siteRoot);
     draftEvidence = await validateModuleContractEvidenceRegistry(draftRegistry, { siteRoot });
     warnings.push(
@@ -233,6 +247,7 @@ export async function validateCourseContracts(
     graphPath,
     contractsPath,
     advancedModuleBridgePath(siteRoot),
+    resolve(siteRoot, legacyModuleContractAuditRelativePath),
   ]);
   try {
     const bridgeLedger = await loadAdvancedModuleBridgeLedger(siteRoot);

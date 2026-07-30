@@ -9,6 +9,10 @@
       "sha256": "7b92554b7ea14ce73dad8d43afba5d94078f164e7d2b8e1853ffbe29e4a71da0"
     },
     {
+      "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
+      "sha256": "b34bfa04c08d9194e461285c6a63ee3f44469636c8ad85b19c9bf16f8e6d2044"
+    },
+    {
       "path": "content/course/contracts/module-contracts.v1.json",
       "sha256": "a93767ad626e60d07bb188e513e3b9efe8d6e0608ebeb7acf634389962c4a807"
     },

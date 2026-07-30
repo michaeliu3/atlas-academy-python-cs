@@ -5,6 +5,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { advancedModuleBridgeRelativePath } from "../scripts/advanced-module-bridge.mjs";
+import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
 
@@ -37,6 +38,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes("content/course/client-performance-budget.v1.json"));
   assert.ok(paths.includes("content/course/contracts/module-contracts.v1.json"));
   assert.ok(paths.includes(advancedModuleBridgeRelativePath));
+  assert.ok(paths.includes(legacyModuleContractAuditRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
   assert.ok(paths.includes("content/source-maps/python_curriculum_sources.md"));
