@@ -79,6 +79,11 @@ review branch. Unless a row separately records the checked-out ref, it is not
 deployment-style evidence that an artifact was built from the head commit
 alone.
 
+Course CI pins its third-party Actions to reviewed full commit SHAs. That makes
+the workflow configuration more reproducible than mutable major tags, but it
+does not independently verify a run URL, prevent every workflow-policy change,
+or establish a complete software-supply-chain claim.
+
 | Source commit | Evidence changed | GitHub Actions evidence | What this establishes | What it does not establish |
 | --- | --- | --- | --- | --- |
 | [`e524b4050b1a95958a838156e0e1133aaad27619`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/e524b4050b1a95958a838156e0e1133aaad27619) | Deterministic, allowlisted release inputs | [Run 30565380896](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30565380896) — successful | The recorded GitHub workflow validated this source commit. | A GitHub Release, a private deployment, complete module-contract verification, or absence of security risk. |

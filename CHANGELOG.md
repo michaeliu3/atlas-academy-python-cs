@@ -47,6 +47,10 @@ actually published.
   M27/M28 → M29 → M30 route, and bounded implementation artifacts while
   preserving the audit's ambiguous rigor, code, source, and visual findings.
   It records no review, verification, release, or learner-mastery claim.
+- Pinned every third-party action in Course CI to a reviewed full commit SHA,
+  with readable version comments and a regression test. This narrows mutable
+  action-tag drift; it is not a complete supply-chain or remote-CI-evidence
+  guarantee.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;
