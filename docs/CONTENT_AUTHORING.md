@@ -68,7 +68,8 @@ contract-verified. It must never be weakened merely to make CI green.
   private deployment must never read an adjacent authoring workspace.
 - `content/course/release-inputs.v1.json` is generated from the allowlisted
   repository inputs and records their SHA-256 hashes. It is a content-provenance
-  record, not a substitute for a reviewed Git commit or release ledger.
+  record, not a substitute for a reviewed Git commit or release ledger. Text
+  input hashes use canonical LF newlines so Windows and Linux checkouts agree.
 - Prefer official language/standard documentation and primary sources.
 - Use university courses for sequence and pedagogy, not copied assignments or
   solutions.

@@ -13,6 +13,10 @@ function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
+function canonicalTextContent(value) {
+  return value.replace(/\r\n?/gu, "\n");
+}
+
 test("the release-input ledger is a reproducible local allowlist", async () => {
   const ledger = JSON.parse(await readFile(ledgerPath, "utf8"));
   assert.equal(ledger.schemaVersion, 1);
@@ -34,6 +38,10 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
     const stats = await lstat(path);
     assert.ok(stats.isFile(), `${input.path} is a regular file`);
     assert.ok(!stats.isSymbolicLink(), `${input.path} is not a symlink`);
-    assert.equal(sha256(await readFile(path)), input.sha256, `${input.path} hash matches`);
+    assert.equal(
+      sha256(canonicalTextContent(await readFile(path, "utf8"))),
+      input.sha256,
+      `${input.path} hash matches`,
+    );
   }
 });

@@ -120,7 +120,10 @@ async function requireFile(path, description) {
 }
 
 async function releaseInputRecord(path) {
-  const content = await readFile(path);
+  // All current allowlisted course inputs are UTF-8 source, workbook, map, or
+  // local teaching-model text. Canonicalize line endings so a Git checkout on
+  // Windows produces the same content-provenance ledger as Linux CI.
+  const content = normalizeNewlines(await readFile(path, "utf8"));
   return {
     path: repositoryPath(path),
     sha256: sha256(content),

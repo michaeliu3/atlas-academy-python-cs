@@ -24,6 +24,8 @@ actually published.
 - Added checked Worker binding types, strict TypeScript and type-freshness CI
   gates, and conservative response headers. These controls do not by themselves
   verify a production deployment or resolve known dependency advisories.
+- Canonicalized newline handling in the hashed release-input ledger so a
+  Windows checkout and Linux GitHub runner produce the same evidence hash.
 
 ## v0.6-capstone (private course milestone)
 
