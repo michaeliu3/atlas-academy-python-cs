@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 22,
+  "moduleCount": 23,
   "arcs": [
     {
       "id": "arc-i",
@@ -29,6 +29,13 @@
       "title": "Machine & network",
       "range": "Modules 17–22",
       "description": "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries."
+    },
+    {
+      "id": "arc-v",
+      "numeral": "V",
+      "title": "Languages & intelligence",
+      "range": "Modules 23–26",
+      "description": "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense."
     }
   ],
   "modules": [
@@ -338,6 +345,20 @@
       "sourceHash": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1",
       "prerequisiteSlug": "21-async-distributed-systems",
       "previousSlug": "21-async-distributed-systems",
+      "nextSlug": "23-programming-languages-interpreters"
+    },
+    {
+      "number": 23,
+      "slug": "23-programming-languages-interpreters",
+      "filename": "23_programming_languages_interpreters.md",
+      "title": "Programming Languages, Interpreters & Bounded Evaluation",
+      "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 22 established that incoming data does not become authority merely because it has a plausible shape. This module makes that principle operational: text can have syntax and s…",
+      "arcId": "arc-v",
+      "wordCount": 7093,
+      "estimatedMinutes": 34,
+      "sourceHash": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742",
+      "prerequisiteSlug": "22-security-privacy-trust-boundaries",
+      "previousSlug": "22-security-privacy-trust-boundaries",
       "nextSlug": null
     }
   ]

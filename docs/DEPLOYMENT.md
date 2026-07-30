@@ -1,0 +1,70 @@
+# Deployment
+
+## Current truth
+
+Atlas Academy is deployed as a **private ChatGPT Sites** application. The
+portal uses Vinext/Cloudflare worker/server output. It is not currently a
+GitHub Pages deployment, and this repository must not claim otherwise.
+
+The project deliberately has two remotes with different responsibilities:
+
+- `github` is configured for the private GitHub project: source review,
+  GitHub Actions CI after a workflow is pushed, issues, and any future GitHub
+  Releases.
+- `origin` is the existing private ChatGPT Sites hosting remote. It is a
+  deployment input, not a GitHub remote, CI system, or release registry.
+
+There is no automatic GitHub-to-hosting deployment in the checked-in workflow.
+A configured remote, a workflow file, a local tag, or a changelog heading is
+not evidence that CI ran or a GitHub Release was published. Verify those
+outcomes in GitHub's Actions and Releases interfaces before relying on them.
+
+## Two-remote operating policy
+
+Run all quality gates before publishing. Address each remote explicitly; do
+not rely on an implicit default and do not use `git push --all`:
+
+~~~text
+git push github main
+git push origin main
+~~~
+
+Pushes remain separate because their effects are separate: the first makes the
+reviewable source and CI workflow available to GitHub; the second supplies the
+private hosting workflow. Neither action substitutes for verifying the other.
+Never send learner records, Notion exports, credentials, or hosting tokens to
+either remote.
+
+## Release gate
+
+Before a private deployment:
+
+1. synchronize module content and downloads;
+2. run lint and the full production portal test;
+3. run relevant Python behavioral tests;
+4. inspect changed source maps, privacy boundaries, and known limitations;
+5. create a small reviewable commit and update the changelog;
+6. push the intended branch to `github` and verify the actual GitHub Actions
+   result before treating CI as passed;
+7. publish a GitHub Release only after its tag and release page exist, if a
+   GitHub release milestone is intended;
+8. use the configured private `origin` hosting workflow;
+9. verify the private deployment status reports success.
+
+## Why not GitHub Pages yet?
+
+GitHub Pages publishes static sites. The current portal has worker/server
+output and private learner-interface constraints. A Pages route may be added
+only after all of the following are demonstrated:
+
+- a complete static build has been produced and tested;
+- no learner-private content, Notion records, or credentials can be published;
+- the interactive studio and module reader still work without server behavior;
+- the new deployment has its own evidence and rollback plan.
+
+## Secrets and permissions
+
+Never store deployment credentials, personal access tokens, service keys, or
+Notion exports in the repository. A future CI deployment must use a protected
+environment, minimum permissions, short-lived credentials when available, and
+an explicit approval boundary.

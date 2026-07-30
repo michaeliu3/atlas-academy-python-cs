@@ -44,3 +44,9 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Python local teaching-model artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/

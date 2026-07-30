@@ -146,10 +146,39 @@ const publishedModule22Tests = resolve(
   "downloads",
   "test_module22_reference.py",
 );
+const canonicalModule23Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module23_reference.py",
+);
+const publishedModule23Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module23_reference.py",
+);
+const canonicalModule23Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module23_reference.py",
+);
+const publishedModule23Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module23_reference.py",
+);
+const canonicalResearchDirectory = resolve(siteRoot, "..", "research");
+const sourceMapOutputDirectory = resolve(siteRoot, "content", "source-maps");
 const sourceDirectory = await access(canonicalSourceDirectory)
   .then(() => canonicalSourceDirectory)
   .catch(() => outputDirectory);
-const publishedThrough = 22;
+const sourceMapDirectory = await access(canonicalResearchDirectory)
+  .then(() => canonicalResearchDirectory)
+  .catch(() => sourceMapOutputDirectory);
+const publishedThrough = 23;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -195,6 +224,16 @@ const arcs = [
       "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries.",
     start: 17,
     end: 22,
+  },
+  {
+    id: "arc-v",
+    numeral: "V",
+    title: "Languages & intelligence",
+    range: "Modules 23–26",
+    description:
+      "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense.",
+    start: 23,
+    end: 26,
   },
 ];
 
@@ -257,6 +296,7 @@ function writeIfChanged(path, content) {
 }
 
 await mkdir(outputDirectory, { recursive: true });
+await mkdir(sourceMapOutputDirectory, { recursive: true });
 
 const sourceFiles = (await readdir(sourceDirectory))
   .filter((filename) => moduleNumber(filename) !== null)
@@ -290,6 +330,26 @@ const modules = [];
 const importLines = [];
 const contentEntries = [];
 let changedFiles = 0;
+
+const sourceMapFiles = (await readdir(sourceMapDirectory))
+  .filter((filename) => filename.endsWith(".md"))
+  .sort();
+const sourceMapSet = new Set(sourceMapFiles);
+const existingSourceMaps = (await readdir(sourceMapOutputDirectory)).filter(
+  (filename) => filename.endsWith(".md"),
+);
+for (const staleFilename of existingSourceMaps) {
+  if (!sourceMapSet.has(staleFilename)) {
+    await rm(join(sourceMapOutputDirectory, staleFilename));
+    changedFiles += 1;
+  }
+}
+for (const filename of sourceMapFiles) {
+  const sourceMap = await readFile(join(sourceMapDirectory, filename), "utf8");
+  if (await writeIfChanged(join(sourceMapOutputDirectory, filename), sourceMap)) {
+    changedFiles += 1;
+  }
+}
 
 await mkdir(dirname(publishedModule17Reference), { recursive: true });
 const module17ReferenceSource = await access(canonicalModule17Reference)
@@ -435,6 +495,32 @@ if (
   changedFiles += 1;
 }
 
+const module23ReferenceSource = await access(canonicalModule23Reference)
+  .then(() => canonicalModule23Reference)
+  .catch(() => publishedModule23Reference);
+const module23Reference = await readFile(module23ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule23Reference,
+    module23Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module23TestsSource = await access(canonicalModule23Tests)
+  .then(() => canonicalModule23Tests)
+  .catch(() => publishedModule23Tests);
+const module23Tests = await readFile(module23TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule23Tests,
+    module23Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
 for (const filename of selectedFiles) {
   const number = moduleNumber(filename);
   const markdown = await readFile(join(sourceDirectory, filename), "utf8");
@@ -519,6 +605,19 @@ if (
 
 const sourceLabel = relative(siteRoot, sourceDirectory).replaceAll("\\", "/");
 const outputLabel = relative(siteRoot, outputDirectory).replaceAll("\\", "/");
+const sourceMapLabel = relative(siteRoot, sourceMapDirectory).replaceAll("\\", "/");
 console.log(
-  `Synced ${modules.length} modules from ${sourceLabel} to ${outputLabel} (${changedFiles} files updated).`,
+  "Synced " +
+    modules.length +
+    " modules from " +
+    sourceLabel +
+    " to " +
+    outputLabel +
+    "; " +
+    sourceMapFiles.length +
+    " source maps from " +
+    sourceMapLabel +
+    " (" +
+    changedFiles +
+    " files updated).",
 );

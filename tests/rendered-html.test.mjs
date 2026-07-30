@@ -462,6 +462,67 @@ test("Module 22 preserves its trust invariant, six-view control room, and latest
   assert.match(studio, /live effects/);
 });
 
+test("Module 23 preserves its language-boundary invariant, six-view studio, and safe local progress shape", async () => {
+  const studioUrl = new URL("../app/LanguageInterpreterStudio.tsx", import.meta.url);
+  const styleUrl = new URL("../app/LanguageInterpreterStudio.module.css", import.meta.url);
+  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
+  const [studio, style, page] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(styleUrl, "utf8"),
+    readFile(pageUrl, "utf8"),
+  ]);
+
+  const invariant =
+    "Structure is data; authority is separate and explicit. A successful parse establishes only the declared grammar shape. Atlas checks a bounded contract, resource budget, and authorization decision before a fixed-scope capability can support one local model operation. The evaluator has no ambient Python authority.";
+  assert.ok(studio.includes(invariant));
+  assert.match(page, /LanguageInterpreterStudio/);
+  assert.match(page, /slug === "23-programming-languages-interpreters"/);
+  assert.match(page, /<LanguageInterpreterStudio \/>/);
+
+  for (const viewLabel of [
+    "Text → tree",
+    "Tokens → tree",
+    "Names → closure",
+    "Tree → meaning",
+    "Contract → capability",
+    "Source → observation",
+  ]) {
+    assert.ok(
+      studio.includes("label: \"" + viewLabel + "\""),
+      viewLabel,
+    );
+  }
+
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /aria-labelledby="language-interpreter-studio-title"/);
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /isStudioRecord/);
+  assert.match(studio, /choiceIdsByView/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /storageReady/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each language view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
+  assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
+  assert.match(studio, /no ambient Python authority/);
+  assert.match(studio, /never selects its host adapter/);
+  assert.doesNotMatch(studio, /window\.confirm/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /focus-visible/);
+});
+
 test("Module 19 withholds each view's answer-bearing evidence until prediction and confidence", async () => {
   const studioUrl = new URL("../app/ConcurrencyStudio.tsx", import.meta.url);
   const studio = await readFile(studioUrl, "utf8");
@@ -776,20 +837,20 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–22 exactly once", async () => {
+test("generated module manifest covers Modules 1–23 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 22);
+  assert.equal(manifest.moduleCount, 23);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 22 }, (_, index) => index + 1),
+    Array.from({ length: 23 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 22);
-  assert.equal(manifest.arcs.length, 4);
+  assert.equal(new Set(slugs).size, 23);
+  assert.equal(manifest.arcs.length, 5);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
   const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
@@ -798,6 +859,7 @@ test("generated module manifest covers Modules 1–22 exactly once", async () =>
   const module20 = manifest.modules.find((courseModule) => courseModule.number === 20);
   const module21 = manifest.modules.find((courseModule) => courseModule.number === 21);
   const module22 = manifest.modules.find((courseModule) => courseModule.number === 22);
+  const module23 = manifest.modules.find((courseModule) => courseModule.number === 23);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -819,7 +881,11 @@ test("generated module manifest covers Modules 1–22 exactly once", async () =>
   assert.equal(module21.nextSlug, module22.slug);
   assert.equal(module22.previousSlug, module21.slug);
   assert.equal(module22.prerequisiteSlug, module21.slug);
-  assert.equal(module22.nextSlug, null);
+  assert.equal(module22.nextSlug, module23.slug);
+  assert.equal(module23.arcId, "arc-v");
+  assert.equal(module23.previousSlug, module22.slug);
+  assert.equal(module23.prerequisiteSlug, module22.slug);
+  assert.equal(module23.nextSlug, null);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -857,6 +923,7 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Data &amp; algorithms/);
   assert.match(html, /Durable software/);
   assert.match(html, /Machine &amp; network/);
+  assert.match(html, /Languages &amp; intelligence/);
   assert.match(html, /Values, State, and Execution/);
   assert.match(html, /Relational Data and Transactions/);
   assert.match(html, /Computer Architecture and the Execution Stack/);
@@ -865,7 +932,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Networks and Application Protocols/);
   assert.match(html, /Async and Distributed Systems/);
   assert.match(html, /Security, Privacy &amp; Trust Boundaries/);
-  assert.match(html, /<dt>22<\/dt>/);
+  assert.match(html, /Programming Languages, Interpreters &amp; Bounded Evaluation/);
+  assert.match(html, /<dt>23<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1273,5 +1341,55 @@ test("renders the finalized security-privacy-and-trust-boundaries workbook", asy
   assert.match(
     referenceTests,
     /test_all_scenarios_emit_the_closed_evidence_schema/,
+  );
+});
+
+test("renders the finalized programming-languages-and-bounded-evaluation workbook", async () => {
+  const response = await render("/modules/23-programming-languages-interpreters");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 23: Programming Languages, Interpreters &amp; Bounded Evaluation · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 23 workbook/);
+  assert.match(html, /Atlas Language Lab/);
+  assert.match(html, /Text → tree/);
+  assert.match(html, /Contract → capability/);
+  assert.match(html, /Structure is data; authority is separate and explicit/);
+  assert.match(html, /Eight-level problem ladder/);
+  assert.match(html, /Atlas Query Language Dossier/);
+  assert.match(html, /href="\/downloads\/module23_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module23_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module23_reference.py",
+    import.meta.url,
+  );
+  const testsUrl = new URL(
+    "../public/downloads/test_module23_reference.py",
+    import.meta.url,
+  );
+  const [reference, referenceTests] = await Promise.all([
+    readFile(referenceUrl, "utf8"),
+    readFile(testsUrl, "utf8"),
+  ]);
+  assert.match(reference, /def lex_query/);
+  assert.match(reference, /def parse_query/);
+  assert.match(reference, /def validate_query/);
+  assert.match(reference, /def run_scenario/);
+  assert.match(reference, /def trusted_compilation_bridge/);
+  assert.match(reference, /SCENARIOS/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module23_reference as model/);
+  assert.match(referenceTests, /ContractAuthorityCapabilitySeamTests/);
+  assert.match(
+    referenceTests,
+    /test_reference_model_has_no_dynamic_execution_or_external_adapter_surface/,
   );
 });

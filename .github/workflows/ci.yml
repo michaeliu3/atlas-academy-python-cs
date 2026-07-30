@@ -1,0 +1,75 @@
+name: Course CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: course-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  portal:
+    name: Portal quality gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Synchronize learner content
+        run: pnpm sync:modules
+      - name: Verify generated content is committed
+        shell: bash
+        run: |
+          if [[ -n "$(git status --porcelain=v1 --untracked-files=all -- content/modules content/source-maps public/downloads)" ]]; then
+            echo "Generated learner artifacts are stale or uncommitted:"
+            git status --short --untracked-files=all -- content/modules content/source-maps public/downloads
+            exit 1
+          fi
+      - name: Lint
+        run: pnpm lint
+      - name: Build and test portal
+        run: pnpm test
+
+  teaching-models:
+    name: Teaching models on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.12"
+          - "3.14"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Synchronize local models
+        run: pnpm sync:modules
+      - name: Run deterministic local teaching models
+        run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"

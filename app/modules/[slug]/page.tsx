@@ -17,6 +17,7 @@ import { ReadingTools } from "./ReadingTools";
 import { AsyncDistributedStudio } from "../../AsyncDistributedStudio";
 import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
 import { SecurityTrustStudio } from "../../SecurityTrustStudio";
+import { LanguageInterpreterStudio } from "../../LanguageInterpreterStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -95,6 +96,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "22-security-privacy-trust-boundaries" && (
           <SecurityTrustStudio />
+        )}
+        {slug === "23-programming-languages-interpreters" && (
+          <LanguageInterpreterStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
