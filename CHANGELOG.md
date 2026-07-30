@@ -18,6 +18,12 @@ actually published.
 - Preserved the additive GitHub history policy for this hardening work. The
   dependency graph must still not be described as security-clean while the
   tracked transitive-advisory follow-up remains open.
+- Added a versioned, allowlisted local-progress codec for affected studios,
+  preventing a stored `revealed` flag from bypassing a valid prediction and
+  confidence record.
+- Added checked Worker binding types, strict TypeScript and type-freshness CI
+  gates, and conservative response headers. These controls do not by themselves
+  verify a production deployment or resolve known dependency advisories.
 
 ## v0.6-capstone (private course milestone)
 

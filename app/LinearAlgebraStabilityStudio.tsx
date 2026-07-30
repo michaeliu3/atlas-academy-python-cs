@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
 import styles from "./LinearAlgebraStabilityStudio.module.css";
 
 type StudioView =
@@ -169,6 +170,16 @@ const correctChoice: Record<StudioView, string> = {
   pca: "named-loss",
 };
 
+const progressCodec = createPredictionProgressCodec({
+  viewIds: views.map((view) => view.id),
+  choiceIdsByView: Object.fromEntries(
+    views.map((view) => [
+      view.id,
+      choices[view.id].map((choice) => choice.id),
+    ]),
+  ),
+});
+
 const feedback: Record<
   StudioView,
   { title: string; answer: string; whyOthersFail: string; boundary: string }
@@ -243,31 +254,6 @@ const blankRecord: StudioRecord = {
   stability: { ...blankViewRecord },
   pca: { ...blankViewRecord },
 };
-
-function isConfidence(value: unknown): value is Confidence {
-  return value === 1 || value === 2 || value === 3 || value === 4;
-}
-
-function isViewRecord(value: unknown): value is ViewRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  const candidate = value as Partial<ViewRecord>;
-  return (
-    (candidate.choice === null || typeof candidate.choice === "string") &&
-    (candidate.confidence === null || isConfidence(candidate.confidence)) &&
-    typeof candidate.revealed === "boolean"
-  );
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  return views.every((view) =>
-    isViewRecord((value as Partial<Record<StudioView, unknown>>)[view.id]),
-  );
-}
 
 function confidenceLabel(confidence: Confidence | null) {
   if (confidence === 1) return "guess";
@@ -452,8 +438,8 @@ export function LinearAlgebraStabilityStudio() {
       try {
         const stored = window.localStorage.getItem(STORAGE_KEY);
         if (stored) {
-          const parsed: unknown = JSON.parse(stored);
-          if (isStudioRecord(parsed)) setRecord(parsed);
+          const parsed = progressCodec.parse(stored);
+          if (parsed) setRecord(parsed as StudioRecord);
         }
       } catch {
         // Local progress is optional. Only choice, confidence, and reveal state
@@ -468,7 +454,7 @@ export function LinearAlgebraStabilityStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
+      window.localStorage.setItem(STORAGE_KEY, progressCodec.serialize(record));
     } catch {
       // Private-browser policies may block storage; the in-memory lesson still works.
     }

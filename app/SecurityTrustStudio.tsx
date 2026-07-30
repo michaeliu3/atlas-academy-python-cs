@@ -7,6 +7,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
 import styles from "./SecurityTrustStudio.module.css";
 
 type TrustView =
@@ -80,6 +81,11 @@ const choiceIdsByView: Record<TrustView, ReadonlyArray<string>> = {
   provenance: ["gap", "safe", "author"],
   incident: ["unknown", "failure", "dump"],
 };
+
+const progressCodec = createPredictionProgressCodec({
+  viewIds: views.map((view) => view.id),
+  choiceIdsByView,
+});
 
 const boundaryCards = [
   {
@@ -236,23 +242,6 @@ function tabId(view: TrustView) {
 
 function panelId(view: TrustView) {
   return `security-trust-panel-${view}`;
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") return false;
-  return views.every((view) => {
-    const candidate = (value as Record<string, unknown>)[view.id];
-    if (!candidate || typeof candidate !== "object") return false;
-    const record = candidate as Record<string, unknown>;
-    return (
-      (record.choice === null ||
-        (typeof record.choice === "string" &&
-          choiceIdsByView[view.id].includes(record.choice))) &&
-      (record.confidence === null ||
-        [1, 2, 3, 4].includes(record.confidence as number)) &&
-      typeof record.revealed === "boolean"
-    );
-  });
 }
 
 function clearStoredStudio() {
@@ -752,15 +741,8 @@ export function SecurityTrustStudio() {
       try {
         const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
         if (raw) {
-          const stored: unknown = JSON.parse(raw);
-          if (
-            stored &&
-            typeof stored === "object" &&
-            (stored as { version?: unknown }).version === 1 &&
-            isStudioRecord((stored as { record?: unknown }).record)
-          ) {
-            setRecord((stored as { record: StudioRecord }).record);
-          }
+          const stored = progressCodec.parse(raw);
+          if (stored) setRecord(stored as StudioRecord);
         }
       } catch {
         // Ignore corrupt or unavailable optional learner storage.
@@ -776,7 +758,7 @@ export function SecurityTrustStudio() {
     try {
       window.localStorage.setItem(
         STUDIO_STORAGE_KEY,
-        JSON.stringify({ version: 1, record }),
+        progressCodec.serialize(record),
       );
     } catch {
       // Only bounded prediction state is optional; no request/secret is retained.

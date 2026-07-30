@@ -83,6 +83,10 @@ generated module content remains the fallback.
 
 ~~~text
 pnpm sync:modules
+pnpm validate:course:inputs
+pnpm check:generated
+pnpm types:worker
+pnpm typecheck
 pnpm lint
 pnpm test
 python -m unittest discover -s public/downloads -p "test_module*_reference.py"
@@ -92,6 +96,10 @@ The Node test command builds the production portal and exercises diagnostic and
 rendered HTML contracts. The Python suite exercises deterministic, local-only
 teaching models. No model should perform network, filesystem, process,
 database, package, credential, or arbitrary-code operations.
+
+`worker-configuration.d.ts` is generated from the checked-in `wrangler.jsonc`
+binding contract and must remain fresh. The type configuration is not evidence
+of a hosting deployment; see Deployment for the separate release boundary.
 
 ## Deployment truth
 

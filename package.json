@@ -12,13 +12,15 @@
     "validate:course:strict": "node scripts/validate-course.mjs --strict",
     "validate:course:inputs": "node scripts/validate-course.mjs --require-git-tracked",
     "check:generated": "node scripts/check-generated.mjs",
+    "types:worker": "wrangler types worker-configuration.d.ts --check",
+    "typecheck": "tsc --noEmit",
     "predev": "pnpm sync:modules",
     "dev": "vinext dev",
     "prebuild": "pnpm sync:modules",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "pnpm build && node --test tests/course-contract.test.mjs tests/course-graph.test.mjs tests/release-inputs.test.mjs tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work",
+    "test": "pnpm build && node --test tests/course-contract.test.mjs tests/course-graph.test.mjs tests/release-inputs.test.mjs tests/local-progress-codec.test.mjs tests/http-security-headers.test.mjs tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern worker-configuration.d.ts",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

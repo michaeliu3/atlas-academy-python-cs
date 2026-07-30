@@ -7,6 +7,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
 import styles from "./NetworkProtocolStudio.module.css";
 
 type ProtocolView =
@@ -72,6 +73,52 @@ const views: ReadonlyArray<{
     question: "Can you catch the first unsupported claim?",
   },
 ];
+
+const predictionChoices: Record<
+  ProtocolView,
+  ReadonlyArray<{ id: string; label: string }>
+> = {
+  naming: [
+    { id: "candidate", label: "The local resolver API returned endpoint candidates the client may attempt." },
+    { id: "reachable", label: "Atlas is reachable at a verified server." },
+    { id: "identity", label: "The address and port authenticate the Atlas service." },
+  ],
+  framing: [
+    { id: "frame", label: "Emit only after the declared header and whole bounded body are present." },
+    { id: "chunk", label: "Treat each receive chunk as one request." },
+    { id: "eof", label: "Use EOF as the body delimiter for any partial frame." },
+  ],
+  evidence: [
+    { id: "unknown", label: "UNKNOWN: timeout without matching response leaves remote effect unresolved." },
+    { id: "rollback", label: "NOT_COMMITTED: no client response proves the server did nothing." },
+    { id: "published", label: "PUBLISHED: TCP reliability proves the domain decision." },
+  ],
+  http: [
+    { id: "atlas", label: "Atlas must define ID scope, digest binding, replay/conflict, retention, and correlation." },
+    { id: "post", label: "POST automatically makes duplicate operations safe." },
+    { id: "key", label: "A header name alone makes exactly-once universal." },
+  ],
+  retry: [
+    { id: "same", label: "Retry the same operation ID with the same canonical digest, or query declared status." },
+    { id: "new", label: "Create a new ID because the timeout proves no first operation occurred." },
+    { id: "changed", label: "Reuse the ID but change its digest so the server treats it as fresh." },
+  ],
+  audit: [
+    { id: "timeout", label: "“publish never reached the server” is unsupported after timeout/non-200." },
+    { id: "framework", label: "Using a client library is always an unsupported claim." },
+    { id: "boolean", label: "Returning a boolean is syntactically invalid Python." },
+  ],
+};
+
+const progressCodec = createPredictionProgressCodec({
+  viewIds: views.map((view) => view.id),
+  choiceIdsByView: Object.fromEntries(
+    views.map((view) => [
+      view.id,
+      predictionChoices[view.id].map((choice) => choice.id),
+    ]),
+  ),
+});
 
 const frameCases: Record<
   FrameCase,
@@ -188,24 +235,6 @@ function tabId(view: ProtocolView) {
 
 function panelId(view: ProtocolView) {
   return `network-protocol-panel-${view}`;
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") return false;
-  return views.every((view) => {
-    const candidate = (value as Record<string, unknown>)[view.id];
-    if (!candidate || typeof candidate !== "object") return false;
-    const entry = candidate as Record<string, unknown>;
-    return (
-      (entry.choice === null || typeof entry.choice === "string") &&
-      (entry.confidence === null ||
-        entry.confidence === 1 ||
-        entry.confidence === 2 ||
-        entry.confidence === 3 ||
-        entry.confidence === 4) &&
-      typeof entry.revealed === "boolean"
-    );
-  });
 }
 
 function clearStoredStudio() {
@@ -325,11 +354,7 @@ function NamingLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "candidate", label: "The local resolver API returned endpoint candidates the client may attempt." },
-          { id: "reachable", label: "Atlas is reachable at a verified server." },
-          { id: "identity", label: "The address and port authenticate the Atlas service." },
-        ]}
+        choices={predictionChoices.naming}
         id="naming"
         onChange={onChange}
         prompt="A resolver returns two address/port candidates. What is the strongest justified conclusion?"
@@ -414,11 +439,7 @@ function FramingLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "frame", label: "Emit only after the declared header and whole bounded body are present." },
-          { id: "chunk", label: "Treat each receive chunk as one request." },
-          { id: "eof", label: "Use EOF as the body delimiter for any partial frame." },
-        ]}
+        choices={predictionChoices.framing}
         id="framing"
         onChange={onChange}
         prompt="What rule allows an Atlas parser to emit a payload from a TCP-like byte stream?"
@@ -531,11 +552,7 @@ function EvidenceLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "unknown", label: "UNKNOWN: timeout without matching response leaves remote effect unresolved." },
-          { id: "rollback", label: "NOT_COMMITTED: no client response proves the server did nothing." },
-          { id: "published", label: "PUBLISHED: TCP reliability proves the domain decision." },
-        ]}
+        choices={predictionChoices.evidence}
         id="evidence"
         onChange={onChange}
         prompt="A client deadline expires after a local send, before any valid matching response. What is the strongest outcome?"
@@ -585,11 +602,7 @@ function HttpLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "atlas", label: "Atlas must define ID scope, digest binding, replay/conflict, retention, and correlation." },
-          { id: "post", label: "POST automatically makes duplicate operations safe." },
-          { id: "key", label: "A header name alone makes exactly-once universal." },
-        ]}
+        choices={predictionChoices.http}
         id="http"
         onChange={onChange}
         prompt="HTTP gives method/status/representation semantics. What must Atlas still declare for a safe publication retry rule?"
@@ -648,11 +661,7 @@ function RetryLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "same", label: "Retry the same operation ID with the same canonical digest, or query declared status." },
-          { id: "new", label: "Create a new ID because the timeout proves no first operation occurred." },
-          { id: "changed", label: "Reuse the ID but change its digest so the server treats it as fresh." },
-        ]}
+        choices={predictionChoices.retry}
         id="retry"
         onChange={onChange}
         prompt="Atlas timed out after an ambiguous attempt. The intended request has not changed. What action preserves the original operation?"
@@ -703,11 +712,7 @@ function AuditLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "timeout", label: "“publish never reached the server” is unsupported after timeout/non-200." },
-          { id: "framework", label: "Using a client library is always an unsupported claim." },
-          { id: "boolean", label: "Returning a boolean is syntactically invalid Python." },
-        ]}
+        choices={predictionChoices.audit}
         id="audit"
         onChange={onChange}
         prompt="Which is the first unsupported inference in this generated patch?"
@@ -767,9 +772,9 @@ export function NetworkProtocolStudio() {
       try {
         const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
         if (stored) {
-          const parsed = JSON.parse(stored);
-          if (isStudioRecord(parsed)) {
-            setRecord(parsed);
+          const parsed = progressCodec.parse(stored);
+          if (parsed) {
+            setRecord(parsed as StudioRecord);
           } else {
             clearStoredStudio();
           }
@@ -786,7 +791,10 @@ export function NetworkProtocolStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      window.localStorage.setItem(
+        STUDIO_STORAGE_KEY,
+        progressCodec.serialize(record),
+      );
     } catch {
       // Progress remains in memory when storage is unavailable or full.
     }

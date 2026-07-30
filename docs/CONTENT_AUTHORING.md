@@ -85,6 +85,9 @@ contract-verified. It must never be weakened merely to make CI green.
   equivalent facts.
 - Store only whitelisted local progress state, never learner queries, records,
   identities, policies, or capability-like data.
+- Use the shared versioned prediction-progress codec when a studio persists
+  prediction/reveal evidence; reject stale, unknown, or incomplete records
+  instead of recovering them optimistically.
 
 ## AI-era review loop
 

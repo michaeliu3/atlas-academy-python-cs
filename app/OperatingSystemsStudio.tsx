@@ -7,6 +7,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
 
 type OsView =
   | "boundary"
@@ -31,6 +32,15 @@ type PublicationScenario = "normal" | "cooperative" | "abrupt";
 const CENTRAL_INVARIANT =
   "Every worker-visible effect is accounted for both as a process-local operation and as an OS-mediated resource transition. After interruption, Atlas publishes only a complete validated result, or leaves an explicitly classified recoverable state; an exit code, successful API return, or timing observation never silently substitutes for that evidence.";
 const STUDIO_STORAGE_KEY = "atlas-academy.module18-os-studio.v2";
+const progressCodec = createPredictionProgressCodec({
+  version: 2,
+  viewIds: ["boundary", "translation", "publication"],
+  choiceIdsByView: {
+    boundary: ["user", "crossing", "kernel"],
+    translation: ["mapped", "not-present", "protection", "invalid"],
+    publication: ["old", "new", "either", "unknown"],
+  },
+});
 const CLAIM_LABELS: ReadonlyArray<ClaimLabel> = [
   "contract",
   "model",
@@ -998,6 +1008,7 @@ export function OperatingSystemsStudio() {
         const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
         if (raw) {
         const saved = JSON.parse(raw) as {
+          progressCodecVersion?: number;
           activeView?: OsView;
           boundaryStep?: number;
           boundaryPrediction?: BoundaryPrediction | null;
@@ -1041,22 +1052,19 @@ export function OperatingSystemsStudio() {
         if (typeof saved.showClaimLabels === "boolean") {
           setShowClaimLabels(saved.showClaimLabels);
         }
-        if (
-          saved.boundaryPrediction === null ||
-          ["user", "crossing", "kernel"].includes(
-            saved.boundaryPrediction ?? "",
-          )
-        ) {
-          setBoundaryPrediction(saved.boundaryPrediction ?? null);
-        }
-        if (
-          saved.boundaryConfidence === null ||
-          [1, 2, 3, 4].includes(saved.boundaryConfidence ?? 0)
-        ) {
-          setBoundaryConfidence(saved.boundaryConfidence ?? null);
-        }
-        if (typeof saved.boundaryRevealed === "boolean") {
-          setBoundaryRevealed(saved.boundaryRevealed);
+        if (saved.progressCodecVersion === progressCodec.version) {
+          const boundaryProgress = progressCodec.parseEntry("boundary", {
+            choice: saved.boundaryPrediction ?? null,
+            confidence: saved.boundaryConfidence ?? null,
+            revealed: saved.boundaryRevealed === true,
+          });
+          if (boundaryProgress) {
+            setBoundaryPrediction(
+              boundaryProgress.choice as BoundaryPrediction | null,
+            );
+            setBoundaryConfidence(boundaryProgress.confidence as Confidence | null);
+            setBoundaryRevealed(boundaryProgress.revealed);
+          }
         }
         if (
           Number.isInteger(saved.schedulerStep) &&
@@ -1102,25 +1110,22 @@ export function OperatingSystemsStudio() {
         if (typeof saved.vmPredictedOffset === "string") {
           setVmPredictedOffset(saved.vmPredictedOffset);
         }
-        if (
-          saved.vmPredictedOutcome === null ||
-          ["mapped", "not-present", "protection", "invalid"].includes(
-            saved.vmPredictedOutcome ?? "",
-          )
-        ) {
-          setVmPredictedOutcome(saved.vmPredictedOutcome ?? null);
-        }
         if (typeof saved.vmPredictedPhysical === "string") {
           setVmPredictedPhysical(saved.vmPredictedPhysical);
         }
-        if (
-          saved.vmConfidence === null ||
-          [1, 2, 3, 4].includes(saved.vmConfidence ?? 0)
-        ) {
-          setVmConfidence(saved.vmConfidence ?? null);
-        }
-        if (typeof saved.vmRevealed === "boolean") {
-          setVmRevealed(saved.vmRevealed);
+        if (saved.progressCodecVersion === progressCodec.version) {
+          const translationProgress = progressCodec.parseEntry("translation", {
+            choice: saved.vmPredictedOutcome ?? null,
+            confidence: saved.vmConfidence ?? null,
+            revealed: saved.vmRevealed === true,
+          });
+          if (translationProgress) {
+            setVmPredictedOutcome(
+              translationProgress.choice as VmPrediction | null,
+            );
+            setVmConfidence(translationProgress.confidence as Confidence | null);
+            setVmRevealed(translationProgress.revealed);
+          }
         }
         if (
           Number.isInteger(saved.fileStep) &&
@@ -1156,20 +1161,17 @@ export function OperatingSystemsStudio() {
             saved.publicationScenario as PublicationScenario,
           );
         }
-        if (
-          saved.prediction === null ||
-          ["old", "new", "either", "unknown"].includes(saved.prediction ?? "")
-        ) {
-          setPrediction(saved.prediction ?? null);
-        }
-        if (
-          saved.confidence === null ||
-          [1, 2, 3, 4].includes(saved.confidence ?? 0)
-        ) {
-          setConfidence(saved.confidence ?? null);
-        }
-        if (typeof saved.showPublicationAnswer === "boolean") {
-          setShowPublicationAnswer(saved.showPublicationAnswer);
+        if (saved.progressCodecVersion === progressCodec.version) {
+          const publicationProgress = progressCodec.parseEntry("publication", {
+            choice: saved.prediction ?? null,
+            confidence: saved.confidence ?? null,
+            revealed: saved.showPublicationAnswer === true,
+          });
+          if (publicationProgress) {
+            setPrediction(publicationProgress.choice as Prediction | null);
+            setConfidence(publicationProgress.confidence as Confidence | null);
+            setShowPublicationAnswer(publicationProgress.revealed);
+          }
         }
         if (platformProfiles.some((item) => item.id === saved.profile)) {
           setProfile(saved.profile as PlatformProfile);
@@ -1207,6 +1209,7 @@ export function OperatingSystemsStudio() {
       window.localStorage.setItem(
         STUDIO_STORAGE_KEY,
         JSON.stringify({
+        progressCodecVersion: progressCodec.version,
         activeView,
         boundaryStep,
         boundaryPrediction,
