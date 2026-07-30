@@ -10,16 +10,16 @@ or project evidence shows a necessary bridge.
   studios where conceptually valuable, and local models where appropriate.
 - [x] Private portal deployment through Module 22.
 - [x] Lead Instructor, TA, Study Partner, and Notion learning-record structure.
-- [ ] GitHub CI, documentation, versioned releases, and repository issue
+- [x] GitHub CI, documentation, versioned releases, and repository issue
   workflow.
 
 ## Arc V — Languages, intelligence, and integration
 
-- [ ] Module 23 — programming languages, interpreters, bounded evaluation.
-- [ ] Module 24 — CPython, performance, and memory evidence.
-- [ ] Module 25 — intelligent systems, human-centered design, and AI-era
-  engineering judgment.
-- [ ] Module 26 — integrated Atlas capstone, red-team review, and defense.
+- [x] Module 23 — programming languages, interpreters, bounded evaluation.
+- [x] Module 24 — CPython, performance, and memory evidence.
+- [ ] Module 25 — evidence-grounded intelligent and human-centered systems.
+- [ ] Module 26 — systems capstone, open-source stewardship, and oral
+  architecture defense.
 
 ## 45-day first-pass checkpoints
 
@@ -40,7 +40,9 @@ or project evidence shows a necessary bridge.
 3. `v0.3-durable-software` — Modules 12–16, contract/data evidence.
 4. `v0.4-systems-trust` — Modules 17–22, system/trust studios.
 5. `v0.5-languages` — Module 23 and its Language Lab.
-6. `v0.6-capstone` — Modules 24–26, final defense, full repository audit.
+6. `v0.5.2-runtime-evidence` — Module 24 and its Runtime Evidence
+   Observatory.
+7. `v0.6-capstone` — Modules 25–26, final defense, full repository audit.
 
 Each milestone requires passing portal/model checks, source attribution review,
 accessibility review, release notes, and a statement of known limitations.

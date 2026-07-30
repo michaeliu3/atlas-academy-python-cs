@@ -544,6 +544,73 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.match(style, /focus-visible/);
 });
 
+test("Module 24 preserves its runtime-evidence invariant, six-view observatory, and safe local progress shape", async () => {
+  const studioUrl = new URL("../app/RuntimeEvidenceObservatory.tsx", import.meta.url);
+  const styleUrl = new URL("../app/RuntimeEvidenceObservatory.module.css", import.meta.url);
+  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
+  const [studio, style, page] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(styleUrl, "utf8"),
+    readFile(pageUrl, "utf8"),
+  ]);
+
+  assert.ok(
+    studio.includes(
+      "An optimization is accepted only after semantic behavior, privacy/retention boundaries, implementation scope, and a controlled measurement are kept distinct.",
+    ),
+  );
+  assert.match(page, /RuntimeEvidenceObservatory/);
+  assert.match(page, /slug === "24-cpython-performance-memory"/);
+  assert.match(page, /<RuntimeEvidenceObservatory \/>/);
+
+  for (const viewLabel of [
+    "Contract → claim",
+    "Names → graph",
+    "Cycle → cleanup",
+    "Metric → scope",
+    "Source → runtime",
+    "Patch → decision",
+  ]) {
+    assert.ok(studio.includes('label: "' + viewLabel + '"'), viewLabel);
+  }
+
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /aria-labelledby="runtime-evidence-observatory-title"/);
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /isObservatoryRecord/);
+  assert.match(studio, /choiceIdsByView/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /storageReady/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each runtime-evidence view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
+  assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
+  assert.match(
+    studio,
+    /!record\.revealed \|\| \(record\.choice !== null && record\.confidence !== null\)/,
+    "stored progress cannot reveal evidence without a recorded choice and confidence",
+  );
+  assert.match(studio, /not a profiler,/);
+  assert.match(studio, /not a CPython emulator,/);
+  assert.match(studio, /not a license\s+to collect\s+private learner traces/);
+  assert.match(studio, /AI-generated patch, a green\s+CI run, private deployment, or a lower isolated metric/);
+  assert.doesNotMatch(studio, /window\.confirm/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /focus-visible/);
+});
+
 test("release architecture keeps Notion capture manual and out of the portal runtime", async () => {
   const architectureUrl = new URL("../docs/ARCHITECTURE.md", import.meta.url);
   const privacyUrl = new URL("../docs/PRIVACY.md", import.meta.url);
@@ -871,19 +938,19 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–23 exactly once", async () => {
+test("generated module manifest covers Modules 1–24 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 23);
+  assert.equal(manifest.moduleCount, 24);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 23 }, (_, index) => index + 1),
+    Array.from({ length: 24 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 23);
+  assert.equal(new Set(slugs).size, 24);
   assert.equal(manifest.arcs.length, 5);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
@@ -894,6 +961,7 @@ test("generated module manifest covers Modules 1–23 exactly once", async () =>
   const module21 = manifest.modules.find((courseModule) => courseModule.number === 21);
   const module22 = manifest.modules.find((courseModule) => courseModule.number === 22);
   const module23 = manifest.modules.find((courseModule) => courseModule.number === 23);
+  const module24 = manifest.modules.find((courseModule) => courseModule.number === 24);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -919,7 +987,11 @@ test("generated module manifest covers Modules 1–23 exactly once", async () =>
   assert.equal(module23.arcId, "arc-v");
   assert.equal(module23.previousSlug, module22.slug);
   assert.equal(module23.prerequisiteSlug, module22.slug);
-  assert.equal(module23.nextSlug, null);
+  assert.equal(module23.nextSlug, module24.slug);
+  assert.equal(module24.arcId, "arc-v");
+  assert.equal(module24.previousSlug, module23.slug);
+  assert.equal(module24.prerequisiteSlug, module23.slug);
+  assert.equal(module24.nextSlug, null);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -967,7 +1039,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Async and Distributed Systems/);
   assert.match(html, /Security, Privacy &amp; Trust Boundaries/);
   assert.match(html, /Programming Languages, Interpreters &amp; Bounded Evaluation/);
-  assert.match(html, /<dt>23<\/dt>/);
+  assert.match(html, /CPython, Performance &amp; Memory Evidence/);
+  assert.match(html, /<dt>24<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1425,5 +1498,56 @@ test("renders the finalized programming-languages-and-bounded-evaluation workboo
   assert.match(
     referenceTests,
     /test_reference_model_has_no_dynamic_execution_or_external_adapter_surface/,
+  );
+});
+
+test("renders the finalized CPython-performance-and-memory-evidence workbook", async () => {
+  const response = await render("/modules/24-cpython-performance-memory");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 24: CPython, Performance &amp; Memory Evidence · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 24 workbook/);
+  assert.match(html, /Runtime Evidence Observatory/);
+  assert.match(html, /Contract → claim/);
+  assert.match(html, /Names → graph/);
+  assert.match(html, /Patch → decision/);
+  assert.match(html, /A cache is data retention and authority design, not a neutral speed/);
+  assert.match(html, /Problem ladder and Atlas project/);
+  assert.match(html, /Runtime Evidence Dossier/);
+  assert.match(html, /href="\/downloads\/module24_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module24_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module24_reference.py",
+    import.meta.url,
+  );
+  const testsUrl = new URL(
+    "../public/downloads/test_module24_reference.py",
+    import.meta.url,
+  );
+  const [reference, referenceTests] = await Promise.all([
+    readFile(referenceUrl, "utf8"),
+    readFile(testsUrl, "utf8"),
+  ]);
+  assert.match(reference, /def reachable_nodes/);
+  assert.match(reference, /def reference_count_sweep/);
+  assert.match(reference, /def classify_observation/);
+  assert.match(reference, /def validate_experiment/);
+  assert.match(reference, /def validate_conclusion/);
+  assert.match(reference, /SCENARIOS/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module24_reference as model/);
+  assert.match(referenceTests, /ObjectGraphSeamTests/);
+  assert.match(
+    referenceTests,
+    /test_unknown_scenario_does_not_accept_dynamic_input/,
   );
 });
