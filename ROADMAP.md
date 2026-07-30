@@ -4,14 +4,20 @@ This roadmap tracks release evidence, not a promise that calendar completion
 equals mastery. The 60-day Atlas Core is adjustable when diagnostic, retrieval,
 oral-defense, or project evidence shows a necessary bridge.
 
-## Published foundation
+## Published foundation — migration truth
 
-- [x] Modules 0–22: connected workbooks, diagnostics, projects, visual
-  studios where conceptually valuable, and local models where appropriate.
-- [x] Private portal deployment through Module 26.
-- [x] Lead Instructor, TA, Study Partner, and Notion learning-record structure.
-- [x] GitHub CI, documentation, versioned releases, and repository issue
-  workflow.
+- [ ] M1–M30 have published reader workbooks. Their new structural contract
+  inventory is present, but human-reviewed evidence for every contract clause
+  is still in progress.
+- [ ] Private deployment and historical release claims require reconciliation
+  against exact GitHub commits, CI runs, source review, limitations, and a
+  current provenance ledger.
+- [ ] Lead Instructor, TA, Study Partner, and Notion learning-record structure
+  exist, but their per-module consistency and consent workflow remain to be
+  verified.
+- [ ] GitHub CI configuration and documentation are checked in; live CI,
+  branch-protection, release, and issue evidence must be verified rather than
+  inferred from files alone.
 
 ## Arc V — Languages, intelligence, and integration
 

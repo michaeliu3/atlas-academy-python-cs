@@ -1,0 +1,36 @@
+# Atlas goal-compliance matrix
+
+This is the living evidence matrix for the Atlas completion goal. A checkmark
+means only that the cited implementation/test evidence exists; it does not turn
+time spent into a degree, a guarantee of mastery, or a claim that an external
+release succeeded. `In progress` means the boundary is known and tracked.
+
+| Goal clause | Status | Implementation / test evidence | Still required before completion |
+| --- | --- | --- | --- |
+| One canonical graph with distinct prerequisites and route navigation | Implemented | `content/course/course-graph.v1.json`, `lib/course-catalog.ts`, `scripts/course-graph.mjs`, `tests/course-graph.test.mjs` | Audit every route, dashboard, and documentation surface against the graph as later modules publish. |
+| No silent path around M31–M36 before M25/M26 synthesis | Implemented for current portal | Graph marks M25/M26 `preview`; reader/route derive released links from the graph; rendered-route tests | Reweave M25/M26 only after strict M31–M36 evidence exists. |
+| Versioned module contract and release gate | In progress | `content/course/contracts/module-contracts.v1.json`, `scripts/validate-course.mjs`, `tests/course-contract.test.mjs` | Convert M1–M30 from legacy structural inventories to reviewed contracts; add full contracts for M31–M36; make strict gate pass. |
+| Six connected sessions and source maps | Structural baseline only | Contract validator checks one checked-in workbook, Sessions 1–6, source-map path, graph handoff | Review actual progression, source claims, access dates, licenses, and reuse status per module. |
+| First-principles / code-reading / debugging / transfer / rigorous math | In progress | Existing workbooks and studios; contract registry records pending human review | Attach module-specific evidence, derivations/counterexamples/numerical experiments where relevant, and reviewer approval. |
+| Confidence-aware diagnostic, retrieval, project, oral defense, TA, Study Partner | In progress | Existing diagnostic/oral-defense code; validator reports missing explicit evidence instead of guessing | Build standardized companions, adaptive text oral flow, review records, and module evidence/rubrics. |
+| M31–M36 and reworked M25/M26 | Not started | Graph reserves modules and dependency order | Author source maps, workbooks, studios/models/tests, contracts, and release evidence. |
+| Intake, bridges, 60/90/180-day operational route | In progress | Current route and diagnostic surfaces | Validate coverage, adaptive recommendations, catch-up policy, extensions, and learner evidence records. |
+| Notion workflow with explicit learner consent | In progress | Local-first portal and existing documentation | Verify/update Notion templates, manual export packets, and consent boundary; no automatic writes. |
+| Visual clarity, accessibility, keyboard/screen-reader/performance checks | In progress | Existing visual studios and reader | Add automated accessibility/browser checks, visual text-equivalent evidence, performance budgets, and retrofit earlier modules. |
+| Local progress privacy and render sanitization | In progress | Local-first design documentation | Introduce shared allowlisted progress codec; sanitize Markdown/SVG/Mermaid; add malicious-content regressions and security headers. |
+| Deterministic, allowlisted, hashable content inputs | Implemented for checked-in course inputs | `scripts/sync-modules.mjs`, `content/course/release-inputs.v1.json`, `tests/release-inputs.test.mjs` | Tie each deployment to an exact reviewed Git commit and release ledger; extend allowlist as contract paths become explicit. |
+| Strict TypeScript, dependency risk triage, bounded lab truth | In progress | Current audit records known type/dependency/lab issues | Fix typecheck, add CI gate, document bounded OS/process labs accurately, triage alerts with evidence. |
+| Auditable GitHub releases and preserved change history | In progress | `docs/CONTENT_AUTHORING.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `docs/DEPLOYMENT.md` | Verify GitHub branch protection/CI/release facts, maintain additive commits and reviewable PRs, and create the provenance ledger. |
+
+## Evidence interpretation
+
+- **Structural baseline**: automation has checked file/graph/session/path facts.
+- **Reviewed contract**: a human has attested to the teaching, source,
+  accessibility, and assessment evidence required by the v1 contract.
+- **Release evidence**: the exact deployed Git commit, CI run, review,
+  limitations, version, and changelog entry have been recorded and are
+  independently reachable.
+
+The strict contract gate is expected to fail while the table contains
+`In progress` rows. That failure is a safeguard, not a reason to weaken the
+gate or rewrite the course history.

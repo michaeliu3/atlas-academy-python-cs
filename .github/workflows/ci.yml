@@ -23,6 +23,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.9.0
@@ -32,16 +33,12 @@ jobs:
           cache: pnpm
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
-      - name: Synchronize learner content
+      - name: Validate structural course contract and release inputs
+        run: pnpm validate:course:inputs
+      - name: Synchronize learner content from checked-in inputs
         run: pnpm sync:modules
-      - name: Verify generated content is committed
-        shell: bash
-        run: |
-          if [[ -n "$(git status --porcelain=v1 --untracked-files=all -- content/modules content/source-maps public/downloads)" ]]; then
-            echo "Generated learner artifacts are stale or uncommitted:"
-            git status --short --untracked-files=all -- content/modules content/source-maps public/downloads
-            exit 1
-          fi
+      - name: Verify generated course artifacts are committed
+        run: pnpm check:generated
       - name: Lint
         run: pnpm lint
       - name: Build and test portal
@@ -50,6 +47,7 @@ jobs:
   teaching-models:
     name: Teaching models on Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    needs: portal
     timeout-minutes: 15
     strategy:
       fail-fast: false
@@ -61,6 +59,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.9.0
@@ -73,7 +72,11 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
-      - name: Synchronize local models
+      - name: Validate checked-in release inputs
+        run: pnpm validate:course:inputs
+      - name: Synchronize local models from checked-in inputs
         run: pnpm sync:modules
+      - name: Verify generated course artifacts are committed
+        run: pnpm check:generated
       - name: Run deterministic local teaching models
         run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"

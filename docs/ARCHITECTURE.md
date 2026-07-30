@@ -34,17 +34,18 @@ flowchart LR
   derive from it; no page or synchronizer may reconstruct its own prerequisite
   graph.
 - The content/modules directory and content/source-maps directory are
-  checked-in, release-canonical course material. In the production authoring
-  workspace, synchronization can refresh the same artifacts from an adjacent
-  course source directory; a standalone GitHub clone uses its checked-in copy
-  as the editable source of truth. No published workbook or source map exists
-  only outside this repository.
+  checked-in, release-canonical course material. Synchronization reads only
+  these repository-local inputs; it never falls back to an adjacent authoring
+  workspace. No published workbook or source map exists only outside this
+  repository.
 - The public/downloads directory contains the checked-in, release-canonical
   deterministic local reference models and behavioral tests. They use fixed
   in-memory fixtures and make no external effect.
 - The scripts/sync-modules.mjs program validates the course graph, then
-  synchronizes the library manifest, module source, and downloadable teaching
-  artifacts. The manifest is a generated projection, not curriculum input.
+  generates the library manifest, module source projection, and a sorted
+  SHA-256 release-input ledger. It does not copy external artifacts. The
+  manifest and release-input ledger are generated projections, not curriculum
+  input.
 - The tests directory verifies the diagnostic model and rendered portal
   contract.
 
@@ -85,3 +86,8 @@ The portal must distinguish:
 | Teaching models | standard-library behavioral test suites |
 | Release | private deployment status, release note, known limitations |
 | Learning | diagnostic, TA checkoff, Study Partner retrieval, capstone defense |
+
+The versioned module-contract registry adds a distinct migration layer between
+content and release. Its structural baseline is intentionally not a claim that
+all pedagogical, source, accessibility, or oral-defense evidence has been
+human-verified; the strict gate remains the publication standard.

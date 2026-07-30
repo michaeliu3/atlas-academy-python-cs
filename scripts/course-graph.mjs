@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -23,6 +23,20 @@ function assertString(value, label) {
   if (typeof value !== "string" || value.trim() === "") {
     fail(`${label} must be a non-empty string.`);
   }
+}
+
+function isCheckedInSourceMapPath(value) {
+  if (
+    typeof value !== "string" ||
+    !value.startsWith("content/source-maps/") ||
+    !value.endsWith(".md") ||
+    value.includes("\\") ||
+    value.split("/").includes("..")
+  ) {
+    return false;
+  }
+  const pathFromRoot = relative(siteRoot, resolve(siteRoot, value)).replaceAll("\\", "/");
+  return pathFromRoot.startsWith("content/source-maps/");
 }
 
 function routePlanFor(graph, routePlanId = "atlas-core-60") {
@@ -115,8 +129,7 @@ export function validateCourseGraph(graph) {
     }
     if (
       courseModule.sourceMap !== null &&
-      (!courseModule.sourceMap.startsWith("content/source-maps/") ||
-        !courseModule.sourceMap.endsWith(".md"))
+      !isCheckedInSourceMapPath(courseModule.sourceMap)
     ) {
       fail(`Module ${courseModule.number} sourceMap must be a checked-in source-map path or null.`);
     }

@@ -7,9 +7,17 @@ actually published.
 
 ## Unreleased
 
-- No unreleased course change is recorded here yet. The dependency graph must
-  not be described as security-clean while the tracked transitive-advisory
-  follow-up remains open.
+- Added the versioned canonical course graph and removed route/navigation
+  shortcuts that could bypass M31–M36 before M25/M26 synthesis work.
+- Added a structural module-contract migration gate and a repository-local,
+  SHA-256 release-input ledger. M1–M30 remain legacy structural baselines;
+  they are not newly claimed as fully contract-verified. The strict release
+  gate intentionally fails until individual human-review evidence exists.
+- Content synchronization now reads only checked-in course inputs. External
+  authoring directories are not deployment, build, CI, or learner inputs.
+- Preserved the additive GitHub history policy for this hardening work. The
+  dependency graph must still not be described as security-clean while the
+  tracked transitive-advisory follow-up remains open.
 
 ## v0.6-capstone (private course milestone)
 

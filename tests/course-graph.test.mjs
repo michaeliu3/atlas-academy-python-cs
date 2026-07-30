@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   loadCourseGraph,
   projectReadableModules,
+  validateCourseGraph,
 } from "../scripts/course-graph.mjs";
 
 test("the canonical course graph separates academic prerequisites from route order", async () => {
@@ -38,4 +39,15 @@ test("readable projections stop at unavailable route nodes instead of bypassing 
   assert.equal(byNumber.get(24)?.nextSlug, null);
   assert.equal(byNumber.get(25)?.availability, "preview");
   assert.equal(byNumber.get(25)?.previousRouteNumber, 36);
+});
+
+test("the graph rejects a source-map path that escapes the checked-in course inputs", async () => {
+  const graph = await loadCourseGraph();
+  const unsafeGraph = structuredClone(graph);
+  unsafeGraph.modules[0].sourceMap = "content/source-maps/../../outside.md";
+
+  assert.throws(
+    () => validateCourseGraph(unsafeGraph),
+    /checked-in source-map path/u,
+  );
 });

@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "scripts/sync-modules.mjs",
+  "courseGraphSchemaVersion": 1,
+  "contractVersion": "v1",
+  "inputs": [
+    {
+      "path": "content/course/contracts/module-contracts.v1.json",
+      "sha256": "a93767ad626e60d07bb188e513e3b9efe8d6e0608ebeb7acf634389962c4a807"
+    },
+    {
+      "path": "content/course/course-graph.v1.json",
+      "sha256": "0fe2565f8917b8ef34555e9554fb760a7ff161aaf20777bf7165a82590e27c7d"
+    },
+    {
+      "path": "content/modules/01_values_state_execution.md",
+      "sha256": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec"
+    },
+    {
+      "path": "content/modules/02_functions_recursion_induction.md",
+      "sha256": "dc5f938fe7b6e320b64314aba970f1d0aa3666ea014e47a87ea98bffdcdfcbce"
+    },
+    {
+      "path": "content/modules/03_abstraction_interfaces_adts.md",
+      "sha256": "7b5860ad02f426a22c694f1725de82cbccb20776fe855ccee90d28b5ee125e00"
+    },
+    {
+      "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
+      "sha256": "1629d7061ac6f118342e7f5680dd9a9b76291e6aa2a9f222ea92756431fb7da6"
+    },
+    {
+      "path": "content/modules/05_cost_models_algorithm_analysis.md",
+      "sha256": "42b6174bcf6b21c9874e04ab360a1ff069408631f6d1bdda1c9dedecb4c3ba01"
+    },
+    {
+      "path": "content/modules/06_representation_memory_sequences_linked.md",
+      "sha256": "f272b9d5ff877e5bc0f316ea2340b22e53ddb2864b0482bb859a3ee3d366f949"
+    },
+    {
+      "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+      "sha256": "870d2e4579a1eb31937197ae038fe95dbb6d2c3e2a54d83380a2ec6283a6288f"
+    },
+    {
+      "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+      "sha256": "8ac708034206cc526a441b0ced9878dd4fe956b4d31183e5ef652340960e3646"
+    },
+    {
+      "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+      "sha256": "f2bd9e373cc47acab3fc586fcc98419d4941ec9c75ca09ebea8978e4b0403643"
+    },
+    {
+      "path": "content/modules/10_graph_algorithms_network_models.md",
+      "sha256": "cbfe82264548694c9436e4c3a40e0a01d79db7e3f1b1d589879f7b3cacff0312"
+    },
+    {
+      "path": "content/modules/11_algorithm_design_paradigms.md",
+      "sha256": "8fb4b8cec427bed7c8581b2f0edb8825d70774438b57df66dcd295079c213f92"
+    },
+    {
+      "path": "content/modules/12_modules_apis_types_dependencies.md",
+      "sha256": "a1fc525a1eebea1f64c1abd4f0cf3e6a78c2777a9865c94b36ad4826c7bfea86"
+    },
+    {
+      "path": "content/modules/13_specifications_testing_debugging_observability.md",
+      "sha256": "adc4c10a855320ae7ff391cef89dcf2d86e8596d1fb35684df501481f08d42ce"
+    },
+    {
+      "path": "content/modules/14_software_design_and_change.md",
+      "sha256": "1938fb2d7674a5951f0fe7e79e62cae154f17b7b7238c5306f3382dccc05147e"
+    },
+    {
+      "path": "content/modules/15_files_serialization_packaging_delivery.md",
+      "sha256": "e97d4a794330d28cb7b7dcb8b3b9241735e3aa6daa0918f004b1f9442eabe113"
+    },
+    {
+      "path": "content/modules/16_relational_data_transactions.md",
+      "sha256": "b80b7cee07b9d42e1afcf498feda08f7de5e4c6e1047911cba67df1be1e933c9"
+    },
+    {
+      "path": "content/modules/17_computer_architecture_execution_stack.md",
+      "sha256": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07"
+    },
+    {
+      "path": "content/modules/18_operating_systems_resource_mediation.md",
+      "sha256": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06"
+    },
+    {
+      "path": "content/modules/19_concurrency_parallelism.md",
+      "sha256": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911"
+    },
+    {
+      "path": "content/modules/20_networks_application_protocols.md",
+      "sha256": "ab4e96417238f6750aadbef0c61e7e54ae501bded7d7176bcffcc059c1cb4382"
+    },
+    {
+      "path": "content/modules/21_async_distributed_systems.md",
+      "sha256": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315"
+    },
+    {
+      "path": "content/modules/22_security_privacy_trust_boundaries.md",
+      "sha256": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1"
+    },
+    {
+      "path": "content/modules/23_programming_languages_interpreters.md",
+      "sha256": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742"
+    },
+    {
+      "path": "content/modules/24_cpython_performance_memory.md",
+      "sha256": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73"
+    },
+    {
+      "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+      "sha256": "0f3b0e7a571005a8361cd2c7704a26bd586fa120a2454d22412548e325a892d7"
+    },
+    {
+      "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
+      "sha256": "4d90e27b9e2670927b1d3c284a7c87126e784accd6b4b0fad259b414e3f84751"
+    },
+    {
+      "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
+      "sha256": "d6e232d6c5244fc7c3ea97fc314ac001a32795a38276d2ff55b7aa80f90f498c"
+    },
+    {
+      "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
+      "sha256": "f1a42ffdf4b062db3320e3a2690b8ef9e7afd8619637f1129aa1847bb5701c95"
+    },
+    {
+      "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+      "sha256": "c02d1e592276be7a418aa7502f9c9a1a7a614db336b2a9982772786c2bd8f152"
+    },
+    {
+      "path": "content/modules/30_probability_statistics_scientific_inference.md",
+      "sha256": "3b5a412e615836fa563649b65c525099f7e92fb3e04d04631767e68d8f1c1750"
+    },
+    {
+      "path": "content/source-maps/arc_ii_source_map.md",
+      "sha256": "bcc57e58c53e27f523ca26eb3e75a22849a34aae1dbbd6a34ca1d1207f5f505e"
+    },
+    {
+      "path": "content/source-maps/arc_iii_source_map.md",
+      "sha256": "bec516d3216192e922af2872236c5b347a326c773935e308eb516b07fa41f0f7"
+    },
+    {
+      "path": "content/source-maps/module17_architecture_execution_source_map.md",
+      "sha256": "7a4ac22a5b71aa9d430af3818ba64d0a051f9809b4267366cbcf4ae3c5125092"
+    },
+    {
+      "path": "content/source-maps/module18_operating_systems_source_map.md",
+      "sha256": "f052e51dbc34863bc199cfabeb8fc06c32ad19b98082ada007a6d065d47ad5bd"
+    },
+    {
+      "path": "content/source-maps/module19_concurrency_parallelism_source_map.md",
+      "sha256": "e82fe81592d9450fd31f08eeaa03fd5c1a7de112aaee20200fde31f7a2809b48"
+    },
+    {
+      "path": "content/source-maps/module20_networks_protocols_source_map.md",
+      "sha256": "2975977ec4b10365e77f9269faa3d5e99389b7ef3db89fca9a9597d6f0b79af2"
+    },
+    {
+      "path": "content/source-maps/module21_async_distributed_source_map.md",
+      "sha256": "ea16503c78bf4cee8d1c71c5a1eabcccff6c1638480b58e9e218e2a7c12e807c"
+    },
+    {
+      "path": "content/source-maps/module22_security_trust_source_map.md",
+      "sha256": "6bf984cc87e70d92214279c556b9a6ba745f5bf6b29adde184da319e761b91d9"
+    },
+    {
+      "path": "content/source-maps/module23_languages_interpreters_source_map.md",
+      "sha256": "4211fe4caf6b46d096b1501d8025a04852d9c0b124ad04aa6953095b1a86f88b"
+    },
+    {
+      "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+      "sha256": "b73bd1be92bb1cca8745bbc3891b2536a92dfcbd788d0139e5b191297b870260"
+    },
+    {
+      "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+      "sha256": "3aff6e7750a5feed5401c8172797ae44f4651a9287fa4daf8c6558bc49f1deff"
+    },
+    {
+      "path": "content/source-maps/module26_systems_capstone_source_map.md",
+      "sha256": "64fef9ce0ea05e07366c2557b0b211622f082ed14062a9111297735c60fcf841"
+    },
+    {
+      "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "sha256": "06c9a64699af2c6cac17b23f0d951d826b2d0e5115fa9faf5f8ab66a5559f3a0"
+    },
+    {
+      "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "sha256": "0fea9f3ff0267cbb16640762cc0ffdec72f5e4d6916c2be495e156542c98fea1"
+    },
+    {
+      "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "sha256": "86ffb1018ed5e1be2c2580a15129e93c62f2f548e82547ff68dc234d15f2ba5f"
+    },
+    {
+      "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
+      "sha256": "5c830c8852c0552de12faa41fa03a048552fad60a05616ade45a339c336a8295"
+    },
+    {
+      "path": "content/source-maps/python_curriculum_sources.md",
+      "sha256": "d87547011d066b9e4a5f444c8042daf2f020a6c47904085b45b3e8273bffd550"
+    },
+    {
+      "path": "public/downloads/__pycache__/module18_reference.cpython-312.pyc",
+      "sha256": "4d231a3bc9ce345f8406bcb1d5e9fe5105351baff32d55c43c4c9e8177003745"
+    },
+    {
+      "path": "public/downloads/__pycache__/module18_reference.cpython-314.pyc",
+      "sha256": "446cd32e2741210ed262bd9e3f3b6e9775bd159f21c90a4c08d43b1fb5f9971d"
+    },
+    {
+      "path": "public/downloads/__pycache__/module19_reference.cpython-312.pyc",
+      "sha256": "ad071016c9eb09210613c2283ec7b9d58f6da3a8f3bf00eb95a8b9f6324f587d"
+    },
+    {
+      "path": "public/downloads/__pycache__/module19_reference.cpython-314.pyc",
+      "sha256": "64a5b091f8058bd0c00aacb828289fec24ab62a0d2fdfea9d4efa81e78378bd6"
+    },
+    {
+      "path": "public/downloads/__pycache__/module20_reference.cpython-312.pyc",
+      "sha256": "2ab6c175873b1fb5e75c104513b7b8bd89d03e4207472b97f83ed1cf8f167730"
+    },
+    {
+      "path": "public/downloads/__pycache__/module20_reference.cpython-314.pyc",
+      "sha256": "e8ff84cb51c9bad2a202ff98503cdc4d89e472714bac7da57f345a186dba9a04"
+    },
+    {
+      "path": "public/downloads/__pycache__/module21_reference.cpython-312.pyc",
+      "sha256": "1f99c06f9c87382dd8b0ab911a17104f61bcaeebbc9bf0d11e1c5e5f854d45c2"
+    },
+    {
+      "path": "public/downloads/__pycache__/module21_reference.cpython-314.pyc",
+      "sha256": "672adf77241307196235a2201f0d5f44daa2b0dc4c5135371c53b70995f39771"
+    },
+    {
+      "path": "public/downloads/__pycache__/module22_reference.cpython-312.pyc",
+      "sha256": "3d2b33d7ffd4e940ba2c37564c3db60807838e77c5e89fd1d9659e9b0d899913"
+    },
+    {
+      "path": "public/downloads/__pycache__/module22_reference.cpython-314.pyc",
+      "sha256": "8d07f5f2e43583ca65077f87b7533ea3d85cec1edbed7270e1aebecbc91b08f5"
+    },
+    {
+      "path": "public/downloads/__pycache__/module23_reference.cpython-312.pyc",
+      "sha256": "f6e9e4c15b3d64e93239fa5df18d17b98adabfc825983aa967b910bac406661e"
+    },
+    {
+      "path": "public/downloads/__pycache__/module23_reference.cpython-314.pyc",
+      "sha256": "24311cbe8b0fe553a84dbdb0a2fe2d65af51a1d633e53094c813848bc95bc829"
+    },
+    {
+      "path": "public/downloads/__pycache__/module24_reference.cpython-312.pyc",
+      "sha256": "c5c4a94ca93643745198ab91e3b0f96694b7e19502c8df4879776cb1d93d0e87"
+    },
+    {
+      "path": "public/downloads/__pycache__/module25_reference.cpython-312.pyc",
+      "sha256": "fbc9a89ac40e6fabf36347ebb90b048da9888f8fffc2e59a2a3b5ae7d1c94633"
+    },
+    {
+      "path": "public/downloads/__pycache__/module25_reference.cpython-314.pyc",
+      "sha256": "84799547f3ace9b84d86e0b9f043d493e6c258869661fe9918c3819e6dab3719"
+    },
+    {
+      "path": "public/downloads/__pycache__/module26_reference.cpython-312.pyc",
+      "sha256": "2021272c3c1e373a9e898f353c0941e832542d484bc336248d032dd69468be2c"
+    },
+    {
+      "path": "public/downloads/__pycache__/module27_reference.cpython-312.pyc",
+      "sha256": "f4f55543d4b03e51361e73ea58aab934981bf683f01fc60869aa34793485915c"
+    },
+    {
+      "path": "public/downloads/__pycache__/module28_reference.cpython-312.pyc",
+      "sha256": "342a0ed54057fdab7dbc2bbeb164c60404f6165af003d28553c4d4e054f3c5ee"
+    },
+    {
+      "path": "public/downloads/__pycache__/module29_reference.cpython-312.pyc",
+      "sha256": "93d0d0c55bde77bab98820268629d805a7b1839f0a88ae5f94a35b31f5718294"
+    },
+    {
+      "path": "public/downloads/__pycache__/module30_reference.cpython-312.pyc",
+      "sha256": "356857d86027cc3ea2aa5c1418598c42807e2fd5bd0b1c8badd965746640f3a6"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module18_reference.cpython-312.pyc",
+      "sha256": "dbb8825e5cd9fa8b291a52d07842678dd22e174fb1cc988b4915ed1e6c137cc4"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module18_reference.cpython-314.pyc",
+      "sha256": "9b7542f8c63d92bee223c3f68e43633b3ac1f15976c983b4390ed282029225c8"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module19_reference.cpython-312.pyc",
+      "sha256": "3ec9a31a20c5241ff7221b1c5a110db0e0ab3ce2c833d5213abcecbd4e4c97f0"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module19_reference.cpython-314.pyc",
+      "sha256": "f693c77f81cb71a37c6268904e195320b80eed2a2521ed6272bb528fa9e69bbc"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module20_reference.cpython-312.pyc",
+      "sha256": "54c59911063eb39e02f34669fc19e76a77342c4c50efdb1253dcc7ee632eff50"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module20_reference.cpython-314.pyc",
+      "sha256": "c231909c14374d7caa07f1544cb0e14899af23542ba2b6533beb933c8f08d693"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module21_reference.cpython-312.pyc",
+      "sha256": "9b0d9db37af99070f12fb997a70e8a6137be4c7374fe69aa51a07d13df8b179f"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module21_reference.cpython-314.pyc",
+      "sha256": "b446a42467e985d64484264f14efb17a667627c5efba19896ac443e9bf9acd19"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module22_reference.cpython-312.pyc",
+      "sha256": "572cb3c2c532b613f325a64c26c913242d15ac1482ee86af45065e7d17185744"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module22_reference.cpython-314.pyc",
+      "sha256": "543cdf7e2cfbd22a7ecad3a337865181c31be3113f8399438197f3e8a719c42c"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module23_reference.cpython-312.pyc",
+      "sha256": "bfa85007463a1b3cf8bac56fad64a90f98473e1d87b69dd409fe9617b68724fc"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module23_reference.cpython-314.pyc",
+      "sha256": "99716374b71cf80668dcb4f0d78adeeb96b3b8cc8a6c5556350deb603e411c96"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module24_reference.cpython-312.pyc",
+      "sha256": "35dca1bb003e294439099a28046acad93e6c210b90fc11cfb5f22ae549673bd4"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module25_reference.cpython-312.pyc",
+      "sha256": "2451b2805ad05768fc28ff68d6888c9cdf428650ee70d03aca9968fac52e2771"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module26_reference.cpython-312.pyc",
+      "sha256": "fd232b9bef3e19f5ccc9f6ea7de27127a5595d26aa184863b97b163c61806779"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module27_reference.cpython-312.pyc",
+      "sha256": "b323b658c849cc4bc37b638f32a7befb880ab9bc70ff64de86dd563f7257e504"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module28_reference.cpython-312.pyc",
+      "sha256": "25b668892d39c28cd2240f4821ef4b2a45a46617601d32d51f0e5d1fbeb70e7f"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module29_reference.cpython-312.pyc",
+      "sha256": "8838197eb254d49fac5c9467f5bbf90d64c6569f67f089303f415a497adf4748"
+    },
+    {
+      "path": "public/downloads/__pycache__/test_module30_reference.cpython-312.pyc",
+      "sha256": "9c23839a69d0315d0ee4c8de9b760d71ce4b887339b34f6dd82f9299fefa1d38"
+    },
+    {
+      "path": "public/downloads/module17_reference.py",
+      "sha256": "8086bf4882971ec31bd26f24f1a903a4c6927c449c41e993b99b8c0de366c4ad"
+    },
+    {
+      "path": "public/downloads/module18_reference.py",
+      "sha256": "7fc35ba847b87190470601fdda3be0f5bfa08be464cfa2cd2eab37c5ef1234b7"
+    },
+    {
+      "path": "public/downloads/module19_reference.py",
+      "sha256": "f9dd5c1f27fb24e6d7e9c57d78c046976ddd2bb4d1ce47d665c77dbe781e3b9d"
+    },
+    {
+      "path": "public/downloads/module20_reference.py",
+      "sha256": "6339582beebba18c16f30200650fe697bb3870b472478a4815a4593263ac6b8e"
+    },
+    {
+      "path": "public/downloads/module21_reference.py",
+      "sha256": "102c326a009ffcbaa6c25f881a407e8708d750c15d61e1a9d1741e413cfcae36"
+    },
+    {
+      "path": "public/downloads/module22_reference.py",
+      "sha256": "5186239178bed5f4293d59847cf0d485e9b22c8b1401c70fd30b849f5422fe7a"
+    },
+    {
+      "path": "public/downloads/module23_reference.py",
+      "sha256": "c94412fecd8f7b368d2bbb2319348ed3cf7fc7bc3f223058f8fbd37c526c855d"
+    },
+    {
+      "path": "public/downloads/module24_reference.py",
+      "sha256": "e9467fc7669f72db4e60e21667b8ce5ce30d30e1352667a4af75a3a49c1316c3"
+    },
+    {
+      "path": "public/downloads/module25_reference.py",
+      "sha256": "689439ccda7e54692929d3e53d7f9a813726a360bc24970abb1fc509cb49ef25"
+    },
+    {
+      "path": "public/downloads/module26_reference.py",
+      "sha256": "7f1079d83acc2433972f4f959a541a2f2571655a1487ed481bd2340246e5769e"
+    },
+    {
+      "path": "public/downloads/module27_reference.py",
+      "sha256": "555a37db6714ce39adfa02fd2abc523c0a5273fe58dbbe489e1b7d085ebe11a4"
+    },
+    {
+      "path": "public/downloads/module28_reference.py",
+      "sha256": "7dce4bf9ae36a4ff60df44ec37ca249263684697e6405ec24f48a81a844f890c"
+    },
+    {
+      "path": "public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "sha256": "86ffb1018ed5e1be2c2580a15129e93c62f2f548e82547ff68dc234d15f2ba5f"
+    },
+    {
+      "path": "public/downloads/module29_calculus_real_analysis_source_audit_addendum.md",
+      "sha256": "ff9e461d78fc5a96b8848877a8e57d3c7556a7048fae95171ca099f6b150252d"
+    },
+    {
+      "path": "public/downloads/module29_reference.py",
+      "sha256": "3796532ee004642cd55d09ca6101618b4a38c3c1c1e8b668fdafb8c9c105fc91"
+    },
+    {
+      "path": "public/downloads/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
+      "sha256": "0e4a2eaa87d4197523919ba9a7157c50c300e0fcb0d206c83071ba65551de158"
+    },
+    {
+      "path": "public/downloads/module30_probability_statistics_scientific_inference_source_map.md",
+      "sha256": "5c830c8852c0552de12faa41fa03a048552fad60a05616ade45a339c336a8295"
+    },
+    {
+      "path": "public/downloads/module30_reference.py",
+      "sha256": "abbebc12d89af0dcad26c637958e82d2a794aa1848a4411747bbbc7c6d444306"
+    },
+    {
+      "path": "public/downloads/test_module18_reference.py",
+      "sha256": "5136dfff7706dfa7bd97e694d4d4287aa54fff75c8693274b45368486a2a9214"
+    },
+    {
+      "path": "public/downloads/test_module19_reference.py",
+      "sha256": "46f743a0117a929262155528ed38c1299ecfe23d9a1a07a2f9d226bb10919dee"
+    },
+    {
+      "path": "public/downloads/test_module20_reference.py",
+      "sha256": "effca466e05543a997dbf0bc7dd036182abaf7d78035a4b98cbc82cdf9c235aa"
+    },
+    {
+      "path": "public/downloads/test_module21_reference.py",
+      "sha256": "6556fce5812f7bda8ac47ccd82a16b6d4dafba459ec1b1af011c4a8103559d1a"
+    },
+    {
+      "path": "public/downloads/test_module22_reference.py",
+      "sha256": "5ee771062e69ebbc71f211787e5fd1d734e09ec371975acafa4603be5a93f5c4"
+    },
+    {
+      "path": "public/downloads/test_module23_reference.py",
+      "sha256": "5c0e89381e2e6ce00f28d2f64e553e826b33e119a8aa9c8b0365980543b9a24a"
+    },
+    {
+      "path": "public/downloads/test_module24_reference.py",
+      "sha256": "42be94d18c436e7aa4aaa16b135acbe0d207482a1fdda424501950650753433a"
+    },
+    {
+      "path": "public/downloads/test_module25_reference.py",
+      "sha256": "b9a459ecc2975ac92f7c97ff3d723325fd8e24818382e8e6e4942b036b013d72"
+    },
+    {
+      "path": "public/downloads/test_module26_reference.py",
+      "sha256": "1f4f692ff41e671d91233c241375ba443a5c730b12214e054fa9ca933de7d137"
+    },
+    {
+      "path": "public/downloads/test_module27_reference.py",
+      "sha256": "7ffe491afaed240c44b0e3f36030336a1006620893fa8333dc132ba408f11e51"
+    },
+    {
+      "path": "public/downloads/test_module28_reference.py",
+      "sha256": "f17aa5110ac8412772818620ea12654a7ad65e8e864c3f2eb05e4db70b8ac015"
+    },
+    {
+      "path": "public/downloads/test_module29_reference.py",
+      "sha256": "907212c407c9c4f7213f3d7d9a65a7c60daab660c555807bf1e74975d0b08795"
+    },
+    {
+      "path": "public/downloads/test_module30_reference.py",
+      "sha256": "e3401c6bcbbe372a651c14091bc7ce5a2e58783848b7c2553f1b95d3f37b06ec"
+    }
+  ]
+}

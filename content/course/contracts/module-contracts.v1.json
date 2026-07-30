@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "v1",
+  "purpose": "Declare publication evidence for each Atlas module without confusing structural checks with human pedagogical judgment.",
+  "legacyBaselineModuleIds": [
+    "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10",
+    "m11", "m12", "m13", "m14", "m15", "m16", "m17", "m18", "m19", "m20",
+    "m21", "m22", "m23", "m24", "m25", "m26", "m27", "m28", "m29", "m30"
+  ],
+  "requiredPublicationEvidence": [
+    "prerequisite-and-forward-map",
+    "six-connected-sessions",
+    "first-principles-and-transfer-work",
+    "source-ledger-and-license-boundary",
+    "accessible-visual-equivalents",
+    "confidence-aware-diagnostic-and-retrieval",
+    "project-or-dossier-with-acceptance-evidence",
+    "supportive-oral-defense",
+    "ta-and-study-partner-handoffs"
+  ],
+  "humanReviewDimensions": [
+    "first-principles-quality",
+    "rigor-and-counterexamples",
+    "source-claim-correctness",
+    "visual-text-equivalent-quality",
+    "assessment-explanation-quality",
+    "project-evidence-quality",
+    "ta-study-partner-usefulness",
+    "oral-defense-quality"
+  ],
+  "defaultHumanReview": {
+    "first-principles-quality": "pending",
+    "rigor-and-counterexamples": "pending",
+    "source-claim-correctness": "pending",
+    "visual-text-equivalent-quality": "pending",
+    "assessment-explanation-quality": "pending",
+    "project-evidence-quality": "pending",
+    "ta-study-partner-usefulness": "pending",
+    "oral-defense-quality": "pending"
+  },
+  "modules": [
+    {"moduleId": "m01", "publicationState": "legacy-baseline"},
+    {"moduleId": "m02", "publicationState": "legacy-baseline"},
+    {"moduleId": "m03", "publicationState": "legacy-baseline"},
+    {"moduleId": "m04", "publicationState": "legacy-baseline"},
+    {"moduleId": "m05", "publicationState": "legacy-baseline"},
+    {"moduleId": "m06", "publicationState": "legacy-baseline"},
+    {"moduleId": "m07", "publicationState": "legacy-baseline"},
+    {"moduleId": "m08", "publicationState": "legacy-baseline"},
+    {"moduleId": "m09", "publicationState": "legacy-baseline"},
+    {"moduleId": "m10", "publicationState": "legacy-baseline"},
+    {"moduleId": "m11", "publicationState": "legacy-baseline"},
+    {"moduleId": "m12", "publicationState": "legacy-baseline"},
+    {"moduleId": "m13", "publicationState": "legacy-baseline"},
+    {"moduleId": "m14", "publicationState": "legacy-baseline"},
+    {"moduleId": "m15", "publicationState": "legacy-baseline"},
+    {"moduleId": "m16", "publicationState": "legacy-baseline"},
+    {"moduleId": "m17", "publicationState": "legacy-baseline"},
+    {"moduleId": "m18", "publicationState": "legacy-baseline"},
+    {"moduleId": "m19", "publicationState": "legacy-baseline"},
+    {"moduleId": "m20", "publicationState": "legacy-baseline"},
+    {"moduleId": "m21", "publicationState": "legacy-baseline"},
+    {"moduleId": "m22", "publicationState": "legacy-baseline"},
+    {"moduleId": "m23", "publicationState": "legacy-baseline"},
+    {"moduleId": "m24", "publicationState": "legacy-baseline"},
+    {"moduleId": "m25", "publicationState": "legacy-baseline"},
+    {"moduleId": "m26", "publicationState": "legacy-baseline"},
+    {"moduleId": "m27", "publicationState": "legacy-baseline"},
+    {"moduleId": "m28", "publicationState": "legacy-baseline"},
+    {"moduleId": "m29", "publicationState": "legacy-baseline"},
+    {"moduleId": "m30", "publicationState": "legacy-baseline"}
+  ]
+}

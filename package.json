@@ -8,12 +8,16 @@
   },
   "scripts": {
     "sync:modules": "node scripts/sync-modules.mjs",
+    "validate:course": "node scripts/validate-course.mjs",
+    "validate:course:strict": "node scripts/validate-course.mjs --strict",
+    "validate:course:inputs": "node scripts/validate-course.mjs --require-git-tracked",
+    "check:generated": "node scripts/check-generated.mjs",
     "predev": "pnpm sync:modules",
     "dev": "vinext dev",
     "prebuild": "pnpm sync:modules",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "pnpm build && node --test tests/course-graph.test.mjs tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
+    "test": "pnpm build && node --test tests/course-contract.test.mjs tests/course-graph.test.mjs tests/release-inputs.test.mjs tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work",
     "db:generate": "drizzle-kit generate"
   },

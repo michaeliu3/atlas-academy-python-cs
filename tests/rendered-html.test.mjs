@@ -1231,7 +1231,7 @@ test("generated module manifest projects the canonical graph without bypassing p
   assert.equal(module26.previousSlug, module25.slug);
 });
 
-test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
+test("module synchronization uses checked-in inputs and normalizes line endings before hashing", async () => {
   const syncUrl = new URL("../scripts/sync-modules.mjs", import.meta.url);
   const synchronizer = await readFile(syncUrl, "utf8");
 
@@ -1240,8 +1240,16 @@ test("module synchronization normalizes checkout line endings before fingerprint
   assert.match(synchronizer, /normalizeNewlines\(current\) === normalizedContent/);
   assert.match(
     synchronizer,
-    /const markdown = normalizeNewlines\(\s*await readFile\(join\(sourceDirectory, filename\), "utf8"\),\s*\);/,
+    /const moduleDirectory = resolve\(siteRoot, "content", "modules"\);/,
   );
+  assert.match(synchronizer, /const releaseInputsPath = resolve\(/);
+  assert.match(
+    synchronizer,
+    /const markdown = normalizeNewlines\(await readFile\(workbookPath, "utf8"\)\);/,
+  );
+  assert.doesNotMatch(synchronizer, /resolve\(siteRoot, "\.\.", "modules"\)/);
+  assert.doesNotMatch(synchronizer, /resolve\(siteRoot, "\.\.", "research"\)/);
+  assert.doesNotMatch(synchronizer, /resolve\(siteRoot, "\.\.", "work"\)/);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
