@@ -1,5 +1,6 @@
 import {
   Children,
+  cloneElement,
   isValidElement,
   type ReactNode,
 } from "react";
@@ -83,6 +84,40 @@ function textFromNode(node: ReactNode): string {
     .join("");
 }
 
+type TaskCheckboxProps = {
+  type?: string;
+  "aria-label"?: string;
+  readOnly?: boolean;
+};
+
+/**
+ * GFM renders a task list as a disabled checkbox followed by task text rather
+ * than a native <label>. Keep the familiar visual checklist, but give each
+ * inert control the same specific name a screen-reader user needs to
+ * understand it. This applies to every workbook, not only the first route
+ * where Axe happened to find the issue.
+ */
+function labelTaskListCheckboxes(children: ReactNode): ReactNode {
+  const taskText = textFromNode(children).replace(/\s+/gu, " ").trim();
+  const accessibleName = taskText
+    ? `Read-only workbook checklist item: ${taskText}`
+    : "Read-only workbook checklist item";
+
+  return Children.map(children, (child) => {
+    if (
+      isValidElement<TaskCheckboxProps>(child) &&
+      child.type === "input" &&
+      child.props.type === "checkbox"
+    ) {
+      return cloneElement(child, {
+        "aria-label": accessibleName,
+        readOnly: true,
+      });
+    }
+    return child;
+  });
+}
+
 const markdownComponents: Components = {
   a({
     "aria-label": ariaLabel,
@@ -137,6 +172,14 @@ const markdownComponents: Components = {
       <h3 className={className} id={id}>
         {children}
       </h3>
+    );
+  },
+  li({ children, className }) {
+    const isTaskListItem = className?.split(/\s+/u).includes("task-list-item");
+    return (
+      <li className={className}>
+        {isTaskListItem ? labelTaskListCheckboxes(children) : children}
+      </li>
     );
   },
   pre({ children }) {

@@ -6,7 +6,9 @@ This is an append-only evidence ledger for Atlas Academy's private release
 process. It separates four different facts that must not be conflated:
 
 1. a source commit exists in the reviewable GitHub repository;
-2. a named GitHub Actions run validated that source commit;
+2. a named GitHub Actions check is attached to a source commit and records a
+   bounded workflow validation (a pull-request workflow can instead check a
+   generated merge candidate);
 3. a GitHub Release exists for a tag; and
 4. the private hosting deployment was verified.
 
@@ -27,10 +29,26 @@ The current review path is [`agent/60-day-route`](https://github.com/michaeliu3/
 [pull request #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
 as the source-review record.
 
+### Verified GitHub history-protection snapshot
+
+On 2026-07-30, GitHub branch-protection settings were checked directly for the
+private repository. `main` disallows force-pushes and deletion and requires
+linear history. The active review branch, `agent/60-day-route`, was then given
+the same no-force-push, no-deletion, linear-history policy while retaining
+ordinary fast-forward commits. It deliberately has no required-review or
+required-check rule: it is a review branch, not a release branch.
+
+This is a point-in-time configuration record, not a claim that an administrator
+cannot later change a setting, that every branch is protected, or that a
+private deployment has been reviewed.
+
 ## Verified candidate-validation records
 
-These are candidate validation records, not releases. Both recorded Actions
-runs completed successfully for the stated commit on the review branch.
+These are candidate validation records, not releases. The listed Actions checks
+completed successfully and are attached to the stated source heads on the
+review branch. Unless a row separately records the checked-out ref, it is not
+deployment-style evidence that an artifact was built from the head commit
+alone.
 
 | Source commit | Evidence changed | GitHub Actions evidence | What this establishes | What it does not establish |
 | --- | --- | --- | --- | --- |
@@ -45,6 +63,7 @@ runs completed successfully for the stated commit on the review branch.
 | Source commit | Evidence changed | GitHub Actions evidence | Recorded outcome | Release consequence |
 | --- | --- | --- | --- | --- |
 | [`a89fcae9a32dd0f9584a1b6f579ccd1f6bb3a853`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a89fcae9a32dd0f9584a1b6f579ccd1f6bb3a853) | Linux Chromium/axe browser-acceptance harness | [Run 30571390346](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30571390346) — browser-accessibility failed; portal and Python teaching-model jobs passed | The browser job reported real contrast and keyboard-focus failures. | This commit is **not** browser-accessibility acceptance, a release candidate, deployment evidence, or a completed accessibility review. A later exact-commit Linux run must pass before a success record is added. |
+| [`2a182dea3edbda1ccb52f67851c2b9de1c11be54`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/2a182dea3edbda1ccb52f67851c2b9de1c11be54) | Legacy/ahead-of-release audits, 20-probe routing, accessibility repairs, and truthful release boundaries | [Run 30576396718](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30576396718) — portal and Python 3.12/3.14 jobs passed; browser-accessibility failed. The check is attached to this head, while the pull-request workflow checked merge candidate `65060c29ccd5da250b4ed91b570786e1388a9cdf`. | Seven browser checks failed. Confirmed causes include an unlabelled GFM workbook checklist, stale diagnostic confidence selectors, ambiguous selectors over intentional text equivalents, and a trust-studio radio hit-target interaction. The failure report is retained by GitHub as an artifact; it is remediation input, not erased history. | This head/merge candidate is **not** browser-accessibility acceptance, a release candidate, deployment evidence, or a completed accessibility review. A later successful candidate must be recorded separately; it does not rewrite this failure. |
 
 ## Historical GitHub Release reconciliation
 
@@ -68,9 +87,10 @@ unverified deployment assertions in this ledger.
 
 These source commits add audit machinery and evidence inventories. Their open
 [pull request #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
-is a review path, not a recorded human approval. At this ledger revision, an
-exact-commit GitHub CI result for these commits is still pending; the next
-candidate record must name it explicitly.
+is a review path, not a recorded human approval. A later Actions check attached
+to descendant head `2a182de` is recorded above, but its browser job failed and
+its pull-request workflow checked a generated merge candidate. That is not a
+substitute for independently recorded exact-build or human-review evidence.
 
 | Source commit | Audit scope | What the source records | What it does not establish |
 | --- | --- | --- | --- |

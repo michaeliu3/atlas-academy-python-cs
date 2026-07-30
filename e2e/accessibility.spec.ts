@@ -84,7 +84,10 @@ const browserAuditRoutes: ReadonlyArray<{
     path: "/modules/22-security-privacy-trust-boundaries",
     ready: async (page) => {
       await expect(
-        page.getByRole("heading", { name: "Atlas Trust Control Room" }),
+        page.getByRole("heading", {
+          name: "Atlas Trust Control Room",
+          exact: true,
+        }),
       ).toBeVisible();
     },
   },
@@ -93,7 +96,10 @@ const browserAuditRoutes: ReadonlyArray<{
     path: "/modules/30-probability-statistics-scientific-inference",
     ready: async (page) => {
       await expect(
-        page.getByRole("heading", { name: "Probability & Inference Studio" }),
+        page.getByRole("heading", {
+          name: "Probability & Inference Studio",
+          exact: true,
+        }),
       ).toBeVisible();
     },
   },
@@ -179,7 +185,7 @@ test("the diagnostic requires an answer and confidence before model reveal", asy
   await page.getByRole("radio").first().check();
   await expect(reveal).toBeDisabled();
 
-  await page.getByRole("radio", { name: /not sure yet/i }).check();
+  await page.getByRole("radio", { name: /^low\b/i }).check();
   await expect(reveal).toBeEnabled();
   await reveal.click();
 
@@ -195,7 +201,7 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
 
   for (let index = 0; index < 20; index += 1) {
     await page.getByRole("radio").first().check();
-    await page.getByRole("radio", { name: /not sure yet/i }).check();
+    await page.getByRole("radio", { name: /^low\b/i }).check();
     await page.getByRole("button", { name: "Reveal the model" }).click();
 
     if (index < 19) {
@@ -233,8 +239,15 @@ test("the Module 22 trust studio requires prediction and confidence before revea
   });
   await expect(reveal).toBeDisabled();
 
-  await prediction.getByRole("radio").first().check();
-  await prediction.getByRole("radio", { name: /guess/i }).check();
+  const choice = prediction.getByRole("radio").first();
+  await choice.focus();
+  await page.keyboard.press("Space");
+  await expect(choice).toBeChecked();
+
+  const confidence = prediction.getByRole("radio", { name: /guess/i });
+  await confidence.focus();
+  await page.keyboard.press("Space");
+  await expect(confidence).toBeChecked();
   await expect(reveal).toBeEnabled();
   await reveal.click();
   await expect(reveal).toHaveText("Refresh the evidence");
@@ -253,7 +266,10 @@ test("the Module 30 studio requires prediction and confidence before explanation
   });
   await expect(reveal).toBeDisabled();
 
-  await prediction.getByRole("radio").first().click();
+  const choice = prediction.getByRole("radio").first();
+  await choice.focus();
+  await page.keyboard.press("Space");
+  await expect(choice).toHaveAttribute("aria-checked", "true");
   await page.getByRole("group", { name: "Confidence" }).getByRole("button", {
     name: "Guess",
   }).click();

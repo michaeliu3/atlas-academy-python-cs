@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { JSDOM } from "jsdom";
 import { diagnosticQuestions } from "../lib/diagnostic-model.js";
 import { extractTableOfContents } from "../lib/heading-ids.js";
 import {
@@ -100,6 +101,34 @@ test("renders separate, learner-controlled Teaching Assistant and Study Partner 
   assert.match(html, /Copy Study Partner startup prompt/);
   assert.match(html, /Never give a bare pass\/fail verdict/);
   assert.match(html, /silently save a transcript/);
+});
+
+test("gives every rendered workbook checklist item a descriptive read-only name", async () => {
+  const moduleSlugs = [
+    "15-files-serialization-packaging-delivery",
+    "16-relational-data-transactions",
+    "17-computer-architecture-execution-stack",
+    "18-operating-systems-resource-mediation",
+  ];
+
+  for (const slug of moduleSlugs) {
+    const response = await render(`/modules/${slug}`);
+    assert.equal(response.status, 200, `${slug} renders`);
+    const document = new JSDOM(await response.text()).window.document;
+    const checkboxes = [
+      ...document.querySelectorAll(".task-list-item > input[type='checkbox']"),
+    ];
+
+    assert.ok(checkboxes.length > 0, `${slug} includes a workbook checklist`);
+    for (const checkbox of checkboxes) {
+      assert.match(
+        checkbox.getAttribute("aria-label") ?? "",
+        /^Read-only workbook checklist item: \S/u,
+        `${slug} checklist control has a specific accessible name`,
+      );
+      assert.equal(checkbox.hasAttribute("readonly"), true);
+    }
+  }
 });
 
 test("keeps landing selection and legacy studio tabs keyboard-accessible", async () => {
