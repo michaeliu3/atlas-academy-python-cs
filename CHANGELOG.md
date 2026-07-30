@@ -57,6 +57,11 @@ actually published.
   with readable version comments and a regression test. This narrows mutable
   action-tag drift; it is not a complete supply-chain or remote-CI-evidence
   guarantee.
+- Recorded the subsequent successful Course CI run separately: source head
+  `282bd6a` entered run `30589660835`, whose four named jobs checked merge
+  candidate `d3e3679`. This is bounded candidate-validation evidence, not a
+  GitHub Release, private deployment, complete security review, or course
+  completion claim.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;
