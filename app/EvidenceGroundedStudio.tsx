@@ -23,6 +23,7 @@ type ViewRecord = {
   revealed: boolean;
 };
 type StudioRecord = Record<StudioView, ViewRecord>;
+type DecisionResponse = "accept" | "dismiss" | "alternative";
 
 const STUDIO_STORAGE_KEY = "atlas-academy.module25-evidence-studio.v1";
 const CORE_RULE =
@@ -250,18 +251,18 @@ const lineageRows = [
 
 const rankingCards = [
   {
-    id: "repair",
-    action: "Repair the cost-model trace",
-    signal: "Module 5 prerequisite incomplete",
-    score: 8,
-    kind: "prerequisite",
-  },
-  {
     id: "transaction",
     action: "Trace a transaction invariant",
     signal: "Module 16 low-confidence + prerequisite gap",
     score: 13,
     kind: "reasoned baseline",
+  },
+  {
+    id: "repair",
+    action: "Repair the cost-model trace",
+    signal: "Module 5 prerequisite incomplete",
+    score: 8,
+    kind: "prerequisite",
   },
   {
     id: "runtime",
@@ -409,6 +410,7 @@ export function EvidenceGroundedStudio() {
   const [activeView, setActiveView] = useState<StudioView>("purpose");
   const [record, setRecord] = useState<StudioRecord>(blankRecord);
   const [storageReady, setStorageReady] = useState(false);
+  const [decisionResponse, setDecisionResponse] = useState<DecisionResponse | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeRecord = record[activeView];
 
@@ -707,12 +709,44 @@ export function EvidenceGroundedStudio() {
                   <p><strong>Why it appeared:</strong> Module 16 is marked low-confidence and remains a prerequisite for the capstone dossier.</p>
                   <p><strong>Policy:</strong> transparent-prerequisite-review/v1 · <strong>data:</strong> synthetic local fixture only.</p>
                   <p><strong>Limit:</strong> this does not predict your outcome or decide your plan.</p>
-                  <div><button type="button">Accept as an idea</button><button type="button">Dismiss</button><button type="button">Choose another route</button></div>
+                  <div>
+                    <button
+                      aria-pressed={decisionResponse === "accept"}
+                      onClick={() => setDecisionResponse("accept")}
+                      type="button"
+                    >
+                      Accept as an idea
+                    </button>
+                    <button
+                      aria-pressed={decisionResponse === "dismiss"}
+                      onClick={() => setDecisionResponse("dismiss")}
+                      type="button"
+                    >
+                      Dismiss
+                    </button>
+                    <button
+                      aria-pressed={decisionResponse === "alternative"}
+                      onClick={() => setDecisionResponse("alternative")}
+                      type="button"
+                    >
+                      Choose another route
+                    </button>
+                  </div>
+                  {decisionResponse && (
+                    <p className={styles.responseStatus} role="status">
+                      {decisionResponse === "accept"
+                        ? "You kept the idea for consideration."
+                        : decisionResponse === "dismiss"
+                          ? "You dismissed this proposal."
+                          : "You chose to inspect another route."} {" "}
+                      This in-memory specimen changed no learner record, plan, or schedule.
+                    </p>
+                  )}
                 </article>
                 <p className={styles.nonClaim}>
-                  The buttons are an interface specimen, not a connected learner
-                  record. Module 25 never sends or changes personal data from this
-                  portal.
+                  These controls acknowledge a local choice without becoming a
+                  connected learner record. Module 25 never sends or changes
+                  personal data from this portal.
                 </p>
               </section>
               <PredictionGate view="control" {...gateProps} />

@@ -76,7 +76,7 @@ that an external model provider has seen, retained, or acted on nothing.
 
 ~~~text
 Reference: module25_reference.py (local deterministic casebook)
-Tests:     test_module25_reference.py (26 behavioral seams)
+Tests:     test_module25_reference.py (28 behavioral seams)
 Scope:     evidence-review model, not a model trainer, LLM client, or service
 Runtime:   local Python evidence environment
 Effects:   no network, filesystem input, external model, prompt, credential,

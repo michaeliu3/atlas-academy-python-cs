@@ -575,7 +575,10 @@
 .decisionCard h4 { font-family: var(--font-dm-serif-display), Georgia, serif; font-size: 1.5rem; font-weight: 400; letter-spacing: -0.025em; margin: 0.35rem 0 0; }
 .decisionCard p { color: #5e5645; font-size: 0.8rem; line-height: 1.48; margin: 0.62rem 0 0; }
 .decisionCard > div { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.85rem; }
-.decisionCard button { background: #fffdf6; border: 1px solid #caa85a; border-radius: 999px; color: #664e1c; cursor: default; font-size: 0.7rem; font-weight: 800; padding: 0.43rem 0.57rem; }
+.decisionCard button { background: #fffdf6; border: 1px solid #caa85a; border-radius: 999px; color: #664e1c; cursor: pointer; font-size: 0.7rem; font-weight: 800; padding: 0.43rem 0.57rem; }
+.decisionCard button:hover { background: #fff4cf; }
+.decisionCard button[aria-pressed="true"] { background: #69551d; border-color: #69551d; color: #fffdf6; }
+.responseStatus { background: #eef5e9; border-left: 3px solid #78a555; color: #405b37 !important; font-size: 0.77rem !important; font-weight: 700; line-height: 1.45 !important; margin-top: 0.75rem !important; padding: 0.55rem 0.65rem; }
 
 .agentMap { display: grid; gap: 0.55rem; margin-top: 1.25rem; }
 .agentMap article { align-items: start; background: #eef3f4; border: 1px solid #cfdbdf; display: grid; gap: 0.65rem; grid-template-columns: auto 1fr; padding: 0.72rem; }
