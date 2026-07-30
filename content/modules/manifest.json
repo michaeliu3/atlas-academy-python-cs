@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 23,
+  "moduleCount": 24,
   "arcs": [
     {
       "id": "arc-i",
@@ -359,6 +359,20 @@
       "sourceHash": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742",
       "prerequisiteSlug": "22-security-privacy-trust-boundaries",
       "previousSlug": "22-security-privacy-trust-boundaries",
+      "nextSlug": "24-cpython-performance-memory"
+    },
+    {
+      "number": 24,
+      "slug": "24-cpython-performance-memory",
+      "filename": "24_cpython_performance_memory.md",
+      "title": "CPython, Performance & Memory Evidence",
+      "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 23 gave a program a semantic path: source, structure, environment, evaluator, and bounded result. This module asks a different question: when a trusted Python program runs,…",
+      "arcId": "arc-v",
+      "wordCount": 4380,
+      "estimatedMinutes": 21,
+      "sourceHash": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73",
+      "prerequisiteSlug": "23-programming-languages-interpreters",
+      "previousSlug": "23-programming-languages-interpreters",
       "nextSlug": null
     }
   ]

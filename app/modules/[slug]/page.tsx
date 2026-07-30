@@ -18,6 +18,7 @@ import { AsyncDistributedStudio } from "../../AsyncDistributedStudio";
 import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
 import { SecurityTrustStudio } from "../../SecurityTrustStudio";
 import { LanguageInterpreterStudio } from "../../LanguageInterpreterStudio";
+import { RuntimeEvidenceObservatory } from "../../RuntimeEvidenceObservatory";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -99,6 +100,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "23-programming-languages-interpreters" && (
           <LanguageInterpreterStudio />
+        )}
+        {slug === "24-cpython-performance-memory" && (
+          <RuntimeEvidenceObservatory />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
