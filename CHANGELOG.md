@@ -34,6 +34,10 @@ actually published.
   and forward handoff. The present M31 plan deliberately declares no delivery
   map, so no learner material is implied; the map is structural evidence, not
   a substitute for human pedagogical review.
+- Tightened the advanced evidence ledger: future provenance documents must use
+  a module-scoped three-file allowlist, while the M31–M36 historical readiness
+  audit remains hashable after future contracts change. This controls ledger
+  scope; it does not independently verify CI, review, or deployment facts.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;

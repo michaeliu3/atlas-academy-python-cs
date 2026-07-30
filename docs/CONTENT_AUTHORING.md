@@ -133,6 +133,16 @@ prose-heading check and not a claim that the explanation, visual, or learner
 experience has passed human review. An `authoring-only` entry must keep this
 field `null`.
 
+Advanced `provenance` inputs under `docs/` are deliberately narrow: the
+historical `M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` remains part of the
+hashed ledger, and future module-specific evidence may use only
+`docs/advanced-evidence/mXX/provenance.md`, `source-review.md`, or
+`known-limitations.md` for that same module. The ledger is derived from the
+validated contract; arbitrary documentation cannot become a release input.
+For a published contract, those three release-record fields must use their
+corresponding exact filenames rather than reusing the historical audit or one
+another.
+
 ## Authoring order
 
 1. Start from an Atlas incident or design pressure inherited from the prior

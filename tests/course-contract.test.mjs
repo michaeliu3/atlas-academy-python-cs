@@ -8,6 +8,8 @@ import {
   validateAdvancedModuleBridgeLedger,
 } from "../scripts/advanced-module-bridge.mjs";
 import {
+  advancedReleaseDocumentationPath,
+  isAllowedAdvancedProvenancePath,
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
 } from "../scripts/advanced-module-contract.mjs";
@@ -77,6 +79,15 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     /authoring-only delivery map must remain null/u,
   );
 
+  const arbitraryProvenance = structuredClone(registry);
+  arbitraryProvenance.modules[0].contractInputs.find(
+    ({ id }) => id === "m31-readiness-audit",
+  ).path = "docs/RELEASE_PROVENANCE.md";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, arbitraryProvenance),
+    /provenance path must use a fixed historical record or a module-scoped advanced-evidence slot/u,
+  );
+
   const brokenPointer = structuredClone(registry);
   brokenPointer.modules[0].contractInputs.find(
     ({ id }) => id === "m31-source-map-claims",
@@ -133,6 +144,48 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     }),
     /authoring-only but appears in a learner manifest or route/u,
   );
+});
+
+test("advanced provenance inputs use fixed historical records or narrow module-scoped slots", () => {
+  assert.equal(
+    isAllowedAdvancedProvenancePath("m31", "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"),
+    true,
+  );
+  assert.equal(
+    isAllowedAdvancedProvenancePath("m36", "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"),
+    true,
+  );
+  assert.equal(
+    isAllowedAdvancedProvenancePath("m31", "docs/advanced-evidence/m31/provenance.md"),
+    true,
+  );
+  assert.equal(
+    isAllowedAdvancedProvenancePath("m31", "docs/advanced-evidence/m31/source-review.md"),
+    true,
+  );
+  assert.equal(
+    isAllowedAdvancedProvenancePath("m31", "docs/advanced-evidence/m32/provenance.md"),
+    false,
+  );
+  assert.equal(isAllowedAdvancedProvenancePath("m31", "docs/RELEASE_PROVENANCE.md"), false);
+  assert.equal(
+    isAllowedAdvancedProvenancePath("m31", "docs/advanced-evidence/m31/anything-else.md"),
+    false,
+  );
+  assert.equal(
+    advancedReleaseDocumentationPath("m31", "provenancePath"),
+    "docs/advanced-evidence/m31/provenance.md",
+  );
+  assert.equal(
+    advancedReleaseDocumentationPath("m31", "sourceReviewPath"),
+    "docs/advanced-evidence/m31/source-review.md",
+  );
+  assert.equal(
+    advancedReleaseDocumentationPath("m31", "knownLimitationsPath"),
+    "docs/advanced-evidence/m31/known-limitations.md",
+  );
+  assert.equal(advancedReleaseDocumentationPath("m31", "unknownPath"), null);
+  assert.equal(advancedReleaseDocumentationPath("m30", "provenancePath"), null);
 });
 
 test("the v1 contract registry covers every legacy published workbook structurally", async () => {

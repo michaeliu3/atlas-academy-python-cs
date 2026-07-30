@@ -5,7 +5,13 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { advancedModuleBridgeRelativePath } from "../scripts/advanced-module-bridge.mjs";
-import { advancedModuleContractRelativePath } from "../scripts/advanced-module-contract.mjs";
+import {
+  advancedModuleContractRelativePath,
+  historicalAdvancedProvenanceLedgerPaths,
+  loadAdvancedModuleContractRegistry,
+  validateAdvancedModuleContractRegistry,
+} from "../scripts/advanced-module-contract.mjs";
+import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
@@ -13,10 +19,8 @@ import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs"
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const ledgerPath = resolve(siteRoot, "content", "course", "release-inputs.v1.json");
-const provenanceOnlyLedgerInputs = new Set([
-  "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
-]);
-
+const advancedProvenanceDocumentPath =
+  /^docs\/advanced-evidence\/(m3[1-6])\/(?:provenance|source-review|known-limitations)\.md$/u;
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
@@ -30,7 +34,16 @@ function comparePaths(left, right) {
 }
 
 test("the release-input ledger is a reproducible local allowlist", async () => {
-  const ledger = JSON.parse(await readFile(ledgerPath, "utf8"));
+  const [ledger, graph, advancedRegistry] = await Promise.all([
+    readFile(ledgerPath, "utf8").then(JSON.parse),
+    loadCourseGraph(),
+    loadAdvancedModuleContractRegistry(),
+  ]);
+  const advancedContractReport = await validateAdvancedModuleContractRegistry(
+    graph,
+    advancedRegistry,
+    { siteRoot },
+  );
   assert.equal(ledger.schemaVersion, 1);
   assert.equal(ledger.generatedBy, "scripts/sync-modules.mjs");
   assert.ok(Array.isArray(ledger.inputs));
@@ -60,11 +73,36 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
     assert.ok(paths.includes(policyPath), `${policyPath} appears in the release-input ledger`);
   }
 
+  const documentationLedgerPaths = paths.filter((path) => path.startsWith("docs/"));
+  const expectedDocumentationLedgerPaths = new Set(historicalAdvancedProvenanceLedgerPaths);
+  for (const entry of advancedRegistry.modules) {
+    for (const input of entry.contractInputs ?? []) {
+      if (input?.role !== "provenance" || !input.path?.startsWith("docs/")) {
+        continue;
+      }
+      const match = input.path.match(advancedProvenanceDocumentPath);
+      assert.ok(
+        historicalAdvancedProvenanceLedgerPaths.includes(input.path) ||
+          (match && match[1] === entry.moduleId),
+        `${input.path} is a fixed historical record or a same-module advanced-evidence slot`,
+      );
+      expectedDocumentationLedgerPaths.add(input.path);
+    }
+  }
+  assert.deepEqual(
+    documentationLedgerPaths,
+    [...expectedDocumentationLedgerPaths].sort(comparePaths),
+  );
+  assert.deepEqual(
+    advancedContractReport.provenanceDocumentationPaths,
+    [...expectedDocumentationLedgerPaths].sort(comparePaths),
+  );
+
   for (const input of ledger.inputs) {
     if (input.path.startsWith("docs/")) {
       assert.ok(
-        provenanceOnlyLedgerInputs.has(input.path),
-        `${input.path} is an explicitly bounded provenance-only ledger input`,
+        expectedDocumentationLedgerPaths.has(input.path),
+        `${input.path} is a contract-declared, module-scoped provenance ledger input`,
       );
     } else {
       assert.match(input.path, /^(?:content|public)\//u);

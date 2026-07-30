@@ -26,6 +26,16 @@ const allowedInputRoles = new Set(["course-content", "provenance", "source-code"
 const ledgerInputRoles = new Set(["course-content", "provenance"]);
 const allowedRoots = new Set(["app", "content", "docs", "lib", "public", "tests"]);
 const allowedExtensions = new Set([".json", ".js", ".md", ".mjs", ".py", ".svg", ".ts", ".tsx"]);
+const advancedModuleIds = new Set(["m31", "m32", "m33", "m34", "m35", "m36"]);
+export const historicalAdvancedProvenanceLedgerPaths = [
+  "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+];
+const historicalAdvancedProvenancePaths = new Set(historicalAdvancedProvenanceLedgerPaths);
+const advancedProvenanceDocumentSlots = new Set([
+  "provenance.md",
+  "source-review.md",
+  "known-limitations.md",
+]);
 const humanReviewDimensions = [
   "first-principles-quality",
   "rigor-and-counterexamples",
@@ -145,6 +155,11 @@ const releasePathDetailFields = new Map([
   ["source-review", "sourceReviewPath"],
   ["known-limitations", "knownLimitationsPath"],
 ]);
+const releaseDocumentationFieldSlots = new Map([
+  ["provenancePath", "provenance.md"],
+  ["sourceReviewPath", "source-review.md"],
+  ["knownLimitationsPath", "known-limitations.md"],
+]);
 
 function hasText(value) {
   return typeof value === "string" && value.trim() !== "";
@@ -211,6 +226,32 @@ function normalizedRepositoryPath(value, label, errors) {
     return null;
   }
   return value;
+}
+
+/**
+ * Keep contract-derived documentation in a small, module-scoped namespace.
+ * Historical readiness evidence remains readable, but future promotion records
+ * cannot silently pull arbitrary docs into the deterministic release ledger.
+ */
+export function isAllowedAdvancedProvenancePath(moduleId, repositoryPath) {
+  if (!advancedModuleIds.has(moduleId)) {
+    return false;
+  }
+  if (historicalAdvancedProvenancePaths.has(repositoryPath)) {
+    return true;
+  }
+  const prefix = `docs/advanced-evidence/${moduleId}/`;
+  return (
+    repositoryPath.startsWith(prefix) &&
+    advancedProvenanceDocumentSlots.has(repositoryPath.slice(prefix.length))
+  );
+}
+
+export function advancedReleaseDocumentationPath(moduleId, releaseField) {
+  const filename = releaseDocumentationFieldSlots.get(releaseField);
+  return advancedModuleIds.has(moduleId) && filename
+    ? `docs/advanced-evidence/${moduleId}/${filename}`
+    : null;
 }
 
 function roleAllowsPath(role, repositoryPath) {
@@ -300,6 +341,16 @@ async function resolveContractInput(siteRoot, input, moduleId, caches, errors) {
     errors.push(`${label} role ${input.role} is incompatible with ${repositoryPath}.`);
     return null;
   }
+  if (
+    input.role === "provenance" &&
+    repositoryPath.startsWith("docs/") &&
+    !isAllowedAdvancedProvenancePath(moduleId, repositoryPath)
+  ) {
+    errors.push(
+      `${label} provenance path must use a fixed historical record or a module-scoped advanced-evidence slot.`,
+    );
+    return null;
+  }
   const absolutePath = await requireTrackedRegularFile(siteRoot, repositoryPath, label, errors);
   if (!absolutePath) {
     return null;
@@ -362,7 +413,7 @@ async function resolveContractInputs(entry, siteRoot, errors) {
   const label = `Module ${entry?.moduleId ?? "(missing moduleId)"} contract inputs`;
   if (!Array.isArray(entry?.contractInputs)) {
     errors.push(`${label} must be an array.`);
-    return { resolvedInputs: new Map(), ledgerInputPaths: [] };
+    return { resolvedInputs: new Map(), ledgerInputPaths: [], provenanceDocumentationPaths: [] };
   }
   if (entry.contractInputs.length === 0) {
     errors.push(`${label} must declare at least one checked-in input.`);
@@ -384,6 +435,9 @@ async function resolveContractInputs(entry, siteRoot, errors) {
     resolvedInputs,
     ledgerInputPaths: [...resolvedInputs.values()]
       .filter(({ role }) => ledgerInputRoles.has(role))
+      .map(({ absolutePath }) => absolutePath),
+    provenanceDocumentationPaths: [...resolvedInputs.values()]
+      .filter(({ role, path }) => role === "provenance" && path.startsWith("docs/"))
       .map(({ absolutePath }) => absolutePath),
   };
 }
@@ -928,6 +982,10 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
     if (!repositoryPath) {
       continue;
     }
+    const expectedPath = advancedReleaseDocumentationPath(entry?.moduleId, field);
+    if (repositoryPath !== expectedPath) {
+      errors.push(`${label}.${field} must use its exact module-scoped evidence slot.`);
+    }
     await requireTrackedRegularFile(siteRoot, repositoryPath, `${label}.${field}`, errors);
     normalizedPaths[field] = repositoryPath;
     paths.push(resolve(siteRoot, repositoryPath));
@@ -1140,6 +1198,10 @@ export async function validateAdvancedModuleContractRegistry(
   const entriesByModuleId = new Map();
   const reportModules = [];
   const releaseInputPaths = new Set([advancedModuleContractPath(siteRoot)]);
+  const provenanceDocumentationPaths = new Set(historicalAdvancedProvenanceLedgerPaths);
+  for (const repositoryPath of historicalAdvancedProvenanceLedgerPaths) {
+    releaseInputPaths.add(resolve(siteRoot, repositoryPath));
+  }
   let plannedContracts = 0;
   let pointerPresentContracts = 0;
   let reviewedContracts = 0;
@@ -1203,6 +1265,9 @@ export async function validateAdvancedModuleContractRegistry(
     const inputs = await resolveContractInputs(entry, siteRoot, errors);
     for (const path of inputs.ledgerInputPaths) {
       releaseInputPaths.add(path);
+    }
+    for (const path of inputs.provenanceDocumentationPaths) {
+      provenanceDocumentationPaths.add(relative(siteRoot, path).replaceAll("\\", "/"));
     }
     validateAuthoringPlan(
       entry,
@@ -1296,6 +1361,7 @@ export async function validateAdvancedModuleContractRegistry(
     registry,
     modules: reportModules,
     releaseInputPaths: [...releaseInputPaths],
+    provenanceDocumentationPaths: [...provenanceDocumentationPaths].sort(),
     legacyBridgeValidationRequired: !advancedLifecycleHasTransitioned,
     bridgeTopologyValidated,
     summary: {
