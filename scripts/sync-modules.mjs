@@ -99,6 +99,12 @@ function repositoryPath(path) {
   return relative(siteRoot, path).replaceAll("\\", "/");
 }
 
+function compareRepositoryPaths(left, right) {
+  const leftPath = repositoryPath(left);
+  const rightPath = repositoryPath(right);
+  return leftPath < rightPath ? -1 : leftPath > rightPath ? 1 : 0;
+}
+
 async function listFilesRecursively(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   const paths = await Promise.all(
@@ -258,7 +264,7 @@ const releaseInputs = {
   contractVersion: "v1",
   inputs: await Promise.all(
     [...releaseInputPaths]
-      .sort((left, right) => repositoryPath(left).localeCompare(repositoryPath(right)))
+      .sort(compareRepositoryPaths)
       .map(releaseInputRecord),
   ),
 };

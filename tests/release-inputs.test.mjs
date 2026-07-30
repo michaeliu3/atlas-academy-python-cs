@@ -17,6 +17,10 @@ function canonicalTextContent(value) {
   return value.replace(/\r\n?/gu, "\n");
 }
 
+function comparePaths(left, right) {
+  return left < right ? -1 : left > right ? 1 : 0;
+}
+
 test("the release-input ledger is a reproducible local allowlist", async () => {
   const ledger = JSON.parse(await readFile(ledgerPath, "utf8"));
   assert.equal(ledger.schemaVersion, 1);
@@ -25,7 +29,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(ledger.inputs.length > 30);
 
   const paths = ledger.inputs.map(({ path }) => path);
-  assert.deepEqual(paths, [...paths].sort((left, right) => left.localeCompare(right)));
+  assert.deepEqual(paths, [...paths].sort(comparePaths));
   assert.ok(paths.includes("content/course/course-graph.v1.json"));
   assert.ok(paths.includes("content/course/contracts/module-contracts.v1.json"));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
