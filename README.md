@@ -95,6 +95,7 @@ pnpm types:worker
 pnpm typecheck
 pnpm lint
 pnpm test
+pnpm test:browser
 python -m unittest discover -s public/downloads -p "test_module*_reference.py"
 ~~~
 
@@ -102,6 +103,11 @@ The Node test command builds the production portal and exercises diagnostic and
 rendered HTML contracts. The Python suite exercises deterministic, local-only
 teaching models. No model should perform network, filesystem, process,
 database, package, credential, or arbitrary-code operations.
+
+`pnpm test:browser` is the focused Chromium/axe acceptance gate. The GitHub
+Linux run is the release evidence for it; see
+[browser acceptance](docs/BROWSER_ACCESSIBILITY_ACCEPTANCE.md) for its exact
+scope and the current Windows local-server limitation.
 
 `worker-configuration.d.ts` is generated from the checked-in `wrangler.jsonc`
 binding contract and must remain fresh. The type configuration is not evidence

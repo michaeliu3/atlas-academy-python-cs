@@ -54,6 +54,11 @@ actually published.
 - Added separate learner-controlled Teaching Assistant and Study Partner
   startup packages to the portal. They are distinct roles for rigorous repair
   and peer-style rehearsal, not automated grading or background record export.
+- Added a strict Chromium/axe browser-acceptance harness with a dedicated
+  Linux CI job, failure artifacts, keyboard/prediction checks, and no axe-rule
+  exclusions. Its Windows local-serving limitation and its bounded coverage
+  are documented; browser acceptance is not claimed until a successful CI run
+  is recorded.
 
 ## v0.6-capstone (private course milestone)
 

@@ -21,7 +21,8 @@
     "build": "vinext build && pnpm validate:built-downloads",
     "start": "vinext start",
     "test": "pnpm build && node --test tests/course-contract.test.mjs tests/course-graph.test.mjs tests/release-inputs.test.mjs tests/local-progress-codec.test.mjs tests/http-security-headers.test.mjs tests/rich-rendering.test.mjs tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern worker-configuration.d.ts",
+    "test:browser": "pnpm build && playwright test",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern .wrangler --ignore-pattern worker-configuration.d.ts",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
@@ -43,7 +44,9 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
     "@cloudflare/vite-plugin": "1.48.0",
+    "@playwright/test": "1.61.1",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",

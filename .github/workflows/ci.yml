@@ -86,3 +86,43 @@ jobs:
         run: pnpm check:generated
       - name: Run deterministic local teaching models
         run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"
+
+  browser-accessibility:
+    name: Browser accessibility acceptance
+    runs-on: ubuntu-latest
+    needs: portal
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Validate checked-in course inputs
+        run: pnpm validate:course:inputs
+      - name: Synchronize learner content from checked-in inputs
+        run: pnpm sync:modules
+      - name: Verify generated course artifacts are committed
+        run: pnpm check:generated
+      - name: Install Chromium for browser acceptance
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Exercise the production portal in Chromium
+        run: pnpm test:browser
+      - name: Upload browser acceptance evidence on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-browser-accessibility-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
