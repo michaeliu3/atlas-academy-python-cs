@@ -20,6 +20,7 @@ import module18 from "./18_operating_systems_resource_mediation.md?raw";
 import module19 from "./19_concurrency_parallelism.md?raw";
 import module20 from "./20_networks_application_protocols.md?raw";
 import module21 from "./21_async_distributed_systems.md?raw";
+import module22 from "./22_security_privacy_trust_boundaries.md?raw";
 
 export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "01-values-state-execution": module01,
@@ -43,4 +44,5 @@ export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "19-concurrency-parallelism": module19,
   "20-networks-application-protocols": module20,
   "21-async-distributed-systems": module21,
+  "22-security-privacy-trust-boundaries": module22,
 };

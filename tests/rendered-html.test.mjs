@@ -319,7 +319,7 @@ test("Module 20 preserves its invariant and six-view protocol observatory", asyn
   assert.match(studio, /scope-labelled model evidence/);
 });
 
-test("Module 21 preserves its async invariant, six-view run control room, and latest Arc IV landing", async () => {
+test("Module 21 preserves its async invariant and six-view run control room", async () => {
   const studioUrl = new URL("../app/AsyncDistributedStudio.tsx", import.meta.url);
   const styleUrl = new URL("../app/AsyncDistributedStudio.module.css", import.meta.url);
   const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
@@ -336,11 +336,6 @@ test("Module 21 preserves its async invariant, six-view run control room, and la
   assert.ok(studio.includes(exactInvariant));
   assert.match(arc, /<AsyncDistributedStudio \/>/);
   assert.match(arc, /href: "\/modules\/21-async-distributed-systems"/);
-  assert.match(
-    arc,
-    /const \[activeModule, setActiveModule\] = useState\(4\)/,
-    "Arc IV should open its latest published module, Module 21",
-  );
   assert.match(page, /slug === "21-async-distributed-systems"/);
   assert.match(page, /<AsyncDistributedStudio \/>/);
 
@@ -390,6 +385,81 @@ test("Module 21 preserves its async invariant, six-view run control room, and la
   assert.match(studio, /traceparent/);
   assert.match(studio, /FULL collection cut/);
   assert.match(studio, /does not establish/);
+});
+
+test("Module 22 preserves its trust invariant, six-view control room, and latest Arc IV landing", async () => {
+  const studioUrl = new URL("../app/SecurityTrustStudio.tsx", import.meta.url);
+  const styleUrl = new URL("../app/SecurityTrustStudio.module.css", import.meta.url);
+  const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
+  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
+  const [studio, style, arc, page] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(styleUrl, "utf8"),
+    readFile(arcUrl, "utf8"),
+    readFile(pageUrl, "utf8"),
+  ]);
+
+  const exactInvariant =
+    "Atlas accepts an external value only as data until the receiving boundary validates its shape, size, provenance, and permitted meaning. Every security-sensitive effect has an authenticated subject, an explicit authorization decision scoped to action, resource, tenant, and purpose, and a redacted decision record. Untrusted data never selects arbitrary code, process execution, filesystem escape, database structure, network authority, or a raw secret-bearing log field. Release artifacts have declared dependency and build provenance; incident evidence is minimised and labelled with what it does and does not prove. A safe automatic denial/defer path explains the next accessible action and escalates unresolved authority to the named owner.";
+  assert.ok(studio.includes(exactInvariant));
+  assert.match(arc, /<SecurityTrustStudio \/>/);
+  assert.match(arc, /href: "\/modules\/22-security-privacy-trust-boundaries"/);
+  assert.match(
+    arc,
+    /const \[activeModule, setActiveModule\] = useState\(5\)/,
+    "Arc IV should open its latest published module, Module 22",
+  );
+  assert.match(page, /slug === "22-security-privacy-trust-boundaries"/);
+  assert.match(page, /<SecurityTrustStudio \/>/);
+
+  for (const viewLabel of [
+    "Claim → boundary",
+    "Identity → decision",
+    "Data → authority",
+    "Crypto → purpose",
+    "Release → provenance",
+    "Incident → restraint",
+  ]) {
+    assert.ok(studio.includes(`label: "${viewLabel}"`), viewLabel);
+  }
+
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /aria-controls=\{panelId\(view\.id\)\}/);
+  assert.match(studio, /aria-selected=\{activeView === view\.id\}/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /aria-labelledby="security-trust-studio-title"/);
+  assert.match(studio, /aria-label="Exploration coverage: revealed security and trust views"/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /label:has\(input:focus-visible\)/);
+  assert.match(style, /td::before/);
+  assert.match(style, /attr\(data-label\)/);
+  assert.doesNotMatch(studio, /window\.confirm/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+
+  assert.match(studio, /\(\[1, 2, 3, 4\] as const\)/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each trust view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
+  assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /choiceIdsByView/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /storageReady/);
+  assert.match(studio, /trace label supports correlation/);
+  assert.match(studio, /worker-99/);
+  assert.match(studio, /not established → deny\/defer/);
+  assert.match(studio, /status lookup itself requires a separately authorized action/);
+  assert.match(studio, /live effects/);
 });
 
 test("Module 19 withholds each view's answer-bearing evidence until prediction and confidence", async () => {
@@ -706,19 +776,19 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–21 exactly once", async () => {
+test("generated module manifest covers Modules 1–22 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 21);
+  assert.equal(manifest.moduleCount, 22);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 21 }, (_, index) => index + 1),
+    Array.from({ length: 22 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 21);
+  assert.equal(new Set(slugs).size, 22);
   assert.equal(manifest.arcs.length, 4);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
@@ -727,6 +797,7 @@ test("generated module manifest covers Modules 1–21 exactly once", async () =>
   const module19 = manifest.modules.find((courseModule) => courseModule.number === 19);
   const module20 = manifest.modules.find((courseModule) => courseModule.number === 20);
   const module21 = manifest.modules.find((courseModule) => courseModule.number === 21);
+  const module22 = manifest.modules.find((courseModule) => courseModule.number === 22);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -745,7 +816,10 @@ test("generated module manifest covers Modules 1–21 exactly once", async () =>
   assert.equal(module20.nextSlug, module21.slug);
   assert.equal(module21.previousSlug, module20.slug);
   assert.equal(module21.prerequisiteSlug, module20.slug);
-  assert.equal(module21.nextSlug, null);
+  assert.equal(module21.nextSlug, module22.slug);
+  assert.equal(module22.previousSlug, module21.slug);
+  assert.equal(module22.prerequisiteSlug, module21.slug);
+  assert.equal(module22.nextSlug, null);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -790,7 +864,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Concurrency and Parallelism/);
   assert.match(html, /Networks and Application Protocols/);
   assert.match(html, /Async and Distributed Systems/);
-  assert.match(html, /<dt>21<\/dt>/);
+  assert.match(html, /Security, Privacy &amp; Trust Boundaries/);
+  assert.match(html, /<dt>22<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1146,4 +1221,57 @@ test("renders the finalized async-and-distributed-systems workbook", async () =>
   assert.match(referenceTests, /import module21_reference as reference/);
   assert.match(referenceTests, /Module21ReferenceTests/);
   assert.match(referenceTests, /test_taskgroup_failure_probe_states_only_the_owned_local_scope_boundary/);
+});
+
+test("renders the finalized security-privacy-and-trust-boundaries workbook", async () => {
+  const response = await render("/modules/22-security-privacy-trust-boundaries");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 22: Security, Privacy &amp; Trust Boundaries · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 22 workbook/);
+  assert.match(html, /Atlas Trust Control Room/);
+  assert.match(html, /Trust-boundary atlas/);
+  assert.match(html, /Identity-to-decision ladder/);
+  assert.match(html, /Data-to-authority pipeline/);
+  assert.match(html, /Cryptographic purpose map/);
+  assert.match(html, /Release provenance and human impact/);
+  assert.match(html, /Privacy-aware incident reconstruction/);
+  assert.match(html, /Eight-level problem ladder/);
+  assert.match(html, /Atlas Trust &amp; Release Dossier/);
+  assert.match(html, /TA intake rule/);
+  assert.match(html, /href="\/downloads\/module22_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module22_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module22_reference.py",
+    import.meta.url,
+  );
+  const testsUrl = new URL(
+    "../public/downloads/test_module22_reference.py",
+    import.meta.url,
+  );
+  const [reference, referenceTests] = await Promise.all([
+    readFile(referenceUrl, "utf8"),
+    readFile(testsUrl, "utf8"),
+  ]);
+  assert.match(reference, /atlas\.module22\.evidence\/1/);
+  assert.match(reference, /class ParsedImporterRequest/);
+  assert.match(reference, /class RedactedEvidencePacket/);
+  assert.match(reference, /incident_unknown/);
+  assert.match(reference, /not a live security assessment/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module22_reference as model/);
+  assert.match(referenceTests, /ArchivePolicySeamTests/);
+  assert.match(
+    referenceTests,
+    /test_all_scenarios_emit_the_closed_evidence_schema/,
+  );
 });

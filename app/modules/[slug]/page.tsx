@@ -16,6 +16,7 @@ import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
 import { AsyncDistributedStudio } from "../../AsyncDistributedStudio";
 import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
+import { SecurityTrustStudio } from "../../SecurityTrustStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -91,6 +92,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "21-async-distributed-systems" && (
           <AsyncDistributedStudio />
+        )}
+        {slug === "22-security-privacy-trust-boundaries" && (
+          <SecurityTrustStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 21,
+  "moduleCount": 22,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,7 +28,7 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Modules 17–21 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and distributed-system claim discipline."
+      "description": "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries."
     }
   ],
   "modules": [
@@ -324,6 +324,20 @@
       "sourceHash": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315",
       "prerequisiteSlug": "20-networks-application-protocols",
       "previousSlug": "20-networks-application-protocols",
+      "nextSlug": "22-security-privacy-trust-boundaries"
+    },
+    {
+      "number": 22,
+      "slug": "22-security-privacy-trust-boundaries",
+      "filename": "22_security_privacy_trust_boundaries.md",
+      "title": "Security, Privacy & Trust Boundaries",
+      "summary": "Arc IV — Machine, network, trust, and responsibility Bridge: Module 21 taught that asynchronous and distributed evidence can be incomplete. Module 22 asks a prior question: which input, identity, authority, and evidence may Atlas trust e…",
+      "arcId": "arc-iv",
+      "wordCount": 6401,
+      "estimatedMinutes": 31,
+      "sourceHash": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1",
+      "prerequisiteSlug": "21-async-distributed-systems",
+      "previousSlug": "21-async-distributed-systems",
       "nextSlug": null
     }
   ]

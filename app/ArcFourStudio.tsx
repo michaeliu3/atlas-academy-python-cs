@@ -10,6 +10,7 @@ import { AsyncDistributedStudio } from "./AsyncDistributedStudio";
 import { ConcurrencyStudio } from "./ConcurrencyStudio";
 import { NetworkProtocolStudio } from "./NetworkProtocolStudio";
 import { OperatingSystemsStudio } from "./OperatingSystemsStudio";
+import { SecurityTrustStudio } from "./SecurityTrustStudio";
 
 type ArcFourStudioProps = {
   onOpenDurableSoftware: () => void;
@@ -71,13 +72,13 @@ const arcModules = [
   },
   {
     number: "22",
-    status: "Forward handoff",
-    href: null,
-    title: "Security & trust boundaries",
+    status: "Published",
+    href: "/modules/22-security-privacy-trust-boundaries",
+    title: "Security, privacy & trust boundaries",
     question: "Who may cause which state transition under what evidence?",
     inherits: "A distributed Atlas with explicit components and data flows.",
     handoff:
-      "Threat models, least privilege, authentication, authorization, and secure defaults.",
+      "Narrow trust decisions, redacted evidence, release provenance, and a parser/capability handoff.",
   },
 ] as const;
 
@@ -380,7 +381,7 @@ function tabId(view: StudioView) {
 export function ArcFourStudio({
   onOpenDurableSoftware,
 }: ArcFourStudioProps) {
-  const [activeModule, setActiveModule] = useState(4);
+  const [activeModule, setActiveModule] = useState(5);
   const [activeView, setActiveView] = useState<StudioView>("stack");
   const [activeLayer, setActiveLayer] = useState(0);
   const [traceStep, setTraceStep] = useState(0);
@@ -838,6 +839,7 @@ export function ArcFourStudio({
       <ConcurrencyStudio />
       <NetworkProtocolStudio />
       <AsyncDistributedStudio />
+      <SecurityTrustStudio />
 
       <section className="arc-four-bridge">
         <div>
@@ -851,8 +853,9 @@ export function ArcFourStudio({
             local result across names, endpoints, bytes, frames, decisions,
             retries, and explicit unknowns. Module 21 adds owned async task
             lifetimes, bounded admission, partial-failure evidence, causal
-            relation, and policy-scoped collection cuts. Module 22 widens that
-            boundary into adversarial and trust conditions.
+            relation, and policy-scoped collection cuts. Module 22 makes every
+            trust promotion explicit: data, identity, authorization, effect,
+            provenance, and redacted evidence now remain distinct.
           </p>
         </div>
         <div className="arc-four-bridge-map" aria-label="Arc IV knowledge bridge">
@@ -878,9 +881,9 @@ export function ArcFourStudio({
           <span>Latest published workbook · complete models, labs, quiz, and project</span>
           <Link
             className="primary-action arc-four-primary"
-            href="/modules/21-async-distributed-systems"
+            href="/modules/22-security-privacy-trust-boundaries"
           >
-            Enter Module 21 <span aria-hidden="true">→</span>
+            Enter Module 22 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </footer>
