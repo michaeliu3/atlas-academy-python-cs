@@ -42,6 +42,10 @@ actually published.
   ESLint/brace-expansion and Drizzle/esbuild development paths are explicitly
   triaged rather than misrepresented as fixed; CI and GitHub alert refresh are
   still required before any candidate closure.
+- Added a graph-checked M31–M36 prerequisite/session bridge ledger and hashes
+  it with the canonical release inputs. It remains an authoring-only planning
+  artifact: source maps, workbooks, studios, contracts, and release evidence
+  are still required before any advanced module can be published.
 
 ## v0.6-capstone (private course milestone)
 

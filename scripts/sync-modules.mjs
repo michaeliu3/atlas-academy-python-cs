@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { access, lstat, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { advancedModuleBridgePath } from "./advanced-module-bridge.mjs";
 import { loadCourseGraph, projectReadableModules } from "./course-graph.mjs";
 import {
   loadReleaseInputPolicy,
@@ -151,7 +152,12 @@ const modules = [];
 const importLines = [];
 const contentEntries = [];
 const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
-const releaseInputPaths = new Set([graphPath, contractPath, releaseInputPolicyPath(siteRoot)]);
+const releaseInputPaths = new Set([
+  graphPath,
+  contractPath,
+  advancedModuleBridgePath(siteRoot),
+  releaseInputPolicyPath(siteRoot),
+]);
 
 for (const projectedModule of projectedModules) {
   const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
@@ -227,6 +233,7 @@ for (const projectedModule of projectedModules) {
 }
 
 await requireFile(contractPath, "Module contract registry");
+await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
 for (const path of releaseInputPolicy.downloadPaths) {
   await requireFile(path, "Allowlisted local teaching artifact");
   releaseInputPaths.add(path);

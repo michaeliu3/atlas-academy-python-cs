@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import {
+  loadAdvancedModuleBridgeLedger,
+  validateAdvancedModuleBridgeLedger,
+} from "../scripts/advanced-module-bridge.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import {
   loadCourseContracts,
@@ -42,5 +46,39 @@ test("strict release validation refuses legacy baseline evidence", async () => {
   await assert.rejects(
     () => runCourseValidation({ strict: true }),
     /cannot pass strict release validation/u,
+  );
+});
+
+test("the advanced prerequisite-session bridge covers every authoring-only graph edge", async () => {
+  const [graph, bridgeLedger] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleBridgeLedger(),
+  ]);
+
+  assert.doesNotThrow(() => validateAdvancedModuleBridgeLedger(graph, bridgeLedger));
+  assert.equal(bridgeLedger.modules.length, 6);
+  assert.equal(
+    bridgeLedger.modules.reduce(
+      (count, moduleBridge) => count + moduleBridge.prerequisiteBridges.length,
+      0,
+    ),
+    30,
+  );
+  assert.ok(
+    bridgeLedger.modules.every((moduleBridge) => moduleBridge.sessionSpine.length === 6),
+  );
+});
+
+test("the advanced bridge rejects a prerequisite that is not first consumed where claimed", async () => {
+  const [graph, bridgeLedger] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleBridgeLedger(),
+  ]);
+  const invalidLedger = structuredClone(bridgeLedger);
+  invalidLedger.modules[0].prerequisiteBridges[0].firstConsumingSessionId = "m31-s06";
+
+  assert.throws(
+    () => validateAdvancedModuleBridgeLedger(graph, invalidLedger),
+    /first consuming session must be the first declared use/u,
   );
 });

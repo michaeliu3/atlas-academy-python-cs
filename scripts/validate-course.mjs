@@ -3,6 +3,11 @@ import { execFile } from "node:child_process";
 import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import {
+  advancedModuleBridgePath,
+  loadAdvancedModuleBridgeLedger,
+  validateAdvancedModuleBridgeLedger,
+} from "./advanced-module-bridge.mjs";
 import { loadCourseGraph } from "./course-graph.mjs";
 import {
   loadReleaseInputPolicy,
@@ -207,7 +212,17 @@ export async function validateCourseContracts(
 
   let legacyBaselineModules = 0;
   let verifiedModules = 0;
-  const releaseInputPaths = new Set([graphPath, contractsPath]);
+  const releaseInputPaths = new Set([
+    graphPath,
+    contractsPath,
+    advancedModuleBridgePath(siteRoot),
+  ]);
+  try {
+    const bridgeLedger = await loadAdvancedModuleBridgeLedger(siteRoot);
+    validateAdvancedModuleBridgeLedger(graph, bridgeLedger);
+  } catch (error) {
+    errors.push(error instanceof Error ? error.message : String(error));
+  }
   for (const courseModule of graph.modules.filter(
     ({ lifecycle }) => lifecycle === "published",
   )) {
