@@ -11,21 +11,12 @@ import {
 } from "@/lib/module-catalog";
 import { CourseReaderHeader } from "../CourseReaderHeader";
 import { ModuleMarkdown } from "./ModuleMarkdown";
+import { ModuleInteraction } from "./ModuleInteraction";
 import { ModuleNavigation } from "./ModuleNavigation";
 import { ModuleOralDefense } from "./ModuleOralDefense";
 import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
-import { AsyncDistributedStudio } from "../../AsyncDistributedStudio";
-import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
-import { SecurityTrustStudio } from "../../SecurityTrustStudio";
-import { LanguageInterpreterStudio } from "../../LanguageInterpreterStudio";
-import { RuntimeEvidenceObservatory } from "../../RuntimeEvidenceObservatory";
-import { EvidenceGroundedStudio } from "../../EvidenceGroundedStudio";
-import { CapstoneDefenseStudio } from "../../CapstoneDefenseStudio";
-import { DiscreteMathProofStudio } from "../../DiscreteMathProofStudio";
-import { LinearAlgebraStabilityStudio } from "../../LinearAlgebraStabilityStudio";
-import { CalculusContinuousChangeStudio } from "../../CalculusContinuousChangeStudio";
-import { ProbabilityInferenceStudio } from "../../ProbabilityInferenceStudio";
+import { resolveModuleStudio } from "@/lib/module-studio-registry";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -58,6 +49,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
   }
 
   const arc = getArcById(courseModule.arcId);
+  const moduleInteraction = resolveModuleStudio(courseModule);
   const lessonMarkdown = stripDocumentTitle(markdown);
   const headings = extractTableOfContents(lessonMarkdown);
 
@@ -96,53 +88,10 @@ export default async function ModulePage({ params }: ModulePageProps) {
           </dl>
         </header>
 
-        {courseModule.availability === "preview" ? (
-          <aside className="module-availability-notice" aria-label="Synthesis preview status">
-            <p className="kicker">Released preview · not an unlocked Core step</p>
-            <h2>This synthesis module is here for orientation, not acceleration.</h2>
-            <p>
-              Its full prerequisite chain includes later authoring modules. Read it
-              as a map of where the course is going; return to the active route
-              rather than treating this workbook as evidence that those foundations
-              have been completed.
-            </p>
-            <Link href="/route">View the prerequisite-first route →</Link>
-          </aside>
-        ) : null}
-
-        {slug === "20-networks-application-protocols" && (
-          <NetworkProtocolStudio />
-        )}
-        {slug === "21-async-distributed-systems" && (
-          <AsyncDistributedStudio />
-        )}
-        {slug === "22-security-privacy-trust-boundaries" && (
-          <SecurityTrustStudio />
-        )}
-        {slug === "23-programming-languages-interpreters" && (
-          <LanguageInterpreterStudio />
-        )}
-        {slug === "24-cpython-performance-memory" && (
-          <RuntimeEvidenceObservatory />
-        )}
-        {slug === "25-evidence-grounded-intelligent-systems" && (
-          <EvidenceGroundedStudio />
-        )}
-        {slug === "26-systems-capstone-open-source-stewardship" && (
-          <CapstoneDefenseStudio />
-        )}
-        {slug === "27-discrete-mathematics-proof-counting-structures" && (
-          <DiscreteMathProofStudio />
-        )}
-        {slug === "28-linear-algebra-numerical-stability-representation" && (
-          <LinearAlgebraStabilityStudio />
-        )}
-        {slug === "29-calculus-real-analysis-continuous-change" && (
-          <CalculusContinuousChangeStudio />
-        )}
-        {slug === "30-probability-statistics-scientific-inference" && (
-          <ProbabilityInferenceStudio />
-        )}
+        <ModuleInteraction
+          courseModule={courseModule}
+          resolution={moduleInteraction}
+        />
 
         <ModuleNavigation courseModule={courseModule} position="top" />
 
@@ -156,7 +105,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
             aria-label={`Complete Module ${courseModule.number} workbook`}
           >
             <ModuleMarkdown markdown={lessonMarkdown} />
-            <ModuleOralDefense courseModule={courseModule} />
+            {moduleInteraction.kind !== "preview" ? (
+              <ModuleOralDefense courseModule={courseModule} />
+            ) : null}
             <footer className="canonical-source-note">
               <span>Canonical workbook snapshot</span>
               <p>

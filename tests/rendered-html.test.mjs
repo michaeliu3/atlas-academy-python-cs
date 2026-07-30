@@ -122,7 +122,7 @@ test("keeps landing selection and legacy studio tabs keyboard-accessible", async
   }
 });
 
-test("every module reader includes the supportive oral-defense route", async () => {
+test("each Core-open module reader keeps the supportive oral-defense route", async () => {
   const [page, oralDefense, oralGuide] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(
@@ -424,8 +424,7 @@ test("Module 20 preserves its invariant and six-view protocol observatory", asyn
   assert.ok(studio.includes(exactInvariant));
   assert.match(arc, /<NetworkProtocolStudio \/>/);
   assert.match(arc, /href: "\/modules\/20-networks-application-protocols"/);
-  assert.match(page, /slug === "20-networks-application-protocols"/);
-  assert.match(page, /<NetworkProtocolStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Name → candidate",
@@ -488,8 +487,7 @@ test("Module 21 preserves its async invariant and six-view run control room", as
   assert.ok(studio.includes(exactInvariant));
   assert.match(arc, /<AsyncDistributedStudio \/>/);
   assert.match(arc, /href: "\/modules\/21-async-distributed-systems"/);
-  assert.match(page, /slug === "21-async-distributed-systems"/);
-  assert.match(page, /<AsyncDistributedStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Coroutine → task",
@@ -561,8 +559,7 @@ test("Module 22 preserves its trust invariant, six-view control room, and latest
     /const \[activeModule, setActiveModule\] = useState\(5\)/,
     "Arc IV should open its latest published module, Module 22",
   );
-  assert.match(page, /slug === "22-security-privacy-trust-boundaries"/);
-  assert.match(page, /<SecurityTrustStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Claim → boundary",
@@ -627,9 +624,7 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   const invariant =
     "Structure is data; authority is separate and explicit. A successful parse establishes only the declared grammar shape. Atlas checks a bounded contract, resource budget, and authorization decision before a fixed-scope capability can support one local model operation. The evaluator has no ambient Python authority.";
   assert.ok(studio.includes(invariant));
-  assert.match(page, /LanguageInterpreterStudio/);
-  assert.match(page, /slug === "23-programming-languages-interpreters"/);
-  assert.match(page, /<LanguageInterpreterStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Text → tree",
@@ -711,9 +706,7 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
       "An optimization is accepted only after semantic behavior, privacy/retention boundaries, implementation scope, and a controlled measurement are kept distinct.",
     ),
   );
-  assert.match(page, /RuntimeEvidenceObservatory/);
-  assert.match(page, /slug === "24-cpython-performance-memory"/);
-  assert.match(page, /<RuntimeEvidenceObservatory \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Contract → claim",
@@ -778,9 +771,7 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
       "A score never silently changes learner state, grants authority, proves truth, establishes causality, or turns feedback into ground truth.",
     ),
   );
-  assert.match(page, /EvidenceGroundedStudio/);
-  assert.match(page, /slug === "25-evidence-grounded-intelligent-systems"/);
-  assert.match(page, /<EvidenceGroundedStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Purpose → boundary",
@@ -844,9 +835,7 @@ test("Module 26 preserves its evidence-first capstone flow and local-only bounda
   const exactInvariant =
     "A capstone release is a versioned evidence bundle, not a polished demo. Each consequential claim needs a named owner, representation or contract, appropriate test or observation, cost and failure boundary, security/privacy implication, human-impact evaluation, and explicit limitation. Agent-generated work remains an untrusted proposal until independently reviewed and verified.";
   assert.ok(studio.includes(exactInvariant));
-  assert.match(page, /CapstoneDefenseStudio/);
-  assert.match(page, /slug === "26-systems-capstone-open-source-stewardship"/);
-  assert.match(page, /<CapstoneDefenseStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   const orderedViewIds = ["brief", "threads", "failure", "patch", "ledger", "board"];
   for (const viewLabel of [
@@ -1373,10 +1362,18 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /Canonical workbook snapshot/);
   assert.match(html, /class="heading-anchor"/);
   assert.match(html, /aria-label="Link to this section"/);
+  assert.match(html, /Workbook-led interaction/);
+  assert.match(html, /This published module has no separate visual studio/);
+  assert.match(html, /href="#oral-defense-1-title"/);
   assert.match(
     html,
     /aria-hidden="true" class="external-link-mark">↗<\/span>/,
   );
+});
+
+test("keeps authoring-only modules out of the published reader", async () => {
+  const response = await render("/modules/31-optimization-information");
+  assert.equal(response.status, 404);
 });
 
 test("all generated lessons have valid internal links and math", async () => {
@@ -1872,14 +1869,16 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
     /Module 25: Evidence-Grounded Intelligent &amp; Human-Centered Systems · Atlas Academy/,
   );
   assert.match(html, /Complete Module 25 workbook/);
-  assert.match(html, /Next-Step Evidence Studio/);
-  assert.match(html, /Purpose → boundary/);
-  assert.match(html, /Proposal → review/);
-  assert.match(html, /A score never silently changes learner state/);
+  assert.match(html, /Released preview · not an unlocked Core step/);
+  assert.match(html, /Read this as a map, not a mastered module/);
+  assert.match(
+    html,
+    /studio, project evidence, and oral-defense route remain unavailable/,
+  );
+  assert.doesNotMatch(html, /id="evidence-grounded-studio-title"/);
+  assert.doesNotMatch(html, /Post-module learning conversation/);
   assert.match(html, /Problem ladder and Atlas project/);
   assert.match(html, /Next-Step Evidence Dossier/);
-  assert.match(html, /href="\/downloads\/module25_reference\.py"/);
-  assert.match(html, /href="\/downloads\/test_module25_reference\.py"/);
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(
@@ -1922,15 +1921,15 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
     /Module 26: Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense · Atlas Academy/,
   );
   assert.match(html, /Complete Module 26 workbook/);
-  assert.match(html, /Make the release argument\./);
-  assert.match(html, /Release Brief/);
-  assert.match(html, /Failure Playback/);
-  assert.match(html, /Red-Team Patch Bay/);
-  assert.match(html, /Evidence Ledger/);
-  assert.match(html, /A capstone release is a versioned evidence bundle/);
+  assert.match(html, /Released preview · not an unlocked Core step/);
+  assert.match(html, /Read this as a map, not a mastered module/);
+  assert.match(
+    html,
+    /studio, project evidence, and oral-defense route remain unavailable/,
+  );
+  assert.doesNotMatch(html, /id="capstone-defense-studio-title"/);
+  assert.doesNotMatch(html, /Post-module learning conversation/);
   assert.match(html, /Atlas Release Dossier \/ Open-Source Stewardship Track/);
-  assert.match(html, /href="\/downloads\/module26_reference\.py"/);
-  assert.match(html, /href="\/downloads\/test_module26_reference\.py"/);
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(

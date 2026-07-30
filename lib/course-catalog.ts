@@ -1,4 +1,5 @@
 import courseGraphData from "@/content/course/course-graph.v1.json";
+import type { ModuleStudioId } from "./module-studio-registry";
 
 export type CourseLifecycle = "published" | "authoring-only";
 export type CourseAvailability =
@@ -30,7 +31,7 @@ export type CourseGraphModule = {
   routeRole: CourseRouteRole;
   referenceReadMinutes: number | null;
   sourceMap: string | null;
-  studioId: string | null;
+  studioId: ModuleStudioId | null;
   releaseEvidence: CourseReleaseEvidence;
 };
 

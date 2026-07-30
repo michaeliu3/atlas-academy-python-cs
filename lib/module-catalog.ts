@@ -10,6 +10,7 @@ import type {
   CourseReleaseEvidence,
   CourseRouteRole,
 } from "./course-catalog";
+import type { ModuleStudioId } from "./module-studio-registry";
 
 export { extractTableOfContents, stripDocumentTitle };
 
@@ -38,7 +39,7 @@ export type CourseModule = {
   routePosition: number;
   masteryGateId: string;
   sourceMap: string | null;
-  studioId: string | null;
+  studioId: ModuleStudioId | null;
   releaseEvidence: CourseReleaseEvidence;
   prerequisiteNumbers: number[];
   prerequisiteSlugs: string[];

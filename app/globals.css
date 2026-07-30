@@ -4433,6 +4433,42 @@ main.module-library-shell {
   text-underline-offset: 0.24em;
 }
 
+.module-interaction-route,
+.module-studio-loading {
+  border-left: 3px solid var(--saffron);
+  margin: 2rem 0 0;
+  max-width: 54rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.module-interaction-route {
+  background: rgba(199, 124, 42, 0.07);
+}
+
+.module-interaction-route h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.12;
+  margin: 0.35rem 0 0.55rem;
+}
+
+.module-interaction-route p:not(.kicker),
+.module-studio-loading p:not(.kicker) {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 44rem;
+}
+
+.module-interaction-route a {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 750;
+  margin-top: 0.8rem;
+  text-underline-offset: 0.24em;
+}
+
 .module-sequence-nav {
   border-bottom: 1px solid var(--line);
   padding: 1.5rem 0;

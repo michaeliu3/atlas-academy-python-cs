@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   loadCourseGraph,
@@ -49,5 +50,43 @@ test("the graph rejects a source-map path that escapes the checked-in course inp
   assert.throws(
     () => validateCourseGraph(unsafeGraph),
     /checked-in source-map path/u,
+  );
+});
+
+test("graph-declared studios have one bounded, code-split reader mapping", async () => {
+  const [graphSource, registrySource, readerSource, loaderSource] = await Promise.all([
+    readFile(new URL("../content/course/course-graph.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../lib/module-studio-registry.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/modules/[slug]/StudioLoader.tsx", import.meta.url), "utf8"),
+  ]);
+  const graph = JSON.parse(graphSource);
+  const declaredStudioIds = graph.modules
+    .map((courseModule) => courseModule.studioId)
+    .filter((studioId) => studioId !== null);
+  const registeredStudioIds = [
+    ...registrySource.matchAll(/studioId: "([^"]+)"/gu),
+  ].map((match) => match[1]);
+
+  assert.deepEqual(registeredStudioIds, declaredStudioIds);
+  assert.equal(new Set(registeredStudioIds).size, registeredStudioIds.length);
+  assert.match(
+    readerSource,
+    /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/,
+  );
+  assert.match(readerSource, /moduleInteraction\.kind !== "preview"/);
+  assert.doesNotMatch(readerSource, /slug === "/);
+  assert.match(loaderSource, /from "next\/dynamic"/);
+  assert.match(loaderSource, /dynamic\(registration\.load/);
+  assert.match(registrySource, /kind: "workbook-and-oral-defense"/);
+  assert.match(registrySource, /kind: "preview"/);
+  assert.match(registrySource, /kind: "unavailable"/);
+  assert.match(
+    registrySource,
+    /no workbook or interactive studio is published/,
+  );
+  assert.match(
+    registrySource,
+    /studio, project evidence, and oral-defense route remain unavailable/,
   );
 });
