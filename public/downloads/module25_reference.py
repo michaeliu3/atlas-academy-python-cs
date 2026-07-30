@@ -203,6 +203,14 @@ def validate_contract(contract: DecisionContract) -> None:
     unexpected = tuple(field for field in contract.allowed_fields if field not in allowed)
     if unexpected:
         raise ContractError("unauthorized field(s): " + ", ".join(unexpected))
+    missing = tuple(
+        field for field in DEFAULT_CONTRACT.allowed_fields if field not in contract.allowed_fields
+    )
+    if missing:
+        raise ContractError(
+            "this fixed transparent baseline requires every named minimal field: "
+            + ", ".join(missing)
+        )
     if not contract.candidate_set_version or not contract.policy_version:
         raise ContractError("candidate-set and policy versions must be named")
     if not contract.human_override_required:
@@ -272,6 +280,11 @@ def render_suggestion(
         raise ContractError("ranked policy version does not match the decision contract")
     if ranked.candidate_set_version != contract.candidate_set_version:
         raise ContractError("ranked candidate set does not match the decision contract")
+    declared_candidates = {
+        candidate.candidate_id: candidate for candidate in fixed_candidates(contract)
+    }
+    if declared_candidates.get(ranked.candidate.candidate_id) != ranked.candidate:
+        raise ContractError("ranked candidate is not in the declared candidate set")
     return Suggestion(
         candidate_id=ranked.candidate.candidate_id,
         display_label=ranked.candidate.label,

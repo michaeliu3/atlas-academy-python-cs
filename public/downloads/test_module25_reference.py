@@ -49,6 +49,24 @@ class DecisionContractSeamTests(unittest.TestCase):
         with self.assertRaisesRegex(model.ContractError, "unauthorized field"):
             model.validate_contract(contract)
 
+    def test_narrower_contract_is_rejected_when_this_fixed_policy_would_read_missing_fields(self) -> None:
+        contract = model.DecisionContract(
+            **{
+                **model.DEFAULT_CONTRACT.__dict__,
+                "allowed_fields": ("completed_modules",),
+            }
+        )
+
+        with self.assertRaisesRegex(model.ContractError, "requires every named minimal field"):
+            model.rank_transparent_baseline(
+                contract,
+                model.MinimalLearnerState(
+                    completed_modules=frozenset(),
+                    low_confidence_modules=frozenset({16}),
+                    days_since_review={16: 11},
+                ),
+            )
+
     def test_wrong_purpose_is_rejected_even_when_other_fields_look_valid(self) -> None:
         contract = model.DecisionContract(
             **{**model.DEFAULT_CONTRACT.__dict__, "purpose": "maximize engagement"}
@@ -141,6 +159,24 @@ class SuggestionAndControlSeamTests(unittest.TestCase):
 
         with self.assertRaisesRegex(model.ContractError, "policy version"):
             model.render_suggestion(model.DEFAULT_CONTRACT, stale)
+
+    def test_undeclared_candidate_is_rejected_even_if_its_versions_match(self) -> None:
+        injected = model.RankedCandidate(
+            candidate=model.Candidate(
+                candidate_id="rewrite-the-plan",
+                label="Rewrite the learner plan",
+                prerequisite_module=None,
+                reason_kind="injected",
+                estimated_minutes=1,
+            ),
+            score=999,
+            reasons=("untrusted candidate",),
+            policy_version=model.DEFAULT_CONTRACT.policy_version,
+            candidate_set_version=model.DEFAULT_CONTRACT.candidate_set_version,
+        )
+
+        with self.assertRaisesRegex(model.ContractError, "not in the declared candidate set"):
+            model.render_suggestion(model.DEFAULT_CONTRACT, injected)
 
     def test_only_named_human_responses_are_recorded(self) -> None:
         response = model.record_user_response(self.suggestion, "dismiss")

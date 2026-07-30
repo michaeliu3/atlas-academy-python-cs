@@ -640,6 +640,10 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   ]) {
     assert.ok(studio.includes('label: "' + viewLabel + '"'), viewLabel);
   }
+  assert.ok(
+    studio.indexOf('id: "transaction"') < studio.indexOf('id: "repair"'),
+    "the visual baseline presents its 13-point candidate before its 8-point candidate",
+  );
 
   assert.match(studio, /role="tablist"/);
   assert.match(studio, /role="tab"/);
@@ -664,7 +668,10 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
   assert.match(studio, /<b>0<\/b> live learner records/);
   assert.match(studio, /Never alter a plan, calendar, or record/);
-  assert.match(studio, /never sends or changes personal data/);
+  assert.match(studio, /setDecisionResponse/);
+  assert.match(studio, /role="status"/);
+  assert.match(studio, /changed no learner record, plan, or schedule/);
+  assert.match(studio, /never sends or changes\s+personal data/);
   assert.doesNotMatch(studio, /window\.confirm/);
   assert.doesNotMatch(studio, /<svg\b/i);
   assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
