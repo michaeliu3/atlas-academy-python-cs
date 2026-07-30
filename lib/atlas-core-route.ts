@@ -232,7 +232,7 @@ export const atlasCoreRoute: AtlasRoutePhase[] = [
         number: 30,
         title: "Probability, Statistics & Scientific Inference",
         shortTitle: "inference",
-        status: inAuthoring,
+        status: published,
         prerequisiteNumbers: [27, 29],
         purpose: "Separate randomness, estimation, uncertainty, and experimental evidence.",
       },

@@ -25,6 +25,7 @@ import { CapstoneDefenseStudio } from "../../CapstoneDefenseStudio";
 import { DiscreteMathProofStudio } from "../../DiscreteMathProofStudio";
 import { LinearAlgebraStabilityStudio } from "../../LinearAlgebraStabilityStudio";
 import { CalculusContinuousChangeStudio } from "../../CalculusContinuousChangeStudio";
+import { ProbabilityInferenceStudio } from "../../ProbabilityInferenceStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -124,6 +125,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "29-calculus-real-analysis-continuous-change" && (
           <CalculusContinuousChangeStudio />
+        )}
+        {slug === "30-probability-statistics-scientific-inference" && (
+          <ProbabilityInferenceStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />

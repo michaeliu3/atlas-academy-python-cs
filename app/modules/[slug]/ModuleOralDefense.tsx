@@ -169,7 +169,7 @@ export function ModuleOralDefense({
 
         <div className={styles.textCard}>
           <p className={styles.cardEyebrow}>Equivalent text route</p>
-          <h3>Use the same conversation without voice.</h3>
+          <h3>Use a fully equivalent text conversation without voice.</h3>
           <p>
             Read the agenda aloud, type your answer, draw a diagram, or paste a
             small code trace. Voice is never required to demonstrate reasoning.

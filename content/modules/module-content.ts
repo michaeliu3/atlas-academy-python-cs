@@ -28,6 +28,7 @@ import module26 from "./26_systems_capstone_open_source_stewardship.md?raw";
 import module27 from "./27_discrete_mathematics_proof_counting_structures.md?raw";
 import module28 from "./28_linear_algebra_numerical_stability_representation.md?raw";
 import module29 from "./29_calculus_real_analysis_continuous_change.md?raw";
+import module30 from "./30_probability_statistics_scientific_inference.md?raw";
 
 export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "01-values-state-execution": module01,
@@ -59,4 +60,5 @@ export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "27-discrete-mathematics-proof-counting-structures": module27,
   "28-linear-algebra-numerical-stability-representation": module28,
   "29-calculus-real-analysis-continuous-change": module29,
+  "30-probability-statistics-scientific-inference": module30,
 };

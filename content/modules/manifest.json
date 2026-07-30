@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 29,
+  "moduleCount": 30,
   "arcs": [
     {
       "id": "arc-i",
@@ -41,8 +41,8 @@
       "id": "arc-vi",
       "numeral": "VI",
       "title": "Mathematical foundations",
-      "range": "Modules 27–29",
-      "description": "Deepen proof, counting, structure, linear representation, numerical claim boundaries, and continuous change before the later mathematics and AI sequence."
+      "range": "Modules 27–30",
+      "description": "Deepen proof, counting, structure, linear representation, continuous change, probability, and scientific-inference boundaries before the later mathematics and AI sequence."
     }
   ],
   "modules": [
@@ -343,11 +343,11 @@
       "wordCount": 20336,
       "estimatedMinutes": 97,
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
-      "prerequisiteSlug": "29-calculus-real-analysis-continuous-change",
+      "prerequisiteSlug": "30-probability-statistics-scientific-inference",
       "prerequisiteSlugs": [
-        "29-calculus-real-analysis-continuous-change"
+        "30-probability-statistics-scientific-inference"
       ],
-      "previousSlug": "29-calculus-real-analysis-continuous-change",
+      "previousSlug": "30-probability-statistics-scientific-inference",
       "nextSlug": "19-concurrency-parallelism"
     },
     {
@@ -539,6 +539,24 @@
         "28-linear-algebra-numerical-stability-representation"
       ],
       "previousSlug": "28-linear-algebra-numerical-stability-representation",
+      "nextSlug": "30-probability-statistics-scientific-inference"
+    },
+    {
+      "number": 30,
+      "slug": "30-probability-statistics-scientific-inference",
+      "filename": "30_probability_statistics_scientific_inference.md",
+      "title": "Probability, Statistics & Scientific Inference",
+      "summary": "Arc VI — Mathematical foundations for uncertain, data-bearing, and learning systems",
+      "arcId": "arc-vi",
+      "wordCount": 9509,
+      "estimatedMinutes": 46,
+      "sourceHash": "3b5a412e615836fa563649b65c525099f7e92fb3e04d04631767e68d8f1c1750",
+      "prerequisiteSlug": "29-calculus-real-analysis-continuous-change",
+      "prerequisiteSlugs": [
+        "27-discrete-mathematics-proof-counting-structures",
+        "29-calculus-real-analysis-continuous-change"
+      ],
+      "previousSlug": "29-calculus-real-analysis-continuous-change",
       "nextSlug": "18-operating-systems-resource-mediation"
     }
   ]
