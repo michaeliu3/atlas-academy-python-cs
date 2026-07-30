@@ -4861,10 +4861,43 @@ main.module-library-shell {
 }
 
 .diagram-canvas svg {
+  color: var(--ink);
   display: block;
+  font-family: var(--font-sans), sans-serif;
   height: auto;
   margin: 0 auto;
   max-width: 100%;
+}
+
+/* Mermaid's generated style block is intentionally removed before injection.
+   These fixed, app-owned rules preserve the core node/edge hierarchy without
+   letting authored diagram text introduce CSS or external URL loads. */
+.diagram-canvas svg .node rect,
+.diagram-canvas svg .node polygon,
+.diagram-canvas svg .node circle,
+.diagram-canvas svg .actor {
+  fill: var(--paper-deep);
+  stroke: var(--cobalt);
+  stroke-width: 1.25;
+}
+
+.diagram-canvas svg .edgePath .path,
+.diagram-canvas svg .flowchart-link,
+.diagram-canvas svg .messageLine0,
+.diagram-canvas svg .messageLine1 {
+  fill: none;
+  stroke: var(--plum);
+  stroke-width: 1.5;
+}
+
+.diagram-canvas svg marker path,
+.diagram-canvas svg marker polygon {
+  fill: var(--plum);
+  stroke: var(--plum);
+}
+
+.diagram-canvas svg text {
+  fill: var(--ink);
 }
 
 .mermaid-figure > figcaption {

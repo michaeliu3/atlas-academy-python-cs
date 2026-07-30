@@ -1,0 +1,148 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { JSDOM } from "jsdom";
+import rehypeSanitize from "rehype-sanitize";
+import {
+  atlasMarkdownSanitizationSchema,
+  atlasMermaidSvgSanitizationConfig,
+  removeNonLocalMermaidReferences,
+} from "../lib/rich-content-sanitization.mjs";
+import { renderSafeMermaidSvg } from "../lib/render-safe-mermaid.mjs";
+
+function element(tagName, properties = {}, children = []) {
+  return { type: "element", tagName, properties, children };
+}
+
+function text(value) {
+  return { type: "text", value };
+}
+
+function installMermaidDom() {
+  const dom = new JSDOM("<!doctype html><html><body></body></html>", {
+    pretendToBeVisual: true,
+  });
+  globalThis.window = dom.window;
+  globalThis.document = dom.window.document;
+  globalThis.DOMParser = dom.window.DOMParser;
+  globalThis.XMLSerializer = dom.window.XMLSerializer;
+  globalThis.HTMLElement = dom.window.HTMLElement;
+  globalThis.SVGElement = dom.window.SVGElement;
+  globalThis.Element = dom.window.Element;
+  globalThis.Node = dom.window.Node;
+  globalThis.getComputedStyle = dom.window.getComputedStyle;
+  globalThis.CSSStyleSheet = class {
+    constructor() {
+      this.cssRules = [];
+    }
+
+    insertRule(rule) {
+      this.cssRules.push({ cssText: rule });
+      return this.cssRules.length - 1;
+    }
+
+    replaceSync() {}
+  };
+  if (!globalThis.SVGElement.prototype.getBBox) {
+    globalThis.SVGElement.prototype.getBBox = () => ({
+      height: 20,
+      width: 100,
+      x: 0,
+      y: 0,
+    });
+  }
+  if (!globalThis.SVGElement.prototype.getComputedTextLength) {
+    globalThis.SVGElement.prototype.getComputedTextLength = () => 100;
+  }
+  return dom.window;
+}
+
+const renderedWindow = installMermaidDom();
+const { default: dompurify } = await import("dompurify");
+
+function purifierForRenderedWindow() {
+  return typeof dompurify.sanitize === "function" ? dompurify : dompurify(renderedWindow);
+}
+
+test("the authored Markdown policy keeps learning structure while stripping active raw HTML", () => {
+  const tree = {
+    type: "root",
+    children: [
+      element("details", { open: true, onClick: "alert('no')" }, [
+        element("summary", {}, [text("Reveal the model")]),
+        element("code", { className: ["language-python"] }, [text("x = 1")]),
+      ]),
+      element("a", { href: "javascript:alert('no')" }, [text("unsafe")]),
+      element("script", {}, [text("alert('no')")]),
+    ],
+  };
+
+  const sanitized = rehypeSanitize(atlasMarkdownSanitizationSchema)(tree);
+
+  assert.equal(sanitized.children.length, 2);
+  const [details, unsafeLink] = sanitized.children;
+  assert.equal(details.tagName, "details");
+  assert.equal(details.properties.open, true);
+  assert.equal(details.properties.onClick, undefined);
+  assert.equal(details.children[0].tagName, "summary");
+  assert.equal(details.children[1].tagName, "code");
+  assert.deepEqual(details.children[1].properties.className, ["language-python"]);
+  assert.equal(unsafeLink.tagName, "a");
+  assert.equal(unsafeLink.properties.href, undefined);
+});
+
+test("the Mermaid SVG allowlist removes active, embedded, and external content", () => {
+  const purifier = purifierForRenderedWindow();
+  const sanitized = purifier.sanitize(
+    `<svg viewBox="0 0 10 10" onload="alert('no')">
+      <script>alert('no')</script>
+      <foreignObject><div onclick="alert('no')">unsafe</div></foreignObject>
+      <image href="https://attacker.example/track.svg" />
+      <a href="javascript:alert('no')"><text>unsafe link</text></a>
+      <rect class="node" width="10" height="10" style="fill: red" onclick="alert('no')" />
+      <path d="M 0 0 L 10 10" marker-end="url(#arrow)" />
+      <text x="1" y="5">safe teaching diagram</text>
+    </svg>`,
+    atlasMermaidSvgSanitizationConfig,
+  );
+
+  assert.match(sanitized, /<svg\b/i);
+  assert.match(sanitized, /<rect\b/i);
+  assert.match(sanitized, /<path\b/i);
+  assert.match(sanitized, /<text\b/i);
+  assert.match(sanitized, /safe teaching diagram/i);
+  assert.doesNotMatch(sanitized, /<script\b|<foreignObject\b|<image\b|<a\b/i);
+  assert.doesNotMatch(sanitized, /onload=|onclick=|javascript:|https:\/\/attacker\.example|style=/i);
+
+  const svg = new renderedWindow.DOMParser().parseFromString(
+    `<svg xmlns="http://www.w3.org/2000/svg">
+      <path marker-end="url(https://attacker.example/arrow)" />
+      <rect fill="url(https://attacker.example/paint.svg)" />
+    </svg>`,
+    "image/svg+xml",
+  ).documentElement;
+  removeNonLocalMermaidReferences(svg);
+  assert.equal(svg.querySelector("path").getAttribute("marker-end"), null);
+  assert.equal(svg.querySelector("rect").getAttribute("fill"), null);
+});
+
+test("a rendered Mermaid fixture retains readable labels and inert geometry", async () => {
+  const markup = await renderSafeMermaidSvg({
+    label: "Concept diagram: a safe route",
+    renderId: "atlas-rendered-fixture",
+    source: `flowchart LR
+      A["First concept<br/>a value"] --> B{"Decision?"}
+      B -- "yes" --> C["Outcome"]`,
+  });
+  const svg = new renderedWindow.DOMParser().parseFromString(markup, "image/svg+xml").documentElement;
+
+  assert.equal(svg.localName, "svg");
+  assert.equal(svg.getAttribute("role"), "img");
+  assert.equal(svg.getAttribute("aria-label"), "Concept diagram: a safe route");
+  assert.match(svg.textContent, /First concept/u);
+  assert.match(svg.textContent, /a value/u);
+  assert.match(svg.textContent, /Decision\?/u);
+  assert.match(svg.textContent, /Outcome/u);
+  assert.ok(svg.querySelectorAll("rect, polygon, circle").length >= 3);
+  assert.ok(svg.querySelectorAll("path").length >= 1);
+  assert.doesNotMatch(markup, /<style\b|<filter\b|<foreignObject\b|<image\b|\son\w+=/iu);
+});

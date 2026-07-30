@@ -30,6 +30,10 @@ actually published.
   reviewed release-input policy. Ignored Python bytecode and other incidental
   local artifacts are excluded; CI now rejects a tracked teaching artifact
   that was not admitted to the policy.
+- Added direct Markdown and Mermaid/SVG sanitizers with Atlas-owned
+  allowlists, local-only SVG marker references, and malicious-rendering
+  regressions. Mermaid retains only inert geometry and readable labels; its
+  technical source fallback is not represented as a prose-equivalent review.
 
 ## v0.6-capstone (private course milestone)
 

@@ -1323,7 +1323,8 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /role="progressbar"/);
   assert.match(html, /aria-valuemin="0"/);
   assert.match(html, /aria-valuemax="100"/);
-  assert.match(html, /Diagram source and text fallback/);
+  assert.match(html, /Diagram source \(technical fallback\)/);
+  assert.doesNotMatch(html, /Diagram source and text fallback/);
   assert.match(html, /class="lesson-table-scroll"/);
   assert.doesNotMatch(html, /aria-label="Scrollable lesson table"/);
   assert.match(html, /Canonical workbook snapshot/);

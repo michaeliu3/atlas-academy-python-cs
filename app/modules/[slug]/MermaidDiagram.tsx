@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { renderSafeMermaidSvg } from "@/lib/render-safe-mermaid.mjs";
 
 type MermaidDiagramProps = {
   source: string;
@@ -34,35 +35,15 @@ export function MermaidDiagram({ source }: MermaidDiagramProps) {
 
     async function renderDiagram() {
       try {
-        const { default: mermaid } = await import("mermaid");
-        mermaid.initialize({
-          startOnLoad: false,
-          securityLevel: "strict",
-          theme: "base",
-          fontFamily: "Manrope, system-ui, sans-serif",
-          themeVariables: {
-            background: "#fffdf7",
-            primaryColor: "#dfe7f7",
-            primaryTextColor: "#17211d",
-            primaryBorderColor: "#3157a4",
-            lineColor: "#76547f",
-            secondaryColor: "#f3dfc5",
-            tertiaryColor: "#dce9df",
-          },
-        });
         const renderId = `atlas-diagram-${reactId.replace(/[^a-z0-9]/giu, "")}`;
-        const result = await mermaid.render(renderId, source);
-        const documentFragment = new DOMParser().parseFromString(
-          result.svg,
-          "image/svg+xml",
-        );
-        const svg = documentFragment.documentElement;
-        svg.setAttribute("role", "img");
-        svg.setAttribute("aria-label", label);
-        svg.setAttribute("focusable", "false");
+        const safeMarkup = await renderSafeMermaidSvg({
+          label,
+          renderId,
+          source,
+        });
 
         if (!cancelled) {
-          setMarkup(new XMLSerializer().serializeToString(svg));
+          setMarkup(safeMarkup);
         }
       } catch {
         if (!cancelled) {
@@ -85,14 +66,14 @@ export function MermaidDiagram({ source }: MermaidDiagramProps) {
         ) : (
           <p role={failed ? "alert" : "status"}>
             {failed
-              ? "The visual diagram could not be drawn. Its complete source remains available below."
+              ? "The visual diagram could not be drawn. The authored Mermaid source remains available below; consult the surrounding lesson prose for its explanation."
               : "Drawing concept diagram…"}
           </p>
         )}
       </div>
       <figcaption>{label}</figcaption>
       <details className="diagram-source">
-        <summary>Diagram source and text fallback</summary>
+        <summary>Diagram source (technical fallback)</summary>
         <pre>
           <code className="language-mermaid">{source}</code>
         </pre>

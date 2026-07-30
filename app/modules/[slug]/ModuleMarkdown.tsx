@@ -7,9 +7,11 @@ import ReactMarkdown, { type Components } from "react-markdown";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import { atlasMarkdownSanitizationSchema } from "@/lib/rich-content-sanitization.mjs";
 import { LessonTable } from "./LessonTable";
 import { MermaidDiagram } from "./MermaidDiagram";
 
@@ -177,6 +179,7 @@ export function ModuleMarkdown({ markdown }: ModuleMarkdownProps) {
       components={markdownComponents}
       rehypePlugins={[
         rehypeRaw,
+        [rehypeSanitize, atlasMarkdownSanitizationSchema],
         rehypeKatex,
         rehypeSlug,
         [
