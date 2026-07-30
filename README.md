@@ -24,31 +24,44 @@ The deployed portal is the primary learner interface. It contains:
 - diagrams, state traces, architecture maps, code-reading labs, and
   first-principles explanations;
 - downloadable local-only Python teaching models and behavioral tests;
-- cumulative Atlas projects, TA checkoffs, Study Partner routines, and
-  retrieval schedules.
+- cumulative Atlas projects, TA checkoffs, Study Partner routines,
+  conversational oral defenses, and retrieval schedules.
 
 The course privileges reading unfamiliar code, modelling, debugging,
 architectural reasoning, reviewing AI-generated changes, and evidence over
 rote typing or exam drill.
 
-## 45-day intensive first pass
+## 60-day Atlas Core: route and release status
 
-The adjustable intensive route targets 20–25 focused hours a week over roughly
-45 days. It is a rigorous connected first pass, not a claim of instant durable
-mastery.
+The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
+days. It is a rigorous connected first pass, not a claim of instant durable
+mastery. The learner route has 36 defined modules: 26 are readable today and
+10 advanced depth modules are in authoring. Planned modules remain visibly
+unlinked until their source maps, workbooks, studios, and checks are released.
+
+Every module ends with a short constructive oral defense: GPT Live Chat is the
+preferred surface when available, with an equivalent text route. It evaluates
+models, reasoning, boundaries, transfer, and reflection—not speech speed or a
+scripted performance.
 
 | Days | Focus |
 |---|---|
-| 1–8 | placement; Python execution, abstraction, proof, and cost |
-| 9–16 | data structures, algorithms, graphs, and optimization |
-| 17–25 | tests, architecture, packaging, persistence, databases, and transactions |
-| 26–34 | architecture, OS, concurrency, networking, distributed systems, and trust |
-| 35–40 | languages, interpreters, CPython/runtime, performance, memory, and AI-era judgment |
-| 41–45 | human-centered Atlas feature, capstone review, red-team critique, and defense |
+| 1 | Module 0 placement diagnostic and learning contract |
+| 2–9 | M1–M5 plus M27 discrete-mathematics depth (M27 in authoring) |
+| 10–17 | M6–M11 data structures and algorithmic strategy |
+| 18–25 | M12–M16 durable software, data, and transactions |
+| 26–34 | M17 plus M28–M31 numerical, statistical, and optimization foundations (M28–M31 in authoring) |
+| 35–44 | M18–M24 operating, network, trust, language, and runtime boundaries |
+| 45–53 | M32–M36 accelerators, formal limits, classical AI, ML, and learning theory (in authoring) |
+| 54–55 | M25 evidence-grounded, human-centered intelligent systems |
+| 56–60 | M26 capstone release and oral architecture defense |
 
 The schedule adapts to diagnostic evidence, difficult concepts, project
-revision, and retrieval needs. A further 8–12 weeks of spaced retrieval and
-transfer work is planned for dependable mastery.
+revision, and retrieval needs. At the lower end of the weekly time budget, or
+after a missed gate, the calendar expands rather than dropping proof, tracing,
+or transfer work. A further 3–12 months of spaced retrieval, project revision,
+and specialization turns first-pass readiness into dependable mastery. See the
+in-product [60-day route](/route) for prerequisites and publication status.
 
 ## Local development
 

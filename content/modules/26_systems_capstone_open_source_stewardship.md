@@ -7,7 +7,7 @@
 > feature live inside a maintained product without borrowing authority from a
 > demo, a green check, a benchmark, an agent, or a polished interface?
 
-**Days 41–45 of the 45-day intensive**
+**Days 56–60 of the 60-day Atlas Core**
 
 **Primary outcome:** You can make and defend a bounded release decision for one
 Atlas capability (or a comparable open-source contribution). You can trace the
@@ -105,7 +105,10 @@ artifacts into one release argument.
 | M6–M11 representation, index/graph, and algorithm decision memo | The data structure, candidate set, dependency path, and complexity tradeoff behind the behavior. | Why this representation and algorithm are suitable for the workload and failure mode. |
 | M12–M16 API contract, test suite, package boundary, schema, and transaction trace | A changeable software boundary with validation, persistence, recovery, and atomicity evidence. | Why a request, migration, retry, or failure preserves the stated invariant. |
 | M17–M22 execution, OS, concurrency, protocol, partial-failure, and trust dossier | A model of resources, races, remote uncertainty, authentication/authorization, privacy, and failure recovery. | Which component owns a failure, who may act, and what remains outside the system's authority. |
-| M23–M25 language/runtime evidence and human-centered feature packet | Meaning-preserving query/representation behavior, scoped performance evidence, and an accessible, bounded decision surface. | Why a local observation or suggestion is not promoted into a universal claim, command, or user benefit. |
+| M23–M24 language/runtime evidence | Meaning-preserving query/representation behavior and scoped performance evidence. | Why a local observation is not promoted into a universal claim. |
+| M27–M31 formal mathematics, inference, and optimization evidence | Definitions, assumptions, derivations, numerical boundaries, statistical models, and information/optimization tradeoffs. | Why a mathematical or empirical claim is valid only under its stated model, data, and finite-precision conditions. |
+| M32–M36 systems-for-learning, formal limits, AI, ML, and learning-theory evidence | Cross-layer execution evidence, reductions, search/decision formulation, evaluation manifests, generalization/limit arguments, and reliability boundaries. | Why an apparent model result does not silently become a deployable guarantee, authority, or human benefit. |
+| M25 human-centered evidence packet | An accessible, bounded decision surface with authority, provenance, explanation, uncertainty, and override evidence. | Why a suggestion remains contestable and does not become a command or a user benefit claim. |
 
 ~~~mermaid
 flowchart LR
@@ -114,7 +117,10 @@ flowchart LR
     A["M6–M11 representation / algorithm memo"] --> X["architecture thread"]
     D["M12–M16 contracts, tests, transaction trace"] --> X
     O["M17–M22 systems / trust dossier"] --> F["failure + authority boundary"]
-    H["M23–M25 semantics, runtime, human evidence"] --> E["evidence ledger"]
+    H["M23–M24 semantics + runtime evidence"] --> E["evidence ledger"]
+    Q["M27–M31 mathematical / statistical evidence"] --> E
+    T["M32–M36 AI / ML / theory evidence"] --> E
+    U["M25 human-control packet"] --> E
     C --> X
     I --> X
     X --> F
@@ -152,11 +158,11 @@ someone else can understand, test, maintain, and reverse.
 
 | Day | Capstone pressure | Sessions | Dossier increment |
 |---|---|---|---|
-| 41 | Define the release rather than the feature wish. | 1 | Release contract and pre-mortem |
-| 42 | Recover the real architecture and ownership boundaries. | 2 | Architecture thread and dependency closure |
-| 43 | Trace a failure across persistence, concurrency, and remote uncertainty. | 3 | Incident report and regression specification |
-| 44 | Review the patch, supply chain, and operational evidence. | 4 and 5 | Change review, evidence ledger, rollback/canary plan |
-| 45 | Decide, hand off, and defend under challenge. | 6 | Final release dossier and oral defense |
+| 56 | Define the release rather than the feature wish. | 1 | Release contract and pre-mortem |
+| 57 | Recover the real architecture and ownership boundaries. | 2 | Architecture thread and dependency closure |
+| 58 | Trace a failure across persistence, concurrency, and remote uncertainty. | 3 | Incident report and regression specification |
+| 59 | Review the patch, supply chain, and operational evidence. | 4 and 5 | Change review, evidence ledger, rollback/canary plan |
+| 60 | Decide, hand off, and defend under challenge. | 6 | Final release dossier and oral defense |
 
 The default workday remains evidence-first: retrieval and prediction; a
 first-principles model and trace; unfamiliar-code or architecture reading;
@@ -1080,9 +1086,9 @@ Useful Study Partner questions:
 
 | When | Prompt |
 |---|---|
-| End of Day 41 | State the release claim, non-goal, invariant, owner, and rollback path without notes. |
-| Start of Day 43 | Draw the request/retry timeline and say where the durable-effect boundary lives. |
-| End of Day 45 | Give the two-minute release/defer decision with one limitation and next falsifier. |
+| End of Day 56 | State the release claim, non-goal, invariant, owner, and rollback path without notes. |
+| Start of Day 58 | Draw the request/retry timeline and say where the durable-effect boundary lives. |
+| End of Day 60 | Give the two-minute release/defer decision with one limitation and next falsifier. |
 | Three days later | Review a fresh diff and identify the first authority, provenance, or rollback question. |
 | Two weeks later | Re-run the oral defense after changing a dependency or workload assumption. |
 | Six weeks later | Read a real issue/patch in the chosen project and produce one miniature evidence ledger. |

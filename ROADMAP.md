@@ -1,8 +1,8 @@
 # Atlas Academy Roadmap
 
 This roadmap tracks release evidence, not a promise that calendar completion
-equals mastery. The 45-day intensive is adjustable when diagnostic, retrieval,
-or project evidence shows a necessary bridge.
+equals mastery. The 60-day Atlas Core is adjustable when diagnostic, retrieval,
+oral-defense, or project evidence shows a necessary bridge.
 
 ## Published foundation
 
@@ -21,16 +21,33 @@ or project evidence shows a necessary bridge.
 - [x] Module 26 — systems capstone, open-source stewardship, and oral
   architecture defense, with private deployment and versioned release evidence.
 
-## 45-day first-pass checkpoints
+## 60-day Atlas Core expansion
 
-- [ ] Days 1–8: establish the execution, abstraction, proof, and cost models.
-- [ ] Days 9–16: defend data-structure/algorithm choices with traces and
+- [x] Prerequisite-first 60-day route, published/in-authoring status boundary,
+  and constructive oral-defense framework.
+- [ ] M27 — discrete mathematics, proof, counting, and structures.
+- [ ] M28–M31 — linear algebra, analysis, probability/statistics, and
+  optimization/information.
+- [ ] M32–M36 — systems-for-learning, formal limits, classical AI, ML, and
+  learning-theory reliability.
+- [ ] Reweave M25/M26 and their capstone evidence packet against the released
+  M27–M36 artifacts.
+
+## 60-day first-pass checkpoints
+
+- [ ] Day 1: placement diagnostic and learning contract.
+- [ ] Days 2–9: establish execution, abstraction, proof, cost, and discrete
+  depth.
+- [ ] Days 10–17: defend data-structure/algorithm choices with traces and
   complexity evidence.
-- [ ] Days 17–25: review and evolve durable software/data boundaries.
-- [ ] Days 26–34: trace systems, failures, network evidence, and trust
-  boundaries.
-- [ ] Days 35–40: connect interpreter/runtime reasoning to AI-era judgment.
-- [ ] Days 41–45: defend Atlas architecture, user impact, limitations, and
+- [ ] Days 18–25: review and evolve durable software/data boundaries.
+- [ ] Days 26–34: connect execution evidence to numerical, statistical, and
+  optimization models.
+- [ ] Days 35–44: trace systems, failures, network evidence, trust, language,
+  and runtime boundaries.
+- [ ] Days 45–53: defend AI/ML/theory choices under changed assumptions.
+- [ ] Days 54–55: produce a human-control and evidence packet.
+- [ ] Days 56–60: defend Atlas architecture, user impact, limitations, and
   evidence under review.
 
 ## Release milestones

@@ -7,6 +7,15 @@
 > suggestion. Atlas may become more helpful only if its help remains
 > inspectable, bounded, and under the learner's control.
 
+> **Expanded Atlas Core gate:** In the 60-day prerequisite-first route, do not
+> use M25 as the final synthesis until M27–M36 have supplied the needed formal
+> and empirical evidence: discrete proof/complexity, numerical linear algebra,
+> calculus/analysis, probability/statistics, optimization/information,
+> systems-for-learning, formal limits, classical AI, ML evaluation, and learning
+> theory. This published workbook remains readable now; its final-synthesis
+> claim is intentionally gated on those released artifacts rather than inferred
+> from a score or an agent explanation.
+
 **Primary outcome:** You can read an intelligent-feature proposal as a chain
 of purpose, authorized data, representation, candidate generation, score or
 model, evaluation, explanation, human decision, and evidence. You can detect
@@ -135,6 +144,25 @@ from becoming unjustified authority. Module 23 gives a narrow query path;
 Module 24 demands controlled measurement. Module 25 joins those inputs only
 at a human decision surface. Module 26 then requires the resulting feature to
 be defended as part of one maintained system.
+
+### 1.1A The expanded-route evidence gate
+
+The original 26-module route established the software, systems, and trust
+boundaries visible above. The expanded 60-day Atlas Core adds a second evidence
+spine before M25 becomes its final AI-system synthesis:
+
+| Required earlier evidence | Why M25 needs it | What cannot be skipped |
+|---|---|---|
+| M27 discrete mathematics and M33 formal limits | Lets the learner distinguish a valid argument, a reduction/complexity boundary, and a plausible explanation. | A fluent AI-generated proof or solver claim is not evidence. |
+| M28–M31 linear algebra, analysis, probability/statistics, optimization, and information | Lets the learner read assumptions, numerical conditioning, uncertainty, inference, objectives, constraints, and information losses. | A model metric or optimizer trace does not replace the model/data assumptions. |
+| M32 systems languages, scientific Python, and accelerators | Lets the learner trace layout, precision, reproducibility, profiling, and distributed execution claims. | A GPU result does not make a numerical or operational claim portable. |
+| M34–M36 classical AI, ML, and learning theory | Lets the learner formulate a decision, evaluate a model, test for shift/leakage, and read a guarantee or limitation. | A validation score does not become authority, causal benefit, or a deployment guarantee. |
+
+At this gate, the learner must be able to name which earlier artifact supports a
+claim, which assumption remains fragile, and what observation would change the
+release decision. If a named depth module is still in authoring, this is an
+honest reason to use M25 as a bounded preparation workbook rather than declare
+the full Core synthesis complete.
 
 ### 1.2 The fixed Atlas incident
 

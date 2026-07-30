@@ -6,12 +6,13 @@
   teaching map for the Module 26 learner workbook, visual capstone studio,
   deterministic reference model, TA sessions, study-partner prompts, final
   dossier, and oral architecture defense.
-- **Course position:** Module 26 concludes the 45-day Atlas Academy. It follows
-  Module 25, *Evidence-Grounded Intelligent and Human-Centered Systems*.
-  Module 25 established that a score, generated proposal, or accessible-looking
-  interface does not own authority and does not prove benefit. Module 26 asks:
-  **what evidence makes a versioned release argument reviewable, recoverable,
-  and honest?**
+- **Course position:** Module 26 concludes days 56–60 of the 60-day Atlas Core.
+  It follows Module 25, *Evidence-Grounded Intelligent and Human-Centered
+  Systems*, after the M27–M36 mathematics, theory, systems-for-learning, AI,
+  ML, and learning-theory bridge. Module 25 established that a score, generated
+  proposal, or accessible-looking interface does not own authority and does not
+  prove benefit. Module 26 asks: **what evidence makes a versioned release
+  argument reviewable, recoverable, and honest?**
 - **Research snapshot:** **2026-07-30**. Links refer to official, primary, or
   author-maintained sources available on that date. Vendor docs, standards
   status, platform capabilities, and licenses can change; a capstone records

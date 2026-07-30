@@ -12,6 +12,7 @@ import {
 import { CourseReaderHeader } from "../CourseReaderHeader";
 import { ModuleMarkdown } from "./ModuleMarkdown";
 import { ModuleNavigation } from "./ModuleNavigation";
+import { ModuleOralDefense } from "./ModuleOralDefense";
 import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
 import { AsyncDistributedStudio } from "../../AsyncDistributedStudio";
@@ -125,6 +126,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
             aria-label={`Complete Module ${courseModule.number} workbook`}
           >
             <ModuleMarkdown markdown={lessonMarkdown} />
+            <ModuleOralDefense courseModule={courseModule} />
             <footer className="canonical-source-note">
               <span>Canonical workbook snapshot</span>
               <p>

@@ -74,8 +74,101 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Course library/);
   assert.match(html, /Begin the diagnostic/);
   assert.match(html, /href="\/diagnostic"/);
+  assert.match(html, /href="\/route"/);
   assert.match(html, /Thirteen multiple-choice investigations/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+});
+
+test("every module reader includes the supportive oral-defense route", async () => {
+  const [page, oralDefense, oralGuide] = await Promise.all([
+    readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleOralDefense.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(page, /<ModuleOralDefense courseModule=\{courseModule\} \/>/);
+  assert.match(oralDefense, /Oral defense: a conversation, not a verdict\./);
+  assert.match(oralDefense, /GPT Live Chat/);
+  assert.match(oralDefense, /Equivalent text route/);
+  assert.match(oralDefense, /Do not store raw voice recordings/);
+  assert.match(oralDefense, /Do not produce a bare pass\/fail verdict/);
+  assert.match(oralDefense, /prediction-before-reveal/);
+  assert.match(oralDefense, /What would change your mind\?/);
+  assert.match(oralDefense, /Ask whether I approve saving only that concise summary/);
+  assert.match(oralGuide, /bindings, object identity, mutation, and frame-local state/);
+  assert.match(oralGuide, /a release argument joining architecture, invariant/);
+  assert.match(oralGuide, /formal definition and assumptions/);
+  assert.match(oralGuide, /system boundary, failure mode, evidence, tradeoff/);
+
+  const response = await render("/modules/04-logic-sets-relations-graphs-proof");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Post-module learning conversation/);
+  assert.match(html, /Oral defense: a conversation, not a verdict\./);
+  assert.match(html, /15–20 thoughtful minutes/);
+  assert.match(html, /Equivalent text route/);
+  assert.match(html, /A small, privacy-respecting record/);
+  assert.match(html, /formative conversation, not a pass\/fail exam/i);
+});
+
+test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
+  const response = await render("/route");
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(readable, /60 days\./);
+  assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
+  assert.match(readable, /26 \/ 10/);
+  assert.match(readable, /published \/ in authoring/i);
+  assert.match(readable, /Days 2–9/);
+  assert.match(readable, /Days 56–60/);
+  assert.match(readable, /Module 27/);
+  assert.match(readable, /In authoring/);
+  assert.match(readable, /Source map and studio are being built before release\./);
+  assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
+  assert.match(readable, /Module 25/);
+  assert.match(readable, /Module 26/);
+  assert.doesNotMatch(html, /href="\/modules\/27-/);
+});
+
+test("keeps release status and route linkability aligned with the published manifest", async () => {
+  const [routeSource, routePage, manifestSource] = await Promise.all([
+    readFile(new URL("../lib/atlas-core-route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/modules/manifest.json", import.meta.url), "utf8"),
+  ]);
+  const manifest = JSON.parse(manifestSource);
+  const publishedNumbers = new Set(
+    manifest.modules.map((courseModule) => courseModule.number),
+  );
+
+  for (let number = 1; number <= 26; number += 1) {
+    assert.ok(publishedNumbers.has(number), `M${number} appears in the manifest`);
+    assert.match(
+      routeSource,
+      new RegExp(`number: ${number},[\\s\\S]{0,260}?status: published`),
+      `M${number} is published in the learner route`,
+    );
+  }
+
+  for (let number = 27; number <= 36; number += 1) {
+    assert.ok(!publishedNumbers.has(number), `M${number} is not prematurely published`);
+    assert.match(
+      routeSource,
+      new RegExp(`number: ${number},[\\s\\S]{0,260}?status: inAuthoring`),
+      `M${number} remains in authoring in the learner route`,
+    );
+  }
+
+  assert.match(
+    routePage,
+    /entry\.status === "published" && releasedModule !== undefined/,
+  );
 });
 
 test("renders the accessible, confidence-aware Module 0 placement studio", async () => {

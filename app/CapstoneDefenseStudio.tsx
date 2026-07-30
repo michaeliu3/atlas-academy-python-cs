@@ -835,7 +835,7 @@ export function CapstoneDefenseStudio() {
   return (
     <section className={styles.studio} aria-labelledby="capstone-defense-studio-title">
       <header className={styles.hero}>
-        <div className={styles.heroEyebrow}><span>Module 26</span><span aria-hidden="true">/</span><span>Days 41–45</span><span aria-hidden="true">/</span><span>Capstone evidence studio</span></div>
+        <div className={styles.heroEyebrow}><span>Module 26</span><span aria-hidden="true">/</span><span>Days 56–60</span><span aria-hidden="true">/</span><span>Capstone evidence studio</span></div>
         <h2 id="capstone-defense-studio-title">Make the release argument.</h2>
         <p>Read one bounded capability like a maintainer: define what it may promise, trace how it works, challenge its evidence, and decide whether to release, revise, defer, or roll back.</p>
       </header>

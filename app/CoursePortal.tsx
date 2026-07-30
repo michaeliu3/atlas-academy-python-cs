@@ -81,6 +81,9 @@ export function CoursePortal() {
           <Link className="header-link" href="/modules">
             Course library
           </Link>
+          <Link className="header-link" href="/route">
+            60-day route
+          </Link>
           <button
             className={view === "path" ? "active" : ""}
             onClick={() => navigate("path")}
@@ -145,6 +148,9 @@ export function CoursePortal() {
             <div className="hero-actions">
               <Link className="primary-action" href="/diagnostic">
                 Begin the diagnostic <span aria-hidden="true">→</span>
+              </Link>
+              <Link className="text-action" href="/route">
+                See the 60-day route
               </Link>
               <button
                 className="text-action"

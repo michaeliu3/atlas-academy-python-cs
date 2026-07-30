@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 type CourseReaderHeaderProps = {
-  current?: "diagnostic" | "library" | "module";
+  current?: "diagnostic" | "library" | "module" | "route";
 };
 
 export function CourseReaderHeader({ current }: CourseReaderHeaderProps) {
@@ -26,6 +26,12 @@ export function CourseReaderHeader({ current }: CourseReaderHeaderProps) {
         </Link>
         <nav aria-label="Primary course navigation">
           <Link href="/">Learning path</Link>
+          <Link
+            aria-current={current === "route" ? "page" : undefined}
+            href="/route"
+          >
+            60-day route
+          </Link>
           <Link
             aria-current={current === "diagnostic" ? "page" : undefined}
             href="/diagnostic"
