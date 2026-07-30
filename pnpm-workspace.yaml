@@ -1,6 +1,11 @@
 packages:
   - .
 
+# Keep the security-patched implementations scoped to Next's dependency tree.
+overrides:
+  "next>postcss": 8.5.18
+  "next>sharp": 0.35.2
+
 # This private site deploys only reviewed, committed lockfile state.
 trustLockfile: true
 

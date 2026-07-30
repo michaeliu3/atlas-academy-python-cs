@@ -37,6 +37,11 @@ actually published.
 - The production build now prunes every download artifact not admitted by the
   versioned release-input policy, so local Python bytecode cannot silently
   reach the deployed client output.
+- Added a reviewed dependency-risk register and a narrowly scoped candidate
+  remediation for Next's runtime PostCSS and sharp paths. The remaining
+  ESLint/brace-expansion and Drizzle/esbuild development paths are explicitly
+  triaged rather than misrepresented as fixed; CI and GitHub alert refresh are
+  still required before any candidate closure.
 
 ## v0.6-capstone (private course milestone)
 
