@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
   useReducer,
   useRef,
@@ -66,6 +67,7 @@ export function DiagnosticExperience() {
   const [copyState, setCopyState] = useState<CopyState>("idle");
   const [resetArmed, setResetArmed] = useState(false);
   const [restoredProgress, setRestoredProgress] = useState(false);
+  const [questionFocusVersion, setQuestionFocusVersion] = useState(0);
   const skipNextPersistence = useRef(false);
   const questionHeadingRef = useRef<HTMLHeadingElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
@@ -145,10 +147,17 @@ export function DiagnosticExperience() {
     [attempt],
   );
 
+  useLayoutEffect(() => {
+    if (questionFocusVersion === 0) {
+      return;
+    }
+    questionHeadingRef.current?.focus();
+  }, [question.id, questionFocusVersion]);
+
   function goToQuestion(questionId: string) {
     setResetArmed(false);
+    setQuestionFocusVersion((version) => version + 1);
     dispatch({ type: "goTo", questionId });
-    window.requestAnimationFrame(() => questionHeadingRef.current?.focus());
   }
 
   function revealCurrentModel() {
@@ -171,8 +180,8 @@ export function DiagnosticExperience() {
     setCopyState("idle");
     setResetArmed(false);
     setRestoredProgress(false);
+    setQuestionFocusVersion((version) => version + 1);
     dispatch({ type: "reset" });
-    window.requestAnimationFrame(() => questionHeadingRef.current?.focus());
   }
 
   function requestReset() {
@@ -744,9 +753,9 @@ export function DiagnosticExperience() {
                         confidence: level.id,
                       })
                     }
-                  />
-                  <strong>{level.label}</strong>
-                  <span>{level.description}</span>
+                    />
+                    <strong>{level.label}</strong>{" "}
+                    <span>{level.description}</span>
                 </label>
               ))}
             </div>

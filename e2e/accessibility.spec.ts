@@ -206,6 +206,36 @@ test("the diagnostic requires an answer and confidence before model reveal", asy
   ).toBeVisible();
 });
 
+test("the diagnostic completes next-question focus before the next keyboard answer", async ({
+  page,
+}) => {
+  await page.goto("/diagnostic");
+
+  const answer = page
+    .getByRole("group", { name: /choose the model that best predicts/i })
+    .getByRole("radio")
+    .first();
+  const confidence = page.getByRole("radio", { name: /^low\b/i });
+  await selectRadioWithKeyboard(page, answer);
+  await selectRadioWithKeyboard(page, confidence);
+  const reveal = page.getByRole("button", { name: "Reveal the model" });
+  await expect(reveal).toBeEnabled();
+  await reveal.click();
+
+  const feedback = page.getByText(
+    /this is a useful model to repair|this model holds/i,
+  );
+  await expect(feedback).toBeVisible();
+  await page.getByRole("button", { name: /next question/i }).click();
+
+  await expect(page.locator(".diagnostic-question-heading h2")).toBeFocused();
+  const nextAnswer = page
+    .getByRole("group", { name: /choose the model that best predicts/i })
+    .getByRole("radio")
+    .first();
+  await selectRadioWithKeyboard(page, nextAnswer);
+});
+
 test("the completed diagnostic route keeps prerequisite context and passes Axe", async ({
   page,
 }) => {
