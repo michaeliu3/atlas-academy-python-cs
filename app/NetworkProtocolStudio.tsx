@@ -721,7 +721,7 @@ function AuditLab({
       {record.revealed && (
         <section className={styles.revealCard} aria-live="polite">
           <div className={styles.auditSplit}>
-            <pre aria-label="Generated patch to audit"><code>{`def publish(snapshot):
+            <pre aria-label="Scrollable generated patch to audit" tabIndex={0}><code>{`def publish(snapshot):
     response = requests.post(URL, json=snapshot, timeout=1)
     if response.status_code != 200:
         logger.error("publish never reached the server: %s", snapshot)
@@ -744,7 +744,7 @@ function AuditLab({
               <span>scope-labelled model evidence</span>
               <small>synthetic · no external connection</small>
             </header>
-            <pre><code>{`{
+            <pre aria-label="Scrollable scoped model evidence JSON" tabIndex={0}><code>{`{
   "attempt": {"classification": "UNKNOWN", "evidence_scope": "CLIENT_OBSERVATION"},
   "endpoint_attempt": {"candidate": "model://atlas-primary", "evidence_scope": "PROTOCOL_MODEL"},
   "server_local": {"decision": "PUBLISHED", "evidence_scope": "SERVER_DECISION"},

@@ -188,6 +188,40 @@ test("the diagnostic requires an answer and confidence before model reveal", asy
   ).toBeVisible();
 });
 
+test("the completed diagnostic route keeps prerequisite context and passes Axe", async ({
+  page,
+}) => {
+  await page.goto("/diagnostic");
+
+  for (let index = 0; index < 20; index += 1) {
+    await page.getByRole("radio").first().check();
+    await page.getByRole("radio", { name: /not sure yet/i }).check();
+    await page.getByRole("button", { name: "Reveal the model" }).click();
+
+    if (index < 19) {
+      await page.getByRole("button", { name: /next question/i }).click();
+    }
+  }
+
+  await page.getByRole("button", { name: /build my learning route/i }).click();
+
+  const resultsHeading = page.getByRole("heading", {
+    name: /a map of what to transfer, verify, and repair/i,
+  });
+  await expect(resultsHeading).toBeVisible();
+  await expect(resultsHeading).toBeFocused();
+  await expect(
+    page.getByText(/direct academic prerequisite/i).first(),
+  ).toBeVisible();
+
+  const repairLink = page
+    .getByRole("link", { name: /rebuild with published module/i })
+    .first();
+  await repairLink.focus();
+  await expect(repairLink).toBeFocused();
+  await expectNoAxeViolations(page);
+});
+
 test("the Module 22 trust studio requires prediction and confidence before reveal", async ({
   page,
 }) => {

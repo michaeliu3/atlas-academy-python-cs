@@ -84,7 +84,7 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Begin the diagnostic/);
   assert.match(html, /href="\/diagnostic"/);
   assert.match(html, /href="\/route"/);
-  assert.match(html, /Thirteen multiple-choice investigations/);
+  assert.match(html, /Twenty multiple-choice investigations/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -204,6 +204,56 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
   assert.match(readable, /Your plain-language explanation/);
   assert.match(readable, /A small, learner-controlled record/);
   assert.match(readable, /formative conversation, not a pass\/fail exam/i);
+});
+
+test("keeps every authored scrollable code region labelled and keyboard-focusable", async () => {
+  const labelledRegions = [
+    ["../app/CoursePortal.tsx", "Scrollable Python state-trace example"],
+    ["../app/ModuleTwoReader.tsx", "Scrollable recursive Python example"],
+    ["../app/CapstoneDefenseStudio.tsx", "Scrollable small proposed patch"],
+    ["../app/NetworkProtocolStudio.tsx", "Scrollable generated patch to audit"],
+    ["../app/NetworkProtocolStudio.tsx", "Scrollable scoped model evidence JSON"],
+    [
+      "../app/learning-partners/LearningPartnerPromptCards.tsx",
+      "Scrollable ${prompt.title} startup prompt",
+    ],
+    [
+      "../app/modules/[slug]/ModuleTextOralDefense.tsx",
+      "Scrollable concise oral-defense evidence draft",
+    ],
+    [
+      "../app/modules/[slug]/ModuleMarkdown.tsx",
+      "Scrollable lesson code example",
+    ],
+    [
+      "../app/modules/[slug]/MermaidDiagram.tsx",
+      "Scrollable technical Mermaid diagram source",
+    ],
+    [
+      "../app/modules/[slug]/ModuleOralDefense.tsx",
+      "Scrollable full facilitator brief",
+    ],
+    [
+      "../app/diagnostic/DiagnosticExperience.tsx",
+      'Scrollable ${question.codeLanguage ?? "code"} diagnostic example',
+    ],
+  ];
+
+  for (const [relativePath, label] of labelledRegions) {
+    const source = await readFile(
+      new URL(relativePath, import.meta.url),
+      "utf8",
+    );
+    assert.ok(
+      source.includes(label),
+      `${relativePath} keeps an explicit accessible name for its scrollable code`,
+    );
+    assert.match(
+      source,
+      /tabIndex=\{0\}/u,
+      `${relativePath} keeps its scrollable code keyboard-focusable`,
+    );
+  }
 });
 
 test("keeps the local text oral-defense route adaptive, prediction-gated, and learner-controlled", () => {
@@ -348,7 +398,7 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
 
   const html = await response.text();
   assert.match(html, /Module 0 Diagnostic · Atlas Academy/);
-  assert.match(html, /Module 0 · 13 reasoning probes/);
+  assert.match(html, /Module 0 · 20 reasoning probes/);
   assert.match(html, /Which pair is correct at the end\?/);
   assert.match(html, /Choose the model that best predicts the result/);
   assert.match(html, /No penalty for uncertainty/);

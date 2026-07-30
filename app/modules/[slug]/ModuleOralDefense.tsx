@@ -149,7 +149,7 @@ export function ModuleOralDefense({
           </p>
           <details className={styles.liveBriefDetails}>
             <summary>Show the full facilitator brief for manual copying</summary>
-            <pre>
+            <pre aria-label="Scrollable full facilitator brief" tabIndex={0}>
               <code>{prompt}</code>
             </pre>
           </details>

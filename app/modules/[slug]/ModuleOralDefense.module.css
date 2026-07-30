@@ -208,13 +208,13 @@
 }
 
 .liveBriefDetails {
-  border-top: 1px solid rgba(23, 33, 29, 0.14);
+  border-top: 1px solid rgba(255, 253, 247, 0.28);
   margin-top: 1.05rem;
   padding-top: 0.85rem;
 }
 
 .liveBriefDetails summary {
-  color: #24427f;
+  color: #fffdf7;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 800;

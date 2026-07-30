@@ -295,7 +295,7 @@ export function CoursePortal() {
             <p className="kicker">Your first step</p>
             <h2>Fast answers. Deep diagnosis.</h2>
             <p>
-              Thirteen multiple-choice investigations pair carefully designed
+              Twenty multiple-choice investigations pair carefully designed
               distractors with confidence evidence. Each choice explains the
               mental model it reveals and routes you to the exact lesson that
               will strengthen it.
@@ -389,7 +389,7 @@ export function CoursePortal() {
           <section className="reader-section">
             <span className="margin-label">Observe</span>
             <h2>Draw before running</h2>
-            <pre>
+            <pre aria-label="Scrollable Python state-trace example" tabIndex={0}>
               <code>{`original = {"tags": ["python"]}
 history = [original]
 current = original

@@ -25,6 +25,13 @@ type DiagnosticAttempt = ReturnType<typeof createEmptyAttempt>;
 type DiagnosticAction = Parameters<typeof diagnosticReducer>[1];
 type CopyState = "idle" | "copied" | "failed";
 type PersistenceState = "loading" | "saved" | "unavailable";
+type AcademicPrerequisite = {
+  moduleNumber: number;
+  moduleTitle: string;
+  availability: string;
+  lifecycle: string;
+};
+const diagnosticProbeKicker = `Module 0 · ${diagnosticQuestions.length} reasoning probes`;
 
 function reduceDiagnostic(
   state: DiagnosticAttempt,
@@ -274,11 +281,14 @@ export function DiagnosticExperience() {
         >
           <header>
             <p className="kicker">Connected next steps</p>
-            <h2 id="learning-route-title">Your evidence-led learning route</h2>
+            <h2 id="learning-route-title">Your evidence-led repair queue</h2>
             <p>
-              The sequence remains dependency ordered. A diagnostic can focus
-              attention; it cannot erase prerequisites without a transfer
-              check.
+              This prioritized queue sits inside, rather than replaces, the
+              canonical route. A diagnostic can focus attention; it cannot
+              erase prerequisites without a transfer check.
+            </p>
+            <p>
+              <Link href="/route">Open the canonical 60-day route</Link>
             </p>
           </header>
 
@@ -299,6 +309,25 @@ export function DiagnosticExperience() {
                     Open the exact section
                     <span aria-hidden="true"> ↗</span>
                   </Link>
+                  {route.academicPrerequisites.length > 0 ? (
+                    <p className="diagnostic-prerequisite-note">
+                      <strong>Keep the academic route intact:</strong>{" "}
+                      {route.academicPrerequisites.map(
+                        (
+                          prerequisite: AcademicPrerequisite,
+                          prerequisiteIndex: number,
+                        ) => (
+                          <span key={prerequisite.moduleNumber}>
+                            {prerequisiteIndex > 0 ? "; " : ""}
+                            Module {prerequisite.moduleNumber} —{" "}
+                            {prerequisite.moduleTitle}
+                          </span>
+                        ),
+                      )}{" "}
+                      must be secured before this section is treated as a
+                      repair target.
+                    </p>
+                  ) : null}
                 </li>
               ))}
             </ol>
@@ -313,6 +342,88 @@ export function DiagnosticExperience() {
               <Link href="/modules/01-values-state-execution">
                 Open Module 1 <span aria-hidden="true">→</span>
               </Link>
+            </div>
+          )}
+        </section>
+
+        <section
+          className="diagnostic-bridge-plan"
+          aria-labelledby="bridge-plan-title"
+        >
+          <header>
+            <p className="kicker">Adaptive foundation bridges</p>
+            <h2 id="bridge-plan-title">What to rebuild before moving faster</h2>
+            <p>
+              Each recommendation is tied to the reasoning signal that raised
+              it. It starts with a published foundation; a later extension is
+              named only when it is not yet available.
+            </p>
+          </header>
+
+          {result.bridgeRecommendations.length > 0 ? (
+            <ol>
+              {result.bridgeRecommendations.map((recommendation) => (
+                <li key={recommendation.area.id}>
+                  <div>
+                    <p className="diagnostic-bridge-area">
+                      {recommendation.area.label}
+                    </p>
+                    <h3>{recommendation.questionCategory}</h3>
+                    <p>{recommendation.area.whyItMatters}</p>
+                  </div>
+                  <div className="diagnostic-bridge-action">
+                    <p>
+                      Q{String(recommendation.questionNumber).padStart(2, "0")}
+                      {" · "}
+                      <strong>{recommendation.tier}</strong> signal
+                    </p>
+                    <Link href={recommendation.route.href}>
+                      Rebuild with published Module {recommendation.route.moduleNumber}
+                      <span aria-hidden="true"> ↗</span>
+                    </Link>
+                    {recommendation.route.academicPrerequisites.length > 0 ? (
+                      <p className="diagnostic-prerequisite-note">
+                        <strong>
+                          Direct academic prerequisite
+                          {recommendation.route.academicPrerequisites.length === 1
+                            ? ""
+                            : "s"}
+                          :
+                        </strong>{" "}
+                        {recommendation.route.academicPrerequisites.map(
+                          (
+                            prerequisite: AcademicPrerequisite,
+                            prerequisiteIndex: number,
+                          ) => (
+                            <span key={prerequisite.moduleNumber}>
+                              {prerequisiteIndex > 0 ? "; " : ""}
+                              Module {prerequisite.moduleNumber} —{" "}
+                              {prerequisite.moduleTitle}
+                            </span>
+                          ),
+                        )}{" "}
+                        This repair link does not waive that route.
+                      </p>
+                    ) : null}
+                    {recommendation.extension ? (
+                      <p className="diagnostic-extension-boundary">
+                        <strong>
+                          Future extension: Module {recommendation.extension.moduleNumber} {recommendation.extension.title} is {recommendation.extension.status}.
+                        </strong>{" "}
+                        {recommendation.extension.note}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <div className="diagnostic-transfer-note">
+              <strong>No foundation bridge needs automatic repair.</strong>
+              <p>
+                Use an instructor transfer conversation to test your ready
+                models in a new context. The connected route remains intact.
+              </p>
             </div>
           )}
         </section>
@@ -419,7 +530,7 @@ export function DiagnosticExperience() {
     >
       <header className="diagnostic-experience-hero">
         <div>
-          <p className="kicker">Module 0 · 13 reasoning probes</p>
+          <p className="kicker">{diagnosticProbeKicker}</p>
           <h1 id="diagnostic-title">
             Quick to answer.
             <em>Deep enough to route your learning.</em>
@@ -543,7 +654,10 @@ export function DiagnosticExperience() {
               <figcaption>
                 Read before answering · {question.codeLanguage ?? "code"}
               </figcaption>
-              <pre>
+              <pre
+                aria-label={`Scrollable ${question.codeLanguage ?? "code"} diagnostic example`}
+                tabIndex={0}
+              >
                 <code>{question.code}</code>
               </pre>
             </figure>

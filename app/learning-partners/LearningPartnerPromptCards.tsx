@@ -72,7 +72,7 @@ export function LearningPartnerPromptCards({
 
           <details>
             <summary>Show the full copyable startup prompt</summary>
-            <pre>
+            <pre aria-label={`Scrollable ${prompt.title} startup prompt`} tabIndex={0}>
               <code>{prompt.startupPrompt}</code>
             </pre>
           </details>

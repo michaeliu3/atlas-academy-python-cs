@@ -666,7 +666,11 @@ function PatchBayEvidence({
           <p>The smallest visible diff can introduce a data recipient, mutable supply-chain reference, new authority, or loss of recovery.</p>
         </div>
       </div>
-      <pre className={styles.patchCode} aria-label="Small proposed patch">
+      <pre
+        aria-label="Scrollable small proposed patch"
+        className={styles.patchCode}
+        tabIndex={0}
+      >
         <code><span className={styles.patchContext}>def render_release_note(packet):</span>{"\n"}<span className={styles.patchRemove}>-    return local_template(packet)</span>{"\n"}<span className={styles.patchAdd}>+    return hosted_agent.summarize(packet)</span>{"\n\n"}<span className={styles.patchContext}>workflow:</span>{"\n"}<span className={styles.patchRemove}>-  uses: actions/checkout@&lt;pinned-revision&gt;</span>{"\n"}<span className={styles.patchAdd}>+  uses: some-action/checkout-helper@main</span></code>
       </pre>
       <div className={styles.patchQuestions}>

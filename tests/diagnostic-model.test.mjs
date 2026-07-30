@@ -10,6 +10,7 @@ import {
   diagnosticQuestions,
   diagnosticReducer,
   parseStoredAttempt,
+  requiredFoundationAreas,
   toLearningBrief,
   validateDiagnosticDefinition,
 } from "../lib/diagnostic-model.js";
@@ -48,7 +49,7 @@ function answerQuestion(state, question, optionId, confidence) {
   });
 }
 
-test("the diagnostic definition exposes the 13 stable curriculum probes", () => {
+test("the diagnostic definition exposes the 20 stable curriculum probes", () => {
   assert.deepEqual(validateDiagnosticDefinition(), []);
   assert.deepEqual(
     diagnosticQuestions.map((question) => question.id),
@@ -66,15 +67,30 @@ test("the diagnostic definition exposes the 13 stable curriculum probes", () => 
       "artifact-pickle-boundary",
       "sql-three-valued-logic",
       "transaction-replay-identity",
+      "memory-locality-cache-lines",
+      "quantifier-scope-countermodel",
+      "linear-algebra-basis-coordinates",
+      "calculus-gradient-local-change",
+      "probability-conditional-evidence",
+      "optimization-feasible-descent",
+      "ml-evaluation-leakage",
     ],
   );
   assert.deepEqual(
     diagnosticQuestions.map((question) => question.number),
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+      19, 20,
+    ],
+  );
+  assert.deepEqual(
+    diagnosticQuestions.slice(13).map((question) => question.arc),
+    ["IV", "VI", "VI", "VI", "VI", "VI", "VI"],
+    "foundation probes should retain their canonical knowledge-arc labels",
   );
 
   const questionIds = diagnosticQuestions.map((question) => question.id);
-  assert.equal(new Set(questionIds).size, 13);
+  assert.equal(new Set(questionIds).size, 20);
 
   for (const question of diagnosticQuestions) {
     assert.deepEqual(
@@ -107,6 +123,132 @@ test("the diagnostic definition exposes the 13 stable curriculum probes", () => 
       }
     }
   }
+});
+
+test("the intake samples every required foundation and keeps advanced extensions non-routable", () => {
+  assert.deepEqual(
+    requiredFoundationAreas.map((area) => area.id),
+    [
+      "python",
+      "algorithms",
+      "systems",
+      "discrete-math",
+      "linear-algebra",
+      "calculus",
+      "probability",
+      "optimization",
+      "ai-ml",
+    ],
+  );
+
+  const primaryProbeByArea = Object.fromEntries(
+    requiredFoundationAreas.map((area) => [area.id, area.probeQuestionId]),
+  );
+  assert.deepEqual(primaryProbeByArea, {
+    python: "python-state-aliasing",
+    algorithms: "cost-hidden-membership",
+    systems: "memory-locality-cache-lines",
+    "discrete-math": "quantifier-scope-countermodel",
+    "linear-algebra": "linear-algebra-basis-coordinates",
+    calculus: "calculus-gradient-local-change",
+    probability: "probability-conditional-evidence",
+    optimization: "optimization-feasible-descent",
+    "ai-ml": "ml-evaluation-leakage",
+  });
+  for (const area of requiredFoundationAreas) {
+    const probe = diagnosticQuestions.find(
+      (question) => question.id === area.probeQuestionId,
+    );
+    assert.ok(probe, `${area.id} must name an existing probe`);
+    assert.ok(
+      probe.foundationAreas.includes(area.id),
+      `${area.id} probe must declare the area it samples`,
+    );
+  }
+
+  const responsesByQuestionId = Object.fromEntries(
+    diagnosticQuestions.map((question) => {
+      const wrongOption = question.options.find(
+        (option) => option.id !== question.correctOptionId,
+      );
+      return [question.id, revealedResponse(wrongOption.id, "high")];
+    }),
+  );
+  const result = buildDiagnosticResult(attemptWith(responsesByQuestionId));
+  const advancedBridges = result.bridgeRecommendations.filter(
+    (recommendation) => recommendation.extension,
+  );
+
+  assert.deepEqual(
+    advancedBridges.map((recommendation) => ({
+      areaId: recommendation.area.id,
+      moduleNumber: recommendation.extension.moduleNumber,
+      status: recommendation.extension.status,
+    })),
+    [
+      {
+        areaId: "optimization",
+        moduleNumber: 31,
+        status: "authoring-only",
+      },
+      {
+        areaId: "ai-ml",
+        moduleNumber: 35,
+        status: "authoring-only",
+      },
+    ],
+  );
+  for (const recommendation of result.bridgeRecommendations) {
+    assert.ok(
+      recommendation.route.moduleNumber <= 30,
+      `${recommendation.area.id} must start from a published foundation`,
+    );
+    assert.equal(
+      Object.hasOwn(recommendation.extension ?? {}, "href"),
+      false,
+      `${recommendation.area.id} must not expose a route to an unavailable extension`,
+    );
+    assert.ok(
+      Array.isArray(recommendation.route.academicPrerequisites),
+      `${recommendation.area.id} must disclose graph prerequisites for its direct repair link`,
+    );
+  }
+  const transactionQuestion = diagnosticQuestions.find(
+    (question) => question.id === "transaction-replay-identity",
+  );
+  assert.ok(transactionQuestion);
+  const transactionWrongOption = transactionQuestion.options.find(
+    (option) => option.id !== transactionQuestion.correctOptionId,
+  );
+  assert.ok(transactionWrongOption);
+  const transactionResult = buildDiagnosticResult(
+    attemptWith({
+      [transactionQuestion.id]: revealedResponse(
+        transactionWrongOption.id,
+        "high",
+      ),
+    }),
+  );
+  const transactionRepair = transactionResult.bridgeRecommendations.find(
+    (recommendation) => recommendation.route.moduleNumber === 16,
+  );
+  assert.deepEqual(
+    transactionRepair?.route.academicPrerequisites.map(
+      (prerequisite) => prerequisite.moduleNumber,
+    ),
+    [15],
+    "a direct M16 repair link must retain the M15 academic prerequisite",
+  );
+  const brief = toLearningBrief(attemptWith(responsesByQuestionId));
+  assert.match(brief, /Foundation bridge recommendations:/u);
+  assert.match(
+    brief,
+    /Future Module 31 \(Optimization & Information\) remains authoring-only; it is not a route\./u,
+  );
+  assert.match(
+    brief,
+    /Future Module 35 \(Machine Learning & Representation\) remains authoring-only; it is not a route\./u,
+  );
 });
 
 test("stored attempts round-trip only when their version and state are valid", () => {
@@ -306,18 +448,33 @@ test("results prioritize misconceptions, then build one dependency-ordered route
 
   const result = buildDiagnosticResult(attemptWith(responsesByQuestionId));
 
-  assert.equal(result.questionCount, 13);
-  assert.equal(result.answeredCount, 13);
+  assert.equal(result.questionCount, 20);
+  assert.equal(result.answeredCount, 20);
   assert.equal(result.correctCount, 0);
   assert.deepEqual(
     result.prioritySignals.map((signal) => signal.question.number),
-    [13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    [13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20],
     "high-confidence errors should lead the review queue",
   );
   assert.deepEqual(
     result.learningRoute.map((route) => route.moduleNumber),
-    [1, 2, 3, 5, 7, 8, 10, 12, 13, 14, 15, 16, 16],
-    "prerequisite order should outrank raw urgency in the learning route",
+    [
+      1, 2, 3, 5, 27, 7, 8, 10, 12, 13, 14, 15, 16, 16, 17, 28, 29, 29,
+      30, 30,
+    ],
+    "canonical dependency order should outrank raw urgency in the learning route",
+  );
+  const orderedModuleNumbers = result.learningRoute.map(
+    (route) => route.moduleNumber,
+  );
+  assert.ok(
+    orderedModuleNumbers.indexOf(5) < orderedModuleNumbers.indexOf(27) &&
+      orderedModuleNumbers.indexOf(27) < orderedModuleNumbers.indexOf(7),
+    "the canonical M5 → M27 → M6 handoff must remain visible",
+  );
+  assert.ok(
+    orderedModuleNumbers.indexOf(17) < orderedModuleNumbers.indexOf(28),
+    "the canonical M17 → M28 handoff must remain visible",
   );
   assert.equal(
     new Set(result.learningRoute.map((route) => route.href)).size,
@@ -325,9 +482,28 @@ test("results prioritize misconceptions, then build one dependency-ordered route
     "a section should appear at most once",
   );
   assert.deepEqual(
-    result.learningRoute.slice(-2).map((route) => route.questionNumber),
-    [13, 12],
-    "distinct repair sections in one module should remain visible and urgency-ordered",
+    result.learningRoute.slice(-4).map((route) => route.questionNumber),
+    [17, 19, 18, 20],
+    "distinct mathematics and inference repairs remain visible in route order",
+  );
+  assert.deepEqual(
+    result.bridgeRecommendations.map((recommendation) => ({
+      areaId: recommendation.area.id,
+      questionNumber: recommendation.questionNumber,
+      routeModuleNumber: recommendation.route.moduleNumber,
+    })),
+    [
+      { areaId: "python", questionNumber: 13, routeModuleNumber: 16 },
+      { areaId: "algorithms", questionNumber: 4, routeModuleNumber: 5 },
+      { areaId: "systems", questionNumber: 13, routeModuleNumber: 16 },
+      { areaId: "discrete-math", questionNumber: 2, routeModuleNumber: 2 },
+      { areaId: "linear-algebra", questionNumber: 16, routeModuleNumber: 28 },
+      { areaId: "calculus", questionNumber: 17, routeModuleNumber: 29 },
+      { areaId: "probability", questionNumber: 18, routeModuleNumber: 30 },
+      { areaId: "optimization", questionNumber: 19, routeModuleNumber: 29 },
+      { areaId: "ai-ml", questionNumber: 20, routeModuleNumber: 30 },
+    ],
+    "the bridge plan retains the evidence signal while naming a published foundation",
   );
 });
 
@@ -346,10 +522,14 @@ test("the learning brief preserves counts, misconception evidence, and exact rep
 
   assert.match(brief, /Atlas Academy — Module 0 learning brief/u);
   assert.match(brief, new RegExp(`Assessment: ${DIAGNOSTIC_ASSESSMENT_VERSION}`));
-  assert.match(brief, /Completed responses: 2\/13/u);
-  assert.match(brief, /Correct models sampled: 1\/13/u);
+  assert.match(brief, /Completed responses: 2\/20/u);
+  assert.match(brief, /Correct models sampled: 1\/20/u);
   assert.match(brief, /Ready to transfer: 1/u);
   assert.match(brief, /Repair first: 1/u);
+  assert.match(
+    brief,
+    /Connected repair queue \(inside the canonical route\):/u,
+  );
   assert.match(
     brief,
     /Q01 Python state and mental execution: A\/high → repair \[PY_STATE_AUGASSIGN_ALWAYS_REBINDS\]/u,

@@ -142,7 +142,11 @@ const markdownComponents: Components = {
   pre({ children }) {
     const child = Children.toArray(children)[0];
     if (!isValidElement<{ children?: ReactNode; className?: string }>(child)) {
-      return <pre>{children}</pre>;
+      return (
+        <pre aria-label="Scrollable lesson code example" tabIndex={0}>
+          {children}
+        </pre>
+      );
     }
 
     const language =
@@ -157,7 +161,10 @@ const markdownComponents: Components = {
     return (
       <figure className="lesson-code">
         <figcaption>{languageNames[language] ?? language}</figcaption>
-        <pre>
+        <pre
+          aria-label={`Scrollable ${languageNames[language] ?? language} code example`}
+          tabIndex={0}
+        >
           <code className={child.props.className}>{child.props.children}</code>
         </pre>
       </figure>

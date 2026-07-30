@@ -197,7 +197,11 @@ export function ModuleTextOralDefense({
           This draft exists only on this page. It is not graded, stored,
           transmitted, or exported unless you deliberately copy it.
         </p>
-        <pre aria-label="Your concise oral-defense evidence draft" className={styles.evidenceDraft}>
+        <pre
+          aria-label="Scrollable concise oral-defense evidence draft"
+          className={styles.evidenceDraft}
+          tabIndex={0}
+        >
           <code>{evidenceDraft}</code>
         </pre>
         <div className={styles.summaryActions}>

@@ -432,6 +432,7 @@ main {
   align-items: center;
   background: var(--saffron);
   border-radius: 50%;
+  color: var(--ink);
   display: flex;
   flex-direction: column;
   height: 8rem;
@@ -961,6 +962,11 @@ pre {
   margin: 2rem 0;
   overflow-x: auto;
   padding: 1.4rem;
+}
+
+pre:focus-visible {
+  outline: 3px solid #e7b271;
+  outline-offset: -3px;
 }
 
 .object-graph {
@@ -5980,17 +5986,20 @@ main.module-library-shell {
 }
 
 .diagnostic-learning-route,
+.diagnostic-bridge-plan,
 .diagnostic-signal-ledger {
   border-top: 1px solid var(--line);
   padding: clamp(3.5rem, 7vw, 6rem) 0;
 }
 
 .diagnostic-learning-route > header,
+.diagnostic-bridge-plan > header,
 .diagnostic-signal-ledger > header {
   max-width: 760px;
 }
 
 .diagnostic-learning-route h2,
+.diagnostic-bridge-plan h2,
 .diagnostic-signal-ledger h2 {
   font-family: var(--font-serif), serif;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -6000,7 +6009,8 @@ main.module-library-shell {
   margin: 0.6rem 0 1rem;
 }
 
-.diagnostic-learning-route > header > p:last-child {
+.diagnostic-learning-route > header > p:last-child,
+.diagnostic-bridge-plan > header > p:last-child {
   color: var(--muted);
   font-family: var(--font-serif), serif;
   font-size: 1.05rem;
@@ -6008,6 +6018,7 @@ main.module-library-shell {
 }
 
 .diagnostic-learning-route ol,
+.diagnostic-bridge-plan ol,
 .diagnostic-signal-ledger > ol {
   list-style: none;
   margin: 2.5rem 0 0;
@@ -6043,11 +6054,82 @@ main.module-library-shell {
 }
 
 .diagnostic-learning-route li > a,
+.diagnostic-bridge-action > a,
 .diagnostic-transfer-note a {
   color: var(--ink);
   font-size: 0.7rem;
   font-weight: 780;
   text-underline-offset: 0.25em;
+}
+
+.diagnostic-bridge-plan > ol {
+  display: grid;
+  gap: 1rem;
+}
+
+.diagnostic-bridge-plan > ol > li {
+  align-items: start;
+  background: rgba(255, 253, 247, 0.72);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--plum);
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr);
+  padding: 1.25rem;
+}
+
+.diagnostic-bridge-area,
+.diagnostic-bridge-action > p:first-child {
+  color: var(--plum);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.63rem;
+  font-weight: 760;
+  letter-spacing: 0.06em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.diagnostic-bridge-plan h3 {
+  font-family: var(--font-serif), serif;
+  font-size: 1.28rem;
+  font-weight: 560;
+  line-height: 1.15;
+  margin: 0.45rem 0;
+}
+
+.diagnostic-bridge-plan li > div > p:last-child,
+.diagnostic-extension-boundary,
+.diagnostic-prerequisite-note {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.58;
+}
+
+.diagnostic-bridge-action {
+  border-left: 1px solid var(--line);
+  display: grid;
+  gap: 0.72rem;
+  padding-left: 1.15rem;
+}
+
+.diagnostic-bridge-action > a {
+  font-size: 0.72rem;
+  font-weight: 780;
+  text-underline-offset: 0.25em;
+}
+
+.diagnostic-extension-boundary {
+  background: var(--plum-soft);
+  border-left: 3px solid var(--plum);
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.diagnostic-prerequisite-note {
+  background: var(--saffron-soft);
+  border-left: 3px solid var(--saffron);
+  margin: 0;
+  padding: 0.75rem;
 }
 
 .diagnostic-transfer-note {
@@ -6335,6 +6417,17 @@ main.module-library-shell {
     grid-column: 2;
   }
 
+  .diagnostic-bridge-plan > ol > li {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnostic-bridge-action {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 1rem;
+  }
+
   .diagnostic-result-score {
     max-width: 24rem;
   }
@@ -6392,6 +6485,7 @@ main.module-library-shell {
 
   .diagnostic-tier-card,
   .diagnostic-learning-route li,
+  .diagnostic-bridge-plan > ol > li,
   .diagnostic-signal-ledger > ol > li,
   .diagnostic-result-caveat {
     background: transparent !important;
@@ -6400,6 +6494,12 @@ main.module-library-shell {
   }
 
   .diagnostic-learning-route a::after {
+    content: " (" attr(href) ")";
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+
+  .diagnostic-bridge-action > a::after {
     content: " (" attr(href) ")";
     font-weight: 400;
     overflow-wrap: anywhere;

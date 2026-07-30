@@ -74,7 +74,7 @@ export function MermaidDiagram({ source }: MermaidDiagramProps) {
       <figcaption>{label}</figcaption>
       <details className="diagram-source">
         <summary>Diagram source (technical fallback)</summary>
-        <pre>
+        <pre aria-label="Scrollable technical Mermaid diagram source" tabIndex={0}>
           <code className="language-mermaid">{source}</code>
         </pre>
       </details>
