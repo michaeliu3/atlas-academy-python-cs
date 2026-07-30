@@ -47,6 +47,13 @@ actually published.
   it with the canonical release inputs. It remains an authoring-only planning
   artifact: source maps, workbooks, studios, contracts, and release evidence
   are still required before any advanced module can be published.
+- Added a draft-only v2 module-evidence pointer pilot for M21 and M27. It
+  resolves local, Git-tracked evidence anchors and rejects release-shaped
+  claims; it records no human approval and does not change v1 contract or
+  publication state.
+- Added separate learner-controlled Teaching Assistant and Study Partner
+  startup packages to the portal. They are distinct roles for rigorous repair
+  and peer-style rehearsal, not automated grading or background record export.
 
 ## v0.6-capstone (private course milestone)
 

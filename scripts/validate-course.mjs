@@ -13,6 +13,10 @@ import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
+import {
+  loadModuleContractEvidenceRegistry,
+  validateModuleContractEvidenceRegistry,
+} from "./module-contract-evidence.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -157,6 +161,19 @@ export async function validateCourseContracts(
 ) {
   const errors = [];
   const warnings = [];
+  let draftEvidence = null;
+
+  try {
+    const draftRegistry = await loadModuleContractEvidenceRegistry(siteRoot);
+    draftEvidence = await validateModuleContractEvidenceRegistry(draftRegistry, { siteRoot });
+    warnings.push(
+      `Draft v2 evidence pointers resolved for ${draftEvidence.summary.draftPilotModules} pilot module(s); this is not human review or publication evidence.`,
+    );
+  } catch (error) {
+    warnings.push(
+      `Draft v2 evidence-pointer lint is informational and unresolved: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
 
   if (contracts?.schemaVersion !== 1 || contracts?.contractVersion !== "v1") {
     errors.push("module contract registry must use schemaVersion 1 and contractVersion v1.");
@@ -329,6 +346,7 @@ export async function validateCourseContracts(
   return {
     errors,
     warnings,
+    draftEvidence,
     summary: {
       legacyBaselineModules,
       verifiedModules,

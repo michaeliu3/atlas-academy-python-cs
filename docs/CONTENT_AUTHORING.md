@@ -45,6 +45,22 @@ pnpm check:generated
 re-verified legacy module, or a private deployment can be presented as fully
 contract-verified. It must never be weakened merely to make CI green.
 
+### Draft evidence-pointer pilot
+
+`content/course/contracts/module-contract-evidence.v2.json` and
+`scripts/module-contract-evidence.mjs` are a deliberately narrow migration
+pilot for M21 (systems) and M27 (mathematics). They resolve versioned,
+Git-tracked local Markdown paths and visible section anchors for the pieces a
+reviewer must inspect. The pilot's states are deliberately `draft-pointer-map`,
+`not-reviewed`, and `publicationEffect: none`.
+
+A successful pointer resolution proves only that the referenced local artifact
+and heading exist in this revision. It does not prove pedagogical quality,
+source/license correctness, visual accessibility, oral-defense quality, or
+human approval. Do not use it to call a module verified or published. Extend
+the evidence model only after its review fields and release semantics can be
+validated without weakening the v1 strict gate.
+
 ## Authoring order
 
 1. Start from an Atlas incident or design pressure inherited from the prior
