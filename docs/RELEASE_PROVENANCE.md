@@ -101,8 +101,29 @@ source head is also not proof of the generated merge ref that a runner used.
 No historical run is being retroactively certified by this policy. Before it
 can support release evidence, a trusted, default-branch-controlled, read-only
 observer must independently fetch the run and jobs, retain the observed run
-attempt and execution identity, and avoid checkout, execution, cache, or
-artifact use from untrusted pull-request code.
+attempt, and avoid checkout, execution, cache, or artifact use from untrusted
+pull-request code.
+
+### Prospective default-branch metadata observer
+
+`.github/workflows/observe-course-ci-metadata.yml` is a deliberately
+read-only, metadata-only observer. GitHub runs a `workflow_run` workflow only
+after its file exists on the default branch, so the version on this review
+branch is prospective until it is merged there. It has only `actions: read`,
+uses one immutable `actions/github-script` revision, and makes attempt-specific
+read requests for the Course CI run and its jobs. It neither checks out nor
+executes candidate code, and does not touch caches, artifacts, deployments,
+commit statuses, pull-request state, or secrets.
+
+For a successful same-repository pull-request run, it emits a compact
+**source-head-attached CI metadata observation** to its own log after binding
+the run ID, run attempt, source head, workflow identity, and required jobs.
+It does not prove the generated merge ref that Course CI executed, that the
+candidate workflow body matched the policy's source digest, a GitHub Release,
+human review, deployment, or learner readiness. Those missing links require a
+separate, reviewed evidence design. This follows GitHub's guidance that a
+privileged `workflow_run` must not check out untrusted pull-request code or
+trust inputs from the preceding run.
 
 | Source commit | Evidence changed | GitHub Actions evidence | What this establishes | What it does not establish |
 | --- | --- | --- | --- | --- |

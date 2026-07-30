@@ -13,6 +13,12 @@ actually published.
   every required job. This is only a local structural check: it neither fetches
   GitHub nor proves the pull-request execution ref, remote CI, review,
   deployment, publication, or learner readiness.
+- Added a prospective default-branch `workflow_run` observer that has only
+  `actions: read`, reads attempt-specific Course CI metadata, and emits a
+  compact source-head-attached observation. It has no checkout, shell,
+  cache, artifact, deployment, status-write, or candidate-code path. Until it
+  exists on the protected default branch and records a run, it is only a
+  checked-in safety mechanism—not remote CI, execution-ref, or release proof.
 - Added a lifecycle-aware advanced-module contract registry, initially for M31
   only. It resolves 15 Git-tracked planning/research inputs, verifies the
   six-session prerequisite spine and S01–S10/C01–C08 coverage, and explicitly
