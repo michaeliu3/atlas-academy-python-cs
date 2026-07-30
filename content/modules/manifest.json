@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 18,
+  "moduleCount": 19,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,7 +28,7 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Modules 17–18 connect machine execution to OS-mediated processes, virtual memory, open resources, durable publication, and bounded shutdown claims."
+      "description": "Modules 17–19 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and workload-fit evidence."
     }
   ],
   "modules": [
@@ -282,6 +282,20 @@
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
       "prerequisiteSlug": "17-computer-architecture-execution-stack",
       "previousSlug": "17-computer-architecture-execution-stack",
+      "nextSlug": "19-concurrency-parallelism"
+    },
+    {
+      "number": 19,
+      "slug": "19-concurrency-parallelism",
+      "filename": "19_concurrency_parallelism.md",
+      "title": "Concurrency and Parallelism",
+      "summary": "Arc IV: make overlapping work explainable One worker can be correct in isolation while two workers, each doing locally valid work, produce a globally invalid result. Concurrency begins at that seam.",
+      "arcId": "arc-iv",
+      "wordCount": 21775,
+      "estimatedMinutes": 104,
+      "sourceHash": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911",
+      "prerequisiteSlug": "18-operating-systems-resource-mediation",
+      "previousSlug": "18-operating-systems-resource-mediation",
       "nextSlug": null
     }
   ]

@@ -36,7 +36,7 @@ body {
     var(--paper);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
-  min-width: 320px;
+  min-width: 0;
 }
 
 button {
