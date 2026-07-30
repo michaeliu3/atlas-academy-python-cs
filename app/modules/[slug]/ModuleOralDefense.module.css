@@ -207,34 +207,20 @@
   border: 1px solid rgba(23, 33, 29, 0.14);
 }
 
-.textCard details {
+.liveBriefDetails {
   border-top: 1px solid rgba(23, 33, 29, 0.14);
   margin-top: 1.05rem;
   padding-top: 0.85rem;
 }
 
-.textCard summary {
+.liveBriefDetails summary {
   color: #24427f;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 800;
 }
 
-.textAgenda {
-  display: grid;
-  gap: 0.55rem;
-  margin: 1rem 0 0;
-  padding-left: 1.2rem;
-}
-
-.textAgenda li {
-  color: #3e4d44;
-  font-size: 0.87rem;
-  line-height: 1.5;
-  padding-left: 0.2rem;
-}
-
-.textCard pre {
+.liveBriefDetails pre {
   background: rgba(23, 33, 29, 0.06);
   border-radius: 0.75rem;
   font-size: 0.9rem;
@@ -244,6 +230,247 @@
   overflow: auto;
   padding: 0.85rem;
   white-space: pre-wrap;
+}
+
+.textFlow {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.textFlow > h3 {
+  margin-top: 0;
+}
+
+.flowProgress {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.15rem;
+}
+
+.flowProgress span {
+  color: #24427f;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.flowProgress progress {
+  accent-color: var(--cobalt);
+  block-size: 0.55rem;
+  inline-size: 100%;
+}
+
+.flowForm {
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(23, 33, 29, 0.13);
+  border-radius: 0.85rem;
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 0.15rem;
+  padding: 1rem;
+}
+
+.flowForm h4,
+.hintLadder h5 {
+  color: #24322b;
+  font-family: var(--font-serif), serif;
+  font-size: 1.13rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.flowForm > label {
+  color: #34463d;
+  font-size: 0.84rem;
+  font-weight: 780;
+  line-height: 1.35;
+}
+
+.flowForm textarea {
+  background: #fffdf7;
+  border: 1px solid rgba(23, 33, 29, 0.3);
+  border-radius: 0.65rem;
+  color: #24322b;
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-block-size: 8rem;
+  padding: 0.72rem;
+  resize: vertical;
+}
+
+.flowForm textarea::placeholder {
+  color: #667069;
+}
+
+.flowForm textarea:focus-visible,
+.flowForm button:focus-visible,
+.summaryActions button:focus-visible,
+.liveBriefDetails summary:focus-visible {
+  outline: 3px solid #c77c2a;
+  outline-offset: 3px;
+}
+
+.confidenceFieldset {
+  border: 1px solid rgba(49, 87, 164, 0.3);
+  border-radius: 0.72rem;
+  margin: 0;
+  padding: 0.78rem;
+}
+
+.confidenceFieldset legend {
+  color: #24427f;
+  font-size: 0.84rem;
+  font-weight: 800;
+  padding: 0 0.25rem;
+}
+
+.confidenceFieldset > p,
+.hintLadder > p,
+.gateNote,
+.flowStatus {
+  color: #4f5d55;
+  font-size: 0.79rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.confidenceFieldset > div {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.7rem;
+}
+
+.confidenceFieldset label,
+.summaryApproval {
+  align-items: start;
+  color: #33433b;
+  display: flex;
+  font-size: 0.81rem;
+  gap: 0.48rem;
+  line-height: 1.4;
+}
+
+.confidenceFieldset input,
+.summaryApproval input {
+  accent-color: var(--cobalt);
+  block-size: 1rem;
+  flex: 0 0 auto;
+  inline-size: 1rem;
+  margin: 0.08rem 0 0;
+}
+
+.predictionGate {
+  background: rgba(199, 124, 42, 0.12);
+  border-inline-start: 3px solid #a46018;
+  color: #673d13 !important;
+  font-size: 0.81rem !important;
+  font-weight: 700;
+  padding: 0.62rem 0.72rem;
+}
+
+.hintLadder {
+  background: rgba(49, 87, 164, 0.07);
+  border: 1px solid rgba(49, 87, 164, 0.2);
+  border-radius: 0.72rem;
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.82rem;
+}
+
+.hintLadder ol {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding-inline-start: 1.25rem;
+}
+
+.hintLadder li {
+  color: #34463d;
+  font-size: 0.82rem;
+  line-height: 1.48;
+}
+
+.flowActions,
+.summaryButtons {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.flowActions button,
+.summaryButtons button,
+.hintButton {
+  background: var(--ink);
+  border: 0;
+  border-radius: 999px;
+  color: #fffdf7;
+  cursor: pointer;
+  font-size: 0.79rem;
+  font-weight: 800;
+  line-height: 1.2;
+  padding: 0.68rem 0.9rem;
+}
+
+.hintButton {
+  justify-self: start;
+}
+
+.flowActions button:hover,
+.summaryButtons button:hover,
+.hintButton:hover {
+  background: var(--plum);
+}
+
+.secondaryButton {
+  background: rgba(255, 253, 247, 0.8) !important;
+  border: 1px solid rgba(23, 33, 29, 0.28) !important;
+  color: #34463d !important;
+}
+
+.secondaryButton:hover {
+  background: #f3dfc5 !important;
+}
+
+.flowActions button[aria-disabled="true"],
+.hintButton[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.summaryButtons button:disabled,
+.flowActions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.flowStatus {
+  min-block-size: 1.2rem;
+}
+
+.evidenceDraft {
+  background: rgba(23, 33, 29, 0.07);
+  border: 1px solid rgba(23, 33, 29, 0.14);
+  border-radius: 0.72rem;
+  color: #34463d;
+  font-size: 0.81rem;
+  line-height: 1.5;
+  margin: 0;
+  max-block-size: 24rem;
+  overflow: auto;
+  padding: 0.85rem;
+  white-space: pre-wrap;
+}
+
+.summaryActions {
+  display: grid;
+  gap: 0.75rem;
 }
 
 .evidence {
@@ -267,47 +494,8 @@
   margin-bottom: 0.3rem;
 }
 
-.recordAction {
-  display: grid;
-  gap: 0.7rem;
-}
-
-.recordAction label {
-  align-items: start;
-  color: #405047;
-  display: flex;
-  font-size: 0.82rem;
-  gap: 0.55rem;
-  line-height: 1.45;
-}
-
-.recordAction input {
-  accent-color: var(--cobalt);
-  height: 1rem;
-  margin: 0.12rem 0 0;
-  width: 1rem;
-}
-
-.recordAction button {
-  background: var(--ink);
-  border: 0;
-  border-radius: 999px;
-  color: #fffdf7;
-  cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 800;
-  justify-self: start;
-  padding: 0.68rem 0.9rem;
-}
-
-.recordAction button:hover,
-.recordAction button:focus-visible {
-  background: var(--plum);
-}
-
-.recordAction button:disabled {
-  background: #a6aea7;
-  cursor: not-allowed;
+.evidencePrivacy {
+  margin: 0;
 }
 
 .rubric {
@@ -326,6 +514,10 @@
   }
 
   .moduleFocus {
+    grid-template-columns: 1fr;
+  }
+
+  .confidenceFieldset > div {
     grid-template-columns: 1fr;
   }
 
@@ -366,10 +558,38 @@
     grid-template-columns: 1fr;
     gap: 0.3rem;
   }
+
+  .flowActions,
+  .summaryButtons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .flowActions button,
+  .summaryButtons button {
+    inline-size: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .liveCard button {
+  .liveCard button,
+  .flowForm button,
+  .summaryActions button {
     transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .flowForm,
+  .hintLadder,
+  .confidenceFieldset,
+  .evidenceDraft {
+    border-color: CanvasText;
+  }
+
+  .flowActions button,
+  .summaryButtons button,
+  .hintButton {
+    border: 1px solid ButtonText;
   }
 }

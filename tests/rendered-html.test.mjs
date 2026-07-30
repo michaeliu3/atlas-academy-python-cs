@@ -3,6 +3,15 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { diagnosticQuestions } from "../lib/diagnostic-model.js";
 import { extractTableOfContents } from "../lib/heading-ids.js";
+import {
+  buildTextDefenseEvidenceDraft,
+  canAdvanceTextDefenseStep,
+  canCopyTextDefenseEvidence,
+  canRevealTextDefenseHint,
+  createTextDefensePlan,
+  getTextDefenseHint,
+  textDefenseStepIds,
+} from "../lib/oral-defense-text-flow.js";
 
 async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -137,10 +146,14 @@ test("keeps landing selection and legacy studio tabs keyboard-accessible", async
 });
 
 test("each Core-open module reader keeps the supportive oral-defense route", async () => {
-  const [page, oralDefense, oralGuide] = await Promise.all([
+  const [page, oralDefense, textDefense, oralGuide] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(
       new URL("../app/modules/[slug]/ModuleOralDefense.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleTextOralDefense.tsx", import.meta.url),
       "utf8",
     ),
     readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
@@ -149,15 +162,28 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
   assert.match(page, /<ModuleOralDefense courseModule=\{courseModule\} \/>/);
   assert.match(oralDefense, /Oral defense: a conversation, not a verdict\./);
   assert.match(oralDefense, /GPT Live Chat/);
-  assert.match(oralDefense, /Equivalent text route/);
-  assert.match(oralDefense, /Do not store raw voice recordings/);
+  assert.match(oralDefense, /ModuleTextOralDefense/);
+  assert.match(oralDefense, /Do not keep raw voice recordings/);
   assert.match(oralDefense, /Do not produce a bare pass\/fail verdict/);
   assert.match(oralDefense, /prediction-before-reveal/);
   assert.match(oralDefense, /What would change your mind\?/);
   assert.match(oralDefense, /Ask whether I approve saving only that concise summary/);
-  assert.match(oralDefense, /checked=\{recordApproved\}/);
-  assert.match(oralDefense, /disabled=\{!recordApproved\}/);
-  assert.match(oralDefense, /I approve copying only this concise evidence record/);
+  assert.match(textDefense, /Equivalent text conversation/);
+  assert.match(textDefense, /Work through one question at a time\./);
+  assert.match(textDefense, /Prediction before reveal/);
+  assert.match(textDefense, /Optional hint ladder/);
+  assert.match(textDefense, /aria-disabled=\{!canRevealHint\}/);
+  assert.match(textDefense, /role="status"/);
+  assert.match(textDefense, /checked=\{summaryApproved\}/);
+  assert.match(textDefense, /disabled=\{!summaryApproved\}/);
+  assert.match(textDefense, /Copy approved evidence summary/);
+  assert.match(textDefense, /does not\s+automatically store or export/);
+  assert.match(textDefense, /restartFocusRequested\.current = true/);
+  assert.match(
+    textDefense,
+    /activeStepIndex > 0 \|\| restartFocusRequested\.current/,
+  );
+  assert.doesNotMatch(textDefense, /localStorage|\bfetch\s*\(/);
   assert.match(oralGuide, /bindings, object identity, mutation, and frame-local state/);
   assert.match(oralGuide, /a release argument joining architecture, invariant/);
   assert.match(oralGuide, /formal definition and assumptions/);
@@ -168,12 +194,83 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
   const response = await render("/modules/04-logic-sets-relations-graphs-proof");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Post-module learning conversation/);
-  assert.match(html, /Oral defense: a conversation, not a verdict\./);
-  assert.match(html, /15–20 thoughtful minutes/);
-  assert.match(html, /Equivalent text route/);
-  assert.match(html, /A small, privacy-respecting record/);
-  assert.match(html, /formative conversation, not a pass\/fail exam/i);
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(readable, /Post-module learning conversation/);
+  assert.match(readable, /Oral defense: a conversation, not a verdict\./);
+  assert.match(readable, /15–20 thoughtful minutes/);
+  assert.match(readable, /Equivalent text conversation/);
+  assert.match(readable, /Work through one question at a time\./);
+  assert.match(readable, /Question 1 of 5/);
+  assert.match(readable, /Your plain-language explanation/);
+  assert.match(readable, /A small, learner-controlled record/);
+  assert.match(readable, /formative conversation, not a pass\/fail exam/i);
+});
+
+test("keeps the local text oral-defense route adaptive, prediction-gated, and learner-controlled", () => {
+  const guide = {
+    centralModel: "a representation invariant",
+    traceOrDerivation: "predict a short trace before seeing evidence",
+    misconception: "a plausible shortcut",
+    boundary: "what a finite observation does not establish",
+    transfer: "a new design decision that needs the same model",
+  };
+  const plan = createTextDefensePlan(guide);
+
+  assert.deepEqual(
+    plan.map((step) => step.id),
+    textDefenseStepIds,
+    "the text route keeps the Live brief's five learning moves in order",
+  );
+  assert.equal(plan[1].predictionBeforeReveal, true);
+  assert.equal(plan[1].requiresConfidence, true);
+  assert.match(plan[1].prompt, /what would change your mind/i);
+  assert.equal(
+    canAdvanceTextDefenseStep(plan[1], "I predict the invariant holds.", null),
+    false,
+    "a prediction alone cannot unlock the trace step",
+  );
+  assert.equal(
+    canRevealTextDefenseHint(plan[1], "", 2),
+    false,
+    "hints stay hidden until the learner has made a prediction and calibrated confidence",
+  );
+  assert.equal(
+    canRevealTextDefenseHint(plan[1], "I predict a shared alias changes.", 2),
+    true,
+  );
+  assert.match(
+    getTextDefenseHint(plan[1], 0, 1),
+    /smaller starting point/i,
+    "low confidence receives a smaller first hint",
+  );
+  assert.match(
+    getTextDefenseHint(plan[1], 0, 4),
+    /stress-test/i,
+    "higher confidence receives a boundary-checking first hint",
+  );
+  assert.match(plan[2].prompt, /finite observation/i);
+  assert.match(plan[3].prompt, /new design decision/i);
+  assert.match(plan[4].prompt, /fragile/i);
+  assert.match(plan[4].prompt, /retrieval/i);
+
+  const draft = buildTextDefenseEvidenceDraft({
+    moduleNumber: 4,
+    moduleTitle: "Logic",
+    guide,
+    answers: {
+      explain: "The invariant states what remains true.",
+      predict: "The trace should preserve the stated relation.",
+      boundary: "One example cannot prove the universal claim.",
+      transfer: "I would define the invariant before choosing an API.",
+      reflect: "I need to revisit quantifiers.",
+    },
+    confidence: 2,
+  });
+  assert.match(draft, /Module 4: Logic/);
+  assert.match(draft, /Fragile idea: I need to revisit quantifiers\./);
+  assert.match(draft, /Retrieval prompt:/);
+  assert.equal(canCopyTextDefenseEvidence(false), false);
+  assert.equal(canCopyTextDefenseEvidence(true), true);
 });
 
 test("renders the truthful prerequisite-first 60-day Atlas route", async () => {

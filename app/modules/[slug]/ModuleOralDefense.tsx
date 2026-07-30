@@ -7,13 +7,14 @@ import {
   lensInstruction,
   type OralDefenseGuide,
 } from "@/lib/oral-defense-guide";
+import { ModuleTextOralDefense } from "./ModuleTextOralDefense";
 import styles from "./ModuleOralDefense.module.css";
 
 type ModuleOralDefenseProps = {
   courseModule: CourseModule;
 };
 
-type CopyState = "idle" | "brief-copied" | "record-copied" | "fallback";
+type CopyState = "idle" | "brief-copied" | "fallback";
 
 const conversationMoves = [
   {
@@ -53,31 +54,12 @@ Begin with a plain-language invitation and the five-move agenda: explain the mod
 Evaluate reasoning, assumptions, evidence, counterexample/debugging skill, transfer, and reflection—not speed, accent, polish, or memorized phrasing. Do not ask for personal or private data. At the end, give me a concise evidence summary with: demonstrated models, fragile ideas, one misconception repaired, calibrated confidence, one retrieval prompt, and the smallest next bridge. Ask whether I approve saving only that concise summary to my private learning record before I copy it. Do not produce a bare pass/fail verdict.`;
 }
 
-function notionRecordTemplate(courseModule: CourseModule, guide: OralDefenseGuide) {
-  return `Atlas Academy — Module ${courseModule.number}: ${courseModule.title}
-Oral defense evidence record
-
-I approve saving this concise record: yes / not yet
-Central model: ${guide.centralModel}
-Demonstrated model or reasoning:
-Trace / derivation / artifact discussed:
-Assumption, counterexample, or failure boundary:
-Misconception repaired or unresolved question:
-Confidence calibration:
-Retrieval prompt:
-Smallest next bridge:
-
-Privacy check: no raw voice recording, sensitive personal content, or unnecessary transcript included.`;
-}
-
 export function ModuleOralDefense({
   courseModule,
 }: ModuleOralDefenseProps) {
   const [copyState, setCopyState] = useState<CopyState>("idle");
-  const [recordApproved, setRecordApproved] = useState(false);
   const guide = getOralDefenseGuide(courseModule.number);
   const prompt = liveChatBrief(courseModule, guide);
-  const recordTemplate = notionRecordTemplate(courseModule, guide);
 
   const copyText = async (text: string, successState: CopyState) => {
     try {
@@ -165,34 +147,23 @@ export function ModuleOralDefense({
             {copyState === "fallback" &&
               "Copy is unavailable here. Select the detailed text below and paste it into your chat."}
           </p>
-        </div>
-
-        <div className={styles.textCard}>
-          <p className={styles.cardEyebrow}>Equivalent text route</p>
-          <h3>Use a fully equivalent text conversation without voice.</h3>
-          <p>
-            Read the agenda aloud, type your answer, draw a diagram, or paste a
-            small code trace. Voice is never required to demonstrate reasoning.
-          </p>
-          <ol className={styles.textAgenda}>
-            <li>Explain: {guide.centralModel}</li>
-            <li>Show: {guide.traceOrDerivation}</li>
-            <li>Stress: {guide.boundary}</li>
-            <li>Transfer: {guide.transfer}</li>
-          </ol>
-          <details>
-            <summary>Show the full copyable facilitator brief</summary>
+          <details className={styles.liveBriefDetails}>
+            <summary>Show the full facilitator brief for manual copying</summary>
             <pre>
               <code>{prompt}</code>
             </pre>
           </details>
+        </div>
+
+        <div className={styles.textCard}>
+          <ModuleTextOralDefense courseModule={courseModule} guide={guide} />
         </div>
       </div>
 
       <div className={styles.evidence}>
         <div>
           <p className={styles.cardEyebrow}>What to keep</p>
-          <h3>A small, privacy-respecting record</h3>
+          <h3>A small, learner-controlled record</h3>
         </div>
         <ul>
           <li>One model you could explain and defend.</li>
@@ -200,35 +171,13 @@ export function ModuleOralDefense({
           <li>One repaired misconception or unanswered question.</li>
           <li>One retrieval prompt and smallest next bridge.</li>
         </ul>
-        <div className={styles.recordAction}>
-          <label>
-            <input
-              checked={recordApproved}
-              onChange={(event) => setRecordApproved(event.target.checked)}
-              type="checkbox"
-            />
-            I approve copying only this concise evidence record to my Notion notebook.
-          </label>
-          <button
-            disabled={!recordApproved}
-            onClick={() => copyText(recordTemplate, "record-copied")}
-            type="button"
-          >
-            Copy approved record template
-          </button>
-          <p aria-live="polite">
-            {copyState === "record-copied" &&
-              "The concise template is ready to complete and paste into Notion."}
-            {copyState === "fallback" &&
-              "The portal cannot copy here. Use the visible agenda and save only your approved summary."}
-            {!copyState.includes("copied") &&
-              "Atlas does not connect to Notion or store audio from this page."}
-          </p>
-          <p>
-            Do not store raw voice recordings, sensitive personal content, or an
-            unnecessary transcript.
-          </p>
-        </div>
+        <p className={styles.evidencePrivacy}>
+          The guided text route creates an optional local draft only after you
+          reflect; it is not sent or saved by Atlas. The Live brief asks the
+          facilitator to request the same approval before you copy a summary.
+          Do not keep raw voice recordings, sensitive personal content, or an
+          unnecessary transcript.
+        </p>
       </div>
 
       <p className={styles.rubric}>
