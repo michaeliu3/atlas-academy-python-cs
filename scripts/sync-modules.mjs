@@ -20,6 +20,12 @@ const contractPath = resolve(
   "module-contracts.v1.json",
 );
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v1.json");
+const performanceBudgetPolicyPath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "client-performance-budget.v1.json",
+);
 const manifestPath = resolve(moduleDirectory, "manifest.json");
 const moduleContentPath = resolve(moduleDirectory, "module-content.ts");
 const releaseInputsPath = resolve(
@@ -154,6 +160,7 @@ const contentEntries = [];
 const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
 const releaseInputPaths = new Set([
   graphPath,
+  performanceBudgetPolicyPath,
   contractPath,
   advancedModuleBridgePath(siteRoot),
   releaseInputPolicyPath(siteRoot),
@@ -233,6 +240,7 @@ for (const projectedModule of projectedModules) {
 }
 
 await requireFile(contractPath, "Module contract registry");
+await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
 for (const path of releaseInputPolicy.downloadPaths) {
   await requireFile(path, "Allowlisted local teaching artifact");

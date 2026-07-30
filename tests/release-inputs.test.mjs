@@ -34,6 +34,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   const paths = ledger.inputs.map(({ path }) => path);
   assert.deepEqual(paths, [...paths].sort(comparePaths));
   assert.ok(paths.includes("content/course/course-graph.v1.json"));
+  assert.ok(paths.includes("content/course/client-performance-budget.v1.json"));
   assert.ok(paths.includes("content/course/contracts/module-contracts.v1.json"));
   assert.ok(paths.includes(advancedModuleBridgeRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
