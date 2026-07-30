@@ -8,7 +8,7 @@ or project evidence shows a necessary bridge.
 
 - [x] Modules 0–22: connected workbooks, diagnostics, projects, visual
   studios where conceptually valuable, and local models where appropriate.
-- [x] Private portal deployment through Module 25.
+- [x] Private portal deployment through Module 26.
 - [x] Lead Instructor, TA, Study Partner, and Notion learning-record structure.
 - [x] GitHub CI, documentation, versioned releases, and repository issue
   workflow.
@@ -18,9 +18,8 @@ or project evidence shows a necessary bridge.
 - [x] Module 23 — programming languages, interpreters, bounded evaluation.
 - [x] Module 24 — CPython, performance, and memory evidence.
 - [x] Module 25 — evidence-grounded intelligent and human-centered systems.
-- [ ] Module 26 — systems capstone, open-source stewardship, and oral
-  architecture defense. The release candidate is locally verified; this item
-  closes only after its private deployment and release evidence exist.
+- [x] Module 26 — systems capstone, open-source stewardship, and oral
+  architecture defense, with private deployment and versioned release evidence.
 
 ## 45-day first-pass checkpoints
 
