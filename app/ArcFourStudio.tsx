@@ -7,6 +7,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { ConcurrencyStudio } from "./ConcurrencyStudio";
+import { NetworkProtocolStudio } from "./NetworkProtocolStudio";
 import { OperatingSystemsStudio } from "./OperatingSystemsStudio";
 
 type ArcFourStudioProps = {
@@ -49,13 +50,13 @@ const arcModules = [
   },
   {
     number: "20",
-    status: "Forward handoff",
-    href: null,
-    title: "Networks & protocols",
-    question: "How do bytes become a conversation across machines?",
+    status: "Published",
+    href: "/modules/20-networks-application-protocols",
+    title: "Networks & application protocols",
+    question: "How do local bytes become bounded remote knowledge?",
     inherits: "Concurrent processes with explicit I/O and failure boundaries.",
     handoff:
-      "Layered protocols, framing, naming, reliability, and observable network behavior.",
+      "Names, endpoint candidates, framing, server-local decisions, retries, and scope-labelled evidence.",
   },
   {
     number: "21",
@@ -378,7 +379,7 @@ function tabId(view: StudioView) {
 export function ArcFourStudio({
   onOpenDurableSoftware,
 }: ArcFourStudioProps) {
-  const [activeModule, setActiveModule] = useState(2);
+  const [activeModule, setActiveModule] = useState(3);
   const [activeView, setActiveView] = useState<StudioView>("stack");
   const [activeLayer, setActiveLayer] = useState(0);
   const [traceStep, setTraceStep] = useState(0);
@@ -442,11 +443,11 @@ export function ArcFourStudio({
           <div className="arc-four-hero-actions">
             <Link
               className="primary-action arc-four-primary"
-              href="/modules/19-concurrency-parallelism"
+              href="/modules/20-networks-application-protocols"
             >
-              Enter the concurrency observatory <span aria-hidden="true">→</span>
+              Enter the protocol observatory <span aria-hidden="true">→</span>
             </Link>
-            <span>Modules 17–19 are published · Modules 20–22 are forward handoffs</span>
+            <span>Modules 17–20 are published · Modules 21–22 are forward handoffs</span>
           </div>
         </div>
 
@@ -552,7 +553,7 @@ export function ArcFourStudio({
             ) : (
               <p className="forward-note">
                 This card marks a dependency boundary, not a published lesson.
-                Modules 17–19 name what this later module must inherit.
+                Modules 17–20 name what this later module must inherit.
               </p>
             )}
           </div>
@@ -834,18 +835,20 @@ export function ArcFourStudio({
 
       <OperatingSystemsStudio />
       <ConcurrencyStudio />
+      <NetworkProtocolStudio />
 
       <section className="arc-four-bridge">
         <div>
           <p className="kicker">The Arc IV discipline</p>
           <h2>Explain across layers. Conclude within evidence.</h2>
           <p>
-            Module 17 supplies the representation, machine, hierarchy, and
+            Module 17 supplies representation, machine, hierarchy, and
             observation vocabulary. Module 18 adds OS mediation, ownership,
             lifetime, and failure. Module 19 adds overlapping histories,
-            synchronization, progress, and model choice. Modules 20–22 add
-            network, distributed, and adversarial conditions without erasing
-            those boundaries.
+            synchronization, progress, and model choice. Module 20 carries a
+            local result across names, endpoints, bytes, frames, decisions,
+            retries, and explicit unknowns. Modules 21–22 widen that protocol
+            boundary into distributed and adversarial conditions.
           </p>
         </div>
         <div className="arc-four-bridge-map" aria-label="Arc IV knowledge bridge">
@@ -871,9 +874,9 @@ export function ArcFourStudio({
           <span>Latest published workbook · complete models, labs, quiz, and project</span>
           <Link
             className="primary-action arc-four-primary"
-            href="/modules/19-concurrency-parallelism"
+            href="/modules/20-networks-application-protocols"
           >
-            Enter Module 19 <span aria-hidden="true">→</span>
+            Enter Module 20 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </footer>

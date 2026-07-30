@@ -74,10 +74,34 @@ const publishedModule19Tests = resolve(
   "downloads",
   "test_module19_reference.py",
 );
+const canonicalModule20Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module20_reference.py",
+);
+const publishedModule20Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module20_reference.py",
+);
+const canonicalModule20Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module20_reference.py",
+);
+const publishedModule20Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module20_reference.py",
+);
 const sourceDirectory = await access(canonicalSourceDirectory)
   .then(() => canonicalSourceDirectory)
   .catch(() => outputDirectory);
-const publishedThrough = 19;
+const publishedThrough = 20;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -120,7 +144,7 @@ const arcs = [
     title: "Machine & network",
     range: "Modules 17–22",
     description:
-      "Modules 17–19 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and workload-fit evidence.",
+      "Modules 17–20 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and evidence-aware network protocols.",
     start: 17,
     end: 22,
   },
@@ -280,6 +304,32 @@ if (
   await writeIfChanged(
     publishedModule19Tests,
     module19Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module20ReferenceSource = await access(canonicalModule20Reference)
+  .then(() => canonicalModule20Reference)
+  .catch(() => publishedModule20Reference);
+const module20Reference = await readFile(module20ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule20Reference,
+    module20Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module20TestsSource = await access(canonicalModule20Tests)
+  .then(() => canonicalModule20Tests)
+  .catch(() => publishedModule20Tests);
+const module20Tests = await readFile(module20TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule20Tests,
+    module20Tests,
   )
 ) {
   changedFiles += 1;

@@ -14,6 +14,7 @@ import { ModuleMarkdown } from "./ModuleMarkdown";
 import { ModuleNavigation } from "./ModuleNavigation";
 import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
+import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -83,6 +84,10 @@ export default async function ModulePage({ params }: ModulePageProps) {
             </div>
           </dl>
         </header>
+
+        {slug === "20-networks-application-protocols" && (
+          <NetworkProtocolStudio />
+        )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
 

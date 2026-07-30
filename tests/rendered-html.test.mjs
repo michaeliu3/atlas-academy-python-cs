@@ -195,7 +195,7 @@ test("Module 18 OS studio preserves its canonical interactive contract", async (
   assert.match(studio, /const resetStudio = \(\) =>/);
 });
 
-test("Module 19 preserves its invariant, six-view shell, and latest-module landing", async () => {
+test("Module 19 preserves its invariant and six-view shell", async () => {
   const studioUrl = new URL("../app/ConcurrencyStudio.tsx", import.meta.url);
   const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
   const [studio, arc] = await Promise.all([
@@ -208,11 +208,6 @@ test("Module 19 preserves its invariant, six-view shell, and latest-module landi
   assert.ok(studio.includes(exactInvariant));
   assert.match(arc, /<ConcurrencyStudio \/>/);
   assert.match(arc, /href: "\/modules\/19-concurrency-parallelism"/);
-  assert.match(
-    arc,
-    /const \[activeModule, setActiveModule\] = useState\(2\)/,
-    "Arc IV should open its latest published module, Module 19",
-  );
 
   for (const viewLabel of [
     "History explorer",
@@ -258,6 +253,75 @@ test("Module 19 preserves its invariant, six-view shell, and latest-module landi
   assert.match(studio, /Revise after evidence/);
   assert.match(studio, /What this proves/);
   assert.match(studio, /What remains unknown/);
+});
+
+test("Module 20 preserves its invariant, six-view observatory, and latest-module landing", async () => {
+  const studioUrl = new URL("../app/NetworkProtocolStudio.tsx", import.meta.url);
+  const styleUrl = new URL("../app/NetworkProtocolStudio.module.css", import.meta.url);
+  const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
+  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
+  const [studio, style, arc, page] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(styleUrl, "utf8"),
+    readFile(arcUrl, "utf8"),
+    readFile(pageUrl, "utf8"),
+  ]);
+
+  const exactInvariant =
+    "Every Atlas remote publication operation has one stable operation ID and canonical request digest. The client records the name-resolution and endpoint-attempt boundary, sends only a complete declared request framing, and never infers remote receipt, parsing, decision, commit, or acknowledgement from a local send, connection close, timeout, or retry. The server admits a complete valid request, records one decision for the pair (operation ID, request digest) before returning a response, replays that decision for an identical duplicate, and rejects reuse of the operation ID with a different digest. Only a valid matching response or a subsequent declared status lookup can confirm the server's recorded decision; every ambiguous client outcome remains explicitly UNKNOWN until resolved.";
+  assert.ok(studio.includes(exactInvariant));
+  assert.match(arc, /<NetworkProtocolStudio \/>/);
+  assert.match(arc, /href: "\/modules\/20-networks-application-protocols"/);
+  assert.match(
+    arc,
+    /const \[activeModule, setActiveModule\] = useState\(3\)/,
+    "Arc IV should open its latest published module, Module 20",
+  );
+  assert.match(page, /slug === "20-networks-application-protocols"/);
+  assert.match(page, /<NetworkProtocolStudio \/>/);
+
+  for (const viewLabel of [
+    "Name → candidate",
+    "Stream → frame",
+    "Evidence ladder",
+    "HTTP + Atlas",
+    "Unknown → retry",
+    "Patch auditor",
+  ]) {
+    assert.ok(studio.includes(`label: "${viewLabel}"`), viewLabel);
+  }
+
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /aria-controls=\{panelId\(view\.id\)\}/);
+  assert.match(studio, /aria-selected=\{activeView === view\.id\}/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /aria-labelledby="network-protocol-studio-title"/);
+  assert.match(studio, /aria-label="Exploration coverage: revealed protocol studio views"/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.doesNotMatch(studio, /window\.confirm/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+
+  assert.match(studio, /\(\[1, 2, 3, 4\] as const\)/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each observatory view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
+  assert.match(studio, /record\.revealed &&/);
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /storageReady/);
+  assert.match(studio, /declared length/);
+  assert.match(studio, /UNKNOWN/);
+  assert.match(studio, /Idempotency-Key/);
+  assert.match(studio, /scope-labelled model evidence/);
 });
 
 test("Module 19 withholds each view's answer-bearing evidence until prediction and confidence", async () => {
@@ -574,25 +638,26 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–19 exactly once", async () => {
+test("generated module manifest covers Modules 1–20 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 19);
+  assert.equal(manifest.moduleCount, 20);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 19 }, (_, index) => index + 1),
+    Array.from({ length: 20 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 19);
+  assert.equal(new Set(slugs).size, 20);
   assert.equal(manifest.arcs.length, 4);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
   const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
   const module18 = manifest.modules.find((courseModule) => courseModule.number === 18);
   const module19 = manifest.modules.find((courseModule) => courseModule.number === 19);
+  const module20 = manifest.modules.find((courseModule) => courseModule.number === 20);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -605,7 +670,10 @@ test("generated module manifest covers Modules 1–19 exactly once", async () =>
   assert.equal(module18.nextSlug, module19.slug);
   assert.equal(module19.previousSlug, module18.slug);
   assert.equal(module19.prerequisiteSlug, module18.slug);
-  assert.equal(module19.nextSlug, null);
+  assert.equal(module19.nextSlug, module20.slug);
+  assert.equal(module20.previousSlug, module19.slug);
+  assert.equal(module20.prerequisiteSlug, module19.slug);
+  assert.equal(module20.nextSlug, null);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -648,7 +716,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Computer Architecture and the Execution Stack/);
   assert.match(html, /Operating Systems and Resource Mediation/);
   assert.match(html, /Concurrency and Parallelism/);
-  assert.match(html, /<dt>19<\/dt>/);
+  assert.match(html, /Networks and Application Protocols/);
+  assert.match(html, /<dt>20<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -896,4 +965,61 @@ test("renders the finalized concurrency-and-parallelism workbook", async () => {
   assert.match(reference, /cancellation_causes/);
   assert.match(referenceTests, /import module19_reference as reference/);
   assert.match(referenceTests, /Module19ReferenceTests/);
+});
+
+test("renders the finalized networks-and-application-protocols workbook", async () => {
+  const response = await render("/modules/20-networks-application-protocols");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 20: Networks and Application Protocols · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 20 workbook/);
+  assert.match(html, /Protocol observatory/);
+  assert.match(html, /Cross the boundary\./);
+  assert.match(html, /A name is not a remote effect/);
+  assert.match(html, /Transport carries bytes, not your request/);
+  assert.match(html, /A response is evidence with a scope/);
+  assert.match(html, /HTTP gives semantics; Atlas still owns policy/);
+  assert.match(html, /Retry is an epistemic problem before it is a loop/);
+  assert.match(html, /Make network knowledge auditable/);
+  assert.match(html, /Eight-level problem ladder/);
+  assert.match(html, /Confidence-aware understanding check/);
+  assert.match(html, /TA Studio A — Framing coroner/);
+  assert.match(html, /TA Studio B — Timeout incident board/);
+  assert.match(html, /TA Studio C — Agent patch and evidence clinic/);
+  assert.match(html, /Atlas remote-publication protocol dossier/);
+  assert.match(html, /href="\/downloads\/module20_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module20_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module20_reference.py",
+    import.meta.url,
+  );
+  const testsUrl = new URL(
+    "../public/downloads/test_module20_reference.py",
+    import.meta.url,
+  );
+  const [reference, referenceTests] = await Promise.all([
+    readFile(referenceUrl, "utf8"),
+    readFile(testsUrl, "utf8"),
+  ]);
+  assert.match(reference, /class FrameDecoder/);
+  assert.match(reference, /class AtlasPublicationServer/);
+  assert.match(reference, /class IdempotencyLedger/);
+  assert.match(reference, /atlas\.module20\.evidence\/1/);
+  assert.match(reference, /timeout_then_lookup/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client)\b/,
+  );
+  assert.match(referenceTests, /import module20_reference as reference/);
+  assert.match(referenceTests, /Module20ReferenceTests/);
+  assert.match(
+    referenceTests,
+    /test_every_two_chunk_partition_reaches_the_ledger_only_after_one_frame/,
+  );
 });

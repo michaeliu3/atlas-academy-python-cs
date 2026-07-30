@@ -18,6 +18,7 @@ import module16 from "./16_relational_data_transactions.md?raw";
 import module17 from "./17_computer_architecture_execution_stack.md?raw";
 import module18 from "./18_operating_systems_resource_mediation.md?raw";
 import module19 from "./19_concurrency_parallelism.md?raw";
+import module20 from "./20_networks_application_protocols.md?raw";
 
 export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "01-values-state-execution": module01,
@@ -39,4 +40,5 @@ export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "17-computer-architecture-execution-stack": module17,
   "18-operating-systems-resource-mediation": module18,
   "19-concurrency-parallelism": module19,
+  "20-networks-application-protocols": module20,
 };

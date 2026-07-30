@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 19,
+  "moduleCount": 20,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,7 +28,7 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Modules 17–19 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and workload-fit evidence."
+      "description": "Modules 17–20 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and evidence-aware network protocols."
     }
   ],
   "modules": [
@@ -296,6 +296,20 @@
       "sourceHash": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911",
       "prerequisiteSlug": "18-operating-systems-resource-mediation",
       "previousSlug": "18-operating-systems-resource-mediation",
+      "nextSlug": "20-networks-application-protocols"
+    },
+    {
+      "number": 20,
+      "slug": "20-networks-application-protocols",
+      "filename": "20_networks_application_protocols.md",
+      "title": "Networks and Application Protocols",
+      "summary": "Arc IV: carry a local result across an uncertain boundary A local program can know that it produced a valid value. The moment that value must cross a network, it must stop pretending that one local event is a remote fact.",
+      "arcId": "arc-iv",
+      "wordCount": 15100,
+      "estimatedMinutes": 72,
+      "sourceHash": "2fb6f8f5cb303e937319fe4d2c4d577a792a5572257e363b7a1e408a6f32b82d",
+      "prerequisiteSlug": "19-concurrency-parallelism",
+      "previousSlug": "19-concurrency-parallelism",
       "nextSlug": null
     }
   ]
