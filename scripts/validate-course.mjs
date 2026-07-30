@@ -278,7 +278,7 @@ export async function validateCourseContracts(
   }
   if (advancedContract && !advancedContract.legacyBridgeValidationRequired) {
     warnings.push(
-      "The M31–M36 prerequisite-session bridge remains retained historical authoring evidence; all six lifecycle-aware contracts now own its live prerequisite/session validation after an advanced-module lifecycle transition.",
+      "The M31–M36 prerequisite-session bridge remains retained historical authoring evidence; the lifecycle-aware contract now validates its canonical prerequisite/session topology after an advanced-module lifecycle transition.",
     );
   } else {
     try {

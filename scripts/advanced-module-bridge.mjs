@@ -41,7 +41,7 @@ function validateText(value, label, errors) {
   }
 }
 
-export function validateAdvancedModuleBridgeLedger(graph, ledger) {
+function validateAdvancedModuleBridge(graph, ledger, { requireAuthoringOnlyGraphState }) {
   const errors = [];
   const graphModules = graph?.modules;
   if (!Array.isArray(graphModules)) {
@@ -107,7 +107,10 @@ export function validateAdvancedModuleBridgeLedger(graph, ledger) {
     if (!entry) {
       continue;
     }
-    if (courseModule.lifecycle !== "authoring-only" || courseModule.availability !== "authoring-only") {
+    if (
+      requireAuthoringOnlyGraphState &&
+      (courseModule.lifecycle !== "authoring-only" || courseModule.availability !== "authoring-only")
+    ) {
       errors.push(
         `Module ${courseModule.number} bridge is an authoring-only plan but the graph no longer has an authoring-only state.`,
       );
@@ -254,4 +257,27 @@ export function validateAdvancedModuleBridgeLedger(graph, ledger) {
 
   bridgeFailure(errors);
   return ledger;
+}
+
+/**
+ * Validate the original authoring bridge while every advanced graph node is
+ * still authoring-only. This is the historical planning gate used before any
+ * advanced lifecycle transition.
+ */
+export function validateAdvancedModuleBridgeLedger(graph, ledger) {
+  return validateAdvancedModuleBridge(graph, ledger, {
+    requireAuthoringOnlyGraphState: true,
+  });
+}
+
+/**
+ * Validate bridge identity, prerequisite topology, first consumption, session
+ * order, and forward handoffs after a lifecycle transition. It intentionally
+ * does not require the current graph to remain authoring-only, because the
+ * ledger preserves the original plan rather than overriding publication state.
+ */
+export function validateAdvancedModuleBridgeTopology(graph, ledger) {
+  return validateAdvancedModuleBridge(graph, ledger, {
+    requireAuthoringOnlyGraphState: false,
+  });
 }

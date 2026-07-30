@@ -109,6 +109,23 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     validateAdvancedModuleContractRegistry(prematureLifecycleTransition, registry),
     /requires lifecycle-aware contract entries for all Modules 31–36/u,
   );
+
+  const brokenBridgeTopology = await loadAdvancedModuleBridgeLedger();
+  brokenBridgeTopology.modules[0].prerequisiteBridges[0].firstConsumingSessionId = "m31-s06";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, registry, {
+      canonicalBridgeLedger: brokenBridgeTopology,
+    }),
+    /must preserve canonical bridge topology[\s\S]*first declared use/u,
+  );
+
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, registry, {
+      learnerManifest: { modules: [{ id: "m31", number: 31 }] },
+      learnerReadableModuleIds: ["m31"],
+    }),
+    /authoring-only but appears in a learner manifest or route/u,
+  );
 });
 
 test("the v1 contract registry covers every legacy published workbook structurally", async () => {

@@ -96,18 +96,33 @@ reclassified as deployed course content. The current
 provenance-only exception: its hash preserves the *do not publish* boundary;
 it does not deploy or expose M31.
 
+Teaching-test inputs must be a top-level `tests/<name>.test.mjs` file. The
+normal `pnpm test` command discovers that exact set deterministically, so a
+module cannot satisfy the contract by naming an inert test file that CI never
+executes.
+
 Do not insert a final candidate SHA or Actions URL into the same commit that
 needs that evidence. First create and validate the candidate commit; then make
 a later additive provenance commit that records the exact candidate SHA, CI
 run, review/source paths, limitations, and—only after it occurs—private
-deployment version. The validator requires that candidate SHA to be an
-ancestor of the provenance record. Do not amend, squash, or rewrite history to
-manufacture self-referential release evidence.
+deployment version. The validator requires that candidate SHA to be a **strict
+ancestor** of the provenance record, that every non-provenance contract input
+is present and byte-identical at that candidate, and that the release evidence
+paths are provenance-role inputs that visibly name that SHA and run URL. Do
+not amend, squash, or rewrite history to manufacture self-referential release
+evidence.
+
+Those checks bind local Git evidence; they do not query GitHub Actions,
+GitHub's review state, or private hosting. Record and independently verify
+those remote facts in `docs/RELEASE_PROVENANCE.md` before making a release or
+deployment claim.
 
 While every M31–M36 graph entry is authoring-only, the historical bridge
 validator remains active. After any advanced lifecycle transition, all six
-modules must have lifecycle-aware contracts that preserve their bridge/session
-relationship before that historical validator can step back from live gating.
+modules must have lifecycle-aware contracts. The lifecycle-aware validator
+continues to enforce the canonical bridge's prerequisite topology, first use,
+session order, and forward handoffs before that historical authoring-only gate
+can step back from live gating.
 
 ## Authoring order
 

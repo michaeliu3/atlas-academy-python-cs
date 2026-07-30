@@ -20,6 +20,14 @@ actually published.
   any advanced module transitions, all M31–M36 contracts must take over live
   bridge validation before the historical bridge can cease to be the sole
   gate.
+- Hardened a future advanced-module promotion against four lifecycle gaps:
+  synchronisation validates its deterministic next manifest rather than a
+  stale checked-in one; canonical prerequisite/first-use/forward-handoff
+  topology remains live after transition; release provenance requires a strict
+  earlier candidate whose non-provenance inputs still match; and every declared
+  teaching test is automatically discovered by `pnpm test`. These are local
+  structural guards, not an independent GitHub CI, review, deployment, or
+  publication claim.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;

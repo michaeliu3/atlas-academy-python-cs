@@ -4,7 +4,11 @@ import { dirname, extname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { extractTableOfContents } from "../lib/heading-ids.js";
-import { advancedModuleBridgeRelativePath } from "./advanced-module-bridge.mjs";
+import {
+  advancedModuleBridgeRelativePath,
+  loadAdvancedModuleBridgeLedger,
+  validateAdvancedModuleBridgeTopology,
+} from "./advanced-module-bridge.mjs";
 import { projectReadableModules } from "./course-graph.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -218,7 +222,7 @@ function roleAllowsPath(role, repositoryPath) {
   if (role === "source-code") {
     return repositoryPath.startsWith("app/") || repositoryPath.startsWith("lib/");
   }
-  return role === "test" && repositoryPath.startsWith("tests/");
+  return role === "test" && /^tests\/[^/]+\.test\.mjs$/u.test(repositoryPath);
 }
 
 async function requireTrackedRegularFile(siteRoot, repositoryPath, label, errors) {
@@ -788,6 +792,7 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
     entry?.release,
     [
       "sourceCommit",
+      "candidateInputIds",
       "provenancePath",
       "sourceReviewPath",
       "ciRunUrl",
@@ -819,6 +824,48 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
       if (!isAncestor) {
         errors.push(`${label}.sourceCommit must be an ancestor of the recorded provenance commit.`);
       }
+      const { stdout: head } = await execFileAsync("git", ["rev-parse", "HEAD"], {
+        cwd: siteRoot,
+      });
+      if (sourceCommit === head.trim()) {
+        errors.push(`${label}.sourceCommit must be a strict ancestor of the recorded provenance commit.`);
+      }
+    }
+  }
+
+  const expectedCandidateInputIds = [...resolvedInputs.values()]
+    .filter(({ role }) => role !== "provenance")
+    .map(({ id }) => id)
+    .sort();
+  if (!sameOrderedValues(entry?.release?.candidateInputIds, expectedCandidateInputIds)) {
+    errors.push(`${label}.candidateInputIds must exactly name the sorted non-provenance contract inputs.`);
+  }
+  if (/^[0-9a-f]{40}$/u.test(sourceCommit ?? "")) {
+    for (const input of resolvedInputs.values()) {
+      if (input.role === "provenance") {
+        continue;
+      }
+      const existsAtCandidate = await execFileAsync(
+        "git",
+        ["cat-file", "-e", `${sourceCommit}:${input.path}`],
+        { cwd: siteRoot },
+      )
+        .then(() => true)
+        .catch(() => false);
+      if (!existsAtCandidate) {
+        errors.push(`${label} candidate sourceCommit does not contain contract input ${input.id}.`);
+        continue;
+      }
+      const unchangedSinceCandidate = await execFileAsync(
+        "git",
+        ["diff", "--quiet", sourceCommit, "--", input.path],
+        { cwd: siteRoot },
+      )
+        .then(() => true)
+        .catch(() => false);
+      if (!unchangedSinceCandidate) {
+        errors.push(`${label} contract input ${input.id} must match its sourceCommit blob.`);
+      }
     }
   }
 
@@ -832,8 +879,9 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
     await requireTrackedRegularFile(siteRoot, repositoryPath, `${label}.${field}`, errors);
     normalizedPaths[field] = repositoryPath;
     paths.push(resolve(siteRoot, repositoryPath));
-    if (![...resolvedInputs.values()].some(({ path }) => path === repositoryPath)) {
-      errors.push(`${label}.${field} must be declared as a checked-in contract input.`);
+    const matchingInput = [...resolvedInputs.values()].find(({ path }) => path === repositoryPath);
+    if (!matchingInput || matchingInput.role !== "provenance") {
+      errors.push(`${label}.${field} must be declared as a provenance contract input.`);
     }
   }
   if (!/^https:\/\/github\.com\/[^/]+\/[^/]+\/actions\/runs\/\d+$/u.test(entry?.release?.ciRunUrl ?? "")) {
@@ -841,6 +889,19 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
   }
   if (!hasText(entry?.release?.privateDeploymentVersion)) {
     errors.push(`${label}.privateDeploymentVersion must be a non-empty deployment identifier.`);
+  }
+  for (const field of ["provenancePath", "sourceReviewPath"]) {
+    const repositoryPath = normalizedPaths[field];
+    if (!repositoryPath || !hasText(sourceCommit) || !hasText(entry?.release?.ciRunUrl)) {
+      continue;
+    }
+    const text = await readFile(resolve(siteRoot, repositoryPath), "utf8").catch((error) => {
+      errors.push(`${label}.${field} cannot be read: ${error.message}`);
+      return "";
+    });
+    if (!text.includes(sourceCommit) || !text.includes(entry.release.ciRunUrl)) {
+      errors.push(`${label}.${field} must visibly bind the sourceCommit and ciRunUrl.`);
+    }
   }
   return { ...entry?.release, ...normalizedPaths, paths };
 }
@@ -859,7 +920,7 @@ function validateReleaseEvidenceBindings(entry, evidence, release, resolvedInput
   }
   for (const [detail, field] of releasePathDetailFields) {
     const input = resolvedInputs.get(record.evidenceDetails[detail]);
-    if (!input || input.path !== release[field]) {
+    if (!input || input.role !== "provenance" || input.path !== release[field]) {
       errors.push(`${label} evidenceDetails.${detail} must bind release.${field} through a contract input.`);
     }
   }
@@ -905,7 +966,12 @@ export async function loadAdvancedModuleContractRegistry(siteRoot = defaultSiteR
 export async function validateAdvancedModuleContractRegistry(
   graph,
   registry,
-  { siteRoot = defaultSiteRoot } = {},
+  {
+    siteRoot = defaultSiteRoot,
+    learnerManifest = null,
+    learnerReadableModuleIds = null,
+    canonicalBridgeLedger = null,
+  } = {},
 ) {
   const errors = [];
   requireExactKeys(
@@ -978,17 +1044,27 @@ export async function validateAdvancedModuleContractRegistry(
     advancedContractFailure(errors);
   }
 
-  let manifest = null;
-  try {
-    manifest = JSON.parse(await readFile(resolve(siteRoot, "content", "modules", "manifest.json"), "utf8"));
-  } catch (error) {
-    errors.push(`advanced module-contract registry cannot read the canonical manifest: ${error.message}`);
+  let manifest = learnerManifest;
+  if (manifest === null) {
+    try {
+      manifest = JSON.parse(await readFile(resolve(siteRoot, "content", "modules", "manifest.json"), "utf8"));
+    } catch (error) {
+      errors.push(`advanced module-contract registry cannot read the canonical manifest: ${error.message}`);
+    }
   }
   let readableModuleIds = new Set();
-  try {
-    readableModuleIds = new Set(projectReadableModules(graph).map(({ id }) => id));
-  } catch (error) {
-    errors.push(`advanced module-contract registry cannot project learner routes: ${error.message}`);
+  if (learnerReadableModuleIds !== null) {
+    if (!Array.isArray(learnerReadableModuleIds)) {
+      errors.push("advanced module-contract learnerReadableModuleIds must be an array when supplied.");
+    } else {
+      readableModuleIds = new Set(learnerReadableModuleIds);
+    }
+  } else {
+    try {
+      readableModuleIds = new Set(projectReadableModules(graph).map(({ id }) => id));
+    } catch (error) {
+      errors.push(`advanced module-contract registry cannot project learner routes: ${error.message}`);
+    }
   }
 
   const graphById = new Map(graphModules.map((courseModule) => [courseModule.id, courseModule]));
@@ -1136,6 +1212,14 @@ export async function validateAdvancedModuleContractRegistry(
       errors.push(`transitioned advanced Module ${courseModule.number} requires a lifecycle-aware contract entry.`);
     }
   }
+  try {
+    const bridgeLedger = canonicalBridgeLedger ?? (await loadAdvancedModuleBridgeLedger(siteRoot));
+    validateAdvancedModuleBridgeTopology(graph, bridgeLedger);
+  } catch (error) {
+    errors.push(
+      `Lifecycle-aware advanced contracts must preserve canonical bridge topology: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
 
   advancedContractFailure(errors);
   return {
@@ -1143,6 +1227,7 @@ export async function validateAdvancedModuleContractRegistry(
     modules: reportModules,
     releaseInputPaths: [...releaseInputPaths],
     legacyBridgeValidationRequired: !advancedLifecycleHasTransitioned,
+    bridgeTopologyValidated: true,
     summary: {
       authoringOnlyContracts: reportModules.filter(({ contractState }) => contractState === "authoring-only").length,
       plannedContracts,
