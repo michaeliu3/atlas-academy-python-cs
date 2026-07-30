@@ -38,6 +38,10 @@ actually published.
   a module-scoped three-file allowlist, while the M31–M36 historical readiness
   audit remains hashable after future contracts change. This controls ledger
   scope; it does not independently verify CI, review, or deployment facts.
+- Closed the legacy free-form “verified” path. Non-empty prose strings and
+  approval flags can no longer elevate an M1–M30 module; future verification
+  must pass a typed, resolved contract-packet gate. No existing module changed
+  publication status in this hardening step.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;

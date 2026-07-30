@@ -48,17 +48,6 @@ const requiredHumanReviewDimensions = [
   "ta-study-partner-usefulness",
   "oral-defense-quality",
 ];
-const requiredVerifiedEvidence = [
-  "prerequisiteAndForwardMap",
-  "sessionAnchors",
-  "sourceLedger",
-  "visualTextAlternatives",
-  "diagnosticAndRetrieval",
-  "projectEvidence",
-  "oralDefense",
-  "taPrompt",
-  "studyPartnerPrompt",
-];
 const execFileAsync = promisify(execFile);
 
 function withinSite(relativePath) {
@@ -142,22 +131,25 @@ function effectiveHumanReview(contracts, moduleContract) {
 }
 
 function validateVerifiedContract(courseModule, moduleContract, review, errors) {
-  const verification = moduleContract.verification;
-  if (!verification || typeof verification !== "object") {
-    errors.push(`Module ${courseModule.number} is verified without a verification record.`);
-    return;
+  if (Object.hasOwn(moduleContract, "verification")) {
+    errors.push(
+      `Module ${courseModule.number} may not use retired free-form verification evidence; it requires a typed contract packet.`,
+    );
   }
-  for (const key of requiredVerifiedEvidence) {
-    const value = verification[key];
-    if (typeof value !== "string" || value.trim() === "") {
-      errors.push(`Module ${courseModule.number} verified evidence ${key} is missing.`);
-    }
+  if (
+    typeof moduleContract.contractPacketId !== "string" ||
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(moduleContract.contractPacketId)
+  ) {
+    errors.push(`Module ${courseModule.number} is verified without a typed contractPacketId.`);
   }
   for (const dimension of requiredHumanReviewDimensions) {
     if (review[dimension] !== "approved") {
       errors.push(`Module ${courseModule.number} is verified but ${dimension} is not approved.`);
     }
   }
+  errors.push(
+    `Module ${courseModule.number} verified state requires a validated typed contract packet; the legacy packet gate is not installed yet.`,
+  );
 }
 
 export async function loadCourseContracts() {

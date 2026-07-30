@@ -188,6 +188,38 @@ test("advanced provenance inputs use fixed historical records or narrow module-s
   assert.equal(advancedReleaseDocumentationPath("m30", "provenancePath"), null);
 });
 
+test("a legacy module cannot become verified with free-form evidence strings", async () => {
+  const [graph, contracts] = await Promise.all([
+    loadCourseGraph(),
+    loadCourseContracts(),
+  ]);
+  const forgedGraph = structuredClone(graph);
+  forgedGraph.modules.find(({ id }) => id === "m29").releaseEvidence.status = "verified";
+  const forgedContracts = structuredClone(contracts);
+  const forgedM29 = forgedContracts.modules.find(({ moduleId }) => moduleId === "m29");
+  forgedM29.publicationState = "verified";
+  forgedM29.contractPacketId = "m29-forged-packet";
+  forgedM29.humanReview = Object.fromEntries(
+    Object.keys(forgedContracts.defaultHumanReview).map((dimension) => [dimension, "approved"]),
+  );
+  forgedM29.verification = {
+    prerequisiteAndForwardMap: "x",
+    sessionAnchors: "x",
+    sourceLedger: "x",
+    visualTextAlternatives: "x",
+    diagnosticAndRetrieval: "x",
+    projectEvidence: "x",
+    oralDefense: "x",
+    taPrompt: "x",
+    studyPartnerPrompt: "x",
+  };
+
+  await assert.rejects(
+    validateCourseContracts(forgedGraph, forgedContracts, { strict: true }),
+    /may not use retired free-form verification evidence[\s\S]*requires a validated typed contract packet/u,
+  );
+});
+
 test("the v1 contract registry covers every legacy published workbook structurally", async () => {
   const [graph, contracts] = await Promise.all([
     loadCourseGraph(),
