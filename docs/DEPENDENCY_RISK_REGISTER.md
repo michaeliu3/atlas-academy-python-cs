@@ -21,7 +21,7 @@ pnpm why postcss sharp brace-expansion esbuild --recursive
 gh api repos/michaeliu3/atlas-academy-python-cs/dependabot/alerts/<number>
 ```
 
-## Candidate remediation awaiting GitHub verification
+## Candidate remediation validated in CI; awaiting alert recalculation
 
 The current working candidate updates `next` to 16.2.12 and uses the
 workspace-scoped overrides below, which the regenerated lockfile resolves as
@@ -33,16 +33,19 @@ overrides:
   "next>sharp": 0.35.2
 ```
 
-This is deliberately narrow: it does not claim a global dependency upgrade,
-and it will not be called resolved until it has an immutable GitHub commit, a
-successful CI run, and a refreshed alert state.
+This is deliberately narrow: it does not claim a global dependency upgrade.
+Commit [`394f20396e21b2289fe4706227c41464b83ac497`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/394f20396e21b2289fe4706227c41464b83ac497)
+was validated by successful [GitHub Actions run 30568694668](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30568694668).
+The candidate will not be called resolved until the protected default branch
+contains the reviewed change and GitHub has refreshed the corresponding alert
+state.
 
 | Alert | Scope | Candidate lockfile evidence | Required patched version | Candidate disposition |
 | --- | --- | --- | --- | --- |
-| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.18 | Await CI and Dependabot refresh. |
-| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.12 | Await CI and Dependabot refresh. |
-| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.10 | Await CI and Dependabot refresh. |
-| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | `next@16.2.12 → sharp@0.35.2` | 0.35.0 | Await CI and Dependabot refresh. |
+| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.18 | CI passed; await protected-default-branch merge and Dependabot refresh. |
+| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.12 | CI passed; await protected-default-branch merge and Dependabot refresh. |
+| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.10 | CI passed; await protected-default-branch merge and Dependabot refresh. |
+| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | `next@16.2.12 → sharp@0.35.2` | 0.35.0 | CI passed; await protected-default-branch merge and Dependabot refresh. |
 
 ## Open, explicitly triaged paths
 

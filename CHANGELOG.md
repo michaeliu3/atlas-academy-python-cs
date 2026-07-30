@@ -40,8 +40,9 @@ actually published.
 - Added a reviewed dependency-risk register and a narrowly scoped candidate
   remediation for Next's runtime PostCSS and sharp paths. The remaining
   ESLint/brace-expansion and Drizzle/esbuild development paths are explicitly
-  triaged rather than misrepresented as fixed; CI and GitHub alert refresh are
-  still required before any candidate closure.
+  triaged rather than misrepresented as fixed. GitHub CI validated the runtime
+  candidate; a protected-default-branch merge and Dependabot refresh are still
+  required before any candidate closure.
 - Added a graph-checked M31–M36 prerequisite/session bridge ledger and hashes
   it with the canonical release inputs. It remains an authoring-only planning
   artifact: source maps, workbooks, studios, contracts, and release evidence
