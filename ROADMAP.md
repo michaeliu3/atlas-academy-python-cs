@@ -36,7 +36,11 @@ oral-defense, or project evidence shows a necessary bridge.
   source-audited six-session workbook, fixed-fixture prediction studio,
   downloadable provenance, bounded local model, code-reading/numerical-evidence
   boundaries, and conversational oral defense.
-- [ ] M30–M31 — probability/statistics and optimization/information.
+- [x] M30 — probability, statistics, and scientific inference, with a
+  source-audited six-session workbook, fixed-fixture Probability & Inference
+  Studio, downloadable provenance, bounded local model, code-reading/
+  claim-evidence boundaries, and conversational oral defense.
+- [ ] M31 — optimization and information.
 - [ ] M32–M36 — systems-for-learning, formal limits, classical AI, ML, and
   learning-theory reliability.
 - [ ] Reweave M25/M26 and their capstone evidence packet against the released
