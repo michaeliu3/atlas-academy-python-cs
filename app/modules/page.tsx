@@ -16,7 +16,7 @@ export default function ModuleLibraryPage() {
       <div id="main-content" tabIndex={-1}>
         <header className="library-hero">
           <p className="kicker">
-            The complete reading room · Modules 1–{moduleManifest.moduleCount}
+            The reading room · {moduleManifest.readableModuleCount} Core-open modules + {moduleManifest.previewModuleCount} synthesis previews
           </p>
           <h1>
             One course.
@@ -30,8 +30,12 @@ export default function ModuleLibraryPage() {
           </p>
           <dl className="library-measures" aria-label="Course library scale">
             <div>
-              <dt>{moduleManifest.moduleCount}</dt>
-              <dd>connected modules</dd>
+              <dt>{moduleManifest.readableModuleCount}</dt>
+              <dd>Core-open modules</dd>
+            </div>
+            <div>
+              <dt>{moduleManifest.previewModuleCount}</dt>
+              <dd>gated synthesis previews</dd>
             </div>
             <div>
               <dt>{moduleManifest.arcs.length}</dt>
@@ -106,6 +110,9 @@ export default function ModuleLibraryPage() {
                         <p>{courseModule.summary}</p>
                         <span className="module-card-meta">
                           {courseModule.estimatedMinutes} min reference read
+                          {courseModule.availability === "preview"
+                            ? " · Preview—not an unlocked Core step"
+                            : ""}
                           <i aria-hidden="true">↗</i>
                         </span>
                       </Link>

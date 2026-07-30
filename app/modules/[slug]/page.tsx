@@ -96,6 +96,20 @@ export default async function ModulePage({ params }: ModulePageProps) {
           </dl>
         </header>
 
+        {courseModule.availability === "preview" ? (
+          <aside className="module-availability-notice" aria-label="Synthesis preview status">
+            <p className="kicker">Released preview · not an unlocked Core step</p>
+            <h2>This synthesis module is here for orientation, not acceleration.</h2>
+            <p>
+              Its full prerequisite chain includes later authoring modules. Read it
+              as a map of where the course is going; return to the active route
+              rather than treating this workbook as evidence that those foundations
+              have been completed.
+            </p>
+            <Link href="/route">View the prerequisite-first route →</Link>
+          </aside>
+        ) : null}
+
         {slug === "20-networks-application-protocols" && (
           <NetworkProtocolStudio />
         )}

@@ -13,7 +13,7 @@
     "prebuild": "pnpm sync:modules",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "pnpm build && node --test tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
+    "test": "pnpm build && node --test tests/course-graph.test.mjs tests/diagnostic-model.test.mjs tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work",
     "db:generate": "drizzle-kit generate"
   },

@@ -17,14 +17,16 @@ oral-defense, or project evidence shows a necessary bridge.
 
 - [x] Module 23 — programming languages, interpreters, bounded evaluation.
 - [x] Module 24 — CPython, performance, and memory evidence.
-- [x] Module 25 — evidence-grounded intelligent and human-centered systems.
-- [x] Module 26 — systems capstone, open-source stewardship, and oral
-  architecture defense, with private deployment and versioned release evidence.
+- [x] Release Module 25 — evidence-grounded intelligent and human-centered
+  systems—as a preview while its M31–M36 academic prerequisites are authored.
+- [x] Release Module 26 — systems capstone, open-source stewardship, and oral
+  architecture defense—as a preview until Module 25 becomes Core-open.
 
 ## 60-day Atlas Core expansion
 
-- [x] Prerequisite-first 60-day route, published/in-authoring status boundary,
-  and constructive oral-defense framework.
+- [x] Canonical prerequisite-first 60-day course graph, generated manifest,
+  explicit published/preview/authoring status boundary, and constructive
+  oral-defense framework.
 - [x] M27 — discrete mathematics, proof, counting, and structures, with a
   source-audited workbook, local proof/counterexample studio, bounded reference
   model, and prerequisite-first reader navigation.

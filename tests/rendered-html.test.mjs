@@ -128,8 +128,8 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   const readable = html.replaceAll("<!-- -->", "");
   assert.match(readable, /60 days\./);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
-  assert.match(readable, /30 \/ 6/);
-  assert.match(readable, /published \/ in authoring/i);
+  assert.match(readable, /28 \/ 2 \/ 6/);
+  assert.match(readable, /Core-open \/ preview \/ authoring/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
@@ -137,7 +137,9 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /Module 29/);
   assert.match(readable, /Module 30/);
   assert.match(readable, /Published/);
+  assert.match(readable, /Preview/);
   assert.match(readable, /In authoring/);
+  assert.match(readable, /Read the preview—not an unlocked Core step/);
   assert.match(readable, /Source map and studio are being built before release\./);
   assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
   assert.match(readable, /Module 25/);
@@ -161,38 +163,28 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
 });
 
 test("keeps release status and route linkability aligned with the published manifest", async () => {
-  const [routeSource, routePage, manifestSource] = await Promise.all([
+  const [routeSource, routePage, catalogSource, manifestSource] = await Promise.all([
     readFile(new URL("../lib/atlas-core-route.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/course-graph.v1.json", import.meta.url), "utf8"),
     readFile(new URL("../content/modules/manifest.json", import.meta.url), "utf8"),
   ]);
+  const graph = JSON.parse(catalogSource);
   const manifest = JSON.parse(manifestSource);
-  const publishedNumbers = new Set(
-    manifest.modules.map((courseModule) => courseModule.number),
+  const graphByNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
+  const manifestByNumber = new Map(
+    manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
   );
 
-  for (let number = 1; number <= 30; number += 1) {
-    assert.ok(publishedNumbers.has(number), `M${number} appears in the manifest`);
-    assert.match(
-      routeSource,
-      new RegExp(`number: ${number},[\\s\\S]{0,260}?status: published`),
-      `M${number} is published in the learner route`,
-    );
-  }
-
-  for (let number = 31; number <= 36; number += 1) {
-    assert.ok(!publishedNumbers.has(number), `M${number} is not prematurely published`);
-    assert.match(
-      routeSource,
-      new RegExp(`number: ${number},[\\s\\S]{0,260}?status: inAuthoring`),
-      `M${number} remains in authoring in the learner route`,
-    );
-  }
-
-  assert.match(
-    routePage,
-    /entry\.status === "published" && releasedModule !== undefined/,
-  );
+  assert.match(routeSource, /atlasCoreRoutePlan/);
+  assert.match(routePage, /entry\.availability === "preview"/);
+  assert.equal(graphByNumber.get(25).availability, "preview");
+  assert.equal(graphByNumber.get(26).availability, "preview");
+  assert.equal(graphByNumber.get(31).lifecycle, "authoring-only");
+  assert.equal(manifestByNumber.get(25).availability, "preview");
+  assert.equal(manifestByNumber.get(26).availability, "preview");
+  assert.equal(manifestByNumber.get(24).nextRouteNumber, 32);
+  assert.equal(manifestByNumber.get(24).nextSlug, null);
 });
 
 test("renders the accessible, confidence-aware Module 0 placement studio", async () => {
@@ -1188,113 +1180,55 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–30 exactly once", async () => {
+test("generated module manifest projects the canonical graph without bypassing prerequisites", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
-  const slugs = manifest.modules.map((courseModule) => courseModule.slug);
-
-  assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 30);
-  assert.deepEqual(
-    numbers,
-    Array.from({ length: 30 }, (_, index) => index + 1),
+  const byNumber = new Map(
+    manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
   );
-  assert.equal(new Set(slugs).size, 30);
+
+  assert.equal(manifest.schemaVersion, 2);
+  assert.equal(manifest.courseGraphSchemaVersion, 1);
+  assert.equal(manifest.routePlanId, "atlas-core-60");
+  assert.equal(manifest.moduleCount, 30);
+  assert.equal(manifest.readableModuleCount, 28);
+  assert.equal(manifest.previewModuleCount, 2);
+  assert.deepEqual(numbers, Array.from({ length: 30 }, (_, index) => index + 1));
   assert.equal(manifest.arcs.length, 6);
 
-  const module2 = manifest.modules.find((courseModule) => courseModule.number === 2);
-  const module4 = manifest.modules.find((courseModule) => courseModule.number === 4);
-  const module5 = manifest.modules.find((courseModule) => courseModule.number === 5);
-  const module6 = manifest.modules.find((courseModule) => courseModule.number === 6);
-  const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
-  const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
-  const module18 = manifest.modules.find((courseModule) => courseModule.number === 18);
-  const module19 = manifest.modules.find((courseModule) => courseModule.number === 19);
-  const module20 = manifest.modules.find((courseModule) => courseModule.number === 20);
-  const module21 = manifest.modules.find((courseModule) => courseModule.number === 21);
-  const module22 = manifest.modules.find((courseModule) => courseModule.number === 22);
-  const module23 = manifest.modules.find((courseModule) => courseModule.number === 23);
-  const module24 = manifest.modules.find((courseModule) => courseModule.number === 24);
-  const module25 = manifest.modules.find((courseModule) => courseModule.number === 25);
-  const module26 = manifest.modules.find((courseModule) => courseModule.number === 26);
-  const module27 = manifest.modules.find((courseModule) => courseModule.number === 27);
-  const module28 = manifest.modules.find((courseModule) => courseModule.number === 28);
-  const module29 = manifest.modules.find((courseModule) => courseModule.number === 29);
-  const module30 = manifest.modules.find((courseModule) => courseModule.number === 30);
-  assert.equal(module17.arcId, "arc-iv");
-  assert.equal(module18.arcId, "arc-iv");
-  assert.equal(module19.arcId, "arc-iv");
-  assert.equal(module16.nextSlug, module17.slug);
-  assert.equal(module17.previousSlug, module16.slug);
-  assert.equal(module17.prerequisiteSlug, module16.slug);
-  assert.equal(module17.nextSlug, module28.slug);
-  assert.equal(module28.previousSlug, module17.slug);
-  assert.equal(module28.prerequisiteSlug, module27.slug);
-  assert.deepEqual(module28.prerequisiteSlugs, [
-    module17.slug,
-    module27.slug,
-  ]);
-  assert.equal(module28.nextSlug, module29.slug);
-  assert.equal(module29.previousSlug, module28.slug);
-  assert.equal(module29.prerequisiteSlug, module28.slug);
-  assert.deepEqual(module29.prerequisiteSlugs, [
-    module27.slug,
-    module28.slug,
-  ]);
-  assert.equal(module29.nextSlug, module30.slug);
-  assert.equal(module30.previousSlug, module29.slug);
-  assert.equal(module30.prerequisiteSlug, module29.slug);
-  assert.deepEqual(module30.prerequisiteSlugs, [
-    module27.slug,
-    module29.slug,
-  ]);
-  assert.equal(module30.nextSlug, module18.slug);
-  assert.equal(module18.previousSlug, module30.slug);
-  assert.equal(module18.prerequisiteSlug, module30.slug);
-  assert.equal(module18.nextSlug, module19.slug);
-  assert.equal(module19.previousSlug, module18.slug);
-  assert.equal(module19.prerequisiteSlug, module18.slug);
-  assert.equal(module19.nextSlug, module20.slug);
-  assert.equal(module20.previousSlug, module19.slug);
-  assert.equal(module20.prerequisiteSlug, module19.slug);
-  assert.equal(module20.nextSlug, module21.slug);
-  assert.equal(module21.previousSlug, module20.slug);
-  assert.equal(module21.prerequisiteSlug, module20.slug);
-  assert.equal(module21.nextSlug, module22.slug);
-  assert.equal(module22.previousSlug, module21.slug);
-  assert.equal(module22.prerequisiteSlug, module21.slug);
-  assert.equal(module22.nextSlug, module23.slug);
-  assert.equal(module23.arcId, "arc-v");
-  assert.equal(module23.previousSlug, module22.slug);
-  assert.equal(module23.prerequisiteSlug, module22.slug);
-  assert.equal(module23.nextSlug, module24.slug);
-  assert.equal(module24.arcId, "arc-v");
-  assert.equal(module24.previousSlug, module23.slug);
-  assert.equal(module24.prerequisiteSlug, module23.slug);
-  assert.equal(module24.nextSlug, module25.slug);
-  assert.equal(module25.arcId, "arc-v");
-  assert.equal(module25.previousSlug, module24.slug);
-  assert.equal(module25.prerequisiteSlug, module24.slug);
-  assert.equal(module25.nextSlug, module26.slug);
-  assert.equal(module26.arcId, "arc-v");
-  assert.equal(module26.previousSlug, module25.slug);
-  assert.equal(module26.prerequisiteSlug, module25.slug);
-  assert.equal(module26.nextSlug, null);
-  assert.equal(module27.arcId, "arc-vi");
-  assert.equal(module28.arcId, "arc-vi");
-  assert.equal(module29.arcId, "arc-vi");
-  assert.equal(module30.arcId, "arc-vi");
-  assert.equal(module5.nextSlug, module27.slug);
-  assert.equal(module27.previousSlug, module5.slug);
-  assert.equal(module27.nextSlug, module6.slug);
-  assert.deepEqual(module27.prerequisiteSlugs, [
-    module2.slug,
-    module4.slug,
-    module5.slug,
-  ]);
+  const module5 = byNumber.get(5);
+  const module6 = byNumber.get(6);
+  const module17 = byNumber.get(17);
+  const module18 = byNumber.get(18);
+  const module24 = byNumber.get(24);
+  const module25 = byNumber.get(25);
+  const module26 = byNumber.get(26);
+  const module27 = byNumber.get(27);
+  const module28 = byNumber.get(28);
+  const module30 = byNumber.get(30);
+
+  assert.deepEqual(module18.prerequisiteNumbers, [17]);
+  assert.deepEqual(module18.prerequisiteSlugs, [module17.slug]);
+  assert.equal(module18.previousRouteNumber, 31);
+  assert.equal(module18.previousSlug, null);
+  assert.equal(module18.nextSlug, byNumber.get(19).slug);
+  assert.deepEqual(module6.prerequisiteNumbers, [5]);
   assert.equal(module6.previousSlug, module27.slug);
-  assert.equal(module6.prerequisiteSlug, module27.slug);
+  assert.equal(module5.nextSlug, module27.slug);
+  assert.deepEqual(module28.prerequisiteNumbers, [17, 27]);
+  assert.deepEqual(module30.prerequisiteNumbers, [27, 29]);
+  assert.equal(module30.nextRouteNumber, 31);
+  assert.equal(module30.nextSlug, null);
+  assert.equal(module24.nextRouteNumber, 32);
+  assert.equal(module24.nextSlug, null);
+  assert.equal(module25.availability, "preview");
+  assert.deepEqual(module25.prerequisiteNumbers, [22, 24, 30, 31, 34, 35, 36]);
+  assert.equal(module25.previousRouteNumber, 36);
+  assert.equal(module25.previousSlug, null);
+  assert.equal(module25.nextSlug, module26.slug);
+  assert.equal(module26.availability, "preview");
+  assert.equal(module26.previousSlug, module25.slug);
 });
 
 test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
@@ -1363,7 +1297,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Linear Algebra, Numerical Stability &amp; Representation/);
   assert.match(html, /Calculus, Real Analysis &amp; Continuous Change/);
   assert.match(html, /Probability, Statistics &amp; Scientific Inference/);
-  assert.match(html, /<dt>30<\/dt>/);
+  assert.match(html, /<dt>28<\/dt>/);
+  assert.match(html, /gated synthesis previews/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1376,7 +1311,7 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /Complete Module 1 workbook/);
   assert.match(html, /Why this module comes first/);
   assert.match(html, /On this page/);
-  assert.match(html, /Foundation placement studio and learning brief/);
+  assert.match(html, /Foundation placement diagnostic and learning brief/);
   assert.match(html, /role="progressbar"/);
   assert.match(html, /aria-valuemin="0"/);
   assert.match(html, /aria-valuemax="100"/);

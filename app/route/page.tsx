@@ -21,7 +21,7 @@ function publishedModule(number: number) {
 }
 
 export default function AtlasCoreRoutePage() {
-  const releaseSummary = `${atlasCoreRouteReleaseStatus.published} / ${atlasCoreRouteReleaseStatus["in-authoring"]}`;
+  const releaseSummary = `${atlasCoreRouteReleaseStatus.published} / ${atlasCoreRouteReleaseStatus.preview} / ${atlasCoreRouteReleaseStatus["in-authoring"]}`;
 
   return (
     <main className={styles.shell}>
@@ -50,7 +50,7 @@ export default function AtlasCoreRoutePage() {
             </div>
             <div>
               <dt>{releaseSummary}</dt>
-              <dd>published / in authoring</dd>
+              <dd>Core-open / preview / authoring</dd>
             </div>
             <div>
               <dt>{atlasCoreRouteTotals.focusedHoursPerWeek}</dt>
@@ -62,7 +62,7 @@ export default function AtlasCoreRoutePage() {
             </div>
           </dl>
           <p className={styles.availability}>
-            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteReleaseStatus.published} modules are readable; the {atlasCoreRouteReleaseStatus["in-authoring"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
+            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteReleaseStatus.published} modules are open on the active Core; {atlasCoreRouteReleaseStatus.preview} released synthesis modules are clearly marked as previews; the {atlasCoreRouteReleaseStatus["in-authoring"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
           </p>
         </header>
 
@@ -106,7 +106,9 @@ export default function AtlasCoreRoutePage() {
 
         <section className={styles.legend} aria-label="Route status legend">
           <span className={styles.publishedDot} aria-hidden="true" />
-          <span>Published and readable now</span>
+          <span>Published and open on the active Core</span>
+          <span className={styles.authoringDot} aria-hidden="true" />
+          <span>Released preview—not an unlocked Core step</span>
           <span className={styles.authoringDot} aria-hidden="true" />
           <span>Depth module in authoring—shown so its prerequisites are never hidden</span>
         </section>
@@ -133,6 +135,13 @@ export default function AtlasCoreRoutePage() {
                   const releasedModule = publishedModule(entry.number);
                   const canOpen =
                     entry.status === "published" && releasedModule !== undefined;
+                  const isPreview = entry.availability === "preview";
+                  const statusLabel =
+                    entry.status === "authoring-only"
+                      ? "In authoring"
+                      : isPreview
+                        ? "Preview"
+                        : "Published";
                   const prerequisiteTitles = entry.prerequisiteNumbers.map(
                     (number) => {
                       const prerequisite = getAtlasRouteEntry(number);
@@ -148,14 +157,12 @@ export default function AtlasCoreRoutePage() {
                         <span>Module {entry.number}</span>
                         <span
                           className={
-                            canOpen
+                            entry.status === "published" && !isPreview
                               ? styles.publishedStatus
                               : styles.authoringStatus
                           }
                         >
-                          {canOpen
-                            ? "Published"
-                            : "In authoring"}
+                          {statusLabel}
                         </span>
                       </div>
                       <h3>{entry.title}</h3>
@@ -176,7 +183,9 @@ export default function AtlasCoreRoutePage() {
                       </dl>
                       {canOpen ? (
                         <span className={styles.cardLink}>
-                          Open the workbook <i aria-hidden="true">→</i>
+                          {isPreview
+                            ? "Read the preview—not an unlocked Core step"
+                            : "Open the workbook"} <i aria-hidden="true">→</i>
                         </span>
                       ) : (
                         <span className={styles.authoringNote}>

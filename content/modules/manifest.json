@@ -1,6 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "courseGraphSchemaVersion": 1,
+  "routePlanId": "atlas-core-60",
   "moduleCount": 30,
+  "readableModuleCount": 28,
+  "previewModuleCount": 2,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,21 +32,21 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries."
+      "description": "Connect machine execution and OS mediation to concurrent histories, protocols, partial failure, and trust boundaries."
     },
     {
       "id": "arc-v",
       "numeral": "V",
       "title": "Languages & intelligence",
       "range": "Modules 23–26",
-      "description": "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense."
+      "description": "Derive language meaning and runtime evidence before human-centered intelligent systems and capstone defense."
     },
     {
       "id": "arc-vi",
       "numeral": "VI",
       "title": "Mathematical foundations",
-      "range": "Modules 27–30",
-      "description": "Deepen proof, counting, structure, linear representation, continuous change, probability, and scientific-inference boundaries before the later mathematics and AI sequence."
+      "range": "Modules 27–31",
+      "description": "Deepen proof, representation, continuous change, probability, optimization, and information."
     }
   ],
   "modules": [
@@ -56,9 +60,23 @@
       "wordCount": 4241,
       "estimatedMinutes": 21,
       "sourceHash": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec",
-      "prerequisiteSlug": null,
+      "id": "m01",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 1,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m01",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [],
       "prerequisiteSlugs": [],
+      "previousRouteNumber": null,
       "previousSlug": null,
+      "nextRouteNumber": 2,
       "nextSlug": "02-functions-recursion-induction"
     },
     {
@@ -71,11 +89,27 @@
       "wordCount": 9484,
       "estimatedMinutes": 46,
       "sourceHash": "dc5f938fe7b6e320b64314aba970f1d0aa3666ea014e47a87ea98bffdcdfcbce",
-      "prerequisiteSlug": "01-values-state-execution",
+      "id": "m02",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 2,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m02",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        1
+      ],
       "prerequisiteSlugs": [
         "01-values-state-execution"
       ],
+      "previousRouteNumber": 1,
       "previousSlug": "01-values-state-execution",
+      "nextRouteNumber": 3,
       "nextSlug": "03-abstraction-interfaces-adts"
     },
     {
@@ -88,11 +122,27 @@
       "wordCount": 13281,
       "estimatedMinutes": 64,
       "sourceHash": "7b5860ad02f426a22c694f1725de82cbccb20776fe855ccee90d28b5ee125e00",
-      "prerequisiteSlug": "02-functions-recursion-induction",
+      "id": "m03",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 3,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m03",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        2
+      ],
       "prerequisiteSlugs": [
         "02-functions-recursion-induction"
       ],
+      "previousRouteNumber": 2,
       "previousSlug": "02-functions-recursion-induction",
+      "nextRouteNumber": 4,
       "nextSlug": "04-logic-sets-relations-graphs-proof"
     },
     {
@@ -105,11 +155,27 @@
       "wordCount": 5196,
       "estimatedMinutes": 25,
       "sourceHash": "1629d7061ac6f118342e7f5680dd9a9b76291e6aa2a9f222ea92756431fb7da6",
-      "prerequisiteSlug": "03-abstraction-interfaces-adts",
+      "id": "m04",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 4,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m04",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        3
+      ],
       "prerequisiteSlugs": [
         "03-abstraction-interfaces-adts"
       ],
+      "previousRouteNumber": 3,
       "previousSlug": "03-abstraction-interfaces-adts",
+      "nextRouteNumber": 5,
       "nextSlug": "05-cost-models-algorithm-analysis"
     },
     {
@@ -122,11 +188,27 @@
       "wordCount": 4951,
       "estimatedMinutes": 24,
       "sourceHash": "42b6174bcf6b21c9874e04ab360a1ff069408631f6d1bdda1c9dedecb4c3ba01",
-      "prerequisiteSlug": "04-logic-sets-relations-graphs-proof",
+      "id": "m05",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 5,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m05",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        4
+      ],
       "prerequisiteSlugs": [
         "04-logic-sets-relations-graphs-proof"
       ],
+      "previousRouteNumber": 4,
       "previousSlug": "04-logic-sets-relations-graphs-proof",
+      "nextRouteNumber": 27,
       "nextSlug": "27-discrete-mathematics-proof-counting-structures"
     },
     {
@@ -139,11 +221,27 @@
       "wordCount": 12119,
       "estimatedMinutes": 58,
       "sourceHash": "f272b9d5ff877e5bc0f316ea2340b22e53ddb2864b0482bb859a3ee3d366f949",
-      "prerequisiteSlug": "27-discrete-mathematics-proof-counting-structures",
-      "prerequisiteSlugs": [
-        "27-discrete-mathematics-proof-counting-structures"
+      "id": "m06",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 7,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m06",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        5
       ],
+      "prerequisiteSlugs": [
+        "05-cost-models-algorithm-analysis"
+      ],
+      "previousRouteNumber": 27,
       "previousSlug": "27-discrete-mathematics-proof-counting-structures",
+      "nextRouteNumber": 7,
       "nextSlug": "07-stacks-queues-iteration-lazy"
     },
     {
@@ -156,11 +254,27 @@
       "wordCount": 10734,
       "estimatedMinutes": 52,
       "sourceHash": "870d2e4579a1eb31937197ae038fe95dbb6d2c3e2a54d83380a2ec6283a6288f",
-      "prerequisiteSlug": "06-representation-memory-sequences-linked",
+      "id": "m07",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 8,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m07",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        6
+      ],
       "prerequisiteSlugs": [
         "06-representation-memory-sequences-linked"
       ],
+      "previousRouteNumber": 6,
       "previousSlug": "06-representation-memory-sequences-linked",
+      "nextRouteNumber": 8,
       "nextSlug": "08-hashing-dictionaries-sets-indexing"
     },
     {
@@ -173,11 +287,27 @@
       "wordCount": 10871,
       "estimatedMinutes": 52,
       "sourceHash": "8ac708034206cc526a441b0ced9878dd4fe956b4d31183e5ef652340960e3646",
-      "prerequisiteSlug": "07-stacks-queues-iteration-lazy",
+      "id": "m08",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 9,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m08",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        7
+      ],
       "prerequisiteSlugs": [
         "07-stacks-queues-iteration-lazy"
       ],
+      "previousRouteNumber": 7,
       "previousSlug": "07-stacks-queues-iteration-lazy",
+      "nextRouteNumber": 9,
       "nextSlug": "09-trees-heaps-sorting-ordered"
     },
     {
@@ -190,11 +320,27 @@
       "wordCount": 15438,
       "estimatedMinutes": 74,
       "sourceHash": "f2bd9e373cc47acab3fc586fcc98419d4941ec9c75ca09ebea8978e4b0403643",
-      "prerequisiteSlug": "08-hashing-dictionaries-sets-indexing",
+      "id": "m09",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 10,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m09",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        8
+      ],
       "prerequisiteSlugs": [
         "08-hashing-dictionaries-sets-indexing"
       ],
+      "previousRouteNumber": 8,
       "previousSlug": "08-hashing-dictionaries-sets-indexing",
+      "nextRouteNumber": 10,
       "nextSlug": "10-graph-algorithms-network-models"
     },
     {
@@ -207,11 +353,27 @@
       "wordCount": 15846,
       "estimatedMinutes": 76,
       "sourceHash": "cbfe82264548694c9436e4c3a40e0a01d79db7e3f1b1d589879f7b3cacff0312",
-      "prerequisiteSlug": "09-trees-heaps-sorting-ordered",
+      "id": "m10",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 11,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m10",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        9
+      ],
       "prerequisiteSlugs": [
         "09-trees-heaps-sorting-ordered"
       ],
+      "previousRouteNumber": 9,
       "previousSlug": "09-trees-heaps-sorting-ordered",
+      "nextRouteNumber": 11,
       "nextSlug": "11-algorithm-design-paradigms"
     },
     {
@@ -224,11 +386,27 @@
       "wordCount": 13178,
       "estimatedMinutes": 63,
       "sourceHash": "8fb4b8cec427bed7c8581b2f0edb8825d70774438b57df66dcd295079c213f92",
-      "prerequisiteSlug": "10-graph-algorithms-network-models",
+      "id": "m11",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 12,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m11",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        10
+      ],
       "prerequisiteSlugs": [
         "10-graph-algorithms-network-models"
       ],
+      "previousRouteNumber": 10,
       "previousSlug": "10-graph-algorithms-network-models",
+      "nextRouteNumber": 12,
       "nextSlug": "12-modules-apis-types-dependencies"
     },
     {
@@ -241,11 +419,27 @@
       "wordCount": 17016,
       "estimatedMinutes": 82,
       "sourceHash": "a1fc525a1eebea1f64c1abd4f0cf3e6a78c2777a9865c94b36ad4826c7bfea86",
-      "prerequisiteSlug": "11-algorithm-design-paradigms",
+      "id": "m12",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 13,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m12",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        11
+      ],
       "prerequisiteSlugs": [
         "11-algorithm-design-paradigms"
       ],
+      "previousRouteNumber": 11,
       "previousSlug": "11-algorithm-design-paradigms",
+      "nextRouteNumber": 13,
       "nextSlug": "13-specifications-testing-debugging-observability"
     },
     {
@@ -258,11 +452,27 @@
       "wordCount": 11291,
       "estimatedMinutes": 54,
       "sourceHash": "adc4c10a855320ae7ff391cef89dcf2d86e8596d1fb35684df501481f08d42ce",
-      "prerequisiteSlug": "12-modules-apis-types-dependencies",
+      "id": "m13",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 14,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m13",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        12
+      ],
       "prerequisiteSlugs": [
         "12-modules-apis-types-dependencies"
       ],
+      "previousRouteNumber": 12,
       "previousSlug": "12-modules-apis-types-dependencies",
+      "nextRouteNumber": 14,
       "nextSlug": "14-software-design-and-change"
     },
     {
@@ -275,11 +485,27 @@
       "wordCount": 14318,
       "estimatedMinutes": 69,
       "sourceHash": "1938fb2d7674a5951f0fe7e79e62cae154f17b7b7238c5306f3382dccc05147e",
-      "prerequisiteSlug": "13-specifications-testing-debugging-observability",
+      "id": "m14",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 15,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m14",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        13
+      ],
       "prerequisiteSlugs": [
         "13-specifications-testing-debugging-observability"
       ],
+      "previousRouteNumber": 13,
       "previousSlug": "13-specifications-testing-debugging-observability",
+      "nextRouteNumber": 15,
       "nextSlug": "15-files-serialization-packaging-delivery"
     },
     {
@@ -292,11 +518,27 @@
       "wordCount": 22984,
       "estimatedMinutes": 110,
       "sourceHash": "e97d4a794330d28cb7b7dcb8b3b9241735e3aa6daa0918f004b1f9442eabe113",
-      "prerequisiteSlug": "14-software-design-and-change",
+      "id": "m15",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 16,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m15",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        14
+      ],
       "prerequisiteSlugs": [
         "14-software-design-and-change"
       ],
+      "previousRouteNumber": 14,
       "previousSlug": "14-software-design-and-change",
+      "nextRouteNumber": 16,
       "nextSlug": "16-relational-data-transactions"
     },
     {
@@ -309,11 +551,27 @@
       "wordCount": 19335,
       "estimatedMinutes": 93,
       "sourceHash": "b80b7cee07b9d42e1afcf498feda08f7de5e4c6e1047911cba67df1be1e933c9",
-      "prerequisiteSlug": "15-files-serialization-packaging-delivery",
+      "id": "m16",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 17,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m16",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        15
+      ],
       "prerequisiteSlugs": [
         "15-files-serialization-packaging-delivery"
       ],
+      "previousRouteNumber": 15,
       "previousSlug": "15-files-serialization-packaging-delivery",
+      "nextRouteNumber": 17,
       "nextSlug": "17-computer-architecture-execution-stack"
     },
     {
@@ -326,11 +584,27 @@
       "wordCount": 20151,
       "estimatedMinutes": 96,
       "sourceHash": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07",
-      "prerequisiteSlug": "16-relational-data-transactions",
+      "id": "m17",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 18,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module17_architecture_execution_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m17",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        16
+      ],
       "prerequisiteSlugs": [
         "16-relational-data-transactions"
       ],
+      "previousRouteNumber": 16,
       "previousSlug": "16-relational-data-transactions",
+      "nextRouteNumber": 28,
       "nextSlug": "28-linear-algebra-numerical-stability-representation"
     },
     {
@@ -343,11 +617,27 @@
       "wordCount": 20336,
       "estimatedMinutes": 97,
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
-      "prerequisiteSlug": "30-probability-statistics-scientific-inference",
-      "prerequisiteSlugs": [
-        "30-probability-statistics-scientific-inference"
+      "id": "m18",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 23,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m18",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        17
       ],
-      "previousSlug": "30-probability-statistics-scientific-inference",
+      "prerequisiteSlugs": [
+        "17-computer-architecture-execution-stack"
+      ],
+      "previousRouteNumber": 31,
+      "previousSlug": null,
+      "nextRouteNumber": 19,
       "nextSlug": "19-concurrency-parallelism"
     },
     {
@@ -360,11 +650,27 @@
       "wordCount": 21775,
       "estimatedMinutes": 104,
       "sourceHash": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911",
-      "prerequisiteSlug": "18-operating-systems-resource-mediation",
+      "id": "m19",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 24,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module19_concurrency_parallelism_source_map.md",
+      "studioId": null,
+      "releaseEvidence": {
+        "id": "m19",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        18
+      ],
       "prerequisiteSlugs": [
         "18-operating-systems-resource-mediation"
       ],
+      "previousRouteNumber": 18,
       "previousSlug": "18-operating-systems-resource-mediation",
+      "nextRouteNumber": 20,
       "nextSlug": "20-networks-application-protocols"
     },
     {
@@ -377,11 +683,27 @@
       "wordCount": 15114,
       "estimatedMinutes": 72,
       "sourceHash": "ab4e96417238f6750aadbef0c61e7e54ae501bded7d7176bcffcc059c1cb4382",
-      "prerequisiteSlug": "19-concurrency-parallelism",
+      "id": "m20",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 25,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module20_networks_protocols_source_map.md",
+      "studioId": "network-protocol",
+      "releaseEvidence": {
+        "id": "m20",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        19
+      ],
       "prerequisiteSlugs": [
         "19-concurrency-parallelism"
       ],
+      "previousRouteNumber": 19,
       "previousSlug": "19-concurrency-parallelism",
+      "nextRouteNumber": 21,
       "nextSlug": "21-async-distributed-systems"
     },
     {
@@ -394,11 +716,27 @@
       "wordCount": 8180,
       "estimatedMinutes": 39,
       "sourceHash": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315",
-      "prerequisiteSlug": "20-networks-application-protocols",
+      "id": "m21",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 26,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module21_async_distributed_source_map.md",
+      "studioId": "async-distributed",
+      "releaseEvidence": {
+        "id": "m21",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        20
+      ],
       "prerequisiteSlugs": [
         "20-networks-application-protocols"
       ],
+      "previousRouteNumber": 20,
       "previousSlug": "20-networks-application-protocols",
+      "nextRouteNumber": 22,
       "nextSlug": "22-security-privacy-trust-boundaries"
     },
     {
@@ -411,11 +749,27 @@
       "wordCount": 6401,
       "estimatedMinutes": 31,
       "sourceHash": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1",
-      "prerequisiteSlug": "21-async-distributed-systems",
+      "id": "m22",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 27,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module22_security_trust_source_map.md",
+      "studioId": "security-trust",
+      "releaseEvidence": {
+        "id": "m22",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        21
+      ],
       "prerequisiteSlugs": [
         "21-async-distributed-systems"
       ],
+      "previousRouteNumber": 21,
       "previousSlug": "21-async-distributed-systems",
+      "nextRouteNumber": 23,
       "nextSlug": "23-programming-languages-interpreters"
     },
     {
@@ -428,11 +782,27 @@
       "wordCount": 7093,
       "estimatedMinutes": 34,
       "sourceHash": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742",
-      "prerequisiteSlug": "22-security-privacy-trust-boundaries",
+      "id": "m23",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 28,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module23_languages_interpreters_source_map.md",
+      "studioId": "language-interpreter",
+      "releaseEvidence": {
+        "id": "m23",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        22
+      ],
       "prerequisiteSlugs": [
         "22-security-privacy-trust-boundaries"
       ],
+      "previousRouteNumber": 22,
       "previousSlug": "22-security-privacy-trust-boundaries",
+      "nextRouteNumber": 24,
       "nextSlug": "24-cpython-performance-memory"
     },
     {
@@ -445,12 +815,28 @@
       "wordCount": 4380,
       "estimatedMinutes": 21,
       "sourceHash": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73",
-      "prerequisiteSlug": "23-programming-languages-interpreters",
+      "id": "m24",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 29,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+      "studioId": "runtime-evidence",
+      "releaseEvidence": {
+        "id": "m24",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        23
+      ],
       "prerequisiteSlugs": [
         "23-programming-languages-interpreters"
       ],
+      "previousRouteNumber": 23,
       "previousSlug": "23-programming-languages-interpreters",
-      "nextSlug": "25-evidence-grounded-intelligent-systems"
+      "nextRouteNumber": 32,
+      "nextSlug": null
     },
     {
       "number": 25,
@@ -462,11 +848,35 @@
       "wordCount": 7528,
       "estimatedMinutes": 36,
       "sourceHash": "0f3b0e7a571005a8361cd2c7704a26bd586fa120a2454d22412548e325a892d7",
-      "prerequisiteSlug": "24-cpython-performance-memory",
-      "prerequisiteSlugs": [
-        "24-cpython-performance-memory"
+      "id": "m25",
+      "availability": "preview",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 35,
+      "masteryGateId": "evidence",
+      "sourceMap": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+      "studioId": "evidence-grounded",
+      "releaseEvidence": {
+        "id": "m25",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        22,
+        24,
+        30,
+        31,
+        34,
+        35,
+        36
       ],
-      "previousSlug": "24-cpython-performance-memory",
+      "prerequisiteSlugs": [
+        "22-security-privacy-trust-boundaries",
+        "24-cpython-performance-memory",
+        "30-probability-statistics-scientific-inference"
+      ],
+      "previousRouteNumber": 36,
+      "previousSlug": null,
+      "nextRouteNumber": 26,
       "nextSlug": "26-systems-capstone-open-source-stewardship"
     },
     {
@@ -479,11 +889,27 @@
       "wordCount": 7933,
       "estimatedMinutes": 38,
       "sourceHash": "4d90e27b9e2670927b1d3c284a7c87126e784accd6b4b0fad259b414e3f84751",
-      "prerequisiteSlug": "25-evidence-grounded-intelligent-systems",
+      "id": "m26",
+      "availability": "preview",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 36,
+      "masteryGateId": "defense",
+      "sourceMap": "content/source-maps/module26_systems_capstone_source_map.md",
+      "studioId": "capstone-defense",
+      "releaseEvidence": {
+        "id": "m26",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        25
+      ],
       "prerequisiteSlugs": [
         "25-evidence-grounded-intelligent-systems"
       ],
+      "previousRouteNumber": 25,
       "previousSlug": "25-evidence-grounded-intelligent-systems",
+      "nextRouteNumber": null,
       "nextSlug": null
     },
     {
@@ -496,13 +922,31 @@
       "wordCount": 9947,
       "estimatedMinutes": 48,
       "sourceHash": "d6e232d6c5244fc7c3ea97fc314ac001a32795a38276d2ff55b7aa80f90f498c",
-      "prerequisiteSlug": "05-cost-models-algorithm-analysis",
+      "id": "m27",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 6,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "studioId": "discrete-math-proof",
+      "releaseEvidence": {
+        "id": "m27",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        2,
+        4,
+        5
+      ],
       "prerequisiteSlugs": [
         "02-functions-recursion-induction",
         "04-logic-sets-relations-graphs-proof",
         "05-cost-models-algorithm-analysis"
       ],
+      "previousRouteNumber": 5,
       "previousSlug": "05-cost-models-algorithm-analysis",
+      "nextRouteNumber": 6,
       "nextSlug": "06-representation-memory-sequences-linked"
     },
     {
@@ -515,12 +959,29 @@
       "wordCount": 8035,
       "estimatedMinutes": 39,
       "sourceHash": "f1a42ffdf4b062db3320e3a2690b8ef9e7afd8619637f1129aa1847bb5701c95",
-      "prerequisiteSlug": "27-discrete-mathematics-proof-counting-structures",
+      "id": "m28",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 19,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "studioId": "linear-algebra-stability",
+      "releaseEvidence": {
+        "id": "m28",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        17,
+        27
+      ],
       "prerequisiteSlugs": [
         "17-computer-architecture-execution-stack",
         "27-discrete-mathematics-proof-counting-structures"
       ],
+      "previousRouteNumber": 17,
       "previousSlug": "17-computer-architecture-execution-stack",
+      "nextRouteNumber": 29,
       "nextSlug": "29-calculus-real-analysis-continuous-change"
     },
     {
@@ -533,12 +994,29 @@
       "wordCount": 8058,
       "estimatedMinutes": 39,
       "sourceHash": "c02d1e592276be7a418aa7502f9c9a1a7a614db336b2a9982772786c2bd8f152",
-      "prerequisiteSlug": "28-linear-algebra-numerical-stability-representation",
+      "id": "m29",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 20,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "studioId": "calculus-continuous-change",
+      "releaseEvidence": {
+        "id": "m29",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        27,
+        28
+      ],
       "prerequisiteSlugs": [
         "27-discrete-mathematics-proof-counting-structures",
         "28-linear-algebra-numerical-stability-representation"
       ],
+      "previousRouteNumber": 28,
       "previousSlug": "28-linear-algebra-numerical-stability-representation",
+      "nextRouteNumber": 30,
       "nextSlug": "30-probability-statistics-scientific-inference"
     },
     {
@@ -551,13 +1029,30 @@
       "wordCount": 9509,
       "estimatedMinutes": 46,
       "sourceHash": "3b5a412e615836fa563649b65c525099f7e92fb3e04d04631767e68d8f1c1750",
-      "prerequisiteSlug": "29-calculus-real-analysis-continuous-change",
+      "id": "m30",
+      "availability": "published",
+      "lifecycle": "published",
+      "routeRole": "required",
+      "routePosition": 21,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
+      "studioId": "probability-inference",
+      "releaseEvidence": {
+        "id": "m30",
+        "status": "legacy-audit-pending"
+      },
+      "prerequisiteNumbers": [
+        27,
+        29
+      ],
       "prerequisiteSlugs": [
         "27-discrete-mathematics-proof-counting-structures",
         "29-calculus-real-analysis-continuous-change"
       ],
+      "previousRouteNumber": 29,
       "previousSlug": "29-calculus-real-analysis-continuous-change",
-      "nextSlug": "18-operating-systems-resource-mediation"
+      "nextRouteNumber": 31,
+      "nextSlug": null
     }
   ]
 }

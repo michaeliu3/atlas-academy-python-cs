@@ -4391,6 +4391,37 @@ main.module-library-shell {
   text-transform: uppercase;
 }
 
+.module-availability-notice {
+  background: linear-gradient(135deg, rgba(49, 87, 164, 0.08), rgba(199, 124, 42, 0.11));
+  border: 1px solid rgba(49, 87, 164, 0.34);
+  margin: 2rem 0 0;
+  max-width: 54rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.module-availability-notice h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.module-availability-notice p:not(.kicker) {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 45rem;
+}
+
+.module-availability-notice a {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 750;
+  margin-top: 1rem;
+  text-underline-offset: 0.24em;
+}
+
 .module-sequence-nav {
   border-bottom: 1px solid var(--line);
   padding: 1.5rem 0;
@@ -4424,6 +4455,11 @@ main.module-library-shell {
   text-underline-offset: 0.24em;
 }
 
+.unavailable-course-reference {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
 .sequence-pair {
   display: grid;
   gap: 1rem;
@@ -4451,6 +4487,12 @@ main.module-library-shell {
   font-family: var(--font-serif), serif;
   font-size: 0.92rem;
   font-weight: 540;
+}
+
+.sequence-link small {
+  color: var(--muted);
+  font-size: 0.64rem;
+  line-height: 1.35;
 }
 
 .sequence-next {

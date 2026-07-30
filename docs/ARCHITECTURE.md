@@ -8,7 +8,8 @@ prediction, local model evidence, and source claims separate.
 
 ~~~mermaid
 flowchart LR
-    S["Source maps and original workbooks"] --> M["module synchronization"]
+    G["Versioned canonical course graph"] --> M["module synchronization"]
+    S["Source maps and original workbooks"] --> M
     M --> L["content/modules<br>rendered course library"]
     M --> D["public/downloads<br>local models + tests"]
     L --> R["Module reader"]
@@ -26,6 +27,12 @@ flowchart LR
 - The deployed portal has no Notion runtime integration or automatic
   portal-to-Notion data flow. Learners and the instructor may capture approved
   learning evidence manually in the separate private Notion workflow.
+- The checked-in `content/course/course-graph.v1.json` is the canonical course
+  catalog. It separates academic prerequisites from route order and records
+  lifecycle, learner availability, source-map, studio, mastery-gate, and
+  release-evidence references. Route views and the generated reader manifest
+  derive from it; no page or synchronizer may reconstruct its own prerequisite
+  graph.
 - The content/modules directory and content/source-maps directory are
   checked-in, release-canonical course material. In the production authoring
   workspace, synchronization can refresh the same artifacts from an adjacent
@@ -35,8 +42,9 @@ flowchart LR
 - The public/downloads directory contains the checked-in, release-canonical
   deterministic local reference models and behavioral tests. They use fixed
   in-memory fixtures and make no external effect.
-- The scripts/sync-modules.mjs program synchronizes the library manifest,
-  module source, and downloadable teaching artifacts.
+- The scripts/sync-modules.mjs program validates the course graph, then
+  synchronizes the library manifest, module source, and downloadable teaching
+  artifacts. The manifest is a generated projection, not curriculum input.
 - The tests directory verifies the diagnostic model and rendered portal
   contract.
 

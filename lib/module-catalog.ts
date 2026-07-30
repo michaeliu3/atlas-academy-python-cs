@@ -4,6 +4,12 @@ import {
   extractTableOfContents,
   stripDocumentTitle,
 } from "./heading-ids.js";
+import type {
+  CourseAvailability,
+  CourseLifecycle,
+  CourseReleaseEvidence,
+  CourseRouteRole,
+} from "./course-catalog";
 
 export { extractTableOfContents, stripDocumentTitle };
 
@@ -16,6 +22,7 @@ export type CourseArc = {
 };
 
 export type CourseModule = {
+  id: string;
   number: number;
   slug: string;
   filename: string;
@@ -25,9 +32,19 @@ export type CourseModule = {
   wordCount: number;
   estimatedMinutes: number;
   sourceHash: string;
-  prerequisiteSlug: string | null;
+  availability: CourseAvailability;
+  lifecycle: CourseLifecycle;
+  routeRole: CourseRouteRole;
+  routePosition: number;
+  masteryGateId: string;
+  sourceMap: string | null;
+  studioId: string | null;
+  releaseEvidence: CourseReleaseEvidence;
+  prerequisiteNumbers: number[];
   prerequisiteSlugs: string[];
+  previousRouteNumber: number | null;
   previousSlug: string | null;
+  nextRouteNumber: number | null;
   nextSlug: string | null;
 };
 
@@ -39,7 +56,11 @@ export type TableOfContentsItem = {
 
 type ModuleManifest = {
   schemaVersion: number;
+  courseGraphSchemaVersion: number;
+  routePlanId: string;
   moduleCount: number;
+  readableModuleCount: number;
+  previewModuleCount: number;
   arcs: CourseArc[];
   modules: CourseModule[];
 };

@@ -35,9 +35,12 @@ rote typing or exam drill.
 
 The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
 days. It is a rigorous connected first pass, not a claim of instant durable
-mastery. The learner route has 36 defined modules: 30 are readable today and
-6 advanced depth modules are in authoring. Planned modules remain visibly
-unlinked until their source maps, workbooks, studios, and checks are released.
+mastery. The learner route has 36 defined modules: 28 are open on the active
+Core, 2 released synthesis workbooks are clearly labelled previews, and 6
+advanced depth modules are in authoring. The learner route pauses at an
+authoring-only prerequisite rather than silently skipping it. The checked-in
+canonical graph at `content/course/course-graph.v1.json` is the source for
+route order, academic prerequisites, availability, and manifest projections.
 
 Every module ends with a short constructive oral defense: GPT Live Chat is the
 preferred surface when available, with an equivalent text route. It evaluates
@@ -53,8 +56,8 @@ scripted performance.
 | 26–34 | M17 plus published M28 linear algebra/stability, M29 calculus/analysis, and M30 probability/statistics/scientific inference, then M31 optimization/information (M31 in authoring) |
 | 35–44 | M18–M24 operating, network, trust, language, and runtime boundaries |
 | 45–53 | M32–M36 accelerators, formal limits, classical AI, ML, and learning theory (in authoring) |
-| 54–55 | M25 evidence-grounded, human-centered intelligent systems |
-| 56–60 | M26 capstone release and oral architecture defense |
+| 54–55 | M25 evidence-grounded, human-centered intelligent systems (released preview until M31–M36 evidence exists) |
+| 56–60 | M26 capstone release and oral architecture defense (released preview until M25 becomes Core-open) |
 
 The schedule adapts to diagnostic evidence, difficult concepts, project
 revision, and retrieval needs. At the lower end of the weekly time budget, or

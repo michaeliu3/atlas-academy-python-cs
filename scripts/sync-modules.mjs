@@ -9,6 +9,7 @@ import {
 } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadCourseGraph, projectReadableModules } from "./course-graph.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -394,89 +395,15 @@ const sourceDirectory = await access(canonicalSourceDirectory)
 const sourceMapDirectory = await access(canonicalResearchDirectory)
   .then(() => canonicalResearchDirectory)
   .catch(() => sourceMapOutputDirectory);
-const publishedThrough = 30;
-const expectedNumbers = Array.from(
-  { length: publishedThrough },
-  (_, index) => index + 1,
+const courseGraph = await loadCourseGraph();
+const projectedModules = projectReadableModules(courseGraph);
+const projectedModuleByNumber = new Map(
+  projectedModules.map((courseModule) => [courseModule.number, courseModule]),
 );
-
-const arcs = [
-  {
-    id: "arc-i",
-    numeral: "I",
-    title: "Computation & reasoning",
-    range: "Modules 1–5",
-    description:
-      "Build the execution, abstraction, proof, and cost models that every later system depends on.",
-    start: 1,
-    end: 5,
-  },
-  {
-    id: "arc-ii",
-    numeral: "II",
-    title: "Data & algorithms",
-    range: "Modules 6–11",
-    description:
-      "Connect representation choices to operations, invariants, performance, and algorithmic strategy.",
-    start: 6,
-    end: 11,
-  },
-  {
-    id: "arc-iii",
-    numeral: "III",
-    title: "Durable software",
-    range: "Modules 12–16",
-    description:
-      "Turn local reasoning into stable APIs, evidence, maintainable architecture, delivery, and transactions.",
-    start: 12,
-    end: 16,
-  },
-  {
-    id: "arc-iv",
-    numeral: "IV",
-    title: "Machine & network",
-    range: "Modules 17–22",
-    description:
-      "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries.",
-    start: 17,
-    end: 22,
-  },
-  {
-    id: "arc-v",
-    numeral: "V",
-    title: "Languages & intelligence",
-    range: "Modules 23–26",
-    description:
-      "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense.",
-    start: 23,
-    end: 26,
-  },
-  {
-    id: "arc-vi",
-    numeral: "VI",
-    title: "Mathematical foundations",
-    range: "Modules 27–30",
-    description:
-      "Deepen proof, counting, structure, linear representation, continuous change, probability, and scientific-inference boundaries before the later mathematics and AI sequence.",
-    start: 27,
-    end: 30,
-  },
-];
-
-// Stable module IDs are numeric for release continuity. Learner navigation must
-// instead follow the prerequisite-first 60-day route, which inserts M27 after M5
-// and M28–M30 after M17 (while preserving their direct prerequisites).
-const learnerRouteOrder = [
-  1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28, 29, 30, 18,
-  19, 20, 21, 22, 23, 24, 25, 26,
-];
-
-const directPrerequisiteNumbers = new Map([
-  [27, [2, 4, 5]],
-  [28, [17, 27]],
-  [29, [27, 28]],
-  [30, [27, 29]],
-]);
+const graphModuleByNumber = new Map(
+  courseGraph.modules.map((courseModule) => [courseModule.number, courseModule]),
+);
+const expectedNumbers = projectedModules.map(({ number }) => number);
 
 function moduleNumber(filename) {
   const match = filename.match(/^(\d{2})_.+\.md$/);
@@ -567,18 +494,13 @@ if (
 }
 
 if (
-  learnerRouteOrder.length !== selectedNumbers.length ||
-  new Set(learnerRouteOrder).size !== learnerRouteOrder.length ||
-  learnerRouteOrder.some((number) => !selectedNumbers.includes(number))
+  projectedModules.length !== selectedNumbers.length ||
+  projectedModules.some(({ number }) => !selectedNumbers.includes(number))
 ) {
   throw new Error(
-    "Learner route order must contain every published module exactly once.",
+    "Every published graph module must have exactly one checked-in workbook.",
   );
 }
-
-const selectedFileByNumber = new Map(
-  selectedFiles.map((filename) => [moduleNumber(filename), filename]),
-);
 
 const existingDerived = (await readdir(outputDirectory)).filter((filename) =>
   filename.endsWith(".md"),
@@ -1021,6 +943,11 @@ if (
 
 for (const filename of selectedFiles) {
   const number = moduleNumber(filename);
+  const graphModule = graphModuleByNumber.get(number);
+  const projectedModule = projectedModuleByNumber.get(number);
+  if (!graphModule || !projectedModule) {
+    throw new Error(`Module ${number} is not a published course-graph projection.`);
+  }
   const markdown = normalizeNewlines(
     await readFile(join(sourceDirectory, filename), "utf8"),
   );
@@ -1033,36 +960,27 @@ for (const filename of selectedFiles) {
     heading.replace(new RegExp(`^Module\\s+${number}\\s+[—–-]\\s*`, "iu"), "").trim() ||
     heading;
   const slug = moduleSlug(filename);
-  const arc = arcs.find(({ start, end }) => number >= start && number <= end);
+  const arc = courseGraph.knowledgeArcs.find(
+    ({ id }) => id === graphModule.knowledgeArcId,
+  );
   if (!arc) {
-    throw new Error(`No arc is configured for Module ${number}.`);
+    throw new Error(`No knowledge arc is configured for Module ${number}.`);
+  }
+  if (title !== graphModule.title) {
+    throw new Error(
+      `Module ${number} workbook title does not match the canonical course graph.`,
+    );
+  }
+  if (slug !== graphModule.slug) {
+    throw new Error(
+      `Module ${number} workbook slug does not match the canonical course graph.`,
+    );
   }
 
   if (await writeIfChanged(join(outputDirectory, filename), markdown)) {
     changedFiles += 1;
   }
 
-  const learnerRouteIndex = learnerRouteOrder.indexOf(number);
-  const previousFilename =
-    learnerRouteIndex > 0
-      ? selectedFileByNumber.get(learnerRouteOrder[learnerRouteIndex - 1]) ?? null
-      : null;
-  const nextFilename =
-    learnerRouteIndex < learnerRouteOrder.length - 1
-      ? selectedFileByNumber.get(learnerRouteOrder[learnerRouteIndex + 1]) ?? null
-      : null;
-  const prerequisiteNumbers =
-    directPrerequisiteNumbers.get(number) ??
-    (previousFilename ? [learnerRouteOrder[learnerRouteIndex - 1]] : []);
-  const prerequisiteSlugs = prerequisiteNumbers.map((prerequisiteNumber) => {
-    const prerequisiteFilename = selectedFileByNumber.get(prerequisiteNumber);
-    if (!prerequisiteFilename) {
-      throw new Error(
-        "Module " + number + " requires unpublished Module " + prerequisiteNumber + ".",
-      );
-    }
-    return moduleSlug(prerequisiteFilename);
-  });
   const variableName = `module${String(number).padStart(2, "0")}`;
   importLines.push(`import ${variableName} from "./${filename}?raw";`);
   contentEntries.push(`  "${slug}": ${variableName},`);
@@ -1080,23 +998,38 @@ for (const filename of selectedFiles) {
       Math.ceil(markdown.trim().split(/\s+/u).length / 210),
     ),
     sourceHash: createHash("sha256").update(markdown).digest("hex"),
-    prerequisiteSlug: prerequisiteSlugs.at(-1) ?? null,
-    prerequisiteSlugs,
-    previousSlug: previousFilename ? moduleSlug(previousFilename) : null,
-    nextSlug: nextFilename ? moduleSlug(nextFilename) : null,
+    id: graphModule.id,
+    availability: graphModule.availability,
+    lifecycle: graphModule.lifecycle,
+    routeRole: graphModule.routeRole,
+    routePosition: projectedModule.routePosition,
+    masteryGateId: graphModule.masteryGateId,
+    sourceMap: graphModule.sourceMap,
+    studioId: graphModule.studioId,
+    releaseEvidence: graphModule.releaseEvidence,
+    prerequisiteNumbers: projectedModule.prerequisiteNumbers,
+    prerequisiteSlugs: projectedModule.prerequisiteSlugs,
+    previousRouteNumber: projectedModule.previousRouteNumber,
+    previousSlug: projectedModule.previousSlug,
+    nextRouteNumber: projectedModule.nextRouteNumber,
+    nextSlug: projectedModule.nextSlug,
   });
 }
 
 const manifest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
+  courseGraphSchemaVersion: courseGraph.schemaVersion,
+  routePlanId: courseGraph.routePlan.id,
   moduleCount: modules.length,
-  arcs: arcs.map((arc) => ({
-    id: arc.id,
-    numeral: arc.numeral,
-    title: arc.title,
-    range: arc.range,
-    description: arc.description,
-  })),
+  readableModuleCount: modules.filter(
+    ({ availability }) => availability === "published",
+  ).length,
+  previewModuleCount: modules.filter(
+    ({ availability }) => availability === "preview",
+  ).length,
+  arcs: courseGraph.knowledgeArcs.filter((arc) =>
+    modules.some(({ arcId }) => arcId === arc.id),
+  ),
   modules,
 };
 
