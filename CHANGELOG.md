@@ -75,6 +75,13 @@ actually published.
   candidate `d3e3679`. This is bounded candidate-validation evidence, not a
   GitHub Release, private deployment, complete security review, or course
   completion claim.
+- Recorded two further successful Course CI candidate records separately:
+  source heads b3f77fa and 0215968 ran in attempt 1 of 30590723766 and
+  30591406448, respectively, with all four required jobs checking merge
+  candidates e71cde3 and d64f688. These remain bounded
+  source-head/merge-candidate validation facts; they do not establish a
+  release, deployment, course completion, or that the prospective observer
+  has executed from the default branch.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;
