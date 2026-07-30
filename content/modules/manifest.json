@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 24,
+  "moduleCount": 25,
   "arcs": [
     {
       "id": "arc-i",
@@ -373,6 +373,20 @@
       "sourceHash": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73",
       "prerequisiteSlug": "23-programming-languages-interpreters",
       "previousSlug": "23-programming-languages-interpreters",
+      "nextSlug": "25-evidence-grounded-intelligent-systems"
+    },
+    {
+      "number": 25,
+      "slug": "25-evidence-grounded-intelligent-systems",
+      "filename": "25_evidence_grounded_intelligent_systems.md",
+      "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
+      "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
+      "arcId": "arc-v",
+      "wordCount": 7189,
+      "estimatedMinutes": 35,
+      "sourceHash": "75a9adccfc34e43546c7e65e858aef9bbe2e3571f838aab91b8da0599366c4c7",
+      "prerequisiteSlug": "24-cpython-performance-memory",
+      "previousSlug": "24-cpython-performance-memory",
       "nextSlug": null
     }
   ]

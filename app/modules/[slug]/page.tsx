@@ -19,6 +19,7 @@ import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
 import { SecurityTrustStudio } from "../../SecurityTrustStudio";
 import { LanguageInterpreterStudio } from "../../LanguageInterpreterStudio";
 import { RuntimeEvidenceObservatory } from "../../RuntimeEvidenceObservatory";
+import { EvidenceGroundedStudio } from "../../EvidenceGroundedStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -103,6 +104,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "24-cpython-performance-memory" && (
           <RuntimeEvidenceObservatory />
+        )}
+        {slug === "25-evidence-grounded-intelligent-systems" && (
+          <EvidenceGroundedStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />

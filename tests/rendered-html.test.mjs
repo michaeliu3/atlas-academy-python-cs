@@ -611,6 +611,67 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
   assert.match(style, /focus-visible/);
 });
 
+test("Module 25 preserves its decision-support invariant, six-view studio, and safe local progress shape", async () => {
+  const studioUrl = new URL("../app/EvidenceGroundedStudio.tsx", import.meta.url);
+  const styleUrl = new URL("../app/EvidenceGroundedStudio.module.css", import.meta.url);
+  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
+  const [studio, style, page] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(styleUrl, "utf8"),
+    readFile(pageUrl, "utf8"),
+  ]);
+
+  assert.ok(
+    studio.includes(
+      "A score never silently changes learner state, grants authority, proves truth, establishes causality, or turns feedback into ground truth.",
+    ),
+  );
+  assert.match(page, /EvidenceGroundedStudio/);
+  assert.match(page, /slug === "25-evidence-grounded-intelligent-systems"/);
+  assert.match(page, /<EvidenceGroundedStudio \/>/);
+
+  for (const viewLabel of [
+    "Purpose → boundary",
+    "Event → claim",
+    "Candidates → reason",
+    "Score → evidence",
+    "Explanation → override",
+    "Proposal → review",
+  ]) {
+    assert.ok(studio.includes('label: "' + viewLabel + '"'), viewLabel);
+  }
+
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /aria-labelledby="evidence-grounded-studio-title"/);
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /isStudioRecord/);
+  assert.match(studio, /choiceIdsByView/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /storageReady/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each decision-support view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
+  assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
+  assert.match(studio, /<b>0<\/b> live learner records/);
+  assert.match(studio, /Never alter a plan, calendar, or record/);
+  assert.match(studio, /never sends or changes personal data/);
+  assert.doesNotMatch(studio, /window\.confirm/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /focus-visible/);
+});
+
 test("release architecture keeps Notion capture manual and out of the portal runtime", async () => {
   const architectureUrl = new URL("../docs/ARCHITECTURE.md", import.meta.url);
   const privacyUrl = new URL("../docs/PRIVACY.md", import.meta.url);
@@ -938,19 +999,19 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–24 exactly once", async () => {
+test("generated module manifest covers Modules 1–25 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 24);
+  assert.equal(manifest.moduleCount, 25);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 24 }, (_, index) => index + 1),
+    Array.from({ length: 25 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 24);
+  assert.equal(new Set(slugs).size, 25);
   assert.equal(manifest.arcs.length, 5);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
@@ -962,6 +1023,7 @@ test("generated module manifest covers Modules 1–24 exactly once", async () =>
   const module22 = manifest.modules.find((courseModule) => courseModule.number === 22);
   const module23 = manifest.modules.find((courseModule) => courseModule.number === 23);
   const module24 = manifest.modules.find((courseModule) => courseModule.number === 24);
+  const module25 = manifest.modules.find((courseModule) => courseModule.number === 25);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -991,7 +1053,11 @@ test("generated module manifest covers Modules 1–24 exactly once", async () =>
   assert.equal(module24.arcId, "arc-v");
   assert.equal(module24.previousSlug, module23.slug);
   assert.equal(module24.prerequisiteSlug, module23.slug);
-  assert.equal(module24.nextSlug, null);
+  assert.equal(module24.nextSlug, module25.slug);
+  assert.equal(module25.arcId, "arc-v");
+  assert.equal(module25.previousSlug, module24.slug);
+  assert.equal(module25.prerequisiteSlug, module24.slug);
+  assert.equal(module25.nextSlug, null);
 });
 
 test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
@@ -1053,7 +1119,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Security, Privacy &amp; Trust Boundaries/);
   assert.match(html, /Programming Languages, Interpreters &amp; Bounded Evaluation/);
   assert.match(html, /CPython, Performance &amp; Memory Evidence/);
-  assert.match(html, /<dt>24<\/dt>/);
+  assert.match(html, /Evidence-Grounded Intelligent &amp; Human-Centered Systems/);
+  assert.match(html, /<dt>25<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1562,5 +1629,55 @@ test("renders the finalized CPython-performance-and-memory-evidence workbook", a
   assert.match(
     referenceTests,
     /test_unknown_scenario_does_not_accept_dynamic_input/,
+  );
+});
+
+test("renders the finalized evidence-grounded-intelligent-systems workbook", async () => {
+  const response = await render("/modules/25-evidence-grounded-intelligent-systems");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 25: Evidence-Grounded Intelligent &amp; Human-Centered Systems · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 25 workbook/);
+  assert.match(html, /Next-Step Evidence Studio/);
+  assert.match(html, /Purpose → boundary/);
+  assert.match(html, /Proposal → review/);
+  assert.match(html, /A score never silently changes learner state/);
+  assert.match(html, /Problem ladder and Atlas project/);
+  assert.match(html, /Next-Step Evidence Dossier/);
+  assert.match(html, /href="\/downloads\/module25_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module25_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module25_reference.py",
+    import.meta.url,
+  );
+  const testsUrl = new URL(
+    "../public/downloads/test_module25_reference.py",
+    import.meta.url,
+  );
+  const [reference, referenceTests] = await Promise.all([
+    readFile(referenceUrl, "utf8"),
+    readFile(testsUrl, "utf8"),
+  ]);
+  assert.match(reference, /def validate_contract/);
+  assert.match(reference, /def rank_transparent_baseline/);
+  assert.match(reference, /def validate_training_rows/);
+  assert.match(reference, /def evaluate_held_out/);
+  assert.match(reference, /def review_agent_proposal/);
+  assert.match(reference, /SCENARIOS/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module25_reference as model/);
+  assert.match(referenceTests, /DecisionContractSeamTests/);
+  assert.match(
+    referenceTests,
+    /test_fixed_scenarios_cover_each_boundary_without_dynamic_input/,
   );
 });
