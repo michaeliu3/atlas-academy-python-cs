@@ -11,6 +11,23 @@ actually published.
   not be described as security-clean while the tracked transitive-advisory
   follow-up remains open.
 
+## v0.5.3-decision-evidence (private course milestone)
+
+- Published the private GitHub Release `v0.5.3-decision-evidence` and deployed
+  the owner-only Atlas Academy portal as version 20 from the exact
+  protected-main build.
+- Released Module 25, Evidence-Grounded Intelligent & Human-Centered Systems:
+  a six-view Next-Step Evidence Studio, a source-backed fixed synthetic
+  reference model with 28 behavioral checks on Python 3.12 and 3.14, and
+  downloadable teaching artifacts. It makes purpose, authorized data,
+  candidate sets, ranking, evaluation, accessibility, human override, and
+  AI-proposal review explicit without letting a score silently change learner
+  state or become authority.
+- Verified the portal with 40 learner-facing checks and retained the
+  owner-only access boundary. Existing dependency advisories remain tracked;
+  this release does not claim a security-clean dependency graph or broader
+  access.
+
 ## v0.5.2-runtime-evidence (private course milestone)
 
 - Published the private GitHub Release `v0.5.2-runtime-evidence` and deployed
