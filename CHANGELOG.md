@@ -11,6 +11,26 @@ actually published.
   not be described as security-clean while the tracked transitive-advisory
   follow-up remains open.
 
+## v0.6-capstone (private course milestone)
+
+- Published the private GitHub Release `v0.6-capstone` and deployed the
+  owner-only Atlas Academy portal as version 21 from the exact
+  protected-main build.
+- Released Module 26, Systems Capstone, Open-Source Stewardship & Oral
+  Architecture Defense: a six-view, reader-first studio that connects a
+  release brief, system trace, failure playback, red-team patch review,
+  evidence ledger, and release defense.
+- Added a deterministic, local reference model and downloadable tests that
+  keep claims bound to a candidate version, require independent human review,
+  recompute release decisions from raw evidence, and reject unapproved
+  external actions or agent-role substitutions. The model passed 46 checks on
+  Python 3.12 and Python 3.14; the published-download suite passed 270 checks
+  with one environment-specific symlink case skipped.
+- Verified 42 learner-facing portal checks, source parity, accessibility
+  semantics, and the owner-only access boundary. Existing dependency
+  advisories remain tracked in issue #10; this release does not claim a
+  security-clean dependency graph or broader portal access.
+
 ## v0.5.3-decision-evidence (private course milestone)
 
 - Published the private GitHub Release `v0.5.3-decision-evidence` and deployed
