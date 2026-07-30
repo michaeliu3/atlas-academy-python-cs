@@ -28,8 +28,11 @@ oral-defense, or project evidence shows a necessary bridge.
 - [x] M27 — discrete mathematics, proof, counting, and structures, with a
   source-audited workbook, local proof/counterexample studio, bounded reference
   model, and prerequisite-first reader navigation.
-- [ ] M28–M31 — linear algebra, analysis, probability/statistics, and
-  optimization/information.
+- [x] M28 — linear algebra, numerical stability, and representation, with a
+  source-audited six-session workbook, fixed-fixture prediction studio,
+  bounded local model, code-reading boundaries, and conversational oral
+  defense.
+- [ ] M29–M31 — analysis, probability/statistics, and optimization/information.
 - [ ] M32–M36 — systems-for-learning, formal limits, classical AI, ML, and
   learning-theory reliability.
 - [ ] Reweave M25/M26 and their capstone evidence packet against the released

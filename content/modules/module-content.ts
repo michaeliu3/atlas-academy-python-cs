@@ -26,6 +26,7 @@ import module24 from "./24_cpython_performance_memory.md?raw";
 import module25 from "./25_evidence_grounded_intelligent_systems.md?raw";
 import module26 from "./26_systems_capstone_open_source_stewardship.md?raw";
 import module27 from "./27_discrete_mathematics_proof_counting_structures.md?raw";
+import module28 from "./28_linear_algebra_numerical_stability_representation.md?raw";
 
 export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "01-values-state-execution": module01,
@@ -55,4 +56,5 @@ export const moduleMarkdownBySlug: Readonly<Record<string, string>> = {
   "25-evidence-grounded-intelligent-systems": module25,
   "26-systems-capstone-open-source-stewardship": module26,
   "27-discrete-mathematics-proof-counting-structures": module27,
+  "28-linear-algebra-numerical-stability-representation": module28,
 };

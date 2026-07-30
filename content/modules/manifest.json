@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 27,
+  "moduleCount": 28,
   "arcs": [
     {
       "id": "arc-i",
@@ -41,8 +41,8 @@
       "id": "arc-vi",
       "numeral": "VI",
       "title": "Mathematical foundations",
-      "range": "Module 27",
-      "description": "Deepen proof, counting, structure, and formal claim boundaries before the later mathematics and AI sequence."
+      "range": "Modules 27–28",
+      "description": "Deepen proof, counting, structure, linear representation, and numerical claim boundaries before the later mathematics and AI sequence."
     }
   ],
   "modules": [
@@ -331,7 +331,7 @@
         "16-relational-data-transactions"
       ],
       "previousSlug": "16-relational-data-transactions",
-      "nextSlug": "18-operating-systems-resource-mediation"
+      "nextSlug": "28-linear-algebra-numerical-stability-representation"
     },
     {
       "number": 18,
@@ -343,11 +343,11 @@
       "wordCount": 20336,
       "estimatedMinutes": 97,
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
-      "prerequisiteSlug": "17-computer-architecture-execution-stack",
+      "prerequisiteSlug": "28-linear-algebra-numerical-stability-representation",
       "prerequisiteSlugs": [
-        "17-computer-architecture-execution-stack"
+        "28-linear-algebra-numerical-stability-representation"
       ],
-      "previousSlug": "17-computer-architecture-execution-stack",
+      "previousSlug": "28-linear-algebra-numerical-stability-representation",
       "nextSlug": "19-concurrency-parallelism"
     },
     {
@@ -504,6 +504,24 @@
       ],
       "previousSlug": "05-cost-models-algorithm-analysis",
       "nextSlug": "06-representation-memory-sequences-linked"
+    },
+    {
+      "number": 28,
+      "slug": "28-linear-algebra-numerical-stability-representation",
+      "filename": "28_linear_algebra_numerical_stability_representation.md",
+      "title": "Linear Algebra, Numerical Stability & Representation",
+      "summary": "Bridge: M27 made domains, definitions, proof obligations, witnesses, and evidence boundaries explicit. M28 asks a complementary question: when a program stores an observation as coordinates, what structure survives a change of coordinate…",
+      "arcId": "arc-vi",
+      "wordCount": 8035,
+      "estimatedMinutes": 39,
+      "sourceHash": "f1a42ffdf4b062db3320e3a2690b8ef9e7afd8619637f1129aa1847bb5701c95",
+      "prerequisiteSlug": "27-discrete-mathematics-proof-counting-structures",
+      "prerequisiteSlugs": [
+        "17-computer-architecture-execution-stack",
+        "27-discrete-mathematics-proof-counting-structures"
+      ],
+      "previousSlug": "17-computer-architecture-execution-stack",
+      "nextSlug": "18-operating-systems-resource-mediation"
     }
   ]
 }

@@ -98,10 +98,15 @@ test("every module reader includes the supportive oral-defense route", async () 
   assert.match(oralDefense, /prediction-before-reveal/);
   assert.match(oralDefense, /What would change your mind\?/);
   assert.match(oralDefense, /Ask whether I approve saving only that concise summary/);
+  assert.match(oralDefense, /checked=\{recordApproved\}/);
+  assert.match(oralDefense, /disabled=\{!recordApproved\}/);
+  assert.match(oralDefense, /I approve copying only this concise evidence record/);
   assert.match(oralGuide, /bindings, object identity, mutation, and frame-local state/);
   assert.match(oralGuide, /a release argument joining architecture, invariant/);
   assert.match(oralGuide, /formal definition and assumptions/);
   assert.match(oralGuide, /system boundary, failure mode, evidence, tradeoff/);
+  assert.match(oralGuide, /linear maps, projections, rank, spectra, and conditioning/);
+  assert.match(oralGuide, /shape\/dtype\/solver path/);
 
   const response = await render("/modules/04-logic-sets-relations-graphs-proof");
   assert.equal(response.status, 200);
@@ -123,11 +128,12 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   const readable = html.replaceAll("<!-- -->", "");
   assert.match(readable, /60 days\./);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
-  assert.match(readable, /27 \/ 9/);
+  assert.match(readable, /28 \/ 8/);
   assert.match(readable, /published \/ in authoring/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
+  assert.match(readable, /Module 28/);
   assert.match(readable, /Published/);
   assert.match(readable, /In authoring/);
   assert.match(readable, /Source map and studio are being built before release\./);
@@ -137,6 +143,10 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(
     html,
     /href="\/modules\/27-discrete-mathematics-proof-counting-structures"/,
+  );
+  assert.match(
+    html,
+    /href="\/modules\/28-linear-algebra-numerical-stability-representation"/,
   );
 });
 
@@ -151,7 +161,7 @@ test("keeps release status and route linkability aligned with the published mani
     manifest.modules.map((courseModule) => courseModule.number),
   );
 
-  for (let number = 1; number <= 27; number += 1) {
+  for (let number = 1; number <= 28; number += 1) {
     assert.ok(publishedNumbers.has(number), `M${number} appears in the manifest`);
     assert.match(
       routeSource,
@@ -160,7 +170,7 @@ test("keeps release status and route linkability aligned with the published mani
     );
   }
 
-  for (let number = 28; number <= 36; number += 1) {
+  for (let number = 29; number <= 36; number += 1) {
     assert.ok(!publishedNumbers.has(number), `M${number} is not prematurely published`);
     assert.match(
       routeSource,
@@ -1168,19 +1178,19 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–27 exactly once", async () => {
+test("generated module manifest covers Modules 1–28 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 27);
+  assert.equal(manifest.moduleCount, 28);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 27 }, (_, index) => index + 1),
+    Array.from({ length: 28 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 27);
+  assert.equal(new Set(slugs).size, 28);
   assert.equal(manifest.arcs.length, 6);
 
   const module2 = manifest.modules.find((courseModule) => courseModule.number === 2);
@@ -1199,15 +1209,23 @@ test("generated module manifest covers Modules 1–27 exactly once", async () =>
   const module25 = manifest.modules.find((courseModule) => courseModule.number === 25);
   const module26 = manifest.modules.find((courseModule) => courseModule.number === 26);
   const module27 = manifest.modules.find((courseModule) => courseModule.number === 27);
+  const module28 = manifest.modules.find((courseModule) => courseModule.number === 28);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
   assert.equal(module16.nextSlug, module17.slug);
   assert.equal(module17.previousSlug, module16.slug);
   assert.equal(module17.prerequisiteSlug, module16.slug);
-  assert.equal(module17.nextSlug, module18.slug);
-  assert.equal(module18.previousSlug, module17.slug);
-  assert.equal(module18.prerequisiteSlug, module17.slug);
+  assert.equal(module17.nextSlug, module28.slug);
+  assert.equal(module28.previousSlug, module17.slug);
+  assert.equal(module28.prerequisiteSlug, module27.slug);
+  assert.deepEqual(module28.prerequisiteSlugs, [
+    module17.slug,
+    module27.slug,
+  ]);
+  assert.equal(module28.nextSlug, module18.slug);
+  assert.equal(module18.previousSlug, module28.slug);
+  assert.equal(module18.prerequisiteSlug, module28.slug);
   assert.equal(module18.nextSlug, module19.slug);
   assert.equal(module19.previousSlug, module18.slug);
   assert.equal(module19.prerequisiteSlug, module18.slug);
@@ -1238,6 +1256,7 @@ test("generated module manifest covers Modules 1–27 exactly once", async () =>
   assert.equal(module26.prerequisiteSlug, module25.slug);
   assert.equal(module26.nextSlug, null);
   assert.equal(module27.arcId, "arc-vi");
+  assert.equal(module28.arcId, "arc-vi");
   assert.equal(module5.nextSlug, module27.slug);
   assert.equal(module27.previousSlug, module5.slug);
   assert.equal(module27.nextSlug, module6.slug);
@@ -1313,7 +1332,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense/);
   assert.match(html, /Mathematical foundations/);
   assert.match(html, /Discrete Mathematics, Proof, Counting &amp; Structures/);
-  assert.match(html, /<dt>27<\/dt>/);
+  assert.match(html, /Linear Algebra, Numerical Stability &amp; Representation/);
+  assert.match(html, /<dt>28<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -2004,4 +2024,87 @@ test("renders the discrete mathematics proof workbook and its bounded teaching m
   assert.match(referenceTests, /class MatchingTests/);
   assert.match(referenceTests, /class CountingAndNumberTheoryTests/);
   assert.match(referenceTests, /test_maximal_matching_can_still_fail_to_be_maximum/);
+});
+
+test("renders the linear algebra stability workbook and its bounded teaching model", async () => {
+  const response = await render(
+    "/modules/28-linear-algebra-numerical-stability-representation",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 28: Linear Algebra, Numerical Stability &amp; Representation · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 28 workbook/);
+  assert.match(html, /Linear Algebra &amp; Stability Studio/);
+  assert.match(html, /M28 working invariant/);
+  assert.match(html, /Coordinate contract/);
+  assert.match(html, /Confidence-aware diagnostic/);
+  assert.match(html, /Representation &amp; Stability Dossier/);
+  assert.match(html, /Conversational oral defense — M28/);
+  assert.match(html, /replaces a traditional coding or written exam/);
+  assert.match(html, /fully equivalent text conversation/);
+  assert.match(html, /href="\/downloads\/module28_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module28_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const [studio, style, reference, referenceTests, oralGuide] = await Promise.all([
+    readFile(new URL("../app/LinearAlgebraStabilityStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/LinearAlgebraStabilityStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module28_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module28_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each M28 view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /A: R³ → R²/);
+  assert.match(studio, /Aε = \[\[1, 1\], \[1, 1001\/1000\]\]/);
+  assert.match(studio, /±\(1, 1\)\/√2/);
+  assert.match(studio, /aria-live="polite"/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /not a theorem prover/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /forced-colors/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module28-reference\/1"/);
+  assert.match(reference, /def analyze_matrix/);
+  assert.match(reference, /def least_squares_projection/);
+  assert.match(reference, /def analyze_symmetric_psd/);
+  assert.match(reference, /def symmetric_eigendecomposition_2x2/);
+  assert.match(reference, /def pca_2d/);
+  assert.match(reference, /def condition_report_2x2/);
+  assert.match(reference, /def rhs_sensitivity_2x2/);
+  assert.match(reference, /def decimal_cancellation_demo/);
+  assert.match(reference, /Finite, deterministic reasoning aids/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module28_reference as model/);
+  assert.match(referenceTests, /class ExactMatrixSpaceTests/);
+  assert.match(referenceTests, /class ProjectionAndLeastSquaresTests/);
+  assert.match(referenceTests, /class SymmetricAndSpectralTests/);
+  assert.match(referenceTests, /class PCAAndNumericalBoundaryTests/);
+  assert.match(oralGuide, /28: \{/);
+  assert.match(oralGuide, /shape\/dtype\/solver path/);
 });

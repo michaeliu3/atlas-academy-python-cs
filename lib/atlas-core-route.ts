@@ -216,7 +216,7 @@ export const atlasCoreRoute: AtlasRoutePhase[] = [
         number: 28,
         title: "Linear Algebra, Numerical Stability & Representation",
         shortTitle: "linear algebra",
-        status: inAuthoring,
+        status: published,
         prerequisiteNumbers: [17, 27],
         purpose: "Derive projection, low-rank structure, and PCA with conditioning in view.",
       },

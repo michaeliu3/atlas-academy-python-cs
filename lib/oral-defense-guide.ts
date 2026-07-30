@@ -238,7 +238,7 @@ export const oralDefenseGuides: Record<number, OralDefenseGuide> = {
   28: {
     lens: "formal",
     centralModel: "linear maps, projections, rank, spectra, and conditioning as a model of representable information",
-    traceOrDerivation: "derive least squares, a projection, or PCA from its assumptions and finite-precision boundary",
+    traceOrDerivation: "derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary",
     misconception: "a matrix formula automatically yields a stable computation or PCA is merely an API call",
     boundary: "the conditioning, scale, rank, and approximation assumptions behind the numerical result",
     transfer: "critiquing a representation-reduction choice in an ML or scientific workflow",

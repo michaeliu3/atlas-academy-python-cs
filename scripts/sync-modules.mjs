@@ -266,6 +266,30 @@ const publishedModule27Tests = resolve(
   "downloads",
   "test_module27_reference.py",
 );
+const canonicalModule28Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module28_reference.py",
+);
+const publishedModule28Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module28_reference.py",
+);
+const canonicalModule28Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module28_reference.py",
+);
+const publishedModule28Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module28_reference.py",
+);
 const canonicalResearchDirectory = resolve(siteRoot, "..", "research");
 const sourceMapOutputDirectory = resolve(siteRoot, "content", "source-maps");
 const sourceDirectory = await access(canonicalSourceDirectory)
@@ -274,7 +298,7 @@ const sourceDirectory = await access(canonicalSourceDirectory)
 const sourceMapDirectory = await access(canonicalResearchDirectory)
   .then(() => canonicalResearchDirectory)
   .catch(() => sourceMapOutputDirectory);
-const publishedThrough = 27;
+const publishedThrough = 28;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -335,23 +359,25 @@ const arcs = [
     id: "arc-vi",
     numeral: "VI",
     title: "Mathematical foundations",
-    range: "Module 27",
+    range: "Modules 27–28",
     description:
-      "Deepen proof, counting, structure, and formal claim boundaries before the later mathematics and AI sequence.",
+      "Deepen proof, counting, structure, linear representation, and numerical claim boundaries before the later mathematics and AI sequence.",
     start: 27,
-    end: 27,
+    end: 28,
   },
 ];
 
 // Stable module IDs are numeric for release continuity. Learner navigation must
-// instead follow the prerequisite-first 60-day route, which inserts M27 after M5.
+// instead follow the prerequisite-first 60-day route, which inserts M27 after M5
+// and M28 after M17 (while preserving its direct M27 prerequisite).
 const learnerRouteOrder = [
-  1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+  1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28, 18, 19,
   20, 21, 22, 23, 24, 25, 26,
 ];
 
 const directPrerequisiteNumbers = new Map([
   [27, [2, 4, 5]],
+  [28, [17, 27]],
 ]);
 
 function moduleNumber(filename) {
@@ -760,6 +786,32 @@ if (
   await writeIfChanged(
     publishedModule27Tests,
     module27Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module28ReferenceSource = await access(canonicalModule28Reference)
+  .then(() => canonicalModule28Reference)
+  .catch(() => publishedModule28Reference);
+const module28Reference = await readFile(module28ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule28Reference,
+    module28Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module28TestsSource = await access(canonicalModule28Tests)
+  .then(() => canonicalModule28Tests)
+  .catch(() => publishedModule28Tests);
+const module28Tests = await readFile(module28TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule28Tests,
+    module28Tests,
   )
 ) {
   changedFiles += 1;

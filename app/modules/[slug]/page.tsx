@@ -23,6 +23,7 @@ import { RuntimeEvidenceObservatory } from "../../RuntimeEvidenceObservatory";
 import { EvidenceGroundedStudio } from "../../EvidenceGroundedStudio";
 import { CapstoneDefenseStudio } from "../../CapstoneDefenseStudio";
 import { DiscreteMathProofStudio } from "../../DiscreteMathProofStudio";
+import { LinearAlgebraStabilityStudio } from "../../LinearAlgebraStabilityStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -116,6 +117,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "27-discrete-mathematics-proof-counting-structures" && (
           <DiscreteMathProofStudio />
+        )}
+        {slug === "28-linear-algebra-numerical-stability-representation" && (
+          <LinearAlgebraStabilityStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
