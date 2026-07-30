@@ -1,0 +1,522 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-advanced-module-publication-readiness-audit",
+  "auditDate": "2026-07-30",
+  "auditedGitHead": "a89fcae9a32dd0f9584a1b6f579ccd1f6bb3a853",
+  "scope": {
+    "moduleIds": ["m31", "m32", "m33", "m34", "m35", "m36"],
+    "purpose": "Record the release-readiness gap for the authoring-only advanced extension. This is an audit, not a module contract, release record, route mutation, or authorization to publish.",
+    "evidenceRule": "Only checked-in, repository-local evidence at the audited commit is counted. Uncommitted work, planned work, generic infrastructure, and a successfully parsed authoring plan do not count as learner-ready module evidence."
+  },
+  "statusTerms": {
+    "authoring-only": "The canonical graph deliberately withholds the module from learners.",
+    "authoring-plan-only": "A checked-in plan exists, but it is not learner-ready content, an approved contract, or release evidence.",
+    "authoring-research-only": "A source/research document exists, but it explicitly disclaims publication and has not been made canonical learner-facing evidence.",
+    "shared-infrastructure-only": "A reusable product capability exists, but no module-specific content, prompts, or release evidence make it evidence for this module.",
+    "not-evidenced": "The audit found no module-specific checked-in artifact that can satisfy the named release requirement.",
+    "blocked-by-design": "The unavailable state is intentional and should remain until all release conditions are met."
+  },
+  "evidenceSources": [
+    {
+      "path": "content/course/course-graph.v1.json",
+      "observation": "Canonical source of lifecycle, availability, academic prerequisites, forward handoffs, source-map pointers, studios, and release-evidence status. M31-M36 are authoring-only with null sourceMap/studioId and planned release evidence."
+    },
+    {
+      "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+      "observation": "Graph-validated authoring ledger with six planned sessions and source/release blockers for every advanced module; its own truth boundary says it is not a publication contract, learner route, source map, or release record."
+    },
+    {
+      "path": "scripts/advanced-module-bridge.mjs",
+      "observation": "Validates the bridge's authoring-only state, graph prerequisites, forward handoff, six-session spine, and first-consumption claims; it does not validate learner content or publication evidence."
+    },
+    {
+      "path": "content/course/contracts/module-contracts.v1.json",
+      "observation": "Defines nine publication-evidence categories, but contains only M01-M30 legacy-baseline entries and no M31-M36 contract entries."
+    },
+    {
+      "path": "content/course/contracts/module-contract-evidence.v2.json",
+      "observation": "Its bounded draft-pointer pilots are M21 and M27 only; it contains no M31-M36 evidence and explicitly has no publication effect."
+    },
+    {
+      "path": "content/modules/manifest.json",
+      "observation": "Learner-readable manifest contains 30 modules (28 published-readable and two previews), not M31-M36."
+    },
+    {
+      "path": "content/source-maps/module31_optimization_information_source_audit.md",
+      "observation": "Detailed M31 instructor-facing source research. Its status statement says it is authoring-only and not publication evidence."
+    },
+    {
+      "path": "content/source-maps/module31_optimization_information_source_map.md",
+      "observation": "Detailed M31 instructor source map with planned six-session route, diagnostics, dossier, visual alternatives, and release gates. Its status statement says it is not a learner-ready workbook, contract approval, release record, or graph mutation."
+    },
+    {
+      "path": "lib/module-studio-registry.ts",
+      "observation": "The allowlisted reader-studio registry has no M31-M36 studio registration and treats authoring-only targets as unavailable."
+    },
+    {
+      "path": "app/modules/[slug]/ModuleInteraction.tsx",
+      "observation": "The reader renders authoring-only modules as unavailable and renders previews as orientation-only, rather than exposing a workbook, studio, project, or oral-defense route."
+    },
+    {
+      "path": "tests/course-contract.test.mjs",
+      "observation": "Covers the M31-M36 bridge as an authoring-plan structural check; it is not a teaching-model, browser, accessibility, source-license, or release-provenance test for any advanced module."
+    }
+  ],
+  "publicationArtifactIds": [
+    "prerequisite-and-forward-map",
+    "six-connected-sessions",
+    "first-principles-and-transfer-work",
+    "rigor-derivations-counterexamples-and-numerical-experiments",
+    "source-ledger-and-license-boundary",
+    "accessible-visual-equivalents",
+    "confidence-aware-diagnostic-and-retrieval",
+    "project-or-dossier-with-acceptance-evidence",
+    "supportive-oral-defense",
+    "module-specific-ta-study-partner-and-handoff",
+    "bounded-studio-or-equivalent-reference-model-and-teaching-tests",
+    "structured-module-contract-and-human-review",
+    "learner-page-manifest-and-route-metadata",
+    "release-provenance-ci-and-deployment-evidence"
+  ],
+  "sharedInfrastructureBoundary": {
+    "paths": [
+      "app/modules/[slug]/ModuleTextOralDefense.tsx",
+      "app/modules/[slug]/ModuleOralDefense.tsx",
+      "lib/learning-partner-prompts.ts"
+    ],
+    "finding": "Reusable text oral-defense and learning-partner infrastructure exists, but the authoring-only route prevents it from becoming M31-M36 learner evidence. No module-specific advanced content, prompts, dossier, or release proof was found in the audited inventory."
+  },
+  "modules": [
+    {
+      "moduleId": "m31",
+      "number": 31,
+      "title": "Optimization & Information",
+      "canonicalState": {
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned",
+        "evidence": "content/course/course-graph.v1.json#/modules/30"
+      },
+      "academicDependencies": {
+        "prerequisiteModuleNumbers": [28, 29, 30],
+        "forwardModuleNumber": 18,
+        "plannedDirectConsumers": [32, 34, 35, 36],
+        "evidence": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/0"
+      },
+      "existingAuthoringEvidence": [
+        {
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/0",
+          "classification": "authoring-plan-only",
+          "coverage": "Prerequisite bridges, six planned sessions, source blockers, release blockers, and forward handoff."
+        },
+        {
+          "path": "content/source-maps/module31_optimization_information_source_audit.md",
+          "classification": "authoring-research-only",
+          "coverage": "Research/source and license-reuse planning."
+        },
+        {
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "classification": "authoring-plan-only",
+          "coverage": "Planned sessions, original learning moves, visual alternatives, diagnostics, dossier, support roles, oral defense, and explicit unchecked release gates."
+        }
+      ],
+      "artifactStatus": {
+        "prerequisite-and-forward-map": "authoring-plan-only",
+        "six-connected-sessions": "authoring-plan-only",
+        "first-principles-and-transfer-work": "authoring-plan-only",
+        "rigor-derivations-counterexamples-and-numerical-experiments": "authoring-plan-only",
+        "source-ledger-and-license-boundary": "authoring-research-only",
+        "accessible-visual-equivalents": "authoring-plan-only",
+        "confidence-aware-diagnostic-and-retrieval": "authoring-plan-only",
+        "project-or-dossier-with-acceptance-evidence": "authoring-plan-only",
+        "supportive-oral-defense": "authoring-plan-only",
+        "module-specific-ta-study-partner-and-handoff": "authoring-plan-only",
+        "bounded-studio-or-equivalent-reference-model-and-teaching-tests": "not-evidenced",
+        "structured-module-contract-and-human-review": "not-evidenced",
+        "learner-page-manifest-and-route-metadata": "blocked-by-design",
+        "release-provenance-ci-and-deployment-evidence": "not-evidenced"
+      },
+      "missingEvidence": [
+        "A contract registry entry and reviewed evidence pointers that are permitted to affect publication.",
+        "Original learner-facing workbook/page, diagnostic/retrieval data, dossier rubric, TA/Study Partner prompt package, and module-specific text/Live oral flow.",
+        "A bounded studio or equivalent reference model plus teaching-model, accessibility/browser, and numerical-boundary tests.",
+        "A canonical graph sourceMap assignment only after source/claim and asset-level reuse review, plus manifest/route metadata generated from the approved graph.",
+        "Exact reviewed Git commit, passing required CI gates, private deployment/provenance ledger, changelog, and human review evidence."
+      ],
+      "bridgeBlockerIds": [
+        "m31-source-map-null",
+        "m31-source-boundaries-unreviewed",
+        "m31-learning-artifacts-unbuilt",
+        "m31-contract-and-provenance-unmet"
+      ],
+      "publicationVerdict": "Do not publish. The rich M31 documents are valuable authoring research and plans, not learner-ready release evidence."
+    },
+    {
+      "moduleId": "m32",
+      "number": 32,
+      "title": "Systems Languages, Scientific Python & Accelerators",
+      "canonicalState": {
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned",
+        "evidence": "content/course/course-graph.v1.json#/modules/31"
+      },
+      "academicDependencies": {
+        "prerequisiteModuleNumbers": [12, 17, 19, 24, 28, 31],
+        "forwardModuleNumber": 33,
+        "evidence": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/1"
+      },
+      "existingAuthoringEvidence": [
+        {
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/1",
+          "classification": "authoring-plan-only",
+          "coverage": "Prerequisite bridges and six planned sessions; it is not source research, a workbook, a studio, or publication evidence."
+        }
+      ],
+      "artifactStatus": {
+        "prerequisite-and-forward-map": "authoring-plan-only",
+        "six-connected-sessions": "authoring-plan-only",
+        "first-principles-and-transfer-work": "not-evidenced",
+        "rigor-derivations-counterexamples-and-numerical-experiments": "not-evidenced",
+        "source-ledger-and-license-boundary": "not-evidenced",
+        "accessible-visual-equivalents": "not-evidenced",
+        "confidence-aware-diagnostic-and-retrieval": "not-evidenced",
+        "project-or-dossier-with-acceptance-evidence": "not-evidenced",
+        "supportive-oral-defense": "shared-infrastructure-only",
+        "module-specific-ta-study-partner-and-handoff": "not-evidenced",
+        "bounded-studio-or-equivalent-reference-model-and-teaching-tests": "not-evidenced",
+        "structured-module-contract-and-human-review": "not-evidenced",
+        "learner-page-manifest-and-route-metadata": "blocked-by-design",
+        "release-provenance-ci-and-deployment-evidence": "not-evidenced"
+      },
+      "missingEvidence": [
+        "All module-specific source research and claim/license ledger, learner content, visuals, diagnostics, project/rubric, oral prompts, partner handoffs, bounded accelerator/reference model, and teaching tests.",
+        "A reviewed structured contract, canonical source-map/studio metadata, manifest/route projection, and release provenance after M31 prerequisite evidence is published."
+      ],
+      "bridgeBlockerIds": [
+        "m32-source-map-null",
+        "m32-hardware-claim-boundaries-unreviewed",
+        "m32-learning-artifacts-unbuilt",
+        "m32-contract-and-provenance-unmet"
+      ],
+      "publicationVerdict": "Do not publish. The only advanced-module-specific evidence is an authoring bridge."
+    },
+    {
+      "moduleId": "m33",
+      "number": 33,
+      "title": "Formal Languages, Computability & Complexity",
+      "canonicalState": {
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned",
+        "evidence": "content/course/course-graph.v1.json#/modules/32"
+      },
+      "academicDependencies": {
+        "prerequisiteModuleNumbers": [5, 11, 23, 27],
+        "forwardModuleNumber": 34,
+        "evidence": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/2"
+      },
+      "existingAuthoringEvidence": [
+        {
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/2",
+          "classification": "authoring-plan-only",
+          "coverage": "Prerequisite bridges and six planned sessions; it is not source research, a workbook, a studio, or publication evidence."
+        }
+      ],
+      "artifactStatus": {
+        "prerequisite-and-forward-map": "authoring-plan-only",
+        "six-connected-sessions": "authoring-plan-only",
+        "first-principles-and-transfer-work": "not-evidenced",
+        "rigor-derivations-counterexamples-and-numerical-experiments": "not-evidenced",
+        "source-ledger-and-license-boundary": "not-evidenced",
+        "accessible-visual-equivalents": "not-evidenced",
+        "confidence-aware-diagnostic-and-retrieval": "not-evidenced",
+        "project-or-dossier-with-acceptance-evidence": "not-evidenced",
+        "supportive-oral-defense": "shared-infrastructure-only",
+        "module-specific-ta-study-partner-and-handoff": "not-evidenced",
+        "bounded-studio-or-equivalent-reference-model-and-teaching-tests": "not-evidenced",
+        "structured-module-contract-and-human-review": "not-evidenced",
+        "learner-page-manifest-and-route-metadata": "blocked-by-design",
+        "release-provenance-ci-and-deployment-evidence": "not-evidenced"
+      },
+      "missingEvidence": [
+        "All module-specific source research and proof/reuse ledger, learner content, definition/proof/counterexample material, diagnostics, project/rubric, oral prompts, partner handoffs, bounded models, and teaching tests.",
+        "A reviewed structured contract, canonical source-map/studio metadata, manifest/route projection, and release provenance."
+      ],
+      "bridgeBlockerIds": [
+        "m33-source-map-null",
+        "m33-proof-source-boundaries-unreviewed",
+        "m33-learning-artifacts-unbuilt",
+        "m33-contract-and-provenance-unmet"
+      ],
+      "publicationVerdict": "Do not publish. The only advanced-module-specific evidence is an authoring bridge."
+    },
+    {
+      "moduleId": "m34",
+      "number": 34,
+      "title": "Classical AI: Search, Constraints & Decision",
+      "canonicalState": {
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned",
+        "evidence": "content/course/course-graph.v1.json#/modules/33"
+      },
+      "academicDependencies": {
+        "prerequisiteModuleNumbers": [10, 11, 30, 31, 33],
+        "forwardModuleNumber": 35,
+        "evidence": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/3"
+      },
+      "existingAuthoringEvidence": [
+        {
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/3",
+          "classification": "authoring-plan-only",
+          "coverage": "Prerequisite bridges and six planned sessions; it is not source research, a workbook, a studio, or publication evidence."
+        }
+      ],
+      "artifactStatus": {
+        "prerequisite-and-forward-map": "authoring-plan-only",
+        "six-connected-sessions": "authoring-plan-only",
+        "first-principles-and-transfer-work": "not-evidenced",
+        "rigor-derivations-counterexamples-and-numerical-experiments": "not-evidenced",
+        "source-ledger-and-license-boundary": "not-evidenced",
+        "accessible-visual-equivalents": "not-evidenced",
+        "confidence-aware-diagnostic-and-retrieval": "not-evidenced",
+        "project-or-dossier-with-acceptance-evidence": "not-evidenced",
+        "supportive-oral-defense": "shared-infrastructure-only",
+        "module-specific-ta-study-partner-and-handoff": "not-evidenced",
+        "bounded-studio-or-equivalent-reference-model-and-teaching-tests": "not-evidenced",
+        "structured-module-contract-and-human-review": "not-evidenced",
+        "learner-page-manifest-and-route-metadata": "blocked-by-design",
+        "release-provenance-ci-and-deployment-evidence": "not-evidenced"
+      },
+      "missingEvidence": [
+        "All module-specific source research and decision-claim/reuse ledger, learner content, search/constraint/decision proofs and counterexamples, diagnostics, project/rubric, oral prompts, partner handoffs, bounded models, and teaching tests.",
+        "A reviewed structured contract, canonical source-map/studio metadata, manifest/route projection, and release provenance after M31 and M33 prerequisite evidence is published."
+      ],
+      "bridgeBlockerIds": [
+        "m34-source-map-null",
+        "m34-decision-claim-boundaries-unreviewed",
+        "m34-learning-artifacts-unbuilt",
+        "m34-contract-and-provenance-unmet"
+      ],
+      "publicationVerdict": "Do not publish. The only advanced-module-specific evidence is an authoring bridge."
+    },
+    {
+      "moduleId": "m35",
+      "number": 35,
+      "title": "Machine Learning & Representation",
+      "canonicalState": {
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned",
+        "evidence": "content/course/course-graph.v1.json#/modules/34"
+      },
+      "academicDependencies": {
+        "prerequisiteModuleNumbers": [13, 22, 28, 30, 31, 32, 34],
+        "forwardModuleNumber": 36,
+        "evidence": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/4"
+      },
+      "existingAuthoringEvidence": [
+        {
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/4",
+          "classification": "authoring-plan-only",
+          "coverage": "Prerequisite bridges and six planned sessions; it is not source research, a workbook, a studio, or publication evidence."
+        }
+      ],
+      "artifactStatus": {
+        "prerequisite-and-forward-map": "authoring-plan-only",
+        "six-connected-sessions": "authoring-plan-only",
+        "first-principles-and-transfer-work": "not-evidenced",
+        "rigor-derivations-counterexamples-and-numerical-experiments": "not-evidenced",
+        "source-ledger-and-license-boundary": "not-evidenced",
+        "accessible-visual-equivalents": "not-evidenced",
+        "confidence-aware-diagnostic-and-retrieval": "not-evidenced",
+        "project-or-dossier-with-acceptance-evidence": "not-evidenced",
+        "supportive-oral-defense": "shared-infrastructure-only",
+        "module-specific-ta-study-partner-and-handoff": "not-evidenced",
+        "bounded-studio-or-equivalent-reference-model-and-teaching-tests": "not-evidenced",
+        "structured-module-contract-and-human-review": "not-evidenced",
+        "learner-page-manifest-and-route-metadata": "blocked-by-design",
+        "release-provenance-ci-and-deployment-evidence": "not-evidenced"
+      },
+      "missingEvidence": [
+        "All module-specific source research and data/model/reuse ledger, learner content, evaluation/shift and ML-debugging material, diagnostics, project/rubric, oral prompts, partner handoffs, bounded models, and teaching tests.",
+        "A reviewed structured contract, canonical source-map/studio metadata, manifest/route projection, and release provenance after M31, M32, and M34 prerequisite evidence is published."
+      ],
+      "bridgeBlockerIds": [
+        "m35-source-map-null",
+        "m35-data-and-model-claim-boundaries-unreviewed",
+        "m35-learning-artifacts-unbuilt",
+        "m35-contract-and-provenance-unmet"
+      ],
+      "publicationVerdict": "Do not publish. The only advanced-module-specific evidence is an authoring bridge."
+    },
+    {
+      "moduleId": "m36",
+      "number": 36,
+      "title": "Statistical Learning Theory & Reliable Deep-Learning Systems",
+      "canonicalState": {
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned",
+        "evidence": "content/course/course-graph.v1.json#/modules/35"
+      },
+      "academicDependencies": {
+        "prerequisiteModuleNumbers": [29, 31, 32, 33, 35],
+        "forwardModuleNumber": 25,
+        "evidence": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/5"
+      },
+      "existingAuthoringEvidence": [
+        {
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json#/modules/5",
+          "classification": "authoring-plan-only",
+          "coverage": "Prerequisite bridges and six planned sessions; it is not source research, a workbook, a studio, or publication evidence."
+        }
+      ],
+      "artifactStatus": {
+        "prerequisite-and-forward-map": "authoring-plan-only",
+        "six-connected-sessions": "authoring-plan-only",
+        "first-principles-and-transfer-work": "not-evidenced",
+        "rigor-derivations-counterexamples-and-numerical-experiments": "not-evidenced",
+        "source-ledger-and-license-boundary": "not-evidenced",
+        "accessible-visual-equivalents": "not-evidenced",
+        "confidence-aware-diagnostic-and-retrieval": "not-evidenced",
+        "project-or-dossier-with-acceptance-evidence": "not-evidenced",
+        "supportive-oral-defense": "shared-infrastructure-only",
+        "module-specific-ta-study-partner-and-handoff": "not-evidenced",
+        "bounded-studio-or-equivalent-reference-model-and-teaching-tests": "not-evidenced",
+        "structured-module-contract-and-human-review": "not-evidenced",
+        "learner-page-manifest-and-route-metadata": "blocked-by-design",
+        "release-provenance-ci-and-deployment-evidence": "not-evidenced"
+      },
+      "missingEvidence": [
+        "All module-specific source research and theorem-to-system/reuse ledger, learner content, formal-limit and reliability material, diagnostics, project/rubric, oral prompts, partner handoffs, bounded models, and teaching tests.",
+        "A reviewed structured contract, canonical source-map/studio metadata, manifest/route projection, and release provenance after M31, M32, M33, and M35 prerequisite evidence is published."
+      ],
+      "bridgeBlockerIds": [
+        "m36-source-map-null",
+        "m36-theorem-to-system-boundaries-unreviewed",
+        "m36-learning-artifacts-unbuilt",
+        "m36-contract-and-provenance-unmet"
+      ],
+      "publicationVerdict": "Do not publish. The only advanced-module-specific evidence is an authoring bridge."
+    }
+  ],
+  "synthesisBoundary": {
+    "m25": {
+      "canonicalState": "published lifecycle, preview availability",
+      "academicPrerequisiteModuleNumbers": [22, 24, 30, 31, 34, 35, 36],
+      "constraint": "M25 remains an orientation preview, not an unlocked synthesis step, until M31, M34, M35, and M36 have learner-ready release evidence and M25 itself is reworked and reviewed.",
+      "evidence": [
+        "content/course/course-graph.v1.json#/modules/24",
+        "app/modules/[slug]/ModuleInteraction.tsx",
+        "lib/module-studio-registry.ts"
+      ]
+    },
+    "m26": {
+      "canonicalState": "published lifecycle, preview availability",
+      "academicPrerequisiteModuleNumbers": [25],
+      "constraint": "M26 remains an orientation preview, not an unlocked capstone, until the reworked M25 has full synthesis release evidence and M26 itself is reworked and reviewed.",
+      "evidence": [
+        "content/course/course-graph.v1.json#/modules/25",
+        "app/modules/[slug]/ModuleInteraction.tsx",
+        "lib/module-studio-registry.ts"
+      ]
+    }
+  },
+  "honestReleaseSequence": [
+    {
+      "order": 1,
+      "action": "Keep M31-M36 authoring-only and M25/M26 preview-only while the contract/linter remains unable to verify an advanced module.",
+      "releaseEffect": "No learner navigation, manifest entry, or availability upgrade."
+    },
+    {
+      "order": 2,
+      "action": "Finish source/claim/reuse research, learner content, structured contract evidence, teaching interaction, accessibility alternatives, assessment/retrieval, dossier/rubric, oral/partner flows, and tests for each advanced module. M33 authoring research may proceed in parallel because its academic prerequisites are already published, but its learner release must preserve the canonical route order.",
+      "releaseEffect": "Still no availability upgrade until module-specific review evidence is complete."
+    },
+    {
+      "order": 3,
+      "action": "Release M31 only after its complete contract and provenance gates pass; retain M18-M24 as the intervening published systems branch required by the canonical route.",
+      "releaseEffect": "M31 may become learner-readable only with a reviewed exact commit and passing gates."
+    },
+    {
+      "order": 4,
+      "action": "Release the advanced learner route in canonical order: M32, M33, M34, M35, then M36. For each release, require its academic prerequisites, full module contract, tests, accessibility evidence, and release provenance; do not infer readiness from an earlier module's release.",
+      "releaseEffect": "No learner bypass of M31-M36 dependencies."
+    },
+    {
+      "order": 5,
+      "action": "After M31-M36 evidence exists, reweave and review M25 as the synthesis module, then reweave and review M26 as the capstone/defense module. Change each preview state only when its own contract and provenance evidence also pass.",
+      "releaseEffect": "M25/M26 never become a substitute for missing advanced work."
+    },
+    {
+      "order": 6,
+      "action": "Record each availability change through a normal reviewed GitHub commit, CI run, changelog, release/provenance ledger, and reachable GitHub source ref. Preserve normal commit history; do not use history-rewriting as a release shortcut.",
+      "releaseEffect": "Auditable learner and deployment truth."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "Critical",
+      "state": "broken-now-for-publication",
+      "finding": "No M31-M36 module has a publishable structured contract, learner page/manifest entry, learner-ready interaction, or release/provenance evidence.",
+      "evidence": [
+        "content/course/contracts/module-contracts.v1.json",
+        "content/course/contracts/module-contract-evidence.v2.json",
+        "content/modules/manifest.json",
+        "content/course/course-graph.v1.json"
+      ],
+      "impact": "Publishing any advanced module now would contradict the course's stated release truth and completion standard.",
+      "confidence": "High"
+    },
+    {
+      "severity": "Watch",
+      "state": "risky-if-misrepresented",
+      "finding": "M31 has unusually detailed and useful research/planning material, but both documents expressly disclaim learner readiness and release status; M32-M36 have only the bridge plan.",
+      "evidence": [
+        "content/source-maps/module31_optimization_information_source_audit.md",
+        "content/source-maps/module31_optimization_information_source_map.md",
+        "content/course/m31-m36-prerequisite-session-bridge.v1.json"
+      ],
+      "impact": "A reader, maintainer, or future automation could mistake strong plans for completed course material without this boundary being recorded.",
+      "confidence": "High"
+    },
+    {
+      "severity": "Info",
+      "state": "healthy-boundary",
+      "finding": "The canonical graph, module reader, and bridge validator currently prevent M25/M26 from becoming an implicit path around M31-M36.",
+      "evidence": [
+        "content/course/course-graph.v1.json",
+        "lib/module-studio-registry.ts",
+        "app/modules/[slug]/ModuleInteraction.tsx",
+        "tests/course-contract.test.mjs"
+      ],
+      "impact": "The release boundary is presently honest, but it must remain covered when later modules are authored and released.",
+      "confidence": "High"
+    }
+  ],
+  "checksRun": [
+    {
+      "command": "node scripts/validate-course.mjs",
+      "result": "passed; reported 30 legacy baselines, 0 verified modules, and 6 authoring-only modules."
+    },
+    {
+      "command": "node --test tests/course-contract.test.mjs",
+      "result": "passed 7 tests, including the advanced prerequisite-session bridge coverage and a first-consumption negative test."
+    }
+  ],
+  "noFixConfirmation": "This audit changes no lifecycle, availability, route, manifest, contract state, source-map pointer, studio registration, release evidence, or deployment."
+}
