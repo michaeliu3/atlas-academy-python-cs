@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Security baseline: upgraded the direct Next, React, React DOM,
+  React Server Components, ESLint-Next, and Vite patch versions after reviewing
+  the private dependency alerts. Resolution remains subject to GitHub's
+  post-merge advisory rescan; no claim is made that every transitive advisory is
+  resolved.
 - Prepared the private GitHub project remote and its CI workflow, and
   documented the AI-era learning philosophy, privacy boundary, content
   workflow, architecture, roadmap, and contribution rules. The changelog does
