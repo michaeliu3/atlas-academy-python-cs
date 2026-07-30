@@ -16,6 +16,17 @@ type View =
   | "arc2"
   | "arc3"
   | "arc4";
+
+const viewLabels: Record<View, string> = {
+  path: "Learning path",
+  foundation: "Foundation",
+  module: "Module 1",
+  module2: "Module 2",
+  arc2: "Data structures",
+  arc3: "Durable software",
+  arc4: "Machine and network",
+};
+
 const arcs = [
   {
     number: "I",
@@ -61,6 +72,7 @@ const arcs = [
 
 export function CoursePortal() {
   const [view, setView] = useState<View>("path");
+  const currentViewLabel = viewLabels[view];
 
   const navigate = (next: View) => {
     setView(next);
@@ -68,9 +80,25 @@ export function CoursePortal() {
   };
 
   return (
-    <main>
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
+      <main id="main-content" tabIndex={-1}>
+      <p
+        aria-live="polite"
+        className="portal-view-status"
+        role="status"
+      >
+        {currentViewLabel} selected.
+      </p>
       <header className="site-header">
-        <button className="brand" onClick={() => navigate("path")}>
+        <button
+          aria-label="Show learning path"
+          className="brand"
+          onClick={() => navigate("path")}
+          type="button"
+        >
           <span className="brand-mark">A</span>
           <span>
             <strong>Atlas Academy</strong>
@@ -85,44 +113,58 @@ export function CoursePortal() {
             60-day route
           </Link>
           <button
+            aria-pressed={view === "path"}
             className={view === "path" ? "active" : ""}
             onClick={() => navigate("path")}
+            type="button"
           >
             Learning path
           </button>
           <button
+            aria-pressed={view === "foundation"}
             className={view === "foundation" ? "active" : ""}
             onClick={() => navigate("foundation")}
+            type="button"
           >
             Foundation
           </button>
           <button
+            aria-pressed={view === "module"}
             className={view === "module" ? "active" : ""}
             onClick={() => navigate("module")}
+            type="button"
           >
             Module 1
           </button>
           <button
+            aria-pressed={view === "module2"}
             className={view === "module2" ? "active" : ""}
             onClick={() => navigate("module2")}
+            type="button"
           >
             Module 2
           </button>
           <button
+            aria-pressed={view === "arc2"}
             className={view === "arc2" ? "active" : ""}
             onClick={() => navigate("arc2")}
+            type="button"
           >
             Data structures
           </button>
           <button
+            aria-pressed={view === "arc3"}
             className={view === "arc3" ? "active" : ""}
             onClick={() => navigate("arc3")}
+            type="button"
           >
             Durable software
           </button>
           <button
+            aria-pressed={view === "arc4"}
             className={view === "arc4" ? "active" : ""}
             onClick={() => navigate("arc4")}
+            type="button"
           >
             Machine & network
           </button>
@@ -155,6 +197,7 @@ export function CoursePortal() {
               <button
                 className="text-action"
                 onClick={() => navigate("foundation")}
+                type="button"
               >
                 Explore the foundation
               </button>
@@ -430,6 +473,7 @@ current = {"tags": ["databases"]}`}</code>
             <button
               className="primary-action"
               onClick={() => navigate("module2")}
+              type="button"
             >
               Continue to Module 2 <span aria-hidden="true">→</span>
             </button>
@@ -466,6 +510,7 @@ current = {"tags": ["databases"]}`}</code>
         <span>Atlas Academy</span>
         <p>Understand deeply. Design clearly. Verify relentlessly.</p>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }

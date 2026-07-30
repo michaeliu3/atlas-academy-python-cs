@@ -79,6 +79,49 @@ test("renders the Atlas Academy course portal", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
+test("keeps landing selection and legacy studio tabs keyboard-accessible", async () => {
+  const [portal, arcTwo, arcThree, capstone] = await Promise.all([
+    readFile(new URL("../app/CoursePortal.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ArcTwoStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ArcThreeStudio.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/CapstoneDefenseStudio.tsx", import.meta.url),
+      "utf8",
+    ),
+  ]);
+
+  assert.match(portal, /<a className="skip-link" href="#main-content">/);
+  assert.match(portal, /<main id="main-content" tabIndex=\{-1\}>/);
+  assert.match(portal, /aria-pressed=\{view === "path"\}/);
+  assert.match(portal, /aria-pressed=\{view === "arc4"\}/);
+  assert.match(portal, /role="status"/);
+  assert.match(portal, /aria-live="polite"/);
+
+  for (const [name, studio] of [
+    ["Arc II", arcTwo],
+    ["Arc III", arcThree],
+    ["capstone", capstone],
+  ]) {
+    assert.match(studio, /role="tablist"/, `${name} has a tablist`);
+    assert.match(studio, /role="tab"/, `${name} has tabs`);
+    assert.match(studio, /role="tabpanel"/, `${name} has a tabpanel`);
+    assert.match(studio, /aria-controls=/, `${name} connects tabs to panels`);
+    assert.match(studio, /aria-labelledby=/, `${name} labels each panel from its tab`);
+    assert.match(studio, /hidden=\{!selected\}/, `${name} retains inactive panels for tab relationships`);
+    assert.match(studio, /tabIndex=/, `${name} uses roving tab focus`);
+    assert.match(studio, /"ArrowRight"/, `${name} supports ArrowRight`);
+    assert.match(studio, /"ArrowLeft"/, `${name} supports ArrowLeft`);
+    assert.match(studio, /"Home"/, `${name} supports Home`);
+    assert.match(studio, /"End"/, `${name} supports End`);
+    assert.match(studio, /event\.preventDefault\(\)/, `${name} prevents native scrolling`);
+    assert.match(
+      studio,
+      /tabRefs\.current\[nextIndex\]\?\.focus\(\)/,
+      `${name} moves focus with the active tab`,
+    );
+  }
+});
+
 test("every module reader includes the supportive oral-defense route", async () => {
   const [page, oralDefense, oralGuide] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),

@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 
 type ArcThreeStudioProps = {
   onOpenDataStructures: () => void;
@@ -201,10 +205,32 @@ export function ArcThreeStudio({
     null,
   );
   const [revealed, setRevealed] = useState(false);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
-  const stage = stages[activeStage];
   const runStep = importRun[activeRunStep];
   const evidence = evidenceClaims[activeClaim];
+
+  function handleStageKeyDown(
+    event: ReactKeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    const key = event.key;
+    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(key)) {
+      return;
+    }
+
+    event.preventDefault();
+    const nextIndex =
+      key === "ArrowRight"
+        ? (index + 1) % stages.length
+        : key === "ArrowLeft"
+          ? (index - 1 + stages.length) % stages.length
+          : key === "Home"
+            ? 0
+            : stages.length - 1;
+    setActiveStage(nextIndex);
+    tabRefs.current[nextIndex]?.focus();
+  }
 
   return (
     <article className="arc-three">
@@ -269,12 +295,20 @@ export function ArcThreeStudio({
           {stages.map((item, index) => (
             <button
               aria-selected={activeStage === index}
+              aria-controls={`arc-three-stage-panel-${item.module}`}
               className={`${item.accent} ${
                 activeStage === index ? "selected" : ""
               }`}
+              id={`arc-three-stage-tab-${item.module}`}
               key={item.module}
               onClick={() => setActiveStage(index)}
+              onKeyDown={(event) => handleStageKeyDown(event, index)}
               role="tab"
+              tabIndex={activeStage === index ? 0 : -1}
+              type="button"
+              ref={(element) => {
+                tabRefs.current[index] = element;
+              }}
             >
               <span>M{item.module}</span>
               <strong>{item.verb}</strong>
@@ -283,39 +317,49 @@ export function ArcThreeStudio({
           ))}
         </div>
 
-        <div
-          className={`pressure-inspector ${stage.accent}`}
-          role="tabpanel"
-          aria-live="polite"
-        >
-          <div className="pressure-module">
-            <span>MODULE</span>
-            <strong>{stage.module}</strong>
-          </div>
-          <div className="pressure-story">
-            <p className="kicker">{stage.verb}</p>
-            <h3>{stage.title}</h3>
-            <p>{stage.pressure}</p>
-          </div>
-          <dl>
-            <div>
-              <dt>Model derived</dt>
-              <dd>{stage.model}</dd>
+        {stages.map((stage, index) => {
+          const selected = activeStage === index;
+          return (
+            <div
+              aria-labelledby={`arc-three-stage-tab-${stage.module}`}
+              aria-live="polite"
+              className={`pressure-inspector ${stage.accent}`}
+              hidden={!selected}
+              id={`arc-three-stage-panel-${stage.module}`}
+              key={stage.module}
+              role="tabpanel"
+              tabIndex={selected ? 0 : -1}
+            >
+              <div className="pressure-module">
+                <span>MODULE</span>
+                <strong>{stage.module}</strong>
+              </div>
+              <div className="pressure-story">
+                <p className="kicker">{stage.verb}</p>
+                <h3>{stage.title}</h3>
+                <p>{stage.pressure}</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Model derived</dt>
+                  <dd>{stage.model}</dd>
+                </div>
+                <div>
+                  <dt>Invariant retained</dt>
+                  <dd>{stage.invariant}</dd>
+                </div>
+                <div>
+                  <dt>Mastery evidence</dt>
+                  <dd>{stage.evidence}</dd>
+                </div>
+                <div>
+                  <dt>Pressure handed forward</dt>
+                  <dd>{stage.handoff}</dd>
+                </div>
+              </dl>
             </div>
-            <div>
-              <dt>Invariant retained</dt>
-              <dd>{stage.invariant}</dd>
-            </div>
-            <div>
-              <dt>Mastery evidence</dt>
-              <dd>{stage.evidence}</dd>
-            </div>
-            <div>
-              <dt>Pressure handed forward</dt>
-              <dd>{stage.handoff}</dd>
-            </div>
-          </dl>
-        </div>
+          );
+        })}
       </section>
 
       <section className="architecture-section">
