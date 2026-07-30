@@ -28,6 +28,12 @@ actually published.
   teaching test is automatically discovered by `pnpm test`. These are local
   structural guards, not an independent GitHub CI, review, deployment, or
   publication claim.
+- Added a candidate-hashed delivery-map gate for future review-ready and
+  published advanced modules. It must bind the actual workbook and source map
+  to the canonical six-session order, prerequisite first-use, bridge artifacts,
+  and forward handoff. The present M31 plan deliberately declares no delivery
+  map, so no learner material is implied; the map is structural evidence, not
+  a substitute for human pedagogical review.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;

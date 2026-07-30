@@ -71,6 +71,7 @@
         {"id": "m31-source-audit-boundaries", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_audit.md", "locator": "claim-and-assumption-boundaries", "note": "Research-only theorem, code, numerical, and non-claim boundaries."},
         {"id": "m31-readiness-audit", "kind": "json-pointer", "role": "provenance", "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json", "locator": "/modules/0", "note": "Historical negative audit: M31 remains authoring-only and must not be published from planning evidence."}
       ],
+      "deliveryMapInputId": null,
       "authoringPlan": {
         "plannedSessionSpine": [
           {"id": "m31-s01", "title": "Objectives, variables, constraints, and geometry", "plannedArtifact": "Objective-geometry sheet"},

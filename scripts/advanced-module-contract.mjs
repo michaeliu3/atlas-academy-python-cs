@@ -9,6 +9,7 @@ import {
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeTopology,
 } from "./advanced-module-bridge.mjs";
+import { validateAdvancedModuleDeliveryMap } from "./advanced-module-delivery-map.mjs";
 import { projectReadableModules } from "./course-graph.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -762,6 +763,57 @@ async function validateVisibleMaterials(
   }
 }
 
+async function validateDeliveredSessionMap(
+  entry,
+  courseModule,
+  resolvedInputs,
+  lifecycle,
+  bridgeEntry,
+  siteRoot,
+  errors,
+) {
+  const label = `Module ${courseModule.number} ${lifecycle} delivery map`;
+  if (lifecycle === "authoring-only") {
+    if (entry?.deliveryMapInputId !== null) {
+      errors.push(`${label} must remain null while the module has no delivered learner material.`);
+    }
+    return;
+  }
+
+  if (!hasText(entry?.deliveryMapInputId)) {
+    errors.push(`${label} must name a candidate-hashed delivery-map contract input.`);
+    return;
+  }
+  const input = resolvedInputs.get(entry.deliveryMapInputId);
+  if (!input || input.role !== "course-content" || input.kind !== "file" || extname(input.path) !== ".json") {
+    errors.push(`${label} must resolve a course-content JSON file input.`);
+    return;
+  }
+  const workbooks = await moduleWorkbookPaths(siteRoot, courseModule.number);
+  if (workbooks.length !== 1 || !hasText(courseModule.sourceMap)) {
+    errors.push(`${label} cannot bind material until the workbook and source map resolve uniquely.`);
+    return;
+  }
+  const workbookPath = relative(siteRoot, workbooks[0]).replaceAll("\\", "/");
+  let deliveryMap;
+  try {
+    deliveryMap = JSON.parse(await readFile(input.absolutePath, "utf8"));
+  } catch (error) {
+    errors.push(`${label} cannot read JSON: ${error.message}`);
+    return;
+  }
+  try {
+    validateAdvancedModuleDeliveryMap(deliveryMap, {
+      courseModule,
+      bridgeEntry,
+      workbookPath,
+      sourceMapPath: courseModule.sourceMap,
+    });
+  } catch (error) {
+    errors.push(`${label} must preserve the canonical delivered-session topology: ${error.message}`);
+  }
+}
+
 function validateInteractionEvidence(entry, evidence, resolvedInputs, lifecycle, errors) {
   if (lifecycle === "authoring-only") {
     return;
@@ -1067,6 +1119,23 @@ export async function validateAdvancedModuleContractRegistry(
     }
   }
 
+  let bridgeLedger = canonicalBridgeLedger;
+  let bridgeTopologyValidated = false;
+  try {
+    bridgeLedger ??= await loadAdvancedModuleBridgeLedger(siteRoot);
+    validateAdvancedModuleBridgeTopology(graph, bridgeLedger);
+    bridgeTopologyValidated = true;
+  } catch (error) {
+    errors.push(
+      `Lifecycle-aware advanced contracts must preserve canonical bridge topology: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  const bridgeEntriesByModuleId = new Map(
+    Array.isArray(bridgeLedger?.modules)
+      ? bridgeLedger.modules.map((bridgeEntry) => [bridgeEntry?.moduleId, bridgeEntry])
+      : [],
+  );
+
   const graphById = new Map(graphModules.map((courseModule) => [courseModule.id, courseModule]));
   const entriesByModuleId = new Map();
   const reportModules = [];
@@ -1097,6 +1166,7 @@ export async function validateAdvancedModuleContractRegistry(
         "publicationEffect",
         "graphSnapshot",
         "contractInputs",
+        "deliveryMapInputId",
         "authoringPlan",
         "humanReview",
         "evidence",
@@ -1150,6 +1220,15 @@ export async function validateAdvancedModuleContractRegistry(
       manifest,
       readableModuleIds,
       lifecycle,
+      siteRoot,
+      errors,
+    );
+    await validateDeliveredSessionMap(
+      entry,
+      courseModule,
+      inputs.resolvedInputs,
+      lifecycle,
+      bridgeEntriesByModuleId.get(entry.moduleId),
       siteRoot,
       errors,
     );
@@ -1212,22 +1291,13 @@ export async function validateAdvancedModuleContractRegistry(
       errors.push(`transitioned advanced Module ${courseModule.number} requires a lifecycle-aware contract entry.`);
     }
   }
-  try {
-    const bridgeLedger = canonicalBridgeLedger ?? (await loadAdvancedModuleBridgeLedger(siteRoot));
-    validateAdvancedModuleBridgeTopology(graph, bridgeLedger);
-  } catch (error) {
-    errors.push(
-      `Lifecycle-aware advanced contracts must preserve canonical bridge topology: ${error instanceof Error ? error.message : String(error)}`,
-    );
-  }
-
   advancedContractFailure(errors);
   return {
     registry,
     modules: reportModules,
     releaseInputPaths: [...releaseInputPaths],
     legacyBridgeValidationRequired: !advancedLifecycleHasTransitioned,
-    bridgeTopologyValidated: true,
+    bridgeTopologyValidated,
     summary: {
       authoringOnlyContracts: reportModules.filter(({ contractState }) => contractState === "authoring-only").length,
       plannedContracts,

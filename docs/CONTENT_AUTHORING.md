@@ -124,6 +124,15 @@ continues to enforce the canonical bridge's prerequisite topology, first use,
 session order, and forward handoffs before that historical authoring-only gate
 can step back from live gating.
 
+For `review-ready` and `published` advanced modules, add a candidate-hashed
+`deliveryMapInputId` pointing to a course-content JSON delivery map. That map
+must bind the exact workbook and source-map paths to the canonical six-session
+sequence, per-session prerequisite use, first-consuming bridge artifacts, and
+forward handoff. It is deliberately a small structural declaration—not a
+prose-heading check and not a claim that the explanation, visual, or learner
+experience has passed human review. An `authoring-only` entry must keep this
+field `null`.
+
 ## Authoring order
 
 1. Start from an Atlas incident or design pressure inherited from the prior

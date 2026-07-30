@@ -70,6 +70,13 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     /must declare exactly six planned session IDs/u,
   );
 
+  const prematureDeliveryMap = structuredClone(registry);
+  prematureDeliveryMap.modules[0].deliveryMapInputId = "m31-source-map-sessions";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, prematureDeliveryMap),
+    /authoring-only delivery map must remain null/u,
+  );
+
   const brokenPointer = structuredClone(registry);
   brokenPointer.modules[0].contractInputs.find(
     ({ id }) => id === "m31-source-map-claims",
