@@ -42,7 +42,8 @@ flowchart LR
   and behavioral tests. Only files explicitly listed by the versioned
   `content/course/release-input-policy.v1.json` are release-canonical; CI
   rejects tracked download artifacts that have not been reviewed into that
-  policy. They use fixed in-memory fixtures and make no external effect.
+  policy, and the production build prunes unallowlisted download output. They
+  use fixed in-memory fixtures and make no external effect.
 - The scripts/sync-modules.mjs program validates the course graph, then
   generates the library manifest, module source projection, and a sorted
   SHA-256 release-input ledger. It does not copy external artifacts. The

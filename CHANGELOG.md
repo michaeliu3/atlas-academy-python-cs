@@ -34,6 +34,9 @@ actually published.
   allowlists, local-only SVG marker references, and malicious-rendering
   regressions. Mermaid retains only inert geometry and readable labels; its
   technical source fallback is not represented as a prose-equivalent review.
+- The production build now prunes every download artifact not admitted by the
+  versioned release-input policy, so local Python bytecode cannot silently
+  reach the deployed client output.
 
 ## v0.6-capstone (private course milestone)
 

@@ -5,6 +5,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
+import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
@@ -59,4 +60,9 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
       `${input.path} hash matches`,
     );
   }
+});
+
+test("the production client exposes only allowlisted teaching downloads", async () => {
+  const report = await validateBuiltDownloads(siteRoot);
+  assert.deepEqual(report.outputPaths, report.expectedPaths);
 });
