@@ -994,6 +994,19 @@ test("generated module manifest covers Modules 1–24 exactly once", async () =>
   assert.equal(module24.nextSlug, null);
 });
 
+test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
+  const syncUrl = new URL("../scripts/sync-modules.mjs", import.meta.url);
+  const synchronizer = await readFile(syncUrl, "utf8");
+
+  assert.match(synchronizer, /function normalizeNewlines\(value\)/);
+  assert.match(synchronizer, /value\.replace\(\/\\r\\n\?\/gu, "\\n"\)/);
+  assert.match(synchronizer, /normalizeNewlines\(current\) === normalizedContent/);
+  assert.match(
+    synchronizer,
+    /const markdown = normalizeNewlines\(\s*await readFile\(join\(sourceDirectory, filename\), "utf8"\),\s*\);/,
+  );
+});
+
 test("table-of-contents IDs account for lower-level heading collisions", () => {
   const markdown = [
     "## Start",

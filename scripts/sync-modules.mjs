@@ -313,10 +313,19 @@ function firstSubstantialParagraph(markdown) {
   return "A connected workbook for reading, reasoning about, and defending this layer of Atlas.";
 }
 
+function normalizeNewlines(value) {
+  return value.replace(/\r\n?/gu, "\n");
+}
+
 function writeIfChanged(path, content) {
+  const normalizedContent = normalizeNewlines(content);
   return readFile(path, "utf8")
     .catch(() => null)
-    .then((current) => (current === content ? false : writeFile(path, content).then(() => true)));
+    .then((current) =>
+      current !== null && normalizeNewlines(current) === normalizedContent
+        ? false
+        : writeFile(path, normalizedContent).then(() => true),
+    );
 }
 
 await mkdir(outputDirectory, { recursive: true });
@@ -573,7 +582,9 @@ if (
 
 for (const filename of selectedFiles) {
   const number = moduleNumber(filename);
-  const markdown = await readFile(join(sourceDirectory, filename), "utf8");
+  const markdown = normalizeNewlines(
+    await readFile(join(sourceDirectory, filename), "utf8"),
+  );
   const heading = markdown.match(/^#\s+(.+)$/mu)?.[1]?.trim();
   if (!heading) {
     throw new Error(`${filename} has no level-one title.`);
