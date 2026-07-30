@@ -384,7 +384,7 @@
       "arcId": "arc-v",
       "wordCount": 7189,
       "estimatedMinutes": 35,
-      "sourceHash": "75a9adccfc34e43546c7e65e858aef9bbe2e3571f838aab91b8da0599366c4c7",
+      "sourceHash": "22d5d913da93c99a298f5e8a5b4237d1126a516f67b226c22b8e26f2b0c2bb51",
       "prerequisiteSlug": "24-cpython-performance-memory",
       "previousSlug": "24-cpython-performance-memory",
       "nextSlug": null
