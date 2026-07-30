@@ -24,6 +24,7 @@ import { EvidenceGroundedStudio } from "../../EvidenceGroundedStudio";
 import { CapstoneDefenseStudio } from "../../CapstoneDefenseStudio";
 import { DiscreteMathProofStudio } from "../../DiscreteMathProofStudio";
 import { LinearAlgebraStabilityStudio } from "../../LinearAlgebraStabilityStudio";
+import { CalculusContinuousChangeStudio } from "../../CalculusContinuousChangeStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -120,6 +121,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "28-linear-algebra-numerical-stability-representation" && (
           <LinearAlgebraStabilityStudio />
+        )}
+        {slug === "29-calculus-real-analysis-continuous-change" && (
+          <CalculusContinuousChangeStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />

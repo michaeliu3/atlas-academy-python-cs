@@ -128,12 +128,13 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   const readable = html.replaceAll("<!-- -->", "");
   assert.match(readable, /60 days\./);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
-  assert.match(readable, /28 \/ 8/);
+  assert.match(readable, /29 \/ 7/);
   assert.match(readable, /published \/ in authoring/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
   assert.match(readable, /Module 28/);
+  assert.match(readable, /Module 29/);
   assert.match(readable, /Published/);
   assert.match(readable, /In authoring/);
   assert.match(readable, /Source map and studio are being built before release\./);
@@ -148,6 +149,10 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
     html,
     /href="\/modules\/28-linear-algebra-numerical-stability-representation"/,
   );
+  assert.match(
+    html,
+    /href="\/modules\/29-calculus-real-analysis-continuous-change"/,
+  );
 });
 
 test("keeps release status and route linkability aligned with the published manifest", async () => {
@@ -161,7 +166,7 @@ test("keeps release status and route linkability aligned with the published mani
     manifest.modules.map((courseModule) => courseModule.number),
   );
 
-  for (let number = 1; number <= 28; number += 1) {
+  for (let number = 1; number <= 29; number += 1) {
     assert.ok(publishedNumbers.has(number), `M${number} appears in the manifest`);
     assert.match(
       routeSource,
@@ -170,7 +175,7 @@ test("keeps release status and route linkability aligned with the published mani
     );
   }
 
-  for (let number = 29; number <= 36; number += 1) {
+  for (let number = 30; number <= 36; number += 1) {
     assert.ok(!publishedNumbers.has(number), `M${number} is not prematurely published`);
     assert.match(
       routeSource,
@@ -1178,19 +1183,19 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–28 exactly once", async () => {
+test("generated module manifest covers Modules 1–29 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 28);
+  assert.equal(manifest.moduleCount, 29);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 28 }, (_, index) => index + 1),
+    Array.from({ length: 29 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 28);
+  assert.equal(new Set(slugs).size, 29);
   assert.equal(manifest.arcs.length, 6);
 
   const module2 = manifest.modules.find((courseModule) => courseModule.number === 2);
@@ -1210,6 +1215,7 @@ test("generated module manifest covers Modules 1–28 exactly once", async () =>
   const module26 = manifest.modules.find((courseModule) => courseModule.number === 26);
   const module27 = manifest.modules.find((courseModule) => courseModule.number === 27);
   const module28 = manifest.modules.find((courseModule) => courseModule.number === 28);
+  const module29 = manifest.modules.find((courseModule) => courseModule.number === 29);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -1223,9 +1229,16 @@ test("generated module manifest covers Modules 1–28 exactly once", async () =>
     module17.slug,
     module27.slug,
   ]);
-  assert.equal(module28.nextSlug, module18.slug);
-  assert.equal(module18.previousSlug, module28.slug);
-  assert.equal(module18.prerequisiteSlug, module28.slug);
+  assert.equal(module28.nextSlug, module29.slug);
+  assert.equal(module29.previousSlug, module28.slug);
+  assert.equal(module29.prerequisiteSlug, module28.slug);
+  assert.deepEqual(module29.prerequisiteSlugs, [
+    module27.slug,
+    module28.slug,
+  ]);
+  assert.equal(module29.nextSlug, module18.slug);
+  assert.equal(module18.previousSlug, module29.slug);
+  assert.equal(module18.prerequisiteSlug, module29.slug);
   assert.equal(module18.nextSlug, module19.slug);
   assert.equal(module19.previousSlug, module18.slug);
   assert.equal(module19.prerequisiteSlug, module18.slug);
@@ -1257,6 +1270,7 @@ test("generated module manifest covers Modules 1–28 exactly once", async () =>
   assert.equal(module26.nextSlug, null);
   assert.equal(module27.arcId, "arc-vi");
   assert.equal(module28.arcId, "arc-vi");
+  assert.equal(module29.arcId, "arc-vi");
   assert.equal(module5.nextSlug, module27.slug);
   assert.equal(module27.previousSlug, module5.slug);
   assert.equal(module27.nextSlug, module6.slug);
@@ -1333,7 +1347,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Mathematical foundations/);
   assert.match(html, /Discrete Mathematics, Proof, Counting &amp; Structures/);
   assert.match(html, /Linear Algebra, Numerical Stability &amp; Representation/);
-  assert.match(html, /<dt>28<\/dt>/);
+  assert.match(html, /Calculus, Real Analysis &amp; Continuous Change/);
+  assert.match(html, /<dt>29<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -2107,4 +2122,94 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(referenceTests, /class PCAAndNumericalBoundaryTests/);
   assert.match(oralGuide, /28: \{/);
   assert.match(oralGuide, /shape\/dtype\/solver path/);
+});
+
+test("renders the calculus continuous-change workbook and its bounded teaching model", async () => {
+  const response = await render(
+    "/modules/29-calculus-real-analysis-continuous-change",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 29: Calculus, Real Analysis &amp; Continuous Change · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 29 workbook/);
+  assert.match(html, /Limits, Change &amp; Convergence Studio/);
+  assert.match(html, /M29 working invariant/);
+  assert.match(html, /Intermediate Value Theorem/);
+  assert.match(html, /Partials are probes/);
+  assert.match(html, /Confidence-aware diagnostic/);
+  assert.match(html, /Continuous-Change Evidence Dossier/);
+  assert.match(html, /Conversational oral defense — M29/);
+  assert.match(html, /replaces a traditional coding or written exam/);
+  assert.match(html, /fully equivalent text conversation/);
+  assert.match(html, /Hint ladder/);
+  assert.match(html, /href="\/downloads\/module29_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module29_reference\.py"/);
+  assert.match(
+    html,
+    /href="\/downloads\/module29_calculus_real_analysis_continuous_change_source_map\.md"/,
+  );
+  assert.match(
+    html,
+    /href="\/downloads\/module29_calculus_real_analysis_source_audit_addendum\.md"/,
+  );
+  assert.doesNotMatch(html, /katex-error/);
+
+  const [studio, style, reference, referenceTests, oralGuide, sourceMap, sourceAudit] = await Promise.all([
+    readFile(new URL("../app/CalculusContinuousChangeStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CalculusContinuousChangeStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module29_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module29_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module29_calculus_real_analysis_source_audit_addendum.md", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.match(studio, /id: "limit"/);
+  assert.match(studio, /id: "trajectory"/);
+  assert.match(studio, /aria-live="polite"/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /not a theorem prover/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /forced-colors/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module29-reference\/1"/);
+  assert.match(reference, /def affine_epsilon_delta_report/);
+  assert.match(reference, /def sine_taylor_report/);
+  assert.match(reference, /def quadratic_surface_report/);
+  assert.match(reference, /def affine_jacobian_report/);
+  assert.match(reference, /def affine_change_of_variables_rectangle_report/);
+  assert.match(reference, /def power_sequence_uniformity_report/);
+  assert.match(reference, /def composite_trapezoid_quadratic_report/);
+  assert.match(reference, /def euler_forced_quadratic_ode_report/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module29_reference as model/);
+  assert.match(referenceTests, /class EpsilonDeltaTests/);
+  assert.match(referenceTests, /class DifferentialAndJacobianTests/);
+  assert.match(referenceTests, /class ChangeOfVariablesAndSeriesTests/);
+  assert.match(referenceTests, /class PointwiseAndNumericalBoundaryTests/);
+  assert.match(oralGuide, /29: \{/);
+  assert.match(oralGuide, /shape, unit, dtype, step, tolerance, or solver trace/);
+  assert.match(sourceMap, /Module 29 .*Source Map/);
+  assert.match(sourceAudit, /Minimum source routing for the six connected sessions/);
 });

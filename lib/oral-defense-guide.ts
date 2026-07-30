@@ -245,11 +245,16 @@ export const oralDefenseGuides: Record<number, OralDefenseGuide> = {
   },
   29: {
     lens: "formal",
-    centralModel: "limits, local approximation, derivatives, integrals, and conditions for exchanging operations",
-    traceOrDerivation: "derive a gradient/Taylor or convergence step and name the regularity condition it uses",
-    misconception: "pointwise convergence is automatically uniform or a formal derivative justifies a numerical update",
-    boundary: "the continuity, differentiability, convergence, and finite-precision assumptions that can fail",
-    transfer: "deciding whether an optimization or expectation manipulation is justified in a new model",
+    centralModel:
+      "a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition",
+    traceOrDerivation:
+      "derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace",
+    misconception:
+      "a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange",
+    boundary:
+      "the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail",
+    transfer:
+      "deciding whether a scientific simulation, optimization update, or expectation manipulation is justified in a new model",
   },
   30: {
     lens: "formal",

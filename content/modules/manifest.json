@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 28,
+  "moduleCount": 29,
   "arcs": [
     {
       "id": "arc-i",
@@ -41,8 +41,8 @@
       "id": "arc-vi",
       "numeral": "VI",
       "title": "Mathematical foundations",
-      "range": "Modules 27–28",
-      "description": "Deepen proof, counting, structure, linear representation, and numerical claim boundaries before the later mathematics and AI sequence."
+      "range": "Modules 27–29",
+      "description": "Deepen proof, counting, structure, linear representation, numerical claim boundaries, and continuous change before the later mathematics and AI sequence."
     }
   ],
   "modules": [
@@ -343,11 +343,11 @@
       "wordCount": 20336,
       "estimatedMinutes": 97,
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
-      "prerequisiteSlug": "28-linear-algebra-numerical-stability-representation",
+      "prerequisiteSlug": "29-calculus-real-analysis-continuous-change",
       "prerequisiteSlugs": [
-        "28-linear-algebra-numerical-stability-representation"
+        "29-calculus-real-analysis-continuous-change"
       ],
-      "previousSlug": "28-linear-algebra-numerical-stability-representation",
+      "previousSlug": "29-calculus-real-analysis-continuous-change",
       "nextSlug": "19-concurrency-parallelism"
     },
     {
@@ -521,6 +521,24 @@
         "27-discrete-mathematics-proof-counting-structures"
       ],
       "previousSlug": "17-computer-architecture-execution-stack",
+      "nextSlug": "29-calculus-real-analysis-continuous-change"
+    },
+    {
+      "number": 29,
+      "slug": "29-calculus-real-analysis-continuous-change",
+      "filename": "29_calculus_real_analysis_continuous_change.md",
+      "title": "Calculus, Real Analysis & Continuous Change",
+      "summary": "Arc VI — Mathematical foundations for continuous, probabilistic, and learning systems",
+      "arcId": "arc-vi",
+      "wordCount": 8058,
+      "estimatedMinutes": 39,
+      "sourceHash": "c02d1e592276be7a418aa7502f9c9a1a7a614db336b2a9982772786c2bd8f152",
+      "prerequisiteSlug": "28-linear-algebra-numerical-stability-representation",
+      "prerequisiteSlugs": [
+        "27-discrete-mathematics-proof-counting-structures",
+        "28-linear-algebra-numerical-stability-representation"
+      ],
+      "previousSlug": "28-linear-algebra-numerical-stability-representation",
       "nextSlug": "18-operating-systems-resource-mediation"
     }
   ]

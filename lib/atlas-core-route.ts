@@ -224,9 +224,9 @@ export const atlasCoreRoute: AtlasRoutePhase[] = [
         number: 29,
         title: "Calculus, Real Analysis & Continuous Change",
         shortTitle: "calculus",
-        status: inAuthoring,
+        status: published,
         prerequisiteNumbers: [27, 28],
-        purpose: "Connect change, approximation, limits, and convergence to computation.",
+        purpose: "Connect limits, local change, accumulation, and convergence to computational evidence.",
       },
       {
         number: 30,

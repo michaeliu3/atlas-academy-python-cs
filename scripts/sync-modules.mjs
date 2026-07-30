@@ -290,6 +290,54 @@ const publishedModule28Tests = resolve(
   "downloads",
   "test_module28_reference.py",
 );
+const canonicalModule29Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module29_reference.py",
+);
+const publishedModule29Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module29_reference.py",
+);
+const canonicalModule29Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module29_reference.py",
+);
+const publishedModule29Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module29_reference.py",
+);
+const canonicalModule29SourceMap = resolve(
+  siteRoot,
+  "..",
+  "research",
+  "module29_calculus_real_analysis_continuous_change_source_map.md",
+);
+const publishedModule29SourceMap = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module29_calculus_real_analysis_continuous_change_source_map.md",
+);
+const canonicalModule29SourceAudit = resolve(
+  siteRoot,
+  "..",
+  "research",
+  "module29_calculus_real_analysis_source_audit_addendum.md",
+);
+const publishedModule29SourceAudit = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module29_calculus_real_analysis_source_audit_addendum.md",
+);
 const canonicalResearchDirectory = resolve(siteRoot, "..", "research");
 const sourceMapOutputDirectory = resolve(siteRoot, "content", "source-maps");
 const sourceDirectory = await access(canonicalSourceDirectory)
@@ -298,7 +346,7 @@ const sourceDirectory = await access(canonicalSourceDirectory)
 const sourceMapDirectory = await access(canonicalResearchDirectory)
   .then(() => canonicalResearchDirectory)
   .catch(() => sourceMapOutputDirectory);
-const publishedThrough = 28;
+const publishedThrough = 29;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -359,25 +407,26 @@ const arcs = [
     id: "arc-vi",
     numeral: "VI",
     title: "Mathematical foundations",
-    range: "Modules 27–28",
+    range: "Modules 27–29",
     description:
-      "Deepen proof, counting, structure, linear representation, and numerical claim boundaries before the later mathematics and AI sequence.",
+      "Deepen proof, counting, structure, linear representation, numerical claim boundaries, and continuous change before the later mathematics and AI sequence.",
     start: 27,
-    end: 28,
+    end: 29,
   },
 ];
 
 // Stable module IDs are numeric for release continuity. Learner navigation must
 // instead follow the prerequisite-first 60-day route, which inserts M27 after M5
-// and M28 after M17 (while preserving its direct M27 prerequisite).
+// and M28/M29 after M17 (while preserving M29's direct M27/M28 prerequisites).
 const learnerRouteOrder = [
-  1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28, 18, 19,
-  20, 21, 22, 23, 24, 25, 26,
+  1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28, 29, 18,
+  19, 20, 21, 22, 23, 24, 25, 26,
 ];
 
 const directPrerequisiteNumbers = new Map([
   [27, [2, 4, 5]],
   [28, [17, 27]],
+  [29, [27, 28]],
 ]);
 
 function moduleNumber(filename) {
@@ -812,6 +861,58 @@ if (
   await writeIfChanged(
     publishedModule28Tests,
     module28Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module29ReferenceSource = await access(canonicalModule29Reference)
+  .then(() => canonicalModule29Reference)
+  .catch(() => publishedModule29Reference);
+const module29Reference = await readFile(module29ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule29Reference,
+    module29Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module29TestsSource = await access(canonicalModule29Tests)
+  .then(() => canonicalModule29Tests)
+  .catch(() => publishedModule29Tests);
+const module29Tests = await readFile(module29TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule29Tests,
+    module29Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module29SourceMapSource = await access(canonicalModule29SourceMap)
+  .then(() => canonicalModule29SourceMap)
+  .catch(() => publishedModule29SourceMap);
+const module29SourceMap = await readFile(module29SourceMapSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule29SourceMap,
+    module29SourceMap,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module29SourceAuditSource = await access(canonicalModule29SourceAudit)
+  .then(() => canonicalModule29SourceAudit)
+  .catch(() => publishedModule29SourceAudit);
+const module29SourceAudit = await readFile(module29SourceAuditSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule29SourceAudit,
+    module29SourceAudit,
   )
 ) {
   changedFiles += 1;
