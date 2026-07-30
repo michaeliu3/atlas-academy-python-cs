@@ -34,6 +34,11 @@ actually published.
   replaced brittle radio/reveal browser assertions with keyboard-oriented,
   current-state checks. This remains a corrective candidate until Linux
   Chromium/axe CI succeeds.
+- Recorded the next failed browser candidate separately after it exposed a
+  3.95:1 contrast defect in diagnostic prerequisite notes. The corrective
+  candidate now gives that surface a dedicated contrast token, a high-contrast
+  override, and a regression test; Linux Chromium/axe remains the acceptance
+  authority.
 - Reconciled existing GitHub Release pages and tag targets in the provenance
   ledger without rewriting release history. Historical private-deployment
   assertions remain unverified in that ledger unless separately evidenced.

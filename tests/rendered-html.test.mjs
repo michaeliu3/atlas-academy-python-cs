@@ -53,6 +53,25 @@ function extractFunctionSource(source, name) {
   );
 }
 
+function relativeLuminance(hex) {
+  const channel = (offset) => {
+    const value = Number.parseInt(hex.slice(offset, offset + 2), 16) / 255;
+    return value <= 0.04045
+      ? value / 12.92
+      : ((value + 0.055) / 1.055) ** 2.4;
+  };
+
+  return 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
+}
+
+function contrastRatio(foreground, background) {
+  const [lighter, darker] = [
+    relativeLuminance(foreground),
+    relativeLuminance(background),
+  ].sort((first, second) => second - first);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 function assertPredictionGated(componentSource, componentName) {
   const predictionGate = componentSource.indexOf("<PredictionGate");
   const revealBranch = componentSource.indexOf("!answer.revealed");
@@ -441,6 +460,25 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
   assert.match(html, /Reset all answers/);
   assert.doesNotMatch(html, /role="radiogroup"/);
   assert.doesNotMatch(html, /window\.confirm/);
+});
+
+test("keeps diagnostic prerequisite notes readable against their saffron surface", async () => {
+  const globals = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const background = globals.match(/--saffron-soft:\s*(#[0-9a-f]{6})/i)?.[1];
+  const foreground = globals.match(
+    /--diagnostic-prerequisite-ink:\s*(#[0-9a-f]{6})/i,
+  )?.[1];
+
+  assert.ok(background, "the saffron note surface must declare a solid color");
+  assert.ok(foreground, "the diagnostic note must declare a readable ink color");
+  assert.match(
+    globals,
+    /\.diagnostic-prerequisite-note\s*\{[^}]*color:\s*var\(--diagnostic-prerequisite-ink\)/,
+  );
+  assert.ok(
+    contrastRatio(foreground, background) >= 4.5,
+    "diagnostic prerequisite notes need at least 4.5:1 normal-text contrast",
+  );
 });
 
 test("Module 18 OS studio preserves its canonical interactive contract", async () => {
