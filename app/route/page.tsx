@@ -102,6 +102,9 @@ export default function AtlasCoreRoutePage() {
               <span>Use the oral defense to explain, revise, and choose a next bridge.</span>
             </li>
           </ol>
+          <Link className={styles.partnerLink} href="/learning-partners">
+            Open the separate TA and Study Partner chats <span aria-hidden="true">→</span>
+          </Link>
         </section>
 
         <section className={styles.legend} aria-label="Route status legend">

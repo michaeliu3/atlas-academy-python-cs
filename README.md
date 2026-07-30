@@ -27,6 +27,12 @@ The deployed portal is the primary learner interface. It contains:
 - cumulative Atlas projects, TA checkoffs, Study Partner routines,
   conversational oral defenses, and retrieval schedules.
 
+The deployed [Learning Partners](/learning-partners) page provides separate,
+copyable startup packages for a Teaching Assistant and a Study Partner. They
+have intentionally different jobs: the TA repairs models and reviews evidence;
+the Study Partner runs short Socratic retrieval/rehearsal rounds. Neither role
+assigns a pass/fail verdict or exports a record without learner approval.
+
 The course privileges reading unfamiliar code, modelling, debugging,
 architectural reasoning, reviewing AI-generated changes, and evidence over
 rote typing or exam drill.

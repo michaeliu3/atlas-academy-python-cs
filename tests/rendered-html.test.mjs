@@ -79,6 +79,20 @@ test("renders the Atlas Academy course portal", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
+test("renders separate, learner-controlled Teaching Assistant and Study Partner packages", async () => {
+  const response = await render("/learning-partners");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Two separate chats\. Two different jobs\./);
+  assert.match(html, /Teaching Assistant/);
+  assert.match(html, /Study Partner/);
+  assert.match(html, /Copy Teaching Assistant startup prompt/);
+  assert.match(html, /Copy Study Partner startup prompt/);
+  assert.match(html, /Never give a bare pass\/fail verdict/);
+  assert.match(html, /silently save a transcript/);
+});
+
 test("keeps landing selection and legacy studio tabs keyboard-accessible", async () => {
   const [portal, arcTwo, arcThree, capstone] = await Promise.all([
     readFile(new URL("../app/CoursePortal.tsx", import.meta.url), "utf8"),
