@@ -462,22 +462,28 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
   assert.doesNotMatch(html, /window\.confirm/);
 });
 
-test("keeps diagnostic prerequisite notes readable against their saffron surface", async () => {
+test("keeps diagnostic route notes readable against their purpose-specific surfaces", async () => {
   const globals = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  const background = globals.match(/--saffron-soft:\s*(#[0-9a-f]{6})/i)?.[1];
+  const saffronBackground = globals.match(/--saffron-soft:\s*(#[0-9a-f]{6})/i)?.[1];
+  const plumBackground = globals.match(/--plum-soft:\s*(#[0-9a-f]{6})/i)?.[1];
   const foreground = globals.match(
-    /--diagnostic-prerequisite-ink:\s*(#[0-9a-f]{6})/i,
+    /\.diagnostic-extension-boundary,\s*\.diagnostic-prerequisite-note\s*\{[^}]*color:\s*(#[0-9a-f]{6})/i,
   )?.[1];
 
-  assert.ok(background, "the saffron note surface must declare a solid color");
-  assert.ok(foreground, "the diagnostic note must declare a readable ink color");
+  assert.ok(saffronBackground, "the prerequisite note surface must declare a solid color");
+  assert.ok(plumBackground, "the extension note surface must declare a solid color");
+  assert.ok(foreground, "diagnostic route notes must declare a readable direct ink color");
   assert.match(
     globals,
-    /\.diagnostic-prerequisite-note\s*\{[^}]*color:\s*var\(--diagnostic-prerequisite-ink\)/,
+    /\.diagnostic-bridge-plan li > div > p:last-child:not\(\.diagnostic-extension-boundary\):not\(\.diagnostic-prerequisite-note\)\s*\{[^}]*color:\s*var\(--muted\)/,
   );
   assert.ok(
-    contrastRatio(foreground, background) >= 4.5,
+    contrastRatio(foreground, saffronBackground) >= 4.5,
     "diagnostic prerequisite notes need at least 4.5:1 normal-text contrast",
+  );
+  assert.ok(
+    contrastRatio(foreground, plumBackground) >= 4.5,
+    "diagnostic extension notes need at least 4.5:1 normal-text contrast",
   );
 });
 

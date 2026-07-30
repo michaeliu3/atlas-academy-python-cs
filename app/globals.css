@@ -10,7 +10,6 @@
   --cobalt-soft: #dfe7f7;
   --saffron: #c77c2a;
   --saffron-soft: #f3dfc5;
-  --diagnostic-prerequisite-ink: #545c57;
   --plum: #76547f;
   --plum-soft: #eadfec;
   --moss: #52715d;
@@ -5243,7 +5242,6 @@ main.module-library-shell {
   :root {
     --ink: #07100c;
     --muted: #37433c;
-    --diagnostic-prerequisite-ink: #07100c;
     --line: rgba(7, 16, 12, 0.52);
     --card: #fffdf7;
   }
@@ -6102,9 +6100,17 @@ main.module-library-shell {
 .diagnostic-bridge-plan li > div > p:last-child,
 .diagnostic-extension-boundary,
 .diagnostic-prerequisite-note {
-  color: var(--muted);
   font-size: 0.72rem;
   line-height: 1.58;
+}
+
+.diagnostic-bridge-plan li > div > p:last-child:not(.diagnostic-extension-boundary):not(.diagnostic-prerequisite-note) {
+  color: var(--muted);
+}
+
+.diagnostic-extension-boundary,
+.diagnostic-prerequisite-note {
+  color: #4f5853;
 }
 
 .diagnostic-bridge-action {
@@ -6130,7 +6136,6 @@ main.module-library-shell {
 .diagnostic-prerequisite-note {
   background: var(--saffron-soft);
   border-left: 3px solid var(--saffron);
-  color: var(--diagnostic-prerequisite-ink);
   margin: 0;
   padding: 0.75rem;
 }

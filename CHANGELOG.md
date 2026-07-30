@@ -39,6 +39,12 @@ actually published.
   candidate now gives that surface a dedicated contrast token, a high-contrast
   override, and a regression test; Linux Chromium/axe remains the acceptance
   authority.
+- Preserved a further failed browser candidate after CI showed the diagnostic
+  note token was losing to a more-specific muted-text selector, and that the
+  future-extension note had the same contrast risk. The next corrective
+  candidate scopes muted text away from those purpose-specific notes, gives
+  both a direct 5.6:1-or-better ink color, and regression-tests both surfaces;
+  Linux Chromium/axe remains the acceptance authority.
 - Reconciled existing GitHub Release pages and tag targets in the provenance
   ledger without rewriting release history. Historical private-deployment
   assertions remain unverified in that ledger unless separately evidenced.
