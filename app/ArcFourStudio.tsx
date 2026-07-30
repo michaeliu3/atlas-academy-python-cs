@@ -6,6 +6,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { AsyncDistributedStudio } from "./AsyncDistributedStudio";
 import { ConcurrencyStudio } from "./ConcurrencyStudio";
 import { NetworkProtocolStudio } from "./NetworkProtocolStudio";
 import { OperatingSystemsStudio } from "./OperatingSystemsStudio";
@@ -60,13 +61,13 @@ const arcModules = [
   },
   {
     number: "21",
-    status: "Forward handoff",
-    href: null,
+    status: "Published",
+    href: "/modules/21-async-distributed-systems",
     title: "Async & distributed systems",
     question: "How does Atlas reason when time, order, and failure are partial?",
     inherits: "Networked operations whose completion is delayed or uncertain.",
     handoff:
-      "Async structure, partial failure, coordination, retries, and consistency choices.",
+      "Bounded async ownership, partial failure, causal order, scoped evidence, and consistency choices.",
   },
   {
     number: "22",
@@ -379,7 +380,7 @@ function tabId(view: StudioView) {
 export function ArcFourStudio({
   onOpenDurableSoftware,
 }: ArcFourStudioProps) {
-  const [activeModule, setActiveModule] = useState(3);
+  const [activeModule, setActiveModule] = useState(4);
   const [activeView, setActiveView] = useState<StudioView>("stack");
   const [activeLayer, setActiveLayer] = useState(0);
   const [traceStep, setTraceStep] = useState(0);
@@ -836,6 +837,7 @@ export function ArcFourStudio({
       <OperatingSystemsStudio />
       <ConcurrencyStudio />
       <NetworkProtocolStudio />
+      <AsyncDistributedStudio />
 
       <section className="arc-four-bridge">
         <div>
@@ -847,8 +849,10 @@ export function ArcFourStudio({
             lifetime, and failure. Module 19 adds overlapping histories,
             synchronization, progress, and model choice. Module 20 carries a
             local result across names, endpoints, bytes, frames, decisions,
-            retries, and explicit unknowns. Modules 21–22 widen that protocol
-            boundary into distributed and adversarial conditions.
+            retries, and explicit unknowns. Module 21 adds owned async task
+            lifetimes, bounded admission, partial-failure evidence, causal
+            relation, and policy-scoped collection cuts. Module 22 widens that
+            boundary into adversarial and trust conditions.
           </p>
         </div>
         <div className="arc-four-bridge-map" aria-label="Arc IV knowledge bridge">
@@ -874,9 +878,9 @@ export function ArcFourStudio({
           <span>Latest published workbook · complete models, labs, quiz, and project</span>
           <Link
             className="primary-action arc-four-primary"
-            href="/modules/20-networks-application-protocols"
+            href="/modules/21-async-distributed-systems"
           >
-            Enter Module 20 <span aria-hidden="true">→</span>
+            Enter Module 21 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </footer>

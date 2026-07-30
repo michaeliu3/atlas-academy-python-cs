@@ -98,10 +98,34 @@ const publishedModule20Tests = resolve(
   "downloads",
   "test_module20_reference.py",
 );
+const canonicalModule21Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module21_reference.py",
+);
+const publishedModule21Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module21_reference.py",
+);
+const canonicalModule21Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module21_reference.py",
+);
+const publishedModule21Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module21_reference.py",
+);
 const sourceDirectory = await access(canonicalSourceDirectory)
   .then(() => canonicalSourceDirectory)
   .catch(() => outputDirectory);
-const publishedThrough = 20;
+const publishedThrough = 21;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -144,7 +168,7 @@ const arcs = [
     title: "Machine & network",
     range: "Modules 17–22",
     description:
-      "Modules 17–20 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and evidence-aware network protocols.",
+      "Modules 17–21 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and distributed-system claim discipline.",
     start: 17,
     end: 22,
   },
@@ -330,6 +354,32 @@ if (
   await writeIfChanged(
     publishedModule20Tests,
     module20Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module21ReferenceSource = await access(canonicalModule21Reference)
+  .then(() => canonicalModule21Reference)
+  .catch(() => publishedModule21Reference);
+const module21Reference = await readFile(module21ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule21Reference,
+    module21Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module21TestsSource = await access(canonicalModule21Tests)
+  .then(() => canonicalModule21Tests)
+  .catch(() => publishedModule21Tests);
+const module21Tests = await readFile(module21TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule21Tests,
+    module21Tests,
   )
 ) {
   changedFiles += 1;

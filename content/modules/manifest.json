@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 20,
+  "moduleCount": 21,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,7 +28,7 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Modules 17–20 connect machine execution and OS mediation to explicit concurrent histories, synchronization, progress, deterministic reduction, and evidence-aware network protocols."
+      "description": "Modules 17–21 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and distributed-system claim discipline."
     }
   ],
   "modules": [
@@ -310,6 +310,20 @@
       "sourceHash": "2fb6f8f5cb303e937319fe4d2c4d577a792a5572257e363b7a1e408a6f32b82d",
       "prerequisiteSlug": "19-concurrency-parallelism",
       "previousSlug": "19-concurrency-parallelism",
+      "nextSlug": "21-async-distributed-systems"
+    },
+    {
+      "number": 21,
+      "slug": "21-async-distributed-systems",
+      "filename": "21_async_distributed_systems.md",
+      "title": "Async and Distributed Systems",
+      "summary": "Arc IV: coordinate local work without inventing remote certainty A program can own a task. It cannot own every queue, clock, replica, or response path beyond its boundary. This module makes that distinction useful.",
+      "arcId": "arc-iv",
+      "wordCount": 8180,
+      "estimatedMinutes": 39,
+      "sourceHash": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315",
+      "prerequisiteSlug": "20-networks-application-protocols",
+      "previousSlug": "20-networks-application-protocols",
       "nextSlug": null
     }
   ]

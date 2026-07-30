@@ -14,6 +14,7 @@ import { ModuleMarkdown } from "./ModuleMarkdown";
 import { ModuleNavigation } from "./ModuleNavigation";
 import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
+import { AsyncDistributedStudio } from "../../AsyncDistributedStudio";
 import { NetworkProtocolStudio } from "../../NetworkProtocolStudio";
 
 type ModulePageProps = {
@@ -87,6 +88,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
 
         {slug === "20-networks-application-protocols" && (
           <NetworkProtocolStudio />
+        )}
+        {slug === "21-async-distributed-systems" && (
+          <AsyncDistributedStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
