@@ -59,6 +59,13 @@ actually published.
   M27/M28 → M29 → M30 route, and bounded implementation artifacts while
   preserving the audit's ambiguous rigor, code, source, and visual findings.
   It records no review, verification, release, or learner-mastery claim.
+- Extended that non-promoting structural inventory to M30. Its additional 36
+  resolved pointers bind M27/M29 → M30 → M31, six connected probability and
+  inference sessions, source-map/addendum surfaces, studio/model artifacts,
+  and learner-support surfaces. It deliberately preserves every M30 audit
+  ambiguity (first principles, rigor, code/debug/design, transfer, source,
+  and visual/text alternatives); the combined packet registry has 71
+  structural pointers, 0 human approvals, and 0 publication changes.
 - Pinned every third-party action in Course CI to a reviewed full commit SHA,
   with readable version comments and a regression test. This narrows mutable
   action-tag drift; it is not a complete supply-chain or remote-CI-evidence

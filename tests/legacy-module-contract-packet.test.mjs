@@ -25,8 +25,8 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
   assert.deepEqual(report.summary, {
-    structuralCandidates: 1,
-    resolvedPointers: 35,
+    structuralCandidates: 2,
+    resolvedPointers: 71,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -48,6 +48,39 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
     ),
   );
   assert.ok(report.releaseInputPaths.every((path) => path.replaceAll("\\", "/").includes("content/")));
+});
+
+test("the M30 structural packet binds its mathematics spine without laundering ambiguous evidence", async () => {
+  const { graph, registry } = await packetFixture();
+  const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
+
+  assert.equal(report.summary.structuralCandidates, 2);
+  const packet = report.packetById.get("m30-probability-inference-structural-candidate");
+  assert.equal(packet?.moduleId, "m30");
+  assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m27", "m29"]);
+  assert.equal(packet?.canonicalExpectation.forwardModuleId, "m31");
+  assert.equal(packet?.packetState, "structural-candidate");
+  assert.equal(packet?.humanReviewState, "not-reviewed");
+  assert.equal(packet?.publicationEffect, "none");
+
+  const statusByCriterion = new Map(
+    packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
+  );
+  assert.equal(statusByCriterion.get("first-principles"), "ambiguous");
+  assert.equal(
+    statusByCriterion.get(
+      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+    ),
+    "ambiguous",
+  );
+  assert.equal(statusByCriterion.get("source-ledger"), "ambiguous");
+  assert.ok(
+    report.releaseInputPaths.some((path) =>
+      path
+        .replaceAll("\\", "/")
+        .endsWith("content/source-maps/module30_probability_statistics_scientific_inference_source_audit_addendum.md"),
+    ),
+  );
 });
 
 test("the packet rejects route drift, audit-status laundering, unreviewed promotion, and missing typed roles", async () => {

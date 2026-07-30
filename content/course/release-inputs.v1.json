@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "0565361ad7db9525ac4073240e5d404a283978fcc179f22631285777e319f0f6"
+      "sha256": "26ca5d7b42c98ddba141f383b69d64ab4b6044aba0a4077bcef2c91f467731c4"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -223,6 +223,10 @@
     {
       "path": "content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md",
       "sha256": "ff9e461d78fc5a96b8848877a8e57d3c7556a7048fae95171ca099f6b150252d"
+    },
+    {
+      "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
+      "sha256": "0e4a2eaa87d4197523919ba9a7157c50c300e0fcb0d206c83071ba65551de158"
     },
     {
       "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",

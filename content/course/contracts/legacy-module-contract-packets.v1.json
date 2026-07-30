@@ -94,6 +94,91 @@
         {"id": "m29-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module29_reference.py", "public/downloads/test_module29_reference.py"]},
         {"id": "m29-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m30",
+      "packetId": "m30-probability-inference-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m27", "m29"],
+        "forwardModuleId": "m31",
+        "masteryGateId": "mathematics",
+        "studioId": "probability-inference"
+      },
+      "workbookPath": "content/modules/30_probability_statistics_scientific_inference.md",
+      "sourceMapPath": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m30-session-1", "usesPrerequisiteModuleIds": ["m27", "m29"], "forwardArtifactId": "m30-probability-model-card"},
+        {"sessionNumber": 2, "pointerId": "m30-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m30-conditional-information-trace"},
+        {"sessionNumber": 3, "pointerId": "m30-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m30-monte-carlo-evidence-record"},
+        {"sessionNumber": 4, "pointerId": "m30-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m30-likelihood-model-contract"},
+        {"sessionNumber": 5, "pointerId": "m30-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m30-inference-procedure-contract"},
+        {"sessionNumber": 6, "pointerId": "m30-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m30-scientific-inference-evidence-dossier"}
+      ],
+      "pointers": [
+        {"id": "m30-course-map", "roles": ["prerequisite-map", "forward-handoff"], "label": "Canonical prerequisite and forward map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "12-prerequisite-and-forward-map"}},
+        {"id": "m30-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "3-session-1--from-a-story-to-a-probability-model"}},
+        {"id": "m30-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "4-session-2--expectation-variation-covariance-and-information"}},
+        {"id": "m30-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "5-session-3--repetition-convergence-concentration-and-monte-carlo"}},
+        {"id": "m30-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "6-session-4--models-likelihood-estimation-and-criticism"}},
+        {"id": "m30-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "7-session-5--intervals-tests-multiplicity-and-resampling"}},
+        {"id": "m30-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "8-session-6--design-criticism-missingness-robustness-and-dimension"}},
+        {"id": "m30-first-principle", "roles": ["first-principles"], "label": "Model before arithmetic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "31-model-before-arithmetic"}},
+        {"id": "m30-definition", "roles": ["definition"], "label": "Joint, marginal, and conditional objects", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "32-joint-marginal-and-conditional-are-different-questions"}},
+        {"id": "m30-assumption", "roles": ["assumption"], "label": "Independence and conditional-independence assumptions", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "33-independence-mutual-exclusion-and-conditional-independence"}},
+        {"id": "m30-derivation", "roles": ["derivation-proof"], "label": "Conditional-expectation repair", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "43-conditional-expectation-and-the-total-expectation-repair"}},
+        {"id": "m30-counterexample", "roles": ["counterexample"], "label": "High-dimensional identification boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "84-high-dimensional-estimation-exposes-an-identification-boundary"}},
+        {"id": "m30-numerical-experiment", "roles": ["numerical-experiment"], "label": "Monte Carlo estimator boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "52-monte-carlo-is-an-estimator-not-a-spell"}},
+        {"id": "m30-code-reading", "roles": ["code-reading"], "label": "Conditional-direction code-reading lab", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "34-code-reading-lab--conditional-direction-and-denominator"}},
+        {"id": "m30-debug", "roles": ["debugging"], "label": "Invalid decision-path repair", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "code-reading-lab--a-small-but-invalid-decision-path"}},
+        {"id": "m30-design", "roles": ["design"], "label": "Cross-systems design audit", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "code-reading-lab--design-audit-across-systems-boundaries"}},
+        {"id": "m30-prediction", "roles": ["prediction"], "label": "Prediction before reveal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "prediction-gate"}},
+        {"id": "m30-transfer", "roles": ["transfer", "oral-transfer"], "label": "Cross-systems inference transfer", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "code-reading-lab--design-audit-across-systems-boundaries"}},
+        {"id": "m30-source-cards", "roles": ["source-rationale", "stable-learner-link"], "label": "Source cards with learner links", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md", "headingAnchor": "source-cards"}},
+        {"id": "m30-claim-linkage", "roles": ["claim-linkage"], "label": "Six-session source routing", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md", "headingAnchor": "six-session-source-routing"}},
+        {"id": "m30-license-route", "roles": ["license-reuse"], "label": "Sources and licensing route", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "15-sources-licensing-and-responsible-reading-route"}},
+        {"id": "m30-visual-studio", "roles": ["visual"], "label": "Probability and Inference Studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "9-probability--inference-studio--six-prediction-gates"}},
+        {"id": "m30-text-alternative-candidate", "roles": ["text-alternative"], "label": "Studio text-equivalent candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "9-probability--inference-studio--six-prediction-gates"}},
+        {"id": "m30-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "10-confidence-aware-diagnostic--12-high-value-checks"}},
+        {"id": "m30-misconception", "roles": ["misconception"], "label": "Diagnostic repair key", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "diagnostic-repair-key"}},
+        {"id": "m30-retrieval", "roles": ["retrieval"], "label": "Retrieval queue", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "retrieval-queue"}},
+        {"id": "m30-dossier", "roles": ["dossier"], "label": "Scientific-inference evidence dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "11-project--uncertainty--inference-evidence-dossier"}},
+        {"id": "m30-acceptance", "roles": ["acceptance-criteria"], "label": "Dossier acceptance criteria", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "acceptance-criteria"}},
+        {"id": "m30-rubric", "roles": ["rubric"], "label": "Dossier evidence rubric candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "acceptance-criteria"}},
+        {"id": "m30-oral-protocol", "roles": ["oral-protocol"], "label": "Conversational oral-defense protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "13-conversational-oral-defense--m30"}},
+        {"id": "m30-oral-hint", "roles": ["oral-hint"], "label": "Oral-defense hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "hint-ladder--preserve-agency"}},
+        {"id": "m30-oral-counterexample", "roles": ["oral-counterexample"], "label": "Oral misconception repair", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "misconception-repair-moments"}},
+        {"id": "m30-oral-reflection", "roles": ["oral-reflection"], "label": "Constructive evidence lens", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "constructive-evidence-lenses--visible-adaptive-and-non-scored"}},
+        {"id": "m30-oral-summary", "roles": ["oral-summary"], "label": "Learner-controlled evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "end-of-defense-evidence-summary"}},
+        {"id": "m30-ta", "roles": ["ta"], "label": "TA inference clinic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "teaching-assistant--2535-minute-inference-clinic"}},
+        {"id": "m30-study-partner", "roles": ["study-partner"], "label": "Study Partner rehearsal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/30_probability_statistics_scientific_inference.md", "headingAnchor": "study-partner--10-minute-no-grading-rehearsal"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-course-map"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-session-1", "m30-session-2", "m30-session-3", "m30-session-4", "m30-session-5", "m30-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-definition", "m30-assumption", "m30-derivation", "m30-counterexample", "m30-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-code-reading", "m30-debug", "m30-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-source-cards", "m30-claim-linkage", "m30-license-route"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-visual-studio", "m30-text-alternative-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-diagnostic", "m30-misconception"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-dossier", "m30-acceptance", "m30-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-oral-protocol", "m30-oral-hint", "m30-oral-counterexample", "m30-transfer", "m30-oral-reflection", "m30-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m30-course-map"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m30-studio", "kind": "studio", "paths": ["app/ProbabilityInferenceStudio.tsx", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m30-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module30_reference.py", "public/downloads/test_module30_reference.py"]},
+        {"id": "m30-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }
