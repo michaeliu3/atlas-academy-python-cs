@@ -26,6 +26,7 @@ export type CourseModule = {
   estimatedMinutes: number;
   sourceHash: string;
   prerequisiteSlug: string | null;
+  prerequisiteSlugs: string[];
   previousSlug: string | null;
   nextSlug: string | null;
 };

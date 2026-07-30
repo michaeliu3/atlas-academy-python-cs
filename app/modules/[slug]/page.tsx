@@ -22,6 +22,7 @@ import { LanguageInterpreterStudio } from "../../LanguageInterpreterStudio";
 import { RuntimeEvidenceObservatory } from "../../RuntimeEvidenceObservatory";
 import { EvidenceGroundedStudio } from "../../EvidenceGroundedStudio";
 import { CapstoneDefenseStudio } from "../../CapstoneDefenseStudio";
+import { DiscreteMathProofStudio } from "../../DiscreteMathProofStudio";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -112,6 +113,9 @@ export default async function ModulePage({ params }: ModulePageProps) {
         )}
         {slug === "26-systems-capstone-open-source-stewardship" && (
           <CapstoneDefenseStudio />
+        )}
+        {slug === "27-discrete-mathematics-proof-counting-structures" && (
+          <DiscreteMathProofStudio />
         )}
 
         <ModuleNavigation courseModule={courseModule} position="top" />

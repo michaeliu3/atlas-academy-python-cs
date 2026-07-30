@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 26,
+  "moduleCount": 27,
   "arcs": [
     {
       "id": "arc-i",
@@ -36,6 +36,13 @@
       "title": "Languages & intelligence",
       "range": "Modules 23–26",
       "description": "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense."
+    },
+    {
+      "id": "arc-vi",
+      "numeral": "VI",
+      "title": "Mathematical foundations",
+      "range": "Module 27",
+      "description": "Deepen proof, counting, structure, and formal claim boundaries before the later mathematics and AI sequence."
     }
   ],
   "modules": [
@@ -50,6 +57,7 @@
       "estimatedMinutes": 21,
       "sourceHash": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec",
       "prerequisiteSlug": null,
+      "prerequisiteSlugs": [],
       "previousSlug": null,
       "nextSlug": "02-functions-recursion-induction"
     },
@@ -64,6 +72,9 @@
       "estimatedMinutes": 46,
       "sourceHash": "dc5f938fe7b6e320b64314aba970f1d0aa3666ea014e47a87ea98bffdcdfcbce",
       "prerequisiteSlug": "01-values-state-execution",
+      "prerequisiteSlugs": [
+        "01-values-state-execution"
+      ],
       "previousSlug": "01-values-state-execution",
       "nextSlug": "03-abstraction-interfaces-adts"
     },
@@ -78,6 +89,9 @@
       "estimatedMinutes": 64,
       "sourceHash": "7b5860ad02f426a22c694f1725de82cbccb20776fe855ccee90d28b5ee125e00",
       "prerequisiteSlug": "02-functions-recursion-induction",
+      "prerequisiteSlugs": [
+        "02-functions-recursion-induction"
+      ],
       "previousSlug": "02-functions-recursion-induction",
       "nextSlug": "04-logic-sets-relations-graphs-proof"
     },
@@ -92,6 +106,9 @@
       "estimatedMinutes": 25,
       "sourceHash": "1629d7061ac6f118342e7f5680dd9a9b76291e6aa2a9f222ea92756431fb7da6",
       "prerequisiteSlug": "03-abstraction-interfaces-adts",
+      "prerequisiteSlugs": [
+        "03-abstraction-interfaces-adts"
+      ],
       "previousSlug": "03-abstraction-interfaces-adts",
       "nextSlug": "05-cost-models-algorithm-analysis"
     },
@@ -106,8 +123,11 @@
       "estimatedMinutes": 24,
       "sourceHash": "42b6174bcf6b21c9874e04ab360a1ff069408631f6d1bdda1c9dedecb4c3ba01",
       "prerequisiteSlug": "04-logic-sets-relations-graphs-proof",
+      "prerequisiteSlugs": [
+        "04-logic-sets-relations-graphs-proof"
+      ],
       "previousSlug": "04-logic-sets-relations-graphs-proof",
-      "nextSlug": "06-representation-memory-sequences-linked"
+      "nextSlug": "27-discrete-mathematics-proof-counting-structures"
     },
     {
       "number": 6,
@@ -119,8 +139,11 @@
       "wordCount": 12119,
       "estimatedMinutes": 58,
       "sourceHash": "f272b9d5ff877e5bc0f316ea2340b22e53ddb2864b0482bb859a3ee3d366f949",
-      "prerequisiteSlug": "05-cost-models-algorithm-analysis",
-      "previousSlug": "05-cost-models-algorithm-analysis",
+      "prerequisiteSlug": "27-discrete-mathematics-proof-counting-structures",
+      "prerequisiteSlugs": [
+        "27-discrete-mathematics-proof-counting-structures"
+      ],
+      "previousSlug": "27-discrete-mathematics-proof-counting-structures",
       "nextSlug": "07-stacks-queues-iteration-lazy"
     },
     {
@@ -134,6 +157,9 @@
       "estimatedMinutes": 52,
       "sourceHash": "870d2e4579a1eb31937197ae038fe95dbb6d2c3e2a54d83380a2ec6283a6288f",
       "prerequisiteSlug": "06-representation-memory-sequences-linked",
+      "prerequisiteSlugs": [
+        "06-representation-memory-sequences-linked"
+      ],
       "previousSlug": "06-representation-memory-sequences-linked",
       "nextSlug": "08-hashing-dictionaries-sets-indexing"
     },
@@ -148,6 +174,9 @@
       "estimatedMinutes": 52,
       "sourceHash": "8ac708034206cc526a441b0ced9878dd4fe956b4d31183e5ef652340960e3646",
       "prerequisiteSlug": "07-stacks-queues-iteration-lazy",
+      "prerequisiteSlugs": [
+        "07-stacks-queues-iteration-lazy"
+      ],
       "previousSlug": "07-stacks-queues-iteration-lazy",
       "nextSlug": "09-trees-heaps-sorting-ordered"
     },
@@ -162,6 +191,9 @@
       "estimatedMinutes": 74,
       "sourceHash": "f2bd9e373cc47acab3fc586fcc98419d4941ec9c75ca09ebea8978e4b0403643",
       "prerequisiteSlug": "08-hashing-dictionaries-sets-indexing",
+      "prerequisiteSlugs": [
+        "08-hashing-dictionaries-sets-indexing"
+      ],
       "previousSlug": "08-hashing-dictionaries-sets-indexing",
       "nextSlug": "10-graph-algorithms-network-models"
     },
@@ -176,6 +208,9 @@
       "estimatedMinutes": 76,
       "sourceHash": "cbfe82264548694c9436e4c3a40e0a01d79db7e3f1b1d589879f7b3cacff0312",
       "prerequisiteSlug": "09-trees-heaps-sorting-ordered",
+      "prerequisiteSlugs": [
+        "09-trees-heaps-sorting-ordered"
+      ],
       "previousSlug": "09-trees-heaps-sorting-ordered",
       "nextSlug": "11-algorithm-design-paradigms"
     },
@@ -190,6 +225,9 @@
       "estimatedMinutes": 63,
       "sourceHash": "8fb4b8cec427bed7c8581b2f0edb8825d70774438b57df66dcd295079c213f92",
       "prerequisiteSlug": "10-graph-algorithms-network-models",
+      "prerequisiteSlugs": [
+        "10-graph-algorithms-network-models"
+      ],
       "previousSlug": "10-graph-algorithms-network-models",
       "nextSlug": "12-modules-apis-types-dependencies"
     },
@@ -204,6 +242,9 @@
       "estimatedMinutes": 82,
       "sourceHash": "a1fc525a1eebea1f64c1abd4f0cf3e6a78c2777a9865c94b36ad4826c7bfea86",
       "prerequisiteSlug": "11-algorithm-design-paradigms",
+      "prerequisiteSlugs": [
+        "11-algorithm-design-paradigms"
+      ],
       "previousSlug": "11-algorithm-design-paradigms",
       "nextSlug": "13-specifications-testing-debugging-observability"
     },
@@ -218,6 +259,9 @@
       "estimatedMinutes": 54,
       "sourceHash": "adc4c10a855320ae7ff391cef89dcf2d86e8596d1fb35684df501481f08d42ce",
       "prerequisiteSlug": "12-modules-apis-types-dependencies",
+      "prerequisiteSlugs": [
+        "12-modules-apis-types-dependencies"
+      ],
       "previousSlug": "12-modules-apis-types-dependencies",
       "nextSlug": "14-software-design-and-change"
     },
@@ -232,6 +276,9 @@
       "estimatedMinutes": 69,
       "sourceHash": "1938fb2d7674a5951f0fe7e79e62cae154f17b7b7238c5306f3382dccc05147e",
       "prerequisiteSlug": "13-specifications-testing-debugging-observability",
+      "prerequisiteSlugs": [
+        "13-specifications-testing-debugging-observability"
+      ],
       "previousSlug": "13-specifications-testing-debugging-observability",
       "nextSlug": "15-files-serialization-packaging-delivery"
     },
@@ -246,6 +293,9 @@
       "estimatedMinutes": 110,
       "sourceHash": "e97d4a794330d28cb7b7dcb8b3b9241735e3aa6daa0918f004b1f9442eabe113",
       "prerequisiteSlug": "14-software-design-and-change",
+      "prerequisiteSlugs": [
+        "14-software-design-and-change"
+      ],
       "previousSlug": "14-software-design-and-change",
       "nextSlug": "16-relational-data-transactions"
     },
@@ -260,6 +310,9 @@
       "estimatedMinutes": 93,
       "sourceHash": "b80b7cee07b9d42e1afcf498feda08f7de5e4c6e1047911cba67df1be1e933c9",
       "prerequisiteSlug": "15-files-serialization-packaging-delivery",
+      "prerequisiteSlugs": [
+        "15-files-serialization-packaging-delivery"
+      ],
       "previousSlug": "15-files-serialization-packaging-delivery",
       "nextSlug": "17-computer-architecture-execution-stack"
     },
@@ -274,6 +327,9 @@
       "estimatedMinutes": 96,
       "sourceHash": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07",
       "prerequisiteSlug": "16-relational-data-transactions",
+      "prerequisiteSlugs": [
+        "16-relational-data-transactions"
+      ],
       "previousSlug": "16-relational-data-transactions",
       "nextSlug": "18-operating-systems-resource-mediation"
     },
@@ -288,6 +344,9 @@
       "estimatedMinutes": 97,
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
       "prerequisiteSlug": "17-computer-architecture-execution-stack",
+      "prerequisiteSlugs": [
+        "17-computer-architecture-execution-stack"
+      ],
       "previousSlug": "17-computer-architecture-execution-stack",
       "nextSlug": "19-concurrency-parallelism"
     },
@@ -302,6 +361,9 @@
       "estimatedMinutes": 104,
       "sourceHash": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911",
       "prerequisiteSlug": "18-operating-systems-resource-mediation",
+      "prerequisiteSlugs": [
+        "18-operating-systems-resource-mediation"
+      ],
       "previousSlug": "18-operating-systems-resource-mediation",
       "nextSlug": "20-networks-application-protocols"
     },
@@ -316,6 +378,9 @@
       "estimatedMinutes": 72,
       "sourceHash": "ab4e96417238f6750aadbef0c61e7e54ae501bded7d7176bcffcc059c1cb4382",
       "prerequisiteSlug": "19-concurrency-parallelism",
+      "prerequisiteSlugs": [
+        "19-concurrency-parallelism"
+      ],
       "previousSlug": "19-concurrency-parallelism",
       "nextSlug": "21-async-distributed-systems"
     },
@@ -330,6 +395,9 @@
       "estimatedMinutes": 39,
       "sourceHash": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315",
       "prerequisiteSlug": "20-networks-application-protocols",
+      "prerequisiteSlugs": [
+        "20-networks-application-protocols"
+      ],
       "previousSlug": "20-networks-application-protocols",
       "nextSlug": "22-security-privacy-trust-boundaries"
     },
@@ -344,6 +412,9 @@
       "estimatedMinutes": 31,
       "sourceHash": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1",
       "prerequisiteSlug": "21-async-distributed-systems",
+      "prerequisiteSlugs": [
+        "21-async-distributed-systems"
+      ],
       "previousSlug": "21-async-distributed-systems",
       "nextSlug": "23-programming-languages-interpreters"
     },
@@ -358,6 +429,9 @@
       "estimatedMinutes": 34,
       "sourceHash": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742",
       "prerequisiteSlug": "22-security-privacy-trust-boundaries",
+      "prerequisiteSlugs": [
+        "22-security-privacy-trust-boundaries"
+      ],
       "previousSlug": "22-security-privacy-trust-boundaries",
       "nextSlug": "24-cpython-performance-memory"
     },
@@ -372,6 +446,9 @@
       "estimatedMinutes": 21,
       "sourceHash": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73",
       "prerequisiteSlug": "23-programming-languages-interpreters",
+      "prerequisiteSlugs": [
+        "23-programming-languages-interpreters"
+      ],
       "previousSlug": "23-programming-languages-interpreters",
       "nextSlug": "25-evidence-grounded-intelligent-systems"
     },
@@ -386,6 +463,9 @@
       "estimatedMinutes": 36,
       "sourceHash": "0f3b0e7a571005a8361cd2c7704a26bd586fa120a2454d22412548e325a892d7",
       "prerequisiteSlug": "24-cpython-performance-memory",
+      "prerequisiteSlugs": [
+        "24-cpython-performance-memory"
+      ],
       "previousSlug": "24-cpython-performance-memory",
       "nextSlug": "26-systems-capstone-open-source-stewardship"
     },
@@ -400,8 +480,30 @@
       "estimatedMinutes": 38,
       "sourceHash": "4d90e27b9e2670927b1d3c284a7c87126e784accd6b4b0fad259b414e3f84751",
       "prerequisiteSlug": "25-evidence-grounded-intelligent-systems",
+      "prerequisiteSlugs": [
+        "25-evidence-grounded-intelligent-systems"
+      ],
       "previousSlug": "25-evidence-grounded-intelligent-systems",
       "nextSlug": null
+    },
+    {
+      "number": 27,
+      "slug": "27-discrete-mathematics-proof-counting-structures",
+      "filename": "27_discrete_mathematics_proof_counting_structures.md",
+      "title": "Discrete Mathematics, Proof, Counting & Structures",
+      "summary": "Bridge: Modules 1–5 taught you to trace Python state, write contracts, use an introductory proof vocabulary, and state a cost model. This module returns to those ideas at full mathematical resolution. It asks what must be true for a clai…",
+      "arcId": "arc-vi",
+      "wordCount": 9947,
+      "estimatedMinutes": 48,
+      "sourceHash": "d6e232d6c5244fc7c3ea97fc314ac001a32795a38276d2ff55b7aa80f90f498c",
+      "prerequisiteSlug": "05-cost-models-algorithm-analysis",
+      "prerequisiteSlugs": [
+        "02-functions-recursion-induction",
+        "04-logic-sets-relations-graphs-proof",
+        "05-cost-models-algorithm-analysis"
+      ],
+      "previousSlug": "05-cost-models-algorithm-analysis",
+      "nextSlug": "06-representation-memory-sequences-linked"
     }
   ]
 }

@@ -123,17 +123,21 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   const readable = html.replaceAll("<!-- -->", "");
   assert.match(readable, /60 days\./);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
-  assert.match(readable, /26 \/ 10/);
+  assert.match(readable, /27 \/ 9/);
   assert.match(readable, /published \/ in authoring/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
+  assert.match(readable, /Published/);
   assert.match(readable, /In authoring/);
   assert.match(readable, /Source map and studio are being built before release\./);
   assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
   assert.match(readable, /Module 25/);
   assert.match(readable, /Module 26/);
-  assert.doesNotMatch(html, /href="\/modules\/27-/);
+  assert.match(
+    html,
+    /href="\/modules\/27-discrete-mathematics-proof-counting-structures"/,
+  );
 });
 
 test("keeps release status and route linkability aligned with the published manifest", async () => {
@@ -147,7 +151,7 @@ test("keeps release status and route linkability aligned with the published mani
     manifest.modules.map((courseModule) => courseModule.number),
   );
 
-  for (let number = 1; number <= 26; number += 1) {
+  for (let number = 1; number <= 27; number += 1) {
     assert.ok(publishedNumbers.has(number), `M${number} appears in the manifest`);
     assert.match(
       routeSource,
@@ -156,7 +160,7 @@ test("keeps release status and route linkability aligned with the published mani
     );
   }
 
-  for (let number = 27; number <= 36; number += 1) {
+  for (let number = 28; number <= 36; number += 1) {
     assert.ok(!publishedNumbers.has(number), `M${number} is not prematurely published`);
     assert.match(
       routeSource,
@@ -1164,21 +1168,25 @@ test("Module 19 persists the bounded learning record and resets view-specific si
   assert.match(root, /stored\.version === 2/);
 });
 
-test("generated module manifest covers Modules 1–26 exactly once", async () => {
+test("generated module manifest covers Modules 1–27 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 26);
+  assert.equal(manifest.moduleCount, 27);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 26 }, (_, index) => index + 1),
+    Array.from({ length: 27 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 26);
-  assert.equal(manifest.arcs.length, 5);
+  assert.equal(new Set(slugs).size, 27);
+  assert.equal(manifest.arcs.length, 6);
 
+  const module2 = manifest.modules.find((courseModule) => courseModule.number === 2);
+  const module4 = manifest.modules.find((courseModule) => courseModule.number === 4);
+  const module5 = manifest.modules.find((courseModule) => courseModule.number === 5);
+  const module6 = manifest.modules.find((courseModule) => courseModule.number === 6);
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
   const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
   const module18 = manifest.modules.find((courseModule) => courseModule.number === 18);
@@ -1190,6 +1198,7 @@ test("generated module manifest covers Modules 1–26 exactly once", async () =>
   const module24 = manifest.modules.find((courseModule) => courseModule.number === 24);
   const module25 = manifest.modules.find((courseModule) => courseModule.number === 25);
   const module26 = manifest.modules.find((courseModule) => courseModule.number === 26);
+  const module27 = manifest.modules.find((courseModule) => courseModule.number === 27);
   assert.equal(module17.arcId, "arc-iv");
   assert.equal(module18.arcId, "arc-iv");
   assert.equal(module19.arcId, "arc-iv");
@@ -1228,6 +1237,17 @@ test("generated module manifest covers Modules 1–26 exactly once", async () =>
   assert.equal(module26.previousSlug, module25.slug);
   assert.equal(module26.prerequisiteSlug, module25.slug);
   assert.equal(module26.nextSlug, null);
+  assert.equal(module27.arcId, "arc-vi");
+  assert.equal(module5.nextSlug, module27.slug);
+  assert.equal(module27.previousSlug, module5.slug);
+  assert.equal(module27.nextSlug, module6.slug);
+  assert.deepEqual(module27.prerequisiteSlugs, [
+    module2.slug,
+    module4.slug,
+    module5.slug,
+  ]);
+  assert.equal(module6.previousSlug, module27.slug);
+  assert.equal(module6.prerequisiteSlug, module27.slug);
 });
 
 test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
@@ -1291,7 +1311,9 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /CPython, Performance &amp; Memory Evidence/);
   assert.match(html, /Evidence-Grounded Intelligent &amp; Human-Centered Systems/);
   assert.match(html, /Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense/);
-  assert.match(html, /<dt>26<\/dt>/);
+  assert.match(html, /Mathematical foundations/);
+  assert.match(html, /Discrete Mathematics, Proof, Counting &amp; Structures/);
+  assert.match(html, /<dt>27<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1902,4 +1924,84 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
   assert.match(referenceTests, /test_unknown_or_alias_external_action_is_a_hard_rejection/);
   assert.match(referenceTests, /test_stale_raw_claims_and_artifacts_cannot_support_the_candidate/);
   assert.match(referenceTests, /test_missing_raw_human_impact_record_requires_revision/);
+});
+
+test("renders the discrete mathematics proof workbook and its bounded teaching model", async () => {
+  const response = await render(
+    "/modules/27-discrete-mathematics-proof-counting-structures",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 27: Discrete Mathematics, Proof, Counting &amp; Structures · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 27 workbook/);
+  assert.match(html, /Proof &amp; Counterexample Workbench/);
+  assert.match(html, /Claim scope lab/);
+  assert.match(html, /Confidence-aware diagnostic/);
+  assert.match(html, /Proof, Counterexample &amp; Constraint Dossier/);
+  assert.match(html, /Conversational oral defense/);
+  assert.match(html, /Sources, licensing, and a responsible reading route/);
+  assert.match(html, /href="\/downloads\/module27_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module27_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const [studio, style, reference, referenceTests] = await Promise.all([
+    readFile(new URL("../app/DiscreteMathProofStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/DiscreteMathProofStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module27_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module27_reference.py", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.match(studio, /t1 can use r1 only; t2 can use r2 only/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each mathematical view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /not a theorem prover/);
+  assert.match(studio, /Proof repair bench/);
+  assert.match(studio, /State and recurrence traceboard/);
+  assert.match(studio, /Counting and coefficient lab/);
+  assert.match(studio, /Graph and matching lab/);
+  assert.match(studio, /Order defense board/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module27-reference\/1"/);
+  assert.match(reference, /def classify_relation/);
+  assert.match(reference, /def transitive_closure/);
+  assert.match(reference, /def topological_order_or_cycle/);
+  assert.match(reference, /def analyze_bipartite_matching/);
+  assert.match(reference, /MAX_MATCHING_EDGES = 12/);
+  assert.match(reference, /def binomial_coefficient/);
+  assert.match(reference, /def linear_recurrence_terms/);
+  assert.match(reference, /def modular_inverse/);
+  assert.match(reference, /Finite teaching model only/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module27_reference as model/);
+  assert.match(referenceTests, /class RelationClassificationTests/);
+  assert.match(referenceTests, /class GraphReasoningTests/);
+  assert.match(referenceTests, /class MatchingTests/);
+  assert.match(referenceTests, /class CountingAndNumberTheoryTests/);
+  assert.match(referenceTests, /test_maximal_matching_can_still_fail_to_be_maximum/);
 });

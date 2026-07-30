@@ -242,6 +242,30 @@ const publishedModule26Tests = resolve(
   "downloads",
   "test_module26_reference.py",
 );
+const canonicalModule27Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module27_reference.py",
+);
+const publishedModule27Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module27_reference.py",
+);
+const canonicalModule27Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module27_reference.py",
+);
+const publishedModule27Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module27_reference.py",
+);
 const canonicalResearchDirectory = resolve(siteRoot, "..", "research");
 const sourceMapOutputDirectory = resolve(siteRoot, "content", "source-maps");
 const sourceDirectory = await access(canonicalSourceDirectory)
@@ -250,7 +274,7 @@ const sourceDirectory = await access(canonicalSourceDirectory)
 const sourceMapDirectory = await access(canonicalResearchDirectory)
   .then(() => canonicalResearchDirectory)
   .catch(() => sourceMapOutputDirectory);
-const publishedThrough = 26;
+const publishedThrough = 27;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -307,7 +331,28 @@ const arcs = [
     start: 23,
     end: 26,
   },
+  {
+    id: "arc-vi",
+    numeral: "VI",
+    title: "Mathematical foundations",
+    range: "Module 27",
+    description:
+      "Deepen proof, counting, structure, and formal claim boundaries before the later mathematics and AI sequence.",
+    start: 27,
+    end: 27,
+  },
 ];
+
+// Stable module IDs are numeric for release continuity. Learner navigation must
+// instead follow the prerequisite-first 60-day route, which inserts M27 after M5.
+const learnerRouteOrder = [
+  1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+  20, 21, 22, 23, 24, 25, 26,
+];
+
+const directPrerequisiteNumbers = new Map([
+  [27, [2, 4, 5]],
+]);
 
 function moduleNumber(filename) {
   const match = filename.match(/^(\d{2})_.+\.md$/);
@@ -396,6 +441,20 @@ if (
     `Expected exactly Modules 1–${publishedThrough} in ${sourceDirectory}; found ${selectedNumbers.join(", ")}.`,
   );
 }
+
+if (
+  learnerRouteOrder.length !== selectedNumbers.length ||
+  new Set(learnerRouteOrder).size !== learnerRouteOrder.length ||
+  learnerRouteOrder.some((number) => !selectedNumbers.includes(number))
+) {
+  throw new Error(
+    "Learner route order must contain every published module exactly once.",
+  );
+}
+
+const selectedFileByNumber = new Map(
+  selectedFiles.map((filename) => [moduleNumber(filename), filename]),
+);
 
 const existingDerived = (await readdir(outputDirectory)).filter((filename) =>
   filename.endsWith(".md"),
@@ -680,6 +739,32 @@ if (
   changedFiles += 1;
 }
 
+const module27ReferenceSource = await access(canonicalModule27Reference)
+  .then(() => canonicalModule27Reference)
+  .catch(() => publishedModule27Reference);
+const module27Reference = await readFile(module27ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule27Reference,
+    module27Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module27TestsSource = await access(canonicalModule27Tests)
+  .then(() => canonicalModule27Tests)
+  .catch(() => publishedModule27Tests);
+const module27Tests = await readFile(module27TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule27Tests,
+    module27Tests,
+  )
+) {
+  changedFiles += 1;
+}
+
 for (const filename of selectedFiles) {
   const number = moduleNumber(filename);
   const markdown = normalizeNewlines(
@@ -703,8 +788,27 @@ for (const filename of selectedFiles) {
     changedFiles += 1;
   }
 
-  const previousFilename = selectedFiles[number - 2] ?? null;
-  const nextFilename = selectedFiles[number] ?? null;
+  const learnerRouteIndex = learnerRouteOrder.indexOf(number);
+  const previousFilename =
+    learnerRouteIndex > 0
+      ? selectedFileByNumber.get(learnerRouteOrder[learnerRouteIndex - 1]) ?? null
+      : null;
+  const nextFilename =
+    learnerRouteIndex < learnerRouteOrder.length - 1
+      ? selectedFileByNumber.get(learnerRouteOrder[learnerRouteIndex + 1]) ?? null
+      : null;
+  const prerequisiteNumbers =
+    directPrerequisiteNumbers.get(number) ??
+    (previousFilename ? [learnerRouteOrder[learnerRouteIndex - 1]] : []);
+  const prerequisiteSlugs = prerequisiteNumbers.map((prerequisiteNumber) => {
+    const prerequisiteFilename = selectedFileByNumber.get(prerequisiteNumber);
+    if (!prerequisiteFilename) {
+      throw new Error(
+        "Module " + number + " requires unpublished Module " + prerequisiteNumber + ".",
+      );
+    }
+    return moduleSlug(prerequisiteFilename);
+  });
   const variableName = `module${String(number).padStart(2, "0")}`;
   importLines.push(`import ${variableName} from "./${filename}?raw";`);
   contentEntries.push(`  "${slug}": ${variableName},`);
@@ -722,7 +826,8 @@ for (const filename of selectedFiles) {
       Math.ceil(markdown.trim().split(/\s+/u).length / 210),
     ),
     sourceHash: createHash("sha256").update(markdown).digest("hex"),
-    prerequisiteSlug: previousFilename ? moduleSlug(previousFilename) : null,
+    prerequisiteSlug: prerequisiteSlugs.at(-1) ?? null,
+    prerequisiteSlugs,
     previousSlug: previousFilename ? moduleSlug(previousFilename) : null,
     nextSlug: nextFilename ? moduleSlug(nextFilename) : null,
   });

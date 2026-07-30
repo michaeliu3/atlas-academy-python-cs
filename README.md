@@ -35,8 +35,8 @@ rote typing or exam drill.
 
 The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
 days. It is a rigorous connected first pass, not a claim of instant durable
-mastery. The learner route has 36 defined modules: 26 are readable today and
-10 advanced depth modules are in authoring. Planned modules remain visibly
+mastery. The learner route has 36 defined modules: 27 are readable today and
+9 advanced depth modules are in authoring. Planned modules remain visibly
 unlinked until their source maps, workbooks, studios, and checks are released.
 
 Every module ends with a short constructive oral defense: GPT Live Chat is the
@@ -47,7 +47,7 @@ scripted performance.
 | Days | Focus |
 |---|---|
 | 1 | Module 0 placement diagnostic and learning contract |
-| 2–9 | M1–M5 plus M27 discrete-mathematics depth (M27 in authoring) |
+| 2–9 | M1–M5 plus published M27 discrete-mathematics depth |
 | 10–17 | M6–M11 data structures and algorithmic strategy |
 | 18–25 | M12–M16 durable software, data, and transactions |
 | 26–34 | M17 plus M28–M31 numerical, statistical, and optimization foundations (M28–M31 in authoring) |

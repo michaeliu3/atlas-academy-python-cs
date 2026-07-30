@@ -25,13 +25,15 @@ oral-defense, or project evidence shows a necessary bridge.
 
 - [x] Prerequisite-first 60-day route, published/in-authoring status boundary,
   and constructive oral-defense framework.
-- [ ] M27 — discrete mathematics, proof, counting, and structures.
+- [x] M27 — discrete mathematics, proof, counting, and structures, with a
+  source-audited workbook, local proof/counterexample studio, bounded reference
+  model, and prerequisite-first reader navigation.
 - [ ] M28–M31 — linear algebra, analysis, probability/statistics, and
   optimization/information.
 - [ ] M32–M36 — systems-for-learning, formal limits, classical AI, ML, and
   learning-theory reliability.
 - [ ] Reweave M25/M26 and their capstone evidence packet against the released
-  M27–M36 artifacts.
+  M28–M36 artifacts.
 
 ## 60-day first-pass checkpoints
 

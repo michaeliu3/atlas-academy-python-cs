@@ -4403,6 +4403,12 @@ main.module-library-shell {
   margin-bottom: 1rem;
 }
 
+.prerequisite-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+}
+
 .prerequisite-link > span,
 .sequence-link > span {
   color: var(--muted);

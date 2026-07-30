@@ -41,9 +41,15 @@ export function ModuleNavigation({
   courseModule,
   position,
 }: ModuleNavigationProps) {
-  const prerequisite = courseModule.prerequisiteSlug
-    ? getModuleBySlug(courseModule.prerequisiteSlug)
-    : null;
+  const prerequisiteSlugs =
+    courseModule.prerequisiteSlugs?.length > 0
+      ? courseModule.prerequisiteSlugs
+      : courseModule.prerequisiteSlug
+        ? [courseModule.prerequisiteSlug]
+        : [];
+  const prerequisites = prerequisiteSlugs
+    .map((slug) => getModuleBySlug(slug))
+    .filter((courseModule): courseModule is CourseModule => courseModule !== undefined);
 
   return (
     <nav
@@ -52,11 +58,15 @@ export function ModuleNavigation({
     >
       {position === "top" ? (
         <div className="prerequisite-link">
-          <span>Prerequisite</span>
-          {prerequisite ? (
-            <Link href={moduleHref(prerequisite.slug)}>
-              Module {prerequisite.number}: {prerequisite.title}
-            </Link>
+          <span>{prerequisites.length === 1 ? "Prerequisite" : "Prerequisites"}</span>
+          {prerequisites.length > 0 ? (
+            <div className="prerequisite-list">
+              {prerequisites.map((prerequisite) => (
+                <Link href={moduleHref(prerequisite.slug)} key={prerequisite.slug}>
+                  Module {prerequisite.number}: {prerequisite.title}
+                </Link>
+              ))}
+            </div>
           ) : (
             <Link href="/diagnostic">
               Foundation placement studio and learning brief

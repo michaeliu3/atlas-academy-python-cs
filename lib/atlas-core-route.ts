@@ -75,7 +75,7 @@ export const atlasCoreRoute: AtlasRoutePhase[] = [
         number: 27,
         title: "Discrete Mathematics, Proof, Counting & Structures",
         shortTitle: "proof depth",
-        status: inAuthoring,
+        status: published,
         prerequisiteNumbers: [2, 4, 5],
         purpose:
           "Deepen induction, invariants, counting, recurrences, posets, matchings, and number-theoretic structure.",
