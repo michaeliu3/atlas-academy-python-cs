@@ -15,7 +15,7 @@ flowchart LR
     I["Interactive visual studios"] --> R
     D --> V["learner inspection + behavioral tests"]
     R --> P["private deployed portal"]
-    P --> N["Notion records and learning workflow"]
+    P -. "manual, learner-controlled capture only" .-> N["Notion records and learning workflow"]
 ~~~
 
 ## Main surfaces
@@ -23,6 +23,9 @@ flowchart LR
 - The app directory contains the portal shell, course reader, diagnostic, and
   client-side visual studios. Studios use fixed data, accessibility-first
   controls, and local device state only.
+- The deployed portal has no Notion runtime integration or automatic
+  portal-to-Notion data flow. Learners and the instructor may capture approved
+  learning evidence manually in the separate private Notion workflow.
 - The content/modules directory and content/source-maps directory are
   checked-in, release-canonical course material. In the production authoring
   workspace, synchronization can refresh the same artifacts from an adjacent

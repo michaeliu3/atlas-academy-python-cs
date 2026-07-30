@@ -596,8 +596,8 @@ Complete this table in your notebook.
 Then run the bounded test suite:
 
 ```powershell
-& 'C:\Users\Michael\Documents\AI Learning\python-advanced-course\work\python-3.14.6-embed\python.exe' `
-  'C:\Users\Michael\Documents\AI Learning\python-advanced-course\work\test_module20_reference.py'
+# From the course's `work/` directory, using the selected Python runtime:
+python test_module20_reference.py
 ```
 
 **[LOCAL REFERENCE RESULT]** The suite checks split frames, coalesced frames,
@@ -770,8 +770,8 @@ The model deliberately returns these two records in the timeout scenario:
 Run it locally:
 
 ```powershell
-& 'C:\Users\Michael\Documents\AI Learning\python-advanced-course\work\python-3.14.6-embed\python.exe' `
-  'C:\Users\Michael\Documents\AI Learning\python-advanced-course\work\module20_reference.py' `
+# From the course's `work/` directory, using the selected Python runtime:
+python module20_reference.py `
   --scenario timeout_then_lookup
 ```
 

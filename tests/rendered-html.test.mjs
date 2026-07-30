@@ -514,6 +514,27 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
+  assert.match(
+    studio,
+    /\(!candidate\.revealed \|\| \(candidate\.choice !== null && candidate\.confidence !== null\)\)/,
+    "stored progress cannot reveal evidence without a recorded choice and confidence",
+  );
+  assert.match(
+    studio,
+    /styles\.modeTabs} aria-label="Evaluation rule examples" role="group"/,
+    "the semantic examples are ordinary pressed-button controls, not incomplete tabs",
+  );
+  for (const [scenario, outcome] of [
+    ["lexical_rejection", "LEX_ERROR"],
+    ["syntax_rejection", "PARSE_ERROR"],
+    ["contract_rejection", "CONTRACT_ERROR"],
+    ["authorization_denial", "DENIED_AUTHORIZATION"],
+    ["successful_count", "RESULT · count = 2"],
+  ]) {
+    assert.match(studio, new RegExp('scenario: "' + scenario + '"'));
+    assert.ok(studio.includes('status: "' + outcome + '"'), outcome);
+  }
+  assert.match(studio, /not a local evidence packet/);
   assert.match(studio, /no ambient Python authority/);
   assert.match(studio, /never selects its host adapter/);
   assert.doesNotMatch(studio, /window\.confirm/);
@@ -521,6 +542,19 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
   assert.match(style, /prefers-reduced-motion/);
   assert.match(style, /focus-visible/);
+});
+
+test("release architecture keeps Notion capture manual and out of the portal runtime", async () => {
+  const architectureUrl = new URL("../docs/ARCHITECTURE.md", import.meta.url);
+  const privacyUrl = new URL("../docs/PRIVACY.md", import.meta.url);
+  const [architecture, privacy] = await Promise.all([
+    readFile(architectureUrl, "utf8"),
+    readFile(privacyUrl, "utf8"),
+  ]);
+
+  assert.match(architecture, /manual, learner-controlled capture only/);
+  assert.match(architecture, /no Notion runtime integration or automatic/);
+  assert.match(privacy, /Notion page exports, IDs, private notes, or learner journal content/);
 });
 
 test("Module 19 withholds each view's answer-bearing evidence until prediction and confidence", async () => {

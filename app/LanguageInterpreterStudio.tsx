@@ -237,58 +237,72 @@ const contractFixtures = [
   {
     id: "lex",
     label: "unknown character",
-    source: 'count(where cohort ? "atlas")',
+    source: 'count(where cohort = "atlas" @)',
     stage: "lexical scan",
-    status: "LEXICAL_REJECTED",
-    reason: "`?` is outside the declared token vocabulary at source span 20.",
+    kind: "model",
+    scenario: "lexical_rejection",
+    status: "LEX_ERROR",
+    reason: "The at-sign is outside the declared Atlas Query token vocabulary. The fixed local model redacts its zero-based failure span as [29, 30).",
   },
   {
     id: "syntax",
     label: "unfinished filter",
-    source: "count(where cohort = )",
+    source: 'count(where cohort = "atlas"',
     stage: "grammar",
-    status: "PARSE_REJECTED",
-    reason: "The token sequence cannot form the `FIELD CMP LITERAL` production.",
+    kind: "model",
+    scenario: "syntax_rejection",
+    status: "PARSE_ERROR",
+    reason: "The fixed local model reaches syntax-only parsing, then reports that the closing parenthesis after the filter is missing.",
   },
   {
     id: "form",
     label: "host-style call node",
     source: "Call(open_fixture, cohort)",
-    stage: "AST allow-list",
-    status: "AST_ALLOWLIST_REJECTED",
-    reason: "This fixed diagnostic node represents a shape that Atlas Query never permits; query text cannot choose a host callable.",
+    stage: "conceptual boundary",
+    kind: "conceptual",
+    scenario: "not a model packet",
+    status: "NOT AN ATLAS QUERY INPUT",
+    reason: "This fixed code-reading contrast is not a local evidence packet. Atlas Query text cannot name a host callable, adapter, or Python AST node.",
   },
   {
     id: "contract",
-    label: "unknown metric",
-    source: 'mean(tempo, where cohort = "atlas")',
-    stage: "schema / contract",
-    status: "CONTRACT_REJECTED",
-    reason: "`tempo` is not one of the declared fixture metrics, even if the grammar accepts its identifier role.",
+    label: "unknown schema field",
+    source: "count(where unknown_field = 3)",
+    stage: "schema + contract",
+    kind: "model",
+    scenario: "contract_rejection",
+    status: "CONTRACT_ERROR",
+    reason: "The grammar accepts the comparison shape, but the fixed local model rejects unknown_field as outside its declared schema.",
   },
   {
     id: "budget",
     label: "declared fuel exhausted",
     source: 'count(where cohort = "atlas")',
     stage: "resource budget",
+    kind: "model",
+    scenario: "fuel_exhausted",
     status: "FUEL_EXHAUSTED",
-    reason: "The local evaluator stopped at its declared model fuel budget; this is not a claim about a real service CPU.",
+    reason: "The fixed local model exhausts its declared fuel before scanning a fixture. This is not a claim about a real-service CPU budget.",
   },
   {
     id: "authority",
     label: "policy tuple denied",
     source: 'count(where cohort = "atlas")',
     stage: "M22 authorization",
-    status: "AUTHORIZATION_DENIED",
-    reason: "A specific local subject/action/resource/tenant/purpose tuple is denied, so no read capability is minted.",
+    kind: "model",
+    scenario: "authorization_denial",
+    status: "DENIED_AUTHORIZATION",
+    reason: "The supplied local subject/action/resource/tenant/purpose tuple is outside the fixed policy, so no read capability is minted.",
   },
   {
     id: "result",
     label: "bounded local success",
     source: 'count(where cohort = "atlas")',
     stage: "fixed capability + evaluator",
-    status: "LOCAL_RESULT · count = 2",
-    reason: "A pre-minted fixed-scope fixture reader supports one deterministic teaching-model result with redacted evidence.",
+    kind: "model",
+    scenario: "successful_count",
+    status: "RESULT · count = 2",
+    reason: "The fixed-scope local reader supports a deterministic scalar aggregate over two in-scope synthetic Atlas records with redacted evidence.",
   },
 ] as const;
 
@@ -353,14 +367,15 @@ function isViewRecord(value: unknown, view: InterpreterView): value is ViewRecor
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const candidate = value as Record<string, unknown>;
   if (!hasOnlyKeys(candidate, ["choice", "confidence", "revealed"])) return false;
-  return (
-    (candidate.choice === null ||
-      (typeof candidate.choice === "string" &&
-        choiceIdsByView[view].includes(candidate.choice))) &&
-    (candidate.confidence === null ||
-      [1, 2, 3, 4].includes(candidate.confidence as number)) &&
-    typeof candidate.revealed === "boolean"
-  );
+  const validChoice =
+    candidate.choice === null ||
+    (typeof candidate.choice === "string" && choiceIdsByView[view].includes(candidate.choice));
+  const validConfidence =
+    candidate.confidence === null || [1, 2, 3, 4].includes(candidate.confidence as number);
+  const validReveal =
+    typeof candidate.revealed === "boolean" &&
+    (!candidate.revealed || (candidate.choice !== null && candidate.confidence !== null));
+  return validChoice && validConfidence && validReveal;
 }
 
 function isStudioRecord(value: unknown): value is StudioRecord {
@@ -779,7 +794,7 @@ function SemanticsLab({
             <span className={styles.scopeTag}>EVALUATION-SEMANTICS TRACE</span>
             <h3>An AST needs rules before it has a result.</h3>
           </div>
-          <div className={styles.modeTabs} aria-label="Evaluation rule examples" role="tablist">
+          <div className={styles.modeTabs} aria-label="Evaluation rule examples" role="group">
             {semanticModes.map((item) => (
               <button
                 aria-pressed={modeId === item.id}
@@ -839,8 +854,8 @@ function ContractLab({
   const fixture = contractFixtures.find((item) => item.id === fixtureId) ?? contractFixtures[0];
   const stages = [
     ["01", "syntax", fixture.stage === "lexical scan" || fixture.stage === "grammar"],
-    ["02", "AST allow-list", fixture.stage === "AST allow-list"],
-    ["03", "schema + contract", fixture.stage === "schema / contract"],
+    ["02", "outside the query language", fixture.stage === "conceptual boundary"],
+    ["03", "schema + contract", fixture.stage === "schema + contract"],
     ["04", "resource budget", fixture.stage === "resource budget"],
     ["05", "M22 authorization", fixture.stage === "M22 authorization"],
     ["06", "fixed capability", fixture.stage === "fixed capability + evaluator"],
@@ -879,7 +894,11 @@ function ContractLab({
               ))}
             </div>
             <div className={styles.fixtureReadout}>
-              <span>fixed local fixture</span>
+              <span>
+                {fixture.kind === "model"
+                  ? "fixed local model scenario: " + fixture.scenario
+                  : "fixed conceptual contrast — not a model packet"}
+              </span>
               <code>{fixture.source}</code>
               <strong>{fixture.status}</strong>
               <p>{fixture.reason}</p>
@@ -890,7 +909,13 @@ function ContractLab({
               <div className={selected ? styles.rejectedLayer : undefined} key={label}>
                 <span>{number}</span>
                 <strong>{label}</strong>
-                <small>{selected ? `earliest outcome: ${fixture.status}` : "not reached or separately evidenced"}</small>
+                <small>
+                  {selected
+                    ? fixture.kind === "model"
+                      ? "earliest outcome: " + fixture.status
+                      : "conceptual contrast; no model execution"
+                    : "not reached or separately evidenced"}
+                </small>
               </div>
             ))}
           </div>
@@ -907,9 +932,10 @@ function ContractLab({
           </div>
           <div className={styles.textEquivalent}>
             <strong>Text equivalent</strong>
-            The stack is read top to bottom. The selected fixture marks its
-            earliest rejecting boundary, which prevents later layers from being
-            reached. Only the final bounded-success fixture reaches the fixed
+            The stack is read top to bottom. Model scenarios mark their earliest
+            rejecting boundary, which prevents later layers from being reached.
+            The separately labelled conceptual contrast does not execute the
+            model. Only the final bounded-success scenario reaches the fixed
             reader; its result remains local teaching-model evidence.
           </div>
         </section>
