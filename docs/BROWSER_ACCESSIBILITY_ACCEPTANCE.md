@@ -19,6 +19,20 @@ CI installs Chromium with its system dependencies and uploads the HTML report
 and failure traces when this gate fails. The report is short-lived CI evidence,
 not learner data.
 
+## Verified CI browser evidence
+
+On 2026-07-30, [GitHub Actions run 30581687917](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30581687917)
+passed the portal, Python 3.12/3.14 teaching-model, and Linux browser jobs.
+The pull-request workflow received source head
+[`b5896be60e0887c41c3bdd263a6e1f34b565cbd4`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b5896be60e0887c41c3bdd263a6e1f34b565cbd4)
+and checked merge candidate
+[`f670ec62cf7df108d920602f1a48984e69e2e3c9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/f670ec62cf7df108d920602f1a48984e69e2e3c9).
+The browser job built that candidate and passed all 16 targeted tests. This is
+the current bounded automated browser-acceptance evidence; it does not make a
+release or a complete accessibility claim. After this successful run, GitHub
+`main` was configured to require the `Browser accessibility acceptance` check
+alongside the existing strict release checks.
+
 ## Current local-runtime limitation
 
 On the current Windows development host, Vinext 0.0.50's Node production
@@ -27,9 +41,10 @@ asset URLs with `/` separators. A fresh `vinext start` can therefore return a
 404 for an existing hashed `/assets/...` file before client hydration. This is
 an upstream local-server limitation, not an axe result or a reason to remove
 the Mermaid/browser assertions. The GitHub acceptance job runs on Ubuntu with
-a fresh build and server; its exact run is the evidence to use for this gate.
-Until that job passes, local static-page axe checks do **not** constitute a
-complete browser-acceptance result.
+a fresh build and server; the exact successful run above is the evidence to use
+for this gate. Every later candidate still needs its own fresh run. Local
+static-page axe checks do **not** substitute for the Linux browser-acceptance
+result.
 
 This is a bounded automated browser check, not a claim of complete
 accessibility. It does not replace manual keyboard review across every

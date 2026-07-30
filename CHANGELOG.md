@@ -45,6 +45,14 @@ actually published.
   candidate scopes muted text away from those purpose-specific notes, gives
   both a direct 5.6:1-or-better ink color, and regression-tests both surfaces;
   Linux Chromium/axe remains the acceptance authority.
+- Recorded the succeeding Linux browser candidate separately: source head
+  `b5896be` entered GitHub's pull-request workflow, merge candidate `f670ec6`
+  passed the portal and Python jobs plus all 16 Chromium/axe browser checks.
+  This is bounded candidate-validation evidence, not a GitHub Release, private
+  deployment, complete accessibility review, or course-completion claim.
+- Added `Browser accessibility acceptance` to `main`'s strict required GitHub
+  checks only after that verified run, while retaining its other required
+  checks and the no-force-push/no-deletion/linear-history protections.
 - Reconciled existing GitHub Release pages and tag targets in the provenance
   ledger without rewriting release history. Historical private-deployment
   assertions remain unverified in that ledger unless separately evidenced.

@@ -58,6 +58,19 @@ required-check details. It is current configuration evidence only, not a claim
 that a future administrator cannot change policy, that an unrecorded checkout
 used an exact source commit, or that a private deployment was reviewed.
 
+### Browser-gate protection verification
+
+After the successful Linux browser candidate in run 30581687917, a direct
+GitHub REST update and readback on 2026-07-30 added `Browser accessibility
+acceptance` to `main`'s strict required status checks. The retained required
+checks are `Portal quality gate`, `Teaching models on Python 3.12`, and
+`Teaching models on Python 3.14`; `main` also continues to apply administrator
+enforcement, no-force-push, no-deletion, linear-history, and conversation-
+resolution rules. This supersedes only the earlier statement that browser
+acceptance was not yet a required `main` check. It is configuration evidence,
+not a claim that every later candidate passed, that a private deployment is
+verified, or that all accessibility work is complete.
+
 ## Verified candidate-validation records
 
 These are candidate validation records, not releases. The listed Actions checks
@@ -73,6 +86,7 @@ alone.
 | [`35236b18b464dff2c13ce897b43a3392f4a1d2ea`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/35236b18b464dff2c13ce897b43a3392f4a1d2ea) | Exact allowlisting of built teaching-download output | [Run 30567401183](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30567401183) — successful | The portal gate and Python 3.12/3.14 teaching-model jobs validated this source commit. | A GitHub Release, a private deployment, complete accessibility review, or absence of security risk. |
 | [`394f20396e21b2289fe4706227c41464b83ac497`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/394f20396e21b2289fe4706227c41464b83ac497) | Advanced-bridge validation, runtime dependency candidate, keyboard fixes, and the prior provenance records | [Run 30568694668](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30568694668) — successful | The portal gate and Python 3.12/3.14 teaching-model jobs validated this source snapshot. | A GitHub Release, a private deployment, a Dependabot alert closure, complete module-contract verification, or a completed accessibility review. |
 | [`906cf5e8ddf316f13b1256fa98e376bb29bd2092`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/906cf5e8ddf316f13b1256fa98e376bb29bd2092) | M31 authoring-source audit, bounded studio loading/preview truth, learner-controlled partner prompts, and draft-only M21/M27 contract-pointer pilots | [Run 30569991215](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30569991215) — successful | The portal gate and Python 3.12/3.14 teaching-model jobs validated this source snapshot. | A GitHub Release, a private deployment, M31 publication, human module review, browser accessibility acceptance, a Dependabot alert closure, or absence of security risk. |
+| [`b5896be60e0887c41c3bdd263a6e1f34b565cbd4`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b5896be60e0887c41c3bdd263a6e1f34b565cbd4) | Diagnostic-route note contrast cascade repair and two-surface regression | [Run 30581687917](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30581687917) — successful: portal gate, Python 3.12/3.14 teaching models, and Linux Chromium/axe browser acceptance | The pull-request event used source head `b5896be60e0887c41c3bdd263a6e1f34b565cbd4` and checked merge candidate [`f670ec62cf7df108d920602f1a48984e69e2e3c9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/f670ec62cf7df108d920602f1a48984e69e2e3c9). Its browser job built that candidate and passed all 16 targeted Chromium/axe, keyboard, and prediction-gate checks. | A GitHub Release, a private deployment, a complete assistive-technology review, full course-contract verification, or an absence of security risk. Every later candidate needs its own recorded validation. |
 
 ## Recorded non-successful candidate validation
 
