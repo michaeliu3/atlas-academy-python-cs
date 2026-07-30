@@ -19,8 +19,16 @@ const { stdout } = await execFileAsync(
 );
 
 if (stdout.trim() !== "") {
+  const { stdout: diff } = await execFileAsync(
+    "git",
+    ["diff", "--no-ext-diff", "--unified=0", "--", ...generatedPaths],
+    { cwd: siteRoot },
+  );
+  const diffDetail = diff.trim()
+    ? `\n\nGenerated diff:\n${diff.trim().slice(0, 12000)}`
+    : "";
   throw new Error(
-    `Generated course artifacts are stale or uncommitted:\n${stdout.trim()}`,
+    `Generated course artifacts are stale or uncommitted:\n${stdout.trim()}${diffDetail}`,
   );
 }
 
