@@ -6,7 +6,7 @@ import { CourseReaderHeader } from "./CourseReaderHeader";
 export const metadata: Metadata = {
   title: "Course Library · Atlas Academy",
   description:
-    "Read the published connected Python and computer science curriculum, Modules 1–17.",
+    "Read the published connected Python and computer science curriculum, Modules 1–18.",
 };
 
 export default function ModuleLibraryPage() {

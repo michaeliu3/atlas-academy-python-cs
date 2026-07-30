@@ -26,10 +26,34 @@ const publishedModule17Reference = resolve(
   "downloads",
   "module17_reference.py",
 );
+const canonicalModule18Reference = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "module18_reference.py",
+);
+const publishedModule18Reference = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "module18_reference.py",
+);
+const canonicalModule18Tests = resolve(
+  siteRoot,
+  "..",
+  "work",
+  "test_module18_reference.py",
+);
+const publishedModule18Tests = resolve(
+  siteRoot,
+  "public",
+  "downloads",
+  "test_module18_reference.py",
+);
 const sourceDirectory = await access(canonicalSourceDirectory)
   .then(() => canonicalSourceDirectory)
   .catch(() => outputDirectory);
-const publishedThrough = 17;
+const publishedThrough = 18;
 const expectedNumbers = Array.from(
   { length: publishedThrough },
   (_, index) => index + 1,
@@ -72,7 +96,7 @@ const arcs = [
     title: "Machine & network",
     range: "Modules 17–22",
     description:
-      "Module 17 opens the machine layer by connecting representation, instructions, processor state, memory hierarchy, and I/O to observable Python behavior.",
+      "Modules 17–18 connect machine execution to OS-mediated processes, virtual memory, open resources, durable publication, and bounded shutdown claims.",
     start: 17,
     end: 22,
   },
@@ -180,6 +204,32 @@ if (
   await writeIfChanged(
     publishedModule17Reference,
     module17Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module18ReferenceSource = await access(canonicalModule18Reference)
+  .then(() => canonicalModule18Reference)
+  .catch(() => publishedModule18Reference);
+const module18Reference = await readFile(module18ReferenceSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule18Reference,
+    module18Reference,
+  )
+) {
+  changedFiles += 1;
+}
+
+const module18TestsSource = await access(canonicalModule18Tests)
+  .then(() => canonicalModule18Tests)
+  .catch(() => publishedModule18Tests);
+const module18Tests = await readFile(module18TestsSource, "utf8");
+if (
+  await writeIfChanged(
+    publishedModule18Tests,
+    module18Tests,
   )
 ) {
   changedFiles += 1;

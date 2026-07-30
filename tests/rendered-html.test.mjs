@@ -70,28 +70,127 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
   assert.doesNotMatch(html, /window\.confirm/);
 });
 
-test("generated module manifest covers Modules 1–17 exactly once", async () => {
+test("Module 18 OS studio preserves its canonical interactive contract", async () => {
+  const studioUrl = new URL("../app/OperatingSystemsStudio.tsx", import.meta.url);
+  const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
+  const [studio, arc] = await Promise.all([
+    readFile(studioUrl, "utf8"),
+    readFile(arcUrl, "utf8"),
+  ]);
+
+  const exactInvariant =
+    "Every worker-visible effect is accounted for both as a process-local operation and as an OS-mediated resource transition. After interruption, Atlas publishes only a complete validated result, or leaves an explicitly classified recoverable state; an exit code, successful API return, or timing observation never silently substitutes for that evidence.";
+  assert.ok(studio.includes(exactInvariant));
+  assert.match(arc, /<OperatingSystemsStudio \/>/);
+  assert.match(
+    arc,
+    /href: "\/modules\/18-operating-systems-resource-mediation"/,
+  );
+
+  for (const viewLabel of [
+    "Boundary crossing",
+    "Process lifecycle",
+    "Virtual memory",
+    "Open resources",
+    "Publication cut",
+    "Claim auditor",
+  ]) {
+    assert.ok(studio.includes(`label: "${viewLabel}"`), viewLabel);
+  }
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /aria-controls=\{osPanelId\(view\.id\)\}/);
+  assert.match(studio, /aria-selected=\{activeView === view\.id\}/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+
+  for (const phase of [
+    "ADMITTED",
+    "STARTED",
+    "ENCODED",
+    "STAGED",
+    "VALIDATED",
+    "PY_FLUSHED",
+    "FILE_SYNC_RETURNED",
+    "CLOSED",
+    "REPLACED",
+    "DIR_SYNC_RETURNED",
+    "EXITED",
+    "RECOVERED",
+  ]) {
+    assert.ok(studio.includes(`label: "${phase}"`), phase);
+  }
+  assert.match(studio, /\(\[1, 2, 3, 4\] as const\)/);
+  assert.equal(
+    [...studio.matchAll(/useState<Confidence \| null>\(null\)/gu)].length,
+    3,
+  );
+  assert.doesNotMatch(studio, /useState<Confidence>\([1-4]\)/);
+  assert.match(studio, /prediction === null \|\| confidence === null/);
+
+  assert.match(studio, /16-bit virtual addresses, 256-byte pages/);
+  assert.match(studio, /an 8-bit\s+VPN, an 8-bit offset/);
+  assert.match(studio, /const vpn = address >>> 8/);
+  assert.match(studio, /const offset = address & 0xff/);
+  assert.match(studio, /\(entry\.frame << 8\) \| offset/);
+  assert.match(studio, /0x2a:[\s\S]*?frame: 0x91/);
+  assert.match(studio, /Process \{candidate\}/);
+  assert.match(studio, /aria-pressed=\{editableVmEntry\.present\}/);
+  assert.match(studio, /Commit the translation before reveal/);
+
+  assert.match(studio, /run_id/);
+  assert.match(studio, /PID/);
+  assert.match(studio, /COLLECTED/);
+  assert.match(studio, /B renames candidate/);
+  assert.match(studio, /OS page cache/);
+  assert.match(studio, /POSIX-like model/);
+  assert.match(studio, /Windows profile/);
+  assert.match(studio, /kill if distinct/);
+
+  assert.match(studio, /Power-loss outcome: UNKNOWN/);
+  assert.match(
+    studio,
+    /Controlled child exit is not OS crash or power loss/,
+  );
+  assert.doesNotMatch(studio, /sudden\s+power\s+loss\s+immediately\s+afterward/i);
+  assert.match(studio, /No durability score is assigned/);
+
+  assert.match(studio, /STUDIO_STORAGE_KEY/);
+  assert.match(studio, /window\.localStorage\.getItem/);
+  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /window\.localStorage\.removeItem/);
+  assert.match(studio, /useEffect\(\(\) => \{/);
+  assert.match(studio, /Reset saved studio/);
+  assert.match(studio, /const resetStudio = \(\) =>/);
+});
+
+test("generated module manifest covers Modules 1–18 exactly once", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
   const slugs = manifest.modules.map((courseModule) => courseModule.slug);
 
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 17);
+  assert.equal(manifest.moduleCount, 18);
   assert.deepEqual(
     numbers,
-    Array.from({ length: 17 }, (_, index) => index + 1),
+    Array.from({ length: 18 }, (_, index) => index + 1),
   );
-  assert.equal(new Set(slugs).size, 17);
+  assert.equal(new Set(slugs).size, 18);
   assert.equal(manifest.arcs.length, 4);
 
   const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
   const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
+  const module18 = manifest.modules.find((courseModule) => courseModule.number === 18);
   assert.equal(module17.arcId, "arc-iv");
+  assert.equal(module18.arcId, "arc-iv");
   assert.equal(module16.nextSlug, module17.slug);
   assert.equal(module17.previousSlug, module16.slug);
   assert.equal(module17.prerequisiteSlug, module16.slug);
-  assert.equal(module17.nextSlug, null);
+  assert.equal(module17.nextSlug, module18.slug);
+  assert.equal(module18.previousSlug, module17.slug);
+  assert.equal(module18.prerequisiteSlug, module17.slug);
+  assert.equal(module18.nextSlug, null);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -132,7 +231,8 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /Values, State, and Execution/);
   assert.match(html, /Relational Data and Transactions/);
   assert.match(html, /Computer Architecture and the Execution Stack/);
-  assert.match(html, /<dt>17<\/dt>/);
+  assert.match(html, /Operating Systems and Resource Mediation/);
+  assert.match(html, /<dt>18<\/dt>/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -264,4 +364,70 @@ test("renders the finalized computer-architecture workbook", async () => {
   assert.match(reference, /atlas\.module17\.architecture-evidence\.v2/);
   assert.match(reference, /first-timed-block-for-condition/);
   assert.doesNotMatch(reference, /tracemalloc|sys\.getsizeof/);
+});
+
+test("renders the finalized operating-systems workbook", async () => {
+  const response = await render(
+    "/modules/18-operating-systems-resource-mediation",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 18: Operating Systems and Resource Mediation · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 18 workbook/);
+  assert.match(html, /Finite resources force a mediator/);
+  assert.match(html, /A program becomes a process/);
+  assert.match(html, /Virtual memory: the private-address-space illusion/);
+  assert.match(
+    html,
+    /Files are names, open resources, caches, and persistence protocols/,
+  );
+  assert.match(html, /Interruption and shutdown/);
+  assert.match(html, /Runnable Atlas operating-systems reference/);
+  assert.match(html, /Six connected teaching sessions/);
+  assert.match(html, /Eight-level problem ladder/);
+  assert.match(html, /Confidence-aware understanding check/);
+  assert.match(html, /Cumulative project, TA protocol, and mastery evidence/);
+  assert.match(html, /Explicit backward and forward connections/);
+  assert.match(
+    html,
+    /Source ledger, licensing, claim boundaries, and freshness/,
+  );
+  assert.match(html, /href="\/downloads\/module18_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module18_reference\.py"/);
+  assert.match(html, /class="katex-display"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const referenceUrl = new URL(
+    "../public/downloads/module18_reference.py",
+    import.meta.url,
+  );
+  const reference = await readFile(referenceUrl, "utf8");
+  const testsUrl = new URL(
+    "../public/downloads/test_module18_reference.py",
+    import.meta.url,
+  );
+  const referenceTests = await readFile(testsUrl, "utf8");
+  assert.match(reference, /atlas\.module18\.os-evidence\.v1/);
+  assert.match(reference, /phase_observations/);
+  assert.match(reference, /artifact_observations/);
+  assert.match(reference, /runtime_profile/);
+  assert.match(reference, /claim_boundaries/);
+  assert.match(reference, /WORKER_PHASE_EDGES = frozenset/);
+  assert.match(reference, /status = "INVALID_MAPPING"/);
+  assert.match(reference, /valid_mapping=valid_mapping/);
+  assert.match(reference, /file_backed=file_backed/);
+  assert.match(reference, /exceeds-bounded-read-limit/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:threading|multiprocessing|socket|tracemalloc|gc)\b/,
+  );
+  assert.match(referenceTests, /import module18_reference as reference/);
+  assert.match(referenceTests, /\("STARTED", "VALIDATED"\)/);
+  assert.match(referenceTests, /"INVALID_MAPPING"/);
+  assert.match(referenceTests, /oversized-foreign\.tmp/);
+  assert.match(referenceTests, /Module18ReferenceTests/);
 });

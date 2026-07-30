@@ -6,6 +6,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { OperatingSystemsStudio } from "./OperatingSystemsStudio";
 
 type ArcFourStudioProps = {
   onOpenDurableSoftware: () => void;
@@ -17,6 +18,7 @@ const arcModules = [
   {
     number: "17",
     status: "Published",
+    href: "/modules/17-computer-architecture-execution-stack",
     title: "Computer architecture & execution stack",
     question: "What changes below a Python operation—and what can we observe?",
     inherits: "A transactional Atlas workload with explicit semantics.",
@@ -25,16 +27,19 @@ const arcModules = [
   },
   {
     number: "18",
-    status: "Forward handoff",
-    title: "Operating systems & resource models",
-    question: "How does the OS mediate processes, memory, files, and devices?",
+    status: "Published",
+    href: "/modules/18-operating-systems-resource-mediation",
+    title: "Operating systems & resource mediation",
+    question:
+      "Who owns each resource transition—and which boundary can observe it?",
     inherits: "The architecture and I/O boundary named in Module 17.",
     handoff:
-      "Process, virtual-memory, filesystem, permission, and system-call models.",
+      "Explicit process, virtual-memory, open-resource, publication, and shutdown models.",
   },
   {
     number: "19",
     status: "Forward handoff",
+    href: null,
     title: "Concurrency & parallelism",
     question: "What becomes possible—and unsafe—when execution overlaps?",
     inherits: "OS-managed execution contexts and shared resource models.",
@@ -44,6 +49,7 @@ const arcModules = [
   {
     number: "20",
     status: "Forward handoff",
+    href: null,
     title: "Networks & protocols",
     question: "How do bytes become a conversation across machines?",
     inherits: "Concurrent processes with explicit I/O and failure boundaries.",
@@ -53,6 +59,7 @@ const arcModules = [
   {
     number: "21",
     status: "Forward handoff",
+    href: null,
     title: "Async & distributed systems",
     question: "How does Atlas reason when time, order, and failure are partial?",
     inherits: "Networked operations whose completion is delayed or uncertain.",
@@ -62,6 +69,7 @@ const arcModules = [
   {
     number: "22",
     status: "Forward handoff",
+    href: null,
     title: "Security & trust boundaries",
     question: "Who may cause which state transition under what evidence?",
     inherits: "A distributed Atlas with explicit components and data flows.",
@@ -369,7 +377,7 @@ function tabId(view: StudioView) {
 export function ArcFourStudio({
   onOpenDurableSoftware,
 }: ArcFourStudioProps) {
-  const [activeModule, setActiveModule] = useState(0);
+  const [activeModule, setActiveModule] = useState(1);
   const [activeView, setActiveView] = useState<StudioView>("stack");
   const [activeLayer, setActiveLayer] = useState(0);
   const [traceStep, setTraceStep] = useState(0);
@@ -422,34 +430,34 @@ export function ArcFourStudio({
         <div className="arc-four-hero-copy">
           <p className="kicker">Arc IV · Modules 17–22</p>
           <h1>
-            Make the machine
+            Make the system
             <em> legible.</em>
           </h1>
           <p>
-            Trace one Atlas operation from represented values to architectural
-            state, data movement, and I/O—then say exactly where the evidence
-            stops.
+            Trace one Atlas operation from machine state into OS-mediated
+            processes, memory, files, and shutdown—then say exactly where each
+            observation stops.
           </p>
           <div className="arc-four-hero-actions">
             <Link
               className="primary-action arc-four-primary"
-              href="/modules/17-computer-architecture-execution-stack"
+              href="/modules/18-operating-systems-resource-mediation"
             >
-              Read published Module 17 <span aria-hidden="true">→</span>
+              Read published Module 18 <span aria-hidden="true">→</span>
             </Link>
-            <span>Module 17 is published · Modules 18–22 are forward handoffs</span>
+            <span>Modules 17–18 are published · Modules 19–22 are forward handoffs</span>
           </div>
         </div>
 
         <div
           className="machine-cutaway"
-          aria-label="Execution stack from Python semantics through the I/O boundary"
+          aria-label="Execution stack from Python semantics through OS-mediated I/O"
         >
           <div className="machine-signal">
             <span>operation</span>
             <i aria-hidden="true">↓</i>
           </div>
-          {["Python", "runtime", "ISA", "processor", "memory", "I/O"].map(
+          {["Python", "runtime", "ISA", "processor", "memory", "OS / I/O"].map(
             (label, index) => (
               <div className="machine-layer" key={label}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -467,15 +475,16 @@ export function ArcFourStudio({
 
       <section className="arc-four-thesis">
         <p className="display-quote">
-          A performance explanation is credible only when it names the{" "}
-          <strong>workload, representation, layer, observation, context,</strong>{" "}
+          A systems explanation is credible only when it names the{" "}
+          <strong>workload, state, owner, boundary, failure model, evidence,</strong>{" "}
           and uncertainty.
         </p>
         <div className="arc-four-invariant">
           <span>Cumulative invariant</span>
           <p>
-            Preserve the same semantic result while each explanation keeps
-            architecture, implementation, and evidence boundaries distinct.
+            Preserve the same semantic result while every explanation keeps
+            machine state, resource ownership, failure, and evidence boundaries
+            distinct.
           </p>
         </div>
       </section>
@@ -534,15 +543,15 @@ export function ArcFourStudio({
                 <dd>{selectedModule.handoff}</dd>
               </div>
             </dl>
-            {selectedModule.number === "17" ? (
-              <Link href="/modules/17-computer-architecture-execution-stack">
+            {selectedModule.href ? (
+              <Link href={selectedModule.href}>
                 Open the complete published workbook{" "}
                 <span aria-hidden="true">↗</span>
               </Link>
             ) : (
               <p className="forward-note">
                 This card marks a dependency boundary, not a published lesson.
-                Module 17 names what this later module must inherit.
+                Modules 17–18 name what this later module must inherit.
               </p>
             )}
           </div>
@@ -822,15 +831,18 @@ export function ArcFourStudio({
         </div>
       </section>
 
+      <OperatingSystemsStudio />
+
       <section className="arc-four-bridge">
         <div>
           <p className="kicker">The Arc IV discipline</p>
           <h2>Explain across layers. Conclude within evidence.</h2>
           <p>
             Module 17 supplies the representation, machine, hierarchy, and
-            observation vocabulary. Modules 18–22 progressively add OS,
-            concurrency, network, distributed, and adversarial conditions
-            without erasing those boundaries.
+            observation vocabulary. Module 18 adds OS mediation, ownership,
+            lifetime, and failure. Modules 19–22 progressively add concurrency,
+            network, distributed, and adversarial conditions without erasing
+            those boundaries.
           </p>
         </div>
         <div className="arc-four-bridge-map" aria-label="Arc IV knowledge bridge">
@@ -853,12 +865,12 @@ export function ArcFourStudio({
           ← Revisit durable software
         </button>
         <div>
-          <span>Published workbook · complete diagrams, labs, quiz, and project</span>
+          <span>Latest published workbook · complete models, labs, quiz, and project</span>
           <Link
             className="primary-action arc-four-primary"
-            href="/modules/17-computer-architecture-execution-stack"
+            href="/modules/18-operating-systems-resource-mediation"
           >
-            Enter Module 17 <span aria-hidden="true">→</span>
+            Enter Module 18 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </footer>

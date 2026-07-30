@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "moduleCount": 17,
+  "moduleCount": 18,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,7 +28,7 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Module 17 opens the machine layer by connecting representation, instructions, processor state, memory hierarchy, and I/O to observable Python behavior."
+      "description": "Modules 17–18 connect machine execution to OS-mediated processes, virtual memory, open resources, durable publication, and bounded shutdown claims."
     }
   ],
   "modules": [
@@ -268,6 +268,20 @@
       "sourceHash": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07",
       "prerequisiteSlug": "16-relational-data-transactions",
       "previousSlug": "16-relational-data-transactions",
+      "nextSlug": "18-operating-systems-resource-mediation"
+    },
+    {
+      "number": 18,
+      "slug": "18-operating-systems-resource-mediation",
+      "filename": "18_operating_systems_resource_mediation.md",
+      "title": "Operating Systems and Resource Mediation",
+      "summary": "Arc IV: make the system legible — from an OS handoff to a supervised, recoverable Atlas worker An operating system does not make finite resources or failure disappear. It gives programs controlled abstractions for using them.",
+      "arcId": "arc-iv",
+      "wordCount": 20336,
+      "estimatedMinutes": 97,
+      "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
+      "prerequisiteSlug": "17-computer-architecture-execution-stack",
+      "previousSlug": "17-computer-architecture-execution-stack",
       "nextSlug": null
     }
   ]
