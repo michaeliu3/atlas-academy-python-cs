@@ -216,7 +216,7 @@ test("a legacy module cannot become verified with free-form evidence strings", a
 
   await assert.rejects(
     validateCourseContracts(forgedGraph, forgedContracts, { strict: true }),
-    /may not use retired free-form verification evidence[\s\S]*requires a validated typed contract packet/u,
+    /may not use retired free-form verification evidence[\s\S]*requires a separately reviewed typed contract record/u,
   );
 });
 
@@ -244,6 +244,12 @@ test("the v1 contract registry covers every legacy published workbook structural
     draftPilotModules: 2,
     resolvedPointers: 37,
     humanReviews: 0,
+    publicationChanges: 0,
+  });
+  assert.deepEqual(report.legacyPackets?.summary, {
+    structuralCandidates: 1,
+    resolvedPointers: 35,
+    humanApprovals: 0,
     publicationChanges: 0,
   });
 });

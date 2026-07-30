@@ -27,6 +27,10 @@ import {
   loadLegacyModuleContractAudit,
   validateLegacyModuleContractAudit,
 } from "./validate-legacy-module-contract-audit.mjs";
+import {
+  loadLegacyModuleContractPacketRegistry,
+  validateLegacyModuleContractPacketRegistry,
+} from "./legacy-module-contract-packet.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -148,7 +152,7 @@ function validateVerifiedContract(courseModule, moduleContract, review, errors) 
     }
   }
   errors.push(
-    `Module ${courseModule.number} verified state requires a validated typed contract packet; the legacy packet gate is not installed yet.`,
+    `Module ${courseModule.number} verified state requires a separately reviewed typed contract record; current structural packets cannot promote a legacy module.`,
   );
 }
 
@@ -165,6 +169,7 @@ export async function validateCourseContracts(
   const warnings = [];
   let draftEvidence = null;
   let advancedContract = null;
+  let legacyPackets = null;
 
   try {
     const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
@@ -172,6 +177,20 @@ export async function validateCourseContracts(
   } catch (error) {
     errors.push(
       `Legacy module-contract audit must remain a valid canonical evidence inventory: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    const packetRegistry = await loadLegacyModuleContractPacketRegistry(siteRoot);
+    legacyPackets = await validateLegacyModuleContractPacketRegistry(graph, packetRegistry, {
+      siteRoot,
+    });
+    warnings.push(
+      `Legacy contract packets resolved for ${legacyPackets.summary.structuralCandidates} structural candidate module(s); this is not human review or publication evidence.`,
+    );
+  } catch (error) {
+    errors.push(
+      `Legacy typed contract-packet gate must remain valid before legacy verification: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -265,6 +284,11 @@ export async function validateCourseContracts(
   ]);
   if (advancedContract) {
     for (const path of advancedContract.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+  }
+  if (legacyPackets) {
+    for (const path of legacyPackets.releaseInputPaths) {
       releaseInputPaths.add(path);
     }
   }
@@ -391,6 +415,7 @@ export async function validateCourseContracts(
     warnings,
     draftEvidence,
     advancedContract,
+    legacyPackets,
     summary: {
       legacyBaselineModules,
       verifiedModules,

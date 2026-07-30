@@ -16,6 +16,10 @@ import {
   validateLegacyModuleContractAudit,
 } from "./validate-legacy-module-contract-audit.mjs";
 import {
+  loadLegacyModuleContractPacketRegistry,
+  validateLegacyModuleContractPacketRegistry,
+} from "./legacy-module-contract-packet.mjs";
+import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
@@ -298,6 +302,15 @@ const advancedModuleContractReport = await validateAdvancedModuleContractRegistr
   },
 );
 for (const path of advancedModuleContractReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+const legacyModuleContractPacketRegistry = await loadLegacyModuleContractPacketRegistry(siteRoot);
+const legacyModuleContractPacketReport = await validateLegacyModuleContractPacketRegistry(
+  courseGraph,
+  legacyModuleContractPacketRegistry,
+  { siteRoot },
+);
+for (const path of legacyModuleContractPacketReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 const generatedModuleContent = `${[

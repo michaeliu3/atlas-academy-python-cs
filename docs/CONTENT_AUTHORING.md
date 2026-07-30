@@ -143,6 +143,21 @@ For a published contract, those three release-record fields must use their
 corresponding exact filenames rather than reusing the historical audit or one
 another.
 
+## Legacy structural packets
+
+`legacy-module-contract-packets.v1.json` is a separate migration layer for
+M1–M30. A packet can resolve exact Git-tracked workbook, source-map, and
+source-audit anchors; bind six ordered sessions to the canonical academic
+prerequisites and forward module; and list bounded studio/model/test artifacts.
+It must preserve the matching legacy-audit status for every one of the
+16 criteria. Its only current state is `structural-candidate`, with
+`humanReviewState: not-reviewed` and `publicationEffect: none`.
+
+Do not use a packet to mark a module reviewed, verified, released, deployable,
+or mastered. In particular, a resolved anchor does not establish the quality
+of prose, accessibility alternatives, source-license correctness, a human
+review, or learner understanding. Those require later, separate evidence.
+
 ## Authoring order
 
 1. Start from an Atlas incident or design pressure inherited from the prior

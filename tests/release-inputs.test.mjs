@@ -12,6 +12,7 @@ import {
   validateAdvancedModuleContractRegistry,
 } from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
+import { legacyModuleContractPacketRelativePath } from "../scripts/legacy-module-contract-packet.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
@@ -57,11 +58,13 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(advancedModuleBridgeRelativePath));
   assert.ok(paths.includes(advancedModuleContractRelativePath));
   assert.ok(paths.includes(legacyModuleContractAuditRelativePath));
+  assert.ok(paths.includes(legacyModuleContractPacketRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
   assert.ok(paths.includes("content/source-maps/python_curriculum_sources.md"));
   assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_map.md"));
   assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_audit.md"));
+  assert.ok(paths.includes("content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md"));
   assert.ok(paths.includes("docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"));
   assert.ok(paths.includes("public/downloads/module18_reference.py"));
   assert.doesNotMatch(paths.join("\n"), /(?:^|\/)__pycache__(?:\/|$)|\.py[co](?:\n|$)/u);

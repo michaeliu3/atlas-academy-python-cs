@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "v1",
+  "kind": "atlas-legacy-module-contract-packets",
+  "purpose": "Bind selected M1–M30 workbooks to typed, reviewable structural evidence without upgrading the historical audit, human-review, release, or publication state.",
+  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "truthBoundary": {
+    "pointerResolutionOnly": "A resolved packet pointer proves only that a declared Git-tracked local teaching anchor or implementation file exists in this revision and is bound to the canonical graph/audit.",
+    "humanReview": "Every packet remains not-reviewed. This registry records no quality, accessibility, source-license, psychological-safety, or learner-mastery approval.",
+    "publication": "A structural candidate cannot change a module contract state, release evidence, route availability, strict release outcome, CI, or deployment claim.",
+    "legacyAudit": "Each criterion preserves the current legacy audit status. A richer pointer map never converts pointer-present or ambiguous inventory evidence into verification."
+  },
+  "modules": [
+    {
+      "moduleId": "m29",
+      "packetId": "m29-continuous-change-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m27", "m28"],
+        "forwardModuleId": "m30",
+        "masteryGateId": "mathematics",
+        "studioId": "calculus-continuous-change"
+      },
+      "workbookPath": "content/modules/29_calculus_real_analysis_continuous_change.md",
+      "sourceMapPath": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m29-session-1", "usesPrerequisiteModuleIds": ["m27", "m28"], "forwardArtifactId": "m29-limit-continuity-calibration-note"},
+        {"sessionNumber": 2, "pointerId": "m29-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m29-local-linear-approximation-card"},
+        {"sessionNumber": 3, "pointerId": "m29-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m29-accumulation-and-quadrature-trace"},
+        {"sessionNumber": 4, "pointerId": "m29-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m29-multivariable-code-contract"},
+        {"sessionNumber": 5, "pointerId": "m29-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m29-convergence-exchange-ledger"},
+        {"sessionNumber": 6, "pointerId": "m29-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m29-continuous-change-evidence-dossier"}
+      ],
+      "pointers": [
+        {"id": "m29-course-map", "roles": ["prerequisite-map", "forward-handoff"], "label": "Canonical prerequisite and forward map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "12-prerequisite-and-forward-map"}},
+        {"id": "m29-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "3-session-1--limits-continuity-metric-spaces-and-compactness"}},
+        {"id": "m29-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "4-session-2--derivatives-mean-value-taylor-approximation-and-finite-differences"}},
+        {"id": "m29-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "5-session-3--integration-the-fundamental-theorem-multiple-integrals-and-change-of-variables"}},
+        {"id": "m29-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "6-session-4--multivariable-derivatives-gradients-jacobians-hessians-and-code-contracts"}},
+        {"id": "m29-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "7-session-5--sequences-series-pointwise-versus-uniform-convergence-and-legal-exchanges"}},
+        {"id": "m29-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "8-session-6--constrained-extrema-ode-approximation-and-the-continuous-change-dossier"}},
+        {"id": "m29-first-principle", "roles": ["first-principles"], "label": "Limit first principle", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "first-principle-a-limit-controls-every-sufficiently-close-input"}},
+        {"id": "m29-definition", "roles": ["definition"], "label": "Metric-space definition", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "31-metric-space-language-is-the-portable-version"}},
+        {"id": "m29-assumption", "roles": ["assumption"], "label": "Mean Value Theorem conditions", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "42-mean-value-theorem-a-hypothesis-sensitive-bridge"}},
+        {"id": "m29-derivation", "roles": ["derivation-proof"], "label": "Taylor remainder contract", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "43-taylors-theorem-approximation-plus-a-remainder-contract"}},
+        {"id": "m29-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Counterexample ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "b-counterexample"}},
+        {"id": "m29-numerical-experiment", "roles": ["numerical-experiment"], "label": "Numerical quadrature boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "55-numerical-quadrature-is-a-bounded-procedure"}},
+        {"id": "m29-code-reading", "roles": ["code-reading"], "label": "Session 1 code-reading task", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "session-1-code-reading-task"}},
+        {"id": "m29-debug", "roles": ["debugging"], "label": "Debug ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "f-debug"}},
+        {"id": "m29-design", "roles": ["design"], "label": "Design transfer ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "g-design"}},
+        {"id": "m29-prediction", "roles": ["prediction"], "label": "Prediction before reveal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "session-2-prediction-before-reveal"}},
+        {"id": "m29-transfer", "roles": ["transfer", "oral-transfer"], "label": "Transfer ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "h-transfer"}},
+        {"id": "m29-source-cards", "roles": ["source-rationale", "stable-learner-link"], "label": "Source cards with learner links", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md", "headingAnchor": "source-cards"}},
+        {"id": "m29-claim-linkage", "roles": ["claim-linkage"], "label": "Source-to-session claim linkage", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md", "headingAnchor": "source-to-session-and-artifact-map"}},
+        {"id": "m29-license-route", "roles": ["license-reuse"], "label": "Sources and licensing route", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "16-sources-licensing-and-responsible-reading-route"}},
+        {"id": "m29-visual-studio", "roles": ["visual"], "label": "Continuous Change Studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "9-continuous-change-studio"}},
+        {"id": "m29-text-alternative-candidate", "roles": ["text-alternative"], "label": "Map-oriented text alternative candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "12-prerequisite-and-forward-map"}},
+        {"id": "m29-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "11-confidence-aware-diagnostic"}},
+        {"id": "m29-misconception", "roles": ["misconception"], "label": "Misconception repair key", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "compact-repair-key--why-the-plausible-alternatives-fail"}},
+        {"id": "m29-retrieval", "roles": ["retrieval"], "label": "Retrieval queue", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "retrieval-queue"}},
+        {"id": "m29-dossier", "roles": ["dossier"], "label": "Continuous-change dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "12-atlas-project--continuous-change-evidence-dossier"}},
+        {"id": "m29-acceptance", "roles": ["acceptance-criteria"], "label": "Required evidence", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "required-evidence"}},
+        {"id": "m29-rubric", "roles": ["rubric"], "label": "Multi-evidence rubric", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "rubric-multi-evidence-never-passfail"}},
+        {"id": "m29-oral-protocol", "roles": ["oral-protocol"], "label": "Conversational oral-defense protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "14-conversational-oral-defense--m29"}},
+        {"id": "m29-oral-hint", "roles": ["oral-hint"], "label": "Oral-defense hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "hint-ladder--preserve-agency-before-revealing"}},
+        {"id": "m29-oral-reflection", "roles": ["oral-reflection"], "label": "Constructive reflection lens", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "constructive-evidence-lens--visible-adaptive-and-non-scored"}},
+        {"id": "m29-oral-summary", "roles": ["oral-summary"], "label": "Learner-controlled evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "end-of-defense-evidence-summary"}},
+        {"id": "m29-ta", "roles": ["ta"], "label": "TA analysis and numerical-review clinic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "teaching-assistant--analysis-and-numerical-review-clinic"}},
+        {"id": "m29-study-partner", "roles": ["study-partner"], "label": "Study Partner rehearsal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/29_calculus_real_analysis_continuous_change.md", "headingAnchor": "study-partner--convergence-and-code-reading-rehearsal"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-course-map"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-session-1", "m29-session-2", "m29-session-3", "m29-session-4", "m29-session-5", "m29-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-definition", "m29-assumption", "m29-derivation", "m29-counterexample", "m29-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-code-reading", "m29-debug", "m29-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-source-cards", "m29-claim-linkage", "m29-license-route"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-visual-studio", "m29-text-alternative-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-diagnostic", "m29-misconception"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-dossier", "m29-acceptance", "m29-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-oral-protocol", "m29-oral-hint", "m29-counterexample", "m29-transfer", "m29-oral-reflection", "m29-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m29-course-map"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m29-studio", "kind": "studio", "paths": ["app/CalculusContinuousChangeStudio.tsx", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m29-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module29_reference.py", "public/downloads/test_module29_reference.py"]},
+        {"id": "m29-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
+    }
+  ]
+}

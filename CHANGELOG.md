@@ -42,6 +42,11 @@ actually published.
   approval flags can no longer elevate an M1–M30 module; future verification
   must pass a typed, resolved contract-packet gate. No existing module changed
   publication status in this hardening step.
+- Added the first typed legacy structural packet for M29. It resolves 35
+  workbook/source-map/addendum anchors, six connected sessions, the canonical
+  M27/M28 → M29 → M30 route, and bounded implementation artifacts while
+  preserving the audit's ambiguous rigor, code, source, and visual findings.
+  It records no review, verification, release, or learner-mastery claim.
 - The deterministic course-input ledger now includes the advanced contract,
   M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
   provenance input. Hashing that audit preserves its non-publication boundary;

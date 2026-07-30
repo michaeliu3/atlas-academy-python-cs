@@ -17,6 +17,10 @@
       "sha256": "b34bfa04c08d9194e461285c6a63ee3f44469636c8ad85b19c9bf16f8e6d2044"
     },
     {
+      "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
+      "sha256": "0565361ad7db9525ac4073240e5d404a283978fcc179f22631285777e319f0f6"
+    },
+    {
       "path": "content/course/contracts/module-contracts.v1.json",
       "sha256": "a93767ad626e60d07bb188e513e3b9efe8d6e0608ebeb7acf634389962c4a807"
     },
@@ -211,6 +215,10 @@
     {
       "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
       "sha256": "090b440350922812a889ff274ea2f7a62f5c1435df4a4672e744d6a0f68ce209"
+    },
+    {
+      "path": "content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md",
+      "sha256": "ff9e461d78fc5a96b8848877a8e57d3c7556a7048fae95171ca099f6b150252d"
     },
     {
       "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
