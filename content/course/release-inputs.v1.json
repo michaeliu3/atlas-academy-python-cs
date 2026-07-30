@@ -13,6 +13,10 @@
       "sha256": "0fe2565f8917b8ef34555e9554fb760a7ff161aaf20777bf7165a82590e27c7d"
     },
     {
+      "path": "content/course/release-input-policy.v1.json",
+      "sha256": "d3c901354b2b520b883589821b0a170834068ebf2b86411ba157f6a0f3c74059"
+    },
+    {
       "path": "content/modules/01_values_state_execution.md",
       "sha256": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec"
     },
@@ -199,162 +203,6 @@
     {
       "path": "content/source-maps/python_curriculum_sources.md",
       "sha256": "d87547011d066b9e4a5f444c8042daf2f020a6c47904085b45b3e8273bffd550"
-    },
-    {
-      "path": "public/downloads/__pycache__/module18_reference.cpython-312.pyc",
-      "sha256": "48aba4ce6a24bd66c3508f0a0fa3c4d4fa6a22096282f0200a7b34ec1d74182b"
-    },
-    {
-      "path": "public/downloads/__pycache__/module18_reference.cpython-314.pyc",
-      "sha256": "8f82dee12dbd150c0d40a57889f5039aa354cb70e55ed2fc0e893cc036596346"
-    },
-    {
-      "path": "public/downloads/__pycache__/module19_reference.cpython-312.pyc",
-      "sha256": "ef588fa5fd8f3741fca0f3bbd3102f61c1aee87a0ea26cce7ed2a25dbcabc7bd"
-    },
-    {
-      "path": "public/downloads/__pycache__/module19_reference.cpython-314.pyc",
-      "sha256": "e7e020334b16ec3b4c2354843f6f4104a371b08a0bb81e03cfd41b4065037d93"
-    },
-    {
-      "path": "public/downloads/__pycache__/module20_reference.cpython-312.pyc",
-      "sha256": "7c6f8d535604bc731f7c3920f72f413c17b9c4e278d1be09870a0ac1a8f601e0"
-    },
-    {
-      "path": "public/downloads/__pycache__/module20_reference.cpython-314.pyc",
-      "sha256": "029c8c438ee6413be46dbc4606104971deecd01bc3e6934b6c847675160531db"
-    },
-    {
-      "path": "public/downloads/__pycache__/module21_reference.cpython-312.pyc",
-      "sha256": "01497b8cb77c5d74e8174a909c2c6325d4569637b59211f1d84e067c3cb00345"
-    },
-    {
-      "path": "public/downloads/__pycache__/module21_reference.cpython-314.pyc",
-      "sha256": "87cb1818b51439a17d602ce6e2ce0008f5d8b3a5d990971f9799f209d8e01eaa"
-    },
-    {
-      "path": "public/downloads/__pycache__/module22_reference.cpython-312.pyc",
-      "sha256": "0981fcd1574b805d89356b6c4afea3db8ef6c9709e1a1a6d7f390e4b35f13b30"
-    },
-    {
-      "path": "public/downloads/__pycache__/module22_reference.cpython-314.pyc",
-      "sha256": "6811648ec4d082e5d7b87c278d4a5340eaca80323342845d121a2709bc5e6722"
-    },
-    {
-      "path": "public/downloads/__pycache__/module23_reference.cpython-312.pyc",
-      "sha256": "c8b37191e4acd2c4752d03d3a3ec9361a9e4ffb3c806dcb305d627fab1ca1a4a"
-    },
-    {
-      "path": "public/downloads/__pycache__/module23_reference.cpython-314.pyc",
-      "sha256": "d9bd2ade3fe960a6bcc8e5767a38cdeee9cf7fb24d1dd4125fb7e3419e762eb5"
-    },
-    {
-      "path": "public/downloads/__pycache__/module24_reference.cpython-312.pyc",
-      "sha256": "0735a1f7c557b0d06f01dec1357ebebc8a8bd699d3d92bf1d0e2e5f680c144e2"
-    },
-    {
-      "path": "public/downloads/__pycache__/module25_reference.cpython-312.pyc",
-      "sha256": "a988f219d79206583367da7aa53e2838304ad1eca088c06b1aa56d113e9237c0"
-    },
-    {
-      "path": "public/downloads/__pycache__/module25_reference.cpython-314.pyc",
-      "sha256": "853101e34debb7b924fea4ae004ce00443f4bc483dbc9eccd996bb3f30895112"
-    },
-    {
-      "path": "public/downloads/__pycache__/module26_reference.cpython-312.pyc",
-      "sha256": "d62f5485a6fcdbf07ee63efc39ecc85b43962a64327842b5cea4d1ce83d8371b"
-    },
-    {
-      "path": "public/downloads/__pycache__/module27_reference.cpython-312.pyc",
-      "sha256": "602a996a32acdeae9b45803dfd4ca27cf0fe627354144129f8ebbad4348c6811"
-    },
-    {
-      "path": "public/downloads/__pycache__/module28_reference.cpython-312.pyc",
-      "sha256": "42fac498872d65029f6e2b89e8b80a9210f7515499f6c0f3772f850cc4405b48"
-    },
-    {
-      "path": "public/downloads/__pycache__/module29_reference.cpython-312.pyc",
-      "sha256": "43374ac2bec29483de046063053fc3c0ec5a690ccb0e60f81d3de183a7a35484"
-    },
-    {
-      "path": "public/downloads/__pycache__/module30_reference.cpython-312.pyc",
-      "sha256": "9d313466391e281706db7d9351b57c3e1f93ceca611ed411add281e94e5f3c6a"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module18_reference.cpython-312.pyc",
-      "sha256": "5466bf06508fbab94eeaa64cd7b4e465be0454336d09690e6e8ed7b4970e4099"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module18_reference.cpython-314.pyc",
-      "sha256": "aaff226295eaf02c8ea7fea3b3e482a0606631792e248bec36cef7f64f7687e4"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module19_reference.cpython-312.pyc",
-      "sha256": "fa8cc4e7f9b0582ef099f90bca20be1f9cc3b27890cf19ae3a1aac8cc17838e3"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module19_reference.cpython-314.pyc",
-      "sha256": "0abdf992ddef7233e13a9364413841df9e9e40ce363c82b26972ec9b617df7a0"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module20_reference.cpython-312.pyc",
-      "sha256": "871e5019d3bd04e82e8ec3387ba9fcede719f51365c72a3dfaf474f991854419"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module20_reference.cpython-314.pyc",
-      "sha256": "d5604fa540e417bcb2adff5e5b80f54d4ac8cb0797473f2f1ce07f8d81128d29"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module21_reference.cpython-312.pyc",
-      "sha256": "5750f5c00604f8516cfe1e32dc474d2b3ae9a8066ac46ba3cf315064f745e13c"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module21_reference.cpython-314.pyc",
-      "sha256": "cd39f610b8f8afea23c7163e68d14b155b004371e9525d505c8621590ddf4c8a"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module22_reference.cpython-312.pyc",
-      "sha256": "1ffd649315c5ffac20d32d7708697d1ff234359e39ae5c803b0e441ade24c34f"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module22_reference.cpython-314.pyc",
-      "sha256": "a84e7930f859ecfafcc64faaf9d0343bcdd43b4efbd3cc5c84f0fc0c0678ad69"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module23_reference.cpython-312.pyc",
-      "sha256": "60f63b0d294c8fbc9b3b5d95ce5ba927be4145097213534cd5d046e8f1375ab4"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module23_reference.cpython-314.pyc",
-      "sha256": "b69a614b79b8856a1d72d4d2f50b104b1624a99a0b057c0377e425de49d9d099"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module24_reference.cpython-312.pyc",
-      "sha256": "538c2bbdf24ac348333186ec772762e4e813530f4563590005dde47a6d798e6f"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module25_reference.cpython-312.pyc",
-      "sha256": "755c77ce175c3b9f09a7c0fa0ccb4cbd178b7c10165ddad2c06bc702fd1d613c"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module26_reference.cpython-312.pyc",
-      "sha256": "b7451504d44ea201839bcb59b7d627e59a1619a04fab7b7a56abcee88bcc1a9a"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module27_reference.cpython-312.pyc",
-      "sha256": "75d8b8882e669c5f629f94ba21376d2f7d30d5059e2a10822cd637b50f5f8393"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module28_reference.cpython-312.pyc",
-      "sha256": "7f9d9c4406bf386dbbeb082b9b508c0f1f505416f39e5682753b46ca25594108"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module29_reference.cpython-312.pyc",
-      "sha256": "22200e89cda0539a2dd3404fc04d259aa573399b3b211656dc2d48c88263fcfe"
-    },
-    {
-      "path": "public/downloads/__pycache__/test_module30_reference.cpython-312.pyc",
-      "sha256": "90493ac4fa70c0596ebb06f9afd0846feb8797f9993390b03187e87803fb5f17"
     },
     {
       "path": "public/downloads/module17_reference.py",

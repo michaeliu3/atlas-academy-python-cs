@@ -4,6 +4,10 @@ import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { loadCourseGraph } from "./course-graph.mjs";
+import {
+  loadReleaseInputPolicy,
+  releaseInputPolicyPath,
+} from "./release-input-policy.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -75,19 +79,14 @@ async function workbookPathFor(courseModule) {
   return filename ? resolve(moduleDirectory, filename) : null;
 }
 
-async function downloadPaths() {
-  const downloadsDirectory = resolve(siteRoot, "public", "downloads");
-  const entries = await readdir(downloadsDirectory, { withFileTypes: true });
-  const children = await Promise.all(
-    entries.map(async (entry) => {
-      const path = resolve(downloadsDirectory, entry.name);
-      if (entry.isDirectory()) {
-        return [];
-      }
-      return [path];
-    }),
-  );
-  return children.flat();
+async function trackedPaths(pathspec) {
+  const { stdout } = await execFileAsync("git", ["ls-files", "-z", "--", pathspec], {
+    cwd: siteRoot,
+  });
+  return stdout
+    .split("\0")
+    .filter(Boolean)
+    .map((path) => path.replaceAll("\\", "/"));
 }
 
 async function validateTrackedRegularFiles(paths, errors) {
@@ -285,8 +284,28 @@ export async function validateCourseContracts(
   }
 
   if (requireGitTracked) {
-    for (const path of await downloadPaths()) {
-      releaseInputPaths.add(path);
+    let releaseInputPolicy;
+    try {
+      releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
+    } catch (error) {
+      errors.push(error.message);
+    }
+    if (releaseInputPolicy) {
+      releaseInputPaths.add(releaseInputPolicyPath(siteRoot));
+      for (const path of releaseInputPolicy.downloadPaths) {
+        releaseInputPaths.add(path);
+      }
+
+      const allowedDownloadPaths = new Set(
+        releaseInputPolicy.downloadPaths.map((path) => relative(siteRoot, path).replaceAll("\\", "/")),
+      );
+      for (const trackedPath of await trackedPaths("public/downloads")) {
+        if (!allowedDownloadPaths.has(trackedPath)) {
+          errors.push(
+            `tracked public teaching artifact is absent from the release-input allowlist: ${trackedPath}.`,
+          );
+        }
+      }
     }
     await validateTrackedRegularFiles(releaseInputPaths, errors);
   }

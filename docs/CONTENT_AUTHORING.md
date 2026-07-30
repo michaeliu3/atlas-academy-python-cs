@@ -63,9 +63,13 @@ contract-verified. It must never be weakened merely to make CI green.
 
 ## Source discipline
 
-- `content/modules/`, `content/source-maps/`, and `public/downloads/` are the
-  complete checked-in release inputs for published material. Builds, CI, and
-  private deployment must never read an adjacent authoring workspace.
+- `content/modules/` and `content/source-maps/` are release inputs for
+  published material. A public teaching artifact becomes a release input only
+  when it is explicitly listed in
+  `content/course/release-input-policy.v1.json`; CI rejects any tracked
+  `public/downloads/` artifact that is absent from that policy. Ignored runtime
+  caches (for example `__pycache__/*.pyc`) can never enter the ledger. Builds,
+  CI, and private deployment must never read an adjacent authoring workspace.
 - `content/course/release-inputs.v1.json` is generated from the allowlisted
   repository inputs and records their SHA-256 hashes. It is a content-provenance
   record, not a substitute for a reviewed Git commit or release ledger. Text

@@ -4,6 +4,7 @@ import { lstat, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
@@ -32,8 +33,18 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.deepEqual(paths, [...paths].sort(comparePaths));
   assert.ok(paths.includes("content/course/course-graph.v1.json"));
   assert.ok(paths.includes("content/course/contracts/module-contracts.v1.json"));
+  assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
   assert.ok(paths.includes("content/source-maps/python_curriculum_sources.md"));
+  assert.ok(paths.includes("public/downloads/module18_reference.py"));
+  assert.doesNotMatch(paths.join("\n"), /(?:^|\/)__pycache__(?:\/|$)|\.py[co](?:\n|$)/u);
+
+  const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
+  const policyPaths = releaseInputPolicy.policy.allowlistedDownloadPaths;
+  assert.deepEqual(policyPaths, [...policyPaths].sort(comparePaths));
+  for (const policyPath of policyPaths) {
+    assert.ok(paths.includes(policyPath), `${policyPath} appears in the release-input ledger`);
+  }
 
   for (const input of ledger.inputs) {
     assert.match(input.path, /^(?:content|public)\//u);

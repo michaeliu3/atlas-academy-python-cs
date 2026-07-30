@@ -38,9 +38,11 @@ flowchart LR
   these repository-local inputs; it never falls back to an adjacent authoring
   workspace. No published workbook or source map exists only outside this
   repository.
-- The public/downloads directory contains the checked-in, release-canonical
-  deterministic local reference models and behavioral tests. They use fixed
-  in-memory fixtures and make no external effect.
+- The public/downloads directory contains deterministic local reference models
+  and behavioral tests. Only files explicitly listed by the versioned
+  `content/course/release-input-policy.v1.json` are release-canonical; CI
+  rejects tracked download artifacts that have not been reviewed into that
+  policy. They use fixed in-memory fixtures and make no external effect.
 - The scripts/sync-modules.mjs program validates the course graph, then
   generates the library manifest, module source projection, and a sorted
   SHA-256 release-input ledger. It does not copy external artifacts. The

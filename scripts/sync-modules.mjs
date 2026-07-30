@@ -1,13 +1,16 @@
 import { createHash } from "node:crypto";
-import { access, readdir, readFile, writeFile } from "node:fs/promises";
+import { access, lstat, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCourseGraph, projectReadableModules } from "./course-graph.mjs";
+import {
+  loadReleaseInputPolicy,
+  releaseInputPolicyPath,
+} from "./release-input-policy.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
 const moduleDirectory = resolve(siteRoot, "content", "modules");
-const downloadsDirectory = resolve(siteRoot, "public", "downloads");
 const contractPath = resolve(
   siteRoot,
   "content",
@@ -105,24 +108,14 @@ function compareRepositoryPaths(left, right) {
   return leftPath < rightPath ? -1 : leftPath > rightPath ? 1 : 0;
 }
 
-async function listFilesRecursively(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const paths = await Promise.all(
-    entries.map(async (entry) => {
-      const path = join(directory, entry.name);
-      if (entry.isDirectory()) {
-        return listFilesRecursively(path);
-      }
-      return entry.isFile() ? [path] : [];
-    }),
-  );
-  return paths.flat();
-}
-
 async function requireFile(path, description) {
   await access(path).catch(() => {
     throw new Error(`${description} is missing: ${repositoryPath(path)}.`);
   });
+  const stats = await lstat(path);
+  if (!stats.isFile() || stats.isSymbolicLink()) {
+    throw new Error(`${description} must be a regular file: ${repositoryPath(path)}.`);
+  }
 }
 
 async function releaseInputRecord(path) {
@@ -157,7 +150,8 @@ for (const filename of filenames) {
 const modules = [];
 const importLines = [];
 const contentEntries = [];
-const releaseInputPaths = new Set([graphPath, contractPath]);
+const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
+const releaseInputPaths = new Set([graphPath, contractPath, releaseInputPolicyPath(siteRoot)]);
 
 for (const projectedModule of projectedModules) {
   const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
@@ -233,8 +227,8 @@ for (const projectedModule of projectedModules) {
 }
 
 await requireFile(contractPath, "Module contract registry");
-await requireFile(downloadsDirectory, "Local teaching-model directory");
-for (const path of await listFilesRecursively(downloadsDirectory)) {
+for (const path of releaseInputPolicy.downloadPaths) {
+  await requireFile(path, "Allowlisted local teaching artifact");
   releaseInputPaths.add(path);
 }
 

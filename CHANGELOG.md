@@ -26,6 +26,10 @@ actually published.
   verify a production deployment or resolve known dependency advisories.
 - Canonicalized newline handling in the hashed release-input ledger so a
   Windows checkout and Linux GitHub runner produce the same evidence hash.
+- Replaced recursive discovery of local download files with a versioned,
+  reviewed release-input policy. Ignored Python bytecode and other incidental
+  local artifacts are excluded; CI now rejects a tracked teaching artifact
+  that was not admitted to the policy.
 
 ## v0.6-capstone (private course milestone)
 
