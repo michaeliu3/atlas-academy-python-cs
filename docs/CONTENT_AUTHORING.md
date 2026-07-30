@@ -61,6 +61,54 @@ human approval. Do not use it to call a module verified or published. Extend
 the evidence model only after its review fields and release semantics can be
 validated without weakening the v1 strict gate.
 
+### Advanced-module lifecycle contract
+
+`content/course/contracts/advanced-module-contracts.v1.json` and
+`scripts/advanced-module-contract.mjs` are the separate lifecycle contract for
+M31–M36. They do not extend the deliberately legacy-only v1 registry or reuse
+the narrow M21/M27 pointer pilot.
+
+The initial M31 record is **authoring-only**. It resolves a bounded set of
+checked-in planning and research inputs, including the canonical prerequisite
+bridge, source/claim plans, and the historical M31–M36 readiness audit. It
+checks the six-session plan and declared S01–S10/C01–C08 coverage while
+requiring all of the following to remain absent or pending: learner manifest,
+learner route, learner workbook, source map, studio/model/tests, human review,
+and release record. It is not a learner-facing M31 module.
+
+The contract uses three states:
+
+1. `authoring-only`: plan/pointer evidence only; no learner material or
+   release-shaped claim.
+2. `review-ready`: a real but still hidden workbook, source map, interaction
+   implementation, reference model, and teaching tests exist as checked-in
+   inputs. All non-release evidence is structured, but human approval and
+   release evidence remain pending.
+3. `published`: graph, manifest, route, workbook, source map, interaction,
+   tests, every review dimension, every release-ready evidence record, and a
+   locally resolvable release record agree.
+
+Each contract input has a versioned role. `course-content` and `provenance`
+inputs are included in the generated course-input hash ledger; `source-code`
+and `test` inputs are Git-tracked structural references but are not silently
+reclassified as deployed course content. The current
+`docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` ledger entry is an explicit
+provenance-only exception: its hash preserves the *do not publish* boundary;
+it does not deploy or expose M31.
+
+Do not insert a final candidate SHA or Actions URL into the same commit that
+needs that evidence. First create and validate the candidate commit; then make
+a later additive provenance commit that records the exact candidate SHA, CI
+run, review/source paths, limitations, and—only after it occurs—private
+deployment version. The validator requires that candidate SHA to be an
+ancestor of the provenance record. Do not amend, squash, or rewrite history to
+manufacture self-referential release evidence.
+
+While every M31–M36 graph entry is authoring-only, the historical bridge
+validator remains active. After any advanced lifecycle transition, all six
+modules must have lifecycle-aware contracts that preserve their bridge/session
+relationship before that historical validator can step back from live gating.
+
 ## Authoring order
 
 1. Start from an Atlas incident or design pressure inherited from the prior

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "v1",
+  "kind": "atlas-advanced-module-contract-registry",
+  "purpose": "Record lifecycle-aware, checked-in authoring evidence for Modules 31–36 without turning plans, pointers, or research into learner publication, approval, CI, deployment, or mastery claims.",
+  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "canonicalAuthoringBridge": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "truthBoundary": {
+    "pointerPresent": "A resolving contract input proves only that a bounded local plan or research reference exists; it is not a learner artifact, quality review, or release claim.",
+    "reviewReady": "Review-ready means every non-release contract record has a structured, checked-in local evidence shape and remains unavailable to learners until independent human review and release evidence are separately recorded.",
+    "published": "Published requires graph, human-review, release-ready contract records, a source commit ancestor, and local provenance paths to agree. Remote CI and private deployment facts remain separately verifiable and must be recorded after the candidate commit exists."
+  },
+  "contractStates": ["authoring-only", "review-ready", "published"],
+  "evidenceStates": ["planned", "pointer-present", "reviewed", "release-ready"],
+  "humanReviewDimensions": [
+    "first-principles-quality",
+    "rigor-and-counterexamples",
+    "source-claim-correctness",
+    "visual-text-equivalent-quality",
+    "assessment-explanation-quality",
+    "project-evidence-quality",
+    "ta-study-partner-usefulness",
+    "oral-defense-quality"
+  ],
+  "evidenceRequirements": [
+    {"id": "prerequisite-and-forward-map", "evidenceDetailKeys": ["academic-prerequisite-map", "forward-handoff"]},
+    {"id": "six-connected-sessions", "evidenceDetailKeys": ["session-anchors", "learning-progression"]},
+    {"id": "first-principles-code-reading-prediction-and-transfer", "evidenceDetailKeys": ["first-principles-explanation", "code-reading-debugging-design", "prediction-before-reveal", "transfer-task"]},
+    {"id": "rigor-derivations-counterexamples-and-numerical-experiments", "evidenceDetailKeys": ["definitions-and-assumptions", "derivation-or-proof-idea", "counterexample", "numerical-experiment"]},
+    {"id": "source-ledger-claim-license-and-link-boundary", "evidenceDetailKeys": ["source-rationale", "claim-linkage", "access-date", "license-reuse-status", "stable-learner-link"]},
+    {"id": "accessible-visuals-and-concise-text-alternatives", "evidenceDetailKeys": ["visual-purpose", "concise-prose-alternative"]},
+    {"id": "confidence-aware-multiple-choice-diagnostic", "evidenceDetailKeys": ["multiple-choice-items", "prediction-and-confidence-gate", "explanations", "misconception-map"]},
+    {"id": "retrieval-and-spaced-review", "evidenceDetailKeys": ["retrieval-prompts", "review-intervals"]},
+    {"id": "dossier-rubric-and-acceptance-evidence", "evidenceDetailKeys": ["dossier", "acceptance-criteria", "evidence-rubric"]},
+    {"id": "supportive-oral-defense", "evidenceDetailKeys": ["live-when-available", "accessible-text-flow", "hint-ladder", "counterexample", "transfer", "reflection", "learner-evidence-summary", "constructive-next-steps"]},
+    {"id": "ta-study-partner-and-forward-handoff", "evidenceDetailKeys": ["ta-prompt", "study-partner-prompt", "forward-handoff"]},
+    {"id": "studio-reference-model-and-teaching-tests", "evidenceDetailKeys": ["interaction-kind", "implementation-path", "reference-model-path", "teaching-test-path"]},
+    {"id": "release-provenance-ci-and-deployment-evidence", "evidenceDetailKeys": ["source-commit", "provenance-path", "source-review", "ci-run-url", "private-deployment-version", "known-limitations"]}
+  ],
+  "scopeModuleIds": ["m31", "m32", "m33", "m34", "m35", "m36"],
+  "modules": [
+    {
+      "moduleId": "m31",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 31,
+        "slug": "31-optimization-information",
+        "academicPrerequisiteNumbers": [28, 29, 30],
+        "forwardModuleNumber": 18,
+        "lifecycle": "authoring-only",
+        "availability": "authoring-only",
+        "sourceMap": null,
+        "studioId": null,
+        "releaseEvidenceStatus": "planned"
+      },
+      "contractInputs": [
+        {"id": "m31-prerequisite-session-bridge", "kind": "json-pointer", "role": "provenance", "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json", "locator": "/modules/0", "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."},
+        {"id": "m31-source-map-connected-argument", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "the-one-connected-argument", "note": "Connected first-principles teaching argument for authoring, not learner-ready material."},
+        {"id": "m31-source-map-prerequisites", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "prerequisite-bridge-and-forward-handoff", "note": "Authoring plan that preserves the academic prerequisite and forward map."},
+        {"id": "m31-source-map-ledger", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "source-ledger-and-reuse-decisions", "note": "Source-link and reuse-decision planning reference."},
+        {"id": "m31-source-map-claims", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "claim-assumption-and-counterexample-ledger", "note": "Planned claim, assumption, and counterexample coverage."},
+        {"id": "m31-source-map-sessions", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "six-session-authoring-route", "note": "Six-session authoring route with understanding-first moves."},
+        {"id": "m31-source-map-numerical", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "numerical-code-reading-and-reference-model-boundary", "note": "Bounded numerical, code-reading, and future reference-model constraints."},
+        {"id": "m31-source-map-visual", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "visual-and-accessible-explanation-authoring-brief", "note": "Planned visual questions and concise text alternatives."},
+        {"id": "m31-source-map-diagnostic", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "diagnostic-retrieval-and-misconception-design", "note": "Planned confidence-aware diagnostic, retrieval, and misconception design."},
+        {"id": "m31-source-map-dossier", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "optimization--information-evidence-dossier", "note": "Planned small evidence dossier, acceptance boundary, and constructive rubric."},
+        {"id": "m31-source-map-support", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "ta-study-partner-and-oral-defense-protocol", "note": "Planned TA, Study Partner, and psychologically safe oral-defense protocol."},
+        {"id": "m31-source-map-release", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_map.md", "locator": "release-and-provenance-gates", "note": "Explicit unchecked release/provenance boundary."},
+        {"id": "m31-source-audit-sources", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_audit.md", "locator": "recommended-source-set", "note": "Research-only source, claim-linkage, access-date, and license/reuse planning."},
+        {"id": "m31-source-audit-boundaries", "kind": "markdown-heading", "role": "course-content", "path": "content/source-maps/module31_optimization_information_source_audit.md", "locator": "claim-and-assumption-boundaries", "note": "Research-only theorem, code, numerical, and non-claim boundaries."},
+        {"id": "m31-readiness-audit", "kind": "json-pointer", "role": "provenance", "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json", "locator": "/modules/0", "note": "Historical negative audit: M31 remains authoring-only and must not be published from planning evidence."}
+      ],
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {"id": "m31-s01", "title": "Objectives, variables, constraints, and geometry", "plannedArtifact": "Objective-geometry sheet"},
+          {"id": "m31-s02", "title": "Local reasoning: derivatives, stationarity, curvature, and feasibility", "plannedArtifact": "Stationarity-counterexample ledger"},
+          {"id": "m31-s03", "title": "Convex structure, dual views, and certificates", "plannedArtifact": "Claim table"},
+          {"id": "m31-s04", "title": "Algorithms, step rules, and convergence evidence", "plannedArtifact": "Solver-selection rationale"},
+          {"id": "m31-s05", "title": "Stochastic optimization and information trade-offs", "plannedArtifact": "Stochastic-information experiment card"},
+          {"id": "m31-s06", "title": "Optimization & information evidence defense", "plannedArtifact": "Optimization & Information Dossier"}
+        ],
+        "plannedCoverage": [
+          {"inputId": "m31-source-audit-sources", "markers": ["S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "S10"]},
+          {"inputId": "m31-source-map-claims", "markers": ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08"]}
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {"id": "prerequisite-and-forward-map", "state": "pointer-present", "inputIds": ["m31-prerequisite-session-bridge", "m31-source-map-prerequisites"], "note": "The prerequisite/forward relationship is an authoring plan and does not change learner navigation.", "evidenceDetails": null},
+        {"id": "six-connected-sessions", "state": "pointer-present", "inputIds": ["m31-prerequisite-session-bridge", "m31-source-map-sessions"], "note": "Six planned sessions resolve structurally, but no learner workbook exists.", "evidenceDetails": null},
+        {"id": "first-principles-code-reading-prediction-and-transfer", "state": "pointer-present", "inputIds": ["m31-source-map-connected-argument", "m31-source-map-sessions", "m31-source-map-numerical"], "note": "The map plans understanding-first moves; it is not delivery evidence.", "evidenceDetails": null},
+        {"id": "rigor-derivations-counterexamples-and-numerical-experiments", "state": "pointer-present", "inputIds": ["m31-source-map-claims", "m31-source-map-numerical", "m31-source-audit-boundaries"], "note": "Claim and numerical boundaries are researched/planned rather than reviewed learner material.", "evidenceDetails": null},
+        {"id": "source-ledger-claim-license-and-link-boundary", "state": "pointer-present", "inputIds": ["m31-source-map-ledger", "m31-source-audit-sources"], "note": "Source and license/reuse planning is present, but future learner claims still require release review.", "evidenceDetails": null},
+        {"id": "accessible-visuals-and-concise-text-alternatives", "state": "pointer-present", "inputIds": ["m31-source-map-visual"], "note": "The authoring brief names visual and prose-alternative requirements, not implemented visuals.", "evidenceDetails": null},
+        {"id": "confidence-aware-multiple-choice-diagnostic", "state": "pointer-present", "inputIds": ["m31-source-map-diagnostic"], "note": "A diagnostic design exists; no learner-facing items or local progress implementation exists yet.", "evidenceDetails": null},
+        {"id": "retrieval-and-spaced-review", "state": "pointer-present", "inputIds": ["m31-source-map-diagnostic"], "note": "Retrieval intentions are planned and are not an operational review record.", "evidenceDetails": null},
+        {"id": "dossier-rubric-and-acceptance-evidence", "state": "pointer-present", "inputIds": ["m31-source-map-dossier"], "note": "The dossier and constructive rubric are authoring specifications, not an assessed project.", "evidenceDetails": null},
+        {"id": "supportive-oral-defense", "state": "pointer-present", "inputIds": ["m31-source-map-support"], "note": "The protocol is planned; no M31 Live/text flow is published.", "evidenceDetails": null},
+        {"id": "ta-study-partner-and-forward-handoff", "state": "pointer-present", "inputIds": ["m31-source-map-support", "m31-source-map-prerequisites"], "note": "Role behavior and handoff are planned, not reusable module-specific prompt packages.", "evidenceDetails": null},
+        {"id": "studio-reference-model-and-teaching-tests", "state": "planned", "inputIds": [], "note": "No bounded studio, reference model, or teaching tests exist; the numerical boundary is not implementation evidence.", "evidenceDetails": null},
+        {"id": "release-provenance-ci-and-deployment-evidence", "state": "planned", "inputIds": [], "note": "No M31 source review, CI validation, deployment version, or release record exists.", "evidenceDetails": null}
+      ],
+      "release": null
+    }
+  ]
+}

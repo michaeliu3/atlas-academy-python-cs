@@ -9,6 +9,10 @@
       "sha256": "7b92554b7ea14ce73dad8d43afba5d94078f164e7d2b8e1853ffbe29e4a71da0"
     },
     {
+      "path": "content/course/contracts/advanced-module-contracts.v1.json",
+      "sha256": "72d8406f95c0c553e577aa5f08c875fc23a450be957ea563bc8a886517fac12e"
+    },
+    {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
       "sha256": "b34bfa04c08d9194e461285c6a63ee3f44469636c8ad85b19c9bf16f8e6d2044"
     },
@@ -213,8 +217,20 @@
       "sha256": "5c830c8852c0552de12faa41fa03a048552fad60a05616ade45a339c336a8295"
     },
     {
+      "path": "content/source-maps/module31_optimization_information_source_audit.md",
+      "sha256": "0e83efed7192e22877912f2e1088cad081d228b590caaf99e3348dff9e0349f5"
+    },
+    {
+      "path": "content/source-maps/module31_optimization_information_source_map.md",
+      "sha256": "a661bde63eb749037f2e8a5e634bf9e9e2f26b39eced13fa29da59b5265aec82"
+    },
+    {
       "path": "content/source-maps/python_curriculum_sources.md",
       "sha256": "d87547011d066b9e4a5f444c8042daf2f020a6c47904085b45b3e8273bffd550"
+    },
+    {
+      "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+      "sha256": "64a1c68ffcf076f8268be54121c04eadf15ab7ce9f5c9f539e0953759f6f12bd"
     },
     {
       "path": "public/downloads/module17_reference.py",

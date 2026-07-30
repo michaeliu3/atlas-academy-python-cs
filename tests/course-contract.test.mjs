@@ -7,6 +7,10 @@ import {
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeLedger,
 } from "../scripts/advanced-module-bridge.mjs";
+import {
+  loadAdvancedModuleContractRegistry,
+  validateAdvancedModuleContractRegistry,
+} from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import {
   loadCourseContracts,
@@ -26,6 +30,87 @@ import {
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 
+test("the lifecycle-aware advanced contract validates M31 authoring evidence without publication", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleContractRegistry(),
+  ]);
+  const report = await validateAdvancedModuleContractRegistry(graph, registry);
+
+  assert.deepEqual(report.summary, {
+    authoringOnlyContracts: 1,
+    plannedContracts: 1,
+    pointerPresentContracts: 0,
+    reviewedContracts: 0,
+    releaseReadyContracts: 0,
+    resolvedContractInputs: 15,
+  });
+  assert.equal(report.modules[0].moduleId, "m31");
+  assert.equal(report.modules[0].publicationEffect, "none");
+  assert.equal(report.modules[0].promotionBlock.learnerManifest, "absent");
+});
+
+test("the advanced contract rejects premature M31 promotion and broken authoring evidence", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleContractRegistry(),
+  ]);
+
+  const prematurePromotion = structuredClone(registry);
+  prematurePromotion.modules[0].publicationEffect = "eligible-for-publication";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, prematurePromotion),
+    /may not claim an eligible-for-publication effect/u,
+  );
+
+  const missingSession = structuredClone(registry);
+  missingSession.modules[0].authoringPlan.plannedSessionSpine.pop();
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, missingSession),
+    /must declare exactly six planned session IDs/u,
+  );
+
+  const brokenPointer = structuredClone(registry);
+  brokenPointer.modules[0].contractInputs.find(
+    ({ id }) => id === "m31-source-map-claims",
+  ).locator = "not-a-real-visible-heading";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, brokenPointer),
+    /does not contain that visible heading/u,
+  );
+
+  const alteredGraph = structuredClone(graph);
+  alteredGraph.modules.find(({ id }) => id === "m31").sourceMap =
+    "content/source-maps/module31_optimization_information_source_map.md";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(alteredGraph, registry),
+    /sourceMap must remain null while it is authoring-only/u,
+  );
+
+  const malformedInputs = structuredClone(registry);
+  malformedInputs.modules[0].contractInputs = {};
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, malformedInputs),
+    /Advanced module-contract validation failed:[\s\S]*contract inputs must be an array/u,
+  );
+
+  const malformedEvidence = structuredClone(registry);
+  malformedEvidence.modules[0].evidence[0] = null;
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, malformedEvidence),
+    /Advanced module-contract validation failed:[\s\S]*contract evidence must match/u,
+  );
+
+  const prematureLifecycleTransition = structuredClone(graph);
+  const module32 = prematureLifecycleTransition.modules.find(({ id }) => id === "m32");
+  module32.lifecycle = "published";
+  module32.availability = "published";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(prematureLifecycleTransition, registry),
+    /requires lifecycle-aware contract entries for all Modules 31–36/u,
+  );
+});
+
 test("the v1 contract registry covers every legacy published workbook structurally", async () => {
   const [graph, contracts] = await Promise.all([
     loadCourseGraph(),
@@ -37,6 +122,14 @@ test("the v1 contract registry covers every legacy published workbook structural
   assert.equal(report.summary.legacyBaselineModules, 30);
   assert.equal(report.summary.verifiedModules, 0);
   assert.equal(report.summary.authoringOnlyModules, 6);
+  assert.deepEqual(report.advancedContract?.summary, {
+    authoringOnlyContracts: 1,
+    plannedContracts: 1,
+    pointerPresentContracts: 0,
+    reviewedContracts: 0,
+    releaseReadyContracts: 0,
+    resolvedContractInputs: 15,
+  });
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
     draftPilotModules: 2,

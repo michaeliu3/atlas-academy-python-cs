@@ -7,6 +7,24 @@ actually published.
 
 ## Unreleased
 
+- Added a lifecycle-aware advanced-module contract registry, initially for M31
+  only. It resolves 15 Git-tracked planning/research inputs, verifies the
+  six-session prerequisite spine and S01–S10/C01–C08 coverage, and explicitly
+  blocks learner-manifest, learner-route, human-review, and release claims.
+  M31 remains authoring-only: this is planning/provenance validation, not
+  learner material, a source-map/studio/model/test release, or publication.
+- Advanced contracts now have distinct authoring-only, review-ready, and
+  published states. A future transition requires real workbook/source-map/
+  interaction/test inputs, complete review-ready or release-ready evidence,
+  and an additive, locally resolvable candidate-commit provenance record. Once
+  any advanced module transitions, all M31–M36 contracts must take over live
+  bridge validation before the historical bridge can cease to be the sole
+  gate.
+- The deterministic course-input ledger now includes the advanced contract,
+  M31 planning maps, and the explicit M31–M36 readiness audit as a bounded
+  provenance input. Hashing that audit preserves its non-publication boundary;
+  it does not deploy or expose M31 learner content.
+
 - Added a 20-probe, confidence-aware, local-only intake across Python,
   algorithms, systems, discrete mathematics, linear algebra, calculus,
   probability, optimization, and AI/ML reasoning. Its repairs remain inside

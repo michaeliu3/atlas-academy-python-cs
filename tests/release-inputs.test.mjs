@@ -5,6 +5,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { advancedModuleBridgeRelativePath } from "../scripts/advanced-module-bridge.mjs";
+import { advancedModuleContractRelativePath } from "../scripts/advanced-module-contract.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
@@ -12,6 +13,9 @@ import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs"
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const ledgerPath = resolve(siteRoot, "content", "course", "release-inputs.v1.json");
+const provenanceOnlyLedgerInputs = new Set([
+  "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+]);
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
@@ -38,10 +42,14 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes("content/course/client-performance-budget.v1.json"));
   assert.ok(paths.includes("content/course/contracts/module-contracts.v1.json"));
   assert.ok(paths.includes(advancedModuleBridgeRelativePath));
+  assert.ok(paths.includes(advancedModuleContractRelativePath));
   assert.ok(paths.includes(legacyModuleContractAuditRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
   assert.ok(paths.includes("content/source-maps/python_curriculum_sources.md"));
+  assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_map.md"));
+  assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_audit.md"));
+  assert.ok(paths.includes("docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"));
   assert.ok(paths.includes("public/downloads/module18_reference.py"));
   assert.doesNotMatch(paths.join("\n"), /(?:^|\/)__pycache__(?:\/|$)|\.py[co](?:\n|$)/u);
 
@@ -53,7 +61,14 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   }
 
   for (const input of ledger.inputs) {
-    assert.match(input.path, /^(?:content|public)\//u);
+    if (input.path.startsWith("docs/")) {
+      assert.ok(
+        provenanceOnlyLedgerInputs.has(input.path),
+        `${input.path} is an explicitly bounded provenance-only ledger input`,
+      );
+    } else {
+      assert.match(input.path, /^(?:content|public)\//u);
+    }
     assert.doesNotMatch(input.path, /(?:^|\/)\.\.(?:\/|$)/u);
     const path = resolve(siteRoot, input.path);
     const stats = await lstat(path);

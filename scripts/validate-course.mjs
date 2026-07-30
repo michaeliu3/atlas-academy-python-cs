@@ -8,6 +8,11 @@ import {
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeLedger,
 } from "./advanced-module-bridge.mjs";
+import {
+  advancedModuleContractPath,
+  loadAdvancedModuleContractRegistry,
+  validateAdvancedModuleContractRegistry,
+} from "./advanced-module-contract.mjs";
 import { loadCourseGraph } from "./course-graph.mjs";
 import {
   loadReleaseInputPolicy,
@@ -167,6 +172,7 @@ export async function validateCourseContracts(
   const errors = [];
   const warnings = [];
   let draftEvidence = null;
+  let advancedContract = null;
 
   try {
     const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
@@ -186,6 +192,17 @@ export async function validateCourseContracts(
   } catch (error) {
     warnings.push(
       `Draft v2 evidence-pointer lint is informational and unresolved: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    const advancedRegistry = await loadAdvancedModuleContractRegistry(siteRoot);
+    advancedContract = await validateAdvancedModuleContractRegistry(graph, advancedRegistry, {
+      siteRoot,
+    });
+  } catch (error) {
+    errors.push(
+      `Lifecycle-aware advanced module contract must remain valid before advanced authoring or publication: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -238,6 +255,10 @@ export async function validateCourseContracts(
     const courseModule = graphById.get(moduleId);
     if (!courseModule || courseModule.lifecycle !== "published") {
       errors.push(`contract ${moduleId} does not correspond to a published graph module.`);
+    } else if (courseModule.number >= 31) {
+      errors.push(
+        `Module ${courseModule.number} must use the lifecycle-aware advanced contract instead of module-contracts.v1.json.`,
+      );
     }
   }
 
@@ -247,23 +268,38 @@ export async function validateCourseContracts(
     graphPath,
     contractsPath,
     advancedModuleBridgePath(siteRoot),
+    advancedModuleContractPath(siteRoot),
     resolve(siteRoot, legacyModuleContractAuditRelativePath),
   ]);
-  try {
-    const bridgeLedger = await loadAdvancedModuleBridgeLedger(siteRoot);
-    validateAdvancedModuleBridgeLedger(graph, bridgeLedger);
-  } catch (error) {
-    errors.push(error instanceof Error ? error.message : String(error));
+  if (advancedContract) {
+    for (const path of advancedContract.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
   }
-  for (const courseModule of graph.modules.filter(
-    ({ lifecycle }) => lifecycle === "published",
-  )) {
+  if (advancedContract && !advancedContract.legacyBridgeValidationRequired) {
+    warnings.push(
+      "The M31–M36 prerequisite-session bridge remains retained historical authoring evidence; all six lifecycle-aware contracts now own its live prerequisite/session validation after an advanced-module lifecycle transition.",
+    );
+  } else {
+    try {
+      const bridgeLedger = await loadAdvancedModuleBridgeLedger(siteRoot);
+      validateAdvancedModuleBridgeLedger(graph, bridgeLedger);
+    } catch (error) {
+      errors.push(error instanceof Error ? error.message : String(error));
+    }
+  }
+  for (const courseModule of graph.modules) {
     if (
+      courseModule.lifecycle === "published" &&
       courseModule.releaseEvidence.status === "legacy-audit-pending" &&
       !legacyBaselineIds.has(courseModule.id)
     ) {
       errors.push(`Module ${courseModule.number} may not use the legacy contract exception.`);
     }
+  }
+  for (const courseModule of graph.modules.filter(
+    ({ lifecycle, number }) => lifecycle === "published" && number <= 30,
+  )) {
     const moduleContract = contractById.get(courseModule.id);
     if (!moduleContract) {
       errors.push(`published Module ${courseModule.number} has no module contract.`);
@@ -362,6 +398,7 @@ export async function validateCourseContracts(
     errors,
     warnings,
     draftEvidence,
+    advancedContract,
     summary: {
       legacyBaselineModules,
       verifiedModules,
@@ -386,7 +423,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     requireGitTracked: process.argv.includes("--require-git-tracked"),
   });
   console.log(
-    `Course contract: ${report.summary.legacyBaselineModules} legacy baselines, ${report.summary.verifiedModules} verified, ${report.summary.authoringOnlyModules} authoring-only.`,
+    `Course contract: ${report.summary.legacyBaselineModules} legacy baselines, ${report.summary.verifiedModules} verified, ${report.summary.authoringOnlyModules} authoring-only; ${report.advancedContract?.summary.authoringOnlyContracts ?? 0} lifecycle-aware advanced authoring contract(s).`,
   );
   for (const warning of report.warnings) {
     console.warn(`warning: ${warning}`);

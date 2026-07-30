@@ -3,6 +3,11 @@ import { access, lstat, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { advancedModuleBridgePath } from "./advanced-module-bridge.mjs";
+import {
+  advancedModuleContractPath,
+  loadAdvancedModuleContractRegistry,
+  validateAdvancedModuleContractRegistry,
+} from "./advanced-module-contract.mjs";
 import { loadCourseGraph, projectReadableModules } from "./course-graph.mjs";
 import {
   legacyModuleContractAuditRelativePath,
@@ -175,14 +180,24 @@ const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
   legacyModuleContractAudit,
   { siteRoot },
 );
+const advancedModuleContractRegistry = await loadAdvancedModuleContractRegistry(siteRoot);
+const advancedModuleContractReport = await validateAdvancedModuleContractRegistry(
+  courseGraph,
+  advancedModuleContractRegistry,
+  { siteRoot },
+);
 const releaseInputPaths = new Set([
   graphPath,
   performanceBudgetPolicyPath,
   contractPath,
   advancedModuleBridgePath(siteRoot),
+  advancedModuleContractPath(siteRoot),
   releaseInputPolicyPath(siteRoot),
   legacyModuleContractAuditPath,
 ]);
+for (const path of advancedModuleContractReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
 
 for (const projectedModule of projectedModules) {
   const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
@@ -260,6 +275,7 @@ for (const projectedModule of projectedModules) {
 await requireFile(contractPath, "Module contract registry");
 await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
+await requireFile(advancedModuleContractPath(siteRoot), "Lifecycle-aware advanced module contract");
 await requireFile(legacyModuleContractAuditPath, "Legacy module-contract audit input");
 for (const path of releaseInputPolicy.downloadPaths) {
   await requireFile(path, "Allowlisted local teaching artifact");
