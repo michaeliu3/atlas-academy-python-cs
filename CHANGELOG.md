@@ -11,6 +11,24 @@ actually published.
   not be described as security-clean while the tracked transitive-advisory
   follow-up remains open.
 
+## v0.5.2-runtime-evidence (private course milestone)
+
+- Published the private GitHub Release `v0.5.2-runtime-evidence` and deployed
+  the owner-only Atlas Academy portal as version 19 from the exact
+  protected-main build.
+- Released Module 24, CPython, Performance & Memory Evidence: a six-view
+  Runtime Evidence Observatory, a bounded local reference model with 24
+  behavioral checks, source maps, and downloadable teaching artifacts. It
+  connects object graphs, lifetime, cycles, memory measurement, bytecode, and
+  responsible AI-generated optimization review without presenting
+  implementation observations as portable Python guarantees.
+- Normalized generated-course fingerprints across Windows and Unix line
+  endings, so a clean checkout no longer reports source drift solely because
+  of newline format.
+- Retained the owner-only access boundary and the explicit dependency-advisory
+  follow-up; this release does not claim a security-clean dependency graph or
+  broader portal access.
+
 ## v0.5.1-security (private maintenance milestone)
 
 - Published the private GitHub Release `v0.5.1-security` and refreshed the
