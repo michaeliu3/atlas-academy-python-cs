@@ -33,6 +33,10 @@
       "sha256": "6dc1e9d697c1a8c5543bd69cbb74bdfc0892b73381574b653dee4be98b07d07b"
     },
     {
+      "path": "content/course/release-evidence-policy.v1.json",
+      "sha256": "1e9e662e99fb949497450ac1aaefb0eddb7ff594d9ce84c2a0c7d5990d728b4f"
+    },
+    {
       "path": "content/course/release-input-policy.v1.json",
       "sha256": "d3c901354b2b520b883589821b0a170834068ebf2b86411ba157f6a0f3c74059"
     },

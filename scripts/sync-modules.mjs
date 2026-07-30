@@ -23,6 +23,10 @@ import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
+import {
+  loadReleaseEvidencePolicy,
+  releaseEvidencePolicyPath,
+} from "./release-evidence-verifier.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -179,6 +183,7 @@ const modules = [];
 const importLines = [];
 const contentEntries = [];
 const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
+const releaseEvidencePolicy = await loadReleaseEvidencePolicy(siteRoot);
 const legacyModuleContractAudit = await loadLegacyModuleContractAudit(siteRoot);
 const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
   legacyModuleContractAudit,
@@ -191,6 +196,7 @@ const releaseInputPaths = new Set([
   advancedModuleBridgePath(siteRoot),
   advancedModuleContractPath(siteRoot),
   releaseInputPolicyPath(siteRoot),
+  releaseEvidencePolicyPath(siteRoot),
   legacyModuleContractAuditPath,
 ]);
 
@@ -272,6 +278,8 @@ await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
 await requireFile(advancedModuleContractPath(siteRoot), "Lifecycle-aware advanced module contract");
 await requireFile(legacyModuleContractAuditPath, "Legacy module-contract audit input");
+await requireFile(releaseEvidencePolicy.path, "Release-evidence policy");
+await requireFile(releaseEvidencePolicy.workflowPath, "Pinned Course CI workflow");
 for (const path of releaseInputPolicy.downloadPaths) {
   await requireFile(path, "Allowlisted local teaching artifact");
   releaseInputPaths.add(path);

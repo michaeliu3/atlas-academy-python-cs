@@ -14,6 +14,10 @@ import {
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { legacyModuleContractPacketRelativePath } from "../scripts/legacy-module-contract-packet.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
+import {
+  loadReleaseEvidencePolicy,
+  releaseEvidencePolicyRelativePath,
+} from "../scripts/release-evidence-verifier.mjs";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
 
@@ -35,10 +39,11 @@ function comparePaths(left, right) {
 }
 
 test("the release-input ledger is a reproducible local allowlist", async () => {
-  const [ledger, graph, advancedRegistry] = await Promise.all([
+  const [ledger, graph, advancedRegistry, releaseEvidencePolicy] = await Promise.all([
     readFile(ledgerPath, "utf8").then(JSON.parse),
     loadCourseGraph(),
     loadAdvancedModuleContractRegistry(),
+    loadReleaseEvidencePolicy(siteRoot),
   ]);
   const advancedContractReport = await validateAdvancedModuleContractRegistry(
     graph,
@@ -60,6 +65,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(legacyModuleContractAuditRelativePath));
   assert.ok(paths.includes(legacyModuleContractPacketRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
+  assert.ok(paths.includes(releaseEvidencePolicyRelativePath));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
   assert.ok(paths.includes("content/source-maps/python_curriculum_sources.md"));
   assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_map.md"));
@@ -75,6 +81,12 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   for (const policyPath of policyPaths) {
     assert.ok(paths.includes(policyPath), `${policyPath} appears in the release-input ledger`);
   }
+  const workflowText = await readFile(releaseEvidencePolicy.workflowPath, "utf8");
+  assert.equal(
+    sha256(canonicalTextContent(workflowText)),
+    releaseEvidencePolicy.report.workflowSourceSha256,
+    "the release-evidence policy binds the current Course CI workflow source",
+  );
 
   const documentationLedgerPaths = paths.filter((path) => path.startsWith("docs/"));
   const expectedDocumentationLedgerPaths = new Set(historicalAdvancedProvenanceLedgerPaths);

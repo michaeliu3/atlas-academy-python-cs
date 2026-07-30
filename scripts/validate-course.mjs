@@ -19,6 +19,10 @@ import {
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
 import {
+  loadReleaseEvidencePolicy,
+  releaseEvidencePolicyPath,
+} from "./release-evidence-verifier.mjs";
+import {
   loadModuleContractEvidenceRegistry,
   validateModuleContractEvidenceRegistry,
 } from "./module-contract-evidence.mjs";
@@ -101,22 +105,22 @@ async function trackedPaths(pathspec) {
     .map((path) => path.replaceAll("\\", "/"));
 }
 
-async function validateTrackedRegularFiles(paths, errors) {
+async function validateTrackedRegularFiles(paths, errors, { label = "release input" } = {}) {
   for (const path of paths) {
     const repositoryPath = relative(siteRoot, path).replaceAll("\\", "/");
     if (!withinSite(repositoryPath)) {
-      errors.push(`release input escapes the repository: ${repositoryPath}.`);
+      errors.push(`${label} escapes the repository: ${repositoryPath}.`);
       continue;
     }
     const stats = await lstat(path).catch(() => null);
     if (!stats || !stats.isFile() || stats.isSymbolicLink()) {
-      errors.push(`release input must be a regular checked-in file: ${repositoryPath}.`);
+      errors.push(`${label} must be a regular checked-in file: ${repositoryPath}.`);
       continue;
     }
     await execFileAsync("git", ["ls-files", "--error-unmatch", "--", repositoryPath], {
       cwd: siteRoot,
     }).catch(() => {
-      errors.push(`release input is not tracked by Git: ${repositoryPath}.`);
+      errors.push(`${label} is not tracked by Git: ${repositoryPath}.`);
     });
   }
 }
@@ -170,6 +174,7 @@ export async function validateCourseContracts(
   let draftEvidence = null;
   let advancedContract = null;
   let legacyPackets = null;
+  let releaseEvidencePolicy = null;
 
   try {
     const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
@@ -214,6 +219,14 @@ export async function validateCourseContracts(
   } catch (error) {
     errors.push(
       `Lifecycle-aware advanced module contract must remain valid before advanced authoring or publication: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    releaseEvidencePolicy = await loadReleaseEvidencePolicy(siteRoot);
+  } catch (error) {
+    errors.push(
+      `Release-evidence policy must remain valid before a CI run can be cited as evidence: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -280,6 +293,7 @@ export async function validateCourseContracts(
     contractsPath,
     advancedModuleBridgePath(siteRoot),
     advancedModuleContractPath(siteRoot),
+    releaseEvidencePolicyPath(siteRoot),
     resolve(siteRoot, legacyModuleContractAuditRelativePath),
   ]);
   if (advancedContract) {
@@ -405,6 +419,11 @@ export async function validateCourseContracts(
           );
         }
       }
+    }
+    if (releaseEvidencePolicy) {
+      await validateTrackedRegularFiles([releaseEvidencePolicy.workflowPath], errors, {
+        label: "pinned Course CI workflow",
+      });
     }
     await validateTrackedRegularFiles(releaseInputPaths, errors);
   }

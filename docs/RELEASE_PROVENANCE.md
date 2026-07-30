@@ -84,6 +84,26 @@ the workflow configuration more reproducible than mutable major tags, but it
 does not independently verify a run URL, prevent every workflow-policy change,
 or establish a complete software-supply-chain claim.
 
+### Local CI-evidence policy (not a remote observation)
+
+`content/course/release-evidence-policy.v1.json` is a versioned, hashed local
+policy for the repository, Course CI workflow identity and source digest, and
+the four required job names. Its pure verifier accepts only a supplied,
+normalized snapshot in which the run and every named job bind to the same run
+ID, attempt, and source-branch-head SHA. It deliberately rejects mutable
+pull-request association fields and derives the Actions URL from the pinned
+repository plus run ID.
+
+This is a **local structural check**, not a fetched GitHub observation. In
+particular, the source-workflow digest is an assertion supplied by a future
+collector; the GitHub run API does not itself furnish it. A pull-request run's
+source head is also not proof of the generated merge ref that a runner used.
+No historical run is being retroactively certified by this policy. Before it
+can support release evidence, a trusted, default-branch-controlled, read-only
+observer must independently fetch the run and jobs, retain the observed run
+attempt and execution identity, and avoid checkout, execution, cache, or
+artifact use from untrusted pull-request code.
+
 | Source commit | Evidence changed | GitHub Actions evidence | What this establishes | What it does not establish |
 | --- | --- | --- | --- | --- |
 | [`e524b4050b1a95958a838156e0e1133aaad27619`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/e524b4050b1a95958a838156e0e1133aaad27619) | Deterministic, allowlisted release inputs | [Run 30565380896](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30565380896) — successful | The recorded GitHub workflow validated this source commit. | A GitHub Release, a private deployment, complete module-contract verification, or absence of security risk. |
