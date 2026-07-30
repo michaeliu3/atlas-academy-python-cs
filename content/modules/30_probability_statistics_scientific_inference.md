@@ -223,7 +223,7 @@ Suppose `H` means a synthetic prompt is helpful under its declared model and
 `+` means an observed synthetic signal is positive. A joint table is one
 model of their co-occurrence:
 
-| | `+` | `-` | marginal |
+| Helpfulness hypothesis / observed signal | `+` | `-` | marginal |
 | --- | ---: | ---: | ---: |
 | `H` | 0.009 | 0.001 | 0.010 |
 | `not H` | 0.0495 | 0.9405 | 0.990 |

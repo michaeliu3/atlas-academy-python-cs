@@ -247,7 +247,7 @@
   transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
-.tabs button span { display: block; margin-bottom: 0.32rem; color: #7c9baa; font-size: 0.64rem; letter-spacing: 0.1em; }
+.tabs button span { display: block; margin-bottom: 0.32rem; color: #526879; font-size: 0.64rem; letter-spacing: 0.1em; }
 .tabs button:hover { border-color: #43929a; transform: translateY(-1px); }
 .tabs .tabActive { border-color: #1b6475; color: #fff; background: linear-gradient(145deg, #177d72, #286d97); box-shadow: 0 0.55rem 1rem rgb(29 103 119 / 18%); }
 .tabs .tabActive span { color: #cef2ec; }

@@ -27,7 +27,13 @@ actually published.
 - Recorded a second failed Linux browser candidate separately, then repaired
   its labelled-checklist and native-radio interaction regressions without
   rewriting either failed run. The current review branch now rejects
-  force-pushes and deletion while retaining ordinary additive commits.
+  force-pushes and deletion, requires linear history, and applies those rules
+  to administrators while retaining ordinary additive commits.
+- Preserved the subsequent failed browser candidate as a distinct provenance
+  record, then corrected the real M30 tab-contrast and table-header defects and
+  replaced brittle radio/reveal browser assertions with keyboard-oriented,
+  current-state checks. This remains a corrective candidate until Linux
+  Chromium/axe CI succeeds.
 - Reconciled existing GitHub Release pages and tag targets in the provenance
   ledger without rewriting release history. Historical private-deployment
   assertions remain unverified in that ledger unless separately evidenced.

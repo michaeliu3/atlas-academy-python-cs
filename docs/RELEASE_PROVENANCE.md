@@ -42,6 +42,22 @@ This is a point-in-time configuration record, not a claim that an administrator
 cannot later change a setting, that every branch is protected, or that a
 private deployment has been reviewed.
 
+### Superseding protection verification
+
+A later direct GitHub REST check on 2026-07-30 confirmed that both `main` and
+`agent/60-day-route` apply their configured protection rules to administrators.
+Both disallow force-pushes and deletion and require linear history. At that
+check, neither branch had a required-pull-request-review rule; `main` required
+conversation resolution and the strict checks `Portal quality gate`, `Teaching
+models on Python 3.12`, and `Teaching models on Python 3.14`, while the review
+branch had no required-status-check or conversation-resolution rule. Browser
+accessibility acceptance was not yet a required status check on `main`.
+
+This supplements the earlier snapshot with its administrator-enforcement and
+required-check details. It is current configuration evidence only, not a claim
+that a future administrator cannot change policy, that an unrecorded checkout
+used an exact source commit, or that a private deployment was reviewed.
+
 ## Verified candidate-validation records
 
 These are candidate validation records, not releases. The listed Actions checks
@@ -64,6 +80,7 @@ alone.
 | --- | --- | --- | --- | --- |
 | [`a89fcae9a32dd0f9584a1b6f579ccd1f6bb3a853`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a89fcae9a32dd0f9584a1b6f579ccd1f6bb3a853) | Linux Chromium/axe browser-acceptance harness | [Run 30571390346](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30571390346) — browser-accessibility failed; portal and Python teaching-model jobs passed | The browser job reported real contrast and keyboard-focus failures. | This commit is **not** browser-accessibility acceptance, a release candidate, deployment evidence, or a completed accessibility review. A later exact-commit Linux run must pass before a success record is added. |
 | [`2a182dea3edbda1ccb52f67851c2b9de1c11be54`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/2a182dea3edbda1ccb52f67851c2b9de1c11be54) | Legacy/ahead-of-release audits, 20-probe routing, accessibility repairs, and truthful release boundaries | [Run 30576396718](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30576396718) — portal and Python 3.12/3.14 jobs passed; browser-accessibility failed. The check is attached to this head, while the pull-request workflow checked merge candidate `65060c29ccd5da250b4ed91b570786e1388a9cdf`. | Seven browser checks failed. Confirmed causes include an unlabelled GFM workbook checklist, stale diagnostic confidence selectors, ambiguous selectors over intentional text equivalents, and a trust-studio radio hit-target interaction. The failure report is retained by GitHub as an artifact; it is remediation input, not erased history. | This head/merge candidate is **not** browser-accessibility acceptance, a release candidate, deployment evidence, or a completed accessibility review. A later successful candidate must be recorded separately; it does not rewrite this failure. |
+| [`2f2bd430764c9caf6ac01ddf88b5ca4d33972aee`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/2f2bd430764c9caf6ac01ddf88b5ca4d33972aee) | Browser-accessibility remediation for checklist labels, native-radio hit targets, and scoped studio selectors | [Run 30578320310](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30578320310) — portal and Python 3.12/3.14 jobs passed; browser-accessibility failed. GitHub records this pull-request run against the stated source head. | Four browser checks failed: the M30 axe scan found a low-contrast inactive tab label and an empty table header; the completed diagnostic used a fragile native-radio pointer path; and M22/M30 post-reveal assertions kept obsolete accessible names. The failure artifact is retained as remediation input. | This source head is **not** browser-accessibility acceptance, a release candidate, deployment evidence, or a completed accessibility review. Its successor must pass and be recorded separately; it does not rewrite this failure. |
 
 ## Historical GitHub Release reconciliation
 

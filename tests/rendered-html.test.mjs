@@ -2440,6 +2440,16 @@ test("renders the probability, statistics, and scientific-inference workbook and
   );
   assert.doesNotMatch(html, /katex-error/);
 
+  const document = new JSDOM(html).window.document;
+  const emptyTableHeaders = [
+    ...document.querySelectorAll(".lesson-table-scroll th"),
+  ].filter((header) => !header.textContent?.trim());
+  assert.deepEqual(
+    emptyTableHeaders,
+    [],
+    "Module 30 tables must name every column and row-axis header.",
+  );
+
   const [studio, style, reference, referenceTests, oralGuide, sourceMap, sourceAudit] = await Promise.all([
     readFile(new URL("../app/ProbabilityInferenceStudio.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ProbabilityInferenceStudio.module.css", import.meta.url), "utf8"),

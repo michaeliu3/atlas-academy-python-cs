@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 test.setTimeout(90_000);
 
@@ -24,6 +24,12 @@ async function expectNoAxeViolations(page: Page) {
     .join("\n\n");
 
   expect(results.violations, summary || "Axe found no violations.").toEqual([]);
+}
+
+async function selectRadioWithKeyboard(page: Page, radio: Locator) {
+  await radio.focus();
+  await page.keyboard.press("Space");
+  await expect(radio).toBeChecked();
 }
 
 const browserAuditRoutes: ReadonlyArray<{
@@ -182,10 +188,16 @@ test("the diagnostic requires an answer and confidence before model reveal", asy
   const reveal = page.getByRole("button", { name: "Reveal the model" });
   await expect(reveal).toBeDisabled();
 
-  await page.getByRole("radio").first().check();
+  const answer = page
+    .getByRole("group", { name: /choose the model that best predicts/i })
+    .getByRole("radio")
+    .first();
+  const confidence = page.getByRole("radio", { name: /^low\b/i });
+
+  await selectRadioWithKeyboard(page, answer);
   await expect(reveal).toBeDisabled();
 
-  await page.getByRole("radio", { name: /^low\b/i }).check();
+  await selectRadioWithKeyboard(page, confidence);
   await expect(reveal).toBeEnabled();
   await reveal.click();
 
@@ -200,8 +212,14 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
   await page.goto("/diagnostic");
 
   for (let index = 0; index < 20; index += 1) {
-    await page.getByRole("radio").first().check();
-    await page.getByRole("radio", { name: /^low\b/i }).check();
+    const answer = page
+      .getByRole("group", { name: /choose the model that best predicts/i })
+      .getByRole("radio")
+      .first();
+    const confidence = page.getByRole("radio", { name: /^low\b/i });
+
+    await selectRadioWithKeyboard(page, answer);
+    await selectRadioWithKeyboard(page, confidence);
     await page.getByRole("button", { name: "Reveal the model" }).click();
 
     if (index < 19) {
@@ -250,7 +268,9 @@ test("the Module 22 trust studio requires prediction and confidence before revea
   await expect(confidence).toBeChecked();
   await expect(reveal).toBeEnabled();
   await reveal.click();
-  await expect(reveal).toHaveText("Refresh the evidence");
+  await expect(
+    prediction.getByRole("button", { name: "Refresh the evidence" }),
+  ).toBeVisible();
 });
 
 test("the Module 30 studio requires prediction and confidence before explanation", async ({
@@ -275,5 +295,7 @@ test("the Module 30 studio requires prediction and confidence before explanation
   }).click();
   await expect(reveal).toBeEnabled();
   await reveal.click();
-  await expect(reveal).toHaveText("Explanation revealed");
+  await expect(
+    page.getByRole("button", { name: "Explanation revealed" }),
+  ).toBeVisible();
 });
