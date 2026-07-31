@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Added an authoring-only M22 source-audit addendum that ties its trust,
+  privacy, security, and release-evidence source classes to six sessions,
+  reuse decisions, bounded-model limits, and release-truth checks. It
+  preserves all six historical audit ambiguities and is not a learner download,
+  quality approval, publication promotion, or release-evidence claim. The
+  associated learner/resource route now corrects stale TLS status language:
+  RFC 8446 is obsolete, RFC 9846 is the TLS 1.3 successor, and RFC 9325's
+  status route must be rechecked for later updates.
 - Added an authoring-only M19 source-audit addendum that ties its concurrency
   source classes to six sessions, reuse decisions, and release-truth checks.
   It keeps the genuinely missing module-specific Study Partner route visible;

@@ -130,7 +130,7 @@
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
-      "sha256": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1"
+      "sha256": "3a71e2babae4e870d220e1562c244f45785045808b039b5e92d7be9eda87c7df"
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
@@ -206,7 +206,7 @@
     },
     {
       "path": "content/source-maps/module22_security_trust_source_map.md",
-      "sha256": "6bf984cc87e70d92214279c556b9a6ba745f5bf6b29adde184da319e761b91d9"
+      "sha256": "edb9a675ea8e9f75c71fe76e0f51af0ba86a0f78b0f34ce3f5fcf2301985b356"
     },
     {
       "path": "content/source-maps/module23_languages_interpreters_source_map.md",

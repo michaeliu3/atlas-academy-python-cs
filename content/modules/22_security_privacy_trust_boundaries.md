@@ -1047,10 +1047,10 @@ Read sources as contracts and evidence, not substitutes for explanation.
   [NIST incident response guidance](https://csrc.nist.gov/pubs/sp/800/61/r3/final)
   — secure development and learning/recovery lifecycle.
 - [NIST Privacy Framework](https://www.nist.gov/privacy-framework) and
-  [NIST Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63.html)
+  [NIST Digital Identity Guidelines, SP 800-63-4 final](https://csrc.nist.gov/pubs/sp/800/63/4/final)
   — privacy risk to people and authentication scope.
-- [TLS 1.3](https://www.rfc-editor.org/rfc/rfc8446.html),
-  [TLS/DTLS secure-use guidance](https://www.rfc-editor.org/rfc/rfc9325.html),
+- [TLS 1.3, RFC 9846](https://www.rfc-editor.org/rfc/rfc9846.html),
+  [BCP 195 TLS/DTLS guidance status](https://www.rfc-editor.org/info/rfc9325/),
   and [OAuth 2.0 security BCP](https://www.rfc-editor.org/rfc/rfc9700.html) —
   advanced integration context, not Atlas implementation requirements.
 - [pip secure installs](https://pip.pypa.io/en/stable/topics/secure-installs/)
