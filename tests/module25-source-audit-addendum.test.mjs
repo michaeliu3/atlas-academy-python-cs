@@ -18,6 +18,10 @@ test("the M25 source-audit addendum stays internal and preserves preview and unr
   );
   assert.match(addendum, /not learner-downloadable/u);
   assert.match(addendum, /hashable internal release input/u);
+  assert.match(
+    addendum,
+    /The non-promoting M25 structural packet now includes this addendum/u,
+  );
   assert.match(addendum, /does \*\*not\*\* change[\s\S]*publication state/u);
   assert.match(addendum, /M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26/u);
   assert.match(addendum, /direct academic prerequisites/u);
@@ -38,6 +42,11 @@ test("the M25 source-audit addendum stays internal and preserves preview and unr
   assert.match(
     addendum,
     /Generic TA\/Study Partner rehearsal[\s\S]*module-specific[\s\S]*oral-defense protocol/u,
+  );
+  assert.match(addendum, /## Unresolved supportive oral-defense route/u);
+  assert.match(
+    addendum,
+    /generic oral infrastructure does not satisfy the\s+module-specific\s+missing criterion/u,
   );
 });
 

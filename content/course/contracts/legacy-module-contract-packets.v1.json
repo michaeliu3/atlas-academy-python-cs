@@ -2198,6 +2198,819 @@
           ]
         }
       ]
+    },
+    {
+      "moduleId": "m25",
+      "packetId": "m25-evidence-grounded-intelligent-systems-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m22",
+          "m24",
+          "m30",
+          "m31",
+          "m34",
+          "m35",
+          "m36"
+        ],
+        "forwardModuleId": "m26",
+        "masteryGateId": "evidence",
+        "studioId": "evidence-grounded"
+      },
+      "workbookPath": "content/modules/25_evidence_grounded_intelligent_systems.md",
+      "sourceMapPath": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m25-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m22",
+            "m24",
+            "m30",
+            "m31",
+            "m34",
+            "m35",
+            "m36"
+          ],
+          "forwardArtifactId": "m25-decision-contract"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m25-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m25-lineage-and-split-card"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m25-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m25-ranker-boundary-map"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m25-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m25-evaluation-card"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m25-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m25-accessible-decision-card-specification"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m25-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m25-proposal-boundary-packet"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m25-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "Canonical preview-gated prerequisite map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "1-position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m25-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "Preview-only Module 26 handoff boundary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "12-retrieval-schedule-and-handoff"
+          }
+        },
+        {
+          "id": "m25-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "2-session-1--a-score-is-not-a-useful-outcome"
+          }
+        },
+        {
+          "id": "m25-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "3-session-2--data-becomes-a-claim-only-through-lineage"
+          }
+        },
+        {
+          "id": "m25-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "4-session-3--candidates-rankers-and-models-do-different-jobs"
+          }
+        },
+        {
+          "id": "m25-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "5-session-4--evaluation-calibration-and-uncertainty"
+          }
+        },
+        {
+          "id": "m25-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "6-session-5--explanations-accessibility-and-meaningful-control"
+          }
+        },
+        {
+          "id": "m25-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "7-session-6--aiagent-proposals-are-systems-not-authorities"
+          }
+        },
+        {
+          "id": "m25-decision-contract",
+          "roles": [
+            "session-output"
+          ],
+          "label": "Session output: Decision Contract",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "session-artifact"
+          }
+        },
+        {
+          "id": "m25-lineage-and-split-card",
+          "roles": [
+            "session-output"
+          ],
+          "label": "Session output: Lineage and Split Card",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "session-artifact-1"
+          }
+        },
+        {
+          "id": "m25-ranker-boundary-map",
+          "roles": [
+            "session-output"
+          ],
+          "label": "Session output: Ranker Boundary Map",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "session-artifact-2"
+          }
+        },
+        {
+          "id": "m25-evaluation-card",
+          "roles": [
+            "session-output"
+          ],
+          "label": "Session output: Evaluation Card",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "session-artifact-3"
+          }
+        },
+        {
+          "id": "m25-accessible-decision-card-specification",
+          "roles": [
+            "session-output"
+          ],
+          "label": "Session output: Accessible Decision Card Specification",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "session-artifact-4"
+          }
+        },
+        {
+          "id": "m25-proposal-boundary-packet",
+          "roles": [
+            "session-output"
+          ],
+          "label": "Session output: Proposal-boundary packet",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "session-artifact-5"
+          }
+        },
+        {
+          "id": "m25-first-principle",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "Lineage first-principles model",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "first-principles-lineage-model"
+          }
+        },
+        {
+          "id": "m25-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "Evidence-label definition candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "evidence-labels"
+          }
+        },
+        {
+          "id": "m25-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "Denominator and uncertainty assumption candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "denominators-and-uncertainty"
+          }
+        },
+        {
+          "id": "m25-derivation",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "Decision-support derivation candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "derive-decision-support-from-a-real-choice"
+          }
+        },
+        {
+          "id": "m25-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "Fixed Atlas incident counterexample candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "12-the-fixed-atlas-incident"
+          }
+        },
+        {
+          "id": "m25-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "Evaluation-card numerical experiment candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "choose-the-metric-from-the-product-question"
+          }
+        },
+        {
+          "id": "m25-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "Missing-owner code-reading lab",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "code-reading-lab--find-the-missing-owner"
+          }
+        },
+        {
+          "id": "m25-debug",
+          "roles": [
+            "debugging"
+          ],
+          "label": "Coercive decision-card repair lab",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "code-reading-lab--repair-a-coercive-card"
+          }
+        },
+        {
+          "id": "m25-design",
+          "roles": [
+            "design"
+          ],
+          "label": "AI-patch review design candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "ai-patch-review"
+          }
+        },
+        {
+          "id": "m25-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "Prediction-before-reveal candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "prediction-exercise"
+          }
+        },
+        {
+          "id": "m25-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "Problem-ladder transfer candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "problem-ladder"
+          }
+        },
+        {
+          "id": "m25-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "Source-selection rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+            "headingAnchor": "executive-teaching-decision"
+          }
+        },
+        {
+          "id": "m25-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "Claim-to-source and evidence map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+            "headingAnchor": "claim-to-source-and-evidence-map"
+          }
+        },
+        {
+          "id": "m25-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "Licensing, reuse, and access ledger",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+            "headingAnchor": "licensing-reuse-and-access-ledger"
+          }
+        },
+        {
+          "id": "m25-stable-learner-link",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "Learner source and reuse route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "13-source-route-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m25-visual-studio",
+          "roles": [
+            "visual"
+          ],
+          "label": "Intelligent Systems Evidence Studio candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "8-intelligent-systems-evidence-studio"
+          }
+        },
+        {
+          "id": "m25-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "Accessible visualization text-equivalent candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "accessible-visualization-rule"
+          }
+        },
+        {
+          "id": "m25-diagnostic",
+          "roles": [
+            "diagnostic",
+            "confidence"
+          ],
+          "label": "Confidence-aware diagnostic candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "9-confidence-aware-diagnostic"
+          }
+        },
+        {
+          "id": "m25-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "Diagnostic-routing misconception candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "diagnostic-routing"
+          }
+        },
+        {
+          "id": "m25-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "Retrieval and handoff queue",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "12-retrieval-schedule-and-handoff"
+          }
+        },
+        {
+          "id": "m25-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "Next-Step Evidence Dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "project--atlas-next-step-evidence-studio"
+          }
+        },
+        {
+          "id": "m25-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "Next-Step Evidence acceptance rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "acceptance-rubric"
+          }
+        },
+        {
+          "id": "m25-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "Next-Step Evidence rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "acceptance-rubric"
+          }
+        },
+        {
+          "id": "m25-oral-missing-protocol-hint",
+          "roles": [
+            "oral-protocol",
+            "oral-hint"
+          ],
+          "label": "Missing module-specific oral protocol and hint route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m25-oral-missing-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "Missing module-specific oral counterexample route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m25-oral-missing-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "Missing module-specific oral transfer route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m25-oral-missing-reflection-summary",
+          "roles": [
+            "oral-reflection",
+            "oral-summary"
+          ],
+          "label": "Missing module-specific oral reflection and summary route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m25-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "TA guide candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "ta-guide"
+          }
+        },
+        {
+          "id": "m25-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "Study Partner routine",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "study-partner-routine"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-course-map",
+            "m25-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-session-1",
+            "m25-session-2",
+            "m25-session-3",
+            "m25-session-4",
+            "m25-session-5",
+            "m25-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-first-principle"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-definition",
+            "m25-assumption",
+            "m25-derivation",
+            "m25-counterexample",
+            "m25-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-code-reading",
+            "m25-debug",
+            "m25-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-source-rationale",
+            "m25-claim-linkage",
+            "m25-license-reuse",
+            "m25-stable-learner-link"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-visual-studio",
+            "m25-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-diagnostic",
+            "m25-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-dossier",
+            "m25-acceptance",
+            "m25-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-oral-missing-protocol-hint",
+            "m25-oral-missing-counterexample",
+            "m25-oral-missing-transfer",
+            "m25-oral-missing-reflection-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m25-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m25-studio",
+          "kind": "studio",
+          "paths": [
+            "app/EvidenceGroundedStudio.tsx",
+            "app/EvidenceGroundedStudio.module.css",
+            "lib/module-studio-registry.ts",
+            "tests/rendered-html.test.mjs"
+          ]
+        },
+        {
+          "id": "m25-reference-model",
+          "kind": "bounded-reference-model",
+          "paths": [
+            "public/downloads/module25_reference.py",
+            "public/downloads/test_module25_reference.py"
+          ]
+        },
+        {
+          "id": "m25-oral-guide",
+          "kind": "oral-guide",
+          "paths": [
+            "lib/oral-defense-guide.ts"
+          ]
+        }
+      ]
     }
   ]
 }

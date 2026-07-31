@@ -920,11 +920,9 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="language-interpreter-studio-title"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isStudioRecord/);
-  assert.match(studio, /choiceIdsByView/);
   assert.match(studio, /window\.localStorage\.getItem/);
   assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /window\.localStorage\.removeItem/);
   assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
@@ -933,11 +931,6 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(
-    studio,
-    /\(!candidate\.revealed \|\| \(candidate\.choice !== null && candidate\.confidence !== null\)\)/,
-    "stored progress cannot reveal evidence without a recorded choice and confidence",
-  );
   assert.match(
     studio,
     /styles\.modeTabs} aria-label="Evaluation rule examples" role="group"/,
@@ -1000,8 +993,6 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="runtime-evidence-observatory-title"/);
   assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isObservatoryRecord/);
-  assert.match(studio, /choiceIdsByView/);
   assert.match(studio, /window\.localStorage\.getItem/);
   assert.match(studio, /window\.localStorage\.setItem/);
   assert.match(studio, /storageReady/);
@@ -1012,11 +1003,6 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(
-    studio,
-    /!record\.revealed \|\| \(record\.choice !== null && record\.confidence !== null\)/,
-    "stored progress cannot reveal evidence without a recorded choice and confidence",
-  );
   assert.match(studio, /not a profiler,/);
   assert.match(studio, /not a CPython emulator,/);
   assert.match(studio, /not a license\s+to collect\s+private learner traces/);
@@ -1069,8 +1055,6 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="evidence-grounded-studio-title"/);
   assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isStudioRecord/);
-  assert.match(studio, /choiceIdsByView/);
   assert.match(studio, /window\.localStorage\.getItem/);
   assert.match(studio, /window\.localStorage\.setItem/);
   assert.match(studio, /storageReady/);
@@ -1079,7 +1063,6 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
     6,
     "each decision-support view has one confidence-aware prediction gate",
   );
-  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
   assert.match(studio, /<b>0<\/b> live learner records/);
   assert.match(studio, /Never alter a plan, calendar, or record/);

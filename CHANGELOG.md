@@ -7,6 +7,22 @@ actually published.
 
 ## Unreleased
 
+- Migrated M23 and M24's fixed browser prediction checkpoints into the shared,
+  versioned, allowlisted v2 codec. Each accepts an exact v1 record only for a
+  one-time local migration, writes v2 before clearing v1, and reset clears both
+  keys; browser tests cover migration and non-revival after reset. M25 instead
+  begins a fresh v2 boundary and intentionally discards its older
+  un-enveloped v1 record rather than trusting or migrating it. These records
+  remain optional local state, not tamper-proof event history or mastery
+  evidence. M18, M19, M26, and the intake still require their own migration;
+  this is not a whole-portal storage-hardening claim.
+- Added M25's non-promoting structural packet. It resolves 43 typed local
+  pointers, including one visible H3 session-output pointer for each of the six
+  sessions, and hash-binds the authoring-only M25 source-audit addendum as an
+  internal release input. The packet preserves preview availability, all four
+  immutable ambiguous criteria, and the missing module-specific oral-defense
+  protocol; it is not human review, release, publication, project/oral credit,
+  learner mastery, or a Module 26 unlock.
 - Patched Vinext 0.0.50's Windows production static-file cache to normalize
   browser URL separators, then added a focused regression that proves a
   `/assets/...` URL resolves. This restores local browser hydration and keeps

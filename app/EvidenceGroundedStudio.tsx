@@ -7,6 +7,10 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import {
+  MODULE25_PROGRESS_STORAGE_KEY,
+  module25ProgressCodec,
+} from "@/lib/module25-progress-codec";
 import styles from "./EvidenceGroundedStudio.module.css";
 
 type StudioView =
@@ -25,7 +29,7 @@ type ViewRecord = {
 type StudioRecord = Record<StudioView, ViewRecord>;
 type DecisionResponse = "accept" | "dismiss" | "alternative";
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module25-evidence-studio.v1";
+const STUDIO_STORAGE_KEY = MODULE25_PROGRESS_STORAGE_KEY;
 const CORE_RULE =
   "Atlas may present a versioned, purpose-scoped suggestion only from authorized minimal data, a declared candidate set, and a named policy or model. Every suggestion preserves provenance, version, evaluation scope, and limitations; it exposes an accessible explanation and meaningful override. A score never silently changes learner state, grants authority, proves truth, establishes causality, or turns feedback into ground truth.";
 
@@ -72,15 +76,6 @@ const views: ReadonlyArray<{
     question: "What does an AI output authorize?",
   },
 ];
-
-const choiceIdsByView: Record<StudioView, ReadonlyArray<string>> = {
-  purpose: ["optional", "automatic", "engagement"],
-  lineage: ["before", "after", "all"],
-  ranking: ["set", "score", "click"],
-  evaluation: ["bounded", "truth", "fair"],
-  control: ["person", "policy", "score"],
-  agent: ["proposal", "permission", "citation"],
-};
 
 const choices: Record<StudioView, ReadonlyArray<{ id: string; label: string }>> = {
   purpose: [
@@ -286,29 +281,6 @@ function blankRecord(): StudioRecord {
   ) as StudioRecord;
 }
 
-function isConfidence(value: unknown): value is Confidence {
-  return value === 1 || value === 2 || value === 3 || value === 4;
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  return views.every(({ id }) => {
-    const candidate = (value as Record<string, unknown>)[id];
-    if (!candidate || typeof candidate !== "object") {
-      return false;
-    }
-    const record = candidate as Record<string, unknown>;
-    return (
-      (record.choice === null || choiceIdsByView[id].includes(String(record.choice))) &&
-      (record.confidence === null || isConfidence(record.confidence)) &&
-      typeof record.revealed === "boolean" &&
-      (!record.revealed || (record.choice !== null && record.confidence !== null))
-    );
-  });
-}
-
 function EvidenceLock() {
   return (
     <div className={styles.evidenceLock} role="status">
@@ -418,11 +390,9 @@ export function EvidenceGroundedStudio() {
     const hydrationTimer = window.setTimeout(() => {
       try {
         const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (stored) {
-          const parsed: unknown = JSON.parse(stored);
-          if (isStudioRecord(parsed)) {
-            setRecord(parsed);
-          }
+        const parsed = module25ProgressCodec.parse(stored);
+        if (parsed) {
+          setRecord(parsed as StudioRecord);
         }
       } catch {
         // Local progress is optional. A malformed or unavailable store changes no lesson evidence.
@@ -438,7 +408,10 @@ export function EvidenceGroundedStudio() {
       return;
     }
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      window.localStorage.setItem(
+        STUDIO_STORAGE_KEY,
+        module25ProgressCodec.serialize(record),
+      );
     } catch {
       // Privacy/browser settings may block local storage; the studio still works in-memory.
     }

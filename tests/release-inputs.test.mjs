@@ -83,6 +83,11 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_map.md"));
   assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_audit.md"));
   assert.ok(paths.includes("content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md"));
+  assert.ok(
+    paths.includes(
+      "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+    ),
+  );
   assert.ok(paths.includes("docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"));
   assert.ok(paths.includes("public/downloads/module18_reference.py"));
   assert.doesNotMatch(paths.join("\n"), /(?:^|\/)__pycache__(?:\/|$)|\.py[co](?:\n|$)/u);

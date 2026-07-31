@@ -6,6 +6,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import {
+  MODULE24_LEGACY_PROGRESS_STORAGE_KEY,
+  MODULE24_PROGRESS_STORAGE_KEY,
+  module24ProgressCodec,
+  parseModule24LegacyProgress,
+} from "@/lib/module24-progress-codec";
 import styles from "./RuntimeEvidenceObservatory.module.css";
 
 type ObservatoryView =
@@ -23,7 +29,7 @@ type ViewRecord = {
 };
 type ObservatoryRecord = Record<ObservatoryView, ViewRecord>;
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module24-runtime-observatory.v1";
+const STUDIO_STORAGE_KEY = MODULE24_PROGRESS_STORAGE_KEY;
 const CORE_RULE =
   "An optimization is accepted only after semantic behavior, privacy/retention boundaries, implementation scope, and a controlled measurement are kept distinct. A number is evidence only for the question and manifest that produced it.";
 
@@ -70,15 +76,6 @@ const views: ReadonlyArray<{
     question: "Should Atlas accept, reject, or defer the patch?",
   },
 ];
-
-const choiceIdsByView: Record<ObservatoryView, ReadonlyArray<string>> = {
-  contract: ["semantic", "timing", "global"],
-  graph: ["audit", "deleted", "address"],
-  cycle: ["model", "resource", "immediate"],
-  lens: ["traced", "rss", "all"],
-  runtime: ["pinned", "language", "speed"],
-  decision: ["defer", "accept", "ignore"],
-};
 
 const claimLayers = [
   {
@@ -162,35 +159,6 @@ function tabId(view: ObservatoryView) {
 
 function panelId(view: ObservatoryView) {
   return "runtime-observatory-panel-" + view;
-}
-
-function isViewRecord(value: unknown, view: ObservatoryView): value is ViewRecord {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
-  const record = value as Record<string, unknown>;
-  const allowed = ["choice", "confidence", "revealed"];
-  if (Object.keys(record).length !== allowed.length || Object.keys(record).some((key) => !allowed.includes(key))) {
-    return false;
-  }
-  const validChoice =
-    record.choice === null ||
-    (typeof record.choice === "string" && choiceIdsByView[view].includes(record.choice));
-  const validConfidence =
-    record.confidence === null || [1, 2, 3, 4].includes(record.confidence as number);
-  const validReveal =
-    typeof record.revealed === "boolean" &&
-    (!record.revealed || (record.choice !== null && record.confidence !== null));
-  return validChoice && validConfidence && validReveal;
-}
-
-function isObservatoryRecord(value: unknown): value is ObservatoryRecord {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
-  const record = value as Record<string, unknown>;
-  const ids = views.map((view) => view.id);
-  return (
-    Object.keys(record).length === ids.length &&
-    Object.keys(record).every((key) => ids.includes(key as ObservatoryView)) &&
-    views.every((view) => isViewRecord(record[view.id], view.id))
-  );
 }
 
 function EvidenceLock() {
@@ -706,13 +674,29 @@ export function RuntimeEvidenceObservatory() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const parsed: unknown = JSON.parse(raw);
-          if (isObservatoryRecord(parsed)) setRecords(parsed);
+        const rawCurrent = window.localStorage.getItem(STUDIO_STORAGE_KEY);
+        const currentRecord = module24ProgressCodec.parse(rawCurrent);
+        if (currentRecord) {
+          setRecords(currentRecord as ObservatoryRecord);
+        } else if (rawCurrent === null) {
+          const legacyRecord = parseModule24LegacyProgress(
+            window.localStorage.getItem(MODULE24_LEGACY_PROGRESS_STORAGE_KEY),
+          );
+          if (legacyRecord) {
+            try {
+              window.localStorage.setItem(
+                STUDIO_STORAGE_KEY,
+                module24ProgressCodec.serialize(legacyRecord),
+              );
+              window.localStorage.removeItem(MODULE24_LEGACY_PROGRESS_STORAGE_KEY);
+            } catch {
+              // The valid legacy record still supports this in-memory visit.
+            }
+            setRecords(legacyRecord as ObservatoryRecord);
+          }
         }
       } catch {
-        // Progress is optional and intentionally contains only answer/confidence state.
+        // Progress is optional and contains only allowlisted local prediction evidence.
       } finally {
         setStorageReady(true);
       }
@@ -723,7 +707,10 @@ export function RuntimeEvidenceObservatory() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(records));
+      window.localStorage.setItem(
+        STUDIO_STORAGE_KEY,
+        module24ProgressCodec.serialize(records),
+      );
     } catch {
       // The observatory remains useful if local storage is unavailable.
     }
@@ -740,6 +727,7 @@ export function RuntimeEvidenceObservatory() {
     setRecords(emptyRecord());
     try {
       window.localStorage.removeItem(STUDIO_STORAGE_KEY);
+      window.localStorage.removeItem(MODULE24_LEGACY_PROGRESS_STORAGE_KEY);
     } catch {
       // Local persistence is optional.
     }

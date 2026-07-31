@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "0a3a428bad99266ae75198dabab0e7bd54f12830837fc48a8707fb2131a0ca65"
+      "sha256": "d2cb61ef7578ac8844d1bb6f846dcced344bb2e6f1aba1fc4e59d3a6160b3197"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -231,6 +231,10 @@
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
       "sha256": "0fbcb18958618483fa9682ca0d28b1c0f09dcb13679e8553f66bcb8e5d01bd2f"
+    },
+    {
+      "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
+      "sha256": "cce0b2055917db3473a147aa9e2b6a3570084d4811415a744633984493eee5e2"
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",

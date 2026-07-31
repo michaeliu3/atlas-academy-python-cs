@@ -15,12 +15,13 @@ release-evidence-policy artifact**; it is not learner-downloadable. The
 canonical M25 source map is likewise an authoring boundary rather than a
 configured M25 learner download.
 
-A later non-promoting structural packet may include this addendum as a
-**hashable internal release input** without public delivery, approval, or
-publication. Until such a packet expressly does so, this addendum is not an
-allowlisted release input. A Git-tracked path or later hash does **not** change
-M25's legacy-audit status, human-review status, preview availability, route
-position, release evidence, deployment state, or publication state.
+The non-promoting M25 structural packet now includes this addendum as a
+**hashable internal release input**, deliberately allowed by its contract and
+release-input ledger. That mechanical inclusion does **not** change M25's
+legacy-audit status, human-review status, preview availability, route position,
+release evidence, deployment state, or publication state. A Git-tracked path
+or hash never automatically makes the canonical map or this addendum a
+learner-facing delivery artifact.
 
 M25 remains legacy-baseline material with preview availability in the canonical
 graph. Its readability does not make it an unlocked final synthesis, a
@@ -144,6 +145,19 @@ alternative pointer, retrieval pointer, project/rubric pointers, TA pointer,
 Study Partner pointer, and forward handoff remain structural pointers wherever
 the immutable audit already records them as present. This record neither
 changes those statuses nor upgrades the four ambiguities or missing oral route.
+
+## Unresolved supportive oral-defense route
+
+Module 25's supportive oral defense remains **missing**. The global guide,
+designated live-chat workflow, and generic TA/Study Partner rehearsal can offer
+a general conversation, but generic oral infrastructure does not satisfy the
+module-specific missing criterion. Before this status can change, a qualified
+review must find or create a Module 25-specific, psychologically safe,
+adaptive text/voice protocol with a learner-controlled evidence summary, hint
+ladder, counterexample and transfer prompts, accessibility-equivalent text
+route, and explicit support/repair choices. This addendum records the absence;
+it does not silently create an oral-defense claim by pointing at a generic
+component or external chat.
 
 ## Release-truth checks and unresolved provenance
 

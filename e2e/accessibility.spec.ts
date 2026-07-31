@@ -347,6 +347,107 @@ test("M19 revokes export approval when its evidence brief changes", async ({ pag
   expect(results.violations, "Axe found a violation in the M19 evidence panel.").toEqual([]);
 });
 
+const codecMigrationCases = [
+  {
+    name: "M23 language lab",
+    path: "/modules/23-programming-languages-interpreters",
+    heading: "Atlas Language Lab",
+    legacyKey: "atlas-academy.module23-language-lab.v1",
+    currentKey: "atlas-academy.module23-language-lab.v2",
+    initialCoverage: "2 / 6 views revealed",
+    resetCoverage: "0 / 6 views revealed",
+    reset: "two-step",
+    record: {
+      boundary: { choice: "syntax", confidence: 4, revealed: true },
+      grammar: { choice: "multiply", confidence: 3, revealed: true },
+      environment: { choice: "captured", confidence: 2, revealed: false },
+      semantics: { choice: "selected", confidence: 1, revealed: false },
+      contract: { choice: "named", confidence: 2, revealed: false },
+      bridge: { choice: "observation", confidence: 3, revealed: false },
+    },
+  },
+  {
+    name: "M24 runtime observatory",
+    path: "/modules/24-cpython-performance-memory",
+    heading: "Runtime Evidence Observatory",
+    legacyKey: "atlas-academy.module24-runtime-observatory.v1",
+    currentKey: "atlas-academy.module24-runtime-observatory.v2",
+    initialCoverage: "2 / 6",
+    resetCoverage: "0 / 6",
+    reset: "one-step",
+    record: {
+      contract: { choice: "semantic", confidence: 4, revealed: true },
+      graph: { choice: "audit", confidence: 3, revealed: true },
+      cycle: { choice: "model", confidence: 2, revealed: false },
+      lens: { choice: "traced", confidence: 1, revealed: false },
+      runtime: { choice: "pinned", confidence: 2, revealed: false },
+      decision: { choice: "defer", confidence: 3, revealed: false },
+    },
+  },
+] as const;
+
+for (const migration of codecMigrationCases) {
+  test(`${migration.name} migrates valid local progress once and reset clears it`, async ({
+    page,
+  }) => {
+    const clearedRecord = Object.fromEntries(
+      Object.keys(migration.record).map((view) => [
+        view,
+        { choice: null, confidence: null, revealed: false },
+      ]),
+    );
+    await page.addInitScript(
+      ({ legacyKey, record }) => {
+        window.localStorage.setItem(legacyKey, JSON.stringify(record));
+      },
+      { legacyKey: migration.legacyKey, record: migration.record },
+    );
+    await page.goto(migration.path);
+    await expect(
+      page.getByRole("heading", { name: migration.heading, exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText(migration.initialCoverage, { exact: true })).toBeVisible();
+
+    await expect
+      .poll(() =>
+        page.evaluate(
+          ({ currentKey, legacyKey }) => {
+            const current = window.localStorage.getItem(currentKey);
+            return {
+              legacy: window.localStorage.getItem(legacyKey),
+              current: current ? JSON.parse(current) : null,
+            };
+          },
+          { currentKey: migration.currentKey, legacyKey: migration.legacyKey },
+        ),
+      )
+      .toEqual({ legacy: null, current: { version: 2, record: migration.record } });
+
+    if (migration.reset === "two-step") {
+      await page.getByRole("button", { name: "Reset saved studio" }).click();
+      await page.getByRole("button", { name: "Confirm reset all" }).click();
+    } else {
+      await page.getByRole("button", { name: "Reset local progress" }).click();
+    }
+
+    await expect
+      .poll(() =>
+        page.evaluate(
+          ({ currentKey, legacyKey }) => ({
+            legacy: window.localStorage.getItem(legacyKey),
+            current: (() => {
+              const raw = window.localStorage.getItem(currentKey);
+              return raw ? JSON.parse(raw) : null;
+            })(),
+          }),
+          { currentKey: migration.currentKey, legacyKey: migration.legacyKey },
+        ),
+      )
+      .toEqual({ legacy: null, current: { version: 2, record: clearedRecord } });
+    await expect(page.getByText(migration.resetCoverage, { exact: true })).toBeVisible();
+  });
+}
+
 test("the Module 22 trust studio requires prediction and confidence before reveal", async ({
   page,
 }) => {
