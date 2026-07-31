@@ -21,6 +21,10 @@ actually published.
   change publication or human-review state. The authoring-only source-audit
   addendum is now hashable as an internal release input, not a learner
   download, source-quality approval, or release evidence.
+- Recorded the successful GitHub Course CI run for the M19 structural-packet
+  source head (`8ac2318…`) in the append-only provenance ledger. It records
+  four successful named jobs on attempt 1, not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
 - Recorded the successful GitHub Course CI run for the M20 structural-packet
   source head (`f253b30…`) in the append-only provenance ledger. It records
   four successful named jobs on attempt 1, not a GitHub Release, private
