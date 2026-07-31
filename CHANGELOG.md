@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Completed Module 2's Mermaid accessibility retrofit: all nine instructional
+  diagrams now have unique stable IDs, concise titles, and authored prose
+  alternatives that retain the recursive call, termination, proof, cycle, and
+  architecture relationships for screen-reader and visible-reader use. This is
+  a bounded visual-equivalence improvement, not a completed accessibility
+  review or a claim that the remaining modules are remediated.
 - Added M32's authoring-only primary-source research ledger for Systems
   Languages, Scientific Python, and Accelerators. It connects CPython/native
   boundaries, buffers and arrays, compilation, CUDA/HIP execution, autodiff,

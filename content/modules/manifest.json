@@ -94,9 +94,9 @@
       "title": "Functions, Recursion, and Induction",
       "summary": "Central idea: a function gives a computation a boundary; recursion gives repeated structure an executable form; induction gives the same structure a correctness argument.",
       "arcId": "arc-i",
-      "wordCount": 9484,
+      "wordCount": 9941,
       "estimatedMinutes": 46,
-      "sourceHash": "dc5f938fe7b6e320b64314aba970f1d0aa3666ea014e47a87ea98bffdcdfcbce",
+      "sourceHash": "3cc8195cb7d2d9517ddd5655902c0270baa22001beb4d8aae8390a8d66ca0a77",
       "id": "m02",
       "state": {
         "lifecycle": "learner-material-ready",

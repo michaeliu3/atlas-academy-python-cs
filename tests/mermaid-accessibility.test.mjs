@@ -101,3 +101,20 @@ test("Module 1 is the complete reference retrofit while the global validator can
   assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m01-")));
   assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });
+
+test("Module 2 is a complete recursion-and-induction retrofit with unique visual explanations", async () => {
+  const moduleTwo = await readFile(
+    new URL("../content/modules/02_functions_recursion_induction.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleTwo, {
+    sourcePath: "content/modules/02_functions_recursion_induction.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 9);
+  assert.equal(report.summary.completeBlocks, 9);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m02-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+});

@@ -13,6 +13,9 @@ Module 1 established that a call creates a new execution frame, parameter names 
 > How can a finite function definition describe a computation whose input may have an unknown depth, and how can we know that the computation terminates, returns the right result, and uses acceptable resources?
 
 ```mermaid
+%% atlas-diagram-id: m02-course-role-map
+%% atlas-diagram-title: Module 2 connects recursion to later Atlas work
+%% atlas-diagram-alt: Module 1 leads to Module 2. Module 2 then supports Modules 3, 4, 5, 6, 10, 11, and 23, connecting functions and recursion to contracts, proof, cost, recursive data, traversal, algorithm design, and interpreters.
 flowchart LR
     M1["Module 1<br/>Values, state, execution"] --> M2["Module 2<br/>Functions, recursion, induction"]
     M2 --> M3["Module 3<br/>Contracts and ADTs"]
@@ -200,6 +203,9 @@ More precisely:
 > A Python function definition creates a function object and binds a name to it. Calling that object evaluates arguments, creates an execution frame, binds parameters, executes the body, and either returns an object or raises an exception.
 
 ```mermaid
+%% atlas-diagram-id: m02-function-call-lifecycle
+%% atlas-diagram-title: A function call creates and resolves an execution frame
+%% atlas-diagram-alt: A caller evaluates argument expressions and calls a function object. A new call frame binds parameters and executes the body, then either returns an object reference to the caller or propagates an exception.
 sequenceDiagram
     participant C as Caller frame
     participant F as Function object
@@ -352,6 +358,9 @@ execution = Note("Python execution", 5, (names, mutation))
 **Prediction:** What value is returned? What is the greatest number of active `total_minutes` frames at once?
 
 ```mermaid
+%% atlas-diagram-id: m02-recursive-note-tree
+%% atlas-diagram-title: A note tree for a recursive total-minutes trace
+%% atlas-diagram-alt: The root Python execution node has a names leaf and a mutation node. Mutation has aliasing and immutable-boundaries leaves; the values 5, 12, 8, 10, and 7 form the tree that the recursive traversal totals.
 flowchart TD
     E["Python execution<br/>5"] --> N["Names and bindings<br/>12"]
     E --> M["Mutation<br/>8"]
@@ -374,6 +383,9 @@ Selected execution states:
 | 9 | caller only | root returns `42` |
 
 ```mermaid
+%% atlas-diagram-id: m02-total-minutes-call-trace
+%% atlas-diagram-title: Recursive calls and returns for the total-minutes tree
+%% atlas-diagram-alt: The caller invokes total on execution. Execution gets 12 from names, then mutation gets 10 from aliasing and 7 from boundaries before returning 25; execution returns the final total 42 to the caller.
 sequenceDiagram
     participant C as Caller
     participant E as total(execution)
@@ -508,6 +520,9 @@ For `total_minutes`, choose:
 Every child subtree has at least one fewer node than the whole tree, so every recursive call decreases \(\mu\). A leaf makes no recursive calls. Therefore the traversal terminates for every finite tree.
 
 ```mermaid
+%% atlas-diagram-id: m02-termination-measure
+%% atlas-diagram-title: A decreasing node-count measure proves tree traversal terminates
+%% atlas-diagram-alt: For a supported finite tree, the node-count measure decreases on every child call. A leaf makes no recursive call, so there can be no infinite descent and the traversal terminates.
 flowchart LR
     I["Supported input<br/>finite tree"] --> M["Measure μ(t)<br/>node count"]
     M --> D["Every child has<br/>smaller μ"]
@@ -520,6 +535,9 @@ flowchart LR
 Python objects can form a graph even when their fields are named `children`. If an input contains a cycle, “child subtree has fewer nodes” is false because there is no finite subtree unfolding:
 
 ```mermaid
+%% atlas-diagram-id: m02-cycle-counterexample
+%% atlas-diagram-title: A two-note cycle breaks the finite-tree termination argument
+%% atlas-diagram-alt: Note A points to Note B and Note B points back to Note A. This cycle is not a finite subtree, so a child does not necessarily have a smaller node-count measure and the tree proof does not apply.
 flowchart LR
     A["Note A"] --> B["Note B"]
     B --> A
@@ -539,6 +557,9 @@ The algorithm follows the contract. Adding a `visited` set without deciding the 
 Recursion is an execution technique. Induction is a reasoning technique. They often align because both decompose a structure into smaller instances.
 
 ```mermaid
+%% atlas-diagram-id: m02-recursion-induction-alignment
+%% atlas-diagram-title: Recursive data, computation, and structural induction share a decomposition
+%% atlas-diagram-alt: A recursive data definition supports both a recursive computation and a structural induction proof. Base calls align with leaf cases, while combining child results aligns with assuming the property for children and proving it for the parent.
 flowchart TB
     D["Recursive data definition"] --> C["Recursive computation"]
     D --> P["Structural induction proof"]
@@ -668,6 +689,9 @@ That distinction will matter later:
 This module adds one computation boundary, not an entire framework.
 
 ```mermaid
+%% atlas-diagram-id: m02-atlas-recursive-architecture
+%% atlas-diagram-title: A narrow Atlas boundary for recursive traversal
+%% atlas-diagram-alt: A caller uses pure recursive operations in atlas/traversal.py, which reads immutable Note values from atlas/model.py. Traversal tests provide contract evidence, returned values flow back to the caller, and file, database, and network work remain deliberately unconnected future concerns.
 flowchart LR
     C["Caller<br/>CLI or report"] --> R["atlas/traversal.py<br/>pure recursive operations"]
     R --> M["atlas/model.py<br/>immutable Note values"]
@@ -1584,6 +1608,9 @@ If one area is weak, assign the corresponding TA counterexample and retrieve it 
 ## 17. Consolidation: one connected model
 
 ```mermaid
+%% atlas-diagram-id: m02-recursion-consolidation
+%% atlas-diagram-title: One connected model for recursive design, proof, cost, and debugging
+%% atlas-diagram-alt: A self-similar problem leads to a function contract and recursive definition. The definition creates execution, termination, correctness, and cost obligations; debugging traces execution, and all of those checks converge on an owned Atlas traversal that can be reviewed and defended.
 flowchart TD
     P["Problem has repeated<br/>self-similar structure"] --> F["Function contract<br/>names supported behavior"]
     F --> R["Recursive definition<br/>smaller instances + combine"]
