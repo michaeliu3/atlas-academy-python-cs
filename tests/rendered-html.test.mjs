@@ -108,7 +108,7 @@ test("renders the Atlas Academy course portal", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("renders separate, learner-controlled Teaching Assistant and Study Partner packages", async () => {
+test("renders separate live-learning Teaching Assistant and Study Partner packages", async () => {
   const response = await render("/learning-partners");
   assert.equal(response.status, 200);
 
@@ -119,7 +119,12 @@ test("renders separate, learner-controlled Teaching Assistant and Study Partner 
   assert.match(html, /Copy Teaching Assistant startup prompt/);
   assert.match(html, /Copy Study Partner startup prompt/);
   assert.match(html, /Never give a bare pass\/fail verdict/);
-  assert.match(html, /silently save a transcript/);
+  assert.match(html, /visible chat an accessible whiteboard/);
+  assert.match(html, /Record mode: keep local/);
+  assert.match(html, /configured-notion-session-note/);
+  assert.match(html, /at most one note per substantive session/);
+  assert.match(html, /pause records/);
+  assert.match(html, /The Teaching Assistant conducts the actual post-module oral defense/);
 });
 
 test("gives every rendered workbook checklist item a descriptive read-only name", async () => {
@@ -209,13 +214,17 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
 
   assert.match(page, /<ModuleOralDefense courseModule=\{courseModule\} \/>/);
   assert.match(oralDefense, /Oral defense: a conversation, not a verdict\./);
-  assert.match(oralDefense, /GPT Live Chat/);
+  assert.match(oralDefense, /voice-enabled Teaching Assistant chat/);
   assert.match(oralDefense, /ModuleTextOralDefense/);
   assert.match(oralDefense, /Do not keep raw voice recordings/);
   assert.match(oralDefense, /Do not produce a bare pass\/fail verdict/);
   assert.match(oralDefense, /prediction-before-reveal/);
   assert.match(oralDefense, /What would change your mind\?/);
-  assert.match(oralDefense, /Ask whether I approve saving only that concise summary/);
+  assert.match(oralDefense, /designated voice-enabled Teaching Assistant chat/);
+  assert.match(oralDefense, /visible chat as an accessible whiteboard/);
+  assert.match(oralDefense, /Record mode to the exact value/);
+  assert.match(oralDefense, /at most one concise structured record/);
+  assert.match(oralDefense, /pause records/);
   assert.match(textDefense, /Equivalent text conversation/);
   assert.match(textDefense, /Work through one question at a time\./);
   assert.match(textDefense, /Prediction before reveal/);
@@ -1148,7 +1157,7 @@ test("Module 26 preserves its evidence-first capstone flow and local-only bounda
   assert.match(style, /focus-visible/);
 });
 
-test("release architecture keeps Notion capture manual and out of the portal runtime", async () => {
+test("release architecture keeps Notion capture out of the portal runtime", async () => {
   const architectureUrl = new URL("../docs/ARCHITECTURE.md", import.meta.url);
   const privacyUrl = new URL("../docs/PRIVACY.md", import.meta.url);
   const [architecture, privacy] = await Promise.all([
@@ -1156,8 +1165,8 @@ test("release architecture keeps Notion capture manual and out of the portal run
     readFile(privacyUrl, "utf8"),
   ]);
 
-  assert.match(architecture, /manual, learner-controlled capture only/);
   assert.match(architecture, /no Notion runtime integration or automatic/);
+  assert.match(architecture, /designated external Codex learning/);
   assert.match(privacy, /Notion page exports, IDs, private notes, or learner journal content/);
 });
 

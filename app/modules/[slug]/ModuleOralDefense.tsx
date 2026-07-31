@@ -49,9 +49,11 @@ function liveChatBrief(courseModule: CourseModule, guide: OralDefenseGuide) {
 
 This is a formative conversation, not a pass/fail exam. The module-specific central model is: ${guide.centralModel}. Ask me to ${guide.traceOrDerivation}. Watch gently for this likely misconception: ${guide.misconception}. Ask me to state the boundary: ${guide.boundary}. End the intellectual work with this transfer: ${guide.transfer}.
 
+Use my designated voice-enabled Teaching Assistant chat if the platform makes it available. Prefer the highest available live quality/reasoning setting that I select, but do not claim control over platform settings. Keep the visible chat as an accessible whiteboard: use supported display math for important equations, define symbols, provide a prose or ASCII fallback if rendering is uncertain, put code in language-labelled fenced blocks, and never rely on speech-only or visual-only explanation.
+
 Begin with a plain-language invitation and the five-move agenda: explain the model; trace or derive; stress a boundary; transfer; choose a next bridge. Adapt one question at a time and wait for my answer before continuing. Include a prediction-before-reveal question and ask, “What would change your mind?” When I expose a misconception, name it constructively, give the smallest useful hint, and let me repair the answer rather than revealing it immediately. ${lensInstruction(guide)}
 
-Evaluate reasoning, assumptions, evidence, counterexample/debugging skill, transfer, and reflection—not speed, accent, polish, or memorized phrasing. Do not ask for personal or private data. At the end, give me a concise evidence summary with: demonstrated models, fragile ideas, one misconception repaired, calibrated confidence, one retrieval prompt, and the smallest next bridge. Ask whether I approve saving only that concise summary to my private learning record before I copy it. Do not produce a bare pass/fail verdict.`;
+Evaluate reasoning, assumptions, evidence, counterexample/debugging skill, transfer, and reflection—not speed, accent, polish, or memorized phrasing. Do not ask for personal or private data. At the end, give me a concise evidence summary with: demonstrated models, fragile ideas, one misconception repaired, calibrated confidence, one retrieval prompt, and the smallest next bridge. Keep it local unless I set Record mode to the exact value “configured-notion-session-note”, this is my designated Teaching Assistant chat, its configured private destination is reachable, and I explicitly end this substantive session or ask for the summary. Then create at most one concise structured record, never one per exchange. If I say “pause records” or “off-record”, write nothing until I explicitly re-enable recording. If I request correction or deletion, make that scoped change when access allows and say plainly if it did not occur. Never save raw voice, a full transcript, sensitive personal data, or material I mark off-record. Do not produce a bare pass/fail verdict.`;
 }
 
 export function ModuleOralDefense({
@@ -127,11 +129,11 @@ export function ModuleOralDefense({
       <div className={styles.actionGrid}>
         <div className={styles.liveCard}>
           <p className={styles.cardEyebrow}>Live or voice-facilitated route</p>
-          <h3>When GPT Live Chat is available, bring this brief.</h3>
+          <h3>When a voice-enabled Teaching Assistant chat is available, paste this brief.</h3>
           <p>
-            The facilitator should ask one question at a time, offer hints
-            before answers, and leave you with evidence—not a performance
-            score.
+            The designated Teaching Assistant should ask one question at a
+            time, offer hints before answers, keep the visible chat usable as a
+            whiteboard, and leave you with evidence—not a performance score.
           </p>
           <button
             onClick={() => copyText(prompt, "brief-copied")}
@@ -143,7 +145,7 @@ export function ModuleOralDefense({
           </button>
           <p aria-live="polite" className={styles.copyStatus}>
             {copyState === "brief-copied" &&
-              "The facilitator brief is ready to paste into a live conversation."}
+              "The Teaching Assistant brief is ready to paste into your designated live conversation."}
             {copyState === "fallback" &&
               "Copy is unavailable here. Select the detailed text below and paste it into your chat."}
           </p>
@@ -173,10 +175,11 @@ export function ModuleOralDefense({
         </ul>
         <p className={styles.evidencePrivacy}>
           The guided text route creates an optional local draft only after you
-          reflect; it is not sent or saved by Atlas. The Live brief asks the
-          facilitator to request the same approval before you copy a summary.
-          Do not keep raw voice recordings, sensitive personal content, or an
-          unnecessary transcript.
+          reflect; it is not sent or saved by Atlas. A designated Codex chat
+          may create at most one concise Notion session note after you set the
+          exact configured mode, verify its destination, and end a substantive
+          session. Do not keep raw voice recordings, sensitive personal
+          content, off-record material, or an unnecessary transcript.
         </p>
       </div>
 

@@ -23,9 +23,10 @@ export default function LearningPartnersPage() {
             <em> protect your thinking.</em>
           </h1>
           <p>
-            Atlas uses AI to make your reasoning visible—not to replace it.
-            Start a separate chat for each role, paste its brief, and fill in
-            only the smallest context needed for the next learning move.
+            Atlas is the course portal; your designated Codex chats are the
+            live learning surface. Paste each role brief into its separate chat
+            and share only the smallest context needed for the next learning
+            move.
           </p>
         </header>
 
@@ -45,7 +46,7 @@ export default function LearningPartnersPage() {
             </li>
             <li>
               <span>03</span>
-              <p><strong>Oral defense:</strong> explain, revise, transfer, and keep only a concise record you approve.</p>
+              <p><strong>Oral defense:</strong> the Teaching Assistant leads a supportive live or text conversation: explain, revise, transfer, and choose the next bridge.</p>
             </li>
           </ol>
         </section>
@@ -60,8 +61,11 @@ export default function LearningPartnersPage() {
           <p>
             Use the diagnostic to choose a bridge, the workbook to build the
             model, and a learning partner to make the model explainable under
-            a changed condition. Neither role awards a grade or writes to
-            Notion automatically.
+            a changed condition. Atlas itself does not access voice, a
+            microphone, or Notion. In a learner-authorized configuration, the
+            designated Codex chats—not the portal—may create one concise Notion
+            session note after a substantive learning conversation, but only
+            after explicit configuration and manual platform verification.
           </p>
           <Link href="/route">Return to the 60-day route <span aria-hidden="true">→</span></Link>
         </section>

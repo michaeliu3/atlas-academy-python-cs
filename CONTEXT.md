@@ -45,3 +45,15 @@ _Avoid_: audit pass, structural validation
 A versioned local course input included in the deterministic provenance ledger.
 It records what was reviewed or built, not whether it was pedagogically approved.
 _Avoid_: release approval, deployment proof
+
+**Designated live learning chat**:
+A learner-created, platform-hosted Codex chat assigned either the Teaching
+Assistant or Study Partner role. It is outside the Atlas portal runtime.
+_Avoid_: Atlas voice feature, portal agent
+
+**Configured concise session note**:
+At most one minimal Notion record for a substantive session, created only after
+the exact record mode, designated chat, reachable private destination, and
+session-end condition are satisfied. It is not a transcript, grade, or proof of
+mastery.
+_Avoid_: automatic progress tracking, chat archive, saved-note claim without evidence

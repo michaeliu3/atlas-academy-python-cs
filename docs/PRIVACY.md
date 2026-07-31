@@ -33,7 +33,11 @@ longer valid. The diagnostic's print path opens only its concise learning brief,
 not the full result ledger.
 
 This is a user-interface consent boundary, not a claim that a browser can stop
-someone from selecting visible text manually or that any Notion write exists.
+someone from selecting visible text manually. The portal never creates a Notion
+write; an explicitly configured and manually verified external Codex
+learning-chat workflow is a separate, learner-authorized boundary. It defaults
+to local records and must exclude raw voice, sensitive data, credentials, and
+off-record material. See [the live Codex workflow](LIVE_CODEX_LEARNING_WORKFLOW.md).
 
 ## Publication decision
 

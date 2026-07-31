@@ -31,6 +31,10 @@ import {
   loadManualLearningRecordWorkflow,
   validateManualLearningRecordWorkflow,
 } from "./manual-learning-record-workflow.mjs";
+import {
+  loadLiveCodexLearningWorkflow,
+  validateLiveCodexLearningWorkflow,
+} from "./live-codex-learning-workflow.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -205,6 +209,11 @@ const manualLearningRecordWorkflowReport = await validateManualLearningRecordWor
   manualLearningRecordWorkflow,
   { siteRoot },
 );
+const liveCodexLearningWorkflow = await loadLiveCodexLearningWorkflow(siteRoot);
+const liveCodexLearningWorkflowReport = await validateLiveCodexLearningWorkflow(
+  liveCodexLearningWorkflow,
+  { siteRoot },
+);
 const legacyModuleContractAudit = await loadLegacyModuleContractAudit(siteRoot);
 const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
   legacyModuleContractAudit,
@@ -227,6 +236,9 @@ for (const { canonicalPath } of releaseInputPolicy.sourceArtifactCopies) {
   releaseInputPaths.add(canonicalPath);
 }
 for (const path of manualLearningRecordWorkflowReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of liveCodexLearningWorkflowReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 

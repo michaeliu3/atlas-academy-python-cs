@@ -28,6 +28,11 @@ import {
   validateManualLearningRecordWorkflow,
 } from "./manual-learning-record-workflow.mjs";
 import {
+  liveCodexLearningWorkflowPath,
+  loadLiveCodexLearningWorkflow,
+  validateLiveCodexLearningWorkflow,
+} from "./live-codex-learning-workflow.mjs";
+import {
   loadModuleContractEvidenceRegistry,
   validateModuleContractEvidenceRegistry,
 } from "./module-contract-evidence.mjs";
@@ -181,6 +186,7 @@ export async function validateCourseContracts(
   let legacyPackets = null;
   let releaseEvidencePolicy = null;
   let manualLearningRecordWorkflow = null;
+  let liveCodexLearningWorkflow = null;
 
   try {
     const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
@@ -244,6 +250,17 @@ export async function validateCourseContracts(
   } catch (error) {
     errors.push(
       `Manual learning record workflow must remain valid before it can be offered as a learner evidence route: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    const workflow = await loadLiveCodexLearningWorkflow(siteRoot);
+    liveCodexLearningWorkflow = await validateLiveCodexLearningWorkflow(workflow, {
+      siteRoot,
+    });
+  } catch (error) {
+    errors.push(
+      `Live Codex learning workflow must remain valid before it can be offered as a configured external evidence route: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -312,6 +329,7 @@ export async function validateCourseContracts(
     advancedModuleContractPath(siteRoot),
     releaseEvidencePolicyPath(siteRoot),
     manualLearningRecordWorkflowPath(siteRoot),
+    liveCodexLearningWorkflowPath(siteRoot),
     resolve(siteRoot, legacyModuleContractAuditRelativePath),
   ]);
   if (advancedContract) {
@@ -326,6 +344,11 @@ export async function validateCourseContracts(
   }
   if (manualLearningRecordWorkflow) {
     for (const path of manualLearningRecordWorkflow.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+  }
+  if (liveCodexLearningWorkflow) {
+    for (const path of liveCodexLearningWorkflow.releaseInputPaths) {
       releaseInputPaths.add(path);
     }
   }

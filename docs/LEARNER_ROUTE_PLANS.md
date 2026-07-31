@@ -200,9 +200,12 @@ than typing volume.
 | Transfer artifact | Produce one small trace, proof sketch, experiment, test/patch review, ADR, threat note, or dossier page with an acceptance statement. |
 | Oral defense and review | Hold a constructive 5–15 minute conversation: model, evidence, counterexample, transfer, reflection, and smallest next bridge. Schedule retrieval at +1 day, +7 days, and +21 days unless a module gives a more specific interval. |
 
-The oral defense may use GPT Live Chat where available or the equivalent text
-conversation. It is an encouraging rehearsal, not a pass/fail exam. Save only
-the concise evidence summary you choose—not raw voice or a full transcript.
+The oral defense may use the designated voice-enabled Teaching Assistant Codex
+chat where available or the equivalent text conversation. It is an encouraging
+rehearsal, not a pass/fail exam. In an explicitly configured and manually
+verified private workflow, the chat may create at most one concise Notion
+evidence note when the learner ends a substantive session; never save raw voice
+or a full transcript.
 
 ## Catch-up without breaking the chain
 
@@ -260,13 +263,14 @@ Keep the record small enough to be useful:
 | Evidence pointer | A local note, redacted screenshot, repository commit, or one-sentence proof/trace. |
 | Confidence and repair | `medium; confused heap order with sorted order; repaired with two insert traces` |
 | Next bridge and retrieval date | `compare heap vs ordered list; +7 days` |
-| Consent decision | `kept local` or `manually copied to my Notion notebook` |
+| Record decision | `kept local`, `manually copied`, or `configured Codex → Notion session note` |
 
-Portal progress is local-first. Notion receives nothing automatically: copy or
-export only the summary you choose, after reviewing it. Keep secrets, raw
-voice/transcripts, personal diagnostics, and private notes out of Git. See
-the repository's [privacy boundary](PRIVACY.md) and the
-[goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) for the remaining
+Portal progress is local-first: Atlas itself does not write or export to
+Notion. A learner may explicitly configure and verify the designated Codex
+chats to make at most one concise Notion session note after a substantive
+session has ended. Keep secrets, raw voice/transcripts, personal diagnostics,
+and private notes out of Git. See the [live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md)
+and the [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) for the remaining
 implementation work.
 
 ## What this plan does and does not promise

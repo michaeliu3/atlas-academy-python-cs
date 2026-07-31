@@ -16,7 +16,8 @@ flowchart LR
     I["Interactive visual studios"] --> R
     D --> V["learner inspection + behavioral tests"]
     R --> P["private deployed portal"]
-    P -. "manual, learner-controlled capture only" .-> N["Notion records and learning workflow"]
+    P -. "copyable role protocols" .-> C["designated Codex learning chats"]
+    C -. "explicitly configured concise notes" .-> N["Notion records and learning workflow"]
 ~~~
 
 ## Main surfaces
@@ -25,8 +26,10 @@ flowchart LR
   client-side visual studios. Studios use fixed data, accessibility-first
   controls, and local device state only.
 - The deployed portal has no Notion runtime integration or automatic
-  portal-to-Notion data flow. Learners and the instructor may capture approved
-  learning evidence manually in the separate private Notion workflow.
+  portal-to-Notion data flow. The learner may use the manual private Notion
+  workflow, or explicitly configure the designated external Codex learning
+  chats to create concise session notes. That external workflow does not grant
+  the portal microphone, voice, transcript, or Notion-write capability.
 - The checked-in `content/course/course-graph.v1.json` is the canonical course
   catalog. It separates academic prerequisites from route order and records
   lifecycle, learner availability, source-map, studio, mastery-gate, and

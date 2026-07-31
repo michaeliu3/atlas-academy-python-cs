@@ -17,6 +17,10 @@ import {
   manualLearningRecordWorkflowGuideRelativePath,
   manualLearningRecordWorkflowRelativePath,
 } from "../scripts/manual-learning-record-workflow.mjs";
+import {
+  liveCodexLearningWorkflowGuideRelativePath,
+  liveCodexLearningWorkflowRelativePath,
+} from "../scripts/live-codex-learning-workflow.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import {
   loadReleaseEvidencePolicy,
@@ -70,6 +74,8 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(legacyModuleContractPacketRelativePath));
   assert.ok(paths.includes(manualLearningRecordWorkflowRelativePath));
   assert.ok(paths.includes(manualLearningRecordWorkflowGuideRelativePath));
+  assert.ok(paths.includes(liveCodexLearningWorkflowRelativePath));
+  assert.ok(paths.includes(liveCodexLearningWorkflowGuideRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes(releaseEvidencePolicyRelativePath));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
@@ -112,6 +118,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   }
   const expectedDocumentationLedgerPaths = new Set(expectedAdvancedProvenancePaths);
   expectedDocumentationLedgerPaths.add(manualLearningRecordWorkflowGuideRelativePath);
+  expectedDocumentationLedgerPaths.add(liveCodexLearningWorkflowGuideRelativePath);
   assert.deepEqual(
     documentationLedgerPaths,
     [...expectedDocumentationLedgerPaths].sort(comparePaths),

@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Clarified the learner-authorized live-learning boundary: Atlas remains a
+  local-first course portal, while designated platform-hosted Codex chats now
+  have distinct Teaching Assistant oral-defense and Study Partner discussion
+  roles. Their copyable prompts require readable equation/code whiteboards and
+  may create at most one explicitly configured and verified Notion session note
+  per substantive session, never raw voice,
+  credentials, sensitive data, or off-record material. Documentation and tests
+  explicitly retain the boundary that Atlas does not control voice, microphone,
+  live rendering, platform retention, or Notion writes.
 - Hardened all ten non-promoting legacy structural packets so every declared
   session forward artifact now resolves to a typed `session-output` pointer at
   a visible H3 inside its matching workbook session. The validator rejects an

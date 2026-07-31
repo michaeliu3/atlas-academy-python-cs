@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "workflowVersion": "v1",
+  "kind": "atlas-live-codex-learning-workflow",
+  "title": "Atlas live Codex learning workflow",
+  "purpose": "Define the bounded, learner-authorized role, whiteboard, and concise-session-note behavior for the two user-designated Codex learning chats without granting the Atlas portal voice, transcript, or Notion-write capability.",
+  "delivery": {
+    "portalRuntimeIntegration": "none",
+    "chatSurface": "user-designated-platform-chat",
+    "defaultRecordMode": "keep-local",
+    "enabledRecordMode": "configured-notion-session-note",
+    "requiredActivation": [
+      "the exact enabled record mode is selected",
+      "this is the designated Teaching Assistant or Study Partner chat",
+      "the configured private Notion destination is reachable",
+      "a substantive session has ended or the learner asks for its concise summary"
+    ],
+    "writeCadence": "at-most-one-concise-note-per-substantive-session",
+    "learnerGuidePath": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md"
+  },
+  "roles": [
+    {
+      "id": "teaching-assistant",
+      "liveResponsibility": "first-principles teaching and the supportive post-module oral defense",
+      "recordFocus": "oral-defense prompt, repair, transfer, uncertainty, and constructive next bridge"
+    },
+    {
+      "id": "study-partner",
+      "liveResponsibility": "non-grading concept discussion, retrieval, rehearsal, and handoff preparation",
+      "recordFocus": "discussion, rehearsal, uncertainty, and focused Teaching Assistant handoff"
+    }
+  ],
+  "whiteboardProtocol": {
+    "required": [
+      "supported display math with defined symbols",
+      "language-labelled fenced code with explicit state traces",
+      "prose or ASCII fallback for math, code, and diagrams",
+      "no speech-only or visual-only explanation"
+    ]
+  },
+  "privacyBoundary": {
+    "excludedFromRecords": [
+      "raw voice recordings",
+      "full chat transcripts",
+      "credentials, keys, or tokens",
+      "sensitive personal data",
+      "off-record material"
+    ],
+    "forbiddenClaims": [
+      "portal control of voice, microphone, live rendering, platform retention, or Notion writes",
+      "a note was saved when configured Notion access is unavailable"
+    ]
+  },
+  "learnerControls": [
+    "pause records",
+    "off-record",
+    "correct a saved note",
+    "delete a saved note"
+  ],
+  "claimBoundary": {
+    "manualPlatformAcceptanceRequired": true,
+    "configuredWriteClaimRequiresEvidence": true,
+    "noPassFail": true
+  }
+}

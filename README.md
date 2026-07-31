@@ -17,7 +17,8 @@ a defended capstone.
 
 ## Learner experience
 
-The deployed portal is the primary learner interface. It contains:
+The deployed portal is the general learner interface for independent reading and
+interactive course work. It contains:
 
 - accessible, responsive HTML workbooks and visual studios;
 - prediction-before-reveal investigations and confidence-aware diagnostics;
@@ -28,10 +29,15 @@ The deployed portal is the primary learner interface. It contains:
   conversational oral defenses, and retrieval schedules.
 
 The deployed [Learning Partners](/learning-partners) page provides separate,
-copyable startup packages for a Teaching Assistant and a Study Partner. They
-have intentionally different jobs: the TA repairs models and reviews evidence;
-the Study Partner runs short Socratic retrieval/rehearsal rounds. Neither role
-assigns a pass/fail verdict or exports a record without learner approval.
+copyable startup packages for a Teaching Assistant and a Study Partner. The
+learner's designated, voice-enabled Codex chats are the primary guided-learning
+surface: the TA repairs models and conducts supportive oral defenses; the Study
+Partner runs live Socratic retrieval/rehearsal rounds. Neither role assigns a
+pass/fail verdict. Atlas does not control platform voice, microphone access,
+rendering, or transcript retention. After explicit configuration and manual
+platform verification, a learner-authorized Codex-to-Notion setup may create
+one concise structured note per substantive session; the portal itself remains
+local-first. See [the live Codex learning workflow](docs/LIVE_CODEX_LEARNING_WORKFLOW.md).
 
 The course privileges reading unfamiliar code, modelling, debugging,
 architectural reasoning, reviewing AI-generated changes, and evidence over
@@ -54,10 +60,12 @@ published-content path, pace selector, bridge and catch-up rules, minimum
 evidence, and the authoring/preview boundary.
 
 Each currently published, non-preview workbook ends with a short constructive
-oral defense: GPT Live Chat is the preferred surface when available, with an
-equivalent text route. It evaluates models, reasoning, boundaries, transfer,
-and reflection—not speech speed or a scripted performance. Preview and
-authoring-only modules are not represented as having completed learner flows.
+oral defense: a designated voice-enabled Teaching Assistant chat is the
+preferred platform surface when available, with an equivalent text route. The
+visible chat must retain readable equations, code, and prose fallbacks. It
+evaluates models, reasoning, boundaries, transfer, and reflection—not speech
+speed or a scripted performance. Preview and authoring-only modules are not
+represented as having completed learner flows.
 
 | Days | Focus |
 |---|---|
