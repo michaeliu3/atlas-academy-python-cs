@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Added M32's authoring-only primary-source research ledger for Systems
+  Languages, Scientific Python, and Accelerators. It connects CPython/native
+  boundaries, buffers and arrays, compilation, CUDA/HIP execution, autodiff,
+  precision, and reproducible measurement to the canonical six-session bridge
+  with claim, assumption, counterexample, reuse, and hardware-scope limits.
+  It does not set M32's canonical source map or release state, change the
+  learner route, or supply a workbook, contract, approval, benchmark, studio,
+  deployment, or learner-mastery claim.
 - Made the unified v3 registry the sole M31–M36 review/promotion authority.
   The retained advanced-v1 record now validates only frozen authoring inputs,
   pending-review boundaries, and bridge topology; it cannot enter
