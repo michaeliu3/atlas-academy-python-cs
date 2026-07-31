@@ -31,6 +31,16 @@ actually published.
   whose four required jobs checked merge candidate `1937d0d`. This is bounded
   source-head/merge-candidate validation evidence, not a GitHub Release,
   private deployment, course completion, or a security-clean claim.
+- Added M28's non-promoting structural packet: 36 typed local anchors now bind
+  its six-session linear-algebra spine, bounded studio/model artifacts, source
+  route, diagnostic, dossier, oral-defense, TA, and Study Partner surfaces.
+  Its historical rigor, code/design, source, visual/text, and diagnostic
+  ambiguities remain explicitly unresolved; this does not change publication
+  or human-review state.
+- Added a small deterministic M31-S01/S02 constrained-quadratic authoring
+  fixture and teaching tests. It makes objective, gradient, feasibility, and a
+  constrained-stationarity counterexample inspectable while M31 remains
+  authoring-only with no learner route, studio, review, or release claim.
 - Added a lifecycle-aware advanced-module contract registry, initially for M31
   only. It resolves 15 Git-tracked planning/research inputs, verifies the
   six-session prerequisite spine and S01–S10/C01–C08 coverage, and explicitly

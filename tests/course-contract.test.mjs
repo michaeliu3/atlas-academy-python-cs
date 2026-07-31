@@ -45,7 +45,7 @@ test("the lifecycle-aware advanced contract validates M31 authoring evidence wit
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 15,
+    resolvedContractInputs: 17,
   });
   assert.equal(report.modules[0].moduleId, "m31");
   assert.equal(report.modules[0].publicationEffect, "none");
@@ -237,7 +237,7 @@ test("the v1 contract registry covers every legacy published workbook structural
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 15,
+    resolvedContractInputs: 17,
   });
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
@@ -247,8 +247,8 @@ test("the v1 contract registry covers every legacy published workbook structural
     publicationChanges: 0,
   });
   assert.deepEqual(report.legacyPackets?.summary, {
-    structuralCandidates: 2,
-    resolvedPointers: 71,
+    structuralCandidates: 3,
+    resolvedPointers: 107,
     humanApprovals: 0,
     publicationChanges: 0,
   });

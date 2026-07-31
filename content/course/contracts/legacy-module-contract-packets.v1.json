@@ -179,6 +179,91 @@
         {"id": "m30-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module30_reference.py", "public/downloads/test_module30_reference.py"]},
         {"id": "m30-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m28",
+      "packetId": "m28-linear-algebra-stability-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m17", "m27"],
+        "forwardModuleId": "m29",
+        "masteryGateId": "mathematics",
+        "studioId": "linear-algebra-stability"
+      },
+      "workbookPath": "content/modules/28_linear_algebra_numerical_stability_representation.md",
+      "sourceMapPath": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module28_linear_algebra_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m28-session-1", "usesPrerequisiteModuleIds": ["m17", "m27"], "forwardArtifactId": "m28-coordinate-contract"},
+        {"sessionNumber": 2, "pointerId": "m28-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m28-projection-residual-trace"},
+        {"sessionNumber": 3, "pointerId": "m28-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m28-spectral-assumption-card"},
+        {"sessionNumber": 4, "pointerId": "m28-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m28-conditioning-stability-record"},
+        {"sessionNumber": 5, "pointerId": "m28-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m28-tensor-gradient-contract"},
+        {"sessionNumber": 6, "pointerId": "m28-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m28-representation-stability-dossier"}
+      ],
+      "pointers": [
+        {"id": "m28-course-map", "roles": ["prerequisite-map", "forward-handoff"], "label": "Canonical prerequisite and forward map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "12-prerequisite-and-forward-map"}},
+        {"id": "m28-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "3-session-1--vectors-spaces-coordinates-rank-and-lost-directions"}},
+        {"id": "m28-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "4-session-2--inner-products-orthogonality-projection-and-least-squares"}},
+        {"id": "m28-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "5-session-3--eigenstructure-symmetric-maps-psd-matrices-and-the-spectral-theorem"}},
+        {"id": "m28-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "6-session-4--svd-low-rank-approximation-conditioning-and-stable-computation"}},
+        {"id": "m28-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "7-session-5--tensors-matrix-calculus-and-the-representation-to-computation-boundary"}},
+        {"id": "m28-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "8-session-6--pca-from-variance-and-low-rank-approximation-representation-dossier"}},
+        {"id": "m28-first-principle", "roles": ["first-principles"], "label": "Vector-space first principle", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "first-principle-a-vector-space-is-a-promise-about-allowed-combinations"}},
+        {"id": "m28-definition", "roles": ["definition"], "label": "Span, independence, basis, and dimension", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "31-span-independence-basis-and-dimension"}},
+        {"id": "m28-assumption", "roles": ["assumption"], "label": "Normal-equation boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "65-the-normal-equations-amplification-boundary"}},
+        {"id": "m28-derivation", "roles": ["derivation-proof"], "label": "Least-squares residual derivation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "43-least-squares-derives-from-residual-orthogonality"}},
+        {"id": "m28-counterexample", "roles": ["counterexample"], "label": "Counterexample ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "b-counterexample"}},
+        {"id": "m28-numerical-experiment", "roles": ["numerical-experiment"], "label": "Session 4 numerical experiment", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "session-4-numerical-experiment"}},
+        {"id": "m28-code-reading", "roles": ["code-reading"], "label": "Session 1 code-reading task", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "session-1-code-reading-task"}},
+        {"id": "m28-debug", "roles": ["debugging"], "label": "Debug ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "f-debug"}},
+        {"id": "m28-design", "roles": ["design"], "label": "Design ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "g-design"}},
+        {"id": "m28-prediction", "roles": ["prediction"], "label": "Prediction before reveal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "session-2-prediction-before-reveal"}},
+        {"id": "m28-transfer", "roles": ["transfer", "oral-transfer"], "label": "Transfer ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "h-transfer"}},
+        {"id": "m28-source-cards", "roles": ["source-rationale", "stable-learner-link"], "label": "Recommended source set with learner links", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module28_linear_algebra_source_audit_addendum.md", "headingAnchor": "recommended-source-set"}},
+        {"id": "m28-claim-linkage", "roles": ["claim-linkage"], "label": "Source-to-session authoring route", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md", "headingAnchor": "source-to-session-authoring-route"}},
+        {"id": "m28-license-route", "roles": ["license-reuse"], "label": "Sources and licensing route", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "16-sources-licensing-and-responsible-reading-route"}},
+        {"id": "m28-visual-studio", "roles": ["visual"], "label": "Linear Algebra and Stability Studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "9-linear-algebra--stability-studio"}},
+        {"id": "m28-text-alternative-candidate", "roles": ["text-alternative"], "label": "Studio text-equivalent candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "9-linear-algebra--stability-studio"}},
+        {"id": "m28-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "11-confidence-aware-diagnostic"}},
+        {"id": "m28-misconception", "roles": ["misconception"], "label": "Misconception repair moments", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "misconception-repair-moments"}},
+        {"id": "m28-retrieval", "roles": ["retrieval"], "label": "Retrieval queue", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "retrieval-queue"}},
+        {"id": "m28-dossier", "roles": ["dossier"], "label": "Representation and Stability Dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "12-atlas-project--representation--stability-dossier"}},
+        {"id": "m28-acceptance", "roles": ["acceptance-criteria"], "label": "Required evidence", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "required-evidence"}},
+        {"id": "m28-rubric", "roles": ["rubric"], "label": "Multi-evidence rubric", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "rubric-multi-evidence-never-passfail"}},
+        {"id": "m28-oral-protocol", "roles": ["oral-protocol"], "label": "Conversational oral-defense protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "14-conversational-oral-defense--m28"}},
+        {"id": "m28-oral-hint", "roles": ["oral-hint"], "label": "TA hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "teaching-assistant--derivation-and-numerical-review-clinic"}},
+        {"id": "m28-oral-counterexample", "roles": ["oral-counterexample"], "label": "Oral counterexample repair", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "misconception-repair-moments"}},
+        {"id": "m28-oral-reflection", "roles": ["oral-reflection"], "label": "Constructive oral reflection", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "invitation-and-agenda-1520-minutes"}},
+        {"id": "m28-oral-summary", "roles": ["oral-summary"], "label": "Learner-controlled evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "end-of-defense-evidence-summary"}},
+        {"id": "m28-ta", "roles": ["ta"], "label": "TA derivation and numerical-review clinic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "teaching-assistant--derivation-and-numerical-review-clinic"}},
+        {"id": "m28-study-partner", "roles": ["study-partner"], "label": "Study Partner rehearsal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "headingAnchor": "study-partner--geometry-and-code-reading-rehearsal"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-course-map"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-session-1", "m28-session-2", "m28-session-3", "m28-session-4", "m28-session-5", "m28-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-definition", "m28-assumption", "m28-derivation", "m28-counterexample", "m28-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-code-reading", "m28-debug", "m28-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-source-cards", "m28-claim-linkage", "m28-license-route"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-visual-studio", "m28-text-alternative-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-diagnostic", "m28-misconception"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-dossier", "m28-acceptance", "m28-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-oral-protocol", "m28-oral-hint", "m28-oral-counterexample", "m28-transfer", "m28-oral-reflection", "m28-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m28-course-map"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m28-studio", "kind": "studio", "paths": ["app/LinearAlgebraStabilityStudio.tsx", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m28-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module28_reference.py", "public/downloads/test_module28_reference.py"]},
+        {"id": "m28-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }
