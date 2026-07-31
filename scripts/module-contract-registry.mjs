@@ -5,6 +5,10 @@ import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import {
+  scanMermaidBlocks,
+  validateMermaidAccessibility,
+} from "../lib/mermaid-accessibility.mjs";
+import {
   advancedModuleContractRelativePath,
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
@@ -119,6 +123,12 @@ export const criterionIds = [
   "interaction-reference-model-and-teaching-tests",
   "release-provenance-ci-and-deployment-evidence",
 ];
+
+export const promotionEvidenceRoleRequirements = Object.freeze({
+  "source-ledger": ["source-ledger"],
+  "accessible-visual-text-alternative": ["course-content", "test"],
+  "release-provenance-ci-and-deployment-evidence": ["provenance"],
+});
 export const humanReviewDimensions = [
   "first-principles-quality",
   "rigor-and-counterexamples",
@@ -764,8 +774,9 @@ function validateAdvancedPlan(moduleEntry, graphModule, bridge, manifestById, er
   }
 }
 
-function requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport, errors) {
+export function promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceReport) {
   const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
+  const errors = [];
   const entryFor = (criterionId) => evidenceReport.evidenceByCriterion.get(criterionId);
   const rolesFor = (criterionId) => new Set(
     (entryFor(criterionId)?.resolvedInputs ?? []).map(({ role }) => role),
@@ -785,8 +796,9 @@ function requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport,
   if (sessionInputs.length < 6) {
     errors.push(`${label} criterion six-connected-sessions must bind six course-content session headings.`);
   }
-  requireRoles("source-ledger", ["source-ledger"]);
-  requireRoles("release-provenance-ci-and-deployment-evidence", ["provenance"]);
+  for (const [criterionId, roles] of Object.entries(promotionEvidenceRoleRequirements)) {
+    requireRoles(criterionId, roles);
+  }
   if (graphModule.studioId) {
     requireRoles("interaction-reference-model-and-teaching-tests", [
       "source-code",
@@ -796,9 +808,96 @@ function requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport,
   } else {
     requireRoles("interaction-reference-model-and-teaching-tests", ["course-content"]);
   }
+  return errors;
 }
 
-async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, errors) {
+function requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport, errors) {
+  errors.push(...promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceReport));
+}
+
+function moduleScopedVisualContentPath(graphModule, repositoryPath) {
+  if (
+    typeof repositoryPath !== "string" ||
+    !repositoryPath.startsWith("content/") ||
+    !repositoryPath.endsWith(".md")
+  ) {
+    return false;
+  }
+  const number = String(graphModule.number);
+  const moduleToken = new RegExp(
+    `(?:^|[/_-])(?:m0?${number}|module0?${number}|0?${number})(?=[/_.-]|$)`,
+    "iu",
+  );
+  return moduleToken.test(repositoryPath);
+}
+
+/**
+ * A review-ready or verified record must bind and scan the promoted module's
+ * own Markdown visual content. Role labels alone are not enough: a different
+ * module's clean fixture cannot stand in for the actual workbook.
+ */
+export async function promotionVisualAlternativeErrors({
+  siteRoot,
+  moduleEntry,
+  graphModule,
+  manifestById,
+  evidenceReport,
+}) {
+  const label = `Module ${moduleEntry.moduleId} reviewed visual evidence`;
+  const errors = [];
+  const visualEvidence = evidenceReport.evidenceByCriterion.get(
+    "accessible-visual-text-alternative",
+  );
+  const contentPaths = [...new Set(
+    (visualEvidence?.resolvedInputs ?? [])
+      .filter(
+        ({ role, path }) => role === "course-content" && typeof path === "string" && path.endsWith(".md"),
+      )
+      .map(({ path }) => path),
+  )];
+  const manifestModule = manifestById.get(moduleEntry.moduleId);
+  const canonicalWorkbookPath = manifestModule?.filename
+    ? `content/modules/${manifestModule.filename}`
+    : null;
+
+  if (contentPaths.length === 0) {
+    errors.push(`${label} must bind module-scoped course-content Markdown for its Mermaid alternatives.`);
+    return { contentPaths, errors };
+  }
+  if (canonicalWorkbookPath && !contentPaths.includes(canonicalWorkbookPath)) {
+    errors.push(`${label} must bind canonical workbook ${canonicalWorkbookPath}.`);
+  }
+  for (const contentPath of contentPaths) {
+    if (!moduleScopedVisualContentPath(graphModule, contentPath)) {
+      errors.push(`${label} may not use unrelated course content: ${contentPath}.`);
+    }
+  }
+  if (errors.length > 0) return { contentPaths, errors };
+
+  const blocks = [];
+  for (const contentPath of contentPaths) {
+    try {
+      const markdown = await readFile(resolve(siteRoot, contentPath), "utf8");
+      blocks.push(...scanMermaidBlocks(markdown, { sourcePath: contentPath }));
+    } catch (error) {
+      errors.push(
+        `${label} could not scan ${contentPath}: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+  if (errors.length === 0) {
+    try {
+      validateMermaidAccessibility(blocks, { requireComplete: true });
+    } catch (error) {
+      errors.push(
+        `${label} must have complete Mermaid text alternatives: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+  return { contentPaths, errors };
+}
+
+async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, manifestById, errors) {
   const label = `Module ${moduleEntry.moduleId}`;
   const evidencePath = recordReference(
     moduleEntry.evidenceRecord,
@@ -886,6 +985,14 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, erro
     }
   }
   requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport, errors);
+  const visualEvidence = await promotionVisualAlternativeErrors({
+    siteRoot,
+    moduleEntry,
+    graphModule,
+    manifestById,
+    evidenceReport,
+  });
+  errors.push(...visualEvidence.errors);
   return {
     evidencePath,
     reviewPath,
@@ -900,7 +1007,13 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, erro
 }
 
 async function validatePromotableState(siteRoot, moduleEntry, graphModule, manifestById, errors) {
-  const promotionEvidence = await resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, errors);
+  const promotionEvidence = await resolvePromotionEvidence(
+    siteRoot,
+    moduleEntry,
+    graphModule,
+    manifestById,
+    errors,
+  );
   if (moduleEntry.contractState === "review-ready") {
     if (
       graphModule.state.lifecycle !== "authoring-only" ||

@@ -3,6 +3,9 @@ import test from "node:test";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import {
   loadModuleContractRegistry,
+  promotionEvidenceRoleErrors,
+  promotionEvidenceRoleRequirements,
+  promotionVisualAlternativeErrors,
   validateModuleContractRegistry,
 } from "../scripts/module-contract-registry.mjs";
 
@@ -36,6 +39,78 @@ test("the unified v3 module-contract registry covers the canonical 36-module gra
     byId.get("m31").criteria.find(({ id }) => id === "interaction-reference-model-and-teaching-tests").status,
     "pointer-present",
   );
+});
+
+test("a promotion cannot bypass authored visual-alternative content and its test evidence", () => {
+  assert.deepEqual(
+    promotionEvidenceRoleRequirements["accessible-visual-text-alternative"],
+    ["course-content", "test"],
+  );
+});
+
+test("promotion evidence must bind and scan the module's own Mermaid content", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleContractRegistry(),
+  ]);
+  const baseline = await validateModuleContractRegistry(graph, registry);
+  const graphById = new Map(graph.modules.map((courseModule) => [courseModule.id, courseModule]));
+  const manifestById = new Map(baseline.manifest.modules.map((courseModule) => [courseModule.id, courseModule]));
+  const visualCriterion = "accessible-visual-text-alternative";
+  const visualEvidence = (path, includeTest = true) => ({
+    evidenceByCriterion: new Map([
+      [
+        visualCriterion,
+        {
+          resolvedInputs: [
+            { kind: "file", role: "course-content", path, locator: null },
+            ...(includeTest
+              ? [{ kind: "file", role: "test", path: "tests/mermaid-accessibility.test.mjs", locator: null }]
+              : []),
+          ],
+        },
+      ],
+    ]),
+  });
+
+  const m01 = graphById.get("m01");
+  const complete = await promotionVisualAlternativeErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m01" },
+    graphModule: m01,
+    manifestById,
+    evidenceReport: visualEvidence("content/modules/01_values_state_execution.md"),
+  });
+  assert.deepEqual(complete.errors, []);
+
+  const missingTest = promotionEvidenceRoleErrors(
+    { moduleId: "m01" },
+    m01,
+    visualEvidence("content/modules/01_values_state_execution.md", false),
+  );
+  assert.ok(
+    missingTest.some((error) => error.includes("accessible-visual-text-alternative must include a test input")),
+  );
+
+  const unrelated = await promotionVisualAlternativeErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m01" },
+    graphModule: m01,
+    manifestById,
+    evidenceReport: visualEvidence("content/modules/02_functions_recursion_induction.md"),
+  });
+  assert.ok(unrelated.errors.some((error) => error.includes("canonical workbook")));
+  assert.ok(unrelated.errors.some((error) => error.includes("unrelated course content")));
+
+  const m02 = graphById.get("m02");
+  const incomplete = await promotionVisualAlternativeErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m02" },
+    graphModule: m02,
+    manifestById,
+    evidenceReport: visualEvidence("content/modules/02_functions_recursion_induction.md"),
+  });
+  assert.ok(incomplete.errors.some((error) => error.includes("complete Mermaid text alternatives")));
 });
 
 test("the registry rejects missing modules, forged audit evidence, and a direct preview-to-verified jump", async () => {

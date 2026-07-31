@@ -58,9 +58,9 @@
       "title": "Values, State, and Execution",
       "summary": "Advanced Python, algorithms, databases, concurrency, and distributed systems all depend on one idea: a program transforms state according to rules. Bugs multiply when “variable,” “value,” “object,” and “memory” are treated as synonyms.",
       "arcId": "arc-i",
-      "wordCount": 4241,
+      "wordCount": 4455,
       "estimatedMinutes": 21,
-      "sourceHash": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec",
+      "sourceHash": "bf666405d26ebba75b7452263c3f559a1e09f54bfeee17f22d67c3df19d2e63e",
       "id": "m01",
       "state": {
         "lifecycle": "learner-material-ready",

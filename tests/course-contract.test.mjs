@@ -45,7 +45,7 @@ test("the lifecycle-aware advanced contract validates M31 authoring evidence wit
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 17,
+    resolvedContractInputs: 18,
   });
   assert.equal(report.modules[0].moduleId, "m31");
   assert.equal(report.modules[0].publicationEffect, "none");
@@ -247,13 +247,21 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   assert.equal(report.summary.legacyBaselineModules, 30);
   assert.equal(report.summary.verifiedModules, 0);
   assert.equal(report.summary.authoringOnlyModules, 6);
+  assert.deepEqual(report.mermaidAlternatives?.summary, {
+    totalBlocks: 245,
+    completeBlocks: 4,
+    incompleteBlocks: 241,
+  });
+  assert.ok(
+    report.warnings.some((warning) => warning.includes("241 Mermaid visual(s)")),
+  );
   assert.deepEqual(report.advancedContract?.summary, {
     authoringOnlyContracts: 1,
     plannedContracts: 1,
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 17,
+    resolvedContractInputs: 18,
   });
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
@@ -371,6 +379,10 @@ test("complete validation remains fail-closed until all modules are verified and
       assert.match(
         error.message,
         /Complete contract validation requires m26 to be Core-open rather than preview-only/u,
+      );
+      assert.match(
+        error.message,
+        /Reader Mermaid text alternatives must validate before a complete-course claim/u,
       );
       return true;
     },

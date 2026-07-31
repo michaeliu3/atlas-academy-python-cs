@@ -3,8 +3,8 @@
 `pnpm test:browser` builds the Atlas portal, starts that production artifact
 locally, and runs focused Chromium acceptance checks. The checks use
 `@axe-core/playwright` without rule exclusions or a baseline, and cover the
-landing page, 60-day route, diagnostic, a Mermaid-heavy reader, and the M18,
-M19, M22, and M30 learner routes. They also exercise the skip link, an
+landing page, 60-day route, diagnostic, a Mermaid-heavy reader, and the M1,
+M18, M22, M25, and M30 learner routes. They also exercise the skip link, an
 operating-systems studio keyboard tab sequence, prediction-and-confidence
 gates that protect explanation reveal, the diagnostic's explicit
 copy/print-review control, and M19's rule that a changed evidence brief

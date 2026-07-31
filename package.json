@@ -12,6 +12,8 @@
     "validate:course:strict": "node scripts/validate-course.mjs --strict",
     "validate:course:complete": "node scripts/validate-course.mjs --complete",
     "validate:course:inputs": "node scripts/validate-course.mjs --require-git-tracked",
+    "validate:mermaid-alternatives": "node scripts/validate-mermaid-alternatives.mjs",
+    "validate:mermaid-alternatives:complete": "node scripts/validate-mermaid-alternatives.mjs --require-complete",
     "validate:browser-progress": "node scripts/browser-progress-surface-policy.mjs",
     "validate:built-downloads": "node scripts/validate-built-downloads.mjs",
     "validate:performance-budget": "node scripts/validate-client-performance-budget.mjs",

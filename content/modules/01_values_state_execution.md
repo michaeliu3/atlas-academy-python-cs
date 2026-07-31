@@ -68,6 +68,9 @@ This model will later scale:
 ## Visual map of the module
 
 ```mermaid
+%% atlas-diagram-id: m01-evaluation-binding-transition
+%% atlas-diagram-title: From source expression to a tested state transition
+%% atlas-diagram-alt: An expression is evaluated in an environment, objects are found or created, and names are bound to them. Rebinding changes the environment; mutation changes an object that every alias can observe. Both lead to observable state, whose contract and invariant are then tested.
 flowchart LR
     A["Source expression"] --> B["Evaluate in an environment"]
     B --> C["Find or create objects"]
@@ -96,6 +99,9 @@ current = {"tags": ["databases"]}
 After the first three lines:
 
 ```mermaid
+%% atlas-diagram-id: m01-alias-graph-before-mutation
+%% atlas-diagram-title: Three names share a dictionary before mutation
+%% atlas-diagram-alt: The names original and current both point to one dictionary. The name history points to a list that contains that same dictionary. The dictionary points to one tags list containing python, so every route reaches the same mutable tags object.
 flowchart LR
     N1["name: original"] --> O1["dictionary object"]
     N2["name: current"] --> O1
@@ -107,6 +113,9 @@ flowchart LR
 Appending `"algorithms"` mutates the tags list. Every route to that list observes the change:
 
 ```mermaid
+%% atlas-diagram-id: m01-alias-graph-after-append
+%% atlas-diagram-title: Shared tags list after an append mutation
+%% atlas-diagram-alt: Original and current still point to one dictionary, while history points to a list containing it. That dictionary points to the single tags list, now containing python and algorithms, so all aliases observe the appended tag.
 flowchart LR
     N1["original"] --> O1["dictionary"]
     N2["current"] --> O1
@@ -192,6 +201,9 @@ The test is evidence for one frame condition: later caller mutation does not cha
 ## Misconception map
 
 ```mermaid
+%% atlas-diagram-id: m01-misconception-repairs
+%% atlas-diagram-title: Precise repairs for five state-model misconceptions
+%% atlas-diagram-alt: Five tempting beliefs are each replaced with a more precise model: names resolve to object bindings, assignment normally changes a binding, parameters bind supplied objects, shallow copies only separate an outer container, and immutability is an object-specific observable-state contract.
 flowchart TD
     M1["A variable is a box containing a value"] --> R1["Useful first picture, but incomplete"]
     R1 --> P1["Precise model: a name is resolved to an object binding"]

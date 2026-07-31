@@ -128,6 +128,7 @@ test("the Mermaid SVG allowlist removes active, embedded, and external content",
 test("a rendered Mermaid fixture retains readable labels and inert geometry", async () => {
   const markup = await renderSafeMermaidSvg({
     label: "Concept diagram: a safe route",
+    describedById: "m99-safe-route-alternative",
     renderId: "atlas-rendered-fixture",
     source: `flowchart LR
       A["First concept<br/>a value"] --> B{"Decision?"}
@@ -138,6 +139,7 @@ test("a rendered Mermaid fixture retains readable labels and inert geometry", as
   assert.equal(svg.localName, "svg");
   assert.equal(svg.getAttribute("role"), "img");
   assert.equal(svg.getAttribute("aria-label"), "Concept diagram: a safe route");
+  assert.equal(svg.getAttribute("aria-describedby"), "m99-safe-route-alternative");
   assert.match(svg.textContent, /First concept/u);
   assert.match(svg.textContent, /a value/u);
   assert.match(svg.textContent, /Decision\?/u);

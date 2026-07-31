@@ -257,6 +257,24 @@ review, or learner understanding. Those require later, separate evidence.
 ## Accessibility
 
 - Provide meaningful text for every diagram and color distinction.
+- For every Mermaid visual, place all three metadata lines immediately inside
+  its fenced block, before the Mermaid syntax:
+
+  ~~~mermaid
+  %% atlas-diagram-id: m01-example-route
+  %% atlas-diagram-title: Short reader-facing title
+  %% atlas-diagram-alt: A concise prose explanation of the relationship the visual teaches.
+  flowchart LR
+    A["Input"] --> B["Checked result"]
+  ~~~
+
+  The ID is a unique lower-case kebab-case visual identifier. The title names
+  the instructional relationship, while the alternative explains it in prose;
+  raw Mermaid source is a technical supplement, not an equivalent. Run
+  `pnpm validate:mermaid-alternatives` during migration and
+  `pnpm validate:mermaid-alternatives:complete` only when every reader visual
+  has been retrofitted. A module cannot use incomplete visual metadata as
+  promotion evidence.
 - Use native controls, visible focus, semantic headings, keyboard paths, and
   readable narrow-screen layouts.
 - Keep prediction/reveal interaction optional; the workbook must contain the

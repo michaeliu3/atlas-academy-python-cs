@@ -158,13 +158,27 @@ for (const route of [
   });
 }
 
-test("Module 6 renders a labelled concept diagram and technical fallback", async ({
+test("Module 1 renders an authored text alternative tied to its concept diagram", async ({
   page,
 }) => {
-  await page.goto("/modules/06-representation-memory-sequences-linked");
+  await page.goto("/modules/01-values-state-execution");
   await expectRenderedMermaidDiagram(page);
-  const diagram = page.locator(".mermaid-figure svg[role='img']").first();
-  await expect(diagram).toHaveAttribute("aria-label", /concept diagram/i);
+  const figure = page.locator(
+    'figure[data-atlas-visual-id="m01-evaluation-binding-transition"]',
+  );
+  const diagram = figure.locator("svg[role='img']");
+  const alternative = figure.locator(".diagram-alternative");
+  await expect(alternative).toContainText(
+    "An expression is evaluated in an environment, objects are found or created",
+  );
+  await expect(alternative).toHaveAttribute(
+    "id",
+    "m01-evaluation-binding-transition-alternative",
+  );
+  await expect(diagram).toHaveAttribute(
+    "aria-describedby",
+    "m01-evaluation-binding-transition-alternative",
+  );
   await expect(
     page.getByText("Diagram source (technical fallback)").first(),
   ).toBeVisible();

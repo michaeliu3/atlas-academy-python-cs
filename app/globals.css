@@ -4975,6 +4975,22 @@ main.module-library-shell {
   padding: 0.8rem 1rem;
 }
 
+.diagram-alternative {
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0.9rem 1rem;
+}
+
+.diagram-alternative strong {
+  color: var(--plum);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .diagram-source {
   border-top: 1px solid var(--line);
   padding: 0 1rem;

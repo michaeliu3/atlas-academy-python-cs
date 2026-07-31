@@ -1592,6 +1592,12 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /role="progressbar"/);
   assert.match(html, /aria-valuemin="0"/);
   assert.match(html, /aria-valuemax="100"/);
+  assert.match(html, /Text alternative:/);
+  assert.match(
+    html,
+    /An expression is evaluated in an environment, objects are found or created/u,
+  );
+  assert.match(html, /m01-evaluation-binding-transition-alternative/);
   assert.match(html, /Diagram source \(technical fallback\)/);
   assert.doesNotMatch(html, /Diagram source and text fallback/);
   assert.match(html, /class="lesson-table-scroll"/);

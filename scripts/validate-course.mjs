@@ -44,6 +44,7 @@ import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
+import { validateReaderMermaidAlternatives } from "./validate-mermaid-alternatives.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -113,6 +114,7 @@ export async function validateCourseContracts(
   let manualLearningRecordWorkflow = null;
   let liveCodexLearningWorkflow = null;
   let browserProgressSurfacePolicy = null;
+  let mermaidAlternatives = null;
   const releaseInputPaths = new Set([
     graphPath,
     moduleContractRegistryPath(siteRoot),
@@ -235,6 +237,22 @@ export async function validateCourseContracts(
     );
   }
 
+  try {
+    mermaidAlternatives = await validateReaderMermaidAlternatives({
+      siteRoot,
+      requireComplete: complete,
+    });
+    if (mermaidAlternatives.summary.incompleteBlocks > 0) {
+      warnings.push(
+        `${mermaidAlternatives.summary.incompleteBlocks} Mermaid visual(s) lack complete authored text alternatives; these cannot satisfy a future promotion review.`,
+      );
+    }
+  } catch (error) {
+    errors.push(
+      `Reader Mermaid text alternatives must validate before a complete-course claim: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
   if (contractRegistry) {
     for (const manifestModule of contractRegistry.manifest.modules) {
       releaseInputPaths.add(resolve(siteRoot, "content", "modules", manifestModule.filename));
@@ -278,6 +296,7 @@ export async function validateCourseContracts(
     manualLearningRecordWorkflow,
     liveCodexLearningWorkflow,
     browserProgressSurfacePolicy,
+    mermaidAlternatives,
     summary: contractRegistry.summary,
   };
 }

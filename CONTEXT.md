@@ -44,6 +44,12 @@ _Avoid_: reader access, grade, automatic completion
 The one module document selected by the canonical manifest for a module.
 _Avoid_: related notes, nearby Markdown file
 
+**Diagram text alternative**:
+An authored, concise prose explanation of the instructional relationship in a
+specific visual. It is rendered visibly and associated with that visual for
+assistive technology; raw Mermaid syntax is only a technical supplement.
+_Avoid_: source fallback, decorative caption, graph label dump
+
 **Evidence pointer**:
 A bounded reference to a visible local workbook or source-map heading for one
 contract criterion. It is structural evidence, not an approval.
