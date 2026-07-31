@@ -49,6 +49,10 @@
       "sha256": "2e619babe511bf26a958da31d0fa2cd297375cc85ea945ab315ea65d60f15fd6"
     },
     {
+      "path": "content/course/module-companion-guides.v1.json",
+      "sha256": "d939dbef6db9d3034302e1c24335885fd6a5c448faae9cb49b631ee64b6717d9"
+    },
+    {
       "path": "content/course/release-evidence-policy.v1.json",
       "sha256": "1e9e662e99fb949497450ac1aaefb0eddb7ff594d9ce84c2a0c7d5990d728b4f"
     },
@@ -302,7 +306,7 @@
     },
     {
       "path": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md",
-      "sha256": "4ec039cecd1547796a07298682d5fe32c4442bda650891c1fd89d1da40f1b684"
+      "sha256": "9c0c7c2527494a4a021ac29197fbb5d137eb0b0b2849ab1f80d405735d451e9c"
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",

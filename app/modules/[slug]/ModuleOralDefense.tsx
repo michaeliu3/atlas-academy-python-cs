@@ -2,19 +2,16 @@
 
 import { useState } from "react";
 import type { CourseModule } from "@/lib/module-catalog";
-import {
-  getOralDefenseGuide,
-  lensInstruction,
-  type OralDefenseGuide,
-} from "@/lib/oral-defense-guide";
+import type { ModuleCompanionPackage } from "@/lib/module-companion-package";
 import { ModuleTextOralDefense } from "./ModuleTextOralDefense";
 import styles from "./ModuleOralDefense.module.css";
 
 type ModuleOralDefenseProps = {
   courseModule: CourseModule;
+  companion: ModuleCompanionPackage;
 };
 
-type CopyState = "idle" | "brief-copied" | "fallback";
+type CopyState = "idle" | "ta-brief-copied" | "partner-brief-copied" | "fallback";
 
 const conversationMoves = [
   {
@@ -44,24 +41,14 @@ const conversationMoves = [
   },
 ] as const;
 
-function liveChatBrief(courseModule: CourseModule, guide: OralDefenseGuide) {
-  return `Act as my encouraging Atlas Academy oral-defense facilitator for Module ${courseModule.number}: ${courseModule.title}.
-
-This is a formative conversation, not a pass/fail exam. The module-specific central model is: ${guide.centralModel}. Ask me to ${guide.traceOrDerivation}. Watch gently for this likely misconception: ${guide.misconception}. Ask me to state the boundary: ${guide.boundary}. End the intellectual work with this transfer: ${guide.transfer}.
-
-Use my designated voice-enabled Teaching Assistant chat if the platform makes it available. Prefer the highest available live quality/reasoning setting that I select, but do not claim control over platform settings. Keep the visible chat as an accessible whiteboard: use supported display math for important equations, define symbols, provide a prose or ASCII fallback if rendering is uncertain, put code in language-labelled fenced blocks, and never rely on speech-only or visual-only explanation.
-
-Begin with a plain-language invitation and the five-move agenda: explain the model; trace or derive; stress a boundary; transfer; choose a next bridge. Adapt one question at a time and wait for my answer before continuing. Include a prediction-before-reveal question and ask, “What would change your mind?” When I expose a misconception, name it constructively, give the smallest useful hint, and let me repair the answer rather than revealing it immediately. ${lensInstruction(guide)}
-
-Evaluate reasoning, assumptions, evidence, counterexample/debugging skill, transfer, and reflection—not speed, accent, polish, or memorized phrasing. Do not ask for personal or private data. At the end, give me a concise evidence summary with: demonstrated models, fragile ideas, one misconception repaired, calibrated confidence, one retrieval prompt, and the smallest next bridge. Keep it local unless I set Record mode to the exact value “configured-notion-session-note”, this is my designated Teaching Assistant chat, its configured private destination is reachable, and I explicitly end this substantive session or ask for the summary. Then create at most one concise structured record, never one per exchange. If I say “pause records” or “off-record”, write nothing until I explicitly re-enable recording. If I request correction or deletion, make that scoped change when access allows and say plainly if it did not occur. Never save raw voice, a full transcript, sensitive personal data, or material I mark off-record. Do not produce a bare pass/fail verdict.`;
-}
-
 export function ModuleOralDefense({
   courseModule,
+  companion,
 }: ModuleOralDefenseProps) {
   const [copyState, setCopyState] = useState<CopyState>("idle");
-  const guide = getOralDefenseGuide(courseModule.number);
-  const prompt = liveChatBrief(courseModule, guide);
+  const guide = companion.guide;
+  const prompt = companion.teachingAssistant.contextPrompt;
+  const studyPartnerPrompt = companion.studyPartner.contextPrompt;
 
   const copyText = async (text: string, successState: CopyState) => {
     try {
@@ -128,31 +115,61 @@ export function ModuleOralDefense({
 
       <div className={styles.actionGrid}>
         <div className={styles.liveCard}>
-          <p className={styles.cardEyebrow}>Live or voice-facilitated route</p>
-          <h3>When a voice-enabled Teaching Assistant chat is available, paste this brief.</h3>
+          <p className={styles.cardEyebrow}>Teaching Assistant · oral-defense context</p>
+          <h3>Use your designated voice-enabled Teaching Assistant chat when it is available.</h3>
           <p>
             The designated Teaching Assistant should ask one question at a
             time, offer hints before answers, keep the visible chat usable as a
             whiteboard, and leave you with evidence—not a performance score.
           </p>
           <button
-            onClick={() => copyText(prompt, "brief-copied")}
+            onClick={() => copyText(prompt, "ta-brief-copied")}
             type="button"
           >
-            {copyState === "brief-copied"
-              ? "Brief copied"
-              : "Copy facilitator brief"}
+            {copyState === "ta-brief-copied"
+              ? "TA context copied"
+              : "Copy Teaching Assistant context"}
           </button>
           <p aria-live="polite" className={styles.copyStatus}>
-            {copyState === "brief-copied" &&
-              "The Teaching Assistant brief is ready to paste into your designated live conversation."}
+            {copyState === "ta-brief-copied" &&
+              "The Teaching Assistant context is ready to paste into your designated live conversation."}
             {copyState === "fallback" &&
               "Copy is unavailable here. Select the detailed text below and paste it into your chat."}
           </p>
           <details className={styles.liveBriefDetails}>
-            <summary>Show the full facilitator brief for manual copying</summary>
-            <pre aria-label="Scrollable full facilitator brief" tabIndex={0}>
+            <summary>Show the full Teaching Assistant context for manual copying</summary>
+            <pre aria-label="Scrollable full Teaching Assistant context" tabIndex={0}>
               <code>{prompt}</code>
+            </pre>
+          </details>
+        </div>
+
+        <div className={styles.liveCard}>
+          <p className={styles.cardEyebrow}>Study Partner · rehearsal context</p>
+          <h3>Use the separate Study Partner chat to make the model explainable first.</h3>
+          <p>
+            This is a low-pressure rehearsal: retrieve, trace, change one
+            premise, and prepare a focused handoff for the Teaching Assistant.
+            It does not administer the formal oral defense.
+          </p>
+          <button
+            onClick={() => copyText(studyPartnerPrompt, "partner-brief-copied")}
+            type="button"
+          >
+            {copyState === "partner-brief-copied"
+              ? "Study Partner context copied"
+              : "Copy Study Partner context"}
+          </button>
+          <p aria-live="polite" className={styles.copyStatus}>
+            {copyState === "partner-brief-copied" &&
+              "The Study Partner context is ready to paste into your separate discussion chat."}
+            {copyState === "fallback" &&
+              "Copy is unavailable here. Select the detailed text below and paste it into your chat."}
+          </p>
+          <details className={styles.liveBriefDetails}>
+            <summary>Show the full Study Partner context for manual copying</summary>
+            <pre aria-label="Scrollable full Study Partner context" tabIndex={0}>
+              <code>{studyPartnerPrompt}</code>
             </pre>
           </details>
         </div>
@@ -161,6 +178,22 @@ export function ModuleOralDefense({
           <ModuleTextOralDefense courseModule={courseModule} guide={guide} />
         </div>
       </div>
+
+      <section className={styles.forwardHandoff} aria-labelledby={`forward-handoff-${courseModule.number}`}>
+        <div>
+          <p className={styles.cardEyebrow}>Canonical forward handoff</p>
+          <h3 id={`forward-handoff-${courseModule.number}`}>
+            {companion.module.declaredForwardHandoff
+              ? `Carry a small evidence card into Module ${companion.module.declaredForwardHandoff.number}.`
+              : "Choose an honest next specialization rather than inventing completion."}
+          </h3>
+        </div>
+        <p>
+          {companion.module.declaredForwardHandoff
+            ? `The academic continuation is Module ${companion.module.declaredForwardHandoff.number}: ${companion.module.declaredForwardHandoff.title}. Bring your model, one uncertainty, and the smallest useful artifact; this is not an automatic route advance or mastery claim.`
+            : "This module has no declared forward module. Keep the model, uncertainty, and artifact available for a learner-chosen specialization or maintenance question."}
+        </p>
+      </section>
 
       <div className={styles.evidence}>
         <div>

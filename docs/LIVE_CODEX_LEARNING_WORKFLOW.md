@@ -32,6 +32,20 @@ voice session, request one display equation and one fenced Python trace, and
 verify that the visible fallback remains readable after the conversation. That
 is platform acceptance evidence, not an Atlas portal test.
 
+## Module-specific follow-on contexts
+
+Set up each designated role once from the portal's **Learning Partners** page.
+After completing a Core-open workbook, its oral-defense panel offers two
+module-specific follow-on contexts: one for the Teaching Assistant's
+supportive defense and one for the Study Partner's rehearsal. Each is derived
+from the canonical course graph's academic prerequisites and declared forward
+handoff, plus a versioned teaching guide for the module.
+
+The packet is a useful conversation starting point, not completion evidence,
+a route unlock, a platform integration, or a claim that the underlying module
+contract has been reviewed. Reference-preview pages do not expose follow-on
+contexts; authoring-only guide content is not shipped into the public reader.
+
 ## Learner-authorized Notion notes
 
 The default portal privacy boundary stays local-first: it does not initiate a

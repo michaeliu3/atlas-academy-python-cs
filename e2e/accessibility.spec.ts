@@ -197,6 +197,58 @@ test("Module 18 retains its workbook and oral-defense route", async ({ page }) =
   ).toBeVisible();
 });
 
+test("Module 1 exposes keyboard-reachable, module-specific companion contexts without opening them on a synthesis preview", async ({
+  page,
+}) => {
+  await page.goto("/modules/01-values-state-execution");
+
+  const taCopy = page.getByRole("button", {
+    name: "Copy Teaching Assistant context",
+  });
+  const studyPartnerCopy = page.getByRole("button", {
+    name: "Copy Study Partner context",
+  });
+
+  await expect(taCopy).toBeVisible();
+  await expect(studyPartnerCopy).toBeVisible();
+  await taCopy.focus();
+  await expect(taCopy).toBeFocused();
+  await studyPartnerCopy.focus();
+  await expect(studyPartnerCopy).toBeFocused();
+  await expect(
+    taCopy.locator("xpath=..").locator("p[aria-live='polite']"),
+  ).toHaveCount(1);
+  await expect(
+    studyPartnerCopy.locator("xpath=..").locator("p[aria-live='polite']"),
+  ).toHaveCount(1);
+  await expect(
+    page.getByRole("heading", { name: /carry a small evidence card into module 2/i }),
+  ).toBeVisible();
+
+  await page
+    .getByText("Show the full Teaching Assistant context for manual copying")
+    .click();
+  await expect(
+    page.getByLabel("Scrollable full Teaching Assistant context"),
+  ).toContainText("accessible whiteboard");
+  await expect(
+    page.getByLabel("Scrollable full Teaching Assistant context"),
+  ).toContainText("display math");
+
+  await page.goto("/modules/25-evidence-grounded-intelligent-systems");
+  await expect(
+    page.getByRole("heading", {
+      name: "Reference access does not advance the Core.",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Copy Teaching Assistant context" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Copy Study Partner context" }),
+  ).toHaveCount(0);
+});
+
 test("the operating-systems studio uses roving tab keyboard navigation", async ({
   page,
 }) => {

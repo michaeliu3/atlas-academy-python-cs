@@ -25,8 +25,9 @@ export default function LearningPartnersPage() {
           <p>
             Atlas is the course portal; your designated Codex chats are the
             live learning surface. Paste each role brief into its separate chat
-            and share only the smallest context needed for the next learning
-            move.
+            once, then use the module-specific follow-on context in each
+            Core-open module&apos;s oral-defense panel. Share only the smallest
+            context needed for the next learning move.
           </p>
         </header>
 

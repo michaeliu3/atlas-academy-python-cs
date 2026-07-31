@@ -37,7 +37,11 @@ pass/fail verdict. Atlas does not control platform voice, microphone access,
 rendering, or transcript retention. After explicit configuration and manual
 platform verification, a learner-authorized Codex-to-Notion setup may create
 one concise structured note per substantive session; the portal itself remains
-local-first. See [the live Codex learning workflow](docs/LIVE_CODEX_LEARNING_WORKFLOW.md).
+local-first. Set up each role once from Learning Partners, then copy the
+current Core-open module's graph-bound follow-on context from its oral-defense
+panel. That packet supports a conversation but is not route progression,
+contract review, or a platform capability claim. See [the live Codex learning
+workflow](docs/LIVE_CODEX_LEARNING_WORKFLOW.md).
 
 The course privileges reading unfamiliar code, modelling, debugging,
 architectural reasoning, reviewing AI-generated changes, and evidence over

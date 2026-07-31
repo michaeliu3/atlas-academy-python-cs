@@ -18,6 +18,11 @@ import {
   validateLiveCodexLearningWorkflow,
 } from "./live-codex-learning-workflow.mjs";
 import {
+  loadModuleCompanionGuides,
+  moduleCompanionGuidesPath,
+  validateModuleCompanionGuides,
+} from "./module-companion-guides.mjs";
+import {
   loadManualLearningRecordWorkflow,
   manualLearningRecordWorkflowPath,
   validateManualLearningRecordWorkflow,
@@ -113,6 +118,7 @@ export async function validateCourseContracts(
   let releaseEvidencePolicy = null;
   let manualLearningRecordWorkflow = null;
   let liveCodexLearningWorkflow = null;
+  let moduleCompanionGuides = null;
   let browserProgressSurfacePolicy = null;
   let mermaidAlternatives = null;
   const releaseInputPaths = new Set([
@@ -122,6 +128,7 @@ export async function validateCourseContracts(
     releaseEvidencePolicyPath(siteRoot),
     manualLearningRecordWorkflowPath(siteRoot),
     liveCodexLearningWorkflowPath(siteRoot),
+    moduleCompanionGuidesPath(siteRoot),
     browserProgressSurfacePolicyPath(siteRoot),
   ]);
 
@@ -224,6 +231,20 @@ export async function validateCourseContracts(
   }
 
   try {
+    moduleCompanionGuides = await validateModuleCompanionGuides(
+      await loadModuleCompanionGuides(siteRoot),
+      { graph, siteRoot },
+    );
+    for (const path of moduleCompanionGuides.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+  } catch (error) {
+    errors.push(
+      `Module companion guides must remain graph-bound before a module-specific Codex brief can be offered: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
     browserProgressSurfacePolicy = await validateBrowserProgressSurfacePolicy(
       await loadBrowserProgressSurfacePolicy(siteRoot),
       { siteRoot },
@@ -295,6 +316,7 @@ export async function validateCourseContracts(
     draftEvidence,
     manualLearningRecordWorkflow,
     liveCodexLearningWorkflow,
+    moduleCompanionGuides,
     browserProgressSurfacePolicy,
     mermaidAlternatives,
     summary: contractRegistry.summary,

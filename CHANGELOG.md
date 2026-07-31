@@ -7,6 +7,17 @@ actually published.
 
 ## Unreleased
 
+- Added a versioned, graph-bound module-companion guide registry and two
+  contextual follow-on packets on each Core-open module's oral-defense panel:
+  one for the Teaching Assistant's supportive defense and one for the Study
+  Partner's rehearsal. The server derives academic prerequisites and the
+  declared forward handoff from the canonical graph, while focused unit,
+  rendered, and browser tests preserve the accessibility and preview boundary.
+  M25/M26 reference previews do not expose the packets, and M31–M36 guide
+  data is not bundled into the learner reader. The shared registry is a
+  non-promoting release input—not an individual reviewed module contract,
+  a chat-platform capability claim, a Notion-write claim, or learner
+  completion evidence.
 - Migrated M23, M24, M19, and M26 prediction checkpoints into the shared,
   versioned, allowlisted local-progress codec. M23/M24/M26 migrate only an
   exact, meaningful legacy record after a reported successful current-envelope

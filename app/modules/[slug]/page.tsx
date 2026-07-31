@@ -9,6 +9,7 @@ import {
   moduleManifest,
   stripDocumentTitle,
 } from "@/lib/module-catalog";
+import { getModuleCompanionPackage } from "@/lib/module-companion-package";
 import { CourseReaderHeader } from "../CourseReaderHeader";
 import { ModuleMarkdown } from "./ModuleMarkdown";
 import { ModuleInteraction } from "./ModuleInteraction";
@@ -157,7 +158,10 @@ export default async function ModulePage({ params }: ModulePageProps) {
           >
             <ModuleMarkdown markdown={lessonMarkdown} />
             {moduleInteraction.kind !== "preview" ? (
-              <ModuleOralDefense courseModule={courseModule} />
+              <ModuleOralDefense
+                companion={getModuleCompanionPackage(courseModule.number)}
+                courseModule={courseModule}
+              />
             ) : null}
             <footer className="canonical-source-note">
               <span>Canonical workbook snapshot</span>

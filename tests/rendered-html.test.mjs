@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 import { JSDOM } from "jsdom";
 import { diagnosticQuestions } from "../lib/diagnostic-model.js";
@@ -235,7 +235,7 @@ test("keeps the interactive explorer separate from Core route access and evidenc
 });
 
 test("each Core-open module reader keeps the supportive oral-defense route", async () => {
-  const [page, oralDefense, textDefense, oralGuide] = await Promise.all([
+  const [page, oralDefense, textDefense, oralGuide, companionPackage, companionGuides] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(
       new URL("../app/modules/[slug]/ModuleOralDefense.tsx", import.meta.url),
@@ -246,21 +246,28 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
       "utf8",
     ),
     readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/module-companion-package-builder.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /<ModuleOralDefense courseModule=\{courseModule\} \/>/);
+  assert.match(page, /<ModuleOralDefense/);
+  assert.match(page, /companion=\{getModuleCompanionPackage\(courseModule\.number\)\}/);
   assert.match(oralDefense, /Oral defense: a conversation, not a verdict\./);
   assert.match(oralDefense, /voice-enabled Teaching Assistant chat/);
   assert.match(oralDefense, /ModuleTextOralDefense/);
-  assert.match(oralDefense, /Do not keep raw voice recordings/);
-  assert.match(oralDefense, /Do not produce a bare pass\/fail verdict/);
-  assert.match(oralDefense, /prediction-before-reveal/);
-  assert.match(oralDefense, /What would change your mind\?/);
-  assert.match(oralDefense, /designated voice-enabled Teaching Assistant chat/);
-  assert.match(oralDefense, /visible chat as an accessible whiteboard/);
-  assert.match(oralDefense, /Record mode to the exact value/);
-  assert.match(oralDefense, /at most one concise structured record/);
-  assert.match(oralDefense, /pause records/);
+  assert.match(oralDefense, /Copy Teaching Assistant context/);
+  assert.match(oralDefense, /Copy Study Partner context/);
+  assert.match(oralDefense, /Study Partner · rehearsal context/);
+  assert.match(oralDefense, /Canonical forward handoff/);
+  assert.match(oralDefense, /companion: ModuleCompanionPackage/);
+  assert.doesNotMatch(oralDefense, /getModuleCompanionPackage/);
+  assert.doesNotMatch(oralDefense, /module-companion-guides|module-companion-package-builder/);
+  assert.match(companionPackage, /formative oral defense conversation, not a grade/);
+  assert.match(companionPackage, /Do not score, grade, or make a binary outcome judgment/);
+  assert.match(companionPackage, /prose or ASCII fallback/);
+  assert.match(companionPackage, /language-labelled fenced code/);
+  assert.match(companionPackage, /recordBoundary\.enabledMode/);
+  assert.match(companionPackage, /Canonical forward handoff/);
   assert.match(textDefense, /Equivalent text conversation/);
   assert.match(textDefense, /Work through one question at a time\./);
   assert.match(textDefense, /Prediction before reveal/);
@@ -277,17 +284,19 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
     /activeStepIndex > 0 \|\| restartFocusRequested\.current/,
   );
   assert.doesNotMatch(textDefense, /localStorage|\bfetch\s*\(/);
-  assert.match(oralGuide, /bindings, object identity, mutation, and frame-local state/);
-  assert.match(oralGuide, /a release argument joining architecture, invariant/);
+  assert.match(oralGuide, /moduleCompanionGuides/);
+  assert.match(companionGuides, /bindings, object identity, mutation, and frame-local state/);
+  assert.match(companionGuides, /a release argument joining architecture, invariant/);
   assert.match(oralGuide, /formal definition and assumptions/);
   assert.match(oralGuide, /system boundary, failure mode, evidence, tradeoff/);
-  assert.match(oralGuide, /linear maps, projections, rank, spectra, and conditioning/);
-  assert.match(oralGuide, /shape\/dtype\/solver path/);
+  assert.match(companionGuides, /linear maps, projections, rank, spectra, and conditioning/);
+  assert.match(companionGuides, /shape\/dtype\/solver path/);
 
   const response = await render("/modules/04-logic-sets-relations-graphs-proof");
   assert.equal(response.status, 200);
   const html = await response.text();
   const readable = html.replaceAll("<!-- -->", "");
+  const renderedText = new JSDOM(html).window.document.body.textContent ?? "";
   assert.match(readable, /Post-module learning conversation/);
   assert.match(readable, /Oral defense: a conversation, not a verdict\./);
   assert.match(readable, /15–20 thoughtful minutes/);
@@ -295,8 +304,36 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
   assert.match(readable, /Work through one question at a time\./);
   assert.match(readable, /Question 1 of 5/);
   assert.match(readable, /Your plain-language explanation/);
+  assert.match(renderedText, /Teaching Assistant · oral-defense context/);
+  assert.match(renderedText, /Study Partner · rehearsal context/);
+  assert.match(renderedText, /Canonical forward handoff/);
+  assert.match(renderedText, /Module 5: Cost Models and Algorithm Analysis/);
+  assert.match(renderedText, /configured-notion-session-note/);
   assert.match(readable, /A small, learner-controlled record/);
-  assert.match(readable, /formative conversation, not a pass\/fail exam/i);
+  assert.match(renderedText, /formative oral defense conversation, not a grade/i);
+});
+
+test("the built browser bundle excludes authoring-only companion content", async () => {
+  const assetsDirectory = new URL("../dist/client/assets/", import.meta.url);
+  const assetNames = await readdir(assetsDirectory);
+  const browserSource = (
+    await Promise.all(
+      assetNames
+        .filter((assetName) => /\.(?:js|mjs)$/u.test(assetName))
+        .map((assetName) => readFile(new URL(`../dist/client/assets/${assetName}`, import.meta.url), "utf8")),
+    )
+  ).join("\n");
+
+  assert.doesNotMatch(
+    browserSource,
+    /an objective, constraints, geometry, convergence path, and information quantity with assumptions/u,
+    "M31's authoring-only guide must stay in the server-only reader path",
+  );
+  assert.doesNotMatch(
+    browserSource,
+    /reconstruct a generalization, regret, margin, or lower-bound proof idea/u,
+    "M36's authoring-only guide must stay in the server-only reader path",
+  );
 });
 
 test("keeps every authored scrollable code region labelled and keyboard-focusable", async () => {
@@ -324,7 +361,11 @@ test("keeps every authored scrollable code region labelled and keyboard-focusabl
     ],
     [
       "../app/modules/[slug]/ModuleOralDefense.tsx",
-      "Scrollable full facilitator brief",
+      "Scrollable full Teaching Assistant context",
+    ],
+    [
+      "../app/modules/[slug]/ModuleOralDefense.tsx",
+      "Scrollable full Study Partner context",
     ],
     [
       "../app/diagnostic/DiagnosticExperience.tsx",
@@ -1179,6 +1220,11 @@ test("Module 26 renders an evidence-first capstone preview without opening its s
     document.querySelector("[aria-label='Post-module learning conversation']"),
     null,
     "the preview must not expose a gated oral-defense flow",
+  );
+  assert.doesNotMatch(
+    document.body.textContent ?? "",
+    /Teaching Assistant · oral-defense context|Study Partner · rehearsal context/u,
+    "the preview must not expose a module companion package",
   );
 });
 
@@ -2116,6 +2162,11 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   assert.match(html, /open for orientation and comparison, not as an unlocked Core step/);
   assert.match(html, /Released preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
+  assert.doesNotMatch(
+    new JSDOM(html).window.document.body.textContent ?? "",
+    /Teaching Assistant · oral-defense context|Study Partner · rehearsal context/u,
+    "the M25 preview must not expose a module companion package",
+  );
   assert.match(
     html,
     /studio, project evidence, and oral-defense route remain unavailable/,
@@ -2314,12 +2365,12 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(html, /href="\/downloads\/test_module28_reference\.py"/);
   assert.doesNotMatch(html, /katex-error/);
 
-  const [studio, style, reference, referenceTests, oralGuide] = await Promise.all([
+  const [studio, style, reference, referenceTests, companionGuides] = await Promise.all([
     readFile(new URL("../app/LinearAlgebraStabilityStudio.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/LinearAlgebraStabilityStudio.module.css", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module28_reference.py", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/test_module28_reference.py", import.meta.url), "utf8"),
-    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
   ]);
   assert.match(studio, /role="tablist"/);
   assert.match(studio, /role="tab"/);
@@ -2372,8 +2423,8 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(referenceTests, /class ProjectionAndLeastSquaresTests/);
   assert.match(referenceTests, /class SymmetricAndSpectralTests/);
   assert.match(referenceTests, /class PCAAndNumericalBoundaryTests/);
-  assert.match(oralGuide, /28: \{/);
-  assert.match(oralGuide, /shape\/dtype\/solver path/);
+  assert.match(companionGuides, /"moduleId": "m28"/);
+  assert.match(companionGuides, /shape\/dtype\/solver path/);
 });
 
 test("renders the calculus continuous-change workbook and its bounded teaching model", async () => {
@@ -2410,12 +2461,12 @@ test("renders the calculus continuous-change workbook and its bounded teaching m
   );
   assert.doesNotMatch(html, /katex-error/);
 
-  const [studio, style, reference, referenceTests, oralGuide, sourceMap, sourceAudit] = await Promise.all([
+  const [studio, style, reference, referenceTests, companionGuides, sourceMap, sourceAudit] = await Promise.all([
     readFile(new URL("../app/CalculusContinuousChangeStudio.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CalculusContinuousChangeStudio.module.css", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module29_reference.py", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/test_module29_reference.py", import.meta.url), "utf8"),
-    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module29_calculus_real_analysis_source_audit_addendum.md", import.meta.url), "utf8"),
   ]);
@@ -2463,8 +2514,8 @@ test("renders the calculus continuous-change workbook and its bounded teaching m
   assert.match(referenceTests, /class DifferentialAndJacobianTests/);
   assert.match(referenceTests, /class ChangeOfVariablesAndSeriesTests/);
   assert.match(referenceTests, /class PointwiseAndNumericalBoundaryTests/);
-  assert.match(oralGuide, /29: \{/);
-  assert.match(oralGuide, /shape, unit, dtype, step, tolerance, or solver trace/);
+  assert.match(companionGuides, /"moduleId": "m29"/);
+  assert.match(companionGuides, /shape, unit, dtype, step, tolerance, or solver trace/);
   assert.match(sourceMap, /Module 29 .*Source Map/);
   assert.match(sourceAudit, /Minimum source routing for the six connected sessions/);
 });
@@ -2514,12 +2565,12 @@ test("renders the probability, statistics, and scientific-inference workbook and
     "Module 30 tables must name every column and row-axis header.",
   );
 
-  const [studio, style, reference, referenceTests, oralGuide, sourceMap, sourceAudit] = await Promise.all([
+  const [studio, style, reference, referenceTests, companionGuides, sourceMap, sourceAudit] = await Promise.all([
     readFile(new URL("../app/ProbabilityInferenceStudio.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ProbabilityInferenceStudio.module.css", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module30_reference.py", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/test_module30_reference.py", import.meta.url), "utf8"),
-    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module30_probability_statistics_scientific_inference_source_map.md", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module30_probability_statistics_scientific_inference_source_audit_addendum.md", import.meta.url), "utf8"),
   ]);
@@ -2571,8 +2622,8 @@ test("renders the probability, statistics, and scientific-inference workbook and
   assert.match(referenceTests, /class RepetitionAndStochasticProcessTests/);
   assert.match(referenceTests, /class EstimationAndUncertaintyTests/);
   assert.match(referenceTests, /class ModelingBoundaryTests/);
-  assert.match(oralGuide, /30: \{/);
-  assert.match(oralGuide, /probability models, conditional structure, inference/);
+  assert.match(companionGuides, /"moduleId": "m30"/);
+  assert.match(companionGuides, /probability models, conditional structure, inference/);
   assert.match(sourceMap, /Module 30 .*Source Map/);
   assert.match(sourceAudit, /M30 should teach one connected transformation/);
 });
