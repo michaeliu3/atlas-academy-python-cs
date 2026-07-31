@@ -35,6 +35,10 @@ actually published.
   diagnostic/misconception, and oral-defense ambiguities remain explicitly
   unresolved. Nothing changes human-review, availability, or publication
   state.
+- Recorded the successful GitHub Course CI run for the M21 structural-packet
+  source head (`a8b466c…`) in the append-only provenance ledger. It records
+  four successful named jobs on attempt 1, not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
 - Recorded the successful GitHub Course CI run for the M20 structural-packet
   source head (`f253b30…`) in the append-only provenance ledger. It records
   four successful named jobs on attempt 1, not a GitHub Release, private

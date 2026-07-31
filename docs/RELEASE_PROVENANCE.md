@@ -71,6 +71,21 @@ acceptance was not yet a required `main` check. It is configuration evidence,
 not a claim that every later candidate passed, that a private deployment is
 verified, or that all accessibility work is complete.
 
+### Latest history-protection readback
+
+On 2026-07-30 (America/New_York), a direct GitHub REST readback confirmed
+that both `main` and `agent/60-day-route` still apply their configured branch
+protection to administrators, disallow force-pushes and deletion, and require
+linear history. `main` requires the strict `Portal quality gate`, `Teaching
+models on Python 3.12`, `Teaching models on Python 3.14`, and `Browser
+accessibility acceptance` checks. The review branch has no required check or
+review rule, so it can retain small ordinary fast-forward evidence commits
+while pull request #21 remains reviewable.
+
+This is a direct, point-in-time configuration readback. It does not prove that
+future settings cannot change, that every branch is protected, that a pull
+request is approved, or that a private deployment has been reviewed.
+
 ## Verified candidate-validation records
 
 These are candidate validation records, not releases. The listed Actions checks
@@ -143,6 +158,7 @@ trust inputs from the preceding run.
 | [`f253b30fb6caffa310646674efddcb5d87902dbf`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/f253b30fb6caffa310646674efddcb5d87902dbf) | M20 non-promoting structural packet and hash-ledgered source-audit input | [Run 30598190724](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30598190724), attempt 1 — successful: portal gate, Python 3.12/3.14 teaching models, and Linux Chromium/axe browser acceptance | Direct GitHub run/job readback recorded the Course CI identity, pull-request event, `agent/60-day-route` source head, attempt, and success for all four named jobs. | A GitHub Release, private deployment, M20 human review or publication, proof that a runner used the source head rather than a generated merge candidate, proof that the workflow body matched the local evidence-policy digest, complete accessibility review, full course-contract verification, or absence of security risk. |
 | [`3ac1ee23e43dce2a74cc65ff2c644e51bb9d20ee`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/3ac1ee23e43dce2a74cc65ff2c644e51bb9d20ee) | M31 S01–S03 bounded KKT authoring fixture | [Run 30598501067](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30598501067), attempt 1 — successful: portal gate, Python 3.12/3.14 teaching models, and Linux Chromium/axe browser acceptance | Direct GitHub run/job readback recorded the Course CI identity, pull-request event, `agent/60-day-route` source head, attempt, and success for all four named jobs. | A GitHub Release, private deployment, M31 learner publication, human review, proof that a runner used the source head rather than a generated merge candidate, proof that the workflow body matched the local evidence-policy digest, complete accessibility review, full course-contract verification, or absence of security risk. |
 | [`8ac23182d2030f5628339208775113113c7ef8d8`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8ac23182d2030f5628339208775113113c7ef8d8) | M19 non-promoting structural packet and hash-ledgered source-audit input | [Run 30599351278](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30599351278), attempt 1 — successful: portal gate, Python 3.12/3.14 teaching models, and Linux Chromium/axe browser acceptance | Direct GitHub run/job readback recorded the Course CI identity, pull-request event, same-repository `agent/60-day-route` source head, attempt, and success for all four named jobs. | A GitHub Release, private deployment, M19 human review or publication, proof that a runner used the source head rather than a generated merge candidate, proof that the workflow body matched the local evidence-policy digest, complete accessibility review, full course-contract verification, or absence of security risk. |
+| [`a8b466c561d3894c9efeedc33589808725bcb701`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a8b466c561d3894c9efeedc33589808725bcb701) | M21 non-promoting structural packet and hash-ledgered source-audit input | [Run 30600295144](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30600295144), attempt 1 — successful: portal gate, Python 3.12/3.14 teaching models, and Linux Chromium/axe browser acceptance | Direct GitHub run/job readback recorded the Course CI identity, pull-request event, same-repository `agent/60-day-route` source head, attempt, and success for all four named jobs. | A GitHub Release, private deployment, M21 human review or publication, proof that a runner used the source head rather than a generated merge candidate, proof that the workflow body matched the local evidence-policy digest, complete accessibility review, full course-contract verification, or absence of security risk. |
 
 ## Recorded non-successful candidate validation
 
