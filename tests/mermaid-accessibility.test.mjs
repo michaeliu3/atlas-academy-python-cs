@@ -118,3 +118,20 @@ test("Module 2 is a complete recursion-and-induction retrofit with unique visual
   assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m02-")));
   assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });
+
+test("Module 3 is a complete abstraction-and-ADT retrofit with unique visual explanations", async () => {
+  const moduleThree = await readFile(
+    new URL("../content/modules/03_abstraction_interfaces_adts.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleThree, {
+    sourcePath: "content/modules/03_abstraction_interfaces_adts.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 7);
+  assert.equal(report.summary.completeBlocks, 7);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m03-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+});

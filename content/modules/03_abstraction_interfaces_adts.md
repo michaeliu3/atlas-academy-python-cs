@@ -36,6 +36,9 @@ The default activity balance is:
 ### The dependency path
 
 ```mermaid
+%% atlas-diagram-id: m03-dependency-path
+%% atlas-diagram-title: Module 3 turns state and function contracts into abstraction boundaries
+%% atlas-diagram-alt: Module 1 feeds Modules 2 and 3, and Module 2 also feeds Module 3. Module 3 then supports data structures, APIs and types, testing and design, and transactions, so state and function contracts become reusable abstraction boundaries.
 flowchart LR
     M1["Module 1<br/>objects, aliases, state, invariants"]
     M2["Module 2<br/>functions, contracts, induction"]
@@ -190,6 +193,9 @@ It prints `0`. `history()` returned the mutable list that is also the representa
 </details>
 
 ```mermaid
+%% atlas-diagram-id: m03-representation-exposure-alias
+%% atlas-diagram-title: A returned alias lets a client clear EventLog state
+%% atlas-diagram-alt: The client name screen and EventLog.events point to the same mutable list holding a StudyEvent. Calling screen.clear mutates that list, so EventLog.events becomes empty; a public history operation exposed representation state.
 flowchart LR
     C["client name: screen"] --> L["one mutable list"]
     S["EventLog.events"] --> L
@@ -266,6 +272,9 @@ A class can implement an ADT, but an ADT is not the same thing as a class. The s
 ### 4.3 Concept map
 
 ```mermaid
+%% atlas-diagram-id: m03-adt-concept-map
+%% atlas-diagram-title: An ADT connects a behavioral contract to replaceable representations
+%% atlas-diagram-alt: A client problem leads to abstract values, operations, contracts, and an interface. Contracts also guide a representation, its RI and AF, implementation, and observable-behavior tests; comparing implementations supports representation independence. Representation exposure breaks the RI and couples clients to the representation.
 flowchart TD
     P["Client problem"] --> A["Choose abstract values"]
     A --> O["Choose a small adequate set of operations"]
@@ -422,6 +431,9 @@ This equation is powerful but bounded. If performance, logging, persistence, or 
 ### 6.1 Two spaces, one meaning
 
 ```mermaid
+%% atlas-diagram-id: m03-ri-af-spaces
+%% atlas-diagram-title: Legal representations map to abstract histories through AF
+%% atlas-diagram-alt: Legal list representations [], [e1], and [e1, e2] map through the abstraction function to the empty sequence, e1, and e1 followed by e2. The list [e1, not an event] violates the representation invariant, so its abstraction function is undefined.
 flowchart LR
     subgraph R["Representation space R"]
         R1["[]"]
@@ -773,6 +785,9 @@ class TupleEventStore:
 Add `TupleEventStore` to both parameter lists. The client and the assertions stay unchanged.
 
 ```mermaid
+%% atlas-diagram-id: m03-list-tuple-equivalence
+%% atlas-diagram-title: List and tuple stores can denote the same abstract history
+%% atlas-diagram-alt: A ListEventStore uses a mutable list and a TupleEventStore uses an immutable tuple, but each representation maps through its own abstraction function to the same ordered history e1, e2, e3.
 flowchart TB
     subgraph Same["Same abstract history"]
         H["⟨e₁, e₂, e₃⟩"]
@@ -1211,6 +1226,9 @@ Use this evidence table:
 <summary>Recovered architecture</summary>
 
 ```mermaid
+%% atlas-diagram-id: m03-event-store-architecture
+%% atlas-diagram-title: The composition root keeps service policy separate from storage
+%% atlas-diagram-alt: main.py constructs and injects ListEventStore and constructs RecordingService. The service depends on the EventStore contract and StudyEvent values; ListEventStore stores StudyEvent values and structurally satisfies the contract. Contract tests target the contract and list implementation, while service tests target RecordingService.
 flowchart TB
     Main["main.py<br/>composition root"]
     Service["recording_service.py<br/>application policy"]
@@ -2190,6 +2208,9 @@ The eight diagnostic questions must eventually be answered with explanations, an
 ## 19. One-page consolidation
 
 ```mermaid
+%% atlas-diagram-id: m03-abstraction-consolidation
+%% atlas-diagram-title: An abstraction boundary makes storage replaceable without rewriting clients
+%% atlas-diagram-alt: The need to change storage leads to an abstract ordered history, operations, a behavioral contract, and a Protocol interface. RecordingService uses only that interface; list, tuple, and chunk representations run through shared observable-behavior tests, followed by human review and later work on data structures, APIs, transactions, and protocols.
 flowchart TB
     Need["Need: change storage<br/>without rewriting clients"]
     Abstract["Abstract value<br/>ordered event history"]

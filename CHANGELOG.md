@@ -17,6 +17,12 @@ actually published.
   canonical source-map, release-input, reader, and publication paths. They do
   not supply a workbook, studio, contract review, benchmark, Notion-write
   proof, deployment, learner-mastery, or M25/M26 unlock claim.
+- Completed Module 3's Mermaid accessibility retrofit: all seven instructional
+  diagrams now carry unique stable IDs, concise titles, and authored prose
+  alternatives for the dependency path, representation exposure, ADT model,
+  RI/AF mapping, equivalent implementations, architecture boundary, and
+  consolidation map. This is a bounded visual-equivalence improvement, not a
+  completed accessibility review or a claim that later modules are remediated.
 - Added a versioned v2 designated-chat learning workflow. Portable copied
   prompts remain local-first, while only the learner-designated Teaching
   Assistant and Study Partner chats may automatically create at most one
