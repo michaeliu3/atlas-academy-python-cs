@@ -25,6 +25,16 @@ actually published.
   source head (`8ac2318…`) in the append-only provenance ledger. It records
   four successful named jobs on attempt 1, not a GitHub Release, private
   deployment, human review, publication, or security-clear claim.
+- Added M21's authoring-only source-audit addendum and non-promoting
+  structural packet: 37 typed local anchors bind the canonical M20 → M21 →
+  M22 route, six-session async/distributed spine, bounded studio/model
+  artifacts, source route, diagnostic, dossier, oral-defense, TA, and Study
+  Partner surfaces. The existing delivered M21 source map remains the
+  learner-facing route; the addendum is only a hashable internal input. Its
+  historical rigor, code/debug/design, prediction, transfer,
+  diagnostic/misconception, and oral-defense ambiguities remain explicitly
+  unresolved. Nothing changes human-review, availability, or publication
+  state.
 - Recorded the successful GitHub Course CI run for the M20 structural-packet
   source head (`f253b30…`) in the append-only provenance ledger. It records
   four successful named jobs on attempt 1, not a GitHub Release, private

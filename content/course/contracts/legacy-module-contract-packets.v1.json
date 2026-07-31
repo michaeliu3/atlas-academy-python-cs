@@ -520,6 +520,92 @@
         {"id": "m19-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module19_reference.py", "public/downloads/test_module19_reference.py"]},
         {"id": "m19-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m21",
+      "packetId": "m21-async-distributed-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m20"],
+        "forwardModuleId": "m22",
+        "masteryGateId": "systems",
+        "studioId": "async-distributed"
+      },
+      "workbookPath": "content/modules/21_async_distributed_systems.md",
+      "sourceMapPath": "content/source-maps/module21_async_distributed_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module21_async_distributed_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m21-session-1", "usesPrerequisiteModuleIds": ["m20"], "forwardArtifactId": "m21-task-ownership-strip"},
+        {"sessionNumber": 2, "pointerId": "m21-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m21-cancellation-evidence-card"},
+        {"sessionNumber": 3, "pointerId": "m21-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m21-admission-timeline"},
+        {"sessionNumber": 4, "pointerId": "m21-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m21-retry-reconciliation-card"},
+        {"sessionNumber": 5, "pointerId": "m21-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m21-order-card"},
+        {"sessionNumber": 6, "pointerId": "m21-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m21-requirement-claim-matrix"}
+      ],
+      "pointers": [
+        {"id": "m21-course-map", "roles": ["prerequisite-map"], "label": "Canonical prerequisite map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "1-position-in-the-knowledge-system"}},
+        {"id": "m21-forward-handoff", "roles": ["forward-handoff"], "label": "M22 handoff boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "14-handoff-what-module-21-deliberately-leaves-open"}},
+        {"id": "m21-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "2-session-1--await-releases-control-it-does-not-transfer-responsibility"}},
+        {"id": "m21-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "3-session-2--structured-lifetime-gives-a-boundary-not-magic-rollback"}},
+        {"id": "m21-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "4-session-3--bounded-admission-makes-overload-a-policy-decision"}},
+        {"id": "m21-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "5-session-4--partial-failure-is-an-evidence-problem-before-it-is-retry-code"}},
+        {"id": "m21-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "6-session-5--time-is-a-local-instrument-order-is-a-declared-relation"}},
+        {"id": "m21-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "7-session-6--consistency-and-availability-are-choices-with-assumptions"}},
+        {"id": "m21-first-principle", "roles": ["first-principles"], "label": "Task-ownership first-principles checkpoint", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "first-principles-checkpoint"}},
+        {"id": "m21-definition", "roles": ["definition"], "label": "Cancellation vocabulary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "cancellation-vocabulary-do-not-collapse-the-verbs"}},
+        {"id": "m21-assumption", "roles": ["assumption"], "label": "Consistency and availability assumptions", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "7-session-6--consistency-and-availability-are-choices-with-assumptions"}},
+        {"id": "m21-derivation", "roles": ["derivation-proof"], "label": "Task-ownership derivation candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "first-principles-checkpoint"}},
+        {"id": "m21-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Compatible histories after a timeout", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "compatible-histories-after-one-local-timeout"}},
+        {"id": "m21-numerical-experiment", "roles": ["numerical-experiment"], "label": "Local stream fixture", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "local-stream-fixture"}},
+        {"id": "m21-code-reading", "roles": ["code-reading"], "label": "Orphaned-coroutine code-reading lab", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "code-reading-lab-a1--the-orphaned-coroutine"}},
+        {"id": "m21-debug", "roles": ["debugging"], "label": "New-ID-after-timeout debugging candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "code-reading-lab-a4--new-id-after-timeout"}},
+        {"id": "m21-design", "roles": ["design"], "label": "Eight-level design ladder candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "9-eight-level-problem-ladder"}},
+        {"id": "m21-prediction", "roles": ["prediction"], "label": "Run Control Room prediction candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "8-the-atlas-run-control-room--visual-studio-text-equivalent"}},
+        {"id": "m21-transfer", "roles": ["transfer", "oral-transfer"], "label": "M22 handoff transfer candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "14-handoff-what-module-21-deliberately-leaves-open"}},
+        {"id": "m21-source-rationale", "roles": ["source-rationale"], "label": "Source-selection rationale", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module21_async_distributed_source_map.md", "headingAnchor": "executive-teaching-decision"}},
+        {"id": "m21-claim-linkage", "roles": ["claim-linkage"], "label": "Claim-to-source matrix", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module21_async_distributed_source_map.md", "headingAnchor": "claim-to-source-matrix-for-authoring-and-ta-use"}},
+        {"id": "m21-license-reuse", "roles": ["license-reuse"], "label": "Licensing and access ledger", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module21_async_distributed_source_map.md", "headingAnchor": "licensing-and-access-ledger"}},
+        {"id": "m21-stable-learner-link", "roles": ["stable-learner-link"], "label": "Learner resource route", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "13-resource-route-and-source-discipline"}},
+        {"id": "m21-visual-studio", "roles": ["visual"], "label": "Run Control Room visual studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "8-the-atlas-run-control-room--visual-studio-text-equivalent"}},
+        {"id": "m21-text-alternative", "roles": ["text-alternative"], "label": "Run Control Room text equivalent", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "8-the-atlas-run-control-room--visual-studio-text-equivalent"}},
+        {"id": "m21-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks"}},
+        {"id": "m21-misconception-candidate", "roles": ["misconception"], "label": "Diagnostic misconception candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks"}},
+        {"id": "m21-retrieval", "roles": ["retrieval"], "label": "Retrieval schedule", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "retrieval-schedule"}},
+        {"id": "m21-dossier", "roles": ["dossier"], "label": "Async collector evidence dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "11-cumulative-project--atlas-async-collector-evidence-dossier"}},
+        {"id": "m21-acceptance", "roles": ["acceptance-criteria"], "label": "Required dossier deliverables", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "required-deliverables"}},
+        {"id": "m21-rubric", "roles": ["rubric"], "label": "Dossier review rubric", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "review-rubric"}},
+        {"id": "m21-oral-protocol", "roles": ["oral-protocol"], "label": "Dossier oral-defense candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "required-deliverables"}},
+        {"id": "m21-oral-hint", "roles": ["oral-hint"], "label": "TA intake candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "ta-intake-rule"}},
+        {"id": "m21-oral-reflection", "roles": ["oral-reflection"], "label": "Study Partner reflection candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "study-partner-routine-2030-minutes"}},
+        {"id": "m21-oral-summary", "roles": ["oral-summary"], "label": "Requirement-to-claim evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "session-artifact--requirement-to-claim-matrix"}},
+        {"id": "m21-ta", "roles": ["ta"], "label": "M21 TA studios", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "ta-studios"}},
+        {"id": "m21-study-partner", "roles": ["study-partner"], "label": "M21 Study Partner routine", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "study-partner-routine-2030-minutes"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-course-map", "m21-forward-handoff"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-session-1", "m21-session-2", "m21-session-3", "m21-session-4", "m21-session-5", "m21-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-definition", "m21-assumption", "m21-derivation", "m21-counterexample", "m21-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-code-reading", "m21-debug", "m21-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-source-rationale", "m21-claim-linkage", "m21-license-reuse", "m21-stable-learner-link"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-visual-studio", "m21-text-alternative"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-diagnostic", "m21-misconception-candidate"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-dossier", "m21-acceptance", "m21-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-oral-protocol", "m21-oral-hint", "m21-counterexample", "m21-transfer", "m21-oral-reflection", "m21-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-forward-handoff"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m21-studio", "kind": "studio", "paths": ["app/AsyncDistributedStudio.tsx", "app/AsyncDistributedStudio.module.css", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m21-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module21_reference.py", "public/downloads/test_module21_reference.py"]},
+        {"id": "m21-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }
