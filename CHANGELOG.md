@@ -25,6 +25,12 @@ actually published.
   allowlisted downloads paths; regression tests reject retired research links
   and source-copy drift. This establishes delivery identity, not source
   quality, license review, or publication approval.
+- Recorded the source-artifact delivery repair's successful Course CI candidate
+  separately: source head `682f875` entered attempt 1 of
+  [run 30592698649](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30592698649),
+  whose four required jobs checked merge candidate `1937d0d`. This is bounded
+  source-head/merge-candidate validation evidence, not a GitHub Release,
+  private deployment, course completion, or a security-clean claim.
 - Added a lifecycle-aware advanced-module contract registry, initially for M31
   only. It resolves 15 Git-tracked planning/research inputs, verifies the
   six-session prerequisite spine and S01–S10/C01–C08 coverage, and explicitly
