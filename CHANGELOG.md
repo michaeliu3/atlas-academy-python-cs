@@ -23,6 +23,10 @@ actually published.
   prediction, transfer, diagnostic/misconception, and oral-defense
   ambiguities remain unresolved. Nothing changes human review, availability,
   or publication state.
+- Recorded the successful GitHub Course CI run for the M22 structural-packet
+  source head (`0fc55ad…`) in the append-only provenance ledger. It records
+  four successful named jobs on attempt 1, not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
 - Added an authoring-only M19 source-audit addendum that ties its concurrency
   source classes to six sessions, reuse decisions, and release-truth checks.
   It keeps the genuinely missing module-specific Study Partner route visible;
