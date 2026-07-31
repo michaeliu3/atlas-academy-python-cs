@@ -8,8 +8,9 @@
   routines, and the bridge to M30–M32.
 - **Course position:** M29 follows M27's quantified proof/counterexample
   boundary and M28's norm, linear-map, and finite-representation boundary. In
-  the learner route it follows M28 and precedes M18; its direct prerequisites
-  remain M27 and M28.
+  the learner route it follows M28 and precedes M30; its direct prerequisites
+  remain M27 and M28. M31–M36 are later conceptual consumers, not a learner
+  navigation bypass.
 - **Research snapshot:** **2026-07-30**. Exact URLs, editions, licenses, and
   API behavior must be rechecked before reusing an external asset, quoting a
   source, or making a current-library claim.

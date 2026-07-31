@@ -38,7 +38,7 @@
     },
     {
       "path": "content/course/release-input-policy.v1.json",
-      "sha256": "d3c901354b2b520b883589821b0a170834068ebf2b86411ba157f6a0f3c74059"
+      "sha256": "3904145edb9c5ac5ad50334aa38fe869c5e3835d2457107179114b0094f64d73"
     },
     {
       "path": "content/modules/01_values_state_execution.md",
@@ -114,15 +114,15 @@
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911"
+      "sha256": "a0a6f3c6f47646633d9294bc969ff8d940e1d75b77ef4ad751c5fa964e50099d"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "ab4e96417238f6750aadbef0c61e7e54ae501bded7d7176bcffcc059c1cb4382"
+      "sha256": "1f6cae04fafd01a36822401d1d5e9c26139a46b120e3ca462ac00bab2900ce55"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
-      "sha256": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315"
+      "sha256": "c98757d97a439c38cc9e5a2bb792f8ce490df6520634ae0821cc7711bc685a76"
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
@@ -150,7 +150,7 @@
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "f1a42ffdf4b062db3320e3a2690b8ef9e7afd8619637f1129aa1847bb5701c95"
+      "sha256": "9b1d5518148d2fab14a659ba28e78f1c355227cd9862f415d4c43e7550c02873"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
@@ -257,12 +257,24 @@
       "sha256": "7fc35ba847b87190470601fdda3be0f5bfa08be464cfa2cd2eab37c5ef1234b7"
     },
     {
+      "path": "public/downloads/module19_concurrency_parallelism_source_map.md",
+      "sha256": "e82fe81592d9450fd31f08eeaa03fd5c1a7de112aaee20200fde31f7a2809b48"
+    },
+    {
       "path": "public/downloads/module19_reference.py",
       "sha256": "f9dd5c1f27fb24e6d7e9c57d78c046976ddd2bb4d1ce47d665c77dbe781e3b9d"
     },
     {
+      "path": "public/downloads/module20_networks_protocols_source_map.md",
+      "sha256": "2975977ec4b10365e77f9269faa3d5e99389b7ef3db89fca9a9597d6f0b79af2"
+    },
+    {
       "path": "public/downloads/module20_reference.py",
       "sha256": "6339582beebba18c16f30200650fe697bb3870b472478a4815a4593263ac6b8e"
+    },
+    {
+      "path": "public/downloads/module21_async_distributed_source_map.md",
+      "sha256": "ea16503c78bf4cee8d1c71c5a1eabcccff6c1638480b58e9e218e2a7c12e807c"
     },
     {
       "path": "public/downloads/module21_reference.py",
@@ -293,12 +305,16 @@
       "sha256": "555a37db6714ce39adfa02fd2abc523c0a5273fe58dbbe489e1b7d085ebe11a4"
     },
     {
+      "path": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "sha256": "0fea9f3ff0267cbb16640762cc0ffdec72f5e4d6916c2be495e156542c98fea1"
+    },
+    {
       "path": "public/downloads/module28_reference.py",
       "sha256": "7dce4bf9ae36a4ff60df44ec37ca249263684697e6405ec24f48a81a844f890c"
     },
     {
       "path": "public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md",
-      "sha256": "86ffb1018ed5e1be2c2580a15129e93c62f2f548e82547ff68dc234d15f2ba5f"
+      "sha256": "090b440350922812a889ff274ea2f7a62f5c1435df4a4672e744d6a0f68ce209"
     },
     {
       "path": "public/downloads/module29_calculus_real_analysis_source_audit_addendum.md",

@@ -130,6 +130,18 @@ async function writeIfChanged(path, content) {
   return true;
 }
 
+async function synchronizeSourceArtifactCopies(sourceArtifactCopies) {
+  let changed = 0;
+  for (const { canonicalPath, publicPath } of sourceArtifactCopies) {
+    await requireFile(canonicalPath, `Canonical source artifact ${repositoryPath(canonicalPath)}`);
+    const canonicalSource = await readFile(canonicalPath, "utf8");
+    if (await writeIfChanged(publicPath, canonicalSource)) {
+      changed += 1;
+    }
+  }
+  return changed;
+}
+
 function repositoryPath(path) {
   return relative(siteRoot, path).replaceAll("\\", "/");
 }
@@ -199,6 +211,12 @@ const releaseInputPaths = new Set([
   releaseEvidencePolicyPath(siteRoot),
   legacyModuleContractAuditPath,
 ]);
+const sourceArtifactChanges = await synchronizeSourceArtifactCopies(
+  releaseInputPolicy.sourceArtifactCopies,
+);
+for (const { canonicalPath } of releaseInputPolicy.sourceArtifactCopies) {
+  releaseInputPaths.add(canonicalPath);
+}
 
 for (const projectedModule of projectedModules) {
   const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
@@ -352,5 +370,5 @@ const changed = await Promise.all([
   ),
 ]);
 console.log(
-  `Synced ${modules.length} modules from checked-in content; ${releaseInputs.inputs.length} hashed release inputs (${changed.filter(Boolean).length} generated files updated).`,
+  `Synced ${modules.length} modules from checked-in content; ${releaseInputs.inputs.length} hashed release inputs (${changed.filter(Boolean).length + sourceArtifactChanges} generated files updated).`,
 );

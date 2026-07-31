@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { basename, relative, resolve } from "node:path";
 
 export const releaseInputPolicyRelativePath = "content/course/release-input-policy.v1.json";
 const allowedDownloadExtensions = new Set([".md", ".py"]);
@@ -36,6 +36,58 @@ function validPolicyPath(siteRoot, candidate) {
   return repositoryPath(siteRoot, resolve(siteRoot, candidate)) === candidate;
 }
 
+function validCanonicalSourcePath(siteRoot, candidate) {
+  if (typeof candidate !== "string" || candidate.length === 0 || candidate.includes("\\")) {
+    return false;
+  }
+  if (!candidate.startsWith("content/source-maps/") || !candidate.endsWith(".md")) {
+    return false;
+  }
+  if (candidate.split("/").some((segment) =>
+    segment === "" ||
+    segment === "." ||
+    segment === ".." ||
+    segment.startsWith(".") ||
+    forbiddenPathSegments.has(segment),
+  )) {
+    return false;
+  }
+  return repositoryPath(siteRoot, resolve(siteRoot, candidate)) === candidate;
+}
+
+function sourceArtifactCopy(siteRoot, candidate) {
+  if (
+    !candidate ||
+    typeof candidate !== "object" ||
+    Array.isArray(candidate) ||
+    Object.keys(candidate).length !== 2 ||
+    !("canonicalPath" in candidate) ||
+    !("publicPath" in candidate)
+  ) {
+    throw new Error("release-input policy sourceArtifactCopies entries must contain only canonicalPath and publicPath.");
+  }
+  if (!validCanonicalSourcePath(siteRoot, candidate.canonicalPath)) {
+    throw new Error(
+      `release-input policy canonical source artifact path is invalid: ${candidate.canonicalPath}.`,
+    );
+  }
+  if (!validPolicyPath(siteRoot, candidate.publicPath) || !candidate.publicPath.endsWith(".md")) {
+    throw new Error(
+      `release-input policy public source artifact path is invalid: ${candidate.publicPath}.`,
+    );
+  }
+  const expectedCanonicalPath = `content/source-maps/${basename(candidate.publicPath)}`;
+  if (candidate.canonicalPath !== expectedCanonicalPath) {
+    throw new Error(
+      `release-input policy source artifact copies must preserve the canonical basename: ${candidate.publicPath}.`,
+    );
+  }
+  return {
+    canonicalPath: resolve(siteRoot, candidate.canonicalPath),
+    publicPath: resolve(siteRoot, candidate.publicPath),
+  };
+}
+
 export async function loadReleaseInputPolicy(siteRoot) {
   const path = releaseInputPolicyPath(siteRoot);
   let policy;
@@ -51,6 +103,9 @@ export async function loadReleaseInputPolicy(siteRoot) {
   if (!Array.isArray(policy.allowlistedDownloadPaths) || policy.allowlistedDownloadPaths.length === 0) {
     throw new Error("release-input policy must declare one or more allowlisted download paths.");
   }
+  if (!Array.isArray(policy.sourceArtifactCopies)) {
+    throw new Error("release-input policy must declare sourceArtifactCopies.");
+  }
 
   const seen = new Set();
   const downloadPaths = [];
@@ -65,5 +120,25 @@ export async function loadReleaseInputPolicy(siteRoot) {
     downloadPaths.push(resolve(siteRoot, candidate));
   }
 
-  return { path, policy, downloadPaths };
+  const copiedCanonicalPaths = new Set();
+  const copiedPublicPaths = new Set();
+  const sourceArtifactCopies = [];
+  for (const candidate of policy.sourceArtifactCopies) {
+    const copy = sourceArtifactCopy(siteRoot, candidate);
+    const canonicalPath = repositoryPath(siteRoot, copy.canonicalPath);
+    const publicPath = repositoryPath(siteRoot, copy.publicPath);
+    if (copiedCanonicalPaths.has(canonicalPath) || copiedPublicPaths.has(publicPath)) {
+      throw new Error(`release-input policy source artifact copy is duplicated: ${publicPath}.`);
+    }
+    if (!seen.has(publicPath)) {
+      throw new Error(
+        `release-input policy source artifact copy must also be an allowlisted download: ${publicPath}.`,
+      );
+    }
+    copiedCanonicalPaths.add(canonicalPath);
+    copiedPublicPaths.add(publicPath);
+    sourceArtifactCopies.push(copy);
+  }
+
+  return { path, policy, downloadPaths, sourceArtifactCopies };
 }

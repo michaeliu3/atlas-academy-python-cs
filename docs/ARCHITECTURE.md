@@ -11,7 +11,7 @@ flowchart LR
     G["Versioned canonical course graph"] --> M["module synchronization"]
     S["Source maps and original workbooks"] --> M
     M --> L["content/modules<br>rendered course library"]
-    M --> D["public/downloads<br>local models + tests"]
+    M --> D["public/downloads<br>local models, tests + selected source maps"]
     L --> R["Module reader"]
     I["Interactive visual studios"] --> R
     D --> V["learner inspection + behavioral tests"]
@@ -39,16 +39,20 @@ flowchart LR
   workspace. No published workbook or source map exists only outside this
   repository.
 - The public/downloads directory contains deterministic local reference models
-  and behavioral tests. Only files explicitly listed by the versioned
+  and behavioral tests, plus selected learner-facing source maps/addenda. Only files explicitly listed by the versioned
   `content/course/release-input-policy.v1.json` are release-canonical; CI
   rejects tracked download artifacts that have not been reviewed into that
   policy, and the production build prunes unallowlisted download output. They
-  use fixed in-memory fixtures and make no external effect.
+  use fixed in-memory fixtures and make no external effect. Declared
+  source-map/addendum copies are synchronized byte-for-byte from canonical
+  repository inputs.
 - The scripts/sync-modules.mjs program validates the course graph, then
   generates the library manifest, module source projection, and a sorted
   SHA-256 release-input ledger. It does not copy external artifacts. The
   manifest and release-input ledger are generated projections, not curriculum
   input.
+  Synchronization may copy declared internal source artifacts, but never
+  fetches or copies an external artifact.
 - The tests directory verifies the diagnostic model and rendered portal
   contract.
 

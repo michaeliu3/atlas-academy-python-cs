@@ -19,6 +19,12 @@ actually published.
   cache, artifact, deployment, status-write, or candidate-code path. Until it
   exists on the protected default branch and records a run, it is only a
   checked-in safety mechanism—not remote CI, execution-ref, or release proof.
+- Repaired learner-facing source-map delivery for M19, M20, M21, and M28, and
+  refreshed M29's stale public copy. Versioned policy mappings now
+  deterministically synchronize declared canonical source-map artifacts into
+  allowlisted downloads paths; regression tests reject retired research links
+  and source-copy drift. This establishes delivery identity, not source
+  quality, license review, or publication approval.
 - Added a lifecycle-aware advanced-module contract registry, initially for M31
   only. It resolves 15 Git-tracked planning/research inputs, verifies the
   six-session prerequisite spine and S01–S10/C01–C08 coverage, and explicitly

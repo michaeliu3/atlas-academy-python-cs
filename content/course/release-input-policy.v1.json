@@ -1,12 +1,15 @@
 {
   "schemaVersion": 1,
   "policyVersion": "v1",
-  "description": "Explicit, text-only public teaching artifacts admitted to the hashed Atlas release-input ledger. Adding, removing, or renaming one requires review in the same Git commit.",
+  "description": "Explicit, text-only public teaching artifacts admitted to the hashed Atlas release-input ledger. Source artifact copies are deterministically synchronized from canonical content/source-maps inputs. Adding, removing, or renaming an artifact requires review in the same Git commit.",
   "allowlistedDownloadPaths": [
     "public/downloads/module17_reference.py",
     "public/downloads/module18_reference.py",
+    "public/downloads/module19_concurrency_parallelism_source_map.md",
     "public/downloads/module19_reference.py",
+    "public/downloads/module20_networks_protocols_source_map.md",
     "public/downloads/module20_reference.py",
+    "public/downloads/module21_async_distributed_source_map.md",
     "public/downloads/module21_reference.py",
     "public/downloads/module22_reference.py",
     "public/downloads/module23_reference.py",
@@ -14,6 +17,7 @@
     "public/downloads/module25_reference.py",
     "public/downloads/module26_reference.py",
     "public/downloads/module27_reference.py",
+    "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",
     "public/downloads/module28_reference.py",
     "public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md",
     "public/downloads/module29_calculus_real_analysis_source_audit_addendum.md",
@@ -34,5 +38,39 @@
     "public/downloads/test_module28_reference.py",
     "public/downloads/test_module29_reference.py",
     "public/downloads/test_module30_reference.py"
+  ],
+  "sourceArtifactCopies": [
+    {
+      "canonicalPath": "content/source-maps/module19_concurrency_parallelism_source_map.md",
+      "publicPath": "public/downloads/module19_concurrency_parallelism_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module20_networks_protocols_source_map.md",
+      "publicPath": "public/downloads/module20_networks_protocols_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module21_async_distributed_source_map.md",
+      "publicPath": "public/downloads/module21_async_distributed_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "publicPath": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "publicPath": "public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md",
+      "publicPath": "public/downloads/module29_calculus_real_analysis_source_audit_addendum.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
+      "publicPath": "public/downloads/module30_probability_statistics_scientific_inference_source_audit_addendum.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
+      "publicPath": "public/downloads/module30_probability_statistics_scientific_inference_source_map.md"
+    }
   ]
 }

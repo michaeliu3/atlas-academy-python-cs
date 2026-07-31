@@ -3629,7 +3629,7 @@ follows meaning, state, workload, transfer, runtime, and evidence.”
 
 External sources are authorities and reading targets. They are not the teaching
 order and are not copied course material. The detailed claim audit is in the
-[Module 19 source map](../research/module19_concurrency_parallelism_source_map.md).
+[Module 19 source map](/downloads/module19_concurrency_parallelism_source_map.md).
 All links below were checked on 2026-07-29.
 
 ### 14.1 The three-source spine

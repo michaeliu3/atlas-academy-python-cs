@@ -1311,8 +1311,8 @@ familiar.
 
 ## 16. Sources, licensing, and responsible reading route
 
-The canonical source map is
-[`research/module28_linear_algebra_numerical_stability_representation_source_map.md`](../research/module28_linear_algebra_numerical_stability_representation_source_map.md).
+The deployed [M28 source map](/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md)
+is synchronized from the canonical course source map.
 It records source owners, exact scope, licensing/reuse boundaries, asset-level
 notes, and what each resource cannot establish.
 

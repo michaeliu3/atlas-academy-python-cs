@@ -184,6 +184,13 @@ review, or learner understanding. Those require later, separate evidence.
   caches (for example `__pycache__/*.pyc`) can never enter the ledger or the
   built client downloads. Builds, CI, and private deployment must never read
   an adjacent authoring workspace.
+- A learner-facing source map or source-audit addendum must use a downloads
+  link. Declare its canonical content/source-maps input and identically named
+  public destination in the policy sourceArtifactCopies list; synchronization
+  writes the public copy, and the source-artifact regression gate rejects
+  retired local research links or a stale delivered copy. This delivery check
+  proves artifact identity only—not source quality, license correctness, or
+  pedagogical review.
 - `content/course/release-inputs.v1.json` is generated from the allowlisted
   repository inputs and records their SHA-256 hashes. It is a content-provenance
   record, not a substitute for a reviewed Git commit or release ledger. Text

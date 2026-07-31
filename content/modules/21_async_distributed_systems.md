@@ -8,7 +8,7 @@
 **Documentation and source baseline:** Python 3.14.6; Python public API docs,
 PEP 654, IETF/W3C standards, original distributed-systems papers, and public
 university course routes last audited 2026-07-30. The full research, licensing,
-and claim map is [Module 21 source map](../research/module21_async_distributed_source_map.md).
+and claim map is [Module 21 source map](/downloads/module21_async_distributed_source_map.md).
 
 **Executed production baseline:** the local-only reference and its test suite
 run on CPython 3.14.6 on Windows. They use synthetic fixtures and make no DNS

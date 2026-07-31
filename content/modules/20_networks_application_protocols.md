@@ -8,7 +8,7 @@
 
 **Documentation and source baseline:** Python 3.14.6; IETF RFCs and
 university material last audited 2026-07-30. The research, licensing, and
-claim map is [Module 20 source map](../research/module20_networks_protocols_source_map.md).
+claim map is [Module 20 source map](/downloads/module20_networks_protocols_source_map.md).
 
 **Executed production baseline:** the local-only reference and its test suite
 run on CPython 3.14.6 on Windows. They use only synthetic data and make no DNS
@@ -2366,7 +2366,7 @@ not restart the entire module.
 
 Use sources to answer a precise question, not as a substitute for a model.
 The full source/claim/licensing ledger lives in the
-[Module 20 source map](../research/module20_networks_protocols_source_map.md).
+[Module 20 source map](/downloads/module20_networks_protocols_source_map.md).
 
 ### 14.1 Three-source spine
 
