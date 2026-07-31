@@ -6,6 +6,7 @@ import test from "node:test";
 import {
   loadModuleEvidencePreflight,
   moduleEvidencePreflightRelativePath,
+  runM29CandidateEvidencePreflight,
   validateModuleEvidencePreflight,
 } from "../scripts/module-evidence-preflight.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
@@ -29,8 +30,7 @@ test("M29 has a complete candidate evidence dossier without a false promotion cl
     moduleEvidencePreflightRelativePath(moduleId),
     "content/course/contracts/evidence-preflight/m29.v1.json",
   );
-  const { preflight } = await loadCandidateArtifacts();
-  const report = await validateModuleEvidencePreflight(preflight, { siteRoot });
+  const report = await runM29CandidateEvidencePreflight({ siteRoot });
 
   assert.equal(report.moduleId, moduleId);
   assert.equal(report.state, "candidate-not-promoting");

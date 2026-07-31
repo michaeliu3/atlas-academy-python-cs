@@ -17,6 +17,7 @@ import {
   readTrackedText,
   validateModuleEvidenceRecord,
 } from "./module-review-evidence.mjs";
+import { openGitIndexSnapshot } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -117,13 +118,14 @@ function canonicalPreflightRepositoryPath(recordPath) {
   return recordPath;
 }
 
-async function readTrackedPreflightJson(siteRoot, repositoryPath) {
+async function readTrackedPreflightJson(siteRoot, repositoryPath, { snapshot = null } = {}) {
   const errors = [];
   const textRecord = await readTrackedText(
     siteRoot,
     repositoryPath,
     `Module evidence-preflight ${repositoryPath}`,
     errors,
+    { snapshot },
   );
   if (!textRecord) {
     throw new Error(errors.join("\n"));
@@ -139,9 +141,9 @@ async function readTrackedPreflightJson(siteRoot, repositoryPath) {
 
 export async function loadModuleEvidencePreflight(
   recordPath,
-  { siteRoot = defaultSiteRoot } = {},
+  { siteRoot = defaultSiteRoot, snapshot = null } = {},
 ) {
-  return readTrackedPreflightJson(siteRoot, canonicalPreflightRepositoryPath(recordPath));
+  return readTrackedPreflightJson(siteRoot, canonicalPreflightRepositoryPath(recordPath), { snapshot });
 }
 
 function validatePreflightRecord(preflight, errors) {
@@ -211,7 +213,12 @@ function validateNonPromotionState(moduleEntry, graphModule, errors) {
   }
 }
 
-async function validateCandidateReleaseBoundary(preflight, evidenceReport, errors, { siteRoot }) {
+async function validateCandidateReleaseBoundary(
+  preflight,
+  evidenceReport,
+  errors,
+  { siteRoot, snapshot = null },
+) {
   const releaseEntry = evidenceReport.evidenceByCriterion.get(
     "release-provenance-ci-and-deployment-evidence",
   );
@@ -255,6 +262,7 @@ async function validateCandidateReleaseBoundary(preflight, evidenceReport, error
     expectedM29CandidateDocumentationPath,
     "M29 candidate release documentation",
     documentationErrors,
+    { snapshot },
   );
   if (!documentation) {
     errors.push(...documentationErrors);
@@ -282,10 +290,21 @@ export async function validateModuleEvidencePreflight(
     evidenceRecord: suppliedEvidenceRecord = null,
     graph: suppliedGraph = null,
     registry: suppliedRegistry = null,
+    snapshot = null,
   } = {},
 ) {
   const errors = [];
   validatePreflightRecord(preflight, errors);
+  let evidenceSnapshot = snapshot;
+  if (!evidenceSnapshot) {
+    try {
+      evidenceSnapshot = await openGitIndexSnapshot(siteRoot);
+    } catch (error) {
+      errors.push(
+        `M29 evidence preflight could not capture its immutable Git-index evidence inputs: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
 
   const [graph, registry] = await Promise.all([
     suppliedGraph ?? loadCourseGraph(siteRoot),
@@ -306,7 +325,10 @@ export async function validateModuleEvidencePreflight(
   let evidenceRecord = suppliedEvidenceRecord;
   if (!evidenceRecord && preflight?.evidenceRecordPath) {
     try {
-      evidenceRecord = await loadModuleEvidenceRecord(preflight.evidenceRecordPath, { siteRoot });
+      evidenceRecord = await loadModuleEvidenceRecord(preflight.evidenceRecordPath, {
+        siteRoot,
+        snapshot: evidenceSnapshot,
+      });
     } catch (error) {
       errors.push(`M29 evidence preflight could not load its candidate evidence record: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -319,6 +341,7 @@ export async function validateModuleEvidencePreflight(
         siteRoot,
         expectedModuleId: "m29",
         requiredCriterionIds: criterionIds,
+        snapshot: evidenceSnapshot,
       });
     } catch (error) {
       errors.push(`M29 evidence preflight requires all 18 candidate evidence criteria to resolve: ${error instanceof Error ? error.message : String(error)}`);
@@ -353,7 +376,10 @@ export async function validateModuleEvidencePreflight(
       evidenceReport,
     });
     errors.push(...visual.errors);
-    await validateCandidateReleaseBoundary(preflight, evidenceReport, errors, { siteRoot });
+    await validateCandidateReleaseBoundary(preflight, evidenceReport, errors, {
+      siteRoot,
+      snapshot: evidenceSnapshot,
+    });
   }
 
   preflightFailure(errors);
@@ -368,9 +394,23 @@ export async function validateModuleEvidencePreflight(
   };
 }
 
+/**
+ * Run the M29 candidate command with one captured Git-index snapshot for its
+ * preflight record and direct evidence-input resolver. The canonical graph,
+ * registry, and downstream promotion checks intentionally retain their own
+ * validation boundary; this is not an end-to-end release provenance claim.
+ */
+export async function runM29CandidateEvidencePreflight({ siteRoot = defaultSiteRoot } = {}) {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const preflight = await loadModuleEvidencePreflight(
+    moduleEvidencePreflightRelativePath("m29"),
+    { siteRoot, snapshot },
+  );
+  return validateModuleEvidencePreflight(preflight, { siteRoot, snapshot });
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const preflight = await loadModuleEvidencePreflight(moduleEvidencePreflightRelativePath("m29"));
-  const report = await validateModuleEvidencePreflight(preflight);
+  const report = await runM29CandidateEvidencePreflight();
   console.log(
     `M29 candidate evidence preflight passed: ${report.evidenceReport.summary.evidenceItems} criteria resolve; ${report.openCriterionIds.join(", ")} remains open.`,
   );

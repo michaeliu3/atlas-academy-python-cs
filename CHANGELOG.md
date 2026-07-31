@@ -7,6 +7,16 @@ actually published.
 
 ## Unreleased
 
+- Hardened local module-evidence reads around an immutable Git-index snapshot
+  seam. Evidence readers now accept only regular stage-0 blobs, reject dirty,
+  unmerged, symlink, non-UTF-8, oversized, stale-index, and inherited
+  `GIT_*`-redirected inputs, and bind each returned text to its blob OID and
+  SHA-256 digest. Candidate evidence validation can share one snapshot and
+  checks its declared inputs against that captured stage-0 generation at the
+  time of validation; immutable reads never substitute later worktree bytes.
+  This protects the local structural-evidence input path; it does not make the entire M29
+  preflight, registry, release validation, CI, deployment, or human review
+  index-bound or complete.
 - Added a non-promoting M29 candidate-evidence preflight. It freezes a
   module-specific TA/Study Partner/M30 handoff companion, binds all eighteen
   current structural criteria to M29's canonical workbook/source map and

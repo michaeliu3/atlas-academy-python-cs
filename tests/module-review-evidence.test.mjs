@@ -9,9 +9,11 @@ import test from "node:test";
 import {
   loadModuleEvidenceRecord,
   loadModuleReviewRecord,
+  readTrackedText,
   validateModuleEvidenceRecord,
   validateModuleReviewRecord,
 } from "../scripts/module-review-evidence.mjs";
+import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -123,6 +125,10 @@ test("a module-specific evidence record resolves tracked Markdown headings, JSON
   );
   assert.equal(report.resolvedInputs[0].heading.title, "First principles");
   assert.equal(report.resolvedInputs[1].value, "bounded");
+  for (const input of report.resolvedInputs) {
+    assert.match(input.blobOid, /^[a-f0-9]{40,64}$/u);
+    assert.match(input.sha256, /^sha256:[a-f0-9]{64}$/u);
+  }
   assert.deepEqual(report.releaseInputPaths, [
     "content/course/contracts/companions/m01.v1.json",
     "content/modules/m01.md",
@@ -170,6 +176,64 @@ test("evidence inputs refuse a worktree file that differs from its Git index", a
     () => validateModuleEvidenceRecord(record, { siteRoot: root }),
     /must resolve to a Git-tracked regular local file/i,
   );
+});
+
+test("evidence validation fails closed if a supplied Git-index snapshot goes stale", async (t) => {
+  const root = await createTrackedFixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const record = await loadModuleEvidenceRecord("content/reviews/m01.evidence.v1.json", {
+    siteRoot: root,
+  });
+  const snapshot = await openGitIndexSnapshot(root);
+
+  await writeFixture(
+    root,
+    "content/modules/m01.md",
+    "# Module 1\n\n## First principles\n\nA different staged model must invalidate the old snapshot.\n",
+  );
+  await execFileAsync("git", ["add", "content/modules/m01.md"], { cwd: root });
+
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(record, { siteRoot: root, snapshot }),
+    /INDEX_SNAPSHOT_STALE/u,
+  );
+});
+
+test("evidence readers reject forged and foreign Git-index snapshots", async (t) => {
+  const [root, foreignRoot] = await Promise.all([createTrackedFixture(), createTrackedFixture()]);
+  t.after(() => rm(root, { recursive: true, force: true }));
+  t.after(() => rm(foreignRoot, { recursive: true, force: true }));
+
+  const forgedErrors = [];
+  assert.equal(
+    await readTrackedText(
+      root,
+      "content/modules/m01.md",
+      "forged snapshot fixture",
+      forgedErrors,
+      {
+        snapshot: {
+          assertClean: async () => undefined,
+          readText: async () => ({ text: "forged" }),
+        },
+      },
+    ),
+    null,
+  );
+  assert.match(forgedErrors.join("\n"), /INVALID_SNAPSHOT/u);
+
+  const foreignErrors = [];
+  assert.equal(
+    await readTrackedText(
+      root,
+      "content/modules/m01.md",
+      "foreign snapshot fixture",
+      foreignErrors,
+      { snapshot: await openGitIndexSnapshot(foreignRoot) },
+    ),
+    null,
+  );
+  assert.match(foreignErrors.join("\n"), /SNAPSHOT_SITE_ROOT_MISMATCH/u);
 });
 
 test("a review record binds the exact tracked evidence digest and its criterion-level judgment", async (t) => {

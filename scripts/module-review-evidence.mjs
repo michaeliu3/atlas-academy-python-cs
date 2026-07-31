@@ -1,14 +1,16 @@
 import { createHash } from "node:crypto";
-import { execFile } from "node:child_process";
-import { lstat, readFile, realpath } from "node:fs/promises";
-import { dirname, isAbsolute, relative, resolve } from "node:path";
-import { promisify } from "node:util";
+import { dirname, isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractTableOfContents } from "../lib/heading-ids.js";
+import {
+  assertGitIndexSnapshotForSiteRoot,
+  GitIndexSnapshotError,
+  openGitIndexSnapshot,
+  readGitIndexText,
+} from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
-const execFileAsync = promisify(execFile);
 
 export const moduleEvidenceRecordKind = "atlas-module-evidence-record";
 export const moduleReviewRecordKind = "atlas-module-review-record";
@@ -175,50 +177,42 @@ function digestText(value) {
   return `sha256:${createHash("sha256").update(value, "utf8").digest("hex")}`;
 }
 
-async function isTrackedRegularFile(siteRoot, repositoryPath) {
-  const absolutePath = resolve(siteRoot, repositoryPath);
-  const pathFromRoot = relative(siteRoot, absolutePath).replaceAll("\\", "/");
-  if (pathFromRoot !== repositoryPath) return false;
-  const stats = await lstat(absolutePath).catch(() => null);
-  if (!stats || !stats.isFile() || stats.isSymbolicLink()) return false;
-  const [realRoot, realFile] = await Promise.all([
-    realpath(siteRoot).catch(() => null),
-    realpath(absolutePath).catch(() => null),
-  ]);
-  if (!realRoot || !realFile || relative(realRoot, realFile).replaceAll("\\", "/") !== repositoryPath) {
-    return false;
-  }
-  const literalPathspec = `:(literal)${repositoryPath}`;
-  return execFileAsync("git", ["ls-files", "--error-unmatch", "--", literalPathspec], {
-    cwd: siteRoot,
-  })
-    .then(() => execFileAsync("git", ["diff", "--quiet", "--no-ext-diff", "--", literalPathspec], {
-      cwd: siteRoot,
-    }))
-    .then(() => true)
-    .catch(() => false);
-}
-
-export async function readTrackedText(siteRoot, repositoryPath, label, errors) {
+export async function readTrackedText(
+  siteRoot,
+  repositoryPath,
+  label,
+  errors,
+  { snapshot = null, inputsAlreadyChecked = false } = {},
+) {
   const normalizedPath = normalizedRepositoryPath(repositoryPath, label, errors);
   if (!normalizedPath) return null;
-  if (!(await isTrackedRegularFile(siteRoot, normalizedPath))) {
-    errors.push(`${label} must resolve to a Git-tracked regular local file.`);
-    return null;
-  }
   try {
-    return {
-      path: normalizedPath,
-      text: await readFile(resolve(siteRoot, normalizedPath), "utf8"),
-    };
+    if (snapshot) {
+      await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
+      if (!inputsAlreadyChecked) {
+        await snapshot.assertClean([normalizedPath]);
+      }
+      return await snapshot.readText(normalizedPath);
+    }
+    return await readGitIndexText(siteRoot, normalizedPath);
   } catch (error) {
-    errors.push(`${label} could not be read: ${error instanceof Error ? error.message : String(error)}`);
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(`${label} must resolve to a Git-tracked regular local file${errorCode}.`);
     return null;
   }
 }
 
-async function readTrackedJson(siteRoot, repositoryPath, label, errors) {
-  const textRecord = await readTrackedText(siteRoot, repositoryPath, label, errors);
+async function readTrackedJson(
+  siteRoot,
+  repositoryPath,
+  label,
+  errors,
+  { snapshot = null, inputsAlreadyChecked = false } = {},
+) {
+  const textRecord = await readTrackedText(siteRoot, repositoryPath, label, errors, {
+    snapshot,
+    inputsAlreadyChecked,
+  });
   if (!textRecord) return null;
   if (!textRecord.path.endsWith(".json")) {
     errors.push(`${label} must name a JSON file.`);
@@ -232,7 +226,14 @@ async function readTrackedJson(siteRoot, repositoryPath, label, errors) {
   }
 }
 
-async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
+async function resolveEvidenceInput(
+  siteRoot,
+  input,
+  context,
+  caches,
+  errors,
+  { snapshot = null, inputsAlreadyChecked = false } = {},
+) {
   const label = `${context} input`;
   if (!exactKeys(input, inputKeys, label, errors)) return null;
   if (!inputKinds.has(input.kind)) {
@@ -276,8 +277,20 @@ async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
   ) return null;
   if (input.kind === "file") {
     if (input.locator !== null) errors.push(`${label}.locator must be null for a file input.`);
-    const text = await readTrackedText(siteRoot, repositoryPath, label, errors);
-    return text ? { kind: input.kind, role: input.role, path: repositoryPath, locator: null } : null;
+    const text = await readTrackedText(siteRoot, repositoryPath, label, errors, {
+      snapshot,
+      inputsAlreadyChecked,
+    });
+    return text
+      ? {
+        kind: input.kind,
+        role: input.role,
+        path: repositoryPath,
+        locator: null,
+        blobOid: text.blobOid,
+        sha256: text.sha256,
+      }
+      : null;
   }
   if (input.kind === "markdown-heading") {
     if (!repositoryPath.endsWith(".md")) {
@@ -286,19 +299,34 @@ async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
     }
     const locator = headingAnchor(input.locator, `${label}.locator`, errors);
     if (!locator) return null;
-    let headings = caches.headings.get(repositoryPath);
-    if (!headings) {
-      const text = await readTrackedText(siteRoot, repositoryPath, label, errors);
+    let headingRecord = caches.headings.get(repositoryPath);
+    if (!headingRecord) {
+      const text = await readTrackedText(siteRoot, repositoryPath, label, errors, {
+        snapshot,
+        inputsAlreadyChecked,
+      });
       if (!text) return null;
-      headings = new Map(extractTableOfContents(text.text).map((heading) => [heading.id, heading]));
-      caches.headings.set(repositoryPath, headings);
+      headingRecord = {
+        headings: new Map(extractTableOfContents(text.text).map((heading) => [heading.id, heading])),
+        blobOid: text.blobOid,
+        sha256: text.sha256,
+      };
+      caches.headings.set(repositoryPath, headingRecord);
     }
-    const heading = headings.get(locator);
+    const heading = headingRecord.headings.get(locator);
     if (!heading) {
       errors.push(`${label} points to #${locator}, which is not a visible h2/h3 heading in ${repositoryPath}.`);
       return null;
     }
-    return { kind: input.kind, role: input.role, path: repositoryPath, locator, heading };
+    return {
+      kind: input.kind,
+      role: input.role,
+      path: repositoryPath,
+      locator,
+      heading,
+      blobOid: headingRecord.blobOid,
+      sha256: headingRecord.sha256,
+    };
   }
   if (!repositoryPath.endsWith(".json")) {
     errors.push(`${label}.path must name a JSON file for a json-pointer input.`);
@@ -308,7 +336,10 @@ async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
   if (locator === null) return null;
   let jsonRecord = caches.json.get(repositoryPath);
   if (!jsonRecord) {
-    jsonRecord = await readTrackedJson(siteRoot, repositoryPath, label, errors);
+    jsonRecord = await readTrackedJson(siteRoot, repositoryPath, label, errors, {
+      snapshot,
+      inputsAlreadyChecked,
+    });
     if (!jsonRecord) return null;
     caches.json.set(repositoryPath, jsonRecord);
   }
@@ -317,7 +348,15 @@ async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
     errors.push(`${label} JSON Pointer ${locator || "(root)"} does not resolve in ${repositoryPath}.`);
     return null;
   }
-  return { kind: input.kind, role: input.role, path: repositoryPath, locator, value };
+  return {
+    kind: input.kind,
+    role: input.role,
+    path: repositoryPath,
+    locator,
+    value,
+    blobOid: jsonRecord.blobOid,
+    sha256: jsonRecord.sha256,
+  };
 }
 
 function validateExpectedModuleId(recordModuleId, expectedModuleId, label, errors) {
@@ -350,9 +389,24 @@ function validateRequiredCriterionIds(evidenceByCriterion, requiredCriterionIds,
   }
 }
 
-export async function loadModuleEvidenceRecord(recordPath, { siteRoot = defaultSiteRoot } = {}) {
+function declaredEvidenceInputPaths(record) {
+  if (!Array.isArray(record?.evidence)) return [];
+  const paths = new Set();
+  for (const entry of record?.evidence ?? []) {
+    if (!Array.isArray(entry?.inputs)) continue;
+    for (const input of entry.inputs) {
+      if (typeof input?.path === "string") paths.add(input.path);
+    }
+  }
+  return [...paths].sort();
+}
+
+export async function loadModuleEvidenceRecord(
+  recordPath,
+  { siteRoot = defaultSiteRoot, snapshot = null } = {},
+) {
   const errors = [];
-  const record = await readTrackedJson(siteRoot, recordPath, "module evidence record", errors);
+  const record = await readTrackedJson(siteRoot, recordPath, "module evidence record", errors, { snapshot });
   failure("Module evidence record load", errors);
   return record.value;
 }
@@ -365,7 +419,12 @@ export async function loadModuleEvidenceRecord(recordPath, { siteRoot = defaultS
  */
 export async function validateModuleEvidenceRecord(
   record,
-  { siteRoot = defaultSiteRoot, expectedModuleId = null, requiredCriterionIds = null } = {},
+  {
+    siteRoot = defaultSiteRoot,
+    expectedModuleId = null,
+    requiredCriterionIds = null,
+    snapshot = null,
+  } = {},
 ) {
   const errors = [];
   exactKeys(record, evidenceTopLevelKeys, "module evidence record", errors);
@@ -390,6 +449,30 @@ export async function validateModuleEvidenceRecord(
   const resolvedInputs = [];
   const releaseInputPaths = new Set();
   const caches = { headings: new Map(), json: new Map() };
+  let evidenceSnapshot = snapshot;
+  if (!evidenceSnapshot) {
+    try {
+      evidenceSnapshot = await openGitIndexSnapshot(siteRoot);
+    } catch (error) {
+      errors.push(
+        `module evidence record could not capture immutable Git-index inputs: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+  const declaredInputPaths = declaredEvidenceInputPaths(record);
+  let inputsAlreadyChecked = false;
+  if (evidenceSnapshot && declaredInputPaths.length > 0) {
+    try {
+      evidenceSnapshot = await assertGitIndexSnapshotForSiteRoot(evidenceSnapshot, siteRoot);
+      await evidenceSnapshot.assertClean(declaredInputPaths);
+      inputsAlreadyChecked = true;
+    } catch (error) {
+      const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+      errors.push(
+        `module evidence record declared inputs must share one clean captured Git-index snapshot${errorCode}.`,
+      );
+    }
+  }
   for (const [index, entry] of (record?.evidence ?? []).entries()) {
     const label = `module evidence record.evidence[${index}]`;
     if (!exactKeys(entry, evidenceEntryKeys, label, errors)) continue;
@@ -415,7 +498,10 @@ export async function validateModuleEvidenceRecord(
     const seenInputs = new Set();
     const entryResolvedInputs = [];
     for (const input of entry.inputs ?? []) {
-      const resolved = await resolveEvidenceInput(siteRoot, input, label, caches, errors);
+      const resolved = await resolveEvidenceInput(siteRoot, input, label, caches, errors, {
+        snapshot: evidenceSnapshot,
+        inputsAlreadyChecked,
+      });
       if (!resolved) continue;
       const key = `${resolved.kind}\u0000${resolved.path}\u0000${resolved.locator ?? ""}`;
       if (seenInputs.has(key)) errors.push(`${label}.inputs may not repeat the same resolved input.`);
@@ -447,9 +533,12 @@ export async function validateModuleEvidenceRecord(
   };
 }
 
-export async function loadModuleReviewRecord(recordPath, { siteRoot = defaultSiteRoot } = {}) {
+export async function loadModuleReviewRecord(
+  recordPath,
+  { siteRoot = defaultSiteRoot, snapshot = null } = {},
+) {
   const errors = [];
-  const record = await readTrackedJson(siteRoot, recordPath, "module review record", errors);
+  const record = await readTrackedJson(siteRoot, recordPath, "module review record", errors, { snapshot });
   failure("Module review record load", errors);
   return record.value;
 }
@@ -467,6 +556,7 @@ export async function validateModuleReviewRecord(
     expectedEvidenceRecordPath = null,
     expectedEvidenceRecordDigest = null,
     requiredCriterionIds = null,
+    snapshot = null,
   } = {},
 ) {
   const errors = [];
@@ -512,8 +602,24 @@ export async function validateModuleReviewRecord(
 
   let evidenceRecord = null;
   let evidenceReport = null;
+  let evidenceSnapshot = snapshot;
+  if (!evidenceSnapshot) {
+    try {
+      evidenceSnapshot = await openGitIndexSnapshot(siteRoot);
+    } catch (error) {
+      errors.push(
+        `module review record could not capture immutable Git-index inputs: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
   if (evidencePath) {
-    const loadedEvidence = await readTrackedJson(siteRoot, evidencePath, "module review record evidenceRecordPath", errors);
+    const loadedEvidence = await readTrackedJson(
+      siteRoot,
+      evidencePath,
+      "module review record evidenceRecordPath",
+      errors,
+      { snapshot: evidenceSnapshot },
+    );
     if (loadedEvidence) {
       evidenceRecord = loadedEvidence.value;
       if (record?.evidenceRecordDigest !== loadedEvidence.digest) {
@@ -524,6 +630,7 @@ export async function validateModuleReviewRecord(
           siteRoot,
           expectedModuleId: moduleId,
           requiredCriterionIds,
+          snapshot: evidenceSnapshot,
         });
       } catch (error) {
         errors.push(`module review record evidenceRecordPath is invalid: ${error instanceof Error ? error.message : String(error)}`);

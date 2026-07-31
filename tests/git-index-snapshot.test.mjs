@@ -1,0 +1,181 @@
+import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
+import { promisify } from "node:util";
+import test from "node:test";
+import {
+  GitIndexSnapshotError,
+  openGitIndexSnapshot,
+  readGitIndexText,
+} from "../scripts/git-index-snapshot.mjs";
+
+const execFileAsync = promisify(execFile);
+
+async function git(root, args) {
+  return execFileAsync("git", args, { cwd: root, encoding: "utf8" });
+}
+
+async function writeFixture(root, repositoryPath, contents) {
+  const absolutePath = join(root, repositoryPath);
+  await mkdir(dirname(absolutePath), { recursive: true });
+  await writeFile(absolutePath, contents);
+}
+
+async function createRepository() {
+  const root = await mkdtemp(join(tmpdir(), "atlas-git-index-snapshot-"));
+  await git(root, ["init", "--quiet"]);
+  await git(root, ["config", "user.email", "tests@example.invalid"]);
+  await git(root, ["config", "user.name", "Atlas test"]);
+  await writeFixture(root, "content/clean.txt", "committed text\n");
+  await writeFixture(root, "content/conflict.txt", "base\n");
+  await git(root, ["add", "."]);
+  await git(root, ["commit", "--quiet", "-m", "fixture"]);
+  return root;
+}
+
+async function expectSnapshotError(action, code) {
+  await assert.rejects(action, (error) => {
+    assert.ok(error instanceof GitIndexSnapshotError);
+    assert.equal(error.code, code);
+    return true;
+  });
+}
+
+test("Git-index snapshot returns the exact committed stage-0 blob identity", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const [{ stdout: expectedBlobOid }, record] = await Promise.all([
+    git(root, ["rev-parse", ":content/clean.txt"]),
+    readGitIndexText(root, "content/clean.txt"),
+  ]);
+
+  assert.equal(record.path, "content/clean.txt");
+  assert.equal(record.blobOid, expectedBlobOid.trim());
+  assert.equal(record.text, "committed text\n");
+  assert.match(record.sha256, /^sha256:[a-f0-9]{64}$/u);
+});
+
+test("Git-index snapshot accepts clean staged candidate content before commit", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  await writeFixture(root, "content/clean.txt", "staged candidate text\n");
+  await git(root, ["add", "content/clean.txt"]);
+
+  const record = await readGitIndexText(root, "content/clean.txt");
+  assert.equal(record.text, "staged candidate text\n");
+});
+
+test("a snapshot never substitutes a later dirty worktree replacement for its captured index blob", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  await writeFixture(root, "content/clean.txt", "staged candidate text\n");
+  await git(root, ["add", "content/clean.txt"]);
+  const snapshot = await openGitIndexSnapshot(root);
+  await snapshot.assertClean(["content/clean.txt"]);
+
+  await writeFixture(root, "content/clean.txt", "dirty replacement text\n");
+  await expectSnapshotError(
+    () => readGitIndexText(root, "content/clean.txt"),
+    "WORKTREE_DIVERGED",
+  );
+  assert.equal((await snapshot.readText("content/clean.txt")).text, "staged candidate text\n");
+});
+
+test("a snapshot rejects an index generation that changed after capture", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const snapshot = await openGitIndexSnapshot(root);
+  await writeFixture(root, "content/clean.txt", "newly staged text\n");
+  await git(root, ["add", "content/clean.txt"]);
+
+  await expectSnapshotError(
+    () => snapshot.assertClean(["content/clean.txt", "content/conflict.txt"]),
+    "INDEX_SNAPSHOT_STALE",
+  );
+  assert.equal((await snapshot.readText("content/clean.txt")).text, "committed text\n");
+});
+
+test("Git-index snapshot ignores an inherited Git index override", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const priorIndexFile = process.env.GIT_INDEX_FILE;
+  process.env.GIT_INDEX_FILE = join(root, "untrusted.index");
+  try {
+    assert.equal((await readGitIndexText(root, "content/clean.txt")).text, "committed text\n");
+  } finally {
+    if (priorIndexFile === undefined) {
+      delete process.env.GIT_INDEX_FILE;
+    } else {
+      process.env.GIT_INDEX_FILE = priorIndexFile;
+    }
+  }
+});
+
+test("Git-index snapshot rejects unsafe repository paths and nested roots", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  for (const repositoryPath of ["../content/clean.txt", "/content/clean.txt", "content\\clean.txt", ":(glob)*", "content/\u0000clean.txt"]) {
+    await expectSnapshotError(
+      () => readGitIndexText(root, repositoryPath),
+      "INVALID_REPOSITORY_PATH",
+    );
+  }
+  await expectSnapshotError(() => openGitIndexSnapshot(join(root, "content")), "INVALID_SITE_ROOT");
+});
+
+test("Git-index snapshot rejects unmerged and non-regular stage entries", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const { stdout: baseBranch } = await git(root, ["branch", "--show-current"]);
+  await git(root, ["checkout", "--quiet", "-b", "other"]);
+  await writeFixture(root, "content/conflict.txt", "other branch\n");
+  await git(root, ["add", "content/conflict.txt"]);
+  await git(root, ["commit", "--quiet", "-m", "other"]);
+  await git(root, ["checkout", "--quiet", baseBranch.trim()]);
+  await writeFixture(root, "content/conflict.txt", "current branch\n");
+  await git(root, ["add", "content/conflict.txt"]);
+  await git(root, ["commit", "--quiet", "-m", "current"]);
+  await assert.rejects(() => git(root, ["merge", "--no-edit", "other"]));
+
+  const conflictedSnapshot = await openGitIndexSnapshot(root);
+  await expectSnapshotError(
+    () => conflictedSnapshot.readText("content/conflict.txt"),
+    "INDEX_ENTRY_UNMERGED",
+  );
+  await git(root, ["merge", "--abort"]);
+
+  const { stdout: blobOid } = await git(root, ["rev-parse", ":content/clean.txt"]);
+  await git(root, [
+    "update-index",
+    "--add",
+    "--cacheinfo",
+    `120000,${blobOid.trim()},content/symlink.txt`,
+  ]);
+  const symlinkSnapshot = await openGitIndexSnapshot(root);
+  await expectSnapshotError(
+    () => symlinkSnapshot.readText("content/symlink.txt"),
+    "INDEX_ENTRY_NOT_REGULAR",
+  );
+});
+
+test("Git-index snapshot rejects non-UTF-8 blobs and enforces its text-size cap", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  await writeFixture(root, "content/not-utf8.bin", Buffer.from([0xff, 0xfe, 0x00]));
+  await writeFixture(root, "content/oversized.txt", "123456789012345678901");
+  await git(root, ["add", "content/not-utf8.bin", "content/oversized.txt"]);
+
+  const snapshot = await openGitIndexSnapshot(root, { maximumTextBytes: 20 });
+  assert.equal((await snapshot.readText("content/clean.txt")).text, "committed text\n");
+  await expectSnapshotError(() => snapshot.readText("content/not-utf8.bin"), "BLOB_NOT_UTF8");
+  await expectSnapshotError(() => snapshot.readText("content/oversized.txt"), "BLOB_TOO_LARGE");
+});
