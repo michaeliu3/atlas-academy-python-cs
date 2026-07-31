@@ -23,6 +23,12 @@ actually published.
   RI/AF mapping, equivalent implementations, architecture boundary, and
   consolidation map. This is a bounded visual-equivalence improvement, not a
   completed accessibility review or a claim that later modules are remediated.
+- Completed Module 4's Mermaid accessibility retrofit: all five instructional
+  diagrams now carry unique stable IDs, concise titles, and authored prose
+  alternatives for its knowledge bridge, implication transformations,
+  prerequisite graph, layered validation architecture, and proof/evidence map.
+  This is a bounded visual-equivalence improvement, not a completed
+  accessibility review or a claim that later modules are remediated.
 - Added a versioned v2 designated-chat learning workflow. Portable copied
   prompts remain local-first, while only the learner-designated Teaching
   Assistant and Study Partner chats may automatically create at most one

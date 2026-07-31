@@ -9,6 +9,9 @@ Atlas can now represent events behind an abstraction boundary. The next problem 
 This forces us to make informal words such as “all,” “depends on,” “before,” “reachable,” and “valid” mathematically precise. Logic gives us claim structure. Sets and relations give us a vocabulary for collections and connections. Graphs give the prerequisite system a shape. Proof tells us when an answer follows for every allowed input rather than only for examples we tried.
 
 ```mermaid
+%% atlas-diagram-id: m04-prerequisite-planner-bridge
+%% atlas-diagram-title: Logic, sets, graphs, and proof extend the first three modules
+%% atlas-diagram-alt: Modules 1 through 3 feed an Atlas prerequisite planner. Logic, sets and relations, graphs, and proof also feed it; the planner then supports later work on cost models, graph algorithms, and specifications and tests.
 flowchart LR
     M1["Module 1<br/>state + invariants"] --> M2["Module 2<br/>functions + induction"]
     M2 --> M3["Module 3<br/>ADTs + contracts"]
@@ -111,6 +114,9 @@ If “a valid route has no backward prerequisite edge” is true, its **converse
 “a route with no backward edge is valid”—may still fail if the route omits a prerequisite entirely. Reversing an implication changes the claim.
 
 ```mermaid
+%% atlas-diagram-id: m04-implication-transformations
+%% atlas-diagram-title: The contrapositive is equivalent, unlike converse and inverse
+%% atlas-diagram-alt: An original implication P implies Q connects to its contrapositive not Q implies not P as a logically equivalent statement. Its converse Q implies P and inverse not P implies not Q are shown as transformations that are not automatically equivalent.
 flowchart TD
     A["Original<br/>P → Q"] --> B["Contrapositive<br/>¬Q → ¬P<br/>logically equivalent"]
     A --> C["Converse<br/>Q → P<br/>not automatically equivalent"]
@@ -203,6 +209,9 @@ For Atlas:
 - edge `(a, b)` means a must be learned before b.
 
 ```mermaid
+%% atlas-diagram-id: m04-prerequisite-dag
+%% atlas-diagram-title: A small directed prerequisite graph leads from state to graph algorithms
+%% atlas-diagram-alt: State leads to functions, then recursion, proof, and graph algorithms. State also leads to abstraction, which leads to proof; the directed edges model concepts that must be learned earlier than their successors.
 flowchart LR
     S["state"] --> F["functions"]
     F --> R["recursion"]
@@ -425,6 +434,9 @@ For each implementation:
 Architecture target:
 
 ```mermaid
+%% atlas-diagram-id: m04-route-validation-architecture
+%% atlas-diagram-title: Pure route rules depend on a graph interface rather than storage or UI
+%% atlas-diagram-alt: A Route UI calls a route-validation use case, which uses pure prerequisite rules and a concept-graph interface. A file or database adapter also implements that interface, while the pure rules depend only on Concept and Edge values rather than storage or rendering.
 flowchart LR
     UI["Route UI"] --> USE["Validate route use case"]
     USE --> RULE["Pure prerequisite rules"]
@@ -755,6 +767,9 @@ The milestone is complete when Michael can defend the model and evidence orally,
 ## 18. Consolidation map
 
 ```mermaid
+%% atlas-diagram-id: m04-logic-proof-consolidation
+%% atlas-diagram-title: Logic models claims while proof, code, tests, and review supply different evidence
+%% atlas-diagram-alt: A quantified claim defines a domain through sets, allowed pairs through relations, and graph structure that code evaluates finitely. Proof covers all modeled cases, tests compare code with selected cases, and both feed review before Module 5 asks what resources evaluation consumes.
 flowchart TD
     Q["Quantified claim"] --> SET["Sets define the domain"]
     SET --> REL["Relations define allowed pairs"]

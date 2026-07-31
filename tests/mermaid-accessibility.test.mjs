@@ -135,3 +135,20 @@ test("Module 3 is a complete abstraction-and-ADT retrofit with unique visual exp
   assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m03-")));
   assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });
+
+test("Module 4 is a complete logic-and-proof retrofit with unique visual explanations", async () => {
+  const moduleFour = await readFile(
+    new URL("../content/modules/04_logic_sets_relations_graphs_proof.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleFour, {
+    sourcePath: "content/modules/04_logic_sets_relations_graphs_proof.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 5);
+  assert.equal(report.summary.completeBlocks, 5);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m04-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+});
