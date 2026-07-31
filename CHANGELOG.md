@@ -7,6 +7,16 @@ actually published.
 
 ## Unreleased
 
+- Added authoring-only primary-source research dossiers for M33–M36: formal
+  languages/computability/complexity; classical AI search, constraints, and
+  decision; machine learning and representation; and statistical learning
+  theory/reliable deep-learning systems. Each preserves the canonical
+  prerequisite/session/forward-handoff plan, first-principles definitions,
+  claim/assumption/counterexample limits, source/reuse boundaries, and a
+  future synthetic project path. Focused tests prove they remain outside the
+  canonical source-map, release-input, reader, and publication paths. They do
+  not supply a workbook, studio, contract review, benchmark, Notion-write
+  proof, deployment, learner-mastery, or M25/M26 unlock claim.
 - Added a versioned v2 designated-chat learning workflow. Portable copied
   prompts remain local-first, while only the learner-designated Teaching
   Assistant and Study Partner chats may automatically create at most one
