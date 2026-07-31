@@ -134,7 +134,7 @@
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
-      "sha256": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742"
+      "sha256": "1e0ef5fb8868bd339d88922bc0dec26393f683071b319f3c4b2c885015ffa427"
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
@@ -214,7 +214,7 @@
     },
     {
       "path": "content/source-maps/module23_languages_interpreters_source_map.md",
-      "sha256": "4211fe4caf6b46d096b1501d8025a04852d9c0b124ad04aa6953095b1a86f88b"
+      "sha256": "cba7ef46543a4f8867ff6d465cfe901e54cab33324354f8699d3fdff798e376b"
     },
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",

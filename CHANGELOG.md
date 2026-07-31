@@ -7,6 +7,23 @@ actually published.
 
 ## Unreleased
 
+- Added an authoring-only M23 source-audit addendum that ties language,
+  interpreter, typing, implementation-evidence, and pedagogy source classes
+  to its six sessions, reuse decisions, bounded-model limits, and
+  release-truth checks. It preserves the immutable legacy audit's five
+  ambiguous criteria plus its genuinely missing module-specific oral-defense
+  protocol; it is not a learner download, quality approval, publication
+  promotion, or release-evidence claim. The canonical M23 map/addendum remain
+  configured authoring inputs rather than learner downloads.
+- Corrected M23 source and learner-facing bridge language: tagged CPython
+  source links now use v3.14.6 rather than the moving main branch; the
+  reference model reports a local Python implementation/version rather than
+  assuming CPython; its fixed text parse and separately defined function
+  disassembly are now explicitly distinct; and the studio marks its opcode
+  names as illustrative rather than captured output. Evaluator purity is also
+  separated truthfully from bounded CLI standard output and the test harness's
+  checked-in-source read. These corrections establish neither human review,
+  publication, release, deployment, nor security clearance.
 - Added an authoring-only M22 source-audit addendum that ties its trust,
   privacy, security, and release-evidence source classes to six sessions,
   reuse decisions, bounded-model limits, and release-truth checks. It

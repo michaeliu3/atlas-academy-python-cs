@@ -23,9 +23,12 @@ visible. We will build two tiny, original teaching languages:
   over a redacted local fixture after a separately authorized, narrow read
   capability is supplied.
 
-Neither language is a subset of Python. Neither is a general sandbox. The
-reference model performs no network, filesystem, process, database, package,
-credential, or remote-code operation.
+Neither language is a subset of Python. Neither is a general sandbox. Within
+its query-evaluation path, the reference model uses fixed in-memory fixtures
+and performs no network, filesystem, child-process, database, package,
+credential, or remote-code operation. Its fixed CLI writes bounded output to
+standard output, and its separate behavioral test harness reads the checked-in
+model source for one structural regression check.
 
 ---
 
@@ -82,8 +85,9 @@ operating-system boundary, or performance guarantee.
 ~~~text
 Reference: module23_reference.py
 Tests:     test_module23_reference.py (43 behavioral checks)
-Runtime:   local CPython evidence environment
-Effects:   no network, file, process, database, package, credential, or remote-code action
+Runtime:   local Python implementation/version evidence environment (reported by the bridge packet)
+Evaluator: no network, filesystem, child-process, database, package, credential, or remote-code action
+Local test-harness I/O: reads checked-in model source for one structural safety check; fixed CLI only writes bounded output
 Input:     fixed scenario names only; the CLI does not accept arbitrary query text
 Core rule: custom Atlas Query lexer/parser; never source → Python evaluator
 Provenance: private seals model the course path; they are not hostile same-process isolation
@@ -799,10 +803,11 @@ external credential. State why each omission is purposeful.
 
 “The disassembly proves what Python means and what will be fast.”
 
-Disassembly is an observation of a particular CPython build and version. It
-can help you ask sharper implementation and performance questions. It is not
-the Python language specification, a portable opcode contract, a sandbox
-boundary, or a benchmark result.
+Disassembly is an observation of one local Python implementation and version.
+When its runtime label is `cpython`, it can support a CPython-specific
+implementation observation. It can help you ask sharper implementation and
+performance questions. It is not the Python language specification, a
+portable opcode contract, a sandbox boundary, or a benchmark result.
 
 ### From trusted Python source to an implementation observation
 
@@ -820,7 +825,7 @@ trusted bundled source
   → ast.parse observation
   → compiler/code-object idea
   → disassembly observation
-  → CPython / Python-version-specific question
+  → local Python-implementation/version-specific question
 ~~~
 
 The word **trusted** matters. Module 23 never sends external Atlas Query text
@@ -834,13 +839,19 @@ returns AST node kinds, opcode names, and the exact local implementation and
 version label. That is evidence about this local runtime—not a portable
 semantic, authorization, or performance claim.
 
+**Bridge provenance note:** the AST comes from the fixed bundled text. The
+instruction names come from a separately declared, course-owned function with
+intentionally matching source. This model does not compile that text at bridge
+time or prove that the inspected code object originated from it; treat the two
+as parallel fixed teaching observations.
+
 ### Four claim owners
 
 | Claim | Correct owner |
 |---|---|
 | “This Pebble expression evaluates left-to-right.” | Atlas/Pebble language rule |
 | “Python resolves this nested name under its execution model.” | Python language reference |
-| “This local CPython build displays these instructions.” | version-labelled CPython observation |
+| “This local Python implementation/version displays these instructions.” | version-labelled implementation observation |
 | “This version is faster for our workload.” | a measured, reproducible performance study |
 
 ~~~mermaid
@@ -889,7 +900,7 @@ contains the same learning route without relying on color or animation.
 | **Environment theatre** | Which `threshold` does a closure see? | The closure captures its lexical parent, not its caller. | A closure is not a security boundary. |
 | **Evaluation trace** | Which branch/value is evaluated next? | Left-to-right/call-by-value and conditional/short-circuit rules. | Tree shape alone does not choose an evaluation order. |
 | **Contract + capability checkpoint** | What is the earliest rejecting layer? | Syntax, contract, authority, capability, and fuel are distinct outcomes. | A permitted AST does not choose a host adapter. |
-| **Trusted compilation bridge** | What does one disassembly establish? | A CPython/Python-version-specific implementation observation. | Bytecode is not portable language law or a performance proof. |
+| **Trusted compilation bridge** | What does one disassembly establish? | A local implementation/version-specific observation. | Bytecode is not portable language law or a performance proof. |
 
 Accessibility requirement: every view has a text label, keyboard-reachable
 native control, visible focus, high contrast, a prose traversal order, and a
@@ -1012,12 +1023,12 @@ What can a `dis` listing contribute here?
 
 - A. A permanent definition of Python semantics.
 - B. Proof that a query sandbox is secure.
-- C. A version-labelled CPython implementation observation that motivates
+- C. A version-labelled local implementation observation that motivates
   Module 24 measurement.
 - D. An authorization result.
 
-**Best answer: C.** CPython bytecode is implementation detail and can change
-across versions and VMs.
+**Best answer: C.** Bytecode is implementation detail and can change across
+versions and implementations.
 
 ---
 
@@ -1078,7 +1089,7 @@ outcomes and prove the evaluator cannot select ambient host authority.
 | Authority | Capability scope/lifetime/owner are explicit. | Parse result or type hint becomes permission. |
 | Resources | Input, tree, fuel, and output constraints are named. | “Fuel makes it universally safe.” |
 | Evidence | Packet is redacted, versioned, and limits its claim. | Raw query/records or inferred remote success appear in logs. |
-| Implementation bridge | CPython facts are version-labelled. | An opcode is treated as language law. |
+| Implementation bridge | Local implementation facts are version-labelled. | An opcode is treated as language law. |
 
 ---
 
@@ -1107,7 +1118,7 @@ scope question by assigning more parser typing drills.
 | Closure clinic | “Which parent environment owns this free name?” | Three-frame environment diagram |
 | Contract split | “What does this annotation/check actually establish?” | Not-the-same-as chain |
 | Capability review | “Where first does authority appear, and what cannot the evaluator do?” | Capability card |
-| CPython claim audit | “Is this language law, CPython evidence, Atlas fixture, or unknown?” | Claim-owner table |
+| Implementation claim audit | “Is this language law, local implementation evidence, Atlas fixture, or unknown?” | Claim-owner table |
 
 ### Study Partner routine — 20 to 30 minutes
 

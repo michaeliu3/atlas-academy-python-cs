@@ -327,9 +327,9 @@ const bridgeCards = [
   },
   {
     id: "dis",
-    label: "dis excerpt",
-    content: "RESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE",
-    detail: "Illustrative CPython-style instruction names can differ by Python release, build, and implementation. Read an actual listing as local evidence, not language law.",
+    label: "illustrative opcode-name card",
+    content: "[illustrative opcode names — not captured `dis` output]\nRESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE",
+    detail: "This fixed conceptual opcode-name list is not a captured disassembly. An actual listing is evidence only about the local Python implementation/version that produced it, not language law.",
   },
 ] as const;
 
@@ -960,27 +960,29 @@ function BridgeLab({
     <div className={styles.viewStack}>
       <PredictionGate
         choices={[
-          { id: "observation", label: "A version-labelled CPython implementation observation that can motivate a later measurement question." },
+          { id: "observation", label: "A version-labelled local Python implementation observation that can motivate a later measurement question." },
           { id: "law", label: "A permanent, portable definition of Python language semantics." },
           { id: "benchmark", label: "Proof that this function is faster in every Python implementation and workload." },
         ]}
         id="bridge"
         onChange={onChange}
-        prompt="What is the strongest claim a `dis` listing for one trusted bundled Python snippet can support?"
+        prompt="What is the strongest claim version-labelled implementation evidence for one trusted bundled Python snippet can support?"
         record={record}
       />
       {record.revealed && (
         <section className={styles.revealCard} aria-live="polite">
           <div className={styles.revealHeader}>
-            <span className={styles.scopeTag}>TRUSTED CPYTHON COMPILATION BRIDGE</span>
+            <span className={styles.scopeTag}>TRUSTED PYTHON IMPLEMENTATION BRIDGE</span>
             <h3>Implementation evidence is useful precisely because its scope is labelled.</h3>
           </div>
           <p className={styles.bridgeWarning}>
-            <strong>CPython / Python-version-specific observation.</strong> This
-            view is a fixed code-reading bridge. It has no custom input, code
-            runner, external Atlas text, or executable action.
+            <strong>Local Python implementation/version-specific observation.</strong>
+            {" "}Call it CPython-specific only when a captured runtime label
+            reports <code>cpython</code>. This view is a fixed code-reading
+            bridge with no custom input, code runner, external Atlas text, or
+            executable action.
           </p>
-          <div className={styles.bridgeRail} aria-label="Trusted Python source to CPython observation path">
+          <div className={styles.bridgeRail} aria-label="Trusted Python source to local implementation observation path">
             {bridgeCards.map((item, index) => (
               <div key={item.id}>
                 <button
@@ -1003,7 +1005,7 @@ function BridgeLab({
           </div>
           <div className={styles.claimOwners}>
             <article><span>language rule</span><p>Python language reference owns language semantics.</p></article>
-            <article><span>local observation</span><p>A particular CPython build can display particular implementation evidence.</p></article>
+            <article><span>local observation</span><p>A particular local Python implementation/build can display particular implementation evidence.</p></article>
             <article><span>performance claim</span><p>A controlled, reproducible measurement owns a speed or allocation conclusion.</p></article>
           </div>
           <div className={styles.nonClaimPlate}>
@@ -1014,9 +1016,10 @@ function BridgeLab({
           <div className={styles.textEquivalent}>
             <strong>Text equivalent</strong>
             Follow the four fixed cards from trusted bundled source to AST
-            observation, compiler/code-object concept, and an illustrative
-            disassembly card. Each card is scoped implementation evidence; none
-            executes or authorizes a learner-provided query.
+            observation, compiler/code-object concept, and a conceptual
+            opcode-name card—not a captured <code>dis</code> listing. Each card
+            scopes an implementation idea; none executes or authorizes a
+            learner-provided query.
           </div>
         </section>
       )}
