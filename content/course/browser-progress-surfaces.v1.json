@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "v1",
+  "kind": "atlas-browser-progress-surface-policy",
+  "purpose": "Allow only bounded, optional, local learner-progress records. Prediction-triad record paths name a fixed gate whose only persisted fields are an allowlisted choice, confidence, and reveal flag. These records are untrusted and are never identity, mastery, authorization, Notion, transcript, oral-defense, route-unlock, or pass/fail evidence.",
+  "scope": {
+    "sourceRoots": ["app", "lib"],
+    "browserStorageAdapterPath": "lib/browser-progress-storage.js",
+    "forbiddenApis": ["sessionStorage"],
+    "forbiddenMethods": ["clear"],
+    "requiredEnvelopeKeys": ["version", "record"],
+    "forbiddenDataClasses": [
+      "learner-text",
+      "names-or-identifiers",
+      "timestamps",
+      "navigation-or-completion-state",
+      "results-or-scores",
+      "export-consent",
+      "raw-transcript",
+      "credentials",
+      "policy-or-capability-state"
+    ]
+  },
+  "surfaces": [
+    {
+      "id": "intake",
+      "owner": { "moduleId": "intake", "lifecycle": "published-foundation" },
+      "route": "/diagnostic",
+      "clientPaths": ["app/diagnostic/DiagnosticExperience.tsx"],
+      "adapter": {
+        "path": "lib/diagnostic-progress-codec.js",
+        "codecExport": "diagnosticProgressCodec",
+        "operations": ["restoreDiagnosticProgress", "persistDiagnosticProgress", "clearDiagnosticProgress"]
+      },
+      "current": {
+        "key": "atlas-academy:diagnostic:intermediate-advanced-v3",
+        "keyVersion": 3,
+        "envelopeVersion": 3,
+        "codecKind": "prediction-triads",
+        "recordPaths": [
+          "python-state-aliasing", "recursion-termination", "adt-observation-contract", "cost-hidden-membership",
+          "lazy-shared-cursor", "hash-key-stability", "bfs-discovery-timing", "architecture-dependency-direction",
+          "debugging-flaky-evidence", "agent-retry-review", "artifact-pickle-boundary", "sql-three-valued-logic",
+          "transaction-replay-identity", "memory-locality-cache-lines", "quantifier-scope-countermodel",
+          "linear-algebra-basis-coordinates", "calculus-gradient-local-change", "probability-conditional-evidence",
+          "optimization-feasible-descent", "ml-evaluation-leakage"
+        ],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 4096
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy:diagnostic:intermediate-advanced-v2",
+          "keyVersion": 2,
+          "strategy": "migrate-meaningful-current-first",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": {
+        "removeKeys": [
+          "atlas-academy:diagnostic:intermediate-advanced-v3",
+          "atlas-academy:diagnostic:intermediate-advanced-v2"
+        ]
+      },
+      "tests": { "unit": "tests/diagnostic-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m18-os-studio",
+      "owner": { "moduleId": "m18", "lifecycle": "published" },
+      "route": "/modules/18-operating-systems-resource-mediation",
+      "clientPaths": ["app/OperatingSystemsStudio.tsx"],
+      "adapter": {
+        "path": "lib/module18-progress-codec.js",
+        "codecExport": "module18ProgressCodec",
+        "operations": ["restoreModule18Progress", "persistModule18Progress", "clearModule18Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module18-os-studio.v3",
+        "keyVersion": 3,
+        "envelopeVersion": 3,
+        "codecKind": "custom-allowlisted",
+        "recordPaths": [
+          "boundary.step", "boundary.choice", "boundary.confidence", "boundary.revealed",
+          "translation.process", "translation.virtualAddress", "translation.access", "translation.pte",
+          "translation.vpn", "translation.offset", "translation.outcome", "translation.physical",
+          "translation.confidence", "translation.revealed", "publication.scenario", "publication.phase",
+          "publication.choice", "publication.confidence", "publication.revealed"
+        ],
+        "allowedDataClasses": ["fixed-choice-id", "bounded-numeric-context", "bounded-enum-context", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy.module18-os-studio.v2",
+          "keyVersion": 2,
+          "strategy": "retire",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": { "removeKeys": ["atlas-academy.module18-os-studio.v3", "atlas-academy.module18-os-studio.v2"] },
+      "tests": { "unit": "tests/module18-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m19-concurrency-studio",
+      "owner": { "moduleId": "m19", "lifecycle": "published" },
+      "route": "/modules/19-concurrency-parallelism",
+      "clientPaths": ["app/ConcurrencyStudio.tsx"],
+      "adapter": {
+        "path": "lib/module19-progress-codec.js",
+        "codecExport": "module19ProgressCodec",
+        "operations": ["restoreModule19Progress", "persistModule19Progress", "clearModule19Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module19-concurrency-studio.v3",
+        "keyVersion": 3,
+        "envelopeVersion": 3,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["history", "linearization", "coordination", "progress", "models", "evidence"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy.module19-concurrency-studio.v2",
+          "keyVersion": 2,
+          "strategy": "retire",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": { "removeKeys": ["atlas-academy.module19-concurrency-studio.v3", "atlas-academy.module19-concurrency-studio.v2"] },
+      "tests": { "unit": "tests/module19-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m20-protocol-studio",
+      "owner": { "moduleId": "m20", "lifecycle": "published" },
+      "route": "/modules/20-networks-application-protocols",
+      "clientPaths": ["app/NetworkProtocolStudio.tsx"],
+      "adapter": {
+        "path": "lib/module20-progress-codec.js",
+        "codecExport": "module20ProgressCodec",
+        "operations": ["restoreModule20Progress", "persistModule20Progress", "clearModule20Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module20-protocol-studio.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["naming", "framing", "evidence", "http", "retry", "audit"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas-academy.module20-protocol-studio.v1"] },
+      "tests": { "unit": "tests/module20-22-25-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m21-async-distributed-studio",
+      "owner": { "moduleId": "m21", "lifecycle": "published" },
+      "route": "/modules/21-async-distributed-systems",
+      "clientPaths": ["app/AsyncDistributedStudio.tsx"],
+      "adapter": {
+        "path": "lib/module21-progress-codec.js",
+        "codecExport": "module21ProgressCodec",
+        "operations": ["restoreModule21Progress", "persistModule21Progress", "clearModule21Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module21-run-control.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["task", "scope", "pressure", "reconcile", "order", "audit"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas-academy.module21-run-control.v1"] },
+      "tests": { "unit": "tests/module20-22-25-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m22-security-trust-studio",
+      "owner": { "moduleId": "m22", "lifecycle": "published" },
+      "route": "/modules/22-security-privacy-trust-boundaries",
+      "clientPaths": ["app/SecurityTrustStudio.tsx"],
+      "adapter": {
+        "path": "lib/module22-progress-codec.js",
+        "codecExport": "module22ProgressCodec",
+        "operations": ["restoreModule22Progress", "persistModule22Progress", "clearModule22Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module22-security-trust.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["boundary", "identity", "pipeline", "crypto", "provenance", "incident"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas-academy.module22-security-trust.v1"] },
+      "tests": { "unit": "tests/module20-22-25-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m23-language-lab",
+      "owner": { "moduleId": "m23", "lifecycle": "published" },
+      "route": "/modules/23-programming-languages-interpreters",
+      "clientPaths": ["app/LanguageInterpreterStudio.tsx"],
+      "adapter": {
+        "path": "lib/module23-progress-codec.js",
+        "codecExport": "module23ProgressCodec",
+        "operations": ["restoreModule23Progress", "persistModule23Progress", "clearModule23Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module23-language-lab.v2",
+        "keyVersion": 2,
+        "envelopeVersion": 2,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["boundary", "grammar", "environment", "semantics", "contract", "bridge"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy.module23-language-lab.v1",
+          "keyVersion": 1,
+          "strategy": "migrate-meaningful-current-first",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": { "removeKeys": ["atlas-academy.module23-language-lab.v2", "atlas-academy.module23-language-lab.v1"] },
+      "tests": { "unit": "tests/module19-23-24-26-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m24-runtime-observatory",
+      "owner": { "moduleId": "m24", "lifecycle": "published" },
+      "route": "/modules/24-cpython-performance-memory",
+      "clientPaths": ["app/RuntimeEvidenceObservatory.tsx"],
+      "adapter": {
+        "path": "lib/module24-progress-codec.js",
+        "codecExport": "module24ProgressCodec",
+        "operations": ["restoreModule24Progress", "persistModule24Progress", "clearModule24Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module24-runtime-observatory.v2",
+        "keyVersion": 2,
+        "envelopeVersion": 2,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["contract", "graph", "cycle", "lens", "runtime", "decision"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy.module24-runtime-observatory.v1",
+          "keyVersion": 1,
+          "strategy": "migrate-meaningful-current-first",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": { "removeKeys": ["atlas-academy.module24-runtime-observatory.v2", "atlas-academy.module24-runtime-observatory.v1"] },
+      "tests": { "unit": "tests/module19-23-24-26-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m25-evidence-studio",
+      "owner": { "moduleId": "m25", "lifecycle": "preview" },
+      "route": "/modules/25-evidence-grounded-intelligent-systems",
+      "clientPaths": ["app/EvidenceGroundedStudio.tsx"],
+      "adapter": {
+        "path": "lib/module25-progress-codec.js",
+        "codecExport": "module25ProgressCodec",
+        "operations": ["restoreModule25Progress", "persistModule25Progress", "clearModule25Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module25-evidence-studio.v2",
+        "keyVersion": 2,
+        "envelopeVersion": 2,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["purpose", "lineage", "ranking", "evaluation", "control", "agent"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy.module25-evidence-studio.v1",
+          "keyVersion": 1,
+          "strategy": "retire",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": { "removeKeys": ["atlas-academy.module25-evidence-studio.v2", "atlas-academy.module25-evidence-studio.v1"] },
+      "tests": { "unit": "tests/module20-22-25-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m26-capstone-defense",
+      "owner": { "moduleId": "m26", "lifecycle": "preview" },
+      "route": "/modules/26-systems-capstone-open-source-stewardship",
+      "clientPaths": ["app/CapstoneDefenseStudio.tsx"],
+      "adapter": {
+        "path": "lib/module26-progress-codec.js",
+        "codecExport": "module26ProgressCodec",
+        "operations": ["restoreModule26Progress", "persistModule26Progress", "clearModule26Progress"]
+      },
+      "current": {
+        "key": "atlas-academy.module26-capstone-defense.v2",
+        "keyVersion": 2,
+        "envelopeVersion": 2,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["brief", "threads", "failure", "patch", "ledger", "board"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [
+        {
+          "key": "atlas-academy.module26-capstone-defense.v1",
+          "keyVersion": 1,
+          "strategy": "migrate-meaningful-current-first",
+          "fallbackWhenCurrentPresent": false
+        }
+      ],
+      "reset": { "removeKeys": ["atlas-academy.module26-capstone-defense.v2", "atlas-academy.module26-capstone-defense.v1"] },
+      "tests": { "unit": "tests/module19-23-24-26-progress-lifecycle.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m27-discrete-math-studio",
+      "owner": { "moduleId": "m27", "lifecycle": "published" },
+      "route": "/modules/27-discrete-mathematics-proof-counting-structures",
+      "clientPaths": ["app/DiscreteMathProofStudio.tsx"],
+      "adapter": {
+        "path": "lib/module27-progress-codec.js",
+        "codecExport": "module27ProgressCodec",
+        "operations": ["restoreModule27Progress", "persistModule27Progress", "clearModule27Progress"]
+      },
+      "current": {
+        "key": "atlas.module27.proof-counterexample-studio.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["scope", "proof", "invariant", "count", "graph", "order"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas.module27.proof-counterexample-studio.v1"] },
+      "tests": { "unit": "tests/module27-30-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m28-linear-algebra-studio",
+      "owner": { "moduleId": "m28", "lifecycle": "published" },
+      "route": "/modules/28-linear-algebra-numerical-stability-representation",
+      "clientPaths": ["app/LinearAlgebraStabilityStudio.tsx"],
+      "adapter": {
+        "path": "lib/module28-progress-codec.js",
+        "codecExport": "module28ProgressCodec",
+        "operations": ["restoreModule28Progress", "persistModule28Progress", "clearModule28Progress"]
+      },
+      "current": {
+        "key": "atlas.module28.linear-algebra-stability-studio.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["space", "map", "projection", "spectrum", "stability", "pca"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas.module28.linear-algebra-stability-studio.v1"] },
+      "tests": { "unit": "tests/module27-30-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m29-calculus-studio",
+      "owner": { "moduleId": "m29", "lifecycle": "published" },
+      "route": "/modules/29-calculus-real-analysis-continuous-change",
+      "clientPaths": ["app/CalculusContinuousChangeStudio.tsx"],
+      "adapter": {
+        "path": "lib/module29-progress-codec.js",
+        "codecExport": "module29ProgressCodec",
+        "operations": ["restoreModule29Progress", "persistModule29Progress", "clearModule29Progress"]
+      },
+      "current": {
+        "key": "atlas.module29.continuous-change-studio.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["limit", "local", "area", "chain", "convergence", "trajectory"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas.module29.continuous-change-studio.v1"] },
+      "tests": { "unit": "tests/module27-30-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    },
+    {
+      "id": "m30-probability-studio",
+      "owner": { "moduleId": "m30", "lifecycle": "published" },
+      "route": "/modules/30-probability-statistics-scientific-inference",
+      "clientPaths": ["app/ProbabilityInferenceStudio.tsx"],
+      "adapter": {
+        "path": "lib/module30-progress-codec.js",
+        "codecExport": "module30ProgressCodec",
+        "operations": ["restoreModule30Progress", "persistModule30Progress", "clearModule30Progress"]
+      },
+      "current": {
+        "key": "atlas.module30.probability-inference-studio.v1",
+        "keyVersion": 1,
+        "envelopeVersion": 1,
+        "codecKind": "prediction-triads",
+        "recordPaths": ["base-rate", "variation", "repetition", "likelihood", "procedure", "design"],
+        "allowedDataClasses": ["fixed-choice-id", "confidence", "reveal-flag"],
+        "meaningfulWriteOnly": true,
+        "maxSerializedBytes": 2048
+      },
+      "legacy": [],
+      "reset": { "removeKeys": ["atlas.module30.probability-inference-studio.v1"] },
+      "tests": { "unit": "tests/module27-30-progress-codec.test.mjs", "browser": "e2e/accessibility.spec.ts" }
+    }
+  ]
+}

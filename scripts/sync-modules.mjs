@@ -35,6 +35,10 @@ import {
   loadLiveCodexLearningWorkflow,
   validateLiveCodexLearningWorkflow,
 } from "./live-codex-learning-workflow.mjs";
+import {
+  loadBrowserProgressSurfacePolicy,
+  validateBrowserProgressSurfacePolicy,
+} from "./browser-progress-surface-policy.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -214,6 +218,11 @@ const liveCodexLearningWorkflowReport = await validateLiveCodexLearningWorkflow(
   liveCodexLearningWorkflow,
   { siteRoot },
 );
+const browserProgressSurfacePolicy = await loadBrowserProgressSurfacePolicy(siteRoot);
+const browserProgressSurfacePolicyReport = await validateBrowserProgressSurfacePolicy(
+  browserProgressSurfacePolicy,
+  { siteRoot },
+);
 const legacyModuleContractAudit = await loadLegacyModuleContractAudit(siteRoot);
 const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
   legacyModuleContractAudit,
@@ -239,6 +248,9 @@ for (const path of manualLearningRecordWorkflowReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 for (const path of liveCodexLearningWorkflowReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of browserProgressSurfacePolicyReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 

@@ -15,6 +15,7 @@ import {
   persistModule18Progress,
   restoreModule18Progress,
 } from "@/lib/module18-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 
 type OsView =
   | "boundary"
@@ -1046,9 +1047,10 @@ export function OperatingSystemsStudio() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const saved = restoreModule18Progress(
-          window.localStorage,
-        ) as Module18Progress | null;
+        const storage = getBrowserProgressStorage();
+        const saved = storage
+          ? (restoreModule18Progress(storage) as Module18Progress | null)
+          : null;
         if (saved) {
           setBoundaryStep(saved.boundary.step);
           setBoundaryPrediction(saved.boundary.choice);
@@ -1133,7 +1135,10 @@ export function OperatingSystemsStudio() {
           revealed: showPublicationAnswer,
         },
       };
-      persistModule18Progress(window.localStorage, progress);
+      const storage = getBrowserProgressStorage();
+      if (storage) {
+        persistModule18Progress(storage, progress);
+      }
     } catch {
       // Persistence is an enhancement; interactions continue in memory.
     }
@@ -1212,7 +1217,10 @@ export function OperatingSystemsStudio() {
 
   const resetStudio = () => {
     try {
-      clearModule18Progress(window.localStorage);
+      const storage = getBrowserProgressStorage();
+      if (storage) {
+        clearModule18Progress(storage);
+      }
     } catch {
       // Browser storage is optional; reset the in-memory studio regardless.
     }

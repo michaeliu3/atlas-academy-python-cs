@@ -850,7 +850,7 @@ test("M23 fails closed when a malformed v2 record coexists with meaningful v1 pr
         { legacyKey, currentKey },
       ),
     )
-    .toEqual({ legacy: rawLegacy, current: malformedCurrent });
+    .toEqual({ legacy: null, current: null });
 });
 
 test("M24 leaves no record for a fresh or blank legacy learner state", async ({ page }) => {

@@ -5,6 +5,10 @@
   "contractVersion": "v1",
   "inputs": [
     {
+      "path": "content/course/browser-progress-surfaces.v1.json",
+      "sha256": "9acd806140ae4be379f3745ea30b37df52575e5c27a4a6d8d77ee8acbfcd44bb"
+    },
+    {
       "path": "content/course/client-performance-budget.v1.json",
       "sha256": "7b92554b7ea14ce73dad8d43afba5d94078f164e7d2b8e1853ffbe29e4a71da0"
     },

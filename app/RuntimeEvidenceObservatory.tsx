@@ -6,6 +6,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import {
   clearModule24Progress,
   persistModule24Progress,
@@ -668,12 +669,16 @@ export function RuntimeEvidenceObservatory() {
     runtime: null,
     decision: null,
   });
+  const progressDirtyRef = useRef(false);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = restoreModule24Progress(window.localStorage);
-        if (stored) setRecords(stored as ObservatoryRecord);
+        const storage = getBrowserProgressStorage();
+        if (storage) {
+          const stored = restoreModule24Progress(storage);
+          if (stored) setRecords(stored as ObservatoryRecord);
+        }
       } catch {
         // Progress is optional and contains only allowlisted local prediction evidence.
       } finally {
@@ -684,15 +689,19 @@ export function RuntimeEvidenceObservatory() {
   }, []);
 
   useEffect(() => {
-    if (!storageReady) return;
+    if (!storageReady || !progressDirtyRef.current) return;
     try {
-      persistModule24Progress(window.localStorage, records);
+      const storage = getBrowserProgressStorage();
+      if (storage) persistModule24Progress(storage, records);
     } catch {
       // The observatory remains useful if local storage is unavailable.
+    } finally {
+      progressDirtyRef.current = false;
     }
   }, [records, storageReady]);
 
   const updateRecord = (view: ObservatoryView, next: Partial<ViewRecord>) => {
+    progressDirtyRef.current = true;
     setRecords((current) => ({
       ...current,
       [view]: { ...current[view], ...next },
@@ -700,9 +709,11 @@ export function RuntimeEvidenceObservatory() {
   };
 
   const resetProgress = () => {
+    progressDirtyRef.current = false;
     setRecords(emptyRecord());
     try {
-      clearModule24Progress(window.localStorage);
+      const storage = getBrowserProgressStorage();
+      if (storage) clearModule24Progress(storage);
     } catch {
       // Local persistence is optional.
     }

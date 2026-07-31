@@ -7,7 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule22Progress,
+  persistModule22Progress,
+  restoreModule22Progress,
+} from "@/lib/module22-progress-codec";
 import styles from "./SecurityTrustStudio.module.css";
 
 type TrustView =
@@ -27,7 +32,6 @@ type StudioRecord = Record<TrustView, ViewRecord>;
 
 const CENTRAL_INVARIANT =
   "Atlas accepts an external value only as data until the receiving boundary validates its shape, size, provenance, and permitted meaning. Every security-sensitive effect has an authenticated subject, an explicit authorization decision scoped to action, resource, tenant, and purpose, and a redacted decision record. Untrusted data never selects arbitrary code, process execution, filesystem escape, database structure, network authority, or a raw secret-bearing log field. Release artifacts have declared dependency and build provenance; incident evidence is minimised and labelled with what it does and does not prove. A safe automatic denial/defer path explains the next accessible action and escalates unresolved authority to the named owner.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module22-security-trust.v1";
 
 const views: ReadonlyArray<{
   id: TrustView;
@@ -72,20 +76,6 @@ const views: ReadonlyArray<{
     question: "How do we preserve a useful unknown safely?",
   },
 ];
-
-const choiceIdsByView: Record<TrustView, ReadonlyArray<string>> = {
-  boundary: ["correlation", "identity", "permission"],
-  identity: ["tuple", "session", "trace"],
-  pipeline: ["sink", "clean", "sanitize"],
-  crypto: ["narrow", "blanket", "remote"],
-  provenance: ["gap", "safe", "author"],
-  incident: ["unknown", "failure", "dump"],
-};
-
-const progressCodec = createPredictionProgressCodec({
-  viewIds: views.map((view) => view.id),
-  choiceIdsByView,
-});
 
 const boundaryCards = [
   {
@@ -242,14 +232,6 @@ function tabId(view: TrustView) {
 
 function panelId(view: TrustView) {
   return `security-trust-panel-${view}`;
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // The studio remains useful when local storage is unavailable.
-  }
 }
 
 function EvidenceLock() {
@@ -733,17 +715,17 @@ export function SecurityTrustStudio() {
   const [sliceId, setSliceId] = useState<(typeof incidentSlices)[number]["id"]>("facts");
   const [resetArmed, setResetArmed] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressStorageRef = useRef<ReturnType<typeof getBrowserProgressStorage>>(null);
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
   const coverage = Math.round((revealedCount / views.length) * 100);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const stored = progressCodec.parse(raw);
-          if (stored) setRecord(stored as StudioRecord);
-        }
+        const storage = getBrowserProgressStorage();
+        progressStorageRef.current = storage;
+        const stored = storage ? restoreModule22Progress(storage) : null;
+        if (stored) setRecord(stored as StudioRecord);
       } catch {
         // Ignore corrupt or unavailable optional learner storage.
       } finally {
@@ -756,10 +738,8 @@ export function SecurityTrustStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        progressCodec.serialize(record),
-      );
+      const storage = progressStorageRef.current;
+      if (storage) persistModule22Progress(storage, record);
     } catch {
       // Only bounded prediction state is optional; no request/secret is retained.
     }
@@ -807,7 +787,9 @@ export function SecurityTrustStudio() {
       setResetArmed(true);
       return;
     }
-    clearStoredStudio();
+    const storage = progressStorageRef.current ?? getBrowserProgressStorage();
+    progressStorageRef.current = storage;
+    if (storage) clearModule22Progress(storage);
     setRecord(emptyRecord());
     setActiveView("boundary");
     setBoundaryCard("request");

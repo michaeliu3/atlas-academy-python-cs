@@ -8,12 +8,11 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 import {
   clearModule19Progress,
-  hasMeaningfulModule19Progress,
-  MODULE19_PROGRESS_STORAGE_KEY,
-  module19ProgressCodec,
+  persistModule19Progress,
   restoreModule19Progress,
 } from "@/lib/module19-progress-codec";
 import styles from "./ConcurrencyStudio.module.css";
@@ -125,7 +124,6 @@ type StudioRecord = {
 
 const CENTRAL_INVARIANT =
   "Every admitted Atlas partition reaches exactly one terminal classification—`COMMITTED`, `FAILED`, or `CANCELLED`. If Atlas publishes a new index, that index is the deterministic fold of all and only `COMMITTED` partial results, and publication is permitted only when every required partition is `COMMITTED`. Every worker-visible effect remains accounted for as a process-local operation, an OS-mediated resource transition, and one step in a declared concurrent history; each shared transition is justified by one named owner or synchronization protocol, every progress claim states its blocking and fairness assumptions, and neither a clean exit, a passing stress run, the GIL, nor observed speedup substitutes for safety, liveness, or model-fit evidence.";
-const STUDIO_STORAGE_KEY = MODULE19_PROGRESS_STORAGE_KEY;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const RUNTIME_PROFILE = {
   python: "CPython 3.14.6",
@@ -664,15 +662,6 @@ function panelId(view: ConcurrencyView) {
 
 function tabId(view: ConcurrencyView) {
   return `concurrency-tab-${view}`;
-}
-
-function clearStoredStudio() {
-  try {
-    clearModule19Progress(window.localStorage);
-  } catch {
-    return false;
-  }
-  return true;
 }
 
 function InvariantPlate() {
@@ -3179,10 +3168,13 @@ export function ConcurrencyStudio() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = restoreModule19Progress(window.localStorage) as
-          | Module19ProgressRecord
-          | null;
-        if (stored) setAnswers(answersFromProgress(stored));
+        const storage = getBrowserProgressStorage();
+        if (storage) {
+          const stored = restoreModule19Progress(storage) as
+            | Module19ProgressRecord
+            | null;
+          if (stored) setAnswers(answersFromProgress(stored));
+        }
       } catch {
         // Browser storage is optional. Keep the current in-memory studio.
       } finally {
@@ -3199,14 +3191,8 @@ export function ConcurrencyStudio() {
     persistProgressRef.current = false;
     const progress = progressRecordFromAnswers(answers);
     try {
-      if (!hasMeaningfulModule19Progress(progress)) {
-        clearModule19Progress(window.localStorage);
-        return;
-      }
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        module19ProgressCodec.serialize(progress),
-      );
+      const storage = getBrowserProgressStorage();
+      if (storage) persistModule19Progress(storage, progress);
     } catch {
       return;
     }
@@ -3303,7 +3289,12 @@ export function ConcurrencyStudio() {
       return;
     }
     persistProgressRef.current = false;
-    clearStoredStudio();
+    try {
+      const storage = getBrowserProgressStorage();
+      if (storage) clearModule19Progress(storage);
+    } catch {
+      // Local persistence is optional; reset the in-memory study state either way.
+    }
     setAnswers(initialAnswers());
     setRecord(initialRecord());
     setActiveView("history");

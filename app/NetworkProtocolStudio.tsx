@@ -7,7 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule20Progress,
+  persistModule20Progress,
+  restoreModule20Progress,
+} from "@/lib/module20-progress-codec";
 import styles from "./NetworkProtocolStudio.module.css";
 
 type ProtocolView =
@@ -28,7 +33,6 @@ type StudioRecord = Record<ProtocolView, ViewRecord>;
 
 const CENTRAL_INVARIANT =
   "Every Atlas remote publication operation has one stable operation ID and canonical request digest. The client records the name-resolution and endpoint-attempt boundary, sends only a complete declared request framing, and never infers remote receipt, parsing, decision, commit, or acknowledgement from a local send, connection close, timeout, or retry. The server admits a complete valid request, records one decision for the pair (operation ID, request digest) before returning a response, replays that decision for an identical duplicate, and rejects reuse of the operation ID with a different digest. Only a valid matching response or a subsequent declared status lookup can confirm the server's recorded decision; every ambiguous client outcome remains explicitly UNKNOWN until resolved.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module20-protocol-studio.v1";
 
 const views: ReadonlyArray<{
   id: ProtocolView;
@@ -109,16 +113,6 @@ const predictionChoices: Record<
     { id: "boolean", label: "Returning a boolean is syntactically invalid Python." },
   ],
 };
-
-const progressCodec = createPredictionProgressCodec({
-  viewIds: views.map((view) => view.id),
-  choiceIdsByView: Object.fromEntries(
-    views.map((view) => [
-      view.id,
-      predictionChoices[view.id].map((choice) => choice.id),
-    ]),
-  ),
-});
 
 const frameCases: Record<
   FrameCase,
@@ -235,14 +229,6 @@ function tabId(view: ProtocolView) {
 
 function panelId(view: ProtocolView) {
   return `network-protocol-panel-${view}`;
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // The observatory remains usable when browser storage is unavailable.
-  }
 }
 
 type PredictionGateProps = {
@@ -766,21 +752,19 @@ export function NetworkProtocolStudio() {
   const [resetArmed, setResetArmed] = useState(false);
   const [storageReady, setStorageReady] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressStorageRef = useRef<ReturnType<typeof getBrowserProgressStorage>>(null);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
+        const storage = getBrowserProgressStorage();
+        progressStorageRef.current = storage;
+        const stored = storage ? restoreModule20Progress(storage) : null;
         if (stored) {
-          const parsed = progressCodec.parse(stored);
-          if (parsed) {
-            setRecord(parsed as StudioRecord);
-          } else {
-            clearStoredStudio();
-          }
+          setRecord(stored as StudioRecord);
         }
       } catch {
-        clearStoredStudio();
+        // Progress is optional; the protocol observatory remains usable in memory.
       } finally {
         setStorageReady(true);
       }
@@ -791,10 +775,8 @@ export function NetworkProtocolStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        progressCodec.serialize(record),
-      );
+      const storage = progressStorageRef.current;
+      if (storage) persistModule20Progress(storage, record);
     } catch {
       // Progress remains in memory when storage is unavailable or full.
     }
@@ -849,7 +831,9 @@ export function NetworkProtocolStudio() {
       return;
     }
     const fresh = emptyRecord();
-    clearStoredStudio();
+    const storage = progressStorageRef.current ?? getBrowserProgressStorage();
+    progressStorageRef.current = storage;
+    if (storage) clearModule20Progress(storage);
     setRecord(fresh);
     setFrameCase("split");
     setFrameStep(0);

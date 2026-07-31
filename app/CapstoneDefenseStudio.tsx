@@ -7,6 +7,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import {
   clearModule26Progress,
   persistModule26Progress,
@@ -28,6 +29,7 @@ type ViewRecord = {
   revealed: boolean;
 };
 type StudioRecord = Record<StudioView, ViewRecord>;
+type ProgressPersistence = "loading" | "ready" | "saved" | "unavailable";
 type PatchDecision = "accept" | "revise" | "reject" | null;
 type FailureMode = "normal" | "retry" | "authority";
 type Challenge = "rollback" | "dependency" | "invariant";
@@ -715,19 +717,32 @@ export function CapstoneDefenseStudio() {
   const [activeView, setActiveView] = useState<StudioView>("brief");
   const [record, setRecord] = useState<StudioRecord>(emptyRecord);
   const [storageReady, setStorageReady] = useState(false);
+  const [persistence, setPersistence] = useState<ProgressPersistence>("loading");
   const [selectedThread, setSelectedThread] = useState<"record" | "proposal">("record");
   const [failureMode, setFailureMode] = useState<FailureMode>("retry");
   const [patchDecision, setPatchDecision] = useState<PatchDecision>(null);
   const [challenge, setChallenge] = useState<Challenge>("rollback");
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressDirtyRef = useRef(false);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = restoreModule26Progress(window.localStorage);
-        if (stored) setRecord(stored as StudioRecord);
+        const storage = getBrowserProgressStorage();
+        if (!storage) {
+          setPersistence("unavailable");
+        } else {
+          const stored = restoreModule26Progress(storage);
+          if (stored) {
+            setRecord(stored as StudioRecord);
+            setPersistence("saved");
+          } else {
+            setPersistence("ready");
+          }
+        }
       } catch {
         // Local learning progress is optional; an unavailable/corrupt store never blocks the studio.
+        setPersistence("unavailable");
       } finally {
         setStorageReady(true);
       }
@@ -736,13 +751,20 @@ export function CapstoneDefenseStudio() {
   }, []);
 
   useEffect(() => {
-    if (!storageReady) {
+    if (!storageReady || !progressDirtyRef.current) {
       return;
     }
     try {
-      persistModule26Progress(window.localStorage, record);
+      const storage = getBrowserProgressStorage();
+      const nextPersistence =
+        storage && persistModule26Progress(storage, record)
+          ? "saved"
+          : "unavailable";
+      window.queueMicrotask(() => setPersistence(nextPersistence));
     } catch {
       // Deliberately no remote fallback: this studio never sends learning data elsewhere.
+    } finally {
+      progressDirtyRef.current = false;
     }
   }, [record, storageReady]);
 
@@ -751,6 +773,7 @@ export function CapstoneDefenseStudio() {
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
 
   function updateRecord(view: StudioView, update: Partial<ViewRecord>) {
+    progressDirtyRef.current = true;
     setRecord((currentRecordValue) => ({
       ...currentRecordValue,
       [view]: { ...currentRecordValue[view], ...update },
@@ -758,8 +781,12 @@ export function CapstoneDefenseStudio() {
   }
 
   function resetProgress() {
+    progressDirtyRef.current = false;
     try {
-      clearModule26Progress(window.localStorage);
+      const storage = getBrowserProgressStorage();
+      setPersistence(
+        storage && clearModule26Progress(storage) ? "ready" : "unavailable",
+      );
     } catch {
       // Local persistence is optional; reset the in-memory study state either way.
     }
@@ -831,7 +858,15 @@ export function CapstoneDefenseStudio() {
       </div>
 
       <div className={styles.progressNote}>
-        <span role="status">{storageReady ? "Your answers and confidence are saved only in this browser." : "Preparing optional local-only progress…"}</span>
+        <span role="status">
+          {persistence === "loading"
+            ? "Preparing optional local-only progress…"
+            : persistence === "saved"
+              ? "Your answers and confidence are saved only in this browser."
+              : persistence === "ready"
+                ? "Local-only progress is available in this browser."
+                : "Browser storage is unavailable; this visit stays in memory."}
+        </span>
         <span><b>0</b> live learner records · <b>0</b> external calls · no release, merge, plan, or schedule can change here.</span>
         <button className={styles.resetProgress} onClick={resetProgress} type="button">Reset local progress</button>
       </div>

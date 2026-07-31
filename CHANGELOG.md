@@ -9,8 +9,10 @@ actually published.
 
 - Migrated M23, M24, M19, and M26 prediction checkpoints into the shared,
   versioned, allowlisted local-progress codec. M23/M24/M26 migrate only an
-  exact, meaningful legacy record after writing the current envelope; blank
-  M26 legacy state is removed without creating a replacement. M19 instead
+  exact, meaningful legacy record after a reported successful current-envelope
+  write; a denied browser write preserves valid legacy evidence for the
+  current visit and a later retry. Blank M26 legacy state is removed without
+  creating a replacement. M19 instead
   retires its broad v2 simulator/context record and starts a fresh six-gate v3
   envelope. Malformed current records fail closed, reset removes both known
   generations, and a blank visit/reset writes no default record. Unit and
@@ -21,10 +23,19 @@ actually published.
   bounded v3 gate records with the allowlisted context needed to interpret
   them; malformed hexadecimal input cannot satisfy its translation reveal. The
   intake now projects a valid v2 attempt into an exact 20-triad v3 envelope
-  before removing v2, deriving
-  navigation, completion, and timestamps only in memory. A storage-surface
-  policy/linter and remaining legacy callers still require separate work; this
-  is not a whole-portal storage-hardening or security-clean claim.
+  before removing v2, deriving navigation, completion, and timestamps only in
+  memory. All 14 current learner-progress surfaces (intake plus M18–M30) now
+  pass through the sole `browser-progress-storage` seam and a dedicated
+  restore/persist/clear codec interface. The versioned
+  `browser-progress-surfaces.v1.json` policy is a deterministic release input;
+  its AST-backed validator rejects direct, static-computed, and `Reflect.get`
+  browser-storage bypasses, `sessionStorage`, duplicate/unversioned keys,
+  undeclared static lifecycle owners,
+  forbidden data classes, malformed reset declarations, and blank/default
+  persistence. M20–M22, M25, and M27–M30 now also remove malformed/blank
+  records and offer learner-controlled clearing. This is a bounded local
+  progress/privacy improvement, not a private-deployment, whole-security, or
+  security-clean claim.
 - Added M25's non-promoting structural packet. It resolves 43 typed local
   pointers, including one visible H3 session-output pointer for each of the six
   sessions, and hash-binds the authoring-only M25 source-audit addendum as an

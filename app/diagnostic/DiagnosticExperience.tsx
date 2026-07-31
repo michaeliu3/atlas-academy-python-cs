@@ -24,12 +24,13 @@ import {
   persistDiagnosticProgress,
   restoreDiagnosticProgress,
 } from "@/lib/diagnostic-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 
 type DiagnosticAttempt = ReturnType<typeof createEmptyAttempt>;
 type DiagnosticAction = Parameters<typeof diagnosticReducer>[1];
 type CopyState = "idle" | "approval-required" | "copied" | "printed" | "failed";
-type PersistenceState = "loading" | "saved" | "unavailable";
+type PersistenceState = "loading" | "ready" | "saved" | "unavailable";
 type AcademicPrerequisite = {
   moduleNumber: number;
   moduleTitle: string;
@@ -84,16 +85,21 @@ export function DiagnosticExperience() {
         return;
       }
       try {
-        const stored = restoreDiagnosticProgress(
-          window.localStorage,
-        ) as DiagnosticAttempt | null;
+        const storage = getBrowserProgressStorage();
+        if (!storage) {
+          setPersistence("unavailable");
+          return;
+        }
+        const stored = restoreDiagnosticProgress(storage) as DiagnosticAttempt | null;
         if (stored) {
           dispatch({ type: "hydrate", attempt: stored });
           setRestoredProgress(
             Object.keys(stored.responsesByQuestionId).length > 0,
           );
+          setPersistence("saved");
+        } else {
+          setPersistence("ready");
         }
-        setPersistence("saved");
       } catch {
         setPersistence("unavailable");
       } finally {
@@ -110,7 +116,19 @@ export function DiagnosticExperience() {
       return;
     }
     try {
-      persistDiagnosticProgress(window.localStorage, attempt);
+      const storage = getBrowserProgressStorage();
+      if (!storage) {
+        window.queueMicrotask(() => setPersistence("unavailable"));
+        return;
+      }
+      const persisted = persistDiagnosticProgress(storage, attempt);
+      if (persisted) {
+        window.queueMicrotask(() => setPersistence("saved"));
+      } else if (Object.keys(attempt.responsesByQuestionId).length > 0) {
+        window.queueMicrotask(() => setPersistence("unavailable"));
+      } else {
+        window.queueMicrotask(() => setPersistence("ready"));
+      }
     } catch {
       window.queueMicrotask(() => setPersistence("unavailable"));
     }
@@ -170,8 +188,12 @@ export function DiagnosticExperience() {
 
   function resetDiagnostic() {
     try {
-      clearDiagnosticProgress(window.localStorage);
-      setPersistence("saved");
+      const storage = getBrowserProgressStorage();
+      if (!storage) {
+        setPersistence("unavailable");
+      } else {
+        setPersistence(clearDiagnosticProgress(storage) ? "ready" : "unavailable");
+      }
     } catch {
       setPersistence("unavailable");
     }
@@ -634,10 +656,12 @@ export function DiagnosticExperience() {
           </span>
           <span>
             {persistence === "loading"
-              ? "Restoring saved progress…"
+              ? "Preparing optional local-only progress…"
               : persistence === "saved"
-                ? "Saved on this device"
-                : "Browser storage unavailable"}
+                ? "Progress saved only in this browser"
+                : persistence === "ready"
+                  ? "Local-only progress is available"
+                  : "Browser storage unavailable"}
           </span>
         </div>
         <progress

@@ -6,7 +6,12 @@ import {
   useRef,
   useState,
 } from "react";
-import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule30Progress,
+  persistModule30Progress,
+  restoreModule30Progress,
+} from "@/lib/module30-progress-codec";
 import styles from "./ProbabilityInferenceStudio.module.css";
 
 type StudioView =
@@ -26,8 +31,6 @@ type ViewRecord = {
 };
 
 type StudioRecord = Record<StudioView, ViewRecord>;
-
-const STORAGE_KEY = "atlas.module30.probability-inference-studio.v1";
 
 const views: ReadonlyArray<{
   id: StudioView;
@@ -186,16 +189,6 @@ const correctChoice: Record<StudioView, string> = {
   procedure: "procedure-meaning",
   design: "assignment-and-observation",
 };
-
-const progressCodec = createPredictionProgressCodec({
-  viewIds: views.map((view) => view.id),
-  choiceIdsByView: Object.fromEntries(
-    views.map((view) => [
-      view.id,
-      choices[view.id].map((choice) => choice.id),
-    ]),
-  ),
-});
 
 const feedback: Record<
   StudioView,
@@ -556,19 +549,20 @@ export function ProbabilityInferenceStudio() {
   const [activeView, setActiveView] = useState<StudioView>("base-rate");
   const [record, setRecord] = useState<StudioRecord>(emptyRecord);
   const [storageReady, setStorageReady] = useState(false);
+  const [clearNotice, setClearNotice] = useState("");
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeRecord = record[activeView];
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = window.localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-          const parsed = progressCodec.parse(stored);
-          if (parsed) setRecord(parsed as StudioRecord);
-        }
+        const storage = getBrowserProgressStorage();
+        const restored = storage
+          ? restoreModule30Progress(storage)
+          : null;
+        if (restored) setRecord(restored as StudioRecord);
       } catch {
-        // Local progress is optional. Only choice/confidence/reveal state is retained.
+        // Local progress is optional; unavailable storage never blocks study.
       } finally {
         setStorageReady(true);
       }
@@ -578,14 +572,17 @@ export function ProbabilityInferenceStudio() {
 
   useEffect(() => {
     if (!storageReady) return;
+    const storage = getBrowserProgressStorage();
+    if (!storage) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, progressCodec.serialize(record));
+      persistModule30Progress(storage, record);
     } catch {
       // A private browser may deny storage; in-memory study remains available.
     }
   }, [record, storageReady]);
 
   function updateActiveRecord(update: Partial<ViewRecord>) {
+    setClearNotice("");
     setRecord((current) => ({
       ...current,
       [activeView]: { ...current[activeView], ...update },
@@ -601,11 +598,23 @@ export function ProbabilityInferenceStudio() {
   }
 
   function reveal() {
+    setClearNotice("");
     setRecord((current) => {
       const candidate = current[activeView];
       if (!candidate.choice || !candidate.confidence) return current;
       return { ...current, [activeView]: { ...candidate, revealed: true } };
     });
+  }
+
+  function clearSavedPredictionEvidence() {
+    const storage = getBrowserProgressStorage();
+    const cleared = storage ? clearModule30Progress(storage) : false;
+    setRecord(emptyRecord);
+    setClearNotice(
+      cleared
+        ? "Saved prediction evidence cleared from this browser."
+        : "Browser storage is unavailable; this visit was reset in memory.",
+    );
   }
 
   function selectView(nextIndex: number, focus = false) {
@@ -698,6 +707,21 @@ export function ProbabilityInferenceStudio() {
           <a href="#diagnostic-repair-key">Diagnostic repair key</a>
           <a href="#11-project--uncertainty--inference-evidence-dossier">Evidence dossier</a>
           <a href="#13-conversational-oral-defense--m30">Constructive oral defense</a>
+          <button
+            aria-describedby="module30-clear-progress-description"
+            className={styles.revealButton}
+            onClick={clearSavedPredictionEvidence}
+            type="button"
+          >
+            Clear saved prediction evidence
+          </button>
+          <p id="module30-clear-progress-description">
+            This clears only saved choices, confidence, and revealed explanations
+            from this browser.
+          </p>
+          <p aria-live="polite" role="status">
+            {clearNotice}
+          </p>
         </div>
         <p className={styles.progress} aria-live="polite">
           Lens {currentIndex + 1} of {views.length}: {activeRecord.revealed ? "explanation recorded locally" : "prediction open"}.

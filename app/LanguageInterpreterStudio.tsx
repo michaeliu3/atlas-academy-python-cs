@@ -7,12 +7,11 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import {
-  hasModule23MeaningfulProgress,
-  MODULE23_LEGACY_PROGRESS_STORAGE_KEY,
-  MODULE23_PROGRESS_STORAGE_KEY,
-  module23ProgressCodec,
-  parseModule23LegacyProgress,
+  clearModule23Progress,
+  persistModule23Progress,
+  restoreModule23Progress,
 } from "@/lib/module23-progress-codec";
 import styles from "./LanguageInterpreterStudio.module.css";
 
@@ -353,15 +352,6 @@ function tabId(view: InterpreterView) {
 
 function panelId(view: InterpreterView) {
   return `language-interpreter-panel-${view}`;
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(MODULE23_PROGRESS_STORAGE_KEY);
-    window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
-  } catch {
-    // Local progress is optional; the learning studio stays useful without it.
-  }
 }
 
 function EvidenceLock() {
@@ -1017,30 +1007,10 @@ export function LanguageInterpreterStudio() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(MODULE23_PROGRESS_STORAGE_KEY);
-        if (raw !== null) {
-          const stored = module23ProgressCodec.parse(raw);
-          if (stored && hasModule23MeaningfulProgress(stored)) {
-            setRecord(stored as StudioRecord);
-          } else if (stored) {
-            window.localStorage.removeItem(MODULE23_PROGRESS_STORAGE_KEY);
-            window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
-          }
-        } else {
-          const legacy = parseModule23LegacyProgress(
-            window.localStorage.getItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY),
-          );
-          if (legacy && hasModule23MeaningfulProgress(legacy)) {
-            const migratedRecord = legacy as StudioRecord;
-            setRecord(migratedRecord);
-            window.localStorage.setItem(
-              MODULE23_PROGRESS_STORAGE_KEY,
-              module23ProgressCodec.serialize(migratedRecord),
-            );
-            window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
-          } else if (legacy) {
-            window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
-          }
+        const storage = getBrowserProgressStorage();
+        if (storage) {
+          const stored = restoreModule23Progress(storage);
+          if (stored) setRecord(stored as StudioRecord);
         }
       } catch {
         // Optional local state contains only fixed choices, confidence, and
@@ -1055,16 +1025,8 @@ export function LanguageInterpreterStudio() {
   useEffect(() => {
     if (!storageReady || !progressDirtyRef.current) return;
     try {
-      if (hasModule23MeaningfulProgress(record)) {
-        window.localStorage.setItem(
-          MODULE23_PROGRESS_STORAGE_KEY,
-          module23ProgressCodec.serialize(record),
-        );
-        window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
-      } else {
-        window.localStorage.removeItem(MODULE23_PROGRESS_STORAGE_KEY);
-        window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
-      }
+      const storage = getBrowserProgressStorage();
+      if (storage) persistModule23Progress(storage, record);
     } catch {
       // Progress storage is optional and never changes the instruction path.
     } finally {
@@ -1115,7 +1077,12 @@ export function LanguageInterpreterStudio() {
       setResetArmed(true);
       return;
     }
-    clearStoredStudio();
+    try {
+      const storage = getBrowserProgressStorage();
+      if (storage) clearModule23Progress(storage);
+    } catch {
+      // Local progress is optional; reset the in-memory study state either way.
+    }
     progressDirtyRef.current = false;
     setRecord(emptyRecord());
     setActiveView("boundary");

@@ -459,7 +459,7 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
   assert.match(html, /Which pair is correct at the end\?/);
   assert.match(html, /Choose the model that best predicts the result/);
   assert.match(html, /No penalty for uncertainty/);
-  assert.match(html, /Restoring saved progress/);
+  assert.match(html, /Preparing optional local-only progress/);
   assert.match(html, /Answers remain in this browser/);
   assert.match(html, /type="radio"/);
   assert.match(html, /<fieldset/);
@@ -535,6 +535,9 @@ test("the diagnostic delegates bounded browser progress to its v3 codec", async 
   assert.match(diagnostic, /restoreDiagnosticProgress/);
   assert.match(diagnostic, /persistDiagnosticProgress/);
   assert.match(diagnostic, /clearDiagnosticProgress/);
+  assert.match(diagnostic, /getBrowserProgressStorage/);
+  assert.match(diagnostic, /Progress saved only in this browser/);
+  assert.doesNotMatch(diagnostic, /Saved on this device/);
   assert.doesNotMatch(diagnostic, /JSON\.parse|JSON\.stringify/);
   assert.doesNotMatch(
     diagnostic,
@@ -631,6 +634,7 @@ test("Module 18 OS studio preserves its canonical interactive contract", async (
   assert.match(studio, /restoreModule18Progress/);
   assert.match(studio, /persistModule18Progress/);
   assert.match(studio, /clearModule18Progress/);
+  assert.match(studio, /getBrowserProgressStorage/);
   assert.match(studio, /parseBoundedHexadecimal/);
   assert.doesNotMatch(studio, /JSON\.parse|JSON\.stringify/);
   assert.doesNotMatch(
@@ -755,9 +759,11 @@ test("Module 20 preserves its invariant and six-view protocol observatory", asyn
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /record\.revealed &&/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule20Progress/);
+  assert.match(studio, /persistModule20Progress/);
+  assert.match(studio, /clearModule20Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.match(studio, /declared length/);
   assert.match(studio, /UNKNOWN/);
@@ -819,9 +825,11 @@ test("Module 21 preserves its async invariant and six-view run control room", as
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule21Progress/);
+  assert.match(studio, /persistModule21Progress/);
+  assert.match(studio, /clearModule21Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.match(studio, /TaskGroup/);
   assert.match(studio, /UNKNOWN_REMOTE/);
@@ -894,10 +902,11 @@ test("Module 22 preserves its trust invariant, six-view control room, and latest
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /choiceIdsByView/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule22Progress/);
+  assert.match(studio, /persistModule22Progress/);
+  assert.match(studio, /clearModule22Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.match(studio, /trace label supports correlation/);
   assert.match(studio, /worker-99/);
@@ -943,9 +952,11 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="language-interpreter-studio-title"/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /window\.localStorage\.removeItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule23Progress/);
+  assert.match(studio, /persistModule23Progress/);
+  assert.match(studio, /clearModule23Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
@@ -1073,9 +1084,11 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="evidence-grounded-studio-title"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule25Progress/);
+  assert.match(studio, /persistModule25Progress/);
+  assert.match(studio, /clearModule25Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
@@ -2185,8 +2198,11 @@ test("renders the discrete mathematics proof workbook and its bounded teaching m
     6,
     "each mathematical view has one confidence-aware prediction gate",
   );
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule27Progress/);
+  assert.match(studio, /persistModule27Progress/);
+  assert.match(studio, /clearModule27Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /not a theorem prover/);
   assert.match(studio, /Proof repair bench/);
   assert.match(studio, /State and recurrence traceboard/);
@@ -2271,8 +2287,11 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(studio, /Aε = \[\[1, 1\], \[1, 1001\/1000\]\]/);
   assert.match(studio, /±\(1, 1\)\/√2/);
   assert.match(studio, /aria-live="polite"/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule28Progress/);
+  assert.match(studio, /persistModule28Progress/);
+  assert.match(studio, /clearModule28Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /not a theorem prover/);
   assert.doesNotMatch(studio, /<svg\b/i);
   assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
@@ -2360,8 +2379,11 @@ test("renders the calculus continuous-change workbook and its bounded teaching m
   assert.match(studio, /id: "limit"/);
   assert.match(studio, /id: "trajectory"/);
   assert.match(studio, /aria-live="polite"/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule29Progress/);
+  assert.match(studio, /persistModule29Progress/);
+  assert.match(studio, /clearModule29Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /not a theorem prover/);
   assert.doesNotMatch(studio, /<svg\b/i);
   assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
@@ -2463,8 +2485,11 @@ test("renders the probability, statistics, and scientific-inference workbook and
   assert.match(studio, /Text equivalent:/);
   assert.match(studio, /p=3\/4[\s\S]*100%/);
   assert.match(studio, /aria-live="polite"/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule30Progress/);
+  assert.match(studio, /persistModule30Progress/);
+  assert.match(studio, /clearModule30Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /not a theorem prover/);
   assert.doesNotMatch(studio, /<svg\b/i);
   assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);

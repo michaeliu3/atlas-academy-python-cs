@@ -7,7 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule21Progress,
+  persistModule21Progress,
+  restoreModule21Progress,
+} from "@/lib/module21-progress-codec";
 import styles from "./AsyncDistributedStudio.module.css";
 
 type RunView = "task" | "scope" | "pressure" | "reconcile" | "order" | "audit";
@@ -21,7 +26,6 @@ type StudioRecord = Record<RunView, ViewRecord>;
 
 const CENTRAL_INVARIANT =
   "Every Atlas dispatch has one stable operation ID, canonical request digest, deadline, and evidence record. Local work is admitted through a bounded, explicitly owned async pipeline; every admitted local item receives one terminal local accounting record. Cancellation is cleaned up and propagated according to the owning structured scope, but is never mislabeled as a remote rollback. Every remote retry retains the same operation identity and is classified separately from a transport write, a server/replica observation, a matching reply, and an unresolved outcome. A trace context correlates declared observations; it does not authenticate them, make them complete, or prove causality, durability, or replicated agreement. In this collector case, the dispatch additionally declares its source set, admission bound, deadline/cancellation policy, and publication-cut rule before work starts.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module21-run-control.v1";
 
 const views: ReadonlyArray<{
   id: RunView;
@@ -102,16 +106,6 @@ const predictionChoices: Record<
     { id: "trust", label: "Trace correlation authenticated every source." },
   ],
 };
-
-const progressCodec = createPredictionProgressCodec({
-  viewIds: views.map((view) => view.id),
-  choiceIdsByView: Object.fromEntries(
-    views.map((view) => [
-      view.id,
-      predictionChoices[view.id].map((choice) => choice.id),
-    ]),
-  ),
-});
 
 const taskStages = [
   {
@@ -253,14 +247,6 @@ function tabId(view: RunView) {
 
 function panelId(view: RunView) {
   return `async-run-control-panel-${view}`;
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // The control room still works when local storage is unavailable.
-  }
 }
 
 function EvidenceLock() {
@@ -755,17 +741,17 @@ export function AsyncDistributedStudio() {
   const [auditField, setAuditField] = useState<(typeof auditFields)[number]["id"]>("task_trace");
   const [resetArmed, setResetArmed] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressStorageRef = useRef<ReturnType<typeof getBrowserProgressStorage>>(null);
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
   const coverage = Math.round((revealedCount / views.length) * 100);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const stored = progressCodec.parse(raw);
-          if (stored) setRecord(stored as StudioRecord);
-        }
+        const storage = getBrowserProgressStorage();
+        progressStorageRef.current = storage;
+        const stored = storage ? restoreModule21Progress(storage) : null;
+        if (stored) setRecord(stored as StudioRecord);
       } catch {
         // Ignore corrupted/unavailable browser storage; no learner record is required.
       } finally {
@@ -778,10 +764,8 @@ export function AsyncDistributedStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        progressCodec.serialize(record),
-      );
+      const storage = progressStorageRef.current;
+      if (storage) persistModule21Progress(storage, record);
     } catch {
       // Local persistence is optional and contains no notes, payloads, or endpoints.
     }
@@ -829,7 +813,9 @@ export function AsyncDistributedStudio() {
       setResetArmed(true);
       return;
     }
-    clearStoredStudio();
+    const storage = progressStorageRef.current ?? getBrowserProgressStorage();
+    progressStorageRef.current = storage;
+    if (storage) clearModule21Progress(storage);
     setRecord(emptyRecord());
     setActiveView("task");
     setTaskStage(2);

@@ -120,7 +120,7 @@ test("M24 migrates only an exact legacy record and refuses malformed legacy stat
   );
 });
 
-test("M24 keeps blank local progress absent on a fresh visit and after reset", () => {
+test("M24 clears stale local progress rather than writing a blank default", () => {
   const storage = createMemoryStorage({
     [MODULE24_LEGACY_PROGRESS_STORAGE_KEY]: JSON.stringify(completeRecord),
     [MODULE24_PROGRESS_STORAGE_KEY]: module24ProgressCodec.serialize(completeRecord),
@@ -128,7 +128,8 @@ test("M24 keeps blank local progress absent on a fresh visit and after reset", (
 
   assert.equal(hasModule24MeaningfulProgress(emptyRecord), false);
   assert.equal(persistModule24Progress(storage, emptyRecord), false);
-  assert.deepEqual(storage.operations, []);
+  assert.equal(storage.read(MODULE24_LEGACY_PROGRESS_STORAGE_KEY), null);
+  assert.equal(storage.read(MODULE24_PROGRESS_STORAGE_KEY), null);
 
   clearModule24Progress(storage);
   assert.equal(storage.read(MODULE24_LEGACY_PROGRESS_STORAGE_KEY), null);
@@ -172,7 +173,7 @@ test("M24 removes a blank current v2 shell without reviving legacy progress", ()
   );
 });
 
-test("M24 preserves a meaningful legacy migration and fails closed on a present malformed v2 record", () => {
+test("M24 preserves a meaningful legacy migration and removes a malformed present v2 record", () => {
   const migrationStorage = createMemoryStorage({
     [MODULE24_LEGACY_PROGRESS_STORAGE_KEY]: JSON.stringify(completeRecord),
   });
@@ -201,10 +202,14 @@ test("M24 preserves a meaningful legacy migration and fails closed on a present 
   });
 
   assert.equal(restoreModule24Progress(malformedStorage), null);
-  assert.equal(
-    malformedStorage.read(MODULE24_PROGRESS_STORAGE_KEY),
-    malformedCurrent,
+  assert.equal(malformedStorage.read(MODULE24_PROGRESS_STORAGE_KEY), null);
+  assert.equal(malformedStorage.read(MODULE24_LEGACY_PROGRESS_STORAGE_KEY), null);
+  assert.deepEqual(
+    malformedStorage.operations.map(([operation, key]) => [operation, key]),
+    [
+      ["get", MODULE24_PROGRESS_STORAGE_KEY],
+      ["remove", MODULE24_PROGRESS_STORAGE_KEY],
+      ["remove", MODULE24_LEGACY_PROGRESS_STORAGE_KEY],
+    ],
   );
-  assert.equal(
-    malformedStorage.read(MODULE24_LEGACY_PROGRESS_STORAGE_KEY), JSON.stringify(completeRecord));
 });

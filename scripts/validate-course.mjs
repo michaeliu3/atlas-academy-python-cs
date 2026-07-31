@@ -33,6 +33,11 @@ import {
   validateLiveCodexLearningWorkflow,
 } from "./live-codex-learning-workflow.mjs";
 import {
+  browserProgressSurfacePolicyPath,
+  loadBrowserProgressSurfacePolicy,
+  validateBrowserProgressSurfacePolicy,
+} from "./browser-progress-surface-policy.mjs";
+import {
   loadModuleContractEvidenceRegistry,
   validateModuleContractEvidenceRegistry,
 } from "./module-contract-evidence.mjs";
@@ -187,6 +192,7 @@ export async function validateCourseContracts(
   let releaseEvidencePolicy = null;
   let manualLearningRecordWorkflow = null;
   let liveCodexLearningWorkflow = null;
+  let browserProgressSurfacePolicy = null;
 
   try {
     const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
@@ -264,6 +270,17 @@ export async function validateCourseContracts(
     );
   }
 
+  try {
+    const policy = await loadBrowserProgressSurfacePolicy(siteRoot);
+    browserProgressSurfacePolicy = await validateBrowserProgressSurfacePolicy(policy, {
+      siteRoot,
+    });
+  } catch (error) {
+    errors.push(
+      `Browser-progress surface policy must remain valid before a learner studio can retain local evidence: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
   if (contracts?.schemaVersion !== 1 || contracts?.contractVersion !== "v1") {
     errors.push("module contract registry must use schemaVersion 1 and contractVersion v1.");
   }
@@ -330,6 +347,7 @@ export async function validateCourseContracts(
     releaseEvidencePolicyPath(siteRoot),
     manualLearningRecordWorkflowPath(siteRoot),
     liveCodexLearningWorkflowPath(siteRoot),
+    browserProgressSurfacePolicyPath(siteRoot),
     resolve(siteRoot, legacyModuleContractAuditRelativePath),
   ]);
   if (advancedContract) {
@@ -349,6 +367,11 @@ export async function validateCourseContracts(
   }
   if (liveCodexLearningWorkflow) {
     for (const path of liveCodexLearningWorkflow.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+  }
+  if (browserProgressSurfacePolicy) {
+    for (const path of browserProgressSurfacePolicy.releaseInputPaths) {
       releaseInputPaths.add(path);
     }
   }
@@ -481,6 +504,7 @@ export async function validateCourseContracts(
     draftEvidence,
     advancedContract,
     legacyPackets,
+    browserProgressSurfacePolicy,
     summary: {
       legacyBaselineModules,
       verifiedModules,

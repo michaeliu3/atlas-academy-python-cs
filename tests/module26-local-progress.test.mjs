@@ -190,7 +190,7 @@ test("M26 migrates only when v2 is absent, writes v2 before removing legacy, and
   assert.equal(storage.read("atlas-academy.module26-capstone-defense.v1"), null);
 });
 
-test("M26 leaves malformed present v2 state untouched and refuses a legacy fallback", () => {
+test("M26 removes malformed present v2 state and refuses a legacy fallback", () => {
   const malformedCurrent = JSON.stringify(completeRecord);
   const legacyRecord = JSON.stringify(completeRecord);
   const storage = createMemoryStorage({
@@ -199,16 +199,12 @@ test("M26 leaves malformed present v2 state untouched and refuses a legacy fallb
   });
 
   assert.equal(restoreModule26Progress(storage), null);
-  assert.equal(
-    storage.read("atlas-academy.module26-capstone-defense.v2"),
-    malformedCurrent,
-  );
-  assert.equal(
-    storage.read("atlas-academy.module26-capstone-defense.v1"),
-    legacyRecord,
-  );
+  assert.equal(storage.read("atlas-academy.module26-capstone-defense.v2"), null);
+  assert.equal(storage.read("atlas-academy.module26-capstone-defense.v1"), null);
   assert.deepEqual(storage.operations, [
     ["get", "atlas-academy.module26-capstone-defense.v2"],
+    ["remove", "atlas-academy.module26-capstone-defense.v2"],
+    ["remove", "atlas-academy.module26-capstone-defense.v1"],
   ]);
 });
 
@@ -246,7 +242,6 @@ test("M26 persists only meaningful prediction evidence and leaves a blank visit 
   assert.equal(hasModule26MeaningfulProgress(emptyRecord), false);
   assert.equal(hasModule26MeaningfulProgress(selectedRecord), true);
   assert.equal(persistModule26Progress(storage, emptyRecord), false);
-  assert.deepEqual(storage.operations, []);
   assert.equal(
     storage.read("atlas-academy.module26-capstone-defense.v2"),
     null,
