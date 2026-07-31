@@ -175,7 +175,7 @@ What has been lost? The sign. A residual of `-0.4` says *how far inside* the
 feasible set a point lies; the clipped violation does not. Keep both when
 reading a constrained trace.
 
-### Transfer task and output
+### Output: Objective Geometry Sheet
 
 Write an **Objective–Geometry Sheet** for one non-consequential decision:
 
@@ -261,7 +261,7 @@ State four distinct claims:
 3. both computations were evaluated in a named representation;
 4. neither computation validates the proxy objective or downstream decision.
 
-### Transfer task and output
+### Output: Stationarity and Feasibility Ledger
 
 Build a **Stationarity–Feasibility Ledger** with three rows: a local minimum,
 a saddle/non-minimum example, and a constrained boundary candidate. Each row
@@ -317,7 +317,7 @@ checker returns every failed condition rather than only `false`.
 | complementary slackness | Connects active constraints with multipliers. | “A zero product proves all KKT conditions.” |
 | qualification | States why a dual/certificate conclusion applies. | “Convexity alone always gives strong duality.” |
 
-### Transfer task and output
+### Output: Constraint Claim Table
 
 Create a **Claim Table** for one constrained problem. It must label each line
 as definition, derivation, numerical observation, or assumption; include a
@@ -386,7 +386,7 @@ Find two bugs before executing it:
 - subtracting the entire residual from both coordinates over-projects and
   changes the declared projection rule.
 
-### Transfer task and output
+### Output: Solver-Selection Rationale
 
 Write a **Solver-Selection Rationale** for a small problem. Name the objective
 class, constraints, derivative/oracle source, representation, tolerance,
@@ -439,7 +439,7 @@ the result “stable convergence.” List the hidden choices: horizon, loss scal
 seed policy, selection rule, comparison baseline, and criterion. Repair the
 record so a reviewer can reproduce the *claim*, not merely the code output.
 
-### Transfer task and output
+### Output: Stochastic Information Experiment Card
 
 Make a **Stochastic–Information Experiment Card**. It must include the
 sampling/fixture rule, full/estimated quantity, a variation display, stopping
@@ -493,7 +493,7 @@ finite trace: what a particular implementation optimized;
 non-claim: what remains unknown about data, approximation, and decision value.
 ```
 
-### Final transfer task — Optimization & Information Evidence Dossier
+### Output: Optimization and Information Evidence Dossier
 
 Choose a bounded, non-consequential toy system. Deliver:
 

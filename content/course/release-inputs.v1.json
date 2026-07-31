@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "409e842f142de80f0658229100ffbedc65532cf5d63c3a31d24520448783e71a"
+      "sha256": "4061a3d3eeb1be24e75f8e723c642b22de7996dd89cd71f3bd3fb233b05364c6"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -22,7 +22,11 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "1c381fcbe9488680590f97198d23f6fb236b72664db177ac4021dc1af8a6d20d"
+      "sha256": "bb4bacad758efbd5975bcedc18cf864897d185edf5bc4e1d75e31ad1c4628cbe"
+    },
+    {
+      "path": "content/course/contracts/authoring-delivery/m31.v1.json",
+      "sha256": "662b4cd62df8cedebccf650de613225e9b749bb819039129e3c70b9f02b13765"
     },
     {
       "path": "content/course/contracts/companions/m29.v1.json",

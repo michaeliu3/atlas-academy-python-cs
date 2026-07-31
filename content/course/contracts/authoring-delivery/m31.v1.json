@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "deliveryMapVersion": "v1",
+  "kind": "atlas-advanced-authoring-delivery-map",
+  "moduleId": "m31",
+  "workbookPath": "content/authoring/m31_optimization_information_workbook.v1.md",
+  "authoringSourcePlanPath": "content/source-maps/module31_optimization_information_source_map.md",
+  "bridgePath": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "sessions": [
+    {
+      "id": "m31-s01",
+      "title": "Objectives, variables, constraints, and geometry",
+      "sessionHeadingAnchor": "session-1--formulate-before-you-optimize",
+      "usesPrerequisiteModuleIds": ["m28"],
+      "outputs": [
+        {
+          "id": "m31-objective-geometry-sheet",
+          "kind": "worksheet",
+          "headingAnchor": "output-objective-geometry-sheet",
+          "forwardArtifactId": "m31-objective-geometry-sheet"
+        }
+      ]
+    },
+    {
+      "id": "m31-s02",
+      "title": "Local reasoning: derivatives, stationarity, curvature, and feasibility",
+      "sessionHeadingAnchor": "session-2--local-equations-are-not-global-decisions",
+      "usesPrerequisiteModuleIds": ["m28", "m29"],
+      "outputs": [
+        {
+          "id": "m31-stationarity-counterexample-ledger",
+          "kind": "ledger",
+          "headingAnchor": "output-stationarity-and-feasibility-ledger",
+          "forwardArtifactId": "m31-stationarity-counterexample-ledger"
+        }
+      ]
+    },
+    {
+      "id": "m31-s03",
+      "title": "Convex structure, dual views, and certificates",
+      "sessionHeadingAnchor": "session-3--constraints-become-certificates-only-under-conditions",
+      "usesPrerequisiteModuleIds": ["m28", "m29"],
+      "outputs": [
+        {
+          "id": "m31-constraint-claim-table",
+          "kind": "claim-table",
+          "headingAnchor": "output-constraint-claim-table",
+          "forwardArtifactId": null
+        }
+      ]
+    },
+    {
+      "id": "m31-s04",
+      "title": "Algorithms, step rules, and convergence evidence",
+      "sessionHeadingAnchor": "session-4--read-stopping-evidence-not-solver-mythology",
+      "usesPrerequisiteModuleIds": ["m28", "m29"],
+      "outputs": [
+        {
+          "id": "m31-solver-selection-rationale",
+          "kind": "rationale",
+          "headingAnchor": "output-solver-selection-rationale",
+          "forwardArtifactId": null
+        }
+      ]
+    },
+    {
+      "id": "m31-s05",
+      "title": "Stochastic optimization and information trade-offs",
+      "sessionHeadingAnchor": "session-5--noise-is-evidence-not-a-nuisance-to-hide",
+      "usesPrerequisiteModuleIds": ["m30"],
+      "outputs": [
+        {
+          "id": "m31-stochastic-information-experiment-card",
+          "kind": "experiment-card",
+          "headingAnchor": "output-stochastic-information-experiment-card",
+          "forwardArtifactId": "m31-stochastic-information-experiment-card"
+        }
+      ]
+    },
+    {
+      "id": "m31-s06",
+      "title": "Optimization & information evidence defense",
+      "sessionHeadingAnchor": "session-6--information-is-a-declared-trade-off",
+      "usesPrerequisiteModuleIds": ["m28", "m29", "m30"],
+      "outputs": [
+        {
+          "id": "m31-optimization-information-evidence-dossier",
+          "kind": "dossier",
+          "headingAnchor": "output-optimization-and-information-evidence-dossier",
+          "forwardArtifactId": null
+        }
+      ]
+    }
+  ],
+  "forwardHandoff": {
+    "declaredForwardModuleId": "m18",
+    "directAcademicConsumerModuleIds": ["m32", "m34", "m35", "m36"],
+    "handoffArtifact": "Objective/constraint/convergence claim sheet with experiment conditions, known limits, and a linkable evidence trail.",
+    "note": "The graph's declared forward handoff is retained verbatim. Direct academic consumers list only modules whose graph prerequisites name M31."
+  },
+  "localForwardHandoffOutputId": "m31-optimization-information-evidence-dossier",
+  "truthBoundary": "This hidden authoring-candidate map proves only that the declared M31 draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select a learner workbook or canonical graph source map, open a route, grant learner access, approve delivery quality, record CI or deployment, or publish M31."
+}

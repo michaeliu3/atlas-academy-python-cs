@@ -9,7 +9,10 @@ import {
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeTopology,
 } from "./advanced-module-bridge.mjs";
-import { validateAdvancedModuleDeliveryMap } from "./advanced-module-delivery-map.mjs";
+import {
+  validateAdvancedAuthoringDeliveryMap,
+  validateAdvancedModuleDeliveryMap,
+} from "./advanced-module-delivery-map.mjs";
 import { projectReaderModules } from "./course-graph.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -842,6 +845,96 @@ async function validateDeliveredSessionMap(
   }
 }
 
+function authoringDeliveryMapPath(moduleId) {
+  return `content/course/contracts/authoring-delivery/${moduleId}.v1.json`;
+}
+
+async function validateAuthoringDeliveryMap(
+  entry,
+  courseModule,
+  resolvedInputs,
+  lifecycle,
+  bridgeEntry,
+  siteRoot,
+  errors,
+) {
+  const label = `Module ${courseModule.number} ${lifecycle} authoring delivery map`;
+  if (lifecycle !== authoringAdapterState) {
+    if (entry?.authoringDeliveryMapInputId !== null) {
+      errors.push(`${label} may only be declared while the retained adapter is authoring-only.`);
+    }
+    return;
+  }
+
+  if (!hasText(entry?.authoringDeliveryMapInputId)) {
+    errors.push(`${label} must name the hidden authoring delivery-map contract input.`);
+    return;
+  }
+  const input = resolvedInputs.get(entry.authoringDeliveryMapInputId);
+  const expectedMapPath = authoringDeliveryMapPath(courseModule.id);
+  if (
+    !input ||
+    input.role !== "provenance" ||
+    input.kind !== "file" ||
+    input.path !== expectedMapPath
+  ) {
+    errors.push(`${label} must resolve provenance JSON input ${expectedMapPath}.`);
+    return;
+  }
+
+  const hiddenWorkbookPaths = [...new Set(
+    [...resolvedInputs.values()]
+      .filter(
+        ({ kind, role, path }) =>
+          kind === "file" &&
+          role === "course-content" &&
+          new RegExp(`^content/authoring/${courseModule.id}_[a-z0-9_.-]+\\.md$`, "u").test(path),
+      )
+      .map(({ path }) => path),
+  )];
+  if (hiddenWorkbookPaths.length !== 1) {
+    errors.push(`${label} requires exactly one hidden authoring workbook contract input.`);
+    return;
+  }
+  const authoringSourceMapPaths = [...new Set(
+    [...resolvedInputs.values()]
+      .filter(
+        ({ role, path }) =>
+          role === "course-content" &&
+          new RegExp(`^content/source-maps/module${courseModule.number}_[a-z0-9_-]+_source_map\\.md$`, "u").test(path),
+      )
+      .map(({ path }) => path),
+  )];
+  if (authoringSourceMapPaths.length !== 1) {
+    errors.push(`${label} requires exactly one instructor-facing authoring source-map contract input.`);
+    return;
+  }
+
+  let deliveryMap;
+  let workbookMarkdown;
+  try {
+    [deliveryMap, workbookMarkdown] = await Promise.all([
+      readFile(input.absolutePath, "utf8").then(JSON.parse),
+      readFile(resolve(siteRoot, hiddenWorkbookPaths[0]), "utf8"),
+    ]);
+  } catch (error) {
+    errors.push(`${label} cannot read its JSON map and hidden workbook: ${error.message}`);
+    return;
+  }
+  try {
+    validateAdvancedAuthoringDeliveryMap(deliveryMap, {
+      courseModule,
+      bridgeEntry,
+      bridgePath: advancedModuleBridgeRelativePath,
+      workbookPath: hiddenWorkbookPaths[0],
+      authoringSourcePlanPath: authoringSourceMapPaths[0],
+      workbookMarkdown,
+    });
+  } catch (error) {
+    errors.push(`${label} must preserve hidden session/output topology: ${error.message}`);
+  }
+}
+
 function validateInteractionEvidence(entry, evidence, resolvedInputs, lifecycle, errors) {
   if (lifecycle === "authoring-only") {
     return;
@@ -1192,6 +1285,7 @@ export async function validateAdvancedModuleContractRegistry(
         "graphSnapshot",
         "contractInputs",
         "deliveryMapInputId",
+        "authoringDeliveryMapInputId",
         "authoringPlan",
         "humanReview",
         "evidence",
@@ -1242,6 +1336,15 @@ export async function validateAdvancedModuleContractRegistry(
       errors,
     );
     await validateDeliveredSessionMap(
+      entry,
+      courseModule,
+      inputs.resolvedInputs,
+      lifecycle,
+      bridgeEntriesByModuleId.get(entry.moduleId),
+      siteRoot,
+      errors,
+    );
+    await validateAuthoringDeliveryMap(
       entry,
       courseModule,
       inputs.resolvedInputs,

@@ -23,6 +23,8 @@ import {
   assertGitIndexSnapshotForSiteRoot,
   openGitIndexSnapshot,
 } from "./git-index-snapshot.mjs";
+import { advancedModuleBridgeRelativePath } from "./advanced-module-bridge.mjs";
+import { validateAdvancedAuthoringDeliveryMap } from "./advanced-module-delivery-map.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -79,16 +81,20 @@ const expectedM31PreflightReleaseBoundary =
 const expectedM31EvidenceRecordReleaseBoundary =
   "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M31 remains authoring-only, hidden from the reader, and unreleased.";
 const expectedM31ReleaseCriterionClaim =
-  "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical source-map or delivery binding, deployment, or publication evidence for hidden M31 material.";
+  "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M31 material.";
 const expectedM31ReleaseCriterionLimitation =
-  "This record does not bind a human review, canonical delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.";
+  "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.";
 const expectedM31CandidateDocumentationPath = "docs/module-evidence/m31/candidate-preflight.md";
 const expectedM31CandidateDocumentationDigest =
-  "sha256:6a0a62538b3ab2e43f3ccdffb6a6e1e424933f86064487ea7849e9af86932966";
+  "sha256:2a80f263eedc507702b2755ccd16f6264554b32e68b00a45d89090676c96a2d3";
 const expectedM31AuthoringWorkbookPath =
   "content/authoring/m31_optimization_information_workbook.v1.md";
+const expectedM31AuthoringDeliveryMapPath =
+  "content/course/contracts/authoring-delivery/m31.v1.json";
+const expectedM31AuthoringSourcePlanPath =
+  "content/source-maps/module31_optimization_information_source_map.md";
 const expectedM31AuthoringSourceMapPaths = new Set([
-  "content/source-maps/module31_optimization_information_source_map.md",
+  expectedM31AuthoringSourcePlanPath,
   "content/source-maps/module31_optimization_information_source_audit.md",
 ]);
 const expectedM31AuthoringModelPath = "lib/m31-optimization-authoring-model.js";
@@ -532,7 +538,12 @@ async function validateCandidateReleaseBoundary(
  * authoring-only scope check instead of borrowing the promoted-module scope
  * rule, which would incorrectly require the absent learner-facing artifacts.
  */
-function validateM31AuthoringCandidateScope(evidenceReport, errors) {
+async function validateM31AuthoringCandidateScope(
+  evidenceReport,
+  graphModule,
+  errors,
+  { siteRoot, snapshot },
+) {
   const label = "M31 authoring candidate evidence";
   for (const entry of evidenceReport.evidenceByCriterion.values()) {
     for (const input of entry.resolvedInputs ?? []) {
@@ -553,6 +564,74 @@ function validateM31AuthoringCandidateScope(evidenceReport, errors) {
       }
     }
   }
+
+  const sessionEvidence = evidenceReport.evidenceByCriterion.get("six-connected-sessions");
+  const sessionDeliveryBindings = (sessionEvidence?.resolvedInputs ?? []).filter(
+    ({ kind, role, path, locator }) =>
+      kind === "json-pointer" &&
+      role === "provenance" &&
+      path === expectedM31AuthoringDeliveryMapPath &&
+      locator === "/sessions",
+  );
+  if (sessionDeliveryBindings.length !== 1) {
+    errors.push(`${label} criterion six-connected-sessions must bind exactly one hidden authoring delivery-map sessions pointer.`);
+  }
+  const prerequisiteEvidence = evidenceReport.evidenceByCriterion.get("prerequisite-forward-map");
+  const handoffDeliveryBindings = (prerequisiteEvidence?.resolvedInputs ?? []).filter(
+    ({ kind, role, path, locator }) =>
+      kind === "json-pointer" &&
+      role === "provenance" &&
+      path === expectedM31AuthoringDeliveryMapPath &&
+      locator === "/forwardHandoff",
+  );
+  if (handoffDeliveryBindings.length !== 1) {
+    errors.push(`${label} criterion prerequisite-forward-map must bind exactly one hidden authoring delivery-map forward-handoff pointer.`);
+  }
+
+  const deliveryMapErrors = [];
+  const [deliveryMapRecord, workbookRecord, bridgeRecord] = await Promise.all([
+    readTrackedText(
+      siteRoot,
+      expectedM31AuthoringDeliveryMapPath,
+      `${label} delivery map`,
+      deliveryMapErrors,
+      { snapshot },
+    ),
+    readTrackedText(
+      siteRoot,
+      expectedM31AuthoringWorkbookPath,
+      `${label} workbook`,
+      deliveryMapErrors,
+      { snapshot },
+    ),
+    readTrackedText(
+      siteRoot,
+      advancedModuleBridgeRelativePath,
+      `${label} prerequisite-session bridge`,
+      deliveryMapErrors,
+      { snapshot },
+    ),
+  ]);
+  if (deliveryMapRecord && workbookRecord && bridgeRecord) {
+    try {
+      const deliveryMap = JSON.parse(deliveryMapRecord.text);
+      const bridge = JSON.parse(bridgeRecord.text);
+      const bridgeEntry = bridge.modules?.find(({ moduleId }) => moduleId === "m31");
+      validateAdvancedAuthoringDeliveryMap(deliveryMap, {
+        courseModule: graphModule,
+        bridgeEntry,
+        bridgePath: advancedModuleBridgeRelativePath,
+        workbookPath: expectedM31AuthoringWorkbookPath,
+        authoringSourcePlanPath: expectedM31AuthoringSourcePlanPath,
+        workbookMarkdown: workbookRecord.text,
+      });
+    } catch (error) {
+      deliveryMapErrors.push(
+        `${label} must preserve a hidden, snapshot-bound session/output topology: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+  errors.push(...deliveryMapErrors);
 
   const sourceLedger = evidenceReport.evidenceByCriterion.get("source-ledger");
   const sourceLedgerPaths = new Set(
@@ -727,7 +806,10 @@ export async function validateModuleEvidencePreflight(
         evidenceReport,
       }));
     } else {
-      validateM31AuthoringCandidateScope(evidenceReport, errors);
+      await validateM31AuthoringCandidateScope(evidenceReport, graphModule, errors, {
+        siteRoot,
+        snapshot: evidenceSnapshot,
+      });
     }
     errors.push(...await promotionEvidenceTestErrors({
       siteRoot,

@@ -3,9 +3,9 @@
   "kind": "atlas-module-evidence-record",
   "recordVersion": "v1",
   "moduleId": "m31",
-  "purpose": "Bind M31's checked-in authoring-only workbook candidate, instructor-facing planning sources, module companion, and bounded Node authoring model into a non-promoting structural candidate package. This record neither changes M31's authoring-only/hidden graph state nor supplies a learner route, canonical source-map binding, studio, review, CI, deployment, or release record.",
+  "purpose": "Bind M31's checked-in authoring-only workbook candidate, instructor-facing planning sources, hidden session/output topology, module companion, and bounded Node authoring model into a non-promoting structural candidate package. This record neither changes M31's authoring-only/hidden graph state nor supplies a learner route, canonical learner-source-map binding, studio, review, CI, deployment, or release record.",
   "truthBoundary": {
-    "structuralResolution": "Resolved inputs can show only that the declared authoring-only candidate files and locators exist in a checked Git candidate. They do not establish that the source map is canonical, that the hidden workbook is learner-ready, that an interaction is a learner-facing studio, or that the material is pedagogically, mathematically, visually, or operationally adequate.",
+    "structuralResolution": "Resolved inputs can show only that the declared authoring-only candidate files and locators exist in a checked Git candidate, including a hidden session/output topology. They do not establish that the instructor-facing source plan is canonical, that the hidden workbook is learner-ready, that an interaction is a learner-facing studio, or that the material is pedagogically, mathematically, visually, or operationally adequate.",
     "humanReview": "This candidate record is not human approval, a source or license review, an oral-defense result, a learner grade, a mastery determination, or authorization to change M31's lifecycle.",
     "release": "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M31 remains authoring-only, hidden from the reader, and unreleased."
   },
@@ -13,7 +13,7 @@
     {
       "id": "m31-prerequisite-forward-map",
       "criterionId": "prerequisite-forward-map",
-      "claim": "The hidden M31 workbook directs repair through M28, M29, and M30, while the authoring bridge and module-scoped companion preserve M18 as the existing canonical forward handoff; references to later modules remain contextual authoring connections rather than learner navigation.",
+      "claim": "The hidden M31 workbook directs repair through M28, M29, and M30, while the authoring bridge, hidden delivery map, and module-scoped companion preserve M18 as the existing canonical forward handoff; references to later modules remain contextual authoring connections rather than learner navigation.",
       "inputs": [
         {
           "kind": "markdown-heading",
@@ -29,6 +29,12 @@
         },
         {
           "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m31.v1.json",
+          "locator": "/forwardHandoff"
+        },
+        {
+          "kind": "json-pointer",
           "role": "learning-companion",
           "path": "content/course/contracts/companions/m31.v1.json",
           "locator": "/forwardHandoff"
@@ -41,7 +47,7 @@
     {
       "id": "m31-six-connected-sessions",
       "criterionId": "six-connected-sessions",
-      "claim": "The hidden M31 candidate declares six ordered sessions from formulation through local reasoning, certificates, algorithm traces, stochastic evidence, and information trade-offs.",
+      "claim": "The hidden M31 candidate declares six ordered sessions from formulation through local reasoning, certificates, algorithm traces, stochastic evidence, and information trade-offs; its authoring delivery map resolves one typed visible local output in each session and binds each prerequisite bridge artifact to its first-consuming session.",
       "inputs": [
         {
           "kind": "markdown-heading",
@@ -78,6 +84,12 @@
           "role": "course-content",
           "path": "content/authoring/m31_optimization_information_workbook.v1.md",
           "locator": "session-6--information-is-a-declared-trade-off"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m31.v1.json",
+          "locator": "/sessions"
         }
       ],
       "limitations": [
@@ -185,7 +197,7 @@
           "kind": "markdown-heading",
           "role": "course-content",
           "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-          "locator": "transfer-task-and-output"
+          "locator": "output-objective-geometry-sheet"
         }
       ],
       "limitations": [
@@ -247,7 +259,7 @@
           "kind": "markdown-heading",
           "role": "course-content",
           "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-          "locator": "final-transfer-task--optimization--information-evidence-dossier"
+          "locator": "output-optimization-and-information-evidence-dossier"
         }
       ],
       "limitations": [
@@ -369,7 +381,7 @@
           "kind": "markdown-heading",
           "role": "course-content",
           "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-          "locator": "final-transfer-task--optimization--information-evidence-dossier"
+          "locator": "output-optimization-and-information-evidence-dossier"
         },
         {
           "kind": "markdown-heading",
@@ -525,7 +537,7 @@
     {
       "id": "m31-release-provenance-boundary",
       "criterionId": "release-provenance-ci-and-deployment-evidence",
-      "claim": "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical source-map or delivery binding, deployment, or publication evidence for hidden M31 material.",
+      "claim": "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M31 material.",
       "inputs": [
         {
           "kind": "json-pointer",
@@ -541,7 +553,7 @@
         }
       ],
       "limitations": [
-        "This record does not bind a human review, canonical delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open."
+        "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open."
       ]
     }
   ]

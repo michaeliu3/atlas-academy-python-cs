@@ -45,7 +45,7 @@ test("the retained advanced authoring adapter validates M31 evidence without pub
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 19,
+    resolvedContractInputs: 20,
   });
   assert.equal(report.modules[0].moduleId, "m31");
   assert.equal(report.modules[0].publicationEffect, "none");
@@ -108,6 +108,13 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
   await assert.rejects(
     validateAdvancedModuleContractRegistry(graph, prematureDeliveryMap),
     /authoring-only delivery map must remain null/u,
+  );
+
+  const missingAuthoringDeliveryMap = structuredClone(registry);
+  missingAuthoringDeliveryMap.modules[0].authoringDeliveryMapInputId = null;
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, missingAuthoringDeliveryMap),
+    /must name the hidden authoring delivery-map contract input/u,
   );
 
   const arbitraryProvenance = structuredClone(registry);
@@ -281,7 +288,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 19,
+    resolvedContractInputs: 20,
   });
   assert.deepEqual(report.moduleLearningCompanions?.summary, {
     companionCount: 2,

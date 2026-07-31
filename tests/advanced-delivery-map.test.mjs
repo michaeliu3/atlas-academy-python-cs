@@ -3,7 +3,10 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateAdvancedModuleDeliveryMap } from "../scripts/advanced-module-delivery-map.mjs";
+import {
+  validateAdvancedAuthoringDeliveryMap,
+  validateAdvancedModuleDeliveryMap,
+} from "../scripts/advanced-module-delivery-map.mjs";
 import { loadAdvancedModuleBridgeLedger } from "../scripts/advanced-module-bridge.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 
@@ -52,6 +55,32 @@ async function m31DeliveryFixture() {
   };
 }
 
+async function m31AuthoringDeliveryFixture() {
+  const authoringWorkbookPath =
+    "content/authoring/m31_optimization_information_workbook.v1.md";
+  const authoringDeliveryMapPath =
+    "content/course/contracts/authoring-delivery/m31.v1.json";
+  const [graph, bridgeLedger, workbookMarkdown, deliveryMapText] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleBridgeLedger(siteRoot),
+    readFile(resolve(siteRoot, authoringWorkbookPath), "utf8"),
+    readFile(resolve(siteRoot, authoringDeliveryMapPath), "utf8"),
+  ]);
+  const courseModule = graph.modules.find(({ id }) => id === "m31");
+  const bridgeEntry = bridgeLedger.modules.find(({ moduleId }) => moduleId === "m31");
+  return {
+    deliveryMap: JSON.parse(deliveryMapText),
+    options: {
+      courseModule,
+      bridgeEntry,
+      bridgePath: "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+      workbookPath: authoringWorkbookPath,
+      authoringSourcePlanPath: "content/source-maps/module31_optimization_information_source_map.md",
+      workbookMarkdown,
+    },
+  };
+}
+
 test("a candidate delivery map preserves the M31 session and bridge topology", async () => {
   const { deliveryMap, options } = await m31DeliveryFixture();
   assert.equal(validateAdvancedModuleDeliveryMap(deliveryMap, options), deliveryMap);
@@ -91,7 +120,51 @@ test("a candidate delivery map rejects session, prerequisite, artifact, and hand
   );
 });
 
-test("the M31 authoring contract deliberately has no delivered-map input yet", async () => {
+test("the hidden M31 authoring delivery map binds each visible session output", async () => {
+  const { deliveryMap, options } = await m31AuthoringDeliveryFixture();
+  assert.equal(validateAdvancedAuthoringDeliveryMap(deliveryMap, options), deliveryMap);
+});
+
+test("the hidden M31 authoring delivery map rejects missing, duplicate, misplaced, and orphan outputs", async () => {
+  const { deliveryMap, options } = await m31AuthoringDeliveryFixture();
+
+  const missingForwardArtifact = structuredClone(deliveryMap);
+  missingForwardArtifact.sessions[0].outputs[0].forwardArtifactId = null;
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(missingForwardArtifact, options),
+    /must bind every canonical prerequisite bridge artifact exactly once/u,
+  );
+
+  const duplicateOutput = structuredClone(deliveryMap);
+  duplicateOutput.sessions[1].outputs.push(structuredClone(duplicateOutput.sessions[0].outputs[0]));
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(duplicateOutput, options),
+    /must be a unique module-scoped artifact identifier/u,
+  );
+
+  const misplacedOutput = structuredClone(deliveryMap);
+  const [sessionOneOutput] = misplacedOutput.sessions[0].outputs;
+  misplacedOutput.sessions[0].outputs = [];
+  misplacedOutput.sessions[1].outputs.push(sessionOneOutput);
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(misplacedOutput, options),
+    /must appear inside its declared session rather than another session/u,
+  );
+
+  const orphanOutputOptions = {
+    ...options,
+    workbookMarkdown: options.workbookMarkdown.replace(
+      "### Output: Constraint Claim Table",
+      "### Output: Unbound experiment note",
+    ),
+  };
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(deliveryMap, orphanOutputOptions),
+    /has an orphan visible output heading/u,
+  );
+});
+
+test("the M31 authoring contract keeps learner delivery null and binds hidden output topology separately", async () => {
   const registryPath = resolve(
     siteRoot,
     "content/course/contracts/advanced-module-contracts.v1.json",
@@ -99,4 +172,5 @@ test("the M31 authoring contract deliberately has no delivered-map input yet", a
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
   assert.equal(registry.modules[0].moduleId, "m31");
   assert.equal(registry.modules[0].deliveryMapInputId, null);
+  assert.equal(registry.modules[0].authoringDeliveryMapInputId, "m31-authoring-delivery-map");
 });

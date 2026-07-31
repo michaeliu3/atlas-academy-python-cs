@@ -11,6 +11,7 @@ import {
   scanMermaidBlocks,
   validateMermaidAccessibility,
 } from "../lib/mermaid-accessibility.mjs";
+import { extractTableOfContents } from "../lib/heading-ids.js";
 
 const candidatePath = "content/authoring/m31_optimization_information_workbook.v1.md";
 
@@ -51,6 +52,19 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   for (const sessionNumber of [1, 2, 3, 4, 5, 6]) {
     assert.match(candidate, new RegExp(`^## Session ${sessionNumber} —`, "mu"));
   }
+  assert.deepEqual(
+    extractTableOfContents(candidate)
+      .filter(({ depth, title }) => depth === 3 && title.startsWith("Output:"))
+      .map(({ id }) => id),
+    [
+      "output-objective-geometry-sheet",
+      "output-stationarity-and-feasibility-ledger",
+      "output-constraint-claim-table",
+      "output-solver-selection-rationale",
+      "output-stochastic-information-experiment-card",
+      "output-optimization-and-information-evidence-dossier",
+    ],
+  );
   assert.match(candidate, /\*\*Text alternative:\*\*/u);
   assert.match(candidate, /```python/u);
   assert.match(candidate, /Teaching Assistant prompt — M31/u);

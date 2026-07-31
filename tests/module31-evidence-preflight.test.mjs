@@ -125,6 +125,26 @@ test("M31 authoring candidate rejects a substitute workbook or visual-test stand
   );
 });
 
+test("M31 authoring candidate requires snapshot-bound delivery-map evidence", async () => {
+  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
+  const missingDeliveryMapBinding = structuredClone(evidenceRecord);
+  const sessions = missingDeliveryMapBinding.evidence.find(
+    ({ criterionId }) => criterionId === "six-connected-sessions",
+  );
+  sessions.inputs = sessions.inputs.filter(
+    ({ path }) => path !== "content/course/contracts/authoring-delivery/m31.v1.json",
+  );
+
+  await assert.rejects(
+    () => validateModuleEvidencePreflight(preflight, {
+      siteRoot,
+      evidenceRecord: missingDeliveryMapBinding,
+      allowInjectedM31CandidateArtifactsForTest: true,
+    }),
+    /must bind exactly one hidden authoring delivery-map sessions pointer/i,
+  );
+});
+
 test("M31 authoring candidate fails closed on a forged release assertion", async () => {
   const { preflight, evidenceRecord } = await loadCandidateArtifacts();
   const testOnlyOptions = {

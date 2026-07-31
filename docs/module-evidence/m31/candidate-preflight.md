@@ -4,14 +4,15 @@
 
 This document records an M31 **candidate-only structural evidence package**.
 It binds the hidden optimization-and-information workbook draft, its
-instructor-facing planning sources, its module companion, and a bounded Node
-authoring fixture/test to inspectable local paths. It does not change M31's
+instructor-facing planning sources, its six-session/output topology, its module
+companion, and a bounded Node authoring fixture/test to inspectable local paths.
+It does not change M31's
 canonical state: M31 remains `authoring-only`, `hidden` from the reader, and
 unreleased.
 
 Nothing here adds M31 to the learner manifest, opens a route, creates a
-learner-facing studio, turns its instructor source map into the canonical graph
-source map, approves a delivery map, or changes the graph's release tuple.
+learner-facing studio, turns its instructor source plan into the canonical graph
+source map, approves learner delivery, or changes the graph's release tuple.
 
 ## What this candidate package can establish
 
@@ -20,6 +21,10 @@ source map, approves a delivery map, or changes the graph's release tuple.
   first-principles invariant, numerical/constraint boundaries, visual prose
   alternatives, diagnostic/retrieval draft, dossier, oral-defense prompts,
   companion handoff, and bounded authoring model/test.
+- The hidden delivery map checks that each declared session has a visible typed
+  local output and that the three prerequisite-bridge artifacts appear once in
+  their canonical first-consuming sessions. It is an authoring topology check,
+  not a learner-delivery decision or quality review.
 - The source materials are explicitly instructor-facing candidate planning
   materials. They provide source, claim, assumption, counterexample, and reuse
   planning context; they are not a canonical source-map binding or a completed
