@@ -27,6 +27,11 @@ actually published.
   unbound or misplaced output pointer; this adds 60 resolved structural
   pointers (424 total) without changing human-review, availability,
   publication, release, or learner-mastery status.
+- Recorded the successful GitHub Course CI run for the legacy session-output
+  binding source head (`07a5fbe…`) in the append-only provenance ledger. It
+  records the portal, Python 3.12, Python 3.14, and Linux Chromium/axe jobs;
+  it is not a GitHub Release, private deployment, human review, publication,
+  or security-clear claim.
 - Added M24's authoring-only primary-source research note and source-audit
   addendum. They preserve its immutable five ambiguous criteria (rigor,
   transfer, visual/text alternative, diagnostic/misconceptions, and TA) and
