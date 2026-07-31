@@ -24,6 +24,10 @@ actually published.
   a hashable internal input, not a learner download, quality approval,
   publication promotion, or release-evidence claim. Nothing changes human
   review, availability, or publication state.
+- Recorded the successful GitHub Course CI run for the M23 structural-packet
+  source head (`3be7919…`) in the append-only provenance ledger. It records
+  four successful named jobs on attempt 1, not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
 - Corrected M23 source and learner-facing bridge language: tagged CPython
   source links now use v3.14.6 rather than the moving main branch; the
   reference model reports a local Python implementation/version rather than
