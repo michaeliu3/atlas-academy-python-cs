@@ -247,8 +247,8 @@ test("the v1 contract registry covers every legacy published workbook structural
     publicationChanges: 0,
   });
   assert.deepEqual(report.legacyPackets?.summary, {
-    structuralCandidates: 4,
-    resolvedPointers: 142,
+    structuralCandidates: 5,
+    resolvedPointers: 179,
     humanApprovals: 0,
     publicationChanges: 0,
   });

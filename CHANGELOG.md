@@ -7,12 +7,18 @@ actually published.
 
 ## Unreleased
 
-- Added an authoring-only M20 source-audit addendum to prepare a later
-  structural packet. It maps source ownership and six-session stopping lines,
-  keeps reuse link/paraphrase-first, and records the missing canonical
-  reference-model source as an unresolved provenance blocker. It is not a
-  learner download, publication promotion, source-quality approval, or
-  release evidence.
+- Added M20's non-promoting structural packet: 37 typed local anchors bind
+  its canonical M19 → M20 → M21 route, six-session networking spine, bounded
+  studio/model artifacts, source route, diagnostic, dossier, oral-defense,
+  TA, and Study Partner surfaces. Its historical rigor, visual/text,
+  diagnostic/misconception, and oral-defense ambiguities remain explicitly
+  unresolved; this does not change publication or human-review state.
+- Bound M20's authoring-only source-audit addendum into that packet and the
+  deterministic internal release-input ledger. It maps source ownership and
+  six-session stopping lines, keeps reuse link/paraphrase-first, and records
+  the missing canonical reference-model source as an unresolved provenance
+  blocker. The addendum remains neither a learner download nor source-quality
+  approval, publication promotion, or release evidence.
 - Corrected M29 source-map route language so its two academic prerequisites
   (M27/M28), direct forward handoff (M30), and later conceptual consumers
   (M31–M36) cannot be mistaken for a navigation bypass. The canonical

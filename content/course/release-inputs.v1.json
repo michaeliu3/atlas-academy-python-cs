@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "ab5b8dbeaff4bafc1e7a70048fcd08c4cd4a8c44ea203c51825fd40a1637af71"
+      "sha256": "5c8cdadf22970bbba6ac78674613a6ed32c06d6d18749cd8b659e71880ff8e91"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -183,6 +183,10 @@
     {
       "path": "content/source-maps/module19_concurrency_parallelism_source_map.md",
       "sha256": "e82fe81592d9450fd31f08eeaa03fd5c1a7de112aaee20200fde31f7a2809b48"
+    },
+    {
+      "path": "content/source-maps/module20_networks_protocols_source_audit_addendum.md",
+      "sha256": "aa415e4c47236dda7f91ed2b350b0623f9bc779166831ccfd434dadfbb707c69"
     },
     {
       "path": "content/source-maps/module20_networks_protocols_source_map.md",

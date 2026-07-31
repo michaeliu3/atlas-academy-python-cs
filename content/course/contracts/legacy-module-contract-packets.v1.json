@@ -348,6 +348,92 @@
         {"id": "m27-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module27_reference.py", "public/downloads/test_module27_reference.py"]},
         {"id": "m27-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m20",
+      "packetId": "m20-networks-protocols-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m19"],
+        "forwardModuleId": "m21",
+        "masteryGateId": "systems",
+        "studioId": "network-protocol"
+      },
+      "workbookPath": "content/modules/20_networks_application_protocols.md",
+      "sourceMapPath": "content/source-maps/module20_networks_protocols_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module20_networks_protocols_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m20-session-1", "usesPrerequisiteModuleIds": ["m19"], "forwardArtifactId": "m20-endpoint-candidate-card"},
+        {"sessionNumber": 2, "pointerId": "m20-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m20-frame-decoder-state-card"},
+        {"sessionNumber": 3, "pointerId": "m20-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m20-evidence-scope-ledger"},
+        {"sessionNumber": 4, "pointerId": "m20-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m20-http-policy-boundary-card"},
+        {"sessionNumber": 5, "pointerId": "m20-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m20-unknown-outcome-retry-ledger"},
+        {"sessionNumber": 6, "pointerId": "m20-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m20-network-evidence-dossier"}
+      ],
+      "pointers": [
+        {"id": "m20-prerequisite-map", "roles": ["prerequisite-map"], "label": "Canonical prerequisite map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "1-position-in-the-knowledge-system"}},
+        {"id": "m20-forward-handoff", "roles": ["forward-handoff"], "label": "Bounded forward handoff", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "15-exact-boundaries-and-handoffs"}},
+        {"id": "m20-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "2-session-1--a-name-is-not-a-remote-effect"}},
+        {"id": "m20-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "3-session-2--transport-carries-bytes-not-your-request"}},
+        {"id": "m20-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "4-session-3--a-response-is-evidence-with-a-scope"}},
+        {"id": "m20-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "5-session-4--http-gives-semantics-atlas-still-owns-policy"}},
+        {"id": "m20-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "6-session-5--retry-is-an-epistemic-problem-before-it-is-a-loop"}},
+        {"id": "m20-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "7-session-6--make-network-knowledge-auditable"}},
+        {"id": "m20-first-principle", "roles": ["first-principles"], "label": "Endpoint-attempt derivation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "derive-the-chain-from-first-principles"}},
+        {"id": "m20-definition", "roles": ["definition"], "label": "Canonical event vocabulary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "13-canonical-event-vocabulary"}},
+        {"id": "m20-assumption", "roles": ["assumption"], "label": "HTTP framing assumption boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "52-http-versions-share-semantics-not-one-framing-rule"}},
+        {"id": "m20-derivation", "roles": ["derivation-proof"], "label": "Evidence-ladder derivation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "derive-the-evidence-ladder"}},
+        {"id": "m20-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Compatible timeout histories", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "the-three-compatible-timeout-histories"}},
+        {"id": "m20-numerical-experiment", "roles": ["numerical-experiment"], "label": "Deterministic reference-packet inspection", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "73-inspect-the-deterministic-reference-packet"}},
+        {"id": "m20-code-reading", "roles": ["code-reading"], "label": "Endpoint-attempt code-reading lab", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "code-reading-lab-l1--make-the-endpoint-attempt-boundary-visible"}},
+        {"id": "m20-debug", "roles": ["debugging"], "label": "Unsupported-inference debugging lab", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "debugging-lab-l2b--find-the-first-unsupported-inference"}},
+        {"id": "m20-design", "roles": ["design"], "label": "Bounded agent-task design ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "level-6--design-a-good-agent-task"}},
+        {"id": "m20-prediction", "roles": ["prediction"], "label": "Prediction record", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "prediction-record"}},
+        {"id": "m20-transfer", "roles": ["transfer", "oral-transfer"], "label": "Transfer without overclaiming", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "level-8--transfer-without-overclaiming"}},
+        {"id": "m20-source-rationale", "roles": ["source-rationale"], "label": "Source-backed teaching architecture", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module20_networks_protocols_source_map.md", "headingAnchor": "source-backed-teaching-architecture"}},
+        {"id": "m20-claim-linkage", "roles": ["claim-linkage"], "label": "Six-session claim linkage", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module20_networks_protocols_source_audit_addendum.md", "headingAnchor": "six-session-claim-linkage"}},
+        {"id": "m20-license-reuse", "roles": ["license-reuse"], "label": "Licensing and access ledger", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module20_networks_protocols_source_map.md", "headingAnchor": "licensing-and-access-ledger"}},
+        {"id": "m20-stable-learner-link", "roles": ["stable-learner-link"], "label": "Source and reuse ledger", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module20_networks_protocols_source_audit_addendum.md", "headingAnchor": "source-and-reuse-ledger"}},
+        {"id": "m20-visual-studio", "roles": ["visual"], "label": "Six-view interactive studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "8-six-view-interactive-html-studio"}},
+        {"id": "m20-text-alternative-candidate", "roles": ["text-alternative"], "label": "Inline text-equivalent candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "how-to-study-this-module"}},
+        {"id": "m20-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware understanding check", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "10-confidence-aware-understanding-check"}},
+        {"id": "m20-misconception-candidate", "roles": ["misconception"], "label": "Quiz-routing misconception candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "quiz-routing"}},
+        {"id": "m20-retrieval", "roles": ["retrieval"], "label": "Spaced retrieval schedule", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "134-spaced-retrieval-schedule"}},
+        {"id": "m20-dossier", "roles": ["dossier"], "label": "Remote-publication protocol dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "11-cumulative-project--atlas-remote-publication-protocol-dossier"}},
+        {"id": "m20-acceptance", "roles": ["acceptance-criteria"], "label": "Project acceptance invariants", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "119-acceptance-invariants-and-assessment-weights"}},
+        {"id": "m20-rubric", "roles": ["rubric"], "label": "Project assessment weights", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "119-acceptance-invariants-and-assessment-weights"}},
+        {"id": "m20-oral-protocol", "roles": ["oral-protocol"], "label": "Session 6 oral defense", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "session-6-oral-defense"}},
+        {"id": "m20-oral-hint", "roles": ["oral-hint"], "label": "TA hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "123-hint-ladder"}},
+        {"id": "m20-oral-reflection", "roles": ["oral-reflection"], "label": "TA response-loop reflection", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "122-ta-response-loop"}},
+        {"id": "m20-oral-summary", "roles": ["oral-summary"], "label": "Machine-readable evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "117-machine-readable-evidence-packet"}},
+        {"id": "m20-ta", "roles": ["ta"], "label": "Teaching-assistant protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "12-teaching-assistant-protocol"}},
+        {"id": "m20-study-partner", "roles": ["study-partner"], "label": "Study-partner role", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/20_networks_application_protocols.md", "headingAnchor": "instructor-ta-and-study-partner-roles"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-prerequisite-map", "m20-forward-handoff"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-session-1", "m20-session-2", "m20-session-3", "m20-session-4", "m20-session-5", "m20-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-definition", "m20-assumption", "m20-derivation", "m20-counterexample", "m20-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-code-reading", "m20-debug", "m20-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-source-rationale", "m20-claim-linkage", "m20-license-reuse", "m20-stable-learner-link"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-visual-studio", "m20-text-alternative-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-diagnostic", "m20-misconception-candidate"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-dossier", "m20-acceptance", "m20-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-oral-protocol", "m20-oral-hint", "m20-counterexample", "m20-transfer", "m20-oral-reflection", "m20-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-forward-handoff"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m20-studio", "kind": "studio", "paths": ["app/NetworkProtocolStudio.tsx", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m20-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module20_reference.py", "public/downloads/test_module20_reference.py"]},
+        {"id": "m20-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }
