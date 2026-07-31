@@ -84,10 +84,12 @@ actually published.
   source-head/merge-candidate validation evidence, not a GitHub Release,
   private deployment, M27 human-review approval, course completion, or a
   security-clean claim.
-- Added a small deterministic M31-S01/S02 constrained-quadratic authoring
-  fixture and teaching tests. It makes objective, gradient, feasibility, and a
-  constrained-stationarity counterexample inspectable while M31 remains
-  authoring-only with no learner route, studio, review, or release claim.
+- Extended the small deterministic M31-S01–S03 constrained-quadratic
+  authoring fixture and teaching tests with an explicit KKT convention and a
+  certificate/failure-condition inspector. It makes objective, gradient,
+  feasibility, stationarity, multiplier sign, and complementary slackness
+  inspectable while M31 remains authoring-only with no learner route, studio,
+  review, or release claim.
 - Recorded the M28/M31 contract-hardening candidate separately: source head
   `6309b52` entered attempt 1 of
   [run 30593670071](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30593670071),

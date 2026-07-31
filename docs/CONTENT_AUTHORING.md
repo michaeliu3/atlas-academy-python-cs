@@ -70,11 +70,13 @@ the narrow M21/M27 pointer pilot.
 
 The initial M31 record is **authoring-only**. It resolves a bounded set of
 checked-in planning and research inputs, including the canonical prerequisite
-bridge, source/claim plans, and the historical M31–M36 readiness audit. It
-checks the six-session plan and declared S01–S10/C01–C08 coverage while
-requiring all of the following to remain absent or pending: learner manifest,
-learner route, learner workbook, source map, studio/model/tests, human review,
-and release record. It is not a learner-facing M31 module.
+bridge, source/claim plans, the historical M31–M36 readiness audit, and a
+small source-code/test fixture for authoring inspection. It checks the
+six-session plan and declared S01–S10/C01–C08 coverage while requiring all of
+the following learner/release surfaces to remain absent or pending: learner
+manifest, learner route, learner workbook, graph-bound source map, learner
+studio, human review, and release record. A bounded source-code/test pointer
+does not make the fixture learner-facing, reviewed, deployed, or published.
 
 The contract uses three states:
 

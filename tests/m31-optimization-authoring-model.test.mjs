@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC,
   evaluateM31ConstrainedQuadratic,
+  evaluateM31KktCertificate,
   isM31ConstrainedQuadraticFeasible,
   m31CentralDifferenceGradient,
   m31ConstraintResidual,
@@ -21,6 +22,10 @@ function assertApproximately(actual, expected, tolerance = 1e-7) {
 }
 
 test("the M31 fixture fixes a small, inspectable constrained quadratic", () => {
+  assert.equal(
+    M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC.id,
+    "m31-s01-s03-two-variable-constrained-quadratic",
+  );
   assert.deepEqual(M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC.variables, ["x", "y"]);
   assert.deepEqual(M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC.unconstrainedStationaryPoint, {
     x: 2,
@@ -72,4 +77,71 @@ test("zero unconstrained gradient does not establish constrained feasibility or 
   assert.equal(counterexample.boundaryConstrainedMinimumHasZeroGradient, false);
   assert.equal(counterexample.zeroGradientPoint.constraintViolation, 2);
   assert.equal(counterexample.boundaryConstrainedMinimum.constraintResidual, 0);
+});
+
+test("the declared M31 boundary minimizer has an inspectable bounded KKT certificate", () => {
+  const certificate = evaluateM31KktCertificate({ x: 1, y: 0 }, 2);
+
+  assert.deepEqual(certificate.point, { x: 1, y: 0 });
+  assert.equal(certificate.multiplier, 2);
+  assert.equal(certificate.primalFeasible, true);
+  assert.equal(certificate.dualFeasible, true);
+  assert.deepEqual(certificate.stationarityResidual, { x: 0, y: 0 });
+  assert.equal(certificate.stationaritySatisfied, true);
+  assert.equal(certificate.complementarySlacknessResidual, 0);
+  assert.equal(certificate.complementarySlacknessProduct, 0);
+  assert.equal(certificate.complementarySlacknessSatisfied, true);
+  assert.equal(certificate.satisfiesDeclaredKktConditions, true);
+  assert.match(certificate.truthBoundary, /one smooth convex constrained problem/u);
+});
+
+test("the M31 KKT fixture exposes its sign convention and exact-arithmetic boundary", () => {
+  const convention = M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC.kktConvention;
+
+  assert.equal(convention.constraintSense, "g(x, y) <= 0");
+  assert.equal(convention.lagrangian, "L(x, y, λ) = f(x, y) + λ g(x, y)");
+  assert.equal(convention.multiplierDomain, "λ >= 0");
+  assert.deepEqual(convention.constraintGradient, { x: 1, y: 1 });
+  assert.deepEqual(convention.strictFeasibilityWitness, { x: 0, y: 0 });
+  assert.equal(isM31ConstrainedQuadraticFeasible(convention.strictFeasibilityWitness), true);
+  assert.equal(m31ConstraintResidual(convention.strictFeasibilityWitness), -1);
+  assert.match(convention.exactArithmeticBoundary, /does not define a numerical tolerance policy/u);
+
+  const certificate = evaluateM31KktCertificate({ x: 1, y: 0 }, 2);
+  assert.equal(certificate.kktConvention, convention);
+  assert.throws(
+    () => evaluateM31KktCertificate({ x: 1, y: 0 }, Number.NaN),
+    /multipliers need to be finite/u,
+  );
+});
+
+test("the bounded KKT evaluator keeps each failed condition visible without making a general solver claim", () => {
+  const negativeMultiplier = evaluateM31KktCertificate({ x: 1, y: 0 }, -2);
+  assert.equal(negativeMultiplier.primalFeasible, true);
+  assert.equal(negativeMultiplier.dualFeasible, false);
+  assert.deepEqual(negativeMultiplier.stationarityResidual, { x: -4, y: -4 });
+  assert.equal(negativeMultiplier.satisfiesDeclaredKktConditions, false);
+
+  const zeroMultiplier = evaluateM31KktCertificate({ x: 1, y: 0 }, 0);
+  assert.equal(zeroMultiplier.primalFeasible, true);
+  assert.equal(zeroMultiplier.dualFeasible, true);
+  assert.deepEqual(zeroMultiplier.stationarityResidual, { x: -2, y: -2 });
+  assert.equal(zeroMultiplier.stationaritySatisfied, false);
+  assert.equal(zeroMultiplier.satisfiesDeclaredKktConditions, false);
+
+  const strictFeasiblePoint = evaluateM31KktCertificate({ x: 0.5, y: -0.5 }, 3);
+  assert.equal(strictFeasiblePoint.primalFeasible, true);
+  assert.equal(strictFeasiblePoint.dualFeasible, true);
+  assert.deepEqual(strictFeasiblePoint.stationarityResidual, { x: 0, y: 0 });
+  assert.equal(strictFeasiblePoint.complementarySlacknessResidual, -3);
+  assert.equal(strictFeasiblePoint.complementarySlacknessSatisfied, false);
+  assert.equal(strictFeasiblePoint.satisfiesDeclaredKktConditions, false);
+
+  const infeasibleStationaryPoint = evaluateM31KktCertificate({ x: 2, y: 1 }, 0);
+  assert.equal(infeasibleStationaryPoint.primalFeasible, false);
+  assert.equal(infeasibleStationaryPoint.dualFeasible, true);
+  assert.deepEqual(infeasibleStationaryPoint.stationarityResidual, { x: 0, y: 0 });
+  assert.equal(infeasibleStationaryPoint.complementarySlacknessSatisfied, true);
+  assert.equal(infeasibleStationaryPoint.satisfiesDeclaredKktConditions, false);
+  assert.match(infeasibleStationaryPoint.truthBoundary, /does not validate a general solver/u);
 });
