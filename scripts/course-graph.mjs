@@ -264,6 +264,12 @@ export function validateCourseGraph(graph) {
     moduleBySlug.set(courseModule.slug, courseModule);
   }
 
+  for (let number = 1; number <= 36; number += 1) {
+    if (!moduleByNumber.has(number)) {
+      fail("must define modules numbered exactly 1 through 36.");
+    }
+  }
+
   if (moduleById.size !== graph.modules.length || moduleBySlug.size !== graph.modules.length) {
     fail("module IDs and slugs must be unique.");
   }

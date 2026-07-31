@@ -77,6 +77,17 @@ const browserAuditRoutes: ReadonlyArray<{
     },
   },
   {
+    name: "Module 1 Core reader access boundary",
+    path: "/modules/01-values-state-execution",
+    ready: async (page) => {
+      await expect(
+        page.getByRole("heading", {
+          name: "The workbook is available; evidence stays learner-controlled.",
+        }),
+      ).toBeVisible();
+    },
+  },
+  {
     name: "Module 18 reader",
     path: "/modules/18-operating-systems-resource-mediation",
     ready: async (page) => {
@@ -105,6 +116,17 @@ const browserAuditRoutes: ReadonlyArray<{
         page.getByRole("heading", {
           name: "Probability & Inference Studio",
           exact: true,
+        }),
+      ).toBeVisible();
+    },
+  },
+  {
+    name: "Module 25 synthesis reference preview",
+    path: "/modules/25-evidence-grounded-intelligent-systems",
+    ready: async (page) => {
+      await expect(
+        page.getByRole("heading", {
+          name: "Reference access does not advance the Core.",
         }),
       ).toBeVisible();
     },
@@ -165,7 +187,7 @@ test("the operating-systems studio uses roving tab keyboard navigation", async (
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Machine & network" }).click();
+  await page.getByRole("button", { name: "Machine & network lab" }).click();
 
   const tabs = page.getByRole("tablist", {
     name: "Operating-systems learning views",
@@ -234,7 +256,7 @@ test("M18 resumes only its bounded v3 prediction evidence and reset leaves no re
     { legacyKey, currentKey, record },
   );
   await page.reload();
-  await page.getByRole("button", { name: "Machine & network" }).click();
+  await page.getByRole("button", { name: "Machine & network lab" }).click();
   const osStudio = page.locator(".os-studio");
 
   await osStudio.getByRole("tab", { name: /translate/i }).click();
@@ -284,7 +306,7 @@ test("M18 clears obsolete saved evidence when its final prediction context chang
 }) => {
   const currentKey = "atlas-academy.module18-os-studio.v3";
   await page.goto("/");
-  await page.getByRole("button", { name: "Machine & network" }).click();
+  await page.getByRole("button", { name: "Machine & network lab" }).click();
   const osStudio = page.locator(".os-studio");
 
   await osStudio.getByRole("button", { name: "User mode" }).click();
@@ -517,7 +539,7 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
 
 test("M19 revokes export approval when its evidence brief changes", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Machine & network" }).click();
+  await page.getByRole("button", { name: "Machine & network lab" }).click();
 
   const studio = page.locator("#concurrency-observatory");
   await expect(studio).toBeVisible();
@@ -595,7 +617,7 @@ test("M19 keeps only its six prediction gates in v3 local progress and reset lea
     },
     { key: legacyKey },
   );
-  await page.getByRole("button", { name: "Machine & network" }).click();
+  await page.getByRole("button", { name: "Machine & network lab" }).click();
 
   const studio = page.locator("#concurrency-observatory");
   await expect(studio).toBeVisible();
@@ -648,7 +670,7 @@ test("M19 keeps only its six prediction gates in v3 local progress and reset lea
     .toEqual({ legacy: null, current: null });
 
   await page.reload();
-  await page.getByRole("button", { name: "Machine & network" }).click();
+  await page.getByRole("button", { name: "Machine & network lab" }).click();
   await expect(studio).toBeVisible();
   await expect
     .poll(() =>

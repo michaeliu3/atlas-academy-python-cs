@@ -87,6 +87,19 @@ test("the graph refuses access states that would turn a preview or authoring nod
   );
 });
 
+test("the graph requires the exact M1–M36 module-number set", async () => {
+  const graph = await loadCourseGraph();
+  const gappedNumbering = structuredClone(graph);
+  const replacement = gappedNumbering.modules.find(({ number }) => number === 36);
+  replacement.number = 37;
+  replacement.id = "m37";
+
+  assert.throws(
+    () => validateCourseGraph(gappedNumbering),
+    /modules numbered exactly 1 through 36/u,
+  );
+});
+
 test("written route handoffs preserve M24's authoring-only continuation and the M26 preview boundary", async () => {
   const [m24Workbook, m24SourceMap, m26Workbook, roadmap] = await Promise.all([
     readFile(new URL("../content/modules/24_cpython_performance_memory.md", import.meta.url), "utf8"),
@@ -150,5 +163,32 @@ test("graph-declared studios have one bounded, code-split reader mapping", async
   assert.match(
     registrySource,
     /studio, project evidence, and oral-defense route remain unavailable/,
+  );
+});
+
+test("studio resolution preserves a locked state before fail-closed hidden-reader handling", async () => {
+  const registrySource = await readFile(
+    new URL("../lib/module-studio-registry.ts", import.meta.url),
+    "utf8",
+  );
+  const resolverSource = registrySource.slice(
+    registrySource.indexOf("export function resolveModuleStudio"),
+  );
+  const lockedCheck = resolverSource.indexOf(
+    'courseModule.state.availability === "locked"',
+  );
+  const hiddenReaderCheck = resolverSource.indexOf(
+    'courseModule.state.readerAccess === "hidden"',
+  );
+
+  assert.ok(lockedCheck >= 0, "locked modules have an explicit resolution");
+  assert.ok(hiddenReaderCheck >= 0, "hidden readers still fail closed");
+  assert.ok(
+    lockedCheck < hiddenReaderCheck,
+    "a locked hidden reader must not be mislabeled authoring-only",
+  );
+  assert.match(
+    resolverSource,
+    /state: "locked"[\s\S]*academic prerequisites and release evidence/u,
   );
 });

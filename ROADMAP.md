@@ -14,6 +14,10 @@ oral-defense, or project evidence shows a necessary bridge.
   inventory is present, but all 30 remain `legacy-baseline` and zero are
   contract-verified; human-reviewed evidence for every contract clause is
   still in progress.
+- [x] The active unified v3 module-contract registry has 36 entries and the
+  same 18 criteria for each module. It preserves the legacy audit/packet and
+  advanced v1 records as migration adapters; those inputs do not promote a
+  module or create Core credit.
 - [ ] M31–M36 remain authoring-only and hidden from the learner reader. They
   are not a delayed completion claim or a promised release date.
 - [ ] Private deployment and historical release claims require reconciliation

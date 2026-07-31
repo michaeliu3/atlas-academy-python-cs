@@ -13,6 +13,7 @@ import {
 } from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { legacyModuleContractPacketRelativePath } from "../scripts/legacy-module-contract-packet.mjs";
+import { moduleContractRegistryRelativePath } from "../scripts/module-contract-registry.mjs";
 import {
   manualLearningRecordWorkflowGuideRelativePath,
   manualLearningRecordWorkflowRelativePath,
@@ -68,7 +69,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.deepEqual(paths, [...paths].sort(comparePaths));
   assert.ok(paths.includes("content/course/course-graph.v2.json"));
   assert.ok(paths.includes("content/course/client-performance-budget.v1.json"));
-  assert.ok(paths.includes("content/course/contracts/module-contracts.v1.json"));
+  assert.ok(paths.includes(moduleContractRegistryRelativePath));
   assert.ok(paths.includes(advancedModuleBridgeRelativePath));
   assert.ok(paths.includes(advancedModuleContractRelativePath));
   assert.ok(paths.includes(legacyModuleContractAuditRelativePath));

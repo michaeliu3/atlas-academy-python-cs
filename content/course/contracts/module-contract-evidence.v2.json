@@ -7,7 +7,7 @@
   "truthBoundary": {
     "pointerResolutionOnly": "A resolved pointer proves only that a Git-tracked local Markdown file and its visible heading anchor exist in this revision.",
     "humanReview": "No human review, approval, accessibility judgment, source-claim judgment, or pedagogical judgment is recorded here.",
-    "publication": "This registry cannot change v1 publication state, canonical graph lifecycle, release evidence, or the strict release gate."
+    "publication": "This registry cannot change canonical reader access, route availability, v3 contract state, release evidence, or the strict release gate."
   },
   "pilotModuleIds": ["m21", "m27"],
   "modules": [

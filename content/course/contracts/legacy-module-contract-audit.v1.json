@@ -11,12 +11,12 @@
       "m11", "m12", "m13", "m14", "m15", "m16", "m17", "m18", "m19", "m20",
       "m21", "m22", "m23", "m24", "m25", "m26", "m27", "m28", "m29", "m30"
     ],
-    "selectionRule": "The canonical graph lifecycle is published for these legacy-baseline modules. M25 and M26 are included because they remain legacy-baseline workbooks, even though their graph availability is preview."
+    "selectionRule": "The canonical graph marks these legacy-baseline modules as learner-material-ready. M25 and M26 are included because they remain reader-visible legacy-baseline workbooks, even though their route availability is preview-only."
   },
   "truthBoundary": {
     "pointerResolutionOnly": "A resolved Markdown anchor proves only that a Git-tracked local Markdown file and its visible h2/h3 heading exist in this revision. A graph field proves only that the named canonical graph field exists for the module.",
     "qualityReview": "Every criterion below has humanQualityReview not-reviewed. No entry records pedagogical quality, accessibility quality, source-claim correctness, psychological safety, license sufficiency, or learner mastery.",
-    "publication": "This audit cannot change canonical graph lifecycle or availability, v1 contract state, release evidence, deployment status, or the strict release gate. In particular, it does not make a legacy-baseline module contract-complete.",
+    "publication": "This audit cannot change canonical graph lifecycle, reader access, route availability, v3 contract state, release evidence, deployment status, or the strict release gate. In particular, it does not make a legacy-baseline module contract-complete.",
     "ambiguity": "ambiguous is intentional: a nearby heading or generic source route may exist, but this audit could not establish a contract-specific, reviewer-ready pointer without reading and approving the underlying material.",
     "provenance": "This audit input is a deterministic, allowlisted release input whose canonical-LF SHA-256 is recorded in content/course/release-inputs.v1.json. That hash is not a release, publication, or human-approval claim."
   },

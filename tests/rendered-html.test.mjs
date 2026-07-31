@@ -200,6 +200,40 @@ test("keeps landing selection and legacy studio tabs keyboard-accessible", async
   }
 });
 
+test("keeps the interactive explorer separate from Core route access and evidence", async () => {
+  const [portal, header, modulePage, navigation, route] = await Promise.all([
+    readFile(new URL("../app/CoursePortal.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/modules/CourseReaderHeader.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/page.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleNavigation.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(portal, /Interactive explorer · not the Core route/);
+  assert.match(portal, /separate Codex\s+learning chats—not this explorer—carry the learning sequence/u);
+  assert.doesNotMatch(portal, /Show learning path/u);
+  assert.match(header, />Interactive explorer</u);
+
+  assert.match(modulePage, /Reference access does not advance the Core\./u);
+  assert.match(modulePage, /does not mark academic prerequisites complete or advance the Core/u);
+  assert.match(navigation, /These links show planned sequence; they do not infer or record\s+prerequisite completion/u);
+  assert.match(navigation, /Locked\. Return to the route to review its prerequisites and release boundary\./u);
+  assert.match(navigation, /Reference preview—not an unlocked Core step\./u);
+
+  assert.match(route, /Atlas does not infer progress\s+from a click, a scroll, or a studio interaction\./u);
+  assert.match(route, /Reference preview—available for orientation, not Core progress/u);
+  assert.match(route, /entry\.state\.readerAccess !== "hidden"/u);
+});
+
 test("each Core-open module reader keeps the supportive oral-defense route", async () => {
   const [page, oralDefense, textDefense, oralGuide] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),

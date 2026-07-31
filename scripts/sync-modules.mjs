@@ -39,17 +39,16 @@ import {
   loadBrowserProgressSurfacePolicy,
   validateBrowserProgressSurfacePolicy,
 } from "./browser-progress-surface-policy.mjs";
+import {
+  loadModuleContractRegistry,
+  moduleContractRegistryPath,
+  validateModuleContractRegistry,
+} from "./module-contract-registry.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
 const moduleDirectory = resolve(siteRoot, "content", "modules");
-const contractPath = resolve(
-  siteRoot,
-  "content",
-  "course",
-  "contracts",
-  "module-contracts.v1.json",
-);
+const contractPath = moduleContractRegistryPath(siteRoot);
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
 const performanceBudgetPolicyPath = resolve(
   siteRoot,
@@ -258,7 +257,7 @@ for (const projectedModule of projectedModules) {
   const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
   if (candidates.length !== 1) {
     throw new Error(
-      `Published Module ${projectedModule.number} must have exactly one checked-in workbook; found ${candidates.length}.`,
+      `Reader-visible Module ${projectedModule.number} must have exactly one checked-in workbook; found ${candidates.length}.`,
     );
   }
 
@@ -285,7 +284,7 @@ for (const projectedModule of projectedModules) {
     throw new Error(`Module ${graphModule.number} workbook slug does not match the canonical course graph.`);
   }
   if (!graphModule.sourceMap) {
-    throw new Error(`Published Module ${graphModule.number} must declare a source map.`);
+    throw new Error(`Reader-visible Module ${graphModule.number} must declare a source map.`);
   }
   const sourceMapPath = resolve(siteRoot, graphModule.sourceMap);
   await requireFile(sourceMapPath, `Module ${graphModule.number} source map`);
@@ -325,7 +324,7 @@ for (const projectedModule of projectedModules) {
   });
 }
 
-await requireFile(contractPath, "Module contract registry");
+await requireFile(contractPath, "Module contract registry v3");
 await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
 await requireFile(advancedModuleContractPath(siteRoot), "Lifecycle-aware advanced module contract");
@@ -369,6 +368,15 @@ const advancedModuleContractReport = await validateAdvancedModuleContractRegistr
 for (const path of advancedModuleContractReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
+const moduleContractRegistry = await loadModuleContractRegistry(siteRoot);
+const moduleContractRegistryReport = await validateModuleContractRegistry(
+  courseGraph,
+  moduleContractRegistry,
+  { siteRoot, manifest },
+);
+for (const path of moduleContractRegistryReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
 const legacyModuleContractPacketRegistry = await loadLegacyModuleContractPacketRegistry(siteRoot);
 const legacyModuleContractPacketReport = await validateLegacyModuleContractPacketRegistry(
   courseGraph,
@@ -391,7 +399,7 @@ const releaseInputs = {
   schemaVersion: 1,
   generatedBy: "scripts/sync-modules.mjs",
   courseGraphSchemaVersion: courseGraph.schemaVersion,
-  contractVersion: "v1",
+  contractVersion: "v3",
   inputs: await Promise.all(
     [...releaseInputPaths]
       .sort(compareRepositoryPaths)

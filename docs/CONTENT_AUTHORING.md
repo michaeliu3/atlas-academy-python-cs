@@ -25,9 +25,19 @@ reader access, route availability, contract maturity, and release maturity.
 No contract registry, route page, or workbook heading may override those
 fields. Reader access is not learner completion; preview access is reference
 reading only, never Core credit.
-`content/course/contracts/module-contracts.v1.json` is the separate evidence
-registry. It exists so that an author cannot make a module look complete by
+`content/course/contracts/module-contract-registry.v3.json` is the active,
+unified evidence registry. It has one fail-closed entry for each of the 36
+canonical modules and the same ordered 18-criterion contract taxonomy for
+every entry. It exists so that an author cannot make a module look complete by
 adding familiar headings alone.
+
+The v3 registry preserves rather than replaces the earlier evidence: the
+immutable legacy audit and structural packets remain migration evidence for
+M1–M30, while the advanced v1 contract and prerequisite/session bridge remain
+authoring evidence for M31–M36. `module-contracts.v1.json` is no longer an
+active registry authority. A pointer, packet, plan, or historical audit cannot
+promote a module, create reader access, award Core credit, or establish a
+release claim.
 
 The current graph has 36 defined modules: 30 reader-visible modules (28
 Core-open plus M25/M26 reference previews) are deliberately recorded as
@@ -37,6 +47,25 @@ workbook, six session headings, source-map path, and graph handoff. It cannot
 infer that an explanation is rigorous, a diagram has a good prose equivalent,
 or an oral defense is supportive. Those require reviewed, module-specific
 evidence before a contract becomes `verified`.
+
+### Promotion evidence chain
+
+V3 promotion is deliberately more than changing a status string. A
+`review-ready` module stays hidden and must bind all 18 criteria to its own
+versioned module-evidence record. Each input must resolve to a Git-tracked
+local file, heading, or JSON Pointer with an explicit role; a digest-bound,
+module-specific review record must approve every criterion and quality
+dimension. Legacy audits, generic README links, unresolvable pointers, and
+unbound review labels cannot satisfy this path.
+
+A `verified` module must preserve that review-ready evidence bundle from an
+earlier review-ready commit. Its later additive release record must bind a
+strictly earlier candidate commit, unchanged candidate inputs, source-commit
+CI policy and CI evidence, a matching canonical graph `deployed-recorded`
+record ID, module-scoped provenance/source-review/known-limitations records,
+and a real private deployment version. These checks establish a bounded
+release record; they do not convert review evidence into a learner-mastery or
+security-clean claim. No module has entered either promotion state yet.
 
 Use the right gate for the claim being made:
 
@@ -48,10 +77,12 @@ pnpm sync:modules
 pnpm check:generated
 ~~~
 
-`validate:course:strict` must pass before a newly Core-open module, a
-re-verified legacy module, or a private deployment can be presented as fully
-contract-verified. The current Core-open legacy baselines are a disclosed
-migration condition, not a precedent for bypassing this gate. It must never be
+`validate:course:strict` uses the active v3 registry and must pass before a
+newly Core-open module, a re-verified legacy module, or a private deployment
+can be presented as fully contract-verified. The current Core-open legacy
+baselines are a disclosed migration condition, not a precedent for bypassing
+this gate. `validate:course:complete` is stricter still: it requires all 36
+entries to be verified and M25/M26 to become Core-open. Neither gate may be
 weakened merely to make CI green.
 
 ### Draft evidence-pointer pilot
@@ -68,14 +99,14 @@ and heading exist in this revision. It does not prove pedagogical quality,
 source/license correctness, visual accessibility, oral-defense quality, or
 human approval. Do not use it to call a module verified, Core-open, or
 released. Extend the evidence model only after its review fields and release
-semantics can be validated without weakening the v1 strict gate.
+semantics can be validated without weakening the active v3 strict gate.
 
 ### Advanced-module lifecycle contract
 
 `content/course/contracts/advanced-module-contracts.v1.json` and
-`scripts/advanced-module-contract.mjs` are the separate lifecycle contract for
-M31–M36. They do not extend the deliberately legacy-only v1 registry or reuse
-the narrow M21/M27 pointer pilot.
+`scripts/advanced-module-contract.mjs` are a retained advanced-authoring
+adapter for M31–M36. They feed the unified v3 registry; they do not supersede
+it, extend an active v1 registry, or reuse the narrow M21/M27 pointer pilot.
 
 Its `contractState` values (`authoring-only`, `review-ready`, and `published`)
 are contract-lifecycle terms, not aliases for the v2 graph state. A contract
@@ -165,13 +196,14 @@ another.
 
 ## Legacy structural packets
 
-`legacy-module-contract-packets.v1.json` is a separate migration layer for
+`legacy-module-contract-packets.v1.json` is a retained migration adapter for
 M1–M30. A packet can resolve exact Git-tracked workbook, source-map, and
 source-audit anchors; bind six ordered sessions to the canonical academic
 prerequisites and forward module; and list bounded studio/model/test artifacts.
-It must preserve the matching legacy-audit status for every one of the
-16 criteria. Its only current state is `structural-candidate`, with
-`humanReviewState: not-reviewed` and `publicationEffect: none`.
+It must preserve the matching immutable legacy-audit status for the first 16
+criteria in the unified v3 taxonomy. Its only current state is
+`structural-candidate`, with `humanReviewState: not-reviewed` and
+`publicationEffect: none`.
 
 Do not use a packet to mark a module reviewed, verified, released, deployable,
 or mastered. In particular, a resolved anchor does not establish the quality

@@ -62,10 +62,10 @@ evidence. Likewise, `published` route availability does not imply a verified
 contract, a recorded deployment, or universal mastery.
 
 The table below is the **intended full canonical order**, not a claim that
-every scheduled module is available today. The release-aware [60-, 90-, and
+every scheduled module is available today. The access-aware [60-, 90-, and
 180-day learner route plans](docs/LEARNER_ROUTE_PLANS.md) explain the current
-published-content path, pace selector, bridge and catch-up rules, minimum
-evidence, and the authoring/preview boundary.
+Core-open path, pace selector, bridge and catch-up rules, minimum evidence,
+and the authoring/preview boundary.
 
 The intended Core experience ends each module with a short constructive oral
 defense: a designated voice-enabled Teaching Assistant chat is the preferred

@@ -106,10 +106,24 @@ The portal must distinguish:
 | Release | private deployment status, release note, known limitations |
 | Learning | diagnostic, TA checkoff, Study Partner retrieval, capstone defense |
 
-The versioned module-contract registry adds a distinct migration layer between
-content and release. At this migration point, the graph defines 36 modules:
-30 are reader-visible (28 Core-open and two reference previews), all 30 are
-legacy baselines, zero are contract-verified, and six are authoring-only. Its
-structural baseline is intentionally not a claim that all pedagogical, source,
-accessibility, or oral-defense evidence has been human-verified; the strict
-gate remains the standard for a verified contract or release claim.
+The active unified `module-contract-registry.v3.json` adds a distinct migration
+layer between content and release. It has one entry per canonical module and
+the same 18 criteria for every entry. The immutable legacy audit/packets and
+advanced v1 authoring contract remain inputs to that registry, not competing
+authorities or promotion paths. At this migration point, the graph defines 36
+modules: 30 are reader-visible (28 Core-open and two reference previews), all
+30 are legacy baselines, zero are contract-verified, and six are authoring-
+only. Its structural baseline is intentionally not a claim that all
+pedagogical, source, accessibility, or oral-defense evidence has been human-
+verified; the strict gate remains the standard for a verified contract or
+release claim.
+
+For future promotion, the registry does not trust criterion labels alone.
+Review-ready requires a module-scoped evidence record that resolves all 18
+criteria to Git-tracked local inputs, plus a digest-bound module review record.
+Verified additionally preserves that bundle from an earlier review-ready
+commit and binds a strict candidate commit, its source-commit CI policy and
+evidence, unchanged candidate blobs, matching graph release record, scoped
+provenance/source-review/limitation documents, and an actual private deployment
+version. Those are auditable boundaries, not claims of learner mastery or a
+security-clean system.

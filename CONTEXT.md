@@ -7,7 +7,7 @@ inventory from pedagogical review and release truth.
 
 **Canonical course graph**:
 The single course-level record of a module's identity, route, prerequisites,
-availability, source map, and release boundary.
+reader access, availability, source map, contract state, and release state.
 _Avoid_: navigation graph, secondary manifest
 
 **Reader access**:
@@ -23,15 +23,15 @@ not learner-deliverable.
 _Avoid_: lifecycle, reader access, completion state
 
 **Contract state**:
-The maturity of a module's structured teaching evidence: `legacy-baseline`,
-`authoring`, `review-ready`, or `reviewed`. It is independent of reader access
-and release evidence.
+The maturity of a module's structured teaching evidence: `not-started`,
+`authoring-only`, `legacy-baseline`, `review-ready`, or `verified`. It is
+independent of reader access and release evidence.
 _Avoid_: published, learner mastery, deployment state
 
 **Release state**:
-The maturity of recorded release evidence: `planned`, `evidence-pending`,
-`candidate-validated`, or `recorded`. It is independent of the quality review
-and does not establish private deployment.
+The maturity of recorded release evidence: `unrecorded`, `candidate-recorded`,
+or `deployed-recorded`. It is independent of quality review; a deployment
+claim must still link to its exact recorded evidence.
 _Avoid_: contract state, reader access, security clean
 
 **Core progression**:
@@ -70,6 +70,20 @@ _Avoid_: failed learning, absent concept
 A separate qualitative judgment of the underlying teaching material. It cannot
 be inferred from an evidence pointer or from a release-input hash.
 _Avoid_: audit pass, structural validation
+
+**Module evidence record**:
+A versioned, module-scoped record that resolves the concrete local inputs for
+every v3 contract criterion, including their role and locator. It makes the
+review surface inspectable; it is not, by itself, a quality approval, learner
+mastery claim, or release proof.
+_Avoid_: checklist label, automatic verification
+
+**Module review record**:
+A versioned, module-scoped human-review decision bound to the exact SHA-256
+digest of its module evidence record. A later verified release must preserve
+that reviewed evidence bundle and add independently checkable CI, deployment,
+and limitation evidence.
+_Avoid_: unbound approval, deployment assertion
 
 **Release input**:
 A versioned local course input included in the deterministic provenance ledger.

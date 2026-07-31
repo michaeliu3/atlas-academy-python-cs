@@ -201,11 +201,23 @@ test("a legacy module cannot become verified with free-form evidence strings", a
   forgedM29Graph.state.release.recordId = "m29-forged-candidate";
   const forgedContracts = structuredClone(contracts);
   const forgedM29 = forgedContracts.modules.find(({ moduleId }) => moduleId === "m29");
-  forgedM29.publicationState = "verified";
-  forgedM29.contractPacketId = "m29-forged-packet";
+  forgedM29.contractState = "verified";
+  forgedM29.criteria = forgedM29.criteria.map((criterion) => ({
+    ...criterion,
+    status: "release-ready",
+  }));
   forgedM29.humanReview = Object.fromEntries(
-    Object.keys(forgedContracts.defaultHumanReview).map((dimension) => [dimension, "approved"]),
+    forgedContracts.humanReviewDimensions.map((dimension) => [dimension, "approved"]),
   );
+  forgedM29.reviewReadyCommit = "0123456789abcdef0123456789abcdef01234567";
+  forgedM29.release = {
+    sourceCommit: "0123456789abcdef0123456789abcdef01234567",
+    ciRunUrl: "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/1",
+    provenancePath: "docs/RELEASE_PROVENANCE.md",
+    sourceReviewPath: "docs/advanced-evidence/m29/source-review.md",
+    knownLimitationsPath: "docs/advanced-evidence/m29/known-limitations.md",
+    privateDeploymentVersion: "forged",
+  };
   forgedM29.verification = {
     prerequisiteAndForwardMap: "x",
     sessionAnchors: "x",
@@ -220,11 +232,11 @@ test("a legacy module cannot become verified with free-form evidence strings", a
 
   await assert.rejects(
     validateCourseContracts(forgedGraph, forgedContracts, { strict: true }),
-    /may not use retired free-form verification evidence[\s\S]*requires a separately reviewed typed contract record/u,
+    /must use exactly these keys/u,
   );
 });
 
-test("the v1 contract registry covers every legacy published workbook structurally", async () => {
+test("the v3 contract registry covers every legacy reader module structurally", async () => {
   const [graph, contracts] = await Promise.all([
     loadCourseGraph(),
     loadCourseContracts(),
@@ -317,16 +329,19 @@ test("a newly published module cannot use the legacy contract exception", async 
     loadCourseContracts(),
   ]);
   const candidate = structuredClone(graph);
+  const candidateContracts = structuredClone(contracts);
   const module31 = candidate.modules.find((courseModule) => courseModule.number === 31);
+  const module31Contract = candidateContracts.modules.find(({ moduleId }) => moduleId === "m31");
   module31.state.lifecycle = "learner-material-ready";
   module31.state.readerAccess = "full";
   module31.state.availability = "published";
   module31.state.contract.track = "legacy-v1";
   module31.state.contract.state = "legacy-baseline";
+  module31Contract.contractState = "legacy-baseline";
 
   await assert.rejects(
-    validateCourseContracts(candidate, contracts),
-    /may not use the legacy contract exception/,
+    validateCourseContracts(candidate, candidateContracts),
+    /Legacy-baseline Module m31 is absent from the immutable audit/,
   );
 });
 
@@ -334,8 +349,29 @@ test("strict release validation refuses legacy baseline evidence", async () => {
   await assert.rejects(
     () => runCourseValidation({ strict: true }),
     (error) => {
-      assert.match(error.message, /30 legacy baseline module\(s\) cannot pass strict release validation/u);
+      assert.match(error.message, /28 non-preview learner module\(s\) cannot pass strict contract validation/u);
       assert.doesNotMatch(error.message, /Draft v2 evidence/u);
+      return true;
+    },
+  );
+});
+
+test("complete validation remains fail-closed until all modules are verified and synthesis is Core-open", async () => {
+  await assert.rejects(
+    () => runCourseValidation({ complete: true }),
+    (error) => {
+      assert.match(
+        error.message,
+        /Complete contract validation requires every one of the 36 modules to be verified/u,
+      );
+      assert.match(
+        error.message,
+        /Complete contract validation requires m25 to be Core-open rather than preview-only/u,
+      );
+      assert.match(
+        error.message,
+        /Complete contract validation requires m26 to be Core-open rather than preview-only/u,
+      );
       return true;
     },
   );

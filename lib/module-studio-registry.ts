@@ -181,6 +181,15 @@ export type ModuleStudioResolution =
 export function resolveModuleStudio(
   courseModule: ModuleStudioTarget,
 ): ModuleStudioResolution {
+  if (courseModule.state.availability === "locked") {
+    return {
+      kind: "unavailable",
+      state: "locked",
+      description:
+        "This module is locked until its academic prerequisites and release evidence are available.",
+    };
+  }
+
   if (
     courseModule.state.lifecycle !== "learner-material-ready" ||
     courseModule.state.readerAccess === "hidden" ||
@@ -191,15 +200,6 @@ export function resolveModuleStudio(
       state: "authoring-only",
       description:
         "This module is authoring-only: no workbook or interactive studio is published.",
-    };
-  }
-
-  if (courseModule.state.availability === "locked") {
-    return {
-      kind: "unavailable",
-      state: "locked",
-      description:
-        "This module is locked until its academic prerequisites and release evidence are available.",
     };
   }
 

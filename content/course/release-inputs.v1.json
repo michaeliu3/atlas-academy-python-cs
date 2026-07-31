@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedBy": "scripts/sync-modules.mjs",
   "courseGraphSchemaVersion": 2,
-  "contractVersion": "v1",
+  "contractVersion": "v3",
   "inputs": [
     {
       "path": "content/course/browser-progress-surfaces.v1.json",
@@ -18,15 +18,15 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "470bfd0e253b656eef6e4f29d818f5c67bb17362b7833dcb67d1832d26974ab4"
+      "sha256": "a74fad51fe16d126229aac91b318a5db03b091e2bdbd0ed286f70d32fbd020e4"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
       "sha256": "8eeceaeca418ccae58911eb38f77a75377db45bbe6e47bc4bd389c34d45591b7"
     },
     {
-      "path": "content/course/contracts/module-contracts.v1.json",
-      "sha256": "a93767ad626e60d07bb188e513e3b9efe8d6e0608ebeb7acf634389962c4a807"
+      "path": "content/course/contracts/module-contract-registry.v3.json",
+      "sha256": "0ef949a29504e261c01238f671fab796f3d29c1211634db915e82de59f7de20e"
     },
     {
       "path": "content/course/course-graph.v2.json",

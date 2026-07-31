@@ -76,7 +76,7 @@ seven days.
 | Calendar | Focused time | Approximate calendar capacity | Best use | Select it when |
 | --- | --- | --- | --- | --- |
 | **60-day accelerated first pass** | 20–25 hours/week | 171–214 hours | A tightly scoped minimum-evidence pass through available material, with short artifacts and protected buffers. | You can reliably protect 3.5–4.5 focused hours on five or six days each week and your first-week evidence averages at most about 5.5 hours per module. |
-| **90-day sustainable route** | 13–17 hours/week | 167–219 hours | The recommended default: the same connected published path with more time for retrieval, project revision, and repair. | You have other obligations, need mathematical rebuilding, or expect to revisit hard models more than once. |
+| **90-day sustainable route** | 13–17 hours/week | 167–219 hours | The recommended default: the same connected Core-open path with more time for retrieval, project revision, and repair. | You have other obligations, need mathematical rebuilding, or expect to revisit hard models more than once. |
 | **180-day durable route** | 7–10 hours/week | 180–257 hours | Deliberate study, spaced recall, larger dossiers, and specialization exploration. | You want retention and architecture judgment to matter more than speed, or the first-week measurement exceeds the 90-day budget. |
 
 The total-hour ranges overlap on purpose. The longer calendars buy spacing,
@@ -105,7 +105,7 @@ The current Module 0 diagnostic is a confidence-aware route generator. It
 samples **20 reasoning models** across Python execution and design,
 algorithms/data structures, systems/execution layers, discrete mathematics and
 proof, linear algebra, calculus, probability, optimization foundations, and
-AI/ML evaluation reasoning. Repair signals link only to exact **published**
+AI/ML evaluation reasoning. Repair signals link only to exact **Core-open**
 sections in M1–M17 and M27–M30. It distinguishes **ready to transfer**,
 **verify and strengthen**, and **repair first**; it does not issue a grade or
 permission to skip dependencies.
@@ -115,7 +115,7 @@ a comprehensive mastery measure. Each item requires an answer and behavioral
 confidence before feedback; a high-confidence answer is still a hypothesis to
 test with a trace, explanation, or changed case. The optimization and AI/ML
 probes name M31 and M35 only as **authoring-only future extensions**. Their
-adaptive bridges begin with published calculus, linear-algebra, probability,
+adaptive bridges begin with Core-open calculus, linear-algebra, probability,
 or inference foundations and do not open, unlock, or self-certify M31–M36.
 
 | Diagnostic signal | Next learning move | What not to do |
@@ -129,35 +129,35 @@ The portal keeps diagnostic progress in the current browser unless the learner
 chooses to copy or print the learning brief. It does not automatically write
 the result to Notion.
 
-## The three release-aware routes
+## The three access-aware routes
 
-### 60 days — accelerated published-content first pass
+### 60 days — accelerated Core-open-content first pass
 
 This is the fastest honest version of the current course. It can cover the
 available material only as a **minimum-evidence first pass**; it cannot turn
 M31–M36 into completed work or turn M25/M26 previews into a capstone.
 
-| Calendar window | Connected focus | Release-aware decision |
+| Calendar window | Connected focus | Access-aware decision |
 | --- | --- | --- |
-| Day 1 | Module 0 diagnostic, pace selection, learning-record setup | Route repair signals to their exact published sections. |
+| Day 1 | Module 0 diagnostic, pace selection, learning-record setup | Route repair signals to their exact Core-open sections. |
 | Days 2–9 | M1–M5, then M27 | Build execution, recursion, abstraction, proof, and cost before choosing structures. |
 | Days 10–17 | M6–M11 | Connect representation and local invariants to algorithmic strategy. |
 | Days 18–25 | M12–M16 | Make contracts, tests, delivery, persistence, and transactions preserve meaning over time. |
-| Days 26–34 | M17, M28–M30 | Connect execution to linear structure, continuous change, uncertainty, and evidence. M31 remains a visible release stop. |
-| Days 35–44 | M18–M24 as the labelled published systems branch | Study OS, concurrency, networks, trust, languages, and runtime evidence from M17. Do not represent this branch as completing M31 or as entering M32. |
+| Days 26–34 | M17, M28–M30 | Connect execution to linear structure, continuous change, uncertainty, and evidence. M31 remains a visible authoring/access stop. |
+| Days 35–44 | M18–M24 as the labelled Core-open systems branch | Study OS, concurrency, networks, trust, languages, and runtime evidence from M17. Do not represent this branch as completing M31 or as entering M32. |
 | Days 45–53 | Retrieval, debugging, and dossier revision | No M32–M36 substitute exists today. Revisit claims, math, and systems evidence; make uncertainty visible. |
 | Days 54–55 | Optional M25 preview orientation | If read, record questions and assumptions only. It produces no synthesis credit. |
-| Days 56–60 | Pre-capstone evidence bundle and constructive oral rehearsal | Build a learner-owned dossier from published work. This is **not** the M26 capstone or a release defense. |
+| Days 56–60 | Pre-capstone evidence bundle and constructive oral rehearsal | Build a learner-owned dossier from Core-open work. This is **not** the M26 capstone or a release defense. |
 
 For this route, reserve at least one short buffer block every week. When a
 buffer is used, move a later nonessential reading or optional preview—not the
 next prerequisite repair—into the buffer.
 
-### 90 days — sustainable, recommended published path
+### 90 days — sustainable, recommended Core-open path
 
 This is the default plan for a learner who wants the same foundations without
 forcing a proof, trace, or explanation into a rushed slot. It uses the same
-release boundary as the 60-day plan.
+reader/Core access boundary as the 60-day plan.
 
 | Days | Focus | Evidence emphasis |
 | --- | --- | --- |
@@ -165,13 +165,14 @@ release boundary as the 60-day plan.
 | 15–35 | M6–M11 | Representation comparison, invariant recovery, algorithm-choice defense. |
 | 36–49 | M12–M16 | API/data boundary, regression test, transaction or serialization trace. |
 | 50–63 | M17, M28–M30 | Numerical/architecture assumption, derivation, counterexample, and uncertainty statement. |
-| 64–77 | M18–M24 published systems branch | Cross-layer trace, failure boundary, trust decision, runtime observation. |
+| 64–77 | M18–M24 Core-open systems branch | Cross-layer trace, failure boundary, trust decision, runtime observation. |
 | 78–90 | Retrieval, revisions, preview orientation only if useful | One revised dossier, two delayed oral defenses, and a next specialization question. |
 
-At current release status, the last two weeks are deliberately not filled with
-invented M31–M36 content. If any of those modules later becomes published,
-insert it only after its canonical availability, validated contract, and
-release/provenance evidence all say it is ready; then recalculate the plan.
+At current reader/Core access status, the last two weeks are deliberately not
+filled with invented M31–M36 content. If any of those modules later becomes
+Core-open, insert it only after its canonical reader access, availability,
+validated contract, and release/provenance evidence all support that claim;
+then recalculate the plan.
 
 ### 180 days — durable understanding and specialization readiness
 
@@ -185,12 +186,13 @@ named artifact and a delayed retrieval.
 | 31–60 | M6–M11 | Compare data-structure/algorithm choices against a concrete workload and repair a flawed trace. |
 | 61–90 | M12–M17 | Read a small architecture end-to-end: interface, test, artifact, data ownership, execution boundary. |
 | 91–120 | M28–M30 | Maintain a proof/derivation/numerical-experiment notebook and challenge at least one model assumption. |
-| 121–150 | M18–M24 published systems branch | Build a cross-layer incident or design dossier with evidence limits and human/trust boundaries. |
-| 151–180 | Retrieval, portfolio revision, release-gated extension | Re-defend selected work after delay. If M31–M36 remain authoring-only, use this time for evidence revision, source reading, or a bounded specialization—not a fabricated equivalent module. |
+| 121–150 | M18–M24 Core-open systems branch | Build a cross-layer incident or design dossier with evidence limits and human/trust boundaries. |
+| 151–180 | Retrieval, portfolio revision, access-gated extension | Re-defend selected work after delay. If M31–M36 remain authoring-only, use this time for evidence revision, source reading, or a bounded specialization—not a fabricated equivalent module. |
 
-When the advanced chain is genuinely released, the 180-day route is the best
-place to add it: preserve the canonical order M31, then M18–M24, then
-M32–M36, followed by reworked M25 and M26. Do not pre-book a release date.
+When the advanced chain is genuinely Core-open with the necessary contract and
+release evidence, the 180-day route is the best place to add it: preserve the
+canonical order M31, then M18–M24, then M32–M36, followed by reworked M25 and
+M26. Do not pre-book a release date.
 
 ## Minimum learner evidence for one module
 
@@ -293,14 +295,15 @@ It is a structured opportunity to build evidence-backed competence.
 Current uncertainty remains material:
 
 - M1–M30 are legacy structural baselines while full module-contract review
-  remains incomplete; a learner's evidence and the release audit are separate
-  facts.
+  remains incomplete; the active unified v3 registry records zero verified
+  modules, and a learner's evidence and the release audit are separate facts.
 - The 20-probe intake now samples the requested foundations, but remains a
   course-specific formative instrument rather than a validated placement test;
   per-module operational records and systematic review evidence are still
   being completed.
-- M31–M36 have no promised release date; M25/M26 stay previews until the
-  advanced chain is released and their synthesis work is reweaved.
+- M31–M36 have no promised release date; M25/M26 stay reader-visible previews
+  without Core credit until the advanced chain becomes Core-open with the
+  necessary evidence and their synthesis work is reweaved.
 - Real time depends on prior knowledge, accessibility needs, energy, project
   scope, and how many explanations need repair.
 
