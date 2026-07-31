@@ -525,6 +525,23 @@ test("diagnostic and M19 export actions require current learner approval before 
   assert.match(evidence, /setApprovedBrief\(event\.target\.checked \? brief : null\)/);
 });
 
+test("the diagnostic delegates bounded browser progress to its v3 codec", async () => {
+  const diagnostic = await readFile(
+    new URL("../app/diagnostic/DiagnosticExperience.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(diagnostic, /diagnostic-progress-codec/);
+  assert.match(diagnostic, /restoreDiagnosticProgress/);
+  assert.match(diagnostic, /persistDiagnosticProgress/);
+  assert.match(diagnostic, /clearDiagnosticProgress/);
+  assert.doesNotMatch(diagnostic, /JSON\.parse|JSON\.stringify/);
+  assert.doesNotMatch(
+    diagnostic,
+    /window\.localStorage\.(?:getItem|setItem|removeItem)/,
+  );
+});
+
 test("Module 18 OS studio preserves its canonical interactive contract", async () => {
   const studioUrl = new URL("../app/OperatingSystemsStudio.tsx", import.meta.url);
   const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
@@ -610,10 +627,16 @@ test("Module 18 OS studio preserves its canonical interactive contract", async (
   assert.doesNotMatch(studio, /sudden\s+power\s+loss\s+immediately\s+afterward/i);
   assert.match(studio, /No durability score is assigned/);
 
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /window\.localStorage\.removeItem/);
+  assert.match(studio, /module18-progress-codec/);
+  assert.match(studio, /restoreModule18Progress/);
+  assert.match(studio, /persistModule18Progress/);
+  assert.match(studio, /clearModule18Progress/);
+  assert.match(studio, /parseBoundedHexadecimal/);
+  assert.doesNotMatch(studio, /JSON\.parse|JSON\.stringify/);
+  assert.doesNotMatch(
+    studio,
+    /window\.localStorage\.(?:getItem|setItem|removeItem)/,
+  );
   assert.match(studio, /useEffect\(\(\) => \{/);
   assert.match(studio, /Reset saved studio/);
   assert.match(studio, /const resetStudio = \(\) =>/);

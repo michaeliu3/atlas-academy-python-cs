@@ -180,6 +180,105 @@ test("the operating-systems studio uses roving tab keyboard navigation", async (
   await expect(secondTab).toHaveAttribute("aria-selected", "true");
 });
 
+test("M18 resumes only its bounded v3 prediction evidence and reset leaves no record", async ({
+  page,
+}) => {
+  const legacyKey = "atlas-academy.module18-os-studio.v2";
+  const currentKey = "atlas-academy.module18-os-studio.v3";
+  const record = {
+    boundary: {
+      step: 2,
+      choice: "crossing",
+      confidence: 4,
+      revealed: true,
+    },
+    translation: {
+      process: "B",
+      virtualAddress: 0x2a3f,
+      access: "write",
+      pte: {
+        valid: true,
+        present: true,
+        frame: 0x52,
+        permissions: "r-x",
+        fileBacked: false,
+      },
+      vpn: 0x2a,
+      offset: 0x3f,
+      outcome: "protection",
+      physical: null,
+      confidence: 3,
+      revealed: true,
+    },
+    publication: {
+      scenario: "abrupt",
+      phase: 8,
+      choice: "unknown",
+      confidence: 2,
+      revealed: true,
+    },
+  };
+
+  await page.goto("/");
+  await page.evaluate(
+    ({ legacyKey, currentKey, record }) => {
+      window.localStorage.setItem(
+        legacyKey,
+        JSON.stringify({ activeView: "shutdown", vmPredictedVpn: "2Agarbage" }),
+      );
+      window.localStorage.setItem(
+        currentKey,
+        JSON.stringify({ version: 3, record }),
+      );
+    },
+    { legacyKey, currentKey, record },
+  );
+  await page.reload();
+  await page.getByRole("button", { name: "Machine & network" }).click();
+  const osStudio = page.locator(".os-studio");
+
+  await osStudio.getByRole("tab", { name: /translate/i }).click();
+  await expect(osStudio.getByLabel("VPN (hex)")).toHaveValue("2A");
+  await expect(osStudio.getByLabel("Offset (hex)")).toHaveValue("3F");
+  await expect(osStudio.getByText("Outcome aligned")).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => ({
+          legacy: window.localStorage.getItem(legacyKey),
+          current: JSON.parse(window.localStorage.getItem(currentKey) ?? "null"),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: { version: 3, record } });
+
+  await osStudio.getByRole("button", { name: "Reset saved studio" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => ({
+          legacy: window.localStorage.getItem(legacyKey),
+          current: window.localStorage.getItem(currentKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+  await page.reload();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => ({
+          legacy: window.localStorage.getItem(legacyKey),
+          current: window.localStorage.getItem(currentKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+});
+
 test("the diagnostic requires an answer and confidence before model reveal", async ({
   page,
 }) => {
@@ -204,6 +303,94 @@ test("the diagnostic requires an answer and confidence before model reveal", asy
   await expect(
     page.getByText(/this is a useful model to repair|this model holds/i),
   ).toBeVisible();
+});
+
+test("the diagnostic stores only v3 triads, resumes them, and reset leaves no record", async ({
+  page,
+}) => {
+  const legacyKey = "atlas-academy:diagnostic:intermediate-advanced-v2";
+  const currentKey = "atlas-academy:diagnostic:intermediate-advanced-v3";
+  await page.goto("/diagnostic");
+
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => ({
+          legacy: window.localStorage.getItem(legacyKey),
+          current: window.localStorage.getItem(currentKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+  const answer = page
+    .getByRole("group", { name: /choose the model that best predicts/i })
+    .getByRole("radio")
+    .first();
+  const confidence = page.getByRole("radio", { name: /^low\b/i });
+  await selectRadioWithKeyboard(page, answer);
+  await selectRadioWithKeyboard(page, confidence);
+
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => {
+          const current = JSON.parse(
+            window.localStorage.getItem(currentKey) ?? "null",
+          );
+          const record = current?.record ?? {};
+          return {
+            legacy: window.localStorage.getItem(legacyKey),
+            envelopeKeys: Object.keys(current ?? {}).sort(),
+            questionCount: Object.keys(record).length,
+            firstGate: Object.values(record)[0],
+            retainsAttemptMetadata: [
+              "currentQuestionId",
+              "completed",
+              "updatedAt",
+              "assessmentVersion",
+            ].some((key) => Object.hasOwn(record, key)),
+          };
+        },
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({
+      legacy: null,
+      envelopeKeys: ["record", "version"],
+      questionCount: 20,
+      firstGate: { choice: "A", confidence: "low", revealed: false },
+      retainsAttemptMetadata: false,
+    });
+
+  await page.reload();
+  await expect(page.getByText("Welcome back.")).toBeVisible();
+  await page.getByRole("button", { name: "Reset all answers" }).click();
+  await page.getByRole("button", { name: "Confirm reset" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => ({
+          legacy: window.localStorage.getItem(legacyKey),
+          current: window.localStorage.getItem(currentKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+  await page.reload();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey, currentKey }) => ({
+          legacy: window.localStorage.getItem(legacyKey),
+          current: window.localStorage.getItem(currentKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
 });
 
 test("the diagnostic completes next-question focus before the next keyboard answer", async ({

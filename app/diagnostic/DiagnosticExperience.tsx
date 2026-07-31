@@ -11,16 +11,19 @@ import {
 } from "react";
 import {
   DIAGNOSTIC_ASSESSMENT_VERSION,
-  DIAGNOSTIC_STORAGE_KEY,
   buildDiagnosticResult,
   classifyResponse,
   confidenceLevels,
   createEmptyAttempt,
   diagnosticQuestions,
   diagnosticReducer,
-  parseStoredAttempt,
   toLearningBrief,
 } from "@/lib/diagnostic-model";
+import {
+  clearDiagnosticProgress,
+  persistDiagnosticProgress,
+  restoreDiagnosticProgress,
+} from "@/lib/diagnostic-progress-codec";
 import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 
 type DiagnosticAttempt = ReturnType<typeof createEmptyAttempt>;
@@ -70,7 +73,6 @@ export function DiagnosticExperience() {
   const [resetArmed, setResetArmed] = useState(false);
   const [restoredProgress, setRestoredProgress] = useState(false);
   const [questionFocusVersion, setQuestionFocusVersion] = useState(0);
-  const skipNextPersistence = useRef(false);
   const questionHeadingRef = useRef<HTMLHeadingElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const resultsHeadingRef = useRef<HTMLHeadingElement>(null);
@@ -82,17 +84,14 @@ export function DiagnosticExperience() {
         return;
       }
       try {
-        const raw = window.localStorage.getItem(DIAGNOSTIC_STORAGE_KEY);
-        if (raw !== null) {
-          const stored = parseStoredAttempt(raw);
-          if (stored) {
-            dispatch({ type: "hydrate", attempt: stored });
-            setRestoredProgress(
-              Object.keys(stored.responsesByQuestionId).length > 0,
-            );
-          } else {
-            window.localStorage.removeItem(DIAGNOSTIC_STORAGE_KEY);
-          }
+        const stored = restoreDiagnosticProgress(
+          window.localStorage,
+        ) as DiagnosticAttempt | null;
+        if (stored) {
+          dispatch({ type: "hydrate", attempt: stored });
+          setRestoredProgress(
+            Object.keys(stored.responsesByQuestionId).length > 0,
+          );
         }
         setPersistence("saved");
       } catch {
@@ -110,15 +109,8 @@ export function DiagnosticExperience() {
     if (!hydrated) {
       return;
     }
-    if (skipNextPersistence.current) {
-      skipNextPersistence.current = false;
-      return;
-    }
     try {
-      window.localStorage.setItem(
-        DIAGNOSTIC_STORAGE_KEY,
-        JSON.stringify(attempt),
-      );
+      persistDiagnosticProgress(window.localStorage, attempt);
     } catch {
       window.queueMicrotask(() => setPersistence("unavailable"));
     }
@@ -177,9 +169,8 @@ export function DiagnosticExperience() {
   }
 
   function resetDiagnostic() {
-    skipNextPersistence.current = true;
     try {
-      window.localStorage.removeItem(DIAGNOSTIC_STORAGE_KEY);
+      clearDiagnosticProgress(window.localStorage);
       setPersistence("saved");
     } catch {
       setPersistence("unavailable");

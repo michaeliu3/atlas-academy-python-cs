@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { createPredictionProgressCodec } from "../lib/local-progress-codec.js";
+import {
+  createPredictionProgressCodec,
+  createVersionedProgressCodec,
+} from "../lib/local-progress-codec.js";
 
 const codec = createPredictionProgressCodec({
   version: 1,
@@ -73,6 +76,63 @@ test("the local progress codec validates a single reveal checkpoint for a compos
       confidence: 4,
       revealed: true,
     }),
+    null,
+  );
+});
+
+test("the local progress codec can allowlist fixed string confidence labels", () => {
+  const intakeCodec = createPredictionProgressCodec({
+    version: 3,
+    viewIds: ["python-model"],
+    choiceIdsByView: { "python-model": ["A", "B", "C", "D"] },
+    confidenceLevels: ["low", "medium", "high"],
+  });
+  const record = {
+    "python-model": { choice: "C", confidence: "medium", revealed: true },
+  };
+
+  assert.deepEqual(intakeCodec.parse(intakeCodec.serialize(record)), record);
+  assert.equal(
+    intakeCodec.parse(
+      JSON.stringify({
+        version: 3,
+        record: {
+          "python-model": { choice: "C", confidence: 3, revealed: true },
+        },
+      }),
+    ),
+    null,
+  );
+});
+
+test("the shared envelope codec rejects expanded records through a module-defined normalizer", () => {
+  const checkpointCodec = createVersionedProgressCodec({
+    version: 7,
+    normalizeRecord(value) {
+      if (
+        value === null ||
+        typeof value !== "object" ||
+        Array.isArray(value) ||
+        Object.keys(value).length !== 1 ||
+        !Object.hasOwn(value, "step") ||
+        !Number.isInteger(value.step) ||
+        value.step < 0 ||
+        value.step > 4
+      ) {
+        return null;
+      }
+      return { step: value.step };
+    },
+  });
+
+  assert.deepEqual(
+    checkpointCodec.parse(checkpointCodec.serialize({ step: 3 })),
+    { step: 3 },
+  );
+  assert.equal(
+    checkpointCodec.parse(
+      JSON.stringify({ version: 7, record: { step: 3, bypass: true } }),
+    ),
     null,
   );
 });

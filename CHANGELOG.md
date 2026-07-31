@@ -17,9 +17,13 @@ actually published.
   browser regressions cover forged records, migration/no-fallback behavior,
   and M26's preview boundary. These records remain optional browser state, not
   learner identity, event history, Notion evidence, authorization, or mastery
-  evidence. M18, the intake diagnostic, and a storage-surface policy/linter
-  still require separate work; this is not a whole-portal storage-hardening or
-  security-clean claim.
+  evidence. M18 now retires its broad v2 OS-studio snapshot and retains only
+  three context-bound, exact v3 prediction gates; malformed hexadecimal input
+  cannot satisfy its translation reveal. The intake now projects a valid v2
+  attempt into an exact 20-triad v3 envelope before removing v2, deriving
+  navigation, completion, and timestamps only in memory. A storage-surface
+  policy/linter and remaining legacy callers still require separate work; this
+  is not a whole-portal storage-hardening or security-clean claim.
 - Added M25's non-promoting structural packet. It resolves 43 typed local
   pointers, including one visible H3 session-output pointer for each of the six
   sessions, and hash-binds the authoring-only M25 source-audit addendum as an

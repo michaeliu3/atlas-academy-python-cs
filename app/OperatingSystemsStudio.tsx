@@ -7,7 +7,14 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { createPredictionProgressCodec } from "@/lib/local-progress-codec";
+import {
+  clearModule18Progress,
+  MODULE18_BOUNDARY_STEP_COUNT,
+  MODULE18_PUBLICATION_PHASE_COUNT,
+  parseBoundedHexadecimal,
+  persistModule18Progress,
+  restoreModule18Progress,
+} from "@/lib/module18-progress-codec";
 
 type OsView =
   | "boundary"
@@ -31,16 +38,6 @@ type PublicationScenario = "normal" | "cooperative" | "abrupt";
 
 const CENTRAL_INVARIANT =
   "Every worker-visible effect is accounted for both as a process-local operation and as an OS-mediated resource transition. After interruption, Atlas publishes only a complete validated result, or leaves an explicitly classified recoverable state; an exit code, successful API return, or timing observation never silently substitutes for that evidence.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module18-os-studio.v2";
-const progressCodec = createPredictionProgressCodec({
-  version: 2,
-  viewIds: ["boundary", "translation", "publication"],
-  choiceIdsByView: {
-    boundary: ["user", "crossing", "kernel"],
-    translation: ["mapped", "not-present", "protection", "invalid"],
-    publication: ["old", "new", "either", "unknown"],
-  },
-});
 const CLAIM_LABELS: ReadonlyArray<ClaimLabel> = [
   "contract",
   "model",
@@ -267,6 +264,34 @@ type PageEntry = {
   fileBacked: boolean;
 };
 
+type Module18Progress = {
+  boundary: {
+    step: number;
+    choice: BoundaryPrediction | null;
+    confidence: Confidence | null;
+    revealed: boolean;
+  };
+  translation: {
+    process: VmProcess;
+    virtualAddress: number;
+    access: MemoryAccess;
+    pte: PageEntry | null;
+    vpn: number | null;
+    offset: number | null;
+    outcome: VmPrediction | null;
+    physical: number | null;
+    confidence: Confidence | null;
+    revealed: boolean;
+  };
+  publication: {
+    scenario: PublicationScenario;
+    phase: number;
+    choice: Prediction | null;
+    confidence: Confidence | null;
+    revealed: boolean;
+  };
+};
+
 const pageTables: Readonly<Record<VmProcess, Readonly<Record<number, PageEntry>>>> = {
   A: {
     0x2a: {
@@ -481,6 +506,13 @@ const publicationPhases: ReadonlyArray<{
     doesNotEstablish: "Every lost external effect was reconstructed.",
   },
 ];
+
+if (
+  boundarySteps.length !== MODULE18_BOUNDARY_STEP_COUNT ||
+  publicationPhases.length !== MODULE18_PUBLICATION_PHASE_COUNT
+) {
+  throw new Error("Module 18 local-progress bounds no longer match its teaching model.");
+}
 
 const predictionLabels: Readonly<Record<Prediction, string>> = {
   old: "Old",
@@ -799,12 +831,24 @@ function hexadecimal(value: number, width = 4) {
   return `0x${value.toString(16).padStart(width, "0").toUpperCase()}`;
 }
 
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // The studio remains fully usable when browser storage is unavailable.
+function hexadecimalInput(value: number | null, width: number) {
+  return value === null ? "" : value.toString(16).padStart(width, "0").toUpperCase();
+}
+
+function pageEntriesMatch(
+  left: PageEntry | null | undefined,
+  right: PageEntry | null | undefined,
+) {
+  if (left === null || left === undefined || right === null || right === undefined) {
+    return left === right;
   }
+  return (
+    left.valid === right.valid &&
+    left.present === right.present &&
+    left.frame === right.frame &&
+    left.permissions === right.permissions &&
+    left.fileBacked === right.fileBacked
+  );
 }
 
 function classifyTranslation(
@@ -920,25 +964,22 @@ export function OperatingSystemsStudio() {
     fileBacked: false,
   };
   const binaryAddress = virtualAddress.toString(2).padStart(16, "0");
+  const predictedVpnValue = parseBoundedHexadecimal(vmPredictedVpn, 0xff);
+  const predictedOffsetValue = parseBoundedHexadecimal(
+    vmPredictedOffset,
+    0xff,
+  );
+  const predictedPhysicalValue = parseBoundedHexadecimal(
+    vmPredictedPhysical,
+    0xffff,
+  );
   const vmCanReveal =
-    vmPredictedVpn.trim() !== "" &&
-    vmPredictedOffset.trim() !== "" &&
+    predictedVpnValue !== null &&
+    predictedOffsetValue !== null &&
     vmPredictedOutcome !== null &&
     vmConfidence !== null &&
     (vmPredictedOutcome !== "mapped" ||
-      vmPredictedPhysical.trim() !== "");
-  const predictedVpnValue = Number.parseInt(
-    vmPredictedVpn.replace(/^0x/iu, ""),
-    16,
-  );
-  const predictedOffsetValue = Number.parseInt(
-    vmPredictedOffset.replace(/^0x/iu, ""),
-    16,
-  );
-  const predictedPhysicalValue = Number.parseInt(
-    vmPredictedPhysical.replace(/^0x/iu, ""),
-    16,
-  );
+      predictedPhysicalValue !== null);
   const vmArithmeticAligned =
     predictedVpnValue === translation.vpn &&
     predictedOffsetValue === translation.offset &&
@@ -1005,194 +1046,50 @@ export function OperatingSystemsStudio() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-        const saved = JSON.parse(raw) as {
-          progressCodecVersion?: number;
-          activeView?: OsView;
-          boundaryStep?: number;
-          boundaryPrediction?: BoundaryPrediction | null;
-          boundaryConfidence?: Confidence | null;
-          boundaryRevealed?: boolean;
-          showClaimLabels?: boolean;
-          schedulerStep?: number;
-          processPolicy?: ProcessPolicy;
-          virtualAddress?: number;
-          memoryAccess?: MemoryAccess;
-          vmProcess?: VmProcess;
-          vmEntryOverride?: PageEntry | null;
-          vmPredictedVpn?: string;
-          vmPredictedOffset?: string;
-          vmPredictedOutcome?: VmPrediction | null;
-          vmPredictedPhysical?: string;
-          vmConfidence?: Confidence | null;
-          vmRevealed?: boolean;
-          fileStep?: number;
-          fileProfile?: FileProfile;
-          activeCacheLayer?: number;
-          publicationPhase?: number;
-          publicationScenario?: PublicationScenario;
-          prediction?: Prediction | null;
-          confidence?: Confidence | null;
-          showPublicationAnswer?: boolean;
-          profile?: PlatformProfile;
-          shutdownStep?: number;
-          activeClaim?: number;
-        };
-        if (osViews.some((view) => view.id === saved.activeView)) {
-          setActiveView(saved.activeView as OsView);
-        }
-        if (
-          Number.isInteger(saved.boundaryStep) &&
-          (saved.boundaryStep ?? -1) >= 0 &&
-          (saved.boundaryStep ?? boundarySteps.length) < boundarySteps.length
-        ) {
-          setBoundaryStep(saved.boundaryStep as number);
-        }
-        if (typeof saved.showClaimLabels === "boolean") {
-          setShowClaimLabels(saved.showClaimLabels);
-        }
-        if (saved.progressCodecVersion === progressCodec.version) {
-          const boundaryProgress = progressCodec.parseEntry("boundary", {
-            choice: saved.boundaryPrediction ?? null,
-            confidence: saved.boundaryConfidence ?? null,
-            revealed: saved.boundaryRevealed === true,
-          });
-          if (boundaryProgress) {
-            setBoundaryPrediction(
-              boundaryProgress.choice as BoundaryPrediction | null,
+        const saved = restoreModule18Progress(
+          window.localStorage,
+        ) as Module18Progress | null;
+        if (saved) {
+          setBoundaryStep(saved.boundary.step);
+          setBoundaryPrediction(saved.boundary.choice);
+          setBoundaryConfidence(saved.boundary.confidence);
+          setBoundaryRevealed(saved.boundary.revealed);
+
+          const savedTranslation = saved.translation;
+          const baseEntry =
+            pageTables[savedTranslation.process][
+              savedTranslation.virtualAddress >>> 8
+            ];
+          const canRestoreTranslation =
+            savedTranslation.pte !== null || baseEntry === undefined;
+          if (canRestoreTranslation) {
+            setVmProcess(savedTranslation.process);
+            setVirtualAddress(savedTranslation.virtualAddress);
+            setMemoryAccess(savedTranslation.access);
+            setVmEntryOverride(
+              savedTranslation.pte === null ||
+                pageEntriesMatch(savedTranslation.pte, baseEntry)
+                ? null
+                : savedTranslation.pte,
             );
-            setBoundaryConfidence(boundaryProgress.confidence as Confidence | null);
-            setBoundaryRevealed(boundaryProgress.revealed);
-          }
-        }
-        if (
-          Number.isInteger(saved.schedulerStep) &&
-          (saved.schedulerStep ?? -1) >= 0 &&
-          (saved.schedulerStep ?? schedulerSteps.length) < schedulerSteps.length
-        ) {
-          setSchedulerStep(saved.schedulerStep as number);
-        }
-        if (schedulingPolicies.some((item) => item.id === saved.processPolicy)) {
-          setProcessPolicy(saved.processPolicy as ProcessPolicy);
-        }
-        if (
-          Number.isInteger(saved.virtualAddress) &&
-          (saved.virtualAddress ?? -1) >= 0 &&
-          (saved.virtualAddress ?? 0x10000) <= 0xffff
-        ) {
-          setVirtualAddress(saved.virtualAddress as number);
-        }
-        if (["read", "write", "execute"].includes(saved.memoryAccess ?? "")) {
-          setMemoryAccess(saved.memoryAccess as MemoryAccess);
-        }
-        if (saved.vmProcess === "A" || saved.vmProcess === "B") {
-          setVmProcess(saved.vmProcess);
-        }
-        if (
-          saved.vmEntryOverride === null ||
-          (typeof saved.vmEntryOverride === "object" &&
-            typeof saved.vmEntryOverride?.valid === "boolean" &&
-            typeof saved.vmEntryOverride.present === "boolean" &&
-            (saved.vmEntryOverride.frame === null ||
-              (typeof saved.vmEntryOverride.frame === "number" &&
-                Number.isInteger(saved.vmEntryOverride.frame) &&
-                saved.vmEntryOverride.frame >= 0 &&
-                saved.vmEntryOverride.frame <= 0xff)) &&
-            /^[r-][w-][x-]$/u.test(saved.vmEntryOverride.permissions) &&
-            typeof saved.vmEntryOverride.fileBacked === "boolean")
-        ) {
-          setVmEntryOverride(saved.vmEntryOverride ?? null);
-        }
-        if (typeof saved.vmPredictedVpn === "string") {
-          setVmPredictedVpn(saved.vmPredictedVpn);
-        }
-        if (typeof saved.vmPredictedOffset === "string") {
-          setVmPredictedOffset(saved.vmPredictedOffset);
-        }
-        if (typeof saved.vmPredictedPhysical === "string") {
-          setVmPredictedPhysical(saved.vmPredictedPhysical);
-        }
-        if (saved.progressCodecVersion === progressCodec.version) {
-          const translationProgress = progressCodec.parseEntry("translation", {
-            choice: saved.vmPredictedOutcome ?? null,
-            confidence: saved.vmConfidence ?? null,
-            revealed: saved.vmRevealed === true,
-          });
-          if (translationProgress) {
-            setVmPredictedOutcome(
-              translationProgress.choice as VmPrediction | null,
+            setVmPredictedVpn(hexadecimalInput(savedTranslation.vpn, 2));
+            setVmPredictedOffset(hexadecimalInput(savedTranslation.offset, 2));
+            setVmPredictedOutcome(savedTranslation.outcome);
+            setVmPredictedPhysical(
+              hexadecimalInput(savedTranslation.physical, 4),
             );
-            setVmConfidence(translationProgress.confidence as Confidence | null);
-            setVmRevealed(translationProgress.revealed);
+            setVmConfidence(savedTranslation.confidence);
+            setVmRevealed(savedTranslation.revealed);
           }
-        }
-        if (
-          Number.isInteger(saved.fileStep) &&
-          (saved.fileStep ?? -1) >= 0 &&
-          (saved.fileStep ?? fileStages.length) < fileStages.length
-        ) {
-          setFileStep(saved.fileStep as number);
-        }
-        if (saved.fileProfile === "posix" || saved.fileProfile === "windows") {
-          setFileProfile(saved.fileProfile);
-        }
-        if (
-          Number.isInteger(saved.activeCacheLayer) &&
-          (saved.activeCacheLayer ?? -1) >= 0 &&
-          (saved.activeCacheLayer ?? cacheLayers.length) < cacheLayers.length
-        ) {
-          setActiveCacheLayer(saved.activeCacheLayer as number);
-        }
-        if (
-          Number.isInteger(saved.publicationPhase) &&
-          (saved.publicationPhase ?? -1) >= 0 &&
-          (saved.publicationPhase ?? publicationPhases.length) <
-            publicationPhases.length
-        ) {
-          setPublicationPhase(saved.publicationPhase as number);
-        }
-        if (
-          ["normal", "cooperative", "abrupt"].includes(
-            saved.publicationScenario ?? "",
-          )
-        ) {
-          setPublicationScenario(
-            saved.publicationScenario as PublicationScenario,
-          );
-        }
-        if (saved.progressCodecVersion === progressCodec.version) {
-          const publicationProgress = progressCodec.parseEntry("publication", {
-            choice: saved.prediction ?? null,
-            confidence: saved.confidence ?? null,
-            revealed: saved.showPublicationAnswer === true,
-          });
-          if (publicationProgress) {
-            setPrediction(publicationProgress.choice as Prediction | null);
-            setConfidence(publicationProgress.confidence as Confidence | null);
-            setShowPublicationAnswer(publicationProgress.revealed);
-          }
-        }
-        if (platformProfiles.some((item) => item.id === saved.profile)) {
-          setProfile(saved.profile as PlatformProfile);
-        }
-        if (
-          Number.isInteger(saved.shutdownStep) &&
-          (saved.shutdownStep ?? -1) >= 0 &&
-          (saved.shutdownStep ?? shutdownSteps.length) < shutdownSteps.length
-        ) {
-          setShutdownStep(saved.shutdownStep as number);
-        }
-        if (
-          Number.isInteger(saved.activeClaim) &&
-          (saved.activeClaim ?? -1) >= 0 &&
-          (saved.activeClaim ?? shutdownClaims.length) < shutdownClaims.length
-        ) {
-          setActiveClaim(saved.activeClaim as number);
-        }
+
+          setPublicationScenario(saved.publication.scenario);
+          setPublicationPhase(saved.publication.phase);
+          setPrediction(saved.publication.choice);
+          setConfidence(saved.publication.confidence);
+          setShowPublicationAnswer(saved.publication.revealed);
         }
       } catch {
-        clearStoredStudio();
+        // Browser storage is optional; the full studio remains usable in memory.
       } finally {
         setHydrated(true);
       }
@@ -1206,69 +1103,55 @@ export function OperatingSystemsStudio() {
       return;
     }
     try {
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        JSON.stringify({
-        progressCodecVersion: progressCodec.version,
-        activeView,
-        boundaryStep,
-        boundaryPrediction,
-        boundaryConfidence,
-        boundaryRevealed,
-        showClaimLabels,
-        schedulerStep,
-        processPolicy,
-        virtualAddress,
-        memoryAccess,
-        vmProcess,
-        vmEntryOverride,
-        vmPredictedVpn,
-        vmPredictedOffset,
-        vmPredictedOutcome,
-        vmPredictedPhysical,
-        vmConfidence,
-        vmRevealed,
-        fileStep,
-        fileProfile,
-        activeCacheLayer,
-        publicationPhase,
-        publicationScenario,
-        prediction,
-        confidence,
-        showPublicationAnswer,
-        profile,
-        shutdownStep,
-        activeClaim,
-        }),
-      );
+      const progress: Module18Progress = {
+        boundary: {
+          step: boundaryStep,
+          choice: boundaryPrediction,
+          confidence: boundaryConfidence,
+          revealed: boundaryRevealed,
+        },
+        translation: {
+          process: vmProcess,
+          virtualAddress,
+          access: memoryAccess,
+          pte: effectiveVmEntry ? { ...effectiveVmEntry } : null,
+          vpn: parseBoundedHexadecimal(vmPredictedVpn, 0xff),
+          offset: parseBoundedHexadecimal(vmPredictedOffset, 0xff),
+          outcome: vmPredictedOutcome,
+          physical:
+            vmPredictedOutcome === "mapped"
+              ? parseBoundedHexadecimal(vmPredictedPhysical, 0xffff)
+              : null,
+          confidence: vmConfidence,
+          revealed: vmRevealed,
+        },
+        publication: {
+          scenario: publicationScenario,
+          phase: publicationPhase,
+          choice: prediction,
+          confidence,
+          revealed: showPublicationAnswer,
+        },
+      };
+      persistModule18Progress(window.localStorage, progress);
     } catch {
       // Persistence is an enhancement; interactions continue in memory.
     }
   }, [
-    activeCacheLayer,
-    activeClaim,
-    activeView,
     boundaryConfidence,
     boundaryPrediction,
     boundaryRevealed,
     boundaryStep,
     confidence,
-    fileProfile,
-    fileStep,
+    effectiveVmEntry,
     hydrated,
     memoryAccess,
     prediction,
-    processPolicy,
-    profile,
     publicationPhase,
     publicationScenario,
-    schedulerStep,
-    showClaimLabels,
     showPublicationAnswer,
-    shutdownStep,
     virtualAddress,
     vmConfidence,
-    vmEntryOverride,
     vmPredictedOffset,
     vmPredictedOutcome,
     vmPredictedPhysical,
@@ -1328,7 +1211,11 @@ export function OperatingSystemsStudio() {
   };
 
   const resetStudio = () => {
-    clearStoredStudio();
+    try {
+      clearModule18Progress(window.localStorage);
+    } catch {
+      // Browser storage is optional; reset the in-memory studio regardless.
+    }
     setActiveView("boundary");
     setBoundaryStep(0);
     resetBoundaryPrediction();
