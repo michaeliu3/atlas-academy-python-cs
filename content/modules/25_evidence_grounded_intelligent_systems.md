@@ -16,6 +16,12 @@
 > claim is intentionally gated on those released artifacts rather than inferred
 > from a score or an agent explanation.
 
+> **Preview boundary:** M25 is readable as a bounded preparation workbook.
+> Until the direct prerequisites have learner-ready release evidence and M25's
+> own contract/review evidence exists, its Studio, dossier, and rehearsal below
+> are specifications for later use—not an unlocked synthesis, oral-defense,
+> project, completion, or release-evidence claim.
+
 **Primary outcome:** You can read an intelligent-feature proposal as a chain
 of purpose, authorized data, representation, candidate generation, score or
 model, evaluation, explanation, human decision, and evidence. You can detect
@@ -90,6 +96,9 @@ Scope:     evidence-review model, not a model trainer, LLM client, or service
 Runtime:   local Python evidence environment
 Effects:   no network, filesystem input, external model, prompt, credential,
            learner-data, package, database, or remote-code action
+Tooling I/O: the CLI accepts one enumerated scenario and writes one JSON packet
+             to stdout; the behavioral test harness imports the checked-in
+             local model. Those bounded tooling operations are not model effects.
 Input:     fixed scenario names only
 Core rule: score/output is advisory data; policy and learner control remain
            separate owners
@@ -144,6 +153,11 @@ from becoming unjustified authority. Module 23 gives a narrow query path;
 Module 24 demands controlled measurement. Module 25 joins those inputs only
 at a human decision surface. Module 26 then requires the resulting feature to
 be defended as part of one maintained system.
+
+This is a concept/evidence map, not next/previous navigation. The canonical
+route is **M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26**. M24 is a required
+systems-evidence thread, not M25's immediate navigation predecessor; the direct
+M25 prerequisites in the graph have a transitive evidence closure of M27–M36.
 
 ### 1.1A The expanded-route evidence gate
 
@@ -848,6 +862,14 @@ still requires the earlier boundaries.
 | **DEFER** | plausible idea lacks representative data/evaluation or runtime/supplier boundary | external-model feature has no consent, retention, or failure plan |
 | **REJECT** | authority, privacy, accessibility, or semantic violation | model response directly mutates learner schedule |
 
+### Session artifact
+
+Create a **proposal-boundary packet** containing a capability ledger, one
+rejected-action test, a redacted/local-only fallback, and an evidence-card
+release recommendation. While M25 is preview-gated, this is a preparation
+artifact only: it creates no oral-defense, project, completion, or release
+credit and cannot unlock Module 26.
+
 ### TA and Study Partner rehearsal
 
 The TA asks:
@@ -869,8 +891,10 @@ evidence-producing action.
 
 ## 8. Intelligent Systems Evidence Studio
 
-The visual studio for this module is a fixed, accessible **Intelligent Systems
-Evidence Studio**, not a live model dashboard.
+When M25 is eligible after its gate, its visual studio is a fixed, accessible
+**Intelligent Systems Evidence Studio**, not a live model dashboard. The current
+preview records this interaction specification; it does not expose a completed
+studio, mastery record, or final-synthesis route.
 
 ~~~text
 declared learner task
@@ -1172,8 +1196,10 @@ sanitized documentation/demo surface is the default safe release target.
 
 ## 13. Source route and reuse boundary
 
-The Module 25 source map is authoritative for claim-to-source routing, version
-pinning, access dates, and licensing details. Its source roles include:
+The Module 25 source map and its authoring-only source-audit addendum provide
+claim-to-source routing plus the dated source/status/reuse record. Moving
+documentation remains a recheck target rather than a reproducibility pin. Its
+source roles include:
 
 - [MIT 18.05: Introduction to Probability and Statistics](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/)
   for probability/statistics retrieval and experiment reasoning;
@@ -1182,7 +1208,8 @@ pinning, access dates, and licensing details. Its source roles include:
   dependency sequence from algorithms/probability to intelligent systems;
 - [scikit-learn model evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
   and [probability calibration](https://scikit-learn.org/stable/modules/calibration.html)
-  for version-pinned tool/API behavior and reproducible small examples;
+  for version-labelled tool/API behavior and original, reproducible small
+  examples;
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
   and its [Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
   for governance/risk framing, with the exact version/status recorded before

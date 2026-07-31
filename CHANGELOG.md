@@ -37,6 +37,15 @@ actually published.
   source head (`95ee127…`). The ledger records all four named jobs, including
   the Linux Chromium/axe browser exercise; it is not a GitHub Release, private
   deployment, human review, publication, or security-clear claim.
+- Repaired M25's authoring/source truth without opening its preview gate. The
+  route now separates M25's direct prerequisites from its M27–M36 transitive
+  evidence closure and removes the false M24 → M25 navigation implication.
+  A new authoring-only source audit records current scikit-learn, NIST Privacy
+  Framework, MCP, OWASP, university, and reuse boundaries; the workbook labels
+  preview-only Studio/dossier/rehearsal material and bounded CLI/test-harness
+  I/O precisely. Its original ambiguous/missing review and oral-defense status
+  remains unchanged; this is not publication, release, learner credit, or
+  security-clear evidence.
 - Added M24's authoring-only primary-source research note and source-audit
   addendum. They preserve its immutable five ambiguous criteria (rigor,
   transfer, visual/text alternative, diagnostic/misconceptions, and TA) and
