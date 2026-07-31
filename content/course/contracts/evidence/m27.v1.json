@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m27",
+  "purpose": "Bind M27's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M27 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m27-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M27 workbook visibly relates its M2/M4/M5 prerequisites to its canonical M06 forward handoff while marking later mathematics and synthesis as conceptual connections rather than route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "12-prerequisite-and-forward-map"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m27-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M27 declares six ordered sessions spanning definitions, proof repair, counting, graph structure, order/number theory, and evidence integration.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "3-session-1--definitions-logic-and-countermodels"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "4-session-2--proof-construction-induction-invariants-and-extremal-choice"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "5-session-3--counting-recurrences-generating-functions-and-asymptotics"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "6-session-4--graphs-trees-connectivity-and-matchings"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "7-session-5--partial-orders-lattices-and-elementary-number-theory"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "8-session-6--integrate-the-models-proof-dossier-and-ai-review"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m27-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M27 begins formal reasoning by requiring a claim to have a stated interpretation, domain, and truth conditions before a proof or program trace is trusted.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "first-principle-a-claim-needs-an-interpretation"}
+      ],
+      "limitations": ["A named first-principles section does not prove mathematical adequacy or learner comprehension."]
+    },
+    {
+      "id": "m27-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M27 binds separate visible locations for a definition, assumption, derivation/proof idea, countermodel, and formula-versus-enumeration numerical experiment.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "35-relation-properties-are-testable-definitions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "21-a-claim-card-before-a-solution"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "52-binomial-coefficients-derive-from-a-recurrence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "b-countermodel"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "numerical-experiment-formula-versus-enumeration"}
+      ],
+      "limitations": ["These structural anchors do not substitute for a qualified review of definitions, proof quality, counterexamples, numerical checks, or source claims."]
+    },
+    {
+      "id": "m27-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M27 includes distinct code-reading, debugging, and design tasks that require tracing an assumption or finite procedure before making a transfer claim.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "session-1-code-reading-task"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "f-debug"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "g-design"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a discrete system."]
+    },
+    {
+      "id": "m27-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M27 visibly asks the learner to predict the result of changing quantifier order before revealing the formal repair.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "predict-before-reveal--the-two-quantifiers"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m27-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M27 includes a transfer task that asks the learner to carry a proof, counterexample, or constraint judgment into a new system context.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "h-transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
+    },
+    {
+      "id": "m27-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M27's canonical source map and bounded audit addendum expose claim/session routing and corrections, while its workbook makes the licensing and responsible-reading route visible to the learner.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md", "locator": "source-to-session-design"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module27_source_audit_addendum.md", "locator": "audit-corrections-and-authoring-checks"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "16-sources-licensing-and-a-responsible-reading-route"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m27-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M27 binds its prerequisite map and interactive proof workbench to concise text alternatives and a module-specific rendered accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "12-prerequisite-and-forward-map"},
+        {"kind": "file", "role": "source-code", "path": "app/DiscreteMathProofStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m27-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M27 exposes confidence-aware diagnostic questions and a compact misconception repair map rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "11-confidence-aware-diagnostic"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "interpret-the-pattern-not-the-score"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m27-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M27 includes a visible retrieval queue and discrete-mathematics mastery gate for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "retrieval-queue"}
+      ],
+      "limitations": ["A retrieval queue does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m27-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M27 specifies a proof, counterexample, and constraint dossier with required evidence and a constructive multi-evidence rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "12-atlas-project--proof-counterexample--constraint-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "required-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "rubric-multi-evidence-never-passfail"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m27-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M27 contains an encouraging conversational oral-defense protocol with hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "14-conversational-oral-defense--m27"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "hint-ladder"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "b-countermodel"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "h-transfer"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "agenda-1218-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "end-of-defense-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m27-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M27 companion binds a Teaching Assistant opening, artifact focus, and repair move to the module's proof and countermodel boundary.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m27.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m27-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M27 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m27.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m27-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M27 companion carries a bounded discrete reasoning card into the canonical M06 representation and memory handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m27.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M27, or authorization to bypass M06 prerequisites."]
+    },
+    {
+      "id": "m27-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M27 binds its interactive proof workbench, explicit registry entry, bounded Python reference model, and exact CI-discovered behavioral teaching-model suite.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/DiscreteMathProofStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module27_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module27_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, theorem validity, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m27-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m27.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m27/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

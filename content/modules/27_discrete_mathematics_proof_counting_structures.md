@@ -87,6 +87,9 @@ list. It makes their hidden obligations explicit:
 ### 1.2 Prerequisite and forward map
 
 ~~~mermaid
+%% atlas-diagram-id: m27-prerequisite-forward-map
+%% atlas-diagram-title: M27 prerequisite and conceptual-forward map
+%% atlas-diagram-alt: M2, M4, and M5 feed M27; M27 strengthens formal reasoning for later algorithms, mathematics, AI/ML, and synthesis connections without opening a learner route to preview-only capstones.
 flowchart LR
     M2["M2: recursion + introductory induction"] --> M27["M27: discrete proof depth"]
     M4["M4: logic, relations, graphs"] --> M27
@@ -563,6 +566,34 @@ The cases are disjoint and exhaustive.
 The recurrence without its edge conditions is incomplete. For example,
 \(a_n=a_{n-1}+a_{n-2}\) describes infinitely many sequences until values such
 as \(a_0\) and \(a_1\) are supplied.
+
+### Numerical experiment: formula versus enumeration
+
+**Predict before reveal.** For four labelled tasks, predict the number of
+two-task review pairs. State whether you expect the formula
+\(\binom{4}{2}\), a direct enumeration, and the row-sum identity to agree, and
+name one reason they might disagree in a program.
+
+Use two deliberately small, inspectable calculations:
+
+~~~python
+from itertools import combinations
+
+tasks = ("a", "b", "c", "d")
+enumerated_pairs = tuple(combinations(tasks, 2))
+formula_count = binomial_coefficient(4, 2)
+row_sum = sum(binomial_coefficient(4, k) for k in range(5))
+~~~
+
+The expected finite checks are `len(enumerated_pairs) == formula_count == 6`
+and `row_sum == 16 == 2**4`. Inspect the actual six pairs, not only the
+count: an off-by-one domain, a repeated task, or an unordered/ordered-pair
+confusion can preserve a plausible number while changing the claim.
+
+**Boundary:** this finite experiment is a debugging and model-checking aid. It
+does not prove Pascal's recurrence for every \(n,k\), establish an asymptotic
+bound, or validate a production implementation for huge inputs. The proof
+still needs the disjoint include/exclude partition and stated edge conditions.
 
 ### 5.3 Recurrence: relation, domain, and base conditions
 
@@ -1474,6 +1505,13 @@ Atlas prose, diagrams, counterexamples, questions, proof repairs, and code
 fixtures in this module are original. These sources support deeper study; use
 their own notices rather than assuming that a university page grants one
 license to every linked asset.
+
+The deployed [M27 source map](/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md)
+and [source-audit addendum](/downloads/module27_source_audit_addendum.md) are
+synchronized from the canonical course records. Together they show the
+source-to-session route, claim boundaries, access dates, and reuse cautions;
+they support evaluation of this module's references but do not turn linked
+material into Atlas content or grant broader reuse rights.
 
 | Resource | Why use it | Reuse boundary |
 | --- | --- | --- |

@@ -16,6 +16,10 @@ const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const moduleId = "m29";
 const evidencePath = "content/course/contracts/evidence/m29.v1.json";
+const legacyCandidateTestOnlyOptions = {
+  siteRoot,
+  allowInjectedLegacyCandidateArtifactsForTest: true,
+};
 
 async function loadCandidateArtifacts() {
   const [preflight, evidenceRecord] = await Promise.all([
@@ -55,7 +59,10 @@ test("M29 preflight rejects unrelated tests and a thin rigor bundle", async () =
   );
   interaction.inputs.find(({ role }) => role === "test").path = "tests/ci-workflow.test.mjs";
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: unrelatedTest }),
+    () => validateModuleEvidencePreflight(preflight, {
+      ...legacyCandidateTestOnlyOptions,
+      evidenceRecord: unrelatedTest,
+    }),
     /module-specific discovered test/i,
   );
 
@@ -66,7 +73,10 @@ test("M29 preflight rejects unrelated tests and a thin rigor bundle", async () =
   );
   rigor.inputs = [rigor.inputs[0]];
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: thinRigor }),
+    () => validateModuleEvidencePreflight(preflight, {
+      ...legacyCandidateTestOnlyOptions,
+      evidenceRecord: thinRigor,
+    }),
     /rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments.*five course-content Markdown headings/i,
   );
 });
@@ -80,7 +90,10 @@ test("M29 preflight rejects a renderer-only stand-in for its behavioral referenc
   interaction.inputs.find(({ role }) => role === "test").path = "tests/rendered-html.test.mjs";
 
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: rendererOnlyTest }),
+    () => validateModuleEvidencePreflight(preflight, {
+      ...legacyCandidateTestOnlyOptions,
+      evidenceRecord: rendererOnlyTest,
+    }),
     /must bind behavioral Python test public\/downloads\/test_module29_reference\.py/i,
   );
 });
@@ -98,8 +111,11 @@ test("M29 preflight rejects cross-module workbook evidence", async () => {
   };
 
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: crossModuleEvidence }),
-    /must bind canonical workbook content\/modules\/29_calculus_real_analysis_continuous_change\.md/i,
+    () => validateModuleEvidencePreflight(preflight, {
+      ...legacyCandidateTestOnlyOptions,
+      evidenceRecord: crossModuleEvidence,
+    }),
+    /must bind scoped workbook content\/modules\/29_calculus_real_analysis_continuous_change\.md/i,
   );
 });
 
@@ -108,7 +124,7 @@ test("M29 preflight fails closed on forged release assertions", async () => {
   const forgedBoundary = structuredClone(preflight);
   forgedBoundary.truthBoundary.release = "M29 is deployed and released with verified CI evidence.";
   await assert.rejects(
-    () => validateModuleEvidencePreflight(forgedBoundary, { siteRoot }),
+    () => validateModuleEvidencePreflight(forgedBoundary, legacyCandidateTestOnlyOptions),
     /must preserve the exact candidate-only release nonclaim/i,
   );
 
@@ -117,14 +133,20 @@ test("M29 preflight fails closed on forged release assertions", async () => {
     ({ criterionId }) => criterionId === "release-provenance-ci-and-deployment-evidence",
   ).claim = "M29 is deployed and released after successful CI.";
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: forgedClaim }),
+    () => validateModuleEvidencePreflight(preflight, {
+      ...legacyCandidateTestOnlyOptions,
+      evidenceRecord: forgedClaim,
+    }),
     /must preserve the exact candidate-only release-boundary claim/i,
   );
 
   const forgedEvidenceBoundary = structuredClone(evidenceRecord);
   forgedEvidenceBoundary.truthBoundary.release = "M29 is a deployed private release.";
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: forgedEvidenceBoundary }),
+    () => validateModuleEvidencePreflight(preflight, {
+      ...legacyCandidateTestOnlyOptions,
+      evidenceRecord: forgedEvidenceBoundary,
+    }),
     /must preserve the exact candidate-only evidence-record release nonclaim/i,
   );
 });
@@ -140,7 +162,7 @@ test("M29 preflight pins its canonical graph contract and release tuple", async 
     m29.state.release = { state: releaseState, recordId: `m29-forged-${releaseState}` };
     await assert.rejects(
       () => validateModuleEvidencePreflight(preflight, { siteRoot, graph: forgedGraph }),
-      /must preserve the canonical graph legacy-v1\/legacy-baseline and unrecorded release tuple/i,
+      /M29 candidate supplied graph must match its captured Git-index graph context/i,
     );
   }
 });
@@ -170,7 +192,7 @@ test("M29 preflight loader refuses noncanonical paths", async () => {
     /canonical module-scoped path/i,
   );
   await assert.rejects(
-    () => loadModuleEvidencePreflight(moduleEvidencePreflightRelativePath("m30"), { siteRoot }),
+    () => loadModuleEvidencePreflight(moduleEvidencePreflightRelativePath("m26"), { siteRoot }),
     /Git-tracked regular local file/i,
   );
 });
@@ -179,7 +201,7 @@ test("M29 preflight rejects a review-ready label and binds a CI-configured runti
   const { preflight } = await loadCandidateArtifacts();
   const falsePromotion = { ...preflight, state: "review-ready" };
   await assert.rejects(
-    () => validateModuleEvidencePreflight(falsePromotion, { siteRoot }),
+    () => validateModuleEvidencePreflight(falsePromotion, legacyCandidateTestOnlyOptions),
     /candidate-not-promoting/i,
   );
 

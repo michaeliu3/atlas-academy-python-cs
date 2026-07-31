@@ -12,23 +12,32 @@ function copy(value) {
   return structuredClone(value);
 }
 
-test("M29 candidate and M31 authoring companions remain graph-bound without lifecycle promotion", async () => {
+test("candidate and authoring companions remain graph-bound without lifecycle promotion", async () => {
   const [graph, companions] = await Promise.all([
     loadCourseGraph(),
     loadModuleLearningCompanions(),
   ]);
   const report = await validateModuleLearningCompanions(companions, { graph });
+  const m27 = report.byModuleId.get("m27");
+  const m28 = report.byModuleId.get("m28");
   const m29 = report.byModuleId.get("m29");
+  const m30 = report.byModuleId.get("m30");
   const m31 = report.byModuleId.get("m31");
 
-  assert.equal(report.summary.companionCount, 2);
-  assert.deepEqual(report.summary.moduleIds, ["m29", "m31"]);
+  assert.equal(report.summary.companionCount, 5);
+  assert.deepEqual(report.summary.moduleIds, ["m27", "m28", "m29", "m30", "m31"]);
+  assert.equal(m27.guideBinding.locator, "/guides/26");
+  assert.equal(m27.forwardHandoff.targetModuleId, "m06");
+  assert.equal(m28.guideBinding.locator, "/guides/27");
+  assert.equal(m28.forwardHandoff.targetModuleId, "m29");
   assert.equal(m29.moduleId, "m29");
   assert.equal(m29.guideBinding.locator, "/guides/28");
   assert.equal(m29.teachingAssistant.role, "supportive-oral-defense");
   assert.equal(m29.studyPartner.role, "non-grading-rehearsal");
   assert.equal(m29.forwardHandoff.targetModuleId, "m30");
   assert.equal(moduleLearningCompanionRelativePath("m29"), "content/course/contracts/companions/m29.v1.json");
+  assert.equal(m30.guideBinding.locator, "/guides/29");
+  assert.equal(m30.forwardHandoff.targetModuleId, "m31");
   assert.equal(m31.moduleId, "m31");
   assert.equal(m31.guideBinding.locator, "/guides/30");
   assert.equal(m31.teachingAssistant.role, "supportive-oral-defense");

@@ -1,11 +1,10 @@
 import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadCourseGraph, validateCourseGraph } from "./course-graph.mjs";
+import { validateCourseGraph } from "./course-graph.mjs";
 import {
   criterionIds,
   moduleContractRegistryRelativePath,
-  loadModuleContractRegistry,
   promotionEvidenceRoleErrors,
   promotionEvidenceScopeErrors,
   promotionEvidenceTestErrors,
@@ -13,6 +12,12 @@ import {
   promotionVisualAlternativeErrors,
   validateModuleContractRegistry,
 } from "./module-contract-registry.mjs";
+import {
+  legacyCandidatePreflightProfilesRelativePath,
+  loadLegacyCandidatePreflightProfiles,
+  validateLegacyCandidatePreflightProfiles,
+} from "./legacy-candidate-preflight-profiles.mjs";
+import { legacyModuleContractPacketRelativePath } from "./legacy-module-contract-packet.mjs";
 import {
   loadModuleEvidenceRecord,
   readTrackedText,
@@ -73,9 +78,6 @@ const expectedM29ReleaseCriterionClaim =
   "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.";
 const expectedM29ReleaseCriterionLimitation =
   "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open.";
-const expectedM29CandidateDocumentationPath = "docs/module-evidence/m29/candidate-preflight.md";
-const expectedM29CandidateDocumentationDigest =
-  "sha256:e6a9ce6345b84696a063747ddfa0127ee620b281be6c6d4080aae11921e2917e";
 const expectedM31PreflightReleaseBoundary =
   "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M31 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.";
 const expectedM31EvidenceRecordReleaseBoundary =
@@ -101,41 +103,49 @@ const expectedM31AuthoringModelPath = "lib/m31-optimization-authoring-model.js";
 const expectedM31AuthoringModelTestPath = "tests/m31-optimization-authoring-model.test.mjs";
 const expectedM31AuthoringVisualTestPath = "tests/m31-authoring-workbook.test.mjs";
 
-const candidatePreflightProfiles = Object.freeze({
-  m29: Object.freeze({
-    moduleId: "m29",
+const m31CandidatePreflightProfile = Object.freeze({
+  moduleId: "m31",
+  state: "authoring-only-candidate-not-promoting",
+  evidenceRecordPath: "content/course/contracts/evidence/m31.v1.json",
+  openCriterionIds: requiredM31OpenCriterionIds,
+  promotionBlockers: requiredM31PromotionBlockers,
+  preflightReleaseBoundary: expectedM31PreflightReleaseBoundary,
+  evidenceRecordReleaseBoundary: expectedM31EvidenceRecordReleaseBoundary,
+  releaseCriterionClaim: expectedM31ReleaseCriterionClaim,
+  releaseCriterionLimitation: expectedM31ReleaseCriterionLimitation,
+  candidateDocumentationPath: expectedM31CandidateDocumentationPath,
+  candidateDocumentationAnchor: "authoring-candidate-boundary",
+  candidateDocumentationDigest: expectedM31CandidateDocumentationDigest,
+  scope: "authoring-only",
+});
+
+/**
+ * The profile data itself is versioned and allowlisted; policy that could
+ * accidentally close the release criterion remains code-owned and identical
+ * for every legacy candidate. A profile can therefore add structural input
+ * scope but cannot create promotion authority.
+ */
+function legacyCandidatePreflightProfile(candidate) {
+  if (!candidate) return null;
+  return Object.freeze({
+    ...candidate,
     state: candidateState,
-    evidenceRecordPath: "content/course/contracts/evidence/m29.v1.json",
+    evidenceRecordPath: `content/course/contracts/evidence/${candidate.moduleId}.v1.json`,
     openCriterionIds: requiredM29OpenCriterionIds,
     promotionBlockers: requiredM29PromotionBlockers,
     preflightReleaseBoundary: expectedM29PreflightReleaseBoundary,
     evidenceRecordReleaseBoundary: expectedM29EvidenceRecordReleaseBoundary,
     releaseCriterionClaim: expectedM29ReleaseCriterionClaim,
     releaseCriterionLimitation: expectedM29ReleaseCriterionLimitation,
-    candidateDocumentationPath: expectedM29CandidateDocumentationPath,
-    candidateDocumentationAnchor: "candidate-boundary",
-    candidateDocumentationDigest: expectedM29CandidateDocumentationDigest,
     scope: "legacy-canonical",
-  }),
-  m31: Object.freeze({
-    moduleId: "m31",
-    state: "authoring-only-candidate-not-promoting",
-    evidenceRecordPath: "content/course/contracts/evidence/m31.v1.json",
-    openCriterionIds: requiredM31OpenCriterionIds,
-    promotionBlockers: requiredM31PromotionBlockers,
-    preflightReleaseBoundary: expectedM31PreflightReleaseBoundary,
-    evidenceRecordReleaseBoundary: expectedM31EvidenceRecordReleaseBoundary,
-    releaseCriterionClaim: expectedM31ReleaseCriterionClaim,
-    releaseCriterionLimitation: expectedM31ReleaseCriterionLimitation,
-    candidateDocumentationPath: expectedM31CandidateDocumentationPath,
-    candidateDocumentationAnchor: "authoring-candidate-boundary",
-    candidateDocumentationDigest: expectedM31CandidateDocumentationDigest,
-    scope: "authoring-only",
-  }),
-});
+  });
+}
 
-function candidatePreflightProfile(moduleId) {
-  return candidatePreflightProfiles[moduleId] ?? null;
+function candidatePreflightProfile(moduleId, legacyCandidateProfiles = null) {
+  if (moduleId === "m31") return m31CandidatePreflightProfile;
+  return legacyCandidatePreflightProfile(
+    legacyCandidateProfiles?.candidateByModuleId?.get(moduleId) ?? null,
+  );
 }
 
 function isPlainObject(value) {
@@ -154,33 +164,54 @@ function graphWithoutDerivedProjection(graph) {
   return canonicalGraph;
 }
 
-function suppliedM31ContextMatchesSnapshot(
+function candidateContextLabel(profile) {
+  const moduleLabel = profile.moduleId.toUpperCase();
+  return profile.scope === "authoring-only"
+    ? `${moduleLabel} authoring candidate`
+    : `${moduleLabel} candidate`;
+}
+
+function suppliedCandidateContextMatchesSnapshot(
+  profile,
   suppliedGraph,
   suppliedRegistry,
+  suppliedManifest,
   context,
   errors,
 ) {
+  const label = candidateContextLabel(profile);
   if (
     suppliedGraph !== null &&
     JSON.stringify(graphWithoutDerivedProjection(suppliedGraph)) !== JSON.stringify(context.graph)
   ) {
-    errors.push("M31 authoring candidate supplied graph must match its captured Git-index graph context.");
+    errors.push(`${label} supplied graph must match its captured Git-index graph context.`);
   }
   if (
     suppliedRegistry !== null &&
     JSON.stringify(suppliedRegistry) !== JSON.stringify(context.registry)
   ) {
-    errors.push("M31 authoring candidate supplied registry must match its captured Git-index registry context.");
+    errors.push(`${label} supplied registry must match its captured Git-index registry context.`);
+  }
+  if (
+    suppliedManifest !== null &&
+    JSON.stringify(suppliedManifest) !== JSON.stringify(context.manifest)
+  ) {
+    errors.push(`${label} supplied manifest must match its captured Git-index manifest context.`);
   }
 }
 
 /**
- * State is evidence for an authoring-only candidate too: a staged reader or
- * release transition cannot be hidden by restoring an older worktree copy.
- * This narrow context closure intentionally covers only the graph, v3
- * registry, and generated reader manifest that define M31's learner boundary.
+ * State is evidence for every candidate: a staged reader or release transition
+ * cannot be hidden by restoring an older worktree copy. The context deliberately
+ * captures the graph, v3 registry, and generated reader manifest from one Git
+ * snapshot before a structural candidate can read its evidence inputs.
  */
-export async function loadM31AuthoringStateContextFromSnapshot(siteRoot, snapshot, errors) {
+export async function loadCandidateStateContextFromSnapshot(
+  siteRoot,
+  snapshot,
+  errors,
+  { label = "Candidate" } = {},
+) {
   const contextPaths = [
     canonicalCourseGraphPath,
     moduleContractRegistryRelativePath,
@@ -197,10 +228,10 @@ export async function loadM31AuthoringStateContextFromSnapshot(siteRoot, snapsho
     const manifest = manifestRecord.value;
     validateCourseGraph(graph);
     if (!isPlainObject(registry) || !Array.isArray(registry.modules)) {
-      throw new Error("M31 candidate Git-index registry context must contain a modules array.");
+      throw new Error(`${label} Git-index registry context must contain a modules array.`);
     }
     if (!isPlainObject(manifest) || !Array.isArray(manifest.modules)) {
-      throw new Error("M31 candidate Git-index manifest context must contain a modules array.");
+      throw new Error(`${label} Git-index manifest context must contain a modules array.`);
     }
     return {
       graph,
@@ -215,10 +246,17 @@ export async function loadM31AuthoringStateContextFromSnapshot(siteRoot, snapsho
   } catch (error) {
     const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
     errors.push(
-      `M31 authoring candidate could not capture its graph, registry, and manifest state context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+      `${label} could not capture its graph, registry, and manifest state context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
     );
     return null;
   }
+}
+
+// Kept as a narrow compatibility export for M31-focused tests and callers.
+export function loadM31AuthoringStateContextFromSnapshot(siteRoot, snapshot, errors) {
+  return loadCandidateStateContextFromSnapshot(siteRoot, snapshot, errors, {
+    label: "M31 authoring candidate",
+  });
 }
 
 function exactKeys(value, expectedKeys, label, errors) {
@@ -266,39 +304,41 @@ function sameJsonValue(left, right) {
 }
 
 /**
- * The default M31 path refuses caller-injected JSON that differs from the
- * captured source. The named override keeps structural negative tests
- * possible, but is deliberately not a provenance-grade entry point.
+ * Production-style validation refuses caller-injected JSON that differs from
+ * the captured source. The scope-specific overrides keep structural negative
+ * tests possible, but neither override is a provenance-grade entry point.
  */
-async function validateM31SuppliedArtifactsMatchSnapshot(
+async function validateSuppliedCandidateArtifactsMatchSnapshot(
+  profile,
   preflight,
   suppliedEvidenceRecord,
   siteRoot,
   snapshot,
   errors,
 ) {
-  const preflightPath = moduleEvidencePreflightRelativePath("m31");
+  const label = candidateContextLabel(profile);
+  const preflightPath = moduleEvidencePreflightRelativePath(profile.moduleId);
   const artifactPaths = [preflightPath];
-  if (suppliedEvidenceRecord !== null) artifactPaths.push(candidatePreflightProfiles.m31.evidenceRecordPath);
+  if (suppliedEvidenceRecord !== null) artifactPaths.push(profile.evidenceRecordPath);
   try {
     await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
     await snapshot.assertClean(artifactPaths);
     const canonicalPreflight = (await snapshot.readJson(preflightPath)).value;
     if (!sameJsonValue(preflight, canonicalPreflight)) {
-      errors.push("M31 authoring candidate supplied preflight must match its captured Git-index preflight record.");
+      errors.push(`${label} supplied preflight must match its captured Git-index preflight record.`);
     }
     if (suppliedEvidenceRecord !== null) {
       const canonicalEvidence = (
-        await snapshot.readJson(candidatePreflightProfiles.m31.evidenceRecordPath)
+        await snapshot.readJson(profile.evidenceRecordPath)
       ).value;
       if (!sameJsonValue(suppliedEvidenceRecord, canonicalEvidence)) {
-        errors.push("M31 authoring candidate supplied evidence record must match its captured Git-index evidence record.");
+        errors.push(`${label} supplied evidence record must match its captured Git-index evidence record.`);
       }
     }
   } catch (error) {
     const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
     errors.push(
-      `M31 authoring candidate could not capture its supplied artifact context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+      `${label} could not capture its supplied artifact context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 }
@@ -359,7 +399,7 @@ export async function loadModuleEvidencePreflight(
   return readTrackedPreflightJson(siteRoot, canonicalPreflightRepositoryPath(recordPath), { snapshot });
 }
 
-function validatePreflightRecord(preflight, errors) {
+function validatePreflightRecord(preflight, errors, legacyCandidateProfiles = null) {
   exactKeys(preflight, preflightKeys, "module evidence preflight", errors);
   if (
     preflight?.schemaVersion !== 1 ||
@@ -370,7 +410,7 @@ function validatePreflightRecord(preflight, errors) {
       `module evidence preflight must use schemaVersion 1, kind ${moduleEvidencePreflightKind}, and recordVersion ${moduleEvidencePreflightRecordVersion}.`,
     );
   }
-  const profile = candidatePreflightProfile(preflight?.moduleId);
+  const profile = candidatePreflightProfile(preflight?.moduleId, legacyCandidateProfiles);
   if (!profile) {
     errors.push("Module evidence preflight must use an explicitly allowlisted candidate module ID.");
   }
@@ -451,10 +491,10 @@ function validateNonPromotionState(profile, moduleEntry, graphModule, errors, { 
     moduleEntry.reviewReadyCommit !== null ||
     moduleEntry.release !== null
   ) {
-    errors.push("M29 evidence preflight requires the canonical registry to remain legacy-baseline with no promotion records.");
+    errors.push(`${moduleLabel} evidence preflight requires the canonical registry to remain legacy-baseline with no promotion records.`);
   }
   if (Object.values(moduleEntry.humanReview ?? {}).some((outcome) => outcome !== "pending")) {
-    errors.push("M29 evidence preflight requires every canonical human-review dimension to remain pending.");
+    errors.push(`${moduleLabel} evidence preflight requires every canonical human-review dimension to remain pending.`);
   }
   if (
     graphModule?.state?.contract?.track !== "legacy-v1" ||
@@ -462,7 +502,153 @@ function validateNonPromotionState(profile, moduleEntry, graphModule, errors, { 
     graphModule?.state?.release?.state !== "unrecorded" ||
     graphModule?.state?.release?.recordId !== null
   ) {
-    errors.push("M29 evidence preflight must preserve the canonical graph legacy-v1/legacy-baseline and unrecorded release tuple.");
+    errors.push(`${moduleLabel} evidence preflight must preserve the canonical graph legacy-v1/legacy-baseline and unrecorded release tuple.`);
+  }
+}
+
+async function loadLegacyCandidateProfileReportFromSnapshot(siteRoot, snapshot, errors) {
+  try {
+    const profiles = await loadLegacyCandidatePreflightProfiles(siteRoot, { snapshot });
+    return await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
+  } catch (error) {
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(
+      `Legacy candidate preflight profiles could not be captured from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return null;
+  }
+}
+
+/**
+ * A legacy candidate profile may expand source-ledger scope only to artifacts
+ * already named by its own non-promoting typed packet. It cannot point a
+ * candidate at a different workbook, future review selector, or unrelated
+ * studio/test surface.
+ */
+async function validateLegacyCandidateProfileContext(
+  profile,
+  stateContext,
+  siteRoot,
+  snapshot,
+  errors,
+) {
+  const moduleLabel = profile.moduleId.toUpperCase();
+  const label = `${moduleLabel} legacy candidate profile`;
+  try {
+    await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
+    await snapshot.assertClean([
+      legacyCandidatePreflightProfilesRelativePath,
+      legacyModuleContractPacketRelativePath,
+    ]);
+    const packetRegistry = (
+      await snapshot.readJson(legacyModuleContractPacketRelativePath)
+    ).value;
+    if (!Array.isArray(packetRegistry?.modules)) {
+      throw new Error("the typed legacy packet registry must contain a modules array.");
+    }
+    const packets = packetRegistry.modules.filter(
+      ({ moduleId }) => moduleId === profile.moduleId,
+    );
+    if (packets.length !== 1) {
+      errors.push(`${label} must resolve exactly one typed legacy packet.`);
+      return null;
+    }
+    const packet = packets[0];
+    const graphModule = stateContext.graph.modules?.find(
+      ({ id }) => id === profile.moduleId,
+    ) ?? null;
+    const manifestModule = stateContext.manifest.modules?.find(
+      ({ id }) => id === profile.moduleId,
+    ) ?? null;
+    const expectedWorkbookPath = manifestModule?.filename
+      ? `content/modules/${manifestModule.filename}`
+      : null;
+    if (!graphModule || !expectedWorkbookPath) {
+      errors.push(`${label} requires a manifest-selected canonical workbook and graph module.`);
+      return null;
+    }
+    if (packet.packetId !== profile.packetId) {
+      errors.push(`${label} packetId must match its captured typed legacy packet.`);
+    }
+    if (packet.workbookPath !== expectedWorkbookPath) {
+      errors.push(`${label} must bind its manifest-selected workbook ${expectedWorkbookPath}.`);
+    }
+    if (packet.sourceMapPath !== graphModule.sourceMap) {
+      errors.push(`${label} packet source map must match its captured canonical graph source map.`);
+    }
+    const permittedSourceLedgerPaths = new Set([
+      packet.sourceMapPath,
+      packet.sourceAuditAddendumPath,
+    ]);
+    if (!profile.sourceLedgerPaths.includes(packet.sourceMapPath)) {
+      errors.push(`${label} must include its canonical graph source map in sourceLedgerPaths.`);
+    }
+    for (const sourceLedgerPath of profile.sourceLedgerPaths) {
+      if (!permittedSourceLedgerPaths.has(sourceLedgerPath)) {
+        errors.push(`${label} may not bind an unscoped source ledger ${sourceLedgerPath}.`);
+      }
+    }
+    const expectedForwardModule = stateContext.graph.modules?.find(
+      ({ number }) => number === graphModule.forwardModuleNumber,
+    ) ?? null;
+    if (packet.canonicalExpectation?.forwardModuleId !== expectedForwardModule?.id) {
+      errors.push(`${label} typed packet must retain canonical forward handoff ${expectedForwardModule?.id ?? "null"}.`);
+    }
+    const implementationPaths = new Set(
+      (packet.implementationArtifacts ?? []).flatMap(({ paths }) => paths ?? []),
+    );
+    if (!implementationPaths.has(profile.studioSourcePath)) {
+      errors.push(`${label} studioSourcePath must be named by its captured typed legacy packet.`);
+    }
+    if (!implementationPaths.has(profile.visualTestPath)) {
+      errors.push(`${label} visualTestPath must be named by its captured typed legacy packet.`);
+    }
+    return {
+      packet,
+      materialScope: Object.freeze({
+        workbookPath: expectedWorkbookPath,
+        sourceLedgerPaths: Object.freeze([...profile.sourceLedgerPaths]),
+        visualContentPaths: Object.freeze([expectedWorkbookPath]),
+      }),
+    };
+  } catch (error) {
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(
+      `${label} could not capture its packet-bound material scope from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return null;
+  }
+}
+
+function validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport, errors) {
+  const moduleLabel = profile.moduleId.toUpperCase();
+  const visualInputs = evidenceReport.evidenceByCriterion.get(
+    "accessible-visual-text-alternative",
+  )?.resolvedInputs ?? [];
+  const visualStudio = visualInputs.filter(
+    ({ kind, role, path }) =>
+      kind === "file" && role === "source-code" && path === profile.studioSourcePath,
+  );
+  const visualTest = visualInputs.filter(
+    ({ kind, role, path }) =>
+      kind === "file" && role === "test" && path === profile.visualTestPath,
+  );
+  if (visualStudio.length !== 1 || visualTest.length !== 1) {
+    errors.push(
+      `${moduleLabel} legacy candidate visual evidence must bind its profiled studio ${profile.studioSourcePath} and visual test ${profile.visualTestPath}.`,
+    );
+  }
+  const interactionInputs = evidenceReport.evidenceByCriterion.get(
+    "interaction-reference-model-and-teaching-tests",
+  )?.resolvedInputs ?? [];
+  const interactionStudio = interactionInputs.filter(
+    ({ kind, role, path }) =>
+      kind === "file" && role === "source-code" && path === profile.studioSourcePath,
+  );
+  if (interactionStudio.length !== 1) {
+    errors.push(
+      `${moduleLabel} legacy candidate interaction evidence must bind its profiled studio ${profile.studioSourcePath}.`,
+    );
   }
 }
 
@@ -685,10 +871,10 @@ async function validateM31AuthoringCandidateScope(
  * changing its lifecycle state. A passing report means only that its
  * module-scoped structural inputs resolve and meet the selected profile; it is
  * not a human review, learner-mastery, CI, deployment, or publication result.
- * M31's default path also requires supplied JSON values to match its captured
- * Git-index records. The explicitly named test-only override exists solely to
- * exercise negative structural checks; use the `run…` entry points for a
- * source-bound candidate preflight.
+ * The source-bound `run…` entry points bind profile, state, preflight, and
+ * declared evidence inputs to one Git-index generation. Direct validation
+ * keeps an explicit M31 test-only injection seam so structural negative tests
+ * can exercise bad records without masquerading as provenance evidence.
  */
 export async function validateModuleEvidencePreflight(
   preflight,
@@ -697,30 +883,41 @@ export async function validateModuleEvidencePreflight(
     evidenceRecord: suppliedEvidenceRecord = null,
     graph: suppliedGraph = null,
     registry: suppliedRegistry = null,
+    manifest: suppliedManifest = null,
     snapshot = null,
+    allowInjectedLegacyCandidateArtifactsForTest = false,
     allowInjectedM31CandidateArtifactsForTest = false,
   } = {},
 ) {
   const errors = [];
-  const profile = validatePreflightRecord(preflight, errors);
-  if (!profile) {
-    preflightFailure(errors);
-  }
-  const moduleLabel = profile.moduleId.toUpperCase();
+  const suppliedModuleLabel = typeof preflight?.moduleId === "string"
+    ? preflight.moduleId.toUpperCase()
+    : "Candidate";
   let evidenceSnapshot = snapshot;
   if (!evidenceSnapshot) {
     try {
       evidenceSnapshot = await openGitIndexSnapshot(siteRoot);
     } catch (error) {
       errors.push(
-        `${moduleLabel} evidence preflight could not capture its immutable Git-index evidence inputs: ${error instanceof Error ? error.message : String(error)}`,
+        `${suppliedModuleLabel} evidence preflight could not capture its immutable Git-index evidence inputs: ${error instanceof Error ? error.message : String(error)}`,
       );
     }
   }
   if (!evidenceSnapshot) preflightFailure(errors);
 
-  if (profile.scope === "authoring-only" && !allowInjectedM31CandidateArtifactsForTest) {
-    await validateM31SuppliedArtifactsMatchSnapshot(
+  const legacyCandidateProfiles = preflight?.moduleId === "m31"
+    ? null
+    : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, evidenceSnapshot, errors);
+  const profile = validatePreflightRecord(preflight, errors, legacyCandidateProfiles);
+  if (!profile) preflightFailure(errors);
+  const moduleLabel = profile.moduleId.toUpperCase();
+
+  const allowsInjectedCandidateArtifactsForTest = profile.scope === "authoring-only"
+    ? allowInjectedM31CandidateArtifactsForTest
+    : allowInjectedLegacyCandidateArtifactsForTest;
+  if (!allowsInjectedCandidateArtifactsForTest) {
+    await validateSuppliedCandidateArtifactsMatchSnapshot(
+      profile,
       preflight,
       suppliedEvidenceRecord,
       siteRoot,
@@ -729,42 +926,47 @@ export async function validateModuleEvidencePreflight(
     );
   }
 
-  const m31StateContext = profile.scope === "authoring-only"
-    ? await loadM31AuthoringStateContextFromSnapshot(siteRoot, evidenceSnapshot, errors)
-    : null;
-  if (profile.scope === "authoring-only" && !m31StateContext) preflightFailure(errors);
-  if (m31StateContext) {
-    suppliedM31ContextMatchesSnapshot(
-      suppliedGraph,
-      suppliedRegistry,
-      m31StateContext,
-      errors,
-    );
-  }
-  const [graph, registry] = m31StateContext
-    ? [m31StateContext.graph, m31StateContext.registry]
-    : await Promise.all([
-      suppliedGraph ?? loadCourseGraph(siteRoot),
-      suppliedRegistry ?? loadModuleContractRegistry(siteRoot),
-    ]);
+  const stateContext = await loadCandidateStateContextFromSnapshot(
+    siteRoot,
+    evidenceSnapshot,
+    errors,
+    { label: candidateContextLabel(profile) },
+  );
+  if (!stateContext) preflightFailure(errors);
+  suppliedCandidateContextMatchesSnapshot(
+    profile,
+    suppliedGraph,
+    suppliedRegistry,
+    suppliedManifest,
+    stateContext,
+    errors,
+  );
+  const graph = stateContext.graph;
+  const registry = stateContext.registry;
   let registryReport = null;
   try {
     registryReport = await validateModuleContractRegistry(
       graph,
       registry,
-      m31StateContext
-        ? { siteRoot, manifest: m31StateContext.manifest }
-        : { siteRoot },
+      { siteRoot, manifest: stateContext.manifest },
     );
   } catch (error) {
     errors.push(`${moduleLabel} evidence preflight requires the current canonical registry to validate: ${error instanceof Error ? error.message : String(error)}`);
   }
 
-  const manifestById = m31StateContext
-    ? new Map(m31StateContext.manifest.modules.map((module) => [module.id, module]))
-    : registryReport
-      ? new Map(registryReport.manifest.modules.map((module) => [module.id, module]))
-      : null;
+  const manifestById = new Map(stateContext.manifest.modules.map((module) => [module.id, module]));
+  const legacyCandidateContext = profile.scope === "legacy-canonical"
+    ? await validateLegacyCandidateProfileContext(
+      profile,
+      stateContext,
+      siteRoot,
+      evidenceSnapshot,
+      errors,
+    )
+    : null;
+  if (profile.scope === "legacy-canonical" && !legacyCandidateContext) {
+    preflightFailure(errors);
+  }
   const graphModule = graph.modules?.find(({ id }) => id === profile.moduleId) ?? null;
   const moduleEntry = registry.modules?.find(({ moduleId }) => moduleId === profile.moduleId) ?? null;
   if (!graphModule) errors.push(`${moduleLabel} evidence preflight requires canonical graph module ${profile.moduleId}.`);
@@ -804,7 +1006,9 @@ export async function validateModuleEvidencePreflight(
         graphModule,
         manifestById,
         evidenceReport,
+        materialScope: legacyCandidateContext.materialScope,
       }));
+      validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport, errors);
     } else {
       await validateM31AuthoringCandidateScope(evidenceReport, graphModule, errors, {
         siteRoot,
@@ -831,6 +1035,7 @@ export async function validateModuleEvidencePreflight(
       graphModule,
       manifestById,
       evidenceReport,
+      materialScope: legacyCandidateContext?.materialScope ?? null,
       snapshot: evidenceSnapshot,
     });
     errors.push(...visual.errors);
@@ -862,10 +1067,15 @@ export async function runModuleCandidateEvidencePreflight(
   moduleId,
   { siteRoot = defaultSiteRoot } = {},
 ) {
-  if (!candidatePreflightProfile(moduleId)) {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const errors = [];
+  const legacyCandidateProfiles = moduleId === "m31"
+    ? null
+    : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, snapshot, errors);
+  if (errors.length > 0) preflightFailure(errors);
+  if (!candidatePreflightProfile(moduleId, legacyCandidateProfiles)) {
     throw new Error("A candidate evidence preflight runner requires an explicitly allowlisted module ID.");
   }
-  const snapshot = await openGitIndexSnapshot(siteRoot);
   const preflight = await loadModuleEvidencePreflight(
     moduleEvidencePreflightRelativePath(moduleId),
     { siteRoot, snapshot },

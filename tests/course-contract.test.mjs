@@ -276,11 +276,11 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   assert.equal(report.summary.authoringOnlyModules, 6);
   assert.deepEqual(report.mermaidAlternatives?.summary, {
     totalBlocks: 245,
-    completeBlocks: 64,
-    incompleteBlocks: 181,
+    completeBlocks: 68,
+    incompleteBlocks: 177,
   });
   assert.ok(
-    report.warnings.some((warning) => warning.includes("181 Mermaid visual(s)")),
+    report.warnings.some((warning) => warning.includes("177 Mermaid visual(s)")),
   );
   assert.deepEqual(report.advancedContract?.summary, {
     authoringOnlyContracts: 1,
@@ -291,9 +291,10 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     resolvedContractInputs: 20,
   });
   assert.deepEqual(report.moduleLearningCompanions?.summary, {
-    companionCount: 2,
-    moduleIds: ["m29", "m31"],
+    companionCount: 5,
+    moduleIds: ["m27", "m28", "m29", "m30", "m31"],
   });
+  assert.equal(report.legacyCandidatePreflightProfiles?.candidateByModuleId.size, 4);
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
     draftPilotModules: 2,

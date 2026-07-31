@@ -271,6 +271,24 @@ or mastered. In particular, a resolved anchor does not establish the quality
 of prose, accessibility alternatives, source-license correctness, a human
 review, or learner understanding. Those require later, separate evidence.
 
+## Legacy candidate preflight profiles
+
+`legacy-candidate-preflight-profiles.v1.json` is the separate, versioned
+allowlist for a small cohort that has a candidate-only evidence record and
+preflight. It currently names M27–M30. Each profile freezes only
+module-specific structural inputs: the typed packet, candidate-boundary
+document hash, scoped source-ledger paths, studio source, and visual test.
+The validator derives and hashes that module's evidence and preflight records
+as well. Code-owned policy keeps the state `candidate-not-promoting`, the
+release criterion open, and all human-review, source-commit CI, and private
+deployment blockers explicit.
+
+Do not add a module to this registry merely because it has content. A passing
+preflight proves a coherent Git-index snapshot of structural inputs, not a
+review, publication, accessibility approval, license decision, deployment,
+or learner-mastery result. The registry deliberately does not use the future
+`review-candidates/` selector, which remains reserved for reviewed promotion.
+
 ## Authoring order
 
 1. Start from an Atlas incident or design pressure inherited from the prior
@@ -304,10 +322,13 @@ review, or learner understanding. Those require later, separate evidence.
   retired local research links or a stale delivered copy. This delivery check
   proves artifact identity only—not source quality, license correctness, or
   pedagogical review.
-- `content/course/release-inputs.v1.json` is generated from the allowlisted
-  repository inputs and records their SHA-256 hashes. It is a content-provenance
-  record, not a substitute for a reviewed Git commit or release ledger. Text
-  input hashes use canonical LF newlines so Windows and Linux checkouts agree.
+- `content/course/release-inputs.v1.json` is generated from allowlisted
+  repository inputs—including profile-derived candidate evidence/preflight
+  inputs—and records their SHA-256 hashes. An arbitrary note cannot enter this
+  ledger: candidate verification records enter only through the versioned
+  profile validator. It is a content-provenance record, not a substitute for a
+  reviewed Git commit or release ledger. Text input hashes use canonical LF
+  newlines so Windows and Linux checkouts agree.
 - Prefer official language/standard documentation and primary sources.
 - Use university courses for sequence and pedagogy, not copied assignments or
   solutions.

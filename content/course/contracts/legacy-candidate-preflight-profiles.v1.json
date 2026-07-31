@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-legacy-candidate-preflight-profiles",
+  "recordVersion": "v1",
+  "purpose": "Versioned, snapshot-bound module-specific inputs for non-promoting legacy candidate evidence preflights.",
+  "truthBoundary": {
+    "candidate": "A passing profile-backed preflight proves only that a listed legacy module's structural candidate inputs resolve from one Git-index snapshot.",
+    "publication": "This registry grants no review, verification, release, deployment, publication, or learner-mastery status. Those claims require their separately recorded evidence."
+  },
+  "candidates": [
+    {
+      "moduleId": "m27",
+      "packetId": "m27-discrete-mathematics-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m27/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:6f9bd9ba141ea50bba93b82067c457cee82a85f78ad15c2d33b2bca0ad8c3ea1"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+        "content/source-maps/module27_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/DiscreteMathProofStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m28",
+      "packetId": "m28-linear-algebra-stability-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m28/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:314f03a31f15d27034444f47f54ccfc38c49e6b4bf893220bfac1c7f24344da4"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+        "content/source-maps/module28_linear_algebra_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/LinearAlgebraStabilityStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m29",
+      "packetId": "m29-continuous-change-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m29/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:e6a9ce6345b84696a063747ddfa0127ee620b281be6c6d4080aae11921e2917e"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md"
+      ],
+      "studioSourcePath": "app/CalculusContinuousChangeStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m30",
+      "packetId": "m30-probability-inference-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m30/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:18357b4822f5fefbcaf6b62e6c645e60aac556baddb032f7b590929ea580913b"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md"
+      ],
+      "studioSourcePath": "app/ProbabilityInferenceStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    }
+  ]
+}

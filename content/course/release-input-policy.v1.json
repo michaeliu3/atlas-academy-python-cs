@@ -16,8 +16,11 @@
     "public/downloads/module24_reference.py",
     "public/downloads/module25_reference.py",
     "public/downloads/module26_reference.py",
+    "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md",
     "public/downloads/module27_reference.py",
+    "public/downloads/module27_source_audit_addendum.md",
     "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",
+    "public/downloads/module28_linear_algebra_source_audit_addendum.md",
     "public/downloads/module28_reference.py",
     "public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md",
     "public/downloads/module29_calculus_real_analysis_source_audit_addendum.md",
@@ -53,8 +56,20 @@
       "publicPath": "public/downloads/module21_async_distributed_source_map.md"
     },
     {
+      "canonicalPath": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "publicPath": "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module27_source_audit_addendum.md",
+      "publicPath": "public/downloads/module27_source_audit_addendum.md"
+    },
+    {
       "canonicalPath": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
       "publicPath": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md"
+    },
+    {
+      "canonicalPath": "content/source-maps/module28_linear_algebra_source_audit_addendum.md",
+      "publicPath": "public/downloads/module28_linear_algebra_source_audit_addendum.md"
     },
     {
       "canonicalPath": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",

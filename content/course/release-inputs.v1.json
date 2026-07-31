@@ -5,6 +5,22 @@
   "contractVersion": "v3",
   "inputs": [
     {
+      "path": "app/CalculusContinuousChangeStudio.tsx",
+      "sha256": "a63750479c68da8bc4e1fae1ccd229eb46d2f2c1d9339f13b6f7a81d71e6b806"
+    },
+    {
+      "path": "app/DiscreteMathProofStudio.tsx",
+      "sha256": "5ccae1c4f4ec03666cf77155818bbeeecf672722215bd3e2bcdce30d1051bf1d"
+    },
+    {
+      "path": "app/LinearAlgebraStabilityStudio.tsx",
+      "sha256": "47e1539357da5b1918ea581b49c1d323535683f8a66d4b022cda0ce72ac739d3"
+    },
+    {
+      "path": "app/ProbabilityInferenceStudio.tsx",
+      "sha256": "dc387f6285e3ef7bbeea8f4936cb4a5f55072cfa813efe3fd0d0df4f1572691a"
+    },
+    {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
       "sha256": "4061a3d3eeb1be24e75f8e723c642b22de7996dd89cd71f3bd3fb233b05364c6"
     },
@@ -29,12 +45,60 @@
       "sha256": "662b4cd62df8cedebccf650de613225e9b749bb819039129e3c70b9f02b13765"
     },
     {
+      "path": "content/course/contracts/companions/m27.v1.json",
+      "sha256": "0d0d2abf7522699e0cfaf0516b4ee267624be146e9abdc3af73b064bbdcf42c1"
+    },
+    {
+      "path": "content/course/contracts/companions/m28.v1.json",
+      "sha256": "7661ed46868952424822909630acc118c07b2d5935dcfe93634a613d5abf898f"
+    },
+    {
       "path": "content/course/contracts/companions/m29.v1.json",
       "sha256": "9acdbb8452f08b289c682d50d0596a2e7cf249efee4bd56d4d47f0464927ee30"
     },
     {
+      "path": "content/course/contracts/companions/m30.v1.json",
+      "sha256": "7092aa98b3a38729392206cb9f59c0af38fd607d1594323b5a5d0ae36fc0a0f6"
+    },
+    {
       "path": "content/course/contracts/companions/m31.v1.json",
       "sha256": "4ae2e421c5263c0f75afeeb77daf6c6f2b3679f6202b6a274ee7d16c79d63ebc"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m27.v1.json",
+      "sha256": "7f81c3c24f4d0b5422a5daa7e9ce23114e6c17fdddd0908fdaf003dcc51396ea"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m28.v1.json",
+      "sha256": "dc4b9b41d052fd898296ffd7df95bac337b0987270bd8dc70c2f5dd0a817b682"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m29.v1.json",
+      "sha256": "c9e222cfa46266b52627febfac6ca74be8bc26c14c62e6479540c50616b964fc"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m30.v1.json",
+      "sha256": "794d1f1960490270ba33c699a88e23abeaef16f60389d66d9e981d779a98ad0d"
+    },
+    {
+      "path": "content/course/contracts/evidence/m27.v1.json",
+      "sha256": "6588451a22bf791745de0fccfdaa3209c4c16d94c92c0336d3f8e41687ea9f07"
+    },
+    {
+      "path": "content/course/contracts/evidence/m28.v1.json",
+      "sha256": "ded70b04054ab043a0a3ea8f812a4da7f737bf98776d9fd789ec8b672a639c9e"
+    },
+    {
+      "path": "content/course/contracts/evidence/m29.v1.json",
+      "sha256": "0ecf7323bc2acc8c25b4d40d12c3e943194e1411dfa2a63a299ea0ba11590b69"
+    },
+    {
+      "path": "content/course/contracts/evidence/m30.v1.json",
+      "sha256": "22dc6179a55aece6bac79c7a06dcba5c6450794ad214c3fe8cf503eabab1ae43"
+    },
+    {
+      "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
+      "sha256": "9955c9eb323688702c2a91d17b4d5f09e2b2a7233bc63b5686dea4c3528e21de"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -74,7 +138,7 @@
     },
     {
       "path": "content/course/release-input-policy.v1.json",
-      "sha256": "3904145edb9c5ac5ad50334aa38fe869c5e3835d2457107179114b0094f64d73"
+      "sha256": "a360856ec6f64a2c6e38a3832e56073caca486b3652c3ee4cbf86a1dc8f64daf"
     },
     {
       "path": "content/modules/01_values_state_execution.md",
@@ -182,11 +246,11 @@
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
-      "sha256": "d6e232d6c5244fc7c3ea97fc314ac001a32795a38276d2ff55b7aa80f90f498c"
+      "sha256": "07993f020b7460fc0f2d0a775ae59e6095bacb8a929898c6152586828d3b0a0c"
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "9b1d5518148d2fab14a659ba28e78f1c355227cd9862f415d4c43e7550c02873"
+      "sha256": "712e394e4bf0ff4093978f2d45368291c600ba76d69186adbc2582f9400d5720"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
@@ -194,7 +258,7 @@
     },
     {
       "path": "content/modules/30_probability_statistics_scientific_inference.md",
-      "sha256": "1cb40d41e6f0024d8b11a55789e153d2781f5007d9c30f4653068a591a9c4833"
+      "sha256": "e099db7292dd56846b920f94696807eb1e2f7561e54763a9891bf89ef0637118"
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
@@ -329,6 +393,22 @@
       "sha256": "64a1c68ffcf076f8268be54121c04eadf15ab7ce9f5c9f539e0953759f6f12bd"
     },
     {
+      "path": "docs/module-evidence/m27/candidate-preflight.md",
+      "sha256": "6f9bd9ba141ea50bba93b82067c457cee82a85f78ad15c2d33b2bca0ad8c3ea1"
+    },
+    {
+      "path": "docs/module-evidence/m28/candidate-preflight.md",
+      "sha256": "314f03a31f15d27034444f47f54ccfc38c49e6b4bf893220bfac1c7f24344da4"
+    },
+    {
+      "path": "docs/module-evidence/m29/candidate-preflight.md",
+      "sha256": "e6a9ce6345b84696a063747ddfa0127ee620b281be6c6d4080aae11921e2917e"
+    },
+    {
+      "path": "docs/module-evidence/m30/candidate-preflight.md",
+      "sha256": "18357b4822f5fefbcaf6b62e6c645e60aac556baddb032f7b590929ea580913b"
+    },
+    {
       "path": "public/downloads/module17_reference.py",
       "sha256": "8086bf4882971ec31bd26f24f1a903a4c6927c449c41e993b99b8c0de366c4ad"
     },
@@ -381,12 +461,24 @@
       "sha256": "7f1079d83acc2433972f4f959a541a2f2571655a1487ed481bd2340246e5769e"
     },
     {
+      "path": "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "sha256": "06c9a64699af2c6cac17b23f0d951d826b2d0e5115fa9faf5f8ab66a5559f3a0"
+    },
+    {
       "path": "public/downloads/module27_reference.py",
       "sha256": "555a37db6714ce39adfa02fd2abc523c0a5273fe58dbbe489e1b7d085ebe11a4"
     },
     {
+      "path": "public/downloads/module27_source_audit_addendum.md",
+      "sha256": "2789a7df3a7e2c7840e3a9420601577fb2aab1ffddf9f53fb8c32c9d5f7ede39"
+    },
+    {
       "path": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",
       "sha256": "0fea9f3ff0267cbb16640762cc0ffdec72f5e4d6916c2be495e156542c98fea1"
+    },
+    {
+      "path": "public/downloads/module28_linear_algebra_source_audit_addendum.md",
+      "sha256": "5d10cbcf99cb3e921cdbc4c4c2c74a86e314a2df5831553246cc8473466cc4da"
     },
     {
       "path": "public/downloads/module28_reference.py",
@@ -467,6 +559,10 @@
     {
       "path": "public/downloads/test_module30_reference.py",
       "sha256": "e3401c6bcbbe372a651c14091bc7ce5a2e58783848b7c2553f1b95d3f37b06ec"
+    },
+    {
+      "path": "tests/rendered-html.test.mjs",
+      "sha256": "f31cf2d2665f7f80b9052950aa5c5b800b4b8d54eb82ccaaf57cf2aaf170e59c"
     }
   ]
 }

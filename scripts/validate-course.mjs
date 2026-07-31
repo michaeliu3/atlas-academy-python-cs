@@ -13,6 +13,11 @@ import {
   validateLegacyModuleContractPacketRegistry,
 } from "./legacy-module-contract-packet.mjs";
 import {
+  legacyCandidatePreflightProfilesPath,
+  loadLegacyCandidatePreflightProfiles,
+  validateLegacyCandidatePreflightProfiles,
+} from "./legacy-candidate-preflight-profiles.mjs";
+import {
   loadLiveCodexLearningWorkflow,
   liveCodexLearningWorkflowPath,
   validateLiveCodexLearningWorkflow,
@@ -119,6 +124,7 @@ export async function validateCourseContracts(
   let contractRegistry = null;
   let advancedContract = null;
   let legacyPackets = null;
+  let legacyCandidatePreflightProfiles = null;
   let draftEvidence = null;
   let releaseEvidencePolicy = null;
   let manualLearningRecordWorkflow = null;
@@ -133,6 +139,7 @@ export async function validateCourseContracts(
     moduleContractRegistryPath(siteRoot),
     releaseInputPolicyPath(siteRoot),
     releaseEvidencePolicyPath(siteRoot),
+    legacyCandidatePreflightProfilesPath(siteRoot),
     manualLearningRecordWorkflowPath(siteRoot),
     liveCodexLearningWorkflowPath(siteRoot),
     moduleCompanionGuidesPath(siteRoot),
@@ -167,6 +174,23 @@ export async function validateCourseContracts(
   } catch (error) {
     errors.push(
       `Legacy typed contract-packet migration adapter must remain valid: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    legacyCandidatePreflightProfiles = await validateLegacyCandidatePreflightProfiles(
+      await loadLegacyCandidatePreflightProfiles(siteRoot),
+      { siteRoot },
+    );
+    for (const path of legacyCandidatePreflightProfiles.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+    warnings.push(
+      `Legacy candidate preflight profiles resolved for ${legacyCandidatePreflightProfiles.candidateByModuleId.size} structural candidate module(s); this is not human review or publication evidence.`,
+    );
+  } catch (error) {
+    errors.push(
+      `Legacy candidate preflight-profile registry must remain valid as non-promoting structural evidence: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -342,6 +366,7 @@ export async function validateCourseContracts(
     contractRegistry,
     advancedContract,
     legacyPackets,
+    legacyCandidatePreflightProfiles,
     draftEvidence,
     manualLearningRecordWorkflow,
     liveCodexLearningWorkflow,

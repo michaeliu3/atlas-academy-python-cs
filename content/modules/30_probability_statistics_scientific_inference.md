@@ -109,6 +109,9 @@ depth. Never replace a missing assumption with a fluent calculation.
 ### 1.2 Prerequisite and forward map
 
 ~~~mermaid
+%% atlas-diagram-id: m30-prerequisite-forward-map
+%% atlas-diagram-title: M30 prerequisite and conceptual-forward map
+%% atlas-diagram-alt: M27, M28, and M29 supply formal, linear, and continuous-change foundations for M30; M31 is a conceptual next handoff but remains authoring-only, while M32 and M34–M36 are later applications and M25 remains synthesis.
 flowchart LR
     M27["M27: definitions, quantifiers, counting"] --> M30["M30: probability, inference + scientific evidence"]
     M28["M28: covariance geometry, least squares, conditioning"] --> M30
@@ -163,6 +166,9 @@ authorize an intervention. It lets a design team practice questions such as:
   nonresponse, or an unrecorded prior change the conclusion?
 
 ~~~mermaid
+%% atlas-diagram-id: m30-evidence-lab-inference-flow
+%% atlas-diagram-title: From a question to a bounded human decision
+%% atlas-diagram-alt: A question and population lead through observed data, a probability model, an inferential procedure, and uncertainty checks to a bounded recommendation; a human retains authority to revise or record the decision.
 flowchart TD
     Q["Question + estimand"] --> P["Population / sampling or assignment"]
     P --> D["Observed data + provenance"]

@@ -87,6 +87,9 @@ repairing code or claims, comparing alternatives, and explaining a result.
 ### 1.2 Prerequisite and forward map
 
 ~~~mermaid
+%% atlas-diagram-id: m28-prerequisite-forward-map
+%% atlas-diagram-title: M28 prerequisite and conceptual-forward map
+%% atlas-diagram-alt: M27 and M17 supply proof and representation foundations for M28; its linear and numerical reasoning then informs M29, M30, M31, M32, M35, and M36, while M25 remains later synthesis rather than a prerequisite.
 flowchart LR
     M2["M2: recursion + induction"] --> M27["M27: proof + discrete structures"]
     M4["M4: functions + relations"] --> M27
@@ -1312,9 +1315,10 @@ familiar.
 ## 16. Sources, licensing, and responsible reading route
 
 The deployed [M28 source map](/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md)
-is synchronized from the canonical course source map.
-It records source owners, exact scope, licensing/reuse boundaries, asset-level
-notes, and what each resource cannot establish.
+and [source-audit addendum](/downloads/module28_linear_algebra_source_audit_addendum.md)
+are synchronized from the canonical course records. Together they record
+source owners, exact scope, licensing/reuse boundaries, asset-level notes, and
+what each resource cannot establish.
 
 Recommended order:
 

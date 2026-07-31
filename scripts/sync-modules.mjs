@@ -26,6 +26,11 @@ import {
   validateLegacyModuleContractPacketRegistry,
 } from "./legacy-module-contract-packet.mjs";
 import {
+  legacyCandidatePreflightProfilesPath,
+  loadLegacyCandidatePreflightProfiles,
+  validateLegacyCandidatePreflightProfiles,
+} from "./legacy-candidate-preflight-profiles.mjs";
+import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
@@ -267,6 +272,11 @@ const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
   legacyModuleContractAudit,
   { siteRoot },
 );
+const legacyCandidatePreflightProfiles = await loadLegacyCandidatePreflightProfiles(siteRoot);
+const legacyCandidatePreflightProfilesReport = await validateLegacyCandidatePreflightProfiles(
+  legacyCandidatePreflightProfiles,
+  { siteRoot },
+);
 const releaseInputPaths = new Set([
   graphPath,
   performanceBudgetPolicyPath,
@@ -276,6 +286,7 @@ const releaseInputPaths = new Set([
   releaseInputPolicyPath(siteRoot),
   releaseEvidencePolicyPath(siteRoot),
   legacyModuleContractAuditPath,
+  legacyCandidatePreflightProfilesPath(siteRoot),
 ]);
 const sourceArtifactChanges = await synchronizeSourceArtifactCopies(
   releaseInputPolicy.sourceArtifactCopies,
@@ -296,6 +307,9 @@ for (const path of moduleLearningCompanionsReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 for (const path of browserProgressSurfacePolicyReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of legacyCandidatePreflightProfilesReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 

@@ -13,6 +13,10 @@ import {
 } from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { legacyModuleContractPacketRelativePath } from "../scripts/legacy-module-contract-packet.mjs";
+import {
+  loadLegacyCandidatePreflightProfiles,
+  validateLegacyCandidatePreflightProfiles,
+} from "../scripts/legacy-candidate-preflight-profiles.mjs";
 import { moduleContractRegistryRelativePath } from "../scripts/module-contract-registry.mjs";
 import {
   manualLearningRecordWorkflowGuideRelativePath,
@@ -53,11 +57,14 @@ function comparePaths(left, right) {
 }
 
 test("the release-input ledger is a reproducible local allowlist", async () => {
-  const [ledger, graph, advancedRegistry, releaseEvidencePolicy] = await Promise.all([
+  const [ledger, graph, advancedRegistry, releaseEvidencePolicy, candidateProfiles] = await Promise.all([
     readFile(ledgerPath, "utf8").then(JSON.parse),
     loadCourseGraph(),
     loadAdvancedModuleContractRegistry(),
     loadReleaseEvidencePolicy(siteRoot),
+    loadLegacyCandidatePreflightProfiles(siteRoot).then((profiles) =>
+      validateLegacyCandidatePreflightProfiles(profiles, { siteRoot }),
+    ),
   ]);
   const advancedContractReport = await validateAdvancedModuleContractRegistry(
     graph,
@@ -133,6 +140,17 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   const expectedDocumentationLedgerPaths = new Set(expectedAdvancedProvenancePaths);
   expectedDocumentationLedgerPaths.add(manualLearningRecordWorkflowGuideRelativePath);
   expectedDocumentationLedgerPaths.add(liveCodexLearningWorkflowGuideRelativePath);
+  for (const profile of candidateProfiles.candidateByModuleId.values()) {
+    expectedDocumentationLedgerPaths.add(profile.candidateDocumentationPath);
+    assert.ok(
+      paths.includes(`content/course/contracts/evidence/${profile.moduleId}.v1.json`),
+      `${profile.moduleId} candidate evidence is profile-derived and hash-ledgered`,
+    );
+    assert.ok(
+      paths.includes(`content/course/contracts/evidence-preflight/${profile.moduleId}.v1.json`),
+      `${profile.moduleId} candidate preflight is profile-derived and hash-ledgered`,
+    );
+  }
   assert.deepEqual(
     documentationLedgerPaths,
     [...expectedDocumentationLedgerPaths].sort(comparePaths),
@@ -142,6 +160,13 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
     [...expectedAdvancedProvenancePaths].sort(comparePaths),
   );
 
+  const profileBoundCodePaths = new Set(
+    [...candidateProfiles.candidateByModuleId.values()].flatMap((profile) => [
+      profile.studioSourcePath,
+      profile.visualTestPath,
+    ]),
+  );
+
   for (const input of ledger.inputs) {
     if (input.path.startsWith("docs/")) {
       assert.ok(
@@ -149,7 +174,10 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
         `${input.path} is an allowlisted provenance or learner-record documentation input`,
       );
     } else {
-      assert.match(input.path, /^(?:content|public)\//u);
+      assert.ok(
+        /^(?:content|public)\//u.test(input.path) || profileBoundCodePaths.has(input.path),
+        `${input.path} is canonical course content, a public artifact, or an exact profile-bound code input`,
+      );
     }
     assert.doesNotMatch(input.path, /(?:^|\/)\.\.(?:\/|$)/u);
     const path = resolve(siteRoot, input.path);
