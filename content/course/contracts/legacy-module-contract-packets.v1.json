@@ -692,6 +692,729 @@
         {"id": "m22-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module22_reference.py", "public/downloads/test_module22_reference.py"]},
         {"id": "m22-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m23",
+      "packetId": "m23-languages-interpreters-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m22"
+        ],
+        "forwardModuleId": "m24",
+        "masteryGateId": "systems",
+        "studioId": "language-interpreter"
+      },
+      "workbookPath": "content/modules/23_programming_languages_interpreters.md",
+      "sourceMapPath": "content/source-maps/module23_languages_interpreters_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m23-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m22"
+          ],
+          "forwardArtifactId": "m23-representation-boundary-card"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m23-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m23-evaluation-trace"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m23-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m23-lexical-environment-diagram"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m23-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m23-check-boundary-matrix"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m23-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m23-capability-decision-record"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m23-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m23-claim-owner-card"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m23-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "Module 22 prerequisite bridge",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "1-position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m23-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "Module 24 handoff boundary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "14-handoff--what-module-23-deliberately-leaves-open"
+          }
+        },
+        {
+          "id": "m23-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "2-session-1--text-has-form-not-permission"
+          }
+        },
+        {
+          "id": "m23-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "3-session-2--a-tree-gets-meaning-from-rules"
+          }
+        },
+        {
+          "id": "m23-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "4-session-3--names-live-in-environments-functions-close-over-them"
+          }
+        },
+        {
+          "id": "m23-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "5-session-4--contracts-make-invalid-states-visible"
+          }
+        },
+        {
+          "id": "m23-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "6-session-5--bounded-evaluation-receives-authority-never-finds-it"
+          }
+        },
+        {
+          "id": "m23-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "7-session-6--implementation-evidence-is-not-semantic-law"
+          }
+        },
+        {
+          "id": "m23-first-principle",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "Pipeline first-principles derivation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "derive-the-pipeline-from-first-principles"
+          }
+        },
+        {
+          "id": "m23-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "Small grammar contract candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "a-small-grammar-is-a-public-contract"
+          }
+        },
+        {
+          "id": "m23-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "Narrow-capability boundary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "the-narrow-capability-rule"
+          }
+        },
+        {
+          "id": "m23-derivation",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "Pipeline derivation candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "derive-the-pipeline-from-first-principles"
+          }
+        },
+        {
+          "id": "m23-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "Fixed Atlas incident counterexample candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "12-the-fixed-atlas-incident"
+          }
+        },
+        {
+          "id": "m23-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "Trusted-source implementation observation candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "from-trusted-python-source-to-an-implementation-observation"
+          }
+        },
+        {
+          "id": "m23-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "Session 1 code-reading lab",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "code-reading-lab-s1--classify-the-first-failure"
+          }
+        },
+        {
+          "id": "m23-debug",
+          "roles": [
+            "debugging"
+          ],
+          "label": "Session 3 wrong-parent debugging candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "code-reading-lab-s3--find-the-wrong-parent"
+          }
+        },
+        {
+          "id": "m23-design",
+          "roles": [
+            "design"
+          ],
+          "label": "Eight-level design ladder candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "9-eight-level-problem-ladder"
+          }
+        },
+        {
+          "id": "m23-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "Language Lab prediction candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "8-atlas-language-lab--visual-studio-text-equivalent"
+          }
+        },
+        {
+          "id": "m23-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "Module 24 transfer handoff candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "14-handoff--what-module-23-deliberately-leaves-open"
+          }
+        },
+        {
+          "id": "m23-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "Source-selection rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module23_languages_interpreters_source_map.md",
+            "headingAnchor": "executive-teaching-decision"
+          }
+        },
+        {
+          "id": "m23-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "Claim-to-source matrix",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module23_languages_interpreters_source_map.md",
+            "headingAnchor": "claim-to-source-matrix-for-authoring-and-ta-use"
+          }
+        },
+        {
+          "id": "m23-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "Authoring source and licensing ledger",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module23_languages_interpreters_source_map.md",
+            "headingAnchor": "authoring-source-and-licensing-ledger"
+          }
+        },
+        {
+          "id": "m23-stable-learner-link",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "Learner resource route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "13-resource-route-and-source-discipline"
+          }
+        },
+        {
+          "id": "m23-visual-studio",
+          "roles": [
+            "visual"
+          ],
+          "label": "Atlas Language Lab",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "8-atlas-language-lab--visual-studio-text-equivalent"
+          }
+        },
+        {
+          "id": "m23-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "Atlas Language Lab text equivalent",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "8-atlas-language-lab--visual-studio-text-equivalent"
+          }
+        },
+        {
+          "id": "m23-diagnostic",
+          "roles": [
+            "diagnostic",
+            "confidence"
+          ],
+          "label": "Confidence-aware diagnostic candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks"
+          }
+        },
+        {
+          "id": "m23-misconception-candidate",
+          "roles": [
+            "misconception"
+          ],
+          "label": "Diagnostic misconception candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks"
+          }
+        },
+        {
+          "id": "m23-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "Retrieval schedule",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "retrieval-schedule"
+          }
+        },
+        {
+          "id": "m23-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "Atlas Query Language dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "11-cumulative-project--atlas-query-language-dossier"
+          }
+        },
+        {
+          "id": "m23-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "Required dossier deliverables",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "required-deliverables"
+          }
+        },
+        {
+          "id": "m23-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "Dossier review rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "review-rubric"
+          }
+        },
+        {
+          "id": "m23-oral-missing-protocol-hint",
+          "roles": [
+            "oral-protocol",
+            "oral-hint"
+          ],
+          "label": "Explicit missing oral protocol and hint route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m23-oral-missing-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "Explicit missing oral counterexample route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m23-oral-missing-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "Explicit missing oral transfer route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m23-oral-missing-reflection-summary",
+          "roles": [
+            "oral-reflection",
+            "oral-summary"
+          ],
+          "label": "Explicit missing oral reflection and summary route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m23-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M23 TA studios",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "ta-studios"
+          }
+        },
+        {
+          "id": "m23-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M23 Study Partner routine",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "study-partner-routine--20-to-30-minutes"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-course-map",
+            "m23-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-session-1",
+            "m23-session-2",
+            "m23-session-3",
+            "m23-session-4",
+            "m23-session-5",
+            "m23-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-first-principle"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-definition",
+            "m23-assumption",
+            "m23-derivation",
+            "m23-counterexample",
+            "m23-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-code-reading",
+            "m23-debug",
+            "m23-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-source-rationale",
+            "m23-claim-linkage",
+            "m23-license-reuse",
+            "m23-stable-learner-link"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-visual-studio",
+            "m23-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-diagnostic",
+            "m23-misconception-candidate"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-dossier",
+            "m23-acceptance",
+            "m23-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-oral-missing-protocol-hint",
+            "m23-oral-missing-counterexample",
+            "m23-oral-missing-transfer",
+            "m23-oral-missing-reflection-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m23-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m23-studio",
+          "kind": "studio",
+          "paths": [
+            "app/LanguageInterpreterStudio.tsx",
+            "app/LanguageInterpreterStudio.module.css",
+            "lib/module-studio-registry.ts",
+            "tests/rendered-html.test.mjs"
+          ]
+        },
+        {
+          "id": "m23-reference-model",
+          "kind": "bounded-reference-model",
+          "paths": [
+            "public/downloads/module23_reference.py",
+            "public/downloads/test_module23_reference.py"
+          ]
+        },
+        {
+          "id": "m23-oral-guide",
+          "kind": "oral-guide",
+          "paths": [
+            "lib/oral-defense-guide.ts"
+          ]
+        }
+      ]
     }
   ]
 }

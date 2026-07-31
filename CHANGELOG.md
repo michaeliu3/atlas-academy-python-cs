@@ -15,6 +15,15 @@ actually published.
   protocol; it is not a learner download, quality approval, publication
   promotion, or release-evidence claim. The canonical M23 map/addendum remain
   configured authoring inputs rather than learner downloads.
+- Added M23's non-promoting structural packet: 37 typed local anchors bind
+  its canonical M22 → M23 → M24 route, six-session language/interpreter
+  spine, bounded studio/model artifacts, source route, diagnostic, dossier,
+  TA, and Study Partner surfaces. The packet preserves the immutable audit's
+  five ambiguous criteria and maps the genuinely missing oral-defense protocol
+  only to its explicit absence record. Its authoring-only audit addendum is now
+  a hashable internal input, not a learner download, quality approval,
+  publication promotion, or release-evidence claim. Nothing changes human
+  review, availability, or publication state.
 - Corrected M23 source and learner-facing bridge language: tagged CPython
   source links now use v3.14.6 rather than the moving main branch; the
   reference model reports a local Python implementation/version rather than
