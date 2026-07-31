@@ -3,9 +3,24 @@
 **Research timestamp:** 2026-07-30  
 **Scope:** rigorous calculus, introductory real analysis, multivariable
 differentiation, numerical approximation, automatic differentiation, and an
-ODE/error boundary for the planned M29 workbook and studio. This is an
+ODE/error boundary for the M29 workbook and studio. This is an
 instructor-facing source, claim, and reuse audit—not learner-facing textbook
-copy.
+copy or a publication/review approval.
+
+## Non-promotion and canonical route boundary
+
+This addendum records sources, reuse decisions, and claim boundaries. It does
+not change the canonical graph, manifest, availability, lifecycle,
+`releaseEvidence`, deployed-download policy, human-review state, or module
+publication status. A resolved source pointer remains structural evidence; it
+does not establish source quality, accessibility quality, learner mastery, or
+release readiness.
+
+The canonical graph controls route truth. M29 has academic prerequisites
+**M27** and **M28** and a direct forward handoff to **M30**. M31–M36 are later
+conceptual consumers, not M29 previous/next navigation, and M25/M26 retain
+their own synthesis prerequisites. This audit must never be used to imply an
+authoring-only bypass or a changed learner route.
 
 ## Verdict
 

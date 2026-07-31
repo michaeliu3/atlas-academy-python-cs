@@ -230,11 +230,11 @@
     },
     {
       "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
-      "sha256": "090b440350922812a889ff274ea2f7a62f5c1435df4a4672e744d6a0f68ce209"
+      "sha256": "36631fe0dbed03f271b62daf01faee8aba78bbb11f80d8ed024752b22b88263e"
     },
     {
       "path": "content/source-maps/module29_calculus_real_analysis_source_audit_addendum.md",
-      "sha256": "ff9e461d78fc5a96b8848877a8e57d3c7556a7048fae95171ca099f6b150252d"
+      "sha256": "ab4c6895d33711bfcd48eebc776fd0c64f075c08bb53be50f1cc8edd1643b759"
     },
     {
       "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
@@ -330,11 +330,11 @@
     },
     {
       "path": "public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md",
-      "sha256": "090b440350922812a889ff274ea2f7a62f5c1435df4a4672e744d6a0f68ce209"
+      "sha256": "36631fe0dbed03f271b62daf01faee8aba78bbb11f80d8ed024752b22b88263e"
     },
     {
       "path": "public/downloads/module29_calculus_real_analysis_source_audit_addendum.md",
-      "sha256": "ff9e461d78fc5a96b8848877a8e57d3c7556a7048fae95171ca099f6b150252d"
+      "sha256": "ab4c6895d33711bfcd48eebc776fd0c64f075c08bb53be50f1cc8edd1643b759"
     },
     {
       "path": "public/downloads/module29_reference.py",

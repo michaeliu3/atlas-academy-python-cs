@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Corrected M29 source-map route language so its two academic prerequisites
+  (M27/M28), direct forward handoff (M30), and later conceptual consumers
+  (M31–M36) cannot be mistaken for a navigation bypass. The canonical
+  source-audit addendum now states its non-promotion boundary, and its
+  learner-facing download and deterministic input hashes were refreshed. This
+  clarifies structural/provenance evidence only; it does not approve M29's
+  teaching quality, accessibility, or release state.
 - Added a versioned, hashed Manual Learning Record Kit with ten connected,
   copy/paste templates for route, daily learning, module reasoning, repair,
   rigor, math/ML gates, retrieval, oral-defense evidence, portfolio, and TA /

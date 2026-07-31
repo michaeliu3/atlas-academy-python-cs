@@ -5,12 +5,13 @@
 - **Purpose:** source, claim, licensing, and teaching map for the M29 workbook,
   Limits, Change & Convergence Studio, diagnostic, Continuous-Change Evidence
   Dossier, bounded Python teaching model, oral defense, TA/Study Partner
-  routines, and the bridge to M30–M32.
+  routines, the direct forward handoff to M30, and later conceptual bridges to
+  M31–M32.
 - **Course position:** M29 follows M27's quantified proof/counterexample
   boundary and M28's norm, linear-map, and finite-representation boundary. In
-  the learner route it follows M28 and precedes M30; its direct prerequisites
-  remain M27 and M28. M31–M36 are later conceptual consumers, not a learner
-  navigation bypass.
+  the learner route it follows M28 and its canonical forward module is M30;
+  its academic prerequisites remain M27 and M28. M31–M36 are later conceptual
+  consumers, not previous/next navigation or a learner-path bypass.
 - **Research snapshot:** **2026-07-30**. Exact URLs, editions, licenses, and
   API behavior must be rechecked before reusing an external asset, quoting a
   source, or making a current-library claim.
@@ -310,8 +311,10 @@ or invalid semantic/objective inference
 
 ### Release checklist
 
-- [ ] M27 and M28 arrows appear in the workbook, studio, route metadata, and
-  source map; M29's learner navigation is after M28.
+- [ ] M27 and M28 academic-prerequisite arrows appear in the workbook, studio,
+  route metadata, and source map; M29's canonical learner handoff is to M30.
+  M31–M36 may be described only as later conceptual consumers, never as a
+  navigation bypass.
 - [ ] Every theorem panel names object/domain, hypotheses, conclusion, and a
   removed-hypothesis counterexample/prompt.
 - [ ] Every calculus/numerics visual has a text alternative and does not reveal
