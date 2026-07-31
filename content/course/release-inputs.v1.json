@@ -5,6 +5,10 @@
   "contractVersion": "v3",
   "inputs": [
     {
+      "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+      "sha256": "5238ba7d84cb3cdc6914557068d56cdd9fec608d36f7095ea0fe95cf6a70a123"
+    },
+    {
       "path": "content/course/browser-progress-surfaces.v1.json",
       "sha256": "9acd806140ae4be379f3745ea30b37df52575e5c27a4a6d8d77ee8acbfcd44bb"
     },
@@ -14,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "9a14c38e8cb2c04da5369fd252c79399a636ce54551fe2864f2ff72c7cb864f7"
+      "sha256": "7d704796fe457709604efb36d77b75e27c958551c36007129c7179fc057dd37d"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",

@@ -2,16 +2,20 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  M31_STOCHASTIC_GRADIENT_FIXTURE,
   M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC,
+  evaluateM31DiscreteInformation,
   evaluateM31ConstrainedQuadratic,
   evaluateM31KktCertificate,
   isM31ConstrainedQuadraticFeasible,
   m31CentralDifferenceGradient,
   m31ConstraintResidual,
   m31ConstraintViolation,
+  m31ProjectedGradientTrace,
   m31QuadraticGradient,
   m31QuadraticObjective,
   m31StationarityCounterexample,
+  m31StochasticGradientTrace,
 } from "../lib/m31-optimization-authoring-model.js";
 
 function assertApproximately(actual, expected, tolerance = 1e-7) {
@@ -144,4 +148,63 @@ test("the bounded KKT evaluator keeps each failed condition visible without maki
   assert.equal(infeasibleStationaryPoint.complementarySlacknessSatisfied, true);
   assert.equal(infeasibleStationaryPoint.satisfiesDeclaredKktConditions, false);
   assert.match(infeasibleStationaryPoint.truthBoundary, /does not validate a general solver/u);
+});
+
+test("the M31 projected-gradient trace keeps objective, projection, and hard-constraint evidence separate", () => {
+  const trace = m31ProjectedGradientTrace({
+    initialPoint: { x: 0, y: 0 },
+    stepSize: 0.25,
+    iterations: 6,
+  });
+
+  assert.equal(trace.id, "m31-s04-projected-gradient-trace");
+  assert.equal(trace.records.length, 7);
+  assert.deepEqual(trace.records[0].point, { x: 0, y: 0 });
+  assert.equal(trace.records[0].iteration, 0);
+  assert.ok(trace.records.every(({ feasible, constraintViolation }) => feasible && constraintViolation === 0));
+  assert.ok(trace.records.at(-1).objective < trace.records[0].objective);
+  assert.ok(trace.records.some(({ projectionApplied }) => projectionApplied));
+  assert.match(trace.truthBoundary, /one projected update rule/u);
+  assert.throws(
+    () => m31ProjectedGradientTrace({ initialPoint: { x: 0, y: 0 }, stepSize: 0.25, iterations: 0 }),
+    /iterations must be an integer from 1 through 64/u,
+  );
+});
+
+test("the M31 stochastic trace makes estimator noise and a finite run visible", () => {
+  const trace = m31StochasticGradientTrace({
+    initialParameter: 0,
+    stepSize: 0.1,
+    noiseSequence: M31_STOCHASTIC_GRADIENT_FIXTURE.noiseSequence,
+  });
+
+  assert.equal(trace.id, "m31-s05-fixed-noisy-gradient-trace");
+  assert.equal(trace.records.length, M31_STOCHASTIC_GRADIENT_FIXTURE.noiseSequence.length + 1);
+  assert.equal(trace.meanDeclaredNoise, 0);
+  assert.equal(trace.records[0].parameter, 0);
+  assert.ok(
+    trace.records.slice(1).some(({ gradientEstimate, fullGradient }) => gradientEstimate !== fullGradient),
+  );
+  assert.ok(Number.isFinite(trace.records.at(-1).objective));
+  assert.match(trace.truthBoundary, /does not establish a convergence theorem/u);
+  assert.throws(
+    () => m31StochasticGradientTrace({ initialParameter: 0, stepSize: 0.1, noiseSequence: [] }),
+    /non-empty finite noise sequence/u,
+  );
+});
+
+test("the M31 finite information card distinguishes entropy, cross-entropy, and KL with support checks", () => {
+  const metrics = evaluateM31DiscreteInformation([0.5, 0.5], [0.75, 0.25]);
+  const identity = evaluateM31DiscreteInformation([0.5, 0.5], [0.5, 0.5]);
+
+  assertApproximately(metrics.entropyNats, Math.log(2));
+  assertApproximately(metrics.crossEntropyNats - metrics.entropyNats, metrics.klDivergenceNats);
+  assert.ok(metrics.klDivergenceNats > 0);
+  assertApproximately(identity.klDivergenceNats, 0);
+  assert.equal(metrics.supportCompatible, true);
+  assert.match(metrics.truthBoundary, /finite categorical distributions/u);
+  assert.throws(
+    () => evaluateM31DiscreteInformation([0.5, 0.5], [1, 0]),
+    /strictly positive wherever the reference distribution is positive/u,
+  );
 });
