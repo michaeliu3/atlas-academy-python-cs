@@ -52,6 +52,13 @@ actually published.
   surfaces. Its historical rigor, code/design, source, visual/text, and
   diagnostic ambiguities remain explicitly unresolved; this does not change
   publication or human-review state.
+- Recorded the M27 structural-packet candidate separately: source head
+  `3f291c7` entered attempt 1 of
+  [run 30594396737](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30594396737),
+  whose four required jobs checked merge candidate `e2f1170`. This is bounded
+  source-head/merge-candidate validation evidence, not a GitHub Release,
+  private deployment, M27 human-review approval, course completion, or a
+  security-clean claim.
 - Added a small deterministic M31-S01/S02 constrained-quadratic authoring
   fixture and teaching tests. It makes objective, gradient, feasibility, and a
   constrained-stationarity counterexample inspectable while M31 remains
