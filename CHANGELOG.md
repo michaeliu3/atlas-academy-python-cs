@@ -41,6 +41,13 @@ actually published.
   fixture and teaching tests. It makes objective, gradient, feasibility, and a
   constrained-stationarity counterexample inspectable while M31 remains
   authoring-only with no learner route, studio, review, or release claim.
+- Recorded the M28/M31 contract-hardening candidate separately: source head
+  `6309b52` entered attempt 1 of
+  [run 30593670071](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30593670071),
+  whose four required jobs checked merge candidate `479c638`. This is bounded
+  source-head/merge-candidate validation evidence, not a GitHub Release,
+  private deployment, M28 human review, M31 publication, course completion, or
+  a security-clean claim.
 - Added a lifecycle-aware advanced-module contract registry, initially for M31
   only. It resolves 15 Git-tracked planning/research inputs, verifies the
   six-session prerequisite spine and S01–S10/C01–C08 coverage, and explicitly
