@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "df7761cf6533cefc7491dd3bfa361ff885d9124928bdf3ebdc6a65e6e1b869ce"
+      "sha256": "c527ef8952e11c15824c1f8d42e94740184c3cc95235fd2dc30502a96cf5988d"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -219,6 +219,10 @@
     {
       "path": "content/source-maps/module23_languages_interpreters_source_map.md",
       "sha256": "cba7ef46543a4f8867ff6d465cfe901e54cab33324354f8699d3fdff798e376b"
+    },
+    {
+      "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
+      "sha256": "9301694e17fe1dfec3713ad6da387abab0dcb3b9242ea30eeab7d70d46dd7fe4"
     },
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",

@@ -1415,6 +1415,729 @@
           ]
         }
       ]
+    },
+    {
+      "moduleId": "m24",
+      "packetId": "m24-cpython-performance-memory-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m23"
+        ],
+        "forwardModuleId": "m32",
+        "masteryGateId": "systems",
+        "studioId": "runtime-evidence"
+      },
+      "workbookPath": "content/modules/24_cpython_performance_memory.md",
+      "sourceMapPath": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m24-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m23"
+          ],
+          "forwardArtifactId": "m24-evidence-contract-card"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m24-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m24-object-lifetime-trace"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m24-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m24-collection-ownership-boundary"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m24-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m24-memory-lens-selection"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m24-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m24-source-inspection-plan"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m24-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m24-runtime-evidence-dossier"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m24-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "Module 23 prerequisite bridge",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "1-position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m24-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "Module 32 authoring-only handoff boundary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "11-retrieval-schedule-and-handoff"
+          }
+        },
+        {
+          "id": "m24-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "2-session-1--evidence-before-optimization"
+          }
+        },
+        {
+          "id": "m24-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "3-session-2--objects-aliases-and-lifetime"
+          }
+        },
+        {
+          "id": "m24-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "4-session-3--cycles-collection-and-resource-ownership"
+          }
+        },
+        {
+          "id": "m24-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "5-session-4--allocation-and-memory-lenses"
+          }
+        },
+        {
+          "id": "m24-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "6-session-5--source-code-object-frame-bytecode"
+          }
+        },
+        {
+          "id": "m24-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "Session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "7-session-6--experiment-and-ai-patch-review"
+          }
+        },
+        {
+          "id": "m24-first-principle",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "Object-lifetime first-principles model",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "first-principles-model"
+          }
+        },
+        {
+          "id": "m24-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "Evidence-label definition candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "evidence-labels"
+          }
+        },
+        {
+          "id": "m24-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "Language-versus-implementation boundary candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "what-python-promises-and-what-it-does-not"
+          }
+        },
+        {
+          "id": "m24-derivation",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "Evidence-claim ladder derivation candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "derive-the-claim-ladder"
+          }
+        },
+        {
+          "id": "m24-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "Fixed Atlas incident counterexample candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "12-the-fixed-atlas-incident"
+          }
+        },
+        {
+          "id": "m24-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "Controlled experiment-manifest candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "build-the-experiment-manifest"
+          }
+        },
+        {
+          "id": "m24-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "Session 1 code-reading lab",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "code-reading-lab"
+          }
+        },
+        {
+          "id": "m24-debug",
+          "roles": [
+            "debugging"
+          ],
+          "label": "Cycle and ownership debugging investigation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "debugging-investigation"
+          }
+        },
+        {
+          "id": "m24-design",
+          "roles": [
+            "design"
+          ],
+          "label": "AI-patch review design candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "ai-patch-review"
+          }
+        },
+        {
+          "id": "m24-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "Prediction-before-reveal candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "prediction-exercise"
+          }
+        },
+        {
+          "id": "m24-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "Runtime-evidence problem-ladder transfer candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "problem-ladder"
+          }
+        },
+        {
+          "id": "m24-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "Source-selection rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+            "headingAnchor": "executive-teaching-decision"
+          }
+        },
+        {
+          "id": "m24-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "Claim-to-source matrix",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+            "headingAnchor": "claim-to-source-matrix"
+          }
+        },
+        {
+          "id": "m24-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "Licensing and reuse ledger",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+            "headingAnchor": "licensing-reuse-and-access-ledger"
+          }
+        },
+        {
+          "id": "m24-stable-learner-link",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "Learner source and reuse route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "12-source-route-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m24-visual-studio",
+          "roles": [
+            "visual"
+          ],
+          "label": "Runtime Evidence Observatory candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "8-runtime-evidence-observatory"
+          }
+        },
+        {
+          "id": "m24-text-alternative-candidate",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "Memory-lens text-equivalent candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "the-memory-lens-diagram"
+          }
+        },
+        {
+          "id": "m24-diagnostic",
+          "roles": [
+            "diagnostic",
+            "confidence"
+          ],
+          "label": "Confidence-labelled diagnostic candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "9-confidence-aware-diagnostic"
+          }
+        },
+        {
+          "id": "m24-misconception-candidate",
+          "roles": [
+            "misconception"
+          ],
+          "label": "Diagnostic repair-routing candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "diagnostic-routing"
+          }
+        },
+        {
+          "id": "m24-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "Retrieval and handoff queue",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "11-retrieval-schedule-and-handoff"
+          }
+        },
+        {
+          "id": "m24-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "Runtime Evidence Dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "project--runtime-evidence-dossier"
+          }
+        },
+        {
+          "id": "m24-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "Runtime-evidence acceptance candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "acceptance-rubric"
+          }
+        },
+        {
+          "id": "m24-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "Runtime-evidence rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "acceptance-rubric"
+          }
+        },
+        {
+          "id": "m24-oral-missing-protocol-hint",
+          "roles": [
+            "oral-protocol",
+            "oral-hint"
+          ],
+          "label": "Missing module-specific oral protocol and hint route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m24-oral-missing-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "Missing module-specific oral counterexample route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m24-oral-missing-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "Missing module-specific oral transfer route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m24-oral-missing-reflection-summary",
+          "roles": [
+            "oral-reflection",
+            "oral-summary"
+          ],
+          "label": "Missing module-specific oral reflection and summary route",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
+            "headingAnchor": "unresolved-supportive-oral-defense-route"
+          }
+        },
+        {
+          "id": "m24-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "TA rehearsal candidate",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "ta-and-study-partner-rehearsal"
+          }
+        },
+        {
+          "id": "m24-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "Study Partner rehearsal",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "ta-and-study-partner-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-course-map",
+            "m24-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-session-1",
+            "m24-session-2",
+            "m24-session-3",
+            "m24-session-4",
+            "m24-session-5",
+            "m24-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-first-principle"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-definition",
+            "m24-assumption",
+            "m24-derivation",
+            "m24-counterexample",
+            "m24-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-code-reading",
+            "m24-debug",
+            "m24-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-source-rationale",
+            "m24-claim-linkage",
+            "m24-license-reuse",
+            "m24-stable-learner-link"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-visual-studio",
+            "m24-text-alternative-candidate"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-diagnostic",
+            "m24-misconception-candidate"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-dossier",
+            "m24-acceptance",
+            "m24-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-oral-missing-protocol-hint",
+            "m24-oral-missing-counterexample",
+            "m24-oral-missing-transfer",
+            "m24-oral-missing-reflection-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m24-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m24-studio",
+          "kind": "studio",
+          "paths": [
+            "app/RuntimeEvidenceObservatory.tsx",
+            "app/RuntimeEvidenceObservatory.module.css",
+            "lib/module-studio-registry.ts",
+            "tests/rendered-html.test.mjs"
+          ]
+        },
+        {
+          "id": "m24-reference-model",
+          "kind": "bounded-reference-model",
+          "paths": [
+            "public/downloads/module24_reference.py",
+            "public/downloads/test_module24_reference.py"
+          ]
+        },
+        {
+          "id": "m24-oral-guide",
+          "kind": "oral-guide",
+          "paths": [
+            "lib/oral-defense-guide.ts"
+          ]
+        }
+      ]
     }
   ]
 }

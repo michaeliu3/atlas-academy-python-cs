@@ -25,8 +25,8 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
   assert.deepEqual(report.summary, {
-    structuralCandidates: 9,
-    resolvedPointers: 327,
+    structuralCandidates: 10,
+    resolvedPointers: 364,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -217,6 +217,69 @@ test("the M23 structural packet maps the language spine without hiding its missi
   );
 });
 
+test("the M24 structural packet maps the runtime-evidence spine without laundering its unresolved evidence", async () => {
+  const { graph, registry } = await packetFixture();
+  const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
+
+  const packet = report.packetById.get("m24-cpython-performance-memory-structural-candidate");
+  assert.equal(packet?.moduleId, "m24");
+  assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m23"]);
+  assert.equal(packet?.canonicalExpectation.forwardModuleId, "m32");
+  assert.equal(packet?.canonicalExpectation.masteryGateId, "systems");
+  assert.equal(packet?.canonicalExpectation.studioId, "runtime-evidence");
+  assert.equal(packet?.packetState, "structural-candidate");
+  assert.equal(packet?.humanReviewState, "not-reviewed");
+  assert.equal(packet?.publicationEffect, "none");
+
+  const statusByCriterion = new Map(
+    packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
+  );
+  assert.equal(
+    statusByCriterion.get(
+      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+    ),
+    "ambiguous",
+  );
+  assert.equal(statusByCriterion.get("transfer-task"), "ambiguous");
+  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
+  assert.equal(statusByCriterion.get("ta-prompt"), "ambiguous");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "missing");
+
+  const oralCriterion = packet?.criteria.find(
+    ({ criterionId }) => criterionId === "supportive-oral-defense",
+  );
+  assert.deepEqual(oralCriterion?.pointerIds, [
+    "m24-oral-missing-protocol-hint",
+    "m24-oral-missing-counterexample",
+    "m24-oral-missing-transfer",
+    "m24-oral-missing-reflection-summary",
+  ]);
+  const missingOralPointer = packet?.pointers.find(
+    ({ id }) => id === "m24-oral-missing-protocol-hint",
+  );
+  assert.deepEqual(missingOralPointer?.roles, ["oral-protocol", "oral-hint"]);
+  assert.equal(
+    missingOralPointer?.target.headingAnchor,
+    "unresolved-supportive-oral-defense-route",
+  );
+  assert.ok(
+    report.releaseInputPaths.some((path) =>
+      path
+        .replaceAll("\\", "/")
+        .endsWith("content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md"),
+    ),
+  );
+  assert.ok(
+    report.releaseInputPaths.every(
+      (path) =>
+        !path
+          .replaceAll("\\", "/")
+          .endsWith("content/source-maps/module24_cpython_performance_memory_source_research.md"),
+    ),
+  );
+});
+
 test("the M19 structural packet records the concurrency spine without hiding its missing Study Partner route", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
@@ -326,7 +389,7 @@ test("the M30 structural packet binds its mathematics spine without laundering a
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
-  assert.equal(report.summary.structuralCandidates, 9);
+  assert.equal(report.summary.structuralCandidates, 10);
   const packet = report.packetById.get("m30-probability-inference-structural-candidate");
   assert.equal(packet?.moduleId, "m30");
   assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m27", "m29"]);

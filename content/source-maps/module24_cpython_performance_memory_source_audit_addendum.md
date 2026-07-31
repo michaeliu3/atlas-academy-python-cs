@@ -15,10 +15,10 @@ release-evidence-policy artifact**; it is not learner-downloadable. The
 canonical M24 source map and the primary-source research note are also
 authoring boundaries rather than configured M24 learner downloads.
 
-A later non-promoting structural packet may include this addendum as a
-**hashable internal release input** only after its contract and release-input
-ledger deliberately allow it. That mechanical inclusion does **not** change
-M24's legacy-audit status, human-review status, availability, route position,
+The non-promoting M24 structural packet now includes this addendum as a
+**hashable internal release input**, deliberately allowed by its contract and
+release-input ledger. That mechanical inclusion does **not** change M24's
+legacy-audit status, human-review status, availability, route position,
 release evidence, deployment state, or publication state. A Git-tracked path
 or a hash never automatically makes the canonical map, this addendum, or the
 research note a learner-facing delivery artifact.

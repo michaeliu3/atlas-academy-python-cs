@@ -18,8 +18,17 @@ actually published.
   pinned interpreter source route, and the stale studio M24 → M25 handoff.
   The canonical M24 → authoring-only M32 route remains intact. This is not a
   learner-download, human-review, contract promotion, publication, deployment,
-  release-evidence, or security-clear claim; its structural packet remains
-  deliberately pending.
+  release-evidence, or security-clear claim.
+- Added M24's non-promoting structural packet: 37 typed local pointers bind its
+  canonical M23 → M24 → authoring-only M32 route, six-session runtime-evidence
+  spine, bounded studio/model artifacts, source route, diagnostic, dossier,
+  TA, and Study Partner surfaces. It preserves the immutable audit's five
+  ambiguous criteria and maps the genuinely missing module-specific
+  oral-defense protocol only to its explicit absence record. The authoring-only
+  audit addendum is now a hashable internal release input; the research note
+  remains authoring-only, and neither becomes a learner delivery artifact.
+  This is not a quality review, publication, deployment, release-evidence, or
+  security-clear claim.
 - Corrected the canonical route story across Module 24, Module 26, and the
   roadmap. M24 now points to authoring-only M32 and explicitly stops the
   readable runtime-evidence path; M25/M26 remain later preview-only synthesis
