@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Added an authoring-only M19 source-audit addendum that ties its concurrency
+  source classes to six sessions, reuse decisions, and release-truth checks.
+  It keeps the genuinely missing module-specific Study Partner route visible;
+  it is neither a learner download nor source-quality approval, publication
+  promotion, or release evidence.
 - Recorded the successful GitHub Course CI run for the M20 structural-packet
   source head (`f253b30…`) in the append-only provenance ledger. It records
   four successful named jobs on attempt 1, not a GitHub Release, private
