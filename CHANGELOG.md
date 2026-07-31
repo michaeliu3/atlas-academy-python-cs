@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Hardened all ten non-promoting legacy structural packets so every declared
+  session forward artifact now resolves to a typed `session-output` pointer at
+  a visible H3 inside its matching workbook session. The validator rejects an
+  unbound or misplaced output pointer; this adds 60 resolved structural
+  pointers (424 total) without changing human-review, availability,
+  publication, release, or learner-mastery status.
 - Added M24's authoring-only primary-source research note and source-audit
   addendum. They preserve its immutable five ambiguous criteria (rigor,
   transfer, visual/text alternative, diagnostic/misconceptions, and TA) and

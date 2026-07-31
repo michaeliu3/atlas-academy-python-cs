@@ -19,6 +19,13 @@ A bounded reference to a visible local workbook or source-map heading for one
 contract criterion. It is structural evidence, not an approval.
 _Avoid_: proof of quality, completion evidence
 
+**Session output pointer**:
+A typed evidence pointer that binds one declared forward artifact in an ordered
+session to a visible local workbook heading inside that session. It proves only
+the structural location and sequence of the artifact—not that a learner made
+it or that its pedagogy has been reviewed.
+_Avoid_: learner evidence, mastery proof
+
 **Pointer-present**:
 An audit status meaning that a criterion-specific structural evidence pointer
 resolves in the canonical local material.

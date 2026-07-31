@@ -58,7 +58,8 @@ const criterionRoles = new Map([
   ["study-partner-prompt", ["study-partner"]],
   ["forward-handoff", ["forward-handoff"]],
 ]);
-const evidenceRoles = new Set([...criterionRoles.values()].flat());
+const sessionOutputRole = "session-output";
+const evidenceRoles = new Set([...criterionRoles.values()].flat().concat(sessionOutputRole));
 const auditStatuses = new Set(["pointer-present", "ambiguous", "missing"]);
 const supportedSurfaces = new Set(["workbook", "canonical-source-map", "source-audit-addendum"]);
 const supportedArtifactKinds = new Set(["studio", "bounded-reference-model", "oral-guide"]);
@@ -149,9 +150,11 @@ async function headingsFor(siteRoot, repositoryPath, cache, label, errors) {
   if (cache.has(repositoryPath)) return cache.get(repositoryPath);
   const absolutePath = await requireTrackedRegularFile(siteRoot, repositoryPath, label, errors);
   if (!absolutePath) return null;
-  const headings = new Map(
-    extractTableOfContents(await readFile(absolutePath, "utf8")).map((heading) => [heading.id, heading]),
-  );
+  const ordered = extractTableOfContents(await readFile(absolutePath, "utf8"));
+  const headings = {
+    ordered,
+    byId: new Map(ordered.map((heading) => [heading.id, heading])),
+  };
   cache.set(repositoryPath, headings);
   return headings;
 }
@@ -176,6 +179,12 @@ async function resolvePointer(entry, pointer, siteRoot, headingCache, errors) {
     : null;
   if (!id) errors.push(`${label}.id must be lowercase kebab-case.`);
   if (!hasText(pointer?.label)) errors.push(`${label}.label must be non-empty.`);
+  const rolesAreValid = (
+    Array.isArray(pointer?.roles) &&
+    pointer.roles.length > 0 &&
+    new Set(pointer.roles).size === pointer.roles.length &&
+    pointer.roles.every((role) => evidenceRoles.has(role))
+  );
   if (!Array.isArray(pointer?.roles) || pointer.roles.length === 0 || new Set(pointer.roles).size !== pointer.roles.length) {
     errors.push(`${label}.roles must be a non-empty array of unique roles.`);
   } else {
@@ -193,13 +202,13 @@ async function resolvePointer(entry, pointer, siteRoot, headingCache, errors) {
   }
   const path = normalizedRepositoryPath(pointer?.target?.path, `${label}.target.path`, errors);
   const anchor = normalizedAnchor(pointer?.target?.headingAnchor, `${label}.target.headingAnchor`, errors);
-  if (!id || !path || !anchor || !supportedSurfaces.has(surface)) return null;
+  if (!id || !rolesAreValid || !path || !anchor || !supportedSurfaces.has(surface)) return null;
   if (path !== packetPathForSurface(entry, surface)) {
     errors.push(`${label}.target.path must match its declared ${surface} path.`);
     return null;
   }
   const headings = await headingsFor(siteRoot, path, headingCache, label, errors);
-  const heading = headings?.get(anchor);
+  const heading = headings?.byId.get(anchor);
   if (!heading) {
     errors.push(`${label} points to #${anchor}, which is not visible in ${path}.`);
     return null;
@@ -236,12 +245,15 @@ async function validateImplementationArtifact(entry, artifact, siteRoot, errors)
   return paths;
 }
 
-function validateSessionSpine(entry, courseModule, auditEntry, pointerById, errors) {
+async function validateSessionSpine(entry, courseModule, auditEntry, pointerById, workbookPath, siteRoot, headingCache, errors) {
   const label = `Module ${entry.moduleId} packet sessionSpine`;
   if (!Array.isArray(entry?.sessionSpine) || entry.sessionSpine.length !== 6) {
     errors.push(`${label} must declare exactly six ordered sessions.`);
     return;
   }
+  const workbookHeadings = workbookPath
+    ? await headingsFor(siteRoot, workbookPath, headingCache, `${label} workbook`, errors)
+    : null;
   const artifactIds = new Set();
   const expectedPrerequisites = courseModule.academicPrerequisiteNumbers.map(moduleIdForNumber);
   for (const [index, session] of entry.sessionSpine.entries()) {
@@ -251,7 +263,7 @@ function validateSessionSpine(entry, courseModule, auditEntry, pointerById, erro
       errors.push(`${sessionLabel}.sessionNumber must be ${index + 1}.`);
     }
     const pointer = pointerById.get(session?.pointerId);
-    if (!pointer || !pointer.roles.includes("session") || pointer.sessionNumber !== index + 1) {
+    if (!pointer || !Array.isArray(pointer.roles) || !pointer.roles.includes("session") || pointer.sessionNumber !== index + 1) {
       errors.push(`${sessionLabel}.pointerId must resolve its matching session pointer.`);
     } else if (pointer.target.path !== entry.workbookPath || pointer.target.headingAnchor !== auditEntry.sessionAnchors[index]) {
       errors.push(`${sessionLabel}.pointerId must match the legacy audit's ordered session anchor.`);
@@ -267,6 +279,52 @@ function validateSessionSpine(entry, courseModule, auditEntry, pointerById, erro
     } else {
       artifactIds.add(session.forwardArtifactId);
     }
+
+    const outputPointer = pointerById.get(session?.forwardArtifactId);
+    if (
+      !outputPointer ||
+      !Array.isArray(outputPointer.roles) ||
+      !outputPointer.roles.includes(sessionOutputRole) ||
+      outputPointer.sessionNumber !== index + 1
+    ) {
+      errors.push(`${sessionLabel}.forwardArtifactId must resolve its matching session-output pointer.`);
+      continue;
+    }
+    if (outputPointer.target.surface !== "workbook" || outputPointer.target.path !== workbookPath) {
+      errors.push(`${sessionLabel}.forwardArtifactId must target its canonical workbook.`);
+      continue;
+    }
+    const sessionHeading = workbookHeadings?.byId.get(pointer?.target?.headingAnchor);
+    const outputHeading = workbookHeadings?.byId.get(outputPointer.target.headingAnchor);
+    const sessionIndex = workbookHeadings?.ordered.findIndex(
+      ({ id }) => id === pointer?.target?.headingAnchor,
+    ) ?? -1;
+    const outputIndex = workbookHeadings?.ordered.findIndex(
+      ({ id }) => id === outputPointer.target.headingAnchor,
+    ) ?? -1;
+    const nextSessionIndex = workbookHeadings?.ordered.findIndex(
+      (heading, headingIndex) => headingIndex > sessionIndex && heading.depth <= sessionHeading?.depth,
+    ) ?? -1;
+    if (
+      !sessionHeading ||
+      !outputHeading ||
+      sessionHeading.depth !== 2 ||
+      outputHeading.depth !== 3 ||
+      outputIndex <= sessionIndex ||
+      (nextSessionIndex !== -1 && outputIndex >= nextSessionIndex)
+    ) {
+      errors.push(`${sessionLabel}.forwardArtifactId must resolve a visible h3 inside its matching session.`);
+    }
+  }
+
+  const sessionOutputPointers = [...pointerById.values()].filter(
+    (pointer) => Array.isArray(pointer.roles) && pointer.roles.includes(sessionOutputRole),
+  );
+  if (
+    sessionOutputPointers.length !== artifactIds.size ||
+    sessionOutputPointers.some((pointer) => !artifactIds.has(pointer.id))
+  ) {
+    errors.push(`${label}.session-output pointers must bind exactly the declared forward artifacts.`);
   }
 }
 
@@ -299,7 +357,7 @@ function validateCriteria(entry, auditEntry, pointerById, errors) {
       errors.push(`${criterionLabel}.pointerIds must all resolve in the packet pointer table.`);
     }
     for (const requiredRole of criterionRoles.get(criterionId) ?? []) {
-      if (!pointers.some((pointer) => pointer.roles.includes(requiredRole))) {
+      if (!pointers.some((pointer) => Array.isArray(pointer.roles) && pointer.roles.includes(requiredRole))) {
         errors.push(`${criterionLabel} requires a ${requiredRole} pointer role.`);
       }
     }
@@ -478,7 +536,16 @@ export async function validateLegacyModuleContractPacketRegistry(
         releaseInputPaths.add(resolve(siteRoot, resolved.target.path));
       }
     }
-    validateSessionSpine(entry, courseModule, auditEntry, pointerById, errors);
+    await validateSessionSpine(
+      entry,
+      courseModule,
+      auditEntry,
+      pointerById,
+      workbookPath,
+      siteRoot,
+      headingCache,
+      errors,
+    );
     validateCriteria(entry, auditEntry, pointerById, errors);
 
     if (!Array.isArray(entry?.implementationArtifacts) || entry.implementationArtifacts.length === 0) {

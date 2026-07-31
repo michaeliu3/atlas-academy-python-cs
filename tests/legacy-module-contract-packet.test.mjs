@@ -26,7 +26,7 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
 
   assert.deepEqual(report.summary, {
     structuralCandidates: 10,
-    resolvedPointers: 364,
+    resolvedPointers: 424,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -48,6 +48,10 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
     ),
   );
   assert.ok(report.releaseInputPaths.every((path) => path.replaceAll("\\", "/").includes("content/")));
+  const sessionOutput = packet.pointers.find(({ id }) => id === "m29-limit-continuity-calibration-note");
+  assert.deepEqual(sessionOutput?.roles, ["session-output"]);
+  assert.equal(sessionOutput?.sessionNumber, 1);
+  assert.equal(sessionOutput?.target.headingAnchor, "session-1-code-reading-task");
 });
 
 test("the M20 structural packet binds the networking spine without promoting its ambiguous evidence", async () => {
@@ -63,6 +67,13 @@ test("the M20 structural packet binds the networking spine without promoting its
   assert.equal(packet?.packetState, "structural-candidate");
   assert.equal(packet?.humanReviewState, "not-reviewed");
   assert.equal(packet?.publicationEffect, "none");
+
+  for (const session of packet?.sessionSpine ?? []) {
+    const outputPointer = packet?.pointers.find(({ id }) => id === session.forwardArtifactId);
+    assert.deepEqual(outputPointer?.roles, ["session-output"]);
+    assert.equal(outputPointer?.sessionNumber, session.sessionNumber);
+    assert.equal(outputPointer?.target.surface, "workbook");
+  }
 
   const statusByCriterion = new Map(
     packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
@@ -447,6 +458,60 @@ test("the packet rejects route drift, audit-status laundering, unreviewed promot
   await assert.rejects(
     validateLegacyModuleContractPacketRegistry(graph, brokenSession, { siteRoot }),
     /pointerId must resolve its matching session pointer/u,
+  );
+
+  const unboundForwardArtifact = structuredClone(registry);
+  unboundForwardArtifact.modules[0].sessionSpine[0].forwardArtifactId = "m29-unbound-artifact";
+  await assert.rejects(
+    validateLegacyModuleContractPacketRegistry(graph, unboundForwardArtifact, { siteRoot }),
+    /forwardArtifactId must resolve its matching session-output pointer/u,
+  );
+
+  const misplacedForwardArtifact = structuredClone(registry);
+  misplacedForwardArtifact.modules[0].pointers.find(
+    ({ id }) => id === "m29-limit-continuity-calibration-note",
+  ).target.headingAnchor = "3-session-1--limits-continuity-metric-spaces-and-compactness";
+  await assert.rejects(
+    validateLegacyModuleContractPacketRegistry(graph, misplacedForwardArtifact, { siteRoot }),
+    /forwardArtifactId must resolve a visible h3 inside its matching session/u,
+  );
+
+  const crossSessionForwardArtifact = structuredClone(registry);
+  crossSessionForwardArtifact.modules[0].pointers.find(
+    ({ id }) => id === "m29-limit-continuity-calibration-note",
+  ).target.headingAnchor = "session-2-prediction-before-reveal";
+  await assert.rejects(
+    validateLegacyModuleContractPacketRegistry(graph, crossSessionForwardArtifact, { siteRoot }),
+    /forwardArtifactId must resolve a visible h3 inside its matching session/u,
+  );
+
+  const malformedOutputRoles = structuredClone(registry);
+  malformedOutputRoles.modules[0].pointers.find(
+    ({ id }) => id === "m29-limit-continuity-calibration-note",
+  ).roles = null;
+  await assert.rejects(
+    validateLegacyModuleContractPacketRegistry(graph, malformedOutputRoles, { siteRoot }),
+    /roles must be a non-empty array of unique roles/u,
+  );
+
+  const malformedWorkbookPath = structuredClone(registry);
+  malformedWorkbookPath.modules[0].workbookPath = null;
+  await assert.rejects(
+    validateLegacyModuleContractPacketRegistry(graph, malformedWorkbookPath, { siteRoot }),
+    /workbookPath must be a normalized repository-relative path without escapes/u,
+  );
+
+  const orphanSessionOutput = structuredClone(registry);
+  orphanSessionOutput.modules[0].pointers.push({
+    ...orphanSessionOutput.modules[0].pointers.find(
+      ({ id }) => id === "m29-limit-continuity-calibration-note",
+    ),
+    id: "m29-orphan-session-output",
+    label: "Orphan session output",
+  });
+  await assert.rejects(
+    validateLegacyModuleContractPacketRegistry(graph, orphanSessionOutput, { siteRoot }),
+    /session-output pointers must bind exactly the declared forward artifacts/u,
   );
 
   const noDebugRole = structuredClone(registry);
