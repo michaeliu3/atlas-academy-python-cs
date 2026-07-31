@@ -11,11 +11,13 @@
   contract or an authority boundary. Module 24 asks: **given one fixed,
   correct semantic workload, what evidence supports a narrow claim about its
   cost?**
-- **Forward connection:** Module 25, *Evidence-Grounded Intelligent and
-  Human-Centered Systems*, reuses the same discipline for model, ranking, visualization,
-  accessibility, and human-impact claims. A faster pipeline that changes
-  outputs, privileges, privacy, accessibility, or an uncertainty label has
-  not preserved the Atlas contract.
+- **Canonical forward connection: Module 32, _Systems Languages, Scientific
+  Python & Accelerators_.** Module 32 is authoring-only in the current course
+  release, so Module 24 ends the readable runtime-evidence path rather than
+  unlocking a next Core module. The later M25/M26 preview workbooks reuse this
+  discipline only after the M31–M36 chain; they are not Module 24's direct
+  learner path. A faster pipeline that changes outputs, privileges, privacy,
+  accessibility, or an uncertainty label has not preserved the Atlas contract.
 - **Semantic baseline:** Python 3.14 language and standard-library
   documentation. Language-reference material owns source-level semantics, not
   a specific object layout, bytecode sequence, allocation policy, timer
@@ -93,15 +95,19 @@ semantic contract + independent oracle + fixed workload family
     → bounded conclusion, counterexample, and next experiment
 ~~~
 
-### M23 → M24 → M25 connected sequence
+### M23 → M24 → M32 (authoring-only) connected sequence
 
-| Boundary | Module 23 gives the learner | Module 24 adds | Module 25 carries forward |
+| Boundary | Module 23 gives the learner | Module 24 adds | Later M25 preview reuses after M31–M36 |
 |---|---|---|---|
 | Meaning | An AST/bytecode display is not language semantics. | An unchanged result must be demonstrated before a cost comparison means anything. | A model score or ranking is not a user benefit without an evaluation contract. |
 | Implementation | A disassembly is a version-labelled CPython observation. | Frames, specialization, reference counting, GC, and allocators are studied as CPython/build observations. | Library/model/runtime behavior becomes an explicitly versioned system component. |
 | Evidence | A local evaluator result is a bounded model observation. | A timed run, allocation trace, and OS counter each support different narrow claims. | Offline metric, usability observation, and impact review each have a separate scope. |
 | Authority/privacy | A language should not gain authority from source text. | Instrumentation and reports avoid raw data, sensitive paths, and unbounded artifact capture. | Data/model/agent boundaries retain minimisation and human oversight. |
 | Change | A repaired evaluator needs tests and a clear invariant. | An optimization is a change proposal with a semantic oracle, benchmark protocol, and rollbackable diff. | A helpful feature needs technical, human, and governance evidence. |
+
+Module 32 is the canonical forward module, but it is authoring-only today.
+The M25/M26 materials in the final column are later preview-only synthesis
+connections, not a direct M24 route or a prerequisite bypass.
 
 ### Required Atlas checkpoint invariant
 
@@ -176,12 +182,11 @@ or a replacement for workload-specific performance engineering.
 
 ### Deferred or explicitly out of scope
 
-- **Module 25:** statistical/model evaluation, data-quality uncertainty,
-  ranking/recommendation tradeoffs, human factors, accessibility,
-  visualization, and human oversight.
-- **Module 26:** a production-like release argument joining correctness,
-  performance, security, reliability, user impact, maintenance, and a
-  defended architecture.
+- **Later preview-only synthesis (Modules 25–26):** statistical/model
+  evaluation, data-quality uncertainty, ranking/recommendation tradeoffs,
+  human factors, accessibility, visualization, oversight, and a
+  production-like release argument. These modules sit after the M31–M36 chain
+  and are not Module 24's forward route.
 - **Specialist study:** C-extension authoring, memory-corruption debugging,
   custom allocator hooks, benchmark-suite governance, OS/kernel tracing,
   hardware-counter analysis, compiler/JIT development, GPU programming,
@@ -683,8 +688,9 @@ TA repair prompts:
 - [ ] Module 5 algorithmic reasoning, Module 6–9 representations, Module 13
   evidence, Module 17 layers, Module 19 execution configuration, and Module
   23 semantics are explicitly retrieved.
-- [ ] The M25 handoff says that technical speed is not human benefit,
-  accessibility, fairness, or responsible AI evaluation.
+- [ ] The later-preview note says that technical speed is not human benefit,
+  accessibility, fairness, or responsible AI evaluation—and does not present
+  M25/M26 as Module 24's direct forward route.
 
 ### Source and version accuracy
 

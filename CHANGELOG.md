@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Corrected the canonical route story across Module 24, Module 26, and the
+  roadmap. M24 now points to authoring-only M32 and explicitly stops the
+  readable runtime-evidence path; M25/M26 remain later preview-only synthesis
+  material rather than a direct bypass. M26 now names itself a full orientation
+  preview, and its Days 56–60 outcome is prospective until M31–M36 exist. The
+  generated manifest and release-input hashes follow the checked-in material.
+  This is route-truth work, not M32 publication, M25/M26 Core opening, review,
+  deployment, or release approval.
 - Added an authoring-only M23 source-audit addendum that ties language,
   interpreter, typing, implementation-evidence, and pedagogy source classes
   to its six sessions, reuse decisions, bounded-model limits, and

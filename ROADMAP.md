@@ -23,10 +23,12 @@ oral-defense, or project evidence shows a necessary bridge.
 
 - [x] Module 23 — programming languages, interpreters, bounded evaluation.
 - [x] Module 24 — CPython, performance, and memory evidence.
-- [x] Release Module 25 — evidence-grounded intelligent and human-centered
-  systems—as a preview while its M31–M36 academic prerequisites are authored.
-- [x] Release Module 26 — systems capstone, open-source stewardship, and oral
-  architecture defense—as a preview until Module 25 becomes Core-open.
+- [x] Publish the Module 25 orientation preview — evidence-grounded intelligent
+  and human-centered systems—while its M31–M36 academic prerequisites are
+  authored.
+- [x] Publish the Module 26 orientation preview — systems capstone,
+  open-source stewardship, and oral architecture defense—until Module 25
+  becomes Core-open.
 
 ## 60-day Atlas Core expansion
 
@@ -54,7 +56,11 @@ oral-defense, or project evidence shows a necessary bridge.
 - [ ] Reweave M25/M26 and their capstone evidence packet against the released
   M28–M36 artifacts.
 
-## 60-day first-pass checkpoints
+## Prospective 60-day checkpoints after M31–M36
+
+These are the intended full-course checkpoints, not the current reader route:
+M31–M36 remain authoring-only, and M25/M26 remain orientation previews without
+synthesis credit.
 
 - [ ] Day 1: placement diagnostic and learning contract.
 - [ ] Days 2–9: establish execution, abstraction, proof, cost, and discrete
@@ -80,8 +86,10 @@ oral-defense, or project evidence shows a necessary bridge.
 5. `v0.5-languages` — Module 23 and its Language Lab.
 6. `v0.5.2-runtime-evidence` — Module 24 and its Runtime Evidence
    Observatory.
-7. `v0.5.3-decision-evidence` — Module 25 and its Next-Step Evidence Studio.
-8. `v0.6-capstone` — Module 26, final defense, full repository audit.
+7. `v0.5.3-decision-evidence` — prospective Core opening for Module 25 and
+   its Next-Step Evidence Studio after M31–M36 evidence exists.
+8. `v0.6-capstone` — prospective Module 26 final defense and full repository
+   audit after Module 25 becomes Core-open.
 
 Each milestone requires passing portal/model checks, source attribution review,
 accessibility review, release notes, and a statement of known limitations.

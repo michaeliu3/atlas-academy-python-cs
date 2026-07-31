@@ -2,17 +2,28 @@
 
 **Arc V — Languages, intelligence, and integrated systems defense**
 
-> **Bridge:** Module 25 ended with a bounded decision-support feature and an
-> evidence packet. This module asks the harder systems question: can that
-> feature live inside a maintained product without borrowing authority from a
-> demo, a green check, a benchmark, an agent, or a polished interface?
+> **Intended bridge after prerequisite evidence exists:** Module 25 ends with a
+> bounded decision-support feature and an evidence packet. This module then
+> asks the harder systems question: can that feature live inside a maintained
+> product without borrowing authority from a demo, a green check, a benchmark,
+> an agent, or a polished interface?
 
-**Days 56–60 of the 60-day Atlas Core**
+## Preview boundary
 
-**Primary outcome:** You can make and defend a bounded release decision for one
-Atlas capability (or a comparable open-source contribution). You can trace the
-claim through representation, algorithms, contracts, tests, data, runtime,
-network, trust, human control, packaging, maintenance, and known unknowns.
+This is a full orientation preview, not an unlocked Days 56–60 capstone or a
+source of synthesis credit. Its prerequisite path includes the authoring-only
+M31–M36 chain through Module 25. Read it to see the eventual integration
+standard; do not treat its project, studio, or oral-defense material as a
+substitute for the unavailable prerequisite evidence.
+
+**Prospective Days 56–60 of the 60-day Atlas Core, after M31–M36 are
+available**
+
+**Intended outcome after that prerequisite chain is available:** You can make
+and defend a bounded release decision for one Atlas capability (or a comparable
+open-source contribution). You can trace the claim through representation,
+algorithms, contracts, tests, data, runtime, network, trust, human control,
+packaging, maintenance, and known unknowns.
 
 This is not a last-minute build marathon. It is an advanced evidence exercise:
 read the system, recover its architecture, diagnose a failure, review a

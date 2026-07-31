@@ -42,6 +42,23 @@ test("readable projections stop at unavailable route nodes instead of bypassing 
   assert.equal(byNumber.get(25)?.previousRouteNumber, 36);
 });
 
+test("written route handoffs preserve M24's authoring-only continuation and the M26 preview boundary", async () => {
+  const [m24Workbook, m24SourceMap, m26Workbook, roadmap] = await Promise.all([
+    readFile(new URL("../content/modules/24_cpython_performance_memory.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/source-maps/module24_cpython_performance_memory_source_map.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/modules/26_systems_capstone_open_source_stewardship.md", import.meta.url), "utf8"),
+    readFile(new URL("../ROADMAP.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(m24Workbook, /Canonical forward handoff: Module 32/u);
+  assert.match(m24Workbook, /Module 32 is authoring-only/u);
+  assert.match(m24SourceMap, /Canonical forward connection: Module 32/u);
+  assert.match(m24SourceMap, /M23 → M24 → M32 \(authoring-only\) connected sequence/u);
+  assert.match(m26Workbook, /## Preview boundary/u);
+  assert.match(m26Workbook, /orientation preview/u);
+  assert.match(roadmap, /## Prospective 60-day checkpoints after M31–M36/u);
+});
+
 test("the graph rejects a source-map path that escapes the checked-in course inputs", async () => {
   const graph = await loadCourseGraph();
   const unsafeGraph = structuredClone(graph);

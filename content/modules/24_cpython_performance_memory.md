@@ -116,16 +116,18 @@ flowchart LR
     R --> D["bounded decision"]
     P --> D
     X --> D
-    D --> M25["M25: evidence-grounded<br/>intelligent systems"]
+    D --> M32["M32: systems languages,<br/>scientific Python & accelerators<br/>(authoring-only)"]
 ~~~
 
 **Text equivalent:** earlier modules tell us what the program means, what data
 structures and APIs promise, what resources the operating system mediates, and
 why an observation has limited scope. Module 24 adds a disciplined bridge from
 that semantic model to a particular CPython implementation and a controlled
-experiment. Module 25 applies the same restraint to a score, model, or AI
-suggestion; Module 26 requires a capstone owner to defend the whole evidence
-chain.
+experiment. **Canonical forward handoff: Module 32.** Module 32 is
+authoring-only in the current course release, so Module 24 ends the currently
+readable runtime-evidence path rather than unlocking a next Core module.
+Modules 25 and 26 are later preview-only synthesis/capstone material after the
+M31–M36 chain; they are not Module 24's direct learner path.
 
 ### 1.2 The fixed Atlas incident
 
@@ -752,7 +754,7 @@ reporting incident and include:
 
 ### Acceptance rubric
 
-| Dimension | Emerging | Ready for Module 25 |
+| Dimension | Emerging | Evidence-ready handoff |
 |---|---|---|
 | Semantic discipline | repeats “same output” | names outputs, errors, invariants, and tests |
 | Evidence scope | treats all numbers alike | labels contract, CPython, measurement, OS/native, hypothesis |
@@ -774,11 +776,16 @@ reporting incident and include:
 - **In two weeks:** defend one Atlas patch to a Study Partner who changes the
   workload or runtime version.
 
-Module 25 transfers this discipline to evidence-grounded intelligent and
-human-centered systems. A score, ranking, model, agent output, or retrieved
-text is not a decision, an authority grant, a probability, or a human benefit
-until its data lineage, evaluation, policy, explanation, and override path are
-explicit.
+**Canonical forward handoff: Module 32.** Module 32 is authoring-only in the
+current course release, so this dossier is a stopping point for the readable
+runtime-evidence branch—not an unlock token for another module. When the
+advanced chain is released, carry this discipline into its systems-language and
+accelerator work. Modules 25 and 26 remain later preview-only synthesis and
+capstone material after M31–M36, not Module 24's next learning step. Their
+shared conceptual lesson remains useful: a score, ranking, model, agent output,
+or retrieved text is not a decision, an authority grant, a probability, or a
+human benefit until its data lineage, evaluation, policy, explanation, and
+override path are explicit.
 
 ---
 

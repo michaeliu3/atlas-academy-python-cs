@@ -138,7 +138,7 @@
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73"
+      "sha256": "83d440d76e3e4e9b2620a1a218263ef3519c46c3dafa5ca01fe03187581d6d8e"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
@@ -146,7 +146,7 @@
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "4d90e27b9e2670927b1d3c284a7c87126e784accd6b4b0fad259b414e3f84751"
+      "sha256": "d38cec772c5e6c99344827aa21b36a840a7a29fa9af544a765d8534107814b85"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -222,7 +222,7 @@
     },
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
-      "sha256": "b73bd1be92bb1cca8745bbc3891b2536a92dfcbd788d0139e5b191297b870260"
+      "sha256": "b01f19cabe7c905c583a34feb1fa271486ab6e415026c26c68904873e9cf95fe"
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
