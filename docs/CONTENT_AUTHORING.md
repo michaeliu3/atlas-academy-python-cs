@@ -143,10 +143,42 @@ reclassified as deployed course content. The current
 provenance-only exception: its hash preserves the *do not publish* boundary;
 it does not deploy or expose M31.
 
-Teaching-test inputs must be a top-level `tests/<name>.test.mjs` file. The
-normal `pnpm test` command discovers that exact set deterministically, so a
-module cannot satisfy the contract by naming an inert test file that CI never
-executes.
+Teaching-test inputs must be either a top-level `tests/<name>.test.mjs` file
+or a canonical `public/downloads/test_moduleNN_reference.py` teaching-model
+suite. `pnpm test` discovers the first set deterministically; the dedicated
+Python CI job discovers the second set with
+`python -m unittest discover -s public/downloads -p "test_module*_reference.py"`.
+The generic contract check establishes only that a declared test is discovered
+by a configured course surface and structurally names the module plus a bound
+artifact. It is not, by itself, proof of behavioral coverage. When an
+`interaction-reference-model-and-teaching-tests` criterion binds a canonical
+`public/downloads/moduleNN_reference.py` model, the stricter rule applies: it
+must bind `public/downloads/test_moduleNN_reference.py` and the Python CI
+workflow must declare `scripts/verify_teaching_model_exercises.py` in a
+standard-shell target step without a direct execution override. That verifier
+runs each discovered suite and
+requires an observed real parent-process Python frame defined by its paired
+reference model; skipped tests, lazy assertion messages, locally shadowed
+stand-ins, and direct synthetic profile callbacks therefore cannot satisfy the
+runtime check. It deliberately fails closed if model work happens only in a
+child process. This is a trusted checked-in-test regression check, not a
+security sandbox for adversarial Python test code: source review and later
+source-commit CI evidence remain separate. The local contract validates that
+this CI route is configured—it does not claim the verifier ran for a particular
+candidate. A matching path or structural check still does not prove browser
+behavior, review, or release.
+
+M29's candidate-only preflight is covered by its focused Node regression test,
+not by a release record. Its loader accepts only Git-tracked canonical
+`content/course/contracts/evidence-preflight/mNN.v1.json` paths whose working
+content matches the Git index; evidence paths reject traversal, symlinks, Git
+pathspec interpretation, and unstaged input drift. For its v1 candidate record,
+the explicit stable release nonclaim, release-boundary claim and limitation,
+and visible candidate-boundary documentation are deliberately locked; changing
+that wording requires a reviewed schema/code change rather than silently
+preserving a passing candidate state. The canonical graph also requires every
+non-verified module to keep an `unrecorded` release with a null record ID; M29
+pins that tuple directly as an extra candidate-boundary check.
 
 For a future v3 verified release, do not insert a final candidate SHA or
 Actions URL into the same commit that needs that evidence. First create and

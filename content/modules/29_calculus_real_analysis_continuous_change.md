@@ -104,6 +104,9 @@ with a fluent summary.
 ### 1.2 Prerequisite and forward map
 
 ~~~mermaid
+%% atlas-diagram-id: m29-continuous-change-prerequisite-map
+%% atlas-diagram-title: Discrete proof and linear representation lead to continuous-change reasoning and later applications
+%% atlas-diagram-alt: Module 27 supplies definitions, quantifiers, proof, and counterexamples, while Module 28 supplies norms, linear maps, conditioning, and representation. Module 29 combines them for limits, derivatives, integrals, and convergence; it then supports probability, optimization, systems execution, and learning modules, while M25 remains later synthesis.
 flowchart LR
     M27["M27: definitions, quantifiers, proof"] --> M29["M29: limits, derivatives + convergence"]
     M28["M28: norms, maps, conditioning"] --> M29

@@ -21,6 +21,10 @@
       "sha256": "1c381fcbe9488680590f97198d23f6fb236b72664db177ac4021dc1af8a6d20d"
     },
     {
+      "path": "content/course/contracts/companions/m29.v1.json",
+      "sha256": "9acdbb8452f08b289c682d50d0596a2e7cf249efee4bd56d4d47f0464927ee30"
+    },
+    {
       "path": "content/course/contracts/companions/m31.v1.json",
       "sha256": "4ae2e421c5263c0f75afeeb77daf6c6f2b3679f6202b6a274ee7d16c79d63ebc"
     },
@@ -58,7 +62,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "1e9e662e99fb949497450ac1aaefb0eddb7ff594d9ce84c2a0c7d5990d728b4f"
+      "sha256": "567c3f6b6adfe4279cd36a25cfe511f05578141a271e6ef9ab17027b3c0cf67f"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -178,7 +182,7 @@
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
-      "sha256": "c02d1e592276be7a418aa7502f9c9a1a7a614db336b2a9982772786c2bd8f152"
+      "sha256": "4679580e4975b41e81c1743e6536e2aeea305decd03000651be375bae1070f0e"
     },
     {
       "path": "content/modules/30_probability_statistics_scientific_inference.md",

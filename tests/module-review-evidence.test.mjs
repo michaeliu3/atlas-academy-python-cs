@@ -154,6 +154,24 @@ test("a module-specific evidence record resolves tracked Markdown headings, JSON
   );
 });
 
+test("evidence inputs refuse a worktree file that differs from its Git index", async (t) => {
+  const root = await createTrackedFixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const record = await loadModuleEvidenceRecord("content/reviews/m01.evidence.v1.json", {
+    siteRoot: root,
+  });
+  await writeFixture(
+    root,
+    "content/modules/m01.md",
+    "# Module 1\n\n## First principles\n\nAn unindexed replacement must not become evidence.\n",
+  );
+
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(record, { siteRoot: root }),
+    /must resolve to a Git-tracked regular local file/i,
+  );
+});
+
 test("a review record binds the exact tracked evidence digest and its criterion-level judgment", async (t) => {
   const root = await createTrackedFixture();
   t.after(() => rm(root, { recursive: true, force: true }));

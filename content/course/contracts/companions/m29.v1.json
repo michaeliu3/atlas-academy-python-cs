@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m29",
+  "purpose": "Freeze a module-specific M29 Teaching Assistant, Study Partner, and M30 handoff context for a future human-reviewed contract without changing M29's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/28",
+    "digest": "sha256:f07a6b70ae6cd7d45b9c25cd83c64cf5c622a597076ed20238b539571cb41556"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected continuous-change claim. Ask for the domain, metric or coordinates, limiting process, and the smallest exact or finite trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one definition or hypothesis visible, reconstruct one derivation or code/shape trace, name one counterexample or numerical boundary, and distinguish what the evidence supports from what it cannot decide.",
+    "repairMove": "Ask for a prediction before correction; change exactly one regularity, region, convergence, unit, step-size, dtype, or tolerance premise; then offer the smallest hint or counterexample that lets the learner revise without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: define notation, render a short derivation or labelled code trace, give plain-language fallback, and rehearse one claim-to-assumption-to-boundary chain at a time.",
+    "changedPremise": "Change one of the metric, differentiability condition, convergence mode, coordinate map, determinant sign, step size, finite precision rule, or stopping tolerance. Ask for a prediction before looking at a counterexample, trace, or theorem condition.",
+    "taHandoff": "End with the learner's selected claim card, attempted derivation or trace, confidence, unresolved misconception, one counterexample or finite limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m30",
+    "carryArtifact": "Carry a continuous-change evidence card: domain, metric or units, exact object, assumptions, local derivation or finite trace, error or convergence boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before treating a limit or numerical trace as probability or inference evidence in M30, what measurable space, random variable, distributional assumption, convergence mode, and finite-sample boundary must become explicit?",
+    "boundary": "M30 is the only canonical forward handoff. References to M31, M32, M35, M36, M25, or M26 are later applications or synthesis connections, not a learner-navigation bypass or release claim."
+  }
+}

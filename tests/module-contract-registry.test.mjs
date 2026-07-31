@@ -236,8 +236,8 @@ test("the registry rejects missing modules, forged audit evidence, and a direct 
   graphM25.state.availability = "published";
   graphM25.state.readerAccess = "full";
   graphM25.state.release = {
-    state: "candidate-recorded",
-    recordId: "candidate-m25",
+    state: "deployed-recorded",
+    recordId: "m25-forged-deployment",
   };
   registryM25.contractState = "verified";
   registryM25.release = {

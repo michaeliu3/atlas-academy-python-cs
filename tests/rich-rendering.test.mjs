@@ -194,3 +194,24 @@ test("Module 8's authored diagrams render after accessibility metadata is remove
     assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
   }
 });
+
+test("Module 29's authored prerequisite map renders after accessibility metadata is removed", async () => {
+  const moduleTwentyNine = await readFile(
+    new URL("../content/modules/29_calculus_real_analysis_continuous_change.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleTwentyNine, {
+    sourcePath: "content/modules/29_calculus_real_analysis_continuous_change.md",
+  });
+
+  assert.equal(blocks.length, 1);
+  const [block] = blocks;
+  const markup = await renderSafeMermaidSvg({
+    label: block.metadata.title,
+    describedById: `${block.metadata.id}-alternative`,
+    renderId: "atlas-m29-render-1",
+    source: block.renderSource,
+  });
+  assert.match(markup, /<svg\b/iu);
+  assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
+});

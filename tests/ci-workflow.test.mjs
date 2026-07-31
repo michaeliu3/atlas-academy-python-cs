@@ -3,6 +3,10 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import {
+  courseWorkflowRunsCommand,
+  teachingModelRuntimeExerciseVerifierCommand,
+} from "../scripts/module-contract-registry.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
@@ -20,4 +24,134 @@ test("Course CI pins every third-party action to a reviewed immutable commit", a
   assert.match(workflow, /actions\/checkout@11bd71901bbe5b1630ceea73d27597364c9af683/u);
   assert.match(workflow, /actions\/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020/u);
   assert.match(workflow, /actions\/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065/u);
+});
+
+test("Teaching-model CI proves the runtime exercise verifier before the ordinary suite", async () => {
+  const workflow = await readFile(workflowPath, "utf8");
+  const verifierTests = 'python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"';
+  const verifier = teachingModelRuntimeExerciseVerifierCommand;
+  const suite = 'python -m unittest discover -s public/downloads -p "test_module*_reference.py"';
+
+  assert.ok(courseWorkflowRunsCommand(workflow, verifierTests));
+  assert.ok(courseWorkflowRunsCommand(workflow, verifier));
+  assert.ok(courseWorkflowRunsCommand(workflow, suite));
+  assert.ok(workflow.indexOf(verifierTests) < workflow.indexOf(verifier));
+  assert.ok(workflow.indexOf(verifier) < workflow.indexOf(suite));
+  assert.equal(courseWorkflowRunsCommand(`# run: ${verifier}`, verifier), false);
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        run: ${verifier}`,
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        if: false\n        run: ${verifier}`,
+      ),
+      verifier,
+    ),
+    false,
+    "a disabled verifier step is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        "    runs-on: ubuntu-latest\n    needs: portal",
+        "    runs-on: ubuntu-latest\n    if: false\n    needs: portal",
+      ),
+      verifier,
+    ),
+    false,
+    "a disabled teaching-model job is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        run: ${verifier}`,
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        continue-on-error: true\n        run: ${verifier}`,
+      ),
+      verifier,
+    ),
+    false,
+    "an error-tolerant verifier step is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        run: ${verifier}`,
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        "if": false\n        run: ${verifier}`,
+      ),
+      verifier,
+    ),
+    false,
+    "a quoted disabled verifier key is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        run: ${verifier}`,
+        `      - name: Verify discovered teaching-model suites execute reference-model code\n        'continue-on-error' : true\n        run: ${verifier}`,
+      ),
+      verifier,
+    ),
+    false,
+    "a quoted error-tolerance key with YAML whitespace is not CI evidence",
+  );
+  for (const [injectedStep, label] of [
+    ["shell: echo {0}", "a custom verifier shell"],
+    ["working-directory: .", "a verifier working-directory override"],
+    ["env:\n          PATH: /tmp/atlas-fake-bin", "a verifier environment override"],
+  ]) {
+    assert.equal(
+      courseWorkflowRunsCommand(
+        workflow.replace(
+          `      - name: Verify discovered teaching-model suites execute reference-model code\n        run: ${verifier}`,
+          `      - name: Verify discovered teaching-model suites execute reference-model code\n        ${injectedStep}\n        run: ${verifier}`,
+        ),
+        verifier,
+      ),
+      false,
+      `${label} is not CI evidence`,
+    );
+  }
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        "permissions:\n  contents: read",
+        "defaults:\n  run:\n    shell: echo {0}\n\npermissions:\n  contents: read",
+      ),
+      verifier,
+    ),
+    false,
+    "a workflow-level shell default is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        "    timeout-minutes: 15\n    strategy:",
+        "    timeout-minutes: 15\n    env:\n      PATH: /tmp/atlas-fake-bin\n    strategy:",
+      ),
+      verifier,
+    ),
+    false,
+    "a job-level environment override is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        "    timeout-minutes: 15\n    strategy:",
+        "    timeout-minutes: 15\n    defaults:\n      run:\n        shell: echo {0}\n    strategy:",
+      ),
+      verifier,
+    ),
+    false,
+    "a job-level shell default is not CI evidence",
+  );
+  assert.equal(
+    courseWorkflowRunsCommand(
+      workflow.replace(
+        "permissions:\n  contents: read",
+        "env:\n  PATH: /tmp/atlas-fake-bin\n\npermissions:\n  contents: read",
+      ),
+      verifier,
+    ),
+    false,
+    "a workflow-level environment override is not CI evidence",
+  );
 });

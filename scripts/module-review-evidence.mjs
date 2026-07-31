@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
-import { lstat, readFile } from "node:fs/promises";
+import { lstat, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -53,10 +53,30 @@ const inputRoles = new Set([
 ]);
 const learningCompanionPathPattern =
   /^content\/course\/contracts\/companions\/m(?:0[1-9]|[1-9]\d)\.v1\.json$/u;
+const discoveredNodeTestPathPattern = /^tests\/[a-z0-9][a-z0-9._-]*\.test\.mjs$/u;
+const discoveredPythonTeachingTestPathPattern =
+  /^public\/downloads\/test_module(?:0[1-9]|[1-9]\d)_reference\.py$/u;
 const reviewOutcomes = new Set(["approved", "changes-requested"]);
 
 function hasText(value) {
   return typeof value === "string" && value.trim() !== "";
+}
+
+/**
+ * The course has two deliberate executable test surfaces. Portal/contract
+ * tests are discovered by scripts/run-course-tests.mjs from top-level tests/;
+ * local Python teaching-model tests are discovered by the dedicated Python CI
+ * job from public/downloads/. A role-labelled arbitrary file is not test
+ * evidence.
+ */
+export function teachingTestDiscoveryKind(repositoryPath) {
+  if (discoveredNodeTestPathPattern.test(repositoryPath ?? "")) return "node";
+  if (discoveredPythonTeachingTestPathPattern.test(repositoryPath ?? "")) return "python";
+  return null;
+}
+
+export function isDiscoveredTeachingTestPath(repositoryPath) {
+  return teachingTestDiscoveryKind(repositoryPath) !== null;
 }
 
 function isPlainObject(value) {
@@ -161,14 +181,25 @@ async function isTrackedRegularFile(siteRoot, repositoryPath) {
   if (pathFromRoot !== repositoryPath) return false;
   const stats = await lstat(absolutePath).catch(() => null);
   if (!stats || !stats.isFile() || stats.isSymbolicLink()) return false;
-  return execFileAsync("git", ["ls-files", "--error-unmatch", "--", repositoryPath], {
+  const [realRoot, realFile] = await Promise.all([
+    realpath(siteRoot).catch(() => null),
+    realpath(absolutePath).catch(() => null),
+  ]);
+  if (!realRoot || !realFile || relative(realRoot, realFile).replaceAll("\\", "/") !== repositoryPath) {
+    return false;
+  }
+  const literalPathspec = `:(literal)${repositoryPath}`;
+  return execFileAsync("git", ["ls-files", "--error-unmatch", "--", literalPathspec], {
     cwd: siteRoot,
   })
+    .then(() => execFileAsync("git", ["diff", "--quiet", "--no-ext-diff", "--", literalPathspec], {
+      cwd: siteRoot,
+    }))
     .then(() => true)
     .catch(() => false);
 }
 
-async function readTrackedText(siteRoot, repositoryPath, label, errors) {
+export async function readTrackedText(siteRoot, repositoryPath, label, errors) {
   const normalizedPath = normalizedRepositoryPath(repositoryPath, label, errors);
   if (!normalizedPath) return null;
   if (!(await isTrackedRegularFile(siteRoot, normalizedPath))) {
@@ -224,7 +255,25 @@ async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
   if (!validLearningCompanionPath) {
     errors.push(`${label} learning-companion role must use a canonical module-scoped companion JSON path.`);
   }
-  if (!repositoryPath || !validLearningCompanionKind || !validLearningCompanionPath) return null;
+  const validTestKind = input.role !== "test" || input.kind === "file";
+  if (!validTestKind) {
+    errors.push(`${label} test role must use a file input.`);
+  }
+  const validTestPath =
+    input.role !== "test" ||
+    (repositoryPath !== null && isDiscoveredTeachingTestPath(repositoryPath));
+  if (!validTestPath) {
+    errors.push(
+      `${label} test role must use a top-level tests/*.test.mjs course test or a canonical public/downloads/test_moduleNN_reference.py teaching-model test.`,
+    );
+  }
+  if (
+    !repositoryPath ||
+    !validLearningCompanionKind ||
+    !validLearningCompanionPath ||
+    !validTestKind ||
+    !validTestPath
+  ) return null;
   if (input.kind === "file") {
     if (input.locator !== null) errors.push(`${label}.locator must be null for a file input.`);
     const text = await readTrackedText(siteRoot, repositoryPath, label, errors);

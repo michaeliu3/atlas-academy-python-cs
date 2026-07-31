@@ -171,8 +171,16 @@ function validateModuleState(courseModule) {
   ) {
     fail(`Module ${number} authoring contract state must use the advanced-v1 contract track.`);
   }
-  if (contract.state === "verified" && release.state === "unrecorded") {
-    fail(`verified Module ${number} needs a recorded release candidate or deployment record.`);
+  if (contract.state === "verified" && release.state !== "deployed-recorded") {
+    fail(`verified Module ${number} needs a deployed-recorded release with a stable recordId.`);
+  }
+  if (
+    contract.state !== "verified" &&
+    (release.state !== "unrecorded" || release.recordId !== null)
+  ) {
+    fail(
+      `${contract.state} Module ${number} must leave release state unrecorded with a null recordId.`,
+    );
   }
 }
 

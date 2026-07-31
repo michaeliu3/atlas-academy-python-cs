@@ -4,6 +4,7 @@ import { lstat, readFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import { load as loadYaml } from "js-yaml";
 import {
   scanMermaidBlocks,
   validateMermaidAccessibility,
@@ -18,6 +19,7 @@ import {
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeLedger,
 } from "./advanced-module-bridge.mjs";
+import { validateCourseGraph } from "./course-graph.mjs";
 import {
   legacyModuleContractAuditRelativePath,
   loadLegacyModuleContractAudit,
@@ -26,6 +28,8 @@ import {
 import {
   loadModuleEvidenceRecord,
   loadModuleReviewRecord,
+  readTrackedText,
+  teachingTestDiscoveryKind,
   validateModuleEvidenceRecord,
   validateModuleReviewRecord,
 } from "./module-review-evidence.mjs";
@@ -128,11 +132,97 @@ export const criterionIds = [
   "release-provenance-ci-and-deployment-evidence",
 ];
 
-export const promotionEvidenceRoleRequirements = Object.freeze({
-  "source-ledger": ["source-ledger"],
-  "accessible-visual-text-alternative": ["course-content", "test"],
-  "release-provenance-ci-and-deployment-evidence": ["provenance"],
+/**
+ * A role label alone is too weak to promote teaching material. These profiles
+ * make each canonical criterion name its smallest inspectable evidence shape.
+ * They are structural minimums only: human review still decides whether the
+ * selected explanation, source, visual, test, or oral protocol is adequate.
+ */
+export const promotionEvidenceCriterionProfiles = Object.freeze({
+  "prerequisite-forward-map": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 1 },
+  },
+  "six-connected-sessions": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 6 },
+  },
+  "first-principles": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 1 },
+  },
+  "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 5 },
+  },
+  "code-reading-debugging-design": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 3 },
+  },
+  "prediction-before-reveal": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 1 },
+  },
+  "transfer-task": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 1 },
+  },
+  "source-ledger": {
+    requiredRoles: ["course-content", "source-ledger"],
+    minimumMarkdownHeadingsByRole: { "course-content": 1, "source-ledger": 2 },
+  },
+  "accessible-visual-text-alternative": {
+    requiredRoles: ["course-content", "test"],
+    minimumMarkdownHeadingsByRole: {},
+  },
+  "confidence-diagnostic-misconceptions": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 2 },
+  },
+  "retrieval-and-spaced-review": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 1 },
+  },
+  "project-and-evidence-rubric": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 3 },
+  },
+  "supportive-oral-defense": {
+    requiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: { "course-content": 5 },
+  },
+  "ta-prompt": {
+    requiredRoles: ["learning-companion"],
+    minimumMarkdownHeadingsByRole: {},
+  },
+  "study-partner-prompt": {
+    requiredRoles: ["learning-companion"],
+    minimumMarkdownHeadingsByRole: {},
+  },
+  "forward-handoff": {
+    requiredRoles: ["learning-companion"],
+    minimumMarkdownHeadingsByRole: {},
+  },
+  "interaction-reference-model-and-teaching-tests": {
+    requiredRoles: [],
+    studioRequiredRoles: ["source-code", "reference-model", "test"],
+    nonStudioRequiredRoles: ["course-content"],
+    minimumMarkdownHeadingsByRole: {},
+  },
+  "release-provenance-ci-and-deployment-evidence": {
+    requiredRoles: ["provenance"],
+    minimumMarkdownHeadingsByRole: {},
+  },
 });
+
+export const promotionEvidenceRoleRequirements = Object.freeze(
+  Object.fromEntries(
+    Object.entries(promotionEvidenceCriterionProfiles).map(([criterionId, profile]) => [
+      criterionId,
+      profile.requiredRoles,
+    ]),
+  ),
+);
 export const humanReviewDimensions = [
   "first-principles-quality",
   "rigor-and-counterexamples",
@@ -793,9 +883,8 @@ export function promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceRe
   const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
   const errors = [];
   const entryFor = (criterionId) => evidenceReport.evidenceByCriterion.get(criterionId);
-  const rolesFor = (criterionId) => new Set(
-    (entryFor(criterionId)?.resolvedInputs ?? []).map(({ role }) => role),
-  );
+  const inputsFor = (criterionId) => entryFor(criterionId)?.resolvedInputs ?? [];
+  const rolesFor = (criterionId) => new Set(inputsFor(criterionId).map(({ role }) => role));
   const requireRoles = (criterionId, roles) => {
     const available = rolesFor(criterionId);
     for (const role of roles) {
@@ -804,24 +893,294 @@ export function promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceRe
       }
     }
   };
+  const numberWord = (value) => [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+  ][value] ?? String(value);
 
-  const sessionInputs = (entryFor("six-connected-sessions")?.resolvedInputs ?? []).filter(
+  for (const [criterionId, profile] of Object.entries(promotionEvidenceCriterionProfiles)) {
+    const requiredRoles = profile.studioRequiredRoles
+      ? (graphModule.studioId ? profile.studioRequiredRoles : profile.nonStudioRequiredRoles)
+      : profile.requiredRoles;
+    requireRoles(criterionId, requiredRoles);
+    for (const [role, minimum] of Object.entries(profile.minimumMarkdownHeadingsByRole)) {
+      const headings = inputsFor(criterionId).filter(
+        (input) => input.role === role && input.kind === "markdown-heading",
+      );
+      if (headings.length < minimum) {
+        errors.push(
+          `${label} criterion ${criterionId} must include at least ${numberWord(minimum)} ${role} Markdown headings.`,
+        );
+      }
+    }
+  }
+
+  const sessionInputs = inputsFor("six-connected-sessions").filter(
     ({ kind, role }) => kind === "markdown-heading" && role === "course-content",
   );
   if (sessionInputs.length < 6) {
     errors.push(`${label} criterion six-connected-sessions must bind six course-content session headings.`);
   }
-  for (const [criterionId, roles] of Object.entries(promotionEvidenceRoleRequirements)) {
-    requireRoles(criterionId, roles);
+  const declaredSessionNumbers = new Set(
+    sessionInputs
+      .map(({ heading }) => /^(?:\d+\.\s+)?Session\s+([1-6])\b/iu.exec(heading?.title ?? "")?.[1])
+      .filter(Boolean),
+  );
+  if (["1", "2", "3", "4", "5", "6"].some((number) => !declaredSessionNumbers.has(number))) {
+    errors.push(`${label} criterion six-connected-sessions must bind one visible Session 1 through Session 6 heading each.`);
   }
-  if (graphModule.studioId) {
-    requireRoles("interaction-reference-model-and-teaching-tests", [
-      "source-code",
-      "reference-model",
-      "test",
-    ]);
-  } else {
-    requireRoles("interaction-reference-model-and-teaching-tests", ["course-content"]);
+  return errors;
+}
+
+/**
+ * Role labels and resolving anchors are still insufficient when they point at
+ * another module. Every future promotion must cite the manifest-selected
+ * workbook and the graph-selected source map for the module under review.
+ */
+export function promotionEvidenceScopeErrors({
+  moduleEntry,
+  graphModule,
+  manifestById,
+  evidenceReport,
+}) {
+  const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
+  const errors = [];
+  const manifestModule = manifestById.get(moduleEntry.moduleId);
+  const canonicalWorkbookPath = manifestModule?.filename
+    ? `content/modules/${manifestModule.filename}`
+    : null;
+  const canonicalSourceMapPath = graphModule.sourceMap;
+
+  if (!canonicalWorkbookPath) {
+    errors.push(`${label} cannot resolve its manifest-selected canonical workbook.`);
+  }
+  if (typeof canonicalSourceMapPath !== "string" || canonicalSourceMapPath === "") {
+    errors.push(`${label} cannot resolve its graph-selected canonical source map.`);
+  }
+
+  for (const entry of evidenceReport.evidenceByCriterion.values()) {
+    for (const input of entry.resolvedInputs ?? []) {
+      if (input.role === "course-content" && input.path !== canonicalWorkbookPath) {
+        errors.push(
+          `${label} criterion ${entry.criterionId} must bind canonical workbook ${canonicalWorkbookPath}; found ${input.path}.`,
+        );
+      }
+      if (input.role === "source-ledger" && input.path !== canonicalSourceMapPath) {
+        errors.push(
+          `${label} criterion ${entry.criterionId} must bind canonical source map ${canonicalSourceMapPath}; found ${input.path}.`,
+        );
+      }
+    }
+  }
+  return errors;
+}
+
+function moduleTestSignals(moduleEntry, graphModule) {
+  return [
+    moduleEntry.moduleId,
+    `module${graphModule.number}`,
+    `module ${graphModule.number}`,
+    graphModule.studioId,
+    graphModule.slug,
+  ]
+    .filter((value) => typeof value === "string" && value !== "")
+    .map((value) => value.toLowerCase());
+}
+
+function boundArtifactBasenames(entry) {
+  return [...new Set(
+    (entry?.resolvedInputs ?? [])
+      .filter(({ role }) => role !== "test")
+      .flatMap(({ path }) => {
+        const basename = typeof path === "string" ? path.split("/").at(-1) : null;
+        if (!basename) return [];
+        return [basename, basename.replace(/\.[^.]+$/u, "")];
+      }),
+  )];
+}
+
+function canonicalPythonReferenceModelTestPath(referenceModelPath) {
+  const match = /^public\/downloads\/(module\d+_reference)\.py$/u.exec(referenceModelPath ?? "");
+  return match ? `public/downloads/test_${match[1]}.py` : null;
+}
+
+export const teachingModelRuntimeExerciseVerifierCommand =
+  "python scripts/verify_teaching_model_exercises.py";
+
+function workflowRecord(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function hasOnlyAllowedKeys(record, allowedKeys) {
+  return workflowRecord(record) && Object.keys(record).every((key) => allowedKeys.has(key));
+}
+
+const standardTeachingModelsJobKeys = new Set([
+  "name",
+  "runs-on",
+  "needs",
+  "timeout-minutes",
+  "strategy",
+  "steps",
+]);
+const standardTeachingModelCommandStepKeys = new Set(["name", "run"]);
+
+function teachingModelsWorkflow(workflow) {
+  try {
+    const parsed = loadYaml(workflow);
+    if (!workflowRecord(parsed) || !workflowRecord(parsed.jobs)) return null;
+    const job = parsed.jobs["teaching-models"];
+    return workflowRecord(job) ? { document: parsed, job } : null;
+  } catch {
+    return null;
+  }
+}
+
+function isStandardTeachingModelsJob(document, job) {
+  return (
+    workflowRecord(document) &&
+    !Object.hasOwn(document, "env") &&
+    !Object.hasOwn(document, "defaults") &&
+    hasOnlyAllowedKeys(job, standardTeachingModelsJobKeys) &&
+    job.name === "Teaching models on Python ${{ matrix.python-version }}" &&
+    job["runs-on"] === "ubuntu-latest" &&
+    job.needs === "portal" &&
+    job["timeout-minutes"] === 15 &&
+    Array.isArray(job.steps)
+  );
+}
+
+/**
+ * A command is CI-route evidence only when the parsed, standard teaching-model
+ * job declares it in a default-shell step without a direct job/workflow/step
+ * execution override. YAML-equivalent quoted keys, comments, other jobs,
+ * environment/default/shell overrides, and disabled or error-tolerant steps
+ * do not establish that GitHub runs it.
+ */
+export function courseWorkflowRunsCommand(workflow, command) {
+  const parsed = teachingModelsWorkflow(workflow);
+  if (!parsed || !isStandardTeachingModelsJob(parsed.document, parsed.job)) {
+    return false;
+  }
+
+  return parsed.job.steps.some((step) => (
+    hasOnlyAllowedKeys(step, standardTeachingModelCommandStepKeys) &&
+    typeof step.name === "string" &&
+    step.run === command
+  ));
+}
+
+/**
+ * Test evidence must be executable through a configured course test surface
+ * and visibly bind an artifact already declared by that criterion. This is
+ * deliberately stronger than a filename convention but remains structural:
+ * it does not substitute for executing CI or human review.
+ */
+export async function promotionEvidenceTestErrors({
+  siteRoot,
+  moduleEntry,
+  graphModule,
+  evidenceReport,
+}) {
+  const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
+  const errors = [];
+  const signals = moduleTestSignals(moduleEntry, graphModule);
+  let workflow = null;
+  let runner = null;
+
+  for (const entry of evidenceReport.evidenceByCriterion.values()) {
+    const testInputs = (entry.resolvedInputs ?? []).filter(({ role }) => role === "test");
+    if (testInputs.length === 0) continue;
+    const artifacts = boundArtifactBasenames(entry);
+    for (const input of testInputs) {
+      const kind = teachingTestDiscoveryKind(input.path);
+      if (!kind) {
+        errors.push(`${label} criterion ${entry.criterionId} test input must use a configured discovered test path.`);
+        continue;
+      }
+      const trackedTest = await readTrackedText(
+        siteRoot,
+        input.path,
+        `${label} criterion ${entry.criterionId} test`,
+        errors,
+      );
+      if (!trackedTest) continue;
+      const testSource = trackedTest.text;
+      const normalizedSource = testSource.toLowerCase();
+      const namesModule = signals.some((signal) => normalizedSource.includes(signal));
+      const coversBoundArtifact = artifacts.some((artifact) => normalizedSource.includes(artifact.toLowerCase()));
+      if (!namesModule || !coversBoundArtifact) {
+        errors.push(`${label} criterion ${entry.criterionId} test ${input.path} must be a module-specific discovered test that reads or exercises a bound module artifact.`);
+      }
+      if (kind === "node") {
+        if (runner === null) {
+          runner = (await readTrackedText(
+            siteRoot,
+            "scripts/run-course-tests.mjs",
+            `${label} Node test discovery runner`,
+            errors,
+          ))?.text ?? "";
+        }
+        if (!runner.includes('filename.endsWith(".test.mjs")')) {
+          errors.push(`${label} cannot verify top-level Node test discovery from scripts/run-course-tests.mjs.`);
+        }
+      } else {
+        if (workflow === null) {
+          workflow = (await readTrackedText(
+            siteRoot,
+            ".github/workflows/ci.yml",
+            `${label} Python test discovery workflow`,
+            errors,
+          ))?.text ?? "";
+        }
+        if (!courseWorkflowRunsCommand(
+          workflow,
+          'python -m unittest discover -s public/downloads -p "test_module*_reference.py"',
+        )) {
+          errors.push(`${label} cannot verify Python teaching-test discovery from .github/workflows/ci.yml.`);
+        }
+        if (!courseWorkflowRunsCommand(workflow, teachingModelRuntimeExerciseVerifierCommand)) {
+          errors.push(
+            `${label} cannot verify the runtime reference-model exercise check from .github/workflows/ci.yml.`,
+          );
+        }
+      }
+    }
+  }
+
+  const interaction = evidenceReport.evidenceByCriterion.get(
+    "interaction-reference-model-and-teaching-tests",
+  );
+  const referenceModels = (interaction?.resolvedInputs ?? []).filter(
+    ({ role }) => role === "reference-model",
+  );
+  const interactionTests = (interaction?.resolvedInputs ?? []).filter(
+    ({ role }) => role === "test",
+  );
+  for (const referenceModel of referenceModels) {
+    const expectedTestPath = canonicalPythonReferenceModelTestPath(referenceModel.path);
+    if (!expectedTestPath) continue;
+    const matchingTests = interactionTests.filter(({ path }) => path === expectedTestPath);
+    if (matchingTests.length !== 1) {
+      errors.push(
+        `${label} criterion interaction-reference-model-and-teaching-tests must bind behavioral Python test ${expectedTestPath} for ${referenceModel.path}.`,
+      );
+      continue;
+    }
+    if (!workflow || !courseWorkflowRunsCommand(workflow, teachingModelRuntimeExerciseVerifierCommand)) {
+      errors.push(
+        `${label} criterion interaction-reference-model-and-teaching-tests must have ${expectedTestPath} covered by the runtime reference-model exercise verifier.`,
+      );
+    }
   }
   return errors;
 }
@@ -1056,6 +1415,19 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, mani
     }
   }
   requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport, errors);
+  errors.push(...promotionEvidenceScopeErrors({
+    moduleEntry,
+    graphModule,
+    manifestById,
+    evidenceReport,
+  }));
+  const testEvidenceErrors = await promotionEvidenceTestErrors({
+    siteRoot,
+    moduleEntry,
+    graphModule,
+    evidenceReport,
+  });
+  errors.push(...testEvidenceErrors);
   const learningCompanionErrors = await promotionLearningCompanionErrors({
     siteRoot,
     moduleEntry,
@@ -1175,6 +1547,13 @@ export async function validateModuleContractRegistry(
   const errors = [];
   if (!isPlainObject(graph) || !Array.isArray(graph.modules)) {
     throw new Error("Module-contract registry v3 needs a validated canonical graph with modules.");
+  }
+  try {
+    validateCourseGraph(graph);
+  } catch (error) {
+    throw new Error(
+      `Module-contract registry v3 needs a validated canonical graph: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
   if (!["integrity", "strict", "complete"].includes(mode)) {
     throw new Error(`Unknown module-contract registry v3 validation mode: ${mode}.`);

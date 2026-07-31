@@ -216,8 +216,8 @@ test("a legacy module cannot become verified with free-form evidence strings", a
   const forgedGraph = structuredClone(graph);
   const forgedM29Graph = forgedGraph.modules.find(({ id }) => id === "m29");
   forgedM29Graph.state.contract.state = "verified";
-  forgedM29Graph.state.release.state = "candidate-recorded";
-  forgedM29Graph.state.release.recordId = "m29-forged-candidate";
+  forgedM29Graph.state.release.state = "deployed-recorded";
+  forgedM29Graph.state.release.recordId = "m29-forged-deployment";
   const forgedContracts = structuredClone(contracts);
   const forgedM29 = forgedContracts.modules.find(({ moduleId }) => moduleId === "m29");
   forgedM29.contractState = "verified";
@@ -268,11 +268,11 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   assert.equal(report.summary.authoringOnlyModules, 6);
   assert.deepEqual(report.mermaidAlternatives?.summary, {
     totalBlocks: 245,
-    completeBlocks: 63,
-    incompleteBlocks: 182,
+    completeBlocks: 64,
+    incompleteBlocks: 181,
   });
   assert.ok(
-    report.warnings.some((warning) => warning.includes("182 Mermaid visual(s)")),
+    report.warnings.some((warning) => warning.includes("181 Mermaid visual(s)")),
   );
   assert.deepEqual(report.advancedContract?.summary, {
     authoringOnlyContracts: 1,
@@ -283,8 +283,8 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     resolvedContractInputs: 19,
   });
   assert.deepEqual(report.moduleLearningCompanions?.summary, {
-    companionCount: 1,
-    moduleIds: ["m31"],
+    companionCount: 2,
+    moduleIds: ["m29", "m31"],
   });
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
@@ -354,7 +354,7 @@ test("the v2 evidence schema rejects unresolved anchors, path escapes, and appro
   );
 });
 
-test("a newly published module cannot use the legacy contract exception", async () => {
+test("a newly published advanced module cannot assume a legacy contract track", async () => {
   const [graph, contracts] = await Promise.all([
     loadCourseGraph(),
     loadCourseContracts(),
@@ -372,7 +372,7 @@ test("a newly published module cannot use the legacy contract exception", async 
 
   await assert.rejects(
     validateCourseContracts(candidate, candidateContracts),
-    /Legacy-baseline Module m31 is absent from the immutable audit/,
+    /advanced Module 31 may not use the legacy-v1 contract track/,
   );
 });
 

@@ -1188,9 +1188,9 @@
       "title": "Calculus, Real Analysis & Continuous Change",
       "summary": "Arc VI — Mathematical foundations for continuous, probabilistic, and learning systems",
       "arcId": "arc-vi",
-      "wordCount": 8058,
+      "wordCount": 8120,
       "estimatedMinutes": 39,
-      "sourceHash": "c02d1e592276be7a418aa7502f9c9a1a7a614db336b2a9982772786c2bd8f152",
+      "sourceHash": "4679580e4975b41e81c1743e6536e2aeea305decd03000651be375bae1070f0e",
       "id": "m29",
       "state": {
         "lifecycle": "learner-material-ready",

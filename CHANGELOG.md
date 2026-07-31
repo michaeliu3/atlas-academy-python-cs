@@ -7,6 +7,26 @@ actually published.
 
 ## Unreleased
 
+- Added a non-promoting M29 candidate-evidence preflight. It freezes a
+  module-specific TA/Study Partner/M30 handoff companion, binds all eighteen
+  current structural criteria to M29's canonical workbook/source map and
+   scoped studio/model/test inputs, and requires every future criterion to meet
+   a data-driven evidence shape. A canonical Python reference model must use
+   its exact paired CI-discovered test plus a CI-configured runtime verifier
+   that observes real parent-process paired-model frames while the suite
+   executes; skipped tests, lazy assertion messages, shadowed stand-ins, and
+   synthetic profile callbacks cannot qualify. It is a trusted-test regression
+   check rather than an adversarial-code sandbox. Generic test-source
+   association remains structural rather than proof that CI ran.
+   The preflight accepts only clean Git-index-matching canonical
+  dossier inputs, locks its stable candidate release nonclaim, evidence
+  claim/limitation, and visible candidate-boundary documentation digest, and
+  pins M29's canonical graph tuple to `legacy-v1`/`legacy-baseline` plus an
+  unrecorded/null release. The graph now rejects recorded release states for
+  every non-verified module. The M29 map now has a tested, rendered text
+  alternative. M29 remains `legacy-baseline` with its release criterion open:
+  this is not human review, learner mastery, CI, deployment, security, or
+  publication evidence.
 - Completed Module 8's Mermaid accessibility retrofit: all nine instructional
   diagrams now carry unique stable IDs, concise titles, and authored prose
   alternatives. Corrected the causal relationship from hash compression to

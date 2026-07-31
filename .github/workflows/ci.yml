@@ -53,8 +53,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: portal
     timeout-minutes: 15
-    env:
-      PYTHONDONTWRITEBYTECODE: "1"
     strategy:
       fail-fast: false
       matrix:
@@ -84,6 +82,10 @@ jobs:
         run: pnpm sync:modules
       - name: Verify generated course artifacts are committed
         run: pnpm check:generated
+      - name: Test the runtime teaching-model exercise verifier
+        run: python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"
+      - name: Verify discovered teaching-model suites execute reference-model code
+        run: python scripts/verify_teaching_model_exercises.py
       - name: Run deterministic local teaching models
         run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"
 

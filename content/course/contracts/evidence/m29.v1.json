@@ -1,0 +1,453 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m29",
+  "purpose": "Bind M29's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M29 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m29-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M29 workbook visibly relates its M27/M28 prerequisites to its canonical M30 forward handoff and labels later synthesis as non-prerequisite context.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "12-prerequisite-and-forward-map"
+        }
+      ],
+      "limitations": [
+        "A resolving map does not prove that a learner has met prerequisites or that a future reviewer accepts its progression quality."
+      ]
+    },
+    {
+      "id": "m29-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M29 declares six ordered sessions spanning limits, local approximation, integration, multivariable change, convergence, and constrained continuous-change design.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "3-session-1--limits-continuity-metric-spaces-and-compactness"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "4-session-2--derivatives-mean-value-taylor-approximation-and-finite-differences"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "5-session-3--integration-the-fundamental-theorem-multiple-integrals-and-change-of-variables"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "6-session-4--multivariable-derivatives-gradients-jacobians-hessians-and-code-contracts"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "7-session-5--sequences-series-pointwise-versus-uniform-convergence-and-legal-exchanges"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "8-session-6--constrained-extrema-ode-approximation-and-the-continuous-change-dossier"
+        }
+      ],
+      "limitations": [
+        "Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."
+      ]
+    },
+    {
+      "id": "m29-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M29 begins continuous-change reasoning from the quantified limit and makes its domain, metric, condition, procedure, and evidence boundary explicit.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "first-principle-a-limit-controls-every-sufficiently-close-input"
+        }
+      ],
+      "limitations": [
+        "A named first-principles section does not prove mathematical adequacy or learner comprehension."
+      ]
+    },
+    {
+      "id": "m29-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M29 binds separate visible locations for a definition, theorem assumptions, derivation/proof idea, counterexample, and numerical-experiment boundary.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "31-metric-space-language-is-the-portable-version"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "42-mean-value-theorem-a-hypothesis-sensitive-bridge"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "43-taylors-theorem-approximation-plus-a-remainder-contract"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "b-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "55-numerical-quadrature-is-a-bounded-procedure"
+        }
+      ],
+      "limitations": [
+        "These structural anchors do not substitute for a qualified review of theorem hypotheses, proof quality, counterexamples, numerical methods, or source claims."
+      ]
+    },
+    {
+      "id": "m29-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M29 includes distinct code-reading, debugging, and design tasks that require tracing an assumption or finite procedure before making a transfer claim.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "session-1-code-reading-task"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "f-debug"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "g-design"
+        }
+      ],
+      "limitations": [
+        "These prompts do not prove that a learner can independently read, debug, or design a continuous-change system."
+      ]
+    },
+    {
+      "id": "m29-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M29 visibly asks for a local-approximation prediction before revealing the finite-difference analysis.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "session-2-prediction-before-reveal"
+        }
+      ],
+      "limitations": [
+        "A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."
+      ]
+    },
+    {
+      "id": "m29-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M29 includes a transfer task that asks the learner to carry a continuous-change judgment into a new model or system boundary.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "h-transfer"
+        }
+      ],
+      "limitations": [
+        "A written transfer prompt does not establish a correct transfer response or real-world decision authority."
+      ]
+    },
+    {
+      "id": "m29-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M29's source map exposes source cards and session/artifact claim linkage, while its workbook makes the licensing and responsible-reading route visible to the learner.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+          "locator": "source-cards"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+          "locator": "source-to-session-and-artifact-map"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "16-sources-licensing-and-responsible-reading-route"
+        }
+      ],
+      "limitations": [
+        "Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."
+      ]
+    },
+    {
+      "id": "m29-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M29's prerequisite map has a module-specific title and concise prose alternative whose render path is exercised by a discovered course test.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "12-prerequisite-and-forward-map"
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "A local scanner and renderer test do not replace screen-reader, keyboard, browser, or human comprehension review."
+      ]
+    },
+    {
+      "id": "m29-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M29 exposes confidence-aware diagnostic questions and a compact misconception repair key rather than a pass/fail score.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "11-confidence-aware-diagnostic"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "compact-repair-key--why-the-plausible-alternatives-fail"
+        }
+      ],
+      "limitations": [
+        "The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."
+      ]
+    },
+    {
+      "id": "m29-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M29 includes a visible retrieval queue and continuous-change mastery gate for learner-controlled follow-up.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "retrieval-queue"
+        }
+      ],
+      "limitations": [
+        "A retrieval queue does not prove that review occurred or that a learner retained the material."
+      ]
+    },
+    {
+      "id": "m29-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M29 specifies a continuous-change evidence dossier with required evidence and a constructive multi-evidence rubric.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "12-atlas-project--continuous-change-evidence-dossier"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "required-evidence"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "rubric-multi-evidence-never-passfail"
+        }
+      ],
+      "limitations": [
+        "A project brief and rubric do not prove learner work quality, portfolio review, or mastery."
+      ]
+    },
+    {
+      "id": "m29-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M29 contains an encouraging conversational oral-defense protocol with hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "14-conversational-oral-defense--m29"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "hint-ladder--preserve-agency-before-revealing"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "b-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "constructive-evidence-lens--visible-adaptive-and-non-scored"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
+          "locator": "end-of-defense-evidence-summary"
+        }
+      ],
+      "limitations": [
+        "A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."
+      ]
+    },
+    {
+      "id": "m29-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M29 companion binds a Teaching Assistant opening, artifact focus, and repair move to the module's continuous-change evidence boundary.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m29.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."
+      ]
+    },
+    {
+      "id": "m29-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M29 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m29.v1.json",
+          "locator": "/studyPartner"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."
+      ]
+    },
+    {
+      "id": "m29-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M29 companion carries a bounded continuous-change evidence card into the canonical M30 probability and inference handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m29.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A declared handoff does not establish learner readiness, completion of M29, or authorization to bypass M30 prerequisites."
+      ]
+    },
+    {
+      "id": "m29-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M29 binds its interactive continuous-change studio, explicit registry entry, bounded Python reference model, exact CI-discovered teaching-model suite, and configured runtime-exercise verification route.",
+      "inputs": [
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/CalculusContinuousChangeStudio.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/module-studio-registry.ts",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "reference-model",
+          "path": "public/downloads/module29_reference.py",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "public/downloads/test_module29_reference.py",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "Static input resolution and a local teaching-model suite do not prove browser interaction, numerical generality, model validity, CI success for this candidate, or a deployed studio.",
+        "The runtime frame check is parent-process and trusted-test scoped; it fails closed for child-process-only work and is not a security sandbox for adversarial Python test source."
+      ]
+    },
+    {
+      "id": "m29-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/evidence-preflight/m29.v1.json",
+          "locator": "/truthBoundary/release"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "provenance",
+          "path": "docs/module-evidence/m29/candidate-preflight.md",
+          "locator": "candidate-boundary"
+        }
+      ],
+      "limitations": [
+        "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."
+      ]
+    }
+  ]
+}

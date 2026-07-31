@@ -246,3 +246,20 @@ test("Module 8 is a complete hashing retrofit with corrected causal and repair m
   assert.ok(moduleEight.includes("old minus new"));
   assert.ok(moduleEight.includes("new minus old"));
 });
+
+test("Module 29's continuous-change prerequisite map has a concise, scoped text alternative", async () => {
+  const moduleTwentyNine = await readFile(
+    new URL("../content/modules/29_calculus_real_analysis_continuous_change.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleTwentyNine, {
+    sourcePath: "content/modules/29_calculus_real_analysis_continuous_change.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 1);
+  assert.equal(report.summary.completeBlocks, 1);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.equal(blocks[0].metadata.id, "m29-continuous-change-prerequisite-map");
+  assert.match(blocks[0].metadata.alternative, /M25 remains later synthesis/u);
+});

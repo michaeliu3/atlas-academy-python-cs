@@ -87,6 +87,19 @@ test("the graph refuses access states that would turn a preview or authoring nod
   );
 });
 
+test("only a verified module may carry a recorded canonical release state", async () => {
+  const graph = await loadCourseGraph();
+  for (const releaseState of ["candidate-recorded", "deployed-recorded"]) {
+    const forgedRelease = structuredClone(graph);
+    const m29 = forgedRelease.modules.find(({ id }) => id === "m29");
+    m29.state.release = { state: releaseState, recordId: `m29-forged-${releaseState}` };
+    assert.throws(
+      () => validateCourseGraph(forgedRelease),
+      /legacy-baseline Module 29 must leave release state unrecorded with a null recordId/u,
+    );
+  }
+});
+
 test("the graph requires the exact M1–M36 module-number set", async () => {
   const graph = await loadCourseGraph();
   const gappedNumbering = structuredClone(graph);

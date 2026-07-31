@@ -12,16 +12,23 @@ function copy(value) {
   return structuredClone(value);
 }
 
-test("the M31 module-scoped companion is graph-bound without opening the module", async () => {
+test("M29 candidate and M31 authoring companions remain graph-bound without lifecycle promotion", async () => {
   const [graph, companions] = await Promise.all([
     loadCourseGraph(),
     loadModuleLearningCompanions(),
   ]);
   const report = await validateModuleLearningCompanions(companions, { graph });
+  const m29 = report.byModuleId.get("m29");
   const m31 = report.byModuleId.get("m31");
 
-  assert.equal(report.summary.companionCount, 1);
-  assert.equal(report.summary.moduleIds[0], "m31");
+  assert.equal(report.summary.companionCount, 2);
+  assert.deepEqual(report.summary.moduleIds, ["m29", "m31"]);
+  assert.equal(m29.moduleId, "m29");
+  assert.equal(m29.guideBinding.locator, "/guides/28");
+  assert.equal(m29.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m29.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m29.forwardHandoff.targetModuleId, "m30");
+  assert.equal(moduleLearningCompanionRelativePath("m29"), "content/course/contracts/companions/m29.v1.json");
   assert.equal(m31.moduleId, "m31");
   assert.equal(m31.guideBinding.locator, "/guides/30");
   assert.equal(m31.teachingAssistant.role, "supportive-oral-defense");
@@ -32,6 +39,9 @@ test("the M31 module-scoped companion is graph-bound without opening the module"
   const graphM31 = graph.modules.find(({ id }) => id === "m31");
   assert.equal(graphM31.state.lifecycle, "authoring-only");
   assert.equal(graphM31.state.readerAccess, "hidden");
+  const graphM29 = graph.modules.find(({ id }) => id === "m29");
+  assert.equal(graphM29.state.contract.state, "legacy-baseline");
+  assert.equal(graphM29.state.release.state, "unrecorded");
 });
 
 test("a learning companion fails closed when it forges a graph handoff or module identity", async () => {
@@ -39,7 +49,7 @@ test("a learning companion fails closed when it forges a graph handoff or module
     loadCourseGraph(),
     loadModuleLearningCompanions(),
   ]);
-  const m31 = companions.records[0];
+  const m31 = companions.records.find(({ moduleId }) => moduleId === "m31");
 
   const wrongHandoff = copy(m31);
   wrongHandoff.forwardHandoff.targetModuleId = "m32";
