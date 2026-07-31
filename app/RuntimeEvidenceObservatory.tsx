@@ -567,7 +567,7 @@ function RuntimeView({
     source: ["trusted source", "A small bundled function is a language-level input to a compiler path; it is not learner-supplied code."],
     code: ["code object route", "A code object is an implementation bridge. Its representation is not the Python language specification."],
     frame: ["frame observation", "Frames make execution context inspectable in a scoped CPython/debugging setting, not a general safety boundary."],
-    bytecode: ["CPython 3.14.6 bytecode card", "Instruction names and adaptive behavior are version-pinned implementation evidence—not cross-VM law or a speed result."],
+    bytecode: ["CPython 3.14.6 illustrative bytecode card", "This static teaching sequence is illustrative, not a captured disassembly from the browser or learner runtime. A real bytecode observation needs recorded dis options, output, and implementation/version."],
     measurement: ["controlled measurement", "A timing/allocation conclusion needs a workload, build, warm-up, GC, samples, metric scope, and confounders."],
   } as const;
   const [title, copy] = stages[stage];
@@ -575,13 +575,13 @@ function RuntimeView({
     <div className={styles.viewStack}>
       <PredictionGate
         choices={[
-          { id: "pinned", label: "A bytecode card supports a version-pinned CPython observation whose speed effect still needs experiment evidence." },
+          { id: "pinned", label: "An illustrative bytecode card names the evidence a version-pinned CPython observation would need; its speed effect still needs experiment evidence." },
           { id: "language", label: "A bytecode instruction is Python-language semantics for all implementations." },
           { id: "speed", label: "A specialized instruction proves every workload is faster." },
         ]}
         id="runtime"
         onChange={onChange}
-        question="What does a version-labelled CPython bytecode observation establish?"
+        question="What would a version-labelled CPython bytecode observation establish once it is actually captured?"
         record={record}
       />
       {record.revealed && (
@@ -602,12 +602,12 @@ function RuntimeView({
             ))}
           </div>
           <div className={styles.runtimeReadout}>
-            <span>[{stage === "bytecode" ? "CPYTHON 3.14.6 OBSERVATION" : stage === "measurement" ? "MANIFEST REQUIRED" : "SCOPED ROUTE"}]</span>
+            <span>[{stage === "bytecode" ? "ILLUSTRATIVE CPYTHON 3.14.6 CARD" : stage === "measurement" ? "MANIFEST REQUIRED" : "SCOPED ROUTE"}]</span>
             <h4>{title}</h4>
             <p>{copy}</p>
             <code>
               {stage === "bytecode"
-                ? "RESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE"
+                ? "illustrative: RESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE (not captured output)"
                 : stage === "measurement"
                   ? "runtime + build + workload + warm-up + GC + metric + samples"
                   : "trusted source → compiler / interpreter implementation boundary"}
@@ -832,9 +832,10 @@ export function RuntimeEvidenceObservatory() {
 
       <footer className={styles.footer}>
         <p>
-          <strong>Hand off:</strong> Module 25 applies the same distinction
-          between model, measurement, policy, and human decision to
-          recommendations, scores, and AI-agent proposals.
+          <strong>Hand off:</strong> Module 32 is authoring-only, so this
+          runtime-evidence route ends here rather than unlocking a next Core
+          module. M25/M26 reuse this distinction only as later preview-only
+          synthesis after M31–M36; they are not a direct Module 24 path.
         </p>
         <a href="#module-reading-article">Read the complete Module 24 workbook</a>
       </footer>

@@ -29,9 +29,10 @@
 - **Research snapshot:** **2026-07-30**. Python documentation links target
   Python 3.14.6 where the versioned page is available. The CPython tag, not
   the moving main branch, is the reproducible code-reading anchor.
-- **Evidence policy:** official Python documentation, accepted PEPs, the
-  pinned CPython source tree, named operating-system API documentation, and
-  official NumPy documentation are authoritative only for their stated
+- **Evidence policy:** official Python documentation, accepted PEPs for their
+  adopted contracts, Draft PEPs only for their stated design/status context,
+  the pinned CPython source tree, named operating-system API documentation,
+  and official NumPy documentation are authoritative only for their stated
   boundaries. University sources inform pedagogical sequencing and systems
   vocabulary; they do not establish Python or CPython behavior.
 - **Pedagogical bias:** learners first read a workload contract, inspect a
@@ -40,11 +41,19 @@
   a baseline and use an independent semantic oracle. Typing speed and
   leaderboard microseconds are not the learning objective.
 - **Safety and privacy boundary:** all exercises use deterministic synthetic
-  fixtures and local measurements. No production records, secrets, telemetry,
-  remote services, privilege changes, unsafe native memory writes, allocator
-  replacement, process limits, or benchmark results from an unknown machine
-  enter the course artifact. A profiler file or memory snapshot is treated as
-  potentially sensitive path/source metadata and is summarised or redacted.
+  fixtures; where a measurement lab is used, it has a declared local
+  measurement protocol. The shipped fixed reference model and static studio
+  cards are course-model/evidence-requirement packets, not real runtime
+  measurements. No production records, secrets, telemetry, remote services,
+  privilege changes, unsafe native memory writes, allocator replacement,
+  process limits, or benchmark results from an unknown machine enter the
+  course artifact. A profiler file or memory snapshot is treated as potentially
+  sensitive path/source metadata and is summarised or redacted.
+- **Fixed reference-model boundary:** the core model is a deterministic,
+  bounded teaching model with no caller-provided program or data path; its
+  CLI/test harness still has bounded process I/O (argument selection, local
+  import, and JSON written to stdout). It is not a no-I/O model, sandbox,
+  profiler, or evidence about a real CPython run.
 - **Copyright policy:** explanations, diagrams, workloads, fixtures,
   experiment reports, source annotations, and assessments are original.
   External material is linked and carefully paraphrased. Do not copy
@@ -159,7 +168,9 @@ or a replacement for workload-specific performance engineering.
   dispatch, call overhead, threading configuration, result equivalence, and
   cross-platform evidence;
 - the CPython 3.14 free-threaded and experimental-JIT variants only as
-  separately configured, separately measured comparison targets;
+  separately configured, separately measured comparison targets; the 3.14
+  JIT is not supported in free-threaded builds, so these are not a combined
+  configuration;
 - an evidence-based optimization report that separates algorithmic, runtime,
   allocator, native library, and operating-system explanations.
 
@@ -274,7 +285,7 @@ Every performance review begins with these questions in order:
 
 | Label | What it means | Example | It does not mean |
 |---|---|---|---|
-| [LANGUAGE GUARANTEE] | Python language/reference contract. | Equal function inputs follow the stated program semantics. | A CPython opcode, allocation count, or elapsed time is fixed. |
+| [LANGUAGE GUARANTEE] | Python language/reference contract. | For named pure/no-effect contract cases, the recorded input produces the stated result or error. | A CPython opcode, allocation count, or elapsed time is fixed. |
 | [STDLIB CONTRACT] | A documented standard-library API behavior. | timeit uses perf_counter by default and disables GC while timing unless re-enabled. | The outcome generalizes to a whole application. |
 | [CPYTHON 3.14.6 OBSERVATION] | A fact observed via the pinned source, dis, or named local build. | This build's trusted function displays a particular disassembly. | The effect is portable or stable across releases/builds. |
 | [MEASUREMENT] | A recorded result from one named experiment. | Five repeats on one fixture have this result vector. | The result explains its own cause or predicts every host. |
@@ -337,7 +348,7 @@ unclassified observation, not a course performance result.
 | P24-07 | [sys](https://docs.python.org/3.14/library/sys.html) | getsizeof is direct-only; getrefcount includes a temporary argument reference and immortal objects invalidate literal-count intuition; _getframe is CPython-specific. | Do not use these as portable ownership/layout or total-memory APIs. |
 | P24-08 | [platform](https://docs.python.org/3.14/library/platform.html) and [sysconfig](https://docs.python.org/3.14/library/sysconfig.html) | A report can capture implementation/version/platform/build metadata through documented interfaces. | Metadata is provenance, not a claim that two hosts are controlled experiments. |
 | P24-09 | [Python support for free threading](https://docs.python.org/3.14/howto/free-threading-python.html) and [thread safety guarantees](https://docs.python.org/3.14/library/threadsafety.html) | Free-threaded CPython is a distinct build/runtime configuration; package compatibility and GIL state matter. | It is not the default course baseline and cannot rescue an unsafe concurrent design. |
-| P24-10 | [What is new in Python 3.14](https://docs.python.org/3.14/whatsnew/3.14.html) | Python 3.14 officially supports free-threaded builds and offers an experimental JIT in some official binaries/configurations. | JIT availability/enablement and performance are per build/workload; no course baseline assumes either. |
+| P24-10 | [What is new in Python 3.14](https://docs.python.org/3.14/whatsnew/3.14.html) | Python 3.14 documents free-threaded builds and an early experimental JIT in some official binaries/configurations. | JIT availability/enablement and performance are per build/workload; it is not supported in free-threaded builds, and no course baseline assumes either. |
 
 ### CPython C-API and implementation sources
 
@@ -350,7 +361,7 @@ unclassified observation, not a course performance result.
 | C24-05 | [PEP 659](https://peps.python.org/pep-0659/) | The specializing adaptive interpreter is CPython implementation design/rationale. | No current M24 test asserts an exact specialization transition or numerical speedup. |
 | C24-06 | [PEP 683](https://peps.python.org/pep-0683/) | Immortal-object design explains why refcount values may be nonliteral. | Do not teach a fixed immortal-object set or use it as a leak detector. |
 | C24-07 | [PEP 703](https://peps.python.org/pep-0703/) and [PEP 779](https://peps.python.org/pep-0779/) | Free-threading changes implementation and compatibility assumptions; it requires separately labelled comparison evidence. | Neither PEP makes a specific Atlas workload faster. |
-| C24-08 | [PEP 744](https://peps.python.org/pep-0744/) | CPython's JIT is an implementation effort with explicit experimental/status and workload caveats. | Do not use it as a generic performance prescription. |
+| C24-08 | [PEP 744](https://peps.python.org/pep-0744/) | PEP 744 was **Draft** when accessed on 2026-07-30; it gives implementation-design/status context for the JIT. | A Draft design document is not a default-runtime, free-threaded, or generic performance prescription. |
 | C24-09 | [CPython v3.14.6 tag](https://github.com/python/cpython/tree/v3.14.6) | The exact code-reading baseline is public and version-pinned. | Source reading establishes no fact about an unrecorded local binary or another tag. |
 
 ### Operating-system and native/vectorized sources
@@ -358,7 +369,7 @@ unclassified observation, not a course performance result.
 | ID | Primary source | Teaching use | Boundary |
 |---|---|---|---|
 | O24-01 | [Windows GetProcessMemoryInfo](https://learn.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-getprocessmemoryinfo) | On the course's Windows path, demonstrate that an OS API reports a named process-memory counter structure. | The report must name the exact field/units/API; it is not interchangeable with Python allocations, virtual memory, or retained object graphs. |
-| O24-02 | [Python resource](https://docs.python.org/3.14/library/resource.html) | Contrast Unix resource accounting/limits with the Windows course path. | This module is Unix-only; do not provide Windows recipes or cross-OS equivalence claims through it. |
+| O24-02 | [Python resource](https://docs.python.org/3.14/library/resource.html) | Contrast Unix resource accounting/limits with the Windows course path. | The `resource` module is Unix-only; do not provide Windows recipes or cross-OS equivalence claims through it. |
 | N24-01 | [NumPy performant-code guide](https://numpy.org/doc/stable/user/basics.performant_code.html) | Optional native/vectorized experiments must make data shape, copies, dtype, library version, and thread configuration visible. | An external package is not a course prerequisite or a universal solution. |
 | N24-02 | [NumPy vectorize](https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html) | Counter the misconception that every API called vectorize executes a compiled vector loop; NumPy documents this helper as convenience rather than performance. | No conclusion about a different NumPy ufunc, BLAS backend, or native library follows. |
 | N24-03 | [NumPy NEP 38](https://numpy.org/neps/nep-0038-SIMD-optimizations.html) | Optional source reading: native dispatch can be conditioned by CPU and build support. | SIMD path, dispatch choice, and result speed must be observed with an exact NumPy wheel/host, never presumed. |
@@ -387,7 +398,7 @@ claim; stronger words require stronger, explicitly added evidence.
 |---|---|---|---|---|
 | M24-C01 | Python source semantics are evaluated according to the named language contract; cost is a separate question. | P24-01 plus an Atlas contract/oracle. | [LANGUAGE GUARANTEE] plus [COURSE MODEL] | “The language promises this timing/layout.” |
 | M24-C02 | This trusted function's displayed bytecode is a CPython 3.14.6 observation. | P24-02, C24-09, exact dis options/output, local runtime header. | [CPYTHON 3.14.6 OBSERVATION] | “All Python implementations execute this way.” |
-| M24-C03 | This variant's repeat vector was lower under this stated timeit/perf_counter protocol. | P24-03, raw repeats, workload, variants, runtime/host header. | [MEASUREMENT] | “It is faster everywhere” or “GC was represented” when default GC was disabled. |
+| M24-C03 | This variant's declared comparison statistic (for example, median of the recorded repeat vectors) was lower under this stated timeit/perf_counter protocol. | P24-03, raw repeats, comparator/statistic, workload, variants, runtime/host header. | [MEASUREMENT] | “It is faster everywhere” or “GC was represented” when default GC was disabled. |
 | M24-C04 | This named Python call path dominated the chosen cProfile run. | P24-04, profile configuration, workload, pstats result. | [MEASUREMENT] | “It consumes this many CPU cycles” or “native work is absent.” |
 | M24-C05 | Traced Python allocations changed between named snapshots. | P24-05, start point, traceback depth, snapshots/diff, redaction. | [MEASUREMENT] | “Process RSS changed by the same amount” or “this proves a leak.” |
 | M24-C06 | getsizeof reports the direct size of this object in this run. | P24-07, type/value/runtime header. | [STDLIB CONTRACT] plus [MEASUREMENT] | “This is the total graph/process size.” |
@@ -428,6 +439,7 @@ invariants, and interfaces, then map the observation back to the experiment.
 | Target | Learner question | Allowed takeaway | Mandatory non-claim |
 |---|---|---|---|
 | [Include/internal/pycore_frame.h](https://github.com/python/cpython/blob/v3.14.6/Include/internal/pycore_frame.h) | Which frame representations are internal to this CPython tag, and why does a logical call frame not imply one stable public heap layout? | Frames have implementation representations beneath Python's call semantics. | Frame fields/addresses/size are portable Python API. |
+| [InternalDocs/interpreter.md](https://github.com/python/cpython/blob/v3.14.6/InternalDocs/interpreter.md) | Which interpreter components and execution vocabulary does this exact CPython tag document? | A tagged internal design note supplies source-reading context for a scoped question. | It is language semantics, a captured learner-runtime disassembly, or a performance result. |
 | [Python/ceval.c](https://github.com/python/cpython/blob/v3.14.6/Python/ceval.c) | Where does this source connect evaluation/thread-state concerns, and what layer is still hidden? | Interpreter evaluation is an implementation layer between bytecode and hardware. | An excerpt maps one source line to a fixed CPU instruction count. |
 | [Python/bytecodes.c](https://github.com/python/cpython/blob/v3.14.6/Python/bytecodes.c) | How are bytecode/micro-op definitions organised, and why can dis output change across releases? | The bytecode interpreter is generated/maintained implementation machinery. | A learner can infer a stable opcode curriculum or performance formula. |
 | [Python/specialize.c](https://github.com/python/cpython/blob/v3.14.6/Python/specialize.c) | Which feedback/specialization concepts are present in this tag, and what would a measurement need to establish? | Specialization is a plausible CPython mechanism worth an observed, version-labelled investigation. | A source symbol proves specialization occurred in this run or caused a particular speedup. |

@@ -72,11 +72,15 @@ implementation, or suitability of a cache for real learner records.
 ~~~text
 Reference: module24_reference.py
 Tests:     test_module24_reference.py
-Scope:     deterministic model of evidence review, not a CPython emulator
-Runtime:   local CPython evidence environment for the teaching tests
-Effects:   no network, profiler attachment, process inspection, file input,
-           subprocess, package, credential, or learner-data action
-Input:     fixed scenario names only; no arbitrary code or profiling dump
+Scope:     deterministic, bounded model of evidence review, not a CPython emulator
+Runtime:   local Python implementation/version evidence environment for a separately
+           captured experiment; CPython 3.14.6 is a source-reading baseline,
+           not the detected CLI host
+Core model: fixed scenario names only; no caller-provided program or data path
+Core effects: no network, profiler attachment, process inspection, subprocess,
+              package, credential, learner-data, or caller-provided file action
+Local test-harness I/O: CLI selects a fixed scenario and writes JSON to stdout;
+                        behavioral tests import the checked-in local model
 Core rule: semantic behavior before performance conclusion
 ~~~
 
@@ -484,19 +488,22 @@ Read only short, pinned excerpts with a question:
 | Modules/gcmodule.c | Which collector structures exist in this revision? | Exact collection timing |
 | Objects/obmalloc.c | Which allocator mechanism is described? | Process RSS behavior on every host |
 
-### Fixed disassembly packet
+### Fixed source-inspection plan, not a captured disassembly
 
-Use a version-labelled, fixed display:
+This fixed source snippet is a question prompt, not `dis` output. It does not
+establish an opcode sequence, a local runtime/version, or a speed result.
 
 ~~~python
 def total(values):
     return sum(values)
 ~~~
 
+Before a learner reads any actual disassembly, record the implementation,
+Python patch version, `dis` options, trusted function, and captured output.
 Do not ask a learner to optimize from an opcode list. Instead ask:
 
-1. Which runtime and version produced this display?
-2. What semantic behavior remains independent of the display?
+1. Which runtime and version would have to produce a real display?
+2. What semantic behavior remains independent of any display?
 3. Which experiment would be required before claiming a speed effect?
 
 ### Warm-up is a measurement condition
@@ -509,9 +516,11 @@ assumptions. It does not merely print one elapsed time.
 ### AI-patch review
 
 The generated patch says “this specialization makes the loop fast.” Mark it
-**[CPYTHON OBSERVATION]** at best until it shows a controlled measurement and
-keeps semantic tests green. Ask whether a different Python implementation or
-future CPython release changes the conclusion.
+**[HYPOTHESIS]**. Treat the causal sentence as a hypothesis, not a CPython
+observation. A pinned `dis` capture could support a narrow implementation
+observation; a controlled experiment could support a narrow measurement. Both
+still need semantic tests green. Ask whether a different Python implementation
+or future CPython release changes the conclusion.
 
 ---
 

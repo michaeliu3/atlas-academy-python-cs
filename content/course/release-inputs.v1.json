@@ -138,7 +138,7 @@
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "83d440d76e3e4e9b2620a1a218263ef3519c46c3dafa5ca01fe03187581d6d8e"
+      "sha256": "8ff64204f744c7b75f08462c54520911009e098707073de419c30f3614d095a8"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
@@ -222,7 +222,7 @@
     },
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
-      "sha256": "b01f19cabe7c905c583a34feb1fa271486ab6e415026c26c68904873e9cf95fe"
+      "sha256": "0fbcb18958618483fa9682ca0d28b1c0f09dcb13679e8553f66bcb8e5d01bd2f"
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
@@ -326,7 +326,7 @@
     },
     {
       "path": "public/downloads/module24_reference.py",
-      "sha256": "e9467fc7669f72db4e60e21667b8ce5ce30d30e1352667a4af75a3a49c1316c3"
+      "sha256": "af96672586db7d99494078ccb1fa7b4e27fc8021a13cc1c93e4870f86f0135d8"
     },
     {
       "path": "public/downloads/module25_reference.py",
@@ -398,7 +398,7 @@
     },
     {
       "path": "public/downloads/test_module24_reference.py",
-      "sha256": "42be94d18c436e7aa4aaa16b135acbe0d207482a1fdda424501950650753433a"
+      "sha256": "e1796e5a2974b3e193fa998539279be7dd25f7cdf184c5a464c46452675eb675"
     },
     {
       "path": "public/downloads/test_module25_reference.py",

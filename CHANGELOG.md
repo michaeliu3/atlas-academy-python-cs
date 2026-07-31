@@ -7,6 +7,19 @@ actually published.
 
 ## Unreleased
 
+- Added M24's authoring-only primary-source research note and source-audit
+  addendum. They preserve its immutable five ambiguous criteria (rigor,
+  transfer, visual/text alternative, diagnostic/misconceptions, and TA) and
+  genuinely missing module-specific oral-defense protocol. The repair corrects
+  model truth—fixed packets are now course-model/evidence-requirement cards,
+  and a matching manifest is not a measurement or accepted patch—plus bounded
+  CLI/test-harness I/O, illustrative rather than captured bytecode, PEP 744's
+  Draft/status boundary, JIT/free-threaded separation, `resource` scope, the
+  pinned interpreter source route, and the stale studio M24 → M25 handoff.
+  The canonical M24 → authoring-only M32 route remains intact. This is not a
+  learner-download, human-review, contract promotion, publication, deployment,
+  release-evidence, or security-clear claim; its structural packet remains
+  deliberately pending.
 - Corrected the canonical route story across Module 24, Module 26, and the
   roadmap. M24 now points to authoring-only M32 and explicitly stops the
   readable runtime-evidence path; M25/M26 remain later preview-only synthesis
