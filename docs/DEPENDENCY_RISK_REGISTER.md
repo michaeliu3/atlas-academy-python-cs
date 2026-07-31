@@ -7,8 +7,9 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-07-30 (GitHub Dependabot alert API and the committed
-lockfile dependency graph). **Owner:** Atlas repository maintainer. **Recheck
+**Last examined:** 2026-07-31 (GitHub Dependabot alert API and the committed
+lockfile dependency graph). All six named alerts remain open on the protected
+default branch at that check. **Owner:** Atlas repository maintainer. **Recheck
 trigger:** before any private deployment, after a relevant upstream release,
 and before closing or dismissing an alert. No alert is considered resolved
 until the reviewed branch is pushed, CI passes, and GitHub has recalculated the
@@ -34,8 +35,11 @@ overrides:
 ```
 
 This is deliberately narrow: it does not claim a global dependency upgrade.
-Commit [`394f20396e21b2289fe4706227c41464b83ac497`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/394f20396e21b2289fe4706227c41464b83ac497)
+Commit [`deaf85c4b7922e7e945a1c4415cf078a12de8fef`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/deaf85c4b7922e7e945a1c4415cf078a12de8fef)
+introduced the scoped runtime-remediation candidate. Its later descendant
+[`394f20396e21b2289fe4706227c41464b83ac497`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/394f20396e21b2289fe4706227c41464b83ac497)
 was validated by successful [GitHub Actions run 30568694668](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30568694668).
+The source-change commit and later CI source head are deliberately distinct.
 The candidate will not be called resolved until the protected default branch
 contains the reviewed change and GitHub has refreshed the corresponding alert
 state.

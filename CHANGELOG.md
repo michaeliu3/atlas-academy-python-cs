@@ -46,6 +46,12 @@ actually published.
   I/O precisely. Its original ambiguous/missing review and oral-defense status
   remains unchanged; this is not publication, release, learner credit, or
   security-clear evidence.
+- Clarified the dependency-risk provenance: `deaf85c…` introduced the scoped
+  runtime remediation, while its later descendant `394f203…` is the successful
+  CI source head. The six Dependabot alerts remain open on the protected
+  default branch pending normal merge/recalculation or upstream-compatible
+  remediation; no alert is represented as closed or the repository as
+  security-clean.
 - Added M24's authoring-only primary-source research note and source-audit
   addendum. They preserve its immutable five ambiguous criteria (rigor,
   transfer, visual/text alternative, diagnostic/misconceptions, and TA) and
