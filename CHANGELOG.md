@@ -29,6 +29,10 @@ actually published.
   remains authoring-only, and neither becomes a learner delivery artifact.
   This is not a quality review, publication, deployment, release-evidence, or
   security-clear claim.
+- Recorded the successful GitHub Course CI run for the M24 structural-packet
+  source head (`67b9ac8…`) in the append-only provenance ledger. It records
+  four successful named jobs on attempt 1, not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
 - Corrected the canonical route story across Module 24, Module 26, and the
   roadmap. M24 now points to authoring-only M32 and explicitly stops the
   readable runtime-evidence path; M25/M26 remain later preview-only synthesis
