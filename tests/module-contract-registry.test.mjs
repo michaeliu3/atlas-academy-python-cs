@@ -197,13 +197,13 @@ test("promotion evidence must bind and scan the module's own Mermaid content", a
   assert.ok(unrelated.errors.some((error) => error.includes("canonical workbook")));
   assert.ok(unrelated.errors.some((error) => error.includes("unrelated course content")));
 
-  const m07 = graphById.get("m07");
+  const m08 = graphById.get("m08");
   const incomplete = await promotionVisualAlternativeErrors({
     siteRoot: process.cwd(),
-    moduleEntry: { moduleId: "m07" },
-    graphModule: m07,
+    moduleEntry: { moduleId: "m08" },
+    graphModule: m08,
     manifestById,
-    evidenceReport: visualEvidence("content/modules/07_stacks_queues_iteration_lazy.md"),
+    evidenceReport: visualEvidence("content/modules/08_hashing_dictionaries_sets_indexing.md"),
   });
   assert.ok(incomplete.errors.some((error) => error.includes("complete Mermaid text alternatives")));
 });

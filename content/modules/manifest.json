@@ -294,9 +294,9 @@
       "title": "Stacks, Queues, Iteration, and Lazy Computation",
       "summary": "Central idea: constrain how stored work may be accessed, then let demand—not accumulation—control when work is performed.",
       "arcId": "arc-ii",
-      "wordCount": 10734,
+      "wordCount": 11355,
       "estimatedMinutes": 52,
-      "sourceHash": "870d2e4579a1eb31937197ae038fe95dbb6d2c3e2a54d83380a2ec6283a6288f",
+      "sourceHash": "bc493d873c19bbe02a8d502339c6648891dc274bd9680b7e9c42545fe6b53c73",
       "id": "m07",
       "state": {
         "lifecycle": "learner-material-ready",

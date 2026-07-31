@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { JSDOM } from "jsdom";
 import rehypeSanitize from "rehype-sanitize";
@@ -8,6 +9,7 @@ import {
   removeNonLocalMermaidReferences,
 } from "../lib/rich-content-sanitization.mjs";
 import { renderSafeMermaidSvg } from "../lib/render-safe-mermaid.mjs";
+import { scanMermaidBlocks } from "../lib/mermaid-accessibility.mjs";
 
 function element(tagName, properties = {}, children = []) {
   return { type: "element", tagName, properties, children };
@@ -147,4 +149,26 @@ test("a rendered Mermaid fixture retains readable labels and inert geometry", as
   assert.ok(svg.querySelectorAll("rect, polygon, circle").length >= 3);
   assert.ok(svg.querySelectorAll("path").length >= 1);
   assert.doesNotMatch(markup, /<style\b|<filter\b|<foreignObject\b|<image\b|\son\w+=/iu);
+});
+
+test("Module 7's authored diagrams render after accessibility metadata is removed", async () => {
+  const moduleSeven = await readFile(
+    new URL("../content/modules/07_stacks_queues_iteration_lazy.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleSeven, {
+    sourcePath: "content/modules/07_stacks_queues_iteration_lazy.md",
+  });
+
+  assert.equal(blocks.length, 10);
+  for (const [index, block] of blocks.entries()) {
+    const markup = await renderSafeMermaidSvg({
+      label: block.metadata.title,
+      describedById: `${block.metadata.id}-alternative`,
+      renderId: `atlas-m07-render-${index + 1}`,
+      source: block.renderSource,
+    });
+    assert.match(markup, /<svg\b/iu);
+    assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
+  }
 });

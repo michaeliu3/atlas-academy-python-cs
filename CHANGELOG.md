@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Completed Module 7's Mermaid accessibility retrofit: all ten instructional
+  diagrams now carry unique stable IDs, concise titles, and authored prose
+  alternatives. Corrected the iterator protocol diagram so it no longer implies
+  that `next` creates a second iterator; made buffer capacity release and full
+  policies explicit; labelled architectural audit edges as observations; and
+  added a renderer-level regression over every Module 7 diagram. This remains a
+  bounded visual-equivalence improvement, not a completed accessibility review
+  or a claim that later modules are remediated.
 - Completed Module 6's Mermaid accessibility retrofit: all thirteen
   instructional diagrams now carry unique stable IDs, concise titles, and
   authored prose alternatives for the representation bridge, contract-to-cost

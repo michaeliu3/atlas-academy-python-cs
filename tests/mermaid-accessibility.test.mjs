@@ -192,3 +192,27 @@ test("Module 6 is a complete representation-and-memory retrofit with model bound
     blocks.some(({ metadata }) => metadata?.alternative.includes("implementation-dependent")),
   );
 });
+
+test("Module 7 is a complete stack-and-lazy-flow retrofit with corrected control boundaries", async () => {
+  const moduleSeven = await readFile(
+    new URL("../content/modules/07_stacks_queues_iteration_lazy.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleSeven, {
+    sourcePath: "content/modules/07_stacks_queues_iteration_lazy.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 10);
+  assert.equal(report.summary.completeBlocks, 10);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m07-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+  assert.ok(
+    blocks.some(({ metadata }) => metadata?.alternative.includes("release capacity")),
+  );
+  assert.ok(
+    !moduleSeven.includes("Iterator --> Iterator : next() advances"),
+    "the protocol diagram must not imply next creates a separate iterator",
+  );
+});

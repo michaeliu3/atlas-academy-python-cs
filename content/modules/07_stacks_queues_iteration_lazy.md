@@ -18,6 +18,9 @@ This is an AI-native module. Most effort goes into tracing, architecture recover
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m07-knowledge-graph
+%% atlas-diagram-title: Module 7 connects prior control, abstraction, cost, and representation models to later systems topics
+%% atlas-diagram-alt: Calls and frames provide LIFO control; interfaces, cost models, and sequence representations supply stack, queue, and iterator choices. Module 7 then supports priority queues, graph frontiers, files, concurrent queues, async streams, and lazy evaluation.
 flowchart LR
     M2["Module 2<br/>calls, frames, recursion"] --> LIFO["LIFO access"]
     M3["Module 3<br/>interfaces and invariants"] --> ADT["Stack / queue ADTs"]
@@ -191,6 +194,9 @@ Let each inserted item have a unique arrival number.
 These statements remain precise even when two stored values are equal.
 
 ```mermaid
+%% atlas-diagram-id: m07-sequence-access-policies
+%% atlas-diagram-title: Stack and queue laws arise by restricting how an ordered sequence may be accessed
+%% atlas-diagram-alt: An ordered sequence with many accessible positions can be constrained to insert and delete at the last position, yielding a stack with LIFO removal, or to insert last and delete first, yielding a queue with FIFO removal.
 flowchart TB
     SEQ["Ordered sequence interface<br/>many positions accessible"]
     SEQ --> STACK["Stack constraint<br/>insert last + delete last"]
@@ -267,6 +273,9 @@ def label_depth(depth: int) -> str:
 Trace `label_depth(2)`:
 
 ```mermaid
+%% atlas-diagram-id: m07-recursive-call-return
+%% atlas-diagram-title: Nested recursive calls resume in reverse order, revealing the LIFO control stack
+%% atlas-diagram-alt: The caller invokes frames at depths 2, 1, and 0. The base case returns root to depth 1, then root slash 1 to depth 2, and finally root slash 1 slash 2 to the caller; the most recently called frame returns first.
 sequenceDiagram
     participant C as Caller
     participant F2 as frame depth=2
@@ -347,6 +356,9 @@ An **iterator** is a stateful object that:
 An iterator is therefore also iterable. An iterable is not necessarily an iterator.
 
 ```mermaid
+%% atlas-diagram-id: m07-iterable-iterator-protocol
+%% atlas-diagram-title: An iterable provides an iterator whose cursor advances when next is requested
+%% atlas-diagram-alt: Calling iter on an iterable obtains an iterator. The iterator returns itself from __iter__, retains the current position, returns one item from __next__, and eventually signals exhaustion with StopIteration; these are behavioral protocols, not inheritance.
 classDiagram
     class Iterable {
       +__iter__() Iterator
@@ -357,10 +369,12 @@ classDiagram
       +state: current position
     }
     Iterable --> Iterator : iter(source)
-    Iterator --> Iterator : next() advances
 ```
 
 `collections.abc.Iterable` and `collections.abc.Iterator` name these behavioral interfaces. As in Module 3, structural behavior matters more than ancestry for ordinary Python iteration.
+
+Each successful `__next__` call advances the **same** iterator's cursor; it does
+not construct a second iterator.
 
 ### Reusable versus one-shot is a separate question
 
@@ -414,6 +428,9 @@ The real bytecode is an implementation detail, but this expansion captures the p
 ### Trace one iterator as a state machine
 
 ```mermaid
+%% atlas-diagram-id: m07-iterator-exhaustion-state
+%% atlas-diagram-title: An iterator advances while ready and remains exhausted after StopIteration
+%% atlas-diagram-alt: After iter(source) creates or obtains an iterator, each next request either produces one item and advances its cursor or detects exhaustion and raises StopIteration. Once exhausted, every later next request continues to raise StopIteration.
 stateDiagram-v2
     [*] --> Ready: iter(source)
     Ready --> Ready: next() / produce item and advance
@@ -652,6 +669,9 @@ On `next(generator)`:
 5. normal return signals exhaustion through `StopIteration`.
 
 ```mermaid
+%% atlas-diagram-id: m07-generator-suspend-resume
+%% atlas-diagram-title: One generator request pulls upstream work, yields a value, and preserves a suspended frame
+%% atlas-diagram-alt: In the illustrated simple generator stage, a downstream next request asks the generator to request a raw line from its upstream iterator, normalize it, yield an event, and suspend. A later next request resumes after the prior yield.
 sequenceDiagram
     participant D as downstream consumer
     participant G as generator frame
@@ -659,13 +679,16 @@ sequenceDiagram
     D->>G: next()
     G->>U: next()
     U-->>G: raw line
-    Note over G: normalize; frame stays active
-    G-->>D: yield event; suspend
+    Note over G: normalize and retain active frame
+    G-->>D: yield event then suspend
     D->>G: next()
     Note over G: resume after prior yield
 ```
 
 This reconnects Module 2’s frame model to iteration. A normal call runs until return; a generator call creates a resumable computation whose frame crosses many `next` calls.
+
+This trace is deliberately a one-upstream-request case. A filtering or batching
+stage can require several upstream requests before it yields once.
 
 ### Generator, iterable, iterator
 
@@ -729,6 +752,9 @@ The second expression does not remove work. If all `n` events are eventually con
 ### Demand travels backward; data travels forward
 
 ```mermaid
+%% atlas-diagram-id: m07-lazy-pipeline-demand-data-flow
+%% atlas-diagram-title: Demand moves upstream through a lazy pipeline while transformed data moves downstream
+%% atlas-diagram-alt: A consumer's next request travels backward through batching, normalization, validation, and the source. Raw items travel forward only when valid, become events, and are accumulated into a tuple batch; one request can require multiple raw reads.
 flowchart LR
     C["Consumer<br/>next()"] -- "demand" --> B["batch"]
     B -- "demand" --> N["normalize"]
@@ -894,12 +920,20 @@ An **overflow policy** says what happens when the capacity is reached:
 **Backpressure** is the mechanism by which downstream capacity limits influence upstream production.
 
 ```mermaid
+%% atlas-diagram-id: m07-buffer-full-policy
+%% atlas-diagram-title: Capacity overflow requires an explicit policy rather than an implicit queue behavior
+%% atlas-diagram-alt: A producer checks whether a buffer is full. With space, it enqueues work for the consumer, whose dequeue can release capacity; when full, the system must explicitly choose waiting, rejecting, dropping, or spilling, each with different delivery semantics.
 flowchart TD
     P["Producer"] --> B{"Buffer full?"}
     B -- "no" --> Q["enqueue"]
     Q --> C["Consumer"]
-    B -- "yes" --> W["wait / reject / drop / spill"]
-    W --> POLICY["Policy must be explicit"]
+    C --> RELEASE["dequeue / release capacity"]
+    RELEASE --> B
+    B -- "yes" --> POLICY["choose explicit full policy"]
+    POLICY --> WAIT["wait with safe coordination"]
+    POLICY --> REJECT["reject"]
+    POLICY --> DROP["drop"]
+    POLICY --> SPILL["spill"]
 ```
 
 ### What synchronous iteration provides
@@ -973,14 +1007,17 @@ A full bounded deque discards an item from the opposite end when appending. That
 Atlas accepts text lines and writes immutable study events in batches.
 
 ```mermaid
+%% atlas-diagram-id: m07-atlas-lazy-ingestion-architecture
+%% atlas-diagram-title: Atlas ingestion separates cursor ownership, validation, immutable batching, and durable writes
+%% atlas-diagram-alt: A line source owns its I/O cursor, parse_valid rejects malformed lines, normalization creates immutable events, stable_batches produces tuples no larger than batch_size, and the store owns durable writes. Demand and capacity tests observe these boundaries.
 flowchart LR
     SRC["Line source<br/>owns I/O cursor"] --> PARSE["parse_valid<br/>reject malformed lines"]
     PARSE --> NORMAL["normalize<br/>create immutable event"]
     NORMAL --> BATCH["stable_batches<br/>≤ batch_size events"]
     BATCH --> SINK["Event store<br/>owns durable write"]
-    AUDIT["Demand + capacity tests"] -.-> SRC
-    AUDIT -.-> BATCH
-    AUDIT -.-> SINK
+    AUDIT["Demand + capacity tests"] -. "observe pull counts" .-> SRC
+    AUDIT -. "assert batch bound" .-> BATCH
+    AUDIT -. "check write boundary" .-> SINK
 ```
 
 Responsibilities:
@@ -2035,6 +2072,9 @@ Passing the MCQ check alone is insufficient. Producing code that “works on my 
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m07-concept-map
+%% atlas-diagram-title: Stacks, queues, iteration, laziness, ownership, and backpressure form one connected model
+%% atlas-diagram-alt: Ordered items become LIFO stacks for nested returns or FIFO queues for arrival order. Iterables supply cursor-owning iterators; generators compose lazy stages where demand moves upstream and data downstream. Ownership, bounds, capacity, overflow policy, backpressure, and evidence complete the model.
 flowchart TD
     SEQ["Ordered items"] --> CONSTRAINT["Restrict legal access"]
     CONSTRAINT --> STACK["Stack: newest remaining first"]
