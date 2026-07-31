@@ -181,6 +181,24 @@
   color: #1c5258;
 }
 
+.resetProgress {
+  padding: 0.45rem 0.65rem;
+  color: #1d5155;
+  cursor: pointer;
+  border: 1px solid #7ba9a2;
+  border-radius: 0.55rem;
+  background: #eef9f3;
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.resetProgress:hover {
+  color: #fff;
+  border-color: #27686a;
+  background: #27686a;
+}
+
 .tabList {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));

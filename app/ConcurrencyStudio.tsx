@@ -9,6 +9,13 @@ import {
   type ReactNode,
 } from "react";
 import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
+import {
+  clearModule19Progress,
+  hasMeaningfulModule19Progress,
+  MODULE19_PROGRESS_STORAGE_KEY,
+  module19ProgressCodec,
+  restoreModule19Progress,
+} from "@/lib/module19-progress-codec";
 import styles from "./ConcurrencyStudio.module.css";
 
 type ConcurrencyView =
@@ -26,6 +33,15 @@ type AnswerState = {
   revision: string;
 };
 type AnswerMap = Record<ConcurrencyView, AnswerState>;
+type PersistedPredictionGate = {
+  choice: string | null;
+  confidence: Confidence | null;
+  revealed: boolean;
+};
+type Module19ProgressRecord = Record<
+  ConcurrencyView,
+  PersistedPredictionGate
+>;
 type WorkerId = "A" | "B";
 type LockPatch = "shared" | "narrow" | "wide" | "owner";
 type CoordinationInstrument = "condition" | "semaphore" | "queue" | "future";
@@ -109,7 +125,7 @@ type StudioRecord = {
 
 const CENTRAL_INVARIANT =
   "Every admitted Atlas partition reaches exactly one terminal classification—`COMMITTED`, `FAILED`, or `CANCELLED`. If Atlas publishes a new index, that index is the deterministic fold of all and only `COMMITTED` partial results, and publication is permitted only when every required partition is `COMMITTED`. Every worker-visible effect remains accounted for as a process-local operation, an OS-mediated resource transition, and one step in a declared concurrent history; each shared transition is justified by one named owner or synchronization protocol, every progress claim states its blocking and fairness assumptions, and neither a clean exit, a passing stress run, the GIL, nor observed speedup substitutes for safety, liveness, or model-fit evidence.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module19-concurrency-studio.v2";
+const STUDIO_STORAGE_KEY = MODULE19_PROGRESS_STORAGE_KEY;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const RUNTIME_PROFILE = {
   python: "CPython 3.14.6",
@@ -136,36 +152,6 @@ const PATCH_AXES: ReadonlyArray<{
   { id: "modelFit", label: "Model fit" },
   { id: "documentation", label: "Documentation" },
 ];
-const CHECKPOINT_VALUES = [
-  "postings-1",
-  "postings-12",
-  "postings-13",
-  "postings-123",
-  "serial-equivalent",
-  "violating",
-  "count-2",
-  "count-6",
-  "count-18",
-  "count-20",
-  "lost-update",
-  "split-ledger",
-  "no-counterexample",
-  "insufficient",
-  "point-none",
-  "point-validation",
-  "point-assignment",
-  "point-fold-ledger",
-  "point-owner",
-  "operation-proceeds",
-  "operation-blocks",
-  "wake-recheck",
-  "admission-closes",
-  "fact-occupancy",
-  "fact-unfinished",
-  "fact-predicate",
-  "fact-terminal",
-  "fact-permit",
-] as const;
 const GATED_COORDINATION_ACTIONS: ReadonlyArray<CoordinationAction> = [
   "get",
   "notify",
@@ -574,6 +560,36 @@ const initialAnswers = (): AnswerMap => ({
   evidence: emptyAnswer(),
 });
 
+function progressRecordFromAnswers(answers: AnswerMap): Module19ProgressRecord {
+  const gate = (answer: AnswerState): PersistedPredictionGate => ({
+    choice: answer.prediction,
+    confidence: answer.confidence,
+    revealed: answer.revealed,
+  });
+  return {
+    history: gate(answers.history),
+    linearization: gate(answers.linearization),
+    coordination: gate(answers.coordination),
+    progress: gate(answers.progress),
+    models: gate(answers.models),
+    evidence: gate(answers.evidence),
+  };
+}
+
+function answersFromProgress(record: Module19ProgressRecord): AnswerMap {
+  const answers = initialAnswers();
+  for (const view of views) {
+    const gate = record[view.id];
+    answers[view.id] = {
+      prediction: gate.choice,
+      confidence: gate.confidence,
+      revealed: gate.revealed,
+      revision: "",
+    };
+  }
+  return answers;
+}
+
 const emptyModelChoice = (): ModelChoiceRecord => ({
   workload: null,
   independence: null,
@@ -629,247 +645,6 @@ const initialRecord = (): StudioRecord => ({
   patchDecisions: emptyPatchDecisions(),
 });
 
-function isOneOf<T extends string>(
-  value: unknown,
-  options: ReadonlyArray<T>,
-): value is T {
-  return typeof value === "string" && options.includes(value as T);
-}
-
-function sanitizeCheckpoint(
-  value: unknown,
-  fallbackContext = "",
-): CheckpointRecord {
-  if (!value || typeof value !== "object") {
-    return emptyCheckpoint(fallbackContext);
-  }
-  const candidate = value as Partial<CheckpointRecord>;
-  const context =
-    typeof candidate.context === "string" &&
-    /^[A-Za-z0-9:_|,.-]{0,720}$/u.test(candidate.context)
-      ? candidate.context
-      : fallbackContext;
-  const prediction = isOneOf(candidate.prediction, CHECKPOINT_VALUES)
-    ? candidate.prediction
-    : null;
-  const secondary = isOneOf(candidate.secondary, CHECKPOINT_VALUES)
-    ? candidate.secondary
-    : null;
-  const confidence =
-    candidate.confidence === 1 ||
-    candidate.confidence === 2 ||
-    candidate.confidence === 3 ||
-    candidate.confidence === 4
-      ? candidate.confidence
-      : null;
-  return {
-    context,
-    prediction,
-    secondary,
-    confidence,
-    revealed:
-      candidate.revealed === true &&
-      prediction !== null &&
-      secondary !== null &&
-      confidence !== null,
-  };
-}
-
-function sanitizeStudioRecord(value: unknown): StudioRecord {
-  if (!value || typeof value !== "object") return initialRecord();
-  const candidate = value as Partial<StudioRecord>;
-  const historySchedule = Array.isArray(candidate.historySchedule)
-    ? candidate.historySchedule.filter(
-        (worker): worker is WorkerId => worker === "A" || worker === "B",
-      ).slice(0, 6)
-    : [];
-  const aCount = historySchedule.filter((worker) => worker === "A").length;
-  const bCount = historySchedule.filter((worker) => worker === "B").length;
-  const safeSchedule =
-    aCount <= 3 && bCount <= 3 ? historySchedule : ([] as WorkerId[]);
-  const completedHistories = Array.isArray(candidate.completedHistories)
-    ? candidate.completedHistories
-        .filter(
-          (key): key is string =>
-            typeof key === "string" && HISTORY_SCHEDULE_KEYS.has(key),
-        )
-        .filter((key, index, all) => all.indexOf(key) === index)
-        .slice(0, 20)
-    : [];
-  const protectedSteps = Array.isArray(candidate.protectedSteps)
-    ? candidate.protectedSteps
-        .filter(
-          (step): step is number =>
-            Number.isInteger(step) && Number(step) >= 0 && Number(step) <= 4,
-        )
-        .filter((step, index, all) => all.indexOf(step) === index)
-    : [];
-  const coordinationActions = Array.isArray(candidate.coordinationActions)
-    ? candidate.coordinationActions
-        .filter((action): action is CoordinationAction =>
-          isOneOf(action, [
-            "put",
-            "get",
-            "wait",
-            "notify",
-            "task_done",
-            "commit",
-            "join",
-            "stop",
-            "immediate_stop",
-            "acquire",
-            "release",
-          ]),
-        )
-        .slice(0, 40)
-    : [];
-  const model = (candidate.modelChoice ?? {}) as Partial<ModelChoiceRecord>;
-  const safeModel: ModelChoiceRecord = {
-    workload: isOneOf(model.workload, ["blocking", "python", "native", "mixed"])
-      ? model.workload
-      : null,
-    independence: isOneOf(model.independence, ["independent", "ordered"])
-      ? model.independence
-      : null,
-    sharing: isOneOf(model.sharing, ["none", "bounded", "shared"])
-      ? model.sharing
-      : null,
-    transfer: isOneOf(model.transfer, ["small", "large"])
-      ? model.transfer
-      : null,
-    isolation: isOneOf(model.isolation, ["acceptable", "required", "forbidden"])
-      ? model.isolation
-      : null,
-    lifetime: isOneOf(model.lifetime, ["short", "long"])
-      ? model.lifetime
-      : null,
-    failure: isOneOf(model.failure, ["shared", "isolated"])
-      ? model.failure
-      : null,
-    cancellation: isOneOf(model.cancellation, [
-      "pending",
-      "cooperative",
-      "terminate",
-    ])
-      ? model.cancellation
-      : null,
-    build: isOneOf(model.build, ["standard", "free-threaded", "unknown"])
-      ? model.build
-      : null,
-    gil: isOneOf(model.gil, ["enabled", "disabled", "unknown"])
-      ? model.gil
-      : null,
-    nativeContract: isOneOf(model.nativeContract, [
-      "releases",
-      "compatible",
-      "unknown",
-    ])
-      ? model.nativeContract
-      : null,
-    candidate: isOneOf(model.candidate, [
-      "sequential",
-      "threads",
-      "processes",
-      "interpreters",
-      "m21",
-    ])
-      ? model.candidate
-      : null,
-    evidencePlan: isOneOf(model.evidencePlan, [
-      "equivalence-first",
-      "profile-first",
-      "failure-first",
-    ])
-      ? model.evidencePlan
-      : null,
-  };
-  const savedPatchDecisions = (candidate.patchDecisions ??
-    {}) as Partial<Record<PatchAxis, PatchDecision | null>>;
-  const patchDecisions = emptyPatchDecisions();
-  for (const axis of PATCH_AXES) {
-    const decision = savedPatchDecisions[axis.id];
-    patchDecisions[axis.id] = isOneOf(decision, [
-      "accept",
-      "reject",
-      "split",
-    ])
-      ? decision
-      : null;
-  }
-
-  return {
-    historySchedule: safeSchedule,
-    completedHistories,
-    historyCheckpoint: sanitizeCheckpoint(candidate.historyCheckpoint),
-    historyCensusCheckpoint: sanitizeCheckpoint(
-      candidate.historyCensusCheckpoint,
-      "all-20-census",
-    ),
-    linearizationPatch: isOneOf(candidate.linearizationPatch, [
-      "shared",
-      "narrow",
-      "wide",
-      "owner",
-    ])
-      ? candidate.linearizationPatch
-      : "narrow",
-    protectedSteps,
-    linearizationCheckpoint: sanitizeCheckpoint(
-      candidate.linearizationCheckpoint,
-    ),
-    coordinationInstrument: isOneOf(candidate.coordinationInstrument, [
-      "condition",
-      "semaphore",
-      "queue",
-      "future",
-    ])
-      ? candidate.coordinationInstrument
-      : "queue",
-    coordinationActions,
-    coordinationPendingAction: isOneOf(candidate.coordinationPendingAction, [
-      "get",
-      "notify",
-      "join",
-      "stop",
-      "immediate_stop",
-    ])
-      ? candidate.coordinationPendingAction
-      : null,
-    coordinationCheckpoint: sanitizeCheckpoint(
-      candidate.coordinationCheckpoint,
-    ),
-    progressScenario: isOneOf(candidate.progressScenario, [
-      "cycle",
-      "capacity",
-      "starvation",
-      "livelock",
-    ])
-      ? candidate.progressScenario
-      : "cycle",
-    progressEdges: Array.isArray(candidate.progressEdges)
-      ? candidate.progressEdges
-          .filter((edge): edge is ProgressEdge =>
-            isOneOf(edge, PROGRESS_EDGES),
-          )
-          .filter((edge, index, all) => all.indexOf(edge) === index)
-      : [],
-    modelChoice: safeModel,
-    evidenceVariant: isOneOf(candidate.evidenceVariant, [
-      "owner",
-      "shared",
-      "narrow",
-      "callback",
-      "empty",
-      "swallowed",
-      "child",
-      "gil",
-    ])
-      ? candidate.evidenceVariant
-      : "owner",
-    patchDecisions,
-  };
-}
-
 function misconceptionLabels(answers: AnswerMap) {
   return views
     .filter((view) => {
@@ -893,7 +668,7 @@ function tabId(view: ConcurrencyView) {
 
 function clearStoredStudio() {
   try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
+    clearModule19Progress(window.localStorage);
   } catch {
     return false;
   }
@@ -3391,6 +3166,7 @@ export function ConcurrencyStudio() {
   const [resetArmed, setResetArmed] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const persistProgressRef = useRef(false);
 
   useEffect(() => {
     const media = window.matchMedia(REDUCED_MOTION_QUERY);
@@ -3403,67 +3179,12 @@ export function ConcurrencyStudio() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const stored = JSON.parse(raw) as {
-            version?: number;
-            activeView?: ConcurrencyView;
-            answers?: Partial<
-              Record<
-                ConcurrencyView,
-                {
-                  prediction?: string | null;
-                  confidence?: Confidence | null;
-                  revealed?: boolean;
-                }
-              >
-            >;
-            record?: unknown;
-            misconceptions?: string[];
-          };
-          if (
-            stored.version === 2 &&
-            views.some((view) => view.id === stored.activeView)
-          ) {
-            setActiveView(stored.activeView ?? "history");
-            setAnswers((current) => {
-              const next = { ...current };
-              for (const view of views) {
-                const saved = stored.answers?.[view.id];
-                if (!saved) continue;
-                const savedPrediction =
-                  typeof saved.prediction === "string" &&
-                  predictionSets[view.id].options.some(
-                    (option) => option.value === saved.prediction,
-                  )
-                    ? saved.prediction
-                    : null;
-                const savedConfidence =
-                  saved.confidence === 1 ||
-                  saved.confidence === 2 ||
-                  saved.confidence === 3 ||
-                  saved.confidence === 4
-                    ? saved.confidence
-                    : null;
-                next[view.id] = {
-                  prediction: savedPrediction,
-                  confidence: savedConfidence,
-                  revealed:
-                    saved.revealed === true &&
-                    savedPrediction !== null &&
-                    savedConfidence !== null,
-                  revision: "",
-                };
-              }
-              return next;
-            });
-            setRecord(sanitizeStudioRecord(stored.record));
-          } else {
-            clearStoredStudio();
-          }
-        }
+        const stored = restoreModule19Progress(window.localStorage) as
+          | Module19ProgressRecord
+          | null;
+        if (stored) setAnswers(answersFromProgress(stored));
       } catch {
-        clearStoredStudio();
+        // Browser storage is optional. Keep the current in-memory studio.
       } finally {
         setHydrated(true);
       }
@@ -3474,34 +3195,25 @@ export function ConcurrencyStudio() {
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return;
-    const safeAnswers = Object.fromEntries(
-      views.map((view) => [
-        view.id,
-        {
-          prediction: answers[view.id].prediction,
-          confidence: answers[view.id].confidence,
-          revealed: answers[view.id].revealed,
-        },
-      ]),
-    );
+    if (!hydrated || !persistProgressRef.current) return;
+    persistProgressRef.current = false;
+    const progress = progressRecordFromAnswers(answers);
     try {
+      if (!hasMeaningfulModule19Progress(progress)) {
+        clearModule19Progress(window.localStorage);
+        return;
+      }
       window.localStorage.setItem(
         STUDIO_STORAGE_KEY,
-        JSON.stringify({
-          version: 2,
-          activeView,
-          answers: safeAnswers,
-          record: sanitizeStudioRecord(record),
-          misconceptions: misconceptionLabels(answers),
-        }),
+        module19ProgressCodec.serialize(progress),
       );
     } catch {
       return;
     }
-  }, [activeView, answers, hydrated, record]);
+  }, [answers, hydrated]);
 
   const updateAnswer = (view: ConcurrencyView, next: AnswerState) => {
+    persistProgressRef.current = true;
     setAnswers((current) => ({ ...current, [view]: next }));
   };
 
@@ -3534,6 +3246,7 @@ export function ConcurrencyStudio() {
   };
 
   const resetView = () => {
+    persistProgressRef.current = true;
     setAnswers((current) => ({
       ...current,
       [activeView]: emptyAnswer(),
@@ -3589,6 +3302,7 @@ export function ConcurrencyStudio() {
       setResetArmed(true);
       return;
     }
+    persistProgressRef.current = false;
     clearStoredStudio();
     setAnswers(initialAnswers());
     setRecord(initialRecord());

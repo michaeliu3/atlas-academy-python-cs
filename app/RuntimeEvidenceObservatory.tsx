@@ -7,10 +7,9 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import {
-  MODULE24_LEGACY_PROGRESS_STORAGE_KEY,
-  MODULE24_PROGRESS_STORAGE_KEY,
-  module24ProgressCodec,
-  parseModule24LegacyProgress,
+  clearModule24Progress,
+  persistModule24Progress,
+  restoreModule24Progress,
 } from "@/lib/module24-progress-codec";
 import styles from "./RuntimeEvidenceObservatory.module.css";
 
@@ -29,7 +28,6 @@ type ViewRecord = {
 };
 type ObservatoryRecord = Record<ObservatoryView, ViewRecord>;
 
-const STUDIO_STORAGE_KEY = MODULE24_PROGRESS_STORAGE_KEY;
 const CORE_RULE =
   "An optimization is accepted only after semantic behavior, privacy/retention boundaries, implementation scope, and a controlled measurement are kept distinct. A number is evidence only for the question and manifest that produced it.";
 
@@ -674,27 +672,8 @@ export function RuntimeEvidenceObservatory() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const rawCurrent = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        const currentRecord = module24ProgressCodec.parse(rawCurrent);
-        if (currentRecord) {
-          setRecords(currentRecord as ObservatoryRecord);
-        } else if (rawCurrent === null) {
-          const legacyRecord = parseModule24LegacyProgress(
-            window.localStorage.getItem(MODULE24_LEGACY_PROGRESS_STORAGE_KEY),
-          );
-          if (legacyRecord) {
-            try {
-              window.localStorage.setItem(
-                STUDIO_STORAGE_KEY,
-                module24ProgressCodec.serialize(legacyRecord),
-              );
-              window.localStorage.removeItem(MODULE24_LEGACY_PROGRESS_STORAGE_KEY);
-            } catch {
-              // The valid legacy record still supports this in-memory visit.
-            }
-            setRecords(legacyRecord as ObservatoryRecord);
-          }
-        }
+        const stored = restoreModule24Progress(window.localStorage);
+        if (stored) setRecords(stored as ObservatoryRecord);
       } catch {
         // Progress is optional and contains only allowlisted local prediction evidence.
       } finally {
@@ -707,10 +686,7 @@ export function RuntimeEvidenceObservatory() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        module24ProgressCodec.serialize(records),
-      );
+      persistModule24Progress(window.localStorage, records);
     } catch {
       // The observatory remains useful if local storage is unavailable.
     }
@@ -726,8 +702,7 @@ export function RuntimeEvidenceObservatory() {
   const resetProgress = () => {
     setRecords(emptyRecord());
     try {
-      window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-      window.localStorage.removeItem(MODULE24_LEGACY_PROGRESS_STORAGE_KEY);
+      clearModule24Progress(window.localStorage);
     } catch {
       // Local persistence is optional.
     }

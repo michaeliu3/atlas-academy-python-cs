@@ -7,6 +7,11 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import {
+  clearModule26Progress,
+  persistModule26Progress,
+  restoreModule26Progress,
+} from "@/lib/module26-progress-codec";
 import styles from "./CapstoneDefenseStudio.module.css";
 
 type StudioView =
@@ -27,7 +32,6 @@ type PatchDecision = "accept" | "revise" | "reject" | null;
 type FailureMode = "normal" | "retry" | "authority";
 type Challenge = "rollback" | "dependency" | "invariant";
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module26-capstone-defense.v1";
 const CORE_RULE =
   "A capstone release is a versioned evidence bundle, not a polished demo. Each consequential claim needs a named owner, representation or contract, appropriate test or observation, cost and failure boundary, security/privacy implication, human-impact evaluation, and explicit limitation. Agent-generated work remains an untrusted proposal until independently reviewed and verified.";
 
@@ -81,15 +85,6 @@ const views: ReadonlyArray<{
     artifact: "defense packet",
   },
 ];
-
-const choiceIdsByView: Record<StudioView, ReadonlyArray<string>> = {
-  brief: ["bounded", "demo", "metric"],
-  threads: ["trace", "diagram", "folders"],
-  ledger: ["scoped", "quality", "security"],
-  failure: ["idempotent", "timeout", "lock"],
-  patch: ["review", "merge", "ban"],
-  board: ["defer", "release", "confidence"],
-};
 
 const choices: Record<StudioView, ReadonlyArray<{ id: string; label: string }>> = {
   brief: [
@@ -345,31 +340,6 @@ function emptyRecord(): StudioRecord {
     patch: { choice: null, confidence: null, revealed: false },
     board: { choice: null, confidence: null, revealed: false },
   };
-}
-
-function isConfidence(value: unknown): value is Confidence {
-  return value === 1 || value === 2 || value === 3 || value === 4;
-}
-
-function isViewRecord(value: unknown, choiceIds: ReadonlyArray<string>): value is ViewRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  const record = value as Record<string, unknown>;
-  return (
-    (record.choice === null || (typeof record.choice === "string" && choiceIds.includes(record.choice))) &&
-    (record.confidence === null || isConfidence(record.confidence)) &&
-    typeof record.revealed === "boolean" &&
-    (!record.revealed || (record.choice !== null && record.confidence !== null))
-  );
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  const record = value as Record<string, unknown>;
-  return views.every((view) => isViewRecord(record[view.id], choiceIdsByView[view.id]));
 }
 
 function EvidenceLock({ artifact }: { artifact: string }) {
@@ -754,13 +724,8 @@ export function CapstoneDefenseStudio() {
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (stored) {
-          const parsed: unknown = JSON.parse(stored);
-          if (isStudioRecord(parsed)) {
-            setRecord(parsed);
-          }
-        }
+        const stored = restoreModule26Progress(window.localStorage);
+        if (stored) setRecord(stored as StudioRecord);
       } catch {
         // Local learning progress is optional; an unavailable/corrupt store never blocks the studio.
       } finally {
@@ -775,7 +740,7 @@ export function CapstoneDefenseStudio() {
       return;
     }
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      persistModule26Progress(window.localStorage, record);
     } catch {
       // Deliberately no remote fallback: this studio never sends learning data elsewhere.
     }
@@ -790,6 +755,15 @@ export function CapstoneDefenseStudio() {
       ...currentRecordValue,
       [view]: { ...currentRecordValue[view], ...update },
     }));
+  }
+
+  function resetProgress() {
+    try {
+      clearModule26Progress(window.localStorage);
+    } catch {
+      // Local persistence is optional; reset the in-memory study state either way.
+    }
+    setRecord(emptyRecord());
   }
 
   function handleTabKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>, index: number) {
@@ -856,9 +830,10 @@ export function CapstoneDefenseStudio() {
         <p>{CORE_RULE}</p>
       </div>
 
-      <div className={styles.progressNote} role="status">
-        <span>{storageReady ? "Your answers and confidence are saved only in this browser." : "Preparing optional local-only progress…"}</span>
+      <div className={styles.progressNote}>
+        <span role="status">{storageReady ? "Your answers and confidence are saved only in this browser." : "Preparing optional local-only progress…"}</span>
         <span><b>0</b> live learner records · <b>0</b> external calls · no release, merge, plan, or schedule can change here.</span>
+        <button className={styles.resetProgress} onClick={resetProgress} type="button">Reset local progress</button>
       </div>
 
       <div className={styles.tabList} role="tablist" aria-label="Capstone studio views">

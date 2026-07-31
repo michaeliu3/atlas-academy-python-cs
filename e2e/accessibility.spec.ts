@@ -347,6 +347,109 @@ test("M19 revokes export approval when its evidence brief changes", async ({ pag
   expect(results.violations, "Axe found a violation in the M19 evidence panel.").toEqual([]);
 });
 
+test("M19 keeps only its six prediction gates in v3 local progress and reset leaves no default record", async ({
+  page,
+}) => {
+  const legacyKey = "atlas-academy.module19-concurrency-studio.v2";
+  const currentKey = "atlas-academy.module19-concurrency-studio.v3";
+  const emptyRecord = {
+    history: { choice: null, confidence: null, revealed: false },
+    linearization: { choice: null, confidence: null, revealed: false },
+    coordination: { choice: null, confidence: null, revealed: false },
+    progress: { choice: null, confidence: null, revealed: false },
+    models: { choice: null, confidence: null, revealed: false },
+    evidence: { choice: null, confidence: null, revealed: false },
+  };
+  const revealedHistoryRecord = {
+    ...emptyRecord,
+    history: { choice: "lost", confidence: 1, revealed: true },
+  };
+
+  await page.goto("/");
+  await page.evaluate(
+    ({ key }) => {
+      window.localStorage.setItem(
+        key,
+        JSON.stringify({
+          version: 2,
+          activeView: "models",
+          answers: { history: { prediction: "lost", confidence: 4, revealed: true } },
+          record: { modelChoice: { candidate: "processes" } },
+          misconceptions: ["History explorer"],
+        }),
+      );
+    },
+    { key: legacyKey },
+  );
+  await page.getByRole("button", { name: "Machine & network" }).click();
+
+  const studio = page.locator("#concurrency-observatory");
+  await expect(studio).toBeVisible();
+  await expect(studio.getByText("0 / 6 views revealed", { exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+  const history = studio.locator("#concurrency-panel-history");
+  await selectRadioWithKeyboard(
+    page,
+    history.getByRole("radio", { name: /one contribution is lost/i }),
+  );
+  await selectRadioWithKeyboard(page, history.getByRole("radio", { name: /guess/i }));
+  await history.getByRole("button", { name: "Reveal the trace evidence" }).click();
+
+  await expect
+    .poll(() =>
+      page.evaluate(
+        (key) => {
+          const raw = window.localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : null;
+        },
+        currentKey,
+      ),
+    )
+    .toEqual({ version: 3, record: revealedHistoryRecord });
+
+  await studio.getByRole("button", { name: "Reset saved studio" }).click();
+  await studio.getByRole("button", { name: "Reset saved studio now" }).click();
+  await expect(studio.getByText("0 / 6 views revealed", { exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+  await page.reload();
+  await page.getByRole("button", { name: "Machine & network" }).click();
+  await expect(studio).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+});
+
 const codecMigrationCases = [
   {
     name: "M23 language lab",
@@ -357,6 +460,7 @@ const codecMigrationCases = [
     initialCoverage: "2 / 6 views revealed",
     resetCoverage: "0 / 6 views revealed",
     reset: "two-step",
+    resetStorage: { legacy: null, current: null },
     record: {
       boundary: { choice: "syntax", confidence: 4, revealed: true },
       grammar: { choice: "multiply", confidence: 3, revealed: true },
@@ -375,6 +479,7 @@ const codecMigrationCases = [
     initialCoverage: "2 / 6",
     resetCoverage: "0 / 6",
     reset: "one-step",
+    resetStorage: { legacy: null, current: null },
     record: {
       contract: { choice: "semantic", confidence: 4, revealed: true },
       graph: { choice: "audit", confidence: 3, revealed: true },
@@ -390,12 +495,6 @@ for (const migration of codecMigrationCases) {
   test(`${migration.name} migrates valid local progress once and reset clears it`, async ({
     page,
   }) => {
-    const clearedRecord = Object.fromEntries(
-      Object.keys(migration.record).map((view) => [
-        view,
-        { choice: null, confidence: null, revealed: false },
-      ]),
-    );
     await page.addInitScript(
       ({ legacyKey, record }) => {
         window.localStorage.setItem(legacyKey, JSON.stringify(record));
@@ -443,10 +542,181 @@ for (const migration of codecMigrationCases) {
           { currentKey: migration.currentKey, legacyKey: migration.legacyKey },
         ),
       )
-      .toEqual({ legacy: null, current: { version: 2, record: clearedRecord } });
+      .toEqual(migration.resetStorage);
     await expect(page.getByText(migration.resetCoverage, { exact: true })).toBeVisible();
   });
 }
+
+test("M23 leaves no record for a fresh or blank legacy learner state", async ({ page }) => {
+  const legacyKey = "atlas-academy.module23-language-lab.v1";
+  const currentKey = "atlas-academy.module23-language-lab.v2";
+  const emptyRecord = {
+    boundary: { choice: null, confidence: null, revealed: false },
+    grammar: { choice: null, confidence: null, revealed: false },
+    environment: { choice: null, confidence: null, revealed: false },
+    semantics: { choice: null, confidence: null, revealed: false },
+    contract: { choice: null, confidence: null, revealed: false },
+    bridge: { choice: null, confidence: null, revealed: false },
+  };
+
+  await page.goto("/modules/23-programming-languages-interpreters");
+  await expect(page.getByRole("heading", { name: "Atlas Language Lab", exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+  await page.evaluate(
+    ({ legacyKey: oldKey, record }) => {
+      window.localStorage.setItem(oldKey, JSON.stringify(record));
+    },
+    { legacyKey, record: emptyRecord },
+  );
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Atlas Language Lab", exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+});
+
+test("M23 fails closed when a malformed v2 record coexists with meaningful v1 progress", async ({ page }) => {
+  const legacyKey = "atlas-academy.module23-language-lab.v1";
+  const currentKey = "atlas-academy.module23-language-lab.v2";
+  const legacyRecord = {
+    boundary: { choice: "syntax", confidence: 4, revealed: true },
+    grammar: { choice: "multiply", confidence: 3, revealed: false },
+    environment: { choice: null, confidence: null, revealed: false },
+    semantics: { choice: null, confidence: null, revealed: false },
+    contract: { choice: null, confidence: null, revealed: false },
+    bridge: { choice: null, confidence: null, revealed: false },
+  };
+  const malformedCurrent = JSON.stringify({
+    version: 2,
+    record: { boundary: { choice: "syntax", confidence: 4, revealed: true } },
+  });
+  const rawLegacy = JSON.stringify(legacyRecord);
+
+  await page.addInitScript(
+    ({ legacyKey: oldKey, currentKey: newKey, legacy, current }) => {
+      window.localStorage.setItem(oldKey, legacy);
+      window.localStorage.setItem(newKey, current);
+    },
+    {
+      legacyKey,
+      currentKey,
+      legacy: rawLegacy,
+      current: malformedCurrent,
+    },
+  );
+  await page.goto("/modules/23-programming-languages-interpreters");
+  await expect(page.getByRole("heading", { name: "Atlas Language Lab", exact: true })).toBeVisible();
+  await expect(page.getByText("0 / 6 views revealed", { exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: rawLegacy, current: malformedCurrent });
+});
+
+test("M24 leaves no record for a fresh or blank legacy learner state", async ({ page }) => {
+  const legacyKey = "atlas-academy.module24-runtime-observatory.v1";
+  const currentKey = "atlas-academy.module24-runtime-observatory.v2";
+  const emptyRecord = {
+    contract: { choice: null, confidence: null, revealed: false },
+    graph: { choice: null, confidence: null, revealed: false },
+    cycle: { choice: null, confidence: null, revealed: false },
+    lens: { choice: null, confidence: null, revealed: false },
+    runtime: { choice: null, confidence: null, revealed: false },
+    decision: { choice: null, confidence: null, revealed: false },
+  };
+
+  await page.goto("/modules/24-cpython-performance-memory");
+  await expect(page.getByRole("heading", { name: "Runtime Evidence Observatory", exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+  await page.evaluate(
+    ({ legacyKey: oldKey, record }) => {
+      window.localStorage.setItem(oldKey, JSON.stringify(record));
+    },
+    { legacyKey, record: emptyRecord },
+  );
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Runtime Evidence Observatory", exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+
+  await page.evaluate(
+    ({ legacyKey: oldKey, currentKey: newKey, empty, record }) => {
+      window.localStorage.setItem(
+        newKey,
+        JSON.stringify({ version: 2, record: empty }),
+      );
+      window.localStorage.setItem(oldKey, JSON.stringify(record));
+    },
+    {
+      legacyKey,
+      currentKey,
+      empty: emptyRecord,
+      record: {
+        ...emptyRecord,
+        contract: { choice: "semantic", confidence: 4, revealed: true },
+      },
+    },
+  );
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Runtime Evidence Observatory", exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        ({ legacyKey: oldKey, currentKey: newKey }) => ({
+          legacy: window.localStorage.getItem(oldKey),
+          current: window.localStorage.getItem(newKey),
+        }),
+        { legacyKey, currentKey },
+      ),
+    )
+    .toEqual({ legacy: null, current: null });
+});
 
 test("the Module 22 trust studio requires prediction and confidence before reveal", async ({
   page,

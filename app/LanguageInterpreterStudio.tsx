@@ -8,6 +8,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import {
+  hasModule23MeaningfulProgress,
   MODULE23_LEGACY_PROGRESS_STORAGE_KEY,
   MODULE23_PROGRESS_STORAGE_KEY,
   module23ProgressCodec,
@@ -1009,6 +1010,7 @@ export function LanguageInterpreterStudio() {
   const [bridgeCard, setBridgeCard] = useState<BridgeCardId>("source");
   const [resetArmed, setResetArmed] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressDirtyRef = useRef(false);
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
   const coverage = Math.round((revealedCount / views.length) * 100);
 
@@ -1018,18 +1020,25 @@ export function LanguageInterpreterStudio() {
         const raw = window.localStorage.getItem(MODULE23_PROGRESS_STORAGE_KEY);
         if (raw !== null) {
           const stored = module23ProgressCodec.parse(raw);
-          if (stored) setRecord(stored as StudioRecord);
+          if (stored && hasModule23MeaningfulProgress(stored)) {
+            setRecord(stored as StudioRecord);
+          } else if (stored) {
+            window.localStorage.removeItem(MODULE23_PROGRESS_STORAGE_KEY);
+            window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
+          }
         } else {
           const legacy = parseModule23LegacyProgress(
             window.localStorage.getItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY),
           );
-          if (legacy) {
+          if (legacy && hasModule23MeaningfulProgress(legacy)) {
             const migratedRecord = legacy as StudioRecord;
             setRecord(migratedRecord);
             window.localStorage.setItem(
               MODULE23_PROGRESS_STORAGE_KEY,
               module23ProgressCodec.serialize(migratedRecord),
             );
+            window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
+          } else if (legacy) {
             window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
           }
         }
@@ -1044,18 +1053,27 @@ export function LanguageInterpreterStudio() {
   }, []);
 
   useEffect(() => {
-    if (!storageReady) return;
+    if (!storageReady || !progressDirtyRef.current) return;
     try {
-      window.localStorage.setItem(
-        MODULE23_PROGRESS_STORAGE_KEY,
-        module23ProgressCodec.serialize(record),
-      );
+      if (hasModule23MeaningfulProgress(record)) {
+        window.localStorage.setItem(
+          MODULE23_PROGRESS_STORAGE_KEY,
+          module23ProgressCodec.serialize(record),
+        );
+        window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
+      } else {
+        window.localStorage.removeItem(MODULE23_PROGRESS_STORAGE_KEY);
+        window.localStorage.removeItem(MODULE23_LEGACY_PROGRESS_STORAGE_KEY);
+      }
     } catch {
       // Progress storage is optional and never changes the instruction path.
+    } finally {
+      progressDirtyRef.current = false;
     }
   }, [record, storageReady]);
 
   const updateRecord = (view: InterpreterView, next: Partial<ViewRecord>) => {
+    progressDirtyRef.current = true;
     setRecord((current) => ({
       ...current,
       [view]: { ...current[view], ...next },
@@ -1098,6 +1116,7 @@ export function LanguageInterpreterStudio() {
       return;
     }
     clearStoredStudio();
+    progressDirtyRef.current = false;
     setRecord(emptyRecord());
     setActiveView("boundary");
     setBoundaryStage("input");

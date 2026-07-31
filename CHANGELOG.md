@@ -7,15 +7,19 @@ actually published.
 
 ## Unreleased
 
-- Migrated M23 and M24's fixed browser prediction checkpoints into the shared,
-  versioned, allowlisted v2 codec. Each accepts an exact v1 record only for a
-  one-time local migration, writes v2 before clearing v1, and reset clears both
-  keys; browser tests cover migration and non-revival after reset. M25 instead
-  begins a fresh v2 boundary and intentionally discards its older
-  un-enveloped v1 record rather than trusting or migrating it. These records
-  remain optional local state, not tamper-proof event history or mastery
-  evidence. M18, M19, M26, and the intake still require their own migration;
-  this is not a whole-portal storage-hardening claim.
+- Migrated M23, M24, M19, and M26 prediction checkpoints into the shared,
+  versioned, allowlisted local-progress codec. M23/M24/M26 migrate only an
+  exact, meaningful legacy record after writing the current envelope; blank
+  M26 legacy state is removed without creating a replacement. M19 instead
+  retires its broad v2 simulator/context record and starts a fresh six-gate v3
+  envelope. Malformed current records fail closed, reset removes both known
+  generations, and a blank visit/reset writes no default record. Unit and
+  browser regressions cover forged records, migration/no-fallback behavior,
+  and M26's preview boundary. These records remain optional browser state, not
+  learner identity, event history, Notion evidence, authorization, or mastery
+  evidence. M18, the intake diagnostic, and a storage-surface policy/linter
+  still require separate work; this is not a whole-portal storage-hardening or
+  security-clean claim.
 - Added M25's non-promoting structural packet. It resolves 43 typed local
   pointers, including one visible H3 session-output pointer for each of the six
   sessions, and hash-binds the authoring-only M25 source-audit addendum as an

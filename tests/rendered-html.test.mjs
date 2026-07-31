@@ -956,7 +956,7 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.match(style, /focus-visible/);
 });
 
-test("Module 24 preserves its runtime-evidence invariant, six-view observatory, and safe local progress shape", async () => {
+test("Module 24 preserves its runtime-evidence invariant and six-view observatory", async () => {
   const studioUrl = new URL("../app/RuntimeEvidenceObservatory.tsx", import.meta.url);
   const styleUrl = new URL("../app/RuntimeEvidenceObservatory.module.css", import.meta.url);
   const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
@@ -992,10 +992,6 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="runtime-evidence-observatory-title"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
     6,
@@ -1077,67 +1073,34 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(style, /focus-visible/);
 });
 
-test("Module 26 preserves its evidence-first capstone flow and local-only boundary", async () => {
-  const studioUrl = new URL("../app/CapstoneDefenseStudio.tsx", import.meta.url);
-  const styleUrl = new URL("../app/CapstoneDefenseStudio.module.css", import.meta.url);
-  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
-  const [studio, style, page] = await Promise.all([
-    readFile(studioUrl, "utf8"),
-    readFile(styleUrl, "utf8"),
-    readFile(pageUrl, "utf8"),
-  ]);
+test("Module 26 renders an evidence-first capstone preview without opening its studio", async () => {
+  const response = await render(
+    "/modules/26-systems-capstone-open-source-stewardship",
+  );
+  assert.equal(response.status, 200);
 
-  const exactInvariant =
-    "A capstone release is a versioned evidence bundle, not a polished demo. Each consequential claim needs a named owner, representation or contract, appropriate test or observation, cost and failure boundary, security/privacy implication, human-impact evaluation, and explicit limitation. Agent-generated work remains an untrusted proposal until independently reviewed and verified.";
-  assert.ok(studio.includes(exactInvariant));
-  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
-
-  const orderedViewIds = ["brief", "threads", "failure", "patch", "ledger", "board"];
-  for (const viewLabel of [
-    "Release Brief",
-    "System Threads",
-    "Failure Playback",
-    "Red-Team Patch Bay",
-    "Evidence Ledger",
-    "Release Board & Defense",
-  ]) {
-    assert.ok(studio.includes('label: "' + viewLabel + '"'), viewLabel);
-  }
-  for (const [index, viewId] of orderedViewIds.entries()) {
-    const nextViewId = orderedViewIds[index + 1];
-    if (nextViewId) {
-      assert.ok(
-        studio.indexOf('id: "' + viewId + '"') < studio.indexOf('id: "' + nextViewId + '"'),
-        "capstone view order keeps failure and repair before evidence synthesis",
-      );
-    }
-  }
-
-  assert.match(studio, /role="tablist"/);
-  assert.match(studio, /role="tab"/);
-  assert.match(studio, /role="tabpanel"/);
-  assert.match(studio, /aria-controls=\{`capstone-panel-\$\{view\.id\}`\}/);
-  assert.match(studio, /id=\{`capstone-panel-\$\{view\.id\}`\}/);
-  assert.match(studio, /hidden=\{!selected\}/);
-  assert.match(studio, /role="group"/);
-  assert.match(studio, /aria-pressed=\{selected\}/);
-  assert.doesNotMatch(studio, /role="radiogroup"/);
-  assert.match(studio, /"ArrowRight"/);
-  assert.match(studio, /"ArrowLeft"/);
-  assert.match(studio, /"Home"/);
-  assert.match(studio, /"End"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isStudioRecord/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /0<\/b> live learner records/);
-  assert.match(studio, /0<\/b> external calls/);
-  assert.match(studio, /never applies, merges, publishes, or deploys a patch/);
-  assert.doesNotMatch(studio, /window\.confirm/);
-  assert.doesNotMatch(studio, /<svg\b/i);
-  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
-  assert.match(style, /prefers-reduced-motion/);
-  assert.match(style, /focus-visible/);
+  const document = new JSDOM(await response.text()).window.document;
+  const article = document.querySelector("#module-reading-article");
+  assert.ok(article);
+  assert.match(
+    article.textContent ?? "",
+    /Atlas may be released only as a versioned, bounded capability/,
+  );
+  assert.match(article.textContent ?? "", /Release Brief/);
+  assert.match(
+    article.textContent ?? "",
+    /The defense tests the architecture, not presentation skill/,
+  );
+  assert.equal(
+    document.querySelector("#capstone-defense-studio-title"),
+    null,
+    "the preview must not mount a gated studio",
+  );
+  assert.equal(
+    document.querySelector("[aria-label='Post-module learning conversation']"),
+    null,
+    "the preview must not expose a gated oral-defense flow",
+  );
 });
 
 test("release architecture keeps Notion capture out of the portal runtime", async () => {
@@ -1402,69 +1365,6 @@ test("Module 19 evidence auditor uses the real fixture digest and per-axis patch
   assert.match(evidence, /Copy approved instructor brief/i);
   assert.match(evidence, /What this proves/);
   assert.match(evidence, /What remains unknown/);
-});
-
-test("Module 19 persists the bounded learning record and resets view-specific simulators", async () => {
-  const studioUrl = new URL("../app/ConcurrencyStudio.tsx", import.meta.url);
-  const studio = await readFile(studioUrl, "utf8");
-  const root = extractFunctionSource(studio, "ConcurrencyStudio");
-
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /window\.localStorage\.removeItem/);
-  assert.match(studio, /function clearStoredStudio/);
-  assert.match(studio, /predictionSets\[view\.id\]\.options\.some/);
-  assert.match(studio, /savedPrediction !== null/);
-  assert.match(root, /useState<StudioRecord>\(initialRecord\)/);
-  assert.match(root, /setRecord\(sanitizeStudioRecord\(stored\.record\)\)/);
-  assert.match(root, /record,/);
-  assert.match(root, /misconceptions:\s*misconceptionLabels\(answers\)/);
-  assert.match(root, /activeView,/);
-  assert.match(root, /answers:\s*safeAnswers/);
-
-  const persistedAnswers = root.slice(
-    root.indexOf("const safeAnswers"),
-    root.indexOf("window.localStorage.setItem"),
-  );
-  assert.doesNotMatch(
-    persistedAnswers,
-    /revision/,
-    "free-form revision text must stay out of localStorage",
-  );
-
-  assert.match(studio, /Reset saved studio/);
-  assert.match(studio, /Reset this view/);
-  assert.match(root, /const resetView = \(\) =>/);
-  for (const viewState of [
-    "historySchedule",
-    "completedHistories",
-    "historyCheckpoint",
-    "historyCensusCheckpoint",
-    "linearizationPatch",
-    "protectedSteps",
-    "linearizationCheckpoint",
-    "coordinationInstrument",
-    "coordinationActions",
-    "coordinationPendingAction",
-    "coordinationCheckpoint",
-    "progressScenario",
-    "progressEdges",
-    "modelChoice",
-    "evidenceVariant",
-    "patchDecisions",
-  ]) {
-    assert.match(
-      root.slice(root.indexOf("const resetView"), root.indexOf("const resetStudio")),
-      new RegExp(`\\b${viewState}\\b`),
-      `view reset covers ${viewState}`,
-    );
-  }
-  assert.match(root, /setRecord\(initialRecord\(\)\)/);
-  assert.match(root, /setActiveView\("history"\)/);
-  assert.match(root, /<RuntimeProfilePlate \/>/);
-  assert.match(studio, /module19-concurrency-studio\.v2/);
-  assert.match(root, /stored\.version === 2/);
 });
 
 test("generated module manifest projects the canonical graph without bypassing prerequisites", async () => {
