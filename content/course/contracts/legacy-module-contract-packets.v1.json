@@ -606,6 +606,92 @@
         {"id": "m21-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module21_reference.py", "public/downloads/test_module21_reference.py"]},
         {"id": "m21-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m22",
+      "packetId": "m22-security-trust-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m21"],
+        "forwardModuleId": "m23",
+        "masteryGateId": "systems",
+        "studioId": "security-trust"
+      },
+      "workbookPath": "content/modules/22_security_privacy_trust_boundaries.md",
+      "sourceMapPath": "content/source-maps/module22_security_trust_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module22_security_trust_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m22-session-1", "usesPrerequisiteModuleIds": ["m21"], "forwardArtifactId": "m22-boundary-card"},
+        {"sessionNumber": 2, "pointerId": "m22-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m22-authority-table"},
+        {"sessionNumber": 3, "pointerId": "m22-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m22-no-promotion-rules"},
+        {"sessionNumber": 4, "pointerId": "m22-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m22-purpose-cards"},
+        {"sessionNumber": 5, "pointerId": "m22-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m22-consequence-ledger"},
+        {"sessionNumber": 6, "pointerId": "m22-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m22-incident-reconstruction"}
+      ],
+      "pointers": [
+        {"id": "m22-course-map", "roles": ["prerequisite-map"], "label": "Canonical prerequisite map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "1-position-in-the-knowledge-system"}},
+        {"id": "m22-forward-handoff", "roles": ["forward-handoff"], "label": "M23 handoff boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "14-handoff--what-module-22-deliberately-leaves-open"}},
+        {"id": "m22-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "2-session-1--trust-boundary-atlas-what-can-atlas-lose-and-where-does-meaning-change"}},
+        {"id": "m22-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "3-session-2--identity-to-decision-ladder-who-may-cause-this-effect"}},
+        {"id": "m22-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "4-session-3--data-to-authority-pipeline-why-one-sanitize-box-cannot-protect-every-sink"}},
+        {"id": "m22-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "5-session-4--cryptographic-purpose-map-what-does-this-primitive-actually-establish"}},
+        {"id": "m22-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "6-session-5--release-provenance-and-human-impact-what-must-be-true-to-ship-responsibly"}},
+        {"id": "m22-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "7-session-6--privacy-aware-incident-reconstruction-how-do-we-learn-without-overclaiming"}},
+        {"id": "m22-first-principle", "roles": ["first-principles"], "label": "Trust-control first-principles derivation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "derive-a-control-from-first-principles"}},
+        {"id": "m22-definition", "roles": ["definition"], "label": "Claim labels", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "claim-labels"}},
+        {"id": "m22-assumption", "roles": ["assumption"], "label": "Freshness boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "freshness-is-a-separate-question"}},
+        {"id": "m22-derivation", "roles": ["derivation-proof"], "label": "Trust-control derivation candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "derive-a-control-from-first-principles"}},
+        {"id": "m22-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Facts, hypotheses, and unknowns", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "facts-hypotheses-and-unknowns"}},
+        {"id": "m22-numerical-experiment", "roles": ["numerical-experiment"], "label": "Bounded runtime-evidence candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "runtime-evidence-card"}},
+        {"id": "m22-code-reading", "roles": ["code-reading"], "label": "Trace-promotion code-reading lab", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "code-reading-lab-s1--trace-promotion"}},
+        {"id": "m22-debug", "roles": ["debugging"], "label": "Release-and-denial debugging candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "code-reading-lab-s5--review-the-release-and-denial"}},
+        {"id": "m22-design", "roles": ["design"], "label": "Eight-level design ladder candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "9-eight-level-problem-ladder"}},
+        {"id": "m22-prediction", "roles": ["prediction"], "label": "Trust Control Room prediction candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "8-atlas-trust-control-room--visual-studio-text-equivalent"}},
+        {"id": "m22-transfer", "roles": ["transfer", "oral-transfer"], "label": "M23 handoff transfer candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "module-23-handoff"}},
+        {"id": "m22-source-rationale", "roles": ["source-rationale"], "label": "Source-selection rationale", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module22_security_trust_source_map.md", "headingAnchor": "executive-teaching-decision"}},
+        {"id": "m22-claim-linkage", "roles": ["claim-linkage"], "label": "Claim-to-source matrix", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module22_security_trust_source_map.md", "headingAnchor": "claim-to-source-matrix-for-authoring-and-ta-use"}},
+        {"id": "m22-license-reuse", "roles": ["license-reuse"], "label": "Licensing and access ledger", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module22_security_trust_source_map.md", "headingAnchor": "licensing-and-access-ledger"}},
+        {"id": "m22-stable-learner-link", "roles": ["stable-learner-link"], "label": "Learner resource route", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "13-resource-route-and-source-discipline"}},
+        {"id": "m22-visual-studio", "roles": ["visual"], "label": "Trust Control Room visual studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "8-atlas-trust-control-room--visual-studio-text-equivalent"}},
+        {"id": "m22-text-alternative", "roles": ["text-alternative"], "label": "Trust Control Room text equivalent", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "8-atlas-trust-control-room--visual-studio-text-equivalent"}},
+        {"id": "m22-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks"}},
+        {"id": "m22-misconception-candidate", "roles": ["misconception"], "label": "Diagnostic misconception candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks"}},
+        {"id": "m22-retrieval", "roles": ["retrieval"], "label": "Retrieval schedule", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "retrieval-schedule"}},
+        {"id": "m22-dossier", "roles": ["dossier"], "label": "Trust and release dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "11-cumulative-project--atlas-trust--release-dossier"}},
+        {"id": "m22-acceptance", "roles": ["acceptance-criteria"], "label": "Required dossier deliverables", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "required-deliverables"}},
+        {"id": "m22-rubric", "roles": ["rubric"], "label": "Dossier review rubric", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "review-rubric"}},
+        {"id": "m22-oral-protocol", "roles": ["oral-protocol"], "label": "Dossier oral-defense candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "11-cumulative-project--atlas-trust--release-dossier"}},
+        {"id": "m22-oral-hint", "roles": ["oral-hint"], "label": "TA intake candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "ta-intake-rule"}},
+        {"id": "m22-oral-reflection", "roles": ["oral-reflection"], "label": "Study Partner reflection candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "study-partner-routine--20-to-30-minutes"}},
+        {"id": "m22-oral-summary", "roles": ["oral-summary"], "label": "Incident-packet evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "incident-packet-template"}},
+        {"id": "m22-ta", "roles": ["ta"], "label": "M22 TA studios", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "ta-studios"}},
+        {"id": "m22-study-partner", "roles": ["study-partner"], "label": "M22 Study Partner routine", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/22_security_privacy_trust_boundaries.md", "headingAnchor": "study-partner-routine--20-to-30-minutes"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-course-map", "m22-forward-handoff"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-session-1", "m22-session-2", "m22-session-3", "m22-session-4", "m22-session-5", "m22-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-definition", "m22-assumption", "m22-derivation", "m22-counterexample", "m22-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-code-reading", "m22-debug", "m22-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-source-rationale", "m22-claim-linkage", "m22-license-reuse", "m22-stable-learner-link"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-visual-studio", "m22-text-alternative"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-diagnostic", "m22-misconception-candidate"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-dossier", "m22-acceptance", "m22-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-oral-protocol", "m22-oral-hint", "m22-counterexample", "m22-transfer", "m22-oral-reflection", "m22-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-forward-handoff"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m22-studio", "kind": "studio", "paths": ["app/SecurityTrustStudio.tsx", "app/SecurityTrustStudio.module.css", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m22-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module22_reference.py", "public/downloads/test_module22_reference.py"]},
+        {"id": "m22-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }

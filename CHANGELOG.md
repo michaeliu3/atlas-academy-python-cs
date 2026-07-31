@@ -15,6 +15,14 @@ actually published.
   associated learner/resource route now corrects stale TLS status language:
   RFC 8446 is obsolete, RFC 9846 is the TLS 1.3 successor, and RFC 9325's
   status route must be rechecked for later updates.
+- Added M22's non-promoting structural packet: 37 typed local anchors bind
+  its canonical M21 → M22 → M23 route, six-session trust spine, bounded
+  studio/model artifacts, source route, diagnostic, dossier, oral-defense,
+  TA, and Study Partner surfaces. Its authoring-only audit addendum is now a
+  hashable internal input; its historical rigor, code/debug/design,
+  prediction, transfer, diagnostic/misconception, and oral-defense
+  ambiguities remain unresolved. Nothing changes human review, availability,
+  or publication state.
 - Added an authoring-only M19 source-audit addendum that ties its concurrency
   source classes to six sessions, reuse decisions, and release-truth checks.
   It keeps the genuinely missing module-specific Study Partner route visible;

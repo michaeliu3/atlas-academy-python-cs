@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "342f1f960334c82d3bf7a08d57a4e235ad84b6d7df6e79778f6bb7216eac702f"
+      "sha256": "2f313162c8734760e51ff0873e1b8cdafa65b1220d711a85be25949d563b0584"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -203,6 +203,10 @@
     {
       "path": "content/source-maps/module21_async_distributed_source_map.md",
       "sha256": "ea16503c78bf4cee8d1c71c5a1eabcccff6c1638480b58e9e218e2a7c12e807c"
+    },
+    {
+      "path": "content/source-maps/module22_security_trust_source_audit_addendum.md",
+      "sha256": "f7d14feb10a96224875e568fa2111ff72a8cd5e89d2f460294c417db296d313b"
     },
     {
       "path": "content/source-maps/module22_security_trust_source_map.md",
