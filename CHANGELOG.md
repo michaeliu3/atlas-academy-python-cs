@@ -32,6 +32,11 @@ actually published.
   records the portal, Python 3.12, Python 3.14, and Linux Chromium/axe jobs;
   it is not a GitHub Release, private deployment, human review, publication,
   or security-clear claim.
+- Recorded the successful GitHub Course CI run for the live Codex workflow,
+  Windows static-asset compatibility patch, and prior session-output evidence
+  source head (`95ee127…`). The ledger records all four named jobs, including
+  the Linux Chromium/axe browser exercise; it is not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
 - Added M24's authoring-only primary-source research note and source-audit
   addendum. They preserve its immutable five ambiguous criteria (rigor,
   transfer, visual/text alternative, diagnostic/misconceptions, and TA) and
