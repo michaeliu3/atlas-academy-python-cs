@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Recorded the successful GitHub Course CI run for the M20 structural-packet
+  source head (`f253b30…`) in the append-only provenance ledger. It records
+  four successful named jobs on attempt 1, not a GitHub Release, private
+  deployment, human review, publication, or security-clear claim.
+- Recorded the successful GitHub Course CI run for the bounded M31 authoring
+  fixture source head (`3ac1ee2…`) in the same provenance ledger. It records
+  four successful named jobs on attempt 1, not M31 learner publication, human
+  review, private deployment, or a security-clear claim.
 - Added M20's non-promoting structural packet: 37 typed local anchors bind
   its canonical M19 → M20 → M21 route, six-session networking spine, bounded
   studio/model artifacts, source route, diagnostic, dossier, oral-defense,
