@@ -34,10 +34,12 @@ not the full result ledger.
 
 This is a user-interface consent boundary, not a claim that a browser can stop
 someone from selecting visible text manually. The portal never creates a Notion
-write; an explicitly configured and manually verified external Codex
-learning-chat workflow is a separate, learner-authorized boundary. It defaults
-to local records and must exclude raw voice, sensitive data, credentials, and
-off-record material. See [the live Codex workflow](LIVE_CODEX_LEARNING_WORKFLOW.md).
+write. The two learner-designated external Codex learning chats may
+automatically create one concise record after a substantive conversation in
+their configured private destination; portable copied prompts remain local.
+They must exclude raw voice, sensitive data, credentials, and off-record
+material, and may claim a saved note only with direct evidence. See [the live
+Codex workflow](LIVE_CODEX_LEARNING_WORKFLOW.md).
 
 ## Publication decision
 

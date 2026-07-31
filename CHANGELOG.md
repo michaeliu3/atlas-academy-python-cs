@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Added a versioned v2 designated-chat learning workflow. Portable copied
+  prompts remain local-first, while only the learner-designated Teaching
+  Assistant and Study Partner chats may automatically create at most one
+  concise Notion note after a substantive learning conversation in a configured
+  private record. The portal remains unable to make Notion writes; actual voice,
+  rendering, platform-setting, and successful-note behavior still require direct
+  external evidence.
 - Completed Module 2's Mermaid accessibility retrofit: all nine instructional
   diagrams now have unique stable IDs, concise titles, and authored prose
   alternatives that retain the recursive call, termination, proof, cycle, and

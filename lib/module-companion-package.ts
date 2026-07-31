@@ -1,4 +1,4 @@
-import workflowData from "@/content/course/live-codex-learning-workflow.v1.json";
+import workflowData from "@/content/course/live-codex-learning-workflow.v2.json";
 import {
   courseCatalog,
   getCourseGraphModule,
@@ -15,7 +15,7 @@ export type ModuleCompanionForwardHandoff = {
 };
 
 export type ModuleCompanionPackage = {
-  schemaVersion: 1;
+  schemaVersion: 2;
   module: {
     id: string;
     number: number;
@@ -28,8 +28,8 @@ export type ModuleCompanionPackage = {
   guide: ModuleCompanionGuide;
   whiteboardProtocol: string[];
   recordBoundary: {
-    defaultMode: "keep-local";
-    enabledMode: "configured-notion-session-note";
+    portableStartupMode: "keep-local";
+    designatedChatMode: "automatic-after-substantive-session";
   };
   teachingAssistant: {
     role: "supportive-oral-defense";

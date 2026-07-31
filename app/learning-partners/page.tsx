@@ -63,10 +63,12 @@ export default function LearningPartnersPage() {
             Use the diagnostic to choose a bridge, the workbook to build the
             model, and a learning partner to make the model explainable under
             a changed condition. Atlas itself does not access voice, a
-            microphone, or Notion. In a learner-authorized configuration, the
-            designated Codex chats—not the portal—may create one concise Notion
-            session note after a substantive learning conversation, but only
-            after explicit configuration and manual platform verification.
+            microphone, or Notion. Within their configured private learning
+            record, the designated Codex chats—not the portal—are authorized to
+            automatically create one concise Notion session note after a
+            substantive learning conversation. A successful write is recorded
+            only from direct evidence; voice, rendering, and platform-setting
+            behavior remain separately unproven until observed.
           </p>
           <Link href="/route">Return to the 60-day route <span aria-hidden="true">→</span></Link>
         </section>

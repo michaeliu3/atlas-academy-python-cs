@@ -214,10 +214,11 @@ than typing volume.
 
 The oral defense may use the designated voice-enabled Teaching Assistant Codex
 chat where available or the equivalent text conversation. It is an encouraging
-rehearsal, not a pass/fail exam. In an explicitly configured and manually
-verified private workflow, the chat may create at most one concise Notion
-evidence note when the learner ends a substantive session; never save raw voice
-or a full transcript.
+rehearsal, not a pass/fail exam. In the two learner-designated chats with a
+configured private record, the role handoff authorizes at most one automatic
+concise Notion evidence note after a substantive learning conversation; never
+save raw voice or a full transcript, and never claim the note was saved without
+direct evidence.
 
 ## Catch-up without breaking the chain
 
@@ -275,13 +276,14 @@ Keep the record small enough to be useful:
 | Evidence pointer | A local note, redacted screenshot, repository commit, or one-sentence proof/trace. |
 | Confidence and repair | `medium; confused heap order with sorted order; repaired with two insert traces` |
 | Next bridge and retrieval date | `compare heap vs ordered list; +7 days` |
-| Record decision | `kept local`, `manually copied`, or `configured Codex → Notion session note` |
+| Record decision | `kept local`, `manually copied`, or `designated Codex → automatic concise Notion session note` |
 
 Portal progress is local-first: Atlas itself does not write or export to
-Notion. A learner may explicitly configure and verify the designated Codex
-chats to make at most one concise Notion session note after a substantive
-session has ended. Keep secrets, raw voice/transcripts, personal diagnostics,
-and private notes out of Git. See the [live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md)
+Notion. The learner-designated Codex chats may automatically make at most one
+concise Notion session note after a substantive learning conversation in their
+configured private record. Keep secrets, raw voice/transcripts, personal
+diagnostics, and private notes out of Git; a successful write still needs
+direct evidence. See the [live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md)
 and the [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) for the remaining
 implementation work.
 

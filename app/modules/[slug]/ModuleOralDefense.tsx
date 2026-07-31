@@ -209,9 +209,10 @@ export function ModuleOralDefense({
         <p className={styles.evidencePrivacy}>
           The guided text route creates an optional local draft only after you
           reflect; it is not sent or saved by Atlas. A designated Codex chat
-          may create at most one concise Notion session note after you set the
-          exact configured mode, verify its destination, and end a substantive
-          session. Do not keep raw voice recordings, sensitive personal
+          may automatically create at most one concise Notion session note after
+          a substantive learning conversation in its configured private record.
+          Atlas does not initiate it, and no successful write is claimed without
+          direct evidence. Do not keep raw voice recordings, sensitive personal
           content, off-record material, or an unnecessary transcript.
         </p>
       </div>

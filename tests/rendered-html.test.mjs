@@ -115,6 +115,7 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.equal(response.status, 200);
 
   const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
   assert.match(html, /Two separate chats\. Two different jobs\./);
   assert.match(html, /Teaching Assistant/);
   assert.match(html, /Study Partner/);
@@ -122,10 +123,15 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /Copy Study Partner startup prompt/);
   assert.match(html, /Never give a bare pass\/fail verdict/);
   assert.match(html, /visible chat an accessible whiteboard/);
-  assert.match(html, /Record mode: keep local/);
-  assert.match(html, /configured-notion-session-note/);
-  assert.match(html, /at most one note per substantive session/);
+  assert.match(html, /Portable copied-chat record mode: keep local/);
+  assert.match(html, /automatic-after-substantive-session/);
+  assert.match(html, /at most one concise structured note per substantive session/);
   assert.match(html, /pause records/);
+  assert.match(readable, /configured private learning\s+record/i);
+  assert.match(readable, /designated Codex chats—not the portal/i);
+  assert.match(readable, /authorized to\s+automatically create one concise Notion session note/i);
+  assert.match(readable, /after a\s+substantive learning conversation/i);
+  assert.match(readable, /successful write is recorded\s+only from direct evidence/i);
   assert.match(html, /The Teaching Assistant conducts the actual post-module oral defense/);
 });
 
@@ -266,7 +272,7 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
   assert.match(companionPackage, /Do not score, grade, or make a binary outcome judgment/);
   assert.match(companionPackage, /prose or ASCII fallback/);
   assert.match(companionPackage, /language-labelled fenced code/);
-  assert.match(companionPackage, /recordBoundary\.enabledMode/);
+  assert.match(companionPackage, /recordBoundary\.designatedChatMode/);
   assert.match(companionPackage, /Canonical forward handoff/);
   assert.match(textDefense, /Equivalent text conversation/);
   assert.match(textDefense, /Work through one question at a time\./);
@@ -308,7 +314,7 @@ test("each Core-open module reader keeps the supportive oral-defense route", asy
   assert.match(renderedText, /Study Partner · rehearsal context/);
   assert.match(renderedText, /Canonical forward handoff/);
   assert.match(renderedText, /Module 5: Cost Models and Algorithm Analysis/);
-  assert.match(renderedText, /configured-notion-session-note/);
+  assert.match(renderedText, /automatic-after-substantive-session/);
   assert.match(readable, /A small, learner-controlled record/);
   assert.match(renderedText, /formative oral defense conversation, not a grade/i);
 });

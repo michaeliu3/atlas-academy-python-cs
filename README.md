@@ -34,10 +34,11 @@ learner's designated, voice-enabled Codex chats are the primary guided-learning
 surface: the TA repairs models and conducts supportive oral defenses; the Study
 Partner runs live Socratic retrieval/rehearsal rounds. Neither role assigns a
 pass/fail verdict. Atlas does not control platform voice, microphone access,
-rendering, or transcript retention. After explicit configuration and manual
-platform verification, a learner-authorized Codex-to-Notion setup may create
-one concise structured note per substantive session; the portal itself remains
-local-first. Set up each role once from Learning Partners, then copy the
+rendering, or transcript retention. In the two learner-designated chats with a
+configured private record, the role handoff authorizes an automatic concise
+structured note per substantive session; portable copied prompts remain local,
+and a successful write is not claimed without direct evidence. The portal
+itself remains local-first. Set up each role once from Learning Partners, then copy the
 current Core-open module's graph-bound follow-on context from its oral-defense
 panel. That packet supports a conversation but is not route progression,
 contract review, or a platform capability claim. See [the live Codex learning

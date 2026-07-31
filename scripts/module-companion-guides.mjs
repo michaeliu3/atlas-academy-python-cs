@@ -83,7 +83,7 @@ export async function validateModuleCompanionGuides(
   if (registry?.canonicalCourseGraph !== "content/course/course-graph.v2.json") {
     errors.push("module companion guide registry must bind to the canonical course graph.");
   }
-  if (registry?.liveCodexLearningWorkflow !== "content/course/live-codex-learning-workflow.v1.json") {
+  if (registry?.liveCodexLearningWorkflow !== "content/course/live-codex-learning-workflow.v2.json") {
     errors.push("module companion guide registry must bind to the reviewed Live Codex workflow.");
   }
   if (!Array.isArray(registry?.guides)) {

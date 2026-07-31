@@ -6,15 +6,21 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
 
 export const liveCodexLearningWorkflowRelativePath =
-  "content/course/live-codex-learning-workflow.v1.json";
+  "content/course/live-codex-learning-workflow.v2.json";
 export const liveCodexLearningWorkflowGuideRelativePath =
   "docs/LIVE_CODEX_LEARNING_WORKFLOW.md";
 
-const requiredActivation = [
-  "the exact enabled record mode is selected",
+const requiredNoteConditions = [
   "this is the designated Teaching Assistant or Study Partner chat",
   "the configured private Notion destination is reachable",
-  "a substantive session has ended or the learner asks for its concise summary",
+  "the learning conversation is substantive",
+  "records are not paused and the material is not marked off-record",
+];
+const requiredRecordFields = [
+  "date, role, module/topic, and learner question",
+  "key definition, derivation, code/architecture trace, or whiteboard snapshot",
+  "prediction, evidence, misconception, counterexample, uncertainty, and next action",
+  "Teaching Assistant oral-defense evidence or Study Partner discussion/rehearsal handoff",
 ];
 const requiredRoles = [
   {
@@ -99,14 +105,17 @@ async function validateGuide(path, siteRoot, errors) {
       errors.push(`Live Codex workflow learner guide is missing the ${marker} marker.`);
     }
   }
-  if (!guide.includes("Record mode: keep local")) {
-    errors.push("Live Codex workflow learner guide must expose the safe local default.");
+  if (!guide.includes("portable copyable prompt stays") || !guide.includes("`keep local`")) {
+    errors.push("Live Codex workflow learner guide must distinguish the portable local default.");
   }
-  if (!guide.includes("configured-notion-session-note")) {
-    errors.push("Live Codex workflow learner guide must name the exact enabled record mode.");
+  if (!guide.includes("automatic concise Notion note")) {
+    errors.push("Live Codex workflow learner guide must name the designated-chat automatic note policy.");
   }
   if (!guide.includes("at most one concise note per substantive session")) {
     errors.push("Live Codex workflow learner guide must state the session-level write cadence.");
+  }
+  if (!guide.includes("direct evidence")) {
+    errors.push("Live Codex workflow learner guide must retain the direct-evidence claim boundary.");
   }
   return absolutePath;
 }
@@ -128,11 +137,11 @@ export async function validateLiveCodexLearningWorkflow(
     throw new Error("Live Codex learning workflow validation failed:\n- workflow must be an object.");
   }
   if (
-    workflow.schemaVersion !== 1 ||
-    workflow.workflowVersion !== "v1" ||
+    workflow.schemaVersion !== 2 ||
+    workflow.workflowVersion !== "v2" ||
     workflow.kind !== "atlas-live-codex-learning-workflow"
   ) {
-    errors.push("Live Codex workflow must use schemaVersion 1, workflowVersion v1, and the expected kind.");
+    errors.push("Live Codex workflow must use schemaVersion 2, workflowVersion v2, and the expected kind.");
   }
   if (text(workflow.title) === "" || text(workflow.purpose) === "") {
     errors.push("Live Codex workflow must define a non-empty title and purpose.");
@@ -148,19 +157,41 @@ export async function validateLiveCodexLearningWorkflow(
     if (delivery.chatSurface !== "user-designated-platform-chat") {
       errors.push("Live Codex workflow must keep the user-designated platform-chat boundary.");
     }
-    if (delivery.defaultRecordMode !== "keep-local") {
-      errors.push("Live Codex workflow defaultRecordMode must remain keep-local.");
-    }
-    if (delivery.enabledRecordMode !== "configured-notion-session-note") {
-      errors.push("Live Codex workflow must require the exact configured Notion session-note mode.");
-    }
-    requiredStringArray(delivery.requiredActivation, "Live Codex workflow requiredActivation", requiredActivation, errors);
-    if (delivery.writeCadence !== "at-most-one-concise-note-per-substantive-session") {
-      errors.push("Live Codex workflow must limit writes to one concise note per substantive session.");
-    }
     if (text(delivery.learnerGuidePath) === "") {
       errors.push("Live Codex workflow delivery must declare learnerGuidePath.");
     }
+  }
+
+  const notionSessionNotes = isPlainObject(workflow.notionSessionNotes)
+    ? workflow.notionSessionNotes
+    : null;
+  if (!notionSessionNotes) {
+    errors.push("Live Codex workflow notionSessionNotes must be an object.");
+  } else {
+    if (notionSessionNotes.portableStartupMode !== "keep-local") {
+      errors.push("Live Codex workflow portableStartupMode must remain keep-local.");
+    }
+    if (notionSessionNotes.designatedChatMode !== "automatic-after-substantive-session") {
+      errors.push("Live Codex workflow designatedChatMode must require automatic concise notes only after substantive learning.");
+    }
+    requiredStringArray(
+      notionSessionNotes.requiredConditions,
+      "Live Codex workflow requiredConditions",
+      requiredNoteConditions,
+      errors,
+    );
+    if (notionSessionNotes.writeCadence !== "at-most-one-concise-note-per-substantive-session") {
+      errors.push("Live Codex workflow must limit writes to one concise note per substantive session.");
+    }
+    if (notionSessionNotes.onUnavailable !== "state-unavailable-and-keep-summary-in-chat") {
+      errors.push("Live Codex workflow must state unavailable writes plainly and retain the local chat summary.");
+    }
+    requiredStringArray(
+      notionSessionNotes.recordFields,
+      "Live Codex workflow recordFields",
+      requiredRecordFields,
+      errors,
+    );
   }
 
   if (!Array.isArray(workflow.roles) || workflow.roles.length !== requiredRoles.length) {
@@ -194,7 +225,7 @@ export async function validateLiveCodexLearningWorkflow(
 
   requiredStringArray(workflow.learnerControls, "Live Codex workflow learnerControls", requiredControls, errors);
   const claimBoundary = isPlainObject(workflow.claimBoundary) ? workflow.claimBoundary : null;
-  if (!claimBoundary || claimBoundary.manualPlatformAcceptanceRequired !== true || claimBoundary.configuredWriteClaimRequiresEvidence !== true || claimBoundary.noPassFail !== true) {
+  if (!claimBoundary || claimBoundary.platformAcceptanceEvidenceRequired !== true || claimBoundary.successfulWriteRequiresDirectEvidence !== true || claimBoundary.noPassFail !== true) {
     errors.push("Live Codex workflow claimBoundary must require platform acceptance evidence and retain the no-pass/fail boundary.");
   }
 
@@ -209,6 +240,7 @@ export async function validateLiveCodexLearningWorkflow(
     workflowPath: liveCodexLearningWorkflowRelativePath,
     learnerGuidePath: delivery.learnerGuidePath,
     delivery,
+    notionSessionNotes,
     roles: workflow.roles,
     privacyBoundary,
     learnerControls: workflow.learnerControls,
@@ -220,6 +252,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const workflow = await loadLiveCodexLearningWorkflow();
   const report = await validateLiveCodexLearningWorkflow(workflow);
   console.log(
-    `Live Codex learning workflow: ${report.roles.length} designated roles; ${report.delivery.defaultRecordMode} default record mode.`,
+    `Live Codex learning workflow: ${report.roles.length} designated roles; ${report.notionSessionNotes.designatedChatMode} note policy.`,
   );
 }

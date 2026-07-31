@@ -6,15 +6,18 @@ import {
   validateLiveCodexLearningWorkflow,
 } from "../scripts/live-codex-learning-workflow.mjs";
 
-test("the live Codex workflow defaults to local notes and separates the two partner roles", async () => {
+test("the live Codex workflow keeps portal isolation while authorizing designated automatic session notes", async () => {
   const workflow = await loadLiveCodexLearningWorkflow();
   const report = await validateLiveCodexLearningWorkflow(workflow);
 
   assert.equal(report.workflowPath, liveCodexLearningWorkflowRelativePath);
   assert.equal(report.delivery.portalRuntimeIntegration, "none");
-  assert.equal(report.delivery.defaultRecordMode, "keep-local");
-  assert.equal(report.delivery.enabledRecordMode, "configured-notion-session-note");
-  assert.equal(report.delivery.writeCadence, "at-most-one-concise-note-per-substantive-session");
+  assert.equal(report.notionSessionNotes.portableStartupMode, "keep-local");
+  assert.equal(report.notionSessionNotes.designatedChatMode, "automatic-after-substantive-session");
+  assert.equal(report.notionSessionNotes.writeCadence, "at-most-one-concise-note-per-substantive-session");
+  assert.ok(report.notionSessionNotes.requiredConditions.includes("the learning conversation is substantive"));
+  assert.ok(report.notionSessionNotes.requiredConditions.includes("records are not paused and the material is not marked off-record"));
+  assert.equal(report.notionSessionNotes.onUnavailable, "state-unavailable-and-keep-summary-in-chat");
   assert.deepEqual(report.roles.map(({ id }) => id), ["teaching-assistant", "study-partner"]);
   assert.match(report.roles[0].liveResponsibility, /oral defense/u);
   assert.match(report.roles[1].liveResponsibility, /non-grading/u);
@@ -23,28 +26,42 @@ test("the live Codex workflow defaults to local notes and separates the two part
   assert.equal(report.learnerGuidePath, "docs/LIVE_CODEX_LEARNING_WORKFLOW.md");
 });
 
-test("the live Codex workflow fails closed if record activation, cadence, controls, or privacy boundaries drift", async () => {
+test("the live Codex workflow fails closed if note authority, cadence, controls, or privacy boundaries drift", async () => {
   const workflow = await loadLiveCodexLearningWorkflow();
 
-  const automaticByDefault = structuredClone(workflow);
-  automaticByDefault.delivery.defaultRecordMode = "configured-notion-session-note";
+  const unsafePortablePrompt = structuredClone(workflow);
+  unsafePortablePrompt.notionSessionNotes.portableStartupMode = "capture-everything";
   await assert.rejects(
-    validateLiveCodexLearningWorkflow(automaticByDefault),
-    /defaultRecordMode must remain keep-local/u,
+    validateLiveCodexLearningWorkflow(unsafePortablePrompt),
+    /portableStartupMode must remain keep-local/u,
+  );
+
+  const manualModeRegression = structuredClone(workflow);
+  manualModeRegression.notionSessionNotes.designatedChatMode = "configured-notion-session-note";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(manualModeRegression),
+    /designatedChatMode must require automatic concise notes/u,
   );
 
   const unscopedWrite = structuredClone(workflow);
-  unscopedWrite.delivery.writeCadence = "one-note-per-exchange";
+  unscopedWrite.notionSessionNotes.writeCadence = "one-note-per-exchange";
   await assert.rejects(
     validateLiveCodexLearningWorkflow(unscopedWrite),
     /limit writes to one concise note per substantive session/u,
   );
 
   const missingActivation = structuredClone(workflow);
-  missingActivation.delivery.requiredActivation.pop();
+  missingActivation.notionSessionNotes.requiredConditions.pop();
   await assert.rejects(
     validateLiveCodexLearningWorkflow(missingActivation),
-    /requiredActivation must preserve the reviewed values and order/u,
+    /requiredConditions must preserve the reviewed values and order/u,
+  );
+
+  const unprovenWriteClaim = structuredClone(workflow);
+  unprovenWriteClaim.claimBoundary.successfulWriteRequiresDirectEvidence = false;
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(unprovenWriteClaim),
+    /claimBoundary must require platform acceptance evidence/u,
   );
 
   const transcriptLeak = structuredClone(workflow);

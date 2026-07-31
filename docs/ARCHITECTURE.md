@@ -17,7 +17,7 @@ flowchart LR
     D --> V["learner inspection + behavioral tests"]
     R --> P["private deployed portal"]
     P -. "copyable role protocols" .-> C["designated Codex learning chats"]
-    C -. "explicitly configured concise notes" .-> N["Notion records and learning workflow"]
+    C -. "designated-chat concise notes" .-> N["Notion records and learning workflow"]
 ~~~
 
 ## Main surfaces
@@ -27,9 +27,12 @@ flowchart LR
   controls, and local device state only.
 - The deployed portal has no Notion runtime integration or automatic
   portal-to-Notion data flow. The learner may use the manual private Notion
-  workflow, or explicitly configure the designated external Codex learning
-  chats to create concise session notes. That external workflow does not grant
-  the portal microphone, voice, transcript, or Notion-write capability.
+  workflow, while the two designated external Codex learning chats may
+  automatically create concise session notes after substantive conversations in
+  their configured private record. Portable copied prompts remain local. That
+  external workflow does not grant the portal microphone, voice, transcript,
+  or Notion-write capability, and a saved-note claim still requires direct
+  evidence.
 - The checked-in `content/course/course-graph.v2.json` is the canonical course
   catalog. It separates academic prerequisites from route order and records
   source-map, studio, mastery-gate, and five independent truth facets:

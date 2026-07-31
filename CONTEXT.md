@@ -101,9 +101,10 @@ A learner-created, platform-hosted Codex chat assigned either the Teaching
 Assistant or Study Partner role. It is outside the Atlas portal runtime.
 _Avoid_: Atlas voice feature, portal agent
 
-**Configured concise session note**:
-At most one minimal Notion record for a substantive session, created only after
-the exact record mode, designated chat, reachable private destination, and
-session-end condition are satisfied. It is not a transcript, grade, or proof of
-mastery.
-_Avoid_: automatic progress tracking, chat archive, saved-note claim without evidence
+**Designated-chat concise session note**:
+At most one minimal Notion record for a substantive learning conversation in a
+configured private destination, automatically created only by the learner's
+designated Teaching Assistant or Study Partner chat when records are not paused
+or off-record. A portable copied prompt remains local. It is not a transcript,
+grade, or proof of mastery; a saved-note claim requires direct evidence.
+_Avoid_: portal automation, chat archive, automatic mastery tracking, saved-note claim without evidence

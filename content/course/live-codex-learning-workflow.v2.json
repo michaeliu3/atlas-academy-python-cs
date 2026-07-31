@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 2,
+  "workflowVersion": "v2",
+  "kind": "atlas-live-codex-learning-workflow",
+  "title": "Atlas designated-chat learning workflow",
+  "purpose": "Define the bounded Teaching Assistant and Study Partner roles, accessible whiteboard practice, and automatic concise Notion-session-note policy for the learner-designated Codex chats without granting the Atlas portal voice, transcript, or Notion-write capability.",
+  "delivery": {
+    "portalRuntimeIntegration": "none",
+    "chatSurface": "user-designated-platform-chat",
+    "learnerGuidePath": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md"
+  },
+  "notionSessionNotes": {
+    "portableStartupMode": "keep-local",
+    "designatedChatMode": "automatic-after-substantive-session",
+    "requiredConditions": [
+      "this is the designated Teaching Assistant or Study Partner chat",
+      "the configured private Notion destination is reachable",
+      "the learning conversation is substantive",
+      "records are not paused and the material is not marked off-record"
+    ],
+    "writeCadence": "at-most-one-concise-note-per-substantive-session",
+    "onUnavailable": "state-unavailable-and-keep-summary-in-chat",
+    "recordFields": [
+      "date, role, module/topic, and learner question",
+      "key definition, derivation, code/architecture trace, or whiteboard snapshot",
+      "prediction, evidence, misconception, counterexample, uncertainty, and next action",
+      "Teaching Assistant oral-defense evidence or Study Partner discussion/rehearsal handoff"
+    ]
+  },
+  "roles": [
+    {
+      "id": "teaching-assistant",
+      "liveResponsibility": "first-principles teaching and the supportive post-module oral defense",
+      "recordFocus": "oral-defense prompt, repair, transfer, uncertainty, and constructive next bridge"
+    },
+    {
+      "id": "study-partner",
+      "liveResponsibility": "non-grading concept discussion, retrieval, rehearsal, and handoff preparation",
+      "recordFocus": "discussion, rehearsal, uncertainty, and focused Teaching Assistant handoff"
+    }
+  ],
+  "whiteboardProtocol": {
+    "required": [
+      "supported display math with defined symbols",
+      "language-labelled fenced code with explicit state traces",
+      "prose or ASCII fallback for math, code, and diagrams",
+      "no speech-only or visual-only explanation"
+    ]
+  },
+  "privacyBoundary": {
+    "excludedFromRecords": [
+      "raw voice recordings",
+      "full chat transcripts",
+      "credentials, keys, or tokens",
+      "sensitive personal data",
+      "off-record material"
+    ],
+    "forbiddenClaims": [
+      "portal control of voice, microphone, live rendering, platform retention, or Notion writes",
+      "a note was saved without direct evidence of the successful write"
+    ]
+  },
+  "learnerControls": [
+    "pause records",
+    "off-record",
+    "correct a saved note",
+    "delete a saved note"
+  ],
+  "claimBoundary": {
+    "platformAcceptanceEvidenceRequired": true,
+    "successfulWriteRequiresDirectEvidence": true,
+    "noPassFail": true
+  }
+}

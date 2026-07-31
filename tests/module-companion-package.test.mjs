@@ -83,7 +83,7 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
     guide,
     liveWorkflow: workflow,
   });
-  assert.equal(companion.schemaVersion, 1);
+  assert.equal(companion.schemaVersion, 2);
   assert.notEqual(
     companion.teachingAssistant.contextPrompt,
     companion.studyPartner.contextPrompt,
@@ -93,8 +93,8 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   assert.doesNotMatch(companion.teachingAssistant.contextPrompt, /pass\/fail verdict/i);
   assert.doesNotMatch(companion.studyPartner.contextPrompt, /pass\/fail verdict/i);
   assert.deepEqual(companion.recordBoundary, {
-    defaultMode: "keep-local",
-    enabledMode: "configured-notion-session-note",
+    portableStartupMode: "keep-local",
+    designatedChatMode: "automatic-after-substantive-session",
   });
   assert.deepEqual(
     companion.whiteboardProtocol,
@@ -102,6 +102,8 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   );
   assert.match(companion.teachingAssistant.contextPrompt, /prose or ASCII fallback/i);
   assert.match(companion.studyPartner.contextPrompt, /language-labelled fenced code/i);
+  assert.match(companion.teachingAssistant.contextPrompt, /automatically create at most one concise note/i);
+  assert.match(companion.studyPartner.contextPrompt, /direct evidence of the successful write/i);
 });
 
 test("guide validation fails closed for a missing or forged module guide", async () => {
@@ -136,7 +138,7 @@ test("the companion package refuses a workflow that changes the learner-record b
   assert.ok(guide);
 
   const forgedWorkflow = clone(workflow);
-  forgedWorkflow.delivery.defaultRecordMode = "capture-everything";
+  forgedWorkflow.notionSessionNotes.portableStartupMode = "capture-everything";
   assert.throws(
     () =>
       buildModuleCompanionPackage({
@@ -145,6 +147,19 @@ test("the companion package refuses a workflow that changes the learner-record b
         guide,
         liveWorkflow: forgedWorkflow,
       }),
-    /default record mode must remain keep-local/i,
+    /portable startup mode must remain keep-local/i,
+  );
+
+  const unscopedWorkflow = clone(workflow);
+  unscopedWorkflow.notionSessionNotes.requiredConditions.pop();
+  assert.throws(
+    () =>
+      buildModuleCompanionPackage({
+        courseModule: m01,
+        graphModules: graph.modules,
+        guide,
+        liveWorkflow: unscopedWorkflow,
+      }),
+    /session-note conditions must preserve designated-chat, privacy, and substantive-session boundaries/i,
   );
 });

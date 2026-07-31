@@ -49,26 +49,28 @@ contexts; authoring-only guide content is not shipped into the public reader.
 ## Learner-authorized Notion notes
 
 The default portal privacy boundary stays local-first: it does not initiate a
-Notion request or send learner data anywhere. The reusable chat package starts
-with `Record mode: keep local`. A learner may explicitly configure the
-designated Teaching Assistant and Study Partner chats to create a concise
-Notion session note after a substantive learning conversation.
+Notion request or send learner data anywhere. A portable copyable prompt stays
+in `keep local` mode, because pasting it into an unrelated chat must not grant
+record authority. In the learner-designated Teaching Assistant and Study
+Partner chats with their configured private destination, the learner has
+authorized an automatic concise Notion note after a substantive learning
+conversation.
 
 <!-- live-codex-workflow: activation -->
 
-The exact enabled mode is `configured-notion-session-note`. It may create a
-note only when all four conditions hold:
+The active designated-chat policy is `automatic-after-substantive-session`.
+It may create at most one concise note per substantive session only when all
+four conditions hold:
 
-1. the exact enabled record mode has been selected;
-2. the conversation is in the designated TA or Study Partner chat;
-3. that chat's private Notion destination is configured and reachable; and
-4. the learner ends a substantive session or asks for its concise summary.
+1. the conversation is in the designated TA or Study Partner chat;
+2. that chat's private Notion destination is configured and reachable;
+3. the learning conversation is substantive; and
+4. records are not paused and the material is not marked off-record.
 
-The chat creates at most one concise note per substantive session, never a note
-after every exchange. “Configured” does not prove that a write worked: until
-the actual two chats have passed the manual platform acceptance check, neither
-role may claim a note was saved. If access is unavailable, it says so plainly
-and keeps the summary local.
+The chat never creates a note after every exchange or for a greeting. “Automatic”
+does not prove that a write worked: neither role may claim a note was saved
+without direct evidence of the successful write. If access is unavailable, it
+says so plainly and keeps the summary in the visible chat.
 
 For a configured record, keep only:
 

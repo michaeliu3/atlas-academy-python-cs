@@ -17,7 +17,7 @@ type ModuleCompanionGuideRegistry = {
   guideVersion: "v1";
   kind: "atlas-module-companion-guides";
   canonicalCourseGraph: "content/course/course-graph.v2.json";
-  liveCodexLearningWorkflow: "content/course/live-codex-learning-workflow.v1.json";
+  liveCodexLearningWorkflow: "content/course/live-codex-learning-workflow.v2.json";
   guides: ModuleCompanionGuide[];
 };
 

@@ -1,6 +1,6 @@
 # Atlas manual learning record kit
 
-Use this kit when a short record will help a future explanation, repair, retrieval, project decision, or coaching handoff. It is the **manual, learner-owned default workflow**. No portal-to-Notion connection exists, and the portal does not write, export, or track these records for you. A separately configured external Codex-to-Notion session-note workflow is described in [Live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md).
+Use this kit when a short record will help a future explanation, repair, retrieval, project decision, or coaching handoff. It is the **manual, learner-owned default workflow**. No portal-to-Notion connection exists, and the portal does not write, export, or track these records for you. The separately designated external Codex-to-Notion session-note workflow is described in [Live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md); it is a chat-owned boundary, not a portal capability.
 
 Create the pages below in any private system you control (including Notion), or keep them locally. Before copying anything outside the portal, apply this rule:
 

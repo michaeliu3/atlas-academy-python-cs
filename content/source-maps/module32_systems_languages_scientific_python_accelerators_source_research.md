@@ -155,9 +155,13 @@ controls: seed, deterministic mode, GC/profiling state, background contention
 result: observation; alternative explanations; next falsifier; explicit non-claim
 ~~~
 
-The course must not automatically transmit this record to Notion or any other
-service. A future learner may inspect, copy, redact, or explicitly approve an
-export under the portal’s local-first consent boundary.
+The Atlas portal must not automatically transmit this record to Notion or any
+other service. A learner may inspect, copy, redact, or explicitly approve an
+export under the portal’s local-first consent boundary. Separately, the
+learner-designated Codex Teaching Assistant or Study Partner chat may create
+one concise, privacy-bounded session note under the active designated-chat
+workflow; that exception does not turn this authoring note into a source map,
+release input, or evidence that any write succeeded.
 
 ## Research gaps and release blockers this file does not close
 
@@ -216,4 +220,3 @@ export under the portal’s local-first consent boundary.
 This research note intentionally leaves the M32 source-map and release blockers
 open. Its contribution is a source-conscious path for making the future module
 more rigorous without making the current course description less truthful.
-
