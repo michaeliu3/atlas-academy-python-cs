@@ -206,13 +206,13 @@
   padding: 0.9rem 1.2rem;
 }
 
-.legend > span:not(.publishedDot):not(.previewDot):not(.authoringDot) {
+.legend > span:not(.legacyOpenDot):not(.previewDot):not(.authoringDot) {
   color: var(--muted);
   font-size: 0.76rem;
   margin-right: 1rem;
 }
 
-.publishedDot,
+.legacyOpenDot,
 .previewDot,
 .authoringDot {
   border-radius: 50%;
@@ -221,7 +221,7 @@
   width: 0.6rem;
 }
 
-.publishedDot {
+.legacyOpenDot {
   background: var(--moss);
 }
 
@@ -335,6 +335,7 @@ a.moduleCard:focus-visible {
   text-transform: uppercase;
 }
 
+.legacyOpenStatus,
 .publishedStatus,
 .previewStatus,
 .optionalStatus,
@@ -347,9 +348,14 @@ a.moduleCard:focus-visible {
   text-transform: uppercase;
 }
 
-.publishedStatus {
+.legacyOpenStatus {
   background: var(--moss-soft);
   color: #345542;
+}
+
+.publishedStatus {
+  background: rgba(49, 87, 164, 0.13);
+  color: #294b9b;
 }
 
 .previewStatus {

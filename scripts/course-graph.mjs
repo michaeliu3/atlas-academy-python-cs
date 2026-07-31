@@ -7,6 +7,7 @@ const siteRoot = resolve(scriptDirectory, "..");
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
 
 const expectedAvailabilityStates = new Set([
+  "legacy-open",
   "published",
   "preview",
   "locked",
@@ -139,6 +140,7 @@ function validateModuleState(courseModule) {
   }
 
   const expectedAccess = {
+    "legacy-open": ["learner-material-ready", "full"],
     published: ["learner-material-ready", "full"],
     preview: ["learner-material-ready", "preview"],
     locked: ["learner-material-ready", "hidden"],
@@ -166,6 +168,27 @@ function validateModuleState(courseModule) {
     fail(`Module ${number} legacy-baseline state must use the legacy-v1 contract track.`);
   }
   if (
+    availability === "legacy-open" &&
+    (contract.track !== "legacy-v1" || contract.state !== "legacy-baseline")
+  ) {
+    fail(`legacy-open Module ${number} must retain a legacy-v1 legacy-baseline contract until a verified publication promotion.`);
+  }
+  if (
+    availability === "legacy-open" &&
+    (release.state !== "unrecorded" || release.recordId !== null)
+  ) {
+    fail(`legacy-open Module ${number} must leave release evidence unrecorded until a verified publication promotion.`);
+  }
+  if (availability === "published" && contract.state !== "verified") {
+    fail(`published Module ${number} requires a verified contract before it can be learner-released.`);
+  }
+  if (
+    availability === "published" &&
+    (release.state !== "deployed-recorded" || typeof release.recordId !== "string")
+  ) {
+    fail(`published Module ${number} requires deployed release evidence before it can be learner-released.`);
+  }
+  if (
     (contract.state === "not-started" || contract.state === "authoring-only") &&
     contract.track !== "advanced-v1"
   ) {
@@ -173,6 +196,9 @@ function validateModuleState(courseModule) {
   }
   if (contract.state === "verified" && release.state !== "deployed-recorded") {
     fail(`verified Module ${number} needs a deployed-recorded release with a stable recordId.`);
+  }
+  if (contract.state === "verified" && availability !== "published") {
+    fail(`verified Module ${number} must use published availability after its release evidence is recorded.`);
   }
   if (
     contract.state !== "verified" &&
@@ -189,6 +215,9 @@ export function resolveLearnerAccess(courseModule) {
     fail("learner-access projection needs a module state.");
   }
   const { availability, readerAccess } = courseModule.state;
+  if (availability === "legacy-open") {
+    return { mode: "legacy-route", readerAccess };
+  }
   if (availability === "published") {
     return { mode: "core-step", readerAccess };
   }

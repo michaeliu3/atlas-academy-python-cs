@@ -35,7 +35,7 @@ is platform acceptance evidence, not an Atlas portal test.
 ## Module-specific follow-on contexts
 
 Set up each designated role once from the portal's **Learning Partners** page.
-After completing a Core-open workbook, its oral-defense panel offers two
+After working through an open legacy workbook, its oral-defense panel offers two
 module-specific follow-on contexts: one for the Teaching Assistant's
 supportive defense and one for the Study Partner's rehearsal. Each is derived
 from the canonical course graph's academic prerequisites and declared forward

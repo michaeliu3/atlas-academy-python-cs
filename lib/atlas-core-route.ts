@@ -57,8 +57,9 @@ export function getAtlasRouteEntry(number: number) {
   return atlasRouteEntries.find((entry) => entry.number === number);
 }
 
-export const atlasCoreRouteReleaseStatus = {
-  "core-open": courseCatalogTotals.coreOpen,
+export const atlasCoreRouteAvailabilityStatus = {
+  "legacy-open": courseCatalogTotals.legacyOpen,
+  published: courseCatalogTotals.published,
   "preview-reader": courseCatalogTotals.previewReader,
   "authoring-only": courseCatalogTotals.authoring,
 };

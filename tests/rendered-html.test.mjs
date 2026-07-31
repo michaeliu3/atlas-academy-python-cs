@@ -235,12 +235,12 @@ test("keeps the interactive explorer separate from Core route access and evidenc
   assert.match(navigation, /Locked\. Return to the route to review its prerequisites and release boundary\./u);
   assert.match(navigation, /Reference preview—not an unlocked Core step\./u);
 
-  assert.match(route, /Atlas does not infer progress\s+from a click, a scroll, or a studio interaction\./u);
+  assert.match(route, /Atlas does not infer progress\s+from a click,\s+a scroll, or a studio interaction\./u);
   assert.match(route, /Reference preview—available for orientation, not Core progress/u);
   assert.match(route, /entry\.state\.readerAccess !== "hidden"/u);
 });
 
-test("each Core-open module reader keeps the supportive oral-defense route", async () => {
+test("each open module reader keeps the supportive oral-defense route", async () => {
   const [page, oralDefense, textDefense, oralGuide, companionPackage, companionGuides] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(
@@ -473,14 +473,14 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /60 days\./);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
   assert.match(readable, /28 \/ 2 \/ 6/);
-  assert.match(readable, /Core-open \/ reference \/ authoring/i);
+  assert.match(readable, /open \/ preview \/ authoring/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
   assert.match(readable, /Module 28/);
   assert.match(readable, /Module 29/);
   assert.match(readable, /Module 30/);
-  assert.match(readable, /Core-open/);
+  assert.match(readable, /Open material · review pending/);
   assert.match(readable, /Reference preview/);
   assert.match(readable, /In authoring/);
   assert.match(readable, /Read as reference—not an unlocked Core step/);
@@ -513,7 +513,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   );
 });
 
-test("keeps release status and route linkability aligned with the published manifest", async () => {
+test("keeps availability status and route linkability aligned with the generated manifest", async () => {
   const [routeSource, routePage, catalogSource, manifestSource] = await Promise.all([
     readFile(new URL("../lib/atlas-core-route.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
@@ -950,7 +950,7 @@ test("Module 22 preserves its trust invariant, six-view control room, and latest
   assert.match(
     arc,
     /const \[activeModule, setActiveModule\] = useState\(5\)/,
-    "Arc IV should open its latest published module, Module 22",
+    "Arc IV should open its latest open module, Module 22",
   );
   assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
@@ -1506,12 +1506,13 @@ test("generated module manifest projects the canonical graph without bypassing p
     manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
   );
 
-  assert.equal(manifest.schemaVersion, 3);
+  assert.equal(manifest.schemaVersion, 4);
   assert.equal(manifest.courseGraphSchemaVersion, 2);
   assert.equal(manifest.routePlanId, "atlas-core-60");
   assert.equal(manifest.definedModuleCount, 36);
   assert.equal(manifest.readerVisibleModuleCount, 30);
-  assert.equal(manifest.coreOpenModuleCount, 28);
+  assert.equal(manifest.legacyOpenModuleCount, 28);
+  assert.equal(manifest.publishedModuleCount, 0);
   assert.equal(manifest.previewReaderModuleCount, 2);
   assert.deepEqual(numbers, Array.from({ length: 30 }, (_, index) => index + 1));
   assert.equal(manifest.arcs.length, 6);
@@ -1636,7 +1637,7 @@ test("renders a complete generated module reading route", async () => {
   const html = await response.text();
   assert.match(html, /Module 1: Values, State, and Execution · Atlas Academy/);
   assert.match(html, /Complete Module 1 workbook/);
-  assert.match(html, /Core-open reader/);
+  assert.match(html, /Open legacy reader/);
   assert.match(html, /Opening, reading, or using a studio does not mark academic prerequisites complete/);
   assert.match(html, /Why this module comes first/);
   assert.match(html, /On this page/);
@@ -1658,7 +1659,7 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /class="heading-anchor"/);
   assert.match(html, /aria-label="Link to this section"/);
   assert.match(html, /Workbook-led interaction/);
-  assert.match(html, /This Core-open module has no separate visual studio/);
+  assert.match(html, /This open workbook has no separate visual studio/);
   assert.match(html, /href="#oral-defense-1-title"/);
   assert.match(
     html,
@@ -1666,7 +1667,7 @@ test("renders a complete generated module reading route", async () => {
   );
 });
 
-test("keeps authoring-only modules out of the published reader", async () => {
+test("keeps authoring-only modules out of the learner reader", async () => {
   const response = await render("/modules/31-optimization-information");
   assert.equal(response.status, 404);
 });
@@ -1697,7 +1698,7 @@ test("all generated lessons have valid internal links and math", async () => {
   }
 });
 
-test("every diagnostic learning route resolves to a published lesson section", async () => {
+test("every diagnostic learning route resolves to an open lesson section", async () => {
   const routesByPath = new Map();
   for (const question of diagnosticQuestions) {
     const route = new URL(question.route.href, "http://localhost");
@@ -2166,7 +2167,7 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   assert.match(html, /Complete Module 25 workbook/);
   assert.match(html, /Reference access does not advance the Core\./);
   assert.match(html, /open for orientation and comparison, not as an unlocked Core step/);
-  assert.match(html, /Released preview · not an unlocked Core step/);
+  assert.match(html, /Reference preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
   assert.doesNotMatch(
     new JSDOM(html).window.document.body.textContent ?? "",
@@ -2223,7 +2224,7 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
     /Module 26: Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense · Atlas Academy/,
   );
   assert.match(html, /Complete Module 26 workbook/);
-  assert.match(html, /Released preview · not an unlocked Core step/);
+  assert.match(html, /Reference preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
   assert.match(
     html,

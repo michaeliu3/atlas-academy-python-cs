@@ -40,7 +40,7 @@ promote a module, create reader access, award Core credit, or establish a
 release claim.
 
 The current graph has 36 defined modules: 30 reader-visible modules (28
-Core-open plus M25/M26 reference previews) are deliberately recorded as
+`legacy-open` workbooks plus M25/M26 reference previews) are deliberately recorded as
 **legacy structural baselines**; zero are `verified`; M31–M36 are
 authoring-only. The validator can prove the legacy modules' checked-in
 workbook, six session headings, source-map path, and graph handoff. It cannot
@@ -72,17 +72,18 @@ Use the right gate for the claim being made:
 ~~~text
 pnpm validate:course          # structural migration gate; reports human-review gaps
 pnpm validate:course:inputs   # structural gate plus Git-tracked regular release inputs
-pnpm validate:course:strict   # future publication/release gate; currently fails by design
+pnpm validate:course:strict   # full learner-route verification gate; currently fails by design
 pnpm sync:modules
 pnpm check:generated
 ~~~
 
-`validate:course:strict` uses the active v3 registry and must pass before a
-newly Core-open module, a re-verified legacy module, or a private deployment
-can be presented as fully contract-verified. The current Core-open legacy
-baselines are a disclosed migration condition, not a precedent for bypassing
-this gate. `validate:course:complete` is stricter still: it requires all 36
-entries to be verified and M25/M26 to become Core-open. Neither gate may be
+`validate:course:inputs` is the CI publication boundary: the graph refuses a
+`published` module without a verified contract and deployed release record, and
+the v3 registry then validates its full promotion evidence. `validate:course:strict`
+goes further by requiring every non-preview learner route module to be verified;
+it is therefore expected to fail while the current `legacy-open` baseline is
+being retrofitted. `validate:course:complete` is stricter still: it requires all
+36 entries to be verified and M25/M26 to become published. Neither gate may be
 weakened merely to make CI green.
 
 ### Draft evidence-pointer pilot
@@ -97,7 +98,7 @@ reviewer must inspect. The pilot's states are deliberately `draft-pointer-map`,
 A successful pointer resolution proves only that the referenced local artifact
 and heading exist in this revision. It does not prove pedagogical quality,
 source/license correctness, visual accessibility, oral-defense quality, or
-human approval. Do not use it to call a module verified, Core-open, or
+human approval. Do not use it to call a module verified, published, or
 released. Extend the evidence model only after its review fields and release
 semantics can be validated without weakening the active v3 strict gate.
 

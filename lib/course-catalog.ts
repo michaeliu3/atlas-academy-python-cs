@@ -3,6 +3,7 @@ import type { ModuleStudioId } from "./module-studio-registry";
 
 export type CourseLifecycle = "learner-material-ready" | "authoring-only";
 export type CourseAvailability =
+  | "legacy-open"
   | "published"
   | "preview"
   | "locked"
@@ -177,11 +178,27 @@ export function isReaderVisible(courseModule: CourseGraphModule) {
   return courseModule.state.readerAccess !== "hidden";
 }
 
-export function isCoreOpen(courseModule: CourseGraphModule) {
+export function isLegacyOpen(courseModule: CourseGraphModule) {
   return (
     courseModule.state.readerAccess === "full" &&
-    courseModule.state.availability === "published"
+    courseModule.state.availability === "legacy-open" &&
+    courseModule.state.contract.track === "legacy-v1" &&
+    courseModule.state.contract.state === "legacy-baseline" &&
+    courseModule.state.release.state === "unrecorded"
   );
+}
+
+export function isPublishedCourseModule(courseModule: CourseGraphModule) {
+  return (
+    courseModule.state.readerAccess === "full" &&
+    courseModule.state.availability === "published" &&
+    courseModule.state.contract.state === "verified" &&
+    courseModule.state.release.state === "deployed-recorded"
+  );
+}
+
+export function isOpenRouteMaterial(courseModule: CourseGraphModule) {
+  return isLegacyOpen(courseModule) || isPublishedCourseModule(courseModule);
 }
 
 export function isPreviewReader(courseModule: CourseGraphModule) {
@@ -198,7 +215,9 @@ export function isReferenceOnly(courseModule: CourseGraphModule) {
 export const courseCatalogTotals = {
   modules: courseCatalog.modules.length,
   readerVisible: courseCatalog.modules.filter(isReaderVisible).length,
-  coreOpen: courseCatalog.modules.filter(isCoreOpen).length,
+  legacyOpen: courseCatalog.modules.filter(isLegacyOpen).length,
+  published: courseCatalog.modules.filter(isPublishedCourseModule).length,
+  openRouteMaterial: courseCatalog.modules.filter(isOpenRouteMaterial).length,
   previewReader: courseCatalog.modules.filter(isPreviewReader).length,
   authoring: courseCatalog.modules.filter(
     ({ state }) => state.lifecycle === "authoring-only",

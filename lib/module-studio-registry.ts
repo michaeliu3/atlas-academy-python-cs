@@ -199,7 +199,7 @@ export function resolveModuleStudio(
       kind: "unavailable",
       state: "authoring-only",
       description:
-        "This module is authoring-only: no workbook or interactive studio is published.",
+        "This module is authoring-only: no learner-released workbook or interactive studio is available.",
     };
   }
 
@@ -207,7 +207,7 @@ export function resolveModuleStudio(
     return {
       kind: "preview",
       description:
-        "This is a released orientation preview, not an unlocked Core step. Its full prerequisite chain includes later authoring modules, so the studio, project evidence, and oral-defense route remain unavailable here.",
+        "This is an orientation preview, not an unlocked Core step. Its full prerequisite chain includes later authoring modules, so the studio, project evidence, and oral-defense route remain unavailable here.",
     };
   }
 
@@ -216,7 +216,7 @@ export function resolveModuleStudio(
       kind: "workbook-and-oral-defense",
       title: "Workbook-led interaction",
       description:
-        "This Core-open module has no separate visual studio. Use its workbook, then the supportive oral-defense conversation below, to make your reasoning visible.",
+        "This open workbook has no separate visual studio. Use its workbook, then the supportive oral-defense conversation below, to make your reasoning visible. Formal module review remains separate from this learning route.",
     };
   }
 

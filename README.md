@@ -39,7 +39,7 @@ configured private record, the role handoff authorizes an automatic concise
 structured note per substantive session; portable copied prompts remain local,
 and a successful write is not claimed without direct evidence. The portal
 itself remains local-first. Set up each role once from Learning Partners, then copy the
-current Core-open module's graph-bound follow-on context from its oral-defense
+current open module's graph-bound follow-on context from its oral-defense
 panel. That packet supports a conversation but is not route progression,
 contract review, or a platform capability claim. See [the live Codex learning
 workflow](docs/LIVE_CODEX_LEARNING_WORKFLOW.md).
@@ -52,24 +52,31 @@ rote typing or exam drill.
 
 The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
 days. It is a rigorous connected first pass, not a claim of instant durable
-mastery. The learner route has **36 defined modules**. Of those, **30 are
-reader-visible**: **28 are Core-open** with full reader access, and **2 are
-reader-visible reference previews** (M25/M26). The remaining **6 are
-authoring-only** and hidden from the learner reader. The 30 learner-material-
-ready modules are all `legacy-baseline` contracts; **zero modules are
-contract-verified**. The checked-in [canonical v2 course graph](content/course/course-graph.v2.json)
+mastery. The checked-in [canonical v2 course graph](content/course/course-graph.v2.json)
 is authoritative for route order, academic prerequisites, reader access, route
 availability, contract state, release state, and generated projections.
 
+<!-- atlas-course-status:start -->
+**Canonical availability (generated from `course-graph.v2.json`):**
+**36** defined modules; **30** reader-visible; **28** open for study.
+- **28** `legacy-open` (M1–M24, M27–M30); full reader access, review pending.
+- **0** `published` (—); only verified, deployed releases count here.
+- **2** `preview` (M25–M26); reference-only, never route credit.
+- **6** `authoring-only` (M31–M36); hidden from the learner reader.
+- Contract states: **30** legacy baselines; **0** verified.
+<!-- atlas-course-status:end -->
+
 Reader access is not learner completion. In particular, M25/M26 are reference
 previews: they can be read, but earn no Core credit or synthesis/capstone
-evidence. Likewise, `published` route availability does not imply a verified
-contract, a recorded deployment, or universal mastery.
+evidence. `legacy-open` route material is available for study while its full
+contract and release review remain pending. A module may use `published`
+availability only after its contract is verified and its deployed release
+evidence is recorded; neither status implies universal mastery.
 
 The table below is the **intended full canonical order**, not a claim that
 every scheduled module is available today. The access-aware [60-, 90-, and
 180-day learner route plans](docs/LEARNER_ROUTE_PLANS.md) explain the current
-Core-open path, pace selector, bridge and catch-up rules, minimum evidence,
+open-material path, pace selector, bridge and catch-up rules, minimum evidence,
 and the authoring/preview boundary.
 
 The intended Core experience ends each module with a short constructive oral
@@ -84,21 +91,21 @@ modules earn no Core credit.
 | Days | Focus |
 |---|---|
 | 1 | Module 0 placement diagnostic and learning contract |
-| 2–9 | M1–M5 plus published M27 discrete-mathematics depth |
+| 2–9 | M1–M5 plus open M27 discrete-mathematics depth |
 | 10–17 | M6–M11 data structures and algorithmic strategy |
 | 18–25 | M12–M16 durable software, data, and transactions |
-| 26–34 | M17 plus published M28 linear algebra/stability, M29 calculus/analysis, and M30 probability/statistics/scientific inference, then M31 optimization/information (M31 in authoring) |
+| 26–34 | M17 plus open M28 linear algebra/stability, M29 calculus/analysis, and M30 probability/statistics/scientific inference, then M31 optimization/information (M31 in authoring) |
 | 35–44 | M18–M24 operating, network, trust, language, and runtime boundaries |
 | 45–53 | M32–M36 accelerators, formal limits, classical AI, ML, and learning theory (in authoring) |
 | 54–55 | M25 evidence-grounded, human-centered intelligent systems (reader-visible reference preview; no Core credit until M31–M36 evidence exists) |
-| 56–60 | M26 capstone orientation and oral-architecture-defense rehearsal (reader-visible reference preview; no Core credit until M25 becomes Core-open) |
+| 56–60 | M26 capstone orientation and oral-architecture-defense rehearsal (reader-visible reference preview; no Core credit until M25 becomes verified published) |
 
 The schedule adapts to diagnostic evidence, difficult concepts, project
 revision, and retrieval needs. At the lower end of the weekly time budget, or
 after a missed gate, the calendar expands rather than dropping proof, tracing,
 or transfer work. A further 3–12 months of spaced retrieval, project revision,
 and specialization turns first-pass readiness into dependable mastery. See the
-in-product [60-day route](/route) for prerequisites and publication status.
+in-product [60-day route](/route) for prerequisites and availability/review status.
 
 ## Local development
 

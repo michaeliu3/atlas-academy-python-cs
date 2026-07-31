@@ -201,7 +201,7 @@ test("the intake samples every required foundation and keeps advanced extensions
   for (const recommendation of result.bridgeRecommendations) {
     assert.ok(
       recommendation.route.moduleNumber <= 30,
-      `${recommendation.area.id} must start from a published foundation`,
+      `${recommendation.area.id} must start from an open foundation`,
     );
     assert.equal(
       Object.hasOwn(recommendation.extension ?? {}, "href"),
@@ -503,7 +503,7 @@ test("results prioritize misconceptions, then build one dependency-ordered route
       { areaId: "optimization", questionNumber: 19, routeModuleNumber: 29 },
       { areaId: "ai-ml", questionNumber: 20, routeModuleNumber: 30 },
     ],
-    "the bridge plan retains the evidence signal while naming a published foundation",
+    "the bridge plan retains the evidence signal while naming an open foundation",
   );
 });
 

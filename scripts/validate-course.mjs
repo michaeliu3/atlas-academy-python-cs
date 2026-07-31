@@ -45,6 +45,7 @@ import {
   loadBrowserProgressSurfacePolicy,
   validateBrowserProgressSurfacePolicy,
 } from "./browser-progress-surface-policy.mjs";
+import { validateCourseStatusProjection } from "./course-status-projection.mjs";
 import {
   loadReleaseEvidencePolicy,
   releaseEvidencePolicyPath,
@@ -125,6 +126,7 @@ export async function validateCourseContracts(
   let moduleCompanionGuides = null;
   let moduleLearningCompanions = null;
   let browserProgressSurfacePolicy = null;
+  let courseStatusProjection = null;
   let mermaidAlternatives = null;
   const releaseInputPaths = new Set([
     graphPath,
@@ -278,6 +280,14 @@ export async function validateCourseContracts(
   }
 
   try {
+    courseStatusProjection = await validateCourseStatusProjection(graph, { siteRoot });
+  } catch (error) {
+    errors.push(
+      `Generated course-status projection and status surfaces must match the canonical graph: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
     mermaidAlternatives = await validateReaderMermaidAlternatives({
       siteRoot,
       requireComplete: complete,
@@ -338,6 +348,7 @@ export async function validateCourseContracts(
     moduleCompanionGuides,
     moduleLearningCompanions,
     browserProgressSurfacePolicy,
+    courseStatusProjection,
     mermaidAlternatives,
     summary: contractRegistry.summary,
   };

@@ -720,7 +720,14 @@ function validateLegacyBaseline(moduleEntry, graphModule, audit, manifestById, e
     errors.push(`Legacy-baseline Module ${moduleEntry.moduleId} is absent from the immutable audit.`);
     return;
   }
-  if (graphModule.number > 30 || graphModule.state.lifecycle !== "learner-material-ready") {
+  const expectedAvailability = ["m25", "m26"].includes(moduleEntry.moduleId)
+    ? "preview"
+    : "legacy-open";
+  if (
+    graphModule.number > 30 ||
+    graphModule.state.lifecycle !== "learner-material-ready" ||
+    graphModule.state.availability !== expectedAvailability
+  ) {
     errors.push(`Module ${moduleEntry.moduleId} may not use the legacy-baseline contract state.`);
   }
   migrationPointer(
@@ -1738,7 +1745,7 @@ export async function validateModuleContractRegistry(
     for (const id of ["m25", "m26"]) {
       const graphModule = graphById.get(id);
       if (graphModule?.state.availability !== "published") {
-        errors.push(`Complete contract validation requires ${id} to be Core-open rather than preview-only.`);
+        errors.push(`Complete contract validation requires ${id} to be published rather than preview-only.`);
       }
     }
   }

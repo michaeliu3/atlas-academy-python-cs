@@ -9,6 +9,10 @@
       "sha256": "409e842f142de80f0658229100ffbedc65532cf5d63c3a31d24520448783e71a"
     },
     {
+      "path": "content/course/browser-progress-owner-bindings.v2.json",
+      "sha256": "bc6bb5ca0a94e97cfe183b04fa0575aeeb634923de236e755459119988bede05"
+    },
+    {
       "path": "content/course/browser-progress-surfaces.v1.json",
       "sha256": "9acd806140ae4be379f3745ea30b37df52575e5c27a4a6d8d77ee8acbfcd44bb"
     },
@@ -42,7 +46,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "5d485530e2599d3abef8dc7f0559b13a580693cd1e30437b63f07567522587a3"
+      "sha256": "2f4cd035c6992a066223a8e517426cb9ac2ebb09e498bfb5258fb68855736db2"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -166,7 +170,7 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "010f669d0559c283b4f188634c946e884ca305838e951d384263e4fc8d53fb11"
+      "sha256": "2e9b3e1ca1323c8511c60432019d83a69383242acdc3cce2d1bc90b952f316e6"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
@@ -314,7 +318,7 @@
     },
     {
       "path": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md",
-      "sha256": "c0d1f09d5d429bbc0c406caf71f56b7199ea3cf17f4d87560064209971a236df"
+      "sha256": "68723c534ba8ba0755bb8e9d7a8eed6b7901c5b592f735afa2dd2fd843916ced"
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",

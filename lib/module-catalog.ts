@@ -52,12 +52,13 @@ export type TableOfContentsItem = {
 };
 
 type ModuleManifest = {
-  schemaVersion: 3;
+  schemaVersion: 4;
   courseGraphSchemaVersion: number;
   routePlanId: string;
   definedModuleCount: number;
   readerVisibleModuleCount: number;
-  coreOpenModuleCount: number;
+  legacyOpenModuleCount: number;
+  publishedModuleCount: number;
   previewReaderModuleCount: number;
   arcs: CourseArc[];
   modules: CourseModule[];

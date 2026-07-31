@@ -15,7 +15,7 @@ function canonicalText(value) {
   return value.replace(/\r\n?/gu, "\n");
 }
 
-test("published workbooks do not expose retired research-directory source-map links", async () => {
+test("learner-visible workbooks do not expose retired research-directory source-map links", async () => {
   const workbookNames = (await readdir(moduleDirectory)).filter((name) => name.endsWith(".md"));
   const retiredLinks = [];
 

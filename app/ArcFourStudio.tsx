@@ -11,6 +11,7 @@ import { ConcurrencyStudio } from "./ConcurrencyStudio";
 import { NetworkProtocolStudio } from "./NetworkProtocolStudio";
 import { OperatingSystemsStudio } from "./OperatingSystemsStudio";
 import { SecurityTrustStudio } from "./SecurityTrustStudio";
+import { getCourseGraphModule } from "@/lib/course-catalog";
 
 type ArcFourStudioProps = {
   onOpenDurableSoftware: () => void;
@@ -18,10 +19,9 @@ type ArcFourStudioProps = {
 
 type StudioView = "stack" | "state" | "locality" | "claims";
 
-const arcModules = [
+const arcModuleDetails = [
   {
     number: "17",
-    status: "Published",
     href: "/modules/17-computer-architecture-execution-stack",
     title: "Computer architecture & execution stack",
     question: "What changes below a Python operation—and what can we observe?",
@@ -31,7 +31,6 @@ const arcModules = [
   },
   {
     number: "18",
-    status: "Published",
     href: "/modules/18-operating-systems-resource-mediation",
     title: "Operating systems & resource mediation",
     question:
@@ -42,7 +41,6 @@ const arcModules = [
   },
   {
     number: "19",
-    status: "Published",
     href: "/modules/19-concurrency-parallelism",
     title: "Concurrency & parallelism",
     question: "What becomes possible—and unsafe—when execution overlaps?",
@@ -52,7 +50,6 @@ const arcModules = [
   },
   {
     number: "20",
-    status: "Published",
     href: "/modules/20-networks-application-protocols",
     title: "Networks & application protocols",
     question: "How do local bytes become bounded remote knowledge?",
@@ -62,7 +59,6 @@ const arcModules = [
   },
   {
     number: "21",
-    status: "Published",
     href: "/modules/21-async-distributed-systems",
     title: "Async & distributed systems",
     question: "How does Atlas reason when time, order, and failure are partial?",
@@ -72,7 +68,6 @@ const arcModules = [
   },
   {
     number: "22",
-    status: "Published",
     href: "/modules/22-security-privacy-trust-boundaries",
     title: "Security, privacy & trust boundaries",
     question: "Who may cause which state transition under what evidence?",
@@ -81,6 +76,27 @@ const arcModules = [
       "Narrow trust decisions, redacted evidence, release provenance, and a parser/capability handoff.",
   },
 ] as const;
+
+const availabilityLabel = {
+  "legacy-open": "Open material",
+  published: "Verified published",
+  preview: "Reference preview",
+  locked: "Locked",
+  optional: "Optional material",
+  "authoring-only": "Authoring only",
+} as const;
+
+const arcModules = arcModuleDetails.map((moduleDetail) => {
+  const courseModule = getCourseGraphModule(Number(moduleDetail.number));
+  if (!courseModule) {
+    throw new Error(`Arc IV card references unknown Module ${moduleDetail.number}.`);
+  }
+  return {
+    ...moduleDetail,
+    availability: courseModule.state.availability,
+    status: availabilityLabel[courseModule.state.availability],
+  };
+});
 
 const studioViews: Array<{
   id: StudioView;
@@ -449,7 +465,7 @@ export function ArcFourStudio({
             >
               Enter the protocol observatory <span aria-hidden="true">→</span>
             </Link>
-            <span>Modules 17–20 are published · Modules 21–22 are forward handoffs</span>
+            <span>Follow the prerequisite-aware Arc IV sequence</span>
           </div>
         </div>
 
@@ -517,8 +533,8 @@ export function ArcFourStudio({
                 <strong>{candidate.title}</strong>
                 <small
                   className={
-                    candidate.status === "Published"
-                      ? "module-status-published"
+                    candidate.availability === "legacy-open"
+                      ? "module-status-open"
                       : undefined
                   }
                 >
@@ -549,12 +565,12 @@ export function ArcFourStudio({
             </dl>
             {selectedModule.href ? (
               <Link href={selectedModule.href}>
-                Open the complete published workbook{" "}
+                Open the complete workbook{" "}
                 <span aria-hidden="true">↗</span>
               </Link>
             ) : (
               <p className="forward-note">
-                This card marks a dependency boundary, not a published lesson.
+                This card marks a dependency boundary, not a released lesson.
                 Modules 17–20 name what this later module must inherit.
               </p>
             )}
@@ -878,7 +894,7 @@ export function ArcFourStudio({
           ← Revisit durable software
         </button>
         <div>
-          <span>Latest published workbook · complete models, labs, quiz, and project</span>
+          <span>Latest open workbook · complete models, labs, quiz, and project</span>
           <Link
             className="primary-action arc-four-primary"
             href="/modules/22-security-privacy-trust-boundaries"

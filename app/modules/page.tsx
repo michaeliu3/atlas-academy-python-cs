@@ -16,7 +16,7 @@ export default function ModuleLibraryPage() {
       <div id="main-content" tabIndex={-1}>
         <header className="library-hero">
           <p className="kicker">
-            The reading room · {moduleManifest.coreOpenModuleCount} Core-open modules + {moduleManifest.previewReaderModuleCount} synthesis previews
+            The reading room · {moduleManifest.legacyOpenModuleCount} open legacy workbooks + {moduleManifest.previewReaderModuleCount} synthesis previews
           </p>
           <h1>
             One course.
@@ -30,8 +30,8 @@ export default function ModuleLibraryPage() {
           </p>
           <dl className="library-measures" aria-label="Course library scale">
             <div>
-              <dt>{moduleManifest.coreOpenModuleCount}</dt>
-              <dd>Core-open modules</dd>
+              <dt>{moduleManifest.legacyOpenModuleCount}</dt>
+              <dd>open workbooks</dd>
             </div>
             <div>
               <dt>{moduleManifest.previewReaderModuleCount}</dt>
@@ -39,7 +39,7 @@ export default function ModuleLibraryPage() {
             </div>
             <div>
               <dt>{moduleManifest.arcs.length}</dt>
-              <dd>published knowledge arcs</dd>
+              <dd>connected knowledge arcs</dd>
             </div>
             <div>
               <dt>1</dt>
@@ -112,6 +112,8 @@ export default function ModuleLibraryPage() {
                           {courseModule.estimatedMinutes} min reference read
                           {courseModule.state.availability === "preview"
                             ? " · Preview—not an unlocked Core step"
+                            : courseModule.state.availability === "legacy-open"
+                              ? " · Open legacy material—formal review pending"
                             : ""}
                           <i aria-hidden="true">↗</i>
                         </span>

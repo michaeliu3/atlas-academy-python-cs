@@ -1,6 +1,6 @@
 # Separate course truth facets
 
-**Status:** Accepted and implemented for the active course graph (2026-07-31)
+**Status:** Superseded by [ADR 0002](0002-reserve-published-for-verified-release.md) for active publication vocabulary; retained as the historical facet-separation decision (2026-07-31)
 
 Atlas must distinguish a workbook's reader access, route availability, contract
 state, release state, and learner-controlled Core progression. We model

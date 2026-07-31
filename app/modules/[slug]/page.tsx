@@ -44,10 +44,17 @@ export async function generateMetadata({
 
 function readerAccessCopy(courseModule: CourseModule) {
   switch (courseModule.state.availability) {
+    case "legacy-open":
+      return {
+        label: "Open legacy reader",
+        title: "The workbook is available; formal contract and release review are still pending.",
+        detail:
+          "Opening, reading, or using a studio does not mark academic prerequisites complete or advance the Core. It also does not make this a published, verified module. Use the prerequisite map and your Teaching Assistant or Study Partner conversation to decide what evidence to build next.",
+      };
     case "published":
       return {
-        label: "Core-open reader",
-        title: "The workbook is available; evidence stays learner-controlled.",
+        label: "Verified published reader",
+        title: "The workbook is learner-released with recorded contract and release evidence.",
         detail:
           "Opening, reading, or using a studio does not mark academic prerequisites complete or advance the Core. Use the prerequisite map and your Teaching Assistant or Study Partner conversation to decide what evidence to build next.",
       };

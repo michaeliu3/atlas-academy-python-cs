@@ -6,14 +6,21 @@ oral-defense, or project evidence shows a necessary bridge.
 
 ## Current reader and contract truth
 
-- [x] The canonical v2 graph defines 36 modules and separates reader access,
-  Core availability, contract state, and release state. It currently projects
-  30 reader-visible modules: 28 Core-open modules and two M25/M26 reference
-  previews that earn no Core credit.
-- [ ] M1–M30 are learner-material-ready legacy baselines. Their structural
-  inventory is present, but all 30 remain `legacy-baseline` and zero are
-  contract-verified; human-reviewed evidence for every contract clause is
-  still in progress.
+<!-- atlas-course-status:start -->
+**Canonical availability (generated from `course-graph.v2.json`):**
+**36** defined modules; **30** reader-visible; **28** open for study.
+- **28** `legacy-open` (M1–M24, M27–M30); full reader access, review pending.
+- **0** `published` (—); only verified, deployed releases count here.
+- **2** `preview` (M25–M26); reference-only, never route credit.
+- **6** `authoring-only` (M31–M36); hidden from the learner reader.
+- Contract states: **30** legacy baselines; **0** verified.
+<!-- atlas-course-status:end -->
+
+- [x] The canonical v2 graph separates reader access, route availability,
+  contract state, and release state. `published` is reserved for verified,
+  deployed releases.
+- [ ] The learner-readable legacy baseline is structurally inventoried, but
+  human-reviewed evidence for every contract clause is still in progress.
 - [x] The active unified v3 module-contract registry has 36 entries and the
   same 18 criteria for each module. It preserves the legacy audit/packet and
   advanced v1 records as migration adapters; those inputs do not promote a
@@ -39,13 +46,13 @@ oral-defense, or project evidence shows a necessary bridge.
   its M31–M36 academic prerequisites are authored. It earns no Core credit.
 - [x] Make the Module 26 orientation material reader-visible as a reference
   preview — systems capstone, open-source stewardship, and oral architecture
-  defense—until Module 25 becomes Core-open. It earns no Core credit.
+  defense—until Module 25 becomes verified published. It earns no Core credit.
 
 ## 60-day Atlas Core expansion
 
 - [x] Canonical v2 prerequisite-first 60-day graph and generated manifest,
-  with distinct reader-access, Core-availability, contract, and release
-  facets; M25/M26 remain previews rather than Core steps.
+  with distinct reader-access, availability, contract, and release facets;
+  M25/M26 remain previews rather than Core steps.
 - [x] M27 — discrete mathematics, proof, counting, and structures, with a
   source-audited workbook, local proof/counterexample studio, bounded reference
   model, and prerequisite-first reader navigation.
@@ -97,10 +104,10 @@ synthesis credit.
 5. `v0.5-languages` — Module 23 and its Language Lab.
 6. `v0.5.2-runtime-evidence` — Module 24 and its Runtime Evidence
    Observatory.
-7. `v0.5.3-decision-evidence` — prospective Core opening for Module 25 and
+7. `v0.5.3-decision-evidence` — prospective verified publication for Module 25 and
    its Next-Step Evidence Studio after M31–M36 evidence exists.
 8. `v0.6-capstone` — prospective Module 26 final defense and full repository
-   audit after Module 25 becomes Core-open.
+   audit after Module 25 becomes verified published.
 
 Each milestone requires passing portal/model checks, source attribution review,
 accessibility review, release notes, and a statement of known limitations.

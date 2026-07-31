@@ -51,7 +51,7 @@ test("the companion package derives prerequisite and forward-handoff facts from 
     moduleId: "m02",
     number: 2,
     title: "Functions, Recursion, and Induction",
-    availability: "published",
+    availability: "legacy-open",
   });
 
   const changedGraph = clone(graph.modules);
@@ -102,6 +102,8 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   );
   assert.match(companion.teachingAssistant.contextPrompt, /prose or ASCII fallback/i);
   assert.match(companion.studyPartner.contextPrompt, /language-labelled fenced code/i);
+  assert.match(companion.teachingAssistant.contextPrompt, /contract and release verification pending/i);
+  assert.doesNotMatch(companion.studyPartner.contextPrompt, /; legacy-open\)/i);
   assert.match(companion.teachingAssistant.contextPrompt, /automatically create at most one concise note/i);
   assert.match(companion.studyPartner.contextPrompt, /direct evidence of the successful write/i);
 });

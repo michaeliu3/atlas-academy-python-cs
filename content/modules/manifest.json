@@ -1,10 +1,11 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "courseGraphSchemaVersion": 2,
   "routePlanId": "atlas-core-60",
   "definedModuleCount": 36,
   "readerVisibleModuleCount": 30,
-  "coreOpenModuleCount": 28,
+  "legacyOpenModuleCount": 28,
+  "publishedModuleCount": 0,
   "previewReaderModuleCount": 2,
   "arcs": [
     {
@@ -65,7 +66,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -101,7 +102,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -141,7 +142,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -181,7 +182,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -221,7 +222,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -261,7 +262,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -301,7 +302,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -341,7 +342,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -381,7 +382,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -421,7 +422,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -461,7 +462,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -501,7 +502,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -541,7 +542,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -581,7 +582,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -621,7 +622,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -661,7 +662,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -701,7 +702,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -741,7 +742,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -781,7 +782,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -821,7 +822,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -861,7 +862,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -901,7 +902,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -941,7 +942,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -981,7 +982,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -1014,9 +1015,9 @@
       "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
       "arcId": "arc-v",
-      "wordCount": 7743,
+      "wordCount": 7744,
       "estimatedMinutes": 36,
-      "sourceHash": "010f669d0559c283b4f188634c946e884ca305838e951d384263e4fc8d53fb11",
+      "sourceHash": "2e9b3e1ca1323c8511c60432019d83a69383242acdc3cce2d1bc90b952f316e6",
       "id": "m25",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1109,7 +1110,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -1153,7 +1154,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -1195,7 +1196,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"
@@ -1237,7 +1238,7 @@
       "state": {
         "lifecycle": "learner-material-ready",
         "readerAccess": "full",
-        "availability": "published",
+        "availability": "legacy-open",
         "contract": {
           "track": "legacy-v1",
           "state": "legacy-baseline"

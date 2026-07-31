@@ -16,22 +16,27 @@ delivery fact, not a mastery, prerequisite, contract-review, or release claim.
 _Avoid_: unlocked, passed, published-quality
 
 **Route availability**:
-The learner-facing role of a module in a named route: `published` is a
-Core-open step; `preview` is reference-only; `locked` is named but not
-route-open; `optional` is outside the required Core; and `authoring-only` is
-not learner-deliverable.
+The learner-facing role of a module in a named route: `legacy-open` is
+available legacy learning material whose full contract and release review are
+still pending; `published` is a learner-released module with a verified
+contract and recorded deployment evidence; `preview` is reference-only;
+`locked` is named but not route-open; `optional` is outside the required Core;
+and `authoring-only` is not learner-deliverable.
 _Avoid_: lifecycle, reader access, completion state
 
 **Contract state**:
 The maturity of a module's structured teaching evidence: `not-started`,
 `authoring-only`, `legacy-baseline`, `review-ready`, or `verified`. It is
-independent of reader access and release evidence.
+separate from reader access, but canonical publication invariants require a
+`verified` module to use `published` availability and recorded deployment
+evidence.
 _Avoid_: published, learner mastery, deployment state
 
 **Release state**:
 The maturity of recorded release evidence: `unrecorded`, `candidate-recorded`,
-or `deployed-recorded`. It is independent of quality review; a deployment
-claim must still link to its exact recorded evidence.
+or `deployed-recorded`. A `published` module must carry a verified contract and
+`deployed-recorded` evidence; a deployment claim must still link to its exact
+recorded evidence.
 _Avoid_: contract state, reader access, security clean
 
 **Core progression**:

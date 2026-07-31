@@ -7,6 +7,26 @@ actually published.
 
 ## Unreleased
 
+- Preserved the browser-progress policy's v1 `{moduleId, lifecycle}` owner
+  schema instead of silently rewriting it during the course-availability
+  migration. A required, separately hashed
+  `browser-progress-owner-bindings.v2.json` companion now binds every active
+  surface to its canonical route and current availability. The validator rejects
+  an altered v1 owner shape, a detached v2 source reference, or an availability
+  mismatch. This preserves the historical policy record while tightening the
+  current local-progress boundary; it is not learner-progress, publication,
+  deployment, or release evidence.
+- Made learner-facing course status truthful without removing the existing
+  learning route. The canonical graph now labels M1–M24 and M27–M30
+  `legacy-open` rather than `published`; they remain readable study material,
+  while their legacy-baseline contract and unrecorded release evidence stay
+  visible. `published` now has a bidirectional graph invariant with a verified
+  v3 contract and deployed-recorded release evidence. The generated manifest,
+  route, reader, diagnostics, companion prompts, progress-surface policy, and
+  current-status documentation project this distinction, while M25/M26 remain
+  previews and M31–M36 remain hidden authoring-only. This is a truth-model and
+  migration-boundary repair, not a contract verification, deployment, learner
+  mastery, release, or accessibility-completion claim.
 - Added a non-promoting M31 authoring-candidate evidence preflight. It binds
   all eighteen structural criteria to the hidden M31 workbook, instructor-facing
   source map/audit, frozen companion, and bounded Node authoring model/tests;
@@ -139,7 +159,8 @@ actually published.
   M31 remains authoring-only, unreviewed, unreleased, and absent from the
   learner reader.
 - Added a versioned, graph-bound module-companion guide registry and two
-  contextual follow-on packets on each Core-open module's oral-defense panel:
+  contextual follow-on packets on each then-Core-open module's oral-defense panel
+  (now `legacy-open` under ADR 0002):
   one for the Teaching Assistant's supportive defense and one for the Study
   Partner's rehearsal. The server derives academic prerequisites and the
   declared forward handoff from the canonical graph, while focused unit,

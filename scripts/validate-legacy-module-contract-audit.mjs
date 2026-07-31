@@ -478,10 +478,10 @@ export async function validateLegacyModuleContractAudit(
   const manifest = await trackedJson(siteRoot, canonicalModuleManifestRelativePath, "canonical module manifest", errors);
   if (!graph || !manifest) auditFailure(errors);
 
-  const publishedGraphModules = graph.modules.filter(
+  const learnerReadyGraphModules = graph.modules.filter(
     (courseModule) => courseModule.state?.lifecycle === "learner-material-ready" && courseModule.number <= 30,
   );
-  const expectedModuleIds = new Set(publishedGraphModules.map(({ id }) => id));
+  const expectedModuleIds = new Set(learnerReadyGraphModules.map(({ id }) => id));
   const declaredScope = Array.isArray(audit?.auditScope?.moduleIds)
     ? new Set(audit.auditScope.moduleIds)
     : new Set();
@@ -512,7 +512,7 @@ export async function validateLegacyModuleContractAudit(
       continue;
     }
     seenModuleIds.add(entry.moduleId);
-    const graphModule = publishedGraphModules.find(({ id }) => id === entry.moduleId);
+    const graphModule = learnerReadyGraphModules.find(({ id }) => id === entry.moduleId);
     const manifestModule = manifestById.get(entry.moduleId);
     if (!graphModule || !manifestModule) {
       errors.push(`${label} must map to a canonical learner-ready graph and manifest module.`);

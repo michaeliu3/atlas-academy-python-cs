@@ -4,6 +4,12 @@ import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { advancedModuleBridgePath } from "./advanced-module-bridge.mjs";
 import {
+  applyCourseStatusSummary,
+  courseStatusProjectionPath,
+  courseStatusSurfaceRelativePaths,
+  renderCourseStatusProjection,
+} from "./course-status-projection.mjs";
+import {
   advancedModuleContractPath,
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
@@ -149,6 +155,21 @@ async function writeIfChanged(path, content) {
   return true;
 }
 
+async function synchronizeCourseStatusSurfaces(courseGraph) {
+  const changes = [
+    writeIfChanged(
+      courseStatusProjectionPath(siteRoot),
+      renderCourseStatusProjection(courseGraph),
+    ),
+  ];
+  for (const surfacePath of courseStatusSurfaceRelativePaths) {
+    const path = resolve(siteRoot, surfacePath);
+    const content = await readFile(path, "utf8");
+    changes.push(writeIfChanged(path, applyCourseStatusSummary(content, courseGraph)));
+  }
+  return Promise.all(changes);
+}
+
 async function synchronizeSourceArtifactCopies(sourceArtifactCopies) {
   let changed = 0;
   for (const { canonicalPath, publicPath } of sourceArtifactCopies) {
@@ -193,6 +214,7 @@ async function releaseInputRecord(path) {
 }
 
 const courseGraph = await loadCourseGraph();
+const courseStatusChanges = await synchronizeCourseStatusSurfaces(courseGraph);
 const projectedModules = projectReaderModules(courseGraph);
 const graphByNumber = new Map(
   courseGraph.modules.map((courseModule) => [courseModule.number, courseModule]),
@@ -361,12 +383,15 @@ for (const path of releaseInputPolicy.downloadPaths) {
 }
 
 const manifest = {
-  schemaVersion: 3,
+  schemaVersion: 4,
   courseGraphSchemaVersion: courseGraph.schemaVersion,
   routePlanId: courseGraph.routePlan.id,
   definedModuleCount: courseGraph.modules.length,
   readerVisibleModuleCount: modules.length,
-  coreOpenModuleCount: modules.filter(
+  legacyOpenModuleCount: modules.filter(
+    ({ state }) => state.readerAccess === "full" && state.availability === "legacy-open",
+  ).length,
+  publishedModuleCount: modules.filter(
     ({ state }) => state.readerAccess === "full" && state.availability === "published",
   ).length,
   previewReaderModuleCount: modules.filter(
@@ -441,5 +466,5 @@ const changed = await Promise.all([
   ),
 ]);
 console.log(
-  `Synced ${modules.length} modules from checked-in content; ${releaseInputs.inputs.length} hashed release inputs (${changed.filter(Boolean).length + sourceArtifactChanges} generated files updated).`,
+  `Synced ${modules.length} modules from checked-in content; ${releaseInputs.inputs.length} hashed release inputs (${changed.filter(Boolean).length + courseStatusChanges.filter(Boolean).length + sourceArtifactChanges} generated files updated).`,
 );

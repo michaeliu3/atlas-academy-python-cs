@@ -14,8 +14,10 @@ type AccessState = CourseModule["state"];
 
 function availabilityLabel({ availability }: AccessState) {
   switch (availability) {
+    case "legacy-open":
+      return "Open material · review pending";
     case "published":
-      return "Core-open";
+      return "Verified published";
     case "preview":
       return "Reference preview";
     case "optional":
@@ -29,8 +31,10 @@ function availabilityLabel({ availability }: AccessState) {
 
 function routeAccessNote({ availability }: AccessState) {
   switch (availability) {
+    case "legacy-open":
+      return "Open legacy workbook. Route order does not verify academic prerequisites, contract review, or release evidence.";
     case "published":
-      return "Core-open workbook. Route order does not verify that academic prerequisites are complete.";
+      return "Verified published workbook. Route order does not verify that academic prerequisites are complete.";
     case "preview":
       return "Reference preview—not an unlocked Core step.";
     case "optional":

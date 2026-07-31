@@ -215,6 +215,7 @@ test("a legacy module cannot become verified with free-form evidence strings", a
   ]);
   const forgedGraph = structuredClone(graph);
   const forgedM29Graph = forgedGraph.modules.find(({ id }) => id === "m29");
+  forgedM29Graph.state.availability = "published";
   forgedM29Graph.state.contract.state = "verified";
   forgedM29Graph.state.release.state = "deployed-recorded";
   forgedM29Graph.state.release.recordId = "m29-forged-deployment";
@@ -387,7 +388,7 @@ test("strict release validation refuses legacy baseline evidence", async () => {
   );
 });
 
-test("complete validation remains fail-closed until all modules are verified and synthesis is Core-open", async () => {
+test("complete validation remains fail-closed until all modules are verified and synthesis is published", async () => {
   await assert.rejects(
     () => runCourseValidation({ complete: true }),
     (error) => {
@@ -397,11 +398,11 @@ test("complete validation remains fail-closed until all modules are verified and
       );
       assert.match(
         error.message,
-        /Complete contract validation requires m25 to be Core-open rather than preview-only/u,
+        /Complete contract validation requires m25 to be published rather than preview-only/u,
       );
       assert.match(
         error.message,
-        /Complete contract validation requires m26 to be Core-open rather than preview-only/u,
+        /Complete contract validation requires m26 to be published rather than preview-only/u,
       );
       assert.match(
         error.message,

@@ -12,8 +12,8 @@
 > and empirical evidence: discrete proof/complexity, numerical linear algebra,
 > calculus/analysis, probability/statistics, optimization/information,
 > systems-for-learning, formal limits, classical AI, ML evaluation, and learning
-> theory. This published workbook remains readable now; its final-synthesis
-> claim is intentionally gated on those released artifacts rather than inferred
+> theory. This preview workbook remains readable now; its final-synthesis
+> claim is intentionally gated on those future verified artifacts rather than inferred
 > from a score or an agent explanation.
 
 > **Preview boundary:** M25 is readable as a bounded preparation workbook.

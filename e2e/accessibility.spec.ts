@@ -77,12 +77,12 @@ const browserAuditRoutes: ReadonlyArray<{
     },
   },
   {
-    name: "Module 1 Core reader access boundary",
+    name: "Module 1 open-material reader access boundary",
     path: "/modules/01-values-state-execution",
     ready: async (page) => {
       await expect(
         page.getByRole("heading", {
-          name: "The workbook is available; evidence stays learner-controlled.",
+          name: "The workbook is available; formal contract and release review are still pending.",
         }),
       ).toBeVisible();
     },
@@ -596,7 +596,7 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
   await expect(printBrief).toBeEnabled();
 
   const repairLink = page
-    .getByRole("link", { name: /rebuild with published module/i })
+    .getByRole("link", { name: /rebuild with open module/i })
     .first();
   await repairLink.focus();
   await expect(repairLink).toBeFocused();

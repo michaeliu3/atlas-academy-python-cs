@@ -28,7 +28,10 @@ import {
   loadReleaseEvidencePolicy,
   releaseEvidencePolicyRelativePath,
 } from "../scripts/release-evidence-verifier.mjs";
-import { browserProgressSurfacePolicyRelativePath } from "../scripts/browser-progress-surface-policy.mjs";
+import {
+  browserProgressOwnerBindingPolicyRelativePath,
+  browserProgressSurfacePolicyRelativePath,
+} from "../scripts/browser-progress-surface-policy.mjs";
 import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
 import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
 
@@ -83,6 +86,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes(releaseEvidencePolicyRelativePath));
   assert.ok(paths.includes(browserProgressSurfacePolicyRelativePath));
+  assert.ok(paths.includes(browserProgressOwnerBindingPolicyRelativePath));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
   assert.ok(paths.includes("content/source-maps/python_curriculum_sources.md"));
   assert.ok(paths.includes("content/source-maps/module31_optimization_information_source_map.md"));

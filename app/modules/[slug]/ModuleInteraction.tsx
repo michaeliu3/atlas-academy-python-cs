@@ -43,7 +43,7 @@ export function ModuleInteraction({
         aria-label="Synthesis preview status"
         className="module-availability-notice"
       >
-        <p className="kicker">Released preview · not an unlocked Core step</p>
+        <p className="kicker">Reference preview · not an unlocked Core step</p>
         <h2>Read this as a map, not a mastered module.</h2>
         <p>{resolution.description}</p>
         <Link href="/route">View the prerequisite-first route →</Link>

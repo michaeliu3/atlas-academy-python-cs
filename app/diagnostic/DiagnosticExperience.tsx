@@ -424,7 +424,7 @@ export function DiagnosticExperience() {
             <h2 id="bridge-plan-title">What to rebuild before moving faster</h2>
             <p>
               Each recommendation is tied to the reasoning signal that raised
-              it. It starts with a published foundation; a later extension is
+              it. It starts with an open foundation; a later extension is
               named only when it is not yet available.
             </p>
           </header>
@@ -447,7 +447,7 @@ export function DiagnosticExperience() {
                       <strong>{recommendation.tier}</strong> signal
                     </p>
                     <Link href={recommendation.route.href}>
-                      Rebuild with published Module {recommendation.route.moduleNumber}
+                      Rebuild with open Module {recommendation.route.moduleNumber}
                       <span aria-hidden="true"> ↗</span>
                     </Link>
                     {recommendation.route.academicPrerequisites.length > 0 ? (

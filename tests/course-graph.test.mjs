@@ -8,7 +8,7 @@ import {
   validateCourseGraph,
 } from "../scripts/course-graph.mjs";
 
-test("the canonical v2 course graph separates academic prerequisites, reader access, and Core availability", async () => {
+test("the canonical v2 course graph separates academic prerequisites, reader access, open legacy material, and formal publication", async () => {
   const graph = await loadCourseGraph();
   const byNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
 
@@ -40,9 +40,27 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
   });
   assert.equal(byNumber.get(25)?.sequencePosition, 35);
   assert.equal(byNumber.get(31)?.sequencePosition, 22);
+  assert.deepEqual(
+    Object.fromEntries(
+      [...byNumber.values()]
+        .reduce((counts, courseModule) => {
+          counts.set(
+            courseModule.state.availability,
+            (counts.get(courseModule.state.availability) ?? 0) + 1,
+          );
+          return counts;
+        }, new Map())
+        .entries(),
+    ),
+    {
+      "authoring-only": 6,
+      "legacy-open": 28,
+      preview: 2,
+    },
+  );
 
   assert.deepEqual(resolveLearnerAccess(byNumber.get(30)), {
-    mode: "core-step",
+    mode: "legacy-route",
     readerAccess: "full",
   });
   assert.deepEqual(resolveLearnerAccess(byNumber.get(25)), {
@@ -87,7 +105,7 @@ test("the graph refuses access states that would turn a preview or authoring nod
   );
 });
 
-test("only a verified module may carry a recorded canonical release state", async () => {
+test("only a verified published module may carry a recorded canonical release state", async () => {
   const graph = await loadCourseGraph();
   for (const releaseState of ["candidate-recorded", "deployed-recorded"]) {
     const forgedRelease = structuredClone(graph);
@@ -95,9 +113,36 @@ test("only a verified module may carry a recorded canonical release state", asyn
     m29.state.release = { state: releaseState, recordId: `m29-forged-${releaseState}` };
     assert.throws(
       () => validateCourseGraph(forgedRelease),
-      /legacy-baseline Module 29 must leave release state unrecorded with a null recordId/u,
+      /legacy-open Module 29 must leave release evidence unrecorded/u,
     );
   }
+});
+
+test("legacy material cannot acquire a published label without verified contract and deployment evidence", async () => {
+  const graph = await loadCourseGraph();
+
+  const forgedPublication = structuredClone(graph);
+  forgedPublication.modules.find(({ id }) => id === "m30").state.availability = "published";
+  assert.throws(
+    () => validateCourseGraph(forgedPublication),
+    /published Module 30 requires a verified contract/u,
+  );
+
+  const forgedLegacyContract = structuredClone(graph);
+  forgedLegacyContract.modules.find(({ id }) => id === "m30").state.contract.state = "review-ready";
+  assert.throws(
+    () => validateCourseGraph(forgedLegacyContract),
+    /legacy-open Module 30 must retain a legacy-v1 legacy-baseline contract/u,
+  );
+
+  const verifiedPreview = structuredClone(graph);
+  const m25 = verifiedPreview.modules.find(({ id }) => id === "m25");
+  m25.state.contract.state = "verified";
+  m25.state.release = { state: "deployed-recorded", recordId: "m25-forged-release" };
+  assert.throws(
+    () => validateCourseGraph(verifiedPreview),
+    /verified Module 25 must use published availability/u,
+  );
 });
 
 test("the graph requires the exact M1–M36 module-number set", async () => {
@@ -171,7 +216,7 @@ test("graph-declared studios have one bounded, code-split reader mapping", async
   assert.match(registrySource, /kind: "unavailable"/);
   assert.match(
     registrySource,
-    /no workbook or interactive studio is published/,
+    /no learner-released workbook or interactive studio is available/,
   );
   assert.match(
     registrySource,

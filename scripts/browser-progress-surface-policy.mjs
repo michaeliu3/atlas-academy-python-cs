@@ -2,12 +2,15 @@ import { lstat, readFile, readdir } from "node:fs/promises";
 import { dirname, extname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
+import { validateCourseGraph } from "./course-graph.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
 
 export const browserProgressSurfacePolicyRelativePath =
   "content/course/browser-progress-surfaces.v1.json";
+export const browserProgressOwnerBindingPolicyRelativePath =
+  "content/course/browser-progress-owner-bindings.v2.json";
 
 const expectedRootKeys = new Set([
   "schemaVersion",
@@ -55,6 +58,22 @@ const expectedLegacyKeys = new Set([
 const expectedAdapterKeys = new Set(["path", "codecExport", "operations"]);
 const expectedTestKeys = new Set(["unit", "browser"]);
 const expectedResetKeys = new Set(["removeKeys"]);
+const expectedLegacyOwnerKeys = new Set(["moduleId", "lifecycle"]);
+const expectedCurrentOwnerKeys = new Set(["moduleId", "availability"]);
+const expectedOwnerBindingPolicyRootKeys = new Set([
+  "schemaVersion",
+  "policyVersion",
+  "kind",
+  "purpose",
+  "surfacePolicy",
+  "bindings",
+]);
+const expectedOwnerBindingSourcePolicyKeys = new Set([
+  "path",
+  "schemaVersion",
+  "policyVersion",
+]);
+const expectedOwnerBindingKeys = new Set(["surfaceId", "owner"]);
 const expectedSurfaceIds = [
   "intake",
   "m18-os-studio",
@@ -71,6 +90,22 @@ const expectedSurfaceIds = [
   "m29-calculus-studio",
   "m30-probability-studio",
 ];
+const expectedLegacyLifecycleBySurfaceId = new Map([
+  ["intake", "published-foundation"],
+  ["m18-os-studio", "published"],
+  ["m19-concurrency-studio", "published"],
+  ["m20-protocol-studio", "published"],
+  ["m21-async-distributed-studio", "published"],
+  ["m22-security-trust-studio", "published"],
+  ["m23-language-lab", "published"],
+  ["m24-runtime-observatory", "published"],
+  ["m25-evidence-studio", "preview"],
+  ["m26-capstone-defense", "preview"],
+  ["m27-discrete-math-studio", "published"],
+  ["m28-linear-algebra-studio", "published"],
+  ["m29-calculus-studio", "published"],
+  ["m30-probability-studio", "published"],
+]);
 const storageNames = new Set(["localStorage", "sessionStorage"]);
 const directStorageMethods = new Set(["getItem", "setItem", "removeItem", "clear"]);
 const sourceExtensions = new Set([".js", ".jsx", ".ts", ".tsx"]);
@@ -459,8 +494,96 @@ export function browserProgressSurfacePolicyPath(siteRoot = defaultSiteRoot) {
   return resolve(siteRoot, browserProgressSurfacePolicyRelativePath);
 }
 
+export function browserProgressOwnerBindingPolicyPath(siteRoot = defaultSiteRoot) {
+  return resolve(siteRoot, browserProgressOwnerBindingPolicyRelativePath);
+}
+
 export async function loadBrowserProgressSurfacePolicy(siteRoot = defaultSiteRoot) {
   return JSON.parse(await readFile(browserProgressSurfacePolicyPath(siteRoot), "utf8"));
+}
+
+export async function loadBrowserProgressOwnerBindingPolicy(siteRoot = defaultSiteRoot) {
+  return JSON.parse(await readFile(browserProgressOwnerBindingPolicyPath(siteRoot), "utf8"));
+}
+
+function validateOwnerBindingPolicy(ownerBindingPolicy, graphModulesById, errors) {
+  if (!hasExactlyKeys(ownerBindingPolicy, expectedOwnerBindingPolicyRootKeys)) {
+    errors.push("Browser-progress owner-binding policy must use its exact versioned root schema.");
+  }
+  if (
+    ownerBindingPolicy?.schemaVersion !== 2 ||
+    ownerBindingPolicy?.policyVersion !== "v2" ||
+    ownerBindingPolicy?.kind !== "atlas-browser-progress-owner-binding-policy"
+  ) {
+    errors.push("Browser-progress owner-binding policy must use schemaVersion 2, policyVersion v2, and the expected kind.");
+  }
+  if (text(ownerBindingPolicy?.purpose) === "") {
+    errors.push("Browser-progress owner-binding policy must define a non-empty purpose.");
+  }
+
+  const sourcePolicy = hasExactlyKeys(
+    ownerBindingPolicy?.surfacePolicy,
+    expectedOwnerBindingSourcePolicyKeys,
+  )
+    ? ownerBindingPolicy.surfacePolicy
+    : null;
+  if (!sourcePolicy) {
+    errors.push("Browser-progress owner-binding policy must declare its exact v1 source policy.");
+  } else if (
+    sourcePolicy.path !== browserProgressSurfacePolicyRelativePath ||
+    sourcePolicy.schemaVersion !== 1 ||
+    sourcePolicy.policyVersion !== "v1"
+  ) {
+    errors.push("Browser-progress owner-binding policy must bind exactly browser-progress-surfaces.v1.json schemaVersion 1 policyVersion v1.");
+  }
+
+  const bindings = Array.isArray(ownerBindingPolicy?.bindings)
+    ? ownerBindingPolicy.bindings
+    : [];
+  if (bindings.length !== expectedSurfaceIds.length) {
+    errors.push(`Browser-progress owner-binding policy must declare exactly ${expectedSurfaceIds.length} bindings.`);
+  }
+  const bindingSurfaceIds = bindings.map((binding) => binding?.surfaceId);
+  if (JSON.stringify(bindingSurfaceIds) !== JSON.stringify(expectedSurfaceIds)) {
+    errors.push("Browser-progress owner-binding policy must preserve the canonical 14-surface order and IDs.");
+  }
+  if (new Set(bindingSurfaceIds).size !== bindingSurfaceIds.length) {
+    errors.push("Browser-progress owner-binding policy must not duplicate surface IDs.");
+  }
+
+  const bindingsBySurfaceId = new Map();
+  for (const [index, binding] of bindings.entries()) {
+    const label = `Browser-progress owner binding ${index + 1}`;
+    if (!hasExactlyKeys(binding, expectedOwnerBindingKeys)) {
+      errors.push(`${label} must use the exact binding schema.`);
+      continue;
+    }
+    if (
+      !hasExactlyKeys(binding.owner, expectedCurrentOwnerKeys) ||
+      text(binding.surfaceId) === "" ||
+      text(binding.owner.moduleId) === "" ||
+      text(binding.owner.availability) === ""
+    ) {
+      errors.push(`${label} must identify a surface, module owner, and canonical availability.`);
+      continue;
+    }
+    bindingsBySurfaceId.set(binding.surfaceId, binding);
+    if (binding.owner.moduleId === "intake") {
+      if (binding.surfaceId !== "intake" || binding.owner.availability !== "diagnostic") {
+        errors.push(`${label} intake binding must use the intake surface and diagnostic availability.`);
+      }
+      continue;
+    }
+    const ownerModule = graphModulesById.get(binding.owner.moduleId);
+    if (!ownerModule) {
+      errors.push(`${label} owner must name a canonical module.`);
+      continue;
+    }
+    if (binding.owner.availability !== ownerModule.state.availability) {
+      errors.push(`${label} owner availability must match canonical Module ${ownerModule.number} availability ${ownerModule.state.availability}.`);
+    }
+  }
+  return bindingsBySurfaceId;
 }
 
 /**
@@ -471,9 +594,34 @@ export async function loadBrowserProgressSurfacePolicy(siteRoot = defaultSiteRoo
  */
 export async function validateBrowserProgressSurfacePolicy(
   policy,
-  { siteRoot = defaultSiteRoot } = {},
+  { siteRoot = defaultSiteRoot, ownerBindingPolicy: suppliedOwnerBindingPolicy = null } = {},
 ) {
   const errors = [];
+  let graphModulesById = new Map();
+  try {
+    const graph = JSON.parse(
+      await readFile(resolve(siteRoot, "content", "course", "course-graph.v2.json"), "utf8"),
+    );
+    validateCourseGraph(graph);
+    graphModulesById = new Map(graph.modules.map((courseModule) => [courseModule.id, courseModule]));
+  } catch (error) {
+    errors.push(
+      `Browser-progress policy needs a valid canonical course graph: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  let ownerBindingPolicy = suppliedOwnerBindingPolicy;
+  if (!ownerBindingPolicy) {
+    try {
+      ownerBindingPolicy = await loadBrowserProgressOwnerBindingPolicy(siteRoot);
+    } catch (error) {
+      errors.push(
+        `Browser-progress policy needs its v2 canonical owner bindings: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+  const ownerBindingsBySurfaceId = ownerBindingPolicy
+    ? validateOwnerBindingPolicy(ownerBindingPolicy, graphModulesById, errors)
+    : new Map();
   if (!hasExactlyKeys(policy, expectedRootKeys)) {
     errors.push("Browser-progress policy must use its exact versioned root schema.");
   }
@@ -482,7 +630,7 @@ export async function validateBrowserProgressSurfacePolicy(
     policy?.policyVersion !== "v1" ||
     policy?.kind !== "atlas-browser-progress-surface-policy"
   ) {
-    errors.push("Browser-progress policy must use schemaVersion 1, policyVersion v1, and the expected kind.");
+    errors.push("Browser-progress policy must retain schemaVersion 1, policyVersion v1, and the expected kind.");
   }
   if (text(policy?.purpose) === "") {
     errors.push("Browser-progress policy must define a non-empty purpose.");
@@ -549,8 +697,28 @@ export async function validateBrowserProgressSurfacePolicy(
       continue;
     }
     if (text(surface.id) === "") errors.push(`${label} needs a stable ID.`);
-    if (!isPlainObject(surface.owner) || text(surface.owner.moduleId) === "" || text(surface.owner.lifecycle) === "") {
-      errors.push(`${label} must identify a module owner and lifecycle.`);
+    if (
+      !hasExactlyKeys(surface.owner, expectedLegacyOwnerKeys) ||
+      text(surface.owner.moduleId) === "" ||
+      text(surface.owner.lifecycle) === ""
+    ) {
+      errors.push(`${label} must retain the v1 module-owner and historical lifecycle schema.`);
+    } else {
+      const expectedLifecycle = expectedLegacyLifecycleBySurfaceId.get(surface.id);
+      if (expectedLifecycle && surface.owner.lifecycle !== expectedLifecycle) {
+        errors.push(`${label} must retain its v1 historical lifecycle value ${expectedLifecycle}.`);
+      }
+    }
+    const ownerBinding = ownerBindingsBySurfaceId.get(surface.id);
+    if (!ownerBinding) {
+      errors.push(`${label} must have exactly one v2 canonical owner binding.`);
+    } else if (surface.owner?.moduleId !== ownerBinding.owner.moduleId) {
+      errors.push(`${label} v1 owner module must match its v2 canonical owner binding.`);
+    } else if (ownerBinding.owner.moduleId !== "intake") {
+      const ownerModule = graphModulesById.get(ownerBinding.owner.moduleId);
+      if (ownerModule && surface.route !== `/modules/${ownerModule.slug}`) {
+        errors.push(`${label} route must match canonical Module ${ownerModule.number} reader route.`);
+      }
     }
     if (text(surface.route) === "" || !surface.route.startsWith("/")) {
       errors.push(`${label} must declare an absolute learner route.`);
@@ -808,9 +976,13 @@ export async function validateBrowserProgressSurfacePolicy(
   }
   return {
     policyPath: browserProgressSurfacePolicyRelativePath,
+    ownerBindingPolicyPath: browserProgressOwnerBindingPolicyRelativePath,
     adapterPath: scope.browserStorageAdapterPath,
     surfaces: surfaceReports,
-    releaseInputPaths: [browserProgressSurfacePolicyPath(siteRoot)],
+    releaseInputPaths: [
+      browserProgressSurfacePolicyPath(siteRoot),
+      browserProgressOwnerBindingPolicyPath(siteRoot),
+    ],
   };
 }
 

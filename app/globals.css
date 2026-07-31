@@ -6937,7 +6937,7 @@ main.module-library-shell {
   text-transform: uppercase;
 }
 
-.arc-four-module-rail button small.module-status-published {
+.arc-four-module-rail button small.module-status-open {
   color: var(--moss);
 }
 

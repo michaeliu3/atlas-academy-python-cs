@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  browserProgressOwnerBindingPolicyRelativePath,
+  browserProgressSurfacePolicyRelativePath,
+  loadBrowserProgressOwnerBindingPolicy,
   loadBrowserProgressSurfacePolicy,
   scanBrowserProgressImports,
   scanBrowserProgressSource,
@@ -12,10 +15,30 @@ function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
-test("the browser-progress policy declares the complete checked-in surface inventory", async () => {
-  const policy = await loadBrowserProgressSurfacePolicy();
-  const report = await validateBrowserProgressSurfacePolicy(policy);
+test("the v1 surface policy and v2 owner binding preserve the complete checked-in inventory", async () => {
+  const [policy, ownerBindingPolicy] = await Promise.all([
+    loadBrowserProgressSurfacePolicy(),
+    loadBrowserProgressOwnerBindingPolicy(),
+  ]);
+  const report = await validateBrowserProgressSurfacePolicy(policy, { ownerBindingPolicy });
 
+  assert.equal(policy.schemaVersion, 1);
+  assert.equal(policy.policyVersion, "v1");
+  assert.ok(
+    policy.surfaces.every(
+      ({ owner }) => Object.keys(owner).length === 2 && "moduleId" in owner && "lifecycle" in owner,
+    ),
+  );
+  assert.equal(ownerBindingPolicy.schemaVersion, 2);
+  assert.equal(ownerBindingPolicy.policyVersion, "v2");
+  assert.ok(
+    ownerBindingPolicy.bindings.every(
+      ({ owner }) => Object.keys(owner).length === 2 && "moduleId" in owner && "availability" in owner,
+    ),
+  );
+  assert.equal(report.policyPath, browserProgressSurfacePolicyRelativePath);
+  assert.equal(report.ownerBindingPolicyPath, browserProgressOwnerBindingPolicyRelativePath);
+  assert.equal(report.releaseInputPaths.length, 2);
   assert.equal(report.surfaces.length, 14);
   assert.equal(report.adapterPath, "lib/browser-progress-storage.js");
   assert.deepEqual(
@@ -39,28 +62,55 @@ test("the browser-progress policy declares the complete checked-in surface inven
   );
 });
 
-test("the browser-progress policy rejects duplicate keys, forbidden data, and incomplete reset declarations", async () => {
-  const policy = await loadBrowserProgressSurfacePolicy();
+test("the browser-progress policy rejects data violations and incompatible owner-schema migrations", async () => {
+  const [policy, ownerBindingPolicy] = await Promise.all([
+    loadBrowserProgressSurfacePolicy(),
+    loadBrowserProgressOwnerBindingPolicy(),
+  ]);
 
   const duplicateKey = clone(policy);
   duplicateKey.surfaces[1].current.key = duplicateKey.surfaces[0].current.key;
   await assert.rejects(
-    validateBrowserProgressSurfacePolicy(duplicateKey),
+    validateBrowserProgressSurfacePolicy(duplicateKey, { ownerBindingPolicy }),
     /duplicates another declared key/u,
   );
 
   const forbiddenData = clone(policy);
   forbiddenData.surfaces[2].current.allowedDataClasses.push("timestamps");
   await assert.rejects(
-    validateBrowserProgressSurfacePolicy(forbiddenData),
+    validateBrowserProgressSurfacePolicy(forbiddenData, { ownerBindingPolicy }),
     /forbidden browser-progress data class/u,
   );
 
   const incompleteReset = clone(policy);
   incompleteReset.surfaces[0].reset.removeKeys.pop();
   await assert.rejects(
-    validateBrowserProgressSurfacePolicy(incompleteReset),
+    validateBrowserProgressSurfacePolicy(incompleteReset, { ownerBindingPolicy }),
     /reset must remove exactly/u,
+  );
+
+  const forgedAvailability = clone(ownerBindingPolicy);
+  forgedAvailability.bindings[1].owner.availability = "published";
+  await assert.rejects(
+    validateBrowserProgressSurfacePolicy(policy, { ownerBindingPolicy: forgedAvailability }),
+    /owner availability must match canonical Module 18 availability legacy-open/u,
+  );
+
+  const incompatibleV1Owner = clone(policy);
+  incompatibleV1Owner.surfaces[1].owner = {
+    moduleId: "m18",
+    availability: "legacy-open",
+  };
+  await assert.rejects(
+    validateBrowserProgressSurfacePolicy(incompatibleV1Owner, { ownerBindingPolicy }),
+    /must retain the v1 module-owner and historical lifecycle schema/u,
+  );
+
+  const detachedV2Binding = clone(ownerBindingPolicy);
+  detachedV2Binding.surfacePolicy.policyVersion = "v2";
+  await assert.rejects(
+    validateBrowserProgressSurfacePolicy(policy, { ownerBindingPolicy: detachedV2Binding }),
+    /must bind exactly browser-progress-surfaces\.v1\.json schemaVersion 1 policyVersion v1/u,
   );
 });
 

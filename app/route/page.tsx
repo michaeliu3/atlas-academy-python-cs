@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   atlasCoreRoute,
-  atlasCoreRouteReleaseStatus,
+  atlasCoreRouteAvailabilityStatus,
   atlasCoreRouteTotals,
   getAtlasRouteEntry,
 } from "@/lib/atlas-core-route";
@@ -31,9 +31,15 @@ function availabilityPresentation(state: CourseModuleState) {
   }
 
   switch (state.availability) {
+    case "legacy-open":
+      return {
+        label: "Open material · review pending",
+        className: styles.legacyOpenStatus,
+        unavailableNote: null,
+      };
     case "published":
       return {
-        label: "Core-open",
+        label: "Verified published",
         className: styles.publishedStatus,
         unavailableNote: null,
       };
@@ -67,7 +73,7 @@ function availabilityPresentation(state: CourseModuleState) {
 }
 
 export default function AtlasCoreRoutePage() {
-  const releaseSummary = `${atlasCoreRouteReleaseStatus["core-open"]} / ${atlasCoreRouteReleaseStatus["preview-reader"]} / ${atlasCoreRouteReleaseStatus["authoring-only"]}`;
+  const availabilitySummary = `${atlasCoreRouteAvailabilityStatus["legacy-open"]} / ${atlasCoreRouteAvailabilityStatus["preview-reader"]} / ${atlasCoreRouteAvailabilityStatus["authoring-only"]}`;
 
   return (
     <main className={styles.shell}>
@@ -95,8 +101,8 @@ export default function AtlasCoreRoutePage() {
               <dd>defined route modules</dd>
             </div>
             <div>
-              <dt>{releaseSummary}</dt>
-              <dd>Core-open / reference / authoring</dd>
+              <dt>{availabilitySummary}</dt>
+              <dd>open / preview / authoring</dd>
             </div>
             <div>
               <dt>{atlasCoreRouteTotals.focusedHoursPerWeek}</dt>
@@ -108,14 +114,15 @@ export default function AtlasCoreRoutePage() {
             </div>
           </dl>
           <p className={styles.availability}>
-            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteReleaseStatus["core-open"]} modules are open on the active Core; {atlasCoreRouteReleaseStatus["preview-reader"]} released synthesis modules are clearly marked as reference previews; the {atlasCoreRouteReleaseStatus["authoring-only"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
+            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
           </p>
           <p className={styles.availability}>
-            <strong>Core-open means material is available, not that a learner has
-            completed its prerequisites.</strong> Atlas does not infer progress
-            from a click, a scroll, or a studio interaction. Use the academic
-            prerequisite map and a Codex learning conversation to choose and
-            record evidence deliberately.
+            <strong>Open material is available for study, not a published,
+            verified module—and it does not mean a learner has completed its
+            prerequisites.</strong> Atlas does not infer progress from a click,
+            a scroll, or a studio interaction. Use the academic prerequisite
+            map and a Codex learning conversation to choose and record evidence
+            deliberately.
           </p>
         </header>
 
@@ -161,8 +168,8 @@ export default function AtlasCoreRoutePage() {
         </section>
 
         <section className={styles.legend} aria-label="Route status legend">
-          <span className={styles.publishedDot} aria-hidden="true" />
-          <span>Core-open workbook—available, with learner-controlled evidence</span>
+          <span className={styles.legacyOpenDot} aria-hidden="true" />
+          <span>Open legacy workbook—available for study; full contract and release review remain pending</span>
           <span className={styles.previewDot} aria-hidden="true" />
           <span>Reference preview—available for orientation, not Core progress</span>
           <span className={styles.authoringDot} aria-hidden="true" />
@@ -232,7 +239,7 @@ export default function AtlasCoreRoutePage() {
                         <span className={styles.cardLink}>
                           {isPreview
                             ? "Read as reference—not an unlocked Core step"
-                            : "Open the workbook as a Core resource"} <i aria-hidden="true">→</i>
+                            : "Open the workbook—formal review remains pending"} <i aria-hidden="true">→</i>
                         </span>
                       ) : (
                         <span className={styles.authoringNote}>
@@ -280,7 +287,7 @@ export default function AtlasCoreRoutePage() {
             informed.
           </p>
           <Link className={styles.primaryLink} href="/modules">
-            Browse the published course library <span aria-hidden="true">→</span>
+            Browse the course library <span aria-hidden="true">→</span>
           </Link>
         </section>
       </div>

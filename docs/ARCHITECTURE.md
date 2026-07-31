@@ -40,14 +40,17 @@ flowchart LR
   state.
   Route views and the generated reader manifest derive from it; no page or
   synchronizer may reconstruct its own prerequisite graph.
-- The four state facets prevent an overloaded `published` label from making a
+- The five state facets prevent an overloaded `published` label from making a
   false claim. `readerAccess` says whether material is hidden, previewable, or
-  fully readable; `availability` says whether it is a Core-open route step;
-  `contract` records its pedagogical-evidence maturity; and `release` records
-  deployment/provenance maturity. A reader visit is not Core progression, and
-  a Core-open module is neither automatically contract-verified nor deployed.
-  M25/M26 have preview reader access and route availability: they are
-  reference-only material, never synthesis/capstone credit.
+  fully readable; `availability` distinguishes open legacy material from a
+  verified published release; `contract` records pedagogical-evidence maturity;
+  and `release` records deployment/provenance maturity. A reader visit is not
+  Core progression, and `legacy-open` material is deliberately not a published
+  module. The graph enforces `published` only with a verified contract and
+  deployed-recorded release evidence. M25/M26 have preview reader access and
+  route availability: they are reference-only material, never synthesis/
+  capstone credit. [ADR 0002](adr/0002-reserve-published-for-verified-release.md)
+  records the migration without rewriting historical evidence.
 - Module companions deliberately have two layers: the all-module guide
   registry supplies server-derived reader context, while an individually
   versioned `content/course/contracts/companions/mNN.v1.json` record is
@@ -63,7 +66,7 @@ flowchart LR
 - The content/modules directory and content/source-maps directory are
   checked-in, release-canonical course material. Synchronization reads only
   these repository-local inputs; it never falls back to an adjacent authoring
-  workspace. No published workbook or source map exists only outside this
+  workspace. No learner-readable workbook or source map exists only outside this
   repository.
 - The public/downloads directory contains deterministic local reference models
   and behavioral tests, plus selected learner-facing source maps/addenda. Only files explicitly listed by the versioned
@@ -74,10 +77,9 @@ flowchart LR
   source-map/addendum copies are synchronized byte-for-byte from canonical
   repository inputs.
 - The scripts/sync-modules.mjs program validates the course graph, then
-  generates the library manifest, module source projection, and a sorted
-  SHA-256 release-input ledger. It does not copy external artifacts. The
-  manifest and release-input ledger are generated projections, not curriculum
-  input.
+  generates the library manifest, module source projection, a graph-derived
+  course-status projection, and a sorted SHA-256 release-input ledger. It does
+  not copy external artifacts. These projections are not curriculum input.
   Synchronization may copy declared internal source artifacts, but never
   fetches or copies an external artifact.
 - The tests directory verifies the diagnostic model and rendered portal
@@ -125,13 +127,21 @@ The active unified `module-contract-registry.v3.json` adds a distinct migration
 layer between content and release. It has one entry per canonical module and
 the same 18 criteria for every entry. The immutable legacy audit/packets and
 advanced v1 authoring contract remain inputs to that registry, not competing
-authorities or promotion paths. At this migration point, the graph defines 36
-modules: 30 are reader-visible (28 Core-open and two reference previews), all
-30 are legacy baselines, zero are contract-verified, and six are authoring-
-only. Its structural baseline is intentionally not a claim that all
-pedagogical, source, accessibility, or oral-defense evidence has been human-
-verified; the strict gate remains the standard for a verified contract or
-release claim.
+authorities or promotion paths.
+
+<!-- atlas-course-status:start -->
+**Canonical availability (generated from `course-graph.v2.json`):**
+**36** defined modules; **30** reader-visible; **28** open for study.
+- **28** `legacy-open` (M1–M24, M27–M30); full reader access, review pending.
+- **0** `published` (—); only verified, deployed releases count here.
+- **2** `preview` (M25–M26); reference-only, never route credit.
+- **6** `authoring-only` (M31–M36); hidden from the learner reader.
+- Contract states: **30** legacy baselines; **0** verified.
+<!-- atlas-course-status:end -->
+
+The structural baseline is intentionally not a claim that all pedagogical,
+source, accessibility, or oral-defense evidence has been human-verified; the
+strict gate remains the standard for a verified contract or release claim.
 
 For future promotion, the registry does not trust criterion labels alone.
 Review-ready requires a module-scoped evidence record that resolves all 18
