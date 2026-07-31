@@ -1,9 +1,10 @@
 # Atlas learner route plans: 60, 90, and 180 days
 
-> **Planning status — 2026-07-30.** This is a learner-facing planning policy,
+> **Planning status — 2026-07-31.** This is a learner-facing planning policy,
 > not a second course graph and not a release claim. The canonical source of
-> truth for module order, academic prerequisites, availability, and release
-> state is [`content/course/course-graph.v1.json`](../content/course/course-graph.v1.json).
+> truth for module order, academic prerequisites, reader access, route
+> availability, contract state, and release state is
+> [`content/course/course-graph.v2.json`](../content/course/course-graph.v2.json).
 > When this document and that graph differ, the graph wins.
 
 Atlas is designed as one connected argument: values and claims make data
@@ -12,26 +13,35 @@ contracts and tests make software durable; machines, math, and uncertainty
 bound later systems and AI claims. The route should therefore adapt its
 *calendar*, not silently drop its reasoning obligations.
 
-This document separates three things that are easy to confuse:
+This document separates four things that are easy to confuse:
 
 1. **A calendar plan** — how much focused time a learner can protect.
-2. **A release boundary** — what the portal may honestly offer today.
-3. **Learner evidence** — what a particular learner can explain, trace,
+2. **A reader/Core access boundary** — what may be read today and what can
+   count as a route step.
+3. **Release/provenance evidence** — what has actually been recorded about a
+   deployment or review.
+4. **Learner evidence** — what a particular learner can explain, trace,
    repair, and transfer.
 
 Finishing a calendar is not evidence by itself. Nor is a green test, fluent
 speech, or an AI-generated patch.
 
-## Read the release boundary first
+## Read the reader/Core access boundary first
 
-The current graph defines 36 modules. Its availability states mean different
-things from a learner's personal progress.
+The current graph defines 36 modules. Reader access, route availability,
+contract state, and release state mean different things from a learner's
+personal progress.
 
 | What is available now | Modules | Honest use |
 | --- | --- | --- |
-| Published workbooks, **legacy-baseline** contract status | M1–M24 and M27–M30 (28 modules) | Learn from the reader and studios; collect personal evidence. Their full module-contract review is still pending, so availability is not a claim that every contract clause has been independently verified. |
-| Released **preview**, still legacy baseline | M25–M26 | Orientation only. These are not unlocked synthesis or capstone steps, and must not be used as evidence that the M31–M36 chain has been completed. |
-| Authoring-only | M31–M36 | Do not schedule, simulate, or self-certify these modules as Atlas completion. No release date is promised. |
+| Core-open with full reader access, **legacy-baseline** contract status | M1–M24 and M27–M30 (28 modules) | Learn from the reader and studios; collect personal evidence. Their full module-contract review is still pending, so Core availability is not a claim that every contract clause has been independently verified. |
+| Reader-visible **reference preview**, still legacy baseline | M25–M26 | Orientation only. These are not unlocked synthesis or capstone steps, earn no Core credit, and must not be used as evidence that the M31–M36 chain has been completed. |
+| Authoring-only with hidden reader access | M31–M36 | Do not schedule, simulate, or self-certify these modules as Atlas completion. No release date is promised. |
+
+That is 30 reader-visible modules, 28 Core-open modules, two previews, and
+six authoring-only modules. All 30 reader-visible modules are legacy baselines
+and **zero are contract-verified**. In the graph, `published` is a route-
+availability value—not a deployment record or a learner-completion signal.
 
 The intended full narrative in the canonical route is:
 
@@ -48,16 +58,16 @@ There are two maps inside that narrative:
   does not erase the academic map, and a card being readable is never a
   completion signal.
 
-M18–M24 are published and academically reachable from M17 through their own
-prerequisite chain. A learner may use them as an explicitly labelled
-**published systems branch** after M17. That is useful preparation; it is not
-a substitute for M31, does not change the canonical route, and does not
-advance the learner into M32–M36, M25, or M26.
+M18–M24 are Core-open with full reader access and academically reachable from
+M17 through their own prerequisite chain. A learner may use them as an
+explicitly labelled **Core-open systems branch** after M17. That is useful
+preparation; it is not a substitute for M31, does not change the canonical
+route, and does not advance the learner into M32–M36, M25, or M26.
 
 ## Choose a pace from evidence, not optimism
 
 The graph supplies reference-reading minutes, not a verified end-to-end time
-study for every legacy workbook. The 28 currently published workbooks contain
+study for every legacy workbook. The 28 currently Core-open workbooks contain
 about **27 hours of reference reading** before tracing, derivation,
 counterexamples, diagnostics, oral defenses, and project evidence. Treat the
 following bands as planning hypotheses, then recalibrate after the first

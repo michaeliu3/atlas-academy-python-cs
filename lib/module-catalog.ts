@@ -5,9 +5,7 @@ import {
   stripDocumentTitle,
 } from "./heading-ids.js";
 import type {
-  CourseAvailability,
-  CourseLifecycle,
-  CourseReleaseEvidence,
+  CourseModuleState,
   CourseRouteRole,
 } from "./course-catalog";
 import type { ModuleStudioId } from "./module-studio-registry";
@@ -33,14 +31,12 @@ export type CourseModule = {
   wordCount: number;
   estimatedMinutes: number;
   sourceHash: string;
-  availability: CourseAvailability;
-  lifecycle: CourseLifecycle;
+  state: CourseModuleState;
   routeRole: CourseRouteRole;
   routePosition: number;
   masteryGateId: string;
   sourceMap: string | null;
   studioId: ModuleStudioId | null;
-  releaseEvidence: CourseReleaseEvidence;
   prerequisiteNumbers: number[];
   prerequisiteSlugs: string[];
   previousRouteNumber: number | null;
@@ -56,12 +52,13 @@ export type TableOfContentsItem = {
 };
 
 type ModuleManifest = {
-  schemaVersion: number;
+  schemaVersion: 3;
   courseGraphSchemaVersion: number;
   routePlanId: string;
-  moduleCount: number;
-  readableModuleCount: number;
-  previewModuleCount: number;
+  definedModuleCount: number;
+  readerVisibleModuleCount: number;
+  coreOpenModuleCount: number;
+  previewReaderModuleCount: number;
   arcs: CourseArc[];
   modules: CourseModule[];
 };

@@ -30,12 +30,21 @@ flowchart LR
   workflow, or explicitly configure the designated external Codex learning
   chats to create concise session notes. That external workflow does not grant
   the portal microphone, voice, transcript, or Notion-write capability.
-- The checked-in `content/course/course-graph.v1.json` is the canonical course
+- The checked-in `content/course/course-graph.v2.json` is the canonical course
   catalog. It separates academic prerequisites from route order and records
-  lifecycle, learner availability, source-map, studio, mastery-gate, and
-  release-evidence references. Route views and the generated reader manifest
-  derive from it; no page or synchronizer may reconstruct its own prerequisite
-  graph.
+  source-map, studio, mastery-gate, and five independent truth facets:
+  lifecycle, reader access, route availability, contract state, and release
+  state.
+  Route views and the generated reader manifest derive from it; no page or
+  synchronizer may reconstruct its own prerequisite graph.
+- The four state facets prevent an overloaded `published` label from making a
+  false claim. `readerAccess` says whether material is hidden, previewable, or
+  fully readable; `availability` says whether it is a Core-open route step;
+  `contract` records its pedagogical-evidence maturity; and `release` records
+  deployment/provenance maturity. A reader visit is not Core progression, and
+  a Core-open module is neither automatically contract-verified nor deployed.
+  M25/M26 have preview reader access and route availability: they are
+  reference-only material, never synthesis/capstone credit.
 - The content/modules directory and content/source-maps directory are
   checked-in, release-canonical course material. Synchronization reads only
   these repository-local inputs; it never falls back to an adjacent authoring
@@ -98,6 +107,9 @@ The portal must distinguish:
 | Learning | diagnostic, TA checkoff, Study Partner retrieval, capstone defense |
 
 The versioned module-contract registry adds a distinct migration layer between
-content and release. Its structural baseline is intentionally not a claim that
-all pedagogical, source, accessibility, or oral-defense evidence has been
-human-verified; the strict gate remains the publication standard.
+content and release. At this migration point, the graph defines 36 modules:
+30 are reader-visible (28 Core-open and two reference previews), all 30 are
+legacy baselines, zero are contract-verified, and six are authoring-only. Its
+structural baseline is intentionally not a claim that all pedagogical, source,
+accessibility, or oral-defense evidence has been human-verified; the strict
+gate remains the standard for a verified contract or release claim.

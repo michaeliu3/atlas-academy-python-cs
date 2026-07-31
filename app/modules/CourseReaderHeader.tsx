@@ -25,7 +25,7 @@ export function CourseReaderHeader({ current }: CourseReaderHeaderProps) {
           </span>
         </Link>
         <nav aria-label="Primary course navigation">
-          <Link href="/">Learning path</Link>
+          <Link href="/">Interactive explorer</Link>
           <Link
             aria-current={current === "route" ? "page" : undefined}
             href="/route"

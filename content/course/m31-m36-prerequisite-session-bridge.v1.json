@@ -3,7 +3,7 @@
   "ledgerVersion": "v1",
   "kind": "atlas-prerequisite-session-bridge",
   "purpose": "Plan exactly how each canonical academic prerequisite first enters the six connected sessions for authoring-only Modules 31–36. This is an authoring bridge and evidence checklist, not a publication contract, learner route, source map, or release record.",
-  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "truthBoundary": {
     "asOf": "2026-07-30",
     "moduleState": "All entries in this ledger are authoring-only plans. Nothing here changes course-graph lifecycle or availability, proves that a workbook/studio exists, or permits a learner to bypass an academic prerequisite.",

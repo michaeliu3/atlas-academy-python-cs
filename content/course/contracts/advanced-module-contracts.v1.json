@@ -3,7 +3,7 @@
   "contractVersion": "v1",
   "kind": "atlas-advanced-module-contract-registry",
   "purpose": "Record lifecycle-aware, checked-in authoring evidence for Modules 31–36 without turning plans, pointers, or research into learner publication, approval, CI, deployment, or mastery claims.",
-  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "canonicalAuthoringBridge": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
   "truthBoundary": {
     "pointerPresent": "A resolving contract input proves only that a bounded local plan or research reference exists; it is not a learner artifact, quality review, or release claim.",
@@ -48,11 +48,21 @@
         "slug": "31-optimization-information",
         "academicPrerequisiteNumbers": [28, 29, 30],
         "forwardModuleNumber": 18,
-        "lifecycle": "authoring-only",
-        "availability": "authoring-only",
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
         "sourceMap": null,
-        "studioId": null,
-        "releaseEvidenceStatus": "planned"
+        "studioId": null
       },
       "contractInputs": [
         {"id": "m31-prerequisite-session-bridge", "kind": "json-pointer", "role": "provenance", "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json", "locator": "/modules/0", "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."},

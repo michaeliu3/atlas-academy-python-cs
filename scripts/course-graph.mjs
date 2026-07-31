@@ -4,7 +4,8 @@ import { fileURLToPath } from "node:url";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
-const graphPath = resolve(siteRoot, "content", "course", "course-graph.v1.json");
+const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
+
 const expectedAvailabilityStates = new Set([
   "published",
   "preview",
@@ -12,16 +13,60 @@ const expectedAvailabilityStates = new Set([
   "optional",
   "authoring-only",
 ]);
-const expectedLifecycles = new Set(["published", "authoring-only"]);
+const expectedLifecycles = new Set(["learner-material-ready", "authoring-only"]);
+const expectedReaderAccessStates = new Set(["hidden", "preview", "full"]);
+const expectedContractTracks = new Set(["legacy-v1", "advanced-v1"]);
+const expectedContractStates = new Set([
+  "not-started",
+  "authoring-only",
+  "legacy-baseline",
+  "review-ready",
+  "verified",
+]);
+const expectedReleaseStates = new Set([
+  "unrecorded",
+  "candidate-recorded",
+  "deployed-recorded",
+]);
 const expectedRouteRoles = new Set(["required", "optional"]);
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);
 }
 
+function isPlainObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
 function assertString(value, label) {
   if (typeof value !== "string" || value.trim() === "") {
     fail(`${label} must be a non-empty string.`);
+  }
+}
+
+function assertExactKeys(value, keys, label) {
+  if (!isPlainObject(value)) {
+    fail(`${label} must be an object.`);
+  }
+  const actual = Object.keys(value).sort();
+  const expected = [...keys].sort();
+  if (actual.length !== expected.length || actual.some((key, index) => key !== expected[index])) {
+    fail(`${label} must use exactly these keys: ${expected.join(", ")}.`);
+  }
+}
+
+function assertDeclaredStates(value, expected, label) {
+  if (!Array.isArray(value)) {
+    fail(`${label} must be an array.`);
+  }
+  const actual = new Set(value);
+  if (actual.size !== value.length || actual.size !== expected.size) {
+    fail(`${label} must declare each supported state exactly once.`);
+  }
+  for (const state of expected) {
+    if (!actual.has(state)) {
+      fail(`${label} is missing state ${state}.`);
+    }
   }
 }
 
@@ -47,25 +92,120 @@ function routePlanFor(graph, routePlanId = "atlas-core-60") {
   return routePlan;
 }
 
+function routeDayLabel({ startDay, endDay }) {
+  return startDay === endDay ? `Day ${startDay}` : `Days ${startDay}–${endDay}`;
+}
+
+function validateModuleState(courseModule) {
+  const number = courseModule.number;
+  if (Object.hasOwn(courseModule, "lifecycle") || Object.hasOwn(courseModule, "availability")) {
+    fail(`Module ${number} must place lifecycle and availability in its canonical state object.`);
+  }
+  if (Object.hasOwn(courseModule, "releaseEvidence")) {
+    fail(`Module ${number} must place release evidence in its canonical state object.`);
+  }
+
+  assertExactKeys(
+    courseModule.state,
+    ["lifecycle", "readerAccess", "availability", "contract", "release"],
+    `Module ${number} state`,
+  );
+  const { lifecycle, readerAccess, availability, contract, release } = courseModule.state;
+  if (!expectedLifecycles.has(lifecycle)) {
+    fail(`Module ${number} lifecycle is invalid.`);
+  }
+  if (!expectedReaderAccessStates.has(readerAccess)) {
+    fail(`Module ${number} reader access is invalid.`);
+  }
+  if (!expectedAvailabilityStates.has(availability)) {
+    fail(`Module ${number} availability is invalid.`);
+  }
+  assertExactKeys(contract, ["track", "state"], `Module ${number} contract state`);
+  if (!expectedContractTracks.has(contract.track)) {
+    fail(`Module ${number} contract track is invalid.`);
+  }
+  if (!expectedContractStates.has(contract.state)) {
+    fail(`Module ${number} contract state is invalid.`);
+  }
+  assertExactKeys(release, ["state", "recordId"], `Module ${number} release state`);
+  if (!expectedReleaseStates.has(release.state)) {
+    fail(`Module ${number} release state is invalid.`);
+  }
+  if (release.state === "unrecorded" && release.recordId !== null) {
+    fail(`unrecorded Module ${number} release state must use a null recordId.`);
+  }
+  if (release.state !== "unrecorded") {
+    assertString(release.recordId, `Module ${number} release recordId`);
+  }
+
+  const expectedAccess = {
+    published: ["learner-material-ready", "full"],
+    preview: ["learner-material-ready", "preview"],
+    locked: ["learner-material-ready", "hidden"],
+    optional: ["learner-material-ready", "full"],
+    "authoring-only": ["authoring-only", "hidden"],
+  }[availability];
+  if (lifecycle !== expectedAccess[0] || readerAccess !== expectedAccess[1]) {
+    if (availability === "preview") {
+      fail(`preview Module ${number} must use preview reader access.`);
+    }
+    if (availability === "authoring-only") {
+      fail(`authoring-only Module ${number} must be hidden from the reader.`);
+    }
+    fail(
+      `${availability} Module ${number} must use lifecycle ${expectedAccess[0]} and reader access ${expectedAccess[1]}.`,
+    );
+  }
+  if (contract.track === "legacy-v1" && number > 30) {
+    fail(`advanced Module ${number} may not use the legacy-v1 contract track.`);
+  }
+  if (contract.track === "advanced-v1" && number <= 30) {
+    fail(`legacy Module ${number} may not use the advanced-v1 contract track.`);
+  }
+  if (contract.state === "legacy-baseline" && contract.track !== "legacy-v1") {
+    fail(`Module ${number} legacy-baseline state must use the legacy-v1 contract track.`);
+  }
+  if (
+    (contract.state === "not-started" || contract.state === "authoring-only") &&
+    contract.track !== "advanced-v1"
+  ) {
+    fail(`Module ${number} authoring contract state must use the advanced-v1 contract track.`);
+  }
+  if (contract.state === "verified" && release.state === "unrecorded") {
+    fail(`verified Module ${number} needs a recorded release candidate or deployment record.`);
+  }
+}
+
+export function resolveLearnerAccess(courseModule) {
+  if (!courseModule?.state) {
+    fail("learner-access projection needs a module state.");
+  }
+  const { availability, readerAccess } = courseModule.state;
+  if (availability === "published") {
+    return { mode: "core-step", readerAccess };
+  }
+  if (availability === "preview" || availability === "optional") {
+    return { mode: "reference", readerAccess };
+  }
+  return { mode: "unavailable", readerAccess };
+}
+
 export function validateCourseGraph(graph) {
-  if (!graph || typeof graph !== "object") {
+  if (!isPlainObject(graph)) {
     fail("root must be an object.");
   }
-  if (graph.schemaVersion !== 1) {
-    fail("schemaVersion must be 1.");
+  if (graph.schemaVersion !== 2) {
+    fail("schemaVersion must be 2.");
   }
   if (!Array.isArray(graph.modules) || graph.modules.length !== 36) {
     fail("must define exactly 36 modules.");
   }
-  if (!Array.isArray(graph.availabilityStates)) {
-    fail("availabilityStates must be an array.");
-  }
-  const availabilityStates = new Set(graph.availabilityStates);
-  for (const state of expectedAvailabilityStates) {
-    if (!availabilityStates.has(state)) {
-      fail(`availability state ${state} is missing.`);
-    }
-  }
+  assertDeclaredStates(graph.availabilityStates, expectedAvailabilityStates, "availabilityStates");
+  assertDeclaredStates(graph.lifecycleStates, expectedLifecycles, "lifecycleStates");
+  assertDeclaredStates(graph.readerAccessStates, expectedReaderAccessStates, "readerAccessStates");
+  assertDeclaredStates(graph.contractTracks, expectedContractTracks, "contractTracks");
+  assertDeclaredStates(graph.contractStates, expectedContractStates, "contractStates");
+  assertDeclaredStates(graph.releaseStates, expectedReleaseStates, "releaseStates");
   if (!Array.isArray(graph.knowledgeArcs) || graph.knowledgeArcs.length === 0) {
     fail("must define knowledge arcs.");
   }
@@ -99,31 +239,12 @@ export function validateCourseGraph(graph) {
     if (!Array.isArray(courseModule.academicPrerequisiteNumbers)) {
       fail(`Module ${courseModule.number} academicPrerequisiteNumbers must be an array.`);
     }
-    if (!expectedLifecycles.has(courseModule.lifecycle)) {
-      fail(`Module ${courseModule.number} lifecycle is invalid.`);
-    }
-    if (!expectedAvailabilityStates.has(courseModule.availability)) {
-      fail(`Module ${courseModule.number} availability is invalid.`);
-    }
     if (!expectedRouteRoles.has(courseModule.routeRole)) {
       fail(`Module ${courseModule.number} routeRole is invalid.`);
     }
     if (
-      courseModule.lifecycle === "authoring-only" &&
-      courseModule.availability !== "authoring-only"
-    ) {
-      fail(`authoring-only Module ${courseModule.number} must be authoring-only in the route.`);
-    }
-    if (
-      courseModule.lifecycle === "published" &&
-      courseModule.availability === "authoring-only"
-    ) {
-      fail(`published Module ${courseModule.number} cannot be authoring-only in the route.`);
-    }
-    if (
       courseModule.referenceReadMinutes !== null &&
-      (!Number.isInteger(courseModule.referenceReadMinutes) ||
-        courseModule.referenceReadMinutes < 1)
+      (!Number.isInteger(courseModule.referenceReadMinutes) || courseModule.referenceReadMinutes < 1)
     ) {
       fail(`Module ${courseModule.number} referenceReadMinutes must be a positive integer or null.`);
     }
@@ -133,11 +254,10 @@ export function validateCourseGraph(graph) {
     ) {
       fail(`Module ${courseModule.number} sourceMap must be a checked-in source-map path or null.`);
     }
-    if (!courseModule.releaseEvidence || typeof courseModule.releaseEvidence !== "object") {
-      fail(`Module ${courseModule.number} needs releaseEvidence.`);
+    if (!Number.isInteger(courseModule.sequencePosition) || courseModule.sequencePosition < 1) {
+      fail(`Module ${courseModule.number} sequencePosition must be a positive integer.`);
     }
-    assertString(courseModule.releaseEvidence.id, `Module ${courseModule.number} release evidence id`);
-    assertString(courseModule.releaseEvidence.status, `Module ${courseModule.number} release evidence status`);
+    validateModuleState(courseModule);
 
     moduleByNumber.set(courseModule.number, courseModule);
     moduleById.set(courseModule.id, courseModule);
@@ -170,15 +290,36 @@ export function validateCourseGraph(graph) {
   }
 
   const routePlan = routePlanFor(graph);
+  if (!Number.isInteger(routePlan.days) || routePlan.days < 1) {
+    fail("the Atlas Core route needs a positive day count.");
+  }
+  if (routePlan.days !== graph.course.days) {
+    fail("the Atlas Core route day count must equal the course day count.");
+  }
+  if (!Number.isInteger(routePlan.intakeDay) || routePlan.intakeDay !== 1) {
+    fail("the Atlas Core route must reserve day 1 for intake.");
+  }
   if (!Array.isArray(routePlan.phases) || routePlan.phases.length === 0) {
     fail("the Atlas Core route needs phases.");
   }
+  let expectedStartDay = routePlan.intakeDay + 1;
   const sequence = routePlan.phases.flatMap((phase) => {
     if (!Array.isArray(phase.moduleNumbers) || phase.moduleNumbers.length === 0) {
       fail(`route phase ${phase.id} needs moduleNumbers.`);
     }
+    assertExactKeys(phase.schedule, ["startDay", "endDay"], `route phase ${phase.id} schedule`);
+    if (!Number.isInteger(phase.schedule.startDay) || !Number.isInteger(phase.schedule.endDay)) {
+      fail(`route phase ${phase.id} schedule must use integer days.`);
+    }
+    if (phase.schedule.startDay !== expectedStartDay || phase.schedule.endDay < phase.schedule.startDay) {
+      fail(`route phase ${phase.id} schedule must continue the preceding phase without a gap.`);
+    }
+    expectedStartDay = phase.schedule.endDay + 1;
     return phase.moduleNumbers;
   });
+  if (expectedStartDay - 1 !== routePlan.days) {
+    fail("the Atlas Core route phases must cover every non-intake course day.");
+  }
   if (sequence.length !== graph.modules.length || new Set(sequence).size !== sequence.length) {
     fail("the Atlas Core route must contain every module exactly once.");
   }
@@ -190,6 +331,9 @@ export function validateCourseGraph(graph) {
   }
   for (const courseModule of graph.modules) {
     const routePosition = routePositionByNumber.get(courseModule.number);
+    if (courseModule.sequencePosition !== routePosition + 1) {
+      fail(`Module ${courseModule.number} sequencePosition must match the canonical route.`);
+    }
     for (const prerequisiteNumber of courseModule.academicPrerequisiteNumbers) {
       if (routePositionByNumber.get(prerequisiteNumber) >= routePosition) {
         fail(`Module ${courseModule.number} precedes academic prerequisite ${prerequisiteNumber} in the route.`);
@@ -211,14 +355,14 @@ export async function loadCourseGraph() {
   };
 }
 
-export function projectReadableModules(graph) {
+export function projectReaderModules(graph) {
   validateCourseGraph(graph);
   const routePlan = routePlanFor(graph);
   const sequence = routePlan.phases.flatMap(({ moduleNumbers }) => moduleNumbers);
   const moduleByNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
 
   return graph.modules
-    .filter(({ lifecycle }) => lifecycle === "published")
+    .filter((courseModule) => resolveLearnerAccess(courseModule).readerAccess !== "hidden")
     .sort((left, right) => left.number - right.number)
     .map((courseModule) => {
       const routeIndex = sequence.indexOf(courseModule.number);
@@ -234,24 +378,29 @@ export function projectReadableModules(graph) {
 
       return {
         ...courseModule,
-        routePosition: routeIndex + 1,
+        routePosition: courseModule.sequencePosition,
         prerequisiteNumbers: courseModule.academicPrerequisiteNumbers,
         prerequisiteSlugs: prerequisites
-          .filter(({ lifecycle }) => lifecycle === "published")
+          .filter((prerequisite) => resolveLearnerAccess(prerequisite).readerAccess !== "hidden")
           .map(({ slug }) => slug),
         previousRouteNumber: previousRouteModule?.number ?? null,
         previousSlug:
-          previousRouteModule?.lifecycle === "published"
+          previousRouteModule && resolveLearnerAccess(previousRouteModule).readerAccess !== "hidden"
             ? previousRouteModule.slug
             : null,
         nextRouteNumber: nextRouteModule?.number ?? null,
         nextSlug:
-          nextRouteModule?.lifecycle === "published"
+          nextRouteModule && resolveLearnerAccess(nextRouteModule).readerAccess !== "hidden"
             ? nextRouteModule.slug
             : null,
       };
     });
 }
+
+// Kept as a short-lived migration alias for integrations that still use the
+// old projection name. New callers must use projectReaderModules so the
+// distinction is visible in code review.
+export const projectReadableModules = projectReaderModules;
 
 export function projectRoutePlan(graph, routePlanId = "atlas-core-60") {
   validateCourseGraph(graph);
@@ -261,6 +410,7 @@ export function projectRoutePlan(graph, routePlanId = "atlas-core-60") {
     ...routePlan,
     phases: routePlan.phases.map((phase) => ({
       ...phase,
+      days: routeDayLabel(phase.schedule),
       entries: phase.moduleNumbers.map((number) => moduleByNumber.get(number)),
     })),
   };

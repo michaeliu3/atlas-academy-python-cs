@@ -227,7 +227,7 @@ export async function validateModuleContractEvidenceRegistry(
   if (!hasText(registry?.purpose)) {
     errors.push("draft module-contract evidence registry must state its limited purpose.");
   }
-  if (registry?.canonicalCourseGraph !== "content/course/course-graph.v1.json") {
+  if (registry?.canonicalCourseGraph !== "content/course/course-graph.v2.json") {
     errors.push("draft module-contract evidence registry must name the canonical course graph.");
   }
   requireExactKeys(

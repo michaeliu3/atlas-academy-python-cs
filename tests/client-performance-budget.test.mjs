@@ -18,7 +18,7 @@ const validatorPath = resolve(
   "scripts",
   "validate-client-performance-budget.mjs",
 );
-const courseGraphPath = resolve(siteRoot, "content", "course", "course-graph.v1.json");
+const courseGraphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
 const policyPath = resolve(
   siteRoot,
   "content",

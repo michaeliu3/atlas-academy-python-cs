@@ -10,7 +10,7 @@ import {
   validateAdvancedModuleBridgeTopology,
 } from "./advanced-module-bridge.mjs";
 import { validateAdvancedModuleDeliveryMap } from "./advanced-module-delivery-map.mjs";
-import { projectReadableModules } from "./course-graph.mjs";
+import { projectReaderModules } from "./course-graph.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -481,11 +481,9 @@ function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
       "slug",
       "academicPrerequisiteNumbers",
       "forwardModuleNumber",
-      "lifecycle",
-      "availability",
+      "state",
       "sourceMap",
       "studioId",
-      "releaseEvidenceStatus",
     ],
     label,
     errors,
@@ -494,11 +492,8 @@ function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
     ["number", courseModule.number],
     ["slug", courseModule.slug],
     ["forwardModuleNumber", courseModule.forwardModuleNumber],
-    ["lifecycle", courseModule.lifecycle],
-    ["availability", courseModule.availability],
     ["sourceMap", courseModule.sourceMap],
     ["studioId", courseModule.studioId],
-    ["releaseEvidenceStatus", courseModule.releaseEvidence?.status],
   ]) {
     if (snapshot?.[field] !== expected) {
       errors.push(`${label}.${field} must match the canonical course graph.`);
@@ -506,6 +501,9 @@ function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
   }
   if (!sameOrderedValues(snapshot?.academicPrerequisiteNumbers, courseModule.academicPrerequisiteNumbers)) {
     errors.push(`${label}.academicPrerequisiteNumbers must match the canonical course graph.`);
+  }
+  if (JSON.stringify(snapshot?.state) !== JSON.stringify(courseModule.state)) {
+    errors.push(`${label}.state must match the canonical course graph.`);
   }
 
   if (contractState === "authoring-only") {
@@ -515,24 +513,24 @@ function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
     if (courseModule.studioId !== null) {
       errors.push(`Module ${courseModule.number} studioId must remain null while it is authoring-only.`);
     }
-    if (courseModule.releaseEvidence?.status !== "planned") {
-      errors.push(`Module ${courseModule.number} release evidence must remain planned while it is authoring-only.`);
+    if (courseModule.state?.release?.state !== "unrecorded") {
+      errors.push(`Module ${courseModule.number} release state must remain unrecorded while it is authoring-only.`);
     }
   }
   if (contractState === "review-ready") {
     if (!hasText(courseModule.sourceMap) || !hasText(courseModule.studioId)) {
       errors.push(`Module ${courseModule.number} review-ready state requires a source map and studio or equivalent ID.`);
     }
-    if (courseModule.releaseEvidence?.status !== "review-ready") {
-      errors.push(`Module ${courseModule.number} review-ready state requires review-ready graph release evidence.`);
+    if (courseModule.state?.release?.state !== "unrecorded") {
+      errors.push(`Module ${courseModule.number} review-ready state may not make a release record claim.`);
     }
   }
   if (contractState === "published") {
     if (!hasText(courseModule.sourceMap) || !hasText(courseModule.studioId)) {
       errors.push(`Module ${courseModule.number} published state requires a source map and studio or equivalent ID.`);
     }
-    if (courseModule.releaseEvidence?.status !== "verified") {
-      errors.push(`Module ${courseModule.number} published state requires verified graph release evidence.`);
+    if (courseModule.state?.release?.state === "unrecorded") {
+      errors.push(`Module ${courseModule.number} published state requires a recorded graph release state.`);
     }
   }
 }
@@ -1110,7 +1108,7 @@ export async function validateAdvancedModuleContractRegistry(
   if (registry?.kind !== "atlas-advanced-module-contract-registry") {
     errors.push("advanced module-contract registry has an invalid kind.");
   }
-  if (!hasText(registry?.purpose) || registry?.canonicalCourseGraph !== "content/course/course-graph.v1.json") {
+  if (!hasText(registry?.purpose) || registry?.canonicalCourseGraph !== "content/course/course-graph.v2.json") {
     errors.push("advanced module-contract registry must declare its purpose and canonical course graph.");
   }
   if (registry?.canonicalAuthoringBridge !== advancedModuleBridgeRelativePath) {
@@ -1171,7 +1169,7 @@ export async function validateAdvancedModuleContractRegistry(
     }
   } else {
     try {
-      readableModuleIds = new Set(projectReadableModules(graph).map(({ id }) => id));
+      readableModuleIds = new Set(projectReaderModules(graph).map(({ id }) => id));
     } catch (error) {
       errors.push(`advanced module-contract registry cannot project learner routes: ${error.message}`);
     }
@@ -1250,13 +1248,15 @@ export async function validateAdvancedModuleContractRegistry(
     }
     if (
       (lifecycle === "authoring-only" || lifecycle === "review-ready") &&
-      (courseModule.lifecycle !== "authoring-only" || courseModule.availability !== "authoring-only")
+      (courseModule.state?.lifecycle !== "authoring-only" ||
+        courseModule.state?.availability !== "authoring-only")
     ) {
       errors.push(`${entryLabel} ${lifecycle} state must remain authoring-only and unavailable to learners.`);
     }
     if (
       lifecycle === "published" &&
-      (courseModule.lifecycle !== "published" || courseModule.availability !== "published")
+      (courseModule.state?.lifecycle !== "learner-material-ready" ||
+        courseModule.state?.availability !== "published")
     ) {
       errors.push(`${entryLabel} published state must match a published graph module.`);
     }
@@ -1344,7 +1344,7 @@ export async function validateAdvancedModuleContractRegistry(
   }
 
   const advancedLifecycleHasTransitioned = advancedModules.some(
-    ({ lifecycle }) => lifecycle !== "authoring-only",
+    ({ state }) => state?.lifecycle !== "authoring-only",
   );
   if (advancedLifecycleHasTransitioned && !sameMembers([...entriesByModuleId.keys()], expectedScopeIds)) {
     errors.push(
@@ -1352,7 +1352,7 @@ export async function validateAdvancedModuleContractRegistry(
     );
   }
   for (const courseModule of advancedModules) {
-    if (courseModule.lifecycle !== "authoring-only" && !entriesByModuleId.has(courseModule.id)) {
+    if (courseModule.state?.lifecycle !== "authoring-only" && !entriesByModuleId.has(courseModule.id)) {
       errors.push(`transitioned advanced Module ${courseModule.number} requires a lifecycle-aware contract entry.`);
     }
   }
@@ -1378,7 +1378,7 @@ export async function validateAdvancedModuleContractRegistry(
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [registry, graph] = await Promise.all([
     loadAdvancedModuleContractRegistry(),
-    (async () => JSON.parse(await readFile(resolve(defaultSiteRoot, "content/course/course-graph.v1.json"), "utf8")))(),
+    (async () => JSON.parse(await readFile(resolve(defaultSiteRoot, "content/course/course-graph.v2.json"), "utf8")))(),
   ]);
   const report = await validateAdvancedModuleContractRegistry(graph, registry);
   console.log(

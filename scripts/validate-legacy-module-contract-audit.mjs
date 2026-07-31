@@ -10,7 +10,7 @@ const defaultSiteRoot = resolve(scriptDirectory, "..");
 
 export const legacyModuleContractAuditRelativePath =
   "content/course/contracts/legacy-module-contract-audit.v1.json";
-export const canonicalCourseGraphRelativePath = "content/course/course-graph.v1.json";
+export const canonicalCourseGraphRelativePath = "content/course/course-graph.v2.json";
 export const canonicalModuleManifestRelativePath = "content/modules/manifest.json";
 
 const execFileAsync = promisify(execFile);
@@ -479,14 +479,14 @@ export async function validateLegacyModuleContractAudit(
   if (!graph || !manifest) auditFailure(errors);
 
   const publishedGraphModules = graph.modules.filter(
-    (courseModule) => courseModule.lifecycle === "published" && courseModule.number <= 30,
+    (courseModule) => courseModule.state?.lifecycle === "learner-material-ready" && courseModule.number <= 30,
   );
   const expectedModuleIds = new Set(publishedGraphModules.map(({ id }) => id));
   const declaredScope = Array.isArray(audit?.auditScope?.moduleIds)
     ? new Set(audit.auditScope.moduleIds)
     : new Set();
   if (declaredScope.size !== expectedModuleIds.size || [...declaredScope].some((id) => !expectedModuleIds.has(id))) {
-    errors.push("Audit scope module IDs must exactly match canonical lifecycle-published M1–M30 IDs.");
+    errors.push("Audit scope module IDs must exactly match canonical learner-ready M1–M30 IDs.");
   }
   const manifestById = new Map((manifest.modules ?? []).map((module) => [module.id, module]));
   const headingCache = new Map();
@@ -515,7 +515,7 @@ export async function validateLegacyModuleContractAudit(
     const graphModule = publishedGraphModules.find(({ id }) => id === entry.moduleId);
     const manifestModule = manifestById.get(entry.moduleId);
     if (!graphModule || !manifestModule) {
-      errors.push(`${label} must map to a canonical lifecycle-published graph and manifest module.`);
+      errors.push(`${label} must map to a canonical learner-ready graph and manifest module.`);
       continue;
     }
     const expectedWorkbookPath = `content/modules/${manifestModule.filename}`;
@@ -633,7 +633,7 @@ export async function validateLegacyModuleContractAudit(
   }
 
   if (seenModuleIds.size !== expectedModuleIds.size || [...expectedModuleIds].some((id) => !seenModuleIds.has(id))) {
-    errors.push("Audit module entries must exactly match canonical lifecycle-published M1–M30 scope.");
+    errors.push("Audit module entries must exactly match canonical learner-ready M1–M30 scope.");
   }
 
   auditFailure(errors);

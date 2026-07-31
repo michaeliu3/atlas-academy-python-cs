@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/sync-modules.mjs",
-  "courseGraphSchemaVersion": 1,
+  "courseGraphSchemaVersion": 2,
   "contractVersion": "v1",
   "inputs": [
     {
@@ -14,23 +14,23 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "d5cfe5577e998a6befeca8eb744b10251e9a5dd455b02298208f5fa84dca89bc"
+      "sha256": "9a14c38e8cb2c04da5369fd252c79399a636ce54551fe2864f2ff72c7cb864f7"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "b34bfa04c08d9194e461285c6a63ee3f44469636c8ad85b19c9bf16f8e6d2044"
+      "sha256": "470bfd0e253b656eef6e4f29d818f5c67bb17362b7833dcb67d1832d26974ab4"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "d2cb61ef7578ac8844d1bb6f846dcced344bb2e6f1aba1fc4e59d3a6160b3197"
+      "sha256": "8eeceaeca418ccae58911eb38f77a75377db45bbe6e47bc4bd389c34d45591b7"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
       "sha256": "a93767ad626e60d07bb188e513e3b9efe8d6e0608ebeb7acf634389962c4a807"
     },
     {
-      "path": "content/course/course-graph.v1.json",
-      "sha256": "0fe2565f8917b8ef34555e9554fb760a7ff161aaf20777bf7165a82590e27c7d"
+      "path": "content/course/course-graph.v2.json",
+      "sha256": "5d485530e2599d3abef8dc7f0559b13a580693cd1e30437b63f07567522587a3"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v1.json",
@@ -38,7 +38,7 @@
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-      "sha256": "6dc1e9d697c1a8c5543bd69cbb74bdfc0892b73381574b653dee4be98b07d07b"
+      "sha256": "61c0a072ba946b5c11d7408b3940034455a5c1de7e2cc862c74998db0d6bea4d"
     },
     {
       "path": "content/course/manual-learning-record-workflow.v1.json",

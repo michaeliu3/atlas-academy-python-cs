@@ -1,18 +1,39 @@
-import courseGraphData from "@/content/course/course-graph.v1.json";
+import courseGraphData from "@/content/course/course-graph.v2.json";
 import type { ModuleStudioId } from "./module-studio-registry";
 
-export type CourseLifecycle = "published" | "authoring-only";
+export type CourseLifecycle = "learner-material-ready" | "authoring-only";
 export type CourseAvailability =
   | "published"
   | "preview"
   | "locked"
   | "optional"
   | "authoring-only";
+export type CourseReaderAccess = "hidden" | "preview" | "full";
+export type CourseContractTrack = "legacy-v1" | "advanced-v1";
+export type CourseContractState =
+  | "not-started"
+  | "authoring-only"
+  | "legacy-baseline"
+  | "review-ready"
+  | "verified";
+export type CourseReleaseState =
+  | "unrecorded"
+  | "candidate-recorded"
+  | "deployed-recorded";
 export type CourseRouteRole = "required" | "optional";
 
-export type CourseReleaseEvidence = {
-  id: string;
-  status: "legacy-audit-pending" | "verified" | "planned";
+export type CourseModuleState = {
+  lifecycle: CourseLifecycle;
+  readerAccess: CourseReaderAccess;
+  availability: CourseAvailability;
+  contract: {
+    track: CourseContractTrack;
+    state: CourseContractState;
+  };
+  release: {
+    state: CourseReleaseState;
+    recordId: string | null;
+  };
 };
 
 export type CourseGraphModule = {
@@ -26,13 +47,12 @@ export type CourseGraphModule = {
   academicPrerequisiteNumbers: number[];
   forwardModuleNumber: number | null;
   masteryGateId: string;
-  lifecycle: CourseLifecycle;
-  availability: CourseAvailability;
   routeRole: CourseRouteRole;
   referenceReadMinutes: number | null;
   sourceMap: string | null;
   studioId: ModuleStudioId | null;
-  releaseEvidence: CourseReleaseEvidence;
+  sequencePosition: number;
+  state: CourseModuleState;
 };
 
 export type KnowledgeArc = {
@@ -43,9 +63,14 @@ export type KnowledgeArc = {
   description: string;
 };
 
+export type RouteSchedule = {
+  startDay: number;
+  endDay: number;
+};
+
 export type RoutePhase = {
   id: string;
-  days: string;
+  schedule: RouteSchedule;
   number: string;
   title: string;
   premise: string;
@@ -53,14 +78,23 @@ export type RoutePhase = {
   moduleNumbers: number[];
 };
 
+export type DisplayRoutePhase = RoutePhase & {
+  days: string;
+};
+
 export type CourseRoutePlan = {
   id: string;
   days: number;
+  intakeDay: number;
   phases: RoutePhase[];
 };
 
+export type DisplayCourseRoutePlan = Omit<CourseRoutePlan, "phases"> & {
+  phases: DisplayRoutePhase[];
+};
+
 type CourseGraph = {
-  schemaVersion: 1;
+  schemaVersion: 2;
   course: {
     id: string;
     title: string;
@@ -69,6 +103,11 @@ type CourseGraph = {
     consolidation: string;
   };
   availabilityStates: CourseAvailability[];
+  lifecycleStates: CourseLifecycle[];
+  readerAccessStates: CourseReaderAccess[];
+  contractTracks: CourseContractTrack[];
+  contractStates: CourseContractState[];
+  releaseStates: CourseReleaseState[];
   knowledgeArcs: KnowledgeArc[];
   routePlans: CourseRoutePlan[];
   modules: CourseGraphModule[];
@@ -84,7 +123,17 @@ if (!primaryRoutePlan) {
   throw new Error("Atlas course catalog is missing the primary 60-day route.");
 }
 
-export const atlasCoreRoutePlan = primaryRoutePlan;
+function routeDayLabel({ startDay, endDay }: RouteSchedule) {
+  return startDay === endDay ? `Day ${startDay}` : `Days ${startDay}–${endDay}`;
+}
+
+export const atlasCoreRoutePlan: DisplayCourseRoutePlan = {
+  ...primaryRoutePlan,
+  phases: primaryRoutePlan.phases.map((phase) => ({
+    ...phase,
+    days: routeDayLabel(phase.schedule),
+  })),
+};
 export const atlasCoreRouteSequence = atlasCoreRoutePlan.phases.flatMap(
   ({ moduleNumbers }) => moduleNumbers,
 );
@@ -124,24 +173,35 @@ export function getRouteNeighbors(number: number) {
   };
 }
 
-export function isReaderReleased(courseModule: CourseGraphModule) {
-  return courseModule.lifecycle === "published";
+export function isReaderVisible(courseModule: CourseGraphModule) {
+  return courseModule.state.readerAccess !== "hidden";
 }
 
 export function isCoreOpen(courseModule: CourseGraphModule) {
-  return courseModule.lifecycle === "published" && courseModule.availability === "published";
+  return (
+    courseModule.state.readerAccess === "full" &&
+    courseModule.state.availability === "published"
+  );
 }
 
-export function isPreview(courseModule: CourseGraphModule) {
-  return courseModule.lifecycle === "published" && courseModule.availability === "preview";
+export function isPreviewReader(courseModule: CourseGraphModule) {
+  return courseModule.state.readerAccess === "preview";
+}
+
+export function isReferenceOnly(courseModule: CourseGraphModule) {
+  return (
+    courseModule.state.availability === "preview" ||
+    courseModule.state.availability === "optional"
+  );
 }
 
 export const courseCatalogTotals = {
   modules: courseCatalog.modules.length,
-  published: courseCatalog.modules.filter(isCoreOpen).length,
-  previews: courseCatalog.modules.filter(isPreview).length,
+  readerVisible: courseCatalog.modules.filter(isReaderVisible).length,
+  coreOpen: courseCatalog.modules.filter(isCoreOpen).length,
+  previewReader: courseCatalog.modules.filter(isPreviewReader).length,
   authoring: courseCatalog.modules.filter(
-    ({ lifecycle }) => lifecycle === "authoring-only",
+    ({ state }) => state.lifecycle === "authoring-only",
   ).length,
   days: courseCatalog.course.days,
   focusedHoursPerWeek: courseCatalog.course.focusedHoursPerWeek,

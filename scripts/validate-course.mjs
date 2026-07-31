@@ -60,7 +60,7 @@ const contractsPath = resolve(
   "contracts",
   "module-contracts.v1.json",
 );
-const graphPath = resolve(siteRoot, "content", "course", "course-graph.v1.json");
+const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
 const requiredHumanReviewDimensions = [
   "first-principles-quality",
   "rigor-and-counterexamples",
@@ -169,6 +169,12 @@ function validateVerifiedContract(courseModule, moduleContract, review, errors) 
     if (review[dimension] !== "approved") {
       errors.push(`Module ${courseModule.number} is verified but ${dimension} is not approved.`);
     }
+  }
+  if (courseModule.state?.contract?.state !== "verified") {
+    errors.push(`Module ${courseModule.number} verified contract must match graph contract state verified.`);
+  }
+  if (courseModule.state?.release?.state === "unrecorded") {
+    errors.push(`Module ${courseModule.number} verified contract needs a recorded release state.`);
   }
   errors.push(
     `Module ${courseModule.number} verified state requires a separately reviewed typed contract record; current structural packets cannot promote a legacy module.`,
@@ -328,8 +334,8 @@ export async function validateCourseContracts(
   const graphById = new Map(graph.modules.map((courseModule) => [courseModule.id, courseModule]));
   for (const moduleId of contractById.keys()) {
     const courseModule = graphById.get(moduleId);
-    if (!courseModule || courseModule.lifecycle !== "published") {
-      errors.push(`contract ${moduleId} does not correspond to a published graph module.`);
+    if (!courseModule || courseModule.state?.lifecycle !== "learner-material-ready") {
+      errors.push(`contract ${moduleId} does not correspond to learner-ready graph material.`);
     } else if (courseModule.number >= 31) {
       errors.push(
         `Module ${courseModule.number} must use the lifecycle-aware advanced contract instead of module-contracts.v1.json.`,
@@ -389,15 +395,15 @@ export async function validateCourseContracts(
   }
   for (const courseModule of graph.modules) {
     if (
-      courseModule.lifecycle === "published" &&
-      courseModule.releaseEvidence.status === "legacy-audit-pending" &&
+      courseModule.state?.lifecycle === "learner-material-ready" &&
+      courseModule.state?.contract?.state === "legacy-baseline" &&
       !legacyBaselineIds.has(courseModule.id)
     ) {
       errors.push(`Module ${courseModule.number} may not use the legacy contract exception.`);
     }
   }
   for (const courseModule of graph.modules.filter(
-    ({ lifecycle, number }) => lifecycle === "published" && number <= 30,
+    ({ state, number }) => state?.lifecycle === "learner-material-ready" && number <= 30,
   )) {
     const moduleContract = contractById.get(courseModule.id);
     if (!moduleContract) {
@@ -435,8 +441,11 @@ export async function validateCourseContracts(
       if (!legacyBaselineIds.has(courseModule.id)) {
         errors.push(`Module ${courseModule.number} may not use the legacy contract exception.`);
       }
-      if (courseModule.releaseEvidence.status !== "legacy-audit-pending") {
-        errors.push(`Module ${courseModule.number} has a legacy contract state but non-legacy release evidence.`);
+      if (courseModule.state?.contract?.state !== "legacy-baseline") {
+        errors.push(`Module ${courseModule.number} legacy contract must match graph contract state legacy-baseline.`);
+      }
+      if (courseModule.state?.release?.state !== "unrecorded") {
+        errors.push(`Module ${courseModule.number} legacy contract may not make a release-record claim.`);
       }
       legacyBaselineModules += 1;
       warnings.push(
@@ -445,9 +454,6 @@ export async function validateCourseContracts(
     }
     if (moduleContract.publicationState === "verified") {
       verifiedModules += 1;
-      if (courseModule.releaseEvidence.status !== "verified") {
-        errors.push(`Module ${courseModule.number} has a verified contract but unverified release evidence.`);
-      }
       validateVerifiedContract(courseModule, moduleContract, review, errors);
     }
 
@@ -509,7 +515,7 @@ export async function validateCourseContracts(
       legacyBaselineModules,
       verifiedModules,
       authoringOnlyModules: graph.modules.filter(
-        ({ lifecycle }) => lifecycle === "authoring-only",
+        ({ state }) => state?.lifecycle === "authoring-only",
       ).length,
     },
   };

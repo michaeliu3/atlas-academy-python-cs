@@ -140,8 +140,11 @@ function findModuleStudioRegistration(studioId: string) {
 }
 
 type ModuleStudioTarget = {
-  lifecycle: string;
-  availability: string;
+  state: {
+    lifecycle: string;
+    readerAccess: string;
+    availability: string;
+  };
   studioId: string | null;
 };
 
@@ -179,8 +182,9 @@ export function resolveModuleStudio(
   courseModule: ModuleStudioTarget,
 ): ModuleStudioResolution {
   if (
-    courseModule.lifecycle !== "published" ||
-    courseModule.availability === "authoring-only"
+    courseModule.state.lifecycle !== "learner-material-ready" ||
+    courseModule.state.readerAccess === "hidden" ||
+    courseModule.state.availability === "authoring-only"
   ) {
     return {
       kind: "unavailable",
@@ -190,7 +194,7 @@ export function resolveModuleStudio(
     };
   }
 
-  if (courseModule.availability === "locked") {
+  if (courseModule.state.availability === "locked") {
     return {
       kind: "unavailable",
       state: "locked",
@@ -199,7 +203,7 @@ export function resolveModuleStudio(
     };
   }
 
-  if (courseModule.availability === "preview") {
+  if (courseModule.state.availability === "preview") {
     return {
       kind: "preview",
       description:
@@ -212,7 +216,7 @@ export function resolveModuleStudio(
       kind: "workbook-and-oral-defense",
       title: "Workbook-led interaction",
       description:
-        "This published module has no separate visual studio. Use its workbook, then the supportive oral-defense conversation below, to make your reasoning visible.",
+        "This Core-open module has no separate visual studio. Use its workbook, then the supportive oral-defense conversation below, to make your reasoning visible.",
     };
   }
 

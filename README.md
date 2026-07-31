@@ -47,11 +47,19 @@ rote typing or exam drill.
 
 The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
 days. It is a rigorous connected first pass, not a claim of instant durable
-mastery. The learner route has 36 defined modules: 28 are open on the active
-Core, 2 released synthesis workbooks are clearly labelled previews, and 6
-advanced depth modules are in authoring. The checked-in canonical graph at
-`content/course/course-graph.v1.json` is the source for route order, academic
-prerequisites, availability, and manifest projections.
+mastery. The learner route has **36 defined modules**. Of those, **30 are
+reader-visible**: **28 are Core-open** with full reader access, and **2 are
+reader-visible reference previews** (M25/M26). The remaining **6 are
+authoring-only** and hidden from the learner reader. The 30 learner-material-
+ready modules are all `legacy-baseline` contracts; **zero modules are
+contract-verified**. The checked-in [canonical v2 course graph](content/course/course-graph.v2.json)
+is authoritative for route order, academic prerequisites, reader access, route
+availability, contract state, release state, and generated projections.
+
+Reader access is not learner completion. In particular, M25/M26 are reference
+previews: they can be read, but earn no Core credit or synthesis/capstone
+evidence. Likewise, `published` route availability does not imply a verified
+contract, a recorded deployment, or universal mastery.
 
 The table below is the **intended full canonical order**, not a claim that
 every scheduled module is available today. The release-aware [60-, 90-, and
@@ -59,13 +67,14 @@ every scheduled module is available today. The release-aware [60-, 90-, and
 published-content path, pace selector, bridge and catch-up rules, minimum
 evidence, and the authoring/preview boundary.
 
-Each currently published, non-preview workbook ends with a short constructive
-oral defense: a designated voice-enabled Teaching Assistant chat is the
-preferred platform surface when available, with an equivalent text route. The
-visible chat must retain readable equations, code, and prose fallbacks. It
-evaluates models, reasoning, boundaries, transfer, and reflection—not speech
-speed or a scripted performance. Preview and authoring-only modules are not
-represented as having completed learner flows.
+The intended Core experience ends each module with a short constructive oral
+defense: a designated voice-enabled Teaching Assistant chat is the preferred
+platform surface when available, with an equivalent text route. The visible
+chat must retain readable equations, code, and prose fallbacks. It evaluates
+models, reasoning, boundaries, transfer, and reflection—not speech speed or a
+scripted performance. The every-module oral-defense implementation and human
+review remain part of the legacy-contract gap; preview and authoring-only
+modules earn no Core credit.
 
 | Days | Focus |
 |---|---|
@@ -76,8 +85,8 @@ represented as having completed learner flows.
 | 26–34 | M17 plus published M28 linear algebra/stability, M29 calculus/analysis, and M30 probability/statistics/scientific inference, then M31 optimization/information (M31 in authoring) |
 | 35–44 | M18–M24 operating, network, trust, language, and runtime boundaries |
 | 45–53 | M32–M36 accelerators, formal limits, classical AI, ML, and learning theory (in authoring) |
-| 54–55 | M25 evidence-grounded, human-centered intelligent systems (released preview until M31–M36 evidence exists) |
-| 56–60 | M26 capstone orientation and oral-architecture-defense rehearsal (released preview until M25 becomes Core-open) |
+| 54–55 | M25 evidence-grounded, human-centered intelligent systems (reader-visible reference preview; no Core credit until M31–M36 evidence exists) |
+| 56–60 | M26 capstone orientation and oral-architecture-defense rehearsal (reader-visible reference preview; no Core credit until M25 becomes Core-open) |
 
 The schedule adapts to diagnostic evidence, difficult concepts, project
 revision, and retrieval needs. At the lower end of the weekly time budget, or

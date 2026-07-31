@@ -6,7 +6,7 @@ import { CourseReaderHeader } from "./CourseReaderHeader";
 export const metadata: Metadata = {
   title: "Course Library · Atlas Academy",
   description:
-    `Read the published connected Python and computer science curriculum, Modules 1–${moduleManifest.moduleCount}.`,
+    `Read the connected Atlas reference library: ${moduleManifest.readerVisibleModuleCount} learner-visible workbooks.`,
 };
 
 export default function ModuleLibraryPage() {
@@ -16,7 +16,7 @@ export default function ModuleLibraryPage() {
       <div id="main-content" tabIndex={-1}>
         <header className="library-hero">
           <p className="kicker">
-            The reading room · {moduleManifest.readableModuleCount} Core-open modules + {moduleManifest.previewModuleCount} synthesis previews
+            The reading room · {moduleManifest.coreOpenModuleCount} Core-open modules + {moduleManifest.previewReaderModuleCount} synthesis previews
           </p>
           <h1>
             One course.
@@ -30,11 +30,11 @@ export default function ModuleLibraryPage() {
           </p>
           <dl className="library-measures" aria-label="Course library scale">
             <div>
-              <dt>{moduleManifest.readableModuleCount}</dt>
+              <dt>{moduleManifest.coreOpenModuleCount}</dt>
               <dd>Core-open modules</dd>
             </div>
             <div>
-              <dt>{moduleManifest.previewModuleCount}</dt>
+              <dt>{moduleManifest.previewReaderModuleCount}</dt>
               <dd>gated synthesis previews</dd>
             </div>
             <div>
@@ -110,7 +110,7 @@ export default function ModuleLibraryPage() {
                         <p>{courseModule.summary}</p>
                         <span className="module-card-meta">
                           {courseModule.estimatedMinutes} min reference read
-                          {courseModule.availability === "preview"
+                          {courseModule.state.availability === "preview"
                             ? " · Preview—not an unlocked Core step"
                             : ""}
                           <i aria-hidden="true">↗</i>

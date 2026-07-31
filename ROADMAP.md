@@ -4,11 +4,18 @@ This roadmap tracks release evidence, not a promise that calendar completion
 equals mastery. The 60-day Atlas Core is adjustable when diagnostic, retrieval,
 oral-defense, or project evidence shows a necessary bridge.
 
-## Published foundation — migration truth
+## Current reader and contract truth
 
-- [ ] M1–M30 have published reader workbooks. Their new structural contract
-  inventory is present, but human-reviewed evidence for every contract clause
-  is still in progress.
+- [x] The canonical v2 graph defines 36 modules and separates reader access,
+  Core availability, contract state, and release state. It currently projects
+  30 reader-visible modules: 28 Core-open modules and two M25/M26 reference
+  previews that earn no Core credit.
+- [ ] M1–M30 are learner-material-ready legacy baselines. Their structural
+  inventory is present, but all 30 remain `legacy-baseline` and zero are
+  contract-verified; human-reviewed evidence for every contract clause is
+  still in progress.
+- [ ] M31–M36 remain authoring-only and hidden from the learner reader. They
+  are not a delayed completion claim or a promised release date.
 - [ ] Private deployment and historical release claims require reconciliation
   against exact GitHub commits, CI runs, source review, limitations, and a
   current provenance ledger.
@@ -23,18 +30,18 @@ oral-defense, or project evidence shows a necessary bridge.
 
 - [x] Module 23 — programming languages, interpreters, bounded evaluation.
 - [x] Module 24 — CPython, performance, and memory evidence.
-- [x] Publish the Module 25 orientation preview — evidence-grounded intelligent
-  and human-centered systems—while its M31–M36 academic prerequisites are
-  authored.
-- [x] Publish the Module 26 orientation preview — systems capstone,
-  open-source stewardship, and oral architecture defense—until Module 25
-  becomes Core-open.
+- [x] Make the Module 25 orientation material reader-visible as a reference
+  preview — evidence-grounded intelligent and human-centered systems—while
+  its M31–M36 academic prerequisites are authored. It earns no Core credit.
+- [x] Make the Module 26 orientation material reader-visible as a reference
+  preview — systems capstone, open-source stewardship, and oral architecture
+  defense—until Module 25 becomes Core-open. It earns no Core credit.
 
 ## 60-day Atlas Core expansion
 
-- [x] Canonical prerequisite-first 60-day course graph, generated manifest,
-  explicit published/preview/authoring status boundary, and constructive
-  oral-defense framework.
+- [x] Canonical v2 prerequisite-first 60-day graph and generated manifest,
+  with distinct reader-access, Core-availability, contract, and release
+  facets; M25/M26 remain previews rather than Core steps.
 - [x] M27 — discrete mathematics, proof, counting, and structures, with a
   source-audited workbook, local proof/counterexample studio, bounded reference
   model, and prerequisite-first reader navigation.

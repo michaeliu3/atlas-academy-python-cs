@@ -426,7 +426,7 @@ export async function validateLegacyModuleContractPacketRegistry(
     errors.push("legacy module contract-packet registry must use schemaVersion 1, contractVersion v1, and the expected kind.");
   }
   if (!hasText(registry?.purpose)) errors.push("legacy module contract-packet registry must state its limited purpose.");
-  if (registry?.canonicalCourseGraph !== "content/course/course-graph.v1.json") {
+  if (registry?.canonicalCourseGraph !== "content/course/course-graph.v2.json") {
     errors.push("legacy module contract-packet registry must name the canonical course graph.");
   }
   requireExactKeys(
@@ -500,8 +500,13 @@ export async function validateLegacyModuleContractPacketRegistry(
     seenPacketIds.add(entry.packetId);
     const courseModule = graphById.get(entry.moduleId);
     const auditEntry = auditByModuleId.get(entry.moduleId);
-    if (!courseModule || courseModule.lifecycle !== "published" || courseModule.number > 30 || !auditEntry) {
-      errors.push(`${label} must bind one canonical M1–M30 published graph/audit module.`);
+    if (
+      !courseModule ||
+      courseModule.state?.lifecycle !== "learner-material-ready" ||
+      courseModule.number > 30 ||
+      !auditEntry
+    ) {
+      errors.push(`${label} must bind one canonical M1–M30 learner-ready graph/audit module.`);
       continue;
     }
     if (entry.packetState !== "structural-candidate" || entry.humanReviewState !== "not-reviewed" || entry.publicationEffect !== "none") {

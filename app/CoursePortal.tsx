@@ -18,20 +18,20 @@ type View =
   | "arc4";
 
 const viewLabels: Record<View, string> = {
-  path: "Learning path",
-  foundation: "Foundation",
-  module: "Module 1",
-  module2: "Module 2",
-  arc2: "Data structures",
-  arc3: "Durable software",
-  arc4: "Machine and network",
+  path: "Interactive explorer",
+  foundation: "Foundation lab",
+  module: "State and execution lab",
+  module2: "Functions and testing lab",
+  arc2: "Data structures lab",
+  arc3: "Durable software lab",
+  arc4: "Machine and network lab",
 };
 
 const arcs = [
   {
     number: "I",
     title: "Computation & reasoning",
-    range: "Modules 0–5",
+    range: "Conceptual lens",
     description:
       "State, functions, recursion, abstraction, proof, probability, and cost models.",
     accent: "saffron",
@@ -39,7 +39,7 @@ const arcs = [
   {
     number: "II",
     title: "Data & algorithms",
-    range: "Modules 6–11",
+    range: "Conceptual lens",
     description:
       "Representation, collections, hashing, trees, graphs, and algorithm design.",
     accent: "cobalt",
@@ -47,7 +47,7 @@ const arcs = [
   {
     number: "III",
     title: "Durable software",
-    range: "Modules 12–16",
+    range: "Conceptual lens",
     description:
       "APIs, types, tests, architecture, packaging, databases, and transactions.",
     accent: "plum",
@@ -55,7 +55,7 @@ const arcs = [
   {
     number: "IV",
     title: "Machine & network",
-    range: "Modules 17–22",
+    range: "Conceptual lens",
     description:
       "Architecture, operating systems, concurrency, networks, distribution, and security.",
     accent: "moss",
@@ -63,7 +63,7 @@ const arcs = [
   {
     number: "V",
     title: "Languages & intelligence",
-    range: "Modules 23–26",
+    range: "Conceptual lens",
     description:
       "Interpreters, CPython, performance, intelligent systems, and capstone defense.",
     accent: "rose",
@@ -94,7 +94,7 @@ export function CoursePortal() {
       </p>
       <header className="site-header">
         <button
-          aria-label="Show learning path"
+          aria-label="Show interactive explorer"
           className="brand"
           onClick={() => navigate("path")}
           type="button"
@@ -118,7 +118,7 @@ export function CoursePortal() {
             onClick={() => navigate("path")}
             type="button"
           >
-            Learning path
+            Interactive explorer
           </button>
           <button
             aria-pressed={view === "foundation"}
@@ -126,7 +126,7 @@ export function CoursePortal() {
             onClick={() => navigate("foundation")}
             type="button"
           >
-            Foundation
+            Foundation lab
           </button>
           <button
             aria-pressed={view === "module"}
@@ -134,7 +134,7 @@ export function CoursePortal() {
             onClick={() => navigate("module")}
             type="button"
           >
-            Module 1
+            State lab
           </button>
           <button
             aria-pressed={view === "module2"}
@@ -142,7 +142,7 @@ export function CoursePortal() {
             onClick={() => navigate("module2")}
             type="button"
           >
-            Module 2
+            Functions lab
           </button>
           <button
             aria-pressed={view === "arc2"}
@@ -150,7 +150,7 @@ export function CoursePortal() {
             onClick={() => navigate("arc2")}
             type="button"
           >
-            Data structures
+            Data structures lab
           </button>
           <button
             aria-pressed={view === "arc3"}
@@ -158,7 +158,7 @@ export function CoursePortal() {
             onClick={() => navigate("arc3")}
             type="button"
           >
-            Durable software
+            Durable software lab
           </button>
           <button
             aria-pressed={view === "arc4"}
@@ -166,7 +166,7 @@ export function CoursePortal() {
             onClick={() => navigate("arc4")}
             type="button"
           >
-            Machine & network
+            Machine & network lab
           </button>
           <Link className="header-link" href="/diagnostic">
             Diagnostic
@@ -177,7 +177,7 @@ export function CoursePortal() {
       {view === "path" && (
         <>
           <section className="hero">
-            <div className="eyebrow">A connected, AI-native CS education</div>
+            <div className="eyebrow">Interactive explorer · not the Core route</div>
             <h1>
               Learn to see the
               <em> whole system.</em>
@@ -187,12 +187,18 @@ export function CoursePortal() {
               understanding, architecture, debugging, creation, and the
               judgment to direct intelligent agents.
             </p>
+            <p className="hero-copy">
+              Use these visual labs to revisit a concept or test an idea. The
+              prerequisite-first 60-day Core route and your separate Codex
+              learning chats—not this explorer—carry the learning sequence,
+              discussion, and evidence.
+            </p>
             <div className="hero-actions">
               <Link className="primary-action" href="/diagnostic">
                 Begin the diagnostic <span aria-hidden="true">→</span>
               </Link>
               <Link className="text-action" href="/route">
-                See the 60-day route
+                See the 60-day Core route
               </Link>
               <button
                 className="text-action"
@@ -317,7 +323,7 @@ export function CoursePortal() {
       {view === "module" && (
         <article className="reader">
           <header className="reader-hero">
-            <p className="kicker">Module 1 · Computation & reasoning</p>
+            <p className="kicker">Interactive orientation lab · computation & reasoning</p>
             <h1>Values, state, and execution</h1>
             <p>
               Before algorithms, databases, or concurrency, we need a precise
@@ -475,7 +481,7 @@ current = {"tags": ["databases"]}`}</code>
               onClick={() => navigate("module2")}
               type="button"
             >
-              Continue to Module 2 <span aria-hidden="true">→</span>
+              Open the functions lab <span aria-hidden="true">→</span>
             </button>
           </footer>
         </article>

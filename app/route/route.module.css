@@ -206,13 +206,14 @@
   padding: 0.9rem 1.2rem;
 }
 
-.legend > span:not(.publishedDot):not(.authoringDot) {
+.legend > span:not(.publishedDot):not(.previewDot):not(.authoringDot) {
   color: var(--muted);
   font-size: 0.76rem;
   margin-right: 1rem;
 }
 
 .publishedDot,
+.previewDot,
 .authoringDot {
   border-radius: 50%;
   display: block;
@@ -222,6 +223,10 @@
 
 .publishedDot {
   background: var(--moss);
+}
+
+.previewDot {
+  background: var(--cobalt);
 }
 
 .authoringDot {
@@ -331,6 +336,9 @@ a.moduleCard:focus-visible {
 }
 
 .publishedStatus,
+.previewStatus,
+.optionalStatus,
+.lockedStatus,
 .authoringStatus {
   border-radius: 999px;
   font-size: 0.64rem;
@@ -342,6 +350,22 @@ a.moduleCard:focus-visible {
 .publishedStatus {
   background: var(--moss-soft);
   color: #345542;
+}
+
+.previewStatus {
+  background: rgba(49, 87, 164, 0.13);
+  color: #294b9b;
+}
+
+.optionalStatus {
+  background: var(--saffron-soft);
+  color: #8f5010;
+}
+
+.lockedStatus {
+  background: transparent;
+  border: 1px dashed rgba(94, 58, 102, 0.72);
+  color: #5e3a66;
 }
 
 .authoringStatus {

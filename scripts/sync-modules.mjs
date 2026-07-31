@@ -8,7 +8,7 @@ import {
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
 } from "./advanced-module-contract.mjs";
-import { loadCourseGraph, projectReadableModules } from "./course-graph.mjs";
+import { loadCourseGraph, projectReaderModules } from "./course-graph.mjs";
 import {
   legacyModuleContractAuditRelativePath,
   loadLegacyModuleContractAudit,
@@ -50,7 +50,7 @@ const contractPath = resolve(
   "contracts",
   "module-contracts.v1.json",
 );
-const graphPath = resolve(siteRoot, "content", "course", "course-graph.v1.json");
+const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
 const performanceBudgetPolicyPath = resolve(
   siteRoot,
   "content",
@@ -186,7 +186,7 @@ async function releaseInputRecord(path) {
 }
 
 const courseGraph = await loadCourseGraph();
-const projectedModules = projectReadableModules(courseGraph);
+const projectedModules = projectReaderModules(courseGraph);
 const graphByNumber = new Map(
   courseGraph.modules.map((courseModule) => [courseModule.number, courseModule]),
 );
@@ -307,17 +307,15 @@ for (const projectedModule of projectedModules) {
     summary: firstSubstantialParagraph(markdown),
     arcId: arc.id,
     wordCount: markdown.trim().split(/\s+/u).length,
-    estimatedMinutes: Math.max(1, Math.ceil(markdown.trim().split(/\s+/u).length / 210)),
+    estimatedMinutes: graphModule.referenceReadMinutes,
     sourceHash: sha256(markdown),
     id: graphModule.id,
-    availability: graphModule.availability,
-    lifecycle: graphModule.lifecycle,
+    state: graphModule.state,
     routeRole: graphModule.routeRole,
     routePosition: projectedModule.routePosition,
     masteryGateId: graphModule.masteryGateId,
     sourceMap: graphModule.sourceMap,
     studioId: graphModule.studioId,
-    releaseEvidence: graphModule.releaseEvidence,
     prerequisiteNumbers: projectedModule.prerequisiteNumbers,
     prerequisiteSlugs: projectedModule.prerequisiteSlugs,
     previousRouteNumber: projectedModule.previousRouteNumber,
@@ -340,12 +338,17 @@ for (const path of releaseInputPolicy.downloadPaths) {
 }
 
 const manifest = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   courseGraphSchemaVersion: courseGraph.schemaVersion,
   routePlanId: courseGraph.routePlan.id,
-  moduleCount: modules.length,
-  readableModuleCount: modules.filter(({ availability }) => availability === "published").length,
-  previewModuleCount: modules.filter(({ availability }) => availability === "preview").length,
+  definedModuleCount: courseGraph.modules.length,
+  readerVisibleModuleCount: modules.length,
+  coreOpenModuleCount: modules.filter(
+    ({ state }) => state.readerAccess === "full" && state.availability === "published",
+  ).length,
+  previewReaderModuleCount: modules.filter(
+    ({ state }) => state.readerAccess === "preview",
+  ).length,
   arcs: courseGraph.knowledgeArcs.filter((arc) => modules.some(({ arcId }) => arcId === arc.id)),
   modules,
 };

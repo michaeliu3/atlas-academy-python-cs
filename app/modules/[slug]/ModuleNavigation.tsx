@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   getCourseGraphModule,
-  isReaderReleased,
+  isReaderVisible,
 } from "@/lib/course-catalog";
 import { moduleHref, type CourseModule } from "@/lib/module-catalog";
 
@@ -10,22 +10,54 @@ type ModuleNavigationProps = {
   position: "top" | "bottom";
 };
 
+type AccessState = CourseModule["state"];
+
+function availabilityLabel({ availability }: AccessState) {
+  switch (availability) {
+    case "published":
+      return "Core-open";
+    case "preview":
+      return "Reference preview";
+    case "optional":
+      return "Optional reference";
+    case "locked":
+      return "Locked";
+    case "authoring-only":
+      return "In authoring";
+  }
+}
+
+function routeAccessNote({ availability }: AccessState) {
+  switch (availability) {
+    case "published":
+      return "Core-open workbook. Route order does not verify that academic prerequisites are complete.";
+    case "preview":
+      return "Reference preview—not an unlocked Core step.";
+    case "optional":
+      return "Optional reference—not a required Core step.";
+    case "locked":
+      return "Locked. Return to the route to review its prerequisites and release boundary.";
+    case "authoring-only":
+      return "In authoring. The active Core route pauses here.";
+  }
+}
+
 function Prerequisite({ number }: { number: number }) {
   const prerequisite = getCourseGraphModule(number);
   if (!prerequisite) {
     return <span>Module {number}</span>;
   }
-  if (isReaderReleased(prerequisite)) {
+  if (isReaderVisible(prerequisite)) {
     return (
       <Link href={moduleHref(prerequisite.slug)}>
         Module {prerequisite.number}: {prerequisite.title}
-        {prerequisite.availability === "preview" ? " (preview)" : ""}
+        {` · ${availabilityLabel(prerequisite.state)}`}
       </Link>
     );
   }
   return (
     <span className="unavailable-course-reference">
-      Module {prerequisite.number}: {prerequisite.title} · in authoring
+      Module {prerequisite.number}: {prerequisite.title} · {availabilityLabel(prerequisite.state)}
     </span>
   );
 }
@@ -41,8 +73,8 @@ function RouteLink({
   if (!courseModule) {
     return null;
   }
-  const isReleased = isReaderReleased(courseModule);
-  const href = isReleased ? moduleHref(courseModule.slug) : "/route";
+  const isReaderOpen = isReaderVisible(courseModule);
+  const href = isReaderOpen ? moduleHref(courseModule.slug) : "/route";
   const label = direction === "previous" ? "Previous in route" : "Next in route";
   const arrow = direction === "previous" ? "← " : " →";
 
@@ -50,7 +82,7 @@ function RouteLink({
     <Link
       className={`sequence-link sequence-${direction}`}
       href={href}
-      rel={isReleased ? (direction === "previous" ? "prev" : "next") : undefined}
+      rel={isReaderOpen ? (direction === "previous" ? "prev" : "next") : undefined}
     >
       <span>{label}</span>
       <strong>
@@ -58,11 +90,7 @@ function RouteLink({
         Module {courseModule.number}: {courseModule.title}
         {direction === "next" ? arrow : ""}
       </strong>
-      {!isReleased ? (
-        <small>In authoring. The active route pauses here.</small>
-      ) : courseModule.availability === "preview" ? (
-        <small>Preview—not an unlocked Core step.</small>
-      ) : null}
+      <small>{routeAccessNote(courseModule.state)}</small>
     </Link>
   );
 }
@@ -77,24 +105,32 @@ export function ModuleNavigation({
       aria-label={`${position === "top" ? "Lesson context" : "Continue through the course"}`}
     >
       {position === "top" ? (
-        <div className="prerequisite-link">
-          <span>
-            {courseModule.prerequisiteNumbers.length === 1
-              ? "Academic prerequisite"
-              : "Academic prerequisites"}
-          </span>
-          {courseModule.prerequisiteNumbers.length > 0 ? (
-            <div className="prerequisite-list">
-              {courseModule.prerequisiteNumbers.map((number) => (
-                <Prerequisite key={number} number={number} />
-              ))}
-            </div>
-          ) : (
-            <Link href="/diagnostic">
-              Foundation placement diagnostic and learning brief
-            </Link>
-          )}
-        </div>
+        <>
+          <div className="prerequisite-link">
+            <span>
+              {courseModule.prerequisiteNumbers.length === 1
+                ? "Academic prerequisite"
+                : "Academic prerequisites"}
+            </span>
+            {courseModule.prerequisiteNumbers.length > 0 ? (
+              <div className="prerequisite-list">
+                {courseModule.prerequisiteNumbers.map((number) => (
+                  <Prerequisite key={number} number={number} />
+                ))}
+              </div>
+            ) : (
+              <Link href="/diagnostic">
+                Foundation placement diagnostic and learning brief
+              </Link>
+            )}
+          </div>
+          <p className="module-route-boundary">
+            <strong>{availabilityLabel(courseModule.state)} reader.</strong>{" "}
+            These links show planned sequence; they do not infer or record
+            prerequisite completion. Keep the listed academic dependencies in
+            view when choosing your next learning conversation.
+          </p>
+        </>
       ) : null}
       <div className="sequence-pair">
         {courseModule.previousRouteNumber ? (

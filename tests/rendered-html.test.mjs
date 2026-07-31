@@ -104,6 +104,8 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Begin the diagnostic/);
   assert.match(html, /href="\/diagnostic"/);
   assert.match(html, /href="\/route"/);
+  assert.match(html, /Interactive explorer/);
+  assert.match(html, /not this explorer—carry the learning sequence/);
   assert.match(html, /Twenty multiple-choice investigations/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
@@ -390,18 +392,25 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /60 days\./);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
   assert.match(readable, /28 \/ 2 \/ 6/);
-  assert.match(readable, /Core-open \/ preview \/ authoring/i);
+  assert.match(readable, /Core-open \/ reference \/ authoring/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
   assert.match(readable, /Module 28/);
   assert.match(readable, /Module 29/);
   assert.match(readable, /Module 30/);
-  assert.match(readable, /Published/);
-  assert.match(readable, /Preview/);
+  assert.match(readable, /Core-open/);
+  assert.match(readable, /Reference preview/);
   assert.match(readable, /In authoring/);
-  assert.match(readable, /Read the preview—not an unlocked Core step/);
-  assert.match(readable, /Source map and studio are being built before release\./);
+  assert.match(readable, /Read as reference—not an unlocked Core step/);
+  assert.match(
+    readable,
+    /Atlas does not infer progress from a click, a scroll, or a studio interaction\./,
+  );
+  assert.match(
+    readable,
+    /Source map, studio, and release evidence are being completed before learner release\./,
+  );
   assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
   assert.match(readable, /Module 25/);
   assert.match(readable, /Module 26/);
@@ -427,7 +436,7 @@ test("keeps release status and route linkability aligned with the published mani
   const [routeSource, routePage, catalogSource, manifestSource] = await Promise.all([
     readFile(new URL("../lib/atlas-core-route.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../content/course/course-graph.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/course-graph.v2.json", import.meta.url), "utf8"),
     readFile(new URL("../content/modules/manifest.json", import.meta.url), "utf8"),
   ]);
   const graph = JSON.parse(catalogSource);
@@ -438,12 +447,12 @@ test("keeps release status and route linkability aligned with the published mani
   );
 
   assert.match(routeSource, /atlasCoreRoutePlan/);
-  assert.match(routePage, /entry\.availability === "preview"/);
-  assert.equal(graphByNumber.get(25).availability, "preview");
-  assert.equal(graphByNumber.get(26).availability, "preview");
-  assert.equal(graphByNumber.get(31).lifecycle, "authoring-only");
-  assert.equal(manifestByNumber.get(25).availability, "preview");
-  assert.equal(manifestByNumber.get(26).availability, "preview");
+  assert.match(routePage, /entry\.state\.readerAccess === "preview"/);
+  assert.equal(graphByNumber.get(25).state.availability, "preview");
+  assert.equal(graphByNumber.get(26).state.availability, "preview");
+  assert.equal(graphByNumber.get(31).state.lifecycle, "authoring-only");
+  assert.equal(manifestByNumber.get(25).state.availability, "preview");
+  assert.equal(manifestByNumber.get(26).state.availability, "preview");
   assert.equal(manifestByNumber.get(24).nextRouteNumber, 32);
   assert.equal(manifestByNumber.get(24).nextSlug, null);
 });
@@ -1411,12 +1420,13 @@ test("generated module manifest projects the canonical graph without bypassing p
     manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
   );
 
-  assert.equal(manifest.schemaVersion, 2);
-  assert.equal(manifest.courseGraphSchemaVersion, 1);
+  assert.equal(manifest.schemaVersion, 3);
+  assert.equal(manifest.courseGraphSchemaVersion, 2);
   assert.equal(manifest.routePlanId, "atlas-core-60");
-  assert.equal(manifest.moduleCount, 30);
-  assert.equal(manifest.readableModuleCount, 28);
-  assert.equal(manifest.previewModuleCount, 2);
+  assert.equal(manifest.definedModuleCount, 36);
+  assert.equal(manifest.readerVisibleModuleCount, 30);
+  assert.equal(manifest.coreOpenModuleCount, 28);
+  assert.equal(manifest.previewReaderModuleCount, 2);
   assert.deepEqual(numbers, Array.from({ length: 30 }, (_, index) => index + 1));
   assert.equal(manifest.arcs.length, 6);
 
@@ -1445,12 +1455,12 @@ test("generated module manifest projects the canonical graph without bypassing p
   assert.equal(module30.nextSlug, null);
   assert.equal(module24.nextRouteNumber, 32);
   assert.equal(module24.nextSlug, null);
-  assert.equal(module25.availability, "preview");
+  assert.equal(module25.state.availability, "preview");
   assert.deepEqual(module25.prerequisiteNumbers, [22, 24, 30, 31, 34, 35, 36]);
   assert.equal(module25.previousRouteNumber, 36);
   assert.equal(module25.previousSlug, null);
   assert.equal(module25.nextSlug, module26.slug);
-  assert.equal(module26.availability, "preview");
+  assert.equal(module26.state.availability, "preview");
   assert.equal(module26.previousSlug, module25.slug);
 });
 
@@ -1540,6 +1550,8 @@ test("renders a complete generated module reading route", async () => {
   const html = await response.text();
   assert.match(html, /Module 1: Values, State, and Execution · Atlas Academy/);
   assert.match(html, /Complete Module 1 workbook/);
+  assert.match(html, /Core-open reader/);
+  assert.match(html, /Opening, reading, or using a studio does not mark academic prerequisites complete/);
   assert.match(html, /Why this module comes first/);
   assert.match(html, /On this page/);
   assert.match(html, /Foundation placement diagnostic and learning brief/);
@@ -1554,7 +1566,7 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /class="heading-anchor"/);
   assert.match(html, /aria-label="Link to this section"/);
   assert.match(html, /Workbook-led interaction/);
-  assert.match(html, /This published module has no separate visual studio/);
+  assert.match(html, /This Core-open module has no separate visual studio/);
   assert.match(html, /href="#oral-defense-1-title"/);
   assert.match(
     html,
@@ -2060,6 +2072,8 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
     /Module 25: Evidence-Grounded Intelligent &amp; Human-Centered Systems · Atlas Academy/,
   );
   assert.match(html, /Complete Module 25 workbook/);
+  assert.match(html, /Reference access does not advance the Core\./);
+  assert.match(html, /open for orientation and comparison, not as an unlocked Core step/);
   assert.match(html, /Released preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
   assert.match(

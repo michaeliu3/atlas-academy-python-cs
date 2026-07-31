@@ -4513,6 +4513,20 @@ main.module-library-shell {
   font-size: 0.78rem;
 }
 
+.module-route-boundary {
+  border-left: 2px solid var(--saffron);
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+  max-width: 52rem;
+  padding-left: 0.8rem;
+}
+
+.module-route-boundary strong {
+  color: var(--ink);
+}
+
 .sequence-pair {
   display: grid;
   gap: 1rem;

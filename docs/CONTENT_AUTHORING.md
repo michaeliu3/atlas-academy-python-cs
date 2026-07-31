@@ -2,7 +2,8 @@
 
 ## Module contract
 
-Every module must have all of the following before release:
+Every module must have all of the following before it can be represented as
+fully contract-verified or release-ready:
 
 1. prerequisite connection and forward handoff;
 2. primary/university source map with claim boundaries and licensing note;
@@ -17,19 +18,25 @@ Every module must have all of the following before release:
 
 ## Versioned evidence contract
 
-`content/course/course-graph.v1.json` is the single source of truth for
+`content/course/course-graph.v2.json` is the single source of truth for
 module identity, academic prerequisites, forward handoff, route position,
-availability, source map, studio, gate, and release status.
+source map, studio, and gate. Its separate state fields record lifecycle,
+reader access, route availability, contract maturity, and release maturity.
+No contract registry, route page, or workbook heading may override those
+fields. Reader access is not learner completion; preview access is reference
+reading only, never Core credit.
 `content/course/contracts/module-contracts.v1.json` is the separate evidence
 registry. It exists so that an author cannot make a module look complete by
 adding familiar headings alone.
 
-The current registry deliberately records M1–M30 as **legacy structural
-baselines**. The validator can prove their checked-in workbook, six session
-headings, source-map path, and graph handoff. It cannot infer that an
-explanation is rigorous, a diagram has a good prose equivalent, or an oral
-defense is supportive. Those require reviewed, module-specific evidence before
-the module becomes `verified`.
+The current graph has 36 defined modules: 30 reader-visible modules (28
+Core-open plus M25/M26 reference previews) are deliberately recorded as
+**legacy structural baselines**; zero are `verified`; M31–M36 are
+authoring-only. The validator can prove the legacy modules' checked-in
+workbook, six session headings, source-map path, and graph handoff. It cannot
+infer that an explanation is rigorous, a diagram has a good prose equivalent,
+or an oral defense is supportive. Those require reviewed, module-specific
+evidence before a contract becomes `verified`.
 
 Use the right gate for the claim being made:
 
@@ -41,9 +48,11 @@ pnpm sync:modules
 pnpm check:generated
 ~~~
 
-`validate:course:strict` must pass before a newly published module, a
+`validate:course:strict` must pass before a newly Core-open module, a
 re-verified legacy module, or a private deployment can be presented as fully
-contract-verified. It must never be weakened merely to make CI green.
+contract-verified. The current Core-open legacy baselines are a disclosed
+migration condition, not a precedent for bypassing this gate. It must never be
+weakened merely to make CI green.
 
 ### Draft evidence-pointer pilot
 
@@ -57,9 +66,9 @@ reviewer must inspect. The pilot's states are deliberately `draft-pointer-map`,
 A successful pointer resolution proves only that the referenced local artifact
 and heading exist in this revision. It does not prove pedagogical quality,
 source/license correctness, visual accessibility, oral-defense quality, or
-human approval. Do not use it to call a module verified or published. Extend
-the evidence model only after its review fields and release semantics can be
-validated without weakening the v1 strict gate.
+human approval. Do not use it to call a module verified, Core-open, or
+released. Extend the evidence model only after its review fields and release
+semantics can be validated without weakening the v1 strict gate.
 
 ### Advanced-module lifecycle contract
 
@@ -67,6 +76,13 @@ validated without weakening the v1 strict gate.
 `scripts/advanced-module-contract.mjs` are the separate lifecycle contract for
 M31–M36. They do not extend the deliberately legacy-only v1 registry or reuse
 the narrow M21/M27 pointer pilot.
+
+Its `contractState` values (`authoring-only`, `review-ready`, and `published`)
+are contract-lifecycle terms, not aliases for the v2 graph state. A contract
+entry can reach its own `published` state only when the graph also makes the
+module learner-material-ready, fully reader-accessible, and Core-open; it
+still does not make a private-deployment claim without separate release
+evidence.
 
 The initial M31 record is **authoring-only**. It resolves a bounded set of
 checked-in planning and research inputs, including the canonical prerequisite
@@ -86,9 +102,11 @@ The contract uses three states:
    implementation, reference model, and teaching tests exist as checked-in
    inputs. All non-release evidence is structured, but human approval and
    release evidence remain pending.
-3. `published`: graph, manifest, route, workbook, source map, interaction,
-   tests, every review dimension, every release-ready evidence record, and a
-   locally resolvable release record agree.
+3. `published` (advanced-contract lifecycle): graph, manifest, route,
+   workbook, source map, interaction, tests, every review dimension, every
+   release-ready evidence record, and a locally resolvable release record
+   agree. It must also map to the v2 graph's full reader access and Core-open
+   availability; it is not itself proof of an external deployment.
 
 Each contract input has a versioned role. `course-content` and `provenance`
 inputs are included in the generated course-input hash ledger; `source-code`
@@ -179,7 +197,7 @@ review, or learner understanding. Those require later, separate evidence.
 ## Source discipline
 
 - `content/modules/` and `content/source-maps/` are release inputs for
-  published material. A public teaching artifact becomes a release input only
+  reader-visible material. A public teaching artifact becomes a release input only
   when it is explicitly listed in
   `content/course/release-input-policy.v1.json`; CI rejects any tracked
   `public/downloads/` artifact that is absent from that policy. Ignored runtime

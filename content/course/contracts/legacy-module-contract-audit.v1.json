@@ -3,7 +3,7 @@
   "kind": "atlas-legacy-module-contract-audit",
   "auditVersion": "v1",
   "purpose": "Give reviewers a conservative, machine-readable starting point for retrofitting the full module contract across the 30 legacy-baseline workbooks. This is an evidence-pointer audit, not a publication or pedagogical approval registry.",
-  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "canonicalModuleManifest": "content/modules/manifest.json",
   "auditScope": {
     "moduleIds": [

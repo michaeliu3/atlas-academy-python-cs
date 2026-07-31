@@ -62,7 +62,7 @@ function validateAdvancedModuleBridge(graph, ledger, { requireAuthoringOnlyGraph
   if (ledger?.kind !== "atlas-prerequisite-session-bridge") {
     errors.push("advanced module bridge has an invalid kind.");
   }
-  if (ledger?.canonicalCourseGraph !== "content/course/course-graph.v1.json") {
+  if (ledger?.canonicalCourseGraph !== "content/course/course-graph.v2.json") {
     errors.push("advanced module bridge must name the canonical course graph.");
   }
   if (!hasText(ledger?.purpose)) {
@@ -109,7 +109,8 @@ function validateAdvancedModuleBridge(graph, ledger, { requireAuthoringOnlyGraph
     }
     if (
       requireAuthoringOnlyGraphState &&
-      (courseModule.lifecycle !== "authoring-only" || courseModule.availability !== "authoring-only")
+      (courseModule.state?.lifecycle !== "authoring-only" ||
+        courseModule.state?.availability !== "authoring-only")
     ) {
       errors.push(
         `Module ${courseModule.number} bridge is an authoring-only plan but the graph no longer has an authoring-only state.`,

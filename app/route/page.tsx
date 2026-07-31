@@ -6,6 +6,7 @@ import {
   atlasCoreRouteTotals,
   getAtlasRouteEntry,
 } from "@/lib/atlas-core-route";
+import type { CourseModuleState } from "@/lib/course-catalog";
 import { moduleHref, moduleManifest } from "@/lib/module-catalog";
 import { CourseReaderHeader } from "../modules/CourseReaderHeader";
 import styles from "./route.module.css";
@@ -16,12 +17,57 @@ export const metadata: Metadata = {
     "A prerequisite-first 60-day route through Python, mathematics, computer science, AI, and evidence-grounded engineering.",
 };
 
-function publishedModule(number: number) {
+function readerModule(number: number) {
   return moduleManifest.modules.find((courseModule) => courseModule.number === number);
 }
 
+function availabilityPresentation(state: CourseModuleState) {
+  if (state.readerAccess === "preview") {
+    return {
+      label: "Reference preview",
+      className: styles.previewStatus,
+      unavailableNote: null,
+    };
+  }
+
+  switch (state.availability) {
+    case "published":
+      return {
+        label: "Core-open",
+        className: styles.publishedStatus,
+        unavailableNote: null,
+      };
+    case "optional":
+      return {
+        label: "Optional reference",
+        className: styles.optionalStatus,
+        unavailableNote: null,
+      };
+    case "locked":
+      return {
+        label: "Locked",
+        className: styles.lockedStatus,
+        unavailableNote:
+          "Locked until its academic prerequisites and release boundary are satisfied.",
+      };
+    case "authoring-only":
+      return {
+        label: "In authoring",
+        className: styles.authoringStatus,
+        unavailableNote:
+          "Source map, studio, and release evidence are being completed before learner release.",
+      };
+    case "preview":
+      return {
+        label: "Reference preview",
+        className: styles.previewStatus,
+        unavailableNote: null,
+      };
+  }
+}
+
 export default function AtlasCoreRoutePage() {
-  const releaseSummary = `${atlasCoreRouteReleaseStatus.published} / ${atlasCoreRouteReleaseStatus.preview} / ${atlasCoreRouteReleaseStatus["in-authoring"]}`;
+  const releaseSummary = `${atlasCoreRouteReleaseStatus["core-open"]} / ${atlasCoreRouteReleaseStatus["preview-reader"]} / ${atlasCoreRouteReleaseStatus["authoring-only"]}`;
 
   return (
     <main className={styles.shell}>
@@ -50,7 +96,7 @@ export default function AtlasCoreRoutePage() {
             </div>
             <div>
               <dt>{releaseSummary}</dt>
-              <dd>Core-open / preview / authoring</dd>
+              <dd>Core-open / reference / authoring</dd>
             </div>
             <div>
               <dt>{atlasCoreRouteTotals.focusedHoursPerWeek}</dt>
@@ -62,7 +108,14 @@ export default function AtlasCoreRoutePage() {
             </div>
           </dl>
           <p className={styles.availability}>
-            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteReleaseStatus.published} modules are open on the active Core; {atlasCoreRouteReleaseStatus.preview} released synthesis modules are clearly marked as previews; the {atlasCoreRouteReleaseStatus["in-authoring"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
+            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteReleaseStatus["core-open"]} modules are open on the active Core; {atlasCoreRouteReleaseStatus["preview-reader"]} released synthesis modules are clearly marked as reference previews; the {atlasCoreRouteReleaseStatus["authoring-only"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
+          </p>
+          <p className={styles.availability}>
+            <strong>Core-open means material is available, not that a learner has
+            completed its prerequisites.</strong> Atlas does not infer progress
+            from a click, a scroll, or a studio interaction. Use the academic
+            prerequisite map and a Codex learning conversation to choose and
+            record evidence deliberately.
           </p>
         </header>
 
@@ -109,11 +162,11 @@ export default function AtlasCoreRoutePage() {
 
         <section className={styles.legend} aria-label="Route status legend">
           <span className={styles.publishedDot} aria-hidden="true" />
-          <span>Published and open on the active Core</span>
+          <span>Core-open workbook—available, with learner-controlled evidence</span>
+          <span className={styles.previewDot} aria-hidden="true" />
+          <span>Reference preview—available for orientation, not Core progress</span>
           <span className={styles.authoringDot} aria-hidden="true" />
-          <span>Released preview—not an unlocked Core step</span>
-          <span className={styles.authoringDot} aria-hidden="true" />
-          <span>Depth module in authoring—shown so its prerequisites are never hidden</span>
+          <span>Authoring-only or locked—shown so its prerequisites are never hidden</span>
         </section>
 
         <div className={styles.phaseList}>
@@ -135,16 +188,11 @@ export default function AtlasCoreRoutePage() {
 
               <ol className={styles.moduleGrid}>
                 {phase.entries.map((entry) => {
-                  const releasedModule = publishedModule(entry.number);
+                  const visibleModule = readerModule(entry.number);
                   const canOpen =
-                    entry.status === "published" && releasedModule !== undefined;
-                  const isPreview = entry.availability === "preview";
-                  const statusLabel =
-                    entry.status === "authoring-only"
-                      ? "In authoring"
-                      : isPreview
-                        ? "Preview"
-                        : "Published";
+                    entry.state.readerAccess !== "hidden" && visibleModule !== undefined;
+                  const isPreview = entry.state.readerAccess === "preview";
+                  const status = availabilityPresentation(entry.state);
                   const prerequisiteTitles = entry.prerequisiteNumbers.map(
                     (number) => {
                       const prerequisite = getAtlasRouteEntry(number);
@@ -159,13 +207,9 @@ export default function AtlasCoreRoutePage() {
                       <div className={styles.cardTopline}>
                         <span>Module {entry.number}</span>
                         <span
-                          className={
-                            entry.status === "published" && !isPreview
-                              ? styles.publishedStatus
-                              : styles.authoringStatus
-                          }
+                          className={status.className}
                         >
-                          {statusLabel}
+                          {status.label}
                         </span>
                       </div>
                       <h3>{entry.title}</h3>
@@ -187,12 +231,12 @@ export default function AtlasCoreRoutePage() {
                       {canOpen ? (
                         <span className={styles.cardLink}>
                           {isPreview
-                            ? "Read the preview—not an unlocked Core step"
-                            : "Open the workbook"} <i aria-hidden="true">→</i>
+                            ? "Read as reference—not an unlocked Core step"
+                            : "Open the workbook as a Core resource"} <i aria-hidden="true">→</i>
                         </span>
                       ) : (
                         <span className={styles.authoringNote}>
-                          Source map and studio are being built before release.
+                          {status.unavailableNote}
                         </span>
                       )}
                     </>
@@ -200,10 +244,10 @@ export default function AtlasCoreRoutePage() {
 
                   return (
                     <li key={entry.number}>
-                      {canOpen && releasedModule ? (
+                      {canOpen && visibleModule ? (
                         <Link
                           className={styles.moduleCard}
-                          href={moduleHref(releasedModule.slug)}
+                          href={moduleHref(visibleModule.slug)}
                         >
                           {card}
                         </Link>

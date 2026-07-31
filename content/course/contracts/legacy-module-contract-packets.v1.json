@@ -3,7 +3,7 @@
   "contractVersion": "v1",
   "kind": "atlas-legacy-module-contract-packets",
   "purpose": "Bind selected M1–M30 workbooks to typed, reviewable structural evidence without upgrading the historical audit, human-review, release, or publication state.",
-  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "truthBoundary": {
     "pointerResolutionOnly": "A resolved packet pointer proves only that a declared Git-tracked local teaching anchor or implementation file exists in this revision and is bound to the canonical graph/audit.",
     "humanReview": "Every packet remains not-reviewed. This registry records no quality, accessibility, source-license, psychological-safety, or learner-mastery approval.",

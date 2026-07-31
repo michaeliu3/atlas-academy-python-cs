@@ -121,8 +121,9 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
 
   const prematureLifecycleTransition = structuredClone(graph);
   const module32 = prematureLifecycleTransition.modules.find(({ id }) => id === "m32");
-  module32.lifecycle = "published";
-  module32.availability = "published";
+  module32.state.lifecycle = "learner-material-ready";
+  module32.state.readerAccess = "full";
+  module32.state.availability = "published";
   await assert.rejects(
     validateAdvancedModuleContractRegistry(prematureLifecycleTransition, registry),
     /requires lifecycle-aware contract entries for all Modules 31–36/u,
@@ -194,7 +195,10 @@ test("a legacy module cannot become verified with free-form evidence strings", a
     loadCourseContracts(),
   ]);
   const forgedGraph = structuredClone(graph);
-  forgedGraph.modules.find(({ id }) => id === "m29").releaseEvidence.status = "verified";
+  const forgedM29Graph = forgedGraph.modules.find(({ id }) => id === "m29");
+  forgedM29Graph.state.contract.state = "verified";
+  forgedM29Graph.state.release.state = "candidate-recorded";
+  forgedM29Graph.state.release.recordId = "m29-forged-candidate";
   const forgedContracts = structuredClone(contracts);
   const forgedM29 = forgedContracts.modules.find(({ moduleId }) => moduleId === "m29");
   forgedM29.publicationState = "verified";
@@ -314,9 +318,11 @@ test("a newly published module cannot use the legacy contract exception", async 
   ]);
   const candidate = structuredClone(graph);
   const module31 = candidate.modules.find((courseModule) => courseModule.number === 31);
-  module31.lifecycle = "published";
-  module31.availability = "published";
-  module31.releaseEvidence.status = "legacy-audit-pending";
+  module31.state.lifecycle = "learner-material-ready";
+  module31.state.readerAccess = "full";
+  module31.state.availability = "published";
+  module31.state.contract.track = "legacy-v1";
+  module31.state.contract.state = "legacy-baseline";
 
   await assert.rejects(
     validateCourseContracts(candidate, contracts),

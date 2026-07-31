@@ -2,16 +2,14 @@ import {
   atlasCoreRoutePlan,
   courseCatalogTotals,
   getCourseGraphModule,
-  type CourseAvailability,
-  type CourseLifecycle,
+  type CourseModuleState,
 } from "./course-catalog";
 
 export type AtlasRouteEntry = {
   number: number;
   title: string;
   shortTitle: string;
-  status: CourseLifecycle;
-  availability: CourseAvailability;
+  state: CourseModuleState;
   prerequisiteNumbers: number[];
   purpose: string;
   masteryGateId: string;
@@ -44,8 +42,7 @@ export const atlasCoreRoute: AtlasRoutePhase[] = atlasCoreRoutePlan.phases.map(
         number: courseModule.number,
         title: courseModule.title,
         shortTitle: courseModule.shortTitle,
-        status: courseModule.lifecycle,
-        availability: courseModule.availability,
+        state: courseModule.state,
         prerequisiteNumbers: courseModule.academicPrerequisiteNumbers,
         purpose: courseModule.purpose,
         masteryGateId: courseModule.masteryGateId,
@@ -61,9 +58,9 @@ export function getAtlasRouteEntry(number: number) {
 }
 
 export const atlasCoreRouteReleaseStatus = {
-  published: courseCatalogTotals.published,
-  preview: courseCatalogTotals.previews,
-  "in-authoring": courseCatalogTotals.authoring,
+  "core-open": courseCatalogTotals.coreOpen,
+  "preview-reader": courseCatalogTotals.previewReader,
+  "authoring-only": courseCatalogTotals.authoring,
 };
 
 export const atlasCoreRouteTotals = {

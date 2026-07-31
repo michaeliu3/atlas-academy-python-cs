@@ -1,10 +1,11 @@
 {
-  "schemaVersion": 2,
-  "courseGraphSchemaVersion": 1,
+  "schemaVersion": 3,
+  "courseGraphSchemaVersion": 2,
   "routePlanId": "atlas-core-60",
-  "moduleCount": 30,
-  "readableModuleCount": 28,
-  "previewModuleCount": 2,
+  "definedModuleCount": 36,
+  "readerVisibleModuleCount": 30,
+  "coreOpenModuleCount": 28,
+  "previewReaderModuleCount": 2,
   "arcs": [
     {
       "id": "arc-i",
@@ -61,17 +62,24 @@
       "estimatedMinutes": 21,
       "sourceHash": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec",
       "id": "m01",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 1,
       "masteryGateId": "claims",
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m01",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [],
       "prerequisiteSlugs": [],
       "previousRouteNumber": null,
@@ -90,17 +98,24 @@
       "estimatedMinutes": 46,
       "sourceHash": "dc5f938fe7b6e320b64314aba970f1d0aa3666ea014e47a87ea98bffdcdfcbce",
       "id": "m02",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 2,
       "masteryGateId": "claims",
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m02",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         1
       ],
@@ -123,17 +138,24 @@
       "estimatedMinutes": 64,
       "sourceHash": "7b5860ad02f426a22c694f1725de82cbccb20776fe855ccee90d28b5ee125e00",
       "id": "m03",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 3,
       "masteryGateId": "claims",
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m03",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         2
       ],
@@ -156,17 +178,24 @@
       "estimatedMinutes": 25,
       "sourceHash": "1629d7061ac6f118342e7f5680dd9a9b76291e6aa2a9f222ea92756431fb7da6",
       "id": "m04",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 4,
       "masteryGateId": "claims",
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m04",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         3
       ],
@@ -189,17 +218,24 @@
       "estimatedMinutes": 24,
       "sourceHash": "42b6174bcf6b21c9874e04ab360a1ff069408631f6d1bdda1c9dedecb4c3ba01",
       "id": "m05",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 5,
       "masteryGateId": "claims",
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m05",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         4
       ],
@@ -222,17 +258,24 @@
       "estimatedMinutes": 58,
       "sourceHash": "f272b9d5ff877e5bc0f316ea2340b22e53ddb2864b0482bb859a3ee3d366f949",
       "id": "m06",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 7,
       "masteryGateId": "algorithms",
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m06",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         5
       ],
@@ -255,17 +298,24 @@
       "estimatedMinutes": 52,
       "sourceHash": "870d2e4579a1eb31937197ae038fe95dbb6d2c3e2a54d83380a2ec6283a6288f",
       "id": "m07",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 8,
       "masteryGateId": "algorithms",
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m07",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         6
       ],
@@ -288,17 +338,24 @@
       "estimatedMinutes": 52,
       "sourceHash": "8ac708034206cc526a441b0ced9878dd4fe956b4d31183e5ef652340960e3646",
       "id": "m08",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 9,
       "masteryGateId": "algorithms",
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m08",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         7
       ],
@@ -321,17 +378,24 @@
       "estimatedMinutes": 74,
       "sourceHash": "f2bd9e373cc47acab3fc586fcc98419d4941ec9c75ca09ebea8978e4b0403643",
       "id": "m09",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 10,
       "masteryGateId": "algorithms",
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m09",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         8
       ],
@@ -354,17 +418,24 @@
       "estimatedMinutes": 76,
       "sourceHash": "cbfe82264548694c9436e4c3a40e0a01d79db7e3f1b1d589879f7b3cacff0312",
       "id": "m10",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 11,
       "masteryGateId": "algorithms",
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m10",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         9
       ],
@@ -387,17 +458,24 @@
       "estimatedMinutes": 63,
       "sourceHash": "8fb4b8cec427bed7c8581b2f0edb8825d70774438b57df66dcd295079c213f92",
       "id": "m11",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 12,
       "masteryGateId": "algorithms",
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m11",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         10
       ],
@@ -420,17 +498,24 @@
       "estimatedMinutes": 82,
       "sourceHash": "a1fc525a1eebea1f64c1abd4f0cf3e6a78c2777a9865c94b36ad4826c7bfea86",
       "id": "m12",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 13,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m12",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         11
       ],
@@ -453,17 +538,24 @@
       "estimatedMinutes": 54,
       "sourceHash": "adc4c10a855320ae7ff391cef89dcf2d86e8596d1fb35684df501481f08d42ce",
       "id": "m13",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 14,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m13",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         12
       ],
@@ -486,17 +578,24 @@
       "estimatedMinutes": 69,
       "sourceHash": "1938fb2d7674a5951f0fe7e79e62cae154f17b7b7238c5306f3382dccc05147e",
       "id": "m14",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 15,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m14",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         13
       ],
@@ -519,17 +618,24 @@
       "estimatedMinutes": 110,
       "sourceHash": "e97d4a794330d28cb7b7dcb8b3b9241735e3aa6daa0918f004b1f9442eabe113",
       "id": "m15",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 16,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m15",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         14
       ],
@@ -552,17 +658,24 @@
       "estimatedMinutes": 93,
       "sourceHash": "b80b7cee07b9d42e1afcf498feda08f7de5e4c6e1047911cba67df1be1e933c9",
       "id": "m16",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 17,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m16",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         15
       ],
@@ -585,17 +698,24 @@
       "estimatedMinutes": 96,
       "sourceHash": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07",
       "id": "m17",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 18,
       "masteryGateId": "mathematics",
       "sourceMap": "content/source-maps/module17_architecture_execution_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m17",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         16
       ],
@@ -618,17 +738,24 @@
       "estimatedMinutes": 97,
       "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
       "id": "m18",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 23,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m18",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         17
       ],
@@ -651,17 +778,24 @@
       "estimatedMinutes": 104,
       "sourceHash": "a0a6f3c6f47646633d9294bc969ff8d940e1d75b77ef4ad751c5fa964e50099d",
       "id": "m19",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 24,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module19_concurrency_parallelism_source_map.md",
       "studioId": null,
-      "releaseEvidence": {
-        "id": "m19",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         18
       ],
@@ -684,17 +818,24 @@
       "estimatedMinutes": 72,
       "sourceHash": "1f6cae04fafd01a36822401d1d5e9c26139a46b120e3ca462ac00bab2900ce55",
       "id": "m20",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 25,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module20_networks_protocols_source_map.md",
       "studioId": "network-protocol",
-      "releaseEvidence": {
-        "id": "m20",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         19
       ],
@@ -717,17 +858,24 @@
       "estimatedMinutes": 39,
       "sourceHash": "c98757d97a439c38cc9e5a2bb792f8ce490df6520634ae0821cc7711bc685a76",
       "id": "m21",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 26,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module21_async_distributed_source_map.md",
       "studioId": "async-distributed",
-      "releaseEvidence": {
-        "id": "m21",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         20
       ],
@@ -750,17 +898,24 @@
       "estimatedMinutes": 31,
       "sourceHash": "3a71e2babae4e870d220e1562c244f45785045808b039b5e92d7be9eda87c7df",
       "id": "m22",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 27,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module22_security_trust_source_map.md",
       "studioId": "security-trust",
-      "releaseEvidence": {
-        "id": "m22",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         21
       ],
@@ -780,20 +935,27 @@
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 22 established that incoming data does not become authority merely because it has a plausible shape. This module makes that principle operational: text can have syntax and s…",
       "arcId": "arc-v",
       "wordCount": 7217,
-      "estimatedMinutes": 35,
+      "estimatedMinutes": 34,
       "sourceHash": "1e0ef5fb8868bd339d88922bc0dec26393f683071b319f3c4b2c885015ffa427",
       "id": "m23",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 28,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module23_languages_interpreters_source_map.md",
       "studioId": "language-interpreter",
-      "releaseEvidence": {
-        "id": "m23",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         22
       ],
@@ -813,20 +975,27 @@
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 23 gave a program a semantic path: source, structure, environment, evaluator, and bounded result. This module asks a different question: when a trusted Python program runs,…",
       "arcId": "arc-v",
       "wordCount": 4573,
-      "estimatedMinutes": 22,
+      "estimatedMinutes": 21,
       "sourceHash": "8ff64204f744c7b75f08462c54520911009e098707073de419c30f3614d095a8",
       "id": "m24",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 29,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module24_cpython_performance_memory_source_map.md",
       "studioId": "runtime-evidence",
-      "releaseEvidence": {
-        "id": "m24",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         23
       ],
@@ -846,20 +1015,27 @@
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
       "arcId": "arc-v",
       "wordCount": 7743,
-      "estimatedMinutes": 37,
+      "estimatedMinutes": 36,
       "sourceHash": "010f669d0559c283b4f188634c946e884ca305838e951d384263e4fc8d53fb11",
       "id": "m25",
-      "availability": "preview",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "preview",
+        "availability": "preview",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 35,
       "masteryGateId": "evidence",
       "sourceMap": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
       "studioId": "evidence-grounded",
-      "releaseEvidence": {
-        "id": "m25",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         22,
         24,
@@ -887,20 +1063,27 @@
       "summary": "Intended bridge after prerequisite evidence exists: Module 25 ends with a bounded decision-support feature and an evidence packet. This module then asks the harder systems question: can that feature live inside a maintained product witho…",
       "arcId": "arc-v",
       "wordCount": 8008,
-      "estimatedMinutes": 39,
+      "estimatedMinutes": 38,
       "sourceHash": "d38cec772c5e6c99344827aa21b36a840a7a29fa9af544a765d8534107814b85",
       "id": "m26",
-      "availability": "preview",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "preview",
+        "availability": "preview",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 36,
       "masteryGateId": "defense",
       "sourceMap": "content/source-maps/module26_systems_capstone_source_map.md",
       "studioId": "capstone-defense",
-      "releaseEvidence": {
-        "id": "m26",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         25
       ],
@@ -923,17 +1106,24 @@
       "estimatedMinutes": 48,
       "sourceHash": "d6e232d6c5244fc7c3ea97fc314ac001a32795a38276d2ff55b7aa80f90f498c",
       "id": "m27",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 6,
       "masteryGateId": "claims",
       "sourceMap": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
       "studioId": "discrete-math-proof",
-      "releaseEvidence": {
-        "id": "m27",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         2,
         4,
@@ -960,17 +1150,24 @@
       "estimatedMinutes": 39,
       "sourceHash": "9b1d5518148d2fab14a659ba28e78f1c355227cd9862f415d4c43e7550c02873",
       "id": "m28",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 19,
       "masteryGateId": "mathematics",
       "sourceMap": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
       "studioId": "linear-algebra-stability",
-      "releaseEvidence": {
-        "id": "m28",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         17,
         27
@@ -995,17 +1192,24 @@
       "estimatedMinutes": 39,
       "sourceHash": "c02d1e592276be7a418aa7502f9c9a1a7a614db336b2a9982772786c2bd8f152",
       "id": "m29",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 20,
       "masteryGateId": "mathematics",
       "sourceMap": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
       "studioId": "calculus-continuous-change",
-      "releaseEvidence": {
-        "id": "m29",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         27,
         28
@@ -1030,17 +1234,24 @@
       "estimatedMinutes": 46,
       "sourceHash": "1cb40d41e6f0024d8b11a55789e153d2781f5007d9c30f4653068a591a9c4833",
       "id": "m30",
-      "availability": "published",
-      "lifecycle": "published",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "published",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
       "routeRole": "required",
       "routePosition": 21,
       "masteryGateId": "mathematics",
       "sourceMap": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
       "studioId": "probability-inference",
-      "releaseEvidence": {
-        "id": "m30",
-        "status": "legacy-audit-pending"
-      },
       "prerequisiteNumbers": [
         27,
         29

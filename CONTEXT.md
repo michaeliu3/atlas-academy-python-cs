@@ -10,6 +10,36 @@ The single course-level record of a module's identity, route, prerequisites,
 availability, source map, and release boundary.
 _Avoid_: navigation graph, secondary manifest
 
+**Reader access**:
+Whether Atlas can render a module's checked-in workbook to a learner. It is a
+delivery fact, not a mastery, prerequisite, contract-review, or release claim.
+_Avoid_: unlocked, passed, published-quality
+
+**Route availability**:
+The learner-facing role of a module in a named route: `published` is a
+Core-open step; `preview` is reference-only; `locked` is named but not
+route-open; `optional` is outside the required Core; and `authoring-only` is
+not learner-deliverable.
+_Avoid_: lifecycle, reader access, completion state
+
+**Contract state**:
+The maturity of a module's structured teaching evidence: `legacy-baseline`,
+`authoring`, `review-ready`, or `reviewed`. It is independent of reader access
+and release evidence.
+_Avoid_: published, learner mastery, deployment state
+
+**Release state**:
+The maturity of recorded release evidence: `planned`, `evidence-pending`,
+`candidate-validated`, or `recorded`. It is independent of the quality review
+and does not establish private deployment.
+_Avoid_: contract state, reader access, security clean
+
+**Core progression**:
+A learner-controlled local record that prerequisite evidence supports taking a
+route step as the next Core study. It never blocks reference reading and never
+claims mastery merely because a page was opened.
+_Avoid_: reader access, grade, automatic completion
+
 **Canonical module workbook**:
 The one module document selected by the canonical manifest for a module.
 _Avoid_: related notes, nearby Markdown file

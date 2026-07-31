@@ -3,7 +3,7 @@
   "contractVersion": "v2-draft",
   "kind": "atlas-module-contract-evidence",
   "purpose": "A bounded draft pointer map for two existing modules. It gives reviewers stable local starting points without representing full compliance.",
-  "canonicalCourseGraph": "content/course/course-graph.v1.json",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "truthBoundary": {
     "pointerResolutionOnly": "A resolved pointer proves only that a Git-tracked local Markdown file and its visible heading anchor exist in this revision.",
     "humanReview": "No human review, approval, accessibility judgment, source-claim judgment, or pedagogical judgment is recorded here.",

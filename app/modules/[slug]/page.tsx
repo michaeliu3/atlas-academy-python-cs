@@ -17,6 +17,7 @@ import { ModuleOralDefense } from "./ModuleOralDefense";
 import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
 import { resolveModuleStudio } from "@/lib/module-studio-registry";
+import type { CourseModule } from "@/lib/module-catalog";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -40,6 +41,46 @@ export async function generateMetadata({
   };
 }
 
+function readerAccessCopy(courseModule: CourseModule) {
+  switch (courseModule.state.availability) {
+    case "published":
+      return {
+        label: "Core-open reader",
+        title: "The workbook is available; evidence stays learner-controlled.",
+        detail:
+          "Opening, reading, or using a studio does not mark academic prerequisites complete or advance the Core. Use the prerequisite map and your Teaching Assistant or Study Partner conversation to decide what evidence to build next.",
+      };
+    case "preview":
+      return {
+        label: "Reference preview",
+        title: "Reference access does not advance the Core.",
+        detail:
+          "This synthesis workbook is open for orientation and comparison, not as an unlocked Core step. Its listed prerequisites remain the academic route into the work.",
+      };
+    case "optional":
+      return {
+        label: "Optional reference",
+        title: "Useful depth, not a required Core step.",
+        detail:
+          "This material is available for exploration, but it neither replaces listed prerequisites nor records Core progress.",
+      };
+    case "locked":
+      return {
+        label: "Locked reader",
+        title: "This workbook is not available on the active Core.",
+        detail:
+          "Return to the route to review the prerequisite and release boundary. A link, scroll position, or preview never counts as completion evidence.",
+      };
+    case "authoring-only":
+      return {
+        label: "Authoring-only reader",
+        title: "This module is still being prepared for learners.",
+        detail:
+          "Its place on the route is visible, but source, interaction, and release evidence must be complete before it becomes learner material.",
+      };
+  }
+}
+
 export default async function ModulePage({ params }: ModulePageProps) {
   const { slug } = await params;
   const courseModule = getModuleBySlug(slug);
@@ -52,6 +93,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
   const moduleInteraction = resolveModuleStudio(courseModule);
   const lessonMarkdown = stripDocumentTitle(markdown);
   const headings = extractTableOfContents(lessonMarkdown);
+  const access = readerAccessCopy(courseModule);
 
   return (
     <main className={`module-shell ${courseModule.arcId}`}>
@@ -86,6 +128,15 @@ export default async function ModulePage({ params }: ModulePageProps) {
               <dd>major sections</dd>
             </div>
           </dl>
+          <aside
+            aria-labelledby={`module-access-${courseModule.number}`}
+            className="module-availability-notice module-reader-access"
+          >
+            <p className="kicker">{access.label}</p>
+            <h2 id={`module-access-${courseModule.number}`}>{access.title}</h2>
+            <p>{access.detail}</p>
+            <Link href="/route">Review the prerequisite-first route →</Link>
+          </aside>
         </header>
 
         <ModuleInteraction
