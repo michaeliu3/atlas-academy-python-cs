@@ -254,9 +254,9 @@
       "title": "Representation, Memory, Sequences, and Linked Structures",
       "summary": "Central idea: an abstract history says what order means; a representation decides where references live, which paths connect them, and what each operation costs.",
       "arcId": "arc-ii",
-      "wordCount": 12119,
+      "wordCount": 12905,
       "estimatedMinutes": 58,
-      "sourceHash": "f272b9d5ff877e5bc0f316ea2340b22e53ddb2864b0482bb859a3ee3d366f949",
+      "sourceHash": "ac8152ed7afb84e784c70bd077031c9054db42a14dec7119587c017ce2c29483",
       "id": "m06",
       "state": {
         "lifecycle": "learner-material-ready",

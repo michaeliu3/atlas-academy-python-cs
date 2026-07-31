@@ -39,6 +39,9 @@ When a sentence has no label, it concerns the course’s Atlas design or follows
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m06-representation-knowledge-bridge
+%% atlas-diagram-title: Module 6 connects its prerequisites to later data-structure, systems, and CPython work
+%% atlas-diagram-alt: Modules 1, 3, and 5 feed into Module 6: object and reference reasoning, ADTs with invariants and ownership, and cost and amortization. Module 6 then supplies representation-and-memory foundations for Modules 7 through 10, 17, and 24.
 flowchart LR
     M1["Module 1<br/>objects, bindings, aliasing"] --> M6["Module 6<br/>representation and memory"]
     M3["Module 3<br/>ADTs, RI, AF, ownership"] --> M6
@@ -254,6 +257,9 @@ Suppose we need to store an ordered sequence \(S\) of \(n\) values.
 This gives the central dependency:
 
 ```mermaid
+%% atlas-diagram-id: m06-sequence-representation-decision
+%% atlas-diagram-title: A sequence contract drives a representation decision through invariants, algorithms, cost, and correctness
+%% atlas-diagram-alt: A sequence contract determines required operations, which motivate a representation. The representation defines an invariant and abstraction function; the invariant and abstraction function establish correctness, while algorithms yield time and retained-space costs. Correctness and cost together inform a requirement-aware decision.
 flowchart TD
     CONTRACT["Sequence contract<br/>what clients observe"] --> OPS["Required operations"]
     OPS --> REP["Representation choice"]
@@ -326,6 +332,9 @@ The call to `decode("ascii")` supplies the interpretation contract. Without an e
 **[MODEL]** Treat memory as an addressable sequence of bytes:
 
 ```mermaid
+%% atlas-diagram-id: m06-addressable-memory-model
+%% atlas-diagram-title: A simplified byte-address model places consecutive addresses next to one another
+%% atlas-diagram-alt: Under the deliberately simplified addressable-memory model, bytes at addresses 100, 101, 102, and 103 occupy consecutive positions and have shown bit patterns. This supports later base-plus-offset reasoning; it is not a diagram of Python object storage.
 flowchart LR
     A100["address 100<br/>00110110"] --- A101["address 101<br/>11000001"]
     A101 --- A102["address 102<br/>00001111"]
@@ -380,6 +389,9 @@ snapshot = history.copy()
 ```
 
 ```mermaid
+%% atlas-diagram-id: m06-shallow-copy-object-graph
+%% atlas-diagram-title: A shallow list copy creates a new outer list but shares event references
+%% atlas-diagram-alt: The names history and alias point to one list, while snapshot points to a distinct copied list. Both slots in each list, and the name event, reference the same one StudyEvent object, showing shallow copying and repeated aliases.
 flowchart LR
     H["name: history"] --> L["list object L"]
     A["name: alias"] --> L
@@ -441,6 +453,9 @@ assert outer == (["memory", "locality"],)
 ### 6.3 Reachability and lifetime
 
 ```mermaid
+%% atlas-diagram-id: m06-reachability-roots-and-cycle
+%% atlas-diagram-title: Reachability from live roots differs from an unreachable object cycle
+%% atlas-diagram-alt: Live runtime roots reach a history object, then its node or slot path and two event objects. A separate two-object cycle has no incoming live-root path; its eventual collection is implementation-dependent and must not be assumed immediate.
 flowchart LR
     R["live roots<br/>frames, modules, runtime"] --> H["History object"]
     H --> N1["node / slot"]
@@ -536,6 +551,9 @@ The same behavioral contract may survive the workload change while the best repr
 **[MODEL]** A static array contains \(n\) fixed-width consecutive slots.
 
 ```mermaid
+%% atlas-diagram-id: m06-contiguous-reference-array
+%% atlas-diagram-title: Contiguous array slots support offset indexing while referenced events can live elsewhere
+%% atlas-diagram-alt: A base location begins a run of adjacent array slots holding references A through D. For the illustrated selection at slot 2, base plus index times slot width selects the slot; the referenced event objects may reside elsewhere, so only references are contiguous.
 flowchart LR
     B["base"] --> S0["slot 0<br/>ref A"]
     S0 --- S1["slot 1<br/>ref B"]
@@ -593,6 +611,9 @@ slot       A      B      C      D
 Insert `X` at index `1` into a larger destination:
 
 ```mermaid
+%% atlas-diagram-id: m06-array-front-insertion-trace
+%% atlas-diagram-title: Front insertion preserves sequence order by moving later array entries
+%% atlas-diagram-alt: In one larger-destination insertion trace, A is copied to slot 0, X is written to slot 1, and B, C, and D are copied to slots 2, 3, and 4 in order. It illustrates why front insertion changes every later position, not a required allocation strategy.
 sequenceDiagram
     participant O as Old slots [A B C D]
     participant N as New/available slots [· · · · ·]
@@ -647,6 +668,9 @@ Capacity is deliberately absent from the abstract value. Clients can observe `n`
 ### 9.2 Append without and with growth
 
 ```mermaid
+%% atlas-diagram-id: m06-dynamic-array-append-branches
+%% atlas-diagram-title: Dynamic-array append either writes into capacity or grows, copies, and replaces storage
+%% atlas-diagram-alt: Dynamic-array append has two mutually exclusive preconditions. When n is less than capacity C, write x at A[n] and increment n. When n equals C, allocate a larger array, copy the used prefix, write x, replace A and C, then increment n.
 stateDiagram-v2
     [*] --> HasRoom: n < C
     HasRoom --> Written: A[n] = x
@@ -745,6 +769,9 @@ The annotation describes a recursive shape. It does not itself prevent cycles or
 ### 10.1 Representation
 
 ```mermaid
+%% atlas-diagram-id: m06-linked-history-representation
+%% atlas-diagram-title: A head-tail singly linked chain stores order in next references
+%% atlas-diagram-alt: Head references the first node and tail references the last. Each node holds one event reference and a next reference to its successor; the final node has next equal to None. The nodes need not be adjacent in memory, yet their links denote the event sequence.
 flowchart LR
     H["head"] --> N1["Node<br/>item ref | next"]
     N1 -->|"item"| A["event A"]
@@ -785,6 +812,9 @@ The RI contains more than a type checker can establish. `Node | None` permits a 
 There are two states, not one:
 
 ```mermaid
+%% atlas-diagram-id: m06-linked-append-invariant
+%% atlas-diagram-title: Linked-history append handles empty and nonempty states before restoring the invariant
+%% atlas-diagram-alt: Appending creates a node N. If size is zero, assign both head and tail to N; otherwise link the old tail to N before moving tail to N. In either case increment size, leaving a tail whose next is None and a reachable path whose length equals size.
 flowchart TD
     START["append(x): create node N"] --> EMPTY{"size == 0?"}
     EMPTY -- "yes" --> BOTH["head = tail = N"]
@@ -857,6 +887,9 @@ Modern machines move data through a memory hierarchy in blocks. Berkeley CS61C d
 - **spatial locality:** addresses near recently accessed data are likely to be accessed soon.
 
 ```mermaid
+%% atlas-diagram-id: m06-locality-model
+%% atlas-diagram-title: Contiguous reference slots may share a cache block while linked nodes may be scattered
+%% atlas-diagram-alt: In a simplified locality model, one fetched cache block may contain several neighboring array reference slots. A linked traversal follows logical next references through nodes whose physical locations may be scattered. This is a performance hypothesis, not a guarantee about Python objects or runtime.
 flowchart TB
     subgraph Contiguous["contiguous reference slots"]
         S0["ref 0"] --- S1["ref 1"] --- S2["ref 2"] --- S3["ref 3"]
@@ -1203,6 +1236,9 @@ record_study = RecordStudy(history, limit=100_000)
 ```
 
 ```mermaid
+%% atlas-diagram-id: m06-historybuffer-ports-and-adapters
+%% atlas-diagram-title: The use case depends on a history contract while the composition root selects an adapter
+%% atlas-diagram-alt: The UI invokes RecordStudy, which depends on the HistoryBuffer contract. ArrayHistory and LinkedHistory implement that contract; main.py composes RecordStudy with ArrayHistory in this example. Immutable StudyEvent is used by the use case and both adapters.
 flowchart LR
     UI["input / UI"] --> USE["RecordStudy use case"]
     USE --> PORT["HistoryBuffer contract"]
@@ -1980,6 +2016,9 @@ Memorizing an operation table or CPython growth sequence is not mastery.
 ## 21. Consolidation
 
 ```mermaid
+%% atlas-diagram-id: m06-representation-decision-loop
+%% atlas-diagram-title: Representation choices lead to evidence and are revisited when workload requirements change
+%% atlas-diagram-alt: An abstract sequence determines the contract and workload. That guides a choice between a dynamic array and a head-tail linked chain, each with its own invariant and cost mechanisms. Machine effects are checked through analysis, tests, and measurements; changed requirements return to workload analysis, otherwise the evidence is recorded.
 flowchart TD
     VALUE["Abstract ordered value"] --> CONTRACT["Sequence operations + laws"]
     CONTRACT --> WORKLOAD["Operation-frequency vector"]

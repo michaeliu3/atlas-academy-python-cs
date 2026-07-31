@@ -169,3 +169,26 @@ test("Module 5 is a complete algorithm-analysis retrofit with unique visual expl
   assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m05-")));
   assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });
+
+test("Module 6 is a complete representation-and-memory retrofit with model boundaries", async () => {
+  const moduleSix = await readFile(
+    new URL("../content/modules/06_representation_memory_sequences_linked.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleSix, {
+    sourcePath: "content/modules/06_representation_memory_sequences_linked.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 13);
+  assert.equal(report.summary.completeBlocks, 13);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m06-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+  assert.ok(
+    blocks.some(({ metadata }) => metadata?.alternative.includes("not a diagram of Python object storage")),
+  );
+  assert.ok(
+    blocks.some(({ metadata }) => metadata?.alternative.includes("implementation-dependent")),
+  );
+});

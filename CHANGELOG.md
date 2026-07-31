@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Completed Module 6's Mermaid accessibility retrofit: all thirteen
+  instructional diagrams now carry unique stable IDs, concise titles, and
+  authored prose alternatives for the representation bridge, contract-to-cost
+  decision, machine-model boundaries, aliasing, reachability, arrays, dynamic
+  arrays, linked chains, locality, architecture, and consolidation loop. The
+  alternatives explicitly preserve model/implementation uncertainty; this is a
+  bounded visual-equivalence improvement, not a completed accessibility review
+  or a claim that later modules are remediated.
 - Completed Module 5's Mermaid accessibility retrofit: all six instructional
   diagrams now carry unique stable IDs, concise titles, and authored prose
   alternatives for the analysis knowledge bridge, complexity-claim components,
