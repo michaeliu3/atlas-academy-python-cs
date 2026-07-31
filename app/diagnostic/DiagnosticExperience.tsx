@@ -21,10 +21,11 @@ import {
   parseStoredAttempt,
   toLearningBrief,
 } from "@/lib/diagnostic-model";
+import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 
 type DiagnosticAttempt = ReturnType<typeof createEmptyAttempt>;
 type DiagnosticAction = Parameters<typeof diagnosticReducer>[1];
-type CopyState = "idle" | "copied" | "failed";
+type CopyState = "idle" | "approval-required" | "copied" | "printed" | "failed";
 type PersistenceState = "loading" | "saved" | "unavailable";
 type AcademicPrerequisite = {
   moduleNumber: number;
@@ -65,6 +66,7 @@ export function DiagnosticExperience() {
   const [persistence, setPersistence] =
     useState<PersistenceState>("loading");
   const [copyState, setCopyState] = useState<CopyState>("idle");
+  const [approvedLearningBrief, setApprovedLearningBrief] = useState<string | null>(null);
   const [resetArmed, setResetArmed] = useState(false);
   const [restoredProgress, setRestoredProgress] = useState(false);
   const [questionFocusVersion, setQuestionFocusVersion] = useState(0);
@@ -146,6 +148,11 @@ export function DiagnosticExperience() {
     () => buildDiagnosticResult(attempt),
     [attempt],
   );
+  const learningBrief = useMemo(() => toLearningBrief(attempt), [attempt]);
+  const learningBriefApproved = canExportApprovedDraft(
+    approvedLearningBrief,
+    learningBrief,
+  );
 
   useLayoutEffect(() => {
     if (questionFocusVersion === 0) {
@@ -178,6 +185,7 @@ export function DiagnosticExperience() {
       setPersistence("unavailable");
     }
     setCopyState("idle");
+    setApprovedLearningBrief(null);
     setResetArmed(false);
     setRestoredProgress(false);
     setQuestionFocusVersion((version) => version + 1);
@@ -193,13 +201,16 @@ export function DiagnosticExperience() {
   }
 
   async function copyLearningBrief() {
-    const brief = toLearningBrief(attempt);
+    if (!learningBriefApproved) {
+      setCopyState("approval-required");
+      return;
+    }
     try {
       if (window.navigator.clipboard?.writeText) {
-        await window.navigator.clipboard.writeText(brief);
+        await window.navigator.clipboard.writeText(learningBrief);
       } else {
         const transfer = document.createElement("textarea");
-        transfer.value = brief;
+        transfer.value = learningBrief;
         transfer.setAttribute("readonly", "");
         transfer.style.position = "fixed";
         transfer.style.opacity = "0";
@@ -215,6 +226,42 @@ export function DiagnosticExperience() {
     } catch {
       setCopyState("failed");
     }
+  }
+
+  function printLearningBrief() {
+    if (!learningBriefApproved) {
+      setCopyState("approval-required");
+      return;
+    }
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) {
+      setCopyState("failed");
+      return;
+    }
+    printWindow.opener = null;
+    const printDocument = printWindow.document;
+    printDocument.title = "Atlas Academy learning brief";
+    const main = printDocument.createElement("main");
+    const heading = printDocument.createElement("h1");
+    const boundary = printDocument.createElement("p");
+    const brief = printDocument.createElement("pre");
+    heading.textContent = "Atlas Academy learning brief";
+    boundary.textContent =
+      "Learner-approved, minimal summary. This page omits the full diagnostic ledger.";
+    brief.textContent = learningBrief;
+    main.appendChild(heading);
+    main.appendChild(boundary);
+    main.appendChild(brief);
+    printDocument.body.replaceChildren(main);
+    printDocument.body.style.cssText =
+      "color: #101322; font-family: system-ui, sans-serif; margin: 2rem;";
+    heading.style.cssText = "font-size: 1.4rem; margin: 0 0 0.5rem;";
+    boundary.style.cssText = "color: #3a4652; line-height: 1.5; margin: 0 0 1.5rem;";
+    brief.style.cssText =
+      "font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.78rem; line-height: 1.55; white-space: pre-wrap;";
+    printWindow.focus();
+    window.setTimeout(() => printWindow.print(), 0);
+    setCopyState("printed");
   }
 
   if (attempt.completed) {
@@ -493,11 +540,38 @@ export function DiagnosticExperience() {
         </aside>
 
         <div className="diagnostic-result-actions">
-          <button type="button" onClick={copyLearningBrief}>
+          <fieldset className="diagnostic-export-consent">
+            <legend>Review before manual copy or print</legend>
+            <label>
+              <input
+                checked={learningBriefApproved}
+                onChange={(event) => {
+                  setApprovedLearningBrief(event.target.checked ? learningBrief : null);
+                  setCopyState("idle");
+                }}
+                type="checkbox"
+              />
+              <span>I reviewed this learning brief and approve copying or printing it myself.</span>
+            </label>
+            <p id="diagnostic-export-consent-note">
+              Only the concise learning brief is copied or printed. Your full results stay in this portal and local browser state.
+            </p>
+          </fieldset>
+          <button
+            aria-describedby="diagnostic-export-consent-note"
+            disabled={!learningBriefApproved}
+            type="button"
+            onClick={copyLearningBrief}
+          >
             Copy learning brief
           </button>
-          <button type="button" onClick={() => window.print()}>
-            Print or save as PDF
+          <button
+            aria-describedby="diagnostic-export-consent-note"
+            disabled={!learningBriefApproved}
+            type="button"
+            onClick={printLearningBrief}
+          >
+            Print approved brief
           </button>
           <Link href="/modules">Open the course library</Link>
           <button
@@ -515,8 +589,12 @@ export function DiagnosticExperience() {
           <p className="diagnostic-copy-status" aria-live="polite">
             {copyState === "copied"
               ? "Learning brief copied."
+              : copyState === "printed"
+                ? "Printable learning brief opened."
+                : copyState === "approval-required"
+                  ? "Review the current brief before copying or printing it."
               : copyState === "failed"
-                ? "Copy was unavailable. Use Print or save as PDF instead."
+                ? "Copy or print was unavailable. You can select only the reviewed brief manually."
                 : ""}
           </p>
         </div>

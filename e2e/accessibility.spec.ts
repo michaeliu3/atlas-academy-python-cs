@@ -268,12 +268,83 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
     page.getByText(/direct academic prerequisite/i).first(),
   ).toBeVisible();
 
+  const exportConsentGroup = page.getByRole("group", {
+    name: "Review before manual copy or print",
+  });
+  await expect(exportConsentGroup).toBeVisible();
+  const exportConsent = exportConsentGroup.getByRole("checkbox", {
+    name: /I reviewed this learning brief and approve copying or printing it myself/i,
+  });
+  const copyBrief = page.getByRole("button", { name: "Copy learning brief" });
+  const printBrief = page.getByRole("button", { name: "Print approved brief" });
+  await expect(copyBrief).toBeDisabled();
+  await expect(printBrief).toBeDisabled();
+  await expect(copyBrief).toHaveAttribute(
+    "aria-describedby",
+    "diagnostic-export-consent-note",
+  );
+  await expect(printBrief).toHaveAttribute(
+    "aria-describedby",
+    "diagnostic-export-consent-note",
+  );
+  await exportConsent.focus();
+  await page.keyboard.press("Space");
+  await expect(exportConsent).toBeChecked();
+  await expect(copyBrief).toBeEnabled();
+  await expect(printBrief).toBeEnabled();
+
   const repairLink = page
     .getByRole("link", { name: /rebuild with published module/i })
     .first();
   await repairLink.focus();
   await expect(repairLink).toBeFocused();
   await expectNoAxeViolations(page);
+});
+
+test("M19 revokes export approval when its evidence brief changes", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Machine & network" }).click();
+
+  const studio = page.locator("#concurrency-observatory");
+  await expect(studio).toBeVisible();
+  await studio.getByRole("tab", { name: /evidence auditor/i }).click();
+
+  const panel = studio.locator("#concurrency-panel-evidence");
+  await expect(panel).toBeVisible();
+  const oracle = panel.getByRole("radio", {
+    name: /all required partitions committed and candidate equals oracle/i,
+  });
+  await selectRadioWithKeyboard(page, oracle);
+  const confidence = panel.getByRole("radio", { name: /guess/i });
+  await selectRadioWithKeyboard(page, confidence);
+  await panel.getByRole("button", { name: "Reveal the trace evidence" }).click();
+
+  const brief = panel.getByRole("textbox", {
+    name: "Generated agent patch review brief",
+  });
+  const approval = panel.getByRole("checkbox", {
+    name: /I reviewed this concise, categorical brief and choose to copy it manually/i,
+  });
+  const copyBrief = panel.getByRole("button", {
+    name: "Copy approved instructor brief",
+  });
+  await expect(brief).toHaveValue(/Variant: single owner/);
+  await expect(approval).not.toBeChecked();
+  await expect(copyBrief).toBeDisabled();
+  await approval.focus();
+  await page.keyboard.press("Space");
+  await expect(approval).toBeChecked();
+  await expect(copyBrief).toBeEnabled();
+
+  await panel.getByRole("button", { name: "shared fold" }).click();
+  await expect(brief).toHaveValue(/Variant: shared fold/);
+  await expect(approval).not.toBeChecked();
+  await expect(copyBrief).toBeDisabled();
+
+  const results = await new AxeBuilder({ page })
+    .include("#concurrency-panel-evidence")
+    .analyze();
+  expect(results.violations, "Axe found a violation in the M19 evidence panel.").toEqual([]);
 });
 
 test("the Module 22 trust studio requires prediction and confidence before reveal", async ({

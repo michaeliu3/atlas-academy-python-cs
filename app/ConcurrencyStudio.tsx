@@ -8,6 +8,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from "react";
+import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 import styles from "./ConcurrencyStudio.module.css";
 
 type ConcurrencyView =
@@ -3039,13 +3040,11 @@ function EvidenceAuditor({
   record: StudioRecord;
   onRecordChange: (next: StudioRecord) => void;
 }) {
-  const copyContext = `${answer.revealed}:${record.evidenceVariant}`;
+  const [approvedBrief, setApprovedBrief] = useState<string | null>(null);
   const [copyFeedback, setCopyFeedback] = useState<{
     context: string;
-    state: "idle" | "copied" | "failed";
+    state: "idle" | "approval-required" | "copied" | "failed";
   }>({ context: "", state: "idle" });
-  const copyState =
-    copyFeedback.context === copyContext ? copyFeedback.state : "idle";
   const preterminalStates = [
     "ADMITTED",
     "ENQUEUED",
@@ -3123,13 +3122,19 @@ function EvidenceAuditor({
     "Digest: 3e2899703a3a5f16bbf6905d6ddd9b819a2e2f69ebe9fb4750f6ebda08c4da66",
     "Residual boundary: scheduler fairness, free-threaded/interpreter behavior, external effects, and Module 18 durability remain unproved here.",
   ].join("\n");
+  const briefApproved = canExportApprovedDraft(approvedBrief, brief);
+  const copyState = copyFeedback.context === brief ? copyFeedback.state : "idle";
 
   const copyBrief = async () => {
+    if (!briefApproved) {
+      setCopyFeedback({ context: brief, state: "approval-required" });
+      return;
+    }
     try {
       await navigator.clipboard.writeText(brief);
-      setCopyFeedback({ context: copyContext, state: "copied" });
+      setCopyFeedback({ context: brief, state: "copied" });
     } catch {
-      setCopyFeedback({ context: copyContext, state: "failed" });
+      setCopyFeedback({ context: brief, state: "failed" });
     }
   };
 
@@ -3339,16 +3344,29 @@ function EvidenceAuditor({
                 <span>Generated agent-review brief</span>
                 <strong>Categorical studio evidence only</strong>
               </div>
-              <button onClick={copyBrief} type="button">
-                Copy instructor brief
-              </button>
             </header>
             <textarea aria-label="Generated agent patch review brief" readOnly value={brief} />
+            <label className={styles.reviewBriefConsent}>
+              <input
+                checked={briefApproved}
+                onChange={(event) => {
+                  setApprovedBrief(event.target.checked ? brief : null);
+                  setCopyFeedback({ context: "", state: "idle" });
+                }}
+                type="checkbox"
+              />
+              <span>I reviewed this concise, categorical brief and choose to copy it manually.</span>
+            </label>
+            <button disabled={!briefApproved} onClick={copyBrief} type="button">
+              Copy approved instructor brief
+            </button>
             <small aria-live="polite">
               {copyState === "copied"
                 ? "Copied."
+                : copyState === "approval-required"
+                  ? "Review the current brief before copying it."
                 : copyState === "failed"
-                  ? "Clipboard unavailable; select the brief manually."
+                  ? "Clipboard unavailable; select only the reviewed brief manually."
                   : "No paths, raw code, or private revision text are included."}
             </small>
           </section>

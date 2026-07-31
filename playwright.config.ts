@@ -20,7 +20,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "pnpm start -- --port 4173",
+    command: "pnpm exec vinext start --port 4173",
     url: "http://127.0.0.1:4173",
     // A reused local server can be serving an older asset manifest after a
     // production build, which turns dynamic-import failures into misleading

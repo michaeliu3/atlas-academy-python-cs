@@ -23,6 +23,18 @@ answer selection, confidence, and whether an explanation is revealed. They
 must never persist source text, event records, names, policy decisions,
 capability-like values, or secrets.
 
+## Learner-controlled copies and prints
+
+Copying or printing a learner summary is manual and requires the learner to
+review the current concise draft first. The oral-defense, diagnostic, and M19
+evidence surfaces keep this approval only in temporary page state and bind it
+to the exact text being copied. If the draft changes, the prior approval is no
+longer valid. The diagnostic's print path opens only its concise learning brief,
+not the full result ledger.
+
+This is a user-interface consent boundary, not a claim that a browser can stop
+someone from selecting visible text manually or that any Notion write exists.
+
 ## Publication decision
 
 The repository is private by default. Before making any part public, review

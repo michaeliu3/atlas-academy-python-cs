@@ -487,6 +487,35 @@ test("keeps diagnostic route notes readable against their purpose-specific surfa
   );
 });
 
+test("diagnostic and M19 export actions require current learner approval before copying or printing", async () => {
+  const [diagnostic, studio] = await Promise.all([
+    readFile(new URL("../app/diagnostic/DiagnosticExperience.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ConcurrencyStudio.tsx", import.meta.url), "utf8"),
+  ]);
+  const evidence = extractFunctionSource(studio, "EvidenceAuditor");
+
+  assert.match(diagnostic, /canExportApprovedDraft/);
+  assert.match(diagnostic, /approvedLearningBrief/);
+  assert.match(
+    diagnostic,
+    /I reviewed this learning brief and approve copying or printing it myself\./,
+  );
+  assert.match(diagnostic, /disabled=\{!learningBriefApproved\}/);
+  assert.match(diagnostic, /Print approved brief/);
+  assert.doesNotMatch(diagnostic, /onClick=\{\(\) => window\.print\(\)\}/);
+  assert.match(diagnostic, /setApprovedLearningBrief\(null\)/);
+
+  assert.match(evidence, /canExportApprovedDraft\(approvedBrief, brief\)/);
+  assert.match(
+    evidence,
+    /I reviewed this concise, categorical brief and choose to copy it manually\./,
+  );
+  assert.match(evidence, /checked=\{briefApproved\}/);
+  assert.match(evidence, /disabled=\{!briefApproved\}/);
+  assert.match(evidence, /Copy approved instructor brief/);
+  assert.match(evidence, /setApprovedBrief\(event\.target\.checked \? brief : null\)/);
+});
+
 test("Module 18 OS studio preserves its canonical interactive contract", async () => {
   const studioUrl = new URL("../app/OperatingSystemsStudio.tsx", import.meta.url);
   const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
@@ -1378,7 +1407,7 @@ test("Module 19 evidence auditor uses the real fixture digest and per-axis patch
   assert.match(evidence, /record\.patchDecisions\[axis\.id\]/);
   assert.match(evidence, /\["accept", "reject", "split"\] as const/);
   assert.match(evidence, /aria-label="[^"]*patch[^"]*decision/i);
-  assert.match(evidence, /Copy instructor brief/i);
+  assert.match(evidence, /Copy approved instructor brief/i);
   assert.match(evidence, /What this proves/);
   assert.match(evidence, /What remains unknown/);
 });

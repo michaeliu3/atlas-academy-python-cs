@@ -16,6 +16,12 @@ actually published.
   contract fails closed if a required record, privacy exclusion, approval rule,
   or guide template drifts. This is a structured local workflow, not proof of
   a provisioned Notion workspace or an approved external export.
+- Bound diagnostic and M19 copy flows to exact, learner-approved volatile
+  drafts. A changed brief automatically invalidates approval; no approval is
+  stored in diagnostic or studio local progress. Diagnostic printing now opens
+  only the concise approved brief rather than printing the full result ledger.
+  This is a user-interface/minimum-data boundary, not a Notion integration or
+  a mechanism to prevent a learner from manually selecting visible text.
 - Added a versioned, hashed Course-CI evidence policy and pure verifier. It
   fails closed unless a supplied normalized snapshot binds the expected source
   branch head, same-repository run, workflow source digest, run attempt, and
