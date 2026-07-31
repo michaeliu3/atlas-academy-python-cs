@@ -264,6 +264,90 @@
         {"id": "m28-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module28_reference.py", "public/downloads/test_module28_reference.py"]},
         {"id": "m28-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m27",
+      "packetId": "m27-discrete-mathematics-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m02", "m04", "m05"],
+        "forwardModuleId": "m06",
+        "masteryGateId": "claims",
+        "studioId": "discrete-math-proof"
+      },
+      "workbookPath": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
+      "sourceMapPath": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module27_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m27-session-1", "usesPrerequisiteModuleIds": ["m02", "m04", "m05"], "forwardArtifactId": "m27-claim-interpretation-card"},
+        {"sessionNumber": 2, "pointerId": "m27-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m27-proof-repair-annotation"},
+        {"sessionNumber": 3, "pointerId": "m27-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m27-counting-recurrence-bound-sheet"},
+        {"sessionNumber": 4, "pointerId": "m27-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m27-graph-witness-sheet"},
+        {"sessionNumber": 5, "pointerId": "m27-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m27-order-euclid-trace"},
+        {"sessionNumber": 6, "pointerId": "m27-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m27-proof-evidence-dossier"}
+      ],
+      "pointers": [
+        {"id": "m27-course-map", "roles": ["prerequisite-map", "forward-handoff"], "label": "Canonical prerequisite and forward map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "12-prerequisite-and-forward-map"}},
+        {"id": "m27-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "3-session-1--definitions-logic-and-countermodels"}},
+        {"id": "m27-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "4-session-2--proof-construction-induction-invariants-and-extremal-choice"}},
+        {"id": "m27-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "5-session-3--counting-recurrences-generating-functions-and-asymptotics"}},
+        {"id": "m27-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "6-session-4--graphs-trees-connectivity-and-matchings"}},
+        {"id": "m27-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "7-session-5--partial-orders-lattices-and-elementary-number-theory"}},
+        {"id": "m27-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "8-session-6--integrate-the-models-proof-dossier-and-ai-review"}},
+        {"id": "m27-first-principle", "roles": ["first-principles"], "label": "Claim-interpretation first principle", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "first-principle-a-claim-needs-an-interpretation"}},
+        {"id": "m27-definition", "roles": ["definition"], "label": "Relation properties as definitions", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "35-relation-properties-are-testable-definitions"}},
+        {"id": "m27-assumption", "roles": ["assumption"], "label": "Claim-card assumptions", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "21-a-claim-card-before-a-solution"}},
+        {"id": "m27-derivation", "roles": ["derivation-proof"], "label": "Binomial recurrence derivation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "52-binomial-coefficients-derive-from-a-recurrence"}},
+        {"id": "m27-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Countermodel ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "b-countermodel"}},
+        {"id": "m27-numerical-experiment", "roles": ["numerical-experiment"], "label": "Formula-versus-enumeration numerical experiment", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md", "headingAnchor": "a-counting-formula-versus-enumeration"}},
+        {"id": "m27-code-reading", "roles": ["code-reading"], "label": "Session 1 code-reading task", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "session-1-code-reading-task"}},
+        {"id": "m27-debug", "roles": ["debugging"], "label": "Debug ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "f-debug"}},
+        {"id": "m27-design", "roles": ["design"], "label": "Design ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "g-design"}},
+        {"id": "m27-prediction", "roles": ["prediction"], "label": "Prediction before reveal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "predict-before-reveal--the-two-quantifiers"}},
+        {"id": "m27-transfer", "roles": ["transfer", "oral-transfer"], "label": "Transfer ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "h-transfer"}},
+        {"id": "m27-source-cards", "roles": ["source-rationale", "stable-learner-link"], "label": "Published sources with learner links", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "16-sources-licensing-and-a-responsible-reading-route"}},
+        {"id": "m27-claim-linkage", "roles": ["claim-linkage"], "label": "Source-to-session design", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md", "headingAnchor": "source-to-session-design"}},
+        {"id": "m27-license-route", "roles": ["license-reuse"], "label": "Asset-level license and reuse checks", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module27_source_audit_addendum.md", "headingAnchor": "audit-corrections-and-authoring-checks"}},
+        {"id": "m27-visual-studio", "roles": ["visual"], "label": "Proof and Counterexample Workbench", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "9-proof--counterexample-workbench"}},
+        {"id": "m27-text-alternative-candidate", "roles": ["text-alternative"], "label": "Workbench text-equivalent candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "9-proof--counterexample-workbench"}},
+        {"id": "m27-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "11-confidence-aware-diagnostic"}},
+        {"id": "m27-misconception", "roles": ["misconception"], "label": "Diagnostic repair pattern", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "interpret-the-pattern-not-the-score"}},
+        {"id": "m27-retrieval", "roles": ["retrieval"], "label": "Retrieval queue", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "retrieval-queue"}},
+        {"id": "m27-dossier", "roles": ["dossier"], "label": "Proof, Counterexample and Constraint Dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "12-atlas-project--proof-counterexample--constraint-dossier"}},
+        {"id": "m27-acceptance", "roles": ["acceptance-criteria"], "label": "Required evidence", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "required-evidence"}},
+        {"id": "m27-rubric", "roles": ["rubric"], "label": "Multi-evidence rubric", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "rubric-multi-evidence-never-passfail"}},
+        {"id": "m27-oral-protocol", "roles": ["oral-protocol"], "label": "Conversational oral-defense protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "14-conversational-oral-defense--m27"}},
+        {"id": "m27-oral-hint", "roles": ["oral-hint"], "label": "Oral-defense hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "hint-ladder"}},
+        {"id": "m27-oral-reflection", "roles": ["oral-reflection"], "label": "Constructive oral reflection", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "agenda-1218-minutes"}},
+        {"id": "m27-oral-summary", "roles": ["oral-summary"], "label": "Learner-controlled evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "end-of-defense-evidence-summary"}},
+        {"id": "m27-ta", "roles": ["ta"], "label": "TA proof and derivation clinic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "teaching-assistant--proof-and-derivation-clinic"}},
+        {"id": "m27-study-partner", "roles": ["study-partner"], "label": "Study Partner rehearsal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "study-partner--rehearsal-without-grading"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-course-map"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-session-1", "m27-session-2", "m27-session-3", "m27-session-4", "m27-session-5", "m27-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-definition", "m27-assumption", "m27-derivation", "m27-counterexample", "m27-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-code-reading", "m27-debug", "m27-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-source-cards", "m27-claim-linkage", "m27-license-route"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-visual-studio", "m27-text-alternative-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-diagnostic", "m27-misconception"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-dossier", "m27-acceptance", "m27-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-oral-protocol", "m27-oral-hint", "m27-counterexample", "m27-transfer", "m27-oral-reflection", "m27-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m27-course-map"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m27-studio", "kind": "studio", "paths": ["app/DiscreteMathProofStudio.tsx", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
+        {"id": "m27-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module27_reference.py", "public/downloads/test_module27_reference.py"]},
+        {"id": "m27-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }

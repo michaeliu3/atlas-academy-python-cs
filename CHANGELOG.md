@@ -37,6 +37,12 @@ actually published.
   Its historical rigor, code/design, source, visual/text, and diagnostic
   ambiguities remain explicitly unresolved; this does not change publication
   or human-review state.
+- Added M27's non-promoting structural packet: 35 typed local anchors now bind
+  its six-session discrete-mathematics spine, bounded studio/model artifacts,
+  source route, diagnostic, dossier, oral-defense, TA, and Study Partner
+  surfaces. Its historical rigor, code/design, source, visual/text, and
+  diagnostic ambiguities remain explicitly unresolved; this does not change
+  publication or human-review state.
 - Added a small deterministic M31-S01/S02 constrained-quadratic authoring
   fixture and teaching tests. It makes objective, gradient, feasibility, and a
   constrained-stationarity counterexample inspectable while M31 remains

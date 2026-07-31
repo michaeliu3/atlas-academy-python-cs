@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "58b3c66b76f9d391d40b2a6551420c8bf44488e5ceef08cad3da462653976e8f"
+      "sha256": "ab5b8dbeaff4bafc1e7a70048fcd08c4cd4a8c44ea203c51825fd40a1637af71"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -211,6 +211,10 @@
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
       "sha256": "06c9a64699af2c6cac17b23f0d951d826b2d0e5115fa9faf5f8ab66a5559f3a0"
+    },
+    {
+      "path": "content/source-maps/module27_source_audit_addendum.md",
+      "sha256": "2789a7df3a7e2c7840e3a9420601577fb2aab1ffddf9f53fb8c32c9d5f7ede39"
     },
     {
       "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
