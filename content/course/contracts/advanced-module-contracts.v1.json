@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "contractVersion": "v1",
   "kind": "atlas-advanced-module-contract-registry",
-  "purpose": "Record lifecycle-aware, checked-in authoring evidence for Modules 31–36 without turning plans, pointers, or research into learner publication, approval, CI, deployment, or mastery claims.",
+  "purpose": "Retain checked-in authoring evidence for Modules 31–36 without turning plans, pointers, or research into learner publication, approval, CI, deployment, or mastery claims. The unified v3 registry is the sole review and promotion authority.",
   "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "canonicalAuthoringBridge": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
   "truthBoundary": {
     "pointerPresent": "A resolving contract input proves only that a bounded local plan or research reference exists; it is not a learner artifact, quality review, or release claim.",
-    "reviewReady": "Review-ready means every non-release contract record has a structured, checked-in local evidence shape and remains unavailable to learners until independent human review and release evidence are separately recorded.",
-    "published": "Published requires graph, human-review, release-ready contract records, a source commit ancestor, and local provenance paths to agree. Remote CI and private deployment facts remain separately verifiable and must be recorded after the candidate commit exists."
+    "reviewReady": "The retained adapter may not enter review-ready. A future review-ready decision belongs only to the unified v3 registry, its module evidence record, and its digest-bound human review record.",
+    "published": "The retained adapter may not publish a module. A future verified release belongs only to the unified v3 registry and separately recorded source-commit, CI, deployment, and limitation evidence."
   },
   "contractStates": ["authoring-only", "review-ready", "published"],
   "evidenceStates": ["planned", "pointer-present", "reviewed", "release-ready"],

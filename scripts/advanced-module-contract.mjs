@@ -19,8 +19,13 @@ const execFileAsync = promisify(execFile);
 export const advancedModuleContractRelativePath =
   "content/course/contracts/advanced-module-contracts.v1.json";
 
+// This retained v1 record is deliberately an authoring adapter. The unified
+// v3 registry is the only authority for review-ready and verified promotion.
+// Keep the historical vocabulary in the JSON schema for compatibility, but
+// reject any non-authoring state at the adapter seam below.
 const contractStates = ["authoring-only", "review-ready", "published"];
 const evidenceStates = ["planned", "pointer-present", "reviewed", "release-ready"];
+const authoringAdapterState = "authoring-only";
 const allowedInputKinds = new Set(["file", "json-pointer", "markdown-heading"]);
 const allowedInputRoles = new Set(["course-content", "provenance", "source-code", "test"]);
 const ledgerInputRoles = new Set(["course-content", "provenance"]);
@@ -170,15 +175,6 @@ function sameOrderedValues(actual, expected) {
     Array.isArray(actual) &&
     actual.length === expected.length &&
     actual.every((value, index) => value === expected[index])
-  );
-}
-
-function sameMembers(actual, expected) {
-  return (
-    Array.isArray(actual) &&
-    actual.length === expected.length &&
-    new Set(actual).size === actual.length &&
-    actual.every((value) => expected.includes(value))
   );
 }
 
@@ -472,8 +468,8 @@ function validateEvidenceRequirementDefinitions(registry, errors) {
   return result;
 }
 
-function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
-  const label = `Module ${courseModule.number} graph snapshot`;
+function validateAuthoringAdapterSnapshot(courseModule, snapshot, errors) {
+  const label = `Module ${courseModule.number} authoring-adapter snapshot`;
   requireExactKeys(
     snapshot,
     [
@@ -492,8 +488,6 @@ function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
     ["number", courseModule.number],
     ["slug", courseModule.slug],
     ["forwardModuleNumber", courseModule.forwardModuleNumber],
-    ["sourceMap", courseModule.sourceMap],
-    ["studioId", courseModule.studioId],
   ]) {
     if (snapshot?.[field] !== expected) {
       errors.push(`${label}.${field} must match the canonical course graph.`);
@@ -502,36 +496,18 @@ function validateGraphSnapshot(courseModule, snapshot, contractState, errors) {
   if (!sameOrderedValues(snapshot?.academicPrerequisiteNumbers, courseModule.academicPrerequisiteNumbers)) {
     errors.push(`${label}.academicPrerequisiteNumbers must match the canonical course graph.`);
   }
-  if (JSON.stringify(snapshot?.state) !== JSON.stringify(courseModule.state)) {
-    errors.push(`${label}.state must match the canonical course graph.`);
+  const expectedSnapshotState = {
+    lifecycle: "authoring-only",
+    readerAccess: "hidden",
+    availability: "authoring-only",
+    contract: { track: "advanced-v1", state: "authoring-only" },
+    release: { state: "unrecorded", recordId: null },
+  };
+  if (JSON.stringify(snapshot?.state) !== JSON.stringify(expectedSnapshotState)) {
+    errors.push(`${label}.state must preserve the frozen hidden authoring-only snapshot.`);
   }
-
-  if (contractState === "authoring-only") {
-    if (courseModule.sourceMap !== null) {
-      errors.push(`Module ${courseModule.number} sourceMap must remain null while it is authoring-only.`);
-    }
-    if (courseModule.studioId !== null) {
-      errors.push(`Module ${courseModule.number} studioId must remain null while it is authoring-only.`);
-    }
-    if (courseModule.state?.release?.state !== "unrecorded") {
-      errors.push(`Module ${courseModule.number} release state must remain unrecorded while it is authoring-only.`);
-    }
-  }
-  if (contractState === "review-ready") {
-    if (!hasText(courseModule.sourceMap) || !hasText(courseModule.studioId)) {
-      errors.push(`Module ${courseModule.number} review-ready state requires a source map and studio or equivalent ID.`);
-    }
-    if (courseModule.state?.release?.state !== "unrecorded") {
-      errors.push(`Module ${courseModule.number} review-ready state may not make a release record claim.`);
-    }
-  }
-  if (contractState === "published") {
-    if (!hasText(courseModule.sourceMap) || !hasText(courseModule.studioId)) {
-      errors.push(`Module ${courseModule.number} published state requires a source map and studio or equivalent ID.`);
-    }
-    if (courseModule.state?.release?.state === "unrecorded") {
-      errors.push(`Module ${courseModule.number} published state requires a recorded graph release state.`);
-    }
+  if (snapshot?.sourceMap !== null || snapshot?.studioId !== null) {
+    errors.push(`${label} must preserve null sourceMap and studioId from the authoring snapshot.`);
   }
 }
 
@@ -755,22 +731,22 @@ async function validateVisibleMaterials(
   siteRoot,
   errors,
 ) {
-  const label = `Module ${courseModule.number} ${lifecycle} materials`;
+  const label = `Module ${courseModule.number} advanced authoring adapter materials`;
+  const learnerWorkbookInput = [...resolvedInputs.values()].find(({ path }) =>
+    /^content\/modules\/\d{2}_.*\.md$/u.test(path),
+  );
+  if (learnerWorkbookInput) {
+    errors.push(`${label} may not bind learner workbook ${learnerWorkbookInput.path}.`);
+  }
+  if (lifecycle === authoringAdapterState) return;
+
+  // This branch is intentionally unreachable for a valid adapter. Retaining
+  // it keeps malformed historical records diagnostic rather than silently
+  // accepting a legacy release shape.
   const manifestHasModule = manifest?.modules?.some(
     ({ id, number }) => id === courseModule.id || number === courseModule.number,
   );
   const readable = readableModuleIds.has(courseModule.id);
-  if (lifecycle === "authoring-only") {
-    if (manifestHasModule || readable) {
-      errors.push(`Module ${courseModule.number} is authoring-only but appears in a learner manifest or route.`);
-    }
-    const workbooks = await moduleWorkbookPaths(siteRoot, courseModule.number);
-    if (workbooks.length > 0) {
-      errors.push(`Module ${courseModule.number} is authoring-only but has a learner workbook in content/modules.`);
-    }
-    return;
-  }
-
   if (lifecycle === "review-ready" && (manifestHasModule || readable)) {
     errors.push(`Module ${courseModule.number} review-ready material must remain absent from learner manifests and routes.`);
   }
@@ -1037,24 +1013,12 @@ function validateReleaseEvidenceBindings(entry, evidence, release, resolvedInput
 function validateLifecycleEvidence(entry, evidence, lifecycle, errors) {
   const label = `advanced module-contract entry ${entry.moduleId}`;
   const records = [...evidence.byId.values()];
-  if (lifecycle === "authoring-only") {
-    if (records.some(({ state }) => !["planned", "pointer-present"].includes(state))) {
-      errors.push(`${label} authoring-only state may contain only planned or pointer-present evidence.`);
-    }
+  if (lifecycle !== authoringAdapterState) {
+    errors.push(`${label} advanced authoring adapter supports only ${authoringAdapterState} evidence.`);
     return;
   }
-  if (lifecycle === "review-ready") {
-    for (const record of records) {
-      const expected =
-        record.id === "release-provenance-ci-and-deployment-evidence" ? "planned" : "reviewed";
-      if (record.state !== expected) {
-        errors.push(`${label} review-ready state requires ${expected} evidence for ${record.id}.`);
-      }
-    }
-    return;
-  }
-  if (records.some(({ state }) => state !== "release-ready")) {
-    errors.push(`${label} published state requires every evidence record to be release-ready.`);
+  if (records.some(({ state }) => !["planned", "pointer-present"].includes(state))) {
+    errors.push(`${label} authoring-only state may contain only planned or pointer-present evidence.`);
   }
 }
 
@@ -1067,9 +1031,10 @@ export async function loadAdvancedModuleContractRegistry(siteRoot = defaultSiteR
 }
 
 /**
- * A passing result proves only checked-in structure and state relationships.
- * Human review, GitHub CI, private deployment, and learner mastery remain
- * distinct evidence that must be recorded outside this local structural gate.
+ * A passing result proves only frozen advanced authoring inputs and topology.
+ * The unified v3 registry—not this retained adapter—owns review-ready and
+ * verified promotion. Human review, GitHub CI, private deployment, and learner
+ * mastery remain distinct evidence.
  */
 export async function validateAdvancedModuleContractRegistry(
   graph,
@@ -1240,27 +1205,15 @@ export async function validateAdvancedModuleContractRegistry(
       errors.push(`${entryLabel} contractState is not recognized.`);
       continue;
     }
-    const expectedPublicationEffect = lifecycle === "published" ? "published" : "none";
-    if (entry.publicationEffect !== expectedPublicationEffect) {
+    if (lifecycle !== authoringAdapterState) {
+      errors.push(`${entryLabel} advanced authoring adapter supports only ${authoringAdapterState}.`);
+    }
+    if (entry.publicationEffect !== "none") {
       errors.push(
-        `${entryLabel} may not claim an eligible-for-publication effect before the graph and full release contract are published.`,
+        `${entryLabel} advanced authoring adapter may not claim a publication effect.`,
       );
     }
-    if (
-      (lifecycle === "authoring-only" || lifecycle === "review-ready") &&
-      (courseModule.state?.lifecycle !== "authoring-only" ||
-        courseModule.state?.availability !== "authoring-only")
-    ) {
-      errors.push(`${entryLabel} ${lifecycle} state must remain authoring-only and unavailable to learners.`);
-    }
-    if (
-      lifecycle === "published" &&
-      (courseModule.state?.lifecycle !== "learner-material-ready" ||
-        courseModule.state?.availability !== "published")
-    ) {
-      errors.push(`${entryLabel} published state must match a published graph module.`);
-    }
-    validateGraphSnapshot(courseModule, entry.graphSnapshot, lifecycle, errors);
+    validateAuthoringAdapterSnapshot(courseModule, entry.graphSnapshot, errors);
 
     const inputs = await resolveContractInputs(entry, siteRoot, errors);
     for (const path of inputs.ledgerInputPaths) {
@@ -1300,7 +1253,7 @@ export async function validateAdvancedModuleContractRegistry(
 
     if (lifecycle === "authoring-only") {
       if (!review.allPending) {
-        errors.push(`${entryLabel} may not record human approval before publication.`);
+        errors.push(`${entryLabel} advanced authoring adapter human-review fields must remain pending.`);
       }
       if (entry.release !== null) {
         errors.push(`${entryLabel} may not declare a release record before publication.`);
@@ -1343,26 +1296,13 @@ export async function validateAdvancedModuleContractRegistry(
     });
   }
 
-  const advancedLifecycleHasTransitioned = advancedModules.some(
-    ({ state }) => state?.lifecycle !== "authoring-only",
-  );
-  if (advancedLifecycleHasTransitioned && !sameMembers([...entriesByModuleId.keys()], expectedScopeIds)) {
-    errors.push(
-      "A transitioned advanced lifecycle requires lifecycle-aware contract entries for all Modules 31–36 before the legacy bridge can become historical-only validation evidence.",
-    );
-  }
-  for (const courseModule of advancedModules) {
-    if (courseModule.state?.lifecycle !== "authoring-only" && !entriesByModuleId.has(courseModule.id)) {
-      errors.push(`transitioned advanced Module ${courseModule.number} requires a lifecycle-aware contract entry.`);
-    }
-  }
   advancedContractFailure(errors);
   return {
     registry,
     modules: reportModules,
     releaseInputPaths: [...releaseInputPaths],
     provenanceDocumentationPaths: [...provenanceDocumentationPaths].sort(),
-    legacyBridgeValidationRequired: !advancedLifecycleHasTransitioned,
+    legacyBridgeValidationRequired: true,
     bridgeTopologyValidated,
     summary: {
       authoringOnlyContracts: reportModules.filter(({ contractState }) => contractState === "authoring-only").length,
@@ -1382,6 +1322,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   ]);
   const report = await validateAdvancedModuleContractRegistry(graph, registry);
   console.log(
-    `Advanced module contract: ${report.summary.authoringOnlyContracts} authoring-only, ${report.summary.reviewedContracts} review-ready, ${report.summary.releaseReadyContracts} published; ${report.summary.resolvedContractInputs} resolved contract inputs.`,
+    `Advanced authoring adapter: ${report.summary.authoringOnlyContracts} authoring-only record(s); ${report.summary.resolvedContractInputs} resolved contract inputs.`,
   );
 }

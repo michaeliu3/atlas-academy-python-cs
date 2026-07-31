@@ -32,7 +32,7 @@ import {
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 
-test("the lifecycle-aware advanced contract validates M31 authoring evidence without publication", async () => {
+test("the retained advanced authoring adapter validates M31 evidence without publication", async () => {
   const [graph, registry] = await Promise.all([
     loadCourseGraph(),
     loadAdvancedModuleContractRegistry(),
@@ -52,6 +52,37 @@ test("the lifecycle-aware advanced contract validates M31 authoring evidence wit
   assert.equal(report.modules[0].promotionBlock.learnerManifest, "absent");
 });
 
+test("the retained advanced contract is an authoring adapter, not M31's later promotion authority", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleContractRegistry(),
+  ]);
+  const laterGraph = structuredClone(graph);
+  const m31 = laterGraph.modules.find(({ id }) => id === "m31");
+  m31.sourceMap = "content/source-maps/module31_optimization_information_source_map.md";
+  m31.studioId = "optimization-information";
+  m31.state.contract.state = "review-ready";
+
+  const report = await validateAdvancedModuleContractRegistry(laterGraph, registry);
+  assert.equal(report.modules[0].moduleId, "m31");
+  assert.equal(report.modules[0].contractState, "authoring-only");
+  assert.equal(report.modules[0].publicationEffect, "none");
+
+  const forgedLifecycle = structuredClone(registry);
+  forgedLifecycle.modules[0].contractState = "review-ready";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, forgedLifecycle),
+    /advanced authoring adapter.*authoring-only/i,
+  );
+
+  const forgedApproval = structuredClone(registry);
+  forgedApproval.modules[0].humanReview["first-principles-quality"] = "approved";
+  await assert.rejects(
+    validateAdvancedModuleContractRegistry(graph, forgedApproval),
+    /advanced authoring adapter.*pending/i,
+  );
+});
+
 test("the advanced contract rejects premature M31 promotion and broken authoring evidence", async () => {
   const [graph, registry] = await Promise.all([
     loadCourseGraph(),
@@ -62,7 +93,7 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
   prematurePromotion.modules[0].publicationEffect = "eligible-for-publication";
   await assert.rejects(
     validateAdvancedModuleContractRegistry(graph, prematurePromotion),
-    /may not claim an eligible-for-publication effect/u,
+    /advanced authoring adapter may not claim a publication effect/u,
   );
 
   const missingSession = structuredClone(registry);
@@ -97,12 +128,12 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     /does not contain that visible heading/u,
   );
 
-  const alteredGraph = structuredClone(graph);
-  alteredGraph.modules.find(({ id }) => id === "m31").sourceMap =
+  const alteredSnapshot = structuredClone(registry);
+  alteredSnapshot.modules[0].graphSnapshot.sourceMap =
     "content/source-maps/module31_optimization_information_source_map.md";
   await assert.rejects(
-    validateAdvancedModuleContractRegistry(alteredGraph, registry),
-    /sourceMap must remain null while it is authoring-only/u,
+    validateAdvancedModuleContractRegistry(graph, alteredSnapshot),
+    /preserve null sourceMap and studioId from the authoring snapshot/u,
   );
 
   const malformedInputs = structuredClone(registry);
@@ -119,16 +150,6 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     /Advanced module-contract validation failed:[\s\S]*contract evidence must match/u,
   );
 
-  const prematureLifecycleTransition = structuredClone(graph);
-  const module32 = prematureLifecycleTransition.modules.find(({ id }) => id === "m32");
-  module32.state.lifecycle = "learner-material-ready";
-  module32.state.readerAccess = "full";
-  module32.state.availability = "published";
-  await assert.rejects(
-    validateAdvancedModuleContractRegistry(prematureLifecycleTransition, registry),
-    /requires lifecycle-aware contract entries for all Modules 31–36/u,
-  );
-
   const brokenBridgeTopology = await loadAdvancedModuleBridgeLedger();
   brokenBridgeTopology.modules[0].prerequisiteBridges[0].firstConsumingSessionId = "m31-s06";
   await assert.rejects(
@@ -138,13 +159,11 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
     /must preserve canonical bridge topology[\s\S]*first declared use/u,
   );
 
-  await assert.rejects(
-    validateAdvancedModuleContractRegistry(graph, registry, {
+  const manifestIndependent = await validateAdvancedModuleContractRegistry(graph, registry, {
       learnerManifest: { modules: [{ id: "m31", number: 31 }] },
       learnerReadableModuleIds: ["m31"],
-    }),
-    /authoring-only but appears in a learner manifest or route/u,
-  );
+    });
+  assert.equal(manifestIndependent.modules[0].moduleId, "m31");
 });
 
 test("advanced provenance inputs use fixed historical records or narrow module-scoped slots", () => {

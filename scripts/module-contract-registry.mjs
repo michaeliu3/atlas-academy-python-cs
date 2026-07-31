@@ -351,7 +351,7 @@ function validateSource(source, label, errors) {
   }
   const allowedKinds = new Set([
     "legacy-audit-criterion",
-    "advanced-contract-evidence",
+    "advanced-authoring-adapter-evidence",
     "advanced-bridge-plan",
     "module-evidence-criterion",
   ]);
@@ -683,11 +683,11 @@ function validateLegacyBaseline(moduleEntry, graphModule, audit, manifestById, e
   }
 }
 
-function validateM31Authoring(moduleEntry, graphModule, advancedRegistry, manifestById, errors) {
+function validateM31AuthoringAdapter(moduleEntry, graphModule, advancedRegistry, manifestById, errors) {
   const advancedIndex = advancedRegistry.modules.findIndex(({ moduleId }) => moduleId === "m31");
   const advancedModule = advancedRegistry.modules[advancedIndex];
   if (!advancedModule) {
-    errors.push("M31 authoring-only v3 entry requires the advanced v1 contract record.");
+    errors.push("M31 authoring-only v3 entry requires the retained advanced authoring adapter record.");
     return;
   }
   if (
@@ -701,10 +701,10 @@ function validateM31Authoring(moduleEntry, graphModule, advancedRegistry, manife
   migrationPointer(
     advancedRegistry,
     moduleEntry.migration,
-    "advanced-contract",
+    "advanced-authoring-adapter",
     advancedModuleContractRelativePath,
     `/modules/${advancedIndex}`,
-    "M31 authoring-only",
+    "M31 authoring-only adapter",
     errors,
   );
   requirePendingReview(moduleEntry, errors);
@@ -726,13 +726,24 @@ function validateM31Authoring(moduleEntry, graphModule, advancedRegistry, manife
       errors.push(`M31 criterion ${criterion.id} must preserve its advanced contract evidence state.`);
     }
     if (
-      criterion.source.kind !== "advanced-contract-evidence" ||
+      criterion.source.kind !== "advanced-authoring-adapter-evidence" ||
       criterion.source.path !== advancedModuleContractRelativePath ||
       criterion.source.locator !== expectedLocator ||
       resolveJsonPointer(advancedRegistry, criterion.source.locator) !== sourceEvidence.evidence
     ) {
-      errors.push(`M31 criterion ${criterion.id} must bind its advanced contract evidence.`);
+      errors.push(`M31 criterion ${criterion.id} must bind its advanced authoring-adapter evidence.`);
     }
+  }
+}
+
+function requireV3PromotionAuthority(moduleEntry, errors) {
+  const adapterCriteria = moduleEntry.criteria.filter(
+    ({ source }) => source?.kind === "advanced-authoring-adapter-evidence",
+  );
+  if (adapterCriteria.length > 0) {
+    errors.push(
+      `Module ${moduleEntry.moduleId} ${moduleEntry.contractState} state may not use advanced authoring-adapter evidence as promotion authority; every criterion must bind its module-evidence record.`,
+    );
   }
 }
 
@@ -1074,6 +1085,7 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, mani
 }
 
 async function validatePromotableState(siteRoot, moduleEntry, graphModule, manifestById, graph, errors) {
+  requireV3PromotionAuthority(moduleEntry, errors);
   const promotionEvidence = await resolvePromotionEvidence(
     siteRoot,
     moduleEntry,
@@ -1281,7 +1293,7 @@ export async function validateModuleContractRegistry(
     if (moduleEntry.contractState === "legacy-baseline" && legacyAudit) {
       validateLegacyBaseline(moduleEntry, graphModule, legacyAudit, manifestById, errors);
     } else if (moduleEntry.contractState === "authoring-only" && advancedRegistry) {
-      validateM31Authoring(moduleEntry, graphModule, advancedRegistry, manifestById, errors);
+      validateM31AuthoringAdapter(moduleEntry, graphModule, advancedRegistry, manifestById, errors);
     } else if (moduleEntry.contractState === "not-started" && bridgeLedger) {
       validateAdvancedPlan(moduleEntry, graphModule, bridgeLedger, manifestById, errors);
     } else if (["review-ready", "verified"].includes(moduleEntry.contractState)) {

@@ -193,7 +193,7 @@ export async function validateCourseContracts(
     }
   } catch (error) {
     errors.push(
-      `Lifecycle-aware advanced module contract must remain valid before advanced authoring or publication: ${error instanceof Error ? error.message : String(error)}`,
+      `Retained advanced authoring adapter must remain valid as checked-in authoring evidence: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 

@@ -101,19 +101,22 @@ human approval. Do not use it to call a module verified, Core-open, or
 released. Extend the evidence model only after its review fields and release
 semantics can be validated without weakening the active v3 strict gate.
 
-### Advanced-module lifecycle contract
+### Retained advanced-authoring adapter
 
 `content/course/contracts/advanced-module-contracts.v1.json` and
 `scripts/advanced-module-contract.mjs` are a retained advanced-authoring
-adapter for M31–M36. They feed the unified v3 registry; they do not supersede
-it, extend an active v1 registry, or reuse the narrow M21/M27 pointer pilot.
+adapter for M31–M36. They preserve frozen authoring inputs, bridge topology,
+and negative publication boundaries. The unified v3 registry is the sole
+authority for review-ready and verified promotion; this adapter never
+supersedes it, extends an active v1 lifecycle, or reuses the narrow M21/M27
+pointer pilot.
 
-Its `contractState` values (`authoring-only`, `review-ready`, and `published`)
-are contract-lifecycle terms, not aliases for the v2 graph state. A contract
-entry can reach its own `published` state only when the graph also makes the
-module learner-material-ready, fully reader-accessible, and Core-open; it
-still does not make a private-deployment claim without separate release
-evidence.
+The retained JSON preserves historical `review-ready` and `published`
+vocabulary for audit readability, but a valid adapter entry may be only
+`authoring-only`: pending human-review fields, `publicationEffect: none`, no
+delivery map, and no release record. Its authoring snapshot is intentionally
+frozen. Later v3 review or release changes must not mutate that snapshot or
+make the adapter compare itself to live learner material.
 
 The initial M31 record is **authoring-only**. It resolves a bounded set of
 checked-in planning and research inputs, including the canonical prerequisite
@@ -125,19 +128,12 @@ manifest, learner route, learner workbook, graph-bound source map, learner
 studio, human review, and release record. A bounded source-code/test pointer
 does not make the fixture learner-facing, reviewed, deployed, or published.
 
-The contract uses three states:
-
-1. `authoring-only`: plan/pointer evidence only; no learner material or
-   release-shaped claim.
-2. `review-ready`: a real but still hidden workbook, source map, interaction
-   implementation, reference model, and teaching tests exist as checked-in
-   inputs. All non-release evidence is structured, but human approval and
-   release evidence remain pending.
-3. `published` (advanced-contract lifecycle): graph, manifest, route,
-   workbook, source map, interaction, tests, every review dimension, every
-   release-ready evidence record, and a locally resolvable release record
-   agree. It must also map to the v2 graph's full reader access and Core-open
-   availability; it is not itself proof of an external deployment.
+The adapter has one accepted state: `authoring-only`, meaning plan/pointer
+evidence only and no learner/release-shaped claim. A future M31–M36 v3
+`review-ready` entry must resolve its own module evidence record and
+digest-bound human review; a future v3 `verified` entry must also preserve the
+review-ready bundle and bind release provenance. Neither transition may reuse
+the adapter's criteria as promotion evidence.
 
 Each contract input has a versioned role. `course-content` and `provenance`
 inputs are included in the generated course-input hash ledger; `source-code`
@@ -152,31 +148,29 @@ normal `pnpm test` command discovers that exact set deterministically, so a
 module cannot satisfy the contract by naming an inert test file that CI never
 executes.
 
-Do not insert a final candidate SHA or Actions URL into the same commit that
-needs that evidence. First create and validate the candidate commit; then make
-a later additive provenance commit that records the exact candidate SHA, CI
-run, review/source paths, limitations, and—only after it occurs—private
-deployment version. The validator requires that candidate SHA to be a **strict
-ancestor** of the provenance record, that every non-provenance contract input
-is present and byte-identical at that candidate, and that the release evidence
-paths are provenance-role inputs that visibly name that SHA and run URL. Do
-not amend, squash, or rewrite history to manufacture self-referential release
-evidence.
+For a future v3 verified release, do not insert a final candidate SHA or
+Actions URL into the same commit that needs that evidence. First create and
+validate the candidate commit; then make a later additive provenance commit
+that records the exact candidate SHA, CI run, review/source paths,
+limitations, and—only after it occurs—private deployment version. The v3 gate
+requires that candidate SHA to be a **strict ancestor** of the provenance
+record, that every non-provenance input is byte-identical at that candidate,
+and that release evidence paths visibly name that SHA and run URL. Do not
+amend, squash, or rewrite history to manufacture self-referential evidence.
 
 Those checks bind local Git evidence; they do not query GitHub Actions,
 GitHub's review state, or private hosting. Record and independently verify
 those remote facts in `docs/RELEASE_PROVENANCE.md` before making a release or
 deployment claim.
 
-While every M31–M36 graph entry is authoring-only, the historical bridge
-validator remains active. After any advanced lifecycle transition, all six
-modules must have lifecycle-aware contracts. The lifecycle-aware validator
-continues to enforce the canonical bridge's prerequisite topology, first use,
-session order, and forward handoffs before that historical authoring-only gate
-can step back from live gating.
+The historical bridge validator remains active for every M31–M36 authoring
+plan. It enforces the canonical prerequisite topology, first use, session
+order, and forward handoffs, but it is never a substitute for v3 evidence,
+review, release, or learner access validation.
 
-For `review-ready` and `published` advanced modules, add a candidate-hashed
-`deliveryMapInputId` pointing to a course-content JSON delivery map. That map
+For future v3 `review-ready` and `verified` advanced modules, create a
+candidate-hashed delivery map pointing to a course-content JSON delivery map.
+That map
 must bind the exact workbook and source-map paths to the canonical six-session
 sequence, per-session prerequisite use, first-consuming bridge artifacts, and
 forward handoff. It is deliberately a small structural declaration—not a
@@ -184,15 +178,15 @@ prose-heading check and not a claim that the explanation, visual, or learner
 experience has passed human review. An `authoring-only` entry must keep this
 field `null`.
 
-Advanced `provenance` inputs under `docs/` are deliberately narrow: the
-historical `M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` remains part of the
-hashed ledger, and future module-specific evidence may use only
-`docs/advanced-evidence/mXX/provenance.md`, `source-review.md`, or
-`known-limitations.md` for that same module. The ledger is derived from the
-validated contract; arbitrary documentation cannot become a release input.
-For a published contract, those three release-record fields must use their
-corresponding exact filenames rather than reusing the historical audit or one
-another.
+Advanced release inputs under `docs/` are deliberately narrow: the historical
+`M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` remains part of the hashed
+ledger, while a future v3 verified module must use only
+`docs/module-evidence/mXX/provenance.md`, `source-review.md`,
+`known-limitations.md`, and `course-ci-evidence.v1.json` for that same module.
+The ledger is derived from the validated v3 contract; arbitrary documentation
+cannot become a release input. Each release-record field must use its
+corresponding exact filename rather than reusing the historical audit or
+another field's evidence.
 
 ## Legacy structural packets
 

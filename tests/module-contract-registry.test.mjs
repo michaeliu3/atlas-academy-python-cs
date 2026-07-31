@@ -286,3 +286,31 @@ test("a review-ready transition needs resolved module-specific evidence rather t
     /requires resolved module-specific evidence/i,
   );
 });
+
+test("a review-ready M31 cannot promote its retained authoring-adapter pointers", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleContractRegistry(),
+  ]);
+  const candidateGraph = copy(graph);
+  const candidateRegistry = copy(registry);
+  const graphM31 = candidateGraph.modules.find(({ id }) => id === "m31");
+  const registryM31 = candidateRegistry.modules.find(({ moduleId }) => moduleId === "m31");
+
+  graphM31.sourceMap = "content/source-maps/module31_optimization_information_source_map.md";
+  graphM31.studioId = "optimization-information";
+  graphM31.state.contract.state = "review-ready";
+  registryM31.contractState = "review-ready";
+  registryM31.criteria = registryM31.criteria.map((criterion) => ({
+    ...criterion,
+    status: "reviewed",
+  }));
+  registryM31.humanReview = Object.fromEntries(
+    candidateRegistry.humanReviewDimensions.map((dimension) => [dimension, "approved"]),
+  );
+
+  await assert.rejects(
+    () => validateModuleContractRegistry(candidateGraph, candidateRegistry),
+    /may not use advanced authoring-adapter evidence as promotion authority/i,
+  );
+});

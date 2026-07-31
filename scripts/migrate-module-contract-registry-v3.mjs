@@ -154,7 +154,7 @@ async function main() {
         return {
           ...base,
           migration: {
-            kind: "advanced-contract",
+            kind: "advanced-authoring-adapter",
             path: advancedContractPath,
             locator: "/modules/0",
           },
@@ -165,7 +165,7 @@ async function main() {
               id,
               status: advancedEvidence.evidence.state,
               source: {
-                kind: "advanced-contract-evidence",
+                kind: "advanced-authoring-adapter-evidence",
                 path: advancedContractPath,
                 locator: `/modules/0/evidence/${advancedEvidence.index}`,
               },

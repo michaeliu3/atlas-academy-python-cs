@@ -5683,7 +5683,7 @@
       "reviewReadyCommit": null,
       "release": null,
       "migration": {
-        "kind": "advanced-contract",
+        "kind": "advanced-authoring-adapter",
         "path": "content/course/contracts/advanced-module-contracts.v1.json",
         "locator": "/modules/0"
       },
@@ -5692,7 +5692,7 @@
           "id": "prerequisite-forward-map",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/0"
           }
@@ -5701,7 +5701,7 @@
           "id": "six-connected-sessions",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/1"
           }
@@ -5710,7 +5710,7 @@
           "id": "first-principles",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/2"
           }
@@ -5719,7 +5719,7 @@
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/3"
           }
@@ -5728,7 +5728,7 @@
           "id": "code-reading-debugging-design",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/2"
           }
@@ -5737,7 +5737,7 @@
           "id": "prediction-before-reveal",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/2"
           }
@@ -5746,7 +5746,7 @@
           "id": "transfer-task",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/2"
           }
@@ -5755,7 +5755,7 @@
           "id": "source-ledger",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/4"
           }
@@ -5764,7 +5764,7 @@
           "id": "accessible-visual-text-alternative",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/5"
           }
@@ -5773,7 +5773,7 @@
           "id": "confidence-diagnostic-misconceptions",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/6"
           }
@@ -5782,7 +5782,7 @@
           "id": "retrieval-and-spaced-review",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/7"
           }
@@ -5791,7 +5791,7 @@
           "id": "project-and-evidence-rubric",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/8"
           }
@@ -5800,7 +5800,7 @@
           "id": "supportive-oral-defense",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/9"
           }
@@ -5809,7 +5809,7 @@
           "id": "ta-prompt",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/10"
           }
@@ -5818,7 +5818,7 @@
           "id": "study-partner-prompt",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/10"
           }
@@ -5827,7 +5827,7 @@
           "id": "forward-handoff",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/10"
           }
@@ -5836,7 +5836,7 @@
           "id": "interaction-reference-model-and-teaching-tests",
           "status": "pointer-present",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/11"
           }
@@ -5845,7 +5845,7 @@
           "id": "release-provenance-ci-and-deployment-evidence",
           "status": "planned",
           "source": {
-            "kind": "advanced-contract-evidence",
+            "kind": "advanced-authoring-adapter-evidence",
             "path": "content/course/contracts/advanced-module-contracts.v1.json",
             "locator": "/modules/0/evidence/12"
           }

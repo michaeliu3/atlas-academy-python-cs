@@ -52,6 +52,11 @@ flowchart LR
   latter binds one exact guide entry by digest and must follow the graph's
   academic forward handoff; it does not itself open a reader, create a chat,
   write Notion, or establish learner progress.
+- `advanced-module-contracts.v1.json` is a retained M31–M36 authoring adapter:
+  it freezes authoring inputs and prerequisite topology only. It cannot enter
+  review-ready or published state, inspect or govern live learner material, or
+  serve as promotion evidence. The unified v3 registry owns future module
+  evidence, digest-bound review, release provenance, and availability changes.
 - The content/modules directory and content/source-maps directory are
   checked-in, release-canonical course material. Synchronization reads only
   these repository-local inputs; it never falls back to an adjacent authoring

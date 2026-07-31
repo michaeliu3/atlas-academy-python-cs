@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "8a432ef9c2c358ce64f13d87628bbce77053feba33cd0cbb70fc375a29b91593"
+      "sha256": "1c381fcbe9488680590f97198d23f6fb236b72664db177ac4021dc1af8a6d20d"
     },
     {
       "path": "content/course/contracts/companions/m31.v1.json",
@@ -34,7 +34,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "0ef949a29504e261c01238f671fab796f3d29c1211634db915e82de59f7de20e"
+      "sha256": "7ac0d40cb49799bd6567584e578aa7601c8a028db98caf11900020fa246373aa"
     },
     {
       "path": "content/course/course-graph.v2.json",

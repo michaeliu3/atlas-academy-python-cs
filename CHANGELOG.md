@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Made the unified v3 registry the sole M31–M36 review/promotion authority.
+  The retained advanced-v1 record now validates only frozen authoring inputs,
+  pending-review boundaries, and bridge topology; it cannot enter
+  review-ready/published state, inspect live learner material, or supply v3
+  promotion criteria. Regression fixtures prove a later M31 v3 review can
+  retain the adapter without inheriting its status or pointers.
 - Added the first individually versioned, promotion-grade learning-companion
   record for hidden M31. It binds the exact M31 global-guide entry by digest,
   keeps TA and Study Partner contexts distinct, and enforces the canonical
