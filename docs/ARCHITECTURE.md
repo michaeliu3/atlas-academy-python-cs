@@ -146,9 +146,25 @@ strict gate remains the standard for a verified contract or release claim.
 For future promotion, the registry does not trust criterion labels alone.
 Review-ready requires a module-scoped evidence record that resolves all 18
 criteria to Git-tracked local inputs, plus a digest-bound module review record.
-Verified additionally preserves that bundle from an earlier review-ready
-commit and binds a strict candidate commit, its source-commit CI policy and
-evidence, unchanged candidate blobs, matching graph release record, scoped
-provenance/source-review/limitation documents, and an actual private deployment
-version. Those are auditable boundaries, not claims of learner mastery or a
-security-clean system.
+For a hidden future learner candidate, the registry additionally resolves only
+the fixed `content/course/contracts/review-candidates/mNN.v1.json` selector:
+it freezes the eventual module workbook, source-ledger scope, and visual
+Markdown scope from one clean Git-index snapshot without creating a manifest,
+route, approval, or release. It cannot point at an instructor authoring
+workbook or authoring-delivery map. The evidence record must bind that exact
+selector as one `review-candidate-delivery` JSON-document-root input before
+its digest-bound review can count. Verified additionally preserves that
+bundle from an earlier review-ready commit and must match the frozen selector
+to its manifest workbook and graph source map, then bind a strict candidate
+commit, source-commit CI policy and evidence, unchanged candidate blobs,
+matching graph release record, scoped provenance/source-review/limitation
+documents, and an actual private deployment version. Those are auditable
+boundaries, not claims of learner mastery or a security-clean system.
+
+The sole pre-write exception is the module synchronizer's deterministic
+manifest projection. After the future graph, registry, evidence, review, and
+selector inputs are staged, it may compare its in-memory next manifest with
+the frozen candidate scope in `integrity` mode. It cannot substitute graph,
+registry, evidence, review, or selector facts, and normal course validation
+returns to the exact clean Git-index manifest after the generated file is
+staged.

@@ -67,6 +67,30 @@ and a real private deployment version. These checks establish a bounded
 release record; they do not convert review evidence into a learner-mastery or
 security-clean claim. No module has entered either promotion state yet.
 
+For a future hidden learner candidate, use the fixed module-scoped selector
+`content/course/contracts/review-candidates/mNN.v1.json`. It binds the final
+future `content/modules/NN_*.md` workbook, module-scoped source-ledger paths,
+and the Markdown visual scope to the exact v3 evidence record. The selector is
+read with the evidence, review, companion, visual, and test inputs from one
+clean Git-index snapshot. It cannot use an instructor `content/authoring/`
+workbook, an authoring-delivery map, a manifest, a studio, or release fields.
+The evidence record must contain exactly one `review-candidate-delivery`
+JSON-pointer input at the selector document root, so its digest-bound review
+cannot approve a different candidate scope.
+At `review-ready` the selector deliberately supplies the material scope while
+the graph remains hidden and has no manifest/source-map binding; at `verified`
+the manifest workbook and graph source map must agree with that frozen scope.
+It is neither approval nor deployment evidence. No M31 selector exists yet.
+
+When a verified transition changes reader visibility, stage the future graph,
+v3 registry, evidence, review, selector, and learner material first, then run
+the module synchronizer to generate the next manifest. Its only pre-write
+allowance is that deterministic in-memory manifest; all other promotion facts
+must already match one clean Git-index snapshot. Stage the generated manifest
+and rerun ordinary course validation, which again requires exact index
+agreement. This convenience is never available to strict, complete, or release
+validation.
+
 Use the right gate for the claim being made:
 
 ~~~text
@@ -212,15 +236,14 @@ plan. It enforces the canonical prerequisite topology, first use, session
 order, and forward handoffs, but it is never a substitute for v3 evidence,
 review, release, or learner access validation.
 
-For future v3 `review-ready` and `verified` advanced modules, create a
-candidate-hashed delivery map pointing to a course-content JSON delivery map.
-That map
-must bind the exact workbook and source-map paths to the canonical six-session
-sequence, per-session prerequisite use, first-consuming bridge artifacts, and
-forward handoff. It is deliberately a small structural declaration—not a
-prose-heading check and not a claim that the explanation, visual, or learner
-experience has passed human review. An `authoring-only` entry must keep this
-field `null`.
+For future v3 `review-ready` and `verified` advanced modules, create the
+separate fixed hidden-review-candidate selector described above. A later
+learner-delivery map may additionally bind the exact workbook/source-map paths
+to the six-session sequence, prerequisite use, first-consuming bridge
+artifacts, and forward handoff, but it cannot replace the selector or reuse an
+authoring delivery map as promotion authority. These declarations remain small
+structural checks—not prose-quality or learner-experience approval. An
+`authoring-only` entry keeps the adapter's delivery-map field `null`.
 
 Advanced release inputs under `docs/` are deliberately narrow: the historical
 `M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` remains part of the hashed

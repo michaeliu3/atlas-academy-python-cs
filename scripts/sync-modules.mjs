@@ -400,10 +400,12 @@ const manifest = {
   arcs: courseGraph.knowledgeArcs.filter((arc) => modules.some(({ arcId }) => arcId === arc.id)),
   modules,
 };
-// During a publication promotion, the checked-in manifest still describes the
-// previous graph until this synchronizer writes the new projection. Validate
-// against that deterministic in-memory projection here; validate-course.mjs
-// separately verifies the checked-in result on the next clean run.
+// During a publication promotion, the clean Git index still contains the
+// previous manifest until this synchronizer writes the new deterministic
+// projection. The narrowly scoped pre-write mode permits only that manifest
+// projection; promotion graph, registry, evidence, review, and selector facts
+// must still match one clean Git-index snapshot. validate-course.mjs then
+// verifies the generated manifest normally after it has been staged.
 const advancedModuleContractRegistry = await loadAdvancedModuleContractRegistry(siteRoot);
 const advancedModuleContractReport = await validateAdvancedModuleContractRegistry(
   courseGraph,
@@ -421,7 +423,7 @@ const moduleContractRegistry = await loadModuleContractRegistry(siteRoot);
 const moduleContractRegistryReport = await validateModuleContractRegistry(
   courseGraph,
   moduleContractRegistry,
-  { siteRoot, manifest },
+  { siteRoot, manifest, manifestTruth: "pre-write-projection" },
 );
 for (const path of moduleContractRegistryReport.releaseInputPaths) {
   releaseInputPaths.add(path);

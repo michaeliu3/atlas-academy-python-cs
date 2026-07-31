@@ -52,9 +52,12 @@ const inputRoles = new Set([
   "test",
   "provenance",
   "learning-companion",
+  "review-candidate-delivery",
 ]);
 const learningCompanionPathPattern =
   /^content\/course\/contracts\/companions\/m(?:0[1-9]|[1-9]\d)\.v1\.json$/u;
+const reviewCandidateDeliveryPathPattern =
+  /^content\/course\/contracts\/review-candidates\/m(?:0[1-9]|[1-9]\d)\.v1\.json$/u;
 const discoveredNodeTestPathPattern = /^tests\/[a-z0-9][a-z0-9._-]*\.test\.mjs$/u;
 const discoveredPythonTeachingTestPathPattern =
   /^public\/downloads\/test_module(?:0[1-9]|[1-9]\d)_reference\.py$/u;
@@ -256,6 +259,22 @@ async function resolveEvidenceInput(
   if (!validLearningCompanionPath) {
     errors.push(`${label} learning-companion role must use a canonical module-scoped companion JSON path.`);
   }
+  const validReviewCandidateDeliveryKind =
+    input.role !== "review-candidate-delivery" || input.kind === "json-pointer";
+  if (!validReviewCandidateDeliveryKind) {
+    errors.push(`${label} review-candidate-delivery role must use a JSON Pointer input.`);
+  }
+  const validReviewCandidateDeliveryPath =
+    input.role !== "review-candidate-delivery" ||
+    (repositoryPath !== null && reviewCandidateDeliveryPathPattern.test(repositoryPath));
+  if (!validReviewCandidateDeliveryPath) {
+    errors.push(`${label} review-candidate-delivery role must use a canonical module-scoped review-candidate JSON path.`);
+  }
+  const validReviewCandidateDeliveryLocator =
+    input.role !== "review-candidate-delivery" || input.locator === "";
+  if (!validReviewCandidateDeliveryLocator) {
+    errors.push(`${label} review-candidate-delivery role must bind the JSON-document root.`);
+  }
   const validTestKind = input.role !== "test" || input.kind === "file";
   if (!validTestKind) {
     errors.push(`${label} test role must use a file input.`);
@@ -272,6 +291,9 @@ async function resolveEvidenceInput(
     !repositoryPath ||
     !validLearningCompanionKind ||
     !validLearningCompanionPath ||
+    !validReviewCandidateDeliveryKind ||
+    !validReviewCandidateDeliveryPath ||
+    !validReviewCandidateDeliveryLocator ||
     !validTestKind ||
     !validTestPath
   ) return null;

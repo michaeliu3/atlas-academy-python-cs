@@ -86,7 +86,7 @@ const expectedM31ReleaseCriterionLimitation =
   "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.";
 const expectedM31CandidateDocumentationPath = "docs/module-evidence/m31/candidate-preflight.md";
 const expectedM31CandidateDocumentationDigest =
-  "sha256:2a80f263eedc507702b2755ccd16f6264554b32e68b00a45d89090676c96a2d3";
+  "sha256:d33e105b3fecf19cfb41d16e15e444db671a6cf5fc2964d7f800575309eac01c";
 const expectedM31AuthoringWorkbookPath =
   "content/authoring/m31_optimization_information_workbook.v1.md";
 const expectedM31AuthoringDeliveryMapPath =

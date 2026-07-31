@@ -6,6 +6,8 @@ import {
   promotionLearningCompanionErrors,
   promotionEvidenceRoleErrors,
   promotionEvidenceRoleRequirements,
+  promotionReviewCandidateDeliveryErrors,
+  promotionEvidenceScopeErrors,
   promotionVisualAlternativeErrors,
   validateModuleContractRegistry,
 } from "../scripts/module-contract-registry.mjs";
@@ -42,10 +44,139 @@ test("the unified v3 module-contract registry covers the canonical 36-module gra
   );
 });
 
+test("the synchronizer-only pre-write manifest projection cannot weaken release validation", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleContractRegistry(),
+  ]);
+
+  await assert.rejects(
+    () => validateModuleContractRegistry(graph, registry, {
+      manifestTruth: "pre-write-projection",
+    }),
+    /requires the synchronizer's supplied manifest/i,
+  );
+  await assert.rejects(
+    () => validateModuleContractRegistry(graph, registry, {
+      manifest: { modules: [] },
+      mode: "strict",
+      manifestTruth: "pre-write-projection",
+    }),
+    /only available to integrity validation/i,
+  );
+  await assert.rejects(
+    () => validateModuleContractRegistry(graph, registry, {
+      manifest: { modules: [] },
+      manifestTruth: "untrusted-worktree",
+    }),
+    /Unknown module-contract registry v3 manifest truth mode/i,
+  );
+});
+
 test("a promotion cannot bypass authored visual-alternative content and its test evidence", () => {
   assert.deepEqual(
     promotionEvidenceRoleRequirements["accessible-visual-text-alternative"],
     ["course-content", "test"],
+  );
+});
+
+test("a hidden review candidate supplies the scope that a review-ready module deliberately lacks", () => {
+  const materialScope = {
+    workbookPath: "content/modules/31_optimization_information.md",
+    sourceLedgerPaths: ["content/source-maps/module31_optimization_information.md"],
+    visualContentPaths: ["content/modules/31_optimization_information.md"],
+  };
+  const evidenceReport = {
+    evidenceByCriterion: new Map([
+      [
+        "six-connected-sessions",
+        {
+          criterionId: "six-connected-sessions",
+          resolvedInputs: [
+            {
+              role: "course-content",
+              path: materialScope.workbookPath,
+            },
+          ],
+        },
+      ],
+      [
+        "source-ledger-claim-license-reuse-links",
+        {
+          criterionId: "source-ledger-claim-license-reuse-links",
+          resolvedInputs: [
+            {
+              role: "source-ledger",
+              path: materialScope.sourceLedgerPaths[0],
+            },
+          ],
+        },
+      ],
+    ]),
+  };
+  const reviewReady = promotionEvidenceScopeErrors({
+    moduleEntry: { moduleId: "m31", contractState: "review-ready" },
+    graphModule: { sourceMap: null },
+    manifestById: new Map(),
+    evidenceReport,
+    materialScope,
+  });
+  assert.deepEqual(reviewReady, []);
+
+  const verified = promotionEvidenceScopeErrors({
+    moduleEntry: { moduleId: "m31", contractState: "verified" },
+    graphModule: { sourceMap: materialScope.sourceLedgerPaths[0] },
+    manifestById: new Map([["m31", { filename: "31_optimization_information.md" }]]),
+    evidenceReport,
+    materialScope,
+  });
+  assert.deepEqual(verified, []);
+
+  const swappedManifest = promotionEvidenceScopeErrors({
+    moduleEntry: { moduleId: "m31", contractState: "verified" },
+    graphModule: { sourceMap: materialScope.sourceLedgerPaths[0] },
+    manifestById: new Map([["m31", { filename: "31_different_workbook.md" }]]),
+    evidenceReport,
+    materialScope,
+  });
+  assert.ok(swappedManifest.some((error) => error.includes("frozen hidden candidate workbook")));
+});
+
+test("a promotion evidence record binds the exact hidden selector before human review", () => {
+  const selectorPath = "content/course/contracts/review-candidates/m31.v1.json";
+  const materialScope = {
+    selectorPath,
+    selectorBlobOid: "a".repeat(40),
+    selectorSha256: `sha256:${"b".repeat(64)}`,
+    selector: { moduleId: "m31", workbookPath: "content/modules/31_optimization_information.md" },
+  };
+  const exactInput = {
+    kind: "json-pointer",
+    role: "review-candidate-delivery",
+    path: selectorPath,
+    locator: "",
+    blobOid: materialScope.selectorBlobOid,
+    sha256: materialScope.selectorSha256,
+    value: structuredClone(materialScope.selector),
+  };
+  const evidenceReport = { resolvedInputs: [exactInput] };
+  assert.deepEqual(
+    promotionReviewCandidateDeliveryErrors({ moduleId: "m31" }, evidenceReport, materialScope),
+    [],
+  );
+
+  const changedBlob = {
+    resolvedInputs: [{ ...exactInput, sha256: `sha256:${"c".repeat(64)}` }],
+  };
+  assert.ok(
+    promotionReviewCandidateDeliveryErrors({ moduleId: "m31" }, changedBlob, materialScope)
+      .some((error) => error.includes("exact captured selector blob")),
+  );
+
+  const missingRole = { resolvedInputs: [] };
+  assert.ok(
+    promotionReviewCandidateDeliveryErrors({ moduleId: "m31" }, missingRole, materialScope)
+      .some((error) => error.includes("exactly one review-candidate-delivery")),
   );
 });
 
@@ -312,5 +443,55 @@ test("a review-ready M31 cannot promote its retained authoring-adapter pointers"
   await assert.rejects(
     () => validateModuleContractRegistry(candidateGraph, candidateRegistry),
     /may not use advanced authoring-adapter evidence as promotion authority/i,
+  );
+});
+
+test("a future M31 lifecycle keeps the authoring bridge topology without treating it as promotion authority", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleContractRegistry(),
+  ]);
+  const candidateGraph = copy(graph);
+  const candidateRegistry = copy(registry);
+  const graphM31 = candidateGraph.modules.find(({ id }) => id === "m31");
+  const registryM31 = candidateRegistry.modules.find(({ moduleId }) => moduleId === "m31");
+
+  graphM31.sourceMap = "content/source-maps/module31_optimization_information_source_map.md";
+  graphM31.studioId = "optimization-information";
+  graphM31.state = {
+    lifecycle: "learner-material-ready",
+    readerAccess: "full",
+    availability: "published",
+    contract: { track: "advanced-v1", state: "verified" },
+    release: { state: "deployed-recorded", recordId: "m31-future-deployment" },
+  };
+  registryM31.contractState = "verified";
+  registryM31.criteria = registryM31.criteria.map((criterion) => ({
+    ...criterion,
+    status: "release-ready",
+  }));
+  registryM31.humanReview = Object.fromEntries(
+    candidateRegistry.humanReviewDimensions.map((dimension) => [dimension, "approved"]),
+  );
+  registryM31.reviewReadyCommit = "0123456789abcdef0123456789abcdef01234567";
+  registryM31.release = {
+    recordId: "m31-future-deployment",
+    sourceCommit: "0123456789abcdef0123456789abcdef01234567",
+    ciRunUrl: "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/1",
+    ciEvidencePath: "docs/module-evidence/m31/course-ci-evidence.v1.json",
+    candidateInputPaths: [],
+    provenancePath: "docs/module-evidence/m31/provenance.md",
+    sourceReviewPath: "docs/module-evidence/m31/source-review.md",
+    knownLimitationsPath: "docs/module-evidence/m31/known-limitations.md",
+    privateDeploymentVersion: "future-fixture",
+  };
+
+  await assert.rejects(
+    () => validateModuleContractRegistry(candidateGraph, candidateRegistry),
+    (error) => {
+      assert.match(error.message, /requires resolved module-specific evidence/i);
+      assert.doesNotMatch(error.message, /bridge is an authoring-only plan/i);
+      return true;
+    },
   );
 });

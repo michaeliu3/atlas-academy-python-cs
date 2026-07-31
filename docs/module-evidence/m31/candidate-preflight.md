@@ -49,8 +49,10 @@ source map, approves learner delivery, or changes the graph's release tuple.
 ## Required path before promotion
 
 1. Keep M31 authoring-only and hidden until a reviewed delivery design supplies
-   a canonical source-map and appropriate learner-facing interaction or
-   equivalent, without weakening prerequisite gates.
+   a separate fixed hidden review-candidate selector, canonical learner source
+   ledger, and appropriate learner-facing interaction or equivalent, without
+   weakening prerequisite gates. That selector must not reuse this authoring
+   workbook or its authoring-delivery map as promotion authority.
 2. Conduct explicit independent review of the workbook, source/claim/license
    boundaries, visual and accessibility behavior, diagnostic/rubric quality,
    and the TA/Study Partner/oral-defense flow on a preserved review-ready

@@ -1,5 +1,4 @@
 import { execFile } from "node:child_process";
-import { createHash } from "node:crypto";
 import { lstat, readFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
@@ -18,6 +17,7 @@ import {
   advancedModuleBridgeRelativePath,
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeLedger,
+  validateAdvancedModuleBridgeTopology,
 } from "./advanced-module-bridge.mjs";
 import { validateCourseGraph } from "./course-graph.mjs";
 import {
@@ -33,6 +33,11 @@ import {
   validateModuleEvidenceRecord,
   validateModuleReviewRecord,
 } from "./module-review-evidence.mjs";
+import { openGitIndexSnapshot } from "./git-index-snapshot.mjs";
+import {
+  hiddenReviewCandidateRelativePath,
+  resolveHiddenReviewCandidateScope,
+} from "./hidden-review-candidate.mjs";
 import {
   moduleLearningCompanionRelativePath,
   validateModuleLearningCompanion,
@@ -471,10 +476,6 @@ function recordReference(reference, expectedKind, label, errors) {
   return reference.kind === expectedKind && path && path.endsWith(".json") && reference.locator === ""
     ? path
     : null;
-}
-
-function sha256(value) {
-  return createHash("sha256").update(value, "utf8").digest("hex");
 }
 
 function moduleReleaseDocumentationPath(moduleId, field) {
@@ -950,14 +951,16 @@ export function promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceRe
 
 /**
  * Role labels and resolving anchors are still insufficient when they point at
- * another module. Every future promotion must cite the manifest-selected
- * workbook and the graph-selected source map for the module under review.
+ * another module. A review-ready module instead has a frozen, hidden
+ * candidate scope; a verified module must agree with both that frozen scope
+ * and the manifest/graph truth selected at release.
  */
 export function promotionEvidenceScopeErrors({
   moduleEntry,
   graphModule,
   manifestById,
   evidenceReport,
+  materialScope = null,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
   const errors = [];
@@ -967,25 +970,74 @@ export function promotionEvidenceScopeErrors({
     : null;
   const canonicalSourceMapPath = graphModule.sourceMap;
 
-  if (!canonicalWorkbookPath) {
+  const promotionState = moduleEntry.contractState;
+  const requiresHiddenCandidate = ["review-ready", "verified"].includes(promotionState);
+  if (requiresHiddenCandidate && !materialScope) {
+    errors.push(`${label} cannot resolve its fixed hidden review-candidate selector.`);
+  }
+  if (promotionState === "review-ready" && canonicalWorkbookPath) {
+    errors.push(`${label} review-ready state may not resolve a manifest-selected workbook.`);
+  }
+  if (promotionState === "review-ready" && canonicalSourceMapPath !== null) {
+    errors.push(`${label} review-ready state may not resolve a graph-selected source map.`);
+  }
+  if (promotionState === "verified" && !canonicalWorkbookPath) {
     errors.push(`${label} cannot resolve its manifest-selected canonical workbook.`);
   }
-  if (typeof canonicalSourceMapPath !== "string" || canonicalSourceMapPath === "") {
+  if (
+    promotionState === "verified" &&
+    (typeof canonicalSourceMapPath !== "string" || canonicalSourceMapPath === "")
+  ) {
+    errors.push(`${label} cannot resolve its graph-selected canonical source map.`);
+  }
+  if (!requiresHiddenCandidate && !canonicalWorkbookPath) {
+    errors.push(`${label} cannot resolve its manifest-selected canonical workbook.`);
+  }
+  if (
+    !requiresHiddenCandidate &&
+    (typeof canonicalSourceMapPath !== "string" || canonicalSourceMapPath === "")
+  ) {
     errors.push(`${label} cannot resolve its graph-selected canonical source map.`);
   }
 
+  const expectedWorkbookPath = materialScope?.workbookPath ?? canonicalWorkbookPath;
+  const expectedSourceLedgerPaths = materialScope?.sourceLedgerPaths ?? [canonicalSourceMapPath];
+  const workbookLabel = materialScope ? "scoped workbook" : "canonical workbook";
+  if (promotionState === "verified" && materialScope) {
+    if (materialScope.workbookPath !== canonicalWorkbookPath) {
+      errors.push(
+        `${label} verified manifest workbook ${canonicalWorkbookPath} must equal its frozen hidden candidate workbook ${materialScope.workbookPath}.`,
+      );
+    }
+    if (!materialScope.sourceLedgerPaths.includes(canonicalSourceMapPath)) {
+      errors.push(
+        `${label} verified graph source map ${canonicalSourceMapPath} must be frozen in its hidden candidate source-ledger scope.`,
+      );
+    }
+  }
+
+  const boundSourceLedgerPaths = new Set();
+
   for (const entry of evidenceReport.evidenceByCriterion.values()) {
     for (const input of entry.resolvedInputs ?? []) {
-      if (input.role === "course-content" && input.path !== canonicalWorkbookPath) {
+      if (input.role === "course-content" && input.path !== expectedWorkbookPath) {
         errors.push(
-          `${label} criterion ${entry.criterionId} must bind canonical workbook ${canonicalWorkbookPath}; found ${input.path}.`,
+          `${label} criterion ${entry.criterionId} must bind ${workbookLabel} ${expectedWorkbookPath}; found ${input.path}.`,
         );
       }
-      if (input.role === "source-ledger" && input.path !== canonicalSourceMapPath) {
+      if (input.role === "source-ledger") {
+        boundSourceLedgerPaths.add(input.path);
+      }
+      if (input.role === "source-ledger" && !expectedSourceLedgerPaths.includes(input.path)) {
         errors.push(
-          `${label} criterion ${entry.criterionId} must bind canonical source map ${canonicalSourceMapPath}; found ${input.path}.`,
+          `${label} criterion ${entry.criterionId} must bind a scoped source ledger; found ${input.path}.`,
         );
       }
+    }
+  }
+  for (const sourceLedgerPath of expectedSourceLedgerPaths.filter((path) => typeof path === "string")) {
+    if (!boundSourceLedgerPaths.has(sourceLedgerPath)) {
+      errors.push(`${label} must bind its scoped source ledger ${sourceLedgerPath}.`);
     }
   }
   return errors;
@@ -1294,6 +1346,7 @@ export async function promotionVisualAlternativeErrors({
   graphModule,
   manifestById,
   evidenceReport,
+  materialScope = null,
   snapshot = null,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed visual evidence`;
@@ -1312,13 +1365,25 @@ export async function promotionVisualAlternativeErrors({
   const canonicalWorkbookPath = manifestModule?.filename
     ? `content/modules/${manifestModule.filename}`
     : null;
+  const expectedWorkbookPath = materialScope?.workbookPath ?? canonicalWorkbookPath;
+  const expectedVisualContentPaths = materialScope?.visualContentPaths ?? null;
+  const workbookLabel = materialScope ? "scoped workbook" : "canonical workbook";
 
   if (contentPaths.length === 0) {
     errors.push(`${label} must bind module-scoped course-content Markdown for its Mermaid alternatives.`);
     return { contentPaths, errors };
   }
-  if (canonicalWorkbookPath && !contentPaths.includes(canonicalWorkbookPath)) {
-    errors.push(`${label} must bind canonical workbook ${canonicalWorkbookPath}.`);
+  if (expectedWorkbookPath && !contentPaths.includes(expectedWorkbookPath)) {
+    errors.push(`${label} must bind ${workbookLabel} ${expectedWorkbookPath}.`);
+  }
+  if (
+    expectedVisualContentPaths &&
+    (
+      contentPaths.length !== expectedVisualContentPaths.length ||
+      expectedVisualContentPaths.some((path) => !contentPaths.includes(path))
+    )
+  ) {
+    errors.push(`${label} must bind exactly the frozen hidden candidate visual-content scope.`);
   }
   for (const contentPath of contentPaths) {
     if (!moduleScopedVisualContentPath(graphModule, contentPath)) {
@@ -1350,7 +1415,143 @@ export async function promotionVisualAlternativeErrors({
   return { contentPaths, errors };
 }
 
-async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, manifestById, graph, errors) {
+const promotionCanonicalGraphPath = "content/course/course-graph.v2.json";
+const promotionCanonicalManifestPath = "content/modules/manifest.json";
+const promotionCanonicalRegistryPath = moduleContractRegistryRelativePath;
+
+function sameJsonValue(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function promotionGraphModuleIdentity(module) {
+  return {
+    id: module?.id ?? null,
+    number: module?.number ?? null,
+    slug: module?.slug ?? null,
+    sourceMap: module?.sourceMap ?? null,
+    studioId: module?.studioId ?? null,
+    state: module?.state ?? null,
+  };
+}
+
+export async function resolvePromotionSnapshotContext({
+  snapshot,
+  graphModule,
+  manifestById,
+  moduleEntry,
+  moduleId,
+  manifestTruth = "git-index",
+}) {
+  if (!["git-index", "pre-write-projection"].includes(manifestTruth)) {
+    throw new Error(`Unknown promotion manifest truth mode: ${manifestTruth}.`);
+  }
+  if (!(manifestById instanceof Map)) {
+    throw new Error("promotion manifest facts must be supplied as a Map keyed by module ID.");
+  }
+  await snapshot.assertClean([
+    promotionCanonicalGraphPath,
+    promotionCanonicalManifestPath,
+    promotionCanonicalRegistryPath,
+  ]);
+  const [graphRecord, manifestRecord, registryRecord] = await Promise.all([
+    snapshot.readJson(promotionCanonicalGraphPath),
+    snapshot.readJson(promotionCanonicalManifestPath),
+    snapshot.readJson(promotionCanonicalRegistryPath),
+  ]);
+  validateCourseGraph(graphRecord.value);
+  if (!Array.isArray(manifestRecord.value?.modules)) {
+    throw new Error("captured canonical module manifest must define modules.");
+  }
+  const snapshotGraphModule = graphRecord.value.modules.find(({ id }) => id === moduleId);
+  if (!snapshotGraphModule) {
+    throw new Error(`captured canonical graph must contain ${moduleId}.`);
+  }
+  const snapshotRegistryEntry = registryRecord.value?.modules?.find(
+    (entry) => entry?.moduleId === moduleId,
+  );
+  if (!snapshotRegistryEntry) {
+    throw new Error(`captured canonical module-contract registry must contain ${moduleId}.`);
+  }
+  const snapshotManifestById = new Map(
+    manifestRecord.value.modules.map((module) => [module.id, module]),
+  );
+  if (!sameJsonValue(
+    promotionGraphModuleIdentity(graphModule),
+    promotionGraphModuleIdentity(snapshotGraphModule),
+  )) {
+    throw new Error(`supplied ${moduleId} graph facts must match the captured canonical graph snapshot.`);
+  }
+  if (
+    manifestTruth === "git-index" &&
+    !sameJsonValue(manifestById.get(moduleId) ?? null, snapshotManifestById.get(moduleId) ?? null)
+  ) {
+    throw new Error(`supplied ${moduleId} manifest facts must match the captured canonical manifest snapshot.`);
+  }
+  if (!sameJsonValue(moduleEntry, snapshotRegistryEntry)) {
+    throw new Error(`supplied ${moduleId} contract facts must match the captured canonical registry snapshot.`);
+  }
+  const snapshotGraphByNumber = new Map(
+    graphRecord.value.modules.map((module) => [module.number, module]),
+  );
+  return Object.freeze({
+    graph: graphRecord.value,
+    graphModule: Object.freeze({
+      ...snapshotGraphModule,
+      __moduleByNumber: snapshotGraphByNumber,
+    }),
+    // Only the synchronizer may opt into a deterministic, in-memory manifest
+    // projection before it writes the generated manifest. Every other source
+    // of promotion truth still comes from the clean index snapshot, and later
+    // validation defaults back to the checked-in manifest.
+    manifestById: manifestTruth === "pre-write-projection"
+      ? new Map(manifestById)
+      : snapshotManifestById,
+  });
+}
+
+export function promotionReviewCandidateDeliveryErrors(moduleEntry, evidenceReport, materialScope) {
+  const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
+  const expectedPath = hiddenReviewCandidateRelativePath(moduleEntry.moduleId);
+  const candidateInputs = evidenceReport.resolvedInputs.filter(
+    ({ role }) => role === "review-candidate-delivery",
+  );
+  const exactInputs = candidateInputs.filter(
+    (input) => (
+      input.kind === "json-pointer" &&
+      input.path === expectedPath &&
+      input.locator === ""
+    ),
+  );
+  const errors = [];
+  if (candidateInputs.length !== 1 || exactInputs.length !== 1) {
+    errors.push(
+      `${label} must bind exactly one review-candidate-delivery JSON Pointer ${expectedPath} at the document root.`,
+    );
+    return errors;
+  }
+  const [input] = exactInputs;
+  if (!materialScope) {
+    errors.push(`${label} cannot resolve its bound review-candidate-delivery selector.`);
+    return errors;
+  }
+  if (
+    input.blobOid !== materialScope.selectorBlobOid ||
+    input.sha256 !== materialScope.selectorSha256 ||
+    !sameJsonValue(input.value, materialScope.selector)
+  ) {
+    errors.push(`${label} review-candidate-delivery input must resolve the exact captured selector blob.`);
+  }
+  return errors;
+}
+
+async function resolvePromotionEvidence(
+  siteRoot,
+  moduleEntry,
+  graphModule,
+  manifestById,
+  errors,
+  { manifestTruth = "git-index" } = {},
+) {
   const label = `Module ${moduleEntry.moduleId}`;
   const evidencePath = recordReference(
     moduleEntry.evidenceRecord,
@@ -1377,32 +1578,89 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, mani
     errors.push(`${label} reviewRecord.path must be ${expectedReviewPath}.`);
   }
 
+  let snapshot = null;
+  let snapshotContext = null;
+  try {
+    snapshot = await openGitIndexSnapshot(siteRoot);
+    await snapshot.assertClean([
+      evidencePath,
+      reviewPath,
+      promotionCanonicalGraphPath,
+      promotionCanonicalManifestPath,
+      promotionCanonicalRegistryPath,
+    ]);
+    snapshotContext = await resolvePromotionSnapshotContext({
+      snapshot,
+      graphModule,
+      manifestById,
+      moduleEntry,
+      moduleId: moduleEntry.moduleId,
+      manifestTruth,
+    });
+  } catch (error) {
+    errors.push(
+      `${label} requires one clean Git-index snapshot for evidence, review, graph, and manifest facts: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return null;
+  }
+
   let evidenceRecord = null;
   let evidenceReport = null;
-  let evidenceDigest = null;
   try {
-    evidenceRecord = await loadModuleEvidenceRecord(evidencePath, { siteRoot });
+    evidenceRecord = await loadModuleEvidenceRecord(evidencePath, { siteRoot, snapshot });
     evidenceReport = await validateModuleEvidenceRecord(evidenceRecord, {
       siteRoot,
       expectedModuleId: moduleEntry.moduleId,
       requiredCriterionIds: criterionIds,
+      snapshot,
     });
-    evidenceDigest = `sha256:${sha256(await readFile(resolve(siteRoot, evidencePath), "utf8"))}`;
   } catch (error) {
     errors.push(`${label} requires resolved module-specific evidence: ${error instanceof Error ? error.message : String(error)}`);
   }
 
+  let materialScope = null;
+  if (evidenceReport) {
+    try {
+      materialScope = await resolveHiddenReviewCandidateScope({
+        siteRoot,
+        moduleId: moduleEntry.moduleId,
+        evidenceRecordPath: evidencePath,
+        snapshot,
+      });
+    } catch (error) {
+      errors.push(
+        `${label} requires a fixed hidden review-candidate selector: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+    errors.push(...promotionReviewCandidateDeliveryErrors(
+      moduleEntry,
+      evidenceReport,
+      materialScope,
+    ));
+  }
+
   let reviewRecord = null;
   let reviewReport = null;
+  let evidenceDigest = null;
+  if (evidenceReport) {
+    try {
+      evidenceDigest = (await snapshot.readText(evidencePath)).sha256;
+    } catch (error) {
+      errors.push(
+        `${label} evidence record must remain in the captured Git-index generation: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
   if (evidenceDigest) {
     try {
-      reviewRecord = await loadModuleReviewRecord(reviewPath, { siteRoot });
+      reviewRecord = await loadModuleReviewRecord(reviewPath, { siteRoot, snapshot });
       reviewReport = await validateModuleReviewRecord(reviewRecord, {
         siteRoot,
         expectedModuleId: moduleEntry.moduleId,
         expectedEvidenceRecordPath: evidencePath,
         expectedEvidenceRecordDigest: evidenceDigest,
         requiredCriterionIds: criterionIds,
+        snapshot,
       });
     } catch (error) {
       errors.push(`${label} requires a review record bound to its resolved evidence: ${error instanceof Error ? error.message : String(error)}`);
@@ -1437,63 +1695,95 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, mani
       errors.push(`${label} criterion ${criterion.id} must bind its exact resolved module-evidence record entry.`);
     }
   }
-  requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport, errors);
+  const effectiveGraphModule = snapshotContext.graphModule;
+  const effectiveManifestById = snapshotContext.manifestById;
+  requirePromotionEvidenceRoles(moduleEntry, effectiveGraphModule, evidenceReport, errors);
   errors.push(...promotionEvidenceScopeErrors({
     moduleEntry,
-    graphModule,
-    manifestById,
+    graphModule: effectiveGraphModule,
+    manifestById: effectiveManifestById,
     evidenceReport,
+    materialScope,
   }));
   const testEvidenceErrors = await promotionEvidenceTestErrors({
     siteRoot,
     moduleEntry,
-    graphModule,
+    graphModule: effectiveGraphModule,
     evidenceReport,
+    snapshot,
   });
   errors.push(...testEvidenceErrors);
   const learningCompanionErrors = await promotionLearningCompanionErrors({
     siteRoot,
     moduleEntry,
-    graph,
+    graph: snapshotContext.graph,
     evidenceReport,
+    snapshot,
   });
   errors.push(...learningCompanionErrors);
   const visualEvidence = await promotionVisualAlternativeErrors({
     siteRoot,
     moduleEntry,
-    graphModule,
-    manifestById,
+    graphModule: effectiveGraphModule,
+    manifestById: effectiveManifestById,
     evidenceReport,
+    materialScope,
+    snapshot,
   });
   errors.push(...visualEvidence.errors);
+  const candidateInputPaths = [
+    evidencePath,
+    reviewPath,
+    ...evidenceReport.releaseInputPaths,
+    ...(materialScope?.candidateInputPaths ?? []),
+  ].filter((path, index, paths) => paths.indexOf(path) === index).sort();
+  try {
+    await snapshot.assertClean([
+      ...candidateInputPaths,
+      promotionCanonicalGraphPath,
+      promotionCanonicalManifestPath,
+      promotionCanonicalRegistryPath,
+    ]);
+  } catch (error) {
+    errors.push(
+      `${label} promotion inputs must remain one clean captured Git-index generation: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
   return {
     evidencePath,
     reviewPath,
     evidenceReport,
     reviewReport,
-    candidateInputPaths: [
-      evidencePath,
-      reviewPath,
-      ...evidenceReport.releaseInputPaths,
-    ].filter((path, index, paths) => paths.indexOf(path) === index).sort(),
+    materialScope,
+    snapshotContext,
+    candidateInputPaths,
   };
 }
 
-async function validatePromotableState(siteRoot, moduleEntry, graphModule, manifestById, graph, errors) {
+async function validatePromotableState(
+  siteRoot,
+  moduleEntry,
+  graphModule,
+  manifestById,
+  errors,
+  { manifestTruth = "git-index" } = {},
+) {
   requireV3PromotionAuthority(moduleEntry, errors);
   const promotionEvidence = await resolvePromotionEvidence(
     siteRoot,
     moduleEntry,
     graphModule,
     manifestById,
-    graph,
     errors,
+    { manifestTruth },
   );
+  const effectiveGraphModule = promotionEvidence?.snapshotContext?.graphModule ?? graphModule;
+  const effectiveManifestById = promotionEvidence?.snapshotContext?.manifestById ?? manifestById;
   if (moduleEntry.contractState === "review-ready") {
     if (
-      graphModule.state.lifecycle !== "authoring-only" ||
-      graphModule.state.readerAccess !== "hidden" ||
-      manifestById.has(moduleEntry.moduleId)
+      effectiveGraphModule.state.lifecycle !== "authoring-only" ||
+      effectiveGraphModule.state.readerAccess !== "hidden" ||
+      effectiveManifestById.has(moduleEntry.moduleId)
     ) {
       errors.push(`Review-ready Module ${moduleEntry.moduleId} must remain hidden until verified release.`);
     }
@@ -1513,11 +1803,11 @@ async function validatePromotableState(siteRoot, moduleEntry, graphModule, manif
 
   if (moduleEntry.contractState === "verified") {
     if (
-      graphModule.state.lifecycle !== "learner-material-ready" ||
-      graphModule.state.readerAccess !== "full" ||
-      graphModule.state.availability !== "published" ||
-      graphModule.state.release.state !== "deployed-recorded" ||
-      !manifestById.has(moduleEntry.moduleId)
+      effectiveGraphModule.state.lifecycle !== "learner-material-ready" ||
+      effectiveGraphModule.state.readerAccess !== "full" ||
+      effectiveGraphModule.state.availability !== "published" ||
+      effectiveGraphModule.state.release.state !== "deployed-recorded" ||
+      !effectiveManifestById.has(moduleEntry.moduleId)
     ) {
       errors.push(`Verified Module ${moduleEntry.moduleId} requires full reader access, Core availability, a manifest entry, and deployed release evidence.`);
     }
@@ -1530,13 +1820,13 @@ async function validatePromotableState(siteRoot, moduleEntry, graphModule, manif
     const releasePaths = await validateRelease(
       siteRoot,
       moduleEntry,
-      graphModule,
+      effectiveGraphModule,
       promotionEvidence,
       errors,
     );
     if (["m25", "m26"].includes(moduleEntry.moduleId)) {
-      for (const prerequisiteNumber of graphModule.academicPrerequisiteNumbers) {
-        const prerequisiteModule = graphModule.__moduleByNumber?.get(prerequisiteNumber);
+      for (const prerequisiteNumber of effectiveGraphModule.academicPrerequisiteNumbers) {
+        const prerequisiteModule = effectiveGraphModule.__moduleByNumber?.get(prerequisiteNumber);
         if (prerequisiteModule?.state.contract.state !== "verified") {
           errors.push(`Verified ${moduleEntry.moduleId} requires verified academic prerequisite m${String(prerequisiteNumber).padStart(2, "0")}.`);
         }
@@ -1565,7 +1855,12 @@ export async function loadModuleContractRegistry(siteRoot = defaultSiteRoot) {
 export async function validateModuleContractRegistry(
   graph,
   registry,
-  { siteRoot = defaultSiteRoot, manifest: suppliedManifest = null, mode = "integrity" } = {},
+  {
+    siteRoot = defaultSiteRoot,
+    manifest: suppliedManifest = null,
+    mode = "integrity",
+    manifestTruth = "git-index",
+  } = {},
 ) {
   const errors = [];
   if (!isPlainObject(graph) || !Array.isArray(graph.modules)) {
@@ -1580,6 +1875,17 @@ export async function validateModuleContractRegistry(
   }
   if (!["integrity", "strict", "complete"].includes(mode)) {
     throw new Error(`Unknown module-contract registry v3 validation mode: ${mode}.`);
+  }
+  if (!["git-index", "pre-write-projection"].includes(manifestTruth)) {
+    throw new Error(`Unknown module-contract registry v3 manifest truth mode: ${manifestTruth}.`);
+  }
+  if (manifestTruth === "pre-write-projection") {
+    if (mode !== "integrity") {
+      throw new Error("The pre-write manifest projection is only available to integrity validation.");
+    }
+    if (suppliedManifest === null) {
+      throw new Error("The pre-write manifest projection requires the synchronizer's supplied manifest.");
+    }
   }
   if (!exactKeys(registry, expectedTopLevelKeys, "Module-contract registry", errors)) {
     registryFailure(errors);
@@ -1633,7 +1939,20 @@ export async function validateModuleContractRegistry(
   }
   try {
     bridgeLedger = await loadAdvancedModuleBridgeLedger(siteRoot);
-    validateAdvancedModuleBridgeLedger(graph, bridgeLedger);
+    const advancedModulesRemainAuthoringOnly = graph.modules
+      .filter(({ number }) => number >= 31 && number <= 36)
+      .every((module) => (
+        module.state?.lifecycle === "authoring-only" &&
+        module.state?.availability === "authoring-only"
+      ));
+    // Preserve the strict historical authoring-plan gate until a real v3
+    // lifecycle transition begins. Afterwards the bridge still validates all
+    // prerequisite/session topology without overriding current release state.
+    if (advancedModulesRemainAuthoringOnly) {
+      validateAdvancedModuleBridgeLedger(graph, bridgeLedger);
+    } else {
+      validateAdvancedModuleBridgeTopology(graph, bridgeLedger);
+    }
   } catch (error) {
     errors.push(`Advanced prerequisite/session bridge must validate before v3 registry use: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -1704,8 +2023,8 @@ export async function validateModuleContractRegistry(
         moduleEntry,
         graphModule,
         manifestById,
-        contextualGraph,
         errors,
+        { manifestTruth },
       );
       for (const path of promotionReport?.candidateInputPaths ?? []) {
         referencedPaths.add(path);

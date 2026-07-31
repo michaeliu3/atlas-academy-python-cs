@@ -178,6 +178,45 @@ test("evidence inputs refuse a worktree file that differs from its Git index", a
   );
 });
 
+test("review-candidate delivery evidence is a canonical root JSON pointer", async (t) => {
+  const root = await createTrackedFixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const selectorPath = "content/course/contracts/review-candidates/m01.v1.json";
+  await writeFixture(root, selectorPath, "{}\n");
+  await execFileAsync("git", ["add", selectorPath], { cwd: root });
+  await execFileAsync("git", ["commit", "--quiet", "-m", "selector fixture"], { cwd: root });
+
+  const record = await loadModuleEvidenceRecord("content/reviews/m01.evidence.v1.json", {
+    siteRoot: root,
+  });
+  const bound = structuredClone(record);
+  bound.evidence[0].inputs.push({
+    kind: "json-pointer",
+    role: "review-candidate-delivery",
+    path: selectorPath,
+    locator: "",
+  });
+  const report = await validateModuleEvidenceRecord(bound, { siteRoot: root });
+  assert.ok(report.resolvedInputs.some(({ role, path, locator }) => (
+    role === "review-candidate-delivery" && path === selectorPath && locator === ""
+  )));
+
+  const nonRoot = structuredClone(bound);
+  nonRoot.evidence[0].inputs.at(-1).locator = "/scope";
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(nonRoot, { siteRoot: root }),
+    /must bind the JSON-document root/i,
+  );
+
+  const authoringSubstitute = structuredClone(bound);
+  authoringSubstitute.evidence[0].inputs.at(-1).path =
+    "content/course/contracts/authoring-delivery/m01.v1.json";
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(authoringSubstitute, { siteRoot: root }),
+    /canonical module-scoped review-candidate JSON path/i,
+  );
+});
+
 test("evidence validation fails closed if a supplied Git-index snapshot goes stale", async (t) => {
   const root = await createTrackedFixture();
   t.after(() => rm(root, { recursive: true, force: true }));
