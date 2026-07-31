@@ -214,9 +214,9 @@
       "title": "Cost Models and Algorithm Analysis",
       "summary": "Module 4 gave Atlas a precise prerequisite model and a correctness condition. Correct output is necessary, but it is not sufficient. A route validator that works for 20 concepts may become unusable for 200,000 concepts.",
       "arcId": "arc-i",
-      "wordCount": 4951,
+      "wordCount": 5293,
       "estimatedMinutes": 24,
-      "sourceHash": "42b6174bcf6b21c9874e04ab360a1ff069408631f6d1bdda1c9dedecb4c3ba01",
+      "sourceHash": "814e5cb678c45134bbe8932281307f8618fde3076abfb4fac4f942e0e4180632",
       "id": "m05",
       "state": {
         "lifecycle": "learner-material-ready",

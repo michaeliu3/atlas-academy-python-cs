@@ -11,6 +11,9 @@ This module asks:
 We derive analysis from the execution model in Module 1, recursive structure in Module 2, abstraction contracts in Module 3, and counting/proof language in Module 4.
 
 ```mermaid
+%% atlas-diagram-id: m05-analysis-knowledge-bridge
+%% atlas-diagram-title: Earlier execution, recursion, ADT, and proof ideas lead to algorithm analysis
+%% atlas-diagram-alt: Execution steps, recursion, ADT operations, and counting and proof supply a cost model, recurrence, operation costs, and a bound. The bound predicts growth, which is measured and explained before later data-structure and algorithm modules.
 flowchart LR
     EXEC["Execution steps<br/>Module 1"] --> MODEL["Choose a cost model"]
     REC["Recursion<br/>Module 2"] --> RECUR["Write a recurrence"]
@@ -175,6 +178,9 @@ If `f(n) = n`, then `f ∈ O(n²)` is true but weak. `Θ(n)` communicates the ti
 An `O(n log n)` implementation can be slower than an `O(n²)` one over small inputs due to constants and overhead. Asymptotic analysis predicts eventual growth, not a universal stopwatch ranking.
 
 ```mermaid
+%% atlas-diagram-id: m05-complexity-claim-components
+%% atlas-diagram-title: A complexity claim needs size, resource, case, operation costs, and bound kind
+%% atlas-diagram-alt: A complexity claim branches into five questions: what input size is used, which resource is counted, whether the case is best, worst, expected, or amortized, which operation costs are assumed, and whether the result is an upper, lower, or tight bound.
 flowchart TD
     CLAIM["Complexity claim"] --> SIZE["What is input size?"]
     CLAIM --> RESOURCE["What resource?"]
@@ -228,6 +234,9 @@ Adding the `n` ordinary writes gives total work below a constant multiple of `n`
 One individual append may still cost `Θ(n)`. Amortized constant time does not mean every call is constant time.
 
 ```mermaid
+%% atlas-diagram-id: m05-amortized-append-sequence
+%% atlas-diagram-title: Rare resize operations are distributed across many cheap appends
+%% atlas-diagram-alt: A sequence of cheap appends contains occasional expensive resize-and-append operations, then returns to cheap appends. The diagram explains why the aggregate cost can be constant amortized even though an individual resize can cost linear time.
 flowchart LR
     A1["append<br/>cheap"] --> A2["append<br/>cheap"]
     A2 --> A3["resize + append<br/>expensive"]
@@ -382,6 +391,9 @@ Ratios are noisy evidence, not proof. A log-log plot can reveal slope, but any f
 ### The benchmark–analysis loop
 
 ```mermaid
+%% atlas-diagram-id: m05-benchmark-analysis-loop
+%% atlas-diagram-title: A measurement disagreement sends analysis back to its assumptions
+%% atlas-diagram-alt: State a model-based hypothesis, design inputs, measure repeatedly, and plot times and ratios. If results roughly match, report a range and uncertainty; if not, inspect constants, hidden operations, data distribution, or a wrong model and revise the hypothesis.
 flowchart LR
     H["State hypothesis<br/>with model"] --> D["Design inputs"]
     D --> M["Measure repeatedly"]
@@ -429,6 +441,9 @@ If `n = len(route)` and `m = len(edges)`, list membership can scan `n` items. Tw
 Performance claims belong near the abstraction that controls the operations.
 
 ```mermaid
+%% atlas-diagram-id: m05-cost-boundary-architecture
+%% atlas-diagram-title: Algorithmic operation counts stay separate from adapter and system costs
+%% atlas-diagram-alt: A Route UI calls a planning use case, which uses a prerequisite domain and Graph Index ADT. A database adapter implements the graph index, while the domain asks only contracted operations such as neighbors and contains; their cost contract stays visible at the abstraction boundary.
 flowchart LR
     UI["Route UI"] --> USE["Plan route use case"]
     USE --> DOMAIN["Prerequisite domain"]
@@ -790,6 +805,9 @@ The milestone is mastered when Michael can predict, measure, explain, and challe
 ## 20. Consolidation
 
 ```mermaid
+%% atlas-diagram-id: m05-analysis-consolidation
+%% atlas-diagram-title: Analyze growth, compare it with evidence, then refine the cost model
+%% atlas-diagram-alt: A problem representation leads to size parameters, a counted resource, operation counts or a recurrence, and proved bounds. The resulting case and asymptotic class guides measurement and raw-evidence inspection; disagreement triggers a search for hidden operations or bad assumptions and returns to the cost model.
 flowchart TD
     PROBLEM["Problem representation"] --> SIZE["Choose size parameters"]
     SIZE --> COST["Choose counted resource"]

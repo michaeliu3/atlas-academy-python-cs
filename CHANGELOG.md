@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Completed Module 5's Mermaid accessibility retrofit: all six instructional
+  diagrams now carry unique stable IDs, concise titles, and authored prose
+  alternatives for the analysis knowledge bridge, complexity-claim components,
+  amortized append sequence, benchmark loop, cost-boundary architecture, and
+  consolidation map. This is a bounded visual-equivalence improvement, not a
+  completed accessibility review or a claim that later modules are remediated.
 - Added authoring-only primary-source research dossiers for M33–M36: formal
   languages/computability/complexity; classical AI search, constraints, and
   decision; machine learning and representation; and statistical learning

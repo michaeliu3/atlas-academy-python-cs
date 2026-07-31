@@ -152,3 +152,20 @@ test("Module 4 is a complete logic-and-proof retrofit with unique visual explana
   assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m04-")));
   assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });
+
+test("Module 5 is a complete algorithm-analysis retrofit with unique visual explanations", async () => {
+  const moduleFive = await readFile(
+    new URL("../content/modules/05_cost_models_algorithm_analysis.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleFive, {
+    sourcePath: "content/modules/05_cost_models_algorithm_analysis.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 6);
+  assert.equal(report.summary.completeBlocks, 6);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m05-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+});
