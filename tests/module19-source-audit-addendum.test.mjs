@@ -14,7 +14,7 @@ test("the M19 source-audit addendum remains authoring-only and preserves the Stu
   assert.match(addendum, /authoring-only/u);
   assert.match(
     addendum,
-    /not a release-input-policy\s+artifact or a public learner download/u,
+    /not a\s+public learner download or release-evidence-policy artifact/u,
   );
   assert.match(addendum, /does \*\*not\*\*\s+change[\s\S]*publication state/u);
   assert.match(addendum, /## Unresolved Study Partner route/u);

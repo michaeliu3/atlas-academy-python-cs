@@ -25,8 +25,8 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
   assert.deepEqual(report.summary, {
-    structuralCandidates: 5,
-    resolvedPointers: 179,
+    structuralCandidates: 6,
+    resolvedPointers: 216,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -82,6 +82,43 @@ test("the M20 structural packet binds the networking spine without promoting its
       path
         .replaceAll("\\", "/")
         .endsWith("content/source-maps/module20_networks_protocols_source_audit_addendum.md"),
+    ),
+  );
+});
+
+test("the M19 structural packet records the concurrency spine without hiding its missing Study Partner route", async () => {
+  const { graph, registry } = await packetFixture();
+  const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
+
+  const packet = report.packetById.get("m19-concurrency-parallelism-structural-candidate");
+  assert.equal(packet?.moduleId, "m19");
+  assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m18"]);
+  assert.equal(packet?.canonicalExpectation.forwardModuleId, "m20");
+  assert.equal(packet?.canonicalExpectation.masteryGateId, "systems");
+  assert.equal(packet?.canonicalExpectation.studioId, null);
+  assert.equal(packet?.packetState, "structural-candidate");
+  assert.equal(packet?.humanReviewState, "not-reviewed");
+  assert.equal(packet?.publicationEffect, "none");
+
+  const statusByCriterion = new Map(
+    packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
+  );
+  assert.equal(
+    statusByCriterion.get(
+      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+    ),
+    "ambiguous",
+  );
+  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
+  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
+  assert.equal(statusByCriterion.get("study-partner-prompt"), "missing");
+  assert.ok(
+    report.releaseInputPaths.some((path) =>
+      path
+        .replaceAll("\\", "/")
+        .endsWith("content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md"),
     ),
   );
 });
@@ -158,7 +195,7 @@ test("the M30 structural packet binds its mathematics spine without laundering a
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
-  assert.equal(report.summary.structuralCandidates, 5);
+  assert.equal(report.summary.structuralCandidates, 6);
   const packet = report.packetById.get("m30-probability-inference-structural-candidate");
   assert.equal(packet?.moduleId, "m30");
   assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m27", "m29"]);

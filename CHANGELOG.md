@@ -12,6 +12,15 @@ actually published.
   It keeps the genuinely missing module-specific Study Partner route visible;
   it is neither a learner download nor source-quality approval, publication
   promotion, or release evidence.
+- Added M19's non-promoting structural packet: 37 typed local anchors bind
+  its canonical M18 → M19 → M20 route, six-session concurrency spine,
+  embedded studio/reference-model artifacts, source route, diagnostic,
+  dossier, oral-defense, and TA surfaces. It retains its historical rigor,
+  code/debug/design, visual/text, diagnostic/misconception, and oral-defense
+  ambiguities and its missing module-specific Study Partner route; it does not
+  change publication or human-review state. The authoring-only source-audit
+  addendum is now hashable as an internal release input, not a learner
+  download, source-quality approval, or release evidence.
 - Recorded the successful GitHub Course CI run for the M20 structural-packet
   source head (`f253b30…`) in the append-only provenance ledger. It records
   four successful named jobs on attempt 1, not a GitHub Release, private

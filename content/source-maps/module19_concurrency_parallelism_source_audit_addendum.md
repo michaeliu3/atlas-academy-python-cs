@@ -5,10 +5,11 @@
 and known structural omissions for the existing M19 workbook, Arc Four
 concurrency surface, and bounded reference model. This is an
 instructor-facing audit record, not learner-facing textbook copy, a quality
-approval, or a publication decision. It is currently an **authoring-only**
-record: it is not a release-input-policy artifact or a public learner download.
-A later structural packet may cite it only while retaining its non-promotion
-boundary.
+approval, or a publication decision. It is an **authoring-only** record, not a
+public learner download or release-evidence-policy artifact. A non-promoting
+structural packet may make it a hashable internal release input; that
+mechanical inclusion is not a learner delivery, quality approval, publication,
+or release-evidence claim.
 
 ## Verdict
 

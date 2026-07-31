@@ -18,7 +18,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "5c8cdadf22970bbba6ac78674613a6ed32c06d6d18749cd8b659e71880ff8e91"
+      "sha256": "68dcf62b36a74140d12a12507bb0a41dfbd0236fb2721aac1c387fd8e770964a"
     },
     {
       "path": "content/course/contracts/module-contracts.v1.json",
@@ -179,6 +179,10 @@
     {
       "path": "content/source-maps/module18_operating_systems_source_map.md",
       "sha256": "f052e51dbc34863bc199cfabeb8fc06c32ad19b98082ada007a6d065d47ad5bd"
+    },
+    {
+      "path": "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md",
+      "sha256": "e1b4570e6fb54d58dc9f73c510bee9a322c93e9960e4e771cb2cf3affd4ece7b"
     },
     {
       "path": "content/source-maps/module19_concurrency_parallelism_source_map.md",

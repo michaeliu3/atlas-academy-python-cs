@@ -434,6 +434,92 @@
         {"id": "m20-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module20_reference.py", "public/downloads/test_module20_reference.py"]},
         {"id": "m20-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]
+    },
+    {
+      "moduleId": "m19",
+      "packetId": "m19-concurrency-parallelism-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": ["m18"],
+        "forwardModuleId": "m20",
+        "masteryGateId": "systems",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/19_concurrency_parallelism.md",
+      "sourceMapPath": "content/source-maps/module19_concurrency_parallelism_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m19-session-1", "usesPrerequisiteModuleIds": ["m18"], "forwardArtifactId": "m19-history-schedule-card"},
+        {"sessionNumber": 2, "pointerId": "m19-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m19-critical-transition-contract"},
+        {"sessionNumber": 3, "pointerId": "m19-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m19-ownership-permit-ledger"},
+        {"sessionNumber": 4, "pointerId": "m19-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m19-wait-for-progress-case"},
+        {"sessionNumber": 5, "pointerId": "m19-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m19-runtime-model-evidence-card"},
+        {"sessionNumber": 6, "pointerId": "m19-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m19-concurrent-evidence-defense-dossier"}
+      ],
+      "pointers": [
+        {"id": "m19-course-map", "roles": ["prerequisite-map"], "label": "Canonical prerequisite map", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "1-position-in-the-knowledge-system"}},
+        {"id": "m19-forward-handoff", "roles": ["forward-handoff"], "label": "Exact downstream handoff", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "15-exact-boundaries-and-handoffs"}},
+        {"id": "m19-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "2-session-1--a-second-worker-creates-histories"}},
+        {"id": "m19-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "3-session-2--protect-one-logical-transition"}},
+        {"id": "m19-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "4-session-3--predicates-permits-and-item-ownership"}},
+        {"id": "m19-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "5-session-4--progress-can-fail"}},
+        {"id": "m19-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "6-session-5--choose-the-python-execution-model-from-first-principles"}},
+        {"id": "m19-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "7-session-6--atlas-multi-worker-evidence-defense"}},
+        {"id": "m19-first-principle", "roles": ["first-principles"], "label": "Concurrency derivation from first principles", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "derivation-from-first-principles"}},
+        {"id": "m19-definition", "roles": ["definition"], "label": "Canonical event vocabulary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "14-canonical-event-vocabulary"}},
+        {"id": "m19-assumption", "roles": ["assumption"], "label": "Race-condition safety and liveness assumptions", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "race-condition-safety-and-liveness"}},
+        {"id": "m19-derivation", "roles": ["derivation-proof"], "label": "First-principles derivation candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "derivation-from-first-principles"}},
+        {"id": "m19-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Interleaving counterexample candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "derivation-from-first-principles"}},
+        {"id": "m19-numerical-experiment", "roles": ["numerical-experiment"], "label": "Bounded lost-update experiment", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "code-reading-lab-l1--valid-local-updates-invalid-global-index"}},
+        {"id": "m19-code-reading", "roles": ["code-reading"], "label": "Lost-update code-reading lab", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "code-reading-lab-l1--valid-local-updates-invalid-global-index"}},
+        {"id": "m19-debug", "roles": ["debugging"], "label": "Bounded hang diagnosis", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "55-diagnose-a-hang-without-creating-an-uncontrolled-hang"}},
+        {"id": "m19-design", "roles": ["design"], "label": "Model-adapter design exercise", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "level-6--design-and-delegate-one-model-adapter"}},
+        {"id": "m19-prediction", "roles": ["prediction"], "label": "Prediction record", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "prediction-record"}},
+        {"id": "m19-transfer", "roles": ["transfer", "oral-transfer"], "label": "M20/M21/M24 transfer ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "level-8--transfer-to-m20-m21-and-m24"}},
+        {"id": "m19-source-rationale", "roles": ["source-rationale"], "label": "Source-selection rationale", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module19_concurrency_parallelism_source_map.md", "headingAnchor": "executive-teaching-decision"}},
+        {"id": "m19-claim-linkage", "roles": ["claim-linkage"], "label": "Claim and evidence ledger", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module19_concurrency_parallelism_source_map.md", "headingAnchor": "claim-and-evidence-ledger"}},
+        {"id": "m19-license-reuse", "roles": ["license-reuse"], "label": "Licensing and reuse matrix", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module19_concurrency_parallelism_source_map.md", "headingAnchor": "licensing-and-reuse-matrix"}},
+        {"id": "m19-stable-learner-link", "roles": ["stable-learner-link"], "label": "Compact source index", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/module19_concurrency_parallelism_source_map.md", "headingAnchor": "compact-source-index"}},
+        {"id": "m19-visual-studio", "roles": ["visual"], "label": "Six-view interactive concurrency studio", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "8-six-view-interactive-html-studio"}},
+        {"id": "m19-text-alternative-candidate", "roles": ["text-alternative"], "label": "Text-equivalent study route candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "how-to-study-this-module"}},
+        {"id": "m19-diagnostic", "roles": ["diagnostic", "confidence"], "label": "Confidence-aware understanding check", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "10-confidence-aware-understanding-check"}},
+        {"id": "m19-misconception-candidate", "roles": ["misconception"], "label": "Quiz routing misconception candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "quiz-routing"}},
+        {"id": "m19-retrieval", "roles": ["retrieval"], "label": "Spaced retrieval route", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "135-spaced-retrieval"}},
+        {"id": "m19-dossier", "roles": ["dossier"], "label": "Multi-worker correctness dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "11-cumulative-project--atlas-multi-worker-correctness-dossier"}},
+        {"id": "m19-acceptance", "roles": ["acceptance-criteria"], "label": "Dossier acceptance invariants", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "119-acceptance-invariants"}},
+        {"id": "m19-rubric", "roles": ["rubric"], "label": "Evidence-packet rubric candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "119-acceptance-invariants"}},
+        {"id": "m19-oral-protocol", "roles": ["oral-protocol"], "label": "Session 6 oral-defense protocol candidate", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "session-6-oral-defense"}},
+        {"id": "m19-oral-hint", "roles": ["oral-hint"], "label": "TA hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "123-hint-ladder"}},
+        {"id": "m19-oral-reflection", "roles": ["oral-reflection"], "label": "TA response reflection loop", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "122-ta-response-loop"}},
+        {"id": "m19-oral-summary", "roles": ["oral-summary"], "label": "Machine-readable evidence summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "117-machine-readable-evidence-packet"}},
+        {"id": "m19-ta", "roles": ["ta"], "label": "Teaching-assistant protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/19_concurrency_parallelism.md", "headingAnchor": "12-teaching-assistant-protocol"}},
+        {"id": "m19-study-partner-missing", "roles": ["study-partner"], "label": "Explicit record of the missing module-specific Study Partner route", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md", "headingAnchor": "unresolved-study-partner-route"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-course-map", "m19-forward-handoff"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-session-1", "m19-session-2", "m19-session-3", "m19-session-4", "m19-session-5", "m19-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-first-principle"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-definition", "m19-assumption", "m19-derivation", "m19-counterexample", "m19-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-code-reading", "m19-debug", "m19-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-source-rationale", "m19-claim-linkage", "m19-license-reuse", "m19-stable-learner-link"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-visual-studio", "m19-text-alternative-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-diagnostic", "m19-misconception-candidate"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-dossier", "m19-acceptance", "m19-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-oral-protocol", "m19-oral-hint", "m19-counterexample", "m19-transfer", "m19-oral-reflection", "m19-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "missing", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-study-partner-missing"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-forward-handoff"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m19-studio", "kind": "studio", "paths": ["app/ConcurrencyStudio.tsx", "app/ConcurrencyStudio.module.css", "app/ArcFourStudio.tsx", "tests/rendered-html.test.mjs"]},
+        {"id": "m19-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module19_reference.py", "public/downloads/test_module19_reference.py"]},
+        {"id": "m19-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
+      ]
     }
   ]
 }
