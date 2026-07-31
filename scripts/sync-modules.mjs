@@ -27,6 +27,10 @@ import {
   loadReleaseEvidencePolicy,
   releaseEvidencePolicyPath,
 } from "./release-evidence-verifier.mjs";
+import {
+  loadManualLearningRecordWorkflow,
+  validateManualLearningRecordWorkflow,
+} from "./manual-learning-record-workflow.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -196,6 +200,11 @@ const importLines = [];
 const contentEntries = [];
 const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
 const releaseEvidencePolicy = await loadReleaseEvidencePolicy(siteRoot);
+const manualLearningRecordWorkflow = await loadManualLearningRecordWorkflow(siteRoot);
+const manualLearningRecordWorkflowReport = await validateManualLearningRecordWorkflow(
+  manualLearningRecordWorkflow,
+  { siteRoot },
+);
 const legacyModuleContractAudit = await loadLegacyModuleContractAudit(siteRoot);
 const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
   legacyModuleContractAudit,
@@ -216,6 +225,9 @@ const sourceArtifactChanges = await synchronizeSourceArtifactCopies(
 );
 for (const { canonicalPath } of releaseInputPolicy.sourceArtifactCopies) {
   releaseInputPaths.add(canonicalPath);
+}
+for (const path of manualLearningRecordWorkflowReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
 }
 
 for (const projectedModule of projectedModules) {

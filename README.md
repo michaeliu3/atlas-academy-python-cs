@@ -162,5 +162,9 @@ credentials, external deployment tokens, embedded runtimes, and build output.
 See [Privacy](docs/PRIVACY.md), [Source and license policy](LICENSES.md), and
 [Contributing](CONTRIBUTING.md).
 
+For learner-owned notes, use the [manual learning record kit](docs/LEARNER_RECORD_WORKFLOW.md).
+It provides copy/paste templates and a consent boundary; it is not a live
+Notion connection or an automatic export path.
+
 The visual portal is private by default. Do not make learner records, Notion
 exports, personal diagnostics, or deployment credentials public.

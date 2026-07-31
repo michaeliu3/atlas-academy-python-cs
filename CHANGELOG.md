@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Added a versioned, hashed Manual Learning Record Kit with ten connected,
+  copy/paste templates for route, daily learning, module reasoning, repair,
+  rigor, math/ML gates, retrieval, oral-defense evidence, portfolio, and TA /
+  Study Partner handoffs. It is deliberately manual and learner-controlled:
+  there is no portal-to-Notion integration, automatic write/export, background
+  tracking, raw-transcript capture, or Git storage of learner records. The
+  contract fails closed if a required record, privacy exclusion, approval rule,
+  or guide template drifts. This is a structured local workflow, not proof of
+  a provisioned Notion workspace or an approved external export.
 - Added a versioned, hashed Course-CI evidence policy and pure verifier. It
   fails closed unless a supplied normalized snapshot binds the expected source
   branch head, same-repository run, workflow source digest, run attempt, and

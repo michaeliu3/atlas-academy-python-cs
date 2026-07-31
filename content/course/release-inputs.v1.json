@@ -33,6 +33,10 @@
       "sha256": "6dc1e9d697c1a8c5543bd69cbb74bdfc0892b73381574b653dee4be98b07d07b"
     },
     {
+      "path": "content/course/manual-learning-record-workflow.v1.json",
+      "sha256": "2e619babe511bf26a958da31d0fa2cd297375cc85ea945ab315ea65d60f15fd6"
+    },
+    {
       "path": "content/course/release-evidence-policy.v1.json",
       "sha256": "1e9e662e99fb949497450ac1aaefb0eddb7ff594d9ce84c2a0c7d5990d728b4f"
     },
@@ -251,6 +255,10 @@
     {
       "path": "content/source-maps/python_curriculum_sources.md",
       "sha256": "d87547011d066b9e4a5f444c8042daf2f020a6c47904085b45b3e8273bffd550"
+    },
+    {
+      "path": "docs/LEARNER_RECORD_WORKFLOW.md",
+      "sha256": "65585ec3c5e0c0cd9395b01bfd0bb797232f972acef6a54c96a99dbdff56d7b4"
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",

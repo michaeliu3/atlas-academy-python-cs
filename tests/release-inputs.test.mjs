@@ -13,6 +13,10 @@ import {
 } from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { legacyModuleContractPacketRelativePath } from "../scripts/legacy-module-contract-packet.mjs";
+import {
+  manualLearningRecordWorkflowGuideRelativePath,
+  manualLearningRecordWorkflowRelativePath,
+} from "../scripts/manual-learning-record-workflow.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import {
   loadReleaseEvidencePolicy,
@@ -64,6 +68,8 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(advancedModuleContractRelativePath));
   assert.ok(paths.includes(legacyModuleContractAuditRelativePath));
   assert.ok(paths.includes(legacyModuleContractPacketRelativePath));
+  assert.ok(paths.includes(manualLearningRecordWorkflowRelativePath));
+  assert.ok(paths.includes(manualLearningRecordWorkflowGuideRelativePath));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes(releaseEvidencePolicyRelativePath));
   assert.ok(paths.includes("content/modules/01_values_state_execution.md"));
@@ -89,7 +95,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   );
 
   const documentationLedgerPaths = paths.filter((path) => path.startsWith("docs/"));
-  const expectedDocumentationLedgerPaths = new Set(historicalAdvancedProvenanceLedgerPaths);
+  const expectedAdvancedProvenancePaths = new Set(historicalAdvancedProvenanceLedgerPaths);
   for (const entry of advancedRegistry.modules) {
     for (const input of entry.contractInputs ?? []) {
       if (input?.role !== "provenance" || !input.path?.startsWith("docs/")) {
@@ -101,23 +107,25 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
           (match && match[1] === entry.moduleId),
         `${input.path} is a fixed historical record or a same-module advanced-evidence slot`,
       );
-      expectedDocumentationLedgerPaths.add(input.path);
+      expectedAdvancedProvenancePaths.add(input.path);
     }
   }
+  const expectedDocumentationLedgerPaths = new Set(expectedAdvancedProvenancePaths);
+  expectedDocumentationLedgerPaths.add(manualLearningRecordWorkflowGuideRelativePath);
   assert.deepEqual(
     documentationLedgerPaths,
     [...expectedDocumentationLedgerPaths].sort(comparePaths),
   );
   assert.deepEqual(
     advancedContractReport.provenanceDocumentationPaths,
-    [...expectedDocumentationLedgerPaths].sort(comparePaths),
+    [...expectedAdvancedProvenancePaths].sort(comparePaths),
   );
 
   for (const input of ledger.inputs) {
     if (input.path.startsWith("docs/")) {
       assert.ok(
         expectedDocumentationLedgerPaths.has(input.path),
-        `${input.path} is a contract-declared, module-scoped provenance ledger input`,
+        `${input.path} is an allowlisted provenance or learner-record documentation input`,
       );
     } else {
       assert.match(input.path, /^(?:content|public)\//u);

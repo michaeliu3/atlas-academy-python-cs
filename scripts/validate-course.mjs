@@ -23,6 +23,11 @@ import {
   releaseEvidencePolicyPath,
 } from "./release-evidence-verifier.mjs";
 import {
+  loadManualLearningRecordWorkflow,
+  manualLearningRecordWorkflowPath,
+  validateManualLearningRecordWorkflow,
+} from "./manual-learning-record-workflow.mjs";
+import {
   loadModuleContractEvidenceRegistry,
   validateModuleContractEvidenceRegistry,
 } from "./module-contract-evidence.mjs";
@@ -175,6 +180,7 @@ export async function validateCourseContracts(
   let advancedContract = null;
   let legacyPackets = null;
   let releaseEvidencePolicy = null;
+  let manualLearningRecordWorkflow = null;
 
   try {
     const legacyAudit = await loadLegacyModuleContractAudit(siteRoot);
@@ -227,6 +233,17 @@ export async function validateCourseContracts(
   } catch (error) {
     errors.push(
       `Release-evidence policy must remain valid before a CI run can be cited as evidence: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    const workflow = await loadManualLearningRecordWorkflow(siteRoot);
+    manualLearningRecordWorkflow = await validateManualLearningRecordWorkflow(workflow, {
+      siteRoot,
+    });
+  } catch (error) {
+    errors.push(
+      `Manual learning record workflow must remain valid before it can be offered as a learner evidence route: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -294,6 +311,7 @@ export async function validateCourseContracts(
     advancedModuleBridgePath(siteRoot),
     advancedModuleContractPath(siteRoot),
     releaseEvidencePolicyPath(siteRoot),
+    manualLearningRecordWorkflowPath(siteRoot),
     resolve(siteRoot, legacyModuleContractAuditRelativePath),
   ]);
   if (advancedContract) {
@@ -303,6 +321,11 @@ export async function validateCourseContracts(
   }
   if (legacyPackets) {
     for (const path of legacyPackets.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+  }
+  if (manualLearningRecordWorkflow) {
+    for (const path of manualLearningRecordWorkflow.releaseInputPaths) {
       releaseInputPaths.add(path);
     }
   }
