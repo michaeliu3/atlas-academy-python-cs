@@ -55,20 +55,23 @@ const authoringOutputKinds = new Set([
   "worksheet",
 ]);
 
-function moduleArtifactIdentifier(value) {
-  return typeof value === "string" && /^m(?:0[1-9]|[1-9]\d)-[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(value);
+function moduleArtifactIdentifier(value, moduleId) {
+  return (
+    typeof moduleId === "string" &&
+    typeof value === "string" &&
+    value.startsWith(`${moduleId}-`) &&
+    /^m(?:0[1-9]|[1-9]\d)-[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(value)
+  );
 }
 
 function isVisibleOutputHeading(heading) {
   return heading?.depth === 3 && /^Output:\s+\S/u.test(heading.title ?? "");
 }
 
-function sessionContainingHeading(headings, sessionHeadingsById, headingIndex) {
-  const candidates = [...sessionHeadingsById.entries()]
-    .map(([sessionId, heading]) => ({ sessionId, index: heading.index }))
-    .filter(({ index }) => index < headingIndex)
-    .sort((left, right) => right.index - left.index);
-  return candidates[0]?.sessionId ?? null;
+function nearestPrecedingH2Heading(headings, headingIndex) {
+  return headings
+    .filter(({ depth, index }) => depth === 2 && index < headingIndex)
+    .at(-1) ?? null;
 }
 
 /**
@@ -150,11 +153,17 @@ export function validateAdvancedAuthoringDeliveryMap(
     errors.push(`${label} must declare exactly six hidden authoring sessions.`);
   }
 
-  const visibleSessionHeadings = headings.filter(
-    ({ depth, title }) => depth === 2 && /^Session\s+[1-6]\b/u.test(title),
+  const sessionLikeHeadings = headings.filter(
+    ({ depth, title }) => depth === 2 && /^Session\b/u.test(title),
   );
-  if (visibleSessionHeadings.length !== 6) {
-    errors.push(`${label} hidden workbook must expose exactly six Session 1 through Session 6 headings.`);
+  const visibleSessionHeadings = sessionLikeHeadings.filter(
+    ({ title }) => /^Session\s+[1-6]\b/u.test(title),
+  );
+  if (
+    visibleSessionHeadings.length !== 6 ||
+    sessionLikeHeadings.length !== visibleSessionHeadings.length
+  ) {
+    errors.push(`${label} hidden workbook must expose exactly six Session 1 through Session 6 headings and no undeclared Session headings.`);
   }
 
   const sessionHeadingsById = new Map();
@@ -208,7 +217,7 @@ export function validateAdvancedAuthoringDeliveryMap(
           outputLabel,
           errors,
         );
-        if (!moduleArtifactIdentifier(output?.id) || outputIds.has(output?.id)) {
+        if (!moduleArtifactIdentifier(output?.id, courseModule?.id) || outputIds.has(output?.id)) {
           errors.push(`${outputLabel}.id must be a unique module-scoped artifact identifier.`);
         }
         if (hasText(output?.id)) outputIds.add(output.id);
@@ -254,12 +263,9 @@ export function validateAdvancedAuthoringDeliveryMap(
 
     for (const { sessionId, output, outputHeading } of allOutputs) {
       if (!outputHeading) continue;
-      const containingSessionId = sessionContainingHeading(
-        headings,
-        sessionHeadingsById,
-        outputHeading.index,
-      );
-      if (containingSessionId !== sessionId) {
+      const declaredSessionHeading = sessionHeadingsById.get(sessionId);
+      const containingH2Heading = nearestPrecedingH2Heading(headings, outputHeading.index);
+      if (containingH2Heading?.id !== declaredSessionHeading?.id) {
         errors.push(
           `${label} output ${output?.id ?? "(missing ID)"} must appear inside its declared session rather than another session.`,
         );

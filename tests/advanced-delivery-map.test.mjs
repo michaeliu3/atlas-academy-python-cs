@@ -142,6 +142,13 @@ test("the hidden M31 authoring delivery map rejects missing, duplicate, misplace
     /must be a unique module-scoped artifact identifier/u,
   );
 
+  const crossModuleOutput = structuredClone(deliveryMap);
+  crossModuleOutput.sessions[2].outputs[0].id = "m32-constraint-claim-table";
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(crossModuleOutput, options),
+    /must be a unique module-scoped artifact identifier/u,
+  );
+
   const misplacedOutput = structuredClone(deliveryMap);
   const [sessionOneOutput] = misplacedOutput.sessions[0].outputs;
   misplacedOutput.sessions[0].outputs = [];
@@ -161,6 +168,30 @@ test("the hidden M31 authoring delivery map rejects missing, duplicate, misplace
   assert.throws(
     () => validateAdvancedAuthoringDeliveryMap(deliveryMap, orphanOutputOptions),
     /has an orphan visible output heading/u,
+  );
+
+  const undeclaredSessionOptions = {
+    ...options,
+    workbookMarkdown: options.workbookMarkdown.replace(
+      "### Output: Optimization and Information Evidence Dossier",
+      "## Session 7 — Undeclared continuation\n\n### Output: Optimization and Information Evidence Dossier",
+    ),
+  };
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(deliveryMap, undeclaredSessionOptions),
+    /must expose exactly six Session 1 through Session 6 headings/u,
+  );
+
+  const outputOutsideSessionOptions = {
+    ...options,
+    workbookMarkdown: options.workbookMarkdown.replace(
+      "### Output: Optimization and Information Evidence Dossier",
+      "## Appendix — Outside Session 6\n\n### Output: Optimization and Information Evidence Dossier",
+    ),
+  };
+  assert.throws(
+    () => validateAdvancedAuthoringDeliveryMap(deliveryMap, outputOutsideSessionOptions),
+    /must appear inside its declared session rather than another session/u,
   );
 });
 
