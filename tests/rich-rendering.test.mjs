@@ -172,3 +172,25 @@ test("Module 7's authored diagrams render after accessibility metadata is remove
     assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
   }
 });
+
+test("Module 8's authored diagrams render after accessibility metadata is removed", async () => {
+  const moduleEight = await readFile(
+    new URL("../content/modules/08_hashing_dictionaries_sets_indexing.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleEight, {
+    sourcePath: "content/modules/08_hashing_dictionaries_sets_indexing.md",
+  });
+
+  assert.equal(blocks.length, 9);
+  for (const [index, block] of blocks.entries()) {
+    const markup = await renderSafeMermaidSvg({
+      label: block.metadata.title,
+      describedById: `${block.metadata.id}-alternative`,
+      renderId: `atlas-m08-render-${index + 1}`,
+      source: block.renderSource,
+    });
+    assert.match(markup, /<svg\b/iu);
+    assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
+  }
+});

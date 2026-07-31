@@ -16,6 +16,9 @@ That question connects four earlier foundations:
 - **Module 5 — cost models:** expected, worst-case, and amortized claims answer different questions and require explicit assumptions.
 
 ```mermaid
+%% atlas-diagram-id: m08-hashing-knowledge-bridge
+%% atlas-diagram-title: Foundations derive hashing and its Atlas indexing application
+%% atlas-diagram-alt: Stable key state, mapping ADTs, the pigeonhole principle, and cost models lead from a lookup need through direct addressing and hash compression to a hash table, Python dictionaries and sets, and an Atlas inverted index used for fast candidate retrieval.
 flowchart LR
     STATE["Module 1<br/>objects + stable state"] --> KEY["Hashable key contract"]
     ADT["Module 3<br/>mapping + set operations"] --> NEED["Lookup need"]
@@ -24,8 +27,9 @@ flowchart LR
     NEED --> DIRECT["Direct addressing"]
     DIRECT --> HASH["Hash compression"]
     KEY --> HASH
-    COLLIDE --> HASH
+    HASH --> COLLIDE
     HASH --> TABLE["Hash-table representation"]
+    COLLIDE -- "requires resolution" --> TABLE
     CLAIM --> TABLE
     TABLE --> PY["Python dict + set"]
     PY --> INDEX["Atlas inverted index"]
@@ -190,12 +194,15 @@ These are **ADT operations**. Possible representations include:
 Each representation supplies different order, cost, memory, persistence, and adversarial properties.
 
 ```mermaid
+%% atlas-diagram-id: m08-mapping-adt-representations
+%% atlas-diagram-title: One mapping contract supports several representations and trade-offs
+%% atlas-diagram-alt: Atlas search requests a mapping from canonical token to posting set. That contract can use a sequence of pairs, balanced tree, hash table, or database index, with different cost, order, memory, persistence, and attack-resistance trade-offs.
 flowchart TD
     CLIENT["Atlas search service"] --> MAP["Mapping ADT<br/>token → posting set"]
-    MAP --> R1["Sequence of pairs"]
-    MAP --> R2["Balanced tree"]
-    MAP --> R3["Hash table"]
-    MAP --> R4["Database index"]
+    MAP -. "choose one" .-> R1["Sequence of pairs"]
+    MAP -. "choose one" .-> R2["Balanced tree"]
+    MAP -. "choose one" .-> R3["Hash table"]
+    MAP -. "choose one" .-> R4["Database index"]
     R1 -. "representation choice" .-> TRADE["cost • order • memory<br/>persistence • attacks"]
     R2 -.-> TRADE
     R3 -.-> TRADE
@@ -241,14 +248,16 @@ Choose an array with `m` positions and a function:
 The hash function turns a key into a candidate table index.
 
 ```mermaid
+%% atlas-diagram-id: m08-hash-address-compression
+%% atlas-diagram-title: Hashing reduces a large key universe to a table index
+%% atlas-diagram-alt: Example string keys each enter their own illustrative hash-and-reduction step, selecting one of four table buckets. Two shown keys select bucket 1, demonstrating that reducing a larger key universe into a small bucket set can produce a collision.
 flowchart LR
-    K1["'graph'"] --> H["hash + reduction"]
-    K2["'proof'"] --> H
-    K3["'collision'"] --> H
-    H --> B0["bucket 0"]
-    H --> B1["bucket 1"]
-    H --> B2["bucket 2"]
-    H --> B3["bucket 3"]
+    K1["'graph'"] --> H1["hash + reduction<br/>index 1, illustrative"]
+    K2["'proof'"] --> H2["hash + reduction<br/>index 3, illustrative"]
+    K3["'collision'"] --> H3["hash + reduction<br/>index 1, illustrative collision"]
+    H1 --> B1["bucket 1"]
+    H2 --> B3["bucket 3"]
+    H3 --> B1
 ```
 
 If the key universe has more than `m` elements, the pigeonhole principle says no such mapping can be injective. Some distinct keys must share a table index.
@@ -264,11 +273,15 @@ Collisions are not exceptional bugs. They are a normal consequence of compressin
 The hash value is a route to candidates. Equality makes the final decision.
 
 ```mermaid
+%% atlas-diagram-id: m08-hash-lookup-equality-check
+%% atlas-diagram-title: Hashing finds candidates while equality confirms a matching key
+%% atlas-diagram-alt: A lookup key is hashed to choose a bucket or probe. The search either finds another candidate to compare for equality, returns the associated value after a match, advances after a nonmatch, or reports the key missing when no candidate remains.
 flowchart LR
     KEY["lookup key"] --> HASH["compute hash"]
     HASH --> INDEX["choose candidate bucket/probe"]
-    INDEX --> CAND["candidate key"]
-    CAND --> EQ{"candidate == lookup key?"}
+    INDEX --> CAND{"candidate remains?"}
+    CAND -- "no" --> MISSING["report missing key"]
+    CAND -- "yes" --> EQ{"candidate == lookup key?"}
     EQ -- "yes" --> FOUND["return associated value"]
     EQ -- "no" --> NEXT["inspect next collision candidate"]
     NEXT --> CAND
@@ -483,6 +496,9 @@ Because the reduction from a hash to a table position depends on `m`. For exampl
 Changing `m` can change every index.
 
 ```mermaid
+%% atlas-diagram-id: m08-resize-rehash-sequence
+%% atlas-diagram-title: Growing a table rehashes entries into a larger address space
+%% atlas-diagram-alt: A put operation crosses the load threshold, so the table allocates twice as many buckets, reinserts every old key using the new capacity, inserts the new entry, adopts the larger buckets as the active table, then returns completion to the client.
 sequenceDiagram
     participant Client
     participant Table
@@ -496,6 +512,7 @@ sequenceDiagram
         Table->>New: recompute index and insert
     end
     Table->>New: insert new entry
+    Table->>Table: adopt new buckets
     Table-->>Client: complete
 ```
 
@@ -557,8 +574,11 @@ The language reference does not make general `dict`/`set` lookup complexity a se
 These facts help explain observed memory and probe behavior. Atlas must not inspect table capacity, depend on dummy-slot placement, reproduce the probe formula, or assume another Python implementation uses the same layout.
 
 ```mermaid
+%% atlas-diagram-id: m08-claim-layer-boundaries
+%% atlas-diagram-title: Semantic, analytic, and CPython claims have different dependency rules
+%% atlas-diagram-alt: Python collection semantics may guide Atlas behavior, with dictionary insertion order kept distinct from unordered set membership. A qualified expected-performance model may guide design and measurement, while CPython 3.14 layout details may be inspected for learning but not used for correctness.
 flowchart TD
-    SEM["Python-level semantics<br/>keys, equality, insertion order"] --> APP["Atlas may rely on these"]
+    SEM["Python collection semantics<br/>dict insertion order; set membership unordered"] --> APP["Atlas may rely on these"]
     PERF["Expected performance model<br/>explicit hashing assumptions"] --> DEC["Atlas may use for design<br/>then measure and defend"]
     CP["CPython 3.14 internals<br/>open addressing, slot states"] --> LEARN["Atlas may inspect to learn<br/>not make correctness depend on them"]
 ```
@@ -746,6 +766,9 @@ token  →  note ids containing that token
 ```
 
 ```mermaid
+%% atlas-diagram-id: m08-inverted-index-transformation
+%% atlas-diagram-title: Inverting notes by token produces an index of posting sets
+%% atlas-diagram-alt: Three notes containing token sets are inverted into postings: hash maps to n1 and n3, table to n1, graph to n2, and cost to n3. Query processing can then retrieve candidate note IDs by token.
 flowchart LR
     N1["n1<br/>{hash, table, collision}"] --> INV["invert relation"]
     N2["n2<br/>{graph, relation}"] --> INV
@@ -754,6 +777,9 @@ flowchart LR
     INV --> T["table → {n1}"]
     INV --> G["graph → {n2}"]
     INV --> C["cost → {n3}"]
+    INV --> COLLISION["collision → {n1}"]
+    INV --> RELATION["relation → {n2}"]
+    INV --> EXPECTED["expected → {n3}"]
 ```
 
 For query `hash cost`, intersect the posting sets:
@@ -1016,15 +1042,26 @@ Suppose note `n1` changes from `"hash graph"` to `"hash proof"`. Atlas must:
 Appending new postings without removing old ones creates false-positive search results.
 
 ```mermaid
+%% atlas-diagram-id: m08-derived-index-update-architecture
+%% atlas-diagram-title: Replacing a note maintains a derived index from authoritative data
+%% atlas-diagram-alt: A replace command reads the old authoritative text and accepts replacement text. Both are tokenized and compared: old-minus-new tokens remove postings and new-minus-old tokens add postings, while a distinct write updates the note store. The store can rebuild the index, and an invariant checker can read and compare both states to detect disagreement.
 flowchart LR
-    CMD["Replace note command"] --> STORE["Authoritative note store"]
-    CMD --> TOK["Tokenizer policy"]
-    TOK --> DELTA["old tokens △ new tokens"]
-    DELTA --> INDEX["Derived inverted index"]
+    CMD["Replace note command"] --> READ["read old note"]
+    STORE -. "existing text" .-> READ
+    CMD --> NEW["new note text"]
+    READ --> TOK["tokenize old + new text"]
+    NEW --> TOK
+    CMD --> WRITE["write replacement text"]
+    WRITE --> STORE["Authoritative note store"]
+    TOK --> DELTA["compare old and new token sets"]
+    DELTA --> REMOVE["old minus new<br/>remove postings"]
+    DELTA --> ADD["new minus old<br/>add postings"]
+    REMOVE --> INDEX["Derived inverted index"]
+    ADD --> INDEX
     INDEX --> QUERY["Query service"]
     STORE -. "rebuild source" .-> INDEX
-    VERIFY["Invariant checker"] --> STORE
-    VERIFY --> INDEX
+    VERIFY["Invariant checker"] -. "read and compare" .-> STORE
+    VERIFY -. "read and compare" .-> INDEX
 ```
 
 ### Code-reading studio: locate the failure window
@@ -1786,6 +1823,9 @@ Fast manual typing, memorized method names, or a passing happy-path demo are not
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m08-hashing-concept-map
+%% atlas-diagram-title: Sparse lookup, collisions, costs, and indexing form one system
+%% atlas-diagram-alt: A repeated lookup need leads from direct addressing through sparse keys, hash compression, pigeonhole collisions, resolution, equality and key contracts, load-factor costs, Python collection semantics, an inverted index, and proofs and recovery limits. Expected and amortized cost models inform design and measurement without becoming language guarantees.
 flowchart TD
     LOOK["Repeated lookup need"] --> DA["Direct addressing"]
     DA --> SPARSE["Huge sparse key universe"]
@@ -1799,10 +1839,11 @@ flowchart TD
     LF --> EXP["expected candidate cost<br/>under stated model"]
     LF --> GROW["geometric resize"]
     GROW --> AM["amortized rebuild cost"]
-    CONTRACT --> DS["Python dict / set semantics"]
-    EXP --> DS
-    AM --> DS
+    CONTRACT --> DS["Python dict / set<br/>semantic contracts"]
+    EXP --> PERF["cost model + measurement<br/>not a language guarantee"]
+    AM --> PERF
     DS --> INV["token → note-id posting set"]
+    PERF -. "inform design" .-> INV
     INV --> PROOF["invariant + soundness + completeness"]
     INV --> ARCH["source of truth + derived state"]
     ARCH --> SEC["recovery + adversarial limits"]

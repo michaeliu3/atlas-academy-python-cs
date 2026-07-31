@@ -216,3 +216,33 @@ test("Module 7 is a complete stack-and-lazy-flow retrofit with corrected control
     "the protocol diagram must not imply next creates a separate iterator",
   );
 });
+
+test("Module 8 is a complete hashing retrofit with corrected causal and repair models", async () => {
+  const moduleEight = await readFile(
+    new URL("../content/modules/08_hashing_dictionaries_sets_indexing.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleEight, {
+    sourcePath: "content/modules/08_hashing_dictionaries_sets_indexing.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 9);
+  assert.equal(report.summary.completeBlocks, 9);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m08-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+  assert.ok(moduleEight.includes("HASH --> COLLIDE"));
+  assert.ok(!moduleEight.includes("COLLIDE --> HASH"));
+  assert.ok(moduleEight.includes('MAP -. "choose one" .-> R1'));
+  assert.ok(!moduleEight.includes("MAP --> R1"));
+  assert.ok(moduleEight.includes("report missing key"));
+  assert.ok(moduleEight.includes("adopt new buckets"));
+  assert.ok(moduleEight.includes("collision → {n1}"));
+  assert.ok(moduleEight.includes("relation → {n2}"));
+  assert.ok(moduleEight.includes("expected → {n3}"));
+  assert.ok(moduleEight.includes("read old note"));
+  assert.ok(moduleEight.includes("write replacement text"));
+  assert.ok(moduleEight.includes("old minus new"));
+  assert.ok(moduleEight.includes("new minus old"));
+});

@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Completed Module 8's Mermaid accessibility retrofit: all nine instructional
+  diagrams now carry unique stable IDs, concise titles, and authored prose
+  alternatives. Corrected the causal relationship from hash compression to
+  collisions, bucket-routing examples, missing-key termination, active-table
+  replacement after rehashing, the dict/set semantic boundary, derived-index
+  repair directions, and the language-versus-cost-model concept map. Added a
+  renderer-level regression over every Module 8 diagram. This remains a bounded
+  visual-equivalence improvement, not a completed accessibility review or a
+  claim that later modules are remediated.
 - Completed Module 7's Mermaid accessibility retrofit: all ten instructional
   diagrams now carry unique stable IDs, concise titles, and authored prose
   alternatives. Corrected the iterator protocol diagram so it no longer implies
