@@ -18,7 +18,11 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "7d704796fe457709604efb36d77b75e27c958551c36007129c7179fc057dd37d"
+      "sha256": "8a432ef9c2c358ce64f13d87628bbce77053feba33cd0cbb70fc375a29b91593"
+    },
+    {
+      "path": "content/course/contracts/companions/m31.v1.json",
+      "sha256": "4ae2e421c5263c0f75afeeb77daf6c6f2b3679f6202b6a274ee7d16c79d63ebc"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",

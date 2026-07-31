@@ -22,6 +22,7 @@ import {
   liveCodexLearningWorkflowGuideRelativePath,
   liveCodexLearningWorkflowRelativePath,
 } from "../scripts/live-codex-learning-workflow.mjs";
+import { moduleLearningCompanionRelativePath } from "../scripts/module-learning-companion.mjs";
 import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
 import {
   loadReleaseEvidencePolicy,
@@ -78,6 +79,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(manualLearningRecordWorkflowGuideRelativePath));
   assert.ok(paths.includes(liveCodexLearningWorkflowRelativePath));
   assert.ok(paths.includes(liveCodexLearningWorkflowGuideRelativePath));
+  assert.ok(paths.includes(moduleLearningCompanionRelativePath("m31")));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes(releaseEvidencePolicyRelativePath));
   assert.ok(paths.includes(browserProgressSurfacePolicyRelativePath));

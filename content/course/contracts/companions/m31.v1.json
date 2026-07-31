@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m31",
+  "purpose": "Freeze a module-specific M31 companion context for a future human-reviewed contract without making M31 learner-visible.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies live voice quality, model selection, equation or code rendering, microphone access, platform retention, or external integrations.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself save a Notion note, raw voice, transcript, credentials, or personal data.",
+    "mastery": "This authoring-only record is not a grade, oral-exam result, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/30",
+    "digest": "sha256:bebe4b978e3c41a344050a58850cb12b9f40511b377c960126a02f4ab3c89f78"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin from the learner's objective, constraint, and evidence card rather than a score: ask what decision the objective proxies for and what it omits.",
+    "artifactFocus": "Ask for one named assumption behind a local, dual, or information claim; one finite trace or certificate field; and the narrowest non-claim supported by the available evidence.",
+    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Lead one retrieval or trace at a time: separate definition, theorem or assumption, API contract, finite observation, and decision claim; treat an AI derivation or solver output as a proposal to inspect.",
+    "changedPremise": "Change exactly one of the constraint, step size, noise rule, distribution support, log units, or utility assumption and ask the learner to predict the consequence before checking it.",
+    "taHandoff": "End with the current question, attempted reasoning, smallest objective/constraint/convergence claim sheet, unresolved misconception, and suggested focus for the supportive Teaching Assistant defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m18",
+    "carryArtifact": "Carry the objective, constraint, convergence claim sheet with experiment conditions, known limits, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before relying on the bounded computation, which process, file, memory, interruption, or resource-mediation boundary in M18 could change the meaning, reproducibility, or failure mode of its trace?",
+    "boundary": "M18 is the only canonical forward handoff. References to M32 or M34–M36 in M31 authoring material are planning or direct-consumer connections, not learner navigation or release evidence."
+  }
+}

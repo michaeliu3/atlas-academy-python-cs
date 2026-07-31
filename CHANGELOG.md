@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Added the first individually versioned, promotion-grade learning-companion
+  record for hidden M31. It binds the exact M31 global-guide entry by digest,
+  keeps TA and Study Partner contexts distinct, and enforces the canonical
+  M31 → M18 handoff. Future review-ready or verified modules must cite their
+  own typed TA, Study Partner, and forward-handoff JSON objects; a shared
+  guide, a cross-module record, or a Markdown heading cannot substitute.
+  M31 remains authoring-only, unreviewed, unreleased, and absent from the
+  learner reader.
 - Added a versioned, graph-bound module-companion guide registry and two
   contextual follow-on packets on each Core-open module's oral-defense panel:
   one for the Teaching Assistant's supportive defense and one for the Study

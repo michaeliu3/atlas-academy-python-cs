@@ -45,6 +45,13 @@ flowchart LR
   a Core-open module is neither automatically contract-verified nor deployed.
   M25/M26 have preview reader access and route availability: they are
   reference-only material, never synthesis/capstone credit.
+- Module companions deliberately have two layers: the all-module guide
+  registry supplies server-derived reader context, while an individually
+  versioned `content/course/contracts/companions/mNN.v1.json` record is
+  required as evidence for a future review-ready or verified promotion. The
+  latter binds one exact guide entry by digest and must follow the graph's
+  academic forward handoff; it does not itself open a reader, create a chat,
+  write Notion, or establish learner progress.
 - The content/modules directory and content/source-maps directory are
   checked-in, release-canonical course material. Synchronization reads only
   these repository-local inputs; it never falls back to an adjacent authoring

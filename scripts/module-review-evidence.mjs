@@ -49,7 +49,10 @@ const inputRoles = new Set([
   "reference-model",
   "test",
   "provenance",
+  "learning-companion",
 ]);
+const learningCompanionPathPattern =
+  /^content\/course\/contracts\/companions\/m(?:0[1-9]|[1-9]\d)\.v1\.json$/u;
 const reviewOutcomes = new Set(["approved", "changes-requested"]);
 
 function hasText(value) {
@@ -209,8 +212,19 @@ async function resolveEvidenceInput(siteRoot, input, context, caches, errors) {
     errors.push(`${label}.role must name an allowlisted contract-input role.`);
     return null;
   }
+  const validLearningCompanionKind =
+    input.role !== "learning-companion" || input.kind === "json-pointer";
+  if (!validLearningCompanionKind) {
+    errors.push(`${label} learning-companion role must use a JSON Pointer input.`);
+  }
   const repositoryPath = normalizedRepositoryPath(input.path, `${label}.path`, errors);
-  if (!repositoryPath) return null;
+  const validLearningCompanionPath =
+    input.role !== "learning-companion" ||
+    (repositoryPath !== null && learningCompanionPathPattern.test(repositoryPath));
+  if (!validLearningCompanionPath) {
+    errors.push(`${label} learning-companion role must use a canonical module-scoped companion JSON path.`);
+  }
+  if (!repositoryPath || !validLearningCompanionKind || !validLearningCompanionPath) return null;
   if (input.kind === "file") {
     if (input.locator !== null) errors.push(`${label}.locator must be null for a file input.`);
     const text = await readTrackedText(siteRoot, repositoryPath, label, errors);

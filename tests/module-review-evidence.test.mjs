@@ -33,6 +33,11 @@ async function createTrackedFixture() {
     "# Module 1\n\n## First principles\n\nA model begins with stated assumptions.\n",
   );
   await writeFixture(root, "content/source.json", '{"claims":{"state":"bounded"}}\n');
+  await writeFixture(
+    root,
+    "content/course/contracts/companions/m01.v1.json",
+    '{"teachingAssistant":{"openingMove":"Start from the visible model."}}\n',
+  );
   await writeFixture(root, "scripts/reference-model.mjs", "export const model = 'bounded';\n");
   await writeFixture(
     root,
@@ -65,6 +70,12 @@ async function createTrackedFixture() {
               role: "source-ledger",
               path: "content/source.json",
               locator: "/claims/state",
+            },
+            {
+              kind: "json-pointer",
+              role: "learning-companion",
+              path: "content/course/contracts/companions/m01.v1.json",
+              locator: "/teachingAssistant",
             },
             {
               kind: "file",
@@ -102,12 +113,18 @@ test("a module-specific evidence record resolves tracked Markdown headings, JSON
         locator: "first-principles",
       },
       { kind: "json-pointer", path: "content/source.json", locator: "/claims/state" },
+      {
+        kind: "json-pointer",
+        path: "content/course/contracts/companions/m01.v1.json",
+        locator: "/teachingAssistant",
+      },
       { kind: "file", path: "scripts/reference-model.mjs", locator: null },
     ],
   );
   assert.equal(report.resolvedInputs[0].heading.title, "First principles");
   assert.equal(report.resolvedInputs[1].value, "bounded");
   assert.deepEqual(report.releaseInputPaths, [
+    "content/course/contracts/companions/m01.v1.json",
     "content/modules/m01.md",
     "content/source.json",
     "scripts/reference-model.mjs",
@@ -127,6 +144,13 @@ test("a module-specific evidence record resolves tracked Markdown headings, JSON
   await assert.rejects(
     () => validateModuleEvidenceRecord(unsupportedRole, { siteRoot: root }),
     /allowlisted contract-input role/i,
+  );
+
+  const unscopedCompanion = structuredClone(record);
+  unscopedCompanion.evidence[0].inputs[2].path = "content/source.json";
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(unscopedCompanion, { siteRoot: root }),
+    /canonical module-scoped companion JSON path/i,
   );
 });
 
@@ -189,6 +213,7 @@ test("a review record binds the exact tracked evidence digest and its criterion-
     changesRequestedCriteria: 0,
   });
   assert.deepEqual(report.releaseInputPaths, [
+    "content/course/contracts/companions/m01.v1.json",
     "content/modules/m01.md",
     evidencePath,
     "content/source.json",

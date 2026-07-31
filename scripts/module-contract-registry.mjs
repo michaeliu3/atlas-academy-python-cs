@@ -30,6 +30,10 @@ import {
   validateModuleReviewRecord,
 } from "./module-review-evidence.mjs";
 import {
+  moduleLearningCompanionRelativePath,
+  validateModuleLearningCompanion,
+} from "./module-learning-companion.mjs";
+import {
   releaseEvidencePolicyRelativePath,
   validateReleaseEvidencePolicy,
   verifyCourseCiEvidence,
@@ -815,6 +819,62 @@ function requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport,
   errors.push(...promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceReport));
 }
 
+const promotionLearningCompanionPointers = Object.freeze({
+  "ta-prompt": "/teachingAssistant",
+  "study-partner-prompt": "/studyPartner",
+  "forward-handoff": "/forwardHandoff",
+});
+
+/**
+ * A future review-ready/verified module must use its own immutable companion
+ * record for its TA, Study Partner, and canonical-forward evidence. The
+ * shared reader registry is intentionally insufficient: editing M32's guide
+ * must never rewrite evidence frozen for M31.
+ */
+export async function promotionLearningCompanionErrors({
+  siteRoot,
+  moduleEntry,
+  graph,
+  evidenceReport,
+}) {
+  const label = `Module ${moduleEntry.moduleId} reviewed learning companion`;
+  const errors = [];
+  const expectedPath = moduleLearningCompanionRelativePath(moduleEntry.moduleId);
+  const entryFor = (criterionId) => evidenceReport.evidenceByCriterion.get(criterionId);
+
+  for (const [criterionId, locator] of Object.entries(promotionLearningCompanionPointers)) {
+    const companionInputs = (entryFor(criterionId)?.resolvedInputs ?? []).filter(
+      ({ role }) => role === "learning-companion",
+    );
+    const exactInputs = companionInputs.filter(
+      (input) =>
+        input.kind === "json-pointer" &&
+        input.path === expectedPath &&
+        input.locator === locator,
+    );
+    if (companionInputs.length !== 1 || exactInputs.length !== 1) {
+      errors.push(
+        `${label} criterion ${criterionId} must bind exactly one learning-companion JSON Pointer ${expectedPath}${locator}.`,
+      );
+    }
+  }
+
+  try {
+    const record = JSON.parse(await readFile(resolve(siteRoot, expectedPath), "utf8"));
+    await validateModuleLearningCompanion(record, {
+      graph,
+      expectedModuleId: moduleEntry.moduleId,
+      repositoryPath: expectedPath,
+      siteRoot,
+    });
+  } catch (error) {
+    errors.push(
+      `${label} must validate its module-scoped companion record: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  return errors;
+}
+
 function moduleScopedVisualContentPath(graphModule, repositoryPath) {
   if (
     typeof repositoryPath !== "string" ||
@@ -897,7 +957,7 @@ export async function promotionVisualAlternativeErrors({
   return { contentPaths, errors };
 }
 
-async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, manifestById, errors) {
+async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, manifestById, graph, errors) {
   const label = `Module ${moduleEntry.moduleId}`;
   const evidencePath = recordReference(
     moduleEntry.evidenceRecord,
@@ -985,6 +1045,13 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, mani
     }
   }
   requirePromotionEvidenceRoles(moduleEntry, graphModule, evidenceReport, errors);
+  const learningCompanionErrors = await promotionLearningCompanionErrors({
+    siteRoot,
+    moduleEntry,
+    graph,
+    evidenceReport,
+  });
+  errors.push(...learningCompanionErrors);
   const visualEvidence = await promotionVisualAlternativeErrors({
     siteRoot,
     moduleEntry,
@@ -1006,12 +1073,13 @@ async function resolvePromotionEvidence(siteRoot, moduleEntry, graphModule, mani
   };
 }
 
-async function validatePromotableState(siteRoot, moduleEntry, graphModule, manifestById, errors) {
+async function validatePromotableState(siteRoot, moduleEntry, graphModule, manifestById, graph, errors) {
   const promotionEvidence = await resolvePromotionEvidence(
     siteRoot,
     moduleEntry,
     graphModule,
     manifestById,
+    graph,
     errors,
   );
   if (moduleEntry.contractState === "review-ready") {
@@ -1222,6 +1290,7 @@ export async function validateModuleContractRegistry(
         moduleEntry,
         graphModule,
         manifestById,
+        contextualGraph,
         errors,
       );
       for (const path of promotionReport?.candidateInputPaths ?? []) {

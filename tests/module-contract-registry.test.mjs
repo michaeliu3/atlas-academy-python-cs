@@ -3,6 +3,7 @@ import test from "node:test";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import {
   loadModuleContractRegistry,
+  promotionLearningCompanionErrors,
   promotionEvidenceRoleErrors,
   promotionEvidenceRoleRequirements,
   promotionVisualAlternativeErrors,
@@ -46,6 +47,100 @@ test("a promotion cannot bypass authored visual-alternative content and its test
     promotionEvidenceRoleRequirements["accessible-visual-text-alternative"],
     ["course-content", "test"],
   );
+});
+
+test("a future promotion needs its own typed TA, Study Partner, and forward-handoff companion", async () => {
+  const graph = await loadCourseGraph();
+  const path = "content/course/contracts/companions/m31.v1.json";
+  const companionEvidence = (overrides = {}) => ({
+    evidenceByCriterion: new Map([
+      [
+        "ta-prompt",
+        {
+          resolvedInputs: [
+            {
+              kind: "json-pointer",
+              role: "learning-companion",
+              path,
+              locator: "/teachingAssistant",
+              ...overrides.ta,
+            },
+          ],
+        },
+      ],
+      [
+        "study-partner-prompt",
+        {
+          resolvedInputs: [
+            {
+              kind: "json-pointer",
+              role: "learning-companion",
+              path,
+              locator: "/studyPartner",
+              ...overrides.studyPartner,
+            },
+          ],
+        },
+      ],
+      [
+        "forward-handoff",
+        {
+          resolvedInputs: [
+            {
+              kind: "json-pointer",
+              role: "learning-companion",
+              path,
+              locator: "/forwardHandoff",
+              ...overrides.forward,
+            },
+          ],
+        },
+      ],
+    ]),
+  });
+
+  const valid = await promotionLearningCompanionErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m31" },
+    graph,
+    evidenceReport: companionEvidence(),
+  });
+  assert.deepEqual(valid, []);
+
+  const wrongPointer = await promotionLearningCompanionErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m31" },
+    graph,
+    evidenceReport: companionEvidence({
+      studyPartner: { locator: "/teachingAssistant" },
+    }),
+  });
+  assert.ok(wrongPointer.some((error) => error.includes("study-partner-prompt")));
+
+  const crossModule = await promotionLearningCompanionErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m31" },
+    graph,
+    evidenceReport: companionEvidence({
+      forward: { path: "content/course/contracts/companions/m32.v1.json" },
+    }),
+  });
+  assert.ok(crossModule.some((error) => error.includes("forward-handoff")));
+
+  const markdownSubstitute = await promotionLearningCompanionErrors({
+    siteRoot: process.cwd(),
+    moduleEntry: { moduleId: "m31" },
+    graph,
+    evidenceReport: companionEvidence({
+      ta: {
+        kind: "markdown-heading",
+        role: "course-content",
+        path: "content/authoring/m31_optimization_information_workbook.v1.md",
+        locator: "teaching-assistant-prompt--m31",
+      },
+    }),
+  });
+  assert.ok(markdownSubstitute.some((error) => error.includes("ta-prompt")));
 });
 
 test("promotion evidence must bind and scan the module's own Mermaid content", async () => {

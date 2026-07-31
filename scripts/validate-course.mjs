@@ -23,6 +23,10 @@ import {
   validateModuleCompanionGuides,
 } from "./module-companion-guides.mjs";
 import {
+  loadModuleLearningCompanions,
+  validateModuleLearningCompanions,
+} from "./module-learning-companion.mjs";
+import {
   loadManualLearningRecordWorkflow,
   manualLearningRecordWorkflowPath,
   validateManualLearningRecordWorkflow,
@@ -119,6 +123,7 @@ export async function validateCourseContracts(
   let manualLearningRecordWorkflow = null;
   let liveCodexLearningWorkflow = null;
   let moduleCompanionGuides = null;
+  let moduleLearningCompanions = null;
   let browserProgressSurfacePolicy = null;
   let mermaidAlternatives = null;
   const releaseInputPaths = new Set([
@@ -245,6 +250,20 @@ export async function validateCourseContracts(
   }
 
   try {
+    moduleLearningCompanions = await validateModuleLearningCompanions(
+      await loadModuleLearningCompanions(siteRoot),
+      { graph, siteRoot },
+    );
+    for (const path of moduleLearningCompanions.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+  } catch (error) {
+    errors.push(
+      `Module-scoped learning companions must validate before future review-ready promotion: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
     browserProgressSurfacePolicy = await validateBrowserProgressSurfacePolicy(
       await loadBrowserProgressSurfacePolicy(siteRoot),
       { siteRoot },
@@ -317,6 +336,7 @@ export async function validateCourseContracts(
     manualLearningRecordWorkflow,
     liveCodexLearningWorkflow,
     moduleCompanionGuides,
+    moduleLearningCompanions,
     browserProgressSurfacePolicy,
     mermaidAlternatives,
     summary: contractRegistry.summary,
