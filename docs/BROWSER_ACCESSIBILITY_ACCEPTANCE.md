@@ -46,18 +46,24 @@ bounded browser-acceptance evidence, not a GitHub Release, a private
 deployment, or a complete accessibility review. Every later candidate still
 requires its own fresh run.
 
-## Current local-runtime limitation
+## Windows production-server compatibility patch
 
-On the current Windows development host, Vinext 0.0.50's Node production
-server indexes static-file paths with Windows separators but receives browser
-asset URLs with `/` separators. A fresh `vinext start` can therefore return a
-404 for an existing hashed `/assets/...` file before client hydration. This is
-an upstream local-server limitation, not an axe result or a reason to remove
-the Mermaid/browser assertions. The GitHub acceptance job runs on Ubuntu with
-a fresh build and server; the newest successful run above is the evidence to use
-for this gate. Every later candidate still needs its own fresh run. Local
-static-page axe checks do **not** substitute for the Linux browser-acceptance
-result.
+Vinext 0.0.50's upstream Node production server originally indexed static-file
+cache keys with Windows `\` separators while browsers request `/assets/...`
+URLs with `/`. That caused a fresh local `vinext start` to return 404 before
+client hydration, so Mermaid and interactive browser checks could not run.
+
+The reviewed, version-pinned `patches/vinext@0.0.50.patch` normalizes the
+cache's relative paths to URL separators. `pnpm-workspace.yaml` binds the patch
+to exactly Vinext 0.0.50 and the lockfile records its hash. The focused
+`tests/vinext-static-assets.test.mjs` regression creates an asset cache and
+requires the browser-style URL lookup to resolve. This is a local test-server
+compatibility fix, not a security remediation, a deployment claim, or proof of
+complete accessibility.
+
+Every later candidate still needs a fresh browser run. The Linux CI job remains
+the release evidence for browser acceptance; successful local static-page axe
+checks do **not** substitute for it.
 
 This is a bounded automated browser check, not a claim of complete
 accessibility. It does not replace manual keyboard review across every

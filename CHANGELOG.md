@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Patched Vinext 0.0.50's Windows production static-file cache to normalize
+  browser URL separators, then added a focused regression that proves a
+  `/assets/...` URL resolves. This restores local browser hydration and keeps
+  the Chromium/axe gate meaningful; it is a narrow compatibility patch, not a
+  security-remediation or deployment claim.
 - Clarified the learner-authorized live-learning boundary: Atlas remains a
   local-first course portal, while designated platform-hosted Codex chats now
   have distinct Teaching Assistant oral-defense and Study Partner discussion

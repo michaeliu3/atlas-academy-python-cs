@@ -14,3 +14,6 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+
+patchedDependencies:
+  vinext@0.0.50: patches/vinext@0.0.50.patch

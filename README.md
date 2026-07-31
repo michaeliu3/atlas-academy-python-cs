@@ -123,7 +123,7 @@ database, package, credential, or arbitrary-code operations.
 successful, recorded GitHub Linux run for the exact source commit is release
 evidence for it; see
 [browser acceptance](docs/BROWSER_ACCESSIBILITY_ACCEPTANCE.md) for its exact
-scope and the current Windows local-server limitation.
+scope and the version-pinned Windows static-asset compatibility patch.
 
 `pnpm validate:performance-budget` inspects the production build's emitted
 client assets and manifest boundaries. It enforces raw-byte limits for the
