@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Added an authoring-only M20 source-audit addendum to prepare a later
+  structural packet. It maps source ownership and six-session stopping lines,
+  keeps reuse link/paraphrase-first, and records the missing canonical
+  reference-model source as an unresolved provenance blocker. It is not a
+  learner download, publication promotion, source-quality approval, or
+  release evidence.
 - Corrected M29 source-map route language so its two academic prerequisites
   (M27/M28), direct forward handoff (M30), and later conceptual consumers
   (M31–M36) cannot be mistaken for a navigation bypass. The canonical
