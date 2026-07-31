@@ -279,6 +279,33 @@ test("M18 resumes only its bounded v3 prediction evidence and reset leaves no re
     .toEqual({ legacy: null, current: null });
 });
 
+test("M18 clears obsolete saved evidence when its final prediction context changes", async ({
+  page,
+}) => {
+  const currentKey = "atlas-academy.module18-os-studio.v3";
+  await page.goto("/");
+  await page.getByRole("button", { name: "Machine & network" }).click();
+  const osStudio = page.locator(".os-studio");
+
+  await osStudio.getByRole("button", { name: "User mode" }).click();
+  await osStudio.getByRole("button", { name: /unsure/i }).click();
+  await osStudio
+    .getByRole("button", { name: "Reveal boundary evidence" })
+    .click();
+  await expect
+    .poll(() => page.evaluate((key) => window.localStorage.getItem(key), currentKey))
+    .not.toBeNull();
+
+  await osStudio.getByRole("button", { name: /Runtime preparation/ }).click();
+  await expect
+    .poll(() => page.evaluate((key) => window.localStorage.getItem(key), currentKey))
+    .toBeNull();
+  await page.reload();
+  await expect
+    .poll(() => page.evaluate((key) => window.localStorage.getItem(key), currentKey))
+    .toBeNull();
+});
+
 test("the diagnostic requires an answer and confidence before model reveal", async ({
   page,
 }) => {

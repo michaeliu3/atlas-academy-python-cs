@@ -17,10 +17,11 @@ actually published.
   browser regressions cover forged records, migration/no-fallback behavior,
   and M26's preview boundary. These records remain optional browser state, not
   learner identity, event history, Notion evidence, authorization, or mastery
-  evidence. M18 now retires its broad v2 OS-studio snapshot and retains only
-  three context-bound, exact v3 prediction gates; malformed hexadecimal input
-  cannot satisfy its translation reveal. The intake now projects a valid v2
-  attempt into an exact 20-triad v3 envelope before removing v2, deriving
+  evidence. M18 now retires its broad v2 OS-studio snapshot and retains three
+  bounded v3 gate records with the allowlisted context needed to interpret
+  them; malformed hexadecimal input cannot satisfy its translation reveal. The
+  intake now projects a valid v2 attempt into an exact 20-triad v3 envelope
+  before removing v2, deriving
   navigation, completion, and timestamps only in memory. A storage-surface
   policy/linter and remaining legacy callers still require separate work; this
   is not a whole-portal storage-hardening or security-clean claim.

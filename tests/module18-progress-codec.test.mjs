@@ -137,7 +137,7 @@ test("M18 rejects record expansion, forged translation reveal, and partial hexad
   assert.equal(parseBoundedHexadecimal("0x2A", 0xff), 0x2a);
 });
 
-test("M18 retires broad v2 state and leaves blank progress absent", () => {
+test("M18 retires broad v2 state, leaves blank progress absent, and clears stale evidence", () => {
   const retiredStorage = createMemoryStorage({
     [MODULE18_LEGACY_PROGRESS_STORAGE_KEY]: JSON.stringify({
       activeView: "memory",
@@ -152,7 +152,18 @@ test("M18 retires broad v2 state and leaves blank progress absent", () => {
   const blankStorage = createMemoryStorage();
   assert.equal(hasMeaningfulModule18Progress(emptyRecord), false);
   assert.equal(persistModule18Progress(blankStorage, emptyRecord), false);
-  assert.deepEqual(blankStorage.operations, []);
+  assert.equal(blankStorage.read(MODULE18_PROGRESS_STORAGE_KEY), null);
+  assert.equal(blankStorage.read(MODULE18_LEGACY_PROGRESS_STORAGE_KEY), null);
+
+  const staleStorage = createMemoryStorage({
+    [MODULE18_PROGRESS_STORAGE_KEY]: module18ProgressCodec.serialize(
+      completeRecord,
+    ),
+    [MODULE18_LEGACY_PROGRESS_STORAGE_KEY]: JSON.stringify({ broad: true }),
+  });
+  assert.equal(persistModule18Progress(staleStorage, emptyRecord), false);
+  assert.equal(staleStorage.read(MODULE18_PROGRESS_STORAGE_KEY), null);
+  assert.equal(staleStorage.read(MODULE18_LEGACY_PROGRESS_STORAGE_KEY), null);
 });
 
 test("M18 resumes only valid v3 evidence and reset clears both generations", () => {
