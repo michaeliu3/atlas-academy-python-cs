@@ -7,6 +7,10 @@ import {
   validateAdvancedModuleContractRegistry,
 } from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
+import {
+  scanMermaidBlocks,
+  validateMermaidAccessibility,
+} from "../lib/mermaid-accessibility.mjs";
 
 const candidatePath = "content/authoring/m31_optimization_information_workbook.v1.md";
 
@@ -52,4 +56,11 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /Teaching Assistant prompt — M31/u);
   assert.match(candidate, /Study Partner prompt — M31/u);
   assert.match(candidate, /not in the reader\s+manifest/u);
+
+  const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: candidatePath });
+  const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
+  assert.equal(visualBlocks.length, 2);
+  assert.equal(visualReport.summary.completeBlocks, 2);
+  assert.ok(visualBlocks.every(({ metadata }) => metadata?.id.startsWith("m31-")));
+  assert.ok(visualBlocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });

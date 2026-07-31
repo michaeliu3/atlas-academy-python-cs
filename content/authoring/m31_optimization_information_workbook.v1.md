@@ -38,6 +38,9 @@ algorithms produce bounded computational evidence; stochasticity and
 information expose a new trade-off; the final dossier reconnects every layer.
 
 ```mermaid
+%% atlas-diagram-id: m31-connected-evidence-route
+%% atlas-diagram-title: The M31 optimization and information evidence route
+%% atlas-diagram-alt: A decision owner defines variables, units, objectives, and constraints before assumptions support a certificate or counterexample; a finite algorithm trace and information trade-off then lead only to a limited recommendation and evidence dossier.
 flowchart LR
   Q["Question and decision owner"] --> F["Variables, units, objective, constraints"]
   F --> G["Geometry and assumptions"]
@@ -211,6 +214,9 @@ At `(1, 0)`, the point is feasible and ultimately becomes the constrained
 minimum, yet its ordinary objective gradient is `(-2, -2)`, not zero.
 
 ```mermaid
+%% atlas-diagram-id: m31-constrained-stationarity-counterexample
+%% atlas-diagram-title: Why zero ordinary gradient is not a constrained certificate
+%% atlas-diagram-alt: The unconstrained stationary point has zero ordinary gradient but violates the hard constraint, while the feasible boundary minimizer has a nonzero ordinary gradient and needs constraint-aware certificate reasoning.
 flowchart TD
   Z["gradient f = 0"] --> Q{"Which problem?"}
   Q -->|"unconstrained, differentiable interior"| L["candidate local stationarity"]
@@ -498,6 +504,14 @@ Choose a bounded, non-consequential toy system. Deliver:
 5. a stochastic or information card with support/uncertainty boundaries;
 6. a limited recommendation, explicit non-claim, and forward handoff.
 
+### Required evidence
+
+Keep the objective/constraint/units card, one named mathematical assumption,
+one smallest counterexample, one finite trace with configuration, one
+independent check or explicit reason it is unavailable, an information/support
+boundary, and a limited next action. This is an evidence dossier—not a score or
+permission to make a consequential decision.
+
 ### Acceptance rubric
 
 | Evidence | Strong evidence looks like | Repair prompt |
@@ -547,6 +561,14 @@ not a failure label.
    **Answer: B.** Misconception repaired: support is an assumption, not an
    implementation detail.
 
+### Misconception repair key
+
+When an answer is fragile, repair the narrowest confusion first: ordinary
+stationarity is not constrained feasibility; a finite trace is not a
+convergence theorem; and a support mismatch is not a harmless numerical
+detail. Then change one premise and make a new prediction before rereading the
+explanation.
+
 **Review schedule:** retrieve the invariant and one counterexample after 1,
 3, 7, 14, and 30 days. On days 7 and 30, change one premise: a nonconvex
 objective, a violated qualification, dependent gradients, or a support
@@ -575,6 +597,17 @@ defended, repaired, still uncertain, and the next retrieval or handoff step.
 Do not grade, claim platform voice settings, or store a raw transcript.
 ```
 
+### Hint ladder and counterexample
+
+1. Ask the learner to name the objective, hard constraint, and one quantity
+   actually observed.
+2. Change only one premise—such as feasibility, a qualification, step size,
+   support, or utility—and ask for a prediction.
+3. If needed, compare the infeasible zero-gradient point with the feasible
+   boundary point before offering a direct correction.
+4. Let the learner restate the narrowest defensible claim and its non-claim in
+   their own words.
+
 ### Study Partner prompt — M31
 
 ```text
@@ -588,6 +621,14 @@ consequence. Help them inspect an AI-generated derivation or solver claim,
 but never treat it as authority. End with a concise TA handoff: strongest
 insight, unresolved misconception, evidence artifact, and next question.
 ```
+
+### Learner-controlled evidence summary
+
+End with a small learner-controlled card: **defended claim**, **repaired
+assumption or misconception**, **evidence inspected**, **remaining
+uncertainty**, and **next retrieval or handoff**. The learner may correct,
+decline to save, or keep this summary locally; it is not an exam result,
+transcript, or automatic Notion record.
 
 ### Forward handoff
 

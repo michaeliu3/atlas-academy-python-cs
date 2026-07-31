@@ -1,9 +1,10 @@
 import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadCourseGraph } from "./course-graph.mjs";
+import { loadCourseGraph, validateCourseGraph } from "./course-graph.mjs";
 import {
   criterionIds,
+  moduleContractRegistryRelativePath,
   loadModuleContractRegistry,
   promotionEvidenceRoleErrors,
   promotionEvidenceScopeErrors,
@@ -17,10 +18,16 @@ import {
   readTrackedText,
   validateModuleEvidenceRecord,
 } from "./module-review-evidence.mjs";
-import { openGitIndexSnapshot } from "./git-index-snapshot.mjs";
+import {
+  GitIndexSnapshotError,
+  assertGitIndexSnapshotForSiteRoot,
+  openGitIndexSnapshot,
+} from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
+const canonicalCourseGraphPath = "content/course/course-graph.v2.json";
+const canonicalModuleManifestPath = "content/modules/manifest.json";
 
 export const moduleEvidencePreflightDirectoryRelativePath =
   "content/course/contracts/evidence-preflight";
@@ -48,6 +55,14 @@ const requiredM29PromotionBlockers = [
   "source-commit-ci-run",
   "private-deployment-record",
 ];
+const requiredM31OpenCriterionIds = ["release-provenance-ci-and-deployment-evidence"];
+const requiredM31PromotionBlockers = [
+  "human-review",
+  "review-ready-commit",
+  "source-commit-ci-run",
+  "private-deployment-record",
+  "learner-delivery-review",
+];
 const expectedM29PreflightReleaseBoundary =
   "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. The required release criterion remains explicitly open.";
 const expectedM29EvidenceRecordReleaseBoundary =
@@ -59,6 +74,63 @@ const expectedM29ReleaseCriterionLimitation =
 const expectedM29CandidateDocumentationPath = "docs/module-evidence/m29/candidate-preflight.md";
 const expectedM29CandidateDocumentationDigest =
   "sha256:e6a9ce6345b84696a063747ddfa0127ee620b281be6c6d4080aae11921e2917e";
+const expectedM31PreflightReleaseBoundary =
+  "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M31 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.";
+const expectedM31EvidenceRecordReleaseBoundary =
+  "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M31 remains authoring-only, hidden from the reader, and unreleased.";
+const expectedM31ReleaseCriterionClaim =
+  "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical source-map or delivery binding, deployment, or publication evidence for hidden M31 material.";
+const expectedM31ReleaseCriterionLimitation =
+  "This record does not bind a human review, canonical delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.";
+const expectedM31CandidateDocumentationPath = "docs/module-evidence/m31/candidate-preflight.md";
+const expectedM31CandidateDocumentationDigest =
+  "sha256:6a0a62538b3ab2e43f3ccdffb6a6e1e424933f86064487ea7849e9af86932966";
+const expectedM31AuthoringWorkbookPath =
+  "content/authoring/m31_optimization_information_workbook.v1.md";
+const expectedM31AuthoringSourceMapPaths = new Set([
+  "content/source-maps/module31_optimization_information_source_map.md",
+  "content/source-maps/module31_optimization_information_source_audit.md",
+]);
+const expectedM31AuthoringModelPath = "lib/m31-optimization-authoring-model.js";
+const expectedM31AuthoringModelTestPath = "tests/m31-optimization-authoring-model.test.mjs";
+const expectedM31AuthoringVisualTestPath = "tests/m31-authoring-workbook.test.mjs";
+
+const candidatePreflightProfiles = Object.freeze({
+  m29: Object.freeze({
+    moduleId: "m29",
+    state: candidateState,
+    evidenceRecordPath: "content/course/contracts/evidence/m29.v1.json",
+    openCriterionIds: requiredM29OpenCriterionIds,
+    promotionBlockers: requiredM29PromotionBlockers,
+    preflightReleaseBoundary: expectedM29PreflightReleaseBoundary,
+    evidenceRecordReleaseBoundary: expectedM29EvidenceRecordReleaseBoundary,
+    releaseCriterionClaim: expectedM29ReleaseCriterionClaim,
+    releaseCriterionLimitation: expectedM29ReleaseCriterionLimitation,
+    candidateDocumentationPath: expectedM29CandidateDocumentationPath,
+    candidateDocumentationAnchor: "candidate-boundary",
+    candidateDocumentationDigest: expectedM29CandidateDocumentationDigest,
+    scope: "legacy-canonical",
+  }),
+  m31: Object.freeze({
+    moduleId: "m31",
+    state: "authoring-only-candidate-not-promoting",
+    evidenceRecordPath: "content/course/contracts/evidence/m31.v1.json",
+    openCriterionIds: requiredM31OpenCriterionIds,
+    promotionBlockers: requiredM31PromotionBlockers,
+    preflightReleaseBoundary: expectedM31PreflightReleaseBoundary,
+    evidenceRecordReleaseBoundary: expectedM31EvidenceRecordReleaseBoundary,
+    releaseCriterionClaim: expectedM31ReleaseCriterionClaim,
+    releaseCriterionLimitation: expectedM31ReleaseCriterionLimitation,
+    candidateDocumentationPath: expectedM31CandidateDocumentationPath,
+    candidateDocumentationAnchor: "authoring-candidate-boundary",
+    candidateDocumentationDigest: expectedM31CandidateDocumentationDigest,
+    scope: "authoring-only",
+  }),
+});
+
+function candidatePreflightProfile(moduleId) {
+  return candidatePreflightProfiles[moduleId] ?? null;
+}
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -66,6 +138,81 @@ function isPlainObject(value) {
 
 function hasText(value) {
   return typeof value === "string" && value.trim() !== "";
+}
+
+function graphWithoutDerivedProjection(graph) {
+  if (!isPlainObject(graph)) return graph;
+  const canonicalGraph = { ...graph };
+  delete canonicalGraph.routePlan;
+  delete canonicalGraph.sequence;
+  return canonicalGraph;
+}
+
+function suppliedM31ContextMatchesSnapshot(
+  suppliedGraph,
+  suppliedRegistry,
+  context,
+  errors,
+) {
+  if (
+    suppliedGraph !== null &&
+    JSON.stringify(graphWithoutDerivedProjection(suppliedGraph)) !== JSON.stringify(context.graph)
+  ) {
+    errors.push("M31 authoring candidate supplied graph must match its captured Git-index graph context.");
+  }
+  if (
+    suppliedRegistry !== null &&
+    JSON.stringify(suppliedRegistry) !== JSON.stringify(context.registry)
+  ) {
+    errors.push("M31 authoring candidate supplied registry must match its captured Git-index registry context.");
+  }
+}
+
+/**
+ * State is evidence for an authoring-only candidate too: a staged reader or
+ * release transition cannot be hidden by restoring an older worktree copy.
+ * This narrow context closure intentionally covers only the graph, v3
+ * registry, and generated reader manifest that define M31's learner boundary.
+ */
+export async function loadM31AuthoringStateContextFromSnapshot(siteRoot, snapshot, errors) {
+  const contextPaths = [
+    canonicalCourseGraphPath,
+    moduleContractRegistryRelativePath,
+    canonicalModuleManifestPath,
+  ];
+  try {
+    await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
+    await snapshot.assertClean(contextPaths);
+    const [graphRecord, registryRecord, manifestRecord] = await Promise.all(
+      contextPaths.map((repositoryPath) => snapshot.readJson(repositoryPath)),
+    );
+    const graph = graphRecord.value;
+    const registry = registryRecord.value;
+    const manifest = manifestRecord.value;
+    validateCourseGraph(graph);
+    if (!isPlainObject(registry) || !Array.isArray(registry.modules)) {
+      throw new Error("M31 candidate Git-index registry context must contain a modules array.");
+    }
+    if (!isPlainObject(manifest) || !Array.isArray(manifest.modules)) {
+      throw new Error("M31 candidate Git-index manifest context must contain a modules array.");
+    }
+    return {
+      graph,
+      registry,
+      manifest,
+      records: Object.freeze({
+        graph: graphRecord,
+        registry: registryRecord,
+        manifest: manifestRecord,
+      }),
+    };
+  } catch (error) {
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(
+      `M31 authoring candidate could not capture its graph, registry, and manifest state context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return null;
+  }
 }
 
 function exactKeys(value, expectedKeys, label, errors) {
@@ -88,6 +235,66 @@ function sameOrderedValues(actual, expected) {
     actual.length === expected.length &&
     actual.every((value, index) => value === expected[index])
   );
+}
+
+function sameJsonValue(left, right) {
+  if (Object.is(left, right)) return true;
+  if (Array.isArray(left) || Array.isArray(right)) {
+    return (
+      Array.isArray(left) &&
+      Array.isArray(right) &&
+      left.length === right.length &&
+      left.every((value, index) => sameJsonValue(value, right[index]))
+    );
+  }
+  if (!isPlainObject(left) || !isPlainObject(right)) return false;
+  const leftKeys = Object.keys(left).sort();
+  const rightKeys = Object.keys(right).sort();
+  return (
+    leftKeys.length === rightKeys.length &&
+    leftKeys.every(
+      (key, index) =>
+        key === rightKeys[index] && sameJsonValue(left[key], right[key]),
+    )
+  );
+}
+
+/**
+ * The default M31 path refuses caller-injected JSON that differs from the
+ * captured source. The named override keeps structural negative tests
+ * possible, but is deliberately not a provenance-grade entry point.
+ */
+async function validateM31SuppliedArtifactsMatchSnapshot(
+  preflight,
+  suppliedEvidenceRecord,
+  siteRoot,
+  snapshot,
+  errors,
+) {
+  const preflightPath = moduleEvidencePreflightRelativePath("m31");
+  const artifactPaths = [preflightPath];
+  if (suppliedEvidenceRecord !== null) artifactPaths.push(candidatePreflightProfiles.m31.evidenceRecordPath);
+  try {
+    await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
+    await snapshot.assertClean(artifactPaths);
+    const canonicalPreflight = (await snapshot.readJson(preflightPath)).value;
+    if (!sameJsonValue(preflight, canonicalPreflight)) {
+      errors.push("M31 authoring candidate supplied preflight must match its captured Git-index preflight record.");
+    }
+    if (suppliedEvidenceRecord !== null) {
+      const canonicalEvidence = (
+        await snapshot.readJson(candidatePreflightProfiles.m31.evidenceRecordPath)
+      ).value;
+      if (!sameJsonValue(suppliedEvidenceRecord, canonicalEvidence)) {
+        errors.push("M31 authoring candidate supplied evidence record must match its captured Git-index evidence record.");
+      }
+    }
+  } catch (error) {
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(
+      `M31 authoring candidate could not capture its supplied artifact context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
 }
 
 function preflightFailure(errors) {
@@ -157,8 +364,9 @@ function validatePreflightRecord(preflight, errors) {
       `module evidence preflight must use schemaVersion 1, kind ${moduleEvidencePreflightKind}, and recordVersion ${moduleEvidencePreflightRecordVersion}.`,
     );
   }
-  if (preflight?.moduleId !== "m29") {
-    errors.push("The first candidate evidence preflight is intentionally scoped to m29.");
+  const profile = candidatePreflightProfile(preflight?.moduleId);
+  if (!profile) {
+    errors.push("Module evidence preflight must use an explicitly allowlisted candidate module ID.");
   }
   if (!hasText(preflight?.purpose)) {
     errors.push("module evidence preflight.purpose must be non-empty text.");
@@ -169,26 +377,65 @@ function validatePreflightRecord(preflight, errors) {
       errors.push(`module evidence preflight.truthBoundary.${key} must be non-empty text.`);
     }
   }
-  if (preflight?.truthBoundary?.release !== expectedM29PreflightReleaseBoundary) {
-    errors.push("M29 evidence preflight must preserve the exact candidate-only release nonclaim.");
+  if (!profile) return null;
+  const moduleLabel = profile.moduleId.toUpperCase();
+  if (preflight?.truthBoundary?.release !== profile.preflightReleaseBoundary) {
+    errors.push(`${moduleLabel} evidence preflight must preserve the exact candidate-only release nonclaim.`);
   }
-  if (preflight?.state !== candidateState) {
-    errors.push(`module evidence preflight.state must be ${candidateState}; it may not label a candidate review-ready or published.`);
+  if (preflight?.state !== profile.state) {
+    errors.push(
+      `module evidence preflight.state must be ${profile.state}; it may not label a candidate review-ready, learner-deliverable, or published.`,
+    );
   }
-  if (preflight?.evidenceRecordPath !== "content/course/contracts/evidence/m29.v1.json") {
-    errors.push("M29 evidence preflight must bind content/course/contracts/evidence/m29.v1.json.");
+  if (preflight?.evidenceRecordPath !== profile.evidenceRecordPath) {
+    errors.push(`${moduleLabel} evidence preflight must bind ${profile.evidenceRecordPath}.`);
   }
-  if (!sameOrderedValues(preflight?.openCriterionIds, requiredM29OpenCriterionIds)) {
-    errors.push("M29 evidence preflight must leave only release-provenance-ci-and-deployment-evidence open.");
+  if (!sameOrderedValues(preflight?.openCriterionIds, profile.openCriterionIds)) {
+    errors.push(`${moduleLabel} evidence preflight must leave only release-provenance-ci-and-deployment-evidence open.`);
   }
-  if (!sameOrderedValues(preflight?.promotionBlockers, requiredM29PromotionBlockers)) {
-    errors.push("M29 evidence preflight must name every unresolved human-review, commit, CI, and deployment blocker.");
+  if (!sameOrderedValues(preflight?.promotionBlockers, profile.promotionBlockers)) {
+    errors.push(`${moduleLabel} evidence preflight must name every unresolved review, commit, CI, deployment, and delivery blocker.`);
   }
+  return profile;
 }
 
-function validateNonPromotionState(moduleEntry, graphModule, errors) {
+function validateNonPromotionState(profile, moduleEntry, graphModule, errors, { manifestById = null } = {}) {
+  const moduleLabel = profile.moduleId.toUpperCase();
   if (!moduleEntry) {
-    errors.push("M29 evidence preflight requires a canonical M29 registry entry.");
+    errors.push(`${moduleLabel} evidence preflight requires a canonical ${moduleLabel} registry entry.`);
+    return;
+  }
+  if (profile.scope === "authoring-only") {
+    const graphState = graphModule?.state;
+    if (
+      moduleEntry.contractState !== "authoring-only" ||
+      moduleEntry.evidenceRecord !== null ||
+      moduleEntry.reviewRecord !== null ||
+      moduleEntry.reviewReadyCommit !== null ||
+      moduleEntry.release !== null ||
+      moduleEntry.migration?.kind !== "advanced-authoring-adapter" ||
+      moduleEntry.migration?.path !== "content/course/contracts/advanced-module-contracts.v1.json" ||
+      moduleEntry.migration?.locator !== "/modules/0"
+    ) {
+      errors.push("M31 authoring candidate requires the canonical registry to remain authoring-only with no promotion records.");
+    }
+    if (Object.values(moduleEntry.humanReview ?? {}).some((outcome) => outcome !== "pending")) {
+      errors.push("M31 authoring candidate requires every canonical human-review dimension to remain pending.");
+    }
+    if (
+      graphState?.lifecycle !== "authoring-only" ||
+      graphState?.readerAccess !== "hidden" ||
+      graphState?.availability !== "authoring-only" ||
+      graphState?.contract?.track !== "advanced-v1" ||
+      graphState?.contract?.state !== "authoring-only" ||
+      graphState?.release?.state !== "unrecorded" ||
+      graphState?.release?.recordId !== null ||
+      graphModule?.sourceMap !== null ||
+      graphModule?.studioId !== null ||
+      manifestById?.has("m31")
+    ) {
+      errors.push("M31 authoring candidate must remain authoring-only and hidden with no canonical source map, studio, manifest entry, or release record.");
+    }
     return;
   }
   if (
@@ -205,20 +452,22 @@ function validateNonPromotionState(moduleEntry, graphModule, errors) {
   }
   if (
     graphModule?.state?.contract?.track !== "legacy-v1" ||
-    graphModule.state.contract.state !== "legacy-baseline" ||
-    graphModule.state.release?.state !== "unrecorded" ||
-    graphModule.state.release?.recordId !== null
+    graphModule?.state?.contract?.state !== "legacy-baseline" ||
+    graphModule?.state?.release?.state !== "unrecorded" ||
+    graphModule?.state?.release?.recordId !== null
   ) {
     errors.push("M29 evidence preflight must preserve the canonical graph legacy-v1/legacy-baseline and unrecorded release tuple.");
   }
 }
 
 async function validateCandidateReleaseBoundary(
+  profile,
   preflight,
   evidenceReport,
   errors,
   { siteRoot, snapshot = null },
 ) {
+  const moduleLabel = profile.moduleId.toUpperCase();
   const releaseEntry = evidenceReport.evidenceByCriterion.get(
     "release-provenance-ci-and-deployment-evidence",
   );
@@ -227,40 +476,40 @@ async function validateCandidateReleaseBoundary(
     ({ kind, role, path, locator }) =>
       kind === "json-pointer" &&
       role === "provenance" &&
-      path === moduleEvidencePreflightRelativePath("m29") &&
+      path === moduleEvidencePreflightRelativePath(profile.moduleId) &&
       locator === "/truthBoundary/release",
   );
   const documentationBound = releaseInputs.filter(
     ({ kind, role, path, locator }) =>
       kind === "markdown-heading" &&
       role === "provenance" &&
-      path === expectedM29CandidateDocumentationPath &&
-      locator === "candidate-boundary",
+      path === profile.candidateDocumentationPath &&
+      locator === profile.candidateDocumentationAnchor,
   );
   if (releaseInputs.length !== 2 || selfBound.length !== 1 || documentationBound.length !== 1) {
-    errors.push("M29 candidate release evidence must bind exactly its explicit release nonclaim and candidate-boundary documentation.");
+    errors.push(`${moduleLabel} candidate release evidence must bind exactly its explicit release nonclaim and candidate-boundary documentation.`);
   }
-  if (evidenceReport.record?.truthBoundary?.release !== expectedM29EvidenceRecordReleaseBoundary) {
-    errors.push("M29 candidate evidence record must preserve the exact candidate-only evidence-record release nonclaim.");
+  if (evidenceReport.record?.truthBoundary?.release !== profile.evidenceRecordReleaseBoundary) {
+    errors.push(`${moduleLabel} candidate evidence record must preserve the exact candidate-only evidence-record release nonclaim.`);
   }
-  if (releaseEntry?.claim !== expectedM29ReleaseCriterionClaim) {
-    errors.push("M29 candidate release evidence must preserve the exact candidate-only release-boundary claim.");
+  if (releaseEntry?.claim !== profile.releaseCriterionClaim) {
+    errors.push(`${moduleLabel} candidate release evidence must preserve the exact candidate-only release-boundary claim.`);
   }
   if (
     !Array.isArray(releaseEntry?.limitations) ||
     releaseEntry.limitations.length !== 1 ||
-    releaseEntry.limitations[0] !== expectedM29ReleaseCriterionLimitation
+    releaseEntry.limitations[0] !== profile.releaseCriterionLimitation
   ) {
-    errors.push("M29 candidate release evidence must preserve its exact open-criterion limitation.");
+    errors.push(`${moduleLabel} candidate release evidence must preserve its exact open-criterion limitation.`);
   }
-  if (preflight.truthBoundary?.release !== expectedM29PreflightReleaseBoundary) {
-    errors.push("M29 candidate release evidence must preserve the preflight's exact release nonclaim.");
+  if (preflight.truthBoundary?.release !== profile.preflightReleaseBoundary) {
+    errors.push(`${moduleLabel} candidate release evidence must preserve the preflight's exact release nonclaim.`);
   }
   const documentationErrors = [];
   const documentation = await readTrackedText(
     siteRoot,
-    expectedM29CandidateDocumentationPath,
-    "M29 candidate release documentation",
+    profile.candidateDocumentationPath,
+    `${moduleLabel} candidate release documentation`,
     documentationErrors,
     { snapshot },
   );
@@ -268,20 +517,99 @@ async function validateCandidateReleaseBoundary(
     errors.push(...documentationErrors);
   } else {
     const digest = `sha256:${createHash("sha256").update(documentation.text, "utf8").digest("hex")}`;
-    if (digest !== expectedM29CandidateDocumentationDigest) {
-      errors.push("M29 candidate release evidence must preserve the reviewed candidate-boundary documentation digest.");
+    if (digest !== profile.candidateDocumentationDigest) {
+      errors.push(`${moduleLabel} candidate release evidence must preserve the reviewed candidate-boundary documentation digest.`);
     }
   }
-  if (!sameOrderedValues(preflight?.openCriterionIds, requiredM29OpenCriterionIds)) {
-    errors.push("M29 candidate release criterion may not be silently closed by structural input resolution.");
+  if (!sameOrderedValues(preflight?.openCriterionIds, profile.openCriterionIds)) {
+    errors.push(`${moduleLabel} candidate release criterion may not be silently closed by structural input resolution.`);
   }
 }
 
 /**
- * Validate an M29 candidate evidence dossier without changing lifecycle state.
- * A passing report means only that module-scoped structural inputs resolve and
- * meet the profile; it is not a human review, learner-mastery, CI, deployment,
- * or publication result.
+ * M31 has intentionally not selected a learner workbook, canonical graph
+ * source map, or studio. Its candidate dossier therefore gets a strict
+ * authoring-only scope check instead of borrowing the promoted-module scope
+ * rule, which would incorrectly require the absent learner-facing artifacts.
+ */
+function validateM31AuthoringCandidateScope(evidenceReport, errors) {
+  const label = "M31 authoring candidate evidence";
+  for (const entry of evidenceReport.evidenceByCriterion.values()) {
+    for (const input of entry.resolvedInputs ?? []) {
+      if (input.role === "course-content" && input.path !== expectedM31AuthoringWorkbookPath) {
+        errors.push(
+          `${label} criterion ${entry.criterionId} must bind hidden authoring workbook ${expectedM31AuthoringWorkbookPath}; found ${input.path}.`,
+        );
+      }
+      if (input.role === "source-ledger" && !expectedM31AuthoringSourceMapPaths.has(input.path)) {
+        errors.push(
+          `${label} criterion ${entry.criterionId} may bind only the M31 instructor-facing source map or source audit; found ${input.path}.`,
+        );
+      }
+      if (typeof input.path === "string" && input.path.startsWith("content/modules/")) {
+        errors.push(
+          `${label} criterion ${entry.criterionId} may not substitute a learner-facing canonical workbook for M31's hidden authoring draft.`,
+        );
+      }
+    }
+  }
+
+  const sourceLedger = evidenceReport.evidenceByCriterion.get("source-ledger");
+  const sourceLedgerPaths = new Set(
+    (sourceLedger?.resolvedInputs ?? [])
+      .filter(({ role }) => role === "source-ledger")
+      .map(({ path }) => path),
+  );
+  for (const requiredPath of expectedM31AuthoringSourceMapPaths) {
+    if (!sourceLedgerPaths.has(requiredPath)) {
+      errors.push(`${label} criterion source-ledger must bind ${requiredPath}.`);
+    }
+  }
+
+  const visual = evidenceReport.evidenceByCriterion.get("accessible-visual-text-alternative");
+  const visualTests = (visual?.resolvedInputs ?? []).filter(({ role }) => role === "test");
+  if (
+    visualTests.length !== 1 ||
+    visualTests[0]?.kind !== "file" ||
+    visualTests[0]?.path !== expectedM31AuthoringVisualTestPath
+  ) {
+    errors.push(`${label} criterion accessible-visual-text-alternative must bind ${expectedM31AuthoringVisualTestPath}.`);
+  }
+
+  const interaction = evidenceReport.evidenceByCriterion.get(
+    "interaction-reference-model-and-teaching-tests",
+  );
+  const authoringModels = (interaction?.resolvedInputs ?? []).filter(
+    ({ role }) => role === "reference-model",
+  );
+  const authoringModelTests = (interaction?.resolvedInputs ?? []).filter(
+    ({ role }) => role === "test",
+  );
+  if (
+    authoringModels.length !== 1 ||
+    authoringModels[0]?.kind !== "file" ||
+    authoringModels[0]?.path !== expectedM31AuthoringModelPath
+  ) {
+    errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${expectedM31AuthoringModelPath}.`);
+  }
+  if (
+    authoringModelTests.length !== 1 ||
+    authoringModelTests[0]?.kind !== "file" ||
+    authoringModelTests[0]?.path !== expectedM31AuthoringModelTestPath
+  ) {
+    errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${expectedM31AuthoringModelTestPath}.`);
+  }
+}
+
+/**
+ * Validate one explicitly allowlisted candidate evidence dossier without
+ * changing its lifecycle state. A passing report means only that its
+ * module-scoped structural inputs resolve and meet the selected profile; it is
+ * not a human review, learner-mastery, CI, deployment, or publication result.
+ * M31's default path also requires supplied JSON values to match its captured
+ * Git-index records. The explicitly named test-only override exists solely to
+ * exercise negative structural checks; use the `run…` entry points for a
+ * source-bound candidate preflight.
  */
 export async function validateModuleEvidencePreflight(
   preflight,
@@ -291,36 +619,77 @@ export async function validateModuleEvidencePreflight(
     graph: suppliedGraph = null,
     registry: suppliedRegistry = null,
     snapshot = null,
+    allowInjectedM31CandidateArtifactsForTest = false,
   } = {},
 ) {
   const errors = [];
-  validatePreflightRecord(preflight, errors);
+  const profile = validatePreflightRecord(preflight, errors);
+  if (!profile) {
+    preflightFailure(errors);
+  }
+  const moduleLabel = profile.moduleId.toUpperCase();
   let evidenceSnapshot = snapshot;
   if (!evidenceSnapshot) {
     try {
       evidenceSnapshot = await openGitIndexSnapshot(siteRoot);
     } catch (error) {
       errors.push(
-        `M29 evidence preflight could not capture its immutable Git-index evidence inputs: ${error instanceof Error ? error.message : String(error)}`,
+        `${moduleLabel} evidence preflight could not capture its immutable Git-index evidence inputs: ${error instanceof Error ? error.message : String(error)}`,
       );
     }
   }
+  if (!evidenceSnapshot) preflightFailure(errors);
 
-  const [graph, registry] = await Promise.all([
-    suppliedGraph ?? loadCourseGraph(siteRoot),
-    suppliedRegistry ?? loadModuleContractRegistry(siteRoot),
-  ]);
-  let registryReport = null;
-  try {
-    registryReport = await validateModuleContractRegistry(graph, registry, { siteRoot });
-  } catch (error) {
-    errors.push(`M29 evidence preflight requires the current canonical registry to validate: ${error instanceof Error ? error.message : String(error)}`);
+  if (profile.scope === "authoring-only" && !allowInjectedM31CandidateArtifactsForTest) {
+    await validateM31SuppliedArtifactsMatchSnapshot(
+      preflight,
+      suppliedEvidenceRecord,
+      siteRoot,
+      evidenceSnapshot,
+      errors,
+    );
   }
 
-  const graphModule = graph.modules?.find(({ id }) => id === "m29") ?? null;
-  const moduleEntry = registry.modules?.find(({ moduleId }) => moduleId === "m29") ?? null;
-  if (!graphModule) errors.push("M29 evidence preflight requires canonical graph module m29.");
-  validateNonPromotionState(moduleEntry, graphModule, errors);
+  const m31StateContext = profile.scope === "authoring-only"
+    ? await loadM31AuthoringStateContextFromSnapshot(siteRoot, evidenceSnapshot, errors)
+    : null;
+  if (profile.scope === "authoring-only" && !m31StateContext) preflightFailure(errors);
+  if (m31StateContext) {
+    suppliedM31ContextMatchesSnapshot(
+      suppliedGraph,
+      suppliedRegistry,
+      m31StateContext,
+      errors,
+    );
+  }
+  const [graph, registry] = m31StateContext
+    ? [m31StateContext.graph, m31StateContext.registry]
+    : await Promise.all([
+      suppliedGraph ?? loadCourseGraph(siteRoot),
+      suppliedRegistry ?? loadModuleContractRegistry(siteRoot),
+    ]);
+  let registryReport = null;
+  try {
+    registryReport = await validateModuleContractRegistry(
+      graph,
+      registry,
+      m31StateContext
+        ? { siteRoot, manifest: m31StateContext.manifest }
+        : { siteRoot },
+    );
+  } catch (error) {
+    errors.push(`${moduleLabel} evidence preflight requires the current canonical registry to validate: ${error instanceof Error ? error.message : String(error)}`);
+  }
+
+  const manifestById = m31StateContext
+    ? new Map(m31StateContext.manifest.modules.map((module) => [module.id, module]))
+    : registryReport
+      ? new Map(registryReport.manifest.modules.map((module) => [module.id, module]))
+      : null;
+  const graphModule = graph.modules?.find(({ id }) => id === profile.moduleId) ?? null;
+  const moduleEntry = registry.modules?.find(({ moduleId }) => moduleId === profile.moduleId) ?? null;
+  if (!graphModule) errors.push(`${moduleLabel} evidence preflight requires canonical graph module ${profile.moduleId}.`);
+  validateNonPromotionState(profile, moduleEntry, graphModule, errors, { manifestById });
 
   let evidenceRecord = suppliedEvidenceRecord;
   if (!evidenceRecord && preflight?.evidenceRecordPath) {
@@ -330,7 +699,7 @@ export async function validateModuleEvidencePreflight(
         snapshot: evidenceSnapshot,
       });
     } catch (error) {
-      errors.push(`M29 evidence preflight could not load its candidate evidence record: ${error instanceof Error ? error.message : String(error)}`);
+      errors.push(`${moduleLabel} evidence preflight could not load its candidate evidence record: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
@@ -339,44 +708,51 @@ export async function validateModuleEvidencePreflight(
     try {
       evidenceReport = await validateModuleEvidenceRecord(evidenceRecord, {
         siteRoot,
-        expectedModuleId: "m29",
+        expectedModuleId: profile.moduleId,
         requiredCriterionIds: criterionIds,
         snapshot: evidenceSnapshot,
       });
     } catch (error) {
-      errors.push(`M29 evidence preflight requires all 18 candidate evidence criteria to resolve: ${error instanceof Error ? error.message : String(error)}`);
+      errors.push(`${moduleLabel} evidence preflight requires all 18 candidate evidence criteria to resolve: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
   if (evidenceReport && graphModule && moduleEntry && registryReport) {
     errors.push(...promotionEvidenceRoleErrors(moduleEntry, graphModule, evidenceReport));
-    errors.push(...promotionEvidenceScopeErrors({
-      moduleEntry,
-      graphModule,
-      manifestById: new Map(registryReport.manifest.modules.map((module) => [module.id, module])),
-      evidenceReport,
-    }));
+    if (profile.scope === "legacy-canonical") {
+      errors.push(...promotionEvidenceScopeErrors({
+        moduleEntry,
+        graphModule,
+        manifestById,
+        evidenceReport,
+      }));
+    } else {
+      validateM31AuthoringCandidateScope(evidenceReport, errors);
+    }
     errors.push(...await promotionEvidenceTestErrors({
       siteRoot,
       moduleEntry,
       graphModule,
       evidenceReport,
+      snapshot: evidenceSnapshot,
     }));
     errors.push(...await promotionLearningCompanionErrors({
       siteRoot,
       moduleEntry,
       graph,
       evidenceReport,
+      snapshot: evidenceSnapshot,
     }));
     const visual = await promotionVisualAlternativeErrors({
       siteRoot,
       moduleEntry,
       graphModule,
-      manifestById: new Map(registryReport.manifest.modules.map((module) => [module.id, module])),
+      manifestById,
       evidenceReport,
+      snapshot: evidenceSnapshot,
     });
     errors.push(...visual.errors);
-    await validateCandidateReleaseBoundary(preflight, evidenceReport, errors, {
+    await validateCandidateReleaseBoundary(profile, preflight, evidenceReport, errors, {
       siteRoot,
       snapshot: evidenceSnapshot,
     });
@@ -384,8 +760,8 @@ export async function validateModuleEvidencePreflight(
 
   preflightFailure(errors);
   return {
-    moduleId: "m29",
-    state: candidateState,
+    moduleId: profile.moduleId,
+    state: profile.state,
     contractState: moduleEntry.contractState,
     evidenceRecordPath: preflight.evidenceRecordPath,
     openCriterionIds: [...preflight.openCriterionIds],
@@ -395,18 +771,32 @@ export async function validateModuleEvidencePreflight(
 }
 
 /**
- * Run the M29 candidate command with one captured Git-index snapshot for its
+ * Run one allowlisted candidate with one captured Git-index snapshot for its
  * preflight record and direct evidence-input resolver. The canonical graph,
  * registry, and downstream promotion checks intentionally retain their own
  * validation boundary; this is not an end-to-end release provenance claim.
  */
-export async function runM29CandidateEvidencePreflight({ siteRoot = defaultSiteRoot } = {}) {
+export async function runModuleCandidateEvidencePreflight(
+  moduleId,
+  { siteRoot = defaultSiteRoot } = {},
+) {
+  if (!candidatePreflightProfile(moduleId)) {
+    throw new Error("A candidate evidence preflight runner requires an explicitly allowlisted module ID.");
+  }
   const snapshot = await openGitIndexSnapshot(siteRoot);
   const preflight = await loadModuleEvidencePreflight(
-    moduleEvidencePreflightRelativePath("m29"),
+    moduleEvidencePreflightRelativePath(moduleId),
     { siteRoot, snapshot },
   );
   return validateModuleEvidencePreflight(preflight, { siteRoot, snapshot });
+}
+
+export function runM29CandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m29", options);
+}
+
+export function runM31AuthoringCandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m31", options);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -8,6 +8,7 @@ import {
   moduleCompanionGuidesRelativePath,
   validateModuleCompanionGuides,
 } from "./module-companion-guides.mjs";
+import { GitIndexSnapshotError } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -145,6 +146,7 @@ export async function validateModuleLearningCompanion(
     expectedModuleId = null,
     repositoryPath = null,
     siteRoot = defaultSiteRoot,
+    snapshot = null,
   } = {},
 ) {
   const errors = [];
@@ -251,8 +253,11 @@ export async function validateModuleLearningCompanion(
   let guide = null;
   if (guidePath === moduleCompanionGuidesRelativePath && guideLocator && digestPattern.test(guideDigest ?? "")) {
     try {
-      const guideRegistry = await loadModuleCompanionGuides(siteRoot);
-      await validateModuleCompanionGuides(guideRegistry, { graph: courseGraph, siteRoot });
+      const guideRegistry = await loadModuleCompanionGuides(siteRoot, { snapshot });
+      await validateModuleCompanionGuides(guideRegistry, {
+        graph: courseGraph,
+        siteRoot,
+      });
       guide = guideAtPointer(guideRegistry, guideLocator);
       if (!isPlainObject(guide) || guide.moduleId !== recordModuleId) {
         errors.push("module learning companion.guideBinding must resolve the same module's global guide.");
@@ -262,7 +267,8 @@ export async function validateModuleLearningCompanion(
         errors.push("module learning companion.guideBinding must resolve a guide with a supported lens.");
       }
     } catch (error) {
-      errors.push(`module learning companion.guideBinding could not validate: ${error instanceof Error ? error.message : String(error)}`);
+      const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+      errors.push(`module learning companion.guideBinding could not validate${errorCode}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 

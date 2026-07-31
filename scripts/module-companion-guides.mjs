@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCourseGraph } from "./course-graph.mjs";
+import { assertGitIndexSnapshotForSiteRoot } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -47,7 +48,15 @@ export function moduleCompanionGuidesPath(siteRoot = defaultSiteRoot) {
   return resolve(siteRoot, moduleCompanionGuidesRelativePath);
 }
 
-export async function loadModuleCompanionGuides(siteRoot = defaultSiteRoot) {
+export async function loadModuleCompanionGuides(
+  siteRoot = defaultSiteRoot,
+  { snapshot = null } = {},
+) {
+  if (snapshot) {
+    await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
+    await snapshot.assertClean([moduleCompanionGuidesRelativePath]);
+    return (await snapshot.readJson(moduleCompanionGuidesRelativePath)).value;
+  }
   return JSON.parse(await readFile(moduleCompanionGuidesPath(siteRoot), "utf8"));
 }
 

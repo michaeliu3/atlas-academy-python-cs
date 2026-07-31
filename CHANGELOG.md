@@ -7,6 +7,19 @@ actually published.
 
 ## Unreleased
 
+- Added a non-promoting M31 authoring-candidate evidence preflight. It binds
+  all eighteen structural criteria to the hidden M31 workbook, instructor-facing
+  source map/audit, frozen companion, and bounded Node authoring model/tests;
+  its diagram metadata is now checked for complete, minimum-length text
+  alternatives. The
+  narrow authoring-only profile rejects a learner workbook, canonical source-map
+  binding, studio, manifest entry, route, review record, or release transition,
+  while retaining its explicit review, source-commit CI, deployment, and
+  learner-delivery blockers. A candidate pass means only that the declared
+  local structural inputs resolve from the captured Git index. M31 remains
+  authoring-only, hidden, unreviewed, unreleased, and absent from the learner
+  reader; this is not a learner-delivery, human-review, CI, deployment,
+  accessibility-review, security, or publication claim.
 - Hardened local module-evidence reads around an immutable Git-index snapshot
   seam. Evidence readers now accept only regular stage-0 blobs, reject dirty,
   unmerged, symlink, non-UTF-8, oversized, stale-index, and inherited

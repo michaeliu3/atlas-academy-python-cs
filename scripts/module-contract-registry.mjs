@@ -1090,6 +1090,7 @@ export async function promotionEvidenceTestErrors({
   moduleEntry,
   graphModule,
   evidenceReport,
+  snapshot = null,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
   const errors = [];
@@ -1112,6 +1113,7 @@ export async function promotionEvidenceTestErrors({
         input.path,
         `${label} criterion ${entry.criterionId} test`,
         errors,
+        { snapshot },
       );
       if (!trackedTest) continue;
       const testSource = trackedTest.text;
@@ -1128,6 +1130,7 @@ export async function promotionEvidenceTestErrors({
             "scripts/run-course-tests.mjs",
             `${label} Node test discovery runner`,
             errors,
+            { snapshot },
           ))?.text ?? "";
         }
         if (!runner.includes('filename.endsWith(".test.mjs")')) {
@@ -1140,6 +1143,7 @@ export async function promotionEvidenceTestErrors({
             ".github/workflows/ci.yml",
             `${label} Python test discovery workflow`,
             errors,
+            { snapshot },
           ))?.text ?? "";
         }
         if (!courseWorkflowRunsCommand(
@@ -1206,6 +1210,7 @@ export async function promotionLearningCompanionErrors({
   moduleEntry,
   graph,
   evidenceReport,
+  snapshot = null,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed learning companion`;
   const errors = [];
@@ -1230,12 +1235,22 @@ export async function promotionLearningCompanionErrors({
   }
 
   try {
-    const record = JSON.parse(await readFile(resolve(siteRoot, expectedPath), "utf8"));
+    const companionErrors = [];
+    const companion = await readTrackedText(
+      siteRoot,
+      expectedPath,
+      `${label} module-scoped companion record`,
+      companionErrors,
+      { snapshot },
+    );
+    if (!companion) throw new Error(companionErrors.join("\n"));
+    const record = JSON.parse(companion.text);
     await validateModuleLearningCompanion(record, {
       graph,
       expectedModuleId: moduleEntry.moduleId,
       repositoryPath: expectedPath,
       siteRoot,
+      snapshot,
     });
   } catch (error) {
     errors.push(
@@ -1272,6 +1287,7 @@ export async function promotionVisualAlternativeErrors({
   graphModule,
   manifestById,
   evidenceReport,
+  snapshot = null,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed visual evidence`;
   const errors = [];
@@ -1306,14 +1322,14 @@ export async function promotionVisualAlternativeErrors({
 
   const blocks = [];
   for (const contentPath of contentPaths) {
-    try {
-      const markdown = await readFile(resolve(siteRoot, contentPath), "utf8");
-      blocks.push(...scanMermaidBlocks(markdown, { sourcePath: contentPath }));
-    } catch (error) {
-      errors.push(
-        `${label} could not scan ${contentPath}: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    const markdown = await readTrackedText(
+      siteRoot,
+      contentPath,
+      `${label} visual content ${contentPath}`,
+      errors,
+      { snapshot },
+    );
+    if (markdown) blocks.push(...scanMermaidBlocks(markdown.text, { sourcePath: contentPath }));
   }
   if (errors.length === 0) {
     try {

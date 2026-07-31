@@ -180,6 +180,17 @@ preserving a passing candidate state. The canonical graph also requires every
 non-verified module to keep an `unrecorded` release with a null record ID; M29
 pins that tuple directly as an extra candidate-boundary check.
 
+M31 has a separate, equally non-promoting authoring-only candidate profile.
+It can resolve all eighteen criteria against the hidden M31 workbook,
+instructor-facing source map/audit, frozen companion, and bounded Node fixture
+without manufacturing the deliberately absent learner workbook, manifest,
+graph source-map binding, studio, delivery map, review record, or release
+record. Its visual candidate test checks complete Mermaid metadata for the
+hidden draft, but that structural check is not a browser/accessibility review.
+The profile keeps every human-review dimension pending and leaves the exact
+source-commit CI, deployment, and learner-delivery evidence open. It is not an
+M31 promotion path and cannot override the v3 registry or the canonical graph.
+
 For a future v3 verified release, do not insert a final candidate SHA or
 Actions URL into the same commit that needs that evidence. First create and
 validate the candidate commit; then make a later additive provenance commit
