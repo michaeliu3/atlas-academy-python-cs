@@ -440,17 +440,25 @@ universal halting decider.
 
 ### A halting-style diagonal boundary
 
-Assume, for contradiction, that a total procedure
-\(H(M,w)\) correctly says whether every encoded machine \(M\) halts on input
-\(w\). Construct \(D(x)\):
+Fix an effective machine encoding \(\langle M\rangle\) and paired encoding
+\(\langle\langle M\rangle,w\rangle\). Assume, for contradiction, that a total
+procedure \(H(\langle M\rangle,w)\) correctly says whether the encoded machine
+\(M\) halts on input \(w\). Under this language convention, malformed strings
+are explicit no-instances rather than unnamed machine/input pairs.
 
-1. ask \(H(x,x)\);
+For a valid machine encoding \(x=\langle M_x\rangle\), construct \(D(x)\):
+
+1. ask \(H(\langle M_x\rangle,x)\);
 2. if it says “halts,” loop forever;
 3. otherwise halt.
 
-Because \(D\) has an encoding, consider \(D(D)\). If \(H(D,D)\) says “halts,”
-then \(D(D)\) loops. If it says “does not halt,” then \(D(D)\) halts. Either
-case contradicts the assumed total correctness of \(H\).
+On a malformed \(x\), let \(D\) halt by this named convention; that branch is
+not the self-application case. Because \(D\) has its own valid encoding
+\(\langle D\rangle\), consider \(D(\langle D\rangle)\). It asks
+\(H(\langle D\rangle,\langle D\rangle)\). If that call says “halts,” then
+\(D(\langle D\rangle)\) loops. If it says “does not halt,” then
+\(D(\langle D\rangle)\) halts. Either case contradicts the assumed total
+correctness of \(H\).
 
 The argument depends on a model able to encode and simulate the construction,
 and on \(H\) being total and correct for all encoded pairs. It does not say

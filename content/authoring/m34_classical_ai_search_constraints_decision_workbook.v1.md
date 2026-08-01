@@ -209,6 +209,16 @@ ranks frontier paths by accumulated declared cost \(g\) and needs a
 nonnegative-cost, well-defined duplicate/termination policy for its usual
 guarantee.
 
+### Completeness is not optimality
+
+**Completeness** means a named search variant returns *some* solution when one
+exists under its stated search-space, termination, duplicate-handling, and
+fair-expansion conditions. **Optimality** means it returns a least-declared-cost
+solution under its additional cost-domain, goal-test, heuristic, and reopen
+conditions. A method can have one guarantee without the other, and a finite
+trace establishes neither theorem by itself. Name which guarantee—if any—a
+claim is using before you reuse it.
+
 ### Prediction before reveal
 
 Suppose the frontier contains \(A\) with \(g=1\) and \(B\) with \(g=5\).
@@ -327,8 +337,8 @@ duplicate/reopen rule; no label or one successful run substitutes for them.
 
 Compare BFS, UCS, and a named A-star variant:
 
-| Method | state/edge model | frontier key | theorem conditions | finite trace observed | non-claim |
-| --- | --- | --- | --- | --- | --- |
+| Method | state/edge model | frontier key | guarantee claimed (completeness / optimality / neither) | theorem conditions | finite trace observed | non-claim |
+| --- | --- | --- | --- | --- | --- | --- |
 
 Include one adversarial graph—weighted edges for BFS or an overestimating
 heuristic for A-star—and explain which premise it changes.
