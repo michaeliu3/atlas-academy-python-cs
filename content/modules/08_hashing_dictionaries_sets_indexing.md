@@ -2015,7 +2015,23 @@ These sources were triangulated to separate language contract, algorithmic model
 
 ### CPython implementation study
 
-- [CPython 3.14 `Objects/dictobject.c`](https://github.com/python/cpython/blob/3.14/Objects/dictobject.c) — current open-addressed dictionary implementation, slot states, probing, and representation commentary. Read this as versioned implementation evidence, not as the Python language contract.
+- [CPython `v3.14.6` `Objects/dictobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/dictobject.c) — current open-addressed dictionary implementation, slot states, probing, and representation commentary. Read this as versioned implementation evidence, not as the Python language contract.
+
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-01** and are link/cite
+only. Atlas retains its original collision traces, tests, index design, and
+review prompts; a Python reference, algorithm model, and CPython source have
+different authority.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | direct-addressing trade-off and index relation | [MIT 6.006 Lecture 4 notes](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/ce9e94705b914598ce78a00a70a1f734_MIT6_006S20_lec4.pdf) for the algorithm model |
+| 2 | collision/tombstone trace and equality confirmation | [MIT 6.006 Lecture 4](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for collision and dynamic-set context |
+| 3 | equality/hash law and stable-key redesign | [Python `object.__hash__`](https://docs.python.org/3.14/reference/datamodel.html#object.__hash__) for the language contract |
+| 4 | expected, amortized, and adversarial lookup claim | [MIT 6.006 Lecture 4 notes](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/ce9e94705b914598ce78a00a70a1f734_MIT6_006S20_lec4.pdf) for assumptions that must remain named |
+| 5 | inverted-index soundness/completeness and portable mapping/set behavior | [Python mapping types](https://docs.python.org/3.14/library/stdtypes.html#mapping-types-dict) and [set types](https://docs.python.org/3.14/library/stdtypes.html#set-types-set-frozenset) |
+| 6 | adversarial patch review and CPython-versus-Python boundary | [CPython `v3.14.6` `dictobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/dictobject.c) only as an implementation observation |
 
 ## Instructor synthesis
 

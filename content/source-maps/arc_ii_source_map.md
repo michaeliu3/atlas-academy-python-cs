@@ -12,6 +12,14 @@ External sources serve three different roles:
 
 The course narrative is original and dependency-ordered. We link rather than copy assignments, respect source licenses, and verify Python claims against current official documentation.
 
+**Access and reuse record.** The linked sources in the Arc II recheck were
+verified on **2026-08-01**. They are link/cite-only calibration and lookup
+sources: Atlas retains its own explanations, diagrams, code, prompts, and
+diagnostics. Do not reproduce course prose, figures, assignments, solutions,
+or course-specific assessments. A Python language reference supports portable
+behavior; a pinned CPython path supports only the named implementation
+observation; a university page calibrates scope and evidence expectations.
+
 ## Arc-level anchor
 
 [MIT 6.006 Introduction to Algorithms, Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) is the primary university spine. Its prerequisites explicitly include Python programming plus the discrete mathematics covered in our Arc I. Its sequence connects data structures, graph algorithms, dynamic programming, correctness, and performance analysis.
@@ -37,7 +45,7 @@ Useful whole-course entry points:
 | [Python 3.14 data model](https://docs.python.org/3.14/reference/datamodel.html) | Canonical basis for objects, identity, type, value, mutability, and references at the language level. |
 | [Python 3.14 built-in sequence types](https://docs.python.org/3.14/library/stdtypes.html#sequence-types-list-tuple-range) | Defines the public behavior of lists, tuples, ranges, and common sequence operations. |
 | [`sys.getsizeof`](https://docs.python.org/3.14/library/sys.html#sys.getsizeof) and [`tracemalloc`](https://docs.python.org/3.14/library/tracemalloc.html) | Supports careful experiments about shallow size and traced allocations, including their limitations. |
-| [CPython `listobject.c`, 3.14 branch](https://github.com/python/cpython/blob/3.14/Objects/listobject.c) | A bounded implementation-reading lab for allocation, resizing, and list operations. |
+| [CPython `v3.14.6` `listobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/listobject.c) | A bounded implementation-reading lab for allocation, resizing, and list operations; it is not a Python language contract. |
 
 **Synthesis decisions**
 
@@ -89,7 +97,7 @@ Useful whole-course entry points:
 | [Python 3.14 data model — `__eq__` and `__hash__`](https://docs.python.org/3.14/reference/datamodel.html#object.__hash__) | Canonical equality/hash contract, mutability cautions, and hash randomization notes. |
 | [Python 3.14 mapping types](https://docs.python.org/3.14/library/stdtypes.html#mapping-types-dict) | Public `dict` semantics, key equivalence, insertion order, views, and operations. |
 | [Python 3.14 set types](https://docs.python.org/3.14/library/stdtypes.html#set-types-set-frozenset) | Public set/frozenset behavior and set algebra. |
-| [CPython `dictobject.c`, 3.14 branch](https://github.com/python/cpython/blob/3.14/Objects/dictobject.c) | Bounded code reading for a real implementation after the course model is understood. |
+| [CPython `v3.14.6` `dictobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/dictobject.c) | Bounded code reading for a real implementation after the course model is understood; it is not a Python language contract. |
 
 **Synthesis decisions**
 
@@ -117,6 +125,7 @@ Useful whole-course entry points:
 | [Python 3.14 `heapq`](https://docs.python.org/3.14/library/heapq.html) | Public heap operations and priority-queue implementation patterns. |
 | [Python 3.14 `bisect`](https://docs.python.org/3.14/library/bisect.html) | Ordered-array search and the crucial distinction between logarithmic search and linear insertion. |
 | [Python Sorting HOWTO](https://docs.python.org/3.14/howto/sorting.html) | Stable sorting, key functions, and practical composition of ordering requirements. |
+| [CPython `v3.14.6` `Lib/heapq.py`](https://github.com/python/cpython/blob/v3.14.6/Lib/heapq.py) | Bounded Session 4 call-path reading for sift/heapify mechanics; helper shape is versioned implementation evidence, not a portable heap guarantee. |
 
 **Synthesis decisions**
 
@@ -138,7 +147,10 @@ Useful whole-course entry points:
 | Source | Role in our module |
 |---|---|
 | [MIT 6.006 Lecture 9: Breadth-First Search](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-9-breadth-first-search/) | Graph representations, adjacency, paths, shortest-path trees, and BFS. |
-| [MIT 6.006 Lectures 9–14 in the lecture-note index](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/) | BFS, DFS, weighted shortest paths, Bellman–Ford, Dijkstra, and all-pairs shortest paths. |
+| [MIT 6.006 Lecture 10: Depth-First Search](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/) | Session 3 source for DFS finishing state, cycle evidence, and topological ordering. |
+| [MIT 6.006 Lecture 11: Weighted Shortest Paths](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-11-weighted-shortest-paths/) and [Lecture 12: Bellman–Ford](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-12-bellman-ford/) | Session 4 sources for relaxation, graph restrictions, negative-cycle evidence, and qualified cost claims. |
+| [MIT 6.006 Lecture 13: Dijkstra](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/) | Session 5 source for nonnegative-edge finalization and priority-frontier reasoning. |
+| [MIT 6.046J Lecture 12: Minimum Spanning Tree](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) | Session 6 source for cut/exchange reasoning, Kruskal/Prim, and spanning-forest invariants. |
 | [MIT 6.042J Mathematics for Computer Science](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) | Graph definitions, relations, induction, and proof techniques already introduced in Module 4. |
 | [Python 3.14 `collections.deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) | Appropriate FIFO frontier mechanism for BFS. |
 | [Python 3.14 `heapq`](https://docs.python.org/3.14/library/heapq.html) | Priority frontier mechanism for Dijkstra-style algorithms. |

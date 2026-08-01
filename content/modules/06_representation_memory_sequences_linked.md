@@ -2139,6 +2139,21 @@ The source synthesis follows four rules:
 3. CPython claims are pinned to `v3.14.6` and explicitly labeled.
 4. Berkeley’s locality account explains a mechanism; only a controlled measurement can estimate its effect for Atlas on a named machine and interpreter.
 
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-01** and are linked or
+briefly paraphrased only. Atlas retains its original traces, code, diagrams,
+and prompts. The source type in each row is part of the claim boundary.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | model/Python/CPython classification and object/reference trace | [Python data model](https://docs.python.org/3.14/reference/datamodel.html#objects-values-and-types) for portable terms |
+| 2 | indexed-access derivation, array RI/AF, and shift count | [MIT 6.006 Lecture 2](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-2-data-structures-and-dynamic-arrays/) for the course model |
+| 3 | geometric-copy argument and capacity-versus-length observation | [CPython `v3.14.6` `listobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/listobject.c#L90-L142) only for the named implementation reading |
+| 4 | linked RI/AF, splice trace, and qualified insertion claim | [CMU 15-122](https://www.cs.cmu.edu/~15122/syllabus.shtml) for invariant/specification calibration |
+| 5 | shallow-versus-retained-memory claim and locality hypothesis | [Python `sys.getsizeof`](https://docs.python.org/3.14/library/sys.html#sys.getsizeof) for its explicit limit; measurement is still required |
+| 6 | representation decision, patch review, and oral defense | the Atlas evidence dossier; university sources calibrate scope but do not establish the decision |
+
 ---
 
 ## Final self-explanation

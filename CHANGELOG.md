@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Strengthened the M6–M10 data-and-algorithms arc after a narrow official-source
+  recheck. Every core session now links its claim and learner artifact to a
+  compact, dated, link/cite-only source route; the shared Arc II map pins M6,
+  M8, and M9 CPython readings to `v3.14.6` and separates M10's graph sources
+  by session. M7 now also has a demand/ownership/bounded-memory/failure
+  evidence rubric. This improves private legacy study material only; it does
+  not promote a contract/release state, create human review, deployment,
+  learner-mastery, or university-equivalence evidence.
 - Strengthened the M1–M5 foundation arc after a narrow official-source
   recheck: M1 now uses a confidence-gated lexical-scope trace; M2 transfers
   termination reasoning to a lexicographic measure; M3 requires a

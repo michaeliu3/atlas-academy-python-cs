@@ -2779,6 +2779,21 @@ The teaching narrative, Atlas checkpoint, diagrams, quizzes, and review tasks ar
 4. Atlas policy owns normalization, ties, duplicate semantics, source of truth, compaction, and recovery.
 5. Every performance statement names height, key size, physical/live/stale counts, output, and model assumptions as applicable.
 
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-01** and are link/cite
+only. Atlas retains its original rotation, heap, scheduling, and patch-review
+traces; a pinned CPython source never becomes a general Python guarantee.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | ordered-operation ledger and representation choice | [MIT 6.006 Lecture 3](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec3/) for ordered-set/sorting context |
+| 2 | BST invariant, path-elimination proof, and height-qualified cost | [MIT 6.006 Lecture 6](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec6/) for binary-tree model |
+| 3 | rotation trace and in-order/node-preservation argument | [MIT 6.006 Lecture 7](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec7/) for AVL reasoning |
+| 4 | heap invariant, heapify argument, and priority trace | [Python `heapq`](https://docs.python.org/3.14/library/heapq.html) for portable operations; [CPython `v3.14.6` `heapq.py`](https://github.com/python/cpython/blob/v3.14.6/Lib/heapq.py) for bounded code reading |
+| 5 | sorting/trie comparison, stability counterexample, and output-aware cost | [Python Sorting HOWTO](https://docs.python.org/3.14/howto/sorting.html) and [MIT 6.006 Lecture 5](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec5/) |
+| 6 | versioned heap/trie coordination, patch review, and defense | the Atlas dossier; source links support terms and model boundaries, not the final design choice |
+
 ---
 
 ## Final self-explanation

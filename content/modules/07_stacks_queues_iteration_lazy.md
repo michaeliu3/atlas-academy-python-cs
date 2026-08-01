@@ -2065,6 +2065,15 @@ Module 7 is mastered only when Michael can, on unseen code:
 
 Passing the MCQ check alone is insufficient. Producing code that “works on my input” is insufficient. Mastery is ownership of the model and evidence.
 
+### Evidence rubric
+
+| Evidence | Ready when | If not yet, repair by |
+| --- | --- | --- |
+| Demand trace | `iter`/`next`, source requests, early stop, and exhaustion are distinguishable | trace one requested value and count requests before modifying code |
+| Ownership boundary | every yielded event/batch has a named owner and immutable or defended snapshot policy | draw the alias path and add the smallest mutation-after-yield regression |
+| Bounded-memory claim | the retained buffers, capacity `B`, exclusions, and synchronous scope are explicit | name hidden buffers and separate pull regulation from concurrent backpressure |
+| Failure evidence | malformed input, capacity, and sink-failure observations support the stated contract | preserve the first failing trace and add one nearby success case |
+
 ---
 
 ## 23. Consolidation
@@ -2188,6 +2197,22 @@ These are source inputs and verification references, not a substitute for the co
 3. Read the MIT 6.006 Lecture 2 interface section after Session 1 and explain why a stack is a problem specification, not a list.
 4. Use the Python `deque` page during the Atlas patch review to verify operation and `maxlen` claims.
 5. Use `itertools.islice` only after defending the manual mechanism, then compare contracts and edge cases.
+
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-01** and are link/cite
+only; Atlas retains its original pipeline traces, code, prompts, and dossier.
+University materials calibrate scope, not an async or concurrent backpressure
+guarantee.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | LIFO/FIFO law and operation-based `list`/`deque` choice | [MIT 6.006 Lecture 2](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec2/) for interface-versus-representation framing |
+| 2 | iterator state machine, exhaustion, and no-over-consumption test | [Python iterator types](https://docs.python.org/3.14/library/stdtypes.html#iterator-types) for the protocol boundary |
+| 3 | suspended-frame trace and one-shot generator claim | [Python `yield` expressions](https://docs.python.org/3.14/reference/expressions.html#yield-expressions) for evaluation/resumption semantics |
+| 4 | lazy-pipeline ownership table and bounded batch claim | [Composing Programs §4.2](https://www.composingprograms.com/pages/42-implicit-sequences.html) as a complementary implicit-sequence explanation |
+| 5 | rate/capacity calculation and synchronous-buffer non-claim | [Python `deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) for end operations and `maxlen`, not concurrent coordination |
+| 6 | bounded patch brief, request-count evidence, and oral walkthrough | the Atlas evidence packet; external references do not prove demand or failure behavior in this system |
 
 ---
 

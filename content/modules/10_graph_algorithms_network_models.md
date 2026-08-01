@@ -2673,6 +2673,22 @@ The MST material is introduced at a first-principles level here and reconnects t
 
 The standard library gives operations, not graph-algorithm correctness. The proof connects those operations to the chosen state-machine invariant.
 
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-01** and are link/cite
+only. Atlas retains its original graph snapshots, counterexamples, traces,
+tests, and oral-defense prompts; each source supports a named model or
+assumption rather than proving the learner's result.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | graph contract, multiplicity policy, and representation question sheet | [MIT 6.042J readings](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/readings/) for graph vocabulary and proof context |
+| 2 | BFS layer invariant, path witness, and `Θ(V+E)` model | [MIT 6.006 Lecture 9](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec9/) |
+| 3 | DFS active-path/cycle or topological-order evidence | [MIT 6.006 Lecture 10](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/) |
+| 4 | relaxation trace, graph-restriction choice, and negative-cycle diagnostic | [MIT 6.006 Lectures 11–12](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/resource-index/) for weighted-path and Bellman–Ford context |
+| 5 | Dijkstra finalization proof, stale-entry trace, and qualified heap cost | [MIT 6.006 Lecture 13](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/) plus [Python `heapq`](https://docs.python.org/3.14/library/heapq.html) for the mechanism boundary |
+| 6 | cut-property/forest evidence and planner defense | [MIT 6.046J MST notes](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) for MST reasoning |
+
 ## Instructor synthesis
 
 This module has one connected argument:
