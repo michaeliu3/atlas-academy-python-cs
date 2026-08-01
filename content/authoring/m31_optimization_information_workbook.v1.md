@@ -221,6 +221,52 @@ The Hessian is positive definite, so the *unconstrained* quadratic has a
 unique global minimizer. That conclusion uses the full domain `R^2` and this
 particular objective. It does not ignore the feasible set.
 
+### Convexity, smoothness, and strong-convexity bridge
+
+Three statements that are often compressed into “the landscape is nice” are
+different obligations. In the Euclidean norm, differentiable `f` is
+`\mu`-strongly convex on a declared convex domain when
+
+\[
+f(v)\geq f(u)+\nabla f(u)^T(v-u)+\frac{\mu}{2}\lVert v-u\rVert^2,
+\qquad \mu>0,
+\]
+
+and it is `L`-smooth there when
+
+\[
+f(v)\leq f(u)+\nabla f(u)^T(v-u)+\frac{L}{2}\lVert v-u\rVert^2.
+\]
+
+For the displayed quadratic, `\nabla^2 f=2I`, so `\mu=L=2` in these
+coordinates. That is a statement about this exact objective and norm, not a
+property inherited by a data set, a penalty surrogate, or a library call.
+
+Here is the proof idea worth retaining. Strong convexity gives, for distinct
+minimizers `u` and `v`, a midpoint inequality with a strictly negative
+`-\mu\lVert u-v\rVert^2/8` term. The midpoint would then have lower value than
+the two minimizers, a contradiction. Thus a minimizer is unique **if it
+exists**. Smoothness instead limits how quickly the gradient can change; it
+does not by itself establish convexity, feasibility, or a solver rate.
+
+The counterexample keeps the conditions honest: `h(t)=t^4` is convex, but its
+second derivative `12t^2` vanishes at zero, so no positive global strong-
+convexity constant follows from this example. Its zero gradient at `t=0` is a
+minimum, yet a rate theorem that assumes strong convexity is still unavailable.
+
+<details>
+<summary>Predict before revealing the repair.</summary>
+
+If a Hessian is positive semidefinite at one sampled point, may you report
+that the full problem is strongly convex and that a fixed linear convergence
+rate applies?
+
+**Reveal:** no. The conclusion needs a positive lower curvature bound on the
+declared domain (and a particular norm), plus the algorithm theorem's other
+assumptions. A one-point Hessian observation is local finite evidence.
+
+</details>
+
 ### A counterexample worth remembering
 
 At `(2, 1)`, the ordinary gradient is zero. Yet the point is infeasible.
@@ -462,6 +508,52 @@ projection corrects the *declared* hard constraint. A lower objective after a
 few steps is finite evidence for this fixture/configuration, not a statement
 about every initial point, step size, precision, or constrained objective.
 
+### Same problem, different solver contract
+
+Projected gradient makes its update and projection visible. A named solver
+can be useful, but its interface is an additional contract rather than a
+certificate. Compare these two evidence records before comparing outcomes:
+
+| Record | What is explicit | What still needs an independent check |
+| --- | --- | --- |
+| **Projected-gradient fixture** | exact objective/gradient, half-space projection, initial point, step size, iteration count, and each residual | whether this update rule is appropriate beyond the stated toy problem; convergence or numerical robustness outside the trace |
+| **Pinned solver/API call** | package and exact version, method, `fun`, `x0`, derivative/oracle source, bounds/constraints, options/tolerances, dtype, and returned status/message/iterations | whether the method's documented stopping fields are small enough for the declared claim, whether the model is right, and whether an analytic/KKT/oracle check agrees |
+
+For example, this is a **contract-reading sketch**, not a recommended or
+executed invocation:
+
+```python
+result = minimize(
+    fun=objective,
+    x0=initial_point,
+    method="trust-constr",
+    jac=analytic_gradient,
+    constraints=[declared_constraint],
+    options={"gtol": gtol, "xtol": xtol, "maxiter": budget},
+)
+```
+
+The accepted options and returned fields are method- and version-specific.
+Before saying anything stronger than “this pinned call returned this record,”
+record the actual SciPy version, `result.message`, `result.success`, `result.nit`,
+and any method-specific optimality or constraint-violation field that is
+present. Then compare against a declared feasibility residual and an
+independent analytic/KKT check where the fixture permits one. A status flag is
+not a substitute for those fields.
+
+<details>
+<summary>Predict before revealing the claim boundary.</summary>
+
+Suppose a pinned solver reports `success=True`, but the recorded constraint
+violation is above the dossier's declared tolerance or no independent oracle
+was checked. Which statement survives?
+
+**Reveal:** only that the named implementation returned its status under the
+recorded configuration. Defer a feasibility, optimality, or decision claim
+until the tolerance, residual, assumptions, and independent check support it.
+
+</details>
+
 ### Prediction before reveal
 
 Before running any trace, predict which of these would be sufficient to claim
@@ -605,6 +697,36 @@ rule, and target before calling either story “unbiased SGD.”
 
 </details>
 
+### Multiple-start counterexample — a small gradient is not a good basin
+
+Use the deterministic double-well teaching fixture
+
+\[
+w(t)=(t^2-1)^2,\qquad w'(t)=4t(t^2-1).
+\]
+
+It has stationary points at `-1`, `0`, and `1`. The outer two are minima;
+`t=0` is a local maximum because `w''(0)=-4`. With the same visible gradient
+rule and step size `0.1`, these three starts already tell different stories:
+
+| initial `t` | first gradient | first update | what the one-step row does **not** prove |
+| --- | --- | --- | --- |
+| `-0.2` | `0.768` | `-0.2768` | that every negative start reaches the same solution under every step rule |
+| `0` | `0` | `0` | that a zero gradient is a local minimum or useful stopping point |
+| `0.2` | `-0.768` | `0.2768` | that the positive well is globally preferred by an outside decision |
+
+<details>
+<summary>Predict before revealing the counterexample.</summary>
+
+If a gradient-based trace started exactly at `0` and stayed there, should its
+small gradient be reported as successful local minimization?
+
+**Reveal:** no. In this fixture it is an unstable stationary maximum. The
+initialization, local curvature, step rule, finite precision, and repeated
+starts belong in the record before describing a nonconvex run as converged.
+
+</details>
+
 ### Experiment card
 
 | Field | Record it | Do not silently infer |
@@ -672,6 +794,42 @@ mathematical discrepancy under the declared `p`, `q`, support, and log base.
 It does not choose privacy, fairness, human utility, or a model class.
 
 </details>
+
+### Mutual-information and distortion card — one narrow channel model
+
+Let a source bit `X` be uniformly distributed, let noise
+`N\sim\operatorname{Bernoulli}(q)` be independent of it, and let
+`Y=X\oplus N`, with `0\leq q\leq 1/2`. In bits, define
+
+\[
+h_2(q)=-q\log_2q-(1-q)\log_2(1-q).
+\]
+
+Then `H(Y)=1`, `H(Y\mid X)=h_2(q)`, and the mutual information is
+
+\[
+I(X;Y)=H(Y)-H(Y\mid X)=1-h_2(q).
+\]
+
+For this **uniform iid binary source** with **Hamming distortion**
+`d(x,\hat x)=\mathbf 1[x\ne\hat x]`, the asymptotic rate-distortion function
+is `R(D)=1-h_2(D)` bits per symbol for `0\leq D\leq1/2`. This is a theorem with
+those source, distortion, and asymptotic coding assumptions—not a generic
+quality score, a finite-code benchmark, a privacy guarantee, or a reason to
+choose a stakeholder's acceptable error rate.
+
+At `q=0.1`, the channel carries about `1-h_2(0.1)\approx0.531` bits per source
+bit. At `q=0.5`, it carries zero. The same numerical formula at a distortion
+level `D=0.1` belongs to a different question: how much representation rate is
+needed under the declared loss. Do not silently exchange those questions.
+
+### Transfer task — changed source or distortion
+
+Replace the uniform source with a biased one, or replace Hamming loss with an
+asymmetric cost. State exactly which displayed `1-h_2(\cdot)` formula must be
+withdrawn, what joint/source/loss description must replace it, and why an
+improved information number still cannot set the product's acceptable harm or
+authority boundary.
 
 ### From likelihood to variational language
 
@@ -768,13 +926,32 @@ Choose a bounded, non-consequential toy system. Deliver:
 5. a stochastic or information card with support/uncertainty boundaries;
 6. a limited recommendation, explicit non-claim, and forward handoff.
 
+### M25 evidence receipt
+
+Copy this compact receipt into the later M25 evidence annex; it is a
+cross-module input, not an unlock:
+
+```text
+decision owner and bounded decision:
+objective, proxy gap, and units:
+hard constraints and feasibility/certificate status:
+algorithm/solver configuration and stopping evidence:
+information/support or sampling boundary:
+finite observation, independent check, and explicit non-claim:
+```
+
+If any field is unavailable, write **unavailable** and narrow the claim. A
+lower objective, a `success` flag, or an information number cannot fill the
+missing receipt.
+
 ### Required evidence
 
 Keep the objective/constraint/units card, one named mathematical assumption,
 one smallest counterexample, one finite trace with configuration, one
 independent check or explicit reason it is unavailable, an information/support
-boundary, and a limited next action. This is an evidence dossier—not a score or
-permission to make a consequential decision.
+boundary, the six-field M25 evidence receipt, and a limited next action. This
+is an evidence dossier—not a score or permission to make a consequential
+decision.
 
 ### Acceptance rubric
 
@@ -784,6 +961,7 @@ permission to make a consequential decision.
 | mathematics | assumptions and conclusion are separated; counterexample is real | “Which condition made your inference legal?” |
 | computation | trace includes config, residuals, representation, and independent probe | “What changed if a new run disagrees?” |
 | information | support, direction, units, and interpretation are named | “Which distribution or utility did you assume?” |
+| synthesis receipt | owner, proxy gap, hard constraint, stopping/support boundary, finite evidence, and non-claim remain separately visible | “Which missing receipt makes your later M25 claim too broad?” |
 | transfer | recommendation is limited and handoff is concrete | “Who may make the next decision, and with what evidence?” |
 
 ---
@@ -885,12 +1063,42 @@ under a stated construction, not an expectation or convergence theorem.
 implementation detail.
 </details>
 
+7. The formula `R(D)=1-h_2(D)` is shown for a uniform iid binary source with
+Hamming distortion. Which change makes that exact formula unavailable without
+new derivation?
+   - A. Writing the result in bits rather than nats.
+   - B. Replacing the source with a biased distribution or the loss with an
+     asymmetric one.
+   - C. Recording the value of `D` in the dossier.
+   - D. Naming the reconstruction variable `\hat x`.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Misconception repaired: an information formula belongs to its
+declared source law, distortion measure, units, and theorem regime; it is not
+a portable quality score.
+</details>
+
+### Distractor-to-misconception map
+
+| Question | Fragile idea exposed by the distractors | Smallest repair move |
+| --- | --- | --- |
+| 1 | a solver can infer purpose, authority, or omitted harm | write the target, proxy gap, hard constraint, and owner before an algorithm |
+| 2 | numerical agreement/disagreement is a theorem about the whole model | inspect domain, dtype, implementation, and a bounded directional check |
+| 3 | zero ordinary gradient proves constrained optimality | separate feasibility from stationarity and name the certificate condition |
+| 4 | six falling values prove convergence or a valid objective | label initialization, stop metric, residual, and theorem assumptions |
+| 5 | one favorable noisy run proves unbiased reliable SGD | state the estimator target, sampling/dependence rule, and repeated-run boundary |
+| 6 | support failures are harmless numerical edge cases | repair the support/model boundary before evaluating KL |
+| 7 | an information formula stays valid when source or loss changes | restate the joint law and distortion/utility before deriving a replacement |
+
 ### Misconception repair key
 
 When an answer is fragile, repair the narrowest confusion first: ordinary
 stationarity is not constrained feasibility; a finite trace is not a
-convergence theorem; and a support mismatch is not a harmless numerical
-detail. Then change one premise and make a new prediction before rereading the
+convergence theorem; a support mismatch is not a harmless numerical detail;
+and a rate-distortion formula is not portable across source or loss changes.
+Then change one premise and make a new prediction before rereading the
 explanation.
 
 **Review schedule:** retrieve the invariant and one counterexample after 1,
@@ -984,7 +1192,7 @@ solutions. The reading routes below were checked on **2026-08-01**.
 | --- | --- | --- |
 | [Stanford EE364a Convex Optimization I](https://web.stanford.edu/class/ee364a/) and its [lecture route](https://web.stanford.edu/class/ee364a/lectures.html) | Sessions 1–4: formulation, convexity, optimality conditions, duality, and algorithm scope. | Link-only and original Atlas paraphrase/examples; course assets and linked texts have their own terms. |
 | [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
-| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | Sessions 5–6: entropy, cross-entropy, KL direction, support, and stated distribution assumptions. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
+| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | Sessions 5–6: entropy, cross-entropy, KL direction, support, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
 | [SciPy `minimize` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) | Sessions 3–5: distinguish a mathematical condition from an API/grammar/solver contract. | Documentation is linked for contract reading; fixtures remain original and pin versions before a concrete implementation claim. |
 
 For the fuller claim-to-source ledger, source rationale, access/reuse cautions,

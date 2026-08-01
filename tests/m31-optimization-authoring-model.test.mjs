@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   M31_STOCHASTIC_GRADIENT_FIXTURE,
   M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC,
+  evaluateM31BinaryChannelDistortion,
   evaluateM31DiscreteInformation,
   evaluateM31ConstrainedQuadratic,
   evaluateM31KktCertificate,
@@ -11,6 +12,7 @@ import {
   m31CentralDifferenceGradient,
   m31ConstraintResidual,
   m31ConstraintViolation,
+  m31DoubleWellMultipleStartCard,
   m31ProjectedGradientTrace,
   m31QuadraticGradient,
   m31QuadraticObjective,
@@ -193,6 +195,27 @@ test("the M31 stochastic trace makes estimator noise and a finite run visible", 
   );
 });
 
+test("the M31 multiple-start card makes a nonconvex stationary maximum visible", () => {
+  const card = m31DoubleWellMultipleStartCard();
+
+  assert.equal(card.id, "m31-s05-double-well-multiple-start-card");
+  assert.equal(card.stepSize, 0.1);
+  assert.deepEqual(
+    card.records.map(({ initialParameter }) => initialParameter),
+    [-0.2, 0, 0.2],
+  );
+  assertApproximately(card.records[0].nextParameter, -0.2768);
+  assertApproximately(card.records[1].nextParameter, 0);
+  assertApproximately(card.records[2].nextParameter, 0.2768);
+  assert.equal(card.records[1].stationaryClassification, "stationary local maximum in the declared analytic fixture");
+  assert.deepEqual(card.knownStationaryPoints, [
+    { parameter: -1, classification: "global minimum" },
+    { parameter: 0, classification: "local maximum" },
+    { parameter: 1, classification: "global minimum" },
+  ]);
+  assert.match(card.truthBoundary, /does not establish convergence/u);
+});
+
 test("the M31 finite information card distinguishes entropy, cross-entropy, and KL with support checks", () => {
   const metrics = evaluateM31DiscreteInformation([0.5, 0.5], [0.75, 0.25]);
   const identity = evaluateM31DiscreteInformation([0.5, 0.5], [0.5, 0.5]);
@@ -206,5 +229,28 @@ test("the M31 finite information card distinguishes entropy, cross-entropy, and 
   assert.throws(
     () => evaluateM31DiscreteInformation([0.5, 0.5], [1, 0]),
     /strictly positive wherever the reference distribution is positive/u,
+  );
+});
+
+test("the M31 binary information card keeps channel and distortion formulas in their declared scope", () => {
+  const card = evaluateM31BinaryChannelDistortion({
+    crossoverProbability: 0.1,
+    distortionLevel: 0.1,
+  });
+  const maximallyNoisy = evaluateM31BinaryChannelDistortion({
+    crossoverProbability: 0.5,
+    distortionLevel: 0.5,
+  });
+
+  assert.equal(card.id, "m31-s06-binary-channel-distortion-card");
+  assertApproximately(card.mutualInformationBits, 0.5310044064107188);
+  assertApproximately(card.rateDistortionBitsPerSymbol, 0.5310044064107188);
+  assertApproximately(maximallyNoisy.mutualInformationBits, 0);
+  assertApproximately(maximallyNoisy.rateDistortionBitsPerSymbol, 0);
+  assert.match(card.theoremScope, /uniform iid binary source/u);
+  assert.match(card.truthBoundary, /changed source law or distortion measure/u);
+  assert.throws(
+    () => evaluateM31BinaryChannelDistortion({ crossoverProbability: 0.6, distortionLevel: 0.1 }),
+    /crossoverProbability must be a finite probability from 0 through 0.5/u,
   );
 });

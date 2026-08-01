@@ -5,8 +5,8 @@
   "purpose": "Plan exactly how each canonical academic prerequisite first enters the six connected sessions for authoring-only Modules 31–36. This is an authoring bridge and evidence checklist, not a publication contract, learner route, source map, or release record.",
   "canonicalCourseGraph": "content/course/course-graph.v2.json",
   "truthBoundary": {
-    "asOf": "2026-07-30",
-    "moduleState": "All entries in this ledger are authoring-only plans. Nothing here changes course-graph lifecycle or availability, proves that a workbook/studio exists, or permits a learner to bypass an academic prerequisite.",
+    "asOf": "2026-08-01",
+    "moduleState": "All entries in this ledger are authoring-only plans. Nothing here changes course-graph lifecycle or availability, verifies candidate-workbook quality or release readiness, or permits a learner to bypass an academic prerequisite.",
     "forwardLinkMeaning": "declaredForwardModuleId copies the graph handoff. It is not a replacement for academicPrerequisiteModuleIds and must not be interpreted as a prerequisite waiver."
   },
   "entryDefinitions": {
@@ -136,7 +136,7 @@
         {
           "id": "m31-source-map-null",
           "status": "unmet",
-          "blockingReason": "The canonical graph currently has sourceMap: null. Author a claim-linked source ledger covering optimization, convexity/duality, stochastic approximation, information quantities, and numerical experiments before publication review."
+          "blockingReason": "The canonical graph currently has sourceMap: null. A candidate M31 source map and audit exist, but they must be selected, claim-reviewed, and release-bound as one canonical ledger covering optimization, convexity/duality, stochastic approximation, information quantities, and numerical experiments before publication review."
         },
         {
           "id": "m31-source-boundaries-unreviewed",
@@ -148,12 +148,12 @@
         {
           "id": "m31-learning-artifacts-unbuilt",
           "status": "unmet",
-          "blockingReason": "No checked-in M31 workbook, studio/equivalent interaction, reference model where appropriate, diagnostic, retrieval flow, dossier rubric, or oral-defense flow is evidenced by this ledger."
+          "blockingReason": "A checked-in M31 candidate workbook, bounded authoring fixture, diagnostics, retrieval, dossier rubric, and oral prompts now exist, but this planning ledger does not review their delivery quality, select canonical learner material, or establish release evidence. Those checks remain required before publication."
         },
         {
           "id": "m31-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M31 has no structured module-contract entry, release evidence remains planned in the graph, and no CI/provenance record may be inferred."
+          "blockingReason": "M31 has authoring-only adapter and v3 registry records, but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -313,7 +313,7 @@
         {
           "id": "m32-source-map-null",
           "status": "unmet",
-          "blockingReason": "The canonical graph currently has sourceMap: null. Author a version-bound source ledger for language/runtime boundaries, scientific arrays, accelerator execution, autodiff, and reproducibility."
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M32 source research exists, but it must be selected, claim-reviewed, and release-bound as one version-aware canonical ledger for language/runtime boundaries, scientific arrays, accelerator execution, autodiff, and reproducibility."
         },
         {
           "id": "m32-hardware-claim-boundaries-unreviewed",
@@ -325,12 +325,12 @@
         {
           "id": "m32-learning-artifacts-unbuilt",
           "status": "unmet",
-          "blockingReason": "No checked-in M32 workbook, safe bounded studio/reference model, diagnostics, retrieval flow, dossier rubric, or accessible oral-defense flow is evidenced by this ledger."
+          "blockingReason": "A checked-in M32 candidate workbook, bounded teaching fixture, diagnostics, retrieval, dossier rubric, and accessible oral prompts now exist, but this planning ledger does not review their delivery quality, select canonical learner material, or establish release evidence. Those checks remain required before publication."
         },
         {
           "id": "m32-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M32 has no structured module-contract entry, its graph release evidence remains planned, and no CI/provenance record may be inferred."
+          "blockingReason": "M32 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -460,7 +460,7 @@
         {
           "id": "m33-source-map-null",
           "status": "unmet",
-          "blockingReason": "The canonical graph currently has sourceMap: null. Author a source ledger for automata, grammars, computability, reductions, complexity, and the exact scope of every theorem or historical claim."
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M33 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for automata, grammars, computability, reductions, complexity, and the exact scope of every theorem or historical claim."
         },
         {
           "id": "m33-proof-source-boundaries-unreviewed",
@@ -472,12 +472,12 @@
         {
           "id": "m33-learning-artifacts-unbuilt",
           "status": "unmet",
-          "blockingReason": "No checked-in M33 workbook, bounded recognizer/proof studio or equivalent, diagnostics, retrieval flow, dossier rubric, or accessible oral-defense flow is evidenced by this ledger."
+          "blockingReason": "A checked-in M33 candidate workbook and bounded reference model now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
         },
         {
           "id": "m33-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M33 has no structured module-contract entry, its graph release evidence remains planned, and no CI/provenance record may be inferred."
+          "blockingReason": "M33 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -622,7 +622,7 @@
         {
           "id": "m34-source-map-null",
           "status": "unmet",
-          "blockingReason": "The canonical graph currently has sourceMap: null. Author claim-linked sources for graph search, heuristics, CSP/planning, decision theory, and complexity boundaries before publication review."
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M34 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for graph search, heuristics, CSP/planning, decision theory, and complexity boundaries before publication review."
         },
         {
           "id": "m34-decision-claim-boundaries-unreviewed",
@@ -634,12 +634,12 @@
         {
           "id": "m34-learning-artifacts-unbuilt",
           "status": "unmet",
-          "blockingReason": "No checked-in M34 workbook, bounded search/CSP/decision studio or reference model, diagnostics, retrieval flow, dossier rubric, or accessible oral-defense flow is evidenced by this ledger."
+          "blockingReason": "A checked-in M34 candidate workbook and bounded reference model now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
         },
         {
           "id": "m34-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M34 has no structured module-contract entry, its graph release evidence remains planned, and no CI/provenance record may be inferred."
+          "blockingReason": "M34 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -814,7 +814,7 @@
         {
           "id": "m35-source-map-null",
           "status": "unmet",
-          "blockingReason": "The canonical graph currently has sourceMap: null. Author a source ledger for representation, model families/baselines, evaluation, optimization, ML systems, uncertainty/shift, and responsible deployment claims."
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M35 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for representation, model families/baselines, evaluation, optimization, ML systems, uncertainty/shift, and responsible deployment claims."
         },
         {
           "id": "m35-data-and-model-claim-boundaries-unreviewed",
@@ -826,12 +826,12 @@
         {
           "id": "m35-learning-artifacts-unbuilt",
           "status": "unmet",
-          "blockingReason": "No checked-in M35 workbook, safe local studio/reference model, diagnostics, retrieval flow, dossier rubric, or accessible oral-defense flow is evidenced by this ledger."
+          "blockingReason": "A checked-in M35 candidate workbook and bounded ML/reliability fixture now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
         },
         {
           "id": "m35-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M35 has no structured module-contract entry, its graph release evidence remains planned, and no CI/provenance record may be inferred."
+          "blockingReason": "M35 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -976,7 +976,7 @@
         {
           "id": "m36-source-map-null",
           "status": "unmet",
-          "blockingReason": "The canonical graph currently has sourceMap: null. Author a claim-linked source ledger for statistical learning theory, optimization/generalization distinctions, capacity/limits, deep-learning reliability, reproducibility, and monitoring."
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M36 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for statistical learning theory, optimization/generalization distinctions, capacity/limits, deep-learning reliability, reproducibility, and monitoring."
         },
         {
           "id": "m36-theorem-to-system-boundaries-unreviewed",
@@ -988,12 +988,12 @@
         {
           "id": "m36-learning-artifacts-unbuilt",
           "status": "unmet",
-          "blockingReason": "No checked-in M36 workbook, safe local studio/reference model, diagnostics, retrieval flow, dossier rubric, or accessible oral-defense flow is evidenced by this ledger."
+          "blockingReason": "A checked-in M36 candidate workbook and bounded ML/reliability fixture now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
         },
         {
           "id": "m36-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M36 has no structured module-contract entry, its graph release evidence remains planned, and no CI/provenance record may be inferred."
+          "blockingReason": "M36 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     }

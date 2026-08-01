@@ -66,7 +66,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "bc87602779e35a27775b6e1d4c0c030c57f5223bce4111fc75da36598c1e5941"
+      "sha256": "be7de2798ef7549d894f0bb819fa29d254d49745226e9392edec7a5039b0d332"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -266,7 +266,7 @@
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-      "sha256": "61c0a072ba946b5c11d7408b3940034455a5c1de7e2cc862c74998db0d6bea4d"
+      "sha256": "8e1a54bd1cb3a42cb5889d9432f3af041401adfcfb109addb362b11fe297d09a"
     },
     {
       "path": "content/course/manual-learning-record-workflow.v1.json",
