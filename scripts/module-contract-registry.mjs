@@ -1074,6 +1074,52 @@ function boundArtifactBasenames(entry) {
   )];
 }
 
+function escapeRegularExpression(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+}
+
+/**
+ * A browser test exercises a direct studio through the graph-declared mode,
+ * not by importing its TSX filename. Bind that selector back to one declared
+ * source component that passes the same mode to the shared studio; this keeps
+ * the evidence about rendered behavior rather than a filename comment.
+ */
+async function browserTestExercisesBoundStudio({
+  siteRoot,
+  entry,
+  graphModule,
+  testSource,
+  snapshot,
+  errors,
+  label,
+}) {
+  if (typeof graphModule?.studioId !== "string" || graphModule.studioId === "") return false;
+  const studioId = escapeRegularExpression(graphModule.studioId);
+  const selectorPattern = new RegExp(
+    String.raw`data-mode\s*=\s*["']${studioId}["']`,
+    "u",
+  );
+  if (!selectorPattern.test(testSource)) return false;
+  const sourceModePattern = new RegExp(
+    String.raw`\bmode\s*=\s*["']${studioId}["']`,
+    "u",
+  );
+  const sourceInputs = (entry?.resolvedInputs ?? []).filter(
+    ({ role, path }) => role === "source-code" && typeof path === "string" && path.endsWith(".tsx"),
+  );
+  for (const sourceInput of sourceInputs) {
+    const source = await readTrackedText(
+      siteRoot,
+      sourceInput.path,
+      `${label} bound browser studio source`,
+      errors,
+      { snapshot },
+    );
+    if (source && sourceModePattern.test(source.text)) return true;
+  }
+  return false;
+}
+
 function canonicalPythonReferenceModelTestPath(referenceModelPath) {
   const match = /^public\/downloads\/(module\d+_reference)\.py$/u.exec(referenceModelPath ?? "");
   return match ? `public/downloads/test_${match[1]}.py` : null;
@@ -1185,7 +1231,17 @@ export async function promotionEvidenceTestErrors({
       const testSource = trackedTest.text;
       const normalizedSource = testSource.toLowerCase();
       const namesModule = signals.some((signal) => normalizedSource.includes(signal));
-      const coversBoundArtifact = artifacts.some((artifact) => normalizedSource.includes(artifact.toLowerCase()));
+      const coversBoundArtifact =
+        artifacts.some((artifact) => normalizedSource.includes(artifact.toLowerCase())) ||
+        (kind === "browser" && await browserTestExercisesBoundStudio({
+          siteRoot,
+          entry,
+          graphModule,
+          testSource,
+          snapshot,
+          errors,
+          label: `${label} criterion ${entry.criterionId}`,
+        }));
       if (!namesModule || !coversBoundArtifact) {
         errors.push(`${label} criterion ${entry.criterionId} test ${input.path} must be a module-specific discovered test that reads or exercises a bound module artifact.`);
       }
@@ -1202,7 +1258,7 @@ export async function promotionEvidenceTestErrors({
         if (!runner.includes('filename.endsWith(".test.mjs")')) {
           errors.push(`${label} cannot verify top-level Node test discovery from scripts/run-course-tests.mjs.`);
         }
-      } else {
+      } else if (kind === "python") {
         if (workflow === null) {
           workflow = (await readTrackedText(
             siteRoot,

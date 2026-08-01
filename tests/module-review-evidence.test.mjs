@@ -10,6 +10,7 @@ import {
   loadModuleEvidenceRecord,
   loadModuleReviewRecord,
   readTrackedText,
+  teachingTestDiscoveryKind,
   validateModuleEvidenceRecord,
   validateModuleReviewRecord,
 } from "../scripts/module-review-evidence.mjs";
@@ -35,6 +36,21 @@ async function createTrackedFixture() {
     "# Module 1\n\n## First principles\n\nA model begins with stated assumptions.\n",
   );
   await writeFixture(root, "content/source.json", '{"claims":{"state":"bounded"}}\n');
+  await writeFixture(
+    root,
+    "package.json",
+    JSON.stringify({ scripts: { "test:browser": "pnpm build && playwright test" } }, null, 2) + "\n",
+  );
+  await writeFixture(
+    root,
+    "playwright.config.ts",
+    'export default { testDir: "./e2e" };\n',
+  );
+  await writeFixture(
+    root,
+    "e2e/accessibility.spec.ts",
+    'test("M01 direct workbench remains keyboard-operable", async () => {});\n',
+  );
   await writeFixture(
     root,
     "content/course/contracts/companions/m01.v1.json",
@@ -157,6 +173,71 @@ test("a module-specific evidence record resolves tracked Markdown headings, JSON
   await assert.rejects(
     () => validateModuleEvidenceRecord(unscopedCompanion, { siteRoot: root }),
     /canonical module-scoped companion JSON path/i,
+  );
+});
+
+test("browser-test evidence binds a declared Playwright test to the configured browser runner", async (t) => {
+  const root = await createTrackedFixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const record = await loadModuleEvidenceRecord("content/reviews/m01.evidence.v1.json", {
+    siteRoot: root,
+  });
+  const browserBound = structuredClone(record);
+  browserBound.evidence[0].inputs.push(
+    {
+      kind: "browser-test",
+      role: "test",
+      path: "e2e/accessibility.spec.ts",
+      locator: "M01 direct workbench remains keyboard-operable",
+    },
+    {
+      kind: "browser-test-runner",
+      role: "test-runner",
+      path: "package.json",
+      locator: "/scripts/test:browser",
+    },
+    {
+      kind: "browser-test-config",
+      role: "test-runner",
+      path: "playwright.config.ts",
+      locator: null,
+    },
+  );
+
+  const report = await validateModuleEvidenceRecord(browserBound, { siteRoot: root });
+  assert.equal(teachingTestDiscoveryKind("e2e/accessibility.spec.ts"), "browser");
+  assert.deepEqual(
+    report.resolvedInputs
+      .filter(({ path }) => path.startsWith("e2e/") || path === "package.json" || path === "playwright.config.ts")
+      .map(({ kind, path, locator }) => ({ kind, path, locator })),
+    [
+      {
+        kind: "browser-test",
+        path: "e2e/accessibility.spec.ts",
+        locator: "M01 direct workbench remains keyboard-operable",
+      },
+      {
+        kind: "browser-test-runner",
+        path: "package.json",
+        locator: "/scripts/test:browser",
+      },
+      { kind: "browser-test-config", path: "playwright.config.ts", locator: null },
+    ],
+  );
+
+  const wrongTitle = structuredClone(browserBound);
+  wrongTitle.evidence[0].inputs.at(-3).locator = "M01 unrelated browser check";
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(wrongTitle, { siteRoot: root }),
+    /must name a declared Playwright test title/i,
+  );
+
+  const missingRunner = structuredClone(browserBound);
+  missingRunner.evidence[0].inputs.splice(-2);
+  await assert.rejects(
+    () => validateModuleEvidenceRecord(missingRunner, { siteRoot: root }),
+    /must bind exactly one browser-test-runner and one browser-test-config input/i,
   );
 });
 

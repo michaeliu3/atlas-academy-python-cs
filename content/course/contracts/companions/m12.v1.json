@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m12",
+  "purpose": "Freeze a candidate-only M12 Teaching Assistant, Study Partner, and M13 handoff context without changing M12's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/11",
+    "digest": "sha256:0e5880d3570a4d5c0ea994c886ca08a02d850414053e0fa7b517ff9793faca07"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected import, API, type, or plugin claim. Ask which module owns the concrete choice, what callers are allowed to observe, and which dependency arrow would change if the implementation varied.",
+    "artifactFocus": "Ask the learner to show one labelled import or dependency trace, name one public contract and one runtime limit of a type declaration, then state the smallest evidence that would distinguish a composition-root choice from a leaked concrete dependency.",
+    "repairMove": "Ask for a prediction and confidence before correction; change exactly one import direction, plugin-trust premise, API version rule, or runtime-validation assumption; then offer the shortest counterexample or trace without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: draw domain ← port ← adapter ← composition root, label one observation and one prohibited choice per layer, and provide the same relationship in prose or ASCII if rich rendering is uncertain.",
+    "changedPremise": "Change one dependency owner, import cycle, representation detail, type-checker result, runtime validation result, plugin version, or trust boundary. Ask for a prediction before opening a diagram, trace, generated patch, or counterexample.",
+    "taHandoff": "End with the learner's selected dependency diagram or import trace, confidence, unresolved misconception, one static-versus-runtime boundary, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m13",
+    "carryArtifact": "Carry a boundary dossier: caller-visible observations, the owned port, the composition-root choice, an import/dependency trace, one runtime validation limit, one trust or compatibility premise, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M13 calls an importer correct or debugs its failure, which observable precondition, result/failure alternative, invariant, and evidence boundary must become explicit?",
+    "boundary": "M13 is the only canonical forward handoff. References to M14–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

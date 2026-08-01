@@ -6,6 +6,8 @@ import type { ComponentType } from "react";
  * never an invitation for the reader to guess from a module slug.
  */
 export const moduleStudioIds = [
+  "dependency-direction",
+  "specification-trace",
   "concurrency",
   "network-protocol",
   "async-distributed",
@@ -31,6 +33,22 @@ export type ModuleStudioRegistration = Readonly<{
 }>;
 
 export const moduleStudioRegistry = {
+  "dependency-direction": {
+    studioId: "dependency-direction",
+    title: "Dependency direction workbench",
+    load: () =>
+      import("@/app/DependencyDirectionStudio").then(({ DependencyDirectionStudio }) => ({
+        default: DependencyDirectionStudio,
+      })),
+  },
+  "specification-trace": {
+    studioId: "specification-trace",
+    title: "Specification and debugging workbench",
+    load: () =>
+      import("@/app/SpecificationTraceStudio").then(({ SpecificationTraceStudio }) => ({
+        default: SpecificationTraceStudio,
+      })),
+  },
   concurrency: {
     studioId: "concurrency",
     title: "Concurrency observatory",

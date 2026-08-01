@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m13",
+  "purpose": "Freeze a candidate-only M13 Teaching Assistant, Study Partner, and M14 handoff context without changing M13's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/12",
+    "digest": "sha256:b56c7334886802ea6d12ab3511103c33001a96f17c74375a4801c9105c761f0f"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected behavioral claim. Ask what observation a caller may rely on, which input partition challenges it, what evidence separates a symptom from a cause, and where responsibility should live.",
+    "artifactFocus": "Ask the learner to show one compact contract table, a labelled claim-to-test matrix or trace, one competing causal hypothesis, and one bounded signal whose meaning changes at a declared terminal outcome.",
+    "repairMove": "Ask for a prediction and confidence before correction; change exactly one input partition, provider behavior, retry premise, trace observation, privacy limit, or failure boundary; then offer the smallest discriminating test or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: write claim → input partition → observation → competing cause → smallest discriminating test, define each term, and keep a prose or ASCII fallback beside any rendered notation or code trace.",
+    "changedPremise": "Change one duplicate, partial result, provider substitution, fixture assumption, remote retry, progress signal, privacy boundary, or source of nondeterminism. Ask for a prediction before looking at coverage, a traceback, a trace, or a generated patch.",
+    "taHandoff": "End with the learner's selected contract clause, attempted reproducer or causal trace, confidence, unresolved misconception, one remaining uncertainty, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m14",
+    "carryArtifact": "Carry an evidence dossier: observable claim, input partition, expected terminal signal, trace or reproducer, competing causes, earliest responsible boundary, regression idea, privacy limit, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M14 changes a software design, which chosen behaviors, decision boundary, evidence trail, and rollback or review condition must stay explicit?",
+    "boundary": "M14 is the only canonical forward handoff. References to M15–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

@@ -607,7 +607,7 @@
       "routeRole": "required",
       "referenceReadMinutes": 82,
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
-      "studioId": null,
+      "studioId": "dependency-direction",
       "sequencePosition": 13,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -639,7 +639,7 @@
       "routeRole": "required",
       "referenceReadMinutes": 54,
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
-      "studioId": null,
+      "studioId": "specification-trace",
       "sequencePosition": 14,
       "state": {
         "lifecycle": "learner-material-ready",

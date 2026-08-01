@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -19,6 +21,18 @@ async function packetFixture() {
   ]);
   return { graph, registry };
 }
+
+test("the immutable historic packet registry retains its canonical digest", async () => {
+  const source = await readFile(
+    resolve(siteRoot, legacyModuleContractPacketRelativePath),
+    "utf8",
+  );
+  const digest = createHash("sha256")
+    .update(source.replace(/\r\n?/gu, "\n"))
+    .digest("hex");
+
+  assert.equal(digest, "f30a2c8d2a28ac1602e45261985fab044d1893c533903b8a04ad5f7ade1ec2fb");
+});
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
   const { graph, registry } = await packetFixture();

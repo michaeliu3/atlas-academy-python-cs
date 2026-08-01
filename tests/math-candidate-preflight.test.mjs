@@ -26,7 +26,7 @@ async function legacyCandidateModuleIds() {
   return [...report.candidateByModuleId.keys()];
 }
 
-test("every configured legacy candidate has a non-promoting 18-criterion preflight", async () => {
+test("every configured candidate profile has a non-promoting 18-criterion preflight", async () => {
   for (const moduleId of await legacyCandidateModuleIds()) {
     const report = await runModuleCandidateEvidencePreflight(moduleId, { siteRoot });
 
@@ -44,7 +44,7 @@ test("every configured legacy candidate has a non-promoting 18-criterion preflig
   }
 });
 
-test("the release-input ledger hashes every profile-backed legacy candidate record", async () => {
+test("the release-input ledger hashes every profile-backed candidate record", async () => {
   const releaseInputs = JSON.parse(
     await readFile(resolve(siteRoot, "content/course/release-inputs.v1.json"), "utf8"),
   );

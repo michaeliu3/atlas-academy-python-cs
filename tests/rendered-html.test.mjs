@@ -1948,6 +1948,48 @@ test("renders the finalized operating-systems workbook", async () => {
   assert.match(referenceTests, /Module18ReferenceTests/);
 });
 
+test("renders the M12 and M13 bounded model packages as honest learner downloads", async () => {
+  const [module12Response, module13Response, module12Reference, module13Reference] = await Promise.all([
+    render("/modules/12-modules-apis-types-dependencies"),
+    render("/modules/13-specifications-testing-debugging-observability"),
+    readFile(new URL("../public/downloads/module12_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module13_reference.py", import.meta.url), "utf8"),
+  ]);
+  assert.equal(module12Response.status, 200);
+  assert.equal(module13Response.status, 200);
+
+  const [module12Html, module13Html] = await Promise.all([
+    module12Response.text(),
+    module13Response.text(),
+  ]);
+  assert.match(module12Html, /Bounded dependency-direction model package/);
+  assert.match(module12Html, /href="\/downloads\/module12_reference\.py"/);
+  assert.match(module12Html, /href="\/downloads\/test_module12_reference\.py"/);
+  assert.match(module12Html, /does not parse Python imports or prove runtime behavior/);
+  assert.match(module13Html, /Bounded terminal-signal model package/);
+  assert.match(module13Html, /href="\/downloads\/module13_reference\.py"/);
+  assert.match(module13Html, /href="\/downloads\/test_module13_reference\.py"/);
+  assert.match(module13Html, /does not execute an importer or prove remote completion/);
+
+  const prohibitedRuntimeImport =
+    /(?:^|\n)\s*(?:from|import)\s+(?:os|subprocess|socket|requests|urllib|http(?:\.client)?|pathlib|shutil|tempfile|asyncio|threading|multiprocessing|pickle|marshal|sqlite3|tarfile|zipfile)\b/;
+  assert.match(
+    "from socket import socket",
+    prohibitedRuntimeImport,
+    "the bounded-model import rule must recognize a prohibited runtime import",
+  );
+  assert.doesNotMatch(
+    module12Reference,
+    prohibitedRuntimeImport,
+    "M12's public model must remain a finite local reasoning aid",
+  );
+  assert.doesNotMatch(
+    module13Reference,
+    prohibitedRuntimeImport,
+    "M13's public model must remain a finite local reasoning aid",
+  );
+});
+
 test("renders the finalized concurrency-and-parallelism workbook", async () => {
   const response = await render("/modules/19-concurrency-parallelism");
   assert.equal(response.status, 200);

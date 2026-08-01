@@ -33,7 +33,7 @@ compressed transfer estimate.
 | Each named studio's own entry plus direct CSS | 80,000 B | Keeps an individual studio's primary code-split entry bounded. |
 | Each named studio's static import closure | 400,000 B | Bounds its entry plus manifest-static dependencies. |
 
-The policy also enumerates all 12 registered visual studios by stable manifest
+The policy also enumerates all 14 registered visual studios by stable manifest
 `name`. Each must resolve to exactly one emitted entry, be dynamically
 reachable from the browser entry, and remain outside its static-import
 closure. This catches a studio that silently becomes part of the initial

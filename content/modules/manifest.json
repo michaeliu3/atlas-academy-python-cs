@@ -495,9 +495,9 @@
       "title": "Modules, APIs, Types, and Dependency Direction",
       "summary": "Central idea: a component boundary is a controlled promise about what may be known, called, and changed; Python modules and type annotations help express that boundary, but architecture determines whether it remains changeable.",
       "arcId": "arc-iii",
-      "wordCount": 17016,
+      "wordCount": 19050,
       "estimatedMinutes": 82,
-      "sourceHash": "a1fc525a1eebea1f64c1abd4f0cf3e6a78c2777a9865c94b36ad4826c7bfea86",
+      "sourceHash": "453828482c3f9027295a3abd4f99393a730293ea54a0eb0a45b183d96327e9e6",
       "id": "m12",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -516,7 +516,7 @@
       "routePosition": 13,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
-      "studioId": null,
+      "studioId": "dependency-direction",
       "prerequisiteNumbers": [
         11
       ],
@@ -535,9 +535,9 @@
       "title": "Specifications, Testing, Debugging, and Observability",
       "summary": "Central idea: ambiguity becomes a specification; a specification creates testable claims; finite evidence localizes failures; observability preserves the missing context; each confirmed defect becomes regression knowledge.",
       "arcId": "arc-iii",
-      "wordCount": 11291,
+      "wordCount": 13045,
       "estimatedMinutes": 54,
-      "sourceHash": "adc4c10a855320ae7ff391cef89dcf2d86e8596d1fb35684df501481f08d42ce",
+      "sourceHash": "07ce63f004ab7cfccba1a9f6ac30845784eeb48e5704322c621677fbe434066c",
       "id": "m13",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -556,7 +556,7 @@
       "routePosition": 14,
       "masteryGateId": "software",
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
-      "studioId": null,
+      "studioId": "specification-trace",
       "prerequisiteNumbers": [
         12
       ],

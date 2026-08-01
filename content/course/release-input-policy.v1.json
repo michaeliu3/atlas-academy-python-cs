@@ -3,6 +3,8 @@
   "policyVersion": "v1",
   "description": "Explicit, text-only public teaching artifacts admitted to the hashed Atlas release-input ledger. Source artifact copies are deterministically synchronized from canonical content/source-maps inputs. Adding, removing, or renaming an artifact requires review in the same Git commit.",
   "allowlistedDownloadPaths": [
+    "public/downloads/module12_reference.py",
+    "public/downloads/module13_reference.py",
     "public/downloads/module17_reference.py",
     "public/downloads/module18_reference.py",
     "public/downloads/module19_concurrency_parallelism_source_map.md",
@@ -28,6 +30,8 @@
     "public/downloads/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
     "public/downloads/module30_probability_statistics_scientific_inference_source_map.md",
     "public/downloads/module30_reference.py",
+    "public/downloads/test_module12_reference.py",
+    "public/downloads/test_module13_reference.py",
     "public/downloads/test_module18_reference.py",
     "public/downloads/test_module19_reference.py",
     "public/downloads/test_module20_reference.py",

@@ -12,7 +12,12 @@ import {
   validateAdvancedModuleContractRegistry,
 } from "../scripts/advanced-module-contract.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
-import { legacyModuleContractPacketRelativePath } from "../scripts/legacy-module-contract-packet.mjs";
+import {
+  legacyModuleContractPacketRelativePath,
+  loadModuleContractCandidatePacketRegistry,
+  moduleContractCandidatePacketRelativePath,
+  validateModuleContractCandidatePacketRegistry,
+} from "../scripts/legacy-module-contract-packet.mjs";
 import {
   loadLegacyCandidatePreflightProfiles,
   validateLegacyCandidatePreflightProfiles,
@@ -57,7 +62,14 @@ function comparePaths(left, right) {
 }
 
 test("the release-input ledger is a reproducible local allowlist", async () => {
-  const [ledger, graph, advancedRegistry, releaseEvidencePolicy, candidateProfiles] = await Promise.all([
+  const [
+    ledger,
+    graph,
+    advancedRegistry,
+    releaseEvidencePolicy,
+    candidateProfiles,
+    currentCandidatePacketRegistry,
+  ] = await Promise.all([
     readFile(ledgerPath, "utf8").then(JSON.parse),
     loadCourseGraph(),
     loadAdvancedModuleContractRegistry(),
@@ -65,10 +77,16 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
     loadLegacyCandidatePreflightProfiles(siteRoot).then((profiles) =>
       validateLegacyCandidatePreflightProfiles(profiles, { siteRoot }),
     ),
+    loadModuleContractCandidatePacketRegistry(siteRoot),
   ]);
   const advancedContractReport = await validateAdvancedModuleContractRegistry(
     graph,
     advancedRegistry,
+    { siteRoot },
+  );
+  const currentCandidatePacketReport = await validateModuleContractCandidatePacketRegistry(
+    graph,
+    currentCandidatePacketRegistry,
     { siteRoot },
   );
   assert.equal(ledger.schemaVersion, 1);
@@ -85,6 +103,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(advancedModuleContractRelativePath));
   assert.ok(paths.includes(legacyModuleContractAuditRelativePath));
   assert.ok(paths.includes(legacyModuleContractPacketRelativePath));
+  assert.ok(paths.includes(moduleContractCandidatePacketRelativePath));
   assert.ok(paths.includes(manualLearningRecordWorkflowRelativePath));
   assert.ok(paths.includes(manualLearningRecordWorkflowGuideRelativePath));
   assert.ok(paths.includes(liveCodexLearningWorkflowRelativePath));
@@ -173,6 +192,17 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
       profile.visualTestPath,
     ]),
   );
+  const currentCandidateImplementationPaths = new Set(
+    currentCandidatePacketReport.releaseInputPaths
+      .map((path) => relative(siteRoot, path).replaceAll("\\", "/"))
+      .filter((path) => /^(?:app|e2e|lib|tests)\/|^(?:package\.json|playwright\.config\.ts)$/u.test(path)),
+  );
+  for (const currentCandidateImplementationPath of currentCandidateImplementationPaths) {
+    assert.ok(
+      paths.includes(currentCandidateImplementationPath),
+      `${currentCandidateImplementationPath} is a hash-ledgered current-candidate implementation input`,
+    );
+  }
 
   for (const input of ledger.inputs) {
     if (input.path.startsWith("docs/")) {
@@ -184,8 +214,9 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
       assert.ok(
         /^(?:content|public)\//u.test(input.path) ||
           profileBoundCodePaths.has(input.path) ||
+          currentCandidateImplementationPaths.has(input.path) ||
           input.path === releaseEvidenceWorkflowPath,
-        `${input.path} is canonical course content, a public artifact, an exact profile-bound code input, or the pinned release-evidence workflow`,
+        `${input.path} is canonical course content, a public artifact, an exact candidate-bound code input, or the pinned release-evidence workflow`,
       );
     }
     assert.doesNotMatch(input.path, /(?:^|\/)\.\.(?:\/|$)/u);

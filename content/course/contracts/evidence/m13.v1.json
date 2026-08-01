@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m13",
+  "purpose": "Bind M13's current workbook, source-ledger, direct studio, local teaching model, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M13 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m13-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The current M13 workbook visibly declares its knowledge-system position and bounded M14 handoff without treating either as completion or release evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "25-backward-and-forward-connections"}
+      ],
+      "limitations": ["Resolving a map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m13-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "The current M13 workbook has six ordered visible sessions that move from a behavioral contract through finite evidence and causal debugging to an evidence defense.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "session-1--ambiguity-becomes-a-behavioral-contract"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "session-2--partition-claims-into-finite-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "session-3--provider-substitution-fixtures-and-controlled-doubles"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "session-4--from-traceback-to-causal-mechanism"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "session-5--observable-without-surveillance-or-noise"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "session-6--agent-directed-atlas-evidence-defense"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m13-first-principles",
+      "criterionId": "first-principles",
+      "claim": "The M13 workbook exposes ambiguity as unowned policy before introducing specifications, tests, debugging, or observability techniques.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "4-first-principle-ambiguity-is-unowned-policy"}
+      ],
+      "limitations": ["A visible first-principles anchor does not prove specification adequacy, implementation correctness, or learner comprehension."]
+    },
+    {
+      "id": "m13-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "The current M13 workbook exposes structural locations for a specification definition, explicit importer assumptions, finite-evidence derivation, changed-premise counterexample, and a bounded validated reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "5-a-specification-is-a-firewall-between-caller-and-provider"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "the-atlas-importer-v1-contract"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "6-from-a-universal-contract-to-finite-test-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "changed-premise-counterexample-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "15-runnable-validated-reference-model"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical reasoning, or source claims."]
+    },
+    {
+      "id": "m13-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "The M13 workbook exposes separate code-reading, traceback-to-cause debugging, and bounded patch-review design anchors.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "16-code-and-architecture-reading-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "17-debugging-case--the-traceback-points-after-the-corruption"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "18-bounded-agent-task-and-patch-review"}
+      ],
+      "limitations": ["Visible task anchors do not prove that a learner can independently read, debug, or design a reliable evidence boundary."]
+    },
+    {
+      "id": "m13-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "The M13 workbook and direct workbench expose a prediction before a learner compares a claim/evidence/causal-repair choice to the analysis.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "prediction-before-reveal--clause-evidence-and-cause"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m13-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "The M13 workbook exposes a bounded transfer task that applies one evidence chain to a different boundary before M14 reasons about preserving behavior through change.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "transfer-task--one-evidence-chain-a-different-boundary"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m13-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "The M13 workbook, canonical Arc III source map, and M13 addendum expose a learner reading route and two scoped source-ledger locations for candidate inspection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "26-primary-source-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/arc_iii_source_map.md", "locator": "recommended-reading-sequence-and-source-contribution-1"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module13_specifications_testing_debugging_observability_source_audit_addendum.md", "locator": "preserved-legacy-audit-findings"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m13-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "The M13 workbook binds its direct specification workbench to a module-specific source component and a declared Playwright keyboard/Axe test that is structurally tied to the checked browser runner and e2e configuration.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "19-six-session-interactive-teaching-sequence"},
+        {"kind": "file", "role": "source-code", "path": "app/SpecificationTraceStudio.tsx", "locator": null},
+        {"kind": "browser-test", "role": "test", "path": "e2e/accessibility.spec.ts", "locator": "M13 direct studio keeps evidence prediction gated by confidence"},
+        {"kind": "browser-test-runner", "role": "test-runner", "path": "package.json", "locator": "/scripts/test:browser"},
+        {"kind": "browser-test-config", "role": "test-runner", "path": "playwright.config.ts", "locator": null}
+      ],
+      "limitations": ["A declared local Playwright test and runner/configuration binding do not replace screen-reader, keyboard, cross-browser, or human-comprehension review."]
+    },
+    {
+      "id": "m13-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "The M13 workbook exposes a confidence-aware diagnostic and a misconception-repair route without asserting a score or mastery result.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "21-understanding-check--eight-confidence-aware-mcqs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "misconception-repair-map--claims-evidence-and-causal-paths"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m13-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "The M13 workbook exposes a scheduled retrieval anchor for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "scheduled-retrieval"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m13-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "The M13 workbook exposes an evidence-packet milestone, evidence-rubric, and mastery-evidence location for later inspection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "23-atlas-milestone-13--evidence-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "evidence-rubric"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "mastery-evidence"}
+      ],
+      "limitations": ["A project brief and rubric anchors do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m13-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "The M13 workbook exposes a constructive conversational oral-defense route with invitation, hint ladder, changed-premise counterexample, transfer, reflection, and learner-controlled evidence summary anchors.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "conversational-oral-defense--m13"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "invitation-and-starting-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "hint-ladder"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "changed-premise-counterexample-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "transfer-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/13_specifications_testing_debugging_observability.md", "locator": "reflection-and-learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["These protocol anchors do not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m13-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The candidate-only M13 companion binds a Teaching Assistant opening, artifact focus, and repair move to specification/evidence boundaries.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m13.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m13-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The candidate-only M13 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m13.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered equations or code, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m13-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The candidate-only M13 companion binds its evidence dossier to the canonical M14 forward handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m13.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M13, or authorization to bypass M14 prerequisites."]
+    },
+    {
+      "id": "m13-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "The current candidate input set binds the M13 specification workbench, its studio registry entry, a bounded local reference model, and its discovered teaching-model test.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/SpecificationTraceStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module13_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module13_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, specification correctness, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m13-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m13.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m13/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

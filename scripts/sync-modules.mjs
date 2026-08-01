@@ -22,8 +22,11 @@ import {
   validateLegacyModuleContractAudit,
 } from "./validate-legacy-module-contract-audit.mjs";
 import {
+  combineModuleContractPacketReports,
   loadLegacyModuleContractPacketRegistry,
+  loadModuleContractCandidatePacketRegistry,
   validateLegacyModuleContractPacketRegistry,
+  validateModuleContractCandidatePacketRegistry,
 } from "./legacy-module-contract-packet.mjs";
 import {
   legacyCandidatePreflightProfilesPath,
@@ -447,13 +450,27 @@ const moduleContractRegistryReport = await validateModuleContractRegistry(
 for (const path of moduleContractRegistryReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
-const legacyModuleContractPacketRegistry = await loadLegacyModuleContractPacketRegistry(siteRoot);
-const legacyModuleContractPacketReport = await validateLegacyModuleContractPacketRegistry(
-  courseGraph,
-  legacyModuleContractPacketRegistry,
-  { siteRoot },
-);
-for (const path of legacyModuleContractPacketReport.releaseInputPaths) {
+const [legacyModuleContractPacketRegistry, currentModuleContractCandidatePacketRegistry] = await Promise.all([
+  loadLegacyModuleContractPacketRegistry(siteRoot),
+  loadModuleContractCandidatePacketRegistry(siteRoot),
+]);
+const [legacyModuleContractPacketReport, currentModuleContractCandidatePacketReport] = await Promise.all([
+  validateLegacyModuleContractPacketRegistry(
+    courseGraph,
+    legacyModuleContractPacketRegistry,
+    { siteRoot },
+  ),
+  validateModuleContractCandidatePacketRegistry(
+    courseGraph,
+    currentModuleContractCandidatePacketRegistry,
+    { siteRoot },
+  ),
+]);
+const moduleContractPacketCohort = combineModuleContractPacketReports([
+  legacyModuleContractPacketReport,
+  currentModuleContractCandidatePacketReport,
+]);
+for (const path of moduleContractPacketCohort.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
 const generatedModuleContent = `${[

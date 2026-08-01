@@ -5,7 +5,12 @@ import {
   GitIndexSnapshotError,
   assertGitIndexSnapshotForSiteRoot,
 } from "./git-index-snapshot.mjs";
-import { readTrackedText, teachingTestDiscoveryKind } from "./module-review-evidence.mjs";
+import {
+  declaresBrowserTestTitle,
+  isValidBrowserTestTitle,
+  readTrackedText,
+  teachingTestDiscoveryKind,
+} from "./module-review-evidence.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -33,6 +38,7 @@ const candidateKeys = [
   "studioSourcePath",
   "visualTestPath",
 ];
+const browserCandidateKeys = [...candidateKeys, "browserTestTitle"];
 const candidateDocumentationKeys = ["path", "anchor", "digest"];
 const moduleIdPattern = /^m(?:0[1-9]|[1-9]\d)$/u;
 const identifierPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
@@ -79,6 +85,14 @@ function exactKeys(value, expectedKeys, label, errors) {
     return false;
   }
   return true;
+}
+
+function exactCandidateKeys(value, label, errors) {
+  const expectedKeys =
+    isPlainObject(value) && Object.hasOwn(value, "browserTestTitle")
+      ? browserCandidateKeys
+      : candidateKeys;
+  return exactKeys(value, expectedKeys, label, errors);
 }
 
 function normalizedRepositoryPath(value, label, errors) {
@@ -228,7 +242,7 @@ export async function validateLegacyCandidatePreflightProfiles(
   const packetIds = new Set();
   for (const [index, candidate] of (profileRegistry?.candidates ?? []).entries()) {
     const label = `legacy candidate preflight-profile registry.candidates[${index}]`;
-    exactKeys(candidate, candidateKeys, label, errors);
+    exactCandidateKeys(candidate, label, errors);
     const moduleId = candidate?.moduleId;
     if (!hasText(moduleId) || !moduleIdPattern.test(moduleId) || moduleNumber(moduleId) > 30) {
       errors.push(`${label}.moduleId must name one canonical M01–M30 legacy module.`);
@@ -325,8 +339,16 @@ export async function validateLegacyCandidatePreflightProfiles(
       `${label}.visualTestPath`,
       errors,
     );
-    if (visualTestPath && teachingTestDiscoveryKind(visualTestPath) !== "node") {
-      errors.push(`${label}.visualTestPath must name a discovered top-level Node test.`);
+    const visualTestKind = visualTestPath ? teachingTestDiscoveryKind(visualTestPath) : null;
+    if (visualTestPath && visualTestKind !== "node" && visualTestKind !== "browser") {
+      errors.push(`${label}.visualTestPath must name a discovered top-level Node or Playwright browser test.`);
+    }
+    const browserTestTitle = candidate?.browserTestTitle;
+    if (visualTestKind === "browser" && !isValidBrowserTestTitle(browserTestTitle)) {
+      errors.push(`${label}.browserTestTitle must name one non-empty literal Playwright test title.`);
+    }
+    if (visualTestKind !== "browser" && Object.hasOwn(candidate ?? {}, "browserTestTitle")) {
+      errors.push(`${label}.browserTestTitle is allowed only with a discovered Playwright browser test.`);
     }
     if (visualTestPath) {
       snapshotInputPaths.add(visualTestPath);
@@ -337,7 +359,16 @@ export async function validateLegacyCandidatePreflightProfiles(
         errors,
         { snapshot },
       );
-      if (record) releaseInputPaths.add(resolve(siteRoot, visualTestPath));
+        if (record) {
+          releaseInputPaths.add(resolve(siteRoot, visualTestPath));
+          if (
+            visualTestKind === "browser" &&
+            isValidBrowserTestTitle(browserTestTitle) &&
+            !declaresBrowserTestTitle(record.text, browserTestTitle)
+          ) {
+            errors.push(`${label}.browserTestTitle must name a declared Playwright test title in ${visualTestPath}.`);
+          }
+        }
     }
 
     if (documentationPath) {
@@ -375,6 +406,7 @@ export async function validateLegacyCandidatePreflightProfiles(
         sourceLedgerPaths: Object.freeze([...sourceLedgerPaths]),
         studioSourcePath,
         visualTestPath,
+        visualTestTitle: visualTestKind === "browser" ? browserTestTitle : null,
       }));
     }
   }

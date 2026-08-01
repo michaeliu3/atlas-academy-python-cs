@@ -2,12 +2,44 @@
   "schemaVersion": 1,
   "kind": "atlas-legacy-candidate-preflight-profiles",
   "recordVersion": "v1",
-  "purpose": "Versioned, snapshot-bound module-specific inputs for non-promoting legacy candidate evidence preflights.",
+  "purpose": "Versioned, snapshot-bound module-specific inputs for non-promoting legacy-baseline candidate evidence preflights, including current retrofit cohorts that preserve the historical audit.",
   "truthBoundary": {
     "candidate": "A passing profile-backed preflight proves only that a listed legacy module's structural candidate inputs resolve from one Git-index snapshot.",
     "publication": "This registry grants no review, verification, release, deployment, publication, or learner-mastery status. Those claims require their separately recorded evidence."
   },
   "candidates": [
+    {
+      "moduleId": "m12",
+      "packetId": "m12-modules-apis-types-dependencies-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m12/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:81a1cc5b6d2e790bf74af81cb85be559a15399a508cd802edfd842f1f29a67ad"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/DependencyDirectionStudio.tsx",
+      "visualTestPath": "e2e/accessibility.spec.ts",
+      "browserTestTitle": "M12 direct studio keeps tabs, prediction, confidence, and reveal keyboard-operable"
+    },
+    {
+      "moduleId": "m13",
+      "packetId": "m13-specifications-testing-debugging-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m13/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:359d0b5f4253f8fa70b1530588169b9cecf4b4d9d9163d2d49a7c3fa4d93013c"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module13_specifications_testing_debugging_observability_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/SpecificationTraceStudio.tsx",
+      "visualTestPath": "e2e/accessibility.spec.ts",
+      "browserTestTitle": "M13 direct studio keeps evidence prediction gated by confidence"
+    },
     {
       "moduleId": "m19",
       "packetId": "m19-concurrency-parallelism-structural-candidate",

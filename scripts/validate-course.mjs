@@ -9,8 +9,11 @@ import {
 } from "./advanced-module-contract.mjs";
 import { loadCourseGraph, validateCourseGraph } from "./course-graph.mjs";
 import {
+  combineModuleContractPacketReports,
   loadLegacyModuleContractPacketRegistry,
+  loadModuleContractCandidatePacketRegistry,
   validateLegacyModuleContractPacketRegistry,
+  validateModuleContractCandidatePacketRegistry,
 } from "./legacy-module-contract-packet.mjs";
 import {
   legacyCandidatePreflightProfilesPath,
@@ -186,6 +189,8 @@ export async function validateCourseContracts(
   let contractRegistry = null;
   let advancedContract = null;
   let legacyPackets = null;
+  let currentCandidatePackets = null;
+  let candidatePackets = null;
   let legacyCandidatePreflightProfiles = null;
   let draftEvidence = null;
   let releaseEvidencePolicy = null;
@@ -277,6 +282,41 @@ export async function validateCourseContracts(
   }
 
   try {
+    const packetRegistry = await loadModuleContractCandidatePacketRegistry(validationSiteRoot);
+    currentCandidatePackets = await validateModuleContractCandidatePacketRegistry(
+      validationGraph,
+      packetRegistry,
+      { siteRoot: validationSiteRoot },
+    );
+    for (const path of currentCandidatePackets.releaseInputPaths) {
+      releaseInputPaths.add(path);
+    }
+    warnings.push(
+      `Current contract packets resolved for ${currentCandidatePackets.summary.structuralCandidates} structural candidate module(s); this is not human review or publication evidence.`,
+    );
+  } catch (error) {
+    errors.push(
+      `Current typed contract-packet cohort must remain valid as non-promoting structural evidence: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  if (legacyPackets && currentCandidatePackets) {
+    try {
+      candidatePackets = combineModuleContractPacketReports([
+        legacyPackets,
+        currentCandidatePackets,
+      ]);
+      for (const path of candidatePackets.releaseInputPaths) {
+        releaseInputPaths.add(path);
+      }
+    } catch (error) {
+      errors.push(
+        `Candidate packet cohorts must not shadow module or packet identities: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+
+  try {
     const profileRegistry = requireGitTracked
       ? (
         await provenanceSnapshot.readJson(
@@ -298,7 +338,7 @@ export async function validateCourseContracts(
       releaseInputPaths.add(path);
     }
     warnings.push(
-      `Legacy candidate preflight profiles resolved for ${legacyCandidatePreflightProfiles.candidateByModuleId.size} structural candidate module(s); this is not human review or publication evidence.`,
+      `Candidate preflight profiles resolved for ${legacyCandidatePreflightProfiles.candidateByModuleId.size} structural candidate module(s); this is not human review or publication evidence.`,
     );
   } catch (error) {
     errors.push(
@@ -497,6 +537,8 @@ export async function validateCourseContracts(
     contractRegistry,
     advancedContract,
     legacyPackets,
+    currentCandidatePackets,
+    candidatePackets,
     legacyCandidatePreflightProfiles,
     draftEvidence,
     manualLearningRecordWorkflow,

@@ -17,8 +17,18 @@ import {
   loadLegacyCandidatePreflightProfiles,
   validateLegacyCandidatePreflightProfiles,
 } from "./legacy-candidate-preflight-profiles.mjs";
-import { legacyModuleContractPacketRelativePath } from "./legacy-module-contract-packet.mjs";
 import {
+  combineModuleContractPacketReports,
+  legacyModuleContractPacketRelativePath,
+  moduleContractCandidatePacketRelativePath,
+  validateLegacyModuleContractPacketRegistry,
+  validateModuleContractCandidatePacketRegistry,
+} from "./legacy-module-contract-packet.mjs";
+import {
+  browserTestConfigPath,
+  browserTestRunnerCommand,
+  browserTestRunnerLocator,
+  browserTestRunnerPath,
   loadModuleEvidenceRecord,
   readTrackedText,
   validateModuleEvidenceRecord,
@@ -543,10 +553,10 @@ async function loadLegacyCandidateProfileReportFromSnapshot(siteRoot, snapshot, 
 }
 
 /**
- * A legacy candidate profile may expand source-ledger scope only to artifacts
- * already named by its own non-promoting typed packet. It cannot point a
- * candidate at a different workbook, future review selector, or unrelated
- * studio/test surface.
+ * A legacy-baseline candidate profile may expand source-ledger scope only to
+ * artifacts already named by one collision-free non-promoting typed packet.
+ * It cannot point a candidate at a different workbook, future review selector,
+ * or unrelated studio/test surface.
  */
 async function validateLegacyCandidateProfileContext(
   profile,
@@ -562,21 +572,29 @@ async function validateLegacyCandidateProfileContext(
     await snapshot.assertClean([
       legacyCandidatePreflightProfilesRelativePath,
       legacyModuleContractPacketRelativePath,
+      moduleContractCandidatePacketRelativePath,
     ]);
-    const packetRegistry = (
-      await snapshot.readJson(legacyModuleContractPacketRelativePath)
-    ).value;
-    if (!Array.isArray(packetRegistry?.modules)) {
-      throw new Error("the typed legacy packet registry must contain a modules array.");
-    }
-    const packets = packetRegistry.modules.filter(
-      ({ moduleId }) => moduleId === profile.moduleId,
-    );
-    if (packets.length !== 1) {
-      errors.push(`${label} must resolve exactly one typed legacy packet.`);
+    const [legacyPacketRegistry, currentPacketRegistry] = await Promise.all([
+      snapshot.readJson(legacyModuleContractPacketRelativePath),
+      snapshot.readJson(moduleContractCandidatePacketRelativePath),
+    ]);
+    const [legacyPacketReport, currentPacketReport] = await Promise.all([
+      validateLegacyModuleContractPacketRegistry(stateContext.graph, legacyPacketRegistry.value, {
+        siteRoot,
+      }),
+      validateModuleContractCandidatePacketRegistry(stateContext.graph, currentPacketRegistry.value, {
+        siteRoot,
+      }),
+    ]);
+    const packetCohort = combineModuleContractPacketReports([
+      legacyPacketReport,
+      currentPacketReport,
+    ]);
+    const packet = packetCohort.packetByModuleId.get(profile.moduleId) ?? null;
+    if (!packet || packet.packetId !== profile.packetId) {
+      errors.push(`${label} must resolve exactly one matching typed candidate packet.`);
       return null;
     }
-    const packet = packets[0];
     const graphModule = stateContext.graph.modules?.find(
       ({ id }) => id === profile.moduleId,
     ) ?? null;
@@ -589,9 +607,6 @@ async function validateLegacyCandidateProfileContext(
     if (!graphModule || !expectedWorkbookPath) {
       errors.push(`${label} requires a manifest-selected canonical workbook and graph module.`);
       return null;
-    }
-    if (packet.packetId !== profile.packetId) {
-      errors.push(`${label} packetId must match its captured typed legacy packet.`);
     }
     if (packet.workbookPath !== expectedWorkbookPath) {
       errors.push(`${label} must bind its manifest-selected workbook ${expectedWorkbookPath}.`);
@@ -626,11 +641,18 @@ async function validateLegacyCandidateProfileContext(
     if (!implementationPaths.has(profile.visualTestPath)) {
       errors.push(`${label} visualTestPath must be named by its captured typed legacy packet.`);
     }
+    if (
+      profile.visualTestTitle !== null &&
+      (!implementationPaths.has(browserTestRunnerPath) || !implementationPaths.has(browserTestConfigPath))
+    ) {
+      errors.push(`${label} browser visual test must name its package runner and Playwright configuration in the captured typed legacy packet.`);
+    }
     return {
       packet,
       snapshotInputPaths: Object.freeze([
         legacyCandidatePreflightProfilesRelativePath,
         legacyModuleContractPacketRelativePath,
+        moduleContractCandidatePacketRelativePath,
       ]),
       materialScope: Object.freeze({
         workbookPath: expectedWorkbookPath,
@@ -647,7 +669,27 @@ async function validateLegacyCandidateProfileContext(
   }
 }
 
-function validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport, errors) {
+function escapeRegularExpression(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+}
+
+function browserTestBody(source, title) {
+  const declaration = new RegExp(
+    String.raw`test\s*\(\s*["']${escapeRegularExpression(title)}["']\s*,`,
+    "u",
+  );
+  const match = declaration.exec(source);
+  if (!match || match.index === undefined) return null;
+  const closingOffset = source.indexOf("\n});", match.index + match[0].length);
+  return closingOffset < 0 ? null : source.slice(match.index, closingOffset + "\n});".length);
+}
+
+async function validateLegacyCandidateProfileEvidenceBindings(
+  profile,
+  evidenceReport,
+  errors,
+  { siteRoot, snapshot = null },
+) {
   const moduleLabel = profile.moduleId.toUpperCase();
   const visualInputs = evidenceReport.evidenceByCriterion.get(
     "accessible-visual-text-alternative",
@@ -657,13 +699,54 @@ function validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport,
       kind === "file" && role === "source-code" && path === profile.studioSourcePath,
   );
   const visualTest = visualInputs.filter(
-    ({ kind, role, path }) =>
-      kind === "file" && role === "test" && path === profile.visualTestPath,
+    ({ kind, role, path, locator }) =>
+      kind === (profile.visualTestTitle === null ? "file" : "browser-test") &&
+      role === "test" &&
+      path === profile.visualTestPath &&
+      locator === profile.visualTestTitle,
   );
-  if (visualStudio.length !== 1 || visualTest.length !== 1) {
+  const browserRunner = visualInputs.filter(
+    ({ kind, role, path, locator, value }) =>
+      kind === "browser-test-runner" &&
+      role === "test-runner" &&
+      path === browserTestRunnerPath &&
+      locator === browserTestRunnerLocator &&
+      value === browserTestRunnerCommand,
+  );
+  const browserConfig = visualInputs.filter(
+    ({ kind, role, path, locator }) =>
+      kind === "browser-test-config" &&
+      role === "test-runner" &&
+      path === browserTestConfigPath &&
+      locator === null,
+  );
+  const browserRunnerBound =
+    profile.visualTestTitle === null ||
+    (browserRunner.length === 1 && browserConfig.length === 1);
+  if (visualStudio.length !== 1 || visualTest.length !== 1 || !browserRunnerBound) {
     errors.push(
-      `${moduleLabel} legacy candidate visual evidence must bind its profiled studio ${profile.studioSourcePath} and visual test ${profile.visualTestPath}.`,
+      `${moduleLabel} legacy candidate visual evidence must bind its profiled studio ${profile.studioSourcePath}, visual test ${profile.visualTestPath}, and any declared browser runner/configuration.`,
     );
+  }
+  if (profile.visualTestTitle !== null && visualTest.length === 1) {
+    const source = await readTrackedText(
+      siteRoot,
+      profile.visualTestPath,
+      `${moduleLabel} candidate visual browser test`,
+      errors,
+      { snapshot },
+    );
+    const body = source ? browserTestBody(source.text, profile.visualTestTitle) : null;
+    if (
+      !body ||
+      !body.includes("page.goto(") ||
+      !(body.includes("selectRadioWithKeyboard") || body.includes("page.keyboard.")) ||
+      !body.includes("new AxeBuilder") ||
+      !body.includes(".analyze()") ||
+      !body.includes("expect(")
+    ) {
+      errors.push(`${moduleLabel} browser visual test must retain a module-route interaction, keyboard exercise, assertion, and direct Axe analysis in its declared Playwright test body.`);
+    }
   }
   const interactionInputs = evidenceReport.evidenceByCriterion.get(
     "interaction-reference-model-and-teaching-tests",
@@ -1115,7 +1198,10 @@ export async function validateModuleEvidencePreflight(
         evidenceReport,
         materialScope: legacyCandidateContext.materialScope,
       }));
-      validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport, errors);
+      await validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport, errors, {
+        siteRoot,
+        snapshot: evidenceSnapshot,
+      });
     } else {
       await validateM31AuthoringCandidateScope(evidenceReport, graphModule, errors, {
         siteRoot,

@@ -16,6 +16,26 @@ const execFileAsync = promisify(execFile);
 
 export const legacyModuleContractPacketRelativePath =
   "content/course/contracts/legacy-module-contract-packets.v1.json";
+export const moduleContractCandidatePacketRelativePath =
+  "content/course/contracts/module-contract-candidate-packets.v1.json";
+
+const legacyPacketRegistryDescriptor = Object.freeze({
+  relativePath: legacyModuleContractPacketRelativePath,
+  kind: "atlas-legacy-module-contract-packets",
+  registryLabel: "legacy module contract-packet registry",
+  packetLabel: "legacy module contract-packet",
+  requiredModuleIds: null,
+  includeImplementationArtifactsInReleaseInputs: false,
+});
+
+const currentCandidatePacketRegistryDescriptor = Object.freeze({
+  relativePath: moduleContractCandidatePacketRelativePath,
+  kind: "atlas-module-contract-candidate-packets",
+  registryLabel: "current module contract-candidate packet registry",
+  packetLabel: "current module contract-candidate packet",
+  requiredModuleIds: ["m12", "m13"],
+  includeImplementationArtifactsInReleaseInputs: true,
+});
 
 const exactCriterionIds = [
   "prerequisite-forward-map",
@@ -92,9 +112,9 @@ function requireExactKeys(record, keys, label, errors) {
   return true;
 }
 
-function packetFailure(errors) {
+function packetFailure(errors, label = "Module contract-packet") {
   if (errors.length > 0) {
-    throw new Error(`Legacy module contract-packet validation failed:\n- ${errors.join("\n- ")}`);
+    throw new Error(`${label} validation failed:\n- ${errors.join("\n- ")}`);
   }
 }
 
@@ -398,12 +418,28 @@ function validateCanonicalExpectation(entry, courseModule, auditEntry, errors) {
   }
 }
 
+function moduleContractPacketRegistryPath(descriptor, siteRoot = defaultSiteRoot) {
+  return resolve(siteRoot, descriptor.relativePath);
+}
+
+async function loadModuleContractPacketRegistry(descriptor, siteRoot = defaultSiteRoot) {
+  return JSON.parse(await readFile(moduleContractPacketRegistryPath(descriptor, siteRoot), "utf8"));
+}
+
 export function legacyModuleContractPacketPath(siteRoot = defaultSiteRoot) {
-  return resolve(siteRoot, legacyModuleContractPacketRelativePath);
+  return moduleContractPacketRegistryPath(legacyPacketRegistryDescriptor, siteRoot);
+}
+
+export function moduleContractCandidatePacketPath(siteRoot = defaultSiteRoot) {
+  return moduleContractPacketRegistryPath(currentCandidatePacketRegistryDescriptor, siteRoot);
 }
 
 export async function loadLegacyModuleContractPacketRegistry(siteRoot = defaultSiteRoot) {
-  return JSON.parse(await readFile(legacyModuleContractPacketPath(siteRoot), "utf8"));
+  return loadModuleContractPacketRegistry(legacyPacketRegistryDescriptor, siteRoot);
+}
+
+export async function loadModuleContractCandidatePacketRegistry(siteRoot = defaultSiteRoot) {
+  return loadModuleContractPacketRegistry(currentCandidatePacketRegistryDescriptor, siteRoot);
 }
 
 /**
@@ -412,43 +448,55 @@ export async function loadLegacyModuleContractPacketRegistry(siteRoot = defaultS
  * agree with the audit's present ambiguity; it does not approve quality,
  * accessibility, source licenses, CI, release, deployment, or mastery.
  */
-export async function validateLegacyModuleContractPacketRegistry(
+async function validateModuleContractPacketRegistry(
   graph,
   registry,
-  { siteRoot = defaultSiteRoot, canonicalLegacyAudit = null } = {},
+  {
+    siteRoot = defaultSiteRoot,
+    canonicalLegacyAudit = null,
+    descriptor = legacyPacketRegistryDescriptor,
+  } = {},
 ) {
   const errors = [];
+  const {
+    relativePath,
+    kind,
+    registryLabel,
+    packetLabel,
+    requiredModuleIds,
+    includeImplementationArtifactsInReleaseInputs,
+  } = descriptor;
   requireExactKeys(
     registry,
     ["schemaVersion", "contractVersion", "kind", "purpose", "canonicalCourseGraph", "truthBoundary", "modules"],
-    "legacy module contract-packet registry",
+    registryLabel,
     errors,
   );
-  if (registry?.schemaVersion !== 1 || registry?.contractVersion !== "v1" || registry?.kind !== "atlas-legacy-module-contract-packets") {
-    errors.push("legacy module contract-packet registry must use schemaVersion 1, contractVersion v1, and the expected kind.");
+  if (registry?.schemaVersion !== 1 || registry?.contractVersion !== "v1" || registry?.kind !== kind) {
+    errors.push(`${registryLabel} must use schemaVersion 1, contractVersion v1, and the expected kind.`);
   }
-  if (!hasText(registry?.purpose)) errors.push("legacy module contract-packet registry must state its limited purpose.");
+  if (!hasText(registry?.purpose)) errors.push(`${registryLabel} must state its limited purpose.`);
   if (registry?.canonicalCourseGraph !== "content/course/course-graph.v2.json") {
-    errors.push("legacy module contract-packet registry must name the canonical course graph.");
+    errors.push(`${registryLabel} must name the canonical course graph.`);
   }
   requireExactKeys(
     registry?.truthBoundary,
     ["pointerResolutionOnly", "humanReview", "publication", "legacyAudit"],
-    "legacy module contract-packet truthBoundary",
+    `${registryLabel} truthBoundary`,
     errors,
   );
   for (const field of ["pointerResolutionOnly", "humanReview", "publication", "legacyAudit"]) {
     if (!hasText(registry?.truthBoundary?.[field])) {
-      errors.push(`legacy module contract-packet truthBoundary.${field} must be non-empty.`);
+      errors.push(`${registryLabel} truthBoundary.${field} must be non-empty.`);
     }
   }
   if (!Array.isArray(registry?.modules) || registry.modules.length === 0) {
-    errors.push("legacy module contract-packet registry must contain at least one non-promoting packet.");
+    errors.push(`${registryLabel} must contain at least one non-promoting packet.`);
   }
   await requireTrackedRegularFile(
     siteRoot,
-    legacyModuleContractPacketRelativePath,
-    "legacy module contract-packet registry",
+    relativePath,
+    registryLabel,
     errors,
   );
 
@@ -457,7 +505,7 @@ export async function validateLegacyModuleContractPacketRegistry(
     audit ??= await loadLegacyModuleContractAudit(siteRoot);
     await validateLegacyModuleContractAudit(audit, { siteRoot });
   } catch (error) {
-    errors.push(`legacy module contract-packet registry requires the canonical audit: ${error instanceof Error ? error.message : String(error)}`);
+    errors.push(`${registryLabel} requires the canonical audit: ${error instanceof Error ? error.message : String(error)}`);
   }
   const graphById = new Map((graph?.modules ?? []).map((courseModule) => [courseModule.id, courseModule]));
   const auditByModuleId = new Map((audit?.modules ?? []).map((entry) => [entry.moduleId, entry]));
@@ -466,10 +514,10 @@ export async function validateLegacyModuleContractPacketRegistry(
   const packetById = new Map();
   const packetByModuleId = new Map();
   const headingCache = new Map();
-  const releaseInputPaths = new Set([legacyModuleContractPacketPath(siteRoot)]);
+  const releaseInputPaths = new Set([moduleContractPacketRegistryPath(descriptor, siteRoot)]);
 
   for (const entry of registry?.modules ?? []) {
-    const label = `legacy module contract-packet ${entry?.moduleId ?? "(missing)"}`;
+    const label = `${packetLabel} ${entry?.moduleId ?? "(missing)"}`;
     requireExactKeys(
       entry,
       [
@@ -564,14 +612,24 @@ export async function validateLegacyModuleContractPacketRegistry(
           errors.push(`${label}.implementationArtifacts IDs must be unique.`);
         }
         if (hasText(artifact?.id)) artifactIds.add(artifact.id);
-        await validateImplementationArtifact(entry, artifact, siteRoot, errors);
+        const artifactPaths = await validateImplementationArtifact(entry, artifact, siteRoot, errors);
+        if (includeImplementationArtifactsInReleaseInputs) {
+          for (const artifactPath of artifactPaths) releaseInputPaths.add(artifactPath);
+        }
       }
     }
     const packet = { ...entry, resolvedPointerIds: [...pointerById.keys()].sort() };
     packetById.set(entry.packetId, packet);
     packetByModuleId.set(entry.moduleId, packet);
   }
-  packetFailure(errors);
+  if (requiredModuleIds !== null) {
+    const actualModuleIds = [...packetByModuleId.keys()].sort();
+    const expectedModuleIds = [...requiredModuleIds].sort();
+    if (!sameOrderedValues(actualModuleIds, expectedModuleIds)) {
+      errors.push(`${registryLabel} must bind exactly this current candidate cohort: ${expectedModuleIds.join(", ")}.`);
+    }
+  }
+  packetFailure(errors, registryLabel);
   return {
     registry,
     packetById,
@@ -583,6 +641,79 @@ export async function validateLegacyModuleContractPacketRegistry(
         (total, packet) => total + packet.resolvedPointerIds.length,
         0,
       ),
+      humanApprovals: 0,
+      publicationChanges: 0,
+    },
+  };
+}
+
+export async function validateLegacyModuleContractPacketRegistry(
+  graph,
+  registry,
+  { siteRoot = defaultSiteRoot, canonicalLegacyAudit = null } = {},
+) {
+  return validateModuleContractPacketRegistry(graph, registry, {
+    siteRoot,
+    canonicalLegacyAudit,
+    descriptor: legacyPacketRegistryDescriptor,
+  });
+}
+
+export async function validateModuleContractCandidatePacketRegistry(
+  graph,
+  registry,
+  { siteRoot = defaultSiteRoot, canonicalLegacyAudit = null } = {},
+) {
+  return validateModuleContractPacketRegistry(graph, registry, {
+    siteRoot,
+    canonicalLegacyAudit,
+    descriptor: currentCandidatePacketRegistryDescriptor,
+  });
+}
+
+/**
+ * Candidate preflights can resolve packets from historic and current cohorts,
+ * but no cohort may shadow another module or packet identity. Combining is
+ * structural resolution only; it grants no review, release, or publication.
+ */
+export function combineModuleContractPacketReports(reports) {
+  const errors = [];
+  const packetById = new Map();
+  const packetByModuleId = new Map();
+  const releaseInputPaths = new Set();
+  let resolvedPointers = 0;
+
+  for (const [index, report] of (reports ?? []).entries()) {
+    if (!(report?.packetById instanceof Map) || !(report?.packetByModuleId instanceof Map)) {
+      errors.push(`candidate packet report ${index} must expose packet maps.`);
+      continue;
+    }
+    for (const [packetId, packet] of report.packetById) {
+      if (packetById.has(packetId)) {
+        errors.push(`duplicate packetId ${packetId} across candidate packet registries.`);
+      } else {
+        packetById.set(packetId, packet);
+      }
+    }
+    for (const [moduleId, packet] of report.packetByModuleId) {
+      if (packetByModuleId.has(moduleId)) {
+        errors.push(`duplicate moduleId ${moduleId} across candidate packet registries.`);
+      } else {
+        packetByModuleId.set(moduleId, packet);
+      }
+    }
+    for (const path of report.releaseInputPaths ?? []) releaseInputPaths.add(path);
+    resolvedPointers += report.summary?.resolvedPointers ?? 0;
+  }
+
+  packetFailure(errors, "Candidate packet cohort");
+  return {
+    packetById,
+    packetByModuleId,
+    releaseInputPaths: [...releaseInputPaths].sort(),
+    summary: {
+      structuralCandidates: packetById.size,
+      resolvedPointers,
       humanApprovals: 0,
       publicationChanges: 0,
     },

@@ -230,6 +230,27 @@ test("graph-declared studios have one bounded, code-split reader mapping", async
   );
 });
 
+test("M12 and M13 expose distinct direct reader studios for Arc III reasoning", async () => {
+  const [graphSource, registrySource] = await Promise.all([
+    readFile(new URL("../content/course/course-graph.v2.json", import.meta.url), "utf8"),
+    readFile(new URL("../lib/module-studio-registry.ts", import.meta.url), "utf8"),
+  ]);
+  const graph = JSON.parse(graphSource);
+  const m12 = graph.modules.find(({ id }) => id === "m12");
+  const m13 = graph.modules.find(({ id }) => id === "m13");
+
+  assert.equal(m12?.studioId, "dependency-direction");
+  assert.equal(m13?.studioId, "specification-trace");
+  assert.match(
+    registrySource,
+    /"dependency-direction":[\s\S]*?studioId: "dependency-direction"[\s\S]*?DependencyDirectionStudio/u,
+  );
+  assert.match(
+    registrySource,
+    /"specification-trace":[\s\S]*?studioId: "specification-trace"[\s\S]*?SpecificationTraceStudio/u,
+  );
+});
+
 test("studio resolution preserves a locked state before fail-closed hidden-reader handling", async () => {
   const registrySource = await readFile(
     new URL("../lib/module-studio-registry.ts", import.meta.url),

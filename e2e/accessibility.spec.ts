@@ -32,6 +32,11 @@ async function selectRadioWithKeyboard(page: Page, radio: Locator) {
   await expect(radio).toBeChecked();
 }
 
+async function expectVisibleForcedColorFocus(control: Locator) {
+  await expect(control).toHaveCSS("outline-style", "solid");
+  await expect(control).toHaveCSS("outline-width", "3px");
+}
+
 async function openConcurrencyObservatory(page: Page) {
   const launch = page.locator('button[aria-controls="concurrency-observatory-panel"]');
   const panel = page.locator("#concurrency-observatory-panel");
@@ -229,6 +234,147 @@ test("Module 19 reader loads its registered concurrency observatory", async ({ p
     .analyze();
   expect(results.violations, "Axe found a violation in the direct M19 studio.").toEqual([]);
 });
+
+test("M12 direct studio keeps tabs, prediction, confidence, and reveal keyboard-operable", async ({
+  page,
+}) => {
+  await page.goto("/modules/12-modules-apis-types-dependencies");
+
+  const studio = page.getByRole("article", { name: "Dependency direction workbench" });
+  await expect(studio).toBeVisible();
+
+  const tabs = studio.getByRole("tablist", {
+    name: "Dependency direction workbench reasoning views",
+  });
+  const tabControls = await tabs.getByRole("tab").evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute("aria-controls")),
+  );
+  expect(tabControls).toHaveLength(3);
+  for (const panelId of tabControls) {
+    expect(panelId).not.toBeNull();
+    await expect(studio.locator(`#${panelId}`)).toHaveCount(1);
+  }
+  const firstTab = tabs.getByRole("tab").first();
+  const secondTab = tabs.getByRole("tab").nth(1);
+  await firstTab.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(secondTab).toBeFocused();
+  await expect(secondTab).toHaveAttribute("aria-selected", "true");
+
+  const reveal = studio.getByRole("button", {
+    name: "Reveal the boundary analysis",
+  });
+  await expect(reveal).toBeDisabled();
+  const boundaryPreservingPrediction = studio.getByRole("radio", {
+    name: /keep the domain and application code dependent on eventimporter/i,
+  });
+  await selectRadioWithKeyboard(page, boundaryPreservingPrediction);
+  await selectRadioWithKeyboard(
+    page,
+    studio.getByRole("radio", { name: "High confidence" }),
+  );
+  await expect(reveal).toBeEnabled();
+  await selectRadioWithKeyboard(
+    page,
+    studio.getByRole("radio", { name: /annotate the importer as any/i }),
+  );
+  await expect(reveal).toBeDisabled();
+  await selectRadioWithKeyboard(page, boundaryPreservingPrediction);
+  await expect(reveal).toBeDisabled();
+  await selectRadioWithKeyboard(
+    page,
+    studio.getByRole("radio", { name: "High confidence" }),
+  );
+  await expect(reveal).toBeEnabled();
+  await reveal.focus();
+  await page.keyboard.press("Enter");
+  await expect(
+    studio.getByRole("heading", {
+      name: "Your prediction preserves the stated boundary.",
+    }),
+  ).toBeVisible();
+
+  const results = await new AxeBuilder({ page }).include("article[data-mode='dependency-direction']").analyze();
+  expect(results.violations, "Axe found a violation in the direct M12 studio.").toEqual([]);
+});
+
+test("M13 direct studio keeps evidence prediction gated by confidence", async ({ page }) => {
+  await page.goto("/modules/13-specifications-testing-debugging-observability");
+
+  const studio = page.getByRole("article", { name: "Specification and debugging workbench" });
+  await expect(studio).toBeVisible();
+  const reveal = studio.getByRole("button", {
+    name: "Reveal the boundary analysis",
+  });
+  await expect(reveal).toBeDisabled();
+  await selectRadioWithKeyboard(
+    page,
+    studio.getByRole("radio", {
+      name: /state the terminal-signal contract, reproduce the duplicate path/i,
+    }),
+  );
+  await expect(reveal).toBeDisabled();
+  await selectRadioWithKeyboard(
+    page,
+    studio.getByRole("radio", { name: "Medium confidence" }),
+  );
+  await expect(reveal).toBeEnabled();
+  await reveal.click();
+  await expect(
+    studio.getByRole("heading", {
+      name: "Your prediction preserves the stated boundary.",
+    }),
+  ).toBeVisible();
+
+  const results = await new AxeBuilder({ page }).include("article[data-mode='specification-trace']").analyze();
+  expect(results.violations, "Axe found a violation in the direct M13 studio.").toEqual([]);
+});
+
+for (const forcedColorsStudio of [
+  {
+    moduleId: "M12",
+    path: "/modules/12-modules-apis-types-dependencies",
+    studioName: "Dependency direction workbench",
+    predictionName: /keep the domain and application code dependent on eventimporter/i,
+  },
+  {
+    moduleId: "M13",
+    path: "/modules/13-specifications-testing-debugging-observability",
+    studioName: "Specification and debugging workbench",
+    predictionName: /state the terminal-signal contract, reproduce the duplicate path/i,
+  },
+] as const) {
+  test(`${forcedColorsStudio.moduleId} direct studio keeps keyboard focus and selected-state boundaries visible in forced colors`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ forcedColors: "active" });
+    await page.goto(forcedColorsStudio.path);
+
+    const studio = page.getByRole("article", { name: forcedColorsStudio.studioName });
+    const tabs = studio.getByRole("tablist");
+    const firstTab = tabs.getByRole("tab").first();
+    const secondTab = tabs.getByRole("tab").nth(1);
+    await firstTab.focus();
+    await expectVisibleForcedColorFocus(firstTab);
+    await page.keyboard.press("ArrowRight");
+    await expect(secondTab).toBeFocused();
+    await expect(secondTab).toHaveCSS("font-weight", "800");
+
+    const prediction = studio.getByRole("radio", {
+      name: forcedColorsStudio.predictionName,
+    });
+    await selectRadioWithKeyboard(page, prediction);
+    const selectedOption = prediction.locator("xpath=..");
+    await expectVisibleForcedColorFocus(selectedOption);
+    await expect(selectedOption).toHaveCSS("font-weight", "800");
+
+    const confidence = studio.getByRole("radio", { name: "High confidence" });
+    await selectRadioWithKeyboard(page, confidence);
+    const reveal = studio.getByRole("button", { name: "Reveal the boundary analysis" });
+    await reveal.focus();
+    await expectVisibleForcedColorFocus(reveal);
+  });
+}
 
 test("Module 1 exposes keyboard-reachable, module-specific companion contexts without opening them on a synthesis preview", async ({
   page,

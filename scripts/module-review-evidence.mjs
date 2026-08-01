@@ -43,7 +43,14 @@ const reviewTopLevelKeys = [
 const reviewTruthBoundaryKeys = ["evidenceBinding", "qualityDecision", "learnerMastery", "release"];
 const reviewKeys = ["reviewerRole", "reviewedAt", "overallOutcome", "summary", "knownLimitations"];
 const reviewCriterionKeys = ["criterionId", "outcome", "rationale"];
-const inputKinds = new Set(["markdown-heading", "json-pointer", "file"]);
+const inputKinds = new Set([
+  "markdown-heading",
+  "json-pointer",
+  "file",
+  "browser-test",
+  "browser-test-runner",
+  "browser-test-config",
+]);
 const inputRoles = new Set([
   "course-content",
   "source-ledger",
@@ -53,6 +60,7 @@ const inputRoles = new Set([
   "provenance",
   "learning-companion",
   "review-candidate-delivery",
+  "test-runner",
 ]);
 const learningCompanionPathPattern =
   /^content\/course\/contracts\/companions\/m(?:0[1-9]|[1-9]\d)\.v1\.json$/u;
@@ -61,6 +69,13 @@ const reviewCandidateDeliveryPathPattern =
 const discoveredNodeTestPathPattern = /^tests\/[a-z0-9][a-z0-9._-]*\.test\.mjs$/u;
 const discoveredPythonTeachingTestPathPattern =
   /^public\/downloads\/test_module(?:0[1-9]|[1-9]\d)_reference\.py$/u;
+const discoveredBrowserTestPathPattern = /^e2e\/[a-z0-9][a-z0-9._-]*\.spec\.ts$/u;
+const browserTestTitleMaxLength = 160;
+export const browserTestRunnerPath = "package.json";
+export const browserTestRunnerLocator = "/scripts/test:browser";
+export const browserTestRunnerCommand = "pnpm build && playwright test";
+export const browserTestConfigPath = "playwright.config.ts";
+const browserTestConfigDirectoryPattern = /\btestDir\s*:\s*["']\.\/e2e["']/u;
 const reviewOutcomes = new Set(["approved", "changes-requested"]);
 
 function hasText(value) {
@@ -68,20 +83,49 @@ function hasText(value) {
 }
 
 /**
- * The course has two deliberate executable test surfaces. Portal/contract
+ * The course has three deliberate executable test surfaces. Portal/contract
  * tests are discovered by scripts/run-course-tests.mjs from top-level tests/;
  * local Python teaching-model tests are discovered by the dedicated Python CI
- * job from public/downloads/. A role-labelled arbitrary file is not test
+ * job from public/downloads/; and Playwright browser tests are run by the
+ * exact package script bound below. A role-labelled arbitrary file is not test
  * evidence.
  */
 export function teachingTestDiscoveryKind(repositoryPath) {
   if (discoveredNodeTestPathPattern.test(repositoryPath ?? "")) return "node";
   if (discoveredPythonTeachingTestPathPattern.test(repositoryPath ?? "")) return "python";
+  if (discoveredBrowserTestPathPattern.test(repositoryPath ?? "")) return "browser";
   return null;
 }
 
 export function isDiscoveredTeachingTestPath(repositoryPath) {
   return teachingTestDiscoveryKind(repositoryPath) !== null;
+}
+
+export function isValidBrowserTestTitle(value) {
+  return (
+    hasText(value) &&
+    value.length <= browserTestTitleMaxLength &&
+    !/[\r\n\0]/u.test(value)
+  );
+}
+
+function escapeRegularExpression(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+}
+
+/**
+ * Browser evidence must identify one literal Playwright `test(...)` title.
+ * That prevents a candidate from binding a spec file whose relevant check was
+ * renamed, deleted, or replaced by an unrelated test in the same file.
+ */
+export function declaresBrowserTestTitle(source, title) {
+  if (typeof source !== "string" || !isValidBrowserTestTitle(title)) return false;
+  const escapedTitle = escapeRegularExpression(title);
+  const declaration = new RegExp(
+    String.raw`(?:^|[\r\n])\s*test\s*\(\s*["']${escapedTitle}["']\s*,`,
+    "u",
+  );
+  return declaration.test(source);
 }
 
 function isPlainObject(value) {
@@ -240,7 +284,7 @@ async function resolveEvidenceInput(
   const label = `${context} input`;
   if (!exactKeys(input, inputKeys, label, errors)) return null;
   if (!inputKinds.has(input.kind)) {
-    errors.push(`${label}.kind must be markdown-heading, json-pointer, or file.`);
+    errors.push(`${label}.kind must name an allowlisted evidence-input kind.`);
     return null;
   }
   if (!inputRoles.has(input.role)) {
@@ -275,17 +319,45 @@ async function resolveEvidenceInput(
   if (!validReviewCandidateDeliveryLocator) {
     errors.push(`${label} review-candidate-delivery role must bind the JSON-document root.`);
   }
-  const validTestKind = input.role !== "test" || input.kind === "file";
-  if (!validTestKind) {
-    errors.push(`${label} test role must use a file input.`);
-  }
-  const validTestPath =
+  const discoveryKind = repositoryPath === null ? null : teachingTestDiscoveryKind(repositoryPath);
+  const validTestKind =
     input.role !== "test" ||
-    (repositoryPath !== null && isDiscoveredTeachingTestPath(repositoryPath));
-  if (!validTestPath) {
-    errors.push(
-      `${label} test role must use a top-level tests/*.test.mjs course test or a canonical public/downloads/test_moduleNN_reference.py teaching-model test.`,
-    );
+    (input.kind === "file" && (discoveryKind === "node" || discoveryKind === "python")) ||
+    (input.kind === "browser-test" && discoveryKind === "browser");
+  if (!validTestKind) {
+    errors.push(`${label} test role must use a discovered Node/Python file test or a declared browser-test input.`);
+  }
+  const validBrowserTestKind = input.kind !== "browser-test" || input.role === "test";
+  if (!validBrowserTestKind) {
+    errors.push(`${label} browser-test input must use the test role.`);
+  }
+  const validBrowserTestRunnerKind =
+    input.kind !== "browser-test-runner" || input.role === "test-runner";
+  if (!validBrowserTestRunnerKind) {
+    errors.push(`${label} browser-test-runner input must use the test-runner role.`);
+  }
+  const validBrowserTestRunnerPath =
+    input.kind !== "browser-test-runner" ||
+    (repositoryPath === browserTestRunnerPath && input.locator === browserTestRunnerLocator);
+  if (!validBrowserTestRunnerPath) {
+    errors.push(`${label} browser-test-runner input must bind package.json#/scripts/test:browser.`);
+  }
+  const validBrowserTestConfigKind =
+    input.kind !== "browser-test-config" || input.role === "test-runner";
+  if (!validBrowserTestConfigKind) {
+    errors.push(`${label} browser-test-config input must use the test-runner role.`);
+  }
+  const validBrowserTestConfigPath =
+    input.kind !== "browser-test-config" || repositoryPath === browserTestConfigPath;
+  if (!validBrowserTestConfigPath) {
+    errors.push(`${label} browser-test-config input must bind ${browserTestConfigPath}.`);
+  }
+  const validTestRunnerKind =
+    input.role !== "test-runner" ||
+    input.kind === "browser-test-runner" ||
+    input.kind === "browser-test-config";
+  if (!validTestRunnerKind) {
+    errors.push(`${label} test-runner role must use a browser-test-runner or browser-test-config input.`);
   }
   if (
     !repositoryPath ||
@@ -295,8 +367,60 @@ async function resolveEvidenceInput(
     !validReviewCandidateDeliveryPath ||
     !validReviewCandidateDeliveryLocator ||
     !validTestKind ||
-    !validTestPath
+    !validBrowserTestKind ||
+    !validBrowserTestRunnerKind ||
+    !validBrowserTestRunnerPath ||
+    !validBrowserTestConfigKind ||
+    !validBrowserTestConfigPath ||
+    !validTestRunnerKind
   ) return null;
+  if (input.kind === "browser-test") {
+    const locator = isValidBrowserTestTitle(input.locator) ? input.locator : null;
+    if (!locator) {
+      errors.push(`${label}.locator must name one non-empty literal Playwright test title.`);
+      return null;
+    }
+    const text = await readTrackedText(siteRoot, repositoryPath, label, errors, {
+      snapshot,
+      inputsAlreadyChecked,
+    });
+    if (!text) return null;
+    if (!declaresBrowserTestTitle(text.text, locator)) {
+      errors.push(`${label}.locator must name a declared Playwright test title in ${repositoryPath}.`);
+      return null;
+    }
+    return {
+      kind: input.kind,
+      role: input.role,
+      path: repositoryPath,
+      locator,
+      blobOid: text.blobOid,
+      sha256: text.sha256,
+    };
+  }
+  if (input.kind === "browser-test-config") {
+    if (input.locator !== null) {
+      errors.push(`${label}.locator must be null for a browser-test-config input.`);
+      return null;
+    }
+    const text = await readTrackedText(siteRoot, repositoryPath, label, errors, {
+      snapshot,
+      inputsAlreadyChecked,
+    });
+    if (!text) return null;
+    if (!browserTestConfigDirectoryPattern.test(text.text)) {
+      errors.push(`${label} must configure Playwright to discover the ./e2e browser-test directory.`);
+      return null;
+    }
+    return {
+      kind: input.kind,
+      role: input.role,
+      path: repositoryPath,
+      locator: null,
+      blobOid: text.blobOid,
+      sha256: text.sha256,
+    };
+  }
   if (input.kind === "file") {
     if (input.locator !== null) errors.push(`${label}.locator must be null for a file input.`);
     const text = await readTrackedText(siteRoot, repositoryPath, label, errors, {
@@ -351,7 +475,7 @@ async function resolveEvidenceInput(
     };
   }
   if (!repositoryPath.endsWith(".json")) {
-    errors.push(`${label}.path must name a JSON file for a json-pointer input.`);
+    errors.push(`${label}.path must name a JSON file for a json-pointer or browser-test-runner input.`);
     return null;
   }
   const locator = jsonPointer(input.locator, `${label}.locator`, errors);
@@ -368,6 +492,10 @@ async function resolveEvidenceInput(
   const value = resolveJsonPointer(jsonRecord.value, locator);
   if (value === undefined) {
     errors.push(`${label} JSON Pointer ${locator || "(root)"} does not resolve in ${repositoryPath}.`);
+    return null;
+  }
+  if (input.kind === "browser-test-runner" && value !== browserTestRunnerCommand) {
+    errors.push(`${label} must preserve the exact browser runner command ${browserTestRunnerCommand}.`);
     return null;
   }
   return {
@@ -408,6 +536,34 @@ function validateRequiredCriterionIds(evidenceByCriterion, requiredCriterionIds,
     normalized.some((criterionId) => !evidenceByCriterion.has(criterionId))
   ) {
     errors.push(`${label} evidence must exactly cover requiredCriterionIds.`);
+  }
+}
+
+function validateBrowserTestRuntimeBindings(resolvedInputs, label, errors) {
+  const browserTests = resolvedInputs.filter(({ kind }) => kind === "browser-test");
+  const browserRunners = resolvedInputs.filter(
+    ({ kind, role, path, locator, value }) =>
+      kind === "browser-test-runner" &&
+      role === "test-runner" &&
+      path === browserTestRunnerPath &&
+      locator === browserTestRunnerLocator &&
+      value === browserTestRunnerCommand,
+  );
+  const browserConfigs = resolvedInputs.filter(
+    ({ kind, role, path, locator }) =>
+      kind === "browser-test-config" &&
+      role === "test-runner" &&
+      path === browserTestConfigPath &&
+      locator === null,
+  );
+  if (browserTests.length === 0 && (browserRunners.length > 0 || browserConfigs.length > 0)) {
+    errors.push(`${label} browser-test runner/config inputs require a declared browser-test input.`);
+  }
+  if (
+    browserTests.length > 0 &&
+    (browserRunners.length !== 1 || browserConfigs.length !== 1)
+  ) {
+    errors.push(`${label} browser-test evidence must bind exactly one browser-test-runner and one browser-test-config input.`);
   }
 }
 
@@ -531,6 +687,7 @@ export async function validateModuleEvidenceRecord(
       entryResolvedInputs.push({ ...resolved, evidenceId, criterionId });
       releaseInputPaths.add(resolved.path);
     }
+    validateBrowserTestRuntimeBindings(entryResolvedInputs, label, errors);
     if (criterionId) {
       evidenceByCriterion.set(criterionId, {
         ...entry,

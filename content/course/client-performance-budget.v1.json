@@ -34,6 +34,14 @@
       "maxStaticClosureBytes": 400000,
       "entries": [
         {
+          "studioId": "dependency-direction",
+          "manifestName": "DependencyDirectionStudio"
+        },
+        {
+          "studioId": "specification-trace",
+          "manifestName": "SpecificationTraceStudio"
+        },
+        {
           "studioId": "concurrency",
           "manifestName": "ConcurrencyStudioReader"
         },

@@ -16,6 +16,8 @@ async function loadProfiles() {
 }
 
 const expectedCandidateModuleIds = [
+  "m12",
+  "m13",
   "m19",
   "m20",
   "m21",
@@ -28,7 +30,7 @@ const expectedCandidateModuleIds = [
   "m30",
 ];
 
-test("the legacy candidate profile registry allowlists the systems and mathematics cohorts", async () => {
+test("the candidate profile registry allowlists the current, systems, and mathematics cohorts", async () => {
   const report = await validateLegacyCandidatePreflightProfiles(await loadProfiles(), { siteRoot });
 
   assert.deepEqual(
@@ -46,6 +48,15 @@ test("the legacy candidate profile registry allowlists the systems and mathemati
       `${moduleId} preflight record is profile-derived and hash-ledgered`,
     );
   }
+  assert.deepEqual(report.candidateByModuleId.get("m12")?.visualTestPath, "e2e/accessibility.spec.ts");
+  assert.equal(
+    report.candidateByModuleId.get("m12")?.visualTestTitle,
+    "M12 direct studio keeps tabs, prediction, confidence, and reveal keyboard-operable",
+  );
+  assert.equal(
+    report.candidateByModuleId.get("m13")?.visualTestTitle,
+    "M13 direct studio keeps evidence prediction gated by confidence",
+  );
 });
 
 test("the legacy candidate profile registry rejects ambiguous or forged profile bindings", async () => {
@@ -83,7 +94,14 @@ test("the legacy candidate profile registry rejects ambiguous or forged profile 
   undiscoveredVisualTest.candidates[0].visualTestPath = "tests/not-a-discovered-test.mjs";
   await assert.rejects(
     () => validateLegacyCandidatePreflightProfiles(undiscoveredVisualTest, { siteRoot }),
-    /must name a discovered top-level Node test/i,
+    /must name a discovered top-level Node or Playwright browser test/i,
+  );
+
+  const forgedBrowserTitle = structuredClone(profiles);
+  forgedBrowserTitle.candidates[0].browserTestTitle = "M12 unrelated browser check";
+  await assert.rejects(
+    () => validateLegacyCandidatePreflightProfiles(forgedBrowserTitle, { siteRoot }),
+    /must name a declared Playwright test title/i,
   );
 });
 
@@ -117,5 +135,5 @@ test("the snapshot-bound profile validator never reuses stateful caller facts", 
   const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
 
   assert.equal(purposeReads, 1);
-  assert.equal(report.candidateByModuleId.size, 10);
+  assert.equal(report.candidateByModuleId.size, 12);
 });
