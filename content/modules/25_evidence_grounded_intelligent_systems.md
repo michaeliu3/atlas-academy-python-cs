@@ -230,8 +230,8 @@ each relevant earlier artifact. The narrow claim under review is:
 | M32 systems execution | **Scientific Python & Accelerators Dossier** | Records semantic oracle, dtype/layout/device/seed, and reproducibility conditions for an execution claim. | A local fast result is not portable, numerically identical, or operationally safe. |
 | M33 formal limits | **Formal Limits Claim Packet** | States any encoding, reduction direction, resource model, or complexity claim actually used. | A timeout or theorem label does not decide this product outcome. If no formal claim is used, say so rather than decorating the dossier. |
 | M34 classical AI | **Classical AI Search, Constraints & Decision Packet** | Separates candidate eligibility, constraints, state, uncertainty, and policy authority. | A solver or planner output is not self-authorizing. |
-| M35 machine learning | **Responsible ML Representation Dossier** | Supplies the baseline, split, representation, failure slice, and shift evidence for a learned proposal. | A validation result is not calibrated generalization or learner benefit. |
-| M36 reliable learning | **Reliable-Learning Evidence Map** and reproducibility record | Names the theorem/limit scope, monitoring hypothesis, stop owner, and deployment non-claim. | A guarantee or benchmark is not a release certificate. |
+| M35 machine learning | **Machine Learning & Representation Dossier** | Supplies the baseline, split, representation, failure slice, and shift evidence for a learned proposal. | A validation result is not calibrated generalization or learner benefit. |
+| M36 reliable learning | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its Reliable-Learning Evidence Map and reproducibility record | Names the theorem/limit scope, monitoring hypothesis, stop owner, and deployment non-claim. | A guarantee or benchmark is not a release certificate. |
 
 One receipt may support only one narrow fragment of the claim. When the required
 learner-ready artifact has not been inspected, write **[UNAVAILABLE — DEFER OR

@@ -442,11 +442,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "3b73b1ef0bfd0b43d5e4ba6964c4261518422c720319425a3b39c7aa4178d91d"
+      "sha256": "4d420b36dcaca71c312a80f09962ef4062c521ccd158fd46c66610faaa0b690f"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "2108fd35d2f21803132c526b349cd804f2bd62d2dd4831869756a63bc7ebf1d9"
+      "sha256": "5ec8080410af75e56f9453a021750d1db9e817aa9d7eb1107472c9f24072864e"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -622,7 +622,7 @@
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
-      "sha256": "64a1c68ffcf076f8268be54121c04eadf15ab7ce9f5c9f539e0953759f6f12bd"
+      "sha256": "b35a491ce2c3e33f564b684d468899961dfb8a3dd8a21499de14f94752cc1397"
     },
     {
       "path": "docs/module-evidence/m12/candidate-preflight.md",

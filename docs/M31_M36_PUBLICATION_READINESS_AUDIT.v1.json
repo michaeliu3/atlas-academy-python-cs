@@ -5,7 +5,7 @@
   "auditedGitHead": "a89fcae9a32dd0f9584a1b6f579ccd1f6bb3a853",
   "scope": {
     "moduleIds": ["m31", "m32", "m33", "m34", "m35", "m36"],
-    "purpose": "Record the release-readiness gap for the authoring-only advanced extension. This is an audit, not a module contract, release record, route mutation, or authorization to publish.",
+    "purpose": "Record the release-readiness gap for the authoring-only advanced extension at the audited historical commit. This is an audit, not a module contract, release record, route mutation, or authorization to publish. Its v1 graph is a frozen historical fixture; the active repository course graph is v2.",
     "evidenceRule": "Only checked-in, repository-local evidence at the audited commit is counted. Uncommitted work, planned work, generic infrastructure, and a successfully parsed authoring plan do not count as learner-ready module evidence."
   },
   "statusTerms": {
@@ -19,7 +19,7 @@
   "evidenceSources": [
     {
       "path": "content/course/course-graph.v1.json",
-      "observation": "Canonical source of lifecycle, availability, academic prerequisites, forward handoffs, source-map pointers, studios, and release-evidence status. M31-M36 are authoring-only with null sourceMap/studioId and planned release evidence."
+      "observation": "Frozen historical source of lifecycle, availability, academic prerequisites, forward handoffs, source-map pointers, studios, and release-evidence status at the audited commit. The active repository canonical graph is v2. At this snapshot, M31-M36 are authoring-only with null sourceMap/studioId and planned release evidence."
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",

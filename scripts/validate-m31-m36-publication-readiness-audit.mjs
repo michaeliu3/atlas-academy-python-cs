@@ -11,7 +11,7 @@ const execFileAsync = promisify(execFile);
 
 export const m31M36PublicationReadinessAuditRelativePath =
   "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json";
-export const canonicalCourseGraphRelativePath = "content/course/course-graph.v1.json";
+export const frozenHistoricalCourseGraphRelativePath = "content/course/course-graph.v1.json";
 export const canonicalModuleManifestRelativePath = "content/modules/manifest.json";
 
 const expectedModuleIds = ["m31", "m32", "m33", "m34", "m35", "m36"];
@@ -217,7 +217,7 @@ async function commitExists(siteRoot, commit) {
 }
 
 async function loadGraphAtAuditedCommit(siteRoot, commit) {
-  const specification = `${commit}:${canonicalCourseGraphRelativePath}`;
+  const specification = `${commit}:${frozenHistoricalCourseGraphRelativePath}`;
   const { stdout } = await execFileAsync("git", ["show", "--no-textconv", specification], {
     cwd: siteRoot,
     env: isolatedGitEnvironment(),
@@ -354,7 +354,7 @@ function validateModuleRecord(entry, index, errors) {
       errors,
     )
   ) {
-    if (entry.canonicalState.evidence !== `${canonicalCourseGraphRelativePath}#/modules/${30 + index}`) {
+    if (entry.canonicalState.evidence !== `${frozenHistoricalCourseGraphRelativePath}#/modules/${30 + index}`) {
       errors.push(`${label} canonicalState.evidence must identify its graph row.`);
     }
   }
