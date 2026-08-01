@@ -66,7 +66,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "eb41a723a2c3edf9456335545f21f8f8f174ab000eb7ccfc97c968d1429b2441"
+      "sha256": "612effa371491f488dc88611c82f3935a9601cc95206fd32e38edc488d97d759"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -382,11 +382,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "07fba77cf0e2d1f6fb0c15241b45d4539c660302424bd055556221346a8e3e4e"
+      "sha256": "989452e97fdbf4d6f8c70e0efcefca698bb9f3beabe9d3139bad18cc17225758"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "9b18b463cf588ce091fcaeca5d8b8fc81be2aafe7e250b6a98f678e768dc84fe"
+      "sha256": "df4490736b52c415e697d651f3d4a9abbec7172bb8bc2f3a093b1ebefb1c769c"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -778,7 +778,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "7381ba0d81dc8abf7a46071ad34c84ca5586d8f87ac3eaf1f37c19b4bb890e30"
+      "sha256": "0fbfd4c7dda43a776425c6307b4afe8980ab3fe433f1c650199bf47cc44596de"
     }
   ]
 }
