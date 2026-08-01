@@ -135,9 +135,9 @@
       "title": "Abstraction, Interfaces, and Abstract Data Types",
       "summary": "Central question: How can a client depend on what a component means without depending on how that component stores its data? Atlas transformation: a list owned by application code becomes a replaceable event store with one behavioral con…",
       "arcId": "arc-i",
-      "wordCount": 13865,
+      "wordCount": 13866,
       "estimatedMinutes": 64,
-      "sourceHash": "0df2bb22077c3f2d0347457aededb3240eebff09d406dd607767027d92d254a7",
+      "sourceHash": "90de7d47e4c789684ba362738adf7eb197d0a1607346c7c4fecbd0bf38520372",
       "id": "m03",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -455,9 +455,9 @@
       "title": "Algorithm Design Paradigms: Choosing a Strategy from Structure",
       "summary": "Central idea: an algorithmic strategy is justified by a structural fact about the problem, not by resemblance to a familiar code template.",
       "arcId": "arc-ii",
-      "wordCount": 13777,
+      "wordCount": 13898,
       "estimatedMinutes": 63,
-      "sourceHash": "d85659adaa9fb3ac4608d5fb726f93bcbcac23956e8664a3a734b532dd2cb89e",
+      "sourceHash": "490e70a4b2dc95e874bbc942664715a30b451ff59bb1c11717e91c73eed2fab1",
       "id": "m11",
       "state": {
         "lifecycle": "learner-material-ready",

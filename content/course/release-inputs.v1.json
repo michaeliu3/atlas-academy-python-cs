@@ -294,7 +294,7 @@
     },
     {
       "path": "content/modules/03_abstraction_interfaces_adts.md",
-      "sha256": "0df2bb22077c3f2d0347457aededb3240eebff09d406dd607767027d92d254a7"
+      "sha256": "90de7d47e4c789684ba362738adf7eb197d0a1607346c7c4fecbd0bf38520372"
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
@@ -326,7 +326,7 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "d85659adaa9fb3ac4608d5fb726f93bcbcac23956e8664a3a734b532dd2cb89e"
+      "sha256": "490e70a4b2dc95e874bbc942664715a30b451ff59bb1c11717e91c73eed2fab1"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
