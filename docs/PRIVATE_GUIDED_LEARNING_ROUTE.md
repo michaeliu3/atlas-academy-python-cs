@@ -63,6 +63,27 @@ For each pack, work one session at a time. Paste or attach only the relevant
 section to the designated chat when the chat cannot see the private repository;
 do not ask it to invent missing sources, experiments, or results.
 
+### Start the first M31 pilot
+
+M31 remains a private, authoring-only instructor-led pack; this starts a
+learning conversation, not a release, grade, or completion record. In the
+designated **Study Partner** chat, first say `records on` only if you want its
+configured concise Notion-note policy to apply. Then send or say:
+
+```text
+Start M31, Session 1 — Formulate before you optimize. I will build the
+Objective Geometry Sheet. Ask me to state the variables, feasible set,
+objective, observable evidence, and one non-claim before you correct me.
+Make me predict one consequence of changing a constraint. Use readable display
+math with defined notation and a short prose fallback; do not grade me. End
+with the smallest uncertainty or evidence artifact to bring to the Teaching
+Assistant.
+```
+
+Keep the session local by omitting `records on` or saying `off-record`.
+After the M31 dossier, use the workbook's Teaching Assistant prompt for the
+supportive oral defense; do not treat a Session 1 rehearsal as the module exam.
+
 ## How the chats run a module
 
 1. **Study Partner first:** explain one model, draw one trace or derivation,
