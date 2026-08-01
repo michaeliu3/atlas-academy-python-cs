@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Added a narrow `minimatch@3` → `brace-expansion@1.1.17` lockfile override
+  after verifying that the patched 1.x line retains the existing lint contract.
+  The full local package audit now retains only the separately documented
+  development-only Drizzle/legacy-esbuild path, while the production audit is
+  empty and lint passes. The former Dependabot alert #40 is recorded as
+  withdrawn, while the runtime candidates still need protected-default-branch
+  and GitHub refresh evidence; this is not a security-clean, deployment, or
+  release claim.
 - Preserved the browser-progress policy's v1 `{moduleId, lifecycle}` owner
   schema instead of silently rewriting it during the course-availability
   migration. A required, separately hashed
