@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Deepened the M33–M36 **authoring-only** workbooks with source-calibrated,
+  first-principles reasoning traces: NFA/DFA construction and a HALT reduction;
+  A*/Bellman update decisions; representation-aware likelihood and ridge
+  selection; and fully specified distributions with a finite-class bound.
+  The additions improve private authoring evidence while preserving the hidden
+  portal boundary: they do not publish, review, release, unlock M25/M26, or
+  claim university equivalence or learner mastery.
 - Added a candidate-only systems cohort for M19–M24. Each module now has
   current learner-visible prediction/repair/transfer material, a supportive
   oral-defense route, a frozen Teaching Assistant/Study Partner/forward-handoff
