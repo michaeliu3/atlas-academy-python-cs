@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m23",
+  "purpose": "Bind M23's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M23 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m23-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M23 workbook visibly places its M22 prerequisite and canonical M24 forward handoff in the connected learning route.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "1-position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "14-handoff--what-module-23-deliberately-leaves-open"}
+      ],
+      "limitations": ["Resolving route headings does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m23-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M23 declares six ordered sessions that progress from text and grammar through meaning, environments, contracts, bounded evaluation, and implementation evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "2-session-1--text-has-form-not-permission"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "3-session-2--a-tree-gets-meaning-from-rules"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "4-session-3--names-live-in-environments-functions-close-over-them"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "5-session-4--contracts-make-invalid-states-visible"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "6-session-5--bounded-evaluation-receives-authority-never-finds-it"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "7-session-6--implementation-evidence-is-not-semantic-law"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m23-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M23 visibly derives a text-to-meaning pipeline before treating a parsed or evaluated value as authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "derive-the-pipeline-from-first-principles"}
+      ],
+      "limitations": ["A named first-principles section does not prove semantic correctness, instructional adequacy, or learner comprehension."]
+    },
+    {
+      "id": "m23-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M23 binds distinct visible sections for grammar definitions, evaluation assumptions, environment experiments, semantic contracts, and implementation-evidence limits as a candidate rigor bundle.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "a-small-grammar-is-a-public-contract"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "evaluation-order-is-a-language-choice"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "a-lexical-versus-caller-lookup-experiment"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "semantic-contract-for-atlas-query"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "from-trusted-python-source-to-an-implementation-observation"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, counterexamples, experiments, or source claims."]
+    },
+    {
+      "id": "m23-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M23 includes separate code-reading labs for classifying a failure, tracing an environment boundary, and labelling an implementation claim before accepting it.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "code-reading-lab-s1--classify-the-first-failure"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "code-reading-lab-s3--find-the-wrong-parent"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "code-reading-lab-s6--label-the-claim-before-accepting-it"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a language implementation."]
+    },
+    {
+      "id": "m23-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M23 visibly asks for a prediction about parsing before revealing the permission-boundary repair.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "prediction-checkpoint--parsing-is-not-permission"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m23-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M23 includes a transfer task that carries a rule-language authority boundary into a new language while preserving its safety limits.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "transfer-task--new-rule-language-same-authority-boundary"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
+    },
+    {
+      "id": "m23-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M23's workbook resource route and its canonical source map and audit addendum expose a candidate source, reuse, and claim-linkage route.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "13-resource-route-and-source-discipline"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module23_languages_interpreters_source_map.md", "locator": "primary-source-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md", "locator": "source-and-reuse-ledger"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m23-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M23 binds its Atlas Language Lab text-equivalent route, implementation surface, and module-specific rendered regression surface as candidate visual evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "8-atlas-language-lab--visual-studio-text-equivalent"},
+        {"kind": "file", "role": "source-code", "path": "app/LanguageInterpreterStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m23-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M23 exposes confidence-aware diagnostic prompts and a layer-confusion misconception repair map rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "10-confidence-aware-diagnostic--eight-fast-deep-checks"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "misconception-map--repair-layer-confusion"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m23-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M23 includes a visible retrieval schedule for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "retrieval-schedule"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m23-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M23 specifies an Atlas Query Language Dossier with required deliverables and a constructive review rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "11-cumulative-project--atlas-query-language-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "required-deliverables"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "review-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m23-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M23 contains a conversational oral-defense protocol with a hint ladder, counterexample turn, transfer turn, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "conversational-oral-defense--m23"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "hint-ladder"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "counterexample-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "transfer-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/23_programming_languages_interpreters.md", "locator": "reflection-and-learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m23-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M23 companion binds a Teaching Assistant opening, artifact focus, and repair move to the language-evaluation reasoning route.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m23.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m23-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M23 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m23.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m23-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M23 companion carries a bounded-evaluation evidence card into the canonical M24 handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m23.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M23, or authorization to bypass M24 prerequisites."]
+    },
+    {
+      "id": "m23-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M23 binds its Atlas Language Lab, explicit registry entry, bounded Python reference model, and module-specific behavioral teaching-model test.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/LanguageInterpreterStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module23_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module23_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, language-semantics correctness, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m23-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m23.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m23/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m22",
+  "purpose": "Freeze a candidate-only M22 Teaching Assistant, Study Partner, and M23 handoff context for future human review without changing M22's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/21",
+    "digest": "sha256:a91e221001765b18418b5863159c660dc1e2ebc65cb1c1cdd31274c9aeab916a"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected trust-boundary claim. Ask which actor requests the action, which capability authorizes it, which data crosses a boundary, what is retained, and for the shortest action-and-audit trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one identity, authority, provenance, privacy, or reversibility assumption visible, reconstruct one labelled capability and data-flow trace, name one missing audit or recipient boundary, and distinguish authentication, encryption, or vendor trust from authorization and safety.",
+    "repairMove": "Ask for a prediction before correction; change exactly one actor, capability scope, recipient, retention rule, provenance claim, revocation path, or audit field; then offer the smallest trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: label actors, capabilities, data recipients, and audit evidence, show a short access or data-flow trace, give a plain-language or ASCII fallback, and rehearse one authority-to-evidence-to-boundary chain at a time.",
+    "changedPremise": "Change one actor, capability scope, data recipient, retention period, provenance source, revocation rule, or audit field. Ask for a prediction before looking at a trace, counterexample, or policy consequence.",
+    "taHandoff": "End with the learner's selected trust-boundary card, attempted action trace, confidence, unresolved misconception, one authority or privacy limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m23",
+    "carryArtifact": "Carry a trust-boundary evidence card: actors, capability and authority, data recipients, retention and reversibility rules, labelled trace, audit/provenance boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before evaluating an expression or rule in M23, what syntax, evaluation environment, resource limit, capability boundary, and authority check must be independently specified?",
+    "boundary": "M23 is the only canonical forward handoff. References to M24–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

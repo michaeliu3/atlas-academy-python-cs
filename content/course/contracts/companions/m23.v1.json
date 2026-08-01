@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m23",
+  "purpose": "Freeze a candidate-only M23 Teaching Assistant, Study Partner, and M24 handoff context for future human review without changing M23's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/22",
+    "digest": "sha256:bc8e8380c6bdbe943549c2d1ec808bd8f58aacbb3eee5b84f10ffa5bacc864fc"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected language or evaluator claim. Ask which text is accepted, which syntax tree is produced, which environment evaluates it, which capability is available, and for the smallest parse-and-evaluate trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one grammar, evaluation, resource, or authority assumption visible, reconstruct one labelled text-to-tree-to-value or code trace, name one syntax, environment, capability, or termination boundary, and distinguish parsing from safety or authority control.",
+    "repairMove": "Ask for a prediction before correction; change exactly one grammar rule, AST form, environment binding, evaluation order, resource limit, capability, or authority check; then offer the smallest trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: label source text, syntax tree, environment, result, and capability boundary, show a short parse or evaluation trace, give a plain-language or ASCII fallback, and rehearse one language-to-authority-to-boundary chain at a time.",
+    "changedPremise": "Change one grammar rule, AST node, environment binding, evaluation order, resource limit, capability, or authority check. Ask for a prediction before looking at a trace, counterexample, or evaluator condition.",
+    "taHandoff": "End with the learner's selected evaluator card, attempted parse or evaluation trace, confidence, unresolved misconception, one resource or authority limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m24",
+    "carryArtifact": "Carry a bounded-evaluation evidence card: accepted text and syntax, environment and capability boundary, labelled parse/evaluation trace, resource assumptions, one failure boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before treating a profiler result or evaluator timing in M24 as performance evidence, what runtime, workload, baseline, measurement method, resource setting, and portability limitation must become explicit?",
+    "boundary": "M24 is the only canonical forward handoff. References to M25/M26 or M31–M36 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

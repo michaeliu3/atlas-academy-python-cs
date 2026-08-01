@@ -336,6 +336,24 @@ remote admission, and collection cut need other evidence and policy steps.
 
 </details>
 
+### Prediction before reveal — task ownership
+
+**Current candidate-only supplement.** Before opening the answer below,
+predict the narrowest fact after a collector creates a coroutine and then
+passes it to `TaskGroup.create_task`. Record confidence `1–4`, the local owner,
+and one remote fact that is still not established. This is not evidence of
+review, release, or learner mastery.
+
+<details>
+<summary>Reveal after the prediction and confidence record</summary>
+
+The task group owns a scheduled local task. That does not establish a request
+send, remote admission, remote effect, rollback, or a complete collection
+cut. The smallest repair for a broader claim is to name the event boundary and
+the evidence that reaches it.
+
+</details>
+
 ### Session artifact
 
 Make a four-column task strip for each source:
@@ -865,6 +883,25 @@ it is to state the actual tested policy and non-claims:
 | bounded local pressure | work can arrive faster than local processing | admission bound/queue policy | in-flight trace | local max in flight | upstream throughput guarantee |
 | debug one incident | observations need correlation | trace context + scope labels | redacted packet | correlation of named records | trust/completeness/causality |
 
+### Transfer task — trace is not trust
+
+**Current candidate-only supplement.** Change one premise in the matrix: the
+trace field now arrives from an untrusted external service. Before inspecting
+any answer, predict which local correlation claim remains and which claim must
+move to the Module 22 trust boundary. Record confidence `1–4` and one
+observation that would be needed before a stronger claim. This is a conceptual
+handoff, not a navigation, review, release, or mastery change.
+
+<details>
+<summary>Reveal after the prediction and confidence record</summary>
+
+The named trace may still correlate the local records that Atlas chose to
+record. It does not authenticate a source, make the trace complete, or prove a
+causal remote history. The transfer is to state the trust question and retain
+the local non-claim rather than silently strengthening it.
+
+</details>
+
 ---
 
 ## 8. The Atlas Run Control Room — visual studio text equivalent
@@ -1053,6 +1090,20 @@ distributed or security guarantees.
 
 </details>
 
+### Diagnostic misconception-repair map
+
+**Current candidate-only supplement.** Use the pattern of a response and its
+confidence to choose a repair, not to assign a verdict. It does not change the
+historical audit, review, release, or mastery state.
+
+| Misconception label | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| `await-is-remote-effect` | draw the local owner, await point, and unresolved remote fact | replace the awaited call with a timeout |
+| `cancellation-is-rollback` | name cleanup, local terminal record, and the remote non-claim | let the remote outcome remain unknown |
+| `bound-is-end-to-end-capacity` | locate every task, queue, stream, and downstream allocation boundary | add one unbounded adapter buffer |
+| `trace-is-causality-or-trust` | distinguish correlation, causal edge, and authenticated source | vary the clock or an incoming trace field |
+| `one-replica-is-global-agreement` | write the contract and fault assumptions before the claim | remove one replica observation or add a partition |
+
 ---
 
 ## 11. Cumulative project — Atlas async collector evidence dossier
@@ -1135,6 +1186,43 @@ boundary you are about to cross.
 | Deadline/retry incident board | one timeout/cancellation packet | enumerate compatible histories, preserve ID, choose reconciliation | decision card and next observation |
 | Pressure clinic | generated code with a “limit” | locate allocation/task/queue/adaptor boundaries | declared admission/overload policy |
 | Distributed-claim clinic | one release sentence or diagram | find earliest unsupported causal/replica/availability claim | narrower defensible statement |
+
+### Supportive oral-defense protocol
+
+**Current candidate-only supplement.** This is a module-specific constructive
+oral-defense route for Session 6 evidence. It is not evidence of review,
+release, or learner mastery.
+
+### Invitation and starting evidence
+
+Invite the learner to choose one task tree, timeout/reconciliation packet,
+causal board, or replica claim. Ask for the exact claim, assumptions, evidence
+scope, and confidence before any correction.
+
+### Hint ladder
+
+Use the smallest move that preserves agency: retrieve one definition; point to
+one owner or event; show one missing assumption; give one compatible history;
+or work a different micro-case. Return the learner to the chosen artifact after
+each move.
+
+### Counterexample repair
+
+Use a local timeout with two compatible remote histories, a detached task, or
+one-replica observation to narrow an overclaim. The learner repairs the first
+unsupported phrase and states what remains unknown.
+
+### Transfer question
+
+Change exactly one premise: make the trace untrusted (M22), increase a local
+runtime/performance claim (M24), or vary the asynchronous boundary. Ask which
+claim survives, which evidence is missing, and where the question belongs.
+
+### Reflection and learner-controlled evidence summary
+
+End with the chosen claim, confidence, repair, counterexample, transfer,
+remaining uncertainty, and next observation. The learner controls this compact
+summary; it is not a score or a mastery result.
 
 ### Study partner routine (20–30 minutes)
 

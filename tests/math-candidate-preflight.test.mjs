@@ -11,15 +11,23 @@ import {
 } from "../scripts/module-evidence-preflight.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
+import {
+  loadLegacyCandidatePreflightProfiles,
+  validateLegacyCandidatePreflightProfiles,
+} from "../scripts/legacy-candidate-preflight-profiles.mjs";
 import { loadModuleContractRegistry } from "../scripts/module-contract-registry.mjs";
 import { loadModuleEvidenceRecord } from "../scripts/module-review-evidence.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
-const mathCandidateModuleIds = ["m27", "m28", "m29", "m30"];
+async function legacyCandidateModuleIds() {
+  const profiles = await loadLegacyCandidatePreflightProfiles(siteRoot);
+  const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot });
+  return [...report.candidateByModuleId.keys()];
+}
 
-test("the M27-M30 mathematics cohort has candidate-only 18-criterion preflights", async () => {
-  for (const moduleId of mathCandidateModuleIds) {
+test("every configured legacy candidate has a non-promoting 18-criterion preflight", async () => {
+  for (const moduleId of await legacyCandidateModuleIds()) {
     const report = await runModuleCandidateEvidencePreflight(moduleId, { siteRoot });
 
     assert.equal(report.moduleId, moduleId);
@@ -36,13 +44,13 @@ test("the M27-M30 mathematics cohort has candidate-only 18-criterion preflights"
   }
 });
 
-test("the release-input ledger hashes every profile-backed mathematics candidate record", async () => {
+test("the release-input ledger hashes every profile-backed legacy candidate record", async () => {
   const releaseInputs = JSON.parse(
     await readFile(resolve(siteRoot, "content/course/release-inputs.v1.json"), "utf8"),
   );
   const hashedPaths = new Set(releaseInputs.inputs.map(({ path }) => path));
 
-  for (const moduleId of mathCandidateModuleIds) {
+  for (const moduleId of await legacyCandidateModuleIds()) {
     assert.ok(
       hashedPaths.has(`content/course/contracts/evidence/${moduleId}.v1.json`),
       `${moduleId} candidate evidence must be an allowlisted hashed release input.`,

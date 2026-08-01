@@ -7,6 +7,17 @@ actually published.
 
 ## Unreleased
 
+- Added a candidate-only systems cohort for M19–M24. Each module now has
+  current learner-visible prediction/repair/transfer material, a supportive
+  oral-defense route, a frozen Teaching Assistant/Study Partner/forward-handoff
+  companion, a source-scoped 18-criterion evidence record, a snapshot-bound
+  preflight, and a hash-bound candidate document. The profile runner validates
+  all ten current M19–M24/M27–M30 candidates from one staged Git-index
+  generation. This does not change any `legacy-open`, `legacy-baseline`,
+  unrecorded, human-review, release, publication, live-chat, Notion, or learner
+  mastery state. In particular, the immutable M19 Study Partner and M23/M24
+  oral-defense audit gaps remain historical audit facts; the new routes are
+  explicitly unreviewed structural candidates.
 - Repaired the canonical M19 reader/studio boundary without changing its
   `legacy-open`/`legacy-baseline`/unrecorded state. The v2 graph now declares
   the existing concurrency observatory, the shared registry makes it reachable

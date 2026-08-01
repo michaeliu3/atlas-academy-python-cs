@@ -594,6 +594,22 @@ The Runtime Evidence Casebook contains fixed packets. For each:
 4. choose accept, reject, or defer;
 5. name one next falsifying test.
 
+### Transfer task — new runtime claim, same evidence discipline
+
+An AI proposal says that changing a fixed local report from a list to a stream
+“makes Atlas faster and fixes memory.” Do not run, benchmark, or merge it.
+Transfer the Module 24 evidence model by writing:
+
+```text
+claim owner → semantic invariant → runtime/version label → workload and metric
+→ controlled comparison → limitation → next falsifier → bounded decision
+```
+
+Then change one premise—input distribution, GC policy, runtime build, or cache
+retention rule—and predict which conclusion must be deferred. This is a
+synthetic transfer task, not an unlock for authoring-only Module 32 or a claim
+about a production system.
+
 ### TA and Study Partner rehearsal
 
 The TA asks five questions:
@@ -608,6 +624,49 @@ The TA asks five questions:
 The Study Partner changes exactly one fact — runtime version, input
 distribution, GC setting, CPU condition, native allocation, or cache policy —
 and asks which conclusions survive. Swap roles after ten minutes.
+
+### Conversational oral defense — M24
+
+The Teaching Assistant leads this supportive, post-module oral-defense
+conversation. The Study Partner can rehearse evidence reasoning but does
+**not** administer or grade the defense. Begin with a learner-selected runtime
+claim, a prediction about the strongest justified conclusion, and confidence
+from 1 to 4. Treat mistakes as evidence for the next repair, never as a
+pass/fail result.
+
+Use the visible chat as a readable whiteboard: show a labelled
+`claim → evidence owner → scope → limitation → falsifier` trace. If an
+equation or statistic is useful, use supported inline or display math, define
+its notation, and give a prose or ASCII fallback; put code, benchmark
+manifests, and state traces in language-labelled fences and explain them in
+prose. Do not depend on speech, color, or an unlabelled visualization.
+
+### Hint ladder
+
+Ask first whether the statement is a Python contract, CPython observation,
+measurement, OS/native observation, or hypothesis. Then ask which version,
+workload, metric, control, and limitation are missing. Give the smallest
+possible prompt before naming a repair.
+
+### Counterexample turn
+
+Change exactly one condition: shallow size becomes process RSS, traced Python
+allocation becomes native allocation, a cold run becomes a warm run, or a
+cache changes retention. The learner identifies which inference breaks and
+what scoped conclusion still survives.
+
+### Transfer turn
+
+Use the fixed list-to-stream proposal above. The learner carries the evidence
+discipline to a fresh design claim, supplies a falsifier, and keeps the Module
+32 forward boundary explicit rather than treating it as an unlock.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's chosen claim, prediction/confidence, corrected scope,
+one counterexample, limitation, falsifier, and next retrieval action. The
+learner controls whether to keep that compact summary; this workbook does not
+assert a chat, voice session, or external record.
 
 ---
 
@@ -738,6 +797,16 @@ answers overgeneralize.
 | implementation-overclaim | Module 17, Module 23, Session 5 |
 | experiment confusion | Module 5, Module 19, Session 6 |
 | trust/retention confusion | Module 22, Session 4 and 6 |
+
+### Misconception map — evidence-lens repairs
+
+| Tempting shortcut | Repair question | Return route |
+|---|---|---|
+| “A smaller shallow object is lower RSS.” | Which memory lens produced the number, and what does it omit? | Session 4 |
+| “Lower traced allocation proves native memory fell.” | Does the metric observe Python allocations, native allocations, or process memory? | Session 4 |
+| “An opcode explains Python semantics or speed.” | Which version-labelled CPython observation exists, and what experiment is still missing? | Session 5 |
+| “One faster timing proves the patch.” | Which workload, GC, warm-up, and sample controls make the comparison meaningful? | Session 6 |
+| “A cache is only an optimization.” | What retention, access, invalidation, and privacy boundary changed? | Session 4 and Session 6 |
 
 ---
 

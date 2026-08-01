@@ -160,3 +160,13 @@ M20 must add remote/evidence scope; M21 must establish asynchronous and
 distributed coordination; M24 must establish interpreter/runtime attribution.
 M19 should leave those topics visibly unresolved rather than borrowing their
 authority from a lock call, a GIL slogan, a finite model, or a passing test.
+
+## 2026-07-31 reconciliation — current candidate supplement
+
+The historical legacy audit's `study-partner-prompt: missing` finding remains
+an historical record and is not revised by later workbook text. The current
+M19 workbook supplement is an **unreviewed structural candidate only**: it
+does not retrospectively change the audit status, human-review state, release
+evidence, availability, publication state, or learner-mastery record. A later
+review must inspect any module-specific companion prompt and learner-facing
+rehearsal route before making any stronger claim.

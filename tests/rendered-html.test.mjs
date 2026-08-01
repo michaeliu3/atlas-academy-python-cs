@@ -319,6 +319,86 @@ test("each open module reader keeps the supportive oral-defense route", async ()
   assert.match(renderedText, /formative oral defense conversation, not a grade/i);
 });
 
+test("the M19-M24 candidate oral protocols keep their reader-visible repair anchors", async () => {
+  const expectedAnchorsByWorkbook = new Map([
+    [
+      "19_concurrency_parallelism.md",
+      [
+        "supportive-oral-defense-route",
+        "123-hint-ladder",
+        "level-8--transfer-to-m20-m21-and-m24",
+        "study-partner-rehearsal-and-ta-handoff",
+        "122-ta-response-loop",
+      ],
+    ],
+    [
+      "20_networks_application_protocols.md",
+      [
+        "supportive-oral-defense-route",
+        "session-6-oral-defense",
+        "123-hint-ladder",
+        "level-8--transfer-without-overclaiming",
+        "122-ta-response-loop",
+      ],
+    ],
+    [
+      "21_async_distributed_systems.md",
+      [
+        "supportive-oral-defense-protocol",
+        "invitation-and-starting-evidence",
+        "hint-ladder",
+        "counterexample-repair",
+        "transfer-question",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+    [
+      "22_security_privacy_trust_boundaries.md",
+      [
+        "conversational-oral-defense--m22",
+        "hint-ladder",
+        "counterexample-turn",
+        "transfer-turn",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+    [
+      "23_programming_languages_interpreters.md",
+      [
+        "conversational-oral-defense--m23",
+        "hint-ladder",
+        "counterexample-turn",
+        "transfer-turn",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+    [
+      "24_cpython_performance_memory.md",
+      [
+        "conversational-oral-defense--m24",
+        "hint-ladder",
+        "counterexample-turn",
+        "transfer-turn",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+  ]);
+
+  for (const [filename, expectedAnchors] of expectedAnchorsByWorkbook) {
+    const markdown = await readFile(
+      new URL(`../content/modules/${filename}`, import.meta.url),
+      "utf8",
+    );
+    const anchors = new Set(extractTableOfContents(markdown).map(({ id }) => id));
+    for (const expectedAnchor of expectedAnchors) {
+      assert.ok(
+        anchors.has(expectedAnchor),
+        `${filename} keeps the reader-visible ${expectedAnchor} oral-repair anchor`,
+      );
+    }
+  }
+});
+
 test("the built browser bundle excludes authoring-only companion content", async () => {
   const assetsDirectory = new URL("../dist/client/assets/", import.meta.url);
   const assetNames = await readdir(assetsDirectory);

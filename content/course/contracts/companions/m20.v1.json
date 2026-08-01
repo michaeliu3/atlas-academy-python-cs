@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m20",
+  "purpose": "Freeze a candidate-only M20 Teaching Assistant, Study Partner, and M21 handoff context for future human review without changing M20's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/19",
+    "digest": "sha256:a6788b7eb587a0895a94db6ef83f3c812f605c67063e283ba7a98696444b08bc"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected protocol claim. Ask for the message scope, sender and receiver states, version, idempotency key or equivalent, and the shortest request-response-retry-timeout trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one protocol state and durability assumption visible, reconstruct one labelled message trace, name one ordering, retry, timeout, or remote-application boundary, and distinguish a local send or HTTP result from a durably applied intended effect.",
+    "repairMove": "Ask for a prediction before correction; change exactly one version, retry rule, timeout, idempotency condition, ordering assumption, or acknowledgement meaning; then offer the smallest trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: define the message and state names, show a short labelled request-response-retry trace, give a plain-language or ASCII fallback, and rehearse one protocol-claim-to-assumption-to-boundary chain at a time.",
+    "changedPremise": "Change one protocol version, message ordering, retry, timeout, idempotency rule, acknowledgement meaning, or durability assumption. Ask for a prediction before looking at a trace, counterexample, or failure case.",
+    "taHandoff": "End with the learner's selected protocol card, attempted message trace, confidence, unresolved misconception, one remote-effect or delivery limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m21",
+    "carryArtifact": "Carry a protocol-evidence card: message and state scope, actors, version and idempotency rule, labelled trace, retry/timeout/durability assumptions, one failure boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before treating an awaited remote operation in M21 as an atomic distributed result, which local completion, remote observation, durable effect, retry, ordering, and compensation assumptions must be separated?",
+    "boundary": "M21 is the only canonical forward handoff. References to M22–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

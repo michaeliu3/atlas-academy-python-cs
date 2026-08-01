@@ -12,7 +12,7 @@ function copy(value) {
   return structuredClone(value);
 }
 
-test("candidate and authoring companions remain graph-bound without lifecycle promotion", async () => {
+test("systems, mathematics, and authoring companions remain graph-bound without lifecycle promotion", async () => {
   const [graph, companions] = await Promise.all([
     loadCourseGraph(),
     loadModuleLearningCompanions(),
@@ -24,8 +24,40 @@ test("candidate and authoring companions remain graph-bound without lifecycle pr
   const m30 = report.byModuleId.get("m30");
   const m31 = report.byModuleId.get("m31");
 
-  assert.equal(report.summary.companionCount, 5);
-  assert.deepEqual(report.summary.moduleIds, ["m27", "m28", "m29", "m30", "m31"]);
+  const m19 = report.byModuleId.get("m19");
+  const m20 = report.byModuleId.get("m20");
+  const m21 = report.byModuleId.get("m21");
+  const m22 = report.byModuleId.get("m22");
+  const m23 = report.byModuleId.get("m23");
+  const m24 = report.byModuleId.get("m24");
+
+  assert.equal(report.summary.companionCount, 11);
+  assert.deepEqual(report.summary.moduleIds, [
+    "m19",
+    "m20",
+    "m21",
+    "m22",
+    "m23",
+    "m24",
+    "m27",
+    "m28",
+    "m29",
+    "m30",
+    "m31",
+  ]);
+  assert.equal(m19.guideBinding.locator, "/guides/18");
+  assert.equal(m19.forwardHandoff.targetModuleId, "m20");
+  assert.equal(m20.guideBinding.locator, "/guides/19");
+  assert.equal(m20.forwardHandoff.targetModuleId, "m21");
+  assert.equal(m21.guideBinding.locator, "/guides/20");
+  assert.equal(m21.forwardHandoff.targetModuleId, "m22");
+  assert.equal(m22.guideBinding.locator, "/guides/21");
+  assert.equal(m22.forwardHandoff.targetModuleId, "m23");
+  assert.equal(m23.guideBinding.locator, "/guides/22");
+  assert.equal(m23.forwardHandoff.targetModuleId, "m24");
+  assert.equal(m24.guideBinding.locator, "/guides/23");
+  assert.equal(m24.forwardHandoff.targetModuleId, "m32");
+  assert.match(m24.forwardHandoff.boundary, /authoring-only and hidden/i);
   assert.equal(m27.guideBinding.locator, "/guides/26");
   assert.equal(m27.forwardHandoff.targetModuleId, "m06");
   assert.equal(m28.guideBinding.locator, "/guides/27");
@@ -51,6 +83,12 @@ test("candidate and authoring companions remain graph-bound without lifecycle pr
   const graphM29 = graph.modules.find(({ id }) => id === "m29");
   assert.equal(graphM29.state.contract.state, "legacy-baseline");
   assert.equal(graphM29.state.release.state, "unrecorded");
+  const graphM19 = graph.modules.find(({ id }) => id === "m19");
+  const graphM24 = graph.modules.find(({ id }) => id === "m24");
+  assert.equal(graphM19.state.contract.state, "legacy-baseline");
+  assert.equal(graphM19.state.release.state, "unrecorded");
+  assert.equal(graphM24.state.contract.state, "legacy-baseline");
+  assert.equal(graphM24.state.release.state, "unrecorded");
 });
 
 test("a learning companion fails closed when it forges a graph handoff or module identity", async () => {

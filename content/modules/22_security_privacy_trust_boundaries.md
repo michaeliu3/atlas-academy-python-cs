@@ -255,6 +255,28 @@ D. A trace proves the remote importer completed.
 **Best answer:** B. Trace correlation is useful but it is not identity,
 authorization, or remote completion.
 
+### Prediction checkpoint — correlation is not authority
+
+Use a fresh, fixed local packet: it has the same `trace_id` as an earlier
+import attempt, but no subject evidence or policy decision. Before opening the
+reveal, write one choice and confidence from 1 (guessing) to 4 (could explain
+the boundary):
+
+- A. The trace proves the caller is the earlier subject.
+- B. The trace permits this tenant's requested effect.
+- C. The trace is correlation input until another boundary establishes more.
+- D. The trace proves the remote importer did not act.
+
+<details>
+<summary>Reveal after recording your prediction and confidence</summary>
+
+**C** is the strongest allowed claim. A trace can connect local observations,
+but it does not establish identity, authorization, or a remote effect. If your
+answer was A, B, or D, redraw the distinction between a received value, an
+identity assertion, an exact authorization tuple, and an observed effect.
+
+</details>
+
 ### Session artifact
 
 Complete this sentence in your notes:
@@ -790,6 +812,68 @@ input text
 An input string is not a Python expression. An abstract syntax tree is not a
 capability. A successful parse is not an authorization result.
 
+### Transfer task — one new sink, same boundary rule
+
+A fictional local reporting repair proposes a new `report_format` field. Do
+not implement or call a renderer. Instead, make a five-box whiteboard trace:
+
+```text
+received report_format claim
+→ declared fixed representation
+→ exact policy decision
+→ fixed local rendering effect
+→ redacted evidence and nonclaim
+```
+
+For each arrow, name the owner and the fact that must still be established.
+Then change one premise: the same value now names a report for another tenant.
+Predict the first boundary that must reject, defer, or escalate it. This is a
+transfer exercise, not permission to contact a service or a route around
+Module 23's prerequisites.
+
+### Conversational oral defense — M22
+
+The Teaching Assistant leads this supportive, post-module conversation; the
+Study Partner may rehearse the same ideas but does **not** administer or grade
+the defense. Begin with one learner-selected claim, a prediction about its
+strongest supported conclusion, and confidence from 1 to 4. The aim is to make
+reasoning visible and repairable, never to produce a pass/fail result.
+
+Use the visible chat as a readable whiteboard. Write a labelled trace such as
+`claim → boundary → decision → protected effect → redacted evidence`. If an
+equation or notation helps, use supported inline or display math, define every
+symbol, and give a plain-language or ASCII fallback; put code or state traces
+in a language-labelled fence and then summarize them in prose. Do not rely on
+speech, color, or an unlabelled diagram alone.
+
+### Hint ladder
+
+Start with: “Which value is only a claim?” Then ask which boundary owns the
+next decision, which authority tuple is still missing, and which smallest
+local observation could narrow the conclusion. Offer one small prompt at a
+time rather than replacing the learner's reasoning.
+
+### Counterexample turn
+
+Change exactly one premise: a trace matches but the tenant changes, a valid
+MAC appears but the policy denies, or a local timeout occurs while remote
+status remains UNKNOWN. Ask which earlier conclusion no longer follows and
+which nonclaim must remain visible.
+
+### Transfer turn
+
+Move the same boundary model to the fictional `report_format` repair above.
+The learner explains why parsing, a fixed enum, authentication, authorization,
+and a renderer answer distinct questions. Keep all examples synthetic and
+local.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's chosen claim, prediction/confidence, repaired boundary
+trace, one remaining uncertainty, and one next retrieval action. The learner
+controls whether to keep that compact summary; this workbook does not assert
+that any chat, voice session, or external record occurred.
+
 ### Session artifact
 
 Write a one-page incident reconstruction. Your final paragraph must contain one
@@ -937,6 +1021,16 @@ C. Remote effect can remain UNKNOWN; later status check needs authorization and
 D. Store full raw request forever to be safe.
 
 **Answer:** C. Preserve uncertainty and minimize retained data.
+
+### Misconception map — nearest tempting overclaims
+
+| Tempting shortcut | Repair question | Return route |
+|---|---|---|
+| “The trace identifies the caller.” | What independent evidence binds a subject to this request? | Session 1 and Session 2 |
+| “Authentication permits the effect.” | Which tenant/resource/action/purpose/policy tuple still needs a decision? | Session 2 |
+| “It parsed, so every sink is safe.” | Which receiving context gives the value a new meaning or effect? | Session 3 |
+| “A MAC or TLS decision grants policy.” | What mechanism-specific claim is supported, and what policy claim remains separate? | Session 4 |
+| “The packet tells the whole incident.” | Which facts are observed, which are hypotheses, and which remain UNKNOWN? | Session 6 |
 
 ---
 

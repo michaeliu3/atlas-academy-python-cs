@@ -9,6 +9,96 @@
   },
   "candidates": [
     {
+      "moduleId": "m19",
+      "packetId": "m19-concurrency-parallelism-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m19/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:c3060c0aaaf282ab43896127358a0aed3c5067f157add35df3b29b64b1394b59"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module19_concurrency_parallelism_source_map.md",
+        "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/ConcurrencyStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m20",
+      "packetId": "m20-networks-protocols-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m20/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:2d01780e5486899e819957bb2acc0b758a9aa0791665d22399d00393da667574"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module20_networks_protocols_source_map.md",
+        "content/source-maps/module20_networks_protocols_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/NetworkProtocolStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m21",
+      "packetId": "m21-async-distributed-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m21/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:813688120ac8232dae6746a88ff32654ac883d3bc9877896ba86f6f3c661830e"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module21_async_distributed_source_map.md",
+        "content/source-maps/module21_async_distributed_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/AsyncDistributedStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m22",
+      "packetId": "m22-security-trust-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m22/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:58d955fad25d0ce7d1d3deec2c66c85d9187d468016f2fe14081aee59a487dec"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module22_security_trust_source_map.md",
+        "content/source-maps/module22_security_trust_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/SecurityTrustStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m23",
+      "packetId": "m23-languages-interpreters-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m23/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:1264ed22ed54b0dda31b2d0c510c46e923641d4fdb443f997b006157b4fb1f5d"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module23_languages_interpreters_source_map.md",
+        "content/source-maps/module23_languages_interpreters_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/LanguageInterpreterStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m24",
+      "packetId": "m24-cpython-performance-memory-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m24/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:d04661691ada7eeab20fcc9afeb52b49b8f7d0e7f8ab9364ef4a91230535efb1"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module24_cpython_performance_memory_source_map.md",
+        "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/RuntimeEvidenceObservatory.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
       "moduleId": "m27",
       "packetId": "m27-discrete-mathematics-structural-candidate",
       "candidateDocumentation": {

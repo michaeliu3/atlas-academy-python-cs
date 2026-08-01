@@ -1984,6 +1984,24 @@ Then provide:
 
 Defend one accepted decision, one rejected patch, and one remaining unknown.
 
+### Supportive oral-defense route
+
+**Current candidate-only supplement.** This route makes the existing Session 6
+defense easier to conduct as a constructive conversation. It is not evidence of
+review, release, or learner mastery.
+
+Start with one learner-selected claim card: the sequential postcondition, one
+shared transition, a progress premise, or the execution-model choice. Before a
+hint, the learner predicts the next state or consequence, records confidence
+`1–4`, and names the observation that could falsify the claim. The Teaching
+Assistant then uses the smallest useful move: recover the invariant, expose one
+event, give a four-event counterexample, or complete a different micro-trace.
+
+Close by changing one premise—replace local queue ownership with a remote
+message (M20), an async task boundary (M21), or a runtime/performance claim
+(M24). The learner states what transfers, what does not, one remaining
+uncertainty, and the next evidence to collect in a learner-controlled summary.
+
 ---
 
 ## 8. Six-view interactive HTML studio
@@ -2854,6 +2872,19 @@ evidence.
 | any two layer/owner collapses | smallest prerequisite bridge, then delayed retrieval |
 | high-confidence correct | still give one “does not establish” sentence |
 
+### Misconception repair map
+
+**Current candidate-only supplement.** Use this map to name a repair rather
+than treating a wrong choice as a verdict. It does not change the historical
+audit, review, release, or mastery state.
+
+| Misconception label | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| `local-step-is-atomic` | trace `A:R, B:R, A:W, B:W` and mark the violated sequential postcondition | move the same history to a cache-version update |
+| `notification-is-completion` | distinguish predicate truth, item ownership, and unfinished-work accounting | replace the queue with one remote response that may be absent |
+| `one-run-proves-progress` | draw the wait-for graph and state the missing fairness assumption | change one executor dependency or capacity bound |
+| `gil-or-speedup-proves-model-fit` | name workload, build, transfer, and measured boundary | compare a documented native call with pure-Python work |
+
 ---
 
 ## 11. Cumulative project — Atlas multi-worker correctness dossier
@@ -3391,6 +3422,25 @@ entire reasoning chain.
 10. vary one schedule, predicate, capacity, failure, or runtime fact;
 11. save a misconception label;
 12. schedule delayed transfer.
+
+### Study Partner rehearsal and TA handoff
+
+**Current candidate-only supplement.** This is a module-specific,
+non-grading rehearsal route. It is a current unreviewed structural candidate,
+not a retrospective change to the legacy audit, review, release, or learner
+mastery record.
+
+Choose one schedule, owner map, wait-for graph, or execution-model card. The
+Study Partner asks for a prediction and confidence before inspecting the trace,
+then changes exactly one schedule edge, predicate, capacity, failure boundary,
+or runtime fact. The pair keeps the explanation visible: a labelled event
+trace, a small code fragment, or a plain-language invariant.
+
+Hand off only a compact learner-controlled card to the Teaching Assistant:
+claim, evidence inspected, confidence, smallest counterexample or repair,
+one M20/M21/M24 transfer, and one uncertainty. The Teaching Assistant uses
+that card to begin the supportive oral-defense route rather than repeating the
+entire session.
 
 ### 12.3 Hint ladder
 

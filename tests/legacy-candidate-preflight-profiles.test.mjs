@@ -15,15 +15,28 @@ async function loadProfiles() {
   return loadLegacyCandidatePreflightProfiles(siteRoot);
 }
 
-test("the legacy candidate profile registry allowlists the complete mathematics cohort", async () => {
+const expectedCandidateModuleIds = [
+  "m19",
+  "m20",
+  "m21",
+  "m22",
+  "m23",
+  "m24",
+  "m27",
+  "m28",
+  "m29",
+  "m30",
+];
+
+test("the legacy candidate profile registry allowlists the systems and mathematics cohorts", async () => {
   const report = await validateLegacyCandidatePreflightProfiles(await loadProfiles(), { siteRoot });
 
   assert.deepEqual(
     [...report.candidateByModuleId.keys()],
-    ["m27", "m28", "m29", "m30"],
+    expectedCandidateModuleIds,
   );
   const releaseInputPaths = report.releaseInputPaths.map((path) => path.replaceAll("\\", "/"));
-  for (const moduleId of report.candidateByModuleId.keys()) {
+  for (const moduleId of expectedCandidateModuleIds) {
     assert.ok(
       releaseInputPaths.some((path) => path.endsWith(`evidence/${moduleId}.v1.json`)),
       `${moduleId} evidence record is profile-derived and hash-ledgered`,
@@ -104,5 +117,5 @@ test("the snapshot-bound profile validator never reuses stateful caller facts", 
   const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
 
   assert.equal(purposeReads, 1);
-  assert.equal(report.candidateByModuleId.size, 4);
+  assert.equal(report.candidateByModuleId.size, 10);
 });

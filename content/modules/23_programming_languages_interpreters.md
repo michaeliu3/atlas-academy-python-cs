@@ -331,6 +331,27 @@ D. count(where cohort = "atlas") extra
 | C | contract error | The grammar can accept a METRIC-shaped token before the schema recognizes it. |
 | D | parse error | The parser must reject trailing undeclared structure. |
 
+### Prediction checkpoint — parsing is not permission
+
+For the fixed query `count(where cohort = "atlas")`, record one choice and
+confidence from 1 (guessing) to 4 (could explain the boundary) before opening
+the reveal:
+
+- A. It may read the learning metric because it parsed.
+- B. It has grammar shape only; contract, authorization, capability, and fuel
+  decisions remain.
+- C. Its subject is authenticated because a field is present.
+- D. It is safe host-language source.
+
+<details>
+<summary>Reveal after recording your prediction and confidence</summary>
+
+**B** is the strongest conclusion. Parsing establishes only the declared
+syntax shape. If you chose A, C, or D, name the missing contract, authority,
+capability, and resource boundaries in order before continuing.
+
+</details>
+
 ### Session artifact
 
 Draw your own eight-card pipeline. Write exactly one sentence below each card:
@@ -904,6 +925,64 @@ bytecode—write:
 End with one Module 24 question you would answer by measurement rather than
 intuition.
 
+### Transfer task — new rule language, same authority boundary
+
+A fictional learner-facing automation needs a tiny rule language that may
+select one of two fixed local explanations. Do not implement the language or
+invoke an adapter. Draw this bounded route instead:
+
+```text
+rule text → declared tokens → original AST → domain contract
+→ exact authorization decision → fixed explanation capability → redacted result
+```
+
+Change one premise: a valid AST now asks for an explanation owned by another
+learner cohort. Predict the earliest boundary that changes and state the
+strongest remaining nonclaim. This is a transfer task, not a host-language
+evaluation exercise and not a bypass around Module 24's evidence boundary.
+
+### Conversational oral defense — M23
+
+The Teaching Assistant leads this supportive, post-module oral-defense
+conversation. The Study Partner may conduct non-grading rehearsal but does
+**not** administer or grade the defense. Start with one learner-selected
+parse-to-capability claim, a prediction of the next result, and confidence from
+1 to 4. The purpose is constructive diagnosis and repair, never pass/fail.
+
+Use the visible chat as a readable whiteboard: show a labelled
+`text → token → AST → environment → capability` trace. If notation or an
+equation is useful, use supported inline or display math, define symbols, and
+give a prose or ASCII fallback; put code, grammar, or evaluation traces in a
+language-labelled fence and explain their state changes in direct prose. Do not
+depend on speech, color, or a visual-only trace.
+
+### Hint ladder
+
+Ask first which representation is present and what it establishes. Then ask
+which semantic rule selects the next evaluation step, what authority is still
+absent, and what bounded observation would strengthen the claim. Offer the
+smallest useful hint before showing a repair.
+
+### Counterexample turn
+
+Change one premise: an AST is well formed but a schema field is unknown, a
+closure's parent is replaced by its caller, or a fuel budget is exhausted. The
+learner identifies which claim fails and which boundary remains intact without
+constructing an exploit.
+
+### Transfer turn
+
+Use the fictional rule-language route above. The learner separates syntax,
+semantics, authorization, capability, and evidence, then asks one Module 24
+measurement question rather than inferring a performance result from bytecode.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's selected trace, prediction/confidence, one repaired
+layer confusion, one counterexample, one remaining uncertainty, and a next
+retrieval action. The learner controls whether to keep that compact summary;
+this workbook does not assert a chat, voice session, or external record.
+
 ---
 
 ## 8. Atlas Language Lab — visual studio text equivalent
@@ -1047,6 +1126,16 @@ What can a `dis` listing contribute here?
 
 **Best answer: C.** Bytecode is implementation detail and can change across
 versions and implementations.
+
+### Misconception map — repair layer confusion
+
+| Tempting shortcut | Repair question | Return route |
+|---|---|---|
+| “It parsed, so it is allowed.” | What contract, authorization, and capability decisions remain? | Session 1 and Session 5 |
+| “The AST already tells us what to do.” | Which declared semantic rule chooses the next evaluation step? | Session 2 |
+| “A type hint validates this received value.” | What runtime contract still checks the concrete representation? | Session 4 |
+| “Fuel makes the evaluator a sandbox.” | Which host authority is absent, and what resource claim is actually bounded? | Session 5 |
+| “Bytecode proves Python law or speed.” | Which version-labelled implementation observation is present, and what measurement is still missing? | Session 6 and Module 24 |
 
 ---
 

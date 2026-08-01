@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m19",
+  "purpose": "Freeze a candidate-only M19 Teaching Assistant, Study Partner, and M20 handoff context for future human review without changing M19's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/18",
+    "digest": "sha256:035b509720ad50f5ca3c12361ee8cec98fc3538b99703e22915b0d3526cc8a46"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected concurrency claim. Ask which state is shared, who owns each transition, which progress guarantee is meant, and for the shortest interleaving before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one state invariant visible, reconstruct one labelled schedule or code trace, name one lost-update, visibility, deadlock, or cancellation boundary, and distinguish an observed run from the guarantees the design actually provides.",
+    "repairMove": "Ask for a prediction before correction; change exactly one schedule, ownership rule, synchronization point, visibility assumption, cancellation point, or worker limit; then offer the smallest trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: name the shared state and invariant, show a short labelled timeline or code trace, give a plain-language or ASCII fallback, and rehearse one history-to-guarantee-to-boundary chain at a time.",
+    "changedPremise": "Change one interleaving, ownership boundary, synchronization primitive, visibility rule, cancellation event, or pool size. Ask for a prediction before looking at a schedule trace, counterexample, or progress argument.",
+    "taHandoff": "End with the learner's selected concurrency card, attempted schedule or code trace, confidence, unresolved misconception, one scheduling or progress limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m20",
+    "carryArtifact": "Carry a concurrent-history evidence card: shared state, owners, invariant, labelled schedule or trace, synchronization/progress assumptions, one failure boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before treating a local send or completed request in M20 as a remote protocol effect, what message state, ownership boundary, ordering, retry, timeout, and durability assumption must become explicit?",
+    "boundary": "M20 is the only canonical forward handoff. References to M21–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

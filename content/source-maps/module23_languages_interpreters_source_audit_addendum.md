@@ -201,3 +201,19 @@ its hash is recorded.
 - M24 must inspect and measure CPython/runtime behavior with an exact
   environment and workload before it makes a stronger implementation or
   performance claim.
+
+## 2026-07-31 candidate-supplement reconciliation
+
+On 2026-07-31, the current M23 workbook received named prediction, transfer,
+misconception-repair, and module-specific conversational-oral-defense material
+for a future **candidate-only structural** preflight. Those current anchors may
+make a later review easier, but they do not alter this addendum's historical
+audit finding that `supportive-oral-defense` was **missing** at the time of the
+legacy audit.
+
+The new material is unreviewed structural content, not evidence of a
+psychologically safe interaction in practice, a designated-chat handoff, voice
+or rendering behavior, Notion activity, learner mastery, CI, deployment,
+release, or publication. Any later reviewer must assess the actual learner
+experience and record separate evidence before changing a lifecycle or audit
+claim.

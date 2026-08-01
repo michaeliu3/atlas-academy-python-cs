@@ -1447,6 +1447,24 @@ Explain this in ninety seconds without using “it probably worked”:
 Your answer must contain `CLIENT_OBSERVATION`, `SERVER_OBSERVATION`,
 `UNKNOWN`, the same ID+digest rule, and one Module 21 or 22 boundary.
 
+### Supportive oral-defense route
+
+**Current candidate-only supplement.** This makes the existing Session 6
+defense a constructive teaching conversation. It is not evidence of review,
+release, or learner mastery.
+
+Begin with the learner's narrowest claim about one timeout history. Before a
+hint, they predict which facts are client-local, server-local, or still
+`UNKNOWN`, record confidence `1–4`, and name the next discriminating
+observation. The Teaching Assistant gives the smallest repair: a byte/frame
+trace, one compatible history, an ID+digest contrast, or a response-matching
+rule—not a broad solution.
+
+Then change one premise: a stream becomes concurrent fan-out (M21), an
+endpoint must become a trusted peer (M22), or a timing observation becomes a
+performance explanation (M24). End with the claim, its scope, the rejected
+overclaim, the next observation, and a learner-controlled evidence summary.
+
 ---
 
 ## 8. Six-view interactive HTML studio
@@ -1875,6 +1893,19 @@ replica/partial-failure/distributed-system problem.
 | 3 or 7 | local observation promotes remote knowledge | View 3 + timeout history matrix |
 | 5 | HTTP/header name replaces Atlas policy | View 4 contract builder |
 | 6 | retry may mint a new operation | View 5 ledger replay |
+
+### Misconception repair map
+
+**Current candidate-only supplement.** Use these labels to select a compact
+repair and later contrast, not to assign a verdict. This does not change the
+historical audit, review, release, or mastery state.
+
+| Misconception label | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| `endpoint-is-service-identity` | separate name, address, port, endpoint candidate, and authenticated service | add an untrusted forwarding header and state the M22 question |
+| `transport-is-application-effect` | split one byte stream into two receives and frame it explicitly | replace TCP with a delivered UDP datagram |
+| `timeout-proves-no-effect` | enumerate the compatible client/server histories | resolve one same-ID status lookup |
+| `header-name-is-retry-policy` | state Atlas's ID, digest, replay, conflict, and retention rules | change the digest under the same operation ID |
 
 ---
 

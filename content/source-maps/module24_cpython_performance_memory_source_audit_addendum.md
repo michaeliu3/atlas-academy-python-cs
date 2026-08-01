@@ -190,3 +190,20 @@ its hash is recorded.
   result, performance acceptance, deployment decision, or causal explanation.
 - M32 must preserve the exact environment/workload/evidence boundary whenever
   it studies systems languages, scientific Python, or accelerators.
+
+## 2026-07-31 candidate-supplement reconciliation
+
+On 2026-07-31, the current M24 workbook received named transfer,
+misconception-repair, and module-specific conversational-oral-defense material
+for a future **candidate-only structural** preflight. The existing prediction
+exercise remains the relevant prediction-before-reveal route. These additions
+do not alter this addendum's historical audit findings that
+`supportive-oral-defense` was **missing** and `ta-prompt` was **ambiguous** at
+the time of the legacy audit.
+
+The new material is unreviewed structural content, not evidence of a
+psychologically safe interaction in practice, a distinct operational TA
+handoff, designated-chat delivery, voice or rendering behavior, Notion
+activity, learner mastery, CI, deployment, release, or publication. Any later
+reviewer must assess the actual learner experience and record separate evidence
+before changing a lifecycle or audit claim.

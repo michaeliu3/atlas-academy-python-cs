@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m24",
+  "purpose": "Freeze a candidate-only M24 Teaching Assistant, Study Partner, and bounded M32 conceptual handoff for future human review without changing M24's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/23",
+    "digest": "sha256:542d627f11135183712bb80193c6a54e1ed3729710a80e40690732cc5528af13"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected performance claim. Ask whether it is a Python guarantee, a CPython mechanism, or a scoped observation; then ask for the workload, runtime, baseline, and smallest measurement trace before a conclusion.",
+    "artifactFocus": "Ask the learner to make one workload and comparison visible, reconstruct one profiler, allocation, or benchmark trace, name one version, allocator, hardware, noise, or generalization boundary, and separate measured evidence from a portable performance claim.",
+    "repairMove": "Ask for a prediction before correction; change exactly one runtime version, workload distribution, baseline, allocator, data shape, warm-up rule, hardware condition, or statistical summary; then offer the smallest trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: label the claim type, runtime, workload, baseline, result, and limitation, show a short benchmark or profiler trace, give a plain-language or ASCII fallback, and rehearse one observation-to-boundary-to-decision chain at a time.",
+    "changedPremise": "Change one runtime version, allocator, workload shape, baseline, warm-up, hardware condition, measurement rule, or statistical summary. Ask for a prediction before looking at a benchmark, profiler trace, or portability limitation.",
+    "taHandoff": "End with the learner's selected performance-evidence card, attempted measurement trace, confidence, unresolved misconception, one portability or generalization limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m32",
+    "carryArtifact": "Carry a performance-evidence card: claim type, runtime and version, workload and baseline, measurement or profiler trace, scoped result, portability/statistical boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before interpreting an accelerator or systems-language result in M32, what execution model, data movement, runtime and compiler settings, baseline, workload, hardware scope, and numerical or portability boundary must become explicit?",
+    "boundary": "M32 is the only conceptual forward handoff, but it remains authoring-only and hidden. This record does not create a learner route to M32, unlock it, bypass prerequisites, assert M32 delivery, or make a release or publication claim."
+  }
+}

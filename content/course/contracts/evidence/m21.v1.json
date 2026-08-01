@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m21",
+  "purpose": "Bind M21's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M21 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m21-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The current M21 workbook visibly declares its knowledge-system position and bounded downstream handoff without treating them as route-completion or release evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "1-position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "14-handoff-what-module-21-deliberately-leaves-open"}
+      ],
+      "limitations": ["Resolving a map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m21-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "The current M21 workbook has six ordered visible session headings that span task ownership, structured lifetime, bounded admission, partial failure, declared order, and consistency/availability choices.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "2-session-1--await-releases-control-it-does-not-transfer-responsibility"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "3-session-2--structured-lifetime-gives-a-boundary-not-magic-rollback"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "4-session-3--bounded-admission-makes-overload-a-policy-decision"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "5-session-4--partial-failure-is-an-evidence-problem-before-it-is-retry-code"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "6-session-5--time-is-a-local-instrument-order-is-a-declared-relation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "7-session-6--consistency-and-availability-are-choices-with-assumptions"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m21-first-principles",
+      "criterionId": "first-principles",
+      "claim": "The current M21 workbook exposes a first-principles checkpoint for tracing ownership and responsibility before an asynchronous claim is trusted.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "first-principles-checkpoint"}
+      ],
+      "limitations": ["A visible first-principles anchor does not prove distributed-systems correctness, implementation correctness, or learner comprehension."]
+    },
+    {
+      "id": "m21-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "The current M21 workbook exposes separate structural locations for first-principles reasoning, cancellation distinctions, admission invariants, compatible timeout histories, and a replica-claim ladder.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "first-principles-checkpoint"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "cancellation-vocabulary-do-not-collapse-the-verbs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "queue-semaphore-and-task-group-protect-different-invariants"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "compatible-histories-after-one-local-timeout"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "replica-claim-ladder"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical reasoning, or source claims."]
+    },
+    {
+      "id": "m21-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "The current M21 workbook exposes separate code-reading and diagnosis anchors for task ownership, bounded admission, and distributed claim language.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "code-reading-lab-a1--the-orphaned-coroutine"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "code-reading-lab-a3--the-fake-bound"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "code-reading-lab-a6--adjective-audit"}
+      ],
+      "limitations": ["Visible task anchors do not prove that a learner can independently read, debug, or design an asynchronous or distributed system."]
+    },
+    {
+      "id": "m21-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "The current M21 workbook exposes a task-ownership prediction before reveal anchor.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "prediction-before-reveal--task-ownership"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m21-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "The current M21 workbook exposes a transfer anchor that distinguishes a trace from trust while keeping later boundary claims separate.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "transfer-task--trace-is-not-trust"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m21-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "The current M21 workbook and its canonical source map plus source-audit addendum expose a learner resource route and two scoped ledger locations for candidate inspection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "13-resource-route-and-source-discipline"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module21_async_distributed_source_map.md", "locator": "claim-to-source-matrix-for-authoring-and-ta-use"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module21_async_distributed_source_audit_addendum.md", "locator": "source-and-reuse-ledger"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m21-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "The current M21 workbook binds its visual-studio text-equivalent section to the module-specific async/distributed studio and rendered-HTML regression surface as structural candidate inputs.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "8-the-atlas-run-control-room--visual-studio-text-equivalent"},
+        {"kind": "file", "role": "source-code", "path": "app/AsyncDistributedStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m21-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "The current M21 workbook exposes a confidence-aware diagnostic and a diagnostic misconception-repair map without asserting a score or mastery result.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "10-confidence-aware-diagnostic--eight-fast-deep-checks"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "diagnostic-misconception-repair-map"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m21-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "The current M21 workbook exposes a retrieval schedule anchor for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "retrieval-schedule"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m21-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "The current M21 workbook exposes an async collector evidence dossier, required-deliverable location, and review-rubric location for later inspection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "11-cumulative-project--atlas-async-collector-evidence-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "required-deliverables"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "review-rubric"}
+      ],
+      "limitations": ["A project brief and rubric anchors do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m21-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "The current M21 workbook exposes a candidate-only constructive oral-defense protocol with invitation, hint, counterexample, transfer, reflection, and learner-controlled evidence-summary anchors.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "supportive-oral-defense-protocol"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "invitation-and-starting-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "hint-ladder"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "counterexample-repair"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "transfer-question"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/21_async_distributed_systems.md", "locator": "reflection-and-learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["These protocol anchors do not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m21-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The candidate-only M21 companion binds a Teaching Assistant opening, artifact focus, and repair move to async/distributed evidence boundaries.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m21.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m21-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The candidate-only M21 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m21.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m21-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The candidate-only M21 companion binds its declared async/distributed evidence card to the canonical M22 forward handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m21.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M21, or authorization to bypass M22 prerequisites."]
+    },
+    {
+      "id": "m21-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "The current candidate input set binds the M21 async/distributed studio, its registry entry, a bounded local reference model, and its discovered teaching-model test.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/AsyncDistributedStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module21_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module21_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, distributed-systems correctness, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m21-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m21.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m21/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

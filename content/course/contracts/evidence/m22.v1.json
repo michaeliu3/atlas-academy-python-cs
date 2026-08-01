@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m22",
+  "purpose": "Bind M22's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M22 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m22-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M22 workbook visibly places its M21 prerequisite and canonical M23 forward handoff in the connected learning route.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "1-position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "14-handoff--what-module-22-deliberately-leaves-open"}
+      ],
+      "limitations": ["Resolving route headings does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m22-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M22 declares six ordered sessions that progress from trust boundaries through authority, data flow, cryptographic purpose, release impact, and incident reconstruction.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "2-session-1--trust-boundary-atlas-what-can-atlas-lose-and-where-does-meaning-change"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "3-session-2--identity-to-decision-ladder-who-may-cause-this-effect"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "4-session-3--data-to-authority-pipeline-why-one-sanitize-box-cannot-protect-every-sink"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "5-session-4--cryptographic-purpose-map-what-does-this-primitive-actually-establish"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "6-session-5--release-provenance-and-human-impact-what-must-be-true-to-ship-responsibly"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "7-session-6--privacy-aware-incident-reconstruction-how-do-we-learn-without-overclaiming"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m22-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M22 visibly derives a control from a stated boundary and threat question before treating a mechanism as protection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "derive-a-control-from-first-principles"}
+      ],
+      "limitations": ["A named first-principles section does not prove security correctness, instructional adequacy, or learner comprehension."]
+    },
+    {
+      "id": "m22-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M22 binds distinct visible sections for boundary and authority definitions, control derivation, purpose limits, and incident evidence reasoning as a candidate rigor bundle.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "boundary-card"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "the-authority-tuple"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "derive-a-control-from-first-principles"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "purpose-map"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "facts-hypotheses-and-unknowns"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, counterexamples, experiments, or source claims."]
+    },
+    {
+      "id": "m22-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M22 includes separate trace, promotion-boundary, and release-review code-reading labs that make a security decision inspectable before a conclusion.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "code-reading-lab-s1--trace-promotion"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "code-reading-lab-s3--find-the-first-promotion"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "code-reading-lab-s5--review-the-release-and-denial"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a secure system."]
+    },
+    {
+      "id": "m22-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M22 visibly asks for a prediction about correlation before revealing the authority-boundary repair.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "prediction-checkpoint--correlation-is-not-authority"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m22-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M22 includes a transfer task that carries one boundary rule to a new sink while keeping the original safety boundary explicit.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "transfer-task--one-new-sink-same-boundary-rule"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
+    },
+    {
+      "id": "m22-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M22's workbook resource route and its canonical source map and audit addendum expose a candidate source, reuse, and claim-linkage route.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "13-resource-route-and-source-discipline"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module22_security_trust_source_map.md", "locator": "primary-source-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module22_security_trust_source_audit_addendum.md", "locator": "source-and-reuse-ledger"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m22-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M22 binds its Trust Control Room text-equivalent route, implementation surface, and module-specific rendered regression surface as candidate visual evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "8-atlas-trust-control-room--visual-studio-text-equivalent"},
+        {"kind": "file", "role": "source-code", "path": "app/SecurityTrustStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m22-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M22 exposes confidence-aware diagnostic prompts and a nearest-overclaim misconception repair map rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "10-confidence-aware-diagnostic--eight-fast-deep-checks"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "misconception-map--nearest-tempting-overclaims"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m22-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M22 includes a visible retrieval schedule for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "retrieval-schedule"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m22-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M22 specifies an Atlas Trust and Release Dossier with required deliverables and a constructive review rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "11-cumulative-project--atlas-trust--release-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "required-deliverables"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "review-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m22-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M22 contains a conversational oral-defense protocol with a hint ladder, counterexample turn, transfer turn, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "conversational-oral-defense--m22"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "hint-ladder"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "counterexample-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "transfer-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/22_security_privacy_trust_boundaries.md", "locator": "reflection-and-learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m22-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M22 companion binds a Teaching Assistant opening, artifact focus, and repair move to the trust-boundary reasoning route.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m22.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m22-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M22 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m22.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m22-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M22 companion carries a trust-boundary evidence card into the canonical M23 handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m22.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M22, or authorization to bypass M23 prerequisites."]
+    },
+    {
+      "id": "m22-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M22 binds its Trust Control Room, explicit registry entry, bounded Python reference model, and module-specific behavioral teaching-model test.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/SecurityTrustStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module22_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module22_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, security correctness, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m22-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m22.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m22/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

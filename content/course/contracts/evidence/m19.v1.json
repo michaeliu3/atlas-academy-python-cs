@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m19",
+  "purpose": "Bind M19's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M19 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m19-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The current M19 workbook visibly declares its knowledge-system position and bounded downstream handoffs without treating them as route-completion or release evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "1-position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "15-exact-boundaries-and-handoffs"}
+      ],
+      "limitations": ["Resolving a map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m19-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "The current M19 workbook has six ordered visible session headings that span concurrent histories, logical transitions, coordination, progress, execution-model choice, and an evidence defense.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "2-session-1--a-second-worker-creates-histories"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "3-session-2--protect-one-logical-transition"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "4-session-3--predicates-permits-and-item-ownership"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "5-session-4--progress-can-fail"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "6-session-5--choose-the-python-execution-model-from-first-principles"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "7-session-6--atlas-multi-worker-evidence-defense"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m19-first-principles",
+      "criterionId": "first-principles",
+      "claim": "The current M19 workbook exposes a first-principles derivation anchor for recovering concurrency reasoning from a declared invariant and history.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "derivation-from-first-principles"}
+      ],
+      "limitations": ["A visible first-principles anchor does not prove mathematical adequacy, implementation correctness, or learner comprehension."]
+    },
+    {
+      "id": "m19-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "The current M19 workbook exposes separate structural locations for a sequential specification, derivation, linearization/proof idea, counterexample repair, and bounded work/span reasoning.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "13-the-sequential-specification-is-the-authority"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "derivation-from-first-principles"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "linearization"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "supportive-oral-defense-route"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "64-work-span-and-bounded-speedup-reasoning"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical reasoning, or source claims."]
+    },
+    {
+      "id": "m19-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "The current M19 workbook exposes separate code-reading, debugging, and integrated patch-defense anchors for a bounded concurrency trace.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "code-reading-lab-l1--valid-local-updates-invalid-global-index"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "code-reading-lab-l4--safe-state-no-result"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "code-reading-lab-l6--integrated-patch-defense"}
+      ],
+      "limitations": ["Visible task anchors do not prove that a learner can independently read, debug, or design a concurrent system."]
+    },
+    {
+      "id": "m19-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "The current M19 workbook exposes a prediction record before a learner compares an interleaving or repair to later evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "prediction-record"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m19-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "The current M19 workbook exposes a bounded transfer anchor into M20, M21, and M24 while keeping those later modules' own claims separate.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "level-8--transfer-to-m20-m21-and-m24"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m19-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "The current M19 workbook and its canonical source map plus source-audit addendum expose a learner reading route and two scoped ledger locations for candidate inspection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "14-directed-primary-source-route"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module19_concurrency_parallelism_source_map.md", "locator": "claim-and-evidence-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md", "locator": "source-and-reuse-ledger"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m19-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "The current M19 workbook binds its interactive-studio section to the module-specific concurrency studio and rendered-HTML regression surface as structural candidate inputs.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "8-six-view-interactive-html-studio"},
+        {"kind": "file", "role": "source-code", "path": "app/ConcurrencyStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m19-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "The current M19 workbook exposes a confidence-aware understanding check and a misconception repair map without asserting a score or mastery result.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "10-confidence-aware-understanding-check"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "misconception-repair-map"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m19-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "The current M19 workbook exposes a spaced-retrieval anchor for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "135-spaced-retrieval"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m19-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "The current M19 workbook exposes a multi-worker correctness dossier, machine-readable evidence-packet location, and acceptance-invariant location for later inspection.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "11-cumulative-project--atlas-multi-worker-correctness-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "117-machine-readable-evidence-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "119-acceptance-invariants"}
+      ],
+      "limitations": ["A project brief and acceptance anchors do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m19-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "The current M19 workbook exposes a constructive oral-defense prompt, candidate-only route, intake, response loop, and hint-ladder anchors for later review.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "session-6-oral-defense"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "supportive-oral-defense-route"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "121-learner-intake-before-a-hint"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "122-ta-response-loop"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "123-hint-ladder"}
+      ],
+      "limitations": ["These protocol anchors do not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m19-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The candidate-only M19 companion binds a Teaching Assistant opening, artifact focus, and repair move to concurrency evidence boundaries.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m19.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m19-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The candidate-only M19 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m19.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m19-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The candidate-only M19 companion binds its declared concurrency evidence card to the canonical M20 forward handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m19.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M19, or authorization to bypass M20 prerequisites."]
+    },
+    {
+      "id": "m19-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "The current candidate input set binds the M19 concurrency studio, its registry entry, a bounded local reference model, and its discovered teaching-model test.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/ConcurrencyStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module19_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module19_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, concurrency correctness, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m19-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m19.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m19/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}
