@@ -86,6 +86,10 @@ jobs:
         run: python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"
       - name: Verify discovered teaching-model suites execute reference-model code
         run: python scripts/verify_teaching_model_exercises.py
+      - name: Verify the bounded M32 NumPy authoring observation
+        run: |
+          python -m pip install --disable-pip-version-check --only-binary=:all: numpy==2.3.5
+          python scripts/test_m32_numpy_layout_observation.py
       - name: Run deterministic local teaching models
         run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"
 

@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "e1fae2708df3aa0154bd7ed49ba14ae8bc3da0b8a0aaad3ee48f21ca2d6b767c"
+      "sha256": "dee9c52cbe4b3c9dbd7c7a9f51dbd05add8009441b346360967abaed96b7c6b3"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -66,11 +66,11 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "7eeb69f1807c84522bd329359156b1bd0f80ac4cdcdd574297cbbcb70ecf00aa"
+      "sha256": "e57961df23cac481f48611b966bf4a09240f29bb29b802f57e4d2d4144c686df"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "3d123e39b4bcf7b940cd1416890ad62ae2c5db8fb55e9bd97217f53a20aa8f6f"
+      "sha256": "0fe8e0c19570a048b6a3c968a096ca21e2a9cc94d3ad97aab609c1367aa02333"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
@@ -338,7 +338,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "567c3f6b6adfe4279cd36a25cfe511f05578141a271e6ef9ab17027b3c0cf67f"
+      "sha256": "426b864a1b03d616cb3b75791a9bb306d9d34a3888631c4dd146aa0e4003090c"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -590,7 +590,7 @@
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "702a535992d1328772d7a0cde46ca032f4de0b6c9c3ba80bf80337da2643fc5f"
+      "sha256": "fd1955e8d1543263a270ab8d18fbcde1a2eab1614718a1af2645e6ce4cda96a7"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",

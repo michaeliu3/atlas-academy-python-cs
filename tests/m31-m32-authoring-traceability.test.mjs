@@ -1,0 +1,47 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+const m31Path = "content/authoring/m31_optimization_information_workbook.v1.md";
+const m32Path = "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md";
+
+test("M31 exposes compact claim-to-source routes and labels non-runnable sketches", async () => {
+  const m31 = await readFile(m31Path, "utf8");
+
+  assert.match(m31, /C04 -> S02–S04/u);
+  assert.match(m31, /C05 -> S02–S04, S09–S10/u);
+  assert.match(m31, /C07 -> S05/iu);
+  assert.match(m31, /C08 -> S06/iu);
+  assert.match(m31, /Blei, Kucukelbir, and McAuliffe/u);
+  assert.match(m31, /Robbins and Monro/u);
+  assert.match(m31, /domain containing the segment from/u);
+  assert.match(m31, /language-neutral pseudocode, not directly runnable Python/u);
+  assert.match(m31, /```text\nraw = point - step_size \* gradient\(point\)/u);
+  assert.match(m31, /language-neutral estimator pseudocode, not a standalone Python/u);
+  assert.match(m31, /```text\nlog_weight = log_joint\(x, z\) - log_q\(z, x\)/u);
+});
+
+test("M32 connects claim tags to one pinned CPU-only NumPy observation", async () => {
+  const [m32, observation, pythonTest] = await Promise.all([
+    readFile(m32Path, "utf8"),
+    readFile("scripts/m32_numpy_layout_observation.py", "utf8"),
+    readFile("scripts/test_m32_numpy_layout_observation.py", "utf8"),
+  ]);
+
+  assert.match(m32, /M32-C03–M32-C04 -> S32-03–S32-04/u);
+  assert.match(m32, /M32-C08–M32-C09 -> S32-10–S32-12/u);
+  assert.match(m32, /A `text` fence is \*\*language-neutral pseudocode\*\*/u);
+  assert.match(m32, /CPU-only NumPy observation/u);
+  assert.match(m32, /NumPy 2\.3\.5/u);
+  assert.match(m32, /exact overlap check/u);
+  assert.match(m32, /conservative possibility check/u);
+  assert.match(m32, /~~~text\ndef prepare_for_kernel\(batch\):/u);
+  assert.match(m32, /~~~text\ndef loss\(theta, x, y\):/u);
+  assert.doesNotMatch(m32, /~~~python\ndef prepare_for_kernel\(batch\):/u);
+
+  assert.match(observation, /PINNED_NUMPY_VERSION = "2\.3\.5"/u);
+  assert.match(observation, /np\.shares_memory/u);
+  assert.match(observation, /np\.may_share_memory/u);
+  assert.match(observation, /one CPU-only in-process NumPy ndarray observation/u);
+  assert.match(pythonTest, /view_copy_and_broadcasting_observation/u);
+});

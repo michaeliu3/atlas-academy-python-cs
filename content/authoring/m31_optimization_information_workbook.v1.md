@@ -68,6 +68,13 @@ not an automatic decision.
 | **[LIBRARY / TOOL CONTRACT]** | A documented interface and configured behavior. | The validity of the mathematical formulation or evidence interpretation. |
 | **[AI PROPOSAL]** | A candidate derivation, experiment, or code review. | Correctness, authority, source validity, or a reason to skip inspection. |
 
+### Claim/source labels
+
+Compact labels such as `C04 -> S02–S04` identify the exact claim and its
+source route in the [M31 source map](../source-maps/module31_optimization_information_source_map.md).
+They are navigation aids, not borrowed proof text: the assumptions and
+counterexample beside the card still control what may be concluded.
+
 ### Core evidence card
 
 Keep this card beside every calculation. It is intentionally more useful than
@@ -111,6 +118,9 @@ If 1 is fragile, bridge through M28. If 2 is fragile, bridge through M29. If
 ### Core question
 
 **What exactly are we allowed to optimize?**
+
+**Claim/source trace:** `C01 -> S01, S03` — formulation and objective/constraint
+scope. Keep the owner, units, proxy boundary, and non-claim beside the model.
 
 Consider a fictional, non-consequential allocation problem. A study team has a
 fixed time budget and wants to choose two preparation activities `x` and `y`.
@@ -208,6 +218,9 @@ boundary before accepting any solver trace.
 ### Core question
 
 **When does a derivative-based local statement become meaningful?**
+
+**Claim/source trace:** `C02–C03 -> S02–S04` — stationarity, curvature,
+convexity, and smoothness have a named domain and theorem regime.
 
 For the Session 1 objective,
 
@@ -349,6 +362,9 @@ global correctness.
 
 **What would make a constrained claim inspectable rather than ceremonial?**
 
+**Claim/source trace:** `C04 -> S02–S04` — primal/dual construction, a named
+constraint qualification, and convexity determine the certificate's scope.
+
 For the convention `g(x,y) <= 0`, use
 
 \[
@@ -481,6 +497,9 @@ need before trusting an agent’s “KKT solved it” explanation.
 
 **What does one algorithm’s trace actually show?**
 
+**Claim/source trace:** `C05 -> S02–S04, S09–S10` — a theorem, an API status,
+and a finite trace are distinct kinds of evidence.
+
 For the same fixture, projected gradient descent uses a deliberately visible
 update:
 
@@ -495,9 +514,9 @@ independent check.
 
 ### Theorem card — do not turn one trace into the theorem
 
-For an **unconstrained**, differentiable, \(L\)-smooth objective, an exact
-gradient step \(x^+=x-\eta\nabla f(x)\) with \(0<\eta\leq1/L\) obeys the
-descent inequality
+For an **unconstrained**, differentiable, \(L\)-smooth objective on a convex
+domain containing the segment from \(x\) to \(x^+=x-\eta\nabla f(x)\), an
+exact gradient step with \(0<\eta\leq1/L\) obeys the descent inequality
 
 \[
 f(x^+)\leq f(x)-\eta\left(1-\frac{L\eta}{2}\right)
@@ -615,7 +634,11 @@ are useful diagnostics, each with a narrower scope.
 
 ### Code-reading/debugging task
 
-```python
+This is **language-neutral pseudocode, not directly runnable Python**. Its
+purpose is to expose the mathematical projection rule before choosing a point
+type, array library, or solver API.
+
+```text
 raw = point - step_size * gradient(point)
 if raw.x + raw.y <= 1:
     next_point = raw
@@ -652,6 +675,9 @@ reviewer to state the evidence it would need before making a convergence claim.
 ### Core question
 
 **What changes when an update uses an estimate rather than a full gradient?**
+
+**Claim/source trace:** `C06 -> S07–S08` — the sampling rule, target,
+dependence, variance, and step schedule limit any stochastic conclusion.
 
 For the scalar teaching fixture
 
@@ -811,6 +837,10 @@ one run into a generalization conclusion.
 
 **What is being compared, under which support and units?**
 
+**Claim/source trace:** `C07 -> S05`; `C08 -> S06` — distribution/support and
+log units govern information quantities, while the variational family governs
+the ELBO approximation claim.
+
 For finite categorical distributions `p` and `q`, in natural-log units,
 
 \[
@@ -948,7 +978,11 @@ decision consequences.
 
 ### Read the estimator boundary
 
-```python
+This is **language-neutral estimator pseudocode, not a standalone Python
+program**. It deliberately leaves the sampling, model, support, and estimator
+contract visible rather than hiding them behind helpers.
+
+```text
 log_weight = log_joint(x, z) - log_q(z, x)
 elbo_estimate = log_weight.mean()
 ```
@@ -1235,10 +1269,12 @@ solutions. The reading routes below were checked on **2026-08-01**.
 
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
-| [Stanford EE364a Convex Optimization I](https://web.stanford.edu/class/ee364a/) and its [lecture route](https://web.stanford.edu/class/ee364a/lectures.html) | Sessions 1–4: formulation, convexity, optimality conditions, duality, and algorithm scope. | Link-only and original Atlas paraphrase/examples; course assets and linked texts have their own terms. |
-| [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
-| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | Sessions 5–6: entropy, cross-entropy, KL direction, support, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
-| [SciPy `minimize` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) | Sessions 3–5: distinguish a mathematical condition from an API/grammar/solver contract. | Documentation is linked for contract reading; fixtures remain original and pin versions before a concrete implementation claim. |
+| [Stanford EE364a Convex Optimization I](https://web.stanford.edu/class/ee364a/) and its [lecture route](https://web.stanford.edu/class/ee364a/lectures.html) | `C01–C05`, Sessions 1–4: formulation, convexity, optimality conditions, duality, and algorithm scope. | Link-only and original Atlas paraphrase/examples; course assets and linked texts have their own terms. |
+| [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | `C01`, `C04–C05`, Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
+| [Robbins and Monro, *A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586) and [Ghadimi and Lan, *Stochastic First- and Zeroth-Order Methods*](https://doi.org/10.1137/120880811) | `C06`, Session 5: stated stochastic-estimator and approximate-stationarity boundaries. | Link-only/original Atlas examples; do not copy proofs, figures, experimental setups, or publisher text. |
+| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | `C07`, Session 6: entropy, cross-entropy, KL direction, support, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
+| [Blei, Kucukelbir, and McAuliffe, *Variational Inference*](https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf) | `C08`, Session 6: ELBO/KL direction, variational-family assumptions, and approximation limits. | Link-only/original Atlas derivation and example; do not copy paper text, figures, tables, or proofs. |
+| [SciPy `minimize` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) | `C04–C05`, Sessions 3–5: distinguish a mathematical condition from an API/grammar/solver contract. | Documentation is linked for contract reading; fixtures remain original and pin versions before a concrete implementation claim. |
 
 For the fuller claim-to-source ledger, source rationale, access/reuse cautions,
 and original-source links, use the instructor-facing [M31 source map](../source-maps/module31_optimization_information_source_map.md)

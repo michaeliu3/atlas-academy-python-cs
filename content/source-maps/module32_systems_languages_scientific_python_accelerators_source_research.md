@@ -71,7 +71,7 @@ or attribution obligations into a future course asset.
 | --- | --- | --- | --- | --- |
 | S32-01 | [Extending Python with C or C++](https://docs.python.org/3.14/extending/extending.html), [C API stability](https://docs.python.org/3.14/c-api/stable.html), and [free-threaded extension support](https://docs.python.org/3/howto/free-threading-extensions.html) | Python Software Foundation (PSF) | A CPython extension can define native object types or call C/system interfaces. Limited API/Stable ABI, private API, and free-threaded extension support are distinct contracts. | [PSF License v2](https://docs.python.org/3.14/license.html). Link-only/original paraphrase; do not copy documentation or extension examples. Pin Python minor version and build target. |
 | S32-02 | [Buffer protocol](https://docs.python.org/3.14/c-api/buffer.html) and [memoryview](https://docs.python.org/3/library/stdtypes.html#memory-views) | PSF | A buffer request can describe data, shape/strides, item size, format, writability, and ownership/release duties; contiguity is requested, not assumed. | PSF License v2. Link-only/original diagrams and fixtures only. |
-| S32-03 | [NumPy ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html), [array layout](https://numpy.org/doc/stable/reference/arrays.ndarray.html), and [copies/views](https://numpy.org/doc/stable/user/basics.copies.html) | NumPy Developers | An ndarray has homogeneous fixed-size elements and exposes dtype, shape, strides, layout flags, and a base/ownership relation. | [NumPy BSD-3-Clause license](https://numpy.org/doc/stable/license.html). Link-only/original examples; recheck exact version/API behavior used by a future lesson. |
+| S32-03 | [NumPy ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html), [array layout](https://numpy.org/doc/stable/reference/arrays.ndarray.html), [copies/views](https://numpy.org/doc/stable/user/basics.copies.html), [`shares_memory`](https://numpy.org/doc/stable/reference/generated/numpy.shares_memory.html), and [`may_share_memory`](https://numpy.org/doc/stable/reference/generated/numpy.may_share_memory.html) | NumPy Developers | An ndarray has homogeneous fixed-size elements and exposes dtype, shape, strides, layout flags, and a base/ownership relation. `shares_memory` is exact but can be expensive for difficult layouts; `may_share_memory` is conservative. | [NumPy BSD-3-Clause license](https://numpy.org/doc/stable/license.html). Link-only/original examples; the private M32 observation pins NumPy 2.3.5 and must be rechecked before a future lesson/release. |
 | S32-04 | [NumPy broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html), [interoperability](https://numpy.org/doc/stable/user/basics.interoperability.html), and [performant multi-core code](https://numpy.org/doc/stable/user/basics.performant_code.html) | NumPy Developers | Broadcast shape rules, array boundary mechanisms, intermediate-allocation risk, and possible interaction with native thread pools. | NumPy BSD-3-Clause. Link-only/original fixtures; no imported benchmark values or diagrams. |
 | S32-05 | [SciPy tutorial](https://docs.scipy.org/doc/scipy/tutorial/index.html) and [Array API capability caveats](https://docs.scipy.org/doc/scipy/dev/api-dev/array_api.html) | SciPy Developers | Scientific algorithms supply a distinct layer above an array backend; compatibility is function-, backend-, and device-specific. | [SciPy BSD-3-Clause license](https://github.com/scipy/scipy/blob/main/LICENSE.txt). Link-only/original examples; never generalize capability notes into blanket GPU support. |
 | S32-06 | [Cython compilation](https://cython.readthedocs.io/en/stable/src/userguide/source_files_and_compilation.html), [typed memoryviews](https://cython.readthedocs.io/en/3.1.x/src/userguide/memoryviews.html), and [parallelism](https://cython.readthedocs.io/en/latest/src/userguide/parallelism.html) | Cython contributors | An annotated Python/Cython source can be compiled through C/C++ into an extension; typed memoryviews model buffer layouts and native parallelism still needs an ownership argument. | [Cython Apache-2.0 license](https://github.com/cython/cython/blob/master/LICENSE.txt). Link-only/original examples; a documentation page is not automatically a code-sample reuse grant. |
@@ -125,7 +125,7 @@ studio, or live oral-defense implementation.
 | --- | --- | --- | --- |
 | **M32-S01 — System boundaries: Python orchestration, native kernels, and scientific-array contracts** (M12) | S32-01–S32-06 | Present a tiny, original orchestration/kernel pseudocode boundary; have the learner label public inputs, dtype/shape/layout, owner, error behavior, and version assumption before revealing a proposed implementation. | **Boundary-contract map.** It does not assert that a real extension is safe, zero-copy, portable, or compiled. |
 | **M32-S02 — Execution and transfer: from Python request to CPU, device, and memory hierarchy** (M17) | S32-08–S32-10, S32-12 | Ask for a prediction of where an input lives and what would have to happen before a host can observe the result; then contrast dispatch time with a completion-aware measurement design. | **Execution-transfer trace with one falsifiable performance prediction.** It does not claim that a GPU route overlaps work or wins on the learner’s hardware. |
-| **M32-S03 — Array layout, vectorization, numerical behavior, and measurement** (M24, M28) | S32-02–S32-07, S32-11 | Code-read two original array pipelines with equal shapes but different strides, views/copies, broadcasting intermediates, and dtypes. Predict the semantic and cost risk before a controlled benchmark card. | **Layout-numerics note and performance-evidence card.** It labels all timing as an observation, not a general law of vectorization. |
+| **M32-S03 — Array layout, vectorization, numerical behavior, and measurement** (M24, M28) | S32-02–S32-07, S32-11 | Code-read two original array pipelines with equal shapes but different strides, views/copies, broadcasting intermediates, and dtypes; then inspect one fixed CPU-only NumPy 2.3.5 view/copy/broadcast result against a semantic oracle. Predict the semantic and cost risk before a controlled benchmark card. | **Layout-numerics note and performance-evidence card.** It labels the fixed observation as one named environment result and all timing as an observation, not a general law of vectorization. |
 | **M32-S04 — Parallel execution, buffer ownership, and synchronization** (M19) | S32-01–S32-02, S32-06–S32-10, S32-12 | Draw a host/device or multi-worker timeline, then inject one early-buffer-reuse or missing-event fault for the learner to diagnose. | **Buffer-ownership timeline and failure probe.** A passed output is not a proof of race freedom, liveness, or overlap. |
 | **M32-S05 — Autodiff, kernels, precision, and optimization traces** (M28, M31) | S32-10–S32-12 | Read a small original scalar loss trace: values, shapes, dtype, graph/transform boundary, gradient, and a finite-difference check. Require the learner to name the claim that remains unproved after matching gradients. | **Autodiff-execution trace.** It does not turn a framework derivative into objective validity, convergence, or numerical-stability proof. |
 | **M32-S06 — Reproducible accelerator systems architecture defense** (M12, M17, M19, M24, M28, M31) | S32-01–S32-13 | Assemble the prior artifacts into a deliberately narrow architecture-defense packet. The oral discussion asks what could change the result without changing the source code and what measurement would most reduce uncertainty. | **Scientific Python & Accelerators Dossier and learner-controlled oral-defense summary.** It is an evidence record, not a pass/fail exam, deployment approval, or portability guarantee. |
@@ -173,16 +173,20 @@ release input, or evidence that any write succeeded.
    Numba, CUDA/HIP/ROCm, compilers, BLAS, drivers, and device architecture must
    be captured by exact version/build identifiers. Current links are research
    anchors, not release pins.
-3. **A bounded local reference fixture and focused teaching test now exist;
-   no learner studio or platform model exists.** A private M32 workbook now
-   supplies six draft sessions, diagnostics, a dossier rubric, and TA/Study
-   Partner oral material. `lib/m32-systems-evidence-fixture.js` exposes only
-   fixed layout/handoff metadata, logical temporary shapes, an event-label
-   ownership timeline, and one scalar reverse-mode trace. It is not a NumPy,
-   buffer-protocol, CUDA/HIP, JAX, or PyTorch model, semantic oracle for a real
-   program, or safe learner interaction. Any future lab must avoid arbitrary
-   learner code, network/package installation, credentials, filesystem access
-   beyond its declared scope, and undisclosed external model calls.
+3. **Bounded local references and focused teaching tests now exist; no learner
+    studio or platform model exists.** A private M32 workbook now supplies six
+    draft sessions, diagnostics, a dossier rubric, and TA/Study Partner oral
+    material. `lib/m32-systems-evidence-fixture.js` exposes only fixed
+    layout/handoff metadata, logical temporary shapes, an event-label ownership
+    timeline, and one scalar reverse-mode trace. Separately,
+    `scripts/m32_numpy_layout_observation.py` is a pinned NumPy 2.3.5,
+    CPU-only observation of named views, a copy, and a broadcasting result;
+    `scripts/test_m32_numpy_layout_observation.py` fixes its narrow expected
+    facts. Neither is a buffer-protocol, CUDA/HIP, JAX, or PyTorch model,
+    semantic oracle for a real program, benchmark, or safe learner interaction.
+    Any future lab must avoid arbitrary learner code, network/package
+    installation, credentials, filesystem access beyond its declared scope, and
+    undisclosed external model calls.
 4. **Create the reviewed delivery and release binding.** The private draft does
    not yet bind its sessions, source linkage, visual alternatives, diagnostics,
    review records, dossier, or oral workflow to the canonical learner route,
@@ -213,9 +217,10 @@ release input, or evidence that any write succeeded.
       records a truthful availability/release decision.
 - [ ] Build original explanatory diagrams with adjacent concise text
       alternatives, not source screenshots or copied figures.
-- [~] A shared local fixture/test now makes four fixed M32 reasoning cards
-      inspectable: layout/handoff, pairwise temporary shape, buffer last use,
-      and scalar reverse-mode arithmetic. Platform-specific semantic oracles,
+- [~] Shared local fixture/tests now make four symbolic M32 reasoning cards
+      inspectable—layout/handoff, pairwise temporary shape, buffer last use,
+      and scalar reverse-mode arithmetic—plus one pinned CPU-only NumPy 2.3.5
+      view/copy/broadcast observation. Platform-specific semantic oracles,
       measurement evidence, learner interaction, and independent lesson review
       remain open.
 - [ ] Bind every performance/numerical claim to a measured environment record,

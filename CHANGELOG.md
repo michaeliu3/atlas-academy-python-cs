@@ -7,6 +7,16 @@ actually published.
 
 ## Unreleased
 
+- Strengthened the hidden M31–M32 authoring packs after a narrow primary-source
+  recheck. M31 now gives compact claim-to-source routes, states the smoothness
+  domain for its descent card, and labels its mathematical sketches as
+  pseudocode. M32 now distinguishes pseudocode from executable fragments and
+  includes a fixed, tested NumPy 2.3.5 CPU-only view/copy/broadcast observation
+  with explicit non-claims. Course CI verifies that bounded observation and its
+  provenance policy is re-bound to the reviewed workflow source. These are
+  private authoring improvements only: neither module is learner-ready,
+  published, unlocked, deployed, or a claim of learner mastery or university
+  equivalence.
 - Deepened the M33–M36 **authoring-only** workbooks with source-calibrated,
   first-principles reasoning traces: NFA/DFA construction and a HALT reduction;
   A*/Bellman update decisions; representation-aware likelihood and ridge

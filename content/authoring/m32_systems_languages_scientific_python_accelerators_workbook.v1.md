@@ -92,6 +92,22 @@ a route or an unlock.
 | **[MEASUREMENT]** | An observed comparison under one protocol and environment. | A mechanism, causal bottleneck, or universal speedup. |
 | **[AI PROPOSAL]** | A candidate trace, derivation, benchmark design, or code review. | Authority, correctness, hardware access, or a reason to skip inspection. |
 
+### Claim/source labels
+
+Compact labels such as `M32-C03 -> S32-03–S32-04` point to the exact claim and
+source route in the [M32 source research dossier](../source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md).
+They do not make a library call, a local observation, or a framework result
+portable: the stated assumptions and non-claim still control the conclusion.
+
+### Code labels
+
+- A `text` fence is **language-neutral pseudocode** for reading a contract or
+  trace. It is intentionally not directly runnable Python.
+- A `python` fence is a syntax-valid compact Python fragment; its surrounding
+  exercise still declares the inputs, environment, and limited claim.
+- The M32 NumPy observation names an exact package version and has a focused
+  test. It remains one CPU-only observation, not a benchmark or platform model.
+
 ### The systems evidence card
 
 Keep this compact card beside every trace or timing result.
@@ -139,6 +155,9 @@ bridge through M31 before continuing. Do not begin by installing a framework.
 **What public promise exists between Python orchestration and lower-level
 work?**
 
+**Claim/source trace:** `M32-C01–M32-C02 -> S32-01–S32-02` — public contract,
+buffer/layout, lifetime, and version facts must be named before a no-copy claim.
+
 The first systems mistake is to start with a tool label: "C extension,"
 "vectorization," "GPU," or "compiler." Start instead with a boundary:
 who calls whom, which object is passed, what may mutate it, what errors are
@@ -147,7 +166,7 @@ visible, and which implementation/version is in scope.
 For a small original teaching fixture, imagine a Python function that sends a
 two-dimensional batch to a lower-level numerical routine:
 
-~~~python
+~~~text
 def summarize_batch(batch):
     prepared = prepare_for_kernel(batch)
     result = kernel_summary(prepared)
@@ -180,7 +199,7 @@ the hidden behavior.
 
 Suppose the caller passes a strided view:
 
-~~~python
+~~~text
 window = samples[:, ::2]
 answer = summarize_batch(window)
 ~~~
@@ -206,7 +225,7 @@ ownership or transfer path.
 
 ### Code-reading lab — a contract hidden by a helpful helper
 
-~~~python
+~~~text
 def prepare_for_kernel(batch):
     if batch.ndim != 2:
         raise ValueError("expected a rank-2 batch")
@@ -289,6 +308,9 @@ proposal by brand name.
 **Where do data and work actually move between a host request and a visible
 result?**
 
+**Claim/source trace:** `M32-C05–M32-C07 -> S32-08–S32-10, S32-12` — dispatch,
+transfer, completion, and timing boundaries depend on one named backend.
+
 An asynchronous request is not the same event as completed work. A host can
 prepare input, arrange transfer, enqueue work, continue with another task, and
 observe a result later. On a CPU-only path, queues and native thread pools can
@@ -336,7 +358,7 @@ For a performance statement, specify:
 
 Read this deliberately incomplete timing fragment:
 
-~~~python
+~~~text
 start = clock()
 ticket = submit_work(input_array)
 elapsed = clock() - start
@@ -362,7 +384,7 @@ wait; it does not retroactively make the earlier clock a completed-work clock.
 
 ### Code-reading lab — make the missing event explicit
 
-~~~python
+~~~text
 warm_up(input_array)
 
 start = clock()
@@ -426,6 +448,10 @@ result? Connect this to M17's memory hierarchy rather than a device slogan.
 **What does an array operation mean once shape, dtype, layout, aliasing, and
 measurement are made visible?**
 
+**Claim/source trace:** `M32-C03–M32-C04 -> S32-03–S32-04` — array metadata,
+alias/copy state, broadcasting semantics, and the semantic oracle precede any
+cost claim.
+
 An array is not just a rectangle of numbers. A useful representation account
 includes homogeneous element type, shape and axes, indexing/strides/layout,
 memory ownership or base relationship, writable state, device residency, and
@@ -436,7 +462,7 @@ paths and legal mutations.
 
 Consider an original NumPy-like teaching fixture:
 
-~~~python
+~~~text
 base = make_array(shape=(3, 4), dtype="float32")
 forward = base[:, :3]
 reversed_columns = base[:, 3:0:-1]
@@ -474,7 +500,7 @@ measured speedup.
 
 ### Code-reading lab — compact expression, potentially large temporary
 
-~~~python
+~~~text
 differences = points[:, None, :] - centers[None, :, :]
 squared_distance = (differences * differences).sum(axis=2)
 ~~~
@@ -498,6 +524,34 @@ Before calling `m32PairwiseTemporaryCard({ n: 4, k: 3, d: 2 })`, predict the
 logical intermediate and reduced-output shapes plus their element counts.
 After inspection, explain why a larger logical temporary is a question for a
 measurement card rather than evidence that a particular backend allocated it.
+
+### CPU-only NumPy observation — inspect a real view, copy, and broadcast result
+
+**Claim/source trace:** `M32-C03–M32-C04 -> S32-03–S32-04`. Read or run the
+original [`m32_numpy_layout_observation.py`](../../scripts/m32_numpy_layout_observation.py)
+with its focused test. It pins **NumPy 2.3.5** and inspects only one in-process,
+CPU-only configuration:
+
+- a `float32` base array has shape `(3, 4)`, byte strides `(16, 4)`, and is
+  C-contiguous;
+- its reversed-column view has the same shape, byte strides `(16, -4)`, is not
+  C-contiguous, and shares an element with the base;
+- `ascontiguousarray` yields a C-contiguous array that does not share an element
+  with that simple reversed view; and
+- the explicit `points[:, None, :] - centers[None, :, :]` result has shape
+  `(2, 3, 2)`, `48` bytes, and reduces to the independently declared squared-
+  distance oracle `[[1, 1, 2], [5, 13, 10]]`.
+
+Before inspection, predict which pair shares an element and whether the
+broadcast result has the final reduced shape. Then distinguish two questions:
+`shares_memory` performs an exact overlap check (which can be expensive for
+hard layouts); `may_share_memory` is a conservative possibility check and can
+say “maybe” when no element overlaps. Neither settles a non-NumPy consumer's
+conversion, lifetime, device, peak-memory, or performance behavior.
+
+This is a fixed observation of named arrays, not a claim that broadcasting
+always allocates, that a particular backend cannot fuse work, or that a layout
+is faster.
 
 ### Numerical boundary — representation changes the claim
 
@@ -571,6 +625,9 @@ resource trade-off each makes, and which data would justify a choice.
 
 **Who owns a buffer, and what ordering condition makes its reuse legal?**
 
+**Claim/source trace:** `M32-C06 -> S32-02, S32-08–S32-10, S32-12` — an
+ownership statement requires a named last consumer and dependency event.
+
 Vectorization, parallel execution, and asynchrony are different ideas. A
 vectorized operation can be synchronous; a host can queue asynchronous work
 that uses one device; multiple workers can execute without safe ownership.
@@ -594,7 +651,7 @@ The word "parallel" does not fill in any of these fields.
 
 Read this abstract asynchronous fragment:
 
-~~~python
+~~~text
 slot = reserve_staging_buffer()
 enqueue_copy(slot, host_batch, queue)
 enqueue_kernel(slot, queue)
@@ -620,7 +677,7 @@ runtime's documented event/wait/lease mechanism.
 
 ### Code-reading/debugging lab — an early reuse hazard
 
-~~~python
+~~~text
 slot = reserve_staging_buffer()
 copy_ticket = enqueue_copy(slot, host_batch, stream_a)
 kernel_ticket = enqueue_kernel(slot, depends_on=copy_ticket, stream_a)
@@ -705,6 +762,9 @@ distinguishing queueing from overlap.
 **What does an automatic derivative validate, and what remains a modeling,
 systems, or numerical question?**
 
+**Claim/source trace:** `M32-C08–M32-C09 -> S32-10–S32-12` — a derivative and
+tolerance concern one implemented computation under a declared dtype/path.
+
 Autodiff transforms or traces a declared computation under framework-specific
 rules. It can produce a derivative of the implemented program on a named
 domain. It does not select a good objective, prove that data was represented
@@ -754,7 +814,7 @@ reasoning.
 
 ### Code-reading lab — separate framework semantics from the invariant
 
-~~~python
+~~~text
 def loss(theta, x, y):
     return (theta * x - y) ** 2
 
@@ -839,6 +899,10 @@ right next action is code, a derivation, a numerical check, or a design review.
 
 **Can you assemble an architecture and measurement record that a careful
 reviewer can inspect without confusing it for a portable recommendation?**
+
+**Claim/source trace:** `M32-C10–M32-C12 -> S32-12–S32-13` — reproducibility
+and benchmark reports require a declared environment, semantic oracle, and
+non-claim.
 
 The point of the final dossier is not to produce the biggest benchmark or a
 vendor-specific demo. It is to make a small systems claim inspectable from
@@ -1233,9 +1297,9 @@ remain gated synthesis work until their own requirements are complete.
 
 This workbook uses original explanations, fixtures, diagrams, and prompts. The
 linked material is for study and provenance; it is not copied source text,
-code, figures, benchmarks, or exercises. Research was accessed on
-2026-07-31; the university calibration route below was checked on
-2026-08-01. Documentation moves, so a future publication must recheck URLs,
+code, figures, benchmarks, or exercises. Research was rechecked for this
+bounded NumPy observation on **2026-08-01**; the university calibration route
+below was checked on the same date. Documentation moves, so a future publication must recheck URLs,
 versions, access dates, licenses, and exact environment scope.
 
 ### Learner-facing university calibration route
@@ -1249,7 +1313,7 @@ versions, access dates, licenses, and exact environment scope.
 | Source cluster | Claim linkage and reason to read | Reuse boundary |
 | --- | --- | --- |
 | [Python extension and C API](https://docs.python.org/3.14/extending/extending.html), [buffer protocol](https://docs.python.org/3.14/c-api/buffer.html), [memoryview](https://docs.python.org/3/library/stdtypes.html#memory-views) | Sessions 1 and 3: public/native boundaries, buffer descriptors, lifetime and contiguity requests. | PSF License v2; link-only and original paraphrase. Pin interpreter/build target before a concrete claim. |
-| [NumPy array layout](https://numpy.org/doc/stable/reference/arrays.ndarray.html), [copies and views](https://numpy.org/doc/stable/user/basics.copies.html), [broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) | Session 3: shape, dtype, strides, views/copies, broadcasting, allocation risk. | NumPy BSD-3-Clause; link-only and original fixtures. Recheck behavior/version before release. |
+| [NumPy array layout](https://numpy.org/doc/stable/reference/arrays.ndarray.html), [copies and views](https://numpy.org/doc/stable/user/basics.copies.html), [`shares_memory`](https://numpy.org/doc/stable/reference/generated/numpy.shares_memory.html), [`may_share_memory`](https://numpy.org/doc/stable/reference/generated/numpy.may_share_memory.html), and [broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) | `M32-C03–M32-C04`, Session 3: shape, dtype, strides, views/copies, exact-versus-conservative alias checks, broadcasting, and allocation risk. | NumPy BSD-3-Clause; link-only and original fixtures. The fixed observation pins NumPy 2.3.5; recheck behavior/version before release. |
 | [Cython memoryviews](https://cython.readthedocs.io/en/3.1.x/src/userguide/memoryviews.html), [Numba performance guidance](https://numba.readthedocs.io/en/stable/user/performance-tips.html) | Sessions 1 and 3: compiled/native routes are explicit contracts, not automatic gains. | Apache-2.0 and BSD-2-Clause respectively; link-only/original paraphrase. |
 | [CUDA asynchronous execution](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/asynchronous-execution.html), [HIP overview](https://rocm.docs.amd.com/projects/HIP/en/docs-6.1.0/) | Sessions 2 and 4: host/device distinction, streams, events, and backend-specific limits. | NVIDIA documentation is proprietary; ROCm components vary. Link-only; never infer universal support. |
 | [JAX asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html), [JAX autodiff](https://docs.jax.dev/en/latest/automatic-differentiation.html), [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html), [PyTorch autograd mechanics](https://docs.pytorch.org/docs/stable/notes/autograd.html) | Sessions 2, 4, and 5: readiness boundaries, framework-specific execution, and autodiff scope. | Apache-2.0/BSD-3-Clause projects; link-only/original paraphrase. Pin framework/backend/runtime/device versions. |
