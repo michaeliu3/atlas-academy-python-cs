@@ -191,8 +191,8 @@ equivalent claim from an AI summary, a test result, or a familiar buzzword.
 | M32 systems and scientific execution | execution-transfer/reproducibility dossier | records dtype, layout, device, seed, resource, profiling, and semantic-oracle boundaries | a fast accelerator result is portable, numerically identical, or operationally safe |
 | M33 formal limits | Formal Limits Claim Packet | checks encoding, reduction direction, complexity claim, and practical boundary | a timeout, failed run, or theorem label decides the usefulness of this instance |
 | M34 classical AI | problem-formulation/search/constraint/decision packet | separates candidates, state, constraints, uncertainty, search result, and authority | a planner, CSP, or expected-utility output is self-authorizing |
-| M35 machine learning | ML representation/evaluation evidence packet | checks baseline, data split, shift, objective, observability, and failure slices | a validation metric generalizes, is calibrated, or improves a learner's outcome |
-| M36 learning theory and reliable deep learning | reliable-learning limit/non-claim and reproducibility packet | bounds generalization, reliability, precision, distribution, and deployment claims | a theorem, benchmark, or green reliability check is a release guarantee |
+| M35 machine learning | **Machine Learning & Representation Dossier** | checks baseline, data split, shift, objective, observability, and failure slices | a validation metric generalizes, is calibrated, or improves a learner's outcome |
+| M36 learning theory and reliable deep learning | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its **Limit-and-Nonclaim Card**, **Theory–System Reproducibility Record**, and **Monitoring Extension to Reliable-Learning Evidence Map** | bounds generalization, reliability, precision, distribution, and deployment claims | a theorem, benchmark, or green reliability check is a release guarantee |
 
 The working synthesis move is deliberately small:
 
@@ -231,7 +231,7 @@ each relevant earlier artifact. The narrow claim under review is:
 | M33 formal limits | **Formal Limits Claim Packet** | States any encoding, reduction direction, resource model, or complexity claim actually used. | A timeout or theorem label does not decide this product outcome. If no formal claim is used, say so rather than decorating the dossier. |
 | M34 classical AI | **Classical AI Search, Constraints & Decision Packet** | Separates candidate eligibility, constraints, state, uncertainty, and policy authority. | A solver or planner output is not self-authorizing. |
 | M35 machine learning | **Machine Learning & Representation Dossier** | Supplies the baseline, split, representation, failure slice, and shift evidence for a learned proposal. | A validation result is not calibrated generalization or learner benefit. |
-| M36 reliable learning | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its Reliable-Learning Evidence Map and reproducibility record | Names the theorem/limit scope, monitoring hypothesis, stop owner, and deployment non-claim. | A guarantee or benchmark is not a release certificate. |
+| M36 reliable learning | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its **Limit-and-Nonclaim Card**, **Theory–System Reproducibility Record**, and **Monitoring Extension to Reliable-Learning Evidence Map** | Names the theorem/limit scope, monitoring hypothesis, stop owner, and deployment non-claim. | A guarantee or benchmark is not a release certificate. |
 
 One receipt may support only one narrow fragment of the claim. When the required
 learner-ready artifact has not been inspected, write **[UNAVAILABLE — DEFER OR

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("M25 and M26 name the actual M35/M36 candidate receipts", async () => {
+test("M25 and M26 name the actual advanced candidate receipts", async () => {
   const [m25, m26, contracts] = await Promise.all([
     readFile(new URL("../content/modules/25_evidence_grounded_intelligent_systems.md", import.meta.url), "utf8"),
     readFile(
@@ -13,9 +13,19 @@ test("M25 and M26 name the actual M35/M36 candidate receipts", async () => {
   ]);
 
   for (const material of [m25, m26]) {
+    assert.match(material, /Optimization and Information Evidence Dossier/u);
+    assert.match(material, /Scientific Python & Accelerators Dossier/u);
+    assert.match(material, /Formal Limits Claim Packet/u);
+    assert.match(material, /Classical AI Search, Constraints & Decision Packet/u);
     assert.match(material, /Machine Learning & Representation Dossier/u);
     assert.match(material, /Statistical Learning Theory & Reliable Deep-Learning Systems Dossier/u);
+    assert.match(material, /Limit-and-Nonclaim Card/u);
+    assert.match(material, /Theory–System Reproducibility Record/u);
+    assert.match(material, /Monitoring Extension to Reliable-Learning Evidence Map/u);
   }
+  assert.doesNotMatch(m25, /ML representation\/evaluation evidence packet/u);
+  assert.doesNotMatch(m26, /\| M35 \| ML evidence packet \|/u);
+  assert.doesNotMatch(m26, /\| M36 \| reliable-learning limit\/non-claim and reproducibility record \|/u);
   assert.match(contracts, /Machine Learning & Representation Dossier and learner-controlled oral-defense summary/u);
   assert.match(
     contracts,

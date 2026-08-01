@@ -1015,9 +1015,9 @@
       "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
       "arcId": "arc-v",
-      "wordCount": 9936,
+      "wordCount": 9960,
       "estimatedMinutes": 36,
-      "sourceHash": "4d420b36dcaca71c312a80f09962ef4062c521ccd158fd46c66610faaa0b690f",
+      "sourceHash": "49842f8e898af680c531bbeb352675c38e2ddf9185efcd9052fbd031175d4566",
       "id": "m25",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1063,9 +1063,9 @@
       "title": "Systems Capstone, Open-Source Stewardship & Oral Architecture Defense",
       "summary": "Intended bridge after prerequisite evidence exists: Module 25 ends with a bounded decision-support feature and an evidence packet. This module then asks the harder systems question: can that feature live inside a maintained product witho…",
       "arcId": "arc-v",
-      "wordCount": 10006,
+      "wordCount": 10031,
       "estimatedMinutes": 38,
-      "sourceHash": "5ec8080410af75e56f9453a021750d1db9e817aa9d7eb1107472c9f24072864e",
+      "sourceHash": "38a8ae820008ec91e36bd91815432b3e10b65c3f98e6065c5f91b92fcb92d10c",
       "id": "m26",
       "state": {
         "lifecycle": "learner-material-ready",
