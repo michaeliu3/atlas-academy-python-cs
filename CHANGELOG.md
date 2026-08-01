@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Calibrated the hidden M33–M34 authoring packs with a narrow official/primary
+  source recheck. M33 now exposes its existing claim-to-source routes and
+  labels two interface-shaped sketches as pseudocode. M34 repairs a Karp DOI,
+  adds a fixed planning state/action trace, and distinguishes all documented
+  CP-SAT statuses from model adequacy or decision authority. These are private
+  authoring improvements only: neither module is learner-ready, published,
+  unlocked, deployed, or a claim of learner mastery or university equivalence.
 - Strengthened the hidden M31–M32 authoring packs after a narrow primary-source
   recheck. M31 now gives compact claim-to-source routes, states the smoothness
   domain for its descent card, and labels its mathematical sketches as

@@ -498,17 +498,52 @@ fixture:
 ~~~text
 take-key
   precondition: room = Entry and key-at-rack
-  effect: has-key = true
+  effect: has-key = true and key-at-rack = false
+
+move-to-vault
+  precondition: room = Entry and energy >= 1
+  effect: room = Vault and energy decreases by 1
 
 open-vault
   precondition: room = Vault and has-key = true and energy >= 1
   effect: vault-open = true and energy decreases by 1
 ~~~
 
-The action model is not the world. It assumes a particular observation model,
-action duration, resource semantics, and absence/presence of outside events.
-If time or a second resource becomes relevant, the previous plan may become
-invalid because the formal language changed.
+### Fixed planning trace — state and action effects
+
+Before revealing the trace, predict whether the three actions reach the goal
+from
+
+\[
+s_0=(\text{room=Entry},\ \text{key-at-rack=true},\ \text{has-key=false},\
+\text{energy=2},\ \text{vault-open=false}).
+\]
+
+<details>
+<summary>Reveal after recording your predicted state changes.</summary>
+
+| state | chosen action | visible change | next state |
+| --- | --- | --- | --- |
+| $s_0$ | `take-key` | key leaves the rack; learner now has the key | $s_1=(\text{Entry},\text{false},\text{true},2,\text{false})$ |
+| $s_1$ | `move-to-vault` | room changes; one energy unit is spent | $s_2=(\text{Vault},\text{false},\text{true},1,\text{false})$ |
+| $s_2$ | `open-vault` | vault opens; final energy unit is spent | $s_3=(\text{Vault},\text{false},\text{true},0,\text{true})$ |
+
+**Reveal:** under exactly these Boolean/action/energy assumptions,
+`take-key → move-to-vault → open-vault` reaches $s_3$, where `vault-open`
+is true. This is a finite trace, not a planner implementation or proof about a
+different action model.
+
+</details>
+
+Now change the formal language: suppose every action takes one time tick but
+the access window has capacity for only two ticks. The same three-action trace
+needs three ticks, so it fails before `open-vault`; adding the time variable,
+duration preconditions, and a failure/closure transition is required. Likewise,
+if a new requirement adds a second item while the carrier has capacity one,
+the state must represent carried items and the old trace supplies neither a
+legal load action nor a capacity proof. A plan does not survive a changed
+state/action/resource contract merely because its earlier action names still
+look plausible.
 
 ### Prediction before reveal
 
@@ -532,6 +567,22 @@ solution exists. Status, model feasibility, objective/bound, and external
 semantics are separate layers.
 
 </details>
+
+### CP-SAT status matrix — a model result is not a world conclusion
+
+For a named CP-SAT model, use the documented status vocabulary precisely:
+
+| Status | Narrow model-level meaning | It still does **not** establish |
+| --- | --- | --- |
+| `OPTIMAL` | An optimal feasible solution was found for the encoded model. | That the encoding, data, objectives, or solution are appropriate, safe, authorized, or optimal outside the model. |
+| `FEASIBLE` | A feasible solution was found, but optimality is not known. | Optimality, model adequacy, practical feasibility, or authority to act. |
+| `INFEASIBLE` | The encoded problem was proven infeasible. | That the real situation is impossible, that an omitted action/variable does not matter, or that a different model is infeasible. |
+| `MODEL_INVALID` | The supplied model failed validation. | A statement about solvability, a theorem, or a real-world constraint. |
+| `UNKNOWN` | No solution was found and infeasibility was not proven before a configured stop, such as a time, memory, or custom limit. | Infeasibility, optimality, complexity classification, model correctness, or a real-world conclusion. |
+
+These labels describe one solver's relation to one declared input. Read the
+version, parameters, stopping condition, and model alongside the status; none
+turns a formal result into a decision authorization.
 
 ### Formal limit and encoding boundary
 

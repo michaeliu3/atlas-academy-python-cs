@@ -148,3 +148,25 @@ test("the M34 workbook makes propagation and decision-horizon boundaries inspect
   assert.match(workbook, /### A two-step Bellman backup/u);
   assert.match(workbook, /Q_0\(s_0,\\text\{inspect\}\)=-0\.5\+0\.5\(3\)\+0\.5\(1\)=1\.5/u);
 });
+
+test("the M34 planning trace and CP-SAT status matrix retain their model boundaries", async () => {
+  const [workbook, sourceResearch] = await Promise.all([
+    readFile("content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "utf8"),
+    readFile(
+      "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+      "utf8",
+    ),
+  ]);
+
+  assert.match(workbook, /### Fixed planning trace — state and action effects/u);
+  assert.match(workbook, /s_0=\(\\text\{room=Entry\}/u);
+  assert.match(workbook, /take-key → move-to-vault → open-vault/u);
+  assert.match(workbook, /access window has capacity for only two ticks/u);
+  assert.match(workbook, /### CP-SAT status matrix — a model result is not a world conclusion/u);
+  for (const status of ["OPTIMAL", "FEASIBLE", "INFEASIBLE", "MODEL_INVALID", "UNKNOWN"]) {
+    assert.match(workbook, new RegExp("\\| `" + status + "` \\|", "u"));
+  }
+  assert.match(workbook, /none\s+turns a formal result into a decision authorization/u);
+  assert.match(sourceResearch, /Karp.*https:\/\/doi\.org\/10\.1007\/978-1-4684-2001-2_9/iu);
+  assert.doesNotMatch(sourceResearch, /https:\/\/doi\.org\/10\.1137\/0201010/u);
+});

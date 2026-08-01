@@ -98,3 +98,23 @@ test("the M33 workbook connects the formal model classes with an original deriva
   assert.match(workbook, /input encoding is malformed.*fixed no-instance/isu);
   assert.match(workbook, /`N` ignores its\s+own input/u);
 });
+
+test("the M33 workbook exposes claim routes and labels interface-dependent sketches", async () => {
+  const workbook = await readFile(
+    "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /### Claim\/source labels/u);
+  assert.match(workbook, /M33-C01, M33-C04 -> S33-01, S33-03/u);
+  assert.match(workbook, /M33-C02–M33-C03 -> S33-01, S33-02/u);
+  assert.match(workbook, /M33-C05–M33-C06 -> S33-01, S33-04/u);
+  assert.match(workbook, /M33-C08 -> S33-01, S33-06, S33-07/u);
+  assert.match(workbook, /M33-C09–M33-C10 -> S33-01, S33-06, S33-07/u);
+  assert.match(workbook, /language-neutral pedagogical pseudocode, not runnable Python/u);
+  assert.match(workbook, /~~~text\ndef run_for_at_most/u);
+  assert.match(workbook, /interface-dependent pedagogical pseudocode, not a runnable Python/u);
+  assert.match(workbook, /~~~text\ndef verifies_vertex_cover/u);
+  assert.doesNotMatch(workbook, /~~~python\ndef run_for_at_most/u);
+  assert.doesNotMatch(workbook, /~~~python\ndef verifies_vertex_cover/u);
+});

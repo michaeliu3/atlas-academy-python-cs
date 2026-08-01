@@ -60,6 +60,14 @@ useful, safe, authorized, or fast on one instance.
 | M23 | syntax, parsing, evaluation, environment, and authority boundaries | a language–machine separation sheet |
 | M27 | quantifiers, countermodels, induction, and proof writing | a formal-claim ledger with a witness or counterexample |
 
+### Claim/source labels
+
+Compact labels such as `M33-C01 -> S33-01, S33-03` point to the exact claim
+and source route in the [M33 primary-source research
+map](../source-maps/module33_formal_languages_computability_complexity_source_research.md).
+They are navigation aids, not borrowed proof text: the named encoding,
+quantifiers, counterexample, and non-claim control the conclusion.
+
 ### Core evidence card
 
 Keep this small card beside every claim. It prevents a theorem name from
@@ -102,6 +110,9 @@ revisit M05 before Session 5.
 ### Core question
 
 **What exactly is being classified before we ask whether it can be computed?**
+
+**Claim/source trace:** `M33-C01, M33-C04 -> S33-01, S33-03` — formal
+language, grammar, machine, and semantic questions must remain distinct.
 
 Let \(\Sigma\) be a finite alphabet. The notation \(\Sigma^*\) means all
 finite strings over that alphabet, including the empty string
@@ -266,6 +277,9 @@ is accepted but the state/action model may still be incomplete.
 
 **What can a finite-state recognizer remember, and how do we prove a limit?**
 
+**Claim/source trace:** `M33-C02–M33-C03 -> S33-01, S33-02` — a finite
+machine model and a named proof obligation are stronger than finite testing.
+
 A deterministic finite automaton (DFA) is
 
 \[
@@ -400,6 +414,10 @@ it is neither a regularity proof nor an undecidability oracle.
 **When does a machine answer the question we asked, and when does it only
 answer a smaller syntactic question?**
 
+**Claim/source trace:** `M33-C05–M33-C06 -> S33-01, S33-04`; `M33-C07 ->
+S33-01, S33-05` — acceptance, halting, semantic properties, and bounded
+observation require different machine/question contracts.
+
 A recognizer for a language accepts members, but on a nonmember it may reject
 or run forever. A decider halts on every input and accepts exactly the
 members. Those words matter whenever an observation is missing:
@@ -415,9 +433,12 @@ concerns behavior of an encoded machine/program under an execution model.
 
 ### Prediction before reveal
 
-Read this bounded evaluator:
+Read this **language-neutral pedagogical pseudocode, not runnable Python**.
+It assumes a teaching-program interface with `initial_state`, `halted`, and
+`step`; its purpose is to expose the finite observation boundary rather than
+to prescribe a program API:
 
-~~~python
+~~~text
 def run_for_at_most(program, input_value, steps):
     machine = program.initial_state(input_value)
     for _ in range(steps):
@@ -497,6 +518,10 @@ never encoded.”
 
 **What must a problem transformation preserve before it transfers a
 conclusion?**
+
+**Claim/source trace:** `M33-C08 -> S33-01, S33-06, S33-07` — the source and
+target languages, transformation direction, resource bound, and iff proof
+are all part of a reduction claim.
 
 A polynomial-time many-one reduction from A to B is a total map
 \(f\) such that
@@ -638,6 +663,10 @@ encoding. A solver run is not a reduction proof.
 
 **What is the object of a complexity statement?**
 
+**Claim/source trace:** `M33-C09–M33-C10 -> S33-01, S33-06, S33-07` — a
+class statement needs a named encoded language, resource model, membership
+argument, and hardness direction.
+
 Under a stated deterministic machine convention and input encoding,
 \(\mathrm{P}\) contains decision languages decidable in polynomial time.
 \(\mathrm{NP}\) can be described using a polynomial-time verifier \(V\) and a
@@ -673,7 +702,12 @@ question; it cannot supply a classification theorem.
 
 ### Code-reading task: verifier versus search
 
-~~~python
+This is **interface-dependent pedagogical pseudocode, not a runnable Python
+program**. It leaves the graph representation and the certificate contract
+visible so the learner can inspect them rather than infer them from a function
+name.
+
+~~~text
 def verifies_vertex_cover(graph, chosen):
     return (
         len(chosen) <= graph.limit
@@ -733,6 +767,10 @@ timeout proves infeasibility.
 
 **Can another person inspect your definitions, proof shape, and boundary
 without having to trust your confidence?**
+
+**Claim/source trace:** `M33-C01–M33-C10 -> S33-01–S33-07` — the final
+packet reconnects formal objects, machine questions, proof obligations, and
+practical non-claims instead of treating them as isolated topics.
 
 Choose exactly one narrow claim:
 
