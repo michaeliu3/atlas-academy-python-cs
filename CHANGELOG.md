@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Strengthened the M11–M16 durable-software arc after a narrow official-source
+  recheck. M11 now has an optional model/proof/counterexample boundary that
+  routes formal hardness questions to M33; M12 carries a compact boundary card
+  into M13 and refreshes its MIT source links; M13–M16 make the existing
+  contract, regression, change, artifact, rollback, and transaction evidence
+  trail explicit. This improves private legacy study material only; it does
+  not promote a contract/release state, create human review, deployment,
+  learner-mastery, or university-equivalence evidence.
 - Strengthened the M6–M10 data-and-algorithms arc after a narrow official-source
   recheck. Every core session now links its claim and learner artifact to a
   compact, dated, link/cite-only source route; the shared Arc II map pins M6,

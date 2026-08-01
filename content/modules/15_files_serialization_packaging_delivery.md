@@ -3539,6 +3539,17 @@ evidence/module15/
 
 The exact filenames may change, but every evidence role must remain and personal data/secrets must not enter the packet.
 
+### Artifact/release receipt — M12–M15
+
+Add one short receipt inside the existing packet (for example beside the build
+or release record), not a second registry. It points to the M12 public promise
+and dependency arrow, the M13 regression and evidence limit, the M14
+change/reversal condition, and the M15 artifact/recovery decision. Its
+`toolchain.txt` records at least the interpreter; build frontend/backend;
+installer/resolver; platform; resolution or lock state; artifact hashes; and
+access date. Record the clean-install result and rollback limit beside those
+facts; a digest or successful build alone is not a release proof.
+
 ### 21.3 Evidence claims
 
 | Claim | Required evidence | Automatic rejection |

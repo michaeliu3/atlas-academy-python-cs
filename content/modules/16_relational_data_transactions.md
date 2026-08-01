@@ -3750,6 +3750,15 @@ Most adapter boilerplate may be agent-generated. Michael owns the model,
 contract, failure analysis, task boundary, patch decision, evidence, and oral
 defense.
 
+### Upstream evidence chain — M12–M16
+
+At the top of the reconciliation dossier, preserve a five-link trail:
+**M12 boundary card → M13 claim/regression/evidence limit → M14
+change-and-rollback card → M15 artifact/toolchain/recovery receipt → M16
+transaction/reconciliation evidence.** Name the engine and configuration
+boundary beside the M16 link. These cards make assumptions inspectable; they
+do not turn earlier finite evidence into proof of the transaction claim.
+
 ### 11.2 Required deliverables
 
 1. pressure record: why the bundle remains interchange input but is not the

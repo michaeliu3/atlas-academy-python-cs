@@ -2097,6 +2097,38 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 ---
 
+### Optional scope boundary — proof under a model, not a general hardness claim (20 minutes)
+
+This is a short bridge to later theory, not an early substitute for Module 33.
+An M11 proof establishes a chosen strategy's behavior **for its stated model**.
+It does not by itself establish that every alternative model is hard, that no
+better algorithm exists, or that a finite test suite proves a universal claim.
+
+**Prediction before reveal.** The Session 6 planner uses `selected_set` as its
+dynamic-programming state. Suppose a task earns a bonus only when it follows a
+particular earlier task. Is `selected_set` still sufficient? Write yes/no,
+confidence, and the future information your answer needs before opening the
+contrast.
+
+<details>
+<summary>Reveal the model boundary</summary>
+
+No. Two histories can contain the same selected tasks while ending with
+different earlier tasks, so their next bonus can differ. The old state merged
+histories that have different futures; the recurrence proof no longer applies
+unless the state records the needed order/history. This is a counterexample to
+the **state-sufficiency claim**, not evidence that the changed problem is
+NP-complete or impossible to solve efficiently.
+</details>
+
+Make a four-line scope card for one Session 6 strategy: (1) model and
+assumptions, (2) correctness or counterexample argument, (3) cost claim and
+input measure, and (4) one changed premise that invalidates the argument. Keep
+reductions, decidability, NP-completeness, and formal lower-bound arguments for
+**Module 33**, where their definitions and proof obligations are introduced.
+
+---
+
 ## 20. Eight-level problem ladder
 
 ### Level 1 — Recognize
@@ -2634,6 +2666,8 @@ Add:
 - Module 19 adds concurrent scheduling, shared state, and interleaving constraints.
 - Module 21 adds cancellation, partial failure, and distributed work queues.
 - Module 24 measures Python implementation costs without changing the mathematical contract.
+- Module 33 supplies reductions, decidability, NP-completeness, and formal
+  complexity limits after the M11 model/counterexample boundary is clear.
 - Module 25 treats uncertain predictions, optimization metrics, bias, evaluation, and human agency as first-class concerns.
 - Module 26 requires a capstone defense that separates model, implementation, evidence, and impact.
 

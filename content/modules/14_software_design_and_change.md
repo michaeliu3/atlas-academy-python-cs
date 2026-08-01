@@ -3146,6 +3146,8 @@ ask which architecture rule breaks. Record the sharpest question for the TA.
 
 ### Forward handoff — M15
 
-Carry one public compatibility promise, one migration/rollback plan, and one
-test seam into **M15**. The next module makes internal state durable across
-files, bytes, packages, and release artifacts.
+Carry the existing change-and-rollback card into **M15**: the M12 public
+promise and dependency arrow, the M13 contract clause/regression and missing
+observation, this module's commit or reversal condition, and one durability
+question. The next module makes that connected evidence durable across files,
+bytes, packages, and release artifacts.

@@ -2821,6 +2821,14 @@ AI-patch verdict with file/line evidence, minimal repair, and regression test.
 End with one unanswered question or uncertainty to carry forward to Module 13's
 specification, testing, debugging, and observability work.
 
+### Carry-forward boundary card — M12 → M13
+
+Attach one compact card to that existing dossier; it is not a new project or
+score. Name: (1) one public observation or behavioral law, (2) the dependency
+arrow that protects it, (3) the smallest contract test that could challenge it,
+and (4) one unresolved risk. Module 13 starts from this card rather than
+reconstructing the component boundary from import names alone.
+
 ---
 
 ## Prediction before reveal — import-boundary experiment
@@ -3750,11 +3758,11 @@ single document as the complete course design.
 
 ### 27.4 University-level software construction
 
-- [MIT 6.102: Abstract Data Types](https://web.mit.edu/6.102/www/sp25/classes/06-abstract-data-types/) —
+- [MIT 6.102: Abstract Data Types](https://web.mit.edu/6.102/www/sp26/classes/06-abstract-data-types/) —
   abstraction, representation independence, invariants, and client reasoning.
-- [MIT 6.102: Specifications](https://web.mit.edu/6.102/www/sp25/classes/04-specifications/) —
+- [MIT 6.102: Specifications](https://web.mit.edu/6.102/www/sp26/classes/04-specifications/) —
   behavioral contracts and under/over-specification.
-- [MIT 6.102: Code review](https://web.mit.edu/6.102/www/sp25/general/code-review.html) —
+- [MIT 6.102: Code review](https://web.mit.edu/6.102/www/sp26/general/code-review.html) —
   systematic human review practices.
 
 ### 27.5 Efficient reading route

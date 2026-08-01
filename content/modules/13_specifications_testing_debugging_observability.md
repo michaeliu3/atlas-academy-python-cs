@@ -2413,6 +2413,11 @@ uncertainty. The Teaching Assistant uses that card to begin the supportive
 oral-defense conversation; this workbook does not claim automated delivery,
 Notion activity, or a completed session.
 
+If the learner carries the M12 boundary card, add its public observation and
+dependency arrow to this handoff alongside the chosen contract clause,
+regression, missing observation, and nonclaim. Module 14 must preserve that
+whole evidence chain while changing the implementation.
+
 ---
 
 ## 24. Consolidation

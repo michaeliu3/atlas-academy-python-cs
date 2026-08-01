@@ -386,27 +386,27 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "490e70a4b2dc95e874bbc942664715a30b451ff59bb1c11717e91c73eed2fab1"
+      "sha256": "1cf755980117ae4994b521c743830ba040834de39eb0a9009b7aed479e69c967"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
-      "sha256": "453828482c3f9027295a3abd4f99393a730293ea54a0eb0a45b183d96327e9e6"
+      "sha256": "b9efd270e62373a60ae7d6a434117d3a63bba17126db539e21843c9e96ff53c2"
     },
     {
       "path": "content/modules/13_specifications_testing_debugging_observability.md",
-      "sha256": "07ce63f004ab7cfccba1a9f6ac30845784eeb48e5704322c621677fbe434066c"
+      "sha256": "57a7cc12144c821f4722899d1c775fef68525f3eefb59a49ee699b8a19c6317f"
     },
     {
       "path": "content/modules/14_software_design_and_change.md",
-      "sha256": "05633341264beb06444dc1e76e0e013a246d0bc28bf4fb74552fcf6fd6444489"
+      "sha256": "028d2dd39de19f59cc1253f43c3e57a10d0f157ff837029180f041ab081ffac8"
     },
     {
       "path": "content/modules/15_files_serialization_packaging_delivery.md",
-      "sha256": "c46fdbba3b5499de835775d5f784b727df8a996f4e4bac5bf85b393b417bd3b5"
+      "sha256": "807e865e1bd4dc8dfa79d6540980a099867b6f44cb2cd7bef742e2b2d84fb6e9"
     },
     {
       "path": "content/modules/16_relational_data_transactions.md",
-      "sha256": "ea3f42aa1e8947e0f78de786c22c47ab46d83e2474f3d0b92b9a59aa17d3f8d3"
+      "sha256": "4e14e10a0ec03d6c232988dfa6ff7fd164e204ee82c0a26d00811c99aa038d95"
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
