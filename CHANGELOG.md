@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Added a concise official-source recheck for the M6–M10 data-structures and
+  algorithms route, cross-calibrated against MIT, CMU, Stanford, Georgia Tech,
+  and Berkeley. It confirms the connected representation → protocol → indexing
+  → ordered-structure → graph progression while retaining explicit scope and
+  practice-volume boundaries. This is calibration evidence only, not a release,
+  university-equivalence, or learner-mastery claim.
 - Calibrated the hidden M35–M36 authoring packs with a narrow official/primary
   source recheck. M35 now makes its claim-to-source routes visible, requires a
   target-relation split contract, and separates a fixed Brier-score observation
