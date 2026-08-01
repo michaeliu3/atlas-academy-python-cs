@@ -1018,6 +1018,10 @@ transparent local choice.
 - [ ] Retrieves M12–16 contracts/tests/data/transactions, M17 architecture,
   M18–21 systems/distributed boundaries, M22 trust/privacy, M23 language,
   M24 performance, and M25 human-centered decision boundaries as relevant.
+- [ ] When a capstone makes an optimization, execution, formal, classical-AI,
+  ML, or learning-theory claim, retrieves the exact M31–M36 evidence field,
+  states its assumption/non-claim, and records the release consequence if it
+  fails; unavailable authoring-only material narrows or defers the claim.
 - [ ] Uses all six views and five maps to connect, not fragment, knowledge.
 - [ ] Oral defense includes rejected alternative, evidence scope, owner,
   unknown, and recovery path.

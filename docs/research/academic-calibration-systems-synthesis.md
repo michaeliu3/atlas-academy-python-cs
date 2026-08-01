@@ -37,6 +37,26 @@ institutional-equivalence outcome.
 | **M25 — Evidence-Grounded Intelligent Systems** | CMU [10-718 Machine Learning in Practice (Spring 2024)](https://www.cs.cmu.edu/~smithv/10718/spring2024/) for the end-to-end project progression—problem/data formulation, baseline/evaluation, additional metrics, reflection—and CMU [Responsible AI & AI Governance (2025–26)](https://privacy.cs.cmu.edu/masters/plan/courses/aigovernance.html) for transparency, privacy, human oversight, agentic governance, and red-teaming scope. MIT [6.036](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/), UC Berkeley [CS188](https://inst.eecs.berkeley.edu/~cs188/), Georgia Tech [CS 6601](https://omscs.gatech.edu/cs-6601-artificial-intelligence), and the public [Stanford CS229 Spring 2020 archive](https://cs229.stanford.edu/syllabus-spring2020.html) are foundation/evaluation anchors. | [M25 workbook](../../content/modules/25_evidence_grounded_intelligent_systems.md): the **Decision Contract** (Session 1), **Lineage and Split Card** (Session 2), **Evaluation Card** (Session 4), accessible **Decision Card** (Session 5), and the `Next-Step Evidence Dossier` with its advanced-evidence annex. | **Aligned/adapted:** the dossier follows problem formulation, controlled lineage/split, same-condition baseline, evaluation/extra-metric, limitation, and next-falsifier reasoning; the governance work adds privacy, accessibility, meaningful override, and no automatic learner-state mutation. **Gap:** it is a bounded local/synthetic vertical slice, not a semester-long real-data, peer-reviewed ML project or governance/compliance certification; M25 stays preview-only until M31–M36 evidence and M25 review are available. |
 | **M26 — Systems Capstone and Open-Source Stewardship** | MIT [6.005 Software Construction (Spring 2016)](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/) for specifications, invariants, testing, concurrency, code review/version control, and a final project; CMU [15-313 Foundations of Software Engineering (2017)](https://www.cs.cmu.edu/~ckaestne/15313/2017/index.html) for an actual open-source-contribution path plus requirements, architecture, QA/inspection, and reflection; UC Berkeley [CS169](https://www2.eecs.berkeley.edu/Courses/CS169/) for verification/validation, regression/integration testing, debugging, monitoring, security, and team-project scope; Georgia Tech [CS 6300](https://omscs.gatech.edu/cs-6300-software-development-process) for process, quality, and maintenance scope. | [M26 workbook](../../content/modules/26_systems_capstone_open_source_stewardship.md): the **Release Contract and Pre-Mortem**, **Architecture Thread Map**, traced incident/regression test, **Change and Supply-Chain Review**, `Release Dossier and Oral Defense Packet`, and the integrated project’s evidence ledger/maintenance handoff. | **Aligned/adapted:** the capstone connects scoped claim, architecture trace, code reading, reproducer/regression plan, patch/change review, rollback/disable reasoning, and a defended maintenance handoff; it grades the reasoning chain rather than code volume or a polished demo. **Gap:** it does not reproduce a term-long Java/team/client project, public maintainer response/merge, production rollout, or operational certification; M26 remains preview-only until M25 and the advanced evidence chain are release-ready. |
 
+### Reweave update — 2026-08-01
+
+- **M25:** the review found that data lineage and failure slices were named but
+  not yet decision-bearing enough for a final synthesis. The workbook now adds
+  a data-readiness veto, a required slice/temporal-shift consequence, and one
+  fixed cross-artifact conflict rehearsal using M27–M36 receipts. This adapts
+  CMU 10-718's end-to-end ML practice into a bounded synthetic case; it does
+  not substitute for a semester project, external data study, or governance
+  certification.
+- **M26:** the review found that advanced material was an annex rather than a
+  release-decision input. The workbook now adds an **Advanced Claim Join**, a
+  required quality-scenario/alternative, and an optional-track Stewardship
+  Boundary. These adapt the requirements, quality-attribute, QA, maintenance,
+  and contribution reasoning found in MIT 6.005, CMU 15-313, Berkeley CS169,
+  and Georgia Tech CS6300 without claiming team instruction, maintainer
+  feedback, a merge, deployment, or institutional equivalence.
+- **Shared boundary:** M31–M36 remain authoring-only. Their named packets are
+  private guided drafts, so an unavailable receipt narrows or defers a claim;
+  it never unlocks M25/M26 or becomes release evidence.
+
 ## Use and reuse boundary
 
 The linked pages are official university sources used only for comparison and

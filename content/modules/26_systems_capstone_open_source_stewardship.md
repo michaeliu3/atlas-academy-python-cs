@@ -171,6 +171,29 @@ boundary, and evidence ledger. The release decision must remain **REVISE** or
 **DEFER** when the exact advanced claim being relied upon has no learner-ready
 artifact.
 
+### 1.1B Advanced Claim Join — one claim, one consequence
+
+The annex becomes useful only when an upstream field changes the capstone
+decision. For the fixed optional next-action feature, the baseline display may
+remain a bounded orientation case. The stronger claim—“a learned order improves
+the next action”—must be narrowed or deferred unless the following join is
+filled from inspected learner-ready artifacts.
+
+| Capstone subclaim | Exact upstream receipt | Assumption that can fail | Release consequence if it fails |
+| --- | --- | --- | --- |
+| The optimized rank expresses the intended choice | M31 **Optimization and Information Evidence Dossier**: objective, hard constraint, proxy gap, stopping/support boundary | the objective is a valid proxy for the declared user outcome | **DEFER** learned-order claim; retain a transparent baseline only |
+| The observed execution result can be compared | M32 **Scientific Python & Accelerators Dossier**: semantic oracle, dtype/layout/device/seed and environment record | the compared runs preserve the same semantics and stated environment | **REVISE** reproduction record before using a performance or model comparison |
+| A formal or complexity statement applies | M33 **Formal Limits Claim Packet**: encoding, reduction direction, resource model | the product actually makes that formal claim | **NARROW** the claim or mark the formal row not relied upon; do not decorate the dossier |
+| Candidate eligibility and decision policy are explicit | M34 **Classical AI Search, Constraints & Decision Packet**: state, candidate set, constraint, uncertainty, authority | the candidate set and constraint remain the ones evaluated | **REVISE** formulation; no solver/planner output may authorize action |
+| A learned proposal outperforms a baseline under scope | M35 **Responsible ML Representation Dossier**: split, baseline, failure slice, shift result | data relation, representation, and evaluation population still hold | **DEFER** broader benefit/generalization claim; display only the bounded evidence |
+| A reliability or monitoring statement survives its scope | M36 **Reliable-Learning Evidence Map** and reproducibility record: theorem/non-claim, shift monitor, stop owner | distribution, precision, implementation, and human-control assumptions hold | **NARROW**, **DEFER**, or **DISABLE** according to the named stop condition |
+
+Each row must cite one narrow claim, one assumption, one counterexample or
+non-claim, and one release consequence. A missing row does not become a
+generated summary. It means **[UNAVAILABLE — DEFER OR NARROW CLAIM]**. The
+authoring-only M31–M36 packs are private guided drafts today, not learner
+credit, release proof, or a reason to unlock this preview.
+
 ### 1.2 The forward connection
 
 The forward path is maintenance:
@@ -239,6 +262,27 @@ Choose one track, but use the same dossier and rubric.
 Neither track requires a public deployment, real learner data, secrets, or
 external AI access. If these would be needed to make the claim, mark the claim
 as **[UNKNOWN]** and choose a safer local fixture or defer the release.
+
+### Stewardship Boundary — required only for the external track
+
+Open-source stewardship is not “send a patch and hope it merges.” Before any
+public interaction, create one small boundary record:
+
+~~~text
+project and exact version/commit inspected:
+issue or bounded problem, reproducer, and affected behavior:
+contribution, license, security, and communication routes read:
+maintainer / reviewer authority and what the learner may not decide:
+smallest local patch or review proposal:
+tests, evidence, and documentation expected by the project:
+submission status: not submitted / draft / submitted / feedback observed:
+explicit non-claim: no merge, maintainer endorsement, deployment, or project-wide quality claim:
+~~~
+
+Public submission is optional. A private, well-scoped reproducer or review
+proposal can demonstrate the reasoning. Never upload secrets, private records,
+or a generated patch that you cannot explain; a maintainer's capacity and
+project norms remain external boundaries, not grading targets.
 
 ### The release admission question
 
@@ -639,6 +683,20 @@ next falsifier:
 release consequence if evidence changes:
 ~~~
 
+### Fill the Advanced Claim Join before promoting an intelligent-feature claim
+
+Use the Section 1.1B table as a linked part of this ledger when the capstone
+relies on optimization, execution, formal, classical-AI, ML, or learning-theory
+evidence. Ask a deliberately uncomfortable question:
+
+> Which exact upstream field would change your release decision if its
+> assumption failed?
+
+For the fixed case, a good answer may be: “If the M35 shifted-slice result or
+M31 proxy boundary fails, we do not release a learned order. We keep or return
+to the optional transparent baseline.” This is not a lesser outcome—it is the
+correct use of evidence.
+
 ### Code-reading lab — reject the convenient metric
 
 ~~~python
@@ -681,9 +739,9 @@ does not demonstrate production safety.
 
 ### Session artifact
 
-Add the evidence ledger and an operational/rollback plan to the release
-dossier. Mark every unperformed observation **[UNKNOWN]** rather than
-inventing a result.
+Add the evidence ledger, Advanced Claim Join when relevant, and an
+operational/rollback plan to the release dossier. Mark every unperformed
+observation **[UNKNOWN]** rather than inventing a result.
 
 ---
 
@@ -754,6 +812,11 @@ questions.
 Your reviewer then changes one premise: the request retries, the dependency is
 unavailable, the metric regresses in one slice, the user refuses the suggestion,
 or an agent asks for a write capability. Re-evaluate the decision aloud.
+
+One changed-constraint question must target the **Advanced Claim Join**: “Which
+exact upstream field changes your release decision if its assumption fails?”
+The learner should name the revised bounded decision, not recite a theorem or
+model label.
 
 ### Session artifact
 
@@ -1030,8 +1093,10 @@ application.”
 
 **Required artifacts**
 
-1. **Release contract** — user task, baseline, version/scope, invariant,
-   owners, non-goals, risk, rollback/disable plan.
+1. **Release contract and quality scenario** — user task, baseline,
+   version/scope, invariant, owners, non-goals, risk, rollback/disable plan,
+   plus one stakeholder/stimulus/context/response-measure scenario with two
+   options, the chosen tradeoff, rejected alternative, and rollback consequence.
 2. **Architecture thread** — one context/container view and one dynamic
    request/failure trace with text equivalents.
 3. **Code-reading dossier** — annotated route through unfamiliar code; identify
@@ -1051,6 +1116,13 @@ application.”
    version/scope, and release consequence. Mark unavailable artifacts
    **[UNAVAILABLE — DEFER OR NARROW CLAIM]**; never replace them with a
    plausible generated summary.
+10. **Advanced Claim Join** — for every advanced claim that matters to the
+    decision, cite the exact upstream field, the assumption that can fail, and
+    the revised release/revise/defer/disable consequence.
+11. **Stewardship Boundary** *(external track only)* — record project/version,
+    contribution and security routes, issue/reproducer, maintainer authority,
+    local review evidence, submission status, and the explicit no-merge/no-
+    endorsement/non-deployment boundary.
 
 ### Release decisions are not pass/fail theater
 
@@ -1071,7 +1143,9 @@ application.”
 | Failure reasoning | Lists generic risks. | Reproduces one concrete failure, names the invariant, and supplies a regression test/plan plus residual uncertainty. |
 | Change stewardship | Treats the diff as implementation detail. | Reviews dependency, provenance, authority, tests, compatibility, documentation, and rollback. |
 | Evidence | Collects screenshots/checkmarks. | Separates test, observation, measurement, decision, scope, limitation, and next falsifier. |
-| Advanced integration | Invokes theorem, model, performance, or reliability vocabulary without an artifact. | Uses the exact M27–M36 evidence row, retains its assumptions/non-claim, or defers/narrows the release when it is unavailable. |
+| Quality tradeoff | Names only a preferred tool or slogan. | States stakeholder, stimulus/context, response measure/bound, two options, rejected alternative, and rollback consequence. |
+| Advanced integration | Invokes theorem, model, performance, or reliability vocabulary without an artifact. | Uses the exact M27–M36 Claim Join field, retains its assumptions/non-claim, and changes the release/revise/defer/disable decision when it fails or is unavailable. |
+| Open-source stewardship | Equates opening a pull request with a successful contribution. | Respects project/license/security routes and maintainer authority; records local evidence, submission status, and no-merge/no-endorsement/non-deployment boundary. |
 | Human/trust judgment | Treats security/accessibility/AI as a checklist. | Names the person/owner, control path, data/authority limit, and consequence of disagreement or failure. |
 | Defense | Repeats prepared prose. | Revises a bounded conclusion when a reviewer changes a premise. |
 
@@ -1156,7 +1230,8 @@ retry, dependency outage, resource/precision change, distribution shift,
 theorem assumption, user refusal, permission boundary, or unavailable M27–M36
 artifact. Ask for a prediction before correcting. Use a hint ladder: locate
 the evidence row; identify its scope/assumption; offer a counterexample;
-require a narrower release/revise/defer/rollback decision. Use the visible chat
+ask which exact upstream field changes the decision; require a narrower
+release/revise/defer/rollback decision. Use the visible chat
 as an accessible whiteboard: define symbols, provide equation prose/ASCII
 fallbacks, put code in labelled fences, and make architecture diagrams/traces
 readable after the conversation. End with a learner-controlled evidence
@@ -1231,7 +1306,9 @@ understood after the original author, agent conversation, or demo is gone.
 
 The resources below inform this workbook's vocabulary and review practices.
 They are not a substitute for the learner's own architecture argument, and
-they do not grant certification or compliance.
+they do not grant certification or compliance. The university calibration
+routes below were rechecked on **2026-08-01**; revisit moving course pages and
+terms before any reuse.
 
 | Resource | Use in M26 | Reuse and licensing boundary |
 |---|---|---|
@@ -1239,6 +1316,9 @@ they do not grant certification or compliance.
 | [C4 model diagrams](https://c4model.com/diagrams) and [notation guidance](https://c4model.com/diagrams/notation) | Choose a context, container, component, dynamic, or deployment view by the question it answers; require titles, scopes, legends, and labeled relationships. | The C4 site identifies CC BY 4.0 for its site/examples. Prefer original Atlas diagrams and retain attribution/terms if material is reused. |
 | [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches), [dependency review](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review), and [artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) | Treat merges, dependency changes, and build provenance as reviewable boundaries. | Link and paraphrase current documentation. Do not claim a repository has controls configured unless they were actually inspected and verified. |
 | [MIT 6.005 Software Construction](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/) | Reinforce invariants, specifications, testing, concurrent reasoning, and code that remains ready for change. | Use as a sequencing/reference route; do not reproduce course assignments, solutions, recordings, or grading materials without checking terms. |
+| [CMU 15-313 Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/15313/2017/index.html) | Calibrate the stewardship boundary: requirements, architecture, quality attributes, inspection, measurement, and a scoped open-source contribution workflow. | Link and paraphrase only. Atlas does not supply a team, public maintainer feedback, a merged patch, or course credit. |
+| [UC Berkeley CS169 Software Engineering](https://www2.eecs.berkeley.edu/Courses/CS169/) | Calibrate verification/validation, regression and integration testing, debugging, monitoring, maintainability, cost/quality reasoning, and substantial-project scope. | Link and paraphrase only; Atlas's local dossier is not a semester-long team project or deployment certification. |
+| [Georgia Tech CS 6300 Software Development Process](https://omscs.gatech.edu/cs-6300-software-development-process) | Calibrate process, quality, and maintenance as software evolves. | The official route is a comparison anchor; do not reproduce restricted course content or claim its Java/team instruction. |
 | [pytest documentation](https://docs.pytest.org/en/stable/) | Read assertion output, fixtures, parametrized cases, and failure-focused regression tests. | pytest is MIT licensed; keep license/attribution requirements if code is copied. Prefer original fixtures and examples. |
 | [SLSA v1.2 requirements](https://slsa.dev/spec/v1.2/requirements) and [provenance](https://slsa.dev/spec/v1.2/provenance) | Discuss artifact provenance and verification as scoped supply-chain evidence. | Record the version/status used and link/paraphrase; do not claim a SLSA level without a real conformance assessment. |
 | [NIST SSDF, SP 800-218](https://csrc.nist.gov/pubs/sp/800/218/final) and [NIST SP 800-61r3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) | Frame secure development and incident-response/recovery planning as lifecycle work. | Treat NIST publications as guidance, not legal advice or a certification. Check notices and incorporated third-party material before reproducing content. |

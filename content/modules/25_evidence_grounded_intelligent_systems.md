@@ -210,6 +210,36 @@ M33 for a complexity non-claim, M34 for its candidate/constraint formulation,
 and M36 for generalization limits. None of those artifacts authorizes a
 learner-state mutation or a consequential decision.
 
+### 1.1C One advanced-evidence synthesis rehearsal
+
+After the gate opens, do not merely attach ten summaries. Revisit the fixed
+next-step suggestion in Section 1.2 and write one **evidence receipt** for
+each relevant earlier artifact. The narrow claim under review is:
+
+> “For a declared synthetic fixture, Atlas may display a reversible local
+> next-step suggestion with its reason and alternatives. It does not claim that
+> the suggested action improves learning, diagnoses ability, or changes a plan.”
+
+| Earlier evidence | Exact receipt to inspect | Narrow contribution to the same decision | Assumption / non-claim retained |
+| --- | --- | --- | --- |
+| M27 discrete mathematics | proof/claim ledger and countermodel | Makes any invariant or implication in the displayed reason explicit. | Passing fixtures do not prove a universal route property. |
+| M28 linear algebra | representation/stability note | Names the representation and precision condition behind a similarity or distance statement. | A vector is not meaningful or stable merely because it has many coordinates. |
+| M29 calculus/analysis | limit/derivative/convergence scope sheet | Separates a local optimization observation from a global product conclusion. | A small derivative or finite trace is not a benefit claim. |
+| M30 probability/inference | inference and evaluation manifest | Declares population, time split, denominator, uncertainty, and alternative explanation. | A held-out score is not causality or user benefit. |
+| M31 optimization/information | **Optimization and Information Evidence Dossier** | Exposes the ranking objective, hard constraints, proxy gap, and stopping/support boundary. | Lower loss does not choose the right human action. |
+| M32 systems execution | **Scientific Python & Accelerators Dossier** | Records semantic oracle, dtype/layout/device/seed, and reproducibility conditions for an execution claim. | A local fast result is not portable, numerically identical, or operationally safe. |
+| M33 formal limits | **Formal Limits Claim Packet** | States any encoding, reduction direction, resource model, or complexity claim actually used. | A timeout or theorem label does not decide this product outcome. If no formal claim is used, say so rather than decorating the dossier. |
+| M34 classical AI | **Classical AI Search, Constraints & Decision Packet** | Separates candidate eligibility, constraints, state, uncertainty, and policy authority. | A solver or planner output is not self-authorizing. |
+| M35 machine learning | **Responsible ML Representation Dossier** | Supplies the baseline, split, representation, failure slice, and shift evidence for a learned proposal. | A validation result is not calibrated generalization or learner benefit. |
+| M36 reliable learning | **Reliable-Learning Evidence Map** and reproducibility record | Names the theorem/limit scope, monitoring hypothesis, stop owner, and deployment non-claim. | A guarantee or benchmark is not a release certificate. |
+
+One receipt may support only one narrow fragment of the claim. When the required
+learner-ready artifact has not been inspected, write **[UNAVAILABLE — DEFER OR
+NARROW CLAIM]**. Current authoring-only packs are private guided drafts, not
+release evidence or learner credit. In the current preview, the stronger
+learned-order claim therefore stays deferred; only the transparent baseline is
+an orientation case.
+
 ### 1.2 The fixed Atlas incident
 
 Atlas already has a prerequisite graph, a review scheduler, a local
@@ -456,6 +486,19 @@ Ask:
 Replace none of the code yet. First write a data contract that says what
 would make the evaluation invalid.
 
+### Data-readiness veto
+
+Before a row can become training or evaluation material, name its label origin
+and likely error path. A missing, selectively observed, or post-decision label
+can change the question rather than merely reduce sample size. For the fixed
+case, ask whether a learner saw the item, could decline it, had time to act,
+and whether the later recall check actually measures the intended outcome.
+
+Write a **do-not-train/defer trigger** such as: “Do not fit or compare a model
+until the label origin, missingness/selection mechanism, and decision-time
+availability are specified.” This is an evidence boundary, not a data-cleaning
+ritual or a claim about a real learner population.
+
 ### Session artifact
 
 Create a **Lineage and Split Card**:
@@ -465,9 +508,11 @@ decision time:
 authorized source fields:
 feature definitions:
 label/outcome definition:
+label origin, likely error, and exposure/selection risk:
 candidate population:
 train / validation / held-out rule:
 known missingness or selection risk:
+do-not-train/defer trigger:
 retention/redaction rule:
 strongest allowed claim:
 ~~~
@@ -686,6 +731,7 @@ label/outcome:
 metrics and denominators:
 threshold/rank/display rule:
 uncertainty and unsupported slices:
+slice/temporal-shift challenge and display/revise/defer consequence:
 runtime/resource manifest:
 privacy/retention effect:
 strongest allowed conclusion:
@@ -1103,7 +1149,7 @@ and logging each need their own boundary and retention decision.
 | outcome/baseline confusion | Module 4 probability/logic; Module 11 objectives; Session 1 |
 | lineage/leakage confusion | Module 13 specifications; Module 16 data; Session 2 |
 | score/model boundary confusion | Modules 8–11; Session 3 |
-| metric/calibration/cost confusion | Module 5; Module 24; Session 4 |
+| metric/calibration/cost/shift confusion | Module 5; Module 24; M35–M36 evidence routes; Session 4 |
 | explanation/accessibility/control confusion | Module 22; Session 5 |
 | model/agent authority confusion | Modules 22–23; Session 6 |
 
@@ -1175,6 +1221,26 @@ non-claim to the feature decision.
 In the current preview, this annex is an orientation template only. A blank
 row is evidence of a gate, not a defect to paper over with generated prose.
 
+### Cross-artifact conflict exercise — revise the claim, not the evidence
+
+Suppose the M35 receipt shows a higher held-out ranking metric, but the M31
+receipt shows that the objective optimizes a click proxy rather than the stated
+learner outcome. M32 then reveals that the comparison changed dtype/layout and
+cannot yet reproduce the same semantic result. M33 limits a claimed solver
+guarantee, M34 changes the candidate constraint, and M36 withdraws an IID or
+reliability conclusion after a named temporal shift.
+
+Do not average these concerns into a confidence score. Fill this compact board:
+
+| Evidence conflict | Smallest justified repair | Decision now | Next falsifier |
+| --- | --- | --- | --- |
+| Metric improved but the proxy/constraint is wrong | restore the decision contract or compare against a better-aligned baseline | **REVISE** or **DEFER** | a scoped outcome/utility observation |
+| Reproduction or semantics changed | restore the declared execution condition before comparing | **DEFER** learned-order claim | semantic-oracle and environment record |
+| Candidate, formal, or distribution premise changed | restate the candidate set, formal scope, or population | **NARROW** to the remaining supported display claim | counterexample or shifted-slice evaluation |
+
+End with one counterexample and one revised claim. A fluent agent explanation,
+green test, or higher metric cannot overrule the narrowest missing receipt.
+
 The reference implementation may be mostly agent-generated only after the
 learner has named the contracts and tests. Manual coding is limited to the
 small portions that reveal a mechanism: candidate eligibility, deterministic
@@ -1189,7 +1255,7 @@ accessible control state.
 | Data lineage | calls database rows “training data” | states availability time, authorized fields, outcome, split, and retention |
 | Ranking/model | treats score as recommendation | separates candidates, score, rank, display policy, and state authority |
 | Evaluation | reports one accuracy number | supplies metric, denominator, baseline, split, uncertainty, and nonclaim |
-| Advanced synthesis | invokes mathematics, systems, or ML by reputation | attaches an exact M27–M36 artifact, assumptions, counterexample/non-claim, or honestly preserves the preview gate |
+| Advanced synthesis | invokes mathematics, systems, or ML by reputation | attaches every relevant M27–M36 receipt, exposes one genuine evidence conflict, revises the claim under a changed premise, and preserves the preview gate when a receipt is unavailable |
 | Human-centered design | adds visual polish after scoring | provides reason, limit, alternatives, accessible path, and meaningful override |
 | AI-era judgment | accepts fluent output or green tests | bounds context/tools/effects and independently reviews patch evidence |
 | Communication | announces a feature | gives claim, evidence, scope, limitation, and next falsifier |
@@ -1255,8 +1321,9 @@ one representation/objective choice, one evaluation limitation, and one
 human-control or abstention rule. Ask for a prediction before revealing a
 correction. When a claim is fragile, use this hint ladder: identify the
 evidence label; name the supporting M27–M36 artifact or mark it unavailable;
-change one premise; offer a counterexample; help the learner restate the
-narrowest supported claim. Use the visible chat as an accessible whiteboard:
+select two receipts that conflict; change one premise; offer a counterexample;
+help the learner restate the narrowest supported claim. Use the visible chat as
+an accessible whiteboard:
 define notation, render equations when supported with a short prose/ASCII
 fallback, put code in labelled fences, and make a trace/table readable after
 the conversation. End with a learner-controlled summary: defended claim,
@@ -1317,12 +1384,22 @@ sanitized documentation/demo surface is the default safe release target.
 ## 13. Source route and reuse boundary
 
 The Module 25 source map and its authoring-only source-audit addendum provide
-claim-to-source routing plus the dated source/status/reuse record. Moving
+claim-to-source routing plus the dated source/status/reuse record. The
+university calibration routes below were rechecked on **2026-08-01**; moving
 documentation remains a recheck target rather than a reproducibility pin. Its
 source roles include:
 
 - [MIT 18.05: Introduction to Probability and Statistics](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/)
   for probability/statistics retrieval and experiment reasoning;
+- [MIT 6.036: Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/)
+  and [CMU 10-718: Machine Learning in Practice](https://www.cs.cmu.edu/~smithv/10718/spring2024/)
+  for problem formulation, representation, reproducible pipelines, evaluation,
+  and the boundary between an end-to-end project and this bounded synthetic
+  rehearsal;
+- [Stanford CS229](https://cs229.stanford.edu/syllabus-spring2020.html) and
+  [Georgia Tech CS 6601](https://omscs.gatech.edu/cs-6601-artificial-intelligence)
+  for the prerequisite mathematical/AI sequence that M31–M36 supply before
+  M25's synthesis; they are calibration routes, not copied assignments;
 - [Berkeley CS 188](https://inst.eecs.berkeley.edu/~cs188/) and
   [Stanford CS221](https://bulletin.stanford.edu/courses/1057301) for the
   dependency sequence from algorithms/probability to intelligent systems;
