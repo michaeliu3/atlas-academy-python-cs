@@ -329,10 +329,16 @@ evidence.
    and TA/Study Partner oral material. Its source binding, review records,
    canonical learner route, and release evidence still require independent
    review.
-4. **No tested studio, reference model, or teaching test exists.** A future
-   interaction must be bounded, local-first, safe to cancel, and transparent
-   about data/model/version limits; it must not execute arbitrary code or
-   access undeclared network, package, credential, or filesystem capabilities.
+4. **A bounded local reference fixture and focused teaching test now exist;
+   no learner studio or release validation exists.**
+   `lib/m35-m36-signal-routing-fixture.js` and its focused test expose only
+   fixed synthetic representation collisions, information-budget baselines,
+   probability-card behavior, and a scalar gradient comparison. They are not
+   real data, a trained model, framework behavior, a benchmark, a population
+   calibration claim, or a learner route. A future interaction must still be
+   bounded, local-first, safe to cancel, and transparent about data/model/
+   version limits; it must not execute arbitrary code or access undeclared
+   network, package, credential, or filesystem capabilities.
 5. **No data/model asset review has occurred.** Dataset provenance, licenses,
    model weights, benchmark terms, code, figures, fairness/privacy claims, and
    domain-specific consequences require independent review before reuse.
@@ -370,9 +376,11 @@ evidence.
 - [ ] Create original accessible diagrams with adjacent concise prose
       alternatives; do not import screenshots, figures, datasets, or notebook
       outputs from the sources without a recorded reuse decision.
-- [ ] Implement bounded deterministic synthetic reference models and tests for
-      representation collisions, split leakage, metric/calibration behavior,
-      shift claims, gradient checks, and reproducibility records.
+- [~] A shared bounded deterministic fixture/test now covers a representation
+      collision, information-budget baseline contrast, finite probability-card
+      behavior, and one scalar gradient check. Split leakage, named shift
+      simulation, reproducibility records, a learner studio, and independent
+      lesson review remain to be completed.
 - [ ] Build confidence-aware diagnostics and evidence rubrics that test
       assumptions and counterexamples, not recognition of algorithm names.
 - [ ] Create M35-specific Teaching Assistant and Study Partner packages. The

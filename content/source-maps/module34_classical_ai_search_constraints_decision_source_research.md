@@ -270,11 +270,13 @@ a raw transcript and no saved-note claim is valid without direct evidence.
    TA/Study Partner oral material. Its prerequisite/forward map, source
    binding, accessibility review, module contract, and release evidence are
    still not canonical learner-route or publication evidence.
-4. **No tested safe learner interaction exists.** There is no checked-in
-   bounded search/CSP/decision studio or reference fixture with an input
-   allowlist, accessibility/browser test, and failure-mode documentation. A
-   future studio must not execute arbitrary code or access undeclared network,
-   package, credential, or filesystem capabilities.
+4. **No tested learner studio exists.** A local deterministic fixture/test now
+   makes two declared frontier-policy and binary-relaxation decisions
+   inspectable, without accepting learner code or acting as a general solver.
+   It is not a browser-accessible search/CSP/decision studio with a full input
+   allowlist, accessibility review, and failure-mode documentation. A future
+   studio must not execute arbitrary code or access undeclared network, package,
+   credential, or filesystem capabilities.
 5. **No theorem or solver validation has occurred.** Future cards must
    independently test the exact A*/CSP/planner/relaxation implementation
    against a reference oracle and stated theorem hypotheses. A copied

@@ -1,0 +1,150 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+import {
+  M35_M36_SIGNAL_ROUTING_FIXTURE,
+  m35BaselineComparison,
+  m35CalibrationContrast,
+  m35RepresentationCollisionWitness,
+  m35SquaredLossGradientCheck,
+  m36LearningClaimProbe,
+  m36ReductionOrderProbe,
+} from "../lib/m35-m36-signal-routing-fixture.js";
+
+function assertApproximately(actual, expected, tolerance = 1e-10) {
+  assert.ok(
+    Math.abs(actual - expected) <= tolerance,
+    `Expected ${actual} to be within ${tolerance} of ${expected}.`,
+  );
+}
+
+test("the shared fixture is frozen, local, and explicit about its evidence boundary", () => {
+  assert.equal(M35_M36_SIGNAL_ROUTING_FIXTURE.id, "m35-m36-fixed-signal-routing-v1");
+  assert.equal(M35_M36_SIGNAL_ROUTING_FIXTURE.localOnly, true);
+  assert.equal(Object.isFrozen(M35_M36_SIGNAL_ROUTING_FIXTURE), true);
+  assert.equal(Object.isFrozen(M35_M36_SIGNAL_ROUTING_FIXTURE.rows), true);
+  assert.equal(M35_M36_SIGNAL_ROUTING_FIXTURE.rows.length, 4);
+  assert.match(M35_M36_SIGNAL_ROUTING_FIXTURE.truthBoundary, /fully synthetic finite cards/u);
+  assert.match(M35_M36_SIGNAL_ROUTING_FIXTURE.truthBoundary, /do not describe people/u);
+});
+
+test("the representation witness makes a collision and its narrow conclusion inspectable", () => {
+  const witness = m35RepresentationCollisionWitness();
+
+  assert.equal(witness.witnesses[0].representation, witness.witnesses[1].representation);
+  assert.notEqual(witness.witnesses[0].label, witness.witnesses[1].label);
+  assert.equal(witness.deterministicDownstreamCanSeparate, false);
+  assert.match(witness.truthBoundary, /generalization theorem/u);
+});
+
+test("the baseline card retains each alternative's input budget beside its finite score", () => {
+  const comparison = m35BaselineComparison();
+  const byId = Object.fromEntries(comparison.alternatives.map((alternative) => [alternative.id, alternative]));
+
+  assert.deepEqual(byId["constant-one"].inputFields, []);
+  assert.deepEqual(byId["signal-only"].inputFields, ["signal"]);
+  assert.deepEqual(byId["disclosed-rule"].inputFields, ["signal", "context"]);
+  assert.equal(byId["constant-one"].accuracy, 0.5);
+  assert.equal(byId["signal-only"].accuracy, 0.5);
+  assert.equal(byId["disclosed-rule"].accuracy, 1);
+  assert.match(comparison.conclusion, /different information budgets/u);
+});
+
+test("the calibration contrast holds threshold accuracy fixed while exposing finite probability differences", () => {
+  const contrast = m35CalibrationContrast();
+  const byId = Object.fromEntries(contrast.predictors.map((predictor) => [predictor.id, predictor]));
+
+  assert.equal(byId["calibrated-card"].accuracy, 0.75);
+  assert.equal(byId["overconfident-card"].accuracy, 0.75);
+  assertApproximately(byId["calibrated-card"].brierScore, 0.1875);
+  assertApproximately(byId["overconfident-card"].brierScore, 0.2451);
+  assert.ok(byId["calibrated-card"].brierScore < byId["overconfident-card"].brierScore);
+  assert.deepEqual(byId["calibrated-card"].bins, [
+    { probability: 0.25, count: 4, positiveCount: 1, observedPositiveRate: 0.25 },
+    { probability: 0.75, count: 4, positiveCount: 3, observedPositiveRate: 0.75 },
+  ]);
+  assert.match(contrast.conclusion, /population calibration guarantee/u);
+});
+
+test("the bounded gradient check agrees at one point and rejects invalid numerical inputs", () => {
+  const check = m35SquaredLossGradientCheck({ weight: 0, feature: 2, label: 1 });
+
+  assert.equal(check.loss, 1);
+  assert.equal(check.analyticGradient, -4);
+  assertApproximately(check.centralDifferenceGradient, -4, 1e-8);
+  assert.match(check.truthBoundary, /one displayed scalar loss/u);
+  assert.throws(
+    () => m35SquaredLossGradientCheck({ weight: Number.NaN, feature: 2, label: 1 }),
+    /weight must be a finite number/u,
+  );
+  assert.throws(
+    () => m35SquaredLossGradientCheck({ weight: 0, feature: 2, label: 1, step: 0 }),
+    /step must be positive/u,
+  );
+});
+
+test("the M36 card keeps finite empirical risk and a named synthetic shift distinct", () => {
+  const probe = m36LearningClaimProbe();
+  const byHypothesis = Object.fromEntries(
+    probe.hypotheses.map((hypothesis) => [hypothesis.id, hypothesis]),
+  );
+  const byRelation = Object.fromEntries(
+    probe.namedRelationContrast.map((relation) => [relation.relationId, relation]),
+  );
+
+  assert.equal(byHypothesis["always-zero"].empiricalZeroOneRisk, 0.75);
+  assert.equal(byHypothesis["always-one"].empiricalZeroOneRisk, 0.25);
+  assert.equal(byRelation["source-balanced"].signalOnlyExpectedAccuracy, 0.5);
+  assert.equal(byRelation["context-heavy"].signalOnlyExpectedAccuracy, 0.75);
+  assert.match(probe.conclusion, /Neither result supplies IID evidence/u);
+  assert.match(probe.truthBoundary, /generalization theorem/u);
+});
+
+test("the reduction-order probe reports only its current JavaScript numerical scope", () => {
+  const probe = m36ReductionOrderProbe();
+
+  assert.equal(probe.left, 1);
+  assert.equal(probe.right, 0);
+  assert.equal(probe.valuesDiffer, true);
+  assert.equal(probe.executionScope, "current ECMAScript Number evaluation only");
+  assert.match(probe.truthBoundary, /not a failure of real-number algebra/u);
+  assert.match(probe.truthBoundary, /not a .*cross-platform reproducibility claim/u);
+});
+
+test("each probe is deterministic and does not mutate the shared declaration", () => {
+  const first = {
+    collision: m35RepresentationCollisionWitness(),
+    baseline: m35BaselineComparison(),
+    calibration: m35CalibrationContrast(),
+    learning: m36LearningClaimProbe(),
+    reduction: m36ReductionOrderProbe(),
+  };
+  const second = {
+    collision: m35RepresentationCollisionWitness(),
+    baseline: m35BaselineComparison(),
+    calibration: m35CalibrationContrast(),
+    learning: m36LearningClaimProbe(),
+    reduction: m36ReductionOrderProbe(),
+  };
+
+  assert.deepEqual(second, first);
+  assert.equal(M35_M36_SIGNAL_ROUTING_FIXTURE.rows[0].label, 1);
+  assert.equal(M35_M36_SIGNAL_ROUTING_FIXTURE.calibrationObservations[0].label, 1);
+});
+
+test("the M35 and M36 workbooks turn the shared fixture into bounded prediction work", async () => {
+  const [m35Workbook, m36Workbook] = await Promise.all([
+    readFile("content/authoring/m35_machine_learning_representation_workbook.v1.md", "utf8"),
+    readFile("content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "utf8"),
+  ]);
+
+  assert.match(m35Workbook, /m35RepresentationCollisionWitness\(\)/u);
+  assert.match(m35Workbook, /m35BaselineComparison\(\)/u);
+  assert.match(m35Workbook, /m35CalibrationContrast\(\)/u);
+  assert.match(m35Workbook, /m35SquaredLossGradientCheck\(\{ weight: 0, feature: 2, label: 1 \}\)/u);
+  assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
+  assert.match(m36Workbook, /m36ReductionOrderProbe\(\)/u);
+  assert.match(m36Workbook, /m35CalibrationContrast\(\)/u);
+  assert.match(m36Workbook, /not IID evidence, a PAC\/VC calculation/u);
+});

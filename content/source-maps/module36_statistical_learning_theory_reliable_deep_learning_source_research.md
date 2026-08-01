@@ -268,9 +268,11 @@ release input, and cannot be claimed saved without direct evidence.
    or learner evidence.
 3. **No reviewed M36 learner-route artifact exists.** A private M36 workbook
    now supplies six draft sessions, visual alternatives, diagnostics/retrieval,
-   a project rubric, and TA/Study Partner oral material. It still lacks a
-   canonical learner-route binding, reviewed evidence, a tested reference
-   model or safe studio, and release evidence.
+   a project rubric, and TA/Study Partner oral material. A shared bounded
+   fixture/test now supplies a finite-risk/named-relation probe and a current
+   JavaScript reduction-order probe. It still lacks a canonical learner-route
+   binding, reviewed evidence, a safe learner studio, and release evidence;
+   the fixture is neither a theorem review nor a general reliability model.
 4. **No theorem or experiment has been independently reviewed for a lesson.**
    Future claims need exact theorem statements/proofs or original derivations,
    explicit conditions, source/asset review, and a scope/non-claim adjacent to
@@ -290,9 +292,10 @@ release input, and cannot be claimed saved without direct evidence.
 - [ ] Build original, accessible diagrams and adjacent text alternatives for
       every risk/gap/theorem/system relationship; never use copied paper or
       course figures as a shortcut.
-- [ ] Build original bounded fixtures with transparent data generation,
-      semantic oracle, numerical assumptions, resource limits, cancellation,
-      and no arbitrary code/network/credential/filesystem behavior.
+- [~] A shared local fixture/test now provides fixed finite-risk/relation and
+      reduction-order probes with explicit numerical and scope boundaries. A
+      broader reviewed experiment, complete semantic-oracle coverage, learner
+      studio, and release evidence remain to be completed.
 - [ ] Require prediction before reveal and expose proof ideas, counterexamples,
       limitations, uncertainty, and transfer tasks rather than memorized bound
       names or loss curves.

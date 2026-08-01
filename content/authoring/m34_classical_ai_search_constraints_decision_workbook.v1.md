@@ -291,6 +291,15 @@ heuristic for A-star—and explain which premise it changes.
 it does not inherit a guarantee unless its assumptions and evaluation match
 the theorem.
 
+### Bounded reference fixture — frontier policy
+
+Use `lib/m34-classical-ai-reference-fixture.js` before accepting a code label.
+Predict the next entry chosen by the declared lowest-accumulated-cost policy
+and by last-in-first-out policy, then inspect
+`chooseM34DeclaredFrontierEntry(...)`. Name the still-missing tie, duplicate,
+goal-test, cost-domain, and reopen rules. The fixture chooses between exactly
+two entries; it is not an implementation of UCS or a graph-search theorem.
+
 ---
 
 ## Session 3 — Constraints and relaxations change the mathematical object
@@ -380,6 +389,15 @@ For one synthetic CSP or optimization fixture, record:
 **Transfer:** M35's loss function and surrogate metric may be useful
 relaxations or proxies; they do not automatically represent the deployment
 constraint or human goal.
+
+### Bounded reference fixture — relaxation status
+
+Before calling `evaluateM34BinaryRelaxationCandidate({ x: 1, y: 0.5 })`,
+predict which checks pass in the relaxed and original binary models. Inspect
+the returned feasible assignments and bound explanation, then state why the
+fractional witness cannot be handed to a user as an original solution. The
+fixture is a finite synthetic status check, not a general solver, rounding
+method, proof system, or decision recommendation.
 
 ---
 

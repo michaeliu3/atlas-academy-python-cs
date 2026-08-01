@@ -313,6 +313,15 @@ Make a ledger for one language claim:
 bug, but it cannot replace the stated conditions of a completeness or
 optimality theorem.
 
+### Bounded reference fixture — trace before claim
+
+Use `lib/m33-formal-languages-reference-model.js` and its focused test as a
+small code-reading exercise. Before calling `traceM33EvenOnesDfa("1010")`,
+write the state trace and acceptance prediction. Then inspect the returned
+trace: every state has a declared parity meaning, and the runner refuses
+non-binary or over-long exercise input. This fixture checks one named DFA only;
+it is neither a regularity proof nor an undecidability oracle.
+
 ---
 
 ## Session 3 — Grammar questions and semantic limits are different questions

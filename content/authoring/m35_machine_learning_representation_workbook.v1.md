@@ -228,6 +228,18 @@ a bit that `phi` erased.
 
 </details>
 
+### Bounded reference fixture — collision before model talk
+
+Read `lib/m35-m36-signal-routing-fixture.js` as a tiny code-reading artifact.
+Before calling `m35RepresentationCollisionWitness()`, write the two inputs
+that share `phi(signal, context) = signal`, their labels, and whether a
+deterministic downstream function can separate them. Then inspect the returned
+`witnesses`, `conclusion`, and `truthBoundary` fields.
+
+The fixture gives four declared synthetic rows a concrete, inspectable form.
+It is not an embedding experiment, a trained model, a claim about a real
+population, or a generalization theorem.
+
 ### Code-reading task: preprocessing is part of the representation
 
 ```python
@@ -330,6 +342,18 @@ different question because it receives less information. List the difference
 in its input contract, its predictable failure, and one reason it could still
 be useful as a deliberately weak lower bound.
 
+### Bounded reference fixture — information budgets before score claims
+
+Before calling `m35BaselineComparison()`, predict the fixed-card accuracy of
+`constant-one`, `signal-only`, and `disclosed-rule`. For each alternative,
+name the input fields it is allowed to see. After inspecting the returned
+`alternatives`, explain why the best number is not evidence of architecture
+superiority.
+
+`disclosed-rule` can match the label only because this synthetic generator is
+shown in the fixture. It is an inspectable oracle for the toy relation, not a
+production baseline recommendation.
+
 ### Output: Classical–Learning Baseline Comparison
 
 Create a **Baseline Comparison** that records:
@@ -419,6 +443,14 @@ synthetic future split. Predict whether an accuracy, calibration, or threshold
 metric could change. Then state what this single perturbation does **not**
 identify: real-world robustness, causal mechanism, or all possible shifts.
 
+### Bounded reference fixture — equal accuracy can hide probability behavior
+
+Before calling `m35CalibrationContrast()`, predict whether its two fixed
+probability cards can have the same threshold accuracy while receiving
+different proper scores. Inspect the returned `predictors` and binned observed
+frequencies. Then write one sentence separating this finite card from a
+population-calibration or decision-policy claim.
+
 ### Output: Evaluation-and-Shift Plan
 
 Record a **Plan** with target relation, unit of independence, split rule,
@@ -492,6 +524,14 @@ on.
 `h` can also suffer cancellation; agreement is a probe, not a theorem.
 
 </details>
+
+### Bounded reference fixture — one scalar gradient comparison
+
+Before calling
+`m35SquaredLossGradientCheck({ weight: 0, feature: 2, label: 1 })`, predict
+the loss and analytic derivative. Compare its analytic and central-difference
+values, then list two important things the agreement does **not** validate.
+The returned scope statement is part of the result, not a disclaimer to skip.
 
 ### Reproducibility is a bounded comparison
 

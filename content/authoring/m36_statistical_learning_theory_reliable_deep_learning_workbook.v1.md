@@ -223,6 +223,17 @@ The first function computes a finite statistic for `sample`. The second only
 names an expectation. Explain why neither function establishes an IID
 assumption, a correct sampling frame, or a valid decision threshold.
 
+### Bounded reference fixture — finite record versus named relation
+
+Read `lib/m35-m36-signal-routing-fixture.js` before making a learning claim.
+Before calling `m36LearningClaimProbe()`, predict the empirical zero-one risk
+of `always-one` on its four-row sample and the `signal-only` accuracy under
+each named synthetic relation. After inspection, identify which numbers
+describe the finite sample and which describe only the two declared relations.
+
+This is a scope-reading card, not IID evidence, a PAC/VC calculation, an
+efficient learning algorithm, or a deployment claim.
+
 ### Output: Assumption-Scope Sheet
 
 For the relay learner, fill the table above and attach one tiny counterexample:
@@ -421,6 +432,14 @@ Explain why a particular runtime’s values are a finite representation fact,
 not a failure of algebra. Then identify why an ML reduction over many values
 may require an environment/reduction-order record.
 
+### Bounded reference fixture — numerical order is an observation
+
+Before calling `m36ReductionOrderProbe()`, predict the values of
+`(1e16 + -1e16) + 1.0` and `1e16 + (-1e16 + 1.0)` in the current JavaScript
+number runtime. Inspect `executionScope` and the returned truth boundary. The
+exercise is evidence about one finite calculation; it is neither a
+cross-platform reproducibility claim nor a framework test.
+
 ### Theory-to-system reproduction record
 
 | Field | Required evidence |
@@ -499,6 +518,15 @@ For a named population, calibration concerns a conditional relation such as
 A finite reliability table estimates it subject to bins, samples, labels,
 selection, and relation. Even good observed calibration does not choose an
 error cost, give consent, settle fairness, or decide who may act.
+
+### Shared fixture return — probability evidence still needs an owner
+
+Revisit `m35CalibrationContrast()` from the shared fixture. Its two cards keep
+threshold accuracy fixed while changing the probability evidence. Before
+looking at the result, name one monitoring observable that could distinguish
+them and one action that must remain with a human owner. A finite card does not
+choose a threshold, authorize intervention, or guarantee robustness under a
+new relation.
 
 ### Output: Reliable-Learning Evidence Map
 

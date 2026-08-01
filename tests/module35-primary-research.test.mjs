@@ -30,6 +30,8 @@ test("M35 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /## Likely six-session source routing/u);
   assert.match(research, /## Bounded project and numerical-experiment plan/u);
   assert.match(research, /## Research gaps and release blockers this file does not close/u);
+  assert.match(research, /A bounded local reference fixture and focused teaching test now exist/u);
+  assert.match(research, /no learner studio or release validation exists/u);
   assert.match(research, /The portal and portable copied prompts remain\s+local-first/u);
   assert.match(research, /only the learner-designated Codex Teaching Assistant or Study Partner\s+chat may create at most one concise, privacy-bounded Notion session note/u);
   assert.match(research, /no saved-note claim is valid without direct\s+evidence\./u);

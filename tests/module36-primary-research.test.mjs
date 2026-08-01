@@ -30,6 +30,8 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /## Likely six-session source routing/u);
   assert.match(research, /## Bounded project and numerical-experiment plan/u);
   assert.match(research, /## Research gaps and release blockers this file does not close/u);
+  assert.match(research, /A shared bounded\s+fixture\/test now supplies a finite-risk\/named-relation probe/u);
+  assert.match(research, /neither a theorem review nor a general reliability model/u);
   assert.match(research, /A portable copied chat prompt stays local by default\./u);
   assert.match(research, /may instead create at most one concise,\s+privacy-bounded session note after a substantive conversation/u);
   assert.match(research, /cannot be claimed saved without direct evidence\./u);
