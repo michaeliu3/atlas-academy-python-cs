@@ -18,10 +18,12 @@ reported as host metadata. The compatibility suite was also run separately on
 CPython 3.12.13. No free-threaded runtime was installed or executed, so every
 free-threaded statement in this module is documentation-scoped.
 
-**Primary learning surface:** use the artistic, interactive HTML studio for
-prediction, stepping, reveal, and persistent learning records. This workbook is
-the complete accessible and auditable canonical source: it contains every
-contract, diagram text equivalent, lab, quiz rationale, project gate, and
+**Learning route:** use the designated Teaching Assistant and Study Partner
+chats for guided teaching, discussion, rehearsal, and oral defense. Use the
+artistic interactive HTML studio as the visual/reference companion for
+prediction, stepping, reveal, and learner-controlled local progress. This
+workbook is the complete accessible and auditable canonical source: it contains
+every contract, diagram text equivalent, lab, quiz rationale, project gate, and
 source boundary needed without animation, color, or JavaScript.
 
 **Learning record:** use the Module 19 Notion notebook for predictions,
@@ -2006,11 +2008,11 @@ uncertainty, and the next evidence to collect in a learner-controlled summary.
 
 ## 8. Six-view interactive HTML studio
 
-The HTML studio is the primary learning experience. It uses a woven execution
-score: workers occupy horizontal event rails; vertical crossings appear only at
-real ownership/synchronization boundaries; the reducer is a strong central
-spine; wait-for cycles tighten into a visible knot; terminal classifications
-have redundant words, icons, and border patterns.
+The HTML studio is a visual/reference companion, not the primary guided-learning
+surface. It uses a woven execution score: workers occupy horizontal event rails;
+vertical crossings appear only at real ownership/synchronization boundaries;
+the reducer is a strong central spine; wait-for cycles tighten into a visible
+knot; terminal classifications have redundant words, icons, and border patterns.
 
 All six views use the same fixture:
 

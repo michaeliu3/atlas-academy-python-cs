@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Corrected the M18–M20 learner-route wording after a focused systems review:
+  designated Teaching Assistant and Study Partner chats now explicitly lead
+  guided teaching, discussion, rehearsal, and oral defense, while the portal
+  is accurately described as the visual/reference companion. M20 also gains
+  direct browser keyboard/Axe coverage for its existing protocol observatory;
+  M23 adds a link-only Stanford CS242 depth route, and M24 directly links its
+  existing source map. This is a truthful private-learning improvement only;
+  it does not promote contract/release state, create human review, deployment,
+  learner-mastery, or university-equivalence evidence.
 - Strengthened the M11–M16 durable-software arc after a narrow official-source
   recheck. M11 now has an optional model/proof/counterexample boundary that
   routes formal hardness questions to M33; M12 carries a compact boundary card

@@ -414,15 +414,15 @@
     },
     {
       "path": "content/modules/18_operating_systems_resource_mediation.md",
-      "sha256": "23c24b6f74e3b432277984d7b5432a8e4c9db294a23423e6e90591fbb9794fba"
+      "sha256": "15e1b990ba3c6b80b667a2994a05851ae336ddbbd6738b9609b2d57d81287b99"
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "19cbff6e69cd72329b5a4e9e1799bef99504409cc974f1b1c731019eb92b18ef"
+      "sha256": "9443e6c7aacb9cfc9bbdb1826c2aace75a183eae07e3c91ea8bb728e594a14f8"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "a5eeabb65bf22a856c131af7d31054b72ebc16ff52f08b4006df7b21dcae927d"
+      "sha256": "5657d9f3be08983346b60ea9e97f642cee690ddcbbd33df058a8145cbc6d5bb9"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
@@ -434,11 +434,11 @@
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
-      "sha256": "ede123d65132452a6b851377907989621729a80f9754a69f0ce474a618e9486b"
+      "sha256": "aea8bd09e105c2c0ad8963312cae650bbd333841849b70e1dc6408eef9759e9f"
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "fff44257170d52c39008b96b31a65f35776490889ebe6837399dd4434c849338"
+      "sha256": "6b8e473148ffc4d232225be1a14aafadf477ebfa8b5b443ebd0198c1e63803e4"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
@@ -674,7 +674,7 @@
     },
     {
       "path": "e2e/accessibility.spec.ts",
-      "sha256": "71cc2820bdff9ad9aea27b37aa8730e82baf5829dc2072bfe3263863f3f3e915"
+      "sha256": "07feb6e6e4218556e56be6ec6f23ee6176cfcfb457ebd248c2ad36f80fdcf6a1"
     },
     {
       "path": "lib/module-studio-registry.ts",

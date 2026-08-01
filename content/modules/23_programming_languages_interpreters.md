@@ -1323,6 +1323,10 @@ These guide teaching order, not Python semantics or security guarantees:
   VM, and JIT.
 - [UC Berkeley CS 61A Scheme specification](https://site.cs61a.org/articles/scheme-spec/)
   for visual environment/frame teaching inspiration.
+- [Stanford CS242 coursework](https://web.stanford.edu/class/cs242/coursework.html)
+  as an optional, link-only theory/semantics route after the bounded evaluator;
+  use it to locate further study, not to copy assignments, solutions, or a
+  grading workflow.
 
 ### Licensing note
 

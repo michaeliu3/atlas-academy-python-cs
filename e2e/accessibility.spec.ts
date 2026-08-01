@@ -330,6 +330,49 @@ test("M13 direct studio keeps evidence prediction gated by confidence", async ({
   expect(results.violations, "Axe found a violation in the direct M13 studio.").toEqual([]);
 });
 
+test("M20 direct studio keeps tabs, prediction, confidence, reveal, and accessibility usable", async ({
+  page,
+}) => {
+  await page.goto("/modules/20-networks-application-protocols");
+
+  const studio = page.locator("section[aria-labelledby='network-protocol-studio-title']");
+  await expect(studio).toBeVisible();
+
+  const tabs = studio.getByRole("tablist", { name: "Network protocol studio views" });
+  const firstTab = tabs.getByRole("tab").first();
+  const secondTab = tabs.getByRole("tab").nth(1);
+  await firstTab.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(secondTab).toBeFocused();
+  await expect(secondTab).toHaveAttribute("aria-selected", "true");
+  await page.keyboard.press("Home");
+  await expect(firstTab).toBeFocused();
+
+  const reveal = studio.getByRole("button", {
+    name: "Commit prediction & reveal evidence",
+  });
+  await expect(reveal).toBeDisabled();
+  await selectRadioWithKeyboard(
+    page,
+    studio.getByRole("radio", {
+      name: /local resolver api returned endpoint candidates the client may attempt/i,
+    }),
+  );
+  await expect(reveal).toBeDisabled();
+  await selectRadioWithKeyboard(page, studio.getByRole("radio", { name: /3 defensible/i }));
+  await expect(reveal).toBeEnabled();
+  await reveal.focus();
+  await page.keyboard.press("Enter");
+  await expect(
+    studio.getByRole("heading", { name: "Candidate is the correct boundary." }),
+  ).toBeVisible();
+
+  const results = await new AxeBuilder({ page })
+    .include("section[aria-labelledby='network-protocol-studio-title']")
+    .analyze();
+  expect(results.violations, "Axe found a violation in the direct M20 studio.").toEqual([]);
+});
+
 for (const forcedColorsStudio of [
   {
     moduleId: "M12",

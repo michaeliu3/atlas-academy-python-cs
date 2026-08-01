@@ -68,3 +68,13 @@ specific asset has an independently verified reuse grant. In particular, do
 not reproduce course or lab solutions. The linked courses calibrate scope and
 pedagogy; the module source ledgers retain responsibility for technical,
 version, license, and freshness claims.
+
+## Implementation record
+
+On **2026-08-01**, M18–M20 wording was corrected so the designated Teaching
+Assistant and Study Partner chats lead guided learning, rehearsal, and oral
+defense while the portal remains a visual/reference companion. M20 also gained
+direct browser keyboard and scoped accessibility coverage for its existing
+protocol observatory. M17 required no change. This does not create a release,
+learner-route promotion, human review, university-equivalence, or learner-
+mastery claim.

@@ -31,10 +31,13 @@ python module20_reference.py --scenario timeout_then_lookup
 The model's evidence packet names the canonical repository-root command and its
 `canonical_command_base`; it does not need or record your actual local folder.
 
-**Primary learning surface:** use the visual HTML studio for prediction,
-stepping, comparison, and recording. This workbook is the complete accessible
-and auditable source: every visual has a text equivalent, every exercise has a
-stated observation boundary, and every source-backed claim names its owner.
+**Learning route:** use the designated Teaching Assistant and Study Partner
+chats for guided teaching, discussion, rehearsal, and oral defense. Use the
+visual HTML studio as a visual/reference companion for prediction, stepping,
+comparison, and learner-controlled local progress. This workbook is the
+complete accessible and auditable source: every visual has a text equivalent,
+every exercise has a stated observation boundary, and every source-backed claim
+names its owner.
 
 **Learning record:** use the Module 20 Notion notebook for endpoint maps,
 frame traces, confidence ratings, timeout-history matrices, API contracts,
@@ -1484,10 +1487,10 @@ overclaim, the next observation, and a learner-controlled evidence summary.
 
 ## 8. Six-view interactive HTML studio
 
-The portal is the primary learning surface. It is a **protocol observatory**,
-not a slide deck: every control changes a small declared model; every visual
-has a text equivalent and reset; no colour, animation, or score is needed to
-understand a claim.
+The portal is a visual/reference companion, not the primary guided-learning
+surface. It is a **protocol observatory**, not a slide deck: every control
+changes a small declared model; every visual has a text equivalent and reset;
+no colour, animation, or score is needed to understand a claim.
 
 ### Studio operating rule
 

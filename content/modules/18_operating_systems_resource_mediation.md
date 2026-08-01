@@ -66,10 +66,12 @@ Each difficult idea appears in several forms:
 7. a bounded Atlas decision;
 8. an evidence claim to defend.
 
-Use the learner-facing HTML reader as the primary study surface when this draft
-is published. Use Notion for predictions, misconceptions, diagrams redrawn from
-memory, experiment records, and oral-defense notes. The workbook remains the
-auditable instructor source.
+Use the designated Teaching Assistant and Study Partner chats for guided
+learning, rehearsal, and the supportive oral defense. The learner-facing HTML
+reader is the visual/reference companion for traces, diagrams, and bounded
+interactive work. Use Notion for predictions, misconceptions, diagrams redrawn
+from memory, experiment records, and oral-defense notes. The workbook remains
+the auditable instructor source.
 
 ### The learner loop
 

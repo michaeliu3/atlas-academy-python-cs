@@ -937,13 +937,13 @@ path are explicit.
 
 ## 12. Source route and reuse boundary
 
-Use the companion Module 24 source map for claim-to-source routing. Core
-reading includes the Python 3.14 data model, sys, gc, tracemalloc, timeit,
-profile, dis, and C-API memory/reference-count documentation; pinned CPython
-3.14.6 interpreter, bytecode, specialization, garbage-collection, and
-allocator source routes; PEPs 659, 683, and 703 for historical/design context;
-and MIT 6.172 / Berkeley CS 61C for performance and memory-hierarchy
-pedagogy.
+Use the companion [Module 24 source map](https://github.com/michaeliu3/atlas-academy-python-cs/blob/main/content/source-maps/module24_cpython_performance_memory_source_map.md)
+for claim-to-source routing. Core reading includes the Python 3.14 data model,
+sys, gc, tracemalloc, timeit, profile, dis, and C-API memory/reference-count
+documentation; pinned CPython 3.14.6 interpreter, bytecode, specialization,
+garbage-collection, and allocator source routes; PEPs 659, 683, and 703 for
+historical/design context; and MIT 6.172 / Berkeley CS 61C for performance and
+memory-hierarchy pedagogy.
 
 Python documentation and CPython source are governed by the PSF License v2;
 documentation examples/recipes additionally carry a 0BSD grant. Atlas uses
