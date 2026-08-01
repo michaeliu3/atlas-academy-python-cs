@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Stabilized temporary Git-index candidate-fixture cleanup with Node's bounded
+  retry support for transient `ENOTEMPTY` failures, and corrected advanced-pack
+  status wording in the completion matrix, roadmap, and learner pace plan.
+  M31–M36 remain hidden authoring-only private drafts and M25/M26 remain
+  preview-gated; this neither promotes a module nor claims human review,
+  learner delivery, deployment, or mastery.
 - Corrected the M18–M20 learner-route wording after a focused systems review:
   designated Teaching Assistant and Study Partner chats now explicitly lead
   guided teaching, discussion, rehearsal, and oral defense, while the portal

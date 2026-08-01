@@ -151,7 +151,7 @@ M31–M36 into completed work or turn M25/M26 previews into a capstone.
 | Days 18–25 | M12–M16 | Make contracts, tests, delivery, persistence, and transactions preserve meaning over time. |
 | Days 26–34 | M17, M28–M30 | Connect execution to linear structure, continuous change, uncertainty, and evidence. M31 remains a visible authoring/access stop. |
 | Days 35–44 | M18–M24 as the labelled open systems branch | Study OS, concurrency, networks, trust, languages, and runtime evidence from M17. Do not represent this branch as completing M31 or as entering M32. |
-| Days 45–53 | Retrieval, debugging, and dossier revision | No M32–M36 substitute exists today. Revisit claims, math, and systems evidence; make uncertainty visible. |
+| Days 45–53 | Retrieval, debugging, and dossier revision | No reader-open or verified M32–M36 substitute exists today. Private authoring drafts remain hidden and do not count toward this open-material route; revisit claims, math, and systems evidence instead. |
 | Days 54–55 | Optional M25 preview orientation | If read, record questions and assumptions only. It produces no synthesis credit. |
 | Days 56–60 | Pre-capstone evidence bundle and constructive oral rehearsal | Build a learner-owned dossier from open material. This is **not** the M26 capstone or a release defense. |
 
@@ -175,10 +175,11 @@ reader/Core access boundary as the 60-day plan.
 | 78–90 | Retrieval, revisions, preview orientation only if useful | One revised dossier, two delayed oral defenses, and a next specialization question. |
 
 At current reader/Core access status, the last two weeks are deliberately not
-filled with invented M31–M36 content. If any of those modules later becomes
-verified published, insert it only after its canonical reader access, availability,
-validated contract, and release/provenance evidence all support that claim;
-then recalculate the plan.
+filled with unverified reader-route M31–M36 coursework. Private authoring
+drafts do not change this open-material boundary. If any module later becomes
+verified and reader-open, insert it only after its canonical reader access,
+availability, validated contract, and release/provenance evidence all support
+that claim; then recalculate the plan.
 
 ### 180 days — durable understanding and specialization readiness
 

@@ -68,11 +68,13 @@ oral-defense, or project evidence shows a necessary bridge.
   source-audited six-session workbook, fixed-fixture Probability & Inference
   Studio, downloadable provenance, bounded local model, code-reading/
   claim-evidence boundaries, and conversational oral defense.
-- [ ] M31 — optimization and information.
-- [ ] M32–M36 — systems-for-learning, formal limits, classical AI, ML, and
-  learning-theory reliability.
-- [ ] Reweave M25/M26 and their capstone evidence packet against the released
-  M28–M36 artifacts.
+- [ ] M31 — review, learner-delivery, and release evidence for the existing
+  optimization-and-information authoring pack.
+- [ ] M32–M36 — review, learner-delivery, and release evidence for the
+  existing systems-for-learning, formal-limits, classical-AI, ML, and
+  learning-theory-reliability authoring packs.
+- [ ] Complete the release-grade M25/M26 reweave only after reviewed/verified
+  M28–M36 evidence exists; preserve the current preview-safe material and gate.
 
 ## Prospective 60-day checkpoints after M31–M36
 
