@@ -5,7 +5,7 @@ import test from "node:test";
 const packs = [
   {
     path: "content/authoring/m31_optimization_information_workbook.v1.md",
-    expectedAnswers: 6,
+    expectedAnswers: 7,
     minimumSessionReveals: 6,
   },
   {
