@@ -50,10 +50,10 @@ Use original Atlas prose, diagrams, counterexamples, proof repairs, and code. Ci
 | --- | --- | --- |
 | 1 — definitions, logic, models | MIT MCS proofs; Open Logic Project | Lean propositions and quantifiers |
 | 2 — proof construction, induction, invariants | MIT MCS proofs/state machines; original Atlas proof repairs | *Book of Proof* (link-only) |
-| 3 — counting, recurrences, asymptotics | MIT MCS counting/recurrences/asymptotics; Levin | Erickson appendices |
-| 4 — generating functions, modular reasoning | Levin plus MIT MCS number theory | Wilf (link-only) |
-| 5 — graphs, connectivity, matching | MIT MCS graphs/matching; Levin matching section | Erickson graph/flow chapters |
-| 6 — posets, lattices, defense | MIT MCS directed graphs/partial orders; Judson lattice vocabulary | Lean micro-lab |
+| 3 — counting, recurrences, generating functions, asymptotics | MIT MCS counting/recurrences/asymptotics; Levin; Wilf for optional depth | Erickson appendices |
+| 4 — graphs, trees, connectivity, and matchings | MIT MCS graphs/matching; Levin matching section | Erickson graph/flow chapters |
+| 5 — partial orders, lattices, and elementary number theory | MIT MCS partial orders and number theory; Judson lattice vocabulary | Lean micro-lab |
+| 6 — integrate the models: proof dossier and AI review | Original Atlas synthesis using the preceding scoped sources | Optional learner-selected source rereading |
 
 ## Evidence language to preserve in the portal
 

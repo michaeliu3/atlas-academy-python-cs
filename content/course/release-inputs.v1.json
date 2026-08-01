@@ -550,11 +550,11 @@
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
-      "sha256": "06c9a64699af2c6cac17b23f0d951d826b2d0e5115fa9faf5f8ab66a5559f3a0"
+      "sha256": "99e7b16ac47999e81d242332835b845ecd279b8570fbf7f0dfd3d29c8c582c03"
     },
     {
       "path": "content/source-maps/module27_source_audit_addendum.md",
-      "sha256": "2789a7df3a7e2c7840e3a9420601577fb2aab1ffddf9f53fb8c32c9d5f7ede39"
+      "sha256": "47f5c4889cba89edab43ac661a4b546a049e47c3af9ce335763b96d1468f610c"
     },
     {
       "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
@@ -750,7 +750,7 @@
     },
     {
       "path": "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md",
-      "sha256": "06c9a64699af2c6cac17b23f0d951d826b2d0e5115fa9faf5f8ab66a5559f3a0"
+      "sha256": "99e7b16ac47999e81d242332835b845ecd279b8570fbf7f0dfd3d29c8c582c03"
     },
     {
       "path": "public/downloads/module27_reference.py",
@@ -758,7 +758,7 @@
     },
     {
       "path": "public/downloads/module27_source_audit_addendum.md",
-      "sha256": "2789a7df3a7e2c7840e3a9420601577fb2aab1ffddf9f53fb8c32c9d5f7ede39"
+      "sha256": "47f5c4889cba89edab43ac661a4b546a049e47c3af9ce335763b96d1468f610c"
     },
     {
       "path": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",

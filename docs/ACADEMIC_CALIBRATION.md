@@ -16,6 +16,18 @@ asset-specific permission review.
 | M19–M26 | [Systems and synthesis](research/academic-calibration-systems-synthesis.md) | MIT 6.1810, 6.172, 6.005; CMU 15-440; Stanford CS144/CS229; Berkeley CS161/CS164; Georgia Tech CS 6200. |
 | M27–M36 | [Mathematics and AI](research/academic-calibration-math-ai.md) | MIT 6.042J, 18.06, 18.100B, 18.600, 6.7220, 6.045J, 6.034, 6.036, 9.520, 6.7960; CMU 15-213/15-451/10-301; Stanford EE364a/CS149/CS229; Berkeley CS188; Georgia Tech CS 6515/6601/7641. |
 
+## Targeted review evidence
+
+The range notes establish the overall comparison standard. These focused
+reviews record a concrete material audit and its resulting action; they do not
+claim institutional equivalence.
+
+| Review | Scope | Resulting action |
+| --- | --- | --- |
+| [M1–M5 foundations review](research/academic-calibration-m1-m5-source-review.md) | State, recursion/induction, ADTs, proof, and cost models against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Preserve the proof-to-cost bridge and add a concise source/session ledger before rewriting theory. |
+| [M6–M10 data-structures review](research/academic-calibration-m6-m10-source-review.md) | Representation, restricted interfaces, hashing, ordered structures, and graph algorithms against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Add one prediction-and-repair trace for open-addressing deletion before adding broader material. |
+| [M27 discrete-mathematics review](../content/source-maps/module27_discrete_mathematics_official_course_calibration_2026-08-01.md) | Logic, proof, counting, recurrence, graph, poset, asymptotic, and number-theory progression against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Correct the source-map and audit routing so sessions 3–6 match the published workbook sequence. |
+
 ## What calibration means in Atlas
 
 For each major authoring or revision batch, compare the Atlas module with a

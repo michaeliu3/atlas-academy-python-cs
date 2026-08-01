@@ -14,7 +14,7 @@
 | M31–M36 advanced extension | Six private authoring workbooks exist under `content/authoring/`, each with connected sessions, sources, diagnostics, project/dossier, oral-defense, TA/Study Partner, and forward-handoff material. M33–M36 now include source-calibrated formal, AI, ML, and learning-theory reasoning traces. | Prepared for bounded private guided use, but authoring-only/hidden in the portal. A uniform M32–M36 authoring-contract cohort remains before any learner-visible/reviewed-release decision. |
 | M25/M26 synthesis and capstone | Both reader-visible previews were reweaved around advanced-evidence dependencies and use preview-safe TA/Study Partner prompts. | Learning material exists, but they remain preview-only and cannot create premature synthesis/capstone credit. |
 | Guided Codex learning | Separate reusable TA and Study Partner packages, module contexts, whiteboard protocol, and supportive oral-defense flow exist. The two learner-designated chats have received their role handoffs. | Operational design is complete; actual Live quality, voice, math rendering, and text fallback remain platform behavior to observe in the exact chats. |
-| Notion learning record | Local-first portal plus a conditional designated-chat concise-note policy, privacy controls, templates, and existing Notion hub. | A real write/correction/deletion/pause workflow remains unverified until directly observed; no raw transcripts or sensitive data should be stored. |
+| Notion learning record | Local-first portal plus a conditional designated-chat concise-note policy, privacy controls, templates, and existing Notion hub. On 2026-08-01, one text-only QA in each designated chat completed a non-sensitive `QA — safe to delete` note creation in the configured private destination. | This verifies concise approved text-note creation only. Correction, deletion, pause, visual rendering, and Live voice behavior remain unverified; no raw transcripts or sensitive data should be stored. |
 | Visual readability and accessibility | `pnpm validate:mermaid-alternatives` now reports **245/245** reader diagrams with IDs, titles, concise alternatives, and visible prose equivalents. | Authored diagram coverage is complete; broader assistive-technology and representative browser review remain separate work. |
 | Academic calibration | [Academic calibration index](ACADEMIC_CALIBRATION.md), three official-source comparison notes, and a representative material-level review sample cover M1–M36. | Scope calibration is complete for this pass; material-level review is in progress and supports targeted improvement, not institutional equivalence. Revisit when a genuine content gap is found. |
 | 60/90/180-day plans | `LEARNER_ROUTE_PLANS.md` gives pace, evidence, buffers, and catch-up rules; `PRIVATE_GUIDED_LEARNING_ROUTE.md` connects the private advanced packs without changing portal gates. | The 60-day version is a rigorous first pass, not a mastery or degree promise. |
@@ -24,7 +24,8 @@
 
 1. Run a private learner walkthrough through a representative module using the
    exact Study Partner, Teaching Assistant, oral-defense, and Notion workflow;
-   record only observed behavior.
+   extend the observed text-only note-create QA to correction/deletion/pause
+   behavior without retaining raw conversation data.
 2. Use the material-level calibration sample to make targeted content
    improvements where an actual gap remains; do not add infrastructure merely
    to mark a checklist.
