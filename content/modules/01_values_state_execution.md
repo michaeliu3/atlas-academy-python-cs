@@ -696,6 +696,17 @@ Deliver:
 - Module 23: environments become interpreter data structures;
 - Module 24: objects and frames become concrete CPython structures.
 
+## Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–4: object/binding traces, aliasing predictions, component contracts, and the shared-state regression artifact | [MIT 6.100L calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) sequences objects, bindings, functions/environments, mutation, aliasing/cloning, debugging, and assertions. | **Aligned, adapted.** Atlas keeps the reasoning in Python and foregrounds prediction/code reading; C/C0, Unix, and institutional assignment volume are deferred. |
+
+**Access and reuse.** Checked 2026-08-01. This is a link-only calibration
+source: Atlas's explanations, diagrams, traces, prompts, and diagnostics remain
+original. Do not copy course prose, figures, assignments, solutions, or
+assessment material.
+
 ## Sources and further study
 
 The Atlas narrative, object graphs, investigations, diagnostic distractors, and review work are original to this course. These sources provide independent explanations and authoritative language detail:

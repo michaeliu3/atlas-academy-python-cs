@@ -888,6 +888,16 @@ Keep one sentence:
 - Module 19 adds work, span, contention, and scheduling overhead to the cost model.
 - Module 24 separates algorithmic improvements from CPython, allocation, and profiling effects.
 
+## Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–6: counted-operation model, bounds/cases, recurrence tree, amortized and space account, measurement reconciliation, and AI-claim review | [MIT 6.006 syllabus](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/syllabus/) builds from Python and discrete-math prerequisites into mathematical modeling and performance analysis. | **Aligned, adapted.** Atlas treats measurement as evidence rather than proof and carries assumptions across abstraction boundaries; 6.006's breadth and problem-set volume begin in M6 onward. |
+
+**Access and reuse.** Checked 2026-08-01. The syllabus is a link-only
+calibration source. Atlas retains original traces, experiments, diagnostics,
+and dossier prompts; do not copy course problems, solutions, figures, or prose.
+
 ## Sources and further study
 
 - [MIT 6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) — algorithmic modeling, asymptotics, recurrences, correctness, and Python-oriented problem solving.

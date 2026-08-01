@@ -1672,7 +1672,17 @@ Complete these in your own words:
 
 ---
 
-## 19. Source synthesis and further study
+## 19. Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–5: recursive contracts, call-frame traces, a decreasing measure, an induction argument, a recurrence, and debugging evidence | [MIT 6.042J syllabus](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) names induction, well-founded ordering, correctness, and termination reasoning as outcomes. | **Aligned, adapted.** Atlas makes execution → recursion → proof → cost explicit; university-scale repeated recursion practice remains an intentional extension. |
+
+**Access and reuse.** Checked 2026-08-01. Link to the original course;
+Atlas's trace, proof, code-review, and diagnostic materials are original and
+must not reproduce institutional exercises, solutions, figures, or prose.
+
+## 20. Source synthesis and further study
 
 The workbook's narrative is original and organized around Atlas. These sources provide independent explanations, formal grounding, language guarantees, and problem traditions.
 

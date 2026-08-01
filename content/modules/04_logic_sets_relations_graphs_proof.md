@@ -845,6 +845,16 @@ Keep one sentence:
 - Module 22 models authorization as relations and security claims as proof obligations under a threat model.
 - Module 25 deepens probability, evaluation, and evidence for intelligent features.
 
+## Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–5: quantified prerequisite claims, relation/graph models, proof and counterexample work, and the proof-versus-test evidence table | [MIT 6.042J official readings](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/pages/readings/) route proofs, induction, graphs, directed graphs, relations, asymptotics, and recurrences. | **Aligned, compressed.** This module builds the proof-to-algorithm bridge; number theory, full counting, and discrete probability continue in the mathematical bridge and advanced route. |
+
+**Access and reuse.** Checked 2026-08-01. Use the original readings by link
+only. Atlas's examples, diagrams, code, prompts, and diagnostics are original;
+do not reproduce protected course prose, figures, assignments, or solutions.
+
 ## Sources and further study
 
 The teaching narrative above is original and integrated. These sources provide deeper exercises and authoritative context:

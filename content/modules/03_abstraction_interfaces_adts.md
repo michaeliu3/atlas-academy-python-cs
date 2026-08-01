@@ -2268,7 +2268,17 @@ One later CS topic that now looks like the same problem at a larger scale is:
 
 ---
 
-## 20. Source synthesis and further study
+## 20. Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–6: EventStore contract, representation change, abstraction function/representation invariant, rep-exposure debugging, and patch review | [MIT 6.102 — Abstraction Functions & Rep Invariants](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) defines AF/RI, documentation obligations, `checkRep`, and representation exposure. | **Aligned, adapted.** The intellectual obligations transfer to Python `Protocol` and runtime checks; full static-checking and team-review infrastructure come later. |
+
+**Access and reuse.** Checked 2026-08-01. This is a link-only calibration
+source. Atlas retains its own event-store story, code, diagrams, prompts, and
+diagnostics; do not copy course assets, exercises, or solutions.
+
+## 21. Source synthesis and further study
 
 This workbook is a synthesis, not a transcription. The event-store narrative, code, diagnostic distractors, studios, and agent-review materials are original to Atlas. Sources were used for distinct roles:
 
