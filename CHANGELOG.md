@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Added M35/M36's Git-index-bound **authoring-only** candidate evidence and
+  preflights, completing structural preflight parity across M31–M36. The
+  package binds each hidden workbook, source research, delivery map, companion,
+  shared bounded fixture/test, and authoring-diagram alternative while rejecting
+  a substitute workbook or forged release assertion. It does not create review
+  candidates, learner routes, releases, deployments, or human-review approval.
 - Added M33/M34's Git-index-bound **authoring-only** candidate evidence and
   preflights, matching the existing M31/M32 non-promoting boundary. The package
   binds each hidden workbook, source research, delivery map, companion,

@@ -25,8 +25,8 @@ Those are structural authoring inputs, not learner-ready or release evidence.
 | M32 | `content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md`; `content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md` | `content/course/contracts/authoring-delivery/m32.v1.json`; `content/course/contracts/companions/m32.v1.json`; `lib/m32-systems-evidence-fixture.js`; `tests/m32-systems-evidence-fixture.test.mjs`; non-promoting `evidence/m32.v1.json` and Git-index preflight |
 | M33 | `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md`; `content/source-maps/module33_formal_languages_computability_complexity_source_research.md` | `content/course/contracts/authoring-delivery/m33.v1.json`; `content/course/contracts/companions/m33.v1.json`; `lib/m33-formal-languages-reference-model.js`; `tests/m33-formal-languages-reference-model.test.mjs`; non-promoting `evidence/m33.v1.json` and Git-index preflight |
 | M34 | `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md`; `content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md` | `content/course/contracts/authoring-delivery/m34.v1.json`; `content/course/contracts/companions/m34.v1.json`; `lib/m34-classical-ai-reference-fixture.js`; `tests/m34-classical-ai-reference-fixture.test.mjs`; non-promoting `evidence/m34.v1.json` and Git-index preflight |
-| M35 | `content/authoring/m35_machine_learning_representation_workbook.v1.md`; `content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md` | `content/course/contracts/authoring-delivery/m35.v1.json`; `content/course/contracts/companions/m35.v1.json`; `lib/m35-m36-signal-routing-fixture.js`; `tests/m35-m36-signal-routing-fixture.test.mjs` |
-| M36 | `content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md`; `content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md` | `content/course/contracts/authoring-delivery/m36.v1.json`; `content/course/contracts/companions/m36.v1.json`; `lib/m35-m36-signal-routing-fixture.js`; `tests/m35-m36-signal-routing-fixture.test.mjs` |
+| M35 | `content/authoring/m35_machine_learning_representation_workbook.v1.md`; `content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md` | `content/course/contracts/authoring-delivery/m35.v1.json`; `content/course/contracts/companions/m35.v1.json`; `lib/m35-m36-signal-routing-fixture.js`; `tests/m35-m36-signal-routing-fixture.test.mjs`; non-promoting `evidence/m35.v1.json` and Git-index preflight |
+| M36 | `content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md`; `content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md` | `content/course/contracts/authoring-delivery/m36.v1.json`; `content/course/contracts/companions/m36.v1.json`; `lib/m35-m36-signal-routing-fixture.js`; `tests/m35-m36-signal-routing-fixture.test.mjs`; non-promoting `evidence/m36.v1.json` and Git-index preflight |
 
 The common structural records are
 [`content/course/contracts/advanced-module-contracts.v1.json`](../../content/course/contracts/advanced-module-contracts.v1.json),
@@ -47,9 +47,10 @@ and release evidence is `planned` with no release record.
   [`content/course/contracts/evidence/m31.v1.json`](../../content/course/contracts/evidence/m31.v1.json),
   [`content/course/contracts/evidence/m32.v1.json`](../../content/course/contracts/evidence/m32.v1.json),
   [`content/course/contracts/evidence/m33.v1.json`](../../content/course/contracts/evidence/m33.v1.json),
-  and [`content/course/contracts/evidence/m34.v1.json`](../../content/course/contracts/evidence/m34.v1.json).
-  They are not review-ready evidence. M35–M36 have no module-evidence records
-  yet.
+  [`content/course/contracts/evidence/m34.v1.json`](../../content/course/contracts/evidence/m34.v1.json),
+  [`content/course/contracts/evidence/m35.v1.json`](../../content/course/contracts/evidence/m35.v1.json),
+  and [`content/course/contracts/evidence/m36.v1.json`](../../content/course/contracts/evidence/m36.v1.json).
+  They are not review-ready evidence.
 - **Intentionally absent until portal publication:** canonical learner
   workbooks under `content/modules/`, graph source-map/studio selections,
   manifest entries, reader access, and release/provenance records. Their

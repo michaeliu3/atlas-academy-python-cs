@@ -8,6 +8,8 @@ import {
   moduleEvidencePreflightRelativePath,
   runM33AuthoringCandidateEvidencePreflight,
   runM34AuthoringCandidateEvidencePreflight,
+  runM35AuthoringCandidateEvidencePreflight,
+  runM36AuthoringCandidateEvidencePreflight,
   validateModuleEvidencePreflight,
 } from "../scripts/module-evidence-preflight.mjs";
 import {
@@ -34,6 +36,22 @@ const authoringCandidates = [
     substitutePath: "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
     substituteLocator: "the-connected-teaching-argument",
     run: runM34AuthoringCandidateEvidencePreflight,
+  },
+  {
+    moduleId: "m35",
+    evidencePath: "content/course/contracts/evidence/m35.v1.json",
+    workbookPath: "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+    substitutePath: "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+    substituteLocator: "the-connected-teaching-argument",
+    run: runM35AuthoringCandidateEvidencePreflight,
+  },
+  {
+    moduleId: "m36",
+    evidencePath: "content/course/contracts/evidence/m36.v1.json",
+    workbookPath: "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+    substitutePath: "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+    substituteLocator: "the-connected-teaching-argument",
+    run: runM36AuthoringCandidateEvidencePreflight,
   },
 ];
 

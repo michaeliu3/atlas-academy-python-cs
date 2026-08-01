@@ -3,6 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
+  scanMermaidBlocks,
+  validateMermaidAccessibility,
+} from "../lib/mermaid-accessibility.mjs";
+import {
   M35_M36_SIGNAL_ROUTING_FIXTURE,
   m35BaselineComparison,
   m35BernoulliLogLikelihoodCard,
@@ -283,4 +287,29 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
   assert.match(m36Workbook, /conditional \/ label-relation shift/u);
   assert.match(m36Workbook, /not IID evidence, a PAC\/VC calculation/u);
+});
+
+test("the M35 and M36 authoring diagrams keep their declared prose alternatives", async () => {
+  const sources = [
+    {
+      path: "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+      ids: ["m35-knowledge-map", "m35-evidence-chain"],
+    },
+    {
+      path: "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+      ids: ["m36-theory-system-map", "m36-learning-claim-chain"],
+    },
+  ];
+
+  for (const source of sources) {
+    const workbook = await readFile(source.path, "utf8");
+    const blocks = scanMermaidBlocks(workbook, { sourcePath: source.path });
+    const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+    assert.equal(blocks.length, 2);
+    assert.equal(report.summary.completeBlocks, 2);
+    assert.deepEqual(blocks.map(({ metadata }) => metadata?.id), source.ids);
+    assert.ok(blocks.every(({ metadata }) => metadata?.title.length >= 20));
+    assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 80));
+  }
 });

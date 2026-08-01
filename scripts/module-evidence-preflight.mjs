@@ -216,11 +216,75 @@ const m34CandidatePreflightProfile = Object.freeze({
   scope: "authoring-only",
 });
 
+const m35CandidatePreflightProfile = Object.freeze({
+  moduleId: "m35",
+  state: "authoring-only-candidate-not-promoting",
+  evidenceRecordPath: "content/course/contracts/evidence/m35.v1.json",
+  openCriterionIds: requiredAuthoringOpenCriterionIds,
+  promotionBlockers: requiredAuthoringPromotionBlockers,
+  preflightReleaseBoundary:
+    "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M35 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.",
+  evidenceRecordReleaseBoundary:
+    "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M35 remains authoring-only, hidden from the reader, and unreleased.",
+  releaseCriterionClaim:
+    "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M35 material.",
+  releaseCriterionLimitation:
+    "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.",
+  candidateDocumentationPath: "docs/module-evidence/m35/candidate-preflight.md",
+  candidateDocumentationAnchor: "authoring-candidate-boundary",
+  candidateDocumentationDigest: "sha256:485365590a6ddc292dc62bd8fcff75c142baede122613e53591dca54ca3103c2",
+  migrationLocator: "/modules/4",
+  authoringWorkbookPath: "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+  authoringDeliveryMapPath: "content/course/contracts/authoring-delivery/m35.v1.json",
+  authoringSourcePlanPath: "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+  authoringSourceMapPaths: Object.freeze([
+    "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+  ]),
+  authoringReferenceModelPath: "lib/m35-m36-signal-routing-fixture.js",
+  authoringReferenceModelTestPath: "tests/m35-m36-signal-routing-fixture.test.mjs",
+  authoringVisualTestPath: "tests/m35-m36-signal-routing-fixture.test.mjs",
+  authoringInteractionSourceCodePaths: Object.freeze([]),
+  scope: "authoring-only",
+});
+
+const m36CandidatePreflightProfile = Object.freeze({
+  moduleId: "m36",
+  state: "authoring-only-candidate-not-promoting",
+  evidenceRecordPath: "content/course/contracts/evidence/m36.v1.json",
+  openCriterionIds: requiredAuthoringOpenCriterionIds,
+  promotionBlockers: requiredAuthoringPromotionBlockers,
+  preflightReleaseBoundary:
+    "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M36 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.",
+  evidenceRecordReleaseBoundary:
+    "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M36 remains authoring-only, hidden from the reader, and unreleased.",
+  releaseCriterionClaim:
+    "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M36 material.",
+  releaseCriterionLimitation:
+    "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.",
+  candidateDocumentationPath: "docs/module-evidence/m36/candidate-preflight.md",
+  candidateDocumentationAnchor: "authoring-candidate-boundary",
+  candidateDocumentationDigest: "sha256:1cb74c8175ca017bac4dc2ab7d7ed3d36640eec530f7336f1bfb7ea0114615cb",
+  migrationLocator: "/modules/5",
+  authoringWorkbookPath: "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+  authoringDeliveryMapPath: "content/course/contracts/authoring-delivery/m36.v1.json",
+  authoringSourcePlanPath: "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+  authoringSourceMapPaths: Object.freeze([
+    "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+  ]),
+  authoringReferenceModelPath: "lib/m35-m36-signal-routing-fixture.js",
+  authoringReferenceModelTestPath: "tests/m35-m36-signal-routing-fixture.test.mjs",
+  authoringVisualTestPath: "tests/m35-m36-signal-routing-fixture.test.mjs",
+  authoringInteractionSourceCodePaths: Object.freeze([]),
+  scope: "authoring-only",
+});
+
 const authoringCandidateProfiles = Object.freeze(new Map([
   [m31CandidatePreflightProfile.moduleId, m31CandidatePreflightProfile],
   [m32CandidatePreflightProfile.moduleId, m32CandidatePreflightProfile],
   [m33CandidatePreflightProfile.moduleId, m33CandidatePreflightProfile],
   [m34CandidatePreflightProfile.moduleId, m34CandidatePreflightProfile],
+  [m35CandidatePreflightProfile.moduleId, m35CandidatePreflightProfile],
+  [m36CandidatePreflightProfile.moduleId, m36CandidatePreflightProfile],
 ]));
 
 /**
@@ -1413,6 +1477,14 @@ export function runM33AuthoringCandidateEvidencePreflight(options = {}) {
 
 export function runM34AuthoringCandidateEvidencePreflight(options = {}) {
   return runModuleCandidateEvidencePreflight("m34", options);
+}
+
+export function runM35AuthoringCandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m35", options);
+}
+
+export function runM36AuthoringCandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m36", options);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
