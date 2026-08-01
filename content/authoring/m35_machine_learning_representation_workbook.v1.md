@@ -219,9 +219,14 @@ Predict whether adding a nonlinear classifier after `phi(s,c)=s` can separate
 `(0,0)` from `(0,1)`. Write one sentence using the word *collision* before
 revealing the answer.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** no deterministic downstream classifier sees different inputs after
 the collision. A nonlinear `g` can divide `Z` differently; it cannot recover
 a bit that `phi` erased.
+
+</details>
 
 ### Code-reading task: preprocessing is part of the representation
 
@@ -300,8 +305,13 @@ An AI suggests a neural network trained with both fields, while the baseline is
 a constant predictor denied `context`. Predict what is wrong with declaring a
 score win “model superiority.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the alternatives have different information budgets. The result
 confounds architecture with access to a task-relevant field.
+
+</details>
 
 ### Code-reading/debugging task
 
@@ -370,12 +380,17 @@ test_rows = [x - mean for x in test_rows]
 Before reading the answer, draw the arrow that carries held-out information
 into A. Then predict which reported estimate can become optimistic.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** in A, the transform’s `mean` depends on every row, including
 held-out rows. The model has not read held-out labels, but the evaluation
 boundary is still contaminated. B has a cleaner boundary for this transform.
 Neither snippet proves that a random row split represents a future relation:
 time, entities, geography, retries, or correlated records can still cross the
 boundary.
+
+</details>
 
 ### Metrics answer different questions
 
@@ -470,8 +485,13 @@ point, which is supported: “the gradient code for this fixture is less
 suspicious,” or “the model is correct and generalizes”? Explain before reading
 on.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** only the narrow implementation statement is supported. Very small
 `h` can also suffer cancellation; agreement is a probe, not a theorem.
+
+</details>
 
 ### Reproducibility is a bounded comparison
 
@@ -526,9 +546,14 @@ Suppose aggregate accuracy is unchanged but the rate of `context=1` doubles
 and a slice metric worsens. Predict three hypotheses that remain possible
 before touching model weights.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** examples include generator/data shift, slicing/metric error,
 representation interaction, threshold selection, or a genuine model weakness.
 The observation narrows the next probe; it does not name the cause.
+
+</details>
 
 ### Debugging sequence
 

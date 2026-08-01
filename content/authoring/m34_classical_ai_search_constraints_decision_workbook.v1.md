@@ -133,10 +133,15 @@ s_{\mathrm{useful}}=(\text{room},\text{has\_key},\text{energy}).
 Predict which encoding can tell whether “open Vault” is legal after visiting
 the same room twice with different resources.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** room alone is not sufficient. If possession or energy changes the
 future legal actions, the two histories cannot be safely merged as one graph
 node. The useful state does not prove the model is complete; it exposes the
 variables it has chosen to retain.
+
+</details>
 
 ### Code-reading and debugging task
 
@@ -211,10 +216,15 @@ Predict what UCS expands first. Then imagine that the graph contains a
 negative-cost edge discovered later. Which familiar proof step becomes
 unavailable?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** UCS expands \(A\) first. The proof that a removed lowest-cost path
 cannot later be beaten depends on the named nonnegative-cost condition. A
 negative edge can invalidate that reasoning; an observed successful run does
 not restore the theorem.
+
+</details>
 
 ### Heuristics: definition before reputation
 
@@ -248,8 +258,13 @@ For this fixture, suppose exact remaining costs are:
 
 Predict which row falsifies admissibility.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** at B, \(2>1\). One overestimate is enough. A heuristic can still
 find a useful route, but the stated optimality guarantee is forfeited.
+
+</details>
 
 ### Read the priority policy
 
@@ -331,8 +346,13 @@ Predict which of these are justified: “the original binary problem is solved,�
 “the relaxed objective is an upper bound for the maximization problem,” or
 “the candidate needs a feasibility check in the original model.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the second and third. A status and a number refer to the model
 actually sent to the solver, not a different original model.
+
+</details>
 
 ### Code-reading task
 
@@ -401,9 +421,14 @@ def human_label(status):
 If a solver hit a time limit or the model was interrupted, what false
 conclusion does this function introduce?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** it turns unknown/limited execution into a claim that no model
 solution exists. Status, model feasibility, objective/bound, and external
 semantics are separate layers.
+
+</details>
 
 ### Formal limit and encoding boundary
 
@@ -489,9 +514,14 @@ allowed actions change.
 Hold the posterior probabilities fixed. If the cost of a blocked dispatch
 changes from -8 to -2, predict whether the recommended action can change.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** yes. The belief model stayed fixed, but the utility model changed.
 Confusing a posterior with a decision rule hides whose losses and constraints
 were supplied.
+
+</details>
 
 ### Code-reading task
 

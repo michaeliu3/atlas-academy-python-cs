@@ -194,10 +194,15 @@ before claiming a no-copy handoff:
   state, lifetime, and consumer contract;
 - the fact that the result looked correct once.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the third answer. Shape and dtype are necessary descriptions but
 do not say whether the consumer can accept the view or whether preparation
 materializes a contiguous copy. A correct-looking output does not prove the
 ownership or transfer path.
+
+</details>
 
 ### Code-reading lab — a contract hidden by a helpful helper
 
@@ -334,9 +339,14 @@ Predict the strongest defensible sentence:
   configuration; completed-work timing needs a named readiness boundary.
 - D. The result is correct because submission succeeded.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** C. Even that statement needs the clock, runtime, input residency,
 and submission semantics named. A later result conversion might implicitly
 wait; it does not retroactively make the earlier clock a completed-work clock.
+
+</details>
 
 ### Code-reading lab — make the missing event explicit
 
@@ -440,10 +450,15 @@ Before seeing a profile, list the missing variables:
 - semantic output oracle;
 - measurement protocol and environment.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** vectorization can move loop work into an array library, but it can
 also materialize a large temporary or take a path whose cost depends on
 layout/backend. "Vectorized" is a description of an expression form, not a
 measured speedup.
+
+</details>
 
 ### Code-reading lab — compact expression, potentially large temporary
 
@@ -570,9 +585,14 @@ Before revealing a repair, choose the safest statement:
 - C. Reuse is legal whenever the output looked correct once.
 - D. Reuse is legal if the queue is called parallel.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** B. Enqueue often records a future dependency rather than completing
 it. Exact ownership semantics vary, so a real repair must use the actual
 runtime's documented event/wait/lease mechanism.
+
+</details>
 
 ### Code-reading/debugging lab — an early reuse hazard
 
@@ -691,9 +711,14 @@ within a stated tolerance. Which statement is strongest?
 - C. The system is numerically stable on every device.
 - D. The model is ready for deployment.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** B. A good gradient check is evidence about a small computational
 claim. It is not a replacement for M31's objective/constraint/convergence
 reasoning.
+
+</details>
 
 ### Code-reading lab — separate framework semantics from the invariant
 
@@ -804,6 +829,9 @@ A report says: "Our compiled GPU implementation is 20x faster."
 Before asking for code, predict the first five evidence fields you would
 request.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** a strong first request is:
 
 1. the exact question and semantic output oracle;
@@ -814,6 +842,8 @@ request.
 
 The number alone does not tell you whether the comparison is fair, completed,
 correct, or portable.
+
+</details>
 
 ### Architecture-reading exercise
 

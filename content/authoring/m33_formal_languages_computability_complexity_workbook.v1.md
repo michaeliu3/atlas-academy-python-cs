@@ -138,9 +138,14 @@ Before revealing any interpretation, label the claims that grammar membership
 can support: “the token sequence has the required shape,” “the expression
 will return a number,” “the action is allowed,” or “the program is safe.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** only the first claim follows from grammar membership. Evaluation
 requires a semantic relation and an environment; authorization requires a
 separate policy and accountable decision process.
+
+</details>
 
 ### Read the recognizer, not its name
 
@@ -164,6 +169,9 @@ def ordered_bits(text: str) -> bool:
 
 Predict the result for 010. Then inspect the default branch.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the default silently returns to zeroes, so the function accepts
 010. The bug is not an exotic theorem failure: an absent transition was
 treated as a permissive recovery. A correct recognizer should reject an
@@ -182,6 +190,8 @@ def ordered_bits_checked(text: str) -> bool:
 
 This finite trace is useful debugging evidence. It does not prove that the
 implementation and the mathematical language agree for every possible input.
+
+</details>
 
 ### Design inspection
 
@@ -246,9 +256,14 @@ Suppose a teammate says: “I tested a ten-state DFA on 100 examples of
 \(L_{=}=\{0^n1^n\mid n\geq0\}\), so the language is probably regular.”
 Predict the one missing quantifier.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** regularity is an existence claim about one finite machine that
 works for **all** strings. A finite test suite provides observations about a
 candidate implementation; it cannot settle the universal claim.
+
+</details>
 
 ### A distinguishability proof idea
 
@@ -336,9 +351,14 @@ def run_for_at_most(program, input_value, steps):
 
 If it returns unknown, is the program proved not to halt?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** no. The function decides only whether it observed halting within
 the declared step budget and model. It gives a useful finite diagnostic, not a
 universal halting decider.
+
+</details>
 
 ### A halting-style diagonal boundary
 
@@ -437,9 +457,14 @@ def vertex_cover_to_independent_set(graph, k):
 For a graph with six vertices and \(k=2\), predict whether the target
 threshold is correct.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** it should be \(6-2=4\), not \(2\). The input object has not merely
 been reused; a mathematical relationship has to be preserved in the right
 direction.
+
+</details>
 
 ### Read a proof skeleton
 
@@ -507,9 +532,14 @@ this 40-variable input, so the problem is NP-complete.”
 Which requirements are still absent: the problem family, decision encoding,
 resource model, reduction, membership argument, or all of them?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** all of them. The run is an observation of one implementation,
 machine, limit, instance, ordering, and representation. It may motivate a
 question; it cannot supply a classification theorem.
+
+</details>
 
 ### Code-reading task: verifier versus search
 

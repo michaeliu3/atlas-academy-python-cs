@@ -198,10 +198,15 @@ the representation discarded it. The identical training statement
 Suppose somebody says: “The loss is smooth, so the entire learning pipeline is
 well behaved.” Before revealing the repair, list two missing layers.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** differentiability may be a property of a declared loss on a
 specified domain. It does not establish smooth data collection, correct labels,
 stable numerical execution, a good objective, a valid population relation, or
 the behavior of a discontinuous decision threshold.
+
+</details>
 
 ### Code-reading task
 
@@ -265,9 +270,14 @@ None of these deny optimization evidence. They show why it is one layer.
 Read: “Gradient norm is near zero after 100 steps.” Predict which ledger row
 this informs most directly, and name two rows it leaves unresolved.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** it is primarily an algorithm/finite-objective observation, subject
 to the trace’s numerical and stopping details. It does not by itself answer
 estimation/generalization or operational reliability.
+
+</details>
 
 ### Code-reading task: a trace is not an argument by itself
 
@@ -333,9 +343,14 @@ Now expand `H` to include a lookup table that can memorize a finite set of
 identifiers. Predict what becomes dangerous about using training loss as a
 general explanation.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** fitting a finite sample may become easy while the relationship to a
 population risk remains an additional question. This does not make empirical
 work meaningless; it makes scope indispensable.
+
+</details>
 
 ### Theorem-card repair
 
@@ -385,10 +400,15 @@ Two runs use the same Python file and one seed but different device/back-end
 versions. Predict one quantity that might differ and one claim that remains
 safe even if the difference is within a recorded tolerance.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** loss, gradient, timing, final parameters, or ordering can differ.
 The safe claim is narrow: these pinned environments produced observations
 within a stated protocol/tolerance. It is not cross-platform identity,
 numerical correctness, or scientific validity.
+
+</details>
 
 ### Code-reading task
 
@@ -458,10 +478,15 @@ The toy’s `context=1` frequency changes. Predict an observable that may move
 and an observable that could stay unchanged despite a meaningful change. Then
 state why neither outcome proves universal robustness.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** aggregate accuracy, slice error, confidence distribution, or input
 frequency may move differently. A single synthetic perturbation is evidence
 about that declared variant only; it cannot represent all future shifts or
 authorize autonomous remediation.
+
+</details>
 
 ### Calibration and action remain distinct
 

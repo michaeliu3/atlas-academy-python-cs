@@ -6,26 +6,32 @@ const packs = [
   {
     path: "content/authoring/m31_optimization_information_workbook.v1.md",
     expectedAnswers: 6,
+    expectedSessionReveals: 6,
   },
   {
     path: "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
     expectedAnswers: 8,
+    expectedSessionReveals: 6,
   },
   {
     path: "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
     expectedAnswers: 5,
+    expectedSessionReveals: 6,
   },
   {
     path: "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
     expectedAnswers: 5,
+    expectedSessionReveals: 6,
   },
   {
     path: "content/authoring/m35_machine_learning_representation_workbook.v1.md",
     expectedAnswers: 6,
+    expectedSessionReveals: 5,
   },
   {
     path: "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
     expectedAnswers: 6,
+    expectedSessionReveals: 5,
   },
 ];
 
@@ -42,16 +48,23 @@ function diagnosticSection(markdown, path) {
 }
 
 test("advanced private-study packs preserve prediction gates and direct source routes", async () => {
-  for (const { path, expectedAnswers } of packs) {
+  for (const { path, expectedAnswers, expectedSessionReveals } of packs) {
     const markdown = await readFile(path, "utf8");
     const diagnostic = diagnosticSection(markdown, path);
     const answers = diagnostic.match(/\*\*Answer:/gu) ?? [];
+    const sessionReveals = markdown.match(/\*\*Reveal:\*\*/gu) ?? [];
     const summaries = diagnostic.match(
       /<summary>Reveal after recording your answer and confidence\.<\/summary>/gu,
+    ) ?? [];
+    const sessionSummaries = markdown.match(
+      /<summary>Reveal after writing your prediction\.<\/summary>/gu,
     ) ?? [];
     const answersOutsideNativeDisclosure = diagnostic
       .replace(/<details>[^]*?<\/details>/gu, "")
       .match(/\*\*Answer:/gu) ?? [];
+    const sessionRevealsOutsideNativeDisclosure = markdown
+      .replace(/<details>[^]*?<\/details>/gu, "")
+      .match(/\*\*Reveal:\*\*/gu) ?? [];
 
     assert.match(
       diagnostic,
@@ -60,15 +73,30 @@ test("advanced private-study packs preserve prediction gates and direct source r
     );
     assert.equal(answers.length, expectedAnswers, `${path} answer count changed unexpectedly.`);
     assert.equal(summaries.length, expectedAnswers, `${path} needs one native reveal gate per answer.`);
+    assert.equal(
+      sessionReveals.length,
+      expectedSessionReveals,
+      `${path} session reveal count changed unexpectedly.`,
+    );
+    assert.equal(
+      sessionSummaries.length,
+      expectedSessionReveals,
+      `${path} needs one native prediction gate per session reveal.`,
+    );
     assert.deepEqual(
       answersOutsideNativeDisclosure,
       [],
       `${path} exposes a diagnostic answer outside a native reveal gate.`,
     );
+    assert.deepEqual(
+      sessionRevealsOutsideNativeDisclosure,
+      [],
+      `${path} exposes a session repair outside a native prediction gate.`,
+    );
     assert.doesNotMatch(
-      diagnostic,
+      markdown,
       /<details\b[^>]*\bopen(?:\s|=|>)/u,
-      `${path} must not default a diagnostic reveal gate open.`,
+      `${path} must not default a learning reveal gate open.`,
     );
     assert.match(markdown, /### Learner-facing source links/u);
     assert.match(markdown, /2026-08-01/u);

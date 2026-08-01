@@ -147,9 +147,14 @@ The unconstrained minimizer is `(2, 1)`. Predict whether it is feasible under
 `x + y <= 1`, and predict whether a zero ordinary gradient is enough to
 certify the constrained answer.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** `(2, 1)` violates the hard constraint by `2`. Its ordinary
 gradient is zero, but feasibility is false. A constraint changes the reasoning
 problem, not merely the visualization.
+
+</details>
 
 ### Read the model, do not rewrite it
 
@@ -242,10 +247,15 @@ Use the central finite-difference idea
 at `(1.25, -0.5)`. Predict whether reducing `h` forever makes the check more
 trustworthy.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** no. Truncation error decreases at first, but cancellation and
 finite representation can dominate for tiny `h`. A finite difference is an
 independent probe, not a proof that the implemented function, autodiff graph,
 or formulation is correct.
+
+</details>
 
 ### Code-reading task
 
@@ -304,9 +314,14 @@ announce that “multipliers solve constrained problems.”
 At `(1,0)`, predict which KKT condition fails if `lambda=-2`. Then predict
 what fails if `lambda=0`.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** `lambda=-2` violates dual feasibility and stationarity. With
 `lambda=0`, primal and dual feasibility hold but stationarity fails. A useful
 checker returns every failed condition rather than only `false`.
+
+</details>
 
 ### Certificate-reading table
 
@@ -366,8 +381,13 @@ Before running any trace, predict which of these would be sufficient to claim
 constrained optimality: objective decrease; a small ordinary gradient; a
 feasible last point; or a verified certificate under named conditions.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** only the fourth can support that claim here. The other observations
 are useful diagnostics, each with a narrower scope.
+
+</details>
 
 ### Code-reading/debugging task
 
@@ -419,9 +439,14 @@ At `theta=0`, the full gradient is `-2`. With first declared noise `-1.5`, is
 the first update smaller, larger, or equal in magnitude to the full-gradient
 update for a positive step size?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the estimate is `-3.5`, so its first movement is larger. The mean
 of a fixed four-row list does not tell you variance, distribution, dependence,
 batching behavior, or finite-time usefulness.
+
+</details>
 
 ### Experiment card
 
@@ -475,9 +500,14 @@ Let `p=(0.5,0.5)` and `q=(0.75,0.25)`. Predict whether
 cross-entropy on a fixture does not automatically mean a better deployed
 system.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** KL is positive for the unequal distributions. It quantifies a
 mathematical discrepancy under the declared `p`, `q`, support, and log base.
 It does not choose privacy, fairness, human utility, or a model class.
+
+</details>
 
 ### From likelihood to variational language
 
