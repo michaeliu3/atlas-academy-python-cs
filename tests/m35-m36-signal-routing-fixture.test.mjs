@@ -264,6 +264,11 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m36Workbook, /Fix the candidate protocol before reading a theorem as evaluation evidence/u);
   assert.match(m36Workbook, /m36ReductionOrderProbe\(\)/u);
   assert.match(m36Workbook, /m35CalibrationContrast\(\)/u);
+  assert.match(
+    m36Workbook,
+    /score values for which the conditional relation is\s+defined/u,
+  );
+  assert.ok(m36Workbook.includes("\\mathbb{E}[Y\\mid q(X)]=q(X)"));
   assert.match(m36Workbook, /m35M36FixedReluTrace\(\)/u);
   assert.match(m36Workbook, /Finite-class proof skeleton — the union-bound step has a home/u);
   assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));

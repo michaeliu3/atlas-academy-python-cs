@@ -100,3 +100,14 @@ test("advanced private-study packs preserve prediction gates and direct source r
     assert.match(markdown, /2026-08-01/u);
   }
 });
+
+test("M33 distinguishes a well-formed graph fact from a total language reduction", async () => {
+  const workbook = await readFile(
+    "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /A well-formed-instance transformation/u);
+  assert.match(workbook, /map malformed strings to\s+a fixed no-instance/u);
+  assert.match(workbook, /total map runs in polynomial time/u);
+});

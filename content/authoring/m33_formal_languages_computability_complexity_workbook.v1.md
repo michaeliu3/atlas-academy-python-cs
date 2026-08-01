@@ -501,7 +501,7 @@ and \(f\) is computable within the stated polynomial bound. The arrow is
 purposeful: if B had a decider, applying \(f\) and then that decider would
 decide A.
 
-### A small exact transformation
+### A well-formed-instance transformation
 
 Let VC be the decision language “a graph \(G\) has a vertex cover of size at
 most \(k\).” Let IS be “a graph \(G\) has an independent set of size at least
@@ -522,6 +522,13 @@ G \text{ has an independent set of size }\ge |V|-k.
 The complement of a vertex cover is an independent set, and vice versa. This
 does not prove either problem is hard by itself; it demonstrates the structure
 an actual reduction must expose.
+
+This card is about well-formed graph instances, not yet a complete language
+reduction over every string. To claim
+\(\mathrm{VC}\le_m^p\mathrm{IS}\), fix an encoding, map malformed strings to
+a fixed no-instance, and show that this total map runs in polynomial time.
+Those obligations keep a true graph fact from being mistaken for a complete
+complexity proof.
 
 ### A computability mapping reduction — halting becomes acceptance
 

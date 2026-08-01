@@ -717,11 +717,17 @@ evidence.
 
 ### Calibration and action remain distinct
 
-For a named population, calibration concerns a conditional relation such as
+For a named population and score values for which the conditional relation is
+defined (for example, discrete values with positive probability), calibration
+concerns a relation such as
 
 \[
 \Pr(Y=1\mid q(X)=a)=a.
 \]
+
+More generally, the conditional-expectation form is
+\(\mathbb{E}[Y\mid q(X)]=q(X)\) almost surely. This is still a population
+relation, not a guarantee about every individual score value or a finite plot.
 
 A finite reliability table estimates it subject to bins, samples, labels,
 selection, and relation. Even good observed calibration does not choose an
