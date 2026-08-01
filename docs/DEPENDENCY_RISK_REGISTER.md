@@ -7,11 +7,12 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-07-31 (GitHub Dependabot alert API and the committed
-lockfile dependency graph). The live API reported five open alerts on protected
-default branch `main` at `33fadbd` (three high, two medium). The earlier push
-notice reported six (four high, two moderate), so it is treated as stale or
-otherwise not yet reconciled rather than as authoritative current state.
+**Last examined:** 2026-08-01 (GitHub Dependabot alert API recheck and the
+committed lockfile dependency graph). The live API again reported five open
+alerts on protected default branch `main` at `33fadbd` (three high, two
+medium). The push notice still reported six (four high, two moderate), so it
+is treated as stale or otherwise not yet reconciled rather than as
+authoritative current state.
 **Owner:** Atlas repository maintainer. **Recheck trigger:** before any private
 deployment, after a relevant upstream release, and before closing or dismissing
 an alert. No alert is considered resolved until the reviewed branch is pushed,
