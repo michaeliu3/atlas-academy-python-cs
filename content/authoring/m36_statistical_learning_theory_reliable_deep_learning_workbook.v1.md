@@ -377,6 +377,20 @@ but the useful work is not memorizing the display. Ask:
 The display is an intentionally generic shape, not a claim that its condition
 holds for the relay learner or an arbitrary neural network.
 
+### Notation strip
+
+Keep the theorem objects separate before reading the proof:
+
+\[
+Z=(X,Y),\qquad
+R_P(h)=\mathbb E_{Z\sim P}[\ell(h,Z)],\qquad
+\widehat R_S(h)=\frac{1}{n}\sum_{i=1}^{n}\ell(h,Z_i).
+\]
+
+Here \(P\) is the named population relation, \(S=(Z_1,\ldots,Z_n)\) is the
+sample, and \(\ell\) is the declared loss. Changing any of those objects
+changes the claim that follows.
+
 ### Finite-class proof skeleton — the union-bound step has a home
 
 Here is one deliberately narrow route to the displayed shape. Let
@@ -674,10 +688,16 @@ For a synthetic shift, write an operationally bounded plan:
 | --- | --- |
 | shift hypothesis | What changes: input mixture, label relation, latency, missingness, representation, or feedback? |
 | observable | Which metric, calibration/slice statistic, data check, or system trace could move? |
+| label availability / detection lag | Is this observable input-time evidence or delayed-label evidence? When can the required label or outcome actually arrive? |
 | threshold | Which range triggers inspection, and what false-alarm/miss trade-off is accepted? |
 | evidence limitation | Which shifts/errors can this observable miss? |
 | owner and action | Who pauses, investigates, escalates, or declines to use an output? |
 | stop boundary | When does the toy system stop rather than “self-correct”? |
+
+Mark every proposed observable as **input-time** or **delayed-label** evidence.
+An input-time monitor can reveal a changed input mixture or missingness quickly,
+but it cannot immediately establish that the label relation or error rate has
+changed before the needed labels arrive.
 
 ### Prediction before reveal
 
@@ -744,7 +764,8 @@ new relation.
 
 ### Output: Monitoring Extension to Reliable-Learning Evidence Map
 
-Extend your evidence map with a shift hypothesis, monitoring observable,
+Extend your evidence map with a shift hypothesis, monitoring observable marked
+as input-time or delayed-label evidence, label availability/detection lag,
 threshold, false-alarm/miss discussion, data/model/system limitations, human
 owner, intervention, appeal/revision question, and stop boundary. Include:
 

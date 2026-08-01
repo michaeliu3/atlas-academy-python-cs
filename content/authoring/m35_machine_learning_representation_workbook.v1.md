@@ -472,6 +472,23 @@ boundary.
 
 </details>
 
+### Tiny group/time split counterexample
+
+Keep the synthetic records small enough to inspect:
+
+| record | entity | time | row-random split | group split | time split |
+| --- | --- | --- | --- | --- | --- |
+| A | `site-7` | week 1 | train | train | train |
+| B | `site-7` | week 4 | test | train | test |
+| C | `site-9` | week 5 | test | test | test |
+
+The row-random split lets the evaluation set contain a second record from an
+entity already seen in training. If the target relation is **new entities**,
+the entity field defines the unit of independence and A/B must stay together.
+If the target relation is **future operation**, time defines the boundary and B
+belongs after A. Neither split is automatically correct: name the target
+relation, then state which field stops information from crossing the boundary.
+
 ### Metrics answer different questions
 
 Two predictors can have identical accuracy yet very different probability
