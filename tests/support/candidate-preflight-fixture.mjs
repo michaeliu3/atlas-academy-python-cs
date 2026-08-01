@@ -26,7 +26,15 @@ async function git(root, args) {
  */
 export async function createIndexedCourseFixture(t) {
   const root = await mkdtemp(join(tmpdir(), "atlas-candidate-preflight-"));
-  t.after(() => rm(root, { recursive: true, force: true }));
+  // `git init` may finish its housekeeping just after the child process exits.
+  // Retry the specific transient directory-removal failures supported by Node so
+  // a correct candidate-rejection assertion is not turned into a CI-only flake.
+  t.after(() => rm(root, {
+    recursive: true,
+    force: true,
+    maxRetries: 3,
+    retryDelay: 100,
+  }));
   const prefix = `${root.replaceAll("\\", "/")}/`;
 
   await execFileAsync("git", ["checkout-index", "--all", `--prefix=${prefix}`], {
