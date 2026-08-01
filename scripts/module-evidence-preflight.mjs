@@ -154,9 +154,73 @@ const m32CandidatePreflightProfile = Object.freeze({
   scope: "authoring-only",
 });
 
+const m33CandidatePreflightProfile = Object.freeze({
+  moduleId: "m33",
+  state: "authoring-only-candidate-not-promoting",
+  evidenceRecordPath: "content/course/contracts/evidence/m33.v1.json",
+  openCriterionIds: requiredAuthoringOpenCriterionIds,
+  promotionBlockers: requiredAuthoringPromotionBlockers,
+  preflightReleaseBoundary:
+    "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M33 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.",
+  evidenceRecordReleaseBoundary:
+    "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M33 remains authoring-only, hidden from the reader, and unreleased.",
+  releaseCriterionClaim:
+    "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M33 material.",
+  releaseCriterionLimitation:
+    "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.",
+  candidateDocumentationPath: "docs/module-evidence/m33/candidate-preflight.md",
+  candidateDocumentationAnchor: "authoring-candidate-boundary",
+  candidateDocumentationDigest: "sha256:3868faebc118b832ff3e8155259f0cdf115fcd83384cb592fa3751ad919ecb7b",
+  migrationLocator: "/modules/2",
+  authoringWorkbookPath: "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+  authoringDeliveryMapPath: "content/course/contracts/authoring-delivery/m33.v1.json",
+  authoringSourcePlanPath: "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+  authoringSourceMapPaths: Object.freeze([
+    "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+  ]),
+  authoringReferenceModelPath: "lib/m33-formal-languages-reference-model.js",
+  authoringReferenceModelTestPath: "tests/m33-formal-languages-reference-model.test.mjs",
+  authoringVisualTestPath: "tests/m33-formal-languages-reference-model.test.mjs",
+  authoringInteractionSourceCodePaths: Object.freeze([]),
+  scope: "authoring-only",
+});
+
+const m34CandidatePreflightProfile = Object.freeze({
+  moduleId: "m34",
+  state: "authoring-only-candidate-not-promoting",
+  evidenceRecordPath: "content/course/contracts/evidence/m34.v1.json",
+  openCriterionIds: requiredAuthoringOpenCriterionIds,
+  promotionBlockers: requiredAuthoringPromotionBlockers,
+  preflightReleaseBoundary:
+    "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M34 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.",
+  evidenceRecordReleaseBoundary:
+    "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M34 remains authoring-only, hidden from the reader, and unreleased.",
+  releaseCriterionClaim:
+    "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M34 material.",
+  releaseCriterionLimitation:
+    "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.",
+  candidateDocumentationPath: "docs/module-evidence/m34/candidate-preflight.md",
+  candidateDocumentationAnchor: "authoring-candidate-boundary",
+  candidateDocumentationDigest: "sha256:7a7fcfef908671291f8167e2d4236b43b51b711624f8289e2168efe47b8fc880",
+  migrationLocator: "/modules/3",
+  authoringWorkbookPath: "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+  authoringDeliveryMapPath: "content/course/contracts/authoring-delivery/m34.v1.json",
+  authoringSourcePlanPath: "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+  authoringSourceMapPaths: Object.freeze([
+    "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+  ]),
+  authoringReferenceModelPath: "lib/m34-classical-ai-reference-fixture.js",
+  authoringReferenceModelTestPath: "tests/m34-classical-ai-reference-fixture.test.mjs",
+  authoringVisualTestPath: "tests/m34-classical-ai-reference-fixture.test.mjs",
+  authoringInteractionSourceCodePaths: Object.freeze([]),
+  scope: "authoring-only",
+});
+
 const authoringCandidateProfiles = Object.freeze(new Map([
   [m31CandidatePreflightProfile.moduleId, m31CandidatePreflightProfile],
   [m32CandidatePreflightProfile.moduleId, m32CandidatePreflightProfile],
+  [m33CandidatePreflightProfile.moduleId, m33CandidatePreflightProfile],
+  [m34CandidatePreflightProfile.moduleId, m34CandidatePreflightProfile],
 ]));
 
 /**
@@ -1341,6 +1405,14 @@ export function runM31AuthoringCandidateEvidencePreflight(options = {}) {
 
 export function runM32AuthoringCandidateEvidencePreflight(options = {}) {
   return runModuleCandidateEvidencePreflight("m32", options);
+}
+
+export function runM33AuthoringCandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m33", options);
+}
+
+export function runM34AuthoringCandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m34", options);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

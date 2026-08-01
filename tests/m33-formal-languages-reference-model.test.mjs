@@ -3,6 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
+  scanMermaidBlocks,
+  validateMermaidAccessibility,
+} from "../lib/mermaid-accessibility.mjs";
+import {
   M33_EVEN_ONES_DFA,
   M33_EVEN_ONES_TRACE_EXERCISES,
   traceM33EvenOnesDfa,
@@ -117,4 +121,19 @@ test("the M33 workbook exposes claim routes and labels interface-dependent sketc
   assert.match(workbook, /~~~text\ndef verifies_vertex_cover/u);
   assert.doesNotMatch(workbook, /~~~python\ndef run_for_at_most/u);
   assert.doesNotMatch(workbook, /~~~python\ndef verifies_vertex_cover/u);
+});
+
+test("the M33 authoring diagram keeps its declared prose alternative", async () => {
+  const sourcePath = "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md";
+  const workbook = await readFile(sourcePath, "utf8");
+  const blocks = scanMermaidBlocks(workbook, { sourcePath });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 1);
+  assert.equal(report.summary.completeBlocks, 1);
+  assert.deepEqual(blocks[0].metadata, {
+    id: "m33-formal-claim-route",
+    title: "The M33 route from strings to bounded conclusions",
+    alternative: "A finite alphabet forms strings. A named language, grammar, or machine gives a formal object. A precisely stated question and proof obligation lead to a resource claim or limit, followed by a practical non-claim rather than automatic authority.",
+  });
 });

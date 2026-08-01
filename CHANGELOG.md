@@ -7,6 +7,19 @@ actually published.
 
 ## Unreleased
 
+- Added M33/M34's Git-index-bound **authoring-only** candidate evidence and
+  preflights, matching the existing M31/M32 non-promoting boundary. The package
+  binds each hidden workbook, source research, delivery map, companion,
+  reference fixture/test, and authoring-diagram alternative while rejecting a
+  substitute workbook or forged release assertion. M34 also now exposes compact
+  session-level claim/source routes. This does not create review candidates,
+  learner routes, releases, deployments, or human-review approval.
+- Added a concise official-source recheck for the M17–M20 systems route,
+  cross-calibrated against MIT, CMU, Stanford, Berkeley, and Georgia Tech. It
+  confirms the connected representation → OS mediation → concurrency →
+  application-protocol progression while recording intentionally deferred lab
+  and implementation depth. This is calibration evidence only, not a release,
+  university-equivalence, or learner-mastery claim.
 - Added M32's Git-index-bound **authoring-only** candidate evidence and
   preflight, matching M31's existing non-promoting boundary. It binds M32's
   hidden workbook, source research, delivery map, fixture, visual trace, and

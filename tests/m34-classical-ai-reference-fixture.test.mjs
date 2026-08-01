@@ -3,6 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
+  scanMermaidBlocks,
+  validateMermaidAccessibility,
+} from "../lib/mermaid-accessibility.mjs";
+import {
   M34_BOUNDED_CLASSICAL_AI_FIXTURE,
   chooseM34DeclaredFrontierEntry,
   evaluateM34BinaryRelaxationCandidate,
@@ -169,4 +173,19 @@ test("the M34 planning trace and CP-SAT status matrix retain their model boundar
   assert.match(workbook, /none\s+turns a formal result into a decision authorization/u);
   assert.match(sourceResearch, /Karp.*https:\/\/doi\.org\/10\.1007\/978-1-4684-2001-2_9/iu);
   assert.doesNotMatch(sourceResearch, /https:\/\/doi\.org\/10\.1137\/0201010/u);
+});
+
+test("the M34 authoring diagram keeps its declared prose alternative", async () => {
+  const sourcePath = "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md";
+  const workbook = await readFile(sourcePath, "utf8");
+  const blocks = scanMermaidBlocks(workbook, { sourcePath });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 1);
+  assert.equal(report.summary.completeBlocks, 1);
+  assert.deepEqual(blocks[0].metadata, {
+    id: "m34-classical-ai-evidence-route",
+    title: "The M34 route from a narrative to a bounded decision claim",
+    alternative: "An accountable owner turns a narrative into states, observations, actions, goals, costs, constraints, and utilities. A search, CSP, planner, relaxation, or decision calculation is checked against theorem and implementation conditions. The result becomes a bounded recommendation with an abstention or review point, not automatic authority.",
+  });
 });

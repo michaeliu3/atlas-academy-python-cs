@@ -61,6 +61,15 @@ table represents affected people, or that a result is authorized to act.
 | M31 | objective, feasible set, relaxation, finite convergence evidence | a constraint/objective/relaxation sheet |
 | M33 | encodings, reductions, formal limits, practical non-claims | a solver-limit and complexity boundary card |
 
+### Claim/source labels
+
+Compact labels such as `M34-C01 -> S34-01, S34-04–S34-05` point to the
+relevant claim and original/official reading route in the [M34 primary-source
+research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md).
+They are navigation aids, not borrowed proof text, a contract-bound source map,
+or release evidence: the named assumptions, original derivation, and non-claim
+still control what may be concluded.
+
 ### Core evidence card
 
 Use this before, during, and after a calculation.
@@ -104,6 +113,10 @@ begin by importing a solver library.
 
 **What information must be in a state for an algorithm to make a valid next
 move in the model?**
+
+**Claim/source trace:** `M34-C01 -> S34-01, S34-04–S34-05` — the state,
+actions, costs, observations, and planning representation need declared
+omissions before an algorithmic claim can be read.
 
 Use a fictional, non-consequential archive-retrieval setting. There are three
 rooms: Entry, Vault, and Exit. A learner must retrieve a labelled box from the
@@ -192,6 +205,10 @@ turns raw observations into features or states.
 ### Core question
 
 **What does a frontier policy optimize, and under what assumptions?**
+
+**Claim/source trace:** `M34-C02–M34-C03 -> S34-01–S34-02` — frontier and
+heuristic guarantees depend on named cost, duplicate, termination, and A*
+variant conditions.
 
 Take the finite graph:
 
@@ -366,6 +383,10 @@ it does not traverse a learner-supplied graph or implement general A-star.
 
 **Which candidates are actually feasible, and which values are only bounds?**
 
+**Claim/source trace:** `M34-C04, M34-C06 -> S34-03, S34-06–S34-07` — local
+propagation, solver status, and a relaxation bound do not by themselves prove
+feasibility in the original model.
+
 A finite constraint satisfaction problem can be written as
 
 \[
@@ -491,6 +512,10 @@ method, proof system, or decision recommendation.
 ### Core question
 
 **What does a planner or CSP solver know, and what has never been encoded?**
+
+**Claim/source trace:** `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10`
+— planning/constraint encodings and a directed reduction set the scope of a
+solver or complexity claim.
 
 A simple planning action has named preconditions and effects. For the archive
 fixture:
@@ -632,6 +657,10 @@ the claim that a learned model captures the actual decision problem.
 
 **How can a likely state lead to a different action than a utility-aware
 choice?**
+
+**Claim/source trace:** `M34-C08–M34-C09 -> S34-08, S34-11–S34-13` —
+expected-utility and MDP structures are conditional models; neither turns a
+numerical result into authority to act.
 
 For a finite model with evidence \(e\), expected utility can be written as
 
@@ -789,6 +818,10 @@ the authority and value questions disappear.
 
 **Can a reviewer trace a recommendation back through its representation,
 algorithm conditions, evidence, and accountable boundary?**
+
+**Claim/source trace:** `M34-C01–M34-C09 -> S34-01–S34-13` — the dossier
+reconnects model, theorem conditions, finite evidence, and governance
+boundaries; it is not source approval or release evidence.
 
 Use only the synthetic archive-retrieval and maintenance-scheduling setting,
 or another clearly invented non-consequential system. Do not build a tool that
@@ -1003,6 +1036,22 @@ The reading routes below were checked on **2026-08-01**.
 | [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
 | [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |
 | [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver) and [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 3–6: solver-status interpretation and the separation of model output, risk evidence, and authority. | Documentation/framework sources are linked for reading; original Atlas models and decision cards remain distinct. |
+
+### Claim-linked session routes
+
+The routes below make each session's compact trace above inspectable. They use
+only the existing M34 ledger IDs and links; read them as sources for original
+Atlas reasoning, not as copied exercises, source approval, or publication
+evidence.
+
+| Session | Claim/source route | Learner reading route |
+| --- | --- | --- |
+| M34-S01 | `M34-C01 -> S34-01, S34-04–S34-05` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129) |
+| M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136) |
+| M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/) |
+| M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9) |
+| M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13` | [S34-08 — von Neumann and Morgenstern](https://assets.press.princeton.edu/about_pup/PUP100/book/2cNeumann.pdf); [S34-11 — NIST AI RMF](https://doi.org/10.6028/NIST.AI.100-1); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) |
+| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-13` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
 
 For the fuller claim-linked original/official source ledger and reuse cautions,
 use the instructor-facing [M34 primary-source research
