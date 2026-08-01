@@ -341,10 +341,12 @@ write. A saved-note claim requires direct evidence.
 2. **Proof/source/reuse review remains open.** `m33-proof-source-boundaries-unreviewed`
    still requires checked proof fixtures, current stable links, source/license
    decisions, and asset-level review before any source material is reused.
-3. **Learning artifacts are unbuilt.** `m33-learning-artifacts-unbuilt` remains
-   true: no checked-in M33 workbook, bounded recognizer/proof studio,
-   confidence-aware diagnostic, retrieval record, dossier rubric, or accessible
-   oral-defense flow has been created by this note.
+3. **Tested interaction and release binding remain unbuilt.** A private M33
+   workbook now provides six draft sessions, diagnostics, retrieval, a dossier
+   rubric, and TA/Study Partner oral material. It still lacks a checked-in
+   bounded recognizer/proof fixture, a tested interaction model, and a
+   canonical learner-route/review binding; this research note does not create
+   any of those.
 4. **Contract and provenance are unmet.** `m33-contract-and-provenance-unmet`
    remains true: M33 has no structured module-contract entry, its graph release
    evidence is still planned, and this note supplies no CI, review, deployment,

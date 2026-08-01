@@ -324,15 +324,15 @@ evidence.
 2. **Academic prerequisites remain unavailable as release evidence.** M31,
    M32, and M34 are authoring-only, and M34 has its own advanced prerequisite
    dependencies. M35 cannot silently bypass or reinterpret those gates.
-3. **No full M35 contract exists.** Six validated sessions, typed visible
-   outputs, diagnostics/misconception mapping, review records, dossier rubric,
-   TA prompt, Study Partner prompt, oral-defense flow, and release evidence
-   still require construction and review.
-4. **No learner workbook, studio, reference model, or teaching test exists.**
-   A future interaction must be bounded, local-first, safe to cancel, and
-   transparent about data/model/version limits; it must not execute arbitrary
-   code or access undeclared network, package, credential, or filesystem
-   capabilities.
+3. **No reviewed M35 contract exists.** A private M35 workbook now provides
+   six draft sessions, typed outputs, diagnostics/retrieval, a dossier rubric,
+   and TA/Study Partner oral material. Its source binding, review records,
+   canonical learner route, and release evidence still require independent
+   review.
+4. **No tested studio, reference model, or teaching test exists.** A future
+   interaction must be bounded, local-first, safe to cancel, and transparent
+   about data/model/version limits; it must not execute arbitrary code or
+   access undeclared network, package, credential, or filesystem capabilities.
 5. **No data/model asset review has occurred.** Dataset provenance, licenses,
    model weights, benchmark terms, code, figures, fairness/privacy claims, and
    domain-specific consequences require independent review before reuse.

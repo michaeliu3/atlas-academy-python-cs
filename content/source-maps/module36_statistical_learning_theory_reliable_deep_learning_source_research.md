@@ -266,10 +266,11 @@ release input, and cannot be claimed saved without direct evidence.
 2. **The prerequisites are not release evidence.** M31, M32, M33, and M35
    remain authoring-only. M36 cannot replace their contracts, source review,
    or learner evidence.
-3. **No complete M36 learning artifact exists.** Six validated sessions,
-   visual alternatives, diagnostics/misconception mapping, review records,
-   reference model, safe studio, project rubric, TA/Study Partner packets, and
-   equivalent accessible oral-defense workflow are still unbuilt.
+3. **No reviewed M36 learner-route artifact exists.** A private M36 workbook
+   now supplies six draft sessions, visual alternatives, diagnostics/retrieval,
+   a project rubric, and TA/Study Partner oral material. It still lacks a
+   canonical learner-route binding, reviewed evidence, a tested reference
+   model or safe studio, and release evidence.
 4. **No theorem or experiment has been independently reviewed for a lesson.**
    Future claims need exact theorem statements/proofs or original derivations,
    explicit conditions, source/asset review, and a scope/non-claim adjacent to

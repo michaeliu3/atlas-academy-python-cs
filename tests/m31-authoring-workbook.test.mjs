@@ -65,6 +65,18 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
       "output-optimization-and-information-evidence-dossier",
     ],
   );
+  assert.deepEqual(
+    extractTableOfContents(candidate)
+      .filter(({ depth, title }) => depth === 3 && title.startsWith("Transfer task"))
+      .map(({ id }) => id),
+    [
+      "transfer-task--changed-authority-boundary",
+      "transfer-task--changed-representation",
+      "transfer-task--changed-constraint-type",
+      "transfer-task--changed-workload",
+      "transfer-task--changed-sampling-story",
+    ],
+  );
   assert.match(candidate, /\*\*Text alternative:\*\*/u);
   assert.match(candidate, /```python/u);
   assert.match(candidate, /Teaching Assistant prompt — M31/u);

@@ -173,16 +173,18 @@ release input, or evidence that any write succeeded.
    Numba, CUDA/HIP/ROCm, compilers, BLAS, drivers, and device architecture must
    be captured by exact version/build identifiers. Current links are research
    anchors, not release pins.
-3. **Author original bounded fixtures and reference models.** No checked-in M32
-   fixture, semantic oracle, bounded reference model, or safe interaction
-   currently exists. Any future lab must avoid arbitrary learner code,
-   network/package installation, credentials, filesystem access beyond its
-   declared scope, and undisclosed external model calls.
-4. **Create the full module contract.** Six sessions, prerequisite/forward map,
-   source linkage, accessible visual alternatives, diagnostics, retrieval and
-   review records, dossier rubric, TA/Study Partner packets, and an equivalent
-   accessible text oral-defense workflow remain unbuilt and must be validated
-   before publication.
+3. **Author original bounded fixtures and reference models.** A private M32
+   workbook now supplies six draft sessions, diagnostics, a dossier rubric, and
+   TA/Study Partner oral material, but it has no checked-in M32 semantic oracle,
+   bounded reference model, or safe learner interaction. Any future lab must
+   avoid arbitrary learner code, network/package installation, credentials,
+   filesystem access beyond its declared scope, and undisclosed external model
+   calls.
+4. **Create the reviewed delivery and release binding.** The private draft does
+   not yet bind its sessions, source linkage, visual alternatives, diagnostics,
+   review records, dossier, or oral workflow to the canonical learner route,
+   a reviewed module contract, or release evidence. Those boundaries remain
+   required before publication.
 5. **Gather real measurement evidence separately.** This research has no
    benchmark results. Performance, transfer, compiler, kernel, memory, and
    reproducibility claims require raw data and the full record above; sources

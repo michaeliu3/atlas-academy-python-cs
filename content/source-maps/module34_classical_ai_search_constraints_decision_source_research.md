@@ -265,15 +265,16 @@ a raw transcript and no saved-note claim is valid without direct evidence.
 2. **M33 prerequisite evidence remains unavailable.** M34’s formal-limits
    session cannot pretend that the learner has satisfied authoring-only M33;
    future route gating must preserve that academic prerequisite.
-3. **No full M34 module contract exists.** Six validated sessions,
-   prerequisite/forward map, diagnostics with misconception mapping,
-   retrieval/review records, practical dossier rubric, TA prompt, Study Partner
-   prompt, oral-defense flow, and release evidence remain unbuilt.
-4. **No safe learner interaction exists.** There is no checked-in bounded
-   search/CSP/decision studio, reference model, input allowlist, accessibility
-   alternative, browser test, or failure-mode documentation. A future studio
-   must not execute arbitrary code or access undeclared network, package,
-   credential, or filesystem capabilities.
+3. **No reviewed M34 module contract exists.** A private M34 workbook now
+   contains six draft sessions, diagnostics/retrieval, a dossier rubric, and
+   TA/Study Partner oral material. Its prerequisite/forward map, source
+   binding, accessibility review, module contract, and release evidence are
+   still not canonical learner-route or publication evidence.
+4. **No tested safe learner interaction exists.** There is no checked-in
+   bounded search/CSP/decision studio or reference fixture with an input
+   allowlist, accessibility/browser test, and failure-mode documentation. A
+   future studio must not execute arbitrary code or access undeclared network,
+   package, credential, or filesystem capabilities.
 5. **No theorem or solver validation has occurred.** Future cards must
    independently test the exact A*/CSP/planner/relaxation implementation
    against a reference oracle and stated theorem hypotheses. A copied

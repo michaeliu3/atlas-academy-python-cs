@@ -193,6 +193,14 @@ Write an **Objective–Geometry Sheet** for one non-consequential decision:
 Use the core evidence card. Save the sentence beginning “This objective does
 not establish …”; it will reappear in the final dossier.
 
+### Transfer task — changed authority boundary
+
+Change the fixture from a personal scheduling recommendation to a decision
+that affects another person. Keep the same quadratic objective, then identify
+the first variable, hard constraint, or authority rule that the model no longer
+has permission to choose. Review an AI-proposed formulation for that missing
+boundary before accepting any solver trace.
+
 ---
 
 ## Session 2 — Local equations are not global decisions
@@ -279,6 +287,14 @@ a saddle/non-minimum example, and a constrained boundary candidate. Each row
 must show domain, gradient, curvature or counterexample, feasibility, and what
 you are *not* claiming.
 
+### Transfer task — changed representation
+
+Replace the scalar fixture with a small vector-valued objective whose variables
+use different units. State whether a finite-difference agreement still checks
+the right thing, choose a rescaling risk to investigate, and reject an
+AI-generated conclusion that treats a small numerical discrepancy as proof of
+global correctness.
+
 ---
 
 ## Session 3 — Constraints become certificates only under conditions
@@ -339,6 +355,13 @@ Create a **Claim Table** for one constrained problem. It must label each line
 as definition, derivation, numerical observation, or assumption; include a
 missing-qualification counterexample; and make an explicit distinction between
 a dual bound and a business/ethical decision.
+
+### Transfer task — changed constraint type
+
+Replace one continuous hard constraint with an integer or chance constraint.
+Identify which displayed certificate condition no longer follows unchanged and
+what new assumption, relaxation boundary, or counterexample the learner would
+need before trusting an agent’s “KKT solved it” explanation.
 
 ---
 
@@ -414,6 +437,13 @@ class, constraints, derivative/oracle source, representation, tolerance,
 stopping metric, condition warning, and independent validation. Then write one
 sentence beginning “A success/status flag would not establish …”.
 
+### Transfer task — changed workload
+
+Change the initial point, step size, or conditioning of the same objective.
+Predict which part of the solver rationale must be reconsidered, then compare
+two short traces without declaring a winner from one final loss. Ask an AI
+reviewer to state the evidence it would need before making a convergence claim.
+
 ---
 
 ## Session 5 — Noise is evidence, not a nuisance to hide
@@ -471,6 +501,13 @@ Make a **Stochastic–Information Experiment Card**. It must include the
 sampling/fixture rule, full/estimated quantity, a variation display, stopping
 rule, one counterexample to one-run reasoning, and a forward link to M30’s
 uncertainty vocabulary and M32’s reproducibility fields.
+
+### Transfer task — changed sampling story
+
+Replace the fixed four-row noise fixture with a dependent or drifting sampling
+story. State which expectation or variance claim must now be withdrawn, what
+record would expose the dependence, and why an AI-generated chart cannot turn
+one run into a generalization conclusion.
 
 ---
 
