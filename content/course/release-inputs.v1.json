@@ -346,23 +346,23 @@
     },
     {
       "path": "content/modules/01_values_state_execution.md",
-      "sha256": "c4964f36edd54e3c7031e9a8aa1c5138b90b76fcb76244983c7d245605639577"
+      "sha256": "6b44bce9ac0fe0781201e0f048be204232856c7a0f0ace8b450237c13e7edd41"
     },
     {
       "path": "content/modules/02_functions_recursion_induction.md",
-      "sha256": "9e3554d289d26b94a4f2f404b46611c8ad572161562497be5d52ef56c862938e"
+      "sha256": "18df9e64cab37fa64c60113259be36f04e1417e8655a78f895f5e2db84c5d7a3"
     },
     {
       "path": "content/modules/03_abstraction_interfaces_adts.md",
-      "sha256": "6ff4ff5189868155d68fcbac31a10cf713169ca490ce9978d4c619f894688bd0"
+      "sha256": "1376ac2d8601d92f888f4d555710b49e68e743a213e623eabf644a128b20cc4a"
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "90f260a739e04cebe44c27b6bcdb0f08f5fb4ceef429bcf4caa60eb565d10013"
+      "sha256": "da95fc8ad7150a54cb83cb47f5ee0946be42982b77b0bce922c6dad36372c6a0"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
-      "sha256": "9e2089aa3bbb8137b5d6aecf16bb2c1e499ce58bbcea3fdea2f44f7497259a3c"
+      "sha256": "faabe07812f0c936cd8b3775671d7c015a77319e99841a9e8d69d20dc6a74b13"
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",

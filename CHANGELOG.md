@@ -7,6 +7,16 @@ actually published.
 
 ## Unreleased
 
+- Strengthened the M1–M5 foundation arc after a narrow official-source
+  recheck: M1 now uses a confidence-gated lexical-scope trace; M2 transfers
+  termination reasoning to a lexicographic measure; M3 requires a
+  type-compatible but law-breaking store trace; M4 separates branch counting
+  from probability independence; and M5 preserves raw timing samples and
+  reports median/minimum/maximum. Each workbook now maps its six sessions to a
+  learner artifact and source route, with concise readiness rubrics where the
+  dossier previously lacked one. This improves private legacy study material
+  only; it does not promote a contract/release state, create human review,
+  deployment, learner-mastery, or university-equivalence evidence.
 - Added M35/M36's Git-index-bound **authoring-only** candidate evidence and
   preflights, completing structural preflight parity across M31–M36. The
   package binds each hidden workbook, source research, delivery map, companion,

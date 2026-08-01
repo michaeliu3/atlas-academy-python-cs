@@ -1097,6 +1097,40 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** write the claim and proof skeleton for `find_path`.  
 **Exit ticket:** distinguish the recursive call from the induction hypothesis.
 
+#### Transfer checkpoint — a decreasing measure need not be one tree size
+
+Before reading the repair, choose a domain and record a **low / medium / high**
+confidence answer for this recursive scan:
+
+```python
+def scan(row: int, column: int, width: int) -> None:
+    if row == 0 and column == 0:
+        return
+    if column > 0:
+        scan(row, column - 1, width)
+    else:
+        scan(row - 1, width, width)
+```
+
+Assume `row >= 0`, `0 <= column <= width`, and `width` is fixed and
+nonnegative. State (1) a well-founded measure, (2) which branch must be
+rejected outside that domain, and (3) one sentence of the induction or
+well-foundedness argument.
+
+<details>
+<summary>Reveal after committing to a measure and confidence.</summary>
+
+Use the lexicographic pair `(row, column)`: a pair is smaller when its first
+component is smaller, or when its first components agree and its second
+component is smaller. The `column > 0` branch reduces the second component.
+The `else` branch changes `(row, 0)` to `(row - 1, width)`, which is smaller
+because the first component falls. The negative-row branch is excluded by the
+input domain; if it were reachable, the argument would no longer establish
+termination. This is the same obligation as a tree-node measure, generalized
+to a different well-founded order.
+
+</details>
+
 ### Session 4 — Call shape and resource cost
 
 **Recall:** active frames versus total calls.  
@@ -1676,7 +1710,7 @@ Complete these in your own words:
 
 | Atlas evidence | Official calibration anchor | Decision |
 | --- | --- | --- |
-| Sessions 1–5: recursive contracts, call-frame traces, a decreasing measure, an induction argument, a recurrence, and debugging evidence | [MIT 6.042J syllabus](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) names induction, well-founded ordering, correctness, and termination reasoning as outcomes. | **Aligned, adapted.** Atlas makes execution → recursion → proof → cost explicit; university-scale repeated recursion practice remains an intentional extension. |
+| Sessions 1–6: recursive contracts, call-frame traces, a decreasing measure, an induction argument, a recurrence, debugging evidence, and a defended synthesis | [MIT 6.042J syllabus](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) names induction, well-founded ordering, correctness, and termination reasoning as outcomes. | **Aligned, adapted.** Atlas makes execution → recursion → proof → cost explicit; university-scale repeated recursion practice remains an intentional extension. |
 
 **Access and reuse.** Checked 2026-08-01. Link to the original course;
 Atlas's trace, proof, code-review, and diagnostic materials are original and
@@ -1705,6 +1739,17 @@ Use one source for each purpose, not all sources at once:
 3. Use the Python reference to verify runtime vocabulary and limits.
 4. Read the relevant MIT 6.042J sections while writing the proof.
 5. Save the deeper MIT 6.006 recurrence exercises for Module 5.
+
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | function contract and frame trace | [Python execution model](https://docs.python.org/3.14/reference/executionmodel.html) for blocks and frames |
+| 2 | recursive input decomposition and call tree | [Composing Programs §1.7](https://www.composingprograms.com/pages/17-recursive-functions.html) for a complementary explanation |
+| 3 | termination domain, measure, and induction skeleton | [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) for induction and well-founded reasoning |
+| 4 | recurrence, work, stack, and output-space claim | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) as a preview of later cost analysis |
+| 5 | minimal recursive bug reproduction and regression | [Berkeley CS61A recursion discussion](https://cs61a.org/disc/disc03/) only as optional explain-first practice |
+| 6 | reviewed design dossier and oral defense | the Atlas evidence pack; sources verify terminology, not the learner's reasoning |
 
 University worksheets are inspiration and optional practice, not material to copy blindly. Their institutional prerequisites, grading infrastructure, and assignment scale differ from this coached course.
 

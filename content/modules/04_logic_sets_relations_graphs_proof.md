@@ -233,10 +233,34 @@ Counting tells us how many possibilities a system must distinguish. Probability 
 
 ### Product and sum rules
 
-- If one decision has `a` choices and a following independent decision has `b` choices, the ordered pair of decisions has `a·b` possibilities.
+- If one decision has `a` choices and **each** first-stage choice has the same `b` allowed second-stage continuations, the ordered pairs total `a·b`. This is a branch-counting condition, not a probability-independence claim.
 - If a choice must come from one of two disjoint categories with `a` and `b` possibilities, there are `a+b` possibilities.
 
+#### Prediction gate — unequal branches need a sum, not a borrowed `b`
+
+A route planner may start at exactly one of three concepts. Starting at `A`
+has one valid continuation, starting at `B` has three, and starting at `C` has
+none. Before revealing the explanation, record a **low / medium / high**
+confidence answer: how many ordered start/continuation pairs are valid, and
+why is `3·b` not an available calculation?
+
+<details>
+<summary>Reveal after writing your count and confidence.</summary>
+
+There are `1 + 3 + 0 = 4` valid pairs. There is no one shared `b`: the branch
+counts are unequal. Product notation applies when each first-stage option has
+the same number of allowed continuations; otherwise sum the branch counts.
+This combinatorial condition is separate from the later probability question
+of whether random events are independent.
+
+</details>
+
 This is why `n` binary include/exclude decisions create `2ⁿ` subsets. It is also why exhaustive route search becomes impossible quickly: even before ordering selected concepts, the candidate-subset space is exponential.
+
+This module establishes the counting and probability language needed to make
+later claims precise. Full counting techniques, discrete probability, and
+their proof practice deepen in **M27** and **M30** rather than being implied by
+this compressed bridge.
 
 ### Sample spaces and events
 
@@ -804,6 +828,15 @@ Deliver a comprehension-and-design portfolio:
 
 The milestone is complete when Michael can defend the model and evidence orally, not when a repository merely turns green.
 
+### Evidence rubric
+
+| Evidence | Ready when | If not yet, repair by |
+| --- | --- | --- |
+| Formal claim | domain, predicate, and quantifier order match the stated policy | translate the claim back into plain language and find a witness |
+| Proof or counterexample | every inference has a stated assumption, or one smallest model refutes the claim | shrink the model to the first failing vertex/edge/value |
+| Code/model connection | implementation variables and tests map to the formal objects | annotate the unfamiliar validator before editing it |
+| Forward handoff | resource hypotheses name `V`, `E`, or another explicit size model | carry the same model into M5 rather than attaching a complexity label first |
+
 ## 18. Consolidation map
 
 ```mermaid
@@ -849,7 +882,7 @@ Keep one sentence:
 
 | Atlas evidence | Official calibration anchor | Decision |
 | --- | --- | --- |
-| Sessions 1–5: quantified prerequisite claims, relation/graph models, proof and counterexample work, and the proof-versus-test evidence table | [MIT 6.042J official readings](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/pages/readings/) route proofs, induction, graphs, directed graphs, relations, asymptotics, and recurrences. | **Aligned, compressed.** This module builds the proof-to-algorithm bridge; number theory, full counting, and discrete probability continue in the mathematical bridge and advanced route. |
+| Sessions 1–6: quantified prerequisite claims, relation/graph models, proof and counterexample work, the proof-versus-test evidence table, and a reviewed design defense | [MIT 6.042J official readings](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/pages/readings/) route proofs, induction, graphs, directed graphs, relations, asymptotics, and recurrences. | **Aligned, compressed.** This module builds the proof-to-algorithm bridge; number theory, full counting, and discrete probability continue in the mathematical bridge and advanced route. |
 
 **Access and reuse.** Checked 2026-08-01. Use the original readings by link
 only. Atlas's examples, diagrams, code, prompts, and diagnostics are original;
@@ -863,6 +896,17 @@ The teaching narrative above is original and integrated. These sources provide d
 - [MIT 6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) — correctness and graph/algorithm modeling that continue in later modules.
 - [Python 3.14 documentation: data structures](https://docs.python.org/3.14/tutorial/datastructures.html) — language-level behavior of lists, sets, and dictionaries used as representations.
 - [Composing Programs](https://www.composingprograms.com/) — functions, data abstraction, recursion, and interpreters as connected computational ideas.
+
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | proposition, predicate, implication, and a smallest witness | [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) for definitions and proof structure |
+| 2 | quantified route policy and correct negation | [MIT 6.042J readings](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/pages/readings/) for relations and directed graphs |
+| 3 | graph model, cycle witness, and topological-order claim | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) as a later algorithmic continuation |
+| 4 | proof method, branch count, and probability-model boundary | [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) for distinct counting/probability foundations |
+| 5 | recovered validator model and minimal mismatch case | [Python data structures](https://docs.python.org/3.14/tutorial/datastructures.html) for representation behavior, not proof |
+| 6 | reviewed patch and oral design defense | the Atlas claim, witness, and evidence card; sources verify terms, not the conclusion |
 
 ## Instructor decision rule
 

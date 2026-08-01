@@ -352,20 +352,31 @@ A benchmark tests whether observed scaling matches a prediction.
 
 ```python
 from collections.abc import Callable
+from statistics import median
 from time import perf_counter
 
 
-def elapsed_seconds(
+def elapsed_samples(
     operation: Callable[[list[str]], object],
     data: list[str],
     repeats: int = 5,
-) -> float:
+) -> list[float]:
     samples: list[float] = []
     for _ in range(repeats):
         start = perf_counter()
         operation(data)
         samples.append(perf_counter() - start)
-    return min(samples)
+    return samples
+
+
+def summarize_samples(samples: list[float]) -> dict[str, float]:
+    if not samples:
+        raise ValueError("need at least one timing sample")
+    return {
+        "median_seconds": median(samples),
+        "minimum_seconds": min(samples),
+        "maximum_seconds": max(samples),
+    }
 ```
 
 This is an intentionally small teaching harness, not a production-grade benchmarking framework. A credible experiment also controls or reports:
@@ -378,6 +389,10 @@ This is an intentionally small teaching harness, not a production-grade benchmar
 - input sizes spanning enough range to reveal growth;
 - environment, Python version, and machine;
 - whether I/O, allocation, or garbage collection dominates.
+
+Keep the raw sample list in the dossier and report its median together with
+its minimum and maximum. The minimum can be a useful lower-noise observation,
+but it is not a defensible stand-in for typical performance or spread.
 
 ### Ratio test
 
@@ -843,6 +858,15 @@ Produce:
 
 The milestone is mastered when Michael can predict, measure, explain, and challenge—not when the fastest line wins.
 
+### Evidence rubric
+
+| Evidence | Ready when | If not yet, repair by |
+| --- | --- | --- |
+| Semantic comparison | both implementations satisfy the same public behavior before timing begins | write an observer-based equivalence test or narrow the claim |
+| Analytic argument | size parameters, costly primitive, assumptions, and bound are named | count a tiny input and write the exact sum or recurrence first |
+| Reproducible measurement | raw samples, median/min/max, inputs, environment, and timing boundary are retained | rerun with setup outside the timed region and report the spread |
+| Honest decision | the recommendation distinguishes model result, observation, and uncertainty | remove any conclusion that the data or cost model cannot establish |
+
 ## 20. Consolidation
 
 ```mermaid
@@ -905,6 +929,17 @@ and dossier prompts; do not copy course problems, solutions, figures, or prose.
 - [Python 3.14 `timeit` documentation](https://docs.python.org/3.14/library/timeit.html) — official guidance for timing small Python code fragments.
 - [Python 3.14 `time` documentation](https://docs.python.org/3.14/library/time.html#time.perf_counter) — the high-resolution performance counter used in the teaching harness.
 - [Python 3.14 Time Complexity wiki](https://wiki.python.org/moin/TimeComplexity) — implementation-oriented reference for common container operations; treat it as a CPython-oriented guide rather than a language guarantee.
+
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | input size, counted operation, and exact small-input count | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for algorithmic modeling context |
+| 2 | upper/lower/tight, case, and distribution-qualified claim | [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) for proof and asymptotic foundations |
+| 3 | recurrence, call tree, and stack/output-space separation | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) as a route to later algorithm work |
+| 4 | amortized aggregate account and retained-space audit | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for the broader performance-analysis spine |
+| 5 | raw timing samples and uncertainty-aware chart | [Python `timeit`](https://docs.python.org/3.14/library/timeit.html) and [`perf_counter`](https://docs.python.org/3.14/library/time.html#time.perf_counter) for timing boundaries |
+| 6 | reviewed benchmark brief and representation decision | [Python Time Complexity wiki](https://wiki.python.org/moin/TimeComplexity) only as CPython-oriented context, never a language-wide proof |
 
 ## Instructor decision rule
 

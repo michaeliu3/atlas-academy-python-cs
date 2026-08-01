@@ -247,6 +247,59 @@ The “box” analogy is useful only to introduce stable names. It breaks when a
 - compare a pure normalizer with an in-place normalizer;
 - identify observable behavior and hidden state.
 
+#### Prediction gate — lexical scope is a binding trace
+
+Before opening the reveal, write the four printed values, draw the three
+environments, and record **low / medium / high** confidence. In particular,
+predict whether rebinding a callee's local name changes the enclosing or
+global binding.
+
+```python
+global_label = "global"
+
+
+def make_label_tools():
+    label = "enclosing"
+
+    def local_rebind():
+        label = "local"
+        return label
+
+    def change_enclosing():
+        nonlocal label
+        label = "changed enclosing"
+        return label
+
+    return local_rebind, change_enclosing
+
+
+local_rebind, change_enclosing = make_label_tools()
+print(local_rebind())
+print(change_enclosing())
+print(change_enclosing())
+print(global_label)
+```
+
+<details>
+<summary>Reveal after writing your prediction and confidence.</summary>
+
+The output is `local`, `changed enclosing`, `changed enclosing`, and `global`.
+
+| Environment | Initial binding | After `local_rebind()` | After `change_enclosing()` |
+| --- | --- | --- | --- |
+| global | `global_label → "global"` | unchanged | unchanged |
+| enclosing `make_label_tools` frame | `label → "enclosing"` | unchanged | `label → "changed enclosing"` |
+| `local_rebind` call frame | created at call | `label → "local"` in that frame only | gone after return |
+
+An assignment normally creates or rebinds a name in the current local frame.
+`nonlocal label` instead selects the nearest enclosing function binding.
+Neither operation changes the caller's binding merely because the name is
+spelled the same; mutation is a separate operation on an object reached by a
+binding. A useful regression test calls both closures and checks that the
+global value is still `"global"`.
+
+</details>
+
 **Exit ticket:** state the difference between “the function changed its parameter” and “the function mutated an object passed by the caller.”
 
 ### Session 3 — Contracts and invariants
@@ -677,6 +730,15 @@ Deliver:
 - one object graph;
 - a short explanation of time and auxiliary-space costs.
 
+### Evidence rubric
+
+| Evidence | Ready when | If not yet, repair by |
+| --- | --- | --- |
+| Binding/state trace | every name, object, and observable mutation is accounted for | redraw the smallest failing trace before rerunning code |
+| Contract and ownership note | precondition, postcondition, and who may mutate are explicit | replace vague “does not change data” wording with a concrete frame condition |
+| Regression evidence | a test distinguishes rebinding, shallow copying, or aliasing from the intended behavior | add the smallest before/after caller-mutation case |
+| Design explanation | the chosen boundary is defended against one credible alternative | name the trade-off in safety, cost, and later change |
+
 ## Connections
 
 ### What this module uses
@@ -700,7 +762,7 @@ Deliver:
 
 | Atlas evidence | Official calibration anchor | Decision |
 | --- | --- | --- |
-| Sessions 1–4: object/binding traces, aliasing predictions, component contracts, and the shared-state regression artifact | [MIT 6.100L calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) sequences objects, bindings, functions/environments, mutation, aliasing/cloning, debugging, and assertions. | **Aligned, adapted.** Atlas keeps the reasoning in Python and foregrounds prediction/code reading; C/C0, Unix, and institutional assignment volume are deferred. |
+| Sessions 1–6: object/binding traces, aliasing predictions, component contracts, the shared-state regression artifact, guided repair, and synthesis | [MIT 6.100L calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) sequences objects, bindings, functions/environments, mutation, aliasing/cloning, debugging, and assertions. | **Aligned, adapted.** Atlas keeps the reasoning in Python and foregrounds prediction/code reading; C/C0, Unix, and institutional assignment volume are deferred. |
 
 **Access and reuse.** Checked 2026-08-01. This is a link-only calibration
 source: Atlas's explanations, diagrams, traces, prompts, and diagnostics remain
@@ -719,6 +781,17 @@ The Atlas narrative, object graphs, investigations, diagnostic distractors, and 
 - [MIT 6.101 Spring 2026](https://py.mit.edu/spring26/) — the read–lab–checkoff rhythm adapted into the course’s prediction, investigation, and ownership studios.
 
 Use the sources by question rather than as a reading pile: begin with this workbook’s object graph, use the Python reference to verify exact language behavior, use Composing Programs for a second conceptual explanation, and read the MIT material when moving from local aliasing to component-level contracts.
+
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | object/binding graph and aliasing prediction | [Python data model](https://docs.python.org/3.14/reference/datamodel.html) for identity, value, and mutability terms |
+| 2 | environment trace and local-versus-`nonlocal` conclusion | [Python execution model](https://docs.python.org/3.14/reference/executionmodel.html) for blocks, bindings, and frames |
+| 3 | ownership contract and mutation regression | [MIT 6.102 mutability reading](https://web.mit.edu/6.102/www/sp26/classes/09-mutability/) for alias and boundary reasoning |
+| 4 | annotated code reading and bounded repair request | [MIT 6.101](https://py.mit.edu/spring26/) only as a link-level comparison for read–lab–checkoff rhythm |
+| 5 | oral explanation of a smallest failure | the preceding trace and test; do not substitute a source quote for evidence |
+| 6 | synthesis dossier and forward handoff | this workbook plus the linked Python references to verify any disputed language claim |
 
 ## Instructor decision rule
 

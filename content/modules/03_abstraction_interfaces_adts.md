@@ -1632,7 +1632,49 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 2. explain why a method signature cannot prove an ordering law;
 3. decide whether Atlas needs nominal inheritance;
 4. critique `@runtime_checkable` as “contract verification”;
-5. decide whether to add `__iter__` and defend the answer.
+5. decide whether to add `__iter__` and defend the answer;
+6. complete the required law-breaking `ReversingStore` trace below.
+
+#### Required trace — right shape, wrong behavior
+
+Do not treat the following as an optional example. Before opening the reveal,
+predict the result of the assertion, name the violated EventStore law, and
+record **low / medium / high** confidence.
+
+```python
+class ReversingStore:
+    def __init__(self) -> None:
+        self._items: list[StudyEvent] = []
+
+    def append(self, event: StudyEvent) -> None:
+        self._items.append(event)
+
+    def history(self) -> tuple[StudyEvent, ...]:
+        return tuple(reversed(self._items))
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+
+first_event = StudyEvent("state", 25, ("binding",))
+second_event = StudyEvent("proof", 30, ("logic",))
+store = ReversingStore()
+store.append(first_event)
+store.append(second_event)
+assert store.history() == (first_event, second_event)
+```
+
+<details>
+<summary>Reveal after recording the observer sequence and confidence.</summary>
+
+The assertion must fail: the method surface can match `EventStore`, but the
+observer returns `(second_event, first_event)`. The violated law is append
+order: appending an event must leave all earlier events before it in the
+observable history. The smallest independent regression is the two-event
+observer sequence shown above. A `Protocol` can help establish a structural
+surface; it cannot establish this temporal behavioral law.
+
+</details>
 
 **Exit ticket:** give one fact each mechanism checks and one fact it cannot check.
 
@@ -2305,6 +2347,17 @@ Use sources in this order:
 4. Read MIT’s AF/RI sections and substitute Atlas values into the definitions.
 5. Read the Python `Protocol` and `abc` references only with the question “Which dependency does this mechanism express?”
 6. Return to the candidate patch and revise the review.
+
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | representation-exposure trace and observable client need | [Composing Programs §2.2](https://www.composingprograms.com/pages/22-data-abstraction.html) for abstraction barriers |
+| 2 | EventStore operations, laws, and client-visible contract | [MIT 6.102 ADTs](https://web.mit.edu/6.102/www/sp26/classes/06-abstract-data-types/) for operation-based abstraction |
+| 3 | AF, RI, and representation-exposure argument | [MIT 6.102 AF/RI](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) for the formal model |
+| 4 | right-shape/wrong-law `ReversingStore` regression | [Python `typing.Protocol`](https://docs.python.org/3.14/library/typing.html#typing.Protocol) for the structural boundary it does and does not provide |
+| 5 | architecture map, failed invariant, and regression | the AF/RI source plus the Atlas trace; neither substitutes for the actual witness |
+| 6 | bounded design review and oral defense | this workbook’s contract, rubric, and learner evidence; linked sources are terminology checks |
 
 Do not assign all linked pages as undirected homework. Every reading has a question and an Atlas artifact.
 
