@@ -677,8 +677,12 @@ the explanation. Low confidence creates a review cue, not a failure label.
    - C. The representation is universally useless.
    - D. More training data makes the collision disappear.
 
-   **Answer: B.** Repair: a collision proves a bounded limitation of the
-   declared map/task pair, not a universal statement about representation.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: a collision proves a bounded limitation of the declared
+map/task pair, not a universal statement about representation.
+</details>
 
 2. A learned model outperforms a dummy predictor, but the dummy was denied a
    feature available to the learned model. What is the strongest conclusion?
@@ -687,8 +691,12 @@ the explanation. Low confidence creates a review cue, not a failure label.
    - C. Baselines are not useful in ML.
    - D. The learned model is deployment-ready.
 
-   **Answer: B.** Repair: align information, split, preprocessing, tuning,
-   metric, and cost before attributing a difference to an architecture.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: align information, split, preprocessing, tuning,
+metric, and cost before attributing a difference to an architecture.
+</details>
 
 3. A transform is fit before the train/test split. Why can this be a problem?
    - A. It necessarily changes every label.
@@ -696,8 +704,12 @@ the explanation. Low confidence creates a review cue, not a failure label.
    - C. It proves the model cannot generalize.
    - D. It makes a random seed invalid.
 
-   **Answer: B.** Repair: leakage is an information path; its impact is
-   empirical, but the evaluation boundary is already compromised.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: leakage is an information path; its impact is empirical,
+but the evaluation boundary is already compromised.
+</details>
 
 4. Analytic and finite-difference gradients agree at one point. What is
    supported?
@@ -707,7 +719,11 @@ the explanation. Low confidence creates a review cue, not a failure label.
      suspicious.
    - D. The optimizer has converged.
 
-   **Answer: C.** Repair: gradient agreement is narrow execution evidence.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: gradient agreement is narrow execution evidence.
+</details>
 
 5. Two models have equal accuracy but different confidence behavior. Which
    statement is most defensible?
@@ -717,8 +733,12 @@ the explanation. Low confidence creates a review cue, not a failure label.
    - C. The more confident model must be better.
    - D. A reliability diagram authorizes a decision.
 
-   **Answer: B.** Repair: accuracy, probability quality, and decision utility
-   are different claims.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: accuracy, probability quality, and decision utility are
+different claims.
+</details>
 
 6. A carefully written model card has been produced. What remains true?
    - A. Documentation itself grants data permission and decision authority.
@@ -727,8 +747,12 @@ the explanation. Low confidence creates a review cue, not a failure label.
    - C. Monitoring is no longer needed.
    - D. The model is automatically fair.
 
-   **Answer: B.** Repair: documentation is evidence infrastructure, not a
-   substitute for accountable human governance.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: documentation is evidence infrastructure, not a
+substitute for accountable human governance.
+</details>
 
 **Review schedule:** retrieve one collision, one leakage path, one
 objective-to-target gap, and one authority boundary after 1, 3, 7, 14, and 30
@@ -741,12 +765,23 @@ dtype/device, or introduce a synthetic shift.
 ## Source and reuse boundary
 
 This workbook uses original Atlas explanations, synthetic examples, diagrams,
-and code. Consult the instructor-facing
-[M35 primary-source research ledger](../source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md)
-for claim-linked university, standards, framework, and primary research
-sources. That ledger records links and review boundaries; it does not grant
-permission to copy third-party prose, figures, datasets, benchmarks, code,
-weights, or model-card assets.
+and code. The reading routes below were checked on **2026-08-01**. They guide
+scope and prerequisite review; they do not turn this draft into an institutional
+course or grant permission to copy third-party prose, figures, datasets,
+benchmarks, code, weights, or model-card assets.
+
+### Learner-facing source links
+
+| Source | Session/claim linkage | Reuse boundary |
+| --- | --- | --- |
+| [Stanford CS229 Machine Learning](https://cs229.stanford.edu/) | Sessions 1–6: learning-problem formulation, representation, generalization, evaluation, and ML prerequisites. Some course material may require affiliate access. | Link-only/original Atlas examples; do not copy assignments, notes, figures, or solutions. |
+| [MIT 6.036 Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Sessions 1–5: supervised learning, model selection, neural networks, and evidence-aware ML reasoning. | MIT OCW assets have their own notices; link-only/original Atlas fixtures and explanations. |
+| [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
+| [scikit-learn common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html) and [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Sessions 2–5: leakage, preprocessing, training/evaluation boundaries, and bounded reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
+
+For the fuller claim-linked university, standards, framework, and primary
+research ledger, consult the instructor-facing [M35 primary-source research
+ledger](../source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md).
 
 Before any publication review, reconcile every learner-facing claim, equation,
 visual, code sample, and numerical fixture with a canonical source map and

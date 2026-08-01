@@ -601,8 +601,12 @@ confidence adds a review item; it is never a pass/fail label.
      sample/loss/procedure.
    - D. The objective is the correct decision objective.
 
-   **Answer: C.** Repair: finite empirical risk, population risk, and use
-   value are different objects.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: finite empirical risk, population risk, and use value
+are different objects.
+</details>
 
 2. A training trace reaches a small gradient norm. Which claim is best
 supported?
@@ -612,8 +616,12 @@ supported?
    - C. Cross-platform reproducibility.
    - D. A safe use authorization.
 
-   **Answer: A.** Repair: optimization evidence does not collapse the other
-   gap ledger rows.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: A.** Repair: optimization evidence does not collapse the other gap
+ledger rows.
+</details>
 
 3. Which item is indispensable to a PAC/VC-style theorem card?
    - A. The model’s brand name.
@@ -622,7 +630,11 @@ supported?
    - C. A single held-out score only.
    - D. A claim that all neural networks are covered.
 
-   **Answer: B.** Repair: a theorem is a scoped implication, not a slogan.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: a theorem is a scoped implication, not a slogan.
+</details>
 
 4. Why can a fixed seed fail to reproduce an identical result elsewhere?
    - A. Seeds never control randomness.
@@ -631,8 +643,12 @@ supported?
    - C. Theory forbids reproducing experiments.
    - D. A seed proves numerical correctness.
 
-   **Answer: B.** Repair: state a bounded comparison protocol rather than a
-   blanket reproducibility claim.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: state a bounded comparison protocol rather than a
+blanket reproducibility claim.
+</details>
 
 5. A calibration plot looks good on one held-out relation. What remains true?
    - A. It proves shifted calibration and decision utility.
@@ -641,8 +657,12 @@ supported?
    - C. It makes monitoring unnecessary.
    - D. It proves fairness.
 
-   **Answer: B.** Repair: calibration, shift, utility, and authority are
-   separate evidence layers.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: calibration, shift, utility, and authority are separate
+evidence layers.
+</details>
 
 6. A monitor detects an input-frequency change. Which response is strongest?
    - A. Retrain autonomously without review.
@@ -651,8 +671,12 @@ supported?
      boundary while retaining uncertainty.
    - D. Ignore it because the source code has not changed.
 
-   **Answer: C.** Repair: monitoring is evidence plus accountable action, not
-   automatic authority.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: monitoring is evidence plus accountable action, not
+automatic authority.
+</details>
 
 **Review schedule:** after 1, 3, 7, 14, and 30 days, retrieve one definition,
 one theorem condition, one finite-experiment boundary, and one monitoring
@@ -665,11 +689,23 @@ strongest remaining claim rather than erasing the old one.
 ## Source and reuse boundary
 
 All explanations, diagrams, examples, and code in this workbook are original
-Atlas authoring material. The instructor-facing
-[M36 primary-source research ledger](../source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md)
-links the original research, university, standards, and framework sources that
-guide later review. It does not grant permission to copy third-party prose,
-proofs, figures, code, datasets, benchmarks, weights, or course exercises.
+Atlas authoring material. The reading routes below were checked on
+**2026-08-01**. They guide scope and proof/evidence review; they do not grant
+permission to copy third-party prose, proofs, figures, code, datasets,
+benchmarks, weights, or course exercises.
+
+### Learner-facing source links
+
+| Source | Session/claim linkage | Reuse boundary |
+| --- | --- | --- |
+| [MIT 9.520 Statistical Learning Theory & Applications](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/) and its [VC-dimension notes](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/resources/class17/) | Sessions 1–3: empirical versus population risk, function classes, quantifiers, and theorem conditions. | MIT OCW assets have individual notices; link-only/original Atlas theorem cards, examples, and proof prompts. |
+| [MIT 6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/) and [generalization-theory lecture](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/) | Sessions 2–5: deep-learning foundations, overparameterization/generalization questions, and experimental scope. | Link-only/original Atlas examples and experiments; no copied videos, slides, homework, or project assets. |
+| [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) and [numerical-accuracy documentation](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html) | Session 4: bounded environment, dtype, backend, and comparison claims. | Link-only/original reproduction record; pin framework, device, and versions before an implementation claim. |
+| [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 5–6: monitoring, management, governance, and human-control boundaries. | Link-only/original Atlas reliability maps; voluntary guidance is not legal advice, certification, or authorization. |
+
+For the fuller original-research, university, standards, and framework source
+ledger, consult the instructor-facing [M36 primary-source research
+ledger](../source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md).
 
 Before publication, reconcile each learner-facing claim, theorem statement,
 formula, source, visual, code fixture, and numerical experiment with a

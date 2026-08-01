@@ -531,7 +531,39 @@ For each question, choose an answer and record confidence **before** revealing
 the explanation. Low confidence is useful evidence for a review queue; it is
 not a failure label.
 
-1. A point has zero ordinary gradient but violates a hard inequality. What
+1. A team says it will “maximize learning,” but has not named an observable
+   target, proxy gap, hard constraint, or decision owner. What should happen
+   before choosing an optimizer?
+   - A. Add more training data.
+   - B. State the target, proxy, excluded harm/constraint, and accountable
+     owner.
+   - C. Select the solver with the smallest reported objective.
+   - D. Ask an agent to infer the missing values from historical logs.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Misconception repaired: optimization begins with a declared
+object and boundary; a solver cannot supply the missing purpose or authority.
+</details>
+
+2. An analytic gradient and a central finite-difference estimate disagree at a
+   displayed point. What is the strongest next step?
+   - A. Conclude that the objective is nonconvex.
+   - B. Keep decreasing the finite-difference step until the numbers match.
+   - C. Inspect the implementation, domain, dtype, and step-size assumptions;
+     compare a bounded directional change before making a broader claim.
+   - D. Treat the finite-difference result as a proof that the solver is wrong.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Misconception repaired: a local numerical check is diagnostic
+evidence with conditioning and implementation limits, not a theorem about the
+objective or optimizer.
+</details>
+
+3. A point has zero ordinary gradient but violates a hard inequality. What
    follows?
    - A. It is a constrained optimum.
    - B. It is an unconstrained stationary point; feasibility/certificate work
@@ -539,28 +571,56 @@ not a failure label.
    - C. The objective is necessarily nonconvex.
    - D. The constraint can be ignored after a solver runs.
 
-   **Answer: B.** Misconception repaired: ordinary stationarity and constrained
-   feasibility are different statements.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
 
-2. A projected-gradient trace decreases the objective for six iterations.
-   What is the strongest supported statement?
+**Answer: B.** Misconception repaired: ordinary stationarity and constrained
+feasibility are different statements.
+</details>
+
+4. A projected-gradient trace decreases the objective for six iterations.
+    What is the strongest supported statement?
    - A. The method converges for every step size.
    - B. The toy problem is globally solved.
    - C. This configuration produced six bounded observations; inspect residuals,
      projection, and assumptions.
    - D. Projection proves the proxy objective is valid.
 
-   **Answer: C.** Misconception repaired: a finite trace is not a theorem or a
-   value judgment.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
 
-3. For `p_i > 0`, `q_i = 0`, what should a finite KL checker do?
+**Answer: C.** Misconception repaired: a finite trace is not a theorem or a
+value judgment.
+</details>
+
+5. A fixed noisy-gradient trace improves one finite objective value. What is
+   strongest?
+   - A. The estimator is unbiased for every distribution.
+   - B. The algorithm has a general convergence guarantee.
+   - C. This declared noise sequence and update rule produced a finite
+     observation; its sampling, step-size, and repetition assumptions remain.
+   - D. Noise can be removed from the evidence record because the final value
+     decreased.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Misconception repaired: a stochastic trace shows an observation
+under a stated construction, not an expectation or convergence theorem.
+</details>
+
+6. For `p_i > 0`, `q_i = 0`, what should a finite KL checker do?
    - A. Treat the term as zero.
    - B. Repair the support mismatch explicitly rather than hiding it.
    - C. Replace it automatically with a different log base.
    - D. Conclude that `q` is more informative.
 
-   **Answer: B.** Misconception repaired: support is an assumption, not an
-   implementation detail.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Misconception repaired: support is an assumption, not an
+implementation detail.
+</details>
 
 ### Misconception repair key
 
@@ -650,13 +710,23 @@ Core-credit-gated until their own contract and release evidence are complete.
 
 ## Source and reuse boundary
 
-Use the instructor-facing [M31 source map](../source-maps/module31_optimization_information_source_map.md)
-and [source audit](../source-maps/module31_optimization_information_source_audit.md)
-for claim-linked university/primary sources, access dates, licenses, and reuse
-decisions. This workbook’s explanations, examples, diagrams, tables, and code
-are original Atlas material. It links to sources for study and provenance; it
-does not reproduce their slides, textbook prose, assignments, figures, or
-solutions.
+This workbook’s explanations, examples, diagrams, tables, and code are
+original Atlas material. It links to sources for study and provenance; it does
+not reproduce their slides, textbook prose, assignments, figures, or
+solutions. The reading routes below were checked on **2026-08-01**.
+
+### Learner-facing source links
+
+| Source | Session/claim linkage | Reuse boundary |
+| --- | --- | --- |
+| [Stanford EE364a Convex Optimization I](https://web.stanford.edu/class/ee364a/) and its [lecture route](https://web.stanford.edu/class/ee364a/lectures.html) | Sessions 1–4: formulation, convexity, optimality conditions, duality, and algorithm scope. | Link-only and original Atlas paraphrase/examples; course assets and linked texts have their own terms. |
+| [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
+| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | Sessions 5–6: entropy, cross-entropy, KL direction, support, and stated distribution assumptions. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
+| [SciPy `minimize` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) | Sessions 3–5: distinguish a mathematical condition from an API/grammar/solver contract. | Documentation is linked for contract reading; fixtures remain original and pin versions before a concrete implementation claim. |
+
+For the fuller claim-to-source ledger, source rationale, access/reuse cautions,
+and original-source links, use the instructor-facing [M31 source map](../source-maps/module31_optimization_information_source_map.md)
+and [source audit](../source-maps/module31_optimization_information_source_audit.md).
 
 ## Candidate release boundary
 

@@ -604,8 +604,12 @@ confidence answer is a useful review target, not a failure.
    - C. The search algorithm is automatically wrong.
    - D. Adding a larger heuristic fixes the missing state variable.
 
-   **Answer: B.** Repair: representation determines whether repeated states
-   are semantically safe to merge.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: representation determines whether repeated states are
+semantically safe to merge.
+</details>
 
 2. Breadth-first search returns a route with two edges and cost 20. Another
    route has three edges and cost 3. What is supported?
@@ -614,7 +618,11 @@ confidence answer is a useful review target, not a failure.
    - C. BFS may be correct for unit-step count while not optimizing the stated cost.
    - D. The graph has no solution.
 
-   **Answer: C.** Repair: name the objective and edge model.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: name the objective and edge model.
+</details>
 
 3. A relaxation of a binary maximization problem returns a fractional value
    with a larger objective. What should happen next?
@@ -623,7 +631,11 @@ confidence answer is a useful review target, not a failure.
    - C. Label its value as a relaxation bound and check original feasibility.
    - D. Conclude the solver is wrong.
 
-   **Answer: C.** Repair: the relaxed and original feasible sets differ.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: the relaxed and original feasible sets differ.
+</details>
 
 4. A solver returns after a time limit. What may be concluded?
    - A. The original problem is infeasible.
@@ -631,8 +643,12 @@ confidence answer is a useful review target, not a failure.
    - C. The encoded family is NP-complete.
    - D. The planner's model matches reality.
 
-   **Answer: B.** Repair: a status does not collapse model, theorem, and
-   external-world claims.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: a status does not collapse model, theorem, and
+external-world claims.
+</details>
 
 5. The most likely state is clear, but inspect has higher expected utility.
    Why?
@@ -641,7 +657,11 @@ confidence answer is a useful review target, not a failure.
    - C. Maximum probability is always irrelevant.
    - D. The calculation grants authority to dispatch.
 
-   **Answer: B.** Repair: belief, value, and authority are separate inputs.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: belief, value, and authority are separate inputs.
+</details>
 
 **Review schedule:** Retrieve the working invariant after 1, 3, 7, 14, and
 30 days. On days 7 and 30, change one premise: add a hidden state variable,
@@ -723,15 +743,22 @@ questions made visible here.
 
 ## Source and reuse boundary
 
-Use the instructor-facing [M34 primary-source research
-map](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md)
-for claim-linked original/official sources, access dates, and reuse cautions.
-Key starting points are the original papers by Dijkstra; Hart, Nilsson, and
-Raphael; Mackworth; Fikes and Nilsson; Fox and Long; the official OR-Tools and
-CVXPY documentation; von Neumann and Morgenstern; Cook and Karp; NIST AI RMF;
-and MIT probability materials. This workbook uses original explanations,
-fixtures, diagrams, and code. It does not reproduce source prose, figures,
-course slides, problem sets, or solutions.
+This workbook uses original explanations, fixtures, diagrams, and code. It does
+not reproduce source prose, figures, course slides, problem sets, or solutions.
+The reading routes below were checked on **2026-08-01**.
+
+### Learner-facing source links
+
+| Source | Session/claim linkage | Reuse boundary |
+| --- | --- | --- |
+| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) | Sessions 1–5: state-space reasoning, search, constraints, planning, decision, and project-oriented AI scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
+| [MIT 6.034 Artificial Intelligence](https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/) | Sessions 1–5: knowledge/problem solving, search, and AI representations as a connected conceptual route. | MIT OCW assets have their own notices; link-only/original Atlas explanations and diagrams. |
+| [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
+| [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver) and [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 3–6: solver-status interpretation and the separation of model output, risk evidence, and authority. | Documentation/framework sources are linked for reading; original Atlas models and decision cards remain distinct. |
+
+For the fuller claim-linked original/official source ledger and reuse cautions,
+use the instructor-facing [M34 primary-source research
+map](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md).
 
 ## Candidate release boundary
 

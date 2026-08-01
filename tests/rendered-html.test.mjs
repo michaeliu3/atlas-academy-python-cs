@@ -2335,6 +2335,18 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   assert.match(html, /Next-Step Evidence Dossier/);
   assert.doesNotMatch(html, /katex-error/);
 
+  const m25DiagnosticReveals = [
+    ...new JSDOM(html).window.document.querySelectorAll("details.lesson-details"),
+  ].filter(
+    ({ firstElementChild }) =>
+      firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
+  );
+  assert.equal(m25DiagnosticReveals.length, 8);
+  for (const reveal of m25DiagnosticReveals) {
+    assert.equal(reveal.hasAttribute("open"), false);
+    assert.match(reveal.textContent ?? "", /Answer:/u);
+  }
+
   const referenceUrl = new URL(
     "../public/downloads/module25_reference.py",
     import.meta.url,
@@ -2385,6 +2397,18 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
   assert.doesNotMatch(html, /Post-module learning conversation/);
   assert.match(html, /Atlas Release Dossier \/ Open-Source Stewardship Track/);
   assert.doesNotMatch(html, /katex-error/);
+
+  const m26DiagnosticReveals = [
+    ...new JSDOM(html).window.document.querySelectorAll("details.lesson-details"),
+  ].filter(
+    ({ firstElementChild }) =>
+      firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
+  );
+  assert.equal(m26DiagnosticReveals.length, 8);
+  for (const reveal of m26DiagnosticReveals) {
+    assert.equal(reveal.hasAttribute("open"), false);
+    assert.match(reveal.textContent ?? "", /Best answer:/u);
+  }
 
   const referenceUrl = new URL(
     "../public/downloads/module26_reference.py",

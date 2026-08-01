@@ -624,7 +624,11 @@ Confidence is evidence for your review queue, never a grade.
    - C. The action is authorized.
    - D. A semantic property has been proved.
 
-   **Answer: B.** Repair: syntax, behavior, and authority are distinct layers.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: syntax, behavior, and authority are distinct layers.
+</details>
 
 2. A DFA has passed 10,000 test strings for a language. What is strongest?
    - A. The language is regular.
@@ -632,8 +636,12 @@ Confidence is evidence for your review queue, never a grade.
    - C. The implementation passed this bounded test suite.
    - D. The language requires a stack.
 
-   **Answer: C.** Repair: finite observations do not settle a universal
-   regularity or correctness claim.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: finite observations do not settle a universal
+regularity or correctness claim.
+</details>
 
 3. A run reaches a step budget without halting. What is justified?
    - A. The program never halts.
@@ -641,7 +649,11 @@ Confidence is evidence for your review queue, never a grade.
    - C. The halting problem is decidable.
    - D. The input is not in the language.
 
-   **Answer: B.** Repair: bounded execution is not a total semantic decider.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: bounded execution is not a total semantic decider.
+</details>
 
 4. To transfer hardness from known-hard A to target B, the key reduction
    direction is:
@@ -650,7 +662,11 @@ Confidence is evidence for your review queue, never a grade.
    - C. either direction if examples look similar.
    - D. a benchmark from B.
 
-   **Answer: B.** Repair: follow the solver consequence through the arrow.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Repair: follow the solver consequence through the arrow.
+</details>
 
 5. A solver timed out on one instance. Which conclusion is supported?
    - A. The encoded family is NP-complete.
@@ -658,7 +674,11 @@ Confidence is evidence for your review queue, never a grade.
    - C. This configured run hit its declared limit.
    - D. P is not NP.
 
-   **Answer: C.** Repair: distinguish runtime evidence from a formal theorem.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Repair: distinguish runtime evidence from a formal theorem.
+</details>
 
 **Review schedule:** Retrieve the working invariant and one counterexample
 after 1, 3, 7, 14, and 30 days. On days 7 and 30, change one premise: make a
@@ -738,14 +758,21 @@ solver run and a theorem about a precisely encoded problem family.
 
 ## Source and reuse boundary
 
-Use the instructor-facing [M33 primary-source research
-map](../source-maps/module33_formal_languages_computability_complexity_source_research.md)
-for source-to-claim links, access dates, and reuse cautions. Key learner
-starting points are MIT 6.045J Automata, Computability, and Complexity; the
-original papers by Rabin and Scott, Chomsky, Turing, Rice, Cook, and Karp.
 This workbook uses original explanations, fixtures, diagrams, and code. It
 does not reproduce source prose, figures, lecture slides, problem sets, or
-solutions.
+solutions. The reading routes below were checked on **2026-08-01**.
+
+### Learner-facing source links
+
+| Source | Session/claim linkage | Reuse boundary |
+| --- | --- | --- |
+| [MIT 6.045J Automata, Computability, and Complexity](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/) and its [syllabus/problem-set route](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/) | Sessions 1–5: formal languages, finite automata, machines, decidability, mapping reductions, and complexity. | Link-only/original Atlas examples and proof explanations; individual MIT OCW assets have their own notices. |
+| [Georgia Tech CS 6515 Intro to Graduate Algorithms](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) | Sessions 4–5: proof-aware algorithm analysis, reductions, and complexity reasoning used as an advanced calibration route. | Link-only/original Atlas exercises; it is not a substitute for the course’s term-long work or feedback. |
+| [Cook’s 1971 complexity paper](https://doi.org/10.1145/800157.805047) and [Karp’s reduction paper](https://doi.org/10.1007/978-1-4684-2001-2_9) | Sessions 4–5: historical/primary anchors for reduction direction and encoded problem families. | Publisher records are link/citation only; do not copy proof prose, figures, or problem sets. |
+
+For the fuller source-to-claim ledger, access/reuse cautions, and primary-source
+map, use the instructor-facing [M33 primary-source research
+map](../source-maps/module33_formal_languages_computability_complexity_source_research.md).
 
 ## Candidate release boundary
 

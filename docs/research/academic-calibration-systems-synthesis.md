@@ -1,10 +1,12 @@
 # Academic calibration — systems and synthesis (M19–M26)
 
-**Scope.** This is a compact curriculum-calibration note for the Atlas module
-outlines reviewed on **2026-08-01**. The university pages below were accessed
-on **2026-08-01**. They are comparison anchors for conceptual scope and
-teaching sequence—not evidence of enrollment, credit, faculty feedback,
-assessment integrity, lab equivalence, certification, or a degree.
+**Scope.** This is a compact curriculum-calibration note for M19–M26. M19–M24
+remain scope-and-sequence comparisons; the M25/M26 section below is a
+material-level comparison of named Atlas artifacts with official university
+course-material routes. The university pages below were accessed on
+**2026-08-01**. They are comparison anchors—not evidence of enrollment, credit,
+faculty feedback, assessment integrity, lab equivalence, certification, or a
+degree.
 
 Atlas deliberately keeps the difficult intellectual work while changing its
 mode: learners read traces and designs, predict before reveal, audit
@@ -22,6 +24,18 @@ controls availability and release status.
 | **M24 — CPython performance and memory** | [MIT 6.172 Performance Engineering of Software Systems](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/) | Controlled performance analysis, algorithms, caching, parallelism, and scalable-systems reasoning. | Atlas substitutes CPython-source-aware observation, memory-lens selection, falsifiable experiments, and review of an AI optimization patch for “make it faster” folklore. | MIT's course is C-based; Atlas does not inherit its native-code scope. Results remain tied to the exact CPython/runtime/workload and must not become universal Python claims. |
 | **M25 — Evidence-grounded intelligent systems** | [Stanford CS229 Machine Learning](https://cs229.stanford.edu/) | The mathematical and practical ML landscape: supervised/unsupervised learning, learning theory, evaluation, and real-world application. | Atlas begins from the decision boundary: data lineage, calibration, uncertainty, accessibility, human override, and agent authority matter alongside a model score. | Formal ML mathematics, optimization, and substantial model-training depth remain dependent on the advanced M31–M36 chain. Until those prerequisite evidence packs are published, M25 must remain preview/locked—not a completed ML claim. |
 | **M26 — Systems capstone and open-source stewardship** | [MIT 6.005 Software Construction](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/) | Specifications, invariants, testing, concurrency reasoning, and software that remains understandable as it changes. | The capstone asks for an architecture/evidence argument: inspect an agent contribution, prove bounded release claims, record provenance and human impact, and leave a truthful handoff. | A private course cannot supply public maintainer feedback, a production rollout, or operational certification. M26 must remain preview/locked until M27–M36 prerequisite evidence exists; its release evidence must say exactly what was and was not observed. |
+
+## Material-level comparison — M25 and M26
+
+The sources in this section are official university course pages or official
+course-material routes, checked on **2026-08-01**. They are used to calibrate
+the actual Atlas artifacts below, not to copy their assessments or declare an
+institutional-equivalence outcome.
+
+| Atlas module | Official material route checked | Concrete Atlas artifact compared | Aligned / adapted / genuine gap |
+| --- | --- | --- | --- |
+| **M25 — Evidence-Grounded Intelligent Systems** | CMU [10-718 Machine Learning in Practice (Spring 2024)](https://www.cs.cmu.edu/~smithv/10718/spring2024/) for the end-to-end project progression—problem/data formulation, baseline/evaluation, additional metrics, reflection—and CMU [Responsible AI & AI Governance (2025–26)](https://privacy.cs.cmu.edu/masters/plan/courses/aigovernance.html) for transparency, privacy, human oversight, agentic governance, and red-teaming scope. MIT [6.036](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/), UC Berkeley [CS188](https://inst.eecs.berkeley.edu/~cs188/), Georgia Tech [CS 6601](https://omscs.gatech.edu/cs-6601-artificial-intelligence), and the public [Stanford CS229 Spring 2020 archive](https://cs229.stanford.edu/syllabus-spring2020.html) are foundation/evaluation anchors. | [M25 workbook](../../content/modules/25_evidence_grounded_intelligent_systems.md): the **Decision Contract** (Session 1), **Lineage and Split Card** (Session 2), **Evaluation Card** (Session 4), accessible **Decision Card** (Session 5), and the `Next-Step Evidence Dossier` with its advanced-evidence annex. | **Aligned/adapted:** the dossier follows problem formulation, controlled lineage/split, same-condition baseline, evaluation/extra-metric, limitation, and next-falsifier reasoning; the governance work adds privacy, accessibility, meaningful override, and no automatic learner-state mutation. **Gap:** it is a bounded local/synthetic vertical slice, not a semester-long real-data, peer-reviewed ML project or governance/compliance certification; M25 stays preview-only until M31–M36 evidence and M25 review are available. |
+| **M26 — Systems Capstone and Open-Source Stewardship** | MIT [6.005 Software Construction (Spring 2016)](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/) for specifications, invariants, testing, concurrency, code review/version control, and a final project; CMU [15-313 Foundations of Software Engineering (2017)](https://www.cs.cmu.edu/~ckaestne/15313/2017/index.html) for an actual open-source-contribution path plus requirements, architecture, QA/inspection, and reflection; UC Berkeley [CS169](https://www2.eecs.berkeley.edu/Courses/CS169/) for verification/validation, regression/integration testing, debugging, monitoring, security, and team-project scope; Georgia Tech [CS 6300](https://omscs.gatech.edu/cs-6300-software-development-process) for process, quality, and maintenance scope. | [M26 workbook](../../content/modules/26_systems_capstone_open_source_stewardship.md): the **Release Contract and Pre-Mortem**, **Architecture Thread Map**, traced incident/regression test, **Change and Supply-Chain Review**, `Release Dossier and Oral Defense Packet`, and the integrated project’s evidence ledger/maintenance handoff. | **Aligned/adapted:** the capstone connects scoped claim, architecture trace, code reading, reproducer/regression plan, patch/change review, rollback/disable reasoning, and a defended maintenance handoff; it grades the reasoning chain rather than code volume or a polished demo. **Gap:** it does not reproduce a term-long Java/team/client project, public maintainer response/merge, production rollout, or operational certification; M26 remains preview-only until M25 and the advanced evidence chain are release-ready. |
 
 ## Use and reuse boundary
 

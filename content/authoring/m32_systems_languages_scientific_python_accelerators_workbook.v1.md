@@ -898,8 +898,12 @@ additional evidence needed before calling the handoff no-copy?
   writable state, lifetime, and observed conversion behavior.
 - D. A faster timing result.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Misconception repaired: correct output, shape, and a tool label
 do not expose copy or ownership behavior.
+</details>
 
 ### Q2 — Submission versus completion
 
@@ -911,8 +915,12 @@ after. What did it most directly measure?
 - C. End-to-end scientific throughput.
 - D. Device-to-host transfer.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Misconception repaired: an enqueue/dispatch event need not be a
 completion event.
+</details>
 
 ### Q3 — Equal shape
 
@@ -923,8 +931,12 @@ Two arrays have equal shape. Which claim is justified?
 - C. More layout, alias/copy, dtype, and backend evidence is needed.
 - D. They are equally suitable for every kernel.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Misconception repaired: shape does not determine layout,
 ownership, cost, or numerical behavior.
+</details>
 
 ### Q4 — Vectorization
 
@@ -936,8 +948,12 @@ A compact broadcast expression produces a large temporary. What follows?
 - C. A GPU always fixes the issue.
 - D. The profiler will identify the unique cause.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Misconception repaired: expression compactness is not a
 resource claim.
+</details>
 
 ### Q5 — Buffer reuse
 
@@ -948,8 +964,12 @@ When is a staging buffer safely returned to a pool?
 - C. After the documented last consumer/ownership condition is complete.
 - D. Whenever work is called parallel.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Misconception repaired: an asynchronous history needs an
 explicit last-use condition.
+</details>
 
 ### Q6 — Autodiff
 
@@ -962,8 +982,12 @@ the best conclusion?
 - C. Every device will give the same result.
 - D. The data pipeline has no stale values.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Misconception repaired: a derivative check is not model,
 systems, or convergence validation.
+</details>
 
 ### Q7 — Reproducibility
 
@@ -976,8 +1000,12 @@ claim?
 - C. Only a screenshot of the result.
 - D. A faster implementation.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Misconception repaired: a seed is one control, not an
 environment identity.
+</details>
 
 ### Q8 — Performance number
 
@@ -989,8 +1017,12 @@ Which statement is strongest after one timed run?
   semantic equivalence, and alternatives remain necessary.
 - D. The compiler chose the best algorithm.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Misconception repaired: a measurement is an observation, not a
 mechanism or recommendation.
+</details>
 
 ### Compact repair key
 
@@ -1132,8 +1164,17 @@ remain gated synthesis work until their own requirements are complete.
 This workbook uses original explanations, fixtures, diagrams, and prompts. The
 linked material is for study and provenance; it is not copied source text,
 code, figures, benchmarks, or exercises. Research was accessed on
-2026-07-31. Documentation moves, so a future publication must recheck URLs,
+2026-07-31; the university calibration route below was checked on
+2026-08-01. Documentation moves, so a future publication must recheck URLs,
 versions, access dates, licenses, and exact environment scope.
+
+### Learner-facing university calibration route
+
+| Source cluster | Claim linkage and reason to read | Reuse boundary |
+| --- | --- | --- |
+| [Stanford CS149 Parallel Computing](https://cs149.stanford.edu/) and [MIT 12.010 Computational Methods of Scientific Programming](https://ocw.mit.edu/courses/12-010-computational-methods-of-scientific-programming-fall-2024/) | Sessions 1–6: parallel/execution reasoning, scientific-programming evidence, performance scope, and reproducibility. These are curriculum-calibration routes, not a promise of identical labs or hardware. | Link-only/original Atlas fixtures and explanations. Check individual course asset terms before reuse; do not copy assignments, recordings, slides, or benchmark claims. |
+
+### Learner-facing source links
 
 | Source cluster | Claim linkage and reason to read | Reuse boundary |
 | --- | --- | --- |

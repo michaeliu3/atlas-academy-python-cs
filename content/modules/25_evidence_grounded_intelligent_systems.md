@@ -965,9 +965,12 @@ C. “For a declared candidate set, Atlas can show a reversible suggestion with
 its reason and alternatives.”  
 D. “The feature maximizes engagement.”
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** It names the bounded task and preserves human control. A and D
-are vague/overclaiming. B grants an inference result authority it does not
-own.
+are vague/overclaiming. B grants an inference result authority it does not own.
+</details>
 
 ### Q2 — Leakage
 
@@ -978,9 +981,12 @@ B. The prerequisite graph version available on Monday.
 C. The learner's recall result recorded on Wednesday.  
 D. The candidate's stable identifier.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Wednesday's result is future information for a Monday
-prediction. It may be a declared later outcome/label, not an available
-feature.
+prediction. It may be a declared later outcome/label, not an available feature.
+</details>
 
 ### Q3 — Score versus probability
 
@@ -992,8 +998,12 @@ C. The named mechanism emitted 0.82 for this candidate under its input
 contract.  
 D. Atlas may automatically select the action.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Calibration and an outcome definition are needed for A. The
 candidate set and tie rule constrain B. D is a policy/authority decision.
+</details>
 
 ### Q4 — Baseline
 
@@ -1005,8 +1015,12 @@ complexity improves the stated decision under the same evidence conditions.
 C. It makes evaluation unnecessary.  
 D. It proves a model is unfair.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A baseline is a reference point, not a verdict. It supports a
 like-for-like comparison and makes complexity/cost visible.
+</details>
 
 ### Q5 — Evaluation
 
@@ -1019,8 +1033,12 @@ policy.
 C. A larger font.  
 D. Direct permission to mutate learner state.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Accuracy and calibration answer different questions. A
 probability label also needs a policy decision. D remains separate.
+</details>
 
 ### Q6 — Feedback
 
@@ -1032,8 +1050,12 @@ if anything, this observation means and may retain.
 C. The model should always lower this item's score.  
 D. The learner has revoked every data permission.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A dismissal has several possible meanings. It is not automatic
 ground truth, a training rule, or a universal consent signal.
+</details>
 
 ### Q7 — Accessibility
 
@@ -1044,8 +1066,12 @@ B. An equivalent text/table explanation and keyboard-operable alternatives.
 C. A longer model name.  
 D. A hidden hover tooltip.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A chart cannot be the only semantic path. Color-only and
 hover-only information exclude users and make the decision harder to audit.
+</details>
 
 ### Q8 — AI-era authority
 
@@ -1058,8 +1084,12 @@ separate policy/human authority for any effect.
 C. Trust it if the model labels itself confident.  
 D. Store the full prompt and response indefinitely.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Structure is not authority. Retrieval, generation, confidence,
 and logging each need their own boundary and retention decision.
+</details>
 
 ### Diagnostic routing
 

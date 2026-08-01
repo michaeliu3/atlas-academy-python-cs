@@ -829,12 +829,16 @@ C. The AI release note is sufficient documentation because it summarizes the
 diff.  
 D. A scan and tests prove the absence of security and operational risk.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** Tests, scans, and generated prose can be useful artifacts,
 but each establishes a narrow fact. They do not merge into authority.
 
 **Why the alternatives fail:** A turns several partial observations into a
 universal conclusion. C promotes generated text into reviewed evidence. D
 mistakes detection under a scope for proof that all risks are absent.
+</details>
 
 ### Q2 — Retry and durable effects
 
@@ -847,6 +851,9 @@ boundary.
 C. The user never sees a timeout.  
 D. The server never performs a lookup.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** The system cannot control every network outcome; it can
 bound its durable state transition by identity, transaction, and recovery
 contract.
@@ -854,6 +861,7 @@ contract.
 **Why the alternatives fail:** A overclaims distributed guarantees. C hides a
 user-observable partial failure instead of modeling it. D removes a mechanism
 that can support idempotent recovery.
+</details>
 
 ### Q3 — Architecture view selection
 
@@ -866,12 +874,16 @@ the fallback path.
 C. A folder tree.  
 D. A screenshot of the user interface.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** The question is about order, ownership, and failure
 containment, so a small dynamic trace is the right abstraction.
 
 **Why the alternatives fail:** A creates cognitive load without clarifying the
 event sequence. C says little about runtime ownership. D can show a symptom but
 not the boundary that protects state.
+</details>
 
 ### Q4 — Patch and supply-chain review
 
@@ -885,12 +897,16 @@ information, tests, and rollback effect before deciding.
 D. Ask an agent to summarize the package repository and merge if the summary is
 positive.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** A dependency or workflow change is a reviewable supply-chain
 and maintenance change, not an automatic rejection or acceptance.
 
 **Why the alternatives fail:** A confuses popularity with suitability. B is an
 absolute rule that ignores legitimate bounded use. D leaves authority and
 verification with untrusted generated text.
+</details>
 
 ### Q5 — Performance evidence
 
@@ -903,12 +919,16 @@ workload/runtime, subject to the measurement's limits.
 C. The algorithm is asymptotically better.  
 D. The cache is safe to store any learner record.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** It preserves the workload, mechanism, and measurement
 boundary from Module 24.
 
 **Why the alternatives fail:** A expands the population and workload without
 evidence. C changes a runtime observation into a complexity proof. D confuses
 performance with privacy/retention authorization.
+</details>
 
 ### Q6 — Human control and intelligence
 
@@ -921,11 +941,15 @@ C. Present a labeled, optional suggestion with explanation and a meaningful
 alternative or dismissal path.  
 D. Treat the learner's click as ground truth for future training.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** A ranked output can support a bounded display policy only
 when the decision contract permits it.
 
 **Why the alternatives fail:** A and B cross authority boundaries. D erases
 exposure, intent, friction, and feedback meaning.
+</details>
 
 ### Q7 — Evidence gap
 
@@ -937,12 +961,16 @@ B. Defer or revise until a named rollback/disable path and owner exist.
 C. Remove the architecture map because it did not solve the gap.  
 D. Add more UI polish so users can report a problem.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** A missing recovery path is a release-evidence gap, not a
 reason to invent confidence.
 
 **Why the alternatives fail:** A turns probability into authority. C discards
 useful evidence rather than addressing the missing evidence. D may improve
 reporting but does not create a bounded recovery mechanism.
+</details>
 
 ### Q8 — Oral defense under changed constraints
 
@@ -955,12 +983,16 @@ release under the local/baseline path.
 C. Claim the provider is safe because it is widely used.  
 D. Let the agent decide whether it needs its own provider call.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** A defense is successful when it can narrow a claim as a
 constraint changes.
 
 **Why the alternatives fail:** A substitutes a demo for availability and
 privacy evidence. C substitutes popularity for a contract. D lets a model mint
 capability and authority.
+</details>
 
 ### Diagnostic routing
 
