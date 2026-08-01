@@ -31,6 +31,8 @@ test("M32 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /## Likely six-session source routing/u);
   assert.match(research, /## Required evidence record for any future experiment/u);
   assert.match(research, /## Research gaps and release blockers this file does not close/u);
+  assert.match(research, /A bounded local reference fixture and focused teaching test now exist/u);
+  assert.match(research, /no learner studio or platform model exists/u);
   for (let number = 1; number <= 13; number += 1) {
     assert.match(research, new RegExp(`\\| S32-${String(number).padStart(2, "0")} \\|`, "u"));
   }

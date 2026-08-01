@@ -242,6 +242,18 @@ questions:
 Do not repair this by guessing a framework behavior. Add an ownership/lifetime
 field to the contract and obtain evidence from the actual API and trace.
 
+### Bounded reference fixture — layout before a no-copy claim
+
+Read `lib/m32-systems-evidence-fixture.js` as a local code-reading card.
+Before calling `m32LayoutHandoffTrace()`, predict whether its base and
+reversed-column cards have the same shape, the same strides, and the same
+eligibility for a declared positive-contiguous consumer. Inspect the two
+logical-to-storage reads and state the narrow conclusion about the handoff.
+
+The card is not an actual array-library, buffer-protocol, or GPU trace. It
+does not tell you what a real `prepare_for_kernel` implementation copies or
+accepts; it shows the metadata a review must still name.
+
 ### Output: Boundary Contract Map
 
 Create a **Boundary Contract Map** for one bounded, non-consequential
@@ -480,6 +492,13 @@ Read four claims separately:
 4. No performance or memory conclusion follows until the actual backend,
    allocation behavior, input, and measurement are known.
 
+### Bounded reference fixture — logical temporary before allocation claim
+
+Before calling `m32PairwiseTemporaryCard({ n: 4, k: 3, d: 2 })`, predict the
+logical intermediate and reduced-output shapes plus their element counts.
+After inspection, explain why a larger logical temporary is a question for a
+measurement card rather than evidence that a particular backend allocated it.
+
 ### Numerical boundary — representation changes the claim
 
 For a sum, a narrower dtype or reordered reduction can change rounding,
@@ -634,6 +653,14 @@ kernel's completion event at t3 is the slot reusable. A different runtime may
 express the events differently, but it must make the dependency and last use
 visible.
 
+### Bounded reference fixture — event labels before reuse
+
+Before calling `m32BufferReuseTimeline("after-enqueue")`, predict whether the
+local card permits reuse. Then compare it with
+`m32BufferReuseTimeline("after-kernel-complete")` and name the declared last
+consumer. The result is a fixed event-label exercise, not an observation of a
+real device queue, framework, overlap, or race.
+
 ### Failure probe
 
 Change exactly one premise: intentionally make a test double return a staging
@@ -744,6 +771,14 @@ record:
 | Is the output scalar or is a cotangent/reduction declared? | A derivative request requires a well-defined mathematical target. |
 | How is 'close' defined? | Absolute/relative tolerance, reference dtype, and scale change the conclusion. |
 | What changes with a wider dtype or different 'h'? | Agreement should be interpreted through representational and truncation error. |
+
+### Bounded reference fixture — manual reverse-mode scope
+
+Before calling `m32ScalarReverseModeTrace({ theta: 1, x: 2, y: 1 })`, trace
+the product, residual, loss, and derivative by hand. Compare the manual chain
+rule with its central difference, then list two claims that agreement still
+does not support. The card checks one scalar arithmetic trace; it does not
+test framework autodiff, dtype/device behavior, or the choice of objective.
 
 ### Debugging probe — the gradient matches and the system is still wrong
 

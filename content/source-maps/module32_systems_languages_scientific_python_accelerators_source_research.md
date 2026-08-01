@@ -173,13 +173,16 @@ release input, or evidence that any write succeeded.
    Numba, CUDA/HIP/ROCm, compilers, BLAS, drivers, and device architecture must
    be captured by exact version/build identifiers. Current links are research
    anchors, not release pins.
-3. **Author original bounded fixtures and reference models.** A private M32
-   workbook now supplies six draft sessions, diagnostics, a dossier rubric, and
-   TA/Study Partner oral material, but it has no checked-in M32 semantic oracle,
-   bounded reference model, or safe learner interaction. Any future lab must
-   avoid arbitrary learner code, network/package installation, credentials,
-   filesystem access beyond its declared scope, and undisclosed external model
-   calls.
+3. **A bounded local reference fixture and focused teaching test now exist;
+   no learner studio or platform model exists.** A private M32 workbook now
+   supplies six draft sessions, diagnostics, a dossier rubric, and TA/Study
+   Partner oral material. `lib/m32-systems-evidence-fixture.js` exposes only
+   fixed layout/handoff metadata, logical temporary shapes, an event-label
+   ownership timeline, and one scalar reverse-mode trace. It is not a NumPy,
+   buffer-protocol, CUDA/HIP, JAX, or PyTorch model, semantic oracle for a real
+   program, or safe learner interaction. Any future lab must avoid arbitrary
+   learner code, network/package installation, credentials, filesystem access
+   beyond its declared scope, and undisclosed external model calls.
 4. **Create the reviewed delivery and release binding.** The private draft does
    not yet bind its sessions, source linkage, visual alternatives, diagnostics,
    review records, dossier, or oral workflow to the canonical learner route,
@@ -210,6 +213,11 @@ release input, or evidence that any write succeeded.
       records a truthful availability/release decision.
 - [ ] Build original explanatory diagrams with adjacent concise text
       alternatives, not source screenshots or copied figures.
+- [~] A shared local fixture/test now makes four fixed M32 reasoning cards
+      inspectable: layout/handoff, pairwise temporary shape, buffer last use,
+      and scalar reverse-mode arithmetic. Platform-specific semantic oracles,
+      measurement evidence, learner interaction, and independent lesson review
+      remain open.
 - [ ] Bind every performance/numerical claim to a measured environment record,
       a semantic oracle, raw observations, and a stated non-claim.
 - [ ] Provide a supportively adaptive oral-defense protocol through the Codex
