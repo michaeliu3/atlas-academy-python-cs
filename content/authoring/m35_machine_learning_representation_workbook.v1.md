@@ -62,6 +62,21 @@ target process → observed data → representation → baseline / model
 | **[FINITE EXPERIMENT]** | A named synthetic generator, split, seed, configuration, trace, metric, and observed comparison. | A universal learning claim, a real-population result, or a future guarantee. |
 | **[AI PROPOSAL]** | A candidate architecture, derivation, code patch, test plan, or explanation. | Correctness, source authority, data permission, or authorization to deploy. |
 
+### Claim/source trail
+
+The compact labels below point to the instructor-facing research ledger and
+the learner-facing links at the end. They make a source route inspectable; they
+do not convert a source into a result about this synthetic exercise.
+
+| Session | Claims to trace | Research route |
+| --- | --- | --- |
+| 1 — representation | `M35-C01` | `S35-01–S35-02` |
+| 2 — formulation and baselines | `M35-C02` | `S35-03–S35-04`, `S35-16–S35-19` |
+| 3 — evaluation, calibration, and shift | `M35-C03–C05` | `S35-05–S35-08`, `S35-20–S35-21` |
+| 4 — objectives and execution | `M35-C06–C07` | `S35-03`, `S35-09–S35-10`, `S35-17–S35-19` |
+| 5 — observability | `M35-C08` | `S35-03`, `S35-11–S35-12`, `S35-15` |
+| 6 — dossier and authority | `M35-C09` | `S35-13–S35-14` |
+
 ### One evidence card, six sessions
 
 Use one evolving card instead of six disconnected sets of notes:
@@ -489,6 +504,24 @@ If the target relation is **future operation**, time defines the boundary and B
 belongs after A. Neither split is automatically correct: name the target
 relation, then state which field stops information from crossing the boundary.
 
+### Split contract — name the relation before naming a tool
+
+For either choice, record four short fields before selecting a splitter:
+
+1. **Target relation:** `new entity` or `future operation` (or a more precise
+   declared relation).
+2. **Unit of independence:** the entity, operation, site, time block, or other
+   object that must be treated together.
+3. **Field that must not cross:** for example `entity` for new-entity evidence,
+   or `time` for future-operation evidence.
+4. **Non-claim:** what the split still does not represent—such as a new region,
+   an intervention, a changed measurement process, or every future condition.
+
+`GroupKFold` and `TimeSeriesSplit` in the
+[scikit-learn cross-validation guide](https://scikit-learn.org/stable/modules/cross_validation.html#group-k-fold)
+are implementation examples for two of these relations. They do not select the
+relation for you or guarantee a deployment estimate.
+
 ### Metrics answer different questions
 
 Two predictors can have identical accuracy yet very different probability
@@ -505,7 +538,7 @@ trust a number as a belief or make a decision from it.
 | Metric / display | Question it helps ask | Missing boundary |
 | --- | --- | --- |
 | Accuracy | How often were labels matched under this evaluation relation? | cost, confidence, slices, and shift |
-| Proper score/loss | How did assigned probabilities align with labels under its convention? | decision utility and population stability |
+| Proper score/loss | What finite probabilistic-forecast loss did these declared outcomes receive? | decision utility, calibration decomposition, and population stability |
 | Reliability table | Do named probability bins roughly align with observed frequencies? | sample size, binning, selection, and deployment shift |
 | Slice metric | Which declared subgroup/time/condition differs in this data? | causal reason, legitimacy, and unseen slices |
 
@@ -521,8 +554,11 @@ identify: real-world robustness, causal mechanism, or all possible shifts.
 Before calling `m35CalibrationContrast()`, predict whether its two fixed
 probability cards can have the same threshold accuracy while receiving
 different proper scores. Inspect the returned `predictors` and binned observed
-frequencies. Then write one sentence separating this finite card from a
-population-calibration or decision-policy claim.
+frequencies. Both cards have threshold accuracy `0.75`; their Brier scores are
+`0.1875` and `0.2451`. This is a constructed finite probability-behavior
+comparison: the lower Brier value here is **not** by itself a
+population-calibration ranking or decision-policy recommendation. Write one
+sentence separating the card, a reliability estimate, and a decision claim.
 
 ### Selection boundary — inspection changes the evidence
 
@@ -1083,7 +1119,8 @@ benchmarks, code, weights, or model-card assets.
 | [MIT 6.036 Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Sessions 1–5: supervised learning, model selection, neural networks, and evidence-aware ML reasoning. | MIT OCW assets have their own notices; link-only/original Atlas fixtures and explanations. |
 | [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
 | [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
-| [scikit-learn common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html) and [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Sessions 2–5: leakage, preprocessing, training/evaluation boundaries, and bounded reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
+| [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html), [probability calibration](https://scikit-learn.org/stable/modules/calibration.html), and [Brier score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html) | Session 3: split relations, leakage, finite reliability estimates, and a bounded probabilistic-loss reading. | Link-only/original Atlas examples. Library mechanisms do not choose a target relation, prove population calibration, or guarantee a decision. |
+| [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Session 4: bounded execution and reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
 
 For the fuller claim-linked university, standards, framework, and primary
 research ledger, consult the instructor-facing [M35 primary-source research

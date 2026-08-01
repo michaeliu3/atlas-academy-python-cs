@@ -38,7 +38,7 @@ test("M35 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~mgormley\/courses\/10601-f25\//u);
   assert.match(research, /https:\/\/cs229\.stanford\.edu\/materials\.html-full/u);
   assert.match(research, /https:\/\/omscs\.gatech\.edu\/cs-7641-machine-learning/u);
-  for (let number = 1; number <= 19; number += 1) {
+  for (let number = 1; number <= 21; number += 1) {
     assert.match(research, new RegExp(`\\| S35-${String(number).padStart(2, "0")} \\|`, "u"));
   }
 

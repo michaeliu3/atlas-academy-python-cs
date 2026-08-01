@@ -254,6 +254,11 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m35Workbook, /m35SharedInformationModelFamilyCard\(\)/u);
   assert.match(m35Workbook, /m35M36FixedReluTrace\(\)/u);
   assert.match(m35Workbook, /Selection boundary — inspection changes the evidence/u);
+  assert.match(m35Workbook, /Claim\/source trail/u);
+  assert.match(m35Workbook, /Split contract — name the relation before naming a tool/u);
+  assert.ok(m35Workbook.includes("Brier scores are"));
+  assert.ok(m35Workbook.includes("0.1875"));
+  assert.ok(m35Workbook.includes("0.2451"));
   assert.match(m35Workbook, /two-hidden-unit ReLU/u);
   assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
   assert.doesNotMatch(m36Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);
@@ -271,6 +276,9 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.ok(m36Workbook.includes("\\mathbb{E}[Y\\mid q(X)]=q(X)"));
   assert.match(m36Workbook, /m35M36FixedReluTrace\(\)/u);
   assert.match(m36Workbook, /Finite-class proof skeleton — the union-bound step has a home/u);
+  assert.match(m36Workbook, /Hoeffding's inequality gives/u);
+  assert.match(m36Workbook, /Quantifier card — uniform deviation is not yet PAC learnability/u);
+  assert.match(m36Workbook, /Bartlett–Foster–Telgarsky spectral-normalized margin-bound example/u);
   assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
   assert.match(m36Workbook, /conditional \/ label-relation shift/u);

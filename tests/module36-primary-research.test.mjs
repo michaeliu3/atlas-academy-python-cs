@@ -37,7 +37,7 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /cannot be claimed saved without direct evidence\./u);
   assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~mgormley\/courses\/10601-f25\//u);
   assert.match(research, /https:\/\/cs229\.stanford\.edu\/materials\.html-full/u);
-  for (let number = 1; number <= 16; number += 1) {
+  for (let number = 1; number <= 17; number += 1) {
     assert.match(research, new RegExp(`\\| S36-${String(number).padStart(2, "0")} \\|`, "u"));
   }
 

@@ -64,6 +64,22 @@ target + decision boundary
 | **[SYSTEM CONTRACT]** | A pinned framework/backend/device behavior or a bounded deterministic/reproduction setting. | Numerical correctness, scientific validity, or cross-platform identity unless directly tested. |
 | **[GOVERNANCE / AUTHORITY]** | Who may inspect, pause, escalate, revise, or decline a use. | A mathematical or statistical conclusion. |
 
+### Claim/source trail
+
+The compact labels below point to the instructor-facing research ledger and
+the learner-facing links at the end. They make the route behind a claim
+inspectable; they do not make a cited theorem or paper evidence about the
+synthetic learning system here.
+
+| Session | Claims to trace | Research route |
+| --- | --- | --- |
+| 1 — learning claims | `M36-C01` | `S36-01–S36-03`, `S36-07–S36-09` |
+| 2 — optimization and gaps | `M36-C02`, `M36-C05` | `S36-04–S36-06` |
+| 3 — theorem scope | `M36-C04–C05` | `S36-01–S36-05`, `S36-14–S36-17` |
+| 4 — numerical evidence | `M36-C03`, `M36-C07` | `S36-10–S36-11` |
+| 5 — shift and control | `M36-C06`, `M36-C08–C09` | `S36-07–S36-12` |
+| 6 — synthesis dossier | `M36-C01–C09` | `S36-01–S36-17` |
+
 ### One reliable-learning evidence map
 
 Keep this map across every session:
@@ -396,13 +412,18 @@ changes the claim that follows.
 Here is one deliberately narrow route to the displayed shape. Let
 \(\mathcal H=\{h_1,\ldots,h_K\}\) be **finite**, let
 \(\ell(h,Z)\in[0,1]\), and let \(Z_1,\ldots,Z_n\) be IID draws from a named
-distribution \(P\). For one fixed \(h\), a bounded IID concentration result
-has the form
+distribution \(P\). For one fixed \(h\), set
+\(L_i=\ell(h,Z_i)\). The \(L_i\) are IID and lie in \([0,1]\), so
+Hoeffding's inequality gives
 
 \[
 \Pr\!\left(\left|R_P(h)-\widehat R_S(h)\right|>\varepsilon\right)
 \leq 2e^{-2n\varepsilon^2}.
 \]
+
+This is specifically a **finite-class, bounded-loss, Hoeffding-plus-union-bound
+route**. It is not a generic justification for the earlier display, a VC proof,
+or a bound for an arbitrary neural network.
 
 Before revealing the rest, decide which independence is doing the work:
 independence between the candidate hypotheses, or the IID relation among the
@@ -436,6 +457,41 @@ logarithmically in \(K\) after solving for \(n\).
    consequential.
 
 </details>
+
+### Quantifier card — uniform deviation is not yet PAC learnability
+
+The finite-class card controls a deviation event for a named class. A
+**realizable PAC** claim adds a target-in-class assumption and a learner
+algorithm \(A\): for every eligible distribution \(P\) and every
+\(\varepsilon,\delta\in(0,1)\), sufficiently many IID examples lead—with
+probability at least \(1-\delta\) over the sample and any declared learner
+randomness—to an output with error at most \(\varepsilon\) in the stated
+realizable classification setting.
+
+Before reading that as a slogan, mark the roles:
+
+| Role | Objects to name |
+| --- | --- |
+| **Assumed** | target concept in \(\mathcal H\), loss/error convention, eligible distributions, and IID sample relation |
+| **Universal** | each eligible \(P\), \(\varepsilon\), and \(\delta\) |
+| **Random** | sampled examples and any declared randomness in \(A\) |
+| **Claimed** | a sufficient sample regime and the stated error/confidence conclusion for \(A\) |
+
+**Prediction.** Which row is missing if someone says only, “the class is
+finite”? Then state the boundary: this finite-card derivation does not by
+itself prove PAC learnability of a neural system, its training algorithm, or
+its future data relation.
+
+### Claim-reading comparison — two routes, different evidence
+
+| Reading card | Assumptions/evidence to keep visible | What the result can support | Explicit non-claim |
+| --- | --- | --- | --- |
+| Finite-class Hoeffding route | fixed finite \(\mathcal H\), bounded loss, named IID relation, and declared \(K,\varepsilon,\delta,n\) | A simultaneous finite-class deviation statement under those assumptions | A deep-network, VC, deployment, or data-quality guarantee |
+| [Bartlett–Foster–Telgarsky spectral-normalized margin-bound example](https://proceedings.neurips.cc/paper/2017/hash/b22b257ad0519d4500539da3c8bcf4dd-Abstract.html) | Exact network/parameterization, margin and spectral-complexity terms, sample relation, theorem conditions, and any separate empirical study | A scoped research-bound reading exercise after checking the exact theorem | An architecture ranking, a universal explanation of generalization, or a reliability certificate |
+
+The point is not to choose the more impressive theorem name. It is to ask which
+objects, quantifiers, and conclusion are actually present before transferring a
+claim to a system.
 
 ### One numerical theorem card — calculation is not a deployment claim
 
@@ -997,6 +1053,7 @@ benchmarks, weights, or course exercises.
 | [MIT 9.520 Statistical Learning Theory & Applications](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/) and its [VC-dimension notes](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/resources/class17/) | Sessions 1–3: empirical versus population risk, function classes, quantifiers, and theorem conditions. | MIT OCW assets have individual notices; link-only/original Atlas theorem cards, examples, and proof prompts. |
 | [MIT 6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/) and [generalization-theory lecture](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/) | Sessions 2–5: deep-learning foundations, overparameterization/generalization questions, and experimental scope. | Link-only/original Atlas examples and experiments; no copied videos, slides, homework, or project assets. |
 | [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) and [Stanford CS229 course materials](https://cs229.stanford.edu/materials.html-full) | Session 3: learning-theory, regularization/model-selection, and fixed-versus-adaptive evaluation boundaries. | Link-only/original Atlas proof cards and examples; do not copy lectures, assignments, figures, data, notes, or solutions. |
+| [Hoeffding (1963)](https://doi.org/10.1080/01621459.1963.10500830), [Valiant's PAC paper](https://dl.acm.org/doi/10.1145/1968.1972), and the [Bartlett–Foster–Telgarsky margin-bound example](https://proceedings.neurips.cc/paper/2017/hash/b22b257ad0519d4500539da3c8bcf4dd-Abstract.html) | Session 3: finite-class concentration, PAC quantifiers, and reading a modern deep-learning bound with its conditions. | Link/cite only/original Atlas theorem cards. Read the exact theorem before applying it; no copied proofs, figures, constants, or benchmark conclusions. |
 | [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) and [numerical-accuracy documentation](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html) | Session 4: bounded environment, dtype, backend, and comparison claims. | Link-only/original reproduction record; pin framework, device, and versions before an implementation claim. |
 | [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 5–6: monitoring, management, governance, and human-control boundaries. | Link-only/original Atlas reliability maps; voluntary guidance is not legal advice, certification, or authorization. |
 

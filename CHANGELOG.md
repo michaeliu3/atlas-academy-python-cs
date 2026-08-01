@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Calibrated the hidden M35–M36 authoring packs with a narrow official/primary
+  source recheck. M35 now makes its claim-to-source routes visible, requires a
+  target-relation split contract, and separates a fixed Brier-score observation
+  from population calibration or a decision. M36 now names the finite-class
+  Hoeffding route, separates it from PAC quantifiers, and contrasts it with a
+  scoped modern deep-learning bound. These are private authoring improvements
+  only: neither module is learner-ready, published, unlocked, deployed, or a
+  claim of learner mastery or university equivalence.
 - Calibrated the hidden M33–M34 authoring packs with a narrow official/primary
   source recheck. M33 now exposes its existing claim-to-source routes and
   labels two interface-shaped sketches as pseudocode. M34 repairs a Karp DOI,
