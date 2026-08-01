@@ -2,9 +2,9 @@
 
 **Authoring-only private study pack.** This is a complete draft for
 instructor-led study in the designated Codex chats. It is intentionally outside
-`content/modules` and the reader manifest; private study does not open a portal
-route, grant Core credit, or establish publication, review, release, or mastery
-evidence.
+`content/modules` and is not in the reader manifest; private study does not
+open a portal route, grant Core credit, or establish publication, review,
+release, or mastery evidence.
 
 **Knowledge arc:** Mathematical foundations → systems/AI reasoning
 
