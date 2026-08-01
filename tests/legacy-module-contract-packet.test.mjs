@@ -371,7 +371,7 @@ test("the M19 structural packet records the concurrency spine without hiding its
   assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m18"]);
   assert.equal(packet?.canonicalExpectation.forwardModuleId, "m20");
   assert.equal(packet?.canonicalExpectation.masteryGateId, "systems");
-  assert.equal(packet?.canonicalExpectation.studioId, null);
+  assert.equal(packet?.canonicalExpectation.studioId, "concurrency");
   assert.equal(packet?.packetState, "structural-candidate");
   assert.equal(packet?.humanReviewState, "not-reviewed");
   assert.equal(packet?.publicationEffect, "none");

@@ -739,16 +739,41 @@ test("Module 18 OS studio preserves its canonical interactive contract", async (
 test("Module 19 preserves its invariant and six-view shell", async () => {
   const studioUrl = new URL("../app/ConcurrencyStudio.tsx", import.meta.url);
   const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
-  const [studio, arc] = await Promise.all([
+  const registryUrl = new URL("../lib/module-studio-registry.ts", import.meta.url);
+  const readerUrl = new URL("../app/ConcurrencyStudioReader.tsx", import.meta.url);
+  const [studio, arc, registry, reader] = await Promise.all([
     readFile(studioUrl, "utf8"),
     readFile(arcUrl, "utf8"),
+    readFile(registryUrl, "utf8"),
+    readFile(readerUrl, "utf8"),
   ]);
 
   const exactInvariant =
     "Every admitted Atlas partition reaches exactly one terminal classification—`COMMITTED`, `FAILED`, or `CANCELLED`. If Atlas publishes a new index, that index is the deterministic fold of all and only `COMMITTED` partial results, and publication is permitted only when every required partition is `COMMITTED`. Every worker-visible effect remains accounted for as a process-local operation, an OS-mediated resource transition, and one step in a declared concurrent history; each shared transition is justified by one named owner or synchronization protocol, every progress claim states its blocking and fairness assumptions, and neither a clean exit, a passing stress run, the GIL, nor observed speedup substitutes for safety, liveness, or model-fit evidence.";
   assert.ok(studio.includes(exactInvariant));
-  assert.match(arc, /<ConcurrencyStudio \/>/);
+  assert.match(arc, /<ConcurrencyStudioReader \/>/);
   assert.match(arc, /href: "\/modules\/19-concurrency-parallelism"/);
+  assert.match(registry, /concurrency:[\s\S]*?studioId: "concurrency"/);
+  assert.match(registry, /import\("@\/app\/ConcurrencyStudioReader"\)/);
+  assert.match(reader, /import\("@\/app\/ConcurrencyStudio"\)/);
+  assert.match(reader, /Open the concurrency observatory/);
+  assert.match(reader, /aria-expanded=\{isOpen\}/);
+  assert.match(reader, /concurrency-observatory-panel/);
+  assert.match(reader, /hidden=\{!isOpen\}/);
+  assert.match(reader, /hasLaunched \? <ConcurrencyObservatory \/> : null/);
+  const scrollableTables = [
+    ...studio.matchAll(/<div[\s\S]{0,240}className=\{styles\.tableScroll\}[\s\S]{0,240}>/gu),
+  ];
+  assert.equal(scrollableTables.length, 7);
+  assert.ok(
+    scrollableTables.every((match) =>
+      /aria-label=["'][^"']+["'][\s\S]*role=["']region["'][\s\S]*tabIndex=\{0\}/u.test(match[0]),
+    ),
+  );
+  assert.match(
+    studio,
+    /aria-label="Scrollable preterminal state progression"[\s\S]{0,160}tabIndex=\{0\}/,
+  );
 
   for (const viewLabel of [
     "History explorer",

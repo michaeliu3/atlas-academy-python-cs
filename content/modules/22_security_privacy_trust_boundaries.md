@@ -112,6 +112,9 @@ identity, trace correlation, partial failure, and distributed claim limits.
 Module 22 preserves all of those boundaries.
 
 ~~~mermaid
+%% atlas-diagram-id: m22-trust-boundary-knowledge-route
+%% atlas-diagram-title: Network observations become bounded security decisions before later language capabilities
+%% atlas-diagram-alt: Module 20 supplies endpoints and replies, and Module 21 adds tasks, retries, traces, and UNKNOWN. Module 22 treats each received value as an input claim, then bounds parsing, authorization, adapters, and redacted evidence before Module 23 exposes a narrow language capability.
 flowchart LR
     M20["M20: endpoint, bytes, request, reply"] --> M21["M21: task, retry, trace, UNKNOWN"]
     M21 --> C["A trace or operation ID correlates declared observations"]
@@ -156,6 +159,9 @@ decision. The question for the module is:
 ### 1.3 Six decision states, not one word called trusted
 
 ~~~mermaid
+%% atlas-diagram-id: m22-claim-to-redacted-evidence-state
+%% atlas-diagram-title: A received claim reaches a narrow plan or a bounded rejection with redacted evidence
+%% atlas-diagram-alt: A received input claim first passes declared format and limit checks. A valid format is authenticated, then either authorized for a context-limited adapter plan or rejected by policy; malformed, unauthorized, and unsafe requests all end in redacted evidence rather than unbounded execution.
 stateDiagram-v2
     [*] --> InputClaim
     InputClaim --> ValidatedFormat: declared shape and limit check
@@ -202,6 +208,9 @@ Before naming a library, ask six questions:
 6. What evidence is legitimate to retain?
 
 ~~~mermaid
+%% atlas-diagram-id: m22-importer-trust-boundaries
+%% atlas-diagram-title: An importer crosses explicit parsing, worker, adapter, review, and evidence boundaries
+%% atlas-diagram-alt: A supplied importer request enters the Atlas API for parsing and limits, carries only correlation through a queue, and reaches a policy-bound worker. That worker selects fixed database, archive, transform, release-review, and redacted-evidence paths rather than handing the request unrestricted authority.
 flowchart LR
     U["Supplied importer request: INPUT CLAIM"] --> API["Atlas API: parse and limits"]
     API --> Q["Module 21 queue/task: correlation only"]
@@ -288,6 +297,9 @@ subject
 ~~~
 
 ~~~mermaid
+%% atlas-diagram-id: m22-authorization-tuple-decision
+%% atlas-diagram-title: Authorization resolves an exact canonical tuple through a versioned explicit rule
+%% atlas-diagram-alt: A presented claim is verified for a scoped subject, canonical tenant and resource, action and purpose, then policy version and freshness. An explicit matching rule authorizes only that tuple; otherwise the system denies, defers, or escalates while retaining redacted decision evidence.
 flowchart TD
     C["Presented claim"] --> V["Declared verifier"]
     V --> S["Scoped subject result"]
@@ -364,6 +376,9 @@ next decision.
 ### The pipeline
 
 ~~~mermaid
+%% atlas-diagram-id: m22-validate-canonicalize-authorize-pipeline
+%% atlas-diagram-title: External data becomes an authorized narrow plan only after bounded validation and policy
+%% atlas-diagram-alt: An external representation is checked for syntax, shape, and size; semantic rules then produce canonical form within a resource budget. A context-specific adapter policy either authorizes a narrow plan or returns a bounded rejection, and both paths yield redacted local evidence.
 flowchart LR
     I["external representation"] --> S["syntax, shape, size"]
     S --> M["schema and semantic rule"]
@@ -485,6 +500,9 @@ Security mechanisms have purposes and assumptions. Treating them as magic
 stickers creates serious design errors.
 
 ~~~mermaid
+%% atlas-diagram-id: m22-security-property-mechanism-selection
+%% atlas-diagram-title: Security mechanisms follow the needed property and still do not replace authorization
+%% atlas-diagram-alt: A required property leads to a distinct mechanism: reviewed randomness for hard-to-guess values, a slow salted verifier for passwords, a MAC for shared-key integrity, peer and certificate policy for transport, or a declared public-key identity system. Each still feeds a separate authorization decision.
 flowchart TD
     N["What property is needed?"] --> R["hard-to-guess value"]
     N --> K["password verifier"]
@@ -584,6 +602,9 @@ safety, not decoration added afterward.
 ### Provenance chain
 
 ~~~mermaid
+%% atlas-diagram-id: m22-release-provenance-chain
+%% atlas-diagram-title: Release trust depends on linked source, review, build, publisher, deployment, and recovery evidence
+%% atlas-diagram-alt: A source change is connected to review evidence, dependency declaration, local integrity control, build-environment and publisher assumptions, and a release artifact. Deployment and recovery review then connect that artifact to user impact and a support path, making the trust chain inspectable rather than automatic.
 flowchart LR
     S["source change"] --> R["review evidence"]
     R --> D["dependency declaration"]
@@ -688,6 +709,9 @@ history, proves successful containment, or permits an unbounded status query.
 ### Facts, hypotheses, and unknowns
 
 ~~~mermaid
+%% atlas-diagram-id: m22-facts-hypotheses-unknown-recovery
+%% atlas-diagram-title: Redacted facts, hypotheses, and visible unknowns guide bounded recovery and improvement
+%% atlas-diagram-alt: A redacted local timeline splits into facts that can be labeled, compatible hypotheses, and visible UNKNOWNs. Facts and hypotheses support a bounded containment or recovery candidate, while unknowns require an authorized status check or escalation; both routes lead to improvement and regression testing.
 flowchart TD
     L["redacted local timeline"] --> F["facts we can label"]
     L --> H["compatible hypotheses"]

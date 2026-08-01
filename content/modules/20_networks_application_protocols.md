@@ -173,7 +173,10 @@ must model **what it knows**, rather than write a story it wants to be true.
 #### D1 — The new boundary
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-network-boundary
+    %% atlas-diagram-title: Local validation across a network boundary
+    %% atlas-diagram-alt: A deterministic M19 result becomes an M18 validated local candidate. The client crosses an uncontrolled name, endpoint, and transport boundary to a server that may or may not decide and respond; the client records only observed facts and may retain UNKNOWN.
+    flowchart LR
     M19["M19: deterministic local index"] --> M18["M18: validated local publication candidate"]
     M18 --> C["Atlas client\nlocal process facts"]
     C --> N["name + endpoint + transport\nuncontrolled boundary"]
@@ -297,7 +300,10 @@ entry exactly that long ([RFC 9499 §5](https://www.rfc-editor.org/rfc/rfc9499.h
 The mental model should be this:
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-name-resolution-candidates
+    %% atlas-diagram-title: Name resolution yields connection candidates
+    %% atlas-diagram-alt: The name atlas.example goes through a resolver and possible cache or queries to produce candidate address, family, and port endpoints. The client selects and attempts candidates; this does not establish reachability, stable machine identity, or authenticated Atlas service identity.
+    flowchart LR
     N["atlas.example\nname"] --> R["client resolver API"]
     R --> CACHE["possible cache"]
     CACHE --> Q["possible recursive/authoritative queries"]
@@ -689,7 +695,10 @@ unreceive, unparse, undecide, or delete operation at the service.
 #### D6 — Each rung answers a different question
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m20-evidence-ladder
+    %% atlas-diagram-title: Evidence ladder for a remote decision
+    %% atlas-diagram-alt: Local acceptance, transport byte receipt, framing, server validation and decision, server response bytes, and matching client parsing are separate rungs. Only matching response evidence binds the client's operation to a confirmed Atlas decision; earlier rungs do not imply it.
+    flowchart TB
     A["client accepted a local write"] --> B["transport peer accepted bytes"]
     B --> C["server reconstructed a complete frame"]
     C --> D["server validated and recorded decision"]
@@ -875,7 +884,10 @@ or security model.
 #### D7 — Two contracts that must meet without being confused
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-http-atlas-contracts
+    %% atlas-diagram-title: HTTP and Atlas operation contracts
+    %% atlas-diagram-alt: HTTP supplies method, target, status, and representation semantics. Atlas adds a versioned schema, operation ID, and digest, then a server-local first, replay, or conflict ledger and a response or status lookup. HTTP does not itself provide that ledger.
+    flowchart LR
     H["HTTP semantics\nmethod, target, status, representation"] --> A["Atlas API contract\nversion, schema, operation ID, digest"]
     A --> L["Atlas decision ledger\nfirst / replay / conflict"]
     L --> R["declared response or status lookup"]
@@ -1069,7 +1081,10 @@ The repair begins with a question, not a loop:
 #### D8 — One ID is not merely a convenience string
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m20-operation-id-state-machine
+    %% atlas-diagram-title: Operation ID and digest state machine
+    %% atlas-diagram-alt: An absent operation ID is recorded only with a valid request and canonical digest. A later same-ID, same-digest request replays the recorded decision; a same-ID, different-digest request conflicts. The model is server-local and says nothing about response delivery or global agreement.
+    stateDiagram-v2
     [*] --> ABSENT
     ABSENT --> RECORDED: valid request\nID + canonical digest
     RECORDED --> REPLAYED: same ID + same digest
@@ -1187,7 +1202,10 @@ Client policy in this teaching model:
 #### D10 — Retry is a knowledge-preserving branch
 
 ```mermaid
-flowchart TD
+    %% atlas-diagram-id: m20-retry-knowledge-branch
+    %% atlas-diagram-title: Retry preserves what the client knows
+    %% atlas-diagram-alt: An initial operation either gets a matching response and is CONFIRMED, or a timeout, close, or error leaves the client's observation UNKNOWN. Policy may retry using the same ID and digest or use status lookup; only matching retained evidence can confirm it.
+    flowchart TD
     A["attempt op-0007 / digest A"] --> B{matching response?}
     B -- yes --> C["CONFIRMED\nmatching decision"]
     B -- no timeout/close/error --> U["UNKNOWN\nclient observation only"]
@@ -1292,7 +1310,10 @@ correlation-rich fields and a label for what remains unknown.
 #### D11 — Dependency direction and observation ownership
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-dependency-observation-ownership
+    %% atlas-diagram-title: Core and adapter dependency direction
+    %% atlas-diagram-alt: A synthetic snapshot feeds canonical request construction, replaceable resolver and transport seams, bounded framing, validation, idempotency ledger, response encoding, client classification, status lookup, and a scoped evidence view. The final evidence still uses the M18 local publication boundary.
+    flowchart LR
     F["synthetic snapshot fixture"] --> B["canonical request builder\ncore"]
     B --> R["resolver / endpoint-attempt seam\nadapter"]
     B --> T["transport seam\nadapter"]
@@ -1903,7 +1924,10 @@ shared ledger races or scheduler/owner repair                           → Modu
 ### 11.2 Required architecture and dependency direction
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m20-reference-network-architecture
+    %% atlas-diagram-title: Reference network protocol architecture
+    %% atlas-diagram-alt: A synthetic snapshot becomes a canonical request and bounded length-prefixed frame sent through a scripted transport seam. Core framing, parsing, validation, one-owner ledger, response correlation, and status lookup yield scoped evidence that ends at M18's local publication boundary.
+    flowchart TB
     S["Synthetic snapshot\nfixture only"] --> C["canonical request\nmethod + target + version + ID + digest"]
     C --> E["length-prefixed\nrequest frame"]
     E --> T["scripted transport /\nendpoint-attempt seam"]

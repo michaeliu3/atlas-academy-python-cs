@@ -105,6 +105,9 @@ count CPython references, collect an actual heap, or infer a real leak.
 ### 1.1 The connected route
 
 ~~~mermaid
+%% atlas-diagram-id: m24-cpython-observation-knowledge-route
+%% atlas-diagram-title: Semantic contracts, object graphs, system lenses, and experiments bound CPython observations
+%% atlas-diagram-alt: Cost-model assumptions and Module 23 semantic paths inform a CPython observation, while representation work supplies an object graph. Tests, machine and OS resource lenses, concurrency limits, and privacy retention boundaries shape an experiment manifest and bounded decision; Module 32 remains authoring-only.
 flowchart LR
     M5["M5: cost model<br/>assumptions"] --> C["semantic contract"]
     M6["M6/8/9: representation,<br/>aliasing, indexes"] --> O["object graph"]
@@ -265,6 +268,9 @@ that model. Now apply it to a graph.
 ### First-principles model
 
 ~~~mermaid
+%% atlas-diagram-id: m24-shared-reference-lifetime
+%% atlas-diagram-title: Deleting one name leaves a shared list reachable through another binding
+%% atlas-diagram-alt: The names report and debug_snapshot both refer to one shared list containing two events. Deleting report removes only that binding, while debug_snapshot still reaches the list and its events; the diagram distinguishes name deletion from object destruction.
 flowchart LR
     A["report"] --> L["shared list"]
     B["debug_snapshot"] --> L
@@ -408,6 +414,9 @@ Python-allocation, native-allocation, or process-memory question.
 ### The memory-lens diagram
 
 ~~~mermaid
+%% atlas-diagram-id: m24-memory-measurement-lenses
+%% atlas-diagram-title: Distinct memory measurements answer different questions and forbid different inferences
+%% atlas-diagram-alt: A memory question can use shallow object size, traced Python allocations, native or extension allocation, or process and OS memory. Each lens has a limit: shallow size does not reveal retained graphs, traced allocations do not reveal RSS, native memory does not identify a Python owner, and process memory does not identify a Python allocation site.
 flowchart TB
     Q["Memory question"] --> S["shallow object size"]
     Q --> T["traced Python allocations"]

@@ -33,7 +33,7 @@ compressed transfer estimate.
 | Each named studio's own entry plus direct CSS | 80,000 B | Keeps an individual studio's primary code-split entry bounded. |
 | Each named studio's static import closure | 400,000 B | Bounds its entry plus manifest-static dependencies. |
 
-The policy also enumerates all 11 registered visual studios by stable manifest
+The policy also enumerates all 12 registered visual studios by stable manifest
 `name`. Each must resolve to exactly one emitted entry, be dynamically
 reachable from the browser entry, and remain outside its static-import
 closure. This catches a studio that silently becomes part of the initial
@@ -44,6 +44,15 @@ the entry's emitted JavaScript plus manifest-associated CSS, recursively across
 `imports`. It intentionally does not follow `dynamicImports`: those are the
 code-split boundary being guarded.
 
+Module 19's `concurrency` entry is intentionally the small
+`ConcurrencyStudioReader` launch shell. Both the direct module reader and the
+supplemental Arc IV portal keep the full `ConcurrencyStudio` behind a stable,
+keyboard-operable disclosure control; its larger six-view laboratory is
+requested only after the learner chooses to open it. The all-assets and
+single-asset limits still bound that deferred emitted file, but the named
+studio static-closure metric measures the launch boundary rather than claiming
+that the post-click laboratory has no cost.
+
 ## What this is not evidence for
 
 The gate does **not** measure or guarantee:
@@ -52,6 +61,7 @@ The gate does **not** measure or guarantee:
 - device CPU, memory, rendering time, interaction latency, or Core Web Vitals;
 - route-specific preload behavior, data fetching, actual learner navigation,
   accessibility, correctness, or comprehension;
+- the deferred Module 19 laboratory payload after its explicit learner action;
 - intentionally separate teaching downloads under `dist/client/downloads`.
 
 Browser accessibility acceptance and any future field/lab performance work are

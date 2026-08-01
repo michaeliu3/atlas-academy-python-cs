@@ -7,7 +7,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { AsyncDistributedStudio } from "./AsyncDistributedStudio";
-import { ConcurrencyStudio } from "./ConcurrencyStudio";
+import { ConcurrencyStudioReader } from "./ConcurrencyStudioReader";
 import { NetworkProtocolStudio } from "./NetworkProtocolStudio";
 import { OperatingSystemsStudio } from "./OperatingSystemsStudio";
 import { SecurityTrustStudio } from "./SecurityTrustStudio";
@@ -852,7 +852,7 @@ export function ArcFourStudio({
       </section>
 
       <OperatingSystemsStudio />
-      <ConcurrencyStudio />
+      <ConcurrencyStudioReader />
       <NetworkProtocolStudio />
       <AsyncDistributedStudio />
       <SecurityTrustStudio />

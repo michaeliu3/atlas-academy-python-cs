@@ -32,6 +32,25 @@ async function selectRadioWithKeyboard(page: Page, radio: Locator) {
   await expect(radio).toBeChecked();
 }
 
+async function openConcurrencyObservatory(page: Page) {
+  const launch = page.locator('button[aria-controls="concurrency-observatory-panel"]');
+  const panel = page.locator("#concurrency-observatory-panel");
+  await expect(launch).toHaveAccessibleName("Open the concurrency observatory");
+  await expect(launch).toHaveAttribute("aria-controls", "concurrency-observatory-panel");
+  await expect(launch).toHaveAttribute("aria-expanded", "false");
+  await expect(panel).toBeHidden();
+  await launch.focus();
+  await page.keyboard.press("Enter");
+  await expect(launch).toBeFocused();
+  await expect(launch).toHaveAccessibleName("Hide the concurrency observatory");
+  await expect(launch).toHaveAttribute("aria-expanded", "true");
+  await expect(panel).toBeVisible();
+
+  const studio = page.locator("#concurrency-observatory");
+  await expect(studio).toBeVisible();
+  return studio;
+}
+
 const browserAuditRoutes: ReadonlyArray<{
   name: string;
   path: string;
@@ -195,6 +214,20 @@ test("Module 18 retains its workbook and oral-defense route", async ({ page }) =
       name: "Oral defense: a conversation, not a verdict.",
     }),
   ).toBeVisible();
+});
+
+test("Module 19 reader loads its registered concurrency observatory", async ({ page }) => {
+  await page.goto("/modules/19-concurrency-parallelism");
+
+  const studio = await openConcurrencyObservatory(page);
+  await expect(
+    studio.getByRole("heading", { name: /read the weave\. defend the history\./i }),
+  ).toBeVisible();
+  await expect(studio.getByRole("tab", { name: "History explorer" })).toBeVisible();
+  const results = await new AxeBuilder({ page })
+    .include("#concurrency-observatory")
+    .analyze();
+  expect(results.violations, "Axe found a violation in the direct M19 studio.").toEqual([]);
 });
 
 test("Module 1 exposes keyboard-reachable, module-specific companion contexts without opening them on a synthesis preview", async ({
@@ -607,8 +640,7 @@ test("M19 revokes export approval when its evidence brief changes", async ({ pag
   await page.goto("/");
   await page.getByRole("button", { name: "Machine & network lab" }).click();
 
-  const studio = page.locator("#concurrency-observatory");
-  await expect(studio).toBeVisible();
+  const studio = await openConcurrencyObservatory(page);
   await studio.getByRole("tab", { name: /evidence auditor/i }).click();
 
   const panel = studio.locator("#concurrency-panel-evidence");
@@ -685,8 +717,7 @@ test("M19 keeps only its six prediction gates in v3 local progress and reset lea
   );
   await page.getByRole("button", { name: "Machine & network lab" }).click();
 
-  const studio = page.locator("#concurrency-observatory");
-  await expect(studio).toBeVisible();
+  const studio = await openConcurrencyObservatory(page);
   await expect(studio.getByText("0 / 6 views revealed", { exact: true })).toBeVisible();
   await expect
     .poll(() =>
@@ -737,6 +768,7 @@ test("M19 keeps only its six prediction gates in v3 local progress and reset lea
 
   await page.reload();
   await page.getByRole("button", { name: "Machine & network lab" }).click();
+  await openConcurrencyObservatory(page);
   await expect(studio).toBeVisible();
   await expect
     .poll(() =>

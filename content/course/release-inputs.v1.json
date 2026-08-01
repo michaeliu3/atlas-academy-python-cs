@@ -38,7 +38,7 @@
     },
     {
       "path": "content/course/client-performance-budget.v1.json",
-      "sha256": "7b92554b7ea14ce73dad8d43afba5d94078f164e7d2b8e1853ffbe29e4a71da0"
+      "sha256": "9157d762a363cfc54f1160bc32d5d8c22f6d0d222fb9bfd7264c1b6106375379"
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
@@ -110,7 +110,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "8eeceaeca418ccae58911eb38f77a75377db45bbe6e47bc4bd389c34d45591b7"
+      "sha256": "f30a2c8d2a28ac1602e45261985fab044d1893c533903b8a04ad5f7ade1ec2fb"
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
@@ -118,7 +118,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "2f4cd035c6992a066223a8e517426cb9ac2ebb09e498bfb5258fb68855736db2"
+      "sha256": "bf141fcd1e555506ca53c47cf6deb68d039e16df61bab367232c7fa1a705deb6"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -218,27 +218,27 @@
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "a0a6f3c6f47646633d9294bc969ff8d940e1d75b77ef4ad751c5fa964e50099d"
+      "sha256": "7e22eea3d19d94638f62916e1c2d52bd7cec2e16ff804d56e2001562c92450f1"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "7b5c9dc4d3e66a6faa4ef3db32165c728fe8f4eed6c28846e8c868db203eaa34"
+      "sha256": "b3811083530673dcc6e2bb3582148f14f00c1d30fb715352f2d0757815294608"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
-      "sha256": "c98757d97a439c38cc9e5a2bb792f8ce490df6520634ae0821cc7711bc685a76"
+      "sha256": "6c6a07dca2148680b98442bb53275e2c52ca5052d9cb3193971314507e9b2365"
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
-      "sha256": "3a71e2babae4e870d220e1562c244f45785045808b039b5e92d7be9eda87c7df"
+      "sha256": "c4398d56b69e171e8c056954354aaf97dcc67c966e13771d29a988cd59efb4b1"
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
-      "sha256": "1e0ef5fb8868bd339d88922bc0dec26393f683071b319f3c4b2c885015ffa427"
+      "sha256": "4ebab9d59034c01a6b5f1a29a1b7a3c42cb6fef013738a53d6e552ff14cc29d1"
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "8ff64204f744c7b75f08462c54520911009e098707073de419c30f3614d095a8"
+      "sha256": "8dda83837149f2c288f678f4dba8aa8f5ef17d1d020d49e5b3da8d62f062090d"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
@@ -566,7 +566,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "990085015a4477a189a071afbc397472f2470ca33740d6640bf6b089b27143b4"
+      "sha256": "431517420137ed041577f6d763f2232ebb51e2d5248e46cd6d979ed187a4bab7"
     }
   ]
 }

@@ -475,7 +475,7 @@
         "academicPrerequisiteModuleIds": ["m18"],
         "forwardModuleId": "m20",
         "masteryGateId": "systems",
-        "studioId": null
+        "studioId": "concurrency"
       },
       "workbookPath": "content/modules/19_concurrency_parallelism.md",
       "sourceMapPath": "content/source-maps/module19_concurrency_parallelism_source_map.md",
@@ -552,7 +552,7 @@
         {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-forward-handoff"]}
       ],
       "implementationArtifacts": [
-        {"id": "m19-studio", "kind": "studio", "paths": ["app/ConcurrencyStudio.tsx", "app/ConcurrencyStudio.module.css", "app/ArcFourStudio.tsx", "tests/rendered-html.test.mjs"]},
+        {"id": "m19-studio", "kind": "studio", "paths": ["app/ConcurrencyStudio.tsx", "app/ConcurrencyStudio.module.css", "app/ConcurrencyStudioReader.tsx", "app/ArcFourStudio.tsx", "lib/module-studio-registry.ts", "tests/rendered-html.test.mjs"]},
         {"id": "m19-reference-model", "kind": "bounded-reference-model", "paths": ["public/downloads/module19_reference.py", "public/downloads/test_module19_reference.py"]},
         {"id": "m19-oral-guide", "kind": "oral-guide", "paths": ["lib/oral-defense-guide.ts"]}
       ]

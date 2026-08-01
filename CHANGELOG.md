@@ -7,6 +7,23 @@ actually published.
 
 ## Unreleased
 
+- Repaired the canonical M19 reader/studio boundary without changing its
+  `legacy-open`/`legacy-baseline`/unrecorded state. The v2 graph now declares
+  the existing concurrency observatory, the shared registry makes it reachable
+  from the module reader, and both the reader and supplemental Arc IV portal
+  use a stable keyboard-operable progressive-disclosure launcher. The launcher
+  preserves focus and the controlled region, while the full six-view laboratory
+  loads only after the learner opens it. The reviewed performance policy now
+  records twelve studio entries and explicitly scopes M19's small launch-shell
+  measurement versus its deferred laboratory asset; this is not a real-user
+  performance, publication, review, or mastery claim.
+- Completed a bounded M19–M24 Mermaid accessibility retrofit: all 49
+  instructional diagrams in that cohort now carry unique stable IDs, concise
+  titles, and prose alternatives, with a strict module-scoped regression.
+  M19's horizontal state and table regions are now keyboard-focusable and
+  labelled. The global scan is deliberately still incomplete at 117/245
+  diagrams (128 remaining), so this does not claim a completed accessibility
+  review, contract verification, release, or publication.
 - Corrected M20's learner-visible reference-model provenance: the tracked
   `public/downloads` model/test pair is now the singular canonical source and
   all repository-root commands name it directly. The source audit preserves the

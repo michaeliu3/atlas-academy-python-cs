@@ -161,7 +161,10 @@ begin before the first responds.
 #### D1 — The M18 → M19 pressure bridge
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-pressure-bridge
+    %% atlas-diagram-title: From M18 publishing to M19 concurrency
+    %% atlas-diagram-alt: A validated local result stays behind one publisher while throughput pressure admits partitions A and B with overlapping lifetimes. M19 orders and accounts for those lifetimes, and one reducer sends one candidate to the unchanged publisher.
+    flowchart LR
     M18["M18: one supervised worker"] --> SAFE["validated local result"]
     SAFE --> PUB["one M18 publisher"]
     PRESSURE["throughput pressure"] --> A["partition A admitted"]
@@ -209,7 +212,10 @@ designed to answer that question.
 #### D2 — Overlap and physical execution are different axes
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-overlap-execution-axes
+    %% atlas-diagram-title: Overlap and physical execution are different axes
+    %% atlas-diagram-alt: Two applications can have overlapping lifetimes while time-slicing on one physical resource, or execute at once on separate resources. Event history establishes overlap only; runtime, workload, and physical-execution evidence is required to establish parallel execution.
+    flowchart TB
     subgraph C["Concurrent, not established parallel"]
         C1["A: invoke ─ work ─ pause ─ work ─ respond"]
         C2["B:       invoke ─ work ─ pause ─ respond"]
@@ -281,7 +287,10 @@ Required specification properties:
 #### D3 — A legal concurrent history must refine the sequential operation
 
 ```mermaid
-sequenceDiagram
+    %% atlas-diagram-id: m19-deterministic-reducer-history
+    %% atlas-diagram-title: Concurrent completion with deterministic reducer order
+    %% atlas-diagram-alt: Workers A and B invoke work concurrently, and B returns first. A single reducer nevertheless validates and commits A before B in stable fold order, then returns responses. Completion order differs from the legal sequential order.
+    sequenceDiagram
     participant A as Worker A
     participant R as Single reducer
     participant B as Worker B
@@ -392,7 +401,10 @@ in the equivalent increment model used by the reference: its exact output is
 #### D4 — A lost update without container corruption
 
 ```mermaid
-sequenceDiagram
+    %% atlas-diagram-id: m19-lost-update-trace
+    %% atlas-diagram-title: Lost update from two stale snapshots
+    %% atlas-diagram-alt: Workers A and B both read shared graph state (1,), compute different valid additions, then write sequentially. B's stale write replaces A's contribution, leaving (1,3) rather than the sequential result (1,2,3).
+    sequenceDiagram
     participant A as Worker A
     participant S as shared["graph"]
     participant B as Worker B
@@ -436,7 +448,10 @@ race” for an explicitly scoped standard.
 #### D5 — Three questions, three proofs
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-history-property-proofs
+    %% atlas-diagram-title: Separate proofs for safety, liveness, and linearizability
+    %% atlas-diagram-alt: The same declared histories support three distinct questions. Safety uses invariants or counterexamples, liveness needs progress assumptions and ranking or cycle reasoning, and linearizability maps each operation to a legal sequential effect; none proves liveness alone.
+    flowchart LR
     H["declared histories"] --> S["Safety<br/>Is a forbidden state reachable?"]
     H --> L["Liveness<br/>Does a desired transition eventually occur?"]
     H --> Z["Linearizability<br/>Can each operation appear once in a legal sequential order?"]
@@ -600,7 +615,10 @@ partials, and one reducer alone validates, folds, and updates the ledger.
 #### D6 — Three boundaries, only two defensible
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-ownership-boundaries
+    %% atlas-diagram-title: Lock scope and single-owner alternatives
+    %% atlas-diagram-alt: A write-only lock leaves read and computation stale. A whole-transition lock protects read, computation, validation, and write. Atlas instead gives workers immutable partials and one reducer ownership of validation, folding, and terminal commit.
+    flowchart TB
     N["narrow lock"] --> N1["read outside"]
     N1 --> N2["compute outside"]
     N2 --> N3["lock: write only"]
@@ -640,7 +658,10 @@ reading stale state or two locks acquired in a cycle.
 #### D7 — Lock ownership and its stopping lines
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m19-lock-ownership-states
+    %% atlas-diagram-title: Lock ownership states and stopping lines
+    %% atlas-diagram-alt: A or B may acquire an unlocked mutual-exclusion lock while the other waits. Release, including exceptional context-manager exit, allows the implementation to select a waiter; the state machine offers no FIFO, fairness, scope-correctness, or deadlock guarantee.
+    stateDiagram-v2
     [*] --> Unlocked
     Unlocked --> OwnedByA: A acquire succeeds
     Unlocked --> OwnedByB: B acquire succeeds
@@ -824,7 +845,10 @@ the durable fact and must be rechecked.
 #### D8 — Release, wake, reacquire, recheck
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-condition-recheck-loop
+    %% atlas-diagram-title: Condition wait requires a predicate recheck
+    %% atlas-diagram-alt: A consumer acquires a condition lock and checks a predicate. If false it releases and waits; after a notification it reacquires and rechecks. A producer changes guarded state, notifies, and releases, but notification alone does not reserve the state.
+    flowchart LR
     A["acquire condition lock"] --> C{"predicate true?"}
     C -- yes --> U["use guarded state"]
     C -- no --> W["wait: release lock + block"]
@@ -874,7 +898,10 @@ not prove each permit guarded the intended resource or that admission is fair.
 #### D9 — Permit accounting is not item transfer
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-semaphore-permit-accounting
+    %% atlas-diagram-title: Semaphore permits are not item transfer
+    %% atlas-diagram-alt: Starting with two permits, A and B acquire and C waits. After A releases, C can acquire, while B's unreleased permit leaves only one available. A bounded semaphore can detect an extra release but does not transfer work items or ensure fairness.
+    flowchart LR
     START["capacity = 2<br/>available = 2"] --> A["A acquire<br/>available = 1"]
     A --> B["B acquire<br/>available = 0"]
     B --> CW["C waits for a permit"]
@@ -922,7 +949,10 @@ queue empty
 #### D10 — Six independent progress surfaces
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-progress-surfaces
+    %% atlas-diagram-title: Independent surfaces of work progress
+    %% atlas-diagram-alt: Queue contents, worker-owned in-flight work, unfinished count, observed Future, terminal ledger, reduction completion, and M18 publication are distinct states. An empty queue, an unfinished count, or an observed Future alone cannot establish later publication.
+    flowchart LR
     Q["queue contents<br/>may be empty"] --> I["in-flight item<br/>worker owns it"]
     I --> U["unfinished count<br/>still positive"]
     U --> F["Future result/exception<br/>must be observed"]
@@ -945,7 +975,10 @@ alone establishes a later one.
 #### D11 — One terminal classification per admitted partition
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m19-terminal-classification-state-machine
+    %% atlas-diagram-title: One terminal classification for each admitted partition
+    %% atlas-diagram-alt: Admitted work may be enqueued, claimed, produce a partial, start commit, and commit; failures and cancellations arise at defined earlier paths. COMMITTED, FAILED, and CANCELLED are pairwise-exclusive terminal states with no outgoing transitions.
+    stateDiagram-v2
     [*] --> ADMITTED
     ADMITTED --> ENQUEUED
     ADMITTED --> CANCELLED
@@ -1114,7 +1147,10 @@ capacity-valued resource systems.
 #### D12 — Wait-for cycle and architectural repair
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-wait-for-cycle
+    %% atlas-diagram-title: Wait-for cycle and single-owner repair
+    %% atlas-diagram-alt: Worker A requests the index lock held by B, while B requests the ledger lock held by A. Under single-instance, non-preemptive locks the request-holder cycle witnesses deadlock. One reducer owning ledger and index removes these cross-owner wait edges.
+    flowchart LR
     A["worker A"] -- "requests" --> I["index_lock"]
     I -- "held by" --> B["worker B"]
     B -- "requests" --> L["ledger_lock"]
@@ -1168,7 +1204,10 @@ cycle can be constructed from those edges.
 #### D13 — Lock order as a topological constraint
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-lock-order-constraint
+    %% atlas-diagram-title: Lock order as an acyclic constraint
+    %% atlas-diagram-alt: The legal lock-order relation flows from ledger to index to publication, with ledger also preceding publication. A reverse publication-to-ledger acquisition is forbidden. Atlas prefers one reducer ownership and releases that state before calling the M18 publisher.
+    flowchart LR
     L["1 · ledger_lock"] --> I["2 · index_lock"]
     I --> P["3 · publication_lock"]
     L --> P
@@ -1330,7 +1369,10 @@ the worker, partition ledger, reducer commit, or publication record.
 #### D14 — Future state and Atlas state are separate machines
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m19-future-atlas-machines
+    %% atlas-diagram-title: Future and Atlas work state machines
+    %% atlas-diagram-alt: A Future can be pending, running, cancelled, or finish through result or exception. Atlas work independently moves from enqueued to claimed, partial ready, commit started, and committed, with defined failures and cancellation; a Future result only supplies a candidate for reducer commit.
+    stateDiagram-v2
     state Future {
         [*] --> PENDING
         PENDING --> RUNNING
@@ -1396,7 +1438,10 @@ Use this stop taxonomy:
 #### D15 — One interface over different execution boundaries
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-executor-boundaries
+    %% atlas-diagram-title: Execution boundaries behind one Future interface
+    %% atlas-diagram-alt: Thread, process, and interpreter executors share a submit/Future surface but have different object-sharing, isolation, transfer, startup, and failure boundaries. Each acceptable adapter sends immutable results to one reducer.
+    flowchart TB
     API["submit(callable, args) → Future"] --> T["ThreadPoolExecutor"]
     API --> P["ProcessPoolExecutor"]
     API --> I["InterpreterPoolExecutor<br/>3.14 capability; separate validation"]
@@ -1456,7 +1501,10 @@ Which observation?
 #### D16 — Build capability, live state, and application protocol
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-gil-capability-live-state
+    %% atlas-diagram-title: Build capability and live GIL state
+    %% atlas-diagram-alt: Python documentation describes an optional free-threaded build, while a standard build reports its own live GIL state. A free-thread-capable executable still needs a live probe and extension audit; every path needs Atlas ownership, synchronization, and result-equivalence evidence.
+    flowchart TB
     DOC["Python 3.14 documents optional free-threaded CPython"] --> BUILD{"Py_GIL_DISABLED build flag"}
     BUILD -- "0 in current executable" --> STD["standard build"]
     BUILD -- "1 in a separate executable" --> FT["free-thread-capable build"]
@@ -1551,7 +1599,10 @@ Attribution waits for Module 24.
 #### D17 — Refuse a model until meaning and ownership are known
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-workload-choice-gate
+    %% atlas-diagram-title: Workload-first concurrency choice
+    %% atlas-diagram-alt: A chooser first requires a sequential oracle and ownership map. It selects sequential, bounded threads, processes, isolated interpreters, or redesign based on proven workload and transfer constraints, then checks oracle equality and ledger evidence before timing; async fan-out routes to M21.
+    flowchart TB
     O{"Sequential oracle and<br/>state ownership supplied?"}
     O -- no --> REFUSE["refuse recommendation;<br/>recover meaning first"]
     O -- yes --> NEED{"Demonstrated need<br/>for overlap?"}
@@ -1679,7 +1730,10 @@ sequential meaning
 #### D18 — Atlas owner-reducer architecture
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-owner-reducer-architecture
+    %% atlas-diagram-title: Atlas owner-reducer architecture
+    %% atlas-diagram-alt: Twelve immutable document partitions enter a bounded worker adapter. Workers return immutable partials or failures; one reducer validates, records terminal states, and folds. Only a fully committed oracle-equivalent result reaches one M18 publisher, which records ordered evidence.
+    flowchart LR
     DOC["12 synthetic immutable documents"] --> PART["stable immutable partitions"]
     PART --> BOUND["bounded submission<br/>1–4 workers"]
     BOUND --> W1["worker 1<br/>local state only"]
@@ -1869,7 +1923,10 @@ liveness, tests, portability, model fit, evidence, and prose.
 #### D19 — Each rung answers a narrower question
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-evidence-ladder
+    %% atlas-diagram-title: Evidence ladder and forward boundaries
+    %% atlas-diagram-alt: Correctness proceeds from sequential specification through finite model, API or build contract, named runtime observation, and a constrained causal hypothesis to explicit unknowns. Unresolved network, async/distributed, and runtime-performance questions route to M20, M21, and M24.
+    flowchart TB
     SPEC["1 · sequential specification<br/>what counts as correct?"] --> MODEL["2 · finite model<br/>which declared histories pass/fail?"]
     MODEL --> CONTRACT["3 · Python/CPython contract<br/>what does this API/build promise?"]
     CONTRACT --> OBS["4 · runtime observation<br/>what happened in this named run?"]

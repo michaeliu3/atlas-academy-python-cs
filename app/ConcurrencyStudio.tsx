@@ -1222,7 +1222,12 @@ function HistoryExplorer({
           {historyEvidenceRevealed ? (
             <details className={styles.textEquivalent} open>
               <summary>Text/table equivalent of the execution score</summary>
-              <div className={styles.tableScroll}>
+              <div
+                aria-label="Scrollable execution score table"
+                className={styles.tableScroll}
+                role="region"
+                tabIndex={0}
+              >
                 <table>
                   <thead>
                     <tr>
@@ -1314,7 +1319,12 @@ function HistoryExplorer({
 
               <details className={styles.textEquivalent}>
                 <summary>All 20 legal schedules and explored-state record</summary>
-                <div className={styles.tableScroll}>
+                <div
+                  aria-label="Scrollable legal schedules table"
+                  className={styles.tableScroll}
+                  role="region"
+                  tabIndex={0}
+                >
                   <table>
                     <thead>
                       <tr>
@@ -1622,7 +1632,12 @@ function LinearizationLab({
                 </p>
               </div>
 
-              <div className={styles.tableScroll}>
+              <div
+                aria-label="Scrollable candidate protocol table"
+                className={styles.tableScroll}
+                role="region"
+                tabIndex={0}
+              >
             <table>
               <caption>
                 Text equivalent: candidate protocol, owner, exception, and
@@ -2059,7 +2074,12 @@ function CoordinationConsole({
             </div>
           </div>
 
-          <div className={styles.tableScroll}>
+          <div
+            aria-label="Scrollable action log and ledger table"
+            className={styles.tableScroll}
+            role="region"
+            tabIndex={0}
+          >
             <table>
               <caption>
                 Text equivalent: action log and the four ledgers it changes
@@ -2277,7 +2297,12 @@ function ProgressLaboratory({
             </div>
           </div>
 
-          <div className={styles.tableScroll}>
+          <div
+            aria-label="Scrollable wait-for evidence table"
+            className={styles.tableScroll}
+            role="region"
+            tabIndex={0}
+          >
             <table>
               <caption>
                 Text equivalent: declared wait-for evidence and assumption
@@ -2731,7 +2756,12 @@ function ModelChooser({
 
           <RuntimeProfilePlate />
 
-          <div className={styles.tableScroll}>
+          <div
+            aria-label="Scrollable execution-model evidence table"
+            className={styles.tableScroll}
+            role="region"
+            tabIndex={0}
+          >
             <table>
               <caption>
                 Text equivalent: execution-model ownership and executed-evidence
@@ -2951,7 +2981,12 @@ function EvidenceAuditor({
           </div>
 
           <div className={styles.terminalScore}>
-            <div className={styles.stateRail}>
+            <div
+              aria-label="Scrollable preterminal state progression"
+              className={styles.stateRail}
+              role="region"
+              tabIndex={0}
+            >
               {preterminalStates.map((state, index) => (
                 <span key={state}>
                   <i>{String(index + 1).padStart(2, "0")}</i>
@@ -3054,7 +3089,12 @@ function EvidenceAuditor({
             ))}
           </section>
 
-          <div className={styles.tableScroll}>
+          <div
+            aria-label="Scrollable evidence packet table"
+            className={styles.tableScroll}
+            role="region"
+            tabIndex={0}
+          >
             <table>
               <caption>
                 Text equivalent: evidence packet, supported claim, and unknown

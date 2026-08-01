@@ -141,6 +141,29 @@ test("the versioned performance policy tracks every graph-declared studio", asyn
   );
 });
 
+test("M19 budgets its direct reader launch boundary without treating the deferred lab as free", async () => {
+  const [policySource, readerSource] = await Promise.all([
+    readFile(policyPath, "utf8"),
+    readFile(resolve(siteRoot, "app", "ConcurrencyStudioReader.tsx"), "utf8"),
+  ]);
+  const policy = JSON.parse(policySource);
+  const concurrencyEntry = policy.limits.studios.entries.find(
+    ({ studioId }) => studioId === "concurrency",
+  );
+
+  assert.deepEqual(concurrencyEntry, {
+    studioId: "concurrency",
+    manifestName: "ConcurrencyStudioReader",
+  });
+  assert.ok(
+    policy.measurement.doesNotMeasure.some((boundary) =>
+      boundary.includes("deferred ConcurrencyStudio payload"),
+    ),
+  );
+  assert.match(readerSource, /dynamic\(/);
+  assert.match(readerSource, /hasLaunched \? <ConcurrencyObservatory \/> : null/);
+});
+
 test("the public CLI rejects a built studio entry that exceeds its reviewed byte budget", async (t) => {
   const root = await makeFixture({ studioByteLength: 121 });
   t.after(() => rm(root, { recursive: true, force: true }));

@@ -6,6 +6,7 @@ import type { ComponentType } from "react";
  * never an invitation for the reader to guess from a module slug.
  */
 export const moduleStudioIds = [
+  "concurrency",
   "network-protocol",
   "async-distributed",
   "security-trust",
@@ -30,6 +31,14 @@ export type ModuleStudioRegistration = Readonly<{
 }>;
 
 export const moduleStudioRegistry = {
+  concurrency: {
+    studioId: "concurrency",
+    title: "Concurrency observatory",
+    load: () =>
+      import("@/app/ConcurrencyStudioReader").then(({ ConcurrencyStudioReader }) => ({
+        default: ConcurrencyStudioReader,
+      })),
+  },
   "network-protocol": {
     studioId: "network-protocol",
     title: "Network protocol observatory",

@@ -831,7 +831,7 @@
       "routeRole": "required",
       "referenceReadMinutes": 104,
       "sourceMap": "content/source-maps/module19_concurrency_parallelism_source_map.md",
-      "studioId": null,
+      "studioId": "concurrency",
       "sequencePosition": 24,
       "state": {
         "lifecycle": "learner-material-ready",

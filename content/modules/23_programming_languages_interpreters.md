@@ -140,6 +140,9 @@ earlier Atlas ideas:
   smaller, justified decision.
 
 ~~~mermaid
+%% atlas-diagram-id: m23-language-semantics-knowledge-route
+%% atlas-diagram-title: Earlier state, representations, effects, and trust boundaries yield bounded language meaning
+%% atlas-diagram-alt: Modules on bindings, invariants, APIs and effects, and network trust feed Pebble names and environments, AST and grammar contracts, parse-validate-evaluate flow, and an Atlas Query boundary. Together they produce deterministic language meaning and bounded evidence before Module 24 studies CPython observations.
 flowchart LR
     M1["M1: bindings and state"] --> P["Pebble: names, environments, values"]
     M3["M3/6: invariants + representation"] --> A["AST and grammar contracts"]
@@ -241,6 +244,9 @@ arrangement is not a domain request. A domain request is not a permission.
 Name the representation at every transition:
 
 ~~~mermaid
+%% atlas-diagram-id: m23-query-representation-pipeline
+%% atlas-diagram-title: A query moves from input text through lexical and syntax forms to an authorized capability
+%% atlas-diagram-alt: The input query count(where cohort = atlas) becomes lexical tokens, then a syntax-only Count(Filter(...)) tree. Contract validation checks the field and comparator, Module 22 authorization approves an exact tuple, and a fixed ReadLearningMetric capability produces the local count result.
 flowchart LR
     T["count(where cohort = &quot;atlas&quot;)\
 [INPUT DATA]"] --> L["COUNT · WHERE · FIELD · = · STRING\
@@ -411,6 +417,9 @@ This matters because an AST does not tell you whether both branches run.
 Semantics is the rule that says what the tree means.
 
 ~~~mermaid
+%% atlas-diagram-id: m23-conditional-evaluation-short-circuit
+%% atlas-diagram-title: A conditional evaluates its selected branch while leaving the other branch unevaluated
+%% atlas-diagram-alt: Evaluating If(True, 7, unknown_name) first evaluates the test to True, then evaluates only the selected then branch to 7. The otherwise branch containing unknown_name is not evaluated, so the resulting value is Value(7).
 flowchart TD
     I["If(True, 7, unknown_name)"] --> T["evaluate test → True"]
     T --> Y["evaluate then branch → 7"]
@@ -469,6 +478,9 @@ Name lookup proceeds from the current frame outward through parents. A new
 binding can shadow an older one without altering the older value.
 
 ~~~mermaid
+%% atlas-diagram-id: m23-closure-environment-chain
+%% atlas-diagram-title: A closure value carries its outer environment into a later call frame
+%% atlas-diagram-alt: A global frame binds rate, an outer frame binds threshold and points to global, and a closure stores parameter, body, and that outer environment. A later call frame binds record and points to outer, allowing the closure body to resolve threshold through its captured environment.
 flowchart BT
     G["global frame<br>rate → 1"]
     O["outer frame<br>threshold → 3<br>parent → global"]
@@ -687,6 +699,9 @@ evaluator receives a pre-minted model object only after Module 22
 authorization:
 
 ~~~mermaid
+%% atlas-diagram-id: m23-query-capability-authorization-boundary
+%% atlas-diagram-title: A validated query crosses exact authorization before a bounded evaluator returns an observation
+%% atlas-diagram-alt: A contract-checked query plan supplies the exact Module 22 subject, action, resource, tenant, and purpose tuple. A denied policy produces redacted evidence; an allowed policy invokes only the host-fixed ReadLearningMetric capability and bounded evaluator, which can return a result, fuel exhaustion, or result-limit exhaustion.
 flowchart LR
     Q["validated query plan<br>[CONTRACT CHECKED]"] --> A["exact M22 tuple<br>subject/action/resource/tenant/purpose"]
     A --> D{"policy permits?"}
@@ -855,6 +870,9 @@ as parallel fixed teaching observations.
 | “This version is faster for our workload.” | a measured, reproducible performance study |
 
 ~~~mermaid
+%% atlas-diagram-id: m23-semantics-to-cpython-observation
+%% atlas-diagram-title: Specified language meaning stays distinct from CPython observations and measured costs
+%% atlas-diagram-alt: Specified language rules lead to trusted Python source, AST observation, a compile or code-object concept, and disassembly. That evidence motivates Module 24 questions about cost, allocation, and version effects, but it does not prove portable semantics or safe execution.
 flowchart TD
     S["language meaning<br>specified rules"] --> P["trusted Python source"]
     P --> A["AST observation"]

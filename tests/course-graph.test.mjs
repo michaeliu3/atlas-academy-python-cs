@@ -197,6 +197,12 @@ test("graph-declared studios have one bounded, code-split reader mapping", async
   const declaredStudioIds = graph.modules
     .map((courseModule) => courseModule.studioId)
     .filter((studioId) => studioId !== null);
+  const m19 = graph.modules.find((courseModule) => courseModule.id === "m19");
+  assert.equal(
+    m19?.studioId,
+    "concurrency",
+    "M19's concurrency observatory must be declared for its direct reader route",
+  );
   const registeredStudioIds = [
     ...registrySource.matchAll(/studioId: "([^"]+)"/gu),
   ].map((match) => match[1]);

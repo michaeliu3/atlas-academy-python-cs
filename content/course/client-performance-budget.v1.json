@@ -12,7 +12,8 @@
     "doesNotMeasure": [
       "HTTP transfer compression, cache state, CDN behavior, or network latency",
       "device CPU, rendering, interaction latency, memory use, or real-user Core Web Vitals",
-      "accessibility, correctness, learner comprehension, or the size of intentionally separate teaching downloads"
+      "accessibility, correctness, learner comprehension, or the size of intentionally separate teaching downloads",
+      "the deferred ConcurrencyStudio payload requested only after a learner opens the progressive-disclosure observatory; total and single-asset limits still apply to that built payload"
     ]
   },
   "output": {
@@ -32,6 +33,10 @@
       "maxOwnEntryBytes": 80000,
       "maxStaticClosureBytes": 400000,
       "entries": [
+        {
+          "studioId": "concurrency",
+          "manifestName": "ConcurrencyStudioReader"
+        },
         {
           "studioId": "network-protocol",
           "manifestName": "NetworkProtocolStudio"

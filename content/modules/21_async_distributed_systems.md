@@ -169,7 +169,10 @@ while Atlas owns **several overlapping local tasks** and faces possible
 cross-system ambiguity.
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m21-module-boundaries
+    %% atlas-diagram-title: From local concurrency to bounded async collection
+    %% atlas-diagram-alt: M19 supplies local concurrency and ownership, and M20 adds an identified remote operation that can remain UNKNOWN. M21 adds a bounded owned async collector and cut/evidence discipline, then routes security to M22 and query and storage concerns to M23.
+    flowchart LR
     M19["M19\nlocal concurrency and ownership"] --> M20["M20\none remote operation\nID + digest + UNKNOWN"]
     M20 --> M21["M21\nbounded owned async collector\ncut + causal/evidence discipline"]
     M21 --> M22["M22\nsecurity and trust boundaries"]
@@ -196,7 +199,10 @@ service.
 | cross-system knowledge | matching status lookup returned the declared ID/digest | this policy permits a scoped confirmation | global agreement, freshness, or security |
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m21-collection-state-machine
+    %% atlas-diagram-title: Local collection and reconciliation states
+    %% atlas-diagram-alt: Each declared source waits for admission, starts a local task and attempt, then becomes collected, a definite local failure, a local cancellation, or an unknown remote outcome. Unknown outcomes can enter same-ID reconciliation and become collected only with matching retained status evidence.
+    stateDiagram-v2
     [*] --> DECLARED
     DECLARED --> WAITING_ADMISSION
     WAITING_ADMISSION --> ADMITTED
@@ -361,7 +367,10 @@ turn cancellation into an external rollback protocol. Read the [TaskGroup API](h
 and [PEP 654](https://peps.python.org/pep-0654/).
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m21-taskgroup-boundary
+    %% atlas-diagram-title: TaskGroup owns local task lifetime
+    %% atlas-diagram-alt: An Atlas owner creates catalog, exercises, and progress child tasks in one TaskGroup. An exercises failure becomes a local ExceptionGroup and triggers sibling cleanup, while a catalog operation that crossed a boundary can still have an UNKNOWN remote result.
+    flowchart TB
     Owner["Atlas collection owner"] --> TG["TaskGroup\nowned local lifetime"]
     TG --> C["catalog child\nserver-model decision may exist"]
     TG --> E["exercises child\nnon-cancellation failure"]
@@ -487,7 +496,10 @@ The queue documentation also warns that immediate shutdown can break the usual
 ### A pressure diagram with stopping lines
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m21-local-pressure-boundary
+    %% atlas-diagram-title: Local admission and pressure boundaries
+    %% atlas-diagram-alt: Declared sources pass through an Atlas-owned admission bound into TaskGroup tasks and perhaps a local stream or write buffer. Upstream service capacity remains unobserved, while every admitted source still receives a terminal local accounting record.
+    flowchart LR
     D["declared sources"] --> A["Atlas admission bound\nlocal policy"]
     A --> T["owned TaskGroup tasks\nlocal lifetime"]
     T --> B["local stream/write buffer\nlocal flow control"]
@@ -681,7 +693,10 @@ It refuses to infer an edge from a shared trace ID or a timestamp because
 neither occurs in its causal input. That refusal is the feature.
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m21-causal-edge-discipline
+    %% atlas-diagram-title: Declared causal edge versus incomparable event
+    %% atlas-diagram-alt: Catalog's declared send precedes the collector's receive in one causal relation. The independent progress event has no declared path to or from that receipt, so it is incomparable rather than probably earlier or later.
+    flowchart LR
     CS["catalog: send\nlocal sequence 1"] --> CR["collector: receive\nlocal sequence 1"]
     PL["progress: local event\nlocal sequence 1"]
     CR -. "no declared causal edge" .-> PL
