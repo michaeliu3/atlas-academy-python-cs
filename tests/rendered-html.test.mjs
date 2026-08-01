@@ -127,7 +127,7 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /automatic-after-substantive-session/);
   assert.match(html, /at most one concise structured note per substantive session/);
   assert.match(html, /say “records on”/);
-  assert.match(html, /all three are present/);
+  assert.match(html, /names a module or learning topic/);
   assert.match(html, /pause records/);
   assert.match(readable, /configured private learning\s+record/i);
   assert.match(readable, /designated Codex chats—not the portal/i);
