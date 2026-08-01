@@ -545,6 +545,11 @@ Produce a **Layout-Numerics Note** with:
 Produce the linked **Performance Evidence Card** with:
 
 - question and compared variants;
+- one fair-comparison row for each pair: the shared semantic oracle or quality
+  threshold, useful-work unit and workload shape, whether the metric is
+  latency or throughput, included/excluded compile/transfer/synchronization
+  work, and the baseline denominator; predict before measuring how a workload
+  size change could alter that metric;
 - versioned environment, hardware/OS/runtime/library header;
 - input fixture, warm-up, clock boundary, repeats, raw observations, statistic;
 - profiler interpretation as a hypothesis, not a root-cause claim;

@@ -493,6 +493,51 @@ a general solver. A trace needs the initial point, `eta`, number of updates,
 projection rule, objective, gradient norm, constraint residual, and an
 independent check.
 
+### Theorem card — do not turn one trace into the theorem
+
+For an **unconstrained**, differentiable, \(L\)-smooth objective, an exact
+gradient step \(x^+=x-\eta\nabla f(x)\) with \(0<\eta\leq1/L\) obeys the
+descent inequality
+
+\[
+f(x^+)\leq f(x)-\eta\left(1-\frac{L\eta}{2}\right)
+\lVert\nabla f(x)\rVert^2
+\leq f(x)-\frac{\eta}{2}\lVert\nabla f(x)\rVert^2.
+\]
+
+That is a stated theorem regime: it explains why one exact *unconstrained*
+step decreases this particular objective unless its ordinary gradient is zero.
+It does not establish a global optimum, survive loss of smoothness or an
+inexact gradient unchanged, or automatically cover the projected update above.
+
+For the declared closed, convex feasible set \(K\), use the different
+first-order residual
+
+\[
+G_\eta(z)=\frac{1}{\eta}\left(z-\Pi_K\bigl(z-\eta\nabla f(z)\bigr)\right).
+\]
+
+With a feasible \(z\), differentiable \(f\), and the named exact projection,
+a small \(\lVert G_\eta(z)\rVert\) is only an approximate constrained
+first-order-stationarity signal. It is not a global-optimality certificate, a
+duality-gap certificate, evidence that the model is appropriate, or a reason
+to ignore finite-precision and stopping boundaries.
+
+<details>
+<summary>Predict the residue before revealing the boundary case.</summary>
+
+For \(\min_{x\geq0} x\), the boundary optimum is \(x=0\), whose ordinary
+gradient is \(1\). Which residual recognizes that the constraint blocks the
+descent direction? What premise must be revisited before carrying the descent
+inequality into a nonsmooth objective?
+
+**Reveal:** the projected-gradient mapping is zero at the boundary point,
+while the ordinary gradient is not. If smoothness is absent, re-derive the
+appropriate condition; a falling finite trace cannot import the displayed
+smooth-descent bound.
+
+</details>
+
 ### Read this record
 
 ```text
