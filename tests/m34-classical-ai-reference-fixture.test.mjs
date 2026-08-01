@@ -6,6 +6,8 @@ import {
   M34_BOUNDED_CLASSICAL_AI_FIXTURE,
   chooseM34DeclaredFrontierEntry,
   evaluateM34BinaryRelaxationCandidate,
+  m34AStarNoReopenCounterexample,
+  m34TwoStageMdpBackupCard,
 } from "../lib/m34-classical-ai-reference-fixture.js";
 
 test("the M34 fixture makes two distinct frontier policies choose their declared next entries", () => {
@@ -66,6 +68,53 @@ test("the M34 relaxation witness stays distinct from an original binary solution
   );
 });
 
+test("the M34 A-star card keeps admissibility, consistency, and reopen policy distinct", () => {
+  const card = m34AStarNoReopenCounterexample();
+
+  assert.equal(card.id, "m34-s02-admissible-inconsistent-no-reopen-card");
+  assert.equal(card.noReopenResult.returnedGoalCost, 4);
+  assert.equal(card.reopenResult.returnedGoalCost, 3);
+  assert.equal(card.heuristic.admissible, true);
+  assert.equal(card.heuristic.consistent, false);
+  assert.deepEqual(card.heuristic.violatedEdge, { from: "B", to: "A", cost: 1 });
+  for (const [state, value] of Object.entries(card.heuristic.values)) {
+    assert.ok(value <= card.graph.trueRemainingCosts[state], `${state} must remain admissible`);
+  }
+  assert.ok(
+    card.heuristic.values.B >
+      card.heuristic.violatedEdge.cost + card.heuristic.values.A,
+    "B -> A must witness the stated consistency violation",
+  );
+  assert.equal(
+    card.policy.openFrontierPolicy,
+    "replace an open frontier entry when a strictly lower g is found; discard a stale higher-g entry if it is later removed",
+  );
+  assert.equal(card.policy.goalTest, "when a goal is removed from the frontier");
+  assert.match(card.reopenResult.trace[2], /replace open G with g=3/u);
+  assert.match(card.truthBoundary, /not a general A-star implementation/u);
+});
+
+test("the M34 two-stage card exposes one Bellman backup without becoming an MDP solver", () => {
+  const card = m34TwoStageMdpBackupCard();
+
+  assert.equal(card.id, "m34-s05-two-stage-mdp-backup-card");
+  assert.equal(card.horizon, 2);
+  assert.equal(card.terminalValues.clear, 3);
+  assert.equal(card.terminalValues.blocked, 1);
+  assert.equal(card.rewards.inspectImmediate, -0.5);
+  assert.equal(
+    card.initialActionValues.inspect,
+    card.rewards.inspectImmediate +
+      0.5 * card.terminalValues.clear +
+      0.5 * card.terminalValues.blocked,
+  );
+  assert.equal(card.initialActionValues.inspect, 1.5);
+  assert.equal(card.initialActionValues.safe, 1.2);
+  assert.equal(card.policyAtInitialState, "inspect");
+  assert.deepEqual(card.policyAtTerminalStates, { clear: "dispatch", blocked: "wait" });
+  assert.match(card.truthBoundary, /not a general MDP planner/u);
+});
+
 test("the M34 workbook puts both bounded fixtures in the relevant prediction and transfer sessions", async () => {
   const workbook = await readFile(
     "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
@@ -74,6 +123,10 @@ test("the M34 workbook puts both bounded fixtures in the relevant prediction and
 
   assert.match(workbook, /### Bounded reference fixture — frontier policy/u);
   assert.match(workbook, /chooseM34DeclaredFrontierEntry/u);
+  assert.match(workbook, /### Exact counterexample — admissible is not enough for no-reopen graph search/u);
+  assert.ok(workbook.includes("no-reopen result has cost `4`"));
+  assert.match(workbook, /reopened result has\s+cost `3`/u);
+  assert.match(workbook, /m34AStarNoReopenCounterexample/u);
   assert.match(workbook, /### Bounded reference fixture — relaxation status/u);
   assert.match(workbook, /evaluateM34BinaryRelaxationCandidate\(\{ x: 1, y: 0\.5 \}\)/u);
 });
@@ -92,4 +145,6 @@ test("the M34 workbook makes propagation and decision-horizon boundaries inspect
   assert.match(workbook, /### One-shot expected utility is not an MDP policy/u);
   assert.ok(workbook.includes("transition model \\(P(s'\\mid s,a)\\)"));
   assert.match(workbook, /Repetition alone supplies neither a transition model nor a\s+long-run objective/u);
+  assert.match(workbook, /### A two-step Bellman backup/u);
+  assert.match(workbook, /Q_0\(s_0,\\text\{inspect\}\)=-0\.5\+0\.5\(3\)\+0\.5\(1\)=1\.5/u);
 });

@@ -303,6 +303,37 @@ candidate implementation; it cannot settle the universal claim.
 
 </details>
 
+### NFA-to-DFA subset construction — track possible states
+
+An NFA does not need a separate physical thread for each possible path. Its
+mathematical transition on a prefix is a **set of possible states**. For this
+original NFA over `0,1`, recognize strings ending in `01`:
+
+| NFA state | on `0` | on `1` |
+| --- | --- | --- |
+| `q0` (start) | `{q0,q1}` | `{q0}` |
+| `q1` | `∅` | `{q2}` |
+| `q2` (accepting) | `∅` | `∅` |
+
+The subset construction makes those sets the states of a DFA. From `{q0}`,
+reading `0` reaches `{q0,q1}`; reading the next `1` reaches `{q0,q2}`. The
+constructed DFA accepts exactly when its subset contains `q2`. Thus `01` and
+`101` accept, while `010` returns to `{q0,q1}` and rejects.
+
+<details>
+<summary>Predict before revealing the construction trace.</summary>
+
+Starting from `{q0}`, write the three reachable subset states for the empty
+prefix, `0`, and `01`. Is the resulting construction evidence that an NFA
+engine uses parallel hardware or that every real regular-expression engine has
+the same semantics?
+
+**Reveal:** the reachable states are `{q0}`, `{q0,q1}`, and `{q0,q2}`. This is
+a finite mathematical simulation of this exact NFA; it is neither a
+parallel-execution claim nor a claim about an extended production regex engine.
+
+</details>
+
 ### A distinguishability proof idea
 
 For distinct nonnegative \(i\) and \(j\), compare prefixes \(0^i\) and
@@ -491,6 +522,43 @@ G \text{ has an independent set of size }\ge |V|-k.
 The complement of a vertex cover is an independent set, and vice versa. This
 does not prove either problem is hard by itself; it demonstrates the structure
 an actual reduction must expose.
+
+### A computability mapping reduction — halting becomes acceptance
+
+The same direction discipline also matters outside polynomial complexity. Let
+`HALT_TM` contain well-formed encodings `⟨M,w⟩` for which machine `M` halts on
+input `w`; let `A_TM` contain encodings `⟨N,y⟩` for which machine `N` accepts
+input `y`. In shorthand, the reduction is `HALT_TM \le_m A_TM`.
+
+For a well-formed `⟨M,w⟩`, construct `N` and output `⟨N,ε⟩`. `N` ignores its
+own input, simulates `M` on `w`, and accepts if and only if that simulation
+halts. Therefore:
+
+\[
+\langle M,w\rangle\in\mathrm{HALT}_{TM}
+\iff
+\langle N,\epsilon\rangle\in\mathrm{A}_{TM}.
+\]
+
+If the input encoding is malformed, map it to a fixed no-instance such as
+`⟨Loop,ε⟩`, where `Loop` never accepts. That makes the mapping total rather
+than silently defining it only for convenient inputs. A decider for `A_TM`
+would then decide `HALT_TM`, so this construction transfers the known
+undecidability boundary in the intended direction. It does not identify a
+production program’s behavior or turn one simulated run into a theorem.
+
+<details>
+<summary>Predict before revealing the iff cases.</summary>
+
+If `M` rejects `w` but halts, does `N` accept its own input? If `M` loops on
+`w`, which side of the displayed iff is false?
+
+**Reveal:** `N` accepts in the first case because this source language asks
+whether `M` **halts**, not whether it accepts. In the looping case, `N` loops
+and does not accept, so both membership statements are false. The target
+machine must preserve exactly the source question.
+
+</details>
 
 ### Prediction before reveal
 
@@ -844,6 +912,8 @@ solutions. The reading routes below were checked on **2026-08-01**.
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
 | [MIT 6.045J Automata, Computability, and Complexity](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/) and its [syllabus/problem-set route](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/) | Sessions 1–5: formal languages, finite automata, machines, decidability, mapping reductions, and complexity. | Link-only/original Atlas examples and proof explanations; individual MIT OCW assets have their own notices. |
+| [Stanford CS103 Mathematical Foundations of Computing](https://web.stanford.edu/class/archive/cs/cs103/cs103.1264/) | Sessions 1–5: proof-first finite automata, computability, and complexity sequence; use it to calibrate the NFA/DFA and reduction bridges, not to copy its assignments. | Stanford course assets remain Stanford material; link-only/original Atlas traces and explanations. |
+| [CMU 15-251 Foundations of Theoretical Computer Science schedule](https://www.cs.cmu.edu/~arielpro/15251f15/schedule.html) and [Georgia Tech CS 4510 Formal Languages and Automata](https://faculty.cc.gatech.edu/~ladha/S26/4510/) | Sessions 2–4: finite automata, computability, and reductions as comparison anchors for the two compact construction traces. | University-hosted routes are linked for study only; Atlas does not copy lectures, problem sets, answers, tools, or grading artifacts. |
 | [Georgia Tech CS 6515 Intro to Graduate Algorithms](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) | Sessions 4–5: proof-aware algorithm analysis, reductions, and complexity reasoning used as an advanced calibration route. | Link-only/original Atlas exercises; it is not a substitute for the course’s term-long work or feedback. |
 | [Cook’s 1971 complexity paper](https://doi.org/10.1145/800157.805047) and [Karp’s reduction paper](https://doi.org/10.1007/978-1-4684-2001-2_9) | Sessions 4–5: historical/primary anchors for reduction direction and encoded problem families. | Publisher records are link/citation only; do not copy proof prose, figures, or problem sets. |
 

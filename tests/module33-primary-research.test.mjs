@@ -38,9 +38,12 @@ test("M33 primary-source research remains a bounded authoring input, not a sourc
     /The designated Codex\s+chats may instead write only their separate bounded concise session note under\s+the active workflow; that does not authorize a transcript\/export or prove any\s+write\./u,
   );
   assert.match(research, /A saved-note claim requires direct evidence\./u);
-  for (let number = 1; number <= 7; number += 1) {
+  for (let number = 1; number <= 10; number += 1) {
     assert.match(research, new RegExp(`\\| S33-${String(number).padStart(2, "0")} \\|`, "u"));
   }
+  assert.match(research, /https:\/\/web\.stanford\.edu\/class\/archive\/cs\/cs103\/cs103\.1264\//u);
+  assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~arielpro\/15251f15\/schedule\.html/u);
+  assert.match(research, /https:\/\/faculty\.cc\.gatech\.edu\/~ladha\/S26\/4510\//u);
 
   const m33GraphEntry = graph.modules.find(({ id }) => id === "m33");
   const contract = registry.modules.find(({ moduleId }) => moduleId === "m33");

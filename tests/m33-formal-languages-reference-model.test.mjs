@@ -90,4 +90,11 @@ test("the M33 workbook connects the formal model classes with an original deriva
   assert.match(workbook, /### Tiny derivation trace — syntax before meaning/u);
   assert.match(workbook, /S \\Rightarrow \(S\)S \\Rightarrow \(\)S/u);
   assert.match(workbook, /It does not establish a semantic\s+result, safe evaluation, or authority to act\./u);
+  assert.match(workbook, /### NFA-to-DFA subset construction — track possible states/u);
+  assert.match(workbook, /strings ending in `01`/u);
+  assert.match(workbook, /The\s+constructed DFA accepts exactly when its subset contains\s+`q2`/u);
+  assert.match(workbook, /### A computability mapping reduction — halting becomes acceptance/u);
+  assert.match(workbook, /HALT_TM \\le_m A_TM/u);
+  assert.match(workbook, /input encoding is malformed.*fixed no-instance/isu);
+  assert.match(workbook, /`N` ignores its\s+own input/u);
 });

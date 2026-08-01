@@ -16,13 +16,14 @@ can satisfy. Source links guide later authoring; they are not evidence that a
 future recognizer/proof studio, diagnostic, retrieval flow, dossier, oral
 defense, accessibility review, CI run, or learner mastery exists.
 
-**Research access date:** 2026-07-31. The source set deliberately uses original
-papers or official university materials. This note is original explanation and
-link-only research. Atlas must not copy source prose, theorem proofs, figures,
-slides, problem sets, code, scans, or exercises into a future learner asset
-without a separate asset-level reuse decision. A citation is not a license;
-historical importance is not a reuse grant; and an implementation trace is not
-a proof of a theorem.
+**Research access dates:** S33-01 through S33-07 were accessed on 2026-07-31;
+the additional university calibration routes S33-08 through S33-10 were checked
+on 2026-08-01. The source set deliberately uses original papers or official
+university materials. This note is original explanation and link-only research.
+Atlas must not copy source prose, theorem proofs, figures, slides, problem sets,
+code, scans, or exercises into a future learner asset without a separate
+asset-level reuse decision. A citation is not a license; historical importance
+is not a reuse grant; and an implementation trace is not a proof of a theorem.
 
 ## The connected teaching argument
 
@@ -87,10 +88,11 @@ evidence.
 
 ## Primary/official source ledger and reuse boundary
 
-All entries were accessed on **2026-07-31**. “Link-only/original paraphrase”
-is the present Atlas decision even where a work can be read online. It avoids
-silently importing copyright, attribution, exercise, figure, or proof-text
-obligations into later material.
+S33-01 through S33-07 were accessed on **2026-07-31**; S33-08 through S33-10
+were checked on **2026-08-01**. “Link-only/original paraphrase” is the present
+Atlas decision even where a work can be read online. It avoids silently
+importing copyright, attribution, exercise, figure, or proof-text obligations
+into later material.
 
 | ID | Primary or official source and stable learner-facing link | Owner / source role | Narrow claims this may support | License/reuse status |
 | --- | --- | --- | --- | --- |
@@ -101,6 +103,10 @@ obligations into later material.
 | S33-05 | Rice, 1953, [*Classes of Recursively Enumerable Sets and Their Decision Problems*](https://doi.org/10.1090/S0002-9947-1953-0053041-6) | Original research article; Transactions of the American Mathematical Society | Scope for a semantic-property undecidability theorem, once the encoded partial-computable-function assumptions are stated. Supports Session 3’s semantic-limit boundary. | AMS-published article; no checked Atlas asset-reuse permission. **Citation/link and original counterexamples only.** |
 | S33-06 | Cook, 1971, [*The Complexity of Theorem-Proving Procedures*](https://doi.org/10.1145/800157.805047) | Original research article; ACM STOC proceedings | Historical source for polynomial reducibility/completeness development. It anchors the distinction between the source’s reduction formulation and a later course’s explicitly declared reduction convention. | ACM records copyright and limited personal/classroom-copy language; no permission has been recorded to reproduce text, figures, or proof. **Citation/link and original reduction fixture only.** |
 | S33-07 | Karp, 1972, [*Reducibility Among Combinatorial Problems*](https://doi.org/10.1007/978-1-4684-2001-2_9) | Original research article; *Complexity of Computer Computations* | Polynomial-time many-one reduction and a catalogue of completeness results under the stated model. Supports Session 5 completeness and encoding discipline. | Springer publication; no checked Atlas asset-reuse permission. **Citation/link and original examples only.** |
+
+| S33-08 | Stanford, [CS103 Mathematical Foundations of Computing](https://web.stanford.edu/class/archive/cs/cs103/cs103.1264/) | Stanford course staff; official university-hosted undergraduate course route | Current-course calibration for a proof-first sequence spanning discrete mathematics, computability, and complexity; supports the compact NFA/DFA and reduction bridges. | Course page is linked for study. No asset-level Atlas reuse permission has been recorded; **link-only/original paraphrase**. |
+| S33-09 | Carnegie Mellon University, [15-251 Foundations of Theoretical Computer Science schedule](https://www.cs.cmu.edu/~arielpro/15251f15/schedule.html) | CMU course staff; official university-hosted course archive | Comparison route for automata, computability, reductions, and complexity sequencing; supports checking that Atlas distinguishes finite constructions from theorem-scale proof practice. | Course archive is linked for study. No blanket license/reuse grant is inferred; **link-only/original examples**. |
+| S33-10 | Georgia Tech, [CS 4510 Formal Languages and Automata](https://faculty.cc.gatech.edu/~ladha/S26/4510/) | Georgia Tech course staff; official university-hosted course route | Direct calibration for DFA/NFA/regular-language and computability scope, complementing CS 6515’s graduate-algorithms role. | Course page is linked for study. Atlas retains original traces, explanations, and prompts; do not copy course assets without a separate reuse decision. |
 
 ### What the ledger does *not* establish
 

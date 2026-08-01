@@ -277,6 +277,52 @@ This is last-in-first-out behavior, not a lowest-\(g\) policy. Before writing
 more code, specify priority key, tie rule, duplicate policy, goal test timing,
 cost domain, and whether a state may be reopened.
 
+### Exact counterexample — admissible is not enough for no-reopen graph search
+
+Keep the graph, heuristic, and operational choices together. Let the positive
+edge costs be
+
+~~~text
+S --3--> A --1--> G
+S --1--> B --1--> A
+~~~
+
+The true remaining costs are `h*(S)=3`, `h*(A)=1`, `h*(B)=2`, and `h*(G)=0`.
+Use the candidate heuristic `h(S)=3`, `h(A)=0`, `h(B)=2`, and `h(G)=0`. It is
+admissible, but it is inconsistent on `B -> A` because
+
+\[
+h(B)=2 > 1+0=c(B,A)+h(A).
+\]
+
+Now name a particular graph-search variant: priority `f=g+h`; ties choose `A`
+before `B`; test a goal when it is removed from the frontier; replace an
+already-open frontier entry when a strictly lower `g` is found (and discard a
+stale higher-`g` entry if it is later removed); and discard a later better path
+to an already closed state. Expanding `S` puts `A` and `B` at equal `f=3`, so
+the tie rule closes `A` with `g=3` and inserts `G` with cost 4. Expanding `B`
+finds a better `A` path with `g=2`, but the no-reopen policy discards it. The
+no-reopen result has cost `4`.
+
+If the same trace reopens `A`, the declared open-frontier rule replaces `G`
+with its lower cost `g=3` before the goal is removed. The reopened result has
+cost `3`, the actual shortest-path cost in this declared graph. This does not
+say that every inconsistent heuristic fails or that every reopen implementation
+is correct; it makes the missing premise visible.
+
+<details>
+<summary>Predict before revealing the policy consequence.</summary>
+
+Which fact is doing the damage: the words “A-star,” admissibility alone, the
+`A`-before-`B` tie rule, or the rule that refuses to reopen a closed state?
+Which detail would you have to record before reusing any theorem claim?
+
+**Reveal:** the failure needs this combined graph, heuristic, tie, goal-test,
+open-frontier update, and no-reopen policy. Record the exact search variant and
+duplicate/reopen rule; no label or one successful run substitutes for them.
+
+</details>
+
 ### Output: Search-Strategy Evidence Table
 
 Compare BFS, UCS, and a named A-star variant:
@@ -299,6 +345,8 @@ and by last-in-first-out policy, then inspect
 `chooseM34DeclaredFrontierEntry(...)`. Name the still-missing tie, duplicate,
 goal-test, cost-domain, and reopen rules. The fixture chooses between exactly
 two entries; it is not an implementation of UCS or a graph-search theorem.
+Then inspect `m34AStarNoReopenCounterexample()` as a fixed four-state trace;
+it does not traverse a learner-supplied graph or implement general A-star.
 
 ---
 
@@ -603,6 +651,46 @@ observation model are further assumptions—not facts supplied by one posterior.
 
 </details>
 
+### A two-step Bellman backup
+
+Here is the smallest sequential contrast. At state `s0`, action `inspect` has
+an immediate reward of `-0.5` (equivalently, an immediate cost of `0.5`) and
+transitions to `clear` or `blocked` with probability `0.5` each. At the final
+stage, `dispatch`/`wait` rewards are `3`/`1` in `clear` and `-3`/`1` in
+`blocked`; therefore
+
+\[
+V_1(\text{clear})=3,\qquad V_1(\text{blocked})=1.
+\]
+
+The two-stage backup is
+
+\[
+Q_0(s_0,\text{inspect})=-0.5+0.5(3)+0.5(1)=1.5.
+\]
+
+Compare a terminal `safe` action with value `1.2`. Under this exact finite
+horizon, the initial policy chooses `inspect`, then chooses `dispatch` in
+`clear` and `wait` in `blocked`. That state-contingent continuation is what a
+one-shot table lacks.
+
+<details>
+<summary>Predict before revealing the policy boundary.</summary>
+
+If the initial expected value says `inspect`, may you stop writing the policy
+there? What becomes invalid if the horizon, transition probabilities, action
+set, or terminal rewards change?
+
+**Reveal:** no. A policy includes the later state/action choices as well as the
+initial action. Changing any declared component creates a different MDP and
+needs a new backup; it is not repaired by repeatedly calling a one-shot
+selector.
+
+</details>
+
+Use `m34TwoStageMdpBackupCard()` only to inspect this arithmetic and its stated
+scope. It is not a general MDP planner, learned policy, or authority to act.
+
 ### Human-impact boundary
 
 For any consequential context, do not turn this toy calculation into action.
@@ -849,7 +937,7 @@ The reading routes below were checked on **2026-08-01**.
 
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
-| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) | Sessions 1–5: state-space reasoning, search, constraints, planning, decision, and project-oriented AI scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
+| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) with its [informed-search route](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html) and [MDP route](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | Sessions 1–5: state-space reasoning, the exact distinction between admissibility/consistency in graph search, constraints, planning, and sequential decision scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
 | [MIT 6.034 Artificial Intelligence](https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/) | Sessions 1–5: knowledge/problem solving, search, and AI representations as a connected conceptual route. | MIT OCW assets have their own notices; link-only/original Atlas explanations and diagrams. |
 | [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
 | [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |
