@@ -815,9 +815,9 @@
       "title": "Networks and Application Protocols",
       "summary": "Arc IV: carry a local result across an uncertain boundary A local program can know that it produced a valid value. The moment that value must cross a network, it must stop pretending that one local event is a remote fact.",
       "arcId": "arc-iv",
-      "wordCount": 15114,
+      "wordCount": 15216,
       "estimatedMinutes": 72,
-      "sourceHash": "1f6cae04fafd01a36822401d1d5e9c26139a46b120e3ca462ac00bab2900ce55",
+      "sourceHash": "7b5c9dc4d3e66a6faa4ef3db32165c728fe8f4eed6c28846e8c868db203eaa34",
       "id": "m20",
       "state": {
         "lifecycle": "learner-material-ready",

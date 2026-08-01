@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Corrected M20's learner-visible reference-model provenance: the tracked
+  `public/downloads` model/test pair is now the singular canonical source and
+  all repository-root commands name it directly. The source audit preserves the
+  historical missing `work/` path and records this repair without upgrading M20
+  to reviewed, verified, released, or published-contract status.
 - Added a narrow `minimatch@3` → `brace-expansion@1.1.17` lockfile override
   after verifying that the patched 1.x line retains the existing lint contract.
   The full local package audit now retains only the separately documented

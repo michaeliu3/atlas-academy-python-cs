@@ -1919,6 +1919,10 @@ test("renders the finalized networks-and-application-protocols workbook", async 
   assert.match(html, /Atlas remote-publication protocol dossier/);
   assert.match(html, /href="\/downloads\/module20_reference\.py"/);
   assert.match(html, /href="\/downloads\/test_module20_reference\.py"/);
+  assert.match(html, /canonical checked-in learner source is/);
+  assert.match(html, /public\/downloads\/module20_reference\.py/);
+  assert.match(html, /Download-only path/);
+  assert.doesNotMatch(html, /work\/module20_reference\.py/);
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(

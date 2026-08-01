@@ -20,6 +20,17 @@ the Internet, a remote host, or a production service.
 and [behavioral tests](/downloads/test_module20_reference.py). These are
 downloadable evidence artifacts for inspection; they do not contact a network.
 
+**Download-only path:** Save both downloaded files in the same local folder.
+From that folder, using a selected Python runtime, run:
+
+```powershell
+python test_module20_reference.py
+python module20_reference.py --scenario timeout_then_lookup
+```
+
+The model's evidence packet names the canonical repository-root command and its
+`canonical_command_base`; it does not need or record your actual local folder.
+
 **Primary learning surface:** use the visual HTML studio for prediction,
 stepping, comparison, and recording. This workbook is the complete accessible
 and auditable source: every visual has a text equivalent, every exercise has a
@@ -519,9 +530,10 @@ format.
 
 The complete local-only model is the
 [`module20_reference.py` download](/downloads/module20_reference.py). Its
-canonical workspace source is `work/module20_reference.py`; the portal exposes
-only the explicit downloadable copy. Read this core before relying on a library
-convenience method:
+canonical checked-in learner source is `public/downloads/module20_reference.py`,
+paired with `public/downloads/test_module20_reference.py`; the portal serves
+those exact tracked files. There is no separate `work/` source or generated
+mirror. Read this core before relying on a library convenience method:
 
 ```python
 class FrameDecoder:
@@ -596,8 +608,8 @@ Complete this table in your notebook.
 Then run the bounded test suite:
 
 ```powershell
-# From the course's `work/` directory, using the selected Python runtime:
-python test_module20_reference.py
+# From the course repository root, using the selected Python runtime:
+python public/downloads/test_module20_reference.py
 ```
 
 **[LOCAL REFERENCE RESULT]** The suite checks split frames, coalesced frames,
@@ -770,8 +782,8 @@ The model deliberately returns these two records in the timeout scenario:
 Run it locally:
 
 ```powershell
-# From the course's `work/` directory, using the selected Python runtime:
-python module20_reference.py `
+# From the course repository root, using the selected Python runtime:
+python public/downloads/module20_reference.py `
   --scenario timeout_then_lookup
 ```
 
@@ -1215,17 +1227,20 @@ identity/integrity conditions.
 
 ### Fault-injection lab L5b — Same observation, different histories
 
-Use the reference's named scenarios:
+From the course repository root, use the reference's named scenarios:
 
 ```powershell
-& $py '.\module20_reference.py' --scenario connection_error
-& $py '.\module20_reference.py' --scenario timeout_then_lookup
-& $py '.\module20_reference.py' --scenario matching_response
+python .\public\downloads\module20_reference.py --scenario connection_error
+python .\public\downloads\module20_reference.py --scenario timeout_then_lookup
+python .\public\downloads\module20_reference.py --scenario matching_response
 ```
 
-Set `$py` to the course's embedded Python executable only if it is present; the
-commands are examples of a local model run, not a requirement to install
-anything. For each output, identify:
+If `python` does not select your intended runtime, replace only the leading
+`python` command with that runtime's executable; keep the script path and
+scenario unchanged. These are examples of a local model run, not a requirement
+to install anything. If you save the paired downloads elsewhere, use that
+folder's bare filenames. Record the scenario, command form, runtime, and
+outcome—not a personal directory path. For each output, identify:
 
 | Scenario | Client attempt class | Server-local record in model | Status result | What remains outside scope |
 |---|---|---|---|---|
@@ -2080,7 +2095,8 @@ teaching contract, not a telemetry standard:
   "schema_version": "atlas.module20.evidence/1",
   "model_version": "...",
   "scenario": "timeout_then_lookup",
-  "command": "python module20_reference.py --scenario timeout_then_lookup",
+  "command": "python public/downloads/module20_reference.py --scenario timeout_then_lookup",
+  "canonical_command_base": "repository root",
   "runtime": {"implementation": "cpython", "python": "3.14.6"},
   "fixture_id": "snapshot-2026-07-30-a",
   "fixture_digest": "sha256:...",

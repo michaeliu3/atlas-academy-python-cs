@@ -222,7 +222,7 @@
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "1f6cae04fafd01a36822401d1d5e9c26139a46b120e3ca462ac00bab2900ce55"
+      "sha256": "7b5c9dc4d3e66a6faa4ef3db32165c728fe8f4eed6c28846e8c868db203eaa34"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
@@ -290,7 +290,7 @@
     },
     {
       "path": "content/source-maps/module20_networks_protocols_source_audit_addendum.md",
-      "sha256": "aa415e4c47236dda7f91ed2b350b0623f9bc779166831ccfd434dadfbb707c69"
+      "sha256": "24c2b601fa71b21de16dd0ab1dfc4f4be931d45e3a95a9da2e859beae3591143"
     },
     {
       "path": "content/source-maps/module20_networks_protocols_source_map.md",
@@ -434,7 +434,7 @@
     },
     {
       "path": "public/downloads/module20_reference.py",
-      "sha256": "6339582beebba18c16f30200650fe697bb3870b472478a4815a4593263ac6b8e"
+      "sha256": "bcb594144dc81dc889e5eba85ba7a8a89fa83954b8e55132a36a47694758cd2f"
     },
     {
       "path": "public/downloads/module21_async_distributed_source_map.md",
@@ -522,7 +522,7 @@
     },
     {
       "path": "public/downloads/test_module20_reference.py",
-      "sha256": "effca466e05543a997dbf0bc7dd036182abaf7d78035a4b98cbc82cdf9c235aa"
+      "sha256": "b0c18fcd3fdc75e4c25e303c6233bd4af025ae4d419ac37678594c5840962fb0"
     },
     {
       "path": "public/downloads/test_module21_reference.py",
@@ -566,7 +566,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "f31cf2d2665f7f80b9052950aa5c5b800b4b8d54eb82ccaaf57cf2aaf170e59c"
+      "sha256": "990085015a4477a189a071afbc397472f2470ca33740d6640bf6b089b27143b4"
     }
   ]
 }

@@ -400,8 +400,10 @@ class Module20ReferenceTests(unittest.TestCase):
         self.assertFalse(packet["test_summary"]["executed_by_scenario"])
         self.assertEqual(
             packet["command"],
-            "python module20_reference.py --scenario timeout_then_lookup",
+            "python public/downloads/module20_reference.py "
+            "--scenario timeout_then_lookup",
         )
+        self.assertEqual(packet["canonical_command_base"], "repository root")
         self.assertIn("remote effect", packet["unknowns_after_attempt"][0])
         self.assertNotIn("C:\\", first)
         self.assertNotIn("raw_payload", first)

@@ -133,6 +133,31 @@ for a human review of the corresponding workbook or studio surface.
    subprocesses, filesystem side effects beyond declared local behavior, and
    arbitrary code. Tests must state their fixture/model limitations.
 
+## Reference-model source truth
+
+### Historical audit observation (2026-07-30)
+
+At the audit snapshot, the learner workbook called
+`work/module20_reference.py` its canonical workspace source, but that path was
+absent from the tracked revision. The tracked model and paired tests were
+already `public/downloads/module20_reference.py` and
+`public/downloads/test_module20_reference.py`. This is a preserved historical
+finding, not retroactive evidence that the earlier learner command worked.
+
+### Current source-truth repair
+
+The singular canonical checked-in learner model is now
+`public/downloads/module20_reference.py`, with
+`public/downloads/test_module20_reference.py` as its paired behavioral test.
+The portal serves those exact tracked files. The `public/downloads` directory
+names the learner delivery route; it is not a generated mirror or a second
+source that can drift from an undisclosed `work/` copy. Current learner commands
+are written from the repository root and point to those paths explicitly.
+
+This repair corrects source provenance and reproducibility only. It does
+**not** change M20's legacy-audit status, human review, accessibility evidence,
+availability, release evidence, or publication state.
+
 ## Release-truth checks and unresolved provenance
 
 The following are necessary checks for a later M20 structural candidate or
@@ -140,7 +165,7 @@ release review. None is satisfied merely by this document existing.
 
 | Check | Current audit observation | Required action before an approval claim |
 | --- | --- | --- |
-| **Reference-model canonical source** | The workbook says the canonical workspace source is `work/module20_reference.py`, but that path is absent in this revision. The tracked model and tests are currently only `public/downloads/module20_reference.py` and `public/downloads/test_module20_reference.py`. | Resolve the source-of-truth location; update the workbook/policy or restore the canonical tracked source; record the reviewed commit and verification that the delivered download matches it. Do not call the missing path canonical. |
+| **Reference-model canonical source** | **Historical observation (2026-07-30):** the workbook named absent `work/module20_reference.py` as canonical. **Current repair:** `public/downloads/module20_reference.py` and its paired test are the singular tracked learner source, and workbook commands now name that repository-root path. | At any later approval review, record the reviewed commit, model/test hashes, test command/environment/result, and the finite-model limitation. This repair is not source review, human approval, release evidence, or publication. |
 | **External source freshness** | Python is version-scoped and the `Idempotency-Key` draft is expired. University pages and WHATWG are living material. | Recheck direct URLs, exact versions/editions, draft/RFC status, and license notices at release time. Update source cards and learner wording when they change. |
 | **Claim linkage in visible surfaces** | The source map has strong source-family linkage; a structural pointer alone cannot prove every workbook/studio sentence preserves it. | Review every learner-visible source-backed assertion against its source ID and stopping line; test for labels/links, not just headings. |
 | **License/reuse verification** | This audit authorizes no external asset import. The workbook says diagrams/traces/code/exercises are original, but that needs release review. | Inventory repository assets and verify that any non-original asset has an asset-level card and notices. Retain the link-only default for uncertain material. |

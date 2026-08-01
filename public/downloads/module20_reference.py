@@ -546,7 +546,10 @@ def scenario_evidence(scenario: str) -> dict[str, object]:
     return {
         "attempt": _outcome_packet(attempt),
         "attempt_history": list(transport.attempt_history),
-        "command": f"python module20_reference.py --scenario {scenario}",
+        "command": (
+            "python public/downloads/module20_reference.py "
+            f"--scenario {scenario}"
+        ),
         "endpoint_attempt": transport.endpoint_attempt,
         "fixture_id": FIXTURE_ID,
         "fixture_digest": _sha256_label(FIXTURE_ID.encode("ascii")),
@@ -569,6 +572,7 @@ def scenario_evidence(scenario: str) -> dict[str, object]:
             "scope": "scenario rendering does not execute the unit suite",
             "status": "NOT_RUN",
         },
+        "canonical_command_base": "repository root",
         "unknowns_after_attempt": unknowns_after_attempt,
     }
 
