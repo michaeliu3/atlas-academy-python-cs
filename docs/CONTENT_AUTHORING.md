@@ -110,6 +110,11 @@ being retrofitted. `validate:course:complete` is stricter still: it requires all
 36 entries to be verified and M25/M26 to become published. Neither gate may be
 weakened merely to make CI green.
 
+`validate:course:inputs` is intentionally a clean Git-index provenance gate:
+stage the intended tracked changes first, and ensure every tracked worktree file
+matches that index before running it. Use ordinary `validate:course` while
+authoring a dirty worktree; it remains the structural, authoring-friendly check.
+
 ### Draft evidence-pointer pilot
 
 `content/course/contracts/module-contract-evidence.v2.json` and

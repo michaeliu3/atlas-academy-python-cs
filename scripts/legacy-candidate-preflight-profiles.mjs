@@ -1,7 +1,10 @@
 import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { GitIndexSnapshotError } from "./git-index-snapshot.mjs";
+import {
+  GitIndexSnapshotError,
+  assertGitIndexSnapshotForSiteRoot,
+} from "./git-index-snapshot.mjs";
 import { readTrackedText, teachingTestDiscoveryKind } from "./module-review-evidence.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -41,6 +44,27 @@ function isPlainObject(value) {
 
 function hasText(value) {
   return typeof value === "string" && value.trim() !== "";
+}
+
+function sameJsonValue(left, right) {
+  if (Object.is(left, right)) return true;
+  if (Array.isArray(left) || Array.isArray(right)) {
+    return (
+      Array.isArray(left) &&
+      Array.isArray(right) &&
+      left.length === right.length &&
+      left.every((value, index) => sameJsonValue(value, right[index]))
+    );
+  }
+  if (!isPlainObject(left) || !isPlainObject(right)) return false;
+  const leftKeys = Object.keys(left).sort();
+  const rightKeys = Object.keys(right).sort();
+  return (
+    leftKeys.length === rightKeys.length &&
+    leftKeys.every(
+      (key, index) => key === rightKeys[index] && sameJsonValue(left[key], right[key]),
+    )
+  );
 }
 
 function exactKeys(value, expectedKeys, label, errors) {
@@ -138,9 +162,35 @@ export async function validateLegacyCandidatePreflightProfiles(
   { siteRoot = defaultSiteRoot, snapshot = null } = {},
 ) {
   const errors = [];
+  const snapshotInputPaths = new Set([
+    legacyCandidatePreflightProfilesRelativePath,
+  ]);
   const releaseInputPaths = new Set([
     legacyCandidatePreflightProfilesPath(siteRoot),
   ]);
+  if (snapshot) {
+    try {
+      await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
+      await snapshot.assertClean([legacyCandidatePreflightProfilesRelativePath]);
+      const capturedProfileRegistry = (
+        await snapshot.readJson(legacyCandidatePreflightProfilesRelativePath)
+      ).value;
+      if (!sameJsonValue(profileRegistry, capturedProfileRegistry)) {
+        errors.push(
+          "legacy candidate preflight-profile supplied profile registry must match its captured Git-index profile registry.",
+        );
+      }
+      // Snapshot-bound callers may provide values for a diagnostic comparison,
+      // but all semantic work below must use immutable captured JSON rather
+      // than a mutable object that could change after that comparison.
+      profileRegistry = capturedProfileRegistry;
+    } catch (error) {
+      const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+      errors.push(
+        `legacy candidate preflight-profile registry must resolve from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
   exactKeys(
     profileRegistry,
     topLevelKeys,
@@ -190,6 +240,7 @@ export async function validateLegacyCandidatePreflightProfiles(
         ["candidate evidence record", evidencePathFor(moduleId)],
         ["candidate preflight record", preflightPathFor(moduleId)],
       ]) {
+        snapshotInputPaths.add(path);
         const record = await readTrackedText(siteRoot, path, `${label}.${role}`, errors, { snapshot });
         if (record) releaseInputPaths.add(resolve(siteRoot, path));
       }
@@ -237,6 +288,7 @@ export async function validateLegacyCandidatePreflightProfiles(
         errors.push(`${label}.sourceLedgerPaths[${pathIndex}] must name a Markdown source-map artifact.`);
       }
       if (normalized) {
+        snapshotInputPaths.add(normalized);
         const record = await readTrackedText(
           siteRoot,
           normalized,
@@ -257,6 +309,7 @@ export async function validateLegacyCandidatePreflightProfiles(
       errors.push(`${label}.studioSourcePath must name an app/*.tsx studio source file.`);
     }
     if (studioSourcePath) {
+      snapshotInputPaths.add(studioSourcePath);
       const record = await readTrackedText(
         siteRoot,
         studioSourcePath,
@@ -276,6 +329,7 @@ export async function validateLegacyCandidatePreflightProfiles(
       errors.push(`${label}.visualTestPath must name a discovered top-level Node test.`);
     }
     if (visualTestPath) {
+      snapshotInputPaths.add(visualTestPath);
       const record = await readTrackedText(
         siteRoot,
         visualTestPath,
@@ -287,6 +341,7 @@ export async function validateLegacyCandidatePreflightProfiles(
     }
 
     if (documentationPath) {
+      snapshotInputPaths.add(documentationPath);
       const record = await readTrackedText(
         siteRoot,
         documentationPath,
@@ -325,10 +380,11 @@ export async function validateLegacyCandidatePreflightProfiles(
   }
 
   try {
-    // A profile registry read from a supplied snapshot must fail closed if it
-    // belongs to another worktree or changed during validation. Individual
-    // inputs above use the same snapshot and therefore share this generation.
-    if (snapshot) await snapshot.assertClean([legacyCandidatePreflightProfilesRelativePath]);
+    // The final closure covers the registry plus every profile-derived record,
+    // source ledger, studio, visual test, and candidate-boundary document
+    // resolved during validation. Individual reads guard early failures; this
+    // final check prevents a mixed generation after a successful early read.
+    if (snapshot) await snapshot.assertClean([...snapshotInputPaths].sort());
   } catch (error) {
     const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
     errors.push(
@@ -341,5 +397,6 @@ export async function validateLegacyCandidatePreflightProfiles(
     profileRegistry,
     candidateByModuleId,
     releaseInputPaths: [...releaseInputPaths].sort(),
+    snapshotInputPaths: [...snapshotInputPaths].sort(),
   };
 }

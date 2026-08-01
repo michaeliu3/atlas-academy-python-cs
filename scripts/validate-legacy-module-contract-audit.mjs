@@ -4,6 +4,7 @@ import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { extractTableOfContents } from "../lib/heading-ids.js";
+import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -154,7 +155,10 @@ async function isTrackedRegularFile(siteRoot, relativePath) {
   if (pathFromRoot !== relativePath || !pathFromRoot.startsWith("content/")) return false;
   const stats = await lstat(absolutePath).catch(() => null);
   if (!stats || !stats.isFile() || stats.isSymbolicLink()) return false;
-  return execFileAsync("git", ["ls-files", "--error-unmatch", "--", relativePath], { cwd: siteRoot })
+  return execFileAsync("git", ["ls-files", "--error-unmatch", "--", relativePath], {
+    cwd: siteRoot,
+    env: isolatedGitEnvironment(),
+  })
     .then(() => true)
     .catch(() => false);
 }

@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -207,7 +208,10 @@ function auditFailure(errors) {
 }
 
 async function commitExists(siteRoot, commit) {
-  return execFileAsync("git", ["cat-file", "-e", `${commit}^{commit}`], { cwd: siteRoot })
+  return execFileAsync("git", ["cat-file", "-e", `${commit}^{commit}`], {
+    cwd: siteRoot,
+    env: isolatedGitEnvironment(),
+  })
     .then(() => true)
     .catch(() => false);
 }
@@ -216,6 +220,7 @@ async function loadGraphAtAuditedCommit(siteRoot, commit) {
   const specification = `${commit}:${canonicalCourseGraphRelativePath}`;
   const { stdout } = await execFileAsync("git", ["show", "--no-textconv", specification], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   });
   return JSON.parse(stdout);
 }
@@ -224,6 +229,7 @@ async function loadManifestAtAuditedCommit(siteRoot, commit) {
   const specification = `${commit}:${canonicalModuleManifestRelativePath}`;
   const { stdout } = await execFileAsync("git", ["show", "--no-textconv", specification], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   });
   return JSON.parse(stdout);
 }

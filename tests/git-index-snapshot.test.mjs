@@ -101,6 +101,59 @@ test("a snapshot rejects an index generation that changed after capture", async 
   assert.equal((await snapshot.readText("content/clean.txt")).text, "committed text\n");
 });
 
+test("a snapshot can close every captured tracked entry as one generation", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const snapshot = await openGitIndexSnapshot(root);
+  await snapshot.assertAllClean();
+
+  await writeFixture(root, "content/conflict.txt", "later staged supporting input\n");
+  await git(root, ["add", "content/conflict.txt"]);
+  await expectSnapshotError(() => snapshot.assertAllClean(), "INDEX_SNAPSHOT_STALE");
+});
+
+test("a whole-index closure rejects an unstaged tracked worktree mutation", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const snapshot = await openGitIndexSnapshot(root);
+  await writeFixture(root, "content/conflict.txt", "unstaged supporting input\n");
+
+  await expectSnapshotError(() => snapshot.assertAllClean(), "WORKTREE_DIVERGED");
+});
+
+test("a whole-index closure rejects a newly staged path after capture", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const snapshot = await openGitIndexSnapshot(root);
+  await writeFixture(root, "content/newly-added.txt", "later staged supporting input\n");
+  await git(root, ["add", "content/newly-added.txt"]);
+
+  await expectSnapshotError(() => snapshot.assertAllClean(), "INDEX_SNAPSHOT_STALE");
+});
+
+test("a whole-index closure rejects a staged removal after capture", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const snapshot = await openGitIndexSnapshot(root);
+
+  await git(root, ["rm", "--quiet", "content/conflict.txt"]);
+
+  await expectSnapshotError(() => snapshot.assertAllClean(), "INDEX_SNAPSHOT_STALE");
+});
+
+test("a whole-index closure rejects an unstaged tracked-file deletion", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const snapshot = await openGitIndexSnapshot(root);
+
+  await rm(join(root, "content", "conflict.txt"));
+
+  await expectSnapshotError(() => snapshot.assertAllClean(), "WORKTREE_DIVERGED");
+});
+
 test("Git-index snapshot ignores an inherited Git index override", async (t) => {
   const root = await createRepository();
   t.after(() => rm(root, { recursive: true, force: true }));
@@ -116,6 +169,28 @@ test("Git-index snapshot ignores an inherited Git index override", async (t) => 
     }
   }
 });
+
+for (const flag of ["skip-worktree", "assume-unchanged"]) {
+  test(`Git-index snapshot rejects ${flag} inputs at capture`, async (t) => {
+    const root = await createRepository();
+    t.after(() => rm(root, { recursive: true, force: true }));
+
+    await git(root, ["update-index", `--${flag}`, "content/clean.txt"]);
+
+    await expectSnapshotError(() => openGitIndexSnapshot(root), "INDEX_WORKTREE_FLAGGED");
+  });
+
+  test(`whole-index closure rejects ${flag} flags introduced after capture`, async (t) => {
+    const root = await createRepository();
+    t.after(() => rm(root, { recursive: true, force: true }));
+    const snapshot = await openGitIndexSnapshot(root);
+
+    await git(root, ["update-index", `--${flag}`, "content/clean.txt"]);
+    await writeFixture(root, "content/clean.txt", `hidden ${flag} replacement\n`);
+
+    await expectSnapshotError(() => snapshot.assertAllClean(), "INDEX_WORKTREE_FLAGGED");
+  });
+}
 
 test("Git-index snapshot rejects unsafe repository paths and nested roots", async (t) => {
   const root = await createRepository();

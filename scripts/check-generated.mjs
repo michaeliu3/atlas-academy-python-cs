@@ -2,6 +2,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
 
 const execFileAsync = promisify(execFile);
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
@@ -17,14 +18,14 @@ const generatedPaths = [
 const { stdout } = await execFileAsync(
   "git",
   ["status", "--porcelain=v1", "--untracked-files=all", "--", ...generatedPaths],
-  { cwd: siteRoot },
+  { cwd: siteRoot, env: isolatedGitEnvironment() },
 );
 
 if (stdout.trim() !== "") {
   const { stdout: diff } = await execFileAsync(
     "git",
     ["diff", "--no-ext-diff", "--unified=0", "--", ...generatedPaths],
-    { cwd: siteRoot },
+    { cwd: siteRoot, env: isolatedGitEnvironment() },
   );
   const diffDetail = diff.trim()
     ? `\n\nGenerated diff:\n${diff.trim().slice(0, 12000)}`

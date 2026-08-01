@@ -7,7 +7,7 @@ import {
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
 } from "./advanced-module-contract.mjs";
-import { loadCourseGraph } from "./course-graph.mjs";
+import { loadCourseGraph, validateCourseGraph } from "./course-graph.mjs";
 import {
   loadLegacyModuleContractPacketRegistry,
   validateLegacyModuleContractPacketRegistry,
@@ -59,22 +59,38 @@ import {
   loadReleaseInputPolicy,
   releaseInputPolicyPath,
 } from "./release-input-policy.mjs";
+import {
+  assertGitIndexSnapshotForSiteRoot,
+  GitIndexSnapshotError,
+  isolatedGitEnvironment,
+  openGitIndexSnapshot,
+} from "./git-index-snapshot.mjs";
+import { validateReleaseInputLedger } from "./release-input-ledger.mjs";
 import { validateReaderMermaidAlternatives } from "./validate-mermaid-alternatives.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
-const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
+const canonicalCourseGraphRelativePath = "content/course/course-graph.v2.json";
 const execFileAsync = promisify(execFile);
 
-function withinSite(relativePath) {
-  const resolved = resolve(siteRoot, relativePath);
-  const pathFromRoot = relative(siteRoot, resolved);
+function courseGraphPathFor(root) {
+  return resolve(root, canonicalCourseGraphRelativePath);
+}
+
+function performanceBudgetPolicyPathFor(root) {
+  return resolve(root, "content", "course", "client-performance-budget.v1.json");
+}
+
+function withinSite(root, relativePath) {
+  const resolved = resolve(root, relativePath);
+  const pathFromRoot = relative(root, resolved);
   return pathFromRoot !== "" && !pathFromRoot.startsWith("..") && !pathFromRoot.includes(":");
 }
 
-async function trackedPaths(pathspec) {
+async function trackedPaths(root, pathspec) {
   const { stdout } = await execFileAsync("git", ["ls-files", "-z", "--", pathspec], {
-    cwd: siteRoot,
+    cwd: root,
+    env: isolatedGitEnvironment(),
   });
   return stdout
     .split("\0")
@@ -82,10 +98,10 @@ async function trackedPaths(pathspec) {
     .map((path) => path.replaceAll("\\", "/"));
 }
 
-async function validateTrackedRegularFiles(paths, errors, { label = "release input" } = {}) {
+async function validateTrackedRegularFiles(root, paths, errors, { label = "release input" } = {}) {
   for (const path of paths) {
-    const repositoryPath = relative(siteRoot, path).replaceAll("\\", "/");
-    if (!withinSite(repositoryPath)) {
+    const repositoryPath = relative(root, path).replaceAll("\\", "/");
+    if (!withinSite(root, repositoryPath)) {
       errors.push(`${label} escapes the repository: ${repositoryPath}.`);
       continue;
     }
@@ -95,7 +111,8 @@ async function validateTrackedRegularFiles(paths, errors, { label = "release inp
       continue;
     }
     await execFileAsync("git", ["ls-files", "--error-unmatch", "--", repositoryPath], {
-      cwd: siteRoot,
+      cwd: root,
+      env: isolatedGitEnvironment(),
     }).catch(() => {
       errors.push(`${label} is not tracked by Git: ${repositoryPath}.`);
     });
@@ -108,6 +125,42 @@ function contractError(errors) {
   }
 }
 
+function isPlainObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function sameJsonValue(left, right) {
+  if (Object.is(left, right)) return true;
+  if (Array.isArray(left) || Array.isArray(right)) {
+    return (
+      Array.isArray(left) &&
+      Array.isArray(right) &&
+      left.length === right.length &&
+      left.every((value, index) => sameJsonValue(value, right[index]))
+    );
+  }
+  if (!isPlainObject(left) || !isPlainObject(right)) return false;
+  const leftKeys = Object.keys(left).sort();
+  const rightKeys = Object.keys(right).sort();
+  return (
+    leftKeys.length === rightKeys.length &&
+    leftKeys.every(
+      (key, index) => key === rightKeys[index] && sameJsonValue(left[key], right[key]),
+    )
+  );
+}
+
+function canonicalGraphForSnapshotComparison(graph) {
+  if (!isPlainObject(graph)) return graph;
+  // loadCourseGraph intentionally adds these reader-facing derived values.
+  // They are not serialized canonical facts and therefore are not compared to
+  // the raw Git-index JSON source.
+  const canonicalGraph = { ...graph };
+  delete canonicalGraph.routePlan;
+  delete canonicalGraph.sequence;
+  return canonicalGraph;
+}
+
 // Compatibility name for integrations that previously loaded the legacy v1
 // registry. The active course validator now reads only the unified v3 source.
 export async function loadCourseContracts() {
@@ -117,8 +170,17 @@ export async function loadCourseContracts() {
 export async function validateCourseContracts(
   graph,
   registry,
-  { strict = false, complete = false, requireGitTracked = false } = {},
+  {
+    strict = false,
+    complete = false,
+    requireGitTracked = false,
+    snapshot: suppliedSnapshot = null,
+    siteRoot: requestedSiteRoot = null,
+  } = {},
 ) {
+  const validationSiteRoot = requestedSiteRoot ?? siteRoot;
+  let validationGraph = graph;
+  let validationRegistry = registry;
   const errors = [];
   const warnings = [];
   let contractRegistry = null;
@@ -134,21 +196,58 @@ export async function validateCourseContracts(
   let browserProgressSurfacePolicy = null;
   let courseStatusProjection = null;
   let mermaidAlternatives = null;
+  let releaseInputLedger = null;
+  let provenanceSnapshot = null;
+  let provenanceSourceReady = false;
   const releaseInputPaths = new Set([
-    graphPath,
-    moduleContractRegistryPath(siteRoot),
-    releaseInputPolicyPath(siteRoot),
-    releaseEvidencePolicyPath(siteRoot),
-    legacyCandidatePreflightProfilesPath(siteRoot),
-    manualLearningRecordWorkflowPath(siteRoot),
-    liveCodexLearningWorkflowPath(siteRoot),
-    moduleCompanionGuidesPath(siteRoot),
-    browserProgressSurfacePolicyPath(siteRoot),
+    courseGraphPathFor(validationSiteRoot),
+    performanceBudgetPolicyPathFor(validationSiteRoot),
+    moduleContractRegistryPath(validationSiteRoot),
+    releaseInputPolicyPath(validationSiteRoot),
+    releaseEvidencePolicyPath(validationSiteRoot),
+    legacyCandidatePreflightProfilesPath(validationSiteRoot),
+    manualLearningRecordWorkflowPath(validationSiteRoot),
+    liveCodexLearningWorkflowPath(validationSiteRoot),
+    moduleCompanionGuidesPath(validationSiteRoot),
+    browserProgressSurfacePolicyPath(validationSiteRoot),
   ]);
 
+  if (requireGitTracked) {
+    try {
+      provenanceSnapshot = suppliedSnapshot ?? await openGitIndexSnapshot(validationSiteRoot);
+      await assertGitIndexSnapshotForSiteRoot(provenanceSnapshot, validationSiteRoot);
+      await provenanceSnapshot.assertAllClean();
+      const registryPath = relative(
+        validationSiteRoot,
+        moduleContractRegistryPath(validationSiteRoot),
+      ).replaceAll("\\", "/");
+      const [capturedGraph, capturedRegistry] = await Promise.all([
+        provenanceSnapshot.readJson(canonicalCourseGraphRelativePath),
+        provenanceSnapshot.readJson(registryPath),
+      ]);
+      if (!sameJsonValue(canonicalGraphForSnapshotComparison(graph), capturedGraph.value)) {
+        errors.push("supplied graph must match its captured Git-index graph.");
+      }
+      if (!sameJsonValue(registry, capturedRegistry.value)) {
+        errors.push("supplied registry must match its captured Git-index registry.");
+      }
+      // A checked-in result is an assertion about the captured Git-index JSON,
+      // never about mutable caller-owned objects that merely compared equal.
+      validationGraph = capturedGraph.value;
+      validationRegistry = capturedRegistry.value;
+      provenanceSourceReady = true;
+    } catch (error) {
+      const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+      errors.push(
+        `Checked-in course validation requires one clean captured Git-index workspace${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+    if (!provenanceSourceReady) contractError(errors);
+  }
+
   try {
-    contractRegistry = await validateModuleContractRegistry(graph, registry, {
-      siteRoot,
+    contractRegistry = await validateModuleContractRegistry(validationGraph, validationRegistry, {
+      siteRoot: validationSiteRoot,
       mode: complete ? "complete" : strict ? "strict" : "integrity",
     });
     for (const path of contractRegistry.releaseInputPaths) {
@@ -161,9 +260,9 @@ export async function validateCourseContracts(
   }
 
   try {
-    const packetRegistry = await loadLegacyModuleContractPacketRegistry(siteRoot);
-    legacyPackets = await validateLegacyModuleContractPacketRegistry(graph, packetRegistry, {
-      siteRoot,
+    const packetRegistry = await loadLegacyModuleContractPacketRegistry(validationSiteRoot);
+    legacyPackets = await validateLegacyModuleContractPacketRegistry(validationGraph, packetRegistry, {
+      siteRoot: validationSiteRoot,
     });
     for (const path of legacyPackets.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -178,9 +277,22 @@ export async function validateCourseContracts(
   }
 
   try {
+    const profileRegistry = requireGitTracked
+      ? (
+        await provenanceSnapshot.readJson(
+          relative(
+            validationSiteRoot,
+            legacyCandidatePreflightProfilesPath(validationSiteRoot),
+          ).replaceAll("\\", "/"),
+        )
+      ).value
+      : await loadLegacyCandidatePreflightProfiles(validationSiteRoot);
     legacyCandidatePreflightProfiles = await validateLegacyCandidatePreflightProfiles(
-      await loadLegacyCandidatePreflightProfiles(siteRoot),
-      { siteRoot },
+      profileRegistry,
+      {
+        siteRoot: validationSiteRoot,
+        snapshot: requireGitTracked ? provenanceSnapshot : null,
+      },
     );
     for (const path of legacyCandidatePreflightProfiles.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -196,8 +308,8 @@ export async function validateCourseContracts(
 
   try {
     draftEvidence = await validateModuleContractEvidenceRegistry(
-      await loadModuleContractEvidenceRegistry(siteRoot),
-      { siteRoot },
+      await loadModuleContractEvidenceRegistry(validationSiteRoot),
+      { siteRoot: validationSiteRoot },
     );
     warnings.push(
       `Draft v2 evidence pointers resolved for ${draftEvidence.summary.draftPilotModules} pilot module(s); this is not human review or publication evidence.`,
@@ -210,9 +322,9 @@ export async function validateCourseContracts(
 
   try {
     advancedContract = await validateAdvancedModuleContractRegistry(
-      graph,
-      await loadAdvancedModuleContractRegistry(siteRoot),
-      { siteRoot },
+      validationGraph,
+      await loadAdvancedModuleContractRegistry(validationSiteRoot),
+      { siteRoot: validationSiteRoot },
     );
     for (const path of advancedContract.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -224,7 +336,7 @@ export async function validateCourseContracts(
   }
 
   try {
-    releaseEvidencePolicy = await loadReleaseEvidencePolicy(siteRoot);
+    releaseEvidencePolicy = await loadReleaseEvidencePolicy(validationSiteRoot);
     releaseInputPaths.add(releaseEvidencePolicy.path);
     releaseInputPaths.add(releaseEvidencePolicy.workflowPath);
   } catch (error) {
@@ -235,8 +347,8 @@ export async function validateCourseContracts(
 
   try {
     manualLearningRecordWorkflow = await validateManualLearningRecordWorkflow(
-      await loadManualLearningRecordWorkflow(siteRoot),
-      { siteRoot },
+      await loadManualLearningRecordWorkflow(validationSiteRoot),
+      { siteRoot: validationSiteRoot },
     );
     for (const path of manualLearningRecordWorkflow.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -249,8 +361,8 @@ export async function validateCourseContracts(
 
   try {
     liveCodexLearningWorkflow = await validateLiveCodexLearningWorkflow(
-      await loadLiveCodexLearningWorkflow(siteRoot),
-      { siteRoot },
+      await loadLiveCodexLearningWorkflow(validationSiteRoot),
+      { siteRoot: validationSiteRoot },
     );
     for (const path of liveCodexLearningWorkflow.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -263,8 +375,8 @@ export async function validateCourseContracts(
 
   try {
     moduleCompanionGuides = await validateModuleCompanionGuides(
-      await loadModuleCompanionGuides(siteRoot),
-      { graph, siteRoot },
+      await loadModuleCompanionGuides(validationSiteRoot),
+      { graph: validationGraph, siteRoot: validationSiteRoot },
     );
     for (const path of moduleCompanionGuides.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -277,8 +389,8 @@ export async function validateCourseContracts(
 
   try {
     moduleLearningCompanions = await validateModuleLearningCompanions(
-      await loadModuleLearningCompanions(siteRoot),
-      { graph, siteRoot },
+      await loadModuleLearningCompanions(validationSiteRoot),
+      { graph: validationGraph, siteRoot: validationSiteRoot },
     );
     for (const path of moduleLearningCompanions.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -291,8 +403,8 @@ export async function validateCourseContracts(
 
   try {
     browserProgressSurfacePolicy = await validateBrowserProgressSurfacePolicy(
-      await loadBrowserProgressSurfacePolicy(siteRoot),
-      { siteRoot },
+      await loadBrowserProgressSurfacePolicy(validationSiteRoot),
+      { siteRoot: validationSiteRoot },
     );
     for (const path of browserProgressSurfacePolicy.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -304,7 +416,9 @@ export async function validateCourseContracts(
   }
 
   try {
-    courseStatusProjection = await validateCourseStatusProjection(graph, { siteRoot });
+    courseStatusProjection = await validateCourseStatusProjection(validationGraph, {
+      siteRoot: validationSiteRoot,
+    });
   } catch (error) {
     errors.push(
       `Generated course-status projection and status surfaces must match the canonical graph: ${error instanceof Error ? error.message : String(error)}`,
@@ -313,7 +427,7 @@ export async function validateCourseContracts(
 
   try {
     mermaidAlternatives = await validateReaderMermaidAlternatives({
-      siteRoot,
+      siteRoot: validationSiteRoot,
       requireComplete: complete,
     });
     if (mermaidAlternatives.summary.incompleteBlocks > 0) {
@@ -329,8 +443,8 @@ export async function validateCourseContracts(
 
   if (contractRegistry) {
     for (const manifestModule of contractRegistry.manifest.modules) {
-      releaseInputPaths.add(resolve(siteRoot, "content", "modules", manifestModule.filename));
-      if (manifestModule.sourceMap) releaseInputPaths.add(resolve(siteRoot, manifestModule.sourceMap));
+      releaseInputPaths.add(resolve(validationSiteRoot, "content", "modules", manifestModule.filename));
+      if (manifestModule.sourceMap) releaseInputPaths.add(resolve(validationSiteRoot, manifestModule.sourceMap));
     }
     if (contractRegistry.summary.legacyBaselineModules > 0) {
       warnings.push(
@@ -341,12 +455,12 @@ export async function validateCourseContracts(
 
   if (requireGitTracked) {
     try {
-      const policy = await loadReleaseInputPolicy(siteRoot);
+      const policy = await loadReleaseInputPolicy(validationSiteRoot);
       for (const path of policy.downloadPaths) releaseInputPaths.add(path);
       const allowedDownloads = new Set(
-        policy.downloadPaths.map((path) => relative(siteRoot, path).replaceAll("\\", "/")),
+        policy.downloadPaths.map((path) => relative(validationSiteRoot, path).replaceAll("\\", "/")),
       );
-      for (const trackedPath of await trackedPaths("public/downloads")) {
+      for (const trackedPath of await trackedPaths(validationSiteRoot, "public/downloads")) {
         if (!allowedDownloads.has(trackedPath)) {
           errors.push(
             `tracked public teaching artifact is absent from the release-input allowlist: ${trackedPath}.`,
@@ -356,7 +470,24 @@ export async function validateCourseContracts(
     } catch (error) {
       errors.push(error instanceof Error ? error.message : String(error));
     }
-    await validateTrackedRegularFiles(releaseInputPaths, errors);
+    await validateTrackedRegularFiles(validationSiteRoot, releaseInputPaths, errors);
+    try {
+      if (!provenanceSnapshot) {
+        throw new Error("Checked-in course validation could not retain its captured Git-index snapshot.");
+      }
+      await provenanceSnapshot.assertAllClean();
+      releaseInputLedger = await validateReleaseInputLedger({
+        siteRoot: validationSiteRoot,
+        snapshot: provenanceSnapshot,
+        requiredInputPaths: [...releaseInputPaths],
+        expectedCourseGraphSchemaVersion: validationGraph.schemaVersion,
+        expectedContractVersion: "v3",
+      });
+    } catch (error) {
+      errors.push(
+        `Release-input ledger must bind every allowlisted course input to one clean Git-index snapshot: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
   }
 
   contractError(errors);
@@ -375,13 +506,32 @@ export async function validateCourseContracts(
     browserProgressSurfacePolicy,
     courseStatusProjection,
     mermaidAlternatives,
+    releaseInputLedger,
     summary: contractRegistry.summary,
   };
 }
 
 export async function runCourseValidation({ strict = false, complete = false, requireGitTracked = false } = {}) {
-  const [graph, contracts] = await Promise.all([loadCourseGraph(), loadCourseContracts()]);
-  return validateCourseContracts(graph, contracts, { strict, complete, requireGitTracked });
+  if (!requireGitTracked) {
+    const [graph, contracts] = await Promise.all([loadCourseGraph(), loadCourseContracts()]);
+    return validateCourseContracts(graph, contracts, { strict, complete, requireGitTracked });
+  }
+
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  await snapshot.assertAllClean();
+  const registryPath = relative(siteRoot, moduleContractRegistryPath(siteRoot)).replaceAll("\\", "/");
+  await snapshot.assertClean([canonicalCourseGraphRelativePath, registryPath]);
+  const [graphRecord, registryRecord] = await Promise.all([
+    snapshot.readJson(canonicalCourseGraphRelativePath),
+    snapshot.readJson(registryPath),
+  ]);
+  validateCourseGraph(graphRecord.value);
+  return validateCourseContracts(graphRecord.value, registryRecord.value, {
+    strict,
+    complete,
+    requireGitTracked,
+    snapshot,
+  });
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

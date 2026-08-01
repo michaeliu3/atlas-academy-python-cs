@@ -11,15 +11,15 @@ import {
 } from "../scripts/module-evidence-preflight.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { loadModuleEvidenceRecord } from "../scripts/module-review-evidence.mjs";
+import {
+  createIndexedCourseFixture,
+  stageJsonMutation,
+} from "./support/candidate-preflight-fixture.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const moduleId = "m29";
 const evidencePath = "content/course/contracts/evidence/m29.v1.json";
-const legacyCandidateTestOnlyOptions = {
-  siteRoot,
-  allowInjectedLegacyCandidateArtifactsForTest: true,
-};
 
 async function loadCandidateArtifacts() {
   const [preflight, evidenceRecord] = await Promise.all([
@@ -27,6 +27,23 @@ async function loadCandidateArtifacts() {
     loadModuleEvidenceRecord(evidencePath, { siteRoot }),
   ]);
   return { preflight, evidenceRecord };
+}
+
+async function stagedM29Candidate(t, { mutateEvidence, mutatePreflight } = {}) {
+  const root = await createIndexedCourseFixture(t);
+  if (mutateEvidence) {
+    await stageJsonMutation(root, evidencePath, mutateEvidence);
+  }
+  if (mutatePreflight) {
+    await stageJsonMutation(root, moduleEvidencePreflightRelativePath(moduleId), mutatePreflight);
+  }
+  return {
+    root,
+    preflight: await loadModuleEvidencePreflight(
+      moduleEvidencePreflightRelativePath(moduleId),
+      { siteRoot: root },
+    ),
+  };
 }
 
 test("M29 has a complete candidate evidence dossier without a false promotion claim", async () => {
@@ -50,103 +67,108 @@ test("M29 has a complete candidate evidence dossier without a false promotion cl
   ]);
 });
 
-test("M29 preflight rejects unrelated tests and a thin rigor bundle", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-
-  const unrelatedTest = structuredClone(evidenceRecord);
-  const interaction = unrelatedTest.evidence.find(
-    ({ criterionId }) => criterionId === "interaction-reference-model-and-teaching-tests",
-  );
-  interaction.inputs.find(({ role }) => role === "test").path = "tests/ci-workflow.test.mjs";
+test("M29 preflight rejects unrelated tests and a thin rigor bundle", async (t) => {
+  const { root: unrelatedRoot, preflight: unrelatedPreflight } = await stagedM29Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const interaction = evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "interaction-reference-model-and-teaching-tests",
+      );
+      interaction.inputs.find(({ role }) => role === "test").path = "tests/ci-workflow.test.mjs";
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...legacyCandidateTestOnlyOptions,
-      evidenceRecord: unrelatedTest,
-    }),
+    () => validateModuleEvidencePreflight(unrelatedPreflight, { siteRoot: unrelatedRoot }),
     /module-specific discovered test/i,
   );
 
-  const thinRigor = structuredClone(evidenceRecord);
-  const rigor = thinRigor.evidence.find(
-    ({ criterionId }) =>
-      criterionId === "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-  );
-  rigor.inputs = [rigor.inputs[0]];
+  const { root: rigorRoot, preflight: rigorPreflight } = await stagedM29Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const rigor = evidenceRecord.evidence.find(
+        ({ criterionId }) =>
+          criterionId === "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      );
+      rigor.inputs = [rigor.inputs[0]];
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...legacyCandidateTestOnlyOptions,
-      evidenceRecord: thinRigor,
-    }),
+    () => validateModuleEvidencePreflight(rigorPreflight, { siteRoot: rigorRoot }),
     /rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments.*five course-content Markdown headings/i,
   );
 });
 
-test("M29 preflight rejects a renderer-only stand-in for its behavioral reference-model test", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-  const rendererOnlyTest = structuredClone(evidenceRecord);
-  const interaction = rendererOnlyTest.evidence.find(
-    ({ criterionId }) => criterionId === "interaction-reference-model-and-teaching-tests",
-  );
-  interaction.inputs.find(({ role }) => role === "test").path = "tests/rendered-html.test.mjs";
+test("M29 preflight rejects a renderer-only stand-in for its behavioral reference-model test", async (t) => {
+  const { root, preflight } = await stagedM29Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const interaction = evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "interaction-reference-model-and-teaching-tests",
+      );
+      interaction.inputs.find(({ role }) => role === "test").path = "tests/rendered-html.test.mjs";
+      return evidenceRecord;
+    },
+  });
 
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...legacyCandidateTestOnlyOptions,
-      evidenceRecord: rendererOnlyTest,
-    }),
+    () => validateModuleEvidencePreflight(preflight, { siteRoot: root }),
     /must bind behavioral Python test public\/downloads\/test_module29_reference\.py/i,
   );
 });
 
-test("M29 preflight rejects cross-module workbook evidence", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-  const crossModuleEvidence = structuredClone(evidenceRecord);
-  const firstPrinciples = crossModuleEvidence.evidence.find(
-    ({ criterionId }) => criterionId === "first-principles",
-  );
-  firstPrinciples.inputs[0] = {
-    ...firstPrinciples.inputs[0],
-    path: "content/modules/28_linear_algebra_numerical_stability_representation.md",
-    locator: "first-principle-a-vector-space-is-a-promise-about-allowed-combinations",
-  };
+test("M29 preflight rejects cross-module workbook evidence", async (t) => {
+  const { root, preflight } = await stagedM29Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const firstPrinciples = evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "first-principles",
+      );
+      firstPrinciples.inputs[0] = {
+        ...firstPrinciples.inputs[0],
+        path: "content/modules/28_linear_algebra_numerical_stability_representation.md",
+        locator: "first-principle-a-vector-space-is-a-promise-about-allowed-combinations",
+      };
+      return evidenceRecord;
+    },
+  });
 
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...legacyCandidateTestOnlyOptions,
-      evidenceRecord: crossModuleEvidence,
-    }),
+    () => validateModuleEvidencePreflight(preflight, { siteRoot: root }),
     /must bind scoped workbook content\/modules\/29_calculus_real_analysis_continuous_change\.md/i,
   );
 });
 
-test("M29 preflight fails closed on forged release assertions", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-  const forgedBoundary = structuredClone(preflight);
-  forgedBoundary.truthBoundary.release = "M29 is deployed and released with verified CI evidence.";
+test("M29 preflight fails closed on forged release assertions", async (t) => {
+  const { root: boundaryRoot, preflight: boundaryPreflight } = await stagedM29Candidate(t, {
+    mutatePreflight(preflight) {
+      preflight.truthBoundary.release = "M29 is deployed and released with verified CI evidence.";
+      return preflight;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(forgedBoundary, legacyCandidateTestOnlyOptions),
+    () => validateModuleEvidencePreflight(boundaryPreflight, { siteRoot: boundaryRoot }),
     /must preserve the exact candidate-only release nonclaim/i,
   );
 
-  const forgedClaim = structuredClone(evidenceRecord);
-  forgedClaim.evidence.find(
-    ({ criterionId }) => criterionId === "release-provenance-ci-and-deployment-evidence",
-  ).claim = "M29 is deployed and released after successful CI.";
+  const { root: claimRoot, preflight: claimPreflight } = await stagedM29Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "release-provenance-ci-and-deployment-evidence",
+      ).claim = "M29 is deployed and released after successful CI.";
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...legacyCandidateTestOnlyOptions,
-      evidenceRecord: forgedClaim,
-    }),
+    () => validateModuleEvidencePreflight(claimPreflight, { siteRoot: claimRoot }),
     /must preserve the exact candidate-only release-boundary claim/i,
   );
 
-  const forgedEvidenceBoundary = structuredClone(evidenceRecord);
-  forgedEvidenceBoundary.truthBoundary.release = "M29 is a deployed private release.";
+  const { root: evidenceBoundaryRoot, preflight: evidenceBoundaryPreflight } = await stagedM29Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      evidenceRecord.truthBoundary.release = "M29 is a deployed private release.";
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...legacyCandidateTestOnlyOptions,
-      evidenceRecord: forgedEvidenceBoundary,
-    }),
+    () => validateModuleEvidencePreflight(evidenceBoundaryPreflight, { siteRoot: evidenceBoundaryRoot }),
     /must preserve the exact candidate-only evidence-record release nonclaim/i,
   );
 });
@@ -197,11 +219,15 @@ test("M29 preflight loader refuses noncanonical paths", async () => {
   );
 });
 
-test("M29 preflight rejects a review-ready label and binds a CI-configured runtime model-exercise check", async () => {
-  const { preflight } = await loadCandidateArtifacts();
-  const falsePromotion = { ...preflight, state: "review-ready" };
+test("M29 preflight rejects a review-ready label and binds a CI-configured runtime model-exercise check", async (t) => {
+  const { root, preflight } = await stagedM29Candidate(t, {
+    mutatePreflight(record) {
+      record.state = "review-ready";
+      return record;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(falsePromotion, legacyCandidateTestOnlyOptions),
+    () => validateModuleEvidencePreflight(preflight, { siteRoot: root }),
     /candidate-not-promoting/i,
   );
 

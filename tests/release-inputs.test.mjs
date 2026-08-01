@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { lstat, readFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { advancedModuleBridgeRelativePath } from "../scripts/advanced-module-bridge.mjs";
@@ -115,6 +115,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
     assert.ok(paths.includes(policyPath), `${policyPath} appears in the release-input ledger`);
   }
   const workflowText = await readFile(releaseEvidencePolicy.workflowPath, "utf8");
+  const releaseEvidenceWorkflowPath = relative(siteRoot, releaseEvidencePolicy.workflowPath).replaceAll("\\", "/");
   assert.equal(
     sha256(canonicalTextContent(workflowText)),
     releaseEvidencePolicy.report.workflowSourceSha256,
@@ -142,14 +143,20 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   expectedDocumentationLedgerPaths.add(liveCodexLearningWorkflowGuideRelativePath);
   for (const profile of candidateProfiles.candidateByModuleId.values()) {
     expectedDocumentationLedgerPaths.add(profile.candidateDocumentationPath);
-    assert.ok(
-      paths.includes(`content/course/contracts/evidence/${profile.moduleId}.v1.json`),
-      `${profile.moduleId} candidate evidence is profile-derived and hash-ledgered`,
-    );
-    assert.ok(
-      paths.includes(`content/course/contracts/evidence-preflight/${profile.moduleId}.v1.json`),
-      `${profile.moduleId} candidate preflight is profile-derived and hash-ledgered`,
-    );
+    const profileBoundPaths = [
+      `content/course/contracts/evidence/${profile.moduleId}.v1.json`,
+      `content/course/contracts/evidence-preflight/${profile.moduleId}.v1.json`,
+      profile.candidateDocumentationPath,
+      ...profile.sourceLedgerPaths,
+      profile.studioSourcePath,
+      profile.visualTestPath,
+    ];
+    for (const profileBoundPath of profileBoundPaths) {
+      assert.ok(
+        paths.includes(profileBoundPath),
+        `${profile.moduleId} profile-bound candidate input is hash-ledgered: ${profileBoundPath}`,
+      );
+    }
   }
   assert.deepEqual(
     documentationLedgerPaths,
@@ -175,8 +182,10 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
       );
     } else {
       assert.ok(
-        /^(?:content|public)\//u.test(input.path) || profileBoundCodePaths.has(input.path),
-        `${input.path} is canonical course content, a public artifact, or an exact profile-bound code input`,
+        /^(?:content|public)\//u.test(input.path) ||
+          profileBoundCodePaths.has(input.path) ||
+          input.path === releaseEvidenceWorkflowPath,
+        `${input.path} is canonical course content, a public artifact, an exact profile-bound code input, or the pinned release-evidence workflow`,
       );
     }
     assert.doesNotMatch(input.path, /(?:^|\/)\.\.(?:\/|$)/u);

@@ -8,6 +8,7 @@ import {
   loadLegacyModuleContractAudit,
   validateLegacyModuleContractAudit,
 } from "./validate-legacy-module-contract-audit.mjs";
+import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -136,6 +137,7 @@ async function requireTrackedRegularFile(siteRoot, repositoryPath, label, errors
   }
   const tracked = await execFileAsync("git", ["ls-files", "--error-unmatch", "--", repositoryPath], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   })
     .then(() => true)
     .catch(() => false);

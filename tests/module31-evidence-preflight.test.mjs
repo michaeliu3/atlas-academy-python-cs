@@ -12,6 +12,10 @@ import {
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import { loadModuleContractRegistry } from "../scripts/module-contract-registry.mjs";
 import { loadModuleEvidenceRecord } from "../scripts/module-review-evidence.mjs";
+import {
+  createIndexedCourseFixture,
+  stageJsonMutation,
+} from "./support/candidate-preflight-fixture.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
@@ -24,6 +28,23 @@ async function loadCandidateArtifacts() {
     loadModuleEvidenceRecord(evidencePath, { siteRoot }),
   ]);
   return { preflight, evidenceRecord };
+}
+
+async function stagedM31Candidate(t, { mutateEvidence, mutatePreflight } = {}) {
+  const root = await createIndexedCourseFixture(t);
+  if (mutateEvidence) {
+    await stageJsonMutation(root, evidencePath, mutateEvidence);
+  }
+  if (mutatePreflight) {
+    await stageJsonMutation(root, moduleEvidencePreflightRelativePath(moduleId), mutatePreflight);
+  }
+  return {
+    root,
+    preflight: await loadModuleEvidencePreflight(
+      moduleEvidencePreflightRelativePath(moduleId),
+      { siteRoot: root },
+    ),
+  };
 }
 
 test("M31 authoring candidate evidence resolves without granting learner access or release status", async () => {
@@ -86,87 +107,82 @@ test("M31 authoring candidate rejects a reader-access or release transition", as
   );
 });
 
-test("M31 authoring candidate rejects a substitute workbook or visual-test stand-in", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-  const testOnlyOptions = {
-    siteRoot,
-    allowInjectedM31CandidateArtifactsForTest: true,
-  };
-
-  const substituteWorkbook = structuredClone(evidenceRecord);
-  const firstPrinciples = substituteWorkbook.evidence.find(
-    ({ criterionId }) => criterionId === "first-principles",
-  );
-  firstPrinciples.inputs[0] = {
-    kind: "markdown-heading",
-    role: "course-content",
-    path: "content/source-maps/module31_optimization_information_source_map.md",
-    locator: "the-one-connected-argument",
-  };
+test("M31 authoring candidate rejects a substitute workbook or visual-test stand-in", async (t) => {
+  const { root: workbookRoot, preflight: workbookPreflight } = await stagedM31Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const firstPrinciples = evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "first-principles",
+      );
+      firstPrinciples.inputs[0] = {
+        kind: "markdown-heading",
+        role: "course-content",
+        path: "content/source-maps/module31_optimization_information_source_map.md",
+        locator: "the-one-connected-argument",
+      };
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...testOnlyOptions,
-      evidenceRecord: substituteWorkbook,
-    }),
+    () => validateModuleEvidencePreflight(workbookPreflight, { siteRoot: workbookRoot }),
     /must bind hidden authoring workbook/i,
   );
 
-  const visualStandIn = structuredClone(evidenceRecord);
-  const visual = visualStandIn.evidence.find(
-    ({ criterionId }) => criterionId === "accessible-visual-text-alternative",
-  );
-  visual.inputs.find(({ role }) => role === "test").path = "tests/mermaid-accessibility.test.mjs";
+  const { root: visualRoot, preflight: visualPreflight } = await stagedM31Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const visual = evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "accessible-visual-text-alternative",
+      );
+      visual.inputs.find(({ role }) => role === "test").path = "tests/mermaid-accessibility.test.mjs";
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...testOnlyOptions,
-      evidenceRecord: visualStandIn,
-    }),
+    () => validateModuleEvidencePreflight(visualPreflight, { siteRoot: visualRoot }),
     /must bind tests\/m31-authoring-workbook\.test\.mjs/i,
   );
 });
 
-test("M31 authoring candidate requires snapshot-bound delivery-map evidence", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-  const missingDeliveryMapBinding = structuredClone(evidenceRecord);
-  const sessions = missingDeliveryMapBinding.evidence.find(
-    ({ criterionId }) => criterionId === "six-connected-sessions",
-  );
-  sessions.inputs = sessions.inputs.filter(
-    ({ path }) => path !== "content/course/contracts/authoring-delivery/m31.v1.json",
-  );
+test("M31 authoring candidate requires snapshot-bound delivery-map evidence", async (t) => {
+  const { root, preflight } = await stagedM31Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      const sessions = evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "six-connected-sessions",
+      );
+      sessions.inputs = sessions.inputs.filter(
+        ({ path }) => path !== "content/course/contracts/authoring-delivery/m31.v1.json",
+      );
+      return evidenceRecord;
+    },
+  });
 
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      siteRoot,
-      evidenceRecord: missingDeliveryMapBinding,
-      allowInjectedM31CandidateArtifactsForTest: true,
-    }),
+    () => validateModuleEvidencePreflight(preflight, { siteRoot: root }),
     /must bind exactly one hidden authoring delivery-map sessions pointer/i,
   );
 });
 
-test("M31 authoring candidate fails closed on a forged release assertion", async () => {
-  const { preflight, evidenceRecord } = await loadCandidateArtifacts();
-  const testOnlyOptions = {
-    siteRoot,
-    allowInjectedM31CandidateArtifactsForTest: true,
-  };
-  const forgedPreflight = structuredClone(preflight);
-  forgedPreflight.truthBoundary.release = "M31 is learner-deliverable and released.";
+test("M31 authoring candidate fails closed on a forged release assertion", async (t) => {
+  const { root: preflightRoot, preflight: forgedPreflight } = await stagedM31Candidate(t, {
+    mutatePreflight(preflight) {
+      preflight.truthBoundary.release = "M31 is learner-deliverable and released.";
+      return preflight;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(forgedPreflight, testOnlyOptions),
+    () => validateModuleEvidencePreflight(forgedPreflight, { siteRoot: preflightRoot }),
     /must preserve the exact candidate-only release nonclaim/i,
   );
 
-  const forgedEvidence = structuredClone(evidenceRecord);
-  forgedEvidence.evidence.find(
-    ({ criterionId }) => criterionId === "release-provenance-ci-and-deployment-evidence",
-  ).claim = "M31 is released after CI.";
+  const { root: evidenceRoot, preflight: evidencePreflight } = await stagedM31Candidate(t, {
+    mutateEvidence(evidenceRecord) {
+      evidenceRecord.evidence.find(
+        ({ criterionId }) => criterionId === "release-provenance-ci-and-deployment-evidence",
+      ).claim = "M31 is released after CI.";
+      return evidenceRecord;
+    },
+  });
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, {
-      ...testOnlyOptions,
-      evidenceRecord: forgedEvidence,
-    }),
+    () => validateModuleEvidencePreflight(evidencePreflight, { siteRoot: evidenceRoot }),
     /must preserve the exact candidate-only release-boundary claim/i,
   );
 });

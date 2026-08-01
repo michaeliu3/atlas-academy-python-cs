@@ -33,7 +33,7 @@ import {
   validateModuleEvidenceRecord,
   validateModuleReviewRecord,
 } from "./module-review-evidence.mjs";
-import { openGitIndexSnapshot } from "./git-index-snapshot.mjs";
+import { isolatedGitEnvironment, openGitIndexSnapshot } from "./git-index-snapshot.mjs";
 import {
   hiddenReviewCandidateRelativePath,
   resolveHiddenReviewCandidateScope,
@@ -342,6 +342,7 @@ async function isTrackedRegularFile(siteRoot, relativePath) {
   if (!stats || !stats.isFile() || stats.isSymbolicLink()) return false;
   return execFileAsync("git", ["ls-files", "--error-unmatch", "--", relativePath], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   })
     .then(() => true)
     .catch(() => false);
@@ -373,7 +374,7 @@ async function checkedInRegistryAtCommit(siteRoot, commit, moduleId, errors) {
     const { stdout } = await execFileAsync(
       "git",
       ["show", `${commit}:${moduleContractRegistryRelativePath}`],
-      { cwd: siteRoot },
+      { cwd: siteRoot, env: isolatedGitEnvironment() },
     );
     const historical = JSON.parse(stdout);
     return historical.modules?.find((module) => module.moduleId === moduleId) ?? null;
@@ -388,6 +389,7 @@ async function checkedInRegistryAtCommit(siteRoot, commit, moduleId, errors) {
 async function isAncestor(siteRoot, ancestor, descendant = "HEAD") {
   return execFileAsync("git", ["merge-base", "--is-ancestor", ancestor, descendant], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   })
     .then(() => true)
     .catch(() => false);
@@ -425,7 +427,7 @@ async function validatePromotionHistory(siteRoot, moduleEntry, promotionEvidence
     const unchanged = await execFileAsync(
       "git",
       ["diff", "--quiet", reviewReadyCommit, "--", path],
-      { cwd: siteRoot },
+      { cwd: siteRoot, env: isolatedGitEnvironment() },
     )
       .then(() => true)
       .catch(() => false);
@@ -518,6 +520,7 @@ async function readTextAtCommit(siteRoot, commit, repositoryPath, label, errors)
   try {
     const { stdout } = await execFileAsync("git", ["show", `${commit}:${repositoryPath}`], {
       cwd: siteRoot,
+      env: isolatedGitEnvironment(),
     });
     return stdout;
   } catch (error) {
@@ -552,6 +555,7 @@ async function validateRelease(siteRoot, moduleEntry, graphModule, promotionEvid
   } else {
     const exists = await execFileAsync("git", ["cat-file", "-e", `${release.sourceCommit}^{commit}`], {
       cwd: siteRoot,
+      env: isolatedGitEnvironment(),
     })
       .then(() => true)
       .catch(() => false);
@@ -560,7 +564,10 @@ async function validateRelease(siteRoot, moduleEntry, graphModule, promotionEvid
     } else if (!(await isAncestor(siteRoot, release.sourceCommit))) {
       errors.push(`${label}.sourceCommit must be an ancestor of HEAD.`);
     } else {
-      const { stdout: head } = await execFileAsync("git", ["rev-parse", "HEAD"], { cwd: siteRoot });
+      const { stdout: head } = await execFileAsync("git", ["rev-parse", "HEAD"], {
+        cwd: siteRoot,
+        env: isolatedGitEnvironment(),
+      });
       if (release.sourceCommit === head.trim()) {
         errors.push(`${label}.sourceCommit must be a strict ancestor of the release-record commit.`);
       }
@@ -582,7 +589,7 @@ async function validateRelease(siteRoot, moduleEntry, graphModule, promotionEvid
       const existsAtCandidate = await execFileAsync(
         "git",
         ["cat-file", "-e", `${release.sourceCommit}:${path}`],
-        { cwd: siteRoot },
+        { cwd: siteRoot, env: isolatedGitEnvironment() },
       )
         .then(() => true)
         .catch(() => false);
@@ -593,7 +600,7 @@ async function validateRelease(siteRoot, moduleEntry, graphModule, promotionEvid
       const unchanged = await execFileAsync(
         "git",
         ["diff", "--quiet", release.sourceCommit, "--", path],
-        { cwd: siteRoot },
+        { cwd: siteRoot, env: isolatedGitEnvironment() },
       )
         .then(() => true)
         .catch(() => false);

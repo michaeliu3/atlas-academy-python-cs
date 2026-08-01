@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateCourseGraph } from "./course-graph.mjs";
 import {
@@ -303,6 +303,25 @@ function sameJsonValue(left, right) {
   );
 }
 
+function addSnapshotInputPath(paths, siteRoot, path, label, errors) {
+  if (typeof path !== "string" || path.trim() === "") {
+    errors.push(`${label} must resolve to a non-empty repository path.`);
+    return;
+  }
+  const repositoryPath = relative(siteRoot, resolve(siteRoot, path)).replaceAll("\\", "/");
+  if (
+    repositoryPath === "" ||
+    repositoryPath.startsWith("../") ||
+    repositoryPath.includes(":") ||
+    repositoryPath.includes("\\") ||
+    repositoryPath.split("/").some((part) => part === "" || part === "." || part === "..")
+  ) {
+    errors.push(`${label} must resolve inside the candidate Git worktree.`);
+    return;
+  }
+  paths.add(repositoryPath);
+}
+
 /**
  * Production-style validation refuses caller-injected JSON that differs from
  * the captured source. The scope-specific overrides keep structural negative
@@ -320,18 +339,20 @@ async function validateSuppliedCandidateArtifactsMatchSnapshot(
   const preflightPath = moduleEvidencePreflightRelativePath(profile.moduleId);
   const artifactPaths = [preflightPath];
   if (suppliedEvidenceRecord !== null) artifactPaths.push(profile.evidenceRecordPath);
+  let canonicalPreflight = null;
+  let canonicalEvidenceRecord = null;
   try {
     await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
     await snapshot.assertClean(artifactPaths);
-    const canonicalPreflight = (await snapshot.readJson(preflightPath)).value;
+    canonicalPreflight = (await snapshot.readJson(preflightPath)).value;
     if (!sameJsonValue(preflight, canonicalPreflight)) {
       errors.push(`${label} supplied preflight must match its captured Git-index preflight record.`);
     }
     if (suppliedEvidenceRecord !== null) {
-      const canonicalEvidence = (
+      canonicalEvidenceRecord = (
         await snapshot.readJson(profile.evidenceRecordPath)
       ).value;
-      if (!sameJsonValue(suppliedEvidenceRecord, canonicalEvidence)) {
+      if (!sameJsonValue(suppliedEvidenceRecord, canonicalEvidenceRecord)) {
         errors.push(`${label} supplied evidence record must match its captured Git-index evidence record.`);
       }
     }
@@ -340,7 +361,9 @@ async function validateSuppliedCandidateArtifactsMatchSnapshot(
     errors.push(
       `${label} could not capture its supplied artifact context from one immutable Git-index snapshot${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
     );
+    return null;
   }
+  return Object.freeze({ canonicalPreflight, canonicalEvidenceRecord });
 }
 
 function preflightFailure(errors) {
@@ -605,6 +628,10 @@ async function validateLegacyCandidateProfileContext(
     }
     return {
       packet,
+      snapshotInputPaths: Object.freeze([
+        legacyCandidatePreflightProfilesRelativePath,
+        legacyModuleContractPacketRelativePath,
+      ]),
       materialScope: Object.freeze({
         workbookPath: expectedWorkbookPath,
         sourceLedgerPaths: Object.freeze([...profile.sourceLedgerPaths]),
@@ -873,8 +900,9 @@ async function validateM31AuthoringCandidateScope(
  * not a human review, learner-mastery, CI, deployment, or publication result.
  * The source-bound `run…` entry points bind profile, state, preflight, and
  * declared evidence inputs to one Git-index generation. Direct validation
- * keeps an explicit M31 test-only injection seam so structural negative tests
- * can exercise bad records without masquerading as provenance evidence.
+ * always uses those snapshot artifacts after comparing any supplied values;
+ * structural negative tests use isolated staged Git fixtures rather than a
+ * caller-selectable artifact-injection path.
  */
 export async function validateModuleEvidencePreflight(
   preflight,
@@ -885,8 +913,6 @@ export async function validateModuleEvidencePreflight(
     registry: suppliedRegistry = null,
     manifest: suppliedManifest = null,
     snapshot = null,
-    allowInjectedLegacyCandidateArtifactsForTest = false,
-    allowInjectedM31CandidateArtifactsForTest = false,
   } = {},
 ) {
   const errors = [];
@@ -904,27 +930,81 @@ export async function validateModuleEvidencePreflight(
     }
   }
   if (!evidenceSnapshot) preflightFailure(errors);
+  try {
+    await assertGitIndexSnapshotForSiteRoot(evidenceSnapshot, siteRoot);
+    await evidenceSnapshot.assertAllClean();
+  } catch (error) {
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(
+      `${suppliedModuleLabel} evidence preflight requires one clean captured Git-index workspace${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  if (errors.length > 0) preflightFailure(errors);
 
   const legacyCandidateProfiles = preflight?.moduleId === "m31"
     ? null
     : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, evidenceSnapshot, errors);
-  const profile = validatePreflightRecord(preflight, errors, legacyCandidateProfiles);
+  let profile = validatePreflightRecord(preflight, errors, legacyCandidateProfiles);
   if (!profile) preflightFailure(errors);
-  const moduleLabel = profile.moduleId.toUpperCase();
-
-  const allowsInjectedCandidateArtifactsForTest = profile.scope === "authoring-only"
-    ? allowInjectedM31CandidateArtifactsForTest
-    : allowInjectedLegacyCandidateArtifactsForTest;
-  if (!allowsInjectedCandidateArtifactsForTest) {
-    await validateSuppliedCandidateArtifactsMatchSnapshot(
-      profile,
-      preflight,
-      suppliedEvidenceRecord,
-      siteRoot,
-      evidenceSnapshot,
-      errors,
-    );
+  let moduleLabel = profile.moduleId.toUpperCase();
+  const snapshotInputPaths = new Set([
+    canonicalCourseGraphPath,
+    moduleContractRegistryRelativePath,
+    canonicalModuleManifestPath,
+    moduleEvidencePreflightRelativePath(profile.moduleId),
+    profile.evidenceRecordPath,
+    profile.candidateDocumentationPath,
+    "content/course/module-companion-guides.v1.json",
+    `content/course/contracts/companions/${profile.moduleId}.v1.json`,
+    "scripts/run-course-tests.mjs",
+    ".github/workflows/ci.yml",
+  ]);
+  if (profile.scope === "legacy-canonical") {
+    for (const path of legacyCandidateProfiles?.snapshotInputPaths ?? []) {
+      addSnapshotInputPath(
+        snapshotInputPaths,
+        siteRoot,
+        path,
+        `${moduleLabel} legacy profile snapshot input`,
+        errors,
+      );
+    }
+  } else {
+    for (const path of [
+      expectedM31AuthoringWorkbookPath,
+      expectedM31AuthoringDeliveryMapPath,
+      expectedM31AuthoringModelPath,
+      expectedM31AuthoringModelTestPath,
+      expectedM31AuthoringVisualTestPath,
+      advancedModuleBridgeRelativePath,
+      ...expectedM31AuthoringSourceMapPaths,
+    ]) {
+      addSnapshotInputPath(
+        snapshotInputPaths,
+        siteRoot,
+        path,
+        `${moduleLabel} authoring snapshot input`,
+        errors,
+      );
+    }
   }
+
+  const snapshotArtifacts = await validateSuppliedCandidateArtifactsMatchSnapshot(
+    profile,
+    preflight,
+    suppliedEvidenceRecord,
+    siteRoot,
+    evidenceSnapshot,
+    errors,
+  );
+  if (!snapshotArtifacts?.canonicalPreflight) preflightFailure(errors);
+  // Report a caller mismatch, then discard caller-owned artifacts. All
+  // subsequent semantics and returned evidence are based on immutable snapshot
+  // records instead.
+  preflight = snapshotArtifacts.canonicalPreflight;
+  profile = validatePreflightRecord(preflight, errors, legacyCandidateProfiles);
+  if (!profile) preflightFailure(errors);
+  moduleLabel = profile.moduleId.toUpperCase();
 
   const stateContext = await loadCandidateStateContextFromSnapshot(
     siteRoot,
@@ -950,6 +1030,15 @@ export async function validateModuleEvidencePreflight(
       registry,
       { siteRoot, manifest: stateContext.manifest },
     );
+    for (const path of registryReport.releaseInputPaths) {
+      addSnapshotInputPath(
+        snapshotInputPaths,
+        siteRoot,
+        path,
+        `${moduleLabel} canonical registry input`,
+        errors,
+      );
+    }
   } catch (error) {
     errors.push(`${moduleLabel} evidence preflight requires the current canonical registry to validate: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -967,12 +1056,21 @@ export async function validateModuleEvidencePreflight(
   if (profile.scope === "legacy-canonical" && !legacyCandidateContext) {
     preflightFailure(errors);
   }
+  for (const path of legacyCandidateContext?.snapshotInputPaths ?? []) {
+    addSnapshotInputPath(
+      snapshotInputPaths,
+      siteRoot,
+      path,
+      `${moduleLabel} packet-bound snapshot input`,
+      errors,
+    );
+  }
   const graphModule = graph.modules?.find(({ id }) => id === profile.moduleId) ?? null;
   const moduleEntry = registry.modules?.find(({ moduleId }) => moduleId === profile.moduleId) ?? null;
   if (!graphModule) errors.push(`${moduleLabel} evidence preflight requires canonical graph module ${profile.moduleId}.`);
   validateNonPromotionState(profile, moduleEntry, graphModule, errors, { manifestById });
 
-  let evidenceRecord = suppliedEvidenceRecord;
+  let evidenceRecord = snapshotArtifacts?.canonicalEvidenceRecord ?? null;
   if (!evidenceRecord && preflight?.evidenceRecordPath) {
     try {
       evidenceRecord = await loadModuleEvidenceRecord(preflight.evidenceRecordPath, {
@@ -993,6 +1091,15 @@ export async function validateModuleEvidencePreflight(
         requiredCriterionIds: criterionIds,
         snapshot: evidenceSnapshot,
       });
+      for (const path of evidenceReport.releaseInputPaths) {
+        addSnapshotInputPath(
+          snapshotInputPaths,
+          siteRoot,
+          path,
+          `${moduleLabel} resolved evidence input`,
+          errors,
+        );
+      }
     } catch (error) {
       errors.push(`${moduleLabel} evidence preflight requires all 18 candidate evidence criteria to resolve: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -1043,6 +1150,16 @@ export async function validateModuleEvidencePreflight(
       siteRoot,
       snapshot: evidenceSnapshot,
     });
+  }
+
+  try {
+    await evidenceSnapshot.assertClean([...snapshotInputPaths].sort());
+    await evidenceSnapshot.assertAllClean();
+  } catch (error) {
+    const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
+    errors.push(
+      `${moduleLabel} evidence preflight must finish against one clean captured candidate input generation${errorCode}: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
 
   preflightFailure(errors);

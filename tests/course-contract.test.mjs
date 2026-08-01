@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
@@ -28,6 +28,7 @@ import {
   renderLegacyModuleContractAuditReport,
   validateLegacyModuleContractAudit,
 } from "../scripts/validate-legacy-module-contract-audit.mjs";
+import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
@@ -308,6 +309,117 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     humanApprovals: 0,
     publicationChanges: 0,
   });
+});
+
+test("checked-in provenance rejects detached caller-supplied canonical graph facts", async () => {
+  const [graph, contracts, snapshot] = await Promise.all([
+    loadCourseGraph(),
+    loadCourseContracts(),
+    openGitIndexSnapshot(siteRoot),
+  ]);
+  const detachedGraph = structuredClone(graph);
+  detachedGraph.modules[0].purpose = "A plausible but detached M01 purpose.";
+
+  await assert.rejects(
+    () => validateCourseContracts(detachedGraph, contracts, {
+      requireGitTracked: true,
+      snapshot,
+    }),
+    /supplied graph must match its captured Git-index graph/i,
+  );
+});
+
+test("checked-in provenance rejects detached caller-supplied canonical registry facts", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const graph = (await snapshot.readJson("content/course/course-graph.v2.json")).value;
+  const detachedRegistry = structuredClone(
+    (await snapshot.readJson("content/course/contracts/module-contract-registry.v3.json")).value,
+  );
+  detachedRegistry.purpose = "A plausible but detached v3 registry purpose.";
+
+  await assert.rejects(
+    () => validateCourseContracts(graph, detachedRegistry, {
+      requireGitTracked: true,
+      snapshot,
+    }),
+    /supplied registry must match its captured Git-index registry/i,
+  );
+});
+
+test("checked-in provenance accepts the canonical derived graph projection", async () => {
+  const [graph, contracts, snapshot] = await Promise.all([
+    loadCourseGraph(),
+    loadCourseContracts(),
+    openGitIndexSnapshot(siteRoot),
+  ]);
+
+  const report = await validateCourseContracts(graph, contracts, {
+    requireGitTracked: true,
+    snapshot,
+  });
+
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 141);
+  assert.equal(report.summary.legacyBaselineModules, 30);
+});
+
+test("checked-in provenance validates captured JSON instead of stateful caller facts", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const graph = (await snapshot.readJson("content/course/course-graph.v2.json")).value;
+  const registry = (
+    await snapshot.readJson("content/course/contracts/module-contract-registry.v3.json")
+  ).value;
+  const canonicalModulePurpose = graph.modules[0].purpose;
+  const canonicalRegistryPurpose = registry.purpose;
+  let graphPurposeReads = 0;
+  let registryPurposeReads = 0;
+  Object.defineProperty(graph.modules[0], "purpose", {
+    enumerable: true,
+    configurable: true,
+    get() {
+      graphPurposeReads += 1;
+      return graphPurposeReads === 1 ? canonicalModulePurpose : "";
+    },
+  });
+  Object.defineProperty(registry, "purpose", {
+    enumerable: true,
+    configurable: true,
+    get() {
+      registryPurposeReads += 1;
+      return registryPurposeReads === 1 ? canonicalRegistryPurpose : "";
+    },
+  });
+
+  const report = await validateCourseContracts(graph, registry, {
+    requireGitTracked: true,
+    snapshot,
+  });
+
+  assert.equal(graphPurposeReads, 1);
+  assert.equal(registryPurposeReads, 1);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 141);
+});
+
+test("checked-in provenance ignores inherited Git index overrides end to end", async () => {
+  const [graph, contracts, snapshot] = await Promise.all([
+    loadCourseGraph(),
+    loadCourseContracts(),
+    openGitIndexSnapshot(siteRoot),
+  ]);
+  const previousIndexOverride = process.env.GIT_INDEX_FILE;
+  process.env.GIT_INDEX_FILE = join(siteRoot, "untrusted-course-contract.index");
+  try {
+    const report = await validateCourseContracts(graph, contracts, {
+      requireGitTracked: true,
+      snapshot,
+    });
+    assert.equal(report.releaseInputLedger?.inputPaths.length, 141);
+  } finally {
+    if (previousIndexOverride === undefined) {
+      delete process.env.GIT_INDEX_FILE;
+    } else {
+      process.env.GIT_INDEX_FILE = previousIndexOverride;
+    }
+  }
 });
 
 test("the v2 draft evidence fixture resolves local visible anchors without review or release claims", async () => {

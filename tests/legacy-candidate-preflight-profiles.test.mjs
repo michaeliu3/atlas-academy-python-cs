@@ -6,6 +6,7 @@ import {
   loadLegacyCandidatePreflightProfiles,
   validateLegacyCandidatePreflightProfiles,
 } from "../scripts/legacy-candidate-preflight-profiles.mjs";
+import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
@@ -71,4 +72,37 @@ test("the legacy candidate profile registry rejects ambiguous or forged profile 
     () => validateLegacyCandidatePreflightProfiles(undiscoveredVisualTest, { siteRoot }),
     /must name a discovered top-level Node test/i,
   );
+});
+
+test("the legacy candidate profile validator binds a supplied registry to its captured snapshot", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const forgedProfiles = structuredClone(await loadProfiles());
+  forgedProfiles.purpose = "A plausible but detached profile registry.";
+
+  await assert.rejects(
+    () => validateLegacyCandidatePreflightProfiles(forgedProfiles, { siteRoot, snapshot }),
+    /supplied profile registry must match its captured Git-index profile registry/i,
+  );
+});
+
+test("the snapshot-bound profile validator never reuses stateful caller facts", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const profiles = (
+    await snapshot.readJson("content/course/contracts/legacy-candidate-preflight-profiles.v1.json")
+  ).value;
+  const canonicalPurpose = profiles.purpose;
+  let purposeReads = 0;
+  Object.defineProperty(profiles, "purpose", {
+    enumerable: true,
+    configurable: true,
+    get() {
+      purposeReads += 1;
+      return purposeReads === 1 ? canonicalPurpose : "";
+    },
+  });
+
+  const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
+
+  assert.equal(purposeReads, 1);
+  assert.equal(report.candidateByModuleId.size, 4);
 });

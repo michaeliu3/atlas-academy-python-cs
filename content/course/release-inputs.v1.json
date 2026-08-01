@@ -5,6 +5,10 @@
   "contractVersion": "v3",
   "inputs": [
     {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "e1fae2708df3aa0154bd7ed49ba14ae8bc3da0b8a0aaad3ee48f21ca2d6b767c"
+    },
+    {
       "path": "app/CalculusContinuousChangeStudio.tsx",
       "sha256": "a63750479c68da8bc4e1fae1ccd229eb46d2f2c1d9339f13b6f7a81d71e6b806"
     },

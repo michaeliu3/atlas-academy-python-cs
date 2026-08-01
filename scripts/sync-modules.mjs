@@ -39,6 +39,10 @@ import {
   releaseEvidencePolicyPath,
 } from "./release-evidence-verifier.mjs";
 import {
+  canonicalReleaseInputText,
+  releaseInputSha256,
+} from "./release-input-ledger.mjs";
+import {
   loadManualLearningRecordWorkflow,
   validateManualLearningRecordWorkflow,
 } from "./manual-learning-record-workflow.mjs";
@@ -211,10 +215,10 @@ async function releaseInputRecord(path) {
   // All current allowlisted course inputs are UTF-8 source, workbook, map, or
   // local teaching-model text. Canonicalize line endings so a Git checkout on
   // Windows produces the same content-provenance ledger as Linux CI.
-  const content = normalizeNewlines(await readFile(path, "utf8"));
+  const content = canonicalReleaseInputText(await readFile(path, "utf8"));
   return {
     path: repositoryPath(path),
-    sha256: sha256(content),
+    sha256: releaseInputSha256(content),
   };
 }
 
@@ -288,6 +292,7 @@ const releaseInputPaths = new Set([
   legacyModuleContractAuditPath,
   legacyCandidatePreflightProfilesPath(siteRoot),
 ]);
+releaseInputPaths.add(releaseEvidencePolicy.workflowPath);
 const sourceArtifactChanges = await synchronizeSourceArtifactCopies(
   releaseInputPolicy.sourceArtifactCopies,
 );

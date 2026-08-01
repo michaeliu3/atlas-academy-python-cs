@@ -9,6 +9,7 @@ import {
   loadAdvancedModuleBridgeLedger,
   validateAdvancedModuleBridgeTopology,
 } from "./advanced-module-bridge.mjs";
+import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
 import {
   validateAdvancedAuthoringDeliveryMap,
   validateAdvancedModuleDeliveryMap,
@@ -279,6 +280,7 @@ async function requireTrackedRegularFile(siteRoot, repositoryPath, label, errors
   }
   const tracked = await execFileAsync("git", ["ls-files", "--error-unmatch", "--", repositoryPath], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   })
     .then(() => true)
     .catch(() => false);
@@ -981,6 +983,7 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
   } else {
     const exists = await execFileAsync("git", ["cat-file", "-e", `${sourceCommit}^{commit}`], {
       cwd: siteRoot,
+      env: isolatedGitEnvironment(),
     })
       .then(() => true)
       .catch(() => false);
@@ -990,7 +993,7 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
       const isAncestor = await execFileAsync(
         "git",
         ["merge-base", "--is-ancestor", sourceCommit, "HEAD"],
-        { cwd: siteRoot },
+        { cwd: siteRoot, env: isolatedGitEnvironment() },
       )
         .then(() => true)
         .catch(() => false);
@@ -999,6 +1002,7 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
       }
       const { stdout: head } = await execFileAsync("git", ["rev-parse", "HEAD"], {
         cwd: siteRoot,
+        env: isolatedGitEnvironment(),
       });
       if (sourceCommit === head.trim()) {
         errors.push(`${label}.sourceCommit must be a strict ancestor of the recorded provenance commit.`);
@@ -1021,7 +1025,7 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
       const existsAtCandidate = await execFileAsync(
         "git",
         ["cat-file", "-e", `${sourceCommit}:${input.path}`],
-        { cwd: siteRoot },
+        { cwd: siteRoot, env: isolatedGitEnvironment() },
       )
         .then(() => true)
         .catch(() => false);
@@ -1032,7 +1036,7 @@ async function resolveReleaseRecord(entry, siteRoot, resolvedInputs, errors) {
       const unchangedSinceCandidate = await execFileAsync(
         "git",
         ["diff", "--quiet", sourceCommit, "--", input.path],
-        { cwd: siteRoot },
+        { cwd: siteRoot, env: isolatedGitEnvironment() },
       )
         .then(() => true)
         .catch(() => false);

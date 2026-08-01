@@ -52,7 +52,11 @@ function commandFailure(command, error) {
   );
 }
 
-function isolatedGitEnvironment() {
+// Git child processes in release validation must describe the worktree selected
+// by their `cwd`, not a caller-selected alternate Git directory, worktree, or
+// index. Keep this boundary shared so transitive validators cannot quietly read
+// different repository facts from the snapshot that anchors their proof.
+export function isolatedGitEnvironment() {
   const environment = { ...process.env };
   for (const key of Object.keys(environment)) {
     if (key.toUpperCase().startsWith("GIT_")) {
@@ -127,7 +131,7 @@ async function checkedRepositoryRoot(siteRoot) {
   return realSiteRoot;
 }
 
-function parseIndexEntries(buffer) {
+function parseIndexEntries(buffer, { includeWorktreeStatus = false } = {}) {
   const entriesByPath = new Map();
   let start = 0;
   while (start < buffer.length) {
@@ -138,15 +142,33 @@ function parseIndexEntries(buffer) {
     const entry = buffer.subarray(start, end);
     start = end + 1;
     if (entry.length === 0) continue;
-    const separator = entry.indexOf(0x09);
-    const header = separator === -1 ? "" : entry.subarray(0, separator).toString("ascii");
+    let stageEntry = entry;
+    if (includeWorktreeStatus) {
+      if (entry.length < 3 || entry[1] !== 0x20) {
+        fail("GIT_COMMAND_FAILED", "Git-index snapshot received an invalid worktree-status stage listing.");
+      }
+      const worktreeStatus = String.fromCharCode(entry[0]);
+      // `git ls-files --stage -v` renders skip-worktree as `S` and every
+      // assume-unchanged entry with a lowercase status. Both flags suppress
+      // ordinary worktree-change detection, so they are incompatible with a
+      // full-worktree provenance claim.
+      if (worktreeStatus === "S" || /[a-z]/u.test(worktreeStatus)) {
+        fail(
+          "INDEX_WORKTREE_FLAGGED",
+          "Git-index snapshot refuses skip-worktree or assume-unchanged entries in a provenance workspace.",
+        );
+      }
+      stageEntry = entry.subarray(2);
+    }
+    const separator = stageEntry.indexOf(0x09);
+    const header = separator === -1 ? "" : stageEntry.subarray(0, separator).toString("ascii");
     const match = /^(\d{6}) ([0-9a-f]{40,64}) ([0-3])$/u.exec(header);
     if (!match || separator === -1) {
       fail("GIT_COMMAND_FAILED", "Git-index snapshot received an invalid stage listing.");
     }
     let repositoryPath;
     try {
-      repositoryPath = new TextDecoder("utf-8", { fatal: true }).decode(entry.subarray(separator + 1));
+      repositoryPath = new TextDecoder("utf-8", { fatal: true }).decode(stageEntry.subarray(separator + 1));
     } catch {
       // An unrelated non-UTF-8 filename must not make a valid text evidence
       // path unreadable. Such a filename can never be a supported input path.
@@ -228,9 +250,10 @@ async function currentIndexEntries(siteRoot, repositoryPaths) {
   return parseIndexEntries(
     await gitBuffer(
       siteRoot,
-      ["ls-files", "--stage", "-z", "--", ...repositoryPaths.map(literalPathspec)],
+      ["ls-files", "--stage", "-v", "-z", "--", ...repositoryPaths.map(literalPathspec)],
       { maxBuffer: 32 * 1024 * 1024 },
     ),
+    { includeWorktreeStatus: true },
   );
 }
 
@@ -298,11 +321,11 @@ export async function openGitIndexSnapshot(
     fail("INVALID_MAXIMUM_TEXT_BYTES", "Git-index snapshot maximumTextBytes must be a positive safe integer.");
   }
   const repositoryRoot = await checkedRepositoryRoot(siteRoot);
-  const indexEntries = parseIndexEntries(
-    await gitBuffer(repositoryRoot, ["ls-files", "--stage", "-z"], {
-      maxBuffer: 32 * 1024 * 1024,
-    }),
-  );
+  const capturedIndexStage = await gitBuffer(repositoryRoot, ["ls-files", "--stage", "-v", "-z"], {
+    maxBuffer: 32 * 1024 * 1024,
+  });
+  const indexEntries = parseIndexEntries(capturedIndexStage, { includeWorktreeStatus: true });
+  const capturedRepositoryPaths = Object.freeze([...indexEntries.keys()].sort());
 
   const readText = async (repositoryPath) => {
     const normalizedPath = normalizedRepositoryPath(repositoryPath);
@@ -339,6 +362,22 @@ export async function openGitIndexSnapshot(
     await assertWorktreeMatchesIndex(repositoryRoot, normalizedPaths);
     return Object.freeze([...normalizedPaths]);
   };
+  const assertAllClean = async () => {
+    const liveIndexStage = await gitBuffer(repositoryRoot, ["ls-files", "--stage", "-v", "-z"], {
+      maxBuffer: 32 * 1024 * 1024,
+    });
+    parseIndexEntries(liveIndexStage, { includeWorktreeStatus: true });
+    if (!liveIndexStage.equals(capturedIndexStage)) {
+      fail(
+        "INDEX_SNAPSHOT_STALE",
+        "Git index entries changed after this snapshot was captured.",
+      );
+    }
+    if (capturedRepositoryPaths.length > 0) {
+      await assertWorktreeMatchesIndex(repositoryRoot, capturedRepositoryPaths);
+    }
+    return capturedRepositoryPaths;
+  };
 
   const snapshot = Object.freeze({
     siteRoot: repositoryRoot,
@@ -346,6 +385,7 @@ export async function openGitIndexSnapshot(
     readText,
     readJson,
     assertClean,
+    assertAllClean,
   });
   snapshotMetadata.set(snapshot, Object.freeze({ siteRoot: repositoryRoot }));
   return snapshot;

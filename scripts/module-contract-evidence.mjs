@@ -4,6 +4,7 @@ import { dirname, relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { extractTableOfContents } from "../lib/heading-ids.js";
+import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
@@ -109,6 +110,7 @@ async function checkedInMarkdownHeadings(siteRoot, relativePath, label, headingC
 
   const tracked = await execFileAsync("git", ["ls-files", "--error-unmatch", "--", relativePath], {
     cwd: siteRoot,
+    env: isolatedGitEnvironment(),
   })
     .then(() => true)
     .catch(() => false);

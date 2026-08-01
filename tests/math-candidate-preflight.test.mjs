@@ -10,6 +10,7 @@ import {
   validateModuleEvidencePreflight,
 } from "../scripts/module-evidence-preflight.mjs";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
+import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 import { loadModuleContractRegistry } from "../scripts/module-contract-registry.mjs";
 import { loadModuleEvidenceRecord } from "../scripts/module-review-evidence.mjs";
 
@@ -86,7 +87,7 @@ test("candidate preflights refuse supplied canonical state detached from their G
   );
 });
 
-test("legacy candidate preflights refuse injected preflight and evidence artifacts by default", async () => {
+test("production candidate preflights refuse injected preflight and evidence artifacts", async () => {
   const [preflight, evidenceRecord] = await Promise.all([
     loadModuleEvidencePreflight(moduleEvidencePreflightRelativePath("m29"), { siteRoot }),
     loadModuleEvidenceRecord("content/course/contracts/evidence/m29.v1.json", { siteRoot }),
@@ -102,7 +103,57 @@ test("legacy candidate preflights refuse injected preflight and evidence artifac
   const forgedEvidence = structuredClone(evidenceRecord);
   forgedEvidence.purpose = "A plausible but caller-injected candidate evidence record.";
   await assert.rejects(
-    () => validateModuleEvidencePreflight(preflight, { siteRoot, evidenceRecord: forgedEvidence }),
+    () => validateModuleEvidencePreflight(preflight, {
+      siteRoot,
+      evidenceRecord: forgedEvidence,
+      // Unknown legacy flags remain inert. Production validation has no
+      // caller-controlled artifact-injection capability.
+      allowInjectedLegacyCandidateArtifactsForTest: true,
+      allowInjectedM31CandidateArtifactsForTest: true,
+    }),
     /M29 candidate supplied evidence record must match its captured Git-index evidence record/i,
   );
+});
+
+test("candidate preflights use captured preflight and evidence JSON after caller comparison", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const preflight = (
+    await snapshot.readJson(moduleEvidencePreflightRelativePath("m29"))
+  ).value;
+  const evidenceRecord = (
+    await snapshot.readJson("content/course/contracts/evidence/m29.v1.json")
+  ).value;
+  const canonicalBlockers = [...preflight.promotionBlockers];
+  const canonicalEvidencePurpose = evidenceRecord.purpose;
+  let blockerReads = 0;
+  let evidencePurposeReads = 0;
+  Object.defineProperty(preflight, "promotionBlockers", {
+    enumerable: true,
+    configurable: true,
+    get() {
+      blockerReads += 1;
+      return blockerReads <= 2 ? canonicalBlockers : [];
+    },
+  });
+  Object.defineProperty(evidenceRecord, "purpose", {
+    enumerable: true,
+    configurable: true,
+    get() {
+      evidencePurposeReads += 1;
+      return evidencePurposeReads === 1
+        ? canonicalEvidencePurpose
+        : "A detached but nonempty evidence purpose.";
+    },
+  });
+
+  const report = await validateModuleEvidencePreflight(preflight, {
+    siteRoot,
+    snapshot,
+    evidenceRecord,
+  });
+
+  assert.deepEqual(report.promotionBlockers, canonicalBlockers);
+  assert.ok(blockerReads <= 2, "caller preflight blockers are not reused after snapshot comparison");
+  assert.equal(evidencePurposeReads, 1);
+  assert.equal(report.evidenceReport.evidenceByCriterion.size, 18);
 });
