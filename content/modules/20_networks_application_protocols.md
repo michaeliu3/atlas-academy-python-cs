@@ -2662,3 +2662,32 @@ That discipline makes the material more demanding—not less—but it also makes
 it learnable. You no longer memorize “TCP is reliable” or “just retry.” You
 read a system layer by layer, identify the exact missing contract, and build
 only the evidence that earns the next claim.
+
+## Guided Codex handoff — M20
+
+### Study Partner — network rehearsal and TA handoff
+
+Start with: **“I am finishing M20. This local observation is [fact], the
+remote claim I am tempted to make is [claim], and my confidence is [level].”**
+Ask for one request/response timeline with client, resolver, transport,
+application ledger, and timeout boundary. Change exactly one premise—duplicate
+delivery, delayed response, retry after an unknown outcome, stale name, or
+partition—and ask what the client can still know. End with a TA handoff:
+current claim, smallest trace, uncertainty, and a proposed next test.
+
+### Teaching Assistant — supportive oral defense
+
+Ask the learner to distinguish address/name, connection, bytes, parsed
+message, local decision, and remote effect before discussing “success.” Use
+this hint ladder: local event → protocol/framing boundary → request identity →
+timeout-compatible histories → reconciliation evidence → human/authority
+decision. Ask for a counterexample to “TCP/retry makes it safe,” then transfer
+the model to an unfamiliar API or distributed job. Finish with a
+learner-controlled evidence summary, never a score.
+
+### Forward handoff — M21
+
+Carry one local-versus-remote claim boundary, one idempotency or reconciliation
+rule, and one timeline into **M21**. The next module makes partial failure,
+cancellation, ordering, and distributed evidence explicit in asynchronous
+systems.

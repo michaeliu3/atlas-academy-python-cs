@@ -2196,3 +2196,28 @@ These are source inputs and verification references, not a substitute for the co
 Advance when Michael can take an unfamiliar ingestion pipeline, recover its access order and demand path, trace one value and one failure, identify every retained buffer and ownership boundary, state a parameterized cost claim, direct a bounded change, and verify the patch with observations stronger than output equality.
 
 Do not advance based on generator syntax fluency alone.
+
+## Guided Codex handoff — M7
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M7. The consumer asks for values in this order;
+the producer retains this state; my predicted next trace is [trace].”** Ask
+for demand order before naming yield, deque, or an API. Use this hint ladder:
+client question → LIFO/FIFO/demand rule → state/container trace →
+suspension/ownership boundary → failure or exhaustion case → cost claim.
+Change one premise (multiple consumers, cancellation, a bounded buffer, or a
+repeated iterator) and ask which contract is no longer valid.
+
+### Study Partner — demand-path rehearsal
+
+Ask the learner to draw a three-step timeline of next() calls, values, and
+retained state. Replace the queue with a stack or eager list, then ask which
+observable order or memory property changes. Preserve one uncertainty for the
+TA rather than guessing about hidden runtime behavior.
+
+### Forward handoff — M8
+
+Carry the idea that a data structure records a **relationship and access
+policy**, not merely values, into **M8**. Hashing adds a new question: how can
+lookup be fast while equality and collision behavior still preserve meaning?

@@ -2310,3 +2310,33 @@ Do not assign all linked pages as undirected homework. Every reading has a quest
 ## Instructor decision rule
 
 Do not advance because Michael can define “ADT,” “Protocol,” and “representation invariant.” Advance when he can recover the abstraction from unfamiliar code, identify what clients may observe, trace a concrete rep through AF, expose a violated invariant with evidence, direct a bounded implementation, and reject a patch that satisfies method signatures but not behavioral laws.
+
+## Guided Codex handoff — M3
+
+The existing TA/consolidation session is an **optional repair and synthesis
+session**, not a seventh required core session. The six-session spine remains
+the required progression.
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M3. This client-visible contract is [claim],
+this representation invariant protects it, and my confidence is [level].”** Ask
+the learner to trace one concrete representation through the abstraction
+function before discussing type annotations. Use this hint ladder: client
+observation → abstraction function → representation invariant → alias/owner →
+smallest failing test. Then change one implementation detail while preserving
+the contract and ask which test should still pass. End with a compact evidence
+summary, not a score.
+
+### Study Partner — abstraction rehearsal
+
+Show a short interface and ask: “What may a client assume, and what must stay
+hidden?” Then offer one tempting implementation leak such as list order, cached
+state, or a private field. Ask for the smallest counterexample that would reveal
+why treating it as public breaks representation independence.
+
+### Forward handoff — M4
+
+Carry an interface claim, one RI/AF trace, and one counterexample into **M4**.
+The next module supplies the logical language needed to state such contracts,
+quantifiers, and proof obligations precisely.

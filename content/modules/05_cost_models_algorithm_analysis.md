@@ -615,11 +615,16 @@ B. `Θ(n)`
 C. `Θ(m + n)`  
 D. `Θ(mn)`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: D.** Each of `m` iterations may perform work proportional to `n`; the constant two does not change the growth class.
 
 - A treats membership as constant.
 - B ignores the edge loop.
 - C would fit separate full passes, not a scan nested through a costly operation.
+
+</details>
 
 ### Question 2
 
@@ -630,11 +635,16 @@ B. “The function is O(n).”
 C. “For `n` edges, it runs in worst-case `Θ(n)` dictionary operations under expected constant-time lookup and uses `Θ(1)` auxiliary space.”  
 D. “It took 2 ms on my laptop.”
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** It names input, case, tight bound, primitive-operation assumption, and space.
 
 - A has no model.
 - B leaves several dimensions unstated.
 - D is one measurement, not a growth claim.
+
+</details>
 
 ### Question 3
 
@@ -645,11 +655,16 @@ B. `f ∈ O(n²)`, but `Θ(n)` is tighter
 C. `f ∈ Θ(n²)`  
 D. Big O cannot compare these functions
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** `n²` is a valid asymptotic upper bound on `n`, but not a tight bound.
 
 - A denies a valid upper bound.
 - C incorrectly claims matching lower growth.
 - D is false.
+
+</details>
 
 ### Question 4
 
@@ -660,11 +675,16 @@ B. Amortized analysis measures only the fastest operation.
 C. Expected analysis is always worst-case.  
 D. They are two names for the same idea.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: A.**
 
 - B confuses amortized with best case.
 - C is contradictory.
 - D erases the source of each guarantee.
+
+</details>
 
 ### Question 5
 
@@ -675,11 +695,16 @@ B. Append has `Θ(1)` amortized time over a sequence.
 C. The expensive append did no work.  
 D. The array uses `Θ(1)` total memory for any size.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Occasional resizing costs can be spread across a sequence whose total work is linear.
 
 - A confuses per-operation worst case with amortized cost.
 - C denies the observed copy.
 - D ignores stored elements.
+
+</details>
 
 ### Question 6
 
@@ -690,11 +715,16 @@ B. `Θ(n)`
 C. `Θ(n log n)`  
 D. `Θ(2ⁿ)`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** There are `Θ(log n)` levels and `Θ(n)` total nonrecursive work per level.
 
 - A counts levels but not work per level.
 - B counts one level only.
 - D confuses two half-size calls with two calls on nearly full-size inputs.
+
+</details>
 
 ### Question 7
 
@@ -705,11 +735,16 @@ B. The observation is consistent with quadratic growth, but other models and con
 C. The implementation must contain exactly two nested loops.  
 D. Hardware no longer affects the result.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Scaling ratios are empirical evidence, not a proof or source-code shape guarantee.
 
 - A overstates evidence.
 - C infers syntax from behavior.
 - D ignores constants and system effects.
+
+</details>
 
 ### Question 8
 
@@ -720,11 +755,16 @@ B. Time `Θ(log n)`, stack `Θ(n)`
 C. Time `Θ(|V|+|E|)`, stack `Θ(n)` in the chain case  
 D. Time `Θ(n²)`, stack `Θ(1)`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** Total visits are linear in represented graph size; maximum recursion depth is linear for a chain.
 
 - A ignores traversal.
 - B understates time.
 - D invents repeated work and ignores recursive frames.
+
+</details>
 
 ### Diagnostic interpretation
 
@@ -858,3 +898,34 @@ Keep one sentence:
 ## Instructor decision rule
 
 Advance when Michael can derive a bound from unfamiliar code, state every important assumption, separate analytic and empirical evidence, and reject a generated performance claim that the data or model does not support. Memorized complexity tables alone are not mastery.
+
+## Guided Codex handoff — M5
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M5. For this code, the input model is [model],
+the costly primitive is [operation], my predicted bound is [claim], and my
+confidence is [level].”** Ask for a trace before accepting a complexity label.
+Use this hint ladder: input size(s) → one loop/call cost → hidden operation →
+sum/recurrence → analytic versus measured evidence. Change one representation
+or workload distribution and ask which bound or constant-factor claim changes.
+End by asking what a timing experiment can establish and what it cannot.
+
+### Study Partner — cost-model rehearsal
+
+Show one short loop with a hidden membership, allocation, or recursive cost.
+Ask the learner to name the unit of work, make a prediction, and choose the
+smallest scaling experiment that could falsify it. Keep the result as a
+question for the TA if the analytic and empirical stories disagree.
+
+### Retrieval, ready-when, and forward handoff
+
+At **+1, +7, and +21 days**, derive one bound from a fresh snippet and state
+one assumption that could invalidate it. M5 is ready when the learner can give
+an input model, a tight-enough argument, and an evidence boundary—not just a
+Big-O label. Carry the representation/cost trade-off into **M6**.
+
+**Source and reuse note:** Atlas's diagnostic, traces, and dossier prompts are
+original course material; linked university and documentation sources are used
+as stable reading links and paraphrased conceptual references, not copied
+assignments or figures.

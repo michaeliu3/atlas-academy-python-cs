@@ -1947,3 +1947,29 @@ The module has one connected argument:
 The durable mental model is:
 
 > Hashing chooses where to look; equality decides what was found; an index stores a relation early so later queries can inspect fewer candidates.
+
+## Guided Codex handoff — M8
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M8. This key/equality contract is [claim], this
+collision case is [case], and my confidence is [level].”** Ask the learner to
+predict a lookup trace before discussing expected-time labels. Use this hint
+ladder: key policy → hash/equality distinction → bucket/probe trace → load
+factor → expected-versus-worst-case model → stale or mutable-key failure.
+Change one premise (equal keys with different hashes, a mutated key, or an
+adversarial distribution) and ask which invariant or test exposes it.
+
+### Study Partner — lookup rehearsal
+
+Offer two equal-looking records and ask which fields are allowed to determine
+identity. Then trace a collision and ask what equality must still decide. End
+with a one-sentence retrieval prompt: “Fast lookup is evidence about a stated
+distribution, not a promise that every key is safe.”
+
+### Forward handoff — M9
+
+Carry the separation of abstract identity, representation, invariant, and cost
+into **M9**. Ordered structures answer a different client question: minimum,
+predecessor, prefix, and sorted traversal require order—not merely fast
+equality lookup.

@@ -127,6 +127,9 @@ problem is no longer “how do I encode a value?” It is:
 That pressure derives the relational and transaction models.
 
 ```mermaid
+    %% atlas-diagram-id: m16-relational-pressure
+    %% atlas-diagram-title: From validated events to transactional recovery
+    %% atlas-diagram-alt: Validated M15 events create identity and relational constraints, queries, physical plans, transactions, isolation schedules, and recovery assumptions.
 flowchart LR
     B["Validated M15 bundle<br/>ordered StudyEvent values"] --> I["Identity pressure<br/>which event, run, and concept?"]
     I --> R["Relations and keys<br/>facts separated by meaning"]
@@ -137,6 +140,10 @@ flowchart LR
     T --> S["Isolation schedule<br/>competing connections"]
     S --> W["Journal / WAL / recovery<br/>named engine assumptions"]
 ```
+
+**Text equivalent.** Validated M15 events create identity and relational
+constraints, queries, physical plans, transactions, isolation schedules, and
+recovery assumptions.
 
 The arrows are obligations. An index cannot repair a wrong key. A transaction
 cannot decide an unowned domain policy. WAL cannot make an invalid committed
@@ -168,6 +175,9 @@ that existed earlier:
 The dependency direction is:
 
 ```mermaid
+    %% atlas-diagram-id: m16-repository-dependency-direction
+    %% atlas-diagram-title: Import repository dependency direction
+    %% atlas-diagram-alt: The import use case depends on an application-owned repository protocol, while the SQLite adapter and composition root provide the concrete implementation without making the planner depend on storage.
 flowchart LR
     BUNDLE["M15 validated values"] --> USE["ImportValidatedBundle"]
     USE --> PORT["EventRepository<br/>application-owned Protocol"]
@@ -177,6 +187,10 @@ flowchart LR
     ROOT["composition root"] -. "constructs" .-> USE
     ROOT -. "constructs" .-> SQLITE
 ```
+
+**Text equivalent.** The import use case depends on an application-owned
+repository protocol. The SQLite adapter and composition root provide its
+concrete implementation, while the planner does not depend on storage.
 
 Data flows from the bundle through the use case into the adapter. Source-code
 dependencies point toward the application-owned contract. The dashed
@@ -545,6 +559,9 @@ Prerequisites(Concept, Prerequisite)
 The resulting fact map is:
 
 ```mermaid
+    %% atlas-diagram-id: m16-atlas-relational-fact-map
+    %% atlas-diagram-title: Atlas relational fact map
+    %% atlas-diagram-alt: Import runs admit events, concepts classify events and relate prerequisites, and keys connect each event to its run and concept without duplicating independent facts.
 erDiagram
     IMPORT_RUNS ||--o{ EVENTS : admits
     CONCEPTS ||--o{ EVENTS : classifies
@@ -574,6 +591,10 @@ erDiagram
         text prerequisite_id PK,FK
     }
 ```
+
+**Text equivalent.** Import runs admit events. Concepts classify events and
+relate prerequisites. Keys connect each event to its run and concept without
+duplicating independent facts.
 
 The two relationships from `CONCEPTS` to `PREREQUISITES` have different roles:
 one edge leaves the learned concept and the other points to the required
@@ -968,6 +989,9 @@ SQL lets the caller describe a desired result without fixing one procedure.
 The engine still performs physical work:
 
 ```mermaid
+    %% atlas-diagram-id: m16-sql-planning-pipeline
+    %% atlas-diagram-title: SQL planning and execution pipeline
+    %% atlas-diagram-alt: SQL with bound values is parsed into a logical tree, rewritten, compared as physical alternatives using statistics and access paths, then executed against pages and storage to return rows.
 flowchart LR
     SQL["SQL text + bound values"] --> PARSE["parse / resolve names"]
     PARSE --> LOGICAL["logical operator tree"]
@@ -980,6 +1004,10 @@ flowchart LR
     PAGES["pages / cache / storage"] --> EXEC
     EXEC --> ROWS["result rows"]
 ```
+
+**Text equivalent.** SQL with bound values is parsed into a logical tree,
+rewritten, compared as physical alternatives using statistics and access paths,
+then executed against pages and storage to return rows.
 
 Logical equivalence constrains which results are legal. It does not select one
 physical plan. The optimizer chooses under incomplete estimates, bounded search,
@@ -1043,6 +1071,9 @@ plus table lookups when the index does not contain all required output.
 Every index is derived:
 
 ```mermaid
+    %% atlas-diagram-id: m16-index-derivation-and-read-validation
+    %% atlas-diagram-title: Index derivation and read validation
+    %% atlas-diagram-alt: Authoritative table rows and every write update derived ordered index entries; an index yields candidate locations or covered values, then remaining predicates and visibility are checked.
 flowchart TD
     TABLE["Authoritative table rows"] --> IDX["Ordered index entries"]
     WRITE["INSERT / UPDATE / DELETE"] --> TABLE
@@ -1050,6 +1081,10 @@ flowchart TD
     IDX --> READ["candidate row locations / covered values"]
     READ --> CHECK["remaining predicates + visibility checks"]
 ```
+
+**Text equivalent.** Authoritative table rows and every write update derived
+ordered index entries. An index yields candidate locations or covered values,
+then remaining predicates and visibility are checked.
 
 Costs:
 
@@ -1260,6 +1295,9 @@ If each statement commits separately, every statement can be individually valid
 while the application operation is wrong.
 
 ```mermaid
+    %% atlas-diagram-id: m16-transaction-outcome-states
+    %% atlas-diagram-title: Transaction outcome states
+    %% atlas-diagram-alt: A transaction starts, performs reads and writes, then commits, rolls back, or fails; a failure requires reconciliation because its final effect may need inspection.
 stateDiagram-v2
     [*] --> NoTransaction
     NoTransaction --> Active: BEGIN / implicit start
@@ -1271,6 +1309,10 @@ stateDiagram-v2
     RolledBack --> [*]
     Failed --> Reconcile: outcome may require inspection
 ```
+
+**Text equivalent.** A transaction starts, performs reads and writes, then
+commits, rolls back, or fails. A failure requires reconciliation because its
+final effect may need inspection.
 
 Do not label an operation committed before commit succeeds. Do not label every
 commit exception “rolled back” unless the named wrapper/engine state supports
@@ -1329,6 +1371,9 @@ Which line opens a transaction? In this example, none necessarily does.
 **[ATLAS POLICY]** M15 validation finishes before a short write transaction.
 
 ```mermaid
+    %% atlas-diagram-id: m16-import-transaction-visibility
+    %% atlas-diagram-title: Import transaction visibility boundary
+    %% atlas-diagram-alt: A validated M15 bundle is checked and applied through a repository and SQLite adapter; a second connection sees old state until commit, while any failed check rolls back and returns a classified failure.
 sequenceDiagram
     participant B as "M15 bundle boundary"
     participant U as "ImportValidatedBundle"
@@ -1354,6 +1399,10 @@ sequenceDiagram
         S-->>U: "classified failure"
     end
 ```
+
+**Text equivalent.** A validated M15 bundle is checked and applied through a
+repository and SQLite adapter. A second connection sees old state until commit;
+any failed check rolls back and returns a classified failure.
 
 Why validate first?
 
@@ -1580,6 +1629,9 @@ This principle does not imply identical file formats, concurrency models,
 checkpoint protocols, or operations.
 
 ```mermaid
+    %% atlas-diagram-id: m16-journal-recovery-path
+    %% atlas-diagram-title: Journal and recovery path
+    %% atlas-diagram-alt: Transaction changes create journal or WAL records, cross a named durability boundary, propagate database pages, and combine with restart recovery to produce a consistent state under stated assumptions.
 flowchart LR
     TX["transaction changes"] --> LOG["journal / WAL records"]
     LOG --> DURABLE["named durable boundary"]
@@ -1588,6 +1640,10 @@ flowchart LR
     DATA --> RECOVER
     RECOVER --> STATE["consistent recovered state<br/>under assumptions"]
 ```
+
+**Text equivalent.** Transaction changes create journal or WAL records, cross a
+named durability boundary, propagate database pages, and combine with restart
+recovery to produce a consistent state under stated assumptions.
 
 ### 6.2 SQLite rollback journal and WAL are different modes
 
@@ -3923,6 +3979,9 @@ evidence/module16/
 One-page map:
 
 ```mermaid
+    %% atlas-diagram-id: m16-relational-one-page-map
+    %% atlas-diagram-title: Relational systems one-page map
+    %% atlas-diagram-alt: Facts and ownership lead through dependencies, normalization, constraints, query contracts, physical plans, transactions, isolation and recovery to an independently tested backup and restore path.
 flowchart TD
     FACT["facts + ownership"] --> FD["FDs + keys"]
     FD --> NF["lossless / preserving normalization"]
@@ -3934,6 +3993,10 @@ flowchart TD
     ISO --> REC["journal / recovery"]
     REC --> RESTORE["independent backup / restore"]
 ```
+
+**Text equivalent.** Facts and ownership lead through dependencies,
+normalization, constraints, query contracts, physical plans, transactions,
+isolation, and recovery to an independently tested backup-and-restore path.
 
 Reflection:
 
@@ -4186,3 +4249,29 @@ Without notes, explain:
 > reconciliation? Finally, what does the executed runtime/configuration prove,
 > and what remains for the machine, OS, network, security, and distributed
 > arcs?
+
+## Guided Codex handoff — M16
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M16. This relation/key or transaction invariant
+is [claim], this concurrent history is [trace], and my confidence is [level].”**
+Ask the learner to draw rows, keys, and a two-transaction timeline before
+naming an isolation level. Use this hint ladder: functional dependency →
+schema/key → query or constraint → transaction boundary → interleaving →
+observable outcome → retry/reconciliation rule. Change one premise (duplicate
+request ID, rollback, lost update, stale read, or backup restore) and ask which
+invariant/test must change.
+
+### Study Partner — transaction rehearsal
+
+Ask for the smallest history that distinguishes two isolation claims. Change
+only one read/write/commit event, then ask which observer can now see which
+state. Keep SQL syntax separate from the data contract and bring an unresolved
+history to the TA.
+
+### Forward handoff — M17
+
+Carry one representation invariant, one concurrency timeline, and one
+evidence boundary into **M17**. The next module explains the machine and
+execution layers beneath a high-level cost or concurrency story.

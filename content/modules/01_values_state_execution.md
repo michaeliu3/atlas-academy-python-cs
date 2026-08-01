@@ -712,3 +712,35 @@ Use the sources by question rather than as a reading pile: begin with this workb
 ## Instructor decision rule
 
 Do not advance because the vocabulary sounds familiar. Advance when Michael can trace unfamiliar aliasing, formulate a contract, expose a shared-state bug with a test, and explain how the same reasoning scales to a larger system.
+
+## Guided Codex handoff — M1
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M1. My model is that names refer to objects,
+mutation changes an object rather than a name, and a contract must say who may
+change shared state. My confidence is [low/medium/high].”** Ask the learner to
+draw one object graph and predict the result of one aliasing trace before
+revealing it. If the trace breaks, use this hint ladder: name → binding arrow →
+object identity/value → mutation versus rebinding → smallest regression test.
+Then change one premise (immutable value, copied container, or second writer)
+and ask what contract must change. End with a learner-controlled summary:
+model demonstrated, misconception repaired, one retrieval prompt, and one
+remaining uncertainty. This is a conversation, never a pass/fail exam.
+
+### Study Partner — five-minute rehearsal
+
+Ask for a two-column whiteboard trace: **names/bindings** on one side and
+**objects/values** on the other. Change exactly one operation from rebinding to
+mutation (or vice versa) and ask which observer can now see a change. Finish
+with: “What assertion would catch the shared-state bug before a user does?”
+
+### Retrieval, ready-when, and forward handoff
+
+Retrieve the object-graph model at **+1 day, +7 days, and +21 days**. M1 is
+ready to carry forward when the learner can (1) trace an unfamiliar aliasing
+snippet without running it, (2) name one ownership or mutation contract, and
+(3) design one test that distinguishes rebinding from mutation. Carry that
+trace and contract into **M2**: recursion is also a changing execution state,
+but its state lives in frames and call relationships rather than one shared
+container.

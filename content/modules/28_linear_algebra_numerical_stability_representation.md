@@ -1342,3 +1342,11 @@ Before calling an answer correct, ask: “Is this a theorem with hypotheses, a
 derivation under a model, a numerical result with an error boundary, a library
 contract, or an observation? What would the smallest counterexample look like
 if we silently changed the representation?”
+
+## Forward handoff — M28 to M29
+
+Carry one linear map/representation argument, one conditioning or numerical
+boundary, and one code-reading trace into **M29**. Continuous change makes the
+same discipline explicit through limits, derivatives, approximation error, and
+coordinate changes. Ask the Study Partner to change a basis, scale, or tolerance;
+ask the TA to separate the theorem, numerical observation, and library claim.

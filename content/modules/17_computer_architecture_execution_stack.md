@@ -183,6 +183,9 @@ result:            3
 Those questions are connected by ownership, not by vocabulary.
 
 ```mermaid
+    %% atlas-diagram-id: m17-execution-stack-roadmap
+    %% atlas-diagram-title: From durable data to a bounded machine explanation
+    %% atlas-diagram-alt: A validated M16 export is represented, transformed by logic and clocked state, implemented by an ISA and processor, shaped by memory hierarchy, and observed before Module 18 takes ownership of operating-system boundaries.
 %% Module dependency path from durable Atlas data to a bounded machine explanation
 flowchart LR
     M16["M16 durable rows<br/>validated synthetic export"] --> PACK["Experiment representation<br/>priority value → array('I'), 4 B/item"]
@@ -196,6 +199,10 @@ flowchart LR
     OBS --> CLAIM["Bounded explanation<br/>alternatives + uncertainty"]
     CLAIM --> M18["M18 handoff<br/>process + VM + syscall + filesystem"]
 ```
+
+**Text equivalent.** A validated M16 export is represented, transformed by
+logic and clocked state, implemented by an ISA and processor, shaped by memory
+hierarchy, and observed before Module 18 takes ownership of OS boundaries.
 
 The arrows are prerequisites. Timing cannot repair a wrong semantic oracle.
 Bytecode cannot establish native events. A cache simulator cannot measure the
@@ -638,6 +645,9 @@ The register's output between modeled clock transitions reflects stored state,
 not merely the current data input.
 
 ```mermaid
+    %% atlas-diagram-id: m17-clocked-state-construction
+    %% atlas-diagram-title: From bits and gates to clocked state
+    %% atlas-diagram-alt: Named bits feed Boolean gates and combinational next-state logic; clocked registers retain state and expose the program counter, register file, and remembered control to later machine operations.
 %% Construction from named bits and gates to clocked machine state
 flowchart LR
     BITS["bits<br/>named width + meaning"] --> GATES["gates<br/>Boolean functions"]
@@ -652,6 +662,10 @@ flowchart LR
     RF --> ALU["datapath operands"]
     CTRL --> ALU
 ```
+
+**Text equivalent.** Named bits feed Boolean gates and combinational
+next-state logic. Clocked registers retain state and expose the program
+counter, register file, and remembered control to later machine operations.
 
 This is a dependency map, not a transistor schematic. The clocked model
 abstracts electrical setup/hold time, clock distribution, metastability, and
@@ -686,6 +700,9 @@ A datapath carries and transforms values. Control selects what the datapath
 does and which state elements update.
 
 ```mermaid
+    %% atlas-diagram-id: m17-datapath-control-loop
+    %% atlas-diagram-title: Datapath and control feedback loop
+    %% atlas-diagram-alt: The PC fetches an instruction, decoding selects operands and destinations, the ALU and data-memory path produce a write-back value, and control chooses the next PC and updates architectural state.
 %% Teaching datapath showing control, value flow, and state updates
 flowchart TB
     PC["PC register"] --> IM["instruction memory<br/>teaching model"]
@@ -701,6 +718,10 @@ flowchart TB
     ALU --> PCN
     PCN --> PC
 ```
+
+**Text equivalent.** The PC fetches an instruction. Decoding selects operands
+and destinations; the ALU and data-memory path produce a write-back value; and
+control chooses the next PC and updates architectural state.
 
 For each arrow, label:
 
@@ -854,6 +875,9 @@ store instruction and target address.
 ### 4.5 Instruction state inspector
 
 ```mermaid
+    %% atlas-diagram-id: m17-instruction-state-cycle
+    %% atlas-diagram-title: Instruction state transition cycle
+    %% atlas-diagram-alt: Each instruction is fetched, decoded, and evaluated against current state, then follows a load, store, arithmetic, branch, or jump path before choosing the next architectural PC and fetching again.
 %% Instruction-effects inspector for PC, register, and memory transitions
 stateDiagram-v2
     [*] --> Fetch
@@ -869,6 +893,10 @@ stateDiagram-v2
     WriteRegister --> ChoosePC
     ChoosePC --> Fetch: next architectural state
 ```
+
+**Text equivalent.** Each instruction is fetched, decoded, and evaluated
+against current state. It then follows a load, store, arithmetic, branch, or
+jump path before choosing the next PC and fetching again.
 
 This is an **instruction effects inspector**, not a claim that a physical
 processor walks these states one at a time. The next section turns the same
@@ -973,6 +1001,9 @@ clock rate, or in-order completion.
 ### 5.2 Combinational work and registers alternate
 
 ```mermaid
+    %% atlas-diagram-id: m17-five-stage-pipeline
+    %% atlas-diagram-title: Five-stage teaching pipeline
+    %% atlas-diagram-alt: Instructions pass through fetch, decode, execute, memory, and write-back stages separated by pipeline registers; later instructions receive register operands and execute-stage control can redirect the PC.
 %% Five-stage teaching pipeline with state carried between combinational stages
 flowchart LR
     PC["PC state"] --> IF["IF<br/>select + fetch"]
@@ -988,6 +1019,10 @@ flowchart LR
     RF -. "operands for later instructions" .-> ID
     EX -. "next-PC decision" .-> PC
 ```
+
+**Text equivalent.** Instructions pass through fetch, decode, execute, memory,
+and write-back stages separated by pipeline registers. Later instructions use
+register operands, and execute-stage control can redirect the PC.
 
 The pipeline registers retain intermediate state between clock edges. Control
 metadata must travel with values: destination register, write enable, memory
@@ -1149,6 +1184,9 @@ uniform cost. Implementations face a trade-off among access time, capacity,
 energy, physical area, and price. They compose levels:
 
 ```mermaid
+    %% atlas-diagram-id: m17-memory-hierarchy
+    %% atlas-diagram-title: Qualitative memory hierarchy
+    %% atlas-diagram-alt: Registers, processor caches, main memory, and persistent storage form levels with different capacities, access costs, and transfer paths; the exact cache structure is implementation-specific.
 %% Qualitative memory hierarchy from registers to persistent storage
 flowchart TB
     REG["registers<br/>explicit ISA operands<br/>very small / closest"]
@@ -1163,6 +1201,10 @@ flowchart TB
     LLC <--> DRAM
     DRAM <--> STORE
 ```
+
+**Text equivalent.** Registers, processor caches, main memory, and persistent
+storage form levels with different capacities, access costs, and transfer
+paths. The exact cache structure is implementation-specific.
 
 This ordering is qualitative. Cache count, ownership, sizes, associativity,
 latencies, coherence, and shared/private organization vary by machine.
@@ -1195,6 +1237,9 @@ tag bits    = 16 - 6 - 3 = 7
 ```
 
 ```mermaid
+    %% atlas-diagram-id: m17-toy-cache-decomposition
+    %% atlas-diagram-title: Toy-cache address decomposition
+    %% atlas-diagram-alt: An item index becomes a byte address split into tag, slot index, and byte offset. The selected slot either matches and supplies bytes or misses, fetches a modeled line, replaces the slot, and then supplies bytes.
 %% Direct-mapped toy-cache address decomposition and hit-or-fill decision
 flowchart LR
     ITEM["item index"] --> ADDR["byte address<br/>index × 4"]
@@ -1208,6 +1253,10 @@ flowchart LR
     CMP -->|miss| FILL["fetch modeled 64-byte line<br/>replace this slot"]
     FILL --> BYTE
 ```
+
+**Text equivalent.** An item index becomes a byte address split into tag, slot
+index, and byte offset. The selected slot either matches and supplies bytes or
+misses, fetches a modeled line, replaces the slot, and then supplies bytes.
 
 In a direct-mapped cache, each block has one possible line. Associative caches
 allow several candidate lines in a set and need a replacement decision. This
@@ -1412,6 +1461,9 @@ order container. A rigorous explanation must name those alternatives.
 ### 7.1 The connected execution stack
 
 ```mermaid
+    %% atlas-diagram-id: m17-python-to-device-stack
+    %% atlas-diagram-title: Python meaning through machine and device boundaries
+    %% atlas-diagram-alt: A Python result contract passes through source, CPython code and frame state, native runtime software, host ISA and microarchitecture, memory, and separately through operating-system and device boundaries for I/O.
 %% Cross-layer path from Python meaning through runtime and machine to I/O
 flowchart TB
     SEM["Python language meaning<br/>count_due result contract"]
@@ -1435,6 +1487,10 @@ flowchart TB
     CEVAL -. "library or I/O request" .-> OS
     OS <--> DEV
 ```
+
+**Text equivalent.** A Python result contract passes through source, CPython
+code and frame state, native runtime software, host ISA and microarchitecture,
+memory, and separately through OS and device boundaries for I/O.
 
 Arrow meanings differ:
 
@@ -1707,6 +1763,9 @@ After timing:
 ### 8.3 Observation points around the incident
 
 ```mermaid
+    %% atlas-diagram-id: m17-comparison-observation-points
+    %% atlas-diagram-title: Observation points for a bounded comparison
+    %% atlas-diagram-alt: The same packed data takes sequential and deterministic-permutation routes through one kernel; matching result oracles, version-scoped disassembly, toy-cache traces, and counterbalanced timing vectors feed one bounded comparison.
 %% Observation points for the sequential-versus-permuted Atlas incident
 flowchart LR
     ROWS["synthetic M16 rows"] -->|outside timing| CODES["packed codes<br/>digest + encoding"]
@@ -1727,6 +1786,11 @@ flowchart LR
     T1 -. "hypothesis support, not identity" .-> C
     T2 -. "hypothesis support, not identity" .-> C
 ```
+
+**Text equivalent.** The same packed data takes sequential and deterministic
+permutation routes through one kernel. Matching result oracles, disassembly,
+toy-cache traces, and counterbalanced timing vectors feed one bounded
+comparison.
 
 An observation belongs at one point. Moving it upward or downward requires a
 new argument and usually new evidence.
@@ -1786,6 +1850,9 @@ does not imply semantic uselessness. Split the decisions:
 ### 8.5 Performance-claim causal map
 
 ```mermaid
+    %% atlas-diagram-id: m17-performance-causal-alternatives
+    %% atlas-diagram-title: Alternative explanations for performance observations
+    %% atlas-diagram-alt: An elapsed-time vector has many compatible causes, including native work, pipeline and cache effects, power, OS interference, and measurement choices; separate evidence narrows only a bounded causal statement.
 %% Alternative causes compatible with an observed elapsed-time vector
 flowchart TB
     TIME["observed elapsed vector"] --> ALT["compatible explanations"]
@@ -1807,6 +1874,10 @@ flowchart TB
     PIN --> BOUND
     PROV --> BOUND
 ```
+
+**Text equivalent.** An elapsed-time vector has many compatible causes,
+including native work, pipeline and cache effects, power, OS interference, and
+measurement choices. Separate evidence supports only a bounded causal claim.
 
 Several causes can act together. The goal is not always to identify one final
 cause. A professionally useful outcome can be:
@@ -2333,6 +2404,9 @@ medians only. It emits no minimum ratio, winner scalar, or hardware cause.
 The expanded candidate separates responsibilities:
 
 ```mermaid
+    %% atlas-diagram-id: m17-machine-evidence-packet
+    %% atlas-diagram-title: Machine evidence packet inputs
+    %% atlas-diagram-alt: Encoding probes, fixed fixtures, order choices, a toy cache, finite ISA, disassembly, timing, provenance, and claim boundaries contribute distinct evidence to one JSON packet.
 %% Responsibilities combined into the Module 17 JSON evidence packet
 flowchart TD
     ENC["signed16 struct probe<br/>width + signedness + byte order"] --> REPORT["JSON evidence packet"]
@@ -2350,6 +2424,10 @@ flowchart TD
     TIME --> REPORT
     BOUND["direct / supported / unmeasured / never"] --> REPORT
 ```
+
+**Text equivalent.** Encoding probes, fixed fixtures, order choices, a toy
+cache, finite ISA, disassembly, timing, provenance, and claim boundaries
+contribute distinct evidence to one JSON packet.
 
 Review order:
 
@@ -3737,3 +3815,29 @@ Finish:
 > experiment. I also know which hardware, OS, concurrency, and CPython
 > mechanisms I have not measured. The explanation is strong because every
 > boundary and uncertainty is visible.
+
+## Guided Codex handoff — M17
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M17. This source operation becomes these
+execution-layer events, this cost claim assumes [model], and my confidence is
+[level].”** Ask for a source → bytecode → machine/toy-model trace before
+discussing speed. Use this hint ladder: semantic operation → representation →
+instruction/memory event → locality or pipeline assumption → bounded
+measurement → non-claim. Change one premise (cache layout, input size,
+interpreter version, or concurrent workload) and ask which observation cannot
+be transferred.
+
+### Study Partner — execution-stack rehearsal
+
+Ask the learner to label one event as Python semantics, CPython observation,
+toy-ISA model, hardware mechanism, or measured result. Then change one label
+and ask what claim becomes invalid. Finish with one readable whiteboard trace
+and an uncertainty for the TA.
+
+### Forward handoff — M18
+
+Carry the separation of semantic contract, execution model, and measurement
+evidence into **M18**. The next module assigns ownership of resources,
+scheduling, files, authority, and durability to the operating system boundary.

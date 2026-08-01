@@ -1315,3 +1315,13 @@ for it. If they have a p-value, posterior, bootstrap interval, or simulation
 but no assumptions, request the procedure contract and a failure case. If they
 propose an action, request effect size, uncertainty, benefit/harm, affected
 people, authority, alternatives, and reversibility.
+
+## Forward handoff — M30 to M31
+
+Carry an estimand, data-generating/sampling assumption, uncertainty statement,
+and one rejected overclaim into **M31 Optimization & Information**. M31 is
+currently authoring-only in the portal; use its private study pack only through
+the owner’s guided route, never as an automatic reader unlock or completion
+claim. The Study Partner should stress one probability-model assumption before
+the TA asks the learner to connect objective, constraint, optimization trace,
+and information trade-off.

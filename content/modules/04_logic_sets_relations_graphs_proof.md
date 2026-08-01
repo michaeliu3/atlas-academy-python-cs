@@ -589,11 +589,16 @@ B. At least one accepted route is missing at least one prerequisite.
 C. Every rejected route contains a prerequisite.  
 D. At least one prerequisite occurs in every route.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Negating a universal produces an existential witness and negates the inner claim.
 
 - A over-negates the statement.
 - C switches from accepted to rejected routes.
 - D changes both the quantifier order and the predicate.
+
+</details>
 
 ### Question 2
 
@@ -604,11 +609,16 @@ B. `¬P → ¬Q`
 C. `¬Q → ¬P`  
 D. `P ↔ Q`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** The contrapositive is equivalent to the original implication.
 
 - A is the converse.
 - B is the inverse.
 - D adds the converse and is stronger.
+
+</details>
 
 ### Question 3
 
@@ -619,11 +629,16 @@ B. Set
 C. Stack frame  
 D. Directed edge
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** A set models distinct membership while intentionally forgetting order.
 
 - A preserves order and can preserve duplicates.
 - C represents an execution environment.
 - D represents one relation pair, not a collection policy.
+
+</details>
 
 ### Question 4
 
@@ -634,11 +649,16 @@ B. The immediate relation is stored as transitive.
 C. `state` is an indirect prerequisite of `recursion` in the transitive closure.  
 D. `recursion` is an immediate prerequisite of `state`.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** A path of two prerequisite edges places the pair in the transitive closure even if no direct edge is stored.
 
 - A would require reversed edges.
 - B contradicts the missing transitive edge.
 - D reverses direction.
+
+</details>
 
 ### Question 5
 
@@ -649,11 +669,16 @@ B. Each vertex would have to occur both before and after itself along the cycle.
 C. Topological orders require symmetric edges.  
 D. Python sets cannot contain graph vertices.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Following each required “before” relation around the cycle returns to the starting vertex, creating an impossible strict ordering.
 
 - A is unrelated to list capacity.
 - C is false; prerequisite edges are directed.
 - D is a Python representation claim, not the mathematical reason.
+
+</details>
 
 ### Question 6
 
@@ -664,10 +689,15 @@ B. The mathematical theorem and implementation are both proved.
 C. The validator passed those generated cases; untested cases or model mismatches may remain.  
 D. Random testing is useless.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** The experiment is meaningful implementation evidence but not a universal proof.
 
 - A and B overstate the evidence.
 - D understates the value of broad, adversarial tests.
+
+</details>
 
 ### Question 7
 
@@ -678,9 +708,14 @@ B. Edge `a → b` with route `[b, a]`.
 C. Edge `a → b` with route `[a, b]`.  
 D. One concept with no edges and route `[a]`.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Every concept occurs once, but the prerequisite edge points backward.
 
 - A, C, and D satisfy the claim in their cases.
+
+</details>
 
 ### Question 8
 
@@ -691,11 +726,16 @@ B. A hidden policy that partial routes may omit downstream concepts.
 C. Proof that the graph is acyclic.  
 D. Evidence that dictionaries are unordered.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** The branch encodes a product/domain decision that must appear in the contract.
 
 - A is false; the code is syntactically valid.
 - C does not follow.
 - D is irrelevant and inaccurate for modern Python’s iteration behavior.
+
+</details>
 
 ### Diagnostic interpretation
 
@@ -817,3 +857,32 @@ The teaching narrative above is original and integrated. These sources provide d
 ## Instructor decision rule
 
 Advance when Michael can turn an informal route policy into a quantified claim, construct a counterexample, recover the model from unfamiliar code, and distinguish proof obligations from implementation evidence. Familiarity with symbols alone is not mastery.
+
+## Guided Codex handoff — M4
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M4. My claim is [quantified statement], my
+smallest witness/counterexample is [case], and my confidence is [level].”**
+Ask the learner to read the quantifiers aloud in plain language before using
+symbols. Use this hint ladder: concrete route/set/graph → predicate →
+quantifier order → negation witness → proof obligation. Change one premise
+(for example, immediate versus transitive prerequisite) and ask what relation
+or theorem must be revised. End with a learner-controlled evidence card:
+claim, witness, assumption, and next question.
+
+### Study Partner — proof rehearsal
+
+Ask for one two-line translation between an informal policy and a quantified
+formula. Deliberately swap a universal and an existential, then ask for the
+smallest model that separates the two statements. Do not correct immediately:
+wait for a counterexample or proof sketch.
+
+### Retrieval, ready-when, and forward handoff
+
+At **+1, +7, and +21 days**, negate one quantified statement, draw one
+relation/graph, and name whether a result is a proof, a test observation, or a
+claim still needing evidence. M4 is ready when the learner can construct and
+explain a counterexample rather than merely name a theorem. Carry the input
+model, relation, and proof obligation into **M5**, where those same choices
+become an explicit cost model.

@@ -31,6 +31,9 @@ This module asks:
 The answer reconnects the whole of Arc II.
 
 ```mermaid
+%% atlas-diagram-id: m10-knowledge-graph
+%% atlas-diagram-title: Module 10 assembles earlier graph, cost, frontier, state, and priority models
+%% atlas-diagram-alt: Modules 4, 5, 7, 8, and 9 provide the graph model, cost model, frontier policy, state maps, and priority frontier. Together they form an Atlas graph-search state machine that leads to Module 11.
 flowchart LR
     M4["Module 4<br/>graph model + proof"] --> MODEL["Precise graph question"]
     M5["Module 5<br/>cost models"] --> COST["|V| + |E| accounting"]
@@ -45,6 +48,8 @@ flowchart LR
     MACHINE --> ATLAS["Atlas PrerequisitePlanner"]
     ATLAS --> M11["Module 11<br/>algorithmic strategies"]
 ```
+
+**Text alternative:** Graph algorithms combine a precise graph model with a cost model, frontier policy, state evidence, and priority handling before they become an Atlas planner.
 
 The structures have distinct jobs:
 
@@ -251,6 +256,9 @@ Using a sequence of `(neighbor, weight)` pairs preserves parallel edges. Replaci
 ### Representation visual
 
 ```mermaid
+%% atlas-diagram-id: m10-representation-selection
+%% atlas-diagram-title: Graph representation follows client operations and edge semantics
+%% atlas-diagram-alt: Dense edge-existence queries favor an adjacency matrix. Repeated neighbor queries favor adjacency collections; whole-edge passes favor an edge list. Meaningful parallel edges need edge records, while simple neighbors can use sets or maps.
 flowchart LR
     Q["Client question"] --> DENSE{"Many edge-existence tests<br/>and graph is dense?"}
     DENSE -- "yes" --> MATRIX["Adjacency matrix"]
@@ -261,6 +269,8 @@ flowchart LR
     MULTI -- "yes" --> SEQ["Sequence of edge records"]
     MULTI -- "no" --> SETMAP["Set or neighbor map"]
 ```
+
+**Text alternative:** Choose matrix, adjacency collection, or edge list from the queries required; preserve parallel edges explicitly when they carry meaning.
 
 ### Prediction: representation loss
 
@@ -285,6 +295,9 @@ Only one edge remains. If parallel alternatives matter, the representation has c
 A graph search coordinates roles:
 
 ```mermaid
+%% atlas-diagram-id: m10-traversal-architecture
+%% atlas-diagram-title: A graph traversal coordinates representation, frontier, state, and witnesses
+%% atlas-diagram-alt: A graph port and frontier select a vertex to expand. Expansion updates discovery state, parent evidence, and distance estimates; discovery and distance may update the frontier, while parent evidence yields a path or cycle witness.
 flowchart TD
     GRAPH["Graph port<br/>neighbors(u)"] --> EXPAND["Expand one vertex"]
     FRONTIER["Frontier<br/>who is next?"] --> EXPAND
@@ -296,6 +309,8 @@ flowchart TD
     PARENT --> WITNESS["Path or cycle witness"]
     DIST --> RESULT["Distance result"]
 ```
+
+**Text alternative:** Traversal is one repeated transition: take eligible work, expand represented edges, update semantic state, and retain evidence that independently justifies the result.
 
 The generic transition is:
 
@@ -333,6 +348,9 @@ Conflating these states is one of the most common generated-code defects.
 From a source `s`, every outgoing neighbor is one edge away. Only after all one-edge discoveries should we expand two-edge routes. FIFO order enforces that temporal rule.
 
 ```mermaid
+%% atlas-diagram-id: m10-bfs-layers
+%% atlas-diagram-title: BFS discovery expands outward in unweighted layers
+%% atlas-diagram-alt: State is layer zero. Functions and abstraction are layer one; recursion and interfaces are layer two; graphs are layer three. Two paths meet at the graph node, illustrating FIFO layer-by-layer discovery.
 flowchart LR
     S["Layer 0<br/>state"] --> L1A["Layer 1<br/>functions"]
     S --> L1B["Layer 1<br/>abstraction"]
@@ -341,6 +359,8 @@ flowchart LR
     L2A --> L3["Layer 3<br/>graphs"]
     L2B --> L3
 ```
+
+**Text alternative:** Breadth-first search reaches all one-edge neighbors before two-edge neighbors; this example shows two layer-one paths converging at a layer-three graph concept.
 
 ### 4.2 Predict before running
 
@@ -549,6 +569,9 @@ DFS pursues one discovered path until it cannot continue, then returns to the mo
 - a finishing order after every descendant has finished.
 
 ```mermaid
+%% atlas-diagram-id: m10-dfs-color-state
+%% atlas-diagram-title: DFS color states distinguish undiscovered, active, and finished vertices
+%% atlas-diagram-alt: A vertex begins white, becomes gray when discovered and active, stays gray while outgoing edges are explored, becomes black when complete, and then exits the traversal state machine.
 stateDiagram-v2
     [*] --> White
     White --> Gray: discover / enter
@@ -556,6 +579,8 @@ stateDiagram-v2
     Gray --> Black: all outgoing work finished
     Black --> [*]
 ```
+
+**Text alternative:** DFS marks vertices white before discovery, gray while they are on the active path, and black only after every outgoing edge is processed.
 
 - **white:** undiscovered;
 - **gray:** active—discovered but not finalized;
@@ -766,6 +791,9 @@ Every finite distance produced by relaxation is the weight of an actual represen
 Relaxation never increases a distance. What differs across algorithms is **which edges are relaxed, in what order, and when a distance becomes final**.
 
 ```mermaid
+%% atlas-diagram-id: m10-relaxation-assumptions
+%% atlas-diagram-title: One relaxation rule is scheduled differently by graph assumptions
+%% atlas-diagram-alt: The local relaxation rule can run once in DAG order, in Bellman-Ford edge rounds, or from Dijkstra's minimum tentative vertex. Each schedule requires a different condition: acyclicity, no source-reachable negative cycle for a finite result, or nonnegative weights.
 flowchart LR
     RELAX["Same local rule:<br/>try d[u] + w(u,v)"] --> DAG["DAG order<br/>once per edge"]
     RELAX --> BF["Bellman–Ford<br/>all edges in rounds"]
@@ -774,6 +802,8 @@ flowchart LR
     BF --> A2["Assumption:<br/>no source-reachable negative cycle<br/>for finite result"]
     DIJ --> A3["Assumption:<br/>all edge weights nonnegative"]
 ```
+
+**Text alternative:** Relaxation is shared; the graph structure and weight assumptions determine whether topological order, full rounds, or a priority frontier is safe.
 
 ### Mechanism-revealing manual step
 
@@ -1176,6 +1206,9 @@ For a simple graph, `log |E| = O(log |V|²) = O(log |V|)`, so texts often report
 ## 12. Choose the shortest-path algorithm from assumptions
 
 ```mermaid
+%% atlas-diagram-id: m10-shortest-path-selection
+%% atlas-diagram-title: Shortest-path algorithm selection follows edge-cost and graph-structure assumptions
+%% atlas-diagram-alt: Equal unit costs select BFS. Otherwise a DAG selects topological relaxation, nonnegative finite weights select Dijkstra, and other source-path cases needing negative-cycle diagnosis select Bellman-Ford; remaining cases require a refined contract.
 flowchart TD
     START["Need source shortest paths"] --> UNIT{"Every edge has equal unit cost?"}
     UNIT -- "yes" --> BFS["BFS"]
@@ -1187,6 +1220,8 @@ flowchart TD
     BFQ -- "yes" --> BF["Bellman–Ford"]
     BFQ -- "no / different scope" --> SPEC["Refine the problem contract"]
 ```
+
+**Text alternative:** Select BFS, DAG relaxation, Dijkstra, or Bellman-Ford from the question's explicit cost and structure assumptions rather than from algorithm popularity.
 
 | Algorithm | Structural/weight precondition | Main scheduling rule | Time in the stated model | Negative-cycle behavior |
 |---|---|---|---:|---|
@@ -1266,6 +1301,9 @@ Suppose a current safe forest is contained in an MST `T`, but `T` does not conta
 This is why the greedy choice is safe. “Pick the cheapest-looking edge” without naming the cut would be an intuition, not a proof.
 
 ```mermaid
+%% atlas-diagram-id: m10-cut-exchange-argument
+%% atlas-diagram-title: The cut exchange argument explains why a light crossing edge is safe for an MST
+%% atlas-diagram-alt: A current forest defines a cut. Adding a light crossing edge creates one cycle in an MST candidate, allowing another crossing edge to be removed so total weight does not increase and the forest remains extendable to an MST.
 flowchart LR
     FOREST["Current forest"] --> CUT["Cut induced by one component"]
     CUT --> LIGHT["Light crossing edge"]
@@ -1273,6 +1311,8 @@ flowchart LR
     ADD --> REMOVE["Remove another crossing edge"]
     REMOVE --> SAFE["No greater total weight<br/>forest remains extendable to an MST"]
 ```
+
+**Text alternative:** A light edge across a cut is safe because any heavier crossing edge on the resulting cycle can be exchanged without increasing total spanning-tree weight.
 
 Kruskal and Prim expose different cuts:
 
@@ -1501,6 +1541,9 @@ This matrix is the adversarial regression plan, not an appendix. Every agent bri
 ### 19.1 Evolving architecture
 
 ```mermaid
+%% atlas-diagram-id: m10-planner-architecture
+%% atlas-diagram-title: Atlas planning separates an immutable graph snapshot from algorithms, scheduling, and evidence formatting
+%% atlas-diagram-alt: The authoritative concept graph store produces an immutable snapshot. Cycle, reachability, shortest-path, and component operations consume that snapshot with the Module 9 scheduler; their results pass through an evidence formatter and independent verifier to the Atlas route UI.
 flowchart LR
     STORE["Concept graph store<br/>authoritative edges"] --> SNAP["Immutable graph snapshot<br/>version + policy"]
     SNAP --> VALID["Cycle diagnosis + topo order"]
@@ -1516,6 +1559,8 @@ flowchart LR
     EXPLAIN --> UI["Atlas learning route UI"]
     VERIFY["Independent witness verifier"] -.-> EXPLAIN
 ```
+
+**Text alternative:** Atlas takes one versioned graph snapshot, runs question-specific algorithms over it, combines their evidence with scheduling, and formats verified route explanations for the learner.
 
 The graph and scheduler coordinate without becoming one structure:
 
@@ -2503,6 +2548,9 @@ Memorizing pseudocode or producing green happy-path tests is not mastery.
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m10-consolidation-map
+%% atlas-diagram-title: Graph questions select coordinated algorithm roles and independently checkable evidence
+%% atlas-diagram-alt: A graph question fixes the model and representation, then assigns FIFO, LIFO, heap, edge-round, or disjoint-set roles. BFS, DFS, Bellman-Ford, Dijkstra, DAG relaxation, Prim, and Kruskal produce path or forest evidence that an independent verifier turns into a versioned Atlas planner result.
 flowchart TD
     QUESTION["Graph question"] --> MODEL["V, E, direction, multiplicity,<br/>weights, scope, evidence"]
     MODEL --> REP["Representation<br/>adjacency · edge list · matrix"]
@@ -2530,6 +2578,8 @@ flowchart TD
     FOREST --> VERIFY
     VERIFY --> ATLAS["Versioned Atlas planner result"]
 ```
+
+**Text alternative:** The graph model chooses the representation and state role; each algorithm produces a witness that an independent verifier checks before Atlas presents a result.
 
 ### Keep these seven invariants
 
@@ -2678,3 +2728,29 @@ Without notes, explain one Atlas request from top to bottom:
 10. How is the returned witness verified and versioned?
 
 If any answer depends on “because that is how the algorithm is written,” return to the invariant and derive the code from the claim.
+
+## Guided Codex handoff — M10
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M10. My graph model is [vertices/edges/weights],
+the frontier invariant is [claim], and I predict this witness/path will
+[result].”** Ask for a tiny graph drawing before accepting a traversal or
+shortest-path label. Use this hint ladder: graph semantics → representation →
+frontier state → invariant/finalization rule → witness verification →
+complexity under V/E and representation assumptions. Change one premise
+(directedness, negative edge, disconnected component, stale graph version, or
+multiple equal paths) and ask which proof or implementation decision fails.
+
+### Study Partner — graph-model rehearsal
+
+Ask the learner to turn one real request into vertices, edges, and an output
+witness. Then change exactly one edge or weight and ask whether the old answer
+remains valid, merely suboptimal, or undefined. Keep a distinction between a
+successful run and a verified graph claim.
+
+### Forward handoff — M11
+
+Carry one graph state model, one frontier invariant, and one cost/witness
+argument into **M11**. The next module asks which algorithmic paradigm best
+matches a subproblem structure and how its correctness/cost evidence differs.

@@ -1531,3 +1531,12 @@ domain and assumptions; use a proof, counterexample, or finite trace for the
 right scope; repair a gap rather than hiding it; and explain how this changes a
 design decision. Familiar symbols, green tests, fast answers, and polished
 agent prose are not enough.
+
+## Forward handoff — M27 to M6
+
+Carry one precise invariant, one proof/counterexample, and one representation
+choice into **M6**. Arrays, linked structures, and later algorithms are not
+separate from discrete mathematics: their correctness depends on the same
+domain, relation, induction, and counting habits. In the Study Partner chat,
+rehearse one invariant under a changed operation; in the TA chat, defend why a
+finite test trace is useful evidence but not a universal proof.

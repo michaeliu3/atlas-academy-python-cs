@@ -1304,3 +1304,11 @@ solutions, code, or transcripts without asset-level license review. Atlas
 prose, diagrams, fixtures, code-reading cases, diagnostics, studio design,
 project brief, and oral-defense prompts are original. Link and narrowly
 paraphrase sources; label every external claim by its actual evidential scope.
+
+## Forward handoff — M29 to M30
+
+Carry one quantified limit/approximation condition, one derivative or integral
+derivation, and one numerical-error boundary into **M30**. Probability and
+inference add uncertainty to the same model-first discipline. In a rehearsal,
+change one distributional or sampling assumption; in the TA discussion, state
+which conclusion is mathematical, empirical, or still unsupported.

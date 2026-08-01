@@ -2148,3 +2148,28 @@ Without notes, answer in five minutes:
 > Atlas stores the same abstract history first in a Python list and then in a head/tail linked structure. Explain what stays the same, what changes in the object graph, how each representation preserves order, which operation costs change, how memory and locality differ, why a tuple snapshot may safely share frozen events, which facts are Python guarantees versus CPython observations, and what new requirement would make you choose neither representation.
 
 If the answer naturally moves through contract → object graph → RI/AF → operation mechanics → cost → ownership → evidence layer → changing decision, the knowledge is connected.
+
+## Guided Codex handoff — M6
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M6. This sequence contract is [claim], this
+representation is [array/list/linked structure], and this operation preserves
+[invariant].”** Ask for an object graph or memory sketch before comparing
+costs. Use this hint ladder: client operation → representation/ownership →
+invariant → local update trace → cost/locality claim → test or measurement.
+Change one workload (append-heavy, random access, shared snapshot, or delete
+near a cursor) and ask whether the representation decision still holds.
+
+### Study Partner — representation rehearsal
+
+Ask for two sketches that represent the same abstract history. Change one
+operation and ask which pointers, indices, aliases, or cached lengths move.
+Finish with one sentence separating a portable Python behavior from a
+CPython/locality observation.
+
+### Forward handoff — M7
+
+Carry one sequence invariant, ownership boundary, and cost comparison into
+**M7**. The next module turns access order and demand timing into explicit
+stack, queue, iterator, and generator contracts.

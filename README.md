@@ -79,6 +79,18 @@ every scheduled module is available today. The access-aware [60-, 90-, and
 open-material path, pace selector, bridge and catch-up rules, minimum evidence,
 and the authoring/preview boundary.
 
+For the private course owner, the
+[private guided learning route](docs/PRIVATE_GUIDED_LEARNING_ROUTE.md) connects
+the same canonical sequence to the six authoring-only advanced study packs and
+the designated Codex chats without changing portal access or making a
+publication claim.
+
+The [academic calibration index](docs/ACADEMIC_CALIBRATION.md) maps the course
+to official open materials from leading institutions and records the intended
+scope, AI-era adaptations, and honest extension boundaries. See the compact
+[course completion snapshot](docs/COURSE_COMPLETION_SNAPSHOT.md) for current
+learner-material, route, chat, and release-boundary status.
+
 The intended Core experience ends each module with a short constructive oral
 defense: a designated voice-enabled Teaching Assistant chat is the preferred
 platform surface when available, with an equivalent text route. The visible
@@ -182,7 +194,8 @@ See [Deployment](docs/DEPLOYMENT.md) for the two-remote release boundary and
 - `scripts/` — deterministic content synchronization.
 - `tests/` — portal/diagnostic tests.
 - `docs/` — architecture, authorship, privacy, deployment, and source policy.
-- `ROADMAP.md` — remaining course and release milestones.
+- `docs/PRIVATE_GUIDED_LEARNING_ROUTE.md` — the private owner’s connected
+  learning route, advanced-study-pack index, and chat operating rhythm.
 
 ## Privacy, sources, and contribution
 
@@ -192,8 +205,11 @@ See [Privacy](docs/PRIVACY.md), [Source and license policy](LICENSES.md), and
 [Contributing](CONTRIBUTING.md).
 
 For learner-owned notes, use the [manual learning record kit](docs/LEARNER_RECORD_WORKFLOW.md).
-It provides copy/paste templates and a consent boundary; it is not a live
-Notion connection or an automatic export path.
+The Atlas portal itself is not a live Notion connection or automatic export
+path. The designated Teaching Assistant and Study Partner chats have a separate
+conditional concise-note policy; see the
+[Live Codex learning workflow](docs/LIVE_CODEX_LEARNING_WORKFLOW.md). Never
+assume a write occurred without direct evidence.
 
 The visual portal is private by default. Do not make learner records, Notion
 exports, personal diagnostics, or deployment credentials public.

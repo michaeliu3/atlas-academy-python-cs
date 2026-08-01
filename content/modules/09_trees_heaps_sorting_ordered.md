@@ -48,6 +48,9 @@ Keep this boundary visible:
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m09-knowledge-graph
+%% atlas-diagram-title: Module 9 connects prior foundations to ordered structures and later systems work
+%% atlas-diagram-alt: Modules 2, 3, 5, 6, 7, and 8 each provide a prerequisite idea to Module 9. Module 9 then supports Modules 10, 11, 16, and 24.
 flowchart LR
     M2["Module 2<br/>recursion + induction"] --> SHAPE["Recursive tree shape"]
     M3["Module 3<br/>ADTs + RI/AF"] --> OPS["Ordered operation contracts"]
@@ -68,6 +71,8 @@ flowchart LR
     M9 --> M16["Module 16<br/>database indexes"]
     M9 --> M24["Module 24<br/>CPython source + profiling"]
 ```
+
+**Text alternative:** Recursion, abstraction, cost, representation, access policy, and identity lookup converge in ordered structures; their resulting models feed graph algorithms, algorithm design, database indexes, and CPython analysis.
 
 ### The problem that forces this module
 
@@ -107,6 +112,9 @@ The checkpoint explicitly handles a difficult engineering fact:
 This checkpoint extends the Arc II pipeline rather than replacing it:
 
 ```mermaid
+%% atlas-diagram-id: m09-atlas-learning-flow
+%% atlas-diagram-title: Atlas data flow through ingestion, indexing, scheduling, and graph planning
+%% atlas-diagram-alt: History flows through lazy ingestion and an inverted index into a concept catalog. The catalog supplies a review heap and title trie, whose review and prefix results feed Module 10 planning.
 flowchart LR
     EVENTS["M6 history"] --> STREAM["M7 lazy ingestion"]
     STREAM --> TERMS["M8 inverted index"]
@@ -118,6 +126,8 @@ flowchart LR
     NEXT --> M10["M10 prerequisite planner"]
     SEARCH --> M10
 ```
+
+**Text alternative:** Atlas keeps catalog identity authoritative, derives review candidates with a heap and title lookup with a trie, then carries those results into prerequisite planning.
 
 ### Backward connections
 
@@ -236,6 +246,9 @@ Hashing from Module 8 creates a candidate region from equality-compatible keys. 
 | “Sort this one snapshot.” | `sort(iterable)` | a new ordered sequence |
 
 ```mermaid
+%% atlas-diagram-id: m09-ordered-operation-selection
+%% atlas-diagram-title: Client operations choose an ordered representation family
+%% atlas-diagram-alt: Exact lookup favors hashing. Mostly-read collections favor a sorted array. Repeated minimum favors a heap, prefix lookup favors a trie, and other ordered operations motivate a balanced ordered-set structure.
 flowchart TD
     NEED["What does the client ask?"] --> EXACT{"Exact identity only?"}
     EXACT -- "yes" --> HASH["hash mapping<br/>Module 8"]
@@ -247,6 +260,8 @@ flowchart TD
     PREFIX -- "yes" --> TRIE["trie"]
     PREFIX -- "no" --> ORDERED["balanced ordered-set idea"]
 ```
+
+**Text alternative:** Choose the structure from the operation required: exact identity, static ordered search, repeated minimum, prefix search, or broader ordered navigation.
 
 The arrows are starting points, not universal answers. Memory, update rate, persistence, concurrency, adversarial inputs, and library availability can change a decision.
 
@@ -356,6 +371,9 @@ A **rooted tree** is either empty or consists of one root joined to disjoint chi
 State the edge-versus-node convention because some texts count height in nodes.
 
 ```mermaid
+%% atlas-diagram-id: m09-tree-vocabulary
+%% atlas-diagram-title: A small binary tree illustrates depth, height, path, and subtree
+%% atlas-diagram-alt: Root m has children f and t. f has children b and h; t has children p and z. The root has height two, its children height one, and leaves height zero.
 flowchart TD
     R["m · depth 0 · height 2"] --> F["f · depth 1 · height 1"]
     R --> T["t · depth 1 · height 1"]
@@ -364,6 +382,8 @@ flowchart TD
     T --> P["p · depth 2 · height 0"]
     T --> Z["z · depth 2 · height 0"]
 ```
+
+**Text alternative:** The binary tree has root `m`, two internal children, and four leaves; depth increases from root to leaf while height decreases.
 
 The path from `m` to `h` has two edges. The subtree rooted at `f` contains `f`, `b`, and `h`.
 
@@ -454,6 +474,9 @@ For a BST with unique keys:
 The invariant makes one comparison discard an entire subtree:
 
 ```mermaid
+%% atlas-diagram-id: m09-bst-search-decision
+%% atlas-diagram-title: BST search chooses one subtree from a comparison
+%% atlas-diagram-alt: Search compares target key k with node key x. Equal keys return the value; a smaller key searches left and a larger key searches right, repeating the same decision.
 flowchart TD
     Q["find key k at node key x"] --> C{"compare k with x"}
     C -- "k == x" --> HIT["return value"]
@@ -462,6 +485,8 @@ flowchart TD
     LEFT --> Q
     RIGHT --> Q
 ```
+
+**Text alternative:** A binary-search-tree lookup keeps only the subtree whose key interval can still contain the target.
 
 ### 7.2 Minimal executable model
 
@@ -567,12 +592,17 @@ Insert keys in this order:
 An ordinary BST becomes:
 
 ```mermaid
+%% atlas-diagram-id: m09-degenerate-bst
+%% atlas-diagram-title: Sorted insertion can turn a valid BST into a chain
+%% atlas-diagram-alt: Nodes 1 through 5 form a single rightward chain. The BST ordering remains valid, but height and search cost become linear in the number of nodes.
 flowchart TD
     A["1"] --> B["2"]
     B --> C["3"]
     C --> D["4"]
     D --> E["5"]
 ```
+
+**Text alternative:** Inserting sorted keys without balancing preserves BST order but gives a five-node chain rather than logarithmic-height branching.
 
 It is semantically a valid BST but structurally a linked chain. Search for `5` takes five node visits.
 
@@ -621,6 +651,9 @@ The height restriction yields `h = Θ(log n)`, so path operations remain logarit
 Before:
 
 ```mermaid
+%% atlas-diagram-id: m09-left-rotation-before
+%% atlas-diagram-title: Left rotation before state with ordered regions A, x, B, y, and C
+%% atlas-diagram-alt: Node x has left region A and right child y. y has left region B and right region C. All keys in A are less than x, B lies between x and y, and C is greater than y.
 flowchart TD
     X["x"] --> A["A<br/>keys &lt; x"]
     X --> Y["y<br/>x &lt; y"]
@@ -628,15 +661,22 @@ flowchart TD
     Y --> C["C<br/>keys &gt; y"]
 ```
 
+**Text alternative:** Before rotation, `x` is above `y`; ordered regions are `A, x, B, y, C` in in-order traversal.
+
 After rotating left at `x`:
 
 ```mermaid
+%% atlas-diagram-id: m09-left-rotation-after
+%% atlas-diagram-title: Left rotation after state preserving ordered regions A, x, B, y, and C
+%% atlas-diagram-alt: Node y becomes the parent, with x as its left child and C as its right region. x keeps A on the left and B on the right, preserving the same in-order key sequence.
 flowchart TD
     Y["y"] --> X["x"]
     Y --> C["C<br/>keys &gt; y"]
     X --> A["A<br/>keys &lt; x"]
     X --> B["B<br/>x &lt; keys &lt; y"]
 ```
+
+**Text alternative:** After rotation, `y` is above `x`, but an in-order traversal still yields `A, x, B, y, C`.
 
 The in-order sequence remains:
 
@@ -831,6 +871,9 @@ For zero-based index `i`:
 - parent for `i > 0`: `(i - 1) // 2`.
 
 ```mermaid
+%% atlas-diagram-id: m09-implicit-heap-tree
+%% atlas-diagram-title: A heap array encodes a complete binary tree by indices
+%% atlas-diagram-alt: Array index 0 holds key 2 and is parent of indices 1 and 2 holding 5 and 4. Those indices in turn parent indices 3 through 5, showing a complete binary-tree shape.
 flowchart TB
     A0["index 0 · key 2"] --> A1["index 1 · key 5"]
     A0 --> A2["index 2 · key 4"]
@@ -838,6 +881,8 @@ flowchart TB
     A1 --> A4["index 4 · key 8"]
     A2 --> A5["index 5 · key 9"]
 ```
+
+**Text alternative:** Heap array positions encode parent-child links: index `0` has children `1` and `2`; index `1` has `3` and `4`; index `2` has `5`.
 
 Array view:
 
@@ -1302,6 +1347,9 @@ Assume:
 There are `n!` possible relative orders. Model a deterministic comparison sort as a binary decision tree:
 
 ```mermaid
+%% atlas-diagram-id: m09-comparison-decision-tree
+%% atlas-diagram-title: Comparison sorting distinguishes orders through binary decisions
+%% atlas-diagram-alt: Comparisons such as a less than b and b less than c branch into possible output orders. A correct comparison sort needs enough leaves to distinguish every input ordering.
 flowchart TD
     C1{"a < b?"} -->|yes| C2{"b < c?"}
     C1 -->|no| C3{"a < c?"}
@@ -1310,6 +1358,8 @@ flowchart TD
     C3 --> L3["another order"]
     C3 --> L4["..."]
 ```
+
+**Text alternative:** A comparison sort gains information one binary comparison at a time, so its decision tree must have enough leaves for all permutations.
 
 A binary tree of height `h` has at most `2^h` leaves. Correctness needs at least `n!` distinguishable leaves:
 
@@ -1366,6 +1416,9 @@ Hash lookup answers whether the whole normalized title key exists. A prefix quer
 A **trie** represents a key as a path of symbols. Keys with a common prefix share the corresponding path.
 
 ```mermaid
+%% atlas-diagram-id: m09-trie-prefix-path
+%% atlas-diagram-title: A trie shares a common prefix across recursive and record keys
+%% atlas-diagram-alt: From the root, the letters r, e, and c form a shared prefix. One branch continues to recursive and another to record, so matching rec identifies both descendant keys.
 flowchart TD
     R["root"] --> R1["r"]
     R1 --> E["e"]
@@ -1377,6 +1430,8 @@ flowchart TD
     O --> R3["r"]
     R3 --> D["d · record"]
 ```
+
+**Text alternative:** The prefix `rec` is stored once; it branches into the words `recursive` and `record`.
 
 The node reached by `"rec"` roots exactly the subtree of matching normalized keys in this tiny example.
 
@@ -1496,6 +1551,9 @@ def complete(self, prefix: str) -> list[str]:
 ### 17.1 Architecture and authority
 
 ```mermaid
+%% atlas-diagram-id: m09-scheduler-authority
+%% atlas-diagram-title: Atlas scheduler separates authoritative catalog and active-review state from derived indexes
+%% atlas-diagram-alt: Catalog commands update the authoritative concept catalog and active-review map. A trie is rebuilt from catalog state and a candidate heap is rebuilt or compacted from active-review state; query and verifier components read all four structures.
 flowchart LR
     CMD["Catalog / scheduling commands"] --> CAT["ConceptCatalog<br/>authoritative identity + title"]
     CMD --> LIVE["ActiveReview map<br/>authoritative active priority"]
@@ -1515,6 +1573,8 @@ flowchart LR
     CAT -. "rebuild" .-> TRIE
     LIVE -. "compact/rebuild" .-> HEAP
 ```
+
+**Text alternative:** Catalog identity and active-review priority are authoritative in different domains; the trie and heap are rebuildable derived indexes checked by a verifier.
 
 The word “authoritative” is used twice for different domains:
 
@@ -2590,6 +2650,9 @@ Manual implementation speed and memorized operation tables are not mastery.
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m09-consolidation-map
+%% atlas-diagram-title: Ordered client questions connect structures, invariants, and Atlas scheduling
+%% atlas-diagram-alt: Exact identity, ordering questions, and policy choices lead to sorting, heaps, BSTs, or tries. Heap, trie, and hash structures coordinate in Atlas, where a dictionary defines current state, revisions reject stale heap entries, and evidence feeds Module 10.
 flowchart TD
     HASH["M8 exact identity"] --> ORDER["Ordered client question"]
     ORDER --> KEY["key + direction<br/>duplicates + ties"]
@@ -2618,6 +2681,8 @@ flowchart TD
     STALE --> EVID["tests + proofs + metrics<br/>rebuild + review"]
     EVID --> M10["M10 graph algorithms"]
 ```
+
+**Text alternative:** Ordered operations choose sorting, heap, tree, or trie mechanisms; Atlas combines them with authoritative dictionary state and revision checks before graph planning.
 
 ### Keep these six statements
 
@@ -2749,3 +2814,28 @@ Without notes, answer in eight minutes:
 > Atlas already has a hash-based identity and term index. Explain why minimum, successor, sorted output, and prefix requests force new operation contracts. Derive a BST from ordered path choices, show why balance matters, preserve order through one rotation, derive a binary heap from complete shape, compare insertion/merge/heap sorting and the comparison lower bound, derive prefix search from trie paths, then defend why Atlas coordinates an authoritative dictionary with a versioned stale-entry heap and a rebuildable trie. State correctness, cost, failure, evidence, and Python-versus-CPython boundaries throughout.
 
 If the explanation naturally moves through **client question → key policy → interface → representation → invariant → correctness → cost → failure → coordinated architecture → evidence**, the knowledge is connected.
+
+## Guided Codex handoff — M9
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M9. The ordered-operation contract is [claim],
+this invariant is [BST/heap/trie rule], and I predict this update will
+[result].”** Ask for a small tree or heap trace before accepting a named
+algorithm. Use this hint ladder: client order question → representation shape
+→ local invariant → update path → witness/correctness argument → height/input
+cost assumptions. Change one premise (duplicate policy, stale entry, skewed
+tree, or prefix normalization) and ask how the contract and test change.
+
+### Study Partner — invariant rehearsal
+
+Give a three-node structure with one subtle violation. Ask the learner to
+locate the earliest broken invariant, predict one repair, and explain whether
+the result is a correct structure, a balanced structure, or both. Finish with
+one evidence artifact to bring to the TA.
+
+### Forward handoff — M10
+
+Carry the habit of making a relation and its invariant explicit into **M10**.
+The next module generalizes ordered links into arbitrary graph edges, frontiers,
+and witnesses for reachability, paths, and network decisions.

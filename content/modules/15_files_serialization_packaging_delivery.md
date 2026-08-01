@@ -79,6 +79,9 @@ No label upgrades another:
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m15-course-position
+%% atlas-diagram-title: M15 prerequisites and forward connections
+%% atlas-diagram-alt: Earlier modules on values, abstraction, bytes, iteration, identity, components, evidence, and change feed durable artifacts. M15 then supports transactions, operating systems, network protocols, and security.
 flowchart LR
     M1["M1 · values, state,<br/>exceptions"] --> REP["representation + failure"]
     M3["M3 · ADTs,<br/>RI and abstraction"] --> SCHEMA["external schema"]
@@ -103,6 +106,8 @@ flowchart LR
     M15 --> M20["M20 · protocol formats<br/>and partial transfer"]
     M15 --> M22["M22 · supply chain,<br/>security, privacy"]
 ``` 
+
+**Text alternative.** Modules 1, 3, 6–8, and 12–14 provide representation, schema, I/O, streaming, identity, component, evidence, and change disciplines to M15. M15 then hands durable-artifact ideas to M16 transactions, M18 operating systems, M20 network protocols, and M22 security.
 
 ### The problem that forces this module
 
@@ -156,6 +161,9 @@ Build and inspect one **versioned learning-event bundle plus installable CLI**:
 The bundle is a **single file** so one local publish can use one replacement boundary. It is not a database and does not solve concurrent multi-record transactions; that pressure deliberately hands forward to Module 16.
 
 ```mermaid
+%% atlas-diagram-id: m15-durable-artifact-lifecycle
+%% atlas-diagram-title: A StudyEvent becomes an installed and releasable artifact
+%% atlas-diagram-alt: Domain values become schema values, canonical JSON text, UTF-8 bytes, a staged file, a CLI, source and built distributions, a fresh installation, and a release record with rollback evidence.
 flowchart LR
     VALUE["StudyEvent values<br/>domain invariants"] --> SCHEMA["v1 schema values<br/>stable field meaning"]
     SCHEMA --> TEXT["canonical JSON text<br/>grammar + order policy"]
@@ -168,6 +176,8 @@ flowchart LR
     WHEEL --> INSTALL["fresh environment<br/>installed command"]
     INSTALL --> RELEASE["release record<br/>identity + evidence + rollback"]
 ```
+
+**Text alternative.** A `StudyEvent` becomes stable schema values, canonical JSON text, strict UTF-8 bytes, and a staged replacement file. That artifact is exposed through a CLI, built from a source tree into sdist and wheel artifacts, installed freshly, then recorded in a release with identity, evidence, and rollback information.
 
 ### Backward connections
 
@@ -317,6 +327,9 @@ The rows are obligations, not decorations. If “version” or “trust” is bl
 ### 4.2 Boundary expansion
 
 ```mermaid
+%% atlas-diagram-id: m15-boundary-expansion
+%% atlas-diagram-title: Durable boundaries widen the failure model
+%% atlas-diagram-alt: A live process crosses file, version, artifact, environment, and release boundaries. Each boundary removes an implicit assumption and introduces a wider compatibility, build, trust, or rollback obligation.
 flowchart TB
     P["live process<br/>objects + open resources"] --> F["file boundary<br/>bytes + name + schema"]
     F --> T["time/version boundary<br/>migration + compatibility"]
@@ -330,6 +343,8 @@ flowchart TB
     A -. "builder environment differs" .-> E
     E -. "local trust no longer suffices" .-> R
 ```
+
+**Text alternative.** A live process crosses a file boundary, then a time/version boundary, an artifact boundary, an installation environment, and a release boundary. Each step makes a formerly implicit assumption unavailable and adds a wider responsibility: schema, migration, build artifact, installation, trust, or rollback.
 
 Each outer layer preserves earlier meaning while adding a wider fault model. Packaging does not repair a wrong schema. Provenance does not repair a wrong algorithm. A release record does not make an unsafe parser safe.
 
@@ -350,6 +365,9 @@ Each outer layer preserves earlier meaning while adding a wider fault model. Pac
 **Transaction** groups related state changes under atomicity/isolation/durability rules. A single replaced bundle is not a general transaction manager.
 
 ```mermaid
+%% atlas-diagram-id: m15-persistence-promise-ladder
+%% atlas-diagram-title: Persistence promises are distinct layers
+%% atlas-diagram-alt: Serialization maps values to bytes, persistence gives them a name and lifetime, publication changes visibility, durability concerns survival, recovery finds usable post-failure state, and backup keeps an independent copy.
 flowchart LR
     S["serialize<br/>value ↔ bytes"] --> P["persist<br/>name + lifetime"]
     P --> A["publish<br/>visibility transition"]
@@ -357,6 +375,8 @@ flowchart LR
     D --> REC["recovery<br/>usable state after failure"]
     REC --> B["backup<br/>independent retained copy"]
 ```
+
+**Text alternative.** Serialization maps a value to bytes. Persistence adds a name and lifetime; publication changes visibility; durability asks what survives; recovery determines usable state after failure; and backup retains an independent copy. None of these later promises is guaranteed merely by completing an earlier one.
 
 The arrows are conceptual dependencies, not an assurance that doing the left step automatically supplies the right one.
 
@@ -391,6 +411,9 @@ More precisely:
 ### 5.1 One value, several representations
 
 ```mermaid
+%% atlas-diagram-id: m15-text-encoding-branches
+%% atlas-diagram-title: One text value under different encoding contracts
+%% atlas-diagram-alt: The text value café can encode as different UTF-8 or UTF-16-LE byte sequences. Decoding with the matching codec restores the value, while using a wrong decoder can fail or produce different text.
 flowchart LR
     CP["text value<br/>'café'"] -->|UTF-8 encode| U8["63 61 66 c3 a9"]
     CP -->|UTF-16-LE encode| U16["63 00 61 00 66 00 e9 00"]
@@ -398,6 +421,8 @@ flowchart LR
     U16 -->|UTF-16-LE decode| CP
     U8 -. "wrong decoder" .-> FAIL["error or wrong text"]
 ```
+
+**Text alternative.** The text value `café` can encode to UTF-8 bytes `63 61 66 c3 a9` or UTF-16-LE bytes `63 00 61 00 66 00 e9 00`. The matching decoder restores the text; a mismatched decoder can fail or yield incorrect text.
 
 The text value does not “contain UTF-8.” UTF-8 is one representation chosen at a boundary.
 
@@ -482,6 +507,9 @@ A path object is a value describing a path according to lexical/platform rules. 
 - replacement will succeed.
 
 ```mermaid
+%% atlas-diagram-id: m15-path-to-open-resource
+%% atlas-diagram-title: From untrusted path text to an open resource
+%% atlas-diagram-alt: Untrusted path text becomes a lexical path, resolves through filesystem rules to a current object, and then becomes an opened handle used for I/O. Symlink, mount, case, and check-use race rules require platform policy.
 flowchart LR
     RAW["untrusted path text"] --> LEX["lexical path value"]
     LEX --> RES["filesystem resolution"]
@@ -492,6 +520,8 @@ flowchart LR
     RES -. "symlink / mount / case rules" .-> POLICY["platform policy"]
     OBJ -. "can change before open" .-> RACE["check/use race"]
 ```
+
+**Text alternative.** Untrusted path text first becomes a lexical path value, then resolves through filesystem rules to a current directory entry or object, and only then becomes an opened handle for I/O. Symlink, mount, and case rules are platform policy, and the object can change between a check and opening it.
 
 For the first Atlas CLI, the destination path is selected by the local operator. Import formats do not get to choose arbitrary output paths. Archive member names are treated as untrusted metadata and never joined blindly to a destination.
 
@@ -517,11 +547,16 @@ A file object is both:
 ### 6.1 Capability layers
 
 ```mermaid
+%% atlas-diagram-id: m15-io-layer-stack
+%% atlas-diagram-title: Text, buffered, raw, and OS I/O layers
+%% atlas-diagram-alt: A TextIOWrapper translates strings and encoding/newline policy to buffered bytes. The buffered stream performs fewer larger operations over a raw binary stream, which uses an OS handle and filesystem or device.
 flowchart TB
     TEXT["TextIOWrapper<br/>str ↔ bytes, encoding, newlines"] --> BUFFER["buffered stream<br/>fewer/larger raw operations"]
     BUFFER --> RAW["raw binary stream<br/>read/write/seek capabilities"]
     RAW --> OS["OS handle + filesystem/device"]
 ```
+
+**Text alternative.** `TextIOWrapper` maps strings to bytes with encoding and newline policy. A buffered stream groups operations over a raw binary stream, which in turn uses an operating-system handle and a filesystem or device.
 
 The exact stack depends on how the stream is opened. A stream can be readable but not writable, non-seekable, buffered, line-buffered, or closed. Code should depend on the capabilities it needs, not an imagined universal “file.”
 
@@ -530,6 +565,9 @@ The exact stack depends on how the stream is opened. A stream can be readable bu
 **[PYTHON 3.14 GUARANTEE]** A context manager implements an enter/exit protocol. If `__enter__` succeeds, Python calls `__exit__` when control leaves the `with` suite through normal completion, return, or exception. `__exit__` can suppress an exception by returning a truthy value.
 
 ```mermaid
+%% atlas-diagram-id: m15-context-manager-exit-flow
+%% atlas-diagram-title: Context manager entry and exit control flow
+%% atlas-diagram-alt: Evaluating a context expression calls __enter__. If it raises, the body never starts; otherwise the body runs and __exit__ receives either no exception or exception details, then propagates or suppresses the exception.
 flowchart TD
     A["evaluate context expression"] --> B["call __enter__"]
     B -->|raises| E0["body never starts<br/>__exit__ not entered for this manager"]
@@ -541,6 +579,8 @@ flowchart TD
     E2 -->|true| SUP["exception suppressed"]
     E1 --> CONT["continue/return"]
 ```
+
+**Text alternative.** The context expression is evaluated and `__enter__` is called. If entry raises, the body never runs. Otherwise the body executes; normal completion calls `__exit__(None, None, None)`, while an exception calls `__exit__` with exception details, which either propagates or suppresses it.
 
 A file context manager normally attempts to close the stream. That does not establish:
 
@@ -656,6 +696,9 @@ No choice removes the need to define:
 ### 7.2 JSON has at least four validation layers
 
 ```mermaid
+%% atlas-diagram-id: m15-layered-input-validation
+%% atlas-diagram-title: Layered bundle input validation
+%% atlas-diagram-alt: Bytes decode as strict UTF-8 text, JSON parses grammar, a schema validator accepts a v1 value, and domain constructors create StudyEvent values. Each stage has its own failure category.
 flowchart LR
     B["bytes"] -->|strict UTF-8| T["text"]
     T -->|JSON parser| G["grammar value"]
@@ -667,6 +710,8 @@ flowchart LR
     G --> SERR["shape/version/limit error"]
     S --> DERR["domain invariant error"]
 ```
+
+**Text alternative.** Bytes first decode as strict UTF-8 text, then a JSON parser produces a grammar value, a schema validator accepts a v1 schema value, and domain constructors build `StudyEvent` values. Byte limits, grammar errors, schema/version errors, and domain-invariant errors remain separate failure categories.
 
 Valid JSON such as `{"schema_version":1,"events":"many"}` can fail the Atlas schema. Schema-valid data can still fail a domain invariant such as confidence in `[0,1]`.
 
@@ -832,6 +877,9 @@ Additional **[ATLAS POLICY]**:
 - v1 readers validate the digest before returning domain values.
 
 ```mermaid
+%% atlas-diagram-id: m15-bundle-schema-tree
+%% atlas-diagram-title: Versioned Atlas bundle structure
+%% atlas-diagram-alt: The bundle root contains format identity, schema version, a manifest, and ordered events. The manifest carries event count and a SHA-256 digest of canonical event bytes; every event must satisfy StudyEvent invariants.
 flowchart TD
     ROOT["root object"] --> ID["format identity"]
     ROOT --> VER["schema version"]
@@ -845,11 +893,16 @@ flowchart TD
     EN --> INV
 ```
 
+**Text alternative.** The bundle root contains a format identity, schema version, manifest, and ordered event array. The manifest records event count and a SHA-256 digest of canonical event bytes; every event in the array must satisfy `StudyEvent` invariants.
+
 The manifest is deterministic for the same ordered domain values under the pinned encoder policy because it contains no clock, random ID, host path, or tool-specific environment detail. Release-time provenance belongs in the external evidence record, where nondeterministic facts can be named honestly.
 
 ### 8.2 Version dispatch precedes interpretation
 
 ```mermaid
+%% atlas-diagram-id: m15-version-dispatch
+%% atlas-diagram-title: Explicit schema-version dispatch
+%% atlas-diagram-alt: Bounded bytes are parsed as JSON and checked for a root object and integer version. Version v0 is validated, migrated purely, and revalidated as v1; v1 is validated directly; all other versions are rejected before domain construction.
 flowchart TD
     P["bounded bytes parsed as JSON"] --> O{"root object + integer version?"}
     O -->|no| BAD["reject schema"]
@@ -859,6 +912,8 @@ flowchart TD
     M --> D["construct domain values"]
     V --> D
 ```
+
+**Text alternative.** Bounded bytes are parsed as JSON and checked for a root object with an integer version. Version v0 is validated, migrated through a pure v0-to-v1 function, and revalidated; v1 is validated directly; every other version is rejected before domain values are constructed.
 
 Do not “try the newest parser, then fall back until something works.” That can reinterpret malformed new data as valid old data. Version dispatch should be explicit and unknown versions should fail closed unless the format deliberately specifies another behavior.
 
@@ -905,11 +960,16 @@ Its correctness argument can therefore focus on a deterministic value transforma
 ### 8.5 Migration graph, not migration wish
 
 ```mermaid
+%% atlas-diagram-id: m15-version-migration-path
+%% atlas-diagram-title: Supported migration paths and an unsupported future version
+%% atlas-diagram-alt: Validated v0 scores from 0 to 100 migrate purely to v1 confidence from 0 to 1, then become StudyEvent values. A future v2 has no declared path and is rejected.
 flowchart LR
     V0["v0 score 0..100"] -->|validated pure edge| V1["v1 confidence 0..1"]
     V1 -->|native reader| APP["StudyEvent domain"]
     V2["future v2"] -. "no edge yet" .-> REJECT["unsupported version"]
 ```
+
+**Text alternative.** A validated v0 score in the range 0–100 can follow a pure migration edge to v1 confidence in the range 0–1, then enter the `StudyEvent` domain. A future v2 has no declared migration edge and is therefore unsupported.
 
 As versions grow, define supported paths deliberately:
 
@@ -1962,6 +2022,9 @@ The `src/` layout makes one common checkout illusion less likely: tests should n
 ### 11.2 Public boundaries
 
 ```mermaid
+%% atlas-diagram-id: m15-installed-cli-boundaries
+%% atlas-diagram-title: Installed CLI, package, and build boundaries
+%% atlas-diagram-alt: A shell user invokes the atlas-bundle launcher, which calls the CLI main function and public bundle operations over domain and JSON/file adapters. Build output creates a wheel that an installer uses to provide the launcher and main module.
 flowchart TB
     SHELL["shell user/script"] --> CMD["atlas-bundle launcher"]
     CMD --> MAIN["atlas_cli.cli:main"]
@@ -1974,6 +2037,8 @@ flowchart TB
     INSTALL --> MAIN
     WHEEL --> INSTALL
 ```
+
+**Text alternative.** A shell user or script invokes the `atlas-bundle` launcher, which calls `atlas_cli.cli:main` and then public bundle operations over domain values and a JSON/file adapter. The build backend creates wheel members, and an installer uses that wheel to provide the launcher and installed main module.
 
 The shell contract includes:
 
@@ -2030,6 +2095,9 @@ This is an **illustrative configuration**, not the freshly pinned course release
 ### 12.2 Build participants
 
 ```mermaid
+%% atlas-diagram-id: m15-build-frontend-sequence
+%% atlas-diagram-title: Build frontend and backend artifact sequence
+%% atlas-diagram-alt: A learner or release job asks a build frontend for sdist and wheel artifacts. The frontend reads pyproject build settings, creates an isolated environment, invokes backend hooks, and reports the artifacts selected from the source tree.
 sequenceDiagram
     participant U as Learner/release job
     participant F as Build frontend
@@ -2046,6 +2114,8 @@ sequenceDiagram
     B-->>ART: emit artifact
     F-->>U: report artifact paths
 ```
+
+**Text alternative.** A learner or release job asks a build frontend for an sdist and wheel. The frontend reads `pyproject.toml`, creates an isolated build environment, installs build requirements, invokes backend hooks that read selected source files, and reports the resulting artifact paths.
 
 Build isolation limits some undeclared build-environment coupling. It does not sandbox malicious build code, remove network/publisher trust, or guarantee reproducible bytes.
 
@@ -2140,6 +2210,9 @@ The artifact is the thing delivered. Source configuration is only evidence about
 ### 13.2 Direct and transitive dependencies
 
 ```mermaid
+%% atlas-diagram-id: m15-dependency-resolution-graph
+%% atlas-diagram-title: Requirements, resolver, and transitive dependency graph
+%% atlas-diagram-alt: Atlas declares direct requirement A, which brings transitive requirements B and C that both select artifact D. Project metadata permits candidates, while resolver, index, environment, and lock or constraint policy determine selection.
 flowchart TD
     ATLAS["atlas-learning-cli<br/>declares direct requirement A"] --> A["A chosen version"]
     A --> B["B transitive requirement"]
@@ -2151,6 +2224,8 @@ flowchart TD
     RES["resolver + index + environment"] -. "selects" .-> A
     LOCK["lock/constraints policy"] -. "narrows/records" .-> A
 ```
+
+**Text alternative.** `atlas-learning-cli` declares direct requirement A. A brings transitive requirements B and C, both leading to selected artifact D. Project metadata permits candidate versions, while the resolver, index, environment, and lock or constraint policy determine which candidate is actually selected.
 
 Two installs from the same broad requirement can legitimately select different transitive graphs as indexes, releases, markers, platforms, and solver inputs change.
 
@@ -2261,6 +2336,9 @@ Use versioning as a reviewed communication rule, backed by compatibility evidenc
 ### 14.2 Release state machine
 
 ```mermaid
+%% atlas-diagram-id: m15-release-state-machine
+%% atlas-diagram-title: Evidence-gated release and rollback states
+%% atlas-diagram-alt: A candidate progresses from proposed through built, inspected, installed, verified, approved, promoted, and observed. After observation it is retained when the acceptance window passes or rolled back through a compatible route when a trigger occurs.
 stateDiagram-v2
     [*] --> Proposed
     Proposed --> Built: reviewed source + pinned build request
@@ -2274,11 +2352,16 @@ stateDiagram-v2
     Observed --> Retained: acceptance window passes
 ```
 
+**Text alternative.** A release candidate moves from `Proposed` to `Built`, `Inspected`, `Installed`, `Verified`, `Approved`, `Promoted`, and `Observed` only when each transition has its named evidence. After observation, it is retained when its acceptance window passes or rolled back through a compatible recovery route.
+
 An artifact can move only when the transition’s evidence exists. “CI is green” does not silently perform approval or promotion.
 
 ### 14.3 Supply-chain trust map
 
 ```mermaid
+%% atlas-diagram-id: m15-supply-chain-path
+%% atlas-diagram-title: Source to runtime supply-chain path
+%% atlas-diagram-alt: Authors and reviewers create a source revision, a build runner and backend produce an sdist or wheel, an artifact store serves it to an installer, and the installer creates a runtime environment. Identity, provenance, and minimal permissions constrain different edges.
 flowchart LR
     DEV["source authors + reviewers"] --> VCS["source revision"]
     VCS --> RUNNER["build runner + workflow"]
@@ -2292,6 +2375,8 @@ flowchart LR
     PROV["provenance + external digest"] -. "binds claims" .-> ART
     PERM["minimal workflow permissions"] -. "limits authority" .-> RUNNER
 ```
+
+**Text alternative.** Authors and reviewers create a source revision. A build runner and backend produce an sdist or wheel, an artifact store or index serves it to a resolver and installer, and installation creates a runtime environment. Publisher identity, provenance and digests, and minimal workflow permissions constrain different parts of that path.
 
 Each arrow can be attacked or misconfigured. Controls answer different questions:
 
@@ -2322,6 +2407,9 @@ Do not publish course artifacts to public PyPI merely to demonstrate packaging. 
 ### 14.5 Rollback has two axes
 
 ```mermaid
+%% atlas-diagram-id: m15-code-data-rollback-decision
+%% atlas-diagram-title: Rollback depends on code and data compatibility
+%% atlas-diagram-alt: A new wheel and v1 bundle meet at the question of whether old code can read new data. If tested compatibility holds, artifact rollback may be viable; otherwise use a forward fix, dual reader, backup restore, or explicit downgrade migration.
 flowchart TB
     CODE["code/artifact version"] --> CNEW["new wheel"]
     DATA["data schema/version"] --> DNEW["v1 bundle"]
@@ -2330,6 +2418,8 @@ flowchart TB
     CHECK -->|yes under tested contract| SIMPLE["artifact rollback may be viable"]
     CHECK -->|no / unknown| PLAN["forward fix, dual reader,<br/>restore independent backup,<br/>or explicit downgrade migration"]
 ```
+
+**Text alternative.** A new code artifact and a new data schema meet at one question: can the old code read the new data? If a tested contract says yes, artifact rollback may work; if not or unknown, choose a forward fix, dual reader, independent backup restore, or explicit downgrade migration.
 
 Rollback questions:
 
@@ -3548,6 +3638,9 @@ Advance when each claim has the right owner, artifact, evidence, cost, and expli
 ## 22. Consolidated knowledge map
 
 ```mermaid
+%% atlas-diagram-id: m15-durable-delivery-knowledge-map
+%% atlas-diagram-title: Durable delivery from value to rollback
+%% atlas-diagram-alt: Domain values move through schema, grammar, bytes, integrity evidence, resource lifetime, file publication, CLI, build artifacts, installation, release, and rollback. Trust and resource costs cross-cut the chain.
 flowchart TB
     VALUE["domain value<br/>meaning + invariants"] --> SCHEMA["external schema<br/>fields + order + version"]
     SCHEMA --> SERIAL["serializer/parser<br/>grammar policy"]
@@ -3572,6 +3665,8 @@ flowchart TB
     COST["time + memory + I/O<br/>latency + human review"] -. "cross-cuts" .-> VALUE
     COST -. "cross-cuts" .-> ENV
 ```
+
+**Text alternative.** Domain values move through an external schema, parser or serializer, UTF-8 bytes, a digest, resource lifetime, staged file publication, CLI behavior, project metadata, built artifacts, installation, release, and rollback. Trust limits cross-cut parsing, publication, wheels, and release; time, memory, I/O latency, and review cost cross-cut the whole system.
 
 ### 22.1 The connected explanation
 
@@ -3871,3 +3966,29 @@ Then answer:
 > A generated patch builds a wheel, passes tests, and produces a matching digest. What must you still inspect, challenge, and verify before Atlas deserves release?
 
 A complete answer traverses public/schema behavior, error and cleanup paths, artifact contents/metadata, dependency graph, fresh install, target compatibility, publisher/build authority, data migration, promotion identity, post-promotion observation, rollback, costs, and unsupported claims.
+
+## Guided Codex handoff — M15
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M15. This domain value becomes these bytes and
+artifact claims; this validation/recovery boundary protects [invariant]; my
+confidence is [level].”** Ask for the round-trip and authority path before
+discussing a package command. Use this hint ladder: domain contract → schema →
+parse/validate → deterministic bytes → artifact inventory → fresh-install or
+recovery observation → publisher/provenance boundary. Change one premise (old
+schema, corrupt archive, untrusted pickle, missing lock, or interrupted write)
+and ask what the current evidence fails to establish.
+
+### Study Partner — durable-artifact rehearsal
+
+Ask the learner to trace one event from in-memory value through serialized
+bytes to a newly loaded value. Then change one byte, version, dependency, or
+publisher fact and ask which validation must reject or reconcile it. End with
+a concise TA handoff: observed fact, open risk, smallest next test.
+
+### Forward handoff — M16
+
+Carry a data contract, migration/recovery boundary, and artifact-provenance
+question into **M16**. The next module asks when the same durable invariants
+require keys, relations, transactions, isolation, and reconciliation.

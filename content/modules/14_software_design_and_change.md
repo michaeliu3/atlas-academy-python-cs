@@ -98,6 +98,9 @@ The first Atlas prototype is one class that:
 It “works” for one route. But each new pressure crosses the same owner.
 
 ```mermaid
+%% atlas-diagram-id: m14-coupled-change-pressure
+%% atlas-diagram-title: Change pressures coupled in one application owner
+%% atlas-diagram-alt: Four independent requests converge on one coupled AtlasApplication, which also owns parsing, ranking, workflow, formatting, and error policy. This creates overlapping change pressure.
 flowchart LR
     R1["Add ranking policy"] --> A["Coupled AtlasApplication"]
     R2["Retry transient import"] --> A
@@ -109,6 +112,8 @@ flowchart LR
     A --> F["Formatting"]
     A --> E["Error policy"]
 ```
+
+**Text alternative.** Adding a ranking policy, retrying transient imports, adding legal plan states, and preserving old output all require changing one coupled `AtlasApplication`, which also owns parsing, ranking, workflow, formatting, and error policy.
 
 The design smell is not “the class is long.” The stronger observation is:
 
@@ -353,6 +358,9 @@ observations. It does **not** mean Python prevents clients from reading source o
 attributes.
 
 ```mermaid
+%% atlas-diagram-id: m14-planner-boundaries
+%% atlas-diagram-title: Planner boundaries and composition root
+%% atlas-diagram-alt: A client uses a compatibility facade and planner service. The service uses importer and ranker ports plus a workflow table, while the composition root chooses the concrete facade, importer, and ranker.
 flowchart LR
     Client["CLI / caller"] -->|"documented result + errors"| Facade["Compatibility façade"]
     Facade -->|"plan request"| Service["Planner service"]
@@ -363,6 +371,8 @@ flowchart LR
     Root --> Importer
     Root --> Ranker
 ```
+
+**Text alternative.** A CLI or caller reaches a compatibility façade, which sends a plan request to the planner service. The service invokes concrete importer and ranker implementations through ports and uses a workflow table; the composition root is the only component choosing those concrete objects.
 
 The façade hides the new domain snapshot from old clients for a bounded period.
 The service hides orchestration from plugins. The transition table exposes legal
@@ -577,11 +587,16 @@ TRANSITIONS = {
 The table makes illegal edges visible by absence.
 
 ```mermaid
+%% atlas-diagram-id: m14-plan-workflow-states
+%% atlas-diagram-title: Legal plan workflow transitions
+%% atlas-diagram-alt: A plan begins in DRAFT, can move to VALIDATED only when it has nonempty concepts, and can then move to PUBLISHED. No direct draft-to-published transition exists.
 stateDiagram-v2
     [*] --> DRAFT
     DRAFT --> VALIDATED: VALIDATE [nonempty concepts]
     VALIDATED --> PUBLISHED: PUBLISH
 ```
+
+**Text alternative.** The workflow starts at `DRAFT`. `VALIDATE` may move it to `VALIDATED` only when concepts are nonempty; `PUBLISH` then moves it to `PUBLISHED`. Because there is no direct `DRAFT → PUBLISHED` edge, that transition is illegal.
 
 Prediction: should `(DRAFT, PUBLISH)` default to `PUBLISHED`? No. A missing edge
 is evidence of an illegal transition, not a request to guess.
@@ -703,6 +718,9 @@ indirection without answering a pressure.
 ### 9.1 Intended dependency direction
 
 ```mermaid
+%% atlas-diagram-id: m14-dependency-direction
+%% atlas-diagram-title: Inward source dependencies and outer concrete choice
+%% atlas-diagram-alt: Ports depend on domain values; application depends on ports and domain; plugins depend on ports and domain; the presenter depends on application and domain; bootstrap selects all concrete outer components.
 flowchart TB
     Domain["domain: values + state invariants"]
     Ports["ports: importer/ranker capabilities"] --> Domain
@@ -716,6 +734,8 @@ flowchart TB
     Bootstrap --> Plugins
     Bootstrap --> Presenter
 ```
+
+**Text alternative.** Domain values own state invariants. Ports depend on the domain; the application depends on ports and domain; concrete plugins also depend on ports and domain. The compatibility presenter depends on the application and domain, while bootstrap owns concrete assembly.
 
 Calls can travel outward to an injected plugin while source dependencies point
 inward toward the port. Runtime flow and knowledge direction are different
@@ -785,6 +805,9 @@ or semantic knowledge encoded as strings.
 Before delegating, draw:
 
 ```mermaid
+%% atlas-diagram-id: m14-bounded-ranking-change
+%% atlas-diagram-title: Bounded recency-ranking change path
+%% atlas-diagram-alt: Adding recency ranking changes the RankingPolicy contract, a new plugin, composition root wiring, shared contract tests, and an end-to-end smoke test. Importer grammar, plan transitions, and legacy presentation must remain untouched.
 flowchart LR
     Change["Add recency ranking"] --> Contract["RankingPolicy contract"]
     Contract --> New["New plugin"]
@@ -795,6 +818,8 @@ flowchart LR
     Change -. "must not touch" .-> State["Plan transitions"]
     Change -. "must not touch" .-> Legacy["Legacy field presenter"]
 ```
+
+**Text alternative.** A bounded recency-ranking change flows from the `RankingPolicy` contract to one new plugin, composition-root wiring, the shared contract suite, and an end-to-end smoke test. It must not change importer grammar, plan transitions, or the legacy-field presenter.
 
 The dashed non-impact claims are review hypotheses. If the patch touches those
 components, require an explanation.
@@ -830,6 +855,9 @@ and yielding again may duplicate the first event. The raw provider keeps Module
 before returning any event:
 
 ```mermaid
+%% atlas-diagram-id: m14-batch-retry-timeline
+%% atlas-diagram-title: Batch retry preserves all-or-nothing output
+%% atlas-diagram-alt: The planner asks a batch loader to read a source. The first importer attempt yields A then fails transiently before A is exposed; the second yields A and B, and only then does the loader return A and B to the planner.
 sequenceDiagram
     participant P as Planner
     participant R as Batch loader
@@ -842,6 +870,8 @@ sequenceDiagram
     I-->>R: A, B, complete
     R-->>P: yield A, B
 ```
+
+**Text alternative.** The planner calls the batch loader. Importer attempt one yields A but then fails transiently while A remains hidden. Attempt two yields A and B completely, after which the loader returns A and B together to the planner.
 
 Cost: batch retry holds `Θ(n)` events and delays first output. This is a
 conscious application tradeoff, not a changed importer guarantee or free safety.
@@ -948,6 +978,9 @@ Content-addressed object IDs depend on object content. A branch is a movable
 reference to a commit.
 
 ```mermaid
+%% atlas-diagram-id: m14-refactor-commit-graph
+%% atlas-diagram-title: Refactor branch and merge history
+%% atlas-diagram-alt: Main begins with C0 and C1 characterization. A refactor branch adds a seam and moves the planner while main receives an urgent fix; the branches later merge at commit M.
 gitGraph
     commit id: "C0"
     commit id: "C1 characterize"
@@ -959,6 +992,8 @@ gitGraph
     commit id: "C4 urgent fix"
     merge refactor id: "M"
 ```
+
+**Text alternative.** History begins with commits C0 and C1 on main. A refactor branch adds a seam and moves the planner, while main receives an urgent fix; the refactor branch is then merged into main as M, which has two parents.
 
 The merge commit can have two parents. The branch name did not contain copies of
 every file; it moved to point at successive commits.
@@ -2785,6 +2820,9 @@ module pretend they are solved.
 ## 22. Consolidated knowledge map
 
 ```mermaid
+%% atlas-diagram-id: m14-design-change-knowledge-map
+%% atlas-diagram-title: Design and change from pressure to evidence
+%% atlas-diagram-alt: Change pressure identifies responsibility, cohesion, and coupling. Contracts and evidence define preserved observations; decomposition, dependency direction, state, staging, Git history, and migration lead to review, verification, oral defense, and handoff.
 flowchart TD
     Pressure["Change pressure"] --> Responsibility["Responsibility / ownership"]
     Responsibility --> Cohesion["Cohesion: changes together"]
@@ -2812,6 +2850,8 @@ flowchart TD
     Review --> Verification["Independent bounded evidence"]
     Verification --> Defense["Oral defense + handoff"]
 ```
+
+**Text alternative.** Change pressure identifies responsibility, cohesion, and coupling. M12 contracts and M13 evidence define observations to preserve; decomposition, inward dependencies, legal state, staging, Git history, and migration lead to review, bounded verification, oral defense, and a forward handoff.
 
 ### 22.1 One connected explanation
 
@@ -3099,3 +3139,29 @@ Then answer one final transfer:
 > If Module 15 serializes `PlanSnapshot`, which previously internal observations
 > become durable compatibility promises, and which migration evidence must exist
 > before renaming them?
+
+## Guided Codex handoff — M14
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M14. This change preserves [observable
+contract], moves this responsibility to [boundary], and my rollback evidence is
+[artifact].”** Ask the learner to draw the dependency direction and one
+before/after behavior before naming a pattern. Use this hint ladder: user
+observable → component responsibility → dependency arrow → migration/compatibility
+boundary → characterization/regression test → rollback decision. Change one
+premise (an old client, a partially migrated record, or a failed deploy) and
+ask which promise must remain stable.
+
+### Study Partner — change rehearsal
+
+Ask for a thirty-second explanation of one refactor without pattern names:
+what changes internally, what stays observable, and how a test would catch a
+regression. Then swap one responsibility or reverse one dependency arrow and
+ask which architecture rule breaks. Record the sharpest question for the TA.
+
+### Forward handoff — M15
+
+Carry one public compatibility promise, one migration/rollback plan, and one
+test seam into **M15**. The next module makes internal state durable across
+files, bytes, packages, and release artifacts.

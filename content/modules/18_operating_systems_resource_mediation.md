@@ -141,6 +141,9 @@ processors, memory, files, and devices without receiving unrestricted control
 over one another.
 
 ```mermaid
+    %% atlas-diagram-id: m18-os-pressure-bridge
+    %% atlas-diagram-title: Operating-system pressure bridge
+    %% atlas-diagram-alt: Module 17 hands a machine and I/O boundary to Module 18, which explains processes, memory, files, and shutdown before later modules add concurrency, networking, distribution, and runtime internals.
 %% Figure 1. Module 17 hands an unresolved OS boundary to Module 18, which resolves local resource ownership before later modules add overlap, networks, distribution, and runtime internals.
 flowchart LR
     M17["M17<br/>machine state + I/O handoff"] --> PRESSURE["finite resources<br/>multiple programs<br/>failure"]
@@ -150,6 +153,10 @@ flowchart LR
     M20 --> M21["M21<br/>async + distribution"]
     M18 --> M24["M24<br/>CPython memory + performance"]
 ```
+
+**Text equivalent.** Module 17 hands a machine and I/O boundary to Module 18,
+which explains processes, memory, files, and shutdown before later modules add
+concurrency, networking, distribution, and runtime internals.
 
 The bridge reuses five M17 disciplines:
 
@@ -350,6 +357,9 @@ not “provide convenient functions.” It is:
 Four responsibilities emerge.
 
 ```mermaid
+    %% atlas-diagram-id: m18-os-responsibilities
+    %% atlas-diagram-title: Four operating-system responsibilities
+    %% atlas-diagram-alt: Finite resources, multiple programs, and failure require an OS to virtualize abstractions, multiplex scarce service, protect authority, and preserve named state through process, scheduler, permission, and filesystem mechanisms.
 %% Figure 2. Finite resources and mutually untrusted programs force four connected OS responsibilities: virtualize, multiplex, protect, and preserve named state.
 flowchart TB
     PRESSURE["finite CPU + memory + devices<br/>many programs + failure"] --> V["virtualize<br/>useful private-looking abstractions"]
@@ -361,6 +371,11 @@ flowchart TB
     P --> MODE["privilege + permissions"]
     D --> FS["filesystem + sync + recovery"]
 ```
+
+**Text equivalent.** Finite resources, multiple programs, and failure require
+an OS to virtualize abstractions, multiplex scarce service, protect authority,
+and preserve named state through process, scheduler, permission, and filesystem
+mechanisms.
 
 - **Virtualize:** present a process with a useful execution and address-space
   model.
@@ -388,6 +403,9 @@ More precisely:
 > request before returning a result or error.
 
 ```mermaid
+    %% atlas-diagram-id: m18-python-os-boundary
+    %% atlas-diagram-title: Python operation across the OS boundary
+    %% atlas-diagram-alt: Atlas code asks the Python runtime for an operation, which may make lower OS-interface requests; the kernel validates authority and state, optionally schedules resource work, and returns a value, error, or later completion.
 %% Figure 3. A high-level Python operation may reach a protected OS service through several owned layers; the diagram does not assert one call at each layer.
 sequenceDiagram
     participant A as "Atlas code"
@@ -408,6 +426,11 @@ sequenceDiagram
     U-->>P: platform result
     P-->>A: value, exception, or later completion
 ```
+
+**Text equivalent.** Atlas code asks the Python runtime for an operation, which
+may make lower OS-interface requests. The kernel validates authority and state,
+optionally schedules resource work, and returns a value, error, or later
+completion.
 
 The diagram is intentionally nonnumerical. It does not say:
 
@@ -515,6 +538,9 @@ Precision:
 | Atlas job | application-defined unit of work | stable `run_id`; not the PID |
 
 ```mermaid
+    %% atlas-diagram-id: m18-process-resource-capsule
+    %% atlas-diagram-title: Process as a live resource capsule
+    %% atlas-diagram-alt: A program artifact and Atlas job together launch a live process containing execution state, virtual memory, open resources, environment, authority, and lifecycle data; exit status and artifact effects remain different evidence.
 %% Figure 4. A process is a live resource capsule, while a program artifact and an Atlas job remain distinct entities.
 flowchart LR
     PROGRAM["program artifact<br/>stored code + defaults"] -->|launch| PROC
@@ -531,6 +557,11 @@ flowchart LR
     PROC --> ART["artifact effects"]
     STATUS -. "not equivalent" .- ART
 ```
+
+**Text equivalent.** A program artifact and Atlas job together launch a live
+process containing execution state, virtual memory, open resources,
+environment, authority, and lifecycle data. Exit status and artifact effects
+remain different evidence.
 
 The process may contain one or more execution streams. That composition fact is
 enough here. Interleavings, locks, races, queues, the GIL, and parallel model
@@ -566,6 +597,9 @@ Do not infer a universal native sequence from the Python surface.
 ### 3.3 Process lifecycle
 
 ```mermaid
+    %% atlas-diagram-id: m18-process-lifecycle
+    %% atlas-diagram-title: Portable process lifecycle
+    %% atlas-diagram-alt: A process is created, admitted, runnable, running, blocked or preempted, terminated, and finally collected when a caller waits for or releases its status object.
 %% Figure 5. The portable teaching lifecycle separates eligibility, execution, waiting, termination, and status collection.
 stateDiagram-v2
     [*] --> Created
@@ -578,6 +612,10 @@ stateDiagram-v2
     Terminated --> Collected: wait or release status/object
     Collected --> [*]
 ```
+
+**Text equivalent.** A process is created, admitted, runnable, running,
+blocked or preempted, terminated, and finally collected when a caller waits for
+or releases its status object.
 
 This is a portable teaching model. Production systems have more states and may
 schedule threads rather than whole processes. The key distinctions survive:
@@ -705,6 +743,9 @@ If runnable work exceeds available execution capacity, a policy chooses which
 eligible work receives service.
 
 ```mermaid
+    %% atlas-diagram-id: m18-one-cpu-schedule
+    %% atlas-diagram-title: Declared one-CPU teaching schedule
+    %% atlas-diagram-alt: On one declared CPU, worker A runs, blocks, then runs again while worker B becomes runnable, runs during A's wait, and is runnable again; service order changes without changing either job's contract.
 %% Figure 6. A declared one-CPU scheduler model can change service order without changing either job's semantic contract.
 gantt
     title Declared one-CPU teaching schedule
@@ -719,6 +760,10 @@ gantt
     running :b1, 2, 5
     runnable :b2, 5, 7
 ```
+
+**Text equivalent.** On one declared CPU, worker A runs, blocks, then runs
+again while worker B becomes runnable, runs during A's wait, and is runnable
+again. Service order changes without changing either job's contract.
 
 This is not a host trace. It illustrates states:
 
@@ -860,6 +905,9 @@ The same virtual address in another process may map to another frame or be
 invalid.
 
 ```mermaid
+    %% atlas-diagram-id: m18-address-translation
+    %% atlas-diagram-title: Toy virtual-address translation
+    %% atlas-diagram-alt: A virtual address splits into virtual-page number and offset, uses a usable TLB entry or page-table lookup, checks mapping and permission state, then forms a physical address or reports a not-present, invalid, or protection fault.
 %% Figure 7. The toy translator separates virtual-page number and offset, checks mapping state and permissions, then either forms a physical address or raises a classified fault.
 flowchart LR
     VA["virtual address<br/>0x2A3F"] --> SPLIT["VPN 0x2A<br/>offset 0x3F"]
@@ -873,6 +921,10 @@ flowchart LR
     PERM -->|yes| PA["frame 0x91 + offset<br/>0x913F"]
     PERM -->|no| PROT["protection fault"]
 ```
+
+**Text equivalent.** A virtual address splits into virtual-page number and
+offset, uses a usable TLB entry or page-table lookup, checks mapping and
+permission state, then forms a physical address or reports a classified fault.
 
 ### 4.3 Page table and TLB are not synonyms
 
@@ -1004,6 +1056,9 @@ offset and which formulas change?
 ### 4.6 A fault decision tree
 
 ```mermaid
+    %% atlas-diagram-id: m18-page-fault-classification
+    %% atlas-diagram-title: Page-fault classification
+    %% atlas-diagram-alt: A virtual-memory access can fail because its mapping is invalid, its requested operation is disallowed, or its valid page is absent; an absent page either resolves and resumes or becomes a failure.
 %% Figure 8. A page fault is a classified event, not a single diagnosis: the mapping may be absent, disallowed, or temporarily not present and resolvable.
 flowchart TD
     ACCESS["virtual-memory access"] --> MAP{"mapping valid?"}
@@ -1016,6 +1071,10 @@ flowchart TD
     RESOLVE -->|yes| POP["populate/update mapping<br/>resume access"]
     RESOLVE -->|no| FAIL["fault delivered as failure"]
 ```
+
+**Text equivalent.** A virtual-memory access can fail because its mapping is
+invalid, its requested operation is disallowed, or its valid page is absent. An
+absent page either resolves and resumes or becomes a failure.
 
 The branch “populate” does not say “read disk.” Possible mechanisms include
 zero-filled lazy allocation, copy-on-write, cached file data, or storage I/O.
@@ -1091,6 +1150,9 @@ Precision:
 | Python file object | object adding mode, buffering, encoding, decoding, methods, cleanup | proof of physical I/O |
 
 ```mermaid
+    %% atlas-diagram-id: m18-names-and-open-resources
+    %% atlas-diagram-title: Names and open resources
+    %% atlas-diagram-alt: A pathname resolves through a directory entry to a filesystem object, while a process descriptor or handle resolves to an open resource with rights and state; both may reach the same object without being the same abstraction.
 %% Figure 9. A pathname reaches a directory binding while a process descriptor or handle reaches an open OS resource; both can lead toward stored data without becoming the same entity.
 flowchart LR
     BASE["resolution base<br/>root, cwd, or directory handle"] --> PATH["path components"]
@@ -1101,6 +1163,10 @@ flowchart LR
     OPEN --> META
     PY["Python file object<br/>text/buffer/raw layers"] --> REF
 ```
+
+**Text equivalent.** A pathname resolves through a directory entry to a
+filesystem object. A process descriptor or handle resolves to an open resource
+with rights and state; both may reach the same object without being identical.
 
 The graph has two routes:
 
@@ -1180,6 +1246,9 @@ model:
 ```
 
 ```mermaid
+    %% atlas-diagram-id: m18-atomic-replacement-reference
+    %% atlas-diagram-title: Atomic replacement and existing open references
+    %% atlas-diagram-alt: In the declared POSIX-like model, process A opens the old object, process B replaces the namespace binding with a new object, and A continues reading the old object through its pre-existing file descriptor until close.
 %% Figure 10. In the declared POSIX-like model, atomic name replacement changes the stable binding while a pre-existing open reference continues to the old object.
 sequenceDiagram
     participant N as "namespace"
@@ -1196,6 +1265,10 @@ sequenceDiagram
     A->>O: close fd 7
 ```
 
+**Text equivalent.** In the declared POSIX-like model, process A opens the old
+object, process B replaces the namespace binding with a new object, and A
+continues reading the old object through its existing descriptor until close.
+
 Do not project this exact result onto every Windows sharing/replacement setup.
 Windows may reject a replacement depending on open-handle sharing modes and
 other conditions. The transferable lesson is:
@@ -1206,6 +1279,9 @@ other conditions. The transferable lesson is:
 ### 5.5 Python buffer, OS page cache, and device path
 
 ```mermaid
+    %% atlas-diagram-id: m18-python-to-storage-layers
+    %% atlas-diagram-title: Python text through storage layers
+    %% atlas-diagram-alt: Python text passes through encoding, buffering, raw-file, OS, page-cache, filesystem, and device layers; flush and synchronization requests strengthen different observations at different layers.
 %% Figure 11. Text encoding and Python buffering precede an OS-managed open resource and possible page-cache/filesystem/device work; each layer answers a different evidence question.
 flowchart TB
     TEXT["Python str"] --> ENC["TextIOWrapper<br/>encoding + newline"]
@@ -1218,6 +1294,10 @@ flowchart TB
     BUF -. "flush()" .-> RAW
     OS -. "fsync / platform sync request" .-> PC
 ```
+
+**Text equivalent.** Python text passes through encoding, buffering, raw-file,
+OS, page-cache, filesystem, and device layers. Flush and synchronization
+requests strengthen different observations at different layers.
 
 Qualify “cache”:
 
@@ -1311,6 +1391,9 @@ requesting process credentials or access token
 ```
 
 ```mermaid
+    %% atlas-diagram-id: m18-operation-authority
+    %% atlas-diagram-title: Operation-time authority decision
+    %% atlas-diagram-alt: An OS access decision combines process identity, requested right, resolved target, and platform rules at operation time, then either grants an open resource capability or returns a permission error.
 %% Figure 12. An access decision combines requester authority, requested operation, target protection state, and platform policy at operation time.
 flowchart LR
     WHO["process identity<br/>credentials or token"] --> DECIDE{"OS access decision"}
@@ -1320,6 +1403,10 @@ flowchart LR
     DECIDE -->|allow| CAP["open resource with granted capability"]
     DECIDE -->|deny| ERR["permission/access error"]
 ```
+
+**Text equivalent.** An OS access decision combines process identity,
+requested right, resolved target, and platform rules at operation time. It
+either grants an open resource capability or returns a permission error.
 
 ### 6.2 POSIX and Windows models are related, not identical
 
@@ -1466,6 +1553,9 @@ belong inside the handler.
 ### 7.2 Cooperative shutdown
 
 ```mermaid
+    %% atlas-diagram-id: m18-cooperative-shutdown
+    %% atlas-diagram-title: Cooperative shutdown protocol
+    %% atlas-diagram-alt: A cooperative stop request stops admission, reaches a declared safe point, then either finishes and publishes work or preserves a classified incomplete artifact before closing resources, exiting, and recording status.
 %% Figure 13. Cooperative shutdown is a fallible application protocol: request, stop admission, reach a safe unit boundary, reconcile artifacts, close resources, exit, and let the supervisor collect status.
 flowchart LR
     REQ["cooperative stop request"] --> ADMIT["stop accepting new work"]
@@ -1478,6 +1568,11 @@ flowchart LR
     EXIT --> WAIT["supervisor waits + records"]
 ```
 
+**Text equivalent.** A cooperative stop request stops admission, reaches a
+declared safe point, then either finishes and publishes work or preserves a
+classified incomplete artifact before closing resources, exiting, and recording
+status.
+
 Every arrow can fail. The protocol must say what happens if interruption occurs
 one step earlier.
 
@@ -1489,6 +1584,9 @@ conditions are recorded.
 ### 7.3 Wait, then escalate under a capability profile
 
 ```mermaid
+    %% atlas-diagram-id: m18-stop-escalation
+    %% atlas-diagram-title: Stop escalation and artifact classification
+    %% atlas-diagram-alt: A supervisor requests cooperative stop, waits to a deadline, escalates only through recorded terminate and kill capabilities, observes the child exit, then inspects artifacts before classification.
 %% Figure 14. The supervisor requests cooperative stop, waits to a deadline, then uses only recorded platform capabilities and always observes the child after escalation before classifying artifacts.
 stateDiagram-v2
     [*] --> Running
@@ -1502,6 +1600,10 @@ stateDiagram-v2
     Exited --> ArtifactsClassified: wait/poll + inspect
     ArtifactsClassified --> [*]
 ```
+
+**Text equivalent.** A supervisor requests cooperative stop, waits to a
+deadline, escalates only through recorded terminate and kill capabilities,
+observes the child exit, then inspects artifacts before classification.
 
 Python method names have different native effects:
 
@@ -1661,6 +1763,9 @@ protocol, not a new canonical phase.
 ### 8.3 The publication sequence
 
 ```mermaid
+    %% atlas-diagram-id: m18-publication-phases
+    %% atlas-diagram-title: Atlas publication phases
+    %% atlas-diagram-alt: An admitted job moves through start, encoding, staging, validation, Python flush, file synchronization, close, replacement, optional directory synchronization, exit, and recovery classification, exposing crash cuts between phases.
 %% Figure 15. The exact Atlas publication phases expose a crash cut between every application and OS boundary while keeping exit evidence separate from artifact evidence.
 flowchart LR
     A["ADMITTED"] --> S["STARTED"]
@@ -1676,6 +1781,11 @@ flowchart LR
     D --> X
     X --> Q["RECOVERED<br/>artifact classification"]
 ```
+
+**Text equivalent.** An admitted job moves through start, encoding, staging,
+validation, Python flush, file synchronization, close, replacement, optional
+directory synchronization, exit, and recovery classification, exposing crash
+cuts between phases.
 
 The target directory contains:
 
@@ -1707,6 +1817,9 @@ false success.
 ### 8.4 Buffer-to-storage ladder
 
 ```mermaid
+    %% atlas-diagram-id: m18-buffer-to-storage-ladder
+    %% atlas-diagram-title: Buffer-to-storage claim ladder
+    %% atlas-diagram-alt: Python flush, file synchronization, name replacement, and optional directory synchronization support progressively different file and namespace claims, while hardware, filesystem, and failure assumptions remain.
 %% Figure 16. Python flush, native file synchronization, name replacement, and optional directory synchronization strengthen different claims and never create a universal power-loss guarantee by themselves.
 flowchart TB
     MEM["candidate bytes in process"] --> PY["Python staging buffer"]
@@ -1717,6 +1830,10 @@ flowchart TB
     FILE --> NAME
     DIR --> LIMIT["hardware/filesystem/failure assumptions remain"]
 ```
+
+**Text equivalent.** Python flush, file synchronization, name replacement, and
+optional directory synchronization support progressively different file and
+namespace claims. Hardware, filesystem, and failure assumptions remain.
 
 **[PYTHON 3.14 CONTRACT]** for buffered file objects, call `flush()` before
 `os.fsync(fileno())`. On Unix, `os.fsync` calls native `fsync`; on Windows it
@@ -2003,6 +2120,9 @@ The important architecture is the separation around this excerpt:
 ### 9.3 Required reference architecture
 
 ```mermaid
+    %% atlas-diagram-id: m18-reference-architecture
+    %% atlas-diagram-title: Reference architecture and external effects
+    %% atlas-diagram-alt: The supervisor owns worker creation, stop policy, recovery, and capability records; the worker combines a pure review packet with staged publication, while workspace, oracle, capabilities, and publication evidence feed one JSON dossier.
 %% Figure 17. The reference keeps the pure review-packet contract inward while supervisor, worker, platform capability, publication, and evidence adapters own external effects.
 flowchart LR
     CLI["scenario command"] --> SUP["supervisor"]
@@ -2020,6 +2140,10 @@ flowchart LR
     CAP --> PACKET
     ORACLE --> PACKET
 ```
+
+**Text equivalent.** The supervisor owns worker creation, stop policy,
+recovery, and capability records. The worker combines a pure review packet with
+staged publication, and its evidence feeds one JSON dossier.
 
 Dependency rule:
 
@@ -3018,6 +3142,9 @@ model result.
 ### 13.3 Architecture to recover
 
 ```mermaid
+    %% atlas-diagram-id: m18-dossier-state-views
+    %% atlas-diagram-title: Independent state views in the evidence dossier
+    %% atlas-diagram-alt: Application job, supervisor, worker, publication phases, raw exit, artifacts, and platform capability remain separate state views that the recovery classifier joins into an evidence dossier without equating them.
 %% Figure 18. The Atlas dossier joins four independent state views—application job, process lifecycle, publication phases, and artifact classification—without letting one stand in for another.
 flowchart TB
     JOB["application job<br/>input + run_id + oracle"] --> WORK["worker process"]
@@ -3031,6 +3158,10 @@ flowchart TB
     CAP --> PHASE
     CLASS --> EVIDENCE["evidence dossier<br/>contract + model + observation + unknown"]
 ```
+
+**Text equivalent.** Application job, supervisor, worker, publication phases,
+raw exit, artifacts, and platform capability remain separate state views. The
+recovery classifier joins them into an evidence dossier without equating them.
 
 The four states can disagree:
 
@@ -3496,6 +3627,9 @@ End with exactly:
 One-page concept map:
 
 ```mermaid
+    %% atlas-diagram-id: m18-os-one-page-map
+    %% atlas-diagram-title: Operating-system mediation one-page map
+    %% atlas-diagram-alt: Finite resources and failure lead to OS mediation of process lifecycle, address translation, names and open resources, and authority; shutdown and publication lead to recovery evidence and later concurrency, network, distribution, and runtime modules.
 %% Figure 19. Module 18 consolidates local resource mediation around four independent state views and carries their boundaries forward.
 flowchart TD
     PRESS["finite resources + failure"] --> OS["OS mediation"]
@@ -3511,6 +3645,11 @@ flowchart TD
     REC --> EVID["contract / model / observation / unknown"]
     EVID --> LATER["M19 overlap · M20 network · M21 distribution · M24 runtime"]
 ```
+
+**Text equivalent.** Finite resources and failure lead to OS mediation of
+process lifecycle, address translation, names and open resources, and
+authority. Shutdown and publication lead to recovery evidence and later system
+modules.
 
 Before/now:
 
@@ -3985,3 +4124,28 @@ Finish:
 > I can recover the OS-owned state, trace its lifecycle, name the source of each
 > guarantee, and design for interruption without claiming more than the
 > platform and evidence support.
+
+## Guided Codex handoff — M18
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M18. This resource is owned by [layer], this
+lifecycle trace is [trace], this authority/durability claim is [claim], and my
+confidence is [level].”** Ask for the resource-state timeline before naming an
+OS API. Use this hint ladder: resource/owner → handle/descriptor → lifecycle
+and cleanup → authority check → visibility/durability boundary → crash or
+recovery observation. Change one premise (cancellation, forced stop, another
+process, permission denial, or power loss) and ask which guarantee disappears.
+
+### Study Partner — lifecycle rehearsal
+
+Ask the learner to trace one file/resource through acquire, use, close,
+flush/sync, failure, and recovery. Change exactly one event and ask whether the
+result is a leak, a visibility difference, lost durability, or an authority
+failure. Preserve the unknown platform detail rather than inventing it.
+
+### Forward handoff — M19
+
+Carry the idea of an owned resource plus a legal lifecycle into **M19**.
+Concurrency makes the same ownership and timing reasoning explicit across
+multiple simultaneous histories.

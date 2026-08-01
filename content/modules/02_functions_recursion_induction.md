@@ -1703,3 +1703,31 @@ University worksheets are inspiration and optional practice, not material to cop
 ## Instructor decision rule
 
 Do not advance because Michael can recognize a base case or recite “\(\Theta(n)\).” Advance when he can read an unfamiliar recursive function, reconstruct its frames and architecture, state its domain, prove progress and correctness, derive cost from the call structure, expose a hidden assumption with a test, and review an agent's patch as the responsible system owner.
+
+## Guided Codex handoff — M2
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M2. Here is my recursive contract, my predicted
+call trace, and my confidence.”** Ask first for the domain and the measure that
+must decrease; only then inspect the base case and recursive call. If the
+argument stalls, climb this hint ladder: one concrete input → frame tree →
+decreasing measure → induction hypothesis → cost recurrence. Change one
+premise (an empty input, an invalid domain value, or a non-decreasing call) and
+ask the learner to repair the contract and test. End by asking what the trace
+does *not* prove about memory, performance, or a different input domain.
+
+### Study Partner — recursion rehearsal
+
+Ask the learner to predict the next two frames of one unfamiliar function,
+then hide the code and reconstruct its base case, recursive promise, and one
+termination measure. Offer one tempting false claim—“the recursive call is
+smaller, so it must terminate”—and ask for the missing assumption. Hand off
+the smallest fragile proof step to the TA if it remains unclear.
+
+### Forward handoff — M3
+
+Carry one explicit function contract, one frame trace, and one proof/cost
+assumption into **M3**. The next module asks the same question at a larger
+boundary: what may a client rely on when an implementation is hidden behind an
+abstraction?

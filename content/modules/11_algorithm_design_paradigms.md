@@ -46,6 +46,9 @@ Every strong claim should be classifiable. “The AI says this is optimal” has
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m11-course-position
+%% atlas-diagram-title: M11 prerequisites and forward connections
+%% atlas-diagram-alt: Modules 6 through 10 converge on Module 11 strategy selection. Module 11 then connects forward to components, testing, transactions, concurrency, and intelligent systems.
 flowchart LR
     M6["M6 · Representation<br/>state and memory"] --> SYN["M11 · Strategy selection"]
     M7["M7 · Stacks, queues,<br/>lazy search"] --> SYN
@@ -59,6 +62,8 @@ flowchart LR
     SYN --> M19["M19 · Scheduling<br/>under concurrency"]
     SYN --> M25["M25 · Intelligent systems<br/>and evaluation"]
 ```
+
+**Text alternative.** Modules 6–10 provide representation, lazy search, indexing, ordering, and graph reasoning to M11. M11’s strategy-selection model then supports M12 components, M13 evidence, M16 transactions, M19 concurrency, and M25 intelligent systems.
 
 ### The Atlas pressure
 
@@ -84,6 +89,9 @@ The tempting rule “always take the largest value per minute” is fast and oft
 ### Arc II synthesis map
 
 ```mermaid
+%% atlas-diagram-id: m11-arc-two-planner-map
+%% atlas-diagram-title: Arc II structures feeding the Atlas planner
+%% atlas-diagram-alt: Representation, ingestion, indexing, ordering, and prerequisite graphs feed constrained plan search. The planner produces verification, a quality certificate, and a decision ledger.
 flowchart TD
     HISTORY["M6 · history representation"] --> STREAM["M7 · bounded ingestion"]
     STREAM --> INDEX["M8 · identity/search indexes"]
@@ -100,6 +108,8 @@ flowchart TD
     PROOF["proof vocabulary"] -.-> CERT
     AI["agent-generated patch"] -.-> VERIFY
 ```
+
+**Text alternative.** Arc II moves from history representation through bounded ingestion, indexing, ordering, and a prerequisite graph to constrained plan search. The planner is checked by an independent verifier, carries a quality certificate, and records a decision ledger.
 
 Module 11 does not discard the earlier structures. An exact planner coordinates:
 
@@ -260,6 +270,9 @@ The result needs:
 - unresolved policy and uncertainty notes.
 
 ```mermaid
+%% atlas-diagram-id: m11-decision-evidence-chain
+%% atlas-diagram-title: From human need to a verified planning decision
+%% atlas-diagram-alt: A human need is modeled as candidates, feasibility, objectives, and an algorithm. The returned plan is independently checked and given a quality label before a human decision.
 flowchart LR
     NEED["Human need"] --> MODEL["Instance + candidate model"]
     MODEL --> FEAS["Feasibility predicate"]
@@ -271,6 +284,8 @@ flowchart LR
     CHECK --> DECIDE["Human decision"]
     QUALITY --> DECIDE
 ```
+
+**Text alternative.** A human need becomes an instance and candidate model, then a feasibility predicate and objective with tie rules. An algorithm returns a plan, which an independent verifier checks and a proof, bound, or heuristic label qualifies before a human decision.
 
 A test showing that code returned *a* plan addresses only one arrow.
 
@@ -424,6 +439,9 @@ Suppose an agent splits tasks in half, independently finds the best plan for the
 The shared budget couples the halves. Both subplans may spend 60 minutes. The combine step needs more than two already-optimized answers: it needs the best left and right value for every possible allocated budget, or another frontier of tradeoffs.
 
 ```mermaid
+%% atlas-diagram-id: m11-divide-conquer-budget-combine
+%% atlas-diagram-title: Divide and conquer with a shared budget
+%% atlas-diagram-alt: Tasks split into left and right groups, but each side must report its best value for every budget. The final answer maximizes left value plus right value over split budgets.
 flowchart TD
     ALL["Tasks + one shared budget B"] --> L["left tasks"]
     ALL --> R["right tasks"]
@@ -432,6 +450,8 @@ flowchart TD
     LB --> COMB["max over b:<br/>left[b] + right[B-b]"]
     RB --> COMB
 ```
+
+**Text alternative.** With one shared budget B, left and right task groups cannot be solved independently by returning one value each. Each returns its best value for every budget from 0 through B, and the combine step maximizes `left[b] + right[B-b]`.
 
 Once the combine boundary carries budget-indexed results, we are already approaching dynamic programming.
 
@@ -479,6 +499,9 @@ In Module 10’s minimum-spanning-tree setting, a lightest edge crossing an appr
 The reusable shape is:
 
 ```mermaid
+%% atlas-diagram-id: m11-greedy-exchange-proof
+%% atlas-diagram-title: Greedy exchange proof structure
+%% atlas-diagram-alt: A greedy local choice is compared with an arbitrary optimum. If exchanging it into that optimum remains feasible and no worse, the remaining problem can be reduced; otherwise the greedy rule is unproved.
 flowchart LR
     LOCAL["Choose local candidate g"] --> OPT["Take an arbitrary optimum O"]
     OPT --> EX["Exchange part of O for g"]
@@ -486,6 +509,8 @@ flowchart LR
     SAFE -- yes --> REDUCE["Reduce to remaining problem"]
     SAFE -- no --> FAIL["Greedy rule unproved"]
 ```
+
+**Text alternative.** To justify a greedy choice, take an arbitrary optimum and exchange in the local choice. Only if the exchanged solution remains feasible and no worse may the proof reduce to the remaining problem; otherwise the rule has no proof.
 
 The theorem belongs to the specific feasible-set structure. It does not travel merely because both problems say “minimum” or “maximum.”
 
@@ -567,12 +592,17 @@ Why exhaustive? Every feasible solution either excludes the last task or include
 ### Subproblem dependency DAG
 
 ```mermaid
+%% atlas-diagram-id: m11-knapsack-state-dependencies
+%% atlas-diagram-title: Knapsack dynamic-programming state dependencies
+%% atlas-diagram-alt: State OPT(i,b) depends either on skipping item i, OPT(i-1,b), or taking it, OPT(i-1,b-w_i) plus v_i. Both routes reduce the item count.
 flowchart TD
     X["OPT(i,b)"] --> SKIP["OPT(i-1,b)"]
     X --> TAKE["OPT(i-1,b-wᵢ) + vᵢ"]
     SKIP --> BASE["smaller i"]
     TAKE --> BASE
 ```
+
+**Text alternative.** The state `OPT(i,b)` has two dependencies: skip item `i` and use `OPT(i-1,b)`, or take it and use `OPT(i-1,b-w_i) + v_i`. Both dependencies reduce `i`, forming a directed acyclic state graph.
 
 The table is one topological ordering of this DAG.
 
@@ -745,6 +775,9 @@ For the Atlas planner, a partial state needs:
 If the selected set determines elapsed time and value, some fields are derivable rather than independent.
 
 ```mermaid
+%% atlas-diagram-id: m11-backtracking-prefix-tree
+%% atlas-diagram-title: Backtracking prefixes with legal and pruned branches
+%% atlas-diagram-alt: From the empty plan, task A or C may be chosen. A then permits B, while an A-to-C path misses a deadline and a C-to-B path violates B's prerequisite; legal paths end at candidate plans.
 flowchart TD
     R["() · 0 min"] --> A["take A"]
     R --> C["take C"]
@@ -755,6 +788,8 @@ flowchart TD
     AB --> STOP1["budget leaves no legal addition"]
     CA --> STOP2["candidate plan"]
 ```
+
+**Text alternative.** Search starts from an empty plan. Choosing A permits B because its prerequisite is met, while choosing C before B leaves B’s prerequisite unsatisfied; choosing C after A misses its deadline. Illegal prefixes are pruned and legal prefixes end at a budget-limited plan.
 
 ### Feasibility pruning
 
@@ -1036,6 +1071,9 @@ Atlas presents a plan, evidence, alternatives, and model limits. The learner rem
 ### Component architecture
 
 ```mermaid
+%% atlas-diagram-id: m11-planner-architecture
+%% atlas-diagram-title: Atlas planning architecture and evidence flow
+%% atlas-diagram-alt: An immutable task snapshot is validated, valued, and passed to an exact or bounded strategy. The resulting plan is independently verified and paired with a relaxation bound and evidence ledger in a decision report.
 flowchart LR
     SNAP["TaskSnapshot<br/>immutable input"] --> VALID["ProblemValidator<br/>IDs, graph, ranges"]
     VALID --> SCORE["ValuePolicy<br/>expected / conservative"]
@@ -1047,6 +1085,8 @@ flowchart LR
     UB --> REPORT
     LEDGER["Arc II evidence ledger"] -.-> REPORT
 ```
+
+**Text alternative.** An immutable task snapshot is validated and scored under an explicit value policy before a strategy produces a plan and claim label. An independent verifier and a relaxation upper bound both feed the decision report, together with the Arc II evidence ledger.
 
 Dependency direction:
 
@@ -1734,6 +1774,9 @@ The words **small**, **validated**, **indivisible**, **ordered**, and **additive
 ### 16.2 Map
 
 ```mermaid
+%% atlas-diagram-id: m11-planner-code-reading-map
+%% atlas-diagram-title: Planner code-reading dependency map
+%% atlas-diagram-alt: A task and policy contract is validated and prepared as masks for exact subset and backtracking planners. Both create a plan checked by an independent verifier, while a fractional bound and the plan determine a quality gap.
 flowchart TD
     TASK["Task + Policy contract"] --> VALID["_validate_problem"]
     VALID --> MASK["_prepared_masks"]
@@ -1746,6 +1789,8 @@ flowchart TD
     RELAX --> GAP["quality gap"]
     PLAN --> GAP
 ```
+
+**Text alternative.** The task and policy contract is validated and transformed into prepared masks. Exact subset and backtracking planners both produce a plan for an independent error checker; a separate fractional upper bound and the plan produce the quality-gap evidence.
 
 Read boundaries before helpers:
 
@@ -2493,6 +2538,9 @@ MCQ recognition or syntax fluency alone is insufficient.
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m11-algorithm-selection-knowledge-map
+%% atlas-diagram-title: Algorithm selection from structure to evidence
+%% atlas-diagram-alt: A problem contract leads to exhaustive evidence and a proved structural choice among divide and conquer, greedy, dynamic programming, backtracking, randomization, and approximation. Each route feeds verification and an honest report.
 flowchart TD
     PROB["Problem contract"] --> ENUM["Exhaustive oracle"]
     PROB --> STRUCT{"What structure is proved?"}
@@ -2518,6 +2566,8 @@ flowchart TD
 
     VERIFY --> REPORT["Feasibility + objective<br/>quality + cost + limits"]
 ```
+
+**Text alternative.** Begin with a problem contract and a tiny exhaustive oracle. The proved structure then licenses divide and conquer, greedy choice, dynamic programming, backtracking, randomization, or approximation; every route feeds verification and a report of feasibility, objective, quality, cost, and limits.
 
 ### Keep these seven statements
 
@@ -2623,3 +2673,29 @@ External sources verify and extend the integrated narrative; they do not replace
 Advance to durable-software design when Michael can formulate an unseen optimization problem, select a strategy from a proved structural fact, recover and challenge an implementation, verify a returned plan independently, state cost and quality honestly, and defend both the mathematical boundary and the human decision boundary.
 
 Do not advance because a named algorithm was recognized or an agent produced green tests.
+
+## Guided Codex handoff — M11
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M11. The problem structure is [subproblems/
+choice/ordering], my chosen paradigm is [claim], and my confidence is
+[level].”** Ask for the structural fact before accepting a strategy name. Use
+this hint ladder: objective and feasibility → smallest subproblem/choice →
+candidate recurrence or exchange → invariant/optimal-substructure proof idea →
+cost and approximation/quality boundary. Change one premise (negative value,
+non-overlapping interval failure, a greedy tie, or an adversarial input) and
+ask whether the proof, implementation, or decision claim survives.
+
+### Study Partner — design-paradigm rehearsal
+
+Ask the learner to classify one unfamiliar problem by its state, choices, and
+repeated work. Offer a tempting but unjustified greedy/DP/divide-and-conquer
+choice, then ask for the smallest counterexample or missing theorem condition.
+Finish with the evidence artifact that the TA should challenge.
+
+### Forward handoff — M12
+
+Carry a written problem contract, an invariant or recurrence, and one evidence
+boundary into **M12**. The next module turns those reasoning obligations into
+explicit Python module, API, type, and dependency contracts.
