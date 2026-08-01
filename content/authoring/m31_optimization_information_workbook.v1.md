@@ -633,8 +633,11 @@ transcript, or automatic Notion record.
 ### Forward handoff
 
 The durable M31 artifact is an **objective/constraint/convergence claim sheet
-with experiment conditions and known limits**. M32 consumes representation,
-dtype/shape, seed, profiling, and solver-configuration fields. M34–M36 consume
+with experiment conditions and known limits**. The planned
+[M32 authoring workbook](m32_systems_languages_scientific_python_accelerators_workbook.v1.md)
+consumes representation, dtype/shape, seed, profiling, and
+solver-configuration fields. This is an authoring-to-authoring handoff, not
+learner navigation or evidence that either module is released. M34–M36 consume
 the distinction between optimizing an objective and supporting a decision or
 generalization claim. M25/M26 remain locked synthesis work until their own
 contract and release evidence are complete.
