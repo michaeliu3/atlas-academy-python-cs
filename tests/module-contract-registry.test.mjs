@@ -329,14 +329,14 @@ test("promotion evidence must bind and scan the module's own Mermaid content", a
   assert.ok(unrelated.errors.some((error) => error.includes("unrelated course content")));
 
   const m09 = graphById.get("m09");
-  const incomplete = await promotionVisualAlternativeErrors({
+  const completeM09 = await promotionVisualAlternativeErrors({
     siteRoot: process.cwd(),
     moduleEntry: { moduleId: "m09" },
     graphModule: m09,
     manifestById,
     evidenceReport: visualEvidence("content/modules/09_trees_heaps_sorting_ordered.md"),
   });
-  assert.ok(incomplete.errors.some((error) => error.includes("complete Mermaid text alternatives")));
+  assert.deepEqual(completeM09.errors, []);
 });
 
 test("the registry rejects missing modules, forged audit evidence, and a direct preview-to-verified jump", async () => {
