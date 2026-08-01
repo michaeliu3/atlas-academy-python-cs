@@ -374,7 +374,20 @@ def best_independent_subset(items, budget):
     return best_ids, best_value
 ```
 
-Prediction: how many subsets does it inspect for 20 items? `2²⁰ = 1,048,576`.
+### Prediction — exhaustive-search scale
+
+Before revealing the count, write an estimate and the rule that produced it:
+how many subsets can an exhaustive search inspect for 20 independently chosen
+items?
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+Each item is either absent or present, so the search examines `2²⁰ = 1,048,576`
+subsets. The point is not merely the number: add one independent binary choice
+and the candidate space doubles.
+
+</details>
 
 ### Correctness pattern
 
@@ -645,7 +658,20 @@ def knapsack_bottom_up(
     return value[n][budget], tuple(chosen)
 ```
 
-Prediction for A/B/C above: the result is value 220 with `("B", "C")`.
+### Prediction — reconstructing the chosen plan
+
+For the A/B/C example above, predict both the optimum value and the selected
+IDs before inspecting the table’s reconstruction path. Record the state whose
+choice you believe changes the result.
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+The result is value 220 with `("B", "C")`. The reconstruction evidence matters:
+the dynamic-programming value alone is not yet a usable plan until the recorded
+choices trace back to those task IDs.
+
+</details>
 
 ### Correctness argument
 

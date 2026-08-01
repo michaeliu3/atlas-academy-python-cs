@@ -1664,7 +1664,7 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 
 **Exit ticket:** distinguish “the patch implements the methods” from “the patch satisfies the ADT.”
 
-### Session 7 — TA studio and consolidation (60 minutes)
+### Optional Session 7 — TA studio and consolidation (60 minutes)
 
 Bring:
 

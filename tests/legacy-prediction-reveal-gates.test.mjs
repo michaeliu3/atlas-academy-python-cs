@@ -4,6 +4,12 @@ import test from "node:test";
 
 const packs = [
   {
+    path: "content/modules/11_algorithm_design_paradigms.md",
+    expectedMarkers: 8,
+    expectedAnswerGates: 0,
+    expectedPredictionGates: 2,
+  },
+  {
     path: "content/modules/20_networks_application_protocols.md",
     expectedMarkers: 11,
     expectedAnswerGates: 8,
