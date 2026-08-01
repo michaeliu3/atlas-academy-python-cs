@@ -25,6 +25,11 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   const m29 = report.byModuleId.get("m29");
   const m30 = report.byModuleId.get("m30");
   const m31 = report.byModuleId.get("m31");
+  const m32 = report.byModuleId.get("m32");
+  const m33 = report.byModuleId.get("m33");
+  const m34 = report.byModuleId.get("m34");
+  const m35 = report.byModuleId.get("m35");
+  const m36 = report.byModuleId.get("m36");
 
   const m19 = report.byModuleId.get("m19");
   const m20 = report.byModuleId.get("m20");
@@ -33,7 +38,7 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 13);
+  assert.equal(report.summary.companionCount, 18);
   assert.deepEqual(report.summary.moduleIds, [
     "m12",
     "m13",
@@ -48,6 +53,11 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
     "m29",
     "m30",
     "m31",
+    "m32",
+    "m33",
+    "m34",
+    "m35",
+    "m36",
   ]);
   assert.equal(m12.guideBinding.locator, "/guides/11");
   assert.equal(m12.teachingAssistant.role, "supportive-oral-defense");
@@ -90,10 +100,31 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   assert.equal(m31.studyPartner.role, "non-grading-rehearsal");
   assert.equal(m31.forwardHandoff.targetModuleId, "m18");
   assert.equal(moduleLearningCompanionRelativePath("m31"), "content/course/contracts/companions/m31.v1.json");
+  for (const [courseModule, guideLocator, forwardModuleId] of [
+    [m32, "/guides/31", "m33"],
+    [m33, "/guides/32", "m34"],
+    [m34, "/guides/33", "m35"],
+    [m35, "/guides/34", "m36"],
+    [m36, "/guides/35", "m25"],
+  ]) {
+    assert.ok(courseModule);
+    assert.equal(courseModule.guideBinding.locator, guideLocator);
+    assert.equal(courseModule.teachingAssistant.role, "supportive-oral-defense");
+    assert.equal(courseModule.studyPartner.role, "non-grading-rehearsal");
+    assert.equal(courseModule.forwardHandoff.targetModuleId, forwardModuleId);
+    assert.match(courseModule.forwardHandoff.boundary, /not learner navigation, release evidence, or credit/i);
+  }
 
   const graphM31 = graph.modules.find(({ id }) => id === "m31");
   assert.equal(graphM31.state.lifecycle, "authoring-only");
   assert.equal(graphM31.state.readerAccess, "hidden");
+  for (const moduleId of ["m32", "m33", "m34", "m35", "m36"]) {
+    const graphModule = graph.modules.find(({ id }) => id === moduleId);
+    assert.equal(graphModule.state.lifecycle, "authoring-only");
+    assert.equal(graphModule.state.readerAccess, "hidden");
+    assert.equal(graphModule.state.contract.state, "authoring-only");
+    assert.equal(graphModule.state.release.state, "unrecorded");
+  }
   const graphM29 = graph.modules.find(({ id }) => id === "m29");
   assert.equal(graphM29.state.contract.state, "legacy-baseline");
   assert.equal(graphM29.state.release.state, "unrecorded");

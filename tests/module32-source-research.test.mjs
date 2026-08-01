@@ -45,13 +45,16 @@ test("M32 primary-source research remains a bounded authoring input, not a sourc
     lifecycle: "authoring-only",
     readerAccess: "hidden",
     availability: "authoring-only",
-    contract: { track: "advanced-v1", state: "not-started" },
+    contract: { track: "advanced-v1", state: "authoring-only" },
     release: { state: "unrecorded", recordId: null },
   });
-  assert.equal(contract?.contractState, "not-started");
-  assert.ok(contract?.criteria.every(({ status }) => status === "planned"));
+  assert.equal(contract?.contractState, "authoring-only");
+  assert.deepEqual([...new Set(contract?.criteria.map(({ status }) => status))].sort(), [
+    "planned",
+    "pointer-present",
+  ]);
   assert.ok(
-    !releaseInputs.inputs.some(
+    releaseInputs.inputs.some(
       ({ path }) => path === "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
     ),
   );
