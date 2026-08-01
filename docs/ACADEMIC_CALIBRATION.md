@@ -26,6 +26,7 @@ claim institutional equivalence.
 | --- | --- | --- |
 | [M1–M5 foundations review](research/academic-calibration-m1-m5-source-review.md) | State, recursion/induction, ADTs, proof, and cost models against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Preserve the proof-to-cost bridge and add a concise source/session ledger before rewriting theory. |
 | [M6–M10 data-structures review](research/academic-calibration-m6-m10-source-review.md) | Representation, restricted interfaces, hashing, ordered structures, and graph algorithms against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Add one prediction-and-repair trace for open-addressing deletion before adding broader material. |
+| [M11–M16 algorithms-and-durable-systems review](research/academic-calibration-m11-m16-source-review.md) | Algorithm design, interfaces, specifications, change, delivery, and transactions against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Preserve the M11 scope handoff and reuse one visible evidence thread across M12–M15. |
 | [M27 discrete-mathematics review](../content/source-maps/module27_discrete_mathematics_official_course_calibration_2026-08-01.md) | Logic, proof, counting, recurrence, graph, poset, asymptotic, and number-theory progression against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Correct the source-map and audit routing so sessions 3–6 match the published workbook sequence. |
 
 ## What calibration means in Atlas

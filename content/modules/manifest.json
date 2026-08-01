@@ -335,9 +335,9 @@
       "title": "Hashing, Dictionaries, Sets, and Indexing",
       "summary": "Atlas can now represent sequences, streams, contracts, graphs, and cost models. It still has a practical problem: a learner types hash collision, and Atlas must find matching notes without rereading every note.",
       "arcId": "arc-ii",
-      "wordCount": 11685,
+      "wordCount": 12241,
       "estimatedMinutes": 52,
-      "sourceHash": "349f6a9c1a572b2c88ff2b45bcaa78809f6f702bd0c13a401732d8c566c089bc",
+      "sourceHash": "71d0aadf8bf4cee0c3a23b25ea2289e4e3d1c40116d0f6d5ffa737680b521c03",
       "id": "m08",
       "state": {
         "lifecycle": "learner-material-ready",

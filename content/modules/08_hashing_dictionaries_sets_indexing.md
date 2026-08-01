@@ -332,6 +332,94 @@ The words **chaining** and **open addressing** name representation families. The
 
 We manually implement chaining because it exposes the invariants with little code. We inspect CPython separately so the teaching representation is never mistaken for Python's required representation.
 
+### Paper/code trace: a tombstone preserves the probe path
+
+This is a deliberately small **linear-probing course model**, not CPython's
+probe formula or table layout. It has five slots, a one-slot-at-a-time probe
+rule, and these illustrative hash routes:
+
+`h("ant") = h("bat") = h("cat") = 0`.
+
+Start with this table. `ACTIVE` holds a live key/value entry; `EMPTY` means no
+key has ever occupied that slot.
+
+```text
+index          0                 1          2       3       4
+state       ACTIVE            ACTIVE      EMPTY   EMPTY   EMPTY
+entry    ("ant", 3)        ("bat", 5)      —       —       —
+```
+
+**Predict before revealing.** Delete `"ant"`. Should slot `0` become `EMPTY`
+or `DUMMY` (also called a tombstone)? Then predict all three results:
+
+1. `get("bat")` — which slots must it inspect, and what value should it find?
+2. `put("bat", 9)` — may it reuse slot `0`, or must it replace the existing
+   entry at slot `1`?
+3. `put("cat", 7)` — which slot should become active once absence has been
+   established?
+
+<details>
+<summary>Reveal the trace and the three different obligations</summary>
+
+Deletion changes slot `0` to `DUMMY`, not `EMPTY`:
+
+```text
+index          0                 1          2       3       4
+state       DUMMY             ACTIVE      EMPTY   EMPTY   EMPTY
+entry          —           ("bat", 5)      —       —       —
+```
+
+**Accessible prose trace:** `"bat"` begins at slot `0`. A dummy says that a
+key may have been displaced farther along the same probe path, so lookup must
+continue to slot `1`, compare equality, and return `5`. If deletion had made
+slot `0` empty, lookup would stop too early and incorrectly report `"bat"`
+missing.
+
+The three operations therefore have distinct duties:
+
+| Operation | What it does at a `DUMMY` slot | What ends the search | Result in this trace |
+| --- | --- | --- | --- |
+| `get("bat")` | Continue probing; a dummy proves neither presence nor absence. | Matching active key → found; `EMPTY` → missing. | Inspect `0`, then `1`; return `5`. |
+| `put("bat", 9)` | Remember the first dummy **but continue**. | Matching active key → replace; `EMPTY` → no existing key. | Inspect `0`, then replace the entry at `1`; size does not change. |
+| `put("cat", 7)` | Remember the first dummy **but continue**. | `EMPTY` establishes absence of `"cat"`. | Inspect `0`, `1`, `2`; reuse the remembered slot `0`. |
+
+After the replacement and insertion, the table is:
+
+```text
+index          0                 1          2       3       4
+state       ACTIVE            ACTIVE      EMPTY   EMPTY   EMPTY
+entry    ("cat", 7)        ("bat", 9)      —       —       —
+```
+
+The insertion cannot immediately overwrite the first dummy: an equal key may
+appear later in the probe sequence. In this example, immediately reusing slot
+`0` for `put("bat", 9)` would create two active entries for the same key.
+
+```python
+# Original Atlas pseudocode: probe_sequence visits each table slot at most once.
+def locate_for_put(table, key):
+    first_dummy = None
+    for index in probe_sequence(key):
+        slot = table[index]
+        if slot is EMPTY:
+            return ("insert", first_dummy if first_dummy is not None else index)
+        if slot is DUMMY:
+            if first_dummy is None:
+                first_dummy = index
+            continue
+        if slot.key == key:
+            return ("replace", index)
+    if first_dummy is not None:
+        return ("insert", first_dummy)
+    raise TableFull
+```
+
+This pseudocode models a table with a defined overflow/resize policy. It does
+not specify Python's `dict`, its probe formula, deletion timing, or its exact
+dummy-slot representation.
+
+</details>
+
 ## 6. The equality/hash contract
 
 **[LANGUAGE GUARANTEE]** Python requires:
@@ -1267,8 +1355,8 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Retrieve:** Module 4 functions and pigeonhole principle.  
 **Launch:** map six distinct keys into four table positions.  
 **Derive:** hash route, candidate region, collision, chaining, open addressing, and equality confirmation.  
-**Learner action:** trace two unequal colliding keys through insertion, successful lookup, and missing lookup.  
-**Debug:** reject the broken implementation that returns the first bucket value.  
+**Learner action:** trace two unequal colliding keys through insertion, successful lookup, and missing lookup; then distinguish lookup, replacement, and tombstone reuse in the five-slot paper trace.  
+**Debug:** reject the broken implementation that returns the first bucket value or turns a deleted open-addressing slot into `EMPTY`.  
 **Exit claim:** state why collision is inevitable but incorrect lookup is not.
 
 ### Session 3 — Keys are behavioral contracts
