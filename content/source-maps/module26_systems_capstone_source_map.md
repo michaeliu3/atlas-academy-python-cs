@@ -72,9 +72,15 @@ bounded human need + non-goal + accountable release owner
     → dossier + oral defense + explicit unknowns
 ~~~
 
-### M24 → M25 → M26 connected sequence
+### M24 evidence thread → M31–M36 synthesis gate → M25 → M26
 
-| Boundary | Module 24 gives the learner | Module 25 adds | Module 26 must defend |
+This table compares connected **evidence roles**, not next/previous navigation.
+M24 supplies a systems-evidence thread; the M31–M36 chain supplies the
+advanced mathematics, systems-for-learning, AI/ML, and learning-theory bridge;
+M25 remains preview-gated until that prerequisite and its own review evidence
+exist. M26 follows only after M25's gate.
+
+| Boundary | Module 24 gives the learner | Module 25 adds after M31–M36 | Module 26 must defend |
 |---|---|---|---|
 | Claim | A performance conclusion needs a named workload, layer, mechanism, and uncertainty. | A decision-support conclusion needs a purpose, data/candidate/model/policy contract, evaluation scope, and human-control boundary. | A release claim needs an owner, source version, representation/contract, appropriate evidence, cost/failure boundary, and explicit limitation. |
 | Architecture | Runtime, interpreter, native boundary, allocation, and operating-system layers stay distinct. | Data, candidate generation, ranker/model, interface, authorization, and mutation stay distinct. | Purpose, context, code/runtime, data/trust, deployment/recovery, and change/release views are connected without pretending one diagram proves all. |

@@ -3,12 +3,13 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("M25 and M26 name the actual advanced candidate receipts", async () => {
-  const [m25, m26, contracts] = await Promise.all([
+  const [m25, m26, m26SourceMap, contracts] = await Promise.all([
     readFile(new URL("../content/modules/25_evidence_grounded_intelligent_systems.md", import.meta.url), "utf8"),
     readFile(
       new URL("../content/modules/26_systems_capstone_open_source_stewardship.md", import.meta.url),
       "utf8",
     ),
+    readFile(new URL("../content/source-maps/module26_systems_capstone_source_map.md", import.meta.url), "utf8"),
     readFile(new URL("../content/course/contracts/advanced-module-contracts.v1.json", import.meta.url), "utf8"),
   ]);
 
@@ -26,6 +27,9 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.doesNotMatch(m25, /ML representation\/evaluation evidence packet/u);
   assert.doesNotMatch(m26, /\| M35 \| ML evidence packet \|/u);
   assert.doesNotMatch(m26, /\| M36 \| reliable-learning limit\/non-claim and reproducibility record \|/u);
+  assert.match(m26SourceMap, /M24 evidence thread → M31–M36 synthesis gate → M25 → M26/u);
+  assert.match(m26SourceMap, /connected \*\*evidence roles\*\*, not next\/previous navigation/u);
+  assert.doesNotMatch(m26SourceMap, /M24 → M25 → M26 connected sequence/u);
   assert.match(contracts, /Machine Learning & Representation Dossier and learner-controlled oral-defense summary/u);
   assert.match(
     contracts,
