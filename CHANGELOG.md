@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Added M32's Git-index-bound **authoring-only** candidate evidence and
+  preflight, matching M31's existing non-promoting boundary. It binds M32's
+  hidden workbook, source research, delivery map, fixture, visual trace, and
+  pinned NumPy observation while rejecting substituted material or forged
+  release assertions. It does not create a review candidate, learner route,
+  release, deployment, or human-review approval.
 - Added a concise official-source recheck for the M6–M10 data-structures and
   algorithms route, cross-calibrated against MIT, CMU, Stanford, Georgia Tech,
   and Berkeley. It confirms the connected representation → protocol → indexing

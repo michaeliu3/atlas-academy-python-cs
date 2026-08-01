@@ -35,6 +35,10 @@ test("M32 connects claim tags to one pinned CPU-only NumPy observation", async (
   assert.match(m32, /NumPy 2\.3\.5/u);
   assert.match(m32, /exact overlap check/u);
   assert.match(m32, /conservative possibility check/u);
+  assert.match(m32, /atlas-diagram-id: m32-systems-evidence-route/u);
+  assert.match(m32, /atlas-diagram-alt: A scientific question first becomes a public interface and data contract\./u);
+  assert.match(m32, /atlas-diagram-id: m32-request-to-observation-trace/u);
+  assert.match(m32, /atlas-diagram-alt: The host prepares an input and records its residency\./u);
   assert.match(m32, /~~~text\ndef prepare_for_kernel\(batch\):/u);
   assert.match(m32, /~~~text\ndef loss\(theta, x, y\):/u);
   assert.doesNotMatch(m32, /~~~python\ndef prepare_for_kernel\(batch\):/u);

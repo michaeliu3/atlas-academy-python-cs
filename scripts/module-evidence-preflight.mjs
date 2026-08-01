@@ -72,8 +72,8 @@ const requiredM29PromotionBlockers = [
   "source-commit-ci-run",
   "private-deployment-record",
 ];
-const requiredM31OpenCriterionIds = ["release-provenance-ci-and-deployment-evidence"];
-const requiredM31PromotionBlockers = [
+const requiredAuthoringOpenCriterionIds = ["release-provenance-ci-and-deployment-evidence"];
+const requiredAuthoringPromotionBlockers = [
   "human-review",
   "review-ready-commit",
   "source-commit-ci-run",
@@ -88,46 +88,76 @@ const expectedM29ReleaseCriterionClaim =
   "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.";
 const expectedM29ReleaseCriterionLimitation =
   "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open.";
-const expectedM31PreflightReleaseBoundary =
-  "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M31 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.";
-const expectedM31EvidenceRecordReleaseBoundary =
-  "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M31 remains authoring-only, hidden from the reader, and unreleased.";
-const expectedM31ReleaseCriterionClaim =
-  "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M31 material.";
-const expectedM31ReleaseCriterionLimitation =
-  "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.";
-const expectedM31CandidateDocumentationPath = "docs/module-evidence/m31/candidate-preflight.md";
-const expectedM31CandidateDocumentationDigest =
-  "sha256:d33e105b3fecf19cfb41d16e15e444db671a6cf5fc2964d7f800575309eac01c";
-const expectedM31AuthoringWorkbookPath =
-  "content/authoring/m31_optimization_information_workbook.v1.md";
-const expectedM31AuthoringDeliveryMapPath =
-  "content/course/contracts/authoring-delivery/m31.v1.json";
-const expectedM31AuthoringSourcePlanPath =
-  "content/source-maps/module31_optimization_information_source_map.md";
-const expectedM31AuthoringSourceMapPaths = new Set([
-  expectedM31AuthoringSourcePlanPath,
-  "content/source-maps/module31_optimization_information_source_audit.md",
-]);
-const expectedM31AuthoringModelPath = "lib/m31-optimization-authoring-model.js";
-const expectedM31AuthoringModelTestPath = "tests/m31-optimization-authoring-model.test.mjs";
-const expectedM31AuthoringVisualTestPath = "tests/m31-authoring-workbook.test.mjs";
-
 const m31CandidatePreflightProfile = Object.freeze({
   moduleId: "m31",
   state: "authoring-only-candidate-not-promoting",
   evidenceRecordPath: "content/course/contracts/evidence/m31.v1.json",
-  openCriterionIds: requiredM31OpenCriterionIds,
-  promotionBlockers: requiredM31PromotionBlockers,
-  preflightReleaseBoundary: expectedM31PreflightReleaseBoundary,
-  evidenceRecordReleaseBoundary: expectedM31EvidenceRecordReleaseBoundary,
-  releaseCriterionClaim: expectedM31ReleaseCriterionClaim,
-  releaseCriterionLimitation: expectedM31ReleaseCriterionLimitation,
-  candidateDocumentationPath: expectedM31CandidateDocumentationPath,
+  openCriterionIds: requiredAuthoringOpenCriterionIds,
+  promotionBlockers: requiredAuthoringPromotionBlockers,
+  preflightReleaseBoundary:
+    "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M31 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.",
+  evidenceRecordReleaseBoundary:
+    "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M31 remains authoring-only, hidden from the reader, and unreleased.",
+  releaseCriterionClaim:
+    "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M31 material.",
+  releaseCriterionLimitation:
+    "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.",
+  candidateDocumentationPath: "docs/module-evidence/m31/candidate-preflight.md",
   candidateDocumentationAnchor: "authoring-candidate-boundary",
-  candidateDocumentationDigest: expectedM31CandidateDocumentationDigest,
+  candidateDocumentationDigest: "sha256:d33e105b3fecf19cfb41d16e15e444db671a6cf5fc2964d7f800575309eac01c",
+  migrationLocator: "/modules/0",
+  authoringWorkbookPath: "content/authoring/m31_optimization_information_workbook.v1.md",
+  authoringDeliveryMapPath: "content/course/contracts/authoring-delivery/m31.v1.json",
+  authoringSourcePlanPath: "content/source-maps/module31_optimization_information_source_map.md",
+  authoringSourceMapPaths: Object.freeze([
+    "content/source-maps/module31_optimization_information_source_map.md",
+    "content/source-maps/module31_optimization_information_source_audit.md",
+  ]),
+  authoringReferenceModelPath: "lib/m31-optimization-authoring-model.js",
+  authoringReferenceModelTestPath: "tests/m31-optimization-authoring-model.test.mjs",
+  authoringVisualTestPath: "tests/m31-authoring-workbook.test.mjs",
+  authoringInteractionSourceCodePaths: Object.freeze([]),
   scope: "authoring-only",
 });
+
+const m32CandidatePreflightProfile = Object.freeze({
+  moduleId: "m32",
+  state: "authoring-only-candidate-not-promoting",
+  evidenceRecordPath: "content/course/contracts/evidence/m32.v1.json",
+  openCriterionIds: requiredAuthoringOpenCriterionIds,
+  promotionBlockers: requiredAuthoringPromotionBlockers,
+  preflightReleaseBoundary:
+    "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M32 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open.",
+  evidenceRecordReleaseBoundary:
+    "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M32 remains authoring-only, hidden from the reader, and unreleased.",
+  releaseCriterionClaim:
+    "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M32 material.",
+  releaseCriterionLimitation:
+    "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open.",
+  candidateDocumentationPath: "docs/module-evidence/m32/candidate-preflight.md",
+  candidateDocumentationAnchor: "authoring-candidate-boundary",
+  candidateDocumentationDigest: "sha256:15fff98d390269e58ca9df5a809da05980e1e1787750b8ca0205b8f940299ae2",
+  migrationLocator: "/modules/1",
+  authoringWorkbookPath: "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
+  authoringDeliveryMapPath: "content/course/contracts/authoring-delivery/m32.v1.json",
+  authoringSourcePlanPath: "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+  authoringSourceMapPaths: Object.freeze([
+    "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+  ]),
+  authoringReferenceModelPath: "lib/m32-systems-evidence-fixture.js",
+  authoringReferenceModelTestPath: "tests/m32-systems-evidence-fixture.test.mjs",
+  authoringVisualTestPath: "tests/m31-m32-authoring-traceability.test.mjs",
+  authoringInteractionSourceCodePaths: Object.freeze([
+    "scripts/m32_numpy_layout_observation.py",
+    "scripts/test_m32_numpy_layout_observation.py",
+  ]),
+  scope: "authoring-only",
+});
+
+const authoringCandidateProfiles = Object.freeze(new Map([
+  [m31CandidatePreflightProfile.moduleId, m31CandidatePreflightProfile],
+  [m32CandidatePreflightProfile.moduleId, m32CandidatePreflightProfile],
+]));
 
 /**
  * The profile data itself is versioned and allowlisted; policy that could
@@ -152,7 +182,8 @@ function legacyCandidatePreflightProfile(candidate) {
 }
 
 function candidatePreflightProfile(moduleId, legacyCandidateProfiles = null) {
-  if (moduleId === "m31") return m31CandidatePreflightProfile;
+  const authoringProfile = authoringCandidateProfiles.get(moduleId);
+  if (authoringProfile) return authoringProfile;
   return legacyCandidatePreflightProfile(
     legacyCandidateProfiles?.candidateByModuleId?.get(moduleId) ?? null,
   );
@@ -494,12 +525,12 @@ function validateNonPromotionState(profile, moduleEntry, graphModule, errors, { 
       moduleEntry.release !== null ||
       moduleEntry.migration?.kind !== "advanced-authoring-adapter" ||
       moduleEntry.migration?.path !== "content/course/contracts/advanced-module-contracts.v1.json" ||
-      moduleEntry.migration?.locator !== "/modules/0"
+      moduleEntry.migration?.locator !== profile.migrationLocator
     ) {
-      errors.push("M31 authoring candidate requires the canonical registry to remain authoring-only with no promotion records.");
+      errors.push(`${moduleLabel} authoring candidate requires the canonical registry to remain authoring-only with no promotion records.`);
     }
     if (Object.values(moduleEntry.humanReview ?? {}).some((outcome) => outcome !== "pending")) {
-      errors.push("M31 authoring candidate requires every canonical human-review dimension to remain pending.");
+      errors.push(`${moduleLabel} authoring candidate requires every canonical human-review dimension to remain pending.`);
     }
     if (
       graphState?.lifecycle !== "authoring-only" ||
@@ -511,9 +542,9 @@ function validateNonPromotionState(profile, moduleEntry, graphModule, errors, { 
       graphState?.release?.recordId !== null ||
       graphModule?.sourceMap !== null ||
       graphModule?.studioId !== null ||
-      manifestById?.has("m31")
+      manifestById?.has(profile.moduleId)
     ) {
-      errors.push("M31 authoring candidate must remain authoring-only and hidden with no canonical source map, studio, manifest entry, or release record.");
+      errors.push(`${moduleLabel} authoring candidate must remain authoring-only and hidden with no canonical source map, studio, manifest entry, or release record.`);
     }
     return;
   }
@@ -829,33 +860,36 @@ async function validateCandidateReleaseBoundary(
 }
 
 /**
- * M31 has intentionally not selected a learner workbook, canonical graph
- * source map, or studio. Its candidate dossier therefore gets a strict
- * authoring-only scope check instead of borrowing the promoted-module scope
- * rule, which would incorrectly require the absent learner-facing artifacts.
+ * Authoring-only candidates intentionally have no selected learner workbook,
+ * canonical graph source map, or studio. Their structural packages therefore
+ * validate only each profiled hidden authoring surface rather than borrowing a
+ * promoted-module scope rule.
  */
-async function validateM31AuthoringCandidateScope(
+async function validateAuthoringCandidateScope(
+  profile,
   evidenceReport,
   graphModule,
   errors,
   { siteRoot, snapshot },
 ) {
-  const label = "M31 authoring candidate evidence";
+  const moduleLabel = profile.moduleId.toUpperCase();
+  const label = `${moduleLabel} authoring candidate evidence`;
+  const sourceMapPaths = new Set(profile.authoringSourceMapPaths);
   for (const entry of evidenceReport.evidenceByCriterion.values()) {
     for (const input of entry.resolvedInputs ?? []) {
-      if (input.role === "course-content" && input.path !== expectedM31AuthoringWorkbookPath) {
+      if (input.role === "course-content" && input.path !== profile.authoringWorkbookPath) {
         errors.push(
-          `${label} criterion ${entry.criterionId} must bind hidden authoring workbook ${expectedM31AuthoringWorkbookPath}; found ${input.path}.`,
+          `${label} criterion ${entry.criterionId} must bind hidden authoring workbook ${profile.authoringWorkbookPath}; found ${input.path}.`,
         );
       }
-      if (input.role === "source-ledger" && !expectedM31AuthoringSourceMapPaths.has(input.path)) {
+      if (input.role === "source-ledger" && !sourceMapPaths.has(input.path)) {
         errors.push(
-          `${label} criterion ${entry.criterionId} may bind only the M31 instructor-facing source map or source audit; found ${input.path}.`,
+          `${label} criterion ${entry.criterionId} may bind only the profiled instructor-facing source material; found ${input.path}.`,
         );
       }
       if (typeof input.path === "string" && input.path.startsWith("content/modules/")) {
         errors.push(
-          `${label} criterion ${entry.criterionId} may not substitute a learner-facing canonical workbook for M31's hidden authoring draft.`,
+          `${label} criterion ${entry.criterionId} may not substitute a learner-facing canonical workbook for ${moduleLabel}'s hidden authoring draft.`,
         );
       }
     }
@@ -866,7 +900,7 @@ async function validateM31AuthoringCandidateScope(
     ({ kind, role, path, locator }) =>
       kind === "json-pointer" &&
       role === "provenance" &&
-      path === expectedM31AuthoringDeliveryMapPath &&
+      path === profile.authoringDeliveryMapPath &&
       locator === "/sessions",
   );
   if (sessionDeliveryBindings.length !== 1) {
@@ -877,7 +911,7 @@ async function validateM31AuthoringCandidateScope(
     ({ kind, role, path, locator }) =>
       kind === "json-pointer" &&
       role === "provenance" &&
-      path === expectedM31AuthoringDeliveryMapPath &&
+      path === profile.authoringDeliveryMapPath &&
       locator === "/forwardHandoff",
   );
   if (handoffDeliveryBindings.length !== 1) {
@@ -888,14 +922,14 @@ async function validateM31AuthoringCandidateScope(
   const [deliveryMapRecord, workbookRecord, bridgeRecord] = await Promise.all([
     readTrackedText(
       siteRoot,
-      expectedM31AuthoringDeliveryMapPath,
+      profile.authoringDeliveryMapPath,
       `${label} delivery map`,
       deliveryMapErrors,
       { snapshot },
     ),
     readTrackedText(
       siteRoot,
-      expectedM31AuthoringWorkbookPath,
+      profile.authoringWorkbookPath,
       `${label} workbook`,
       deliveryMapErrors,
       { snapshot },
@@ -912,13 +946,13 @@ async function validateM31AuthoringCandidateScope(
     try {
       const deliveryMap = JSON.parse(deliveryMapRecord.text);
       const bridge = JSON.parse(bridgeRecord.text);
-      const bridgeEntry = bridge.modules?.find(({ moduleId }) => moduleId === "m31");
+      const bridgeEntry = bridge.modules?.find(({ moduleId }) => moduleId === profile.moduleId);
       validateAdvancedAuthoringDeliveryMap(deliveryMap, {
         courseModule: graphModule,
         bridgeEntry,
         bridgePath: advancedModuleBridgeRelativePath,
-        workbookPath: expectedM31AuthoringWorkbookPath,
-        authoringSourcePlanPath: expectedM31AuthoringSourcePlanPath,
+        workbookPath: profile.authoringWorkbookPath,
+        authoringSourcePlanPath: profile.authoringSourcePlanPath,
         workbookMarkdown: workbookRecord.text,
       });
     } catch (error) {
@@ -935,7 +969,7 @@ async function validateM31AuthoringCandidateScope(
       .filter(({ role }) => role === "source-ledger")
       .map(({ path }) => path),
   );
-  for (const requiredPath of expectedM31AuthoringSourceMapPaths) {
+  for (const requiredPath of sourceMapPaths) {
     if (!sourceLedgerPaths.has(requiredPath)) {
       errors.push(`${label} criterion source-ledger must bind ${requiredPath}.`);
     }
@@ -946,9 +980,9 @@ async function validateM31AuthoringCandidateScope(
   if (
     visualTests.length !== 1 ||
     visualTests[0]?.kind !== "file" ||
-    visualTests[0]?.path !== expectedM31AuthoringVisualTestPath
+    visualTests[0]?.path !== profile.authoringVisualTestPath
   ) {
-    errors.push(`${label} criterion accessible-visual-text-alternative must bind ${expectedM31AuthoringVisualTestPath}.`);
+    errors.push(`${label} criterion accessible-visual-text-alternative must bind ${profile.authoringVisualTestPath}.`);
   }
 
   const interaction = evidenceReport.evidenceByCriterion.get(
@@ -963,16 +997,26 @@ async function validateM31AuthoringCandidateScope(
   if (
     authoringModels.length !== 1 ||
     authoringModels[0]?.kind !== "file" ||
-    authoringModels[0]?.path !== expectedM31AuthoringModelPath
+    authoringModels[0]?.path !== profile.authoringReferenceModelPath
   ) {
-    errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${expectedM31AuthoringModelPath}.`);
+    errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${profile.authoringReferenceModelPath}.`);
   }
   if (
     authoringModelTests.length !== 1 ||
     authoringModelTests[0]?.kind !== "file" ||
-    authoringModelTests[0]?.path !== expectedM31AuthoringModelTestPath
+    authoringModelTests[0]?.path !== profile.authoringReferenceModelTestPath
   ) {
-    errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${expectedM31AuthoringModelTestPath}.`);
+    errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${profile.authoringReferenceModelTestPath}.`);
+  }
+  const interactionSourceCodePaths = new Set(
+    (interaction?.resolvedInputs ?? [])
+      .filter(({ role }) => role === "source-code")
+      .map(({ path }) => path),
+  );
+  for (const requiredPath of profile.authoringInteractionSourceCodePaths) {
+    if (!interactionSourceCodePaths.has(requiredPath)) {
+      errors.push(`${label} criterion interaction-reference-model-and-teaching-tests must bind ${requiredPath}.`);
+    }
   }
 }
 
@@ -1024,7 +1068,7 @@ export async function validateModuleEvidencePreflight(
   }
   if (errors.length > 0) preflightFailure(errors);
 
-  const legacyCandidateProfiles = preflight?.moduleId === "m31"
+  const legacyCandidateProfiles = authoringCandidateProfiles.has(preflight?.moduleId)
     ? null
     : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, evidenceSnapshot, errors);
   let profile = validatePreflightRecord(preflight, errors, legacyCandidateProfiles);
@@ -1054,13 +1098,14 @@ export async function validateModuleEvidencePreflight(
     }
   } else {
     for (const path of [
-      expectedM31AuthoringWorkbookPath,
-      expectedM31AuthoringDeliveryMapPath,
-      expectedM31AuthoringModelPath,
-      expectedM31AuthoringModelTestPath,
-      expectedM31AuthoringVisualTestPath,
+      profile.authoringWorkbookPath,
+      profile.authoringDeliveryMapPath,
+      profile.authoringReferenceModelPath,
+      profile.authoringReferenceModelTestPath,
+      profile.authoringVisualTestPath,
       advancedModuleBridgeRelativePath,
-      ...expectedM31AuthoringSourceMapPaths,
+      ...profile.authoringSourceMapPaths,
+      ...profile.authoringInteractionSourceCodePaths,
     ]) {
       addSnapshotInputPath(
         snapshotInputPaths,
@@ -1203,7 +1248,7 @@ export async function validateModuleEvidencePreflight(
         snapshot: evidenceSnapshot,
       });
     } else {
-      await validateM31AuthoringCandidateScope(evidenceReport, graphModule, errors, {
+      await validateAuthoringCandidateScope(profile, evidenceReport, graphModule, errors, {
         siteRoot,
         snapshot: evidenceSnapshot,
       });
@@ -1272,7 +1317,7 @@ export async function runModuleCandidateEvidencePreflight(
 ) {
   const snapshot = await openGitIndexSnapshot(siteRoot);
   const errors = [];
-  const legacyCandidateProfiles = moduleId === "m31"
+  const legacyCandidateProfiles = authoringCandidateProfiles.has(moduleId)
     ? null
     : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, snapshot, errors);
   if (errors.length > 0) preflightFailure(errors);
@@ -1292,6 +1337,10 @@ export function runM29CandidateEvidencePreflight(options = {}) {
 
 export function runM31AuthoringCandidateEvidencePreflight(options = {}) {
   return runModuleCandidateEvidencePreflight("m31", options);
+}
+
+export function runM32AuthoringCandidateEvidencePreflight(options = {}) {
+  return runModuleCandidateEvidencePreflight("m32", options);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
