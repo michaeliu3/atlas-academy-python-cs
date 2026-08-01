@@ -31,6 +31,8 @@ claim institutional equivalence.
 | [M21–M24 distributed-to-runtime review](research/academic-calibration-m21-m24-source-review.md) | Distributed coordination, trust, bounded evaluation, and runtime evidence against official MIT, CMU, Stanford, Georgia Tech, Berkeley, and Python anchors. | Keep the scope boundaries; offer one optional local M24 measurement receipt rather than adding a second tracking system. |
 | [M25–M26 synthesis-preview review](research/academic-calibration-m25-m26-synthesis-review.md) | Advanced evidence integration, human-centered AI, system stewardship, and architecture defense against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Keep the previews gated, align M35/M36 receipt names with the candidate packs, and preserve the active v2 graph as the sole route truth. |
 | [M27 discrete-mathematics review](../content/source-maps/module27_discrete_mathematics_official_course_calibration_2026-08-01.md) | Logic, proof, counting, recurrence, graph, poset, asymptotic, and number-theory progression against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Correct the source-map and audit routing so sessions 3–6 match the published workbook sequence. |
+| [M28–M30 mathematical-core review](research/academic-calibration-m28-m30-source-review.md) | Linear algebra/stability, proof-aware calculus/analysis, and probability/statistics/inference against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Keep the connected core and use named numerical-analysis, real-analysis/ODE/PDE, and advanced-statistics boundaries for later depth. |
+| [M31–M36 authoring-only review](research/academic-calibration-m31-m36-source-review.md) | Optimization through reliable-learning systems against official MIT, CMU, Stanford, Georgia Tech, and Berkeley anchors. | Keep every pack hidden/authoring-only; proof-check selected mathematical material and retain the M32 simulated-fixture boundary before any release decision. |
 
 ## What calibration means in Atlas
 
@@ -48,9 +50,9 @@ small relevant set of official sources:
 5. **Gap decision:** Mark the topic as aligned, intentionally adapted, or an
    explicit future extension; do not hide a gap behind a prestigious citation.
 
-The three source-backed notes record those decisions and honest boundaries for
-every module range. Use them to improve an actual learning gap, not to create
-an additional contract or metadata system.
+The range and targeted source-backed notes record those decisions and honest
+boundaries for every module range. Use them to improve an actual learning gap,
+not to create an additional contract or metadata system.
 
 ## Material-level review sample — this authoring pass
 
