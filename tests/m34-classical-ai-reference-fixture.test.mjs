@@ -77,3 +77,19 @@ test("the M34 workbook puts both bounded fixtures in the relevant prediction and
   assert.match(workbook, /### Bounded reference fixture — relaxation status/u);
   assert.match(workbook, /evaluateM34BinaryRelaxationCandidate\(\{ x: 1, y: 0\.5 \}\)/u);
 });
+
+test("the M34 workbook makes propagation and decision-horizon boundaries inspectable", async () => {
+  const workbook = await readFile(
+    "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /### Prediction before reveal — propagation and branching trace/u);
+  assert.ok(workbook.includes("Arc consistency removes \\(C=1\\)"));
+  assert.match(workbook, /declared alphabetical MRV tie-break/u);
+  assert.ok(workbook.includes("the stated MRV tie-break selects \\(A\\)"));
+  assert.match(workbook, /LCV compares its\s+legal values/u);
+  assert.match(workbook, /### One-shot expected utility is not an MDP policy/u);
+  assert.ok(workbook.includes("transition model \\(P(s'\\mid s,a)\\)"));
+  assert.match(workbook, /Repetition alone supplies neither a transition model nor a\s+long-run objective/u);
+});

@@ -6,7 +6,9 @@ import {
   M35_M36_SIGNAL_ROUTING_FIXTURE,
   m35BaselineComparison,
   m35CalibrationContrast,
+  m35M36FixedReluTrace,
   m35RepresentationCollisionWitness,
+  m35SharedInformationModelFamilyCard,
   m35SquaredLossGradientCheck,
   m36LearningClaimProbe,
   m36ReductionOrderProbe,
@@ -84,6 +86,42 @@ test("the bounded gradient check agrees at one point and rejects invalid numeric
   );
 });
 
+test("the shared-information card separates raw inputs, hypothesis families, and constructed scope", () => {
+  const card = m35SharedInformationModelFamilyCard();
+  const byFamily = Object.fromEntries(card.families.map((family) => [family.id, family]));
+
+  assert.deepEqual(card.rawInputs, ["signal", "context"]);
+  assert.equal(card.trainingOrSelectionPerformed, false);
+  assert.match(byFamily["single-affine-threshold"].result, /cannot represent/u);
+  assert.match(byFamily["fixed-two-relu-network"].caution, /constructed by hand/u);
+  assert.deepEqual(
+    card.rows.map((row) => row.prediction),
+    [1, 0, 0, 1],
+  );
+  assert.deepEqual(
+    card.rows.map((row) => row.explicitInteraction),
+    [1, 0, 0, 1],
+  );
+  assert.match(card.conclusion, /raw information held fixed/u);
+  assert.match(card.truthBoundary, /generalization theorem/u);
+});
+
+test("the fixed two-layer trace exposes forward values and a scoped backward path", () => {
+  const trace = m35M36FixedReluTrace();
+
+  assert.deepEqual(trace.input, { x1: 1, x2: 0 });
+  assert.equal(trace.forward.preactivation, 1.5);
+  assert.equal(trace.forward.activation, 1.5);
+  assert.equal(trace.forward.output, 4.7);
+  assertApproximately(trace.forward.loss, 13.69);
+  assert.equal(trace.backward.dLossDOutput, 7.4);
+  assertApproximately(trace.backward.dLossDPreactivation, 22.2);
+  assertApproximately(trace.backward.dLossDW1, 22.2);
+  assert.equal(trace.backward.dLossDW2, 0);
+  assert.match(trace.executionScope, /two-layer ReLU/u);
+  assert.match(trace.truthBoundary, /not a framework\/autodiff comparison/u);
+});
+
 test("the M36 card keeps finite empirical risk and a named synthetic shift distinct", () => {
   const probe = m36LearningClaimProbe();
   const byHypothesis = Object.fromEntries(
@@ -117,6 +155,8 @@ test("each probe is deterministic and does not mutate the shared declaration", (
     collision: m35RepresentationCollisionWitness(),
     baseline: m35BaselineComparison(),
     calibration: m35CalibrationContrast(),
+    modelFamily: m35SharedInformationModelFamilyCard(),
+    twoLayerTrace: m35M36FixedReluTrace(),
     learning: m36LearningClaimProbe(),
     reduction: m36ReductionOrderProbe(),
   };
@@ -124,6 +164,8 @@ test("each probe is deterministic and does not mutate the shared declaration", (
     collision: m35RepresentationCollisionWitness(),
     baseline: m35BaselineComparison(),
     calibration: m35CalibrationContrast(),
+    modelFamily: m35SharedInformationModelFamilyCard(),
+    twoLayerTrace: m35M36FixedReluTrace(),
     learning: m36LearningClaimProbe(),
     reduction: m36ReductionOrderProbe(),
   };
@@ -143,8 +185,17 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m35Workbook, /m35BaselineComparison\(\)/u);
   assert.match(m35Workbook, /m35CalibrationContrast\(\)/u);
   assert.match(m35Workbook, /m35SquaredLossGradientCheck\(\{ weight: 0, feature: 2, label: 1 \}\)/u);
+  assert.match(m35Workbook, /m35SharedInformationModelFamilyCard\(\)/u);
+  assert.match(m35Workbook, /m35M36FixedReluTrace\(\)/u);
+  assert.match(m35Workbook, /Selection boundary — inspection changes the evidence/u);
+  assert.match(m35Workbook, /two-hidden-unit ReLU/u);
   assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
   assert.match(m36Workbook, /m36ReductionOrderProbe\(\)/u);
   assert.match(m36Workbook, /m35CalibrationContrast\(\)/u);
+  assert.match(m36Workbook, /m35M36FixedReluTrace\(\)/u);
+  assert.match(m36Workbook, /Finite-class proof skeleton — the union-bound step has a home/u);
+  assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));
+  assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
+  assert.match(m36Workbook, /conditional \/ label-relation shift/u);
   assert.match(m36Workbook, /not IID evidence, a PAC\/VC calculation/u);
 });

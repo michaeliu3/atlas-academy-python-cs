@@ -125,6 +125,44 @@ S \rightarrow (S)S \mid \epsilon.
 The grammar says which strings can be derived. It says nothing yet about what
 a string means after parsing.
 
+### Formal-model ladder — choose the smallest proven scope
+
+Before seeing the ladder, classify these three language claims: `0*1*`,
+balanced parentheses, and \(L_{=}={0^n1^n\mid n\geq0}\). Which can be
+described with finite state alone, and which need a nesting/counting relation?
+
+<details>
+<summary>Reveal after making a model prediction.</summary>
+
+| Formal object | What it can retain or express | Exact scope and boundary |
+| --- | --- | --- |
+| DFA | one declared finite state after each symbol | recognizes regular languages |
+| NFA | finitely many possible branches; a deterministic simulation can track a finite subset | recognizes exactly the regular languages too—not a larger language class than a DFA |
+| ordinary formal regular expression | union, concatenation, and Kleene star as a finite notation | denotes exactly a regular language; a production “regex” engine may add non-formal extensions, so its name alone proves nothing |
+| context-free grammar (CFG) | productions such as \(S\rightarrow(S)S\mid\epsilon\), which can express recursive nesting | defines a context-free language; it does not by itself define evaluation, policy, or authority |
+
+Every regular language is context-free, but \(L_{=}\) is context-free and not
+regular. This is a relation between language classes, not a promise that a
+particular parser implementation is correct or that every real-language feature
+fits a CFG.
+
+</details>
+
+### Tiny derivation trace — syntax before meaning
+
+For the balanced-parentheses grammar above, derive `()()` without skipping the
+remaining nonterminal:
+
+\[
+S \Rightarrow (S)S \Rightarrow ()S \Rightarrow ()(S)S
+  \Rightarrow ()()S \Rightarrow ()().
+\]
+
+**Text/tree reading:** the root \(S\) creates one matched pair and a trailing
+\(S\); that trailing \(S\) creates the second pair. This is a witness that this
+one string is derivable under this one grammar. It does not establish a semantic
+result, safe evaluation, or authority to act.
+
 ### Prediction before reveal
 
 Two snippets both satisfy a toy assignment grammar:

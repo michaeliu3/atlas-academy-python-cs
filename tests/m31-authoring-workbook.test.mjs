@@ -82,6 +82,16 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /Teaching Assistant prompt — M31/u);
   assert.match(candidate, /Study Partner prompt — M31/u);
   assert.match(candidate, /not in the reader\s+manifest/u);
+  assert.match(candidate, /Worked primal\/dual mini-case — derive the gap before trusting it/u);
+  assert.match(candidate, /p\^\\star=2,\\qquad d\^\\star=q\(2\)=2,\\qquad p\^\\star-d\^\\star=0/u);
+  assert.match(candidate, /usual convex\s+Slater\/KKT theorem applies/u);
+  assert.match(candidate, /Expected-gradient assumption card/u);
+  assert.ok(candidate.includes("\\mathbb E[\\widehat g_t\\mid\\mathcal F_{t-1}]"));
+  assert.match(candidate, /Counterexample — cached, dependent sampling/u);
+  assert.match(candidate, /cached estimate is `-1`/u);
+  assert.match(candidate, /One-step ELBO identity — derive the gap before trusting the objective/u);
+  assert.match(candidate, /needed log-ratio expectations are\s+integrable/u);
+  assert.match(candidate, /posterior may not belong to the\s+family/u);
 
   const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: candidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });

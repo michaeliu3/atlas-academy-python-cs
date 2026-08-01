@@ -354,6 +354,62 @@ superiority.
 shown in the fixture. It is an inspectable oracle for the toy relation, not a
 production baseline recommendation.
 
+### Shared-information model-family comparison
+
+Hold the **same two raw inputs**—`signal` and `context`—fixed for every
+candidate. On the four declared rows, compare a single affine threshold, an
+explicit engineered interaction, and a hand-constructed two-hidden-unit ReLU
+network. This is an expressivity comparison on a finite card, not a training
+or benchmark comparison.
+
+Before calling `m35SharedInformationModelFamilyCard()`, predict which family
+can represent the equality labels on all four rows. Do not use the words
+“better model” until you have named the raw-input contract, hypothesis family,
+and selection budget.
+
+<details>
+<summary>Reveal the equal-information comparison after writing a prediction.</summary>
+
+For a single affine threshold
+
+\[
+f(s,c)=\mathbf 1[w_0+w_s s+w_c c\geq 0],
+\]
+
+the equality labels require
+
+\[
+w_0\geq0,\quad w_0+w_s<0,\quad w_0+w_c<0,\quad
+w_0+w_s+w_c\geq0.
+\]
+
+Adding the two negative inequalities says
+\(2w_0+w_s+w_c<0\), while adding the two positive inequalities says
+\(2w_0+w_s+w_c\geq0\). That contradiction proves that this **single affine
+threshold** cannot represent this four-row equality task.
+
+An engineered interaction \(\mathbf 1[s=c]\) uses no extra raw field, but it
+puts target-shaped structure into the representation. A fixed two-hidden-unit
+ReLU construction also uses only the same raw fields:
+
+\[
+a_1=\operatorname{ReLU}(s+c-1),\qquad
+a_2=\operatorname{ReLU}(1-s-c),\qquad
+q=a_1+a_2.
+\]
+
+For `(signal, context)` ordered as `(0,0)`, `(0,1)`, `(1,0)`, `(1,1)`, its
+scores are `1, 0, 0, 1`. The parameters were constructed from the disclosed
+toy rule. No fitting, validation, selection, data-efficiency, or architecture
+superiority claim follows.
+
+</details>
+
+Record one **equal-information family card** in your Baseline Comparison:
+raw fields, derived features, family, constructed/fitted status, tuning budget,
+four-row result, and one non-claim. The useful question is *which assumption
+or computational form changed?*, not *which model name won?*
+
 ### Output: Classical–Learning Baseline Comparison
 
 Create a **Baseline Comparison** that records:
@@ -451,6 +507,29 @@ different proper scores. Inspect the returned `predictors` and binned observed
 frequencies. Then write one sentence separating this finite card from a
 population-calibration or decision-policy claim.
 
+### Selection boundary — inspection changes the evidence
+
+Suppose an AI proposes thresholds `0.35`, `0.50`, and `0.65`, reads the labels
+of the only declared test split, and selects whichever threshold reports the
+largest test F1. Before revealing the answer, classify that split after the
+choice: is it still an untouched test, or has it become selection evidence?
+
+<details>
+<summary>Reveal after naming the boundary.</summary>
+
+Once the split's labels influence which threshold, family, seed, feature set,
+or stopping time is chosen, its result is **selection-conditioned** evidence.
+It may still be useful for tuning, but it no longer supports an untouched-test
+claim about the selected configuration. Preserve the candidate set, every
+look/selection rule, metric, seed budget, and stop rule; use a fresh,
+predeclared evaluation relation for the next performance observation.
+
+</details>
+
+This does not make selection invalid. It makes the boundary visible. Add the
+selection record and the fresh-evaluation plan to the Evaluation-and-Shift Plan
+instead of silently relabeling a tuned split as “test.”
+
 ### Output: Evaluation-and-Shift Plan
 
 Record a **Plan** with target relation, unit of independence, split rule,
@@ -532,6 +611,55 @@ Before calling
 the loss and analytic derivative. Compare its analytic and central-difference
 values, then list two important things the agreement does **not** validate.
 The returned scope statement is part of the result, not a disclaimer to skip.
+
+### Fixed two-layer trace — values first, then backward paths
+
+Read this hand-checkable network as two parameterized layers, not as a claim
+about a trained neural system:
+
+```python
+# One fixed example and one fixed parameter setting.
+x1, x2, target = 1.0, 0.0, 1.0
+w1, w2, b1 = 2.0, -1.0, -0.5
+v, b2 = 3.0, 0.2
+
+z = w1 * x1 + w2 * x2 + b1
+a = max(0.0, z)              # ReLU; here z is strictly positive
+q = v * a + b2
+loss = (q - target) ** 2
+```
+
+Before calling `m35M36FixedReluTrace()`, calculate `z`, `a`, `q`, and `loss`.
+Then predict whether `w2` gets a zero gradient because `x2=0`, because the
+ReLU is inactive, or for neither reason.
+
+<details>
+<summary>Reveal the forward and backward trace after calculating it.</summary>
+
+The forward values are \(z=1.5\), \(a=1.5\), \(q=4.7\), and
+\(L=13.69\). Because \(z>0\), the ReLU derivative on this path is `1`:
+
+\[
+\frac{\partial L}{\partial q}=7.4,\quad
+\frac{\partial L}{\partial v}=11.1,\quad
+\frac{\partial L}{\partial b_2}=7.4,\quad
+\frac{\partial L}{\partial z}=22.2,
+\]
+\[
+\frac{\partial L}{\partial w_1}=22.2,\quad
+\frac{\partial L}{\partial w_2}=0,\quad
+\frac{\partial L}{\partial b_1}=22.2.
+\]
+
+`w2` receives zero gradient here because `x2=0`, not because the ReLU is
+inactive. If \(z=0\), a derivative convention would need to be stated; this
+trace deliberately avoids that boundary.
+
+</details>
+
+The trace makes one chain rule calculation inspectable. It does **not** test
+autodiff, validate a framework graph, show useful training behavior, compare
+architectures, establish generalization, or authorize a use decision.
 
 ### Reproducibility is a bounded comparison
 

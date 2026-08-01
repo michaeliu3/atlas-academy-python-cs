@@ -74,3 +74,20 @@ test("the M33 workbook makes the bounded trace a prediction-before-inspection ex
   assert.match(workbook, /traceM33EvenOnesDfa\("1010"\)/u);
   assert.match(workbook, /neither a regularity proof nor an undecidability oracle/u);
 });
+
+test("the M33 workbook connects the formal model classes with an original derivation trace", async () => {
+  const workbook = await readFile(
+    "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /### Formal-model ladder — choose the smallest proven scope/u);
+  assert.match(workbook, /\| DFA \|/u);
+  assert.match(workbook, /\| NFA \|/u);
+  assert.match(workbook, /ordinary formal regular expression/u);
+  assert.match(workbook, /context-free grammar \(CFG\)/u);
+  assert.match(workbook, /Every regular language is context-free/u);
+  assert.match(workbook, /### Tiny derivation trace — syntax before meaning/u);
+  assert.match(workbook, /S \\Rightarrow \(S\)S \\Rightarrow \(\)S/u);
+  assert.match(workbook, /It does not establish a semantic\s+result, safe evaluation, or authority to act\./u);
+});

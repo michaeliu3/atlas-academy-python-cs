@@ -343,6 +343,66 @@ but the useful work is not memorizing the display. Ask:
 The display is an intentionally generic shape, not a claim that its condition
 holds for the relay learner or an arbitrary neural network.
 
+### Finite-class proof skeleton — the union-bound step has a home
+
+Here is one deliberately narrow route to the displayed shape. Let
+\(\mathcal H=\{h_1,\ldots,h_K\}\) be **finite**, let
+\(\ell(h,Z)\in[0,1]\), and let \(Z_1,\ldots,Z_n\) be IID draws from a named
+distribution \(P\). For one fixed \(h\), a bounded IID concentration result
+has the form
+
+\[
+\Pr\!\left(\left|R_P(h)-\widehat R_S(h)\right|>\varepsilon\right)
+\leq 2e^{-2n\varepsilon^2}.
+\]
+
+Before revealing the rest, decide which independence is doing the work:
+independence between the candidate hypotheses, or the IID relation among the
+sampled examples. Also predict whether the next bound grows linearly or
+logarithmically in \(K\) after solving for \(n\).
+
+<details>
+<summary>Reveal the finite-class proof skeleton after making both predictions.</summary>
+
+1. Apply the fixed-\(h\) concentration statement to every member of the
+   finite class.
+2. The event “some \(h\) deviates by more than \(\varepsilon\)” is a union of
+   those bad events. The union bound needs **no independence between
+   hypotheses**:
+
+   \[
+   \Pr\!\left(\exists h\in\mathcal H:
+   |R_P(h)-\widehat R_S(h)|>\varepsilon\right)
+   \leq 2K e^{-2n\varepsilon^2}.
+   \]
+
+3. Require \(2K e^{-2n\varepsilon^2}\leq\delta\). One sufficient condition is
+
+   \[
+   n\geq\frac{\log(2K/\delta)}{2\varepsilon^2}.
+   \]
+
+4. Taking complements gives a simultaneous deviation statement with
+   probability at least \(1-\delta\). The \(K\) contribution is logarithmic
+   **in this finite-class route**; the \(1/\varepsilon^2\) term is still
+   consequential.
+
+</details>
+
+The IID condition is not decorative. If every “sample” is a cloned copy of
+one latent Bernoulli draw \(Z\), and a fixed loss equals \(Z\) with
+\(\mathbb E[Z]=1/2\), then \(\widehat R_S=Z\) is still either `0` or `1` no
+matter how large \(n\) becomes. Its deviation from \(R_P=1/2\) does not
+concentrate in the IID way. This does not say no dependent-data theorem can
+exist; it says this proof skeleton cannot be used without replacement
+conditions.
+
+`m36LearningClaimProbe()` deliberately supplies a tiny finite class but **not
+IID evidence**. Treat it as notation and scope practice, not as numbers to
+substitute into a PAC/VC formula. A finite-class union bound is not yet a
+deep-network bound, a learner implementation, a data-quality guarantee, or a
+deployment decision.
+
 ### A small hypothesis-class probe
 
 Let `H` contain only two predictors for a binary toy input: `always_zero` and
@@ -440,6 +500,40 @@ number runtime. Inspect `executionScope` and the returned truth boundary. The
 exercise is evidence about one finite calculation; it is neither a
 cross-platform reproducibility claim nor a framework test.
 
+### Fixed-network trace — execution evidence has a narrow scope
+
+Use the same original, fixed two-layer ReLU card from M35, now as a compact
+deep-learning execution trace:
+
+\[
+(x_1,x_2)=(1,0)
+\longrightarrow z=1.5
+\longrightarrow \operatorname{ReLU}(z)=1.5
+\longrightarrow q=4.7
+\longrightarrow (q-1)^2=13.69.
+\]
+
+The backward path on this strictly-positive ReLU branch is
+
+\[
+\frac{\partial L}{\partial q}=7.4
+\longrightarrow \frac{\partial L}{\partial z}=22.2
+\longrightarrow
+\left(\frac{\partial L}{\partial w_1},
+\frac{\partial L}{\partial w_2}\right)=(22.2,0).
+\]
+
+Before calling `m35M36FixedReluTrace()`, identify one input/parameter value,
+one activation convention, and one numeric/reduction choice you would need to
+record if a framework, dtype, or device were used. Then state the strongest
+claim the displayed hand trace can support.
+
+The strongest claim is only that the declared scalar equations yield these
+values under the displayed arithmetic. It is not a training trace, autodiff
+test, framework comparison, generalization result, calibration result,
+architecture ranking, or reliability claim. In particular, the zero gradient
+for \(w_2\) comes from \(x_2=0\), not from evidence that a feature is useless.
+
 ### Theory-to-system reproduction record
 
 | Field | Required evidence |
@@ -507,6 +601,26 @@ authorize autonomous remediation.
 
 </details>
 
+### Contrast mechanisms before choosing a monitor
+
+The word *shift* hides different mechanisms. Keep these two synthetic changes
+separate before proposing one universal monitor:
+
+| Declared mechanism | What changes in the relay card | A probe that may reveal it | A probe that can stay silent |
+| --- | --- | --- | --- |
+| input-mixture / covariate shift | `context=1` mass changes from `0.50` to `0.75`, while `label = Number(signal == context)` stays fixed | input-frequency and slice-count checks; the fixed `signal-only` card's expected accuracy changes from `0.50` to `0.75` without any model improvement | an input-independent aggregate or a monitor that never records the context slice |
+| conditional / label-relation shift | input frequencies stay fixed, but the declared label relation changes from `signal == context` to `label = signal` | delayed-label performance/slice checks against the named new relation | an input-frequency monitor, because the observed input mixture can be unchanged |
+| measurement / representation shift | `context` becomes missing and is encoded as `0`, although the underlying task relation was not declared to change | schema, missingness, transform, and availability-time checks | a label-only aggregate that does not record the representation path |
+
+Before reading the table's implications, predict which mechanism an
+input-frequency monitor can detect while completely missing another. Then name
+the owner, response, and stop condition if the probe fires.
+
+These cards are not an exhaustive taxonomy, causal diagnosis, robustness
+test, or automatic remedy. They show why one named shift mechanism needs its
+own observable and why two different mechanisms can require different
+evidence.
+
 ### Calibration and action remain distinct
 
 For a named population, calibration concerns a conditional relation such as
@@ -535,6 +649,9 @@ threshold, false-alarm/miss discussion, data/model/system limitations, human
 owner, intervention, appeal/revision question, and stop boundary. Include:
 
 > “This monitor can reveal ___ under ___; it cannot guarantee ___.”
+
+Include two distinct declared shift mechanisms from the table above and state
+which one your chosen observable could miss.
 
 ---
 

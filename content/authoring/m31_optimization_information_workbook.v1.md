@@ -325,6 +325,70 @@ fixture. Slater’s condition is easy to see because `(0,0)` is strictly
 feasible. That supports the specific certificate; it is not permission to
 announce that “multipliers solve constrained problems.”
 
+### Worked primal/dual mini-case — derive the gap before trusting it
+
+Keep the Session 1 variables unrestricted in `R^2` and make the primal problem
+explicit:
+
+\[
+p^\star=\min_{x,y}\ (x-2)^2+(y-1)^2
+\quad\text{subject to}\quad x+y-1\leq0.
+\]
+
+For the convention already declared above, the dual function is the best lower
+bound obtained after fixing a dual-feasible multiplier:
+
+\[
+q(\lambda)=\inf_{x,y\in\mathbb R}
+\left[(x-2)^2+(y-1)^2+\lambda(x+y-1)\right],
+\qquad \lambda\geq0.
+\]
+
+### Prediction before derivation
+
+Before opening the algebra, predict whether `lambda=2` is dual feasible. If a
+feasible primal point has value `2`, can a dual lower bound of `2` leave any
+positive duality gap?
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+Set the two derivatives of the Lagrangian to zero. They give
+
+\[
+x=2-\frac{\lambda}{2},\qquad y=1-\frac{\lambda}{2},
+\]
+
+and substitution gives the concave one-variable dual function
+
+\[
+q(\lambda)=2\lambda-\frac{1}{2}\lambda^2,\qquad \lambda\geq0.
+\]
+
+Its maximum is at `lambda=2`, with `q(2)=2`. The primal point `(1,0)` is
+feasible and has `f(1,0)=2`. Weak duality says every dual-feasible value is a
+lower bound on every feasible primal value, so these matching witnesses prove
+
+\[
+p^\star=2,\qquad d^\star=q(2)=2,\qquad p^\star-d^\star=0.
+\]
+
+</details>
+
+### Why the certificate has this scope
+
+This is a differentiable convex objective with an affine constraint, and
+`(0,0)` is strictly feasible because `g(0,0)=-1`. Thus the usual convex
+Slater/KKT theorem applies; `(x,y,lambda)=(1,0,2)` is a global-optimality
+certificate for this stated problem. The matching primal/dual values already
+prove this tiny exact result; Slater explains why the broader theorem is
+available here.
+
+Do **not** transfer that conclusion unchanged to an integer, chance, nonconvex,
+or numerically approximate problem. There, a solver's reported multiplier or
+small numerical gap is finite evidence with a tolerance and model boundary,
+not an automatically valid strong-duality or global-optimality certificate.
+
 ### Prediction before reveal
 
 At `(1,0)`, predict which KKT condition fails if `lambda=-2`. Then predict
@@ -478,6 +542,69 @@ batching behavior, or finite-time usefulness.
 
 </details>
 
+### Expected-gradient assumption card
+
+For a population objective
+
+\[
+R(\theta)=\mathbb E_{Z\sim P}[\ell(\theta;Z)],
+\qquad g(\theta)=\nabla R(\theta),
+\]
+
+an “unbiased stochastic gradient” is not a label on an array. It is a
+conditional statement about the declared history `\mathcal F_{t-1}`:
+
+\[
+\mathbb E[\widehat g_t\mid\mathcal F_{t-1}]
+=g(\theta_t).
+\]
+
+Before using that statement, name all of the following: the population `P` and
+loss, the sampling/weighting rule, the information already in
+`\mathcal F_{t-1}`, integrability of `\widehat g_t`, and the condition that
+lets the displayed expectation target the displayed gradient. An iid
+mini-batch rule is one sufficient route, not the definition; dependence may be
+acceptable only when the appropriate conditional claim is actually justified.
+Variance/tail bounds, step sizes, and smoothness are additional assumptions for
+particular convergence theorems.
+
+### Counterexample — cached, dependent sampling
+
+Let the declared population put probability `1/2` on each synthetic loss
+
+\[
+\ell_A(\theta)=(\theta-0.5)^2,
+\qquad
+\ell_B(\theta)=(\theta-1.5)^2.
+\]
+
+Then `R(theta)` has gradient `2(theta-1)`. Suppose an implementation caches
+record `A` and reuses it at every update. Its displayed estimate is
+
+\[
+\widehat g_t=\nabla\ell_A(\theta_t)=2\theta_t-1
+=\nabla R(\theta_t)+1.
+\]
+
+### Prediction before reveal
+
+At `theta=0`, predict the population gradient and the cached estimate. Is the
+cache merely noisy, or is it biased for the declared population target? What
+does reusing the same record do to independence across updates?
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+The population gradient is `-2`; the cached estimate is `-1`. It has bias
+`+1` for the stated population objective, and the repeated estimates are
+perfectly dependent through the cache. A fair one-time choice between `A` and
+`B` would make an *unconditional* first-draw average look right, but once the
+cached choice is part of `\mathcal F_{t-1}`, the conditional expectation is
+still not the full-population gradient. Record the conditioning, selection
+rule, and target before calling either story “unbiased SGD.”
+
+</details>
+
 ### Experiment card
 
 | Field | Record it | Do not silently infer |
@@ -560,6 +687,75 @@ derivation: which bound/identity follows under named conditions;
 finite trace: what a particular implementation optimized;
 non-claim: what remains unknown about data, approximation, and decision value.
 ```
+
+### One-step ELBO identity — derive the gap before trusting the objective
+
+Fix observed `x`, a declared joint model `p_theta(x,z)`, and a declared
+variational family `q_phi(z | x)`. For the finite-valued identity below, name
+these boundaries first: `p_theta(x)>0`; `q_phi` places mass only where
+`p_theta(x,z)>0` (equivalently, it is absolutely continuous with respect to
+the posterior for this observation); and the needed log-ratio expectations are
+integrable. Define
+
+\[
+\operatorname{ELBO}(q_\phi)
+=\mathbb E_{q_\phi(z\mid x)}
+\left[\log p_\theta(x,z)-\log q_\phi(z\mid x)\right].
+\]
+
+Using `p_theta(z | x)=p_theta(x,z)/p_theta(x)` for this fixed observation gives
+one inspectable line:
+
+\[
+\begin{aligned}
+D_{KL}\!\left(q_\phi(z\mid x)\,\middle\Vert\,p_\theta(z\mid x)\right)
+&=\mathbb E_{q_\phi}\!\left[\log q_\phi-\log p_\theta(x,z)+\log p_\theta(x)\right]\\
+&=\log p_\theta(x)-\operatorname{ELBO}(q_\phi).
+\end{aligned}
+\]
+
+Therefore
+
+\[
+\log p_\theta(x)
+=\operatorname{ELBO}(q_\phi)
++D_{KL}\!\left(q_\phi(z\mid x)\,\middle\Vert\,p_\theta(z\mid x)\right).
+\]
+
+### Prediction before reveal
+
+Suppose `q_phi` assigns positive mass where the joint model assigns zero, or
+suppose its chosen family is mean-field while the posterior is not. Predict
+which finite identity condition fails in the first case and what a maximized
+ELBO can still leave unresolved in the second.
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+In the support-mismatch case, the relevant log ratio/KL is infinite or the
+finite-expression boundary fails; do not report a finite gap without handling
+that fact. In the restricted-family case, the posterior may not belong to the
+family, so even the best available `q_phi` can retain a positive approximation
+gap. Equality requires the posterior to be represented by the declared family
+and matched up to the relevant almost-everywhere boundary. An improved ELBO is
+still not a proof of correct specification, calibrated uncertainty, or useful
+decision consequences.
+
+</details>
+
+### Read the estimator boundary
+
+```python
+log_weight = log_joint(x, z) - log_q(z, x)
+elbo_estimate = log_weight.mean()
+```
+
+Before accepting this as an ELBO estimate, identify whether `z` was actually
+sampled from the declared `q_phi`, whether `log_joint` and `log_q` use a
+compatible support and reference measure, and whether the finite Monte Carlo
+mean has a stated integrability/variance boundary. The code can record one
+finite estimate; it does not by itself prove the identity, an optimized
+variational family, or a correct scientific model.
 
 ### Output: Optimization and Information Evidence Dossier
 

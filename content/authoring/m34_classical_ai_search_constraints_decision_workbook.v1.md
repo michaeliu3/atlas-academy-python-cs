@@ -325,6 +325,33 @@ pairwise “different” constraints around a three-cycle. Every color can have 
 local supporting different color at a neighbor, yet no two-color assignment
 satisfies all three inequalities. Arc consistency is not a universal solver.
 
+### Prediction before reveal — propagation and branching trace
+
+Use the tiny CSP \(A,B\in\{1,2\}\), \(C\in\{1,2,3\}\), with constraints
+\(A<C\) and \(B<C\). Before revealing the trace, predict:
+
+1. which value arc consistency removes before any assignment;
+2. after the declared alphabetical MRV tie-break chooses \(A\), whether LCV
+   prefers \(A=1\) or \(A=2\); and
+3. whether this local work alone proves that every related CSP is satisfiable.
+
+<details>
+<summary>Reveal the declared propagation and MRV/LCV trace.</summary>
+
+Arc consistency removes \(C=1\): it has no smaller supporting value in either
+\(A\) or \(B\). It leaves \(A,B\in\{1,2\}\) and \(C\in\{2,3\}\). All domains
+now have size two, so the stated MRV tie-break selects \(A\). LCV compares its
+legal values: \(A=1\) deletes no value from \(C\), while \(A=2\) deletes
+\(C=2\), so choose \(A=1\). Forward checking leaves \(C\in\{2,3\}\); the next
+MRV tie-break selects \(B\), and LCV similarly chooses \(B=1\). Choosing
+\(C=2\) completes this particular solution.
+
+This is a trace of declared propagation, tie rules, and branching—not evidence
+that arc consistency or MRV/LCV solves arbitrary CSPs. The preceding odd-cycle
+counterexample still has local support without a global solution.
+
+</details>
+
 ### Relaxation from first principles
 
 For the synthetic maximization problem
@@ -552,6 +579,29 @@ def choose_action(posterior):
 This chooses from a maximum-probability state only. It cannot reproduce the
 expected-utility comparison because it has no utility table or constrained
 action set. That is a model mismatch, not a minor implementation style issue.
+
+### One-shot expected utility is not an MDP policy
+
+The table above is a **one-shot** choice: condition on \(e\), rank one allowed
+action, and score the stated outcome. It does not say what state follows or
+what action will be taken later. An MDP-policy claim needs a state space,
+available actions, transition model \(P(s'\mid s,a)\), reward/cost definition,
+a horizon or discounted/average-return objective, and a policy such as
+\(\pi(a\mid s)\).
+
+Predict whether calling `choose_action(posterior)` once per minute turns the
+function into an MDP policy.
+
+<details>
+<summary>Reveal after writing your boundary.</summary>
+
+**Reveal:** no. Repetition alone supplies neither a transition model nor a
+long-run objective or state-contingent policy. A one-step table is an MDP
+special case only when its terminal/horizon and transition/reward assumptions
+are explicitly declared. If state is partly observed, a belief update and
+observation model are further assumptions—not facts supplied by one posterior.
+
+</details>
 
 ### Human-impact boundary
 
@@ -802,6 +852,7 @@ The reading routes below were checked on **2026-08-01**.
 | [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) | Sessions 1–5: state-space reasoning, search, constraints, planning, decision, and project-oriented AI scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
 | [MIT 6.034 Artificial Intelligence](https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/) | Sessions 1–5: knowledge/problem solving, search, and AI representations as a connected conceptual route. | MIT OCW assets have their own notices; link-only/original Atlas explanations and diagrams. |
 | [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
+| [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |
 | [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver) and [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 3–6: solver-status interpretation and the separation of model output, risk evidence, and authority. | Documentation/framework sources are linked for reading; original Atlas models and decision cards remain distinct. |
 
 For the fuller claim-linked original/official source ledger and reuse cautions,
