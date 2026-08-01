@@ -597,6 +597,28 @@ The Runtime Evidence Casebook contains fixed packets. For each:
 4. choose accept, reject, or defer;
 5. name one next falsifying test.
 
+### Optional local measurement receipt
+
+The fixed casebook is a complete path through this module. If you choose to
+run one small local probe, use the same fixed baseline/candidate fixture and
+record only a narrow, learner-controlled receipt:
+
+~~~text
+runtime / build:
+OS and coarse host condition:
+fixture and workload ID:
+warm-up, GC policy, repetitions, and statistic:
+chosen metric and result:
+one nonclaim:
+next falsifier:
+~~~
+
+Keep raw profiles, paths, payloads, and machine identifiers local. Share only
+a redacted summary with the Teaching Assistant or Study Partner if you choose
+to discuss it; no portal upload, automatic collection, comparison leaderboard,
+or production-performance claim follows from this exercise. A result is still
+only a measurement under its declared manifest.
+
 ### Transfer task — new runtime claim, same evidence discipline
 
 An AI proposal says that changing a fixed local report from a list to a stream
@@ -869,6 +891,8 @@ reporting incident and include:
 - one CPython 3.14.6 source-reading card labelled as an observation;
 - memory-metric selection table with stated omissions;
 - controlled timing/allocation manifest, fixed sample packet, and limitation;
+- optional local measurement receipt or an explicit decision to use only the
+  fixed casebook packet;
 - AI-patch review that accepts, rejects, or splits the proposal;
 - rollback condition, privacy consequence, and next falsifying experiment.
 

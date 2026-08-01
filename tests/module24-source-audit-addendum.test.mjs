@@ -90,6 +90,12 @@ test("the M24 learner and authoring surfaces state the fixed-model, local-I/O, a
   assert.match(workbook, /Local test-harness I\/O:/u);
   assert.match(workbook, /Fixed source-inspection plan, not a captured disassembly/u);
   assert.match(workbook, /hypothesis, not a CPython\s+observation/u);
+  assert.match(workbook, /Optional local measurement receipt/u);
+  assert.match(
+    workbook,
+    /no portal upload, automatic collection, comparison leaderboard,\s+or production-performance claim/u,
+  );
+  assert.match(workbook, /Keep raw profiles, paths, payloads, and machine identifiers local/u);
   assert.match(studio, /illustrative bytecode card/u);
   assert.match(studio, /not a captured disassembly/u);
   assert.match(referenceModel, /fixed fixture label, not the detected interpreter/iu);

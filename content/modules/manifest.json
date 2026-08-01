@@ -975,9 +975,9 @@
       "title": "CPython, Performance & Memory Evidence",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 23 gave a program a semantic path: source, structure, environment, evaluator, and bounded result. This module asks a different question: when a trusted Python program runs,…",
       "arcId": "arc-v",
-      "wordCount": 5258,
+      "wordCount": 5391,
       "estimatedMinutes": 21,
-      "sourceHash": "15206661c3308da64e61f75960a4d0e56d54e22992e9ee7c4066b4a1c5ff005d",
+      "sourceHash": "fff44257170d52c39008b96b31a65f35776490889ebe6837399dd4434c849338",
       "id": "m24",
       "state": {
         "lifecycle": "learner-material-ready",
