@@ -130,6 +130,7 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /names a module or learning topic/);
   assert.match(html, /pause records/);
   assert.match(readable, /configured private learning\s+record/i);
+  assert.match(readable, /after you say “records on” in that exact designated chat/i);
   assert.match(readable, /designated Codex chats—not the portal/i);
   assert.match(readable, /authorized to\s+automatically create one concise Notion session note/i);
   assert.match(readable, /after a\s+substantive learning conversation/i);

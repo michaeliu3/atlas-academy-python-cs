@@ -72,10 +72,11 @@ do not ask it to invent missing sources, experiments, or results.
 3. **Visible whiteboard:** use display math with defined notation, labelled code
    blocks, state traces, and a prose/ASCII fallback whenever rendering is
    uncertain.
-4. **One concise record:** when the designated chat has a working approved
-   Notion integration and the session is substantive, it may create one compact
-   note. Otherwise keep the ready-to-paste summary in chat. Never treat a
-   claimed write as successful without direct evidence.
+4. **One concise record:** after the learner says `records on` in that exact
+   designated chat, when its approved Notion integration is working and the
+   session is substantive, it may create one compact note. Otherwise keep the
+   ready-to-paste summary in chat. Never treat a claimed write as successful
+   without direct evidence.
 
 See [Live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md) for role,
 voice, whiteboard, and privacy boundaries.

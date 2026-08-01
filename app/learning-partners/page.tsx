@@ -64,7 +64,8 @@ export default function LearningPartnersPage() {
             model, and a learning partner to make the model explainable under
             a changed condition. Atlas itself does not access voice, a
             microphone, or Notion. Within their configured private learning
-            record, the designated Codex chats—not the portal—are authorized to
+            record, after you say “records on” in that exact designated chat,
+            the designated Codex chats—not the portal—are authorized to
             automatically create one concise Notion session note after a
             substantive learning conversation. A successful write is recorded
             only from direct evidence; voice, rendering, and platform-setting
