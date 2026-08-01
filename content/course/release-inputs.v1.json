@@ -66,7 +66,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "612effa371491f488dc88611c82f3935a9601cc95206fd32e38edc488d97d759"
+      "sha256": "65ece7a3065b204e742d275a959f44c53cc29a51f08098a5febae8cee1f2a87b"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -362,7 +362,7 @@
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "8dd3ac506ce8f035eca672d58fd0bb83e3a1d7b87e79953e3dce2cbb8ad11c4b"
+      "sha256": "a5eeabb65bf22a856c131af7d31054b72ebc16ff52f08b4006df7b21dcae927d"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
@@ -370,19 +370,19 @@
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
-      "sha256": "4c4beec8467de8eaebb7116d97ca1ee412e8910e69df4dae94df60e027160e14"
+      "sha256": "e0ddfe87727a578c3c5e428a1f012fcf2b4cd77739039775cd494e29087663a3"
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
-      "sha256": "7f06ce96ed7840f3694f3b9fac63ae10758c96f36b21cca84e9f500f5f44f189"
+      "sha256": "ede123d65132452a6b851377907989621729a80f9754a69f0ce474a618e9486b"
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "3a212d50627ca4481c604b11cbdcd1f8194324409f9be418455a5e5d2aa77e7e"
+      "sha256": "15206661c3308da64e61f75960a4d0e56d54e22992e9ee7c4066b4a1c5ff005d"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "989452e97fdbf4d6f8c70e0efcefca698bb9f3beabe9d3139bad18cc17225758"
+      "sha256": "2add16418b4f0de33e19a568260abb3dba2c242f89a020886184753ab857c176"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
@@ -390,11 +390,11 @@
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
-      "sha256": "5851f24df5e02dd643ab77f3371105f3790f6968e3b3df8fd1caa01d3cacc0f0"
+      "sha256": "8101e4017f07e7566f5db781421c1c248c38e5123052524ba0a8fce3700f5be7"
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "512c4c3e122f97740723d01e0fef602c31f2dd901fc09dc61049137f916bd52b"
+      "sha256": "a22eeaec5018e807d8a1f5e3226d33118c0ae18f03caf899ee1bfff611b93739"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
@@ -778,7 +778,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "0fbfd4c7dda43a776425c6307b4afe8980ab3fe433f1c650199bf47cc44596de"
+      "sha256": "74cf71a6fa914ff62970d3db64636b0038deac3fdcfcf34e6b9843cc71f42b96"
     }
   ]
 }
