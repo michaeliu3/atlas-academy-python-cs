@@ -277,11 +277,11 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   assert.equal(report.summary.authoringOnlyModules, 6);
   assert.deepEqual(report.mermaidAlternatives?.summary, {
     totalBlocks: 245,
-    completeBlocks: 135,
-    incompleteBlocks: 110,
+    completeBlocks: 146,
+    incompleteBlocks: 99,
   });
   assert.ok(
-    report.warnings.some((warning) => warning.includes("110 Mermaid visual(s)")),
+    report.warnings.some((warning) => warning.includes("99 Mermaid visual(s)")),
   );
   assert.deepEqual(report.advancedContract?.summary, {
     authoringOnlyContracts: 1,
