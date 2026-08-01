@@ -898,17 +898,20 @@ async function validateAuthoringDeliveryMap(
     errors.push(`${label} requires exactly one hidden authoring workbook contract input.`);
     return;
   }
-  const authoringSourceMapPaths = [...new Set(
+  const authoringSourcePlanPaths = [...new Set(
     [...resolvedInputs.values()]
       .filter(
         ({ role, path }) =>
           role === "course-content" &&
-          new RegExp(`^content/source-maps/module${courseModule.number}_[a-z0-9_-]+_source_map\\.md$`, "u").test(path),
+          new RegExp(
+            `^content/source-maps/module${courseModule.number}_[a-z0-9_-]+_source_(?:map|research)\\.md$`,
+            "u",
+          ).test(path),
       )
       .map(({ path }) => path),
   )];
-  if (authoringSourceMapPaths.length !== 1) {
-    errors.push(`${label} requires exactly one instructor-facing authoring source-map contract input.`);
+  if (authoringSourcePlanPaths.length !== 1) {
+    errors.push(`${label} requires exactly one instructor-facing authoring source-plan contract input.`);
     return;
   }
 
@@ -929,7 +932,7 @@ async function validateAuthoringDeliveryMap(
       bridgeEntry,
       bridgePath: advancedModuleBridgeRelativePath,
       workbookPath: hiddenWorkbookPaths[0],
-      authoringSourcePlanPath: authoringSourceMapPaths[0],
+      authoringSourcePlanPath: authoringSourcePlanPaths[0],
       workbookMarkdown,
     });
   } catch (error) {

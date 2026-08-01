@@ -33,7 +33,7 @@ import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 
-test("the retained advanced authoring adapter validates M31 evidence without publication", async () => {
+test("the retained advanced authoring adapter validates M31-M36 evidence without publication", async () => {
   const [graph, registry] = await Promise.all([
     loadCourseGraph(),
     loadAdvancedModuleContractRegistry(),
@@ -41,16 +41,21 @@ test("the retained advanced authoring adapter validates M31 evidence without pub
   const report = await validateAdvancedModuleContractRegistry(graph, registry);
 
   assert.deepEqual(report.summary, {
-    authoringOnlyContracts: 1,
-    plannedContracts: 1,
+    authoringOnlyContracts: 6,
+    plannedContracts: 6,
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 20,
+    resolvedContractInputs: 75,
   });
-  assert.equal(report.modules[0].moduleId, "m31");
-  assert.equal(report.modules[0].publicationEffect, "none");
-  assert.equal(report.modules[0].promotionBlock.learnerManifest, "absent");
+  assert.deepEqual(
+    report.modules.map(({ moduleId }) => moduleId),
+    ["m31", "m32", "m33", "m34", "m35", "m36"],
+  );
+  for (const courseModule of report.modules) {
+    assert.equal(courseModule.publicationEffect, "none");
+    assert.equal(courseModule.promotionBlock.learnerManifest, "absent");
+  }
 });
 
 test("the retained advanced contract is an authoring adapter, not M31's later promotion authority", async () => {
@@ -285,15 +290,15 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     false,
   );
   assert.deepEqual(report.advancedContract?.summary, {
-    authoringOnlyContracts: 1,
-    plannedContracts: 1,
+    authoringOnlyContracts: 6,
+    plannedContracts: 6,
     pointerPresentContracts: 0,
     reviewedContracts: 0,
     releaseReadyContracts: 0,
-    resolvedContractInputs: 20,
+    resolvedContractInputs: 75,
   });
   assert.deepEqual(report.moduleLearningCompanions?.summary, {
-    companionCount: 13,
+    companionCount: 18,
     moduleIds: [
       "m12",
       "m13",
@@ -308,6 +313,11 @@ test("the v3 contract registry covers every legacy reader module structurally", 
       "m29",
       "m30",
       "m31",
+      "m32",
+      "m33",
+      "m34",
+      "m35",
+      "m36",
     ],
   });
   assert.equal(report.legacyCandidatePreflightProfiles?.candidateByModuleId.size, 12);
@@ -379,7 +389,7 @@ test("checked-in provenance accepts the canonical derived graph projection", asy
     snapshot,
   });
 
-  assert.equal(report.releaseInputLedger?.inputPaths.length, 194);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 214);
   assert.equal(report.summary.legacyBaselineModules, 30);
 });
 
@@ -417,7 +427,7 @@ test("checked-in provenance validates captured JSON instead of stateful caller f
 
   assert.equal(graphPurposeReads, 1);
   assert.equal(registryPurposeReads, 1);
-  assert.equal(report.releaseInputLedger?.inputPaths.length, 194);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 214);
 });
 
 test("checked-in provenance ignores inherited Git index overrides end to end", async () => {
@@ -433,7 +443,7 @@ test("checked-in provenance ignores inherited Git index overrides end to end", a
       requireGitTracked: true,
       snapshot,
     });
-    assert.equal(report.releaseInputLedger?.inputPaths.length, 194);
+    assert.equal(report.releaseInputLedger?.inputPaths.length, 214);
   } finally {
     if (previousIndexOverride === undefined) {
       delete process.env.GIT_INDEX_FILE;

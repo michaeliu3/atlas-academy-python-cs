@@ -55,19 +55,31 @@ async function m31DeliveryFixture() {
   };
 }
 
-async function m31AuthoringDeliveryFixture() {
-  const authoringWorkbookPath =
-    "content/authoring/m31_optimization_information_workbook.v1.md";
-  const authoringDeliveryMapPath =
-    "content/course/contracts/authoring-delivery/m31.v1.json";
-  const [graph, bridgeLedger, workbookMarkdown, deliveryMapText] = await Promise.all([
+async function authoringDeliveryFixture(moduleId) {
+  const advancedRegistryPath = resolve(
+    siteRoot,
+    "content/course/contracts/advanced-module-contracts.v1.json",
+  );
+  const [graph, bridgeLedger, registryText] = await Promise.all([
     loadCourseGraph(),
     loadAdvancedModuleBridgeLedger(siteRoot),
+    readFile(advancedRegistryPath, "utf8"),
+  ]);
+  const adapter = JSON.parse(registryText).modules.find((entry) => entry.moduleId === moduleId);
+  const inputById = new Map(adapter.contractInputs.map((input) => [input.id, input]));
+  const authoringWorkbookPath = inputById.get(`${moduleId}-authoring-workbook-draft`).path;
+  const authoringDeliveryMapPath = inputById.get(adapter.authoringDeliveryMapInputId).path;
+  const authoringSourcePlanInput =
+    inputById.get(`${moduleId}-source-research-sessions`) ??
+    inputById.get(`${moduleId}-source-map-sessions`);
+  assert.ok(authoringSourcePlanInput, `${moduleId} must declare a session-level source-plan input`);
+  const authoringSourcePlanPath = authoringSourcePlanInput.path;
+  const [workbookMarkdown, deliveryMapText] = await Promise.all([
     readFile(resolve(siteRoot, authoringWorkbookPath), "utf8"),
     readFile(resolve(siteRoot, authoringDeliveryMapPath), "utf8"),
   ]);
-  const courseModule = graph.modules.find(({ id }) => id === "m31");
-  const bridgeEntry = bridgeLedger.modules.find(({ moduleId }) => moduleId === "m31");
+  const courseModule = graph.modules.find(({ id }) => id === moduleId);
+  const bridgeEntry = bridgeLedger.modules.find((entry) => entry.moduleId === moduleId);
   return {
     deliveryMap: JSON.parse(deliveryMapText),
     options: {
@@ -75,7 +87,7 @@ async function m31AuthoringDeliveryFixture() {
       bridgeEntry,
       bridgePath: "content/course/m31-m36-prerequisite-session-bridge.v1.json",
       workbookPath: authoringWorkbookPath,
-      authoringSourcePlanPath: "content/source-maps/module31_optimization_information_source_map.md",
+      authoringSourcePlanPath,
       workbookMarkdown,
     },
   };
@@ -120,13 +132,15 @@ test("a candidate delivery map rejects session, prerequisite, artifact, and hand
   );
 });
 
-test("the hidden M31 authoring delivery map binds each visible session output", async () => {
-  const { deliveryMap, options } = await m31AuthoringDeliveryFixture();
-  assert.equal(validateAdvancedAuthoringDeliveryMap(deliveryMap, options), deliveryMap);
+test("the hidden M31-M36 authoring delivery maps bind each visible session output", async () => {
+  for (const moduleId of ["m31", "m32", "m33", "m34", "m35", "m36"]) {
+    const { deliveryMap, options } = await authoringDeliveryFixture(moduleId);
+    assert.equal(validateAdvancedAuthoringDeliveryMap(deliveryMap, options), deliveryMap);
+  }
 });
 
 test("the hidden M31 authoring delivery map rejects missing, duplicate, misplaced, and orphan outputs", async () => {
-  const { deliveryMap, options } = await m31AuthoringDeliveryFixture();
+  const { deliveryMap, options } = await authoringDeliveryFixture("m31");
 
   const missingForwardArtifact = structuredClone(deliveryMap);
   missingForwardArtifact.sessions[0].outputs[0].forwardArtifactId = null;
@@ -195,13 +209,15 @@ test("the hidden M31 authoring delivery map rejects missing, duplicate, misplace
   );
 });
 
-test("the M31 authoring contract keeps learner delivery null and binds hidden output topology separately", async () => {
+test("the M31-M36 authoring contracts keep learner delivery null and bind hidden output topology separately", async () => {
   const registryPath = resolve(
     siteRoot,
     "content/course/contracts/advanced-module-contracts.v1.json",
   );
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
-  assert.equal(registry.modules[0].moduleId, "m31");
-  assert.equal(registry.modules[0].deliveryMapInputId, null);
-  assert.equal(registry.modules[0].authoringDeliveryMapInputId, "m31-authoring-delivery-map");
+  for (const moduleId of ["m31", "m32", "m33", "m34", "m35", "m36"]) {
+    const courseModule = registry.modules.find((entry) => entry.moduleId === moduleId);
+    assert.equal(courseModule.deliveryMapInputId, null);
+    assert.equal(courseModule.authoringDeliveryMapInputId, `${moduleId}-authoring-delivery-map`);
+  }
 });

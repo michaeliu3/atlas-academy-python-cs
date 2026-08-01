@@ -1273,7 +1273,7 @@
         "availability": "authoring-only",
         "contract": {
           "track": "advanced-v1",
-          "state": "not-started"
+          "state": "authoring-only"
         },
         "release": {
           "state": "unrecorded",
@@ -1308,7 +1308,7 @@
         "availability": "authoring-only",
         "contract": {
           "track": "advanced-v1",
-          "state": "not-started"
+          "state": "authoring-only"
         },
         "release": {
           "state": "unrecorded",
@@ -1344,7 +1344,7 @@
         "availability": "authoring-only",
         "contract": {
           "track": "advanced-v1",
-          "state": "not-started"
+          "state": "authoring-only"
         },
         "release": {
           "state": "unrecorded",
@@ -1382,7 +1382,7 @@
         "availability": "authoring-only",
         "contract": {
           "track": "advanced-v1",
-          "state": "not-started"
+          "state": "authoring-only"
         },
         "release": {
           "state": "unrecorded",
@@ -1418,7 +1418,7 @@
         "availability": "authoring-only",
         "contract": {
           "track": "advanced-v1",
-          "state": "not-started"
+          "state": "authoring-only"
         },
         "release": {
           "state": "unrecorded",

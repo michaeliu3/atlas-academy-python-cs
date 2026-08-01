@@ -240,7 +240,7 @@ export const humanReviewDimensions = [
 ];
 
 const legacyCriterionIds = new Set(criterionIds.slice(0, 16));
-const m31EvidenceByCriterion = {
+const authoringAdapterEvidenceByCriterion = {
   "prerequisite-forward-map": "prerequisite-and-forward-map",
   "six-connected-sessions": "six-connected-sessions",
   "first-principles": "first-principles-code-reading-prediction-and-transfer",
@@ -788,20 +788,21 @@ function validateLegacyBaseline(moduleEntry, graphModule, audit, manifestById, e
   }
 }
 
-function validateM31AuthoringAdapter(moduleEntry, graphModule, advancedRegistry, manifestById, errors) {
-  const advancedIndex = advancedRegistry.modules.findIndex(({ moduleId }) => moduleId === "m31");
+function validateAuthoringAdapter(moduleEntry, graphModule, advancedRegistry, manifestById, errors) {
+  const moduleId = moduleEntry.moduleId;
+  const advancedIndex = advancedRegistry.modules.findIndex(({ moduleId: candidateId }) => candidateId === moduleId);
   const advancedModule = advancedRegistry.modules[advancedIndex];
   if (!advancedModule) {
-    errors.push("M31 authoring-only v3 entry requires the retained advanced authoring adapter record.");
+    errors.push(`${moduleId} authoring-only v3 entry requires the retained advanced authoring adapter record.`);
     return;
   }
   if (
-    graphModule.id !== "m31" ||
+    graphModule.id !== moduleId ||
     graphModule.state.lifecycle !== "authoring-only" ||
     graphModule.state.readerAccess !== "hidden" ||
-    manifestById.has("m31")
+    manifestById.has(moduleId)
   ) {
-    errors.push("M31 authoring-only v3 entry must remain hidden learner material.");
+    errors.push(`${moduleId} authoring-only v3 entry must remain hidden learner material.`);
   }
   migrationPointer(
     advancedRegistry,
@@ -809,26 +810,26 @@ function validateM31AuthoringAdapter(moduleEntry, graphModule, advancedRegistry,
     "advanced-authoring-adapter",
     advancedModuleContractRelativePath,
     `/modules/${advancedIndex}`,
-    "M31 authoring-only adapter",
+    `${moduleId} authoring-only adapter`,
     errors,
   );
   requirePendingReview(moduleEntry, errors);
   requireNoPromotionRecords(moduleEntry, errors);
   if (moduleEntry.reviewReadyCommit !== null || moduleEntry.release !== null) {
-    errors.push("M31 authoring-only v3 entry may not declare promotion or release evidence.");
+    errors.push(`${moduleId} authoring-only v3 entry may not declare promotion or release evidence.`);
   }
   const advancedEvidenceById = new Map(
     advancedModule.evidence.map((evidence, index) => [evidence.id, { evidence, index }]),
   );
   for (const criterion of moduleEntry.criteria) {
-    const sourceEvidence = advancedEvidenceById.get(m31EvidenceByCriterion[criterion.id]);
+    const sourceEvidence = advancedEvidenceById.get(authoringAdapterEvidenceByCriterion[criterion.id]);
     if (!sourceEvidence) {
-      errors.push(`M31 criterion ${criterion.id} has no mapped advanced contract evidence.`);
+      errors.push(`${moduleId} criterion ${criterion.id} has no mapped advanced contract evidence.`);
       continue;
     }
     const expectedLocator = `/modules/${advancedIndex}/evidence/${sourceEvidence.index}`;
     if (criterion.status !== sourceEvidence.evidence.state) {
-      errors.push(`M31 criterion ${criterion.id} must preserve its advanced contract evidence state.`);
+      errors.push(`${moduleId} criterion ${criterion.id} must preserve its advanced contract evidence state.`);
     }
     if (
       criterion.source.kind !== "advanced-authoring-adapter-evidence" ||
@@ -836,7 +837,7 @@ function validateM31AuthoringAdapter(moduleEntry, graphModule, advancedRegistry,
       criterion.source.locator !== expectedLocator ||
       resolveJsonPointer(advancedRegistry, criterion.source.locator) !== sourceEvidence.evidence
     ) {
-      errors.push(`M31 criterion ${criterion.id} must bind its advanced authoring-adapter evidence.`);
+      errors.push(`${moduleId} criterion ${criterion.id} must bind its advanced authoring-adapter evidence.`);
     }
   }
 }
@@ -2077,7 +2078,7 @@ export async function validateModuleContractRegistry(
     if (moduleEntry.contractState === "legacy-baseline" && legacyAudit) {
       validateLegacyBaseline(moduleEntry, graphModule, legacyAudit, manifestById, errors);
     } else if (moduleEntry.contractState === "authoring-only" && advancedRegistry) {
-      validateM31AuthoringAdapter(moduleEntry, graphModule, advancedRegistry, manifestById, errors);
+      validateAuthoringAdapter(moduleEntry, graphModule, advancedRegistry, manifestById, errors);
     } else if (moduleEntry.contractState === "not-started" && bridgeLedger) {
       validateAdvancedPlan(moduleEntry, graphModule, bridgeLedger, manifestById, errors);
     } else if (["review-ready", "verified"].includes(moduleEntry.contractState)) {

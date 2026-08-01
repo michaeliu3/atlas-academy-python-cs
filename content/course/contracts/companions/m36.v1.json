@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m36",
+  "purpose": "Freeze a module-specific M36 companion context for a future human-reviewed contract without making it learner-visible.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies live voice quality, model selection, equation or code rendering, microphone access, platform retention, or external integrations.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself save a Notion note, raw voice, transcript, credentials, or personal data.",
+    "mastery": "This authoring-only record is not a grade, oral-exam result, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/35",
+    "digest": "sha256:333f104b0dcedfa432ba688e86850f251bb1fd8dbbd4d40a61dad81829c9bf35"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin from the learner's named learning-theory scope, systems evidence, monitoring, and human control artifact rather than a score; ask which decision or claim it supports and what it leaves unresolved.",
+    "artifactFocus": "Ask for one named assumption, one bounded trace or counterexample, and the narrowest non-claim supported by the available evidence.",
+    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Lead one retrieval or trace at a time: separate definition, assumption, finite observation, implementation contract, and decision claim; treat an AI-generated answer as a proposal to inspect.",
+    "changedPremise": "Change exactly one declared premise or boundary, ask the learner to predict the consequence before checking it, and keep equations, code, and tables readable in the chat whiteboard.",
+    "taHandoff": "End with the current question, attempted reasoning, smallest named artifact, unresolved misconception, and suggested focus for the supportive Teaching Assistant defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m25",
+    "carryArtifact": "Carry the canonical Synthesis-ready reliable-learning evidence packet: assumptions, gaps, theorem limits, reproducibility record, monitoring/authority boundary, and oral-defense reflection. with one uncertainty-not a mastery claim.",
+    "targetQuestion": "Before using this packet in M25, which stated assumption, trace boundary, or counterexample must remain visible when the next module changes the problem?",
+    "boundary": "M25 is the only canonical forward handoff. Any other advanced-module reference is an authoring or direct-consumer connection, not learner navigation, release evidence, or credit."
+  }
+}

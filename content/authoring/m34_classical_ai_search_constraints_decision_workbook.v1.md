@@ -734,7 +734,7 @@ or another clearly invented non-consequential system. Do not build a tool that
 decides for real people, operates equipment, accesses accounts, or supplies
 professional advice.
 
-### Dossier: Classical AI Search, Constraints & Decision Packet
+### Output: Classical AI Search, Constraints & Decision Packet
 
 Submit one connected packet containing:
 

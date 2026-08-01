@@ -36,12 +36,17 @@ test("the unified v3 module-contract registry covers the canonical 36-module gra
     byId.get("m25").criteria.find(({ id }) => id === "release-provenance-ci-and-deployment-evidence").status,
     "missing",
   );
-  assert.equal(byId.get("m31").contractState, "authoring-only");
-  assert.equal(byId.get("m32").contractState, "not-started");
-  assert.equal(
-    byId.get("m31").criteria.find(({ id }) => id === "interaction-reference-model-and-teaching-tests").status,
-    "pointer-present",
-  );
+  for (const moduleId of ["m31", "m32", "m33", "m34", "m35", "m36"]) {
+    assert.equal(byId.get(moduleId).contractState, "authoring-only");
+    assert.equal(
+      byId.get(moduleId).criteria.find(({ id }) => id === "interaction-reference-model-and-teaching-tests").status,
+      "pointer-present",
+    );
+    assert.equal(
+      byId.get(moduleId).criteria.find(({ id }) => id === "release-provenance-ci-and-deployment-evidence").status,
+      "planned",
+    );
+  }
 });
 
 test("the synchronizer-only pre-write manifest projection cannot weaken release validation", async () => {
@@ -70,6 +75,25 @@ test("the synchronizer-only pre-write manifest projection cannot weaken release 
       manifestTruth: "untrusted-worktree",
     }),
     /Unknown module-contract registry v3 manifest truth mode/i,
+  );
+});
+
+test("an M32 authoring adapter cannot become learner-visible before review and release evidence", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleContractRegistry(),
+  ]);
+  const candidateGraph = copy(graph);
+  const candidateRegistry = copy(registry);
+  const m32 = candidateGraph.modules.find(({ id }) => id === "m32");
+
+  m32.state.lifecycle = "learner-material-ready";
+  m32.state.readerAccess = "full";
+  m32.state.availability = "optional";
+
+  await assert.rejects(
+    () => validateModuleContractRegistry(candidateGraph, candidateRegistry),
+    /m32 authoring-only v3 entry must remain hidden learner material/i,
   );
 });
 

@@ -731,7 +731,7 @@ Choose exactly one narrow claim:
 Do not combine every theorem in the module. A strong small claim with visible
 assumptions teaches more than a catalogue of names.
 
-### Dossier: Formal Limits Claim Packet
+### Output: Formal Limits Claim Packet
 
 Your dossier must contain:
 

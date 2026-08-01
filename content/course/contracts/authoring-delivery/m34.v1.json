@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "deliveryMapVersion": "v1",
+  "kind": "atlas-advanced-authoring-delivery-map",
+  "moduleId": "m34",
+  "workbookPath": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+  "authoringSourcePlanPath": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+  "bridgePath": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "sessions": [
+    {
+      "id": "m34-s01",
+      "title": "Problem formulation: states, actions, goals, costs, and observations",
+      "sessionHeadingAnchor": "session-1--model-a-state-before-searching-it",
+      "usesPrerequisiteModuleIds": [
+        "m10"
+      ],
+      "outputs": [
+        {
+          "id": "m34-state-space-model-card",
+          "kind": "worksheet",
+          "headingAnchor": "output-state-space-model-card",
+          "forwardArtifactId": "m34-state-space-model-card"
+        }
+      ]
+    },
+    {
+      "id": "m34-s02",
+      "title": "Search strategies, heuristics, and evidence of completeness or optimality",
+      "sessionHeadingAnchor": "session-2--search-traces-need-their-theorem-conditions",
+      "usesPrerequisiteModuleIds": [
+        "m10",
+        "m11"
+      ],
+      "outputs": [
+        {
+          "id": "m34-search-strategy-evidence-table",
+          "kind": "claim-table",
+          "headingAnchor": "output-search-strategy-evidence-table",
+          "forwardArtifactId": "m34-search-strategy-evidence-table"
+        }
+      ]
+    },
+    {
+      "id": "m34-s03",
+      "title": "Constraints, optimization, relaxations, and explanation",
+      "sessionHeadingAnchor": "session-3--constraints-and-relaxations-change-the-mathematical-object",
+      "usesPrerequisiteModuleIds": [
+        "m11",
+        "m31"
+      ],
+      "outputs": [
+        {
+          "id": "m34-constraint-objective-relaxation-sheet",
+          "kind": "worksheet",
+          "headingAnchor": "output-constraintobjectiverelaxation-sheet",
+          "forwardArtifactId": "m34-constraint-objective-relaxation-sheet"
+        }
+      ]
+    },
+    {
+      "id": "m34-s04",
+      "title": "Planning/CSP limits: encoding, reductions, and solver boundaries",
+      "sessionHeadingAnchor": "session-4--planning-and-solver-limits-must-be-stated-not-guessed",
+      "usesPrerequisiteModuleIds": [
+        "m33"
+      ],
+      "outputs": [
+        {
+          "id": "m34-csp-limit-claim-card",
+          "kind": "claim-table",
+          "headingAnchor": "output-cspplanning-limit-claim-card",
+          "forwardArtifactId": "m34-csp-limit-claim-card"
+        }
+      ]
+    },
+    {
+      "id": "m34-s05",
+      "title": "Uncertainty, utility, and decision under incomplete information",
+      "sessionHeadingAnchor": "session-5--belief-utility-and-authority-are-different-inputs",
+      "usesPrerequisiteModuleIds": [
+        "m30",
+        "m31"
+      ],
+      "outputs": [
+        {
+          "id": "m34-decision-under-uncertainty-card",
+          "kind": "claim-table",
+          "headingAnchor": "output-decision-under-uncertainty-card",
+          "forwardArtifactId": "m34-decision-under-uncertainty-card"
+        }
+      ]
+    },
+    {
+      "id": "m34-s06",
+      "title": "Classical AI design dossier and oral defense",
+      "sessionHeadingAnchor": "session-6--defend-a-classical-ai-design-dossier",
+      "usesPrerequisiteModuleIds": [
+        "m10",
+        "m11",
+        "m30",
+        "m31",
+        "m33"
+      ],
+      "outputs": [
+        {
+          "id": "m34-classical-ai-search-constraints-decision-packet",
+          "kind": "dossier",
+          "headingAnchor": "output-classical-ai-search-constraints--decision-packet",
+          "forwardArtifactId": null
+        }
+      ]
+    }
+  ],
+  "forwardHandoff": {
+    "declaredForwardModuleId": "m35",
+    "directAcademicConsumerModuleIds": [
+      "m35"
+    ],
+    "handoffArtifact": "Problem-formulation packet: state/representation, objective/constraints, search or solver rationale, uncertainty model, and limit/human-impact boundaries.",
+    "note": "M35 is both the graph's declared forward handoff and its direct academic consumer."
+  },
+  "localForwardHandoffOutputId": "m34-classical-ai-search-constraints-decision-packet",
+  "truthBoundary": "This hidden M34 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."
+}

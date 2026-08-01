@@ -69,6 +69,26 @@
       "sha256": "be7de2798ef7549d894f0bb819fa29d254d49745226e9392edec7a5039b0d332"
     },
     {
+      "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
+      "sha256": "4fcc1c0c7794421124f7a4447c605a87ad5e980db268f238aebbe2462801300e"
+    },
+    {
+      "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+      "sha256": "3a206677b33e9fc8a57482092be65861635e5fd328d558b8ab0ce5fc6d3e0bbc"
+    },
+    {
+      "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+      "sha256": "66f9d2059ddd6dc8a32fda512d4bb1935df0ff49a26f86bb6f4e39d604b1237e"
+    },
+    {
+      "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+      "sha256": "7c7382e9c3ce6d92c0aef766b43e17928bb17e7ee4d6a13b92c15f7529a59840"
+    },
+    {
+      "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+      "sha256": "79dcda8e1c238ac4ebf9e3deb5a9588c81904dc146f24da6780bd71c131f9146"
+    },
+    {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
       "sha256": "bc6bb5ca0a94e97cfe183b04fa0575aeeb634923de236e755459119988bede05"
     },
@@ -82,11 +102,31 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "bb4bacad758efbd5975bcedc18cf864897d185edf5bc4e1d75e31ad1c4628cbe"
+      "sha256": "af3b23ce33bfa24e72d7b5eb3bf11dc0244afd783419543a0f1522bdc03f0873"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m31.v1.json",
       "sha256": "662b4cd62df8cedebccf650de613225e9b749bb819039129e3c70b9f02b13765"
+    },
+    {
+      "path": "content/course/contracts/authoring-delivery/m32.v1.json",
+      "sha256": "1eb7f11959c23e0c30bf14a23e14f239e83060efde39b357f9323d4e887e1a9c"
+    },
+    {
+      "path": "content/course/contracts/authoring-delivery/m33.v1.json",
+      "sha256": "43675ea7cc4a2a91ea0a3ac45b522a35de14cffebc88034931a0ec6fc5939b7a"
+    },
+    {
+      "path": "content/course/contracts/authoring-delivery/m34.v1.json",
+      "sha256": "146c2a3ce0987d8cd223740bef569844ba4ccb4a86d27e997e8206554ad703e4"
+    },
+    {
+      "path": "content/course/contracts/authoring-delivery/m35.v1.json",
+      "sha256": "b606328f95deaa50001ea5de363badfa070ceb97f408f025e6e23bf3e6fa174b"
+    },
+    {
+      "path": "content/course/contracts/authoring-delivery/m36.v1.json",
+      "sha256": "a01a123352f5548254d9931c25ac46dc8b325e759149493857ce09b38bb47e62"
     },
     {
       "path": "content/course/contracts/companions/m12.v1.json",
@@ -139,6 +179,26 @@
     {
       "path": "content/course/contracts/companions/m31.v1.json",
       "sha256": "4ae2e421c5263c0f75afeeb77daf6c6f2b3679f6202b6a274ee7d16c79d63ebc"
+    },
+    {
+      "path": "content/course/contracts/companions/m32.v1.json",
+      "sha256": "336d737f45d161bebb810b73a27d6dcbc45f4995cb111089d5bcbbaad6fc3b46"
+    },
+    {
+      "path": "content/course/contracts/companions/m33.v1.json",
+      "sha256": "5c8cd52b97e3de275fc057d7dcf978766180e826e653cf00ebfb3421a136985b"
+    },
+    {
+      "path": "content/course/contracts/companions/m34.v1.json",
+      "sha256": "ab8f7b9df6b8015bcd2affd304e393644c38461e4ea850fdbf28ed92527edae7"
+    },
+    {
+      "path": "content/course/contracts/companions/m35.v1.json",
+      "sha256": "7bebd9fc02f9e8d95f53b171c1f78161f677579317a36543edb7c7348708f137"
+    },
+    {
+      "path": "content/course/contracts/companions/m36.v1.json",
+      "sha256": "8d5dbdbf1554e58e3d393597e85b3d4bcb2616ef33929c890055ffaf126c8a21"
     },
     {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",
@@ -254,11 +314,11 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "7ac0d40cb49799bd6567584e578aa7601c8a028db98caf11900020fa246373aa"
+      "sha256": "802e8161b625aa43e628d79a022b2565a761e84b4b45fb87462c3d332c1c8117"
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "2582dd858bcfd137f7a8388981f79877faa6f6b72307a27e05212471f882cb94"
+      "sha256": "d60c4d1fc1d4880283acbe76cc5fcd7ab8e08808d016ae27ec105753aaace1fc"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -527,6 +587,26 @@
     {
       "path": "content/source-maps/module31_optimization_information_source_map.md",
       "sha256": "a661bde63eb749037f2e8a5e634bf9e9e2f26b39eced13fa29da59b5265aec82"
+    },
+    {
+      "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+      "sha256": "702a535992d1328772d7a0cde46ca032f4de0b6c9c3ba80bf80337da2643fc5f"
+    },
+    {
+      "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+      "sha256": "53b1df6981738afed22d9c0836d76fbeb3e70562eba3eb51ba03b5a01dda5e5b"
+    },
+    {
+      "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+      "sha256": "74cb301949793b0fdcf65366e73a7cbd6af1954b36dd504bff2e06cc9fb5d3d7"
+    },
+    {
+      "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+      "sha256": "743f7e4d28cbd78af02cbf2052df1f7cd87a81c7084e4e766e06e9ccf855871d"
+    },
+    {
+      "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+      "sha256": "16a0400dac9944ee8682813b96a009fa3778a4398ffd2fa8e19ed6a7fc058ae1"
     },
     {
       "path": "content/source-maps/python_curriculum_sources.md",

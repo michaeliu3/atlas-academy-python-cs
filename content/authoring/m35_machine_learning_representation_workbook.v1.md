@@ -177,7 +177,7 @@ reversible next action.
 
 ---
 
-## 3. Session 1 — Representation, inductive bias, and what a model can discard
+## Session 1 — Representation, inductive bias, and what a model can discard
 
 ### Core question
 
@@ -285,7 +285,7 @@ not matter.
 
 ---
 
-## 4. Session 2 — Formulation and classical baselines before learned models
+## Session 2 — Formulation and classical baselines before learned models
 
 ### Core question
 
@@ -427,7 +427,7 @@ deployment value, causal explanation, or a legitimate decision policy.
 
 ---
 
-## 5. Session 3 — Data relations, splits, metrics, calibration, and shift
+## Session 3 — Data relations, splits, metrics, calibration, and shift
 
 ### Core question
 
@@ -541,7 +541,7 @@ inference boundary. Include the sentence:
 
 ---
 
-## 6. Session 4 — Objectives, autodiff, optimization, and training systems
+## Session 4 — Objectives, autodiff, optimization, and training systems
 
 ### Core question
 
@@ -760,16 +760,18 @@ Setting a seed is useful, but it is not a universal portability guarantee.
 
 ### Output: Objective–Optimization–Generalization Trace
 
-Create two linked artifacts:
-
-- an **objective trace**: inputs, representation, loss, regularizer, optimizer,
+Create an **objective trace**: inputs, representation, loss, regularizer, optimizer,
   step rule, gradient/finite-difference probe, observed training and validation
-  quantities, and unresolved objective-to-target gap;
-- a **training-systems reproducibility card** using the table above.
+  quantities, and unresolved objective-to-target gap.
+
+### Output: Training-Systems Reproducibility Card
+
+Create a **training-systems reproducibility card** using the table above. Keep
+the exact comparison conditions and its nonportable boundary visible.
 
 ---
 
-## 7. Session 5 — ML debugging, observability, and evidence that can fail usefully
+## Session 5 — ML debugging, observability, and evidence that can fail usefully
 
 ### Core question
 
@@ -826,7 +828,7 @@ discriminating probe for each major branch.
 
 ---
 
-## 8. Session 6 — Responsible ML representation dossier and oral defense
+## Session 6 — Responsible ML representation dossier and oral defense
 
 ### Core question
 
@@ -860,6 +862,17 @@ For this module, keep the project intentionally bounded:
 6. **Claim–test–observability matrix:** probes, owners, response boundaries.
 7. **Data-authority-impact map:** prohibited uses, privacy/provenance question,
    human decision owner, escalation/appeal question, and unanswered impact.
+
+### Output: Data-Authority-Impact Map
+
+Make artifact 7 independently readable: name the synthetic data boundary,
+prohibited uses, authority owner, escalation/appeal path, and one unanswered
+impact question. This is a governance boundary, not a deployment decision.
+
+### Output: Machine Learning & Representation Dossier
+
+Submit one connected dossier that integrates the seven required artifacts and
+keeps every supported claim next to its uncertainty and non-claim.
 
 ### Acceptance rubric
 

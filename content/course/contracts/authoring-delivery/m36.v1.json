@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "deliveryMapVersion": "v1",
+  "kind": "atlas-advanced-authoring-delivery-map",
+  "moduleId": "m36",
+  "workbookPath": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+  "authoringSourcePlanPath": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+  "bridgePath": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "sessions": [
+    {
+      "id": "m36-s01",
+      "title": "What learning claims mean: risk, representation, data, and assumptions",
+      "sessionHeadingAnchor": "session-1--risk-representation-data-and-assumption-scope",
+      "usesPrerequisiteModuleIds": [
+        "m29",
+        "m35"
+      ],
+      "outputs": [
+        {
+          "id": "m36-assumption-scope-sheet",
+          "kind": "worksheet",
+          "headingAnchor": "output-assumption-scope-sheet",
+          "forwardArtifactId": "m36-assumption-scope-sheet"
+        },
+        {
+          "id": "m36-reliable-learning-evidence-map",
+          "kind": "worksheet",
+          "headingAnchor": "output-initial-reliable-learning-evidence-map",
+          "forwardArtifactId": "m36-reliable-learning-evidence-map"
+        }
+      ]
+    },
+    {
+      "id": "m36-s02",
+      "title": "Optimization, estimation, and generalization are different gaps",
+      "sessionHeadingAnchor": "session-2--optimization-estimation-and-generalization-are-different-gaps",
+      "usesPrerequisiteModuleIds": [
+        "m29",
+        "m31",
+        "m35"
+      ],
+      "outputs": [
+        {
+          "id": "m36-optimization-generalization-gap-ledger",
+          "kind": "ledger",
+          "headingAnchor": "output-optimizationgeneralization-gap-ledger",
+          "forwardArtifactId": "m36-optimization-generalization-gap-ledger"
+        }
+      ]
+    },
+    {
+      "id": "m36-s03",
+      "title": "Capacity, learnability, computational limits, and theorem scope",
+      "sessionHeadingAnchor": "session-3--capacity-learnability-computational-limits-and-theorem-scope",
+      "usesPrerequisiteModuleIds": [
+        "m33",
+        "m35"
+      ],
+      "outputs": [
+        {
+          "id": "m36-limit-and-nonclaim-card",
+          "kind": "claim-table",
+          "headingAnchor": "output-limit-and-nonclaim-card",
+          "forwardArtifactId": "m36-limit-and-nonclaim-card"
+        }
+      ]
+    },
+    {
+      "id": "m36-s04",
+      "title": "Reliable deep-learning systems: numerical, systems, and reproducibility evidence",
+      "sessionHeadingAnchor": "session-4--numerical-systems-and-reproducibility-evidence",
+      "usesPrerequisiteModuleIds": [
+        "m32",
+        "m35"
+      ],
+      "outputs": [
+        {
+          "id": "m36-theory-system-reproducibility-record",
+          "kind": "experiment-card",
+          "headingAnchor": "output-theorysystem-reproducibility-record",
+          "forwardArtifactId": "m36-theory-system-reproducibility-record"
+        }
+      ]
+    },
+    {
+      "id": "m36-s05",
+      "title": "Shift, robustness, monitoring, and bounded human control",
+      "sessionHeadingAnchor": "session-5--shift-robustness-monitoring-and-bounded-human-control",
+      "usesPrerequisiteModuleIds": [
+        "m31",
+        "m32",
+        "m35"
+      ],
+      "outputs": [
+        {
+          "id": "m36-monitoring-extension-evidence-map",
+          "kind": "worksheet",
+          "headingAnchor": "output-monitoring-extension-to-reliable-learning-evidence-map",
+          "forwardArtifactId": null
+        }
+      ]
+    },
+    {
+      "id": "m36-s06",
+      "title": "Reliable learning systems dossier and bridge to synthesis",
+      "sessionHeadingAnchor": "session-6--reliable-learning-systems-dossier-and-bridge-to-synthesis",
+      "usesPrerequisiteModuleIds": [
+        "m29",
+        "m31",
+        "m32",
+        "m33",
+        "m35"
+      ],
+      "outputs": [
+        {
+          "id": "m36-statistical-learning-theory-reliable-deep-learning-systems-dossier",
+          "kind": "dossier",
+          "headingAnchor": "output-statistical-learning-theory--reliable-deep-learning-systems-dossier",
+          "forwardArtifactId": null
+        }
+      ]
+    }
+  ],
+  "forwardHandoff": {
+    "declaredForwardModuleId": "m25",
+    "directAcademicConsumerModuleIds": [],
+    "handoffArtifact": "Synthesis-ready reliable-learning evidence packet: assumptions, gaps, theorem limits, reproducibility record, monitoring/authority boundary, and oral-defense reflection.",
+    "note": "The graph's declared forward handoff is M25. This ledger does not unlock M25/M26; their academic prerequisites and release evidence remain governed by the canonical graph and module contract."
+  },
+  "localForwardHandoffOutputId": "m36-statistical-learning-theory-reliable-deep-learning-systems-dossier",
+  "truthBoundary": "This hidden M36 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."
+}

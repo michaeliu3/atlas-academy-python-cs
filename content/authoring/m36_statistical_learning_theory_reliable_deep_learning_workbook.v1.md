@@ -191,7 +191,7 @@ bounded action.
 
 ---
 
-## 3. Session 1 — Risk, representation, data, and assumption scope
+## Session 1 — Risk, representation, data, and assumption scope
 
 ### Core question
 
@@ -269,9 +269,17 @@ or a shift. Finish with:
 > “The implication I would need is ___ under ___; this finite record alone
 > does not establish ___.”
 
+### Output: Initial Reliable-Learning Evidence Map
+
+Create the first version of the evidence map now: name the target relation,
+representation, loss, hypothesis-class boundary, sample relation, one needed
+assumption, one finite observation, and one non-claim. Session 5 will extend
+this same map with monitoring and human-control fields rather than replacing
+its initial scope.
+
 ---
 
-## 4. Session 2 — Optimization, estimation, and generalization are different gaps
+## Session 2 — Optimization, estimation, and generalization are different gaps
 
 ### Core question
 
@@ -341,7 +349,7 @@ probe. Include an explicit sentence beginning:
 
 ---
 
-## 5. Session 3 — Capacity, learnability, computational limits, and theorem scope
+## Session 3 — Capacity, learnability, computational limits, and theorem scope
 
 ### Core question
 
@@ -538,7 +546,7 @@ non-conclusion before you accept the citation as useful.
 
 ---
 
-## 6. Session 4 — Numerical, systems, and reproducibility evidence
+## Session 4 — Numerical, systems, and reproducibility evidence
 
 ### Core question
 
@@ -641,7 +649,7 @@ benchmark, a model-reliability proof, or a platform guarantee.
 
 ---
 
-## 7. Session 5 — Shift, robustness, monitoring, and bounded human control
+## Session 5 — Shift, robustness, monitoring, and bounded human control
 
 ### Core question
 
@@ -728,7 +736,7 @@ them and one action that must remain with a human owner. A finite card does not
 choose a threshold, authorize intervention, or guarantee robustness under a
 new relation.
 
-### Output: Reliable-Learning Evidence Map
+### Output: Monitoring Extension to Reliable-Learning Evidence Map
 
 Extend your evidence map with a shift hypothesis, monitoring observable,
 threshold, false-alarm/miss discussion, data/model/system limitations, human
@@ -741,7 +749,7 @@ which one your chosen observable could miss.
 
 ---
 
-## 8. Session 6 — Reliable learning systems dossier and bridge to synthesis
+## Session 6 — Reliable learning systems dossier and bridge to synthesis
 
 ### Core question
 
@@ -751,6 +759,11 @@ score, or framework name as a shortcut?**
 Build a **Reliable Deep-Learning Systems Dossier** for the synthetic relay
 learner. No personal/proprietary data, external service, learned weights,
 consequential recommendation, or deployment is allowed.
+
+### Output: Statistical Learning Theory & Reliable Deep-Learning Systems Dossier
+
+Submit the connected dossier below with its assumptions, numerical/system
+evidence, monitoring boundary, and M25 handoff kept together.
 
 ### Required artifacts
 

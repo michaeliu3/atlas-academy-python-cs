@@ -5856,7 +5856,7 @@
     },
     {
       "moduleId": "m32",
-      "contractState": "not-started",
+      "contractState": "authoring-only",
       "humanReview": {
         "first-principles-quality": "pending",
         "rigor-and-counterexamples": "pending",
@@ -5870,171 +5870,171 @@
       "reviewReadyCommit": null,
       "release": null,
       "migration": {
-        "kind": "advanced-bridge-plan",
-        "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+        "kind": "advanced-authoring-adapter",
+        "path": "content/course/contracts/advanced-module-contracts.v1.json",
         "locator": "/modules/1"
       },
       "criteria": [
         {
           "id": "prerequisite-forward-map",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/0"
           }
         },
         {
           "id": "six-connected-sessions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/1"
           }
         },
         {
           "id": "first-principles",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/2"
           }
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/3"
           }
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/2"
           }
         },
         {
           "id": "prediction-before-reveal",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/2"
           }
         },
         {
           "id": "transfer-task",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/2"
           }
         },
         {
           "id": "source-ledger",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/4"
           }
         },
         {
           "id": "accessible-visual-text-alternative",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/5"
           }
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/6"
           }
         },
         {
           "id": "retrieval-and-spaced-review",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/7"
           }
         },
         {
           "id": "project-and-evidence-rubric",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/8"
           }
         },
         {
           "id": "supportive-oral-defense",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/9"
           }
         },
         {
           "id": "ta-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/10"
           }
         },
         {
           "id": "study-partner-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/10"
           }
         },
         {
           "id": "forward-handoff",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/10"
           }
         },
         {
           "id": "interaction-reference-model-and-teaching-tests",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/11"
           }
         },
         {
           "id": "release-provenance-ci-and-deployment-evidence",
           "status": "planned",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/1"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/1/evidence/12"
           }
         }
       ],
@@ -6043,7 +6043,7 @@
     },
     {
       "moduleId": "m33",
-      "contractState": "not-started",
+      "contractState": "authoring-only",
       "humanReview": {
         "first-principles-quality": "pending",
         "rigor-and-counterexamples": "pending",
@@ -6057,171 +6057,171 @@
       "reviewReadyCommit": null,
       "release": null,
       "migration": {
-        "kind": "advanced-bridge-plan",
-        "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+        "kind": "advanced-authoring-adapter",
+        "path": "content/course/contracts/advanced-module-contracts.v1.json",
         "locator": "/modules/2"
       },
       "criteria": [
         {
           "id": "prerequisite-forward-map",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/0"
           }
         },
         {
           "id": "six-connected-sessions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/1"
           }
         },
         {
           "id": "first-principles",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/2"
           }
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/3"
           }
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/2"
           }
         },
         {
           "id": "prediction-before-reveal",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/2"
           }
         },
         {
           "id": "transfer-task",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/2"
           }
         },
         {
           "id": "source-ledger",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/4"
           }
         },
         {
           "id": "accessible-visual-text-alternative",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/5"
           }
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/6"
           }
         },
         {
           "id": "retrieval-and-spaced-review",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/7"
           }
         },
         {
           "id": "project-and-evidence-rubric",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/8"
           }
         },
         {
           "id": "supportive-oral-defense",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/9"
           }
         },
         {
           "id": "ta-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/10"
           }
         },
         {
           "id": "study-partner-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/10"
           }
         },
         {
           "id": "forward-handoff",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/10"
           }
         },
         {
           "id": "interaction-reference-model-and-teaching-tests",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/11"
           }
         },
         {
           "id": "release-provenance-ci-and-deployment-evidence",
           "status": "planned",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/2"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/2/evidence/12"
           }
         }
       ],
@@ -6230,7 +6230,7 @@
     },
     {
       "moduleId": "m34",
-      "contractState": "not-started",
+      "contractState": "authoring-only",
       "humanReview": {
         "first-principles-quality": "pending",
         "rigor-and-counterexamples": "pending",
@@ -6244,171 +6244,171 @@
       "reviewReadyCommit": null,
       "release": null,
       "migration": {
-        "kind": "advanced-bridge-plan",
-        "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+        "kind": "advanced-authoring-adapter",
+        "path": "content/course/contracts/advanced-module-contracts.v1.json",
         "locator": "/modules/3"
       },
       "criteria": [
         {
           "id": "prerequisite-forward-map",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/0"
           }
         },
         {
           "id": "six-connected-sessions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/1"
           }
         },
         {
           "id": "first-principles",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/2"
           }
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/3"
           }
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/2"
           }
         },
         {
           "id": "prediction-before-reveal",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/2"
           }
         },
         {
           "id": "transfer-task",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/2"
           }
         },
         {
           "id": "source-ledger",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/4"
           }
         },
         {
           "id": "accessible-visual-text-alternative",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/5"
           }
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/6"
           }
         },
         {
           "id": "retrieval-and-spaced-review",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/7"
           }
         },
         {
           "id": "project-and-evidence-rubric",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/8"
           }
         },
         {
           "id": "supportive-oral-defense",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/9"
           }
         },
         {
           "id": "ta-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/10"
           }
         },
         {
           "id": "study-partner-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/10"
           }
         },
         {
           "id": "forward-handoff",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/10"
           }
         },
         {
           "id": "interaction-reference-model-and-teaching-tests",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/11"
           }
         },
         {
           "id": "release-provenance-ci-and-deployment-evidence",
           "status": "planned",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/3"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/3/evidence/12"
           }
         }
       ],
@@ -6417,7 +6417,7 @@
     },
     {
       "moduleId": "m35",
-      "contractState": "not-started",
+      "contractState": "authoring-only",
       "humanReview": {
         "first-principles-quality": "pending",
         "rigor-and-counterexamples": "pending",
@@ -6431,171 +6431,171 @@
       "reviewReadyCommit": null,
       "release": null,
       "migration": {
-        "kind": "advanced-bridge-plan",
-        "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+        "kind": "advanced-authoring-adapter",
+        "path": "content/course/contracts/advanced-module-contracts.v1.json",
         "locator": "/modules/4"
       },
       "criteria": [
         {
           "id": "prerequisite-forward-map",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/0"
           }
         },
         {
           "id": "six-connected-sessions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/1"
           }
         },
         {
           "id": "first-principles",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/2"
           }
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/3"
           }
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/2"
           }
         },
         {
           "id": "prediction-before-reveal",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/2"
           }
         },
         {
           "id": "transfer-task",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/2"
           }
         },
         {
           "id": "source-ledger",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/4"
           }
         },
         {
           "id": "accessible-visual-text-alternative",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/5"
           }
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/6"
           }
         },
         {
           "id": "retrieval-and-spaced-review",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/7"
           }
         },
         {
           "id": "project-and-evidence-rubric",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/8"
           }
         },
         {
           "id": "supportive-oral-defense",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/9"
           }
         },
         {
           "id": "ta-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/10"
           }
         },
         {
           "id": "study-partner-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/10"
           }
         },
         {
           "id": "forward-handoff",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/10"
           }
         },
         {
           "id": "interaction-reference-model-and-teaching-tests",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/11"
           }
         },
         {
           "id": "release-provenance-ci-and-deployment-evidence",
           "status": "planned",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/4"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/4/evidence/12"
           }
         }
       ],
@@ -6604,7 +6604,7 @@
     },
     {
       "moduleId": "m36",
-      "contractState": "not-started",
+      "contractState": "authoring-only",
       "humanReview": {
         "first-principles-quality": "pending",
         "rigor-and-counterexamples": "pending",
@@ -6618,171 +6618,171 @@
       "reviewReadyCommit": null,
       "release": null,
       "migration": {
-        "kind": "advanced-bridge-plan",
-        "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+        "kind": "advanced-authoring-adapter",
+        "path": "content/course/contracts/advanced-module-contracts.v1.json",
         "locator": "/modules/5"
       },
       "criteria": [
         {
           "id": "prerequisite-forward-map",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/0"
           }
         },
         {
           "id": "six-connected-sessions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/1"
           }
         },
         {
           "id": "first-principles",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/2"
           }
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/3"
           }
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/2"
           }
         },
         {
           "id": "prediction-before-reveal",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/2"
           }
         },
         {
           "id": "transfer-task",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/2"
           }
         },
         {
           "id": "source-ledger",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/4"
           }
         },
         {
           "id": "accessible-visual-text-alternative",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/5"
           }
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/6"
           }
         },
         {
           "id": "retrieval-and-spaced-review",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/7"
           }
         },
         {
           "id": "project-and-evidence-rubric",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/8"
           }
         },
         {
           "id": "supportive-oral-defense",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/9"
           }
         },
         {
           "id": "ta-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/10"
           }
         },
         {
           "id": "study-partner-prompt",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/10"
           }
         },
         {
           "id": "forward-handoff",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/10"
           }
         },
         {
           "id": "interaction-reference-model-and-teaching-tests",
-          "status": "planned",
+          "status": "pointer-present",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/11"
           }
         },
         {
           "id": "release-provenance-ci-and-deployment-evidence",
           "status": "planned",
           "source": {
-            "kind": "advanced-bridge-plan",
-            "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-            "locator": "/modules/5"
+            "kind": "advanced-authoring-adapter-evidence",
+            "path": "content/course/contracts/advanced-module-contracts.v1.json",
+            "locator": "/modules/5/evidence/12"
           }
         }
       ],

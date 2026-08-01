@@ -530,11 +530,9 @@ Design one controlled comparison that could distinguish them. Change one
 factor—layout, dtype, input scale, preallocation, or timing boundary—while
 keeping the semantic oracle fixed.
 
-### Output: Layout-Numerics Note and Performance Evidence Card
+### Output: Layout-Numerics Note
 
-Produce two linked artifacts:
-
-**Layout-Numerics Note**
+Produce a **Layout-Numerics Note** with:
 
 - arrays, axes, shapes, dtype/precision, strides/layout, alias/copy state,
   mutation policy, backend, and semantic oracle;
@@ -542,7 +540,9 @@ Produce two linked artifacts:
   same cost";
 - a conditioning, overflow, rounding, or tolerance observation.
 
-**Performance Evidence Card**
+### Output: Performance Evidence Card
+
+Produce the linked **Performance Evidence Card** with:
 
 - question and compared variants;
 - versioned environment, hardware/OS/runtime/library header;
