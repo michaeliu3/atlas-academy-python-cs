@@ -23,10 +23,11 @@ export default function ModuleLibraryPage() {
             <em>Every connection visible.</em>
           </h1>
           <p>
-            These are the full authored workbooks—not summaries. Read in
-            dependency order, follow every diagram and code trace, and use the
-            quizzes as instruments for finding the exact model that needs
-            repair.
+            These are the full authored workbooks—not summaries. This library
+            groups them by knowledge arc for reference browsing. For the
+            prerequisite-first sequence, use the <Link href="/route">60-day route</Link>.
+            Then follow every diagram and code trace, and use the quizzes as
+            instruments for finding the exact model that needs repair.
           </p>
           <dl className="library-measures" aria-label="Course library scale">
             <div>

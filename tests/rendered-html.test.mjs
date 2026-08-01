@@ -1711,6 +1711,9 @@ test("renders the arc-grouped course library", async () => {
   const html = await response.text();
   assert.match(html, /One course\./);
   assert.match(html, /Every connection visible\./);
+  assert.match(html, /groups them by knowledge arc for reference browsing/);
+  assert.match(html, /href="\/route"/);
+  assert.match(html, /60-day route/);
   assert.match(html, /Computation &amp; reasoning/);
   assert.match(html, /Data &amp; algorithms/);
   assert.match(html, /Durable software/);
