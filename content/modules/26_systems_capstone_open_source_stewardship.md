@@ -122,6 +122,9 @@ artifacts into one release argument.
 | M25 human-centered evidence packet | An accessible, bounded decision surface with authority, provenance, explanation, uncertainty, and override evidence. | Why a suggestion remains contestable and does not become a command or a user benefit claim. |
 
 ~~~mermaid
+%% atlas-diagram-id: m26-prerequisite-release-evidence
+%% atlas-diagram-title: Advanced course artifacts converge on the M26 release decision
+%% atlas-diagram-alt: Retrieval evidence, software foundations, data structures, contracts, systems, trust, semantics, mathematics, advanced AI/ML evidence, and the M25 human-control packet combine into a release claim, architecture thread, failure and authority boundary, evidence ledger, and a bounded release decision with a maintenance handoff.
 flowchart LR
     R["M0 retrieval + uncertainty map"] --> C["release claim + owner"]
     S["M1–M5 state, proof, cost artifacts"] --> I["invariant + workload"]
@@ -146,6 +149,34 @@ trust, runtime, and human-impact artifacts into a single architecture thread.
 Use that thread to diagnose failure and judge evidence. The output is a
 bounded release decision and a maintenance handoff, not a claim that every
 unknown is solved.
+
+### 1.1A The advanced-evidence annex
+
+The capstone does not ask for a ceremonial appendix of M27–M36 topic names. It
+asks for one exact contribution from each advanced artifact that is relevant to
+the release claim. If an artifact is unavailable because the learner pack is
+still authoring-only, the correct dossier entry is
+**[UNAVAILABLE — DEFER OR NARROW CLAIM]**. Do not reproduce a theorem,
+benchmark, agent answer, or test result as a substitute.
+
+| Module | Capstone artifact to attach or cite | Capstone question it must answer | Boundary retained in M26 |
+| --- | --- | --- | --- |
+| M27 | proof/claim ledger with countermodel | Which invariant, quantifier, or implication in the release claim is actually justified? | A few passing cases do not prove a universal property. |
+| M28 | representation and numerical-stability note | Which representation, conditioning, precision, or distance assumption affects correctness? | A numerical output is not automatically stable or meaningful. |
+| M29 | limit/derivative/convergence scope sheet | Which continuous or iterative conclusion is valid under which domain and assumptions? | A finite trace or small derivative is not a global guarantee. |
+| M30 | inference/evaluation manifest | Which population, data-generation story, uncertainty, and alternative explanation bound an empirical claim? | A metric is not causality, benefit, or universal quality. |
+| M31 | optimization/information evidence dossier | Which objective, hard constraint, proxy gap, and stopping/support condition make the algorithmic result interpretable? | A minimized loss does not decide what should be released. |
+| M32 | execution-transfer/reproducibility dossier | Which dtype, layout, device, seed, profiling, memory, or semantic-oracle fields make the system observation reproducible? | A local accelerator result is not a portable operational guarantee. |
+| M33 | Formal Limits Claim Packet | What exact encoding, reduction, resource model, or complexity limit constrains the capability? | A timeout or a theory label does not decide a particular product outcome. |
+| M34 | Classical AI Search, Constraints & Decision Packet | Which state, action, constraint, search/solver condition, uncertainty model, and authority boundary shaped the proposed behavior? | A solver/planner recommendation is not self-authorizing. |
+| M35 | ML evidence packet | Which representation, baseline, split, shift test, objective, and failure slice support the learned component? | A validation result is not generalization, calibration, or user benefit. |
+| M36 | reliable-learning limit/non-claim and reproducibility record | Which guarantee/limitation survives the declared distribution, precision, implementation, and deployment conditions? | A theorem or benchmark is not a release certificate. |
+
+The M25 handoff supplies the human-control side of this annex: user purpose,
+decision authority, accessible explanation, meaningful override, retention
+boundary, and evidence ledger. The release decision must remain **REVISE** or
+**DEFER** when the exact advanced claim being relied upon has no learner-ready
+artifact.
 
 ### 1.2 The forward connection
 
@@ -322,6 +353,9 @@ who can mutate it, which dependency can fail, or why a response is trustworthy.
 Use only the architecture view needed to answer the current question.
 
 ~~~mermaid
+%% atlas-diagram-id: m26-architecture-thread
+%% atlas-diagram-title: One Atlas request crosses interface, API, local state, graph, policy, and log boundaries
+%% atlas-diagram-alt: A learner records a session through the Atlas interface. The interface sends a validated request to an event API. The API owns durable writes and reads the progress store, consults the prerequisite graph, applies a transparent ranking policy, returns an optional suggestion, and records a structured local audit outcome.
 flowchart LR
     P["Learner\nperson"] -->|records session| UI["Atlas interface\ncontainer"]
     UI -->|validated request| API["event API\ncomponent"]
@@ -431,6 +465,9 @@ what occurred.
 ### Failure playback
 
 ~~~mermaid
+%% atlas-diagram-id: m26-retry-failure-playback
+%% atlas-diagram-title: A retry must preserve one logical durable event
+%% atlas-diagram-alt: A client submits event e-204 to the event API. The API commits it to storage, but the response is lost. The client retries with the same event identity. The API and store recognize the already committed logical event and return the prior outcome without creating a second durable effect.
 sequenceDiagram
     participant C as client
     participant A as event API
@@ -700,6 +737,9 @@ choice with a quality scenario, evidence, owner, alternative, and known cost.
 ### Architecture-defense board
 
 ~~~mermaid
+%% atlas-diagram-id: m26-defense-board
+%% atlas-diagram-title: The M26 evidence board supports release, revise/defer, or rollback
+%% atlas-diagram-alt: A release claim leads to an architecture thread. Tests and incident traces, security and authority review, operational and rollback evidence, and human-control/accessibility evidence feed a claim ledger. The named owner chooses bounded release, revise/defer for a repairable gap, or rollback/disable for an active harm or invariant break.
 flowchart TD
     Q["release claim"] --> A["architecture thread"]
     A --> T["tests + incident trace"]
@@ -999,6 +1039,11 @@ application.”
    or disable procedure, observable signals, and open questions.
 8. **Oral defense packet** — seven-minute architecture explanation and five
    changed-constraint prompts with prepared evidence anchors.
+9. **Advanced-evidence annex** — for each M27–M36 artifact actually relied
+   upon, name the exact claim, assumption, counterexample/limitation,
+   version/scope, and release consequence. Mark unavailable artifacts
+   **[UNAVAILABLE — DEFER OR NARROW CLAIM]**; never replace them with a
+   plausible generated summary.
 
 ### Release decisions are not pass/fail theater
 
@@ -1019,6 +1064,7 @@ application.”
 | Failure reasoning | Lists generic risks. | Reproduces one concrete failure, names the invariant, and supplies a regression test/plan plus residual uncertainty. |
 | Change stewardship | Treats the diff as implementation detail. | Reviews dependency, provenance, authority, tests, compatibility, documentation, and rollback. |
 | Evidence | Collects screenshots/checkmarks. | Separates test, observation, measurement, decision, scope, limitation, and next falsifier. |
+| Advanced integration | Invokes theorem, model, performance, or reliability vocabulary without an artifact. | Uses the exact M27–M36 evidence row, retains its assumptions/non-claim, or defers/narrows the release when it is unavailable. |
 | Human/trust judgment | Treats security/accessibility/AI as a checklist. | Names the person/owner, control path, data/authority limit, and consequence of disagreement or failure. |
 | Defense | Repeats prepared prose. | Revises a bounded conclusion when a reviewer changes a premise. |
 
@@ -1088,6 +1134,56 @@ Useful Study Partner questions:
 - “What would let a user refuse or correct the result?”
 - “Which new dependency, recipient, or capability did the patch add?”
 - “What is your rollback trigger, and who may pull it?”
+
+### Teaching Assistant oral-defense prompt — M26
+
+~~~text
+You are Atlas Academy's M26 Teaching Assistant. Conduct a supportive,
+non-pass/fail architecture conversation only after the learner has prepared a
+Release Dossier and its advanced-evidence annex. Start with the release claim,
+owner, invariant, and defer/rollback path. Ask the learner to trace one
+request through the architecture, defend one representation/algorithm or
+learning-system evidence claim, replay one failure, and distinguish one
+observed result from what it does not establish. Then change one premise:
+retry, dependency outage, resource/precision change, distribution shift,
+theorem assumption, user refusal, permission boundary, or unavailable M27–M36
+artifact. Ask for a prediction before correcting. Use a hint ladder: locate
+the evidence row; identify its scope/assumption; offer a counterexample;
+require a narrower release/revise/defer/rollback decision. Use the visible chat
+as an accessible whiteboard: define symbols, provide equation prose/ASCII
+fallbacks, put code in labelled fences, and make architecture diagrams/traces
+readable after the conversation. End with a learner-controlled evidence
+summary and maintenance handoff. Do not grade, claim platform voice settings,
+or save a raw transcript.
+~~~
+
+### Study Partner live-rehearsal prompt — M26
+
+~~~text
+You are Atlas Academy's M26 Study Partner. Run a non-grading architecture
+rehearsal for the learner's bounded capstone claim. Use the visible chat as a
+readable whiteboard: give diagrams a title and prose alternative, define
+notation, use concise labelled tables, and put code/diffs in language-labelled
+fences. Ask for a 90-second claim-and-invariant explanation, then challenge
+one M27–M36 evidence row: ask what it supports, which assumption it needs,
+what counterexample or non-claim applies, and whether the release decision
+changes when the artifact is unavailable. Change one operational or human
+premise and require a bounded release, revise, defer, or rollback response.
+End with a compact TA handoff: strongest insight, unresolved misconception,
+exact dossier anchor, decision status, and next falsifier. Do not administer
+the formal oral defense or manufacture missing evidence.
+~~~
+
+### Learner-controlled note boundary
+
+After a substantive designated-chat conversation, prepare a small record of
+date, module/topic, claim, architecture trace or whiteboard snapshot,
+prediction, evidence, counterexample, uncertainty, decision, and next action.
+If the configured Notion workflow is available and the learner has not asked
+for off-record handling, the designated chat may save that concise note;
+otherwise provide a copyable summary. Never save raw voice transcripts,
+credentials, sensitive records, or an unverified claim that a live session or
+Notion write occurred.
 
 ---
 

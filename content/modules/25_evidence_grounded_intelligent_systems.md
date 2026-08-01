@@ -128,6 +128,9 @@ learner, call a provider, collect a prompt, or make a production decision.
 ### 1.1 The connected route
 
 ~~~mermaid
+%% atlas-diagram-id: m25-connected-route
+%% atlas-diagram-title: The M25 evidence route into a human-controlled decision
+%% atlas-diagram-alt: Earlier modules provide logic, cost models, data contracts, systems reliability, authorization, language boundaries, and runtime evidence. These feed a declared need, candidate set, evaluation, score or model proposal, accessible human decision, and then the gated M26 capstone.
 flowchart LR
     M4["M4: probability,<br/>logic, relations"] --> N["declared need + outcome"]
     M5["M5: cost and<br/>measurement"] --> E["evaluation manifest"]
@@ -177,6 +180,43 @@ claim, which assumption remains fragile, and what observation would change the
 release decision. If a named depth module is still in authoring, this is an
 honest reason to use M25 as a bounded preparation workbook rather than declare
 the full Core synthesis complete.
+
+### 1.1B The advanced-artifact weave
+
+M25 is not allowed to treat M27–M36 as a list of impressive topic names. A
+final-synthesis dossier must use each earlier module as a specific kind of
+evidence and preserve its limitation. Until a learner-ready artifact exists,
+write **[UNAVAILABLE — PRESERVE PREVIEW GATE]** rather than inventing an
+equivalent claim from an AI summary, a test result, or a familiar buzzword.
+
+| Earlier module | Artifact M25 must inspect | Where it changes the intelligent-feature decision | What M25 must refuse to infer |
+| --- | --- | --- | --- |
+| M27 discrete mathematics | proof/claim ledger, countermodel, and stated quantifiers | checks whether a model, metric, or policy claim actually follows from its premises | a finite positive example proves a universal property |
+| M28 linear algebra and numerical stability | representation/conditioning note | checks transformations, embeddings, precision, and distance claims | a vector output is stable or meaningful because it has many dimensions |
+| M29 calculus and real analysis | derivative, limit, and convergence-scope sheet | distinguishes an optimization observation from a valid local/global conclusion | a small gradient or a converged trace validates the product objective |
+| M30 probability and inference | uncertainty/evaluation manifest | names the population, split, denominator, uncertainty, and alternative explanation | a score, posterior, or held-out result proves causality or user benefit |
+| M31 optimization and information | objective/constraint/evidence dossier | tests proxy gaps, feasible-set changes, stopping criteria, and information-loss claims | optimizing a loss automatically chooses the right action |
+| M32 systems and scientific execution | execution-transfer/reproducibility dossier | records dtype, layout, device, seed, resource, profiling, and semantic-oracle boundaries | a fast accelerator result is portable, numerically identical, or operationally safe |
+| M33 formal limits | Formal Limits Claim Packet | checks encoding, reduction direction, complexity claim, and practical boundary | a timeout, failed run, or theorem label decides the usefulness of this instance |
+| M34 classical AI | problem-formulation/search/constraint/decision packet | separates candidates, state, constraints, uncertainty, search result, and authority | a planner, CSP, or expected-utility output is self-authorizing |
+| M35 machine learning | ML representation/evaluation evidence packet | checks baseline, data split, shift, objective, observability, and failure slices | a validation metric generalizes, is calibrated, or improves a learner's outcome |
+| M36 learning theory and reliable deep learning | reliable-learning limit/non-claim and reproducibility packet | bounds generalization, reliability, precision, distribution, and deployment claims | a theorem, benchmark, or green reliability check is a release guarantee |
+
+The working synthesis move is deliberately small:
+
+~~~text
+M25 decision claim
+    -> cite one earlier artifact that supports one narrow part
+    -> name its assumptions and non-claim
+    -> add a new local observation only if it tests the same scoped question
+    -> retain human control, abstention, and the next falsifier
+~~~
+
+For example, a next-step suggestion may cite M35 for an evaluation manifest,
+M31 for its proxy-objective boundary, M32 for its reproducibility record,
+M33 for a complexity non-claim, M34 for its candidate/constraint formulation,
+and M36 for generalization limits. None of those artifacts authorizes a
+learner-state mutation or a consequential decision.
 
 ### 1.2 The fixed Atlas incident
 
@@ -287,6 +327,9 @@ It is not:
 ### The decision-support ladder
 
 ~~~mermaid
+%% atlas-diagram-id: m25-decision-support-ladder
+%% atlas-diagram-title: Decision support keeps model output separate from human choice
+%% atlas-diagram-alt: A person and task establish a baseline and candidate set. A score proposes an ordering, while evaluation and authorization constrain the display. An accessible human decision produces only bounded, redacted evidence rather than an automatic state change.
 flowchart LR
     U["person + task<br/>[DECLARED USER NEED]"] --> B["existing baseline"]
     B --> C["declared candidates"]
@@ -362,6 +405,9 @@ An event can support different questions at different times. Make every
 transformation visible:
 
 ~~~mermaid
+%% atlas-diagram-id: m25-lineage-time-boundary
+%% atlas-diagram-title: Event lineage and the temporal evaluation boundary
+%% atlas-diagram-alt: A study event enters a validated store, then a past-only feature builder, an explicitly defined label/outcome, a time-aware split, an evaluation record, and a minimized observation. Each arrow names a separate time, purpose, or authority boundary.
 flowchart LR
     E["StudyEvent<br/>time, action, confidence"] --> V["validated event store"]
     V --> F["feature builder<br/>past-only window"]
@@ -486,6 +532,9 @@ that we can trace it before comparing it with a learned alternative.
 ### Candidate generation, scoring, ranking, and policy
 
 ~~~mermaid
+%% atlas-diagram-id: m25-candidate-score-policy
+%% atlas-diagram-title: Candidate generation, scoring, ranking, and policy are distinct
+%% atlas-diagram-alt: A candidate generator produces eligible actions. A baseline or model assigns scores, a stable rank applies a tie rule, policy selects a display, and the learner can choose or override. M22 authorization constrains the display path.
 flowchart LR
     G["candidate generator<br/>M9/M10 constraints"] --> S["baseline or model score"]
     S --> R["stable rank + tie rule"]
@@ -593,6 +642,9 @@ useful for ranking without being calibrated. Conversely, a calibrated
 probability does not establish that the chosen action will cause the outcome.
 
 ~~~mermaid
+%% atlas-diagram-id: m25-calibration-control
+%% atlas-diagram-title: A raw score, calibration evidence, and human choice are different claims
+%% atlas-diagram-alt: A raw score can support ordering. Separate calibration evidence can support a probability interpretation for a stated population. A policy chooses a display, and a human makes the final choice.
 flowchart LR
     S["raw score"] --> R["may support ordering"]
     S --> C["separate calibration evidence"]
@@ -695,6 +747,9 @@ An Atlas suggestion should let the learner answer four ordinary questions:
 4. What can I choose, change, dismiss, or inspect next?
 
 ~~~mermaid
+%% atlas-diagram-id: m25-accessible-decision-card
+%% atlas-diagram-title: The accessible decision card gives a reason, limitation, alternatives, and control
+%% atlas-diagram-alt: Suggestion identity leads to a plain-language reason, a limit or uncertainty label, alternatives, and controls. The same information is available by text and assistive-technology paths; feedback does not automatically become a reward label.
 flowchart TB
     I["suggestion identity"] --> R["plain-language reason"]
     R --> L["limit / uncertainty label"]
@@ -795,6 +850,9 @@ evidence still applies.
 ### A bounded AI-assistance architecture
 
 ~~~mermaid
+%% atlas-diagram-id: m25-bounded-ai-assistance
+%% atlas-diagram-title: Bounded AI assistance keeps proposal generation separate from action authority
+%% atlas-diagram-alt: A learner request is validated, then a fixed authorized context builder feeds a model or retrieval adapter. Output validation and provenance produce a proposal for learner choice. A separate evaluation harness records limits; no model proposal receives automatic state-changing authority.
 flowchart LR
     Q["learner request<br/>[INPUT DATA]"] --> V["validate intent + scope"]
     V --> C["fixed context builder<br/>authorized, redacted facts"]
@@ -1104,6 +1162,26 @@ not a production recommender race. The project includes:
 - a Module 26 handoff packet: architecture map, claim ledger, open questions,
   and release recommendation.
 
+### Advanced Evidence Annex — required only after the preview gate opens
+
+The final-synthesis version of this dossier also carries a short annex. It is
+not a request to recreate ten modules. It is a traceability table: every
+advanced artifact supplies one bounded claim, its assumptions, and its
+non-claim to the feature decision.
+
+| Evidence row | Minimum visible anchor | If the artifact is not learner-ready |
+| --- | --- | --- |
+| M27/M33 formal reasoning | claim, quantifiers/encoding, counterexample or reduction boundary | write **[UNAVAILABLE — no formal claim promoted]** |
+| M28/M29 numerical reasoning | representation, numerical condition, derivative/limit scope | write **[UNAVAILABLE — no numerical/convergence claim promoted]** |
+| M30/M35 empirical learning | population, split, baseline, uncertainty, shift/failure slice | write **[UNAVAILABLE — no benefit/generalization claim promoted]** |
+| M31 objective and information | objective, constraint, proxy gap, stopping/support boundary | write **[UNAVAILABLE — no optimization-to-value inference]** |
+| M32 execution | semantic oracle, precision/layout/device/seed/profiling note | write **[UNAVAILABLE — no portability/performance claim promoted]** |
+| M34 classical AI | state/candidate/constraint/utility/authority formulation | write **[UNAVAILABLE — no planner/decision authority]** |
+| M36 reliability | theorem/limit scope, reproducibility record, deployment non-claim | write **[UNAVAILABLE — no reliable-learning release claim]** |
+
+In the current preview, this annex is an orientation template only. A blank
+row is evidence of a gate, not a defect to paper over with generated prose.
+
 The reference implementation may be mostly agent-generated only after the
 learner has named the contracts and tests. Manual coding is limited to the
 small portions that reveal a mechanism: candidate eligibility, deterministic
@@ -1118,6 +1196,7 @@ accessible control state.
 | Data lineage | calls database rows “training data” | states availability time, authorized fields, outcome, split, and retention |
 | Ranking/model | treats score as recommendation | separates candidates, score, rank, display policy, and state authority |
 | Evaluation | reports one accuracy number | supplies metric, denominator, baseline, split, uncertainty, and nonclaim |
+| Advanced synthesis | invokes mathematics, systems, or ML by reputation | attaches an exact M27–M36 artifact, assumptions, counterexample/non-claim, or honestly preserves the preview gate |
 | Human-centered design | adds visual polish after scoring | provides reason, limit, alternatives, accessible path, and meaningful override |
 | AI-era judgment | accepts fluent output or green tests | bounds context/tools/effects and independently reviews patch evidence |
 | Communication | announces a feature | gives claim, evidence, scope, limitation, and next falsifier |
@@ -1171,6 +1250,54 @@ After each session, switch roles:
 At the final checkoff, the Study Partner plays an AI agent that summarizes the
 feature with one subtle overclaim. The learner corrects it using the evidence
 labels, not a rhetorical objection.
+
+### Teaching Assistant oral-defense prompt — M25
+
+~~~text
+You are Atlas Academy's M25 Teaching Assistant. This preview module is a
+preparation and evidence-repair conversation, not a pass/fail examination or
+an unlock. Start from the learner's Next-Step Evidence Dossier and Advanced
+Evidence Annex. Ask them to defend one user decision, one data-time boundary,
+one representation/objective choice, one evaluation limitation, and one
+human-control or abstention rule. Ask for a prediction before revealing a
+correction. When a claim is fragile, use this hint ladder: identify the
+evidence label; name the supporting M27–M36 artifact or mark it unavailable;
+change one premise; offer a counterexample; help the learner restate the
+narrowest supported claim. Use the visible chat as an accessible whiteboard:
+define notation, render equations when supported with a short prose/ASCII
+fallback, put code in labelled fences, and make a trace/table readable after
+the conversation. End with a learner-controlled summary: defended claim,
+repaired misconception, evidence inspected, unavailable advanced evidence,
+remaining uncertainty, and M26 handoff. Do not grade, claim that voice/live
+settings are controlled, or save a raw transcript.
+~~~
+
+### Study Partner live-rehearsal prompt — M25
+
+~~~text
+You are Atlas Academy's M25 Study Partner. Lead a non-grading live discussion
+or text rehearsal about an evidence-grounded intelligent feature. Treat the
+visible chat as a readable whiteboard: use concise labelled tables and
+diagrams only when helpful; define notation; provide prose/ASCII fallbacks for
+equations; and use language-labelled code fences. Ask the learner to inspect
+an AI-generated feature claim, trace it backward through data, model/policy,
+evaluation, and authority, then change one premise such as time window,
+candidate set, uncertainty, objective, execution constraint, or deployment
+assumption. Require a named M27–M36 artifact or an honest unavailable marker;
+never fill a missing artifact with confidence. End with a compact TA handoff:
+strongest insight, unresolved misconception, dossier evidence, gate status,
+and next question. Do not administer the formal oral defense.
+~~~
+
+### Learner-controlled note boundary
+
+After a substantive designated-chat session, prepare a compact note with
+module/topic, definitions or trace, prediction, evidence, misconception,
+counterexample, uncertainty, and next action. If the configured Notion
+workflow is available and the learner has not requested off-record handling,
+the designated chat may save that concise note; otherwise offer it for manual
+copy. Never save raw voice transcripts, credentials, private data, or an
+unverified claim that a live session or Notion write occurred.
 
 ---
 
