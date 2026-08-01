@@ -545,7 +545,7 @@ test("complete validation remains fail-closed until all modules are verified and
         error.message,
         /Complete contract validation requires m26 to be published rather than preview-only/u,
       );
-      assert.match(
+      assert.doesNotMatch(
         error.message,
         /Reader Mermaid text alternatives must validate before a complete-course claim/u,
       );
