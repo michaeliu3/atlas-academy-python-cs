@@ -214,10 +214,15 @@ Before revealing the ledger, classify each line:
 3. “This workload’s median wall-clock sample fell by 12% on one host.”
 4. “The cache will reduce production latency for every cohort.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** 1 is a language/API claim whose exact scope still needs a source.
 2 is an implementation observation. 3 is a measurement under a manifest.
 4 is a hypothesis that needs deployment-representative evidence and a
 retention review.
+
+</details>
 
 ### Code-reading lab
 
@@ -291,9 +296,14 @@ Predict:
 2. Did rebinding events mutate the prior list?
 3. What does this trace say about when the prior list is reclaimed?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** audit_view still references the original one-item list. Rebinding
 events did not mutate it. The trace establishes neither an address nor a
 portable reclamation schedule.
+
+</details>
 
 ### CPython observation boundary
 
@@ -346,10 +356,15 @@ root → A → B
 If root is removed, what remains after a simplified reference-count sweep?
 What additional reasoning can identify the cycle as unreachable?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the internal A↔B references prevent a simple local-count rule from
 reducing both to zero. Reachability from roots, or a cycle-collection phase,
 can identify the cycle. Exact CPython collector behavior remains
 version-specific.
+
+</details>
 
 ### Resource boundary
 
@@ -425,7 +440,12 @@ C. A snapshot difference can support a scoped claim about traced Python
 allocations.  
 D. A process RSS observation names the exact Python list responsible.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** C only. The other answers cross a scope boundary without evidence.
+
+</details>
 
 ### Code-reading lab
 
@@ -705,9 +725,14 @@ B. An object has identity, type, and value.
 C. sys.getrefcount(x) gives the exact graph in-degree.  
 D. del x immediately destroys x.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The language data model uses identity/type/value. A is a
 CPython-specific observation at most; C includes implementation effects; D
 removes a binding, not a portable destruction promise.
+
+</details>
 
 ### Q2 — Shallow size
 
@@ -718,8 +743,13 @@ B. Process RSS will fall.
 C. This immediate object’s reported shallow size is lower.  
 D. A native extension allocated less.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** The function reports a direct/shallow size. A, B, and D cross
 to different memory lenses.
+
+</details>
 
 ### Q3 — Tracing
 
@@ -730,8 +760,13 @@ B. A guarantee of lower total native memory.
 C. Proof that no memory is retained.  
 D. A production memory SLO.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: A.** The metric has a declared tracing scope. It does not become RSS,
 native allocation, retention analysis, or production evidence.
+
+</details>
 
 ### Q4 — Bytecode
 
@@ -742,8 +777,13 @@ B. every Python implementation has the same optimization.
 C. a version-pinned CPython implementation observation only.  
 D. the program is faster for every workload.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Bytecode and specialization are CPython/version-specific
 implementation evidence. A, B, and D require different sources or experiments.
+
+</details>
 
 ### Q5 — Benchmark
 
@@ -755,8 +795,13 @@ B. reject the language.
 C. defer the performance conclusion as confounded.  
 D. call it a memory leak.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** The change may still be useful, but the comparison no longer
 answers a controlled question.
+
+</details>
 
 ### Q6 — Cache
 
@@ -768,8 +813,13 @@ B. It may retain derived learner/cohort information across requests and change
 C. Python forbids dictionaries.  
 D. A cache automatically changes language semantics.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Retention and authority are system-design questions. The other
 answers overgeneralize.
+
+</details>
 
 ### Diagnostic routing
 

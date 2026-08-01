@@ -243,8 +243,13 @@ B. The trace can correlate local observations but needs separate identity eviden
 C. A trace proves the request is authorized for this tenant.<br>
 D. A trace proves the remote importer completed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer:** B. Trace correlation is useful but it is not identity,
 authorization, or remote completion.
+
+</details>
 
 ### Prediction checkpoint — correlation is not authority
 
@@ -696,7 +701,12 @@ C. “Release review is incomplete; outcome needs named recovery and accessible
    explanation.”<br>
 D. “Log more raw diagnostics to help support.”
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer:** C.
+
+</details>
 
 ### Session artifact — consequence ledger
 
@@ -928,8 +938,13 @@ B. Sender is authorized to retry.<br>
 C. Atlas has correlation input until relevant trust model validates more.<br>
 D. Remote effect is known.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. Trace correlation is not identity, authorization, or remote
 completion.
+
+</details>
 
 ### Q2 — Authentication versus authorization
 
@@ -941,7 +956,12 @@ B. Evaluate exact tenant/resource/action/purpose/policy decision.<br>
 C. Treat trace as proof of tenant membership.<br>
 D. Ask database to decide from a string.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Authentication and authorization answer different questions.
+
+</details>
 
 ### Q3 — Input boundary
 
@@ -952,7 +972,12 @@ B. Values may build SQL structure.<br>
 C. Every receiving context still needs meaning and resource policy.<br>
 D. It may select a Python object loader.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. Parsing is not universal semantic or authority validation.
+
+</details>
 
 ### Q4 — Parameter binding
 
@@ -963,7 +988,12 @@ B. It keeps value from selecting statement structure in that context.<br>
 C. It proves value came from trusted user.<br>
 D. It makes all queries safe regardless of policy.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Authorization and business rules remain separate.
+
+</details>
 
 ### Q5 — Cryptographic purpose
 
@@ -974,7 +1004,12 @@ B. HMAC is public signature with non-repudiation.<br>
 C. Under fixture key model, bounded message matched; policy is still separate.<br>
 D. Remote importer certainly executed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. MAC has a key/trust model and does not decide authorization.
+
+</details>
 
 ### Q6 — TLS scope
 
@@ -986,7 +1021,12 @@ B. Static configuration review found declared transport policy fields.<br>
 C. Every request field is safe.<br>
 D. Peer completed a real connection.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Reference opens no connection, and TLS is not app policy.
+
+</details>
 
 ### Q7 — Provenance
 
@@ -998,7 +1038,12 @@ B. Source review, publisher/build assumptions, vulnerability posture, and
 C. Package cannot run code.<br>
 D. User experience is accessible.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Local integrity control is valuable but narrow.
+
+</details>
 
 ### Q8 — Incident evidence
 
@@ -1011,7 +1056,12 @@ C. Remote effect can remain UNKNOWN; later status check needs authorization and
    evidence scope.<br>
 D. Store full raw request forever to be safe.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. Preserve uncertainty and minimize retained data.
+
+</details>
 
 ### Misconception map — nearest tempting overclaims
 

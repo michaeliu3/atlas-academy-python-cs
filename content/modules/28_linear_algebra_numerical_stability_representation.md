@@ -443,10 +443,15 @@ Then derive the best constant (x) from residual orthogonality:
 \sum_i(x-b_i)=0
 \).
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the best constant is the mean (4/3), and the residual is not
 zero because (b\notin\operatorname{Col}(A)). This does not say a constant
 model is useful; it states which constant is closest under the declared
 squared-error geometry.
+
+</details>
 
 ---
 
@@ -964,9 +969,14 @@ B. \(\{(x,y):y=2x\}\)
 C. \(\{(x,y):x\ge0\}\)  
 D. \(\{(1,0),(0,1)\}\)
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** It contains zero and is closed under all real linear
 combinations. A is affine but misses zero; C fails negative-scalar closure; D
 is a finite set not closed under addition/scaling.
+
+</details>
 
 ### Question 2 — basis versus useful columns
 
@@ -977,9 +987,14 @@ B. At least one column is a linear combination of the others.
 C. The matrix has three nonzero singular values.  
 D. One column is semantically useless.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A spanning list longer than the space dimension is dependent.
 C reverses the rank implication; D is an application judgment, not a linear
 algebra conclusion.
+
+</details>
 
 ### Question 3 — rank-nullity
 
@@ -990,9 +1005,14 @@ B. 2
 C. 3  
 D. Cannot be known because the codomain has dimension 3.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Rank-nullity uses the domain: (5=3+\operatorname{nullity}).
 A confuses full row rank with injectivity; C repeats rank; D ignores the named
 domain and rank.
+
+</details>
 
 ### Question 4 — projection
 
@@ -1004,9 +1024,14 @@ B. (b-p=0) always.
 C. (p\) is orthogonal to (b).  
 D. Every least-squares coefficient vector is unique.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: A.** Residual orthogonality characterizes the projection. B only
 holds when (b\) is in the column space; C is generally false; D fails under
 rank deficiency although the fitted vector can remain unique.
+
+</details>
 
 ### Question 5 — normal-equation boundary
 
@@ -1017,9 +1042,14 @@ B. It can square conditioning and fails for dependent columns.
 C. Least squares never uses transpose.  
 D. QR/SVD make the mathematical minimizer different.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The algebraic expression has narrow assumptions and can worsen
 numerics. A/C are false; D confuses an exact problem with alternative
 algorithms for it.
+
+</details>
 
 ### Question 6 — PSD
 
@@ -1030,9 +1060,14 @@ B. It is square.
 C. (x^\mathsf TA^\mathsf TAx=\lVert Ax\rVert_2^2\ge0\) for every (x).  
 D. A numerical eigensolver returned real values once.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** It proves the quadratic-form definition. Positive diagonal and
 squareness are insufficient; D is finite algorithm evidence, not an exact
 proof.
+
+</details>
 
 ### Question 7 — spectral theorem scope
 
@@ -1043,9 +1078,14 @@ B. (A=A^\mathsf T).
 C. (A) has a repeated eigenvalue.  
 D. (A) is invertible.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Real symmetry is the key hypothesis. The other properties do
 not suffice; the Jordan-block counterexample has a repeated eigenvalue and is
 invertible but not diagonalizable.
+
+</details>
 
 ### Question 8 — SVD versus eigendecomposition
 
@@ -1056,8 +1096,13 @@ B. It is symmetric PSD.
 C. It has an SVD (U\Sigma V^\mathsf T).  
 D. Its columns are independent.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** SVD covers rectangular and rank-deficient matrices. A requires
 square shape and may still fail to diagonalize; B/D add unsupported claims.
+
+</details>
 
 ### Question 9 — conditioning versus stability
 
@@ -1070,9 +1115,14 @@ algorithm's handling of finite arithmetic.
 C. They are two names for floating-point rounding.  
 D. A stable algorithm always gives a small forward error.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A backward-stable algorithm can face an ill-conditioned problem
 and still produce a large forward error. A reverses the ideas; C/D erase the
 critical boundary.
+
+</details>
 
 ### Question 10 — PCA objective
 
@@ -1083,8 +1133,13 @@ B. Projected empirical variance under a chosen Euclidean scaling.
 C. Accuracy of every future classifier.  
 D. The number of nonzero entries.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The Rayleigh quotient gives this bounded objective. A/C/D need
 different models and evidence.
+
+</details>
 
 ### Question 11 — PCA equivalence
 
@@ -1096,8 +1151,13 @@ truncation minimizes stated rank-​(k) reconstruction loss.
 C. Every low-rank approximation is causally meaningful.  
 D. Centering is never needed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** It names the convention and norm. A is superficial; C/D are
 false overclaims.
+
+</details>
 
 ### Question 12 — tensor/code contract
 
@@ -1109,9 +1169,14 @@ B. `X - X.mean(axis=1, keepdims=True)`
 C. `X @ X.mean(axis=0)`  
 D. `X - X.mean()` always means the same thing.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: A.** It yields one mean per feature and broadcasts across rows. B
 centers within each observation; C has incompatible/changed meaning; D makes a
 different global-centering model.
+
+</details>
 
 ### Interpret the pattern, not the score
 

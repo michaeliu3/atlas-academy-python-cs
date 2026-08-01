@@ -376,6 +376,9 @@ Answer before reveal:
 3. Does `connect()` return prove that an Atlas HTTP request was parsed?
 4. What identity/security fact is still missing even after a connection?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal.** Python documents `getaddrinfo()` as address-information lookup and
 `create_connection()`/sockets as local connection APIs, not a remote business
 protocol ([Python `socket`](https://docs.python.org/3.14/library/socket.html)).
@@ -383,6 +386,8 @@ A defensible attempt record contains the target name, candidate family and
 address/port, attempt ordinal, local result/exception class, deadline policy,
 and correlation ID. It omits private/raw payloads and does not label the
 candidate “Atlas service verified.”
+
+</details>
 
 ### A small Atlas record
 
@@ -831,11 +836,16 @@ Answer:
 3. What does `CONFIRMED` mean in this finite Atlas contract—and what does it
    still not mean?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal.** A response must bind to the operation the client intended and the
 canonical meaning that operation was declared to carry. Otherwise a stale,
 wrong, or miscorrelated response could falsely promote knowledge. The result
 confirms a stated server-local Atlas decision; it does not authenticate a
 network peer (Module 22) or prove global exactly-once processing (Module 21).
+
+</details>
 
 ### Incident board — classify, then choose the next observation
 
@@ -1019,10 +1029,15 @@ Write a review that separates three kinds of absence:
 3. **Deferred security detail:** What cannot be inferred about identity,
    authorization, or trust merely from the route string?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal.** A framework can parse a route and serialize a response. It cannot
 invent an operation-ID/digest ledger, decide a safe retry budget, or
 authenticate a peer by itself. The smallest correct response is a narrower
 contract, not a bigger framework.
+
+</details>
 
 ### Contract sketch: response and problem shapes
 
@@ -1784,9 +1799,14 @@ is the strongest justified conclusion?
 - C. The client authenticated the service at both addresses.
 - D. Both candidates will process the same publication once.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** It is a local resolver/API observation. It does not establish
 reachability, one-to-one server identity, or authentication. Revisit View 1 if
 you chose A/C/D.
+
+</details>
 
 ### MCQ 2 — Byte-stream framing
 
@@ -1799,8 +1819,13 @@ conclude?
   request exists.
 - D. The sender's next `send()` creates a second message.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** TCP gives an ordered byte stream, not application-message
 boundaries. Revisit View 2 and RFC 9293 if you chose A/B/D.
+
+</details>
 
 ### MCQ 3 — `sendall()` and timeout
 
@@ -1813,8 +1838,13 @@ response. Which classification is correct?
   decision, or response receipt.
 - D. `RETRY_WITH_NEW_ID`, because the first operation definitely failed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Local send completion and deadline leave multiple server
 histories compatible. Revisit View 3/5 if you chose another answer.
+
+</details>
 
 ### MCQ 4 — UDP versus business meaning
 
@@ -1826,8 +1856,13 @@ Which statement is accurate?
   validation and must handle delivery/order/duplicate limitations.
 - D. UDP is unsuitable for every application protocol.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Datagram boundary is not schema validity or an effect. Revisit
 Session 2 if you chose A/B/D.
+
+</details>
 
 ### MCQ 5 — HTTP and Atlas policy
 
@@ -1840,8 +1875,13 @@ Which is the most complete statement about `POST /v1/publications`?
   response/status correlation.
 - D. A `503 Retry-After` guarantees later success.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** The related key header draft is not a final universal standard,
 and retry timing is not outcome proof. Revisit Session 4.
+
+</details>
 
 ### MCQ 6 — Stable identity after timeout
 
@@ -1854,8 +1894,13 @@ operation under the Atlas model?
 - C. retry with `op-0007`, digest B to mark it fresh
 - D. omit both values because the server recognizes the JSON
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Same ID + same canonical meaning can replay one server-local
 decision. A is distinct; C conflicts; D loses the contract.
+
+</details>
 
 ### MCQ 7 — Response correlation
 
@@ -1868,8 +1913,13 @@ the pending request. What follows?
   operation.
 - D. `NOT_COMMITTED`, because the server must be broken.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Response structure alone is not enough. The client needs same
 ID and digest binding. Revisit Session 3.
+
+</details>
 
 ### MCQ 8 — Boundary transfer
 
@@ -1881,8 +1931,13 @@ Which claim belongs primarily to Module 21 rather than Module 20?
   under partial failure.
 - D. A name/address/port does not authenticate a peer.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** A/B are Module 20; D is a Module 22 handoff. Module 21 owns the
 replica/partial-failure/distributed-system problem.
+
+</details>
 
 ### Quiz routing
 

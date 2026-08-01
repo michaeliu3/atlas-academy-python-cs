@@ -302,10 +302,15 @@ B. \(\exists y\forall x,\ Likes(x,y)\) only
 C. both  
 D. neither
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** A is true: choose a for x=a and b for x=b. B is also true:
 choose y=b, which both a and b like. Change the relation so only
 \(Likes(a,a)\) and \(Likes(b,b)\) hold: A stays true but B becomes false. The
 model, not the symbol count, decides the answer.
+
+</details>
 
 ### Session 1 code-reading task
 
@@ -1127,12 +1132,17 @@ B. At least one accepted route omits at least one declared prerequisite.
 C. Every rejected route contains a prerequisite.  
 D. At least one prerequisite appears in every route.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Negating a universal produces an existential witness and
 negates the inner property.
 
 - A says much more than the negation.
 - C changes accepted to rejected.
 - D changes both quantifier order and predicate.
+
+</details>
 
 ### Question 2 — relation and function
 
@@ -1143,12 +1153,17 @@ B. Each value in A receives exactly one value in B.
 C. No two values in A may share an output.  
 D. The implementation must be a Python function.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A total function assigns exactly one output to every input in
 its domain.
 
 - A is surjectivity, which is stronger.
 - C is injectivity, also stronger.
 - D confuses a language construct with a mathematical definition.
+
+</details>
 
 ### Question 3 — proof form
 
@@ -1159,11 +1174,16 @@ B. \(\lnot P\Rightarrow\lnot Q\)
 C. \(\lnot Q\Rightarrow\lnot P\)  
 D. \(P\Leftrightarrow Q\)
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** This is the contrapositive.
 
 - A is the converse.
 - B is the inverse.
 - D adds the converse, making a stronger claim.
+
+</details>
 
 ### Question 4 — induction/invariant
 
@@ -1175,6 +1195,9 @@ B. The code needs an import.
 C. A loop can never be reasoned about formally.  
 D. The invariant is automatically a recurrence.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: A.** A trace samples a few states. An invariant needs a proof that it
 holds initially and is preserved for every allowed iteration, plus termination
 and exit reasoning when used for a postcondition.
@@ -1182,6 +1205,8 @@ and exit reasoning when used for a postcondition.
 - B is irrelevant.
 - C is false.
 - D mixes distinct concepts.
+
+</details>
 
 ### Question 5 — counting and recurrence
 
@@ -1192,12 +1217,17 @@ B. It needs at least enough base values and a domain.
 C. Recurrences only describe exponential processes.  
 D. It has no plus sign.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The relation permits many sequences until bases and domain are
 declared.
 
 - A confuses a mathematical model with an implementation.
 - C is false.
 - D is irrelevant.
+
+</details>
 
 ### Question 6 — matching
 
@@ -1208,11 +1238,16 @@ B. Every maximum matching is maximal.
 C. A greedy matching is always maximum in a bipartite graph.  
 D. Hall's condition only needs to be checked for singleton subsets.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** If a maximum matching could be extended, it was not maximum.
 
 - A fails on the three-edge path.
 - C needs extra structure not supplied.
 - D misses a possible multi-vertex bottleneck.
+
+</details>
 
 ### Question 7 — lattice
 
@@ -1223,10 +1258,15 @@ B. Every pair necessarily has a meet and join.
 C. It may still fail to be a lattice because some pair lacks a meet or join.  
 D. It is necessarily a total order.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Lattice requires a meet and join for every pair.
 
 - A and B overclaim.
 - D confuses partial order with total order.
+
+</details>
 
 ### Question 8 — asymptotics
 
@@ -1238,11 +1278,16 @@ B. The observation is consistent with quadratic growth under that experiment.
 C. The source must have two nested loops.  
 D. Hardware cannot affect the measurement.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The measurements are useful but scoped evidence.
 
 - A promotes a finite observation into a quantified proof.
 - C infers syntax from a trend.
 - D ignores the runtime and measurement environment.
+
+</details>
 
 ### Question 9 — modular inverse
 
@@ -1253,11 +1298,16 @@ B. Exactly when \(a>m\).
 C. Exactly when \(\gcd(a,m)=1\).  
 D. Exactly when a is prime.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Bézout supplies the witness when the gcd is one.
 
 - A fails for 6 modulo 15.
 - B is unrelated.
 - D is neither necessary nor sufficient as stated.
+
+</details>
 
 ### Question 10 — evidence boundary
 
@@ -1270,11 +1320,16 @@ its input contract and implementation are correct.
 C. The task graph has no cycle.  
 D. The code is portable across all Python implementations.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The result is conditional and finite.
 
 - A overgeneralizes the domain.
 - C does not follow from transitivity.
 - D is a separate implementation claim.
+
+</details>
 
 ### Question 11 — generating functions
 
@@ -1286,11 +1341,16 @@ B. A coefficient identity follows from valid formal-series algebra.
 C. A numerical approximation is automatically stable.  
 D. It establishes a probability distribution.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Formal power-series reasoning supports coefficient identities.
 
 - A needs analytic convergence conditions.
 - C needs numerical analysis and conditioning.
 - D needs a separately defined probability model.
+
+</details>
 
 ### Interpret the pattern, not the score
 

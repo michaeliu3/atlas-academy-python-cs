@@ -1028,8 +1028,13 @@ An Atlas Query string successfully parses. What is the strongest conclusion?
 - C. The supplied subject is authenticated.
 - D. The source is safe Python.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** A grammar establishes syntax only. The other choices
 require different evidence and boundaries.
+
+</details>
 
 ### Q2 — Lexer boundary
 
@@ -1040,8 +1045,13 @@ Where should an undeclared character be rejected?
 - C. During lexical scanning, with a source span
 - D. By a static type checker
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** An unknown character has not become a valid token or AST.
 Later work should not occur.
+
+</details>
 
 ### Q3 — Closure parent
 
@@ -1053,8 +1063,13 @@ to which parent environment?
 - C. A global dictionary containing every host name
 - D. The latest environment that defines the same spelling
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** This makes free-name meaning depend on the definition
 context rather than an unrelated caller.
+
+</details>
 
 ### Q4 — Conditional trace
 
@@ -1065,7 +1080,12 @@ Pebble evaluates `if true then 7 else missing`. Which name lookup occurs?
 - C. Neither branch is evaluated.
 - D. The selected then branch evaluates; `missing` is not looked up.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: D.** Conditional branch selection is a named semantic rule.
+
+</details>
 
 ### Q5 — Type claims
 
@@ -1076,8 +1096,13 @@ What does a clean static type-checker result establish?
 - C. The request is authorized for a tenant and purpose.
 - D. The evaluator cannot consume resources.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: A.** Static communication is useful, but runtime data,
 authority, and resource boundaries remain separate.
+
+</details>
 
 ### Q6 — Narrow authority
 
@@ -1089,7 +1114,12 @@ receive?
 - C. A fixed-scope, pre-minted read capability.
 - D. A newly opened database connection.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** Query text cannot select a host adapter or scope.
+
+</details>
 
 ### Q7 — Fuel result
 
@@ -1100,8 +1130,13 @@ What does `FUEL_EXHAUSTED` mean in the reference model?
 - C. The query was malformed.
 - D. The subject was denied authorization.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** It is a local resource observation, not a global
 security or availability result.
+
+</details>
 
 ### Q8 — Bytecode observation
 
@@ -1113,8 +1148,13 @@ What can a `dis` listing contribute here?
   Module 24 measurement.
 - D. An authorization result.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** Bytecode is implementation detail and can change across
 versions and implementations.
+
+</details>
 
 ### Misconception map — repair layer confusion
 

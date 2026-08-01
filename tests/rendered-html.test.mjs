@@ -2377,6 +2377,72 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   );
 });
 
+test("renders affected legacy explanations behind closed native prediction gates", async () => {
+  const routes = [
+    {
+      pathname: "/modules/20-networks-application-protocols",
+      expectedAnswerGates: 8,
+      expectedPredictionGates: 3,
+    },
+    {
+      pathname: "/modules/22-security-privacy-trust-boundaries",
+      expectedAnswerGates: 10,
+      expectedPredictionGates: 0,
+    },
+    {
+      pathname: "/modules/23-programming-languages-interpreters",
+      expectedAnswerGates: 8,
+      expectedPredictionGates: 0,
+    },
+    {
+      pathname: "/modules/24-cpython-performance-memory",
+      expectedAnswerGates: 6,
+      expectedPredictionGates: 4,
+    },
+    {
+      pathname: "/modules/25-evidence-grounded-intelligent-systems",
+      expectedAnswerGates: 8,
+      expectedPredictionGates: 1,
+    },
+    {
+      pathname: "/modules/27-discrete-mathematics-proof-counting-structures",
+      expectedAnswerGates: 11,
+      expectedPredictionGates: 1,
+    },
+    {
+      pathname: "/modules/28-linear-algebra-numerical-stability-representation",
+      expectedAnswerGates: 12,
+      expectedPredictionGates: 1,
+    },
+  ];
+
+  for (const { pathname, expectedAnswerGates, expectedPredictionGates } of routes) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} must render.`);
+
+    const document = new JSDOM(await response.text()).window.document;
+    const gates = [...document.querySelectorAll("details.lesson-details")];
+    const answerGates = gates.filter(
+      ({ firstElementChild }) =>
+        firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
+    );
+    const predictionGates = gates.filter(
+      ({ firstElementChild }) =>
+        firstElementChild?.textContent === "Reveal after writing your prediction.",
+    );
+
+    assert.equal(answerGates.length, expectedAnswerGates, `${pathname} answer-gate count changed.`);
+    assert.equal(
+      predictionGates.length,
+      expectedPredictionGates,
+      `${pathname} prediction-gate count changed.`,
+    );
+    for (const gate of [...answerGates, ...predictionGates]) {
+      assert.equal(gate.hasAttribute("open"), false, `${pathname} exposes a reveal by default.`);
+    }
+  }
+});
+
 test("renders the systems-capstone workbook and publishes its bounded model", async () => {
   const response = await render("/modules/26-systems-capstone-open-source-stewardship");
   assert.equal(response.status, 200);

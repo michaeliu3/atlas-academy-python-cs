@@ -341,8 +341,13 @@ C. “For a declared candidate set, display one reversible suggestion with its
 reason and alternatives.”  
 D. “Automatically set the next action whenever confidence is high.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** C. A and B do not name a person-facing decision or safety
 boundary. D gives a score authority it has not earned.
+
+</details>
 
 ### Code-reading lab — find the missing owner
 
