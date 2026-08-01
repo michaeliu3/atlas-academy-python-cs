@@ -146,7 +146,7 @@ export function ModuleOralDefense({
 
         <div className={styles.liveCard}>
           <p className={styles.cardEyebrow}>Study Partner · rehearsal context</p>
-          <h3>Use the separate Study Partner chat to make the model explainable first.</h3>
+          <h3>Use the separate live-capable Study Partner chat to make the model explainable first.</h3>
           <p>
             This is a low-pressure rehearsal: retrieve, trace, change one
             premise, and prepare a focused handoff for the Teaching Assistant.
@@ -162,7 +162,7 @@ export function ModuleOralDefense({
           </button>
           <p aria-live="polite" className={styles.copyStatus}>
             {copyState === "partner-brief-copied" &&
-              "The Study Partner context is ready to paste into your separate discussion chat."}
+              "The Study Partner context is ready to paste into your separate live discussion chat."}
             {copyState === "fallback" &&
               "Copy is unavailable here. Select the detailed text below and paste it into your chat."}
           </p>

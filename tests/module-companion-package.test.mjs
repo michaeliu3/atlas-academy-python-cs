@@ -105,6 +105,8 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   assert.match(companion.teachingAssistant.contextPrompt, /contract and release verification pending/i);
   assert.doesNotMatch(companion.studyPartner.contextPrompt, /; legacy-open\)/i);
   assert.match(companion.teachingAssistant.contextPrompt, /automatically create at most one concise note/i);
+  assert.match(companion.teachingAssistant.contextPrompt, /confirm “records on”/u);
+  assert.match(companion.studyPartner.contextPrompt, /names a module or learning topic/i);
   assert.match(companion.studyPartner.contextPrompt, /direct evidence of the successful write/i);
 });
 
@@ -163,5 +165,18 @@ test("the companion package refuses a workflow that changes the learner-record b
         liveWorkflow: unscopedWorkflow,
       }),
     /session-note conditions must preserve designated-chat, privacy, and substantive-session boundaries/i,
+  );
+
+  const missingRecordsOnConfirmation = clone(workflow);
+  missingRecordsOnConfirmation.notionSessionNotes.recordingAuthorization.activationPhrase = "capture";
+  assert.throws(
+    () =>
+      buildModuleCompanionPackage({
+        courseModule: m01,
+        graphModules: graph.modules,
+        guide,
+        liveWorkflow: missingRecordsOnConfirmation,
+      }),
+    /scoped records-on confirmation/i,
   );
 });

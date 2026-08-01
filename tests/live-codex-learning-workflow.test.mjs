@@ -14,6 +14,16 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.equal(report.delivery.portalRuntimeIntegration, "none");
   assert.equal(report.notionSessionNotes.portableStartupMode, "keep-local");
   assert.equal(report.notionSessionNotes.designatedChatMode, "automatic-after-substantive-session");
+  assert.deepEqual(report.notionSessionNotes.recordingAuthorization, {
+    initialState: "require-explicit-records-on-confirmation",
+    activationPhrase: "records on",
+    scope: "that designated chat until records are paused or material is off-record",
+  });
+  assert.deepEqual(report.notionSessionNotes.substantiveSession.minimumEvidence, [
+    "a named module or learning topic",
+    "learner reasoning, a concrete evidence artifact, a misconception, or a counterexample",
+    "a learner-controlled next action or cross-role handoff",
+  ]);
   assert.equal(report.notionSessionNotes.writeCadence, "at-most-one-concise-note-per-substantive-session");
   assert.ok(report.notionSessionNotes.requiredConditions.includes("the learning conversation is substantive"));
   assert.ok(report.notionSessionNotes.requiredConditions.includes("records are not paused and the material is not marked off-record"));
@@ -55,6 +65,20 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   await assert.rejects(
     validateLiveCodexLearningWorkflow(missingActivation),
     /requiredConditions must preserve the reviewed values and order/u,
+  );
+
+  const missingRecordsOnConfirmation = structuredClone(workflow);
+  missingRecordsOnConfirmation.notionSessionNotes.recordingAuthorization.activationPhrase = "capture";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(missingRecordsOnConfirmation),
+    /scoped records-on confirmation/u,
+  );
+
+  const vagueSubstantiveSession = structuredClone(workflow);
+  vagueSubstantiveSession.notionSessionNotes.substantiveSession.minimumEvidence.pop();
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(vagueSubstantiveSession),
+    /substantiveSession\.minimumEvidence must preserve the reviewed values and order/u,
   );
 
   const unprovenWriteClaim = structuredClone(workflow);

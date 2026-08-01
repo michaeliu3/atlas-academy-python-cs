@@ -126,6 +126,8 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /Portable copied-chat record mode: keep local/);
   assert.match(html, /automatic-after-substantive-session/);
   assert.match(html, /at most one concise structured note per substantive session/);
+  assert.match(html, /say “records on”/);
+  assert.match(html, /all three are present/);
   assert.match(html, /pause records/);
   assert.match(readable, /configured private learning\s+record/i);
   assert.match(readable, /designated Codex chats—not the portal/i);
@@ -264,6 +266,7 @@ test("each open module reader keeps the supportive oral-defense route", async ()
   assert.match(oralDefense, /Copy Teaching Assistant context/);
   assert.match(oralDefense, /Copy Study Partner context/);
   assert.match(oralDefense, /Study Partner · rehearsal context/);
+  assert.match(oralDefense, /separate live-capable Study Partner chat/);
   assert.match(oralDefense, /Canonical forward handoff/);
   assert.match(oralDefense, /companion: ModuleCompanionPackage/);
   assert.doesNotMatch(oralDefense, /getModuleCompanionPackage/);

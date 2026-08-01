@@ -52,20 +52,32 @@ The default portal privacy boundary stays local-first: it does not initiate a
 Notion request or send learner data anywhere. A portable copyable prompt stays
 in `keep local` mode, because pasting it into an unrelated chat must not grant
 record authority. In the learner-designated Teaching Assistant and Study
-Partner chats with their configured private destination, the learner has
-authorized an automatic concise Notion note after a substantive learning
+Partner chats with their configured private destination, the learner can
+authorize an automatic concise Notion note after a substantive learning
 conversation.
 
 <!-- live-codex-workflow: activation -->
 
 The active designated-chat policy is `automatic-after-substantive-session`.
-It may create at most one concise note per substantive session only when all
-four conditions hold:
+Before its first automatic note, say “records on” in that designated chat.
+That one-time confirmation remains active there until records are paused or
+material is marked off-record. It may then create at most one concise note per
+substantive session only when all four conditions hold:
 
 1. the conversation is in the designated TA or Study Partner chat;
 2. that chat's private Notion destination is configured and reachable;
 3. the learning conversation is substantive; and
 4. records are not paused and the material is not marked off-record.
+
+Treat a conversation as substantive only when all three are present:
+
+1. a named module or learning topic;
+2. learner reasoning, a concrete evidence artifact, a misconception, or a
+   counterexample; and
+3. a learner-controlled next action or cross-role handoff.
+
+A greeting, scheduling exchange, or isolated administrative question is not a
+substantive session and creates no note.
 
 The chat never creates a note after every exchange or for a greeting. “Automatic”
 does not prove that a write worked: neither role may claim a note was saved

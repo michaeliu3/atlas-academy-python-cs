@@ -16,6 +16,16 @@ const requiredNoteConditions = [
   "the learning conversation is substantive",
   "records are not paused and the material is not marked off-record",
 ];
+const requiredRecordingAuthorization = {
+  initialState: "require-explicit-records-on-confirmation",
+  activationPhrase: "records on",
+  scope: "that designated chat until records are paused or material is off-record",
+};
+const requiredSubstantiveEvidence = [
+  "a named module or learning topic",
+  "learner reasoning, a concrete evidence artifact, a misconception, or a counterexample",
+  "a learner-controlled next action or cross-role handoff",
+];
 const requiredRecordFields = [
   "date, role, module/topic, and learner question",
   "key definition, derivation, code/architecture trace, or whiteboard snapshot",
@@ -111,8 +121,11 @@ async function validateGuide(path, siteRoot, errors) {
   if (!guide.includes("automatic concise Notion note")) {
     errors.push("Live Codex workflow learner guide must name the designated-chat automatic note policy.");
   }
-  if (!guide.includes("at most one concise note per substantive session")) {
+  if (!/at most one concise note per\s+substantive session/u.test(guide)) {
     errors.push("Live Codex workflow learner guide must state the session-level write cadence.");
+  }
+  if (!guide.includes("say “records on”") || !guide.includes("all three are present")) {
+    errors.push("Live Codex workflow learner guide must define recording activation and a substantive-session threshold.");
   }
   if (!guide.includes("direct evidence")) {
     errors.push("Live Codex workflow learner guide must retain the direct-evidence claim boundary.");
@@ -173,6 +186,26 @@ export async function validateLiveCodexLearningWorkflow(
     }
     if (notionSessionNotes.designatedChatMode !== "automatic-after-substantive-session") {
       errors.push("Live Codex workflow designatedChatMode must require automatic concise notes only after substantive learning.");
+    }
+    const recordingAuthorization = notionSessionNotes.recordingAuthorization;
+    if (
+      !isPlainObject(recordingAuthorization) ||
+      recordingAuthorization.initialState !== requiredRecordingAuthorization.initialState ||
+      recordingAuthorization.activationPhrase !== requiredRecordingAuthorization.activationPhrase ||
+      recordingAuthorization.scope !== requiredRecordingAuthorization.scope
+    ) {
+      errors.push("Live Codex workflow must require a scoped records-on confirmation before automatic notes.");
+    }
+    const substantiveSession = notionSessionNotes.substantiveSession;
+    if (!isPlainObject(substantiveSession)) {
+      errors.push("Live Codex workflow must define a substantive-session threshold.");
+    } else {
+      requiredStringArray(
+        substantiveSession.minimumEvidence,
+        "Live Codex workflow substantiveSession.minimumEvidence",
+        requiredSubstantiveEvidence,
+        errors,
+      );
     }
     requiredStringArray(
       notionSessionNotes.requiredConditions,

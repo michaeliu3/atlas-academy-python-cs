@@ -12,6 +12,18 @@
   "notionSessionNotes": {
     "portableStartupMode": "keep-local",
     "designatedChatMode": "automatic-after-substantive-session",
+    "recordingAuthorization": {
+      "initialState": "require-explicit-records-on-confirmation",
+      "activationPhrase": "records on",
+      "scope": "that designated chat until records are paused or material is off-record"
+    },
+    "substantiveSession": {
+      "minimumEvidence": [
+        "a named module or learning topic",
+        "learner reasoning, a concrete evidence artifact, a misconception, or a counterexample",
+        "a learner-controlled next action or cross-role handoff"
+      ]
+    },
     "requiredConditions": [
       "this is the designated Teaching Assistant or Study Partner chat",
       "the configured private Notion destination is reachable",
