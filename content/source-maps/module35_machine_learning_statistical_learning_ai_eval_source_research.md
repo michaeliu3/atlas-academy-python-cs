@@ -98,11 +98,12 @@ reliable deep-learning systems; it must not treat it as a generalization proof.
 
 ## Primary-source ledger and reuse boundary
 
-All links below were accessed on **2026-07-31**. “Link-only” is deliberate:
-until a human reviews exact version, license, third-party notices, data terms,
-and asset-specific rights, Atlas may cite and link to a source but must create
-its own prose, figures, code, datasets, derivations, tests, and examples. A
-source’s existence is not a release approval.
+S35-01–S35-16 were accessed on **2026-07-31**; S35-17–S35-19 were checked on
+**2026-08-01**. “Link-only” is deliberate: until a human reviews exact version,
+license, third-party notices, data terms, and asset-specific rights, Atlas may
+cite and link to a source but must create its own prose, figures, code,
+datasets, derivations, tests, and examples. A source’s existence is not a
+release approval.
 
 | ID | Primary / first-party source | Why it belongs in M35; bounded claim linkage | License / reuse status for future authoring |
 | --- | --- | --- | --- |
@@ -122,6 +123,9 @@ source’s existence is not a release approval.
 | S35-14 | NIST, [Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1](https://doi.org/10.6028/NIST.AI.100-1) (2023) | Official framework for naming governance, mapping, measurement, and management activities. Supports M35-C09’s authority and accountability separation. | NIST publication. **Link/cite only pending exact reuse and third-party-material review**; its voluntary framework is not legal, domain, or approval authority. |
 | S35-15 | D. Sculley et al., [“Hidden Technical Debt in Machine Learning Systems”](https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/) (NeurIPS, 2015) | Original systems paper for coupling, data dependencies, and debt discussion. Supports M35-C08’s architectural-observability lens. | Google Research / proceedings record; **link/cite only**. Do not reproduce figures or interpret a cited risk as evidence of a particular Atlas defect. |
 | S35-16 | MIT OpenCourseWare, [6.036 Introduction to Machine Learning (Fall 2020)](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Official university-course benchmark for future scope review: supervised learning, model selection, neural networks, and learning-system reasoning. It is a coverage reference, not a replacement course or a source of copied teaching assets. | Check the course’s displayed [MIT OCW license terms](https://ocw.mit.edu/help/faq-fair-use/) and individual asset notices before reuse. Atlas should link and create original material. |
+| S35-17 | Carnegie Mellon University, [10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) (Fall 2025) | Official university-course benchmark for problem formulation, regularization, model selection, and formal guarantees with their limits. Supports M35-S04’s fixed regularization/selection card. | Course material is **link/cite only**. Do not copy lectures, assignments, solutions, figures, or data; create original Atlas derivations and examples. |
+| S35-18 | Stanford, [CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Official course-material route for supervised learning, learning theory, and regularization/model selection sequencing. Supports M35-S04 scope review, not a claim of course equivalence. | **Link/cite only**. Some material may have its own access or reuse constraints; do not copy notes, assignments, figures, or solutions. |
+| S35-19 | Georgia Tech, [CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Official course route for connected supervised, unsupervised, and sequential-decision analysis with defensible reports. Supports M35’s dossier and scope-gap review. | **Link/cite only**. Atlas does not reproduce course reports, private repositories, feedback, or term-long project work. |
 
 ### What this ledger does *not* establish
 
@@ -221,11 +225,11 @@ project rubric, TA/Study Partner prompt, and release proof.
 | Canonical session and prerequisites | Source route | Understanding-first / code-reading move | Planned artifact and explicit non-claim |
 | --- | --- | --- | --- |
 | **M35-S01 — Representation, inductive bias, and what a model can discard** (**M28**) | S35-01, S35-02 | Start with a small original two-feature synthetic setting. Before any model is fitted, ask the learner to predict what a projection retains and loses; code-read a PCA/feature pipeline for centering, shape, solver, and component-count assumptions. | **Representation-assumption sheet.** It does not claim that PCA, an embedding, or more dimensions reveal semantically right features or preserve what a later task needs. |
-| **M35-S02 — Problem formulation and classical baselines before learned models** (**M28, M34**) | S35-03, S35-04, S35-16 | Present a narrow problem statement and an AI-generated model proposal. Hold the raw-input contract fixed across a single affine threshold, an engineered interaction, and a fixed two-ReLU card; then name the selection boundary before calling any score “test.” | **Classical-learning baseline comparison plus equal-information family card.** It does not claim a complex model is needed, a benchmark win is meaningful, a constructed toy rule was learned, or a baseline is operationally acceptable. |
+| **M35-S02 — Problem formulation and classical baselines before learned models** (**M28, M34**) | S35-03, S35-04, S35-16–S35-19 | Present a narrow problem statement and an AI-generated model proposal. Hold the raw-input contract fixed across a single affine threshold, an engineered interaction, and a fixed two-ReLU card; then name the selection boundary before calling any score “test.” | **Classical-learning baseline comparison plus equal-information family card.** It does not claim a complex model is needed, a benchmark win is meaningful, a constructed toy rule was learned, or a baseline is operationally acceptable. |
 | **M35-S03 — Data-generating process, splits, metrics, uncertainty, and shift** (**M30**) | S35-05–S35-08 | Code-read two deliberately near-identical evaluation pipelines; one leaks a fitted transform or entity/time information. Predict the optimistic path, then inspect metric/slice/calibration behavior under an explicit synthetic shift. | **Evaluation-and-shift plan.** It does not estimate real-world performance, certify calibration, or replace domain-specific data/governance review. |
-| **M35-S04 — Learning dynamics: objectives, autodiff, optimization, and training systems** (**M28, M31, M32**) | S35-09, S35-10, S35-03 | Read an original scalar loss trace, then a fixed two-parameter-layer ReLU forward/backward trace with a visible zero-gradient path. Predict whether a finite-difference check, chain-rule calculation, or loss decrease validates a named stronger claim. | **Objective–optimization–generalization trace and reproducibility card.** They do not establish convergence, framework correctness, portability, generalization, or a correct objective. |
+| **M35-S04 — Learning dynamics: objectives, autodiff, optimization, and training systems** (**M28, M31, M32**) | S35-03, S35-09, S35-10, S35-17–S35-19 | Derive one Bernoulli negative-log-likelihood card and one fixed ridge-shrinkage card, then read an original scalar loss trace and a fixed two-parameter-layer ReLU forward/backward trace with a visible zero-gradient path. Predict whether a finite-difference check, chain-rule calculation, loss decrease, or reused validation score validates a named stronger claim. | **Objective–optimization–generalization trace and reproducibility card.** They do not establish convergence, framework correctness, portability, generalization, or a correct objective. |
 | **M35-S05 — ML debugging, observability, and evidence that can fail usefully** (**M13, M30**) | S35-03, S35-11, S35-12, S35-15 | Diagnose an aggregate-score regression using a small original evidence table. Require the learner to choose a data, representation, model, metric, slice, or serving probe before requesting a model change. | **ML claim–test–observability matrix.** It does not certify a pipeline, identify a root cause from one chart, or turn monitoring into autonomous action. |
-| **M35-S06 — Responsible ML representation dossier and oral defense** (**M13, M22, M28, M30, M31, M32, M34**) | S35-01–S35-15 | Assemble a deliberately synthetic, bounded dossier. The learner criticizes an AI-generated claim, repairs an assumption, explains a counterexample, and specifies abstention/escalation. A future TA conversation must use supportive questions, hint ladders, transfer, and learner-controlled evidence—not pass/fail verdicts. | **Machine Learning & Representation Dossier and learner-controlled oral-defense summary.** It is neither an automatic unlock nor evidence of a live chat, Notion write, deployed model, external approval, or mastery. |
+| **M35-S06 — Responsible ML representation dossier and oral defense** (**M13, M22, M28, M30, M31, M32, M34**) | S35-01–S35-19 | Assemble a deliberately synthetic, bounded dossier. The learner criticizes an AI-generated claim, repairs an assumption, explains a counterexample, and specifies abstention/escalation. A future TA conversation must use supportive questions, hint ladders, transfer, and learner-controlled evidence—not pass/fail verdicts. | **Machine Learning & Representation Dossier and learner-controlled oral-defense summary.** It is neither an automatic unlock nor evidence of a live chat, Notion write, deployed model, external approval, or mastery. |
 
 Each future session should include prediction before reveal, first-principles
 explanation, code-reading/debugging/design inspection, a counterexample,
@@ -378,7 +382,8 @@ evidence.
       outputs from the sources without a recorded reuse decision.
 - [~] A shared bounded deterministic fixture/test now covers a representation
       collision, information-budget baseline contrast, finite probability-card
-      behavior, and one scalar gradient check. Split leakage, named shift
+      behavior, one Bernoulli-likelihood derivation, one ridge-shrinkage card,
+      and one scalar gradient check. Split leakage, named shift
       simulation, reproducibility records, a learner studio, and independent
       lesson review remain to be completed.
 - [ ] Build confidence-aware diagnostics and evidence rubrics that test

@@ -568,6 +568,88 @@ is a computational event. It does not establish that `L` measures the desired
 outcome, that the trace converges, that a low loss generalizes, or that the
 result is safe to use.
 
+### Bernoulli likelihood — why this loss has this shape
+
+The data term above is not a ritual to memorize. Make one explicit conditional
+model: after the available representation of \(\phi(x)\), let a binary label satisfy
+
+\[
+\Pr(Y=y\mid \phi(x))=p_w(\phi(x))^y\bigl(1-p_w(\phi(x))\bigr)^{1-y},
+\qquad y\in\{0,1\}.
+\]
+
+Taking the negative log of the observed-label likelihood gives
+
+\[
+-\log \Pr(Y=y\mid \phi(x))
+=-\left[y\log p_w(\phi(x))+(1-y)\log\bigl(1-p_w(\phi(x))\bigr)\right].
+\]
+
+That is the binary cross-entropy term. It follows from the named Bernoulli
+conditional model and log-likelihood objective; it does not prove that the
+model, labels, target, or probability interpretation is appropriate.
+
+**Predict before revealing the numbers.** Let a fixed logit be
+\(z=\log 3\), so \(p=\sigma(z)=3/4\). Which observed label gets the smaller
+negative log likelihood: \(y=1\) or \(y=0\)? State why in terms of the
+probability assigned to the observed label.
+
+<details>
+<summary>Reveal the one-point likelihood comparison after predicting.</summary>
+
+For \(y=1\), the likelihood is \(3/4\), so the loss is
+\(\log(4/3)\). For \(y=0\), the likelihood is \(1/4\), so the loss is
+\(\log 4\). On this one declared model, assigning more probability to the
+observed label lowers negative log likelihood. This is neither a calibration
+guarantee nor a decision rule.
+
+</details>
+
+Before calling `m35BernoulliLogLikelihoodCard()`, derive both likelihoods and
+losses yourself. Then use its `conditionalModel`, `derivation`, `examples`,
+and `truthBoundary` fields to check arithmetic and scope—not to infer that a
+trained system has meaningful probabilities.
+
+### Regularization changes the target; selection changes the evidence
+
+The term \(\lambda\Omega(w)\) changes the optimization question; it is not a
+magic “anti-overfitting switch.” On one deliberately tiny scalar card, let
+
+\[
+J_\lambda(w)=(w-2)^2+\lambda w^2,
+\qquad \lambda\in\{0,1,3\}.
+\]
+
+The stationary condition is
+
+\[
+\frac{dJ_\lambda}{dw}=2(w-2)+2\lambda w=0,
+\qquad
+w^*_\lambda=\frac{2}{1+\lambda}.
+\]
+
+**Predict before revealing.** As \(\lambda\) goes from `0` to `1` to `3`,
+does the constructed optimum move toward `2`, toward `0`, or remain fixed?
+Can you compare the three objective values as though they measured one shared
+test metric?
+
+<details>
+<summary>Reveal the shrinkage and selection boundary after predicting.</summary>
+
+The optima are \(2\), \(1\), and \(0.5\). The penalty changes the objective,
+so its values are not directly a model-ranking score across different
+\(\lambda\) values. If labels or a metric choose \(\lambda\), that evaluation
+has become selection evidence. Preserve the candidate set and selection rule,
+then use a fresh, predeclared evaluation relation for a later performance
+observation.
+
+</details>
+
+Before calling `m35RidgeShrinkageCard()`, derive each optimum and split its
+objective into data and penalty terms. Its `selectionBoundary` is part of the
+lesson: a regularizer changes a hypothesis preference; it does not make a
+reused validation result untouched or prove a selected model generalizes.
+
 ### Code-reading task: a tiny trace
 
 ```python
@@ -967,8 +1049,9 @@ benchmarks, code, weights, or model-card assets.
 
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
-| [Stanford CS229 Machine Learning](https://cs229.stanford.edu/) | Sessions 1–6: learning-problem formulation, representation, generalization, evaluation, and ML prerequisites. Some course material may require affiliate access. | Link-only/original Atlas examples; do not copy assignments, notes, figures, or solutions. |
+| [Stanford CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Sessions 1–6: learning-problem formulation, representation, learning theory, regularization/model selection, and evaluation. Some course material may require affiliate access. | Link-only/original Atlas examples; do not copy assignments, notes, figures, or solutions. |
 | [MIT 6.036 Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Sessions 1–5: supervised learning, model selection, neural networks, and evidence-aware ML reasoning. | MIT OCW assets have their own notices; link-only/original Atlas fixtures and explanations. |
+| [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
 | [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
 | [scikit-learn common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html) and [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Sessions 2–5: leakage, preprocessing, training/evaluation boundaries, and bounded reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
 

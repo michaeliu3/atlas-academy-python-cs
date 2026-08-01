@@ -142,6 +142,32 @@ finite calculation on the named sample `S`. Writing the symbols does not make
 the rows IID, select a valid loss, make the synthetic relation realistic, or
 identify deployment behavior.
 
+### Name \(P\) fully before calculating \(R_P(h)\)
+
+The relay card names two **fully specified** synthetic joint relations. In
+both, `signal` and `context` are independent binary fields and
+`label = Number(signal == context)`; only the declared context marginal
+changes:
+
+| `signal` | `context` | \(P_{\mathrm{source}}\) | \(P_{\mathrm{context-heavy}}\) |
+| --- | --- | --- | --- |
+| 0 | 0 | \(0.25\) | \(0.125\) |
+| 0 | 1 | \(0.25\) | \(0.375\) |
+| 1 | 0 | \(0.25\) | \(0.125\) |
+| 1 | 1 | \(0.25\) | \(0.375\) |
+
+For the fixed `signal-only` predictor \(h(s,c)=s\), its prediction matches
+the declared label exactly when \(c=1\). Therefore its expected accuracy is
+\(P(C=1)\): \(0.50\) in the source relation and \(0.75\) in the
+context-heavy relation. That derivation is specific to this predictor and
+label rule; a marginal alone would not specify the risk of an arbitrary
+predictor or a general learning theorem.
+
+Before calling `m36LearningClaimProbe()`, verify that each joint table sums to
+one, recover both marginals, and derive the fixed predictor's correctness
+event. A declared relation is still not evidence that a finite sample was IID
+from it.
+
 ~~~mermaid
 %% atlas-diagram-id: m36-learning-claim-chain
 %% atlas-diagram-title: A learning claim moves through distinct evidence layers
@@ -388,6 +414,66 @@ logarithmically in \(K\) after solving for \(n\).
    consequential.
 
 </details>
+
+### One numerical theorem card — calculation is not a deployment claim
+
+Keep every assumption fixed just long enough to calculate one consequence.
+For a finite class with \(K=8\), bounded IID loss, \(\varepsilon=0.25\), and
+\(\delta=0.05\), the displayed sufficient condition becomes
+
+\[
+n\geq\frac{\log(2K/\delta)}{2\varepsilon^2}
+=\frac{\log(320)}{0.125}\approx 46.15.
+\]
+
+Thus \(n=47\) is a sufficient **integer** sample size for this particular
+union-bound route. It is not an exact minimum, a statement that a real data
+set is IID, or a statement about a deep network.
+
+**Predict before calculating.** Does \(n=46\) still make the displayed upper
+bound at most \(0.05\)? What would doubling \(K\) change: the assumptions, the
+numerical sufficient bound, or the truth of every deployment claim?
+
+<details>
+<summary>Reveal the numeric scope check after making both predictions.</summary>
+
+At \(n=46\), \(2K e^{-2n\varepsilon^2}\approx0.0509>0.05\); at \(n=47\), it
+is approximately \(0.0449\leq0.05\). Doubling \(K\) changes the sufficient
+bound through the same formula, but it does not establish the formula's
+sampling assumptions or make an external system reliable.
+
+</details>
+
+Before calling `m36FiniteClassSampleBoundCard()`, compute the ceiling and both
+failure-bound values. Inspect its `assumptions`, `derivation`, and
+`truthBoundary`, then name one assumption the arithmetic cannot check.
+
+### Fix the candidate protocol before reading a theorem as evaluation evidence
+
+The finite-class route controls a named finite candidate class under its stated
+sampling assumptions. It does not give a free pass to repeatedly ask an AI to
+generate a new feature, architecture, seed, stopping rule, or threshold after
+reading the labels of the same evaluation split.
+
+**Predict before revealing.** A learner tries ten generated pipelines, keeps
+the one with the best score on the only held-out split, then cites the
+finite-class display. Which object has changed: only a selected hypothesis, or
+the evidence-producing selection procedure too?
+
+<details>
+<summary>Reveal the fixed-versus-adaptive repair after predicting.</summary>
+
+The selection procedure has changed too. A fixed finite candidate set may be
+part of a stated analysis, but adaptive reuse of validation/test labels needs
+selection-aware accounting or a fresh, predeclared evaluation relation. Keep
+the candidate-generation rule, every look, selection metric, and stop rule;
+do not silently rename a reused selection split as an untouched test.
+
+</details>
+
+This does not forbid model selection. It makes the evidence boundary visible:
+choose with training/validation evidence, preserve the protocol, and reserve a
+fresh evaluation relation for the later claim you want to make.
 
 The IID condition is not decorative. If every “sample” is a cloned copy of
 one latent Bernoulli draw \(Z\), and a fixed loss equals \(Z\) with
@@ -870,6 +956,7 @@ benchmarks, weights, or course exercises.
 | --- | --- | --- |
 | [MIT 9.520 Statistical Learning Theory & Applications](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/) and its [VC-dimension notes](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/resources/class17/) | Sessions 1–3: empirical versus population risk, function classes, quantifiers, and theorem conditions. | MIT OCW assets have individual notices; link-only/original Atlas theorem cards, examples, and proof prompts. |
 | [MIT 6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/) and [generalization-theory lecture](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/) | Sessions 2–5: deep-learning foundations, overparameterization/generalization questions, and experimental scope. | Link-only/original Atlas examples and experiments; no copied videos, slides, homework, or project assets. |
+| [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) and [Stanford CS229 course materials](https://cs229.stanford.edu/materials.html-full) | Session 3: learning-theory, regularization/model-selection, and fixed-versus-adaptive evaluation boundaries. | Link-only/original Atlas proof cards and examples; do not copy lectures, assignments, figures, data, notes, or solutions. |
 | [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) and [numerical-accuracy documentation](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html) | Session 4: bounded environment, dtype, backend, and comparison claims. | Link-only/original reproduction record; pin framework, device, and versions before an implementation claim. |
 | [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 5–6: monitoring, management, governance, and human-control boundaries. | Link-only/original Atlas reliability maps; voluntary guidance is not legal advice, certification, or authorization. |
 

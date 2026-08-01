@@ -93,11 +93,12 @@ evidence say otherwise; this file cannot change that state.
 
 ## Primary-source ledger and reuse boundary
 
-All entries were accessed on **2026-07-31**. “Link/cite only” means the source
-may guide a future author but does not grant Atlas permission to reproduce
-prose, formulas, figures, code, data, benchmarks, videos, course exercises, or
-brand assets. A future structured source ledger must add a learner-facing claim
-link and asset decision for every actual use.
+S36-01–S36-14 were accessed on **2026-07-31**; S36-15–S36-16 were checked on
+**2026-08-01**. “Link/cite only” means the source may guide a future author
+but does not grant Atlas permission to reproduce prose, formulas, figures,
+code, data, benchmarks, videos, course exercises, or brand assets. A future
+structured source ledger must add a learner-facing claim link and asset decision
+for every actual use.
 
 | ID | Primary / first-party source | Narrow authoring use and claim linkage | License / reuse status |
 | --- | --- | --- | --- |
@@ -115,6 +116,8 @@ link and asset decision for every actual use.
 | S36-12 | NIST, [Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://doi.org/10.6028/NIST.AI.100-1) (2023) | Official framework for separating measurement, management, governance, monitoring, and intended use. Supports M36-C08/C09 as a planning vocabulary, not law, certification, or domain authority. | NIST publication; **link/cite only pending asset and third-party-material review**. Its voluntary framework does not approve a system. |
 | S36-13 | MIT OpenCourseWare, [6.7960 Deep Learning, Lec. 06: Generalization Theory](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/) (2024) | University-course benchmark for future scope: generalization theory, overparameterization, double descent, and VC-dimension limits. It is a coverage reference, not a replacement course or copied learning asset. | Check the course's displayed MIT OCW license and individual asset notices before reuse. Atlas should link and author independently. |
 | S36-14 | MIT OpenCourseWare, [9.520 Statistical Learning Theory & Applications, VC-dimension notes](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/resources/class17/) | University-level source for teaching sequencing around function-class complexity and VC-style definitions. Supports scope review for M36-S03 only. | Check MIT OCW and individual material notices before reuse; link/cite only unless an exact asset decision is recorded. |
+| S36-15 | Carnegie Mellon University, [10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) (Fall 2025) | Official university-course benchmark joining regularization/model selection with formal learning guarantees and their limits. Supports M36-S03’s fixed-versus-adaptive selection repair. | Course material is **link/cite only**. Do not copy lectures, assignments, solutions, figures, or data; create original Atlas proofs, examples, and cards. |
+| S36-16 | Stanford, [CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Official course-material route for learning theory and regularization/model-selection sequencing. Supports M36-S03 calibration without claiming access, enrollment, or equivalence. | **Link/cite only**. Some material may have its own access or reuse constraints; do not copy notes, assignments, figures, or solutions. |
 
 ### What this ledger does *not* establish
 
@@ -192,10 +195,10 @@ not create a workbook, studio, test, or oral-defense surface.
 | --- | --- | --- | --- |
 | **M36-S01 — What learning claims mean** (M29, M35) | S36-01–S36-03, S36-07–S36-09 | Start with a tiny synthetic learning claim. Before any formula, ask the learner to mark the population, sample, loss, representation, hypothesis class, and missing assumption; only then reveal empirical/population risk notation. | **Assumption-scope sheet.** It does not say a synthetic relation represents a real population or that a stated loss is the correct decision objective. |
 | **M36-S02 — Optimization, estimation, and generalization gaps** (M29, M31, M35) | S36-04–S36-06 | Code-read an original fixed-length training trace and a held-out observation. Ask which claim is supported by a gradient/loss change and which remains unanswered. | **Optimization–generalization gap ledger.** It does not claim convergence, population optimality, or a valid deployment decision. |
-| **M36-S03 — Capacity, learnability, computational limits, and theorem scope** (M33, M35) | S36-01–S36-05, S36-14 | Build a finite-hypothesis, bounded-loss, IID proof skeleton: fixed-hypothesis concentration, union bound, and explicit \(K,\varepsilon,\delta,n\) scope. Then remove IID with a cloned-sample counterexample and state what the restored result still cannot decide. | **Limit-and-nonclaim card.** It does not turn a finite-class theorem name into a guarantee about an arbitrary neural network, data source, or user. |
+| **M36-S03 — Capacity, learnability, computational limits, and theorem scope** (M33, M35) | S36-01–S36-05, S36-14–S36-16 | Build a finite-hypothesis, bounded-loss, IID proof skeleton: fixed-hypothesis concentration, union bound, a numeric \(K,\varepsilon,\delta,n\) card, and a fixed-versus-adaptive selection repair. Then remove IID with a cloned-sample counterexample and state what the restored result still cannot decide. | **Limit-and-nonclaim card.** It does not turn a finite-class theorem name into a guarantee about an arbitrary neural network, data source, or user. |
 | **M36-S04 — Numerical, systems, and reproducibility evidence** (M32, M35) | S36-10–S36-11 | Read a fixed two-layer ReLU forward/backward trace and an original environment record with one unpinned variable. Predict a plausible difference between two runs, then choose the smallest added record/check rather than a blanket "set the seed" response. | **Theory-system reproducibility record.** It does not promise bitwise matching, validate framework/autodiff behavior, or validate an experiment's scientific/reliability claim. |
 | **M36-S05 — Shift, robustness, monitoring, and bounded human control** (M31, M32, M35) | S36-07–S36-12 | Contrast an input-mixture shift, a conditional/label-relation shift, and a representation/measurement shift before revealing an intervention plan. Require a named observable, threshold, false-positive/false-negative trade-off, owner, and stop condition for each claimed mechanism. | **Reliable-learning evidence map.** It does not certify detection, robustness, causal diagnosis, or autonomous authority. |
-| **M36-S06 — Reliable learning systems dossier and bridge to synthesis** (M29, M31, M32, M33, M35) | S36-01–S36-14 | Assemble a small synthetic dossier. A supportive TA oral discussion asks the learner to repair one assumption, explain one counterexample, distinguish a theorem from an observation, and choose a next uncertainty-reducing measurement. | **Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary.** It is not a pass/fail result, platform-live evidence, Notion-write proof, or M25/M26 unlock. |
+| **M36-S06 — Reliable learning systems dossier and bridge to synthesis** (M29, M31, M32, M33, M35) | S36-01–S36-16 | Assemble a small synthetic dossier. A supportive TA oral discussion asks the learner to repair one assumption, explain one counterexample, distinguish a theorem from an observation, and choose a next uncertainty-reducing measurement. | **Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary.** It is not a pass/fail result, platform-live evidence, Notion-write proof, or M25/M26 unlock. |
 
 Every future session should preserve prediction before reveal, compact
 first-principles explanation, code-reading/debugging/design inspection, an
@@ -292,8 +295,9 @@ release input, and cannot be claimed saved without direct evidence.
 - [ ] Build original, accessible diagrams and adjacent text alternatives for
       every risk/gap/theorem/system relationship; never use copied paper or
       course figures as a shortcut.
-- [~] A shared local fixture/test now provides fixed finite-risk/relation and
-      reduction-order probes with explicit numerical and scope boundaries. A
+- [~] A shared local fixture/test now provides fixed finite-risk/relation,
+      finite-class sample-bound, and reduction-order probes with explicit
+      numerical and scope boundaries. A
       broader reviewed experiment, complete semantic-oracle coverage, learner
       studio, and release evidence remain to be completed.
 - [ ] Require prediction before reveal and expose proof ideas, counterexamples,

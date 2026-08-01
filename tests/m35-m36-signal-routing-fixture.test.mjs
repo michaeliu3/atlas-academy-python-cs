@@ -5,11 +5,14 @@ import test from "node:test";
 import {
   M35_M36_SIGNAL_ROUTING_FIXTURE,
   m35BaselineComparison,
+  m35BernoulliLogLikelihoodCard,
   m35CalibrationContrast,
   m35M36FixedReluTrace,
   m35RepresentationCollisionWitness,
+  m35RidgeShrinkageCard,
   m35SharedInformationModelFamilyCard,
   m35SquaredLossGradientCheck,
+  m36FiniteClassSampleBoundCard,
   m36LearningClaimProbe,
   m36ReductionOrderProbe,
 } from "../lib/m35-m36-signal-routing-fixture.js";
@@ -86,6 +89,36 @@ test("the bounded gradient check agrees at one point and rejects invalid numeric
   );
 });
 
+test("the M35 likelihood card derives a scoped binary cross-entropy comparison", () => {
+  const card = m35BernoulliLogLikelihoodCard();
+
+  assert.equal(card.logit, Math.log(3));
+  assert.equal(card.probability, 0.75);
+  assert.deepEqual(
+    card.examples.map(({ label, negativeLogLikelihood }) => [label, negativeLogLikelihood]),
+    [
+      [1, Math.log(4 / 3)],
+      [0, Math.log(4)],
+    ],
+  );
+  assert.match(card.derivation, /-\[y log p \+ \(1-y\) log\(1-p\)\]/u);
+  assert.match(card.truthBoundary, /calibration guarantee/u);
+});
+
+test("the M35 ridge card keeps objective shrinkage and selection evidence distinct", () => {
+  const card = m35RidgeShrinkageCard();
+
+  assert.equal(card.objective, "J_lambda(w) = (w - 2)^2 + lambda w^2");
+  assert.equal(card.minimizer, "w_lambda^* = 2 / (1 + lambda)");
+  assert.deepEqual(card.alternatives, [
+    { lambda: 0, minimizer: 2, dataTerm: 0, penaltyTerm: 0, objectiveValue: 0 },
+    { lambda: 1, minimizer: 1, dataTerm: 1, penaltyTerm: 1, objectiveValue: 2 },
+    { lambda: 3, minimizer: 0.5, dataTerm: 2.25, penaltyTerm: 0.75, objectiveValue: 3 },
+  ]);
+  assert.match(card.selectionBoundary, /fresh evaluation relation/u);
+  assert.match(card.truthBoundary, /model-selection result/u);
+});
+
 test("the shared-information card separates raw inputs, hypothesis families, and constructed scope", () => {
   const card = m35SharedInformationModelFamilyCard();
   const byFamily = Object.fromEntries(card.families.map((family) => [family.id, family]));
@@ -135,8 +168,35 @@ test("the M36 card keeps finite empirical risk and a named synthetic shift disti
   assert.equal(byHypothesis["always-one"].empiricalZeroOneRisk, 0.25);
   assert.equal(byRelation["source-balanced"].signalOnlyExpectedAccuracy, 0.5);
   assert.equal(byRelation["context-heavy"].signalOnlyExpectedAccuracy, 0.75);
+  assert.deepEqual(byRelation["source-balanced"].jointDistribution, [
+    { signal: 0, context: 0, probability: 0.25 },
+    { signal: 0, context: 1, probability: 0.25 },
+    { signal: 1, context: 0, probability: 0.25 },
+    { signal: 1, context: 1, probability: 0.25 },
+  ]);
+  assert.deepEqual(byRelation["context-heavy"].jointDistribution, [
+    { signal: 0, context: 0, probability: 0.125 },
+    { signal: 0, context: 1, probability: 0.375 },
+    { signal: 1, context: 0, probability: 0.125 },
+    { signal: 1, context: 1, probability: 0.375 },
+  ]);
+  assert.equal(
+    probe.relationScope,
+    "The two named relations fully specify independent binary signal/context draws; the fixed signal-only predictor is correct exactly when context is 1.",
+  );
   assert.match(probe.conclusion, /Neither result supplies IID evidence/u);
   assert.match(probe.truthBoundary, /generalization theorem/u);
+});
+
+test("the M36 finite-class card checks one union-bound sample-size calculation and its limit", () => {
+  const card = m36FiniteClassSampleBoundCard();
+
+  assert.deepEqual(card.assumptions, { hypothesisCount: 8, epsilon: 0.25, delta: 0.05 });
+  assert.equal(card.sufficientSampleSize, 47);
+  assert.ok(card.failureBoundAtPreviousInteger > card.assumptions.delta);
+  assert.ok(card.failureBoundAtSufficientSampleSize <= card.assumptions.delta);
+  assert.match(card.derivation, /log\(2K\/delta\) \/ \(2 epsilon\^2\)/u);
+  assert.match(card.truthBoundary, /deep-network bound/u);
 });
 
 test("the reduction-order probe reports only its current JavaScript numerical scope", () => {
@@ -182,14 +242,26 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   ]);
 
   assert.match(m35Workbook, /m35RepresentationCollisionWitness\(\)/u);
+  assert.doesNotMatch(m35Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);
   assert.match(m35Workbook, /m35BaselineComparison\(\)/u);
   assert.match(m35Workbook, /m35CalibrationContrast\(\)/u);
   assert.match(m35Workbook, /m35SquaredLossGradientCheck\(\{ weight: 0, feature: 2, label: 1 \}\)/u);
+  assert.match(m35Workbook, /m35BernoulliLogLikelihoodCard\(\)/u);
+  assert.match(m35Workbook, /Bernoulli likelihood — why this loss has this shape/u);
+  assert.ok(m35Workbook.includes("\\Pr(Y=y\\mid \\phi(x))"));
+  assert.match(m35Workbook, /m35RidgeShrinkageCard\(\)/u);
+  assert.match(m35Workbook, /Regularization changes the target; selection changes the evidence/u);
   assert.match(m35Workbook, /m35SharedInformationModelFamilyCard\(\)/u);
   assert.match(m35Workbook, /m35M36FixedReluTrace\(\)/u);
   assert.match(m35Workbook, /Selection boundary — inspection changes the evidence/u);
   assert.match(m35Workbook, /two-hidden-unit ReLU/u);
   assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
+  assert.doesNotMatch(m36Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);
+  assert.match(m36Workbook, /m36FiniteClassSampleBoundCard\(\)/u);
+  assert.match(m36Workbook, /One numerical theorem card — calculation is not a deployment claim/u);
+  assert.ok(m36Workbook.includes("\\varepsilon=0.25"));
+  assert.ok(m36Workbook.includes("Name \\(P\\) fully before calculating"));
+  assert.match(m36Workbook, /Fix the candidate protocol before reading a theorem as evaluation evidence/u);
   assert.match(m36Workbook, /m36ReductionOrderProbe\(\)/u);
   assert.match(m36Workbook, /m35CalibrationContrast\(\)/u);
   assert.match(m36Workbook, /m35M36FixedReluTrace\(\)/u);
