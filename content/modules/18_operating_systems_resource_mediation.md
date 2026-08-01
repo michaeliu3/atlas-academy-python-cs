@@ -154,10 +154,6 @@ flowchart LR
     M18 --> M24["M24<br/>CPython memory + performance"]
 ```
 
-**Text equivalent.** Module 17 hands a machine and I/O boundary to Module 18,
-which explains processes, memory, files, and shutdown before later modules add
-concurrency, networking, distribution, and runtime internals.
-
 The bridge reuses five M17 disciplines:
 
 | M17 discipline | M18 use |
@@ -372,11 +368,6 @@ flowchart TB
     D --> FS["filesystem + sync + recovery"]
 ```
 
-**Text equivalent.** Finite resources, multiple programs, and failure require
-an OS to virtualize abstractions, multiplex scarce service, protect authority,
-and preserve named state through process, scheduler, permission, and filesystem
-mechanisms.
-
 - **Virtualize:** present a process with a useful execution and address-space
   model.
 - **Multiplex:** share processors, memory, and I/O over time and space.
@@ -426,11 +417,6 @@ sequenceDiagram
     U-->>P: platform result
     P-->>A: value, exception, or later completion
 ```
-
-**Text equivalent.** Atlas code asks the Python runtime for an operation, which
-may make lower OS-interface requests. The kernel validates authority and state,
-optionally schedules resource work, and returns a value, error, or later
-completion.
 
 The diagram is intentionally nonnumerical. It does not say:
 
@@ -558,11 +544,6 @@ flowchart LR
     STATUS -. "not equivalent" .- ART
 ```
 
-**Text equivalent.** A program artifact and Atlas job together launch a live
-process containing execution state, virtual memory, open resources,
-environment, authority, and lifecycle data. Exit status and artifact effects
-remain different evidence.
-
 The process may contain one or more execution streams. That composition fact is
 enough here. Interleavings, locks, races, queues, the GIL, and parallel model
 choice belong to M19.
@@ -612,10 +593,6 @@ stateDiagram-v2
     Terminated --> Collected: wait or release status/object
     Collected --> [*]
 ```
-
-**Text equivalent.** A process is created, admitted, runnable, running,
-blocked or preempted, terminated, and finally collected when a caller waits for
-or releases its status object.
 
 This is a portable teaching model. Production systems have more states and may
 schedule threads rather than whole processes. The key distinctions survive:
@@ -760,10 +737,6 @@ gantt
     running :b1, 2, 5
     runnable :b2, 5, 7
 ```
-
-**Text equivalent.** On one declared CPU, worker A runs, blocks, then runs
-again while worker B becomes runnable, runs during A's wait, and is runnable
-again. Service order changes without changing either job's contract.
 
 This is not a host trace. It illustrates states:
 
@@ -922,10 +895,6 @@ flowchart LR
     PERM -->|no| PROT["protection fault"]
 ```
 
-**Text equivalent.** A virtual address splits into virtual-page number and
-offset, uses a usable TLB entry or page-table lookup, checks mapping and
-permission state, then forms a physical address or reports a classified fault.
-
 ### 4.3 Page table and TLB are not synonyms
 
 The page table is the model’s authoritative mapping structure. The TLB caches
@@ -1072,10 +1041,6 @@ flowchart TD
     RESOLVE -->|no| FAIL["fault delivered as failure"]
 ```
 
-**Text equivalent.** A virtual-memory access can fail because its mapping is
-invalid, its requested operation is disallowed, or its valid page is absent. An
-absent page either resolves and resumes or becomes a failure.
-
 The branch “populate” does not say “read disk.” Possible mechanisms include
 zero-filled lazy allocation, copy-on-write, cached file data, or storage I/O.
 Name the mechanism only with appropriate evidence.
@@ -1163,10 +1128,6 @@ flowchart LR
     OPEN --> META
     PY["Python file object<br/>text/buffer/raw layers"] --> REF
 ```
-
-**Text equivalent.** A pathname resolves through a directory entry to a
-filesystem object. A process descriptor or handle resolves to an open resource
-with rights and state; both may reach the same object without being identical.
 
 The graph has two routes:
 
@@ -1265,10 +1226,6 @@ sequenceDiagram
     A->>O: close fd 7
 ```
 
-**Text equivalent.** In the declared POSIX-like model, process A opens the old
-object, process B replaces the namespace binding with a new object, and A
-continues reading the old object through its existing descriptor until close.
-
 Do not project this exact result onto every Windows sharing/replacement setup.
 Windows may reject a replacement depending on open-handle sharing modes and
 other conditions. The transferable lesson is:
@@ -1294,10 +1251,6 @@ flowchart TB
     BUF -. "flush()" .-> RAW
     OS -. "fsync / platform sync request" .-> PC
 ```
-
-**Text equivalent.** Python text passes through encoding, buffering, raw-file,
-OS, page-cache, filesystem, and device layers. Flush and synchronization
-requests strengthen different observations at different layers.
 
 Qualify “cache”:
 
@@ -1403,10 +1356,6 @@ flowchart LR
     DECIDE -->|allow| CAP["open resource with granted capability"]
     DECIDE -->|deny| ERR["permission/access error"]
 ```
-
-**Text equivalent.** An OS access decision combines process identity,
-requested right, resolved target, and platform rules at operation time. It
-either grants an open resource capability or returns a permission error.
 
 ### 6.2 POSIX and Windows models are related, not identical
 
@@ -1568,11 +1517,6 @@ flowchart LR
     EXIT --> WAIT["supervisor waits + records"]
 ```
 
-**Text equivalent.** A cooperative stop request stops admission, reaches a
-declared safe point, then either finishes and publishes work or preserves a
-classified incomplete artifact before closing resources, exiting, and recording
-status.
-
 Every arrow can fail. The protocol must say what happens if interruption occurs
 one step earlier.
 
@@ -1600,10 +1544,6 @@ stateDiagram-v2
     Exited --> ArtifactsClassified: wait/poll + inspect
     ArtifactsClassified --> [*]
 ```
-
-**Text equivalent.** A supervisor requests cooperative stop, waits to a
-deadline, escalates only through recorded terminate and kill capabilities,
-observes the child exit, then inspects artifacts before classification.
 
 Python method names have different native effects:
 
@@ -1782,11 +1722,6 @@ flowchart LR
     X --> Q["RECOVERED<br/>artifact classification"]
 ```
 
-**Text equivalent.** An admitted job moves through start, encoding, staging,
-validation, Python flush, file synchronization, close, replacement, optional
-directory synchronization, exit, and recovery classification, exposing crash
-cuts between phases.
-
 The target directory contains:
 
 ```text
@@ -1830,10 +1765,6 @@ flowchart TB
     FILE --> NAME
     DIR --> LIMIT["hardware/filesystem/failure assumptions remain"]
 ```
-
-**Text equivalent.** Python flush, file synchronization, name replacement, and
-optional directory synchronization support progressively different file and
-namespace claims. Hardware, filesystem, and failure assumptions remain.
 
 **[PYTHON 3.14 CONTRACT]** for buffered file objects, call `flush()` before
 `os.fsync(fileno())`. On Unix, `os.fsync` calls native `fsync`; on Windows it
@@ -2140,10 +2071,6 @@ flowchart LR
     CAP --> PACKET
     ORACLE --> PACKET
 ```
-
-**Text equivalent.** The supervisor owns worker creation, stop policy,
-recovery, and capability records. The worker combines a pure review packet with
-staged publication, and its evidence feeds one JSON dossier.
 
 Dependency rule:
 
@@ -3159,10 +3086,6 @@ flowchart TB
     CLASS --> EVIDENCE["evidence dossier<br/>contract + model + observation + unknown"]
 ```
 
-**Text equivalent.** Application job, supervisor, worker, publication phases,
-raw exit, artifacts, and platform capability remain separate state views. The
-recovery classifier joins them into an evidence dossier without equating them.
-
 The four states can disagree:
 
 ```text
@@ -3645,11 +3568,6 @@ flowchart TD
     REC --> EVID["contract / model / observation / unknown"]
     EVID --> LATER["M19 overlap · M20 network · M21 distribution · M24 runtime"]
 ```
-
-**Text equivalent.** Finite resources and failure lead to OS mediation of
-process lifecycle, address translation, names and open resources, and
-authority. Shutdown and publication lead to recovery evidence and later system
-modules.
 
 Before/now:
 

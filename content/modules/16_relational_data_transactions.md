@@ -141,10 +141,6 @@ flowchart LR
     S --> W["Journal / WAL / recovery<br/>named engine assumptions"]
 ```
 
-**Text equivalent.** Validated M15 events create identity and relational
-constraints, queries, physical plans, transactions, isolation schedules, and
-recovery assumptions.
-
 The arrows are obligations. An index cannot repair a wrong key. A transaction
 cannot decide an unowned domain policy. WAL cannot make an invalid committed
 state correct. A backup cannot make an unsafe retry idempotent.
@@ -187,10 +183,6 @@ flowchart LR
     ROOT["composition root"] -. "constructs" .-> USE
     ROOT -. "constructs" .-> SQLITE
 ```
-
-**Text equivalent.** The import use case depends on an application-owned
-repository protocol. The SQLite adapter and composition root provide its
-concrete implementation, while the planner does not depend on storage.
 
 Data flows from the bundle through the use case into the adapter. Source-code
 dependencies point toward the application-owned contract. The dashed
@@ -591,10 +583,6 @@ erDiagram
         text prerequisite_id PK,FK
     }
 ```
-
-**Text equivalent.** Import runs admit events. Concepts classify events and
-relate prerequisites. Keys connect each event to its run and concept without
-duplicating independent facts.
 
 The two relationships from `CONCEPTS` to `PREREQUISITES` have different roles:
 one edge leaves the learned concept and the other points to the required
@@ -1005,10 +993,6 @@ flowchart LR
     EXEC --> ROWS["result rows"]
 ```
 
-**Text equivalent.** SQL with bound values is parsed into a logical tree,
-rewritten, compared as physical alternatives using statistics and access paths,
-then executed against pages and storage to return rows.
-
 Logical equivalence constrains which results are legal. It does not select one
 physical plan. The optimizer chooses under incomplete estimates, bounded search,
 available operators, configuration, and current catalog statistics.
@@ -1081,10 +1065,6 @@ flowchart TD
     IDX --> READ["candidate row locations / covered values"]
     READ --> CHECK["remaining predicates + visibility checks"]
 ```
-
-**Text equivalent.** Authoritative table rows and every write update derived
-ordered index entries. An index yields candidate locations or covered values,
-then remaining predicates and visibility are checked.
 
 Costs:
 
@@ -1310,10 +1290,6 @@ stateDiagram-v2
     Failed --> Reconcile: outcome may require inspection
 ```
 
-**Text equivalent.** A transaction starts, performs reads and writes, then
-commits, rolls back, or fails. A failure requires reconciliation because its
-final effect may need inspection.
-
 Do not label an operation committed before commit succeeds. Do not label every
 commit exception “rolled back” unless the named wrapper/engine state supports
 that conclusion.
@@ -1399,10 +1375,6 @@ sequenceDiagram
         S-->>U: "classified failure"
     end
 ```
-
-**Text equivalent.** A validated M15 bundle is checked and applied through a
-repository and SQLite adapter. A second connection sees old state until commit;
-any failed check rolls back and returns a classified failure.
 
 Why validate first?
 
@@ -1640,10 +1612,6 @@ flowchart LR
     DATA --> RECOVER
     RECOVER --> STATE["consistent recovered state<br/>under assumptions"]
 ```
-
-**Text equivalent.** Transaction changes create journal or WAL records, cross a
-named durability boundary, propagate database pages, and combine with restart
-recovery to produce a consistent state under stated assumptions.
 
 ### 6.2 SQLite rollback journal and WAL are different modes
 
@@ -3993,10 +3961,6 @@ flowchart TD
     ISO --> REC["journal / recovery"]
     REC --> RESTORE["independent backup / restore"]
 ```
-
-**Text equivalent.** Facts and ownership lead through dependencies,
-normalization, constraints, query contracts, physical plans, transactions,
-isolation, and recovery to an independently tested backup-and-restore path.
 
 Reflection:
 

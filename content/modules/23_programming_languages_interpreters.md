@@ -155,13 +155,6 @@ flowchart LR
     B --> M24["M24: CPython implementation and measured cost"]
 ~~~
 
-**Text equivalent:** Pebble explains how a tree gets meaning from environments
-and rules. Atlas Query applies the same parser/evaluator separation to a
-read-only learning metric, then adds Module 22’s scoped authorization before a
-fixed capability is handed in. Module 24 will ask how CPython implements and
-measures a trusted Python program; it does not retroactively make bytecode
-the language specification.
-
 ### 1.2 The fixed Atlas incident
 
 After the delayed-import investigation, an analyst asks for a small aggregate
@@ -509,10 +502,6 @@ flowchart BT
     A["call frame<br>record → 4<br>parent → outer"]
     G --> O --> C --> A
 ~~~
-
-**Text equivalent:** The closure carries a lexical parent. During the call,
-`record` comes from the new call frame and `threshold` comes from the captured
-outer frame. A caller’s unrelated `threshold` is not consulted.
 
 ### Function values are data plus a remembered environment
 

@@ -143,13 +143,6 @@ flowchart LR
     B --> M["maintained product / responsible contribution"]
 ~~~
 
-**Text equivalent:** Start with a release claim owned by a named person. Join
-the prior state, proof, cost, representation, contract, transaction, systems,
-trust, runtime, and human-impact artifacts into a single architecture thread.
-Use that thread to diagnose failure and judge evidence. The output is a
-bounded release decision and a maintenance handoff, not a claim that every
-unknown is solved.
-
 ### 1.1A The advanced-evidence annex
 
 The capstone does not ask for a ceremonial appendix of M27–M36 topic names. It
@@ -366,13 +359,6 @@ flowchart LR
     API -->|audit outcome| L["structured local log\nobservation boundary"]
 ~~~
 
-**Text equivalent:** A learner uses the Atlas interface. The interface sends a
-validated request to an event API. The API owns the durable write and reads the
-progress store. It queries the prerequisite graph, applies a transparent
-ranking policy, and returns an optional displayable suggestion. It records a
-bounded audit outcome. The learner, not the ranker, owns whether to act on the
-suggestion.
-
 This is a context-and-container story. Zoom into a component only when the
 question needs a data structure, contract, transaction, or algorithm. Do not
 put every class on one diagram.
@@ -481,11 +467,6 @@ sequenceDiagram
     S-->>A: existing committed event
     A-->>C: same logical outcome, no second effect
 ~~~
-
-**Text equivalent:** The client submits event e-204. The API commits it, but
-the client never receives the response. The client retries using the same
-event identity. The API and store recognize the prior committed event and
-return the logical outcome without writing a second durable effect.
 
 ### Debugging lab — find the race
 
@@ -755,12 +736,6 @@ flowchart TD
     D -->|repairable gap| V["REVISE / DEFER"]
     D -->|active harm or invariant break| B["ROLL BACK / DISABLE"]
 ~~~
-
-**Text equivalent:** The release claim leads to an architecture thread. Tests,
-incident traces, security/authority review, operational/rollback evidence, and
-human-control evidence feed a claim ledger. The named owner chooses one of
-three bounded outcomes: release within scope, revise/defer because evidence is
-missing, or roll back/disable because an invariant is broken or harm is active.
 
 ### Defense format
 

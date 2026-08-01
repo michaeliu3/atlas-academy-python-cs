@@ -102,12 +102,6 @@ flowchart LR
     M27 --> C["M26: capstone evidence and oral defense"]
 ~~~
 
-**Text equivalent:** M2 supplies recursion and the first induction pattern.
-M4 supplies the introductory logical and relational vocabulary. M5 supplies
-cost-model language. M27 strengthens all three. Its proof and modeling habits
-then feed algorithm design, numerical and statistical modeling, computability,
-AI/ML claims, and the final release argument.
-
 ### 1.3 Entry retrieval
 
 Answer aloud or in three short notes before reading further.

@@ -2,11 +2,12 @@
 
 **Arc VII — Formal limits, classical AI, and learning systems**
 
-> **Authoring-only learning workbook.** This is a connected, learner-facing
-> draft for review. M35 remains hidden from the Atlas reader until its
-> canonical source map, contract, accessibility review, release evidence, and
-> prerequisite evidence are complete. Nothing in this workbook unlocks M35,
-> M36, M25, or M26.
+> **Authoring-only private study pack.** This is a connected draft for
+> instructor-led study in the designated Codex chats. M35 remains hidden from
+> the Atlas reader until its canonical source map, contract, accessibility
+> review, release evidence, and prerequisite evidence are complete. Private
+> study is not a portal unlock, Core credit, published/reviewed release, or
+> mastery claim; nothing in this workbook unlocks M35, M36, M25, or M26.
 
 **Bridge.** M28 made representation a geometrical choice with numerical
 consequences. M30 made an evaluation result conditional on a data-generating

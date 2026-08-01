@@ -124,14 +124,6 @@ flowchart LR
     M30 --> M25["M25: evidence-grounded AI synthesis"]
 ~~~
 
-**Text equivalent:** M27 supplies precise events and proof language. M28
-supplies data-matrix and covariance geometry. M29 supplies expectation,
-integration, convergence, and numerical caution. M30 turns all three into a
-probability-to-inference chain. M31 owns objectives/optimization/information;
-M32 owns production scientific computing; M34 owns richer decision models;
-M35/M36 own ML evaluation and learning theory. M25/M26 remain final synthesis,
-not prerequisites.
-
 ### 1.3 Entry retrieval
 
 Answer in short notes before beginning.
@@ -178,12 +170,6 @@ flowchart TD
     C --> R["Bounded recommendation"]
     R --> H["Human authority, revision, and record"]
 ~~~
-
-**Text equivalent:** A useful question first names the target and population.
-Only then can a sampling/assignment mechanism produce observed data. The model
-and procedure create an uncertainty statement; a diagnostic/sensitivity check
-limits it; a human decides whether the remaining evidence supports a reversible
-action. No arrow lets a score or model decide by itself.
 
 ### Inference-card example
 

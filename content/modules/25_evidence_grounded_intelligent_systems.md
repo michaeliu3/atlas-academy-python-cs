@@ -149,14 +149,6 @@ flowchart LR
     H --> M26["M26: maintained<br/>capstone + defense"]
 ~~~
 
-**Text equivalent:** Modules 8–11 already let Atlas enumerate and rank
-possible actions. Modules 12–16 make data and behavior durable and reviewable.
-Modules 20–22 prevent a network response, trace, or permission-shaped field
-from becoming unjustified authority. Module 23 gives a narrow query path;
-Module 24 demands controlled measurement. Module 25 joins those inputs only
-at a human decision surface. Module 26 then requires the resulting feature to
-be defended as part of one maintained system.
-
 This is a concept/evidence map, not next/previous navigation. The canonical
 route is **M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26**. M24 is a required
 systems-evidence thread, not M25's immediate navigation predecessor; the direct
@@ -339,12 +331,6 @@ flowchart LR
     H --> R["bounded, redacted evidence"]
 ~~~
 
-**Text equivalent:** a baseline lets us ask whether a new aid is better than
-the existing interface. A candidate set prevents an opaque score from silently
-choosing what exists. The score is an advisory proposal. Explanation and
-uncertainty let a person judge it. The learner remains able to choose or
-refuse; the resulting observation is limited evidence, not a universal claim.
-
 ### Prediction exercise
 
 Which statement is the narrowest useful first feature goal?
@@ -419,12 +405,6 @@ flowchart LR
     Q --> A["purpose-scoped display"]
     A --> O["minimized observation"]
 ~~~
-
-**Text equivalent:** the feature builder may use only records available at
-the stated prediction time. A later result can be a label only when its
-meaning is declared. The split is a boundary between development evidence and
-held-out evaluation. The display has a separate purpose/authority check. A
-dismissal remains an observation whose meaning must be interpreted carefully.
 
 ### Feature, label, and outcome are different things
 
@@ -544,12 +524,6 @@ flowchart LR
     A["M22 authorization"] --> W
 ~~~
 
-**Text equivalent:** candidate generation says what actions are eligible.
-Scoring gives a value under one mechanism. Ranking compares eligible values
-with an explicit tie policy. Product policy decides what to display. The
-learner can choose or override. A later state change has a separate Module 22
-authorization/workflow boundary.
-
 ### A small model is still a model
 
 For one optional learned alternative, use a fixed, readable linear score:
@@ -652,11 +626,6 @@ flowchart LR
     P --> D["display/decision policy"]
     D --> H["human choice"]
 ~~~
-
-**Text equivalent:** a raw score may support ranking. Calibration is additional
-evaluation evidence. A probability label is limited to the evaluated
-population and outcome. A policy decides how to display it; a person still
-makes the choice.
 
 ### Denominators and uncertainty
 
@@ -761,11 +730,6 @@ flowchart TB
     T --- A
 ~~~
 
-**Text equivalent:** every suggestion has a visible identity, a limited reason,
-an uncertainty statement, alternatives, and controls. The same information
-has a text equivalent and a keyboard/assistive-technology path. Feedback is
-an observation with a stated meaning, not an automatic reward signal.
-
 ### Explanation categories
 
 | Explanation | What it may honestly say | What it must not imply |
@@ -864,12 +828,6 @@ flowchart LR
     P["tool/capability policy"] --> W
     X["evaluation harness + limits"] --> M
 ~~~
-
-**Text equivalent:** input is validated for the declared task. A trusted
-context builder selects only allowed, redacted facts. The model/retrieval
-adapter emits a proposal. Output validation and provenance make its limits
-visible. The learner chooses. A state-changing workflow needs separate
-authority; a model response cannot mint it.
 
 ### Retrieval, generation, and tool use are different boundaries
 

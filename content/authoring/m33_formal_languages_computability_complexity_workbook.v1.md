@@ -1,9 +1,10 @@
 # M33 candidate workbook — Formal Languages, Computability & Complexity
 
-**Authoring-only candidate.** This is a complete draft of learner material for
-review. It intentionally lives outside the reader route and does not change
-the course graph, availability, prerequisite policy, source-map binding,
-release state, or publication claim.
+**Authoring-only private study pack.** This is a complete draft for
+instructor-led study in the designated Codex chats. It intentionally lives
+outside the portal reader route; private study does not change the course
+graph, availability, prerequisite policy, source-map binding, release state,
+publication claim, or Core credit.
 
 **Knowledge arc:** systems, languages, and AI-era reasoning
 
@@ -748,7 +749,7 @@ solutions.
 
 ## Candidate release boundary
 
-Before this draft may move into a learner route, it still needs its
+Before this draft may move into the released portal learner route, it still needs its
 contract-bound source ledger, reviewed accessible interaction or equivalent
 activity, diagnostic/review integration, source/visual review, candidate CI
 and release evidence, deployment provenance, and human approval. Until then

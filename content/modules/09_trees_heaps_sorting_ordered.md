@@ -72,8 +72,6 @@ flowchart LR
     M9 --> M24["Module 24<br/>CPython source + profiling"]
 ```
 
-**Text alternative:** Recursion, abstraction, cost, representation, access policy, and identity lookup converge in ordered structures; their resulting models feed graph algorithms, algorithm design, database indexes, and CPython analysis.
-
 ### The problem that forces this module
 
 Module 8's mapping can retrieve `record_by_id["m9"]` with expected constant-time lookup under its stated model. But a hash table deliberately does not arrange keys by their comparison order.
@@ -126,8 +124,6 @@ flowchart LR
     NEXT --> M10["M10 prerequisite planner"]
     SEARCH --> M10
 ```
-
-**Text alternative:** Atlas keeps catalog identity authoritative, derives review candidates with a heap and title lookup with a trie, then carries those results into prerequisite planning.
 
 ### Backward connections
 
@@ -261,8 +257,6 @@ flowchart TD
     PREFIX -- "no" --> ORDERED["balanced ordered-set idea"]
 ```
 
-**Text alternative:** Choose the structure from the operation required: exact identity, static ordered search, repeated minimum, prefix search, or broader ordered navigation.
-
 The arrows are starting points, not universal answers. Memory, update rate, persistence, concurrency, adversarial inputs, and library availability can change a decision.
 
 ### Operation comparison under course models
@@ -383,8 +377,6 @@ flowchart TD
     T --> Z["z · depth 2 · height 0"]
 ```
 
-**Text alternative:** The binary tree has root `m`, two internal children, and four leaves; depth increases from root to leaf while height decreases.
-
 The path from `m` to `h` has two edges. The subtree rooted at `f` contains `f`, `b`, and `h`.
 
 ### 6.2 Recursive representation
@@ -485,8 +477,6 @@ flowchart TD
     LEFT --> Q
     RIGHT --> Q
 ```
-
-**Text alternative:** A binary-search-tree lookup keeps only the subtree whose key interval can still contain the target.
 
 ### 7.2 Minimal executable model
 
@@ -602,8 +592,6 @@ flowchart TD
     D --> E["5"]
 ```
 
-**Text alternative:** Inserting sorted keys without balancing preserves BST order but gives a five-node chain rather than logarithmic-height branching.
-
 It is semantically a valid BST but structurally a linked chain. Search for `5` takes five node visits.
 
 ### Height facts
@@ -661,8 +649,6 @@ flowchart TD
     Y --> C["C<br/>keys &gt; y"]
 ```
 
-**Text alternative:** Before rotation, `x` is above `y`; ordered regions are `A, x, B, y, C` in in-order traversal.
-
 After rotating left at `x`:
 
 ```mermaid
@@ -675,8 +661,6 @@ flowchart TD
     X --> A["A<br/>keys &lt; x"]
     X --> B["B<br/>x &lt; keys &lt; y"]
 ```
-
-**Text alternative:** After rotation, `y` is above `x`, but an in-order traversal still yields `A, x, B, y, C`.
 
 The in-order sequence remains:
 
@@ -881,8 +865,6 @@ flowchart TB
     A1 --> A4["index 4 · key 8"]
     A2 --> A5["index 5 · key 9"]
 ```
-
-**Text alternative:** Heap array positions encode parent-child links: index `0` has children `1` and `2`; index `1` has `3` and `4`; index `2` has `5`.
 
 Array view:
 
@@ -1359,8 +1341,6 @@ flowchart TD
     C3 --> L4["..."]
 ```
 
-**Text alternative:** A comparison sort gains information one binary comparison at a time, so its decision tree must have enough leaves for all permutations.
-
 A binary tree of height `h` has at most `2^h` leaves. Correctness needs at least `n!` distinguishable leaves:
 
 `2^h ≥ n!`.
@@ -1430,8 +1410,6 @@ flowchart TD
     O --> R3["r"]
     R3 --> D["d · record"]
 ```
-
-**Text alternative:** The prefix `rec` is stored once; it branches into the words `recursive` and `record`.
 
 The node reached by `"rec"` roots exactly the subtree of matching normalized keys in this tiny example.
 
@@ -1573,8 +1551,6 @@ flowchart LR
     CAT -. "rebuild" .-> TRIE
     LIVE -. "compact/rebuild" .-> HEAP
 ```
-
-**Text alternative:** Catalog identity and active-review priority are authoritative in different domains; the trie and heap are rebuildable derived indexes checked by a verifier.
 
 The word “authoritative” is used twice for different domains:
 
@@ -2681,8 +2657,6 @@ flowchart TD
     STALE --> EVID["tests + proofs + metrics<br/>rebuild + review"]
     EVID --> M10["M10 graph algorithms"]
 ```
-
-**Text alternative:** Ordered operations choose sorting, heap, tree, or trie mechanisms; Atlas combines them with authoritative dictionary state and revision checks before graph planning.
 
 ### Keep these six statements
 

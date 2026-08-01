@@ -126,16 +126,6 @@ flowchart LR
     D --> M32["M32: systems languages,<br/>scientific Python & accelerators<br/>(authoring-only)"]
 ~~~
 
-**Text equivalent:** earlier modules tell us what the program means, what data
-structures and APIs promise, what resources the operating system mediates, and
-why an observation has limited scope. Module 24 adds a disciplined bridge from
-that semantic model to a particular CPython implementation and a controlled
-experiment. **Canonical forward handoff: Module 32.** Module 32 is
-authoring-only in the current course release, so Module 24 ends the currently
-readable runtime-evidence path rather than unlocking a next Core module.
-Modules 25 and 26 are later preview-only synthesis/capstone material after the
-M31–M36 chain; they are not Module 24's direct learner path.
-
 ### 1.2 The fixed Atlas incident
 
 The reporting route currently materializes all matching learning events, then
@@ -280,10 +270,6 @@ flowchart LR
     B --> L
 ~~~
 
-**Text equivalent:** report and debug_snapshot both point to the same list.
-Deleting report removes that binding. It does not prove the list is
-unreachable because debug_snapshot still points to it.
-
 ### What Python promises and what it does not
 
 The Python data model gives objects identity, type, and value. It does not
@@ -427,9 +413,6 @@ flowchart TB
     N --> Z["Do not infer Python owner"]
     P --> W["Do not infer Python allocation site"]
 ~~~
-
-**Text equivalent:** each lens answers a different question. A number from one
-lens cannot silently answer another lens’s question.
 
 ### Prediction exercise
 
@@ -864,15 +847,17 @@ reporting incident and include:
   workload or runtime version.
 
 **Canonical forward handoff: Module 32.** Module 32 is authoring-only in the
-current course release, so this dossier is a stopping point for the readable
-runtime-evidence branch—not an unlock token for another module. When the
-advanced chain is released, carry this discipline into its systems-language and
-accelerator work. Modules 25 and 26 remain later preview-only synthesis and
-capstone material after M31–M36, not Module 24's next learning step. Their
-shared conceptual lesson remains useful: a score, ranking, model, agent output,
-or retrieved text is not a decision, an authority grant, a probability, or a
-human benefit until its data lineage, evaluation, policy, explanation, and
-override path are explicit.
+portal, so this dossier is a stopping point for the reader-visible
+runtime-evidence branch—not an unlock token for another module. In the
+designated private guided route, the M32 draft pack may be used only for
+private instructor-led draft study; it is not a portal unlock, Core credit, or
+release claim. Carry this discipline into its systems-language and accelerator
+work there. Modules 25 and 26 remain later preview-only synthesis and capstone
+material after M31–M36, not Module 24's next learning step. Their shared
+conceptual lesson remains useful: a score, ranking, model, agent output, or
+retrieved text is not a decision, an authority grant, a probability, or a human
+benefit until its data lineage, evaluation, policy, explanation, and override
+path are explicit.
 
 ---
 

@@ -13,7 +13,7 @@ We derive analysis from the execution model in Module 1, recursive structure in 
 ```mermaid
 %% atlas-diagram-id: m05-analysis-knowledge-bridge
 %% atlas-diagram-title: Earlier execution, recursion, ADT, and proof ideas lead to algorithm analysis
-%% atlas-diagram-alt: Execution steps, recursion, ADT operations, and counting and proof supply a cost model, recurrence, operation costs, and a bound. The bound predicts growth, which is measured and explained before later data-structure and algorithm modules.
+%% atlas-diagram-alt: Execution steps, recursion, ADT operations, and counting and proof supply a cost model, recurrence, operation costs, and a bound. The bound predicts growth, which is measured and explained before Module 27 strengthens the proof bridge for later data-structure and algorithm modules.
 flowchart LR
     EXEC["Execution steps<br/>Module 1"] --> MODEL["Choose a cost model"]
     REC["Recursion<br/>Module 2"] --> RECUR["Write a recurrence"]
@@ -25,7 +25,8 @@ flowchart LR
     BOUND --> PREDICT["Predict growth"]
     PREDICT --> MEASURE["Measure implementation"]
     MEASURE --> EXPLAIN["Explain agreement or mismatch"]
-    EXPLAIN --> DS["Modules 6–11<br/>data structures + algorithms"]
+    EXPLAIN --> M27["Module 27<br/>discrete proof bridge"]
+    M27 --> DS["Modules 6–11<br/>data structures + algorithms"]
 ```
 
 Analysis is a model of growth. Measurement is an observation of a particular implementation on a particular machine. We need both, and we must not confuse them.
@@ -923,7 +924,9 @@ question for the TA if the analytic and empirical stories disagree.
 At **+1, +7, and +21 days**, derive one bound from a fresh snippet and state
 one assumption that could invalidate it. M5 is ready when the learner can give
 an input model, a tight-enough argument, and an evidence boundary—not just a
-Big-O label. Carry the representation/cost trade-off into **M6**.
+Big-O label. Carry the representation/cost trade-off into **M27**, where the
+counting, recurrence, and proof language becomes explicit discrete
+mathematics. After that bridge, carry the same trade-off into **M6**.
 
 **Source and reuse note:** Atlas's diagnostic, traces, and dossier prompts are
 original course material; linked university and documentation sources are used

@@ -105,15 +105,6 @@ flowchart LR
     M28 --> M25["M25: evidence-grounded AI synthesis"]
 ~~~
 
-**Text equivalent:** M27 provides formal definitions, proof repair, matrix-free
-function reasoning, and evidence boundaries. M17 contributes an execution and
-floating-point representation lens. M28 needs both: it adds geometry,
-coordinate systems, and numerical error. M29 uses its linear approximations;
-M30 uses its covariance geometry; M31 uses gradients and PSD curvature; M32
-makes its array and accelerator mechanics concrete; M35 derives PCA and
-representation evaluation from it. M25/M26 remain final synthesis modules, not
-prerequisites for this mathematics.
-
 ### 1.3 Entry retrieval
 
 Before continuing, answer in short notes.

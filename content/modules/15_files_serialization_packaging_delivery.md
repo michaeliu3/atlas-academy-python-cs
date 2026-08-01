@@ -107,8 +107,6 @@ flowchart LR
     M15 --> M22["M22 · supply chain,<br/>security, privacy"]
 ``` 
 
-**Text alternative.** Modules 1, 3, 6–8, and 12–14 provide representation, schema, I/O, streaming, identity, component, evidence, and change disciplines to M15. M15 then hands durable-artifact ideas to M16 transactions, M18 operating systems, M20 network protocols, and M22 security.
-
 ### The problem that forces this module
 
 An early Atlas snapshot writer is short:
@@ -176,8 +174,6 @@ flowchart LR
     WHEEL --> INSTALL["fresh environment<br/>installed command"]
     INSTALL --> RELEASE["release record<br/>identity + evidence + rollback"]
 ```
-
-**Text alternative.** A `StudyEvent` becomes stable schema values, canonical JSON text, strict UTF-8 bytes, and a staged replacement file. That artifact is exposed through a CLI, built from a source tree into sdist and wheel artifacts, installed freshly, then recorded in a release with identity, evidence, and rollback information.
 
 ### Backward connections
 
@@ -344,8 +340,6 @@ flowchart TB
     E -. "local trust no longer suffices" .-> R
 ```
 
-**Text alternative.** A live process crosses a file boundary, then a time/version boundary, an artifact boundary, an installation environment, and a release boundary. Each step makes a formerly implicit assumption unavailable and adds a wider responsibility: schema, migration, build artifact, installation, trust, or rollback.
-
 Each outer layer preserves earlier meaning while adding a wider fault model. Packaging does not repair a wrong schema. Provenance does not repair a wrong algorithm. A release record does not make an unsafe parser safe.
 
 ### 4.3 Serialization is not persistence
@@ -375,8 +369,6 @@ flowchart LR
     D --> REC["recovery<br/>usable state after failure"]
     REC --> B["backup<br/>independent retained copy"]
 ```
-
-**Text alternative.** Serialization maps a value to bytes. Persistence adds a name and lifetime; publication changes visibility; durability asks what survives; recovery determines usable state after failure; and backup retains an independent copy. None of these later promises is guaranteed merely by completing an earlier one.
 
 The arrows are conceptual dependencies, not an assurance that doing the left step automatically supplies the right one.
 
@@ -421,8 +413,6 @@ flowchart LR
     U16 -->|UTF-16-LE decode| CP
     U8 -. "wrong decoder" .-> FAIL["error or wrong text"]
 ```
-
-**Text alternative.** The text value `café` can encode to UTF-8 bytes `63 61 66 c3 a9` or UTF-16-LE bytes `63 00 61 00 66 00 e9 00`. The matching decoder restores the text; a mismatched decoder can fail or yield incorrect text.
 
 The text value does not “contain UTF-8.” UTF-8 is one representation chosen at a boundary.
 
@@ -521,8 +511,6 @@ flowchart LR
     OBJ -. "can change before open" .-> RACE["check/use race"]
 ```
 
-**Text alternative.** Untrusted path text first becomes a lexical path value, then resolves through filesystem rules to a current directory entry or object, and only then becomes an opened handle for I/O. Symlink, mount, and case rules are platform policy, and the object can change between a check and opening it.
-
 For the first Atlas CLI, the destination path is selected by the local operator. Import formats do not get to choose arbitrary output paths. Archive member names are treated as untrusted metadata and never joined blindly to a destination.
 
 ### 5.6 Cost model
@@ -556,8 +544,6 @@ flowchart TB
     RAW --> OS["OS handle + filesystem/device"]
 ```
 
-**Text alternative.** `TextIOWrapper` maps strings to bytes with encoding and newline policy. A buffered stream groups operations over a raw binary stream, which in turn uses an operating-system handle and a filesystem or device.
-
 The exact stack depends on how the stream is opened. A stream can be readable but not writable, non-seekable, buffered, line-buffered, or closed. Code should depend on the capabilities it needs, not an imagined universal “file.”
 
 ### 6.2 Enter and exit are control-flow hooks
@@ -579,8 +565,6 @@ flowchart TD
     E2 -->|true| SUP["exception suppressed"]
     E1 --> CONT["continue/return"]
 ```
-
-**Text alternative.** The context expression is evaluated and `__enter__` is called. If entry raises, the body never runs. Otherwise the body executes; normal completion calls `__exit__(None, None, None)`, while an exception calls `__exit__` with exception details, which either propagates or suppresses it.
 
 A file context manager normally attempts to close the stream. That does not establish:
 
@@ -710,8 +694,6 @@ flowchart LR
     G --> SERR["shape/version/limit error"]
     S --> DERR["domain invariant error"]
 ```
-
-**Text alternative.** Bytes first decode as strict UTF-8 text, then a JSON parser produces a grammar value, a schema validator accepts a v1 schema value, and domain constructors build `StudyEvent` values. Byte limits, grammar errors, schema/version errors, and domain-invariant errors remain separate failure categories.
 
 Valid JSON such as `{"schema_version":1,"events":"many"}` can fail the Atlas schema. Schema-valid data can still fail a domain invariant such as confidence in `[0,1]`.
 
@@ -893,8 +875,6 @@ flowchart TD
     EN --> INV
 ```
 
-**Text alternative.** The bundle root contains a format identity, schema version, manifest, and ordered event array. The manifest records event count and a SHA-256 digest of canonical event bytes; every event in the array must satisfy `StudyEvent` invariants.
-
 The manifest is deterministic for the same ordered domain values under the pinned encoder policy because it contains no clock, random ID, host path, or tool-specific environment detail. Release-time provenance belongs in the external evidence record, where nondeterministic facts can be named honestly.
 
 ### 8.2 Version dispatch precedes interpretation
@@ -912,8 +892,6 @@ flowchart TD
     M --> D["construct domain values"]
     V --> D
 ```
-
-**Text alternative.** Bounded bytes are parsed as JSON and checked for a root object with an integer version. Version v0 is validated, migrated through a pure v0-to-v1 function, and revalidated; v1 is validated directly; every other version is rejected before domain values are constructed.
 
 Do not “try the newest parser, then fall back until something works.” That can reinterpret malformed new data as valid old data. Version dispatch should be explicit and unknown versions should fail closed unless the format deliberately specifies another behavior.
 
@@ -968,8 +946,6 @@ flowchart LR
     V1 -->|native reader| APP["StudyEvent domain"]
     V2["future v2"] -. "no edge yet" .-> REJECT["unsupported version"]
 ```
-
-**Text alternative.** A validated v0 score in the range 0–100 can follow a pure migration edge to v1 confidence in the range 0–1, then enter the `StudyEvent` domain. A future v2 has no declared migration edge and is therefore unsupported.
 
 As versions grow, define supported paths deliberately:
 
@@ -2038,8 +2014,6 @@ flowchart TB
     WHEEL --> INSTALL
 ```
 
-**Text alternative.** A shell user or script invokes the `atlas-bundle` launcher, which calls `atlas_cli.cli:main` and then public bundle operations over domain values and a JSON/file adapter. The build backend creates wheel members, and an installer uses that wheel to provide the launcher and installed main module.
-
 The shell contract includes:
 
 - command/subcommand/argument grammar;
@@ -2114,8 +2088,6 @@ sequenceDiagram
     B-->>ART: emit artifact
     F-->>U: report artifact paths
 ```
-
-**Text alternative.** A learner or release job asks a build frontend for an sdist and wheel. The frontend reads `pyproject.toml`, creates an isolated build environment, installs build requirements, invokes backend hooks that read selected source files, and reports the resulting artifact paths.
 
 Build isolation limits some undeclared build-environment coupling. It does not sandbox malicious build code, remove network/publisher trust, or guarantee reproducible bytes.
 
@@ -2224,8 +2196,6 @@ flowchart TD
     RES["resolver + index + environment"] -. "selects" .-> A
     LOCK["lock/constraints policy"] -. "narrows/records" .-> A
 ```
-
-**Text alternative.** `atlas-learning-cli` declares direct requirement A. A brings transitive requirements B and C, both leading to selected artifact D. Project metadata permits candidate versions, while the resolver, index, environment, and lock or constraint policy determine which candidate is actually selected.
 
 Two installs from the same broad requirement can legitimately select different transitive graphs as indexes, releases, markers, platforms, and solver inputs change.
 
@@ -2352,8 +2322,6 @@ stateDiagram-v2
     Observed --> Retained: acceptance window passes
 ```
 
-**Text alternative.** A release candidate moves from `Proposed` to `Built`, `Inspected`, `Installed`, `Verified`, `Approved`, `Promoted`, and `Observed` only when each transition has its named evidence. After observation, it is retained when its acceptance window passes or rolled back through a compatible recovery route.
-
 An artifact can move only when the transition’s evidence exists. “CI is green” does not silently perform approval or promotion.
 
 ### 14.3 Supply-chain trust map
@@ -2375,8 +2343,6 @@ flowchart LR
     PROV["provenance + external digest"] -. "binds claims" .-> ART
     PERM["minimal workflow permissions"] -. "limits authority" .-> RUNNER
 ```
-
-**Text alternative.** Authors and reviewers create a source revision. A build runner and backend produce an sdist or wheel, an artifact store or index serves it to a resolver and installer, and installation creates a runtime environment. Publisher identity, provenance and digests, and minimal workflow permissions constrain different parts of that path.
 
 Each arrow can be attacked or misconfigured. Controls answer different questions:
 
@@ -2418,8 +2384,6 @@ flowchart TB
     CHECK -->|yes under tested contract| SIMPLE["artifact rollback may be viable"]
     CHECK -->|no / unknown| PLAN["forward fix, dual reader,<br/>restore independent backup,<br/>or explicit downgrade migration"]
 ```
-
-**Text alternative.** A new code artifact and a new data schema meet at one question: can the old code read the new data? If a tested contract says yes, artifact rollback may work; if not or unknown, choose a forward fix, dual reader, independent backup restore, or explicit downgrade migration.
 
 Rollback questions:
 
@@ -3665,8 +3629,6 @@ flowchart TB
     COST["time + memory + I/O<br/>latency + human review"] -. "cross-cuts" .-> VALUE
     COST -. "cross-cuts" .-> ENV
 ```
-
-**Text alternative.** Domain values move through an external schema, parser or serializer, UTF-8 bytes, a digest, resource lifetime, staged file publication, CLI behavior, project metadata, built artifacts, installation, release, and rollback. Trust limits cross-cut parsing, publication, wheels, and release; time, memory, I/O latency, and review cost cross-cut the whole system.
 
 ### 22.1 The connected explanation
 

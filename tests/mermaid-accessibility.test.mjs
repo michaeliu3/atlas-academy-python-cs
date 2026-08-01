@@ -263,3 +263,22 @@ test("Module 29's continuous-change prerequisite map has a concise, scoped text 
   assert.equal(blocks[0].metadata.id, "m29-continuous-change-prerequisite-map");
   assert.match(blocks[0].metadata.alternative, /M25 remains later synthesis/u);
 });
+
+test("canonical workbooks do not duplicate renderer-owned Mermaid alternatives", async () => {
+  const manifest = JSON.parse(
+    await readFile(new URL("../content/modules/manifest.json", import.meta.url), "utf8"),
+  );
+  const duplicateAlternative = /```mermaid[\s\S]*?```(?:\r?\n){1,2}\*\*Text (?:alternative|equivalent)(?::|\.\*\*)/gu;
+
+  for (const { filename } of manifest.modules) {
+    const markdown = await readFile(
+      new URL(`../content/modules/${filename}`, import.meta.url),
+      "utf8",
+    );
+    assert.doesNotMatch(
+      markdown,
+      duplicateAlternative,
+      `${filename} must leave the single visible Mermaid alternative to MermaidDiagram.`,
+    );
+  }
+});

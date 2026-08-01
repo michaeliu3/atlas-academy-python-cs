@@ -1,9 +1,10 @@
 # M34 candidate workbook — Classical AI: Search, Constraints & Decision
 
-**Authoring-only candidate.** This is a complete draft of learner material for
-review. It is intentionally outside the reader route. It does not satisfy or
-bypass M33, change the canonical graph, create a studio, grant authority to a
-solver, or make a release/publication claim.
+**Authoring-only private study pack.** This is a complete draft for
+instructor-led study in the designated Codex chats. It is intentionally outside
+the portal reader route. Private study does not satisfy or bypass M33, change
+the canonical graph, create a studio, grant authority to a solver, give Core
+credit, or make a release/publication claim.
 
 **Knowledge arc:** systems, formal reasoning, and AI-era design
 
@@ -734,7 +735,7 @@ course slides, problem sets, or solutions.
 
 ## Candidate release boundary
 
-Before this draft may move into a learner route, it still needs its
+Before this draft may move into the released portal learner route, it still needs its
 contract-bound source ledger, reviewed accessible interaction or equivalent
 activity, deterministic reference checks where appropriate, diagnostic/review
 integration, source/visual review, candidate CI and release evidence,

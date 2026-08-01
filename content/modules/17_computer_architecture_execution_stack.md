@@ -185,7 +185,7 @@ Those questions are connected by ownership, not by vocabulary.
 ```mermaid
     %% atlas-diagram-id: m17-execution-stack-roadmap
     %% atlas-diagram-title: From durable data to a bounded machine explanation
-    %% atlas-diagram-alt: A validated M16 export is represented, transformed by logic and clocked state, implemented by an ISA and processor, shaped by memory hierarchy, and observed before Module 18 takes ownership of operating-system boundaries.
+    %% atlas-diagram-alt: A validated M16 export is represented, transformed by logic and clocked state, implemented by an ISA and processor, shaped by memory hierarchy, and observed. Modules 28 through 31 then formalize numerical and optimization evidence before Module 18 takes ownership of operating-system boundaries.
 %% Module dependency path from durable Atlas data to a bounded machine explanation
 flowchart LR
     M16["M16 durable rows<br/>validated synthetic export"] --> PACK["Experiment representation<br/>priority value → array('I'), 4 B/item"]
@@ -197,12 +197,9 @@ flowchart LR
     HIER --> PY["Python execution bridge<br/>language → runtime → native software"]
     PY --> OBS["Evidence packet<br/>encoding + state trace + dis + timing"]
     OBS --> CLAIM["Bounded explanation<br/>alternatives + uncertainty"]
-    CLAIM --> M18["M18 handoff<br/>process + VM + syscall + filesystem"]
+    CLAIM --> M28["M28–M31 bridge<br/>numerical + optimization evidence"]
+    M28 --> M18["M18 later continuation<br/>process + VM + syscall + filesystem"]
 ```
-
-**Text equivalent.** A validated M16 export is represented, transformed by
-logic and clocked state, implemented by an ISA and processor, shaped by memory
-hierarchy, and observed before Module 18 takes ownership of OS boundaries.
 
 The arrows are prerequisites. Timing cannot repair a wrong semantic oracle.
 Bytecode cannot establish native events. A cache simulator cannot measure the
@@ -663,10 +660,6 @@ flowchart LR
     CTRL --> ALU
 ```
 
-**Text equivalent.** Named bits feed Boolean gates and combinational
-next-state logic. Clocked registers retain state and expose the program
-counter, register file, and remembered control to later machine operations.
-
 This is a dependency map, not a transistor schematic. The clocked model
 abstracts electrical setup/hold time, clock distribution, metastability, and
 physical power.
@@ -718,10 +711,6 @@ flowchart TB
     ALU --> PCN
     PCN --> PC
 ```
-
-**Text equivalent.** The PC fetches an instruction. Decoding selects operands
-and destinations; the ALU and data-memory path produce a write-back value; and
-control chooses the next PC and updates architectural state.
 
 For each arrow, label:
 
@@ -894,10 +883,6 @@ stateDiagram-v2
     ChoosePC --> Fetch: next architectural state
 ```
 
-**Text equivalent.** Each instruction is fetched, decoded, and evaluated
-against current state. It then follows a load, store, arithmetic, branch, or
-jump path before choosing the next PC and fetching again.
-
 This is an **instruction effects inspector**, not a claim that a physical
 processor walks these states one at a time. The next section turns the same
 visible transition into an implementation question.
@@ -1019,10 +1004,6 @@ flowchart LR
     RF -. "operands for later instructions" .-> ID
     EX -. "next-PC decision" .-> PC
 ```
-
-**Text equivalent.** Instructions pass through fetch, decode, execute, memory,
-and write-back stages separated by pipeline registers. Later instructions use
-register operands, and execute-stage control can redirect the PC.
 
 The pipeline registers retain intermediate state between clock edges. Control
 metadata must travel with values: destination register, write enable, memory
@@ -1202,10 +1183,6 @@ flowchart TB
     DRAM <--> STORE
 ```
 
-**Text equivalent.** Registers, processor caches, main memory, and persistent
-storage form levels with different capacities, access costs, and transfer
-paths. The exact cache structure is implementation-specific.
-
 This ordering is qualitative. Cache count, ownership, sizes, associativity,
 latencies, coherence, and shared/private organization vary by machine.
 Persistent storage crosses OS/device questions that Module 18 derives.
@@ -1253,10 +1230,6 @@ flowchart LR
     CMP -->|miss| FILL["fetch modeled 64-byte line<br/>replace this slot"]
     FILL --> BYTE
 ```
-
-**Text equivalent.** An item index becomes a byte address split into tag, slot
-index, and byte offset. The selected slot either matches and supplies bytes or
-misses, fetches a modeled line, replaces the slot, and then supplies bytes.
 
 In a direct-mapped cache, each block has one possible line. Associative caches
 allow several candidate lines in a set and need a replacement decision. This
@@ -1487,10 +1460,6 @@ flowchart TB
     CEVAL -. "library or I/O request" .-> OS
     OS <--> DEV
 ```
-
-**Text equivalent.** A Python result contract passes through source, CPython
-code and frame state, native runtime software, host ISA and microarchitecture,
-memory, and separately through OS and device boundaries for I/O.
 
 Arrow meanings differ:
 
@@ -1787,11 +1756,6 @@ flowchart LR
     T2 -. "hypothesis support, not identity" .-> C
 ```
 
-**Text equivalent.** The same packed data takes sequential and deterministic
-permutation routes through one kernel. Matching result oracles, disassembly,
-toy-cache traces, and counterbalanced timing vectors feed one bounded
-comparison.
-
 An observation belongs at one point. Moving it upward or downward requires a
 new argument and usually new evidence.
 
@@ -1874,10 +1838,6 @@ flowchart TB
     PIN --> BOUND
     PROV --> BOUND
 ```
-
-**Text equivalent.** An elapsed-time vector has many compatible causes,
-including native work, pipeline and cache effects, power, OS interference, and
-measurement choices. Separate evidence supports only a bounded causal claim.
 
 Several causes can act together. The goal is not always to identify one final
 cause. A professionally useful outcome can be:
@@ -2424,10 +2384,6 @@ flowchart TD
     TIME --> REPORT
     BOUND["direct / supported / unmeasured / never"] --> REPORT
 ```
-
-**Text equivalent.** Encoding probes, fixed fixtures, order choices, a toy
-cache, finite ISA, disassembly, timing, provenance, and claim boundaries
-contribute distinct evidence to one JSON packet.
 
 Review order:
 
@@ -3111,8 +3067,9 @@ transfer.
 **Counterexample:** the byte may already be in a Python buffer or OS-managed
 cache, so no new physical storage transfer is required for this call.
 
-**Route:** confident miss → Section 7.7 and prepare the M18 handoff. Correct at
-low confidence → name three possible paths without claiming which occurred.
+**Route:** confident miss → Section 7.7, record the later M18 question, and
+continue through the M28–M31 mathematical bridge. Correct at low confidence →
+name three possible paths without claiming which occurred.
 </details>
 
 ### Question 8 — Benchmark evidence and causal claims
@@ -3509,7 +3466,7 @@ Integrated performance ownership demonstration on a fresh fixture:
 
 | State | Meaning | Action |
 |---|---|---|
-| Ready | reasoning transfers and all boundaries hold | proceed to M18 |
+| Ready | reasoning transfers and all boundaries hold | continue to M28; retain M18 questions for the later systems bridge |
 | Ready with retrieval plan | ownership is correct but recall is slow/low confidence | proceed with scheduled consolidation |
 | Bridge required | one or two named dependencies are unstable | repeat matching ladder/TA microcase |
 | Reconstruct | semantics or evidence ownership is missing | return to earliest missing session |
@@ -3561,7 +3518,7 @@ the evidence of mastery.
   reversed ABBA/BAAB start; predict before running.
 - **1 week:** read an unseen sequence-scan function and audit an agent
   performance explanation without implementing first.
-- **3 weeks:** five-minute oral retrieval before M18:
+- **3 weeks:** five-minute oral retrieval in preparation for later M18 work:
 
 > How can one Python operation, one byte request, and one elapsed-time sample
 > each be real observations while none uniquely identifies the physical work
@@ -3594,7 +3551,7 @@ Reflection:
 | M15 — files/serialization | explicit byte format and I/O contract | connects portable fields to machine representation and opens OS handoff |
 | M16 — relational/transactions | pages, plans, DB caches, synthetic export | prevents database physical vocabulary becoming CPU-cache claims |
 
-### 14.2 Module 18 — Operating systems
+### 14.2 Module 18 — later systems continuation
 
 M17 ends with:
 
@@ -3602,9 +3559,10 @@ M17 ends with:
 > address space, page translation, files, permissions, scheduling, caches, and
 > devices?
 
-M18 owns process state, system calls, scheduling, virtual memory/page tables,
-filesystems, permissions, signals, page cache, and shutdown. M17 supplies the
-execution-stack and evidence-layer prerequisite.
+After the M28–M31 mathematical bridge, M18 owns process state, system calls,
+scheduling, virtual memory/page tables, filesystems, permissions, signals,
+page cache, and shutdown. M17 supplies the execution-stack and evidence-layer
+prerequisite.
 
 ### 14.3 Module 19 — Concurrency and parallelism
 
@@ -3836,8 +3794,10 @@ toy-ISA model, hardware mechanism, or measured result. Then change one label
 and ask what claim becomes invalid. Finish with one readable whiteboard trace
 and an uncertainty for the TA.
 
-### Forward handoff — M18
+### Forward handoff — M28
 
 Carry the separation of semantic contract, execution model, and measurement
-evidence into **M18**. The next module assigns ownership of resources,
-scheduling, files, authority, and durability to the operating system boundary.
+evidence into **M28**. M28–M31 turn representation, continuous change,
+uncertainty, and optimization into explicit mathematical evidence. After that
+bridge, carry the execution discipline into **M18**, where the operating system
+owns resources, scheduling, files, authority, and durability.

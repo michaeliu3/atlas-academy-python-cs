@@ -126,11 +126,6 @@ flowchart LR
     R --> M23["M23: grammar, bounded evaluator, narrow capability"]
 ~~~
 
-**Text equivalent:** A request can have a stable operation ID and a trace from
-Module 21. That can help Atlas connect local records. It does not establish who
-sent the request, whether they can request an import, or whether their
-information should be retained.
-
 ### 1.2 The fixed Atlas incident
 
 Atlas receives a delayed importer request after an asynchronous collector
@@ -222,10 +217,6 @@ flowchart LR
     W --> L["evidence store: redacted fields only"]
     U -. trace and operation ID .-> Q
 ~~~
-
-**Text equivalent:** Every arrow crosses a boundary. A field that is only data
-at the API must not quietly become authority at the worker, database,
-filesystem, process, or evidence store.
 
 ### Boundary card
 

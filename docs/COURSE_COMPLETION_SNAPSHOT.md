@@ -16,7 +16,7 @@
 | Guided Codex learning | Separate reusable TA and Study Partner packages, module contexts, whiteboard protocol, and supportive oral-defense flow exist. The two learner-designated chats have received their role handoffs. | Operational design is complete; actual Live quality, voice, math rendering, and text fallback remain platform behavior to observe in the exact chats. |
 | Notion learning record | Local-first portal plus a conditional designated-chat concise-note policy, privacy controls, templates, and existing Notion hub. | A real write/correction/deletion/pause workflow remains unverified until directly observed; no raw transcripts or sensitive data should be stored. |
 | Visual readability and accessibility | `pnpm validate:mermaid-alternatives` now reports **245/245** reader diagrams with IDs, titles, concise alternatives, and visible prose equivalents. | Authored diagram coverage is complete; broader assistive-technology and representative browser review remain separate work. |
-| Academic calibration | [Academic calibration index](ACADEMIC_CALIBRATION.md) and three official-source comparison notes cover M1–M36. | Source-backed scope calibration is complete for this pass; it supports comparable rigor, not institutional equivalence. Revisit when a genuine content gap is found. |
+| Academic calibration | [Academic calibration index](ACADEMIC_CALIBRATION.md), three official-source comparison notes, and a representative material-level review sample cover M1–M36. | Scope calibration is complete for this pass; material-level review is in progress and supports targeted improvement, not institutional equivalence. Revisit when a genuine content gap is found. |
 | 60/90/180-day plans | `LEARNER_ROUTE_PLANS.md` gives pace, evidence, buffers, and catch-up rules; `PRIVATE_GUIDED_LEARNING_ROUTE.md` connects the private advanced packs without changing portal gates. | The 60-day version is a rigorous first pass, not a mastery or degree promise. |
 | Privacy, safety, build, and Git history | Existing local-first, sanitization, build/type/lint, and Git protections remain in place. | Release-grade hardening and dependency-risk follow-up are deliberately deferred unless a concrete learner/privacy/security issue requires them. Use only additive commits and normal pushes. |
 
@@ -25,13 +25,12 @@
 1. Run a private learner walkthrough through a representative module using the
    exact Study Partner, Teaching Assistant, oral-defense, and Notion workflow;
    record only observed behavior.
-2. Finish the current content-batch validation and preserve it in an additive
-   Git commit/push.
-3. Use the calibration notes to make targeted content improvements where an
-   actual gap remains; do not add infrastructure merely to mark a checklist.
-4. Decide deliberately whether and how the private M31–M36 packs should move
+2. Use the material-level calibration sample to make targeted content
+   improvements where an actual gap remains; do not add infrastructure merely
+   to mark a checklist.
+3. Decide deliberately whether and how the private M31–M36 packs should move
    from authoring-only to a learner-visible release stage.
-5. Conduct the final requirement-by-requirement audit after those operational
+4. Conduct the final requirement-by-requirement audit after those operational
    and release-boundary decisions are evidenced.
 
 ## Deliberately deferred, not silently missing

@@ -2,11 +2,13 @@
 
 **Arc VII — Formal limits, classical AI, and learning systems**
 
-> **Authoring-only learning workbook.** This draft is not yet in the learner
-> route. M36 remains hidden until its canonical source map, structured module
-> contract, accessibility review, teaching-model evidence, release record, and
-> prerequisite evidence are complete. It does not unlock M25 or M26, certify a
-> learning system, prove learner mastery, or record a live/Notion session.
+> **Authoring-only private study pack.** This draft may be used only for
+> instructor-led study in the designated Codex chats; it is not yet a portal
+> learner route. M36 remains hidden until its canonical source map, structured
+> module contract, accessibility review, teaching-model evidence, release
+> record, and prerequisite evidence are complete. Private study does not unlock
+> M25 or M26, grant Core credit, certify a learning system, prove learner
+> mastery, or record a live/Notion session.
 
 **Bridge.** M35 made a trained model claim traceable through representation,
 data, objective, execution, evaluation, shift, and authority. M36 adds the
@@ -580,8 +582,10 @@ live chat/Notion action happened without direct evidence.
 
 The forward packet is: **assumptions, optimization/generalization gaps,
 theorem limits, reproduction record, shift/monitoring/authority boundary, and
-oral-defense reflection.** It may inform M25 only once M25’s separate graph,
-contract, source, accessibility, review, and release requirements agree.
+oral-defense reflection.** In the private guided route, it may inform a
+non-credit discussion of M25's reader-visible reference preview. It does not
+change M25's preview state, unlock M26, grant Core credit, or support a
+publication/release claim; M25's separate promotion requirements still apply.
 
 ---
 

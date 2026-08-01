@@ -63,8 +63,6 @@ flowchart LR
     SYN --> M25["M25 · Intelligent systems<br/>and evaluation"]
 ```
 
-**Text alternative.** Modules 6–10 provide representation, lazy search, indexing, ordering, and graph reasoning to M11. M11’s strategy-selection model then supports M12 components, M13 evidence, M16 transactions, M19 concurrency, and M25 intelligent systems.
-
 ### The Atlas pressure
 
 Atlas has candidate learning tasks. Each task has:
@@ -108,8 +106,6 @@ flowchart TD
     PROOF["proof vocabulary"] -.-> CERT
     AI["agent-generated patch"] -.-> VERIFY
 ```
-
-**Text alternative.** Arc II moves from history representation through bounded ingestion, indexing, ordering, and a prerequisite graph to constrained plan search. The planner is checked by an independent verifier, carries a quality certificate, and records a decision ledger.
 
 Module 11 does not discard the earlier structures. An exact planner coordinates:
 
@@ -285,8 +281,6 @@ flowchart LR
     QUALITY --> DECIDE
 ```
 
-**Text alternative.** A human need becomes an instance and candidate model, then a feasibility predicate and objective with tie rules. An algorithm returns a plan, which an independent verifier checks and a proof, bound, or heuristic label qualifies before a human decision.
-
 A test showing that code returned *a* plan addresses only one arrow.
 
 ---
@@ -451,8 +445,6 @@ flowchart TD
     RB --> COMB
 ```
 
-**Text alternative.** With one shared budget B, left and right task groups cannot be solved independently by returning one value each. Each returns its best value for every budget from 0 through B, and the combine step maximizes `left[b] + right[B-b]`.
-
 Once the combine boundary carries budget-indexed results, we are already approaching dynamic programming.
 
 ### Broken recursion
@@ -509,8 +501,6 @@ flowchart LR
     SAFE -- yes --> REDUCE["Reduce to remaining problem"]
     SAFE -- no --> FAIL["Greedy rule unproved"]
 ```
-
-**Text alternative.** To justify a greedy choice, take an arbitrary optimum and exchange in the local choice. Only if the exchanged solution remains feasible and no worse may the proof reduce to the remaining problem; otherwise the rule has no proof.
 
 The theorem belongs to the specific feasible-set structure. It does not travel merely because both problems say “minimum” or “maximum.”
 
@@ -601,8 +591,6 @@ flowchart TD
     SKIP --> BASE["smaller i"]
     TAKE --> BASE
 ```
-
-**Text alternative.** The state `OPT(i,b)` has two dependencies: skip item `i` and use `OPT(i-1,b)`, or take it and use `OPT(i-1,b-w_i) + v_i`. Both dependencies reduce `i`, forming a directed acyclic state graph.
 
 The table is one topological ordering of this DAG.
 
@@ -788,8 +776,6 @@ flowchart TD
     AB --> STOP1["budget leaves no legal addition"]
     CA --> STOP2["candidate plan"]
 ```
-
-**Text alternative.** Search starts from an empty plan. Choosing A permits B because its prerequisite is met, while choosing C before B leaves B’s prerequisite unsatisfied; choosing C after A misses its deadline. Illegal prefixes are pruned and legal prefixes end at a budget-limited plan.
 
 ### Feasibility pruning
 
@@ -1085,8 +1071,6 @@ flowchart LR
     UB --> REPORT
     LEDGER["Arc II evidence ledger"] -.-> REPORT
 ```
-
-**Text alternative.** An immutable task snapshot is validated and scored under an explicit value policy before a strategy produces a plan and claim label. An independent verifier and a relaxation upper bound both feed the decision report, together with the Arc II evidence ledger.
 
 Dependency direction:
 
@@ -1789,8 +1773,6 @@ flowchart TD
     RELAX --> GAP["quality gap"]
     PLAN --> GAP
 ```
-
-**Text alternative.** The task and policy contract is validated and transformed into prepared masks. Exact subset and backtracking planners both produce a plan for an independent error checker; a separate fractional upper bound and the plan produce the quality-gap evidence.
 
 Read boundaries before helpers:
 
@@ -2566,8 +2548,6 @@ flowchart TD
 
     VERIFY --> REPORT["Feasibility + objective<br/>quality + cost + limits"]
 ```
-
-**Text alternative.** Begin with a problem contract and a tiny exhaustive oracle. The proved structure then licenses divide and conquer, greedy choice, dynamic programming, backtracking, randomization, or approximation; every route feeds verification and a report of feasibility, objective, quality, cost, and limits.
 
 ### Keep these seven statements
 

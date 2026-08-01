@@ -49,8 +49,6 @@ flowchart LR
     ATLAS --> M11["Module 11<br/>algorithmic strategies"]
 ```
 
-**Text alternative:** Graph algorithms combine a precise graph model with a cost model, frontier policy, state evidence, and priority handling before they become an Atlas planner.
-
 The structures have distinct jobs:
 
 - the graph representation answers `neighbors(vertex)`;
@@ -270,8 +268,6 @@ flowchart LR
     MULTI -- "no" --> SETMAP["Set or neighbor map"]
 ```
 
-**Text alternative:** Choose matrix, adjacency collection, or edge list from the queries required; preserve parallel edges explicitly when they carry meaning.
-
 ### Prediction: representation loss
 
 Atlas has two routes from `graphs` to `optimization`:
@@ -309,8 +305,6 @@ flowchart TD
     PARENT --> WITNESS["Path or cycle witness"]
     DIST --> RESULT["Distance result"]
 ```
-
-**Text alternative:** Traversal is one repeated transition: take eligible work, expand represented edges, update semantic state, and retain evidence that independently justifies the result.
 
 The generic transition is:
 
@@ -359,8 +353,6 @@ flowchart LR
     L2A --> L3["Layer 3<br/>graphs"]
     L2B --> L3
 ```
-
-**Text alternative:** Breadth-first search reaches all one-edge neighbors before two-edge neighbors; this example shows two layer-one paths converging at a layer-three graph concept.
 
 ### 4.2 Predict before running
 
@@ -579,8 +571,6 @@ stateDiagram-v2
     Gray --> Black: all outgoing work finished
     Black --> [*]
 ```
-
-**Text alternative:** DFS marks vertices white before discovery, gray while they are on the active path, and black only after every outgoing edge is processed.
 
 - **white:** undiscovered;
 - **gray:** active—discovered but not finalized;
@@ -802,8 +792,6 @@ flowchart LR
     BF --> A2["Assumption:<br/>no source-reachable negative cycle<br/>for finite result"]
     DIJ --> A3["Assumption:<br/>all edge weights nonnegative"]
 ```
-
-**Text alternative:** Relaxation is shared; the graph structure and weight assumptions determine whether topological order, full rounds, or a priority frontier is safe.
 
 ### Mechanism-revealing manual step
 
@@ -1221,8 +1209,6 @@ flowchart TD
     BFQ -- "no / different scope" --> SPEC["Refine the problem contract"]
 ```
 
-**Text alternative:** Select BFS, DAG relaxation, Dijkstra, or Bellman-Ford from the question's explicit cost and structure assumptions rather than from algorithm popularity.
-
 | Algorithm | Structural/weight precondition | Main scheduling rule | Time in the stated model | Negative-cycle behavior |
 |---|---|---|---:|---|
 | BFS | equal unit edge cost | FIFO layers | `Θ(V+E)` | weights not represented |
@@ -1311,8 +1297,6 @@ flowchart LR
     ADD --> REMOVE["Remove another crossing edge"]
     REMOVE --> SAFE["No greater total weight<br/>forest remains extendable to an MST"]
 ```
-
-**Text alternative:** A light edge across a cut is safe because any heavier crossing edge on the resulting cycle can be exchanged without increasing total spanning-tree weight.
 
 Kruskal and Prim expose different cuts:
 
@@ -1559,8 +1543,6 @@ flowchart LR
     EXPLAIN --> UI["Atlas learning route UI"]
     VERIFY["Independent witness verifier"] -.-> EXPLAIN
 ```
-
-**Text alternative:** Atlas takes one versioned graph snapshot, runs question-specific algorithms over it, combines their evidence with scheduling, and formats verified route explanations for the learner.
 
 The graph and scheduler coordinate without becoming one structure:
 
@@ -2578,8 +2560,6 @@ flowchart TD
     FOREST --> VERIFY
     VERIFY --> ATLAS["Versioned Atlas planner result"]
 ```
-
-**Text alternative:** The graph model chooses the representation and state role; each algorithm produces a witness that an independent verifier checks before Atlas presents a result.
 
 ### Keep these seven invariants
 

@@ -585,7 +585,7 @@
         "supportive-oral-defense": {"status": "ambiguous", "anchors": ["13-cumulative-project-ta-protocol-and-mastery-evidence"], "note": "A project oral-defense requirement appears in prose, but no supportive adaptive protocol is indexed."},
         "ta-prompt": {"status": "pointer-present", "anchors": ["1312-ta-role", "1313-ta-response-loop-and-hint-ladder"]},
         "study-partner-prompt": {"status": "missing", "note": "No module-specific Study Partner prompt/route is found in the workbook."},
-        "forward-handoff": {"status": "pointer-present", "anchors": ["14-explicit-backward-and-forward-connections", "142-module-18--operating-systems", "147-module-26--capstone-defense"]}
+        "forward-handoff": {"status": "pointer-present", "anchors": ["14-explicit-backward-and-forward-connections", "142-module-18--later-systems-continuation", "147-module-26--capstone-defense"]}
       }
     },
     {

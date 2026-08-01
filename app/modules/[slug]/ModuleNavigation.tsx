@@ -42,7 +42,7 @@ function routeAccessNote({ availability }: AccessState) {
     case "locked":
       return "Locked. Return to the route to review its prerequisites and release boundary.";
     case "authoring-only":
-      return "In authoring. The active Core route pauses here.";
+      return "In authoring. The portal reader pauses here; private instructor-led draft study does not unlock this page or grant Core credit.";
   }
 }
 

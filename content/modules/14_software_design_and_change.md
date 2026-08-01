@@ -113,8 +113,6 @@ flowchart LR
     A --> E["Error policy"]
 ```
 
-**Text alternative.** Adding a ranking policy, retrying transient imports, adding legal plan states, and preserving old output all require changing one coupled `AtlasApplication`, which also owns parsing, ranking, workflow, formatting, and error policy.
-
 The design smell is not “the class is long.” The stronger observation is:
 
 > Decisions that change for different reasons share one owner, so unrelated
@@ -372,8 +370,6 @@ flowchart LR
     Root --> Ranker
 ```
 
-**Text alternative.** A CLI or caller reaches a compatibility façade, which sends a plan request to the planner service. The service invokes concrete importer and ranker implementations through ports and uses a workflow table; the composition root is the only component choosing those concrete objects.
-
 The façade hides the new domain snapshot from old clients for a bounded period.
 The service hides orchestration from plugins. The transition table exposes legal
 state change but hides its representation.
@@ -596,8 +592,6 @@ stateDiagram-v2
     VALIDATED --> PUBLISHED: PUBLISH
 ```
 
-**Text alternative.** The workflow starts at `DRAFT`. `VALIDATE` may move it to `VALIDATED` only when concepts are nonempty; `PUBLISH` then moves it to `PUBLISHED`. Because there is no direct `DRAFT → PUBLISHED` edge, that transition is illegal.
-
 Prediction: should `(DRAFT, PUBLISH)` default to `PUBLISHED`? No. A missing edge
 is evidence of an illegal transition, not a request to guess.
 
@@ -735,8 +729,6 @@ flowchart TB
     Bootstrap --> Presenter
 ```
 
-**Text alternative.** Domain values own state invariants. Ports depend on the domain; the application depends on ports and domain; concrete plugins also depend on ports and domain. The compatibility presenter depends on the application and domain, while bootstrap owns concrete assembly.
-
 Calls can travel outward to an injected plugin while source dependencies point
 inward toward the port. Runtime flow and knowledge direction are different
 graphs.
@@ -819,8 +811,6 @@ flowchart LR
     Change -. "must not touch" .-> Legacy["Legacy field presenter"]
 ```
 
-**Text alternative.** A bounded recency-ranking change flows from the `RankingPolicy` contract to one new plugin, composition-root wiring, the shared contract suite, and an end-to-end smoke test. It must not change importer grammar, plan transitions, or the legacy-field presenter.
-
 The dashed non-impact claims are review hypotheses. If the patch touches those
 components, require an explanation.
 
@@ -870,8 +860,6 @@ sequenceDiagram
     I-->>R: A, B, complete
     R-->>P: yield A, B
 ```
-
-**Text alternative.** The planner calls the batch loader. Importer attempt one yields A but then fails transiently while A remains hidden. Attempt two yields A and B completely, after which the loader returns A and B together to the planner.
 
 Cost: batch retry holds `Θ(n)` events and delays first output. This is a
 conscious application tradeoff, not a changed importer guarantee or free safety.
@@ -992,8 +980,6 @@ gitGraph
     commit id: "C4 urgent fix"
     merge refactor id: "M"
 ```
-
-**Text alternative.** History begins with commits C0 and C1 on main. A refactor branch adds a seam and moves the planner, while main receives an urgent fix; the refactor branch is then merged into main as M, which has two parents.
 
 The merge commit can have two parents. The branch name did not contain copies of
 every file; it moved to point at successive commits.
@@ -2850,8 +2836,6 @@ flowchart TD
     Review --> Verification["Independent bounded evidence"]
     Verification --> Defense["Oral defense + handoff"]
 ```
-
-**Text alternative.** Change pressure identifies responsibility, cohesion, and coupling. M12 contracts and M13 evidence define observations to preserve; decomposition, inward dependencies, legal state, staging, Git history, and migration lead to review, bounded verification, oral defense, and a forward handoff.
 
 ### 22.1 One connected explanation
 

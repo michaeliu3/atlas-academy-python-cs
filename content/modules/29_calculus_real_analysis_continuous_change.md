@@ -118,14 +118,6 @@ flowchart LR
     M29 --> M25["M25: evidence-grounded AI synthesis"]
 ~~~
 
-**Text equivalent:** M27 supplies quantified claims and proof repair. M28
-supplies norms, linear maps, conditioning, and shape-aware representation.
-M29 combines them to reason about continuous change and approximation. M30
-owns probability, measure, expectation, and statistical inference; M31 owns
-optimization and convergence algorithms; M32 owns production autodiff and
-accelerators. M25/M26 remain final synthesis modules, not prerequisites for
-this mathematical bridge.
-
 ### 1.3 Entry retrieval
 
 Before continuing, answer in short notes.

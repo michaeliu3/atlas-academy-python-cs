@@ -114,7 +114,7 @@ export default function AtlasCoreRoutePage() {
             </div>
           </dl>
           <p className={styles.availability}>
-            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules stay visibly planned until their source maps, studios, and workbooks pass release checks.
+            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules remain unavailable as portal reader pages while their release material is reviewed.
           </p>
           <p className={styles.availability}>
             <strong>Open material is available for study, not a published,
@@ -123,6 +123,16 @@ export default function AtlasCoreRoutePage() {
             a scroll, or a studio interaction. Use the academic prerequisite
             map and a Codex learning conversation to choose and record evidence
             deliberately.
+          </p>
+          <p className={styles.availability}>
+            <strong>Private guided continuation.</strong> The course owner may
+            use the authoring-only M31–M36 draft packs only with the designated
+            Teaching Assistant and Study Partner chats. That private
+            instructor-led study does not make a portal page available, record
+            Core credit, or create a publication claim. Use the{" "}
+            <Link href="/learning-partners">Teaching Assistant and Study Partner guide</Link>{" "}
+            to prepare the conversation and keep the private draft boundary
+            explicit.
           </p>
         </header>
 
@@ -163,7 +173,7 @@ export default function AtlasCoreRoutePage() {
             </li>
           </ol>
           <Link className={styles.partnerLink} href="/learning-partners">
-            Open the separate TA and Study Partner chats <span aria-hidden="true">→</span>
+            Prepare the Teaching Assistant and Study Partner guide <span aria-hidden="true">→</span>
           </Link>
         </section>
 

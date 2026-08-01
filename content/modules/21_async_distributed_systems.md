@@ -179,12 +179,6 @@ cross-system ambiguity.
     M21 --> M23["M23\nquery, storage, and indexing semantics"]
 ```
 
-**Text equivalent.** Module 21 does not replace concurrent local reasoning or
-Module 20's request identity rule. It adds an explicitly owned async pipeline
-and asks what may be concluded about a group of source operations. Module 22
-later asks whether an observation was authenticated and protected; Module 23
-later asks how validated records are queried and stored.
-
 ### 1.2 Four state machines, not one story
 
 The most common async/distributed bug is a silent promotion from one state
@@ -397,12 +391,6 @@ and [PEP 654](https://peps.python.org/pep-0654/).
     E --> Failure["owner observes local ExceptionGroup"]
 ```
 
-**Text equivalent.** The owner creates three child tasks. If `exercises`
-raises a non-cancellation error, the TaskGroup owns cancelling and waiting for
-siblings. If `catalog` had already crossed an adapter/server boundary, the
-TaskGroup cleanup does not prove that effect rolled back. The parent observes a
-local grouped failure after child handling.
-
 ### Cancellation vocabulary: do not collapse the verbs
 
 | API/event | Local documented meaning | Does **not** establish |
@@ -524,12 +512,6 @@ The queue documentation also warns that immediate shutdown can break the usual
     B --> U["upstream service\nunobserved capacity/queue"]
     T --> R["terminal local accounting record"]
 ```
-
-**Text equivalent.** The source list enters an Atlas-owned local admission
-policy. Admitted work belongs to a TaskGroup and may touch a local buffer. The
-upstream service is beyond the model's direct capacity evidence. Every
-admitted item must still receive a terminal **local** accounting record even
-when the remote result is unresolved.
 
 ### Code-reading lab A3 — the fake bound
 
@@ -719,13 +701,6 @@ neither occurs in its causal input. That refusal is the feature.
     PL["progress: local event\nlocal sequence 1"]
     CR -. "no declared causal edge" .-> PL
 ```
-
-**Text equivalent.** A send-to-receive edge establishes that catalog's send
-precedes collector's receipt in the fixture's causal relation. The independent
-progress event has no path to or from that receipt, so the events are
-incomparable. A diagrammed dashed absence is not an unknown relation waiting
-to become “probably after”; it is a reason to avoid an unsupported order
-claim.
 
 ### Order-claim matrix
 

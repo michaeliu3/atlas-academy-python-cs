@@ -1,9 +1,10 @@
 # M31 candidate workbook — Optimization & Information
 
-**Authoring-only candidate.** This is a complete draft of learner material for
-review. It is intentionally outside `content/modules`, is not in the reader
-manifest, does not open a route, and does not establish publication, review,
-or release evidence.
+**Authoring-only private study pack.** This is a complete draft for
+instructor-led study in the designated Codex chats. It is intentionally outside
+`content/modules` and the reader manifest; private study does not open a portal
+route, grant Core credit, or establish publication, review, release, or mastery
+evidence.
 
 **Knowledge arc:** Mathematical foundations → systems/AI reasoning
 
@@ -633,14 +634,17 @@ transcript, or automatic Notion record.
 ### Forward handoff
 
 The durable M31 artifact is an **objective/constraint/convergence claim sheet
-with experiment conditions and known limits**. The planned
+with experiment conditions and known limits**. In the private guided route, the
+next academic continuation is **M18**, which applies its ownership and evidence
+discipline to operating-system resource mediation. The
 [M32 authoring workbook](m32_systems_languages_scientific_python_accelerators_workbook.v1.md)
-consumes representation, dtype/shape, seed, profiling, and
-solver-configuration fields. This is an authoring-to-authoring handoff, not
-learner navigation or evidence that either module is released. M34–M36 consume
-the distinction between optimizing an objective and supporting a decision or
-generalization claim. M25/M26 remain locked synthesis work until their own
-contract and release evidence are complete.
+comes later, after M18–M24, and consumes representation, dtype/shape, seed,
+profiling, and solver-configuration fields. That later M31→M32 connection is
+an authoring-to-authoring handoff, not portal navigation or evidence that
+either module is released. M34–M36 consume the distinction between optimizing
+an objective and supporting a decision or generalization claim. M25/M26 remain
+reader-visible reference previews; their synthesis/capstone work is
+Core-credit-gated until their own contract and release evidence are complete.
 
 ---
 
@@ -656,7 +660,7 @@ solutions.
 
 ## Candidate release boundary
 
-Before this draft can move into a learner route, it still needs the versioned
+Before this draft can move into the released portal learner route, it still needs the versioned
 review-ready delivery map, full source/claim/accessibility review, a bounded
 interactive implementation or equivalent interaction, learner-facing
 diagnostic/review record, module evidence and review records, exact candidate

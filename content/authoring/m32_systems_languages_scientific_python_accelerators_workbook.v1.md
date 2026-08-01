@@ -1,19 +1,21 @@
 # M32 candidate workbook — Systems Languages, Scientific Python & Accelerators
 
-**Authoring-only candidate.** This is original learner material prepared for
-review. It deliberately lives outside 'content/modules', is not in the reader
-manifest, does not open a route, and does not establish a source-map decision,
-contract review, accessibility review, release, or learner mastery.
+**Authoring-only private study pack.** This is original draft material for
+instructor-led study in the designated Codex chats. It deliberately lives
+outside `content/modules` and the reader manifest; private study does not open
+a portal route, grant Core credit, or establish a source-map decision, contract
+review, accessibility review, release, or learner mastery.
 
 **Knowledge arc:** Systems reasoning → formal methods, machine learning, and
 reliable AI systems
 
-**Planned academic prerequisites:** M12 API contracts and dependency
+**Canonical academic prerequisites:** M12 API contracts and dependency
 boundaries; M17 architecture and execution; M19 concurrency and parallelism;
 M24 CPython performance and memory; M28 linear algebra and numerical
-stability; and M31 optimization and information. These are intended learning
-bridges, not currently accessible learner-route prerequisites: M31 and M32
-remain authoring-only.
+stability; and M31 optimization and information. These remain required
+learning bridges for private instructor-led study. M31 and M32 being
+authoring-only means that no portal reader route, Core credit, or release claim
+exists; it does not make their academic prerequisites optional.
 
 **Primary outcome:** Given a small scientific-computing or accelerator claim,
 you can trace the public contract, representation, ownership, execution
@@ -1148,7 +1150,7 @@ and planned claim/counterexample map, read the instructor-facing
 
 ## Candidate release boundary
 
-Before this draft can move into a learner route, it needs an approved canonical
+Before this draft can move into the released portal learner route, it needs an approved canonical
 source-map binding, structured delivery/contract review, original bounded
 reference fixtures or a safe equivalent interaction, diagnostics/review
 records, accessibility and teaching-flow review, exact CI/deployment
@@ -1156,4 +1158,3 @@ provenance, and human approval. Hardware, compiler, framework, and benchmark
 claims also need their own versioned evidence records. Until then this remains
 an authoring artifact—not a published module, navigable route, deployment
 claim, oral-defense result, or learner mastery claim.
-
