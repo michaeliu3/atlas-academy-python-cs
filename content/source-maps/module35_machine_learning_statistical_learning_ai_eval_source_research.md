@@ -9,7 +9,7 @@ record, assessment, studio, route change, or proof of learner competence.
 The canonical graph currently describes M35 as **Machine Learning &
 Representation**, `authoring-only`, `readerAccess: hidden`, with a planned
 release record, a `null` source-map field, no studio, and a v3 contract state
-of `not-started`. Those facts remain unchanged. This note must not be used to
+of `authoring-only`. Those facts remain unchanged. This note must not be used to
 mark M35 published, review-ready, available, or complete.
 
 In particular, this research does **not**:

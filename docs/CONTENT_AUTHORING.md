@@ -80,7 +80,7 @@ cannot approve a different candidate scope.
 At `review-ready` the selector deliberately supplies the material scope while
 the graph remains hidden and has no manifest/source-map binding; at `verified`
 the manifest workbook and graph source map must agree with that frozen scope.
-It is neither approval nor deployment evidence. M31–M34 currently have
+It is neither approval nor deployment evidence. M31–M35 currently have
 non-promoting hidden selectors; their authoring-only evidence records
 deliberately do not bind a `review-candidate-delivery` input, so none of
 these selectors is a review-ready decision.

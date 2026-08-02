@@ -441,6 +441,17 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   );
 });
 
+test("the M35 research ledger preserves its canonical authoring-only boundary", async () => {
+  const ledger = await readFile(
+    "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+    "utf8",
+  );
+
+  assert.match(ledger, /v3 contract state\s+of\s+`authoring-only`/u);
+  assert.doesNotMatch(ledger, /v3 contract state\s+of\s+`not-started`/u);
+  assert.match(ledger, /does \*\*not\*\*:?[\s\S]*unlock M35, M36, M25, or M26/u);
+});
+
 test("the M36 research ledger preserves its authoring-only, paraphrase, and consent boundaries", async () => {
   const ledger = await readFile(
     "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
