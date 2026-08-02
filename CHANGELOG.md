@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Tightened the private M31 pilot rather than adding a new learning surface:
+  its chat kickoff now performs the existing M28–M30 prerequisite retrieval,
+  requires answer-plus-confidence before a diagnostic explanation, gives an
+  honest time range, and supplies a pasteable bounded projected-gradient trace
+  card for code-reading discussion. These are authoring-only private-learning
+  improvements; they do not create a portal route, release, learner record,
+  or mastery claim.
 - Independently rechecked the M31–M36 private advanced packs against official
   university and source-owner material. The review found no theory expansion
   worth adding to the 60-day core, refreshed M33's learner-facing Stanford

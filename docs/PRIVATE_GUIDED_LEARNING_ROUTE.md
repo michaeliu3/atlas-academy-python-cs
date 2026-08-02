@@ -74,17 +74,54 @@ configured concise Notion-note policy to apply. Then send or say:
 
 ```text
 Start M31, Session 1 — Formulate before you optimize. I will build the
-Objective Geometry Sheet. Ask me to state the variables, feasible set,
-objective, observable evidence, and one non-claim before you correct me.
-Make me predict one consequence of changing a constraint. Use readable display
-math with defined notation and a short prose fallback; do not grade me. End
-with the smallest uncertainty or evidence artifact to bring to the Teaching
+Objective Geometry Sheet. Before Session 1, give me the three short M28/M29/M30
+retrieval checks below and direct me to the named bridge if my reasoning is
+fragile. Then ask me to state the variables, feasible set, objective,
+observable evidence, and one non-claim before you correct me. Make me predict
+one consequence of changing a constraint. For every multiple-choice diagnostic,
+ask for my A–D answer and 0–100 confidence before explaining it. Use readable
+display math with defined notation and a short prose fallback; do not grade me.
+End with the smallest uncertainty or evidence artifact to bring to the Teaching
 Assistant.
 ```
 
 Keep the session local by omitting `records on` or saying `off-record`.
 After the M31 dossier, use the workbook's Teaching Assistant prompt for the
 supportive oral defense; do not treat a Session 1 rehearsal as the module exam.
+
+**M31 prerequisite retrieval.** Before Session 1, answer without notes: (1)
+what a quadratic gradient and Hessian say locally, and why poor conditioning
+can change an iterative computation without changing its mathematical
+minimizer; (2) one stationary-point counterexample and the regularity/domain
+condition needed for a derivative-based conclusion; and (3) the difference
+between a full gradient and a mini-batch estimate, including what one favorable
+finite run cannot establish. If these are fragile, bridge through M28, M29, or
+M30 respectively before continuing. This is a repair route, not a gate or
+grade.
+
+**M31 time budget.** Budget about **6–8 focused hours** for a minimum-evidence
+first pass, or **10–14 hours** when you re-derive the arguments, inspect the
+traces, and complete the dossier/oral rehearsal. If the first-week calibration
+in the pace guide already exceeds its threshold, choose the 90-day route rather
+than skimming the mathematics.
+
+### M31 bounded reference-trace card
+
+Use this small, deterministic Session 4 card for code-reading and discussion;
+it is an equivalent interaction, not a solver recommendation or a portal
+studio. A chat with repository access may inspect
+`lib/m31-optimization-authoring-model.js`; otherwise paste this card into the
+chat rather than asking it to invent a trace.
+
+| Fixture | Fixed input | Evidence to inspect |
+| --- | --- | --- |
+| Two-variable constrained quadratic | `m31ProjectedGradientTrace({ initialPoint: { x: 0, y: 0 }, stepSize: 0.25, iterations: 6 })` | Seven rows. Iteration 0 is `(0, 0)`, objective `5`, residual `-1`, no projection. Iteration 1 is `(0.75, 0.25)`, objective `2.125`, residual `0`, projected from raw candidate `(1, 0.5)`. Iteration 6 is approximately `(0.9921875, 0.0078125)`, objective `2.00012207`, residual `0`, with projection. |
+
+Ask: which fields show feasibility, which show only a finite objective trace,
+and which missing premise would be needed for a convergence or decision claim?
+The card establishes one exact update rule on one toy fixture; it does not
+establish a general convergence theorem, solver comparison, numerical
+robustness, proxy validity, or authority to decide.
 
 ## How the chats run a module
 

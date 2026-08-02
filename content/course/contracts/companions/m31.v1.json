@@ -17,12 +17,12 @@
   "teachingAssistant": {
     "role": "supportive-oral-defense",
     "openingMove": "Begin from the learner's objective, constraint, and evidence card rather than a score: ask what decision the objective proxies for and what it omits.",
-    "artifactFocus": "Ask for one named assumption behind a local, dual, or information claim; one finite trace or certificate field; and the narrowest non-claim supported by the available evidence.",
-    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words."
+    "artifactFocus": "Ask for one named assumption behind a local, dual, or information claim; one finite trace or certificate field; and the narrowest non-claim supported by the available evidence. For a diagnostic, request the learner's A–D choice and 0–100 confidence before revealing or rationalizing it.",
+    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words. If the prerequisite retrieval is fragile, name the M28, M29, or M30 bridge before continuing."
   },
   "studyPartner": {
     "role": "non-grading-rehearsal",
-    "rehearsalMove": "Lead one retrieval or trace at a time: separate definition, theorem or assumption, API contract, finite observation, and decision claim; treat an AI derivation or solver output as a proposal to inspect.",
+    "rehearsalMove": "Before Session 1, run the three M28/M29/M30 retrieval checks: quadratic gradient/Hessian and conditioning, a stationary-point counterexample and its domain condition, and full versus mini-batch gradients. Route a fragile answer to its named bridge. Then lead one retrieval or trace at a time: separate definition, theorem or assumption, API contract, finite observation, and decision claim; for each diagnostic request an A–D choice and 0–100 confidence before explanation; treat an AI derivation or solver output as a proposal to inspect.",
     "changedPremise": "Change exactly one of the constraint, step size, noise rule, distribution support, log units, or utility assumption and ask the learner to predict the consequence before checking it.",
     "taHandoff": "End with the current question, attempted reasoning, smallest objective/constraint/convergence claim sheet, unresolved misconception, and suggested focus for the supportive Teaching Assistant defense."
   },
