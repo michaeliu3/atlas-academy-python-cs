@@ -7,13 +7,15 @@ means only that the cited implementation/test evidence exists; it does not turn
 time spent into a degree, a guarantee of mastery, or a claim that an external
 release succeeded. `In progress` means the boundary is known and tracked.
 
-> **Current material correction — 2026-08-01:** M31–M36 now each have a
-> private six-session authoring workbook under `content/authoring/`; M25/M26
-> have been reweaved as preview-safe synthesis/capstone material. Older rows
-> that describe missing advanced workbooks refer to historical release-gate
-> work and are superseded for course-authoring progress by the snapshot above.
-> In broad contract rows, remaining M31–M36 “implementation” means reviewed
-> learner-delivery/release evidence, not missing authoring material.
+> **Current material correction — 2026-08-02:** M31–M36 each have a private
+> six-session authoring workbook and a non-promoting hidden review-candidate
+> selector; their v3 contract state is `authoring-only`. M25/M26 remain
+> preview-safe synthesis/capstone material. Older rows that describe missing
+> advanced workbooks or `not-started` advanced contracts refer to historical
+> release-gate work and are superseded for course-authoring progress by the
+> snapshot above. In broad contract rows, remaining M31–M36 “implementation”
+> means reviewed learner-delivery/release evidence, not missing authoring
+> material.
 
 | Goal clause | Status | Implementation / test evidence | Still required before completion |
 | --- | --- | --- | --- |
