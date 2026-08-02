@@ -177,6 +177,185 @@ not measurements of the learner's machine.
 For each row, ask which observation is finite, which contract or assumption is
 still missing, and which broad claim must remain withdrawn.
 
+### Start the M33 private session
+
+M33 remains a private, authoring-only instructor-led pack. In the designated
+**Study Partner** chat, say `records on` only if you want the configured concise
+Notion-note policy to apply. Then send or say:
+
+```text
+Start M33, Session 1 — Languages are objects; syntax is not authority. Before
+Session 1, give me the three short prerequisite retrieval checks below and
+direct me to the named bridge if my reasoning is fragile. Help me build a formal
+claim card with alphabet/input domain, object, invariant or witness, and one
+non-claim. Make me predict how one change in input, machine, or reduction
+direction changes the conclusion. For every multiple-choice diagnostic, ask for
+my A–D answer and 0–100 confidence before explaining it. Use readable formal
+notation, code, and a prose/ASCII fallback; do not grade me. End with the
+smallest proof/counterexample artifact and uncertainty for the Teaching
+Assistant.
+```
+
+**M33 prerequisite retrieval.** Before Session 1, answer without notes: (1)
+an invariant separating a finite test run from a proof about all inputs; (2)
+the direction of a reduction that lets a solver for B solve A; and (3) why
+parsing, evaluating, and authorizing a program are distinct. Bridge through
+M27, M11, or M23 respectively; before Session 5, repair an unnamed input
+measure or machine model through M05. This is a repair route, not a gate or
+grade.
+
+**M33 time budget.** Provisionally budget **6–8 focused hours** for a
+minimum-evidence first pass, or **10–14 hours** for proof reconstruction,
+counterexamples, and the dossier/oral rehearsal. Work one session at a time;
+use the 90-day route if a faster calendar would make you skip the formal
+argument.
+
+### M33 bounded reference card
+
+A chat with repository access may inspect `lib/m33-formal-languages-reference-model.js`.
+Otherwise paste this exact card: `traceM33EvenOnesDfa("1010")` produces states
+`even → odd → odd → even → even`; the final state is accepting. Its domain is a
+binary string of at most 32 symbols. It illustrates one declared two-state
+parity DFA—not a proof of regularity, undecidability, DFA equivalence, or a
+claim about arbitrary input parsers. Ask what the transition table establishes
+and what proof obligation remains.
+
+### Start the M34 private session
+
+M34 remains a private, authoring-only instructor-led pack. In the designated
+**Study Partner** chat, say `records on` only if you want the configured concise
+Notion-note policy to apply. Then send or say:
+
+```text
+Start M34, Session 1 — Model a state before searching it. Before Session 1,
+give me the five short prerequisite retrieval checks below and direct me to the
+named bridge if my reasoning is fragile. Then help me state the state, actions,
+costs, observations, uncertainty, authority boundary, and one non-claim before
+choosing an algorithm. Make me predict one consequence of changing an encoding,
+duplicate policy, constraint, or utility. For every multiple-choice diagnostic,
+ask for my A–D answer and 0–100 confidence before explaining it. Use readable
+state tables, code, math, and prose/ASCII fallbacks; do not grade me. End with
+the smallest evidence artifact and uncertainty for the Teaching Assistant.
+```
+
+**M34 prerequisite retrieval.** Before Session 1, answer without notes: (1)
+why two graph encodings of one story can have different legal paths; (2) which
+edge-cost and duplicate-policy conditions support a search-optimality claim;
+(3) how a minimization relaxation changes feasible region and bound direction;
+(4) why MAP and maximum expected utility can select different actions; and (5)
+which formal object a complexity or reduction claim must name. Bridge through
+M10/M11, M31, M30, and M33 as indicated. Do not begin by importing a solver;
+this is a repair route, not a gate or grade.
+
+**M34 time budget.** Provisionally budget **7–9 focused hours** for a
+minimum-evidence first pass, or **12–16 hours** for search/constraint/decision
+traces, counterexamples, and the dossier/oral rehearsal.
+
+### M34 bounded reference-card set
+
+A chat with repository access may inspect `lib/m34-classical-ai-reference-fixture.js`;
+otherwise paste only the relevant row. These are fixed reasoning cards, not
+general solvers, planners, or decision authority.
+
+| Question | Fixed card | Bounded observation |
+| --- | --- | --- |
+| What does this frontier policy decide? | `chooseM34DeclaredFrontierEntry("lowest-accumulated-cost")` | It selects A (`g=1`, order 0) over B (`g=5`, order 1); the policy is still incomplete without priority, ties, duplicates, goal test, cost domain, and reopen rules. Last-in-first-out selects B. |
+| What does a relaxation certify? | `evaluateM34BinaryRelaxationCandidate({ x: 1, y: 0.5 })` | Objective `3`; it is shared/relaxed feasible but not original-binary feasible. The original maximum is `2`, while the relaxation upper bound is `3`; this is not an LP/IP solver or rounding recommendation. |
+| Why can no-reopen A* fail? | `m34AStarNoReopenCounterexample()` | Its admissible but inconsistent heuristic has `h(B)=2 > c(B,A)+h(A)=1`; the fixed no-reopen result has cost `4`, while reopening finds `3`. This is not a general A* conclusion. |
+| Why is an action not just its most-probable state? | `m34TwoStageMdpBackupCard()` | At horizon 2, `Q(inspect)=1.5` versus `safe=1.2`, so the fixed initial policy inspects. This is not a general MDP planner, belief-state model, or authority claim. |
+
+### Start the M35 private session
+
+M35 remains a private, authoring-only instructor-led pack. In the designated
+**Study Partner** chat, say `records on` only if you want the configured concise
+Notion-note policy to apply. Then send or say:
+
+```text
+Start M35, Session 1 — Representation, inductive bias, and what a model can
+discard. Before Session 1, give me the six entry-retrieval checks below and
+direct me to the named bridge if my reasoning is fragile. Help me state the
+representation, target, baseline information boundary, split/evaluation
+relation, evidence, authority boundary, and one non-claim before discussing a
+model. Make me predict one consequence of changing a feature, split, metric,
+shift, seed, precision, or authority. For every multiple-choice diagnostic,
+ask for my A–D answer and 0–100 confidence before explaining it. Use readable
+math, labelled code, and prose/ASCII fallbacks; do not grade me. End with the
+smallest ML-evidence artifact and uncertainty for the Teaching Assistant.
+```
+
+**M35 entry retrieval.** Before Session 1, answer without notes: (1) one
+claim/failure probe that could falsify a stated ML observation; (2) a pair of
+inputs a representation collapses even though the task must distinguish them;
+(3) why a baseline needs the same information boundary and split as a learned
+model; (4) the difference between lower training objective and lower target
+population risk; (5) two non-source-code variables that can change training;
+and (6) why a model card cannot authorize a decision. Bridge through M13, M28,
+M34, M30/M31, M32, and M22 respectively. This is a repair route, not a gate or
+grade.
+
+**M35 time budget.** Provisionally budget **7–9 focused hours** for a
+minimum-evidence first pass, or **12–16 hours** for the evaluation/shift plan,
+training evidence, dossier, and oral rehearsal.
+
+### M35 bounded reference-card set
+
+A chat with repository access may inspect `lib/m35-m36-signal-routing-fixture.js`;
+otherwise paste the relevant card. All rows are fully synthetic and finite;
+they do not describe people, a trained production model, or a deployment.
+
+| Question | Fixed card | Bounded observation |
+| --- | --- | --- |
+| Can a downstream model recover discarded information? | `m35RepresentationCollisionWitness()` | Two witnesses have the same representation but different labels, so a deterministic downstream predictor cannot separate that pair from the representation alone. This is not a generalization theorem. |
+| Is a score comparison fair when information differs? | `m35BaselineComparison()` | `constant-one` and `signal-only` each have accuracy `0.5`; the disclosed synthetic rule using signal and context has `1`. The card compares different information budgets; it does not train or select a model. |
+| Does equal accuracy imply equal probability behavior? | `m35CalibrationContrast()` | Both fixed cards have accuracy `0.75`, while Brier scores are `0.1875` and `0.2451`. This is not a population-calibration guarantee. |
+
+### Start the M36 private session
+
+M36 remains a private, authoring-only instructor-led pack. In the designated
+**Study Partner** chat, say `records on` only if you want the configured concise
+Notion-note policy to apply. Then send or say:
+
+```text
+Start M36, Session 1 — Risk, representation, data, and assumption scope. Before
+Session 1, give me the five entry-retrieval checks below and direct me to the
+named bridge if my reasoning is fragile. Help me state the population/sample
+relation, loss, hypothesis class, theorem or finite-evidence scope, systems
+variables, response owner, stop condition, and one non-claim before a
+reliability claim. Make me predict one consequence of changing sampling,
+precision, reduction order, shift, or authority. For every multiple-choice
+diagnostic, ask for my A–D answer and 0–100 confidence before explaining it.
+Use readable notation, code, and prose/ASCII fallbacks; do not grade me. End
+with the smallest reliable-learning artifact and uncertainty for the Teaching
+Assistant.
+```
+
+**M36 entry retrieval.** Before Session 1, answer without notes: (1) why a
+finite average loss differs from a population expectation; (2) why optimizer
+convergence does not establish generalization; (3) what makes “with high
+probability” incomplete; (4) one way unchanged source can produce different
+runs; and (5) why a shift monitor needs a response owner and stop condition.
+Bridge through M29, M31, M33, M32, and M35 respectively. This is a repair
+route, not a gate or grade.
+
+**M36 time budget.** Provisionally budget **8–10 focused hours** for a
+minimum-evidence first pass, or **14–18 hours** for theorem reconstruction,
+reproducibility/monitoring evidence, dossier, and oral rehearsal.
+
+### M36 bounded reference-card set
+
+A chat with repository access may inspect `lib/m35-m36-signal-routing-fixture.js`;
+otherwise paste the relevant row. These cards keep a theorem, finite
+observation, execution scope, and authority decision separate.
+
+| Question | Fixed card | Bounded observation |
+| --- | --- | --- |
+| Does a finite risk observation establish a learning claim? | `m36LearningClaimProbe()` | In its fixed sample, always-zero risk is `0.75` and always-one risk is `0.25`; the named signal-only predictor has expected accuracy `0.5` under source-balanced and `0.75` under context-heavy relation. Neither is IID evidence or a generalization theorem. |
+| What does one finite-class bound require? | `m36FiniteClassSampleBoundCard()` | With `K=8`, `epsilon=0.25`, and `delta=0.05`, the displayed union-bound calculation gives sufficient `n=47` under its named finite-class assumptions. It is not a deep-network bound. |
+| Is numerical reduction associative on this machine? | `m36ReductionOrderProbe()` | The fixed current ECMAScript Number evaluation gives left `1` and right `0`; that is neither a failure of real-number algebra nor a cross-platform reproducibility claim. |
+
+For every advanced card, ask which claim type it supports, which assumption is
+still missing, and which broader claim must be withdrawn before moving forward.
+
 ## How the chats run a module
 
 1. **Study Partner first:** explain one model, draw one trace or derivation,

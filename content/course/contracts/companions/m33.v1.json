@@ -17,12 +17,12 @@
   "teachingAssistant": {
     "role": "supportive-oral-defense",
     "openingMove": "Begin from the learner's named formal claims, reductions, and computability limits artifact rather than a score; ask which decision or claim it supports and what it leaves unresolved.",
-    "artifactFocus": "Ask for one named assumption, one bounded trace or counterexample, and the narrowest non-claim supported by the available evidence.",
-    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words."
+    "artifactFocus": "Ask for one named assumption, one bounded trace or counterexample, and the narrowest non-claim supported by the available evidence. For a diagnostic, request the learner's A–D choice and 0–100 confidence before revealing or rationalizing it.",
+    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words. If prerequisite retrieval is fragile, name the M27, M11, M23, or M05 bridge before continuing."
   },
   "studyPartner": {
     "role": "non-grading-rehearsal",
-    "rehearsalMove": "Lead one retrieval or trace at a time: separate definition, assumption, finite observation, implementation contract, and decision claim; treat an AI-generated answer as a proposal to inspect.",
+    "rehearsalMove": "Before Session 1, run the M27 all-input proof versus finite trace, M11 reduction-direction, and M23 parse/evaluate/authorize retrieval checks; before Session 5 recheck M05's input measure and machine model. Route a fragile answer to its named bridge. Then lead one retrieval or trace at a time: separate definition, assumption, finite observation, implementation contract, and decision claim; for each diagnostic request an A–D choice and 0–100 confidence before explanation; treat an AI-generated answer as a proposal to inspect.",
     "changedPremise": "Change exactly one declared premise or boundary, ask the learner to predict the consequence before checking it, and keep equations, code, and tables readable in the chat whiteboard.",
     "taHandoff": "End with the current question, attempted reasoning, smallest named artifact, unresolved misconception, and suggested focus for the supportive Teaching Assistant defense."
   },

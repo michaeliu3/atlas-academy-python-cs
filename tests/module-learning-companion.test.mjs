@@ -106,6 +106,14 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   assert.match(m32.studyPartner.rehearsalMove, /M12, M17, M24\/M28, M19, or M31/u);
   assert.match(m32.studyPartner.rehearsalMove, /0–100 confidence/u);
   assert.match(m32.teachingAssistant.artifactFocus, /0–100 confidence/u);
+  assert.match(m33.studyPartner.rehearsalMove, /M27 all-input proof versus finite trace/u);
+  assert.match(m33.studyPartner.rehearsalMove, /0–100 confidence/u);
+  assert.match(m34.studyPartner.rehearsalMove, /five retrieval checks/u);
+  assert.match(m34.studyPartner.rehearsalMove, /0–100 confidence/u);
+  assert.match(m35.studyPartner.rehearsalMove, /claim\/failure probe/u);
+  assert.match(m35.studyPartner.rehearsalMove, /0–100 confidence/u);
+  assert.match(m36.studyPartner.rehearsalMove, /finite average versus population expectation/u);
+  assert.match(m36.studyPartner.rehearsalMove, /0–100 confidence/u);
   for (const [courseModule, guideLocator, forwardModuleId] of [
     [m32, "/guides/31", "m33"],
     [m33, "/guides/32", "m34"],

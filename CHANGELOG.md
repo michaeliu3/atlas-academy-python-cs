@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Completed the lean chat-led launch layer for the remaining private advanced
+  packs, M33–M36: each now has prerequisite repair, confidence-before-reveal,
+  provisional pacing, and pasteable bounded reference cards for formal
+  reasoning, classical AI, ML evaluation, and learning-theory/system evidence.
+  These remain original authoring-only private materials; they do not create a
+  portal route, general solver, GPU/framework lab, release, learner record, or
+  mastery claim.
 - Gave the private M32 systems pack the same lean chat-led entry path: explicit
   prerequisite repair, confidence-before-reveal, provisional honest pacing,
   and four pasteable bounded reference cards for layout, temporary-shape,
