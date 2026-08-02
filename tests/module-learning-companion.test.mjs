@@ -103,6 +103,9 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   assert.match(m31.teachingAssistant.artifactFocus, /0–100 confidence/u);
   assert.equal(m31.forwardHandoff.targetModuleId, "m18");
   assert.equal(moduleLearningCompanionRelativePath("m31"), "content/course/contracts/companions/m31.v1.json");
+  assert.match(m32.studyPartner.rehearsalMove, /M12, M17, M24\/M28, M19, or M31/u);
+  assert.match(m32.studyPartner.rehearsalMove, /0–100 confidence/u);
+  assert.match(m32.teachingAssistant.artifactFocus, /0–100 confidence/u);
   for (const [courseModule, guideLocator, forwardModuleId] of [
     [m32, "/guides/31", "m33"],
     [m33, "/guides/32", "m34"],

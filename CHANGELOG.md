@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Gave the private M32 systems pack the same lean chat-led entry path: explicit
+  prerequisite repair, confidence-before-reveal, provisional honest pacing,
+  and four pasteable bounded reference cards for layout, temporary-shape,
+  ownership, and scalar-autodiff reasoning. It remains CPU-only,
+  authoring-only learning material—not a framework installation, GPU lab,
+  portal route, release, learner record, or mastery claim.
 - Tightened the private M31 pilot rather than adding a new learning surface:
   its chat kickoff now performs the existing M28–M30 prerequisite retrieval,
   requires answer-plus-confidence before a diagnostic explanation, gives an

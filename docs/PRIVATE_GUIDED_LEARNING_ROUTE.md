@@ -123,6 +123,60 @@ The card establishes one exact update rule on one toy fixture; it does not
 establish a general convergence theorem, solver comparison, numerical
 robustness, proxy validity, or authority to decide.
 
+### Start the M32 private session
+
+M32 remains a private, authoring-only instructor-led pack. Start it only after
+the connected M12, M17, M19, M24/M28, and M31 ideas are available for repair;
+this begins a learning conversation, not a portal route, grade, or completion
+record. In the designated **Study Partner** chat, say `records on` only if you
+want the configured concise Notion-note policy to apply. Then send or say:
+
+```text
+Start M32, Session 1 — Map responsibility before optimizing a boundary. Before
+Session 1, give me the five short prerequisite retrieval checks below and direct
+me to the named bridge if my reasoning is fragile. Then help me build a Boundary
+Contract Map: public interface, ownership/lifetime, layout/alias/copy/residency,
+version scope, and one non-claim. Make me predict one consequence of changing a
+layout or lifetime premise. For every multiple-choice diagnostic, ask for my
+A–D answer and 0–100 confidence before explaining it. Use readable code,
+equations, and timelines with prose/ASCII fallbacks; do not grade me. End with
+the smallest evidence artifact and uncertainty for the Teaching Assistant.
+```
+
+**M32 prerequisite retrieval.** Before Session 1, answer without notes: (1)
+the narrowest Python-to-numerical-kernel interface and the ownership/error facts
+that cross it; (2) one array operation through memory access and what remains
+unknown without a named timing boundary; (3) why equal shape does not guarantee
+equal mutation, traversal, cost, or numerical behavior; (4) when an
+asynchronously used buffer can be reused; and (5) what one finite-difference /
+autodiff agreement does not validate. If these are fragile, bridge through M12,
+M17, M24/M28, M19, or M31 respectively. Do not begin by installing a framework;
+this is a repair route, not a gate or grade.
+
+**M32 time budget.** Provisionally budget **7–9 focused hours** for a
+minimum-evidence first pass, or **12–16 hours** when you inspect the four
+reference cards, complete the dossier, and rehearse the oral defense. Use the
+90-day route if the first-week calibration already shows that the 60-day pace
+would force you to skip the evidence work.
+
+### M32 bounded reference-card set
+
+Use these deterministic cards for code-reading and discussion. A chat with
+repository access may inspect `lib/m32-systems-evidence-fixture.js`; otherwise
+paste the relevant row rather than asking it to invent a backend, install a
+framework, or claim a GPU/NumPy observation. They are local teaching fixtures,
+not measurements of the learner's machine.
+
+| Question | Fixed card | Bounded observation |
+| --- | --- | --- |
+| Does equal shape prove a safe handoff? | `m32LayoutHandoffTrace()` | Base and reversed-column layouts have the same shape but different strides; the declared positive-contiguous consumer accepts the base layout and rejects the reversed one. This is not an actual array-library, buffer-protocol, or GPU trace. |
+| Does a broadcast expression prove an allocation? | `m32PairwiseTemporaryCard({ n: 4, k: 3, d: 2 })` | Logical difference shape is `[4, 3, 2]` (24 elements); output shape is `[4, 3]` (12 elements). It does not show whether a particular backend materializes that temporary. |
+| When may a buffer be reused? | `m32BufferReuseTimeline("after-enqueue")` | Reuse is unsafe after enqueue and only becomes safe at the declared `after-kernel-complete` point. This is not a CUDA, HIP, JAX, or PyTorch execution trace. |
+| Does a scalar gradient check validate a framework graph? | `m32ScalarReverseModeTrace({ theta: 1, x: 2, y: 1 })` | The manual analytic gradient and central-difference estimate are both `4` for this scalar fixture; that does not validate a framework graph, mutation behavior, or numerical policy. |
+
+For each row, ask which observation is finite, which contract or assumption is
+still missing, and which broad claim must remain withdrawn.
+
 ## How the chats run a module
 
 1. **Study Partner first:** explain one model, draw one trace or derivation,
