@@ -7,12 +7,18 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-08-01 (GitHub Dependabot alert API recheck and the
-committed lockfile dependency graph). The live API again reported five open
-alerts on protected default branch `main` at `33fadbd` (three high, two
-medium). The push notice still reported six (four high, two moderate), so it
-is treated as stale or otherwise not yet reconciled rather than as
-authoritative current state.
+**Last examined:** 2026-08-02 (GitHub Dependabot alert API recheck, the
+committed lockfile dependency graph, and `pnpm audit --prod --json`). The live
+API reported five open alerts on protected default branch `main` at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` (three high, two medium). Its
+checked-in lockfile resolves `postcss@8.5.24` and `sharp@0.35.2`, both beyond
+the alerts' first patched versions; this review branch resolves
+`postcss@8.5.18` and `sharp@0.35.2`, also patched. GitHub nevertheless still
+marks the four runtime alerts open. The push notice still reported six (four
+high, two moderate), so it is treated as stale or otherwise not yet reconciled
+rather than as authoritative current state. The current production-only audit
+returned zero findings; it does not close the live GitHub alerts or erase the
+separately triaged development path.
 **Owner:** Atlas repository maintainer. **Recheck trigger:** before any private
 deployment, after a relevant upstream release, and before closing or dismissing
 an alert. No alert is considered resolved until the reviewed branch is pushed,
@@ -26,7 +32,7 @@ pnpm why postcss sharp brace-expansion esbuild --recursive
 gh api repos/michaeliu3/atlas-academy-python-cs/dependabot/alerts/<number>
 ```
 
-## Candidate remediation; awaiting protected-default-branch alert recalculation
+## Patched runtime paths; Dependabot reconciliation outstanding
 
 The current branch updates `next` to 16.2.12 and uses workspace-scoped
 overrides. Its regenerated lockfile resolves `postcss@8.5.18` and
@@ -42,23 +48,27 @@ overrides:
 
 These are deliberately narrow: they do not claim a global dependency upgrade
 or a GitHub alert closure. `pnpm audit --prod --json` returned zero current
-branch findings; the full audit retained the separate Drizzle/esbuild path
-documented below. `pnpm lint` passed after the brace-expansion override.
+branch findings on 2026-08-02; the full audit retained the separate
+Drizzle/esbuild path documented below. No direct `postcss().process` call over
+user-provided CSS, direct `sharp` call, or untrusted-image intake route was
+found in the checked-in portal on that review. Those reachability observations
+narrow the current portal model but do not close an advisory or establish
+deployment safety. `pnpm lint` passed after the brace-expansion override.
 Commit [`deaf85c4b7922e7e945a1c4415cf078a12de8fef`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/deaf85c4b7922e7e945a1c4415cf078a12de8fef)
 introduced the scoped runtime-remediation candidate. Its later descendant
 [`394f20396e21b2289fe4706227c41464b83ac497`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/394f20396e21b2289fe4706227c41464b83ac497)
 was validated by successful [GitHub Actions run 30568694668](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30568694668).
 The source-change commit and later CI source head are deliberately distinct.
-The four runtime candidates will not be called resolved until the protected
-default branch contains the reviewed change and GitHub has refreshed each
-corresponding alert state.
+The protected default branch now has patched PostCSS/sharp resolutions, but
+the four runtime alerts will not be called resolved until GitHub has refreshed
+or otherwise reconciled each corresponding alert state.
 
 | Alert | Scope | Candidate lockfile evidence | Required patched version | Candidate disposition |
 | --- | --- | --- | --- | --- |
-| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.18 | CI passed; await protected-default-branch merge and Dependabot refresh. |
-| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.12 | CI passed; await protected-default-branch merge and Dependabot refresh. |
-| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | `next@16.2.12 → postcss@8.5.18` | 8.5.10 | CI passed; await protected-default-branch merge and Dependabot refresh. |
-| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | `next@16.2.12 → sharp@0.35.2` | 0.35.0 | CI passed; await protected-default-branch merge and Dependabot refresh. |
+| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | review `next@16.2.12 → postcss@8.5.18`; default lock `postcss@8.5.24` | 8.5.18 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
+| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | review `next@16.2.12 → postcss@8.5.18`; default lock `postcss@8.5.24` | 8.5.12 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
+| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | review `next@16.2.12 → postcss@8.5.18`; default lock `postcss@8.5.24` | 8.5.10 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
+| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | review/default `sharp@0.35.2` | 0.35.0 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
 
 ## Withdrawn alert record
 
@@ -76,7 +86,7 @@ alert closure for another path, or a security-clean state.
 
 | Alert | Scope and path | Why it remains open | Current control and next action |
 | --- | --- | --- | --- |
-| [#13](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/13) — `GHSA-67mh-4wv8-2f99` | development: `drizzle-kit@0.31.10` → `@esbuild-kit/esm-loader@2.6.5` → `@esbuild-kit/core-utils@3.3.2` → `esbuild@0.18.20` | The top-level Drizzle package also resolves patched `esbuild@0.25.12`, but its legacy loader retains the vulnerable nested copy. A blanket nested override has not been compatibility-validated and must not be represented as a fix. | Run database-generation tooling only locally with maintainer-controlled schema/configuration, not as an internet-exposed development server. `pnpm db:generate` completed against the empty intentional schema with no migration output on 2026-07-31. Recheck the Drizzle/loader chain for an upstream removal or patched release, then add a targeted compatibility test before changing the nested resolver. |
+| [#13](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/13) — `GHSA-67mh-4wv8-2f99` | development: `drizzle-kit@0.31.10` → `@esbuild-kit/esm-loader@2.6.5` → `@esbuild-kit/core-utils@3.3.2` → `esbuild@0.18.20` | The top-level Drizzle package also resolves patched `esbuild@0.25.12`, but its legacy loader retains the vulnerable nested copy. No repository `esbuild` serve/context API use was found; the path is limited to maintainer-local `pnpm db:generate`. A blanket nested override would violate its declared range and has not been compatibility-validated, so it must not be represented as a fix. | Run database-generation tooling only locally with maintainer-controlled schema/configuration, not as an internet-exposed development server. `pnpm db:generate` completed against the empty intentional schema with no migration output on 2026-07-31. Recheck the Drizzle/loader chain for an upstream removal or patched release, then add a targeted compatibility test before changing the nested resolver. |
 
 ## Limits
 
