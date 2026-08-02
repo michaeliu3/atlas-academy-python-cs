@@ -330,7 +330,7 @@
         {
           "id": "m32-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M32 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+          "blockingReason": "M32 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -477,7 +477,7 @@
         {
           "id": "m33-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M33 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+          "blockingReason": "M33 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -639,7 +639,7 @@
         {
           "id": "m34-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M34 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+          "blockingReason": "M34 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -831,7 +831,7 @@
         {
           "id": "m35-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M35 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+          "blockingReason": "M35 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     },
@@ -993,7 +993,7 @@
         {
           "id": "m36-contract-and-provenance-unmet",
           "status": "unmet",
-          "blockingReason": "M36 has a not-started v3 registry plan but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+          "blockingReason": "M36 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
         }
       ]
     }

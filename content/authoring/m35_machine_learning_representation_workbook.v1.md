@@ -72,7 +72,7 @@ do not convert a source into a result about this synthetic exercise.
 | --- | --- | --- |
 | 1 — representation | `M35-C01` | `S35-01–S35-02` |
 | 2 — formulation and baselines | `M35-C02` | `S35-03–S35-04`, `S35-16–S35-19` |
-| 3 — evaluation, calibration, and shift | `M35-C03–C05` | `S35-05–S35-08`, `S35-20–S35-21` |
+| 3 — evaluation, calibration, and shift | `M35-C03–C05` | `S35-05–S35-08`, `S35-20–S35-24` |
 | 4 — objectives and execution | `M35-C06–C07` | `S35-03`, `S35-09–S35-10`, `S35-17–S35-19` |
 | 5 — observability | `M35-C08` | `S35-03`, `S35-11–S35-12`, `S35-15` |
 | 6 — dossier and authority | `M35-C09` | `S35-13–S35-14` |
@@ -465,6 +465,16 @@ Create a **Baseline Comparison** that records:
 **Non-claim:** the highest value on one synthetic metric does not establish
 deployment value, causal explanation, or a legitimate decision policy.
 
+### Retrieval and transfer
+
+Without reopening the score table, retrieve the six fields that make a
+baseline comparison interpretable: available information, representation,
+objective, hypothesis/decision class, selection procedure, and observable
+evidence. Then inspect an AI proposal that calls a neural alternative “better”
+than a rule. Ask it to hold the information and selection budgets fixed, name
+the decision owner, and predict one failure case before comparing a metric.
+This transfers the baseline discipline; it does not choose a model family.
+
 ---
 
 ## Session 3 — Data relations, splits, metrics, calibration, and shift
@@ -678,6 +688,16 @@ record, fresh-evaluation row identifiers, and one candidate choice the fresh
 rows were not permitted to change. Include the sentence:
 
 > “This evaluation estimates behavior under ___; it does not establish ___.”
+
+### Retrieval and transfer
+
+Start the M36 handoff with four fields from this plan: the named relation
+`P` (or explicitly synthetic generator), loss, split/independence relation,
+and selection protocol. If any field is unknown, mark it as an assumption
+rather than silently treating a score as theorem-ready evidence. For transfer,
+give an AI-proposed evaluation one changed premise—new entities, future time,
+or a changed measurement path—and ask which split field and non-claim must be
+rewritten before an additional score is useful.
 
 ---
 
@@ -908,6 +928,15 @@ Create an **objective trace**: inputs, representation, loss, regularizer, optimi
 
 Create a **training-systems reproducibility card** using the table above. Keep
 the exact comparison conditions and its nonportable boundary visible.
+
+### Retrieval and transfer
+
+Retrieve the chain `conditional model → loss → gradient/training trace →
+evaluation relation → use boundary`. A finite-difference agreement can check
+one displayed derivative, not the target, split, or use decision. For transfer,
+ask an AI agent to justify an optimizer change; require the objective,
+regularizer, numerical environment, selection record, and the claim that the
+proposed trace could actually support.
 
 ---
 
@@ -1193,11 +1222,12 @@ dtype/device, or introduce a synthetic shift.
 ## Source and reuse boundary
 
 This workbook uses original Atlas explanations, synthetic examples, diagrams,
-and code. The reading routes below were checked on **2026-08-01**; the
-fit/validation/fresh-evaluation route was rechecked on **2026-08-02**. They guide
-scope and prerequisite review; they do not turn this draft into an institutional
-course or grant permission to copy third-party prose, figures, datasets,
-benchmarks, code, weights, or model-card assets.
+and code. The reading routes below were checked on **2026-08-01**; the Session
+3 data-relation, fit/validation/fresh-evaluation, and shift routes were
+rechecked on **2026-08-02**. They guide scope and prerequisite review; they do
+not turn this draft into an institutional course or grant permission to copy
+third-party prose, figures, datasets, benchmarks, code, weights, or model-card
+assets.
 
 ### Learner-facing source links
 
@@ -1205,7 +1235,8 @@ benchmarks, code, weights, or model-card assets.
 | --- | --- | --- |
 | [Stanford CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Sessions 1–6: learning-problem formulation, representation, learning theory, regularization/model selection, and evaluation. Some course material may require affiliate access. | Link-only/original Atlas examples; do not copy assignments, notes, figures, or solutions. |
 | [MIT 6.036 Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Sessions 1–5: supervised learning, model selection, neural networks, and evidence-aware ML reasoning. | MIT OCW assets have their own notices; link-only/original Atlas fixtures and explanations. |
-| [MIT 18.642 Lecture 23: Introduction to Machine Learning](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/resources/mit18_642_f24_lec23/) | Session 3: distinguish fitting, validation comparison, and a final held-out observation in the original fixed-partition trace. | Link-only/original Atlas rows and derivations; do not copy lecture slides, examples, or exercises. |
+| [MIT 18.642 Lecture 23: Introduction to Machine Learning](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/resources/mit18_642_f24_lec23/) and [CMU 10-315 Chapter 1](https://www.cs.cmu.edu/~10315-s24/notes/ciml-v0_99-ch01.pdf) | Session 3: distinguish a named data-generating relation and loss from sampled fitting, validation comparison, and a final held-out observation in the original fixed-partition trace. | Link-only/original Atlas rows and derivations; do not copy lecture slides, prose, examples, or exercises. |
+| [MIT 6.7960 Lecture 17: Out-of-Distribution Generalization](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/mit6_7960_f24_lec17.pdf) | Session 3: distinguish same-relation evidence from one named input, label-relation, or measurement shift before claiming robustness. | Link-only/original Atlas shift cards and calculations; the lecture is not evidence that every shift lowers accuracy or that a monitor chooses an intervention. |
 | [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
 | [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
 | [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html), [probability calibration](https://scikit-learn.org/stable/modules/calibration.html), and [Brier score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html) | Session 3: split relations, leakage, finite reliability estimates, and a bounded probabilistic-loss reading. | Link-only/original Atlas examples. Library mechanisms do not choose a target relation, prove population calibration, or guarantee a decision. |

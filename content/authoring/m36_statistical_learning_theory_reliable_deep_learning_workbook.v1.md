@@ -75,10 +75,10 @@ synthetic learning system here.
 | --- | --- | --- |
 | 1 — learning claims | `M36-C01` | `S36-01–S36-03`, `S36-07–S36-09` |
 | 2 — optimization and gaps | `M36-C02`, `M36-C05` | `S36-04–S36-06` |
-| 3 — theorem scope | `M36-C04–C05` | `S36-01–S36-05`, `S36-14–S36-17` |
+| 3 — theorem scope | `M36-C04–C05` | `S36-01–S36-05`, `S36-14–S36-19` |
 | 4 — numerical evidence | `M36-C03`, `M36-C07` | `S36-10–S36-11` |
-| 5 — shift and control | `M36-C06`, `M36-C08–C09` | `S36-07–S36-12` |
-| 6 — synthesis dossier | `M36-C01–C09` | `S36-01–S36-17` |
+| 5 — shift and control | `M36-C06`, `M36-C08–C09` | `S36-07–S36-12`, `S36-20` |
+| 6 — synthesis dossier | `M36-C01–C09` | `S36-01–S36-20` |
 
 ### One reliable-learning evidence map
 
@@ -403,6 +403,31 @@ R_P(h)=\mathbb E_{Z\sim P}[\ell(h,Z)],\qquad
 \widehat R_S(h)=\frac{1}{n}\sum_{i=1}^{n}\ell(h,Z_i).
 \]
 
+### Carry the M35 evidence packet into the theorem card
+
+Do not introduce \(P\), loss, or a sample relation as anonymous symbols.
+Start with the four fields carried from M35’s Evaluation-and-Shift Plan:
+
+1. the named population relation \(P\), or the explicitly synthetic generator;
+2. the loss and target question;
+3. the split and independence/dependence relation; and
+4. the candidate-generation, selection, and stopping protocol.
+
+**Prediction before reveal.** Which of those fields becomes false or unknown
+if the only score came from repeatedly selecting an AI-generated pipeline on
+the same held-out labels?
+
+<details>
+<summary>Reveal after naming the broken field.</summary>
+
+**Reveal:** the selection protocol is no longer fixed, and the held-out labels
+are no longer untouched evaluation evidence. A theorem card may still state a
+conditional implication, but it cannot silently certify that adaptive
+procedure. Record the missing selection-aware argument or design a new,
+predeclared evaluation relation.
+
+</details>
+
 Here \(P\) is the named population relation, \(S=(Z_1,\ldots,Z_n)\) is the
 sample, and \(\ell\) is the declared loss. Changing any of those objects
 changes the claim that follows.
@@ -723,12 +748,27 @@ for \(w_2\) comes from \(x_2=0\), not from evidence that a feature is useless.
 | repeat protocol | number of repeats, values retained, equality/tolerance rule |
 | nonportable boundary | which platforms/versions/operations remain untested |
 
+### Filled bounded record — one observed numerical factor
+
+Use the reduction-order probe as a fully inspectable reference record before
+designing a broader reproduction experiment:
+
+| Field | This record declares |
+| --- | --- |
+| semantic oracle | Evaluate the two displayed parenthesized additions in current ECMAScript Number arithmetic. |
+| source/data identity | `m36ReductionOrderProbe()` from this workbook's checked-in teaching fixture; no dataset or framework run. |
+| factor actually changed | Addition association: `(1e16 + -1e16) + 1.0` versus `1e16 + (-1e16 + 1.0)`. |
+| observed result | The declared current runtime returns `1` and `0`; that is one finite representation observation. |
+| deliberately unobserved | Seed, data order, dtype, backend/device, framework version, worker policy, and cross-platform behavior. |
+| conclusion | Record reduction order when it is relevant; do not infer a framework defect, a cross-platform mismatch, or model reliability. |
+
 ### Output: Theory–System Reproducibility Record
 
 Fill a record for one tiny synthetic calculation. Hold as much fixed as
-possible, vary exactly one factor—seed, data order, dtype, or backend—and
-record raw observations plus alternate explanations. Do not call the result a
-benchmark, a model-reliability proof, or a platform guarantee.
+possible, vary exactly one factor—seed, data order, dtype, backend, or
+reduction/association order—and record raw observations plus alternate
+explanations. Do not call the result a benchmark, a model-reliability proof,
+or a platform guarantee.
 
 ### Debugging probe — repair one reproducibility claim
 
@@ -822,6 +862,30 @@ separate before proposing one universal monitor:
 | input-mixture / covariate shift | `context=1` mass changes from `0.50` to `0.75`, while `label = Number(signal == context)` stays fixed | input-frequency and slice-count checks; the fixed `signal-only` card's expected accuracy changes from `0.50` to `0.75` without any model improvement | an input-independent aggregate or a monitor that never records the context slice |
 | conditional / label-relation shift | input frequencies stay fixed, but the declared label relation changes from `signal == context` to `label = signal` | delayed-label performance/slice checks against the named new relation | an input-frequency monitor, because the observed input mixture can be unchanged |
 | measurement / representation shift | `context` becomes missing and is encoded as `0`, although the underlying task relation was not declared to change | schema, missingness, transform, and availability-time checks | a label-only aggregate that does not record the representation path |
+| adversarial perturbation threat model | an explicitly named allowable input change and budget are proposed; neither the threat set nor preserved label relation may be left implicit | a bounded worst-case or attack evaluation against that declared threat set, with its metric and failure cases recorded | an IID score, input-frequency monitor, or one finite attack result outside the declared threat model |
+
+### Bounded adversarial threat card — declare the set
+
+This is a separate, fully synthetic two-bit card, not a claim about the
+signal-routing fixture or any real input. Let \(x=(s,c)\in\{0,1\}^2\), give it
+the target \(y=s\), and use the deliberately brittle fixed predictor
+\(h(s,c)=c\). Declare the allowable threat set
+
+\[
+\mathcal A_1(s,c)=\{(s,c),(s,1-c)\},
+\]
+
+with a **budget of one flip of the declared nuisance bit**. The
+**label-preservation assumption** is explicit: every \(x'\in\mathcal A_1(x)\)
+keeps \(y=s\). At \(x=(1,1)\), clean zero-one loss is \(0\), while
+\(x'=(1,0)\) has zero-one loss \(1\). Thus the named **worst-case zero-one
+loss** over this declared set is \(1\) for that one input.
+
+**Claim/source trace:** `M36-C08 -> S36-20`. MIT's OOD lecture is a
+calibration route for separating an explicit perturbation set from a broader
+distribution shift; this original two-bit card supplies no image, attack,
+benchmark, or robustness result. It is **not an attack implementation, a
+certified-robustness proof, a universal threat model, or a decision rule**.
 
 Before reading the table's implications, predict which mechanism an
 input-frequency monitor can detect while completely missing another. Then name
@@ -1005,8 +1069,10 @@ confidence adds a review item; it is never a pass/fail label.
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
-**Answer: C.** Repair: finite empirical risk, population risk, and use value
-are different objects.
+**Answer: C.** Misconception map: A confuses a finite sample with \(P\); B
+turns a scoped observation into a future-relation claim; D substitutes an
+objective-choice judgment for an empirical-risk calculation. Repair: finite
+empirical risk, population risk, and use value are different objects.
 </details>
 
 2. A training trace reaches a small gradient norm. Which claim is best
@@ -1020,7 +1086,9 @@ supported?
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
-**Answer: A.** Repair: optimization evidence does not collapse the other gap
+**Answer: A.** Misconception map: B skips the estimation/generalization gap; C
+confuses one trace with an environment comparison; D confuses evidence with
+authority. Repair: optimization evidence does not collapse the other gap
 ledger rows.
 </details>
 
@@ -1034,7 +1102,10 @@ ledger rows.
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
-**Answer: B.** Repair: a theorem is a scoped implication, not a slogan.
+**Answer: B.** Misconception map: A is branding, not a quantified object; C
+is one observation rather than a conditional implication; D overextends a
+theorem beyond its stated class and conditions. Repair: a theorem is a scoped
+implication, not a slogan.
 </details>
 
 4. Why can a fixed seed fail to reproduce an identical result elsewhere?
@@ -1047,8 +1118,10 @@ ledger rows.
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
-**Answer: B.** Repair: state a bounded comparison protocol rather than a
-blanket reproducibility claim.
+**Answer: B.** Misconception map: A says too little; C substitutes theory for
+an execution record; D confuses a control with numerical validation. Repair:
+state a bounded comparison protocol rather than a blanket reproducibility
+claim.
 </details>
 
 5. A calibration plot looks good on one held-out relation. What remains true?
@@ -1061,8 +1134,10 @@ blanket reproducibility claim.
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
-**Answer: B.** Repair: calibration, shift, utility, and authority are separate
-evidence layers.
+**Answer: B.** Misconception map: A extends one finite relation to shift and
+utility; C removes the need for lifecycle evidence; D changes a calibration
+question into a fairness proof. Repair: calibration, shift, utility, and
+authority are separate evidence layers.
 </details>
 
 6. A monitor detects an input-frequency change. Which response is strongest?
@@ -1075,7 +1150,9 @@ evidence layers.
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
-**Answer: C.** Repair: monitoring is evidence plus accountable action, not
+**Answer: C.** Misconception map: A replaces accountable review with automatic
+action; B confuses an alert with a causal diagnosis; D ignores an observation
+that may matter. Repair: monitoring is evidence plus accountable action, not
 automatic authority.
 </details>
 
@@ -1091,17 +1168,18 @@ strongest remaining claim rather than erasing the old one.
 
 All explanations, diagrams, examples, and code in this workbook are original
 Atlas authoring material. The reading routes below were checked on
-**2026-08-01**. They guide scope and proof/evidence review; they do not grant
-permission to copy third-party prose, proofs, figures, code, datasets,
-benchmarks, weights, or course exercises.
+**2026-08-01**; the Session 3 PAC/efficiency and Session 5 OOD/threat-model
+routes were rechecked on **2026-08-02**. They guide scope and proof/evidence
+review; they do not grant permission to copy third-party prose, proofs,
+figures, code, datasets, benchmarks, weights, or course exercises.
 
 ### Learner-facing source links
 
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
 | [MIT 9.520 Statistical Learning Theory & Applications](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/) and its [VC-dimension notes](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/resources/class17/) | Sessions 1–3: empirical versus population risk, function classes, quantifiers, and theorem conditions. | MIT OCW assets have individual notices; link-only/original Atlas theorem cards, examples, and proof prompts. |
-| [MIT 6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/) and [generalization-theory lecture](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/) | Sessions 2–5: deep-learning foundations, overparameterization/generalization questions, and experimental scope. | Link-only/original Atlas examples and experiments; no copied videos, slides, homework, or project assets. |
-| [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/) and [Stanford CS229 course materials](https://cs229.stanford.edu/materials.html-full) | Session 3: learning-theory, regularization/model-selection, and fixed-versus-adaptive evaluation boundaries. | Link-only/original Atlas proof cards and examples; do not copy lectures, assignments, figures, data, notes, or solutions. |
+| [MIT 6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/), [generalization-theory lecture](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/), and [Lecture 17: Out-of-Distribution Generalization](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/mit6_7960_f24_lec17.pdf) | Sessions 2–5: deep-learning foundations, overparameterization/generalization questions, experimental scope, and the distinction between a declared perturbation threat set and broader distribution shifts. | Link-only/original Atlas examples and synthetic threat cards; no copied videos, slides, homework, figures, or project assets. |
+| [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/), [CMU 10-806 PAC/efficiency notes](https://www.cs.cmu.edu/~avrim/ML07/lect1207.pdf), [MIT 6.080 PAC lecture](https://ocw.mit.edu/courses/6-080-great-ideas-in-theoretical-computer-science-spring-2008/838468541460ee9c1d08eb36c1921d30_lec20.pdf), and [Stanford CS229 course materials](https://cs229.stanford.edu/materials.html-full) | Session 3: learning-theory quantifiers, statistical-versus-computational conditions, regularization/model-selection, and fixed-versus-adaptive evaluation boundaries. | Link-only/original Atlas proof cards and examples; do not copy lectures, assignments, figures, data, notes, or solutions. |
 | [Hoeffding (1963)](https://doi.org/10.1080/01621459.1963.10500830), [Valiant's PAC paper](https://dl.acm.org/doi/10.1145/1968.1972), and the [Bartlett–Foster–Telgarsky margin-bound example](https://proceedings.neurips.cc/paper/2017/hash/b22b257ad0519d4500539da3c8bcf4dd-Abstract.html) | Session 3: finite-class concentration, PAC quantifiers, and reading a modern deep-learning bound with its conditions. | Link/cite only/original Atlas theorem cards. Read the exact theorem before applying it; no copied proofs, figures, constants, or benchmark conclusions. |
 | [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) and [numerical-accuracy documentation](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html) | Session 4: bounded environment, dtype, backend, and comparison claims. | Link-only/original reproduction record; pin framework, device, and versions before an implementation claim. |
 | [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 5–6: monitoring, management, governance, and human-control boundaries. | Link-only/original Atlas reliability maps; voluntary guidance is not legal advice, certification, or authorization. |

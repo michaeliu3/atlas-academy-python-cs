@@ -221,3 +221,23 @@ test("the M31-M36 authoring contracts keep learner delivery null and bind hidden
     assert.equal(courseModule.authoringDeliveryMapInputId, `${moduleId}-authoring-delivery-map`);
   }
 });
+
+test("the advanced bridge's blocker wording matches the current authoring-only registry state", async () => {
+  const [bridgeLedger, registryText] = await Promise.all([
+    loadAdvancedModuleBridgeLedger(siteRoot),
+    readFile(resolve(siteRoot, "content/course/contracts/module-contract-registry.v3.json"), "utf8"),
+  ]);
+  const registry = JSON.parse(registryText);
+
+  for (const moduleId of ["m32", "m33", "m34", "m35", "m36"]) {
+    const bridgeEntry = bridgeLedger.modules.find((entry) => entry.moduleId === moduleId);
+    const contract = registry.modules.find((entry) => entry.moduleId === moduleId);
+    const blocker = bridgeEntry.releaseBlockers.find(
+      ({ id }) => id === `${moduleId}-contract-and-provenance-unmet`,
+    );
+
+    assert.equal(contract?.contractState, "authoring-only");
+    assert.match(blocker?.blockingReason ?? "", /authoring-only v3 registry record/u);
+    assert.doesNotMatch(blocker?.blockingReason ?? "", /not-started v3 registry plan/u);
+  }
+});

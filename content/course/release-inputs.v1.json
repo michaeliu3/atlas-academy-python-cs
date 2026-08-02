@@ -82,11 +82,11 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "97251e494adeaece8788a57791eb2f0e84ad6b92052bf1bf39aa555108dbea64"
+      "sha256": "0173f31b249b355b0e03886bd989c519d4cda0b9d8ef467f0115891066cd3ebc"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "98458eb3ddd1f56dfd8f3ff9e0476406e738367026f1e6e6434d9d083bd022ba"
+      "sha256": "af4e184359ab94f4b3872cbcb641f37c2155f6510c8caac530a0d502244c0a88"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -326,7 +326,7 @@
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-      "sha256": "8e1a54bd1cb3a42cb5889d9432f3af041401adfcfb109addb362b11fe297d09a"
+      "sha256": "77e829bc152c52841e0368abdfe28c4d42c08bc4778d19e285554a128a69263a"
     },
     {
       "path": "content/course/manual-learning-record-workflow.v1.json",
@@ -606,7 +606,7 @@
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
-      "sha256": "a5a56028873d4ad5833a3c3699efe2a19bb88b08a90511e5dc0742faa85f58af"
+      "sha256": "4797dab9837c9bd4c9fde3046e244cf2b48cc0278d7fe0ea31852b52085e7370"
     },
     {
       "path": "content/source-maps/python_curriculum_sources.md",

@@ -340,6 +340,26 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m35Workbook, /m35M36FixedReluTrace\(\)/u);
   assert.match(m35Workbook, /Selection boundary — inspection changes the evidence/u);
   assert.match(m35Workbook, /Claim\/source trail/u);
+  assert.match(m35Workbook, /S35-05–S35-08`, `S35-20–S35-24/u);
+  assert.match(m35Workbook, /CMU 10-315 Chapter 1/u);
+  assert.match(m35Workbook, /MIT 6\.7960 Lecture 17: Out-of-Distribution Generalization/u);
+  const sessionTwoStart = m35Workbook.indexOf("## Session 2 —");
+  const sessionThreeStart = m35Workbook.indexOf("## Session 3 —");
+  const sessionFourStart = m35Workbook.indexOf("## Session 4 —");
+  const sessionFiveStart = m35Workbook.indexOf("## Session 5 —");
+  assert.ok(sessionTwoStart >= 0 && sessionThreeStart > sessionTwoStart);
+  assert.ok(sessionFourStart > sessionThreeStart && sessionFiveStart > sessionFourStart);
+  for (const [start, end] of [
+    [sessionTwoStart, sessionThreeStart],
+    [sessionThreeStart, sessionFourStart],
+    [sessionFourStart, sessionFiveStart],
+  ]) {
+    assert.match(
+      m35Workbook.slice(start, end),
+      /### Retrieval and transfer/u,
+      "M35 Sessions 2–4 should each close with a compact retrieval/transfer prompt.",
+    );
+  }
   assert.match(m35Workbook, /Split contract — name the relation before naming a tool/u);
   assert.ok(m35Workbook.includes("Brier scores are"));
   assert.ok(m35Workbook.includes("0.1875"));
@@ -371,6 +391,34 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
   assert.match(m36Workbook, /conditional \/ label-relation shift/u);
+  assert.match(m36Workbook, /S36-14–S36-19/u);
+  assert.match(m36Workbook, /S36-07–S36-12`, `S36-20/u);
+  assert.match(m36Workbook, /Carry the M35 evidence packet into the theorem card/u);
+  assert.match(m36Workbook, /candidate-generation, selection, and stopping protocol/u);
+  assert.match(m36Workbook, /Filled bounded record — one observed numerical factor/u);
+  assert.match(m36Workbook, /factor actually changed/u);
+  assert.match(m36Workbook, /deliberately unobserved/u);
+  assert.match(m36Workbook, /reduction\/association order/u);
+  assert.match(m36Workbook, /adversarial perturbation threat model/u);
+  const threatCardStart = m36Workbook.indexOf("### Bounded adversarial threat card — declare the set");
+  const calibrationStart = m36Workbook.indexOf("### Calibration and action remain distinct");
+  assert.ok(threatCardStart >= 0 && calibrationStart > threatCardStart);
+  const threatCard = m36Workbook.slice(threatCardStart, calibrationStart);
+  assert.ok(threatCard.includes("\\mathcal A_1"));
+  assert.ok(threatCard.includes("\\(x=(s,c)\\in\\{0,1\\}^2\\)"));
+  assert.ok(threatCard.includes("\\(x'\\in\\mathcal A_1(x)\\)"));
+  assert.ok(threatCard.includes("\\(h(s,c)=c\\)"));
+  assert.ok(threatCard.includes("\\(x'=(1,0)\\) has zero-one loss \\(1\\)"));
+  assert.match(threatCard, /budget of one flip/u);
+  assert.match(threatCard, /label-preservation assumption/u);
+  assert.match(threatCard, /worst-case zero-one\s+loss/u);
+  assert.match(threatCard, /not an attack implementation/u);
+  assert.match(threatCard, /M36-C08 -> S36-20/u);
+  assert.equal(
+    (m36Workbook.match(/\*\*Answer: [A-D]\.\*\* Misconception map:/g) ?? []).length,
+    6,
+    "Each M36 diagnostic should link wrong answers to a repair.",
+  );
   assert.match(m36Workbook, /not IID evidence, a PAC\/VC calculation/u);
 
   const dossierStart = m36Workbook.indexOf(
@@ -408,6 +456,8 @@ test("the M36 research ledger preserves its authoring-only, paraphrase, and cons
   assert.match(ledger, /ready-to-paste local note/u);
   assert.match(ledger, /S36-18/u);
   assert.match(ledger, /S36-19/u);
+  assert.match(ledger, /S36-20/u);
+  assert.match(ledger, /Lecture 17: Out-of-Distribution Generalization/u);
 });
 
 test("the M35 and M36 authoring diagrams keep their declared prose alternatives", async () => {
