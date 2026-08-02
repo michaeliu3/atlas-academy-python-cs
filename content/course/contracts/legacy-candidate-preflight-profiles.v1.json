@@ -337,6 +337,21 @@
       ],
       "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m11",
+      "packetId": "m11-algorithm-design-paradigms-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m11/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:b16967659862c82246cdba8dbecdf491320e74c53f88fc6a688ffe4ec8dea14e"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     }
   ]
 }

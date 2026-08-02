@@ -455,9 +455,9 @@
       "title": "Algorithm Design Paradigms: Choosing a Strategy from Structure",
       "summary": "Central idea: an algorithmic strategy is justified by a structural fact about the problem, not by resemblance to a familiar code template.",
       "arcId": "arc-ii",
-      "wordCount": 14256,
+      "wordCount": 15458,
       "estimatedMinutes": 63,
-      "sourceHash": "31d5548cf0b543318fc6dce6f93686cd21958894f896a8e2829cfd02ed329a2d",
+      "sourceHash": "82d52bd3346f80b75604ca4e164f8c69bbd2a1234f95164dffd305bc4b4a40c3",
       "id": "m11",
       "state": {
         "lifecycle": "learner-material-ready",

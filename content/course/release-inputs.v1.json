@@ -173,6 +173,10 @@
       "sha256": "7595724facaff1bddf0486ef5e05cb2e0ac8844dbe02cf5bb5fa75019af414f5"
     },
     {
+      "path": "content/course/contracts/companions/m11.v1.json",
+      "sha256": "57a102b6124b3f5420b2b2178e65a878cea2cf24a0c8ff464c102bc45f84c2d1"
+    },
+    {
       "path": "content/course/contracts/companions/m12.v1.json",
       "sha256": "f16687c98ec4d96f3d3f7b147b059f5fda4f60d2c0d0a2878e3740d456b26e7b"
     },
@@ -285,6 +289,10 @@
       "sha256": "6f919f59b637f6f74610399f84e09b39e604f603128215ac7c4fa19afc3cd82d"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m11.v1.json",
+      "sha256": "0cf35b69226d6e7f46763b1e4f4ea76741d3c9d5b2dbaca9bbb635e1daa769ef"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",
       "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
     },
@@ -373,6 +381,10 @@
       "sha256": "04150abd2b5313c49a51d62c3e843452fe6c1551a0c6626863b309bee25cd686"
     },
     {
+      "path": "content/course/contracts/evidence/m11.v1.json",
+      "sha256": "db400b0832d13825ab0ca79075487163b318295d9851ed1e080a88abab4be4fe"
+    },
+    {
       "path": "content/course/contracts/evidence/m12.v1.json",
       "sha256": "235cb3cd376d5b5bf762637c9c4ff4f15ad68ac06b914c258c65b062f5a0ce12"
     },
@@ -422,7 +434,7 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "add7e9ae2acb9d54e3943d4bec491f987da8de3c37978794edc74f36aacefcc3"
+      "sha256": "9518c19fe88dcdb54f14b1d7984069b96fea80900f1062e682b5fd99ff13f679"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -430,7 +442,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "9fa55840b0611100295d284753895045f1148d1eb79e510e7e73bacc12f9a3ef"
+      "sha256": "cd2bec0ad9286d2fa6ba64e364bf8f746665c1dfefe4df7e2c7fd8e216b6eb23"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +526,7 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "31d5548cf0b543318fc6dce6f93686cd21958894f896a8e2829cfd02ed329a2d"
+      "sha256": "82d52bd3346f80b75604ca4e164f8c69bbd2a1234f95164dffd305bc4b4a40c3"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
@@ -603,6 +615,10 @@
     {
       "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
       "sha256": "832f5a54068993c8d2b56887bf28c99522a61f825cdffcea2b60b6fcb161d416"
+    },
+    {
+      "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
+      "sha256": "4a8d2b5700e0188b8d62be2763b22675dd2095d0e9c24aa7333572b76b4d853d"
     },
     {
       "path": "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md",
@@ -831,6 +847,10 @@
     {
       "path": "docs/module-evidence/m10/candidate-preflight.md",
       "sha256": "51d7036821803c748a71d695deafd25976089440e1544205c03c889bf916098a"
+    },
+    {
+      "path": "docs/module-evidence/m11/candidate-preflight.md",
+      "sha256": "b16967659862c82246cdba8dbecdf491320e74c53f88fc6a688ffe4ec8dea14e"
     },
     {
       "path": "docs/module-evidence/m12/candidate-preflight.md",
@@ -1066,7 +1086,7 @@
     },
     {
       "path": "tests/mermaid-accessibility.test.mjs",
-      "sha256": "12287381a181666638adbfcc4bc8438bcf04323ab5294d9a291b633d9c36894e"
+      "sha256": "bfc14dba882f1e7b306341c547fd5a2a2870d19730992c47e88b8ac27d691776"
     },
     {
       "path": "tests/rendered-html.test.mjs",

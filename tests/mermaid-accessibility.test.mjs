@@ -283,6 +283,24 @@ test("Module 10 is a complete graph-algorithms retrofit with scoped visual expla
   assert.ok(moduleTen.includes("m10-planner-architecture"));
 });
 
+test("Module 11 is a complete algorithm-strategy retrofit with scoped visual explanations", async () => {
+  const moduleEleven = await readFile(
+    new URL("../content/modules/11_algorithm_design_paradigms.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleEleven, {
+    sourcePath: "content/modules/11_algorithm_design_paradigms.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 10);
+  assert.equal(report.summary.completeBlocks, 10);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m11-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+  assert.ok(moduleEleven.includes("m11-algorithm-selection-knowledge-map"));
+});
+
 test("Module 29's continuous-change prerequisite map has a concise, scoped text alternative", async () => {
   const moduleTwentyNine = await readFile(
     new URL("../content/modules/29_calculus_real_analysis_continuous_change.md", import.meta.url),

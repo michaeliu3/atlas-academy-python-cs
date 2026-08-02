@@ -7514,6 +7514,836 @@
           ]
         }
       ]
-    }
+    },
+    {
+          "moduleId": "m11",
+          "packetId": "m11-algorithm-design-paradigms-structural-candidate",
+          "packetState": "structural-candidate",
+          "humanReviewState": "not-reviewed",
+          "publicationEffect": "none",
+          "canonicalExpectation": {
+            "academicPrerequisiteModuleIds": [
+              "m10"
+            ],
+            "forwardModuleId": "m12",
+            "masteryGateId": "algorithms",
+            "studioId": null
+          },
+          "workbookPath": "content/modules/11_algorithm_design_paradigms.md",
+          "sourceMapPath": "content/source-maps/arc_ii_source_map.md",
+          "sourceAuditAddendumPath": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
+          "sessionSpine": [
+            {
+              "sessionNumber": 1,
+              "pointerId": "m11-session-1",
+              "usesPrerequisiteModuleIds": [
+                "m10"
+              ],
+              "forwardArtifactId": "m11-session-1-output"
+            },
+            {
+              "sessionNumber": 2,
+              "pointerId": "m11-session-2",
+              "usesPrerequisiteModuleIds": [],
+              "forwardArtifactId": "m11-session-2-output"
+            },
+            {
+              "sessionNumber": 3,
+              "pointerId": "m11-session-3",
+              "usesPrerequisiteModuleIds": [],
+              "forwardArtifactId": "m11-session-3-output"
+            },
+            {
+              "sessionNumber": 4,
+              "pointerId": "m11-session-4",
+              "usesPrerequisiteModuleIds": [],
+              "forwardArtifactId": "m11-session-4-output"
+            },
+            {
+              "sessionNumber": 5,
+              "pointerId": "m11-session-5",
+              "usesPrerequisiteModuleIds": [],
+              "forwardArtifactId": "m11-session-5-output"
+            },
+            {
+              "sessionNumber": 6,
+              "pointerId": "m11-session-6",
+              "usesPrerequisiteModuleIds": [],
+              "forwardArtifactId": "m11-session-6-output"
+            }
+          ],
+          "pointers": [
+            {
+              "id": "m11-course-map",
+              "roles": [
+                "prerequisite-map"
+              ],
+              "label": "M11 course map",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "1-position-in-the-knowledge-graph"
+              }
+            },
+            {
+              "id": "m11-forward-handoff",
+              "roles": [
+                "forward-handoff"
+              ],
+              "label": "M11 forward handoff",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "25-backward-and-forward-connections"
+              }
+            },
+            {
+              "id": "m11-session-1",
+              "roles": [
+                "session"
+              ],
+              "label": "M11 session 1",
+              "sessionNumber": 1,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-1--formulate-before-optimizing"
+              }
+            },
+            {
+              "id": "m11-session-2",
+              "roles": [
+                "session"
+              ],
+              "label": "M11 session 2",
+              "sessionNumber": 2,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-2--decomposition-and-safe-commitment"
+              }
+            },
+            {
+              "id": "m11-session-3",
+              "roles": [
+                "session"
+              ],
+              "label": "M11 session 3",
+              "sessionNumber": 3,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-3--dynamic-programming-as-a-state-dag"
+              }
+            },
+            {
+              "id": "m11-session-4",
+              "roles": [
+                "session"
+              ],
+              "label": "M11 session 4",
+              "sessionNumber": 4,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-4--search-pruning-and-state-sufficiency"
+              }
+            },
+            {
+              "id": "m11-session-5",
+              "roles": [
+                "session"
+              ],
+              "label": "M11 session 5",
+              "sessionNumber": 5,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-5--randomness-approximation-and-uncertainty"
+              }
+            },
+            {
+              "id": "m11-session-6",
+              "roles": [
+                "session"
+              ],
+              "label": "M11 session 6",
+              "sessionNumber": 6,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-6--agent-directed-atlas-strategy-defense"
+              }
+            },
+            {
+              "id": "m11-session-1-output",
+              "roles": [
+                "session-output"
+              ],
+              "label": "M11 session 1 output",
+              "sessionNumber": 1,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-1-output--problem-contract-and-oracle-boundary"
+              }
+            },
+            {
+              "id": "m11-session-2-output",
+              "roles": [
+                "session-output"
+              ],
+              "label": "M11 session 2 output",
+              "sessionNumber": 2,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-2-output--strategy-proof-and-counterexample-card"
+              }
+            },
+            {
+              "id": "m11-session-3-output",
+              "roles": [
+                "session-output"
+              ],
+              "label": "M11 session 3 output",
+              "sessionNumber": 3,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-3-output--state-dag-and-reconstruction-note"
+              }
+            },
+            {
+              "id": "m11-session-4-output",
+              "roles": [
+                "session-output"
+              ],
+              "label": "M11 session 4 output",
+              "sessionNumber": 4,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-4-output--pruning-and-state-sufficiency-proof"
+              }
+            },
+            {
+              "id": "m11-session-5-output",
+              "roles": [
+                "session-output"
+              ],
+              "label": "M11 session 5 output",
+              "sessionNumber": 5,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-5-output--probability-and-quality-bound-ledger"
+              }
+            },
+            {
+              "id": "m11-session-6-output",
+              "roles": [
+                "session-output"
+              ],
+              "label": "M11 session 6 output",
+              "sessionNumber": 6,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-6-output--strategy-defense-dossier"
+              }
+            },
+            {
+              "id": "m11-first-principles",
+              "roles": [
+                "first-principles"
+              ],
+              "label": "M11 first principles",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "4-first-principle-optimization-has-five-separate-layers"
+              }
+            },
+            {
+              "id": "m11-definition",
+              "roles": [
+                "definition"
+              ],
+              "label": "M11 definition",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "layer-2--candidate"
+              }
+            },
+            {
+              "id": "m11-assumption",
+              "roles": [
+                "assumption"
+              ],
+              "label": "M11 assumption",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "layer-4--objective-and-tie-policy"
+              }
+            },
+            {
+              "id": "m11-derivation",
+              "roles": [
+                "derivation-proof"
+              ],
+              "label": "M11 derivation",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "correctness-argument"
+              }
+            },
+            {
+              "id": "m11-counterexample",
+              "roles": [
+                "counterexample"
+              ],
+              "label": "M11 counterexample",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "atlas-ratio-greedy-fails"
+              }
+            },
+            {
+              "id": "m11-numerical-experiment",
+              "roles": [
+                "numerical-experiment"
+              ],
+              "label": "M11 numerical experiment",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "numerical-experiment--compare-a-fixed-tiny-instance"
+              }
+            },
+            {
+              "id": "m11-code-reading",
+              "roles": [
+                "code-reading"
+              ],
+              "label": "M11 code reading",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "16-read-the-planner-in-dependency-order"
+              }
+            },
+            {
+              "id": "m11-debugging",
+              "roles": [
+                "debugging"
+              ],
+              "label": "M11 debugging",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "17-debugging-studio--when-a-smaller-state-is-too-small"
+              }
+            },
+            {
+              "id": "m11-design",
+              "roles": [
+                "design"
+              ],
+              "label": "M11 design",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "18-bounded-agent-task-and-patch-review"
+              }
+            },
+            {
+              "id": "m11-prediction",
+              "roles": [
+                "prediction"
+              ],
+              "label": "M11 prediction",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "prediction-before-reveal--state-sufficiency-under-a-changed-premise"
+              }
+            },
+            {
+              "id": "m11-transfer",
+              "roles": [
+                "transfer"
+              ],
+              "label": "M11 transfer",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "level-8--transfer"
+              }
+            },
+            {
+              "id": "m11-source-rationale",
+              "roles": [
+                "source-rationale"
+              ],
+              "label": "M11 source rationale",
+              "sessionNumber": null,
+              "target": {
+                "surface": "canonical-source-map",
+                "path": "content/source-maps/arc_ii_source_map.md",
+                "headingAnchor": "module-11--algorithm-design-paradigms"
+              }
+            },
+            {
+              "id": "m11-source-claim-linkage",
+              "roles": [
+                "claim-linkage"
+              ],
+              "label": "M11 source claim linkage",
+              "sessionNumber": null,
+              "target": {
+                "surface": "source-audit-addendum",
+                "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
+                "headingAnchor": "claim-linkage-and-stopping-lines"
+              }
+            },
+            {
+              "id": "m11-source-license-reuse",
+              "roles": [
+                "license-reuse"
+              ],
+              "label": "M11 source license reuse",
+              "sessionNumber": null,
+              "target": {
+                "surface": "source-audit-addendum",
+                "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
+                "headingAnchor": "license-and-reuse-boundary"
+              }
+            },
+            {
+              "id": "m11-stable-learner-links",
+              "roles": [
+                "stable-learner-link"
+              ],
+              "label": "M11 stable learner links",
+              "sessionNumber": null,
+              "target": {
+                "surface": "source-audit-addendum",
+                "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
+                "headingAnchor": "stable-learner-links"
+              }
+            },
+            {
+              "id": "m11-visual",
+              "roles": [
+                "visual"
+              ],
+              "label": "M11 visual",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "arc-ii-synthesis-map"
+              }
+            },
+            {
+              "id": "m11-text-alternative",
+              "roles": [
+                "text-alternative"
+              ],
+              "label": "M11 text alternative",
+              "sessionNumber": null,
+              "target": {
+                "surface": "source-audit-addendum",
+                "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
+                "headingAnchor": "visual-and-text-alternative-review-boundary"
+              }
+            },
+            {
+              "id": "m11-diagnostic",
+              "roles": [
+                "diagnostic"
+              ],
+              "label": "M11 diagnostic",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "21-understanding-check--eight-confidence-aware-mcqs"
+              }
+            },
+            {
+              "id": "m11-confidence",
+              "roles": [
+                "confidence"
+              ],
+              "label": "M11 confidence",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "interpretation"
+              }
+            },
+            {
+              "id": "m11-misconception",
+              "roles": [
+                "misconception"
+              ],
+              "label": "M11 misconception",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "misconception-repair-map--claims-before-tactics"
+              }
+            },
+            {
+              "id": "m11-retrieval",
+              "roles": [
+                "retrieval"
+              ],
+              "label": "M11 retrieval",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "scheduled-retrieval"
+              }
+            },
+            {
+              "id": "m11-dossier",
+              "roles": [
+                "dossier"
+              ],
+              "label": "M11 dossier",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "23-atlas-milestone-11--evidence-packet"
+              }
+            },
+            {
+              "id": "m11-acceptance",
+              "roles": [
+                "acceptance-criteria"
+              ],
+              "label": "M11 acceptance",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "evidence-rubric--strategy-dossier"
+              }
+            },
+            {
+              "id": "m11-rubric",
+              "roles": [
+                "rubric"
+              ],
+              "label": "M11 rubric",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "evidence-rubric--strategy-dossier"
+              }
+            },
+            {
+              "id": "m11-oral-protocol",
+              "roles": [
+                "oral-protocol"
+              ],
+              "label": "M11 oral protocol",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "conversational-oral-defense--m11"
+              }
+            },
+            {
+              "id": "m11-oral-hint",
+              "roles": [
+                "oral-hint"
+              ],
+              "label": "M11 oral hint",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "hint-ladder--model-to-evidence"
+              }
+            },
+            {
+              "id": "m11-oral-counterexample",
+              "roles": [
+                "oral-counterexample"
+              ],
+              "label": "M11 oral counterexample",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "changed-premise-counterexample"
+              }
+            },
+            {
+              "id": "m11-oral-reflection",
+              "roles": [
+                "oral-reflection"
+              ],
+              "label": "M11 oral reflection",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "reflection--learner-controlled-evidence-summary"
+              }
+            },
+            {
+              "id": "m11-oral-summary",
+              "roles": [
+                "oral-summary"
+              ],
+              "label": "M11 oral summary",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "session-6-output--strategy-defense-dossier"
+              }
+            },
+            {
+              "id": "m11-ta",
+              "roles": [
+                "ta"
+              ],
+              "label": "M11 TA",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "teaching-assistant--supportive-oral-defense"
+              }
+            },
+            {
+              "id": "m11-study-partner",
+              "roles": [
+                "study-partner"
+              ],
+              "label": "M11 Study Partner",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "study-partner--design-paradigm-rehearsal"
+              }
+            },
+            {
+              "id": "m11-oral-transfer",
+              "roles": [
+                "oral-transfer"
+              ],
+              "label": "M11 oral transfer",
+              "sessionNumber": null,
+              "target": {
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "transfer-turn--m12-boundary"
+              }
+            }
+          ],
+          "criteria": [
+            {
+              "criterionId": "prerequisite-forward-map",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-course-map",
+                "m11-forward-handoff"
+              ]
+            },
+            {
+              "criterionId": "six-connected-sessions",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-session-1",
+                "m11-session-2",
+                "m11-session-3",
+                "m11-session-4",
+                "m11-session-5",
+                "m11-session-6"
+              ]
+            },
+            {
+              "criterionId": "first-principles",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-first-principles"
+              ]
+            },
+            {
+              "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-definition",
+                "m11-assumption",
+                "m11-derivation",
+                "m11-counterexample",
+                "m11-numerical-experiment"
+              ]
+            },
+            {
+              "criterionId": "code-reading-debugging-design",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-code-reading",
+                "m11-debugging",
+                "m11-design"
+              ]
+            },
+            {
+              "criterionId": "prediction-before-reveal",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-prediction"
+              ]
+            },
+            {
+              "criterionId": "transfer-task",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-transfer"
+              ]
+            },
+            {
+              "criterionId": "source-ledger",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-source-rationale",
+                "m11-source-claim-linkage",
+                "m11-source-license-reuse",
+                "m11-stable-learner-links"
+              ]
+            },
+            {
+              "criterionId": "accessible-visual-text-alternative",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-visual",
+                "m11-text-alternative"
+              ]
+            },
+            {
+              "criterionId": "confidence-diagnostic-misconceptions",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-diagnostic",
+                "m11-confidence",
+                "m11-misconception"
+              ]
+            },
+            {
+              "criterionId": "retrieval-and-spaced-review",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-retrieval"
+              ]
+            },
+            {
+              "criterionId": "project-and-evidence-rubric",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-dossier",
+                "m11-acceptance",
+                "m11-rubric"
+              ]
+            },
+            {
+              "criterionId": "supportive-oral-defense",
+              "legacyAuditStatus": "ambiguous",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-oral-protocol",
+                "m11-oral-hint",
+                "m11-oral-counterexample",
+                "m11-oral-transfer",
+                "m11-oral-reflection",
+                "m11-oral-summary"
+              ]
+            },
+            {
+              "criterionId": "ta-prompt",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-ta"
+              ]
+            },
+            {
+              "criterionId": "study-partner-prompt",
+              "legacyAuditStatus": "missing",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-study-partner"
+              ]
+            },
+            {
+              "criterionId": "forward-handoff",
+              "legacyAuditStatus": "pointer-present",
+              "structuralState": "mapped-not-reviewed",
+              "pointerIds": [
+                "m11-forward-handoff"
+              ]
+            }
+          ],
+          "implementationArtifacts": [
+            {
+              "id": "m11-visual-reader",
+              "kind": "studio",
+              "paths": [
+                "app/modules/[slug]/MermaidDiagram.tsx",
+                "tests/mermaid-accessibility.test.mjs"
+              ]
+            },
+            {
+              "id": "m11-guided-companion",
+              "kind": "oral-guide",
+              "paths": [
+                "content/course/contracts/companions/m11.v1.json"
+              ]
+            }
+          ]
+        }
   ]
 }

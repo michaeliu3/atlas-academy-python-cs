@@ -28,6 +28,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m08 = report.byModuleId.get("m08");
   const m09 = report.byModuleId.get("m09");
   const m10 = report.byModuleId.get("m10");
+  const m11 = report.byModuleId.get("m11");
   const m12 = report.byModuleId.get("m12");
   const m13 = report.byModuleId.get("m13");
   const m27 = report.byModuleId.get("m27");
@@ -48,7 +49,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 28);
+  assert.equal(report.summary.companionCount, 29);
   assert.deepEqual(report.summary.moduleIds, [
     "m01",
     "m02",
@@ -60,6 +61,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
     "m08",
     "m09",
     "m10",
+    "m11",
     "m12",
     "m13",
     "m19",
@@ -123,6 +125,11 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.equal(m10.guideBinding.locator, "/guides/9");
   assert.equal(m10.forwardHandoff.targetModuleId, "m11");
   assert.equal(moduleLearningCompanionRelativePath("m10"), "content/course/contracts/companions/m10.v1.json");
+  assert.equal(m11.guideBinding.locator, "/guides/10");
+  assert.equal(m11.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m11.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m11.forwardHandoff.targetModuleId, "m12");
+  assert.equal(moduleLearningCompanionRelativePath("m11"), "content/course/contracts/companions/m11.v1.json");
   assert.equal(m12.guideBinding.locator, "/guides/11");
   assert.equal(m12.teachingAssistant.role, "supportive-oral-defense");
   assert.equal(m12.studyPartner.role, "non-grading-rehearsal");
