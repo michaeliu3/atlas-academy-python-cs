@@ -65,6 +65,52 @@ For each pack, work one session at a time. Paste or attach only the relevant
 section to the designated chat when the chat cannot see the private repository;
 do not ask it to invent missing sources, experiments, or results.
 
+## Continue M31–M36 after Session 1
+
+Use this same short bridge for **M31, M32, M33, M34, M35, and M36**. It keeps a
+session artifact, uncertainty, and next question visible when the learner moves
+between the Study Partner and Teaching Assistant chats. These remain private,
+authoring-only rehearsals—not a grade, release, unlock, or credit.
+
+### Sessions 2–5 — Study Partner → TA checkpoint
+
+In the designated **Study Partner** chat, paste the relevant workbook section
+and say. Replace each bracketed field before sending:
+
+```text
+Continue M[31–36], Session [2–5] — [workbook session title]. The named Output
+for this session is [exact artifact name]. Work only from the attached or named
+section. Before you explain, ask me to predict the result and give my confidence
+(0–100). Help me read or construct the artifact, change one premise, and name
+one assumption or non-claim. Do not invent an experiment, source, result, or
+tool execution. Use readable equations, labelled code, or compact traces with a
+prose/ASCII fallback if rendering is uncertain. End with this compact TA
+handoff: session and Output; attempted reasoning; prediction versus observation;
+smallest artifact; one assumption or non-claim; unresolved misconception or
+question; and the smallest suggested next action.
+```
+
+The learner may take that handoff to the **Teaching Assistant** for an optional
+short checkpoint. The TA repairs one fragile model, reviews the actual artifact,
+asks one changed-premise or transfer question, and returns one concrete repair
+or next action. This is a constructive checkpoint, not the module oral defense
+and not a score.
+
+### Session 6 — supportive Teaching Assistant oral defense
+
+Use the same Study Partner handoff after the final session, but identify the
+completed dossier or packet and the learner's remaining uncertainty. Then use
+the module's Teaching Assistant prompt for its **supportive Teaching Assistant
+oral defense**: explanation, hint ladder, counterexample or changed premise,
+transfer, reflection, and a learner-controlled evidence summary. It must stay
+adaptive and non-grading; no fluent answer alone proves mastery.
+
+For either path, say `records on` only when the learner wants the configured
+concise-note policy, its approved integration is available, and the session is
+substantive. Say `off-record` or `pause records` to keep the session out of that
+policy. Never claim that a Notion write, voice transcript, formatting event,
+publication, or completion occurred without direct evidence.
+
 ### Start the first M31 pilot
 
 M31 remains a private, authoring-only instructor-led pack; this starts a

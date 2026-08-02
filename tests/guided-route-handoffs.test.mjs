@@ -107,3 +107,45 @@ test("private guided continuation remains distinct from portal release", async (
   assert.match(routePage, /Primary guided learning happens in Codex/u);
   assert.match(routePage, /Teaching Assistant and Study Partner guide/u);
 });
+
+test("private advanced packs provide a bounded Session 2–6 chat continuation", async () => {
+  const privateRoute = await readFile(
+    new URL("../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(privateRoute, /## Continue M31–M36 after Session 1/u);
+  assert.match(privateRoute, /M31, M32, M33, M34, M35, and M36/u);
+  assert.match(
+    privateRoute,
+    /Sessions 2–5[\s\S]{0,900}Study Partner → TA checkpoint/u,
+  );
+  assert.match(privateRoute, /optional\s+short checkpoint/u);
+  assert.match(privateRoute, /not the module oral defense/u);
+  assert.match(
+    privateRoute,
+    /predict the result and give my confidence[\s\S]{0,80}\(0–100\)/u,
+  );
+  assert.match(
+    privateRoute,
+    /Session 6[\s\S]{0,900}supportive Teaching Assistant oral defense/u,
+  );
+  assert.match(privateRoute, /adaptive and non-grading/u);
+  assert.match(
+    privateRoute,
+    /not a grade, release, unlock, or credit/u,
+  );
+  assert.match(
+    privateRoute,
+    /records on[\s\S]{0,260}off-record/u,
+  );
+  assert.match(privateRoute, /Replace each bracketed field before sending/u);
+  assert.match(
+    privateRoute,
+    /readable equations, labelled code, or compact traces[\s\S]{0,180}prose\/ASCII fallback/u,
+  );
+  assert.match(
+    privateRoute,
+    /approved integration is available, and the session is\s+substantive/u,
+  );
+});
