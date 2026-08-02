@@ -301,6 +301,30 @@ test("Module 11 is a complete algorithm-strategy retrofit with scoped visual exp
   assert.ok(moduleEleven.includes("m11-algorithm-selection-knowledge-map"));
 });
 
+test("Modules 14 through 16 retain complete, readable visual explanations", async () => {
+  for (const [moduleNumber, filename, expectedBlocks, knowledgeMapId] of [
+    ["14", "14_software_design_and_change.md", 8, "m14-design-change-knowledge-map"],
+    ["15", "15_files_serialization_packaging_delivery.md", 19, "m15-durable-delivery-knowledge-map"],
+    ["16", "16_relational_data_transactions.md", 9, "m16-relational-one-page-map"],
+  ]) {
+    const markdown = await readFile(
+      new URL(`../content/modules/${filename}`, import.meta.url),
+      "utf8",
+    );
+    const blocks = scanMermaidBlocks(markdown, {
+      sourcePath: `content/modules/${filename}`,
+    });
+    const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+    assert.equal(blocks.length, expectedBlocks);
+    assert.equal(report.summary.completeBlocks, expectedBlocks);
+    assert.equal(report.summary.incompleteBlocks, 0);
+    assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith(`m${moduleNumber}-`)));
+    assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+    assert.ok(blocks.some(({ metadata }) => metadata?.id === knowledgeMapId));
+  }
+});
+
 test("Module 29's continuous-change prerequisite map has a concise, scoped text alternative", async () => {
   const moduleTwentyNine = await readFile(
     new URL("../content/modules/29_calculus_real_analysis_continuous_change.md", import.meta.url),

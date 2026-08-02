@@ -2614,9 +2614,11 @@ Disposition: reject, preserve the good entry-point line if it was absent, and re
 | release artifact is unchanged | compare promotion artifact to approved external digest | expected-digest channel remains trusted |
 | rollback is viable | install previous wheel + read current data/restore disposable backup | rehearsed data/environment only |
 
-### 16.5 Oral defense
+### 16.5 Conversation rehearsal — use the canonical oral-defense flow below
 
-Without code, explain in six minutes:
+Use this as an optional prompt bank for the single conversational oral-defense
+flow below. The learner may keep a code, byte, or artifact sketch visible,
+choose any subset, pause for a hint, and finish with an uncertainty:
 
 1. why the same event is a Python value, schema value, text, bytes, file, and installed-system input without those being the same representation;
 2. the exact v0 → v1 path and unsupported-version behavior;
@@ -2625,7 +2627,8 @@ Without code, explain in six minutes:
 5. what hashes, clean install, and Trusted Publishing each establish and omit;
 6. the strongest rollback uncertainty.
 
-If the explanation skips a boundary, the artifact is not yet owned.
+If the explanation skips a boundary, name a useful next question or evidence
+request; it is not a readiness, ownership, or pass/fail gate.
 
 ---
 
@@ -2633,7 +2636,7 @@ If the explanation skips a boundary, the artifact is not yet owned.
 
 Every session consumes the preceding artifact. The instructor alternates brief explanation with prediction, tracing, comparison, inspection, and defense. No session is a packaging-command recital.
 
-### Session 1 — One event crosses text, byte, and path boundaries
+## Session 1 — One event crosses text, byte, and path boundaries
 
 **Consumes:** Module 14’s validated `StudyEvent`, in-memory `ImportSource.text`, explicit composition boundary, and compatibility ledger.
 
@@ -2685,13 +2688,20 @@ Which can change the bytes while preserving intended event meaning: object-key o
 - encoding/newline/path decision note;
 - three failure examples and their responsible boundaries.
 
+### Session 1 output — representation boundary trace
+
+Keep the value → schema → text → bytes → path trace, named encoding/newline
+policy, authority boundary, and one prediction that distinguishes data meaning
+from its representation. Session 2 uses this trace to reason about resource
+lifetime and visible partial effects.
+
 **TA handoff**
 
 If text and bytes remain fused, return to Module 6 before schema work. If a path object is described as a capability or security proof, use the lexical/resolution/handle diagram and one check/use counterexample.
 
 ---
 
-### Session 2 — Resource lifetime becomes a publication failure timeline
+## Session 2 — Resource lifetime becomes a publication failure timeline
 
 **Consumes:** explicit v1 bytes and target-path policy from Session 1.
 
@@ -2748,13 +2758,19 @@ Even if the caller owns `stream` with a context manager, a later iterator failur
 - injected-failure expectation;
 - cost comparison and one unresolved multi-writer question.
 
+### Session 2 output — resource and publication failure timeline
+
+Record acquire/use/flush/close/replace/observer events, what can be visible at
+each point, the filesystem assumptions, and the strongest honest nonclaim.
+Session 3 turns that timeline into an explicit schema and migration decision.
+
 **TA handoff**
 
 If “closed” means “durable,” ask the learner to place Python buffer, OS/page cache, filesystem metadata, controller, device, recovery, and backup on separate rows. Do not teach unqualified folklore about `fsync` or rename.
 
 ---
 
-### Session 3 — A schema version becomes a migration and trust decision
+## Session 3 — A schema version becomes a migration and trust decision
 
 **Consumes:** bounded canonical bytes and publication model from Sessions 1–2.
 
@@ -2809,13 +2825,19 @@ Byte identity relative to a compromised assertion may be established; trustworth
 - format-selection note rejecting pickle;
 - archive allowlist and resource-limit note.
 
+### Session 3 output — schema migration and trust contract
+
+Preserve accepted versions, rejected inputs, migration purity/order claims,
+resource limits, one adversarial fixture, and the evidence still needed before
+treating an artifact as trustworthy. Session 4 attacks this boundary.
+
 **TA handoff**
 
 If parsing and validation are fused, use a valid JSON string with wrong Atlas shape. If digest and authentication are fused, change both artifact and adjacent expected digest in the counterexample.
 
 ---
 
-### Session 4 — Read, attack, and defend the Atlas bundle implementation
+## Session 4 — Read, attack, and defend the Atlas bundle implementation
 
 **Consumes:** schemas, migration map, manifest, and failure model from Sessions 1–3.
 
@@ -2860,13 +2882,20 @@ There is no universal answer; choose based on what the artifact identity is mean
 - one accepted/rejected patch disposition;
 - updated boundary and limitation ledger.
 
+### Session 4 output — attack and defense boundary review
+
+Write the smallest allowed input surface, byte/grammar/schema/domain checks,
+one failure trace, one proposed repair, and the library/platform fact that must
+be verified rather than assumed. Session 5 carries that contract into the
+built artifact.
+
 **TA handoff**
 
 If test success replaces explanation, ask the learner to prove one loop/transition property and name two untested platform assumptions. If review starts with style, return to public contract and failure order.
 
 ---
 
-### Session 5 — The source tree becomes an inspected installed command
+## Session 5 — The source tree becomes an inspected installed command
 
 **Consumes:** reviewed bundle/CLI core and evidence from Session 4.
 
@@ -2922,13 +2951,19 @@ Use local built artifacts and a disposable environment. If the pinned build depe
 - fresh-install transcript;
 - discrepancies and acceptance disposition.
 
+### Session 5 output — artifact and clean-install receipt
+
+Keep source, sdist, wheel, installed files, and command observations in one
+five-column map, including `METADATA`/`WHEEL`/`RECORD`, interpreter and
+resolver context, exact artifact identity, and one compatibility limit.
+
 **TA handoff**
 
 If the learner describes build frontend, backend, resolver, installer, and environment as “pip,” redraw participants and require one file/evidence item owned by each.
 
 ---
 
-### Session 6 — Rehearse release, rollback, and agent-patch defense
+## Session 6 — Rehearse release, rollback, and agent-patch defense
 
 **Consumes:** one verified local wheel, clean-install evidence, and the entire bundle compatibility record.
 
@@ -2946,7 +2981,8 @@ If the learner describes build frontend, backend, resolver, installer, and envir
 8. run post-promotion CLI evidence in a disposable environment;
 9. rehearse code rollback and test whether the old command can read current v1 data;
 10. decide forward fix versus rollback when data compatibility is absent;
-11. conduct the six-minute oral defense;
+11. use the conversational oral-defense flow below with a learner-selected
+    prompt and stopping point;
 12. hand the bundle limitations to Module 16.
 
 **Release incident**
@@ -2963,6 +2999,13 @@ No. Code artifact rollback would restore an old binary that cannot interpret cur
 - agent patch review and corrective brief;
 - code/data rollback rehearsal;
 - Arc III handoff stating why a relational transaction boundary is next.
+
+### Session 6 output — release and rollback defense with M16 handoff
+
+Package the durable-boundary record, migration/failure evidence, artifact
+receipt, rollback limits, unresolved trust or platform assumption, and the
+M16 question: which linked facts now require one transactional visibility and
+reconciliation boundary rather than independent files?
 
 **Evidence to inspect before choosing a next step**
 
@@ -3578,9 +3621,11 @@ facts; a digest or successful build alone is not a release proof.
 | delivery/rollback | keeps old wheel | evidence-gated release + data check | handles incident tradeoffs/authority/uncertainty |
 | explanation | uses terminology | connected first-principles story | precise multi-layer oral defense with limits/costs |
 
-### 21.5 Oral defense prompts
+### 21.5 Optional prompt bank for the same conversation
 
-Select four:
+Choose any four only if useful for the canonical conversational oral-defense
+flow below. They are not timed, recorded, scored, or used as a completion
+decision:
 
 1. A user says the JSON “looks fine.” Walk from bytes to domain truth.
 2. Prove what the v0 → v1 score mapping preserves.
@@ -3951,6 +3996,50 @@ Then answer:
 > A generated patch builds a wheel, passes tests, and produces a matching digest. What must you still inspect, challenge, and verify before Atlas deserves release?
 
 A complete answer traverses public/schema behavior, error and cleanup paths, artifact contents/metadata, dependency graph, fresh install, target compatibility, publisher/build authority, data migration, promotion identity, post-promotion observation, rollback, costs, and unsupported claims.
+
+## Conversational oral defense — M15
+
+This is a supportive Teaching Assistant conversation, not a release approval or
+pass/fail exam. If the learner chooses GPT Live at a preferred setting and
+their client renders the material, use the byte trace, schema table, artifact
+listing, code, and formulae as a shared whiteboard. This workbook cannot
+control voice availability, quality settings, rendering, retention, or
+integrations. The same conversation protocol can instead use readable text
+with Markdown and an ASCII value → bytes → artifact sketch; nothing is
+automatically written to Notion or treated as completion evidence.
+
+### Invitation — trace one durable claim
+
+Invite the learner to choose one artifact and say: “This value crosses
+[boundary]; this evidence supports [claim]; this assumption remains
+[assumption]; my confidence is [level].” Ask for the trace before a command or
+tool name.
+
+### Hint ladder — meaning to reversible operation
+
+Move one rung at a time: domain contract → schema/version → text/bytes policy
+→ resource/failure timeline → validation/trust boundary → built artifact and
+fresh-install observation → code/data rollback condition. Offer the smallest
+counterexample or evidence request instead of a judgment.
+
+### Changed-premise counterexample
+
+Keep the release goal but change one premise: an old reader rejects the new
+schema, a ZIP has a duplicate logical member, or the exact wheel installs but
+the resolver chooses a different dependency graph. Ask which claim, artifact,
+test, or recovery plan must change and which layer remains outside the proof.
+
+### Transfer turn — M16 transaction boundary
+
+Ask which two durable facts can no longer be safely published as independent
+file effects, and what key, atomic visibility, retry identity, or recovery
+evidence M16 must introduce.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may retain a compact record: boundary trace, prediction, observed
+artifact evidence, changed-premise repair, confidence, unresolved assumption,
+and one M16 question. Copy/export only with learner approval.
 
 ## Guided Codex handoff — M15
 

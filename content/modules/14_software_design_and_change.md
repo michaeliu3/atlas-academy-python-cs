@@ -2013,9 +2013,11 @@ through a plugin patch.
 | Patch is reversible | isolated root switch + coherent commits | data/external consumers may add cost |
 | Performance acceptable | benchmark/profile in target environment | reference asymptotics are not latency |
 
-### 16.4 Oral defense
+### 16.4 Conversation rehearsal — use the canonical oral-defense flow below
 
-In four minutes, without code:
+Use this as an optional prompt bank for the single conversational oral-defense
+flow below. The learner may keep code or a visible sketch open, choose any
+subset, pause for a hint, and finish with an uncertainty rather than a verdict:
 
 1. name the four change pressures;
 2. draw the dependency and runtime-flow graphs separately;
@@ -2032,7 +2034,7 @@ In four minutes, without code:
 These meetings are one staged change. Each begins with retrieval, adds one
 abstraction jump, and leaves an artifact used by the next meeting.
 
-### Session 1 — Reconstruct pressure and observable behavior
+## Session 1 — Reconstruct pressure and observable behavior
 
 **Question:** What is expensive about the coupled prototype, and what must not
 change accidentally?
@@ -2062,12 +2064,26 @@ change accidentally?
 - write two independent expected results without calling production helpers;
 - explain why passing cases are evidence, not equivalence proof.
 
+### Prediction before reveal — one change, one preserved observation
+
+Before inspecting a proposed refactor, predict which public observation could
+change if the ranking policy is moved behind a new owner. State confidence and
+the smallest characterization or regression that would challenge the
+prediction; then compare the patch with that evidence rather than its style.
+
 **Artifact:** characterization matrix, pressure map, and uncertainty list.
+
+### Session 1 output — preservation ledger and pressure map
+
+Keep one compact record: the chosen public observations, the four change
+pressures, one invariant, one unresolved assumption, and the smallest test or
+trace that would expose a regression. Session 2 uses this record to judge
+decompositions rather than treating a pattern name as a design decision.
 
 **Exit check:** Michael can answer “relative to which observations?” whenever
 someone says “behavior-preserving.”
 
-### Session 2 — Compare decompositions by change axis
+## Session 2 — Compare decompositions by change axis
 
 **Question:** Which decisions should live together?
 
@@ -2097,10 +2113,17 @@ someone says “behavior-preserving.”
 
 **Artifact:** responsibility table and architecture decision draft.
 
+### Session 2 output — responsibility and decomposition decision
+
+Record the change axis, owner, dependency direction, selected decomposition,
+one rejected alternative, and the observable behavior that remains protected.
+Carry this decision into the state/failure boundary rather than starting a new
+architecture story.
+
 **Exit check:** every design choice names a pressure, invariant, and rejected
 alternative.
 
-### Session 3 — Enforce state and failure boundaries
+## Session 3 — Enforce state and failure boundaries
 
 **Question:** How do explicit transitions and composition prevent invalid
 behavior?
@@ -2129,9 +2152,15 @@ behavior?
 
 **Artifact:** state table, failure taxonomy, and retry evidence.
 
+### Session 3 output — state, failure, and retry boundary
+
+Preserve a legal-transition table, a failure classification, the retry
+atomicity boundary, its space/repeatability assumptions, and one adversarial
+trace. Session 4 treats this as a contract that staged commits must preserve.
+
 **Exit check:** Michael can explain both the safety and cost of atomic retry.
 
-### Session 4 — Stage a compatible refactor in the Git graph
+## Session 4 — Stage a compatible refactor in the Git graph
 
 **Question:** How should the change be divided so each step is understandable
 and reversible?
@@ -2160,10 +2189,16 @@ and reversible?
 
 **Artifact:** commit storyboard, compatibility window, and rollback preconditions.
 
+### Session 4 output — staged Git change and rollback conditions
+
+Write the coherent commit sequence, each commit's preserved observation, the
+compatibility window, reversal route, and the condition that would block a
+rollback. Session 5 reviews this evidence, not an isolated diff.
+
 **Exit check:** the story remains buildable and reviewable after every planned
 commit.
 
-### Session 5 — Review an agent patch and localize a regression
+## Session 5 — Review an agent patch and localize a regression
 
 **Question:** Does the patch implement the declared change model?
 
@@ -2192,10 +2227,16 @@ commit.
 
 **Artifact:** structured review, evidence gaps, and bisect predicate checklist.
 
+### Session 5 output — evidence-led review and bisect predicate
+
+Keep the ranked findings, consequence, missing evidence, smallest repair
+direction, and reproducible good/bad predicate. The final defense must say
+which green check still leaves uncertainty.
+
 **Exit check:** every blocking review comment has a concrete consequence and a
 resolution route.
 
-### Session 6 — Atlas change defense and handoff
+## Session 6 — Atlas change defense and handoff
 
 **Question:** Does the refactor deserve trust, and is it ready to cross a durable
 boundary in M15?
@@ -2211,7 +2252,8 @@ boundary in M15?
 2. Run reference, adversarial, compatibility, and architecture checks.
 3. Inspect the Git story and reversal route.
 4. Challenge operational and dynamic-dependency blind spots.
-5. Conduct the four-minute oral defense.
+5. Use the conversational oral-defense flow below; let the learner choose a
+   prompt, hint, and stopping point.
 6. Freeze handoff invariants for file/schema/package work.
 
 **Learner actions**
@@ -2223,6 +2265,13 @@ boundary in M15?
 - state the M15 handoff: in-memory text/dict is not yet durable or versioned.
 
 **Artifact:** Atlas Module 14 evidence packet and durable-boundary handoff.
+
+### Session 6 output — change defense and M15 durable-boundary handoff
+
+Package the pressure-to-contract story, architecture map, state/failure trace,
+review decision, reversal condition, residual uncertainty, and the M15
+question: which in-memory assumptions must become explicit bytes, schema,
+artifact, or rollback evidence?
 
 **Exit check:** Michael can reconstruct contracts, state transitions, dependency
 ownership, evidence, and reversal without relying on a pattern label.
@@ -2387,7 +2436,8 @@ Design:
 Finally connect it back to Atlas by identifying which M15 serialized observation
 would need versioning.
 
-**Deliverable:** architecture decision record plus a four-minute oral defense.
+**Deliverable:** architecture decision record plus a learner-selected
+conversation summary from the canonical oral-defense flow below.
 
 **Mastery evidence:** the learner transfers forces and invariants, not Atlas
 class names.
@@ -2752,7 +2802,9 @@ Refactor the coupled study-session planner while:
 10. **Compatibility plan:** expand/migrate/contract, removal condition, rollback
     preconditions.
 11. **Cost note:** time, space, latency, repeated work, CI/reviewer cost.
-12. **Oral defense:** four-minute recording or transcript.
+12. **Conversation summary:** learner-selected explanation, visible artifact,
+    confidence, and unresolved uncertainty from the canonical oral-defense
+    flow below; no recording or transcript is required.
 
 ### 21.3 Rubric
 
@@ -3123,6 +3175,50 @@ Then answer one final transfer:
 > If Module 15 serializes `PlanSnapshot`, which previously internal observations
 > become durable compatibility promises, and which migration evidence must exist
 > before renaming them?
+
+## Conversational oral defense — M14
+
+This is a supportive Teaching Assistant conversation, not a pass/fail exam.
+If the learner chooses GPT Live at a preferred setting and their client renders
+the material, use the selected contract, code fragment, equation, and diagram
+as a shared whiteboard. This workbook cannot control voice availability,
+quality settings, rendering, retention, or integrations. The same conversation
+protocol can instead use readable text with Markdown and a small ASCII
+dependency/state sketch. Do not infer a score, completion, or automatic note
+from the conversation.
+
+### Invitation — pressure before pattern
+
+Ask the learner to choose one change pressure and say: “This observable
+behavior must stay [claim]; I would move [decision] behind [owner]; my
+confidence is [level].” Draw source dependencies and runtime calls separately
+before naming a pattern.
+
+### Hint ladder — observation to reversible change
+
+If stuck, move one rung at a time: preserved observation → invariant → change
+axis → owner/dependency arrow → state/failure boundary → characterization or
+regression evidence → commit/reversal condition. Offer a hint or a tiny trace,
+not a verdict.
+
+### Changed-premise counterexample
+
+Keep the requested ranking feature but change one premise: the importer now
+has a non-idempotent side effect, or the old CLI field must persist for two
+releases. Ask which retry, boundary, test, compatibility, or rollback claim
+must change and what remains unproven.
+
+### Transfer turn — M15 durable boundary
+
+Ask which M14 observation becomes an on-disk or installed-artifact promise in
+M15, and which version/migration or artifact-inspection evidence would make
+that promise reviewable.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a short summary: selected pressure, preserved observation,
+diagram or trace, changed-premise repair, confidence, unresolved assumption,
+and one M15 question. Copy or export it only with the learner's approval.
 
 ## Guided Codex handoff — M14
 

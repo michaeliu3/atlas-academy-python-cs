@@ -8344,6 +8344,2538 @@
               ]
             }
           ]
+        },
+    {
+      "moduleId": "m14",
+      "packetId": "m14-software-design-change-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m13"
+        ],
+        "forwardModuleId": "m15",
+        "masteryGateId": "software",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/14_software_design_and_change.md",
+      "sourceMapPath": "content/source-maps/arc_iii_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m14-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m13"
+          ],
+          "forwardArtifactId": "m14-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m14-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m14-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m14-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m14-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m14-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m14-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m14-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m14-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m14-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m14-session-6-output"
         }
+      ],
+      "pointers": [
+        {
+          "id": "m14-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M14 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "1-position-in-the-knowledge-graph"
+          }
+        },
+        {
+          "id": "m14-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M14 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "23-backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m14-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M14 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-1--reconstruct-pressure-and-observable-behavior"
+          }
+        },
+        {
+          "id": "m14-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M14 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-2--compare-decompositions-by-change-axis"
+          }
+        },
+        {
+          "id": "m14-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M14 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-3--enforce-state-and-failure-boundaries"
+          }
+        },
+        {
+          "id": "m14-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M14 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-4--stage-a-compatible-refactor-in-the-git-graph"
+          }
+        },
+        {
+          "id": "m14-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M14 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-5--review-an-agent-patch-and-localize-a-regression"
+          }
+        },
+        {
+          "id": "m14-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M14 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-6--atlas-change-defense-and-handoff"
+          }
+        },
+        {
+          "id": "m14-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M14 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-1-output--preservation-ledger-and-pressure-map"
+          }
+        },
+        {
+          "id": "m14-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M14 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-2-output--responsibility-and-decomposition-decision"
+          }
+        },
+        {
+          "id": "m14-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M14 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-3-output--state-failure-and-retry-boundary"
+          }
+        },
+        {
+          "id": "m14-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M14 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-4-output--staged-git-change-and-rollback-conditions"
+          }
+        },
+        {
+          "id": "m14-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M14 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-5-output--evidence-led-review-and-bisect-predicate"
+          }
+        },
+        {
+          "id": "m14-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M14 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-6-output--change-defense-and-m15-durable-boundary-handoff"
+          }
+        },
+        {
+          "id": "m14-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M14 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "4-begin-with-pressure-not-pattern"
+          }
+        },
+        {
+          "id": "m14-first-principles-continuation",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M14 first-principles continuation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "5-preserve-observations-before-moving-code"
+          }
+        },
+        {
+          "id": "m14-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M14 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "41-responsibility-means-ownership-of-a-decision"
+          }
+        },
+        {
+          "id": "m14-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M14 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "51-refactoring-is-specification-relative"
+          }
+        },
+        {
+          "id": "m14-derivation-proof",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M14 derivation-proof",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "141-correctness-argument"
+          }
+        },
+        {
+          "id": "m14-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "M14 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "72-inheritance-promises-substitutability"
+          }
+        },
+        {
+          "id": "m14-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M14 numerical-experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "42-change-amplification-is-inspectable-evidence"
+          }
+        },
+        {
+          "id": "m14-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M14 code-reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "15-architecture-reading-studio"
+          }
+        },
+        {
+          "id": "m14-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M14 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "level-5--debug-and-defend-retry-duplicates-a-prefix"
+          }
+        },
+        {
+          "id": "m14-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M14 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "16-design-delegate-review-verify"
+          }
+        },
+        {
+          "id": "m14-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M14 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "prediction-before-reveal--one-change-one-preserved-observation"
+          }
+        },
+        {
+          "id": "m14-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "M14 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "level-8--transfer-design-a-document-approval-workflow"
+          }
+        },
+        {
+          "id": "m14-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M14 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/arc_iii_source_map.md",
+            "headingAnchor": "module-14--software-design-and-change"
+          }
+        },
+        {
+          "id": "m14-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M14 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m14-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M14 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m14-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M14 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m14-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M14 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "22-consolidated-knowledge-map"
+          }
+        },
+        {
+          "id": "m14-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M14 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+            "headingAnchor": "visual-and-text-alternative-review-boundary"
+          }
+        },
+        {
+          "id": "m14-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M14 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "19-confidence-aware-diagnostic-quiz"
+          }
+        },
+        {
+          "id": "m14-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M14 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "19-confidence-aware-diagnostic-quiz"
+          }
+        },
+        {
+          "id": "m14-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M14 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "201-misconception-map"
+          }
+        },
+        {
+          "id": "m14-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M14 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "224-spaced-retrieval-schedule"
+          }
+        },
+        {
+          "id": "m14-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M14 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "21-atlas-milestone-and-evidence-packet"
+          }
+        },
+        {
+          "id": "m14-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M14 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "214-acceptance-decision"
+          }
+        },
+        {
+          "id": "m14-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M14 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "213-rubric"
+          }
+        },
+        {
+          "id": "m14-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M14 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "conversational-oral-defense--m14"
+          }
+        },
+        {
+          "id": "m14-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M14 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "hint-ladder--observation-to-reversible-change"
+          }
+        },
+        {
+          "id": "m14-oral-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "M14 oral counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "changed-premise-counterexample"
+          }
+        },
+        {
+          "id": "m14-oral-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "M14 oral transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "transfer-turn--m15-durable-boundary"
+          }
+        },
+        {
+          "id": "m14-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M14 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "reflection--learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m14-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M14 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "session-6-output--change-defense-and-m15-durable-boundary-handoff"
+          }
+        },
+        {
+          "id": "m14-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M14 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m14-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M14 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/14_software_design_and_change.md",
+            "headingAnchor": "study-partner--change-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-course-map",
+            "m14-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-session-1",
+            "m14-session-2",
+            "m14-session-3",
+            "m14-session-4",
+            "m14-session-5",
+            "m14-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-first-principles",
+            "m14-first-principles-continuation"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-definition",
+            "m14-assumption",
+            "m14-derivation-proof",
+            "m14-counterexample",
+            "m14-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-code-reading",
+            "m14-debugging",
+            "m14-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-source-rationale",
+            "m14-source-claim-linkage",
+            "m14-source-license-reuse",
+            "m14-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-visual",
+            "m14-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-diagnostic",
+            "m14-confidence",
+            "m14-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-dossier",
+            "m14-acceptance",
+            "m14-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-oral-protocol",
+            "m14-oral-hint",
+            "m14-oral-counterexample",
+            "m14-oral-transfer",
+            "m14-oral-reflection",
+            "m14-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m14-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m14-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m14-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m14.v1.json"
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "m15",
+      "packetId": "m15-files-serialization-packaging-delivery-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m14"
+        ],
+        "forwardModuleId": "m16",
+        "masteryGateId": "software",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/15_files_serialization_packaging_delivery.md",
+      "sourceMapPath": "content/source-maps/arc_iii_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m15-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m14"
+          ],
+          "forwardArtifactId": "m15-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m15-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m15-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m15-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m15-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m15-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m15-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m15-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m15-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m15-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m15-session-6-output"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m15-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M15 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "1-position-in-the-knowledge-graph"
+          }
+        },
+        {
+          "id": "m15-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M15 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "23-explicit-backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m15-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M15 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-1--one-event-crosses-text-byte-and-path-boundaries"
+          }
+        },
+        {
+          "id": "m15-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M15 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-2--resource-lifetime-becomes-a-publication-failure-timeline"
+          }
+        },
+        {
+          "id": "m15-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M15 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-3--a-schema-version-becomes-a-migration-and-trust-decision"
+          }
+        },
+        {
+          "id": "m15-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M15 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-4--read-attack-and-defend-the-atlas-bundle-implementation"
+          }
+        },
+        {
+          "id": "m15-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M15 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-5--the-source-tree-becomes-an-inspected-installed-command"
+          }
+        },
+        {
+          "id": "m15-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M15 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-6--rehearse-release-rollback-and-agent-patch-defense"
+          }
+        },
+        {
+          "id": "m15-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M15 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-1-output--representation-boundary-trace"
+          }
+        },
+        {
+          "id": "m15-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M15 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-2-output--resource-and-publication-failure-timeline"
+          }
+        },
+        {
+          "id": "m15-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M15 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-3-output--schema-migration-and-trust-contract"
+          }
+        },
+        {
+          "id": "m15-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M15 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-4-output--attack-and-defense-boundary-review"
+          }
+        },
+        {
+          "id": "m15-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M15 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-5-output--artifact-and-clean-install-receipt"
+          }
+        },
+        {
+          "id": "m15-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M15 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-6-output--release-and-rollback-defense-with-m16-handoff"
+          }
+        },
+        {
+          "id": "m15-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M15 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "4-first-principle-a-durable-artifact-is-an-explicit-boundary-record"
+          }
+        },
+        {
+          "id": "m15-first-principles-continuation",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M15 first-principles continuation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "7-serialization-chooses-a-data-model-persistence-adds-time-and-failure"
+          }
+        },
+        {
+          "id": "m15-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M15 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "41-the-boundary-record"
+          }
+        },
+        {
+          "id": "m15-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M15 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "95-resource-and-system-costs"
+          }
+        },
+        {
+          "id": "m15-derivation-proof",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M15 derivation-proof",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "83-backward-and-forward-compatibility-are-directional"
+          }
+        },
+        {
+          "id": "m15-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "M15 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "63-broken-exception-suppression"
+          }
+        },
+        {
+          "id": "m15-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M15 numerical-experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "95-resource-and-system-costs"
+          }
+        },
+        {
+          "id": "m15-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M15 code-reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "15-artifact-and-architecture-reading-studio"
+          }
+        },
+        {
+          "id": "m15-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M15 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "level-5--debug-and-defend-a-layered-failure"
+          }
+        },
+        {
+          "id": "m15-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M15 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "16-design-delegate-review-and-independently-verify"
+          }
+        },
+        {
+          "id": "m15-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M15 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "44-prediction-before-mechanism"
+          }
+        },
+        {
+          "id": "m15-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "M15 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "level-6--design-and-delegate-a-release-sized-change"
+          }
+        },
+        {
+          "id": "m15-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M15 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/arc_iii_source_map.md",
+            "headingAnchor": "module-15--files-serialization-packaging-and-delivery"
+          }
+        },
+        {
+          "id": "m15-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M15 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m15-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M15 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m15-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M15 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m15-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M15 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "22-consolidated-knowledge-map"
+          }
+        },
+        {
+          "id": "m15-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M15 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md",
+            "headingAnchor": "visual-and-text-alternative-review-boundary"
+          }
+        },
+        {
+          "id": "m15-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M15 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "19-understanding-check--eight-confidence-aware-mcqs"
+          }
+        },
+        {
+          "id": "m15-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M15 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "diagnostic-interpretation"
+          }
+        },
+        {
+          "id": "m15-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M15 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "201-misconception-map"
+          }
+        },
+        {
+          "id": "m15-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M15 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "224-spaced-retrieval-schedule"
+          }
+        },
+        {
+          "id": "m15-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M15 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "21-atlas-milestone-and-evidence-packet"
+          }
+        },
+        {
+          "id": "m15-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M15 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "213-evidence-claims"
+          }
+        },
+        {
+          "id": "m15-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M15 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "214-rubric"
+          }
+        },
+        {
+          "id": "m15-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M15 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "conversational-oral-defense--m15"
+          }
+        },
+        {
+          "id": "m15-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M15 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "hint-ladder--meaning-to-reversible-operation"
+          }
+        },
+        {
+          "id": "m15-oral-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "M15 oral counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "changed-premise-counterexample"
+          }
+        },
+        {
+          "id": "m15-oral-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "M15 oral transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "transfer-turn--m16-transaction-boundary"
+          }
+        },
+        {
+          "id": "m15-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M15 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "reflection--learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m15-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M15 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "session-6-output--release-and-rollback-defense-with-m16-handoff"
+          }
+        },
+        {
+          "id": "m15-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M15 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m15-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M15 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/15_files_serialization_packaging_delivery.md",
+            "headingAnchor": "study-partner--durable-artifact-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-course-map",
+            "m15-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-session-1",
+            "m15-session-2",
+            "m15-session-3",
+            "m15-session-4",
+            "m15-session-5",
+            "m15-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-first-principles",
+            "m15-first-principles-continuation"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-definition",
+            "m15-assumption",
+            "m15-derivation-proof",
+            "m15-counterexample",
+            "m15-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-code-reading",
+            "m15-debugging",
+            "m15-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-source-rationale",
+            "m15-source-claim-linkage",
+            "m15-source-license-reuse",
+            "m15-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-visual",
+            "m15-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-diagnostic",
+            "m15-confidence",
+            "m15-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-dossier",
+            "m15-acceptance",
+            "m15-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-oral-protocol",
+            "m15-oral-hint",
+            "m15-oral-counterexample",
+            "m15-oral-transfer",
+            "m15-oral-reflection",
+            "m15-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m15-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m15-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m15-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m15.v1.json"
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "m16",
+      "packetId": "m16-relational-data-transactions-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m15"
+        ],
+        "forwardModuleId": "m17",
+        "masteryGateId": "software",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/16_relational_data_transactions.md",
+      "sourceMapPath": "content/source-maps/arc_iii_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m16-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m15"
+          ],
+          "forwardArtifactId": "m16-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m16-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m16-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m16-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m16-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m16-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m16-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m16-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m16-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m16-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m16-session-6-output"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m16-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M16 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "1-position-in-the-knowledge-graph-and-problem-pressure"
+          }
+        },
+        {
+          "id": "m16-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M16 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "12-explicit-backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m16-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M16 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-1--derive-relations-from-repeated-facts-not-table-shaped-habit"
+          }
+        },
+        {
+          "id": "m16-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M16 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-2--turn-legal-state-claims-into-constraints-and-a-narrow-port"
+          }
+        },
+        {
+          "id": "m16-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M16 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-3--specify-query-results-before-reading-syntax"
+          }
+        },
+        {
+          "id": "m16-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M16 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-4--treat-indexes-and-plans-as-measured-strategy-choices"
+          }
+        },
+        {
+          "id": "m16-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M16 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-5--make-import-one-transaction-then-expose-competition"
+          }
+        },
+        {
+          "id": "m16-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M16 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-6--bound-recovery-prove-wal-is-not-backup"
+          }
+        },
+        {
+          "id": "m16-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M16 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-1-output--fact-fd-key-and-order-derivation"
+          }
+        },
+        {
+          "id": "m16-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M16 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-2-output--constraint-and-repository-contract"
+          }
+        },
+        {
+          "id": "m16-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M16 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-3-output--result-contract-and-query-reasoning"
+          }
+        },
+        {
+          "id": "m16-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M16 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-4-output--plan-evidence-and-index-decision"
+          }
+        },
+        {
+          "id": "m16-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M16 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-5-output--transaction-schedule-and-retry-boundary"
+          }
+        },
+        {
+          "id": "m16-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M16 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-6-output--recovery-restore-and-claim-boundary"
+          }
+        },
+        {
+          "id": "m16-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M16 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "2-relations-identity-functional-dependencies-and-normalization"
+          }
+        },
+        {
+          "id": "m16-first-principles-continuation",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M16 first-principles continuation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "5-application-transactions-isolation-schedules-and-retry-classification"
+          }
+        },
+        {
+          "id": "m16-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M16 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "22-precise-relational-vocabulary"
+          }
+        },
+        {
+          "id": "m16-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M16 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "25-functional-dependencies-describe-all-legal-states"
+          }
+        },
+        {
+          "id": "m16-derivation-proof",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M16 derivation-proof",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "210-lossless-join-and-dependency-preservation-answer-different-questions"
+          }
+        },
+        {
+          "id": "m16-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "M16 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "57-schedules-reveal-anomalies"
+          }
+        },
+        {
+          "id": "m16-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M16 numerical-experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "48-the-fixed-plan-evidence-protocol"
+          }
+        },
+        {
+          "id": "m16-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M16 code-reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "7-runnable-atlas-repository-reference-and-adversarial-checks"
+          }
+        },
+        {
+          "id": "m16-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M16 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "level-5--debug-and-defend-a-partial-import-incident"
+          }
+        },
+        {
+          "id": "m16-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M16 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "level-6--design-and-delegate-the-database-import-boundary"
+          }
+        },
+        {
+          "id": "m16-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M16 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "59-two-connection-prediction-lab"
+          }
+        },
+        {
+          "id": "m16-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "M16 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "level-8--transfer-to-an-uncertain-network-outcome"
+          }
+        },
+        {
+          "id": "m16-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M16 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/arc_iii_source_map.md",
+            "headingAnchor": "module-16--relational-data-and-transactions"
+          }
+        },
+        {
+          "id": "m16-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M16 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m16-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M16 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m16-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M16 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m16-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M16 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "119-consolidation-and-spaced-retrieval"
+          }
+        },
+        {
+          "id": "m16-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M16 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+            "headingAnchor": "visual-and-text-alternative-review-boundary"
+          }
+        },
+        {
+          "id": "m16-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M16 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "10-confidence-aware-understanding-check"
+          }
+        },
+        {
+          "id": "m16-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M16 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "diagnostic-routing"
+          }
+        },
+        {
+          "id": "m16-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M16 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "115-ta-diagnostic-protocol"
+          }
+        },
+        {
+          "id": "m16-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M16 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "119-consolidation-and-spaced-retrieval"
+          }
+        },
+        {
+          "id": "m16-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M16 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "111-project--atlas-bundle-to-database-reconciliation-dossier"
+          }
+        },
+        {
+          "id": "m16-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M16 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "113-acceptance-invariants"
+          }
+        },
+        {
+          "id": "m16-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M16 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "113-acceptance-invariants"
+          }
+        },
+        {
+          "id": "m16-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M16 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "conversational-oral-defense--m16"
+          }
+        },
+        {
+          "id": "m16-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M16 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "hint-ladder--fact-to-recovery-evidence"
+          }
+        },
+        {
+          "id": "m16-oral-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "M16 oral counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "changed-premise-counterexample"
+          }
+        },
+        {
+          "id": "m16-oral-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "M16 oral transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "transfer-turn--m17-execution-layers"
+          }
+        },
+        {
+          "id": "m16-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M16 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "reflection--learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m16-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M16 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "session-6-output--recovery-restore-and-claim-boundary"
+          }
+        },
+        {
+          "id": "m16-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M16 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m16-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M16 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/16_relational_data_transactions.md",
+            "headingAnchor": "study-partner--transaction-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-course-map",
+            "m16-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-session-1",
+            "m16-session-2",
+            "m16-session-3",
+            "m16-session-4",
+            "m16-session-5",
+            "m16-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-first-principles",
+            "m16-first-principles-continuation"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-definition",
+            "m16-assumption",
+            "m16-derivation-proof",
+            "m16-counterexample",
+            "m16-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-code-reading",
+            "m16-debugging",
+            "m16-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-source-rationale",
+            "m16-source-claim-linkage",
+            "m16-source-license-reuse",
+            "m16-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-visual",
+            "m16-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-diagnostic",
+            "m16-confidence",
+            "m16-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-dossier",
+            "m16-acceptance",
+            "m16-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-oral-protocol",
+            "m16-oral-hint",
+            "m16-oral-counterexample",
+            "m16-oral-transfer",
+            "m16-oral-reflection",
+            "m16-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m16-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m16-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m16-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m16.v1.json"
+          ]
+        }
+      ]
+    }
   ]
 }

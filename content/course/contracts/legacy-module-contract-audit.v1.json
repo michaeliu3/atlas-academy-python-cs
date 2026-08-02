@@ -486,7 +486,7 @@
         "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["19-confidence-aware-diagnostic-quiz", "201-misconception-map"]},
         "retrieval-and-spaced-review": {"status": "pointer-present", "anchors": ["224-spaced-retrieval-schedule"]},
         "project-and-evidence-rubric": {"status": "pointer-present", "anchors": ["21-atlas-milestone-and-evidence-packet", "213-rubric"]},
-        "supportive-oral-defense": {"status": "ambiguous", "anchors": ["164-oral-defense"], "note": "An oral-defense activity is named, but no supportive adaptive protocol is indexed."},
+        "supportive-oral-defense": {"status": "ambiguous", "anchors": ["conversational-oral-defense--m14"], "note": "A candidate-only supportive protocol is indexed, but structural presence is not a quality review, session result, or publication claim."},
         "ta-prompt": {"status": "pointer-present", "anchors": ["20-ta-playbook--diagnose-the-model-before-suggesting-code"]},
         "study-partner-prompt": {"status": "missing", "note": "No module-specific Study Partner prompt/route is found in the workbook."},
         "forward-handoff": {"status": "pointer-present", "anchors": ["215-handoff-invariants-for-module-15", "forward"]}
@@ -518,7 +518,7 @@
         "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["19-understanding-check--eight-confidence-aware-mcqs", "diagnostic-interpretation", "201-misconception-map"]},
         "retrieval-and-spaced-review": {"status": "pointer-present", "anchors": ["224-spaced-retrieval-schedule"]},
         "project-and-evidence-rubric": {"status": "pointer-present", "anchors": ["21-atlas-milestone-and-evidence-packet", "214-rubric"]},
-        "supportive-oral-defense": {"status": "ambiguous", "anchors": ["215-oral-defense-prompts"], "note": "Oral prompts exist, but no supportive adaptive protocol is indexed."},
+        "supportive-oral-defense": {"status": "ambiguous", "anchors": ["conversational-oral-defense--m15"], "note": "A candidate-only supportive protocol is indexed, but structural presence is not a quality review, session result, or publication claim."},
         "ta-prompt": {"status": "pointer-present", "anchors": ["20-ta-playbook--locate-the-collapsed-boundary"]},
         "study-partner-prompt": {"status": "missing", "note": "No module-specific Study Partner prompt/route is found in the workbook."},
         "forward-handoff": {"status": "pointer-present", "anchors": ["the-handoff-to-module-16", "forward"]}
@@ -550,7 +550,7 @@
         "confidence-diagnostic-misconceptions": {"status": "ambiguous", "anchors": ["10-confidence-aware-understanding-check", "diagnostic-routing"], "note": "A diagnostic and routing anchor exist, but no named misconception map is indexed."},
         "retrieval-and-spaced-review": {"status": "pointer-present", "anchors": ["119-consolidation-and-spaced-retrieval"]},
         "project-and-evidence-rubric": {"status": "pointer-present", "anchors": ["111-project--atlas-bundle-to-database-reconciliation-dossier", "113-acceptance-invariants"]},
-        "supportive-oral-defense": {"status": "ambiguous", "anchors": ["11-cumulative-project-ta-protocol-and-mastery-evidence"], "note": "A project oral-defense requirement appears in prose, but no supportive adaptive protocol is indexed."},
+        "supportive-oral-defense": {"status": "ambiguous", "anchors": ["conversational-oral-defense--m16"], "note": "A candidate-only supportive protocol is indexed, but structural presence is not a quality review, session result, or publication claim."},
         "ta-prompt": {"status": "pointer-present", "anchors": ["115-ta-diagnostic-protocol"]},
         "study-partner-prompt": {"status": "missing", "note": "No module-specific Study Partner prompt/route is found in the workbook."},
         "forward-handoff": {"status": "pointer-present", "anchors": ["arc-iv-handoff", "forward"]}

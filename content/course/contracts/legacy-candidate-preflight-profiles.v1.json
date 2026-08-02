@@ -352,6 +352,51 @@
       ],
       "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m14",
+      "packetId": "m14-software-design-change-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m14/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:84a79259f6cbf0a78a3d7a9fdf07d6e4d354a02c1ba9c9494bd57d9ca0d8d0ae"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module14_software_design_change_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m15",
+      "packetId": "m15-files-serialization-packaging-delivery-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m15/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:7dddee05efbf3a6163630c0c5a55cae5da17b67cb1f56b13ace7a771a73be3d9"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m16",
+      "packetId": "m16-relational-data-transactions-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m16/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:127412e757027a626b51494b3243b1aeed9af8d745fd4eba7815f62eb04f7f97"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     }
   ]
 }

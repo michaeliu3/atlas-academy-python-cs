@@ -3221,7 +3221,7 @@ Use one bundle throughout:
 Each session consumes the prior artifact. A session adds one abstraction jump,
 not a new toy system.
 
-### Session 1 — Derive relations from repeated facts, not table-shaped habit
+## Session 1 — Derive relations from repeated facts, not table-shaped habit
 
 **Consumes:** the validated bundle, representation independence, relations, and
 M15’s value/representation boundary.
@@ -3250,7 +3250,14 @@ counterexample, and explicit order decision.
 **Exit:** explain why normalization localizes invariants rather than
 ritualistically splitting tables.
 
-### Session 2 — Turn legal-state claims into constraints and a narrow port
+### Session 1 output — fact, FD, key, and order derivation
+
+Keep the ownership table, legal-state FDs, one false-FD counterexample,
+candidate-key/closure reasoning, lossless/preservation argument, and explicit
+order decision. Session 2 turns these claims into constraints and a narrow
+repository contract.
+
+## Session 2 — Turn legal-state claims into constraints and a narrow port
 
 **Consumes:** Session 1’s schema reasoning.
 
@@ -3282,7 +3289,13 @@ architecture map, and patch decision.
 **Exit:** name which illegality is schema-impossible, application-rejected, or
 configuration-dependent.
 
-### Session 3 — Specify query results before reading syntax
+### Session 2 output — constraint and repository contract
+
+Preserve annotated DDL, the invariant/constraint matrix, negative probes,
+dependency-versus-data-flow map, configuration assumption, and bounded patch
+decision. Session 3 must make result meaning explicit before it writes SQL.
+
+## Session 3 — Specify query results before reading syntax
 
 **Consumes:** constrained relations, repository port, explicit-order discipline.
 
@@ -3310,7 +3323,13 @@ row-mapping map, and tiny-oracle regressions.
 
 **Exit:** explain why a correct logical result does not determine physical work.
 
-### Session 4 — Treat indexes and plans as measured strategy choices
+### Session 3 output — result contract and query reasoning
+
+Keep columns, cardinality, bag/null/order rules, bound-value versus allowlisted
+structure decision, tiny oracle, and row-mapping trace. Session 4 compares
+physical plans only after these logical observations are fixed.
+
+## Session 4 — Treat indexes and plans as measured strategy choices
 
 **Consumes:** query contracts, M5 evidence, M8 indexing, M11 strategy choice.
 
@@ -3341,7 +3360,13 @@ measurement, and keep/remove index decision.
 
 **Exit:** defend adding or rejecting the index without “indexes are faster.”
 
-### Session 5 — Make import one transaction, then expose competition
+### Session 4 output — plan evidence and index decision
+
+Record version/configuration/data/statistics context, prediction, before/after
+plan evidence, logical-result comparison, write/space cost, and keep/remove
+decision. Session 5 preserves this evidence while adding transaction histories.
+
+## Session 5 — Make import one transaction, then expose competition
 
 **Consumes:** failure classification, architecture ownership, validated values,
 schema/query/plan artifacts.
@@ -3380,7 +3405,14 @@ table, idempotency record, and reviewed patch.
 
 **Exit:** distinguish atomicity, isolation, and idempotency in one minute.
 
-### Session 6 — Bound recovery; prove WAL is not backup
+### Session 5 output — transaction schedule and retry boundary
+
+Keep the owner/state map, same- and second-connection visibility trace,
+engine/mode assumptions, retry classification, idempotency identities, bounded
+attempt rule, and patch review. Session 6 asks what survives restart and what
+counts as independent restore evidence.
+
+## Session 6 — Bound recovery; prove WAL is not backup
 
 **Consumes:** commit/rollback/isolation evidence and M15 durability boundaries.
 
@@ -3411,6 +3443,13 @@ timeline, restore transcript, reconciliation, and bounded durability statement.
 
 **Exit:** “For this engine/version/configuration/storage/failure, evidence
 supports ___; it does not establish ___.”
+
+### Session 6 output — recovery, restore, and claim boundary
+
+Package the recovery-owner diagram, engine/configuration record, interruption
+timeline, independent restore/reconciliation transcript, cost/concurrency
+limit, and exact durability stopping line. Carry this bounded evidence into the
+M17 machine/OS layers rather than treating WAL as backup or a universal claim.
 
 ---
 
@@ -3786,8 +3825,10 @@ do not turn earlier finite evidence into proof of the transaction claim.
     focused verification, and accept/reject/split decision;
 13. architecture decision record with costs, rejected alternatives, limits, and
     revisit triggers;
-14. six-minute oral defense tracing one event, schema decision, transaction,
-    plan, retry, and recovery limit.
+14. learner-selected conversational explanation tracing one event, schema
+    decision, transaction, plan, retry, and recovery limit, with visible
+    artifact, confidence, and unresolved uncertainty; no duration, recording,
+    or score is required.
 
 ### 11.3 Acceptance invariants
 
@@ -3957,7 +3998,7 @@ evidence/module16/
     ├── responsibility-map.md
     ├── interruption-observation.txt
     ├── backup-restore-transcript.txt
-    └── oral-defense.md
+    └── conversation-summary.md
 ```
 
 ### 11.9 Consolidation and spaced retrieval
@@ -4231,6 +4272,51 @@ Without notes, explain:
 > reconciliation? Finally, what does the executed runtime/configuration prove,
 > and what remains for the machine, OS, network, security, and distributed
 > arcs?
+
+## Conversational oral defense — M16
+
+This is a constructive Teaching Assistant conversation, not a score, gate, or
+database-certification claim. If the learner chooses GPT Live at a preferred
+setting and their client renders the material, use the relation/FD notation,
+schema, SQL fragment, schedule, and recovery diagram as a shared whiteboard.
+This workbook cannot control voice availability, quality settings, rendering,
+retention, or integrations. The same conversation protocol can instead use
+readable text with Markdown and an ASCII schedule; the course cannot write
+Notion evidence automatically.
+
+### Invitation — draw the legal state before the mechanism
+
+Ask the learner to choose one invariant and say: “These facts determine
+[key/FD]; this transaction exposes [visible outcome]; my confidence is
+[level].” Have them draw rows and a two-connection timeline before naming an
+isolation level or engine mechanism.
+
+### Hint ladder — fact to recovery evidence
+
+Move one rung at a time: fact ownership → FD/key → constraint/result contract
+→ plan evidence → transaction owner → interleaving/observer trace → retry or
+reconciliation rule → recovery/restore evidence. Offer a small trace or
+counterexample without pass/fail framing.
+
+### Changed-premise counterexample
+
+Keep the import goal but change one premise: reuse a retry key with a different
+digest, remove `ORDER BY`, disable a per-connection foreign-key setting, or
+replace an independent restore with a WAL file. Ask which invariant, schedule,
+test, engine assumption, or operational claim must change.
+
+### Transfer turn — M17 execution layers
+
+Ask which plan, journal, or visibility claim is actually relying on pages,
+caches, system calls, storage ordering, or process mediation that M17/M18 must
+make explicit.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a compact record: chosen invariant, rows/schedule,
+prediction, changed-premise repair, observed engine/configuration evidence,
+confidence, unresolved limit, and one M17 question. Copy/export it only with
+the learner's approval.
 
 ## Guided Codex handoff — M16
 

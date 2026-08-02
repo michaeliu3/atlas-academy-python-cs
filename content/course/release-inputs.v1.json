@@ -185,6 +185,18 @@
       "sha256": "927bd74906d3c6429669bf40093d3ce762066cd555b0e45a73a20dc36a388891"
     },
     {
+      "path": "content/course/contracts/companions/m14.v1.json",
+      "sha256": "2f15c0388827b759d268713a0873afcf11322a16f11f29d4d142cba3ffad5d55"
+    },
+    {
+      "path": "content/course/contracts/companions/m15.v1.json",
+      "sha256": "8bd3ca95d548bf078d0856dc24f39af5b1844bdfb03463c1dbb0319e7f77d147"
+    },
+    {
+      "path": "content/course/contracts/companions/m16.v1.json",
+      "sha256": "1816d4a649d4061ad011f4ece97ca5384d1cd8fb1e4c271576446c10c57fbf43"
+    },
+    {
       "path": "content/course/contracts/companions/m19.v1.json",
       "sha256": "9d6c5ec7d771ee780f7bab7f7116ccd711575bdfa125eb86b2f5bd0d530f8c83"
     },
@@ -301,6 +313,18 @@
       "sha256": "fa190d4fd615ac73162bc4a501e02a9dd585f242934770fe61ede5e817f61085"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m14.v1.json",
+      "sha256": "07056c41a198bea7dde85ef2892259202124b154fe0cc574017e269fa82a3f3d"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m15.v1.json",
+      "sha256": "0e895585c8e8f1592908a10ff1ff5e3d0d7f3441fe01ff3e09a32acd5072c702"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m16.v1.json",
+      "sha256": "f445826851ae06915d5ab58b6ceceda2d1933319578310f669ca437103e03017"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m19.v1.json",
       "sha256": "1f0a2fd7849a2a3e17b4aa4827f300f0c0e747d09f2f7073f708363055c69ba8"
     },
@@ -393,6 +417,18 @@
       "sha256": "592c9f886ec791e340231b2306f84eff165f2fc4bb71ccb65c973efb6eb02a39"
     },
     {
+      "path": "content/course/contracts/evidence/m14.v1.json",
+      "sha256": "7f2985d55166cbf3bf9de422ad7980ea05bf4797feda9599fce9ce8453ae57c6"
+    },
+    {
+      "path": "content/course/contracts/evidence/m15.v1.json",
+      "sha256": "9fb04321ddf991ebd3777e56d7c98dcbaa05a9e45301bb9e4862a4900b6c8389"
+    },
+    {
+      "path": "content/course/contracts/evidence/m16.v1.json",
+      "sha256": "2388c3bd80ec184b0824b7645db79246d1ec6c6c329f7c04f8b6a5b8ec9e1662"
+    },
+    {
       "path": "content/course/contracts/evidence/m19.v1.json",
       "sha256": "2c26e6d5bcc69dfc0ceb4f5899acf92f4c6fc4f97b59b8fe365601c3858cabfe"
     },
@@ -434,15 +470,15 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "9518c19fe88dcdb54f14b1d7984069b96fea80900f1062e682b5fd99ff13f679"
+      "sha256": "cde18bbe5969246aa3e8b60b685b8b7d6d281c7bd0f6f68eb63957b8ec076b2d"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "af0e4c461851eac447d2945677c51520e1d024cde97f1dcce522d2c411ac6adb"
+      "sha256": "445f36f59c578ec87825d5d126b4b3e06e6e8cc7c820b6e7524a150d46f3c758"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "cd2bec0ad9286d2fa6ba64e364bf8f746665c1dfefe4df7e2c7fd8e216b6eb23"
+      "sha256": "eceafe53ec2e984a1ad9de94f08bf761e3126a48e27ded8f1072c3ba331ef09c"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -538,15 +574,15 @@
     },
     {
       "path": "content/modules/14_software_design_and_change.md",
-      "sha256": "028d2dd39de19f59cc1253f43c3e57a10d0f157ff837029180f041ab081ffac8"
+      "sha256": "d54beaa1558cd3f4cc97330ada32916d274fd028976af8a761252ef2c4f02206"
     },
     {
       "path": "content/modules/15_files_serialization_packaging_delivery.md",
-      "sha256": "092a1a350be87c757ba8d525e7d4482ec94b331065dc6f29f30c4ee7d86f8398"
+      "sha256": "c7ffe0fc23254b70704cd5b661106bb3daf5b3ab7d65461d07a0dbfb141c29ea"
     },
     {
       "path": "content/modules/16_relational_data_transactions.md",
-      "sha256": "17c000d876918974507987a3db09d6961c288098247ffe2d42a36a1130786b29"
+      "sha256": "3d16a7ae33884eaaabc6e301206804e0b0a65b4d44f21d9814740a63c5958831"
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
@@ -627,6 +663,18 @@
     {
       "path": "content/source-maps/module13_specifications_testing_debugging_observability_source_audit_addendum.md",
       "sha256": "260503d516e89ae0fa84928b3dbbe94984bd23ef900986d6dd2ad4f2ebf13383"
+    },
+    {
+      "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+      "sha256": "366a14bb007190743cd14aa6bab55bea429fa28028bd73efc6e8fe18a03d8204"
+    },
+    {
+      "path": "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md",
+      "sha256": "1a5b8d47e5dd30bf6eb33bda7552472b6836803bd763e713e7dcead09c6ae6b2"
+    },
+    {
+      "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+      "sha256": "aaa1dec0160859402d6a3cf2f9ab64eea9d3bc670654c91f89ab3f60e258ef79"
     },
     {
       "path": "content/source-maps/module17_architecture_execution_source_map.md",
@@ -861,6 +909,18 @@
       "sha256": "359d0b5f4253f8fa70b1530588169b9cecf4b4d9d9163d2d49a7c3fa4d93013c"
     },
     {
+      "path": "docs/module-evidence/m14/candidate-preflight.md",
+      "sha256": "84a79259f6cbf0a78a3d7a9fdf07d6e4d354a02c1ba9c9494bd57d9ca0d8d0ae"
+    },
+    {
+      "path": "docs/module-evidence/m15/candidate-preflight.md",
+      "sha256": "7dddee05efbf3a6163630c0c5a55cae5da17b67cb1f56b13ace7a771a73be3d9"
+    },
+    {
+      "path": "docs/module-evidence/m16/candidate-preflight.md",
+      "sha256": "127412e757027a626b51494b3243b1aeed9af8d745fd4eba7815f62eb04f7f97"
+    },
+    {
       "path": "docs/module-evidence/m19/candidate-preflight.md",
       "sha256": "c3060c0aaaf282ab43896127358a0aed3c5067f157add35df3b29b64b1394b59"
     },
@@ -1086,7 +1146,7 @@
     },
     {
       "path": "tests/mermaid-accessibility.test.mjs",
-      "sha256": "bfc14dba882f1e7b306341c547fd5a2a2870d19730992c47e88b8ac27d691776"
+      "sha256": "eb4606fe461af0e5bb24d0bd3802f664195cdb193bb6657c8113fcb2486be7c0"
     },
     {
       "path": "tests/rendered-html.test.mjs",

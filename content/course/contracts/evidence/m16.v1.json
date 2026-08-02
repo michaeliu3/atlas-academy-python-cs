@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m16",
+  "purpose": "Bind M16's current workbook, source ledger, Mermaid reader surface, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark the module review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m16-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "M16 distinguishes M15 as its canonical academic prerequisite and M17 as its canonical forward handoff without treating conceptual connections as route authority.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "1-position-in-the-knowledge-graph-and-problem-pressure"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "12-explicit-backward-and-forward-connections"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m16.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."
+      ]
+    },
+    {
+      "id": "m16-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M16 exposes six ordered sessions whose output anchors carry one connected evidence thread into M17.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "session-1--derive-relations-from-repeated-facts-not-table-shaped-habit"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "session-2--turn-legal-state-claims-into-constraints-and-a-narrow-port"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "session-3--specify-query-results-before-reading-syntax"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "session-4--treat-indexes-and-plans-as-measured-strategy-choices"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "session-5--make-import-one-transaction-then-expose-competition"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "session-6--bound-recovery-prove-wal-is-not-backup"
+        }
+      ],
+      "limitations": [
+        "Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."
+      ]
+    },
+    {
+      "id": "m16-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M16 begins from the stated system pressure and derives its decisions from observable boundaries rather than a memorized tool or pattern.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "2-relations-identity-functional-dependencies-and-normalization"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "5-application-transactions-isolation-schedules-and-retry-classification"
+        }
+      ],
+      "limitations": [
+        "A named first-principles route does not prove conceptual adequacy, a correct derivation, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m16-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M16 structurally exposes relational definitions, FD/legal-state claims, lossless reasoning, fixed plan evidence, and a bounded correctness argument.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "22-precise-relational-vocabulary"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "25-functional-dependencies-describe-all-legal-states"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "210-lossless-join-and-dependency-preservation-answer-different-questions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "48-the-fixed-plan-evidence-protocol"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "73-correctness-argument"
+        }
+      ],
+      "limitations": [
+        "These structural anchors do not substitute for qualified review of definitions, assumptions, proof ideas, counterexamples, numerical reasoning, or source claims."
+      ]
+    },
+    {
+      "id": "m16-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M16 contains distinct repository code reading, partial-import debugging, and bounded database-boundary design review.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "7-runnable-atlas-repository-reference-and-adversarial-checks"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "level-5--debug-and-defend-a-partial-import-incident"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "level-6--design-and-delegate-the-database-import-boundary"
+        }
+      ],
+      "limitations": [
+        "These prompts do not prove that a learner can independently read, debug, or design the corresponding system."
+      ]
+    },
+    {
+      "id": "m16-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M16 asks for a confidence-aware prediction before the relevant mechanism or changed-premise contrast is revealed.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "59-two-connection-prediction-lab"
+        }
+      ],
+      "limitations": [
+        "A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."
+      ]
+    },
+    {
+      "id": "m16-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M16 asks the learner to transfer its model to an uncertain network outcome rather than a local transaction only.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "level-8--transfer-to-an-uncertain-network-outcome"
+        }
+      ],
+      "limitations": [
+        "A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."
+      ]
+    },
+    {
+      "id": "m16-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M16 exposes a learner-facing source route plus a scoped source/reuse ledger with claim linkage and stopping lines.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "13-source-ledger-and-freshness-boundary"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/arc_iii_source_map.md",
+          "locator": "module-16--relational-data-and-transactions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+          "locator": "source-and-reuse-ledger"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+          "locator": "claim-linkage-and-stopping-lines"
+        }
+      ],
+      "limitations": [
+        "Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."
+      ]
+    },
+    {
+      "id": "m16-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M16 binds its knowledge-map diagrams to concise Mermaid alternatives, the shared reader, and a module-specific accessibility regression surface.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "119-consolidation-and-spaced-retrieval"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
+          "locator": "visual-and-text-alternative-review-boundary"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "The local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."
+      ]
+    },
+    {
+      "id": "m16-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M16 exposes confidence-aware understanding checks and TA diagnostic routing for relation, plan, transaction, and recovery claims.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "10-confidence-aware-understanding-check"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "115-ta-diagnostic-protocol"
+        }
+      ],
+      "limitations": [
+        "The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."
+      ]
+    },
+    {
+      "id": "m16-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M16 includes learner-controlled spaced retrieval tied to its central evidence artifacts.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "119-consolidation-and-spaced-retrieval"
+        }
+      ],
+      "limitations": [
+        "A retrieval schedule does not prove that review occurred or that a learner retained the material."
+      ]
+    },
+    {
+      "id": "m16-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M16 specifies a cumulative reconciliation dossier and acceptance invariants instead of a pass/fail exam.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "111-project--atlas-bundle-to-database-reconciliation-dossier"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "112-required-deliverables"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "113-acceptance-invariants"
+        }
+      ],
+      "limitations": [
+        "A project brief and rubric do not prove learner work quality, portfolio review, or mastery."
+      ]
+    },
+    {
+      "id": "m16-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M16 contains an encouraging conversational oral-defense route with invitation, visible artifact, adaptive hint, changed premise, transfer, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "conversational-oral-defense--m16"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "invitation--draw-the-legal-state-before-the-mechanism"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "hint-ladder--fact-to-recovery-evidence"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "changed-premise-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "transfer-turn--m17-execution-layers"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "reflection--learner-controlled-evidence-summary"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m16.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."
+      ]
+    },
+    {
+      "id": "m16-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M16 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated system claim.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m16.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."
+      ]
+    },
+    {
+      "id": "m16-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M16 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m16.v1.json",
+          "locator": "/studyPartner"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas or code, or saved a learner-authorized note."
+      ]
+    },
+    {
+      "id": "m16-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M16 companion carries a bounded evidence artifact into the canonical M17 handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m16.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A declared handoff does not establish learner readiness, completion of M16, or authorization to bypass M17 prerequisites."
+      ]
+    },
+    {
+      "id": "m16-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M16 binds its Mermaid relational maps to the shared accessible reader and direct Mermaid regression; it declares no dedicated studio or executable reference model.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/16_relational_data_transactions.md",
+          "locator": "119-consolidation-and-spaced-retrieval"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m16-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/evidence-preflight/m16.v1.json",
+          "locator": "/truthBoundary/release"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "provenance",
+          "path": "docs/module-evidence/m16/candidate-preflight.md",
+          "locator": "candidate-boundary"
+        }
+      ],
+      "limitations": [
+        "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."
+      ]
+    }
+  ]
+}

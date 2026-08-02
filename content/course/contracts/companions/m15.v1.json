@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m15",
+  "purpose": "Freeze a candidate-only M15 Teaching Assistant, Study Partner, and M16 handoff context without changing M15's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/14",
+    "digest": "sha256:debc90911165d2d72a4480dab99ba5362d5eca7afa12c91841a0f4c42d7b9b37"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected value-to-bytes trace, schema/version decision, failure timeline, artifact observation, or rollback limit. Ask what each layer establishes, what it does not establish, and the learner's confidence before a package command or tool name.",
+    "artifactFocus": "Ask the learner to make a boundary record, publication timeline, validation ladder, artifact five-column map, or code/data rollback table visible. Distinguish source intent, built artifact, installed environment, trust claim, and observed behavior.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as an old schema, corrupt archive, untrusted pickle, interrupted replacement, missing dependency lock, or data-incompatible rollback. Offer a tiny trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard when available: draw value → schema → text → bytes → artifact, a failure timeline, or source/sdist/wheel/install/command map beside a short code or metadata fragment, with a plain-language or ASCII fallback.",
+    "changedPremise": "Keep the release goal fixed but change one byte, version, path, publisher, dependency, filesystem, or recovery fact. Ask for a prediction and confidence before separating validation, integrity, provenance, compatibility, durability, and rollback claims.",
+    "taHandoff": "End with the learner's selected M15 trace, confidence, changed premise, observed evidence, one unsupported conclusion, and a constructive M16 question for the Teaching Assistant."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m16",
+    "carryArtifact": "Carry a durable-boundary record: domain/schema/version contract; byte/validation/failure timeline; migration and trust limit; source-to-artifact-to-install receipt; code/data rollback condition; residual platform assumption; and the linked facts that cannot be safely published as independent file effects—not a mastery claim.",
+    "targetQuestion": "Before M16 introduces a relational repository, which facts require keys and one atomic visibility boundary, how will retry identity prevent duplication, and what recovery evidence is distinct from a file replacement or artifact digest?",
+    "boundary": "M14 is M15's only canonical academic prerequisite and M16 is its only canonical forward handoff. References to M17–M36 or M25/M26 are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}
