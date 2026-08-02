@@ -145,6 +145,14 @@
       "sha256": "4a5a8e8ccfa0b902e69a76127eee278dbd93704985253e24666474d370bd2d2f"
     },
     {
+      "path": "content/course/contracts/companions/m04.v1.json",
+      "sha256": "a4237c7e5fa65bf6b7873521f6ce9eb203a0a163a8069e08164dbe6adc9e1c63"
+    },
+    {
+      "path": "content/course/contracts/companions/m05.v1.json",
+      "sha256": "25936deb4bc38d8129c0af9fab4ed4fdaafde097fd5888ddc190b72f350ecd71"
+    },
+    {
       "path": "content/course/contracts/companions/m12.v1.json",
       "sha256": "f16687c98ec4d96f3d3f7b147b059f5fda4f60d2c0d0a2878e3740d456b26e7b"
     },
@@ -229,6 +237,14 @@
       "sha256": "dff9c62f2c0b544ba780f29627c65df5d5f69c540813da43e951676ffe3459a8"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m04.v1.json",
+      "sha256": "1ac2c5a5495c7404cf69994debe59949aca4c8e6d4225c54a0028192ca3a6d6e"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m05.v1.json",
+      "sha256": "28021586595469966d502b54313ce8f625125ef4b90a7fae6c222150bd7d426c"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",
       "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
     },
@@ -289,6 +305,14 @@
       "sha256": "cd9b0fe2c66fd922e58d2f2e58b624adbe642ca18bac8a93d37a852163ac7661"
     },
     {
+      "path": "content/course/contracts/evidence/m04.v1.json",
+      "sha256": "4fd8da30efe9bf6259cd29c6f413d051bdd1ec721d220f4e92f5e975b0023342"
+    },
+    {
+      "path": "content/course/contracts/evidence/m05.v1.json",
+      "sha256": "b3f19f4d954f1918cca7a8d3c8ef468fa697e381a286c27e909a5c64c1e8faec"
+    },
+    {
       "path": "content/course/contracts/evidence/m12.v1.json",
       "sha256": "235cb3cd376d5b5bf762637c9c4ff4f15ad68ac06b914c258c65b062f5a0ce12"
     },
@@ -338,7 +362,7 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "468e1669c0597852d33e780ee83ecf2d158e822feb7b7dec713e825b59f04273"
+      "sha256": "a94b7bfdf7ebd53184e505cfa1f27ae9e8bbad11e6ddf91626ea8465889f098b"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -346,7 +370,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "2593603e4cfc4e44dd0c53f0b458dcfece00d4ecfe787c1f0999f9dd7e26aae6"
+      "sha256": "1ab3d0ef194e322c77a1047141d2eef94e66e810bb9eb6aea1775859818215a6"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -402,11 +426,11 @@
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "a83e6dbf40fe177a587e060192fd934ca5f13e45f39db3b2df02e4047531ef97"
+      "sha256": "0e98eb122b3a6e140fd8fb3570524398bf84fa5b7a9c35956cfa224c6d7aa1c0"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
-      "sha256": "7055d49db664f7c53f2dd447db61a962becc8e5d2f6c77505fc060e350e00b10"
+      "sha256": "785a222aeda2682b920bbd2f75fe0f0343494cf96a062767e00c554ec40ef610"
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
@@ -665,6 +689,14 @@
       "sha256": "19fff1eec6655bdd3544eda79ee4d8b05002f34108b722980e9f1e06062caecd"
     },
     {
+      "path": "content/source-maps/module4_logic_sets_relations_graphs_proof_source_audit_addendum.md",
+      "sha256": "e25b1eee7bf96b128fd1422439aa84737b575f6f8e813d35c412a3b97fcdc9c2"
+    },
+    {
+      "path": "content/source-maps/module5_cost_models_algorithm_analysis_source_audit_addendum.md",
+      "sha256": "12f6c7586745033fbf7ec1977468ea9998d7bc0ec9ff3a8ebb19c7cb7f6bac93"
+    },
+    {
       "path": "content/source-maps/python_curriculum_sources.md",
       "sha256": "65807d4ddc427e5d38a63f0bf95a3c04e6769ab4ab27f834f27da20a173f1508"
     },
@@ -691,6 +723,14 @@
     {
       "path": "docs/module-evidence/m03/candidate-preflight.md",
       "sha256": "73e13ff613862b86184de97bd1ec58dea14138d1183e64fbc74cf0c06dcc1f92"
+    },
+    {
+      "path": "docs/module-evidence/m04/candidate-preflight.md",
+      "sha256": "7edd28b7907e06b1e27f23d37fe911d4a6f93aef5ae677bb970797dfa3d2f82a"
+    },
+    {
+      "path": "docs/module-evidence/m05/candidate-preflight.md",
+      "sha256": "2afdefe008f48f30d8ec884d810bade1988375e95b234e83a89313f0cb39fb54"
     },
     {
       "path": "docs/module-evidence/m12/candidate-preflight.md",

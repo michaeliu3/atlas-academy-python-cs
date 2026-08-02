@@ -54,6 +54,36 @@
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     },
     {
+      "moduleId": "m04",
+      "packetId": "m04-logic-sets-relations-graphs-proof-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m04/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:7edd28b7907e06b1e27f23d37fe911d4a6f93aef5ae677bb970797dfa3d2f82a"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module4_logic_sets_relations_graphs_proof_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m05",
+      "packetId": "m05-cost-models-algorithm-analysis-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m05/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:2afdefe008f48f30d8ec884d810bade1988375e95b234e83a89313f0cb39fb54"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module5_cost_models_algorithm_analysis_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
       "moduleId": "m12",
       "packetId": "m12-modules-apis-types-dependencies-structural-candidate",
       "candidateDocumentation": {

@@ -78,6 +78,56 @@ That sentence ranges over many possible concepts, prerequisite edges, and routes
 
 Reliable engineering combines them: prove the model, test the implementation, and inspect whether the implementation refines the model.
 
+### First-principles derivation — from informal policy to checkable claim
+
+Start with the policy sentence: “a learning route respects every required
+prerequisite.” Replace its informal nouns with a finite route and a stated
+edge relation, then quantify over each represented prerequisite edge whose
+dependent appears in that route. Require its prerequisite to appear too and at
+an earlier position under the chosen partial- or full-route policy. The result
+is a predicate that can be proved for an arbitrary edge, disproved by one
+witness edge, and implemented as a validation loop without changing what the
+claim means.
+
+### Definition — domain, predicate, and witness
+
+Begin by naming the allowed objects and the exact predicate. For a route,
+the domain includes a finite sequence of concepts and a stated prerequisite
+relation; a witness is one concrete route and edge pair that makes the
+predicate true or false. Without this boundary, a sentence such as “the route
+is valid” has no determinate claim to prove or test.
+
+### Assumption — the relation is complete enough for the claim
+
+A proof about the supplied edge set establishes a fact about that model, not
+about every prerequisite that someone might have forgotten to record. The
+implementation also needs a policy for missing concepts, duplicate entries,
+self-loops, and whether the relation stores immediate edges or its transitive
+closure.
+
+### Derivation and proof idea — quantify then seek a witness
+
+Translate “every represented prerequisite comes earlier” into a quantified
+predicate. To prove it, choose an arbitrary represented edge and derive the
+required ordering from the contract. To refute it, negate the universal and
+produce one allowed edge and route that violate the ordering. The same
+derivation tells a test what concrete witness it should expose.
+
+### Counterexample — a true example does not prove a universal policy
+
+The route `["state", "functions"]` respects the one edge
+`state → functions`, but that example does not establish every route policy.
+The route `["functions", "state"]` is a counterexample to the nearby
+universal claim even though it contains the same two concepts exactly once.
+
+### Numerical experiment — count cases without upgrading the claim
+
+For a small graph, enumerate candidate routes or sample generated DAGs and
+record which witnesses the validator accepts or rejects. This can find a model
+or implementation mismatch; it cannot turn a finite sample into a proof about
+all finite graphs. Carry the graph size model into M5 before attaching a cost
+label.
+
 ## 2. Propositions: claims with truth conditions
 
 A **proposition** is a claim that is either true or false under a fixed interpretation.
@@ -227,6 +277,14 @@ A prerequisite graph should be a **directed acyclic graph** (DAG). A cycle such 
 
 A **topological order** is a linear ordering in which every edge points forward. A finite directed graph has a topological order exactly when it has no directed cycle. We will implement traversal algorithms in Module 10; here our focus is the model and correctness condition.
 
+### Text alternative — prerequisite graph as a relation
+
+Read the graph as an ordered relation: `state` must come before `functions`
+and `abstraction`; `functions` must come before `recursion`; both `recursion`
+and `abstraction` must come before `proof`; and `proof` must come before graph
+algorithms. A route is valid only when every required directed edge points from
+an earlier concept to a later one; a directed cycle would make that impossible.
+
 ## 7. Counting and probability foundations
 
 Counting tells us how many possibilities a system must distinguish. Probability tells us how uncertainty is distributed across those possibilities.
@@ -236,7 +294,7 @@ Counting tells us how many possibilities a system must distinguish. Probability 
 - If one decision has `a` choices and **each** first-stage choice has the same `b` allowed second-stage continuations, the ordered pairs total `a·b`. This is a branch-counting condition, not a probability-independence claim.
 - If a choice must come from one of two disjoint categories with `a` and `b` possibilities, there are `a+b` possibilities.
 
-#### Prediction gate — unequal branches need a sum, not a borrowed `b`
+### Prediction before reveal — unequal branches require a sum
 
 A route planner may start at exactly one of three concepts. Starting at `A`
 has one valid continuation, starting at `B` has three, and starting at `C` has
@@ -515,7 +573,7 @@ The learner owns the claim after accepting the patch.
 
 Each session alternates short explanation with prediction, drawing, code reading, or argument. Timing is flexible and follows evidence.
 
-### Session 1 — Claims that can be checked
+## Session 1 — Claims that can be checked
 
 **Recall:** contracts and counterexamples from Modules 2–3.  
 **Launch:** inspect three English descriptions of a “valid route” that disagree on missing concepts.  
@@ -523,7 +581,12 @@ Each session alternates short explanation with prediction, drawing, code reading
 **Learner action:** translate one route policy, find one ambiguous phrase, and construct one violating witness.  
 **Exit synthesis:** explain why a plausible example cannot establish a universal claim.
 
-### Session 2 — Quantifiers, sets, and relations
+### Output: claim-and-witness card
+
+Carry one bounded English policy, its domain and predicate, one smallest
+witness, and a confidence note into Session 2.
+
+## Session 2 — Quantifiers, sets, and relations
 
 **Recall:** one implication and its contrapositive.  
 **Launch:** compare “every concept has some route” with “one route has every concept.”  
@@ -531,7 +594,12 @@ Each session alternates short explanation with prediction, drawing, code reading
 **Learner action:** annotate which code variable represents each mathematical domain and pair.  
 **Exit synthesis:** negate the Atlas validity rule and name the data a failing test must expose.
 
-### Session 3 — Give prerequisites a graph shape
+### Output: quantified-policy and relation map
+
+Carry one quantified route policy, its correct negation, the relevant set or
+relation, and the witness a failing test would need to reveal.
+
+## Session 3 — Give prerequisites a graph shape
 
 **Recall:** immediate relation versus transitive consequence.  
 **Launch:** draw a prerequisite cycle that makes every linear route impossible.  
@@ -539,7 +607,12 @@ Each session alternates short explanation with prediction, drawing, code reading
 **Learner action:** recover `V`, `E`, edge direction, and missing policies from unfamiliar validator code.  
 **Exit synthesis:** defend why a field named `children` does not by itself prove tree semantics.
 
-### Session 4 — Proof and probability as different models
+### Output: prerequisite-graph and cycle witness
+
+Carry a directed graph model, one stated edge convention, one cycle or
+topological-order witness, and the domain assumption that makes it meaningful.
+
+## Session 4 — Proof and probability as different models
 
 **Recall:** structural induction from Module 2.  
 **Launch:** compare a proof, a test suite, a random simulation, and a counterexample.  
@@ -547,19 +620,34 @@ Each session alternates short explanation with prediction, drawing, code reading
 **Learner action:** choose a proof method for one route theorem and identify the probability assumption in one expected-cost claim.  
 **Exit synthesis:** state what each evidence form establishes and where it stops.
 
-### Session 5 — Code-reading and architecture investigation
+### Output: proof-and-probability boundary note
+
+Carry one claim, proof method or counterexample, sampling or probability
+assumption, and a clear stopping line between model proof and finite evidence.
+
+## Session 5 — Code-reading and architecture investigation
 
 **Recall:** public contract versus representation invariant.  
 **Launch:** compare three planners with identical method names and different domain policies.  
 **Learner action:** reconstruct the mathematical claim, dependency direction, effects, witness behavior, and proof obligation; then isolate one mismatch with a minimal case.  
 **Exit synthesis:** explain why moving a validator into a class neither proves it nor clarifies its policy.
 
-### Session 6 — Design, delegate, review, defend
+### Output: validation-model investigation memo
+
+Carry the recovered domain, relation, policy decision, minimal mismatch case,
+and one claim requiring proof rather than a reassuring code shape.
+
+## Session 6 — Design, delegate, review, defend
 
 **Recall:** the exact partial-route contract and its negation.  
 **Launch:** frame the bounded cycle-diagnosis agent task.  
 **Learner action:** review the resulting patch in dependency order, run an independent cycle-witness checker, challenge the complexity claim, and request one focused revision.  
 **Exit synthesis:** orally connect the final model to graph algorithms, database constraints, authorization relations, and protocol invariants.
+
+### Output: cycle-review-and-evidence dossier
+
+Carry the bounded task, a checked cycle witness, one unproven claim, a
+constructive revision request, and the route model required for M5's cost work.
 
 ## 14. Problem ladder
 
@@ -830,6 +918,15 @@ Use the milestone evidence to choose a next bridge or repair: Michael explains
 the model and evidence orally rather than treating a green repository as the
 whole story.
 
+### Project acceptance criteria — prerequisite-domain portfolio
+
+The portfolio is ready for a constructive next-step discussion when it names
+the route domain and edge convention; connects each formal claim to a witness,
+proof step, or test boundary; distinguishes immediate edges from reachability;
+includes one minimal counterexample and one independent cycle-witness check;
+and identifies one remaining assumption or cost question. This is not a
+pass/fail score or a mastery declaration.
+
 ### Evidence rubric
 
 | Evidence | Evidence to carry forward | If a bridge is needed, repair by |
@@ -934,6 +1031,44 @@ quantifier order → negation witness → proof obligation. Change one premise
 (for example, immediate versus transitive prerequisite) and ask what relation
 or theorem must be revised. End with a learner-controlled evidence card:
 claim, witness, assumption, and next question.
+
+### Invitation — state the model in plain language
+
+Invite the learner to choose one quantified route claim, say its domain and
+edge convention in ordinary language, show a smallest witness, and name a
+confidence level before the Teaching Assistant offers correction.
+
+### Hint ladder — make one quantifier visible
+
+Use the smallest prompt needed: draw a route and edge; name the predicate;
+write “for every” or “there exists”; negate the claim; then connect the
+witness to a proof obligation. Keep the discussion constructive rather than
+pass/fail.
+
+### Changed-premise counterexample
+
+Change exactly one premise—make a direct edge merely indirect, permit a
+self-loop, omit one prerequisite, or change a partial route into a complete
+route—and ask which definition, theorem, or test must change.
+
+### Transfer — from a prerequisite route to an operational rule
+
+Ask the learner to turn one database constraint, authorization relation, or
+concurrent-state invariant into a bounded domain, predicate, witness, and
+evidence plan without claiming identical mechanisms or guarantees.
+
+### Reflection — name the next smallest evidence
+
+Ask what the current proof, trace, or test establishes; what it does not
+establish; and which single counterexample, source check, or regression would
+reduce the remaining uncertainty.
+
+### Learner-controlled evidence summary
+
+Keep only a learner-selected concise card: claim, domain, witness or proof
+step, confidence, revised model, unresolved question, and retrieval prompt.
+No Notion write, transcript retention, oral-exam result, grade, or mastery
+decision follows from this workbook alone.
 
 ### Study Partner — proof rehearsal
 

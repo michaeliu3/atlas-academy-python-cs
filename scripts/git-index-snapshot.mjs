@@ -207,9 +207,11 @@ function stageZeroRecord(entriesByPath, repositoryPath) {
   return entry;
 }
 
-async function assertWorktreeMatchesIndex(siteRoot, repositoryPath) {
+async function assertWorktreeMatchesIndex(siteRoot, repositoryPath, { wholeIndex = false } = {}) {
   const paths = Array.isArray(repositoryPath) ? repositoryPath : [repositoryPath];
-  const command = ["diff", "--quiet", "--no-ext-diff", "--", ...paths.map(literalPathspec)];
+  const command = wholeIndex
+    ? ["diff", "--quiet", "--no-ext-diff"]
+    : ["diff", "--quiet", "--no-ext-diff", "--", ...paths.map(literalPathspec)];
   try {
     await execFileAsync("git", command, { cwd: siteRoot, env: isolatedGitEnvironment() });
   } catch (error) {
@@ -374,7 +376,7 @@ export async function openGitIndexSnapshot(
       );
     }
     if (capturedRepositoryPaths.length > 0) {
-      await assertWorktreeMatchesIndex(repositoryRoot, capturedRepositoryPaths);
+      await assertWorktreeMatchesIndex(repositoryRoot, capturedRepositoryPaths, { wholeIndex: true });
     }
     return capturedRepositoryPaths;
   };

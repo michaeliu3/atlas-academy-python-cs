@@ -175,9 +175,9 @@
       "title": "Logic, Sets, Relations, Graphs, and Proof",
       "summary": "Atlas can now represent events behind an abstraction boundary. The next problem is not mainly about Python syntax:",
       "arcId": "arc-i",
-      "wordCount": 6373,
+      "wordCount": 7310,
       "estimatedMinutes": 25,
-      "sourceHash": "a83e6dbf40fe177a587e060192fd934ca5f13e45f39db3b2df02e4047531ef97",
+      "sourceHash": "0e98eb122b3a6e140fd8fb3570524398bf84fa5b7a9c35956cfa224c6d7aa1c0",
       "id": "m04",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -215,9 +215,9 @@
       "title": "Cost Models and Algorithm Analysis",
       "summary": "Module 4 gave Atlas a precise prerequisite model and a correctness condition. Correct output is necessary, but it is not sufficient. A route validator that works for 20 concepts may become unusable for 200,000 concepts.",
       "arcId": "arc-i",
-      "wordCount": 6116,
+      "wordCount": 7314,
       "estimatedMinutes": 24,
-      "sourceHash": "7055d49db664f7c53f2dd447db61a962becc8e5d2f6c77505fc060e350e00b10",
+      "sourceHash": "785a222aeda2682b920bbd2f75fe0f0343494cf96a062767e00c554ec40ef610",
       "id": "m05",
       "state": {
         "lifecycle": "learner-material-ready",

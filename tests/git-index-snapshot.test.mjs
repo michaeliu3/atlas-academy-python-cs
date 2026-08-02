@@ -154,6 +154,25 @@ test("a whole-index closure rejects an unstaged tracked-file deletion", async (t
   await expectSnapshotError(() => snapshot.assertAllClean(), "WORKTREE_DIVERGED");
 });
 
+test("a whole-index closure avoids path-argument limits for a large tracked input set", async (t) => {
+  const root = await createRepository();
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  const suffix = "x".repeat(88);
+  for (let index = 0; index < 450; index += 1) {
+    await writeFixture(
+      root,
+      `content/large-input-set/${String(index).padStart(4, "0")}-${suffix}.txt`,
+      `${index}\n`,
+    );
+  }
+  await git(root, ["add", "."]);
+  await git(root, ["commit", "--quiet", "-m", "large input set"]);
+
+  const snapshot = await openGitIndexSnapshot(root);
+  await snapshot.assertAllClean();
+});
+
 test("Git-index snapshot ignores an inherited Git index override", async (t) => {
   const root = await createRepository();
   t.after(() => rm(root, { recursive: true, force: true }));

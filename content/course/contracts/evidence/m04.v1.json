@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m04",
+  "purpose": "Bind M4's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M4 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m04-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M4 workbook names Module 3 as its prerequisite context and its canonical M5 forward handoff without treating conceptual later-module connections as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "retrieval-ready-when-and-forward-handoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m04-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M4 exposes six ordered sessions that move from checkable claims through quantifiers, relations, graphs, proof boundaries, code reading, and a defended M5 handoff dossier.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "session-1--claims-that-can-be-checked"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "session-2--quantifiers-sets-and-relations"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "session-3--give-prerequisites-a-graph-shape"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "session-4--proof-and-probability-as-different-models"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "session-5--code-reading-and-architecture-investigation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "session-6--design-delegate-review-defend"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m04-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M4 derives formal reasoning from a bounded policy, a precise predicate, and a concrete witness before using proof or code-review vocabulary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "first-principles-derivation--from-informal-policy-to-checkable-claim"}
+      ],
+      "limitations": ["A named first-principles section does not prove conceptual adequacy, mathematical correctness, or learner comprehension."]
+    },
+    {
+      "id": "m04-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M4 exposes separate definition, assumption, derivation/proof idea, counterexample, and bounded numerical-experiment locations for inspecting a formal route model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "definition--domain-predicate-and-witness"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "assumption--the-relation-is-complete-enough-for-the-claim"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "derivation-and-proof-idea--quantify-then-seek-a-witness"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "counterexample--a-true-example-does-not-prove-a-universal-policy"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "numerical-experiment--count-cases-without-upgrading-the-claim"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical checks, or source claims."]
+    },
+    {
+      "id": "m04-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M4 contains distinct code-reading, model-mismatch debugging, bounded predicate design, and patch-review tasks centred on an inspectable prerequisite-route validator.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "10-code-reading-and-architecture-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "11-mechanism-revealing-implementation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "12-agent-direction-and-patch-review"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, design, or review a formal-model implementation."]
+    },
+    {
+      "id": "m04-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M4 asks the learner to predict a branch-count result and record confidence before opening the explanation.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "prediction-before-reveal--unequal-branches-require-a-sum"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m04-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M4 asks the learner to transfer a bounded formal-model discipline to databases, concurrency, authorization, or network-reachability claims without claiming identical mechanisms or guarantees.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "h-transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m04-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M4 exposes a learner reading route plus a scoped canonical source map and module-specific source/reuse audit addendum.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "sources-and-further-study"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/python_curriculum_sources.md", "locator": "first-principles-computer-science-sequence"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module4_logic_sets_relations_graphs_proof_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module4_logic_sets_relations_graphs_proof_source_audit_addendum.md", "locator": "claim-to-source-and-session-map"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m04-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M4 binds its prerequisite-graph visual to a concise text alternative and the shared Mermaid reader plus module-specific accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "6-graphs-relations-with-a-useful-visual-shape"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "text-alternative--prerequisite-graph-as-a-relation"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m04-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M4 exposes a confidence-aware understanding check and a likely-misconception guide rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "15-understanding-check--confidence-aware-multiple-choice"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "diagnostic-interpretation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "likely-misconceptions"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m04-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M4 includes a learner-controlled +1, +7, and +21 day retrieval route tied to the M5 handoff evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "retrieval-ready-when-and-forward-handoff"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m04-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M4 specifies a prerequisite-domain portfolio with a constructive evidence rubric and explicit acceptance criteria.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "17-atlas-milestone-4"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "project-acceptance-criteria--prerequisite-domain-portfolio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "evidence-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m04-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M4 contains an encouraging conversational oral-defense protocol with invitation, hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "teaching-assistant--supportive-oral-defense"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "hint-ladder--make-one-quantifier-visible"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "transfer--from-a-prerequisite-route-to-an-operational-rule"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "reflection--name-the-next-smallest-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m04-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M4 companion binds a Teaching Assistant opening, artifact focus, and repair move to a quantified claim and its stated hypothesis boundary.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m04.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m04-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M4 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m04.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m04-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M4 companion carries a bounded claim-and-cost card into the canonical M5 cost-model handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m04.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M4, or authorization to bypass M5 prerequisites."]
+    },
+    {
+      "id": "m04-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M4 binds the accessible Mermaid rendering surface and its direct M4 accessibility test to the workbook's prerequisite-graph route; M4 declares no separate executable studio or reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/04_logic_sets_relations_graphs_proof.md", "locator": "6-graphs-relations-with-a-useful-visual-shape"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m04-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m04.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m04/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

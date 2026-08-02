@@ -21,6 +21,8 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m01 = report.byModuleId.get("m01");
   const m02 = report.byModuleId.get("m02");
   const m03 = report.byModuleId.get("m03");
+  const m04 = report.byModuleId.get("m04");
+  const m05 = report.byModuleId.get("m05");
   const m12 = report.byModuleId.get("m12");
   const m13 = report.byModuleId.get("m13");
   const m27 = report.byModuleId.get("m27");
@@ -41,11 +43,13 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 21);
+  assert.equal(report.summary.companionCount, 23);
   assert.deepEqual(report.summary.moduleIds, [
     "m01",
     "m02",
     "m03",
+    "m04",
+    "m05",
     "m12",
     "m13",
     "m19",
@@ -80,6 +84,16 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.equal(m03.studyPartner.role, "non-grading-rehearsal");
   assert.equal(m03.forwardHandoff.targetModuleId, "m04");
   assert.equal(moduleLearningCompanionRelativePath("m03"), "content/course/contracts/companions/m03.v1.json");
+  assert.equal(m04.guideBinding.locator, "/guides/3");
+  assert.equal(m04.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m04.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m04.forwardHandoff.targetModuleId, "m05");
+  assert.equal(moduleLearningCompanionRelativePath("m04"), "content/course/contracts/companions/m04.v1.json");
+  assert.equal(m05.guideBinding.locator, "/guides/4");
+  assert.equal(m05.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m05.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m05.forwardHandoff.targetModuleId, "m27");
+  assert.equal(moduleLearningCompanionRelativePath("m05"), "content/course/contracts/companions/m05.v1.json");
   assert.equal(m12.guideBinding.locator, "/guides/11");
   assert.equal(m12.teachingAssistant.role, "supportive-oral-defense");
   assert.equal(m12.studyPartner.role, "non-grading-rehearsal");
