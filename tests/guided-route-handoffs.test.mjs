@@ -41,7 +41,7 @@ test("guided handoff copy preserves the required mathematical bridges", async ()
 });
 
 test("private guided continuation remains distinct from portal release", async () => {
-  const [graph, moduleTwentyFour, moduleThirtyOne, moduleThirtyTwo, moduleThirtySix, privateRoute, routePage] = await Promise.all([
+  const [graph, moduleTwentyFour, moduleThirtyOne, moduleThirtyTwo, moduleThirtySix, privateRoute, openMaterialPlans, routePage] = await Promise.all([
     loadCourseGraph(),
     workbook("24_cpython_performance_memory.md"),
     readFile(
@@ -66,6 +66,7 @@ test("private guided continuation remains distinct from portal release", async (
       "utf8",
     ),
     readFile(new URL("../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/LEARNER_ROUTE_PLANS.md", import.meta.url), "utf8"),
     readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
   ]);
 
@@ -90,6 +91,19 @@ test("private guided continuation remains distinct from portal release", async (
     moduleThirtySix,
     /non-credit discussion of M25's reader-visible reference preview[\s\S]{0,240}M25's separate promotion requirements still apply/u,
   );
-  assert.match(routePage, /Private guided continuation/u);
+  assert.match(
+    privateRoute,
+    /M25 reference-preview orientation[\s\S]{0,220}M26 pre-capstone rehearsal preview/u,
+  );
+  assert.match(
+    openMaterialPlans,
+    /## Choose the study surface before choosing a calendar[\s\S]{0,720}Private guided course/u,
+  );
+  assert.match(
+    openMaterialPlans,
+    /In the \*\*portal\/open-material route\*\*,[\s\S]{0,300}private chat-led draft study/u,
+  );
+  assert.match(routePage, /intended 36-module dependency sequence/u);
+  assert.match(routePage, /Primary guided learning happens in Codex/u);
   assert.match(routePage, /Teaching Assistant and Study Partner guide/u);
 });

@@ -36,12 +36,14 @@ the final AI/systems modules integrate prior evidence rather than replacing it.
 | Days 26–34 | M17, M28–M30, then M31 | Execution/mathematical assumptions and optimization evidence card. |
 | Days 35–44 | M18–M24, then M32 | Cross-layer trace, resource/authority boundary, and reproducibility card. |
 | Days 45–53 | M33–M36 | Formal-limit, search/decision, ML-evaluation, and reliability dossiers. |
-| Days 54–55 | M25 synthesis preview | Evidence-grounded AI/human-control questions; no invented prerequisite credit. |
-| Days 56–60 | M26 capstone preview | Architecture-defense rehearsal and a bounded next-specialization plan. |
+| Days 54–55 | M25 reference-preview orientation | Evidence-grounded AI/human-control questions; no invented prerequisite or synthesis credit. |
+| Days 56–60 | M26 pre-capstone rehearsal preview | Architecture-defense rehearsal and a bounded next-specialization plan; this is not the capstone. |
 
 The 60-day plan is a demanding first pass. Use the existing
 [90- and 180-day pacing rules](LEARNER_ROUTE_PLANS.md) whenever a proof, trace,
-or retrieval needs more time; expanding the calendar is a repair, not failure.
+or retrieval needs more time. That document's portal/open-material schedules
+are an availability plan; this page remains the full private chat-led sequence.
+Expanding the calendar is a repair, not failure.
 
 ## Private advanced study packs
 

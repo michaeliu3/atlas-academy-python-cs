@@ -229,6 +229,8 @@ test("keeps the interactive explorer separate from Core route access and evidenc
 
   assert.match(portal, /Interactive explorer · not the Core route/);
   assert.match(portal, /separate Codex\s+learning chats—not this explorer—carry the learning sequence/u);
+  assert.match(portal, /href="\/learning-partners"/u);
+  assert.match(portal, />\s*Learning partners/u);
   assert.doesNotMatch(portal, /Show learning path/u);
   assert.match(header, />Interactive explorer</u);
 
@@ -239,6 +241,7 @@ test("keeps the interactive explorer separate from Core route access and evidenc
   assert.match(navigation, /Reference preview—not an unlocked Core step\./u);
 
   assert.match(route, /Atlas does not infer progress\s+from a click,\s+a scroll, or a studio interaction\./u);
+  assert.match(route, /Teaching Assistant for a supportive oral defense/u);
   assert.match(route, /Reference preview—available for orientation, not Core progress/u);
   assert.match(route, /entry\.state\.readerAccess !== "hidden"/u);
 });

@@ -109,6 +109,9 @@ export function CoursePortal() {
           <Link className="header-link" href="/modules">
             Course library
           </Link>
+          <Link className="header-link" href="/learning-partners">
+            Learning partners
+          </Link>
           <Link className="header-link" href="/route">
             60-day route
           </Link>

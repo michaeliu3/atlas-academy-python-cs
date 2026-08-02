@@ -114,6 +114,13 @@ export default function AtlasCoreRoutePage() {
             </div>
           </dl>
           <p className={styles.availability}>
+            <strong>This page maps the intended 36-module dependency sequence
+            and current portal access.</strong> It is not a promise that every
+            phase can be completed in the reader today: M31–M36 require
+            designated private chat-led draft study, while M25/M26 remain
+            orientation-only previews.
+          </p>
+          <p className={styles.availability}>
             Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules remain unavailable as portal reader pages while their release material is reviewed.
           </p>
           <p className={styles.availability}>
@@ -125,11 +132,12 @@ export default function AtlasCoreRoutePage() {
             deliberately.
           </p>
           <p className={styles.availability}>
-            <strong>Private guided continuation.</strong> The course owner may
-            use the authoring-only M31–M36 draft packs only with the designated
-            Teaching Assistant and Study Partner chats. That private
-            instructor-led study does not make a portal page available, record
-            Core credit, or create a publication claim. Use the{" "}
+            <strong>Primary guided learning happens in Codex.</strong> The
+            course owner may use the authoring-only M31–M36 draft packs only
+            with the designated Teaching Assistant and Study Partner chats.
+            That private instructor-led study does not make a portal page
+            available, record Core credit, or create a publication claim. Use
+            the{" "}
             <Link href="/learning-partners">Teaching Assistant and Study Partner guide</Link>{" "}
             to prepare the conversation and keep the private draft boundary
             explicit.
@@ -169,7 +177,7 @@ export default function AtlasCoreRoutePage() {
             </li>
             <li>
               <strong>After</strong>
-              <span>Use the oral defense to explain, revise, and choose a next bridge.</span>
+              <span>Bring the evidence to the Teaching Assistant for a supportive oral defense; use the portal text flow to prepare or rehearse.</span>
             </li>
           </ol>
           <Link className={styles.partnerLink} href="/learning-partners">

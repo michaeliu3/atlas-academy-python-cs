@@ -42,10 +42,28 @@ personal progress.
 - Contract states: **30** legacy baselines; **0** verified.
 <!-- atlas-course-status:end -->
 
+## Choose the study surface before choosing a calendar
+
+Atlas deliberately separates two ways to use the same canonical sequence:
+
+- **Private guided course — the primary learning mode.** Work through the
+  designated Codex Study Partner and Teaching Assistant chats; use the
+  [private guided learning route](PRIVATE_GUIDED_LEARNING_ROUTE.md) for the
+  complete chat-led sequence, including the six M31–M36 private draft packs.
+  Those packs remain authoring-only in the portal and create no portal access,
+  Core credit, review, or publication claim. M25/M26 remain guided
+  reference-preview/rehearsal material, not synthesis or capstone credit.
+- **Portal/open-material route — the visual and reference mode.** The
+  calendar plans below schedule only reader-visible open material. They are a
+  truthful availability plan, not a substitute for the private guided route or
+  a way to unlock authoring-only material.
+
 Open legacy material is suitable for study while its full module-contract
 review remains pending. Reference previews are orientation only and do not
-create synthesis or capstone credit. Authoring-only modules must not be
-scheduled, simulated, or self-certified as Atlas completion. In the graph,
+create synthesis or capstone credit. In the **portal/open-material route**,
+authoring-only modules must not be scheduled as Core steps, simulated, or
+self-certified as Atlas completion. Designated private chat-led draft study is
+separate and carries the same no-credit/no-release boundary. In the graph,
 `published` is reserved for a verified contract with recorded deployment
 evidence—not a learner-completion signal.
 
@@ -135,13 +153,17 @@ The portal keeps diagnostic progress in the current browser unless the learner
 chooses to copy or print the learning brief. It does not automatically write
 the result to Notion.
 
-## The three access-aware routes
+## Portal/open-material 60/90/180-day routes
 
 ### 60 days — accelerated open-material first pass
 
-This is the fastest honest version of the current course. It can cover the
-available material only as a **minimum-evidence first pass**; it cannot turn
-M31–M36 into completed work or turn M25/M26 previews into a capstone.
+This is the fastest honest **portal/open-material** version of the course. It
+can cover reader-visible material only as a **minimum-evidence first pass**;
+it cannot turn M31–M36 into completed work or turn M25/M26 previews into a
+capstone. If you are using the designated chats for the full private course,
+follow the [private guided learning route](PRIVATE_GUIDED_LEARNING_ROUTE.md)
+instead; that still does not unlock portal modules or create review/release
+credit.
 
 | Calendar window | Connected focus | Access-aware decision |
 | --- | --- | --- |
