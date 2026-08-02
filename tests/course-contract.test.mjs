@@ -389,7 +389,12 @@ test("checked-in provenance accepts the canonical derived graph projection", asy
     snapshot,
   });
 
-  assert.equal(report.releaseInputLedger?.inputPaths.length, 214);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 215);
+  assert.ok(
+    report.releaseInputLedger?.inputPaths.includes(
+      "content/course/synthesis-preview-conversations.v1.json",
+    ),
+  );
   assert.equal(report.summary.legacyBaselineModules, 30);
 });
 
@@ -427,7 +432,7 @@ test("checked-in provenance validates captured JSON instead of stateful caller f
 
   assert.equal(graphPurposeReads, 1);
   assert.equal(registryPurposeReads, 1);
-  assert.equal(report.releaseInputLedger?.inputPaths.length, 214);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 215);
 });
 
 test("checked-in provenance ignores inherited Git index overrides end to end", async () => {
@@ -443,7 +448,7 @@ test("checked-in provenance ignores inherited Git index overrides end to end", a
       requireGitTracked: true,
       snapshot,
     });
-    assert.equal(report.releaseInputLedger?.inputPaths.length, 214);
+    assert.equal(report.releaseInputLedger?.inputPaths.length, 215);
   } finally {
     if (previousIndexOverride === undefined) {
       delete process.env.GIT_INDEX_FILE;

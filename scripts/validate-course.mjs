@@ -74,10 +74,16 @@ import { validateReaderMermaidAlternatives } from "./validate-mermaid-alternativ
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
 const canonicalCourseGraphRelativePath = "content/course/course-graph.v2.json";
+const synthesisPreviewConversationsRelativePath =
+  "content/course/synthesis-preview-conversations.v1.json";
 const execFileAsync = promisify(execFile);
 
 function courseGraphPathFor(root) {
   return resolve(root, canonicalCourseGraphRelativePath);
+}
+
+function synthesisPreviewConversationsPathFor(root) {
+  return resolve(root, synthesisPreviewConversationsRelativePath);
 }
 
 function performanceBudgetPolicyPathFor(root) {
@@ -206,6 +212,7 @@ export async function validateCourseContracts(
   let provenanceSourceReady = false;
   const releaseInputPaths = new Set([
     courseGraphPathFor(validationSiteRoot),
+    synthesisPreviewConversationsPathFor(validationSiteRoot),
     performanceBudgetPolicyPathFor(validationSiteRoot),
     moduleContractRegistryPath(validationSiteRoot),
     releaseInputPolicyPath(validationSiteRoot),

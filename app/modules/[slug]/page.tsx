@@ -15,10 +15,12 @@ import { ModuleMarkdown } from "./ModuleMarkdown";
 import { ModuleInteraction } from "./ModuleInteraction";
 import { ModuleNavigation } from "./ModuleNavigation";
 import { ModuleOralDefense } from "./ModuleOralDefense";
+import { ModulePreviewConversation } from "./ModulePreviewConversation";
 import { ModuleTableOfContents } from "./ModuleTableOfContents";
 import { ReadingTools } from "./ReadingTools";
 import { resolveModuleStudio } from "@/lib/module-studio-registry";
 import type { CourseModule } from "@/lib/module-catalog";
+import { getSynthesisPreviewConversation } from "@/lib/synthesis-preview-conversations";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -102,6 +104,10 @@ export default async function ModulePage({ params }: ModulePageProps) {
   const lessonMarkdown = stripDocumentTitle(markdown);
   const headings = extractTableOfContents(lessonMarkdown);
   const access = readerAccessCopy(courseModule);
+  const previewConversation =
+    moduleInteraction.kind === "preview"
+      ? getSynthesisPreviewConversation(courseModule.id)
+      : undefined;
 
   return (
     <main className={`module-shell ${courseModule.arcId}`}>
@@ -151,6 +157,13 @@ export default async function ModulePage({ params }: ModulePageProps) {
           courseModule={courseModule}
           resolution={moduleInteraction}
         />
+
+        {previewConversation ? (
+          <ModulePreviewConversation
+            courseModule={courseModule}
+            previewPackage={previewConversation}
+          />
+        ) : null}
 
         <ModuleNavigation courseModule={courseModule} position="top" />
 

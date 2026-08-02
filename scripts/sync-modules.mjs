@@ -76,6 +76,12 @@ const siteRoot = resolve(scriptDirectory, "..");
 const moduleDirectory = resolve(siteRoot, "content", "modules");
 const contractPath = moduleContractRegistryPath(siteRoot);
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
+const synthesisPreviewConversationsPath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "synthesis-preview-conversations.v1.json",
+);
 const performanceBudgetPolicyPath = resolve(
   siteRoot,
   "content",
@@ -286,6 +292,7 @@ const legacyCandidatePreflightProfilesReport = await validateLegacyCandidatePref
 );
 const releaseInputPaths = new Set([
   graphPath,
+  synthesisPreviewConversationsPath,
   performanceBudgetPolicyPath,
   contractPath,
   advancedModuleBridgePath(siteRoot),
@@ -393,6 +400,7 @@ for (const projectedModule of projectedModules) {
 }
 
 await requireFile(contractPath, "Module contract registry v3");
+await requireFile(synthesisPreviewConversationsPath, "Synthesis preview conversations");
 await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
 await requireFile(advancedModuleContractPath(siteRoot), "Lifecycle-aware advanced module contract");

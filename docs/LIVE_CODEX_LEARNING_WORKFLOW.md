@@ -43,8 +43,11 @@ handoff, plus a versioned teaching guide for the module.
 
 The packet is a useful conversation starting point, not completion evidence,
 a route unlock, a platform integration, or a claim that the underlying module
-contract has been reviewed. Reference-preview pages do not expose follow-on
-contexts; authoring-only guide content is not shipped into the public reader.
+contract has been reviewed. Reference-preview pages do not expose full-module
+follow-on contexts; authoring-only guide content is not shipped into the public
+reader. The deliberate M25/M26 synthesis-preview exception exposes only
+copyable **preview-preparation** cards—never a full oral defense, studio,
+project, route unlock, or completion claim.
 
 ## Learner-authorized Notion notes
 

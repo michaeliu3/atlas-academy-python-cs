@@ -1420,6 +1420,13 @@ test("Module 26 renders an evidence-first capstone preview without opening its s
     /Teaching Assistant · oral-defense context|Study Partner · rehearsal context/u,
     "the preview must not expose a module companion package",
   );
+  const previewText = document.body.textContent ?? "";
+  assert.match(previewText, /Preview conversation—not an oral defense\./u);
+  assert.match(previewText, /REHEARSAL ONLY/u);
+  assert.match(previewText, /Teaching Assistant · clarification context/u);
+  assert.match(previewText, /Study Partner · orientation context/u);
+  assert.match(previewText, /Copy the concise evidence packet/u);
+  assert.match(previewText, /Next map: maintenance or specialization question/u);
 });
 
 test("release architecture keeps Notion capture out of the portal runtime", async () => {
@@ -2406,8 +2413,15 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   assert.match(html, /open for orientation and comparison, not as an unlocked Core step/);
   assert.match(html, /Reference preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
+  const m25PreviewText = new JSDOM(html).window.document.body.textContent ?? "";
+  assert.match(m25PreviewText, /Preview conversation—not an oral defense\./u);
+  assert.match(m25PreviewText, /PREVIEW ONLY/u);
+  assert.match(m25PreviewText, /Teaching Assistant · clarification context/u);
+  assert.match(m25PreviewText, /Study Partner · orientation context/u);
+  assert.match(m25PreviewText, /Copy the concise evidence packet/u);
+  assert.match(m25PreviewText, /Future map: M26 capstone reasoning/u);
   assert.doesNotMatch(
-    new JSDOM(html).window.document.body.textContent ?? "",
+    m25PreviewText,
     /Teaching Assistant · oral-defense context|Study Partner · rehearsal context/u,
     "the M25 preview must not expose a module companion package",
   );
@@ -2541,6 +2555,13 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
   assert.match(html, /Complete Module 26 workbook/);
   assert.match(html, /Reference preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
+  const m26PreviewText = new JSDOM(html).window.document.body.textContent ?? "";
+  assert.match(m26PreviewText, /Preview conversation—not an oral defense\./u);
+  assert.match(m26PreviewText, /REHEARSAL ONLY/u);
+  assert.match(m26PreviewText, /Teaching Assistant · clarification context/u);
+  assert.match(m26PreviewText, /Study Partner · orientation context/u);
+  assert.match(m26PreviewText, /Copy the concise evidence packet/u);
+  assert.match(m26PreviewText, /Next map: maintenance or specialization question/u);
   assert.match(
     html,
     /studio, project evidence, and oral-defense route remain unavailable/,

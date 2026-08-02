@@ -345,6 +345,10 @@
       "sha256": "38ea7750e5f4d20875294bec96d5ef1d0e86fca324ea8ec5cf2185fbcd202642"
     },
     {
+      "path": "content/course/synthesis-preview-conversations.v1.json",
+      "sha256": "257836fe13b8d4d5b8eef0156cde64c9526652439352a65797173c0951319fb2"
+    },
+    {
       "path": "content/modules/01_values_state_execution.md",
       "sha256": "57ebc6c931ae94dc15f271c4d0af8d30a3171f81b1b6a2a0cee20290a7e5b3df"
     },
@@ -618,7 +622,7 @@
     },
     {
       "path": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md",
-      "sha256": "69988251830872ae318ffd0653134519c1a6dc6afc3c73969f48f69d824c99f5"
+      "sha256": "9c5ca56599c5f56c2c4797c5fc83c1efb6a1aa43c24ce07f5d5e4d3a98c81a8f"
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
@@ -858,7 +862,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "106071e93fc0366f58e160857e496bfd5abd6fadef5f5ecf5ee1283e108fca75"
+      "sha256": "f432c37f790da14fc6c080f593af5d6e22b6c8a0f369439df02fc3fd20528209"
     }
   ]
 }

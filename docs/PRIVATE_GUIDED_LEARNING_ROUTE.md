@@ -410,24 +410,23 @@ missing evidence visible. It creates no module credit, capstone result, release
 decision, oral-defense result, or Notion record unless the normal `records on`
 conditions already apply.
 
+Mark any receipt that the learner has not actually completed and reviewed as
+`[UNAVAILABLE — PRESERVE PREVIEW GATE]`; a fluent summary never fills that gap.
+
+The reader's copyable preparation cards are the canonical live-chat wording:
+[synthesis preview conversation registry](../content/course/synthesis-preview-conversations.v1.json).
+This guide explains their place in the route; do not maintain a second, drifting
+version of the prompts here.
+
 ### M25 evidence-synthesis orientation (45–60 minutes)
 
 Use this only after studying the relevant prior material. It is a way to see
 the final connection, not to claim an M25 synthesis before M31–M36 receive
-reviewed learner evidence. In the designated **Study Partner** chat, send:
-
-```text
-Run the M25 evidence-synthesis orientation, not the M25 module or oral defense.
-Help me examine the fixed Atlas next-step suggestion as a bounded preview. Ask
-me to distinguish a score, a policy, a human decision, and an authority
-boundary; then ask what M30/M31, M34, M35, and M36 evidence would each need to
-contribute. I will mark any artifact I have not genuinely completed and
-reviewed as [UNAVAILABLE — PRESERVE PREVIEW GATE]. Ask for one A–D answer and
-0–100 confidence before every diagnostic explanation. Use a readable
-whiteboard with defined notation, labelled code, and prose/ASCII fallbacks.
-Do not turn the orientation into a grade, an unlock, a recommendation, or an
-M26 handoff. End with one narrow question to carry forward.
-```
+reviewed learner evidence. Open M25's **Codex preview conversation** panel and
+copy its Study Partner preparation into the designated chat. It keeps the
+orientation bounded to one claim, baseline/owner, missing or conflicting
+advanced receipt, and one future-M26 question; it is never an M26 handoff or
+unlock.
 
 The only permitted orientation artifact is a **preview gate card**: bounded
 claim; baseline; human owner; evidence type that would be needed; missing or
@@ -442,20 +441,11 @@ that work into a preview window.
 
 This rehearsal uses only already available evidence to practice framing a
 maintainable system. It is not the M26 studio, project, final oral defense, or
-release. In the designated **Study Partner** chat, send:
-
-```text
-Run the M26 pre-capstone architecture rehearsal, not the M26 capstone or oral
-defense. I will choose one bounded Atlas vertical slice using evidence I can
-actually inspect. First ask me for a claim, non-goal, owner, one request trace,
-one failure/rollback boundary, and what upstream M25/M31–M36 receipts would be
-needed before a release decision. Make me change one premise such as a retry,
-permission, dependency, or data boundary and predict what becomes unknown. Ask
-for an A–D answer and 0–100 confidence before every diagnostic explanation.
-Use readable maps/tables/code with prose fallbacks. End with a `REHEARSAL ONLY`
-card and one next falsifier; do not issue RELEASE, REVISE, DEFER, or ROLLBACK as
-a capstone decision.
-```
+release. Open M26's **Codex preview conversation** panel and copy its Study
+Partner preparation into the designated chat. It keeps the rehearsal bounded to
+one claim/non-goal, owner, source/test anchor, trace, failure boundary, missing
+receipt, and next falsifier; it cannot issue a capstone decision or restore the
+gated studio. Treat the resulting framing card as `REHEARSAL ONLY`.
 
 The permitted rehearsal card names only: claim, non-goal, owner, source/test
 anchor, one trace, one failure boundary, missing advanced receipt, and next

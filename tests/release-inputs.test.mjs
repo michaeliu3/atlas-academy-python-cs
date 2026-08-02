@@ -108,6 +108,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
   assert.ok(paths.includes(manualLearningRecordWorkflowGuideRelativePath));
   assert.ok(paths.includes(liveCodexLearningWorkflowRelativePath));
   assert.ok(paths.includes(liveCodexLearningWorkflowGuideRelativePath));
+  assert.ok(paths.includes("content/course/synthesis-preview-conversations.v1.json"));
   assert.ok(paths.includes(moduleLearningCompanionRelativePath("m31")));
   assert.ok(paths.includes("content/course/release-input-policy.v1.json"));
   assert.ok(paths.includes(releaseEvidencePolicyRelativePath));

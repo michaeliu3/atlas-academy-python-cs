@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "conversationVersion": "v1",
+  "kind": "atlas-synthesis-preview-conversations",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
+  "liveCodexLearningWorkflow": "content/course/live-codex-learning-workflow.v2.json",
+  "purpose": "Give the two reader-visible synthesis previews small, copyable Codex preparation contexts without restoring a gated studio, oral defense, project, Core advance, or portal-side record write.",
+  "packages": [
+    {
+      "moduleId": "m25",
+      "title": "M25 evidence-synthesis orientation",
+      "mode": "preview-only",
+      "fullSessionEstimate": "45–60 minutes",
+      "summary": "Use this brief conversation to locate one missing or conflicting evidence receipt before treating an intelligent-feature claim as a decision.",
+      "allowedArtifact": {
+        "tag": "PREVIEW ONLY",
+        "label": "Gate card",
+        "instruction": "Name one proposed claim, its transparent baseline and owner, one needed or missing M27–M36 receipt, the current DEFER decision, and one future-M26 question.",
+        "boundary": "No dossier, project, handoff, unlock, or completion claim belongs in this preview card."
+      },
+      "teachingAssistantClarificationPrompt": "Start the M25 evidence-synthesis preview. This is a preview conversation—not an oral defense, project review, capstone, grade, release decision, or Core-completion claim. Help me make one claim boundary explicit: ask for the baseline, decision owner, and one missing or conflicting M27–M36 receipt. If the designated chat offers GPT Live High, use it; keep equations, code, and a simple claim trace visible in chat as an accessible whiteboard, with prose or ASCII fallback. End with only the PREVIEW ONLY gate card and one future-M26 question. Do not manufacture a dossier, a handoff, an unlock, or evidence that I have not supplied.",
+      "studyPartnerPrompt": "Start the M25 evidence-synthesis preview rehearsal. This is a preview conversation—not an oral defense or a claim that M25 is complete. Use the visible chat as a whiteboard: retrieve one upstream receipt, trace one assumption to the proposed intelligent-feature claim, then change one premise and ask what must be deferred. When the designated chat offers GPT Live High, use it; render any equations or code visibly and give a prose or ASCII fallback. Keep the result to the PREVIEW ONLY gate card and one future-M26 question; do not create a dossier, project, handoff, unlock, or completion record.",
+      "futureForwardContext": {
+        "kind": "future-module-without-handoff",
+        "moduleId": "m26",
+        "label": "Future map: M26 capstone reasoning",
+        "boundary": "Module 26 is a future map for the question only, not a handoff or unlock."
+      },
+      "notionEvidencePacket": {
+        "title": "M25 preview gate-card packet",
+        "conditions": "Only in the designated configured Teaching Assistant or Study Partner chat, after the learner says records on, the session is substantive, and neither pause records nor off-record applies; at most one concise approved summary may be saved.",
+        "boundary": "The portal performs no Notion write and must not claim one succeeded without direct evidence. Exclude raw voice recordings and full transcripts.",
+        "fields": [
+          "claim",
+          "baseline and owner",
+          "needed or missing advanced receipt",
+          "preview decision",
+          "one future-M26 question"
+        ]
+      }
+    },
+    {
+      "moduleId": "m26",
+      "title": "M26 pre-capstone architecture rehearsal",
+      "mode": "preview-only",
+      "fullSessionEstimate": "60–90 minutes",
+      "summary": "Use this brief rehearsal to state the boundary of one future delivery claim and identify the next falsifier before any capstone decision exists.",
+      "allowedArtifact": {
+        "tag": "REHEARSAL ONLY",
+        "label": "Framing card",
+        "instruction": "Name one claim and non-goal, its owner and source/test anchor, one architecture trace and failure boundary, one missing M27–M36 receipt, and the next falsifier or specialization question.",
+        "boundary": "No release decision, dossier, project, studio, or completion claim belongs in this rehearsal card."
+      },
+      "teachingAssistantClarificationPrompt": "Start the M26 pre-capstone preview. This is a preview conversation—not an oral defense, capstone decision, grade, release review, or Core-completion claim. Help me state one bounded future delivery claim and one non-goal. Ask for the owner, a source or test anchor, a short architecture trace, a failure boundary, and the missing M27–M36 receipt. If the designated chat offers GPT Live High, use it; keep equations, code, and the trace visible in chat as an accessible whiteboard, with prose or ASCII fallback. End with only the REHEARSAL ONLY framing card and one next falsifier or specialization question. Do not manufacture a release decision, dossier, project, studio result, or evidence I have not supplied.",
+      "studyPartnerPrompt": "Start the M26 pre-capstone rehearsal. This is a preview conversation—not an oral defense or a claim that a capstone is complete. Use the visible chat as a whiteboard: draw one responsibility trace, change one dependency or failure premise, and identify which receipt or test would be needed before any decision. When the designated chat offers GPT Live High, use it; render any equations or code visibly and give a prose or ASCII fallback. Keep the result to the REHEARSAL ONLY framing card and one next falsifier or specialization question; do not create a release decision, dossier, project, studio result, or completion record.",
+      "futureForwardContext": {
+        "kind": "specialization-question-without-handoff",
+        "moduleId": null,
+        "label": "Next map: maintenance or specialization question",
+        "boundary": "Choose a future maintenance or specialization question; do not infer a forward module, handoff, or unlock."
+      },
+      "notionEvidencePacket": {
+        "title": "M26 rehearsal framing-card packet",
+        "conditions": "Only in the designated configured Teaching Assistant or Study Partner chat, after the learner says records on, the session is substantive, and neither pause records nor off-record applies; at most one concise approved summary may be saved.",
+        "boundary": "The portal performs no Notion write and must not claim one succeeded without direct evidence. Exclude raw voice recordings and full transcripts.",
+        "fields": [
+          "claim and non-goal",
+          "owner and source/test anchor",
+          "architecture trace and failure boundary",
+          "missing advanced receipt",
+          "next falsifier or specialization question"
+        ]
+      }
+    }
+  ]
+}
