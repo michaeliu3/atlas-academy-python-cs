@@ -39,10 +39,11 @@ test("M34 primary-source research remains a bounded authoring input, not a sourc
     research,
     /The portal and portable copied prompts keep this record\s+local-first; only the designated Codex chats may create at most one bounded\s+concise Notion session note under the active policy\. That note must not contain\s+a raw transcript and no saved-note claim is valid without direct evidence\./u,
   );
-  for (let number = 1; number <= 13; number += 1) {
+  for (let number = 1; number <= 18; number += 1) {
     assert.match(research, new RegExp(`\\| S34-${String(number).padStart(2, "0")} \\|`, "u"));
   }
   assert.match(research, /CMU course staff; official university-hosted course notes/u);
+  assert.match(research, /UC Berkeley course staff; official course textbook routes/u);
   assert.match(research, /one-shot expected-utility table/u);
 
   const m34GraphEntry = graph.modules.find(({ id }) => id === "m34");

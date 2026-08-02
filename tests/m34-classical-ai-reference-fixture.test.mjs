@@ -10,7 +10,9 @@ import {
   M34_BOUNDED_CLASSICAL_AI_FIXTURE,
   chooseM34DeclaredFrontierEntry,
   evaluateM34BinaryRelaxationCandidate,
+  m34Ac3RequeueCard,
   m34AStarNoReopenCounterexample,
+  m34ObservationBoundaryCard,
   m34TwoStageMdpBackupCard,
 } from "../lib/m34-classical-ai-reference-fixture.js";
 
@@ -117,7 +119,58 @@ test("the M34 two-stage card exposes one Bellman backup without becoming an MDP 
   assert.equal(card.objectiveConvention, "finite-horizon, undiscounted total reward");
   assert.equal(card.policyAtInitialState, "inspect");
   assert.deepEqual(card.policyAtTerminalStates, { clear: "dispatch", blocked: "wait" });
+  assert.equal(card.observationModel.terminalPolicyRequiresObservedSuccessor, true);
+  assert.match(card.observationModel.terminalObservation, /clear.*blocked/u);
+  assert.match(card.observationModel.hiddenSuccessorBoundary, /belief-state model/u);
   assert.match(card.truthBoundary, /not a general MDP planner/u);
+});
+
+test("the M34 observation card separates a world state from a shared signal and exposes a countermodel", () => {
+  const card = m34ObservationBoundaryCard();
+
+  assert.equal(card.id, "m34-s01-observation-versus-world-card");
+  assert.equal(card.observation.keyRackLight, "lit");
+  assert.equal(card.worlds.length, 2);
+  assert.equal(card.worlds[0].takeKeyLegal, true);
+  assert.equal(card.worlds[1].takeKeyLegal, false);
+  assert.equal(card.sameObservationDifferentLegalAction, true);
+  assert.equal(card.finiteModelCheck.proposition, "light-lit -> key-at-rack");
+  assert.equal(card.finiteModelCheck.validInDeclaredWorldSet, false);
+  assert.equal(card.finiteModelCheck.countermodel.worldId, "key-absent-light-lit");
+  for (const evaluation of card.finiteModelCheck.evaluations) {
+    assert.equal(evaluation.propositionTrue, !evaluation.lightLit || evaluation.keyAtRack);
+  }
+  assert.equal(
+    card.finiteModelCheck.evaluations.some(({ propositionTrue }) => !propositionTrue),
+    true,
+  );
+  assert.match(card.truthBoundary, /not a belief-state updater/u);
+});
+
+test("the M34 AC-3 card makes the predecessor requeue and empty-domain boundary inspectable", () => {
+  const card = m34Ac3RequeueCard();
+
+  assert.equal(card.id, "m34-s03-ac3-requeue-card");
+  assert.deepEqual(card.initialDomains, { A: [1, 2], B: [1, 2], C: [2] });
+  assert.deepEqual(card.steps[0].processedArc, "B->C");
+  assert.deepEqual(card.steps[0].removed, { variable: "B", values: [2] });
+  assert.deepEqual(card.steps[0].reEnqueuedPredecessorArcs, ["A->B"]);
+  assert.deepEqual(card.steps[1].processedArc, "A->B");
+  assert.deepEqual(card.steps[1].removed, { variable: "A", values: [1, 2] });
+  assert.equal(card.steps[1].emptyDomain, "A");
+  assert.equal(
+    card.steps[0].removed.values.every(
+      (value) => !card.steps[0].domainsAfter.C.some((support) => value < support),
+    ),
+    true,
+  );
+  assert.equal(
+    card.steps[1].removed.values.every(
+      (value) => !card.steps[1].domainsAfter.B.some((support) => value < support),
+    ),
+    true,
+  );
+  assert.match(card.truthBoundary, /not a general AC-3 implementation/u);
 });
 
 test("the M34 workbook puts both bounded fixtures in the relevant prediction and transfer sessions", async () => {
@@ -132,6 +185,8 @@ test("the M34 workbook puts both bounded fixtures in the relevant prediction and
   assert.ok(workbook.includes("no-reopen result has cost `4`"));
   assert.match(workbook, /reopened result has\s+cost `3`/u);
   assert.match(workbook, /m34AStarNoReopenCounterexample/u);
+  assert.match(workbook, /0\\le h\(n\)\\le h\^\*\(n\)/u);
+  assert.match(workbook, /### A-star guarantee regime audit/u);
   assert.match(workbook, /### Bounded reference fixture — relaxation status/u);
   assert.match(workbook, /evaluateM34BinaryRelaxationCandidate\(\{ x: 1, y: 0\.5 \}\)/u);
 });
@@ -161,16 +216,22 @@ test("the M34 workbook makes the model-construction audits explicit", async () =
   );
 
   assert.match(workbook, /### Relaxed-model heuristic audit — derive, then re-audit/u);
+  assert.match(workbook, /M34-C01 -> S34-01, S34-04–S34-05, S34-18/u);
   assert.match(workbook, /h_\{\\mathrm\{relaxed\}\}\(n\)\\le h\^\*\(n\)/u);
   assert.match(workbook, /removes only the declared key precondition of `open-vault`/u);
   assert.match(workbook, /Every original route remains legal in the relaxed model/u);
   assert.match(workbook, /old heuristic can overestimate after a model change/u);
   assert.match(workbook, /### CSP as partial-assignment search/u);
   assert.match(workbook, /AC-3 queue/u);
+  assert.match(workbook, /m34Ac3RequeueCard/u);
+  assert.match(workbook, /re-enqueue `A->B`/u);
   assert.match(workbook, /### State-update card — name what changes and what persists/u);
   assert.match(workbook, /T\(s,a\) = \(s \\setminus Del\(a\)\) \\cup Add\(a\)/u);
   assert.match(workbook, /### Markov-sufficiency and horizon audit/u);
   assert.match(workbook, /finite-horizon, undiscounted/u);
+  assert.match(workbook, /m34ObservationBoundaryCard/u);
+  assert.match(workbook, /light-lit -> key-at-rack/u);
+  assert.match(workbook, /observation becomes `clear` or `blocked` before the terminal action/u);
 });
 
 test("the M34 final dossier keeps one-shot and sequential decision claims distinct", async () => {

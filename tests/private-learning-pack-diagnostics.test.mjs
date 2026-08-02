@@ -97,7 +97,14 @@ test("advanced private-study packs preserve prediction gates and direct source r
       `${path} must not default a learning reveal gate open.`,
     );
     assert.match(markdown, /### Learner-facing source links/u);
-    assert.match(markdown, /2026-08-01/u);
+    const sourceBoundary = /^## Sources?\b.*$/mu.exec(markdown);
+    assert.ok(sourceBoundary, `${path} needs a source/reuse boundary before its learner links.`);
+    const sourceSection = markdown.slice(sourceBoundary.index);
+    assert.match(
+      sourceSection,
+      /\b(?:checked|rechecked|accessed)\b[\s\S]{0,280}?\b20\d{2}-\d{2}-\d{2}\b/iu,
+      `${path} needs a nearby ISO-format source access/check date.`,
+    );
   }
 });
 

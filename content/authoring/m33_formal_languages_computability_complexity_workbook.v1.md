@@ -127,10 +127,19 @@ L_{\mathrm{ordered}}=\{0^i1^j \mid i,j\geq0\}.
 \]
 
 It contains the empty string, 000, 111, and 0011; it excludes 010. A grammar
-is a different formal object. One grammar for balanced parentheses is
+is a different formal object. A CFG is the tuple \(G=(V,\Sigma,R,S)\):
+variables \(V\), terminals \(\Sigma\), productions \(R\), and start variable
+\(S\). One grammar for balanced parentheses is
 
 \[
 S \rightarrow (S)S \mid \epsilon.
+\]
+
+For that example, an explicit object is
+
+\[
+G_{\mathrm{paren}}=(\{S\},\{\texttt{(},\texttt{)}\},
+\{S\rightarrow\texttt{(}S\texttt{)}S\mid\epsilon\},S).
 \]
 
 The grammar says which strings can be derived. It says nothing yet about what
@@ -199,6 +208,30 @@ only when the stack is empty** at the end. For `(()())`, the stack heights are
 \[
 0\to1\to2\to1\to2\to1\to0.
 \]
+
+### PDA configuration trace — make the stack state explicit
+
+The same scan can be written as a compact pushdown-automaton-style
+configuration \((q_{\mathrm{scan}},u,\gamma)\): finite control state,
+unread suffix (u), and stack \(\gamma\), with the top written at the left
+and \(\bot\) as the bottom marker. For the original input `(()())`, the
+finite control does not change in this teaching trace; only the unread suffix
+and stack do.
+
+| Consumed prefix | Configuration after the prefix | Why it changes |
+| --- | --- | --- |
+| \(\epsilon\) | \((q_{\mathrm{scan}},\texttt{(()())},\bot)\) | start with no unmatched open parenthesis |
+| `(` | \((q_{\mathrm{scan}},\texttt{()())},\texttt{(}\bot)\) | push one open parenthesis |
+| `((` | \((q_{\mathrm{scan}},\texttt{)())},\texttt{((}\bot)\) | push another open parenthesis |
+| `(()` | \((q_{\mathrm{scan}},\texttt{())},\texttt{(}\bot)\) | close matches the top open parenthesis |
+| `(()(` | \((q_{\mathrm{scan}},\texttt{))},\texttt{((}\bot)\) | push for the new nested pair |
+| `(()()` | \((q_{\mathrm{scan}},\texttt{)},\texttt{(}\bot)\) | close that nested pair |
+| `(()())` | \((q_{\mathrm{scan}},\epsilon,\bot)\) | input and pending nesting are both empty |
+
+In prose, the stack is \(\bot\), `(`\(\bot\), `((`\(\bot\), `(`\(\bot\),
+`((`\(\bot\), `(`\(\bot\), then \(\bot\) again. This configuration trace
+is an operational witness for this one stack discipline. It is not a full
+formal PDA definition, a CFG–PDA equivalence proof, or a production parser.
 
 **Predict before reveal.** Trace `())(`. At which symbol is the smallest
 counterexample exposed: an unmatched close, an unmatched open, or a grammar
@@ -667,12 +700,53 @@ The complement of a vertex cover is an independent set, and vice versa. This
 does not prove either problem is hard by itself; it demonstrates the structure
 an actual reduction must expose.
 
-This card is about well-formed graph instances, not yet a complete language
-reduction over every string. To claim
-\(\mathrm{VC}\le_m^p\mathrm{IS}\), fix an encoding, map malformed strings to
-a fixed no-instance, and show that this total map runs in polynomial time.
-Those obligations keep a true graph fact from being mistaken for a complete
-complexity proof.
+The next card makes those obligations inspectable with one small declared
+serialization. It is still a compact teaching proof—not an NP-completeness
+claim, a production graph parser, or a generic graph tool.
+
+### VC ↔ IS micro-proof card — make every reduction obligation visible
+
+Number the vertices \(0,\ldots,n-1\). A valid input has the exact text form
+`n#k#i,j;i,j;...`: `n` and `k` are canonical nonnegative decimal numerals with
+\(0\le k\le n\); the final field is empty or a lexicographically sorted list
+of distinct edges \(i,j\), where \(0\le i<j<n\). This explicit format makes
+the string-level validity branch visible without asking the learner to infer a
+hidden graph parser. Define `VC` to contain each valid input whose graph has a
+cover of size at most \(k\), and `IS` to contain each valid input whose graph
+has an independent set of size at least its threshold. For a valid `n#k#E`,
+set
+
+\[
+f(\texttt{n#k#E})=\texttt{n#(n-k)#E}.
+\]
+
+For malformed input, use one named branch: **map malformed strings to a fixed no-instance.**
+Use `2#2#0,1`: it encodes a two-vertex graph with one edge and threshold \(2\),
+so no independent set can meet the threshold. Every malformed string maps to
+this fixed target no-instance; it is not in `VC`, and this target is not in
+`IS`, so the branch preserves the iff instead of leaving the map partial.
+Checking separators, decimal fields, endpoint
+bounds, order, and duplicates; subtracting \(k\) from \(n\); and copying the
+edge field each take polynomial time in the input-string length. Under this
+declared serialization, the two branches therefore define a total
+polynomial-time map. **Cost conclusion:** this total map runs in polynomial time under the declared serialization.
+
+Now read both directions, not only the formula:
+
+1. If \(C\) is a cover with \(|C|\le k\), no edge has both endpoints in
+   \(V\setminus C\). Thus \(V\setminus C\) is independent and has size at
+   least \(|V|-k\).
+2. If \(I\) is independent with \(|I|\ge|V|-k\), no edge has both endpoints
+   in \(I\). Thus \(V\setminus I\) covers every edge and has size at most
+   \(k\).
+
+The bounded reference card `M33_VC_TO_IS_MICRO_PROOF_CARD` exposes one path
+graph \(P_4\): for \(k=2\), `\{v1,v2\}` is a cover and its complement
+`\{v0,v3\}` is an independent set of threshold \(2\); for \(k=1\), the
+threshold is \(3\) and both membership claims are false. This fixed yes/no
+check makes the threshold and complement concrete; it does not prove the iff
+for all graph encodings, establish NP-completeness, or validate an arbitrary
+AI-generated reduction.
 
 ### A computability mapping reduction — halting becomes acceptance
 
@@ -1078,6 +1152,17 @@ M34 receives your **Limits Claim Packet**: formal definitions, an annotated
 reduction or counterexample, an encoding/cost-model boundary, and a practical
 interpretation limit. M34 must preserve the distinction between a bounded
 solver run and a theorem about a precisely encoded problem family.
+
+### Optional systems-evidence sequence — not a gate
+
+The authoring sequence `M32 → M33 → M34 → M35 → M36` also carries one optional,
+non-gating systems-evidence thread. If you already have an M32 execution and
+reproducibility receipt, keep it labelled as implementation context: M35 may
+attach it to a training-systems reproducibility card, and M36 may retain it in
+a theory-to-system reproducibility record. The M33 Limits Claim Packet does
+not require that receipt. It neither changes M33’s academic prerequisites nor
+unlocks, satisfies, or releases M35 or M36; each later module still needs its
+own prerequisite and learner-evidence decisions.
 
 ---
 

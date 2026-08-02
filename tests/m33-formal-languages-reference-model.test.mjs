@@ -9,8 +9,38 @@ import {
 import {
   M33_EVEN_ONES_DFA,
   M33_EVEN_ONES_TRACE_EXERCISES,
+  M33_VC_TO_IS_MICRO_PROOF_CARD,
   traceM33EvenOnesDfa,
 } from "../lib/m33-formal-languages-reference-model.js";
+
+function allSubsets(items) {
+  return items.reduce(
+    (subsets, item) => [...subsets, ...subsets.map((subset) => [...subset, item])],
+    [[]],
+  );
+}
+
+function isVertexCover(graph, chosenVertices) {
+  const chosen = new Set(chosenVertices);
+  return graph.edges.every(([left, right]) => chosen.has(left) || chosen.has(right));
+}
+
+function isIndependentSet(graph, chosenVertices) {
+  const chosen = new Set(chosenVertices);
+  return graph.edges.every(([left, right]) => !chosen.has(left) || !chosen.has(right));
+}
+
+function hasVertexCoverAtMost(graph, threshold) {
+  return allSubsets(graph.vertices).some(
+    (candidate) => candidate.length <= threshold && isVertexCover(graph, candidate),
+  );
+}
+
+function hasIndependentSetAtLeast(graph, threshold) {
+  return allSubsets(graph.vertices).some(
+    (candidate) => candidate.length >= threshold && isIndependentSet(graph, candidate),
+  );
+}
 
 test("the M33 bounded DFA fixture returns the independently worked parity traces", () => {
   assert.equal(M33_EVEN_ONES_DFA.id, "m33-s02-even-ones-dfa");
@@ -68,6 +98,83 @@ test("the M33 fixture exposes its finite exercise set and rejects claims outside
   assert.throws(() => traceM33EvenOnesDfa("0".repeat(33)), /at most 32 symbols/u);
 });
 
+test("the M33 VC-to-IS micro-proof card makes totality, both directions, and its finite boundary inspectable", () => {
+  assert.equal(M33_VC_TO_IS_MICRO_PROOF_CARD.id, "m33-s04-vc-to-is-micro-proof-card");
+  assert.equal(M33_VC_TO_IS_MICRO_PROOF_CARD.transformation.thresholdFormula, "t = |V| - k");
+  assert.match(M33_VC_TO_IS_MICRO_PROOF_CARD.inputConvention.validInput, /n#k#i,j;i,j/u);
+  assert.match(
+    M33_VC_TO_IS_MICRO_PROOF_CARD.inputConvention.malformedInput,
+    /fixed target no-instance/u,
+  );
+  assert.equal(
+    M33_VC_TO_IS_MICRO_PROOF_CARD.inputConvention.fixedTargetNoInstance.targetMembership,
+    false,
+  );
+  assert.equal(
+    M33_VC_TO_IS_MICRO_PROOF_CARD.inputConvention.fixedTargetNoInstance.serialized,
+    "2#2#0,1",
+  );
+  assert.equal(
+    M33_VC_TO_IS_MICRO_PROOF_CARD.inputConvention.fixedTargetNoInstance.targetThreshold,
+    2,
+  );
+  assert.match(M33_VC_TO_IS_MICRO_PROOF_CARD.transformation.forwardDirection, /V\\C/u);
+  assert.match(M33_VC_TO_IS_MICRO_PROOF_CARD.transformation.reverseDirection, /V\\I/u);
+  assert.match(M33_VC_TO_IS_MICRO_PROOF_CARD.transformation.totalityAndTime, /2#2#0,1/u);
+  assert.match(M33_VC_TO_IS_MICRO_PROOF_CARD.transformation.totalityAndTime, /polynomial/u);
+
+  assert.deepEqual(
+    M33_VC_TO_IS_MICRO_PROOF_CARD.handCheckedCases.map(
+      ({ sourceThreshold, targetThreshold, sourceMembership, targetMembership }) => ({
+        sourceThreshold,
+        targetThreshold,
+        sourceMembership,
+        targetMembership,
+      }),
+    ),
+    [
+      {
+        sourceThreshold: 2,
+        targetThreshold: 2,
+        sourceMembership: true,
+        targetMembership: true,
+      },
+      {
+        sourceThreshold: 1,
+        targetThreshold: 3,
+        sourceMembership: false,
+        targetMembership: false,
+      },
+    ],
+  );
+  assert.deepEqual(M33_VC_TO_IS_MICRO_PROOF_CARD.handCheckedCases[0].sourceWitness, [
+    "v1",
+    "v2",
+  ]);
+  assert.deepEqual(M33_VC_TO_IS_MICRO_PROOF_CARD.handCheckedCases[0].targetWitness, [
+    "v0",
+    "v3",
+  ]);
+  const { workedGraph, handCheckedCases } = M33_VC_TO_IS_MICRO_PROOF_CARD;
+  const [yesCase, noCase] = handCheckedCases;
+  assert.equal(isVertexCover(workedGraph, yesCase.sourceWitness), true);
+  assert.ok(yesCase.sourceWitness.length <= yesCase.sourceThreshold);
+  assert.equal(isIndependentSet(workedGraph, yesCase.targetWitness), true);
+  assert.ok(yesCase.targetWitness.length >= yesCase.targetThreshold);
+  assert.equal(hasVertexCoverAtMost(workedGraph, noCase.sourceThreshold), false);
+  assert.equal(hasIndependentSetAtLeast(workedGraph, noCase.targetThreshold), false);
+  const fixedTarget = M33_VC_TO_IS_MICRO_PROOF_CARD.inputConvention.fixedTargetNoInstance;
+  assert.equal(
+    hasIndependentSetAtLeast(fixedTarget.graph, fixedTarget.targetThreshold),
+    false,
+  );
+  assert.match(
+    M33_VC_TO_IS_MICRO_PROOF_CARD.finiteCheckBoundary,
+    /does not prove the iff for all graph encodings/u,
+  );
+  assert.match(M33_VC_TO_IS_MICRO_PROOF_CARD.truthBoundary, /not a parser, solver, or proof checker/u);
+});
+
 test("the M33 workbook makes the bounded trace a prediction-before-inspection exercise", async () => {
   const workbook = await readFile(
     "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
@@ -123,6 +230,22 @@ test("the M33 workbook connects construction, machine memory, encodings, and pro
   assert.match(workbook, /Return a minimum cover/u);
   assert.match(workbook, /verifier checks a supplied candidate/u);
   assert.match(workbook, /does not decide whether some candidate exists/u);
+});
+
+test("the M33 workbook makes the CFG/PDA bridge, full VC-to-IS proof card, and optional systems handoff explicit", async () => {
+  const workbook = await readFile(
+    "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /G=\(V,\\Sigma,R,S\)/u);
+  assert.match(workbook, /### PDA configuration trace — make the stack state explicit/u);
+  assert.match(workbook, /\(q_\{\\mathrm\{scan\}\},u,\\gamma\)/u);
+  assert.match(workbook, /### VC ↔ IS micro-proof card — make every reduction obligation visible/u);
+  assert.match(workbook, /malformed string.*fixed target no-instance/isu);
+  assert.match(workbook, /fixed yes\/no\s+check.*does not prove the iff\s+for all graph encodings/isu);
+  assert.match(workbook, /M32 → M33 → M34 → M35 → M36/u);
+  assert.match(workbook, /optional,\s+non-gating/u);
 });
 
 test("the M33 workbook exposes claim routes and labels interface-dependent sketches", async () => {

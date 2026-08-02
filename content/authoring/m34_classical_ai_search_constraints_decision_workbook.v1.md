@@ -63,7 +63,7 @@ table represents affected people, or that a result is authorized to act.
 
 ### Claim/source labels
 
-Compact labels such as `M34-C01 -> S34-01, S34-04–S34-05` point to the
+Compact labels such as `M34-C01 -> S34-01, S34-04–S34-05, S34-18` point to the
 relevant claim and original/official reading route in the [M34 primary-source
 research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md).
 They are navigation aids, not borrowed proof text, a contract-bound source map,
@@ -115,7 +115,7 @@ begin by importing a solver library.
 **What information must be in a state for an algorithm to make a valid next
 move in the model?**
 
-**Claim/source trace:** `M34-C01 -> S34-01, S34-04–S34-05` — the state,
+**Claim/source trace:** `M34-C01 -> S34-01, S34-04–S34-05, S34-18` — the state,
 actions, costs, observations, and planning representation need declared
 omissions before an algorithmic claim can be read.
 
@@ -156,6 +156,40 @@ node. The useful state does not prove the model is complete; it exposes the
 variables it has chosen to retain.
 
 </details>
+
+### World, observation, and belief are different objects
+
+The phrase “the light says the rack is occupied” hides three different
+objects. A **world state** records what is true in the declared model, such as
+`key-at-rack`. An **observation** records what the agent receives, such as
+`key-rack-light=lit`. A **belief state** would summarize uncertainty over
+possible world states after a declared prior and observation-update rule.
+Do not silently replace any one with another.
+
+Inspect `m34ObservationBoundaryCard()`. Its two synthetic worlds have the
+same `lit` observation, but `take-key` is legal in only one. Predict whether
+the light alone can be used as the `take-key` precondition.
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+**Reveal:** no. The observation is compatible with both a present key and an
+absent key. A fully observable model must retain `key-at-rack`; a partially
+observable model must also declare how observations update belief and when
+feedback arrives. This card supplies neither a probability model nor an
+update rule.
+
+</details>
+
+### Logic / representation boundary — one countermodel, not a logic unit
+
+The same card evaluates the one propositional claim
+`light-lit -> key-at-rack` in its two declared worlds. The
+`key-absent-light-lit` world is a countermodel: its light is lit while the key
+is absent, so the implication is false. This is a compact finite
+model-checking boundary for inspecting a representation claim. It is not a
+resolution procedure, a first-order logic survey, a general model checker, or
+evidence that a real sensor is reliable.
 
 ### Code-reading and debugging task
 
@@ -207,7 +241,7 @@ turns raw observations into features or states.
 
 **What does a frontier policy optimize, and under what assumptions?**
 
-**Claim/source trace:** `M34-C02–M34-C03 -> S34-01–S34-02` — frontier and
+**Claim/source trace:** `M34-C02–M34-C03 -> S34-01–S34-02, S34-18` — frontier and
 heuristic guarantees depend on named cost, duplicate, termination, and A*
 variant conditions.
 
@@ -256,8 +290,16 @@ not restore the theorem.
 
 ### Heuristics: definition before reputation
 
-Let \(h^*(n)\) be the least remaining cost to a goal in the named model. A
-heuristic is admissible when
+Let \(h^*(n)\) be the least remaining cost to a goal in the named model. For
+this course's conventional nonnegative-cost setting, record the full audit
+
+\[
+0\le h(n)\le h^*(n).
+\]
+
+The upper inequality is admissibility; the lower inequality is a declared
+convention here, not a substitute for specifying the cost domain. A heuristic
+is admissible when
 
 \[
 h(n)\le h^*(n)
@@ -379,6 +421,20 @@ duplicate/reopen rule; no label or one successful run substitutes for them.
 
 </details>
 
+### A-star guarantee regime audit
+
+Use this as a theorem-condition checklist, not a slogan or a substitute for a
+proof of a particular implementation.
+
+| Declared variant | Conditions that must stay visible | What this table does not establish |
+| --- | --- | --- |
+| tree search without global closed-state pruning | nonnegative edge costs; \(0\le h\le h^*\); declared frontier/goal-removal rule; a finite or otherwise stated termination regime | that a graph-search implementation inherits the same result |
+| graph search with best-\(g\) replacement and reopening | the tree-search conditions plus a lower-\(g\) path can replace/reopen an earlier state; stale higher-\(g\) entries are handled deliberately | that an arbitrary “reopen” implementation is correct or efficient |
+| graph search that never reopens a closed state | the named duplicate/goal-test rules plus \(h(g)=0\), consistency, and the declared nonnegative-cost model | that admissibility alone protects a no-reopen implementation |
+
+The fixed counterexample above belongs in the third row: it changes the
+closed-state policy, so an admissibility label alone cannot carry the theorem.
+
 ### Output: Search-Strategy Evidence Table
 
 Compare BFS, UCS, and a named A-star variant:
@@ -412,7 +468,7 @@ it does not traverse a learner-supplied graph or implement general A-star.
 
 **Which candidates are actually feasible, and which values are only bounds?**
 
-**Claim/source trace:** `M34-C04, M34-C06 -> S34-03, S34-06–S34-07` — local
+**Claim/source trace:** `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-18` — local
 propagation, solver status, and a relaxation bound do not by themselves prove
 feasibility in the original model.
 
@@ -452,6 +508,21 @@ arc consistency.
 This turns “propagation” into a reviewable sequence: state, branch, queue
 policy, domain change, and backtrack condition. It does not build or claim a
 general CSP solver.
+
+### Fixed AC-3 queue/requeue trace
+
+Inspect `m34Ac3RequeueCard()` before treating “propagation” as a black box.
+For \(A,B\in\{1,2\}\), \(C\in\{2\}\), and constraints \(A<B\), \(B<C\),
+start with queue `B->C`:
+
+| Queue step | Domain change | Why the next arc is queued |
+| --- | --- | --- |
+| process `B->C` | remove \(B=2\): it has no larger support in \(C=\{2\}\) | because \(B\)'s domain changed, re-enqueue `A->B` |
+| process `A->B` | remove \(A=1,2\): neither is below the only remaining \(B=1\) | \(A\)'s domain is empty, so this branch is inconsistent and must backtrack |
+
+The direction matters: when \(B\) changes, re-enqueue predecessors whose
+support depended on \(B\), not an arbitrary nearby arc. This fixed trace is
+not a general AC-3 implementation or a global-satisfiability proof.
 
 ### Prediction before reveal — propagation and branching trace
 
@@ -739,7 +810,7 @@ the claim that a learned model captures the actual decision problem.
 **How can a likely state lead to a different action than a utility-aware
 choice?**
 
-**Claim/source trace:** `M34-C08–M34-C09 -> S34-08, S34-11–S34-13` —
+**Claim/source trace:** `M34-C08–M34-C09 -> S34-08, S34-11–S34-13, S34-18` —
 expected-utility and MDP structures are conditional models; neither turns a
 numerical result into authority to act.
 
@@ -863,6 +934,14 @@ The two-stage backup is
 \[
 Q_0(s_0,\text{inspect})=-0.5+0.5(3)+0.5(1)=1.5.
 \]
+
+This particular terminal policy assumes that, after `inspect`, the
+observation becomes `clear` or `blocked` before the terminal action. If that
+successor state remained hidden, “dispatch in clear and wait in blocked” would
+not be an available state-contingent policy without a belief-state model and a
+different backup. Inspect the `observationModel` on
+`m34TwoStageMdpBackupCard()`; it makes this assumption visible instead of
+smuggling it in through the table.
 
 Compare a terminal `safe` action with value `1.2`. Under this exact
 finite-horizon, undiscounted objective, the initial policy chooses `inspect`, then chooses `dispatch` in
@@ -1148,7 +1227,7 @@ model-construction routes were rechecked on **2026-08-02**.
 
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
-| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) with its [informed-search route](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html) and [MDP route](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | Sessions 1–5: state-space reasoning, the exact distinction between admissibility/consistency in graph search, constraints, planning, and sequential decision scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
+| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) with its [informed-search route](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP-filtering route](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), and [MDP route](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | Sessions 1–5: state/observation boundaries, the exact distinction between admissibility/consistency in graph search, propagation/requeue direction, planning, and sequential-decision scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
 | [MIT 6.034 Artificial Intelligence](https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/) | Sessions 1–5: knowledge/problem solving, search, and AI representations as a connected conceptual route. | MIT OCW assets have their own notices; link-only/original Atlas explanations and diagrams. |
 | [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
 | [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |
@@ -1165,12 +1244,12 @@ evidence.
 
 | Session | Claim/source route | Learner reading route |
 | --- | --- | --- |
-| M34-S01 | `M34-C01 -> S34-01, S34-04–S34-05` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129) |
-| M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02, S34-14` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136); [S34-14 — MIT 6.034 planning/search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf) |
-| M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/); [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html) |
+| M34-S01 | `M34-C01 -> S34-01, S34-04–S34-05, S34-18` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-18 — Berkeley CS188](https://inst.eecs.berkeley.edu/~cs188/textbook/) |
+| M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02, S34-14, S34-18` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136); [S34-14 — MIT 6.034 planning/search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf); [S34-18 — Berkeley informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html) |
+| M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15, S34-18` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/); [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html); [S34-18 — Berkeley CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html) |
 | M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10, S34-16` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9); [S34-16 — MIT 6.825 planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) |
-| M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13, S34-17` | [S34-08 — von Neumann and Morgenstern](https://assets.press.princeton.edu/about_pup/PUP100/book/2cNeumann.pdf); [S34-11 — NIST AI RMF](https://doi.org/10.6028/NIST.AI.100-1); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html) |
-| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-17` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
+| M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13, S34-17, S34-18` | [S34-08 — von Neumann and Morgenstern](https://assets.press.princeton.edu/about_pup/PUP100/book/2cNeumann.pdf); [S34-11 — NIST AI RMF](https://doi.org/10.6028/NIST.AI.100-1); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html); [S34-18 — Berkeley MDP](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) |
+| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-18` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
 
 For the fuller claim-linked original/official source ledger and reuse cautions,
 use the instructor-facing [M34 primary-source research
