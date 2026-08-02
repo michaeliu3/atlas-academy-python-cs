@@ -51,9 +51,10 @@ rote typing or exam drill.
 
 ## 60-day Atlas Core: intended route and release status
 
-The adjustable Atlas Core targets 20–25 focused hours a week over 60 calendar
-days. It is a rigorous connected first pass, not a claim of instant durable
-mastery. The checked-in [canonical v2 course graph](content/course/course-graph.v2.json)
+The 60-day Atlas Core is a **full-time intensive**: it targets **35–45 focused
+hours a week** over 60 calendar days. A 20–25-hour week belongs on the 90-day
+route instead. It is a rigorous connected first pass, not a claim of instant
+durable mastery. The checked-in [canonical v2 course graph](content/course/course-graph.v2.json)
 is authoritative for route order, academic prerequisites, reader access, route
 availability, contract state, release state, and generated projections.
 

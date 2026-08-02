@@ -93,20 +93,22 @@ route, and does not advance the learner into M32–M36, M25, or M26.
 The graph supplies reference-reading minutes, not a verified end-to-end time
 study for every legacy workbook. The 28 currently open legacy workbooks contain
 about **27 hours of reference reading** before tracing, derivation,
-counterexamples, diagnostics, oral defenses, and project evidence. Treat the
-following bands as planning hypotheses, then recalibrate after the first
-seven days.
+counterexamples, diagnostics, oral defenses, and project evidence. The
+[gateway evidence-hours roll-up](research/gateway-evidence-hours-rollup-2026-08-02.md)
+shows why a 20–25-hour week cannot honestly hold the six-session M1–M5/M27
+gateway inside Days 2–9. Treat the following bands as planning hypotheses, then
+recalibrate after the first seven days.
 
 | Calendar | Focused time | Approximate calendar capacity | Best use | Select it when |
 | --- | --- | --- | --- | --- |
-| **60-day accelerated first pass** | 20–25 hours/week | 171–214 hours | A tightly scoped minimum-evidence pass through available material, with short artifacts and protected buffers. | You can reliably protect 3.5–4.5 focused hours on five or six days each week and your first-week evidence averages at most about 5.5 hours per module. |
-| **90-day sustainable route** | 13–17 hours/week | 167–219 hours | The recommended default: the same connected open-material path with more time for retrieval, project revision, and repair. | You have other obligations, need mathematical rebuilding, or expect to revisit hard models more than once. |
-| **180-day durable route** | 7–10 hours/week | 180–257 hours | Deliberate study, spaced recall, larger dossiers, and specialization exploration. | You want retention and architecture judgment to matter more than speed, or the first-week measurement exceeds the 90-day budget. |
+| **60-day intensive core** | 35–45 hours/week | 300–386 hours | A full-time, minimum-evidence pass through the connected route, with short artifacts and protected buffers. | You can reliably protect roughly 5–6.5 focused hours most days, complete rather than compress gateway sessions, and preserve prediction, transfer, and oral reflection. |
+| **90-day sustainable route** | 20–25 hours/week | 257–321 hours | The recommended default: the same connected open-material path with more time for retrieval, project revision, and repair. | You have other obligations, need mathematical rebuilding, or can protect five focused half-days rather than a full-time intensive. |
+| **180-day durable route** | 10–15 hours/week | 257–386 hours | Deliberate study, spaced recall, larger dossiers, and specialization exploration. | You want retention and architecture judgment to matter more than speed, or the 90-day route would require omitting a proof, trace, or repair. |
 
 The total-hour ranges overlap on purpose. The longer calendars buy spacing,
 recovery, and better evidence—not a smaller version of the course. The
-**90-day route is the sensible default** until actual study data says the
-60-day pace is sustainable.
+**90-day route is the sensible default** unless the 60-day full-time commitment
+is genuinely available.
 
 ### Seven-day calibration rule
 
@@ -118,10 +120,11 @@ For the diagnostic, M1, and the first prerequisite repair, record only:
 - the next retrieval date.
 
 At day 7, choose the shortest route for which you have not had to omit a
-proof/trace, prediction, transfer task, or oral reflection. If the average
-minimum-evidence module exceeds roughly 5.5 hours, move from 60 to 90 days.
-If it exceeds roughly 7 hours or recovery is repeatedly needed, move to 180
-days. This is a change of calendar, not a failure.
+proof/trace, prediction, transfer task, or oral reflection. Keep the 60-day
+route only when the observed M1 gateway work fits the full-time 35–45-hour
+band without compression. Choose 90 days when 20–25 hours/week is realistic,
+or 180 days when 10–15 hours/week and durable retrieval are the better fit.
+This is a change of calendar, not a failure.
 
 ## Start with the diagnostic, but do not overread it
 
@@ -155,20 +158,20 @@ the result to Notion.
 
 ## Portal/open-material 60/90/180-day routes
 
-### 60 days — accelerated open-material first pass
+### 60 days — full-time intensive open-material first pass
 
 This is the fastest honest **portal/open-material** version of the course. It
-can cover reader-visible material only as a **minimum-evidence first pass**;
-it cannot turn M31–M36 into completed work or turn M25/M26 previews into a
-capstone. If you are using the designated chats for the full private course,
-follow the [private guided learning route](PRIVATE_GUIDED_LEARNING_ROUTE.md)
-instead; that still does not unlock portal modules or create review/release
-credit.
+requires the 35–45-hour full-time band above and can cover reader-visible
+material only as a **minimum-evidence first pass**; it cannot turn M31–M36 into
+completed work or turn M25/M26 previews into a capstone. If you are using the
+designated chats for the full private course, follow the
+[private guided learning route](PRIVATE_GUIDED_LEARNING_ROUTE.md) instead; that
+still does not unlock portal modules or create review/release credit.
 
 | Calendar window | Connected focus | Access-aware decision |
 | --- | --- | --- |
 | Day 1 | Module 0 diagnostic, pace selection, learning-record setup | Route repair signals to their exact open-material sections. |
-| Days 2–9 | M1–M5, then M27 | Build execution, recursion, abstraction, proof, and cost before choosing structures. |
+| Days 2–9 | M1–M5, then M27 | Complete the six-session gateway rather than skimming it: build execution, recursion, abstraction, proof, and cost before choosing structures. The roll-up makes this a full-time intensive window. |
 | Days 10–17 | M6–M11 | Connect representation and local invariants to algorithmic strategy. |
 | Days 18–25 | M12–M16 | Make contracts, tests, delivery, persistence, and transactions preserve meaning over time. |
 | Days 26–34 | M17, M28–M30 | Connect execution to linear structure, continuous change, uncertainty, and evidence. M31 remains a visible authoring/access stop. |

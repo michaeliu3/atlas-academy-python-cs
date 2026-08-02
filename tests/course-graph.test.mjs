@@ -13,6 +13,7 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
   const byNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
 
   assert.equal(graph.schemaVersion, 2);
+  assert.equal(graph.course.focusedHoursPerWeek, "35–45");
   assert.equal(graph.modules.length, 36);
   assert.deepEqual(graph.sequence, [
     1, 2, 3, 4, 5, 27, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,

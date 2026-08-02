@@ -558,6 +558,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   const html = await response.text();
   const readable = html.replaceAll("<!-- -->", "");
   assert.match(readable, /60 days\./);
+  assert.match(readable, /full-time 35–45 focused-hours-per-week intensive/u);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
   assert.match(readable, /28 \/ 2 \/ 6/);
   assert.match(readable, /open \/ preview \/ authoring/i);

@@ -88,9 +88,11 @@ export default function AtlasCoreRoutePage() {
           </h1>
           <p>
             This is an accelerated first pass through Python, mathematical
-            reasoning, systems, AI, and machine learning. It is not a promise
-            that 60 calendar days create permanent mastery. It is a way to make
-            every later claim rest on the models it needs.
+            reasoning, systems, AI, and machine learning. It is credible only
+            as a full-time 35–45 focused-hours-per-week intensive; choose the
+            90- or 180-day route at a lower weekly capacity. It is not a
+            promise that 60 calendar days create permanent mastery. It is a way
+            to make every later claim rest on the models it needs.
           </p>
           <dl className={styles.measures} aria-label="Atlas Core route scale">
             <div>
