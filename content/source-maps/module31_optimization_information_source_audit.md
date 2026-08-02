@@ -1,6 +1,7 @@
 # Module 31 — Optimization & Information — Source Audit
 
-**Research timestamp:** 2026-07-30  
+**Research timestamp:** baseline 2026-07-30; focused calibration follow-up
+2026-08-02  
 **Scope:** unconstrained and constrained optimization, convexity, convergence
 conditions, Lagrangians/duality/KKT, stochastic and nonconvex boundaries,
 entropy/KL/information measures, variational objectives, and the planned M31
@@ -75,10 +76,11 @@ being silently assumed.
 
 ## Recommended source set
 
-All URLs below were checked on 2026-07-30. **Link-only** means Atlas may cite
-and direct learners to the source but must not import its prose, figures,
-exercise/problem wording, solutions, videos, code, or datasets into the
-deployable product. A freely readable source is not blanket reuse permission.
+S01–S10 below were checked on 2026-07-30; S11 was checked in the focused
+2026-08-02 calibration follow-up. **Link-only** means Atlas may cite and direct
+learners to the source but must not import its prose, figures, exercise/problem
+wording, solutions, videos, code, or datasets into the deployable product. A
+freely readable source is not blanket reuse permission.
 
 | ID | Owner/source and stable URL | Claim linkage and rationale | Access date / license and reuse decision |
 | --- | --- | --- | --- |
@@ -92,6 +94,7 @@ deployable product. A freely readable source is not blanket reuse permission.
 | **S08** | Saeed Ghadimi and Guanghui Lan, [*Stochastic First- and Zeroth-order Methods for Nonconvex Stochastic Programming*](https://doi.org/10.1137/120880811) and [author preprint record](https://arxiv.org/abs/1309.5549). | Primary nonconvex/stochastic boundary: under stated smoothness/noise/oracle conditions, an algorithm can target an approximate stationary point; that is weaker than a global-optimum result. It supplies a precise antidote to loss-curve overclaims. | Accessed 2026-07-30. SIAM publication rights / arXiv distribution do not authorize wholesale reuse. **Link-only.** Do not copy equations, proofs, figures, or experimental setups; Atlas examples must be independently authored. |
 | **S09** | SciPy Developers, [`scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html), [`trust-constr`](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-trustconstr.html), and [licensing guidance](https://docs.scipy.org/doc/scipy/dev/core-dev/index.html#licensing). | Versioned Python API contracts for scalar objectives, initial points, derivatives, bounds/constraints, methods, and documented stopping/tolerance fields. `trust-constr` exposes a Lagrangian-gradient and constraint-violation termination rule; that is implementation evidence, not a universal KKT certificate. | Accessed 2026-07-30. SciPy is modified **BSD 3-clause** unless a source file says otherwise. Direct code reuse requires required notices; Atlas defaults to original short examples and pins package/version. A returned status never validates the objective/model/constraints. |
 | **S10** | CVXPY authors, [Disciplined Convex Programming tutorial](https://www.cvxpy.org/tutorial/dcp/) and [Apache-2.0 project license](https://www.cvxpy.org/version/1.2/license/index.html). | Official implementation source for DCP expression/shape/curvature checking and a useful code-reading contrast: a grammar may conservatively reject a mathematically convex expression, and its acceptance is not a real-world model validation. | Accessed 2026-07-30. CVXPY publishes an **Apache-2.0** project license; verify current/third-party notices before reusing a specific asset. Atlas examples remain original. DCP acceptance is an implementation-level structural result, not proof of data, units, constraints, solver result, or deployment safety. |
+| **S11** | CMU, [10-725 Convex Optimization](https://stat.cmu.edu/~siva/teaching/725/). | Focused course-sequence calibration for M31 Session 2’s least-squares/conditioning card and Session 4’s exact-gradient versus projected/stochastic theorem boundary; it also cross-checks the KKT/duality and nonconvex progression. It does not source a theorem proof or authorize reused course assets. | Accessed 2026-08-02. The course page provides no blanket asset license. **Link-only**; keep all Atlas fixtures, derivations, prose, diagrams, questions, and code original. Do not copy notes, assignments, figures, solutions, or code. |
 
 ### Source selection boundary
 

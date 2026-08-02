@@ -267,6 +267,47 @@ second derivative `12t^2` vanishes at zero, so no positive global strong-
 convexity constant follows from this example. Its zero gradient at `t=0` is a
 minimum, yet a rate theorem that assumes strong convexity is still unavailable.
 
+### Ridge and conditioning card — regularization has units
+
+Keep the matrix and its coordinates visible. Let
+
+\[
+A=\begin{bmatrix}1&0\\0&0.01\end{bmatrix},\qquad
+y=\begin{bmatrix}1\\0.01\end{bmatrix},\qquad
+\ell_\lambda(\theta)=\frac12\lVert A\theta-y\rVert^2+
+\frac{\lambda}{2}\lVert\theta\rVert^2,
+\]
+
+with `lambda = 0.01`. The unregularized normal matrix has diagonal
+`(1, 0.0001)`, hence condition number `10,000` in these declared coordinates.
+The ridge normal matrix has diagonal `(1.01, 0.0101)`, hence condition number
+`100`. Its exact solution is approximately `(0.990099, 0.009901)`. The point
+is not that `0.01` is a good universal choice: it makes the weak second
+direction visibly sensitive to the penalty and to units.
+
+Before looking at a calculation, predict what happens if the same prediction
+model is reparameterized by `theta = diag(1, 100) beta`, so that
+`A diag(1, 100) = I`, and the *same numeric* `lambda = 0.01` is applied to
+`beta`. The data-fit coordinates are equivalent, but the ridge penalty is not:
+the mapped-back second coordinate becomes about `0.990099`, not `0.009901`.
+A numeric regularization weight has a scale and a unit story.
+
+Use the fixed, local `m31RidgeConditioningCard()` before trusting this card.
+It exposes the normal-equation diagonal, analytic and central-difference
+gradients at the stated solution, and the rescaling counterexample. It is not
+a solver, a tuning recipe, or evidence about a real data set.
+
+```text
+normal_matrix = transpose(A) @ A + lambda * identity
+right_hand_side = transpose(A) @ y
+theta = solve(normal_matrix, right_hand_side)
+```
+
+This is language-neutral pseudocode, not a library call. Diagnose the claim,
+not merely the line: a review must state the units/scaling of each coordinate,
+the condition estimate's norm/definition, the actual `lambda`, the numerical
+method, and an independent residual or finite-difference check.
+
 <details>
 <summary>Predict before revealing the repair.</summary>
 
@@ -528,6 +569,34 @@ That is a stated theorem regime: it explains why one exact *unconstrained*
 step decreases this particular objective unless its ordinary gradient is zero.
 It does not establish a global optimum, survive loss of smoothness or an
 inexact gradient unchanged, or automatically cover the projected update above.
+
+### Rate versus trace — make the hypothesis set visible
+
+For the separate unconstrained quadratic
+
+\[
+r(u,v)=\frac12(u^2+100v^2),
+\]
+
+the declared Euclidean constants are `mu = 1` and `L = 100`. With exact
+gradient descent and `eta = 1/L = 0.01`, the stated function-gap bound is
+
+\[
+r(x_k)-r^\star\leq(1-\mu/L)^k\bigl(r(x_0)-r^\star\bigr)=0.99^k\bigl(r(x_0)-r^\star\bigr).
+\]
+
+Start at `(1, 1)`: the initial gap is `50.5`; after ten steps the **bound** is
+about `45.67`. The actual trace can be much lower because the high-curvature
+coordinate is eliminated by this particular step size. A bound need not be
+tight to be useful; it makes the condition number and the theorem scope
+visible. Inspect `m31GradientDescentRateCard(10)` and compare every actual
+row with its stated upper bound before quoting either number.
+
+Now change one premise. Project the step onto a hard set, use a stale/noisy
+gradient, change the dtype, or lose the `L`-smooth condition. Which line of
+the displayed theorem no longer follows? Do **not** carry this rate into the
+projected finite trace below without a theorem whose own projection, domain,
+and error assumptions are written down.
 
 For the declared closed, convex feasible set \(K\), use the different
 first-order residual
@@ -841,6 +910,18 @@ one run into a generalization conclusion.
 log units govern information quantities, while the variational family governs
 the ELBO approximation claim.
 
+### A short route through this dense session
+
+1. First distinguish entropy, cross-entropy, and KL for declared finite
+   support.
+2. Then keep the channel and rate-distortion questions separate even when a
+   binary formula has the same numerical shape.
+3. Finally read the ELBO as a model-and-family identity whose finite gap has
+   support and approximation conditions.
+
+Each step changes the question. None converts an information number into a
+utility, safety, or authority decision.
+
 For finite categorical distributions `p` and `q`, in natural-log units,
 
 \[
@@ -954,6 +1035,26 @@ Therefore
 =\operatorname{ELBO}(q_\phi)
 +D_{KL}\!\left(q_\phi(z\mid x)\,\middle\Vert\,p_\theta(z\mid x)\right).
 \]
+
+### Two-state ELBO equality table — inspect the identity before optimizing
+
+For one fixed observation, take the original finite joint values
+`p(x,z_1)=0.18`, `p(x,z_2)=0.12`, hence `p(x)=0.30` and posterior
+`p(z|x)=(0.6,0.4)`. Choose `q(z|x)=(0.75,0.25)`.
+
+| Quantity (natural-log units) | Declared finite value | What it does **not** establish |
+| --- | ---: | --- |
+| `log p(x)` | about `-1.204` | a correct likelihood for real data |
+| `ELBO(q)` | about `-1.254` | a learned posterior or calibrated uncertainty |
+| `KL(q || p(z|x))` | about `0.050` | an acceptable approximation for a decision |
+| `ELBO + KL` | about `-1.204` | a framework, optimizer, or generalization result |
+
+Before reveal, change the joint to `(0.30, 0)` while `q=(0.5,0.5)`. Which
+support condition fails? The answer is not a small numeric warning: `q` puts
+positive mass where the joint is zero, so the finite log-ratio form is not
+available. Inspect `m31TwoStateElboCard()` for both the equality residual and
+that support-mismatch control. It is a two-state algebra card, not a VAE,
+training run, or model-selection method.
 
 ### Prediction before reveal
 
@@ -1263,7 +1364,7 @@ Core-credit-gated until their own contract and release evidence are complete.
 This workbook’s explanations, examples, diagrams, tables, and code are
 original Atlas material. It links to sources for study and provenance; it does
 not reproduce their slides, textbook prose, assignments, figures, or
-solutions. The reading routes below were checked on **2026-08-01**.
+solutions. The reading routes below were checked on **2026-08-02**.
 
 ### Learner-facing source links
 
@@ -1271,6 +1372,7 @@ solutions. The reading routes below were checked on **2026-08-01**.
 | --- | --- | --- |
 | [Stanford EE364a Convex Optimization I](https://web.stanford.edu/class/ee364a/) and its [lecture route](https://web.stanford.edu/class/ee364a/lectures.html) | `C01–C05`, Sessions 1–4: formulation, convexity, optimality conditions, duality, and algorithm scope. | Link-only and original Atlas paraphrase/examples; course assets and linked texts have their own terms. |
 | [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | `C01`, `C04–C05`, Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
+| [CMU 10-725 Convex Optimization](https://stat.cmu.edu/~siva/teaching/725/) | `C02–C06`, Sessions 2–5: connect gradient, projected/stochastic methods, duality/KKT, and nonconvex boundaries without copying its course sequence or assessments. | Link-only/original Atlas cards. This is a calibration route, not a promise of CMU-equivalent coverage, labs, or grading. |
 | [Robbins and Monro, *A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586) and [Ghadimi and Lan, *Stochastic First- and Zeroth-Order Methods*](https://doi.org/10.1137/120880811) | `C06`, Session 5: stated stochastic-estimator and approximate-stationarity boundaries. | Link-only/original Atlas examples; do not copy proofs, figures, experimental setups, or publisher text. |
 | [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | `C07`, Session 6: entropy, cross-entropy, KL direction, support, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
 | [Blei, Kucukelbir, and McAuliffe, *Variational Inference*](https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf) | `C08`, Session 6: ELBO/KL direction, variational-family assumptions, and approximation limits. | Link-only/original Atlas derivation and example; do not copy paper text, figures, tables, or proofs. |

@@ -123,4 +123,11 @@ test("the M32 workbook turns each bounded card into a prediction-before-inspecti
     /format, item size, rank, shape, strides, contiguity, readonly\/writable state,\s+and paired release/u,
   );
   assert.match(workbook, /not an actual array-library, buffer-protocol, or GPU trace/u);
+  assert.match(workbook, /Cost prediction card/u);
+  assert.match(workbook, /Named execution contrast/u);
+  assert.match(workbook, /SciPy \/ Array-API capability boundary/u);
+  assert.match(workbook, /M31 Artifact Bridge/u);
+  assert.match(workbook, /Objective\/Constraint\/Convergence Claim Sheet/u);
+  assert.match(workbook, /Reproduction capsule/u);
+  assert.match(workbook, /CMU 15-418\/618/u);
 });

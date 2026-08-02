@@ -44,3 +44,32 @@ This is an **authoring review only**. It does not alter the graph, portal,
 manifest, routing, contract/release status, or M25/M26 gating; it is not human
 review, accessibility validation, live-chat delivery evidence, CI/deployment
 evidence, or proof that either candidate is ready to publish.
+
+## 2026-08-02 calibration follow-up — applied authoring improvements
+
+This follow-up rechecked a small official corpus before the next M31–M32
+revision batch. Sources calibrate intellectual scope and sequence only; Atlas
+links and paraphrases rather than copying lectures, slides, assignments,
+figures, code, or solutions.
+
+| Source accessed 2026-08-02 | Narrow use in this revision |
+| --- | --- |
+| [Stanford EE364a](https://web.stanford.edu/class/ee364a/) and [CMU 10-725](https://stat.cmu.edu/~siva/teaching/725/) | M31: least-squares/conditioning, exact-gradient versus projected/stochastic theorem scopes, and the relation among gradient, KKT, and nonconvex reasoning. |
+| MIT OCW [6.253 Convex Analysis and Optimization](https://ocw.mit.edu/courses/6-253-convex-analysis-and-optimization-spring-2012/) and MIT OCW [6.441 Information Theory](https://www.ocw.mit.edu/courses/6-441-information-theory-spring-2016/resources/lecture-notes/) | M31: retain a bounded proof/information bridge rather than expand into a graduate sequence; support and variational-family conditions remain visible. |
+| [Stanford CS149, Fall 2025](https://gfxcourses.stanford.edu/cs149/fall25), [CMU 15-418/618 schedule](https://www.cs.cmu.edu/~418/schedule.html), and MIT OCW [12.010](https://ocw.mit.edu/courses/12-010-computational-methods-of-scientific-programming-fall-2024/) | M32: locality, work distribution, synchronization, completed-work measurement, scientific-program verification, and reproducibility boundaries. |
+| [SciPy Array API capability caveats](https://docs.scipy.org/doc/scipy/dev/api-dev/array_api.html), [JAX asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html), and [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html) | M32: frame backend/function/device capability and readiness/precision semantics as named documentation questions, not universal GPU claims. |
+
+| Revision | Why it closes a real learning gap |
+| --- | --- |
+| M31 Session 2 now has a fixed `2x2` ridge-conditioning card with units/scaling, a finite-difference check, and a feature-rescaling counterexample. | The Scope Matrix calls conditioning and numerical stability core; the existing draft mentioned them but did not make the ridge trade-off inspectable. |
+| M31 Session 4 now pairs the descent statement with a fixed quantitative exact-gradient rate card and a changed-premise withdrawal. | Learners can now distinguish an actual theorem hypothesis set and bound from a finite projected/stochastic trace. |
+| M31 Session 6 now uses a two-state ELBO equality/support-mismatch card and a three-step disclosure map. | The symbolic identity becomes inspectable without introducing a framework/VAE lab or diluting its support/approximation boundary. |
+| M32 Session 2 now requires a cost decomposition/prediction and contrasts JAX staged readiness with PyTorch CUDA stream vocabulary. | It makes workload, locality, transfer, launch, and readiness reasoning explicit without assuming hardware or API equivalence. |
+| M32 Session 3 now includes a SciPy/Array-API capability question; Sessions 5–6 now require the M31 objective/constraint/convergence artifact and a redacted reproduction capsule. | “Scientific Python” and optimization-to-systems transfer are now visible, while backend availability, reproducibility, and privacy remain scoped. |
+| The Scope Matrix now names distributed data parallelism as an M35-led boundary instead of implying replica/collective mastery from M32's single-buffer/stream work. | This corrects an overclaim without adding a premature distributed-training lab. |
+
+The follow-up remains **authoring-only**. It grants no reader route, hidden
+review-ready status, source-map selection, studio, deployment, publication,
+learner evidence, or university-equivalence claim. The next legitimate stage
+is independent source/pedagogical/accessibility review and a bounded,
+learner-approved pilot—not a release by documentation alone.

@@ -346,12 +346,12 @@
       {
         "id": "l2.programming-lower-level-ml-runtime",
         "level": 2,
-        "label": "At least one lower-level language; NumPy layout/broadcasting; PyTorch or JAX reasoning; automatic differentiation; GPU execution; mixed precision; profilers; and distributed data parallelism.",
+        "label": "Scoped lower-level-language reading; NumPy layout/broadcasting; JAX/PyTorch execution reasoning; automatic differentiation; GPU/precision/profiler evidence; and an explicit M35-led boundary for distributed data parallelism rather than replica/collective mastery.",
         "scope": "scoped-exposure",
         "targetCapabilities": ["recognize", "read", "debug", "design"],
         "anchors": [{ "moduleId": "m32", "sessions": [1, 6] }, { "moduleId": "m35", "sessions": [4, 5] }],
         "sourceModuleIds": ["m32", "m35"],
-        "evidenceArtifact": "Scientific Python & Accelerators Dossier; no claimed C/C++/Rust, CUDA, or framework mastery.",
+        "evidenceArtifact": "Scientific Python & Accelerators Dossier plus an M35-led replica/collective boundary; no claimed C/C++/Rust, CUDA, framework, or distributed-data-parallel mastery.",
         "trackId": null
       },
       {

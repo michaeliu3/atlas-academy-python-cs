@@ -87,7 +87,11 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /p\^\\star=2,\\qquad d\^\\star=q\(2\)=2,\\qquad p\^\\star-d\^\\star=0/u);
   assert.match(candidate, /usual convex\s+Slater\/KKT theorem applies/u);
   assert.match(candidate, /Convexity, smoothness, and strong-convexity bridge/u);
+  assert.match(candidate, /Ridge and conditioning card/u);
+  assert.match(candidate, /m31RidgeConditioningCard\(\)/u);
   assert.match(candidate, /h\(t\)=t\^4/u);
+  assert.match(candidate, /Rate versus trace/u);
+  assert.match(candidate, /m31GradientDescentRateCard\(10\)/u);
   assert.match(candidate, /Same problem, different solver contract/u);
   assert.match(candidate, /result\.success/u);
   assert.match(candidate, /Expected-gradient assumption card/u);
@@ -98,8 +102,11 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /Mutual-information and distortion card — one narrow channel model/u);
   assert.match(candidate, /R\(D\)=1-h_2\(D\)/u);
   assert.match(candidate, /One-step ELBO identity — derive the gap before trusting the objective/u);
+  assert.match(candidate, /Two-state ELBO equality table/u);
+  assert.match(candidate, /m31TwoStateElboCard\(\)/u);
   assert.match(candidate, /needed log-ratio expectations are\s+integrable/u);
   assert.match(candidate, /posterior may not belong to the\s+family/u);
+  assert.match(candidate, /CMU 10-725 Convex Optimization/u);
   assert.match(candidate, /M25 evidence receipt/u);
   assert.match(candidate, /Distractor-to-misconception map/u);
 

@@ -8,9 +8,10 @@ learner-ready workbook, a module-contract approval, a release record, or
 evidence that M31 is published. It must not be used to add M31 to a manifest,
 change the canonical graph, or make its route navigable.
 
-**Research snapshot:** 2026-07-30. Recheck every URL, version, license, and
-asset-level reuse notice before a future release. The detailed evidence review
-is [the M31 source audit](module31_optimization_information_source_audit.md).
+**Research snapshot:** baseline 2026-07-30, with a focused calibration
+follow-up on 2026-08-02. Recheck every URL, version, license, and asset-level
+reuse notice before a future release. The detailed evidence review is [the M31
+source audit](module31_optimization_information_source_audit.md).
 
 **Authoring rule:** Atlas may link to and narrowly paraphrase the sources below.
 Atlas explanations, diagrams, examples, code traces, diagnostics, prompts, and
@@ -83,11 +84,13 @@ academic consumers above are planning connections, not learner navigation.
 | S08 | [Ghadimi and Lan: Nonconvex Stochastic Programming](https://doi.org/10.1137/120880811), [preprint record](https://arxiv.org/abs/1309.5549) | Boundary between approximate stationarity and global optimization in stated nonconvex stochastic settings. | Link-only; do not copy equations, proofs, figures, or experimental setups. |
 | S09 | [SciPy minimize](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [trust-constr](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-trustconstr.html) | Versioned contracts for objective/derivative/constraint inputs, options, and stop fields. | SciPy is generally BSD-3-Clause; Atlas examples remain original and must pin the version before code reuse. |
 | S10 | [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) and [Apache-2.0 license](https://www.cvxpy.org/version/1.2/license/index.html) | DCP grammar, shape/curvature checking, and implementation-versus-mathematics contrast. | Cite the API and make original examples. DCP acceptance is not a real-world or solver certificate. |
+| S11 | [CMU 10-725 Convex Optimization](https://stat.cmu.edu/~siva/teaching/725/) | A course-sequence calibration cross-check for least-squares conditioning, exact-gradient versus projected/stochastic theorem scopes, KKT/duality, and nonconvex boundaries in the new M31 S02/S04 cards. | Accessed 2026-08-02. The course page grants no blanket asset license. **Link-only**; Atlas keeps its fixture, derivation, and prose original and does not copy notes, assignments, figures, code, or solutions. |
 
-Each source above was accessed in the linked audit on 2026-07-30. Before
-future publication, add exact access date, version/page where relevant, license
-or reuse status, rationale, linked claims, and stable learner-facing URL to the
-structured source ledger. A freely readable page is not a blanket reuse grant.
+S01–S10 were accessed in the linked audit on 2026-07-30; S11 was added in the
+focused 2026-08-02 calibration follow-up. Before future publication, recheck
+every URL/version/license, preserve claim linkage and access dates, and bind
+the reviewed learner-facing selection to the structured source ledger. A freely
+readable page is not a blanket reuse grant.
 
 ## Claim, assumption, and counterexample ledger
 
@@ -112,9 +115,9 @@ visible.
 | Session | First-principles progression | Original understanding-first learning move | Prediction, retrieval, and transfer evidence | Sources |
 | --- | --- | --- | --- | --- |
 | M31-S01 — Objectives, variables, constraints, and geometry | Translate a bounded resource-allocation decision into variables, units, objective terms, feasible set, and authority boundary before discussing a solver. Connect M28 geometry and conditioning. | Annotate a tiny original two-variable formulation; code-read a wrong penalty that silently replaces a hard constraint. | Predict whether the penalty changed the problem; retrieve gradient/Hessian meaning; transfer by repairing a proxy objective with an omitted safety constraint. Produce the objective-geometry sheet. | S01, S03; M28 bridge |
-| M31-S02 — Local reasoning: derivatives, stationarity, curvature, and feasibility | Move from M29’s local derivative facts to first-/second-order conditions, convexity, strong convexity, smoothness, and quadratic geometry. | Read a compact least-squares-plus-regularizer trace; compare analytic directional derivative, autodiff claim, and finite-difference check. | Predict the next gradient step; classify a saddle/boundary/flat stationary point; transfer by stating the missing condition in an overclaimed local-minimum assertion. Produce the stationarity-counterexample ledger. | S02–S04; M28/M29 bridge |
+| M31-S02 — Local reasoning: derivatives, stationarity, curvature, and feasibility | Move from M29’s local derivative facts to first-/second-order conditions, convexity, strong convexity, smoothness, and quadratic geometry. | Read a compact least-squares-plus-regularizer trace; compare analytic directional derivative, autodiff claim, and finite-difference check. | Predict the next gradient step; classify a saddle/boundary/flat stationary point; transfer by stating the missing condition in an overclaimed local-minimum assertion. Produce the stationarity-counterexample ledger. | S02–S04, S11; M28/M29 bridge |
 | M31-S03 — Convex structure, dual views, and certificates | Add constrained problems without erasing S01/S02 assumptions: primal feasibility, Lagrangian signs, weak duality, strong-duality conditions, KKT components, and residuals. | Derive an original tiny convex constrained quadratic by hand; inspect a deliberately incomplete certificate. | Predict whether a proposed multiplier/sign pair is feasible; retrieve four KKT components; transfer by naming the missing constraint qualification before a strong-duality claim. Produce the primal/dual claim table. | S01–S04 |
-| M31-S04 — Algorithms, step rules, and convergence evidence | Turn a structural problem into an iterative calculation. Compare gradient, projected/proximal, Newton, and line/trust-region rules from update, cost, information, and assumptions. | Read two solver records for the same synthetic objective with different initialization/step rules; inspect SciPy/CVXPY contract boundaries. | Predict which stopping quantity changes; retrieve theorem-versus-run distinction; transfer by choosing a method and writing a convergence-condition checklist. Produce the solver-selection rationale. | S02–S04, S09–S10; M28/M29 bridge |
+| M31-S04 — Algorithms, step rules, and convergence evidence | Turn a structural problem into an iterative calculation. Compare gradient, projected/proximal, Newton, and line/trust-region rules from update, cost, information, and assumptions. | Read two solver records for the same synthetic objective with different initialization/step rules; inspect SciPy/CVXPY contract boundaries. | Predict which stopping quantity changes; retrieve theorem-versus-run distinction; transfer by choosing a method and writing a convergence-condition checklist. Produce the solver-selection rationale. | S02–S04, S09–S11; M28/M29 bridge |
 | M31-S05 — Stochastic optimization and nonconvex limits | Connect M30 sampling and uncertainty to empirical risk, mini-batches, stochastic approximation, initialization, stationarity, and validation separation. | Debug an original flawed SGD evidence card with a biased sampler or a leaked validation decision; compare multiple fixed-seed runs. | Predict the hidden failure; retrieve estimator target/bias/variance facts; transfer by replacing an unsupported “converged” statement with a bounded observation. Produce the stochastic-information experiment card. | S07–S08; M30 bridge |
 | M31-S06 — Information trade-offs and evidence defense | Reunite the probability model, optimization target, approximation family, finite computation, and decision boundary through entropy, KL, MI, ELBO, and distortion/fit trade-offs. | Derive a small finite categorical KL identity with support labels; audit an original variational or regularized objective. | Predict what changing KL direction or a trade-off weight changes; retrieve support/log-base/family conditions; transfer by explaining what an improved objective still cannot establish. Produce the Optimization & Information Evidence Dossier and learner-controlled oral summary. | S05–S06; M30 bridge |
 

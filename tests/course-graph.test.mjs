@@ -113,6 +113,9 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
   const scopes = new Set(matrix.topics.map(({ scope }) => scope));
   const foundationModels = matrix.topics.find(({ id }) => id === "l8.fm.representations-transformers");
   const optimization = matrix.topics.find(({ id }) => id === "l1.optimization.formulation-convexity");
+  const lowerLevelRuntime = matrix.topics.find(
+    ({ id }) => id === "l2.programming-lower-level-ml-runtime",
+  );
 
   assert.equal(matrix.schemaVersion, 3);
   assert.equal(
@@ -183,6 +186,18 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
   assert.ok(
     optimization?.anchors.some(({ moduleId }) => moduleId === "m31"),
     "the target remains anchored to M31 rather than silently claiming open delivery",
+  );
+  assert.equal(lowerLevelRuntime?.scope, "scoped-exposure");
+  assert.ok(
+    lowerLevelRuntime?.anchors.some(({ moduleId }) => moduleId === "m35"),
+    "the distributed-data-parallel boundary stays M35-led rather than being claimed by M32",
+  );
+  assert.match(lowerLevelRuntime?.label ?? "", /M35-led boundary/u);
+  assert.match(lowerLevelRuntime?.evidenceArtifact ?? "", /no claimed .*distributed-data-parallel mastery/u);
+  assert.equal(
+    graph.modules.find(({ id }) => id === "m35")?.state.readerAccess,
+    "hidden",
+    "the M35-led boundary must not turn M35 into an available reader route",
   );
   assert.equal(
     graph.modules.find(({ id }) => id === "m31")?.state.readerAccess,

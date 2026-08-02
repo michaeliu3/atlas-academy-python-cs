@@ -66,11 +66,11 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "e57961df23cac481f48611b966bf4a09240f29bb29b802f57e4d2d4144c686df"
+      "sha256": "3988100589c6647d0425961b8b6869f39b29b8d1001493ddd3c498dd16e6c012"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "6939f352f0d3953cbf9bb0a452346743d9c441ecac6da72eaca6834959c7ec0e"
+      "sha256": "02ac58b5a612f546fef642a0b092f413d0bf62b63b479cf393fc5e95b3ae9638"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
@@ -318,7 +318,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "b55e63805edf575db2e9eecaa382089b96f64a021929397800b02e2761ef0e6e"
+      "sha256": "b26a79b17841100209f8e4c841d45aacb53061f86df33c88d1d48895b8c64312"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -582,15 +582,15 @@
     },
     {
       "path": "content/source-maps/module31_optimization_information_source_audit.md",
-      "sha256": "0e83efed7192e22877912f2e1088cad081d228b590caaf99e3348dff9e0349f5"
+      "sha256": "6f3d921906ab87ba2b91bea482ccb54aba528f5edd7c4fbe26c6d6e5146d3fb5"
     },
     {
       "path": "content/source-maps/module31_optimization_information_source_map.md",
-      "sha256": "a661bde63eb749037f2e8a5e634bf9e9e2f26b39eced13fa29da59b5265aec82"
+      "sha256": "62ffe5e63bb7948bf59bf61bbe6f2eeb719cd025775c2be977d08208e860d342"
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "a1269b700e7c85f1210f723412295ed9b28b845595c96ac8229dd2a40295bba0"
+      "sha256": "6be25aef955afebe49c327b52aa85925f624f12f487de4e111d8dc139d8e52e9"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",

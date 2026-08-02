@@ -35,9 +35,11 @@ test("M32 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /m32_numpy_layout_observation\.py/u);
   assert.match(research, /NumPy 2\.3\.5/u);
   assert.match(research, /no learner\s+studio or platform model exists/u);
-  for (let number = 1; number <= 13; number += 1) {
+  for (let number = 1; number <= 14; number += 1) {
     assert.match(research, new RegExp(`\\| S32-${String(number).padStart(2, "0")} \\|`, "u"));
   }
+  assert.match(research, /manual browser review on 2026-08-02/u);
+  assert.match(research, /Automated requests can receive a 403/u);
 
   const m32GraphEntry = graph.modules.find(({ id }) => id === "m32");
   const contract = registry.modules.find(({ moduleId }) => moduleId === "m32");

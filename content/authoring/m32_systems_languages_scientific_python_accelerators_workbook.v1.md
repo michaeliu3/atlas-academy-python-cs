@@ -449,6 +449,30 @@ For a performance statement, specify:
 - warm-up/compilation policy, repeats, input fixtures, and semantic oracle;
 - the environment under which the observation was made.
 
+### Cost prediction card — name the work before comparing paths
+
+Before timing anything, write a hypothesis with visible terms:
+
+\[
+T_{\mathrm{accelerator}} = T_{\mathrm{prepare}} + T_{\mathrm{transfer}} +
+T_{\mathrm{queue/launch}} + T_{\mathrm{execute}} + T_{\mathrm{ready/return}}.
+\]
+
+Compare it with a named CPU baseline such as
+`T_cpu = preparation + CPU execution + result conversion`, not with the word
+"CPU." The terms may overlap or be excluded only when the protocol says how.
+This is a reasoning scaffold, not a universal performance model.
+
+| Changed premise | Prediction to make before measurement | One observation that could falsify it |
+| --- | --- | --- |
+| tiny workload, host-resident input, immediate host read | transfer, launch, and readiness may dominate useful device work | a completed-work protocol that includes those terms and still shows a lower end-to-end latency |
+| larger arithmetic-intensive workload with suitable locality | useful execution may dominate fixed overheads | raw completed-work timings under the same oracle, layout, warm-up, and environment show no such crossover |
+| strided or repeatedly converted input | layout/conversion may dominate even if nominal arithmetic grows | a controlled layout/residency change moves the cost in a different direction than predicted |
+
+State the useful-work unit, input size/layout, arithmetic-intensity proxy, and
+one competing explanation. A favorable prediction is not a speedup claim; a
+completed, oracle-checked observation is still only a scoped observation.
+
 ### Optional backend reading lens — PyTorch CUDA, not a GPU lab
 
 Use this lens only when you deliberately choose **PyTorch CUDA semantics** as
@@ -467,6 +491,23 @@ Read the [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cud
 page before using its terms. Record its access date and the exact runtime only
 if you run a real observation. This table never establishes that a learner's
 machine has CUDA, that a call overlaps work, or that a result is faster.
+
+### Named execution contrast — JAX staged readiness and PyTorch CUDA streams
+
+Do not turn "both use accelerators" into a common execution model. Read this
+as a vocabulary contrast, not code to run:
+
+| Question | JAX lens | PyTorch CUDA lens | Boundary that remains |
+| --- | --- | --- | --- |
+| host return | JAX documents asynchronous dispatch; a value may be pending until a named readiness operation such as `block_until_ready()`. | A CUDA operation can return before queued device work completes. | Name the version, backend, device, input residency, and exact observation point. |
+| work ordering | Staged transformations and the chosen backend determine what is compiled/dispatched. | Current/default or explicitly named streams order their own work. | Do not infer cross-stream dependencies, overlap, or compilation behavior from a generic trace. |
+| precision premise | Default dtype/configuration can constrain representability. | Tensor dtype, accumulation behavior, and device path can change the numerical observation. | A lower-precision input versus higher-precision accumulation must be recorded with its tolerance and semantic oracle. |
+
+Use the [JAX asynchronous-dispatch](https://docs.jax.dev/en/latest/async_dispatch.html)
+and [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html)
+pages as link-only documentation. The correct comparison begins by declaring
+what is held fixed; it does not claim that the APIs, graphs, mutation rules, or
+performance mechanisms are interchangeable.
 
 ### Prediction before reveal
 
@@ -680,6 +721,27 @@ Keep these two kinds of evidence separate:
 Before carrying a conclusion forward, record the runtime/library version and
 rerun the named observation with its semantic oracle. Documentation helps
 interpret an interface; it does not recreate the observed execution.
+
+### SciPy / Array-API capability boundary
+
+Scientific Python is not one backend promise. Read this tiny **capability
+question**, not a compatibility tutorial:
+
+```text
+candidate = scipy_algorithm(array_input, named_options)
+```
+
+Before claiming that this can run on a chosen array/backend/device, write a
+four-column note: the exact SciPy function and version, the input's array API
+and device, the documented capability/support statement, and the fallback or
+explicitly unsupported path. Then change the premise from a NumPy CPU array to
+another backend/device. Which evidence must be rechecked instead of inferred
+from the function name?
+
+Use the [SciPy tutorial](https://docs.scipy.org/doc/scipy/tutorial/index.html)
+and [Array API capability caveats](https://docs.scipy.org/doc/scipy/dev/api-dev/array_api.html)
+as a vocabulary route. They do not establish that a particular algorithm,
+version, device, or acceleration path is available on the learner's system.
 
 ### Numerical boundary — representation changes the claim
 
@@ -940,6 +1002,22 @@ reasoning.
 
 </details>
 
+### M31 Artifact Bridge — a gradient trace needs an objective contract
+
+Bring the M31 **Objective/Constraint/Convergence Claim Sheet** into this
+session. For every autodiff trace, copy or explicitly mark unavailable:
+
+- the scalar or reduction objective and its units;
+- domain, hard constraint, regularization, and representation assumptions;
+- the one M31 conclusion being considered (for example, a local derivative
+  match, a finite projected trace, or a rate bound) and its exact hypotheses;
+- one conclusion a gradient check **cannot** supply: feasible optimality,
+  convergence, generalization, or decision validity.
+
+The trace may validate a derivative of the declared program. It cannot repair
+an absent objective contract or import an unconstrained exact-gradient theorem
+into a mixed-precision, projected, stochastic, or framework-specific path.
+
 ### Code-reading lab — separate framework semantics from the invariant
 
 ~~~text
@@ -999,6 +1077,12 @@ Build a comparison table with these fields:
 - what is intentionally different;
 - what a comparison may and may not conclude.
 
+For a concrete changed premise, compare a lower-precision input with a
+higher-precision accumulation path. Keep the function, reduction, data,
+device, and semantic oracle visible. A changed result can arise from
+representability, reduction order, overflow/underflow, or a different
+execution path; it does not automatically identify the mechanism.
+
 ### Output: Autodiff-Execution Trace
 
 Create an **Autodiff-Execution Trace** for the scalar fixture or another
@@ -1006,6 +1090,8 @@ bounded, non-consequential function. Include:
 
 - objective, domain, scalar/reduction target, values/shapes/dtypes/devices,
   framework/runtime or pseudocode label, and mutation/control-flow boundary;
+- the M31 objective/constraint/convergence claim sheet, or a precise reason it
+  is unavailable for this task;
 - analytic or independently reasoned gradient where available;
 - finite-difference policy, step sweep or rationale, tolerance, and raw
   comparison;
@@ -1095,6 +1181,25 @@ Expand it into a reviewable architecture without adding imaginary detail:
 | native kernel | backend/build/target and semantic role | that compilation proves speed, safety, or portability |
 | host result | wait/observation, output oracle, result owner | that a successful result rules out stale or incorrect data |
 
+### Reproduction capsule — retain evidence, redact identifiers
+
+Attach one compact **Reproduction Capsule** to the dossier. It contains only
+what a reviewer needs to reproduce or challenge the scoped claim:
+
+```text
+source revision or artifact hash:
+package/runtime/backend versions:
+OS, device/driver, compiler/ABI, and thread settings:
+seed, determinism controls, data-order policy, and input identity/redaction:
+shape/dtype/layout/residency plus semantic oracle:
+warm-up, exact timing/readiness boundary, raw observations, and statistic:
+known alternatives, non-claim, and privacy/redaction boundary:
+```
+
+Do not include credentials, raw private data, raw voice transcripts, or an
+unredacted machine fingerprint in a learning note. A capsule makes a claim
+auditable; it does not make it portable or repeatable on every environment.
+
 ### Output: Scientific Python & Accelerators Dossier
 
 Choose a bounded, non-consequential toy pipeline such as a table transform,
@@ -1108,10 +1213,12 @@ pairwise-distance calculation, or scalar gradient fixture. Deliver:
    alias/copy state, tolerance, and one risk.
 4. **Execution and ownership trace.** Reuse Sessions 2 and 4; identify the
    timing/observation boundary and legal buffer reuse point.
-5. **Autodiff or independent numerical check.** Reuse Session 5 or state why
-   it is inapplicable.
-6. **Experiment record.** Either provide a versioned, raw observation under a
-   named environment or explicitly label the artifact a design-only protocol.
+5. **Autodiff or independent numerical check.** Reuse Session 5, including
+   its M31 objective/constraint/convergence bridge, or state why it is
+   inapplicable.
+6. **Experiment record and Reproduction Capsule.** Either provide a versioned,
+   raw observation under a named environment or explicitly label the artifact a
+   design-only protocol; include the compact, redacted capsule above.
 7. **Limited recommendation.** State alternatives, counterexample/falsifier,
    non-claim, and human-controlled next action.
 
@@ -1426,16 +1533,16 @@ remain gated synthesis work until their own requirements are complete.
 This workbook uses original explanations, fixtures, diagrams, and prompts. The
 linked material is for study and provenance; it is not copied source text,
 code, figures, benchmarks, or exercises. Research was rechecked for this
-bounded NumPy observation on **2026-08-01** and for the Python buffer-protocol
-route on **2026-08-02**; the university calibration route below was checked on
-the former date. Documentation moves, so a future publication must recheck URLs,
+bounded NumPy observation on **2026-08-01** and for the Python buffer-protocol,
+scientific-Python capability, and university-calibration routes on
+**2026-08-02**. Documentation moves, so a future publication must recheck URLs,
 versions, access dates, licenses, and exact environment scope.
 
 ### Learner-facing university calibration route
 
 | Source cluster | Claim linkage and reason to read | Reuse boundary |
 | --- | --- | --- |
-| [Stanford CS149 Parallel Computing](https://cs149.stanford.edu/) and [MIT 12.010 Computational Methods of Scientific Programming](https://ocw.mit.edu/courses/12-010-computational-methods-of-scientific-programming-fall-2024/) | Sessions 1–6: parallel/execution reasoning, scientific-programming evidence, performance scope, and reproducibility. These are curriculum-calibration routes, not a promise of identical labs or hardware. | Link-only/original Atlas fixtures and explanations. Check individual course asset terms before reuse; do not copy assignments, recordings, slides, or benchmark claims. |
+| [Stanford CS149 Parallel Computing](https://cs149.stanford.edu/), [CMU 15-418/618](https://www.cs.cmu.edu/~418/schedule.html), and [MIT 12.010 Computational Methods of Scientific Programming](https://ocw.mit.edu/courses/12-010-computational-methods-of-scientific-programming-fall-2024/) | Sessions 1–6: work distribution, locality/communication, synchronization, workload-driven measurement, scientific-programming evidence, and reproducibility. These are curriculum-calibration routes, not a promise of identical labs, hardware, or grading. | Link-only/original Atlas fixtures and explanations. Check individual course asset terms before reuse; do not copy assignments, recordings, slides, or benchmark claims. |
 
 ### Learner-facing source links
 
@@ -1443,6 +1550,7 @@ versions, access dates, licenses, and exact environment scope.
 | --- | --- | --- |
 | [Python extension and C API](https://docs.python.org/3.14/extending/extending.html), [buffer protocol](https://docs.python.org/3.14/c-api/buffer.html), [memoryview](https://docs.python.org/3/library/stdtypes.html#memory-views) | Sessions 1 and 3: public/native boundaries, buffer descriptors, lifetime and contiguity requests. | PSF License v2; link-only and original paraphrase. Pin interpreter/build target before a concrete claim. |
 | [NumPy 2.3 array layout](https://numpy.org/doc/2.3/reference/arrays.ndarray.html), [copies and views](https://numpy.org/doc/2.3/user/basics.copies.html), [`shares_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.shares_memory.html), [`may_share_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.may_share_memory.html), plus [current stable broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) | `M32-C03–M32-C04`, Session 3: versioned vocabulary for the frozen 2.3.5 observation, then a clearly separate route to moving documentation. | NumPy BSD-3-Clause; link-only and original fixtures. The fixed observation pins NumPy 2.3.5; recheck behavior/version before release. |
+| [SciPy tutorial](https://docs.scipy.org/doc/scipy/tutorial/index.html) and [Array API capability caveats](https://docs.scipy.org/doc/scipy/dev/api-dev/array_api.html) | Session 3: scientific algorithms have function-, version-, backend-, and device-specific capability boundaries. | SciPy BSD-3-Clause; link-only/original capability questions. Never turn a documentation route into blanket CPU/GPU/backend support. |
 | [Cython memoryviews](https://cython.readthedocs.io/en/3.1.x/src/userguide/memoryviews.html), [Numba performance guidance](https://numba.readthedocs.io/en/stable/user/performance-tips.html) | Sessions 1 and 3: compiled/native routes are explicit contracts, not automatic gains. | Apache-2.0 and BSD-2-Clause respectively; link-only/original paraphrase. |
 | [CUDA asynchronous execution](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/asynchronous-execution.html), [HIP overview](https://rocm.docs.amd.com/projects/HIP/en/docs-6.1.0/) | Sessions 2 and 4: host/device distinction, streams, events, and backend-specific limits. | NVIDIA documentation is proprietary; ROCm components vary. Link-only; never infer universal support. |
 | [JAX asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html), [JAX autodiff](https://docs.jax.dev/en/latest/automatic-differentiation.html), [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html), [PyTorch autograd mechanics](https://docs.pytorch.org/docs/stable/notes/autograd.html) | Sessions 2, 4, and 5: readiness boundaries, framework-specific execution, and autodiff scope. | Apache-2.0/BSD-3-Clause projects; link-only/original paraphrase. Pin framework/backend/runtime/device versions. |

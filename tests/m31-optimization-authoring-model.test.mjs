@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   M31_STOCHASTIC_GRADIENT_FIXTURE,
   M31_TWO_VARIABLE_CONSTRAINED_QUADRATIC,
+  M31_RIDGE_CONDITIONING_FIXTURE,
   evaluateM31BinaryChannelDistortion,
   evaluateM31DiscreteInformation,
   evaluateM31ConstrainedQuadratic,
@@ -13,11 +14,14 @@ import {
   m31ConstraintResidual,
   m31ConstraintViolation,
   m31DoubleWellMultipleStartCard,
+  m31GradientDescentRateCard,
   m31ProjectedGradientTrace,
   m31QuadraticGradient,
   m31QuadraticObjective,
+  m31RidgeConditioningCard,
   m31StationarityCounterexample,
   m31StochasticGradientTrace,
+  m31TwoStateElboCard,
 } from "../lib/m31-optimization-authoring-model.js";
 
 function assertApproximately(actual, expected, tolerance = 1e-7) {
@@ -230,6 +234,64 @@ test("the M31 finite information card distinguishes entropy, cross-entropy, and 
     () => evaluateM31DiscreteInformation([0.5, 0.5], [1, 0]),
     /strictly positive wherever the reference distribution is positive/u,
   );
+});
+
+test("the M31 ridge card makes conditioning and coordinate-sensitive regularization inspectable", () => {
+  const card = m31RidgeConditioningCard();
+
+  assert.equal(card.id, "m31-s02-ridge-conditioning-card");
+  assert.equal(M31_RIDGE_CONDITIONING_FIXTURE.lambda, 0.01);
+  assert.equal(card.normalEquation.unregularizedConditionNumber, 10_000);
+  assertApproximately(card.normalEquation.ridgeConditionNumber, 100);
+  assertApproximately(card.normalEquation.solution[0], 0.9900990099009901);
+  assertApproximately(card.normalEquation.solution[1], 0.009900990099009901);
+  assertApproximately(card.normalEquation.analyticGradientAtSolution[0], 0);
+  assertApproximately(card.normalEquation.analyticGradientAtSolution[1], 0);
+  assertApproximately(card.normalEquation.finiteDifferenceGradientAtSolution[0], 0, 1e-8);
+  assertApproximately(card.normalEquation.finiteDifferenceGradientAtSolution[1], 0, 1e-8);
+  assert.deepEqual(card.fixture.featureRescaling, [1, 100]);
+  assert.deepEqual(card.rescalingCounterexample.mappedBackTheta, [
+    0.9900990099009901,
+    0.9900990099009901,
+  ]);
+  assert.match(card.rescalingCounterexample.predictionMeaning, /units and feature scaling/u);
+  assert.match(card.truthBoundary, /not a prescription/u);
+});
+
+test("the M31 rate card separates an unconstrained bound from a finite trace", () => {
+  const card = m31GradientDescentRateCard(10);
+
+  assert.equal(card.id, "m31-s04-unconstrained-gradient-descent-rate-card");
+  assert.equal(card.strongConvexity, 1);
+  assert.equal(card.smoothness, 100);
+  assert.equal(card.stepSize, 0.01);
+  assert.equal(card.contraction, 0.99);
+  assert.equal(card.records.length, 11);
+  assert.equal(card.records[0].actualSuboptimality, 50.5);
+  assert.ok(
+    card.records.every(
+      ({ actualSuboptimality, statedFunctionGapUpperBound }) =>
+        actualSuboptimality <= statedFunctionGapUpperBound + 1e-12,
+    ),
+  );
+  assert.ok(card.records[1].actualSuboptimality < card.records[1].statedFunctionGapUpperBound);
+  assert.match(card.truthBoundary, /projected or stochastic trace/u);
+  assert.throws(() => m31GradientDescentRateCard(0), /iterations must be an integer from 1 through 64/u);
+});
+
+test("the M31 two-state ELBO card keeps a finite identity separate from support mismatch", () => {
+  const card = m31TwoStateElboCard();
+  const { validFiniteCase, supportMismatchCase } = card;
+
+  assert.equal(card.id, "m31-s06-two-state-elbo-identity-card");
+  assert.deepEqual(validFiniteCase.posterior, [0.6, 0.4]);
+  assert.equal(validFiniteCase.supportCompatible, true);
+  assertApproximately(validFiniteCase.logEvidenceNats, Math.log(0.3));
+  assertApproximately(validFiniteCase.identityResidual, 0, 1e-12);
+  assert.equal(supportMismatchCase.supportCompatible, false);
+  assert.equal(supportMismatchCase.finiteIdentityAvailable, false);
+  assert.match(supportMismatchCase.reason, /positive mass/u);
+  assert.match(card.truthBoundary, /does not train a variational model/u);
 });
 
 test("the M31 binary information card keeps channel and distortion formulas in their declared scope", () => {
