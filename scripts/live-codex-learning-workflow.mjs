@@ -26,6 +26,13 @@ const requiredSubstantiveEvidence = [
   "learner reasoning, a concrete evidence artifact, a misconception, or a counterexample",
   "a learner-controlled next action or cross-role handoff",
 ];
+const requiredLearnerControlAcknowledgements = {
+  recordsOn: "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+  pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
+  confirmedSave: "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
+  deletionUnavailable:
+    "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI.",
+};
 const requiredRecordFields = [
   "date, role, module/topic, and learner question",
   "key definition, derivation, code/architecture trace, or whiteboard snapshot",
@@ -218,6 +225,18 @@ export async function validateLiveCodexLearningWorkflow(
     }
     if (notionSessionNotes.onUnavailable !== "state-unavailable-and-keep-summary-in-chat") {
       errors.push("Live Codex workflow must state unavailable writes plainly and retain the local chat summary.");
+    }
+    const learnerControlAcknowledgements = notionSessionNotes.learnerControlAcknowledgements;
+    if (
+      !isPlainObject(learnerControlAcknowledgements) ||
+      Object.keys(learnerControlAcknowledgements).length !== Object.keys(requiredLearnerControlAcknowledgements).length ||
+      Object.entries(requiredLearnerControlAcknowledgements).some(
+        ([key, value]) => learnerControlAcknowledgements[key] !== value,
+      )
+    ) {
+      errors.push(
+        "Live Codex workflow learnerControlAcknowledgements must preserve the reviewed values and order.",
+      );
     }
     requiredStringArray(
       notionSessionNotes.recordFields,

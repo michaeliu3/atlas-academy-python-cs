@@ -63,3 +63,20 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
     ),
   );
 });
+
+test("M36 Session 4 makes reproducibility-claim debugging explicit", async () => {
+  const [workbook, companion] = await Promise.all([
+    readFile(
+      new URL("../content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", import.meta.url),
+      "utf8",
+    ),
+    readJson("../content/course/contracts/companions/m36.v1.json"),
+  ]);
+
+  assert.match(workbook, /### Debugging probe — repair one reproducibility claim/u);
+  assert.match(workbook, /m36ReductionOrderProbe\(\)/u);
+  assert.match(workbook, /Repair the claim/u);
+  assert.match(workbook, /same seed/u);
+  assert.match(companion.teachingAssistant.repairMove, /debug/u);
+  assert.match(companion.studyPartner.rehearsalMove, /debug/u);
+});

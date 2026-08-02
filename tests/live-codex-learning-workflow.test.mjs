@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   liveCodexLearningWorkflowRelativePath,
@@ -28,12 +29,30 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.ok(report.notionSessionNotes.requiredConditions.includes("the learning conversation is substantive"));
   assert.ok(report.notionSessionNotes.requiredConditions.includes("records are not paused and the material is not marked off-record"));
   assert.equal(report.notionSessionNotes.onUnavailable, "state-unavailable-and-keep-summary-in-chat");
+  assert.deepEqual(report.notionSessionNotes.learnerControlAcknowledgements, {
+    recordsOn: "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+    pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
+    confirmedSave: "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
+    deletionUnavailable: "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI.",
+  });
   assert.deepEqual(report.roles.map(({ id }) => id), ["teaching-assistant", "study-partner"]);
   assert.match(report.roles[0].liveResponsibility, /oral defense/u);
   assert.match(report.roles[1].liveResponsibility, /non-grading/u);
   assert.ok(report.privacyBoundary.excludedFromRecords.includes("raw voice recordings"));
   assert.ok(report.learnerControls.includes("pause records"));
   assert.equal(report.learnerGuidePath, "docs/LIVE_CODEX_LEARNING_WORKFLOW.md");
+});
+
+test("the live Codex workflow makes record-control acknowledgements and the manual deletion fallback visible", async () => {
+  const [guide, promptSource] = await Promise.all([
+    readFile(new URL("../docs/LIVE_CODEX_LEARNING_WORKFLOW.md", import.meta.url), "utf8"),
+    readFile(new URL("../lib/learning-partner-prompts.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(guide, /chat-level intent/u);
+  assert.match(guide, /delete or archive.*own Notion UI/u);
+  assert.match(promptSource, /chat-level intent/u);
+  assert.match(promptSource, /delete or archive.*own Notion UI/u);
 });
 
 test("the live Codex workflow fails closed if note authority, cadence, controls, or privacy boundaries drift", async () => {
@@ -102,5 +121,12 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   await assert.rejects(
     validateLiveCodexLearningWorkflow(missingPause),
     /learnerControls must preserve the reviewed values and order/u,
+  );
+
+  const missingDeletionFallback = structuredClone(workflow);
+  delete missingDeletionFallback.notionSessionNotes.learnerControlAcknowledgements;
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(missingDeletionFallback),
+    /learnerControlAcknowledgements must preserve the reviewed values and order/u,
   );
 });

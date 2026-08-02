@@ -717,6 +717,34 @@ possible, vary exactly one factor—seed, data order, dtype, or backend—and
 record raw observations plus alternate explanations. Do not call the result a
 benchmark, a model-reliability proof, or a platform guarantee.
 
+### Debugging probe — repair one reproducibility claim
+
+An AI-generated experiment note says: “The source and seed are the same, so
+the result reproduces.” Treat that sentence as a bug report, not a conclusion.
+The copied record names the source revision and seed, but leaves one execution
+field unresolved: dtype/precision, reduction order, backend/device, package
+version, or data-worker/order policy.
+
+1. **Predict before checking.** Name the missing field most likely to change
+   the claimed observation, and say whether it threatens numerical equality,
+   semantic behavior, or only a comparison claim.
+2. **Inspect one bounded trace.** Run or read `m36ReductionOrderProbe()` and
+   identify what its two arithmetic orders establish in its declared runtime.
+   Do not substitute the trace for a framework, hardware, or cross-platform
+   observation.
+3. **Repair the claim.** Add a debugging row to the Theory-to-system
+   reproduction record with the missing field, the exact observation, an
+   alternate explanation, and a two-sentence conclusion: (a) the narrow
+   observation under the declared protocol; (b) the broader reproducibility
+   statement that must remain withdrawn.
+4. **Transfer.** Change exactly one different field in a hypothetical follow-up
+   record and predict which part of the repaired conclusion must be reopened.
+
+The point is not to make two runs identical. It is to debug an overbroad
+reproducibility claim until its evidence, environment, and non-claim agree.
+“Same seed” alone is not a sufficient explanation of equal or unequal finite
+runs.
+
 ---
 
 ## Session 5 — Shift, robustness, monitoring, and bounded human control
@@ -912,6 +940,9 @@ display equations with a prose/ASCII fallback when uncertain; and use valid,
 language-labelled code fences. Help the learner separate a mathematical
 implication, a finite experiment, a systems observation, and a human authority
 decision. If they get stuck, give the hint ladder and change only one premise.
+Include one debugging probe: have the learner find a missing reproducibility
+field in an overbroad claim, inspect a bounded trace, and repair the conclusion
+without turning it into a framework or deployment assertion.
 End with a learner-controlled summary of defended claim, repaired assumption,
 counterexample, remaining uncertainty, and M25 handoff. Do not grade, claim
 voice/platform settings, claim a Notion write, or save raw transcript content.
@@ -927,6 +958,9 @@ when rendering is uncertain, and label code fences. Ask the learner to read a
 claim card, alter one premise (loss, distribution, class, precision, seed,
 shift, or authority), and predict the narrower conclusion. Help them critique
 AI-generated theorem or deep-learning claims without treating them as proof.
+When a record relies on “same seed,” ask the learner to debug the missing
+execution field, predict the consequence, and state the narrowest repaired
+reproducibility claim.
 End with a concise TA handoff: strongest insight, unresolved misconception,
 artifact, and next question. Do not administer the formal defense or claim a
 live chat/Notion action happened without direct evidence.

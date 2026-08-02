@@ -64,6 +64,12 @@ That one-time confirmation remains active there until records are paused or
 material is marked off-record. It may then create at most one concise note per
 substantive session only when all four conditions hold:
 
+The chat should visibly acknowledge `records on` as **chat-level intent** to
+use this configured policy, not as proof that a write or platform setting took
+effect. It should likewise acknowledge `pause records` or `off-record` as
+chat-level intent to stop the policy; neither acknowledgement is a claim of
+platform enforcement.
+
 1. the conversation is in the designated TA or Study Partner chat;
 2. that chat's private Notion destination is configured and reachable;
 3. the learning conversation is substantive; and
@@ -107,6 +113,12 @@ deletion request is completed only if the configured access allows it, and the
 chat must say plainly if it could not complete the request. The target
 page/database is configured in the designated chats rather than embedded in the
 portal or repository.
+
+After direct evidence of a successful save, the chat reports the concise note
+title and date, plus a link only if the platform provides one. If deletion
+access is unavailable, it says deletion did not occur and directs the learner to
+delete or archive the note in their own Notion UI; it never implies that an
+unavailable deletion succeeded.
 
 ## Handoff rule
 

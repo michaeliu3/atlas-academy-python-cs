@@ -16,8 +16,11 @@ content or opaque automation.
 ## Change workflow
 
 1. Make a small, reviewable change with a clear objective.
-2. Run the structural course gate, module sync, generated-artifact check,
-   lint, portal tests, and relevant Python behavioral tests.
+2. Validate proportionately: for a text-only lesson repair, preview the edited
+   route, links, and a focused content check; for a meaningful 2–6 module or
+   interactive-behavior batch, run sync, generated-artifact, type/lint, and
+   relevant focused tests; for a GitHub push, private deployment, or substantial
+   portal change, rely on the full CI/browser and relevant Python model checks.
 3. Review the patch for unsupported claims, privacy leaks, hard-coded learner
    data, and source attribution.
 4. Explain what the change proves and what it does not prove in the PR or

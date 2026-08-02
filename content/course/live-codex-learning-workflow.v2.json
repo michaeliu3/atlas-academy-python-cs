@@ -32,6 +32,12 @@
     ],
     "writeCadence": "at-most-one-concise-note-per-substantive-session",
     "onUnavailable": "state-unavailable-and-keep-summary-in-chat",
+    "learnerControlAcknowledgements": {
+      "recordsOn": "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+      "pauseOrOffRecord": "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
+      "confirmedSave": "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
+      "deletionUnavailable": "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI."
+    },
     "recordFields": [
       "date, role, module/topic, and learner question",
       "key definition, derivation, code/architecture trace, or whiteboard snapshot",
