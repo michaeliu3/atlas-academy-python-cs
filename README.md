@@ -28,7 +28,7 @@ interactive course work. It contains:
 - cumulative Atlas projects, TA checkoffs, Study Partner routines,
   conversational oral defenses, and retrieval schedules.
 
-The deployed [Learning Partners](/learning-partners) page provides separate,
+The [Learning Partners](/learning-partners) page provides separate,
 copyable startup packages for a Teaching Assistant and a Study Partner. The
 learner's designated, voice-enabled Codex chats are the primary guided-learning
 surface: the TA repairs models and conducts supportive oral defenses; the Study
@@ -36,8 +36,9 @@ Partner runs live Socratic retrieval/rehearsal rounds. Neither role assigns a
 pass/fail verdict. Atlas does not control platform voice, microphone access,
 rendering, or transcript retention. In the two learner-designated chats with a
 configured private record, the role handoff authorizes an automatic concise
-structured note per substantive session; portable copied prompts remain local,
-and a successful write is not claimed without direct evidence. The portal
+structured note per substantive session only after the learner says `records on`
+in that exact designated chat; portable copied prompts remain local, and a
+successful write is not claimed without direct evidence. The portal
 itself remains local-first. Set up each role once from Learning Partners, then copy the
 current open module's graph-bound follow-on context from its oral-defense
 panel. That packet supports a conversation but is not route progression,
@@ -176,15 +177,16 @@ of a hosting deployment; see Deployment for the separate release boundary.
 
 ## Deployment truth
 
-Atlas Academy is currently deployed as a private ChatGPT Sites application.
-The portal is a Vinext application with worker/server output; it is **not**
-currently a GitHub Pages site. The `github` remote is configured for a private
-GitHub project and GitHub Actions is the intended CI gate. The `origin` remote
-is the existing private ChatGPT Sites deployment remote. They are deliberately
-separate: a push to GitHub does not deploy the portal, and a portal deployment
-is not evidence of a GitHub CI run or GitHub Release. GitHub Pages will be
-considered only after a fully static build, learner-data review, and deployment
-evidence exist.
+Atlas Academy is configured for a private ChatGPT Sites deployment. The portal
+is a Vinext application with worker/server output; it is **not** a GitHub Pages
+site. Its current private deployment status has not been independently recorded
+in the release ledger, so this repository makes no current-deployment claim.
+The `github` remote is configured for a private GitHub project and GitHub
+Actions is the intended CI gate. The `origin` remote is configured for the
+private ChatGPT Sites hosting workflow. They are deliberately separate: a push
+to GitHub does not deploy the portal, and a portal deployment is not evidence
+of a GitHub CI run or GitHub Release. GitHub Pages will be considered only after
+a fully static build, learner-data review, and deployment evidence exist.
 
 See [Deployment](docs/DEPLOYMENT.md) for the two-remote release boundary and
 [Architecture](docs/ARCHITECTURE.md) for the content/runtime flow.

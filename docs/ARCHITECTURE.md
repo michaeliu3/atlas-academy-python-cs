@@ -15,7 +15,7 @@ flowchart LR
     L --> R["Module reader"]
     I["Interactive visual studios"] --> R
     D --> V["learner inspection + behavioral tests"]
-    R --> P["private deployed portal"]
+    R --> P["private portal"]
     P -. "copyable role protocols" .-> C["designated Codex learning chats"]
     C -. "designated-chat concise notes" .-> N["Notion records and learning workflow"]
 ~~~
@@ -25,11 +25,12 @@ flowchart LR
 - The app directory contains the portal shell, course reader, diagnostic, and
   client-side visual studios. Studios use fixed data, accessibility-first
   controls, and local device state only.
-- The deployed portal has no Notion runtime integration or automatic
+- The portal has no Notion runtime integration or automatic
   portal-to-Notion data flow. The learner may use the manual private Notion
   workflow, while the two designated external Codex learning chats may
-  automatically create concise session notes after substantive conversations in
-  their configured private record. Portable copied prompts remain local. That
+  automatically create concise session notes only after the learner says
+  `records on` in that exact designated chat and a substantive conversation
+  ends in their configured private record. Portable copied prompts remain local. That
   external workflow does not grant the portal microphone, voice, transcript,
   or Notion-write capability, and a saved-note claim still requires direct
   evidence.

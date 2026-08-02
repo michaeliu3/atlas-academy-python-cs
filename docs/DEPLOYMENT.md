@@ -2,17 +2,19 @@
 
 ## Current truth
 
-Atlas Academy is deployed as a **private ChatGPT Sites** application. The
-portal uses Vinext/Cloudflare worker/server output. It is not currently a
-GitHub Pages deployment, and this repository must not claim otherwise.
+Atlas Academy is configured for a **private ChatGPT Sites** deployment. The
+portal uses Vinext/Cloudflare worker/server output. The current private
+deployment status has not been independently recorded in the release ledger,
+so this repository makes no current-deployment claim. GitHub Pages is not a
+configured deployment target, and this repository must not claim otherwise.
 
 The project deliberately has two remotes with different responsibilities:
 
 - `github` is configured for the private GitHub project: source review,
   GitHub Actions CI after a workflow is pushed, issues, and any future GitHub
   Releases.
-- `origin` is the existing private ChatGPT Sites hosting remote. It is a
-  deployment input, not a GitHub remote, CI system, or release registry.
+- `origin` is configured for the private ChatGPT Sites hosting workflow. It is
+  a deployment input, not a GitHub remote, CI system, or release registry.
 
 There is no automatic GitHub-to-hosting deployment in the checked-in workflow.
 A configured remote, a workflow file, a local tag, or a changelog heading is

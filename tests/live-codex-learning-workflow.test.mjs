@@ -55,6 +55,24 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   assert.match(promptSource, /delete or archive.*own Notion UI/u);
 });
 
+test("learner-facing policy summaries retain explicit records-on authority", async () => {
+  const policySummaries = [
+    ["../CONTEXT.md", /only after the learner\s+says `records on` in that exact designated chat/u],
+    ["../docs/ARCHITECTURE.md", /only after the learner says\s+`records on` in that exact designated chat/u],
+    ["../docs/PRIVACY.md", /only after the learner says `records on`\s+in that exact designated chat/u],
+    ["../docs/LEARNER_ROUTE_PLANS.md", /only after the learner says `records on` in that\s+exact designated chat/u],
+    ["../docs/GOAL_COMPLIANCE_MATRIX.md", /only after the learner says `records on` in that exact designated chat/u],
+    ["../README.md", /only after the learner says `records on`\s+in that exact designated chat/u],
+    ["../app/modules/[slug]/ModuleOralDefense.tsx", /only\s+after you say “records on” in that exact designated chat/u],
+    ["../lib/learning-partner-prompts.ts", /only after I say “records on” in that exact designated chat/u],
+  ];
+  const texts = await Promise.all(policySummaries.map(([path]) => readFile(new URL(path, import.meta.url), "utf8")));
+
+  for (const [index, [path, expected]] of policySummaries.entries()) {
+    assert.match(texts[index], expected, `${path} must retain the explicit designated-chat recording authority.`);
+  }
+});
+
 test("the live Codex workflow fails closed if note authority, cadence, controls, or privacy boundaries drift", async () => {
   const workflow = await loadLiveCodexLearningWorkflow();
 
