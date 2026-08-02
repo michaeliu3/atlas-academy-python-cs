@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Standardized the remaining learner-facing evidence guides as constructive
+  next-step guidance: rigorous evidence now leads to the canonical handoff or
+  one named repair route instead of a pass/advance declaration. The real
+  M5→M27, M17→M28, and M27→M6 connections remain intact; this is a
+  learner-language clarification, not a score, release, route unlock, or
+  mastery claim.
 - Added the graph-derived, learner-facing **Levels 1–9 Scope Matrix** to the
   existing 60-day route. Its 63 topic groups now separate intended target
   depth, current delivery state, session/source route, learner evidence, and
