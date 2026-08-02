@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Independently rechecked the M31–M36 private advanced packs against official
+  university and source-owner material. The review found no theory expansion
+  worth adding to the 60-day core, refreshed M33's learner-facing Stanford
+  CS103 route to the Spring 2026 archive, and records the remaining real gap:
+  learner-approved chat/oral delivery evidence. This preserves every
+  authoring-only, preview, and no-university-equivalence boundary.
 - Connected completed Module 0 diagnostic results to the designated Learning
   Partners workflow: after approving and copying the concise brief, a learner
   can paste it into the Study Partner chat. Atlas does not transfer the brief

@@ -41,7 +41,7 @@ test("M33 primary-source research remains a bounded authoring input, not a sourc
   for (let number = 1; number <= 10; number += 1) {
     assert.match(research, new RegExp(`\\| S33-${String(number).padStart(2, "0")} \\|`, "u"));
   }
-  assert.match(research, /https:\/\/web\.stanford\.edu\/class\/archive\/cs\/cs103\/cs103\.1264\//u);
+  assert.match(research, /https:\/\/web\.stanford\.edu\/class\/archive\/cs\/cs103\/cs103\.1266\//u);
   assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~arielpro\/15251f15\/schedule\.html/u);
   assert.match(research, /https:\/\/faculty\.cc\.gatech\.edu\/~ladha\/S26\/4510\//u);
 
