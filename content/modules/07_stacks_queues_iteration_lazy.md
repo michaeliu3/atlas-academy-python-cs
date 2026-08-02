@@ -1729,7 +1729,7 @@ For every question:
 3. explain why the strongest distractor is wrong;
 4. after feedback, label the issue as concept, trace, contract, cost, or evidence.
 
-High-confidence errors trigger a prerequisite or misconception repair. Low-confidence correct answers trigger one contrast example before advancement.
+High-confidence errors trigger a prerequisite or misconception repair. Low-confidence correct answers trigger one contrast example before the next transfer task.
 
 ### Question 1 — The abstraction
 
@@ -2216,11 +2216,13 @@ guarantee.
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance when Michael can take an unfamiliar ingestion pipeline, recover its access order and demand path, trace one value and one failure, identify every retained buffer and ownership boundary, state a parameterized cost claim, direct a bounded change, and verify the patch with observations stronger than output equality.
+Use this evidence to choose the M8 bridge or a repair path, not to decide whether Michael passes. Consider whether you can take an unfamiliar ingestion pipeline, recover its access order and demand path, trace one value and one failure, identify every retained buffer and ownership boundary, state a parameterized cost claim, direct a bounded change, and verify the patch with observations stronger than output equality.
 
-Do not advance based on generator syntax fluency alone.
+With a clear, self-supported explanation, continue with the M8 handoff. Otherwise, repair the named misconception, re-trace one unseen pipeline, or ask the TA for a counterexample through the hint ladder.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Generator syntax fluency alone is not sufficient evidence.
 
 ## Guided Codex handoff — M7
 

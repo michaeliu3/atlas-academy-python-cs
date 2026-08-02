@@ -29,6 +29,26 @@ test("Arc II keeps compact session-level source and evidence boundaries", async 
     assert.match(markdown, /\| 6 \|/u, `${moduleId} needs a source/evidence route through Session 6.`);
   }
 
+  for (const [moduleId, markdown, nextModule] of [
+    ["M6", m6, "M7"],
+    ["M7", m7, "M8"],
+    ["M8", m8, "M9"],
+    ["M9", m9, "M10"],
+    ["M10", m10, "M11"],
+  ]) {
+    assert.match(markdown, /Constructive next-step guide/u, `${moduleId} needs a constructive next-step guide.`);
+    assert.doesNotMatch(markdown, /Instructor decision rule/u, `${moduleId} must not frame its evidence as an instructor gate.`);
+    assert.doesNotMatch(markdown, /Advance when/u, `${moduleId} must not use advancement wording for learner evidence.`);
+    assert.doesNotMatch(markdown, /ready to advance/iu, `${moduleId} must not use readiness-to-advance labels for learner evidence.`);
+    assert.match(
+      markdown,
+      /not a score, grade, release approval, Core advance, or mastery declaration/u,
+      `${moduleId} needs a non-promoting evidence boundary.`,
+    );
+    assert.match(markdown, new RegExp(`continue with the ${nextModule} handoff`, "u"), `${moduleId} needs its next bridge.`);
+    assert.match(markdown, /Otherwise,/u, `${moduleId} needs a named repair route.`);
+  }
+
   assert.match(m6, /CPython `v3\.14\.6` `listobject\.c`/u);
   assert.match(m7, /### Evidence rubric/u);
   assert.match(m7, /synchronous-buffer non-claim/u);

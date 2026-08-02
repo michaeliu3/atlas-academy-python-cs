@@ -2573,7 +2573,7 @@ Produce one connected studio packet.
 
 ### Evidence rubric
 
-| Capability | Emerging | Ready to advance |
+| Capability | Emerging | Evidence for next bridge |
 |---|---|---|
 | operation recovery | names a container | derives structure from client operations and constraints |
 | tree reasoning | labels nodes | states RI/AF and proves path/traversal behavior |
@@ -2603,9 +2603,9 @@ Produce one connected studio packet.
 11. Why must trie search include output work?
 12. Which Atlas facts are Python guarantees, course models, or product policies?
 
-### Instructor decision rule
+### Constructive next-step guide
 
-Advance when Michael can take unfamiliar ordered code and:
+Use this evidence to choose the M10 bridge or a repair path, not to decide whether Michael passes. Consider whether you can take unfamiliar ordered code and:
 
 1. recover the client operations and ordering policy;
 2. diagram representation and authoritative state;
@@ -2617,7 +2617,9 @@ Advance when Michael can take unfamiliar ordered code and:
 8. reject a plausible same-priority, stability, or output-cost defect;
 9. verify the repaired system with evidence that survives representation changes.
 
-Manual implementation speed and memorized operation tables are not mastery.
+With a clear, self-supported explanation across the list, continue with the M10 handoff. Otherwise, trace a same-priority or stale-entry counterexample, redraw authoritative versus derived state, or ask the TA to change one ordering assumption.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Manual implementation speed and memorized operation tables are not sufficient evidence.
 
 ---
 

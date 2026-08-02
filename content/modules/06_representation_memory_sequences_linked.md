@@ -1956,7 +1956,7 @@ For any history implementation, require:
 
 ### TA intervention rule
 
-Return the learner to a diagram when an explanation relies on “Python somehow moves it” or “the pointer just works.” Advance when the learner can name:
+Return the learner to a diagram when an explanation relies on “Python somehow moves it” or “the pointer just works.” When the evidence becomes explainable, continue to the next trace by naming:
 
 - the object or slot;
 - the reference that changes;
@@ -1985,7 +1985,7 @@ Produce a comprehension-and-design portfolio, not a typing portfolio.
 
 ### Evidence rubric
 
-| Dimension | Emerging | Ready to advance |
+| Dimension | Emerging | Evidence for next bridge |
 |---|---|---|
 | Representation | names fields | maps each legal rep to the abstract sequence |
 | Trace | predicts final output | records every reference/slot transition and first RI violation |
@@ -1997,9 +1997,9 @@ Produce a comprehension-and-design portfolio, not a typing portfolio.
 | AI collaboration | accepts generated patch | constrains, reviews, falsifies, and verifies it independently |
 | Decision | chooses a favorite structure | defends tradeoffs and names a reopening trigger |
 
-### Instructor decision rule
+### Constructive next-step guide
 
-Advance when Michael can take an unfamiliar sequence implementation and:
+Use this evidence to choose the next bridge, not to decide whether Michael passes. Consider whether you can take an unfamiliar sequence implementation and:
 
 1. recover the abstract value, RI, and AF;
 2. trace a boundary transition without execution;
@@ -2009,7 +2009,9 @@ Advance when Michael can take an unfamiliar sequence implementation and:
 6. defend a changing-constraints Atlas decision;
 7. review an agent patch with independent evidence.
 
-Memorizing an operation table or CPython growth sequence is not mastery.
+With a clear, self-supported explanation across the list, continue with the M7 handoff. Otherwise, choose one named repair: redraw the object graph, re-trace one boundary transition, construct a delayed-invariant counterexample, or ask the TA to challenge one unsupported evidence claim.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Memorizing an operation table or CPython growth sequence is not sufficient evidence.
 
 ---
 

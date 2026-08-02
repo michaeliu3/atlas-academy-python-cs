@@ -366,23 +366,23 @@
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
-      "sha256": "5a53ecac02a1ed37bbe4cf168f3fcfdb9280d892dc8b1a6a6380d3005ff8abdd"
+      "sha256": "bc46012c625c782cbad38b6495d7f5f2ec8e3e239185701107eaef344c3c007a"
     },
     {
       "path": "content/modules/07_stacks_queues_iteration_lazy.md",
-      "sha256": "4f207f1c18023d6f3f192edb834ecf00968d286191299fbfe35c922ab50e39f5"
+      "sha256": "045aae05e99dd7609248424be0c54985cd9363cc210708af32005ed81be73566"
     },
     {
       "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
-      "sha256": "337d7970a0c27f864d75271e34f5c25be1ba3b8ca1dc9eaf57eed39a9e3845f7"
+      "sha256": "a498efe2a2b3dc5d7171efe15b98b4bc0e052f1b63a2318e1a0adb443fc2feb7"
     },
     {
       "path": "content/modules/09_trees_heaps_sorting_ordered.md",
-      "sha256": "47a1289d7f7e724a8d6664d8898fc42d47f90fe584588c87999e646b0b4d8a41"
+      "sha256": "895db0cb6093f11e004ce93161208062129f94219d4a17b7b4a840560b9b9665"
     },
     {
       "path": "content/modules/10_graph_algorithms_network_models.md",
-      "sha256": "8bb09e3b138411712532ca8dcf5b376cbb3c9e202efbfca5e5bd83b764f1bf87"
+      "sha256": "0943f3c8c8bc798403fbdbd7d231ee59d0e8d719b17959a965998e56d5aaf10b"
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",

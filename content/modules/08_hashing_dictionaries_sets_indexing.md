@@ -1892,9 +1892,9 @@ Produce one coherent checkpoint, not a collection of unrelated exercises.
 7. How do your tests expose a collision bug that normal examples might miss?
 8. Why would persisting `hash(token)` corrupt the design?
 
-### Instructor decision rule
+### Constructive next-step guide
 
-Advance when Michael can:
+Use this evidence to choose the M9 bridge or a repair path, not to decide whether Michael passes. Consider whether you can:
 
 - reconstruct hashing from the lookup/space problem;
 - trace and defend collision correctness;
@@ -1904,7 +1904,9 @@ Advance when Michael can:
 - distinguish Python semantics from CPython internals;
 - direct and review an agent using adversarial evidence.
 
-Fast manual typing, memorized method names, or a passing happy-path demo are not mastery.
+With a clear, self-supported explanation across the list, continue with the M9 handoff. Otherwise, rebuild a collision trace, test a mutable-key counterexample, or ask the TA to challenge one cost or portability claim.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Fast manual typing, memorized method names, or a passing happy-path demo are not sufficient evidence.
 
 ## 25. Consolidation
 

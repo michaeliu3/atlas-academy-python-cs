@@ -2509,9 +2509,9 @@ Produce one coherent planner checkpoint.
 | Review | challenge semantics, state, evidence, cost, and scope | accept agent summary |
 | Transfer | map graph roles and redefine domain meaning | name another graph use |
 
-### Instructor decision rule
+### Constructive next-step guide
 
-Advance when Michael can:
+Use this evidence to choose the M11 bridge or a repair path, not to decide whether Michael passes. Consider whether you can:
 
 - derive the algorithm family from the graph question and assumptions;
 - trace frontier, state, and evidence without executing;
@@ -2523,7 +2523,9 @@ Advance when Michael can:
 - reject a plausible generated patch with a minimal counterexample;
 - defend cost and architecture against representation and snapshot changes.
 
-Memorizing pseudocode or producing green happy-path tests is not mastery.
+With a clear, self-supported explanation across the list, continue with the M11 handoff. Otherwise, draw the frontier trace, construct a negative-edge or stale-snapshot counterexample, or ask the TA to change one graph assumption.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Memorizing pseudocode or producing green happy-path tests are not sufficient evidence.
 
 ## 29. Consolidation
 
