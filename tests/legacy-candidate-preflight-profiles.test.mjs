@@ -17,6 +17,8 @@ async function loadProfiles() {
 
 const expectedCandidateModuleIds = [
   "m01",
+  "m02",
+  "m03",
   "m12",
   "m13",
   "m19",
@@ -102,7 +104,7 @@ test("the legacy candidate profile registry rejects ambiguous or forged profile 
   forgedBrowserTitle.candidates[0].browserTestTitle = "M12 unrelated browser check";
   await assert.rejects(
     () => validateLegacyCandidatePreflightProfiles(forgedBrowserTitle, { siteRoot }),
-    /must name a declared Playwright test title/i,
+    /(?:browserTestTitle is allowed only with a discovered Playwright browser test|must name a declared Playwright test title)/i,
   );
 });
 
@@ -136,5 +138,5 @@ test("the snapshot-bound profile validator never reuses stateful caller facts", 
   const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
 
   assert.equal(purposeReads, 1);
-  assert.equal(report.candidateByModuleId.size, 13);
+  assert.equal(report.candidateByModuleId.size, 15);
 });

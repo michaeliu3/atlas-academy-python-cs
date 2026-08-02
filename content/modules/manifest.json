@@ -95,9 +95,9 @@
       "title": "Functions, Recursion, and Induction",
       "summary": "Central idea: a function gives a computation a boundary; recursion gives repeated structure an executable form; induction gives the same structure a correctness argument.",
       "arcId": "arc-i",
-      "wordCount": 10654,
+      "wordCount": 11531,
       "estimatedMinutes": 46,
-      "sourceHash": "393ddb919e7c2d0de0c24566639c937e6878189f1ec02a8babe6763e92445a6a",
+      "sourceHash": "f15512100632d211b49c2aa03211e904bf76cb87ee42844269f32b04159c3033",
       "id": "m02",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -135,9 +135,9 @@
       "title": "Abstraction, Interfaces, and Abstract Data Types",
       "summary": "Central question: How can a client depend on what a component means without depending on how that component stores its data? Atlas transformation: a list owned by application code becomes a replaceable event store with one behavioral con…",
       "arcId": "arc-i",
-      "wordCount": 14328,
+      "wordCount": 15349,
       "estimatedMinutes": 64,
-      "sourceHash": "4775a2698b52762f6eb67ed50f68a73a8f8dd0b903ebfc5da1c8a7352e3cc2c2",
+      "sourceHash": "098f68f4f73ebdc6267522a1b0262bba7de6d7473f0c335bfaf36c78c61b3bfb",
       "id": "m03",
       "state": {
         "lifecycle": "learner-material-ready",

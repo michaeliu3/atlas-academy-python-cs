@@ -192,6 +192,52 @@ The computation should follow that shape:
 
 That is the need from which recursion is derived. Recursion is not “a function doing something magical to itself.” It is a finite rule that delegates structurally smaller instances to new calls.
 
+### First-principles derivation — finite rules for unknown depth
+
+Start with the finite grammar: a `Note` is one root contribution plus a
+finite sequence of smaller `Note` values. A function can therefore use one
+base rule for an empty child sequence and one combining rule that reuses the
+same contract only on those structurally smaller children; no fixed nesting
+depth needs to be guessed in advance.
+
+### Definition — recursive contract and supported domain
+
+A recursive contract names a supported input domain, a base case, the result
+for that case, the strictly smaller inputs delegated to recursive calls, and
+the rule that combines their results. For `total_minutes`, the supported
+domain is a finite `Note` tree rather than every object that happens to have a
+`children` attribute.
+
+### Assumption — finite-tree input and ownership boundary
+
+The tree argument assumes each child occurrence denotes a smaller finite
+subtree and that the traversal only reads the tree. A cycle or an ownership
+boundary that lets a call mutate a shared input is not silently covered by
+that argument; it must be rejected by the contract or reasoned about under a
+different graph-and-effects model.
+
+### Derivation and proof idea — recursive decomposition
+
+The data definition gives the computation shape: solve the root contribution
+directly, ask the same contract of each smaller child, then combine one result
+per child. The correctness argument follows the same decomposition: establish
+the leaf case, assume the contract for child trees, and show the combination
+rule establishes it for the parent.
+
+### Counterexample — a base case without progress
+
+`countdown(3)` that stops only at zero but calls `countdown(number - 2)` has a
+base case and still fails to reach it. A base case is a branch; a termination
+argument also needs a measure that stays in its stated domain and strictly
+decreases on every recursive call.
+
+### Numerical experiment — call count versus active stack depth
+
+For a finite tree, record two quantities rather than treating “recursive” as
+a cost claim: total calls (one per visited node for this traversal) and the
+maximum simultaneous call depth (the tree height). Compare a balanced tree
+and a chain with the same node count before reading the cost conclusion.
+
 ### 4.2 A function is an executable boundary
 
 Plain language:
@@ -234,7 +280,7 @@ result = normalizer("  Recursion  ")     # calls the object and returns "recursi
 
 `normalizer` and `canonical_title` reach the same function object. Functions are values in Python: they can be stored, passed, and returned. Later modules will use that fact for policies, callbacks, decorators, and dependency injection.
 
-#### Prediction checkpoint
+### Prediction before reveal — identify the recursive boundary
 
 ```python
 def twice(operation, value):
@@ -704,6 +750,15 @@ flowchart LR
 
 The dashed future component is deliberately not connected. Persistence and networking arrive later. Adding them now would mix recursive reasoning with unrelated failure modes.
 
+### Text alternative — recursive study-tree architecture
+
+Read the architecture as one narrow route: a caller asks
+`atlas/traversal.py` for a value; traversal reads immutable `Note` values from
+`atlas/model.py`; traversal tests supply contract evidence; the returned value
+goes back to the caller. Files, databases, and networks are deliberately
+outside this module's boundary, so none of their failure or persistence claims
+belong to the recursion argument.
+
 ### Component responsibilities
 
 | Component | Owns | Must not own yet |
@@ -1070,7 +1125,7 @@ Then inspect the diff, run focused tests, and explain the implementation without
 
 Each session alternates explanation with learner action. There is no long lecture followed by disconnected exercises.
 
-### Session 1 — Functions as contracts, not syntax
+## Session 1 — Functions as contracts, not syntax
 
 **Recall:** binding versus mutation; anatomy of a call frame.  
 **Model:** function object → call → frame → returned object/exception.  
@@ -1079,7 +1134,12 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** separate `summary_line` from `write_summary`.  
 **Exit ticket:** explain why a Python function may not behave like a mathematical function and how a contract repairs the gap.
 
-### Session 2 — Recursion follows the input
+### Output: contract-and-frame trace
+
+Carry one short function contract, one caller-to-frame-to-result trace, and
+one stated effect boundary into Session 2.
+
+## Session 2 — Recursion follows the input
 
 **Recall:** each call receives its own frame-local bindings.  
 **Model:** base case, smaller call, progress measure, combination.  
@@ -1088,7 +1148,12 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** draw the note tree and its call tree side by side.  
 **Exit ticket:** identify all four recursive obligations for a new `count_notes` function.
 
-### Session 3 — Termination and induction
+### Output: recursive-decomposition card
+
+Carry a base case, recursive-call input, decreasing measure, and combination
+rule for one note-tree operation into Session 3.
+
+## Session 3 — Termination and induction
 
 **Recall:** why a base case alone does not prove termination.  
 **Model:** decreasing measure; structural induction.  
@@ -1096,6 +1161,11 @@ Each session alternates explanation with learner action. There is no long lectur
 **You drive:** find the exact invalid step if the input contains a cycle.  
 **Atlas action:** write the claim and proof skeleton for `find_path`.  
 **Exit ticket:** distinguish the recursive call from the induction hypothesis.
+
+### Output: termination-and-induction proof note
+
+Carry one quantified claim, its supported input domain, a decreasing measure,
+and the exact place where the induction hypothesis may be used.
 
 #### Transfer checkpoint — a decreasing measure need not be one tree size
 
@@ -1131,7 +1201,7 @@ to a different well-founded order.
 
 </details>
 
-### Session 4 — Call shape and resource cost
+## Session 4 — Call shape and resource cost
 
 **Recall:** active frames versus total calls.  
 **Model:** recurrence, node count \(n\), height \(h\), repeated subproblems.  
@@ -1140,7 +1210,12 @@ to a different well-founded order.
 **Atlas action:** state time, stack, and output-space costs separately.  
 **Exit ticket:** explain why two linear-time traversals can have different stack risks.
 
-### Session 5 — Code-reading and debugging studio
+### Output: recurrence-and-stack-cost claim
+
+Carry a cost statement that separates visited-node work, maximum active stack,
+output space, and the input-shape assumption that makes the statement true.
+
+## Session 5 — Code-reading and debugging studio
 
 **Recall:** default argument creation and aliasing from Module 1.  
 **Model:** purpose → map → flow → mechanism → evaluation.  
@@ -1149,7 +1224,13 @@ to a different well-founded order.
 **Atlas action:** reconstruct the four-component architecture.  
 **Exit ticket:** name one symptom, one cause, and one contract-level repair.
 
-### Session 6 — Design, delegate, review, defend
+### Output: recursive-failure-investigation memo
+
+Carry the smallest two-call reproduction, a falsifiable cause, one ownership
+or domain repair, and a regression test that would distinguish repair from
+plausible-looking code.
+
+## Session 6 — Design, delegate, review, defend
 
 **Recall:** the difference between requested behavior and implementation idea.  
 **Model:** frame → explore → delegate → review → challenge → verify → explain.  
@@ -1157,6 +1238,12 @@ to a different well-founded order.
 **You drive:** issue a bounded revision request and choose missing tests.  
 **Atlas action:** finish the checkpoint evidence pack.  
 **Exit ticket:** identify one claim still unproven by the tests and propose evidence.
+
+### Output: design-review-and-oral-defense dossier
+
+Carry the bounded task, one reviewed claim, one missing-evidence question,
+and a short explanation of the recursive contract into the constructive TA
+conversation and M3 handoff.
 
 ---
 
@@ -1624,6 +1711,15 @@ Deliver:
 - focused test evidence;
 - a short design note separating correctness, termination, time, stack, and input-domain limits.
 
+### Project acceptance criteria — Atlas traversal dossier
+
+The dossier is ready for a constructive next-step conversation when it makes
+the supported tree domain explicit; links every recursive call to a decreasing
+measure and combination rule; separates correctness, termination, and cost
+claims; includes one minimal regression for a broken assumption; and names
+one claim still requiring a different kind of evidence. This is not a
+pass/fail score or a claim of mastery.
+
 ### Evidence route
 
 Use the following rigorous criteria without relying on memorized templates:
@@ -1781,6 +1877,43 @@ decreasing measure → induction hypothesis → cost recurrence. Change one
 premise (an empty input, an invalid domain value, or a non-decreasing call) and
 ask the learner to repair the contract and test. End by asking what the trace
 does *not* prove about memory, performance, or a different input domain.
+
+### Invitation — choose one trace to defend
+
+Invite the learner to choose one recursive claim, show the smallest supporting
+trace, state a confidence level, and name the input-domain assumption before
+the Teaching Assistant offers correction.
+
+### Hint ladder — repair one recursive obligation
+
+Use the smallest needed prompt in order: concrete input, frame tree,
+decreasing measure, induction hypothesis, combination rule, then cost
+recurrence. Do not turn the conversation into a pass/fail interrogation.
+
+### Changed-premise counterexample
+
+Change exactly one premise—allow a cycle, make a recursive input non-smaller,
+or reuse a caller-owned accumulator—and ask which proof or contract step no
+longer holds and what evidence would repair the boundary.
+
+### Transfer — from note tree to expression evaluator
+
+Ask the learner to transfer the same base-case, recursive-decomposition,
+termination, and returned-value reasoning to a small expression tree without
+claiming that the two domains have identical effects or costs.
+
+### Reflection — name the next smallest repair
+
+Ask what the current trace establishes, what it does not establish, and which
+single counterexample, regression, or source check would most reduce the
+remaining uncertainty.
+
+### Learner-controlled evidence summary
+
+Keep only a learner-selected short summary: chosen claim, displayed artifact,
+confidence, revised model, unresolved question, and next retrieval prompt. No
+voice transcript, Notion write, score, or mastery claim follows from this
+workbook alone.
 
 ### Study Partner — recursion rehearsal
 

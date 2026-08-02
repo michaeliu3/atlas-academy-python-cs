@@ -12,13 +12,15 @@ function copy(value) {
   return structuredClone(value);
 }
 
-test("software, systems, mathematics, and authoring companions remain graph-bound without lifecycle promotion", async () => {
+test("foundations, software, systems, mathematics, and authoring companions remain graph-bound without lifecycle promotion", async () => {
   const [graph, companions] = await Promise.all([
     loadCourseGraph(),
     loadModuleLearningCompanions(),
   ]);
   const report = await validateModuleLearningCompanions(companions, { graph });
   const m01 = report.byModuleId.get("m01");
+  const m02 = report.byModuleId.get("m02");
+  const m03 = report.byModuleId.get("m03");
   const m12 = report.byModuleId.get("m12");
   const m13 = report.byModuleId.get("m13");
   const m27 = report.byModuleId.get("m27");
@@ -39,9 +41,11 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 19);
+  assert.equal(report.summary.companionCount, 21);
   assert.deepEqual(report.summary.moduleIds, [
     "m01",
+    "m02",
+    "m03",
     "m12",
     "m13",
     "m19",
@@ -66,6 +70,16 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   assert.equal(m01.studyPartner.role, "non-grading-rehearsal");
   assert.equal(m01.forwardHandoff.targetModuleId, "m02");
   assert.equal(moduleLearningCompanionRelativePath("m01"), "content/course/contracts/companions/m01.v1.json");
+  assert.equal(m02.guideBinding.locator, "/guides/1");
+  assert.equal(m02.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m02.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m02.forwardHandoff.targetModuleId, "m03");
+  assert.equal(moduleLearningCompanionRelativePath("m02"), "content/course/contracts/companions/m02.v1.json");
+  assert.equal(m03.guideBinding.locator, "/guides/2");
+  assert.equal(m03.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m03.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m03.forwardHandoff.targetModuleId, "m04");
+  assert.equal(moduleLearningCompanionRelativePath("m03"), "content/course/contracts/companions/m03.v1.json");
   assert.equal(m12.guideBinding.locator, "/guides/11");
   assert.equal(m12.teachingAssistant.role, "supportive-oral-defense");
   assert.equal(m12.studyPartner.role, "non-grading-rehearsal");

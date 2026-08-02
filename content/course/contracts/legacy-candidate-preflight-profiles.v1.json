@@ -24,6 +24,36 @@
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     },
     {
+      "moduleId": "m02",
+      "packetId": "m02-functions-recursion-induction-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m02/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:55a50dbe865292b4bd3733d0545ec0cb108e1ad20c45c41c370fbdc5c9a3e3e2"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module2_functions_recursion_induction_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m03",
+      "packetId": "m03-abstraction-interfaces-adts-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m03/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:73e13ff613862b86184de97bd1ec58dea14138d1183e64fbc74cf0c06dcc1f92"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module3_abstraction_interfaces_adts_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
       "moduleId": "m12",
       "packetId": "m12-modules-apis-types-dependencies-structural-candidate",
       "candidateDocumentation": {
