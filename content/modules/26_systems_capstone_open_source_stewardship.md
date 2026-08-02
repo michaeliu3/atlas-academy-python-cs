@@ -16,10 +16,14 @@ M31–M36 chain through Module 25. Read it to see the eventual integration
 standard; do not treat its project, studio, or oral-defense material as a
 substitute for the unavailable prerequisite evidence.
 
-**Prospective Days 56–60 of the 60-day Atlas Core, after M31–M36 are
-available**
+> Preview mode now: you may make only a `REHEARSAL ONLY` framing card.
+> Do not use the later studio, project, oral defense, or `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` language as a current capstone decision.
 
-**Intended outcome after that prerequisite chain is available:** You can make
+**Prospective Days 56–60 of the 60-day Atlas Core—only after M25 and its
+M31–M36 prerequisite chain have actual learner-ready release evidence**
+
+**Intended outcome only after that reviewed learner-ready prerequisite chain
+exists:** You can make
 and defend a bounded release decision for one Atlas capability (or a comparable
 open-source contribution). You can trace the claim through representation,
 algorithms, contracts, tests, data, runtime, network, trust, human control,
@@ -1086,6 +1090,10 @@ capability and authority.
 
 ### Project — Atlas Release Dossier / Open-Source Stewardship Track
 
+> **Future full-module project:** Use this only after M25 and its M31–M36
+> prerequisite chain has actual learner-ready release evidence. In preview,
+> create only the `REHEARSAL ONLY` framing card; do not create a release dossier.
+
 Produce one integrated dossier for a single vertical capability. It can be a
 small but genuine Atlas slice or a comparable contribution to an existing
 project. It must be deeper than a README and narrower than “finish the whole
@@ -1219,9 +1227,13 @@ Useful Study Partner questions:
 ### Teaching Assistant oral-defense prompt — M26
 
 ~~~text
-You are Atlas Academy's M26 Teaching Assistant. Conduct a supportive,
-non-pass/fail architecture conversation only after the learner has prepared a
-Release Dossier and its advanced-evidence annex. Start with the release claim,
+You are Atlas Academy's M26 Teaching Assistant. Use this full-module
+oral-defense prompt only after M25 and its M31–M36 prerequisite chain has
+actual learner-ready release evidence. During preview, use only the
+`REHEARSAL ONLY` framing card; do not conduct an oral defense or make a
+release/revise/defer/rollback decision. Conduct a supportive, non-pass/fail
+architecture conversation only after the learner has prepared a Release Dossier
+and its advanced-evidence annex. Start with the release claim,
 owner, invariant, and defer/rollback path. Ask the learner to trace one
 request through the architecture, defend one representation/algorithm or
 learning-system evidence claim, replay one failure, and distinguish one
@@ -1242,7 +1254,10 @@ or save a raw transcript.
 ### Study Partner live-rehearsal prompt — M26
 
 ~~~text
-You are Atlas Academy's M26 Study Partner. Run a non-grading architecture
+You are Atlas Academy's M26 Study Partner. Use this full-module rehearsal
+prompt only after M25 and its M31–M36 prerequisite chain has actual learner-ready
+release evidence. During preview, use only the `REHEARSAL ONLY` framing card;
+do not issue a capstone decision or TA handoff. Run a non-grading architecture
 rehearsal for the learner's bounded capstone claim. Use the visible chat as a
 readable whiteboard: give diagrams a title and prose alternative, define
 notation, use concise labelled tables, and put code/diffs in language-labelled

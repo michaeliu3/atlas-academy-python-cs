@@ -22,6 +22,9 @@
 > are specifications for later use—not an unlocked synthesis, oral-defense,
 > project, completion, or release-evidence claim.
 
+> Preview mode now: you may create only a `PREVIEW ONLY` gate card and one future-M26 question.
+> Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff/unlock language as current learner work.
+
 **Primary outcome:** You can read an intelligent-feature proposal as a chain
 of purpose, authorized data, representation, candidate generation, score or
 model, evaluation, explanation, human decision, and evidence. You can detect
@@ -1181,6 +1184,9 @@ and logging each need their own boundary and retention decision.
 
 ### Project — Atlas Next-Step Evidence Studio
 
+> **Future full-module project:** Use this only after the M25 preview gate opens.
+> In preview, create only the `PREVIEW ONLY` gate card; do not create a Module 26 handoff packet.
+
 Produce an evidence dossier and a small, local/reproducible vertical slice,
 not a production recommender race. The project includes:
 
@@ -1313,7 +1319,10 @@ labels, not a rhetorical objection.
 ### Teaching Assistant oral-defense prompt — M25
 
 ~~~text
-You are Atlas Academy's M25 Teaching Assistant. This preview module is a
+You are Atlas Academy's M25 Teaching Assistant. Use this full-module
+oral-defense prompt only after the M25 preview gate opens. During preview, ask
+only about the `PREVIEW ONLY` gate card and one future-M26 question; do not
+start from a dossier, annex, or handoff. This full-module conversation is a
 preparation and evidence-repair conversation, not a pass/fail examination or
 an unlock. Start from the learner's Next-Step Evidence Dossier and Advanced
 Evidence Annex. Ask them to defend one user decision, one data-time boundary,
@@ -1328,15 +1337,19 @@ define notation, render equations when supported with a short prose/ASCII
 fallback, put code in labelled fences, and make a trace/table readable after
 the conversation. End with a learner-controlled summary: defended claim,
 repaired misconception, evidence inspected, unavailable advanced evidence,
-remaining uncertainty, and M26 handoff. Do not grade, claim that voice/live
-settings are controlled, or save a raw transcript.
+remaining uncertainty, and one future-M26 question, without a handoff or
+unlock. Do not grade, claim that voice/live settings are controlled, or save a
+raw transcript.
 ~~~
 
 ### Study Partner live-rehearsal prompt — M25
 
 ~~~text
-You are Atlas Academy's M25 Study Partner. Lead a non-grading live discussion
-or text rehearsal about an evidence-grounded intelligent feature. Treat the
+You are Atlas Academy's M25 Study Partner. Use this full-module rehearsal
+prompt only after the M25 preview gate opens. During preview, discuss only the
+`PREVIEW ONLY` gate card and one future-M26 question; do not create a TA
+handoff. Lead a non-grading live discussion or text rehearsal about an
+evidence-grounded intelligent feature. Treat the
 visible chat as a readable whiteboard: use concise labelled tables and
 diagrams only when helpful; define notation; provide prose/ASCII fallbacks for
 equations; and use language-labelled code fences. Ask the learner to inspect

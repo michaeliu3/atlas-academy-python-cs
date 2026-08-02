@@ -44,6 +44,73 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.match(guidedRoute, /M26 pre-capstone architecture rehearsal/u);
   assert.match(guidedRoute, /\[UNAVAILABLE — PRESERVE PREVIEW GATE\]/u);
   assert.match(guidedRoute, /`REHEARSAL ONLY`/u);
+
+  assert.match(
+    m25,
+    /Preview mode now: you may create only a `PREVIEW ONLY` gate card and one future-M26 question/u,
+  );
+  assert.match(
+    m25,
+    /Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff\/unlock language as current learner work/u,
+  );
+  const m25TaPromptStart = m25.indexOf("### Teaching Assistant oral-defense prompt — M25");
+  const m25TaPromptEnd = m25.indexOf("### Study Partner live-rehearsal prompt — M25", m25TaPromptStart);
+  const m25TaPrompt = m25.slice(m25TaPromptStart, m25TaPromptEnd);
+  assert.match(m25TaPrompt, /one future-M26 question, without a handoff or\s+unlock/u);
+  assert.doesNotMatch(m25TaPrompt, /remaining uncertainty, and M26 handoff/u);
+  assert.match(
+    m25TaPrompt,
+    /Use this full-module\s+oral-defense prompt only after the M25 preview\s+gate opens/u,
+  );
+  const m25StudyPartnerStart = m25TaPromptEnd;
+  const m25StudyPartnerEnd = m25.indexOf("### Learner-controlled note boundary", m25StudyPartnerStart);
+  const m25StudyPartner = m25.slice(m25StudyPartnerStart, m25StudyPartnerEnd);
+  assert.match(
+    m25StudyPartner,
+    /Use this full-module\s+rehearsal\s+prompt only after the M25\s+preview gate opens/u,
+  );
+  const m25ProjectStart = m25.indexOf("### Project — Atlas Next-Step Evidence Studio");
+  const m25ProjectEnd = m25.indexOf("### Advanced Evidence Annex", m25ProjectStart);
+  const m25Project = m25.slice(m25ProjectStart, m25ProjectEnd);
+  assert.match(
+    m25Project,
+    /Future full-module project:\*{0,2}\s+Use this only after the M25 preview gate opens/u,
+  );
+
+  assert.match(
+    m26,
+    /only after M25 and its\s+M31–M36\s+prerequisite chain have actual learner-ready\s+release evidence/u,
+  );
+  assert.match(
+    m26,
+    /Preview mode now: you may make only a `REHEARSAL ONLY` framing card/u,
+  );
+  assert.match(
+    m26,
+    /Do not use the later studio, project, oral defense, or `RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` language as a current capstone decision/u,
+  );
+  const m26TaPromptStart = m26.indexOf("### Teaching Assistant oral-defense prompt — M26");
+  const m26TaPromptEnd = m26.indexOf("### Study Partner live-rehearsal prompt — M26", m26TaPromptStart);
+  const m26TaPrompt = m26.slice(m26TaPromptStart, m26TaPromptEnd);
+  assert.match(
+    m26TaPrompt,
+    /Use this full-module\s+oral-defense prompt only after M25 and its\s+M31–M36\s+prerequisite chain has\s+actual learner-ready\s+release evidence/u,
+  );
+  const m26StudyPartnerStart = m26TaPromptEnd;
+  const m26StudyPartnerEnd = m26.indexOf("### Learner-controlled note boundary", m26StudyPartnerStart);
+  const m26StudyPartner = m26.slice(m26StudyPartnerStart, m26StudyPartnerEnd);
+  assert.match(
+    m26StudyPartner,
+    /Use this full-module\s+rehearsal\s+prompt only after M25 and its\s+M31–M36\s+prerequisite chain has\s+actual learner-ready\s+release evidence/u,
+  );
+  const m26ProjectStart = m26.indexOf("### Project — Atlas Release Dossier / Open-Source Stewardship Track");
+  const m26ProjectEnd = m26.indexOf("### Release decisions are not pass/fail theater", m26ProjectStart);
+  const m26Project = m26.slice(m26ProjectStart, m26ProjectEnd);
+  assert.match(
+    m26Project,
+    /Future full-module project:\*{0,2}\s+Use this only after M25 and its M31–M36/u,
+  );
+  assert.match(m26Project, /prerequisite chain has actual learner-ready release evidence/u);
 });
 
 test("the v1 M31–M36 audit identifies its graph as a frozen historical fixture", async () => {
