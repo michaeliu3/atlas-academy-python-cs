@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("M25 and M26 name the actual advanced candidate receipts", async () => {
-  const [m25, m26, m26SourceMap, contracts] = await Promise.all([
+  const [m25, m26, m26SourceMap, contracts, guidedRoute] = await Promise.all([
     readFile(new URL("../content/modules/25_evidence_grounded_intelligent_systems.md", import.meta.url), "utf8"),
     readFile(
       new URL("../content/modules/26_systems_capstone_open_source_stewardship.md", import.meta.url),
@@ -11,6 +11,7 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
     ),
     readFile(new URL("../content/source-maps/module26_systems_capstone_source_map.md", import.meta.url), "utf8"),
     readFile(new URL("../content/course/contracts/advanced-module-contracts.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md", import.meta.url), "utf8"),
   ]);
 
   for (const material of [m25, m26]) {
@@ -35,6 +36,14 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
     contracts,
     /Statistical Learning Theory & Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary/u,
   );
+  for (const material of [m25, m26]) {
+    assert.match(material, /said `records on` in that exact chat/u);
+    assert.match(material, /`pause records` nor\s+`off-record`/u);
+  }
+  assert.match(guidedRoute, /M25 evidence-synthesis orientation/u);
+  assert.match(guidedRoute, /M26 pre-capstone architecture rehearsal/u);
+  assert.match(guidedRoute, /\[UNAVAILABLE — PRESERVE PREVIEW GATE\]/u);
+  assert.match(guidedRoute, /`REHEARSAL ONLY`/u);
 });
 
 test("the v1 M31–M36 audit identifies its graph as a frozen historical fixture", async () => {

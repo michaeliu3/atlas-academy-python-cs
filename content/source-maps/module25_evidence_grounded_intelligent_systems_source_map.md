@@ -22,7 +22,8 @@
   decision, data, evaluation, accessibility, and authority evidence with the
   earlier systems evidence into a release argument.
 - **Research snapshot:** original map snapshot **2026-07-30**; a scoped source
-  audit rechecked mutable/versioned routes on **2026-07-31**. Stable
+  audit rechecked mutable/versioned routes on **2026-07-31**, and the synthesis
+  calibration routes below were rechecked on **2026-08-02**. Stable
   documentation can change; a runnable workbook must record and pin its exact
   library/package/version separately.
 - **Evidence hierarchy:** (1) public specifications and official library
@@ -705,6 +706,8 @@ not license copying course assets or make their material Atlas's own.
 | [Berkeley CS 188: Introduction to AI](https://inst.eecs.berkeley.edu/~cs188/) | Retrieve the progression from uncertainty/search/decision concepts to a small bounded decision-support case. | Copy projects, autograders, assignments, slides, solutions, or grading scheme. |
 | [Stanford CS229: Machine Learning](https://cs229.stanford.edu/) | Optional theory bridge for supervised learning, bias/variance, regularization, and evaluation vocabulary. | Treat lecture material as a reusable Atlas textbook or reproduce notes/problem sets. |
 | [MIT 6.036: Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Optional structured review of learning/evaluation foundations before the small learned alternative. | Reuse OCW video, images, labs, solutions, or assets without checking exact terms. |
+| [CMU 10-718: Machine Learning in Practice](https://www.cs.cmu.edu/~smithv/10718/) | Calibrate problem formulation, messy-data boundaries, reproducible pipelines, deployment impact, and concerns beyond accuracy. | Link and paraphrase only; the synthetic Atlas case is not its semester project, discussion, feedback, or real-data experience. |
+| [Georgia Tech CS 7641: Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) and [CS 6601: Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Check that model/evidence work stays connected to Python, algorithms, probability, and accountable policy rather than a detached model demo. | Link and paraphrase only; do not copy restricted course material or imply equivalent instruction, grading, or credit. |
 | [Stanford Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/) | Optional background for candidate generation, ranking, relevance judgments, and offline evaluation. | Present an IR metric as a learner-benefit or policy decision proof. |
 
 The Module 25 pathway deliberately uses these sources to **connect** to
@@ -1074,6 +1077,8 @@ TA repair prompts:
 - [Berkeley CS 188](https://inst.eecs.berkeley.edu/~cs188/)
 - [Stanford CS229](https://cs229.stanford.edu/)
 - [MIT 6.036 OCW](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/)
+- [CMU 10-718](https://www.cs.cmu.edu/~smithv/10718/)
+- [Georgia Tech CS 7641](https://omscs.gatech.edu/cs-7641-machine-learning) and [CS 6601](https://omscs.gatech.edu/cs-6601-artificial-intelligence)
 - [Stanford Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/)
 
 ## Final research verdict

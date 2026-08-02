@@ -356,6 +356,69 @@ observation, execution scope, and authority decision separate.
 For every advanced card, ask which claim type it supports, which assumption is
 still missing, and which broader claim must be withdrawn before moving forward.
 
+## M25/M26 preview guides — preserve the synthesis gate
+
+M25 and M26 are reader-visible **previews**, not shortcuts around the advanced
+chain. Use the following small chat-led orientation/rehearsal only to make
+missing evidence visible. It creates no module credit, capstone result, release
+decision, oral-defense result, or Notion record unless the normal `records on`
+conditions already apply.
+
+### M25 evidence-synthesis orientation (45–60 minutes)
+
+Use this only after studying the relevant prior material. It is a way to see
+the final connection, not to claim an M25 synthesis before M31–M36 receive
+reviewed learner evidence. In the designated **Study Partner** chat, send:
+
+```text
+Run the M25 evidence-synthesis orientation, not the M25 module or oral defense.
+Help me examine the fixed Atlas next-step suggestion as a bounded preview. Ask
+me to distinguish a score, a policy, a human decision, and an authority
+boundary; then ask what M30/M31, M34, M35, and M36 evidence would each need to
+contribute. I will mark any artifact I have not genuinely completed and
+reviewed as [UNAVAILABLE — PRESERVE PREVIEW GATE]. Ask for one A–D answer and
+0–100 confidence before every diagnostic explanation. Use a readable
+whiteboard with defined notation, labelled code, and prose/ASCII fallbacks.
+Do not turn the orientation into a grade, an unlock, a recommendation, or an
+M26 handoff. End with one narrow question to carry forward.
+```
+
+The only permitted orientation artifact is a **preview gate card**: bounded
+claim; baseline; human owner; evidence type that would be needed; missing or
+unreviewed receipt; and the resulting `PREVIEW ONLY` decision. It must not
+invent an M31–M36 result or claim benefit, calibration, generalization,
+authority, or completion. A future full M25 pass should budget about **6–8
+focused hours** for minimum evidence or **10–14 hours** for a deep dossier and
+supportive TA rehearsal; use the 90- or 180-day route rather than compressing
+that work into a preview window.
+
+### M26 pre-capstone architecture rehearsal (60–90 minutes)
+
+This rehearsal uses only already available evidence to practice framing a
+maintainable system. It is not the M26 studio, project, final oral defense, or
+release. In the designated **Study Partner** chat, send:
+
+```text
+Run the M26 pre-capstone architecture rehearsal, not the M26 capstone or oral
+defense. I will choose one bounded Atlas vertical slice using evidence I can
+actually inspect. First ask me for a claim, non-goal, owner, one request trace,
+one failure/rollback boundary, and what upstream M25/M31–M36 receipts would be
+needed before a release decision. Make me change one premise such as a retry,
+permission, dependency, or data boundary and predict what becomes unknown. Ask
+for an A–D answer and 0–100 confidence before every diagnostic explanation.
+Use readable maps/tables/code with prose fallbacks. End with a `REHEARSAL ONLY`
+card and one next falsifier; do not issue RELEASE, REVISE, DEFER, or ROLLBACK as
+a capstone decision.
+```
+
+The permitted rehearsal card names only: claim, non-goal, owner, source/test
+anchor, one trace, one failure boundary, missing advanced receipt, and next
+falsifier. It carries no deployment, maintainer, accessibility-conformance,
+security-clean, oral-defense, or learner-completion claim. A future genuine
+M26 capstone should budget about **8–10 focused hours** for a minimum evidence
+bundle or **14–18 hours** for a deeper dossier, maintenance handoff, and
+constructive TA defense after M25 and the advanced receipt chain are reviewed.
+
 ## How the chats run a module
 
 1. **Study Partner first:** explain one model, draw one trace or derivation,

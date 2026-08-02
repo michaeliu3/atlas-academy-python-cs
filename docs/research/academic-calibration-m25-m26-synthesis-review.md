@@ -7,7 +7,7 @@ This research-only audit reviewed the current [M25 workbook](../../content/modul
 their source maps, the active [v2 course graph](../../content/course/course-graph.v2.json),
 the generated manifest, the [M31–M36 prerequisite bridge](../../content/course/m31-m36-prerequisite-session-bridge.v1.json),
 and the six private candidate workbooks/delivery maps. Official sources below
-were accessed **2026-08-01**.
+were rechecked **2026-08-02**.
 
 It changes no learner material or release status. It is not evidence of
 mastery, enrollment, faculty feedback, credit, grading, certification, a
@@ -39,19 +39,17 @@ agent response, or green test does not gain authority by itself.
 | M32 | *Scientific Python & Accelerators Dossier* | Exact title/concept match: semantic oracle, environment, dtype/layout/device/seed, reproducibility limits. |
 | M33 | *Formal Limits Claim Packet* | Exact title/concept match: encoding, reduction/resource model, non-claim. |
 | M34 | *Classical AI Search, Constraints & Decision Packet* | Exact title/concept match: candidate, constraint, uncertainty, and authority. |
-| M35 | *Machine Learning & Representation Dossier* / ML evidence packet | Content matches, but M25/M26 call it *Responsible ML Representation Dossier*; the displayed receipt is not yet an exact output ID. |
-| M36 | final theory/reliable-learning dossier, evidence map, and reproduction record | Content matches, but the synthesis uses a combined map/record while the candidate pack supplies several differently named artifacts. |
+| M35 | *Machine Learning & Representation Dossier* | Exact output title/concept match: baseline, split, representation, failure slice, shift, objective, and authority boundary. |
+| M36 | *Statistical Learning Theory & Reliable Deep-Learning Systems Dossier*, with the *Limit-and-Nonclaim Card*, *Theory–System Reproducibility Record*, and *Monitoring Extension to Reliable-Learning Evidence Map* | Exact output titles/concept match: theorem scope, reproducibility, monitoring, stop-owner, and deployment non-claim. |
 
-The M35/M36 issue is a handoff-resolution gap, not a missing-content claim.
-It causes no false unlock while all relevant packs remain authoring-only, but
-it must be made precise before a learner uses the final dossier.
+The M35/M36 handoff labels were resolved in the checked-in workbooks and are
+covered by the synthesis-receipts regression test. This does not unlock the
+previews: the candidate packs remain authoring-only and are not learner or
+release evidence.
 
-One separate provenance ambiguity remains: the architecture record calls v2
-the sole active graph and v1 a frozen historical fixture, while the older
-M31–M36 readiness-audit script/report still names v1 `canonicalCourseGraph`.
-The portal does not use that fixture, so this is not an active gating defect;
-it could mislead a later release review because v1's M25/M26 lifecycle wording
-is older.
+The older M31–M36 v1 readiness snapshot is explicitly a frozen historical
+fixture. The active route truth remains v2; it must not be used to justify an
+availability or release change.
 
 ## Official-course calibration
 
@@ -71,18 +69,17 @@ volume, team interaction, live-system work, or institutional assessment.
 
 ## Lean improvements
 
-1. **Repair the historical-audit label, not the learner route.** Point the
-   M31–M36 readiness snapshot at v2 or label its v1 input a frozen historical
-   fixture. Keep v2 as the sole active graph; do not add another graph.
-2. **Make the existing Claim Join resolvable.** Refer to existing M35/M36
-   output IDs (or one displayed name derived from them) in M25/M26's current
-   receipt tables, then validate those references with the existing contract
-   machinery—no new registry or studio.
-3. **Reweave only after the gate can be honest.** Once M31–M36 have
-   learner-ready evidence, run one focused M25/M26 revision that fills one
-   real Claim Join and changes a release/defer decision under a changed
-   premise. Recheck the sources above for scope; do not copy their protected
-   course assets or imply equivalence.
+1. **Keep the historical label, not another graph.** The v1 readiness snapshot
+   is now explicitly frozen; retain v2 as the sole active graph.
+2. **Use the resolved Claim Join, not a new registry.** The exact M35/M36
+   receipt labels are now checked against M25/M26. A future synthesis run must
+   consume only the receipts it relies on and retain their assumptions and
+   non-claims.
+3. **Reweave only after the gate can be honest.** Once M31–M36 have reviewed
+   learner evidence, run one focused M25/M26 revision that fills one real Claim
+   Join and changes a release/defer decision under a changed premise. Recheck
+   the sources above for scope; do not copy their protected course assets or
+   imply equivalence.
 
 ## Reuse boundary
 

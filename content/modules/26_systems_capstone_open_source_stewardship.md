@@ -1258,14 +1258,15 @@ the formal oral defense or manufacture missing evidence.
 
 ### Learner-controlled note boundary
 
-After a substantive designated-chat conversation, prepare a small record of
-date, module/topic, claim, architecture trace or whiteboard snapshot,
-prediction, evidence, counterexample, uncertainty, decision, and next action.
-If the configured Notion workflow is available and the learner has not asked
-for off-record handling, the designated chat may save that concise note;
-otherwise provide a copyable summary. Never save raw voice transcripts,
-credentials, sensitive records, or an unverified claim that a live session or
-Notion write occurred.
+The designated chat may create at most one small record of date, module/topic,
+claim, architecture trace or whiteboard snapshot, prediction, evidence,
+counterexample, uncertainty, decision, and next action only when all four
+conditions hold: the learner said `records on` in that exact chat, the
+configured private destination is reachable, the conversation was substantive,
+and neither `pause records` nor `off-record` applies. Otherwise, make no write
+and provide a copyable summary. Never save raw voice transcripts, credentials,
+sensitive records, or an unverified claim that a live session or Notion write
+occurred.
 
 ---
 

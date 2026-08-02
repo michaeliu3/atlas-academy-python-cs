@@ -7,6 +7,16 @@ actually published.
 
 ## Unreleased
 
+- Made the two final synthesis previews operational without weakening their
+  gate: M25 now has a chat-led evidence-synthesis orientation and M26 a
+  pre-capstone architecture rehearsal, each with an honest time boundary and
+  no-credit/no-release outcome. Their embedded Notion guidance now requires
+  `records on` in the exact chat, a reachable configured destination, a
+  substantive session, and no pause/off-record instruction. The M25 source map
+  and calibration review were refreshed against official CMU and Georgia Tech
+  course routes and corrected to reflect the already-resolved M35/M36 receipt
+  names. This preserves M25/M26 preview status and does not create learner
+  evidence, a capstone result, a release, or a mastery claim.
 - Completed the lean chat-led launch layer for the remaining private advanced
   packs, M33–M36: each now has prerequisite repair, confidence-before-reveal,
   provisional pacing, and pasteable bounded reference cards for formal

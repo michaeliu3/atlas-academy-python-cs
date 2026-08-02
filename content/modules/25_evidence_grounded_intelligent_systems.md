@@ -1351,13 +1351,14 @@ and next question. Do not administer the formal oral defense.
 
 ### Learner-controlled note boundary
 
-After a substantive designated-chat session, prepare a compact note with
-module/topic, definitions or trace, prediction, evidence, misconception,
-counterexample, uncertainty, and next action. If the configured Notion
-workflow is available and the learner has not requested off-record handling,
-the designated chat may save that concise note; otherwise offer it for manual
-copy. Never save raw voice transcripts, credentials, private data, or an
-unverified claim that a live session or Notion write occurred.
+The designated chat may create at most one compact note with module/topic,
+definitions or trace, prediction, evidence, misconception, counterexample,
+uncertainty, and next action only when all four conditions hold: the learner
+said `records on` in that exact chat, the configured private destination is
+reachable, the session was substantive, and neither `pause records` nor
+`off-record` applies. Otherwise, make no write and offer the same compact note
+for manual copy. Never save raw voice transcripts, credentials, private data,
+or an unverified claim that a live session or Notion write occurred.
 
 ---
 
