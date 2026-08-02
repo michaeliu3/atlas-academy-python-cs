@@ -318,7 +318,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "d60c4d1fc1d4880283acbe76cc5fcd7ab8e08808d016ae27ec105753aaace1fc"
+      "sha256": "0b9564622764729c12b1fc28520437d1fad746da0f693a1de61ce67f11635209"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -858,7 +858,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "e336b67f93947cdf00f489180b5b9901e9ce47e53f830a69b3da462bbcc141ec"
+      "sha256": "05428ff3b942186721de2918bee276228a5a70075967caf4e9ba41aa36c710ab"
     }
   ]
 }

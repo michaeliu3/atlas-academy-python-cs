@@ -5,7 +5,8 @@
 This is a compact material-level calibration pass for Atlas's mathematics and
 AI arc. It compares named Atlas session artifacts with official university
 course pages, syllabi, notes, lectures, or assignment routes—not merely course
-titles. **Every university link below was accessed on 2026-08-01.**
+titles. The foundation and M27–M36 pass was accessed on **2026-08-01**; the
+design-only extension calibration below was rechecked on **2026-08-02**.
 
 The comparison is about intellectual scope, prerequisite logic, and evidence
 standards. It is not a claim of enrollment, faculty feedback, contact hours,
@@ -58,6 +59,25 @@ Atlas prose, examples, traces, and dossiers.
    relevant lecture/note/assignment route only when it deepens the current
    module; linked material is not copied into Atlas or treated as completion
    evidence.
+
+## Scope Matrix and design-only extension calibration
+
+The learner-facing Scope Matrix maps the attached Levels 1–9 inventory into
+Core targets, scoped exposure, post-Core specialization, and explicit deferral.
+The four routes below are **design-only**: they calibrate a future 90/180-day
+specialization after Core prerequisites and do not schedule, release, or imply
+mastery of additional Atlas modules.
+
+| Post-Core route | Official calibration checked | Bounded evidence boundary |
+| --- | --- | --- |
+| Mathematical, Algorithms & Theory Deepening | MIT [6.854 Advanced Algorithms](https://ocw.mit.edu/courses/6-854j-advanced-algorithms-fall-2005/), MIT [6.045J](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/), and Georgia Tech [CS 6515](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) | One proof/algorithm/numerical-claim dossier with assumptions, counterexample, and oral defense; not a mathematics or theory degree sequence. |
+| Deep Learning & ML Systems | MIT [6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/), Stanford [CS329S](https://web.stanford.edu/class/cs329s/), and Georgia Tech [CS 7643](https://omscs.gatech.edu/cs-7643-deep-learning) | One reproducible bounded training/inference dossier; no inferred GPU, distributed-training, or production-reliability capability. |
+| Probabilistic Modeling, Sequential Decision-Making & RL | CMU [10-708 Probabilistic Graphical Models](https://www.cs.cmu.edu/~pradeepr/708/), UC Berkeley [CS 285 Deep RL](https://rail.eecs.berkeley.edu/deeprlcourse/index.html), and UC Berkeley [CS 188 MDP route](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | One bounded inference or decision-model dossier with uncertainty and reward assumptions; not a general policy, control, or safe-RL guarantee. |
+| Foundation Models, Generative AI & NLP | MIT [6.S087 Foundation Models and Generative AI](https://ocw.mit.edu/courses/6-s087-foundation-models-and-generative-ai-january-iap-2024/), Stanford [CS224N](https://web.stanford.edu/class/cs224n/), and MIT [6.7960](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/) | One language/model evaluation dossier with provenance, metric, red team, and human override; not LLM-training, alignment, security, or NLP-specialist evidence. |
+
+The book and resource lists in the Levels 1–9 inventory remain reference
+families for selecting a targeted repair. They are not copied coursework or a
+claim that reading a listed text establishes coverage.
 
 ## Honest conclusion
 

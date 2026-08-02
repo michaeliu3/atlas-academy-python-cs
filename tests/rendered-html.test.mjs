@@ -598,6 +598,19 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
     html,
     /href="\/modules\/30-probability-statistics-scientific-inference"/,
   );
+  assert.match(readable, /Scope Matrix: intended depth and current delivery/);
+  assert.match(
+    readable,
+    /A topic can be a Core target and still be authoring-only today\./,
+  );
+  assert.match(readable, /Level 1 · Mathematical foundations/);
+  assert.match(readable, /Level 9 · Deep specialization/);
+  assert.match(readable, /Post-core extension routes \(design only\)/);
+  assert.match(readable, /Authoring-only — no learner reader route/);
+  assert.match(readable, /Mathematical, Algorithms &amp; Theory Deepening/);
+  assert.match(readable, /MIT 6\.854 Advanced Algorithms/);
+  assert.match(readable, /Stanford CS224N NLP with Deep Learning/);
+  assert.doesNotMatch(html, /href="\/modules\/31-/);
 });
 
 test("keeps availability status and route linkability aligned with the generated manifest", async () => {

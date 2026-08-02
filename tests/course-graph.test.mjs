@@ -105,6 +105,54 @@ test("the graph refuses access states that would turn a preview or authoring nod
   );
 });
 
+test("the canonical Scope Matrix maps every calibration level without turning a planned target into access", async () => {
+  const graph = await loadCourseGraph();
+  const matrix = graph.scopeMatrix;
+  const levels = [...new Set(matrix.topics.map(({ level }) => level))].sort((left, right) => left - right);
+  const scopes = new Set(matrix.topics.map(({ scope }) => scope));
+  const foundationModels = matrix.topics.find(({ id }) => id === "l8.fm.representations-transformers");
+  const optimization = matrix.topics.find(({ id }) => id === "l1.optimization.formulation-convexity");
+
+  assert.equal(matrix.schemaVersion, 1);
+  assert.equal(matrix.topics.length, 63);
+  assert.deepEqual(levels, [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  assert.deepEqual(
+    [...scopes].sort(),
+    ["core-mastery", "explicitly-deferred", "post-core-specialization", "scoped-exposure"],
+  );
+  assert.equal(matrix.extensionTracks.length, 4);
+  assert.ok(matrix.extensionTracks.every(({ status }) => status === "design-only"));
+  assert.deepEqual(foundationModels?.trackId, "foundation-models-nlp");
+  assert.equal(optimization?.scope, "core-mastery");
+  assert.ok(
+    optimization?.anchors.some(({ moduleId }) => moduleId === "m31"),
+    "the target remains anchored to M31 rather than silently claiming open delivery",
+  );
+  assert.equal(
+    graph.modules.find(({ id }) => id === "m31")?.state.readerAccess,
+    "hidden",
+    "the matrix must not change the authoring-only reader boundary",
+  );
+});
+
+test("the graph rejects Scope Matrix gaps and fabricated post-core routes", async () => {
+  const graph = await loadCourseGraph();
+
+  const missingTrack = structuredClone(graph);
+  missingTrack.scopeMatrix.topics.find(({ id }) => id === "l8.fm.representations-transformers").trackId = null;
+  assert.throws(
+    () => validateCourseGraph(missingTrack),
+    /post-core scopeMatrix topic l8\.fm\.representations-transformers needs a declared extension track/u,
+  );
+
+  const impossibleSession = structuredClone(graph);
+  impossibleSession.scopeMatrix.topics.find(({ id }) => id === "l1.proofs.logic-relations").anchors[0].sessions = [7];
+  assert.throws(
+    () => validateCourseGraph(impossibleSession),
+    /scopeMatrix topic l1\.proofs\.logic-relations anchor m04 sessions must be 1 through 6/u,
+  );
+});
+
 test("only a verified published module may carry a recorded canonical release state", async () => {
   const graph = await loadCourseGraph();
   for (const releaseState of ["candidate-recorded", "deployed-recorded"]) {

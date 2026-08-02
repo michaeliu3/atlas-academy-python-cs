@@ -22,6 +22,59 @@ export type CourseReleaseState =
   | "candidate-recorded"
   | "deployed-recorded";
 export type CourseRouteRole = "required" | "optional";
+export type ScopeMatrixState =
+  | "core-mastery"
+  | "scoped-exposure"
+  | "post-core-specialization"
+  | "explicitly-deferred";
+export type ScopeMatrixCapability =
+  | "recognize"
+  | "read"
+  | "derive"
+  | "debug"
+  | "design"
+  | "implement";
+
+export type ScopeMatrixAnchor = {
+  moduleId: string;
+  sessions: number[];
+};
+
+export type ScopeMatrixTopic = {
+  id: string;
+  level: number;
+  label: string;
+  scope: ScopeMatrixState;
+  targetCapabilities: ScopeMatrixCapability[];
+  anchors: ScopeMatrixAnchor[];
+  sourceModuleIds: string[];
+  evidenceArtifact: string;
+  trackId: string | null;
+};
+
+export type ScopeMatrixExtensionTrack = {
+  id: string;
+  title: string;
+  status: "design-only";
+  prerequisiteModuleIds: string[];
+  calibrationUrls: string[];
+  project: string;
+  oralDefense: string;
+  nonClaim: string;
+};
+
+export type CourseScopeMatrix = {
+  schemaVersion: 1;
+  benchmark: {
+    id: string;
+    title: string;
+    accessedOn: string;
+  };
+  scopeStates: ScopeMatrixState[];
+  capabilities: ScopeMatrixCapability[];
+  topics: ScopeMatrixTopic[];
+  extensionTracks: ScopeMatrixExtensionTrack[];
+};
 
 export type CourseModuleState = {
   lifecycle: CourseLifecycle;
@@ -110,11 +163,13 @@ type CourseGraph = {
   contractStates: CourseContractState[];
   releaseStates: CourseReleaseState[];
   knowledgeArcs: KnowledgeArc[];
+  scopeMatrix: CourseScopeMatrix;
   routePlans: CourseRoutePlan[];
   modules: CourseGraphModule[];
 };
 
 export const courseCatalog = courseGraphData as CourseGraph;
+export const courseScopeMatrix = courseCatalog.scopeMatrix;
 
 const primaryRoutePlan = courseCatalog.routePlans.find(
   ({ id }) => id === "atlas-core-60",

@@ -9,6 +9,7 @@ import {
 import type { CourseModuleState } from "@/lib/course-catalog";
 import { moduleHref, moduleManifest } from "@/lib/module-catalog";
 import { CourseReaderHeader } from "../modules/CourseReaderHeader";
+import { ScopeMatrix } from "./ScopeMatrix";
 import styles from "./route.module.css";
 
 export const metadata: Metadata = {
@@ -293,6 +294,8 @@ export default function AtlasCoreRoutePage() {
             </section>
           ))}
         </div>
+
+        <ScopeMatrix />
 
         <section className={styles.continuation} aria-labelledby="continuation-title">
           <p className="kicker">After day 60</p>

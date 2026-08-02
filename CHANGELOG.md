@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Added the graph-derived, learner-facing **Levels 1–9 Scope Matrix** to the
+  existing 60-day route. Its 63 topic groups now separate intended target
+  depth, current delivery state, session/source route, learner evidence, and
+  four official-source-calibrated **design-only** post-Core tracks. Hidden
+  M31–M36 anchors, M25/M26 previews, and intentionally deferred depth remain
+  visibly non-complete; this does not promote any module, add a portal route,
+  create a specialization, grant credit, or claim mastery.
 - Made the two final synthesis previews operational without weakening their
   gate: M25 now has a chat-led evidence-synthesis orientation and M26 a
   pre-capstone architecture rehearsal, each with an honest time boundary and

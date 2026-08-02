@@ -30,6 +30,20 @@ const expectedReleaseStates = new Set([
   "deployed-recorded",
 ]);
 const expectedRouteRoles = new Set(["required", "optional"]);
+const expectedScopeStates = new Set([
+  "core-mastery",
+  "scoped-exposure",
+  "post-core-specialization",
+  "explicitly-deferred",
+]);
+const expectedScopeCapabilities = new Set([
+  "recognize",
+  "read",
+  "derive",
+  "debug",
+  "design",
+  "implement",
+]);
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);
@@ -210,6 +224,190 @@ function validateModuleState(courseModule) {
   }
 }
 
+function validateScopeMatrix(scopeMatrix, moduleById) {
+  assertExactKeys(
+    scopeMatrix,
+    ["schemaVersion", "benchmark", "scopeStates", "capabilities", "topics", "extensionTracks"],
+    "scopeMatrix",
+  );
+  if (scopeMatrix.schemaVersion !== 1) {
+    fail("scopeMatrix schemaVersion must be 1.");
+  }
+  assertExactKeys(scopeMatrix.benchmark, ["id", "title", "accessedOn"], "scopeMatrix benchmark");
+  assertString(scopeMatrix.benchmark.id, "scopeMatrix benchmark id");
+  assertString(scopeMatrix.benchmark.title, "scopeMatrix benchmark title");
+  if (!/^\d{4}-\d{2}-\d{2}$/u.test(scopeMatrix.benchmark.accessedOn)) {
+    fail("scopeMatrix benchmark accessedOn must use YYYY-MM-DD.");
+  }
+  assertDeclaredStates(scopeMatrix.scopeStates, expectedScopeStates, "scopeMatrix scopeStates");
+  assertDeclaredStates(scopeMatrix.capabilities, expectedScopeCapabilities, "scopeMatrix capabilities");
+  if (!Array.isArray(scopeMatrix.extensionTracks) || scopeMatrix.extensionTracks.length === 0) {
+    fail("scopeMatrix must define design-only extension tracks.");
+  }
+
+  const trackIds = new Set();
+  for (const track of scopeMatrix.extensionTracks) {
+    assertExactKeys(
+      track,
+      [
+        "id",
+        "title",
+        "status",
+        "prerequisiteModuleIds",
+        "calibrationUrls",
+        "project",
+        "oralDefense",
+        "nonClaim",
+      ],
+      "scopeMatrix extension track",
+    );
+    assertString(track.id, "scopeMatrix extension track id");
+    if (trackIds.has(track.id)) {
+      fail(`scopeMatrix extension track ${track.id} is duplicated.`);
+    }
+    trackIds.add(track.id);
+    assertString(track.title, `scopeMatrix extension track ${track.id} title`);
+    if (track.status !== "design-only") {
+      fail(`scopeMatrix extension track ${track.id} must remain design-only.`);
+    }
+    if (!Array.isArray(track.prerequisiteModuleIds) || track.prerequisiteModuleIds.length === 0) {
+      fail(`scopeMatrix extension track ${track.id} needs prerequisiteModuleIds.`);
+    }
+    if (new Set(track.prerequisiteModuleIds).size !== track.prerequisiteModuleIds.length) {
+      fail(`scopeMatrix extension track ${track.id} repeats a prerequisite module.`);
+    }
+    for (const moduleId of track.prerequisiteModuleIds) {
+      if (!moduleById.has(moduleId)) {
+        fail(`scopeMatrix extension track ${track.id} references missing module ${moduleId}.`);
+      }
+    }
+    if (!Array.isArray(track.calibrationUrls) || track.calibrationUrls.length < 2) {
+      fail(`scopeMatrix extension track ${track.id} needs at least two official calibration URLs.`);
+    }
+    for (const calibrationUrl of track.calibrationUrls) {
+      try {
+        const parsed = new URL(calibrationUrl);
+        if (parsed.protocol !== "https:") {
+          fail(`scopeMatrix extension track ${track.id} calibration URLs must use HTTPS.`);
+        }
+      } catch {
+        fail(`scopeMatrix extension track ${track.id} has an invalid calibration URL.`);
+      }
+    }
+    for (const [field, value] of Object.entries({
+      project: track.project,
+      oralDefense: track.oralDefense,
+      nonClaim: track.nonClaim,
+    })) {
+      assertString(value, `scopeMatrix extension track ${track.id} ${field}`);
+    }
+  }
+
+  if (!Array.isArray(scopeMatrix.topics) || scopeMatrix.topics.length === 0) {
+    fail("scopeMatrix must map benchmark topics.");
+  }
+  const topicIds = new Set();
+  const levels = new Set();
+  const scopes = new Set();
+  for (const topic of scopeMatrix.topics) {
+    assertExactKeys(
+      topic,
+      [
+        "id",
+        "level",
+        "label",
+        "scope",
+        "targetCapabilities",
+        "anchors",
+        "sourceModuleIds",
+        "evidenceArtifact",
+        "trackId",
+      ],
+      "scopeMatrix topic",
+    );
+    assertString(topic.id, "scopeMatrix topic id");
+    if (topicIds.has(topic.id)) {
+      fail(`scopeMatrix topic ${topic.id} is duplicated.`);
+    }
+    topicIds.add(topic.id);
+    if (!Number.isInteger(topic.level) || topic.level < 1 || topic.level > 9) {
+      fail(`scopeMatrix topic ${topic.id} level must be an integer from 1 through 9.`);
+    }
+    levels.add(topic.level);
+    assertString(topic.label, `scopeMatrix topic ${topic.id} label`);
+    if (!expectedScopeStates.has(topic.scope)) {
+      fail(`scopeMatrix topic ${topic.id} has an invalid scope state.`);
+    }
+    scopes.add(topic.scope);
+    if (!Array.isArray(topic.targetCapabilities) || topic.targetCapabilities.length === 0) {
+      fail(`scopeMatrix topic ${topic.id} needs target capabilities.`);
+    }
+    if (new Set(topic.targetCapabilities).size !== topic.targetCapabilities.length) {
+      fail(`scopeMatrix topic ${topic.id} repeats a target capability.`);
+    }
+    for (const capability of topic.targetCapabilities) {
+      if (!expectedScopeCapabilities.has(capability)) {
+        fail(`scopeMatrix topic ${topic.id} has an invalid target capability.`);
+      }
+    }
+    if (!Array.isArray(topic.anchors) || topic.anchors.length === 0) {
+      fail(`scopeMatrix topic ${topic.id} needs at least one module/session anchor.`);
+    }
+    const anchorKeys = new Set();
+    for (const anchor of topic.anchors) {
+      assertExactKeys(anchor, ["moduleId", "sessions"], `scopeMatrix topic ${topic.id} anchor`);
+      if (!moduleById.has(anchor.moduleId)) {
+        fail(`scopeMatrix topic ${topic.id} anchor references missing module ${anchor.moduleId}.`);
+      }
+      if (!Array.isArray(anchor.sessions) || anchor.sessions.length === 0) {
+        fail(`scopeMatrix topic ${topic.id} anchor ${anchor.moduleId} needs sessions.`);
+      }
+      if (new Set(anchor.sessions).size !== anchor.sessions.length) {
+        fail(`scopeMatrix topic ${topic.id} anchor ${anchor.moduleId} repeats a session.`);
+      }
+      for (const session of anchor.sessions) {
+        if (!Number.isInteger(session) || session < 1 || session > 6) {
+          fail(`scopeMatrix topic ${topic.id} anchor ${anchor.moduleId} sessions must be 1 through 6.`);
+        }
+      }
+      const anchorKey = `${anchor.moduleId}:${anchor.sessions.join(",")}`;
+      if (anchorKeys.has(anchorKey)) {
+        fail(`scopeMatrix topic ${topic.id} repeats an anchor.`);
+      }
+      anchorKeys.add(anchorKey);
+    }
+    if (!Array.isArray(topic.sourceModuleIds) || topic.sourceModuleIds.length === 0) {
+      fail(`scopeMatrix topic ${topic.id} needs source module routes.`);
+    }
+    if (new Set(topic.sourceModuleIds).size !== topic.sourceModuleIds.length) {
+      fail(`scopeMatrix topic ${topic.id} repeats a source module route.`);
+    }
+    for (const moduleId of topic.sourceModuleIds) {
+      if (!moduleById.has(moduleId)) {
+        fail(`scopeMatrix topic ${topic.id} source route references missing module ${moduleId}.`);
+      }
+    }
+    assertString(topic.evidenceArtifact, `scopeMatrix topic ${topic.id} evidence artifact`);
+    if (topic.scope === "post-core-specialization") {
+      if (typeof topic.trackId !== "string" || !trackIds.has(topic.trackId)) {
+        fail(`post-core scopeMatrix topic ${topic.id} needs a declared extension track.`);
+      }
+    } else if (topic.trackId !== null) {
+      fail(`non-specialization scopeMatrix topic ${topic.id} must use a null trackId.`);
+    }
+  }
+  for (let level = 1; level <= 9; level += 1) {
+    if (!levels.has(level)) {
+      fail(`scopeMatrix must map Level ${level}.`);
+    }
+  }
+  for (const scope of expectedScopeStates) {
+    if (!scopes.has(scope)) {
+      fail(`scopeMatrix must use ${scope} at least once.`);
+    }
+  }
+}
+
 export function resolveLearnerAccess(courseModule) {
   if (!courseModule?.state) {
     fail("learner-access projection needs a module state.");
@@ -331,6 +529,8 @@ export function validateCourseGraph(graph) {
       fail(`Module ${courseModule.number} references a missing forward module.`);
     }
   }
+
+  validateScopeMatrix(graph.scopeMatrix, moduleById);
 
   const routePlan = routePlanFor(graph);
   if (!Number.isInteger(routePlan.days) || routePlan.days < 1) {
