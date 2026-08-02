@@ -2,7 +2,7 @@
 
 > **Central idea:** crossing a boundary turns implicit process state into an explicit artifact; that artifact deserves a representation, schema, compatibility policy, trust model, failure model, and evidence record.
 
-> **Mastery claim:** “I can trace an Atlas event from a Python value to schema values, Unicode text, UTF-8 bytes, a safely replaced file, a built wheel, and an installed CLI; I can say which layer owns every promise, inspect rather than trust generated artifacts, migrate old data deliberately, review a release patch, and bound every portability, atomicity, reproducibility, and supply-chain claim.”
+> **Learning aim:** “I can trace an Atlas event from a Python value to schema values, Unicode text, UTF-8 bytes, a safely replaced file, a built wheel, and an installed CLI; I can say which layer owns every promise, inspect rather than trust generated artifacts, migrate old data deliberately, review a release patch, and bound every portability, atomicity, reproducibility, and supply-chain claim.”
 
 Module 14 leaves Atlas changeable inside one checkout: `PlannerService` depends on the distinct `BatchEventLoader` and the Module 12 v1 `RankingPolicy`; `LegacyPlanFacade` preserves old output; `build_legacy_compatible_app()` owns concrete assembly; and Module 13 evidence protects the raw importer contract. No persistence repository exists yet. A new pressure now appears:
 
@@ -256,7 +256,7 @@ If four or more answers are weak, pause for targeted repair. The new module shou
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -2964,9 +2964,9 @@ No. Code artifact rollback would restore an old binary that cannot interpret cur
 - code/data rollback rehearsal;
 - Arc III handoff stating why a relational transaction boundary is next.
 
-**Mastery gate**
+**Evidence to inspect before choosing a next step**
 
-Advance only if Michael can:
+Use the following evidence to choose a next bridge or repair. Look for whether Michael can:
 
 - traverse value → schema → bytes → file → CLI → wheel → installed environment without collapsing layers;
 - explain the strongest evidence and remaining uncertainty at each transition;
@@ -3593,11 +3593,11 @@ Select four:
 9. Decide whether a CLI wording change is patch/minor/major under the documented contract.
 10. Handle an old-wheel/new-schema rollback incident.
 
-### 21.6 Instructor decision rule
+### 21.6 Constructive next-step guide
 
-Module 15 is mastered when Michael can receive an unfamiliar serialized artifact and Python distribution, recover the representation/compatibility/trust/failure model, inspect the built artifact, direct and review a bounded change, verify it in a clean environment, and defend the release/rollback limits.
-
-Do not advance because:
+Use the representation, compatibility, trust, failure, clean-environment, and
+rollback evidence to choose a next bridge or repair—not to decide whether
+Michael passes. Do not treat these signals as a reason to skip repair:
 
 - the reference tests passed;
 - the JSON is readable;
@@ -3606,7 +3606,19 @@ Do not advance because:
 - the command ran once;
 - the agent said the release is reproducible.
 
-Advance when each claim has the right owner, artifact, evidence, cost, and explicit boundary.
+If each claim has the right owner, artifact, evidence, cost, and explicit
+boundary while Michael can recover an unfamiliar serialized artifact and Python
+distribution, inspect the built artifact, direct and review a bounded change,
+verify it in a clean environment, and defend the release/rollback limits,
+continue with the M16 handoff.
+
+Otherwise, repair the first collapsed boundary: trace one value from domain
+meaning through bytes and installation, create a version/corruption
+counterexample, inspect the built artifact in a fresh environment, or rehearse
+the code-and-data rollback decision with its explicit recovery limit. Keep the
+release-policy gates above intact while making the missing evidence visible.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ---
 

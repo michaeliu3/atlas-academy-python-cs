@@ -291,7 +291,7 @@ Stop at these boundaries:
 A process may contain threads; Windows schedules threads. That boundary fact is
 M18. Reasoning about their interleavings is M19.
 
-### 1.7 Mastery outcomes
+### 1.7 Learning outcomes
 
 At exit, Michael can:
 
@@ -3013,8 +3013,7 @@ escalation state machine represent a missing distinct hard-kill rung?
 | correct with low confidence | one plain-language explanation plus changed-surface transfer |
 | correct with high confidence | one “does not establish” sentence |
 
-Mastery is the corrected model transferring to a new case. It is not an 8/8
-memorized score.
+A corrected model transfers to a new case. It is not an 8/8 memorized score.
 
 ---
 
@@ -3458,7 +3457,7 @@ inferred from exit alone.
 Checkoff: forced termination is not graceful, recovery is artifact-driven, and
 claims remain version/platform scoped.
 
-### 13.18 Mastery gate
+### 13.18 Constructive next-step guide
 
 | Capability | Required evidence | Not enough |
 |---|---|---|
@@ -3478,7 +3477,8 @@ claims remain version/platform scoped.
 | communicate uncertainty | five labeled sentences and unknowns | “works locally” |
 | transfer | correct M19/M20/M21/M24 routing | “later topic” |
 
-Ready only when:
+Use the evidence above to choose a next bridge or repair—not to decide whether
+Michael passes. Check which of these claims has usable evidence:
 
 1. project acceptance invariants hold;
 2. S0–S9 have raw evidence or explicit safe capability-based skips;
@@ -3492,15 +3492,23 @@ Ready only when:
 
 Routing:
 
-| Result | Action |
+| Evidence pattern | Next bridge or repair |
 |---|---|
-| ready | proceed to M19 with the dossier |
-| concept ready, evidence weak | repeat only failure scenarios/defense |
-| process model weak | TA Studio A |
-| memory/file model weak | TA Studio B |
-| shutdown/platform model weak | TA Studio C |
-| repeated owner collapse | M17 evidence bridge |
-| publication collapse | M15 crash/publication bridge |
+| the project evidence and boundaries are coherent | continue with the M19 handoff and carry the dossier |
+| concept model is coherent but evidence is weak | repeat only the failure scenarios or defense |
+| process model is weak | TA Studio A |
+| memory/file model is weak | TA Studio B |
+| shutdown/platform model is weak | TA Studio C |
+| ownership repeatedly collapses | M17 evidence bridge |
+| publication reasoning collapses | M15 crash/publication bridge |
+
+Otherwise, start with the first missing state transition: rebuild the
+resource-owner timeline, classify one interruption without inferring a commit,
+or inspect the artifact table before choosing a recovery claim. Preserve an
+explicit platform limitation rather than inventing a guarantee, then bring the
+revised trace to the Teaching Assistant or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ### 13.19 Evidence packet and operating memo
 

@@ -129,7 +129,7 @@ Turn the ambiguous importer into:
 
 ### Capabilities unlocked
 
-After mastery, Michael can:
+By the end, Michael can practice:
 
 - strengthen an ambiguous API into a precise, declarative contract;
 - compare stronger/weaker specifications by pre- and postconditions;
@@ -205,7 +205,7 @@ If five examples pass, what universal statement has been proved?
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -1745,7 +1745,7 @@ accepted or transformed the invalid value.
 
 </details>
 
-**TA gate:** return to Module 3 if the learner writes only examples or signatures.
+**TA repair path:** return to Module 3 if the learner writes only examples or signatures.
 
 ## Session 2 — Partition claims into finite evidence
 
@@ -1772,7 +1772,7 @@ test layer, oracle, observed result, and remaining blind spot. Carry it into
 Session 3 so provider substitution is evaluated against declared claims rather
 than test count or coverage alone.
 
-**TA gate:** if cases are selected from code branches alone, return to the specification.
+**TA repair path:** if cases are selected from code branches alone, return to the specification.
 
 ## Session 3 — Provider substitution, fixtures, and controlled doubles
 
@@ -1799,7 +1799,7 @@ behavior that stays real at each seam, and why each fake, stub, spy, or mock is
 appropriate. Carry this rationale into Session 4 when deciding whether an
 observation can discriminate a causal hypothesis.
 
-**TA gate:** reject mocks that replace the behavior the test claims to verify.
+**TA repair path:** replace mocks that stand in for the behavior the test claims to verify.
 
 ## Session 4 — From traceback to causal mechanism
 
@@ -1827,7 +1827,7 @@ hypotheses, discriminating observation, earliest violated invariant, justified
 repair boundary, and regression assertion. Carry its missing-observation note
 into Session 5 instead of treating the traceback as a causal verdict.
 
-**TA gate:** no fix until a reliable reproduction or an explicit production-observation plan exists.
+**TA repair path:** establish a reliable reproduction or an explicit production-observation plan before proposing a fix.
 
 ## Session 5 — Observable without surveillance or noise
 
@@ -1855,7 +1855,7 @@ sensitivity, retention, and a nonclaim. Add the hidden input controlled for
 each flaky test. Carry this sheet into Session 6 so an agent patch cannot
 substitute noisy telemetry or retries for evidence.
 
-**TA gate:** “log everything” triggers a field-by-field purpose and retention review.
+**TA repair path:** when “log everything” appears, do a field-by-field purpose and retention review.
 
 ## Session 6 — Agent-directed Atlas evidence defense
 
@@ -1883,7 +1883,7 @@ unexpected-error behavior, unrequested changes, and residual uncertainty.
 This memo is the forward handoff to Module 14's reviewable change process, not
 a release or learner-mastery record.
 
-**TA gate:** green tests without contract, privacy, failure, and scope review are insufficient.
+**TA repair path:** add contract, privacy, failure, and scope review when green tests stand alone.
 
 ---
 
@@ -2320,7 +2320,8 @@ Produce:
 
 ### Mastery evidence
 
-Advance only when Michael can take an unfamiliar production-like failure and:
+Use an unfamiliar production-like failure to choose a next bridge or repair.
+Look for whether Michael can:
 
 - recover or strengthen the boundary specification;
 - choose tests by supported claim;
@@ -2556,8 +2557,22 @@ External material supplies concepts and normative references. All Atlas examples
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance when Michael can receive an ambiguous boundary and a production-like failure, write the behavioral contract, select layered finite evidence, build or specify a reliable reproduction, localize the first violated invariant with a falsifiable experiment, design safe correlated observations, preserve the cause as regression learning, and independently accept or reject an agent patch.
+Use the behavioral contract, selected finite evidence, reproduction or
+observation plan, causal experiment, safe signal design, regression record,
+and patch review to choose a next bridge or repair—not to decide whether
+Michael passes. If Michael can receive an ambiguous boundary and a
+production-like failure, write the behavioral contract, select layered finite
+evidence, build or specify a reliable reproduction, localize the first violated
+invariant with a falsifiable experiment, design safe correlated observations,
+preserve the cause as regression learning, and independently accept or reject
+an agent patch, continue with the M14 handoff.
 
-Do not advance on test count, coverage percentage, log volume, debugger fluency, or a green agent summary alone.
+Otherwise, repair the first missing link: rewrite the unsupported claim as a
+contract clause, partition the input space, freeze the smallest reproduction,
+or choose one discriminating observation before changing code. A test count,
+coverage percentage, log volume, debugger fluency, or green agent summary does
+not replace that repair.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.

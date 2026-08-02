@@ -2,7 +2,7 @@
 
 > **Central idea:** a component boundary is a controlled promise about what may be known, called, and changed; Python modules and type annotations help express that boundary, but architecture determines whether it remains changeable.
 
-> **Mastery claim:** “I can recover a Python component graph from imports and calls, distinguish runtime loading from static typing, define a small public API, direct volatile implementations toward stable contracts, diagnose a real import cycle, and evolve a typed plugin boundary without trusting annotations or discovery metadata as behavioral proof.”
+> **Learning aim:** “I can recover a Python component graph from imports and calls, distinguish runtime loading from static typing, define a small public API, direct volatile implementations toward stable contracts, diagnose a real import cycle, and evolve a typed plugin boundary without trusting annotations or discovery metadata as behavioral proof.”
 
 Arc II taught Atlas to choose representations and algorithms from client operations. Atlas can now ingest, index, schedule, and plan. A new pressure appears: **different parts must change for different reasons**.
 
@@ -232,7 +232,7 @@ What is stronger evidence for an importer: “a checker accepts the class” or 
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -3486,21 +3486,20 @@ Submit one coherent packet:
 
 ### 24.3 Rubric
 
-| Dimension | Weight | Production evidence |
-|---|---:|---|
-| First-principles model | 15 | Explains import state, API observations, type relations, and graph direction without slogans |
-| Dependency architecture | 20 | Inward stable dependencies, explicit composition root, no incidental loading |
-| Contract quality | 15 | Surface plus behavioral laws, failure/ordering/mutation/side-effect policy |
-| Static type reasoning | 10 | Sound narrowing and variance explanations; bounded checker claims |
-| Runtime correctness | 15 | Domain/output validation and adversarial contract tests |
-| Debugging and review | 10 | Reproduces root causes, reviews generated patches with evidence |
-| Compatibility and trust | 10 | Version/evolution strategy and honest in-process trust boundary |
-| Communication and transfer | 5 | Clear defense and valid application to a new domain |
+| Dimension | Evidence focus | Production evidence |
+|---|---|---|
+| First-principles model | core | Explains import state, API observations, type relations, and graph direction without slogans |
+| Dependency architecture | core | Inward stable dependencies, explicit composition root, no incidental loading |
+| Contract quality | core | Surface plus behavioral laws, failure/ordering/mutation/side-effect policy |
+| Static type reasoning | supporting | Sound narrowing and variance explanations; bounded checker claims |
+| Runtime correctness | core | Domain/output validation and adversarial contract tests |
+| Debugging and review | core | Reproduces root causes, reviews generated patches with evidence |
+| Compatibility and trust | core | Version/evolution strategy and honest in-process trust boundary |
+| Communication and transfer | transfer | Clear defense and valid application to a new domain |
 
-**Readiness threshold:** at least 80/100 overall, and at least half credit in every
-dimension. A high total cannot compensate for a reversed dependency graph,
-unvalidated external output, or an unsafe claim that in-process plugins are
-sandboxed.
+Use this map to choose the first repair to make visible. No aggregate total
+erases a reversed dependency graph, unvalidated external output, or an unsafe
+claim that in-process plugins are sandboxed.
 
 ### 24.4 Oral defense
 
@@ -3521,14 +3520,20 @@ The instructor may perturb one assumption—for example, two importers claim the
 same source, a ranker returns `nan`, or an old import path disappears. The learner
 must trace the consequence and propose evidence, not guess a patch.
 
-### 24.5 Instructor decision rule
+### 24.5 Constructive next-step guide
 
-- **Ready:** predicts behavior, explains causes, independently reviews code, and
-  states evidence limits.
-- **Ready with repair:** implementation works but one conceptual dependency needs
-  targeted retrieval and re-defense.
-- **Not yet:** relies on tool authority, cannot trace initialization, treats
-  annotations as validation, or cannot distinguish port from implementation.
+Use the import trace, API law, dependency arrow, adversarial contract evidence,
+and evidence limit to choose a next bridge or repair—not to decide whether
+Michael passes. If Michael predicts behavior, explains causes, independently
+reviews code, and states evidence limits, continue with the M13 handoff.
+
+Otherwise, repair the named weak point: trace initialization from one import
+when loading is opaque, redraw the client-owned port and dependency arrow when
+ownership reverses, or write one runtime validation and adversarial test when
+annotations are being treated as behavior. Rehearse that repaired explanation
+before asking the Teaching Assistant to change a premise.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ---
 

@@ -245,7 +245,7 @@ This statement contains several owners:
 | failed attempt exposes no new committed rows | transaction implementation | injected failure and second-connection observation |
 | survives a named crash | engine + storage configuration + operations | documented guarantee and disposable crash/restore rehearsal |
 
-### 1.5 Mastery outcomes
+### 1.5 Learning outcomes
 
 At exit, Michael can:
 
@@ -3897,7 +3897,7 @@ Required regression evidence:
 End TA work with: collapsed distinction in plain language, smallest verified
 correction, regression/counterexample, ownership statement, retrieval date.
 
-### 11.7 Mastery gate
+### 11.7 Constructive next-step guide
 
 | Capability | Required evidence | Insufficient substitute |
 |---|---|---|
@@ -3912,10 +3912,19 @@ correction, regression/counterexample, ownership statement, retrieval date.
 | recovery | layered claim + restore evidence | WAL enabled |
 | agent stewardship | bounded brief + diff review + verification | agent summary |
 
-Advance only if Michael can reconstruct the entire boundary from unfamiliar
+Use the evidence table to choose a next bridge or repair—not to decide whether
+Michael passes. If Michael can reconstruct the entire boundary from unfamiliar
 code, prove all-or-nothing visibility, interpret a plan without universalizing
 it, defend uncertain-outcome reconciliation, preserve the prior public
-contracts, and state where the local model ends.
+contracts, and state where the local model ends, continue with the M17 handoff.
+
+Otherwise, repair the first named boundary: return to the FD/key worksheet for
+a modeling collapse, draw a two-connection schedule for an isolation claim,
+re-run the restore/reconciliation path for a recovery claim, or record the
+engine/configuration evidence before treating a plan as transferable. Bring the
+smallest revised trace to the Teaching Assistant or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ### 11.8 Evidence packet
 

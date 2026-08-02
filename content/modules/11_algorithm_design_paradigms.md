@@ -119,7 +119,7 @@ Module 11 does not discard the earlier structures. An exact planner coordinates:
 
 ### Capabilities unlocked
 
-After mastery, Michael can:
+By the end, Michael can practice:
 
 - formulate a candidate space, feasibility predicate, objective, and tie policy;
 - use exhaustive search as a specification oracle rather than dismissing it as “slow”;
@@ -192,7 +192,7 @@ A recurrence calls `OPT(i - 1, b)` and `OPT(i - 1, b - wᵢ)`. What must be defi
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -2093,7 +2093,7 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 **Evidence:** an inspected diff, regression record, quality report, and unresolved decision ledger.
 
-**TA check:** mastery means Michael owns the claim and counterexample even if the agent wrote every production line.
+**TA check:** ownership means Michael owns the claim and counterexample even if the agent wrote every production line.
 
 ---
 
@@ -2432,11 +2432,11 @@ D. Rewrite it manually so authorship is known.
 
 | Pattern | Instructional response |
 |---|---|
-| 7–8 correct with calibrated confidence and sound distractor rejection | proceed to Atlas strategy defense |
+| 7–8 correct with calibrated confidence and sound distractor rejection | rehearse the Atlas strategy defense and preserve one uncertainty |
 | 5–6 correct | repair the named state/proof/bound misconception, then solve one unseen contrast |
-| 0–4 correct | repeat formulation, exhaustive oracle, and DP-state derivation before agent work |
+| 0–4 correct | return to formulation, the exhaustive oracle, and DP-state derivation before the next agent review |
 | any confidence-4 error | construct a minimal counterexample and schedule retrieval |
-| correct choice but weak rationale | treat as recognition, not mastery |
+| correct choice but weak rationale | treat as recognition; write one explanation trace before the defense |
 
 The check routes instruction. It is not a grade.
 
@@ -2556,7 +2556,7 @@ Produce:
 
 ### Mastery evidence
 
-Advance only when Michael can take an unseen optimization patch and:
+Use an unseen optimization patch to choose a next bridge or repair. Look for whether Michael can:
 
 - reconstruct the actual mathematical/product problem it solves;
 - identify a missing constraint or tie policy;
@@ -2569,7 +2569,7 @@ Advance only when Michael can take an unseen optimization patch and:
 - label exactness, probability, approximation, and empirical evidence correctly;
 - direct an agent through a bounded change and defend the accepted result.
 
-MCQ recognition or syntax fluency alone is insufficient.
+MCQ recognition or syntax fluency alone does not choose the next step.
 
 ---
 
@@ -2708,11 +2708,22 @@ External sources verify and extend the integrated narrative; they do not replace
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance to durable-software design when Michael can formulate an unseen optimization problem, select a strategy from a proved structural fact, recover and challenge an implementation, verify a returned plan independently, state cost and quality honestly, and defend both the mathematical boundary and the human decision boundary.
+Use the problem contract, proof or counterexample, independent verification,
+cost/quality statement, and human-decision boundary to choose a next bridge or
+repair—not to decide whether Michael passes. If Michael can formulate an unseen
+optimization problem, select a strategy from a proved structural fact, recover
+and challenge an implementation, verify a returned plan independently, and
+state the mathematical and human decision boundaries honestly, continue with the M12 handoff.
 
-Do not advance because a named algorithm was recognized or an agent produced green tests.
+Otherwise, repair the first missing link: return to the problem contract when
+the model is unclear, the smallest counterexample or proof obligation when a
+strategy is unsupported, the state/recurrence trace when futures were merged,
+or the independent verifier when a result was trusted too quickly. Then repeat
+one changed-premise explanation with the Teaching Assistant or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ## Guided Codex handoff — M11
 

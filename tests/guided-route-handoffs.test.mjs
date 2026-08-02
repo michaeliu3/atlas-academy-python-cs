@@ -36,7 +36,7 @@ test("guided handoff copy preserves the required mathematical bridges", async ()
   );
   assert.match(
     moduleSeventeen,
-    /continue to M28; retain M18 questions for the later systems bridge/u,
+    /continue with the M28 handoff; retain M18 questions for the later systems bridge/u,
   );
 });
 

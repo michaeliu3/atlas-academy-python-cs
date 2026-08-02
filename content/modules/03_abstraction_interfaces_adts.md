@@ -4,7 +4,7 @@
 >
 > **Atlas transformation:** a list owned by application code becomes a replaceable event store with one behavioral contract.
 >
-> **Mastery claim:** “I can recover an abstraction from code, state its laws and representation invariant, change its representation without changing clients, and verify an agent’s implementation against the contract.”
+> **Working capability claim:** “I can recover an abstraction from code, state its laws and representation invariant, change its representation without changing clients, and verify an agent’s implementation against the contract.”
 
 ## How to use this workbook
 
@@ -119,7 +119,7 @@ Answer without notes. A weak answer is not a failure; it identifies the exact br
 
 </details>
 
-### Mastery outcomes
+### Learning outcomes
 
 By the end, Michael can:
 
@@ -2117,7 +2117,7 @@ Return briefly to Module 2 when Michael cannot:
 - use base case plus preservation step;
 - distinguish a concrete example from a quantified law.
 
-The bridge is complete when the missing idea is demonstrated on a new example. Do not restart an entire module.
+Use one new example to demonstrate the repaired idea; do not restart an entire module.
 
 ### 16.6 Misconception log entry
 
@@ -2138,7 +2138,9 @@ Transfer result:
 
 ## 17. Mastery evidence and Atlas milestone
 
-Multiple-choice results inform teaching but cannot prove ownership. Mastery is a portfolio of connected evidence.
+Multiple-choice results inform teaching but cannot prove ownership. Treat this
+portfolio as connected evidence for choosing the next bridge or repair, not as
+a decision about whether Michael passes.
 
 ### Atlas milestone 3 — Replaceable event store
 
@@ -2156,7 +2158,7 @@ Deliver:
 
 ### Mastery rubric
 
-| Dimension | Not yet | Developing | Mastery evidence |
+| Dimension | Current bridge | Developing | Evidence to carry forward |
 |---|---|---|---|
 | Abstract model | names classes/fields as the ADT | separates rep from public methods | states abstract values, laws, and non-guarantees without naming a rep |
 | Contracts | gives happy-path examples | states some pre/postconditions | includes frame conditions, failures, temporal laws, and cost boundaries |
@@ -2168,9 +2170,9 @@ Deliver:
 | Patch review | trusts summary or style | finds obvious bug | reviews contract, rep, flow, failure, tests, and scope with prioritized findings |
 | Connections | recalls nearby terms | gives one analogy | transfers abstraction reasoning to a later CS layer and names the new observation |
 
-### Mastery gate
+### Evidence route
 
-Advance when Michael can, without implementation notes:
+Use the following rigorous criteria, without implementation notes:
 
 - explain the list and chunk implementations as the same ADT;
 - recover AF and RI from an unfamiliar small store;
@@ -2181,7 +2183,9 @@ Advance when Michael can, without implementation notes:
 - explain why `Protocol` is useful but insufficient;
 - defend one representation choice under a stated workload.
 
-The eight diagnostic questions must eventually be answered with explanations, and no high-confidence misconception may remain. A first-attempt percentage alone is neither necessary nor sufficient.
+Revisit the eight diagnostic questions with explanations. A high-confidence
+misconception signals its named repair before using this evidence for the next
+handoff; a first-attempt percentage alone is neither necessary nor sufficient.
 
 ### Oral-defense prompts
 
@@ -2370,9 +2374,17 @@ Do not assign all linked pages as undirected homework. Every reading has a quest
 - Representation independence covers only observations included in the contract.
 - Source licenses and university academic-integrity rules still apply; link to original exercises rather than presenting them as Atlas originals.
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Do not advance because Michael can define “ADT,” “Protocol,” and “representation invariant.” Advance when he can recover the abstraction from unfamiliar code, identify what clients may observe, trace a concrete rep through AF, expose a violated invariant with evidence, direct a bounded implementation, and reject a patch that satisfies method signatures but not behavioral laws.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M4 handoff.
+That explanation should cover an unfamiliar ADT's public observations,
+abstraction function, representation invariant, exposure or cache failure,
+dependency direction, and behavioral patch review. Otherwise, perform the
+`ReversingStore` trace and stale-cache repair with the Teaching Assistant before
+returning to the same evidence.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ## Guided Codex handoff — M3
 

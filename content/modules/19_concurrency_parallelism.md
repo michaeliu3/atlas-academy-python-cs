@@ -3601,10 +3601,10 @@ evidence; neither an optional build nor speedup is inferred.
 
 ---
 
-## 13. Mastery gate and spaced retrieval
+## 13. Constructive evidence route and spaced retrieval
 
-Mastery means the exact invariant can move downward into mechanisms and upward
-into architecture:
+The evidence route asks whether the exact invariant can move downward into
+mechanisms and upward into architecture:
 
 > **Every admitted Atlas partition reaches exactly one terminal
 > classification—`COMMITTED`, `FAILED`, or `CANCELLED`. If Atlas publishes a
@@ -3615,21 +3615,22 @@ into architecture:
 > transition, and one step in a declared concurrent history; each shared
 > transition is justified by one named owner or synchronization protocol,
 > every progress claim states its blocking and fairness assumptions, and
-> neither a clean exit, a passing stress run, the GIL, nor observed speedup
+> neither a clean exit, a clean stress run, the GIL, nor observed speedup
 > substitutes for safety, liveness, or model-fit evidence.**
 
-### 13.1 Evidence weights
+### 13.1 Evidence lenses
 
-| Evidence | Weight | Demonstrates |
+| Evidence | Planning emphasis | Demonstrates |
 |---|---:|---|
-| history, code, and architecture walkthroughs | 25% | recovery of hidden state and ownership |
-| race/progress/debugging investigations | 20% | causal diagnosis from ordered evidence |
-| safety/liveness/linearization defense | 20% | specification-level reasoning |
-| model-choice and design brief | 15% | Python engineering judgment |
-| agent task and patch review | 15% | bounded delegation and independent verification |
-| targeted mechanisms | 5% | first-principles interleaving/graph understanding |
+| history, code, and architecture walkthroughs | primary | recovery of hidden state and ownership |
+| race/progress/debugging investigations | primary | causal diagnosis from ordered evidence |
+| safety/liveness/linearization defense | primary | specification-level reasoning |
+| model-choice and design brief | substantial | Python engineering judgment |
+| agent task and patch review | substantial | bounded delegation and independent verification |
+| targeted mechanisms | supporting | first-principles interleaving/graph understanding |
 
-MCQs route misconceptions. They are not an exam average.
+These lenses are intentionally non-additive: they guide attention and repair,
+not points, a score, or an exam average. MCQs route misconceptions.
 
 ### 13.2 Capability matrix
 
@@ -3638,7 +3639,7 @@ MCQs route misconceptions. They are not an exam average.
 | recover sequential spec | pure oracle, pre/postconditions, exact bytes | explain current implementation |
 | reason about histories | enabled-step trace and smallest counterexample | say “race” |
 | separate concurrency/parallelism | lifetimes plus runtime evidence boundary | multiple workers |
-| prove safety | invariant over transitions or exact finite-model scope | repeated passing run |
+| prove safety | invariant over transitions or exact finite-model scope | repeated green run |
 | state liveness | desired transition and named fairness/failure premises | no timeout |
 | reason about linearizability | operation mapping and justified point | one atomic statement |
 | choose lock scope | protected-state protocol and exceptional path | a lock exists |
@@ -3656,9 +3657,12 @@ MCQs route misconceptions. They are not an exam average.
 | review/verify | diff, raw events, exact tests, unknowns | summary/green check |
 | transfer | exact M20/M21/M24 boundary memo | “later” |
 
-### 13.3 Mandatory gate conditions
+### 13.3 Constructive next-step guide
 
-1. all project acceptance invariants pass;
+Use this evidence to choose the M20 bridge or a repair path, not to decide
+whether Michael passes. Consider whether you can:
+
+1. show direct evidence for every project acceptance invariant;
 2. S0–S16 have raw evidence or explicit capability-based skip;
 3. every confident MCQ miss has a repaired counterexample and later transfer;
 4. reproduce the invariant and core state machines without notes;
@@ -3675,20 +3679,24 @@ MCQs route misconceptions. They are not an exam average.
 11. separate agent-patch decisions by dimension;
 12. preserve the M20/M21/M24 boundaries.
 
-Routing:
+With a clear, self-supported explanation across this evidence, continue with the M20 handoff. Otherwise, use the smallest named repair route below before returning to the handoff.
 
-| Result | Next action |
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+### Suggested repair route
+
+| Evidence seam | Suggested repair |
 |---|---|
-| ready | proceed to M20 with the dossier |
+| integrated evidence | continue with the M20 handoff and carry the dossier |
 | spec/history weak | repeat the first TA studio and M3/M4 bridge |
 | coordination weak | repeat Session 3 microcases and the second TA studio |
 | progress weak | pure wait-for/executor graph repair |
 | runtime/model weak | M17/M18 boundary bridge, then the third TA studio |
-| correctness ready/evidence weak | rerun only missing negative/evidence cases |
+| correctness evidence available / evidence gap | rerun only missing negative/evidence cases |
 | publication collapse | return to M18 phase/evidence gate |
 | agent-review weak | a second, smaller constrained patch |
 
-No calendar deadline or quiz score substitutes for the gate.
+No calendar deadline or quiz score substitutes for explained evidence.
 
 ### 13.4 Consolidation artifacts
 

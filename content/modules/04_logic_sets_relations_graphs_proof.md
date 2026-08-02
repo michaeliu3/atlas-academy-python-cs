@@ -38,7 +38,7 @@ Answer before reading further. Explanation matters more than speed.
 
 If questions 2 or 3 are unclear, return briefly to Modules 2 and 3. We will reuse induction and invariants rather than silently assuming them.
 
-## Mastery outcomes
+## Learning outcomes
 
 By the end, Michael can:
 
@@ -278,7 +278,7 @@ If Atlas randomly selects one of four equally likely review prompts, then each s
 
 `P(A | B) = P(A ∩ B) / P(B)`, when `P(B) > 0`.
 
-Events A and B are independent when `P(A ∩ B) = P(A)P(B)`. Independence is a model claim, not a synonym for “unrelated.” For example, quiz correctness and response time may not be independent; treating them as such could distort a mastery signal.
+Events A and B are independent when `P(A ∩ B) = P(A)P(B)`. Independence is a model claim, not a synonym for “unrelated.” For example, quiz correctness and response time may not be independent; treating them as such could distort a learning-confidence signal.
 
 ### Random variables and expectation
 
@@ -826,11 +826,13 @@ Deliver a comprehension-and-design portfolio:
 - one counterexample journal entry;
 - complexity hypotheses to carry into Module 5.
 
-The milestone is complete when Michael can defend the model and evidence orally, not when a repository merely turns green.
+Use the milestone evidence to choose a next bridge or repair: Michael explains
+the model and evidence orally rather than treating a green repository as the
+whole story.
 
 ### Evidence rubric
 
-| Evidence | Ready when | If not yet, repair by |
+| Evidence | Evidence to carry forward | If a bridge is needed, repair by |
 | --- | --- | --- |
 | Formal claim | domain, predicate, and quantifier order match the stated policy | translate the claim back into plain language and find a witness |
 | Proof or counterexample | every inference has a stated assumption, or one smallest model refutes the claim | shrink the model to the first failing vertex/edge/value |
@@ -908,9 +910,17 @@ The teaching narrative above is original and integrated. These sources provide d
 | 5 | recovered validator model and minimal mismatch case | [Python data structures](https://docs.python.org/3.14/tutorial/datastructures.html) for representation behavior, not proof |
 | 6 | reviewed patch and oral design defense | the Atlas claim, witness, and evidence card; sources verify terms, not the conclusion |
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance when Michael can turn an informal route policy into a quantified claim, construct a counterexample, recover the model from unfamiliar code, and distinguish proof obligations from implementation evidence. Familiarity with symbols alone is not mastery.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M5 handoff.
+That explanation should cover a quantified route policy, a smallest witness or
+counterexample, the mapping from formal objects to unfamiliar code, and the
+boundary between proof and implementation evidence. Otherwise, translate the
+policy into a predicate, draw the smallest relation/graph witness, and use the
+Teaching Assistant's proof hint ladder before retrying.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ## Guided Codex handoff — M4
 
@@ -936,7 +946,7 @@ wait for a counterexample or proof sketch.
 
 At **+1, +7, and +21 days**, negate one quantified statement, draw one
 relation/graph, and name whether a result is a proof, a test observation, or a
-claim still needing evidence. M4 is ready when the learner can construct and
-explain a counterexample rather than merely name a theorem. Carry the input
-model, relation, and proof obligation into **M5**, where those same choices
-become an explicit cost model.
+claim still needing evidence. The M4 evidence supports the M5 handoff when the
+learner can construct and explain a counterexample rather than merely name a
+theorem. Carry the input model, relation, and proof obligation into **M5**,
+where those same choices become an explicit cost model.

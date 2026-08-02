@@ -1534,9 +1534,9 @@ code/model reading, dossier evidence, and later transfer.
 | Before M28 | State which mathematical claims are theorem, finite calculation, numerical observation, and API contract. |
 | Before M30/M31 | Explain why a formal manipulation or code result needs assumptions before it becomes an inference or optimization conclusion. |
 
-### Arc gate
+### Constructive next-step guide
 
-Advance when you can, without a template:
+Use this evidence to choose the M6 bridge or a repair path, not to decide whether you pass. Consider whether you can, without a template:
 
 - state a finite-domain claim with correct quantifier order;
 - construct a countermodel to an invalid converse;
@@ -1547,9 +1547,9 @@ Advance when you can, without a template:
 - explain what a finite program trace establishes and what it cannot;
 - transfer the discipline to a later mathematical, AI, or systems claim.
 
-If one item is missing, slow the route at that seam. The right repair is
-usually a tiny object, a single proof paragraph, or a new trace—not re-reading
-the entire module.
+With a clear, self-supported explanation across the list, continue with the M6 handoff. Otherwise, slow the route at the named seam: use a tiny object, a single proof paragraph, or a new trace—not a full reread of the entire module.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ---
 
@@ -1578,13 +1578,13 @@ material into Atlas content or grant broader reuse rights.
 | [Theorem Proving in Lean 4](https://lean-lang.org/theorem_proving_in_lean4/) | Optional micro-lab for structural induction and checked proof terms. | Lean is Apache-2.0; a checked term does not replace model review or human explanation. |
 | [Wilf, generatingfunctionology](https://www2.math.upenn.edu/~wilf/DownldGF.html) | Optional depth on generating functions. | Link-only by default; hosted terms are not a broad open adaptation license. |
 
-### Instructor decision rule
+### Evidence discipline
 
-Advance when you can turn a natural-language claim into a model with named
-domain and assumptions; use a proof, counterexample, or finite trace for the
-right scope; repair a gap rather than hiding it; and explain how this changes a
-design decision. Familiar symbols, green tests, fast answers, and polished
-agent prose are not enough.
+Keep the evidence guide honest: turn a natural-language claim into a model with
+named domain and assumptions; use a proof, counterexample, or finite trace for
+the right scope; repair a gap rather than hiding it; and explain how this
+changes a design decision. Familiar symbols, green tests, fast answers, and
+polished agent prose are not enough.
 
 ## Forward handoff — M27 to M6
 

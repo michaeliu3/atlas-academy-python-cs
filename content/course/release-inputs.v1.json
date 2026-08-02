@@ -346,23 +346,23 @@
     },
     {
       "path": "content/modules/01_values_state_execution.md",
-      "sha256": "6b44bce9ac0fe0781201e0f048be204232856c7a0f0ace8b450237c13e7edd41"
+      "sha256": "57ebc6c931ae94dc15f271c4d0af8d30a3171f81b1b6a2a0cee20290a7e5b3df"
     },
     {
       "path": "content/modules/02_functions_recursion_induction.md",
-      "sha256": "18df9e64cab37fa64c60113259be36f04e1417e8655a78f895f5e2db84c5d7a3"
+      "sha256": "393ddb919e7c2d0de0c24566639c937e6878189f1ec02a8babe6763e92445a6a"
     },
     {
       "path": "content/modules/03_abstraction_interfaces_adts.md",
-      "sha256": "1376ac2d8601d92f888f4d555710b49e68e743a213e623eabf644a128b20cc4a"
+      "sha256": "4775a2698b52762f6eb67ed50f68a73a8f8dd0b903ebfc5da1c8a7352e3cc2c2"
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "da95fc8ad7150a54cb83cb47f5ee0946be42982b77b0bce922c6dad36372c6a0"
+      "sha256": "a83e6dbf40fe177a587e060192fd934ca5f13e45f39db3b2df02e4047531ef97"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
-      "sha256": "faabe07812f0c936cd8b3775671d7c015a77319e99841a9e8d69d20dc6a74b13"
+      "sha256": "7055d49db664f7c53f2dd447db61a962becc8e5d2f6c77505fc060e350e00b10"
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
@@ -386,15 +386,15 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "1cf755980117ae4994b521c743830ba040834de39eb0a9009b7aed479e69c967"
+      "sha256": "31d5548cf0b543318fc6dce6f93686cd21958894f896a8e2829cfd02ed329a2d"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
-      "sha256": "b9efd270e62373a60ae7d6a434117d3a63bba17126db539e21843c9e96ff53c2"
+      "sha256": "45986af30bac321f67c8dbd9704051349937d15d394fc85c30cfe8f4120b7051"
     },
     {
       "path": "content/modules/13_specifications_testing_debugging_observability.md",
-      "sha256": "57a7cc12144c821f4722899d1c775fef68525f3eefb59a49ee699b8a19c6317f"
+      "sha256": "894260ca6595823d262e9e20eb933ef674fc344bd9492895a9724f189e9c9c22"
     },
     {
       "path": "content/modules/14_software_design_and_change.md",
@@ -402,27 +402,27 @@
     },
     {
       "path": "content/modules/15_files_serialization_packaging_delivery.md",
-      "sha256": "807e865e1bd4dc8dfa79d6540980a099867b6f44cb2cd7bef742e2b2d84fb6e9"
+      "sha256": "092a1a350be87c757ba8d525e7d4482ec94b331065dc6f29f30c4ee7d86f8398"
     },
     {
       "path": "content/modules/16_relational_data_transactions.md",
-      "sha256": "4e14e10a0ec03d6c232988dfa6ff7fd164e204ee82c0a26d00811c99aa038d95"
+      "sha256": "17c000d876918974507987a3db09d6961c288098247ffe2d42a36a1130786b29"
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
-      "sha256": "528c06e8ae32ccfd357469a76c2df30e45ff01e2cf0eb424de523da0060ebffb"
+      "sha256": "ce57e45a8f674d625e2a5c6db27bd398cc4568d02869cc3b8c067c7b2d61edbf"
     },
     {
       "path": "content/modules/18_operating_systems_resource_mediation.md",
-      "sha256": "15e1b990ba3c6b80b667a2994a05851ae336ddbbd6738b9609b2d57d81287b99"
+      "sha256": "f9e0a24e3df59f14e0d2060420eb674a2a369a7bb6627a78c24557c9e3949a1c"
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "9443e6c7aacb9cfc9bbdb1826c2aace75a183eae07e3c91ea8bb728e594a14f8"
+      "sha256": "ff159c079fdec8b1ba099b688de0fc719afd5215e42d303fde28fe0b1ac9d23f"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "5657d9f3be08983346b60ea9e97f642cee690ddcbbd33df058a8145cbc6d5bb9"
+      "sha256": "f5ce154da17243cc4df2796b6a3afb81eca06dba433bcf3b6e5dee67f4a36f5a"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
@@ -450,7 +450,7 @@
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
-      "sha256": "8101e4017f07e7566f5db781421c1c248c38e5123052524ba0a8fce3700f5be7"
+      "sha256": "c3dbac8168f5cdd2deff87a2a0bdd37c6662f3151ee7a80465e4df2fc30af02e"
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",

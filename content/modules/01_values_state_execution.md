@@ -30,7 +30,7 @@ The real problem is not “how to copy a list.” It is:
 - No formal proof background is assumed.
 - Python installation is helpful for the lab but not required for Sessions 1–2.
 
-## Mastery outcomes
+## Learning outcomes
 
 By the end, Michael can:
 
@@ -366,6 +366,9 @@ The TA uses staged hints and records the final misconception and regression test
 
 ### Session 6 — Mastery check and synthesis
 
+Use this evidence check to choose the next bridge or repair; it does not decide
+whether Michael passes.
+
 1. Fast confidence-aware multiple-choice check with explanation and misconception repair.
 2. Trace one unfamiliar program.
 3. Reconstruct the architecture and state model of an unfamiliar implementation.
@@ -700,7 +703,9 @@ Use the result to choose the next learning action:
 | incorrect + C2 | competing partial models | contrast the chosen option with the correct state trace |
 | incorrect + C3 | high-confidence misconception | priority TA intervention, minimal counterexample, delayed retrieval |
 
-There is no percentage-based pass. Mastery requires that Michael can defend the answer using objects, bindings, state transitions, contracts, or architecture—not merely recognize the correct letter.
+No percentage determines the next step. The evidence is useful when Michael can
+defend an answer using objects, bindings, state transitions, contracts, or
+architecture—not merely recognize the correct letter.
 
 ### Misconception routing
 
@@ -715,7 +720,7 @@ There is no percentage-based pass. Mastery requires that Michael can defend the 
 | 7 | state ownership across architecture boundaries | repeat Session 4's dependency map before reading code |
 | 8 | multi-step state transitions and unjustified atomicity | draw two interleaved read/compute/write traces; save synchronization mechanisms for Module 19 |
 
-For any incorrect C3 response, the TA records the misconception in the shared log and schedules an isomorphic question several days later. For any correct C1 response, Michael must explain one rejected distractor before the item counts as understood.
+For any incorrect C3 response, the TA records the misconception in the shared log and schedules an isomorphic question several days later. For any correct C1 response, Michael explains one rejected distractor before the evidence is treated as stable.
 
 The check can be administered interactively in chat, one item at a time. Answers remain hidden until Michael commits to both a choice and confidence level.
 
@@ -732,7 +737,7 @@ Deliver:
 
 ### Evidence rubric
 
-| Evidence | Ready when | If not yet, repair by |
+| Evidence | Evidence to carry forward | If a bridge is needed, repair by |
 | --- | --- | --- |
 | Binding/state trace | every name, object, and observable mutation is accounted for | redraw the smallest failing trace before rerunning code |
 | Contract and ownership note | precondition, postcondition, and who may mutate are explicit | replace vague “does not change data” wording with a concrete frame condition |
@@ -793,9 +798,16 @@ Use the sources by question rather than as a reading pile: begin with this workb
 | 5 | oral explanation of a smallest failure | the preceding trace and test; do not substitute a source quote for evidence |
 | 6 | synthesis dossier and forward handoff | this workbook plus the linked Python references to verify any disputed language claim |
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Do not advance because the vocabulary sounds familiar. Advance when Michael can trace unfamiliar aliasing, formulate a contract, expose a shared-state bug with a test, and explain how the same reasoning scales to a larger system.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M2 handoff.
+That explanation should cover an unfamiliar aliasing trace, an ownership
+contract, a shared-state regression test, and one way the model scales to a
+larger system. Otherwise, redraw the smallest binding/object trace with the
+Teaching Assistant and retry the corresponding aliasing counterexample.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ## Guided Codex handoff — M1
 
@@ -821,10 +833,10 @@ with: “What assertion would catch the shared-state bug before a user does?”
 
 ### Retrieval, ready-when, and forward handoff
 
-Retrieve the object-graph model at **+1 day, +7 days, and +21 days**. M1 is
-ready to carry forward when the learner can (1) trace an unfamiliar aliasing
-snippet without running it, (2) name one ownership or mutation contract, and
-(3) design one test that distinguishes rebinding from mutation. Carry that
-trace and contract into **M2**: recursion is also a changing execution state,
-but its state lives in frames and call relationships rather than one shared
-container.
+Retrieve the object-graph model at **+1 day, +7 days, and +21 days**. The M1
+evidence supports the M2 handoff when the learner can (1) trace an unfamiliar
+aliasing snippet without running it, (2) name one ownership or mutation
+contract, and (3) design one test that distinguishes rebinding from mutation.
+Carry that trace and contract into **M2**: recursion is also a changing
+execution state, but its state lives in frames and call relationships rather
+than one shared container.

@@ -1674,8 +1674,8 @@ Save six short notes to Notion, not a screenshot-only completion mark:
 
 ## 9. Eight-level problem ladder
 
-The ladder moves from recognition to transfer. Advance only when the stated
-evidence exists; “I have seen the term” is not an exit condition.
+The ladder moves from recognition to transfer. Work through each level using
+the stated evidence; “I have seen the term” is not a useful stopping point.
 
 | Level | Learner action | Artifact | Exit evidence |
 |---|---|---|---|
@@ -2421,7 +2421,7 @@ fragmenting.
 
 ---
 
-## 13. Mastery gate and spaced retrieval
+## 13. Constructive evidence route and spaced retrieval
 
 ### 13.1 Capability matrix
 
@@ -2440,10 +2440,11 @@ Use `0 = cannot yet`, `1 = with notes`, `2 = independently`, and
 `3 = can teach/review`. The goal is not a perfect row on day one; it is an
 honest map that selects the next retrieval task.
 
-### 13.2 Mandatory gate conditions
+### 13.2 Constructive next-step guide
 
-You pass Module 20 only when you can do all of these without browsing your
-notes first:
+Use this evidence to choose the M21 bridge or a repair path, not to decide
+whether Michael passes. Consider whether you can do all of these without
+browsing your notes first:
 
 1. draw the name → candidate → bytes → frame → decision → response/unknown
    chain and give one non-equality per arrow;
@@ -2456,9 +2457,9 @@ ledger access;
 7. audit one evidence packet for scope/provenance/privacy; and
 8. state the exact thing Modules 21, 22, and 24 would add.
 
-A correct MCQ score alone is insufficient. You must produce a trace, a
-counterexample, and an oral defense because these detect different forms of
-understanding.
+With a clear, self-supported explanation across this evidence, continue with the M21 handoff. Otherwise, reopen the smallest relevant frame, timeout, or operation-ID trace; make one prediction; correct one artifact; and rehearse the repair with the TA or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. A correct MCQ score alone is insufficient; use a trace, a counterexample, and an oral defense because they detect different forms of understanding.
 
 ### 13.3 Consolidation artifacts
 

@@ -126,7 +126,7 @@ If items 1–3 are unclear, return to Module 1's binding diagrams before continu
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end of this module, Michael can:
 
@@ -1593,7 +1593,8 @@ End every help session with:
 
 ## 16. Mastery evidence and Atlas checkpoint
 
-Familiar vocabulary is not mastery. The module is complete when the following evidence agrees.
+Familiar vocabulary is not enough. Use the following evidence to choose the
+next bridge or repair, not to decide whether Michael passes.
 
 ### Evidence pack
 
@@ -1623,9 +1624,9 @@ Deliver:
 - focused test evidence;
 - a short design note separating correctness, termination, time, stack, and input-domain limits.
 
-### Mastery gate
+### Evidence route
 
-Advance when Michael can, without relying on memorized templates:
+Use the following rigorous criteria without relying on memorized templates:
 
 1. derive recursion from a new recursive structure;
 2. identify a valid decreasing measure;
@@ -1635,7 +1636,8 @@ Advance when Michael can, without relying on memorized templates:
 6. catch a hidden state or domain-contract defect in an agent patch;
 7. defend why the final evidence covers the stated contract.
 
-If one area is weak, assign the corresponding TA counterexample and retrieve it later. Do not repeat unrelated material.
+If one area is weak, assign the corresponding TA counterexample and retrieve
+it later. Do not repeat unrelated material.
 
 ---
 
@@ -1755,9 +1757,17 @@ University worksheets are inspiration and optional practice, not material to cop
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Do not advance because Michael can recognize a base case or recite “\(\Theta(n)\).” Advance when he can read an unfamiliar recursive function, reconstruct its frames and architecture, state its domain, prove progress and correctness, derive cost from the call structure, expose a hidden assumption with a test, and review an agent's patch as the responsible system owner.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M3 handoff.
+That explanation should cover an unfamiliar recursive function's domain,
+frames, decreasing measure, correctness argument, call-cost model, hidden
+assumption, and patch review. Otherwise, rebuild the smallest frame trace and
+decreasing-measure argument with the Teaching Assistant's recursive-design
+hint ladder, then retry an isomorphic example.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ## Guided Codex handoff — M2
 

@@ -312,7 +312,7 @@ M17 uses one narrow `dis` observation and raw elapsed trials to teach evidence
 boundaries. It deliberately leaves object layout, retained-size traversal,
 allocation tracing, GC, specialization, and profiling to Module 24.
 
-### 1.5 Mastery outcomes
+### 1.5 Learning outcomes
 
 At exit, Michael can:
 
@@ -3437,10 +3437,10 @@ Checkoff: model, host event, and elapsed observation remain distinct.
 Checkoff: the claim improves incrementally without correlation becoming
 universal cause.
 
-### 13.16 Mastery gate
+### 13.16 Constructive next-step guide
 
-Module 17 is ready for progression only when Michael can explain, without
-notes:
+Use the following evidence to choose a next bridge or repair—not to decide
+whether Michael passes. Look for whether Michael can explain, without notes:
 
 1. why bits need width and interpretation;
 2. why clocked state differs from a combinational function;
@@ -3464,15 +3464,24 @@ Integrated performance ownership demonstration on a fresh fixture:
 - propose an independent falsification step;
 - route one question each to M18, M19, and M24.
 
-| State | Meaning | Action |
-|---|---|---|
-| Ready | reasoning transfers and all boundaries hold | continue to M28; retain M18 questions for the later systems bridge |
-| Ready with retrieval plan | ownership is correct but recall is slow/low confidence | proceed with scheduled consolidation |
-| Bridge required | one or two named dependencies are unstable | repeat matching ladder/TA microcase |
-| Reconstruct | semantics or evidence ownership is missing | return to earliest missing session |
+| Evidence pattern | Next bridge or repair |
+|---|---|
+| reasoning transfers and all boundaries hold | continue with the M28 handoff; retain M18 questions for the later systems bridge |
+| ownership is correct but recall is slow or low confidence | use scheduled consolidation |
+| one or two named dependencies are unstable | repeat the matching ladder or TA microcase |
+| semantics or evidence ownership is missing | return to the earliest missing session |
 
-MCQ percentage alone cannot pass the gate. A high-confidence layer collapse
-triggers a targeted bridge even when the dossier looks polished.
+MCQ percentage alone does not choose the next step. A high-confidence layer
+collapse calls for a targeted bridge even when the dossier looks polished.
+
+Otherwise, name the collapsed layer first: rebuild a width/interpretation or
+clocked-state trace for a representation error, compare ISA and
+microarchitecture for a layer collapse, rerun the declared toy model for a
+locality claim, or rewrite the experiment as observation rather than cause.
+Then bring one revised trace and one uncertainty to the Teaching Assistant or
+Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ### 13.17 Evidence packet
 

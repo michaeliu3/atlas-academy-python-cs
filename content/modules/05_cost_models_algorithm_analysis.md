@@ -41,7 +41,7 @@ Analysis is a model of growth. Measurement is an observation of a particular imp
 
 If question 2 or 3 is unclear, pause for a short proof/recursion bridge. Recurrences and asymptotic claims build directly on them.
 
-## Mastery outcomes
+## Learning outcomes
 
 By the end, Michael can:
 
@@ -856,11 +856,13 @@ Produce:
 - an architecture diagram separating algorithmic and adapter costs;
 - a decision note that preserves semantics while choosing a representation.
 
-The milestone is mastered when Michael can predict, measure, explain, and challenge—not when the fastest line wins.
+Use the milestone evidence to choose a next bridge or repair: Michael predicts,
+measures, explains, and challenges rather than treating the fastest line as the
+whole result.
 
 ### Evidence rubric
 
-| Evidence | Ready when | If not yet, repair by |
+| Evidence | Evidence to carry forward | If a bridge is needed, repair by |
 | --- | --- | --- |
 | Semantic comparison | both implementations satisfy the same public behavior before timing begins | write an observer-based equivalence test or narrow the claim |
 | Analytic argument | size parameters, costly primitive, assumptions, and bound are named | count a tiny input and write the exact sum or recurrence first |
@@ -941,9 +943,17 @@ and dossier prompts; do not copy course problems, solutions, figures, or prose.
 | 5 | raw timing samples and uncertainty-aware chart | [Python `timeit`](https://docs.python.org/3.14/library/timeit.html) and [`perf_counter`](https://docs.python.org/3.14/library/time.html#time.perf_counter) for timing boundaries |
 | 6 | reviewed benchmark brief and representation decision | [Python Time Complexity wiki](https://wiki.python.org/moin/TimeComplexity) only as CPython-oriented context, never a language-wide proof |
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance when Michael can derive a bound from unfamiliar code, state every important assumption, separate analytic and empirical evidence, and reject a generated performance claim that the data or model does not support. Memorized complexity tables alone are not mastery.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M27 handoff.
+That explanation should cover an unfamiliar program's input model, costly
+primitive, exact count or recurrence, analytic bound, measurement boundary,
+and unsupported generated claim. Otherwise, count a tiny input, state the
+missing assumption, and rebuild the raw-sample measurement record with the
+Teaching Assistant before retrying the claim.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ## Guided Codex handoff — M5
 
@@ -967,11 +977,9 @@ question for the TA if the analytic and empirical stories disagree.
 ### Retrieval, ready-when, and forward handoff
 
 At **+1, +7, and +21 days**, derive one bound from a fresh snippet and state
-one assumption that could invalidate it. M5 is ready when the learner can give
-an input model, a tight-enough argument, and an evidence boundary—not just a
-Big-O label. Carry the representation/cost trade-off into **M27**, where the
-counting, recurrence, and proof language becomes explicit discrete
-mathematics. After that bridge, carry the same trade-off into **M6**.
+one assumption that could invalidate it. The M5 evidence supports the M27
+handoff when the learner can give an input model, a tight-enough argument, and
+an evidence boundary—not just a Big-O label. Carry the representation/cost trade-off into **M27**, where counting, recurrence, and proof become explicit; then carry the same trade-off into **M6**.
 
 **Source and reuse note:** Atlas's diagnostic, traces, and dossier prompts are
 original course material; linked university and documentation sources are used
