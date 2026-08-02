@@ -70,7 +70,7 @@
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "516a254c0bc0bf04b494495ef6a40ce3cb2055ba1006e57104f82f42401b5453"
+      "sha256": "6939f352f0d3953cbf9bb0a452346743d9c441ecac6da72eaca6834959c7ec0e"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
@@ -82,7 +82,7 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "10f3e5bec82a345320c1d63cbf674a2ea937f060de0f284b1b4dae0839cf42b2"
+      "sha256": "3a31675ac96be561809571f06b99820bc665e5fe40bbc03cb25aa23c82330306"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
@@ -182,15 +182,15 @@
     },
     {
       "path": "content/course/contracts/companions/m32.v1.json",
-      "sha256": "d948dbcfe61f9a729c18a338ebfbd508e5814d8f8da2a88bf6214299c51e03c7"
+      "sha256": "5129ee9c4e4d29fc5908a685bee76290071fefbb184a0eaf170b0e0559739f77"
     },
     {
       "path": "content/course/contracts/companions/m33.v1.json",
-      "sha256": "f1ff317bb2af788f8a901aefa9402e7c9885ad4d73e5b2049e50052e75c64335"
+      "sha256": "c32dcb304ed259422e519bf7e2b7cb6f2d733958b91f97646896848fd451d600"
     },
     {
       "path": "content/course/contracts/companions/m34.v1.json",
-      "sha256": "d4b222302f9193b3c80f3121d4b726340b8be46677e9ce6e649ba2f7c23baccb"
+      "sha256": "f18c1bc435c54528c9a2d4fbbbb99686bd405331588b36a7f370ca62cd415138"
     },
     {
       "path": "content/course/contracts/companions/m35.v1.json",
@@ -590,7 +590,7 @@
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "04ae22c551afb19930a87d41cd53eb6ca0329c8d5e0aa904a6917cfe36a8d67c"
+      "sha256": "a1269b700e7c85f1210f723412295ed9b28b845595c96ac8229dd2a40295bba0"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
@@ -602,7 +602,7 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "db1d4f9ef9cb89e6249ae3d34085a511066e7587cb19bcb0108a1f2331f7dde2"
+      "sha256": "edec477844c2decf771e96179c82941d825db527e34d29cdc68a6db140c66bde"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",

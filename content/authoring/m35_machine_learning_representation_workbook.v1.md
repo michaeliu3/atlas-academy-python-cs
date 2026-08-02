@@ -604,12 +604,62 @@ This does not make selection invalid. It makes the boundary visible. Add the
 selection record and the fresh-evaluation plan to the Evaluation-and-Shift Plan
 instead of silently relabeling a tuned split as “test.”
 
+### Fit → select → fresh evaluation
+
+Read the next fixture as a compact execution ledger, not as a framework run.
+It fixes three disjoint partitions and exactly two candidate families:
+
+| Phase | Permitted labels | What becomes fixed afterward |
+| --- | --- | --- |
+| fit | training rows only | each one-feature threshold's orientation |
+| select | validation rows only | the selected candidate and selection log |
+| fresh evaluation | fresh rows only, after selection | one finite observation of the already selected candidate |
+
+Before calling `m35FitSelectFreshEvaluationTrace()`, predict which feature
+(`signal` or `context`) the validation rows will select. Then write down what
+the fixture must *not* read while making that choice: the labels of
+`fresh-1` through `fresh-4`.
+
+<details>
+<summary>Reveal the fit/selection/fresh trace after committing your prediction.</summary>
+
+The trace fits each candidate's orientation on its four training rows, then
+selects `context-threshold` with the two validation rows. Its fresh partition
+deliberately follows a different tiny pattern: the already selected candidate
+gets `1/4` correct. That is a finite observation about these declared fresh
+rows—not a population estimate, a reason to retune after the fact, or a claim
+that another candidate is generally better.
+
+</details>
+
+Inspect the `partition`, `fitting`, `selection`, and `freshEvaluation` fields
+in that order. For each field, state the rows used, the decision it permits,
+and one stronger statement it cannot support.
+
+### One-change debugging probe — fresh labels are not tuning feedback
+
+Change exactly one premise: allow the fresh labels into model selection. The
+fixture's `oneChangeLeakageDebug` shows that this improper rule would choose
+`signal-threshold` instead. Diagnose the bug before proposing a repair:
+
+1. Which rows changed role from evaluation evidence to selection evidence?
+2. Which claim about the fresh score is now unavailable?
+3. What must remain fixed before a new independent evaluation is designed?
+
+**Repair:** retain the validation-selected candidate, its candidate order,
+metric, and row identifiers; record the fresh observation without using it to
+choose again. If a new choice is justified, predeclare a new untouched
+evaluation boundary. This is an evidence-discipline exercise, not a command to
+deploy or retrain anything.
+
 ### Output: Evaluation-and-Shift Plan
 
 Record a **Plan** with target relation, unit of independence, split rule,
 preprocessing-fit boundary, metric suite, uncertainty method, slices, model
 selection/stopping rule, one predeclared synthetic shift, and one explicit
-inference boundary. Include the sentence:
+inference boundary. Include the fitted candidate family, validation-selection
+record, fresh-evaluation row identifiers, and one candidate choice the fresh
+rows were not permitted to change. Include the sentence:
 
 > “This evaluation estimates behavior under ___; it does not establish ___.”
 
@@ -1127,7 +1177,8 @@ dtype/device, or introduce a synthetic shift.
 ## Source and reuse boundary
 
 This workbook uses original Atlas explanations, synthetic examples, diagrams,
-and code. The reading routes below were checked on **2026-08-01**. They guide
+and code. The reading routes below were checked on **2026-08-01**; the
+fit/validation/fresh-evaluation route was rechecked on **2026-08-02**. They guide
 scope and prerequisite review; they do not turn this draft into an institutional
 course or grant permission to copy third-party prose, figures, datasets,
 benchmarks, code, weights, or model-card assets.
@@ -1138,6 +1189,7 @@ benchmarks, code, weights, or model-card assets.
 | --- | --- | --- |
 | [Stanford CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Sessions 1–6: learning-problem formulation, representation, learning theory, regularization/model selection, and evaluation. Some course material may require affiliate access. | Link-only/original Atlas examples; do not copy assignments, notes, figures, or solutions. |
 | [MIT 6.036 Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Sessions 1–5: supervised learning, model selection, neural networks, and evidence-aware ML reasoning. | MIT OCW assets have their own notices; link-only/original Atlas fixtures and explanations. |
+| [MIT 18.642 Lecture 23: Introduction to Machine Learning](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/resources/mit18_642_f24_lec23/) | Session 3: distinguish fitting, validation comparison, and a final held-out observation in the original fixed-partition trace. | Link-only/original Atlas rows and derivations; do not copy lecture slides, examples, or exercises. |
 | [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
 | [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
 | [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html), [probability calibration](https://scikit-learn.org/stable/modules/calibration.html), and [Brier score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html) | Session 3: split relations, leakage, finite reliability estimates, and a bounded probabilistic-loss reading. | Link-only/original Atlas examples. Library mechanisms do not choose a target relation, prove population calibration, or guarantee a decision. |

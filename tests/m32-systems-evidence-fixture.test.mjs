@@ -103,5 +103,24 @@ test("the M32 workbook turns each bounded card into a prediction-before-inspecti
   assert.match(workbook, /m32PairwiseTemporaryCard\(\{ n: 4, k: 3, d: 2 \}\)/u);
   assert.match(workbook, /m32BufferReuseTimeline\("after-enqueue"\)/u);
   assert.match(workbook, /m32ScalarReverseModeTrace\(\{ theta: 1, x: 2, y: 1 \}\)/u);
+  assert.match(workbook, /Native code-reading card — a buffer descriptor is not a flat float array/u);
+  assert.match(workbook, /int inspect_rank2_float32\(PyObject \*source\)/u);
+  assert.match(workbook, /PyObject_GetBuffer\(source, &view, PyBUF_FORMAT \| PyBUF_STRIDES\)/u);
+  assert.match(workbook, /PyBuffer_Release\(&view\)/u);
+  assert.match(
+    workbook,
+    /\(char \*\)view\.buf \+ row \* view\.strides\[0\] \+ column \* view\.strides\[1\]/u,
+  );
+  assert.match(workbook, /logical start/u);
+  assert.match(workbook, /end of the physical storage/u);
+  assert.match(workbook, /deliberately flawed original C-API sketch/u);
+  assert.match(workbook, /negative-stride view/u);
+  assert.match(workbook, /C-contiguous request/u);
+  assert.match(workbook, /PyBUF_FORMAT \| PyBUF_C_CONTIGUOUS/u);
+  assert.match(workbook, /PyBuffer_IsContiguous\(&view, 'C'\)/u);
+  assert.match(
+    workbook,
+    /format, item size, rank, shape, strides, contiguity, readonly\/writable state,\s+and paired release/u,
+  );
   assert.match(workbook, /not an actual array-library, buffer-protocol, or GPU trace/u);
 });

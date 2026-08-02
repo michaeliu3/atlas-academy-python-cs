@@ -99,7 +99,7 @@ reliable deep-learning systems; it must not treat it as a generalization proof.
 ## Primary-source ledger and reuse boundary
 
 S35-01–S35-16 were accessed on **2026-07-31**; S35-17–S35-21 were checked on
-**2026-08-01**. “Link-only” is deliberate: until a human reviews exact version,
+**2026-08-01**; S35-22 was checked on **2026-08-02**. “Link-only” is deliberate: until a human reviews exact version,
 license, third-party notices, data terms, and asset-specific rights, Atlas may
 cite and link to a source but must create its own prose, figures, code,
 datasets, derivations, tests, and examples. A source’s existence is not a
@@ -128,6 +128,7 @@ release approval.
 | S35-19 | Georgia Tech, [CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Official course route for connected supervised, unsupervised, and sequential-decision analysis with defensible reports. Supports M35’s dossier and scope-gap review. | **Link/cite only**. Atlas does not reproduce course reports, private repositories, feedback, or term-long project work. |
 | S35-20 | [scikit-learn probability calibration guide](https://scikit-learn.org/stable/modules/calibration.html) | First-party documentation for separating a named population calibration relation from a finite reliability estimate. Supports M35-C04 and M35-S03; it does not make a finite card a calibration guarantee. | BSD-3-Clause project; link-only/original reliability tables and explanations. Recheck the documentation/API version before a concrete implementation claim. |
 | S35-21 | [scikit-learn `brier_score_loss` reference](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html) | First-party API reference for the Brier-score convention used only as a bounded finite probabilistic-forecast loss reading card. Supports M35-S03; a lower score alone is not a population-calibration ranking or decision policy. | BSD-3-Clause project; link-only/original fixed cards. Recheck the version and score convention before a concrete API claim. |
+| S35-22 | MIT OpenCourseWare, [18.642 Lecture 23: Introduction to Machine Learning](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/resources/mit18_642_f24_lec23/) | Official lecture route for the fit/train, validation comparison, and final held-out test distinction. Supports M35-S03's original fixed-partition trace and its leakage repair, not an IID, generalization, or deployment guarantee. | MIT OCW assets have their own notices; link-only/original Atlas rows, derivation, and code. Do not copy the lecture slides, prose, examples, or exercises. |
 
 ### What this ledger does *not* establish
 

@@ -28,7 +28,7 @@
   },
   "forwardHandoff": {
     "targetModuleId": "m33",
-    "carryArtifact": "Carry the canonical Reproducible systems claim packet: boundary map, execution trace, benchmark card, environment record, and unresolved-risk list. with one uncertainty-not a mastery claim.",
+    "carryArtifact": "Carry the canonical Reproducible systems claim packet: boundary map, execution trace, benchmark card, environment record, and unresolved-risk list, with one remaining uncertainty; it is not a mastery claim.",
     "targetQuestion": "Before using this packet in M33, which stated assumption, trace boundary, or counterexample must remain visible when the next module changes the problem?",
     "boundary": "M33 is the only canonical forward handoff. Any other advanced-module reference is an authoring or direct-consumer connection, not learner navigation, release evidence, or credit."
   }

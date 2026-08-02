@@ -105,6 +105,8 @@ portable: the stated assumptions and non-claim still control the conclusion.
   trace. It is intentionally not directly runnable Python.
 - A `python` fence is a syntax-valid compact Python fragment; its surrounding
   exercise still declares the inputs, environment, and limited claim.
+- A `c` fence is an original, deliberately flawed C-API reading sketch. Read
+  its contract and error paths; do not compile or run it as a lab.
 - The M32 NumPy observation names an exact package version and has a focused
   test. It remains one CPU-only observation, not a benchmark or platform model.
 
@@ -273,6 +275,97 @@ The card is not an actual array-library, buffer-protocol, or GPU trace. It
 does not tell you what a real `prepare_for_kernel` implementation copies or
 accepts; it shows the metadata a review must still name.
 
+### Native code-reading card — a buffer descriptor is not a flat float array
+
+This is a **deliberately flawed original C-API sketch** for reading—not a
+compiled extension, recipe, or invitation to run native code. It requests a
+formatted strided buffer, then hides two contract bugs.
+
+~~~c
+#include <Python.h>
+#include <string.h>
+
+int inspect_rank2_float32(PyObject *source) {
+    Py_buffer view = {0};
+    if (PyObject_GetBuffer(source, &view, PyBUF_FORMAT | PyBUF_STRIDES) < 0) {
+        return -1;
+    }
+    if (view.ndim != 2 || view.itemsize != sizeof(float) ||
+        strcmp(view.format, "f") != 0) {
+        return -1;  /* suspicious: a successful acquisition was not released */
+    }
+
+    float observed_total = 0.0f;
+    float *values = (float *)view.buf;
+    for (Py_ssize_t row = 0; row < view.shape[0]; ++row) {
+        for (Py_ssize_t column = 0; column < view.shape[1]; ++column) {
+            observed_total += values[row * view.shape[1] + column];  /* suspicious */
+        }
+    }
+    (void)observed_total;  /* traversal is the only purpose of this inspection sketch */
+    PyBuffer_Release(&view);
+    return 0;  /* inspection sketch: no public result contract is claimed */
+}
+~~~
+
+**Text equivalent:** after a successful request, the sketch can reject an
+unsupported descriptor without releasing it. Its indexing expression treats
+the buffer as a C-contiguous float array even though the request permits
+arbitrary strides, including a negative-stride view. The sketch is therefore a
+review target, not a valid no-copy implementation.
+
+**Predict before reveal.** Mark the two suspicious lines and choose a repair
+direction before reading on:
+
+- A. Either make a `PyBUF_FORMAT | PyBUF_C_CONTIGUOUS` **C-contiguous request**
+  (and handle its possible failure while preserving the format-dependent
+  contract), or acquire a strided view and verify it with
+  `PyBuffer_IsContiguous(&view, 'C')` before a flat-pointer walk; ensure every
+  successful acquisition has one paired release on every exit path.
+- B. Treat shape as enough evidence that the flat-pointer walk is valid.
+- C. Remove `PyBuffer_Release` because the caller still owns `source`.
+- D. Convert the code to Python and infer the native contract from one result.
+
+<details>
+<summary>Reveal the boundary repair after writing your prediction.</summary>
+
+**Reveal:** A. A consumer that needs `view.format` may ask
+`PyObject_GetBuffer` for `PyBUF_FORMAT | PyBUF_C_CONTIGUOUS`; that request can
+fail. Or it may acquire the strided formatted view and call
+`PyBuffer_IsContiguous(&view, 'C')` before flat-pointer arithmetic. Otherwise
+it must retain the strided contract and compute addresses from the declared
+strides. Those are different consumer promises. After
+`PyObject_GetBuffer` succeeds, every later return path must preserve the single
+paired `PyBuffer_Release` duty. Real code must also define its exact format
+acceptance, rank/shape policy, read versus write permission, overflow checks,
+and error translation under its pinned Python/build target.
+
+For a rank-2 strided contract, the byte-address idea is:
+
+~~~c
+char *address = (char *)view.buf + row * view.strides[0] + column * view.strides[1];
+~~~
+
+`view.buf` is the **logical start** of the described view, not necessarily the
+start of the physical allocation. With a negative stride, it can point at the
+**end of the physical storage**. That is why treating it as a flat positive
+row-major `float *` is a separate contiguous-consumer promise. A real consumer
+must still state its exact format, item-size, alignment, and dereference rules.
+
+</details>
+
+### Debugging task — repair the claim, not just the line
+
+For this sketch, write a review note with three columns: observed source fact,
+missing contract fact, and safe next action. Include the negative-stride view
+as the smallest counterexample to the flat traversal. Then change one premise:
+suppose the consumer writes instead of reads. Which request and permission fact
+must be rechecked before the implementation can even discuss mutation?
+
+The point is not to memorize C API flags. It is to make the boundary visible:
+format, item size, rank, shape, strides, contiguity, readonly/writable state,
+and paired release belong in the same review sentence.
+
 ### Output: Boundary Contract Map
 
 Create a **Boundary Contract Map** for one bounded, non-consequential
@@ -280,6 +373,8 @@ computation. Include:
 
 - semantic oracle, units, public input/output, errors, and version scope;
 - rank/axes/shape/dtype/layout/alias/copy/residency fields;
+- format, item size, rank, shape, strides, contiguity, readonly/writable state,
+  and paired release for any buffer-consumer boundary;
 - caller, exporter, consumer, and result owner at each boundary;
 - one intentionally private implementation detail;
 - one adversarial input such as a negative-stride view, readonly buffer,
@@ -1331,8 +1426,9 @@ remain gated synthesis work until their own requirements are complete.
 This workbook uses original explanations, fixtures, diagrams, and prompts. The
 linked material is for study and provenance; it is not copied source text,
 code, figures, benchmarks, or exercises. Research was rechecked for this
-bounded NumPy observation on **2026-08-01**; the university calibration route
-below was checked on the same date. Documentation moves, so a future publication must recheck URLs,
+bounded NumPy observation on **2026-08-01** and for the Python buffer-protocol
+route on **2026-08-02**; the university calibration route below was checked on
+the former date. Documentation moves, so a future publication must recheck URLs,
 versions, access dates, licenses, and exact environment scope.
 
 ### Learner-facing university calibration route

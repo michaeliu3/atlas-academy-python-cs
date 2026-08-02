@@ -11,6 +11,7 @@ import {
   m35BaselineComparison,
   m35BernoulliLogLikelihoodCard,
   m35CalibrationContrast,
+  m35FitSelectFreshEvaluationTrace,
   m35M36FixedReluTrace,
   m35RepresentationCollisionWitness,
   m35RidgeShrinkageCard,
@@ -121,6 +122,52 @@ test("the M35 ridge card keeps objective shrinkage and selection evidence distin
   ]);
   assert.match(card.selectionBoundary, /fresh evaluation relation/u);
   assert.match(card.truthBoundary, /model-selection result/u);
+});
+
+test("the M35 trace fits on train rows, selects on validation rows, and preserves a fresh evaluation boundary", () => {
+  const trace = m35FitSelectFreshEvaluationTrace();
+
+  assert.deepEqual(trace.partition, {
+    trainRowIds: ["train-1", "train-2", "train-3", "train-4"],
+    validationRowIds: ["validation-1", "validation-2"],
+    freshEvaluationRowIds: ["fresh-1", "fresh-2", "fresh-3", "fresh-4"],
+  });
+  assert.deepEqual(trace.fitting.rowsUsed, trace.partition.trainRowIds);
+  assert.deepEqual(trace.selection.rowsUsed, trace.partition.validationRowIds);
+  assert.deepEqual(trace.freshEvaluation.rowsUsed, trace.partition.freshEvaluationRowIds);
+  assert.deepEqual(
+    trace.fitting.candidates.map(({ id, polarity, trainingCorrect, trainingTotal }) => ({
+      id,
+      polarity,
+      trainingCorrect,
+      trainingTotal,
+    })),
+    [
+      { id: "signal-threshold", polarity: 1, trainingCorrect: 2, trainingTotal: 4 },
+      { id: "context-threshold", polarity: 1, trainingCorrect: 4, trainingTotal: 4 },
+    ],
+  );
+  assert.deepEqual(
+    trace.selection.candidates.flatMap(({ observations }) => observations.map(({ id }) => id)),
+    ["validation-1", "validation-2", "validation-1", "validation-2"],
+  );
+  assert.deepEqual(
+    trace.freshEvaluation.observations.map(({ id }) => id),
+    ["fresh-1", "fresh-2", "fresh-3", "fresh-4"],
+  );
+  const evidencePartitions = [
+    trace.fitting.rowsUsed,
+    trace.selection.rowsUsed,
+    trace.freshEvaluation.rowsUsed,
+  ];
+  assert.equal(new Set(evidencePartitions.flat()).size, evidencePartitions.flat().length);
+  assert.equal(trace.selection.selectedCandidateId, "context-threshold");
+  assert.equal(trace.freshEvaluation.selectedCandidateId, "context-threshold");
+  assert.equal(trace.freshEvaluation.accuracy, 0.25);
+  assert.equal(trace.oneChangeLeakageDebug.correctSelectionCandidateId, "context-threshold");
+  assert.equal(trace.oneChangeLeakageDebug.improperSelectedCandidateId, "signal-threshold");
+  assert.match(trace.oneChangeLeakageDebug.diagnosis, /fresh labels/u);
+  assert.match(trace.truthBoundary, /not a population estimate/u);
 });
 
 test("the shared-information card separates raw inputs, hypothesis families, and constructed scope", () => {
@@ -256,6 +303,10 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m35Workbook, /m35RidgeShrinkageCard\(\)/u);
   assert.match(m35Workbook, /Regularization changes the target; selection changes the evidence/u);
   assert.match(m35Workbook, /m35SharedInformationModelFamilyCard\(\)/u);
+  assert.match(m35Workbook, /m35FitSelectFreshEvaluationTrace\(\)/u);
+  assert.match(m35Workbook, /Fit → select → fresh evaluation/u);
+  assert.match(m35Workbook, /One-change debugging probe — fresh labels are not tuning feedback/u);
+  assert.match(m35Workbook, /training rows only/u);
   assert.match(m35Workbook, /m35M36FixedReluTrace\(\)/u);
   assert.match(m35Workbook, /Selection boundary — inspection changes the evidence/u);
   assert.match(m35Workbook, /Claim\/source trail/u);

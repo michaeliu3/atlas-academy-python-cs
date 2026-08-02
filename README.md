@@ -149,8 +149,13 @@ python -m unittest discover -s public/downloads -p "test_module*_reference.py"
 
 The Node test command builds the production portal and exercises diagnostic and
 rendered HTML contracts. The Python suite exercises deterministic, local-only
-teaching models. No model should perform network, filesystem, process,
-database, package, credential, or arbitrary-code operations.
+teaching models. Most models do not perform network, filesystem, process,
+database, package, credential, or arbitrary-code operations. The explicit
+exception is the [bounded Module 18 OS evidence lab](public/downloads/module18_reference.py):
+it uses a caller-marked disposable workspace and one local child worker under
+its documented timeout and allowed-scenario contract. It does not use network,
+database, package, credential, or arbitrary-code operations, and it does not
+claim sandboxing, durability, or broad process safety.
 
 `pnpm test:browser` is the focused Chromium/axe acceptance gate. Only a
 successful, recorded GitHub Linux run for the exact source commit is release
