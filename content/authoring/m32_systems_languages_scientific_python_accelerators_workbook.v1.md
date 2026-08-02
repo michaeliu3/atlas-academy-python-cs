@@ -354,6 +354,25 @@ For a performance statement, specify:
 - warm-up/compilation policy, repeats, input fixtures, and semantic oracle;
 - the environment under which the observation was made.
 
+### Optional backend reading lens — PyTorch CUDA, not a GPU lab
+
+Use this lens only when you deliberately choose **PyTorch CUDA semantics** as
+the named backend to read. It is a vocabulary and code-reading bridge; it does
+not require PyTorch, a GPU, a timing run, or a portability claim. The generic
+trace above remains the required CPU/text fallback.
+
+| Generic trace field | PyTorch CUDA concept to inspect in the official documentation | Question the lens still leaves open |
+| --- | --- | --- |
+| submit | A CUDA operation may return control to the host before device work has completed. | Which operation, input residency, PyTorch/CUDA/driver version, and stream were actually used? |
+| named queue | The current/default or an explicitly named CUDA stream orders work in that stream. | Which dependencies cross streams, and what prior work is already queued? |
+| readiness boundary | A documented synchronization operation can define a host-visible wait boundary. | Does the chosen wait include transfer, warm-up, or unrelated queued work? |
+| storage/lifetime | A tensor, its device storage, and its stream usage have backend-specific lifetime rules. | Which object owns the storage until the last consumer, and which documented rule establishes that? |
+
+Read the [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html)
+page before using its terms. Record its access date and the exact runtime only
+if you run a real observation. This table never establishes that a learner's
+machine has CUDA, that a call overlaps work, or that a result is faster.
+
 ### Prediction before reveal
 
 Read this deliberately incomplete timing fragment:
@@ -552,6 +571,20 @@ conversion, lifetime, device, peak-memory, or performance behavior.
 This is a fixed observation of named arrays, not a claim that broadcasting
 always allocates, that a particular backend cannot fuse work, or that a layout
 is faster.
+
+### Reproducibility bridge — frozen observation versus moving documentation
+
+Keep these two kinds of evidence separate:
+
+| Item | What it can support | What it cannot replace |
+| --- | --- | --- |
+| This fixture | The named CPU-only arrays and checks under **NumPy 2.3.5**. | A claim about another NumPy release, backend, device, consumer, or allocation path. |
+| [NumPy 2.3 copies/views](https://numpy.org/doc/2.3/user/basics.copies.html), [`shares_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.shares_memory.html), and [`may_share_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.may_share_memory.html) | The documented API vocabulary closest to the frozen fixture. | A rerun of the semantic oracle under the learner's environment. |
+| [Current stable NumPy documentation](https://numpy.org/doc/stable/user/basics.copies.html), accessed 2026-08-01 | A route for checking later documentation language. | Evidence that this fixed 2.3.5 observation still holds unchanged. |
+
+Before carrying a conclusion forward, record the runtime/library version and
+rerun the named observation with its semantic oracle. Documentation helps
+interpret an interface; it does not recreate the observed execution.
 
 ### Numerical boundary — representation changes the claim
 
@@ -1313,7 +1346,7 @@ versions, access dates, licenses, and exact environment scope.
 | Source cluster | Claim linkage and reason to read | Reuse boundary |
 | --- | --- | --- |
 | [Python extension and C API](https://docs.python.org/3.14/extending/extending.html), [buffer protocol](https://docs.python.org/3.14/c-api/buffer.html), [memoryview](https://docs.python.org/3/library/stdtypes.html#memory-views) | Sessions 1 and 3: public/native boundaries, buffer descriptors, lifetime and contiguity requests. | PSF License v2; link-only and original paraphrase. Pin interpreter/build target before a concrete claim. |
-| [NumPy array layout](https://numpy.org/doc/stable/reference/arrays.ndarray.html), [copies and views](https://numpy.org/doc/stable/user/basics.copies.html), [`shares_memory`](https://numpy.org/doc/stable/reference/generated/numpy.shares_memory.html), [`may_share_memory`](https://numpy.org/doc/stable/reference/generated/numpy.may_share_memory.html), and [broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) | `M32-C03–M32-C04`, Session 3: shape, dtype, strides, views/copies, exact-versus-conservative alias checks, broadcasting, and allocation risk. | NumPy BSD-3-Clause; link-only and original fixtures. The fixed observation pins NumPy 2.3.5; recheck behavior/version before release. |
+| [NumPy 2.3 array layout](https://numpy.org/doc/2.3/reference/arrays.ndarray.html), [copies and views](https://numpy.org/doc/2.3/user/basics.copies.html), [`shares_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.shares_memory.html), [`may_share_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.may_share_memory.html), plus [current stable broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) | `M32-C03–M32-C04`, Session 3: versioned vocabulary for the frozen 2.3.5 observation, then a clearly separate route to moving documentation. | NumPy BSD-3-Clause; link-only and original fixtures. The fixed observation pins NumPy 2.3.5; recheck behavior/version before release. |
 | [Cython memoryviews](https://cython.readthedocs.io/en/3.1.x/src/userguide/memoryviews.html), [Numba performance guidance](https://numba.readthedocs.io/en/stable/user/performance-tips.html) | Sessions 1 and 3: compiled/native routes are explicit contracts, not automatic gains. | Apache-2.0 and BSD-2-Clause respectively; link-only/original paraphrase. |
 | [CUDA asynchronous execution](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/asynchronous-execution.html), [HIP overview](https://rocm.docs.amd.com/projects/HIP/en/docs-6.1.0/) | Sessions 2 and 4: host/device distinction, streams, events, and backend-specific limits. | NVIDIA documentation is proprietary; ROCm components vary. Link-only; never infer universal support. |
 | [JAX asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html), [JAX autodiff](https://docs.jax.dev/en/latest/automatic-differentiation.html), [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html), [PyTorch autograd mechanics](https://docs.pytorch.org/docs/stable/notes/autograd.html) | Sessions 2, 4, and 5: readiness boundaries, framework-specific execution, and autodiff scope. | Apache-2.0/BSD-3-Clause projects; link-only/original paraphrase. Pin framework/backend/runtime/device versions. |

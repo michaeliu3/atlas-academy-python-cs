@@ -14,7 +14,7 @@ credit, or university equivalence.
 | Official material (accessed 2026-08-01) | Review use |
 | --- | --- |
 | [MIT 6.036](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) and [MIT 6.7960](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/) | Validate the representation → generalization/theory progression and the deliberate boundary from a full deep-learning survey. |
-| [CMU 10-301/601](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) and [Stanford CS229 materials](https://cs229.stanford.edu/materials.html-full) | Validate formulation, regularization/model selection, formal-properties, and experiment-design habits. |
+| [CMU 10-301/601](https://www.cs.cmu.edu/~mgormley/courses/10601/) and [Stanford CS229 materials](https://cs229.stanford.edu/materials.html-full) | Validate formulation, regularization/model selection, formal-properties, and experiment-design habits. |
 | [Georgia Tech CS 7641](https://omscs.gatech.edu/cs-7641-machine-learning) and [UC Berkeley CS 189 catalog](https://undergraduate.catalog.berkeley.edu/courses/1042881/overview-aoYks) | Calibrate defensible analysis/portfolio expectations and preserve the stated boundary from broad model-family and real-data project coverage. |
 
 ## Strengths retained

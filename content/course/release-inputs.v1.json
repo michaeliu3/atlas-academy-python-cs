@@ -70,11 +70,11 @@
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "0fe8e0c19570a048b6a3c968a096ca21e2a9cc94d3ad97aab609c1367aa02333"
+      "sha256": "516a254c0bc0bf04b494495ef6a40ce3cb2055ba1006e57104f82f42401b5453"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "89056c19a2ad609a44fc4e1c2b29d856cce24ebc816a1caad8acf09e3fee4c33"
+      "sha256": "f73369c3c1bbb15a80644faf4a90b7e1c3944e788d021d755f3c4acfd160bca3"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
@@ -82,11 +82,11 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "7e0ce22548ad563a2503934b58d6811523f2b8a5965b64c88817285be725c34b"
+      "sha256": "10f3e5bec82a345320c1d63cbf674a2ea937f060de0f284b1b4dae0839cf42b2"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "a21d2c8822389216e4c9f266f49c7ecbc5be9a4a44ff5c684956f9c5bf9bc9f1"
+      "sha256": "21e070bdf010d2c5ab8fc993c1360aa286574c4dc2f91a140b879d046bbabf31"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -590,7 +590,7 @@
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "fd1955e8d1543263a270ab8d18fbcde1a2eab1614718a1af2645e6ce4cda96a7"
+      "sha256": "04ae22c551afb19930a87d41cd53eb6ca0329c8d5e0aa904a6917cfe36a8d67c"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
@@ -602,11 +602,11 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "0c8be245382cb76df6794fe68ed38c02d52ac1d37154d54079c1c6e1c259a657"
+      "sha256": "db1d4f9ef9cb89e6249ae3d34085a511066e7587cb19bcb0108a1f2331f7dde2"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
-      "sha256": "4fca7b74941ebd4d84ce4ce34ddcb5fc93a2a6a6a8a9fe5c50cdf1d03b160af4"
+      "sha256": "b4cd9b188245a7bbf153d6655393d289c31d1f23e73d2a31988c60bcd63174df"
     },
     {
       "path": "content/source-maps/python_curriculum_sources.md",

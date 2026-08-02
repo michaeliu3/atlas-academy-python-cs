@@ -159,6 +159,21 @@ fits a CFG.
 
 </details>
 
+### Constructive witness — a CFG for \(L_=\)
+
+The grammar
+
+\[
+S \rightarrow 0S1 \mid \epsilon
+\]
+
+generates the equal-count language: for example,
+\(S \Rightarrow 0S1 \Rightarrow 00S11 \Rightarrow 0011\). Each recursive
+step adds one `0` on the left and one `1` on the right; the base case ends the
+string. This is a constructive witness that \(L_=\) is context-free. The
+later distinguishability argument answers the separate question of why no
+finite-state recognizer can recognize it.
+
 ### Tiny derivation trace — syntax before meaning
 
 For the balanced-parentheses grammar above, derive `()()` without skipping the

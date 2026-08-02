@@ -425,6 +425,27 @@ raw fields, derived features, family, constructed/fitted status, tuning budget,
 four-row result, and one non-claim. The useful question is *which assumption
 or computational form changed?*, not *which model name won?*
 
+### Breadth map — a family changes a contract, not just a model name
+
+This module studies representation, evaluation, training evidence, and
+reliability in depth; it is not a compressed survey of every learning family.
+Use this map when reading an unfamiliar proposal. It tells you which contract
+the proposal changes and where Atlas intentionally stops.
+
+| Family | What changes first | Evidence question before comparison | Atlas boundary |
+| --- | --- | --- | --- |
+| Linear or additive model | The relation is constrained to a weighted combination of declared features. | Which distinctions cannot this representation and hypothesis class express? | The affine threshold above is the hand-checkable reference case. |
+| Tree or rule partition | The input space is divided by named tests. | What split/tuning budget and missing-value or subgroup policy were allowed? | Read and compare the partition; full tree training is optional depth. |
+| Kernel or similarity method | A similarity function acts like a chosen feature geometry. | What does the kernel say is similar, and how were scale and regularization selected? | Treat kernel choice as a representation claim; no kernel implementation is required here. |
+| Neural network | Learned compositions can change the hypothesis class and numerical execution path. | Which architecture, objective, precision, seed, and gradient claim are actually evidenced? | The fixed two-ReLU and autodiff traces are the in-scope execution cases. |
+| Unsupervised method | The objective no longer uses the same labeled decision target. | What structure is optimized, and how would its usefulness for a later task be tested without leakage? | Representation and clustering/reconstruction are optional depth, not a proxy for task success. |
+| Sequential decision | Actions affect later observations and returns. | Who owns the reward, intervention, and safety boundary when the policy changes data? | M34 supplies state/action/decision framing; policy learning is optional depth. |
+
+For any family, write the same six fields before trusting a result: **available
+information, representation, objective, hypothesis/decision class, selection
+procedure, and observable evidence**. A new family never removes the need for
+an authority boundary.
+
 ### Output: Classical–Learning Baseline Comparison
 
 Create a **Baseline Comparison** that records:
@@ -1117,7 +1138,7 @@ benchmarks, code, weights, or model-card assets.
 | --- | --- | --- |
 | [Stanford CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Sessions 1–6: learning-problem formulation, representation, learning theory, regularization/model selection, and evaluation. Some course material may require affiliate access. | Link-only/original Atlas examples; do not copy assignments, notes, figures, or solutions. |
 | [MIT 6.036 Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Sessions 1–5: supervised learning, model selection, neural networks, and evidence-aware ML reasoning. | MIT OCW assets have their own notices; link-only/original Atlas fixtures and explanations. |
-| [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601-f25/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
+| [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
 | [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
 | [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html), [probability calibration](https://scikit-learn.org/stable/modules/calibration.html), and [Brier score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html) | Session 3: split relations, leakage, finite reliability estimates, and a bounded probabilistic-loss reading. | Link-only/original Atlas examples. Library mechanisms do not choose a target relation, prove population calibration, or guarantee a decision. |
 | [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Session 4: bounded execution and reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
