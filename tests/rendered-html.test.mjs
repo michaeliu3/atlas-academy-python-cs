@@ -607,6 +607,41 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /Level 9 · Deep specialization/);
   assert.match(readable, /Post-core extension routes \(design only\)/);
   assert.match(readable, /Authoring-only — no learner reader route/);
+
+  const scopeDocument = new JSDOM(html).window.document;
+  const scopeTopic = (label) =>
+    [...scopeDocument.querySelectorAll("article")].find(
+      (topic) => topic.querySelector("h3")?.textContent === label,
+    );
+  const currentDelivery = (topic) =>
+    [...(topic?.querySelectorAll("dl > div") ?? [])].find(
+      (fact) => fact.querySelector("dt")?.textContent === "Current delivery",
+    )?.querySelector("dd")?.textContent?.replace(/\s+/g, " ").trim() ?? "";
+
+  const interchangeDelivery = currentDelivery(
+    scopeTopic(
+      "Rigorous conditions for interchanging limits, derivatives, expectations, and integrals; measure theory and full real-analysis depth.",
+    ),
+  );
+  assert.match(
+    interchangeDelivery,
+    /Open material · review pending.*2 mapped anchors/i,
+    "a post-core topic still reports the current delivery of each open anchor",
+  );
+  assert.equal(
+    (interchangeDelivery.match(/Open material · review pending/gi) ?? []).length,
+    1,
+    "a single delivery state is not repeated inside one compact fact",
+  );
+  assert.match(
+    currentDelivery(
+      scopeTopic(
+        "Model misspecification, robust statistics, causal reasoning, nonparametrics, and high-dimensional estimation.",
+      ),
+    ),
+    /Mixed anchor delivery.*Open material · review pending.*Authoring-only — no learner reader route/is,
+    "mixed open and authoring-only anchors stay visible instead of being flattened into the scope label",
+  );
   assert.match(readable, /Mathematical, Algorithms &amp; Theory Deepening/);
   assert.match(readable, /MIT 6\.854 Advanced Algorithms/);
   assert.match(readable, /Stanford CS224N NLP with Deep Learning/);

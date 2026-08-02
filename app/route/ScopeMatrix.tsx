@@ -41,14 +41,14 @@ const availabilityLabels: Record<CourseAvailability, string> = {
   "authoring-only": "Authoring-only — no learner reader route",
 };
 
-const availabilityRank: Record<CourseAvailability, number> = {
-  "authoring-only": 0,
-  locked: 1,
-  preview: 2,
-  optional: 3,
-  "legacy-open": 4,
-  published: 5,
-};
+const availabilityOrder: CourseAvailability[] = [
+  "legacy-open",
+  "published",
+  "preview",
+  "locked",
+  "optional",
+  "authoring-only",
+];
 
 const calibrationSourceLabels = new Map([
   [
@@ -102,34 +102,42 @@ function moduleReference(moduleId: string) {
 }
 
 function deliveryPresentation(topic: ScopeMatrixTopic) {
-  if (topic.scope === "post-core-specialization") {
-    return {
-      label: "Post-core design only",
-      detail: "Core anchors are prerequisites or bridges, not a completed specialization.",
-    };
-  }
-  if (topic.scope === "explicitly-deferred") {
-    return {
-      label: "Explicitly deferred",
-      detail: "This needs a longer sequence and feedback cycle than the Atlas Core claims.",
-    };
-  }
-
   const anchorModules = topic.anchors
     .map(({ moduleId }) => modulesById.get(moduleId))
     .filter((courseModule): courseModule is NonNullable<typeof courseModule> => Boolean(courseModule));
-  const leastDeliverable = anchorModules.reduce((least, courseModule) =>
-    availabilityRank[courseModule.state.availability] < availabilityRank[least.state.availability]
-      ? courseModule
-      : least,
-  );
+  const availabilityCounts = new Map<CourseAvailability, number>();
+  for (const courseModule of anchorModules) {
+    const availability = courseModule.state.availability;
+    availabilityCounts.set(availability, (availabilityCounts.get(availability) ?? 0) + 1);
+  }
+  const deliveryStates = availabilityOrder.flatMap((availability) => {
+    const count = availabilityCounts.get(availability) ?? 0;
+    return count === 0 ? [] : [{ availability, count }];
+  });
+  const label =
+    deliveryStates.length === 1
+      ? availabilityLabels[deliveryStates[0].availability]
+      : "Mixed anchor delivery";
+  const deliverySummary = deliveryStates
+    .map(
+      ({ availability, count }) =>
+        deliveryStates.length === 1
+          ? `${count} mapped ${count === 1 ? "anchor" : "anchors"}`
+          : `${count} ${count === 1 ? "anchor" : "anchors"} · ${availabilityLabels[availability]}`,
+    )
+    .join("; ");
+
+  const scopeNote =
+    topic.scope === "post-core-specialization"
+      ? "This is a post-core study design; its Core anchors are bridges, not completed specialization."
+      : topic.scope === "explicitly-deferred"
+        ? "This needs a longer sequence and feedback cycle than the Atlas Core claims."
+        : "This labels current access, not learner completion or verified mastery.";
 
   return {
-    label: availabilityLabels[leastDeliverable.state.availability],
-    detail:
-      leastDeliverable.state.readerAccess === "hidden"
-        ? "A required anchor is hidden while its learner-release evidence is reviewed."
-        : "This labels current access, not learner completion or verified mastery.",
+    label,
+    detail: deliverySummary || "No mapped anchor delivery is available.",
+    scopeNote,
   };
 }
 
@@ -192,14 +200,20 @@ export function ScopeMatrix() {
                     <article className={styles.scopeTopic} key={topic.id}>
                       <div className={styles.scopeTopicTopline}>
                         <span className={styles.scopeTag}>{scopeLabels[topic.scope]}</span>
-                        <span className={styles.deliveryTag}>{delivery.label}</span>
                       </div>
                       <h3>{topic.label}</h3>
-                      <p className={styles.deliveryDetail}>{delivery.detail}</p>
+                      <p className={styles.deliveryDetail}>{delivery.scopeNote}</p>
                       <dl>
                         <div>
                           <dt>Target depth</dt>
                           <dd>{topic.targetCapabilities.join(" · ")}</dd>
+                        </div>
+                        <div>
+                          <dt>Current delivery</dt>
+                          <dd>
+                            <span className={styles.deliveryTag}>{delivery.label}</span>
+                            <span>{delivery.detail}</span>
+                          </dd>
                         </div>
                         <div>
                           <dt>Sessions</dt>
