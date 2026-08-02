@@ -22,11 +22,11 @@ does not alter them or copy outside exercises, notes, figures, or solutions.
 
 | Atlas module | Official material checked | Alignment, adaptation, and boundary |
 | --- | --- | --- |
-| **M1 — execution and state** | MIT [6.100L's calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) explicitly sequences Python objects/types/variables/bindings, environments/scope, mutation/aliasing, debugging, and assertions. CMU [15-122 learning objectives](https://www.cs.cmu.edu/~15122/syllabus.shtml) require tracing small imperative programs and using contracts, invariants, and tests to reason about safety and correctness. UC Berkeley [CS 61A Discussion 1](https://cs61a.org/disc/disc01/disc01.pdf) explicitly asks learners to describe a process and test it on examples before treating it as code. | Atlas's object/binding traces, aliasing prediction, mutation contracts, and regression-test artifact are a close conceptual fit. It deliberately adapts C0/C-style imperative reasoning to Python objects and shifts most evidence toward code reading, prediction, and explanation. It does not supply CMU's C/C0, Unix, or institutional problem volume. |
-| **M2 — functions, recursion, and induction** | MIT [6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) lists induction, well-founded ordering, and termination/correctness reasoning among its outcomes. Stanford [CS106B](https://web.stanford.edu/class/cs106b/index.html) names recursion, algorithm analysis, and data abstraction as connected programming-abstraction topics; Berkeley's [CS 61A recursion discussion](https://cs61a.org/disc/disc03/disc03.pdf) supplies a current base-case/decomposition practice route. | Atlas connects a call-frame trace to a termination measure, induction hypothesis, recurrence, and debugging case. That is a sound dependency order. The language and evaluation style differ from Stanford and Berkeley, and the six-session module cannot stand in for their repeated problem practice. |
-| **M3 — ADTs and interfaces** | MIT [6.102 Abstract Data Types](https://web.mit.edu/6.102/www/sp26/classes/06-abstract-data-types/) explicitly introduces ADTs and representation independence. Its [abstraction-functions and representation-invariants reading](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) defines AF and RI and treats representation exposure as a design concern. CMU 15-122 also expects learners to distinguish specification from implementation and defend interfaces and abstractions. | Atlas's EventStore contract, AF/RI trace, representation-exposure debugging, and behavioral patch review align with those central ideas. The deliberate adaptation is Python protocols and runtime limits rather than TypeScript or C interfaces. Static checking, API syntax, and test tools remain implementation-specific rather than proof substitutes. |
+| **M1 — execution and state** | MIT [6.100L's calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) sequences Python objects/types/variables/bindings, environments/scope, mutation/aliasing, debugging, and assertions. CMU [15-122 learning objectives](https://www.cs.cmu.edu/~15122/syllabus.shtml) require tracing small imperative programs and using contracts, invariants, and tests to reason about safety and correctness. The [Python 3.14 execution model](https://docs.python.org/3.14/reference/executionmodel.html) is the behavior authority for Atlas's frames, binding, lookup, and `nonlocal` claims. | Atlas's object/binding traces, aliasing prediction, mutation contracts, and regression-test artifact are a close conceptual fit. Its Session-2 lexical-scope prediction now gives the stated scope outcome direct learner evidence. It deliberately adapts C0/C-style imperative reasoning to Python objects and does not supply CMU's C/C0, Unix, or institutional problem volume. |
+| **M2 — functions, recursion, and induction** | MIT [6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) lists induction, well-founded ordering, and termination/correctness reasoning among its outcomes. Stanford [CS106B's official schedule](https://web.stanford.edu/class/cs106b/schedule.html) connects recursion, abstraction, and algorithm analysis; Berkeley's [CS 61A recursion discussion](https://cs61a.org/disc/disc03/disc03.pdf) supplies a current base-case/decomposition practice route. The [Python recursion-limit documentation](https://docs.python.org/3.14/library/sys.html#sys.getrecursionlimit) is the runtime authority for the implementation boundary. | Atlas connects a call-frame trace to a termination measure, induction hypothesis, recurrence, and debugging case. Its lexicographic-measure transfer confirms that the termination model is not tree-only. The language and evaluation style differ from Stanford and Berkeley, and the six-session module cannot stand in for their repeated problem practice. |
+| **M3 — ADTs and interfaces** | MIT [6.102 Abstract Data Types](https://web.mit.edu/6.102/www/sp26/classes/06-abstract-data-types/) explicitly introduces ADTs and representation independence. Its [abstraction-functions and representation-invariants reading](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) defines AF and RI and treats representation exposure as a design concern. CMU 15-122 also expects learners to distinguish specification from implementation and defend interfaces and abstractions. The [Python `Protocol` reference](https://docs.python.org/3.14/library/typing.html#typing.Protocol) is the behavior authority for the structural-typing boundary. | Atlas's EventStore contract, AF/RI trace, representation-exposure debugging, and behavioral patch review align with those central ideas. The required right-shape/wrong-law `ReversingStore` trace now makes the central limitation of structural typing learner-visible. The deliberate adaptation is Python protocols and runtime limits rather than TypeScript or C interfaces. |
 | **M4 — logic, sets, relations, graphs, and proof** | MIT 6.042J's outcomes include logical notation, sets, relations, induction, graph models, countering fallacious reasoning, and well-founded correctness/termination arguments. MIT [6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/syllabus/) lists this discrete-mathematics knowledge as a prerequisite for algorithm study. | Atlas correctly uses quantified contracts, counterexamples, relations, graph models, and a proof-versus-test distinction as the bridge from software claims to algorithm reasoning. Counting and probability appear as foundations only; deeper discrete mathematics is explicitly revisited in M27. One accelerated module cannot match a full discrete-mathematics term's proof volume. |
-| **M5 — cost models and analysis** | MIT 6.006 describes mathematical modeling, algorithms/data structures, and performance measures/analysis techniques. CMU 15-122 expects Big-O analysis, asymptotic classes, amortized analysis, practical-efficiency experiments, and applying those analyses to new programs. Georgia Tech [CS 6515](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) treats recurrence solving, asymptotic analysis, discrete mathematics, and undergraduate algorithm design as prerequisites for later graduate work. | Atlas's input model, counted operation, case analysis, recurrence, amortized argument, and measurement-reconciliation workflow aligns well with the undergraduate foundation that later algorithms assumes. Its explicit warning that measurements are not proofs is an appropriate AI-era adaptation. It does not claim the breadth or proof/problem-set depth of 6.006 or the graduate content of CS 6515. |
+| **M5 — cost models and analysis** | MIT 6.006 describes mathematical modeling, algorithms/data structures, and performance measures/analysis techniques. CMU 15-122 expects Big-O analysis, asymptotic classes, amortized analysis, practical-efficiency experiments, and applying those analyses to new programs. Georgia Tech [CS 6515](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) treats recurrence solving, asymptotic analysis, discrete mathematics, and undergraduate algorithm design as prerequisites for later graduate work. The [Python `perf_counter` reference](https://docs.python.org/3.14/library/time.html#time.perf_counter) is the authority for the timer API, not for a complexity claim. | Atlas's input model, counted operation, case analysis, recurrence, amortized argument, and measurement-reconciliation workflow aligns well with the undergraduate foundation that later algorithms assumes. Its raw-sample/median/minimum/maximum harness directly reinforces that measurements are evidence, not proofs. It does not claim the breadth or proof/problem-set depth of 6.006 or the graduate content of CS 6515. |
 
 ## Cross-module finding
 
@@ -42,29 +42,22 @@ reading, counterexample construction, small evidence artifacts, and supportive
 oral defense—is visible in each reviewed workbook. It should remain an
 adaptation, not be presented as the cited institutions' assessment model.
 
-## Recommended next revision priority
+## Learner-facing review result
 
-**P1 — make the existing sources mechanically session-addressable before
-adding theory.** Add a small Arc-I/M1–M5 source ledger or derive one from the
-canonical contract so that every core session points to one official source,
-one Atlas artifact, and one explicit `aligned`, `adapted`, or `deferred` note.
-This preserves the current connected sequence while making its evidence easier
-to audit.
+No additional theory or infrastructure is justified in this batch. The five
+small learner-facing risks found in the prior calibration are now directly
+addressed in the workbooks: M1 has a lexical-scope prediction trace; M2 has a
+lexicographic termination transfer; M3 requires a type-compatible,
+law-breaking implementation trace; M4 separates unequal branch counting from
+probability independence; and M5 retains raw samples and reports
+median/minimum/maximum. The M4→M5 handoff therefore retains both a completed
+counterexample/proof-style argument and a cost argument with a stated input
+model and measurement limit.
 
-**P2 — protect the proof-to-cost bridge.** At the M4→M5 handoff, retain one
-completed quantified proof or counterexample and one cost argument with an
-input model, operation count, and measurement limitation. MIT 6.042J makes
-rigorous conclusions and proof construction core outcomes, while CMU 15-122
-pairs correctness reasoning with practical-efficiency experiments; a quiz
-selection alone is not sufficient evidence. [MIT 6.042J syllabus](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/)
-[CMU 15-122 syllabus](https://www.cs.cmu.edu/~15122/syllabus.shtml)
-
-**P3 — keep advanced extensions visibly optional.** Use Stanford CS106B and
-Georgia Tech CS 6515 as scope and prerequisite anchors for recursion/data
-abstraction/analysis extensions, not as material to compress into M1–M5.
-Their different languages, support structures, and depth are reasons to link
-to a bounded next step rather than imply equivalence. [Stanford CS106B](https://web.stanford.edu/class/cs106b/index.html)
-[Georgia Tech CS 6515](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms)
+Keep Stanford CS106B and Georgia Tech CS6515 as optional depth and prerequisite
+anchors, not content to compress into M1–M5. A new Arc-I source ledger or
+registry would not add learner value here: each workbook already has a concise
+session-to-source route and this review records the cross-module comparison.
 
 ## Reuse and integrity note
 
