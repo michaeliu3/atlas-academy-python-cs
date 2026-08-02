@@ -8,11 +8,39 @@
     "consolidation": "3–12 months"
   },
   "scopeMatrix": {
-    "schemaVersion": 2,
+    "schemaVersion": 3,
     "benchmark": {
       "id": "learner-levels-1-to-9-2026-08",
       "title": "Levels 1–9 foundations-to-AI benchmark",
-      "accessedOn": "2026-08-02"
+      "accessedOn": "2026-08-02",
+      "sourceDigest": "sha256:1d8aa72a7084cc46a351a21be3c2e1e2dbf7ede24414d3eca50e25697cf701a2",
+      "sourceBoundary": "A compact index of the learner-supplied inventory headings. It crosswalks the inventory to Atlas targets without copying its reading lists or claiming delivery, coverage, or mastery.",
+      "items": [
+        { "id": "l1-01-proofs-discrete-mathematics", "level": 1, "label": "Proofs and discrete mathematics", "scopeTopicIds": ["l1.proofs.logic-relations", "l1.proofs.methods-invariants", "l1.discrete.counting-recurrences", "l1.discrete.graphs-orders-number-theory"] },
+        { "id": "l1-02-linear-algebra", "level": 1, "label": "Linear algebra", "scopeTopicIds": ["l1.linear.spaces-rank", "l1.linear.geometry", "l1.linear.spectral-pca", "l1.linear.tensor-stability"] },
+        { "id": "l1-03-calculus-real-analysis", "level": 1, "label": "Calculus and real analysis", "scopeTopicIds": ["l1.calculus.change-derivatives", "l1.analysis.limits-convergence", "l1.analysis.interchange-and-measure"] },
+        { "id": "l1-04-probability", "level": 1, "label": "Probability", "scopeTopicIds": ["l1.probability.foundations", "l1.probability.limits-concentration", "l1.probability.stochastic-processes"] },
+        { "id": "l1-05-statistics", "level": 1, "label": "Statistics", "scopeTopicIds": ["l1.statistics.models-estimation", "l1.statistics.inference-design", "l1.statistics.robust-high-dimensional"] },
+        { "id": "l1-06-optimization", "level": 1, "label": "Optimization", "scopeTopicIds": ["l1.optimization.formulation-convexity", "l1.optimization.methods-rates", "l1.optimization.advanced-methods"] },
+        { "id": "l1-07-information-theory", "level": 1, "label": "Information theory", "scopeTopicIds": ["l1.information.measures-variational", "l1.information.coding-principles"] },
+        { "id": "l2-08-programming-beyond-basic-python", "level": 2, "label": "Programming beyond basic Python", "scopeTopicIds": ["l2.programming.paradigms-abstraction", "l2.programming.types-testing-debugging", "l2.programming-shell-concurrency-data", "l2.programming-lower-level-ml-runtime"] },
+        { "id": "l2-09-data-structures-algorithms", "level": 2, "label": "Data structures and algorithms", "scopeTopicIds": ["l2.dsa.structures", "l2.dsa.graphs-and-paradigms", "l2.dsa.advanced-analysis", "l2.theory.formal-foundations"] },
+        { "id": "l2-10-theory-of-computation", "level": 2, "label": "Theory of computation", "scopeTopicIds": ["l2.theory.formal-foundations", "l2.theory.advanced-complexity"] },
+        { "id": "l2-11-computer-systems", "level": 2, "label": "Computer systems", "scopeTopicIds": ["l2.systems.machine-os-network", "l2.systems-data-distributed", "l2.systems-accelerators"] },
+        { "id": "l2-12-software-engineering", "level": 2, "label": "Software engineering", "scopeTopicIds": ["l2.software-engineering-durable-systems"] },
+        { "id": "l3-13-classical-artificial-intelligence", "level": 3, "label": "Classical artificial intelligence", "scopeTopicIds": ["l3.ai.state-search", "l3.ai.constraints-planning", "l3.ai.logic-knowledge-representation", "l3.ai.probabilistic-decision", "l3.ai.partial-observability-multiagent"] },
+        { "id": "l4-14-supervised-learning", "level": 4, "label": "Supervised learning", "scopeTopicIds": ["l4.ml.erm-supervised-foundations", "l4.ml.supervised-model-families"] },
+        { "id": "l4-15-unsupervised-representation-learning", "level": 4, "label": "Unsupervised and representation learning", "scopeTopicIds": ["l4.ml.unsupervised-representation"] },
+        { "id": "l4-16-generalization-model-selection", "level": 4, "label": "Generalization and model selection", "scopeTopicIds": ["l4.ml.generalization-selection-reliability"] },
+        { "id": "l4-17-statistical-learning-theory", "level": 4, "label": "Statistical learning theory", "scopeTopicIds": ["l4.ml.advanced-learning-theory"] },
+        { "id": "l5-18-neural-network-fundamentals", "level": 5, "label": "Neural-network fundamentals", "scopeTopicIds": ["l5.dl.computational-graphs-backprop"] },
+        { "id": "l5-19-major-architectures", "level": 5, "label": "Major architectures", "scopeTopicIds": ["l5.dl.architecture-families"] },
+        { "id": "l5-20-modern-training-methodology", "level": 5, "label": "Modern training methodology", "scopeTopicIds": ["l5.dl.modern-training-systems"] },
+        { "id": "l6-probabilistic-modeling-inference", "level": 6, "label": "Probabilistic modeling and inference", "scopeTopicIds": ["l6.pgm.structure-exact-inference", "l6.pgm.monte-carlo-variational", "l6.pgm.gaussian-processes-nonparametrics"] },
+        { "id": "l7-sequential-decision-making-rl", "level": 7, "label": "Sequential decision-making and reinforcement learning", "scopeTopicIds": ["l7.rl.bellman-dynamic-programming", "l7.rl.value-policy-methods", "l7.rl.advanced-control"] },
+        { "id": "l8-foundation-models-llms-generative-ai", "level": 8, "label": "Foundation models, LLMs, and generative AI", "scopeTopicIds": ["l8.fm.representations-transformers", "l8.fm.alignment-and-preference", "l8.fm.retrieval-tools-agents", "l8.fm.reliability-security-evaluation", "l8.fm.efficiency-multimodality"] },
+        { "id": "l9-deep-specialization-nlp-language-models", "level": 9, "label": "Deep specialization: NLP and language models", "scopeTopicIds": ["l9.nlp.linguistic-language-modeling", "l9.nlp.tasks-retrieval-dialogue", "l9.nlp.multilingual-specialty"] }
+      ]
     },
     "scopeStates": [
       "core-mastery",

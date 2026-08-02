@@ -230,14 +230,56 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     ["schemaVersion", "benchmark", "scopeStates", "capabilities", "topics", "extensionTracks"],
     "scopeMatrix",
   );
-  if (scopeMatrix.schemaVersion !== 2) {
-    fail("scopeMatrix schemaVersion must be 2.");
+  if (scopeMatrix.schemaVersion !== 3) {
+    fail("scopeMatrix schemaVersion must be 3.");
   }
-  assertExactKeys(scopeMatrix.benchmark, ["id", "title", "accessedOn"], "scopeMatrix benchmark");
+  assertExactKeys(
+    scopeMatrix.benchmark,
+    ["id", "title", "accessedOn", "sourceDigest", "sourceBoundary", "items"],
+    "scopeMatrix benchmark",
+  );
   assertString(scopeMatrix.benchmark.id, "scopeMatrix benchmark id");
   assertString(scopeMatrix.benchmark.title, "scopeMatrix benchmark title");
   if (!/^\d{4}-\d{2}-\d{2}$/u.test(scopeMatrix.benchmark.accessedOn)) {
     fail("scopeMatrix benchmark accessedOn must use YYYY-MM-DD.");
+  }
+  if (!/^sha256:[a-f0-9]{64}$/u.test(scopeMatrix.benchmark.sourceDigest)) {
+    fail("scopeMatrix benchmark sourceDigest must be a lowercase sha256 digest.");
+  }
+  assertString(scopeMatrix.benchmark.sourceBoundary, "scopeMatrix benchmark sourceBoundary");
+  if (!Array.isArray(scopeMatrix.benchmark.items) || scopeMatrix.benchmark.items.length === 0) {
+    fail("scopeMatrix benchmark must define source-inventory items.");
+  }
+  const benchmarkItemIds = new Set();
+  const benchmarkItemsById = new Map();
+  const benchmarkLevels = new Set();
+  for (const item of scopeMatrix.benchmark.items) {
+    assertExactKeys(item, ["id", "level", "label", "scopeTopicIds"], "scopeMatrix benchmark item");
+    assertString(item.id, "scopeMatrix benchmark item id");
+    if (benchmarkItemIds.has(item.id)) {
+      fail(`scopeMatrix benchmark item ${item.id} is duplicated.`);
+    }
+    benchmarkItemIds.add(item.id);
+    benchmarkItemsById.set(item.id, item);
+    if (!Number.isInteger(item.level) || item.level < 1 || item.level > 9) {
+      fail(`scopeMatrix benchmark item ${item.id} level must be an integer from 1 through 9.`);
+    }
+    benchmarkLevels.add(item.level);
+    assertString(item.label, `scopeMatrix benchmark item ${item.id} label`);
+    if (!Array.isArray(item.scopeTopicIds) || item.scopeTopicIds.length === 0) {
+      fail(`scopeMatrix benchmark item ${item.id} needs mapped Scope Matrix topics.`);
+    }
+    if (new Set(item.scopeTopicIds).size !== item.scopeTopicIds.length) {
+      fail(`scopeMatrix benchmark item ${item.id} repeats a mapped Scope Matrix topic.`);
+    }
+    for (const topicId of item.scopeTopicIds) {
+      assertString(topicId, `scopeMatrix benchmark item ${item.id} mapped topic`);
+    }
+  }
+  for (let level = 1; level <= 9; level += 1) {
+    if (!benchmarkLevels.has(level)) {
+      fail(`scopeMatrix benchmark must index Level ${level}.`);
+    }
   }
   assertDeclaredStates(scopeMatrix.scopeStates, expectedScopeStates, "scopeMatrix scopeStates");
   assertDeclaredStates(scopeMatrix.capabilities, expectedScopeCapabilities, "scopeMatrix capabilities");
@@ -323,6 +365,7 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     fail("scopeMatrix must map benchmark topics.");
   }
   const topicIds = new Set();
+  const topicsById = new Map();
   const levels = new Set();
   const scopes = new Set();
   for (const topic of scopeMatrix.topics) {
@@ -346,6 +389,7 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
       fail(`scopeMatrix topic ${topic.id} is duplicated.`);
     }
     topicIds.add(topic.id);
+    topicsById.set(topic.id, topic);
     if (!Number.isInteger(topic.level) || topic.level < 1 || topic.level > 9) {
       fail(`scopeMatrix topic ${topic.id} level must be an integer from 1 through 9.`);
     }
@@ -420,6 +464,31 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
   for (const scope of expectedScopeStates) {
     if (!scopes.has(scope)) {
       fail(`scopeMatrix must use ${scope} at least once.`);
+    }
+  }
+
+  const mappedTopicIds = new Set();
+  for (const item of benchmarkItemsById.values()) {
+    for (const topicId of item.scopeTopicIds) {
+      const topic = topicsById.get(topicId);
+      if (!topic) {
+        fail(`scopeMatrix benchmark item ${item.id} references missing Scope Matrix topic ${topicId}.`);
+      }
+      if (topic.level !== item.level) {
+        fail(`scopeMatrix benchmark item ${item.id} must map only Level ${item.level} Scope Matrix topics.`);
+      }
+      mappedTopicIds.add(topicId);
+    }
+  }
+  for (const topic of scopeMatrix.topics) {
+    if (topic.scope === "explicitly-deferred") {
+      if (mappedTopicIds.has(topic.id)) {
+        fail(`explicitly deferred Scope Matrix topic ${topic.id} must remain an Atlas boundary, not an inventory-coverage claim.`);
+      }
+      continue;
+    }
+    if (!mappedTopicIds.has(topic.id)) {
+      fail(`Scope Matrix topic ${topic.id} is missing a learner-inventory crosswalk.`);
     }
   }
 }

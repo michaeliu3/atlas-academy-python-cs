@@ -114,7 +114,41 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
   const foundationModels = matrix.topics.find(({ id }) => id === "l8.fm.representations-transformers");
   const optimization = matrix.topics.find(({ id }) => id === "l1.optimization.formulation-convexity");
 
-  assert.equal(matrix.schemaVersion, 2);
+  assert.equal(matrix.schemaVersion, 3);
+  assert.equal(
+    matrix.benchmark.sourceDigest,
+    "sha256:1d8aa72a7084cc46a351a21be3c2e1e2dbf7ede24414d3eca50e25697cf701a2",
+  );
+  assert.deepEqual(
+    matrix.benchmark.items.map(({ id }) => id),
+    [
+      "l1-01-proofs-discrete-mathematics",
+      "l1-02-linear-algebra",
+      "l1-03-calculus-real-analysis",
+      "l1-04-probability",
+      "l1-05-statistics",
+      "l1-06-optimization",
+      "l1-07-information-theory",
+      "l2-08-programming-beyond-basic-python",
+      "l2-09-data-structures-algorithms",
+      "l2-10-theory-of-computation",
+      "l2-11-computer-systems",
+      "l2-12-software-engineering",
+      "l3-13-classical-artificial-intelligence",
+      "l4-14-supervised-learning",
+      "l4-15-unsupervised-representation-learning",
+      "l4-16-generalization-model-selection",
+      "l4-17-statistical-learning-theory",
+      "l5-18-neural-network-fundamentals",
+      "l5-19-major-architectures",
+      "l5-20-modern-training-methodology",
+      "l6-probabilistic-modeling-inference",
+      "l7-sequential-decision-making-rl",
+      "l8-foundation-models-llms-generative-ai",
+      "l9-deep-specialization-nlp-language-models",
+    ],
+    "the whole learner-supplied Levels 1–9 inventory remains present in the canonical crosswalk",
+  );
   assert.equal(matrix.topics.length, 63);
   assert.deepEqual(levels, [1, 2, 3, 4, 5, 6, 7, 8, 9]);
   assert.deepEqual(
@@ -172,6 +206,28 @@ test("the graph rejects Scope Matrix gaps and fabricated post-core routes", asyn
   assert.throws(
     () => validateCourseGraph(impossibleSession),
     /scopeMatrix topic l1\.proofs\.logic-relations anchor m04 sessions must be 1 through 6/u,
+  );
+
+  const missingInventoryCrosswalk = structuredClone(graph);
+  missingInventoryCrosswalk.scopeMatrix.benchmark.items
+    .find(({ id }) => id === "l1-01-proofs-discrete-mathematics")
+    .scopeTopicIds = [
+      "l1.proofs.methods-invariants",
+      "l1.discrete.counting-recurrences",
+      "l1.discrete.graphs-orders-number-theory",
+    ];
+  assert.throws(
+    () => validateCourseGraph(missingInventoryCrosswalk),
+    /Scope Matrix topic l1\.proofs\.logic-relations is missing a learner-inventory crosswalk/u,
+  );
+
+  const crossLevelInventoryClaim = structuredClone(graph);
+  crossLevelInventoryClaim.scopeMatrix.benchmark.items
+    .find(({ id }) => id === "l1-01-proofs-discrete-mathematics")
+    .scopeTopicIds = ["l2.dsa.structures"];
+  assert.throws(
+    () => validateCourseGraph(crossLevelInventoryClaim),
+    /scopeMatrix benchmark item l1-01-proofs-discrete-mathematics must map only Level 1 Scope Matrix topics/u,
   );
 
   const missingCadence = structuredClone(graph);

@@ -68,12 +68,22 @@ export type ScopeMatrixExtensionTrack = {
   nonClaim: string;
 };
 
+export type ScopeMatrixBenchmarkItem = {
+  id: string;
+  level: number;
+  label: string;
+  scopeTopicIds: string[];
+};
+
 export type CourseScopeMatrix = {
-  schemaVersion: 2;
+  schemaVersion: 3;
   benchmark: {
     id: string;
     title: string;
     accessedOn: string;
+    sourceDigest: string;
+    sourceBoundary: string;
+    items: ScopeMatrixBenchmarkItem[];
   };
   scopeStates: ScopeMatrixState[];
   capabilities: ScopeMatrixCapability[];

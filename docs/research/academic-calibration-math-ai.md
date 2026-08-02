@@ -64,6 +64,10 @@ Atlas prose, examples, traces, and dossiers.
 
 The learner-facing Scope Matrix maps the attached Levels 1–9 inventory into
 Core targets, scoped exposure, post-Core specialization, and explicit deferral.
+Its canonical v3 benchmark records the source fingerprint plus a compact
+24-heading crosswalk to the non-deferred Matrix rows, so an omitted inventory
+heading or unanchored Matrix topic fails validation. This is a coverage index,
+not a claim that every target is learner-accessible, released, or mastered.
 The four routes below are **design-only**: they calibrate a future 90/180-day
 specialization after Core prerequisites and do not schedule, release, or imply
 mastery of additional Atlas modules.
