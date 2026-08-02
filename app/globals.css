@@ -5790,7 +5790,7 @@ main.module-library-shell {
 
 .diagnostic-reveal-row button,
 .diagnostic-question-controls button:last-child,
-.diagnostic-result-actions > :not(.diagnostic-reset-action, p, .diagnostic-export-consent) {
+.diagnostic-result-actions > :not(.diagnostic-reset-action, p, .diagnostic-export-consent, .diagnostic-manual-copy-fallback) {
   background: var(--ink);
   border: 0;
   border-radius: 999px;
@@ -6297,7 +6297,7 @@ main.module-library-shell {
   gap: 0.75rem;
 }
 
-.diagnostic-result-actions > :not(p) {
+.diagnostic-result-actions > :not(p, .diagnostic-manual-copy-fallback) {
   align-items: center;
   display: inline-flex;
   justify-content: center;
@@ -6368,6 +6368,41 @@ main.module-library-shell {
   font-size: 0.68rem;
   margin: 0.4rem 0 0;
   min-height: 1rem;
+}
+
+.diagnostic-learning-partners-handoff {
+  color: var(--ink);
+  flex-basis: 100%;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  margin: 0.2rem 0 0;
+}
+
+.diagnostic-manual-copy-fallback {
+  display: grid;
+  flex-basis: 100%;
+  gap: 0.45rem;
+  margin: 0.2rem 0 0;
+}
+
+.diagnostic-manual-copy-fallback label {
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.diagnostic-manual-copy-fallback textarea {
+  background: rgb(255 255 255 / 58%);
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  min-height: 11rem;
+  padding: 0.8rem;
+  resize: vertical;
+  width: 100%;
 }
 
 @media (max-width: 900px) {

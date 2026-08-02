@@ -77,6 +77,7 @@ export function DiagnosticExperience() {
   const questionHeadingRef = useRef<HTMLHeadingElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const resultsHeadingRef = useRef<HTMLHeadingElement>(null);
+  const copyAttemptVersionRef = useRef(0);
 
   useEffect(() => {
     let active = true;
@@ -163,6 +164,7 @@ export function DiagnosticExperience() {
     approvedLearningBrief,
     learningBrief,
   );
+  const copyFailureVisible = copyState === "failed" && learningBriefApproved;
 
   useLayoutEffect(() => {
     if (questionFocusVersion === 0) {
@@ -186,6 +188,12 @@ export function DiagnosticExperience() {
     dispatch({ type: "complete" });
   }
 
+  function setLearningBriefApproval(approved: boolean) {
+    copyAttemptVersionRef.current += 1;
+    setApprovedLearningBrief(approved ? learningBrief : null);
+    setCopyState("idle");
+  }
+
   function resetDiagnostic() {
     try {
       const storage = getBrowserProgressStorage();
@@ -197,8 +205,7 @@ export function DiagnosticExperience() {
     } catch {
       setPersistence("unavailable");
     }
-    setCopyState("idle");
-    setApprovedLearningBrief(null);
+    setLearningBriefApproval(false);
     setResetArmed(false);
     setRestoredProgress(false);
     setQuestionFocusVersion((version) => version + 1);
@@ -218,6 +225,7 @@ export function DiagnosticExperience() {
       setCopyState("approval-required");
       return;
     }
+    const copyAttemptVersion = copyAttemptVersionRef.current;
     try {
       if (window.navigator.clipboard?.writeText) {
         await window.navigator.clipboard.writeText(learningBrief);
@@ -235,9 +243,13 @@ export function DiagnosticExperience() {
           throw new Error("copy command was declined");
         }
       }
-      setCopyState("copied");
+      if (copyAttemptVersion === copyAttemptVersionRef.current) {
+        setCopyState("copied");
+      }
     } catch {
-      setCopyState("failed");
+      if (copyAttemptVersion === copyAttemptVersionRef.current) {
+        setCopyState("failed");
+      }
     }
   }
 
@@ -558,10 +570,7 @@ export function DiagnosticExperience() {
             <label>
               <input
                 checked={learningBriefApproved}
-                onChange={(event) => {
-                  setApprovedLearningBrief(event.target.checked ? learningBrief : null);
-                  setCopyState("idle");
-                }}
+                onChange={(event) => setLearningBriefApproval(event.target.checked)}
                 type="checkbox"
               />
               <span>I reviewed this learning brief and approve copying or printing it myself.</span>
@@ -586,6 +595,12 @@ export function DiagnosticExperience() {
           >
             Print approved brief
           </button>
+          <Link href="/learning-partners">Continue with Learning Partners</Link>
+          <p className="diagnostic-learning-partners-handoff">
+            After you approve and copy this brief, paste it into the designated Study Partner chat.
+            Atlas does not transfer this brief or activate records. Say <code>records on</code>{" "}
+            in that chat only if you want its configured concise-note policy.
+          </p>
           <Link href="/modules">Open the course library</Link>
           <button
             className="diagnostic-reset-action"
@@ -605,11 +620,24 @@ export function DiagnosticExperience() {
               : copyState === "printed"
                 ? "Printable learning brief opened."
                 : copyState === "approval-required"
-                  ? "Review the current brief before copying or printing it."
-              : copyState === "failed"
-                ? "Copy or print was unavailable. You can select only the reviewed brief manually."
+                ? "Review the current brief before copying or printing it."
+              : copyFailureVisible
+                ? "Copy or print was unavailable. The approved brief is below for manual selection."
                 : ""}
           </p>
+          {copyFailureVisible ? (
+            <div className="diagnostic-manual-copy-fallback">
+              <label htmlFor="diagnostic-manual-copy-fallback">
+                Approved learning brief for manual copy
+              </label>
+              <textarea
+                id="diagnostic-manual-copy-fallback"
+                readOnly
+                rows={12}
+                value={learningBrief}
+              />
+            </div>
+          ) : null}
         </div>
       </section>
     );

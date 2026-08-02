@@ -817,6 +817,65 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
   await expect(copyBrief).toBeEnabled();
   await expect(printBrief).toBeEnabled();
 
+  const learningPartnersLink = page.getByRole("link", {
+    name: "Continue with Learning Partners",
+  });
+  await expect(learningPartnersLink).toHaveAttribute("href", "/learning-partners");
+  const learningPartnersHandoff = page.locator(
+    ".diagnostic-learning-partners-handoff",
+  );
+  await expect(learningPartnersHandoff).toContainText(
+    "After you approve and copy this brief, paste it into the designated Study Partner chat.",
+  );
+  await expect(learningPartnersHandoff).toContainText(
+    "Atlas does not transfer this brief or activate records.",
+  );
+  await expect(learningPartnersHandoff).toContainText("records on");
+
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: () => Promise.reject(new Error("clipboard access denied")),
+      },
+    });
+  });
+  await copyBrief.click();
+  const manualCopyFallback = page.getByRole("textbox", {
+    name: "Approved learning brief for manual copy",
+  });
+  await expect(manualCopyFallback).toBeVisible();
+  await expect(manualCopyFallback).toHaveValue(
+    /Atlas Academy — Module 0 learning brief/,
+  );
+
+  await exportConsent.uncheck();
+  await expect(manualCopyFallback).toBeHidden();
+  await exportConsent.check();
+  await page.evaluate(() => {
+    let rejectPendingCopy: ((reason?: unknown) => void) | undefined;
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: () =>
+          new Promise<void>((_resolve, reject) => {
+            rejectPendingCopy = reject;
+          }),
+      },
+    });
+    window.addEventListener(
+      "atlas-reject-pending-copy",
+      () => rejectPendingCopy?.(new Error("clipboard access denied")),
+      { once: true },
+    );
+  });
+  await copyBrief.click();
+  await exportConsent.uncheck();
+  await page.evaluate(() => {
+    window.dispatchEvent(new Event("atlas-reject-pending-copy"));
+  });
+  await expect(manualCopyFallback).toBeHidden();
+
   const repairLink = page
     .getByRole("link", { name: /rebuild with open module/i })
     .first();

@@ -546,7 +546,7 @@
     },
     {
       "path": "content/source-maps/module26_systems_capstone_source_map.md",
-      "sha256": "26423571c077c05e9ff90c2c69cecec8bcade570ee12d1620401169fd9d8ecd6"
+      "sha256": "d6930f5dc84b48a1ed048e6ae93f1c861662a45cbf4b247d723074d47e74fa66"
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
@@ -674,7 +674,7 @@
     },
     {
       "path": "e2e/accessibility.spec.ts",
-      "sha256": "07feb6e6e4218556e56be6ec6f23ee6176cfcfb457ebd248c2ad36f80fdcf6a1"
+      "sha256": "fe9dfcba3e656eac435c7ab9d234da72bd09e714ea4c3ebc8e05f698ff9da35c"
     },
     {
       "path": "lib/module-studio-registry.ts",
@@ -858,7 +858,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "0854593de618904c1aeb4e25dc2104af0a51998197fc47a9a0fbcf0b36067e49"
+      "sha256": "819d4d8137dfbfcd7e5f75fdbc9736f99907123f46b8f8be524923e3ed1047be"
     }
   ]
 }

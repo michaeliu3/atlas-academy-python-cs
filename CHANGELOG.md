@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Connected completed Module 0 diagnostic results to the designated Learning
+  Partners workflow: after approving and copying the concise brief, a learner
+  can paste it into the Study Partner chat. Atlas does not transfer the brief
+  or activate records. If copying or printing is unavailable, the approved
+  brief appears locally in a labelled, selectable read-only fallback; revoking
+  approval hides it and invalidates any pending copy result. This does not
+  promote a module, create a record, or claim chat, deployment, review, or
+  learner-mastery evidence.
 - Stabilized temporary Git-index candidate-fixture cleanup with Node's bounded
   retry support for transient `ENOTEMPTY` failures, and corrected advanced-pack
   status wording in the completion matrix, roadmap, and learner pace plan.

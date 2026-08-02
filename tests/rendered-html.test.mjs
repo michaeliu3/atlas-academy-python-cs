@@ -671,6 +671,10 @@ test("keeps diagnostic route notes readable against their purpose-specific surfa
     contrastRatio(foreground, plumBackground) >= 4.5,
     "diagnostic extension notes need at least 4.5:1 normal-text contrast",
   );
+  assert.match(
+    globals,
+    /\.diagnostic-learning-partners-handoff\s*\{[^}]*color:\s*var\(--ink\)/,
+  );
 });
 
 test("diagnostic and M19 export actions require current learner approval before copying or printing", async () => {
@@ -688,6 +692,13 @@ test("diagnostic and M19 export actions require current learner approval before 
   );
   assert.match(diagnostic, /disabled=\{!learningBriefApproved\}/);
   assert.match(diagnostic, /Print approved brief/);
+  assert.match(diagnostic, /href="\/learning-partners"/);
+  assert.match(
+    diagnostic,
+    /After you approve and copy this brief, paste it into the designated Study Partner chat\./,
+  );
+  assert.match(diagnostic, /Atlas does not transfer this brief or activate records\./);
+  assert.match(diagnostic, /only if you want its configured concise-note policy\./);
   assert.doesNotMatch(diagnostic, /onClick=\{\(\) => window\.print\(\)\}/);
   assert.match(diagnostic, /setApprovedLearningBrief\(null\)/);
 
