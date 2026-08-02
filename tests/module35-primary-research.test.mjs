@@ -35,7 +35,7 @@ test("M35 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /The portal and portable copied prompts remain\s+local-first/u);
   assert.match(research, /only the learner-designated Codex Teaching Assistant or Study Partner\s+chat may create at most one concise, privacy-bounded Notion session note/u);
   assert.match(research, /no saved-note claim is valid without direct\s+evidence\./u);
-  assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~mgormley\/courses\/10601-f25\//u);
+  assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~mgormley\/courses\/10601\//u);
   assert.match(research, /https:\/\/cs229\.stanford\.edu\/materials\.html-full/u);
   assert.match(research, /https:\/\/omscs\.gatech\.edu\/cs-7641-machine-learning/u);
   for (let number = 1; number <= 21; number += 1) {
