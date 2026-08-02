@@ -287,6 +287,25 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
   assert.match(m36Workbook, /conditional \/ label-relation shift/u);
   assert.match(m36Workbook, /not IID evidence, a PAC\/VC calculation/u);
+
+  const dossierStart = m36Workbook.indexOf(
+    "### Output: Statistical Learning Theory & Reliable Deep-Learning Systems Dossier",
+  );
+  const rubricStart = m36Workbook.indexOf("### Acceptance rubric", dossierStart);
+  assert.ok(dossierStart >= 0, "M36 should define its final connected dossier");
+  assert.ok(rubricStart > dossierStart, "M36 should place its rubric after the final dossier");
+
+  const dossier = m36Workbook.slice(dossierStart, rubricStart);
+  assert.match(dossier, /two declared synthetic shift mechanisms/u);
+  assert.match(dossier, /input-time or delayed-label evidence/u);
+  assert.match(dossier, /label\s+availability\/detection lag/u);
+  assert.match(dossier, /one mechanism it can miss/u);
+  assert.match(dossier, /false-alarm\/miss trade-off/u);
+  assert.match(dossier, /owner, intervention, and stop boundary/u);
+  assert.match(
+    m36Workbook,
+    /monitoring claim states its evidence timing, one blind spot, and the accountable response/u,
+  );
 });
 
 test("the M35 and M36 authoring diagrams keep their declared prose alternatives", async () => {

@@ -86,7 +86,7 @@
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "21e070bdf010d2c5ab8fc993c1360aa286574c4dc2f91a140b879d046bbabf31"
+      "sha256": "bd38f7060283d51a6e8a8ee5249de46f11887e628490bd2f2111ea5af9850af9"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -194,11 +194,11 @@
     },
     {
       "path": "content/course/contracts/companions/m35.v1.json",
-      "sha256": "2eb345a57afd8827f4014ed09d00f62d1f4e004fdd309e4c784c41f23245e81c"
+      "sha256": "3091da46b42cd94f1d68435bc079ceb0331ca4791a2a60f03b64e99751f456a3"
     },
     {
       "path": "content/course/contracts/companions/m36.v1.json",
-      "sha256": "20d34253e3b3b86a8d19a1a2246dd279cbf8ca8551f6dca1c2895efe81f858ae"
+      "sha256": "7867f00f10019dcd97461f41eb17aa56c07363f730580ec0b58dd2b7155cb8ba"
     },
     {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",

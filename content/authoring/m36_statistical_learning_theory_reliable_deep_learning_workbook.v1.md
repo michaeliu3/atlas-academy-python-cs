@@ -858,8 +858,10 @@ evidence, monitoring boundary, and M25 handoff kept together.
    idea, quantifiers, edge case, and non-conclusion.
 4. **Theory-system reproduction record:** source/data/environment/precision/
    randomness identity, repeats, tolerance, and semantic oracle.
-5. **Shift/monitoring map:** named perturbation, observable, threshold,
-   ownership, response, and stop boundary.
+5. **Shift/monitoring map:** two declared synthetic shift mechanisms; a chosen
+   observable marked as input-time or delayed-label evidence; label
+   availability/detection lag; one mechanism it can miss; threshold and
+   false-alarm/miss trade-off; owner, intervention, and stop boundary.
 6. **Synthesis handoff:** the strongest supported claim, uncertainty, and the
    exact question M25 should carry into later evidence-grounded design work.
 
@@ -871,7 +873,7 @@ evidence, monitoring boundary, and M25 handoff kept together.
 | gaps | algorithm, finite sample, population, and operation are distinct | “Which gap did your loss trace actually touch?” |
 | theorem/limit | quantified scope and a non-conclusion appear adjacent | “What would be false if IID or the class condition vanished?” |
 | systems | raw repeat protocol and a nonportable boundary are visible | “What changed without a source-code change?” |
-| lifecycle | monitor, owner, intervention, and stop condition are concrete | “Who acts when the evidence weakens?” |
+| lifecycle | monitoring claim states its evidence timing, one blind spot, and the accountable response—not merely a metric and threshold | “Who acts when the evidence weakens?” |
 | judgment | recommendation is narrow, reversible, and human-controlled | “What is still unknown before anyone relies on this?” |
 
 ### Supportive oral-defense protocol

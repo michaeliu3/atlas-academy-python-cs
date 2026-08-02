@@ -112,8 +112,16 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   assert.match(m34.studyPartner.rehearsalMove, /0–100 confidence/u);
   assert.match(m35.studyPartner.rehearsalMove, /claim\/failure probe/u);
   assert.match(m35.studyPartner.rehearsalMove, /0–100 confidence/u);
+  assert.match(
+    m35.forwardHandoff.carryArtifact,
+    /Carry one remaining uncertainty; it is not a mastery claim\./u,
+  );
   assert.match(m36.studyPartner.rehearsalMove, /finite average versus population expectation/u);
   assert.match(m36.studyPartner.rehearsalMove, /0–100 confidence/u);
+  assert.match(
+    m36.forwardHandoff.carryArtifact,
+    /Carry one remaining uncertainty; it is not a mastery claim\./u,
+  );
   for (const [courseModule, guideLocator, forwardModuleId] of [
     [m32, "/guides/31", "m33"],
     [m33, "/guides/32", "m34"],
