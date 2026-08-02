@@ -30,7 +30,7 @@ test("current M12/M13 structural packets are separate from immutable historic pa
   assert.equal(currentReport.summary.structuralCandidates, 2);
   assert.equal(currentReport.summary.humanApprovals, 0);
   assert.equal(currentReport.summary.publicationChanges, 0);
-  assert.equal(legacyReport.summary.structuralCandidates, 11);
+  assert.equal(legacyReport.summary.structuralCandidates, 18);
   assert.equal(legacyReport.packetByModuleId.has("m12"), false);
   assert.equal(legacyReport.packetByModuleId.has("m13"), false);
   for (const moduleId of ["m12", "m13"]) {
@@ -50,7 +50,7 @@ test("current M12/M13 structural packets are separate from immutable historic pa
   );
 
   const combined = combineModuleContractPacketReports([legacyReport, currentReport]);
-  assert.equal(combined.packetByModuleId.size, 13);
+  assert.equal(combined.packetByModuleId.size, 20);
   assert.equal(
     combined.packetById.get("m12-modules-apis-types-dependencies-structural-candidate")?.moduleId,
     "m12",

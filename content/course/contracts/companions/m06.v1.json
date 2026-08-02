@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m06",
+  "purpose": "Freeze a candidate-only M6 Teaching Assistant, Study Partner, and M7 handoff context for future human review without changing M6's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/5",
+    "digest": "sha256:541e9783507b3ec514f814cd4efc35275be3ce6e139fcd2e64ba0077c6c783f1"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected sequence behavior and ask for the abstract value, representation, invariant, predicted local update, evidence label, and confidence before offering a correction.",
+    "artifactFocus": "Ask the learner to make one object graph, used-slot table, head-tail transition trace, cost card, or bounded measurement setup visible, then distinguish what it establishes from its language, CPython, and machine-model limits.",
+    "repairMove": "Ask for a prediction before correction; change exactly one workload, predecessor reference, snapshot mutability, or locality assumption; then offer the smallest counterexample or evidence repair without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use a readable visible-chat whiteboard when available: place one compact object graph, slot table, or linked trace beside the same abstract sequence and provide a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep public behavior fixed but make oldest eviction frequent, restore random inspection, remove a known predecessor, or make a payload mutable. Ask for a prediction and confidence before comparing the invariant, cost, snapshot, or ownership boundary.",
+    "taHandoff": "End with the learner's selected M6 artifact, labeled claim, confidence, changed premise, unresolved assumption, and M7 queue/deque question for a constructive Teaching Assistant conversation."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m07",
+    "carryArtifact": "Carry a representation-decision card: abstract sequence, RI/AF, object or slot trace, operation-frequency vector, MODEL/PYTHON/CPYTHON labels, measurement boundary, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M7 derives queue/deque and demand-timing contracts, which rolling-history operation mix makes a dynamic array, linked chain, ring, or deque worth comparing while public behavior stays fixed?",
+    "boundary": "M5 is M6's academic prerequisite and M7 is its only canonical forward handoff. The existing M27 previous-reader navigation/bridge link is not an M6 academic prerequisite, route authorization, completion claim, or license to bypass M5."
+  }
+}

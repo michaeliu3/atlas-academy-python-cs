@@ -66,7 +66,7 @@ Useful whole-course entry points:
 
 | Source | Role in our module |
 |---|---|
-| [CS 61A Spring 2026 Discussion 6: Iterators and Generators](https://cs61a.org/disc/disc06/disc06.pdf) | Current university exercise tradition for iterator consumption, infinite streams, and generator tracing. |
+| [CS 61A Summer 2026 Discussion 5: Iterators and Generators](https://cs61a.org/disc/disc05/disc05.pdf) | Term-sensitive university exercise route for iterator consumption, infinite streams, and generator tracing; recheck the link and topic before a later review or release claim. |
 | [Composing Programs: Iterators](https://www.composingprograms.com/pages/42-implicit-sequences.html) | Conceptual bridge from sequence abstraction to implicit/lazy sequences. |
 | [Python 3.14 data model — iterator types](https://docs.python.org/3.14/reference/datamodel.html#iterator-types) | Canonical iterable/iterator protocol. |
 | [Python 3.14 expressions — generator expressions and `yield`](https://docs.python.org/3.14/reference/expressions.html#yield-expressions) | Precise suspension, retained state, resumption, delegation, and finalization semantics. |
@@ -78,7 +78,7 @@ Useful whole-course entry points:
 - Derive stack and queue interfaces by restricting sequence access.
 - Connect the call stack backward to recursion and forward to DFS.
 - Treat iteration as a pull protocol with state, not as syntax sugar to memorize.
-- Connect laziness to bounded-memory architecture, while showing that a lazy source alone cannot enforce backpressure.
+- Connect laziness to a bounded-memory architectural question, while showing that a lazy source alone cannot guarantee bounded memory or enforce backpressure.
 - Keep asynchronous iteration for Module 21; this module establishes the synchronous mechanism it depends on.
 
 **Claims we will not make**
@@ -213,7 +213,7 @@ The remaining sources are instructor references for triangulation and remediatio
 | Learning need | Primary learner source | When it appears |
 |---|---|---|
 | Interface versus representation | MIT 6.006 Lecture 2 | Module 6 opening |
-| Iterator state and generator tracing | CS 61A Discussion 6 + Python expression reference | Module 7 middle |
+| Iterator state and generator tracing | CS 61A Summer 2026 Discussion 5 + Python expression reference | Module 7 middle |
 | Hash reasoning | MIT 6.006 Lecture 4 + Python data model | Module 8 core |
 | Ordered structure tradeoffs | MIT 6.006 Lectures 6–8 + `heapq` | Module 9 core |
 | Graph traversal invariants | MIT 6.006 Lectures 9–13 | Module 10 core |

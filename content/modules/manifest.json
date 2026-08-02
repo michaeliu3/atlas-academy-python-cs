@@ -255,9 +255,9 @@
       "title": "Representation, Memory, Sequences, and Linked Structures",
       "summary": "Central idea: an abstract history says what order means; a representation decides where references live, which paths connect them, and what each operation costs.",
       "arcId": "arc-ii",
-      "wordCount": 13321,
+      "wordCount": 14815,
       "estimatedMinutes": 58,
-      "sourceHash": "bc46012c625c782cbad38b6495d7f5f2ec8e3e239185701107eaef344c3c007a",
+      "sourceHash": "42020c3323ac782b4c7baf300dc9645f40aec5e42bf8bd80f0f39f8b2c46e79f",
       "id": "m06",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -295,9 +295,9 @@
       "title": "Stacks, Queues, Iteration, and Lazy Computation",
       "summary": "Central idea: constrain how stored work may be accessed, then let demand—not accumulation—control when work is performed.",
       "arcId": "arc-ii",
-      "wordCount": 11914,
+      "wordCount": 13319,
       "estimatedMinutes": 52,
-      "sourceHash": "045aae05e99dd7609248424be0c54985cd9363cc210708af32005ed81be73566",
+      "sourceHash": "b9952203f92d3781b1e1fb62ea47aac8d1b157587b967fb9436a2136ab0b137c",
       "id": "m07",
       "state": {
         "lifecycle": "learner-material-ready",

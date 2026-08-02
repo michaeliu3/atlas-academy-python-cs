@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-preflight",
+  "recordVersion": "v1",
+  "moduleId": "m06",
+  "purpose": "Bind M6's current workbook, source ledger, Mermaid reader surface, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "candidate": "This preflight verifies only that declared local structural inputs resolve together in the captured Git revision; it is not a human review, learner-mastery, or publication result.",
+    "review": "Resolved structure does not approve explanation quality, Python correctness, source authority or license interpretation, accessibility quality, psychological safety, or the designated chats' behavior.",
+    "release": "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. The required release criterion remains explicitly open."
+  },
+  "state": "candidate-not-promoting",
+  "evidenceRecordPath": "content/course/contracts/evidence/m06.v1.json",
+  "openCriterionIds": [
+    "release-provenance-ci-and-deployment-evidence"
+  ],
+  "promotionBlockers": [
+    "human-review",
+    "review-ready-commit",
+    "source-commit-ci-run",
+    "private-deployment-record"
+  ]
+}

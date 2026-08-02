@@ -153,6 +153,14 @@
       "sha256": "25936deb4bc38d8129c0af9fab4ed4fdaafde097fd5888ddc190b72f350ecd71"
     },
     {
+      "path": "content/course/contracts/companions/m06.v1.json",
+      "sha256": "d1b781599958e6d517f15c73fc3fbcd5de661b0ec16e594214b2b5fa55df9171"
+    },
+    {
+      "path": "content/course/contracts/companions/m07.v1.json",
+      "sha256": "f4e1fefeba4e9f0eb91b62ff9351116b007386198301c9bab56b245a124749eb"
+    },
+    {
       "path": "content/course/contracts/companions/m12.v1.json",
       "sha256": "f16687c98ec4d96f3d3f7b147b059f5fda4f60d2c0d0a2878e3740d456b26e7b"
     },
@@ -245,6 +253,14 @@
       "sha256": "28021586595469966d502b54313ce8f625125ef4b90a7fae6c222150bd7d426c"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m06.v1.json",
+      "sha256": "aefbc5a170557859a635141b5df7c3eccde7a78f3e2657a652156a244e452539"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m07.v1.json",
+      "sha256": "6bfc547eae62e26333750f425047ca9abafd2610252efed58cae06340b27f6f3"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",
       "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
     },
@@ -313,6 +329,14 @@
       "sha256": "b3f19f4d954f1918cca7a8d3c8ef468fa697e381a286c27e909a5c64c1e8faec"
     },
     {
+      "path": "content/course/contracts/evidence/m06.v1.json",
+      "sha256": "1a2033846b577f04bc3b9ad40bbc78d2743b6ad0124ea8bb55a0b75e15c2033f"
+    },
+    {
+      "path": "content/course/contracts/evidence/m07.v1.json",
+      "sha256": "f5e4f8e4207dd6d41ac426841e7d7b5691683645faaaf019293f9eab57ec2274"
+    },
+    {
       "path": "content/course/contracts/evidence/m12.v1.json",
       "sha256": "235cb3cd376d5b5bf762637c9c4ff4f15ad68ac06b914c258c65b062f5a0ce12"
     },
@@ -362,7 +386,7 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "a94b7bfdf7ebd53184e505cfa1f27ae9e8bbad11e6ddf91626ea8465889f098b"
+      "sha256": "3077754f4b605fee1cd1aa5ef46d2001b9cdaedb930ae748ec9734a779ea6999"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -370,7 +394,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "1ab3d0ef194e322c77a1047141d2eef94e66e810bb9eb6aea1775859818215a6"
+      "sha256": "93d166940e126808158920b030ed6adf663c31c78f05afad139c551f94a255a4"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -434,11 +458,11 @@
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
-      "sha256": "bc46012c625c782cbad38b6495d7f5f2ec8e3e239185701107eaef344c3c007a"
+      "sha256": "42020c3323ac782b4c7baf300dc9645f40aec5e42bf8bd80f0f39f8b2c46e79f"
     },
     {
       "path": "content/modules/07_stacks_queues_iteration_lazy.md",
-      "sha256": "045aae05e99dd7609248424be0c54985cd9363cc210708af32005ed81be73566"
+      "sha256": "b9952203f92d3781b1e1fb62ea47aac8d1b157587b967fb9436a2136ab0b137c"
     },
     {
       "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
@@ -534,7 +558,7 @@
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
-      "sha256": "ed55f555f4c2554d8d50fcccc3068cb131cad1d89305ce9634ef8799e3f0dc91"
+      "sha256": "5f8a02ee7ec6bc239171104d80626796ae5a9aecb1ffb335b7da457d5e079684"
     },
     {
       "path": "content/source-maps/arc_iii_source_map.md",
@@ -697,6 +721,14 @@
       "sha256": "12f6c7586745033fbf7ec1977468ea9998d7bc0ec9ff3a8ebb19c7cb7f6bac93"
     },
     {
+      "path": "content/source-maps/module6_representation_memory_sequences_linked_source_audit_addendum.md",
+      "sha256": "e35580974a34e36be89caaecb283d32cb2ae93df52082eb82d26ca3b0e84ee83"
+    },
+    {
+      "path": "content/source-maps/module7_stacks_queues_iteration_lazy_source_audit_addendum.md",
+      "sha256": "25f808156bede08cc4eb8b6d83ebfbf28d743b54c2e82701e4ab1bd3d67ee773"
+    },
+    {
       "path": "content/source-maps/python_curriculum_sources.md",
       "sha256": "65807d4ddc427e5d38a63f0bf95a3c04e6769ab4ab27f834f27da20a173f1508"
     },
@@ -731,6 +763,14 @@
     {
       "path": "docs/module-evidence/m05/candidate-preflight.md",
       "sha256": "2afdefe008f48f30d8ec884d810bade1988375e95b234e83a89313f0cb39fb54"
+    },
+    {
+      "path": "docs/module-evidence/m06/candidate-preflight.md",
+      "sha256": "3e18992734cc71403274441c36b0b9aa01cdf1c30b7c76dc0f1f20a8685eb53a"
+    },
+    {
+      "path": "docs/module-evidence/m07/candidate-preflight.md",
+      "sha256": "69d8ccb56dd45b13cafcab693b6fd75c896a6661d73f8aec729eb6a950659774"
     },
     {
       "path": "docs/module-evidence/m12/candidate-preflight.md",

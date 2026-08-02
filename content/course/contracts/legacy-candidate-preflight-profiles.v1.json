@@ -84,6 +84,36 @@
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     },
     {
+      "moduleId": "m06",
+      "packetId": "m06-representation-memory-sequences-linked-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m06/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:3e18992734cc71403274441c36b0b9aa01cdf1c30b7c76dc0f1f20a8685eb53a"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module6_representation_memory_sequences_linked_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m07",
+      "packetId": "m07-stacks-queues-iteration-lazy-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m07/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:69d8ccb56dd45b13cafcab693b6fd75c896a6661d73f8aec729eb6a950659774"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module7_stacks_queues_iteration_lazy_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
       "moduleId": "m12",
       "packetId": "m12-modules-apis-types-dependencies-structural-candidate",
       "candidateDocumentation": {

@@ -38,6 +38,15 @@ flowchart LR
     M7 --> M23["Module 23<br/>lazy evaluation"]
 ```
 
+### Text alternative — access, demand, and bounded handoff
+
+Modules 2–6 supply call order, interface laws, cost assumptions, and sequence
+representation. M7 restricts access into stack or queue order, then makes a
+consumer request one item at a time through an iterator. A lazy pipeline lets
+demand travel upstream and data travel downstream; a capacity only bounds the
+specific named buffer and does not establish concurrent or asynchronous
+backpressure. M8 builds on the resulting access-policy model.
+
 ### The problem this module solves
 
 Atlas can already represent study events and reason about operation costs. It now needs to ingest an event source that may be:
@@ -246,6 +255,16 @@ Q.enqueue(a); Q.enqueue(b); Q.dequeue() == a
 
 Both empty-removal operations need an explicit failure contract. Python’s `list.pop()` and `deque.popleft()` raise `IndexError`; a custom ADT might return a result object. Silently returning `None` is ambiguous when `None` is a legal stored value.
 
+### Derivation and proof idea — restrictions determine removal order
+
+Label every insertion with a distinct arrival number. A stack permits removal
+only at the most recently extended end, so its next removal must have the
+largest remaining arrival number. A queue inserts at one logical end and
+removes at the other, so its next removal must have the smallest remaining
+arrival number. The base case is an empty structure; each legal insertion or
+removal preserves the respective statement. This derives an **order law**. It
+does not derive an implementation cost, storage layout, or concurrency policy.
+
 ### Representation and operation costs
 
 | Needed policy | Suitable Python operations | Time claim under documented model | Trap |
@@ -354,6 +373,21 @@ An **iterator** is a stateful object that:
 - remains exhausted after it has reported exhaustion, according to the iterator protocol.
 
 An iterator is therefore also iterable. An iterable is not necessarily an iterator.
+
+At the built-in boundary, `iter(obj)` also has a legacy `__getitem__` fallback
+when `__iter__` is absent. Treat that as compatibility behavior, not as a
+replacement for stating the iterable/iterator contract used in this module.
+
+### Definition — access, demand, and capacity
+
+An **access policy** specifies which remaining item may be removed next. A
+**demand step** is one downstream request for a next value; a stage may need
+several upstream requests to satisfy it. A **bounded handoff** has a named
+buffer, a nonnegative capacity, and an explicit full-buffer policy. These are
+separate contracts: laziness alone does not supply a capacity, and capacity
+alone does not define waiting or coordination. Direct access to a raw `list`
+or `deque` can also bypass a stack or queue policy, so a client-facing ADT
+should expose the restricted operations it actually promises.
 
 ```mermaid
 %% atlas-diagram-id: m07-iterable-iterator-protocol
@@ -656,6 +690,13 @@ Calling either generator function creates a generator object; it does not execut
 
 </details>
 
+### Prediction before reveal — construction and first pull
+
+Before expanding the trace, write the printed order, the first suspended
+frame, and a confidence level. Then change only one premise: replace
+`next(topics)` with `list(topics)`. Predict which effects now occur and why
+the change is about demand, not a different generator implementation.
+
 ### Precise execution model
 
 A function whose body contains `yield` is a **generator function**. Calling it returns a **generator iterator**.
@@ -786,6 +827,20 @@ all_events = list(normalized)
 
 The pipeline may remain lazy internally while the terminal consumer intentionally materializes `Θ(n)` output.
 
+### Counterexample — lazy construction can still retain input-sized state
+
+```python
+def retains_everything(source):
+    remembered = []
+    for item in source:
+        remembered.append(item)
+        yield item
+```
+
+This generator is lazy about when it requests each item, yet after `n`
+requests it retains `n` items. A bounded-memory claim must name every retained
+collection and its bound; generator syntax does not make that proof for us.
+
 ### Infinite input distinguishes the designs
 
 ```python
@@ -902,6 +957,14 @@ If `rₚ > r꜀` for time `t`, an unbounded push design accumulates roughly:
 
 No clever queue representation removes that growth. The architecture needs a response to excess demand.
 
+### Assumption — single-threaded pull scope
+
+The local derivations and `BoundedBuffer` model assume one synchronous caller
+controls each `next`/`put`/`get` action. They do not assume an external producer
+can be paused, that libraries avoid prefetching, or that multiple threads and
+tasks coordinate safely. Those require later concurrency and asynchronous
+contracts.
+
 ### Precise terms
 
 A **buffer** temporarily stores produced but unconsumed items.
@@ -935,6 +998,17 @@ flowchart TD
     POLICY --> DROP["drop"]
     POLICY --> SPILL["spill"]
 ```
+
+### Derivation and proof idea — capacity is an invariant, not a laziness slogan
+
+For `BoundedBuffer`, begin with length `0`. A successful `put` occurs only
+when the length is below `capacity`, so the new length is still at most
+`capacity`; a successful `get` reduces length; a failed full `put` leaves the
+contents unchanged. By induction over those completed operations,
+`0 ≤ len(buffer) ≤ capacity`. This proves only the named in-memory buffer's
+bound under the stated single-threaded contract. It says nothing about hidden
+source/sink buffers, external production, waiting, cancellation, or
+asynchronous backpressure.
 
 ### What synchronous iteration provides
 
@@ -1310,6 +1384,15 @@ assert source.requests == 2
 
 The third line remains unrequested. The test does **not** prove cleanup or retry safety; those require separate contracts.
 
+### Numerical experiment — request-count observation
+
+Run the same `CountingIterator` or `TracedLines` probe with a small limit or
+batch size such as `1`, `2`, `4`, and `8`. Record source requests, delivered
+items, and the largest explicitly named batch; then include one malformed
+prefix. The observation can challenge a stated local contract (for example,
+an accidental extra pull). It is not a timing benchmark, a proof that all
+memory is bounded, or evidence of concurrent backpressure.
+
 ---
 
 ## 15. Code and architecture reading studio
@@ -1381,6 +1464,22 @@ Prefer three components:
 - coordinator calls the effectful sink.
 
 Then tests can observe each contract boundary independently.
+
+### Debugging — isolate capacity and ownership before rewriting
+
+First reproduce one trace with `batch_size=2` and name the first invariant
+failure: the `>` check permits three retained events. Then make the ownership
+failure visible by having a sink retain the passed list and observing the later
+`clear()`. Keep parsing, capacity, ownership, and sink-failure observations
+separate; a green output-only example cannot distinguish these defects.
+
+### Design — separate demand, batching, and effects
+
+Keep a parser/normalizer responsible for values, a batcher responsible for an
+explicit `B` and immutable snapshots, and a coordinator responsible for the
+effectful store call. This is a design comparison, not a mandate to add layers:
+the separation earns its place because it exposes demand, ownership, and
+failure boundaries for independent tracing and testing.
 
 ### Oral architecture prompts
 
@@ -1492,7 +1591,7 @@ Do not accept the patch because it “looks cleaner” or because the happy-path
 
 Each session is designed for about 75–90 focused minutes. Stop after the evidence checkpoint; do not turn a session into a marathon.
 
-### Session 1 — Access constraints create behavior
+## Session 1 — Access constraints create behavior
 
 **Retrieve:** function call order, ADT versus representation, front-removal cost.
 
@@ -1509,9 +1608,15 @@ Each session is designed for about 75–90 focused minutes. Stop after the evide
 
 **Evidence:** one-minute oral defense: “A stack/queue is an interface, not a container.”
 
+### Output: access-law trace
+
+One annotated arrival-order trace that states the legal operations, the next
+removal, and the representation/cost assumption behind the chosen `list` or
+`deque` operation.
+
 **TA check:** if the learner chooses by syntax instead of operations and cost, return to Modules 3 and 5.
 
-### Session 2 — The iterator protocol exposes demand
+## Session 2 — The iterator protocol exposes demand
 
 **Retrieve:** object identity, mutable state, protocol contracts.
 
@@ -1529,9 +1634,14 @@ Each session is designed for about 75–90 focused minutes. Stop after the evide
 
 **Evidence:** explain why output equality alone misses `BrokenTake`.
 
+### Output: iterator-state trace
+
+One state table for a reusable iterable and one one-shot iterator, including
+request counts that show why the source was not over-consumed.
+
 **TA check:** distinguish “can be used in a `for` loop” from “can be traversed repeatedly.”
 
-### Session 3 — A generator is a resumable computation
+## Session 3 — A generator is a resumable computation
 
 **Retrieve:** frames and local bindings from Module 2.
 
@@ -1549,9 +1659,14 @@ Each session is designed for about 75–90 focused minutes. Stop after the evide
 
 **Evidence:** annotate a generator trace with “running,” “suspended,” and “exhausted.”
 
+### Output: generator-suspension trace
+
+One prediction-first trace that marks construction, each `next`, retained
+bindings, one effect or validation boundary, and eventual exhaustion.
+
 **TA check:** if `yield` is described as “return many times,” require a precise contrast with normal return and retained frame state.
 
-### Session 4 — Lazy pipelines and ownership
+## Session 4 — Lazy pipelines and ownership
 
 **Retrieve:** aliasing and immutable boundaries.
 
@@ -1569,9 +1684,15 @@ Each session is designed for about 75–90 focused minutes. Stop after the evide
 
 **Evidence:** a component table naming input, output, state ownership, and forbidden responsibility.
 
+### Output: demand-and-ownership map
+
+One map of a valid and rejected source line showing downstream demand,
+upstream reads, each retained collection, its owner, and the immutable
+snapshot or defended ownership boundary.
+
 **TA check:** challenge any claim that “generator means no memory.”
 
-### Session 5 — Capacity and backpressure are system contracts
+## Session 5 — Capacity and backpressure are system contracts
 
 **Retrieve:** queue laws and rate difference.
 
@@ -1589,9 +1710,15 @@ Each session is designed for about 75–90 focused minutes. Stop after the evide
 
 **Evidence:** a backpressure claim with scope: “Under these assumptions, this observation proves …; it does not prove …”
 
+### Output: capacity-scope card
+
+One parameterized claim naming `B`, the exact bounded buffer, full-buffer
+policy, observed request/capacity evidence, and excluded asynchronous or
+external-buffer behavior.
+
 **TA check:** do not allow asynchronous vocabulary to replace a rate/capacity argument.
 
-### Session 6 — Agent-directed Atlas checkpoint
+## Session 6 — Agent-directed Atlas checkpoint
 
 **Retrieve:** all four access/demand/ownership/cost invariants.
 
@@ -1608,7 +1735,14 @@ Each session is designed for about 75–90 focused minutes. Stop after the evide
 
 **Evidence:** accepted or rejected patch review with exact reasons and test observations.
 
-**TA check:** mastery requires ownership of the argument, not acceptance of a green test summary.
+### Output: reviewed patch evidence dossier
+
+One bounded delegation brief, inspected diff, invariant-based patch decision,
+focused test observations, oral walkthrough notes, and one remaining
+failure-policy uncertainty.
+
+**TA check:** strong next-step evidence comes from owning the argument, not
+accepting a green test summary.
 
 ---
 
@@ -2049,7 +2183,10 @@ Produce an evidence packet containing:
 
 ### Mastery evidence
 
-Module 7 is mastered only when Michael can, on unseen code:
+“Mastery evidence” is a historical heading for evidence worth discussing; it
+is not a score, pass/fail gate, or declaration of total competence. For a
+constructive next-step conversation about unfamiliar code, collect evidence
+that Michael can:
 
 - derive stack or queue behavior from legal operations;
 - trace independent and shared iterator state;
@@ -2063,7 +2200,17 @@ Module 7 is mastered only when Michael can, on unseen code:
 - verify behavior using request counts, capacity observations, and regression tests;
 - connect the mechanism to call stacks, graph frontiers, scheduling, async streams, and interpreters.
 
-Passing the MCQ check alone is insufficient. Producing code that “works on my input” is insufficient. Mastery is ownership of the model and evidence.
+Passing the MCQ check alone is insufficient. Producing code that “works on my
+input” is insufficient. The useful next step is ownership of a stated model
+and evidence, with an explicit uncertainty when one remains.
+
+### Project acceptance criteria
+
+For a learner-controlled TA or Study Partner discussion, the dossier should
+make one demand trace, one ownership boundary, one parameterized capacity
+claim, one failure observation, and one reviewed patch decision inspectable.
+If any are incomplete, select that item as a repair target; this is not a
+grade, automatic route permission, or claim of full mastery.
 
 ### Evidence rubric
 
@@ -2175,11 +2322,11 @@ These are source inputs and verification references, not a substitute for the co
 
 ### Official Python 3.14 references
 
-- [Python 3.14 — Iterator Types](https://docs.python.org/3.14/library/stdtypes.html#iterator-types) — the iterator protocol, exhaustion requirement, and built-in iterator behavior.
+- [Python 3.14 — Iterator Types](https://docs.python.org/3.14/reference/datamodel.html#iterator-types) — the iterator protocol, exhaustion requirement, and built-in iterator behavior.
 - [Python 3.14 — `iter` and `next`](https://docs.python.org/3.14/library/functions.html#iter) — the built-in protocol entry points, including `iter`’s callable/sentinel form for later exploration.
 - [Python 3.14 — `collections.abc`](https://docs.python.org/3.14/library/collections.abc.html) — behavioral interfaces including `Iterable`, `Iterator`, and `Generator`.
 - [Python 3.14 — `collections.deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) — end-operation guarantees, `maxlen`, and the contrast with list front operations.
-- [Python 3.14 — Expressions: generator expressions and generator methods](https://docs.python.org/3.14/reference/expressions.html#generator-expressions) — evaluation timing, suspension, resumption, exhaustion, and generator control.
+- [Python 3.14 — Expressions: `yield` expressions](https://docs.python.org/3.14/reference/expressions.html#yield-expressions) — suspension, resumption, exhaustion, and generator-control semantics.
 - [Python 3.14 Tutorial — Iterators and Generators](https://docs.python.org/3.14/tutorial/classes.html#iterators) — compact executable examples of the protocol and retained generator state.
 - [Python 3.14 — `itertools`](https://docs.python.org/3.14/library/itertools.html) — mature lazy building blocks such as `islice`; read after the manual iterator mechanism is understood.
 
@@ -2187,7 +2334,7 @@ These are source inputs and verification references, not a substitute for the co
 
 - [MIT 6.006, Lecture 2 — Data Structures](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec2/) — separates an interface (“the problem”) from a data structure representation (“the solution”) and identifies stacks/queues as restricted sequence interfaces.
 - [MIT 6.006 — Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) — undergraduate data-structure modeling, correctness, and performance context.
-- [UC Berkeley CS 61A — Iterators and Generators](https://cs61a.org/) — trace-oriented exercises using `next`, generator functions, and compositional iteration. Use the current course calendar’s iterator/generator materials.
+- [UC Berkeley CS 61A Summer 2026 Discussion 5](https://cs61a.org/disc/disc05/disc05.pdf) — a current trace-oriented exercise source for iterator consumption, generators, and lazy streams; link-only calibration, not a copied assignment.
 - [Composing Programs, §4.2 Implicit Sequences](https://www.composingprograms.com/pages/42-implicit-sequences.html) — develops iterators and generators as implicit sequences and connects `yield` to preserved execution environments.
 
 ### Reading route
@@ -2200,7 +2347,7 @@ These are source inputs and verification references, not a substitute for the co
 
 ### Session-to-source-and-evidence route
 
-**Access and reuse.** Sources were checked **2026-08-01** and are link/cite
+**Access and reuse.** Sources were checked **2026-08-02** and are link/cite
 only; Atlas retains its original pipeline traces, code, prompts, and dossier.
 University materials calibrate scope, not an async or concurrent backpressure
 guarantee.
@@ -2213,6 +2360,15 @@ guarantee.
 | 4 | lazy-pipeline ownership table and bounded batch claim | [Composing Programs §4.2](https://www.composingprograms.com/pages/42-implicit-sequences.html) as a complementary implicit-sequence explanation |
 | 5 | rate/capacity calculation and synchronous-buffer non-claim | [Python `deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) for end operations and `maxlen`, not concurrent coordination |
 | 6 | bounded patch brief, request-count evidence, and oral walkthrough | the Atlas evidence packet; external references do not prove demand or failure behavior in this system |
+
+### Source wording and claim boundary
+
+The linked sources support vocabulary, protocol boundaries, and university
+scope calibration. Atlas retains its own examples, diagrams, prompts, and
+evidence packet; sources are linked and paraphrased rather than copied. The
+module-specific source-audit addendum records source role, claim linkage,
+access date, and reuse boundary. No source here establishes a universal
+bounded-memory claim or a concurrent/asynchronous backpressure guarantee.
 
 ---
 
@@ -2236,12 +2392,58 @@ suspension/ownership boundary → failure or exhaustion case → cost claim.
 Change one premise (multiple consumers, cancellation, a bounded buffer, or a
 repeated iterator) and ask which contract is no longer valid.
 
+### Supportive oral-defense protocol
+
+Use an encouraging conversation rather than a rigid exam. The learner may
+choose text or voice and may pause, request a hint, or correct a trace. Keep
+the model visible in the chat as compact code, a table, an equation, or an
+ASCII fallback; this workbook does not configure or guarantee any platform,
+voice, rendering, storage, or export behavior.
+
+### Invitation — trace one request before naming the abstraction
+
+Invite the learner to choose one source line and say what the next consumer
+request does, what state changes, and how confident they are. Ask for a
+prediction before offering terminology or correction.
+
+### Hint ladder — expose one boundary at a time
+
+Offer one move at a time: name the access rule; trace `iter`/`next`; mark a
+suspended frame; name the retained collection; then state the capacity or
+failure boundary. Return to the last stable trace rather than treating a
+wrong answer as a verdict.
+
+### Changed-premise counterexample
+
+Change exactly one premise: materialize the pipeline, let a source prefetch,
+add a second consumer, or replace the synchronous buffer with a background
+producer. Ask which previous conclusion no longer follows and what evidence
+would now be needed.
+
+### Transfer — connect demand to the M8 access-policy bridge
+
+Ask how an iterator over dictionary keys or a one-shot stream could make an
+M8 lookup or indexing review misleading if order, consumption, and retained
+state are not named. This is a transfer question, not permission to bypass
+M8's prerequisites.
+
+### Learner-controlled evidence summary
+
+Let the learner retain a short self-selected summary: chosen trace, confidence,
+one repaired misconception, remaining uncertainty, and a next question for
+the TA or Study Partner. Recording or exporting it requires the learner's
+separate choice; this protocol performs no write.
+
 ### Study Partner — demand-path rehearsal
 
 Ask the learner to draw a three-step timeline of next() calls, values, and
 retained state. Replace the queue with a stack or eager list, then ask which
 observable order or memory property changes. Preserve one uncertainty for the
-TA rather than guessing about hidden runtime behavior.
+TA rather than guessing about hidden runtime behavior. Use the visible chat as
+a non-grading whiteboard: if the current surface renders code or equations,
+make the trace readable there; otherwise use a short table or plain-text
+fallback. This prompt does not require voice access, platform rendering, or
+automatic record storage.
 
 ### Forward handoff — M8
 
