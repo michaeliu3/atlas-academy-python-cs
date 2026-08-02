@@ -79,6 +79,7 @@ Decision owner and synthetic/non-consequential setting:
 State, observation, action, transition, goal, and cost:
 Constraints, domains, and omitted variables:
 Search/CSP/planning/decision method and exact variant:
+Decision-model scope: one-shot or sequential; if sequential, state/action/transition/reward-horizon-policy:
 Theorem assumptions and implementation choices:
 Fixture, queue/tie/seed/tolerance/time-limit details:
 Observed trace, certificate, bound, or explicit unavailable evidence:
@@ -799,13 +800,20 @@ missing authority.
 
 Create a synthetic card with:
 
-1. finite state/outcome/action space;
-2. probability source and uncertainty note;
-3. utility/loss assumptions and omitted stakeholders/outcomes;
-4. expected-utility calculation;
-5. one one-variable sensitivity analysis;
-6. a constraint or abstention rule that overrides a numerical ranking; and
-7. a sentence beginning, “This calculation does not authorize …”
+1. a decision artifact explicitly labelled `one-shot` or `sequential`;
+2. finite state/outcome/action space;
+3. probability source and uncertainty note;
+4. utility/loss assumptions and omitted stakeholders/outcomes;
+5. expected-utility calculation;
+6. one one-variable sensitivity analysis;
+7. a constraint or abstention rule that overrides a numerical ranking; and
+8. a sentence beginning, “This calculation does not authorize …”
+
+A one-shot artifact must state that it does not establish a transition model or
+policy. A sequential artifact must name state, action, transition, reward/cost,
+horizon, and continuation policy. It may use the fixed two-step card to inspect
+one declared backup, but it must not claim a general planner, learned policy,
+or authority to act.
 
 **Transfer:** M35 adds learned estimates and representations; it does not make
 the authority and value questions disappear.
@@ -840,7 +848,10 @@ Submit one connected packet containing:
 5. an original and relaxed optimization sheet with bound direction and
    feasibility check;
 6. a planning or solver-status boundary card;
-7. a finite belief/utility/action table with a sensitivity change;
+7. a decision artifact explicitly labelled `one-shot` or `sequential`; a
+   one-shot artifact must state that it does not establish a transition model or
+   policy, while a sequential artifact must name state, action, transition,
+   reward/cost, horizon, and continuation policy;
 8. a formal-limits card naming an encoded problem and a practical non-claim;
 9. an accountable review/abstention condition; and
 10. a learner-controlled oral-defense summary and M35 handoff.
@@ -853,6 +864,7 @@ Submit one connected packet containing:
 | algorithm | frontier key, duplicate policy, theorem conditions, and trace are separate | “What condition does your guarantee require?” |
 | constraints | original versus relaxed model and feasibility are visible | “Is this a legal candidate or only a bound?” |
 | uncertainty | probability and utility assumptions are distinct, with sensitivity | “Did a belief change or a value change?” |
+| decision model | one-shot versus sequential scope is labelled; a sequential claim includes a continuation policy | “Which transition, horizon, or later action would change this claim?” |
 | limits | status, encoding, theorem scope, and practical non-claim are named | “What did the run observe rather than prove?” |
 | governance | review, abstention, intervention, and accountability are concrete | “Who may veto or revise this action?” |
 

@@ -153,6 +153,36 @@ test("the M34 workbook makes propagation and decision-horizon boundaries inspect
   assert.match(workbook, /Q_0\(s_0,\\text\{inspect\}\)=-0\.5\+0\.5\(3\)\+0\.5\(1\)=1\.5/u);
 });
 
+test("the M34 final dossier keeps one-shot and sequential decision claims distinct", async () => {
+  const workbook = await readFile(
+    "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+    "utf8",
+  );
+  const packetStart = workbook.indexOf(
+    "### Output: Classical AI Search, Constraints & Decision Packet",
+  );
+  const rubricStart = workbook.indexOf("### Acceptance rubric", packetStart);
+
+  assert.ok(packetStart >= 0, "M34 should define its final connected packet");
+  assert.ok(rubricStart > packetStart, "M34 should place an acceptance rubric after its packet");
+
+  const packet = workbook.slice(packetStart, rubricStart);
+
+  assert.match(
+    packet,
+    /decision artifact explicitly labelled `one-shot` or `sequential`/u,
+  );
+  assert.match(
+    packet,
+    /one-shot artifact must state that it does not establish a transition model or\s+policy/u,
+  );
+  assert.match(
+    packet,
+    /sequential artifact must name state, action, transition,\s+reward\/cost,\s+horizon, and continuation policy/u,
+  );
+  assert.match(workbook, /decision model[\s\S]{0,220}one-shot versus sequential/u);
+});
+
 test("the M34 planning trace and CP-SAT status matrix retain their model boundaries", async () => {
   const [workbook, sourceResearch] = await Promise.all([
     readFile("content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "utf8"),
