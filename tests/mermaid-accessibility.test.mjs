@@ -247,6 +247,42 @@ test("Module 8 is a complete hashing retrofit with corrected causal and repair m
   assert.ok(moduleEight.includes("new minus old"));
 });
 
+test("Module 9 is a complete ordered-structures retrofit with scoped visual explanations", async () => {
+  const moduleNine = await readFile(
+    new URL("../content/modules/09_trees_heaps_sorting_ordered.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleNine, {
+    sourcePath: "content/modules/09_trees_heaps_sorting_ordered.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 13);
+  assert.equal(report.summary.completeBlocks, 13);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m09-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+  assert.ok(moduleNine.includes("m09-scheduler-authority"));
+});
+
+test("Module 10 is a complete graph-algorithms retrofit with scoped visual explanations", async () => {
+  const moduleTen = await readFile(
+    new URL("../content/modules/10_graph_algorithms_network_models.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(moduleTen, {
+    sourcePath: "content/modules/10_graph_algorithms_network_models.md",
+  });
+  const report = validateMermaidAccessibility(blocks, { requireComplete: true });
+
+  assert.equal(blocks.length, 10);
+  assert.equal(report.summary.completeBlocks, 10);
+  assert.equal(report.summary.incompleteBlocks, 0);
+  assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m10-")));
+  assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+  assert.ok(moduleTen.includes("m10-planner-architecture"));
+});
+
 test("Module 29's continuous-change prerequisite map has a concise, scoped text alternative", async () => {
   const moduleTwentyNine = await readFile(
     new URL("../content/modules/29_calculus_real_analysis_continuous_change.md", import.meta.url),

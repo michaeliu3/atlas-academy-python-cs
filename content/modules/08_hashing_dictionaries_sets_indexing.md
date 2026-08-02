@@ -14,6 +14,7 @@ That question connects four earlier foundations:
 - **Module 3 — abstraction, interfaces, and ADTs:** `dict` and `set` are operation contracts; a hash table is one possible representation;
 - **Module 4 — sets, relations, functions, and proof:** a hash function maps a large key universe into a smaller index set, so collisions follow from the pigeonhole principle;
 - **Module 5 — cost models:** expected, worst-case, and amortized claims answer different questions and require explicit assumptions.
+- **Module 7 — access and demand:** an index builder must name whether an input is replayable, consumed once, or materialized before it is queried again.
 
 ```mermaid
 %% atlas-diagram-id: m08-hashing-knowledge-bridge
@@ -38,6 +39,17 @@ flowchart LR
 ```
 
 Hashing is not introduced as punctuation such as `{}`. It is derived from a lookup requirement, proved correct under a key contract, analyzed under named assumptions, and then used as an architectural boundary.
+
+### Text alternative — lookup, collision, and index bridge
+
+Earlier modules supply stable object state, abstract mapping operations, the
+pigeonhole principle, and qualified cost models. M8 turns a repeated lookup
+need into an index: direct addressing avoids search but can waste space; hash
+compression makes a small candidate region but necessarily permits collisions;
+equality makes the final key decision. The resulting mapping can support an
+inverted index, while later modules add ordering, persistence, security, and
+implementation-specific depth. This is a conceptual bridge, not a route
+authorization or a claim that one representation is universally best.
 
 ## Claim-label legend
 
@@ -210,6 +222,15 @@ flowchart TD
 ```
 
 **[ADT CONTRACT]** Atlas search needs “retrieve the posting set for this canonical token.” It does not need “read bucket 7.” Buckets belong behind the boundary.
+
+### Definition — mapping identity, hash route, and equality decision
+
+A **mapping** relates each semantic key to one value; a **set** retains each
+semantic element at most once. A **hash function** supplies a route to a
+candidate region, while **equality** decides whether a candidate represents
+the requested key. A correct table therefore stores enough key information to
+perform equality after a collision. These are definitions for the course
+model; they do not prescribe CPython's layout or make a cost promise.
 
 ## 3. Direct addressing: lookup with no search
 
@@ -556,6 +577,14 @@ Every clause matters:
 - **which table state?** Load factor must be controlled;
 - **which case?** Expected cost does not remove worst-case inputs or unlucky choices.
 
+### Assumption — name the randomness, load, and key work
+
+The expected claim assumes a stated hashing model, a controlled load factor,
+and bounded or separately accounted-for hash/equality work. It is not a claim
+about an unspecified “average user,” a universal Python guarantee, or a
+defense against every hostile input. If any assumption changes, restate the
+cost claim rather than carrying over its label.
+
 ### Adversarial worst case
 
 If `n` unequal keys all collide, a lookup may inspect `Θ(n)` candidates. A sequence of `n` insertions into a collision-heavy table can take `Θ(n²)` equality work.
@@ -570,6 +599,15 @@ That does not contradict expected constant time. These are different claims:
 | Amortized | Cost over every allowed operation sequence | occasional resize spread over many updates |
 
 “Average case” without a probability model is not a rigorous substitute for “expected.”
+
+### Counterexample — a good route cannot replace equality
+
+Let two unequal keys deliberately return the same hash. A map that stores only
+that integer route merges their values and can return a false positive; a map
+that keeps the original keys still compares equality and remains correct,
+although it may inspect more candidates. Changing the hash function alone
+does not repair this semantic defect. This counterexample separates collision
+performance from collision correctness.
 
 ## 9. Resizing and amortized reasoning
 
@@ -616,6 +654,16 @@ That phrase has two independent qualifiers:
 - **amortized** handles occasional resizing.
 
 Do not simplify it to “guaranteed constant time.”
+
+### Derivation and proof idea — a geometric rebuild has bounded total movement
+
+With geometric growth, every successful resize moves the currently stored
+entries, but capacities form a geometric series. Summing the moves through
+`n` successful insertions gives a linear bound in `n`; dividing by the number
+of insertions gives constant amortized movement. This establishes only the
+resize component under the stated growth policy. Collision distribution,
+hash/equality cost, allocation failure, and a particular runtime's behavior
+remain separate assumptions.
 
 ## 10. Python `dict` and `set`: contract before internals
 
@@ -1105,6 +1153,16 @@ Required conclusion:
 
 Do not set `PYTHONHASHSEED` to a constant and call ordinary strings “adversarial collisions.” A fixed seed provides reproducibility; it does not automatically generate colliding strings.
 
+### Numerical experiment — count a named collision workload
+
+For `n = 1, 2, 4, 8, ...`, build a fresh chained teaching table from
+`CollisionKey` objects whose hashes intentionally agree. Record `n`, table
+capacity, load factor, equality comparisons for a successful and missing
+lookup, interpreter/version, and whether resizing occurred. The experiment can
+make the stated worst-case witness visible; it is not a benchmark of Python
+`dict`, proof of the expected model, portability claim, or a reason to expose
+internal buckets in application code.
+
 ### Metamorphic properties
 
 Useful properties that generate many tests:
@@ -1261,6 +1319,29 @@ This bug joins three earlier ideas:
 - Module 3: representation invariant;
 - Module 5: optimization must preserve semantics.
 
+### Code reading — recover the lookup contract before optimizing
+
+Read `SearchService` and `match_all` in this order: name the authoritative
+note store, derive the query's empty and missing-token behavior, identify the
+posting-set ownership boundary, then separate in-memory lookup work from any
+I/O. A class name or a fast-looking container is not evidence of a contract.
+
+### Debugging — expose aliasing with the smallest query sequence
+
+Use two queries that share a smallest posting set. First record that both
+queries should return the same membership; then show that
+`intersection_update` mutates the stored set through `result`. Copying the
+candidate set repairs that particular ownership invariant. It does not by
+itself establish ranking, transactionality, or all update-failure behavior.
+
+### Design — keep identity, derived state, and recovery visible
+
+Keep canonical note text as the source of truth, treat postings as rebuildable
+derived state, and define one explicit replacement/rebuild policy. The design
+does not require speculative layers: its useful boundary is the one that makes
+key equality, ownership, a failed update, and recovery inspectable by a
+reader or reviewing agent.
+
 ## 18. Agent specification: delegate a bounded implementation
 
 Give an agent this brief after you can defend every clause:
@@ -1341,7 +1422,7 @@ The correct design stores canonical tokens as keys and lets the mapping represen
 
 Each session alternates explanation with prediction, tracing, design, and defense. No lecture block introduces more than one abstraction jump without learner action.
 
-### Session 1 — Why lookup creates an index
+## Session 1 — Why lookup creates an index
 
 **Retrieve:** Module 3 ADTs and Module 5 cost models.  
 **Launch:** compare repeated full-note scans with a precomputed token relation.  
@@ -1350,7 +1431,13 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Trace:** direct-address lookup for a small integer universe.  
 **Exit claim:** explain why hashing is a response to direct addressing's space cost, not magic search.
 
-### Session 2 — Hashing, collisions, and equality
+### Output: lookup-to-index decision card
+
+One compact scan/direct-address/hash comparison naming the lookup workload,
+key universe, stored-key count, saved query work, added update work, and one
+assumption that still needs evidence.
+
+## Session 2 — Hashing, collisions, and equality
 
 **Retrieve:** Module 4 functions and pigeonhole principle.  
 **Launch:** map six distinct keys into four table positions.  
@@ -1359,7 +1446,13 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Debug:** reject the broken implementation that returns the first bucket value or turns a deleted open-addressing slot into `EMPTY`.  
 **Exit claim:** state why collision is inevitable but incorrect lookup is not.
 
-### Session 3 — Keys are behavioral contracts
+### Output: collision-and-equality trace
+
+One prediction-first trace that records the hash route, every candidate,
+equality decision, absence condition, table invariant, and confidence before
+the reveal.
+
+## Session 3 — Keys are behavioral contracts
 
 **Retrieve:** Module 1 identity, equality, aliasing, and mutation.  
 **Launch:** inspect `MutableTopic` before and after changing `slug`.  
@@ -1368,7 +1461,13 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Repair:** redesign a mutable key into immutable identity plus mutable value metadata.  
 **Exit claim:** explain why “hashable” is a contract over time, not merely “`hash(x)` ran once.”
 
-### Session 4 — Cost without overclaiming
+### Output: key-contract repair note
+
+One equality/hash field table with a mutable-key counterexample, an immutable
+redesign, the relied-on language claim, and an explicitly excluded
+implementation detail.
+
+## Session 4 — Cost without overclaiming
 
 **Retrieve:** Module 5 expected versus amortized analysis.  
 **Launch:** inspect one balanced table and one constant-hash table.  
@@ -1377,7 +1476,13 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Investigation:** count equality calls using `CollisionKey`.  
 **Exit claim:** state an honest lookup/insertion cost sentence that separates distribution, collision, resize, and key-length assumptions.
 
-### Session 5 — From Python semantics to an Atlas inverted index
+### Output: qualified-cost card
+
+One cost sentence that separately names the expected distribution model,
+worst-case collision witness, amortized resize argument, key-work assumption,
+measurement setup, and one conclusion it does not support.
+
+## Session 5 — From Python semantics to an Atlas inverted index
 
 **Retrieve:** Module 4 set intersection and proof directions.  
 **Launch:** invert three note-to-token relationships by hand.  
@@ -1386,7 +1491,12 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Debug:** repair the aliasing optimization that mutates a stored posting set.  
 **Exit claim:** explain which facts Atlas can rely on across Python implementations.
 
-### Session 6 — Architecture, adversaries, and agent review
+### Output: index-proof and ownership sheet
+
+One token-to-posting invariant, soundness/completeness sketch, empty-query
+policy, language-versus-CPython label, and minimal alias-regression trace.
+
+## Session 6 — Architecture, adversaries, and agent review
 
 **Retrieve:** source of truth, derived state, and failure windows.  
 **Launch:** interrupt an incremental note replacement after each line.  
@@ -1394,6 +1504,12 @@ Each session alternates explanation with prediction, tracing, design, and defens
 **Learner action:** write the bounded agent brief, inspect the generated patch, run semantic and adversarial tests, and reject the `hash(token)`-as-key change.  
 **Oral defense:** defend the index using correctness, cost, mutation safety, recovery, and implementation-layer boundaries.  
 **Exit artifact:** Atlas milestone 8 evidence packet.
+
+### Output: reviewed index evidence dossier
+
+One bounded delegation brief, inspected patch decision, collision and
+alias-regression evidence, source-of-truth/recovery map, oral-defense notes,
+and one remaining uncertainty—not a score or route authorization.
 
 ## 21. Eight-level problem ladder
 
@@ -1881,6 +1997,15 @@ Produce one coherent checkpoint, not a collection of unrelated exercises.
 | Review | reject semantic and evidentiary defects | accept because tests are green |
 | Transfer | map model to another index/cache/table | name another use of dictionaries |
 
+### Project acceptance criteria
+
+For a learner-controlled TA or Study Partner discussion, the dossier should
+make the lookup derivation, one collision/equality trace, one stable-key
+decision, one qualified cost claim, index invariant/proof, alias or update
+repair, and reviewed agent patch inspectable. If an item is incomplete, choose
+it as the next repair target; this is not a grade, automatic route permission,
+or declaration of complete mastery.
+
 ### Oral-defense prompts
 
 1. Why is a collision not a correctness failure by itself?
@@ -2035,6 +2160,17 @@ different authority.
 | 5 | inverted-index soundness/completeness and portable mapping/set behavior | [Python mapping types](https://docs.python.org/3.14/library/stdtypes.html#mapping-types-dict) and [set types](https://docs.python.org/3.14/library/stdtypes.html#set-types-set-frozenset) |
 | 6 | adversarial patch review and CPython-versus-Python boundary | [CPython `v3.14.6` `dictobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/dictobject.c) only as an implementation observation |
 
+### Source wording and claim boundary
+
+The linked sources support Python semantics, algorithm-model vocabulary, and
+versioned implementation reading; MIT and Open Data Structures calibrate
+rigorous undergraduate scope. Atlas retains its original traces, diagrams,
+index design, diagnostics, and review prompts. Sources are linked and
+paraphrased rather than copied. The module-specific source-audit addendum
+records source role, claim linkage, access date, and reuse boundaries. No
+source establishes universal constant time, a cryptographic guarantee,
+institutional equivalence, a deployment result, or a learner-mastery claim.
+
 ## Instructor synthesis
 
 The module has one connected argument:
@@ -2056,6 +2192,54 @@ The durable mental model is:
 
 ## Guided Codex handoff — M8
 
+### Supportive oral-defense protocol
+
+Use an encouraging conversation rather than a rigid exam. The learner may use
+text or voice, pause, ask for a hint, revise a trace, and keep one compact
+equation, code block, table, or ASCII fallback visible as a shared whiteboard.
+This workbook does not configure or guarantee GPT Live quality, model choice,
+voice/microphone access, rendering, retention, Notion writes, or export.
+
+### Invitation — start from one observable lookup
+
+Invite the learner to choose one lookup or collision trace, state what it
+predicts, label the claim layer, and name a confidence level before correction
+or terminology is offered.
+
+### Oral hint ladder — separate route, equality, and cost
+
+Offer one move at a time: name the mapping operation; draw the hash route;
+point to the equality decision; state the invariant; then attach the load,
+randomness, or resize assumption. Return to the last sound trace rather than
+treating an error as a verdict.
+
+### Changed-premise counterexample
+
+Change exactly one premise: make two unequal keys collide, mutate an
+equality-relevant field, remove a tombstone, persist `hash(token)`, or let an
+update fail mid-index change. Ask which earlier conclusion no longer follows
+and what minimal trace or test would expose it.
+
+### Transfer — prepare the ordered-index question in M9
+
+Ask which client question an equality index cannot answer—such as minimum,
+predecessor, range, or sorted traversal—and which identity and cost claims
+would still carry into M9. This is a transfer question, not permission to
+bypass M9's prerequisites.
+
+### Reflection — name the next smallest evidence
+
+Ask the learner to name one repaired misconception, one claim now stated with
+its assumptions, and the smallest next counterexample, proof step, or test
+that would reduce the remaining uncertainty.
+
+### Learner-controlled evidence summary
+
+Let the learner retain a self-selected summary of the chosen trace,
+confidence, repaired claim, remaining uncertainty, and M9 question. Saving,
+exporting, or writing it to another tool requires the learner's separate
+choice; this protocol performs no write.
+
 ### Teaching Assistant — supportive oral defense
 
 Start with: **“I am finishing M8. This key/equality contract is [claim], this
@@ -2071,7 +2255,10 @@ adversarial distribution) and ask which invariant or test exposes it.
 Offer two equal-looking records and ask which fields are allowed to determine
 identity. Then trace a collision and ask what equality must still decide. End
 with a one-sentence retrieval prompt: “Fast lookup is evidence about a stated
-distribution, not a promise that every key is safe.”
+distribution, not a promise that every key is safe.” Use the visible chat as a
+non-grading whiteboard when available: keep a short lookup table, equation, or
+code trace readable and provide a plain-text fallback. This prompt does not
+require live voice, platform rendering, or automatic record storage.
 
 ### Forward handoff — M9
 

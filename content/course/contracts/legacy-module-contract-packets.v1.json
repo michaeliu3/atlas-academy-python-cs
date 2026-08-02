@@ -5084,6 +5084,2436 @@
           ]
         }
       ]
+    },
+    {
+      "moduleId": "m08",
+      "packetId": "m08-hashing-dictionaries-sets-indexing-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m07"
+        ],
+        "forwardModuleId": "m09",
+        "masteryGateId": "algorithms",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+      "sourceMapPath": "content/source-maps/arc_ii_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m08-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m07"
+          ],
+          "forwardArtifactId": "m08-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m08-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m08-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m08-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m08-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m08-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m08-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m08-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m08-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m08-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m08-session-6-output"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m08-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M08 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m08-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M08 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m08-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M08 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "session-1--why-lookup-creates-an-index"
+          }
+        },
+        {
+          "id": "m08-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M08 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "session-2--hashing-collisions-and-equality"
+          }
+        },
+        {
+          "id": "m08-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M08 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "session-3--keys-are-behavioral-contracts"
+          }
+        },
+        {
+          "id": "m08-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M08 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "session-4--cost-without-overclaiming"
+          }
+        },
+        {
+          "id": "m08-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M08 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "session-5--from-python-semantics-to-an-atlas-inverted-index"
+          }
+        },
+        {
+          "id": "m08-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M08 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "session-6--architecture-adversaries-and-agent-review"
+          }
+        },
+        {
+          "id": "m08-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M08 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "output-lookup-to-index-decision-card"
+          }
+        },
+        {
+          "id": "m08-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M08 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "output-collision-and-equality-trace"
+          }
+        },
+        {
+          "id": "m08-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M08 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "output-key-contract-repair-note"
+          }
+        },
+        {
+          "id": "m08-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M08 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "output-qualified-cost-card"
+          }
+        },
+        {
+          "id": "m08-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M08 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "output-index-proof-and-ownership-sheet"
+          }
+        },
+        {
+          "id": "m08-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M08 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "output-reviewed-index-evidence-dossier"
+          }
+        },
+        {
+          "id": "m08-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M08 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "1-the-concrete-observation-repeated-scans-do-repeated-work"
+          }
+        },
+        {
+          "id": "m08-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M08 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "definition--mapping-identity-hash-route-and-equality-decision"
+          }
+        },
+        {
+          "id": "m08-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M08 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "assumption--name-the-randomness-load-and-key-work"
+          }
+        },
+        {
+          "id": "m08-derivation",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M08 derivation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "derivation-and-proof-idea--a-geometric-rebuild-has-bounded-total-movement"
+          }
+        },
+        {
+          "id": "m08-counterexample",
+          "roles": [
+            "counterexample",
+            "oral-counterexample"
+          ],
+          "label": "M08 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "counterexample--a-good-route-cannot-replace-equality"
+          }
+        },
+        {
+          "id": "m08-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M08 numerical experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "numerical-experiment--count-a-named-collision-workload"
+          }
+        },
+        {
+          "id": "m08-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M08 code reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "code-reading--recover-the-lookup-contract-before-optimizing"
+          }
+        },
+        {
+          "id": "m08-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M08 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "debugging--expose-aliasing-with-the-smallest-query-sequence"
+          }
+        },
+        {
+          "id": "m08-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M08 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "design--keep-identity-derived-state-and-recovery-visible"
+          }
+        },
+        {
+          "id": "m08-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M08 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "predict-before-running"
+          }
+        },
+        {
+          "id": "m08-transfer",
+          "roles": [
+            "transfer",
+            "oral-transfer"
+          ],
+          "label": "M08 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "level-8--transfer"
+          }
+        },
+        {
+          "id": "m08-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M08 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/arc_ii_source_map.md",
+            "headingAnchor": "module-8--hashing-dictionaries-sets-and-indexing"
+          }
+        },
+        {
+          "id": "m08-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M08 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m08-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M08 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m08-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M08 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m08-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M08 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m08-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M08 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "text-alternative--lookup-collision-and-index-bridge"
+          }
+        },
+        {
+          "id": "m08-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M08 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "22-understanding-check--confidence-aware-multiple-choice"
+          }
+        },
+        {
+          "id": "m08-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M08 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "diagnostic-interpretation"
+          }
+        },
+        {
+          "id": "m08-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M08 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "likely-misconceptions"
+          }
+        },
+        {
+          "id": "m08-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M08 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "spaced-retrieval"
+          }
+        },
+        {
+          "id": "m08-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M08 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "24-atlas-checkpoint-8--evidence-packet"
+          }
+        },
+        {
+          "id": "m08-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M08 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "project-acceptance-criteria"
+          }
+        },
+        {
+          "id": "m08-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M08 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "mastery-evidence"
+          }
+        },
+        {
+          "id": "m08-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M08 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "supportive-oral-defense-protocol"
+          }
+        },
+        {
+          "id": "m08-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M08 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "oral-hint-ladder--separate-route-equality-and-cost"
+          }
+        },
+        {
+          "id": "m08-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M08 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "reflection--name-the-next-smallest-evidence"
+          }
+        },
+        {
+          "id": "m08-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M08 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m08-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M08 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m08-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M08 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
+            "headingAnchor": "study-partner--lookup-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-course-map",
+            "m08-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-session-1",
+            "m08-session-2",
+            "m08-session-3",
+            "m08-session-4",
+            "m08-session-5",
+            "m08-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-first-principles"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-definition",
+            "m08-assumption",
+            "m08-derivation",
+            "m08-counterexample",
+            "m08-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-code-reading",
+            "m08-debugging",
+            "m08-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-source-rationale",
+            "m08-source-claim-linkage",
+            "m08-source-license-reuse",
+            "m08-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-visual",
+            "m08-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-diagnostic",
+            "m08-confidence",
+            "m08-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-dossier",
+            "m08-acceptance",
+            "m08-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-oral-protocol",
+            "m08-oral-hint",
+            "m08-counterexample",
+            "m08-transfer",
+            "m08-oral-reflection",
+            "m08-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m08-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m08-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m08-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m08.v1.json"
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "m09",
+      "packetId": "m09-trees-heaps-sorting-ordered-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m08"
+        ],
+        "forwardModuleId": "m10",
+        "masteryGateId": "algorithms",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/09_trees_heaps_sorting_ordered.md",
+      "sourceMapPath": "content/source-maps/arc_ii_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m09-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m08"
+          ],
+          "forwardArtifactId": "m09-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m09-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m09-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m09-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m09-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m09-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m09-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m09-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m09-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m09-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m09-session-6-output"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m09-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M09 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "1-position-in-the-knowledge-graph"
+          }
+        },
+        {
+          "id": "m09-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M09 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m09-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M09 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "session-1--ordered-questions-force-new-operations"
+          }
+        },
+        {
+          "id": "m09-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M09 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "session-2--recursive-shape-becomes-ordered-search"
+          }
+        },
+        {
+          "id": "m09-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M09 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "session-3--balance-is-a-repairable-shape-constraint"
+          }
+        },
+        {
+          "id": "m09-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M09 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "session-4--a-complete-tree-becomes-a-priority-mechanism"
+          }
+        },
+        {
+          "id": "m09-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M09 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "session-5--sorting-and-prefix-paths-organize-different-evidence"
+          }
+        },
+        {
+          "id": "m09-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M09 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "session-6--coordinate-indexes-direct-an-agent-defend-the-system"
+          }
+        },
+        {
+          "id": "m09-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M09 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "output-ordered-operation-decision-ledger"
+          }
+        },
+        {
+          "id": "m09-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M09 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "output-bst-path-and-proof-trace"
+          }
+        },
+        {
+          "id": "m09-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M09 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "output-rotation-preservation-dossier"
+          }
+        },
+        {
+          "id": "m09-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M09 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "output-heap-invariant-trace"
+          }
+        },
+        {
+          "id": "m09-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M09 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "output-ordering-contract-comparison-memo"
+          }
+        },
+        {
+          "id": "m09-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M09 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "output-ordered-index-defense-dossier"
+          }
+        },
+        {
+          "id": "m09-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M09 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "4-start-with-the-ordered-question-not-the-tree"
+          }
+        },
+        {
+          "id": "m09-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M09 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "definition--ordered-operation-key-and-invariant"
+          }
+        },
+        {
+          "id": "m09-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M09 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "assumption--comparison-model-and-policy-stay-separate"
+          }
+        },
+        {
+          "id": "m09-derivation",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M09 derivation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "derivation-and-proof-idea--an-operation-constrains-the-useful-order"
+          }
+        },
+        {
+          "id": "m09-counterexample",
+          "roles": [
+            "counterexample",
+            "oral-counterexample"
+          ],
+          "label": "M09 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "counterexample--a-familiar-shape-does-not-answer-every-ordered-question"
+          }
+        },
+        {
+          "id": "m09-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M09 numerical experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "numerical-experiment--measure-a-declared-workload-not-a-structure-name"
+          }
+        },
+        {
+          "id": "m09-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M09 code reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "18-code-and-architecture-reading-studio"
+          }
+        },
+        {
+          "id": "m09-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M09 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "183-suspicious-agent-patch"
+          }
+        },
+        {
+          "id": "m09-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M09 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "185-bounded-agent-task"
+          }
+        },
+        {
+          "id": "m09-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M09 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "predict-before-revealing--scheduler-generation-trace"
+          }
+        },
+        {
+          "id": "m09-transfer",
+          "roles": [
+            "transfer",
+            "oral-transfer"
+          ],
+          "label": "M09 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "level-8--transfer"
+          }
+        },
+        {
+          "id": "m09-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M09 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/arc_ii_source_map.md",
+            "headingAnchor": "module-9--trees-heaps-sorting-and-ordered-data"
+          }
+        },
+        {
+          "id": "m09-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M09 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m09-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M09 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m09-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M09 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m09-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M09 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "1-position-in-the-knowledge-graph"
+          }
+        },
+        {
+          "id": "m09-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M09 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "text-alternative--ordered-structure-knowledge-bridge"
+          }
+        },
+        {
+          "id": "m09-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M09 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "21-understanding-check--eight-confidence-aware-mcqs"
+          }
+        },
+        {
+          "id": "m09-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M09 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "diagnostic-interpretation"
+          }
+        },
+        {
+          "id": "m09-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M09 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "likely-misconceptions"
+          }
+        },
+        {
+          "id": "m09-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M09 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "scheduled-retrieval"
+          }
+        },
+        {
+          "id": "m09-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M09 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "23-atlas-milestone-9--evidence-packet"
+          }
+        },
+        {
+          "id": "m09-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M09 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "project-acceptance-criteria"
+          }
+        },
+        {
+          "id": "m09-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M09 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "evidence-rubric"
+          }
+        },
+        {
+          "id": "m09-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M09 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "supportive-oral-defense-protocol"
+          }
+        },
+        {
+          "id": "m09-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M09 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "hint-ladder--expose-one-invariant-at-a-time"
+          }
+        },
+        {
+          "id": "m09-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M09 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "reflection--name-the-next-smallest-evidence"
+          }
+        },
+        {
+          "id": "m09-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M09 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m09-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M09 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m09-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M09 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/09_trees_heaps_sorting_ordered.md",
+            "headingAnchor": "study-partner--invariant-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-course-map",
+            "m09-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-session-1",
+            "m09-session-2",
+            "m09-session-3",
+            "m09-session-4",
+            "m09-session-5",
+            "m09-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-first-principles"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-definition",
+            "m09-assumption",
+            "m09-derivation",
+            "m09-counterexample",
+            "m09-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-code-reading",
+            "m09-debugging",
+            "m09-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-source-rationale",
+            "m09-source-claim-linkage",
+            "m09-source-license-reuse",
+            "m09-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-visual",
+            "m09-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-diagnostic",
+            "m09-confidence",
+            "m09-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-dossier",
+            "m09-acceptance",
+            "m09-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-oral-protocol",
+            "m09-oral-hint",
+            "m09-counterexample",
+            "m09-transfer",
+            "m09-oral-reflection",
+            "m09-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m09-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m09-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m09-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m09.v1.json"
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "m10",
+      "packetId": "m10-graph-algorithms-network-models-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m09"
+        ],
+        "forwardModuleId": "m11",
+        "masteryGateId": "algorithms",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/10_graph_algorithms_network_models.md",
+      "sourceMapPath": "content/source-maps/arc_ii_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m10-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m09"
+          ],
+          "forwardArtifactId": "m10-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m10-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m10-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m10-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m10-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m10-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m10-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m10-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m10-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m10-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m10-session-6-output"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m10-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M10 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m10-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M10 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m10-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M10 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "session-1--turn-graph-questions-into-representations"
+          }
+        },
+        {
+          "id": "m10-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M10 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "session-2--fifo-layers-create-shortest-unweighted-evidence"
+          }
+        },
+        {
+          "id": "m10-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M10 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "session-3--dfs-finishing-state-exposes-cycles-and-order"
+          }
+        },
+        {
+          "id": "m10-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M10 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "session-4--relaxation-plus-graph-structure-selects-a-path-method"
+          }
+        },
+        {
+          "id": "m10-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M10 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "session-5--dijkstra-coordinates-heap-currency-and-finalization"
+          }
+        },
+        {
+          "id": "m10-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M10 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "session-6--connectivity-spanning-forests-and-atlas-defense"
+          }
+        },
+        {
+          "id": "m10-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M10 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "output-graph-contract-evidence-card"
+          }
+        },
+        {
+          "id": "m10-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M10 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "output-bfs-witness-and-cost-card"
+          }
+        },
+        {
+          "id": "m10-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M10 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "output-dfs-cycle-or-order-evidence-card"
+          }
+        },
+        {
+          "id": "m10-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M10 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "output-weighted-path-decision-card"
+          }
+        },
+        {
+          "id": "m10-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M10 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "output-dijkstra-review-card"
+          }
+        },
+        {
+          "id": "m10-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M10 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "output-planner-role-oral-defense-map"
+          }
+        },
+        {
+          "id": "m10-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M10 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "1-start-with-the-graph-question"
+          }
+        },
+        {
+          "id": "m10-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M10 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "21-mathematical-model"
+          }
+        },
+        {
+          "id": "m10-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M10 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "assumption--one-stable-finite-graph-snapshot"
+          }
+        },
+        {
+          "id": "m10-derivation",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M10 derivation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "44-representation-invariant"
+          }
+        },
+        {
+          "id": "m10-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "M10 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "46-intentionally-broken-bfs"
+          }
+        },
+        {
+          "id": "m10-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M10 numerical experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "numerical-experiment--representation-aware-cost-observation"
+          }
+        },
+        {
+          "id": "m10-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M10 code reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "22-code-reading-and-architecture-recovery-studio"
+          }
+        },
+        {
+          "id": "m10-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M10 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "mechanism-defects"
+          }
+        },
+        {
+          "id": "m10-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M10 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "23-design-and-delegate-a-bounded-atlas-change"
+          }
+        },
+        {
+          "id": "m10-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M10 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "prediction-representation-loss"
+          }
+        },
+        {
+          "id": "m10-transfer",
+          "roles": [
+            "transfer",
+            "oral-transfer"
+          ],
+          "label": "M10 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "level-8--transfer"
+          }
+        },
+        {
+          "id": "m10-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M10 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/arc_ii_source_map.md",
+            "headingAnchor": "module-10--graph-algorithms-and-network-models"
+          }
+        },
+        {
+          "id": "m10-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M10 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m10-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M10 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m10-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M10 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m10-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M10 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "position-in-the-knowledge-system"
+          }
+        },
+        {
+          "id": "m10-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M10 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "text-alternative--graph-search-state-machine-bridge"
+          }
+        },
+        {
+          "id": "m10-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M10 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "26-understanding-check--eight-confidence-aware-mcqs"
+          }
+        },
+        {
+          "id": "m10-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M10 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "diagnostic-interpretation"
+          }
+        },
+        {
+          "id": "m10-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M10 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "likely-misconceptions"
+          }
+        },
+        {
+          "id": "m10-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M10 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "spaced-retrieval"
+          }
+        },
+        {
+          "id": "m10-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M10 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "28-atlas-milestone-10--evidence-packet"
+          }
+        },
+        {
+          "id": "m10-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M10 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "acceptance-criteria"
+          }
+        },
+        {
+          "id": "m10-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M10 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "evidence-rubric"
+          }
+        },
+        {
+          "id": "m10-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M10 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "supportive-oral-defense-protocol"
+          }
+        },
+        {
+          "id": "m10-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M10 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "oral-hint-ladder--graph-semantics-to-witness"
+          }
+        },
+        {
+          "id": "m10-oral-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "M10 oral counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "changed-premise-counterexample"
+          }
+        },
+        {
+          "id": "m10-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M10 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "reflection--name-the-next-evidence"
+          }
+        },
+        {
+          "id": "m10-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M10 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m10-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M10 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m10-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M10 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/10_graph_algorithms_network_models.md",
+            "headingAnchor": "study-partner--graph-model-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-course-map",
+            "m10-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-session-1",
+            "m10-session-2",
+            "m10-session-3",
+            "m10-session-4",
+            "m10-session-5",
+            "m10-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-first-principles"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-definition",
+            "m10-assumption",
+            "m10-derivation",
+            "m10-counterexample",
+            "m10-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-code-reading",
+            "m10-debugging",
+            "m10-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-source-rationale",
+            "m10-source-claim-linkage",
+            "m10-source-license-reuse",
+            "m10-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-visual",
+            "m10-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-diagnostic",
+            "m10-confidence",
+            "m10-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-dossier",
+            "m10-acceptance",
+            "m10-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-oral-protocol",
+            "m10-oral-hint",
+            "m10-oral-counterexample",
+            "m10-transfer",
+            "m10-oral-reflection",
+            "m10-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m10-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m10-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m10-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m10.v1.json"
+          ]
+        }
+      ]
     }
   ]
 }

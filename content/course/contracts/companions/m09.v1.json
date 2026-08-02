@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m09",
+  "purpose": "Freeze a candidate-only M9 Teaching Assistant, Study Partner, and M10 handoff context for future human review without changing M9's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/8",
+    "digest": "sha256:f40796091df27fc5b1a18abfd3827cf2037074982d5d4a1584369b7e499c8de8"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected ordered request. Ask for the client operation, key and tie policy, representation, invariant, predicted next local update, and confidence before naming BST, heap, trie, or sorting terminology.",
+    "artifactFocus": "Ask the learner to make one compact tree region, heap-array trace, tuple-order table, sorting witness, trie path, or authoritative-versus-derived-state map visible, then distinguish the local conclusion from its height, output, stale-entry, Python, CPython, and workload boundaries.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as a skewed tree, equal priority, mutable key, snapshot sort, or large prefix output; then offer the smallest counterexample or invariant repair without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: show one small tree, heap table, tuple comparison, code trace, or equation and give a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the client request fixed but make the tree skewed, reschedule an ID at the same priority, mutate an ordering field, replace a repeated-minimum request with a one-time sort, or grow the prefix output. Ask for a prediction and confidence before separating the changed invariant or cost from the unchanged contract.",
+    "taHandoff": "End with the learner's selected M9 artifact, ordered-operation claim, confidence, changed premise, unresolved assumption, and M10 frontier question for a constructive Teaching Assistant conversation."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m10",
+    "carryArtifact": "Carry an ordered-evidence card: client operation, key/tie policy, tree/heap/trie or sorting invariant, short correctness witness, named height/stale/key/output cost parameters, Python/CPython/model labels, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M10 reuses priority queues in graph frontiers, which relation is authoritative, which candidate is current, and what graph assumption would make a minimum selection claim valid?",
+    "boundary": "M8 is M9's academic prerequisite and M10 is its only canonical forward handoff. References to M11, M16, M17, M19, M22, M24, M25, or later topics are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

@@ -6,14 +6,51 @@ async function workbook(filename) {
   return readFile(new URL(`../content/modules/${filename}`, import.meta.url), "utf8");
 }
 
+function isValidIsoDate(match) {
+  if (!match) return false;
+  const [year, month, day] = match.slice(1).map(Number);
+  const candidate = new Date(Date.UTC(year, month - 1, day));
+  return (
+    year >= 2000 &&
+    candidate.getUTCFullYear() === year &&
+    candidate.getUTCMonth() === month - 1 &&
+    candidate.getUTCDate() === day &&
+    candidate.getTime() <= Date.UTC(
+      new Date().getUTCFullYear(),
+      new Date().getUTCMonth(),
+      new Date().getUTCDate(),
+    )
+  );
+}
+
+function hasValidSourceDate(markdown) {
+  return isValidIsoDate(
+    markdown.match(/Sources were checked \*\*(\d{4})-(\d{2})-(\d{2})\*\*/u),
+  );
+}
+
+function hasValidAuditDate(markdown) {
+  return isValidIsoDate(markdown.match(/\*\*Audit date:\*\*\s*(\d{4})-(\d{2})-(\d{2})/u));
+}
+
+test("source-ledger date checks reject impossible and future provenance dates", () => {
+  assert.equal(hasValidSourceDate("Sources were checked **2026-02-30**"), false);
+  assert.equal(hasValidSourceDate("Sources were checked **2099-02-28**"), false);
+});
+
 test("Arc II keeps compact session-level source and evidence boundaries", async () => {
-  const [m6, m7, m8, m9, m10, sourceMap] = await Promise.all([
+  const [m6, m7, m8, m9, m10, sourceMap, ...addendums] = await Promise.all([
     workbook("06_representation_memory_sequences_linked.md"),
     workbook("07_stacks_queues_iteration_lazy.md"),
     workbook("08_hashing_dictionaries_sets_indexing.md"),
     workbook("09_trees_heaps_sorting_ordered.md"),
     workbook("10_graph_algorithms_network_models.md"),
     readFile(new URL("../content/source-maps/arc_ii_source_map.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/source-maps/module6_representation_memory_sequences_linked_source_audit_addendum.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/source-maps/module7_stacks_queues_iteration_lazy_source_audit_addendum.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md", import.meta.url), "utf8"),
+    readFile(new URL("../content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md", import.meta.url), "utf8"),
   ]);
 
   for (const [moduleId, markdown] of [
@@ -24,9 +61,15 @@ test("Arc II keeps compact session-level source and evidence boundaries", async 
     ["M10", m10],
   ]) {
     assert.match(markdown, /### Session-to-source-and-evidence route/u, `${moduleId} needs a learner-facing source route.`);
-    assert.match(markdown, /Sources were checked \*\*2026-08-01\*\*/u, `${moduleId} needs an access date.`);
+    assert.equal(hasValidSourceDate(markdown), true, `${moduleId} needs a valid ISO access date.`);
     assert.match(markdown, /link(?:\/cite|-cite|ed\s+or\s+briefly paraphrased)\s+only/u, `${moduleId} needs a reuse boundary.`);
     assert.match(markdown, /\| 6 \|/u, `${moduleId} needs a source/evidence route through Session 6.`);
+  }
+
+  for (const [moduleId, addendum] of ["M6", "M7", "M8", "M9", "M10"].map(
+    (moduleId, index) => [moduleId, addendums[index]],
+  )) {
+    assert.equal(hasValidAuditDate(addendum), true, `${moduleId} addendum needs a valid audit date.`);
   }
 
   for (const [moduleId, markdown, nextModule] of [

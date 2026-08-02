@@ -161,6 +161,18 @@
       "sha256": "f4e1fefeba4e9f0eb91b62ff9351116b007386198301c9bab56b245a124749eb"
     },
     {
+      "path": "content/course/contracts/companions/m08.v1.json",
+      "sha256": "750afd772b8020c4b9bd645c9f89af26b474f7b4fed7338f44a3284d7b8990d1"
+    },
+    {
+      "path": "content/course/contracts/companions/m09.v1.json",
+      "sha256": "1ee16383358b926867270258d745d5d4e3f09eb40c7099f2607416d4f32f38a1"
+    },
+    {
+      "path": "content/course/contracts/companions/m10.v1.json",
+      "sha256": "7595724facaff1bddf0486ef5e05cb2e0ac8844dbe02cf5bb5fa75019af414f5"
+    },
+    {
       "path": "content/course/contracts/companions/m12.v1.json",
       "sha256": "f16687c98ec4d96f3d3f7b147b059f5fda4f60d2c0d0a2878e3740d456b26e7b"
     },
@@ -261,6 +273,18 @@
       "sha256": "6bfc547eae62e26333750f425047ca9abafd2610252efed58cae06340b27f6f3"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m08.v1.json",
+      "sha256": "0e1dce37065c98611e33075884ab308d9b827ccdeed197710f5fcf69ce239be0"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m09.v1.json",
+      "sha256": "9d181e16f9f06a3229dc87a4de0f36d87833ac16795990933843ce109f11ad77"
+    },
+    {
+      "path": "content/course/contracts/evidence-preflight/m10.v1.json",
+      "sha256": "6f919f59b637f6f74610399f84e09b39e604f603128215ac7c4fa19afc3cd82d"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",
       "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
     },
@@ -337,6 +361,18 @@
       "sha256": "f5e4f8e4207dd6d41ac426841e7d7b5691683645faaaf019293f9eab57ec2274"
     },
     {
+      "path": "content/course/contracts/evidence/m08.v1.json",
+      "sha256": "2edfd66db4a1f170fea9f8ce39a2546477b652d70087f4f8677a8183c6c78b2b"
+    },
+    {
+      "path": "content/course/contracts/evidence/m09.v1.json",
+      "sha256": "4ddd470d2dbe2689e418ca46ae3d29ad86bf111d6e6436328e6734ef3a12ace7"
+    },
+    {
+      "path": "content/course/contracts/evidence/m10.v1.json",
+      "sha256": "04150abd2b5313c49a51d62c3e843452fe6c1551a0c6626863b309bee25cd686"
+    },
+    {
       "path": "content/course/contracts/evidence/m12.v1.json",
       "sha256": "235cb3cd376d5b5bf762637c9c4ff4f15ad68ac06b914c258c65b062f5a0ce12"
     },
@@ -386,7 +422,7 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "3077754f4b605fee1cd1aa5ef46d2001b9cdaedb930ae748ec9734a779ea6999"
+      "sha256": "add7e9ae2acb9d54e3943d4bec491f987da8de3c37978794edc74f36aacefcc3"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -394,7 +430,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "93d166940e126808158920b030ed6adf663c31c78f05afad139c551f94a255a4"
+      "sha256": "9fa55840b0611100295d284753895045f1148d1eb79e510e7e73bacc12f9a3ef"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -466,15 +502,15 @@
     },
     {
       "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
-      "sha256": "a498efe2a2b3dc5d7171efe15b98b4bc0e052f1b63a2318e1a0adb443fc2feb7"
+      "sha256": "abdd47b9fe8afe4aed174f92e71dd5e17cc614dedb5012ac659a6f263895ff1a"
     },
     {
       "path": "content/modules/09_trees_heaps_sorting_ordered.md",
-      "sha256": "895db0cb6093f11e004ce93161208062129f94219d4a17b7b4a840560b9b9665"
+      "sha256": "ce05dbec4fd4e384963886acf762b4067db4dc3b9affb3c15b00c3edd238a163"
     },
     {
       "path": "content/modules/10_graph_algorithms_network_models.md",
-      "sha256": "0943f3c8c8bc798403fbdbd7d231ee59d0e8d719b17959a965998e56d5aaf10b"
+      "sha256": "5eb1fe817ffa599f96e311f94bf72dafb04f8eef288315b3424a6b406f511b69"
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
@@ -563,6 +599,10 @@
     {
       "path": "content/source-maps/arc_iii_source_map.md",
       "sha256": "bec516d3216192e922af2872236c5b347a326c773935e308eb516b07fa41f0f7"
+    },
+    {
+      "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
+      "sha256": "832f5a54068993c8d2b56887bf28c99522a61f825cdffcea2b60b6fcb161d416"
     },
     {
       "path": "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md",
@@ -729,6 +769,14 @@
       "sha256": "25f808156bede08cc4eb8b6d83ebfbf28d743b54c2e82701e4ab1bd3d67ee773"
     },
     {
+      "path": "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md",
+      "sha256": "b64e7fdf3e88c02832e7481ebb513fb59c8946f05024079c0fe1c9a53412f0d6"
+    },
+    {
+      "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md",
+      "sha256": "0a9d3c3e89a7506730dc8acdc2e9d983a9d7773924f0ba91cd297ac0ff1dc887"
+    },
+    {
       "path": "content/source-maps/python_curriculum_sources.md",
       "sha256": "65807d4ddc427e5d38a63f0bf95a3c04e6769ab4ab27f834f27da20a173f1508"
     },
@@ -771,6 +819,18 @@
     {
       "path": "docs/module-evidence/m07/candidate-preflight.md",
       "sha256": "69d8ccb56dd45b13cafcab693b6fd75c896a6661d73f8aec729eb6a950659774"
+    },
+    {
+      "path": "docs/module-evidence/m08/candidate-preflight.md",
+      "sha256": "08ccdf7a7b41b016d2d6b11d371c3b025d4f987669e9142eb24b734911cf59c2"
+    },
+    {
+      "path": "docs/module-evidence/m09/candidate-preflight.md",
+      "sha256": "56c0ce7f498d72cf025b0396d68d1df714cd964e0a8a4a597a220c26ad351903"
+    },
+    {
+      "path": "docs/module-evidence/m10/candidate-preflight.md",
+      "sha256": "51d7036821803c748a71d695deafd25976089440e1544205c03c889bf916098a"
     },
     {
       "path": "docs/module-evidence/m12/candidate-preflight.md",
@@ -1006,7 +1066,7 @@
     },
     {
       "path": "tests/mermaid-accessibility.test.mjs",
-      "sha256": "a4731bea7cd71a202636f433b7a8402940e79bcc2397dd09ee8f9960ad288d59"
+      "sha256": "12287381a181666638adbfcc4bc8438bcf04323ab5294d9a291b633d9c36894e"
     },
     {
       "path": "tests/rendered-html.test.mjs",

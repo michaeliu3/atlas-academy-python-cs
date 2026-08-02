@@ -292,6 +292,51 @@
       ],
       "studioSourcePath": "app/ProbabilityInferenceStudio.tsx",
       "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m08",
+      "packetId": "m08-hashing-dictionaries-sets-indexing-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m08/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:08ccdf7a7b41b016d2d6b11d371c3b025d4f987669e9142eb24b734911cf59c2"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m09",
+      "packetId": "m09-trees-heaps-sorting-ordered-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m09/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:56c0ce7f498d72cf025b0396d68d1df714cd964e0a8a4a597a220c26ad351903"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m10",
+      "packetId": "m10-graph-algorithms-network-models-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m10/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:51d7036821803c748a71d695deafd25976089440e1544205c03c889bf916098a"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     }
   ]
 }

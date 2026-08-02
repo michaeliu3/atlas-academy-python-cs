@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "93d166940e126808158920b030ed6adf663c31c78f05afad139c551f94a255a4");
+  assert.equal(digest, "9fa55840b0611100295d284753895045f1148d1eb79e510e7e73bacc12f9a3ef");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -39,8 +39,8 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
   assert.deepEqual(report.summary, {
-    structuralCandidates: 18,
-    resolvedPointers: 775,
+    structuralCandidates: 21,
+    resolvedPointers: 908,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -485,7 +485,7 @@ test("the M30 structural packet binds its mathematics spine without laundering a
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
-  assert.equal(report.summary.structuralCandidates, 18);
+  assert.equal(report.summary.structuralCandidates, 21);
   const packet = report.packetById.get("m30-probability-inference-structural-candidate");
   assert.equal(packet?.moduleId, "m30");
   assert.deepEqual(packet?.canonicalExpectation.academicPrerequisiteModuleIds, ["m27", "m29"]);

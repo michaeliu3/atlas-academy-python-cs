@@ -49,6 +49,16 @@ flowchart LR
     ATLAS --> M11["Module 11<br/>algorithmic strategies"]
 ```
 
+### Text alternative — graph-search state-machine bridge
+
+Modules 4, 5, 7, 8, and 9 contribute different inputs to one M10 graph
+state machine: graph vocabulary and proof style; `V/E` cost accounting;
+FIFO/LIFO frontier rules; set/map state and path witnesses; and heap-based
+minimum selection. M10 combines those roles to answer a declared graph
+question, then carries the resulting model, invariant, cost qualification, and
+witness into M11. The diagram is a dependency explanation, not permission to
+skip any prerequisite.
+
 The structures have distinct jobs:
 
 - the graph representation answers `neighbors(vertex)`;
@@ -213,6 +223,14 @@ These choices are not decoration:
 - two parallel transit routes can have different costs;
 - a mapping `neighbor → weight` silently collapses parallel edges;
 - a disconnected graph has no single spanning tree over all vertices.
+
+### Assumption — one stable finite graph snapshot
+
+Every proof and trace in this module assumes one finite graph snapshot with
+declared vertex identity, edge direction, multiplicity, weight, and endpoint
+policies. If an adapter can mutate, omit, lazily fetch, or reinterpret edges
+during a run, the result needs a version/snapshot contract before the
+mathematical claim can describe what the program actually observed.
 
 ### 2.2 Three common representations
 
@@ -1792,6 +1810,15 @@ assert len(prim_edges) == 2
 
 They do encode boundary contracts and expose common implementation defects. Proof, property testing, small exhaustive comparison, measurement, and architecture review complete the evidence.
 
+### Numerical experiment — representation-aware cost observation
+
+Generate a sparse and a dense graph family, then compare one named traversal
+under an adjacency collection and an adjacency matrix. Record `|V|`, `|E|`,
+the representation, Python version, machine, repetitions, and exactly what
+the timer includes. The observation can test a stated workload hypothesis; it
+does not prove the `Θ(V+E)` or `Θ(V²)` model, a universal Python cost, or the
+quality of a storage adapter.
+
 ## 22. Code-reading and architecture recovery studio
 
 An agent submits:
@@ -1925,7 +1952,7 @@ Each session begins with retrieval, alternates explanation with learner action, 
 representation → frontier → finishing → relaxation → greedy order → network design
 ```
 
-### Session 1 — Turn graph questions into representations
+## Session 1 — Turn graph questions into representations
 
 **Retrieve:** Module 4 graph vocabulary, Module 3 interface/representation, and Module 5 two-parameter cost models.  
 **Launch:** inspect one Atlas prerequisite dataset containing an isolated vertex, a self-loop, and two parallel weighted edges.  
@@ -1933,9 +1960,12 @@ representation → frontier → finishing → relaxation → greedy order → ne
 **Predict:** identify exactly what is lost by converting parallel edge records to `dict[neighbor, weight]`.  
 **Learner action:** complete the six-part graph question sheet for reachability, least effort, and minimum connection cost.  
 **Code reading:** recover endpoint policy and `E` counting convention from an unfamiliar adjacency adapter.  
-**Exit artifact:** a versioned Atlas graph contract with explicit edge direction, multiplicity, self-loop, isolation, and weight policies.
+### Output: graph-contract evidence card
 
-### Session 2 — FIFO layers create shortest unweighted evidence
+A versioned Atlas graph contract with explicit edge direction, multiplicity,
+self-loop, isolation, and weight policies.
+
+## Session 2 — FIFO layers create shortest unweighted evidence
 
 **Retrieve:** Module 7 queue law and Module 8 discovered/parent map roles.  
 **Launch:** trace the diamond graph and predict the queue after every transition.  
@@ -1943,9 +1973,12 @@ representation → frontier → finishing → relaxation → greedy order → ne
 **Learner action:** mark discovery at enqueue time, reconstruct one shortest path, and independently validate each edge.  
 **Debug:** use the delayed-marking implementation to produce duplicate enqueues and overwritten parent evidence.  
 **Architecture reading:** distinguish one-source reachability from whole-curriculum component coverage.  
-**Exit artifact:** BFS trace, path witness, component partition, and `Θ(V+E)` cost claim with a named adjacency model.
+### Output: BFS witness-and-cost card
 
-### Session 3 — DFS finishing state exposes cycles and order
+A BFS trace, path witness, component partition, and `Θ(V+E)` cost claim with a
+named adjacency model.
+
+## Session 3 — DFS finishing state exposes cycles and order
 
 **Retrieve:** Module 2 call frames/induction and Module 4 DAG/topological definitions.  
 **Launch:** compare a set-only traversal with white/gray/black state on `a → c ← b`.  
@@ -1953,9 +1986,12 @@ representation → frontier → finishing → relaxation → greedy order → ne
 **Learner action:** trace `active`, `active_index`, and `finishing_order` on a DAG and a self-loop.  
 **Debug:** reject the seen-only cycle detector with the smallest DAG counterexample.  
 **Design:** specify an explicit-frame iterative alternative for a chain longer than Python's safe recursion depth.  
-**Exit artifact:** independently checked cycle or topological-order evidence tied to one graph snapshot.
+### Output: DFS cycle-or-order evidence card
 
-### Session 4 — Relaxation plus graph structure selects a path method
+Independently checked cycle or topological-order evidence tied to one graph
+snapshot.
+
+## Session 4 — Relaxation plus graph structure selects a path method
 
 **Retrieve:** Module 5 induction over rounds and Module 4 path/cycle definitions.  
 **Launch:** compare fewest-edge and least-weight routes on the same three vertices.  
@@ -1963,9 +1999,12 @@ representation → frontier → finishing → relaxation → greedy order → ne
 **Learner action:** write the tiny `relax` mechanism, then trace round `k` as paths using at most `k` edges.  
 **Debug:** distinguish a reachable negative cycle from one in a disconnected component and extract an edge-following witness.  
 **Choose:** defend DAG relaxation over Bellman–Ford when acyclicity is guaranteed.  
-**Exit artifact:** one weighted trace, one correctness argument, and one negative-cycle diagnostic.
+### Output: weighted-path decision card
 
-### Session 5 — Dijkstra coordinates heap currency and finalization
+One weighted trace, one correctness argument, and one negative-cycle
+diagnostic.
+
+## Session 5 — Dijkstra coordinates heap currency and finalization
 
 **Retrieve:** Module 9 heap invariant, authoritative live state, revisions, and stale-entry skipping.  
 **Launch:** trace the `10/2/3` graph that creates an old `(10, a)` heap record after `a` improves to `5`.  
@@ -1973,9 +2012,12 @@ representation → frontier → finishing → relaxation → greedy order → ne
 **Learner action:** annotate every heap entry as current or stale and identify the only safe early-return point.  
 **Debug:** defeat discovery-time finalization and negative-edge acceptance with minimal counterexamples.  
 **Patch review:** compare the generated claim `O(E log V)` with actual heap occupancy and graph multiplicity.  
-**Exit artifact:** accepted or rejected Dijkstra patch with trace, invariant, tests, and qualified complexity.
+### Output: Dijkstra review card
 
-### Session 6 — Connectivity, spanning forests, and Atlas defense
+An accepted or rejected Dijkstra patch with trace, invariant, tests, and
+qualified complexity.
+
+## Session 6 — Connectivity, spanning forests, and Atlas defense
 
 **Retrieve:** Module 4 proof by exchange, Module 8 set partitions, and Module 9 priority selection.  
 **Launch:** contrast a shortest-path tree with an MST on the `2/2/1` triangle.  
@@ -1983,7 +2025,10 @@ representation → frontier → finishing → relaxation → greedy order → ne
 **Learner action:** trace parallel edges, a negative self-loop, and an isolated vertex through both algorithms.  
 **Architecture studio:** walk one Atlas request through immutable snapshot, algorithm selection, stale-entry handling, parent-edge evidence, independent verification, and UI response.  
 **Delegate and review:** issue the bounded `least_effort_path` brief, challenge the patch, and request one focused revision.  
-**Exit defense:** explain why queue, stack, heap, maps, and disjoint set have noninterchangeable roles in the same planner.
+### Output: planner-role oral-defense map
+
+Explain why queue, stack, heap, maps, and disjoint set have noninterchangeable
+roles in the same planner.
 
 ## 25. Eight-level problem ladder
 
@@ -2641,6 +2686,16 @@ Save:
 
 The teaching narrative and Atlas exercises are original. These primary sources were triangulated for definitions, correctness traditions, algorithm sequence, and Python contracts.
 
+### Source wording and claim boundary
+
+The linked sources calibrate graph theory, algorithm proof traditions, and
+documented Python container behavior. They do not make this compressed module
+equivalent to an institutional course, prove an Atlas result, or turn a
+mathematical theorem into a claim about malformed input, mutable storage, or a
+particular deployment. The module-specific source-audit addendum records the
+source role, access date, reuse boundary, and stopping line for each claim
+family.
+
 ### MIT graph and shortest-path sequence
 
 - [MIT 6.006 Spring 2020 resource index](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/resource-index/) — lecture and recitation notes 9–14: BFS, DFS/topological ordering, weighted shortest paths, Bellman–Ford, Dijkstra, and Johnson's algorithm.
@@ -2739,6 +2794,48 @@ frontier state → invariant/finalization rule → witness verification →
 complexity under V/E and representation assumptions. Change one premise
 (directedness, negative edge, disconnected component, stale graph version, or
 multiple equal paths) and ask which proof or implementation decision fails.
+
+### Supportive oral-defense protocol
+
+Start from the learner's own graph and prediction, not a verdict. Ask for one
+visible state trace and confidence before offering a hint; change one premise,
+use the smallest counterexample when needed, and close with the learner's
+chosen next evidence step. A spoken or text conversation is constructive
+practice, not a score, completion record, or claim about GPT Live behavior.
+
+### Oral hint ladder — graph semantics to witness
+
+Offer only the next smallest prompt: restate the graph question; draw all
+represented edges; label frontier and state; state the invariant; then verify
+one edge-following witness and qualify its cost. Reveal pseudocode or a proof
+skeleton only after the learner has made a prediction.
+
+### Changed-premise counterexample
+
+Change exactly one premise: reverse one edge, preserve a parallel edge, make
+one reachable edge negative, disconnect a negative cycle, or replace the
+snapshot with a later version. Ask which claim survives, which invariant no
+longer applies, and what smallest graph makes the distinction visible.
+
+### Transfer — test a new graph question
+
+Ask the learner to model one unfamiliar dependency, routing, or review-flow
+request. They should name the graph contract, required witness, lawful
+frontier or edge schedule, and one assumption that would make the selected
+algorithm invalid.
+
+### Reflection — name the next evidence
+
+Ask: “Which part of your graph claim is most fragile—model, representation,
+state trace, invariant, witness, cost, or snapshot—and what smallest artifact
+would check it?” Treat the response as a learning choice, not a grade.
+
+### Learner-controlled evidence summary
+
+The learner may keep only a graph sketch, one state/witness trace, a confidence
+label, the changed premise, the remaining uncertainty, and their selected M11
+question. Do not automatically retain a voice recording, transcript, or
+external note; any export remains learner-controlled.
 
 ### Study Partner — graph-model rehearsal
 
