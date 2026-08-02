@@ -47,24 +47,22 @@ asset-level license review; Stanford explicitly reserves its course materials.
   evidence correctly declines to treat structure or a fixture as a learner
   release.
 
-## Genuine learner-impacting gap and minimal repair
+## Resolved learner-impacting repair
 
-### M33: provide a constructive witness for the one key language-class claim
+### M33: constructive witness for the key language-class claim
 
-The formal-model ladder says that
-\(L_= = \{0^n1^n \mid n\ge0\}\) is context-free and not regular. The workbook
-then gives a useful *nonregularity* proof, but it does not currently show the
-corresponding tiny CFG witness. A learner therefore has to accept one half of
-the class-placement claim on authority, despite the course’s first-principles
-standard.
+The formal-model ladder states that
+\(L_= = \{0^n1^n \mid n\ge0\}\) is context-free and not regular. The
+workbook now directly supplies the corresponding compact CFG witness under
+**“Constructive witness — a CFG for \(L_=\)”**:
+\(S \rightarrow 0S1 \mid \epsilon\), with the derivation
+\(S \Rightarrow 0S1 \Rightarrow 00S11 \Rightarrow 0011\). It explains that
+this witnesses context-freeness while the later distinguishability argument
+addresses the separate finite-state/regular-language limit.
 
-**Minimal edit, not a new topic:** directly under that ladder, add
-\(S \rightarrow 0S1 \mid \epsilon\), one short derivation such as
-\(S \Rightarrow 0S1 \Rightarrow 00S11 \Rightarrow 0011\), and one sentence
-that this witnesses membership in the context-free class while the existing
-distinguishability argument addresses the separate regular-language limit.
-Do **not** add a PDA-equivalence, pumping-lemma, or closure-property unit here;
-link those as optional depth if desired.
+This resolves the earlier missing-witness finding without expanding scope.
+PDA equivalence, pumping-lemma variants, and closure-property proofs remain
+optional depth rather than an added required unit.
 
 ## Delivery gap that should not be papered over
 
