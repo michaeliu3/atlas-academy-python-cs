@@ -272,6 +272,14 @@ export function ScopeMatrix() {
               </div>
               <dl>
                 <div>
+                  <dt>Recommended cadence</dt>
+                  <dd>
+                    <span><strong>{track.cadence.firstPassDays}-day route</strong> · bounded first pass</span>
+                    <span><strong>{track.cadence.recommendedDays}-day route</strong> · durable extension</span>
+                    <span>{track.cadence.rationale}</span>
+                  </dd>
+                </div>
+                <div>
                   <dt>Prerequisites</dt>
                   <dd>
                     {track.prerequisiteModuleIds.map((moduleId) => (

@@ -645,6 +645,19 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /Mathematical, Algorithms &amp; Theory Deepening/);
   assert.match(readable, /MIT 6\.854 Advanced Algorithms/);
   assert.match(readable, /Stanford CS224N NLP with Deep Learning/);
+  for (const trackId of [
+    "math-algorithms-theory",
+    "deep-learning-ml-systems",
+    "probabilistic-models-rl",
+    "foundation-models-nlp",
+  ]) {
+    const track = scopeDocument.querySelector(`#track-${trackId}`);
+    const cadence = [...(track?.querySelectorAll("dl > div") ?? [])].find(
+      (fact) => fact.querySelector("dt")?.textContent === "Recommended cadence",
+    )?.querySelector("dd")?.textContent?.replace(/\s+/g, " ").trim() ?? "";
+    assert.match(cadence, /90-day route/i, `${trackId} exposes a 90-day route`);
+    assert.match(cadence, /180-day route/i, `${trackId} exposes a 180-day route`);
+  }
   assert.doesNotMatch(html, /href="\/modules\/31-/);
 });
 

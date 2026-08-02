@@ -8,7 +8,7 @@
     "consolidation": "3–12 months"
   },
   "scopeMatrix": {
-    "schemaVersion": 1,
+    "schemaVersion": 2,
     "benchmark": {
       "id": "learner-levels-1-to-9-2026-08",
       "title": "Levels 1–9 foundations-to-AI benchmark",
@@ -728,6 +728,11 @@
         "id": "math-algorithms-theory",
         "title": "Mathematical, Algorithms & Theory Deepening",
         "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Theory needs spaced proof reconstruction, counterexamples, and one revised argument—not a single compressed survey."
+        },
         "prerequisiteModuleIds": ["m26", "m27", "m28", "m29", "m30", "m31", "m33", "m36"],
         "calibrationUrls": [
           "https://ocw.mit.edu/courses/6-854j-advanced-algorithms-fall-2005/",
@@ -742,6 +747,11 @@
         "id": "deep-learning-ml-systems",
         "title": "Deep Learning & ML Systems",
         "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Repeatable experiments need time to inspect systems evidence, revise the baseline, and explain resource and reliability limits."
+        },
         "prerequisiteModuleIds": ["m26", "m28", "m29", "m30", "m31", "m32", "m35", "m36"],
         "calibrationUrls": [
           "https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/",
@@ -756,6 +766,11 @@
         "id": "probabilistic-models-rl",
         "title": "Probabilistic Modeling, Sequential Decision-Making & RL",
         "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Inference and decision claims need a separate calibration and revision cycle so a finite simulation is not mistaken for a policy guarantee."
+        },
         "prerequisiteModuleIds": ["m26", "m29", "m30", "m31", "m34", "m35"],
         "calibrationUrls": [
           "https://www.cs.cmu.edu/~pradeepr/708/",
@@ -770,6 +785,11 @@
         "id": "foundation-models-nlp",
         "title": "Foundation Models, Generative AI & NLP",
         "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Model and data provenance, evaluation, red-teaming, and human-override reasoning need revision after the first dossier."
+        },
         "prerequisiteModuleIds": ["m26", "m23", "m28", "m29", "m30", "m31", "m32", "m33", "m35", "m36"],
         "calibrationUrls": [
           "https://ocw.mit.edu/courses/6-s087-foundation-models-and-generative-ai-january-iap-2024/",

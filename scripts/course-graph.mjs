@@ -230,8 +230,8 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     ["schemaVersion", "benchmark", "scopeStates", "capabilities", "topics", "extensionTracks"],
     "scopeMatrix",
   );
-  if (scopeMatrix.schemaVersion !== 1) {
-    fail("scopeMatrix schemaVersion must be 1.");
+  if (scopeMatrix.schemaVersion !== 2) {
+    fail("scopeMatrix schemaVersion must be 2.");
   }
   assertExactKeys(scopeMatrix.benchmark, ["id", "title", "accessedOn"], "scopeMatrix benchmark");
   assertString(scopeMatrix.benchmark.id, "scopeMatrix benchmark id");
@@ -253,6 +253,7 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
         "id",
         "title",
         "status",
+        "cadence",
         "prerequisiteModuleIds",
         "calibrationUrls",
         "project",
@@ -270,6 +271,18 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     if (track.status !== "design-only") {
       fail(`scopeMatrix extension track ${track.id} must remain design-only.`);
     }
+    assertExactKeys(
+      track.cadence,
+      ["firstPassDays", "recommendedDays", "rationale"],
+      `scopeMatrix extension track ${track.id} cadence`,
+    );
+    if (track.cadence.firstPassDays !== 90 || track.cadence.recommendedDays !== 180) {
+      fail(`scopeMatrix extension track ${track.id} cadence must define 90 and 180 days.`);
+    }
+    if (track.cadence.firstPassDays >= track.cadence.recommendedDays) {
+      fail(`scopeMatrix extension track ${track.id} cadence must increase from first pass to durable study.`);
+    }
+    assertString(track.cadence.rationale, `scopeMatrix extension track ${track.id} cadence rationale`);
     if (!Array.isArray(track.prerequisiteModuleIds) || track.prerequisiteModuleIds.length === 0) {
       fail(`scopeMatrix extension track ${track.id} needs prerequisiteModuleIds.`);
     }
@@ -280,6 +293,9 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
       if (!moduleById.has(moduleId)) {
         fail(`scopeMatrix extension track ${track.id} references missing module ${moduleId}.`);
       }
+    }
+    if (!track.prerequisiteModuleIds.includes("m26")) {
+      fail(`scopeMatrix extension track ${track.id} must retain M26 as its post-core evidence boundary.`);
     }
     if (!Array.isArray(track.calibrationUrls) || track.calibrationUrls.length < 2) {
       fail(`scopeMatrix extension track ${track.id} needs at least two official calibration URLs.`);

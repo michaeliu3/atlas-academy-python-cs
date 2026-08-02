@@ -56,6 +56,11 @@ export type ScopeMatrixExtensionTrack = {
   id: string;
   title: string;
   status: "design-only";
+  cadence: {
+    firstPassDays: 90;
+    recommendedDays: 180;
+    rationale: string;
+  };
   prerequisiteModuleIds: string[];
   calibrationUrls: string[];
   project: string;
@@ -64,7 +69,7 @@ export type ScopeMatrixExtensionTrack = {
 };
 
 export type CourseScopeMatrix = {
-  schemaVersion: 1;
+  schemaVersion: 2;
   benchmark: {
     id: string;
     title: string;

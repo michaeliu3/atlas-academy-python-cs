@@ -113,7 +113,7 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
   const foundationModels = matrix.topics.find(({ id }) => id === "l8.fm.representations-transformers");
   const optimization = matrix.topics.find(({ id }) => id === "l1.optimization.formulation-convexity");
 
-  assert.equal(matrix.schemaVersion, 1);
+  assert.equal(matrix.schemaVersion, 2);
   assert.equal(matrix.topics.length, 63);
   assert.deepEqual(levels, [1, 2, 3, 4, 5, 6, 7, 8, 9]);
   assert.deepEqual(
@@ -122,6 +122,27 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
   );
   assert.equal(matrix.extensionTracks.length, 4);
   assert.ok(matrix.extensionTracks.every(({ status }) => status === "design-only"));
+  assert.deepEqual(
+    matrix.extensionTracks.map(({ id }) => id),
+    [
+      "math-algorithms-theory",
+      "deep-learning-ml-systems",
+      "probabilistic-models-rl",
+      "foundation-models-nlp",
+    ],
+  );
+  assert.ok(
+    matrix.extensionTracks.every(({ prerequisiteModuleIds }) => prerequisiteModuleIds.includes("m26")),
+    "each post-core design begins after the M26 evidence boundary",
+  );
+  assert.ok(
+    matrix.extensionTracks.every(
+      ({ cadence }) =>
+        cadence?.firstPassDays === 90 && cadence.recommendedDays === 180 &&
+        typeof cadence.rationale === "string" && cadence.rationale.trim() !== "",
+    ),
+    "each post-core design declares both a 90-day and 180-day cadence",
+  );
   assert.deepEqual(foundationModels?.trackId, "foundation-models-nlp");
   assert.equal(optimization?.scope, "core-mastery");
   assert.ok(
@@ -150,6 +171,13 @@ test("the graph rejects Scope Matrix gaps and fabricated post-core routes", asyn
   assert.throws(
     () => validateCourseGraph(impossibleSession),
     /scopeMatrix topic l1\.proofs\.logic-relations anchor m04 sessions must be 1 through 6/u,
+  );
+
+  const missingCadence = structuredClone(graph);
+  delete missingCadence.scopeMatrix.extensionTracks[0].cadence;
+  assert.throws(
+    () => validateCourseGraph(missingCadence),
+    /scopeMatrix extension track must use exactly these keys/u,
   );
 });
 
