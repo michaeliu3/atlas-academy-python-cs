@@ -858,7 +858,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "819d4d8137dfbfcd7e5f75fdbc9736f99907123f46b8f8be524923e3ed1047be"
+      "sha256": "e336b67f93947cdf00f489180b5b9901e9ce47e53f830a69b3da462bbcc141ec"
     }
   ]
 }

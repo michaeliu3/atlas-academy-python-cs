@@ -700,7 +700,10 @@ test("diagnostic and M19 export actions require current learner approval before 
   assert.match(diagnostic, /Atlas does not transfer this brief or activate records\./);
   assert.match(diagnostic, /only if you want its configured concise-note policy\./);
   assert.doesNotMatch(diagnostic, /onClick=\{\(\) => window\.print\(\)\}/);
-  assert.match(diagnostic, /setApprovedLearningBrief\(null\)/);
+  assert.match(diagnostic, /function setLearningBriefApproval\(approved: boolean\)/);
+  assert.match(diagnostic, /setLearningBriefApproval\(false\)/);
+  assert.match(diagnostic, /copyAttemptVersionRef\.current \+= 1/);
+  assert.match(diagnostic, /copyFailureVisible/);
 
   assert.match(evidence, /canExportApprovedDraft\(approvedBrief, brief\)/);
   assert.match(
