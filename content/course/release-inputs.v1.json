@@ -65,6 +65,10 @@
       "sha256": "25c1ff0dc5b3adafb177afb92f009ea3233eb8cf3a92a7797fbdbef1b6ff1d01"
     },
     {
+      "path": "app/modules/[slug]/MermaidDiagram.tsx",
+      "sha256": "d52684d776697518d0a7cf200b91327810a77b8a0dbf90632ea7c7d3b4c0cd8c"
+    },
+    {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
       "sha256": "3988100589c6647d0425961b8b6869f39b29b8d1001493ddd3c498dd16e6c012"
     },
@@ -127,6 +131,10 @@
     {
       "path": "content/course/contracts/authoring-delivery/m36.v1.json",
       "sha256": "a01a123352f5548254d9931c25ac46dc8b325e759149493857ce09b38bb47e62"
+    },
+    {
+      "path": "content/course/contracts/companions/m01.v1.json",
+      "sha256": "038c74937731ede7b751ab9deae559d58b1fcc97f80cfdca83bf92153f98dc55"
     },
     {
       "path": "content/course/contracts/companions/m12.v1.json",
@@ -201,6 +209,10 @@
       "sha256": "af341075245795413512b3bf347775b9eeaa3519a09c22f61e99962a6de5250f"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m01.v1.json",
+      "sha256": "fe2ffb85fae6ae9421cb6df3816b38c78a8f9d27fdda8b94af03b487843261a5"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m12.v1.json",
       "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
     },
@@ -247,6 +259,10 @@
     {
       "path": "content/course/contracts/evidence-preflight/m30.v1.json",
       "sha256": "794d1f1960490270ba33c699a88e23abeaef16f60389d66d9e981d779a98ad0d"
+    },
+    {
+      "path": "content/course/contracts/evidence/m01.v1.json",
+      "sha256": "e12873bb29bdf250c16b4dae900a27f67507afd9a0c97da425d850c3d3256400"
     },
     {
       "path": "content/course/contracts/evidence/m12.v1.json",
@@ -298,7 +314,7 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "45a1cd8a9f6713e33df8ddb6804b07d2c6a72513dc87ecb949464078cab8aed8"
+      "sha256": "1a3a363335063db0c86cd3ac50fcaa388f7c6b8bb5a66bf58d675319fc2a64d1"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -306,7 +322,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "f30a2c8d2a28ac1602e45261985fab044d1893c533903b8a04ad5f7ade1ec2fb"
+      "sha256": "f4d409608f37163ebf4ad7aef3e1dfa383cce5ab0ea06c3b5f36740159137673"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -350,7 +366,7 @@
     },
     {
       "path": "content/modules/01_values_state_execution.md",
-      "sha256": "57ebc6c931ae94dc15f271c4d0af8d30a3171f81b1b6a2a0cee20290a7e5b3df"
+      "sha256": "e641ea4b3086697d7ca62437403ee39160947d056ac6ddc923e894c429bf3f6f"
     },
     {
       "path": "content/modules/02_functions_recursion_induction.md",
@@ -501,6 +517,10 @@
       "sha256": "e82fe81592d9450fd31f08eeaa03fd5c1a7de112aaee20200fde31f7a2809b48"
     },
     {
+      "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md",
+      "sha256": "20c32cdf030199f54261f3b8c860d5ea8d6b3b02460303e47fc30bc61c903e15"
+    },
+    {
       "path": "content/source-maps/module20_networks_protocols_source_audit_addendum.md",
       "sha256": "24c2b601fa71b21de16dd0ab1dfc4f4be931d45e3a95a9da2e859beae3591143"
     },
@@ -627,6 +647,10 @@
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
       "sha256": "b35a491ce2c3e33f564b684d468899961dfb8a3dd8a21499de14f94752cc1397"
+    },
+    {
+      "path": "docs/module-evidence/m01/candidate-preflight.md",
+      "sha256": "17c3f7f5c825c7e85530b67459a85188d5fa8348c928dbfbae36ee6d195bfa5f"
     },
     {
       "path": "docs/module-evidence/m12/candidate-preflight.md",
@@ -859,6 +883,10 @@
     {
       "path": "public/downloads/test_module30_reference.py",
       "sha256": "e3401c6bcbbe372a651c14091bc7ce5a2e58783848b7c2553f1b95d3f37b06ec"
+    },
+    {
+      "path": "tests/mermaid-accessibility.test.mjs",
+      "sha256": "a4731bea7cd71a202636f433b7a8402940e79bcc2397dd09ee8f9960ad288d59"
     },
     {
       "path": "tests/rendered-html.test.mjs",

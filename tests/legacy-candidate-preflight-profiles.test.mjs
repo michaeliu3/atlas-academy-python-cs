@@ -16,6 +16,7 @@ async function loadProfiles() {
 }
 
 const expectedCandidateModuleIds = [
+  "m01",
   "m12",
   "m13",
   "m19",
@@ -135,5 +136,5 @@ test("the snapshot-bound profile validator never reuses stateful caller facts", 
   const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
 
   assert.equal(purposeReads, 1);
-  assert.equal(report.candidateByModuleId.size, 12);
+  assert.equal(report.candidateByModuleId.size, 13);
 });

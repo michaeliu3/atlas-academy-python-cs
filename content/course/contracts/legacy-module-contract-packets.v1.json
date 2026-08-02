@@ -3011,6 +3011,98 @@
           ]
         }
       ]
+    },
+    {
+      "moduleId": "m01",
+      "packetId": "m01-values-state-execution-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [],
+        "forwardModuleId": "m02",
+        "masteryGateId": "claims",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/01_values_state_execution.md",
+      "sourceMapPath": "content/source-maps/python_curriculum_sources.md",
+      "sourceAuditAddendumPath": "content/source-maps/module1_values_state_execution_source_audit_addendum.md",
+      "sessionSpine": [
+        {"sessionNumber": 1, "pointerId": "m01-session-1", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m01-session-1-output"},
+        {"sessionNumber": 2, "pointerId": "m01-session-2", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m01-session-2-output"},
+        {"sessionNumber": 3, "pointerId": "m01-session-3", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m01-session-3-output"},
+        {"sessionNumber": 4, "pointerId": "m01-session-4", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m01-session-4-output"},
+        {"sessionNumber": 5, "pointerId": "m01-session-5", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m01-session-5-output"},
+        {"sessionNumber": 6, "pointerId": "m01-session-6", "usesPrerequisiteModuleIds": [], "forwardArtifactId": "m01-session-6-output"}
+      ],
+      "pointers": [
+        {"id": "m01-course-map", "roles": ["prerequisite-map"], "label": "M1 entry prerequisites", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "prerequisites"}},
+        {"id": "m01-forward-handoff", "roles": ["forward-handoff"], "label": "M2 evidence handoff", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "retrieval-ready-when-and-forward-handoff"}},
+        {"id": "m01-session-1", "roles": ["session"], "label": "Session 1", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "session-1--the-mystery-of-the-changing-record"}},
+        {"id": "m01-session-2", "roles": ["session"], "label": "Session 2", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "session-2--evaluation-calls-and-environments"}},
+        {"id": "m01-session-3", "roles": ["session"], "label": "Session 3", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "session-3--contracts-and-invariants"}},
+        {"id": "m01-session-4", "roles": ["session"], "label": "Session 4", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "session-4--code-reading-and-investigation-studio"}},
+        {"id": "m01-session-5", "roles": ["session"], "label": "Session 5", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "session-5--ta-studio"}},
+        {"id": "m01-session-6", "roles": ["session"], "label": "Session 6", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "session-6--mastery-check-and-synthesis"}},
+        {"id": "m01-session-1-output", "roles": ["session-output"], "label": "Session 1 binding and alias map", "sessionNumber": 1, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "output-binding-and-alias-map"}},
+        {"id": "m01-session-2-output", "roles": ["session-output"], "label": "Session 2 environment trace", "sessionNumber": 2, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "output-environment-trace-and-scope-claim"}},
+        {"id": "m01-session-3-output", "roles": ["session-output"], "label": "Session 3 ownership contract", "sessionNumber": 3, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "output-ownership-contract-card"}},
+        {"id": "m01-session-4-output", "roles": ["session-output"], "label": "Session 4 repair memo", "sessionNumber": 4, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "output-event-log-comparison-and-repair-memo"}},
+        {"id": "m01-session-5-output", "roles": ["session-output"], "label": "Session 5 TA card", "sessionNumber": 5, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "output-ta-misconception-and-regression-card"}},
+        {"id": "m01-session-6-output", "roles": ["session-output"], "label": "Session 6 state dossier", "sessionNumber": 6, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "output-m1-state-evidence-dossier"}},
+        {"id": "m01-first-principles", "roles": ["first-principles"], "label": "State-model first-principles derivation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "first-principles-derivation--named-state-makes-behavior-inspectable"}},
+        {"id": "m01-definition", "roles": ["definition"], "label": "Object and binding vocabulary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "definition--objects-names-bindings-and-state"}},
+        {"id": "m01-assumption", "roles": ["assumption"], "label": "Trace boundary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "assumption--what-one-trace-does-and-does-not-establish"}},
+        {"id": "m01-derivation", "roles": ["derivation-proof"], "label": "Aliasing proof idea", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "derivation-and-proof-idea--why-aliases-matter"}},
+        {"id": "m01-counterexample", "roles": ["counterexample", "oral-counterexample"], "label": "Equal values, distinct objects", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "counterexample--equal-values-can-still-be-different-objects"}},
+        {"id": "m01-numerical-experiment", "roles": ["numerical-experiment"], "label": "Bounded alias count", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "numerical-experiment--count-aliases-not-speed"}},
+        {"id": "m01-code-reading", "roles": ["code-reading"], "label": "Three event-log implementations", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "code-reading--three-implementations-one-state-question"}},
+        {"id": "m01-debugging", "roles": ["debugging"], "label": "Delayed-alias regression", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "debugging--predict-a-delayed-failure-before-the-reveal"}},
+        {"id": "m01-design", "roles": ["design"], "label": "Smallest ownership repair", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "design--keep-the-smallest-repair-that-establishes-the-boundary"}},
+        {"id": "m01-prediction", "roles": ["prediction"], "label": "Scope trace prediction", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "prediction-before-reveal--lexical-scope-is-a-binding-trace"}},
+        {"id": "m01-transfer", "roles": ["transfer", "oral-transfer"], "label": "State-model transfer", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "question-8--patch-review-and-concurrency-transfer"}},
+        {"id": "m01-source-rationale", "roles": ["source-rationale"], "label": "M1–M5 calibration route", "sessionNumber": null, "target": {"surface": "canonical-source-map", "path": "content/source-maps/python_curriculum_sources.md", "headingAnchor": "m1m5-learner-calibration-route"}},
+        {"id": "m01-claim-linkage", "roles": ["claim-linkage"], "label": "Claim linkage and stopping lines", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md", "headingAnchor": "claim-linkage-and-stopping-lines"}},
+        {"id": "m01-license-reuse", "roles": ["license-reuse"], "label": "Source and reuse ledger", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md", "headingAnchor": "source-and-reuse-ledger"}},
+        {"id": "m01-stable-learner-link", "roles": ["stable-learner-link"], "label": "Stable learner links", "sessionNumber": null, "target": {"surface": "source-audit-addendum", "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md", "headingAnchor": "source-and-reuse-ledger"}},
+        {"id": "m01-visual", "roles": ["visual"], "label": "State transition visual", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "visual-map-of-the-module"}},
+        {"id": "m01-text-alternative", "roles": ["text-alternative"], "label": "State transition prose alternative", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "text-alternative--trace-the-state-transition-without-the-diagram"}},
+        {"id": "m01-diagnostic", "roles": ["diagnostic"], "label": "Confidence-aware M1 diagnostic", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "understanding-check--eight-confidence-aware-questions"}},
+        {"id": "m01-confidence", "roles": ["confidence"], "label": "Confidence interpretation", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "confidence-interpretation"}},
+        {"id": "m01-misconception", "roles": ["misconception"], "label": "Misconception repair routing", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "misconception-routing"}},
+        {"id": "m01-retrieval", "roles": ["retrieval"], "label": "Spaced retrieval and M2 handoff", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "retrieval-ready-when-and-forward-handoff"}},
+        {"id": "m01-dossier", "roles": ["dossier"], "label": "Atlas event-log dossier", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "atlas-milestone-1"}},
+        {"id": "m01-acceptance", "roles": ["acceptance-criteria"], "label": "Dossier acceptance criteria", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "project-acceptance-criteria"}},
+        {"id": "m01-rubric", "roles": ["rubric"], "label": "Evidence rubric", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "evidence-rubric"}},
+        {"id": "m01-oral-protocol", "roles": ["oral-protocol"], "label": "Supportive oral-defense protocol", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "teaching-assistant--supportive-oral-defense"}},
+        {"id": "m01-oral-hint", "roles": ["oral-hint"], "label": "Trace repair hint ladder", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "hint-ladder--repair-one-trace-at-a-time"}},
+        {"id": "m01-oral-reflection", "roles": ["oral-reflection"], "label": "Constructive next step", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "constructive-next-step-guide"}},
+        {"id": "m01-oral-summary", "roles": ["oral-summary"], "label": "Learner-controlled summary", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "learner-controlled-evidence-summary"}},
+        {"id": "m01-ta", "roles": ["ta"], "label": "Teaching Assistant guide", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "teaching-assistant--supportive-oral-defense"}},
+        {"id": "m01-study-partner", "roles": ["study-partner"], "label": "Study Partner rehearsal", "sessionNumber": null, "target": {"surface": "workbook", "path": "content/modules/01_values_state_execution.md", "headingAnchor": "study-partner--five-minute-rehearsal"}}
+      ],
+      "criteria": [
+        {"criterionId": "prerequisite-forward-map", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-course-map", "m01-forward-handoff"]},
+        {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-session-1", "m01-session-2", "m01-session-3", "m01-session-4", "m01-session-5", "m01-session-6"]},
+        {"criterionId": "first-principles", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-first-principles"]},
+        {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-definition", "m01-assumption", "m01-derivation", "m01-counterexample", "m01-numerical-experiment"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-code-reading", "m01-debugging", "m01-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-transfer"]},
+        {"criterionId": "source-ledger", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-source-rationale", "m01-claim-linkage", "m01-license-reuse", "m01-stable-learner-link"]},
+        {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-visual", "m01-text-alternative"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-diagnostic", "m01-confidence", "m01-misconception"]},
+        {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "missing", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-retrieval"]},
+        {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-dossier", "m01-acceptance", "m01-rubric"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "missing", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-oral-protocol", "m01-oral-hint", "m01-counterexample", "m01-transfer", "m01-oral-reflection", "m01-oral-summary"]},
+        {"criterionId": "ta-prompt", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-ta"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "missing", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-study-partner"]},
+        {"criterionId": "forward-handoff", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m01-forward-handoff"]}
+      ],
+      "implementationArtifacts": [
+        {"id": "m01-visual-reader", "kind": "studio", "paths": ["app/modules/[slug]/MermaidDiagram.tsx", "tests/mermaid-accessibility.test.mjs"]},
+        {"id": "m01-guided-companion", "kind": "oral-guide", "paths": ["content/course/contracts/companions/m01.v1.json"]}
+      ]
     }
   ]
 }

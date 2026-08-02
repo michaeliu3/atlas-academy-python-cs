@@ -18,6 +18,7 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
     loadModuleLearningCompanions(),
   ]);
   const report = await validateModuleLearningCompanions(companions, { graph });
+  const m01 = report.byModuleId.get("m01");
   const m12 = report.byModuleId.get("m12");
   const m13 = report.byModuleId.get("m13");
   const m27 = report.byModuleId.get("m27");
@@ -38,8 +39,9 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 18);
+  assert.equal(report.summary.companionCount, 19);
   assert.deepEqual(report.summary.moduleIds, [
+    "m01",
     "m12",
     "m13",
     "m19",
@@ -59,6 +61,11 @@ test("software, systems, mathematics, and authoring companions remain graph-boun
     "m35",
     "m36",
   ]);
+  assert.equal(m01.guideBinding.locator, "/guides/0");
+  assert.equal(m01.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m01.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m01.forwardHandoff.targetModuleId, "m02");
+  assert.equal(moduleLearningCompanionRelativePath("m01"), "content/course/contracts/companions/m01.v1.json");
   assert.equal(m12.guideBinding.locator, "/guides/11");
   assert.equal(m12.teachingAssistant.role, "supportive-oral-defense");
   assert.equal(m12.studyPartner.role, "non-grading-rehearsal");

@@ -9,6 +9,21 @@
   },
   "candidates": [
     {
+      "moduleId": "m01",
+      "packetId": "m01-values-state-execution-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m01/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:17c3f7f5c825c7e85530b67459a85188d5fa8348c928dbfbae36ee6d195bfa5f"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module1_values_state_execution_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
       "moduleId": "m12",
       "packetId": "m12-modules-apis-types-dependencies-structural-candidate",
       "candidateDocumentation": {

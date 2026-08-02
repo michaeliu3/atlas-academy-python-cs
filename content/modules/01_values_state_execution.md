@@ -65,6 +65,61 @@ This model will later scale:
 - a lock restricts which interleavings may mutate shared state;
 - a distributed protocol reasons about state when no single machine sees the whole truth.
 
+## First-principles derivation — named state makes behavior inspectable
+
+The practical habit behind this module is deliberately small: before proposing
+a repair, name the objects, bindings, allowed transitions, and observation
+that would show whether the repair worked. A trace is evidence about that
+trace; it is not a universal explanation merely because it ran once.
+
+### Definition — objects, names, bindings, and state
+
+An **object** has identity, type, and observable state. A **name** is resolved
+in an environment to a binding; a **binding** is not the object itself. A
+**state transition** changes either an environment binding or an object that a
+binding reaches. The distinction is what makes an aliasing bug drawable.
+
+### Assumption — what one trace does and does not establish
+
+This workbook reasons about documented Python behavior and the stated Atlas
+contract. It does not infer a memory address, a CPython-only representation,
+or a concurrency guarantee from `id()` or from a single observed run. `id()`
+is useful only as an implementation-dependent diagnostic when its limitation
+is named.
+
+### Derivation and proof idea — why aliases matter
+
+If two bindings reach one mutable object, a mutation through either route can
+change what an observer through the other route sees. In contrast, rebinding
+one name replaces only that name's association in its environment. Therefore,
+to establish that a stored event survives a caller's later edit, the design
+must either prevent the caller from retaining a mutation path or reconstruct
+an owned representation before storage. The regression test must perform the
+later caller edit; an immediate equality check is not enough.
+
+### Counterexample — equal values can still be different objects
+
+```python
+left = {"tags": ("python",)}
+right = {"tags": ("python",)}
+
+assert left == right
+assert left is not right
+```
+
+Value equality cannot answer whether a future mutation through one route
+would be visible through another. Identity and equality answer different
+questions.
+
+### Numerical experiment — count aliases, not speed
+
+For three caller-owned raw events with one mutable tag list each, count how
+many caller-owned mutable tag lists remain reachable from the stored history
+after recording. The concise and wrapper-heavy versions in Session 4 retain
+three; the explicit `EventLog` retains zero because it reconstructs tuples.
+This is a bounded object-graph count, not a benchmark, memory measurement, or
+claim about Python's internal addresses.
+
 ## Visual map of the module
 
 ```mermaid
@@ -85,6 +140,14 @@ flowchart LR
 ```
 
 The map shows the causal chain. Source code is not the state itself: evaluation uses an environment, bindings connect names to objects, and mutation may be visible through more than one name.
+
+### Text alternative — trace the state transition without the diagram
+
+Read the visual as this sequence: evaluate an expression in an environment;
+find or create objects; bind names; then decide whether an operation merely
+changes one binding or mutates a shared object. Observe the resulting state,
+state the contract that should hold, and test the transition that could break
+it.
 
 ## Worked example — draw before running
 
@@ -217,7 +280,7 @@ The “box” analogy is useful only to introduce stable names. It breaks when a
 
 ## Teaching sequence
 
-### Session 1 — The mystery of the changing record
+## Session 1 — The mystery of the changing record
 
 **Launch:** inspect a short Atlas bug where changing a current event changes a historical event.
 
@@ -230,7 +293,13 @@ The “box” analogy is useful only to introduce stable names. It breaks when a
 
 **Exit ticket:** explain why shallow copying sometimes works and sometimes fails without using the phrase “Python is weird.”
 
-### Session 2 — Evaluation, calls, and environments
+### Output: binding and alias map
+
+Carry one labelled object graph: names on the left, objects on the right, and
+an arrow for every route that can observe the same mutable tags list. Mark one
+statement as rebinding and one as mutation.
+
+## Session 2 — Evaluation, calls, and environments
 
 **Derivation:**
 
@@ -247,7 +316,7 @@ The “box” analogy is useful only to introduce stable names. It breaks when a
 - compare a pure normalizer with an in-place normalizer;
 - identify observable behavior and hidden state.
 
-#### Prediction gate — lexical scope is a binding trace
+### Prediction before reveal — lexical scope is a binding trace
 
 Before opening the reveal, write the four printed values, draw the three
 environments, and record **low / medium / high** confidence. In particular,
@@ -302,7 +371,13 @@ global value is still `"global"`.
 
 **Exit ticket:** state the difference between “the function changed its parameter” and “the function mutated an object passed by the caller.”
 
-### Session 3 — Contracts and invariants
+### Output: environment trace and scope claim
+
+Carry a three-frame trace (global, enclosing, and call-local), your committed
+prediction/confidence, and one sentence distinguishing local rebinding from
+mutation of a caller-reachable object.
+
+## Session 3 — Contracts and invariants
 
 We introduce contracts because state without constraints is impossible to reason about.
 
@@ -320,15 +395,108 @@ For `normalize_event(raw)`:
 - write a failing test for each violated claim;
 - decide which failures are caller errors and which are system errors.
 
-### Session 4 — Code-reading and investigation studio
+### Output: ownership contract card
 
-Read three Atlas event-log implementations:
+Write one precondition, postcondition, frame condition, and representation
+invariant for `normalize_event`. Include the specific later caller edit that
+would disprove the frame condition.
 
-- a concise implementation with hidden aliasing;
-- an overengineered generated implementation;
-- a small implementation with an explicit immutable boundary.
+## Session 4 — Code-reading and investigation studio
 
-For each one:
+Read the three small Atlas event-log implementations below before running
+anything. They have the same apparent goal, but they make different ownership
+claims. For a valid raw mapping, each deliberately exposes the same observable
+contract: `record(raw)` returns nothing, and `snapshot()` returns an ordered
+immutable `tuple[StudyEvent, ...]`. The comparison is therefore about when the
+stored value becomes owned—not about a different public interface or output
+shape.
+
+### Code reading — three implementations, one state question
+
+```python
+class ConciseEventLog:
+    def __init__(self) -> None:
+        self._events: list[Mapping[str, object]] = []
+
+    def record(self, raw: Mapping[str, object]) -> None:
+        self._events.append(raw)
+
+    def snapshot(self) -> tuple[StudyEvent, ...]:
+        return tuple(normalize_event(raw) for raw in self._events)
+```
+
+```python
+class GeneratedEventPipeline:
+    def __init__(self) -> None:
+        self._records: list[dict[str, object]] = []
+
+    def _wrap(self, raw: Mapping[str, object]) -> dict[str, object]:
+        return {"schema": "event/v1", "payload": raw}
+
+    def record(self, raw: Mapping[str, object]) -> None:
+        self._records.append(self._wrap(raw))
+
+    def snapshot(self) -> tuple[StudyEvent, ...]:
+        return tuple(
+            normalize_event(record["payload"])
+            for record in self._records
+        )
+```
+
+```python
+class EventLog:
+    def __init__(self) -> None:
+        self._events: list[StudyEvent] = []
+
+    def record(self, raw: Mapping[str, object]) -> None:
+        event = normalize_event(raw)
+        self._events.append(event)
+
+    def snapshot(self) -> tuple[StudyEvent, ...]:
+        return tuple(self._events)
+```
+
+The concise version retains the caller's whole mapping and only constructs the
+logical event later, when `snapshot()` is called. The wrapper-heavy version
+does the same through a nested `payload`; indirection does not establish
+ownership. The explicit version makes its boundary visible at `record()`:
+`normalize_event` reconstructs a `StudyEvent` with tuple tags before the
+history keeps it. All three give the reader the same logical snapshot shape.
+
+### Debugging — predict a delayed failure before the reveal
+
+Before opening the reveal, write **low / medium / high** confidence for which
+implementation can preserve a historical event after `raw_tags` changes and
+explain the object path that makes you think so.
+
+<details>
+<summary>Reveal after writing your prediction and confidence.</summary>
+
+```python
+def tags_after_later_edit(log) -> tuple[str, ...]:
+    raw_tags = ["Python"]
+    log.record({"topic": "Hash Tables", "minutes": 25, "tags": raw_tags})
+    raw_tags.append("later edit")
+    return log.snapshot()[0].tags
+
+
+assert tags_after_later_edit(ConciseEventLog()) == ("python", "later edit")
+assert tags_after_later_edit(GeneratedEventPipeline()) == ("python", "later edit")
+assert tags_after_later_edit(EventLog()) == ("python",)
+```
+
+The first two implementations can present the same immutable snapshot type,
+yet still fail the historical-value contract because they retain a mutation
+path until that snapshot is constructed. The test does not prove every
+property of the log. It proves one delayed observation: caller mutation after
+recording does not alter the stored tags only when the owned event is
+reconstructed at the record boundary.
+
+</details>
+
+### Design — keep the smallest repair that establishes the boundary
+
+For each implementation:
 
 1. locate the public contract and state;
 2. draw the object graph for one input;
@@ -353,7 +521,14 @@ Michael reviews the patch, rejects scope expansion, adds or requests missing tes
 
 No storage, database, or concurrency is added yet. Those would hide the execution model we are trying to master.
 
-### Session 5 — TA studio
+### Output: event-log comparison and repair memo
+
+Carry a three-row comparison: retained aliases, exposed mutable state, and
+smallest contract-preserving repair. The recommendation must say why a
+framework, database, deep-copy-everywhere policy, or concurrency mechanism is
+unnecessary for this boundary.
+
+## Session 5 — TA studio
 
 Bring:
 
@@ -362,9 +537,19 @@ Bring:
 - the smallest code example that reproduces it;
 - your current claim about the root cause.
 
-The TA uses staged hints and records the final misconception and regression test.
+The TA uses staged hints and helps the learner form a concise misconception and
+regression card. A Notion or shared-log write occurs only if the learner has
+explicitly requested a `records on` workflow, a configured private destination
+is reachable, and the session is substantive; otherwise the card remains as a
+ready-to-copy summary in the chat and no write is claimed.
 
-### Session 6 — Mastery check and synthesis
+### Output: TA misconception and regression card
+
+Carry the smallest reproducer, your pre-hint prediction, the repaired claim,
+one regression test, and one remaining uncertainty. This is evidence for the
+next conversation, not a pass/fail result.
+
+## Session 6 — Mastery check and synthesis
 
 Use this evidence check to choose the next bridge or repair; it does not decide
 whether Michael passes.
@@ -376,6 +561,13 @@ whether Michael passes.
 5. Review an agent-generated patch and identify one unproven claim.
 6. Explain two backward connections and three forward connections.
 7. Defend one mutability decision in the Atlas checkpoint.
+
+### Output: M1 state-evidence dossier
+
+Carry the object graph, environment trace, ownership contract, delayed-alias
+regression, compact design comparison, confidence/misconception note, and M2
+question. It records current evidence and uncertainty; it is not a completion
+or mastery declaration.
 
 ## Problem set
 
@@ -720,7 +912,12 @@ architecture—not merely recognize the correct letter.
 | 7 | state ownership across architecture boundaries | repeat Session 4's dependency map before reading code |
 | 8 | multi-step state transitions and unjustified atomicity | draw two interleaved read/compute/write traces; save synchronization mechanisms for Module 19 |
 
-For any incorrect C3 response, the TA records the misconception in the shared log and schedules an isomorphic question several days later. For any correct C1 response, Michael explains one rejected distractor before the evidence is treated as stable.
+For any incorrect C3 response, the TA helps the learner name the misconception
+and choose whether to add an isomorphic question to a later review queue. A
+concise note may be written only after an explicit `records on` request and a
+reachable configured private destination; otherwise no write or automatic
+scheduling is claimed. For any correct C1 response, Michael explains one
+rejected distractor before the evidence is treated as stable.
 
 The check can be administered interactively in chat, one item at a time. Answers remain hidden until Michael commits to both a choice and confidence level.
 
@@ -743,6 +940,14 @@ Deliver:
 | Contract and ownership note | precondition, postcondition, and who may mutate are explicit | replace vague “does not change data” wording with a concrete frame condition |
 | Regression evidence | a test distinguishes rebinding, shallow copying, or aliasing from the intended behavior | add the smallest before/after caller-mutation case |
 | Design explanation | the chosen boundary is defended against one credible alternative | name the trade-off in safety, cost, and later change |
+
+### Project acceptance criteria
+
+The dossier is ready for a constructive TA discussion when it includes one
+trace that accounts for every binding, one explicit ownership/frame condition,
+one delayed-mutation regression, and one reason the selected repair is smaller
+than a credible alternative. Missing evidence is a reason to repair or ask a
+question—not a grade.
 
 ## Connections
 
@@ -782,8 +987,8 @@ The Atlas narrative, object graphs, investigations, diagnostic distractors, and 
 - [Python 3.14 data model](https://docs.python.org/3.14/reference/datamodel.html) — objects, identity, type, value, mutability, and callable objects.
 - [Python 3.14 assignment statements](https://docs.python.org/3.14/reference/simple_stmts.html#assignment-statements) — authoritative assignment and target-list semantics.
 - [Composing Programs §2.4 — Mutable Data](https://www.composingprograms.com/pages/24-mutable-data.html) — identity, mutation, state, and shared local state in a computational-abstraction sequence.
-- [MIT 6.102 Spring 2026 — Mutability & Immutability](https://web.mit.edu/6.102/www/sp26/classes/09-mutability/) — reasoning about aliases, mutation, contracts, and risks at software boundaries.
-- [MIT 6.101 Spring 2026](https://py.mit.edu/spring26/) — the read–lab–checkoff rhythm adapted into the course’s prediction, investigation, and ownership studios.
+- [MIT 6.102 Spring 2026 — Designing Specifications](https://web.mit.edu/6.102/www/sp26/classes/05-designing-specs/) — declarative specifications, preconditions, postconditions, and boundary reasoning.
+- [MIT 6.100L calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) — calibration for the objects/bindings, environments, mutability/aliasing, debugging, and assertions sequence.
 
 Use the sources by question rather than as a reading pile: begin with this workbook’s object graph, use the Python reference to verify exact language behavior, use Composing Programs for a second conceptual explanation, and read the MIT material when moving from local aliasing to component-level contracts.
 
@@ -793,8 +998,8 @@ Use the sources by question rather than as a reading pile: begin with this workb
 | --- | --- | --- |
 | 1 | object/binding graph and aliasing prediction | [Python data model](https://docs.python.org/3.14/reference/datamodel.html) for identity, value, and mutability terms |
 | 2 | environment trace and local-versus-`nonlocal` conclusion | [Python execution model](https://docs.python.org/3.14/reference/executionmodel.html) for blocks, bindings, and frames |
-| 3 | ownership contract and mutation regression | [MIT 6.102 mutability reading](https://web.mit.edu/6.102/www/sp26/classes/09-mutability/) for alias and boundary reasoning |
-| 4 | annotated code reading and bounded repair request | [MIT 6.101](https://py.mit.edu/spring26/) only as a link-level comparison for read–lab–checkoff rhythm |
+| 3 | ownership contract and mutation regression | [MIT 6.102 designing specifications](https://web.mit.edu/6.102/www/sp26/classes/05-designing-specs/) for contract and boundary reasoning |
+| 4 | annotated code reading and bounded repair request | the three local implementations and delayed-alias regression; use the MIT 6.100L calendar only as a link-level sequence calibration |
 | 5 | oral explanation of a smallest failure | the preceding trace and test; do not substitute a source quote for evidence |
 | 6 | synthesis dossier and forward handoff | this workbook plus the linked Python references to verify any disputed language claim |
 
@@ -813,16 +1018,41 @@ This guide is not a score, grade, release approval, Core advance, or mastery dec
 
 ### Teaching Assistant — supportive oral defense
 
+This is a supportive conversation, never a pass/fail exam. The learner chooses
+which claim to defend and can pause, ask for a hint, or keep a result off the
+record.
+
+### Invitation — name your current model
+
 Start with: **“I am finishing M1. My model is that names refer to objects,
 mutation changes an object rather than a name, and a contract must say who may
 change shared state. My confidence is [low/medium/high].”** Ask the learner to
-draw one object graph and predict the result of one aliasing trace before
-revealing it. If the trace breaks, use this hint ladder: name → binding arrow →
+draw one object graph and predict one aliasing trace before revealing it.
+
+### Hint ladder — repair one trace at a time
+
+If the trace breaks, offer only the next useful step: name → binding arrow →
 object identity/value → mutation versus rebinding → smallest regression test.
-Then change one premise (immutable value, copied container, or second writer)
-and ask what contract must change. End with a learner-controlled summary:
-model demonstrated, misconception repaired, one retrieval prompt, and one
-remaining uncertainty. This is a conversation, never a pass/fail exam.
+Do not give a final answer before the learner has made a prediction.
+
+### Changed-premise counterexample
+
+Change exactly one premise—an immutable value, copied outer container, nested
+mutable value, or second writer—and ask which object path and contract must
+change. Use a small counterexample rather than a lecture.
+
+### Transfer — from one event log to a later system
+
+Ask how the same state-transition model will reappear in M2 call frames, M3
+representation invariants, M16 transactions, or M19 shared updates, while
+keeping those later modules' detailed mechanisms out of scope.
+
+### Learner-controlled evidence summary
+
+End with a short visible summary: model demonstrated, misconception repaired,
+one retrieval prompt, one evidence artifact, and one remaining uncertainty.
+Save or export it only when the learner explicitly requests a records-on
+workflow; this workbook does not itself write any note.
 
 ### Study Partner — five-minute rehearsal
 

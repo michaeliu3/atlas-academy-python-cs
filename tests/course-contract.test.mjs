@@ -298,8 +298,9 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     resolvedContractInputs: 75,
   });
   assert.deepEqual(report.moduleLearningCompanions?.summary, {
-    companionCount: 18,
+    companionCount: 19,
     moduleIds: [
+      "m01",
       "m12",
       "m13",
       "m19",
@@ -320,7 +321,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
       "m36",
     ],
   });
-  assert.equal(report.legacyCandidatePreflightProfiles?.candidateByModuleId.size, 12);
+  assert.equal(report.legacyCandidatePreflightProfiles?.candidateByModuleId.size, 13);
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
     draftPilotModules: 2,
@@ -329,15 +330,15 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     publicationChanges: 0,
   });
   assert.deepEqual(report.legacyPackets?.summary, {
-    structuralCandidates: 11,
-    resolvedPointers: 467,
+    structuralCandidates: 12,
+    resolvedPointers: 511,
     humanApprovals: 0,
     publicationChanges: 0,
   });
   assert.equal(report.currentCandidatePackets?.summary.structuralCandidates, 2);
   assert.equal(report.currentCandidatePackets?.summary.humanApprovals, 0);
   assert.equal(report.currentCandidatePackets?.summary.publicationChanges, 0);
-  assert.equal(report.candidatePackets?.summary.structuralCandidates, 13);
+  assert.equal(report.candidatePackets?.summary.structuralCandidates, 14);
   assert.equal(report.candidatePackets?.summary.humanApprovals, 0);
   assert.equal(report.candidatePackets?.summary.publicationChanges, 0);
 });
@@ -448,7 +449,7 @@ test("checked-in provenance ignores inherited Git index overrides end to end", a
       requireGitTracked: true,
       snapshot,
     });
-    assert.equal(report.releaseInputLedger?.inputPaths.length, 215);
+    assert.equal(report.releaseInputLedger?.inputPaths.length, 222);
   } finally {
     if (previousIndexOverride === undefined) {
       delete process.env.GIT_INDEX_FILE;
