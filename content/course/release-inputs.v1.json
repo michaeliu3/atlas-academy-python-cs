@@ -74,11 +74,11 @@
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "9bb47412464b9d87c941a40ebeb9a7c0bf676605869010e755d51bf31aa94337"
+      "sha256": "97995fe11143823a15600ebcfcb7a9c795e3da903b42f9a9805b2e18e4200232"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "f473200e54f2ea3e13ea4fcdaee38d5aadccd5519b9670d84270aefb9b7d4b85"
+      "sha256": "db6ee2a11a7ebbff0617839668daaa0da59671e9d83727f28fccf4619d7205d2"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
@@ -594,11 +594,11 @@
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
-      "sha256": "7166575fde88bd00031d86cdc3a1f7ab95e87e048efefe4171a1aa360a9e43ec"
+      "sha256": "63ffdffbba6a1c028ab1f8e94eb566a9568816f3f4a8725ccb83e4b24dd01a12"
     },
     {
       "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
-      "sha256": "ea2bcdfc92c064f5527af30adf9f2b90e493a0c49bad3f87c5d28f2cabf4079c"
+      "sha256": "018418e9e942692a01a54ee9adc2b97e8ec011712b3a8e7b2abfeb08b872ceb6"
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",

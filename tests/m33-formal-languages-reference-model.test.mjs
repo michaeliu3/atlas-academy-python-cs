@@ -103,6 +103,28 @@ test("the M33 workbook connects the formal model classes with an original deriva
   assert.match(workbook, /`N` ignores its\s+own input/u);
 });
 
+test("the M33 workbook connects construction, machine memory, encodings, and proof obligations", async () => {
+  const workbook = await readFile(
+    "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /### Regex → NFA → DFA — one language, three representations/u);
+  assert.match(workbook, /\(0\|1\)\*01/u);
+  assert.match(workbook, /formal-regex semantics/u);
+  assert.match(workbook, /### Stack trace — why nested structure is not finite-state/u);
+  assert.match(workbook, /push `\(`/u);
+  assert.match(workbook, /accept\s+only when the stack is empty/u);
+  assert.match(workbook, /### Proof-debugging card — the pumping lemma's quantifier order/u);
+  assert.match(workbook, /every legal decomposition/u);
+  assert.match(workbook, /### Encoding contract before diagonalization/u);
+  assert.match(workbook, /D\(\\langle D\\rangle\)/u);
+  assert.match(workbook, /### Decision, search, and optimization are different contracts/u);
+  assert.match(workbook, /Return a minimum cover/u);
+  assert.match(workbook, /verifier checks a supplied candidate/u);
+  assert.match(workbook, /does not decide whether some candidate exists/u);
+});
+
 test("the M33 workbook exposes claim routes and labels interface-dependent sketches", async () => {
   const workbook = await readFile(
     "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",

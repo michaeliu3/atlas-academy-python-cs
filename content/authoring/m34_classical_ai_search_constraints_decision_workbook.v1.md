@@ -294,6 +294,34 @@ find a useful route, but the stated optimality guarantee is forfeited.
 
 </details>
 
+### Relaxed-model heuristic audit — derive, then re-audit
+
+Do not call a number “admissible” by reputation. In the archive model, form a
+relaxation that removes only the declared key precondition of `open-vault`—`has-key=true`—while retaining the same states, edge costs, and goal. Every original route remains legal in the relaxed model, so its exact
+remaining cost is a lower bound:
+
+\[
+h_{\mathrm{relaxed}}(n)\le h^*(n).
+\]
+
+That containment argument—not a successful search run—is what makes this
+particular relaxed distance admissible for the declared original graph.
+
+**Predict before reveal.** Suppose a zero-cost `emergency-exit` action is
+added to the original graph but the relaxed graph and its old distances are
+left unchanged. Can the old heuristic still be reused without an audit?
+
+<details>
+<summary>Reveal after naming the relation that changed.</summary>
+
+**Reveal:** no. The new original route need not exist in the old relaxation;
+at a state with a new zero-cost exit, an old positive relaxed distance can
+overestimate the new \(h^*\). An old heuristic can overestimate after a model change.
+Rebuild the relaxation or re-prove that every new original route is
+represented before carrying an admissibility claim forward.
+
+</details>
+
 ### Read the priority policy
 
 ~~~python
@@ -404,6 +432,26 @@ Give \(X,Y,Z\) each domain \(\{\text{red},\text{blue}\}\), and impose
 pairwise “different” constraints around a three-cycle. Every color can have a
 local supporting different color at a neighbor, yet no two-color assignment
 satisfies all three inequalities. Arc consistency is not a universal solver.
+
+### CSP as partial-assignment search
+
+Make the solver architecture visible before naming a heuristic. A CSP search
+state is a **partial assignment**; an action chooses one unassigned variable
+and one currently legal value; a goal is a complete assignment satisfying all
+constraints. MRV and LCV choose among those actions—they do not replace the
+state, action, or goal contract.
+
+An **AC-3 queue** holds directed constraint arcs. Revising \(X_i\to X_j\)
+removes a value of \(X_i\) only when no value still in \(X_j\) supports it. If
+that removal changes a domain, re-enqueue relevant neighboring arcs toward
+\(X_i\); an empty domain means the current partial-assignment branch must
+backtrack. Forward checking is a lighter policy: after an assignment, it
+prunes directly affected future domains but does not by itself promise global
+arc consistency.
+
+This turns “propagation” into a reviewable sequence: state, branch, queue
+policy, domain change, and backtrack condition. It does not build or claim a
+general CSP solver.
 
 ### Prediction before reveal — propagation and branching trace
 
@@ -534,6 +582,38 @@ open-vault
   precondition: room = Vault and has-key = true and energy >= 1
   effect: vault-open = true and energy decreases by 1
 ~~~
+
+### State-update card — name what changes and what persists
+
+For Boolean facts, use one declared frame convention: facts not named by an
+action persist. With an add list and delete list, the Boolean part of the
+transition is
+
+\[
+T(s,a) = (s \setminus Del(a)) \cup Add(a).
+\]
+
+Numeric fields need their own visible assignment rather than an implied reset.
+
+| Action | Add / delete effects | Numeric update | Declared persistence |
+| --- | --- | --- | --- |
+| `take-key` | add `has-key`; delete `key-at-rack` | energy unchanged | room and `vault-open` persist |
+| `move-to-vault` | no Boolean add/delete | `energy := energy - 1`; room becomes Vault | `has-key`, `key-at-rack`, and `vault-open` persist |
+| `open-vault` | add `vault-open` | `energy := energy - 1` | room and key facts persist |
+
+**Predict before reveal.** A candidate trace leaves `key-at-rack=true` after
+`take-key` and silently resets energy to 2 after `move-to-vault`. Which
+add/delete, numeric-update, or persistence rule did it violate?
+
+<details>
+<summary>Reveal after identifying the first bad state update.</summary>
+
+**Reveal:** the first line violates the delete effect; the second invents a
+numeric reset absent from the transition contract. A planner trace is only as
+valid as its state update convention. The table is a compact reading aid, not
+a PDDL interpreter or a proof that this archive narrative is adequate.
+
+</details>
 
 ### Fixed planning trace — state and action effects
 
@@ -742,6 +822,30 @@ observation model are further assumptions—not facts supplied by one posterior.
 
 </details>
 
+### Markov-sufficiency and horizon audit
+
+An MDP state must retain what is needed to determine the next-state/reward
+distribution under the declared action. Imagine two histories both displayed
+as `s0`, but the sensor was recently calibrated in one and stale in the other.
+If `inspect` then leads to different clear/blocked distributions, the displayed
+state is not Markov-sufficient for this decision model.
+
+**Predict before reveal.** Is it enough to keep the convenient label `s0`, or
+must you augment the state with the relevant reliability/history information,
+state a belief/partial-observation model, or withdraw the MDP claim?
+
+<details>
+<summary>Reveal after choosing the smallest defensible repair.</summary>
+
+**Reveal:** the model must make the relevant state information or belief
+explicit, or it cannot reuse the MDP backup as stated. The card below is
+**finite-horizon, undiscounted**: it has two decision stages, terminal values
+at stage 1, and no infinite-horizon or discount-factor claim. Changing the
+horizon, state, observation process, transition, reward, or action set creates
+a different calculation.
+
+</details>
+
 ### A two-step Bellman backup
 
 Here is the smallest sequential contrast. At state `s0`, action `inspect` has
@@ -760,8 +864,8 @@ The two-stage backup is
 Q_0(s_0,\text{inspect})=-0.5+0.5(3)+0.5(1)=1.5.
 \]
 
-Compare a terminal `safe` action with value `1.2`. Under this exact finite
-horizon, the initial policy chooses `inspect`, then chooses `dispatch` in
+Compare a terminal `safe` action with value `1.2`. Under this exact
+finite-horizon, undiscounted objective, the initial policy chooses `inspect`, then chooses `dispatch` in
 `clear` and `wait` in `blocked`. That state-contingent continuation is what a
 one-shot table lacks.
 
@@ -1037,7 +1141,8 @@ questions made visible here.
 
 This workbook uses original explanations, fixtures, diagrams, and code. It does
 not reproduce source prose, figures, course slides, problem sets, or solutions.
-The reading routes below were checked on **2026-08-01**.
+The established reading routes below were checked on **2026-08-01**; targeted
+model-construction routes were rechecked on **2026-08-02**.
 
 ### Learner-facing source links
 
@@ -1048,6 +1153,8 @@ The reading routes below were checked on **2026-08-01**.
 | [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
 | [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |
 | [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver) and [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 3–6: solver-status interpretation and the separation of model output, risk evidence, and authority. | Documentation/framework sources are linked for reading; original Atlas models and decision cards remain distinct. |
+| [MIT 6.034 Planning and Search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf) and [MIT 6.825 Planning lecture](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) | Sessions 2 and 4: relaxed heuristic lower bounds; state transitions, add/delete effects, and frame conventions. | Targeted 2026-08-02 calibration only; link-only/original Atlas audits and synthetic traces. |
+| [Stanford CS221 scheduling assignment](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html) and [Markov Decisions handout](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html) | Sessions 3 and 5: partial-assignment propagation; Markov-sufficiency and finite-horizon assumptions. | Link-only/original Atlas explanations; do not copy assignment or handout assets. |
 
 ### Claim-linked session routes
 
@@ -1059,11 +1166,11 @@ evidence.
 | Session | Claim/source route | Learner reading route |
 | --- | --- | --- |
 | M34-S01 | `M34-C01 -> S34-01, S34-04–S34-05` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129) |
-| M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136) |
-| M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/) |
-| M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9) |
-| M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13` | [S34-08 — von Neumann and Morgenstern](https://assets.press.princeton.edu/about_pup/PUP100/book/2cNeumann.pdf); [S34-11 — NIST AI RMF](https://doi.org/10.6028/NIST.AI.100-1); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) |
-| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-13` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
+| M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02, S34-14` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136); [S34-14 — MIT 6.034 planning/search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf) |
+| M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/); [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html) |
+| M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10, S34-16` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9); [S34-16 — MIT 6.825 planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) |
+| M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13, S34-17` | [S34-08 — von Neumann and Morgenstern](https://assets.press.princeton.edu/about_pup/PUP100/book/2cNeumann.pdf); [S34-11 — NIST AI RMF](https://doi.org/10.6028/NIST.AI.100-1); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html) |
+| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-17` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
 
 For the fuller claim-linked original/official source ledger and reuse cautions,
 use the instructor-facing [M34 primary-source research

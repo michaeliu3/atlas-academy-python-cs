@@ -18,8 +18,9 @@ defense, accessibility review, CI run, or learner mastery exists.
 
 **Research access dates:** S33-01 through S33-07 were accessed on 2026-07-31;
 the additional university calibration routes S33-08 through S33-10 were checked
-on 2026-08-01. The source set deliberately uses original papers or official
-university materials. This note is original explanation and link-only research.
+on 2026-08-01; the targeted authoring-calibration routes S33-11 through S33-13
+were checked on 2026-08-02. The source set deliberately uses original papers or
+official university materials. This note is original explanation and link-only research.
 Atlas must not copy source prose, theorem proofs, figures, slides, problem sets,
 code, scans, or exercises into a future learner asset without a separate
 asset-level reuse decision. A citation is not a license; historical importance
@@ -89,8 +90,9 @@ evidence.
 ## Primary/official source ledger and reuse boundary
 
 S33-01 through S33-07 were accessed on **2026-07-31**; S33-08 through S33-10
-were checked on **2026-08-01**. “Link-only/original paraphrase” is the present
-Atlas decision even where a work can be read online. It avoids silently
+were checked on **2026-08-01**; S33-11 through S33-13 were checked on
+**2026-08-02**. “Link-only/original paraphrase” is the present Atlas decision
+even where a work can be read online. It avoids silently
 importing copyright, attribution, exercise, figure, or proof-text obligations
 into later material.
 
@@ -107,6 +109,19 @@ into later material.
 | S33-08 | Stanford, [CS103 Mathematical Foundations of Computing (Spring 2026)](https://web.stanford.edu/class/archive/cs/cs103/cs103.1266/) | Stanford course staff; official university-hosted undergraduate course route | Current-course calibration for a proof-first sequence spanning discrete mathematics, computability, and complexity; supports the compact NFA/DFA and reduction bridges. | Course page is linked for study. No asset-level Atlas reuse permission has been recorded; **link-only/original paraphrase**. |
 | S33-09 | Carnegie Mellon University, [15-251 Foundations of Theoretical Computer Science schedule](https://www.cs.cmu.edu/~arielpro/15251f15/schedule.html) | CMU course staff; official university-hosted course archive | Comparison route for automata, computability, reductions, and complexity sequencing; supports checking that Atlas distinguishes finite constructions from theorem-scale proof practice. | Course archive is linked for study. No blanket license/reuse grant is inferred; **link-only/original examples**. |
 | S33-10 | Georgia Tech, [CS 4510 Formal Languages and Automata](https://faculty.cc.gatech.edu/~ladha/S26/4510/) | Georgia Tech course staff; official university-hosted course route | Direct calibration for DFA/NFA/regular-language and computability scope, complementing CS 6515’s graduate-algorithms role. | Course page is linked for study. Atlas retains original traces, explanations, and prompts; do not copy course assets without a separate reuse decision. |
+| S33-11 | MIT OpenCourseWare, [18.404J Theory of Computation lecture-note index](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/) | MIT course staff; official undergraduate/graduate course material | Checked progression: regular expressions → finite automata, regular pumping lemma and automata → regular expressions/CFGs, PDA ↔ CFG, then undecidability and P/NP. Supports a connected original regex–NFA–DFA, CFG/stack, and pumping-lemma audit sequence rather than a vocabulary list. | MIT OCW links a Creative Commons license, subject to item notices. Atlas remains **link-only/original paraphrase**: no copied slides, notes, proof text, figures, exercises, or code without asset-level review. |
+| S33-12 | Stanford, [CS103 Theorem and Definition Reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | Stanford course staff; official university-hosted course reference | Direct definitions for regular expressions, NFA, DFA, subset construction, CFG, stack-based PDA, regular pumping, polynomial verifier, and a diagonal language over encoded Turing machines. Supports stating the formal object and quantifier/encoding assumptions before an original trace or proof audit. | Course reference is linked for study. No blanket Atlas reuse permission is recorded; **link-only/original paraphrase** and independently authored examples only. |
+| S33-13 | MIT OpenCourseWare, [6.046J Lecture 17: Complexity and NP-completeness](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2012/b4562881f2af637e09e806450e9b62c8_MIT6_046JS12_lec17.pdf) | MIT course staff; official algorithms lecture note | Distinguishes a yes/no decision problem from a related search problem, places certificates/verifiers in the decision formulation, and uses a minimum-spanning-tree example. Supports an original decision/search/optimization comparison that does not conflate returning a candidate with verifying a bounded decision claim. | MIT OCW source is linked solely for calibration. Atlas keeps **link-only/original paraphrase** and must not reuse the note’s prose, figures, exercises, or derivations without a separate asset review. |
+
+### Targeted 2026-08-02 calibration routing
+
+| Planned M33 addition | Claim-linked source route | Authoring boundary preserved |
+| --- | --- | --- |
+| Regex → NFA → DFA progression | S33-11 gives the course progression; S33-12 names the three formal objects and subset construction. | Reuse one original shared trace, not production-regex semantics or a generic recognizer engine. |
+| CFG/stack bridge | S33-11 places CFG ↔ PDA together; S33-12 identifies a PDA as finite control plus stack memory. | Show a compact original balanced-parentheses push/pop trace, not a full CFG↔PDA proof or parser claim. |
+| Encoding/diagonalization audit | S33-12 defines diagonalization over a Turing-machine description. | Make effective encoding, malformed-input convention, and self-application visible before an original diagonal argument; do not pretend a finite code experiment establishes undecidability. |
+| Verifier, decision, search, and optimization distinction | S33-13 distinguishes decision and related search while locating certificates/verifiers in the decision formulation. | The three-row comparison is original Atlas scaffolding, not an NP-completeness proof or a generic reduction claim. |
+| Pumping-lemma quantifier audit | S33-11 sequences regular pumping; S33-12 provides the theorem reference. | Use an original proof-debugging prompt that makes the decomposition quantifiers inspectable; do not copy a course exercise or make pumping the only nonregularity proof method. |
 
 ### What the ledger does *not* establish
 

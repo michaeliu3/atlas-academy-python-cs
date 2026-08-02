@@ -114,6 +114,7 @@ test("the M34 two-stage card exposes one Bellman backup without becoming an MDP 
   );
   assert.equal(card.initialActionValues.inspect, 1.5);
   assert.equal(card.initialActionValues.safe, 1.2);
+  assert.equal(card.objectiveConvention, "finite-horizon, undiscounted total reward");
   assert.equal(card.policyAtInitialState, "inspect");
   assert.deepEqual(card.policyAtTerminalStates, { clear: "dispatch", blocked: "wait" });
   assert.match(card.truthBoundary, /not a general MDP planner/u);
@@ -151,6 +152,25 @@ test("the M34 workbook makes propagation and decision-horizon boundaries inspect
   assert.match(workbook, /Repetition alone supplies neither a transition model nor a\s+long-run objective/u);
   assert.match(workbook, /### A two-step Bellman backup/u);
   assert.match(workbook, /Q_0\(s_0,\\text\{inspect\}\)=-0\.5\+0\.5\(3\)\+0\.5\(1\)=1\.5/u);
+});
+
+test("the M34 workbook makes the model-construction audits explicit", async () => {
+  const workbook = await readFile(
+    "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+    "utf8",
+  );
+
+  assert.match(workbook, /### Relaxed-model heuristic audit — derive, then re-audit/u);
+  assert.match(workbook, /h_\{\\mathrm\{relaxed\}\}\(n\)\\le h\^\*\(n\)/u);
+  assert.match(workbook, /removes only the declared key precondition of `open-vault`/u);
+  assert.match(workbook, /Every original route remains legal in the relaxed model/u);
+  assert.match(workbook, /old heuristic can overestimate after a model change/u);
+  assert.match(workbook, /### CSP as partial-assignment search/u);
+  assert.match(workbook, /AC-3 queue/u);
+  assert.match(workbook, /### State-update card — name what changes and what persists/u);
+  assert.match(workbook, /T\(s,a\) = \(s \\setminus Del\(a\)\) \\cup Add\(a\)/u);
+  assert.match(workbook, /### Markov-sufficiency and horizon audit/u);
+  assert.match(workbook, /finite-horizon, undiscounted/u);
 });
 
 test("the M34 final dossier keeps one-shot and sequential decision claims distinct", async () => {

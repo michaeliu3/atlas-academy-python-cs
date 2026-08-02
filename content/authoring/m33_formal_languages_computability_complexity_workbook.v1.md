@@ -189,6 +189,32 @@ S \Rightarrow (S)S \Rightarrow ()S \Rightarrow ()(S)S
 one string is derivable under this one grammar. It does not establish a semantic
 result, safe evaluation, or authority to act.
 
+### Stack trace — why nested structure is not finite-state
+
+The same balanced-parentheses language has an operational reading. Scan from
+left to right: **push `(`** for each opening parenthesis, pop one `(` for each
+closing parenthesis, reject an attempted pop from an empty stack, and **accept
+only when the stack is empty** at the end. For `(()())`, the stack heights are
+
+\[
+0\to1\to2\to1\to2\to1\to0.
+\]
+
+**Predict before reveal.** Trace `())(`. At which symbol is the smallest
+counterexample exposed: an unmatched close, an unmatched open, or a grammar
+production with no semantics?
+
+<details>
+<summary>Reveal after tracing the stack yourself.</summary>
+
+**Reveal:** the third symbol is an unmatched close: the stack is already empty
+after `()`. A finite-state recognizer has only finitely many fixed summaries;
+this stack can retain an unbounded pending-nesting depth. That is an
+operational bridge to the CFG, not a proof of the full CFG–PDA equivalence and
+not a production parser design.
+
+</details>
+
 ### Prediction before reveal
 
 Two snippets both satisfy a toy assignment grammar:
@@ -363,6 +389,31 @@ parallel-execution claim nor a claim about an extended production regex engine.
 
 </details>
 
+### Regex → NFA → DFA — one language, three representations
+
+For the NFA just traced, the original **formal** regular expression
+
+\[
+(0\mid1)^*01
+\]
+
+denotes the same language, written in plain formal-regex notation as
+`(0|1)*01`: binary strings ending in `01`. The expression is a finite notation;
+the NFA makes possible branches explicit; subset construction makes a DFA state
+out of the NFA's reachable-state set. Predict whether `101` and `010` are in
+the language *before* repeating the NFA trace.
+
+<details>
+<summary>Reveal after writing both predictions.</summary>
+
+**Reveal:** `101` ends in `01` and accepts; `010` does not and rejects. This
+is a three-representation construction for one declared language. Its
+formal-regex semantics do **not** establish the behavior, performance, or
+security of a production regex engine with extensions, backreferences, or a
+different matching convention.
+
+</details>
+
 ### A distinguishability proof idea
 
 For distinct nonnegative \(i\) and \(j\), compare prefixes \(0^i\) and
@@ -379,6 +430,28 @@ many DFA states, so no DFA recognizes \(L_{=}\).
 
 This is a proof shape, not a slogan that “it needs memory.” Its assumptions
 are a fixed finite alphabet, ordinary DFA semantics, and the stated language.
+
+### Proof-debugging card — the pumping lemma's quantifier order
+
+For a regular language \(L\), the pumping lemma says that there **exists** a
+pumping length \(p\) such that for **every** sufficiently long
+\(s\in L\), there **exists** a legal split \(s=xyz\), and for **every**
+\(i\ge0\), the pumped string \(xy^iz\) remains in \(L\). To prove a language
+nonregular by contradiction, your chosen string may depend on \(p\), but the
+repair must handle **every legal decomposition** that satisfies
+
+\[
+|xy|\le p,\qquad |y|\ge1.
+\]
+
+For \(L_{=}\), choose \(s=0^p1^p\). Any legal \(y\) lies among the initial
+zeroes, so pumping it down with \(i=0\) gives fewer zeroes than ones. The
+single change is enough for each legal split.
+
+**Debugging prompt:** an AI draft chooses one convenient split and declares
+victory. Mark the missing universal quantifier, then repair the argument or
+label it incomplete. This compact audit supplements—not replaces—the earlier
+distinguishability proof.
 
 ### Debugging probe
 
@@ -471,6 +544,29 @@ If it returns unknown, is the program proved not to halt?
 **Reveal:** no. The function decides only whether it observed halting within
 the declared step budget and model. It gives a useful finite diagnostic, not a
 universal halting decider.
+
+</details>
+
+### Encoding contract before diagonalization
+
+Before a diagonal argument uses self-input, make its notation auditable:
+
+| Encoded text | Declared convention | Why it matters |
+| --- | --- | --- |
+| \(\langle M\rangle\) | a valid finite description of one machine \(M\) | lets the construction identify a machine rather than arbitrary prose |
+| \(\langle\langle M\rangle,w\rangle\) | a decodable pair of a machine description and an input string | tells \(H\) exactly which computation it is asked about |
+| malformed text | a fixed explicit no-instance, not an unnamed machine/input pair | keeps the total-procedure convention visible |
+
+**Predict before reveal.** Which row makes the self-application
+\(D(\langle D\rangle)\) a defined case rather than a typography trick?
+
+<details>
+<summary>Reveal after naming the needed assumption.</summary>
+
+**Reveal:** the first two rows together: \(D\) must have a valid effective
+encoding, and that encoding must be usable as the declared input to \(D\).
+The malformed-text convention handles a separate branch; it is not evidence
+that arbitrary source text has a stable meaning.
 
 </details>
 
@@ -714,6 +810,22 @@ machine, limit, instance, ordering, and representation. It may motivate a
 question; it cannot supply a classification theorem.
 
 </details>
+
+### Decision, search, and optimization are different contracts
+
+Keep one graph object fixed and change only the question:
+
+| Contract | Exact question | What a certificate/verifier can establish |
+| --- | --- | --- |
+| decision | “Does a cover of size at most \(k\) exist?” | an existential claim; a supplied certificate needs a sound and complete verifier argument |
+| search | “Return one cover of size at most \(k\), if one exists.” | a returned witness still needs the decision contract checked |
+| optimization | “Return a minimum cover.” | requires an additional optimality argument; feasibility alone is insufficient |
+
+A verifier checks a supplied candidate. It does not decide whether some candidate exists,
+and it cannot establish a no-instance merely because no candidate was supplied. For the decision row, state the certificate
+representation, soundness, completeness, and polynomial verification cost
+before interpreting any pseudocode. An AI-generated optimizer is not thereby
+a verifier proof or an NP-completeness result.
 
 ### Code-reading task: verifier versus search
 
@@ -973,7 +1085,9 @@ solver run and a theorem about a precisely encoded problem family.
 
 This workbook uses original explanations, fixtures, diagrams, and code. It
 does not reproduce source prose, figures, lecture slides, problem sets, or
-solutions. The reading routes below were checked on **2026-08-01**.
+solutions. The established reading routes below were checked on **2026-08-01**;
+the targeted construction and proof-audit routes were rechecked on
+**2026-08-02**.
 
 ### Learner-facing source links
 
@@ -984,6 +1098,8 @@ solutions. The reading routes below were checked on **2026-08-01**.
 | [CMU 15-251 Foundations of Theoretical Computer Science schedule](https://www.cs.cmu.edu/~arielpro/15251f15/schedule.html) and [Georgia Tech CS 4510 Formal Languages and Automata](https://faculty.cc.gatech.edu/~ladha/S26/4510/) | Sessions 2–4: finite automata, computability, and reductions as comparison anchors for the two compact construction traces. | University-hosted routes are linked for study only; Atlas does not copy lectures, problem sets, answers, tools, or grading artifacts. |
 | [Georgia Tech CS 6515 Intro to Graduate Algorithms](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) | Sessions 4–5: proof-aware algorithm analysis, reductions, and complexity reasoning used as an advanced calibration route. | Link-only/original Atlas exercises; it is not a substitute for the course’s term-long work or feedback. |
 | [Cook’s 1971 complexity paper](https://doi.org/10.1145/800157.805047) and [Karp’s reduction paper](https://doi.org/10.1007/978-1-4684-2001-2_9) | Sessions 4–5: historical/primary anchors for reduction direction and encoded problem families. | Publisher records are link/citation only; do not copy proof prose, figures, or problem sets. |
+| [MIT 18.404J Theory of Computation lecture notes](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/) and [Stanford CS103 theorem/definition reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | Sessions 1–3: regex/NFA/DFA progression, CFG/stack distinction, pumping-lemma quantifiers, and encoded-machine assumptions before a diagonal argument. | Targeted 2026-08-02 calibration only; link-only/original Atlas traces, proof audits, and counterexamples. |
+| [MIT 6.046J Lecture 17: Complexity and NP-completeness](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2012/b4562881f2af637e09e806450e9b62c8_MIT6_046JS12_lec17.pdf) | Session 5: decision, certificate/verifier, and related search/optimization distinctions. | Link-only/original Atlas comparison table; do not copy lecture prose, figures, or exercises. |
 
 For the fuller source-to-claim ledger, access/reuse cautions, and primary-source
 map, use the instructor-facing [M33 primary-source research

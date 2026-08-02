@@ -15,8 +15,10 @@ Notion workflow, or learner access. It does not make M34 navigable,
 review-ready, released, or a prerequisite a learner can satisfy. In
 particular, it does not unlock M35, M25, or M26.
 
-**Research access date:** 2026-07-31. This note uses original papers, an
-original primary work, official documentation/repositories, or official
+**Research access dates:** S34-01 through S34-12 were accessed on 2026-07-31;
+S34-10 and S34-13 were rechecked on 2026-08-01; targeted authoring-calibration
+routes S34-14 through S34-17 were checked on 2026-08-02. This note uses original
+papers, an original primary work, official documentation/repositories, or official
 standards guidance only. It is link-and-original-paraphrase research. Atlas
 must not copy source prose, pseudocode, figures, tables, benchmark results,
 datasets, branding, or code into a future learner asset without a separate
@@ -85,8 +87,9 @@ validity, calibration, deployment authorization, or an M34 release signal.
 ## Primary-source ledger and reuse boundary
 
 Entries S34-01–S34-12 were accessed on 2026-07-31; S34-10 and S34-13 were
-rechecked on 2026-08-01. “Link-only/original paraphrase” is intentional even when a project
-repository has an open-source license:
+rechecked on 2026-08-01; S34-14 through S34-17 were checked on 2026-08-02.
+“Link-only/original paraphrase” is intentional even when a project repository
+has an open-source license:
 documentation, examples, figures, test data, and third-party portions can have
 different rights. Each future learner-facing claim must pin the exact source
 revision or edition it relies on.
@@ -106,6 +109,19 @@ revision or edition it relies on.
 | S34-11 | NIST, [Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1](https://doi.org/10.6028/NIST.AI.100-1) and [official PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) | U.S. National Institute of Standards and Technology | Official guidance for treating human oversight, context of use, harms, accountability, and risk controls as design/review concerns rather than assuming a model output has authority. | Official NIST publication. Use link-only/original paraphrase pending asset-level review. It is voluntary framework guidance, not a legal determination or an authorization for any particular action. |
 | S34-12 | MIT OpenCourseWare, [18.600 Probability and Random Variables lecture notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/) | Massachusetts Institute of Technology | Official course source used only as a bridge back to M30 for finite expectation/conditional-probability notation; it does not supply M34’s decision-legitimacy claim. | MIT OCW materials are generally CC BY-NC-SA 4.0 subject to item notices. Atlas remains link-and-original-paraphrase; no copied notes, figures, or exercises. |
 | S34-13 | Carnegie Mellon University, [07-280 AI/ML I Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | CMU course staff; official university-hosted course notes | Calibration for the structural distinction between a sequential MDP—states, actions, transition model, reward/objective, and policy—and a one-shot expected-utility table. | Course notes are linked for study only. No blanket asset-reuse permission has been recorded; Atlas uses original notation, examples, and boundary explanation. |
+| S34-14 | MIT, [6.034 Recitation 6: Planning and Search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf) | MIT course staff; official course handout | Direct support for deriving an admissible heuristic from a relaxed problem whose optimal cost is no larger than the original’s, including the deliberate omission of STRIPS delete lists. Supports a relaxed-heuristic audit with the changed problem made explicit. | Course handout is linked for calibration. No blanket asset-level reuse is inferred; Atlas uses **link-only/original paraphrase** and no copied exercises, diagrams, or code. |
+| S34-15 | Stanford, [CS221 Course Scheduling assignment](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html) | Stanford course staff; official university-hosted course assignment | Direct code-reading calibration for backtracking over partial assignments, pruning a zero-contribution extension, and AC-3-style propagation after an assignment until domains stop changing. | Assignment is linked for study only. Atlas uses **link-only/original paraphrase** and must not reproduce its problem, code, tests, or solution structure. |
+| S34-16 | MIT OpenCourseWare, [6.825 Lecture 10: Planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) | MIT course staff; official graduate AI lecture note | Supports an explicit state-result relation, the frame problem, and STRIPS precondition/add/delete effects. It calibrates an original state-update card that labels persistence as a modeling convention instead of silently treating omitted facts as real-world invariants. | MIT OCW material is linked solely for calibration. Atlas remains **link-only/original paraphrase**; no copied slides, figures, examples, or prose without asset-level review. |
+| S34-17 | Stanford, [CS221 Markov Decisions handout](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html) | Stanford course staff; official university-hosted course handout | Direct support for auditing the Markov conditional-independence assumption, state/action/transition-model assumptions, and the finite-horizon versus specialized infinite-horizon distinction. | Course handout is linked for study. No blanket Atlas reuse permission is recorded; **link-only/original paraphrase** and independently authored examples only. |
+
+### Targeted 2026-08-02 calibration routing
+
+| Planned M34 addition | Claim-linked source route | Authoring boundary preserved |
+| --- | --- | --- |
+| Relaxed heuristics | S34-14 states the relaxation/optimal-cost relation and its delete-list example. | An original audit must name the original and relaxed action model, goal, and cost before transferring a lower-bound claim; it must not call a fast heuristic admissible from a run alone. |
+| CSP partial-assignment search and propagation | S34-15 supplies a code-reading route from partial assignments through pruning to repeated domain propagation. | An original trace must show assignment and domain changes separately, and must not treat local propagation as a global-solution certificate. |
+| Planning state update and frame convention | S34-16 covers result states, explicit effects, and the frame problem. | State which facts are added, deleted, retained, unknown, or out of model; no STRIPS convention becomes a claim about physical persistence. |
+| MDP Markov and horizon audit | S34-17 makes the conditional-independence, discrete-state, known-start/legal-action, and horizon assumptions explicit. | An original audit must name state sufficiency, transition/reward model, horizon or return convention, and policy scope; it must not relabel a one-shot expected-utility table as a sequential policy. |
 
 ### What this ledger does not establish
 
