@@ -461,21 +461,34 @@ logarithmically in \(K\) after solving for \(n\).
 ### Quantifier card — uniform deviation is not yet PAC learnability
 
 The finite-class card controls a deviation event for a named class. A
-**realizable PAC** claim adds a target-in-class assumption and a learner
-algorithm \(A\): for every eligible distribution \(P\) and every
-\(\varepsilon,\delta\in(0,1)\), sufficiently many IID examples lead—with
-probability at least \(1-\delta\) over the sample and any declared learner
-randomness—to an output with error at most \(\varepsilon\) in the stated
-realizable classification setting.
+**distribution-free realizable PAC** claim adds a target-in-class assumption,
+a learner algorithm \(A\), and a sample regime selected before a particular
+distribution or target is named. With \(R_{P,c}(h)=\Pr_{X\sim P}[h(X)\ne
+c(X)]\), the relevant order is
+
+\[
+\exists A\;\forall\varepsilon,\delta\in(0,1)\;\exists m_{\mathcal H}(\varepsilon,\delta)\;
+\forall P\;\forall c\in\mathcal H:\quad
+\Pr_{S\sim P^{m_{\mathcal H}(\varepsilon,\delta)},\,A}
+\!\left[R_{P,c}(A(S))\le\varepsilon\right]\ge1-\delta.
+\]
+
+Here the IID inputs in \(S\) are labelled by the realizable target \(c\).
+The sufficient \(m_{\mathcal H}(\varepsilon,\delta)\) may depend on the
+fixed class and \(\varepsilon,\delta\), but not on the later universally
+quantified \(P\) or \(c\). Computational efficiency is an additional claim:
+it needs a separately stated polynomial sample/runtime bound under named
+encoding and size conventions.
 
 Before reading that as a slogan, mark the roles:
 
 | Role | Objects to name |
 | --- | --- |
 | **Assumed** | target concept in \(\mathcal H\), loss/error convention, eligible distributions, and IID sample relation |
-| **Universal** | each eligible \(P\), \(\varepsilon\), and \(\delta\) |
+| **Existential** | learner \(A\) and sufficient \(m_{\mathcal H}(\varepsilon,\delta)\), selected before \(P\) and \(c\) |
+| **Universal** | \(\varepsilon\), \(\delta\), each eligible \(P\), and each target \(c\in\mathcal H\) |
 | **Random** | sampled examples and any declared randomness in \(A\) |
-| **Claimed** | a sufficient sample regime and the stated error/confidence conclusion for \(A\) |
+| **Claimed** | the stated error/confidence conclusion for \(A\), not an efficiency claim unless one is separately proved |
 
 **Prediction.** Which row is missing if someone says only, “the class is
 finite”? Then state the boundary: this finite-card derivation does not by

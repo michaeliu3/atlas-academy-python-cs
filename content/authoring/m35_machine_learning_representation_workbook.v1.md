@@ -146,8 +146,8 @@ M32. If 5 is fragile, retrieve M22.
 
 ## 2. One synthetic story: the signal-routing laboratory
 
-Throughout the module, a team studies a **synthetic signal-routing toy**. A
-fictional simulator emits two binary fields:
+For the core representation and baseline cards, a team studies a **synthetic
+signal-routing toy**. A fictional simulator emits two binary fields:
 
 ~~~text
 signal  : a deliberately visible pattern bit
@@ -167,6 +167,10 @@ The team is tempted to discard `context` because it is inconvenient. That
 choice creates a precise question: if two inputs have the same representation
 but need different labels, can *any* deterministic downstream classifier
 recover the difference?
+
+The later fit → select → fresh-evaluation card deliberately uses a **separate
+constructed selection-evidence relation**. It names that relation at the card;
+it is not silently presented as more rows drawn from this equality-label story.
 
 ~~~mermaid
 %% atlas-diagram-id: m35-evidence-chain
@@ -563,12 +567,19 @@ trust a number as a belief or make a decision from it.
 | Reliability table | Do named probability bins roughly align with observed frequencies? | sample size, binning, selection, and deployment shift |
 | Slice metric | Which declared subgroup/time/condition differs in this data? | causal reason, legitimacy, and unseen slices |
 
-### Shift probe
+### Bounded reference fixture — declared input-mixture shift
 
-Keep the toy label rule fixed, but change the frequency of `context=1` in a
-synthetic future split. Predict whether an accuracy, calibration, or threshold
-metric could change. Then state what this single perturbation does **not**
-identify: real-world robustness, causal mechanism, or all possible shifts.
+Before calling `m35DeclaredRelationShiftProbe()`, predict the expected accuracy
+of the fixed `signal-only` predictor under two declared relations. The fixture
+keeps \(y=\mathbf 1\{\text{signal}=\text{context}\}\) fixed, but changes the
+input mixture from `source-balanced` to `context-heavy`. Its expected accuracy
+changes from `0.50` to `0.75` because that predictor is correct exactly when
+`context=1`.
+
+Inspect the two joint tables before accepting the number. This is a declared
+input-mixture/covariate-shift calculation, not a sampled evaluation. It does
+not identify real-world robustness, a causal mechanism, an undeclared future
+relation, or all possible shifts.
 
 ### Bounded reference fixture — equal accuracy can hide probability behavior
 
@@ -606,8 +617,12 @@ instead of silently relabeling a tuned split as “test.”
 
 ### Fit → select → fresh evaluation
 
-Read the next fixture as a compact execution ledger, not as a framework run.
-It fixes three disjoint partitions and exactly two candidate families:
+Read the next fixture as a separate constructed selection-evidence ledger, not
+as a framework run or an unlabelled sample from the earlier equality-label
+story. It fixes three disjoint partitions and exactly two candidate families.
+The declared train/validation relation is `label = context`; the declared fresh
+relation is `label = signal`. That deliberate conditional/label-relation shift
+makes both the evidence boundary and its model change inspectable:
 
 | Phase | Permitted labels | What becomes fixed afterward |
 | --- | --- | --- |
@@ -624,11 +639,12 @@ the fixture must *not* read while making that choice: the labels of
 <summary>Reveal the fit/selection/fresh trace after committing your prediction.</summary>
 
 The trace fits each candidate's orientation on its four training rows, then
-selects `context-threshold` with the two validation rows. Its fresh partition
-deliberately follows a different tiny pattern: the already selected candidate
-gets `1/4` correct. That is a finite observation about these declared fresh
-rows—not a population estimate, a reason to retune after the fact, or a claim
-that another candidate is generally better.
+selects `context-threshold` with the two validation rows under the declared
+`label = context` relation. Its fresh partition deliberately changes to
+`label = signal`: the already selected candidate gets `1/4` correct. That is a
+finite observation about these declared fresh rows—not a population estimate,
+a reason to retune after the fact, or a claim that another candidate is
+generally better.
 
 </details>
 

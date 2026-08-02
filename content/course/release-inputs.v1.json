@@ -82,11 +82,11 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "3a31675ac96be561809571f06b99820bc665e5fe40bbc03cb25aa23c82330306"
+      "sha256": "97251e494adeaece8788a57791eb2f0e84ad6b92052bf1bf39aa555108dbea64"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "7b2aa3f5361f242ced778407668ce4bf957a8e325cf0f85ceb18b9f785588860"
+      "sha256": "98458eb3ddd1f56dfd8f3ff9e0476406e738367026f1e6e6434d9d083bd022ba"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -602,11 +602,11 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "edec477844c2decf771e96179c82941d825db527e34d29cdc68a6db140c66bde"
+      "sha256": "4d6dcd277fc3dd53cfa699d355517b33550da17460473c79d0f193a1f2f65e73"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
-      "sha256": "b4cd9b188245a7bbf153d6655393d289c31d1f23e73d2a31988c60bcd63174df"
+      "sha256": "a5a56028873d4ad5833a3c3699efe2a19bb88b08a90511e5dc0742faa85f58af"
     },
     {
       "path": "content/source-maps/python_curriculum_sources.md",

@@ -2,14 +2,15 @@
 
 ## Status, scope, and non-publication boundary
 
-**Status on 2026-07-31:** instructor-facing, **authoring-only** research for a
-planned Module 36. This is not a learner workbook, canonical source map,
-structured module contract, review record, release input, studio, diagnostic,
-oral-defense implementation, route change, or proof of learner competence.
+**Status on 2026-08-02:** instructor-facing, **authoring-only** research tied
+to a private authoring workbook. This dossier is not a learner route, canonical
+source map, structured module contract, review record, release input, studio,
+diagnostic, oral-defense implementation, route change, or proof of learner
+competence.
 
 The canonical graph still records M36 as `authoring-only` with hidden reader
 access, a `null` source-map field, no studio, and a v3 contract state of
-`not-started`. Its academic prerequisites remain M29, M31, M32, M33, and M35;
+`authoring-only`. Its academic prerequisites remain M29, M31, M32, M33, and M35;
 its declared forward handoff remains M25. This dossier changes none of those
 facts. It must not unlock M36, M25, or M26; create a claim that a prerequisite
 has been satisfied; or turn a source link into evidence that any learner-facing
@@ -94,7 +95,7 @@ evidence say otherwise; this file cannot change that state.
 ## Primary-source ledger and reuse boundary
 
 S36-01–S36-14 were accessed on **2026-07-31**; S36-15–S36-17 were checked on
-**2026-08-01**. “Link/cite only” means the source may guide a future author
+**2026-08-01**; S36-18–S36-19 were checked on **2026-08-02**. “Link/cite only” means the source may guide a future author
 but does not grant Atlas permission to reproduce prose, formulas, figures,
 code, data, benchmarks, videos, course exercises, or brand assets. A future
 structured source ledger must add a learner-facing claim link and asset decision
@@ -119,6 +120,27 @@ for every actual use.
 | S36-15 | Carnegie Mellon University, [10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/) | Official university-course benchmark joining regularization/model selection with formal learning guarantees and their limits. Supports M36-S03’s fixed-versus-adaptive selection repair. | Course material is **link/cite only**. Do not copy lectures, assignments, solutions, figures, or data; create original Atlas proofs, examples, and cards. |
 | S36-16 | Stanford, [CS229 Machine Learning course materials](https://cs229.stanford.edu/materials.html-full) | Official course-material route for learning theory and regularization/model-selection sequencing. Supports M36-S03 calibration without claiming access, enrollment, or equivalence. | **Link/cite only**. Some material may have its own access or reuse constraints; do not copy notes, assignments, figures, or solutions. |
 | S36-17 | W. Hoeffding, [“Probability Inequalities for Sums of Bounded Random Variables”](https://doi.org/10.1080/01621459.1963.10500830) (JASA, 1963) | Primary source for the explicitly named fixed-hypothesis bounded-IID concentration step in M36-S03. It supports only the finite-class, bounded-loss Hoeffding-plus-union-bound card after its assumptions are stated. | Journal article; **link/cite only**. Create original theorem cards and derivations; do not copy proof text, constants presentation, or examples. |
+| S36-18 | Carnegie Mellon University, [10-806 Foundations of Machine Learning & Data Science, Lecture 25: Differential Privacy and Statistical Query Learning](https://www.cs.cmu.edu/~avrim/ML07/lect1207.pdf) | Official lecture notes that recall a realizable PAC setup over accuracy/confidence pairs, distributions, and target concepts, and distinguish a separate polynomial time/sample requirement. Supports the M36-S03 quantifier and efficiency distinction, not application to an arbitrary modern model or data source. | Course notes are **link-only/original-paraphrase**. Do not copy theorem prose, diagrams, exercises, or proof steps; construct an original Atlas theorem card and counterexample. |
+| S36-19 | MIT OpenCourseWare, [6.080 Lecture 20: Probably Approximately Correct Learning](https://ocw.mit.edu/courses/6-080-great-ideas-in-theoretical-computer-science-spring-2008/838468541460ee9c1d08eb36c1921d30_lec20.pdf) | Official lecture notes connecting an IID finite-class PAC sample guarantee to the separate difficulty of finding a fitting hypothesis. Supports M36-S03's sample-versus-computation boundary; it does not supply an efficiency proof for the Atlas learner or a deep-learning guarantee. | MIT OCW material is **link-only/original-paraphrase** pending asset review. Do not copy lecture prose, examples, or proofs; retain original Atlas notation, proof sketch, and fixtures. |
+
+### Targeted 2026-08-02 calibration
+
+- **M36-S03 / M36-C04:** For a fixed hypothesis class \(\mathcal H\) and
+  \(\varepsilon,\delta\in(0,1)\), choose the sample bound
+  \(m_{\mathcal H}(\varepsilon,\delta)\) **before** the universal quantifiers.
+  Then state: for every distribution \(D\) and every realizable target
+  \(c\in\mathcal H\), any \(m\ge m_{\mathcal H}(\varepsilon,\delta)\)
+  samples \(S\sim D^m\) labelled by \(c\) lead a named learner, with
+  probability at least \(1-\delta\), to a hypothesis with
+  \(D\)-error at most \(\varepsilon\). S36-18 and S36-19 calibrate that
+  scope; the notation and explanation here are original paraphrase, not a
+  copied theorem card.
+- **M36-S03 / M36-C04:** Statistical PAC success is not a computation claim.
+  A separate efficient-learning requirement must name the representation/input
+  size and require the learning procedure's sample use and running time to be
+  polynomial in the relevant accuracy/confidence and size parameters. A
+  sample bound alone does not prove that a consistent hypothesis can be found
+  efficiently.
 
 ### What this ledger does *not* establish
 
@@ -196,10 +218,10 @@ not create a workbook, studio, test, or oral-defense surface.
 | --- | --- | --- | --- |
 | **M36-S01 — What learning claims mean** (M29, M35) | S36-01–S36-03, S36-07–S36-09 | Start with a tiny synthetic learning claim. Before any formula, ask the learner to mark the population, sample, loss, representation, hypothesis class, and missing assumption; only then reveal empirical/population risk notation. | **Assumption-scope sheet.** It does not say a synthetic relation represents a real population or that a stated loss is the correct decision objective. |
 | **M36-S02 — Optimization, estimation, and generalization gaps** (M29, M31, M35) | S36-04–S36-06 | Code-read an original fixed-length training trace and a held-out observation. Ask which claim is supported by a gradient/loss change and which remains unanswered. | **Optimization–generalization gap ledger.** It does not claim convergence, population optimality, or a valid deployment decision. |
-| **M36-S03 — Capacity, learnability, computational limits, and theorem scope** (M33, M35) | S36-01–S36-05, S36-14–S36-17 | Build a finite-hypothesis, bounded-loss, IID Hoeffding proof skeleton: fixed-hypothesis concentration, union bound, a numeric \(K,\varepsilon,\delta,n\) card, a PAC-quantifier contrast, and a fixed-versus-adaptive selection repair. Then remove IID with a cloned-sample counterexample and state what the restored result still cannot decide. | **Limit-and-nonclaim card.** It does not turn a finite-class theorem name into a guarantee about an arbitrary neural network, data source, or user. |
+| **M36-S03 — Capacity, learnability, computational limits, and theorem scope** (M33, M35) | S36-01–S36-05, S36-14–S36-19 | Build a finite-hypothesis, bounded-loss, IID Hoeffding proof skeleton: fixed-hypothesis concentration, union bound, a numeric \(K,\varepsilon,\delta,n\) card, a distribution-free realizable PAC-quantifier contrast, a separate sample-versus-runtime boundary, and a fixed-versus-adaptive selection repair. Then remove IID with a cloned-sample counterexample and state what the restored result still cannot decide. | **Limit-and-nonclaim card.** It does not turn a finite-class theorem name into a guarantee about an arbitrary neural network, data source, or user. |
 | **M36-S04 — Numerical, systems, and reproducibility evidence** (M32, M35) | S36-10–S36-11 | Read a fixed two-layer ReLU forward/backward trace and an original environment record with one unpinned variable. Predict a plausible difference between two runs, then choose the smallest added record/check rather than a blanket "set the seed" response. | **Theory-system reproducibility record.** It does not promise bitwise matching, validate framework/autodiff behavior, or validate an experiment's scientific/reliability claim. |
 | **M36-S05 — Shift, robustness, monitoring, and bounded human control** (M31, M32, M35) | S36-07–S36-12 | Contrast an input-mixture shift, a conditional/label-relation shift, and a representation/measurement shift before revealing an intervention plan. Require a named observable, threshold, false-positive/false-negative trade-off, owner, and stop condition for each claimed mechanism. | **Reliable-learning evidence map.** It does not certify detection, robustness, causal diagnosis, or autonomous authority. |
-| **M36-S06 — Reliable learning systems dossier and bridge to synthesis** (M29, M31, M32, M33, M35) | S36-01–S36-17 | Assemble a small synthetic dossier. A supportive TA oral discussion asks the learner to repair one assumption, explain one counterexample, distinguish a theorem from an observation, and choose a next uncertainty-reducing measurement. | **Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary.** It is not a pass/fail result, platform-live evidence, Notion-write proof, or M25/M26 unlock. |
+| **M36-S06 — Reliable learning systems dossier and bridge to synthesis** (M29, M31, M32, M33, M35) | S36-01–S36-19 | Assemble a small synthetic dossier. A supportive TA oral discussion asks the learner to repair one assumption, explain one counterexample, distinguish a theorem from an observation, and choose a next uncertainty-reducing measurement. | **Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary.** It is not a pass/fail result, platform-live evidence, Notion-write proof, or M25/M26 unlock. |
 
 Every future session should preserve prediction before reveal, compact
 first-principles explanation, code-reading/debugging/design inspection, an
@@ -225,7 +247,7 @@ could rely on it?
 | --- | --- | --- |
 | Assumption-scope sheet | Target/synthetic relation, variables, loss, class, sample/split, regularity/limit regime, and every unknown. | That a finite simulation supplies a real population or theorem condition. |
 | Gap ledger | Objective, reference/comparator, optimization trace, validation observation, generalization/operational questions, and evidence status. | That any one optimization or validation number resolves every gap. |
-| Theorem-limit card | Formal statement in original wording, quantified assumptions, conclusion, proof idea, one counterexample/edge case, and explicit non-conclusion. | That the card proves the theorem or applies it to a deployed system. |
+| Theorem-limit card | Precise learner-authored/paraphrased statement, necessary mathematical notation, quantified assumptions, conclusion, proof idea, one counterexample/edge case, and explicit non-conclusion. Do not copy source prose. | That the card proves the theorem or applies it to a deployed system. |
 | Reproduction record | Generator/code revision, dependencies, hardware/backend, dtype, seed/RNG/data order, deterministic settings, tolerance, raw repeats, and semantic oracle. | Cross-platform bitwise identity, causal explanation, or universal reproducibility. |
 | Shift/monitoring plan | Synthetic shift design, observables, calibration/metric/slice, threshold and uncertainty, false alarm/miss discussion, owner, intervention, and stop/escalation boundary. | That the plan detects all shifts, prevents harm, or authorizes automatic action. |
 | Supportive oral-defense summary | Learner-selected explanation, prediction, corrected misconception, counterexample, transfer question, uncertainty, and next action. | A grade, mastery proof, raw transcript, voice record, or automatic Notion export. |
@@ -257,11 +279,14 @@ could rely on it?
 The Atlas portal remains local-first and must not transmit any of these
 artifacts automatically. A portable copied chat prompt stays local by default.
 Under the active designated-chat workflow, the learner-designated Codex
-Teaching Assistant or Study Partner may instead create at most one concise,
-privacy-bounded session note after a substantive conversation, unless records
-are paused or material is off-record. That separate bounded note never includes
-raw voice or full transcripts, does not turn this dossier into a source map or
-release input, and cannot be claimed saved without direct evidence.
+Teaching Assistant or Study Partner may create at most one concise,
+privacy-bounded session note only after a substantive conversation when the
+Notion integration is configured, the learner has currently approved the
+write, records are not paused, and material is not off-record. Otherwise,
+provide a ready-to-paste local note and state that no write occurred. That
+separate bounded note never includes raw voice or full transcripts, does not
+turn this dossier into a source map or release input, and cannot be claimed
+saved without direct evidence.
 
 ## Research gaps and release blockers this file does not close
 

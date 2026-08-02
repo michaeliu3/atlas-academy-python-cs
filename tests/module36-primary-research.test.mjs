@@ -21,8 +21,9 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
   ]);
 
   assert.match(research, /^# Module 36 .*Primary-Source Research/mu);
-  assert.match(research, /\*\*Status on 2026-07-31:\*\* instructor-facing, \*\*authoring-only\*\* research/u);
-  assert.match(research, /This is not a learner workbook, canonical source map,\s+structured module contract,/u);
+  assert.match(research, /\*\*Status on 2026-08-02:\*\* instructor-facing, \*\*authoring-only\*\* research tied\s+to a private authoring workbook/u);
+  assert.match(research, /This dossier is not a learner route, canonical\s+source map, structured module contract,/u);
+  assert.match(research, /v3 contract state of\s+`authoring-only`/u);
   assert.match(research, /It must not unlock M36, M25, or M26/u);
   assert.match(research, /## Primary-source ledger and reuse boundary/u);
   assert.match(research, /## First-principles definitions and derivation aids/u);
@@ -33,11 +34,15 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /A shared bounded\s+fixture\/test now supplies a finite-risk\/named-relation probe/u);
   assert.match(research, /neither a theorem review nor a general reliability model/u);
   assert.match(research, /A portable copied chat prompt stays local by default\./u);
-  assert.match(research, /may instead create at most one concise,\s+privacy-bounded session note after a substantive conversation/u);
-  assert.match(research, /cannot be claimed saved without direct evidence\./u);
+  assert.match(research, /may create at most one concise,\s+privacy-bounded session note only after a substantive conversation/u);
+  assert.match(research, /Notion integration is configured/u);
+  assert.match(research, /learner has currently approved the\s+write/u);
+  assert.match(research, /ready-to-paste local note/u);
+  assert.match(research, /cannot be claimed\s+saved without direct evidence\./u);
   assert.match(research, /https:\/\/www\.cs\.cmu\.edu\/~mgormley\/courses\/10601\//u);
   assert.match(research, /https:\/\/cs229\.stanford\.edu\/materials\.html-full/u);
-  for (let number = 1; number <= 17; number += 1) {
+  assert.match(research, /Lecture 25: Differential Privacy and Statistical Query Learning/u);
+  for (let number = 1; number <= 19; number += 1) {
     assert.match(research, new RegExp(`\\| S36-${String(number).padStart(2, "0")} \\|`, "u"));
   }
 

@@ -11,6 +11,7 @@ import {
   m35BaselineComparison,
   m35BernoulliLogLikelihoodCard,
   m35CalibrationContrast,
+  m35DeclaredRelationShiftProbe,
   m35FitSelectFreshEvaluationTrace,
   m35M36FixedReluTrace,
   m35RepresentationCollisionWitness,
@@ -35,6 +36,14 @@ test("the shared fixture is frozen, local, and explicit about its evidence bound
   assert.equal(Object.isFrozen(M35_M36_SIGNAL_ROUTING_FIXTURE), true);
   assert.equal(Object.isFrozen(M35_M36_SIGNAL_ROUTING_FIXTURE.rows), true);
   assert.equal(M35_M36_SIGNAL_ROUTING_FIXTURE.rows.length, 4);
+  assert.equal(
+    M35_M36_SIGNAL_ROUTING_FIXTURE.modelSelectionRelation.trainAndValidationLabelRule,
+    "label = context",
+  );
+  assert.equal(
+    M35_M36_SIGNAL_ROUTING_FIXTURE.modelSelectionRelation.freshEvaluationLabelRule,
+    "label = signal",
+  );
   assert.match(M35_M36_SIGNAL_ROUTING_FIXTURE.truthBoundary, /fully synthetic finite cards/u);
   assert.match(M35_M36_SIGNAL_ROUTING_FIXTURE.truthBoundary, /do not describe people/u);
 });
@@ -135,6 +144,9 @@ test("the M35 trace fits on train rows, selects on validation rows, and preserve
   assert.deepEqual(trace.fitting.rowsUsed, trace.partition.trainRowIds);
   assert.deepEqual(trace.selection.rowsUsed, trace.partition.validationRowIds);
   assert.deepEqual(trace.freshEvaluation.rowsUsed, trace.partition.freshEvaluationRowIds);
+  assert.equal(trace.dataRelation.trainAndValidationLabelRule, "label = context");
+  assert.equal(trace.dataRelation.freshEvaluationLabelRule, "label = signal");
+  assert.match(trace.dataRelation.scope, /separate constructed selection-evidence fixture/u);
   assert.deepEqual(
     trace.fitting.candidates.map(({ id, polarity, trainingCorrect, trainingTotal }) => ({
       id,
@@ -168,6 +180,20 @@ test("the M35 trace fits on train rows, selects on validation rows, and preserve
   assert.equal(trace.oneChangeLeakageDebug.improperSelectedCandidateId, "signal-threshold");
   assert.match(trace.oneChangeLeakageDebug.diagnosis, /fresh labels/u);
   assert.match(trace.truthBoundary, /not a population estimate/u);
+});
+
+test("the M35 shift probe makes its fixed relation and expected-accuracy change explicit", () => {
+  const probe = m35DeclaredRelationShiftProbe();
+
+  assert.equal(probe.fixedPredictor, "signal-only: prediction = signal");
+  assert.equal(probe.fixedLabelRelation, "label = Number(signal === context)");
+  assert.equal(probe.source.relationId, "source-balanced");
+  assert.equal(probe.shifted.relationId, "context-heavy");
+  assert.equal(probe.source.signalOnlyExpectedAccuracy, 0.5);
+  assert.equal(probe.shifted.signalOnlyExpectedAccuracy, 0.75);
+  assert.match(probe.changedPremise, /input mixture changes/u);
+  assert.match(probe.truthBoundary, /not a sampled evaluation/u);
+  assert.match(probe.truthBoundary, /not a robustness result/u);
 });
 
 test("the shared-information card separates raw inputs, hypothesis families, and constructed scope", () => {
@@ -304,6 +330,10 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m35Workbook, /Regularization changes the target; selection changes the evidence/u);
   assert.match(m35Workbook, /m35SharedInformationModelFamilyCard\(\)/u);
   assert.match(m35Workbook, /m35FitSelectFreshEvaluationTrace\(\)/u);
+  assert.match(m35Workbook, /m35DeclaredRelationShiftProbe\(\)/u);
+  assert.match(m35Workbook, /expected accuracy\s+changes from `0\.50` to `0\.75`/u);
+  assert.match(m35Workbook, /separate constructed selection-evidence ledger/u);
+  assert.match(m35Workbook, /declared train\/validation relation is `label = context`/u);
   assert.match(m35Workbook, /Fit → select → fresh evaluation/u);
   assert.match(m35Workbook, /One-change debugging probe — fresh labels are not tuning feedback/u);
   assert.match(m35Workbook, /training rows only/u);
@@ -333,6 +363,10 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m36Workbook, /Finite-class proof skeleton — the union-bound step has a home/u);
   assert.match(m36Workbook, /Hoeffding's inequality gives/u);
   assert.match(m36Workbook, /Quantifier card — uniform deviation is not yet PAC learnability/u);
+  assert.ok(m36Workbook.includes("\\exists A\\;\\forall\\varepsilon,\\delta\\in(0,1)"));
+  assert.match(m36Workbook, /but not on the later universally\s+quantified/u);
+  assert.ok(m36Workbook.includes("\\(P\\) or \\(c\\)"));
+  assert.match(m36Workbook, /Computational efficiency is an additional claim/u);
   assert.match(m36Workbook, /Bartlett–Foster–Telgarsky spectral-normalized margin-bound example/u);
   assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
@@ -357,6 +391,23 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
     m36Workbook,
     /monitoring claim states its evidence timing, one blind spot, and the accountable response/u,
   );
+});
+
+test("the M36 research ledger preserves its authoring-only, paraphrase, and consent boundaries", async () => {
+  const ledger = await readFile(
+    "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+    "utf8",
+  );
+
+  assert.match(ledger, /v3 contract state of\s+`authoring-only`/u);
+  assert.doesNotMatch(ledger, /v3 contract state of\s+`not-started`/u);
+  assert.match(ledger, /Precise learner-authored\/paraphrased statement/u);
+  assert.match(ledger, /Do not copy source prose/u);
+  assert.match(ledger, /Notion integration is configured/u);
+  assert.match(ledger, /learner has currently approved the\s+write/u);
+  assert.match(ledger, /ready-to-paste local note/u);
+  assert.match(ledger, /S36-18/u);
+  assert.match(ledger, /S36-19/u);
 });
 
 test("the M35 and M36 authoring diagrams keep their declared prose alternatives", async () => {
