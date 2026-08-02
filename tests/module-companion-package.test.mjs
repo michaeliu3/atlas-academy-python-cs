@@ -66,6 +66,36 @@ test("the companion package derives prerequisite and forward-handoff facts from 
   assert.equal(changedPackage.module.declaredForwardHandoff.number, 4);
 });
 
+test("M1 chat contexts state the reachable-Notion and unavailable-write boundary", async () => {
+  const [graph, guides, workflow] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleCompanionGuides(),
+    loadLiveCodexLearningWorkflow(),
+  ]);
+  const m01 = graph.modules.find(({ id }) => id === "m01");
+  const guide = guides.guides.find(({ moduleId }) => moduleId === "m01");
+  assert.ok(m01);
+  assert.ok(guide);
+
+  const companion = buildModuleCompanionPackage({
+    courseModule: m01,
+    graphModules: graph.modules,
+    guide,
+    liveWorkflow: workflow,
+  });
+
+  for (const contextPrompt of [
+    companion.teachingAssistant.contextPrompt,
+    companion.studyPartner.contextPrompt,
+  ]) {
+    assert.match(contextPrompt, /configured private Notion destination is reachable/i);
+    assert.match(
+      contextPrompt,
+      /if that destination is unavailable, say plainly that no write occurred and keep a ready-to-paste concise summary in chat/i,
+    );
+  }
+});
+
 test("the TA and Study Partner packets stay distinct, constructive, and bounded", async () => {
   const [graph, guides, workflow] = await Promise.all([
     loadCourseGraph(),
