@@ -21,6 +21,19 @@ function sessionSpine(markdown, label) {
   return headings;
 }
 
+function sessionLaunches(markdown, label) {
+  const launches = [...markdown.matchAll(
+    /^## Session [1-6] — .+\n\n\*\*Launch:\*\* (.+)$/gmu,
+  )].map(([, launch]) => launch);
+
+  assert.equal(
+    launches.length,
+    6,
+    `${label} must give the learner one concrete Study Partner launch for every session`,
+  );
+  return launches;
+}
+
 function assertCoreLearningAnchors(markdown, label) {
   for (const [name, pattern] of [
     ["prerequisite connection", /prerequisite/iu],
@@ -79,6 +92,11 @@ test("hidden M31-M36 authoring and review workbooks retain one aligned learning 
       sessionSpine(authoringWorkbook, `${moduleId} authoring workbook`),
       sessionSpine(reviewWorkbook, `${moduleId} review workbook`),
       `${moduleId} hidden review material must retain its authoring session progression`,
+    );
+    assert.deepEqual(
+      sessionLaunches(authoringWorkbook, `${moduleId} authoring workbook`),
+      sessionLaunches(reviewWorkbook, `${moduleId} review workbook`),
+      `${moduleId} authoring workbook launches must stay aligned with the frozen review candidate`,
     );
     assertCoreLearningAnchors(authoringWorkbook, `${moduleId} authoring workbook`);
     assertCoreLearningAnchors(reviewWorkbook, `${moduleId} review workbook`);

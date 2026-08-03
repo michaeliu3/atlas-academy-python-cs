@@ -4983,6 +4983,87 @@ main.module-library-shell {
   margin-bottom: 1.2rem;
 }
 
+.prediction-reveal-gate {
+  background: rgba(249, 242, 252, 0.7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--plum);
+  margin: 1.25rem 0 2.6rem;
+  padding: clamp(1rem, 3vw, 1.45rem);
+}
+
+.prediction-reveal-gate h4 {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  margin: 0.25rem 0 0.55rem;
+}
+
+.prediction-reveal-kicker {
+  color: var(--plum);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.prediction-reveal-gate fieldset {
+  border: 0;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.prediction-reveal-gate legend {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 0.55rem;
+}
+
+.prediction-choice-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prediction-choice-list label {
+  align-items: center;
+  background: rgba(255, 253, 247, 0.85);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  padding: 0.45rem 0.6rem;
+}
+
+.prediction-choice-list input {
+  accent-color: var(--plum);
+}
+
+.prediction-reveal-gate button {
+  margin-top: 0.35rem;
+}
+
+.prediction-reveal-gate button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.prediction-reveal-note {
+  color: var(--muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.prediction-reveal-gate .lesson-details {
+  margin-bottom: 0;
+  margin-top: 1.25rem;
+}
+
 .mermaid-figure {
   background: rgba(255, 253, 247, 0.72);
   border: 1px solid var(--line);

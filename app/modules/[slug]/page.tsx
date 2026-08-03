@@ -198,7 +198,12 @@ export default async function ModulePage({ params }: ModulePageProps) {
             id="module-reading-article"
             aria-label={`Complete Module ${courseModule.number} workbook`}
           >
-            <ModuleMarkdown markdown={lessonMarkdown} />
+            <ModuleMarkdown
+              enableMultipleChoicePredictionGates={
+                courseModule.state.availability === "legacy-open"
+              }
+              markdown={lessonMarkdown}
+            />
             {moduleInteraction.kind !== "preview" ? (
               <ModuleOralDefense
                 companion={getModuleCompanionPackage(courseModule.number)}

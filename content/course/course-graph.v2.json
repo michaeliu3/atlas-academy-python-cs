@@ -5135,6 +5135,16 @@
       "masteryGateId": "mathematics",
       "routeRole": "required",
       "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          600,
+          840
+        ]
+      },
       "sourceMap": null,
       "studioId": null,
       "sequencePosition": 22,
@@ -5172,6 +5182,16 @@
       "masteryGateId": "intelligence",
       "routeRole": "required",
       "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          720,
+          960
+        ]
+      },
       "sourceMap": null,
       "studioId": null,
       "sequencePosition": 30,
@@ -5207,6 +5227,16 @@
       "masteryGateId": "intelligence",
       "routeRole": "required",
       "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          600,
+          840
+        ]
+      },
       "sourceMap": null,
       "studioId": null,
       "sequencePosition": 31,
@@ -5243,6 +5273,16 @@
       "masteryGateId": "intelligence",
       "routeRole": "required",
       "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          720,
+          960
+        ]
+      },
       "sourceMap": null,
       "studioId": null,
       "sequencePosition": 32,
@@ -5281,6 +5321,16 @@
       "masteryGateId": "intelligence",
       "routeRole": "required",
       "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          720,
+          960
+        ]
+      },
       "sourceMap": null,
       "studioId": null,
       "sequencePosition": 33,
@@ -5318,6 +5368,16 @@
       "masteryGateId": "intelligence",
       "routeRole": "required",
       "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          840,
+          1080
+        ]
+      },
       "sourceMap": null,
       "studioId": null,
       "sequencePosition": 34,
