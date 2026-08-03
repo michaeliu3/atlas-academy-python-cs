@@ -267,7 +267,7 @@ field to the contract and obtain evidence from the actual API and trace.
 
 ### Bounded reference fixture — layout before a no-copy claim
 
-Read `lib/m32-systems-evidence-fixture.js` as a local code-reading card.
+Read [`lib/m32-systems-evidence-fixture.js`](../../lib/m32-systems-evidence-fixture.js) as a local code-reading card.
 Before calling `m32LayoutHandoffTrace()`, predict whether its base and
 reversed-column cards have the same shape, the same strides, and the same
 eligibility for a declared positive-contiguous consumer. Inspect the two
