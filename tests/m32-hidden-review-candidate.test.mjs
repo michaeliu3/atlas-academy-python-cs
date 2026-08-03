@@ -2,12 +2,18 @@ import assert from "node:assert/strict";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import {
+  scanMermaidBlocks,
+  validateMermaidAccessibility,
+} from "../lib/mermaid-accessibility.mjs";
+import { extractTableOfContents } from "../lib/heading-ids.js";
 import { projectReaderModules } from "../scripts/course-graph.mjs";
 import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 import { resolveHiddenReviewCandidateScope } from "../scripts/hidden-review-candidate.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
+const reviewCandidatePath = "content/modules/32_systems_languages_scientific_python_accelerators.md";
 
 test("M32 freezes a hidden review candidate without changing its authoring-only route", async () => {
   const snapshot = await openGitIndexSnapshot(siteRoot);
@@ -31,7 +37,7 @@ test("M32 freezes a hidden review candidate without changing its authoring-only 
   assert.deepEqual(candidate.candidateInputPaths, [
     "content/course/contracts/evidence/m32.v1.json",
     "content/course/contracts/review-candidates/m32.v1.json",
-    "content/modules/32_systems_languages_scientific_python_accelerators.md",
+    reviewCandidatePath,
     "content/source-maps/module32_systems_languages_scientific_python_accelerators.md",
   ]);
   assert.ok(
@@ -52,4 +58,41 @@ test("M32 freezes a hidden review candidate without changing its authoring-only 
   assert.equal(m32?.studioId, null);
   assert.ok(!projectReaderModules(graph).some(({ id }) => id === "m32"));
   assert.ok(!manifest.modules.some(({ id }) => id === "m32"));
+});
+
+test("the frozen M32 review candidate retains the study-ready structural spine", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
+  await snapshot.assertClean([reviewCandidatePath]);
+  const candidate = (await snapshot.readText(reviewCandidatePath)).text;
+
+  for (const sessionNumber of [1, 2, 3, 4, 5, 6]) {
+    assert.match(candidate, new RegExp(`^## Session ${sessionNumber} —`, "mu"));
+  }
+  assert.deepEqual(
+    extractTableOfContents(candidate)
+      .filter(({ depth, title }) => depth === 3 && title.startsWith("Output:"))
+      .map(({ id }) => id),
+    [
+      "output-boundary-contract-map",
+      "output-execution-transfer-trace",
+      "output-layout-numerics-note",
+      "output-performance-evidence-card",
+      "output-buffer-ownership-timeline",
+      "output-autodiff-execution-trace",
+      "output-scientific-python--accelerators-dossier",
+    ],
+  );
+  assert.match(candidate, /^## Confidence-aware diagnostic and spaced review/mu);
+  assert.match(candidate, /Teaching Assistant — M32 systems evidence clinic/u);
+  assert.match(candidate, /Study Partner — M32 live rehearsal/u);
+  assert.match(candidate, /Conversational oral defense — M32/u);
+  assert.match(candidate, /^## Sources, licensing, and responsible reading route/mu);
+  assert.match(candidate, /^## Candidate release boundary/mu);
+
+  const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: reviewCandidatePath });
+  const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
+  assert.equal(visualBlocks.length, 2);
+  assert.equal(visualReport.summary.completeBlocks, 2);
+  assert.ok(visualBlocks.every(({ metadata }) => metadata?.id.startsWith("m32-")));
+  assert.ok(visualBlocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });
