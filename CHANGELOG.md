@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Tightened the private M31–M32 authoring packs after the 2026-08-03 official
+  calibration: M31 now compares direct matching-witness and qualified-theorem
+  certificate routes, then retrieves the distinct source, law, quantity, and
+  regime behind BSC and rate-distortion formulas. M32 now treats CPU stride
+  locality as a falsifiable measurement hypothesis and requires an adversarial
+  reproduction delta beside a same-environment control. These are source-backed
+  learning improvements only: both modules remain hidden, authoring-only, and
+  unreleased.
 - Reduced future GitHub Actions usage without weakening the required Course CI
   gate. The audit found that repeated non-draft pull-request synchronizations
   were the cost driver; the portal, Python 3.12/3.14, and Chromium checks stay

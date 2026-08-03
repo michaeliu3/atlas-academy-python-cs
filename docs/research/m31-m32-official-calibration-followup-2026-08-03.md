@@ -46,7 +46,13 @@ both modules are still authoring-only. A source-calibrated workbook is not
 learner access, a successful oral session, a released module, or evidence of
 competence.
 
-## High-leverage content improvements — recommended, not applied
+## High-leverage content improvements — applied in `cc5c85b`
+
+The four narrow repairs below were applied to the M31/M32 candidate modules and
+their matching private authoring workbooks in commit `cc5c85b`, with focused
+traceability regression coverage. They strengthen prediction, counterexample,
+and transfer reasoning; they do **not** create a learner route, source approval,
+human review, chat-delivery record, or release evidence.
 
 1. **M31 Session 3: require a two-route certificate comparison.** Add one
    tiny output/oral-defense row distinguishing (a) a direct matching
