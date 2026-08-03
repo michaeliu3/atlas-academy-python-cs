@@ -62,10 +62,11 @@ conversation.
 <!-- live-codex-workflow: activation -->
 
 The active designated-chat policy is `automatic-after-substantive-session`.
-Before its first automatic note, say “records on” in that designated chat.
-That one-time confirmation remains active there until records are paused or
-material is marked off-record. It may then create at most one concise note per
-substantive session only when all four conditions hold:
+Before an automatic note, say “records on” in that designated chat **for the
+current substantive session**. That confirmation expires when the session
+ends; a later session requires a fresh `records on`. It may then create at most
+one concise note for the current substantive session only when all four
+conditions hold:
 
 The chat should visibly acknowledge `records on` as **chat-level intent** to
 use this configured policy, not as proof that a write or platform setting took
@@ -91,7 +92,19 @@ substantive session and creates no note.
 The chat never creates a note after every exchange or for a greeting. “Automatic”
 does not prove that a write worked: neither role may claim a note was saved
 without direct evidence of the successful write. If access is unavailable, it
-says so plainly and keeps the summary in the visible chat.
+says plainly that no write occurred and leaves this ready-to-paste local packet
+in the visible chat:
+
+```text
+Notion unavailable — local session note
+No Notion write occurred. Copy only this concise, learner-approved summary if useful.
+- Date / role / module or topic:
+- Question and prediction:
+- Whiteboard trace: definition, derivation, code/architecture observation, or counterexample:
+- Misconception, uncertainty, or boundary:
+- Smallest next action and cross-role handoff:
+Do not include raw voice, full transcripts, credentials, sensitive data, or off-record material.
+```
 
 For a configured record, keep only:
 

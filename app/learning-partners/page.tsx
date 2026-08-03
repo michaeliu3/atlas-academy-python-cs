@@ -66,8 +66,9 @@ export default function LearningPartnersPage() {
             microphone, or Notion. Within their configured private learning
             record, after you say “records on” in that exact designated chat,
             the designated Codex chats—not the portal—are authorized to
-            automatically create one concise Notion session note after a
-            substantive learning conversation. A successful write is recorded
+            automatically create one concise Notion session note for the current
+            substantive learning conversation; permission expires when that
+            session ends. A successful write is recorded
             only from direct evidence; voice, rendering, and platform-setting
             behavior remain separately unproven until observed.
           </p>

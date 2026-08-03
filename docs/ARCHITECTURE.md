@@ -27,10 +27,11 @@ flowchart LR
   controls, and local device state only.
 - The portal has no Notion runtime integration or automatic
   portal-to-Notion data flow. The learner may use the manual private Notion
-  workflow, while the two designated external Codex learning chats may
-  automatically create concise session notes only after the learner says
-  `records on` in that exact designated chat and a substantive conversation
-  ends in their configured private record. Portable copied prompts remain local. That
+workflow, while the two designated external Codex learning chats may
+automatically create concise session notes only after the learner says
+`records on` in that exact designated chat for the current substantive session;
+permission expires when that session ends. A substantive conversation may then
+end in their configured private record. Portable copied prompts remain local. That
   external workflow does not grant the portal microphone, voice, transcript,
   or Notion-write capability, and a saved-note claim still requires direct
   evidence.

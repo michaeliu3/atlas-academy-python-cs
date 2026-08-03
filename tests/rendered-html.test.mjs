@@ -125,15 +125,17 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /visible chat an accessible whiteboard/);
   assert.match(html, /Portable copied-chat record mode: keep local/);
   assert.match(html, /automatic-after-substantive-session/);
-  assert.match(html, /at most one concise structured note per substantive session/);
+  assert.match(html, /at most one concise structured note for that session/);
   assert.match(html, /say “records on”/);
+  assert.match(html, /Notion unavailable — local session note/);
   assert.match(html, /names a module or learning topic/);
   assert.match(html, /pause records/);
   assert.match(readable, /configured private learning\s+record/i);
   assert.match(readable, /after you say “records on” in that exact designated chat/i);
   assert.match(readable, /designated Codex chats—not the portal/i);
   assert.match(readable, /authorized to\s+automatically create one concise Notion session note/i);
-  assert.match(readable, /after a\s+substantive learning conversation/i);
+  assert.match(readable, /current\s+substantive learning conversation/i);
+  assert.match(readable, /permission expires when that\s+session ends/i);
   assert.match(readable, /successful write is recorded\s+only from direct evidence/i);
   assert.match(html, /The Teaching Assistant conducts the actual post-module oral defense/);
 });
@@ -1701,7 +1703,7 @@ test("generated module manifest projects the canonical graph without bypassing p
     manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
   );
 
-  assert.equal(manifest.schemaVersion, 4);
+  assert.equal(manifest.schemaVersion, 5);
   assert.equal(manifest.courseGraphSchemaVersion, 2);
   assert.equal(manifest.routePlanId, "atlas-core-60");
   assert.equal(manifest.definedModuleCount, 36);
