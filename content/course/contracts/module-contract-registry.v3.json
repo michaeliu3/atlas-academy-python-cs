@@ -2912,7 +2912,7 @@
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -2921,7 +2921,7 @@
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -2966,7 +2966,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -2993,7 +2993,7 @@
         },
         {
           "id": "supportive-oral-defense",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3011,7 +3011,7 @@
         },
         {
           "id": "study-partner-prompt",
-          "status": "missing",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3099,7 +3099,7 @@
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3117,7 +3117,7 @@
         },
         {
           "id": "prediction-before-reveal",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3153,7 +3153,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3180,7 +3180,7 @@
         },
         {
           "id": "supportive-oral-defense",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3198,7 +3198,7 @@
         },
         {
           "id": "study-partner-prompt",
-          "status": "missing",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3295,7 +3295,7 @@
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3304,7 +3304,7 @@
         },
         {
           "id": "prediction-before-reveal",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3340,7 +3340,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3367,7 +3367,7 @@
         },
         {
           "id": "supportive-oral-defense",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3385,7 +3385,7 @@
         },
         {
           "id": "study-partner-prompt",
-          "status": "missing",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3482,7 +3482,7 @@
         },
         {
           "id": "code-reading-debugging-design",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3527,7 +3527,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3572,7 +3572,7 @@
         },
         {
           "id": "study-partner-prompt",
-          "status": "missing",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -3714,7 +3714,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",

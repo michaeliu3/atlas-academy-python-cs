@@ -614,16 +614,16 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 381,
-    ambiguous: 92,
-    missing: 7,
+    "pointer-present": 400,
+    ambiguous: 77,
+    missing: 3,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    17,
+    15,
   );
-  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 4);
+  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 0);
   assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 3);
   assert.ok(
     audit.modules
@@ -638,6 +638,11 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
     ["m13", ["accessible-visual-text-alternative"]],
     ["m14", ["first-principles", "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
     ["m15", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
+    ["m16", ["first-principles", "accessible-visual-text-alternative"]],
+    ["m17", ["first-principles", "code-reading-debugging-design", "accessible-visual-text-alternative"]],
+    ["m18", ["first-principles", "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
+    ["m19", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative", "supportive-oral-defense"]],
+    ["m20", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative", "supportive-oral-defense"]],
   ]);
   for (const [moduleId, ambiguousCriteria] of expectedAmbiguousByModule) {
     const evidence = audit.modules.find((module) => module.moduleId === moduleId)?.evidence;

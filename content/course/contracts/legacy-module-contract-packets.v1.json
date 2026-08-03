@@ -451,7 +451,7 @@
         {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-transfer"]},
         {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-source-rationale", "m20-claim-linkage", "m20-license-reuse", "m20-stable-learner-link"]},
         {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-visual-studio", "m20-text-alternative-candidate"]},
-        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-diagnostic", "m20-misconception-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-diagnostic", "m20-misconception-candidate"]},
         {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-retrieval"]},
         {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-dossier", "m20-acceptance", "m20-rubric"]},
         {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m20-oral-protocol", "m20-oral-hint", "m20-counterexample", "m20-transfer", "m20-oral-reflection", "m20-oral-summary"]},
@@ -538,17 +538,17 @@
         {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-session-1", "m19-session-2", "m19-session-3", "m19-session-4", "m19-session-5", "m19-session-6"]},
         {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-first-principle"]},
         {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-definition", "m19-assumption", "m19-derivation", "m19-counterexample", "m19-numerical-experiment"]},
-        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-code-reading", "m19-debug", "m19-design"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-code-reading", "m19-debug", "m19-design"]},
         {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-prediction"]},
         {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-transfer"]},
         {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-source-rationale", "m19-claim-linkage", "m19-license-reuse", "m19-stable-learner-link"]},
         {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-visual-studio", "m19-text-alternative-candidate"]},
-        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-diagnostic", "m19-misconception-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-diagnostic", "m19-misconception-candidate"]},
         {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-retrieval"]},
         {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-dossier", "m19-acceptance", "m19-rubric"]},
         {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-oral-protocol", "m19-oral-hint", "m19-counterexample", "m19-transfer", "m19-oral-reflection", "m19-oral-summary"]},
         {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-ta"]},
-        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "missing", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-study-partner-missing"]},
+        {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-study-partner-missing"]},
         {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m19-forward-handoff"]}
       ],
       "implementationArtifacts": [
@@ -10737,7 +10737,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-definition",
@@ -10749,7 +10749,7 @@
         },
         {
           "criterionId": "code-reading-debugging-design",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-code-reading",
@@ -10795,7 +10795,7 @@
         },
         {
           "criterionId": "confidence-diagnostic-misconceptions",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-diagnostic",
@@ -10823,7 +10823,7 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-oral-protocol",
@@ -10844,7 +10844,7 @@
         },
         {
           "criterionId": "study-partner-prompt",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-study-partner"
@@ -11581,7 +11581,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-definition",
@@ -11603,7 +11603,7 @@
         },
         {
           "criterionId": "prediction-before-reveal",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-prediction"
@@ -11639,7 +11639,7 @@
         },
         {
           "criterionId": "confidence-diagnostic-misconceptions",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-diagnostic",
@@ -11667,7 +11667,7 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-oral-protocol",
@@ -11688,7 +11688,7 @@
         },
         {
           "criterionId": "study-partner-prompt",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-study-partner"
@@ -12431,7 +12431,7 @@
         },
         {
           "criterionId": "code-reading-debugging-design",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-code-reading",
@@ -12441,7 +12441,7 @@
         },
         {
           "criterionId": "prediction-before-reveal",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-prediction"
@@ -12477,7 +12477,7 @@
         },
         {
           "criterionId": "confidence-diagnostic-misconceptions",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-diagnostic",
@@ -12505,7 +12505,7 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-oral-protocol",
@@ -12526,7 +12526,7 @@
         },
         {
           "criterionId": "study-partner-prompt",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-study-partner"

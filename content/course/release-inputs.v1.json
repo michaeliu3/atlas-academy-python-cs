@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "0bea2ae2369fdf01438978df5594206e19379fd31a50228472566c2251eeba65"
+      "sha256": "7ff4d3d5d6423ca5dd3222c11c4f7abde11c69e8d2f1f3086831c274ad976567"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "a4b2b70765ba3362d1a553de5a23448aabaf9e12891fc95f0975f054be81e27d"
+      "sha256": "c24f5c56c6b8393c7553532704287a3d199e53ca42e736b0ddfe34dcd8e39b7c"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "8088564bd62bb977e3c6c0784b79d3f3bb9f1e7e33d812288e054b6194dfc8fd"
+      "sha256": "b61e86da5cb5025363592d8c70230dac60ae67a7d41fc0c84a54b08d365175ff"
     },
     {
       "path": "content/course/course-graph.v2.json",

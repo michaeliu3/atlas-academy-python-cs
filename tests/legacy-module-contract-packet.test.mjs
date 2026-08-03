@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "a4b2b70765ba3362d1a553de5a23448aabaf9e12891fc95f0975f054be81e27d");
+  assert.equal(digest, "c24f5c56c6b8393c7553532704287a3d199e53ca42e736b0ddfe34dcd8e39b7c");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -99,7 +99,7 @@ test("the M20 structural packet binds the networking spine without promoting its
     "ambiguous",
   );
   assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
   assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
   assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
   assert.ok(

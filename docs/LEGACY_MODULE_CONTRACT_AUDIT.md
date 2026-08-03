@@ -10,7 +10,7 @@
 - Each module's `humanQualityReview: not-reviewed` uniformly applies to all 16 criteria. This audit records no per-criterion approvals; future granular human review needs a different reviewed contract record.
 - M25/M26 remain preview-only in the canonical graph. This audit neither changes their availability nor permits their authoring-only prerequisites to be bypassed.
 
-The validator resolved 30 modules and 480 criteria: **381 P**, **92 A**, **7 M**. It records **0 human approvals** and **0 publication changes**.
+The validator resolved 30 modules and 480 criteria: **400 P**, **77 A**, **3 M**. It records **0 human approvals** and **0 publication changes**.
 
 ## Matrix
 
@@ -31,11 +31,11 @@ The validator resolved 30 modules and 480 criteria: **381 P**, **92 A**, **7 M**
 | M13 | P | P | P | P | P | P | P | P | A | P | P | P | P | P | P | P |
 | M14 | P | P | A | A | P | P | P | P | A | P | P | P | P | P | P | P |
 | M15 | P | P | P | A | P | P | P | P | A | P | P | P | P | P | P | P |
-| M16 | P | P | A | A | A | P | P | P | A | A | P | P | A | P | M | P |
-| M17 | P | P | A | A | A | A | P | P | A | A | P | P | A | P | M | P |
-| M18 | P | P | A | A | A | A | P | P | A | A | P | P | A | P | M | P |
-| M19 | P | P | P | A | A | P | P | P | A | A | P | P | A | P | M | P |
-| M20 | P | P | P | A | P | P | P | P | A | A | P | P | A | P | P | P |
+| M16 | P | P | A | P | P | P | P | P | A | P | P | P | P | P | P | P |
+| M17 | P | P | A | P | A | P | P | P | A | P | P | P | P | P | P | P |
+| M18 | P | P | A | A | P | P | P | P | A | P | P | P | P | P | P | P |
+| M19 | P | P | P | A | P | P | P | P | A | P | P | P | A | P | P | P |
+| M20 | P | P | P | A | P | P | P | P | A | P | P | P | A | P | P | P |
 | M21 | P | P | P | A | A | A | A | P | P | A | P | P | A | P | P | P |
 | M22 | P | P | P | A | A | A | A | P | P | A | P | P | A | P | P | P |
 | M23 | P | P | P | A | A | A | A | P | P | A | P | P | M | P | P | P |
@@ -54,18 +54,18 @@ The validator resolved 30 modules and 480 criteria: **381 P**, **92 A**, **7 M**
 | prerequisite forward map | 28 | 2 | 0 |
 | six connected sessions | 30 | 0 | 0 |
 | first principles | 23 | 7 | 0 |
-| rigor definitions assumptions derivations proofs counterexamples numerical experiments | 13 | 17 | 0 |
-| code reading debugging design | 18 | 12 | 0 |
-| prediction before reveal | 24 | 6 | 0 |
+| rigor definitions assumptions derivations proofs counterexamples numerical experiments | 15 | 15 | 0 |
+| code reading debugging design | 21 | 9 | 0 |
+| prediction before reveal | 26 | 4 | 0 |
 | transfer task | 23 | 7 | 0 |
 | source ledger | 26 | 4 | 0 |
 | accessible visual text alternative | 15 | 15 | 0 |
-| confidence diagnostic misconceptions | 17 | 13 | 0 |
+| confidence diagnostic misconceptions | 22 | 8 | 0 |
 | retrieval and spaced review | 30 | 0 | 0 |
 | project and evidence rubric | 30 | 0 | 0 |
-| supportive oral defense | 19 | 8 | 3 |
+| supportive oral defense | 22 | 5 | 3 |
 | ta prompt | 29 | 1 | 0 |
-| study partner prompt | 26 | 0 | 4 |
+| study partner prompt | 30 | 0 | 0 |
 | forward handoff | 30 | 0 | 0 |
 
 ## Verification
