@@ -853,7 +853,76 @@ assert bisect_left(values, 20) == 1
 assert bisect_right(values, 20) == 4
 ```
 
-The half-open range `[1, 4)` identifies all entries equal to `20`. That same boundary idea supports ranges and prefix bounds in sorted text, though a trie supplies a different tradeoff.
+The half-open range `[1, 4)` identifies all entries equal to `20`. That same
+boundary idea supports ranges and prefix bounds in sorted text, though a trie
+supplies a different tradeoff.
+
+### First principles: derive the lower boundary
+
+`bisect_left` answers a boundary question, not merely “did I see an equal
+value?” Assume `a` is sorted in nondecreasing order under the same comparison
+as `x`. A lower-bound loop keeps the unclassified array slice half-open,
+`a[lo:hi]`, and must preserve these facts before each iteration:
+
+- every index before `lo` stores a value `< x`;
+- every index at or after `hi` stores a value `>= x`; and
+- the insertion **position** is still in the closed index interval `[lo, hi]`.
+
+The distinction matters: an insertion position may be `len(a)`, just beyond
+the final array index.
+
+**Trace before reveal.** For `values = [10, 20, 20, 20, 30]`, predict the
+lower boundary for `20`, `30`, and `35`. Which branch-preservation argument
+loses its justification if `values` were not sorted?
+
+```python
+def lower_bound(a: list[int], x: int) -> int:
+    lo, hi = 0, len(a)
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+```
+
+Why it works, step by step:
+
+| Observation at `mid` | Safe classification from sortedness | Next boundary |
+| --- | --- | --- |
+| `a[mid] < x` | Every index through `mid` is `< x`; the insertion position is after `mid`. | `lo = mid + 1` |
+| `a[mid] >= x` | Every index from `mid` onward is `>= x`; the insertion position is at or before `mid`. | `hi = mid` |
+
+When `lo < hi`, `lo <= mid < hi`. The first branch changes the width from
+`hi - lo` to `hi - (mid + 1)`; the second changes it to `mid - lo`. Either is
+strictly smaller, so a finite list reaches `lo == hi`. Then the two slice facts
+are exactly the `bisect_left` partition: values before `lo` are `< x`, and
+values at or after it are `>= x`.
+
+### Debug a boundary, not a result
+
+This tempting edit breaks the half-open invariant:
+
+```python
+def broken_lower_bound(a: list[int], x: int) -> int:
+    lo, hi = 0, len(a)
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid - 1  # BUG: skips `mid` as a possible boundary
+    return lo
+```
+
+With `a = [10, 20, 20, 20, 30]` and `x = 30`, the first comparison moves
+`lo` to `3`; the second sees `a[4] == 30` and sets `hi` to `3`. It returns
+`3`, even though the right slice begins with `20`, not a value `>= 30`.
+Diagnose the failure from the violated partition rather than from the returned
+number alone. If the comparison is deliberately changed from `<` to `<=`, the
+loop instead targets the `bisect_right` contract—an upper boundary after equal
+values—not a repaired lower boundary.
 
 ### Broken use
 

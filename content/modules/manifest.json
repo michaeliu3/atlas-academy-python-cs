@@ -383,10 +383,10 @@
       "title": "Trees, Heaps, Sorting, and Ordered Search",
       "summary": "Central idea: a hash index answers “which item has this exact identity?”; ordered structures answer “what comes first, next, nearest, or under this prefix?”",
       "arcId": "arc-ii",
-      "wordCount": 17658,
+      "wordCount": 18132,
       "estimatedMinutes": 74,
       "focusedStudyMinutes": null,
-      "sourceHash": "ce05dbec4fd4e384963886acf762b4067db4dc3b9affb3c15b00c3edd238a163",
+      "sourceHash": "47d69b832c408776b96c62c7a614f739bce1e7c07dc4c21038bee891c44d6592",
       "id": "m09",
       "state": {
         "lifecycle": "learner-material-ready",
