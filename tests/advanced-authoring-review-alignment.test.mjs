@@ -7,6 +7,16 @@ import { fileURLToPath } from "node:url";
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const moduleIds = ["m31", "m32", "m33", "m34", "m35", "m36"];
+const recordBoundaryModuleIds = new Set(["m32", "m33", "m34", "m35", "m36"]);
+const designatedChatRecordBoundary = /### Record boundary for designated chats[\s\S]*?exact\s+configured\s+designated\s+Teaching\s+Assistant\s+or\s+Study\s+Partner\s+chat[\s\S]*?`records\s+on`[\s\S]*?substantive\s+session[\s\S]*?at\s+most\s+one\s+concise\s+note[\s\S]*?private\s+destination\s+is\s+reachable[\s\S]*?`pause\s+records`[\s\S]*?`off-record`[\s\S]*?authorization\s+ends\s+with\s+the\s+session[\s\S]*?raw\s+transcript[\s\S]*?direct\s+evidence/u;
+
+function recordBoundaryBlock(markdown, label) {
+  const match = markdown.match(
+    /### Record boundary for designated chats[\s\S]*?(?=\n### Forward handoff)/u,
+  );
+  assert.ok(match, `${label} must contain one record-boundary block before its forward handoff`);
+  return match[0];
+}
 
 function sessionSpine(markdown, label) {
   const headings = [...markdown.matchAll(/^## Session ([1-6]) — (.+)$/gmu)].map(
@@ -100,5 +110,22 @@ test("hidden M31-M36 authoring and review workbooks retain one aligned learning 
     );
     assertCoreLearningAnchors(authoringWorkbook, `${moduleId} authoring workbook`);
     assertCoreLearningAnchors(reviewWorkbook, `${moduleId} review workbook`);
+    if (recordBoundaryModuleIds.has(moduleId)) {
+      assert.match(
+        authoringWorkbook,
+        designatedChatRecordBoundary,
+        `${moduleId} authoring workbook must preserve the designated-chat record boundary`,
+      );
+      assert.match(
+        reviewWorkbook,
+        designatedChatRecordBoundary,
+        `${moduleId} review workbook must preserve the designated-chat record boundary`,
+      );
+      assert.equal(
+        recordBoundaryBlock(authoringWorkbook, `${moduleId} authoring workbook`),
+        recordBoundaryBlock(reviewWorkbook, `${moduleId} review workbook`),
+        `${moduleId} authoring and review workbooks must keep the same record boundary`,
+      );
+    }
   }
 });
