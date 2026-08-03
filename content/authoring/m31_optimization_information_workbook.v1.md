@@ -940,6 +940,36 @@ starts belong in the record before describing a nonconvex run as converged.
 
 </details>
 
+### Inspect the fixed traces before generalizing
+
+If the local model is available, inspect these two bounded cards rather than
+rewriting their update rules from memory:
+
+~~~text
+m31StochasticGradientTrace({
+  initialParameter: 0,
+  stepSize: 0.1,
+  noiseSequence: [-1.5, 1.5, -0.5, 0.5],
+})
+
+m31DoubleWellMultipleStartCard()
+~~~
+
+Before looking at the rows, predict which card can show a finite estimator
+path and which can show that a zero gradient is an unsafe stopping story. Then
+read the implementation and make this three-part distinction:
+
+| Fixed observation | What it helps you inspect | What it still cannot establish |
+| --- | --- | --- |
+| The noisy trace starts at `theta=0`, takes an estimated gradient of `-3.5`, and reaches `theta=0.35` after its first declared update. The second displayed loss rises even though the four declared noise values average to zero. | A particular update formula, noise label, and finite non-monotone path. | An iid sampling process, conditional unbiasedness, a variance bound, convergence, or a useful model result. |
+| The double-well card classifies the exact start `t=0` as a stationary local maximum, while its two neighboring starts have nonzero gradients. | Why initialization and local curvature belong beside a small-gradient report. | Basin membership, global optimality, stability, or behavior under another step rule, dtype, or objective. |
+
+Now change one premise: suppose the four noise values were chosen after
+looking at earlier rows, rather than supplied as a fixed teaching sequence.
+Which expectation claim must be withdrawn, and what history/selection record
+would you need before describing an estimator? End by marking one field in
+each card as a **definition**, **finite observation**, and **non-claim**.
+
 ### Experiment card
 
 | Field | Record it | Do not silently infer |
@@ -1119,6 +1149,26 @@ as a finite-code benchmark, and which one-use distribution identity remains
 available if its BSC assumptions still hold? State the field that changed
 before answering. Then change the source law to biased input and identify the
 additional formula whose `1-h_2(\cdot)` form no longer follows.
+
+### Inspect the matching-number trap
+
+Use the bounded card
+`evaluateM31BinaryChannelDistortion({ crossoverProbability: 0.1,
+distortionLevel: 0.1 })`. Before inspecting it, predict whether it returns
+one quantity or two, and whether equal displayed numbers make their claims
+interchangeable.
+
+The card reports approximately `0.531004` bits for both fields. Read its
+declared `source`, `observationChannel`, `distortion`, and `theoremScope`, then
+complete this sentence:
+
+> The channel value answers ___ under ___; the rate-distortion value answers
+> ___ under ___. Their numerical agreement does not ___ .
+
+Change only the distortion level from `0.1` to `0.2`. Which card field may
+change, which channel fact remains fixed, and which finite-code or decision
+claim is still unavailable? This is a source/loss/regime inspection, not a
+coding implementation or model-quality score.
 
 ### Transfer task — changed source or distortion
 

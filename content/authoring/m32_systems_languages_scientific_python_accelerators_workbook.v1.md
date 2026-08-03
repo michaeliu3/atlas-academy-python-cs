@@ -368,6 +368,27 @@ The point is not to memorize C API flags. It is to make the boundary visible:
 format, item size, rank, shape, strides, contiguity, readonly/writable state,
 and paired release belong in the same review sentence.
 
+### Tool choice is a contract choice, not a speed promise
+
+An AI assistant proposes: “Use Cython or Numba; it will make this no-copy and
+fast.” Do not accept or reject that sentence by tool name. Compare three
+possible **reading targets** first:
+
+| Route | Contract evidence you would need before a narrow claim | What the route does **not** prove by itself |
+| --- | --- | --- |
+| A CPython C-API buffer consumer | Requested buffer flags, exact format/rank/shape/stride/read-write rules, every successful-acquisition release path, interpreter/build target, and the semantic oracle. | That the caller avoided a conversion, that the consumer is portable, numerically correct, or fast. |
+| A Cython typed-memoryview boundary | The declared element type/dimensions/layout requirement, read-only or writable rule, compiler and generated-extension build scope, and the behavior for an incompatible view. | That a typed signature preserves the caller's storage, avoids materialization, or transfers to another Python/runtime environment unchanged. |
+| A Numba-compiled CPU function | The supported Python/NumPy operations, compilation mode/version, dtype and numerical-order assumptions, real workload, semantic oracle, and completed measurement protocol. | That compilation preserves every Python behavior, that a vectorized expression is inferior, or that one timing transfers to another CPU, library, or backend. |
+
+Read the [Cython typed-memoryview guide](https://cython.readthedocs.io/en/3.1.x/src/userguide/memoryviews.html)
+and [Numba performance guide](https://numba.readthedocs.io/en/stable/user/performance-tips.html)
+only to check the named contracts. They are not build recipes or benchmark
+authority. Pick one route, write the smallest falsifiable claim it might
+support, and then write the first counterexample or measurement that could
+defeat that claim. In particular, ask an AI proposal where copies, layout
+rejections, floating-point reordering, compilation, and completed work are
+observed rather than inferred.
+
 ### Output: Boundary Contract Map
 
 Create a **Boundary Contract Map** for one bounded, non-consequential
