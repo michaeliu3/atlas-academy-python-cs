@@ -114,31 +114,34 @@ particular, the source-workflow digest is an assertion supplied by a future
 collector; the GitHub run API does not itself furnish it. A pull-request run's
 source head is also not proof of the generated merge ref that a runner used.
 No historical run is being retroactively certified by this policy. Before it
-can support release evidence, a trusted, default-branch-controlled, read-only
-observer must independently fetch the run and jobs, retain the observed run
-attempt, and avoid checkout, execution, cache, or artifact use from untrusted
-pull-request code.
+can support release evidence, a reviewer must explicitly run the read-only
+metadata verifier for the exact successful pull-request Course CI run being
+recorded. It independently fetches the run and jobs, retains the observed run
+attempt, and never checks out, executes, caches, or handles artifacts from
+candidate code.
 
-### Prospective default-branch metadata observer
+### On-demand Course CI metadata verifier
 
-`.github/workflows/observe-course-ci-metadata.yml` is a deliberately
-read-only, metadata-only observer. GitHub runs a `workflow_run` workflow only
-after its file exists on the default branch, so the version on this review
-branch is prospective until it is merged there. It has only `actions: read`,
-uses one immutable `actions/github-script` revision, and makes attempt-specific
-read requests for the Course CI run and its jobs. It neither checks out nor
-executes candidate code, and does not touch caches, artifacts, deployments,
-commit statuses, pull-request state, or secrets.
+`.github/workflows/observe-course-ci-metadata.yml` is an explicitly dispatched,
+read-only final-verification workflow. It does not run after every Course CI
+gate, so ordinary successful pull-request checks do not pay for a duplicate
+metadata runner. Its sole required input is a positive decimal Course CI
+`run_id`; the value is passed as data, validated before use, and is never
+interpolated into the script body.
 
-For a successful same-repository pull-request run, it emits a compact
-**source-head-attached CI metadata observation** to its own log after binding
-the run ID, run attempt, source head, workflow identity, and required jobs.
-It does not prove the generated merge ref that Course CI executed, that the
-candidate workflow body matched the policy's source digest, a GitHub Release,
-human review, deployment, or learner readiness. Those missing links require a
-separate, reviewed evidence design. This follows GitHub's guidance that a
-privileged `workflow_run` must not check out untrusted pull-request code or
-trust inputs from the preceding run.
+The workflow has only `actions: read`, uses one immutable
+`actions/github-script` revision, reads the selected run, then reads its exact
+attempt and jobs. It requires a successful same-repository pull-request Course
+CI gate with the expected source head, workflow identity, display title, and
+four required jobs. It neither checks out nor executes candidate code, and does
+not touch caches, artifacts, deployments, commit statuses, pull-request state,
+or secrets.
+
+On success it emits a compact **on-demand source-head-attached Course CI
+metadata observation** to its log. It does not prove the generated merge ref
+that Course CI executed, that the candidate workflow body matched the policy's
+source digest, a GitHub Release, human review, deployment, or learner
+readiness. Those missing links require separate, reviewed evidence.
 
 | Source commit | Evidence changed | GitHub Actions evidence | What this establishes | What it does not establish |
 | --- | --- | --- | --- | --- |

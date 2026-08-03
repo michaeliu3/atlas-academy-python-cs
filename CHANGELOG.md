@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Reduced future GitHub Actions usage without weakening the required Course CI
+  gate. The audit found that repeated non-draft pull-request synchronizations
+  were the cost driver; the portal, Python 3.12/3.14, and Chromium checks stay
+  intact. The prospective provenance observer is now an explicitly dispatched,
+  read-only final-verification action rather than an extra runner after every
+  successful gate. Draft updates retain their zero-hosted-job path, and the
+  already-reviewed Python/browser de-duplication remains in place. This is a
+  CI-cost and provenance-workflow change only, not release, deployment, or
+  learner-readiness evidence.
 - Repaired the advanced learning handoff rather than adding a new surface:
   M31 now derives conditional entropy and the uniform-input BSC calculation
   before using mutual information, adds KKT-certificate and ELBO-family-gap
