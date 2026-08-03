@@ -699,6 +699,14 @@ test("renders the on-demand Levels 1–9 atomic source crosswalk", async () => {
     document.querySelector('a[href="/route#scope-topic-l1.proofs.logic-relations"]'),
     "each source row points back to the concise route target and its delivery label",
   );
+  const martingaleRow = [...document.querySelectorAll("li")].find(
+    (row) => row.textContent?.includes("Martingales at an introductory level"),
+  );
+  assert.match(
+    martingaleRow?.textContent ?? "",
+    /Mixed anchor delivery.*1 open legacy anchor.*1 authoring-only anchor/is,
+    "a mixed source target names each mapped delivery state instead of hiding it behind one label",
+  );
   const proofSection = [...document.querySelectorAll("details")].find(
     (section) => section.firstElementChild?.textContent?.includes("Proofs and discrete mathematics"),
   );

@@ -47,6 +47,15 @@ const availabilityOrder: CourseAvailability[] = [
   "authoring-only",
 ];
 
+const availabilitySummaryLabels: Record<CourseAvailability, string> = {
+  "legacy-open": "open legacy",
+  published: "verified published",
+  preview: "reference preview",
+  locked: "locked",
+  optional: "optional reference",
+  "authoring-only": "authoring-only",
+};
+
 function deliveryLabel(topic: ScopeMatrixTopic) {
   const availabilityCounts = new Map<CourseAvailability, number>();
   for (const { moduleId } of topic.anchors) {
@@ -64,7 +73,13 @@ function deliveryLabel(topic: ScopeMatrixTopic) {
   if (deliveryStates.length === 1) {
     return availabilityLabels[deliveryStates[0]];
   }
-  return "Mixed anchor delivery";
+  const detail = deliveryStates
+    .map((availability) => {
+      const count = availabilityCounts.get(availability) ?? 0;
+      return `${count} ${availabilitySummaryLabels[availability]} ${count === 1 ? "anchor" : "anchors"}`;
+    })
+    .join("; ");
+  return `Mixed anchor delivery · ${detail}`;
 }
 
 export function ScopeInventory() {
@@ -126,7 +141,7 @@ export function ScopeInventory() {
       <div className={styles.inventoryPageLegend}>
         <span><strong>Source target</strong> preserves the supplied learning-target wording.</span>
         <span><strong>Atlas target</strong> links to the concise route card with sessions and evidence.</span>
-        <span><strong>Current delivery</strong> is inherited from that target’s mapped modules.</span>
+        <span><strong>Current delivery</strong> lists every distinct state among that target’s mapped modules.</span>
       </div>
 
       <div className={styles.scopeLevels}>
