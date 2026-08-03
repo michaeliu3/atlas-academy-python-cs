@@ -598,7 +598,7 @@ test("the advanced prerequisite-session bridge covers every authoring-only graph
       (count, moduleBridge) => count + moduleBridge.prerequisiteBridges.length,
       0,
     ),
-    30,
+    31,
   );
   assert.ok(
     bridgeLedger.modules.every((moduleBridge) => moduleBridge.sessionSpine.length === 6),

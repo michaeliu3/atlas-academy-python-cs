@@ -67,7 +67,7 @@ const authoringCandidates = [
     substitutePath: "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
     substituteLocator: "the-connected-teaching-argument",
     reviewSelectorPath: "content/course/contracts/review-candidates/m36.v1.json",
-    expectedFrozenOutputCount: 7,
+    expectedFrozenOutputCount: 8,
     expectedFrozenMermaidCount: 2,
     run: runM36AuthoringCandidateEvidencePreflight,
   },
