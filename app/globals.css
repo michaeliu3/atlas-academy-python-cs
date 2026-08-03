@@ -4475,6 +4475,75 @@ main.module-library-shell {
   text-underline-offset: 0.24em;
 }
 
+.module-session-launches {
+  border-top: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+}
+
+.module-session-launches-intro {
+  color: var(--ink) !important;
+  font-size: 0.92rem;
+  max-width: 52rem !important;
+}
+
+.module-session-launches ol {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+}
+
+.module-session-launches li {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid color-mix(in srgb, var(--ink) 13%, transparent);
+  border-radius: 0.4rem;
+  min-width: 0;
+  padding: 0.7rem 0.75rem;
+}
+
+.module-session-launches li > a {
+  color: var(--ink);
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.module-session-launches li > a span {
+  color: var(--plum);
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.16rem;
+  text-transform: uppercase;
+}
+
+.module-session-launches li p {
+  color: var(--muted) !important;
+  font-size: 0.79rem;
+  line-height: 1.42;
+  margin: 0.46rem 0 0;
+}
+
+.module-session-launches li .module-session-output {
+  color: var(--ink) !important;
+}
+
+.module-session-start,
+.module-oral-defense-link {
+  margin-right: 1rem;
+}
+
+@media (max-width: 700px) {
+  .module-session-launches ol {
+    grid-template-columns: 1fr;
+  }
+}
+
 .module-sequence-nav {
   border-bottom: 1px solid var(--line);
   padding: 1.5rem 0;

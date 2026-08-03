@@ -1622,7 +1622,7 @@
       "routeRole": "required",
       "referenceReadMinutes": 97,
       "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
-      "studioId": null,
+      "studioId": "operating-systems",
       "sequencePosition": 23,
       "state": {
         "lifecycle": "learner-material-ready",

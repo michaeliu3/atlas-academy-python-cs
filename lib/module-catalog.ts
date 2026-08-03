@@ -1,6 +1,7 @@
 import manifestData from "@/content/modules/manifest.json";
 import { moduleMarkdownBySlug } from "@/content/modules/module-content";
 import {
+  extractSessionLaunches,
   extractTableOfContents,
   stripDocumentTitle,
 } from "./heading-ids.js";
@@ -10,7 +11,7 @@ import type {
 } from "./course-catalog";
 import type { ModuleStudioId } from "./module-studio-registry";
 
-export { extractTableOfContents, stripDocumentTitle };
+export { extractSessionLaunches, extractTableOfContents, stripDocumentTitle };
 
 export type CourseArc = {
   id: string;
@@ -49,6 +50,14 @@ export type TableOfContentsItem = {
   id: string;
   title: string;
   depth: 2 | 3;
+};
+
+export type ModuleSessionLaunch = {
+  number: number;
+  id: string;
+  title: string;
+  launch: string | null;
+  output: string | null;
 };
 
 type ModuleManifest = {

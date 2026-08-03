@@ -11767,7 +11767,7 @@
         ],
         "forwardModuleId": "m19",
         "masteryGateId": "systems",
-        "studioId": null
+        "studioId": "operating-systems"
       },
       "workbookPath": "content/modules/18_operating_systems_resource_mediation.md",
       "sourceMapPath": "content/source-maps/module18_operating_systems_source_map.md",

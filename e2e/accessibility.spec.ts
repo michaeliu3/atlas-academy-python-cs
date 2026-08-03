@@ -208,17 +208,45 @@ test("Module 1 renders an authored text alternative tied to its concept diagram"
   ).toBeVisible();
 });
 
-test("Module 18 retains its workbook and oral-defense route", async ({ page }) => {
+test("Module 1 exposes a six-session Study Partner-first reader path", async ({ page }) => {
+  await page.goto("/modules/01-values-state-execution");
+
+  const sessionPath = page.getByRole("list", {
+    name: "Six-session study path for Module 1",
+  });
+  await expect(sessionPath).toBeVisible();
+  await expect(sessionPath.getByRole("listitem")).toHaveCount(6);
+  await expect(sessionPath).toContainText("Carry forward: binding and alias map");
+
+  const firstSession = sessionPath.getByRole("link", {
+    name: /session 1.*mystery of the changing record/i,
+  });
+  const firstSessionHref = await firstSession.getAttribute("href");
+  expect(firstSessionHref).toMatch(/^#session-1-/);
+  await expect(
+    page.getByRole("link", { name: "Start Session 1 with the Study Partner →" }),
+  ).toHaveAttribute("href", firstSessionHref ?? "");
+  await expect(page.locator(".module-session-launches-intro")).toContainText(
+    "Teaching Assistant's oral defense for after Session 6",
+  );
+});
+
+test("Module 18 loads its registered operating-systems studio in the direct reader", async ({
+  page,
+}) => {
   await page.goto("/modules/18-operating-systems-resource-mediation");
 
+  const studio = page.locator(".os-studio");
+  await expect(studio).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Workbook-led interaction" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", {
-      name: "Oral defense: a conversation, not a verdict.",
+    studio.getByRole("heading", {
+      name: /resources are mediated.*evidence has jurisdiction/i,
     }),
   ).toBeVisible();
+  await expect(
+    studio.getByRole("tablist", { name: "Operating-systems learning views" }),
+  ).toBeVisible();
+  await expect(studio.getByRole("tab", { name: /boundary crossing/i })).toBeVisible();
 });
 
 test("Module 19 reader loads its registered concurrency observatory", async ({ page }) => {
