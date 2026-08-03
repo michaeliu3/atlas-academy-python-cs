@@ -614,20 +614,22 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 419,
-    ambiguous: 60,
+    "pointer-present": 439,
+    ambiguous: 40,
     missing: 1,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    13,
+    9,
   );
   assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 0);
   assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 1);
   assert.ok(
     audit.modules
-      .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10", "m23"].includes(moduleId))
+      .filter(({ moduleId }) => [
+        "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10", "m23", "m27", "m28", "m29", "m30",
+      ].includes(moduleId))
       .every(({ evidence }) => Object.values(evidence).every(({ status }) => status === "pointer-present")),
   );
   const expectedAmbiguousByModule = new Map([

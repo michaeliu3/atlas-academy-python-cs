@@ -839,6 +839,8 @@ counterexample → algorithm/library boundary → transfer question. It contains
 6. **Constraint & trajectory:** Lagrange candidates and one Euler step-size
    claim; distinguish a candidate/finite trace from a global solver guarantee.
 
+### Accessible visual text equivalent
+
 Every CSS visual has an adjacent text equivalent; matrices and fixtures are
 real tables; tabs and answer choices support keyboard navigation; feedback is
 not color-only; no timer, drag interaction, or score/pass-fail gate is used.

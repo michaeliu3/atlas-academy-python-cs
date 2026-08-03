@@ -47,7 +47,7 @@
       "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
       "claim": "M28 binds separate visible locations for a definition, normal-equation assumption, least-squares derivation, counterexample, and conditioning/stability numerical experiment.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "31-span-independence-basis-and-dimension"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "31-definitions-span-independence-basis-and-dimension"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "65-the-normal-equations-amplification-boundary"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "43-least-squares-derives-from-residual-orthogonality"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "b-counterexample"},
@@ -98,9 +98,9 @@
     {
       "id": "m28-accessible-visual",
       "criterionId": "accessible-visual-text-alternative",
-      "claim": "M28 binds its prerequisite map and interactive stability studio to concise text alternatives and a module-specific rendered accessibility regression surface.",
+      "claim": "M28 binds its interactive stability studio to concise text alternatives and a module-specific rendered accessibility regression surface.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "12-prerequisite-and-forward-map"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "accessible-visual-text-alternative"},
         {"kind": "file", "role": "source-code", "path": "app/LinearAlgebraStabilityStudio.tsx", "locator": null},
         {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
       ],
@@ -109,10 +109,10 @@
     {
       "id": "m28-confidence-diagnostic",
       "criterionId": "confidence-diagnostic-misconceptions",
-      "claim": "M28 exposes confidence-aware diagnostic questions and misconception-repair moments rather than a pass/fail score.",
+      "claim": "M28 exposes confidence-aware diagnostic questions and a misconception-repair route rather than a pass/fail score.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "11-confidence-aware-diagnostic"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "misconception-repair-moments"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "interpretation-and-misconception-repair-route"}
       ],
       "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
     },

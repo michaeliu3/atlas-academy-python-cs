@@ -219,13 +219,13 @@
     {
       "id": "m29-accessible-visual",
       "criterionId": "accessible-visual-text-alternative",
-      "claim": "M29's prerequisite map has a module-specific title and concise prose alternative whose render path is exercised by a discovered course test.",
+      "claim": "M29's continuous-change studio has a concise visual text equivalent whose render path is exercised by a discovered course test.",
       "inputs": [
         {
           "kind": "markdown-heading",
           "role": "course-content",
           "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
-          "locator": "12-prerequisite-and-forward-map"
+          "locator": "accessible-visual-text-equivalent"
         },
         {
           "kind": "file",

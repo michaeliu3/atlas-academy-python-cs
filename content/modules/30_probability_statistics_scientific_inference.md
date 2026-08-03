@@ -196,7 +196,7 @@ population/process → sample space → events and random variables → joint la
 → marginal or conditional question → Bayes update → boundary on interpretation
 ~~~
 
-### 3.1 Model before arithmetic
+### 3.1 First principle: model before arithmetic
 
 A **sample space** `Omega` lists possible outcomes of a declared experiment.
 An **event** is a set of outcomes. A probability model assigns a number to
@@ -209,7 +209,7 @@ success” is a model statement. “Half the observed records succeeded” is a
 finite observation. “The prompt causes success” is a much stronger causal
 statement requiring design and execution evidence.
 
-### 3.2 Joint, marginal, and conditional are different questions
+### 3.2 Definition: joint, marginal, and conditional are different questions
 
 Suppose `H` means a synthetic prompt is helpful under its declared model and
 `+` means an observed synthetic signal is positive. A joint table is one
@@ -245,7 +245,7 @@ Before revealing the calculation, predict: if the false-positive rate is held
 fixed and the base rate becomes smaller, does `P(H | +)` rise, fall, or remain
 unchanged? Then state which term in Bayes’ rule forced your answer.
 
-### 3.3 Independence, mutual exclusion, and conditional independence
+### 3.3 Independence, mutual exclusion, and conditional-independence assumptions
 
 Events are **mutually exclusive** when they cannot co-occur: `P(A and B)=0`.
 They are **independent** when learning one leaves the probability of the other
@@ -337,7 +337,7 @@ conditions (for example, some jointly Gaussian settings). Correlation is a
 scale-normalized covariance when the variances are positive; it is not a
 causal effect size.
 
-### 4.3 Conditional expectation and the total-expectation repair
+### 4.3 Derivation: conditional expectation and the total-expectation repair
 
 If a prompt outcome depends on a recorded stratum `S`, then
 
@@ -507,7 +507,7 @@ It does not check whether telemetry rows are IID. Reused learners, clustered
 devices, prompt interference, retries, and time drift can make `n` much less
 informative than the row count suggests.
 
-### 5.2 Monte Carlo is an estimator, not a spell
+### 5.2 Monte Carlo numerical experiment: an estimator, not a spell
 
 A Monte Carlo estimate needs:
 
@@ -768,7 +768,7 @@ Read an API result as a procedure contract: the method, sample/resample count,
 RNG, statistic, alternative, axes, and finite-precision behavior must all be
 recorded. An API return does not establish the data/design assumptions.
 
-### Code-reading lab — a small but invalid decision path
+### Code-reading debug lab — a small but invalid decision-path repair
 
 ~~~python
 if p_value < 0.05:
@@ -846,7 +846,7 @@ selection bias, causal confounding, harmful labels, missingness, or privacy
 harm. State the perturbation class and target before calling an estimator
 robust.
 
-### 8.4 High-dimensional estimation exposes an identification boundary
+### 8.4 Counterexample: high-dimensional estimation exposes an identification boundary
 
 When feature count `p` can meet or exceed observation count `n`, ordinary
 least-squares coefficients may be nonunique without extra structure. A
@@ -859,7 +859,7 @@ Connect this to M28: a design matrix has rank at most `min(n, p)`. Connect it
 to M31: regularization is an objective/constraint choice. Connect it to M35:
 tuning and evaluation must be separated to avoid leakage and selection bias.
 
-### Code-reading lab — design audit across systems boundaries
+### Code-reading lab — transfer and design audit across systems boundaries
 
 ~~~python
 events = load_events(after="2026-07-01")
@@ -897,6 +897,8 @@ The interactive studio uses only fixed synthetic fixtures. It stores only
 local choice/confidence/reveal state; it has no raw learner text, no voice
 capture, no remote model call, no personal data collection, and no timed
 interaction.
+
+### Accessible visual text alternative
 
 | Studio view | Predict before reveal | What the visual makes visible | Text alternative / boundary |
 | --- | --- | --- | --- |

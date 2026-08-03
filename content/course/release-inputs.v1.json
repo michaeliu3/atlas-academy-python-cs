@@ -482,19 +482,19 @@
     },
     {
       "path": "content/course/contracts/evidence/m27.v1.json",
-      "sha256": "6588451a22bf791745de0fccfdaa3209c4c16d94c92c0336d3f8e41687ea9f07"
+      "sha256": "459dfaa858b617235a64485a2a3815f5ce9872f8e1a25fc58777d89fca1bea03"
     },
     {
       "path": "content/course/contracts/evidence/m28.v1.json",
-      "sha256": "ded70b04054ab043a0a3ea8f812a4da7f737bf98776d9fd789ec8b672a639c9e"
+      "sha256": "23ef6f88b048ecb3d86d2911135f3fcf5020e9ca887ed7fc1cce88e96c2089ca"
     },
     {
       "path": "content/course/contracts/evidence/m29.v1.json",
-      "sha256": "0ecf7323bc2acc8c25b4d40d12c3e943194e1411dfa2a63a299ea0ba11590b69"
+      "sha256": "5aec6204e178b98c0fc1e4abc811e5f3120d379ada18bfeb8e699251a9e3ab9e"
     },
     {
       "path": "content/course/contracts/evidence/m30.v1.json",
-      "sha256": "22dc6179a55aece6bac79c7a06dcba5c6450794ad214c3fe8cf503eabab1ae43"
+      "sha256": "f3f936dd1ede4ea58d9407a2c132bbc25b96c27c461462c59c766e3958464cd4"
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "003a68354d0fe5ee83ec64f5314cb85b63b6fa81ab82f815a4e2ab6d71295a96"
+      "sha256": "3f420ef4899fac6c92a83ccb03a8d1af7e4eec93a25994268e1e8d2c65762da7"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "f842beebc1dbe7f37afa6e772dfc500971930ac868d9bd04813810def3fcb65c"
+      "sha256": "052865aec76bf95736c810d23a7b2eba25faa056464c8873a457a7a1bd9f485b"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "6a3f480d59c6b2337a96062690f29cbc552cc811bf8031851512679a73f5e166"
+      "sha256": "38d843e697568e393c66520018762ce08b3844b163f906f529d29bad5402f00e"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -654,19 +654,19 @@
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
-      "sha256": "c3dbac8168f5cdd2deff87a2a0bdd37c6662f3151ee7a80465e4df2fc30af02e"
+      "sha256": "9fa2e4fc5c617bd7c9c6228b92051dc6ddaab473c2985bf83c44496ed45a848e"
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "a22eeaec5018e807d8a1f5e3226d33118c0ae18f03caf899ee1bfff611b93739"
+      "sha256": "69cb932d26e2bcfe5ae41d96e7ea26ef3f82515a80435f74280c0c0229332b08"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
-      "sha256": "c4fe6e6a37c60301094c2d4d150f12c48f764c76b4a3d491f0977ac6aa3fa7d4"
+      "sha256": "0a4e7257f0d6eb775054890182c3bf7d19e2783c84459058b69f812e9588f37f"
     },
     {
       "path": "content/modules/30_probability_statistics_scientific_inference.md",
-      "sha256": "d9775a060d09c8bef3e2c402fb4b8028ab0f126899978366de49fe2b6e8e9fc3"
+      "sha256": "c135b3f62f6bffaec6c07630c4b7c4bd2e8ba259c443e28a2c6952dfe9a623f6"
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",

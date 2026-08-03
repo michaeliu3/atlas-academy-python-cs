@@ -201,7 +201,7 @@ looks line-like but is not a subspace: it excludes (0), and adding two
 points of (L) produces a point with coordinate sum (2). “Flat” is not the
 same as “subspace”; an affine translation matters.
 
-### 3.1 Span, independence, basis, and dimension
+### 3.1 Definitions: span, independence, basis, and dimension
 
 For vectors (v_1,\ldots,v_k\in V),
 
@@ -868,6 +868,8 @@ derivation; each view supplies a text alternative and a prediction gate.
 | 5. Stability | Which solve is sensitive, and why? | Condition versus algorithmic stability; dtype/tolerance shown. |
 | 6. PCA | Which retained direction optimizes which loss? | Centered variance and rank-​(k) reconstruction; no semantic-importance claim. |
 
+### Accessible visual text alternative
+
 **Accessible text path:** every diagram has an explicit table/description;
 keyboard-accessible tabs, radio-style predictions, visible focus, no
 motion-dependent conclusion, and a written explanation packet appear after a
@@ -1178,7 +1180,7 @@ different global-centering model.
 
 </details>
 
-### Interpret the pattern, not the score
+### Interpretation and misconception repair route
 
 | Pattern | Likely fragile model | Smallest bridge |
 | --- | --- | --- |

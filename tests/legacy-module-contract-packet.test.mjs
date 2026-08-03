@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "f842beebc1dbe7f37afa6e772dfc500971930ac868d9bd04813810def3fcb65c");
+  assert.equal(digest, "052865aec76bf95736c810d23a7b2eba25faa056464c8873a457a7a1bd9f485b");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -49,6 +49,10 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   assert.equal(packet.canonicalExpectation.forwardModuleId, "m30");
   assert.equal(packet.packetState, "structural-candidate");
   assert.equal(packet.publicationEffect, "none");
+  const statusByCriterion = new Map(
+    packet.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
+  );
+  assert.ok([...statusByCriterion.values()].every((status) => status === "pointer-present"));
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path.replaceAll("\\", "/").endsWith(legacyModuleContractPacketRelativePath),
@@ -66,6 +70,10 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   assert.deepEqual(sessionOutput?.roles, ["session-output"]);
   assert.equal(sessionOutput?.sessionNumber, 1);
   assert.equal(sessionOutput?.target.headingAnchor, "session-1-code-reading-task");
+  assert.equal(
+    packet.pointers.find(({ id }) => id === "m29-text-alternative-candidate")?.target.headingAnchor,
+    "accessible-visual-text-equivalent",
+  );
 });
 
 test("the M20 structural packet binds the networking spine without promoting its ambiguous evidence", async () => {
@@ -401,7 +409,7 @@ test("the M19 structural packet records the concurrency spine with its current s
   );
 });
 
-test("the M27 structural packet binds the discrete-mathematics spine without laundering ambiguous evidence", async () => {
+test("the M27 structural packet binds the discrete-mathematics spine with its current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -416,16 +424,11 @@ test("the M27 structural packet binds the discrete-mathematics spine without lau
   const statusByCriterion = new Map(
     packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
   );
+  assert.ok([...statusByCriterion.values()].every((status) => status === "pointer-present"));
   assert.equal(
-    statusByCriterion.get(
-      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-    ),
-    "ambiguous",
+    packet?.pointers.find(({ id }) => id === "m27-numerical-experiment")?.target.headingAnchor,
+    "numerical-experiment-formula-versus-enumeration",
   );
-  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
-  assert.equal(statusByCriterion.get("source-ledger"), "ambiguous");
-  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path
@@ -435,7 +438,7 @@ test("the M27 structural packet binds the discrete-mathematics spine without lau
   );
 });
 
-test("the M28 structural packet binds the linear-algebra spine without laundering ambiguous evidence", async () => {
+test("the M28 structural packet binds the linear-algebra spine with its current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -450,16 +453,11 @@ test("the M28 structural packet binds the linear-algebra spine without launderin
   const statusByCriterion = new Map(
     packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
   );
+  assert.ok([...statusByCriterion.values()].every((status) => status === "pointer-present"));
   assert.equal(
-    statusByCriterion.get(
-      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-    ),
-    "ambiguous",
+    packet?.pointers.find(({ id }) => id === "m28-misconception")?.target.headingAnchor,
+    "interpretation-and-misconception-repair-route",
   );
-  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
-  assert.equal(statusByCriterion.get("source-ledger"), "ambiguous");
-  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path
@@ -469,7 +467,7 @@ test("the M28 structural packet binds the linear-algebra spine without launderin
   );
 });
 
-test("the M30 structural packet binds its mathematics spine without laundering ambiguous evidence", async () => {
+test("the M30 structural packet binds its mathematics spine with its current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -485,14 +483,7 @@ test("the M30 structural packet binds its mathematics spine without laundering a
   const statusByCriterion = new Map(
     packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
   );
-  assert.equal(statusByCriterion.get("first-principles"), "ambiguous");
-  assert.equal(
-    statusByCriterion.get(
-      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-    ),
-    "ambiguous",
-  );
-  assert.equal(statusByCriterion.get("source-ledger"), "ambiguous");
+  assert.ok([...statusByCriterion.values()].every((status) => status === "pointer-present"));
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path

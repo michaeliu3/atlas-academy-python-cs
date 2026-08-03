@@ -1027,6 +1027,8 @@ this module. It is a local teaching surface, not a grader or proof assistant.
 It uses synthetic finite cases, preserves no voice or transcript, and gives a
 text-equivalent explanation for every visual relationship.
 
+### Accessible text equivalent
+
 Use it in this order:
 
 1. Choose a claim in the **quantifier and countermodel** pane.
@@ -1352,7 +1354,7 @@ D. It establishes a probability distribution.
 
 </details>
 
-### Interpret the pattern, not the score
+### Interpretation and misconception repair route
 
 | Pattern | Next action |
 | --- | --- |

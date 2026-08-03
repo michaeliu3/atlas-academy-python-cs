@@ -98,9 +98,9 @@
     {
       "id": "m27-accessible-visual",
       "criterionId": "accessible-visual-text-alternative",
-      "claim": "M27 binds its prerequisite map and interactive proof workbench to concise text alternatives and a module-specific rendered accessibility regression surface.",
+      "claim": "M27 binds its interactive proof workbench to concise text alternatives and a module-specific rendered accessibility regression surface.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "12-prerequisite-and-forward-map"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "accessible-text-equivalent"},
         {"kind": "file", "role": "source-code", "path": "app/DiscreteMathProofStudio.tsx", "locator": null},
         {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
       ],
@@ -112,7 +112,7 @@
       "claim": "M27 exposes confidence-aware diagnostic questions and a compact misconception repair map rather than a pass/fail score.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "11-confidence-aware-diagnostic"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "interpret-the-pattern-not-the-score"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "locator": "interpretation-and-misconception-repair-route"}
       ],
       "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
     },

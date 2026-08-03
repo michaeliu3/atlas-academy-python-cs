@@ -38,7 +38,7 @@
       "criterionId": "first-principles",
       "claim": "M30 begins inference from an explicit probability model before arithmetic, simulation, or API output is interpreted.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "31-model-before-arithmetic"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "31-first-principle-model-before-arithmetic"}
       ],
       "limitations": ["A named first-principles section does not prove statistical adequacy or learner comprehension."]
     },
@@ -47,11 +47,11 @@
       "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
       "claim": "M30 binds separate visible locations for a definition, independence assumption, conditional-expectation derivation, high-dimensional identification counterexample, and Monte-Carlo numerical experiment.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "32-joint-marginal-and-conditional-are-different-questions"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "33-independence-mutual-exclusion-and-conditional-independence"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "43-conditional-expectation-and-the-total-expectation-repair"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "84-high-dimensional-estimation-exposes-an-identification-boundary"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "52-monte-carlo-is-an-estimator-not-a-spell"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "32-definition-joint-marginal-and-conditional-are-different-questions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "33-independence-mutual-exclusion-and-conditional-independence-assumptions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "43-derivation-conditional-expectation-and-the-total-expectation-repair"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "84-counterexample-high-dimensional-estimation-exposes-an-identification-boundary"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "52-monte-carlo-numerical-experiment-an-estimator-not-a-spell"}
       ],
       "limitations": ["These structural anchors do not substitute for a qualified review of probability assumptions, derivations, counterexamples, numerical procedures, or source claims."]
     },
@@ -61,8 +61,8 @@
       "claim": "M30 includes distinct code-reading, debugging, and design tasks that require tracing a conditional or decision assumption before making an inference claim.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "34-code-reading-lab--conditional-direction-and-denominator"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--a-small-but-invalid-decision-path"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--design-audit-across-systems-boundaries"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-debug-lab--a-small-but-invalid-decision-path-repair"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--transfer-and-design-audit-across-systems-boundaries"}
       ],
       "limitations": ["These prompts do not prove that a learner can independently read, debug, or design an inference system."]
     },
@@ -80,7 +80,7 @@
       "criterionId": "transfer-task",
       "claim": "M30 includes a transfer task that asks the learner to audit an inference design across a new systems boundary.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--design-audit-across-systems-boundaries"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--transfer-and-design-audit-across-systems-boundaries"}
       ],
       "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
     },
@@ -98,9 +98,9 @@
     {
       "id": "m30-accessible-visual",
       "criterionId": "accessible-visual-text-alternative",
-      "claim": "M30 binds its prerequisite and evidence-lab maps plus interactive probability studio to concise text alternatives and a module-specific rendered accessibility regression surface.",
+      "claim": "M30 binds its interactive probability studio to concise text alternatives and a module-specific rendered accessibility regression surface.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "12-prerequisite-and-forward-map"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "accessible-visual-text-alternative"},
         {"kind": "file", "role": "source-code", "path": "app/ProbabilityInferenceStudio.tsx", "locator": null},
         {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
       ],
@@ -145,7 +145,7 @@
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "13-conversational-oral-defense--m30"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "hint-ladder--preserve-agency"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "misconception-repair-moments"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--design-audit-across-systems-boundaries"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--transfer-and-design-audit-across-systems-boundaries"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "constructive-evidence-lenses--visible-adaptive-and-non-scored"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "end-of-defense-evidence-summary"}
       ],
