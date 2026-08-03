@@ -2524,67 +2524,98 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   );
 });
 
-test("renders affected legacy explanations behind closed native prediction gates", async () => {
+test("renders legacy MCQ rationales behind local prediction gates while previews keep their static disclosure", async () => {
   const routes = [
     {
       pathname: "/modules/20-networks-application-protocols",
-      expectedAnswerGates: 8,
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 3,
     },
     {
       pathname: "/modules/22-security-privacy-trust-boundaries",
-      expectedAnswerGates: 10,
+      expectedInteractiveAnswerGates: 10,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 0,
     },
     {
       pathname: "/modules/23-programming-languages-interpreters",
-      expectedAnswerGates: 8,
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 0,
     },
     {
       pathname: "/modules/24-cpython-performance-memory",
-      expectedAnswerGates: 6,
+      expectedInteractiveAnswerGates: 6,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 4,
     },
     {
       pathname: "/modules/25-evidence-grounded-intelligent-systems",
-      expectedAnswerGates: 8,
+      expectedInteractiveAnswerGates: 0,
+      expectedNativeAnswerGates: 8,
       expectedPredictionGates: 1,
     },
     {
       pathname: "/modules/27-discrete-mathematics-proof-counting-structures",
-      expectedAnswerGates: 11,
+      expectedInteractiveAnswerGates: 11,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 1,
     },
     {
       pathname: "/modules/28-linear-algebra-numerical-stability-representation",
-      expectedAnswerGates: 12,
+      expectedInteractiveAnswerGates: 12,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 1,
     },
   ];
 
-  for (const { pathname, expectedAnswerGates, expectedPredictionGates } of routes) {
+  for (const {
+    pathname,
+    expectedInteractiveAnswerGates,
+    expectedNativeAnswerGates,
+    expectedPredictionGates,
+  } of routes) {
     const response = await render(pathname);
     assert.equal(response.status, 200, `${pathname} must render.`);
 
     const document = new JSDOM(await response.text()).window.document;
     const gates = [...document.querySelectorAll("details.lesson-details")];
-    const answerGates = gates.filter(
+    const nativeAnswerGates = gates.filter(
       ({ firstElementChild }) =>
         firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
     );
+    const interactiveAnswerGates = [
+      ...document.querySelectorAll(".prediction-reveal-gate"),
+    ];
     const predictionGates = gates.filter(
       ({ firstElementChild }) =>
         firstElementChild?.textContent === "Reveal after writing your prediction.",
     );
 
-    assert.equal(answerGates.length, expectedAnswerGates, `${pathname} answer-gate count changed.`);
+    assert.equal(
+      interactiveAnswerGates.length,
+      expectedInteractiveAnswerGates,
+      `${pathname} interactive answer-gate count changed.`,
+    );
+    assert.equal(
+      nativeAnswerGates.length,
+      expectedNativeAnswerGates,
+      `${pathname} native answer-gate count changed.`,
+    );
     assert.equal(
       predictionGates.length,
       expectedPredictionGates,
       `${pathname} prediction-gate count changed.`,
     );
-    for (const gate of [...answerGates, ...predictionGates]) {
+    for (const gate of interactiveAnswerGates) {
+      assert.equal(
+        gate.querySelector("details"),
+        null,
+        `${pathname} exposes a rationale before a learner prediction.`,
+      );
+    }
+    for (const gate of [...nativeAnswerGates, ...predictionGates]) {
       assert.equal(gate.hasAttribute("open"), false, `${pathname} exposes a reveal by default.`);
     }
   }

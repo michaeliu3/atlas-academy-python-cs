@@ -257,7 +257,11 @@ export default function AtlasCoreRoutePage() {
                         </div>
                         {entry.focusedStudyMinutes ? (
                           <div>
-                            <dt>Evidence</dt>
+                            <dt>
+                              {entry.state.availability === "authoring-only"
+                                ? "Private study draft"
+                                : "Evidence"}
+                            </dt>
                             <dd>
                               {formatFocusedStudyHours(entry.focusedStudyMinutes.minimumEvidence)} minimum · {" "}
                               {formatFocusedStudyHours(entry.focusedStudyMinutes.deepDossier)} deep dossier

@@ -119,6 +119,8 @@ If 1 is fragile, bridge through M28. If 2 is fragile, bridge through M29. If
 
 ## Session 1 — Formulate before you optimize
 
+**Launch:** With the Study Partner, name the decision owner, objective, feasible set, units, and one value the model leaves outside before opening the trace.
+
 ### Core question
 
 **What exactly are we allowed to optimize?**
@@ -218,6 +220,8 @@ boundary before accepting any solver trace.
 ---
 
 ## Session 2 — Local equations are not global decisions
+
+**Launch:** Predict whether the local calculation supports a global claim; then name the missing domain, curvature, or regularity premise.
 
 ### Core question
 
@@ -421,6 +425,8 @@ global correctness.
 
 ## Session 3 — Constraints become certificates only under conditions
 
+**Launch:** Sketch the primal claim, constraint, and dual-feasibility route; say whether strict feasibility or another qualification is actually available.
+
 ### Core question
 
 **What would make a constrained claim inspectable rather than ceremonial?**
@@ -561,6 +567,8 @@ need before trusting an agent’s “KKT solved it” explanation.
 ---
 
 ## Session 4 — Read stopping evidence, not solver mythology
+
+**Launch:** Before trusting a solver status, predict which residual and independent check would still be needed for the stated claim.
 
 ### Core question
 
@@ -773,6 +781,8 @@ reviewer to state the evidence it would need before making a convergence claim.
 
 ## Session 5 — Noise is evidence, not a nuisance to hide
 
+**Launch:** Contrast two starts or samples and state which oracle, noise, or stationarity conclusion remains justified—and which does not.
+
 ### Core question
 
 **What changes when an update uses an estimate rather than a full gradient?**
@@ -933,6 +943,8 @@ one run into a generalization conclusion.
 ---
 
 ## Session 6 — Information is a declared trade-off
+
+**Launch:** Write the distribution, logarithm base, direction, and support before computing an information quantity or interpreting an ELBO.
 
 ### Core question
 

@@ -51,7 +51,7 @@ const expectedInventoryDirectives = new Set([
   "study",
 ]);
 const expectedAtomicInventoryItemCount = 362;
-const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30]);
+const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);

@@ -13,10 +13,13 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { atlasMarkdownSanitizationSchema } from "@/lib/rich-content-sanitization.mjs";
+import { isMultipleChoiceAnswerRationaleSummary } from "@/lib/multiple-choice-prediction-gate.js";
 import { LessonTable } from "./LessonTable";
 import { MermaidDiagram } from "./MermaidDiagram";
+import { PredictionRevealGate } from "./PredictionRevealGate";
 
 type ModuleMarkdownProps = {
+  enableMultipleChoicePredictionGates?: boolean;
   markdown: string;
 };
 
@@ -118,7 +121,25 @@ function labelTaskListCheckboxes(children: ReactNode): ReactNode {
   });
 }
 
-const markdownComponents: Components = {
+function detailsSummaryLabel(children: ReactNode): string | null {
+  // react-markdown may supply the authored <summary> as its custom renderer
+  // rather than the literal HTML tag. It remains the first element child of a
+  // well-formed disclosure, so inspect that stable structural position instead
+  // of tying the gate to an implementation-specific element type.
+  const summary = Children.toArray(children).find((child) => isValidElement(child));
+
+  if (!summary || !isValidElement<{ children?: ReactNode }>(summary)) {
+    return null;
+  }
+
+  const label = textFromNode(summary.props.children).replace(/\s+/gu, " ").trim();
+  return label || null;
+}
+
+function createMarkdownComponents(
+  enableMultipleChoicePredictionGates: boolean,
+): Components {
+  return {
   a({
     "aria-label": ariaLabel,
     children,
@@ -151,13 +172,26 @@ const markdownComponents: Components = {
   code({ children, className }) {
     return <code className={className}>{children}</code>;
   },
-  details({ children, open }) {
-    return (
-      <details className="lesson-details" open={open}>
-        {children}
-      </details>
-    );
-  },
+    details({ children, open }) {
+      const summaryLabel = detailsSummaryLabel(children);
+      if (
+        enableMultipleChoicePredictionGates &&
+        summaryLabel &&
+        isMultipleChoiceAnswerRationaleSummary(summaryLabel)
+      ) {
+        return (
+          <PredictionRevealGate summaryLabel={summaryLabel}>
+            {children}
+          </PredictionRevealGate>
+        );
+      }
+
+      return (
+        <details className="lesson-details" open={open}>
+          {children}
+        </details>
+      );
+    },
   h2({ children, id }) {
     return <h2 id={id}>{children}</h2>;
   },
@@ -219,14 +253,18 @@ const markdownComponents: Components = {
   table({ children }) {
     return <LessonTable>{children}</LessonTable>;
   },
-};
+  };
+}
 
-export function ModuleMarkdown({ markdown }: ModuleMarkdownProps) {
+export function ModuleMarkdown({
+  enableMultipleChoicePredictionGates = false,
+  markdown,
+}: ModuleMarkdownProps) {
   const learnerMarkdown = normalizeMathDelimiters(markdown);
 
   return (
     <ReactMarkdown
-      components={markdownComponents}
+      components={createMarkdownComponents(enableMultipleChoicePredictionGates)}
       rehypePlugins={[
         rehypeRaw,
         [rehypeSanitize, atlasMarkdownSanitizationSchema],

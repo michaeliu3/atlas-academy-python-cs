@@ -100,6 +100,12 @@ test("the dense systems-and-mathematics route exposes conservative evidence-time
     [28, { minimumEvidence: [840, 1080], deepDossier: [1380, 1920] }],
     [29, { minimumEvidence: [480, 600], deepDossier: [660, 840] }],
     [30, { minimumEvidence: [480, 600], deepDossier: [660, 840] }],
+    [31, { minimumEvidence: [360, 480], deepDossier: [600, 840] }],
+    [32, { minimumEvidence: [420, 540], deepDossier: [720, 960] }],
+    [33, { minimumEvidence: [360, 480], deepDossier: [600, 840] }],
+    [34, { minimumEvidence: [420, 540], deepDossier: [720, 960] }],
+    [35, { minimumEvidence: [420, 540], deepDossier: [720, 960] }],
+    [36, { minimumEvidence: [480, 600], deepDossier: [840, 1080] }],
   ]);
 
   for (const [number, band] of expectedBands) {
