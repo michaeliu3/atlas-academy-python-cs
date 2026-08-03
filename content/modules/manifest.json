@@ -135,9 +135,9 @@
       "title": "Abstraction, Interfaces, and Abstract Data Types",
       "summary": "Central question: How can a client depend on what a component means without depending on how that component stores its data? Atlas transformation: a list owned by application code becomes a replaceable event store with one behavioral con…",
       "arcId": "arc-i",
-      "wordCount": 15349,
+      "wordCount": 15353,
       "estimatedMinutes": 64,
-      "sourceHash": "098f68f4f73ebdc6267522a1b0262bba7de6d7473f0c335bfaf36c78c61b3bfb",
+      "sourceHash": "994e91a894c121833469cdb97b6d1a70ed8b7b6fa6b5415bb89eee723d7e8377",
       "id": "m03",
       "state": {
         "lifecycle": "learner-material-ready",

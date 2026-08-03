@@ -1871,6 +1871,8 @@ State the old abstraction, the new observation, and the contract clause that mus
 
 ## 15. Understanding diagnostic — eight multiple-choice investigations
 
+### Confidence before explanation
+
 This is a fast diagnostic, not an exam identity. For each question, record:
 
 - one option;

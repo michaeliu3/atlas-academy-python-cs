@@ -614,17 +614,22 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 283,
-    ambiguous: 171,
-    missing: 26,
+    "pointer-present": 329,
+    ambiguous: 134,
+    missing: 17,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    30,
+    25,
   );
-  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 19);
-  assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 6);
+  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 14);
+  assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 3);
+  assert.ok(
+    audit.modules
+      .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05"].includes(moduleId))
+      .every(({ evidence }) => Object.values(evidence).every(({ status }) => status === "pointer-present")),
+  );
 });
 
 test("the legacy module-contract report is a deterministic projection of the validated audit", async () => {

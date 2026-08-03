@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "445f36f59c578ec87825d5d126b4b3e06e6e8cc7c820b6e7524a150d46f3c758"
+      "sha256": "aa56c88d69283a6e4c827a4fd8efe4b610001010ba0c4e7a2e8b7f1ea6ab3715"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "49f37d2ac264f62d097f2fcb90b16ca1a9cd6f020671d6c4e00666618b2e6e4e"
+      "sha256": "fc8300c7fe7906758424901e43e04cb04730ee237b8b75be866489064f75f5b1"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "802e8161b625aa43e628d79a022b2565a761e84b4b45fb87462c3d332c1c8117"
+      "sha256": "ec4d6ea2df91a4c37787930dc7814cb687a39083766725c05fb4cc776fc71208"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -558,7 +558,7 @@
     },
     {
       "path": "content/modules/03_abstraction_interfaces_adts.md",
-      "sha256": "098f68f4f73ebdc6267522a1b0262bba7de6d7473f0c335bfaf36c78c61b3bfb"
+      "sha256": "994e91a894c121833469cdb97b6d1a70ed8b7b6fa6b5415bb89eee723d7e8377"
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
