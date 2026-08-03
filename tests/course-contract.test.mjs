@@ -345,7 +345,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   });
   assert.deepEqual(report.legacyPackets?.summary, {
     structuralCandidates: 26,
-    resolvedPointers: 1139,
+    resolvedPointers: 1142,
     humanApprovals: 0,
     publicationChanges: 0,
   });
