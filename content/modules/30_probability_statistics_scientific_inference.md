@@ -199,9 +199,10 @@ population/process → sample space → events and random variables → joint la
 ### 3.1 First principle: model before arithmetic
 
 A **sample space** `Omega` lists possible outcomes of a declared experiment.
-An **event** is a set of outcomes. A probability model assigns a number to
-each event, preserving nonnegativity, total mass one, and additivity over
-disjoint events. A **random variable** maps an outcome to a quantity such as a
+An **event** is a set of outcomes in the model's declared event collection. A
+probability model assigns a number to
+each event, preserving nonnegativity, total mass one, and countable additivity
+over pairwise disjoint events. A **random variable** maps an outcome to a
 binary recall indicator, a duration, a count, or a vector of measurements.
 
 The model is not the world. “Each simulated prompt has probability 1/2 of a

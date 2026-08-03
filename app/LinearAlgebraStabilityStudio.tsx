@@ -830,16 +830,16 @@ export function LinearAlgebraStabilityStudio() {
                 <div className={styles.pcaBoard}>
                   <article>
                     <strong>variance route</strong>
-                    <span>center X</span>
-                    <b>maximize vᵀXᵀXv / n</b>
+                    <span>center: X_c = X − 1μᵀ</span>
+                    <b>maximize vᵀX_cᵀX_cv / n</b>
                     <small>subject to ‖v‖ = 1</small>
                   </article>
                   <i aria-hidden="true">=</i>
                   <article>
                     <strong>reconstruction route</strong>
-                    <span>X = UΣVᵀ</span>
-                    <b>minimize ‖X − X₁‖F</b>
-                    <small>rank(X₁) ≤ 1</small>
+                    <span>X_c = UΣVᵀ</span>
+                    <b>minimize ‖X_c − (X_c)₁‖F</b>
+                    <small>rank((X_c)₁) ≤ 1</small>
                   </article>
                 </div>
                 <div className={styles.pcaBoundaryCards}>
@@ -849,8 +849,9 @@ export function LinearAlgebraStabilityStudio() {
                   <span>do not call variance “importance”</span>
                 </div>
                 <p className={styles.boundary}>
-                  Text equivalent: the variance and reconstruction routes use
-                  the declared centered/scaled matrix and loss. Derive their
+                  Text equivalent: after centering, call the matrix X_c. Both
+                  routes use X_c: one maximizes its projected variance and the
+                  other minimizes its rank-1 reconstruction loss. Derive their
                   shared direction before interpreting a component as important.
                 </p>
               </section>

@@ -53,9 +53,9 @@ particular NumPy/LAPACK build are four different kinds of evidence.
 | 1 — spaces, maps, four subspaces | MIT 18.06SC + Axler | Translate an API/data transformation into a linear-map claim, then separate the chosen basis from the map. |
 | 2 — inner products, projection, least squares | MIT 18.06SC + NumPy `lstsq` | Derive a projection condition, read a least-squares implementation, and explain why normal equations and a numerical solver are different claims. |
 | 3 — eigensystems, symmetric/PSD, spectral theorem | Axler + MIT 18.06SC | Repair a false diagonalization argument by identifying its missing hypothesis. |
-| 4 — SVD and rank-\(k\) approximation | MIT 18.06SC + MIT 18.065 + NumPy `svd` | Predict what truncation removes, check a finite matrix, then state what the experiment cannot establish. |
-| 5 — PCA and representations | MIT 18.065 + Stanford CS229 (link-only) | Derive PCA twice—variance and reconstruction—then test how centering/scaling alters a small dataset. |
-| 6 — conditioning and numerical defense | Trefethen--Bau + FNC (link-only) + NumPy `cond`/`finfo` | Contrast a well-conditioned mathematical problem with an unstable algorithm and explain the evidence needed to diagnose either. |
+| 4 — SVD, low-rank, conditioning, stability | MIT 18.06SC + MIT 18.065 + Trefethen--Bau + FNC (link-only) + NumPy `svd`/`cond`/`finfo` | Predict what truncation removes, compare a near-dependent fixture and solver story, then state what the experiment cannot establish. |
+| 5 — tensors, matrix calculus, code contract | Axler + NumPy `einsum`/`finfo` | Derive one Frobenius-gradient line and narrate axes, shapes, dtypes, and the objective in unfamiliar code. |
+| 6 — PCA dual derivation and dossier | MIT 18.065 + Stanford CS229 (link-only) + NumPy `svd` | Derive PCA twice—variance and reconstruction—then test how centering/scaling alters a small dataset. |
 
 ## Authoring and release checks
 

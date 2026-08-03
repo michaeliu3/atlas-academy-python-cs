@@ -2720,12 +2720,13 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(html, /href="\/downloads\/test_module28_reference\.py"/);
   assert.doesNotMatch(html, /katex-error/);
 
-  const [studio, style, reference, referenceTests, companionGuides] = await Promise.all([
+  const [studio, style, reference, referenceTests, companionGuides, sourceAudit] = await Promise.all([
     readFile(new URL("../app/LinearAlgebraStabilityStudio.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/LinearAlgebraStabilityStudio.module.css", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/module28_reference.py", import.meta.url), "utf8"),
     readFile(new URL("../public/downloads/test_module28_reference.py", import.meta.url), "utf8"),
     readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module28_linear_algebra_source_audit_addendum.md", import.meta.url), "utf8"),
   ]);
   assert.match(studio, /role="tablist"/);
   assert.match(studio, /role="tab"/);
@@ -2746,6 +2747,11 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(studio, /A: R³ → R²/);
   assert.match(studio, /Aε = \[\[1, 1\], \[1, 1001\/1000\]\]/);
   assert.match(studio, /±\(1, 1\)\/√2/);
+  assert.ok(studio.includes("center: X_c = X − 1μᵀ"));
+  assert.ok(studio.includes("maximize vᵀX_cᵀX_cv / n"));
+  assert.ok(studio.includes("X_c = UΣVᵀ"));
+  assert.ok(studio.includes("minimize ‖X_c − (X_c)₁‖F"));
+  assert.doesNotMatch(studio, /<span>X = UΣVᵀ<\/span>/);
   assert.match(studio, /aria-live="polite"/);
   assert.match(studio, /getBrowserProgressStorage/);
   assert.match(studio, /restoreModule28Progress/);
@@ -2780,6 +2786,10 @@ test("renders the linear algebra stability workbook and its bounded teaching mod
   assert.match(referenceTests, /class PCAAndNumericalBoundaryTests/);
   assert.match(companionGuides, /"moduleId": "m28"/);
   assert.match(companionGuides, /shape\/dtype\/solver path/);
+  assert.match(sourceAudit, /\| 4 — SVD, low-rank, conditioning, stability \|/);
+  assert.match(sourceAudit, /\| 5 — tensors, matrix calculus, code contract \|/);
+  assert.match(sourceAudit, /\| 6 — PCA dual derivation and dossier \|/);
+  assert.doesNotMatch(sourceAudit, /\| 5 — PCA and representations \|/);
 });
 
 test("renders the calculus continuous-change workbook and its bounded teaching model", async () => {
@@ -2891,6 +2901,7 @@ test("renders the probability, statistics, and scientific-inference workbook and
   assert.match(html, /M30 working invariant/);
   assert.match(html, /Hoeffding/);
   assert.match(html, /Common distributions and the multivariate-Gaussian bridge/);
+  assert.match(html, /countable additivity\s+over pairwise disjoint events/);
   assert.match(html, /bivariate_normal_affine_report/);
   assert.match(html, /unique boundary mode/);
   assert.match(html, /Uncertainty &amp; Inference Evidence Dossier/);

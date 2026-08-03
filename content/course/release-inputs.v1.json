@@ -42,7 +42,7 @@
     },
     {
       "path": "app/LinearAlgebraStabilityStudio.tsx",
-      "sha256": "47e1539357da5b1918ea581b49c1d323535683f8a66d4b022cda0ce72ac739d3"
+      "sha256": "0306ba6821855892443f08c1032c0c3d84ec2937cba2b3b0081b6ec76e5f72fe"
     },
     {
       "path": "app/NetworkProtocolStudio.tsx",
@@ -666,7 +666,7 @@
     },
     {
       "path": "content/modules/30_probability_statistics_scientific_inference.md",
-      "sha256": "e480d8bc23a02f49894a579606a51c0083b723ce4e25931dcf4f49d09bda790a"
+      "sha256": "d2b34e6018bd064dfe6e25458b1d0b9c670649032e528a5a45ecb533799f58ed"
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
@@ -798,7 +798,7 @@
     },
     {
       "path": "content/source-maps/module28_linear_algebra_source_audit_addendum.md",
-      "sha256": "5d10cbcf99cb3e921cdbc4c4c2c74a86e314a2df5831553246cc8473466cc4da"
+      "sha256": "f8ce9edc3d394fa70b820a94f751d1d5c9d7e086b1b548fb657bb7f9ad5f93fd"
     },
     {
       "path": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
@@ -1098,7 +1098,7 @@
     },
     {
       "path": "public/downloads/module28_linear_algebra_source_audit_addendum.md",
-      "sha256": "5d10cbcf99cb3e921cdbc4c4c2c74a86e314a2df5831553246cc8473466cc4da"
+      "sha256": "f8ce9edc3d394fa70b820a94f751d1d5c9d7e086b1b548fb657bb7f9ad5f93fd"
     },
     {
       "path": "public/downloads/module28_reference.py",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "f432c37f790da14fc6c080f593af5d6e22b6c8a0f369439df02fc3fd20528209"
+      "sha256": "1792ce57b6906b69fe2fb7774d7b97e10fb04e0c8c961d46d3c0370dfc0a755e"
     }
   ]
 }
