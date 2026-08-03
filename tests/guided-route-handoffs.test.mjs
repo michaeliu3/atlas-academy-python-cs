@@ -92,7 +92,10 @@ test("private guided continuation remains distinct from portal release", async (
     moduleThirtyTwo,
     /required\s+learning bridges for private instructor-led study[\s\S]{0,220}not make their academic prerequisites optional/u,
   );
-  assert.match(moduleThirtyOne, /next academic continuation is \*\*M18\*\*/u);
+  assert.match(
+    moduleThirtyOne,
+    /canonical forward handoff is a conceptual systems cross-link to \*\*M18\*\*/u,
+  );
   assert.match(moduleThirtyOne, /reader-visible reference previews[\s\S]{0,180}Core-credit-gated/u);
   assert.match(
     moduleThirtySix,

@@ -14,7 +14,11 @@ fully contract-verified or release-ready:
 7. problem ladder, Atlas project, review rubric, and retrieval schedule;
 8. TA prompts and Study Partner routine;
 9. deterministic local model/tests when they reveal a mechanism;
-10. Notion record and progress update.
+10. learner-controlled record or cross-role handoff option, if the learner chooses it.
+
+No learner record, Notion write, or progress-tracking event is required for
+module readiness, review, or release. Records stay off by default and remain a
+separate, session-scoped learner choice in a designated learning chat.
 
 ## Versioned evidence contract
 
