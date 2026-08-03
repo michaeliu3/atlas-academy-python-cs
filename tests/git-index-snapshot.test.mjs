@@ -26,6 +26,10 @@ async function writeFixture(root, repositoryPath, contents) {
 async function createRepository() {
   const root = await mkdtemp(join(tmpdir(), "atlas-git-index-snapshot-"));
   await git(root, ["init", "--quiet"]);
+  // Keep disposable fixture cleanup deterministic: a large fixture can otherwise
+  // trigger detached Git maintenance while the test hook removes its repository.
+  await git(root, ["config", "maintenance.auto", "false"]);
+  await git(root, ["config", "gc.auto", "0"]);
   await git(root, ["config", "user.email", "tests@example.invalid"]);
   await git(root, ["config", "user.name", "Atlas test"]);
   await writeFixture(root, "content/clean.txt", "committed text\n");

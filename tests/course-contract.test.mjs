@@ -614,33 +614,45 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 361,
-    ambiguous: 107,
-    missing: 12,
+    "pointer-present": 381,
+    ambiguous: 92,
+    missing: 7,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    20,
+    17,
   );
-  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 9);
+  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 4);
   assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 3);
   assert.ok(
     audit.modules
       .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10"].includes(moduleId))
       .every(({ evidence }) => Object.values(evidence).every(({ status }) => status === "pointer-present")),
   );
-  assert.ok(
-    audit.modules
-      .filter(({ moduleId }) => ["m08", "m09"].includes(moduleId))
-      .every(
-        ({ evidence }) =>
-          evidence["first-principles"].status === "ambiguous" &&
-          Object.entries(evidence)
-            .filter(([criterionId]) => criterionId !== "first-principles")
-            .every(([, { status }]) => status === "pointer-present"),
-      ),
-  );
+  const expectedAmbiguousByModule = new Map([
+    ["m08", ["first-principles"]],
+    ["m09", ["first-principles"]],
+    ["m11", ["code-reading-debugging-design", "accessible-visual-text-alternative"]],
+    ["m12", ["accessible-visual-text-alternative"]],
+    ["m13", ["accessible-visual-text-alternative"]],
+    ["m14", ["first-principles", "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
+    ["m15", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
+  ]);
+  for (const [moduleId, ambiguousCriteria] of expectedAmbiguousByModule) {
+    const evidence = audit.modules.find((module) => module.moduleId === moduleId)?.evidence;
+    assert.deepEqual(
+      Object.entries(evidence)
+        .filter(([, { status }]) => status === "ambiguous")
+        .map(([criterionId]) => criterionId),
+      ambiguousCriteria,
+    );
+    assert.ok(
+      Object.entries(evidence)
+        .filter(([criterionId]) => !ambiguousCriteria.includes(criterionId))
+        .every(([, { status }]) => status === "pointer-present"),
+    );
+  }
 });
 
 test("the legacy module-contract report is a deterministic projection of the validated audit", async () => {

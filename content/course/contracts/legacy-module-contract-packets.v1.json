@@ -8205,7 +8205,7 @@
             },
             {
               "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-definition",
@@ -8227,7 +8227,7 @@
             },
             {
               "criterionId": "prediction-before-reveal",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-prediction"
@@ -8243,7 +8243,7 @@
             },
             {
               "criterionId": "source-ledger",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-source-rationale",
@@ -8281,7 +8281,7 @@
             },
             {
               "criterionId": "project-and-evidence-rubric",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-dossier",
@@ -8291,7 +8291,7 @@
             },
             {
               "criterionId": "supportive-oral-defense",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-oral-protocol",
@@ -8312,7 +8312,7 @@
             },
             {
               "criterionId": "study-partner-prompt",
-              "legacyAuditStatus": "missing",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-study-partner"
@@ -9061,7 +9061,7 @@
         },
         {
           "criterionId": "code-reading-debugging-design",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m14-code-reading",
@@ -9135,7 +9135,7 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m14-oral-protocol",
@@ -9156,7 +9156,7 @@
         },
         {
           "criterionId": "study-partner-prompt",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m14-study-partner"
@@ -9905,7 +9905,7 @@
         },
         {
           "criterionId": "code-reading-debugging-design",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m15-code-reading",
@@ -9979,7 +9979,7 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m15-oral-protocol",
@@ -10000,7 +10000,7 @@
         },
         {
           "criterionId": "study-partner-prompt",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m15-study-partner"
