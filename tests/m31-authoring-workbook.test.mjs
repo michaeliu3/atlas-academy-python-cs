@@ -87,6 +87,9 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /Worked primal\/dual mini-case — derive the gap before trusting it/u);
   assert.match(candidate, /p\^\\star=2,\\qquad d\^\\star=q\(2\)=2,\\qquad p\^\\star-d\^\\star=0/u);
   assert.match(candidate, /usual convex\s+Slater\/KKT theorem applies/u);
+  assert.match(candidate, /all-affine-constraint qualification\s+route/u);
+  assert.match(candidate, /Individual access\/recheck dates and reuse statuses/u);
+  assert.ok(candidate.includes("If \\(\\mathcal F_{t-1}\\) is unfamiliar"));
   assert.match(candidate, /Convexity, smoothness, and strong-convexity bridge/u);
   assert.ok(candidate.includes("A declared feasible domain \\(C\\) is **convex**"));
   assert.ok(candidate.includes("A function \\(f:C\\to\\mathbb R\\) is **convex**"));
@@ -110,6 +113,8 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /Mutual-information and distortion card — derive one BSC first/u);
   assert.match(candidate, /P\(Y=1\)[\s\S]{0,180}\\tfrac12/u);
   assert.match(candidate, /not the generic mutual information for a biased\s+input/u);
+  assert.match(candidate, /same KL notation does not make the questions interchangeable/u);
+  assert.match(candidate, /finite block code as an exact asymptotic\s+benchmark/u);
   assert.match(candidate, /R\(D\)=1-h_2\(D\)/u);
   assert.match(candidate, /One-step ELBO identity — derive the gap before trusting the objective/u);
   assert.match(candidate, /Two-state ELBO equality table/u);
@@ -166,6 +171,11 @@ test("the frozen M31 review candidate retains the study-ready structural spine",
   assert.match(candidate, /not the generic mutual information for a biased\s+input/u);
   assert.match(candidate, /small displayed primal\/dual gap/u);
   assert.match(candidate, /mean-field variational family reaches a higher ELBO/u);
+  assert.match(candidate, /all-affine-constraint qualification\s+route/u);
+  assert.match(candidate, /Individual access\/recheck dates and reuse statuses/u);
+  assert.ok(candidate.includes("If \\(\\mathcal F_{t-1}\\) is unfamiliar"));
+  assert.match(candidate, /same KL notation does not make the questions interchangeable/u);
+  assert.match(candidate, /finite block code as an exact asymptotic\s+benchmark/u);
 
   const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: reviewCandidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });

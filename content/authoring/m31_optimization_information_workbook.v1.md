@@ -112,6 +112,9 @@ grades.
    held fixed, what new randomness is averaged over, and why do support and
    integrability still matter?
 
+If \(\mathcal F_{t-1}\) is unfamiliar, read it as “information known before
+the new draw”; Session 5 formalizes that conditional-history boundary.
+
 If 1 is fragile, bridge through M28. If 2 is fragile, bridge through M29. If
 3 or 4 is fragile, bridge through M30. Do not start by choosing a library.
 
@@ -521,6 +524,11 @@ necessity. `(x,y,lambda)=(1,0,2)` is therefore a certificate for this stated
 problem; the matching primal/dual values already prove the tiny exact result
 directly.
 
+Because `g` is affine in this fixture, an all-affine-constraint qualification
+route is also available under its own theorem assumptions. This exercise
+deliberately practices the explicit Slater route; removing a strict-feasibility
+witness blocks only that stated route, not every possible qualification route.
+
 Do **not** transfer that conclusion unchanged to an integer, chance, nonconvex,
 or numerically approximate problem. There, a solver's reported multiplier or
 small numerical gap is finite evidence with a tolerance and model boundary,
@@ -565,7 +573,9 @@ interchangeable evidence.
 
 A new evidence packet gives a convex-looking problem and a boundary-feasible
 candidate, but no strict-feasibility witness. It has **not** proved that Slater
-fails; it has shown that this packet cannot invoke the Slater theorem route.
+fails; it has shown only that this packet cannot invoke the explicit Slater
+theorem route. Another qualification is available only if the packet
+establishes it; in an all-affine-constraint setting, that is a separate route.
 In a short oral explanation, say which route must be withdrawn and why. The
 direct route remains available only if the packet separately derives matching
 primal and dual witnesses. Do not withdraw a conclusion merely by ritual, and
@@ -1118,6 +1128,21 @@ withdrawn, what joint/source/loss description must replace it, and why an
 improved information number still cannot set the product's acceptable harm or
 authority boundary.
 
+### Checkpoint — the same KL notation does not make the questions interchangeable
+
+The BSC/rate-distortion card concerns a declared source, channel or distortion
+law, and one-use or asymptotic coding regime. The ELBO identity concerns a
+declared joint model, posterior, and variational family for a fixed
+observation. Each can contain a KL divergence, but \(D_{KL}\) names a
+divergence between its declared arguments; it does not supply a shared theorem
+or turn a channel/coding claim into a posterior-approximation claim.
+
+Before moving on, make the two boundaries visible: write “source + channel or
+loss + regime” beside the BSC/rate-distortion card, and “joint model +
+posterior + variational family” beside the ELBO card. If an AI response says
+“the KL is lower, so the representation is better,” ask which of those two
+questions it is answering and which decision boundary still remains.
+
 ### From likelihood to variational language
 
 An objective such as an ELBO is useful because it specifies a relationship
@@ -1379,7 +1404,8 @@ Hamming distortion. Which change makes that exact formula unavailable without
 new derivation?
    - A. Writing the result in bits rather than nats.
    - B. Replacing the source with a biased distribution or the loss with an
-     asymmetric one.
+     asymmetric one, or treating one finite block code as an exact asymptotic
+     benchmark.
    - C. Recording the value of `D` in the dossier.
    - D. Naming the reconstruction variable `\hat x`.
 
@@ -1540,8 +1566,9 @@ Core-credit-gated until their own contract and release evidence are complete.
 This workbook’s explanations, examples, diagrams, tables, and code are
 original Atlas material. It links to sources for study and provenance; it does
 not reproduce their slides, textbook prose, assignments, figures, or
-solutions. The routes below were rechecked on **2026-08-02**; the linked source
-map and audit retain their own access and reuse records.
+solutions. Individual access/recheck dates and reuse statuses are recorded in
+the linked source map and audit; the dated focused calibration records its own
+cross-source check.
 
 ### Learner-facing source links
 
