@@ -16,7 +16,7 @@ asset-level review.
 | Pack | Current alignment | Calibration routes |
 | --- | --- | --- |
 | **M33 — Formal Languages, Computability & Complexity** | The connected route from formal objects through automata, computability, reductions, and complexity is mathematically sound at its stated scope. The CFG/PDA, pumping-lemma quantifiers, diagonal argument, VC-to-IS construction, and `HALT_TM <=m A_TM` reasoning are appropriately bounded. | MIT [18.404J Theory of Computation notes](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/) and Stanford [CS103 reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/). |
-| **M34 — Classical AI: Search, Constraints & Decision** | State formulation before search; the A* counterexample; CSP propagation, relaxation, planning, solver-status, and finite-horizon MDP distinctions are sound. The CP-SAT status wording matches the official documentation. | UC Berkeley [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), [MDPs](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html), and [OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver). |
+| **M34 — Classical AI: Search, Constraints & Decision** | State formulation before search; the A* counterexample; CSP propagation, relaxation, planning, solver-status, and finite-horizon MDP distinctions are sound. The CP-SAT status wording matches the official documentation. | UC Berkeley [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), [MDPs](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html), [CMU 15-887 planning](https://www.cs.cmu.edu/~mmv/planning/schedule.html), and [OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver). |
 
 ## Concrete repairs applied after this audit
 
@@ -38,6 +38,13 @@ asset-level review.
 5. **M34 Session 4 state-update table:** the header now says “explicit field
    updates,” and the text names symbolic as well as numeric assignments, so a
    location transition is not misleadingly presented as arithmetic.
+6. **M34 Session 4 state semantics:** the archive card now separates a fact
+   assigned false by a declared closed-world state from a missing observation
+   and a wholly unmodelled factor. The learner predicts whether a silent
+   key-location sensor authorizes a false state fact, then must add an
+   observation/belief boundary, revise the representation, or withdraw the
+   plan claim. This uses CMU 15-887 as a link-only calibration route and does
+   not add a POMDP, solver, or real-world planning lab.
 
 ## Deliberate limits and release boundary
 

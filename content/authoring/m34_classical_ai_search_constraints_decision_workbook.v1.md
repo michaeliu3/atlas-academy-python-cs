@@ -681,6 +681,35 @@ than an implied reset.
 | `move-to-vault` | no Boolean add/delete | `energy := energy - 1`; room becomes Vault | `has-key`, `key-at-rack`, and `vault-open` persist |
 | `open-vault` | add `vault-open` | `energy := energy - 1` | room and key facts persist |
 
+### State semantics card: false, unknown, or unmodelled
+
+The archive trace has a **declared closed-world state convention**: a Boolean
+fact is model-true or model-false only when the stated symbolic model assigns
+that value. This is a convention inside the model, not a rule that missing
+sensor data tells us what is false in the world.
+
+| Status of **key-at-rack** | Meaning | Required response |
+| --- | --- | --- |
+| model-true or model-false | The declared state assigns a truth value under its stated convention. | Apply only the named precondition, effect, and persistence rules. |
+| unobserved or uncertain | The current evidence has not justified a truth value for the actual setting. | Add an observation/belief boundary, obtain evidence, or withdraw the plan claim. |
+| unmodelled | No state variable represents the factor at all. | Name the omitted factor; revise the model or restrict the conclusion. Do not treat omission as evidence of falsehood. |
+
+**Prediction before reveal.** A sensor does not report whether the key is at
+the rack. Does that let the planner record **key-at-rack=false**? Which extra
+model assumption would be needed before that conclusion is legal?
+
+<details>
+<summary>Reveal after distinguishing model state from missing evidence.</summary>
+
+**Reveal:** no. The fixed symbolic state in the next trace is a fully declared
+model input; it is not an inference from a silent sensor. Sensor silence means
+the planner needs an observation/belief representation or an explicit
+failure-as-false assumption. If the factor has no representation, it is
+unmodelled. In either case, do not silently convert missing evidence into a
+false state fact.
+
+</details>
+
 **Predict before reveal.** A candidate trace leaves `key-at-rack=true` after
 `take-key` and silently resets energy to 2 after `move-to-vault`. Which
 add/delete, numeric-update, or persistence rule did it violate?
@@ -1245,8 +1274,9 @@ This workbook uses original explanations, fixtures, diagrams, and code. It does
 not reproduce source prose, figures, course slides, problem sets, or solutions.
 The established reading routes below were checked on **2026-08-01**; targeted
 model-construction routes were rechecked on **2026-08-02**, with focused
-Berkeley decision-network and NIST routes rechecked on **2026-08-03**. Exact
-source-level dates remain in the candidate source ledger.
+Berkeley decision-network, NIST, and CMU planning-semantics routes rechecked
+on **2026-08-03**. Exact source-level dates remain in the candidate source
+ledger.
 
 ### Learner-facing source links
 
@@ -1258,6 +1288,7 @@ source-level dates remain in the candidate source ledger.
 | [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |
 | [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver) and the [NIST AI RMF 1.0 PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) | Sessions 3–6: solver-status interpretation and the separation of model output, risk evidence, and authority. | Documentation/framework sources are linked for reading; original Atlas models and decision cards remain distinct. |
 | [MIT 6.034 Planning and Search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf) and [MIT 6.825 Planning lecture](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) | Sessions 2 and 4: relaxed heuristic lower bounds; state transitions, add/delete effects, and frame conventions. | Targeted 2026-08-02 calibration only; link-only/original Atlas audits and synthetic traces. |
+| [CMU 15-887 Planning, Execution, and Learning](https://www.cs.cmu.edu/~mmv/planning/schedule.html) | Session 4: declared closed-world planning semantics and the distinction among model-false, unknown, and unmodelled facts. | Link-only/original Atlas state-semantics card; do not copy course notes, assignments, code, or solutions. |
 | [Stanford CS221 scheduling assignment](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html) and [Markov Decisions handout](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html) | Sessions 3 and 5: partial-assignment propagation; Markov-sufficiency and finite-horizon assumptions. | Link-only/original Atlas explanations; do not copy assignment or handout assets. |
 
 ### Claim-linked session routes
@@ -1266,6 +1297,10 @@ The routes below make each session's compact trace above inspectable. They use
 only the existing M34 ledger IDs and links; read them as sources for original
 Atlas reasoning, not as copied exercises, source approval, or publication
 evidence.
+
+The Session 4 state-semantics card additionally uses [S34-19 — CMU planning
+semantics](https://www.cs.cmu.edu/~mmv/planning/schedule.html) to keep
+model-false, missing observation, and omitted representation distinct.
 
 | Session | Claim/source route | Learner reading route |
 | --- | --- | --- |
