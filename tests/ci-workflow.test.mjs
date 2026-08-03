@@ -26,6 +26,21 @@ test("Course CI pins every third-party action to a reviewed immutable commit", a
   assert.match(workflow, /actions\/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065/u);
 });
 
+test("Course CI skips hosted jobs for draft PR updates but reruns them when review begins", async () => {
+  const workflow = await readFile(workflowPath, "utf8");
+
+  assert.match(
+    workflow,
+    /pull_request:\n(?:\s*#.*\n)*\s*types:\n\s*- opened\n\s*- reopened\n\s*- ready_for_review\n\s*- synchronize/mu,
+    "the ready-for-review transition is a full CI trigger",
+  );
+  assert.match(
+    workflow,
+    /portal:\n\s*name: Portal quality gate\n\s*if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
+    "only explicit draft pull-request updates skip the hosted quality gates",
+  );
+});
+
 test("Teaching-model CI proves the runtime exercise verifier before the ordinary suite", async () => {
   const workflow = await readFile(workflowPath, "utf8");
   const verifierTests = 'python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"';
