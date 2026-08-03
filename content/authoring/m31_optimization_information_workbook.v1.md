@@ -1470,8 +1470,9 @@ successful write. Otherwise, keep the card in chat or local notes.
 
 The durable M31 artifact is an **objective/constraint/convergence claim sheet
 with experiment conditions and known limits**. In the private guided route, the
-next academic continuation is **M18**, which applies its ownership and evidence
-discipline to operating-system resource mediation. The
+canonical forward handoff is a conceptual systems cross-link to **M18**, which
+applies its ownership and evidence discipline to operating-system resource
+mediation. The
 [M32 authoring workbook](m32_systems_languages_scientific_python_accelerators_workbook.v1.md)
 comes later, after M18–M24, and consumes representation, dtype/shape, seed,
 profiling, and solver-configuration fields. That later M31→M32 connection is

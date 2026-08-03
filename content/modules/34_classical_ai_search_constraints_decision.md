@@ -955,8 +955,8 @@ different backup. Inspect the `observationModel` on
 `m34TwoStageMdpBackupCard()`; it makes this assumption visible instead of
 smuggling it in through the table.
 
-Compare a terminal `safe` action with value `1.2`. Under this exact
-finite-horizon, undiscounted objective, the initial policy chooses `inspect`, then chooses `dispatch` in
+Compare a `safe` action that terminates immediately with value `1.2`. Under this
+exact finite-horizon, undiscounted objective, the initial policy chooses `inspect`, then chooses `dispatch` in
 `clear` and `wait` in `blocked`. That state-contingent continuation is what a
 one-shot table lacks.
 
@@ -1024,7 +1024,7 @@ the authority and value questions disappear.
 **Can a reviewer trace a recommendation back through its representation,
 algorithm conditions, evidence, and accountable boundary?**
 
-**Claim/source trace:** `M34-C01–M34-C09 -> S34-01–S34-13` — the dossier
+**Claim/source trace:** `M34-C01–M34-C09 -> S34-01–S34-18` — the dossier
 reconnects model, theorem conditions, finite evidence, and governance
 boundaries; it is not source approval or release evidence.
 
@@ -1235,7 +1235,9 @@ questions made visible here.
 This workbook uses original explanations, fixtures, diagrams, and code. It does
 not reproduce source prose, figures, course slides, problem sets, or solutions.
 The established reading routes below were checked on **2026-08-01**; targeted
-model-construction routes were rechecked on **2026-08-02**.
+model-construction routes were rechecked on **2026-08-02**, with focused
+Berkeley decision-network and NIST routes rechecked on **2026-08-03**. Exact
+source-level dates remain in the candidate source ledger.
 
 ### Learner-facing source links
 
