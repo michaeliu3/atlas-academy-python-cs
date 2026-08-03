@@ -98,6 +98,27 @@ coding course, vendor benchmark, required CUDA environment, copied university
 lab, or a new data/service layer. Those would inflate the module beyond its
 connected first-principles role without closing its actual delivery boundary.
 
+## Targeted follow-up — inspectable evidence, not breadth expansion
+
+After rechecking MIT 6.441's information-measures and rate-distortion sequence,
+CMU 15-418/15-618's locality/performance sequence, the Cython typed-memoryview
+guide, and Numba's performance guidance on 2026-08-03, the next edit is kept
+deliberately small:
+
+- M31 Sessions 5–6 now route learners to the existing bounded stochastic,
+  nonconvex, and binary-channel/rate-distortion cards. The new prompts make a
+  learner distinguish a definition, finite observation, and non-claim; they do
+  not add stochastic-optimization, coding-theory, or variational-inference
+  breadth.
+- M32 Session 1 now compares a C-API buffer consumer, Cython typed-memoryview
+  boundary, and Numba-compiled CPU function as **contract-reading routes**.
+  It asks for build/layout/numerical/measurement evidence and a falsifier,
+  rather than a tool recommendation, compiler lab, or performance claim.
+
+This remains aligned and intentionally adapted: the official sources establish
+the relevant contracts and broader intellectual sequence, while Atlas retains
+its independently authored, bounded, first-principles evidence exercises.
+
 ## Next review boundary
 
 Before any M31/M32 learner-release decision, recheck the source URLs, exact
