@@ -136,7 +136,7 @@ not the authoring draft. Then send or say:
 
 ```text
 Start M31, Session 1 — Formulate before you optimize. I will build the
-Objective Geometry Sheet. Before Session 1, give me the three short M28/M29/M30
+Objective Geometry Sheet. Before Session 1, give me the four short M28/M29/M30
 retrieval checks below and direct me to the named bridge if my reasoning is
 fragile. Then ask me to state the variables, feasible set, objective,
 observable evidence, and one non-claim before you correct me. Make me predict
@@ -157,9 +157,12 @@ can change an iterative computation without changing its mathematical
 minimizer; (2) one stationary-point counterexample and the regularity/domain
 condition needed for a derivative-based conclusion; and (3) the difference
 between a full gradient and a mini-batch estimate, including what one favorable
-finite run cannot establish. If these are fragile, bridge through M28, M29, or
-M30 respectively before continuing. This is a repair route, not a gate or
-grade.
+finite run cannot establish; and (4) for a finite joint distribution, when a
+conditional probability is defined and what new randomness is averaged in
+\(\mathbb E[\widehat g_t\mid\mathcal F_{t-1}]\) after the past history is fixed.
+If these are fragile, bridge through M28, M29, or M30 respectively before
+continuing; items 3 and 4 both use the M30 bridge. This is a repair route, not
+a gate or grade.
 
 **M31 time budget.** Budget about **6–8 focused hours** for a minimum-evidence
 first pass, or **10–14 hours** when you re-derive the arguments, inspect the

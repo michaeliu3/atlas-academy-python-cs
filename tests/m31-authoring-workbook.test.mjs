@@ -88,6 +88,8 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /p\^\\star=2,\\qquad d\^\\star=q\(2\)=2,\\qquad p\^\\star-d\^\\star=0/u);
   assert.match(candidate, /usual convex\s+Slater\/KKT theorem applies/u);
   assert.match(candidate, /Convexity, smoothness, and strong-convexity bridge/u);
+  assert.ok(candidate.includes("A declared feasible domain \\(C\\) is **convex**"));
+  assert.ok(candidate.includes("A function \\(f:C\\to\\mathbb R\\) is **convex**"));
   assert.match(candidate, /Ridge and conditioning card/u);
   assert.match(candidate, /m31RidgeConditioningCard\(\)/u);
   assert.match(candidate, /h\(t\)=t\^4/u);
@@ -95,8 +97,11 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /m31GradientDescentRateCard\(10\)/u);
   assert.match(candidate, /Same problem, different solver contract/u);
   assert.match(candidate, /result\.success/u);
+  assert.match(candidate, /Find one mathematical bug and one branch\/tolerance question\s+before executing/u);
+  assert.match(candidate, /at exact `raw\.x \+ raw\.y = 1`/u);
   assert.match(candidate, /Expected-gradient assumption card/u);
   assert.ok(candidate.includes("\\mathbb E[\\widehat g_t\\mid\\mathcal F_{t-1}]"));
+  assert.match(candidate, /For a finite joint distribution/u);
   assert.match(candidate, /Counterexample — cached, dependent sampling/u);
   assert.match(candidate, /Multiple-start counterexample — a small gradient is not a good basin/u);
   assert.match(candidate, /cached estimate is `-1`/u);
@@ -147,6 +152,9 @@ test("the frozen M31 review candidate retains the study-ready structural spine",
   assert.match(candidate, /Study Partner prompt — M31/u);
   assert.match(candidate, /^## Source and reuse boundary/mu);
   assert.match(candidate, /^## Candidate release boundary/mu);
+  assert.ok(candidate.includes("A declared feasible domain \\(C\\) is **convex**"));
+  assert.match(candidate, /at exact `raw\.x \+ raw\.y = 1`/u);
+  assert.match(candidate, /For a finite joint distribution/u);
 
   const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: reviewCandidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });

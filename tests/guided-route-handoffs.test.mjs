@@ -76,6 +76,12 @@ test("private guided continuation remains distinct from portal release", async (
   );
   assert.match(privateRoute, /M18–M24 → M32/u);
   assert.equal(graph.modules.find(({ id }) => id === "m31").forwardModuleNumber, 18);
+  assert.match(
+    privateRoute,
+    /four short M28\/M29\/M30\s+retrieval checks/u,
+  );
+  assert.match(privateRoute, /for a finite joint distribution/u);
+  assert.ok(privateRoute.includes("\\mathbb E[\\widehat g_t\\mid\\mathcal F_{t-1}]"));
   assert.match(moduleThirtyTwo, /\*\*Canonical academic prerequisites:\*\*/u);
   assert.match(
     moduleThirtyTwo,

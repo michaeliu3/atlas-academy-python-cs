@@ -107,9 +107,13 @@ grades.
    condition would be needed before a derivative-based conclusion is valid?
 3. Contrast a full gradient with a mini-batch gradient estimate. What does a
    favorable finite run fail to prove?
+4. For a finite joint distribution, when is a conditional probability defined?
+   In \(\mathbb E[\widehat g_t\mid\mathcal F_{t-1}]\), what past history is
+   held fixed, what new randomness is averaged over, and why do support and
+   integrability still matter?
 
 If 1 is fragile, bridge through M28. If 2 is fragile, bridge through M29. If
-3 is fragile, bridge through M30. Do not start by choosing a library.
+3 or 4 is fragile, bridge through M30. Do not start by choosing a library.
 
 ---
 
@@ -236,8 +240,26 @@ particular objective. It does not ignore the feasible set.
 
 ### Convexity, smoothness, and strong-convexity bridge
 
-Three statements that are often compressed into “the landscape is nice” are
-different obligations. In the Euclidean norm, differentiable `f` is
+A declared feasible domain \(C\) is **convex** when every line segment between
+two of its points remains feasible:
+
+\[
+u,v\in C,\quad \lambda\in[0,1]
+\quad\Longrightarrow\quad
+\lambda u+(1-\lambda)v\in C.
+\]
+
+A function \(f:C\to\mathbb R\) is **convex** when its value at that mixture is
+no larger than the same mixture of values:
+
+\[
+f(\lambda u+(1-\lambda)v)\leq
+\lambda f(u)+(1-\lambda)f(v).
+\]
+
+These definitions are the base layer for the three stronger or different
+statements that are often compressed into “the landscape is nice.” In the
+Euclidean norm, differentiable `f` is
 `\mu`-strongly convex on a declared convex domain when
 
 \[
@@ -716,10 +738,14 @@ else:
     next_point = (raw.x - correction, raw.y - correction)
 ```
 
-Find two bugs before executing it:
+Find one mathematical bug and one branch/tolerance question before executing
+it:
 
-- changing `<=` to `<` changes only a boundary branch but can silently alter
-  a trace/invariant;
+- at exact `raw.x + raw.y = 1` in the displayed real arithmetic, changing
+  `<=` to `<` leaves `next_point` unchanged because the correction is zero.
+  In an implementation, the branch can still change logged provenance, control
+  flow, or a tolerance policy; name that boundary/tolerance rather than calling
+  it a different projection;
 - subtracting the entire residual from both coordinates over-projects and
   changes the declared projection rule.
 
@@ -1370,7 +1396,8 @@ Core-credit-gated until their own contract and release evidence are complete.
 This workbook’s explanations, examples, diagrams, tables, and code are
 original Atlas material. It links to sources for study and provenance; it does
 not reproduce their slides, textbook prose, assignments, figures, or
-solutions. The reading routes below were checked on **2026-08-02**.
+solutions. The routes below were rechecked on **2026-08-02**; the linked source
+map and audit retain their own access and reuse records.
 
 ### Learner-facing source links
 
