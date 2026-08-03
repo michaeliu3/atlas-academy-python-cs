@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { CourseModule } from "@/lib/module-catalog";
 import type { ModuleCompanionPackage } from "@/lib/module-companion-package";
@@ -122,6 +123,13 @@ export function ModuleOralDefense({
             time, offer hints before answers, keep the visible chat usable as a
             whiteboard, and leave you with evidence—not a performance score.
           </p>
+          <p className={styles.setupNote}>
+            <strong>First time with this role?</strong>{" "}
+            <Link className={styles.setupLink} href="/learning-partners">
+              Set up the Teaching Assistant chat first
+            </Link>
+            . Paste the role brief once before this module context.
+          </p>
           <button
             onClick={() => copyText(prompt, "ta-brief-copied")}
             type="button"
@@ -151,6 +159,13 @@ export function ModuleOralDefense({
             This is a low-pressure rehearsal: retrieve, trace, change one
             premise, and prepare a focused handoff for the Teaching Assistant.
             It does not administer the formal oral defense.
+          </p>
+          <p className={styles.setupNote}>
+            <strong>First time with this role?</strong>{" "}
+            <Link className={styles.setupLink} href="/learning-partners">
+              Set up the Study Partner chat first
+            </Link>
+            . Paste the role brief once before this module context.
           </p>
           <button
             onClick={() => copyText(studyPartnerPrompt, "partner-brief-copied")}

@@ -375,6 +375,24 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.ok(m35Workbook.includes("0.1875"));
   assert.ok(m35Workbook.includes("0.2451"));
   assert.match(m35Workbook, /two-hidden-unit ReLU/u);
+  const m35SessionSixStart = m35Workbook.indexOf(
+    "## Session 6 — Responsible ML representation dossier and oral defense",
+  );
+  const m35CandidateSessionSixStart = m35Candidate.indexOf(
+    "## Session 6 — Responsible ML representation dossier and oral defense",
+  );
+  assert.ok(m35SessionSixStart >= 0, "M35 authoring pack needs its final dossier session.");
+  assert.ok(m35CandidateSessionSixStart >= 0, "M35 candidate needs its final dossier session.");
+  for (const [label, sessionSix] of [
+    ["authoring pack", m35Workbook.slice(m35SessionSixStart)],
+    ["frozen candidate", m35Candidate.slice(m35CandidateSessionSixStart)],
+  ]) {
+    assert.match(sessionSix, /### Dossier preflight — predict, inspect, repair/u, label);
+    assert.match(sessionSix, /Synthetic AI-generated claim/u, label);
+    assert.match(sessionSix, /Reveal after writing your prediction\./u, label);
+    assert.match(sessionSix, /fresh-evaluation rows were used to choose the threshold/u, label);
+    assert.match(sessionSix, /withdraw/u, label);
+  }
   assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
   assert.match(
     m36Workbook,
@@ -473,6 +491,20 @@ test("the M35 research ledger preserves its canonical authoring-only boundary", 
   assert.match(ledger, /v3 contract state\s+of\s+`authoring-only`/u);
   assert.doesNotMatch(ledger, /v3 contract state\s+of\s+`not-started`/u);
   assert.match(ledger, /does \*\*not\*\*:?[\s\S]*unlock M35, M36, M25, or M26/u);
+});
+
+test("the M35 candidate ledger binds its Session 6 preflight to bounded official calibration", async () => {
+  const ledger = await readFile(
+    "content/source-maps/module35_machine_learning_representation.md",
+    "utf8",
+  );
+
+  assert.match(ledger, /S35-25/u);
+  assert.match(ledger, /Session 6 preflight/u);
+  assert.match(ledger, /declared experiment evidence/u);
+  assert.match(ledger, /C09\/S35-14/u);
+  assert.match(ledger, /Rechecked 2026-08-03/u);
+  assert.match(ledger, /do not establish a deployment or authority claim/u);
 });
 
 test("the M36 research ledger preserves its authoring-only, paraphrase, and consent boundaries", async () => {

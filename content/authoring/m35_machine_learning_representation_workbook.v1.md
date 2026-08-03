@@ -1028,6 +1028,37 @@ For this module, keep the project intentionally bounded:
 > biometric, or consequential decision data. Do not call external services,
 > ship weights, or recommend an external action.
 
+### Dossier preflight — predict, inspect, repair
+
+**Synthetic AI-generated claim (not evidence):** “Our synthetic signal-routing
+model is ready to rank incoming signals automatically: it achieved 94% validation
+accuracy, its probability scores are calibrated, and its risk card proves that
+human review is unnecessary.”
+
+Before revealing a repair, do a claim-and-design inspection. Mark which fields
+are absent or merely asserted: the source/target data relation, split and
+selection history, fresh-evaluation boundary, metric/slice/cost, probability
+evidence, decision owner, abstention rule, and appeal or escalation path. Then
+write the narrowest sentence you could defend from a *declared synthetic*
+fixture without turning a score, chart, or document into authority.
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+**Repair:** the claim cannot establish readiness, calibration, safety, or
+automatic authority. A validation score needs its named data relation, split,
+preprocessing and selection history, metric, slice, and cost; calibration needs
+separate probability evidence under a named population; and no finite result or
+risk card appoints a decision owner. A narrower claim might say only that a
+specified model produced a finite result in one declared synthetic evaluation.
+
+**Counterexample:** the same score can coexist with a leaked split, an omitted
+failure slice, or a policy that forbids automated action. None of those facts is
+repaired by adding more confident prose.
+</details>
+
+**Transfer.** Change exactly one premise. If the fresh-evaluation rows were used to choose the threshold, which evaluation claim must be withdrawn? If an accountable owner proposes an external decision, which authority and impact evidence is still missing even if every synthetic metric is unchanged? State one retained narrow fact and one withdrawn claim.
+
 ### Required dossier artifacts
 
 1. **Data/provenance card:** generator revision, seed policy, variables,
