@@ -11,6 +11,7 @@ import platform
 import subprocess
 import sys
 import sysconfig
+import threading
 import unittest
 from unittest import mock
 
@@ -772,12 +773,55 @@ class Module19ReferenceTests(unittest.TestCase):
             f"doc-{letter}": ("lock queue condition " * 4_000)
             for letter in "abcdefgh"
         }
-        report = reference.run_indexer(
-            documents=documents,
-            executor="thread",
-            max_workers=1,
-            timeout_seconds=0.000001,
-        )
+        worker_entered = threading.Event()
+        first_wait_finished = threading.Event()
+        release_worker = threading.Event()
+        releaser_finished = threading.Event()
+        original_task = reference._index_document_task
+        original_as_completed = reference.concurrent.futures.as_completed
+
+        def held_index_task(*args: object, **kwargs: object) -> reference.WorkerOutcome:
+            worker_entered.set()
+            if not release_worker.wait(timeout=1):
+                raise RuntimeError("test worker was not released after the first wait")
+            return original_task(*args, **kwargs)
+
+        def observed_as_completed(*args: object, **kwargs: object):
+            iterator = original_as_completed(*args, **kwargs)
+            try:
+                yield from iterator
+            finally:
+                first_wait_finished.set()
+
+        def release_after_first_wait() -> None:
+            first_wait_finished.wait(timeout=1)
+            release_worker.set()
+            releaser_finished.set()
+
+        releaser = threading.Thread(target=release_after_first_wait, daemon=True)
+        releaser.start()
+        try:
+            with (
+                mock.patch.object(reference, "_index_document_task", held_index_task),
+                mock.patch.object(
+                    reference.concurrent.futures,
+                    "as_completed",
+                    observed_as_completed,
+                ),
+            ):
+                report = reference.run_indexer(
+                    documents=documents,
+                    executor="thread",
+                    max_workers=1,
+                    timeout_seconds=0.000001,
+                )
+        finally:
+            release_worker.set()
+            releaser.join(timeout=1)
+
+        self.assertTrue(worker_entered.is_set())
+        self.assertTrue(first_wait_finished.is_set())
+        self.assertTrue(releaser_finished.is_set())
 
         wait = report.completion_wait
         self.assertEqual(wait.timeout_seconds, 0.000001)

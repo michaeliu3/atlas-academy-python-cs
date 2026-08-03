@@ -9,7 +9,9 @@ export default defineConfig({
   testDir: "./e2e",
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  // A retry consumes a second full browser pass and can hide a flaky failure.
+  // Record the first failure; a deliberate later run is clearer evidence.
+  retries: 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI
     ? [["github"], ["html", { open: "never" }]]

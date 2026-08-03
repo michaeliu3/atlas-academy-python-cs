@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "9eac5f5ff1fdeec3dfe61588269a949c07698837c32c2f5bf81904337a5405ae"
+      "sha256": "af41670fd0c2b825ff3740d201c0e4c1c272ad72ef94138acb511a6399e8da01"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -538,7 +538,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "8b1e79dbad34640fb394156710bceead0007b5b23d573b727c3b9b660648a10a"
+      "sha256": "fd1a97da74e9ff24264f45295f416181162d0013b5e17e4b55db76b2457f0f77"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -562,11 +562,11 @@
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "c75354d7905bca0e7ef4a52b3e5257cd3b4136893f19cf23d46fff591684f5a5"
+      "sha256": "fb78b83f824d6d1bf199be76823abc09fc04afe5b2308b07baee2d119267a306"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
-      "sha256": "785a222aeda2682b920bbd2f75fe0f0343494cf96a062767e00c554ec40ef610"
+      "sha256": "8b65376c844f1f0c62ff7015f5836cd15f16c3be48ef02b2a0529d3a51644e5d"
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
@@ -590,7 +590,7 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "82d52bd3346f80b75604ca4e164f8c69bbd2a1234f95164dffd305bc4b4a40c3"
+      "sha256": "9957015c75abf12d49fde8839b5b479e37a24e5eec146d3c17a435cfede04ee7"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
@@ -1018,7 +1018,7 @@
     },
     {
       "path": "playwright.config.ts",
-      "sha256": "f61231825c172951bc436a997d9d3d0bd683f2718a9cf201517e39c0e9a67cbc"
+      "sha256": "c56d68af47f78bfad89767c3a7cdb5fb64310dcc7d1676084cffcee4d57ee773"
     },
     {
       "path": "public/downloads/module12_reference.py",
@@ -1146,7 +1146,7 @@
     },
     {
       "path": "public/downloads/test_module19_reference.py",
-      "sha256": "46f743a0117a929262155528ed38c1299ecfe23d9a1a07a2f9d226bb10919dee"
+      "sha256": "88686393b3a63827670b7a8ad52091687ce48ca92fc2f731ffafd4f3224ce049"
     },
     {
       "path": "public/downloads/test_module20_reference.py",

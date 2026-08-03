@@ -32,6 +32,8 @@ function observerSafetyErrors(workflow) {
     "context.payload.workflow_run.head_sha",
     "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}",
     "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs",
+    "partial skipped Course CI jobs are not an approved draft preflight",
+    "Course CI draft run intentionally skipped",
     "source-head-attached Course CI metadata observation",
   ];
   for (const fragment of requiredFragments) {
@@ -149,6 +151,11 @@ jobs:
               event: \"pull_request\",
               requiredJobNames: [\"Portal quality gate\", \"Teaching models on Python 3.12\", \"Teaching models on Python 3.14\", \"Browser accessibility acceptance\"],
             });
+            const skippedExpectedJobs = [];
+            if (skippedExpectedJobs.length > 0) {
+              throw new Error("partial skipped Course CI jobs are not an approved draft preflight");
+            }
+            core.notice("Course CI draft run intentionally skipped");
             core.notice("source-head-attached Course CI metadata observation");
 `;
   requireSafeObserver(safeFixture);

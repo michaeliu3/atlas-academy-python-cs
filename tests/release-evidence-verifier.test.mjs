@@ -59,7 +59,7 @@ test("a complete same-repository Course CI snapshot is structurally bound to its
     runId: 9000000001,
     runAttempt: 7,
     runUrl: "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/9000000001",
-    workflowSourceSha256: "9eac5f5ff1fdeec3dfe61588269a949c07698837c32c2f5bf81904337a5405ae",
+    workflowSourceSha256: "af41670fd0c2b825ff3740d201c0e4c1c272ad72ef94138acb511a6399e8da01",
     requiredJobNames: [
       "Portal quality gate",
       "Teaching models on Python 3.12",
