@@ -80,8 +80,28 @@ export type ScopeMatrixBenchmarkItem = {
   scopeTopicIds: string[];
 };
 
+export type ScopeMatrixInventoryDirective =
+  | "master"
+  | "graduate-master"
+  | "also-know"
+  | "study";
+
+export type ScopeMatrixBenchmarkSourceList = {
+  sectionId: string;
+  directive: ScopeMatrixInventoryDirective;
+  sourceLineStart: number;
+  sourceLineEnd: number;
+};
+
+export type ScopeMatrixBenchmarkAtomicItem = {
+  sourceLine: number;
+  sectionId: string;
+  label: string;
+  scopeTopicIds: string[];
+};
+
 export type CourseScopeMatrix = {
-  schemaVersion: 3;
+  schemaVersion: 4;
   benchmark: {
     id: string;
     title: string;
@@ -89,6 +109,9 @@ export type CourseScopeMatrix = {
     sourceDigest: string;
     sourceBoundary: string;
     items: ScopeMatrixBenchmarkItem[];
+    sourceLists: ScopeMatrixBenchmarkSourceList[];
+    atomicItemCount: number;
+    atomicItems: ScopeMatrixBenchmarkAtomicItem[];
   };
   scopeStates: ScopeMatrixState[];
   capabilities: ScopeMatrixCapability[];

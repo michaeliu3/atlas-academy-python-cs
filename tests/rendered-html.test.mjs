@@ -608,10 +608,20 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   );
   assert.match(readable, /Level 1 · Mathematical foundations/);
   assert.match(readable, /Level 9 · Deep specialization/);
+  assert.match(
+    readable,
+    /97 source targets.*are\s+calibrated to this level/is,
+  );
   assert.match(readable, /Post-core extension routes \(design only\)/);
   assert.match(readable, /Authoring-only — no learner reader route/);
 
   const scopeDocument = new JSDOM(html).window.document;
+  assert.ok(
+    scopeDocument.querySelector(
+      'a[href="/route/inventory#scope-inventory-level-1"]',
+    ),
+    "the full proof surface is available without placing all atomic rows in the normal route",
+  );
   const scopeTopic = (label) =>
     [...scopeDocument.querySelectorAll("article")].find(
       (topic) => topic.querySelector("h3")?.textContent === label,
@@ -662,6 +672,41 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
     assert.match(cadence, /180-day route/i, `${trackId} exposes a 180-day route`);
   }
   assert.doesNotMatch(html, /href="\/modules\/31-/);
+});
+
+test("renders the on-demand Levels 1–9 atomic source crosswalk", async () => {
+  const response = await render("/route/inventory");
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(readable, /Levels 1–9 target crosswalk/);
+  assert.match(readable, /all 362 learner-supplied learning targets/);
+  assert.match(readable, /Source target/);
+  assert.match(readable, /Atlas target/);
+  assert.match(readable, /Current delivery/);
+  assert.match(readable, /Propositional and predicate logic/);
+  assert.match(readable, /Graduate master/);
+  assert.match(readable, /Also know/);
+
+  const document = new JSDOM(html).window.document;
+  const levelOne = document.querySelector("#scope-inventory-level-1");
+  const levelTwo = document.querySelector("#scope-inventory-level-2");
+  assert.ok(levelOne?.hasAttribute("open"), "the first evidence layer opens for orientation");
+  assert.equal(levelTwo?.hasAttribute("open"), false, "later levels remain collapsed by default");
+  assert.ok(
+    document.querySelector('a[href="/route#scope-topic-l1.proofs.logic-relations"]'),
+    "each source row points back to the concise route target and its delivery label",
+  );
+  const proofSection = [...document.querySelectorAll("details")].find(
+    (section) => section.firstElementChild?.textContent?.includes("Proofs and discrete mathematics"),
+  );
+  assert.equal(
+    proofSection?.hasAttribute("open"),
+    false,
+    "a dense source section remains collapsed until the learner chooses to inspect it",
+  );
 });
 
 test("keeps availability status and route linkability aligned with the generated manifest", async () => {

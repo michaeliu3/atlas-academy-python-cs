@@ -568,6 +568,100 @@ a.moduleCard:focus-visible {
   color: var(--ink);
 }
 
+.inventoryCallout {
+  align-items: center;
+  background: rgba(219, 183, 108, 0.1);
+  border: 1px solid rgba(143, 80, 16, 0.22);
+  border-radius: 0.75rem;
+  display: flex;
+  gap: 0.8rem 1.1rem;
+  justify-content: space-between;
+  margin: 0 1rem 1rem;
+  padding: 0.78rem 0.9rem;
+}
+
+.inventoryCallout p {
+  color: #4e564d;
+  font-size: 0.76rem;
+  line-height: 1.48;
+  margin: 0;
+}
+
+.inventoryCallout strong {
+  color: #583c10;
+}
+
+.inventoryCallout a,
+.inventoryBack {
+  color: var(--cobalt);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-underline-offset: 0.2em;
+  white-space: nowrap;
+}
+
+.inventoryPage {
+  background: linear-gradient(160deg, rgba(49, 87, 164, 0.08), rgba(255, 253, 247, 0.9));
+  min-height: 100vh;
+  padding: 5rem 5vw;
+}
+
+.inventoryPageHeader,
+.inventoryPageLegend {
+  margin: 0 auto;
+  max-width: 1240px;
+}
+
+.inventoryPageHeader {
+  align-items: start;
+  display: grid;
+  gap: 2rem 4rem;
+  grid-template-columns: minmax(17rem, 0.95fr) minmax(20rem, 1.05fr);
+}
+
+.inventoryPageHeader h1 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2.35rem, 5vw, 4.9rem);
+  font-weight: 460;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin: 0.6rem 0 0;
+  max-width: 12ch;
+}
+
+.inventoryPageHeader > div:last-child > p {
+  color: #46554d;
+  font-size: 1rem;
+  line-height: 1.66;
+  margin: 0;
+}
+
+.inventoryPageHeader > div:last-child > p + p,
+.inventoryBack {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.inventoryPageLegend {
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.8rem 1.3rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 3rem;
+  padding: 1rem 0;
+}
+
+.inventoryPageLegend span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.48;
+}
+
+.inventoryPageLegend strong {
+  color: var(--ink);
+}
+
 .scopeLevels {
   display: grid;
   gap: 0.85rem;
@@ -642,6 +736,159 @@ a.moduleCard:focus-visible {
   border: 1px solid rgba(64, 80, 70, 0.2);
   border-radius: 0.8rem;
   padding: 1rem;
+  scroll-margin-top: 1rem;
+}
+
+.inventoryCrosswalk {
+  border-top: 1px solid var(--line);
+  margin: 0 1rem 1rem;
+  padding-top: 1rem;
+}
+
+.inventoryCrosswalk > summary,
+.inventorySection > summary {
+  align-items: center;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  font-weight: 760;
+  gap: 0.75rem;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.inventoryCrosswalk > summary {
+  font-size: 0.88rem;
+}
+
+.inventoryCrosswalk > summary::-webkit-details-marker,
+.inventorySection > summary::-webkit-details-marker {
+  display: none;
+}
+
+.inventoryCrosswalk > summary::after,
+.inventorySection > summary::after {
+  color: var(--plum);
+  content: "+";
+  font-family: var(--font-mono), monospace;
+  font-size: 1rem;
+  margin-left: auto;
+}
+
+.inventoryCrosswalk[open] > summary::after,
+.inventorySection[open] > summary::after {
+  content: "−";
+}
+
+.inventoryCrosswalk > summary small,
+.inventorySection > summary small {
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.inventoryCrosswalk > summary:focus-visible,
+.inventorySection > summary:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 0.2rem;
+}
+
+.inventoryCrosswalk > p {
+  color: #536057;
+  font-size: 0.78rem;
+  line-height: 1.52;
+  margin: 0.85rem 0 0;
+  max-width: 72ch;
+}
+
+.inventorySections {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.inventorySection {
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(64, 80, 70, 0.18);
+  border-radius: 0.7rem;
+  padding: 0.72rem 0.8rem;
+}
+
+.inventorySection[open] > summary {
+  border-bottom: 1px solid rgba(64, 80, 70, 0.14);
+  padding-bottom: 0.62rem;
+}
+
+.inventorySection > summary {
+  font-size: 0.8rem;
+}
+
+.inventorySection > ol {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0.85rem 0 0 1.3rem;
+}
+
+.inventorySection li {
+  align-items: start;
+  color: #46554d;
+  display: grid;
+  font-size: 0.74rem;
+  gap: 0.3rem 0.7rem;
+  grid-template-columns: minmax(12rem, 0.85fr) auto minmax(14rem, 1.15fr);
+  line-height: 1.46;
+  padding-left: 0.1rem;
+}
+
+.inventorySource {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.34rem;
+}
+
+.directiveTag {
+  background: rgba(219, 183, 108, 0.18);
+  border-radius: 999px;
+  color: #75500e;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  line-height: 1.35;
+  padding: 0.08rem 0.28rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.inventoryArrow {
+  color: var(--plum);
+  font-family: var(--font-mono), monospace;
+  font-weight: 800;
+}
+
+.inventoryTargets {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.inventoryTargets > span {
+  display: grid;
+  gap: 0.08rem;
+}
+
+.inventoryTargets a {
+  color: var(--cobalt);
+  text-underline-offset: 0.2em;
+}
+
+.inventoryTargets small {
+  color: #67736b;
+  font-size: 0.65rem;
+  line-height: 1.35;
 }
 
 .scopeTopicTopline,
@@ -803,7 +1050,8 @@ a.moduleCard:focus-visible {
   }
 
   .scopeMatrixIntro,
-  .extensionTracks {
+  .extensionTracks,
+  .inventoryPageHeader {
     grid-template-columns: 1fr;
   }
 }
@@ -819,6 +1067,7 @@ a.moduleCard:focus-visible {
   .rhythm,
   .moduleGrid,
   .scopeLegend,
+  .inventoryPageLegend,
   .scopeTopicGrid {
     grid-template-columns: 1fr;
   }
@@ -858,6 +1107,20 @@ a.moduleCard:focus-visible {
     padding-top: 3.5rem;
   }
 
+  .inventoryPage {
+    padding-bottom: 3.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .inventoryCallout {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .inventoryCallout a {
+    white-space: normal;
+  }
+
   .scopeLevel summary {
     align-items: start;
     font-size: 1.2rem;
@@ -871,6 +1134,24 @@ a.moduleCard:focus-visible {
   .extensionTracks dl > div {
     gap: 0.25rem;
     grid-template-columns: 1fr;
+  }
+
+  .inventoryCrosswalk {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+
+  .inventoryCrosswalk > summary,
+  .inventorySection > summary {
+    align-items: start;
+  }
+
+  .inventorySection li {
+    grid-template-columns: 1fr;
+  }
+
+  .inventoryArrow {
+    display: none;
   }
 }
 
