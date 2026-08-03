@@ -86,7 +86,7 @@
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "c036c882c456794a73529ece3e4a1191370a1052e93324ac3f27d66d8dc1adcf"
+      "sha256": "9eebf7b2b725332de4c064efe683d179e48254fdee4d6c4d656e61f4fd171b64"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
@@ -262,7 +262,7 @@
     },
     {
       "path": "content/course/contracts/companions/m34.v1.json",
-      "sha256": "f18c1bc435c54528c9a2d4fbbbb99686bd405331588b36a7f370ca62cd415138"
+      "sha256": "dc7b1af6766faddfe68c0bd19ee3fd5f9505d800d466653bffd7c6ccbae011d7"
     },
     {
       "path": "content/course/contracts/companions/m35.v1.json",
@@ -838,7 +838,7 @@
     },
     {
       "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
-      "sha256": "80dfd35976e3d852b849b6891b00cba45f4707089e426a5ec173f3757c89e421"
+      "sha256": "743941ce0a31b1c28c70e7a43179c268371097d2996ee188b4c71e903c6e14be"
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",

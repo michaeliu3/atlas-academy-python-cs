@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Strengthened M34's planning semantics with one source-calibrated
+  first-principles card: a declared model-false fact is now distinct from a
+  missing observation and an unmodelled factor. The learner predicts whether a
+  silent key-location sensor permits a false state value, then adds an
+  observation/belief boundary, revises the representation, or withdraws the
+  plan claim. The module's source ledger, TA/Study Partner handoff, and
+  focused test now carry the same boundary. This does not add a POMDP, solver,
+  hardware lab, reader route, release, record, or mastery claim.
 - Repaired a concrete Arc II continuity gap without adding a new system: M11
   now turns the M6→M10 representation, ingestion, indexing, ordering, and
   graph chain into one five-handoff architecture-reading page inside its
