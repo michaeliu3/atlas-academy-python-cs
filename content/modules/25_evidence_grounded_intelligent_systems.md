@@ -152,8 +152,9 @@ flowchart LR
     H --> M26["M26: maintained<br/>capstone + defense"]
 ~~~
 
-This is a concept/evidence map, not next/previous navigation. The canonical
-route is **M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26**. M24 is a required
+This is a concept/evidence map, not next/previous navigation. The full
+canonical route reaches M31 before M18–M24. From M24, the downstream navigation
+segment is **M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26**. M24 is a required
 systems-evidence thread, not M25's immediate navigation predecessor; the direct
 M25 prerequisites in the graph have a transitive evidence closure of M27–M36.
 

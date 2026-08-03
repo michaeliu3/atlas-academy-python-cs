@@ -1075,10 +1075,10 @@
       "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
       "arcId": "arc-v",
-      "wordCount": 10116,
+      "wordCount": 10127,
       "estimatedMinutes": 36,
       "focusedStudyMinutes": null,
-      "sourceHash": "8e4debe5fa32b6ebd9a6c40007263de3580bb42deb6f1345aa56287a1e7e284c",
+      "sourceHash": "cb17af8ffebfaf1f1f738f22d81e0a12371f406af51a376b3678cba25243124e",
       "id": "m25",
       "state": {
         "lifecycle": "learner-material-ready",

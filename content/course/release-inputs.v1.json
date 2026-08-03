@@ -646,7 +646,7 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "8e4debe5fa32b6ebd9a6c40007263de3580bb42deb6f1345aa56287a1e7e284c"
+      "sha256": "cb17af8ffebfaf1f1f738f22d81e0a12371f406af51a376b3678cba25243124e"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
@@ -774,11 +774,11 @@
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-      "sha256": "e2d6c77bc81326299678f112fedd370bbfba47cdad4a8709054174768d138bbb"
+      "sha256": "f6ee8e62d34428891a2cb3bbd7015226c6092e852161acfa3a2a87385132d854"
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
-      "sha256": "2f8060cc2050e463be52ca88a53dd9eefeb7416ac456ebdf7523530c30bb35ee"
+      "sha256": "0ce26f130bcc9c7b3550afbfa6a6d6783e8e7b2c0a1aa35054825b6bc2c53773"
     },
     {
       "path": "content/source-maps/module26_systems_capstone_source_map.md",
