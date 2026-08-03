@@ -1188,6 +1188,13 @@ and logging each need their own boundary and retention decision.
    ranking, a dashboard, an external LLM assistant, or an unfamiliar
    open-source recommendation feature.
 
+### Transfer task — preserve the boundary in an unfamiliar system
+
+Choose one unfamiliar ranking, dashboard, or assistant feature. Carry the same
+candidate/model-or-policy/human-choice separation into it, then change one
+premise—data purpose, time window, uncertainty, or authority—and state the
+smallest claim that still has evidence.
+
 ### Project — Atlas Next-Step Evidence Studio
 
 > **Future full-module project:** Use this only after the M25 preview gate opens.
@@ -1280,6 +1287,8 @@ accessible control state.
 
 The TA does not begin by teaching a library call. Use this hint ladder:
 
+### Supportive hint and repair ladder
+
 1. **Purpose hint:** “Who is deciding what, and what exists before your
    feature?”
 2. **Time hint:** “Draw the moment the suggestion is made. Which fact arrives
@@ -1347,6 +1356,13 @@ remaining uncertainty, and one future-M26 question, without a handoff or
 unlock. Do not grade, claim that voice/live settings are controlled, or save a
 raw transcript.
 ~~~
+
+### Learner-controlled evidence summary
+
+End the conversation with the learner's defended claim, the smallest repaired
+misconception, evidence inspected, an unavailable-evidence marker when needed,
+remaining uncertainty, and one future-M26 question. This is a learning record,
+not a grade, unlock, or raw transcript.
 
 ### Study Partner live-rehearsal prompt — M25
 

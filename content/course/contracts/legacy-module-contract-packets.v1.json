@@ -2612,12 +2612,12 @@
           "roles": [
             "transfer"
           ],
-          "label": "Problem-ladder transfer candidate",
+          "label": "Boundary-preserving transfer task",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-            "headingAnchor": "problem-ladder"
+            "headingAnchor": "transfer-task--preserve-the-boundary-in-an-unfamiliar-system"
           }
         },
         {
@@ -2778,57 +2778,57 @@
           }
         },
         {
-          "id": "m25-oral-missing-protocol-hint",
+          "id": "m25-oral-protocol-hint",
           "roles": [
             "oral-protocol",
             "oral-hint"
           ],
-          "label": "Missing module-specific oral protocol and hint route",
+          "label": "Module-specific oral protocol and hint route",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "supportive-hint-and-repair-ladder"
           }
         },
         {
-          "id": "m25-oral-missing-counterexample",
+          "id": "m25-oral-counterexample",
           "roles": [
             "oral-counterexample"
           ],
-          "label": "Missing module-specific oral counterexample route",
+          "label": "Module-specific oral counterexample route",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "teaching-assistant-oral-defense-prompt--m25"
           }
         },
         {
-          "id": "m25-oral-missing-transfer",
+          "id": "m25-oral-transfer",
           "roles": [
             "oral-transfer"
           ],
-          "label": "Missing module-specific oral transfer route",
+          "label": "Module-specific oral transfer route",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "transfer-task--preserve-the-boundary-in-an-unfamiliar-system"
           }
         },
         {
-          "id": "m25-oral-missing-reflection-summary",
+          "id": "m25-oral-reflection-summary",
           "roles": [
             "oral-reflection",
             "oral-summary"
           ],
-          "label": "Missing module-specific oral reflection and summary route",
+          "label": "Module-specific oral reflection and summary route",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
+            "headingAnchor": "learner-controlled-evidence-summary"
           }
         },
         {
@@ -2921,7 +2921,7 @@
         },
         {
           "criterionId": "transfer-task",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m25-transfer"
@@ -2949,7 +2949,7 @@
         },
         {
           "criterionId": "confidence-diagnostic-misconceptions",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m25-diagnostic",
@@ -2976,13 +2976,13 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
-            "m25-oral-missing-protocol-hint",
-            "m25-oral-missing-counterexample",
-            "m25-oral-missing-transfer",
-            "m25-oral-missing-reflection-summary"
+            "m25-oral-protocol-hint",
+            "m25-oral-counterexample",
+            "m25-oral-transfer",
+            "m25-oral-reflection-summary"
           ]
         },
         {

@@ -869,7 +869,7 @@ mini-apps.
 | 5. Evidence Ledger | What does each result actually prove? | Test, metric, task, and runtime cards. | Scope, denominator, version, limitation, next falsifier. | Establishes release evidence. |
 | 6. Release Board | Release, revise/defer, or disable? | Claim ledger and quality scenarios. | Challenge card, decision owner, maintenance plan. | Produces oral defense/handoff. |
 
-### Interaction pattern
+### Prediction-before-reveal interaction pattern
 
 Every view uses the same accessible, prediction-first sequence:
 
@@ -1113,6 +1113,14 @@ capability and authority.
 | 7. Review and verify | Inspect a patch/workflow/dependency proposal. | Evidence-based accept, revise, defer, or reject decision. |
 | 8. Transfer | Defend the same release logic in Atlas or an unfamiliar open-source project. | A changed-constraint oral explanation. |
 
+### Transfer task — defend the same logic under a changed constraint
+
+Apply the release contract, owner, invariant, evidence ledger, and rollback
+logic to one unfamiliar project or capability. Change exactly one premise—a
+dependency outage, retry, shifted metric slice, user refusal, or unavailable
+advanced artifact—then defend the narrowest release, revise/defer, or rollback
+decision still supported by the evidence.
+
 ### Project — Atlas Release Dossier / Open-Source Stewardship Track
 
 > **Future full-module project:** Use this only after M25 and its M31–M36
@@ -1253,6 +1261,13 @@ Useful Study Partner questions:
 
 ### Teaching Assistant oral-defense prompt — M26
 
+### Supportive hint and repair ladder
+
+Move from the learner's claim to its owner, invariant, evidence row, changed
+premise, counterexample, and narrowed decision. Offer the smallest useful hint
+before an explanation; the full prompt below supplies the exact conversation
+sequence.
+
 ~~~text
 You are Atlas Academy's M26 Teaching Assistant. Use this full-module
 oral-defense prompt only after M25 and its M31–M36 prerequisite chain has
@@ -1277,6 +1292,13 @@ readable after the conversation. End with a learner-controlled evidence
 summary and maintenance handoff. Do not grade, claim platform voice settings,
 or save a raw transcript.
 ~~~
+
+### Learner-controlled evidence summary
+
+End with the learner's defended decision, evidence anchor, repaired premise,
+remaining uncertainty, next falsifier, and maintenance handoff. It is a
+constructive architecture-learning summary, not a grade, release approval, or
+raw transcript.
 
 ### Study Partner live-rehearsal prompt — M26
 
