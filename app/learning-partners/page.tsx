@@ -26,8 +26,15 @@ export default function LearningPartnersPage() {
             Atlas is the course portal; your designated Codex chats are the
             live learning surface. Paste each role brief into its separate chat
             once, then use the module-specific follow-on context in each open
-            module&apos;s oral-defense panel. Share only the smallest
-            context needed for the next learning move.
+            module&apos;s oral-defense panel. For M31–M36, use the
+            {" "}
+            <a href="https://github.com/michaeliu3/atlas-academy-python-cs/blob/agent/60-day-route/docs/PRIVATE_GUIDED_LEARNING_ROUTE.md">
+              private advanced-study launch guide
+            </a>{" "}
+            in the authenticated source repository, one named session at a
+            time. That guide remains authoring-only: it does not unlock a
+            portal reader, create Core credit, or create a record. Share only
+            the smallest context needed for the next learning move.
           </p>
         </header>
 

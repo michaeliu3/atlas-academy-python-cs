@@ -154,10 +154,12 @@ export default function AtlasCoreRoutePage() {
           </div>
           <p>
             Every topic on this route needs a definition, derivation or trace,
-            misconception check, transfer task, and later retrieval. The oral
-            defense after each module creates a small learning record; it never
-            substitutes fluent speech, a green test, or a completed checklist
-            for mastery.
+            misconception check, transfer task, and later retrieval. For
+            eligible learner-ready work, a Teaching Assistant oral defense
+            supports a learner-controlled summary after evidence; M25/M26
+            reference previews use only their bounded preparation and rehearsal
+            cards. A portal click, preview, or oral conversation never
+            automatically creates a record or Core credit.
           </p>
           <Link className={styles.primaryLink} href="/diagnostic">
             Begin with the placement diagnostic <span aria-hidden="true">→</span>

@@ -138,6 +138,13 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(readable, /permission expires when that\s+session ends/i);
   assert.match(readable, /successful write is recorded\s+only from direct evidence/i);
   assert.match(html, /The Teaching Assistant conducts the actual post-module oral defense/);
+  assert.match(html, /private advanced-study launch guide/);
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/michaeliu3\/atlas-academy-python-cs\/blob\/agent\/60-day-route\/docs\/PRIVATE_GUIDED_LEARNING_ROUTE\.md"/,
+  );
+  assert.match(html, /That guide remains authoring-only/);
+  assert.match(html, /does not unlock a\s+portal reader, create Core credit, or create a record/);
 });
 
 test("gives every rendered workbook checklist item a descriptive read-only name", async () => {
@@ -2490,18 +2497,6 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   assert.match(html, /Next-Step Evidence Dossier/);
   assert.doesNotMatch(html, /katex-error/);
 
-  const m25DiagnosticReveals = [
-    ...new JSDOM(html).window.document.querySelectorAll("details.lesson-details"),
-  ].filter(
-    ({ firstElementChild }) =>
-      firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
-  );
-  assert.equal(m25DiagnosticReveals.length, 8);
-  for (const reveal of m25DiagnosticReveals) {
-    assert.equal(reveal.hasAttribute("open"), false);
-    assert.match(reveal.textContent ?? "", /Answer:/u);
-  }
-
   const referenceUrl = new URL(
     "../public/downloads/module25_reference.py",
     import.meta.url,
@@ -2532,7 +2527,7 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   );
 });
 
-test("renders legacy MCQ rationales behind local prediction gates while previews keep their static disclosure", async () => {
+test("renders reader-visible MCQ rationales behind local prediction gates", async () => {
   const routes = [
     {
       pathname: "/modules/20-networks-application-protocols",
@@ -2560,9 +2555,17 @@ test("renders legacy MCQ rationales behind local prediction gates while previews
     },
     {
       pathname: "/modules/25-evidence-grounded-intelligent-systems",
-      expectedInteractiveAnswerGates: 0,
-      expectedNativeAnswerGates: 8,
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
       expectedPredictionGates: 1,
+      hiddenRationaleText: "It names the bounded task",
+    },
+    {
+      pathname: "/modules/26-systems-capstone-open-source-stewardship",
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+      hiddenRationaleText: "Tests, scans, and generated prose can be useful artifacts",
     },
     {
       pathname: "/modules/27-discrete-mathematics-proof-counting-structures",
@@ -2678,18 +2681,6 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
   assert.doesNotMatch(html, /Post-module learning conversation/);
   assert.match(html, /Atlas Release Dossier \/ Open-Source Stewardship Track/);
   assert.doesNotMatch(html, /katex-error/);
-
-  const m26DiagnosticReveals = [
-    ...new JSDOM(html).window.document.querySelectorAll("details.lesson-details"),
-  ].filter(
-    ({ firstElementChild }) =>
-      firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
-  );
-  assert.equal(m26DiagnosticReveals.length, 8);
-  for (const reveal of m26DiagnosticReveals) {
-    assert.equal(reveal.hasAttribute("open"), false);
-    assert.match(reveal.textContent ?? "", /Best answer:/u);
-  }
 
   const referenceUrl = new URL(
     "../public/downloads/module26_reference.py",
