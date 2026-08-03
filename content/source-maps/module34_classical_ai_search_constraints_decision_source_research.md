@@ -17,8 +17,8 @@ particular, it does not unlock M35, M25, or M26.
 
 **Research access dates:** S34-01 through S34-12 were accessed on 2026-07-31;
 S34-10 and S34-13 were rechecked on 2026-08-01; targeted authoring-calibration
-routes S34-14 through S34-18 were checked on 2026-08-02, and S34-19 was checked
-on 2026-08-03. This note uses original
+routes S34-14 through S34-18 were checked on 2026-08-02, and S34-18–S34-19 were
+rechecked on 2026-08-03. This note uses original
 papers, an original primary work, official documentation/repositories, or official
 standards guidance only. It is link-and-original-paraphrase research. Atlas
 must not copy source prose, pseudocode, figures, tables, benchmark results,
@@ -89,7 +89,7 @@ validity, calibration, deployment authorization, or an M34 release signal.
 
 Entries S34-01–S34-12 were accessed on 2026-07-31; S34-10 and S34-13 were
 rechecked on 2026-08-01; S34-14 through S34-18 were checked on 2026-08-02;
-S34-19 was checked on 2026-08-03.
+S34-18–S34-19 were rechecked on 2026-08-03.
 “Link-only/original paraphrase” is intentional even when a project repository
 has an open-source license:
 documentation, examples, figures, test data, and third-party portions can have
@@ -115,7 +115,7 @@ revision or edition it relies on.
 | S34-15 | Stanford, [CS221 Course Scheduling assignment](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html) | Stanford course staff; official university-hosted course assignment | Direct code-reading calibration for backtracking over partial assignments, pruning a zero-contribution extension, and AC-3-style propagation after an assignment until domains stop changing. | Assignment is linked for study only. Atlas uses **link-only/original paraphrase** and must not reproduce its problem, code, tests, or solution structure. |
 | S34-16 | MIT OpenCourseWare, [6.825 Lecture 10: Planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) | MIT course staff; official graduate AI lecture note | Supports an explicit state-result relation, the frame problem, and STRIPS precondition/add/delete effects. It calibrates an original state-update card that labels persistence as a modeling convention instead of silently treating omitted facts as real-world invariants. | MIT OCW material is linked solely for calibration. Atlas remains **link-only/original paraphrase**; no copied slides, figures, examples, or prose without asset-level review. |
 | S34-17 | Stanford, [CS221 Markov Decisions handout](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html) | Stanford course staff; official university-hosted course handout | Direct support for auditing the Markov conditional-independence assumption, state/action/transition-model assumptions, and the finite-horizon versus specialized infinite-horizon distinction. | Course handout is linked for study. No blanket Atlas reuse permission is recorded; **link-only/original paraphrase** and independently authored examples only. |
-| S34-18 | UC Berkeley, [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), and [Markov decision processes](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | UC Berkeley course staff; official course textbook routes | Targeted calibration for original state-versus-observation countermodels, an explicit A-star variant/duplicate-policy audit, predecessor requeue direction in a fixed AC-3 trace, and a declared observation condition for a finite Bellman card. | University-hosted course material is linked for study only. Atlas uses **link-only/original paraphrase** and synthetic cards; do not copy textbook prose, figures, exercises, pseudocode, or code. |
+| S34-18 | UC Berkeley, [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [A* graph-search exam analysis](https://inst.eecs.berkeley.edu/~cs188/assets/exam/cs188-sp11-mt1-sol.pdf), [CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), and [Markov decision processes](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | UC Berkeley course staff; official course textbook routes | Targeted calibration for original state-versus-observation countermodels, an explicit A-star variant/duplicate-policy and goal-on-frontier-removal audit, predecessor requeue direction in a fixed AC-3 trace, and a declared observation condition for a finite Bellman card. | University-hosted course material is linked for study only. Atlas uses **link-only/original paraphrase** and synthetic cards; do not copy textbook prose, figures, exercises, pseudocode, or code. |
 | S34-19 | Carnegie Mellon University, [15-887 Planning, Execution, and Learning schedule](https://www.cs.cmu.edu/~mmv/planning/schedule.html) | CMU course staff; official university-hosted planning course schedule | Calibration for explicitly stating the closed-world convention behind a STRIPS-style state, then separating a model-false fact from an unobserved/uncertain or wholly unmodelled factor. | University course material is linked for study only. Atlas uses **link-only/original paraphrase** and an original key-at-rack card; do not copy notes, assignments, code, or solutions. |
 
 ### Targeted 2026-08-02 calibration routing
