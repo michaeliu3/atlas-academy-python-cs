@@ -136,6 +136,22 @@ function detailsSummaryLabel(children: ReactNode): string | null {
   return label || null;
 }
 
+const diagnosticRepairKeyClassName = "atlas-diagnostic-repair-key";
+
+/**
+ * M29 and M30 deliberately keep their short diagnostic repair tables together
+ * so a learner can compare misconceptions across the whole set. Turn only
+ * those two established heading-plus-table shapes into the same local
+ * prediction-before-reveal surface used by ordinary answer rationales. This
+ * keeps the workbooks source-readable without broad Markdown heuristics.
+ */
+function wrapBatchDiagnosticRepairKeys(markdown: string): string {
+  return markdown.replace(
+    /^(### (?:Compact repair key — why the plausible alternatives fail|Diagnostic repair key))\r?\n\r?\n((?:\|[^\r\n]*(?:\r?\n|$))+)/gmu,
+    `$1\n\n<details class="${diagnosticRepairKeyClassName}">\n<summary>Reveal after recording your answer and confidence.</summary>\n\n$2</details>\n`,
+  );
+}
+
 function createMarkdownComponents(
   enableMultipleChoicePredictionGates: boolean,
 ): Components {
@@ -172,7 +188,7 @@ function createMarkdownComponents(
   code({ children, className }) {
     return <code className={className}>{children}</code>;
   },
-    details({ children, open }) {
+    details({ children, className, open }) {
       const summaryLabel = detailsSummaryLabel(children);
       if (
         enableMultipleChoicePredictionGates &&
@@ -180,14 +196,21 @@ function createMarkdownComponents(
         isMultipleChoiceAnswerRationaleSummary(summaryLabel)
       ) {
         return (
-          <PredictionRevealGate summaryLabel={summaryLabel}>
+          <PredictionRevealGate
+            mode={
+              className?.split(/\s+/u).includes(diagnosticRepairKeyClassName)
+                ? "batch"
+                : "individual"
+            }
+            summaryLabel={summaryLabel}
+          >
             {children}
           </PredictionRevealGate>
         );
       }
 
       return (
-        <details className="lesson-details" open={open}>
+        <details className={["lesson-details", className].filter(Boolean).join(" ")} open={open}>
           {children}
         </details>
       );
@@ -260,7 +283,9 @@ export function ModuleMarkdown({
   enableMultipleChoicePredictionGates = false,
   markdown,
 }: ModuleMarkdownProps) {
-  const learnerMarkdown = normalizeMathDelimiters(markdown);
+  const learnerMarkdown = enableMultipleChoicePredictionGates
+    ? wrapBatchDiagnosticRepairKeys(normalizeMathDelimiters(markdown))
+    : normalizeMathDelimiters(markdown);
 
   return (
     <ReactMarkdown

@@ -4,6 +4,7 @@ import { type ReactNode, useId, useState } from "react";
 
 type PredictionRevealGateProps = {
   children: ReactNode;
+  mode?: "batch" | "individual";
   summaryLabel: string;
 };
 
@@ -22,13 +23,16 @@ const confidenceChoices = [
  */
 export function PredictionRevealGate({
   children,
+  mode = "individual",
   summaryLabel,
 }: PredictionRevealGateProps) {
   const reactId = useId();
   const [choice, setChoice] = useState<string | null>(null);
+  const [batchPredictionRecorded, setBatchPredictionRecorded] = useState(false);
   const [confidence, setConfidence] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
-  const canReveal = choice !== null && confidence !== null;
+  const canReveal =
+    (mode === "batch" ? batchPredictionRecorded : choice !== null) && confidence !== null;
   const hintId = `prediction-gate-${reactId}`;
 
   const revisePrediction = (nextChoice?: string, nextConfidence?: string) => {
@@ -37,39 +41,62 @@ export function PredictionRevealGate({
     setRevealed(false);
   };
 
+  const reviseBatchPrediction = (nextRecorded: boolean) => {
+    setBatchPredictionRecorded(nextRecorded);
+    setRevealed(false);
+  };
+
   return (
     <section
-      aria-label={`Multiple-choice prediction: ${summaryLabel}`}
+      aria-label={`${mode === "batch" ? "Multiple-choice diagnostic batch" : "Multiple-choice"} prediction: ${summaryLabel}`}
       className="prediction-reveal-gate"
     >
       <p className="prediction-reveal-kicker">Prediction before reveal</p>
-      <h4>Commit a choice and confidence</h4>
+      <h4>{mode === "batch" ? "Commit the batch and confidence" : "Commit a choice and confidence"}</h4>
       <p>
-        Choose the option you currently expect, then calibrate confidence. This
-        is a private thinking aid: it does not assign a grade, save an answer,
-        or claim mastery.
+        {mode === "batch"
+          ? "Record a prediction for each diagnostic question, then calibrate the answer you find least certain. This is a private thinking aid: it does not assign a grade, save an answer, or claim mastery."
+          : "Choose the option you currently expect, then calibrate confidence. This is a private thinking aid: it does not assign a grade, save an answer, or claim mastery."}
       </p>
 
-      <fieldset>
-        <legend>Which option do you predict?</legend>
-        <div className="prediction-choice-list">
-          {answerChoices.map((option) => (
-            <label key={option}>
-              <input
-                checked={choice === option}
-                name={`prediction-choice-${reactId}`}
-                onChange={() => revisePrediction(option)}
-                type="radio"
-                value={option}
-              />
-              {option}.
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      {mode === "batch" ? (
+        <fieldset>
+          <legend>Have you recorded a prediction for each question?</legend>
+          <label>
+            <input
+              checked={batchPredictionRecorded}
+              onChange={(event) => reviseBatchPrediction(event.target.checked)}
+              type="checkbox"
+            />
+            I recorded a prediction for each diagnostic question before opening the repair key.
+          </label>
+        </fieldset>
+      ) : (
+        <fieldset>
+          <legend>Which option do you predict?</legend>
+          <div className="prediction-choice-list">
+            {answerChoices.map((option) => (
+              <label key={option}>
+                <input
+                  checked={choice === option}
+                  name={`prediction-choice-${reactId}`}
+                  onChange={() => revisePrediction(option)}
+                  type="radio"
+                  value={option}
+                />
+                {option}.
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
 
       <fieldset>
-        <legend>How confident is that prediction?</legend>
+        <legend>
+          {mode === "batch"
+            ? "How confident is your least-certain recorded answer?"
+            : "How confident is that prediction?"}
+        </legend>
         <div className="prediction-choice-list">
           {confidenceChoices.map((option) => (
             <label key={option.value}>
@@ -92,12 +119,16 @@ export function PredictionRevealGate({
         onClick={() => setRevealed(true)}
         type="button"
       >
-        Reveal answer rationale
+        {mode === "batch" ? "Reveal diagnostic repair key" : "Reveal answer rationale"}
       </button>
       <p aria-live="polite" className="prediction-reveal-note" id={hintId}>
         {canReveal
-          ? "Your prediction is set. Reveal the rationale when you are ready."
-          : "Choose an option and confidence first; the rationale stays hidden until then."}
+          ? mode === "batch"
+            ? "Your batch prediction is set. Reveal the repair key when you are ready."
+            : "Your prediction is set. Reveal the rationale when you are ready."
+          : mode === "batch"
+            ? "Record the batch prediction and choose a confidence level first; the repair key stays hidden until then."
+            : "Choose an option and confidence first; the rationale stays hidden until then."}
       </p>
 
       {revealed ? (
