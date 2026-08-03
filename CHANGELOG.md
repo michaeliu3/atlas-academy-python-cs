@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Refined the advanced evidence chain after a targeted source/calibration pass:
+  M21/M22 now distinguish trace, identity, and effect-time boundaries; M28
+  states the rectangular full-column-rank condition; M30 separates empirical
+  gradients from population reasoning; M31 distinguishes convex KKT
+  sufficiency from Slater's qualification role; M32 adds a bounded
+  side-stream ownership/lifetime reading lens; M33 preserves total-reduction
+  target-instance language; and M36 names its M30 prerequisite. These remain
+  source-calibrated private authoring improvements only: M31–M36 are not
+  learner-released, and M25/M26 remain preview-gated.
 - Added M18's candidate-only structural package: its six-session systems
   workbook, source/reuse audit, typed evidence/preflight records, bounded
   reference-model links, and Teaching Assistant/Study Partner companion now
