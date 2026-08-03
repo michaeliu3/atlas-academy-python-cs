@@ -26,14 +26,15 @@ function observerSafetyErrors(workflow) {
     "github.event.workflow_run.repository.full_name == github.repository",
     "github.event.workflow_run.head_repository.full_name == github.repository",
     "github.event.workflow_run.head_sha != ''",
+    "github.event.workflow_run.display_title == 'atlas-course-ci-gate'",
     "uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0",
     "context.payload.workflow_run.id",
     "context.payload.workflow_run.run_attempt",
     "context.payload.workflow_run.head_sha",
     "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}",
     "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs",
-    "partial skipped Course CI jobs are not an approved draft preflight",
-    "Course CI draft run intentionally skipped",
+    'displayTitle: "atlas-course-ci-gate"',
+    "run.display_title === expected.displayTitle",
     "source-head-attached Course CI metadata observation",
   ];
   for (const fragment of requiredFragments) {
@@ -129,7 +130,8 @@ jobs:
       github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.repository.full_name == github.repository &&
       github.event.workflow_run.head_repository.full_name == github.repository &&
-      github.event.workflow_run.head_sha != ''
+      github.event.workflow_run.head_sha != '' &&
+      github.event.workflow_run.display_title == 'atlas-course-ci-gate'
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -148,14 +150,11 @@ jobs:
               workflowId: 323581527,
               workflowName: \"Course CI\",
               workflowPath: \".github/workflows/ci.yml\",
+              displayTitle: \"atlas-course-ci-gate\",
               event: \"pull_request\",
               requiredJobNames: [\"Portal quality gate\", \"Teaching models on Python 3.12\", \"Teaching models on Python 3.14\", \"Browser accessibility acceptance\"],
             });
-            const skippedExpectedJobs = [];
-            if (skippedExpectedJobs.length > 0) {
-              throw new Error("partial skipped Course CI jobs are not an approved draft preflight");
-            }
-            core.notice("Course CI draft run intentionally skipped");
+            assert(run.display_title === expected.displayTitle);
             core.notice("source-head-attached Course CI metadata observation");
 `;
   requireSafeObserver(safeFixture);
@@ -167,7 +166,7 @@ jobs:
     ["shell", safeFixture.replace("steps:", "steps:\n      - run: echo unsafe")],
     ["write permission", safeFixture.replace("actions: read", "actions: write")],
     ["privileged trigger", safeFixture.replace("workflow_run:", "pull_request_target:" )],
-    ["missing head guard", safeFixture.replace("      github.event.workflow_run.head_sha != ''\n", "")],
+    ["missing head guard", safeFixture.replace("      github.event.workflow_run.head_sha != '' &&\n", "")],
   ];
   for (const [label, unsafeFixture] of unsafeCases) {
     assert.ok(observerSafetyErrors(unsafeFixture).length > 0, `${label} is rejected`);
