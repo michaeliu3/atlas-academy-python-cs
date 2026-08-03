@@ -254,7 +254,7 @@ a bit that `phi` erased.
 
 ### Bounded reference fixture — collision before model talk
 
-Read `lib/m35-m36-signal-routing-fixture.js` as a tiny code-reading artifact.
+Read [`lib/m35-m36-signal-routing-fixture.js`](../../lib/m35-m36-signal-routing-fixture.js) as a tiny code-reading artifact.
 Before calling `m35RepresentationCollisionWitness()`, write the two inputs
 that share `phi(signal, context) = signal`, their labels, and whether a
 deterministic downstream function can separate them. Then inspect the returned

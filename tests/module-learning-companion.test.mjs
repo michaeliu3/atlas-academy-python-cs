@@ -209,7 +209,11 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.equal(m31.guideBinding.locator, "/guides/30");
   assert.equal(m31.teachingAssistant.role, "supportive-oral-defense");
   assert.equal(m31.studyPartner.role, "non-grading-rehearsal");
-  assert.match(m31.studyPartner.rehearsalMove, /M28\/M29\/M30 retrieval checks/u);
+  assert.match(m31.studyPartner.rehearsalMove, /M28\/M29\/M30 bridges/u);
+  assert.match(m31.studyPartner.rehearsalMove, /four short retrieval prompts across the three M28\/M29\/M30 bridges/u);
+  assert.match(m31.studyPartner.rehearsalMove, /conditional probability/u);
+  assert.match(m31.studyPartner.rehearsalMove, /support boundary/u);
+  assert.match(m31.studyPartner.rehearsalMove, /past history is fixed/u);
   assert.match(m31.studyPartner.rehearsalMove, /0–100 confidence/u);
   assert.match(m31.teachingAssistant.artifactFocus, /0–100 confidence/u);
   assert.equal(m31.forwardHandoff.targetModuleId, "m18");
