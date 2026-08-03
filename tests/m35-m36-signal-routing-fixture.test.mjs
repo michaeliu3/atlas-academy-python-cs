@@ -319,6 +319,10 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   ]);
 
   assert.match(m35Workbook, /m35RepresentationCollisionWitness\(\)/u);
+  assert.match(
+    m35Workbook,
+    /\[`lib\/m35-m36-signal-routing-fixture\.js`\]\(\.\.\/\.\.\/lib\/m35-m36-signal-routing-fixture\.js\)/u,
+  );
   assert.doesNotMatch(m35Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);
   assert.match(m35Workbook, /m35BaselineComparison\(\)/u);
   assert.match(m35Workbook, /m35CalibrationContrast\(\)/u);
@@ -366,6 +370,10 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.ok(m35Workbook.includes("0.2451"));
   assert.match(m35Workbook, /two-hidden-unit ReLU/u);
   assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
+  assert.match(
+    m36Workbook,
+    /\[`lib\/m35-m36-signal-routing-fixture\.js`\]\(\.\.\/\.\.\/lib\/m35-m36-signal-routing-fixture\.js\)/u,
+  );
   assert.doesNotMatch(m36Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);
   assert.match(m36Workbook, /m36FiniteClassSampleBoundCard\(\)/u);
   assert.match(m36Workbook, /One numerical theorem card — calculation is not a deployment claim/u);

@@ -272,7 +272,7 @@ assumption, a correct sampling frame, or a valid decision threshold.
 
 ### Bounded reference fixture — finite record versus named relation
 
-Read `lib/m35-m36-signal-routing-fixture.js` before making a learning claim.
+Read [`lib/m35-m36-signal-routing-fixture.js`](../../lib/m35-m36-signal-routing-fixture.js) before making a learning claim.
 Before calling `m36LearningClaimProbe()`, predict the empirical zero-one risk
 of `always-one` on its four-row sample and the `signal-only` accuracy under
 each named synthetic relation. After inspection, identify which numbers
