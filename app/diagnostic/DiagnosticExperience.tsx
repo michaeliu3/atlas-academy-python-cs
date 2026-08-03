@@ -24,6 +24,10 @@ import {
   persistDiagnosticProgress,
   restoreDiagnosticProgress,
 } from "@/lib/diagnostic-progress-codec";
+import {
+  appendDiagnosticPaceDecision,
+  diagnosticPaceOptions,
+} from "@/lib/diagnostic-pace";
 import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 
@@ -71,6 +75,7 @@ export function DiagnosticExperience() {
     useState<PersistenceState>("loading");
   const [copyState, setCopyState] = useState<CopyState>("idle");
   const [approvedLearningBrief, setApprovedLearningBrief] = useState<string | null>(null);
+  const [selectedPaceId, setSelectedPaceId] = useState<string | null>(null);
   const [resetArmed, setResetArmed] = useState(false);
   const [restoredProgress, setRestoredProgress] = useState(false);
   const [questionFocusVersion, setQuestionFocusVersion] = useState(0);
@@ -160,9 +165,13 @@ export function DiagnosticExperience() {
     [attempt],
   );
   const learningBrief = useMemo(() => toLearningBrief(attempt), [attempt]);
+  const learningBriefWithPace = useMemo(
+    () => appendDiagnosticPaceDecision(learningBrief, selectedPaceId),
+    [learningBrief, selectedPaceId],
+  );
   const learningBriefApproved = canExportApprovedDraft(
     approvedLearningBrief,
-    learningBrief,
+    learningBriefWithPace,
   );
   const copyFailureVisible = copyState === "failed" && learningBriefApproved;
 
@@ -190,7 +199,14 @@ export function DiagnosticExperience() {
 
   function setLearningBriefApproval(approved: boolean) {
     copyAttemptVersionRef.current += 1;
-    setApprovedLearningBrief(approved ? learningBrief : null);
+    setApprovedLearningBrief(approved ? learningBriefWithPace : null);
+    setCopyState("idle");
+  }
+
+  function selectDiagnosticPace(paceId: string) {
+    copyAttemptVersionRef.current += 1;
+    setSelectedPaceId(paceId);
+    setApprovedLearningBrief(null);
     setCopyState("idle");
   }
 
@@ -206,6 +222,7 @@ export function DiagnosticExperience() {
       setPersistence("unavailable");
     }
     setLearningBriefApproval(false);
+    setSelectedPaceId(null);
     setResetArmed(false);
     setRestoredProgress(false);
     setQuestionFocusVersion((version) => version + 1);
@@ -228,10 +245,10 @@ export function DiagnosticExperience() {
     const copyAttemptVersion = copyAttemptVersionRef.current;
     try {
       if (window.navigator.clipboard?.writeText) {
-        await window.navigator.clipboard.writeText(learningBrief);
+        await window.navigator.clipboard.writeText(learningBriefWithPace);
       } else {
         const transfer = document.createElement("textarea");
-        transfer.value = learningBrief;
+        transfer.value = learningBriefWithPace;
         transfer.setAttribute("readonly", "");
         transfer.style.position = "fixed";
         transfer.style.opacity = "0";
@@ -273,7 +290,7 @@ export function DiagnosticExperience() {
     heading.textContent = "Atlas Academy learning brief";
     boundary.textContent =
       "Learner-approved, minimal summary. This page omits the full diagnostic ledger.";
-    brief.textContent = learningBrief;
+    brief.textContent = learningBriefWithPace;
     main.appendChild(heading);
     main.appendChild(boundary);
     main.appendChild(brief);
@@ -355,6 +372,61 @@ export function DiagnosticExperience() {
             </p>
           </article>
         </div>
+
+        <section
+          className="diagnostic-pace-choice"
+          aria-labelledby="diagnostic-pace-title"
+        >
+          <header>
+            <p className="kicker">Calendar, not a gate</p>
+            <h2 id="diagnostic-pace-title">Choose a temporary pace after seeing the repair work.</h2>
+            <p>
+              This is a temporary planning choice. It does not unlock a module or
+              create a record; it only adds your selected calendar to an
+              approved learning brief for a later Study Partner or Teaching
+              Assistant handoff.
+            </p>
+          </header>
+          <fieldset>
+            <legend>Which focused-time band is realistic for the next seven days?</legend>
+            <div className="diagnostic-pace-options">
+              {diagnosticPaceOptions.map((pace) => (
+                <label
+                  className="diagnostic-pace-option"
+                  data-selected={selectedPaceId === pace.id}
+                  key={pace.id}
+                >
+                  <input
+                    checked={selectedPaceId === pace.id}
+                    name="diagnostic-pace"
+                    onChange={() => selectDiagnosticPace(pace.id)}
+                    type="radio"
+                    value={pace.id}
+                  />
+                  <span>
+                    <strong>{pace.label}</strong>
+                    <small>{pace.weeklyHours}</small>
+                    <span>{pace.summary}</span>
+                    {pace.recommended ? (
+                      <em>Recommended starting point</em>
+                    ) : null}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <p className="diagnostic-pace-boundary">
+            Recalibrate after seven days. Keep proof/trace, prediction,
+            transfer, and oral reflection; change the calendar rather than
+            compressing the evidence. This selection stays in this results
+            view and is not saved with diagnostic progress.
+          </p>
+          <p className="diagnostic-pace-status" aria-live="polite">
+            {selectedPaceId
+              ? `Selected: ${diagnosticPaceOptions.find((pace) => pace.id === selectedPaceId)?.label}. This will appear in a newly approved learning brief.`
+              : "No pace is selected yet; your learning brief will not invent one."}
+          </p>
+        </section>
 
         <section
           className="diagnostic-learning-route"
@@ -634,7 +706,7 @@ export function DiagnosticExperience() {
                 id="diagnostic-manual-copy-fallback"
                 readOnly
                 rows={12}
-                value={learningBrief}
+                value={learningBriefWithPace}
               />
             </div>
           ) : null}

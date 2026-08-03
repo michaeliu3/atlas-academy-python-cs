@@ -6173,6 +6173,137 @@ main.module-library-shell {
   line-height: 1.55;
 }
 
+.diagnostic-pace-choice {
+  background: linear-gradient(135deg, var(--plum-soft), rgb(255 255 255 / 48%));
+  border: 1px solid color-mix(in srgb, var(--plum) 32%, var(--line));
+  margin: 0 0 clamp(3.5rem, 7vw, 6rem);
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+}
+
+.diagnostic-pace-choice > header {
+  max-width: 48rem;
+}
+
+.diagnostic-pace-choice h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  font-weight: 540;
+  line-height: 1.08;
+  margin: 0.45rem 0 0.75rem;
+}
+
+.diagnostic-pace-choice > header > p:last-child,
+.diagnostic-pace-boundary,
+.diagnostic-pace-status {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  max-width: 52rem;
+}
+
+.diagnostic-pace-choice fieldset {
+  border: 0;
+  margin: 1.4rem 0 0;
+  padding: 0;
+}
+
+.diagnostic-pace-choice legend {
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 780;
+  line-height: 1.45;
+  max-width: 48rem;
+  padding: 0;
+}
+
+.diagnostic-pace-options {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.8rem;
+}
+
+.diagnostic-pace-option {
+  background: rgb(255 255 255 / 58%);
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  cursor: pointer;
+  display: flex;
+  gap: 0.65rem;
+  min-height: 12.5rem;
+  padding: 0.9rem;
+}
+
+.diagnostic-pace-option[data-selected="true"] {
+  background: var(--paper);
+  border-color: var(--plum);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--plum) 22%, transparent);
+}
+
+.diagnostic-pace-option:has(input:focus-visible) {
+  outline: 3px solid rgba(49, 87, 164, 0.5);
+  outline-offset: 3px;
+}
+
+.diagnostic-pace-option input {
+  accent-color: var(--plum);
+  flex: 0 0 auto;
+  margin: 0.2rem 0 0;
+}
+
+.diagnostic-pace-option > span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.diagnostic-pace-option strong {
+  font-family: var(--font-serif), serif;
+  font-size: 1.18rem;
+  font-weight: 560;
+  line-height: 1.1;
+}
+
+.diagnostic-pace-option small {
+  color: var(--plum);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 750;
+  line-height: 1.35;
+  margin-top: 0.38rem;
+  text-transform: uppercase;
+}
+
+.diagnostic-pace-option > span > span {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  margin-top: 0.8rem;
+}
+
+.diagnostic-pace-option em {
+  align-self: flex-start;
+  background: var(--plum);
+  color: var(--paper);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 780;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+  padding: 0.24rem 0.35rem;
+  text-transform: uppercase;
+}
+
+.diagnostic-pace-boundary {
+  border-top: 1px solid color-mix(in srgb, var(--ink) 15%, transparent);
+  margin: 1.1rem 0 0;
+  padding-top: 0.9rem;
+}
+
+.diagnostic-pace-status {
+  color: var(--ink);
+  font-weight: 680;
+  margin: 0.75rem 0 0;
+}
+
 .diagnostic-learning-route,
 .diagnostic-bridge-plan,
 .diagnostic-signal-ledger {
@@ -6672,6 +6803,7 @@ main.module-library-shell {
 
   .diagnostic-confidence-fieldset > div,
   .diagnostic-tier-grid,
+  .diagnostic-pace-options,
   .diagnostic-signal-ledger dl {
     grid-template-columns: 1fr;
   }
