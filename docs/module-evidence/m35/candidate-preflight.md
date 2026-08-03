@@ -48,15 +48,17 @@ tuple.
 
 ## Required path before promotion
 
-1. Keep M35 authoring-only and hidden until a reviewed delivery design supplies
-   a separate fixed hidden review-candidate selector, canonical learner source
-   ledger, and appropriate learner-facing interaction or equivalent, without
-   weakening prerequisite gates. That selector must not reuse this authoring
-   workbook or its authoring-delivery map as promotion authority.
-2. Conduct explicit independent review of the workbook, source/claim/license
-   boundaries, visual and accessibility behavior, diagnostic/rubric quality,
-   and the TA/Study Partner/oral-defense flow on a preserved review-ready
-   commit.
+1. Keep M35 authoring-only and hidden. The existing fixed selector at
+   `content/course/contracts/review-candidates/m35.v1.json` already freezes
+   `content/modules/35_machine_learning_representation.md` and its candidate
+   source ledger for qualified review. It is not the graph-bound learner source
+   map, an approval, or promotion authority; the separate `content/authoring`
+   workbook and authoring-delivery map remain authoring evidence only.
+2. Conduct explicit independent review on a preserved review-ready commit of
+   eight lenses: claims/derivations/counterexamples; source/license links;
+   visual and semantic accessibility; diagnostic and retrieval quality;
+   dossier/rubric quality; bounded fixture or interaction behavior; TA/Study
+   Partner oral/whiteboard flow; and learner privacy/record control.
 3. Add a learner manifest/route only after the reviewed contract, tests,
    accessibility checks, and release requirements are satisfied; preserve the
    exact reviewed commit as an ancestor.

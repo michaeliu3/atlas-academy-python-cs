@@ -70,3 +70,7 @@ against the exact candidate commit. University, standards, documentation, and
 primary-source routes calibrate instructional scope and formal definitions; they
 do not grant reuse, automatically prove the candidate's argument, establish
 learner competence, validate a data/model relation, or authorize a decision.
+
+The focused [2026-08-03 official calibration](../../docs/research/m35-m36-official-calibration-2026-08-03.md)
+records the scope check and its remaining delivery-evidence boundary. It is not
+a source-map selection, review approval, or release record.
