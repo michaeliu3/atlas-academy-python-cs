@@ -53,6 +53,7 @@ real-world claim. None automatically upgrades into the next.
 | S09 | [OpenIntro Introduction to Modern Statistics](https://www.openintro.org/book/ims/) and [license](https://www.openintro.org/license/) | Reader-friendly simulation, randomization, bootstrap, regression, and study-design route. | Most materials are CC BY-SA 3.0 but exceptions apply; default to links/original material and no OpenIntro branding. |
 | S10 | [SciPy `bootstrap`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html), [`permutation_test`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.permutation_test.html), and [`monte_carlo_test`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.monte_carlo_test.html) | Versioned API contracts for named resampling methods only. | SciPy’s BSD licensing does not turn an API result into a theorem, valid design, or causal conclusion. Pin a version before code reuse. |
 | S11 | [Efron (1979)](https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.full), [Benjamini–Hochberg (1995)](https://doi.org/10.1111/j.2517-6161.1995.tb02031.x), [Rubin (1976)](https://doi.org/10.1093/biomet/63.3.581), [White (1982)](https://doi.org/10.2307/1912526), [Huber (1964)](https://doi.org/10.1214/aoms/1177703732), [Tibshirani (1996)](https://doi.org/10.1111/j.2517-6161.1996.tb02080.x) | Original anchors for bootstrap, FDR, missingness, misspecified likelihood, robustness, and regularized estimation. | Publisher-controlled / link-only. Cite only the result actually used and preserve its assumptions. |
+| S12 | MIT [6.7220 Lecture 15](https://ocw.mit.edu/courses/6-7220j-nonlinear-optimization-spring-2025/mit6_7220_s25_lec15.pdf) | Conditional unbiased-estimator and mini-batch distinction at the M30 → M31 bridge. | Accessed 2026-08-03. MIT OCW link/cite only; M30 uses an original two-line bridge and does not reproduce the lecture or claim SGD convergence. |
 
 ## Six-session source routing
 
@@ -91,8 +92,9 @@ real-world claim. None automatically upgrades into the next.
 ## Forward handoff
 
 - **M31:** likelihood/MAP become objectives; M30 keeps the target, data model,
-  and uncertainty boundary visible while M31 owns optimization and information
-  theory.
+  and uncertainty boundary visible. Under a named conditional sampling rule, a
+  mini-batch average can estimate a fixed empirical gradient; M31 owns
+  optimization, convergence, and information-theory claims.
 - **M32:** fixed fixtures, seed/version records, shape/axis conventions, and
   resampling cost become scientific-Python implementation evidence.
 - **M34:** conditional independence, Markov language, and uncertainty models

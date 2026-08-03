@@ -1860,6 +1860,7 @@
         "slug": "36-statistical-learning-theory-reliable-deep-learning",
         "academicPrerequisiteNumbers": [
           29,
+          30,
           31,
           32,
           33,
@@ -1979,7 +1980,7 @@
           {
             "id": "m36-s01",
             "title": "What learning claims mean: risk, representation, data, and assumptions",
-            "plannedArtifact": "Assumption-scope sheet and a first reliable-learning evidence map."
+            "plannedArtifact": "Empirical-population scope card, assumption-scope sheet, and a first reliable-learning evidence map."
           },
           {
             "id": "m36-s02",

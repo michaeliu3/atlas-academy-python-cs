@@ -13,9 +13,16 @@
       "sessionHeadingAnchor": "session-1--risk-representation-data-and-assumption-scope",
       "usesPrerequisiteModuleIds": [
         "m29",
+        "m30",
         "m35"
       ],
       "outputs": [
+        {
+          "id": "m36-empirical-population-scope-card",
+          "kind": "claim-table",
+          "headingAnchor": "output-empiricalpopulation-scope-card",
+          "forwardArtifactId": "m36-empirical-population-scope-card"
+        },
         {
           "id": "m36-assumption-scope-sheet",
           "kind": "worksheet",

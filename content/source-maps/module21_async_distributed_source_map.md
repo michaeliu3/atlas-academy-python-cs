@@ -445,7 +445,9 @@ Allowed learner-facing claims:
   The first non-`CancelledError` child failure cancels the remaining group
   tasks and failures are combined into an exception group after the group has
   waited. It was added in Python 3.11; in 3.14 `create_task()` passes keyword
-  arguments to the loop task factory.
+  arguments to the loop task factory. An eager-start policy can run child code
+  during creation, so the returned task establishes local ownership but not
+  that the child has not started.
 - `asyncio.gather()` and `TaskGroup` are not interchangeable. With default
   `return_exceptions=False`, a first exception propagates out of `gather()`
   while other awaitables continue; `TaskGroup` supplies the stronger
@@ -849,6 +851,10 @@ Allowed learner-facing claims:
 - Sampling flags are recommendations, not a guarantee that every service has
   recorded data. A service may need to restart trace context at a security
   boundary.
+- At an external boundary, a policy must choose to drop, restart, or narrowly
+  continue a trace context after format, size, privacy, and trust checks.
+  Treat `tracestate` as opaque vendor data rather than a safe raw log field;
+  retain only a generated or redacted local correlation reference when needed.
 
 Required stopping line:
 

@@ -94,7 +94,7 @@
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "24974f1779a333f1244d3f6bb25dd7519f0f0e3ce705932260400747f0a7de74"
+      "sha256": "d78d63243825e9eed5ed8a0539157b85768ef8d5c09014d5ee65ae8f133719ab"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -110,7 +110,7 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "af3b23ce33bfa24e72d7b5eb3bf11dc0244afd783419543a0f1522bdc03f0873"
+      "sha256": "943c4dadd1f77d2c3c40c26d885ecfff3fd4eb6a0e0f3a63281f1521d26fd0fc"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m31.v1.json",
@@ -134,7 +134,7 @@
     },
     {
       "path": "content/course/contracts/authoring-delivery/m36.v1.json",
-      "sha256": "a01a123352f5548254d9931c25ac46dc8b325e759149493857ce09b38bb47e62"
+      "sha256": "1dcfae2207b616f90ed49ebe563aec5ca2391de4ef67a515a837228c1f517176"
     },
     {
       "path": "content/course/contracts/companions/m01.v1.json",
@@ -270,7 +270,7 @@
     },
     {
       "path": "content/course/contracts/companions/m36.v1.json",
-      "sha256": "af341075245795413512b3bf347775b9eeaa3519a09c22f61e99962a6de5250f"
+      "sha256": "b770c36439f058cc56869115681369ec9486750525cc6a08f8425f7599d1a06d"
     },
     {
       "path": "content/course/contracts/evidence-preflight/m01.v1.json",
@@ -518,7 +518,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "b26a79b17841100209f8e4c841d45aacb53061f86df33c88d1d48895b8c64312"
+      "sha256": "79d701b539d7bad2e09650f810d10c2eb17ab39aadff9cd71f7af669a7c0a2d3"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-      "sha256": "77e829bc152c52841e0368abdfe28c4d42c08bc4778d19e285554a128a69263a"
+      "sha256": "9cf7b7becc5cb7fd761998e04b00ef2c3ec4b510b3a5abadf3cc4e3026123a54"
     },
     {
       "path": "content/course/manual-learning-record-workflow.v1.json",
@@ -630,11 +630,11 @@
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
-      "sha256": "3b29363d513ec6fe67d5744f32310320fd0315a05746a8a06c574c3f23e1008a"
+      "sha256": "1339aebb2d01ccd78f9cd2ea5eb63fbab6386a989fbe38f8bd52a50cf4d1dedf"
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
-      "sha256": "e0ddfe87727a578c3c5e428a1f012fcf2b4cd77739039775cd494e29087663a3"
+      "sha256": "49def9e86deb35fc2669215b7f26b19f3ce04da104f11284baa488df4624f0f6"
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
@@ -658,7 +658,7 @@
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "69cb932d26e2bcfe5ae41d96e7ea26ef3f82515a80435f74280c0c0229332b08"
+      "sha256": "ed81fc7fb8bb7fbd03f572d7504528144d83cb11232831d9ec9e2ec45235aff6"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
@@ -666,7 +666,7 @@
     },
     {
       "path": "content/modules/30_probability_statistics_scientific_inference.md",
-      "sha256": "c135b3f62f6bffaec6c07630c4b7c4bd2e8ba259c443e28a2c6952dfe9a623f6"
+      "sha256": "e480d8bc23a02f49894a579606a51c0083b723ce4e25931dcf4f49d09bda790a"
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
@@ -746,7 +746,7 @@
     },
     {
       "path": "content/source-maps/module21_async_distributed_source_map.md",
-      "sha256": "ea16503c78bf4cee8d1c71c5a1eabcccff6c1638480b58e9e218e2a7c12e807c"
+      "sha256": "6c15ff6bfe1b3d14b114f25b7d0dc4f99d159b3cf2123de966eda990e23d881c"
     },
     {
       "path": "content/source-maps/module22_security_trust_source_audit_addendum.md",
@@ -754,7 +754,7 @@
     },
     {
       "path": "content/source-maps/module22_security_trust_source_map.md",
-      "sha256": "edb9a675ea8e9f75c71fe76e0f51af0ba86a0f78b0f34ce3f5fcf2301985b356"
+      "sha256": "03764fc55efc1b6b04016c5ba2132184ade0edeed0704a20ea9a7c5a23285526"
     },
     {
       "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
@@ -818,7 +818,7 @@
     },
     {
       "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
-      "sha256": "5c830c8852c0552de12faa41fa03a048552fad60a05616ade45a339c336a8295"
+      "sha256": "8de564289944de0f602aaebc86cbec0c1a56c4ca6b9e92e9c655211b071a15bc"
     },
     {
       "path": "content/source-maps/module31_optimization_information_source_audit.md",
@@ -846,7 +846,7 @@
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
-      "sha256": "4797dab9837c9bd4c9fde3046e244cf2b48cc0278d7fe0ea31852b52085e7370"
+      "sha256": "221ad1ab78422d496edfc91f7cbfcc79f5b6dd61a7c1d20525d61c38d9cf7791"
     },
     {
       "path": "content/source-maps/module3_abstraction_interfaces_adts_source_audit_addendum.md",
@@ -1054,7 +1054,7 @@
     },
     {
       "path": "public/downloads/module21_async_distributed_source_map.md",
-      "sha256": "ea16503c78bf4cee8d1c71c5a1eabcccff6c1638480b58e9e218e2a7c12e807c"
+      "sha256": "6c15ff6bfe1b3d14b114f25b7d0dc4f99d159b3cf2123de966eda990e23d881c"
     },
     {
       "path": "public/downloads/module21_reference.py",
@@ -1122,7 +1122,7 @@
     },
     {
       "path": "public/downloads/module30_probability_statistics_scientific_inference_source_map.md",
-      "sha256": "5c830c8852c0552de12faa41fa03a048552fad60a05616ade45a339c336a8295"
+      "sha256": "8de564289944de0f602aaebc86cbec0c1a56c4ca6b9e92e9c655211b071a15bc"
     },
     {
       "path": "public/downloads/module30_reference.py",

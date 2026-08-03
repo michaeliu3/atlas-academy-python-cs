@@ -104,9 +104,10 @@ Strongest supported claim / remaining uncertainty / M25 handoff:
 ~~~mermaid
 %% atlas-diagram-id: m36-theory-system-map
 %% atlas-diagram-title: M36 connects mathematical claims to learning-system evidence
-%% atlas-diagram-alt: M29 contributes regularity and limiting statements; M31 contributes optimization evidence; M32 contributes execution and reproducibility; M33 contributes formal quantifiers and limits; M35 contributes representation, evaluation, shift, and authority. All feed M36. M36 creates a bounded reliable-learning evidence packet that is handed to preview-only M25, then eventually M26.
+%% atlas-diagram-alt: M29 contributes regularity and limiting statements; M30 contributes probability models and the finite-average versus population-expectation distinction; M31 contributes optimization evidence; M32 contributes execution and reproducibility; M33 contributes formal quantifiers and limits; M35 contributes representation, evaluation, shift, and authority. All feed M36. M36 creates a bounded reliable-learning evidence packet that is handed to preview-only M25, then eventually M26.
 flowchart LR
   M29["M29: domains, limits, regularity"] --> M36["M36: theory-to-system evidence"]
+  M30["M30: population, sampling, expectation"] --> M36
   M31["M31: objective + optimization"] --> M36
   M32["M32: systems + numerical evidence"] --> M36
   M33["M33: quantifiers + limits"] --> M36
@@ -116,10 +117,11 @@ flowchart LR
 ~~~
 
 **Text equivalent:** M36 does not turn a theorem into a release decision. It
-uses M29 to keep limits scoped, M31 to separate algorithmic from statistical
-evidence, M32 to keep execution visible, M33 to read quantified claims, and
-M35 to retain representation/evaluation/authority boundaries. Its forward
-packet is for later synthesis only after the graph’s separate gates are met.
+uses M29 to keep limits scoped, M30 to distinguish a finite average from a
+population expectation, M31 to separate algorithmic from statistical evidence,
+M32 to keep execution visible, M33 to read quantified claims, and M35 to retain
+representation/evaluation/authority boundaries. Its forward packet is for later
+synthesis only after the graph’s separate gates are met.
 
 ### Entry retrieval
 
@@ -131,7 +133,8 @@ Before continuing, answer briefly.
 4. Name one way two runs of unchanged source code can differ.
 5. Why does a shift monitor need both a response owner and a stop condition?
 
-Retrieve M29 if regularity/limit language is fragile; M31 for objective versus
+Retrieve M30 if the finite-average versus population-expectation distinction is
+fragile; M29 for regularity/limit language; M31 for objective versus
 generalization; M33 for quantifiers; M32 for execution variables; and M35 for
 evaluation, shift, and authority.
 
@@ -284,6 +287,13 @@ or a shift. Finish with:
 
 > “The implication I would need is ___ under ___; this finite record alone
 > does not establish ___.”
+
+### Output: Empirical–Population Scope Card
+
+For one reported average loss, name the finite sample average, the target
+population relation, the sampling or data-collection condition, and the exact
+inference still missing. Finish with: “This average estimates ___ only if ___;
+it does not by itself establish ___.”
 
 ### Output: Initial Reliable-Learning Evidence Map
 
@@ -957,19 +967,21 @@ evidence, monitoring boundary, and M25 handoff kept together.
 
 ### Required artifacts
 
-1. **Assumption-scope sheet:** target relation, loss, class, representation,
+1. **Empirical–population scope card:** finite average, target relation,
+   sampling condition, and the missing inference before a population claim.
+2. **Assumption-scope sheet:** target relation, loss, class, representation,
    sample/split, regularity/limit conditions, and unknowns.
-2. **Gap ledger:** approximation, estimation, optimization, and operational
+3. **Gap ledger:** approximation, estimation, optimization, and operational
    questions with their evidence and non-claims.
-3. **Limit-and-nonclaim card:** one scoped theorem/limit statement, proof
+4. **Limit-and-nonclaim card:** one scoped theorem/limit statement, proof
    idea, quantifiers, edge case, and non-conclusion.
-4. **Theory-system reproduction record:** source/data/environment/precision/
+5. **Theory-system reproduction record:** source/data/environment/precision/
    randomness identity, repeats, tolerance, and semantic oracle.
-5. **Shift/monitoring map:** two declared synthetic shift mechanisms; a chosen
+6. **Shift/monitoring map:** two declared synthetic shift mechanisms; a chosen
    observable marked as input-time or delayed-label evidence; label
    availability/detection lag; one mechanism it can miss; threshold and
    false-alarm/miss trade-off; owner, intervention, and stop boundary.
-6. **Synthesis handoff:** the strongest supported claim, uncertainty, and the
+7. **Synthesis handoff:** the strongest supported claim, uncertainty, and the
    exact question M25 should carry into later evidence-grounded design work.
 
 ### Acceptance rubric

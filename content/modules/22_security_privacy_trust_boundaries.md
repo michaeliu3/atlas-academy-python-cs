@@ -273,6 +273,16 @@ identity assertion, an exact authorization tuple, and an observed effect.
 
 </details>
 
+### Trace-disposition card — context is not a credential
+
+An inbound `traceparent` / `tracestate` needs a boundary disposition, not a
+promotion. The boundary owner chooses to **drop** it, **restart** a local
+context, or **continue** only a permitted context after format, size, privacy,
+and trust rules. Treat `tracestate` as opaque vendor data, not a safe raw log
+field. A redacted local correlation reference and policy version can support
+diagnosis; separately verified identity and authorization still govern every
+protected effect.
+
 ### Session artifact
 
 Complete this sentence in your notes:
@@ -451,6 +461,12 @@ member path: notes-link       kind: symlink    size: 0
 
 No archive is opened. No filesystem is touched. The question is purely: which
 metadata violates Atlas policy before any effect is possible?
+
+Metadata preflight is not an effect-time guarantee. If a future product ever
+extracts, an operation owner must enforce member policy immediately before each
+effect into an owned destination, keep resource/collision/link limits, and
+account for or clean up partial output after failure. Atlas deliberately does
+none of that here: it remains a metadata-only exercise, not an extraction lab.
 
 ### Database boundary
 

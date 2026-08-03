@@ -276,7 +276,7 @@ pending = fetch_catalog()             # a coroutine object exists
 
 async with asyncio.TaskGroup() as group:
     task = group.create_task(fetch_catalog(), name="atlas-collect:catalog")
-    # An owned local Task now exists. No remote effect is implied.
+    # An owned local Task now exists. It may start eagerly; no remote effect is implied.
 
 result = task.result()                # parent observes its local terminal result
 ```
@@ -284,9 +284,15 @@ result = task.result()                # parent observes its local terminal resul
 | Moment | May say | Must not say |
 |---|---|---|
 | `fetch_catalog()` returned | a coroutine object was constructed | a fetch began |
-| `create_task(...)` returned | a task is scheduled and owned by this scope | catalog received a request |
+| `create_task(...)` returned | this scope owns a local task; it may already have begun under an eager-start policy | catalog received a request or the child has not run yet |
 | child reaches `await adapter.fetch(...)` | local task yielded at a declared boundary | an adapter made a remote decision |
 | parent reads a result/exception | parent observed a local task outcome | every external effect is known |
+
+**Timing boundary.** Returning from `create_task` establishes ownership, not
+that no child code has run. Python 3.14 can start a task eagerly through the
+loop/task-factory policy, so creation order is not necessarily start order. If
+admission must precede child work, put an explicit start/admission gate in the
+declared protocol rather than infer it from the return of `create_task`.
 
 ### Code-reading lab A1 — the orphaned coroutine
 
@@ -325,8 +331,9 @@ Choose one statement and record confidence 1–4 in the visual studio.
 <details>
 <summary>Reveal after predicting</summary>
 
-**B** is the narrow answer. It is a local task-ownership fact. A request send,
-remote admission, and collection cut need other evidence and policy steps.
+**B** is the narrow answer. It is a local task-ownership fact. Under an
+eager-start policy, child code may already have begun; a request send, remote
+admission, and collection cut still need other evidence and policy steps.
 
 </details>
 
@@ -341,10 +348,10 @@ review, release, or learner mastery.
 <details>
 <summary>Reveal after the prediction and confidence record</summary>
 
-The task group owns a scheduled local task. That does not establish a request
-send, remote admission, remote effect, rollback, or a complete collection
-cut. The smallest repair for a broader claim is to name the event boundary and
-the evidence that reaches it.
+The task group owns a local task. It may already have begun if the loop uses an
+eager-start policy. Neither fact establishes a request send, remote admission,
+remote effect, rollback, or a complete collection cut. The smallest repair for
+a broader claim is to name the event boundary and the evidence that reaches it.
 
 </details>
 
@@ -874,6 +881,12 @@ The named trace may still correlate the local records that Atlas chose to
 record. It does not authenticate a source, make the trace complete, or prove a
 causal remote history. The transfer is to state the trust question and retain
 the local non-claim rather than silently strengthening it.
+
+At the external boundary, do not silently forward the received context. Module
+22 requires the owner to choose a trace disposition—drop it, restart a local
+context, or continue only under a format, size, privacy, and trust policy—then
+use a generated/redacted local reference for evidence. Authentication and
+authorization remain separate questions.
 
 </details>
 

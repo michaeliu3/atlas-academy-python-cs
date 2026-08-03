@@ -1313,3 +1313,16 @@ the owner’s guided route, never as an automatic reader unlock or completion
 claim. The Study Partner should stress one probability-model assumption before
 the TA asks the learner to connect objective, constraint, optimization trace,
 and information trade-off.
+
+### Probability bridge — empirical-gradient estimate
+
+For a declared finite empirical objective
+\[
+F_n(\theta)=\frac1n\sum_{i=1}^{n}\ell(\theta;z_i),
+\]
+a uniformly sampled, correctly weighted mini-batch average of per-example
+gradients can target \(\nabla F_n(\theta_t)\) conditional on the stated past
+history and sampling rule. That is an estimator fact about a fixed empirical
+objective—not evidence that one step decreases the objective, that an algorithm
+converges, or that population risk improves. M31 owns those optimization and
+stochastic-convergence claims.

@@ -65,7 +65,7 @@ asset and harm hypothesis
 
 | Boundary | Module 21 gives the learner | Module 22 adds | Module 23 makes concrete |
 |---|---|---|---|
-| Request identity | An operation ID and trace context correlate declared observations. | Neither identifier authenticates a caller or authorizes an action. | A query has a parsed identity and explicit evaluation context; it cannot inherit authority from a string. |
+| Request identity | An operation ID and trace context correlate declared observations. | Choose drop/restart/policy-bounded continuation and a redacted local reference; neither identifier authenticates a caller or authorizes an action. | A query has a parsed identity and explicit evaluation context; it cannot inherit authority from a string. |
 | Unknown outcome | A local timeout can leave a remote outcome UNKNOWN. | Reconciliation/status lookup itself needs authenticated, authorized, privacy-aware access. | An evaluator records a bounded result or failure without inventing external effect. |
 | Queue/message boundary | A message can be duplicated, delayed, or observed locally only. | Headers and message fields are untrusted until a relevant boundary validates them. | Grammar and type checks reject malformed meaning before evaluation. |
 | Async evidence | Traces and logs are scoped observations. | Evidence must be minimised, redacted, access-controlled, and never mistaken for a sandbox. | The interpreter emits a small, structured, redacted evaluation record. |
@@ -323,7 +323,7 @@ security model.
 | P22-07 | [ast](https://docs.python.org/3.14/library/ast.html) | The literal-evaluation API does not execute Python code but docs warn of memory, C-stack, and CPU exhaustion. It is not a complete untrusted-input boundary. |
 | P22-08 | [subprocess](https://docs.python.org/3.14/library/subprocess.html) | Python does not implicitly choose a shell, but an application that explicitly requests shell use owns safe quoting and policy. Atlas uses a fake command adapter, not a shell exercise. |
 | P22-09 | [sqlite3](https://docs.python.org/3.14/library/sqlite3.html) | Bind values using placeholders rather than composing SQL strings. That protects value binding; it does not decide whether a subject may read/write a table. |
-| P22-10 | [tarfile](https://docs.python.org/3.14/library/tarfile.html) | Python 3.14 defaults extraction to the data filter, but docs still require prior inspection for untrusted archives and say filters do not block all dangerous features. |
+| P22-10 | [tarfile](https://docs.python.org/3.14/library/tarfile.html) | Python 3.14 defaults extraction to the data filter, but docs still require prior inspection for untrusted archives and say filters do not block all dangerous features. The per-member filter is effect-time policy; an aborted extraction can leave partial output. |
 | P22-11 | [XML security note](https://docs.python.org/3.14/library/xml.html) | Use only to show parser/version and resource-risk questions; not to teach attack construction. Parser/version choice is one bounded dependency decision. |
 | P22-12 | [sys.addaudithook](https://docs.python.org/3.14/library/sys.html#sys.addaudithook) and [audit events](https://docs.python.org/3.14/library/audit_events.html) | Audit hooks can collect or react to events, but Python states interpreter-level hooks are not a sandbox and may be bypassed by malicious code. Evidence is not containment. |
 
@@ -367,7 +367,7 @@ security model.
 | Do not deserialize Python object data received from an untrusted/tampered source. | P22-05 and P22-06 | Signing/integrity checks require a correct key-distribution and trust model; safest course design avoids the format for external state. |
 | The literal-evaluation API is not a complete safety boundary for untrusted input because resource exhaustion remains possible. | P22-07 | Module 23 owns purpose-built grammar, resource limits, and capability model. |
 | Avoid composing SQL values into text; bind values as parameters/placeholders. | P22-09 | Parameter binding does not grant database rights or validate business rules. |
-| Archive extraction needs inspection, destination, link/path, member-count, and size policy even in Python 3.14. | P22-10 | The data filter mitigates important cases but does not make arbitrary archives universally safe. |
+| Archive extraction needs inspection, destination, link/path, member-count, size, effect-time policy, and partial-output accounting even in Python 3.14. | P22-10 | The data filter mitigates important cases but does not make arbitrary archives universally safe or guarantee cleanup after failure. |
 | A subprocess call is an authority boundary; explicit shell invocation transfers quoting/security responsibility to the application. | P22-08 | Atlas uses a fake adapter and policy review rather than a shell exercise. |
 | Audit hooks improve observation opportunities but are not containment/sandboxing. | P22-12 | Audit events may be incomplete for the desired threat model and evidence must be redacted. |
 | Local dependency hashes help detect remote tampering in the installer model. | S22-06 | A hash alone does not establish source review, publisher identity, absence of vulnerabilities, or safe runtime behaviour. |

@@ -399,8 +399,9 @@ finite average loss differs from a population expectation; (2) why optimizer
 convergence does not establish generalization; (3) what makes “with high
 probability” incomplete; (4) one way unchanged source can produce different
 runs; and (5) why a shift monitor needs a response owner and stop condition.
-Bridge through M29, M31, M33, M32, and M35 respectively. This is a repair
-route, not a gate or grade.
+Bridge a fragile finite-average answer through M30; use M29 too when its
+limit/regularity language is fragile, then M31, M33, M32, and M35 for the
+remaining checks respectively. This is a repair route, not a gate or grade.
 
 **M36 time budget.** Provisionally budget **8–10 focused hours** for a
 minimum-evidence first pass, or **14–18 hours** for theorem reconstruction,

@@ -720,7 +720,7 @@ set
 f(\texttt{n#k#E})=\texttt{n#(n-k)#E}.
 \]
 
-For malformed input, use one named branch: **map malformed strings to a fixed no-instance.**
+For malformed input, use one named branch: **map each malformed string to a fixed target no-instance.** This makes the reduction total rather than silently leaving an unencoded input outside the function's domain.
 Use `2#2#0,1`: it encodes a two-vertex graph with one edge and threshold \(2\),
 so no independent set can meet the threshold. Every malformed **source** string
 is outside `VC` and maps to this fixed target outside `IS`. The target itself

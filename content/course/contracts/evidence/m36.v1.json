@@ -13,7 +13,7 @@
     {
       "id": "m36-prerequisite-forward-map",
       "criterionId": "prerequisite-forward-map",
-      "claim": "The hidden M36 workbook directs entry retrieval through M29, M31, M32, M33, and M35, while its authoring bridge, hidden delivery map, and module-scoped companion preserve preview-only M25 as the existing canonical forward handoff without unlocking it or weakening its gate.",
+      "claim": "The hidden M36 workbook directs entry retrieval through M30 for finite-average versus population-expectation reasoning, then M29, M31, M32, M33, and M35 for their respective boundaries, while its authoring bridge, hidden delivery map, and module-scoped companion preserve preview-only M25 as the existing canonical forward handoff without unlocking it or weakening its gate.",
       "inputs": [
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "locator": "entry-retrieval" },
         { "kind": "json-pointer", "role": "provenance", "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json", "locator": "/modules/5" },

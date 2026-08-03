@@ -1,11 +1,20 @@
-# M31–M36 release-readiness audit
+# M31–M36 release-readiness audit (historical 2026-08-01)
+
+> **Current-state correction (2026-08-03):** This document preserves the
+> pre-candidate audit as provenance. It must not be used as the current file
+> inventory. Since this audit, each M31–M36 module gained a fixed hidden
+> `review-candidates/mNN.v1.json` selector, a checked-in candidate workbook
+> under `content/modules/`, and a candidate source ledger. They remain
+> authoring-only, hidden, unreleased, and unreviewed. See the current
+> [study-ready gap audit](m31-m36-study-ready-gap-audit.md) for the authoritative
+> inventory and next gates.
 
 **Scope (2026-08-01):** a read-only audit of the six hidden advanced packs,
 their authoring contracts, delivery maps, companions, graph state, and
 existing promotion path. This is not a content review, release approval, or
 permission to change availability.
 
-## Current truthful state
+## Historical audited state (2026-08-01)
 
 M31–M36 are consistently **`authoring-only` / hidden / unreleased** in the
 canonical graph at
@@ -39,7 +48,7 @@ and release evidence is `planned` with no release record.
 
 ## Actual gaps and non-gaps
 
-- **Missing for a reviewed private-learning pack:** no M31–M36
+- **Missing at this audit date for a reviewed private-learning pack:** no M31–M36
   `content/course/contracts/review-candidates/<module>.v1.json` selector or
   `content/course/contracts/reviews/<module>.v1.json` approval record exists.
   M31 and M32 each have a non-promoting authoring evidence record and
@@ -70,7 +79,7 @@ and release evidence is `planned` with no release record.
 
 | Priority | Finding | Evidence / impact | Confidence / next step |
 | --- | --- | --- | --- |
-| Watch | The packs are not yet reviewed private learning material. | No candidate selectors, review records, or promotion-ready evidence packages exist; a chat can consult a draft but cannot honestly call it reviewed. | High. Complete the existing hidden `review-ready` workflow. |
+| Watch | The packs are not yet reviewed private learning material. | At this audit date, no candidate selectors, review records, or promotion-ready evidence packages existed; a chat could consult a draft but could not honestly call it reviewed. | High. Complete the existing hidden `review-ready` workflow. |
 | Critical for portal publication | No advanced module can truthfully be published now. | The graph/manifest/release evidence deliberately withhold every M31–M36 learner route. | High. Complete the existing `verified` workflow only after review-ready evidence. |
 | Info | The older readiness audit is not current-state proof. | It is pinned to its recorded historical commit and is preserved as provenance. | High. Retain it; use this note and future reviewed evidence for present state. |
 

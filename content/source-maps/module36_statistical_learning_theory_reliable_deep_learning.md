@@ -12,9 +12,9 @@ It is not a review approval, learner route, release record, course-equivalence
 claim, theorem proof, robustness certificate, data-permission decision, or
 learner-mastery record. M36 remains authoring-only and hidden until the
 canonical graph, contract evidence, qualified review, interaction,
-accessibility, CI, deployment, and provenance requirements agree. Its
-prerequisites M29, M31, M32, M33, and M35 remain required; selecting this file
-neither satisfies them nor opens M25 or M26.
+accessibility, CI, deployment, and provenance requirements agree. Its direct
+graph prerequisites M29, M30, M31, M32, M33, and M35 remain required; selecting
+this file neither satisfies them nor opens M25 or M26.
 
 Atlas explanations, diagrams, synthetic fixtures, theorem cards, diagnostics,
 oral prompts, and dossiers are independently authored. The links below are for

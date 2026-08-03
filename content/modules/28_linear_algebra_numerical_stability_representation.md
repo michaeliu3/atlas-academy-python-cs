@@ -610,6 +610,12 @@ For an invertible square matrix in the two-norm,
 =\frac{\sigma_{\max}(A)}{\sigma_{\min}(A)}.
 \]
 
+For a full-column-rank rectangular matrix \(A\in\mathbb R^{m\times n}\)
+with \(m\ge n\), use the corresponding nonzero-singular-value ratio
+\(\sigma_{\max}(A)/\sigma_{\min}(A)\). It agrees with the square definition
+when an inverse exists; it does not turn every least-squares sensitivity question
+into one scalar.
+
 Large (\kappa\) means some small relative input perturbations can cause much
 larger relative output perturbations. A singular matrix has infinite condition
 number for solving (Ax=b). Conditioning is a property of a problem plus a
@@ -632,7 +638,8 @@ by an unstable procedure. Never compress both ideas into “numerical error.”
 
 ### 6.5 The normal-equations amplification boundary
 
-For full-column-rank (A),
+For full-column-rank rectangular (A), the nonzero singular values of
+(A^\mathsf TA) are the squares of those of (A), so
 
 \[
 \kappa_2(A^\mathsf TA)=\kappa_2(A)^2.

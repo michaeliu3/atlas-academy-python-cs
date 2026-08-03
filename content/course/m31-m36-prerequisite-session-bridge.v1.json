@@ -842,7 +842,7 @@
         "number": 36,
         "slug": "36-statistical-learning-theory-reliable-deep-learning",
         "title": "Statistical Learning Theory & Reliable Deep-Learning Systems",
-        "academicPrerequisiteModuleIds": ["m29", "m31", "m32", "m33", "m35"],
+        "academicPrerequisiteModuleIds": ["m29", "m30", "m31", "m32", "m33", "m35"],
         "declaredForwardModuleId": "m25"
       },
       "prerequisiteBridges": [
@@ -859,6 +859,21 @@
             "id": "m36-assumption-scope-sheet",
             "description": "A theorem/experiment assumption sheet identifying variables, regularity, limit regime, and where the model/system violates or leaves the scope unknown.",
             "intendedUse": "Carries into every theory-to-system claim in the final dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m30",
+          "inheritedConcept": "A finite sample average is an estimator under a named law/sampling process, not automatically a population expectation or a generalization result.",
+          "retrievalCheck": {
+            "prompt": "For one finite average loss, name the target population relation, the sample/sampling rule, and the additional condition needed before treating the average as evidence about a population expectation.",
+            "acceptableEvidence": "Separates the recorded sample average from an expectation and names a sampling/distribution condition without claiming a theorem or deployment result."
+          },
+          "firstConsumingSessionId": "m36-s01",
+          "likelyMisconception": "A low finite average loss is already the population risk, or any sampling story automatically justifies a generalization claim.",
+          "forwardArtifact": {
+            "id": "m36-empirical-population-scope-card",
+            "description": "A compact card naming the finite average, target relation, sampling condition, and the inference still missing before a population claim.",
+            "intendedUse": "Keeps Session 1's empirical-versus-population distinction visible throughout the theory-to-system dossier."
           }
         },
         {
@@ -927,8 +942,8 @@
           "id": "m36-s01",
           "title": "What learning claims mean: risk, representation, data, and assumptions",
           "progression": "Translate a model result into population, hypothesis-class, representation, and regularity assumptions before reading a guarantee.",
-          "usesPrerequisiteModuleIds": ["m29", "m35"],
-          "plannedEvidence": "Assumption-scope sheet and a first reliable-learning evidence map."
+          "usesPrerequisiteModuleIds": ["m29", "m30", "m35"],
+          "plannedEvidence": "Empirical-population scope card, assumption-scope sheet, and a first reliable-learning evidence map."
         },
         {
           "id": "m36-s02",

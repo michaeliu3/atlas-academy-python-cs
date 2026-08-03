@@ -10,7 +10,7 @@ competence.
 
 The canonical graph still records M36 as `authoring-only` with hidden reader
 access, a `null` source-map field, no studio, and a v3 contract state of
-`authoring-only`. Its academic prerequisites remain M29, M31, M32, M33, and M35;
+`authoring-only`. Its academic prerequisites remain M29, M30, M31, M32, M33, and M35;
 its declared forward handoff remains M25. This dossier changes none of those
 facts. It must not unlock M36, M25, or M26; create a claim that a prerequisite
 has been satisfied; or turn a source link into evidence that any learner-facing
@@ -57,6 +57,7 @@ The canonical prerequisites give each link a prior foundation:
 | Incoming module | M36 reuses | M36 adds without replacing it |
 | --- | --- | --- |
 | M29 — Calculus & Continuous Change | derivatives, limits, smoothness domains, and convergence language | an assumption-scope sheet that prevents exchanging limits, expectations, derivatives, and finite observations without conditions |
+| M30 — Probability, Statistics & Scientific Inference | population, sampling, conditional expectation, and finite-estimator boundaries | an empirical–population scope card before a finite average is treated as a population-learning claim |
 | M31 — Optimization & Information | objective, stochastic update, constraint, and convergence distinctions | a ledger that separates approximation, estimation, optimization, and deployment/reliability evidence |
 | M32 — Systems Languages, Scientific Python & Accelerators | precision, autodiff, asynchronous execution, environment, and benchmark discipline | a theory-to-system reproducibility record with nonportable boundaries |
 | M33 — Formal Languages, Computability & Complexity | quantified definitions, reductions, resource limits, and explicit non-claims | a theorem-limit card that resists both theorem denial and theorem overreach |
@@ -70,6 +71,7 @@ of any incoming artifact or a substitute for the graph.
 | Required prerequisite | First consuming session | Inherited distinction that must remain visible | Planned forward artifact |
 | --- | --- | --- |
 | M29 | M36-S01 | Differentiability and an asymptotic/large-sample statement each have a variable, domain, and regularity conditions. | `m36-assumption-scope-sheet` |
+| M30 | M36-S01 | A finite average is an estimator under a named sampling relation, not automatically a population expectation or generalization result. | `m36-empirical-population-scope-card` |
 | M31 | M36-S02 | Optimizing a finite objective is not evidence of population risk or operational reliability. | `m36-optimization-generalization-gap-ledger` |
 | M33 | M36-S03 | A theorem is a quantified implication with assumptions and an explicit set of non-conclusions. | `m36-limit-and-nonclaim-card` |
 | M32 | M36-S04 | Precision, data order, backend, runtime, and device can affect an observed experiment and what reproducibility means. | `m36-theory-system-reproducibility-record` |
@@ -79,7 +81,7 @@ of any incoming artifact or a substitute for the graph.
 
 | Canonical session | Connected progression | Planned evidence |
 | --- | --- | --- |
-| **M36-S01 — What learning claims mean: risk, representation, data, and assumptions** | Translate a reported model result into a target distribution, loss, hypothesis class, representation, sample relation, and regularity assumptions before discussing a guarantee. | Assumption-scope sheet and initial reliable-learning evidence map |
+| **M36-S01 — What learning claims mean: risk, representation, data, and assumptions** | Translate a reported model result into a target distribution, loss, hypothesis class, representation, sample relation, and regularity assumptions before discussing a guarantee. | Empirical–population scope card, assumption-scope sheet, and initial reliable-learning evidence map |
 | **M36-S02 — Optimization, estimation, and generalization are different gaps** | Separate objective minimization, approximation, finite-sample estimation, optimization, and deployment evidence using a loss-only counterexample. | Optimization–generalization gap ledger |
 | **M36-S03 — Capacity, learnability, computational limits, and theorem scope** | Read PAC/VC, stability, or margin language as a precise conditional claim; distinguish statistical possibility from efficient construction and deployment safety. | Limit-and-nonclaim card |
 | **M36-S04 — Reliable deep-learning systems: numerical, systems, and reproducibility evidence** | Connect a mathematical/empirical comparison to data identity, dtype, backend, stochasticity, environment, and a bounded repeat protocol. | Theory-system reproducibility record |
@@ -217,7 +219,7 @@ not create a workbook, studio, test, or oral-defense surface.
 
 | Session and prerequisite bridge | Source route | Understanding-first/code-reading move | Planned artifact and non-claim |
 | --- | --- | --- | --- |
-| **M36-S01 — What learning claims mean** (M29, M35) | S36-01–S36-03, S36-07–S36-09 | Start with a tiny synthetic learning claim. Before any formula, ask the learner to mark the population, sample, loss, representation, hypothesis class, and missing assumption; only then reveal empirical/population risk notation. | **Assumption-scope sheet.** It does not say a synthetic relation represents a real population or that a stated loss is the correct decision objective. |
+| **M36-S01 — What learning claims mean** (M29, M30, M35) | S36-01–S36-03, S36-07–S36-09 | Start with a tiny synthetic learning claim. Before any formula, ask the learner to mark the population, sample, loss, representation, hypothesis class, and missing assumption; only then reveal empirical/population risk notation. | **Empirical–population scope card and assumption-scope sheet.** They do not say a synthetic relation represents a real population or that a stated loss is the correct decision objective. |
 | **M36-S02 — Optimization, estimation, and generalization gaps** (M29, M31, M35) | S36-04–S36-06 | Code-read an original fixed-length training trace and a held-out observation. Ask which claim is supported by a gradient/loss change and which remains unanswered. | **Optimization–generalization gap ledger.** It does not claim convergence, population optimality, or a valid deployment decision. |
 | **M36-S03 — Capacity, learnability, computational limits, and theorem scope** (M33, M35) | S36-01–S36-05, S36-14–S36-19 | Build a finite-hypothesis, bounded-loss, IID Hoeffding proof skeleton: fixed-hypothesis concentration, union bound, a numeric \(K,\varepsilon,\delta,n\) card, a distribution-free realizable PAC-quantifier contrast, a separate sample-versus-runtime boundary, and a fixed-versus-adaptive selection repair. Then remove IID with a cloned-sample counterexample and state what the restored result still cannot decide. | **Limit-and-nonclaim card.** It does not turn a finite-class theorem name into a guarantee about an arbitrary neural network, data source, or user. |
 | **M36-S04 — Numerical, systems, and reproducibility evidence** (M32, M35) | S36-10–S36-11 | Read a fixed two-layer ReLU forward/backward trace and an original environment record with one unpinned variable. Predict a plausible difference between two runs, then choose the smallest added record/check rather than a blanket "set the seed" response. | **Theory-system reproducibility record.** It does not promise bitwise matching, validate framework/autodiff behavior, or validate an experiment's scientific/reliability claim. |
