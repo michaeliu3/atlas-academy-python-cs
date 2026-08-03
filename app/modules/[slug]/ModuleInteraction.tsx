@@ -12,6 +12,67 @@ type ModuleInteractionProps = {
   sessionLaunches?: ModuleSessionLaunch[];
 };
 
+type SessionRouteProps = {
+  courseModule: CourseModule;
+  description: string;
+  eyebrow: string;
+  sessionLaunches: ModuleSessionLaunch[];
+  title: string;
+};
+
+function renderSessionRoute({
+  courseModule,
+  description,
+  eyebrow,
+  sessionLaunches,
+  title,
+}: SessionRouteProps) {
+  const coreSessions = sessionLaunches.filter(({ number }) => number >= 1 && number <= 6);
+  const hasSixSessionPath = coreSessions.length === 6;
+
+  return (
+    <section
+      aria-labelledby={`module-interaction-${courseModule.number}`}
+      className="module-interaction-route"
+    >
+      <p className="kicker">{eyebrow}</p>
+      <h2 id={`module-interaction-${courseModule.number}`}>{title}</h2>
+      <p>{description}</p>
+      {hasSixSessionPath ? (
+        <div className="module-session-launches">
+          <p className="module-session-launches-intro">
+            Start with a Study Partner rehearsal during the session. Keep the
+            Teaching Assistant&apos;s oral defense for after Session 6 and a
+            concrete dossier.
+          </p>
+          <ol aria-label={`Six-session study path for Module ${courseModule.number}`}>
+            {coreSessions.map((session) => (
+              <li key={session.id}>
+                <a href={`#${session.id}`}>
+                  <span>Session {session.number}</span>
+                  {session.title}
+                </a>
+                {session.launch ? <p>{session.launch}</p> : null}
+                {session.output ? (
+                  <p className="module-session-output">
+                    <strong>Carry forward:</strong> {session.output}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+          <a className="module-session-start" href={`#${coreSessions[0].id}`}>
+            Start Session 1 with the Study Partner →
+          </a>
+        </div>
+      ) : null}
+      <a className="module-oral-defense-link" href={`#oral-defense-${courseModule.number}-title`}>
+        Use the Teaching Assistant&apos;s oral defense after evidence ↓
+      </a>
+    </section>
+  );
+}
+
 export function ModuleInteraction({
   courseModule,
   resolution: suppliedResolution,
@@ -20,54 +81,29 @@ export function ModuleInteraction({
   const resolution = suppliedResolution ?? resolveModuleStudio(courseModule);
 
   if (resolution.kind === "studio") {
-    return <StudioLoader studioId={resolution.registration.studioId} />;
+    return (
+      <>
+        {renderSessionRoute({
+          courseModule,
+          sessionLaunches,
+          eyebrow: "Six-session route + interactive studio",
+          title: `Study the route; use the ${resolution.registration.title} as a laboratory.`,
+          description:
+            "Follow the workbook in order. Make a prediction before using the bounded studio to inspect one claim; the studio does not replace prerequisites, the workbook, or your own evidence.",
+        })}
+        <StudioLoader studioId={resolution.registration.studioId} />
+      </>
+    );
   }
 
   if (resolution.kind === "workbook-and-oral-defense") {
-    const coreSessions = sessionLaunches.filter(({ number }) => number >= 1 && number <= 6);
-    const hasSixSessionPath = coreSessions.length === 6;
-
-    return (
-      <section
-        aria-labelledby={`module-interaction-${courseModule.number}`}
-        className="module-interaction-route"
-      >
-        <p className="kicker">Interaction route</p>
-        <h2 id={`module-interaction-${courseModule.number}`}>{resolution.title}</h2>
-        <p>{resolution.description}</p>
-        {hasSixSessionPath ? (
-          <div className="module-session-launches">
-            <p className="module-session-launches-intro">
-              Start with a Study Partner rehearsal during the session. Keep the
-              Teaching Assistant&apos;s oral defense for after Session 6 and a
-              concrete dossier.
-            </p>
-            <ol aria-label={`Six-session study path for Module ${courseModule.number}`}>
-              {coreSessions.map((session) => (
-                <li key={session.id}>
-                  <a href={`#${session.id}`}>
-                    <span>Session {session.number}</span>
-                    {session.title}
-                  </a>
-                  {session.launch ? <p>{session.launch}</p> : null}
-                  {session.output ? (
-                    <p className="module-session-output">
-                      <strong>Carry forward:</strong> {session.output}
-                    </p>
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-            <a className="module-session-start" href={`#${coreSessions[0].id}`}>
-              Start Session 1 with the Study Partner →
-            </a>
-          </div>
-        ) : null}
-        <a className="module-oral-defense-link" href={`#oral-defense-${courseModule.number}-title`}>
-          Use the Teaching Assistant&apos;s oral defense after evidence ↓
-        </a>
-      </section>
-    );
+    return renderSessionRoute({
+      courseModule,
+      sessionLaunches,
+      eyebrow: "Interaction route",
+      title: resolution.title,
+      description: resolution.description,
+    });
   }
 
   if (resolution.kind === "preview") {
