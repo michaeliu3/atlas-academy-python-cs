@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Reweaved M26's optional external stewardship track after an official CMU
+  source follow-up: it now asks the learner to inspect project activity, ground
+  the proposed work in a documented issue/request, and name the
+  maintainer/community boundary—or choose the private Atlas integration track.
+  This neither requires public contact, submission, merge, or deployment nor
+  changes M26's preview gate, review state, learner records, or release claims.
 - Strengthened M34's planning semantics with one source-calibrated
   first-principles card: a declared model-false fact is now distinct from a
   missing observation and an unmodelled factor. The learner predicts whether a

@@ -120,6 +120,10 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
     /Future full-module project:\*{0,2}\s+Use this only after M25 and its M31–M36/u,
   );
   assert.match(m26Project, /prerequisite chain has actual learner-ready release evidence/u);
+  assert.match(m26, /### External-track selection check/u);
+  assert.match(m26, /recent release, commit, issue, or contribution\s+activity/u);
+  assert.match(m26, /documented issue\/request/u);
+  assert.match(m26SourceMap, /Open Source\s+Excursion/u);
 });
 
 test("the v1 M31–M36 audit identifies its graph as a frozen historical fixture", async () => {

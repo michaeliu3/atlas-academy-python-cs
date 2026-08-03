@@ -510,6 +510,27 @@ repository](https://docs.github.com/en/repositories/managing-your-repositorys-se
 - **Access/reuse:** use vendor guidance for mechanics only; it is not legal
   counsel.
 
+#### B2a. External-track selection: active project and documented need
+
+Primary source: [CMU 15-313 Open Source
+Excursion](https://www.cs.cmu.edu/~ckaestne/15313/2016/extra/Homework6.pdf)
+within the official [Foundations of Software
+Engineering](https://www.cs.cmu.edu/~ckaestne/15313/2017/) course route.
+
+- **Status/date:** historical official course material, accessed 2026-08-03.
+- **Narrow use:** calibrate the selection boundary for an optional external
+  stewardship exercise: inspect a living project and contribution route, then
+  ground work in a documented issue/request before proposing a bounded change.
+- **Teaching move:** the M26 external-track selection check records one recent
+  activity signal, one documented need, and the maintainer/community boundary.
+  If any is unavailable, the learner chooses the private Atlas integration
+  track rather than inventing an external task.
+- **Boundary:** this does not require public contact, submission, a merge,
+  maintainer feedback, or a claim that Atlas reproduces CMU's team/project
+  experience.
+- **Access/reuse:** link and paraphrase only; do not reproduce the assignment,
+  its grading, or its project artifacts.
+
 #### B3. GitHub guidance on AI-generated code
 
 Primary sources: [Review AI-generated
