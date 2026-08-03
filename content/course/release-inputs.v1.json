@@ -650,7 +650,7 @@
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "6464ae20c34253df08327ddd8ae85f783c1c63dd6853ab48aa673ce225cf640a"
+      "sha256": "17dc8d66baaadce1087bab750586b6100a78495859716beddf81b5320ccc1f34"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -782,7 +782,7 @@
     },
     {
       "path": "content/source-maps/module26_systems_capstone_source_map.md",
-      "sha256": "d6930f5dc84b48a1ed048e6ae93f1c861662a45cbf4b247d723074d47e74fa66"
+      "sha256": "3d8422cb9980aa96308b9ceb9f1b62278e48be831e434b84841168ea4dc6cd2e"
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",

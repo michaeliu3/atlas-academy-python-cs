@@ -266,11 +266,29 @@ Choose one track, but use the same dossier and rubric.
 | Track | Scope | Evidence requirement |
 |---|---|---|
 | **Atlas integration (default)** | Finish one bounded vertical slice in the course system. | Trace the capability through architecture, tests, failure handling, trust, and maintenance. |
-| **Open-source stewardship** | Make a comparable small contribution to an established Python project. | Read project norms, reproduce a bounded issue, propose/review a patch, respect maintainers' authority, and document the evidence. |
+| **Open-source stewardship** | Make a comparable small contribution to an established Python project. | Confirm that the project is active, ground the task in a documented issue/request, read project norms, reproduce a bounded issue, propose/review a patch, respect maintainers' authority, and document the evidence. |
 
 Neither track requires a public deployment, real learner data, secrets, or
 external AI access. If these would be needed to make the claim, mark the claim
 as **[UNKNOWN]** and choose a safer local fixture or defer the release.
+
+### External-track selection check
+
+Choose the open-source track only when all three facts are inspectable:
+
+1. **Active project:** record one recent release, commit, issue, or contribution
+   activity signal and the route by which a contributor would work.
+2. **Tracked need:** link or quote the title of one documented issue/request
+   that the bounded reproducer or proposal addresses. Do not manufacture an
+   issue after the fact.
+3. **Authority boundary:** name the maintainer/community route and what remains
+   their decision.
+
+If any fact is unavailable, choose the Atlas integration track instead. The
+local track is not a lesser substitute: it is the correct privacy-safe route
+when there is no active project, no documented need, or no appropriate public
+interaction. A public submission, merge, contact, or endorsement is never
+required.
 
 ### Stewardship Boundary — required only for the external track
 
@@ -279,6 +297,8 @@ public interaction, create one small boundary record:
 
 ~~~text
 project and exact version/commit inspected:
+activity evidence and contribution route (recent release, commit, issue, or contribution activity):
+documented issue/request tied to this task:
 issue or bounded problem, reproducer, and affected behavior:
 contribution, license, security, and communication routes read:
 maintainer / reviewer authority and what the learner may not decide:
@@ -1133,9 +1153,11 @@ application.”
     decision, cite the exact upstream field, the assumption that can fail, and
     the revised release/revise/defer/disable consequence.
 11. **Stewardship Boundary** *(external track only)* — record project/version,
-    contribution and security routes, issue/reproducer, maintainer authority,
-    local review evidence, submission status, and the explicit no-merge/no-
-    endorsement/non-deployment boundary.
+    activity evidence, contribution and security routes, the documented
+    issue/request and reproducer, maintainer authority, local review evidence,
+    submission status, and the explicit no-merge/no-endorsement/non-deployment
+    boundary. If no active project or documented need is available, switch to
+    the Atlas integration track rather than inventing external stewardship.
 
 ### Release decisions are not pass/fail theater
 
@@ -1337,7 +1359,7 @@ terms before any reuse.
 | [C4 model diagrams](https://c4model.com/diagrams) and [notation guidance](https://c4model.com/diagrams/notation) | Choose a context, container, component, dynamic, or deployment view by the question it answers; require titles, scopes, legends, and labeled relationships. | The C4 site identifies CC BY 4.0 for its site/examples. Prefer original Atlas diagrams and retain attribution/terms if material is reused. |
 | [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches), [dependency review](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review), and [artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) | Treat merges, dependency changes, and build provenance as reviewable boundaries. | Link and paraphrase current documentation. Do not claim a repository has controls configured unless they were actually inspected and verified. |
 | [MIT 6.005 Software Construction](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/) | Reinforce invariants, specifications, testing, concurrent reasoning, and code that remains ready for change. | Use as a sequencing/reference route; do not reproduce course assignments, solutions, recordings, or grading materials without checking terms. |
-| [CMU 15-313 Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/15313/2017/index.html) | Calibrate the stewardship boundary: requirements, architecture, quality attributes, inspection, measurement, and a scoped open-source contribution workflow. | Link and paraphrase only. Atlas does not supply a team, public maintainer feedback, a merged patch, or course credit. |
+| [CMU 15-313 Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/15313/2017/index.html) and its [Open Source Excursion](https://www.cs.cmu.edu/~ckaestne/15313/2016/extra/Homework6.pdf) | Calibrate the stewardship boundary: requirements, architecture, quality attributes, inspection, measurement, and a scoped open-source contribution workflow with an active-project and documented-need selection check. | Link and paraphrase only. Atlas does not supply a team, public maintainer feedback, a merged patch, or course credit. |
 | [UC Berkeley CS169 Software Engineering](https://www2.eecs.berkeley.edu/Courses/CS169/) | Calibrate verification/validation, regression and integration testing, debugging, monitoring, maintainability, cost/quality reasoning, and substantial-project scope. | Link and paraphrase only; Atlas's local dossier is not a semester-long team project or deployment certification. |
 | [Georgia Tech CS 6300 Software Development Process](https://omscs.gatech.edu/cs-6300-software-development-process) | Calibrate process, quality, and maintenance as software evolves. | The official route is a comparison anchor; do not reproduce restricted course content or claim its Java/team instruction. |
 | [pytest documentation](https://docs.pytest.org/en/stable/) | Read assertion output, fixtures, parametrized cases, and failure-focused regression tests. | pytest is MIT licensed; keep license/attribution requirements if code is copied. Prefer original fixtures and examples. |
