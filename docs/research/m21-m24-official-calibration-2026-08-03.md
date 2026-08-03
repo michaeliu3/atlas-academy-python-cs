@@ -4,9 +4,10 @@
 
 This is a narrow, read-only primary-source calibration of the current M21–M24
 workbooks and their existing claim routes. All external links below were
-accessed on **2026-08-03**. It identifies only factual or first-principles
-connections whose absence could cause an overclaim; it makes no curriculum,
-source-map, contract, availability, status, CI, deployment, or release change.
+accessed on **2026-08-03**. The calibration itself makes no curriculum,
+source-map, contract, availability, status, CI, deployment, or release change;
+the current-workbook implementation record below identifies the bounded
+instructional corrections later made in response to it.
 
 Atlas remains original and link/cite-only: this note does not authorize copying
 documentation, standards prose, university course assets, exercises, or code.
@@ -23,13 +24,12 @@ boundaries and open release-evidence criterion remain exactly as recorded.
 | **M23 — Programming Languages and Interpreters** | Text → tokens → AST → declared semantics → contract/authority/capability retains the necessary distinction between structure and permission. The lexical-scope treatment agrees with the Python [execution model](https://docs.python.org/3.14/reference/executionmodel.html); the prohibition on source-to-eval is supported by Python's explicit [eval/exec](https://docs.python.org/3.14/library/functions.html#eval) security warning. Stanford [CS242](https://web.stanford.edu/class/cs242/coursework.html) calibrates the broader theory/programming work intentionally left outside the bounded evaluator. |
 | **M24 — CPython, Performance, and Memory Evidence** | The claimed separation among direct object size, traced allocations, process/native observations, CPython bytecode, and controlled measurements is correct. Python documents direct-object scope in [sys.getsizeof](https://docs.python.org/3.14/library/sys.html#sys.getsizeof), traced-allocation scope in [tracemalloc](https://docs.python.org/3.14/library/tracemalloc.html), the CPython implementation-detail caveat in [dis](https://docs.python.org/3.14/library/dis.html), and GC conditions in [timeit](https://docs.python.org/3.14/library/timeit.html). MIT [6.172](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/) supports evidence before optimization without requiring its C/cache/project depth. |
 
-## Focused repairs for a later authoring pass
+## Focused repairs now present in the current workbooks
 
-1. **P1 — make M21 task-start timing precise.** At
-   content/modules/21_async_distributed_systems.md:284–329 (the
-   create-task row and immediate-after checkpoint), with the associated source
-   route at content/source-maps/module21_async_distributed_source_map.md:441–448,
-   add one caveat:
+1. **P1 — M21 task-start timing is now precise.** In M21's **Read this before
+   running it** table and its **Timing boundary**, `create_task(...)` is
+   explicitly framed as local ownership that may already have begun under an
+   eager-start policy. The current workbook says:
 
    > Returning from create_task establishes an owned local Task. In this fixture
    > it is scheduled to run soon, but Python 3.14 can start it eagerly during
@@ -43,16 +43,14 @@ boundaries and open release-evidence criterion remain exactly as recorded.
    remote-effect claim. See [Creating Tasks](https://docs.python.org/3.14/library/asyncio-task.html#creating-tasks)
    and the [eager task factory](https://docs.python.org/3.14/library/asyncio-task.html#eager-task-factory).
 
-2. **P1 — make the M21 → M22 inbound-trace handoff operational.** M21 already
-   says a trace is not trust at 21_async_distributed_systems.md:861–876, but
-   M22's boundary card and trace-promotion exercise at
-   22_security_privacy_trust_boundaries.md:221–274 stop before deciding how an
-   inbound traceparent/tracestate is parsed, retained, or forwarded. Add one
-   short **trace-disposition** card: at an external boundary, record a policy
-   to restart/drop or spec-compliantly continue only a format-, size-, privacy-,
-   and trust-bounded context; use a generated/redacted local correlation
-   reference for evidence; never promote it to authentication or authorization.
-   Name tracestate as opaque vendor data rather than a safe log field.
+2. **P1 — the M21 → M22 inbound-trace handoff is now operational.** M21's
+   handoff requires a boundary owner to choose a trace disposition; M22's
+   **Trace-disposition card — context is not a credential** now records the
+   permitted choices: drop, restart a local context, or continue only under a
+   format, size, privacy, and trust policy. It permits a redacted local
+   correlation reference and policy version for diagnosis, keeps authentication
+   and authorization separate, and treats `tracestate` as opaque vendor data
+   rather than a safe raw log field.
 
    This closes an actual first-principles bridge without adding observability
    implementation. The [W3C Trace Context privacy](https://www.w3.org/TR/trace-context/#privacy-considerations)
@@ -60,13 +58,12 @@ boundaries and open release-evidence criterion remain exactly as recorded.
    sections require attention to sensitive information, header abuse, parsing,
    sampling abuse, and boundary-specific restart/propagation choices.
 
-3. **P2 — carry M21 partial-effect reasoning into the M22 archive card.** At
-   22_security_privacy_trust_boundaries.md:437–453, add a two-sentence
-   nonclaim after the metadata exercise: preflight metadata inspection is not
-   an effect-time guarantee; if a later product extracts, it needs an
-   operation-owned destination, per-member/effect-time policy, resource and
-   collision limits, and partial-output cleanup/accounting. State explicitly
-   that Atlas remains metadata-only and should not add a real extraction lab.
+3. **P2 — M21 partial-effect reasoning now reaches the M22 archive card.**
+   M22 now says metadata preflight is not an effect-time guarantee. Any future
+   extraction would need an operation-owned destination, per-member/effect-time
+   policy, resource/collision/link limits, and partial-output accounting or
+   cleanup. It explicitly keeps Atlas metadata-only and declines a real
+   extraction lab.
 
    Python's [extraction-filter documentation](https://docs.python.org/3.14/library/tarfile.html#extraction-filters)
    says the filter runs immediately before each member and that an aborted
@@ -84,8 +81,7 @@ extractor, mandatory host benchmark, or a claim beyond a version-labelled
 CPython observation or measurement manifest. Those would exceed the intended
 bounded route rather than repair it.
 
-The three recommendations above are authoring-only candidates. Applying any of
-them later would still require its own scoped review; this research note neither
-changes release/availability truth nor supplies source approval, accessibility,
-CI, deployment, or publication evidence.
-
+The three corrections above are current legacy-candidate instructional
+material. Their presence does not alter historic audit findings or supply
+source approval, accessibility review, CI, deployment, learner delivery,
+publication, or release evidence.
