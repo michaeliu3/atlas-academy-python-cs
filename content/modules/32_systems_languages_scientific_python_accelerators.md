@@ -152,6 +152,8 @@ bridge through M31 before continuing. Do not begin by installing a framework.
 
 ## Session 1 — Map responsibility before optimizing a boundary
 
+**Launch:** With the Study Partner, map the public input, output, version, ownership, and error promises before following the lower-level code.
+
 ### Core question
 
 **What public promise exists between Python orchestration and lower-level
@@ -398,6 +400,8 @@ proposal by brand name.
 
 ## Session 2 — Trace work before timing it
 
+**Launch:** Sketch request → transfer → queue or stream → work → synchronization → observation, then mark the first event that makes the result readable.
+
 ### Core question
 
 **Where do data and work actually move between a host request and a visible
@@ -597,6 +601,8 @@ result? Connect this to M17's memory hierarchy rather than a device slogan.
 ---
 
 ## Session 3 — Treat array metadata as part of the algorithm
+
+**Launch:** Predict whether the proposed handoff can be no-copy; name the shape, dtype, strides, aliasing, and semantic-oracle facts needed to check it.
 
 ### Core question
 
@@ -811,6 +817,8 @@ resource trade-off each makes, and which data would justify a choice.
 
 ## Session 4 — Draw ownership before claiming parallelism
 
+**Launch:** Draw the producer, named dependency, last consumer, and legal-reuse point before making any overlap or throughput claim.
+
 ### Core question
 
 **Who owns a buffer, and what ordering condition makes its reuse legal?**
@@ -968,6 +976,8 @@ distinguishing queueing from overlap.
 ---
 
 ## Session 5 — Read autodiff as a program with a numerical contract
+
+**Launch:** Write one scalar chain rule and a finite-difference check, then identify the dtype, device, and objective assumptions they do not validate.
 
 ### Core question
 
@@ -1130,6 +1140,8 @@ right next action is code, a derivation, a numerical check, or a design review.
 ---
 
 ## Session 6 — Defend a bounded systems claim
+
+**Launch:** Choose one sentence-sized systems claim and list its environment record, observation, limitation, and next falsifier before drafting the dossier.
 
 ### Core question
 

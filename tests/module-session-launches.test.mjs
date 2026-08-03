@@ -48,6 +48,27 @@ test("the launch extractor ignores M3's optional seventh session", async () => {
   assert.equal(launches.some(({ title }) => /optional/i.test(title)), false);
 });
 
+test("the hidden M31 and M32 review candidates already expose a concise six-session launch spine", async () => {
+  const files = [
+    "31_optimization_information.md",
+    "32_systems_languages_scientific_python_accelerators.md",
+  ];
+
+  for (const file of files) {
+    const launches = extractSessionLaunches(await workbook(file));
+    assert.equal(launches.length, 6, `${file} needs exactly six core sessions.`);
+    assert.deepEqual(
+      launches.map(({ number }) => number),
+      [1, 2, 3, 4, 5, 6],
+      `${file} needs the canonical session order.`,
+    );
+    for (const session of launches) {
+      assert.ok(session.launch, `${file} Session ${session.number} needs a concise launch.`);
+      assert.ok(session.output, `${file} Session ${session.number} needs a carry-forward output.`);
+    }
+  }
+});
+
 test("the reader integrates the path before the workbook and preserves TA timing", async () => {
   const [page, interaction] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
