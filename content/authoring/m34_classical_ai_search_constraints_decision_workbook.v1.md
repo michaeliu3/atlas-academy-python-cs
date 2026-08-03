@@ -864,9 +864,48 @@ This is a conditional mathematical ranking given a state space, probability
 model, action set, utility/loss table, and action constraints. It is not a
 discovery of moral truth, consent, fairness, or decision authority.
 
+### Evidence becomes a posterior only through a declared update
+
+Do not let the posterior in the next table arrive by magic. Let `clear` and
+`blocked` be two mutually exclusive fictional states, and let \(e\) mean that
+a fictional sensor emitted one named signal. Declare:
+
+\[
+P(\text{clear})=P(\text{blocked})=0.5,
+\qquad
+P(e\mid\text{clear})=0.7,
+\qquad
+P(e\mid\text{blocked})=0.3.
+\]
+
+The evidence normalizer is
+
+\[
+P(e)=0.7(0.5)+0.3(0.5)=0.5,
+\]
+
+so Bayes' rule gives
+
+\[
+P(\text{clear}\mid e)=\frac{P(e\mid\text{clear})P(\text{clear})}{P(e)}=0.7,
+\qquad
+P(\text{blocked}\mid e)=0.3.
+\]
+
+**Prediction before reveal.** Keep the likelihoods fixed but change the prior
+to \(P(\text{clear})=0.9\). Does the posterior remain `0.7`? Write the new
+normalizer before calculating. Then label each number as a prior, likelihood,
+normalizer, or posterior.
+
+This is a finite conditional-probability calculation under a declared model.
+It does not calibrate a sensor, justify its likelihoods, establish a causal
+mechanism, authorize an action, or turn the one-shot table into a POMDP. Those
+are separate evidence and design questions; this bridge simply makes the
+M30-to-M34 update visible before utility enters.
+
 ### A synthetic decision table
 
-After a fictional sensor signal, suppose:
+Use the posterior from the finite trace above:
 
 \[
 p(\text{clear}\mid e)=0.7,\qquad

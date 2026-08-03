@@ -46,6 +46,27 @@ asset-level review.
    plan claim. This uses CMU 15-887 as a link-only calibration route and does
    not add a POMDP, solver, or real-world planning lab.
 
+## Targeted follow-up — proof and posterior continuity
+
+After rechecking Stanford CS103's formal-definition route, MIT 6.046J's
+decision/verifier/reduction treatment, and Berkeley CS188's decision-network
+route on 2026-08-03, three small repairs strengthen the connected reasoning
+without expanding scope:
+
+1. M33 Session 1 now turns the repaired finite recognizer into a
+   code-to-spec loop-invariant proof sketch, including the exact alphabet and
+   change-premise boundary.
+2. M33 Sessions 4–5 now compose the existing directed VC-to-IS reduction with
+   a certificate verifier under an explicitly listed graph encoding. The
+   result is visibly conditional on the known VC premise and certificate-size
+   assumptions rather than an unqualified theorem label.
+3. M34 Session 5 now derives its finite posterior from a declared prior,
+   likelihood, and normalizer before the existing expected-utility table. It
+   still does not claim calibration, causal validity, authority, or a POMDP.
+
+These are aligned first-principles bridges: they reuse no course prose or
+assignments, add no solver/framework/lab, and keep the modules authoring-only.
+
 ## Deliberate limits and release boundary
 
 No expansion is indicated: the packs deliberately adapt term-length
