@@ -111,6 +111,8 @@ begin by importing a solver library.
 
 ## Session 1 — Model a state before searching it
 
+**Launch:** With the Study Partner, list the state variables, actions, costs, observations, and one omitted factor before choosing a search method.
+
 ### Core question
 
 **What information must be in a state for an algorithm to make a valid next
@@ -237,6 +239,8 @@ turns raw observations into features or states.
 ---
 
 ## Session 2 — Search traces need their theorem conditions
+
+**Launch:** Trace one frontier policy, then name the cost, heuristic, duplicate-handling, and termination assumptions needed for its claim.
 
 ### Core question
 
@@ -465,6 +469,8 @@ it does not traverse a learner-supplied graph or implement general A-star.
 
 ## Session 3 — Constraints and relaxations change the mathematical object
 
+**Launch:** Mark which candidates are feasible in the original model and which values are only relaxation bounds before reading a solver result.
+
 ### Core question
 
 **Which candidates are actually feasible, and which values are only bounds?**
@@ -629,6 +635,8 @@ method, proof system, or decision recommendation.
 ---
 
 ## Session 4 — Planning and solver limits must be stated, not guessed
+
+**Launch:** Map the symbolic state update, constraints, solver status, and one unencoded cause that the system therefore cannot know.
 
 ### Core question
 
@@ -806,6 +814,8 @@ the claim that a learned model captures the actual decision problem.
 ---
 
 ## Session 5 — Belief, utility, and authority are different inputs
+
+**Launch:** Write belief, utility, and decision authority in separate lines; predict how changing one can change an action without changing the others.
 
 ### Core question
 
@@ -1006,6 +1016,8 @@ the authority and value questions disappear.
 ---
 
 ## Session 6 — Defend a classical AI design dossier
+
+**Launch:** Draft a one-sentence recommendation, then attach its representation, algorithm conditions, evidence, limitation, accountable owner, and next falsifier.
 
 ### Core question
 

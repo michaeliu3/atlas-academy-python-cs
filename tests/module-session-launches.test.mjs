@@ -48,10 +48,12 @@ test("the launch extractor ignores M3's optional seventh session", async () => {
   assert.equal(launches.some(({ title }) => /optional/i.test(title)), false);
 });
 
-test("the hidden M31 and M32 review candidates already expose a concise six-session launch spine", async () => {
+test("the hidden advanced review candidates expose a concise six-session launch spine", async () => {
   const files = [
     "31_optimization_information.md",
     "32_systems_languages_scientific_python_accelerators.md",
+    "33_formal_languages_computability_complexity.md",
+    "34_classical_ai_search_constraints_decision.md",
   ];
 
   for (const file of files) {
