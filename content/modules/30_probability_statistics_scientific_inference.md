@@ -198,12 +198,29 @@ population/process → sample space → events and random variables → joint la
 
 ### 3.1 First principle: model before arithmetic
 
-A **sample space** `Omega` lists possible outcomes of a declared experiment.
-An **event** is a set of outcomes in the model's declared event collection. A
-probability model assigns a number to
-each event, preserving nonnegativity, total mass one, and countable additivity
-over pairwise disjoint events. A **random variable** maps an outcome to a
-binary recall indicator, a duration, a count, or a vector of measurements.
+A probability model begins with a declared triple:
+
+\[
+(\Omega, \mathcal F, P).
+\]
+
+- \(\Omega\), the **sample space**, lists possible outcomes of a declared
+  experiment.
+- \(\mathcal F\) is the declared collection of measurable **events**—the
+  outcome-sets to which this model assigns probabilities.
+- \(P\) assigns probabilities to those events. Its axioms include
+
+\[
+P(A) \geq 0,\qquad P(\Omega)=1,\qquad
+P\!\left(\bigcup_{i=1}^{\infty} A_i\right)
+= \sum_{i=1}^{\infty} P(A_i)
+\]
+
+whenever the events \(A_1,A_2,\ldots\) are pairwise disjoint. The final rule
+is **countable additivity**: it is stronger than checking only a few finite
+cases, and it applies only to the model's declared measurable events. A
+**random variable** maps an outcome to a binary recall indicator, a duration,
+a count, or a vector of measurements.
 
 The model is not the world. “Each simulated prompt has probability 1/2 of a
 success” is a model statement. “Half the observed records succeeded” is a
