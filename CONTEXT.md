@@ -109,7 +109,8 @@ _Avoid_: Atlas voice feature, portal agent
 **Designated-chat concise session note**:
 At most one minimal Notion record for a substantive learning conversation in a
 configured private destination, automatically created only after the learner
-says `records on` in that exact designated chat and while records are not
-paused or off-record. A portable copied prompt remains local. It is not a transcript,
+says `records on` in that exact designated chat for the current substantive
+session and while records are not paused or off-record. Permission expires
+when the session ends. A portable copied prompt remains local. It is not a transcript,
 grade, or proof of mastery; a saved-note claim requires direct evidence.
 _Avoid_: portal automation, chat archive, automatic mastery tracking, saved-note claim without evidence

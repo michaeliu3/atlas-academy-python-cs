@@ -19,7 +19,7 @@ const requiredNoteConditions = [
 const requiredRecordingAuthorization = {
   initialState: "require-explicit-records-on-confirmation",
   activationPhrase: "records on",
-  scope: "that designated chat until records are paused or material is off-record",
+  scope: "the current substantive session in that designated chat; re-confirm records on for a later session",
 };
 const requiredSubstantiveEvidence = [
   "a named module or learning topic",
@@ -39,6 +39,19 @@ const requiredRecordFields = [
   "prediction, evidence, misconception, counterexample, uncertainty, and next action",
   "Teaching Assistant oral-defense evidence or Study Partner discussion/rehearsal handoff",
 ];
+const requiredUnavailableNoteTemplate = {
+  title: "Notion unavailable — local session note",
+  intro: "No Notion write occurred. Copy only this concise, learner-approved summary if useful.",
+  fields: [
+    "Date / role / module or topic:",
+    "Question and prediction:",
+    "Whiteboard trace: definition, derivation, code/architecture observation, or counterexample:",
+    "Misconception, uncertainty, or boundary:",
+    "Smallest next action and cross-role handoff:",
+  ],
+  privacyReminder:
+    "Do not include raw voice, full transcripts, credentials, sensitive data, or off-record material.",
+};
 const requiredRoles = [
   {
     id: "teaching-assistant",
@@ -128,7 +141,7 @@ async function validateGuide(path, siteRoot, errors) {
   if (!guide.includes("automatic concise Notion note")) {
     errors.push("Live Codex workflow learner guide must name the designated-chat automatic note policy.");
   }
-  if (!/at most one concise note per\s+substantive session/u.test(guide)) {
+  if (!/at most\s+one concise note for the current\s+substantive session/u.test(guide)) {
     errors.push("Live Codex workflow learner guide must state the session-level write cadence.");
   }
   if (!guide.includes("say “records on”") || !guide.includes("all three are present")) {
@@ -223,8 +236,18 @@ export async function validateLiveCodexLearningWorkflow(
     if (notionSessionNotes.writeCadence !== "at-most-one-concise-note-per-substantive-session") {
       errors.push("Live Codex workflow must limit writes to one concise note per substantive session.");
     }
-    if (notionSessionNotes.onUnavailable !== "state-unavailable-and-keep-summary-in-chat") {
-      errors.push("Live Codex workflow must state unavailable writes plainly and retain the local chat summary.");
+    if (notionSessionNotes.onUnavailable !== "state-unavailable-and-provide-ready-to-paste-summary") {
+      errors.push("Live Codex workflow must state unavailable writes plainly and provide a ready-to-paste local summary.");
+    }
+    const unavailableNoteTemplate = notionSessionNotes.unavailableNoteTemplate;
+    if (
+      !isPlainObject(unavailableNoteTemplate) ||
+      unavailableNoteTemplate.title !== requiredUnavailableNoteTemplate.title ||
+      unavailableNoteTemplate.intro !== requiredUnavailableNoteTemplate.intro ||
+      !arraysMatch(unavailableNoteTemplate.fields, requiredUnavailableNoteTemplate.fields) ||
+      unavailableNoteTemplate.privacyReminder !== requiredUnavailableNoteTemplate.privacyReminder
+    ) {
+      errors.push("Live Codex workflow must preserve the bounded ready-to-paste unavailable-write note template.");
     }
     const learnerControlAcknowledgements = notionSessionNotes.learnerControlAcknowledgements;
     if (

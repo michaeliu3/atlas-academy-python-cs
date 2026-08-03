@@ -18,7 +18,7 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.deepEqual(report.notionSessionNotes.recordingAuthorization, {
     initialState: "require-explicit-records-on-confirmation",
     activationPhrase: "records on",
-    scope: "that designated chat until records are paused or material is off-record",
+    scope: "the current substantive session in that designated chat; re-confirm records on for a later session",
   });
   assert.deepEqual(report.notionSessionNotes.substantiveSession.minimumEvidence, [
     "a named module or learning topic",
@@ -28,7 +28,20 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.equal(report.notionSessionNotes.writeCadence, "at-most-one-concise-note-per-substantive-session");
   assert.ok(report.notionSessionNotes.requiredConditions.includes("the learning conversation is substantive"));
   assert.ok(report.notionSessionNotes.requiredConditions.includes("records are not paused and the material is not marked off-record"));
-  assert.equal(report.notionSessionNotes.onUnavailable, "state-unavailable-and-keep-summary-in-chat");
+  assert.equal(report.notionSessionNotes.onUnavailable, "state-unavailable-and-provide-ready-to-paste-summary");
+  assert.deepEqual(report.notionSessionNotes.unavailableNoteTemplate, {
+    title: "Notion unavailable — local session note",
+    intro: "No Notion write occurred. Copy only this concise, learner-approved summary if useful.",
+    fields: [
+      "Date / role / module or topic:",
+      "Question and prediction:",
+      "Whiteboard trace: definition, derivation, code/architecture observation, or counterexample:",
+      "Misconception, uncertainty, or boundary:",
+      "Smallest next action and cross-role handoff:",
+    ],
+    privacyReminder:
+      "Do not include raw voice, full transcripts, credentials, sensitive data, or off-record material.",
+  });
   assert.deepEqual(report.notionSessionNotes.learnerControlAcknowledgements, {
     recordsOn: "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
     pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
@@ -51,8 +64,12 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
 
   assert.match(guide, /chat-level intent/u);
   assert.match(guide, /delete or archive.*own Notion UI/u);
+  assert.match(guide, /current substantive session/u);
+  assert.match(guide, /Notion unavailable — local session note/u);
   assert.match(promptSource, /chat-level intent/u);
   assert.match(promptSource, /delete or archive.*own Notion UI/u);
+  assert.match(promptSource, /authorization expires when the substantive session ends/u);
+  assert.match(promptSource, /unavailableNoteTemplate/u);
 });
 
 test("learner-facing policy summaries retain explicit records-on authority", async () => {
@@ -97,6 +114,14 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
     /limit writes to one concise note per substantive session/u,
   );
 
+  const persistentAuthorization = structuredClone(workflow);
+  persistentAuthorization.notionSessionNotes.recordingAuthorization.scope =
+    "that designated chat until records are paused or material is off-record";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(persistentAuthorization),
+    /scoped records-on confirmation/u,
+  );
+
   const missingActivation = structuredClone(workflow);
   missingActivation.notionSessionNotes.requiredConditions.pop();
   await assert.rejects(
@@ -123,6 +148,13 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   await assert.rejects(
     validateLiveCodexLearningWorkflow(unprovenWriteClaim),
     /claimBoundary must require platform acceptance evidence/u,
+  );
+
+  const vagueUnavailableNote = structuredClone(workflow);
+  vagueUnavailableNote.notionSessionNotes.unavailableNoteTemplate.fields.pop();
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(vagueUnavailableNote),
+    /ready-to-paste unavailable-write note template/u,
   );
 
   const transcriptLeak = structuredClone(workflow);

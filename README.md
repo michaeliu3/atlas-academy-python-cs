@@ -37,7 +37,8 @@ pass/fail verdict. Atlas does not control platform voice, microphone access,
 rendering, or transcript retention. In the two learner-designated chats with a
 configured private record, the role handoff authorizes an automatic concise
 structured note per substantive session only after the learner says `records on`
-in that exact designated chat; portable copied prompts remain local, and a
+in that exact designated chat for the current substantive session; permission
+expires when that session ends. Portable copied prompts remain local, and a
 successful write is not claimed without direct evidence. The portal
 itself remains local-first. Set up each role once from Learning Partners, then copy the
 current open module's graph-bound follow-on context from its oral-defense

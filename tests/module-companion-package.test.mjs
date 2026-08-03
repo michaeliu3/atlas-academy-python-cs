@@ -91,8 +91,10 @@ test("M1 chat contexts state the reachable-Notion and unavailable-write boundary
     assert.match(contextPrompt, /configured private Notion destination is reachable/i);
     assert.match(
       contextPrompt,
-      /if that destination is unavailable, say plainly that no write occurred and keep a ready-to-paste concise summary in chat/i,
+      /if that destination is unavailable, say plainly that no write occurred and provide this ready-to-paste local summary in chat/i,
     );
+    assert.match(contextPrompt, /Notion unavailable — local session note/u);
+    assert.match(contextPrompt, /Question and prediction:/u);
   }
 });
 
@@ -136,6 +138,7 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   assert.doesNotMatch(companion.studyPartner.contextPrompt, /; legacy-open\)/i);
   assert.match(companion.teachingAssistant.contextPrompt, /automatically create at most one concise note/i);
   assert.match(companion.teachingAssistant.contextPrompt, /confirm “records on”/u);
+  assert.match(companion.teachingAssistant.contextPrompt, /authorization expires when this substantive session ends/u);
   assert.match(companion.studyPartner.contextPrompt, /names a module or learning topic/i);
   assert.match(companion.studyPartner.contextPrompt, /direct evidence of the successful write/i);
 });

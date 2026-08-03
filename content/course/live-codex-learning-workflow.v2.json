@@ -15,7 +15,7 @@
     "recordingAuthorization": {
       "initialState": "require-explicit-records-on-confirmation",
       "activationPhrase": "records on",
-      "scope": "that designated chat until records are paused or material is off-record"
+      "scope": "the current substantive session in that designated chat; re-confirm records on for a later session"
     },
     "substantiveSession": {
       "minimumEvidence": [
@@ -31,7 +31,19 @@
       "records are not paused and the material is not marked off-record"
     ],
     "writeCadence": "at-most-one-concise-note-per-substantive-session",
-    "onUnavailable": "state-unavailable-and-keep-summary-in-chat",
+    "onUnavailable": "state-unavailable-and-provide-ready-to-paste-summary",
+    "unavailableNoteTemplate": {
+      "title": "Notion unavailable — local session note",
+      "intro": "No Notion write occurred. Copy only this concise, learner-approved summary if useful.",
+      "fields": [
+        "Date / role / module or topic:",
+        "Question and prediction:",
+        "Whiteboard trace: definition, derivation, code/architecture observation, or counterexample:",
+        "Misconception, uncertainty, or boundary:",
+        "Smallest next action and cross-role handoff:"
+      ],
+      "privacyReminder": "Do not include raw voice, full transcripts, credentials, sensitive data, or off-record material."
+    },
     "learnerControlAcknowledgements": {
       "recordsOn": "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
       "pauseOrOffRecord": "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",

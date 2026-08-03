@@ -28,7 +28,7 @@
       },
       "notionEvidencePacket": {
         "title": "M25 preview gate-card packet",
-        "conditions": "Only in the designated configured Teaching Assistant or Study Partner chat, after the learner says records on, the session is substantive, and neither pause records nor off-record applies; at most one concise approved summary may be saved.",
+        "conditions": "Only in the designated configured Teaching Assistant or Study Partner chat, after the learner says records on for the current substantive session, and neither pause records nor off-record applies; at most one concise approved summary may be saved and permission expires when the session ends.",
         "boundary": "The portal performs no Notion write and must not claim one succeeded without direct evidence. Exclude raw voice recordings and full transcripts.",
         "fields": [
           "claim",
@@ -61,7 +61,7 @@
       },
       "notionEvidencePacket": {
         "title": "M26 rehearsal framing-card packet",
-        "conditions": "Only in the designated configured Teaching Assistant or Study Partner chat, after the learner says records on, the session is substantive, and neither pause records nor off-record applies; at most one concise approved summary may be saved.",
+        "conditions": "Only in the designated configured Teaching Assistant or Study Partner chat, after the learner says records on for the current substantive session, and neither pause records nor off-record applies; at most one concise approved summary may be saved and permission expires when the session ends.",
         "boundary": "The portal performs no Notion write and must not claim one succeeded without direct evidence. Exclude raw voice recordings and full transcripts.",
         "fields": [
           "claim and non-goal",
