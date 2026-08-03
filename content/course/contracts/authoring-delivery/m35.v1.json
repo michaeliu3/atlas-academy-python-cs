@@ -129,10 +129,11 @@
   "forwardHandoff": {
     "declaredForwardModuleId": "m36",
     "directAcademicConsumerModuleIds": [
+      "m25",
       "m36"
     ],
     "handoffArtifact": "ML evidence packet: representation assumptions, baseline comparison, evaluation/shift plan, objective/training trace, reproducibility record, and data-authority boundary map.",
-    "note": "M36 is both the graph's declared forward handoff and its direct academic consumer."
+    "note": "M36 is the graph's declared forward handoff. M25 and M36 are its direct academic consumers; M25 remains gated by the canonical graph."
   },
   "localForwardHandoffOutputId": "m35-machine-learning-representation-dossier",
   "truthBoundary": "This hidden M35 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."
