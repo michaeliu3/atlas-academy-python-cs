@@ -90,7 +90,7 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "bd83ef8bbf56b6f40bbe64b81f460424a40a69e7d64a8be8771e5e1f55914dca"
+      "sha256": "47a55fb09931561788d246f6d1586980075f6eb04709fcc6b2a0d16469b3ada9"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
@@ -842,7 +842,7 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "2649a7a8f25e98ed22984319eb65177c7d04e2a97c077f0f82d862b5d59e910e"
+      "sha256": "3d06298c2212d3a7331529c97637cb7c65e6eb6eaee94bd896b05a4b459c6100"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",

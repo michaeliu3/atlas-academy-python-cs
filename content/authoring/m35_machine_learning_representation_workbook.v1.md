@@ -608,6 +608,49 @@ comparison: the lower Brier value here is **not** by itself a
 population-calibration ranking or decision-policy recommendation. Write one
 sentence separating the card, a reliability estimate, and a decision claim.
 
+### Uncertainty inherits its sampling unit
+
+Before an error bar or resampling result can mean anything, name the object
+that was independently sampled. Start with eight *declared independent* binary
+loss units:
+
+\[
+(1,0,0,1,0,0,1,0),\qquad \widehat R=\frac{3}{8}.
+\]
+
+Under the deliberately narrow IID Bernoulli-loss model, a rough standard-error
+scale is
+
+\[
+\widehat{\operatorname{SE}}(\widehat R)
+=\sqrt{\frac{\widehat R(1-\widehat R)}{8}}
+\approx 0.171.
+\]
+
+**Predict before revealing.** Change exactly one premise: the eight rows are
+two observations from each of four customer journeys, and observations within a
+journey may move together. May a row-level resample still be interpreted as
+eight independent loss units? What is the smallest repair to the plan?
+
+<details>
+<summary>Reveal the sampling-unit boundary after naming the assumption.</summary>
+
+No. A row-level resample treats rows as independently sampled. With repeated
+entities or serial dependence, that assumption is no longer the declared data
+relation. The plan must instead resample the independently sampled objects
+(for example, whole entity vectors or a justified time block), use another
+dependence-aware method, or withdraw the earlier uncertainty interpretation.
+Neither four groups nor eight rows automatically supplies a valid real-world
+interval; the sampling model and available independent units remain part of the
+claim.
+
+</details>
+
+Add the declared independent unit and any dependence treatment to the
+Evaluation-and-Shift Plan. This card distinguishes a rough IID calculation from
+a dependence-aware design; it does not select a universal bootstrap, establish
+coverage, or certify a deployment estimate.
+
 ### Selection boundary — inspection changes the evidence
 
 Suppose an AI proposes thresholds `0.35`, `0.50`, and `0.65`, reads the labels
@@ -777,6 +820,49 @@ Before calling `m35BernoulliLogLikelihoodCard()`, derive both likelihoods and
 losses yourself. Then use its `conditionalModel`, `derivation`, `examples`,
 and `truthBoundary` fields to check arithmetic and scope—not to infer that a
 trained system has meaningful probabilities.
+
+### Code-reading card — a mathematically right loss can be numerically wrong
+
+With a logit \(z\), write \(p=\sigma(z)\). In exact arithmetic the binary
+loss can be evaluated through probabilities, but the intermediate calculation
+can fail in finite precision:
+
+```python
+def naive_bce_from_logit(z, y):
+    p = 1 / (1 + exp(-z))
+    return -(y * log(p) + (1 - y) * log(1 - p))
+```
+
+**Predict before revealing.** For `z = 1000, y = 0`, which intermediate is
+likely to round to an endpoint? For `z = -1000, y = 1`, which exponential is
+likely to overflow? Explain why the symbolic expression and the executable
+path are different questions.
+
+<details>
+<summary>Reveal the stable logit-space rewrite after predicting.</summary>
+
+For \(y\in\{0,1\}\), the same scalar loss can be written as
+
+\[
+\ell(z,y)=\max(z,0)-zy+\log\bigl(1+\exp(-|z|)\bigr).
+\]
+
+```python
+def stable_bce_from_logit(z, y):
+    return max(z, 0) - z * y + log1p(exp(-abs(z)))
+```
+
+The naïve path can encounter an overflowing exponential, a probability rounded
+to `0` or `1`, or a logarithm of zero. In the stable form the exponential's
+argument is non-positive; at extreme magnitude its correction may underflow
+toward zero while the appropriate linear term remains. For the two declared
+cases above, the stable scalar loss is approximately `1000`.
+
+</details>
+
+Reading this rewrite establishes only a bounded numerical property of the
+displayed scalar loss. It does not validate the labels, split, objective,
+calibration, generalization, or any decision that could use the score.
 
 ### Regularization changes the target; selection changes the evidence
 
@@ -1277,7 +1363,8 @@ dtype/device, or introduce a synthetic shift.
 This workbook uses original Atlas explanations, synthetic examples, diagrams,
 and code. The reading routes below were checked on **2026-08-01**; the Session
 3 data-relation, fit/validation/fresh-evaluation, and shift routes were
-rechecked on **2026-08-02**. They guide scope and prerequisite review; they do
+rechecked on **2026-08-02**; and the sampling-unit and stable-logit routes were
+rechecked on **2026-08-03**. They guide scope and prerequisite review; they do
 not turn this draft into an institutional course or grant permission to copy
 third-party prose, figures, datasets, benchmarks, code, weights, or model-card
 assets.
@@ -1293,7 +1380,9 @@ assets.
 | [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/) | Sessions 2–4: problem formulation, regularization/model selection, and formal guarantees with their limits. | Link-only/original Atlas derivations and cards; do not copy lectures, assignments, figures, datasets, or solutions. |
 | [Georgia Tech CS 7641 Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) | Sessions 1–6: linked supervised, unsupervised, and sequential-decision practice plus defensible analysis expectations. | Link-only/original Atlas work; it is not a substitute for the course’s reports, feedback, or term-long sequence. |
 | [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html), [probability calibration](https://scikit-learn.org/stable/modules/calibration.html), and [Brier score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html) | Session 3: split relations, leakage, finite reliability estimates, and a bounded probabilistic-loss reading. | Link-only/original Atlas examples. Library mechanisms do not choose a target relation, prove population calibration, or guarantee a decision. |
+| [UC Davis Bootstrap methods](https://cameron.econ.ucdavis.edu/slides/bootstrap_2022.pdf) and [CMU The Bootstrap](https://www.stat.cmu.edu/~cshalizi/uADA/12/lectures/ch05.pdf) | Session 3: an ordinary resample needs a declared independent unit; clustered or serial dependence requires a separately justified treatment. | Link/cite only; use original Atlas rows and prose. Do not copy slides, figures, examples, or exercises. This route does not choose a valid interval or dependence method for a learner dataset. |
 | [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Session 4: bounded execution and reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
+| [TensorFlow sigmoid cross-entropy with logits](https://www.tensorflow.org/api_docs/python/tf/nn/sigmoid_cross_entropy_with_logits) and [PyTorch BCEWithLogitsLoss](https://docs.pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html) | Session 4: derive a logit-space binary loss, then inspect why fused/stable computation avoids the naïve sigmoid-plus-log path at extreme finite-precision inputs. | Link/cite only; use original Atlas derivation and code. A stable API call does not validate data, objective, calibration, or use. |
 
 For the fuller claim-linked university, standards, framework, and primary
 research ledger, consult the instructor-facing [M35 primary-source research

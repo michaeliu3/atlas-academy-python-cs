@@ -101,7 +101,8 @@ reliable deep-learning systems; it must not treat it as a generalization proof.
 ## Primary-source ledger and reuse boundary
 
 S35-01–S35-16 were accessed on **2026-07-31**; S35-17–S35-21 were checked on
-**2026-08-01**; S35-22–S35-24 were checked on **2026-08-02**. “Link-only” is deliberate: until a human reviews exact version,
+**2026-08-01**; S35-22–S35-24 were checked on **2026-08-02**; and S35-25–S35-26
+were checked on **2026-08-03**. “Link-only” is deliberate: until a human reviews exact version,
 license, third-party notices, data terms, and asset-specific rights, Atlas may
 cite and link to a source but must create its own prose, figures, code,
 datasets, derivations, tests, and examples. A source’s existence is not a
@@ -133,6 +134,8 @@ release approval.
 | S35-22 | MIT OpenCourseWare, [18.642 Lecture 23: Introduction to Machine Learning](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/resources/mit18_642_f24_lec23/) | Official lecture route for the fit/train, validation comparison, and final held-out test distinction. Supports M35-S03's original fixed-partition trace and its leakage repair, not an IID, generalization, or deployment guarantee. | MIT OCW assets have their own notices; link-only/original Atlas rows, derivation, and code. Do not copy the lecture slides, prose, examples, or exercises. |
 | S35-23 | Carnegie Mellon University, [10-315 *A Course in Machine Learning*, Chapter 1](https://www.cs.cmu.edu/~10315-s24/notes/ciml-v0_99-ch01.pdf) | Official course notes that define a learning problem with a loss and unknown data-generating distribution, distinguish sampled training data from expected future loss, and make the data relation explicit. Supports M35-C03's named synthetic generator/evaluation interpretation; it does not validate Atlas's particular rows or expected-accuracy calculation. | Course notes are **link-only/original-paraphrase**. Do not copy prose, figures, exercises, or examples; retain only Atlas's original generator, derivation, and fixture. |
 | S35-24 | MIT OpenCourseWare, [6.7960 Lecture 17: Out-of-Distribution Generalization](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/mit6_7960_f24_lec17.pdf) | Official lecture route for separating the standard same-distribution setting from named deployment shifts, including label/measurement/location changes and features whose correlations need not persist. Supports M35-C05 and the M35-S03 shift interpretation, not a claim that accuracy must decline under every shift. | MIT OCW material is **link-only/original-paraphrase** pending asset review. Do not copy slides, images, examples, or empirical claims; use original Atlas diagrams and deterministic calculations. |
+| S35-25 | UC Davis, [Bootstrap methods](https://cameron.econ.ucdavis.edu/slides/bootstrap_2022.pdf) | University lecture route for making the independent sampling unit explicit and distinguishing ordinary resampling from clustered or serially dependent settings. Supports M35-S03's original sampling-unit card, not a universally valid confidence interval or block rule. | **Link/cite only**; no permissive reuse status was identified. Do not copy slides, figures, worked examples, or prose. Keep Atlas's rows, calculation, and boundary original. |
+| S35-26 | TensorFlow, [`sigmoid_cross_entropy_with_logits`](https://www.tensorflow.org/api_docs/python/tf/nn/sigmoid_cross_entropy_with_logits) | First-party derivation of an overflow-resistant logit-space binary cross-entropy form. Supports M35-S04's original code-reading card about numerical path versus loss identity; it does not support a calibration, generalization, or deployment claim. | TensorFlow documentation is CC BY 4.0 and code samples Apache 2.0; this Atlas card remains original and link/cite only pending full asset review. Preserve applicable attribution if any source asset is later reused. |
 
 ### Targeted 2026-08-02 calibration
 
@@ -157,6 +160,22 @@ release approval.
   claim. This adapts the courses' representation/generalization and experiment-
   design expectations; it does not copy course material or establish a trained,
   deployed, calibrated, or authorized system.
+
+### Targeted 2026-08-03 sampling-unit and stable-logit calibration
+
+- **M35-S03 / M35-C03:** S35-25 supports an original card in which a learner
+  declares the independently sampled object before interpreting a resampling or
+  standard-error calculation. Atlas must state its IID Bernoulli-loss premise,
+  then change the data relation to repeated entities or serial dependence. The
+  repair is a separately justified independent-unit/dependence-aware plan or a
+  withdrawal of the earlier interpretation—not a universal bootstrap,
+  confidence-interval, or deployment claim.
+- **M35-S04 / M35-C06:** S35-26 supports an original derivation from binary
+  negative log likelihood to the stable logit-space expression
+  \(\max(z,0)-zy+\log(1+\exp(-|z|))\). The card must distinguish exact loss
+  algebra from finite-precision execution and must not imply that stable loss
+  evaluation validates labels, data splitting, calibration, generalization, or
+  use.
 
 ### What this ledger does *not* establish
 
