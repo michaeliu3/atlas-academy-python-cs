@@ -18,19 +18,22 @@ course, while its individual sessions are still expected to take an hour or
 more. That scale is evidence for conservative Atlas planning, not a basis for
 an equivalence claim.
 
-## Recommended learner-facing route (not yet applied)
+## Recommended learner-facing route (applied)
 
 | Module | Core trace: minimum evidence before moving on | Optional deepening after the trace | Conservative planning band |
 | --- | --- | --- | --- |
 | **M27** | Carry one claim through **definition/domain → prediction → proof or counterexample → recurrence/count with base conditions → graph or modular/ordering model → short transfer explanation**. The six sessions remain visible; the dossier must distinguish a general proof, a finite test, a code trace, and an AI proposal. | Formal-series generating functions beyond a small coefficient example; a full matching theorem proof; broader lattice theory; additional number-theory/cryptography applications. | **13–17 hours** for the core evidence route; **+7–11 hours** for one or more depth threads. |
 | **M28** | Keep one named map/data matrix visible: **shape and field → rank/null direction → projection/least-squares derivation → symmetry/PSD hypothesis check → SVD/conditioning experiment → centered-and-scaled PCA explanation**. Every numerical conclusion names the norm, dtype/algorithm, and whether it is a theorem, API contract, or finite observation. | Proof-level spectral/SVD development; QR versus normal-equation numerical analysis; backward-stability/IEEE detail; broader tensor/matrix calculus; high-dimensional PCA practice. | **14–18 hours** for the core evidence route; **+9–14 hours** for one or more depth threads. |
 
-These are planning envelopes, not measured learner times, hidden release
-claims, or a replacement for the graph's `referenceReadMinutes`. They should
-be shown as a *minimum-evidence path* plus optional depth, with the 90- and
-180-day routes recommended whenever the learner cannot protect the core time.
+These are planning envelopes, not measured learner times or hidden release
+claims. They are now the graph's `focusedStudyMinutes` bands: M27's
+13–17-hour minimum-evidence route and 20–28-hour deep dossier route, and
+M28's 14–18-hour minimum-evidence route and 23–32-hour deep dossier route.
+The workbooks place the core trace before explicit optional depth; the 90- and
+180-day routes remain the recommended alternative whenever the learner cannot
+protect the core time.
 
-## First-principles presentation rules for the lean batch
+## Applied first-principles presentation rules
 
 1. Put the core trace before the large reference workbook. Mark each optional
    depth branch explicitly; do not make the learner infer that a theorem proof,
@@ -43,5 +46,8 @@ be shown as a *minimum-evidence path* plus optional depth, with the 90- and
    a shape/norm/error ledger for M28. The TA can use it for a constructive oral
    defense; it is evidence for next-step guidance, never pass/fail grading.
 
-This calibration recommends clearer pacing and progressive disclosure, not
-topic removal, university-course substitution, or a claim of learner mastery.
+The M27 and M28 workbooks now implement this bounded pacing and progressive
+disclosure: each starts with a **Pace guard: one spine, optional depth** table,
+then carries its core trace into an original proof or representation dossier
+and constructive oral-defense guide. This remains an adaptation, not topic
+removal, university-course substitution, or a claim of learner mastery.
