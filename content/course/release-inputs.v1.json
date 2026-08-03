@@ -197,6 +197,10 @@
       "sha256": "1816d4a649d4061ad011f4ece97ca5384d1cd8fb1e4c271576446c10c57fbf43"
     },
     {
+      "path": "content/course/contracts/companions/m17.v1.json",
+      "sha256": "866f95ddde1e4869888bbbeaed990a5b0307b5eab1201589c75357c390b36d24"
+    },
+    {
       "path": "content/course/contracts/companions/m19.v1.json",
       "sha256": "9d6c5ec7d771ee780f7bab7f7116ccd711575bdfa125eb86b2f5bd0d530f8c83"
     },
@@ -325,6 +329,10 @@
       "sha256": "f445826851ae06915d5ab58b6ceceda2d1933319578310f669ca437103e03017"
     },
     {
+      "path": "content/course/contracts/evidence-preflight/m17.v1.json",
+      "sha256": "4c205e57e8fa359830b5bbc117d6d39e8ea2735805537ad1942c9a0f949cc295"
+    },
+    {
       "path": "content/course/contracts/evidence-preflight/m19.v1.json",
       "sha256": "1f0a2fd7849a2a3e17b4aa4827f300f0c0e747d09f2f7073f708363055c69ba8"
     },
@@ -429,6 +437,10 @@
       "sha256": "2388c3bd80ec184b0824b7645db79246d1ec6c6c329f7c04f8b6a5b8ec9e1662"
     },
     {
+      "path": "content/course/contracts/evidence/m17.v1.json",
+      "sha256": "3e693d0d1f61c14f546864d6dd0f5fe22203a6e6ef3be6a6afe697aa4dbd2894"
+    },
+    {
       "path": "content/course/contracts/evidence/m19.v1.json",
       "sha256": "2c26e6d5bcc69dfc0ceb4f5899acf92f4c6fc4f97b59b8fe365601c3858cabfe"
     },
@@ -470,7 +482,7 @@
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",
-      "sha256": "cde18bbe5969246aa3e8b60b685b8b7d6d281c7bd0f6f68eb63957b8ec076b2d"
+      "sha256": "508cb63ae91f938194edc4722da6477ccda150e978bbf0f4a938eb1fa5df0808"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -478,7 +490,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "eceafe53ec2e984a1ad9de94f08bf761e3126a48e27ded8f1072c3ba331ef09c"
+      "sha256": "5240ead69729e6d16201e36c5f7ef4fe616918a2da6741fc82e841008cddc2d7"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +526,7 @@
     },
     {
       "path": "content/course/release-input-policy.v1.json",
-      "sha256": "38ea7750e5f4d20875294bec96d5ef1d0e86fca324ea8ec5cf2185fbcd202642"
+      "sha256": "8b90ce094415da2d78a51ee1a8f28cb9d451360275f321c02ecc365b22f686c4"
     },
     {
       "path": "content/course/synthesis-preview-conversations.v1.json",
@@ -586,7 +598,7 @@
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
-      "sha256": "ce57e45a8f674d625e2a5c6db27bd398cc4568d02869cc3b8c067c7b2d61edbf"
+      "sha256": "3ec87feb851b821539f71e5b82866086b177c306324aab0900eb5a8fa3610b84"
     },
     {
       "path": "content/modules/18_operating_systems_resource_mediation.md",
@@ -675,6 +687,10 @@
     {
       "path": "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md",
       "sha256": "aaa1dec0160859402d6a3cf2f9ab64eea9d3bc670654c91f89ab3f60e258ef79"
+    },
+    {
+      "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+      "sha256": "f6c4eefe58560fa2f7ea6cdb342d2a410d9cf3f8c35f9a469cebb24d545b8554"
     },
     {
       "path": "content/source-maps/module17_architecture_execution_source_map.md",
@@ -921,6 +937,10 @@
       "sha256": "127412e757027a626b51494b3243b1aeed9af8d745fd4eba7815f62eb04f7f97"
     },
     {
+      "path": "docs/module-evidence/m17/candidate-preflight.md",
+      "sha256": "755b1977971bfcba07b6939d74d626ae49f8245088daae4fec980163f3f30895"
+    },
+    {
       "path": "docs/module-evidence/m19/candidate-preflight.md",
       "sha256": "c3060c0aaaf282ab43896127358a0aed3c5067f157add35df3b29b64b1394b59"
     },
@@ -1093,6 +1113,10 @@
       "sha256": "24708325360c5068f434c6c46fc424975a37369f662524976bdd2db82f2f2f90"
     },
     {
+      "path": "public/downloads/test_module17_reference.py",
+      "sha256": "ef97887e2808b74675d35d90a86abad4ce6ddb74e9c3b560853efe294822f837"
+    },
+    {
       "path": "public/downloads/test_module18_reference.py",
       "sha256": "5136dfff7706dfa7bd97e694d4d4287aa54fff75c8693274b45368486a2a9214"
     },
@@ -1146,7 +1170,7 @@
     },
     {
       "path": "tests/mermaid-accessibility.test.mjs",
-      "sha256": "eb4606fe461af0e5bb24d0bd3802f664195cdb193bb6657c8113fcb2486be7c0"
+      "sha256": "b323d176774f12e52643dda9c3c22dbdacf3ff3e03e3956b18ff972e97ddec89"
     },
     {
       "path": "tests/rendered-html.test.mjs",

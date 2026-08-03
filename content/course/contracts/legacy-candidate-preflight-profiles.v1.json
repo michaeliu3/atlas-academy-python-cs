@@ -397,6 +397,21 @@
       ],
       "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m17",
+      "packetId": "m17-computer-architecture-execution-stack-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m17/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:755b1977971bfcba07b6939d74d626ae49f8245088daae4fec980163f3f30895"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module17_architecture_execution_source_map.md",
+        "content/source-maps/module17_architecture_execution_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     }
   ]
 }

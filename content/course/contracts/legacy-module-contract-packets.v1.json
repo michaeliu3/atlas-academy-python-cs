@@ -10876,6 +10876,858 @@
           ]
         }
       ]
+    },
+    {
+      "moduleId": "m17",
+      "packetId": "m17-computer-architecture-execution-stack-structural-candidate",
+      "packetState": "structural-candidate",
+      "humanReviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "canonicalExpectation": {
+        "academicPrerequisiteModuleIds": [
+          "m16"
+        ],
+        "forwardModuleId": "m28",
+        "masteryGateId": "mathematics",
+        "studioId": null
+      },
+      "workbookPath": "content/modules/17_computer_architecture_execution_stack.md",
+      "sourceMapPath": "content/source-maps/module17_architecture_execution_source_map.md",
+      "sourceAuditAddendumPath": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+      "sessionSpine": [
+        {
+          "sessionNumber": 1,
+          "pointerId": "m17-session-1",
+          "usesPrerequisiteModuleIds": [
+            "m16"
+          ],
+          "forwardArtifactId": "m17-session-1-output"
+        },
+        {
+          "sessionNumber": 2,
+          "pointerId": "m17-session-2",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m17-session-2-output"
+        },
+        {
+          "sessionNumber": 3,
+          "pointerId": "m17-session-3",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m17-session-3-output"
+        },
+        {
+          "sessionNumber": 4,
+          "pointerId": "m17-session-4",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m17-session-4-output"
+        },
+        {
+          "sessionNumber": 5,
+          "pointerId": "m17-session-5",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m17-session-5-output"
+        },
+        {
+          "sessionNumber": 6,
+          "pointerId": "m17-session-6",
+          "usesPrerequisiteModuleIds": [],
+          "forwardArtifactId": "m17-session-6-output"
+        }
+      ],
+      "pointers": [
+        {
+          "id": "m17-course-map",
+          "roles": [
+            "prerequisite-map"
+          ],
+          "label": "M17 course map",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "1-position-in-the-knowledge-graph-and-problem-pressure"
+          }
+        },
+        {
+          "id": "m17-forward-handoff",
+          "roles": [
+            "forward-handoff"
+          ],
+          "label": "M17 forward handoff",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "14-explicit-backward-and-forward-connections"
+          }
+        },
+        {
+          "id": "m17-session-1",
+          "roles": [
+            "session"
+          ],
+          "label": "M17 session 1",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-1--make-bits-earn-their-meaning"
+          }
+        },
+        {
+          "id": "m17-session-2",
+          "roles": [
+            "session"
+          ],
+          "label": "M17 session 2",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-2--derive-remembered-state-from-current-input-logic"
+          }
+        },
+        {
+          "id": "m17-session-3",
+          "roles": [
+            "session"
+          ],
+          "label": "M17 session 3",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-3--read-instructions-as-state-transitions"
+          }
+        },
+        {
+          "id": "m17-session-4",
+          "roles": [
+            "session"
+          ],
+          "label": "M17 session 4",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-4--explain-overlap-and-locality-without-promising-hardware"
+          }
+        },
+        {
+          "id": "m17-session-5",
+          "roles": [
+            "session"
+          ],
+          "label": "M17 session 5",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-5--bridge-python-to-the-machine-one-owned-layer-at-a-time"
+          }
+        },
+        {
+          "id": "m17-session-6",
+          "roles": [
+            "session"
+          ],
+          "label": "M17 session 6",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-6--review-the-incident-and-defend-a-bounded-claim"
+          }
+        },
+        {
+          "id": "m17-session-1-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M17 session 1 output",
+          "sessionNumber": 1,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-1-output--representation-and-semantic-trace"
+          }
+        },
+        {
+          "id": "m17-session-2-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M17 session 2 output",
+          "sessionNumber": 2,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-2-output--state-table-and-clock-boundary-trace"
+          }
+        },
+        {
+          "id": "m17-session-3-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M17 session 3 output",
+          "sessionNumber": 3,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-3-output--isa-state-and-call-convention-trace"
+          }
+        },
+        {
+          "id": "m17-session-4-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M17 session 4 output",
+          "sessionNumber": 4,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-4-output--overlaplocality-model-and-causal-boundary"
+          }
+        },
+        {
+          "id": "m17-session-5-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M17 session 5 output",
+          "sessionNumber": 5,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-5-output--execution-stack-ownership-and-observation-record"
+          }
+        },
+        {
+          "id": "m17-session-6-output",
+          "roles": [
+            "session-output"
+          ],
+          "label": "M17 session 6 output",
+          "sessionNumber": 6,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-6-output--bounded-architecture-claim-and-m28-handoff"
+          }
+        },
+        {
+          "id": "m17-first-principles",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M17 first principles",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "2-bits-width-signedness-and-byte-order"
+          }
+        },
+        {
+          "id": "m17-first-principles-continuation",
+          "roles": [
+            "first-principles"
+          ],
+          "label": "M17 first-principles continuation",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "3-from-boolean-transformation-to-clocked-state"
+          }
+        },
+        {
+          "id": "m17-definition",
+          "roles": [
+            "definition"
+          ],
+          "label": "M17 definition",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "21-a-bit-pattern-is-not-yet-a-number"
+          }
+        },
+        {
+          "id": "m17-assumption",
+          "roles": [
+            "assumption"
+          ],
+          "label": "M17 assumption",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "34-state-tables-force-hidden-assumptions-into-view"
+          }
+        },
+        {
+          "id": "m17-derivation-proof",
+          "roles": [
+            "derivation-proof"
+          ],
+          "label": "M17 derivation-proof",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "96-correctness-argument"
+          }
+        },
+        {
+          "id": "m17-counterexample",
+          "roles": [
+            "counterexample"
+          ],
+          "label": "M17 counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "65-sequential-and-deterministic-permutations-in-a-small-declared-model"
+          }
+        },
+        {
+          "id": "m17-numerical-experiment",
+          "roles": [
+            "numerical-experiment"
+          ],
+          "label": "M17 numerical experiment",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "64-hand-trace-an-item-index"
+          }
+        },
+        {
+          "id": "m17-code-reading",
+          "roles": [
+            "code-reading"
+          ],
+          "label": "M17 code reading",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "9-runnable-atlas-architecture-evidence-reference"
+          }
+        },
+        {
+          "id": "m17-debugging",
+          "roles": [
+            "debugging"
+          ],
+          "label": "M17 debugging",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "level-5--debug-the-atlas-performance-incident"
+          }
+        },
+        {
+          "id": "m17-design",
+          "roles": [
+            "design"
+          ],
+          "label": "M17 design",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "level-6--design-and-delegate-the-evidence-packet"
+          }
+        },
+        {
+          "id": "m17-prediction",
+          "roles": [
+            "prediction"
+          ],
+          "label": "M17 prediction",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "prediction-before-reveal--one-bit-pattern-one-named-interpretation"
+          }
+        },
+        {
+          "id": "m17-transfer",
+          "roles": [
+            "transfer"
+          ],
+          "label": "M17 transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "level-8--transfer-across-the-io-and-os-handoff"
+          }
+        },
+        {
+          "id": "m17-source-rationale",
+          "roles": [
+            "source-rationale"
+          ],
+          "label": "M17 source rationale",
+          "sessionNumber": null,
+          "target": {
+            "surface": "canonical-source-map",
+            "path": "content/source-maps/module17_architecture_execution_source_map.md",
+            "headingAnchor": "1-research-question-and-stopping-rule"
+          }
+        },
+        {
+          "id": "m17-source-claim-linkage",
+          "roles": [
+            "claim-linkage"
+          ],
+          "label": "M17 source claim linkage",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+            "headingAnchor": "claim-linkage-and-stopping-lines"
+          }
+        },
+        {
+          "id": "m17-source-license-reuse",
+          "roles": [
+            "license-reuse"
+          ],
+          "label": "M17 source license reuse",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+            "headingAnchor": "license-and-reuse-boundary"
+          }
+        },
+        {
+          "id": "m17-stable-learner-links",
+          "roles": [
+            "stable-learner-link"
+          ],
+          "label": "M17 stable learner links",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+            "headingAnchor": "stable-learner-links"
+          }
+        },
+        {
+          "id": "m17-visual",
+          "roles": [
+            "visual"
+          ],
+          "label": "M17 visual",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "10-six-connected-teaching-sessions"
+          }
+        },
+        {
+          "id": "m17-text-alternative",
+          "roles": [
+            "text-alternative"
+          ],
+          "label": "M17 text alternative",
+          "sessionNumber": null,
+          "target": {
+            "surface": "source-audit-addendum",
+            "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+            "headingAnchor": "visual-and-text-alternative-review-boundary"
+          }
+        },
+        {
+          "id": "m17-diagnostic",
+          "roles": [
+            "diagnostic"
+          ],
+          "label": "M17 diagnostic",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "12-confidence-aware-understanding-check"
+          }
+        },
+        {
+          "id": "m17-confidence",
+          "roles": [
+            "confidence"
+          ],
+          "label": "M17 confidence",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "diagnostic-routing"
+          }
+        },
+        {
+          "id": "m17-misconception",
+          "roles": [
+            "misconception"
+          ],
+          "label": "M17 misconception",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "1316-constructive-next-step-guide"
+          }
+        },
+        {
+          "id": "m17-retrieval",
+          "roles": [
+            "retrieval"
+          ],
+          "label": "M17 retrieval",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "1318-consolidation-and-spaced-retrieval"
+          }
+        },
+        {
+          "id": "m17-dossier",
+          "roles": [
+            "dossier"
+          ],
+          "label": "M17 dossier",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "131-project--atlas-architecture-and-performance-evidence-dossier"
+          }
+        },
+        {
+          "id": "m17-acceptance",
+          "roles": [
+            "acceptance-criteria"
+          ],
+          "label": "M17 acceptance",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "1311-project-acceptance-invariants"
+          }
+        },
+        {
+          "id": "m17-rubric",
+          "roles": [
+            "rubric"
+          ],
+          "label": "M17 rubric",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "1311-project-acceptance-invariants"
+          }
+        },
+        {
+          "id": "m17-oral-protocol",
+          "roles": [
+            "oral-protocol"
+          ],
+          "label": "M17 oral protocol",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "conversational-oral-defense--m17"
+          }
+        },
+        {
+          "id": "m17-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "M17 oral hint",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "hint-ladder--representation-to-bounded-evidence"
+          }
+        },
+        {
+          "id": "m17-oral-counterexample",
+          "roles": [
+            "oral-counterexample"
+          ],
+          "label": "M17 oral counterexample",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "changed-premise-counterexample"
+          }
+        },
+        {
+          "id": "m17-oral-transfer",
+          "roles": [
+            "oral-transfer"
+          ],
+          "label": "M17 oral transfer",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "transfer-turn--m28-vector-and-numerical-model"
+          }
+        },
+        {
+          "id": "m17-oral-reflection",
+          "roles": [
+            "oral-reflection"
+          ],
+          "label": "M17 oral reflection",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "reflection--learner-controlled-evidence-summary"
+          }
+        },
+        {
+          "id": "m17-oral-summary",
+          "roles": [
+            "oral-summary"
+          ],
+          "label": "M17 oral summary",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "session-6-output--bounded-architecture-claim-and-m28-handoff"
+          }
+        },
+        {
+          "id": "m17-ta",
+          "roles": [
+            "ta"
+          ],
+          "label": "M17 TA",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "teaching-assistant--supportive-oral-defense"
+          }
+        },
+        {
+          "id": "m17-study-partner",
+          "roles": [
+            "study-partner"
+          ],
+          "label": "M17 Study Partner",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/17_computer_architecture_execution_stack.md",
+            "headingAnchor": "study-partner--execution-stack-rehearsal"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "criterionId": "prerequisite-forward-map",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-course-map",
+            "m17-forward-handoff"
+          ]
+        },
+        {
+          "criterionId": "six-connected-sessions",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-session-1",
+            "m17-session-2",
+            "m17-session-3",
+            "m17-session-4",
+            "m17-session-5",
+            "m17-session-6"
+          ]
+        },
+        {
+          "criterionId": "first-principles",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-first-principles",
+            "m17-first-principles-continuation"
+          ]
+        },
+        {
+          "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-definition",
+            "m17-assumption",
+            "m17-derivation-proof",
+            "m17-counterexample",
+            "m17-numerical-experiment"
+          ]
+        },
+        {
+          "criterionId": "code-reading-debugging-design",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-code-reading",
+            "m17-debugging",
+            "m17-design"
+          ]
+        },
+        {
+          "criterionId": "prediction-before-reveal",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-prediction"
+          ]
+        },
+        {
+          "criterionId": "transfer-task",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-transfer"
+          ]
+        },
+        {
+          "criterionId": "source-ledger",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-source-rationale",
+            "m17-source-claim-linkage",
+            "m17-source-license-reuse",
+            "m17-stable-learner-links"
+          ]
+        },
+        {
+          "criterionId": "accessible-visual-text-alternative",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-visual",
+            "m17-text-alternative"
+          ]
+        },
+        {
+          "criterionId": "confidence-diagnostic-misconceptions",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-diagnostic",
+            "m17-confidence",
+            "m17-misconception"
+          ]
+        },
+        {
+          "criterionId": "retrieval-and-spaced-review",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-retrieval"
+          ]
+        },
+        {
+          "criterionId": "project-and-evidence-rubric",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-dossier",
+            "m17-acceptance",
+            "m17-rubric"
+          ]
+        },
+        {
+          "criterionId": "supportive-oral-defense",
+          "legacyAuditStatus": "ambiguous",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-oral-protocol",
+            "m17-oral-hint",
+            "m17-oral-counterexample",
+            "m17-oral-transfer",
+            "m17-oral-reflection",
+            "m17-oral-summary"
+          ]
+        },
+        {
+          "criterionId": "ta-prompt",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-ta"
+          ]
+        },
+        {
+          "criterionId": "study-partner-prompt",
+          "legacyAuditStatus": "missing",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-study-partner"
+          ]
+        },
+        {
+          "criterionId": "forward-handoff",
+          "legacyAuditStatus": "pointer-present",
+          "structuralState": "mapped-not-reviewed",
+          "pointerIds": [
+            "m17-forward-handoff"
+          ]
+        }
+      ],
+      "implementationArtifacts": [
+        {
+          "id": "m17-visual-reader",
+          "kind": "studio",
+          "paths": [
+            "app/modules/[slug]/MermaidDiagram.tsx",
+            "tests/mermaid-accessibility.test.mjs"
+          ]
+        },
+        {
+          "id": "m17-guided-companion",
+          "kind": "oral-guide",
+          "paths": [
+            "content/course/contracts/companions/m17.v1.json"
+          ]
+        },
+        {
+          "id": "m17-reference-model",
+          "kind": "bounded-reference-model",
+          "paths": [
+            "public/downloads/module17_reference.py",
+            "public/downloads/test_module17_reference.py"
+          ]
+        }
+      ]
     }
   ]
 }

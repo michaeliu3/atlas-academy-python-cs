@@ -34,6 +34,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m14 = report.byModuleId.get("m14");
   const m15 = report.byModuleId.get("m15");
   const m16 = report.byModuleId.get("m16");
+  const m17 = report.byModuleId.get("m17");
   const m27 = report.byModuleId.get("m27");
   const m28 = report.byModuleId.get("m28");
   const m29 = report.byModuleId.get("m29");
@@ -52,7 +53,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 32);
+  assert.equal(report.summary.companionCount, 33);
   assert.deepEqual(report.summary.moduleIds, [
     "m01",
     "m02",
@@ -70,6 +71,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
     "m14",
     "m15",
     "m16",
+    "m17",
     "m19",
     "m20",
     "m21",
@@ -161,6 +163,14 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.equal(m16.studyPartner.role, "non-grading-rehearsal");
   assert.equal(m16.forwardHandoff.targetModuleId, "m17");
   assert.equal(moduleLearningCompanionRelativePath("m16"), "content/course/contracts/companions/m16.v1.json");
+  assert.equal(m17.guideBinding.locator, "/guides/16");
+  assert.equal(m17.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m17.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m17.forwardHandoff.targetModuleId, "m28");
+  assert.match(m17.forwardHandoff.boundary, /M18 is a separate open systems branch/i);
+  assert.match(m17.forwardHandoff.boundary, /sole academic prerequisite is M17/i);
+  assert.match(m17.forwardHandoff.boundary, /M31-to-M18 reader continuation is narrative navigation/i);
+  assert.equal(moduleLearningCompanionRelativePath("m17"), "content/course/contracts/companions/m17.v1.json");
   assert.equal(m19.guideBinding.locator, "/guides/18");
   assert.equal(m19.forwardHandoff.targetModuleId, "m20");
   assert.equal(m20.guideBinding.locator, "/guides/19");
@@ -247,6 +257,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const graphM14 = graph.modules.find(({ id }) => id === "m14");
   const graphM15 = graph.modules.find(({ id }) => id === "m15");
   const graphM16 = graph.modules.find(({ id }) => id === "m16");
+  const graphM17 = graph.modules.find(({ id }) => id === "m17");
   const graphM19 = graph.modules.find(({ id }) => id === "m19");
   const graphM24 = graph.modules.find(({ id }) => id === "m24");
   assert.equal(graphM12.state.lifecycle, "learner-material-ready");
@@ -255,7 +266,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.equal(graphM13.state.lifecycle, "learner-material-ready");
   assert.equal(graphM13.state.contract.state, "legacy-baseline");
   assert.equal(graphM13.state.release.state, "unrecorded");
-  for (const graphModule of [graphM14, graphM15, graphM16]) {
+  for (const graphModule of [graphM14, graphM15, graphM16, graphM17]) {
     assert.equal(graphModule.state.lifecycle, "learner-material-ready");
     assert.equal(graphModule.state.contract.state, "legacy-baseline");
     assert.equal(graphModule.state.release.state, "unrecorded");

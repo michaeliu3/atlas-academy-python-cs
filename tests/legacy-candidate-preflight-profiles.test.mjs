@@ -42,6 +42,7 @@ const expectedCandidateModuleIds = [
   "m14",
   "m15",
   "m16",
+  "m17",
 ];
 
 test("the candidate profile registry allowlists the current, systems, and mathematics cohorts", async () => {
@@ -149,5 +150,5 @@ test("the snapshot-bound profile validator never reuses stateful caller facts", 
   const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
 
   assert.equal(purposeReads, 1);
-  assert.equal(report.candidateByModuleId.size, 26);
+  assert.equal(report.candidateByModuleId.size, 27);
 });
