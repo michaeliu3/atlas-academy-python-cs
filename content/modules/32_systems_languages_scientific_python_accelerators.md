@@ -905,6 +905,28 @@ kernel's completion event at t3 is the slot reusable. A different runtime may
 express the events differently, but it must make the dependency and last use
 visible.
 
+### Optional backend reading lens — a side stream still needs a lifetime story
+
+This is a link-only reading lens for one named PyTorch/CUDA configuration, not
+a GPU lab or a portable recipe. When a non-default consumer stream is involved,
+a reviewer needs **both** a named dependency that protects its read and a
+backend-specific storage-lifetime record that keeps the storage unavailable for
+reuse until that consumer finishes. Launch order alone supplies neither fact.
+
+~~~text
+producer stream A -- named event / wait --> consumer stream B -- completion --> legal reuse
+       \________________ storage remains live through B ____________________/
+~~~
+
+**Text reading:** Stream A produces or last writes the storage, then a named
+dependency protects Stream B's later read. The storage remains retained through
+that read; B's completion, not the host's launch order, establishes legal reuse.
+
+For a pinned PyTorch version, `wait_stream` and `record_stream` are useful
+documentation terms to inspect, not commands to copy into this course. A real
+implementation must name its framework, backend, allocator, device, and error
+path; this local reference fixture deliberately does not simulate side streams.
+
 ### Bounded reference fixture — event labels before reuse
 
 Before calling `m32BufferReuseTimeline("after-enqueue")`, predict whether the

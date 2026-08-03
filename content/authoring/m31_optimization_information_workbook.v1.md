@@ -447,8 +447,12 @@ g(x,y) &\leq 0 &&\text{(primal feasibility)}\\
 
 At `(1, 0)` with `lambda=2`, every displayed condition holds for this
 fixture. Slater’s condition is easy to see because `(0,0)` is strictly
-feasible. That supports the specific certificate; it is not permission to
-announce that “multipliers solve constrained problems.”
+feasible. In this differentiable convex setting, the four displayed KKT
+conditions are sufficient for global optimality. Slater is the qualification
+that supplies the usual strong-duality/dual-attainment route and KKT necessity
+here; the matching primal and dual witnesses also prove this finite fixture
+directly. None of that is permission to announce that “multipliers solve
+constrained problems.”
 
 ### Worked primal/dual mini-case — derive the gap before trusting it
 
@@ -504,10 +508,12 @@ p^\star=2,\qquad d^\star=q(2)=2,\qquad p^\star-d^\star=0.
 
 This is a differentiable convex objective with an affine constraint, and
 `(0,0)` is strictly feasible because `g(0,0)=-1`. Thus the usual convex
-Slater/KKT theorem applies; `(x,y,lambda)=(1,0,2)` is a global-optimality
-certificate for this stated problem. The matching primal/dual values already
-prove this tiny exact result; Slater explains why the broader theorem is
-available here.
+Slater/KKT theorem applies. The KKT conditions are sufficient for the
+global-optimality certificate in this convex setting, while Slater supplies
+the theorem's regularity route to strong duality, dual attainment, and
+necessity. `(x,y,lambda)=(1,0,2)` is therefore a certificate for this stated
+problem; the matching primal/dual values already prove the tiny exact result
+directly.
 
 Do **not** transfer that conclusion unchanged to an integer, chance, nonconvex,
 or numerically approximate problem. There, a solver's reported multiplier or

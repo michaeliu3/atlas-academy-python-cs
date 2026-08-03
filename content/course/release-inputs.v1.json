@@ -74,11 +74,11 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "53a85e59f433323a9017dd188b8761f8cbd1facca7ec1cb37d90dcc09c67a74c"
+      "sha256": "a65a54cb3e563cc2ee56efd918debeaa957b637afc23b8f3163066071cb352ef"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "02ac58b5a612f546fef642a0b092f413d0bf62b63b479cf393fc5e95b3ae9638"
+      "sha256": "bf76adc299b67ee9a9110e31c7bc08f86d462817acedabbf3394306861c55fd4"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
@@ -830,7 +830,7 @@
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "6be25aef955afebe49c327b52aa85925f624f12f487de4e111d8dc139d8e52e9"
+      "sha256": "31e03d3b429433152377092e7347a75c0bc681aec3e01e21ad959d7f6f573037"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
