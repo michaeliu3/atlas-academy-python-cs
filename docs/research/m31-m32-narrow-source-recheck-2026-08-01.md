@@ -24,12 +24,25 @@ university-equivalent instruction, assessment, credit, or outcomes.
 | Strides and contiguity | [`ndarray.strides`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.strides.html), [`ndarray.flags`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flags.html), and [`numpy.ascontiguousarray`](https://numpy.org/doc/stable/reference/generated/numpy.ascontiguousarray.html) | Strides are byte steps per axis; they are not themselves a universal proof of C/F contiguity, ownership, compatibility, or cost. Inspect the relevant layout flags as well. `ascontiguousarray` can return the same C-contiguous object or make a C-contiguous copy, depending on the actual input. The workbook's negative-stride and lower-level-consumer cautions are correct. |
 | Broadcasting and temporaries | [Broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) and [`numpy.broadcast_to`](https://numpy.org/doc/stable/reference/generated/numpy.broadcast_to.html) | Broadcasting is shape semantics, not an automatic materialization rule: `broadcast_to` returns a readonly, typically non-contiguous view whose elements can share locations. A specific NumPy expression can nevertheless produce a large result/intermediate; the documented vector-quantization example identifies such a large `diff` array as computationally inefficient. The current `points[:, None, :] - centers[None, :, :]` wording—logical `(n, k, d)` shape, then backend/allocation evidence—is appropriately narrow. **Keep it; do not rewrite it as “broadcasting always allocates.”** |
 
-## Authoring action
+## Current implementation record
 
-Apply only the two small clarifications above if this batch revises the
-workbooks: (1) name the smoothness domain/segment around M31's exact descent
-step, and (2) add the `shares_memory` versus `may_share_memory` distinction to
-M32's array-inspection exercise. They improve precision without expanding the
-module scope or creating a hardware/performance claim. Recheck moving NumPy
-documentation and any pinned runtime version again before a learner-facing
-release.
+The two conditional micro-clarifications from this source recheck are present
+in the current frozen hidden candidates and matching authoring workbooks; no
+additional content patch is required.
+
+1. M31 names the convex smoothness domain and the segment from \(x\) to
+   \(x^+=x-\eta\nabla f(x)\), then explicitly excludes automatic transfer to
+   projected, nonsmooth, or inexact cases
+   ([candidate](../../content/modules/31_optimization_information.md),
+   [workbook](../../content/authoring/m31_optimization_information_workbook.v1.md)).
+2. M32 asks for a prediction before distinguishing `shares_memory`'s exact,
+   potentially expensive overlap check from `may_share_memory`'s conservative
+   possibility check; it retains the boundary that neither proves a non-NumPy
+   consumer's conversion, lifetime, device, or performance behavior
+   ([candidate](../../content/modules/32_systems_languages_scientific_python_accelerators.md),
+   [workbook](../../content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md)).
+
+This confirms textual implementation only. It is not fresh source approval,
+human review, learner delivery, release evidence, or a hardware/performance
+claim. Recheck moving NumPy documentation and any pinned runtime version again
+before a learner-facing release.
