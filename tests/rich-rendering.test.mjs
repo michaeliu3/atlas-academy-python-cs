@@ -215,3 +215,38 @@ test("Module 29's authored prerequisite map renders after accessibility metadata
   assert.match(markup, /<svg\b/iu);
   assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
 });
+
+test("M31's hidden review candidate renders its authored diagram alternatives without opening a reader route", async () => {
+  const candidate = await readFile(
+    new URL("../content/modules/31_optimization_information.md", import.meta.url),
+    "utf8",
+  );
+  const blocks = scanMermaidBlocks(candidate, {
+    sourcePath: "content/modules/31_optimization_information.md",
+  });
+
+  assert.equal(blocks.length, 2);
+  for (const [index, block] of blocks.entries()) {
+    assert.ok(block.metadata?.id?.startsWith("m31-"));
+    assert.ok(block.metadata?.title);
+    assert.ok(block.metadata?.alternative);
+
+    const markup = await renderSafeMermaidSvg({
+      label: block.metadata.title,
+      describedById: `${block.metadata.id}-alternative`,
+      renderId: `atlas-m31-hidden-candidate-${index + 1}`,
+      source: block.renderSource,
+    });
+    const svg = new renderedWindow.DOMParser().parseFromString(
+      markup,
+      "image/svg+xml",
+    ).documentElement;
+
+    assert.equal(svg.localName, "svg");
+    assert.equal(svg.getAttribute("role"), "img");
+    assert.equal(svg.getAttribute("aria-label"), block.metadata.title);
+    assert.equal(svg.getAttribute("aria-describedby"), `${block.metadata.id}-alternative`);
+    assert.equal(svg.getAttribute("focusable"), "false");
+    assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
+  }
+});
