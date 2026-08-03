@@ -2568,6 +2568,20 @@ test("renders legacy MCQ rationales behind local prediction gates while previews
       expectedNativeAnswerGates: 0,
       expectedPredictionGates: 1,
     },
+    {
+      pathname: "/modules/29-calculus-real-analysis-continuous-change",
+      expectedInteractiveAnswerGates: 1,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+      hiddenRationaleText: "A reverses the quantifier responsibility",
+    },
+    {
+      pathname: "/modules/30-probability-statistics-scientific-inference",
+      expectedInteractiveAnswerGates: 1,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+      hiddenRationaleText: "It names the observed denominator",
+    },
   ];
 
   for (const {
@@ -2575,6 +2589,7 @@ test("renders legacy MCQ rationales behind local prediction gates while previews
     expectedInteractiveAnswerGates,
     expectedNativeAnswerGates,
     expectedPredictionGates,
+    hiddenRationaleText,
   } of routes) {
     const response = await render(pathname);
     assert.equal(response.status, 200, `${pathname} must render.`);
@@ -2617,6 +2632,13 @@ test("renders legacy MCQ rationales behind local prediction gates while previews
     }
     for (const gate of [...nativeAnswerGates, ...predictionGates]) {
       assert.equal(gate.hasAttribute("open"), false, `${pathname} exposes a reveal by default.`);
+    }
+    if (hiddenRationaleText) {
+      assert.doesNotMatch(
+        document.querySelector("main")?.textContent ?? "",
+        new RegExp(hiddenRationaleText, "u"),
+        `${pathname} exposes its repair key before a learner prediction.`,
+      );
     }
   }
 });
