@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   extractTableOfContents,
+  extractSessionLaunches,
   getArcById,
   getModuleBySlug,
   getModuleMarkdown,
@@ -103,6 +104,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
   const moduleInteraction = resolveModuleStudio(courseModule);
   const lessonMarkdown = stripDocumentTitle(markdown);
   const headings = extractTableOfContents(lessonMarkdown);
+  const sessionLaunches = extractSessionLaunches(lessonMarkdown);
   const access = readerAccessCopy(courseModule);
   const previewConversation =
     moduleInteraction.kind === "preview"
@@ -156,6 +158,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
         <ModuleInteraction
           courseModule={courseModule}
           resolution={moduleInteraction}
+          sessionLaunches={sessionLaunches}
         />
 
         {previewConversation ? (

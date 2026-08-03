@@ -345,7 +345,13 @@ test("graph-declared studios have one bounded, code-split reader mapping", async
   const declaredStudioIds = graph.modules
     .map((courseModule) => courseModule.studioId)
     .filter((studioId) => studioId !== null);
+  const m18 = graph.modules.find((courseModule) => courseModule.id === "m18");
   const m19 = graph.modules.find((courseModule) => courseModule.id === "m19");
+  assert.equal(
+    m18?.studioId,
+    "operating-systems",
+    "M18's existing resource observatory must be declared for its direct reader route",
+  );
   assert.equal(
     m19?.studioId,
     "concurrency",
@@ -378,7 +384,7 @@ test("graph-declared studios have one bounded, code-split reader mapping", async
   );
 });
 
-test("M12 and M13 expose distinct direct reader studios for Arc III reasoning", async () => {
+test("M12, M13, and M18 expose their declared direct reader studios", async () => {
   const [graphSource, registrySource] = await Promise.all([
     readFile(new URL("../content/course/course-graph.v2.json", import.meta.url), "utf8"),
     readFile(new URL("../lib/module-studio-registry.ts", import.meta.url), "utf8"),
@@ -386,9 +392,11 @@ test("M12 and M13 expose distinct direct reader studios for Arc III reasoning", 
   const graph = JSON.parse(graphSource);
   const m12 = graph.modules.find(({ id }) => id === "m12");
   const m13 = graph.modules.find(({ id }) => id === "m13");
+  const m18 = graph.modules.find(({ id }) => id === "m18");
 
   assert.equal(m12?.studioId, "dependency-direction");
   assert.equal(m13?.studioId, "specification-trace");
+  assert.equal(m18?.studioId, "operating-systems");
   assert.match(
     registrySource,
     /"dependency-direction":[\s\S]*?studioId: "dependency-direction"[\s\S]*?DependencyDirectionStudio/u,
@@ -396,6 +404,10 @@ test("M12 and M13 expose distinct direct reader studios for Arc III reasoning", 
   assert.match(
     registrySource,
     /"specification-trace":[\s\S]*?studioId: "specification-trace"[\s\S]*?SpecificationTraceStudio/u,
+  );
+  assert.match(
+    registrySource,
+    /"operating-systems":[\s\S]*?studioId: "operating-systems"[\s\S]*?OperatingSystemsStudio/u,
   );
 });
 

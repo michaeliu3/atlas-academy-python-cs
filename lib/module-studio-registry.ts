@@ -8,6 +8,7 @@ import type { ComponentType } from "react";
 export const moduleStudioIds = [
   "dependency-direction",
   "specification-trace",
+  "operating-systems",
   "concurrency",
   "network-protocol",
   "async-distributed",
@@ -47,6 +48,14 @@ export const moduleStudioRegistry = {
     load: () =>
       import("@/app/SpecificationTraceStudio").then(({ SpecificationTraceStudio }) => ({
         default: SpecificationTraceStudio,
+      })),
+  },
+  "operating-systems": {
+    studioId: "operating-systems",
+    title: "Operating systems resource observatory",
+    load: () =>
+      import("@/app/OperatingSystemsStudio").then(({ OperatingSystemsStudio }) => ({
+        default: OperatingSystemsStudio,
       })),
   },
   concurrency: {

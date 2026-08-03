@@ -1,0 +1,61 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import {
+  extractSessionLaunches,
+  stripDocumentTitle,
+} from "../lib/heading-ids.js";
+
+async function workbook(filename) {
+  return stripDocumentTitle(
+    await readFile(new URL(`../content/modules/${filename}`, import.meta.url), "utf8"),
+  );
+}
+
+test("the reader can derive a concise six-session path from M1-M10 workbooks", async () => {
+  const files = [
+    "01_values_state_execution.md",
+    "02_functions_recursion_induction.md",
+    "03_abstraction_interfaces_adts.md",
+    "04_logic_sets_relations_graphs_proof.md",
+    "05_cost_models_algorithm_analysis.md",
+    "06_representation_memory_sequences_linked.md",
+    "07_stacks_queues_iteration_lazy.md",
+    "08_hashing_dictionaries_sets_indexing.md",
+    "09_trees_heaps_sorting_ordered.md",
+    "10_graph_algorithms_network_models.md",
+  ];
+
+  for (const file of files) {
+    const launches = extractSessionLaunches(await workbook(file));
+    assert.equal(launches.length, 6, `${file} needs its six core sessions.`);
+    assert.deepEqual(
+      launches.map(({ number }) => number),
+      [1, 2, 3, 4, 5, 6],
+      `${file} must preserve the ordered core sequence.`,
+    );
+    for (const launch of launches) {
+      assert.match(launch.id, /^session-[1-6]-/u, `${file} needs a rendered session anchor.`);
+      assert.ok(launch.title.length > 0, `${file} needs a readable session title.`);
+      assert.ok(launch.output, `${file} needs a visible carry-forward artifact.`);
+    }
+  }
+});
+
+test("the launch extractor ignores M3's optional seventh session", async () => {
+  const launches = extractSessionLaunches(await workbook("03_abstraction_interfaces_adts.md"));
+  assert.equal(launches.at(-1)?.number, 6);
+  assert.equal(launches.some(({ title }) => /optional/i.test(title)), false);
+});
+
+test("the reader integrates the path before the workbook and preserves TA timing", async () => {
+  const [page, interaction] = await Promise.all([
+    readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/modules/[slug]/ModuleInteraction.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(page, /extractSessionLaunches\(lessonMarkdown\)/u);
+  assert.match(page, /sessionLaunches=\{sessionLaunches\}/u);
+  assert.match(interaction, /Start Session 1 with the Study Partner/u);
+  assert.match(interaction, /oral defense for after Session 6 and a\s+concrete dossier/u);
+});

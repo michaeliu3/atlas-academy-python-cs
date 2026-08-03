@@ -175,9 +175,9 @@
       "title": "Logic, Sets, Relations, Graphs, and Proof",
       "summary": "Atlas can now represent events behind an abstraction boundary. The next problem is not mainly about Python syntax:",
       "arcId": "arc-i",
-      "wordCount": 7310,
+      "wordCount": 7720,
       "estimatedMinutes": 25,
-      "sourceHash": "0e98eb122b3a6e140fd8fb3570524398bf84fa5b7a9c35956cfa224c6d7aa1c0",
+      "sourceHash": "c75354d7905bca0e7ef4a52b3e5257cd3b4136893f19cf23d46fff591684f5a5",
       "id": "m04",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -756,7 +756,7 @@
       "routePosition": 23,
       "masteryGateId": "systems",
       "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
-      "studioId": null,
+      "studioId": "operating-systems",
       "prerequisiteNumbers": [
         17
       ],

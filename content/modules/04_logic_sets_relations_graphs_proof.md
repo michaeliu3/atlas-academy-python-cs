@@ -849,6 +849,62 @@ D. Evidence that dictionaries are unordered.
 
 </details>
 
+### Question 9
+
+An Atlas route planner may start at exactly one of three concepts. `A` has one
+valid continuation, `B` has three, and `C` has none. Which claim is most
+precise before the planner assigns any probabilities?
+
+A. There are four valid ordered start/continuation pairs; add the unequal
+branches, and independence is not a premise of this count.  
+B. There are nine pairs because three starting concepts must be multiplied by
+three continuations.  
+C. There are four pairs only if starting concept and continuation are
+independent random events.  
+D. There are three pairs because only `B` has more than one continuation.
+
+<details>
+<summary>Reveal answer and reasoning</summary>
+
+**Answer: A.** The count is `1 + 3 + 0 = 4`. Product notation needs one
+shared number of allowed second-stage choices for every first-stage choice;
+these branches do not have one. Independence belongs to a probability model,
+not to this structural counting decision.
+
+- **B** invents a common second-stage branch count that the scenario denies.
+- **C** reaches the count but imports an unnecessary probability assumption.
+- **D** ignores the one valid continuation after `A`.
+
+</details>
+
+### Question 10
+
+Let `X` and `Y` count the probes made by two hash-table lookups under a stated
+probability model. Which statement is justified without adding an independence
+assumption?
+
+A. `E[X + Y] = E[X] + E[Y]` when the expectations exist; independence may
+matter for other claims, and the model still needs justification.  
+B. The equality holds only when the two lookups are independent.  
+C. Every pair of lookups uses exactly `E[X] + E[Y]` probes.  
+D. A simulation that resembles the equality proves the chosen probability
+model is appropriate.
+
+<details>
+<summary>Reveal answer and reasoning</summary>
+
+**Answer: A.** Linearity of expectation does not require `X` and `Y` to be
+independent. It does not turn an expected value into a per-run guarantee, and
+it does not establish that the hashing or input distribution is the right
+model for a real system.
+
+- **B** confuses a familiar sufficient condition for some probability rules
+  with a requirement for linearity.
+- **C** replaces an average over a model with an exact claim about every run.
+- **D** treats finite empirical agreement as proof of a model assumption.
+
+</details>
+
 ### Diagnostic interpretation
 
 - Miss Q1–Q2: revisit implication, negation, and quantifier scope.
@@ -856,6 +912,10 @@ D. Evidence that dictionaries are unordered.
 - Miss Q5 or Q7: rebuild the graph-order model with a drawn counterexample.
 - Miss Q6: separate proof of a model from tests of an implementation.
 - Miss Q8: practice recovering domain policy from control flow.
+- Miss Q9: redraw the unequal branch tree; say which premise is combinatorial
+  and which would belong to a probability model.
+- Miss Q10: state the probability model for an expected-cost claim, then
+  explain why linearity does not need independence or guarantee one run.
 - High confidence + wrong: explain why the distractor felt compelling, then construct the smallest case that breaks it.
 
 ## 16. TA guide

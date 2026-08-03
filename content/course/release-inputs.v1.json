@@ -506,7 +506,7 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "052865aec76bf95736c810d23a7b2eba25faa056464c8873a457a7a1bd9f485b"
+      "sha256": "81c460463de78d89da9a058a8bdb567d696d2265a9711e90651627db43b3d031"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -518,7 +518,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "79d701b539d7bad2e09650f810d10c2eb17ab39aadff9cd71f7af669a7c0a2d3"
+      "sha256": "bc3740c43f6162bfd748b0b53b9c8a207a5a0035501f87cb9c9eb7aaba6f10fe"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -562,7 +562,7 @@
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "0e98eb122b3a6e140fd8fb3570524398bf84fa5b7a9c35956cfa224c6d7aa1c0"
+      "sha256": "c75354d7905bca0e7ef4a52b3e5257cd3b4136893f19cf23d46fff591684f5a5"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
@@ -1006,11 +1006,11 @@
     },
     {
       "path": "e2e/accessibility.spec.ts",
-      "sha256": "fe9dfcba3e656eac435c7ab9d234da72bd09e714ea4c3ebc8e05f698ff9da35c"
+      "sha256": "6ba26892d137974470517e4fdb55b3ccdd786ec40d58dbd427acaf98360a485d"
     },
     {
       "path": "lib/module-studio-registry.ts",
-      "sha256": "7f1341a573525123da5eedbc23ca650ef35f22affa6de9c9bae823a9abcd349d"
+      "sha256": "ef9522b2ebdd31aaa60f04a75b229ac4fc4e7948851261fde4a38641cd8b3ecf"
     },
     {
       "path": "package.json",
