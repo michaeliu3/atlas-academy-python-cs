@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Refined M31 after a focused source and learning-quality pre-review: it now
+  defines conditional-history notation before use, distinguishes the explicit
+  Slater route from a separate all-affine-constraint qualification route, and
+  makes the BSC/rate-distortion versus ELBO boundary explicit. These are
+  source-backed authoring improvements only: M31 remains hidden,
+  authoring-only, and unreleased.
 - Tightened the private M31–M32 authoring packs after the 2026-08-03 official
   calibration: M31 now compares direct matching-witness and qualified-theorem
   certificate routes, then retrieves the distinct source, law, quantity, and
