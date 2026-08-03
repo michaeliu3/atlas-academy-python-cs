@@ -7,6 +7,14 @@ actually published.
 
 ## Unreleased
 
+- Added M18's candidate-only structural package: its six-session systems
+  workbook, source/reuse audit, typed evidence/preflight records, bounded
+  reference-model links, and Teaching Assistant/Study Partner companion now
+  bind the M17 → M18 → M19 route. The package prefers GPT Live at a High
+  setting when available and preserves a readable Markdown/ASCII whiteboard
+  fallback, without claiming platform control or automatic Notion writing. It
+  remains `legacy-baseline`, unrecorded, non-promoting, and preserves the
+  immutable audit's ambiguous criteria and missing Study Partner finding.
 - Standardized the remaining learner-facing evidence guides as constructive
   next-step guidance: rigorous evidence now leads to the canonical handoff or
   one named repair route instead of a pass/advance declaration. The real

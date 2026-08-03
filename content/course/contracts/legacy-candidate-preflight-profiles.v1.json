@@ -412,6 +412,21 @@
       ],
       "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
       "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m18",
+      "packetId": "m18-operating-systems-resource-mediation-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m18/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:b823bc40a7a0c97084aef5c90826c49f16c3ec34e608a88b19514dd02c084a25"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module18_operating_systems_source_map.md",
+        "content/source-maps/module18_operating_systems_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/OperatingSystemsStudio.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
     }
   ]
 }

@@ -35,6 +35,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m15 = report.byModuleId.get("m15");
   const m16 = report.byModuleId.get("m16");
   const m17 = report.byModuleId.get("m17");
+  const m18 = report.byModuleId.get("m18");
   const m27 = report.byModuleId.get("m27");
   const m28 = report.byModuleId.get("m28");
   const m29 = report.byModuleId.get("m29");
@@ -53,7 +54,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   const m23 = report.byModuleId.get("m23");
   const m24 = report.byModuleId.get("m24");
 
-  assert.equal(report.summary.companionCount, 33);
+  assert.equal(report.summary.companionCount, 34);
   assert.deepEqual(report.summary.moduleIds, [
     "m01",
     "m02",
@@ -72,6 +73,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
     "m15",
     "m16",
     "m17",
+    "m18",
     "m19",
     "m20",
     "m21",
@@ -171,6 +173,13 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.match(m17.forwardHandoff.boundary, /sole academic prerequisite is M17/i);
   assert.match(m17.forwardHandoff.boundary, /M31-to-M18 reader continuation is narrative navigation/i);
   assert.equal(moduleLearningCompanionRelativePath("m17"), "content/course/contracts/companions/m17.v1.json");
+  assert.equal(m18.guideBinding.locator, "/guides/17");
+  assert.equal(m18.teachingAssistant.role, "supportive-oral-defense");
+  assert.equal(m18.studyPartner.role, "non-grading-rehearsal");
+  assert.equal(m18.forwardHandoff.targetModuleId, "m19");
+  assert.match(m18.forwardHandoff.boundary, /M17 is M18's sole academic prerequisite/i);
+  assert.match(m18.forwardHandoff.boundary, /M31-to-M18 reader continuation is narrative reader order/i);
+  assert.equal(moduleLearningCompanionRelativePath("m18"), "content/course/contracts/companions/m18.v1.json");
   assert.equal(m19.guideBinding.locator, "/guides/18");
   assert.equal(m19.forwardHandoff.targetModuleId, "m20");
   assert.equal(m20.guideBinding.locator, "/guides/19");

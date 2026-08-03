@@ -301,12 +301,13 @@ test("Module 11 is a complete algorithm-strategy retrofit with scoped visual exp
   assert.ok(moduleEleven.includes("m11-algorithm-selection-knowledge-map"));
 });
 
-test("Modules 14 through 17 retain complete, readable visual explanations", async () => {
+test("Modules 14 through 18 retain complete, readable visual explanations", async () => {
   for (const [moduleNumber, filename, expectedBlocks, knowledgeMapId] of [
     ["14", "14_software_design_and_change.md", 8, "m14-design-change-knowledge-map"],
     ["15", "15_files_serialization_packaging_delivery.md", 19, "m15-durable-delivery-knowledge-map"],
     ["16", "16_relational_data_transactions.md", 9, "m16-relational-one-page-map"],
     ["17", "17_computer_architecture_execution_stack.md", 11, "m17-execution-stack-roadmap"],
+    ["18", "18_operating_systems_resource_mediation.md", 19, "m18-os-pressure-bridge"],
   ]) {
     const markdown = await readFile(
       new URL(`../content/modules/${filename}`, import.meta.url),

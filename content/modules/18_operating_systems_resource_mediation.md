@@ -145,16 +145,22 @@ over one another.
 ```mermaid
     %% atlas-diagram-id: m18-os-pressure-bridge
     %% atlas-diagram-title: Operating-system pressure bridge
-    %% atlas-diagram-alt: Module 17 hands a machine and I/O boundary to Module 18, which explains processes, memory, files, and shutdown before later modules add concurrency, networking, distribution, and runtime internals.
-%% Figure 1. Module 17 hands an unresolved OS boundary to Module 18, which resolves local resource ownership before later modules add overlap, networks, distribution, and runtime internals.
+    %% atlas-diagram-alt: Module 17 hands a machine and I/O boundary to Module 18, which explains processes, memory, files, and shutdown. Module 19 is the canonical forward handoff for concurrency, then Module 20 adds networking and Module 21 adds distribution. The dotted Module 24 link is a later conceptual runtime boundary, not reader navigation or an academic prerequisite.
+%% Figure 1. Module 17 hands an unresolved OS boundary to Module 18, which resolves local resource ownership before the canonical M19 concurrency handoff. The dotted runtime link is conceptual only.
 flowchart LR
     M17["M17<br/>machine state + I/O handoff"] --> PRESSURE["finite resources<br/>multiple programs<br/>failure"]
     PRESSURE --> M18["M18<br/>process + VM + files + shutdown"]
-    M18 --> M19["M19<br/>interleavings + synchronization"]
-    M18 --> M20["M20<br/>network protocols"]
+    M18 --> M19["M19 canonical forward handoff<br/>interleavings + synchronization"]
+    M19 --> M20["M20<br/>network protocols"]
     M20 --> M21["M21<br/>async + distribution"]
-    M18 --> M24["M24<br/>CPython memory + performance"]
+    M18 -.-> M24["M24 later conceptual boundary<br/>CPython memory + performance"]
 ```
+
+The graph separates academic foundations, reader narrative, and topic links.
+M18's sole academic prerequisite is M17. M31's reader-narrative placement is
+not an academic prerequisite; it resumes the 60-day route after the M28–M31
+mathematics arc. M19 is M18's only canonical forward handoff. The dotted M24
+edge is a conceptual stopping boundary, not learner navigation or a bypass.
 
 The bridge reuses five M17 disciplines:
 
@@ -261,6 +267,17 @@ Route misses:
 
 A confident miss receives a counterexample and a delayed transfer. A
 low-confidence correct answer receives an explanation prompt.
+
+### Prediction before reveal — one returned write, one named boundary
+
+Before opening a trace, choose a confidence level and complete this sentence:
+
+> “After `buffered.write(payload)` returns, the strongest claim I can make is
+> [claim], because [named owner and evidence]. I cannot yet claim [one lower
+> layer or durability fact].”
+
+Then compare the prediction with the Python, declared OS-model, platform, and
+artifact evidence that follow. A revision is useful evidence, not a penalty.
 
 ### 1.6 Module ownership and stopping rules
 
@@ -2184,7 +2201,7 @@ actually execute. A green summary alone is not the mastery artifact.
 The sessions are not six chapters. Each adds one missing state owner to the
 same shutdown incident.
 
-### Session 1 — Why a mediator exists
+## Session 1 — Why a mediator exists
 
 **Before**
 
@@ -2233,7 +2250,13 @@ In two minutes:
 > Why does a protected system-call interface make both resource sharing and
 > isolation possible, and why does it not reveal physical work?
 
-### Session 2 — Program, process, lifecycle, and scheduling
+### Session 1 output — ownership and privilege-boundary trace
+
+Produce a seven-row `write()` ownership table that labels the caller, the
+resource owner, the strongest supported claim, and one still-unknown lower
+layer for each transition.
+
+## Session 2 — Program, process, lifecycle, and scheduling
 
 **Before**
 
@@ -2288,7 +2311,12 @@ zero-exit/failed-publication incident.
 One state table distinguishing program, process, run, PID, lifecycle, exit
 status, and target state.
 
-### Session 3 — Virtual memory and fault classification
+### Session 2 output — lifecycle and scheduling state table
+
+Keep one labelled lifecycle trace plus one declared-policy schedule, with run
+identity separate from PID, exit status, and target-artifact state.
+
+## Session 3 — Virtual memory and fault classification
 
 **Before**
 
@@ -2345,7 +2373,12 @@ invalid mapping:
 storage I/O proved?:
 ```
 
-### Session 4 — Names, open resources, caches, and authority
+### Session 3 output — translation and fault-classification trace
+
+Submit a VPN/offset/PTE/TLB trace that separates a TLB miss, resolvable fault,
+protection fault, invalid mapping, and the storage I/O evidence that is absent.
+
+## Session 4 — Names, open resources, caches, and authority
 
 **Before**
 
@@ -2400,7 +2433,12 @@ survives; classify a permission denial without privilege escalation.
 Explain why the pathname can change while an open resource retains distinct
 state, and why this is not a universal Windows/POSIX outcome.
 
-### Session 5 — Shutdown as a fallible protocol
+### Session 4 output — name, open-resource, and authority card
+
+Create one declared-model card showing path, name binding, descriptor/handle,
+open resource, buffer/cache boundary, required right, and platform unknown.
+
+## Session 5 — Shutdown as a fallible protocol
 
 **Before**
 
@@ -2452,7 +2490,12 @@ graceful.
 Explain one scenario in which the child exits nonzero but the target is valid
 new output.
 
-### Session 6 — Publication, recovery, and evidence defense
+### Session 5 output — shutdown and recovery boundary
+
+Write one interruption timeline with cooperative, forced, and unknown cleanup
+paths, plus the artifact observation required before any recovery decision.
+
+## Session 6 — Publication, recovery, and evidence defense
 
 **Before**
 
@@ -2516,6 +2559,12 @@ packet, run focused tests, and defend accept/reject/split decisions.
 [EMPIRICAL OBSERVATION] ...
 [UNKNOWN + NEXT EVIDENCE] ...
 ```
+
+### Session 6 output — bounded operating-evidence dossier and M19 handoff
+
+Assemble the six labelled claim sentences, raw artifact observations, one
+falsification step, and one M19 question about what changes when a second
+worker may interleave with this lifecycle.
 
 ---
 
@@ -3211,7 +3260,7 @@ Deliver:
 6. separate behavior/test/portability/schema/prose decisions;
 7. 700–1,000 word operating contract;
 8. five labeled final sentences;
-9. five-minute oral defense;
+9. learner-paced conversational defense;
 10. M19/M20/M21/M24 handoff map.
 
 **Gate:** agent summary and green test count never replace diff, test-coverage,
@@ -4053,17 +4102,71 @@ Finish:
 > guarantee, and design for interruption without claiming more than the
 > platform and evidence support.
 
+## Conversational oral defense — M18
+
+This is a supportive Teaching Assistant conversation, not a pass/fail exam,
+score, timed assessment, completion signal, or operating-systems certification
+claim. It is not a score, not timed, and does not produce a binary outcome.
+If the learner chooses GPT Live at a preferred High setting when available and
+their client renders the material, use the resource-owner map, lifecycle trace, translation table,
+publication phases, and Markdown/ASCII evidence ladder as a shared whiteboard.
+This workbook cannot control voice availability, quality settings, rendering,
+retention, or integrations. The same conversation protocol can instead use
+readable text with Markdown and an ASCII resource/lifecycle trace; the course
+cannot write Notion evidence automatically.
+
+### Invitation — separate an API return from OS state
+
+Start from one learner-selected artifact: an ownership table, process
+lifecycle, page translation, pathname/open-resource map, shutdown trace, or
+crash-cut matrix. Ask what changed, who owns the transition, which evidence
+supports it, how confident the learner is, and which lower-layer fact remains
+unknown before naming an API or guarantee.
+
+### Hint ladder — owner to recovery claim
+
+Offer only the smallest needed prompt:
+
+1. name the resource and current owner;
+2. draw the legal next state and one illegal edge;
+3. distinguish application invariant, declared model, platform contract,
+   observation, and unknown;
+4. inspect the shortest trace or artifact table;
+5. change one interruption or authority premise;
+6. state the narrowest recovery or non-claim.
+
+### Changed-premise counterexample
+
+Keep the application job fixed, then change exactly one premise: a permission
+denial, a forced stop, an uncollected child, a renamed pathname, a not-present
+page, a missing directory-sync capability, or a second worker. Predict which
+state transition, claim, and recovery rule change before seeing a trace. Use a
+small counterexample rather than turning an uncertainty into a failure.
+
+### Transfer turn — M19 concurrent histories
+
+Admit a second worker that can observe or modify the same name, resource, or
+publication protocol. Which M18 ownership and lifecycle facts remain useful,
+and which claims now require M19's interleavings, synchronization, progress,
+and race reasoning? Carry the unresolved question forward rather than claiming
+that a one-worker trace proves a concurrent guarantee.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a short summary: selected artifact, defended claim,
+confidence, changed premise, repaired misconception, observed evidence,
+remaining unknown, and M19 question. It is optional learner-controlled
+evidence, not a grade, transcript, automatic record, completion decision, or
+Notion write.
+
 ## Guided Codex handoff — M18
 
 ### Teaching Assistant — supportive oral defense
 
-Start with: **“I am finishing M18. This resource is owned by [layer], this
-lifecycle trace is [trace], this authority/durability claim is [claim], and my
-confidence is [level].”** Ask for the resource-state timeline before naming an
-OS API. Use this hint ladder: resource/owner → handle/descriptor → lifecycle
-and cleanup → authority check → visibility/durability boundary → crash or
-recovery observation. Change one premise (cancellation, forced stop, another
-process, permission denial, or power loss) and ask which guarantee disappears.
+Use the canonical conversational oral-defense protocol above. Start with:
+**“I am finishing M18. This resource is owned by [layer], this lifecycle trace
+is [trace], this authority/durability claim is [claim], and my confidence is
+[level].”** Ask for the resource-state timeline before naming an OS API.
 
 ### Study Partner — lifecycle rehearsal
 

@@ -298,7 +298,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     resolvedContractInputs: 75,
   });
   assert.deepEqual(report.moduleLearningCompanions?.summary, {
-    companionCount: 33,
+    companionCount: 34,
     moduleIds: [
       "m01",
       "m02",
@@ -317,6 +317,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
       "m15",
       "m16",
       "m17",
+      "m18",
       "m19",
       "m20",
       "m21",
@@ -335,7 +336,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
       "m36",
     ],
   });
-  assert.equal(report.legacyCandidatePreflightProfiles?.candidateByModuleId.size, 27);
+  assert.equal(report.legacyCandidatePreflightProfiles?.candidateByModuleId.size, 28);
   assert.ok(report.warnings.some((warning) => warning.includes("human review")));
   assert.deepEqual(report.draftEvidence?.summary, {
     draftPilotModules: 2,
@@ -344,15 +345,15 @@ test("the v3 contract registry covers every legacy reader module structurally", 
     publicationChanges: 0,
   });
   assert.deepEqual(report.legacyPackets?.summary, {
-    structuralCandidates: 26,
-    resolvedPointers: 1142,
+    structuralCandidates: 27,
+    resolvedPointers: 1188,
     humanApprovals: 0,
     publicationChanges: 0,
   });
   assert.equal(report.currentCandidatePackets?.summary.structuralCandidates, 2);
   assert.equal(report.currentCandidatePackets?.summary.humanApprovals, 0);
   assert.equal(report.currentCandidatePackets?.summary.publicationChanges, 0);
-  assert.equal(report.candidatePackets?.summary.structuralCandidates, 28);
+  assert.equal(report.candidatePackets?.summary.structuralCandidates, 29);
   assert.equal(report.candidatePackets?.summary.humanApprovals, 0);
   assert.equal(report.candidatePackets?.summary.publicationChanges, 0);
 });
@@ -404,7 +405,7 @@ test("checked-in provenance accepts the canonical derived graph projection", asy
     snapshot,
   });
 
-  assert.equal(report.releaseInputLedger?.inputPaths.length, 293);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 299);
   assert.ok(
     report.releaseInputLedger?.inputPaths.includes(
       "content/course/synthesis-preview-conversations.v1.json",
@@ -447,7 +448,7 @@ test("checked-in provenance validates captured JSON instead of stateful caller f
 
   assert.equal(graphPurposeReads, 1);
   assert.equal(registryPurposeReads, 1);
-  assert.equal(report.releaseInputLedger?.inputPaths.length, 293);
+  assert.equal(report.releaseInputLedger?.inputPaths.length, 299);
 });
 
 test("checked-in provenance ignores inherited Git index overrides end to end", async () => {
@@ -463,7 +464,7 @@ test("checked-in provenance ignores inherited Git index overrides end to end", a
       requireGitTracked: true,
       snapshot,
     });
-    assert.equal(report.releaseInputLedger?.inputPaths.length, 293);
+    assert.equal(report.releaseInputLedger?.inputPaths.length, 299);
   } finally {
     if (previousIndexOverride === undefined) {
       delete process.env.GIT_INDEX_FILE;

@@ -735,9 +735,9 @@
       "title": "Operating Systems and Resource Mediation",
       "summary": "Arc IV: make the system legible — from an OS handoff to a supervised, recoverable Atlas worker An operating system does not make finite resources or failure disappear. It gives programs controlled abstractions for using them.",
       "arcId": "arc-iv",
-      "wordCount": 21414,
+      "wordCount": 22138,
       "estimatedMinutes": 97,
-      "sourceHash": "f9e0a24e3df59f14e0d2060420eb674a2a369a7bb6627a78c24557c9e3949a1c",
+      "sourceHash": "6231120c24b905cfd3f2e3486a2f1168854a626a7dba4ecebda98842324687b8",
       "id": "m18",
       "state": {
         "lifecycle": "learner-material-ready",
