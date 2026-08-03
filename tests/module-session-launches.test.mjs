@@ -27,18 +27,61 @@ test("the reader can derive a concise six-session path from M1-M10 workbooks", a
   ];
 
   for (const file of files) {
-    const launches = extractSessionLaunches(await workbook(file));
+    const markdown = await workbook(file);
+    const launches = extractSessionLaunches(markdown);
     assert.equal(launches.length, 6, `${file} needs its six core sessions.`);
+    const authoredOutputs = [...markdown.matchAll(
+      /^### Output:\s*(.+?)\s*#*\s*$/gmu,
+    )].map(([, output]) => output.trim());
+    assert.equal(authoredOutputs.length, 6, `${file} needs six generic output artifacts.`);
     assert.deepEqual(
       launches.map(({ number }) => number),
       [1, 2, 3, 4, 5, 6],
       `${file} must preserve the ordered core sequence.`,
+    );
+    assert.deepEqual(
+      launches.map(({ output }) => output),
+      authoredOutputs,
+      `${file} should preserve its generic Output artifact titles.`,
     );
     for (const launch of launches) {
       assert.match(launch.id, /^session-[1-6]-/u, `${file} needs a rendered session anchor.`);
       assert.ok(launch.title.length > 0, `${file} needs a readable session title.`);
       assert.ok(launch.output, `${file} needs a visible carry-forward artifact.`);
     }
+  }
+});
+
+test("the reader preserves Session N output artifacts in the legacy systems bridge", async () => {
+  const files = [
+    "11_algorithm_design_paradigms.md",
+    "12_modules_apis_types_dependencies.md",
+    "14_software_design_and_change.md",
+    "15_files_serialization_packaging_delivery.md",
+    "16_relational_data_transactions.md",
+    "17_computer_architecture_execution_stack.md",
+    "18_operating_systems_resource_mediation.md",
+  ];
+
+  for (const file of files) {
+    const markdown = await workbook(file);
+    const launches = extractSessionLaunches(markdown);
+    assert.equal(launches.length, 6, `${file} needs its six connected sessions.`);
+    const authoredOutputs = [...markdown.matchAll(
+      /^### Session ([1-6]) output —\s*(.+?)\s*#*\s*$/gmu,
+    )].map(([, number, output]) => [Number(number), output.trim()]);
+    assert.equal(authoredOutputs.length, 6, `${file} needs six explicit session artifacts.`);
+    for (const session of launches) {
+      assert.ok(
+        session.output,
+        `${file} Session ${session.number} needs its authored carry-forward artifact.`,
+      );
+    }
+    assert.deepEqual(
+      launches.map(({ number, output }) => [number, output]),
+      authoredOutputs,
+      `${file} should prefer its explicit Session N output artifact.`,
+    );
   }
 });
 

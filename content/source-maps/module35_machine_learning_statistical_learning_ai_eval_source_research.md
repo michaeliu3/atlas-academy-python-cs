@@ -16,7 +16,9 @@ In particular, this research does **not**:
 
 - unlock M35, M36, M25, or M26;
 - alter the graph, manifest, reader route, schedule, contract registry,
-  release-input hashes, or provenance records;
+  release state, deployment record, or provenance approval; a deterministic
+  hash refresh only identifies the changed checked-in research input and is
+  not release evidence;
 - establish that M31, M32, or M34 (all required M35 prerequisites) has been
   released with learner-ready evidence;
 - grant reuse rights for a paper, code, dataset, checkpoint, figure, model
@@ -144,6 +146,17 @@ release approval.
   signal-only expected-accuracy change from the stated synthetic relation and
   context frequencies, then label it a bounded calculation—not a robustness,
   deployment, or universal direction-of-change claim.
+
+### Targeted 2026-08-03 M35-S06 preflight calibration
+
+- **M35-S06:** [MIT 6.036](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/)
+  and [CMU 10-301/601](https://www.cs.cmu.edu/~mgormley/courses/10601/)
+  were rechecked on 2026-08-03. The original synthetic preflight asks the
+  learner to separate data relation, split/selection/fresh-evaluation evidence,
+  metric/slice/cost, and decision authority before narrowing an AI-generated
+  claim. This adapts the courses' representation/generalization and experiment-
+  design expectations; it does not copy course material or establish a trained,
+  deployed, calibrated, or authorized system.
 
 ### What this ledger does *not* establish
 

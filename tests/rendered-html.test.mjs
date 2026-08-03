@@ -256,10 +256,14 @@ test("keeps the interactive explorer separate from Core route access and evidenc
 });
 
 test("each open module reader keeps the supportive oral-defense route", async () => {
-  const [page, oralDefense, textDefense, oralGuide, companionPackage, companionGuides] = await Promise.all([
+  const [page, oralDefense, oralDefenseStyles, textDefense, oralGuide, companionPackage, companionGuides] = await Promise.all([
     readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
     readFile(
       new URL("../app/modules/[slug]/ModuleOralDefense.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleOralDefense.module.css", import.meta.url),
       "utf8",
     ),
     readFile(
@@ -280,6 +284,13 @@ test("each open module reader keeps the supportive oral-defense route", async ()
   assert.match(oralDefense, /Copy Study Partner context/);
   assert.match(oralDefense, /Study Partner · rehearsal context/);
   assert.match(oralDefense, /separate live-capable Study Partner chat/);
+  assert.match(oralDefense, /First time with this role\?/u);
+  assert.match(oralDefense, /href="\/learning-partners"/u);
+  assert.match(oralDefense, /Paste the role brief once before this module context\./u);
+  assert.match(
+    oralDefenseStyles,
+    /\.setupLink:focus-visible\s*\{[\s\S]*outline:\s*3px solid #f3dfc5/u,
+  );
   assert.match(oralDefense, /Canonical forward handoff/);
   assert.match(oralDefense, /companion: ModuleCompanionPackage/);
   assert.doesNotMatch(oralDefense, /getModuleCompanionPackage/);
@@ -328,6 +339,9 @@ test("each open module reader keeps the supportive oral-defense route", async ()
   assert.match(readable, /Your plain-language explanation/);
   assert.match(renderedText, /Teaching Assistant · oral-defense context/);
   assert.match(renderedText, /Study Partner · rehearsal context/);
+  assert.match(renderedText, /First time with this role\?/u);
+  assert.match(renderedText, /Paste the role brief once before this module context\./u);
+  assert.match(html, /href="\/learning-partners"/u);
   assert.match(renderedText, /Canonical forward handoff/);
   assert.match(renderedText, /Module 5: Cost Models and Algorithm Analysis/);
   assert.match(renderedText, /automatic-after-substantive-session/);
