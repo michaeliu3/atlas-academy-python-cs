@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("the M24 source-audit addendum stays internal and preserves every unresolved legacy boundary", async () => {
+test("the M24 source-audit addendum stays internal and distinguishes historical from current structural boundaries", async () => {
   const [addendum, research] = await Promise.all([
     readFile(
       new URL(
@@ -30,18 +30,19 @@ test("the M24 source-audit addendum stays internal and preserves every unresolve
   assert.match(addendum, /does \*\*not\*\*\s+change[\s\S]*publication state/u);
   assert.match(addendum, /## Source and reuse ledger/u);
   assert.match(addendum, /## Six-session claim linkage/u);
-  assert.match(addendum, /## Preserved audit ambiguities and missing evidence/u);
+  assert.match(addendum, /## Preserved audit ambiguities and missing evidence \(historical snapshot\)/u);
   assert.match(addendum, /rigor bundle[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /transfer task[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /accessible visual\/text alternative[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /confidence diagnostic\/misconceptions[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /TA prompt[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /supportive oral defense[\s\S]*\*\*missing\*\*/u);
-  assert.match(addendum, /## Unresolved supportive oral-defense route/u);
+  assert.match(addendum, /## Historical supportive oral-defense gap, now structurally mapped/u);
   assert.match(
     addendum,
-    /generic oral infrastructure does not satisfy the\s+module-specific\s+missing criterion/u,
+    /current canonical audit now resolves rigor, transfer, confidence diagnostic,\s+and supportive oral defense as \*\*pointer-present\*\*/u,
   );
+  assert.match(addendum, /accessible visual\/text-alternative and TA-prompt criteria remain\s+\*\*ambiguous\*\*/u);
   assert.match(addendum, /Python 3\.14\.6/u);
   assert.match(addendum, /v3\.14\.6/u);
   assert.match(addendum, /PEP 744/u);

@@ -346,7 +346,7 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   });
   assert.deepEqual(report.legacyPackets?.summary, {
     structuralCandidates: 27,
-    resolvedPointers: 1188,
+    resolvedPointers: 1190,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -614,20 +614,20 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 400,
-    ambiguous: 77,
-    missing: 3,
+    "pointer-present": 419,
+    ambiguous: 60,
+    missing: 1,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    15,
+    13,
   );
   assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 0);
-  assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 3);
+  assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 1);
   assert.ok(
     audit.modules
-      .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10"].includes(moduleId))
+      .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10", "m23"].includes(moduleId))
       .every(({ evidence }) => Object.values(evidence).every(({ status }) => status === "pointer-present")),
   );
   const expectedAmbiguousByModule = new Map([
@@ -643,6 +643,9 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
     ["m18", ["first-principles", "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
     ["m19", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative", "supportive-oral-defense"]],
     ["m20", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative", "supportive-oral-defense"]],
+    ["m21", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"]],
+    ["m22", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "code-reading-debugging-design"]],
+    ["m24", ["accessible-visual-text-alternative", "ta-prompt"]],
   ]);
   for (const [moduleId, ambiguousCriteria] of expectedAmbiguousByModule) {
     const evidence = audit.modules.find((module) => module.moduleId === moduleId)?.evidence;

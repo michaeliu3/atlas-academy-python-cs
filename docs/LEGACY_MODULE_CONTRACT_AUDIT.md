@@ -10,7 +10,7 @@
 - Each module's `humanQualityReview: not-reviewed` uniformly applies to all 16 criteria. This audit records no per-criterion approvals; future granular human review needs a different reviewed contract record.
 - M25/M26 remain preview-only in the canonical graph. This audit neither changes their availability nor permits their authoring-only prerequisites to be bypassed.
 
-The validator resolved 30 modules and 480 criteria: **400 P**, **77 A**, **3 M**. It records **0 human approvals** and **0 publication changes**.
+The validator resolved 30 modules and 480 criteria: **419 P**, **60 A**, **1 M**. It records **0 human approvals** and **0 publication changes**.
 
 ## Matrix
 
@@ -36,10 +36,10 @@ The validator resolved 30 modules and 480 criteria: **400 P**, **77 A**, **3 M**
 | M18 | P | P | A | A | P | P | P | P | A | P | P | P | P | P | P | P |
 | M19 | P | P | P | A | P | P | P | P | A | P | P | P | A | P | P | P |
 | M20 | P | P | P | A | P | P | P | P | A | P | P | P | A | P | P | P |
-| M21 | P | P | P | A | A | A | A | P | P | A | P | P | A | P | P | P |
-| M22 | P | P | P | A | A | A | A | P | P | A | P | P | A | P | P | P |
-| M23 | P | P | P | A | A | A | A | P | P | A | P | P | M | P | P | P |
-| M24 | P | P | P | A | P | P | A | P | A | A | P | P | M | A | P | P |
+| M21 | P | P | P | A | P | P | P | P | P | P | P | P | P | P | P | P |
+| M22 | P | P | P | A | A | P | P | P | P | P | P | P | P | P | P | P |
+| M23 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
+| M24 | P | P | P | P | P | P | P | P | A | P | P | P | P | A | P | P |
 | M25 | A | P | P | A | P | P | A | P | P | A | P | P | M | P | P | P |
 | M26 | A | P | P | A | P | A | A | P | P | A | P | P | A | P | P | P |
 | M27 | P | P | P | A | A | P | P | A | A | A | P | P | P | P | P | P |
@@ -54,16 +54,16 @@ The validator resolved 30 modules and 480 criteria: **400 P**, **77 A**, **3 M**
 | prerequisite forward map | 28 | 2 | 0 |
 | six connected sessions | 30 | 0 | 0 |
 | first principles | 23 | 7 | 0 |
-| rigor definitions assumptions derivations proofs counterexamples numerical experiments | 15 | 15 | 0 |
-| code reading debugging design | 21 | 9 | 0 |
-| prediction before reveal | 26 | 4 | 0 |
-| transfer task | 23 | 7 | 0 |
+| rigor definitions assumptions derivations proofs counterexamples numerical experiments | 17 | 13 | 0 |
+| code reading debugging design | 23 | 7 | 0 |
+| prediction before reveal | 29 | 1 | 0 |
+| transfer task | 27 | 3 | 0 |
 | source ledger | 26 | 4 | 0 |
 | accessible visual text alternative | 15 | 15 | 0 |
-| confidence diagnostic misconceptions | 22 | 8 | 0 |
+| confidence diagnostic misconceptions | 26 | 4 | 0 |
 | retrieval and spaced review | 30 | 0 | 0 |
 | project and evidence rubric | 30 | 0 | 0 |
-| supportive oral defense | 22 | 5 | 3 |
+| supportive oral defense | 26 | 3 | 1 |
 | ta prompt | 29 | 1 | 0 |
 | study partner prompt | 30 | 0 | 0 |
 | forward handoff | 30 | 0 | 0 |

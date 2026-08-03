@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("the M23 source-audit addendum remains internal and preserves its unresolved contract boundaries", async () => {
+test("the M23 source-audit addendum remains internal and distinguishes historical from current structural boundaries", async () => {
   const addendum = await readFile(
     new URL(
       "../content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
@@ -21,18 +21,19 @@ test("the M23 source-audit addendum remains internal and preserves its unresolve
   assert.match(addendum, /does \*\*not\*\*\s+change[\s\S]*publication state/u);
   assert.match(addendum, /## Source and reuse ledger/u);
   assert.match(addendum, /## Six-session claim linkage/u);
-  assert.match(addendum, /## Preserved audit ambiguities and missing evidence/u);
+  assert.match(addendum, /## Preserved audit ambiguities and missing evidence \(historical snapshot\)/u);
   assert.match(addendum, /rigor bundle[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /code-reading\/debugging\/design[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /prediction before reveal[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /transfer task[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /confidence diagnostic\/misconceptions[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /supportive oral defense[\s\S]*\*\*missing\*\*/u);
-  assert.match(addendum, /## Unresolved supportive oral-defense route/u);
+  assert.match(addendum, /## Historical supportive oral-defense gap, now structurally mapped/u);
   assert.match(
     addendum,
-    /generic oral infrastructure does not satisfy the\s+module-specific\s+missing criterion/u,
+    /current canonical audit now resolves all M23 criteria as \*\*pointer-present\*\*/u,
   );
+  assert.match(addendum, /structural reconciliation only: it records no\s+human-quality approval/u);
   assert.match(addendum, /Python 3\.14\.6/u);
   assert.match(addendum, /typing\.python\.org\/en\/latest/u);
   assert.match(addendum, /v3\.14\.6/u);

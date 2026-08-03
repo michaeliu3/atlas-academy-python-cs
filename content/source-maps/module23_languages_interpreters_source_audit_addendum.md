@@ -102,16 +102,15 @@ later structural packet maps a local heading to this source record.
 | **5 — Bounded evaluation receives authority, never finds it** | Which authority is explicitly minted, and what remains impossible for the evaluator? | P23-01, P23-04, A23-model | Fuel, allow-lists, and a fixed capability are declared model boundaries, not a whole-process containment or denial-of-service proof. |
 | **6 — Implementation evidence is not semantic law** | What can a trusted AST/disassembly observation teach without becoming a portability claim? | P23-01, P23-03, P23-05, A23-model | A local implementation/version observation can motivate M24 inspection or measurement; it is not language semantics, a performance conclusion, or proof that a displayed string produced a particular code object. |
 
-## Preserved audit ambiguities and missing evidence
+## Preserved audit ambiguities and missing evidence (historical snapshot)
 
-The immutable legacy audit records five **ambiguous** criteria and one
-**missing** criterion for M23. The six unresolved boundaries total is not a
-license to turn the missing oral-defense route into another ambiguous pointer.
-A heading, source ledger, test, studio, shared oral flow, or this addendum can
-make later review easier; none substitutes for qualified review of
-learner-facing work, outcomes, accessibility, or psychological safety.
+The 2026-07-31 legacy-audit snapshot recorded five **ambiguous** criteria and
+one **missing** criterion for M23. Those six historical boundaries did not
+authorize a heading, source ledger, test, studio, shared oral flow, or this
+addendum to substitute for qualified review of learner-facing work, outcomes,
+accessibility, or psychological safety.
 
-| Legacy criterion | Status that remains | Why this addendum cannot promote it |
+| Legacy criterion | Historical snapshot status | Why the historical addendum could not promote it |
 | --- | --- | --- |
 | **rigor bundle**: definitions, assumptions, derivations, proof ideas, counterexamples, and numerical experiments | **ambiguous** | Source ownership and a detailed map do not prove a coherent, accurate, appropriately scoped, reviewed rigor bundle. |
 | **code-reading/debugging/design** | **ambiguous** | Relevant labs, implementation files, and a bounded model are pointers, not qualified evidence that code-reading, debugging, and architectural-design work is adequate. |
@@ -120,25 +119,24 @@ learner-facing work, outcomes, accessibility, or psychological safety.
 | **confidence diagnostic/misconceptions** | **ambiguous** | A confidence-labelled diagnostic is not a verified misconception-routing workflow, explanation set, or learner repair record. |
 | **supportive oral defense** | **missing** | The immutable audit found no module-specific oral-defense protocol anchor. Generic oral infrastructure does not satisfy the module-specific missing criterion. |
 
-The prerequisite/forward map, six-session pointers, first-principles pointer,
-source-ledger pointer, visual/text-equivalent pointer, retrieval pointer,
-project/rubric pointers, TA prompt, Study Partner prompt, and forward handoff
-remain structural pointers where the immutable legacy audit already records
-them as present. This addendum neither changes those records nor upgrades the
-five ambiguous criteria or the missing oral-defense criterion.
+The table is a historical snapshot, not the current structural record. The
+current canonical audit now resolves all M23 criteria as **pointer-present**
+through named workbook anchors, including the module-specific oral protocol,
+hint ladder, counterexample turn, transfer turn, and learner-controlled
+evidence summary. This is a structural reconciliation only: it records no
+human-quality approval, learner outcome, accessibility approval, release, or
+publication change.
 
-## Unresolved supportive oral-defense route
+## Historical supportive oral-defense gap, now structurally mapped
 
-Module 23's supportive oral defense remains **missing**. The global guide in
-lib/oral-defense-guide.ts and shared module surface can offer a general
-conversation workflow, but generic oral infrastructure does not satisfy the
-module-specific missing criterion. Before this status can change, a qualified
-review must find or create a Module 23-specific, psychologically safe,
-adaptive text/voice protocol with a learner-controlled evidence summary,
-hint ladder, counterexample and transfer prompts, accessibility-equivalent
-text route, and explicit support/repair choices. This addendum records the
-absence; it does not silently create an oral-defense claim by pointing at a
-generic component.
+At the historical snapshot, M23's supportive oral defense was **missing**.
+The global guide and shared surface alone did not satisfy that module-specific
+criterion. The current workbook now contains the direct conversational oral
+defense route and its supporting turns, so the current packet maps those
+workbook anchors rather than an unresolved addendum placeholder. Qualified
+review must still assess the real text/voice interaction, accessibility,
+psychological safety, support/repair choices, and learner evidence before any
+quality or release claim is made.
 
 ## Bridge, bounded I/O, and evidence-language controls
 
@@ -183,7 +181,7 @@ its hash is recorded.
 | Learner-visible claim linkage | The workbook uses selected links, while the detailed canonical map/addendum are not configured learner downloads. | Review visible claims, diagrams, prompts, labels, and links session by session; decide deliberately whether any source-map artifact should be delivered. |
 | Asset and reuse inventory | This document approves no non-original external asset import. | Record owner, exact URL/version, access date, license/notice, attribution, modification, distribution decision, and reviewer for every shipped non-original asset. |
 | Bounded reference model | The model/tests are finite teaching artifacts with explicit local CLI/test-harness I/O boundaries. | Run declared tests, inspect execution/import/effect boundaries, record environment/result, and preserve the finite-model limitation in a release ledger. |
-| Human quality and accessibility review | Five audit ambiguities and the missing module-specific oral-defense route remain unresolved. | Preserve their exact statuses until qualified review records learner-facing evidence, including visual/text alternatives and oral interaction quality. |
+| Human quality and accessibility review | The historical snapshot recorded five ambiguities and one missing oral route; the current audit is structural-only and records no approval. | Qualified review must still assess learner-facing evidence, including visual/text alternatives and oral interaction quality, before any approval or release claim. |
 | Provenance chain | A file path or hash alone does not prove delivery, reviewability, or a release. | Bind a reviewed Git commit, source ref, CI run, source review, known limitations, and any verified deployment fact without changing publication state by implication. |
 
 ## Evidence language to carry into M24
@@ -206,10 +204,10 @@ its hash is recorded.
 
 On 2026-07-31, the current M23 workbook received named prediction, transfer,
 misconception-repair, and module-specific conversational-oral-defense material
-for a future **candidate-only structural** preflight. Those current anchors may
-make a later review easier, but they do not alter this addendum's historical
-audit finding that `supportive-oral-defense` was **missing** at the time of the
-legacy audit.
+for a future **candidate-only structural** preflight. The current audit now
+uses those named anchors as structural pointers; that does not retrospectively
+change this addendum's historical `supportive-oral-defense` **missing**
+snapshot.
 
 The new material is unreviewed structural content, not evidence of a
 psychologically safe interaction in practice, a designated-chat handoff, voice

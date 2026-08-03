@@ -126,15 +126,15 @@ and avoid overclaiming:
    reference to M25/M26 is explicitly later preview-only synthesis rather than
    a navigation handoff.
 
-## Preserved audit ambiguities and missing evidence
+## Preserved audit ambiguities and missing evidence (historical snapshot)
 
-The immutable legacy audit records five **ambiguous** criteria and one
-**missing** criterion for M24. A source ledger, a bounded model, a test, a
-resolved Markdown anchor, or this addendum can make later review easier; none
-substitutes for qualified review of learner-facing quality, accessibility,
-pedagogy, source-license correctness, or psychological safety.
+The 2026-07-31 legacy-audit snapshot recorded five **ambiguous** criteria and
+one **missing** criterion for M24. A source ledger, a bounded model, a test,
+a resolved Markdown anchor, or this addendum did not substitute for qualified
+review of learner-facing quality, accessibility, pedagogy, source-license
+correctness, or psychological safety.
 
-| Legacy criterion | Status that remains | Why this addendum cannot promote it |
+| Legacy criterion | Historical snapshot status | Why the historical addendum could not promote it |
 | --- | --- | --- |
 | **rigor bundle**: definitions, assumptions, derivations, proof ideas, counterexamples, and numerical experiments | **ambiguous** | The workbook's claim ladder and first-principles model are useful pointers, but this audit does not establish a coherent, accurate, reviewed rigor bundle. |
 | **transfer task** | **ambiguous** | The problem ladder, dossier, and handoff offer candidates, not reviewed evidence that the transfer task or acceptance criteria work. |
@@ -143,25 +143,24 @@ pedagogy, source-license correctness, or psychological safety.
 | **TA prompt** | **ambiguous** | The TA/Study Partner rehearsal is not a verified, distinct operational TA prompt package or handoff workflow. |
 | **supportive oral defense** | **missing** | The immutable audit found no module-specific oral-defense protocol anchor. Generic oral infrastructure does not satisfy the module-specific missing criterion. |
 
-The prerequisite/forward map, six-session spine, first-principles pointer,
-code-reading/debugging/design pointers, prediction pointer, source-ledger
-pointer, retrieval pointer, project/rubric pointers, Study Partner pointer,
-and forward handoff remain structural pointers where the immutable audit
-already records them as present. This addendum neither changes those records
-nor upgrades the five ambiguous criteria or the missing oral-defense criterion.
+The table is a historical snapshot, not the current structural record. The
+current canonical audit now resolves rigor, transfer, confidence diagnostic,
+and supportive oral defense as **pointer-present** through named workbook
+anchors. The accessible visual/text-alternative and TA-prompt criteria remain
+**ambiguous**. This reconciliation records no human-quality approval, learner
+outcome, accessibility approval, release, or publication change.
 
-## Unresolved supportive oral-defense route
+## Historical supportive oral-defense gap, now structurally mapped
 
-Module 24's supportive oral defense remains **missing**. The global guide in
-`lib/oral-defense-guide.ts` and shared module surface can offer a general
-conversation workflow, but generic oral infrastructure does not satisfy the
-module-specific missing criterion. Before this status can change, a qualified
-review must find or create a Module 24-specific, psychologically safe,
-adaptive text/voice protocol with a learner-controlled evidence summary, hint
-ladder, counterexample and transfer prompts, accessibility-equivalent text
-route, and explicit support/repair choices. This addendum records the absence;
-it does not silently create an oral-defense claim by pointing at a generic
-component.
+At the historical snapshot, M24's supportive oral defense was **missing**.
+The global guide and shared surface alone did not satisfy that module-specific
+criterion. The current workbook now contains the direct conversational oral
+defense route, hint ladder, counterexample turn, transfer turn, and
+learner-controlled evidence summary, so the current packet maps those workbook
+anchors rather than an unresolved addendum placeholder. Qualified review must
+still assess the real text/voice interaction, accessibility, psychological
+safety, support/repair choices, and learner evidence before any quality or
+release claim is made.
 
 ## Release-truth checks and unresolved provenance
 
@@ -174,7 +173,7 @@ its hash is recorded.
 | Learner-visible claim linkage | The workbook uses selected links and downloads; the detailed canonical map, research note, and addendum are authoring artifacts. | Review session-visible claims, diagrams, prompts, labels, and links; decide deliberately whether any authoring artifact becomes delivered. |
 | Asset and reuse inventory | This document approves no non-original external asset import. | Record owner, exact URL/version, access date, license/notice, attribution, modification, distribution decision, and reviewer for every shipped non-original asset. |
 | Bounded reference model | The model/tests are finite teaching artifacts with bounded CLI/test-harness I/O and no actual runtime evidence. | Run declared tests, inspect import/effect boundaries, record environment/result, and preserve the distinction between a course model and a real experiment. |
-| Human quality and accessibility review | Five audit ambiguities and the missing module-specific oral-defense route remain unresolved. | Preserve their exact statuses until qualified review records learner-facing evidence, including visual/text alternatives and oral interaction quality. |
+| Human quality and accessibility review | The historical snapshot recorded five ambiguities and one missing oral route; the current audit remains structural-only with visual and TA ambiguity still open. | Qualified review must still assess learner-facing evidence, including visual/text alternatives and oral interaction quality, before any approval or release claim. |
 | Provenance chain | A local path or hash alone does not prove delivery, reviewability, or a release. | Bind a reviewed Git commit, source ref, CI run, source review, known limitations, and any verified deployment fact without changing publication state by implication. |
 
 ## Evidence language to carry into M32
@@ -196,10 +195,10 @@ its hash is recorded.
 On 2026-07-31, the current M24 workbook received named transfer,
 misconception-repair, and module-specific conversational-oral-defense material
 for a future **candidate-only structural** preflight. The existing prediction
-exercise remains the relevant prediction-before-reveal route. These additions
-do not alter this addendum's historical audit findings that
-`supportive-oral-defense` was **missing** and `ta-prompt` was **ambiguous** at
-the time of the legacy audit.
+exercise remains the relevant prediction-before-reveal route. The current audit
+now uses the named transfer, diagnostic, and oral anchors as structural
+pointers; that does not retrospectively change this addendum's historical
+`supportive-oral-defense` **missing** and `ta-prompt` **ambiguous** snapshot.
 
 The new material is unreviewed structural content, not evidence of a
 psychologically safe interaction in practice, a distinct operational TA

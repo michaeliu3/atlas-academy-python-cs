@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "c24f5c56c6b8393c7553532704287a3d199e53ca42e736b0ddfe34dcd8e39b7c");
+  assert.equal(digest, "f842beebc1dbe7f37afa6e772dfc500971930ac868d9bd04813810def3fcb65c");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -40,7 +40,7 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
 
   assert.deepEqual(report.summary, {
     structuralCandidates: 27,
-    resolvedPointers: 1188,
+    resolvedPointers: 1190,
     humanApprovals: 0,
     publicationChanges: 0,
   });
@@ -134,11 +134,11 @@ test("the M21 structural packet binds the direct async continuation without laun
     ),
     "ambiguous",
   );
-  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
-  assert.equal(statusByCriterion.get("prediction-before-reveal"), "ambiguous");
-  assert.equal(statusByCriterion.get("transfer-task"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
+  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
+  assert.equal(statusByCriterion.get("prediction-before-reveal"), "pointer-present");
+  assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
   assert.equal(statusByCriterion.get("study-partner-prompt"), "pointer-present");
   assert.ok(
     report.releaseInputPaths.some((path) =>
@@ -173,10 +173,10 @@ test("the M22 structural packet binds the trust continuation without promoting i
     "ambiguous",
   );
   assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
-  assert.equal(statusByCriterion.get("prediction-before-reveal"), "ambiguous");
-  assert.equal(statusByCriterion.get("transfer-task"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
+  assert.equal(statusByCriterion.get("prediction-before-reveal"), "pointer-present");
+  assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
   assert.equal(statusByCriterion.get("study-partner-prompt"), "pointer-present");
   assert.ok(
     report.releaseInputPaths.some((path) =>
@@ -187,7 +187,7 @@ test("the M22 structural packet binds the trust continuation without promoting i
   );
 });
 
-test("the M23 structural packet maps the language spine without hiding its missing oral-defense protocol", async () => {
+test("the M23 structural packet maps the language spine with direct oral-defense evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -204,35 +204,24 @@ test("the M23 structural packet maps the language spine without hiding its missi
   const statusByCriterion = new Map(
     packet?.criteria.map((criterion) => [criterion.criterionId, criterion.legacyAuditStatus]),
   );
-  assert.equal(
-    statusByCriterion.get(
-      "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-    ),
-    "ambiguous",
-  );
-  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
-  assert.equal(statusByCriterion.get("prediction-before-reveal"), "ambiguous");
-  assert.equal(statusByCriterion.get("transfer-task"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "missing");
+  assert.ok([...statusByCriterion.values()].every((status) => status === "pointer-present"));
 
   const oralCriterion = packet?.criteria.find(
     ({ criterionId }) => criterionId === "supportive-oral-defense",
   );
   assert.deepEqual(oralCriterion?.pointerIds, [
-    "m23-oral-missing-protocol-hint",
-    "m23-oral-missing-counterexample",
-    "m23-oral-missing-transfer",
-    "m23-oral-missing-reflection-summary",
+    "m23-oral-protocol",
+    "m23-oral-hint",
+    "m23-oral-counterexample",
+    "m23-oral-transfer",
+    "m23-oral-reflection-summary",
   ]);
-  const missingOralPointer = packet?.pointers.find(
-    ({ id }) => id === "m23-oral-missing-protocol-hint",
+  const oralProtocol = packet?.pointers.find(
+    ({ id }) => id === "m23-oral-protocol",
   );
-  assert.deepEqual(missingOralPointer?.roles, ["oral-protocol", "oral-hint"]);
-  assert.equal(
-    missingOralPointer?.target.headingAnchor,
-    "unresolved-supportive-oral-defense-route",
-  );
+  assert.deepEqual(oralProtocol?.roles, ["oral-protocol"]);
+  assert.equal(oralProtocol?.target.surface, "workbook");
+  assert.equal(oralProtocol?.target.headingAnchor, "conversational-oral-defense--m23");
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path
@@ -263,31 +252,30 @@ test("the M24 structural packet maps the runtime-evidence spine without launderi
     statusByCriterion.get(
       "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
     ),
-    "ambiguous",
+    "pointer-present",
   );
-  assert.equal(statusByCriterion.get("transfer-task"), "ambiguous");
+  assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
   assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
   assert.equal(statusByCriterion.get("ta-prompt"), "ambiguous");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "missing");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
 
   const oralCriterion = packet?.criteria.find(
     ({ criterionId }) => criterionId === "supportive-oral-defense",
   );
   assert.deepEqual(oralCriterion?.pointerIds, [
-    "m24-oral-missing-protocol-hint",
-    "m24-oral-missing-counterexample",
-    "m24-oral-missing-transfer",
-    "m24-oral-missing-reflection-summary",
+    "m24-oral-protocol",
+    "m24-oral-hint",
+    "m24-oral-counterexample",
+    "m24-oral-transfer",
+    "m24-oral-reflection-summary",
   ]);
-  const missingOralPointer = packet?.pointers.find(
-    ({ id }) => id === "m24-oral-missing-protocol-hint",
+  const oralProtocol = packet?.pointers.find(
+    ({ id }) => id === "m24-oral-protocol",
   );
-  assert.deepEqual(missingOralPointer?.roles, ["oral-protocol", "oral-hint"]);
-  assert.equal(
-    missingOralPointer?.target.headingAnchor,
-    "unresolved-supportive-oral-defense-route",
-  );
+  assert.deepEqual(oralProtocol?.roles, ["oral-protocol"]);
+  assert.equal(oralProtocol?.target.surface, "workbook");
+  assert.equal(oralProtocol?.target.headingAnchor, "conversational-oral-defense--m24");
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path
@@ -376,7 +364,7 @@ test("the M25 structural packet records its preview-gated synthesis spine withou
   );
 });
 
-test("the M19 structural packet records the concurrency spine without hiding its missing Study Partner route", async () => {
+test("the M19 structural packet records the concurrency spine with its current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -399,11 +387,11 @@ test("the M19 structural packet records the concurrency spine without hiding its
     ),
     "ambiguous",
   );
-  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
+  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
   assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
   assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
-  assert.equal(statusByCriterion.get("study-partner-prompt"), "missing");
+  assert.equal(statusByCriterion.get("study-partner-prompt"), "pointer-present");
   assert.ok(
     report.releaseInputPaths.some((path) =>
       path

@@ -630,15 +630,15 @@
         {"criterionId": "six-connected-sessions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-session-1", "m21-session-2", "m21-session-3", "m21-session-4", "m21-session-5", "m21-session-6"]},
         {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-first-principle"]},
         {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-definition", "m21-assumption", "m21-derivation", "m21-counterexample", "m21-numerical-experiment"]},
-        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-code-reading", "m21-debug", "m21-design"]},
-        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-prediction"]},
-        {"criterionId": "transfer-task", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-transfer"]},
+        {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-code-reading", "m21-debug", "m21-design"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-transfer"]},
         {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-source-rationale", "m21-claim-linkage", "m21-license-reuse", "m21-stable-learner-link"]},
         {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-visual-studio", "m21-text-alternative"]},
-        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-diagnostic", "m21-misconception-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-diagnostic", "m21-misconception-candidate"]},
         {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-retrieval"]},
         {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-dossier", "m21-acceptance", "m21-rubric"]},
-        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-oral-protocol", "m21-oral-hint", "m21-counterexample", "m21-transfer", "m21-oral-reflection", "m21-oral-summary"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-oral-protocol", "m21-oral-hint", "m21-counterexample", "m21-transfer", "m21-oral-reflection", "m21-oral-summary"]},
         {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-ta"]},
         {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-study-partner"]},
         {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m21-forward-handoff"]}
@@ -723,14 +723,14 @@
         {"criterionId": "first-principles", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-first-principle"]},
         {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-definition", "m22-assumption", "m22-derivation", "m22-counterexample", "m22-numerical-experiment"]},
         {"criterionId": "code-reading-debugging-design", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-code-reading", "m22-debug", "m22-design"]},
-        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-prediction"]},
-        {"criterionId": "transfer-task", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-transfer"]},
+        {"criterionId": "prediction-before-reveal", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-prediction"]},
+        {"criterionId": "transfer-task", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-transfer"]},
         {"criterionId": "source-ledger", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-source-rationale", "m22-claim-linkage", "m22-license-reuse", "m22-stable-learner-link"]},
         {"criterionId": "accessible-visual-text-alternative", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-visual-studio", "m22-text-alternative"]},
-        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-diagnostic", "m22-misconception-candidate"]},
+        {"criterionId": "confidence-diagnostic-misconceptions", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-diagnostic", "m22-misconception-candidate"]},
         {"criterionId": "retrieval-and-spaced-review", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-retrieval"]},
         {"criterionId": "project-and-evidence-rubric", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-dossier", "m22-acceptance", "m22-rubric"]},
-        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "ambiguous", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-oral-protocol", "m22-oral-hint", "m22-counterexample", "m22-transfer", "m22-oral-reflection", "m22-oral-summary"]},
+        {"criterionId": "supportive-oral-defense", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-oral-protocol", "m22-oral-hint", "m22-counterexample", "m22-transfer", "m22-oral-reflection", "m22-oral-summary"]},
         {"criterionId": "ta-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-ta"]},
         {"criterionId": "study-partner-prompt", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-study-partner"]},
         {"criterionId": "forward-handoff", "legacyAuditStatus": "pointer-present", "structuralState": "mapped-not-reviewed", "pointerIds": ["m22-forward-handoff"]}
@@ -1210,57 +1210,69 @@
           }
         },
         {
-          "id": "m23-oral-missing-protocol-hint",
+          "id": "m23-oral-protocol",
           "roles": [
-            "oral-protocol",
-            "oral-hint"
+            "oral-protocol"
           ],
-          "label": "Explicit missing oral protocol and hint route",
+          "label": "Conversational oral-defense protocol",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "conversational-oral-defense--m23"
           }
         },
         {
-          "id": "m23-oral-missing-counterexample",
+          "id": "m23-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "Supportive oral hint ladder",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "hint-ladder"
+          }
+        },
+        {
+          "id": "m23-oral-counterexample",
           "roles": [
             "oral-counterexample"
           ],
-          "label": "Explicit missing oral counterexample route",
+          "label": "Oral counterexample turn",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "counterexample-turn"
           }
         },
         {
-          "id": "m23-oral-missing-transfer",
+          "id": "m23-oral-transfer",
           "roles": [
             "oral-transfer"
           ],
-          "label": "Explicit missing oral transfer route",
+          "label": "Oral transfer turn",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "transfer-turn"
           }
         },
         {
-          "id": "m23-oral-missing-reflection-summary",
+          "id": "m23-oral-reflection-summary",
           "roles": [
             "oral-reflection",
             "oral-summary"
           ],
-          "label": "Explicit missing oral reflection and summary route",
+          "label": "Learner-controlled oral evidence summary",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module23_languages_interpreters_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/23_programming_languages_interpreters.md",
+            "headingAnchor": "reflection-and-learner-controlled-evidence-summary"
           }
         },
         {
@@ -1323,7 +1335,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m23-definition",
@@ -1335,7 +1347,7 @@
         },
         {
           "criterionId": "code-reading-debugging-design",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m23-code-reading",
@@ -1345,7 +1357,7 @@
         },
         {
           "criterionId": "prediction-before-reveal",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m23-prediction"
@@ -1353,7 +1365,7 @@
         },
         {
           "criterionId": "transfer-task",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m23-transfer"
@@ -1381,7 +1393,7 @@
         },
         {
           "criterionId": "confidence-diagnostic-misconceptions",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m23-diagnostic",
@@ -1408,13 +1420,14 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
-            "m23-oral-missing-protocol-hint",
-            "m23-oral-missing-counterexample",
-            "m23-oral-missing-transfer",
-            "m23-oral-missing-reflection-summary"
+              "m23-oral-protocol",
+              "m23-oral-hint",
+              "m23-oral-counterexample",
+              "m23-oral-transfer",
+              "m23-oral-reflection-summary"
           ]
         },
         {
@@ -1939,57 +1952,69 @@
           }
         },
         {
-          "id": "m24-oral-missing-protocol-hint",
+          "id": "m24-oral-protocol",
           "roles": [
-            "oral-protocol",
-            "oral-hint"
+            "oral-protocol"
           ],
-          "label": "Missing module-specific oral protocol and hint route",
+          "label": "Conversational oral-defense protocol",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "conversational-oral-defense--m24"
           }
         },
         {
-          "id": "m24-oral-missing-counterexample",
+          "id": "m24-oral-hint",
+          "roles": [
+            "oral-hint"
+          ],
+          "label": "Supportive oral hint ladder",
+          "sessionNumber": null,
+          "target": {
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "hint-ladder"
+          }
+        },
+        {
+          "id": "m24-oral-counterexample",
           "roles": [
             "oral-counterexample"
           ],
-          "label": "Missing module-specific oral counterexample route",
+          "label": "Oral counterexample turn",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "counterexample-turn"
           }
         },
         {
-          "id": "m24-oral-missing-transfer",
+          "id": "m24-oral-transfer",
           "roles": [
             "oral-transfer"
           ],
-          "label": "Missing module-specific oral transfer route",
+          "label": "Oral transfer turn",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "transfer-turn"
           }
         },
         {
-          "id": "m24-oral-missing-reflection-summary",
+          "id": "m24-oral-reflection-summary",
           "roles": [
             "oral-reflection",
             "oral-summary"
           ],
-          "label": "Missing module-specific oral reflection and summary route",
+          "label": "Learner-controlled oral evidence summary",
           "sessionNumber": null,
           "target": {
-            "surface": "source-audit-addendum",
-            "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
-            "headingAnchor": "unresolved-supportive-oral-defense-route"
+            "surface": "workbook",
+            "path": "content/modules/24_cpython_performance_memory.md",
+            "headingAnchor": "reflection-and-learner-controlled-evidence-summary"
           }
         },
         {
@@ -2052,7 +2077,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m24-definition",
@@ -2082,7 +2107,7 @@
         },
         {
           "criterionId": "transfer-task",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m24-transfer"
@@ -2110,7 +2135,7 @@
         },
         {
           "criterionId": "confidence-diagnostic-misconceptions",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m24-diagnostic",
@@ -2137,13 +2162,14 @@
         },
         {
           "criterionId": "supportive-oral-defense",
-          "legacyAuditStatus": "missing",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
-            "m24-oral-missing-protocol-hint",
-            "m24-oral-missing-counterexample",
-            "m24-oral-missing-transfer",
-            "m24-oral-missing-reflection-summary"
+              "m24-oral-protocol",
+              "m24-oral-hint",
+              "m24-oral-counterexample",
+              "m24-oral-transfer",
+              "m24-oral-reflection-summary"
           ]
         },
         {
