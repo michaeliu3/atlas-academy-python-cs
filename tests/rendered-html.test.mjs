@@ -2516,6 +2516,10 @@ test("renders M25 as a bounded evidence-synthesis preview", async () => {
   assert.match(m25PreviewText, /Teaching Assistant · clarification context/u);
   assert.match(m25PreviewText, /Study Partner · orientation context/u);
   assert.match(m25PreviewText, /Copy the concise evidence packet/u);
+  assert.match(m25PreviewText, /Set up the Teaching Assistant chat first/u);
+  assert.match(m25PreviewText, /Set up the Study Partner chat first/u);
+  assert.match(m25PreviewText, /This preview card never grants record authority./u);
+  assert.match(html, /href="\/learning-partners"/u);
   assert.match(m25PreviewText, /Future map: M26 capstone reasoning/u);
   assert.doesNotMatch(
     m25PreviewText,
@@ -2707,6 +2711,10 @@ test("renders M26 as a bounded capstone preview and retains its bounded model", 
   assert.match(m26PreviewText, /Teaching Assistant · clarification context/u);
   assert.match(m26PreviewText, /Study Partner · orientation context/u);
   assert.match(m26PreviewText, /Copy the concise evidence packet/u);
+  assert.match(m26PreviewText, /Set up the Teaching Assistant chat first/u);
+  assert.match(m26PreviewText, /Set up the Study Partner chat first/u);
+  assert.match(m26PreviewText, /This preview card never grants record authority./u);
+  assert.match(html, /href="\/learning-partners"/u);
   assert.match(m26PreviewText, /Next map: maintenance or specialization question/u);
   assert.match(
     html,

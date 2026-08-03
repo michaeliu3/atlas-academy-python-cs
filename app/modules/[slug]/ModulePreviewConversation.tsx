@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { CourseModule } from "@/lib/module-catalog";
 import type { SynthesisPreviewConversation } from "@/lib/synthesis-preview-conversations";
@@ -88,8 +89,16 @@ export function ModulePreviewConversation({
           <p className={styles.cardEyebrow}>Teaching Assistant · clarification context</p>
           <h3>Ask for one boundary, not a performance verdict.</h3>
           <p>
-            Use the designated live-capable Teaching Assistant chat to clarify a
-            claim, its evidence, and the next honest question.
+            Use the already-configured designated live-capable Teaching Assistant
+            chat to clarify a claim, its evidence, and the next honest question.
+          </p>
+          <p className={styles.setupNote}>
+            <strong>First time with this role?</strong>{" "}
+            <Link className={styles.setupLink} href="/learning-partners">
+              Set up the Teaching Assistant chat first
+            </Link>
+            . This preview card supplements that role; it does not configure a
+            chat or activate records.
           </p>
           <button
             onClick={() => copyText(previewPackage.teachingAssistantClarificationPrompt, "ta")}
@@ -111,8 +120,17 @@ export function ModulePreviewConversation({
           <p className={styles.cardEyebrow}>Study Partner · orientation context</p>
           <h3>Rehearse the evidence chain before asking for a decision.</h3>
           <p>
-            Use the separate Study Partner chat to retrieve one prerequisite,
-            change one premise, and expose the smallest missing receipt.
+            Use the already-configured separate Study Partner chat to retrieve
+            one prerequisite, change one premise, and expose the smallest
+            missing receipt.
+          </p>
+          <p className={styles.setupNote}>
+            <strong>First time with this role?</strong>{" "}
+            <Link className={styles.setupLink} href="/learning-partners">
+              Set up the Study Partner chat first
+            </Link>
+            . This preview card supplements that role; it does not configure a
+            chat or activate records.
           </p>
           <button
             onClick={() => copyText(previewPackage.studyPartnerPrompt, "partner")}
@@ -136,6 +154,11 @@ export function ModulePreviewConversation({
           <p>
             This is a copyable template for your designated chat or manual note;
             the portal does not write to Notion.
+          </p>
+          <p className={styles.setupNote}>
+            This preview card never grants record authority. In an unconfigured
+            or unavailable chat, no write occurs—copy this packet as a local
+            learner-approved note instead.
           </p>
           <button onClick={() => copyText(previewPacket, "packet")} type="button">
             {copyState === "packet"
@@ -168,9 +191,9 @@ export function ModulePreviewConversation({
         {copyState === "fallback" &&
           "Copy is unavailable here. Open a preparation card and copy its text manually."}
         {copyState === "ta" &&
-          "Teaching Assistant preparation is ready to paste into your designated live chat."}
+          "Teaching Assistant preparation is ready to paste into your already configured designated live chat."}
         {copyState === "partner" &&
-          "Study Partner preparation is ready to paste into your separate live chat."}
+          "Study Partner preparation is ready to paste into your already configured separate live chat."}
         {copyState === "packet" &&
           "The concise evidence packet is ready for a designated chat or manual note."}
       </p>

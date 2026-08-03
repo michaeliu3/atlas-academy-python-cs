@@ -7,6 +7,15 @@ actually published.
 
 ## Unreleased
 
+- Closed a preview-chat setup gap without expanding the portal: M25/M26
+  preparation cards now send first-time learners to configure the matching
+  designated TA or Study Partner chat, explicitly keep fresh/generic chats
+  local, and point unavailable writes to the canonical concise local-note
+  fallback. The learning-partner startup confirmation now names the matching
+  designated live-capable chat. The completion snapshot no longer claims that
+  a repository can prove current chats received their handoffs; it requires
+  seeding and confirming each exact chat. This preserves preview gates, makes
+  no platform-control or Notion-write claim, and adds no learner record.
 - Reweaved M26's optional external stewardship track after an official CMU
   source follow-up: it now asks the learner to inspect project activity, ground
   the proposed work in a documented issue/request, and name the

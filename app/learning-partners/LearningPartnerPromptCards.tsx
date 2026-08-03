@@ -62,7 +62,7 @@ export function LearningPartnerPromptCards({
             </button>
             <p aria-live="polite" className={styles.copyStatus}>
               {copiedId === prompt.id
-                ? "Paste this into a separate chat, complete the context block, then begin with one small question."
+                ? "Paste this into the matching designated live-capable chat, complete the context block, then begin with one small question."
                 : null}
               {copyUnavailable
                 ? "Copy is unavailable in this browser. Open the full prompt below and select it manually."
