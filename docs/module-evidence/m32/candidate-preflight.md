@@ -53,11 +53,13 @@ tuple.
 
 ## Required path before promotion
 
-1. Keep M32 authoring-only and hidden until a reviewed delivery design supplies
-   a separate fixed hidden review-candidate selector, canonical learner source
-   ledger, and appropriate learner-facing interaction or equivalent, without
-   weakening prerequisite gates. That selector must not reuse this authoring
-   workbook or its authoring-delivery map as promotion authority.
+1. Keep M32 authoring-only and hidden. The existing fixed selector at
+   `content/course/contracts/review-candidates/m32.v1.json` already freezes
+   `content/modules/32_systems_languages_scientific_python_accelerators.md`
+   and its candidate source ledger for qualified review. It is not the
+   graph-bound learner source map, an approval, or promotion authority; the
+   separate `content/authoring` workbook and authoring-delivery map remain
+   authoring evidence only.
 2. Conduct explicit independent review of the workbook, source/claim/license
    boundaries, CPU-observation scope, visual and accessibility behavior,
    diagnostic/rubric quality, and the TA/Study Partner/oral-defense flow on a

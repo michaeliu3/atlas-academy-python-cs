@@ -152,6 +152,21 @@ export function ScopeMatrix() {
     topics.push(topic);
     topicsByLevel.set(topic.level, topics);
   }
+  const benchmarkSectionsByLevel = new Map<number, typeof courseScopeMatrix.benchmark.items>();
+  for (const section of courseScopeMatrix.benchmark.items) {
+    const sections = benchmarkSectionsByLevel.get(section.level) ?? [];
+    sections.push(section);
+    benchmarkSectionsByLevel.set(section.level, sections);
+  }
+  const atomicItemsBySection = new Map<
+    string,
+    typeof courseScopeMatrix.benchmark.atomicItems
+  >();
+  for (const atomicItem of courseScopeMatrix.benchmark.atomicItems) {
+    const items = atomicItemsBySection.get(atomicItem.sectionId) ?? [];
+    items.push(atomicItem);
+    atomicItemsBySection.set(atomicItem.sectionId, items);
+  }
   const tracksById = new Map(
     courseScopeMatrix.extensionTracks.map((track) => [track.id, track]),
   );
@@ -165,9 +180,10 @@ export function ScopeMatrix() {
         </div>
         <div>
           <p>
-            The attached Levels 1–9 inventory calibrates this course; it is not
-            a 60-day promise of universal mastery. Each row separates the
-            learning target from what is currently available in Atlas.
+            The Levels 1–9 inventory calibrates this course; it is not a
+            60-day promise of universal mastery. This route keeps the learning
+            map concise; the linked source crosswalk preserves all 362 targets
+            and separates each target from current Atlas delivery.
           </p>
           <p className={styles.scopeBoundary}>
             <strong>A topic can be a Core target and still be authoring-only today.</strong>
@@ -186,18 +202,27 @@ export function ScopeMatrix() {
       <div className={styles.scopeLevels}>
         {Array.from({ length: 9 }, (_, index) => index + 1).map((level) => {
           const topics = topicsByLevel.get(level) ?? [];
+          const benchmarkSections = benchmarkSectionsByLevel.get(level) ?? [];
+          const atomicItemCount = benchmarkSections.reduce(
+            (count, section) => count + (atomicItemsBySection.get(section.id)?.length ?? 0),
+            0,
+          );
           return (
             <details className={styles.scopeLevel} key={level} open={level === 1}>
               <summary>
                 <span>Level {level} · {levelTitles.get(level)}</span>
-                <small>{topics.length} mapped areas</small>
+                <small>{topics.length} mapped areas · {atomicItemCount} source targets</small>
               </summary>
               <div className={styles.scopeTopicGrid}>
                 {topics.map((topic) => {
                   const delivery = deliveryPresentation(topic);
                   const track = topic.trackId ? tracksById.get(topic.trackId) : null;
                   return (
-                    <article className={styles.scopeTopic} key={topic.id}>
+                    <article
+                      className={styles.scopeTopic}
+                      id={`scope-topic-${topic.id}`}
+                      key={topic.id}
+                    >
                       <div className={styles.scopeTopicTopline}>
                         <span className={styles.scopeTag}>{scopeLabels[topic.scope]}</span>
                       </div>
@@ -248,6 +273,16 @@ export function ScopeMatrix() {
                   );
                 })}
               </div>
+              <aside className={styles.inventoryCallout}>
+                <p>
+                  <strong>{atomicItemCount} source targets</strong> are
+                  calibrated to this level. The proof surface stays outside
+                  the everyday route so it does not slow or crowd your study.
+                </p>
+                <Link href={`/route/inventory#scope-inventory-level-${level}`}>
+                  Inspect the Level {level} source crosswalk
+                </Link>
+              </aside>
             </details>
           );
         })}

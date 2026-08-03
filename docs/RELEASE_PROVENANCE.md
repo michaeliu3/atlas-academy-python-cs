@@ -257,3 +257,11 @@ state, known limitations, and—only after it actually occurs—the private
 deployment version and verification result. If a GitHub Release is intended,
 also record its existing tag and release URL. Never fill a field from an
 assumption, a configured remote, or a local command alone.
+
+## Dated dependency-risk supersession (2026-08-03)
+
+The six-alert statement in **Known limits at ledger creation** is a historical
+snapshot. For the current alert count and exact default-branch/review-branch
+disposition, consult the living [dependency risk register](DEPENDENCY_RISK_REGISTER.md),
+last examined 2026-08-03. This pointer does not claim a merged remediation,
+alert closure, private deployment, or security-clean state.

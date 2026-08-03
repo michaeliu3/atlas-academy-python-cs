@@ -44,6 +44,13 @@ const expectedScopeCapabilities = new Set([
   "design",
   "implement",
 ]);
+const expectedInventoryDirectives = new Set([
+  "master",
+  "graduate-master",
+  "also-know",
+  "study",
+]);
+const expectedAtomicInventoryItemCount = 362;
 const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30]);
 
 function fail(message) {
@@ -254,12 +261,22 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     ["schemaVersion", "benchmark", "scopeStates", "capabilities", "topics", "extensionTracks"],
     "scopeMatrix",
   );
-  if (scopeMatrix.schemaVersion !== 3) {
-    fail("scopeMatrix schemaVersion must be 3.");
+  if (scopeMatrix.schemaVersion !== 4) {
+    fail("scopeMatrix schemaVersion must be 4.");
   }
   assertExactKeys(
     scopeMatrix.benchmark,
-    ["id", "title", "accessedOn", "sourceDigest", "sourceBoundary", "items"],
+    [
+      "id",
+      "title",
+      "accessedOn",
+      "sourceDigest",
+      "sourceBoundary",
+      "items",
+      "sourceLists",
+      "atomicItemCount",
+      "atomicItems",
+    ],
     "scopeMatrix benchmark",
   );
   assertString(scopeMatrix.benchmark.id, "scopeMatrix benchmark id");
@@ -299,6 +316,54 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     for (const topicId of item.scopeTopicIds) {
       assertString(topicId, `scopeMatrix benchmark item ${item.id} mapped topic`);
     }
+  }
+  if (scopeMatrix.benchmark.atomicItemCount !== expectedAtomicInventoryItemCount) {
+    fail(
+      `scopeMatrix benchmark atomicItemCount must be ${expectedAtomicInventoryItemCount} for its pinned inventory digest.`,
+    );
+  }
+  if (!Array.isArray(scopeMatrix.benchmark.sourceLists) || scopeMatrix.benchmark.sourceLists.length !== 25) {
+    fail("scopeMatrix benchmark must define its 25 source target lists.");
+  }
+  const declaredSourceLines = new Map();
+  for (const sourceList of scopeMatrix.benchmark.sourceLists) {
+    assertExactKeys(
+      sourceList,
+      ["sectionId", "directive", "sourceLineStart", "sourceLineEnd"],
+      "scopeMatrix benchmark source list",
+    );
+    assertString(sourceList.sectionId, "scopeMatrix benchmark source list sectionId");
+    if (!benchmarkItemsById.has(sourceList.sectionId)) {
+      fail(`scopeMatrix benchmark source list references unknown section ${sourceList.sectionId}.`);
+    }
+    if (!expectedInventoryDirectives.has(sourceList.directive)) {
+      fail(`scopeMatrix benchmark source list ${sourceList.sectionId} has an invalid directive.`);
+    }
+    if (
+      !Number.isInteger(sourceList.sourceLineStart) ||
+      !Number.isInteger(sourceList.sourceLineEnd) ||
+      sourceList.sourceLineStart < 1 ||
+      sourceList.sourceLineEnd < sourceList.sourceLineStart
+    ) {
+      fail(`scopeMatrix benchmark source list ${sourceList.sectionId} needs an ordered positive source-line range.`);
+    }
+    for (let sourceLine = sourceList.sourceLineStart; sourceLine <= sourceList.sourceLineEnd; sourceLine += 1) {
+      if (declaredSourceLines.has(sourceLine)) {
+        fail(`scopeMatrix benchmark source line ${sourceLine} is declared more than once.`);
+      }
+      declaredSourceLines.set(sourceLine, sourceList.sectionId);
+    }
+  }
+  if (declaredSourceLines.size !== expectedAtomicInventoryItemCount) {
+    fail(
+      `scopeMatrix benchmark source lists must declare exactly ${expectedAtomicInventoryItemCount} atomic source lines.`,
+    );
+  }
+  if (
+    !Array.isArray(scopeMatrix.benchmark.atomicItems) ||
+    scopeMatrix.benchmark.atomicItems.length !== scopeMatrix.benchmark.atomicItemCount
+  ) {
+    fail("scopeMatrix benchmark atomicItems must match atomicItemCount.");
   }
   for (let level = 1; level <= 9; level += 1) {
     if (!benchmarkLevels.has(level)) {
@@ -492,16 +557,69 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
   }
 
   const mappedTopicIds = new Set();
-  for (const item of benchmarkItemsById.values()) {
-    for (const topicId of item.scopeTopicIds) {
+  const atomicSourceLines = new Set();
+  const atomicTopicIdsBySection = new Map();
+  for (const atomicItem of scopeMatrix.benchmark.atomicItems) {
+    assertExactKeys(
+      atomicItem,
+      ["sourceLine", "sectionId", "label", "scopeTopicIds"],
+      "scopeMatrix benchmark atomic item",
+    );
+    if (!Number.isInteger(atomicItem.sourceLine) || atomicItem.sourceLine < 1) {
+      fail("scopeMatrix benchmark atomic item needs a positive integer sourceLine.");
+    }
+    if (atomicSourceLines.has(atomicItem.sourceLine)) {
+      fail(`scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} is duplicated.`);
+    }
+    atomicSourceLines.add(atomicItem.sourceLine);
+    const declaredSectionId = declaredSourceLines.get(atomicItem.sourceLine);
+    if (!declaredSectionId) {
+      fail(`scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} is not declared by a source list.`);
+    }
+    assertString(atomicItem.sectionId, "scopeMatrix benchmark atomic item sectionId");
+    if (atomicItem.sectionId !== declaredSectionId) {
+      fail(
+        `scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} must remain in section ${declaredSectionId}.`,
+      );
+    }
+    assertString(atomicItem.label, `scopeMatrix benchmark atomic item ${atomicItem.sourceLine} label`);
+    if (!Array.isArray(atomicItem.scopeTopicIds) || atomicItem.scopeTopicIds.length === 0) {
+      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} needs mapped Scope Matrix topics.`);
+    }
+    if (new Set(atomicItem.scopeTopicIds).size !== atomicItem.scopeTopicIds.length) {
+      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} repeats a mapped Scope Matrix topic.`);
+    }
+    const item = benchmarkItemsById.get(atomicItem.sectionId);
+    const sectionTopicIds = atomicTopicIdsBySection.get(item.id) ?? new Set();
+    for (const topicId of atomicItem.scopeTopicIds) {
       const topic = topicsById.get(topicId);
       if (!topic) {
-        fail(`scopeMatrix benchmark item ${item.id} references missing Scope Matrix topic ${topicId}.`);
+        fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} references missing Scope Matrix topic ${topicId}.`);
       }
       if (topic.level !== item.level) {
-        fail(`scopeMatrix benchmark item ${item.id} must map only Level ${item.level} Scope Matrix topics.`);
+        fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} must map only Level ${item.level} Scope Matrix topics.`);
       }
       mappedTopicIds.add(topicId);
+      sectionTopicIds.add(topicId);
+    }
+    atomicTopicIdsBySection.set(item.id, sectionTopicIds);
+  }
+  if (atomicSourceLines.size !== declaredSourceLines.size) {
+    fail("scopeMatrix benchmark must index every declared atomic source line exactly once.");
+  }
+  for (const sourceLine of declaredSourceLines.keys()) {
+    if (!atomicSourceLines.has(sourceLine)) {
+      fail(`scopeMatrix benchmark source line ${sourceLine} is missing its atomic crosswalk.`);
+    }
+  }
+  for (const item of benchmarkItemsById.values()) {
+    const declaredTopicIds = [...item.scopeTopicIds].sort();
+    const derivedTopicIds = [...(atomicTopicIdsBySection.get(item.id) ?? new Set())].sort();
+    if (
+      declaredTopicIds.length !== derivedTopicIds.length ||
+      declaredTopicIds.some((topicId, index) => topicId !== derivedTopicIds[index])
+    ) {
+      fail(`scopeMatrix benchmark item ${item.id} must match its derived atomic topic rollup.`);
     }
   }
   for (const topic of scopeMatrix.topics) {

@@ -163,7 +163,7 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
     ({ id }) => id === "l2.programming-lower-level-ml-runtime",
   );
 
-  assert.equal(matrix.schemaVersion, 3);
+  assert.equal(matrix.schemaVersion, 4);
   assert.equal(
     matrix.benchmark.sourceDigest,
     "sha256:1d8aa72a7084cc46a351a21be3c2e1e2dbf7ede24414d3eca50e25697cf701a2",
@@ -196,7 +196,42 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
       "l8-foundation-models-llms-generative-ai",
       "l9-deep-specialization-nlp-language-models",
     ],
-    "the whole learner-supplied Levels 1–9 inventory remains present in the canonical crosswalk",
+    "the full learner-supplied Levels 1–9 heading index remains present in the canonical crosswalk",
+  );
+  assert.equal(matrix.benchmark.atomicItemCount, 362);
+  assert.equal(matrix.benchmark.atomicItems.length, 362);
+  assert.equal(matrix.benchmark.sourceLists.length, 25);
+  assert.deepEqual(
+    [...new Set(matrix.benchmark.atomicItems.map(({ sourceLine }) => sourceLine))].length,
+    362,
+    "every pinned source target line is represented exactly once",
+  );
+  assert.ok(
+    matrix.benchmark.sourceLists.some(
+      ({ directive, sourceLineStart, sourceLineEnd }) =>
+        directive === "also-know" && sourceLineStart === 203 && sourceLineEnd === 209,
+    ),
+    "the explicit Level-2 AI-research additions remain visible rather than being silently dropped",
+  );
+  assert.deepEqual(
+    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 71)?.scopeTopicIds,
+    ["l1.analysis.interchange-and-measure"],
+  );
+  assert.deepEqual(
+    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 124)?.scopeTopicIds,
+    ["l1.statistics.robust-high-dimensional"],
+  );
+  assert.deepEqual(
+    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 228)?.scopeTopicIds,
+    ["l2.dsa.graphs-and-paradigms", "l2.dsa.advanced-analysis"],
+  );
+  assert.deepEqual(
+    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 250)?.scopeTopicIds,
+    ["l2.theory.formal-foundations", "l2.theory.advanced-complexity"],
+  );
+  assert.deepEqual(
+    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 272)?.scopeTopicIds,
+    ["l2.systems-data-distributed"],
   );
   assert.equal(matrix.topics.length, 63);
   assert.deepEqual(levels, [1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -270,25 +305,30 @@ test("the graph rejects Scope Matrix gaps and fabricated post-core routes", asyn
   );
 
   const missingInventoryCrosswalk = structuredClone(graph);
-  missingInventoryCrosswalk.scopeMatrix.benchmark.items
-    .find(({ id }) => id === "l1-01-proofs-discrete-mathematics")
-    .scopeTopicIds = [
-      "l1.proofs.methods-invariants",
-      "l1.discrete.counting-recurrences",
-      "l1.discrete.graphs-orders-number-theory",
-    ];
+  missingInventoryCrosswalk.scopeMatrix.benchmark.atomicItems
+    .find(({ sourceLine }) => sourceLine === 9)
+    .scopeTopicIds = [];
   assert.throws(
     () => validateCourseGraph(missingInventoryCrosswalk),
-    /Scope Matrix topic l1\.proofs\.logic-relations is missing a learner-inventory crosswalk/u,
+    /scopeMatrix benchmark atomic item 9 needs mapped Scope Matrix topics/u,
   );
 
   const crossLevelInventoryClaim = structuredClone(graph);
-  crossLevelInventoryClaim.scopeMatrix.benchmark.items
-    .find(({ id }) => id === "l1-01-proofs-discrete-mathematics")
+  crossLevelInventoryClaim.scopeMatrix.benchmark.atomicItems
+    .find(({ sourceLine }) => sourceLine === 9)
     .scopeTopicIds = ["l2.dsa.structures"];
   assert.throws(
     () => validateCourseGraph(crossLevelInventoryClaim),
-    /scopeMatrix benchmark item l1-01-proofs-discrete-mathematics must map only Level 1 Scope Matrix topics/u,
+    /scopeMatrix benchmark atomic item 9 must map only Level 1 Scope Matrix topics/u,
+  );
+
+  const duplicateAtomicSourceLine = structuredClone(graph);
+  duplicateAtomicSourceLine.scopeMatrix.benchmark.atomicItems
+    .find(({ sourceLine }) => sourceLine === 10)
+    .sourceLine = 9;
+  assert.throws(
+    () => validateCourseGraph(duplicateAtomicSourceLine),
+    /scopeMatrix benchmark atomic source line 9 is duplicated/u,
   );
 
   const missingCadence = structuredClone(graph);
