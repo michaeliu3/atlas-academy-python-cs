@@ -24,6 +24,8 @@ test("the M25 source-audit addendum stays internal and preserves preview and unr
   );
   assert.match(addendum, /does \*\*not\*\* change[\s\S]*publication state/u);
   assert.match(addendum, /M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26/u);
+  assert.match(addendum, /full\s+canonical route reaches M31 before M18–M24/u);
+  assert.match(addendum, /downstream\s+navigation\s+segment from M24/u);
   assert.match(addendum, /direct academic prerequisites/u);
   assert.match(addendum, /transitive[\s\S]*closure/u);
   assert.match(addendum, /scikit-learn[\s\S]*\*\*1\.9\.0\*\*/u);
@@ -68,6 +70,8 @@ test("the M25 learner and authoring surfaces distinguish route, preview, source 
 
   assert.match(workbook, /Preview boundary/u);
   assert.match(workbook, /M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26/u);
+  assert.match(workbook, /full\s+canonical route reaches M31 before M18–M24/u);
+  assert.match(workbook, /From M24, the downstream\s+navigation\s+segment/u);
   assert.match(workbook, /concept\/evidence map, not next\/previous navigation/u);
   assert.match(workbook, /Tooling I\/O:/u);
   assert.match(workbook, /Session artifact/u);
@@ -75,7 +79,9 @@ test("the M25 learner and authoring surfaces distinguish route, preview, source 
   assert.match(workbook, /current\s+preview records this interaction specification/u);
 
   assert.match(sourceMap, /gated, preview-only synthesis/u);
-  assert.match(sourceMap, /M24 → M32 → M33 → M34 → M35 → M36 →\s+M25 → M26/u);
+  assert.match(sourceMap, /M24 → M32 → M33 → M34 → M35 → M36\s+→\s+M25 → M26/u);
+  assert.match(sourceMap, /full\s+canonical route reaches M31 before M18–M24/u);
+  assert.match(sourceMap, /downstream\s+navigation\s+segment from M24/u);
   assert.match(sourceMap, /transitive closure supplies the M27–M36 evidence spine/u);
   assert.match(sourceMap, /M24 evidence thread → M31–M36 synthesis gate → M25 → M26/u);
   assert.match(sourceMap, /scikit-learn 1\.9\.0/u);

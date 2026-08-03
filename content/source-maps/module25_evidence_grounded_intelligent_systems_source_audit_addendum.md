@@ -34,7 +34,8 @@ M25 has these **direct academic prerequisites** in the canonical graph:
 **M22, M24, M30, M31, M34, M35, and M36**. Their transitive prerequisite and
 evidence closure includes all M27–M36.
 
-The canonical navigational route is:
+The full canonical route reaches M31 before M18–M24. The downstream navigation
+segment from M24 is:
 
 > **M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26**
 

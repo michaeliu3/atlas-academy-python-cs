@@ -10,8 +10,9 @@
   Performance, and Memory Evidence*, is a required systems-evidence thread: a
   local timing or memory observation is meaningful only when its workload,
   mechanism, layer, and uncertainty are named. It does **not** navigate
-  directly to M25. The canonical route is M24 → M32 → M33 → M34 → M35 → M36 →
-  M25 → M26. M25's direct graph prerequisites are M22, M24, M30, M31, M34,
+  directly to M25. The full canonical route reaches M31 before M18–M24; the
+  downstream navigation segment from M24 is M24 → M32 → M33 → M34 → M35 → M36
+  → M25 → M26. M25's direct graph prerequisites are M22, M24, M30, M31, M34,
   M35, and M36; their transitive closure supplies the M27–M36 evidence spine.
   M25 asks the analogous intelligent-feature question: **when does a score,
   ranking, prediction, explanation, or generated proposal deserve to influence
