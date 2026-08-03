@@ -4,10 +4,13 @@ import test from "node:test";
 
 const m31Path = "content/authoring/m31_optimization_information_workbook.v1.md";
 const m32Path = "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md";
+const m31CandidatePath = "content/modules/31_optimization_information.md";
+const m32CandidatePath = "content/modules/32_systems_languages_scientific_python_accelerators.md";
 
 test("M31 exposes compact claim-to-source routes and labels non-runnable sketches", async () => {
-  const [m31, bridge] = await Promise.all([
+  const [m31, m31Candidate, bridge] = await Promise.all([
     readFile(m31Path, "utf8"),
+    readFile(m31CandidatePath, "utf8"),
     readFile("content/course/m31-m36-prerequisite-session-bridge.v1.json", "utf8"),
   ]);
 
@@ -26,6 +29,10 @@ test("M31 exposes compact claim-to-source routes and labels non-runnable sketche
     m31,
     /\[`m31GradientDescentRateCard\(10\)`\]\(\.\.\/\.\.\/lib\/m31-optimization-authoring-model\.js\)/u,
   );
+  assert.match(
+    m31Candidate,
+    /\[`m31GradientDescentRateCard\(10\)`\]\(\.\.\/\.\.\/lib\/m31-optimization-authoring-model\.js\)/u,
+  );
 
   const m31Sessions = JSON.parse(bridge).modules.find(({ moduleId }) => moduleId === "m31").sessionSpine;
   const sessionFour = m31Sessions.find(({ id }) => id === "m31-s04");
@@ -36,8 +43,9 @@ test("M31 exposes compact claim-to-source routes and labels non-runnable sketche
 });
 
 test("M32 connects claim tags to one pinned CPU-only NumPy observation", async () => {
-  const [m32, observation, pythonTest] = await Promise.all([
+  const [m32, m32Candidate, observation, pythonTest] = await Promise.all([
     readFile(m32Path, "utf8"),
+    readFile(m32CandidatePath, "utf8"),
     readFile("scripts/m32_numpy_layout_observation.py", "utf8"),
     readFile("scripts/test_m32_numpy_layout_observation.py", "utf8"),
   ]);
@@ -58,6 +66,10 @@ test("M32 connects claim tags to one pinned CPU-only NumPy observation", async (
   assert.doesNotMatch(m32, /~~~python\ndef prepare_for_kernel\(batch\):/u);
   assert.match(
     m32,
+    /\[`lib\/m32-systems-evidence-fixture\.js`\]\(\.\.\/\.\.\/lib\/m32-systems-evidence-fixture\.js\)/u,
+  );
+  assert.match(
+    m32Candidate,
     /\[`lib\/m32-systems-evidence-fixture\.js`\]\(\.\.\/\.\.\/lib\/m32-systems-evidence-fixture\.js\)/u,
   );
 

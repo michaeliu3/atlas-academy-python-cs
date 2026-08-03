@@ -456,7 +456,7 @@ the theorem.
 
 ### Bounded reference fixture — frontier policy
 
-Use `lib/m34-classical-ai-reference-fixture.js` before accepting a code label.
+Use [`m34-classical-ai-reference-fixture.js`](../../lib/m34-classical-ai-reference-fixture.js) before accepting a code label.
 Predict the next entry chosen by the declared lowest-accumulated-cost policy
 and by last-in-first-out policy, then inspect
 `chooseM34DeclaredFrontierEntry(...)`. Name the still-missing tie, duplicate,

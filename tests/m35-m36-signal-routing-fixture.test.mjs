@@ -313,14 +313,20 @@ test("each probe is deterministic and does not mutate the shared declaration", (
 });
 
 test("the M35 and M36 workbooks turn the shared fixture into bounded prediction work", async () => {
-  const [m35Workbook, m36Workbook] = await Promise.all([
+  const [m35Workbook, m36Workbook, m35Candidate, m36Candidate] = await Promise.all([
     readFile("content/authoring/m35_machine_learning_representation_workbook.v1.md", "utf8"),
     readFile("content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "utf8"),
+    readFile("content/modules/35_machine_learning_representation.md", "utf8"),
+    readFile("content/modules/36_statistical_learning_theory_reliable_deep_learning.md", "utf8"),
   ]);
 
   assert.match(m35Workbook, /m35RepresentationCollisionWitness\(\)/u);
   assert.match(
     m35Workbook,
+    /\[`lib\/m35-m36-signal-routing-fixture\.js`\]\(\.\.\/\.\.\/lib\/m35-m36-signal-routing-fixture\.js\)/u,
+  );
+  assert.match(
+    m35Candidate,
     /\[`lib\/m35-m36-signal-routing-fixture\.js`\]\(\.\.\/\.\.\/lib\/m35-m36-signal-routing-fixture\.js\)/u,
   );
   assert.doesNotMatch(m35Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);
@@ -372,6 +378,10 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m36Workbook, /m36LearningClaimProbe\(\)/u);
   assert.match(
     m36Workbook,
+    /\[`lib\/m35-m36-signal-routing-fixture\.js`\]\(\.\.\/\.\.\/lib\/m35-m36-signal-routing-fixture\.js\)/u,
+  );
+  assert.match(
+    m36Candidate,
     /\[`lib\/m35-m36-signal-routing-fixture\.js`\]\(\.\.\/\.\.\/lib\/m35-m36-signal-routing-fixture\.js\)/u,
   );
   assert.doesNotMatch(m36Workbook, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/u);

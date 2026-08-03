@@ -174,14 +174,21 @@ test("the M34 AC-3 card makes the predecessor requeue and empty-domain boundary 
 });
 
 test("the M34 workbook puts both bounded fixtures in the relevant prediction and transfer sessions", async () => {
-  const workbook = await readFile(
-    "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-    "utf8",
-  );
+  const [workbook, candidate] = await Promise.all([
+    readFile(
+      "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+      "utf8",
+    ),
+    readFile("content/modules/34_classical_ai_search_constraints_decision.md", "utf8"),
+  ]);
 
   assert.match(workbook, /### Bounded reference fixture — frontier policy/u);
   assert.match(
     workbook,
+    /\[`m34-classical-ai-reference-fixture\.js`\]\(\.\.\/\.\.\/lib\/m34-classical-ai-reference-fixture\.js\)/u,
+  );
+  assert.match(
+    candidate,
     /\[`m34-classical-ai-reference-fixture\.js`\]\(\.\.\/\.\.\/lib\/m34-classical-ai-reference-fixture\.js\)/u,
   );
   assert.match(workbook, /chooseM34DeclaredFrontierEntry/u);
