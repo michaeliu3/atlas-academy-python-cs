@@ -550,6 +550,27 @@ checker returns every failed condition rather than only `false`.
 | complementary slackness | Connects active constraints with multipliers. | “A zero product proves all KKT conditions.” |
 | qualification | States why a dual/certificate conclusion applies. | “Convexity alone always gives strong duality.” |
 
+### Two routes, two evidentiary burdens
+
+For this exact fixture, compare the two legitimate routes below before saying
+what has been proved. They reach compatible conclusions here, but they are not
+interchangeable evidence.
+
+| Route | What must be shown | What it supports — and does not support |
+| --- | --- | --- |
+| direct matching witnesses | A primal-feasible `(1,0)` with value `2`; a dual-feasible `lambda=2`; the derived value `q(2)=2`; and weak duality. | The exact optimum and zero gap for this stated finite fixture. It does **not** establish a theorem for nearby problems. |
+| convex theorem route | Convex `f`, affine `g`, the stated KKT fields, and a named strict-feasibility witness such as `(0,0)`. | The particular Slater/KKT route to strong duality, dual attainment, and KKT necessity for this problem class. It does **not** make qualification automatic elsewhere. |
+
+### Changed-premise oral check — withdraw only the unsupported route
+
+A new evidence packet gives a convex-looking problem and a boundary-feasible
+candidate, but no strict-feasibility witness. It has **not** proved that Slater
+fails; it has shown that this packet cannot invoke the Slater theorem route.
+In a short oral explanation, say which route must be withdrawn and why. The
+direct route remains available only if the packet separately derives matching
+primal and dual witnesses. Do not withdraw a conclusion merely by ritual, and
+do not retain a theorem route without its stated premise.
+
 ### Output: Constraint Claim Table
 
 Create a **Claim Table** for one constrained problem. It must label each line
@@ -1070,6 +1091,24 @@ At `q=0.1`, this declared channel/input pair has about
 has zero. The same numerical formula at a distortion level `D=0.1` belongs to
 a different question: how much representation rate is needed under the
 declared loss. Do not silently exchange those questions.
+
+### Retrieval card — do not exchange a channel question for a coding question
+
+Before reusing either displayed formula, complete all four fields:
+
+| Field | One-use BSC calculation | Rate-distortion statement |
+| --- | --- | --- |
+| source law | `X~Bernoulli(1/2)` | iid `Bernoulli(1/2)` source |
+| channel or distortion law | independent BSC noise `N~Bernoulli(q)` and `Y=X\oplus N` | Hamming loss `d(x,\hat x)=\mathbf 1[x\ne\hat x]` at distortion `D` |
+| quantity | `I(X;Y)=1-h_2(q)` bits **per use** | `R(D)=1-h_2(D)` bits **per symbol** |
+| regime | one declared channel use under its joint law | asymptotic coding theorem, not a finite-code score |
+
+**Changed field:** keep the uniform source and Hamming loss, but replace the
+asymptotic regime with one finite block code. Which formula must be withdrawn
+as a finite-code benchmark, and which one-use distribution identity remains
+available if its BSC assumptions still hold? State the field that changed
+before answering. Then change the source law to biased input and identify the
+additional formula whose `1-h_2(\cdot)` form no longer follows.
 
 ### Transfer task — changed source or distortion
 

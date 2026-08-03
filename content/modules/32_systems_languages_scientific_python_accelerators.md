@@ -714,6 +714,26 @@ This is a fixed observation of named arrays, not a claim that broadcasting
 always allocates, that a particular backend cannot fuse work, or that a layout
 is faster.
 
+### CPU-only stride-to-locality hypothesis card
+
+Use the named CPU-only layout fixture before timing anything. For each declared
+logical access order, draw the first four byte offsets and label the access
+pattern—not a cache conclusion:
+
+| Declared logical reads | Offset trace to draw | Initial pattern label | What is still required |
+| --- | --- | --- | --- |
+| `base[0, 0]` through `base[0, 3]` | `0, 4, 8, 12` from the base row start | contiguous, forward | a named workload and completed measurement before saying anything about performance |
+| `reversed_columns[0, 0]` through `reversed_columns[0, 3]` | `12, 8, 4, 0` from the base row start | reversed, adjacent addresses | the same oracle, environment, and timing boundary before comparing it with the forward order |
+| a declared `base[0, ::2]` traversal | fill in the offsets and signed step | strided | evidence that this stride, rather than a conversion or different work, explains any observation |
+| a declared `2 x 2` tile/block traversal | write the coordinate and offset order yourself | blocked schedule | a named tile size, loop order, workload, and completed measurement |
+
+Write one falsifiable sentence of the form: “For this named CPU, array,
+workload, and access order, I hypothesize ___; I would withdraw it if ___.”
+Keep “cache” and “faster” out of the conclusion until the semantic oracle,
+warm-up, readiness boundary, and completed measurements are recorded. Even then,
+the result is evidence for that named setup, not a general cache or backend
+model.
+
 ### Reproducibility bridge — frozen observation versus moving documentation
 
 Keep these two kinds of evidence separate:
@@ -1233,6 +1253,22 @@ known alternatives, non-claim, and privacy/redaction boundary:
 Do not include credentials, raw private data, raw voice transcripts, or an
 unredacted machine fingerprint in a learning note. A capsule makes a claim
 auditable; it does not make it portable or repeatable on every environment.
+
+### Adversarial reproduction-delta row
+
+Attach one row beside the capsule that contrasts a control rerun with exactly
+one deliberately changed premise. Keep the semantic oracle fixed; this is a
+test of the portability boundary, not a search for a favorable result.
+
+| Same-environment rerun | One changed variable | Fixed semantic oracle | Report both sides | Remaining non-portability claim |
+| --- | --- | --- | --- | --- |
+| `[control result under the recorded environment]` | `[library version, dtype, backend, data order, or synchronization policy]` | `[expected output and tolerance]` | `[what stayed the same; what changed; raw observation or design-only prediction]` | `[what cannot be generalized across environments]` |
+
+If suitable hardware or a safe alternate environment is unavailable, the row
+may be a design-only protocol: name the changed premise, the fixed oracle, the
+observation that would count, and the claim that must remain withdrawn. Do not
+turn equal same-seed results—or a single changed run—into a cross-release,
+cross-platform, CPU/GPU, or backend reproducibility promise.
 
 ### Output: Scientific Python & Accelerators Dossier
 

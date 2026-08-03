@@ -33,6 +33,12 @@ test("M31 exposes compact claim-to-source routes and labels non-runnable sketche
     m31Candidate,
     /\[`m31GradientDescentRateCard\(10\)`\]\(\.\.\/\.\.\/lib\/m31-optimization-authoring-model\.js\)/u,
   );
+  for (const m31Pack of [m31, m31Candidate]) {
+    assert.match(m31Pack, /Two routes, two evidentiary burdens/u);
+    assert.match(m31Pack, /Changed-premise oral check/u);
+    assert.match(m31Pack, /do not exchange a channel question for a coding question/u);
+    assert.match(m31Pack, /asymptotic coding theorem, not a finite-code score/u);
+  }
 
   const m31Sessions = JSON.parse(bridge).modules.find(({ moduleId }) => moduleId === "m31").sessionSpine;
   const sessionFour = m31Sessions.find(({ id }) => id === "m31-s04");
@@ -72,6 +78,12 @@ test("M32 connects claim tags to one pinned CPU-only NumPy observation", async (
     m32Candidate,
     /\[`lib\/m32-systems-evidence-fixture\.js`\]\(\.\.\/\.\.\/lib\/m32-systems-evidence-fixture\.js\)/u,
   );
+  for (const m32Pack of [m32, m32Candidate]) {
+    assert.match(m32Pack, /CPU-only stride-to-locality hypothesis card/u);
+    assert.match(m32Pack, /Adversarial reproduction-delta row/u);
+    assert.match(m32Pack, /Keep “cache” and “faster” out of the conclusion/u);
+    assert.match(m32Pack, /Keep the semantic oracle fixed/u);
+  }
 
   assert.match(observation, /PINNED_NUMPY_VERSION = "2\.3\.5"/u);
   assert.match(observation, /np\.shares_memory/u);
