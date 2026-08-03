@@ -605,6 +605,21 @@ test("the advanced prerequisite-session bridge covers every authoring-only graph
   );
 });
 
+test("the advanced bridge derives direct academic consumers from the canonical graph", async () => {
+  const [graph, bridgeLedger] = await Promise.all([
+    loadCourseGraph(),
+    loadAdvancedModuleBridgeLedger(),
+  ]);
+  const invalidLedger = structuredClone(bridgeLedger);
+  const m36 = invalidLedger.modules.find(({ moduleId }) => moduleId === "m36");
+  m36.forwardHandoff.directAcademicConsumerModuleIds = [];
+
+  assert.throws(
+    () => validateAdvancedModuleBridgeLedger(graph, invalidLedger),
+    /direct academic consumers do not match the graph/u,
+  );
+});
+
 test("the legacy module-contract audit resolves every M1–M30 pointer without approval or publication claims", async () => {
   const audit = await loadLegacyModuleContractAudit();
   const report = await validateLegacyModuleContractAudit(audit);

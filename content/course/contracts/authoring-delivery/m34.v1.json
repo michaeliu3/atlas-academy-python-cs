@@ -114,10 +114,11 @@
   "forwardHandoff": {
     "declaredForwardModuleId": "m35",
     "directAcademicConsumerModuleIds": [
+      "m25",
       "m35"
     ],
     "handoffArtifact": "Problem-formulation packet: state/representation, objective/constraints, search or solver rationale, uncertainty model, and limit/human-impact boundaries.",
-    "note": "M35 is both the graph's declared forward handoff and its direct academic consumer."
+    "note": "M35 is the graph's declared forward handoff. M25 and M35 are its direct academic consumers; M25 remains gated by the canonical graph."
   },
   "localForwardHandoffOutputId": "m34-classical-ai-search-constraints-decision-packet",
   "truthBoundary": "This hidden M34 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."

@@ -94,9 +94,9 @@
   ],
   "forwardHandoff": {
     "declaredForwardModuleId": "m18",
-    "directAcademicConsumerModuleIds": ["m32", "m34", "m35", "m36"],
+    "directAcademicConsumerModuleIds": ["m25", "m32", "m34", "m35", "m36"],
     "handoffArtifact": "Objective/constraint/convergence claim sheet with experiment conditions, known limits, and a linkable evidence trail.",
-    "note": "The graph's declared forward handoff is retained verbatim. Direct academic consumers list only modules whose graph prerequisites name M31."
+    "note": "The graph's declared forward handoff is retained verbatim. Direct academic consumers list every graph module whose prerequisites name M31, including gated synthesis preview M25."
   },
   "localForwardHandoffOutputId": "m31-optimization-information-evidence-dossier",
   "truthBoundary": "This hidden authoring-candidate map proves only that the declared M31 draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select a learner workbook or canonical graph source map, open a route, grant learner access, approve delivery quality, record CI or deployment, or publish M31."

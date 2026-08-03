@@ -132,6 +132,12 @@ function validateAdvancedModuleBridge(graph, ledger, { requireAuthoringOnlyGraph
       courseModule.forwardModuleNumber === null
         ? null
         : moduleByNumber.get(courseModule.forwardModuleNumber)?.id ?? null;
+    const expectedDirectAcademicConsumerModuleIds = graphModules
+      .filter((consumerModule) =>
+        Array.isArray(consumerModule.academicPrerequisiteNumbers) &&
+        consumerModule.academicPrerequisiteNumbers.includes(courseModule.number),
+      )
+      .map(({ id }) => id);
 
     if (entry?.graph?.number !== courseModule.number) {
       errors.push(`Module ${courseModule.number} bridge number does not match the graph.`);
@@ -144,6 +150,14 @@ function validateAdvancedModuleBridge(graph, ledger, { requireAuthoringOnlyGraph
     }
     if (entry?.graph?.declaredForwardModuleId !== expectedForwardModuleId) {
       errors.push(`Module ${courseModule.number} bridge forward handoff does not match the graph.`);
+    }
+    if (
+      !sameMembers(
+        entry?.forwardHandoff?.directAcademicConsumerModuleIds,
+        expectedDirectAcademicConsumerModuleIds,
+      )
+    ) {
+      errors.push(`Module ${courseModule.number} bridge direct academic consumers do not match the graph.`);
     }
 
     const sessions = entry.sessionSpine;

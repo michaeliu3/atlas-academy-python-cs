@@ -128,9 +128,9 @@
       ],
       "forwardHandoff": {
         "declaredForwardModuleId": "m18",
-        "directAcademicConsumerModuleIds": ["m32", "m34", "m35", "m36"],
+        "directAcademicConsumerModuleIds": ["m25", "m32", "m34", "m35", "m36"],
         "handoffArtifact": "Objective/constraint/convergence claim sheet with experiment conditions, known limits, and a linkable evidence trail.",
-        "note": "The graph's declared forward handoff is retained verbatim. Direct academic consumers list only modules whose graph prerequisites name M31."
+        "note": "The graph's declared forward handoff is retained verbatim. Direct academic consumers list every graph module whose prerequisites name M31, including gated synthesis preview M25."
       },
       "sourceBlockers": [
         {
@@ -614,9 +614,9 @@
       ],
       "forwardHandoff": {
         "declaredForwardModuleId": "m35",
-        "directAcademicConsumerModuleIds": ["m35"],
+        "directAcademicConsumerModuleIds": ["m25", "m35"],
         "handoffArtifact": "Problem-formulation packet: state/representation, objective/constraints, search or solver rationale, uncertainty model, and limit/human-impact boundaries.",
-        "note": "M35 is both the graph's declared forward handoff and its direct academic consumer."
+        "note": "M35 is the graph's declared forward handoff. M25 and M35 are its direct academic consumers; M25 remains gated by the canonical graph."
       },
       "sourceBlockers": [
         {
@@ -806,9 +806,9 @@
       ],
       "forwardHandoff": {
         "declaredForwardModuleId": "m36",
-        "directAcademicConsumerModuleIds": ["m36"],
+        "directAcademicConsumerModuleIds": ["m25", "m36"],
         "handoffArtifact": "ML evidence packet: representation assumptions, baseline comparison, evaluation/shift plan, objective/training trace, reproducibility record, and data-authority boundary map.",
-        "note": "M36 is both the graph's declared forward handoff and its direct academic consumer."
+        "note": "M36 is the graph's declared forward handoff. M25 and M36 are its direct academic consumers; M25 remains gated by the canonical graph."
       },
       "sourceBlockers": [
         {
@@ -983,9 +983,9 @@
       ],
       "forwardHandoff": {
         "declaredForwardModuleId": "m25",
-        "directAcademicConsumerModuleIds": [],
+        "directAcademicConsumerModuleIds": ["m25"],
         "handoffArtifact": "Synthesis-ready reliable-learning evidence packet: assumptions, gaps, theorem limits, reproducibility record, monitoring/authority boundary, and oral-defense reflection.",
-        "note": "The graph's declared forward handoff is M25. This ledger does not unlock M25/M26; their academic prerequisites and release evidence remain governed by the canonical graph and module contract."
+        "note": "The graph's declared forward handoff and direct academic consumer are M25. This ledger does not unlock M25/M26; their academic prerequisites and release evidence remain governed by the canonical graph and module contract."
       },
       "sourceBlockers": [
         {

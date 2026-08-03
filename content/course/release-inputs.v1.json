@@ -114,7 +114,7 @@
     },
     {
       "path": "content/course/contracts/authoring-delivery/m31.v1.json",
-      "sha256": "f7f2abc240964996c9333a951c0f62652e3e73deb103b0c57367e0d4923348f3"
+      "sha256": "99808ccf4783cd87ab1249562b210c11540bedb4c9a4b9e776ed169ec1c7900f"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m32.v1.json",
@@ -126,15 +126,15 @@
     },
     {
       "path": "content/course/contracts/authoring-delivery/m34.v1.json",
-      "sha256": "146c2a3ce0987d8cd223740bef569844ba4ccb4a86d27e997e8206554ad703e4"
+      "sha256": "d16744ed5fa6a140500bebb35dd96a45c47e0b6921ceac1ef0123c6bf6c00e69"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m35.v1.json",
-      "sha256": "b606328f95deaa50001ea5de363badfa070ceb97f408f025e6e23bf3e6fa174b"
+      "sha256": "459f98e9d138adf1fbf2c67706b6b3518b82da0c11a5d824039f8210d5c23a17"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m36.v1.json",
-      "sha256": "1dcfae2207b616f90ed49ebe563aec5ca2391de4ef67a515a837228c1f517176"
+      "sha256": "82b9646e6f5d902a5d2b42451021dfd9627d5d74f8bb1bfd88cf0d502492c20f"
     },
     {
       "path": "content/course/contracts/companions/m01.v1.json",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-      "sha256": "58a6e2842605e022f94f8858a4fd7160759a37ca0d912833c01b37e95b521eb8"
+      "sha256": "0388edeaeb3692f2eb25d8a53e5e51c480ebbb3d9577af04720baa44cf60625b"
     },
     {
       "path": "content/course/manual-learning-record-workflow.v1.json",

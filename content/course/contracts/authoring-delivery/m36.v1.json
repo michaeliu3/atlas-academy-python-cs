@@ -130,9 +130,9 @@
   ],
   "forwardHandoff": {
     "declaredForwardModuleId": "m25",
-    "directAcademicConsumerModuleIds": [],
+    "directAcademicConsumerModuleIds": ["m25"],
     "handoffArtifact": "Synthesis-ready reliable-learning evidence packet: assumptions, gaps, theorem limits, reproducibility record, monitoring/authority boundary, and oral-defense reflection.",
-    "note": "The graph's declared forward handoff is M25. This ledger does not unlock M25/M26; their academic prerequisites and release evidence remain governed by the canonical graph and module contract."
+    "note": "The graph's declared forward handoff and direct academic consumer are M25. This ledger does not unlock M25/M26; their academic prerequisites and release evidence remain governed by the canonical graph and module contract."
   },
   "localForwardHandoffOutputId": "m36-statistical-learning-theory-reliable-deep-learning-systems-dossier",
   "truthBoundary": "This hidden M36 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."
