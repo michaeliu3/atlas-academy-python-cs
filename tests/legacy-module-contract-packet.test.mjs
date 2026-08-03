@@ -504,7 +504,9 @@ test("the packet rejects route drift, audit-status laundering, unreviewed promot
   );
 
   const launderedAudit = structuredClone(registry);
-  launderedAudit.modules[0].criteria[3].legacyAuditStatus = "pointer-present";
+  const originalAuditStatus = launderedAudit.modules[0].criteria[3].legacyAuditStatus;
+  launderedAudit.modules[0].criteria[3].legacyAuditStatus =
+    originalAuditStatus === "pointer-present" ? "ambiguous" : "pointer-present";
   await assert.rejects(
     validateLegacyModuleContractPacketRegistry(graph, launderedAudit, { siteRoot }),
     /legacyAuditStatus must match the immutable legacy audit status/u,

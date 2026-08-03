@@ -45,8 +45,10 @@ jobs:
         run: pnpm typecheck
       - name: Lint
         run: pnpm lint
-      - name: Build and test portal
-        run: pnpm test
+      - name: Build portal
+        run: pnpm build
+      - name: Run Node portal tests
+        run: node scripts/run-course-tests.mjs
 
   teaching-models:
     name: Teaching models on Python ${{ matrix.python-version }}
