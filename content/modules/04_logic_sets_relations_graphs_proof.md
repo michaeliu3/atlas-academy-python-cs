@@ -367,9 +367,35 @@ The proof style should match the claim.
 
 Use the assumptions forward.
 
+#### Warm-up: a definition check
+
 **Claim:** If every prerequisite edge points from a lower route position to a higher position, the route contains no backward prerequisite edge.
 
 This follows directly because “backward edge” means an edge whose source position is not lower than its target position.
+
+#### A quantified direct proof: choose an arbitrary edge
+
+Let `E` be the prerequisite-edge set and let `p(v)` be the position of vertex
+`v` in a total proposed route. Call `(a, b)` **backward** when
+`p(a) ≥ p(b)`.
+
+**Prediction before reveal:** Under the premise
+`∀(a, b) ∈ E, p(a) < p(b)`, can an edge in `E` be backward? Write one
+inference rule you would need and a confidence from 0–100 before reading on.
+
+**Claim:** If `∀(a, b) ∈ E, p(a) < p(b)`, then no edge in `E` is backward.
+
+**Proof:** Let `(a, b)` be an arbitrary edge in `E`.
+
+1. **Assumption:** `∀(x, y) ∈ E, p(x) < p(y)`.
+2. **Universal instantiation:** because `(a, b) ∈ E`, `p(a) < p(b)`.
+3. **Definition:** a backward edge would require `p(a) ≥ p(b)`.
+4. Therefore this arbitrary edge is not backward. Because the choice of
+   `(a, b)` was arbitrary, no edge in `E` is backward. ∎
+
+The proof is about the stated edge set and total-position premise. A route
+validator, a few examples, or a graph drawing can check a finite instance; it
+does not replace the universal inference above.
 
 ### Contrapositive
 

@@ -903,6 +903,29 @@ def reservoir_one(items: Iterable[str], rng: Random) -> str:
     return chosen
 ```
 
+### Proof model — finite prefix and ideal draws
+
+Fix a finite prefix of `k ≥ 1` stream items. For the mathematical proof, let
+`U_i` be the draw made after item `i` is seen, and let `H_(i-1)` contain every
+earlier draw and selection state. Assume the ideal model
+
+$$
+\Pr(U_i = j \mid \mathcal H_{i-1}) = \frac{1}{i}
+\qquad\text{for each } j \in \{0, \ldots, i - 1\}.
+$$
+
+**Prose fallback:** given every earlier draw and selection state, each of the
+`i` possible draw positions is equally likely at step `i`.
+
+A fresh independent uniform draw at each step is one sufficient way to obtain
+that conditional model. The program call `rng.randrange(i)` is an
+implementation mechanism to inspect; a seed gives a reproducible trace, not
+the probability assumption itself.
+
+**Prediction before proof:** Which statement is needed for the induction:
+“the seed is fixed,” “one test looked balanced,” or “each next draw has the
+stated conditional uniform distribution”? Give a confidence from 0–100.
+
 **[MATHEMATICAL CLAIM]** After processing `k ≥ 1` items, each has probability `1/k` of being retained.
 
 Inductive step:
@@ -911,7 +934,9 @@ Inductive step:
 - each old item was present with probability `1/(k-1)` and survives with probability `(k-1)/k`;
 - its final probability is `(1/(k-1))((k-1)/k) = 1/k`.
 
-This is a proof about a mathematical uniform-choice model. A deterministic seed supports reproducible debugging, not proof of distribution quality.
+This is a proof about the stated mathematical uniform-choice model. A
+deterministic seed supports reproducible debugging, not proof of distribution
+quality.
 
 ### Python boundary
 

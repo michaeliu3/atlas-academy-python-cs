@@ -179,6 +179,26 @@ an upper and a lower constant-factor multiple of `n²` once `n` is large enough,
 which is the proof idea behind the tight `Θ(n²)` claim. The count comes
 first; the bound summarizes it.
 
+### Prediction and proof checkpoint — make `Θ` concrete
+
+Under the all-distinct, list-membership, equality-comparison model above, let
+`f(n) = n(n - 1) / 2`. Before revealing the bound, choose a lower constant,
+an upper constant, and a threshold that you think can witness `f ∈ Θ(n²)`.
+
+For every `n ≥ 2`, `n - 1 ≥ n / 2` and `n - 1 ≤ n`. Therefore:
+
+$$
+\frac{n^2}{4} \le \frac{n(n - 1)}{2} \le \frac{n^2}{2}.
+$$
+
+**Prose fallback:** once `n` is at least two, the exact comparison count is
+at least one quarter of `n²` and at most one half of `n²`.
+
+So `c₁ = 1/4`, `c₂ = 1/2`, and `n₀ = 2` witness both the lower and upper
+constant-factor bounds. Hence `f ∈ Θ(n²)` **for this stated operation model**.
+The proof does not claim a wall-clock bound, constant-time hash lookup, or a
+performance result for every Python runtime and input family.
+
 ### Counterexample — one visible loop can hide quadratic membership
 
 `for topic in topics` looks like one pass, but `topic not in unique` can scan a

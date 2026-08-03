@@ -562,11 +562,11 @@
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "c75354d7905bca0e7ef4a52b3e5257cd3b4136893f19cf23d46fff591684f5a5"
+      "sha256": "fb78b83f824d6d1bf199be76823abc09fc04afe5b2308b07baee2d119267a306"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
-      "sha256": "785a222aeda2682b920bbd2f75fe0f0343494cf96a062767e00c554ec40ef610"
+      "sha256": "8b65376c844f1f0c62ff7015f5836cd15f16c3be48ef02b2a0529d3a51644e5d"
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
@@ -590,7 +590,7 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "82d52bd3346f80b75604ca4e164f8c69bbd2a1234f95164dffd305bc4b4a40c3"
+      "sha256": "9957015c75abf12d49fde8839b5b479e37a24e5eec146d3c17a435cfede04ee7"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
@@ -1146,7 +1146,7 @@
     },
     {
       "path": "public/downloads/test_module19_reference.py",
-      "sha256": "46f743a0117a929262155528ed38c1299ecfe23d9a1a07a2f9d226bb10919dee"
+      "sha256": "88686393b3a63827670b7a8ad52091687ce48ca92fc2f731ffafd4f3224ce049"
     },
     {
       "path": "public/downloads/test_module20_reference.py",
