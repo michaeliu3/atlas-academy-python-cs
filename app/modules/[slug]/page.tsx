@@ -200,7 +200,8 @@ export default async function ModulePage({ params }: ModulePageProps) {
           >
             <ModuleMarkdown
               enableMultipleChoicePredictionGates={
-                courseModule.state.availability === "legacy-open"
+                courseModule.state.availability === "legacy-open" ||
+                courseModule.state.availability === "preview"
               }
               markdown={lessonMarkdown}
             />

@@ -120,6 +120,11 @@ test("private guided continuation remains distinct from portal release", async (
   assert.match(routePage, /intended 36-module dependency sequence/u);
   assert.match(routePage, /Primary guided learning happens in Codex/u);
   assert.match(routePage, /Teaching Assistant and Study Partner guide/u);
+  assert.match(routePage, /eligible learner-ready work/u);
+  assert.match(
+    routePage,
+    /portal click, preview, or oral conversation never\s+automatically creates a record or Core credit/u,
+  );
 });
 
 test("private advanced packs provide a bounded Session 2–6 chat continuation", async () => {
