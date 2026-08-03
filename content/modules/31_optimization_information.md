@@ -1339,8 +1339,14 @@ insight, unresolved misconception, evidence artifact, and next question.
 End with a small learner-controlled card: **defended claim**, **repaired
 assumption or misconception**, **evidence inspected**, **remaining
 uncertainty**, and **next retrieval or handoff**. The learner may correct,
-decline to save, or keep this summary locally; it is not an exam result,
-transcript, or automatic Notion record.
+decline to save, or keep this summary locally. The card itself remains
+local/copyable: it is not an exam result, transcript, or proof that a Notion
+write occurred. In a configured designated Teaching Assistant or Study Partner
+chat, the shared record policy may create at most one concise note only when
+the learner has said `records on`, the configured private destination is
+reachable, the session is substantive, and records are not paused or
+off-record. It may report a saved note only after direct evidence of a
+successful write. Otherwise, keep the card in chat or local notes.
 
 ### Forward handoff
 

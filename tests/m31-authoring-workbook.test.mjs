@@ -109,6 +109,10 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /CMU 10-725 Convex Optimization/u);
   assert.match(candidate, /M25 evidence receipt/u);
   assert.match(candidate, /Distractor-to-misconception map/u);
+  assert.match(candidate, /The card itself remains\s+local\/copyable/u);
+  assert.match(candidate, /only when\s+the learner has said `records on`/u);
+  assert.match(candidate, /configured private destination is\s+reachable/u);
+  assert.match(candidate, /may report a saved note only after\s+direct evidence of a\s+successful write/u);
 
   const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: candidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
