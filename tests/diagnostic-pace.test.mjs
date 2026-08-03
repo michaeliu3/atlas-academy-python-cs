@@ -74,6 +74,11 @@ test("the completed diagnostic presents all three pace options without defaultin
   assert.match(experience, /setSelectedPaceId\(null\)/u);
   assert.match(experience, /persistDiagnosticProgress\(storage, attempt\)/u);
   assert.doesNotMatch(experience, /persistDiagnosticPace/u);
+  assert.match(
+    experience,
+    /paste it into the designated Study Partner or Teaching Assistant chat/u,
+  );
+  assert.match(experience, /in that exact chat only if you want its configured concise-note policy/u);
   assert.match(styles, /\.diagnostic-pace-option:has\(input:focus-visible\)/u);
   assert.match(styles, /\.diagnostic-pace-options/u);
 });

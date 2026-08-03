@@ -178,7 +178,7 @@
     },
     {
       "path": "content/course/contracts/companions/m11.v1.json",
-      "sha256": "57a102b6124b3f5420b2b2178e65a878cea2cf24a0c8ff464c102bc45f84c2d1"
+      "sha256": "3e83def26a437cb7471aeeae6e6149f1c9fddff0f080eaf719008bbb3d68491f"
     },
     {
       "path": "content/course/contracts/companions/m12.v1.json",
@@ -426,7 +426,7 @@
     },
     {
       "path": "content/course/contracts/evidence/m11.v1.json",
-      "sha256": "db400b0832d13825ab0ca79075487163b318295d9851ed1e080a88abab4be4fe"
+      "sha256": "f5ef5a35bd3d1ceeb424c55419dc5208315e2aef170af89c43f06aa3a53f6285"
     },
     {
       "path": "content/course/contracts/evidence/m12.v1.json",
@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "3f420ef4899fac6c92a83ccb03a8d1af7e4eec93a25994268e1e8d2c65762da7"
+      "sha256": "45edb9362a98ca5e372054bf944f610071bade8da93849e95eeacb9888927f19"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "81c460463de78d89da9a058a8bdb567d696d2265a9711e90651627db43b3d031"
+      "sha256": "14076ae3f9ed0fc3c047e685765daaadbad641f8ad23074cdd6b14d6d0ffc895"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "38d843e697568e393c66520018762ce08b3844b163f906f529d29bad5402f00e"
+      "sha256": "085b38078668775c5fe9ca649509a988807fbbea558cac3234b7557c4e79c12f"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -590,7 +590,7 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "9957015c75abf12d49fde8839b5b479e37a24e5eec146d3c17a435cfede04ee7"
+      "sha256": "4cc4595cebc57b90c18fa39718023a126d4fec2ce671c0f344fdf61c123c33b1"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
@@ -646,11 +646,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "cb17af8ffebfaf1f1f738f22d81e0a12371f406af51a376b3678cba25243124e"
+      "sha256": "0e645418365f885dc039d407365d6e905759ca000a2c51df5e6e73c26775e97d"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "4aec51c06859195331ce2d8c711034b18dbe2badec934cf8b93301a6edb7aef3"
+      "sha256": "6464ae20c34253df08327ddd8ae85f783c1c63dd6853ab48aa673ce225cf640a"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -682,7 +682,7 @@
     },
     {
       "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
-      "sha256": "4a8d2b5700e0188b8d62be2763b22675dd2095d0e9c24aa7333572b76b4d853d"
+      "sha256": "6e2eadd6ea55fa41dd6df7120162fa117b35ce5b93cfb03f56a0a31d34fcd5c9"
     },
     {
       "path": "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md",
@@ -1006,7 +1006,7 @@
     },
     {
       "path": "e2e/accessibility.spec.ts",
-      "sha256": "6ba26892d137974470517e4fdb55b3ccdd786ec40d58dbd427acaf98360a485d"
+      "sha256": "1add371ad50903dd81a7e2eb145904272c840f2c70052628ce087e7d61816040"
     },
     {
       "path": "lib/module-studio-registry.ts",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "ff74d26670a190b4158cfc15314120b4dc011488357c82912da905aed7db0b22"
+      "sha256": "c1b7aa1321450eb43dd077739101d0fe359550f76822a4fc42c4f60ec68ff226"
     }
   ]
 }

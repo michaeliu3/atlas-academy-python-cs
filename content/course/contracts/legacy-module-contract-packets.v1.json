@@ -8243,7 +8243,7 @@
             },
             {
               "criterionId": "code-reading-debugging-design",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-code-reading",

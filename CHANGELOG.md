@@ -7,6 +7,18 @@ actually published.
 
 ## Unreleased
 
+- Repaired a concrete Arc II continuity gap without adding a new system: M11
+  now turns the M6→M10 representation, ingestion, indexing, ordering, and
+  graph chain into one five-handoff architecture-reading page inside its
+  existing Session 6 strategy-defense dossier. The table makes contract,
+  invariant, cost, failure, and changed-premise reasoning visible to the
+  designated Teaching Assistant and Study Partner chats. It is original,
+  source-calibrated legacy learning material only; it does not promote M11,
+  create a record, advance the route, or claim review, release, or mastery.
+- Corrected the learner-facing route language: the existing diagnostic pace
+  brief may be manually pasted into either designated Learning Partner chat,
+  and M25/M26 previews now label their orientation material and reader
+  semantics without suggesting an unlocked or completable Core module.
 - Refined M31 after a focused source and learning-quality pre-review: it now
   defines conditional-history notation before use, distinguishes the explicit
   Slater route from a separate all-affine-constraint qualification route, and

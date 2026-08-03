@@ -38,6 +38,11 @@ under a changed constraint.
 
 ## How to study this module
 
+> **Preview reading boundary:** The six-session orientation material below is
+> for after the prerequisite gate opens. In preview mode, make only the
+> `REHEARSAL ONLY` framing card; do not use the later layers, project, studio,
+> oral defense, or release-decision language as current capstone work.
+
 ### The exact cumulative invariant
 
 > **Atlas may be released only as a versioned, bounded capability when its

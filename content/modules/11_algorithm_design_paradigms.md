@@ -1891,6 +1891,36 @@ Boundaries:
 - fatigue, transfer, partial tasks, multiple resources, fairness, and learner overrides need new models;
 - “exact” says nothing about whether the model represents a good education.
 
+### 16.6 Architecture-reading dossier: five M6→M10 handoffs (20–30 minutes)
+
+Before choosing a planner strategy, make the earlier data-structure arc
+visible as one argument. This is an original reading-and-design artifact, not
+a new implementation project and not a claim that a completed table proves
+route completion.
+
+Use the fixed Atlas story: an event enters a bounded flow, supports identity
+lookup, informs a next-review choice, and participates in a prerequisite
+graph. Reopen the five earlier artifacts below and complete one row at a time.
+On a narrow screen, finish the five short lines in one row before moving to
+the next.
+
+| Handoff | Existing artifact to reopen | Fill these five short lines |
+| --- | --- | --- |
+| **M6 → M7** | `HistoryBuffer` and the M6 representation-decision/M7-handoff dossier | **Contract:** what ordered history or snapshot may a client request? **Invariant:** what does the reachable structure denote, and who may mutate it? **Cost:** name `n` and the relevant access, append, eviction, traversal, or copy operation. **Failure:** name one alias, stale-link, cycle, or hidden front-shift boundary. **Changed premise:** if only the newest `C` events may remain, what must be re-proved about eviction or snapshots? |
+| **M7 → M8** | M7 access-and-demand card | **Contract:** when may a consumer request the next normalized event or stop? **Invariant:** which frame and named buffer state is retained? **Cost:** name capacity `B`, work per requested item, and the sink assumption. **Failure:** identify `list(...)`, an unnamed collector, ownership leak, or false backpressure claim. **Changed premise:** if the sink slows, cancels, or becomes asynchronous, which queue, ownership, cancellation, and failure policy is now missing? |
+| **M8 → M9** | M8 identity-and-index card | **Contract:** what candidate IDs may a key or token query return before final equality/query checking? **Invariant:** which stable key and source-of-truth version does the derived index represent? **Cost:** qualify expected lookup with hashing, equality, load, update, and retained-index assumptions. **Failure:** name a mutable key, collision mistake, stale entry, or changed normalization rule. **Changed premise:** if an event or tokenizer changes, which entries must be invalidated, rebuilt, or versioned? |
+| **M9 → M10** | M9 ordered-evidence card | **Contract:** which review is next under an explicit `(priority, revision)` key and tie rule? **Invariant:** why does the identity record remain authoritative while a heap exposes only a candidate minimum? **Cost:** separate heap insert/remove, exact-key lookup, and full-sort work. **Failure:** name a stale heap entry, hidden tie policy, or heap-as-sorted-list error. **Changed premise:** if priority or stable ordering changes, what key, revision check, and trace must be repaired? |
+| **M10 → M11** | M10 graph-decision card | **Contract:** which prerequisite relation, order, or witness is being returned? **Invariant:** what does each directed edge mean, and why must every edge point forward in a topological order? **Cost:** name `|V|`, `|E|`, representation, frontier, and the qualified traversal/order bound. **Failure:** name a missing edge, cycle, wrong frontier, or theorem mismatch. **Changed premise:** if a new edge creates a cycle, what must be rejected or recomputed before the planner uses the graph? |
+
+**Acceptance boundary:** attach these exactly five rows as page one of the
+existing Session 6 strategy-defense dossier. Finish with a four-to-six-sentence
+**evidence-boundary conclusion**: name one claim the table supports, one it
+does *not* support, and the earliest component whose invariant or cost model
+must be revisited after the changed premise. Do not add a sixth subsystem,
+new registry, score, or mastery claim. Then carry the table into §17: the
+planner state must preserve every future-relevant distinction these handoffs
+expose.
+
 ---
 
 ## 17. Debugging studio — when a smaller state is too small
@@ -2162,9 +2192,10 @@ that invalidates the claim. A seeded run is evidence of reproducibility only.
 
 ### Session 6 output — strategy-defense dossier
 
-Assemble the problem contract, selected paradigm, proof or counterexample,
-independent verifier result, resource/quality boundary, inspected agent diff,
-and one unresolved human decision. This dossier is evidence for a constructive
+Assemble the five-row M6→M10 architecture-reading dossier as page one, then
+the problem contract, selected paradigm, proof or counterexample, independent
+verifier result, resource/quality boundary, inspected agent diff, and one
+unresolved human decision. This dossier is evidence for a constructive
 conversation, never a pass/fail verdict.
 
 **TA check:** ownership means Michael owns the claim and counterexample even if the agent wrote every production line.
@@ -2618,19 +2649,20 @@ Before accepting a planner patch, require:
 Produce:
 
 1. problem contract with candidate, feasibility, objective, tie, and uncertainty policy;
-2. Arc II architecture diagram locating validation, policy, strategy, verification, and reporting;
-3. one exhaustive tiny-instance oracle;
-4. one valid greedy proof and one minimal invalid-greedy counterexample;
-5. a DP state sentence, recurrence, bases, dependency order, answer location, and reconstruction path;
-6. a state-sufficiency proof for selected-set masks;
-7. a safe prune or optimistic bound with proof;
-8. exact subset and backtracking agreement evidence;
-9. an independent feasibility/accounting verifier;
-10. a feasible lower score and valid relaxed upper bound;
-11. a bounded agent brief, inspected diff, and patch disposition;
-12. cost claims including the exponential and pseudopolynomial boundaries;
-13. a model-limit and human-impact decision ledger;
-14. a five-minute oral strategy defense.
+2. five M6→M10 handoff rows: public contract, representation invariant, named cost model, failure boundary, and changed-premise consequence;
+3. Arc II architecture diagram locating validation, policy, strategy, verification, and reporting;
+4. one exhaustive tiny-instance oracle;
+5. one valid greedy proof and one minimal invalid-greedy counterexample;
+6. a DP state sentence, recurrence, bases, dependency order, answer location, and reconstruction path;
+7. a state-sufficiency proof for selected-set masks;
+8. a safe prune or optimistic bound with proof;
+9. exact subset and backtracking agreement evidence;
+10. an independent feasibility/accounting verifier;
+11. a feasible lower score and valid relaxed upper bound;
+12. a bounded agent brief, inspected diff, and patch disposition;
+13. cost claims including the exponential and pseudopolynomial boundaries;
+14. a model-limit and human-impact decision ledger;
+15. a five-minute oral strategy defense.
 
 ### Mastery evidence
 
@@ -2656,6 +2688,7 @@ MCQ recognition or syntax fluency alone does not choose the next step.
 | Model | Candidate, feasibility, objective, tie policy, and uncertainty assumptions are explicit. |
 | Strategy | The chosen paradigm is tied to a structural fact; a tempting alternative has a proof obligation or minimal counterexample. |
 | Implementation | The state, transition, reconstruction, and every prune can be explained from the written model. |
+| System thread | Exactly five M6→M10 handoff rows name a public contract, representation invariant, cost model, failure boundary, and changed-premise consequence without inventing a route-completion claim. |
 | Verification | A tiny oracle or second exact method, plus an independent feasibility/accounting check, challenges the planner. |
 | Boundary | Cost, probability, approximation, and human-impact limits are named without inflating a local result into a general claim. |
 | Communication | The learner can revise one claim after a changed premise and choose a small evidence summary to carry forward. |
@@ -2783,6 +2816,11 @@ diagnostics, and dossiers are original synthesis. External material is
 linked/cited or briefly paraphrased only; this module imports no external
 slides, diagrams, solutions, code, or assessment assets.
 
+The connected-architecture calibration was rechecked **2026-08-03**. It uses
+the MIT and CMU links below to calibrate a connected undergraduate spine and
+cross-component correctness reasoning; it does not prescribe the Atlas
+dossier format or grant reuse of course assets.
+
 | Need | Focused source | What it supports—and does not support |
 |---|---|---|
 | Divide and combine | [MIT 6.046J Lecture 2 — Divide & Conquer](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/7463c413c944ed72b46a3c3d02b49448_MIT6_046JS15_lec02.pdf) | A decomposition/combine and recurrence-proof pattern; it does not establish that an Atlas split preserves a shared constraint. |
@@ -2790,6 +2828,7 @@ slides, diagrams, solutions, code, or assessment assets.
 | Greedy proof | [MIT 6.046J Lecture 12 — Greedy Algorithms & MST](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) | A cut/exchange proof pattern; it does not justify an Atlas value or ratio priority. |
 | Probability contract | [MIT 6.046J Lecture 6 — Randomized Algorithms](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/cb55cb123a557eed0738a1187a452c24_MIT6_046JS15_lec06.pdf) | Expected-time/error-bound vocabulary; it does not establish Python randomness security or an Atlas guarantee. |
 | Approximation boundary | [MIT 6.046J Lecture 17 — Approximation Algorithms](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/a4a7f356ba3e65a00ad2bdcfed6e0f35_MIT6_046JS15_lec17.pdf) | A proved approximation-ratio pattern; a benchmark alone grants no Atlas quality bound. |
+| Connected architecture reading | [MIT 6.006 resource index](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/resource-index/) and [CMU 15-122 course information](https://www.cs.cmu.edu/~15122/syllabus.shtml) | A connected data-structures-and-algorithms spine and correct-by-design cross-component reasoning; neither source dictates this Atlas table or validates an Atlas architecture. |
 
 ### Session-to-source-and-evidence route
 
@@ -2856,9 +2895,9 @@ rich rendering is uncertain.
 ### Invitation and starting evidence
 
 Ask the learner to choose one claim from the dossier: the candidate model, a
-greedy safe-choice argument, a DP state, a prune, or a quality bound. Start
-with their confidence and the artifact they want to show; do not infer a score
-or force a recording.
+greedy safe-choice argument, a DP state, a prune, a quality bound, or one row
+of the M6→M10 architecture-reading dossier. Start with their confidence and
+the artifact they want to show; do not infer a score or force a recording.
 
 ### Hint ladder — model to evidence
 
@@ -2902,15 +2941,23 @@ cost and approximation/quality boundary. Change one premise (negative value,
 non-overlapping interval failure, a greedy tie, or an adversarial input) and
 ask whether the proof, implementation, or decision claim survives.
 
+Before accepting the final defense, ask the learner to put the weakest row of
+the five-handoff table on the visible whiteboard and repair it in this order:
+**contract → invariant → cost → failure → changed premise**. Treat a missing
+row as a repair target, not a score.
+
 ### Study Partner — design-paradigm rehearsal
 
 Ask the learner to classify one unfamiliar problem by its state, choices, and
 repeated work. Offer a tempting but unjustified greedy/DP/divide-and-conquer
 choice, then ask for the smallest counterexample or missing theorem condition.
-Finish with the evidence artifact that the TA should challenge.
+Rehearse the five M6→M10 handoffs left-to-right, one changed premise at a time:
+ask for prediction and confidence before offering the smallest repair. Finish
+with the evidence artifact that the TA should challenge.
 
 ### Forward handoff — M12
 
-Carry a written problem contract, an invariant or recurrence, and one evidence
-boundary into **M12**. The next module turns those reasoning obligations into
-explicit Python module, API, type, and dependency contracts.
+Carry the five-row architecture-reading table, a written problem contract, an
+invariant or recurrence, and one evidence boundary into **M12**. The next
+module turns those reasoning obligations into explicit Python module, API,
+type, and dependency contracts.
