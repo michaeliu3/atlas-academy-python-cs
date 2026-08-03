@@ -170,23 +170,25 @@ traces, and complete the dossier/oral rehearsal. If the first-week calibration
 in the pace guide already exceeds its threshold, choose the 90-day route rather
 than skimming the mathematics.
 
-### M31 bounded reference-trace card
+### M31 bounded reference-card set
 
-Use this small, deterministic Session 4 card for code-reading and discussion;
-it is an equivalent interaction, not a solver recommendation or a portal
-studio. A chat with repository access may inspect
-`lib/m31-optimization-authoring-model.js`; otherwise paste this card into the
-chat rather than asking it to invent a trace.
+Use these small deterministic cards for code-reading and discussion. They are
+equivalent interactions, not solver recommendations or portal studios. A chat
+with repository access may inspect `lib/m31-optimization-authoring-model.js`;
+otherwise paste the relevant card rather than asking it to invent a trace or a
+result.
 
-| Fixture | Fixed input | Evidence to inspect |
+| Question | Fixed card | Bounded observation |
 | --- | --- | --- |
-| Two-variable constrained quadratic | `m31ProjectedGradientTrace({ initialPoint: { x: 0, y: 0 }, stepSize: 0.25, iterations: 6 })` | Seven rows. Iteration 0 is `(0, 0)`, objective `5`, residual `-1`, no projection. Iteration 1 is `(0.75, 0.25)`, objective `2.125`, residual `0`, projected from raw candidate `(1, 0.5)`. Iteration 6 is approximately `(0.9921875, 0.0078125)`, objective `2.00012207`, residual `0`, with projection. |
+| Which fields show feasibility versus only a finite trace? | `m31ProjectedGradientTrace({ initialPoint: { x: 0, y: 0 }, stepSize: 0.25, iterations: 6 })` | Seven rows. Iteration 0 is `(0, 0)`, objective `5`, residual `-1`, no projection. Iteration 1 is `(0.75, 0.25)`, objective `2.125`, residual `0`, projected from raw candidate `(1, 0.5)`. Iteration 6 is approximately `(0.9921875, 0.0078125)`, objective `2.00012207`, residual `0`, with projection. |
+| Does the same numeric ridge weight mean the same thing after rescaling? | `m31RidgeConditioningCard()` | The declared unregularized condition number is `10000`; with `lambda=0.01`, the ridge condition number is `100`. Reusing that numeric `lambda` after `theta = diag(1, 100) beta` maps a different regularized coordinate solution back to `theta_2≈0.990099` rather than `0.009901`. This exposes units and coordinate dependence; it is not a rule for choosing `lambda` or an estimate of real-data conditioning. |
+| Does a rate card transfer to a projected or stochastic trace? | `m31GradientDescentRateCard(10)` | The card declares an unconstrained exact-gradient quadratic with `mu=1`, `L=100`, and `eta=0.01`; its stated bound contracts by `0.99`. Those are the card's assumptions, not assumptions inherited by the projected trace, another objective, or another solver. |
+| Why can a BSC number and a rate-distortion number agree numerically but mean different things? | `evaluateM31BinaryChannelDistortion({ crossoverProbability: 0.1, distortionLevel: 0.1 })` | Both fixed expressions are about `0.531004` bits in their respective declared models. One is mutual information for a uniform-input BSC; the other is an asymptotic rate-distortion value for a uniform iid source with Hamming loss. Neither is a finite-code, utility, privacy, or decision claim. |
+| What does the finite ELBO card establish—and what support failure stops it? | `m31TwoStateElboCard()` | In the valid two-state case, `ELBO≈-1.253830`, `KL≈0.049857`, and `log p(x)≈-1.203973`, with zero identity residual. In the mismatch case, `q` assigns mass where the joint is zero, so the finite equality is unavailable. This does not train a model or prove posterior quality. |
 
-Ask: which fields show feasibility, which show only a finite objective trace,
-and which missing premise would be needed for a convergence or decision claim?
-The card establishes one exact update rule on one toy fixture; it does not
-establish a general convergence theorem, solver comparison, numerical
-robustness, proxy validity, or authority to decide.
+For each card, ask which fields show a definition, an assumption, a finite
+observation, and a non-claim. No card establishes a general convergence theorem,
+solver comparison, numerical robustness, proxy validity, or authority to decide.
 
 ### Start the M32 private session
 

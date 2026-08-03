@@ -946,9 +946,11 @@ the ELBO approximation claim.
 
 1. First distinguish entropy, cross-entropy, and KL for declared finite
    support.
-2. Then keep the channel and rate-distortion questions separate even when a
-   binary formula has the same numerical shape.
-3. Finally read the ELBO as a model-and-family identity whose finite gap has
+2. Then define conditional entropy from a joint law before using mutual
+   information or a binary-channel formula.
+3. Keep the channel and rate-distortion questions separate even when a binary
+   formula has the same numerical shape.
+4. Finally read the ELBO as a model-and-family identity whose finite gap has
    support and approximation conditions.
 
 Each step changes the question. None converts an information number into a
@@ -983,21 +985,66 @@ It does not choose privacy, fairness, human utility, or a model class.
 
 </details>
 
-### Mutual-information and distortion card — one narrow channel model
+### Conditional entropy before mutual information
 
-Let a source bit `X` be uniformly distributed, let noise
+For discrete variables with a declared joint distribution, conditional entropy
+is the average uncertainty left in `Y` after `X` is known:
+
+\[
+H(Y\mid X)=\sum_x P(X=x)H(Y\mid X=x).
+\]
+
+Mutual information is the resulting reduction in uncertainty:
+
+\[
+I(X;Y)=H(Y)-H(Y\mid X).
+\]
+
+These are definitions about the declared joint law. Use base-2 logarithms when
+the unit is bits. They do not say that an observed feature is useful, causal,
+private, or appropriate to use in a decision.
+
+### Mutual-information and distortion card — derive one BSC first
+
+Let `X\sim\operatorname{Bernoulli}(1/2)`, let noise
 `N\sim\operatorname{Bernoulli}(q)` be independent of it, and let
-`Y=X\oplus N`, with `0\leq q\leq 1/2`. In bits, define
+`Y=X\oplus N`, with `0\leq q\leq1/2`. In bits, define
 
 \[
 h_2(q)=-q\log_2q-(1-q)\log_2(1-q).
 \]
 
-Then `H(Y)=1`, `H(Y\mid X)=h_2(q)`, and the mutual information is
+### Prediction before reveal
+
+Before calculating, predict whether `Y` is also uniform. What is
+`P(Y=1)` when `q=0.1`, and which one assumption makes your calculation legal?
+
+<details>
+<summary>Reveal after writing the joint-law step.</summary>
+
+The uniform-input and independence assumptions give
+
+\[
+\begin{aligned}
+P(Y=1)
+&=P(X=0,N=1)+P(X=1,N=0)\\
+&=\tfrac12q+\tfrac12(1-q)=\tfrac12.
+\end{aligned}
+\]
+
+So `H(Y)=1`. Given `X=x`, XOR by the known bit only relabels `N`, so
+`H(Y\mid X=x)=H(N)=h_2(q)`. Averaging over `X` gives
+`H(Y\mid X)=h_2(q)`, and therefore
 
 \[
 I(X;Y)=H(Y)-H(Y\mid X)=1-h_2(q).
 \]
+
+</details>
+
+The equality `1-h_2(q)` is not the generic mutual information for a biased
+input: then `H(Y)` need not be one. This is a one-use BSC calculation; it is
+not yet the rate-distortion theorem or a finite-code benchmark.
 
 For this **uniform iid binary source** with **Hamming distortion**
 `d(x,\hat x)=\mathbf 1[x\ne\hat x]`, the asymptotic rate-distortion function
@@ -1006,10 +1053,11 @@ those source, distortion, and asymptotic coding assumptions—not a generic
 quality score, a finite-code benchmark, a privacy guarantee, or a reason to
 choose a stakeholder's acceptable error rate.
 
-At `q=0.1`, the channel carries about `1-h_2(0.1)\approx0.531` bits per source
-bit. At `q=0.5`, it carries zero. The same numerical formula at a distortion
-level `D=0.1` belongs to a different question: how much representation rate is
-needed under the declared loss. Do not silently exchange those questions.
+At `q=0.1`, this declared channel/input pair has about
+`1-h_2(0.1)\approx0.531` bits of mutual information per use. At `q=0.5`, it
+has zero. The same numerical formula at a distortion level `D=0.1` belongs to
+a different question: how much representation rate is needed under the
+declared loss. Do not silently exchange those questions.
 
 ### Transfer task — changed source or distortion
 
@@ -1292,6 +1340,41 @@ declared source law, distortion measure, units, and theorem regime; it is not
 a portable quality score.
 </details>
 
+8. A constrained solver reports a small displayed primal/dual gap on one
+   finite problem. A teammate says this proves a KKT certificate and global
+   optimality. What is the strongest response?
+   - A. Agree: a small numerical gap establishes every KKT assumption.
+   - B. Inspect primal/dual feasibility, stationarity, complementarity,
+     convention, convexity, and any stated constraint qualification before
+     making a certificate or globality claim.
+   - C. Ignore the constraints because the solver returned a result.
+   - D. Conclude that every nonconvex problem has strong duality.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Misconception repaired: a displayed numerical gap is finite
+evidence under a solver and formulation contract. It does not supply missing
+KKT/Slater conditions or turn a local calculation into a general certificate.
+</details>
+
+9. A mean-field variational family reaches a higher ELBO than its earlier
+   iterate. What is the strongest supported statement?
+   - A. The approximate posterior is exact and the model is correct.
+   - B. The system is calibrated and safe to deploy.
+   - C. Under the declared model, support, estimator, and family, the objective
+     improved; family restriction, model misspecification, and decision value
+     remain unresolved.
+   - D. The KL direction no longer matters because the ELBO increased.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: C.** Misconception repaired: an ELBO is a model-and-family objective.
+It can tighten a declared lower bound without proving an exact posterior,
+correct model specification, calibrated uncertainty, or useful decision.
+</details>
+
 ### Distractor-to-misconception map
 
 | Question | Fragile idea exposed by the distractors | Smallest repair move |
@@ -1303,20 +1386,23 @@ a portable quality score.
 | 5 | one favorable noisy run proves unbiased reliable SGD | state the estimator target, sampling/dependence rule, and repeated-run boundary |
 | 6 | support failures are harmless numerical edge cases | repair the support/model boundary before evaluating KL |
 | 7 | an information formula stays valid when source or loss changes | restate the joint law and distortion/utility before deriving a replacement |
+| 8 | a small displayed duality gap supplies KKT/Slater conditions | name feasibility, stationarity, complementarity, convexity, and qualification before a certificate claim |
+| 9 | a higher ELBO proves exact inference or a correct model | name the model, family, support, and remaining approximation/model gap |
 
 ### Misconception repair key
 
 When an answer is fragile, repair the narrowest confusion first: ordinary
 stationarity is not constrained feasibility; a finite trace is not a
-convergence theorem; a support mismatch is not a harmless numerical detail;
-and a rate-distortion formula is not portable across source or loss changes.
-Then change one premise and make a new prediction before rereading the
-explanation.
+convergence theorem; a support mismatch is not a harmless numerical detail; a
+rate-distortion formula is not portable across source or loss changes; a small
+numerical gap is not a KKT certificate; and a higher ELBO is not exact
+inference. Then change one premise and make a new prediction before rereading
+the explanation.
 
 **Review schedule:** retrieve the invariant and one counterexample after 1,
 3, 7, 14, and 30 days. On days 7 and 30, change one premise: a nonconvex
-objective, a violated qualification, dependent gradients, or a support
-mismatch. Update—not erase—the earlier evidence card.
+objective, a violated qualification, dependent gradients, a support mismatch,
+or a restricted variational family. Update—not erase—the earlier evidence card.
 
 ---
 
@@ -1414,7 +1500,7 @@ access and reuse records remain in the adjacent candidate source ledger.
 | [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | `C01`, `C04–C05`, Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
 | [CMU 10-725 Convex Optimization](https://stat.cmu.edu/~siva/teaching/725/) | `C02–C06`, Sessions 2–5: connect gradient, projected/stochastic methods, duality/KKT, and nonconvex boundaries without copying its course sequence or assessments. | Link-only/original Atlas cards. This is a calibration route, not a promise of CMU-equivalent coverage, labs, or grading. |
 | [Robbins and Monro, *A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586) and [Ghadimi and Lan, *Stochastic First- and Zeroth-Order Methods*](https://doi.org/10.1137/120880811) ([arXiv preprint](https://arxiv.org/abs/1309.5549)) | `C06`, Session 5: stated stochastic-estimator and approximate-stationarity boundaries. | Link-only/original Atlas examples; do not copy proofs, figures, experimental setups, or publisher text. |
-| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | `C07`, Session 6: entropy, cross-entropy, KL direction, support, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
+| [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) and [Stanford EE 376A Information Theory notes](https://web.stanford.edu/class/ee376a/files/scribes/lecture_notes.pdf) | `C07`, Session 6: entropy, conditional entropy, KL direction, support, the uniform-input BSC derivation, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
 | [Blei, Kucukelbir, and McAuliffe, *Variational Inference*](https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf) | `C08`, Session 6: ELBO/KL direction, variational-family assumptions, and approximation limits. | Link-only/original Atlas derivation and example; do not copy paper text, figures, tables, or proofs. |
 | [SciPy `minimize` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) | `C04–C05`, Sessions 3–5: distinguish a mathematical condition from an API/grammar/solver contract. | Documentation is linked for contract reading; fixtures remain original and pin versions before a concrete implementation claim. |
 

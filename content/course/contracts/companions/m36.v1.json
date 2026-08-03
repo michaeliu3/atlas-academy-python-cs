@@ -12,7 +12,7 @@
   "guideBinding": {
     "path": "content/course/module-companion-guides.v1.json",
     "locator": "/guides/35",
-    "digest": "sha256:333f104b0dcedfa432ba688e86850f251bb1fd8dbbd4d40a61dad81829c9bf35"
+    "digest": "sha256:8011614971aaef4e9c2bef5599c75064c29f4b311191161ca30b519e7d704b82"
   },
   "teachingAssistant": {
     "role": "supportive-oral-defense",

@@ -82,6 +82,11 @@ test("private guided continuation remains distinct from portal release", async (
   );
   assert.match(privateRoute, /for a finite joint distribution/u);
   assert.ok(privateRoute.includes("\\mathbb E[\\widehat g_t\\mid\\mathcal F_{t-1}]"));
+  assert.match(privateRoute, /M31 bounded reference-card set/u);
+  assert.match(privateRoute, /m31RidgeConditioningCard\(\)/u);
+  assert.match(privateRoute, /m31GradientDescentRateCard\(10\)/u);
+  assert.match(privateRoute, /evaluateM31BinaryChannelDistortion/u);
+  assert.match(privateRoute, /m31TwoStateElboCard\(\)/u);
   assert.match(moduleThirtyTwo, /\*\*Canonical academic prerequisites:\*\*/u);
   assert.match(
     moduleThirtyTwo,

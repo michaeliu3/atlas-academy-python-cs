@@ -6,7 +6,10 @@ const m31Path = "content/authoring/m31_optimization_information_workbook.v1.md";
 const m32Path = "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md";
 
 test("M31 exposes compact claim-to-source routes and labels non-runnable sketches", async () => {
-  const m31 = await readFile(m31Path, "utf8");
+  const [m31, bridge] = await Promise.all([
+    readFile(m31Path, "utf8"),
+    readFile("content/course/m31-m36-prerequisite-session-bridge.v1.json", "utf8"),
+  ]);
 
   assert.match(m31, /C04 -> S02–S04/u);
   assert.match(m31, /C05 -> S02–S04, S09–S10/u);
@@ -19,6 +22,13 @@ test("M31 exposes compact claim-to-source routes and labels non-runnable sketche
   assert.match(m31, /```text\nraw = point - step_size \* gradient\(point\)/u);
   assert.match(m31, /language-neutral estimator pseudocode, not a standalone Python/u);
   assert.match(m31, /```text\nlog_weight = log_joint\(x, z\) - log_q\(z, x\)/u);
+
+  const m31Sessions = JSON.parse(bridge).modules.find(({ moduleId }) => moduleId === "m31").sessionSpine;
+  const sessionFour = m31Sessions.find(({ id }) => id === "m31-s04");
+  const sessionFive = m31Sessions.find(({ id }) => id === "m31-s05");
+  assert.match(sessionFour.progression, /projected-gradient update/u);
+  assert.doesNotMatch(sessionFour.progression, /coordinate|proximal/u);
+  assert.match(sessionFive.progression, /Information quantities begin in Session 6/u);
 });
 
 test("M32 connects claim tags to one pinned CPU-only NumPy observation", async () => {

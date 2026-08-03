@@ -105,13 +105,19 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /Counterexample — cached, dependent sampling/u);
   assert.match(candidate, /Multiple-start counterexample — a small gradient is not a good basin/u);
   assert.match(candidate, /cached estimate is `-1`/u);
-  assert.match(candidate, /Mutual-information and distortion card — one narrow channel model/u);
+  assert.match(candidate, /Conditional entropy before mutual information/u);
+  assert.ok(candidate.includes("H(Y\\mid X)=\\sum_x P(X=x)H(Y\\mid X=x)"));
+  assert.match(candidate, /Mutual-information and distortion card — derive one BSC first/u);
+  assert.match(candidate, /P\(Y=1\)[\s\S]{0,180}\\tfrac12/u);
+  assert.match(candidate, /not the generic mutual information for a biased\s+input/u);
   assert.match(candidate, /R\(D\)=1-h_2\(D\)/u);
   assert.match(candidate, /One-step ELBO identity — derive the gap before trusting the objective/u);
   assert.match(candidate, /Two-state ELBO equality table/u);
   assert.match(candidate, /m31TwoStateElboCard\(\)/u);
   assert.match(candidate, /needed log-ratio expectations are\s+integrable/u);
   assert.match(candidate, /posterior may not belong to the\s+family/u);
+  assert.match(candidate, /small displayed primal\/dual gap/u);
+  assert.match(candidate, /mean-field variational family reaches a higher ELBO/u);
   assert.match(candidate, /CMU 10-725 Convex Optimization/u);
   assert.match(candidate, /M25 evidence receipt/u);
   assert.match(candidate, /Distractor-to-misconception map/u);
@@ -155,6 +161,11 @@ test("the frozen M31 review candidate retains the study-ready structural spine",
   assert.ok(candidate.includes("A declared feasible domain \\(C\\) is **convex**"));
   assert.match(candidate, /at exact `raw\.x \+ raw\.y = 1`/u);
   assert.match(candidate, /For a finite joint distribution/u);
+  assert.match(candidate, /Conditional entropy before mutual information/u);
+  assert.ok(candidate.includes("H(Y\\mid X)=\\sum_x P(X=x)H(Y\\mid X=x)"));
+  assert.match(candidate, /not the generic mutual information for a biased\s+input/u);
+  assert.match(candidate, /small displayed primal\/dual gap/u);
+  assert.match(candidate, /mean-field variational family reaches a higher ELBO/u);
 
   const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: reviewCandidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });

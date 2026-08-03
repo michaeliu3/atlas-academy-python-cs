@@ -51,7 +51,7 @@
     },
     {
       "id": "m31-s04",
-      "title": "Algorithms, step rules, and convergence evidence",
+      "title": "Projected updates, step rules, and bounded convergence evidence",
       "sessionHeadingAnchor": "session-4--read-stopping-evidence-not-solver-mythology",
       "usesPrerequisiteModuleIds": ["m28", "m29"],
       "outputs": [
@@ -65,7 +65,7 @@
     },
     {
       "id": "m31-s05",
-      "title": "Stochastic optimization and information trade-offs",
+      "title": "Stochastic optimization, sampling, and finite evidence",
       "sessionHeadingAnchor": "session-5--noise-is-evidence-not-a-nuisance-to-hide",
       "usesPrerequisiteModuleIds": ["m30"],
       "outputs": [

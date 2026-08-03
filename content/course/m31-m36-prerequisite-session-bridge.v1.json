@@ -106,15 +106,15 @@
         },
         {
           "id": "m31-s04",
-          "title": "Algorithms, step rules, and convergence evidence",
-          "progression": "Compare gradient, coordinate, proximal, and constrained methods from update rules, cost, assumptions, and failure modes rather than brand names.",
+          "title": "Projected updates, step rules, and bounded convergence evidence",
+          "progression": "Read a projected-gradient update beside an exact-gradient rate card; separate their objective and constraint assumptions, and explain why a finite trace, solver status, or one bound cannot transfer to another method.",
           "usesPrerequisiteModuleIds": ["m28", "m29"],
           "plannedEvidence": "Solver-selection rationale with a convergence-condition checklist."
         },
         {
           "id": "m31-s05",
-          "title": "Stochastic optimization and information trade-offs",
-          "progression": "Connect sampling, noise, regularization, entropy/information quantities, and finite compute budgets without equating training loss with reliable knowledge.",
+          "title": "Stochastic optimization, sampling, and finite evidence",
+          "progression": "Make estimator and sampling assumptions explicit, inspect a bounded noisy trace and nonconvex counterexample, and record why one run is not a convergence or population claim. Information quantities begin in Session 6.",
           "usesPrerequisiteModuleIds": ["m30"],
           "plannedEvidence": "Stochastic-information experiment card with a counterexample to one-run reasoning."
         },

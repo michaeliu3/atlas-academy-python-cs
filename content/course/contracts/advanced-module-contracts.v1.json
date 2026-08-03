@@ -368,12 +368,12 @@
           },
           {
             "id": "m31-s04",
-            "title": "Algorithms, step rules, and convergence evidence",
+            "title": "Projected updates, step rules, and bounded convergence evidence",
             "plannedArtifact": "Solver-selection rationale"
           },
           {
             "id": "m31-s05",
-            "title": "Stochastic optimization and information trade-offs",
+            "title": "Stochastic optimization, sampling, and finite evidence",
             "plannedArtifact": "Stochastic-information experiment card"
           },
           {

@@ -7,6 +7,16 @@ actually published.
 
 ## Unreleased
 
+- Repaired the advanced learning handoff rather than adding a new surface:
+  M31 now derives conditional entropy and the uniform-input BSC calculation
+  before using mutual information, adds KKT-certificate and ELBO-family-gap
+  misconception repairs, and exposes its existing ridge, rate, information,
+  and ELBO evidence cards to the private chat route. Its session bridge/source
+  map now describe the delivered projected/stochastic scope. M36's reusable
+  TA/Study Partner guide now rehearses its actual finite-class/PAC/margin-bound
+  material rather than unrelated regret/lower-bound ideas. These are
+  source-calibrated authoring improvements only: M31–M36 remain hidden,
+  authoring-only drafts, and M25/M26 remain preview-gated.
 - Refined the advanced evidence chain after a targeted source/calibration pass:
   M21/M22 now distinguish trace, identity, and effect-time boundaries; M28
   states the rectangular full-column-rank condition; M30 separates empirical

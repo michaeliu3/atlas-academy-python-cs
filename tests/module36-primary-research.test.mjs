@@ -70,12 +70,13 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
 });
 
 test("M36 Session 4 makes reproducibility-claim debugging explicit", async () => {
-  const [workbook, companion] = await Promise.all([
+  const [workbook, companion, guides] = await Promise.all([
     readFile(
       new URL("../content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", import.meta.url),
       "utf8",
     ),
     readJson("../content/course/contracts/companions/m36.v1.json"),
+    readJson("../content/course/module-companion-guides.v1.json"),
   ]);
 
   assert.match(workbook, /### Debugging probe — repair one reproducibility claim/u);
@@ -84,4 +85,8 @@ test("M36 Session 4 makes reproducibility-claim debugging explicit", async () =>
   assert.match(workbook, /same seed/u);
   assert.match(companion.teachingAssistant.repairMove, /debug/u);
   assert.match(companion.studyPartner.rehearsalMove, /debug/u);
+  const m36Guide = guides.guides.find(({ moduleId }) => moduleId === "m36");
+  assert.match(m36Guide.centralModel, /finite-class or PAC generalization claim/u);
+  assert.match(m36Guide.traceOrDerivation, /Hoeffding-plus-union-bound/u);
+  assert.doesNotMatch(m36Guide.traceOrDerivation, /regret|lower-bound/u);
 });

@@ -323,8 +323,8 @@
     {
       "moduleId": "m36",
       "lens": "formal",
-      "centralModel": "a learning guarantee or lower bound tied to a hypothesis class, assumptions, observable evidence, and system limits",
-      "traceOrDerivation": "reconstruct a generalization, regret, margin, or lower-bound proof idea and its computational consequence",
+      "centralModel": "a conditional finite-class or PAC generalization claim, or a scoped margin-bound reading, tied to a hypothesis class, assumptions, observable evidence, and system limits",
+      "traceOrDerivation": "reconstruct a finite-class Hoeffding-plus-union-bound proof idea, PAC quantifier order, or margin-bound scope and its non-deployment consequence",
       "misconception": "a theorem proves a deployed model will work or a benchmark score demonstrates the theorem's assumptions",
       "boundary": "the distribution, class, sample, optimization, and implementation assumptions that prevent overclaiming",
       "transfer": "deciding whether a theoretical guarantee should change a model-release or monitoring decision"
