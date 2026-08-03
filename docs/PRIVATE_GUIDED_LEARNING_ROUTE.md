@@ -52,18 +52,31 @@ These six packs are structured for private instructor-led study. They remain
 reviewed-release material, or evidence that a learner has completed the
 advanced chain.
 
-| Module | Private study pack | Use it to build |
-| --- | --- | --- |
-| M31 | [Optimization & Information](../content/authoring/m31_optimization_information_workbook.v1.md) | Formulation, constraints, finite optimization evidence, and information trade-offs. |
-| M32 | [Systems Languages, Scientific Python & Accelerators](../content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md) | Array/ownership/execution traces, numerical policy, and reproducible measurements. |
-| M33 | [Formal Languages, Computability & Complexity](../content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md) | Formal claims, reductions, limits, and complexity boundaries. |
-| M34 | [Classical AI: Search, Constraints & Decision](../content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md) | State formulation, search/constraint evidence, and bounded decision support. |
-| M35 | [Machine Learning & Representation](../content/authoring/m35_machine_learning_representation_workbook.v1.md) | Representation, split/evaluation discipline, debugging, and model evidence. |
-| M36 | [Learning Theory & Reliable Deep-Learning Systems](../content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md) | Theorem scope, reliability, shift, monitoring, and human-control boundaries. |
+| Module | Private guided-study draft | Frozen hidden review candidate | Use it to build |
+| --- | --- | --- | --- |
+| M31 | [Optimization & Information](../content/authoring/m31_optimization_information_workbook.v1.md) | [M31 candidate](../content/modules/31_optimization_information.md) | Formulation, constraints, finite optimization evidence, and information trade-offs. |
+| M32 | [Systems Languages, Scientific Python & Accelerators](../content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md) | [M32 candidate](../content/modules/32_systems_languages_scientific_python_accelerators.md) | Array/ownership/execution traces, numerical policy, and reproducible measurements. |
+| M33 | [Formal Languages, Computability & Complexity](../content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md) | [M33 candidate](../content/modules/33_formal_languages_computability_complexity.md) | Formal claims, reductions, limits, and complexity boundaries. |
+| M34 | [Classical AI: Search, Constraints & Decision](../content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md) | [M34 candidate](../content/modules/34_classical_ai_search_constraints_decision.md) | State formulation, search/constraint evidence, and bounded decision support. |
+| M35 | [Machine Learning & Representation](../content/authoring/m35_machine_learning_representation_workbook.v1.md) | [M35 candidate](../content/modules/35_machine_learning_representation.md) | Representation, split/evaluation discipline, debugging, and model evidence. |
+| M36 | [Learning Theory & Reliable Deep-Learning Systems](../content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md) | [M36 candidate](../content/modules/36_statistical_learning_theory_reliable_deep_learning.md) | Theorem scope, reliability, shift, monitoring, and human-control boundaries. |
 
 For each pack, work one session at a time. Paste or attach only the relevant
 section to the designated chat when the chat cannot see the private repository;
 do not ask it to invent missing sources, experiments, or results.
+
+The two columns have different jobs. The authoring workbook is the private
+guided-study draft. The candidate is a separate, fixed review scope selected by
+`content/course/contracts/review-candidates/m31.v1.json` through `m36.v1.json`,
+with its own adjacent candidate source ledger. A file under `content/modules/`
+does **not** make it a portal module: M31–M36 remain absent from the manifest,
+hidden from the reader, and authoring-only in the canonical graph.
+
+Name the exact copy in a chat handoff. Use the frozen candidate when a session
+is intended to inform a qualified delivery/readability review; use the
+authoring workbook for private drafting or exploration. Do not silently treat
+feedback about one copy as evidence about the other, and do not call either a
+portal release, Core credit, or mastery evidence.
 
 ## Continue M31–M36 after Session 1
 
@@ -116,7 +129,10 @@ publication, or completion occurred without direct evidence.
 M31 remains a private, authoring-only instructor-led pack; this starts a
 learning conversation, not a release, grade, or completion record. In the
 designated **Study Partner** chat, first say `records on` only if you want its
-configured concise Notion-note policy to apply. Then send or say:
+configured concise Notion-note policy to apply. This pilot uses the frozen
+[M31 hidden review candidate](../content/modules/31_optimization_information.md)
+and its [candidate source ledger](../content/source-maps/module31_optimization_information.md),
+not the authoring draft. Then send or say:
 
 ```text
 Start M31, Session 1 — Formulate before you optimize. I will build the
