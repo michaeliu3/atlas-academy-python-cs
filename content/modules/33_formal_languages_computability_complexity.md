@@ -569,7 +569,7 @@ it is neither a regularity proof nor an undecidability oracle.
 **When does a machine answer the question we asked, and when does it only
 answer a smaller syntactic question?**
 
-**Claim/source trace:** `M33-C05–M33-C06 -> S33-01, S33-04`; `M33-C07 ->
+**Claim/source trace:** `M33-C05–M33-C06 -> S33-01, S33-04, S33-14`; `M33-C07 ->
 S33-01, S33-05` — acceptance, halting, semantic properties, and bounded
 observation require different machine/question contracts.
 
@@ -593,6 +593,10 @@ It assumes a teaching-program interface with `initial_state`, `halted`, and
 `step`; its purpose is to expose the finite observation boundary rather than
 to prescribe a program API:
 
+Declare \(c_0\) as the initial configuration and \(c_i\) as the configuration
+after \(i\) calls to `step`. “Within `steps = k` transitions” inspects
+\(c_0,c_1,\ldots,c_k\), not merely the configurations before those transitions.
+
 ~~~text
 def run_for_at_most(program, input_value, steps):
     machine = program.initial_state(input_value)
@@ -600,17 +604,22 @@ def run_for_at_most(program, input_value, steps):
         if machine.halted:
             return "halted"
         machine = machine.step()
-    return "unknown"
+    return "halted" if machine.halted else "unknown"
 ~~~
 
-If it returns unknown, is the program proved not to halt?
+**Predict before revealing.** Let \(c_0\) be nonhalting,
+`step(c_0) = c_1`, and let \(c_1\) halt. With `steps = 1`, should this routine
+report `halted` or `unknown`? Then ask: if it returns `unknown`, is the program
+proved not to halt?
 
 <details>
 <summary>Reveal after writing your prediction.</summary>
 
-**Reveal:** no. The function decides only whether it observed halting within
-the declared step budget and model. It gives a useful finite diagnostic, not a
-universal halting decider.
+**Reveal:** it reports `halted`: the post-loop check observes \(c_1\), the
+configuration reached by the one permitted transition. In general, `unknown`
+means no halting configuration was observed among \(c_0,\ldots,c_k\) under the
+declared model. It gives a useful finite diagnostic, not a universal halting
+decider or a proof that the program never halts.
 
 </details>
 
@@ -1262,7 +1271,8 @@ This workbook uses original explanations, fixtures, diagrams, and code. It
 does not reproduce source prose, figures, lecture slides, problem sets, or
 solutions. The established reading routes below were checked on **2026-08-01**;
 the targeted construction and proof-audit routes were rechecked on
-**2026-08-02**.
+**2026-08-02**, with the bounded-configuration route rechecked on
+**2026-08-03**.
 
 ### Learner-facing source links
 
@@ -1273,7 +1283,7 @@ the targeted construction and proof-audit routes were rechecked on
 | [CMU 15-251 Foundations of Theoretical Computer Science schedule](https://www.cs.cmu.edu/~arielpro/15251f15/schedule.html) and [Georgia Tech CS 4510 Formal Languages and Automata](https://faculty.cc.gatech.edu/~ladha/S26/4510/) | Sessions 2–4: finite automata, computability, and reductions as comparison anchors for the two compact construction traces. | University-hosted routes are linked for study only; Atlas does not copy lectures, problem sets, answers, tools, or grading artifacts. |
 | [Georgia Tech CS 6515 Intro to Graduate Algorithms](https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms) | Sessions 4–5: proof-aware algorithm analysis, reductions, and complexity reasoning used as an advanced calibration route. | Link-only/original Atlas exercises; it is not a substitute for the course’s term-long work or feedback. |
 | [Cook’s 1971 complexity paper](https://doi.org/10.1145/800157.805047) and [Karp’s reduction paper](https://doi.org/10.1007/978-1-4684-2001-2_9) | Sessions 4–5: historical/primary anchors for reduction direction and encoded problem families. | Publisher records are link/citation only; do not copy proof prose, figures, or problem sets. |
-| [MIT 18.404J Theory of Computation lecture notes](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/) and [Stanford CS103 theorem/definition reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | Sessions 1–3: regex/NFA/DFA progression, CFG/stack distinction, pumping-lemma quantifiers, and encoded-machine assumptions before a diagonal argument. | Targeted 2026-08-02 calibration only; link-only/original Atlas traces, proof audits, and counterexamples. |
+| [MIT 18.404J Theory of Computation lecture notes](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/), [Lecture 6: TM Variants, Church–Turing Thesis](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/7405f6112c8ca7242e1edd9a021c1e63_MIT18_404f20_lec6.pdf), and [Stanford CS103 theorem/definition reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | Sessions 1–3: regex/NFA/DFA progression, CFG/stack distinction, pumping-lemma quantifiers, and encoded-machine assumptions before a diagonal argument or bounded configuration trace. | Targeted 2026-08-02/03 calibration only; link-only/original Atlas traces, proof audits, and counterexamples. |
 | [MIT 6.046J Lecture 17: Complexity and NP-completeness](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2012/b4562881f2af637e09e806450e9b62c8_MIT6_046JS12_lec17.pdf) | Session 5: decision, certificate/verifier, and related search/optimization distinctions. | Link-only/original Atlas comparison table; do not copy lecture prose, figures, or exercises. |
 
 For the source-to-claim ledger, access/reuse cautions, and primary-source

@@ -19,7 +19,7 @@ defense, accessibility review, CI run, or learner mastery exists.
 **Research access dates:** S33-01 through S33-07 were accessed on 2026-07-31;
 the additional university calibration routes S33-08 through S33-10 were checked
 on 2026-08-01; the targeted authoring-calibration routes S33-11 through S33-13
-were checked on 2026-08-02. The source set deliberately uses original papers or
+were checked on 2026-08-02; and S33-14 was checked on 2026-08-03. The source set deliberately uses original papers or
 official university materials. This note is original explanation and link-only research.
 Atlas must not copy source prose, theorem proofs, figures, slides, problem sets,
 code, scans, or exercises into a future learner asset without a separate
@@ -91,7 +91,7 @@ evidence.
 
 S33-01 through S33-07 were accessed on **2026-07-31**; S33-08 through S33-10
 were checked on **2026-08-01**; S33-11 through S33-13 were checked on
-**2026-08-02**. “Link-only/original paraphrase” is the present Atlas decision
+**2026-08-02**; and S33-14 was checked on **2026-08-03**. “Link-only/original paraphrase” is the present Atlas decision
 even where a work can be read online. It avoids silently
 importing copyright, attribution, exercise, figure, or proof-text obligations
 into later material.
@@ -112,6 +112,7 @@ into later material.
 | S33-11 | MIT OpenCourseWare, [18.404J Theory of Computation lecture-note index](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/) | MIT course staff; official undergraduate/graduate course material | Checked progression: regular expressions → finite automata, regular pumping lemma and automata → regular expressions/CFGs, PDA ↔ CFG, then undecidability and P/NP. Supports a connected original regex–NFA–DFA, CFG/stack, and pumping-lemma audit sequence rather than a vocabulary list. | MIT OCW links a Creative Commons license, subject to item notices. Atlas remains **link-only/original paraphrase**: no copied slides, notes, proof text, figures, exercises, or code without asset-level review. |
 | S33-12 | Stanford, [CS103 Theorem and Definition Reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | Stanford course staff; official university-hosted course reference | Direct definitions for regular expressions, NFA, DFA, subset construction, CFG, stack-based PDA, regular pumping, polynomial verifier, and a diagonal language over encoded Turing machines. Supports stating the formal object and quantifier/encoding assumptions before an original trace or proof audit. | Course reference is linked for study. No blanket Atlas reuse permission is recorded; **link-only/original paraphrase** and independently authored examples only. |
 | S33-13 | MIT OpenCourseWare, [6.046J Lecture 17: Complexity and NP-completeness](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2012/b4562881f2af637e09e806450e9b62c8_MIT6_046JS12_lec17.pdf) | MIT course staff; official algorithms lecture note | Distinguishes a yes/no decision problem from a related search problem, places certificates/verifiers in the decision formulation, and uses a minimum-spanning-tree example. Supports an original decision/search/optimization comparison that does not conflate returning a candidate with verifying a bounded decision claim. | MIT OCW source is linked solely for calibration. Atlas keeps **link-only/original paraphrase** and must not reuse the note’s prose, figures, exercises, or derivations without a separate asset review. |
+| S33-14 | MIT OpenCourseWare, [18.404J F2020 Lecture 6: TM Variants, Church–Turing Thesis](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/7405f6112c8ca7242e1edd9a021c1e63_MIT18_404f20_lec6.pdf) and Stanford [CS103 Theorem and Definition Reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | MIT and Stanford course staff; official university-hosted course material | Calibrates an original Session 3 configuration-boundary explanation: a bounded simulation observes halting only if a halting configuration occurs among \(c_0,\ldots,c_k\), without becoming a total halting decider. | Accessed 2026-08-03. Link-only/original paraphrase; do not copy source prose, figures, pseudocode, or exercises. |
 
 ### Targeted 2026-08-02 calibration routing
 

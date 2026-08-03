@@ -380,6 +380,42 @@ This is last-in-first-out behavior, not a lowest-\(g\) policy. Before writing
 more code, specify priority key, tie rule, duplicate policy, goal test timing,
 cost domain, and whether a state may be reopened.
 
+### Code-reading counterexample — generation is not frontier removal
+
+Read the candidate's stopping line before accepting its search label:
+
+~~~text
+for successor in successors(removed_node):
+    if successor.is_goal:
+        return successor.path  # generation-time goal test
+    frontier.push_or_replace(successor)
+~~~
+
+Use \(h(n)=0\) and the positive-cost graph below, with `G` first in `S`'s
+successor order:
+
+~~~text
+S --10--> G
+S --1--> A --1--> G
+~~~
+
+**Predict before revealing.** Which detail changes the least-cost claim here:
+the priority key, the goal-test timing, or the graph label “A-star”?
+
+<details>
+<summary>Reveal after committing to one detail.</summary>
+
+**Reveal:** the generation-time line returns \(S\to G\) with cost \(10\)
+before the priority queue removes \(A\) with cost \(1\). With the same
+lowest-\(f\) policy (here \(f=g\)), a goal test on frontier removal, and a
+lower-\(g\) replacement policy, the trace removes \(A\), replaces the pending
+goal path by cost \(2\), then removes \(G\). Goal-test timing is executable
+semantics, not a cosmetic comment. This is one declared implementation
+counterexample, not a claim that every early-stop policy is invalid under every
+separately proved regime.
+
+</details>
+
 ### Exact counterexample — admissible is not enough for no-reopen graph search
 
 Keep the graph, heuristic, and operational choices together. Let the positive
@@ -1314,15 +1350,15 @@ This workbook uses original explanations, fixtures, diagrams, and code. It does
 not reproduce source prose, figures, course slides, problem sets, or solutions.
 The established reading routes below were checked on **2026-08-01**; targeted
 model-construction routes were rechecked on **2026-08-02**, with focused
-Berkeley decision-network, NIST, and CMU planning-semantics routes rechecked
-on **2026-08-03**. Exact source-level dates remain in the candidate source
-ledger.
+Berkeley informed-search/decision-network, NIST, and CMU planning-semantics
+routes rechecked on **2026-08-03**. Exact source-level dates remain in the
+candidate source ledger.
 
 ### Learner-facing source links
 
 | Source | Session/claim linkage | Reuse boundary |
 | --- | --- | --- |
-| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) with its [informed-search route](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP-filtering route](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), [decision-networks route](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html), and [MDP route](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | Sessions 1–5: state/observation boundaries, the exact distinction between admissibility/consistency in graph search, propagation/requeue direction, conditional expected utility, planning, and sequential-decision scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
+| [UC Berkeley CS188 Introduction to Artificial Intelligence](https://inst.eecs.berkeley.edu/~cs188/) with its [informed-search route](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP-filtering route](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), [decision-networks route](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html), and [MDP route](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) | Sessions 1–5: state/observation boundaries, the exact distinction between admissibility/consistency and goal-on-frontier-removal in graph search, propagation/requeue direction, conditional expected utility, planning, and sequential-decision scope. | Link-only/original Atlas fixtures; do not copy course projects, slides, solutions, or autograder material. |
 | [MIT 6.034 Artificial Intelligence](https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/) | Sessions 1–5: knowledge/problem solving, search, and AI representations as a connected conceptual route. | MIT OCW assets have their own notices; link-only/original Atlas explanations and diagrams. |
 | [Georgia Tech CS 6601 Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Sessions 1–6: algorithms, probability, linear algebra, and AI application scope used to calibrate prerequisites and transfer. | Link-only/original Atlas exercises; not equivalent to term-long project work or instructor feedback. |
 | [CMU 07-280 AI/ML I: Markov Decision Process notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html) | Session 5: distinction between a one-shot expected-utility comparison and a sequential MDP policy with state transitions and an objective over time. | Course-staff notes are a reading route only; Atlas uses an original boundary example and does not copy notes, figures, exercises, or code. |

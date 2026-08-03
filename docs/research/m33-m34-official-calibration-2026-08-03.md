@@ -45,6 +45,20 @@ asset-level review.
    observation/belief boundary, revise the representation, or withdraw the
    plan claim. This uses CMU 15-887 as a link-only calibration route and does
    not add a POMDP, solver, or real-world planning lab.
+7. **M33 Session 3 bounded execution:** the configuration trace now defines
+   \(c_0,\ldots,c_k\) for a budget of \(k\) transitions and checks the terminal
+   configuration after the final permitted transition. A one-step halting trace
+   makes the former off-by-one ambiguity visible while preserving the finite
+   observation/non-decider boundary. It is calibrated against MIT
+   [18.404J Lecture 6](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/7405f6112c8ca7242e1edd9a021c1e63_MIT18_404f20_lec6.pdf)
+   and the Stanford CS103 reference, with original Atlas pseudocode only.
+8. **M34 Session 2 goal-test timing:** an original \(h=0\) trace now contrasts
+   a generation-time goal return with goal-on-frontier-removal under a declared
+   lower-\(g\) replacement policy. The first returns a cost-10 successor before
+   the cost-1 frontier entry is removed; the second reaches the cost-2 goal
+   path. This is a scoped code-reading counterexample, not a universal theorem,
+   calibrated against Berkeley [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html)
+   and its [A* graph-search exam analysis](https://inst.eecs.berkeley.edu/~cs188/assets/exam/cs188-sp11-mt1-sol.pdf).
 
 ## Targeted follow-up — proof and posterior continuity
 
