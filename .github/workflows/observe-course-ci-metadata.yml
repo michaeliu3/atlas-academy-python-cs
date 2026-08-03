@@ -85,10 +85,6 @@ jobs:
               run.display_title === expected.displayTitle,
               "readback workflow display title differs from the bounded verification policy",
             );
-            assert(
-              run.display_title === expected.displayTitle,
-              "readback workflow display title differs from the bounded observer policy",
-            );
             assert(run.status === "completed" && run.conclusion === "success", "readback run is not successful");
             assert(
               run.html_url === `https://github.com/${expected.repository}/actions/runs/${runId}`,
@@ -100,8 +96,6 @@ jobs:
               attemptRequest,
               (response) => response.data.jobs,
             );
-            const expectedJobNames = new Set(expected.requiredJobNames);
-            const expectedJobs = jobs.filter((job) => expectedJobNames.has(job.name));
             const jobIds = new Set();
             const jobNames = new Set();
             for (const job of jobs) {
