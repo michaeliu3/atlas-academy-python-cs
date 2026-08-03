@@ -318,6 +318,34 @@ implementation and the mathematical language agree for every possible input.
 
 </details>
 
+### Code-to-spec proof sketch — a trace needs an invariant
+
+Let \(L_{\mathrm{ordered}}=0^*1^*\), including the empty string. For the
+**exact** `ordered_bits_checked` code and its displayed transition map, prove
+the following loop invariant rather than relying on a handful of examples:
+
+> After a prefix has been consumed without returning `False`, `state` is
+> `"zeroes"` exactly when that prefix lies in \(0^*\), and `state` is `"ones"`
+> exactly when it lies in \(0^*1^+\).
+
+Start with the empty prefix in `"zeroes"`. Then audit one symbol at a time:
+
+| Previous invariant case | Next symbol | Transition/result | Why the invariant is preserved or rejection is correct |
+| --- | --- | --- | --- |
+| \(0^*\) / `"zeroes"` | `0` | stay in `"zeroes"` | appending `0` stays in \(0^*\) |
+| \(0^*\) / `"zeroes"` | `1` | move to `"ones"` | appending the first `1` enters \(0^*1^+\) |
+| \(0^*1^+\) / `"ones"` | `1` | stay in `"ones"` | appending `1` stays in \(0^*1^+\) |
+| either live state | any missing transition | return `False` | the extended prefix is not in \(0^*1^*\) under this alphabet |
+
+**Prediction before proof.** Fill the fourth column for yourself before
+reading the table. Then explain why a finite input is accepted exactly when
+its completed prefix remains in one of the two live invariant cases. This is a
+proof sketch for this finite-loop implementation, its `TRANSITIONS` object,
+and the declared alphabet—not a proof about a renamed function, a future
+tokenizer, Unicode normalization, or an arbitrary parser. Change one premise:
+if an engineer adds an `"error"` recovery transition for an unexpected symbol,
+which invariant clause and language definition must be revised together?
+
 ### Design inspection
 
 Write three columns for a tiny language feature:
@@ -932,6 +960,44 @@ This can be read as a certificate checker for one encoding. To make a
 membership argument, name the certificate size bound, input representation,
 and cost of checking every edge. It is not enough to say “the function is
 short.”
+
+### Complete the theorem shape — conditional IS NP-completeness
+
+This compact exercise makes the Session 4 reduction and Session 5 verifier
+belong to the same argument. Work under an explicitly listed graph encoding
+\(E_{\mathrm{exp}}\) where the vertices and edges are part of the input, so
+the number of vertices \(n\) is bounded by the input length. Do **not** assume
+that this certificate-size fact automatically follows from every compressed
+wire format.
+
+Assume, as a known premise under this encoding, that `VC` is NP-complete.
+For `IS`, use a certificate containing exactly \(t\) distinct vertex identifiers.
+The verifier checks the input encoding, the \(t\)-vertex bound, membership of
+each identifier in the declared graph, distinctness, and that no listed edge
+has both endpoints in the certificate. Under \(E_{\mathrm{exp}}\), the
+certificate length and these checks are polynomial in the input length, so
+\(\mathrm{IS}\in\mathrm{NP}\).
+
+Now reuse the Session 4 map
+\((G,k)\mapsto(G,|V|-k)\) and its two-direction iff argument. It gives
+\(\mathrm{VC}\le_m^p\mathrm{IS}\), so the assumed NP-hard source transfers
+NP-hardness to `IS`. Together:
+
+\[
+\text{VC is NP-complete} \quad+\quad
+\text{VC}\le_m^p\text{IS} \quad+\quad
+\text{IS}\in\text{NP}
+\quad\Longrightarrow\quad
+\text{IS is NP-complete}.
+\]
+
+Before revealing that conclusion aloud, point to the exact sentence that
+establishes (1) the known-hard premise, (2) membership, and (3) the directed
+reduction. Then state the practical non-claim: this conditional classification
+does not predict one solver's runtime, prove an instance infeasible, or settle
+\(\mathrm{P}\stackrel{?}{=}\mathrm{NP}\). If the encoding changes, re-audit the
+certificate bound and the running time of the transformation before carrying
+the conclusion forward.
 
 ### Numerical observation boundary
 
