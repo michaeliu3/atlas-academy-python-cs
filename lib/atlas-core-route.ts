@@ -3,6 +3,7 @@ import {
   courseCatalogTotals,
   getCourseGraphModule,
   type CourseModuleState,
+  type FocusedStudyMinutes,
 } from "./course-catalog";
 
 export type AtlasRouteEntry = {
@@ -13,6 +14,7 @@ export type AtlasRouteEntry = {
   prerequisiteNumbers: number[];
   purpose: string;
   masteryGateId: string;
+  focusedStudyMinutes: FocusedStudyMinutes | null;
 };
 
 export type AtlasRoutePhase = {
@@ -46,6 +48,7 @@ export const atlasCoreRoute: AtlasRoutePhase[] = atlasCoreRoutePlan.phases.map(
         prerequisiteNumbers: courseModule.academicPrerequisiteNumbers,
         purpose: courseModule.purpose,
         masteryGateId: courseModule.masteryGateId,
+        focusedStudyMinutes: courseModule.focusedStudyMinutes ?? null,
       };
     }),
   }),

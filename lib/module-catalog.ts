@@ -8,6 +8,7 @@ import {
 import type {
   CourseModuleState,
   CourseRouteRole,
+  FocusedStudyMinutes,
 } from "./course-catalog";
 import type { ModuleStudioId } from "./module-studio-registry";
 
@@ -31,6 +32,7 @@ export type CourseModule = {
   arcId: string;
   wordCount: number;
   estimatedMinutes: number;
+  focusedStudyMinutes: FocusedStudyMinutes | null;
   sourceHash: string;
   state: CourseModuleState;
   routeRole: CourseRouteRole;
@@ -61,7 +63,7 @@ export type ModuleSessionLaunch = {
 };
 
 type ModuleManifest = {
-  schemaVersion: 4;
+  schemaVersion: 5;
   courseGraphSchemaVersion: number;
   routePlanId: string;
   definedModuleCount: number;

@@ -518,7 +518,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "bc3740c43f6162bfd748b0b53b9c8a207a5a0035501f87cb9c9eb7aaba6f10fe"
+      "sha256": "1f8a074f02c8958f052f2136473b5a2d982c68d11f85ed68058ca6d1bc164307"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -654,11 +654,11 @@
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
-      "sha256": "9fa2e4fc5c617bd7c9c6228b92051dc6ddaab473c2985bf83c44496ed45a848e"
+      "sha256": "735c077f822f873fc555bfe806477e86fe10522af506ae62705fa87ca75fa894"
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "ed81fc7fb8bb7fbd03f572d7504528144d83cb11232831d9ec9e2ec45235aff6"
+      "sha256": "27d0527a5d5bc7311457124e655bcc5bcd57f9b4eb49a700a909e2182f20ceff"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
@@ -786,7 +786,7 @@
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
-      "sha256": "99e7b16ac47999e81d242332835b845ecd279b8570fbf7f0dfd3d29c8c582c03"
+      "sha256": "192cd3c35f8a668be2467e5551c1a38b3b4506bdf76172f5dded20df45874a67"
     },
     {
       "path": "content/source-maps/module27_source_audit_addendum.md",
@@ -794,7 +794,7 @@
     },
     {
       "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
-      "sha256": "0fea9f3ff0267cbb16640762cc0ffdec72f5e4d6916c2be495e156542c98fea1"
+      "sha256": "e1da598402056554613b9cfa325d6975da9391ea8168130c643879b6b1528ff6"
     },
     {
       "path": "content/source-maps/module28_linear_algebra_source_audit_addendum.md",
@@ -1082,7 +1082,7 @@
     },
     {
       "path": "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md",
-      "sha256": "99e7b16ac47999e81d242332835b845ecd279b8570fbf7f0dfd3d29c8c582c03"
+      "sha256": "192cd3c35f8a668be2467e5551c1a38b3b4506bdf76172f5dded20df45874a67"
     },
     {
       "path": "public/downloads/module27_reference.py",
@@ -1094,7 +1094,7 @@
     },
     {
       "path": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",
-      "sha256": "0fea9f3ff0267cbb16640762cc0ffdec72f5e4d6916c2be495e156542c98fea1"
+      "sha256": "e1da598402056554613b9cfa325d6975da9391ea8168130c643879b6b1528ff6"
     },
     {
       "path": "public/downloads/module28_linear_algebra_source_audit_addendum.md",

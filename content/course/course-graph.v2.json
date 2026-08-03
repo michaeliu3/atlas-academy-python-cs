@@ -1717,6 +1717,10 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [420, 540],
+        "deepDossier": [600, 780]
+      },
       "sourceMap": "content/source-maps/module21_async_distributed_source_map.md",
       "studioId": "async-distributed",
       "sequencePosition": 26,
@@ -1749,6 +1753,10 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 31,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [420, 540],
+        "deepDossier": [600, 780]
+      },
       "sourceMap": "content/source-maps/module22_security_trust_source_map.md",
       "studioId": "security-trust",
       "sequencePosition": 27,
@@ -1781,6 +1789,10 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 34,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [420, 540],
+        "deepDossier": [600, 780]
+      },
       "sourceMap": "content/source-maps/module23_languages_interpreters_source_map.md",
       "studioId": "language-interpreter",
       "sequencePosition": 28,
@@ -1813,6 +1825,10 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 21,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [360, 480],
+        "deepDossier": [540, 720]
+      },
       "sourceMap": "content/source-maps/module24_cpython_performance_memory_source_map.md",
       "studioId": "runtime-evidence",
       "sequencePosition": 29,
@@ -1917,6 +1933,10 @@
       "masteryGateId": "claims",
       "routeRole": "required",
       "referenceReadMinutes": 48,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [780, 1020],
+        "deepDossier": [1200, 1680]
+      },
       "sourceMap": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
       "studioId": "discrete-math-proof",
       "sequencePosition": 6,
@@ -1950,6 +1970,10 @@
       "masteryGateId": "mathematics",
       "routeRole": "required",
       "referenceReadMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [840, 1080],
+        "deepDossier": [1380, 1920]
+      },
       "sourceMap": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
       "studioId": "linear-algebra-stability",
       "sequencePosition": 19,
@@ -1983,6 +2007,10 @@
       "masteryGateId": "mathematics",
       "routeRole": "required",
       "referenceReadMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [480, 600],
+        "deepDossier": [660, 840]
+      },
       "sourceMap": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
       "studioId": "calculus-continuous-change",
       "sequencePosition": 20,
@@ -2016,6 +2044,10 @@
       "masteryGateId": "mathematics",
       "routeRole": "required",
       "referenceReadMinutes": 46,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [480, 600],
+        "deepDossier": [660, 840]
+      },
       "sourceMap": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
       "studioId": "probability-inference",
       "sequencePosition": 21,

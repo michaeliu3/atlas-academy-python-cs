@@ -4408,6 +4408,14 @@ main.module-library-shell {
   text-transform: uppercase;
 }
 
+.module-effort-boundary {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0.85rem 0 0;
+  max-width: 48rem;
+}
+
 .module-availability-notice {
   background: linear-gradient(135deg, rgba(49, 87, 164, 0.08), rgba(199, 124, 42, 0.11));
   border: 1px solid rgba(49, 87, 164, 0.34);

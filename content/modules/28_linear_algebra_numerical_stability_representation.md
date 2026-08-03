@@ -70,6 +70,23 @@ Typing is intentionally secondary. You will inspect small arrays and one
 bounded teaching model, but most work is reading derivations, drawing spaces,
 repairing code or claims, comparing alternatives, and explaining a result.
 
+### Pace guard: one spine, optional depth
+
+The six sessions form one representation argument. First complete the
+center-column trace with one named map or data matrix visible throughout. The
+right column is a second pass after the core dossier is coherent; it never
+turns a missing norm, hypothesis, coordinate convention, or error model into
+an optional detail.
+
+| Session | Core trace to reconstruct | Optional deepening (second pass) |
+| --- | --- | --- |
+| 1 | Name the field, spaces, shape convention, rank, and one null direction of a matrix-as-map. | Compare bases or row-reduction subtleties without confusing row operations with data semantics. |
+| 2 | Derive a projection or least-squares residual argument under a named inner product. | Compare weighted geometry with QR or SVD-based least-squares routes. |
+| 3 | Check the symmetry/PSD hypothesis before making one spectral claim. | Trace a non-symmetric or defective-matrix boundary. |
+| 4 | Explain SVD, a low-rank loss, and one conditioning-versus-stability experiment. | Study pseudoinverses, perturbation detail, or backward-error reasoning. |
+| 5 | Trace shape, dtype, and objective through one tensor/matrix-calculus computation. | Reconstruct a fuller matrix-calculus derivation or richer tensor operation. |
+| 6 | Derive centered PCA and state the data, scaling, and interpretation non-claim in the representation dossier. | Audit tied spectra, residual/group structure, missingness, or a broader high-dimensional PCA case. |
+
 ---
 
 ## 1. Position in the knowledge system

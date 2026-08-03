@@ -14,6 +14,11 @@
 - **Research snapshot:** **2026-07-30**. Exact URLs, editions, licenses, and
   API behavior must be rechecked if an external asset, a library version, or a
   quotation is reused.
+- **Pacing recheck:** **2026-08-03**. The current MIT 18.06SC, MIT 18.335J,
+  and MIT 18.065 calibration, source links, and reuse boundary are recorded in
+  the [M27–M28 core-trace pacing note](../../docs/research/m27-m28-core-trace-pacing-calibration-2026-08-03.md).
+  It refines planning and progressive disclosure only; it does not make this
+  module a substitute for an undergraduate or graduate course.
 - **Reader-first rule:** mathematical difficulty is preserved while the path is
   made visible: formal definition → plain-language model → minimal
   counterexample/boundary → derivation or trace → computation/library

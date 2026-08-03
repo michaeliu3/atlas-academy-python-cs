@@ -88,6 +88,52 @@ test("readable projections stop at unavailable route nodes instead of bypassing 
   assert.equal(byNumber.get(25)?.previousRouteNumber, 36);
 });
 
+test("the dense systems-and-mathematics route exposes conservative evidence-time bands without relabeling reading time", async () => {
+  const graph = await loadCourseGraph();
+  const byNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
+  const expectedBands = new Map([
+    [21, { minimumEvidence: [420, 540], deepDossier: [600, 780] }],
+    [22, { minimumEvidence: [420, 540], deepDossier: [600, 780] }],
+    [23, { minimumEvidence: [420, 540], deepDossier: [600, 780] }],
+    [24, { minimumEvidence: [360, 480], deepDossier: [540, 720] }],
+    [27, { minimumEvidence: [780, 1020], deepDossier: [1200, 1680] }],
+    [28, { minimumEvidence: [840, 1080], deepDossier: [1380, 1920] }],
+    [29, { minimumEvidence: [480, 600], deepDossier: [660, 840] }],
+    [30, { minimumEvidence: [480, 600], deepDossier: [660, 840] }],
+  ]);
+
+  for (const [number, band] of expectedBands) {
+    const courseModule = byNumber.get(number);
+    assert.deepEqual(courseModule?.focusedStudyMinutes, band, `M${number} needs its canonical evidence-time plan.`);
+    assert.notEqual(
+      courseModule?.referenceReadMinutes,
+      band.minimumEvidence[0],
+      `M${number} reference reading must remain distinct from focused-study evidence time.`,
+    );
+  }
+
+  const missingPlan = structuredClone(graph);
+  delete missingPlan.modules.find(({ number }) => number === 28).focusedStudyMinutes;
+  assert.throws(
+    () => validateCourseGraph(missingPlan),
+    /Module 28 needs focusedStudyMinutes/u,
+  );
+
+  const invertedPlan = structuredClone(graph);
+  invertedPlan.modules.find(({ number }) => number === 28).focusedStudyMinutes.minimumEvidence = [1080, 840];
+  assert.throws(
+    () => validateCourseGraph(invertedPlan),
+    /must use increasing positive integer minutes/u,
+  );
+
+  const shallowDossier = structuredClone(graph);
+  shallowDossier.modules.find(({ number }) => number === 28).focusedStudyMinutes.deepDossier = [900, 1200];
+  assert.throws(
+    () => validateCourseGraph(shallowDossier),
+    /deep dossier time must include the complete minimum-evidence band/u,
+  );
+});
+
 test("the graph refuses access states that would turn a preview or authoring node into a Core reader", async () => {
   const graph = await loadCourseGraph();
 
