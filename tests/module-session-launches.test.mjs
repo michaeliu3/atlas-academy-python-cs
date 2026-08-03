@@ -85,6 +85,39 @@ test("the reader preserves Session N output artifacts in the legacy systems brid
   }
 });
 
+test("the reader derives six-session anchors from numbered studio workbooks", async () => {
+  const files = [
+    "19_concurrency_parallelism.md",
+    "20_networks_application_protocols.md",
+    "21_async_distributed_systems.md",
+    "22_security_privacy_trust_boundaries.md",
+    "23_programming_languages_interpreters.md",
+    "24_cpython_performance_memory.md",
+    "27_discrete_mathematics_proof_counting_structures.md",
+    "28_linear_algebra_numerical_stability_representation.md",
+    "29_calculus_real_analysis_continuous_change.md",
+    "30_probability_statistics_scientific_inference.md",
+  ];
+
+  for (const file of files) {
+    const launches = extractSessionLaunches(await workbook(file));
+    assert.equal(launches.length, 6, `${file} needs its visible six-session route.`);
+    assert.deepEqual(
+      launches.map(({ number }) => number),
+      [1, 2, 3, 4, 5, 6],
+      `${file} must preserve the ordered session sequence.`,
+    );
+    for (const session of launches) {
+      assert.match(
+        session.id,
+        new RegExp(`session-${session.number}-`, "u"),
+        `${file} Session ${session.number} needs its rendered anchor.`,
+      );
+      assert.ok(session.title.length > 0, `${file} Session ${session.number} needs a readable title.`);
+    }
+  }
+});
+
 test("the launch extractor ignores M3's optional seventh session", async () => {
   const launches = extractSessionLaunches(await workbook("03_abstraction_interfaces_adts.md"));
   assert.equal(launches.at(-1)?.number, 6);
@@ -126,4 +159,9 @@ test("the reader integrates the path before the workbook and preserves TA timing
   assert.match(page, /sessionLaunches=\{sessionLaunches\}/u);
   assert.match(interaction, /Start Session 1 with the Study Partner/u);
   assert.match(interaction, /oral defense for after Session 6 and a\s+concrete dossier/u);
+  assert.match(
+    interaction,
+    /resolution\.kind === "studio"[\s\S]*renderSessionRoute\([\s\S]*StudioLoader/u,
+    "a studio must retain the shared six-session route instead of replacing it",
+  );
 });
