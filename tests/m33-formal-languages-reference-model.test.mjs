@@ -182,6 +182,10 @@ test("the M33 workbook makes the bounded trace a prediction-before-inspection ex
   );
 
   assert.match(workbook, /### Bounded reference fixture — trace before claim/u);
+  assert.match(
+    workbook,
+    /\[`m33-formal-languages-reference-model\.js`\]\(\.\.\/\.\.\/lib\/m33-formal-languages-reference-model\.js\)/u,
+  );
   assert.match(workbook, /traceM33EvenOnesDfa\("1010"\)/u);
   assert.match(workbook, /neither a regularity proof nor an undecidability oracle/u);
 });

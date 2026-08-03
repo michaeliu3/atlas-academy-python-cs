@@ -523,7 +523,7 @@ optimality theorem.
 
 ### Bounded reference fixture — trace before claim
 
-Use `lib/m33-formal-languages-reference-model.js` and its focused test as a
+Use [`m33-formal-languages-reference-model.js`](../../lib/m33-formal-languages-reference-model.js) and its focused test as a
 small code-reading exercise. Before calling `traceM33EvenOnesDfa("1010")`,
 write the state trace and acceptance prediction. Then inspect the returned
 trace: every state has a declared parity meaning, and the runner refuses
