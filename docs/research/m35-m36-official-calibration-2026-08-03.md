@@ -2,69 +2,32 @@
 
 ## Scope and release boundary
 
-This is a fresh, read-only calibration of the current private M35/M36
-authoring workbooks and source maps against official/public teaching and
-documentation routes checked on **2026-08-03**. It is not a learner-route,
-accessibility, pilot, contract, security, or release decision. Both modules
-remain authoring-only and hidden from the learner route; this note neither
-changes a status nor unlocks M25/M26. Atlas retains original prose, fixtures,
-derivations, and prompts; the linked material is used only for calibration and
-must remain link/cite-only.
+This is a fresh, read-only check of the current private M35/M36 authoring
+candidates against official course material and first-party source
+documentation, accessed **2026-08-03**. It is not a route, accessibility,
+contract, pilot, security, or release review. The canonical graph keeps M35
+and M36 as authoring-only, hidden, and unrecorded
+(content/course/course-graph.v2.json:2179–2251); nothing here unlocks M25,
+M26, M35, or M36. All external material remains link/cite-only; Atlas
+continues to use original prose, cards, fixtures, and derivations.
 
-## Alignment confirmed
+## Result: no material factual or teaching gap found
 
-- **M35 evaluation evidence is appropriately bounded.** Its declared
-  group/time split choices, fit-on-train-only leakage probe, calibration
-  definition, equal-accuracy/different-probability contrast, and
-  fit–select–fresh-evaluation trace agree with the distinctions in
-  [scikit-learn's cross-validation guide](https://scikit-learn.org/stable/modules/cross_validation.html),
-  [calibration guide](https://scikit-learn.org/stable/modules/calibration.html),
-  and [MIT 18.642 Lecture 23](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/mit18_642_f24_lec23.pdf).
-  The workbook correctly avoids treating a finite Brier comparison as proof of
-  population calibration or decision quality.
+| Calibration point | Current file/line anchor | Official calibration | Proposed repair |
+| --- | --- | --- | --- |
+| **M35 evaluation evidence** | content/authoring/m35_machine_learning_representation_workbook.v1.md:542–675 | The split contract, train-only leakage boundary, finite calibration/Brier distinction, and fit → select → fresh-evaluation trace accurately retain the limitations in [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [probability calibration](https://scikit-learn.org/stable/modules/calibration.html), and [MIT 18.642 Lecture 23](https://ocw.mit.edu/courses/18-642-topics-in-mathematics-with-applications-in-finance-fall-2024/resources/mit18_642_f24_lec23/). In particular, the workbook does not turn a finite Brier comparison into population calibration or a decision recommendation. | None. |
+| **M36 finite-class and PAC scope** | content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md:445–528; source rationale content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md:124–146 | The fixed-finite-class, bounded-loss, IID Hoeffding/union-bound card is correctly limited. The PAC card now correctly quantifies every \(m\ge m_{\mathcal H}(\varepsilon,\delta)\), preserves the realizable target-in-class condition, and separates sample sufficiency from efficient learning—consistent with [MIT 6.080 Lecture 20](https://ocw.mit.edu/courses/6-080-great-ideas-in-theoretical-computer-science-spring-2008/838468541460ee9c1d08eb36c1921d30_lec20.pdf) and [CMU 10-806 notes](https://www.cs.cmu.edu/~avrim/ML07/lect1207.pdf). | None. |
+| **M36 shift/adversarial boundary** | content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md:872–909; source rationale content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md:127 | The synthetic threat card explicitly states its set, one-bit budget, label-preservation assumption, loss, and non-claims. It correctly distinguishes a finite counterexample from operational robustness, as required by the broader shift framing in [MIT 6.7960 Lecture 17](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/mit6_7960_f24_lec17.pdf). | None. |
 
-- **M36's finite-class theorem route is correctly scoped.** The current
-  bounded-loss, IID, fixed-finite-class Hoeffding-plus-union-bound derivation
-  and its explicit non-claims are consistent with the introductory PAC
-  presentations in [MIT 6.080 Lecture 20](https://ocw.mit.edu/courses/6-080-great-ideas-in-theoretical-computer-science-spring-2008/838468541460ee9c1d08eb36c1921d30_lec20.pdf)
-  and [CMU 10-806 notes](https://www.cs.cmu.edu/~avrim/ML07/lect1207.pdf).
-  Its deep-network discussion is also correctly limited to reading the
-  conditions of a margin/spectral-complexity result rather than claiming a
-  universal neural-network guarantee; compare
-  [Bartlett, Foster, and Telgarsky (NeurIPS 2017)](https://proceedings.neurips.cc/paper/2017/hash/b22b257ad0519d4500539da3c8bcf4dd-Abstract.html).
+## Closed precision check
 
-- **M36's shift and adversarial card remains a synthetic boundary exercise.**
-  Its explicitly declared threat set and label-preservation assumption support
-  the stated finite counterexample, while its source-shift discussion does not
-  claim an operational robustness certificate. This is proportionate to the
-  distribution-shift framing in [MIT 6.7960 Lecture 17](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/mit6_7960_f24_lec17.pdf).
+The formerly plausible PAC sample-count concern is already resolved in the
+current candidate: its display and explanation at
+content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md:504–518
+use a sufficient threshold and quantify all declared \(m\) at or above it.
+Do not reapply that repair.
 
-## One concrete repair: PAC sample-count quantifier
-
-At review time, the M36 PAC card wrote its probability over exactly
-\(S\sim P^{m_{\mathcal H}(\varepsilon,\delta)}\). That can describe one
-chosen count, but it does not express the ordinary *sample-complexity
-threshold* guarantee, and it conflicts with the companion source map's
-already-correct “any \(m\ge m_{\mathcal H}(\varepsilon,\delta)\)” wording.
-
-Applied repair: the display's sample-count portion now reads:
-
-\[
-\exists A\;\forall\varepsilon,\delta\in(0,1)\;
-\exists m_{\mathcal H}(\varepsilon,\delta)\;
-\forall m\ge m_{\mathcal H}(\varepsilon,\delta)\;\forall P\;\forall c\in\mathcal H:
-\quad
-\Pr_{S\sim P^m,\,A}\!\left[R_{P,c}(A(S))\le\varepsilon\right]\ge1-\delta.
-\]
-
-Keep the existing realizable \(c\in\mathcal H\) qualifier and the separate
-computational-efficiency boundary. This is a one-card precision repair, not a
-request to add VC theory, Rademacher complexity, framework training, grading,
-or a release gate.
-
-## Deliberately bounded result
-
-No new M35 factual correction was found in this pass, and no other M36
-high-value factual correction was identified. The finding does not establish
-institutional equivalence, learner mastery, source-map completion, or
-publication readiness; those require their own evidence paths.
+No curriculum, contract, test, source-map, status, or release change is
+proposed by this audit. This result is not evidence of institutional
+equivalence, learner mastery, accessibility completion, or publication
+readiness; those require their own review paths.
