@@ -85,6 +85,10 @@ jobs:
               run.display_title === expected.displayTitle,
               "readback workflow display title differs from the bounded verification policy",
             );
+            assert(
+              run.display_title === expected.displayTitle,
+              "readback workflow display title differs from the bounded observer policy",
+            );
             assert(run.status === "completed" && run.conclusion === "success", "readback run is not successful");
             assert(
               run.html_url === `https://github.com/${expected.repository}/actions/runs/${runId}`,
@@ -98,29 +102,6 @@ jobs:
             );
             const expectedJobNames = new Set(expected.requiredJobNames);
             const expectedJobs = jobs.filter((job) => expectedJobNames.has(job.name));
-            const skippedExpectedJobs = expectedJobs.filter(
-              (job) => job.status === "completed" && job.conclusion === "skipped",
-            );
-            // Draft pull requests intentionally skip every hosted Course CI job.
-            // They are not source-head-attached full-gate evidence and must not
-            // be mistaken for a release-quality observation.
-            if (skippedExpectedJobs.length > 0) {
-              assert(
-                expectedJobs.length === expected.requiredJobNames.length &&
-                  skippedExpectedJobs.length === expected.requiredJobNames.length,
-                "partial skipped Course CI jobs are not an approved draft preflight",
-              );
-              core.notice(
-                JSON.stringify({
-                  kind: "Course CI draft run intentionally skipped",
-                  sourceHeadSha,
-                  runId,
-                  runAttempt,
-                  skippedRequiredJobNames: skippedExpectedJobs.map((job) => job.name),
-                }),
-              );
-              return;
-            }
             const jobIds = new Set();
             const jobNames = new Set();
             for (const job of jobs) {

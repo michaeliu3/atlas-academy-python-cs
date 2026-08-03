@@ -33,6 +33,12 @@ test("Course CI pins every third-party action to a reviewed immutable commit", a
 test("Course CI skips hosted jobs for draft PR updates but reruns them when review begins", async () => {
   const workflow = await readCourseWorkflow();
 
+  assert.ok(
+    workflow.includes(
+      "run-name: >-\n  atlas-course-ci-${{ github.event_name == 'pull_request' &&\n  (github.event.pull_request.draft && 'draft' || 'gate') || github.event_name }}",
+    ),
+    "the workflow labels draft and full-gate runs before the observer job is evaluated",
+  );
   assert.match(
     workflow,
     /run-name: >-\n\s*atlas-course-ci-\$\{\{ github\.event_name == 'pull_request'/mu,
