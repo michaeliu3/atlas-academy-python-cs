@@ -74,7 +74,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "3ffce9a963f24fe131246203ecfd0b085d83c949abd80ffab114ee0a819bcfff"
+      "sha256": "6e2de107496822d12c2566aae8d86d90552d890cc40529149a8533ef11419ff8"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
@@ -250,7 +250,7 @@
     },
     {
       "path": "content/course/contracts/companions/m31.v1.json",
-      "sha256": "efd31570523c5b39ca1f79a2b7df60a79542963756395ceefd807d1e4daa3fd9"
+      "sha256": "f43d16b2738a836b240d13ec014f8c61248032a0dc4bf781a6bb8bd573a10ae1"
     },
     {
       "path": "content/course/contracts/companions/m32.v1.json",
