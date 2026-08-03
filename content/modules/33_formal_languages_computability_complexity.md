@@ -107,6 +107,8 @@ revisit M05 before Session 5.
 
 ## Session 1 — Languages are objects; syntax is not authority
 
+**Launch:** With the Study Partner, name the alphabet, language, grammar or machine, and question; identify which parts are syntax and which are semantic claims.
+
 ### Core question
 
 **What exactly is being classified before we ask whether it can be computed?**
@@ -347,6 +349,8 @@ is accepted but the state/action model may still be incomplete.
 
 ## Session 2 — Finite state needs finite evidence
 
+**Launch:** Before tracing a recognizer, predict what finite state can remember and name the proof obligation that would justify a universal limit.
+
 ### Core question
 
 **What can a finite-state recognizer remember, and how do we prove a limit?**
@@ -530,6 +534,8 @@ it is neither a regularity proof nor an undecidability oracle.
 
 ## Session 3 — Grammar questions and semantic limits are different questions
 
+**Launch:** State the input encoding, machine, acceptance or halting condition, and property before deciding whether the machine answers the intended question.
+
 ### Core question
 
 **When does a machine answer the question we asked, and when does it only
@@ -657,6 +663,8 @@ never encoded.”
 ---
 
 ## Session 4 — A reduction is a directed proof, not a resemblance
+
+**Launch:** Write the source and target languages, transformation direction, resource bound, and required iff statement before calling two problems reducible.
 
 ### Core question
 
@@ -846,6 +854,8 @@ encoding. A solver run is not a reduction proof.
 
 ## Session 5 — Complexity classes classify formal families, not one run
 
+**Launch:** Name the encoded language, computation model, resource bound, and membership or hardness direction before invoking a complexity class.
+
 ### Core question
 
 **What is the object of a complexity statement?**
@@ -965,6 +975,8 @@ timeout proves infeasibility.
 ---
 
 ## Session 6 — Defend one narrow formal claim
+
+**Launch:** Choose one formal claim and rehearse its definitions, proof skeleton, smallest counterexample boundary, and practical non-claim with the Study Partner.
 
 ### Core question
 
