@@ -4622,7 +4622,7 @@
         },
         {
           "id": "transfer-task",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4649,7 +4649,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4676,7 +4676,7 @@
         },
         {
           "id": "supportive-oral-defense",
-          "status": "missing",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4800,7 +4800,7 @@
         },
         {
           "id": "prediction-before-reveal",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4809,7 +4809,7 @@
         },
         {
           "id": "transfer-task",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4836,7 +4836,7 @@
         },
         {
           "id": "confidence-diagnostic-misconceptions",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4863,7 +4863,7 @@
         },
         {
           "id": "supportive-oral-defense",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
