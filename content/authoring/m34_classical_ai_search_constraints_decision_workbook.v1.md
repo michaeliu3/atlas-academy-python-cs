@@ -1219,6 +1219,16 @@ You may correct, decline to save, or keep this summary locally. It is not a
 transcript, pass/fail result, automatic unlock, or proof that a live voice
 session occurred.
 
+### Record boundary for designated chats
+
+A learner-controlled summary stays local unless, in the exact configured
+designated Teaching Assistant or Study Partner chat, the learner says `records
+on` for this substantive session. Only then may the shared policy create at
+most one concise note if the configured private destination is reachable.
+`pause records` or `off-record` means create nothing; authorization ends with
+the session. Never save a raw transcript or claim a successful write without
+direct evidence. Otherwise, keep the summary in chat or local notes.
+
 ### Forward handoff
 
 M35 receives your **problem-formulation packet**: state/representation,

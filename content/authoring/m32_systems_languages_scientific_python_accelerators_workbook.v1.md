@@ -1550,6 +1550,16 @@ only a concise privacy-bounded learning note under its configured workflow;
 that possibility is not evidence that a note, voice session, whiteboard
 rendering, or export occurred.
 
+### Record boundary for designated chats
+
+A learner-controlled summary stays local unless, in the exact configured
+designated Teaching Assistant or Study Partner chat, the learner says `records
+on` for this substantive session. Only then may the shared policy create at
+most one concise note if the configured private destination is reachable.
+`pause records` or `off-record` means create nothing; authorization ends with
+the session. Never save a raw transcript or claim a successful write without
+direct evidence. Otherwise, keep the summary in chat or local notes.
+
 ### Forward handoff
 
 The durable M32 artifact is a **reproducible systems claim packet**:
