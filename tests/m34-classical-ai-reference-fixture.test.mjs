@@ -180,6 +180,10 @@ test("the M34 workbook puts both bounded fixtures in the relevant prediction and
   );
 
   assert.match(workbook, /### Bounded reference fixture — frontier policy/u);
+  assert.match(
+    workbook,
+    /\[`m34-classical-ai-reference-fixture\.js`\]\(\.\.\/\.\.\/lib\/m34-classical-ai-reference-fixture\.js\)/u,
+  );
   assert.match(workbook, /chooseM34DeclaredFrontierEntry/u);
   assert.match(workbook, /### Exact counterexample — admissible is not enough for no-reopen graph search/u);
   assert.ok(workbook.includes("no-reopen result has cost `4`"));
