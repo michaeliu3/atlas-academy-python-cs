@@ -53,6 +53,11 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
     m25,
     /Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff\/unlock language as current learner work/u,
   );
+  assert.match(m25, /Full-module outcome — after the gate opens/u);
+  assert.match(
+    m25,
+    /Preview reading boundary:[\s\S]{0,260}orientation map for after the gate opens/u,
+  );
   const m25TaPromptStart = m25.indexOf("### Teaching Assistant oral-defense prompt — M25");
   const m25TaPromptEnd = m25.indexOf("### Study Partner live-rehearsal prompt — M25", m25TaPromptStart);
   const m25TaPrompt = m25.slice(m25TaPromptStart, m25TaPromptEnd);
@@ -88,6 +93,10 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.match(
     m26,
     /Do not use the later studio, project, oral defense, or `RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` language as a current capstone decision/u,
+  );
+  assert.match(
+    m26,
+    /Preview reading boundary:[\s\S]{0,260}for after the prerequisite gate opens/u,
   );
   const m26TaPromptStart = m26.indexOf("### Teaching Assistant oral-defense prompt — M26");
   const m26TaPromptEnd = m26.indexOf("### Study Partner live-rehearsal prompt — M26", m26TaPromptStart);

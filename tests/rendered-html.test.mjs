@@ -147,6 +147,27 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /does not unlock a\s+portal reader, create Core credit, or create a record/);
 });
 
+test("renders synthesis previews as reference workbooks rather than completable Core modules", async () => {
+  for (const [slug, moduleNumber] of [
+    ["25-evidence-grounded-intelligent-systems", 25],
+    ["26-systems-capstone-open-source-stewardship", 26],
+  ]) {
+    const response = await render(`/modules/${slug}`);
+    assert.equal(response.status, 200, `${slug} renders`);
+    const document = new JSDOM(await response.text()).window.document;
+    const workbook = document.querySelector("#module-reading-article");
+    assert.equal(
+      workbook?.getAttribute("aria-label"),
+      `Module ${moduleNumber} reference preview workbook; not an unlocked Core step`,
+    );
+    assert.match(
+      document.body.textContent ?? "",
+      /Preview reading boundary/u,
+      `${slug} keeps its orientation boundary visible`,
+    );
+  }
+});
+
 test("gives every rendered workbook checklist item a descriptive read-only name", async () => {
   const moduleSlugs = [
     "15-files-serialization-packaging-delivery",
@@ -833,7 +854,7 @@ test("diagnostic and M19 export actions require current learner approval before 
   assert.match(diagnostic, /href="\/learning-partners"/);
   assert.match(
     diagnostic,
-    /After you approve and copy this brief, paste it into the designated Study Partner chat\./,
+    /After you approve and copy this brief, paste it into the designated Study Partner or Teaching Assistant chat\./,
   );
   assert.match(diagnostic, /Atlas does not transfer this brief or activate records\./);
   assert.match(diagnostic, /only if you want its configured concise-note policy\./);
@@ -2475,7 +2496,7 @@ test("renders the finalized CPython-performance-and-memory-evidence workbook", a
   );
 });
 
-test("renders the finalized evidence-grounded-intelligent-systems workbook", async () => {
+test("renders M25 as a bounded evidence-synthesis preview", async () => {
   const response = await render("/modules/25-evidence-grounded-intelligent-systems");
   assert.equal(response.status, 200);
 
@@ -2484,7 +2505,7 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
     html,
     /Module 25: Evidence-Grounded Intelligent &amp; Human-Centered Systems · Atlas Academy/,
   );
-  assert.match(html, /Complete Module 25 workbook/);
+  assert.match(html, /Module 25 reference preview workbook; not an unlocked Core step/);
   assert.match(html, /Reference access does not advance the Core\./);
   assert.match(html, /open for orientation and comparison, not as an unlocked Core step/);
   assert.match(html, /Reference preview · not an unlocked Core step/);
@@ -2668,7 +2689,7 @@ test("renders reader-visible MCQ rationales behind local prediction gates", asyn
   }
 });
 
-test("renders the systems-capstone workbook and publishes its bounded model", async () => {
+test("renders M26 as a bounded capstone preview and retains its bounded model", async () => {
   const response = await render("/modules/26-systems-capstone-open-source-stewardship");
   assert.equal(response.status, 200);
 
@@ -2677,7 +2698,7 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
     html,
     /Module 26: Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense · Atlas Academy/,
   );
-  assert.match(html, /Complete Module 26 workbook/);
+  assert.match(html, /Module 26 reference preview workbook; not an unlocked Core step/);
   assert.match(html, /Reference preview · not an unlocked Core step/);
   assert.match(html, /Read this as a map, not a mastered module/);
   const m26PreviewText = new JSDOM(html).window.document.body.textContent ?? "";

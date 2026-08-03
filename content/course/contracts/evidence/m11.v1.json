@@ -61,9 +61,10 @@
     {
       "id": "m11-code-reading-debugging-design",
       "criterionId": "code-reading-debugging-design",
-      "claim": "M11 contains distinct planner code-reading, insufficient-state debugging, and bounded agent task/patch-review work.",
+      "claim": "M11 contains distinct planner code-reading, five-handoff architecture-reading, insufficient-state debugging, and bounded agent task/patch-review work.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "16-read-the-planner-in-dependency-order"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "166-architecture-reading-dossier-five-m6m10-handoffs-2030-minutes"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "17-debugging-studio--when-a-smaller-state-is-too-small"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "18-bounded-agent-task-and-patch-review"}
       ],
@@ -135,9 +136,10 @@
     {
       "id": "m11-project-rubric",
       "criterionId": "project-and-evidence-rubric",
-      "claim": "M11 specifies a constructive strategy-defense dossier, mastery-evidence prompts, and an evidence rubric rather than a pass/fail exam.",
+      "claim": "M11 specifies a constructive strategy-defense dossier with a five-handoff architecture-reading page, mastery-evidence prompts, and an evidence rubric rather than a pass/fail exam.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "23-atlas-milestone-11--evidence-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "166-architecture-reading-dossier-five-m6m10-handoffs-2030-minutes"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "mastery-evidence"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "evidence-rubric--strategy-dossier"}
       ],

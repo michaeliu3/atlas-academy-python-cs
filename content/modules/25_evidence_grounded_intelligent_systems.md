@@ -25,7 +25,7 @@
 > Preview mode now: you may create only a `PREVIEW ONLY` gate card and one future-M26 question.
 > Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff/unlock language as current learner work.
 
-**Primary outcome:** You can read an intelligent-feature proposal as a chain
+**Full-module outcome — after the gate opens:** You can read an intelligent-feature proposal as a chain
 of purpose, authorized data, representation, candidate generation, score or
 model, evaluation, explanation, human decision, and evidence. You can detect
 leakage, distinguish a score from a calibrated probability, choose an
@@ -44,6 +44,11 @@ decision and collect the right evidence.
 ---
 
 ## How to study this module
+
+> **Preview reading boundary:** The six-session material below is an
+> orientation map for after the gate opens. Until then, create only the named
+> `PREVIEW ONLY` gate card and one future-M26 question; do not turn the later
+> loop, studio, dossier, rehearsal, project, or handoff into current work.
 
 Use this loop in every session:
 

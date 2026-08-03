@@ -111,6 +111,10 @@ export default async function ModulePage({ params }: ModulePageProps) {
     moduleInteraction.kind === "preview"
       ? getSynthesisPreviewConversation(courseModule.id)
       : undefined;
+  const workbookAriaLabel =
+    courseModule.state.availability === "preview"
+      ? `Module ${courseModule.number} reference preview workbook; not an unlocked Core step`
+      : `Complete Module ${courseModule.number} workbook`;
 
   return (
     <main className={`module-shell ${courseModule.arcId}`}>
@@ -196,7 +200,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
           <article
             className="module-prose"
             id="module-reading-article"
-            aria-label={`Complete Module ${courseModule.number} workbook`}
+            aria-label={workbookAriaLabel}
           >
             <ModuleMarkdown
               enableMultipleChoicePredictionGates={

@@ -669,9 +669,9 @@ export function DiagnosticExperience() {
           </button>
           <Link href="/learning-partners">Continue with Learning Partners</Link>
           <p className="diagnostic-learning-partners-handoff">
-            After you approve and copy this brief, paste it into the designated Study Partner chat.
+            After you approve and copy this brief, paste it into the designated Study Partner or Teaching Assistant chat.
             Atlas does not transfer this brief or activate records. Say <code>records on</code>{" "}
-            in that chat only if you want its configured concise-note policy.
+            in that exact chat only if you want its configured concise-note policy.
           </p>
           <Link href="/modules">Open the course library</Link>
           <button

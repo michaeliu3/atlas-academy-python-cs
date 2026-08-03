@@ -853,7 +853,7 @@ test("the completed diagnostic route keeps prerequisite context and passes Axe",
     ".diagnostic-learning-partners-handoff",
   );
   await expect(learningPartnersHandoff).toContainText(
-    "After you approve and copy this brief, paste it into the designated Study Partner chat.",
+    "After you approve and copy this brief, paste it into the designated Study Partner or Teaching Assistant chat.",
   );
   await expect(learningPartnersHandoff).toContainText(
     "Atlas does not transfer this brief or activate records.",
