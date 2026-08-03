@@ -44,6 +44,7 @@ const expectedScopeCapabilities = new Set([
   "design",
   "implement",
 ]);
+const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30]);
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);
@@ -67,6 +68,29 @@ function assertExactKeys(value, keys, label) {
   const expected = [...keys].sort();
   if (actual.length !== expected.length || actual.some((key, index) => key !== expected[index])) {
     fail(`${label} must use exactly these keys: ${expected.join(", ")}.`);
+  }
+}
+
+function validateFocusedStudyMinutes(value, number) {
+  assertExactKeys(value, ["minimumEvidence", "deepDossier"], `Module ${number} focusedStudyMinutes`);
+
+  for (const [label, range] of Object.entries(value)) {
+    if (!Array.isArray(range) || range.length !== 2) {
+      fail(`Module ${number} focusedStudyMinutes.${label} must be a two-value minute range.`);
+    }
+    const [minimum, maximum] = range;
+    if (
+      !Number.isInteger(minimum) ||
+      !Number.isInteger(maximum) ||
+      minimum < 1 ||
+      maximum < minimum
+    ) {
+      fail(`Module ${number} focusedStudyMinutes.${label} must use increasing positive integer minutes.`);
+    }
+  }
+
+  if (value.deepDossier[0] < value.minimumEvidence[1]) {
+    fail(`Module ${number} deep dossier time must include the complete minimum-evidence band.`);
   }
 }
 
@@ -567,6 +591,11 @@ export function validateCourseGraph(graph) {
       (!Number.isInteger(courseModule.referenceReadMinutes) || courseModule.referenceReadMinutes < 1)
     ) {
       fail(`Module ${courseModule.number} referenceReadMinutes must be a positive integer or null.`);
+    }
+    if (courseModule.focusedStudyMinutes !== undefined) {
+      validateFocusedStudyMinutes(courseModule.focusedStudyMinutes, courseModule.number);
+    } else if (focusedStudyModuleNumbers.has(courseModule.number)) {
+      fail(`Module ${courseModule.number} needs focusedStudyMinutes for its evidence-planning route.`);
     }
     if (
       courseModule.sourceMap !== null &&

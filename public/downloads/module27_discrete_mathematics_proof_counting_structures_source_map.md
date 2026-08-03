@@ -16,6 +16,11 @@
 - **Research snapshot:** **2026-07-30**. URLs, editions, course materials, and
   licenses were checked on that date. Pin a source revision or access date in a
   learner artifact when the exact wording, exercise, code, or edition matters.
+- **Pacing recheck:** **2026-08-03**. The current MIT 6.1200J and CMU 15-151
+  calibration, source links, and reuse boundary are recorded in the
+  [M27–M28 core-trace pacing note](../../docs/research/m27-m28-core-trace-pacing-calibration-2026-08-03.md).
+  It refines planning and progressive disclosure only; it does not replace the
+  source cards below or claim equivalence to a term-long course.
 - **Reader-first rule:** this map supports demanding mathematics, not a
   shortcut around it. The portal should state the formal definition first,
   then a plain-language model, a minimal counterexample, a worked proof or

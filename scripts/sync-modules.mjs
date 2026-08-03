@@ -382,6 +382,7 @@ for (const projectedModule of projectedModules) {
     arcId: arc.id,
     wordCount: markdown.trim().split(/\s+/u).length,
     estimatedMinutes: graphModule.referenceReadMinutes,
+    focusedStudyMinutes: graphModule.focusedStudyMinutes ?? null,
     sourceHash: sha256(markdown),
     id: graphModule.id,
     state: graphModule.state,
@@ -413,7 +414,7 @@ for (const path of releaseInputPolicy.downloadPaths) {
 }
 
 const manifest = {
-  schemaVersion: 4,
+  schemaVersion: 5,
   courseGraphSchemaVersion: courseGraph.schemaVersion,
   routePlanId: courseGraph.routePlan.id,
   definedModuleCount: courseGraph.modules.length,

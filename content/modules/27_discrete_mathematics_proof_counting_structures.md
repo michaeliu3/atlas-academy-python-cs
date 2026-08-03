@@ -66,6 +66,22 @@ Typing is deliberately secondary. You will write a few small predicates and
 proof fragments, but most work is reading, drawing, tracing, explaining,
 debugging, and reviewing an agent's proposed argument.
 
+### Pace guard: one spine, optional depth
+
+The six sessions are one connected core, not six disconnected topics. First
+build the center-column artifact for each session. Treat the right column as a
+deliberate second pass after the core dossier is coherent; it never licenses
+you to skip a definition, assumption, counterexample, or proof obligation.
+
+| Session | Core trace to reconstruct | Optional deepening (second pass) |
+| --- | --- | --- |
+| 1 | State a formal claim with a domain, then repair a quantifier error with a smallest countermodel. | Refine a relation-property argument or compare two proof calculi. |
+| 2 | Build one initialization → preservation → use argument, or repair an induction proof whose hypothesis is too weak. | Work through structural induction or an extremal argument on a fresh object. |
+| 3 | Derive one recurrence with its domain, base cases, and cost/counting interpretation; check a candidate bound. | Use a generating function beyond one small coefficient example. |
+| 4 | Trace one graph witness and distinguish a locally plausible matching from a globally justified one. | Reconstruct a Hall-condition or matching proof with all hypotheses named. |
+| 5 | Build a poset or trace a modular-inverse precondition before an API call. | Explore a non-lattice boundary or a larger number-theory/cryptography application. |
+| 6 | Join one claim, counterexample, proof, finite trace, and transfer decision into the proof dossier. | Defend a second independent case and audit an AI-generated proof line by line. |
+
 ---
 
 ## 1. Position in the knowledge system

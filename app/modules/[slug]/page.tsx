@@ -22,6 +22,7 @@ import { ReadingTools } from "./ReadingTools";
 import { resolveModuleStudio } from "@/lib/module-studio-registry";
 import type { CourseModule } from "@/lib/module-catalog";
 import { getSynthesisPreviewConversation } from "@/lib/synthesis-preview-conversations";
+import { formatFocusedStudyHours } from "@/lib/course-catalog";
 
 type ModulePageProps = {
   params: Promise<{ slug: string }>;
@@ -135,6 +136,18 @@ export default async function ModulePage({ params }: ModulePageProps) {
               <dt>{courseModule.estimatedMinutes} min</dt>
               <dd>reference read</dd>
             </div>
+            {courseModule.focusedStudyMinutes ? (
+              <>
+                <div>
+                  <dt>{formatFocusedStudyHours(courseModule.focusedStudyMinutes.minimumEvidence)}</dt>
+                  <dd>minimum evidence</dd>
+                </div>
+                <div>
+                  <dt>{formatFocusedStudyHours(courseModule.focusedStudyMinutes.deepDossier)}</dt>
+                  <dd>deep dossier</dd>
+                </div>
+              </>
+            ) : null}
             <div>
               <dt>{courseModule.wordCount.toLocaleString("en-US")}</dt>
               <dd>authored words</dd>
@@ -144,6 +157,12 @@ export default async function ModulePage({ params }: ModulePageProps) {
               <dd>major sections</dd>
             </div>
           </dl>
+          {courseModule.focusedStudyMinutes ? (
+            <p className="module-effort-boundary">
+              These are focused-study planning bands for the six-session evidence route,
+              not reading time, a promise of mastery, or a substitute for later spaced review.
+            </p>
+          ) : null}
           <aside
             aria-labelledby={`module-access-${courseModule.number}`}
             className="module-availability-notice module-reader-access"

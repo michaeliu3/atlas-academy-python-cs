@@ -22,6 +22,11 @@ export type CourseReleaseState =
   | "candidate-recorded"
   | "deployed-recorded";
 export type CourseRouteRole = "required" | "optional";
+
+export type FocusedStudyMinutes = {
+  minimumEvidence: [number, number];
+  deepDossier: [number, number];
+};
 export type ScopeMatrixState =
   | "core-mastery"
   | "scoped-exposure"
@@ -118,6 +123,7 @@ export type CourseGraphModule = {
   masteryGateId: string;
   routeRole: CourseRouteRole;
   referenceReadMinutes: number | null;
+  focusedStudyMinutes?: FocusedStudyMinutes;
   sourceMap: string | null;
   studioId: ModuleStudioId | null;
   sequencePosition: number;
@@ -214,6 +220,15 @@ export const courseGraphModulesByNumber = new Map(
 export const courseGraphModulesBySlug = new Map(
   courseCatalog.modules.map((courseModule) => [courseModule.slug, courseModule]),
 );
+
+export function formatFocusedStudyHours([minimum, maximum]: [number, number]) {
+  const formatHours = (minutes: number) => {
+    const hours = minutes / 60;
+    return Number.isInteger(hours) ? String(hours) : hours.toFixed(1).replace(/\.0$/u, "");
+  };
+
+  return `${formatHours(minimum)}–${formatHours(maximum)} h`;
+}
 
 export function getCourseGraphModule(number: number) {
   return courseGraphModulesByNumber.get(number);

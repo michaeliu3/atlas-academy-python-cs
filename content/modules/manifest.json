@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "courseGraphSchemaVersion": 2,
   "routePlanId": "atlas-core-60",
   "definedModuleCount": 36,
@@ -61,6 +61,7 @@
       "arcId": "arc-i",
       "wordCount": 6714,
       "estimatedMinutes": 21,
+      "focusedStudyMinutes": null,
       "sourceHash": "e641ea4b3086697d7ca62437403ee39160947d056ac6ddc923e894c429bf3f6f",
       "id": "m01",
       "state": {
@@ -97,6 +98,7 @@
       "arcId": "arc-i",
       "wordCount": 11531,
       "estimatedMinutes": 46,
+      "focusedStudyMinutes": null,
       "sourceHash": "f15512100632d211b49c2aa03211e904bf76cb87ee42844269f32b04159c3033",
       "id": "m02",
       "state": {
@@ -137,6 +139,7 @@
       "arcId": "arc-i",
       "wordCount": 15353,
       "estimatedMinutes": 64,
+      "focusedStudyMinutes": null,
       "sourceHash": "994e91a894c121833469cdb97b6d1a70ed8b7b6fa6b5415bb89eee723d7e8377",
       "id": "m03",
       "state": {
@@ -177,6 +180,7 @@
       "arcId": "arc-i",
       "wordCount": 7720,
       "estimatedMinutes": 25,
+      "focusedStudyMinutes": null,
       "sourceHash": "c75354d7905bca0e7ef4a52b3e5257cd3b4136893f19cf23d46fff591684f5a5",
       "id": "m04",
       "state": {
@@ -217,6 +221,7 @@
       "arcId": "arc-i",
       "wordCount": 7314,
       "estimatedMinutes": 24,
+      "focusedStudyMinutes": null,
       "sourceHash": "785a222aeda2682b920bbd2f75fe0f0343494cf96a062767e00c554ec40ef610",
       "id": "m05",
       "state": {
@@ -257,6 +262,7 @@
       "arcId": "arc-ii",
       "wordCount": 14815,
       "estimatedMinutes": 58,
+      "focusedStudyMinutes": null,
       "sourceHash": "42020c3323ac782b4c7baf300dc9645f40aec5e42bf8bd80f0f39f8b2c46e79f",
       "id": "m06",
       "state": {
@@ -297,6 +303,7 @@
       "arcId": "arc-ii",
       "wordCount": 13319,
       "estimatedMinutes": 52,
+      "focusedStudyMinutes": null,
       "sourceHash": "b9952203f92d3781b1e1fb62ea47aac8d1b157587b967fb9436a2136ab0b137c",
       "id": "m07",
       "state": {
@@ -337,6 +344,7 @@
       "arcId": "arc-ii",
       "wordCount": 13819,
       "estimatedMinutes": 52,
+      "focusedStudyMinutes": null,
       "sourceHash": "abdd47b9fe8afe4aed174f92e71dd5e17cc614dedb5012ac659a6f263895ff1a",
       "id": "m08",
       "state": {
@@ -377,6 +385,7 @@
       "arcId": "arc-ii",
       "wordCount": 17658,
       "estimatedMinutes": 74,
+      "focusedStudyMinutes": null,
       "sourceHash": "ce05dbec4fd4e384963886acf762b4067db4dc3b9affb3c15b00c3edd238a163",
       "id": "m09",
       "state": {
@@ -417,6 +426,7 @@
       "arcId": "arc-ii",
       "wordCount": 17387,
       "estimatedMinutes": 76,
+      "focusedStudyMinutes": null,
       "sourceHash": "5eb1fe817ffa599f96e311f94bf72dafb04f8eef288315b3424a6b406f511b69",
       "id": "m10",
       "state": {
@@ -457,6 +467,7 @@
       "arcId": "arc-ii",
       "wordCount": 15458,
       "estimatedMinutes": 63,
+      "focusedStudyMinutes": null,
       "sourceHash": "82d52bd3346f80b75604ca4e164f8c69bbd2a1234f95164dffd305bc4b4a40c3",
       "id": "m11",
       "state": {
@@ -497,6 +508,7 @@
       "arcId": "arc-iii",
       "wordCount": 19178,
       "estimatedMinutes": 82,
+      "focusedStudyMinutes": null,
       "sourceHash": "45986af30bac321f67c8dbd9704051349937d15d394fc85c30cfe8f4120b7051",
       "id": "m12",
       "state": {
@@ -537,6 +549,7 @@
       "arcId": "arc-iii",
       "wordCount": 13186,
       "estimatedMinutes": 54,
+      "focusedStudyMinutes": null,
       "sourceHash": "894260ca6595823d262e9e20eb933ef674fc344bd9492895a9724f189e9c9c22",
       "id": "m13",
       "state": {
@@ -577,6 +590,7 @@
       "arcId": "arc-iii",
       "wordCount": 15534,
       "estimatedMinutes": 69,
+      "focusedStudyMinutes": null,
       "sourceHash": "d54beaa1558cd3f4cc97330ada32916d274fd028976af8a761252ef2c4f02206",
       "id": "m14",
       "state": {
@@ -617,6 +631,7 @@
       "arcId": "arc-iii",
       "wordCount": 24870,
       "estimatedMinutes": 110,
+      "focusedStudyMinutes": null,
       "sourceHash": "c7ffe0fc23254b70704cd5b661106bb3daf5b3ab7d65461d07a0dbfb141c29ea",
       "id": "m15",
       "state": {
@@ -657,6 +672,7 @@
       "arcId": "arc-iii",
       "wordCount": 20544,
       "estimatedMinutes": 93,
+      "focusedStudyMinutes": null,
       "sourceHash": "3d16a7ae33884eaaabc6e301206804e0b0a65b4d44f21d9814740a63c5958831",
       "id": "m16",
       "state": {
@@ -697,6 +713,7 @@
       "arcId": "arc-iv",
       "wordCount": 21663,
       "estimatedMinutes": 96,
+      "focusedStudyMinutes": null,
       "sourceHash": "3ec87feb851b821539f71e5b82866086b177c306324aab0900eb5a8fa3610b84",
       "id": "m17",
       "state": {
@@ -737,6 +754,7 @@
       "arcId": "arc-iv",
       "wordCount": 22138,
       "estimatedMinutes": 97,
+      "focusedStudyMinutes": null,
       "sourceHash": "6231120c24b905cfd3f2e3486a2f1168854a626a7dba4ecebda98842324687b8",
       "id": "m18",
       "state": {
@@ -777,6 +795,7 @@
       "arcId": "arc-iv",
       "wordCount": 23231,
       "estimatedMinutes": 104,
+      "focusedStudyMinutes": null,
       "sourceHash": "ff159c079fdec8b1ba099b688de0fc719afd5215e42d303fde28fe0b1ac9d23f",
       "id": "m19",
       "state": {
@@ -817,6 +836,7 @@
       "arcId": "arc-iv",
       "wordCount": 16279,
       "estimatedMinutes": 72,
+      "focusedStudyMinutes": null,
       "sourceHash": "f5ce154da17243cc4df2796b6a3afb81eca06dba433bcf3b6e5dee67f4a36f5a",
       "id": "m20",
       "state": {
@@ -857,6 +877,16 @@
       "arcId": "arc-iv",
       "wordCount": 8962,
       "estimatedMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceHash": "1339aebb2d01ccd78f9cd2ea5eb63fbab6386a989fbe38f8bd52a50cf4d1dedf",
       "id": "m21",
       "state": {
@@ -897,6 +927,16 @@
       "arcId": "arc-iv",
       "wordCount": 7749,
       "estimatedMinutes": 31,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceHash": "49def9e86deb35fc2669215b7f26b19f3ce04da104f11284baa488df4624f0f6",
       "id": "m22",
       "state": {
@@ -937,6 +977,16 @@
       "arcId": "arc-v",
       "wordCount": 8248,
       "estimatedMinutes": 34,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceHash": "aea8bd09e105c2c0ad8963312cae650bbd333841849b70e1dc6408eef9759e9f",
       "id": "m23",
       "state": {
@@ -977,6 +1027,16 @@
       "arcId": "arc-v",
       "wordCount": 5391,
       "estimatedMinutes": 21,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceHash": "6b8e473148ffc4d232225be1a14aafadf477ebfa8b5b443ebd0198c1e63803e4",
       "id": "m24",
       "state": {
@@ -1017,6 +1077,7 @@
       "arcId": "arc-v",
       "wordCount": 10116,
       "estimatedMinutes": 36,
+      "focusedStudyMinutes": null,
       "sourceHash": "8e4debe5fa32b6ebd9a6c40007263de3580bb42deb6f1345aa56287a1e7e284c",
       "id": "m25",
       "state": {
@@ -1065,6 +1126,7 @@
       "arcId": "arc-v",
       "wordCount": 10195,
       "estimatedMinutes": 38,
+      "focusedStudyMinutes": null,
       "sourceHash": "4aec51c06859195331ce2d8c711034b18dbe2badec934cf8b93301a6edb7aef3",
       "id": "m26",
       "state": {
@@ -1103,9 +1165,19 @@
       "title": "Discrete Mathematics, Proof, Counting & Structures",
       "summary": "Bridge: Modules 1–5 taught you to trace Python state, write contracts, use an introductory proof vocabulary, and state a cost model. This module returns to those ideas at full mathematical resolution. It asks what must be true for a clai…",
       "arcId": "arc-vi",
-      "wordCount": 10378,
+      "wordCount": 10634,
       "estimatedMinutes": 48,
-      "sourceHash": "9fa2e4fc5c617bd7c9c6228b92051dc6ddaab473c2985bf83c44496ed45a848e",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          780,
+          1020
+        ],
+        "deepDossier": [
+          1200,
+          1680
+        ]
+      },
+      "sourceHash": "735c077f822f873fc555bfe806477e86fe10522af506ae62705fa87ca75fa894",
       "id": "m27",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1147,9 +1219,19 @@
       "title": "Linear Algebra, Numerical Stability & Representation",
       "summary": "Bridge: M27 made domains, definitions, proof obligations, witnesses, and evidence boundaries explicit. M28 asks a complementary question: when a program stores an observation as coordinates, what structure survives a change of coordinate…",
       "arcId": "arc-vi",
-      "wordCount": 8250,
+      "wordCount": 8480,
       "estimatedMinutes": 39,
-      "sourceHash": "ed81fc7fb8bb7fbd03f572d7504528144d83cb11232831d9ec9e2ec45235aff6",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          840,
+          1080
+        ],
+        "deepDossier": [
+          1380,
+          1920
+        ]
+      },
+      "sourceHash": "27d0527a5d5bc7311457124e655bcc5bcd57f9b4eb49a700a909e2182f20ceff",
       "id": "m28",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1191,6 +1273,16 @@
       "arcId": "arc-vi",
       "wordCount": 8121,
       "estimatedMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
+      },
       "sourceHash": "0a4e7257f0d6eb775054890182c3bf7d19e2783c84459058b69f812e9588f37f",
       "id": "m29",
       "state": {
@@ -1233,6 +1325,16 @@
       "arcId": "arc-vi",
       "wordCount": 9655,
       "estimatedMinutes": 46,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
+      },
       "sourceHash": "d2b34e6018bd064dfe6e25458b1d0b9c670649032e528a5a45ecb533799f58ed",
       "id": "m30",
       "state": {

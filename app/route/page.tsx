@@ -6,7 +6,7 @@ import {
   atlasCoreRouteTotals,
   getAtlasRouteEntry,
 } from "@/lib/atlas-core-route";
-import type { CourseModuleState } from "@/lib/course-catalog";
+import { formatFocusedStudyHours, type CourseModuleState } from "@/lib/course-catalog";
 import { moduleHref, moduleManifest } from "@/lib/module-catalog";
 import { CourseReaderHeader } from "../modules/CourseReaderHeader";
 import { ScopeMatrix } from "./ScopeMatrix";
@@ -255,6 +255,15 @@ export default function AtlasCoreRoutePage() {
                           <dt>Role</dt>
                           <dd>{entry.shortTitle}</dd>
                         </div>
+                        {entry.focusedStudyMinutes ? (
+                          <div>
+                            <dt>Evidence</dt>
+                            <dd>
+                              {formatFocusedStudyHours(entry.focusedStudyMinutes.minimumEvidence)} minimum · {" "}
+                              {formatFocusedStudyHours(entry.focusedStudyMinutes.deepDossier)} deep dossier
+                            </dd>
+                          </div>
+                        ) : null}
                       </dl>
                       {canOpen ? (
                         <span className={styles.cardLink}>
