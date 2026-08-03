@@ -54,6 +54,8 @@ test("the hidden advanced review candidates expose a concise six-session launch 
     "32_systems_languages_scientific_python_accelerators.md",
     "33_formal_languages_computability_complexity.md",
     "34_classical_ai_search_constraints_decision.md",
+    "35_machine_learning_representation.md",
+    "36_statistical_learning_theory_reliable_deep_learning.md",
   ];
 
   for (const file of files) {

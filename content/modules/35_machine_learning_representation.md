@@ -201,6 +201,8 @@ reversible next action.
 
 ## Session 1 — Representation, inductive bias, and what a model can discard
 
+**Launch:** With the Study Partner, name the target relation, representation, discarded distinction, and one decision that the representation therefore cannot support.
+
 ### Core question
 
 **What becomes impossible after a representation forgets a task-relevant
@@ -308,6 +310,8 @@ not matter.
 ---
 
 ## Session 2 — Formulation and classical baselines before learned models
+
+**Launch:** State the prediction target, decision owner, information available at inference, and a classical baseline before proposing a learned model.
 
 ### Core question
 
@@ -481,6 +485,8 @@ This transfers the baseline discipline; it does not choose a model family.
 ---
 
 ## Session 3 — Data relations, splits, metrics, calibration, and shift
+
+**Launch:** Name the train, test, and deployment relations, split rule, metric, and one future shift that the held-out score cannot settle.
 
 ### Core question
 
@@ -705,6 +711,8 @@ rewritten before an additional score is useful.
 ---
 
 ## Session 4 — Objectives, autodiff, optimization, and training systems
+
+**Launch:** Trace objective → gradient → update → system condition, then say which optimization, evaluation, or generalization question the trace leaves open.
 
 ### Core question
 
@@ -945,6 +953,8 @@ proposed trace could actually support.
 
 ## Session 5 — ML debugging, observability, and evidence that can fail usefully
 
+**Launch:** When an aggregate score moves, list the data, representation, metric, model, system, and serving hypotheses before changing the model.
+
 ### Core question
 
 **When an aggregate score changes, what should you inspect before changing the
@@ -1001,6 +1011,8 @@ discriminating probe for each major branch.
 ---
 
 ## Session 6 — Responsible ML representation dossier and oral defense
+
+**Launch:** Separate model output, decision owner, authority, evidence, and missing permission before drafting the responsible-ML dossier.
 
 ### Core question
 

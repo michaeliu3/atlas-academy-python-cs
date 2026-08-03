@@ -212,6 +212,8 @@ bounded action.
 
 ## Session 1 — Risk, representation, data, and assumption scope
 
+**Launch:** With the Study Partner, name the population relation, hypothesis class, loss, sample path, and assumption that must hold before an empirical result can travel further.
+
 ### Core question
 
 **What must be true before an empirical result can speak about a larger
@@ -307,6 +309,8 @@ its initial scope.
 
 ## Session 2 — Optimization, estimation, and generalization are different gaps
 
+**Launch:** Label the loss trace's question, comparator, and evidence; then name one optimization, estimation, or generalization question it does not answer.
+
 ### Core question
 
 **Which question did a loss trace answer, and which questions remain open?**
@@ -376,6 +380,8 @@ probe. Include an explicit sentence beginning:
 ---
 
 ## Session 3 — Capacity, learnability, computational limits, and theorem scope
+
+**Launch:** Before reading a theorem, write its probability statement, quantifiers, hypothesis class, sample or resource condition, and one excluded regime.
 
 ### Core question
 
@@ -668,6 +674,8 @@ non-conclusion before you accept the citation as useful.
 
 ## Session 4 — Numerical, systems, and reproducibility evidence
 
+**Launch:** Compare two runs by listing what was fixed, what changed, the numerical path, and the limit of any reproducibility claim.
+
 ### Core question
 
 **What did two runs actually hold fixed?**
@@ -814,6 +822,8 @@ runs.
 
 ## Session 5 — Shift, robustness, monitoring, and bounded human control
 
+**Launch:** Name the declared shift or threat set, monitoring signal, decision owner, and response boundary before calling a system robust.
+
 ### Core question
 
 **What happens after the static test split is no longer the whole story?**
@@ -950,6 +960,8 @@ which one your chosen observable could miss.
 ---
 
 ## Session 6 — Reliable learning systems dossier and bridge to synthesis
+
+**Launch:** Choose one bounded learning-system claim and rehearse its assumptions, evidence, non-claim, monitoring trigger, accountable owner, and next falsifier.
 
 ### Core question
 
