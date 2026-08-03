@@ -66,11 +66,18 @@ test("M25 and M26 preview conversations allow only bounded preparation artifacts
   for (const previewPackage of packages.values()) {
     assert.match(previewPackage.teachingAssistantClarificationPrompt, /preview conversation—not an oral defense/i);
     assert.match(previewPackage.studyPartnerPrompt, /visible chat as a whiteboard/i);
+    assert.match(previewPackage.teachingAssistantClarificationPrompt, /already-configured designated Teaching Assistant role/i);
+    assert.match(previewPackage.studyPartnerPrompt, /already-configured designated Study Partner role/i);
+    assert.match(previewPackage.teachingAssistantClarificationPrompt, /does not configure a chat or grant recording authority/i);
+    assert.match(previewPackage.studyPartnerPrompt, /does not configure a chat or grant recording authority/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /records on/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /pause records|off-record/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /at most one concise/i);
+    assert.match(previewPackage.notionEvidencePacket.conditions, /chat-level intent/i);
+    assert.match(previewPackage.notionEvidencePacket.conditions, /Notion unavailable — local session note/i);
     assert.match(previewPackage.notionEvidencePacket.boundary, /portal.*notion write/i);
     assert.match(previewPackage.notionEvidencePacket.boundary, /raw voice|transcript/i);
+    assert.match(previewPackage.notionEvidencePacket.boundary, /fresh or generic chat.*no recording authority/i);
   }
 });
 
@@ -91,6 +98,11 @@ test("the preview reader has a distinct copyable conversation surface, not a res
   assert.match(component, /Copy Teaching Assistant preparation/u);
   assert.match(component, /Copy Study Partner preparation/u);
   assert.match(component, /Copy the concise evidence packet/u);
+  assert.match(component, /Set up the Teaching Assistant chat first/u);
+  assert.match(component, /Set up the Study Partner chat first/u);
+  assert.match(component, /href="\/learning-partners"/u);
+  assert.match(component, /never grants record authority/u);
+  assert.match(component, /unconfigured\s+or unavailable chat, no write occurs/u);
   assert.match(component, /navigator\.clipboard\.writeText/u);
   assert.doesNotMatch(component, /<ModuleOralDefense|<ModuleTextOralDefense/u);
   assert.doesNotMatch(component, /localStorage|\bfetch\s*\(/u);

@@ -546,7 +546,7 @@
     },
     {
       "path": "content/course/synthesis-preview-conversations.v1.json",
-      "sha256": "9174520cc2b70e9440a99068c406f17b3e88e9744dbb1cfbf3b3b2c63f1fb928"
+      "sha256": "eb5a457fcd9611e397cac312d85af661b0da9c069bd6342202d8c1ad92a2987a"
     },
     {
       "path": "content/modules/01_values_state_execution.md",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "c1b7aa1321450eb43dd077739101d0fe359550f76822a4fc42c4f60ec68ff226"
+      "sha256": "d24025fe5485efb21a859f93bf1286a6afb28d6fccc66ad8c7762c5461122f45"
     }
   ]
 }
