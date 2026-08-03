@@ -7,18 +7,19 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-08-02 (GitHub Dependabot alert API recheck, the
-committed lockfile dependency graph, and `pnpm audit --prod --json`). The live
-API reported five open alerts on protected default branch `main` at
-`33fadbd49b0e33900f21aba06ed40845c3cbd641` (three high, two medium). Its
-checked-in lockfile resolves `postcss@8.5.24` and `sharp@0.35.2`, both beyond
-the alerts' first patched versions; this review branch resolves
-`postcss@8.5.18` and `sharp@0.35.2`, also patched. GitHub nevertheless still
-marks the four runtime alerts open. The push notice still reported six (four
-high, two moderate), so it is treated as stale or otherwise not yet reconciled
-rather than as authoritative current state. The current production-only audit
-returned zero findings; it does not close the live GitHub alerts or erase the
-separately triaged development path.
+**Last examined:** 2026-08-03 (live GitHub Dependabot API, the default and
+review-branch lockfile graphs, and `pnpm audit --prod --json`). The live API
+reported five open alerts on protected default branch `main` at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` (three high, two medium). That
+branch still resolves `next@16.2.11 → postcss@8.4.31` and `sharp@0.34.5`.
+The review branch for draft [PR #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
+resolves `next@16.2.12 → postcss@8.5.18` and `sharp@0.35.2`, beyond the
+alerts' first patched versions. Those are candidate remediations only until a
+normal reviewed merge reaches `main` and Dependabot recalculates. The push
+notice still reported six (four high, two moderate); direct API evidence of
+five open alerts is authoritative for this register. The current
+production-only audit returned zero findings; it does not close the live
+GitHub alerts or erase the separately triaged development path.
 **Owner:** Atlas repository maintainer. **Recheck trigger:** before any private
 deployment, after a relevant upstream release, and before closing or dismissing
 an alert. No alert is considered resolved until the reviewed branch is pushed,
@@ -59,16 +60,17 @@ introduced the scoped runtime-remediation candidate. Its later descendant
 [`394f20396e21b2289fe4706227c41464b83ac497`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/394f20396e21b2289fe4706227c41464b83ac497)
 was validated by successful [GitHub Actions run 30568694668](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30568694668).
 The source-change commit and later CI source head are deliberately distinct.
-The protected default branch now has patched PostCSS/sharp resolutions, but
-the four runtime alerts will not be called resolved until GitHub has refreshed
-or otherwise reconciled each corresponding alert state.
+The protected default branch does **not** yet have the candidate PostCSS/sharp
+resolutions. The four runtime alerts will not be called resolved until the
+reviewed remediation is normally merged to `main` and GitHub has refreshed or
+otherwise reconciled each corresponding alert state.
 
 | Alert | Scope | Candidate lockfile evidence | Required patched version | Candidate disposition |
 | --- | --- | --- | --- | --- |
-| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | review `next@16.2.12 → postcss@8.5.18`; default lock `postcss@8.5.24` | 8.5.18 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
-| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | review `next@16.2.12 → postcss@8.5.18`; default lock `postcss@8.5.24` | 8.5.12 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
-| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | review `next@16.2.12 → postcss@8.5.18`; default lock `postcss@8.5.24` | 8.5.10 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
-| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | review/default `sharp@0.35.2` | 0.35.0 | Patched lock paths; live alert remains open. Recheck/reconcile Dependabot on `main`. |
+| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | review `next@16.2.12 → postcss@8.5.18`; default `next@16.2.11 → postcss@8.4.31` | 8.5.18 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
+| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | review `next@16.2.12 → postcss@8.5.18`; default `next@16.2.11 → postcss@8.4.31` | 8.5.12 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
+| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | review `next@16.2.12 → postcss@8.5.18`; default `next@16.2.11 → postcss@8.4.31` | 8.5.10 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
+| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | review `sharp@0.35.2`; default `sharp@0.34.5` | 0.35.0 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
 
 ## Withdrawn alert record
 
