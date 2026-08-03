@@ -26,7 +26,7 @@ test("foundation remediation keeps the five direct misconception repairs study-r
     assert.match(markdown, /\| 6 \|/u, `${moduleId} needs a source/evidence route through Session 6.`);
   }
 
-  assert.match(m1, /Prediction gate — lexical scope is a binding trace/u);
+  assert.match(m1, /^### Prediction before reveal — lexical scope is a binding trace$/mu);
   assert.match(m1, /nonlocal label/u);
   assert.match(m1, /Reveal after writing your prediction and confidence\./u);
   assert.match(m1, /\| Binding\/state trace \|/u);
@@ -41,7 +41,7 @@ test("foundation remediation keeps the five direct misconception repairs study-r
   assert.match(m3, /behavioral law/u);
 
   assert.match(m4, /branch-counting condition, not a probability-independence claim/u);
-  assert.match(m4, /Prediction gate — unequal branches need a sum/u);
+  assert.match(m4, /^### Prediction before reveal — unequal branches require a sum$/mu);
   assert.match(m4, /There are `1 \+ 3 \+ 0 = 4` valid pairs/u);
   assert.match(m4, /Full counting techniques, discrete probability/u);
 
