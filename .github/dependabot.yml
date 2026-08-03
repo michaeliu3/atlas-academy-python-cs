@@ -4,9 +4,20 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    # One reviewed version-update batch avoids five independent full CI runs.
+    # Security updates are not matched by this version-update group or limit.
+    open-pull-requests-limit: 1
+    groups:
+      routine-version-updates:
+        patterns:
+          - "*"
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
-    open-pull-requests-limit: 3
+    # Keep the action updates reviewable as one full, protected CI gate.
+    open-pull-requests-limit: 1
+    groups:
+      routine-version-updates:
+        patterns:
+          - "*"
