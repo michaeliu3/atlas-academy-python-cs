@@ -83,6 +83,21 @@ test("private guided continuation remains distinct from portal release", async (
   assert.match(privateRoute, /for a finite joint distribution/u);
   assert.ok(privateRoute.includes("\\mathbb E[\\widehat g_t\\mid\\mathcal F_{t-1}]"));
   assert.match(privateRoute, /M31 bounded reference-card set/u);
+  assert.match(privateRoute, /M31 20–40-minute pilot run card/u);
+  assert.match(
+    privateRoute,
+    /frozen\s+M31 candidate[\s\S]{0,520}no new mathematics, source claim, route access, or review state/u,
+  );
+  assert.match(privateRoute, /Stop at forty\s+minutes even if the larger M31 pack has more to explore/u);
+  assert.match(privateRoute, /Neither choice creates progress, review, or release evidence/u);
+  assert.match(
+    privateRoute,
+    /visible equation, code block, and a prose or ASCII fallback[\s\S]{0,140}readable/u,
+  );
+  assert.match(
+    privateRoute,
+    /What this pilot can show:[\s\S]{0,560}cannot show:[\s\S]{0,440}M25\/M26 gate/u,
+  );
   assert.match(privateRoute, /m31RidgeConditioningCard\(\)/u);
   assert.match(privateRoute, /m31GradientDescentRateCard\(10\)/u);
   assert.match(privateRoute, /evaluateM31BinaryChannelDistortion/u);

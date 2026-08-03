@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Made the first private M31 trial easier to run without loosening its boundary:
+  the existing guided route now has one 20–40-minute pilot card that joins the
+  frozen candidate, Session 1 micro-artifact, prerequisite retrieval,
+  whiteboard/readability observation, changed-premise reasoning, and a
+  learner-controlled handoff. It stops short of M31 source/accessibility review,
+  a successful record write, mastery, portal access, release, or any M25/M26
+  gate change.
 - Closed a preview-chat setup gap without expanding the portal: M25/M26
   preparation cards now send first-time learners to configure the matching
   designated TA or Study Partner chat, explicitly keep fresh/generic chats
