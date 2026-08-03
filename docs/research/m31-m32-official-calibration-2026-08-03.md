@@ -11,11 +11,13 @@ code, figures, assignments, or solutions without an asset-level reuse review.
 
 ## Official primary sources checked
 
-All sources below were accessed **2026-08-03**.
+All sources below were accessed **2026-08-03**. University sources calibrate
+academic scope; Python, NumPy, JAX, and PyTorch documentation is used only for
+the API facts each project owns.
 
 | Source | Calibration use |
 | --- | --- |
-| [Stanford EE364a](https://web.stanford.edu/class/ee364a/), [Boyd & Vandenberghe, *Convex Optimization*](https://web.stanford.edu/~boyd/cvxbook/), and [CMU 10-725](https://stat.cmu.edu/~siva/teaching/725/) | Convexity, first-order/projected/stochastic methods, duality, KKT, and the distinction between a bounded six-session bridge and a full graduate optimization course. |
+| [MIT 6.251J](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/), [Stanford EE364a](https://web.stanford.edu/class/ee364a/), [Boyd & Vandenberghe, *Convex Optimization*](https://web.stanford.edu/~boyd/cvxbook/), and [CMU 10-725](https://stat.cmu.edu/~siva/teaching/725/) | Convexity, first-order/projected/stochastic methods, duality, KKT, and the distinction between a bounded six-session bridge and a full graduate optimization course. |
 | [MIT 6.441 lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) | Entropy, divergence, mutual information, rate-distortion, and the depth intentionally outside M31. |
 | [CMU 15-418/618 schedule](https://www.cs.cmu.edu/~418/schedule.html) and [MIT 12.010](https://ocw.mit.edu/courses/12-010-computational-methods-of-scientific-programming-fall-2024/) | Locality, GPU/CUDA, synchronization, workload-driven measurement, scientific-programming verification, and reproducibility. |
 | [Python buffer protocol](https://docs.python.org/3.14/c-api/buffer.html) and [NumPy 2.3 `shares_memory`](https://numpy.org/doc/2.3/reference/generated/numpy.shares_memory.html) | Source-owned requirements for buffer release/contiguity and exact-versus-conservative alias checks. |
@@ -86,3 +88,32 @@ using the existing equation/code/timeline material and record only the
 learner-controlled summary: one misunderstanding repaired, one accessibility
 or whiteboard observation, and one forward handoff. This is not a release,
 grade, automatic record write, or basis to change authoring-only status.
+
+## Scope comparison and recommended sequence
+
+**M31 is a bridge, not a compressed EE364a, 10-725, 6.251J, or 6.441.** Keep
+the six-session progression: formulation and geometry → constraints and
+certificates → exact versus projected evidence → stochastic/non-convex limits
+→ information and ELBO boundaries. Retrieve earlier calculus, linear algebra,
+probability, and algorithms first; hand the resulting evidence card forward to
+M32. Do not add broad optimizer surveys, coding theory, or interior-point
+methods before the existing dossier.
+
+**M32 is an applied systems-reasoning bridge, not a replacement for CMU
+15-418/618 laboratories.** Keep its progression: public boundary → execution
+and measurement → representation and numerics → ownership and synchronization
+→ autodiff and precision → reproducible dossier. Use the CPU/text fallback by
+default. Introduce a JAX or PyTorch lens only after naming the version and
+backend; it clarifies documented semantics, never becomes a hardware
+requirement, benchmark claim, or route gate.
+
+## Licensing, reuse, and explicit non-equivalence
+
+This note and the workbooks remain original, link-only paraphrase. MIT OCW
+assets require the attribution and licence terms published for the specific
+asset; Stanford and CMU course pages provide no blanket permission to reuse
+their course assets. Official platform documentation supports narrow API-fact
+citations only and does not authorize copying its prose, examples, figures, or
+source code. This calibration creates no university enrollment, faculty
+feedback, peer environment, assessment, credit, degree, learner mastery, or
+instruction-equivalence claim.

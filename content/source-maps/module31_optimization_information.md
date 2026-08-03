@@ -53,3 +53,7 @@ version, access date, license/reuse notice, and source-to-claim link against
 the exact candidate commit. University/open-course material calibrates
 instructional scope; it does not promise institutional equivalence, grant
 blanket reuse rights, or establish learner competence.
+
+The focused [2026-08-03 official calibration](../../docs/research/m31-m32-official-calibration-2026-08-03.md)
+records the scope check and its remaining delivery-evidence boundary. It is not
+a source-map selection, review approval, or release record.
