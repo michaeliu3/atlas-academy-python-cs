@@ -582,7 +582,7 @@
     },
     {
       "path": "content/modules/09_trees_heaps_sorting_ordered.md",
-      "sha256": "ce05dbec4fd4e384963886acf762b4067db4dc3b9affb3c15b00c3edd238a163"
+      "sha256": "47d69b832c408776b96c62c7a614f739bce1e7c07dc4c21038bee891c44d6592"
     },
     {
       "path": "content/modules/10_graph_algorithms_network_models.md",
@@ -874,7 +874,7 @@
     },
     {
       "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md",
-      "sha256": "0a9d3c3e89a7506730dc8acdc2e9d983a9d7773924f0ba91cd297ac0ff1dc887"
+      "sha256": "9d4c009fff832e9cefd246c554bf6f45ce8488ead50573f12e118b23a57c2034"
     },
     {
       "path": "content/source-maps/python_curriculum_sources.md",
