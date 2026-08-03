@@ -614,21 +614,32 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 329,
-    ambiguous: 134,
-    missing: 17,
+    "pointer-present": 361,
+    ambiguous: 107,
+    missing: 12,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    25,
+    20,
   );
-  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 14);
+  assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 9);
   assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 3);
   assert.ok(
     audit.modules
-      .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05"].includes(moduleId))
+      .filter(({ moduleId }) => ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10"].includes(moduleId))
       .every(({ evidence }) => Object.values(evidence).every(({ status }) => status === "pointer-present")),
+  );
+  assert.ok(
+    audit.modules
+      .filter(({ moduleId }) => ["m08", "m09"].includes(moduleId))
+      .every(
+        ({ evidence }) =>
+          evidence["first-principles"].status === "ambiguous" &&
+          Object.entries(evidence)
+            .filter(([criterionId]) => criterionId !== "first-principles")
+            .every(([, { status }]) => status === "pointer-present"),
+      ),
   );
 });
 
