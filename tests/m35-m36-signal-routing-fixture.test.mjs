@@ -384,9 +384,14 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
   assert.match(m36Workbook, /Hoeffding's inequality gives/u);
   assert.match(m36Workbook, /Quantifier card — uniform deviation is not yet PAC learnability/u);
   assert.ok(m36Workbook.includes("\\exists A\\;\\forall\\varepsilon,\\delta\\in(0,1)"));
-  assert.match(m36Workbook, /but not on the later universally\s+quantified/u);
+  assert.ok(
+    m36Workbook.includes("\\forall m\\ge m_{\\mathcal H}(\\varepsilon,\\delta)"),
+    "The PAC card must state its sample-complexity threshold for every sufficient sample count.",
+  );
+  assert.ok(m36Workbook.includes("\\Pr_{S\\sim P^m,\\,A}"));
+  assert.match(m36Workbook, /but\s+not on the later universally\s+quantified/u);
   assert.ok(m36Workbook.includes("\\(P\\) or \\(c\\)"));
-  assert.match(m36Workbook, /Computational efficiency is an additional claim/u);
+  assert.match(m36Workbook, /Computational\s+efficiency is an additional claim/u);
   assert.match(m36Workbook, /Bartlett–Foster–Telgarsky spectral-normalized margin-bound example/u);
   assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);

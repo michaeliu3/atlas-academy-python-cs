@@ -82,11 +82,11 @@
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "099259da72edec32e3a4e7f6a2d6b614006f35ffb98883ae91be3127f80b1c40"
+      "sha256": "a34b168c76279eaeec61364b2ab9d1e35f10133dd774dec715c854dc6b77b750"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "3eb7a550f126f69bf5b51b5faca9e1a17fb2362b2025ef61f26943b96e8c871d"
+      "sha256": "35c08b580a0a8fc5cfb794a146a2a6ca11560ab782ef3796212d0356e71b89e3"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
@@ -94,7 +94,7 @@
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "af4e184359ab94f4b3872cbcb641f37c2155f6510c8caac530a0d502244c0a88"
+      "sha256": "24974f1779a333f1244d3f6bb25dd7519f0f0e3ce705932260400747f0a7de74"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -838,7 +838,7 @@
     },
     {
       "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
-      "sha256": "e21a3135495ad40731e526f327ef7c82c2eb2e770b71103f167c34edc7e4a292"
+      "sha256": "80dfd35976e3d852b849b6891b00cba45f4707089e426a5ec173f3757c89e421"
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",

@@ -52,4 +52,13 @@ test("M36 freezes a hidden review candidate without changing its authoring-only 
   assert.equal(m36?.studioId, null);
   assert.ok(!projectReaderModules(graph).some(({ id }) => id === "m36"));
   assert.ok(!manifest.modules.some(({ id }) => id === "m36"));
+
+  const frozenCandidate = (
+    await snapshot.readText("content/modules/36_statistical_learning_theory_reliable_deep_learning.md")
+  ).text;
+  assert.ok(
+    frozenCandidate.includes("\\forall m\\ge m_{\\mathcal H}(\\varepsilon,\\delta)"),
+    "The frozen M36 candidate must retain the PAC sample-threshold quantifier.",
+  );
+  assert.ok(frozenCandidate.includes("\\Pr_{S\\sim P^m,\\,A}"));
 });

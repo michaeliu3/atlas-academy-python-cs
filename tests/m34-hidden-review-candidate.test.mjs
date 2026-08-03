@@ -52,4 +52,21 @@ test("M34 freezes a hidden review candidate without changing its authoring-only 
   assert.equal(m34?.studioId, null);
   assert.ok(!projectReaderModules(graph).some(({ id }) => id === "m34"));
   assert.ok(!manifest.modules.some(({ id }) => id === "m34"));
+
+  const [frozenCandidate, frozenLedger] = await Promise.all([
+    snapshot.readText("content/modules/34_classical_ai_search_constraints_decision.md"),
+    snapshot.readText("content/source-maps/module34_classical_ai_search_constraints_decision.md"),
+  ]);
+  assert.match(
+    frozenCandidate.text,
+    /finite or otherwise stated termination regime/u,
+    "The no-reopen A* regime must state a termination condition.",
+  );
+  for (const sourceUrl of [
+    "https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html",
+    "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+  ]) {
+    assert.ok(frozenCandidate.text.includes(sourceUrl));
+    assert.ok(frozenLedger.text.includes(sourceUrl));
+  }
 });

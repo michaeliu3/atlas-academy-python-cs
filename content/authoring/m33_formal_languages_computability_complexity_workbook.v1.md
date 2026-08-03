@@ -722,9 +722,11 @@ f(\texttt{n#k#E})=\texttt{n#(n-k)#E}.
 
 For malformed input, use one named branch: **map malformed strings to a fixed no-instance.**
 Use `2#2#0,1`: it encodes a two-vertex graph with one edge and threshold \(2\),
-so no independent set can meet the threshold. Every malformed string maps to
-this fixed target no-instance; it is not in `VC`, and this target is not in
-`IS`, so the branch preserves the iff instead of leaving the map partial.
+so no independent set can meet the threshold. Every malformed **source** string
+is outside `VC` and maps to this fixed target outside `IS`. The target itself
+is a valid `VC` instance (its two vertices cover the edge), so do not conflate
+source-language membership with target-language membership. This branch
+preserves the iff instead of leaving the map partial.
 Checking separators, decimal fields, endpoint
 bounds, order, and duplicates; subtracting \(k\) from \(n\); and copying the
 edge field each take polynomial time in the input-string length. Under this

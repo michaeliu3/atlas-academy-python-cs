@@ -52,4 +52,14 @@ test("M33 freezes a hidden review candidate without changing its authoring-only 
   assert.equal(m33?.studioId, null);
   assert.ok(!projectReaderModules(graph).some(({ id }) => id === "m33"));
   assert.ok(!manifest.modules.some(({ id }) => id === "m33"));
+
+  const frozenCandidate = (
+    await snapshot.readText("content/modules/33_formal_languages_computability_complexity.md")
+  ).text;
+  assert.match(
+    frozenCandidate,
+    /Every malformed \*\*source\*\* string\s+is outside `VC` and maps to this fixed target outside `IS`/u,
+    "The fixed branch must distinguish malformed-source membership from its target-language membership.",
+  );
+  assert.match(frozenCandidate, /The target itself\s+is a valid `VC` instance/u);
 });

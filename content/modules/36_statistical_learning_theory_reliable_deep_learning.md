@@ -493,15 +493,17 @@ c(X)]\), the relevant order is
 
 \[
 \exists A\;\forall\varepsilon,\delta\in(0,1)\;\exists m_{\mathcal H}(\varepsilon,\delta)\;
-\forall P\;\forall c\in\mathcal H:\quad
-\Pr_{S\sim P^{m_{\mathcal H}(\varepsilon,\delta)},\,A}
+\forall m\ge m_{\mathcal H}(\varepsilon,\delta)\;\forall P\;\forall c\in\mathcal H:\quad
+\Pr_{S\sim P^m,\,A}
 \!\left[R_{P,c}(A(S))\le\varepsilon\right]\ge1-\delta.
 \]
 
 Here the IID inputs in \(S\) are labelled by the realizable target \(c\).
-The sufficient \(m_{\mathcal H}(\varepsilon,\delta)\) may depend on the
-fixed class and \(\varepsilon,\delta\), but not on the later universally
-quantified \(P\) or \(c\). Computational efficiency is an additional claim:
+\(m_{\mathcal H}(\varepsilon,\delta)\) is a sufficient threshold: the
+conclusion must hold for every declared sample count \(m\) at or above it.
+The threshold may depend on the fixed class and \(\varepsilon,\delta\), but
+not on the later universally quantified \(P\) or \(c\). Computational
+efficiency is an additional claim:
 it needs a separately stated polynomial sample/runtime bound under named
 encoding and size conventions.
 
@@ -511,7 +513,7 @@ Before reading that as a slogan, mark the roles:
 | --- | --- |
 | **Assumed** | target concept in \(\mathcal H\), loss/error convention, eligible distributions, and IID sample relation |
 | **Existential** | learner \(A\) and sufficient \(m_{\mathcal H}(\varepsilon,\delta)\), selected before \(P\) and \(c\) |
-| **Universal** | \(\varepsilon\), \(\delta\), each eligible \(P\), and each target \(c\in\mathcal H\) |
+| **Universal** | \(\varepsilon\), \(\delta\), each declared \(m\ge m_{\mathcal H}(\varepsilon,\delta)\), each eligible \(P\), and each target \(c\in\mathcal H\) |
 | **Random** | sampled examples and any declared randomness in \(A\) |
 | **Claimed** | the stated error/confidence conclusion for \(A\), not an efficiency claim unless one is separately proved |
 
