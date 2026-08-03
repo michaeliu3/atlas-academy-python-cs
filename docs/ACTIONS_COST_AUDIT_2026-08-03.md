@@ -17,7 +17,8 @@ Each full gate intentionally starts four Ubuntu jobs:
 3. `Teaching models on Python 3.14`; and
 4. `Browser accessibility acceptance`.
 
-For example, [Course CI run 30795582906](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30795582906)
+Before the Python/browser de-duplication change, [Course CI run
+30795582906](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30795582906)
 used 1,513 runner-seconds (25m 13s): 15m 50s portal, 6m 09s browser,
 1m 24s Python 3.12, and 1m 50s Python 3.14. The run count rose from #45 on the
 July 30 pull request to #280 at the current PR head; the provenance ledger
