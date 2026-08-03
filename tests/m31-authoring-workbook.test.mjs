@@ -13,13 +13,14 @@ import {
 } from "../lib/mermaid-accessibility.mjs";
 import { extractTableOfContents } from "../lib/heading-ids.js";
 
-const candidatePath = "content/authoring/m31_optimization_information_workbook.v1.md";
+const authoringWorkbookPath = "content/authoring/m31_optimization_information_workbook.v1.md";
+const reviewCandidatePath = "content/modules/31_optimization_information.md";
 
 test("the M31 six-session candidate is tracked as authoring evidence without becoming learner access", async () => {
   const [graph, contract, candidate] = await Promise.all([
     loadCourseGraph(),
     loadAdvancedModuleContractRegistry(),
-    readFile(candidatePath, "utf8"),
+    readFile(authoringWorkbookPath, "utf8"),
   ]);
   const report = await validateAdvancedModuleContractRegistry(graph, contract);
   const m31Graph = graph.modules.find(({ id }) => id === "m31");
@@ -42,12 +43,12 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
     id: "m31-authoring-workbook-draft",
     kind: "file",
     role: "course-content",
-    path: candidatePath,
+    path: authoringWorkbookPath,
     locator: null,
     note: "Complete authoring-only M31 workbook candidate; it is not a reader route, review approval, or release record.",
   });
   assert.ok(
-    report.releaseInputPaths.some((path) => path.replaceAll("\\", "/").endsWith(candidatePath)),
+    report.releaseInputPaths.some((path) => path.replaceAll("\\", "/").endsWith(authoringWorkbookPath)),
   );
   for (const sessionNumber of [1, 2, 3, 4, 5, 6]) {
     assert.match(candidate, new RegExp(`^## Session ${sessionNumber} —`, "mu"));
@@ -114,7 +115,40 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /configured private destination is\s+reachable/u);
   assert.match(candidate, /may report a saved note only after\s+direct evidence of a\s+successful write/u);
 
-  const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: candidatePath });
+  const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: authoringWorkbookPath });
+  const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
+  assert.equal(visualBlocks.length, 2);
+  assert.equal(visualReport.summary.completeBlocks, 2);
+  assert.ok(visualBlocks.every(({ metadata }) => metadata?.id.startsWith("m31-")));
+  assert.ok(visualBlocks.every(({ metadata }) => metadata?.alternative.length >= 40));
+});
+
+test("the frozen M31 review candidate retains the study-ready structural spine", async () => {
+  const candidate = await readFile(reviewCandidatePath, "utf8");
+
+  for (const sessionNumber of [1, 2, 3, 4, 5, 6]) {
+    assert.match(candidate, new RegExp(`^## Session ${sessionNumber} —`, "mu"));
+  }
+  assert.deepEqual(
+    extractTableOfContents(candidate)
+      .filter(({ depth, title }) => depth === 3 && title.startsWith("Output:"))
+      .map(({ id }) => id),
+    [
+      "output-objective-geometry-sheet",
+      "output-stationarity-and-feasibility-ledger",
+      "output-constraint-claim-table",
+      "output-solver-selection-rationale",
+      "output-stochastic-information-experiment-card",
+      "output-optimization-and-information-evidence-dossier",
+    ],
+  );
+  assert.match(candidate, /^## Confidence-aware diagnostic and spaced review/mu);
+  assert.match(candidate, /Teaching Assistant prompt — M31/u);
+  assert.match(candidate, /Study Partner prompt — M31/u);
+  assert.match(candidate, /^## Source and reuse boundary/mu);
+  assert.match(candidate, /^## Candidate release boundary/mu);
+
+  const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: reviewCandidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
   assert.equal(visualBlocks.length, 2);
   assert.equal(visualReport.summary.completeBlocks, 2);
