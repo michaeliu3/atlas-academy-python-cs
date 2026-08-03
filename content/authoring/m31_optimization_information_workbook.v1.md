@@ -625,7 +625,7 @@ Start at `(1, 1)`: the initial gap is `50.5`; after ten steps the **bound** is
 about `45.67`. The actual trace can be much lower because the high-curvature
 coordinate is eliminated by this particular step size. A bound need not be
 tight to be useful; it makes the condition number and the theorem scope
-visible. Inspect `m31GradientDescentRateCard(10)` and compare every actual
+visible. Inspect [`m31GradientDescentRateCard(10)`](../../lib/m31-optimization-authoring-model.js) and compare every actual
 row with its stated upper bound before quoting either number.
 
 Now change one premise. Project the step onto a hard set, use a stale/noisy

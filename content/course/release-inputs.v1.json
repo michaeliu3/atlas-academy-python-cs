@@ -74,27 +74,27 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "4a99928d8c506a69ab44972ac20bc56aeb5548a6873b2f0bdc30d06287dd9af6"
+      "sha256": "cf983f64c8807edf4db82ce74e9185837fa84ceca93a91172fa7628a34772c1c"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "bf76adc299b67ee9a9110e31c7bc08f86d462817acedabbf3394306861c55fd4"
+      "sha256": "1f0de3a245dd10b8cc5ec5a65de7b33143a8dc4c4c162b9d1723bd7c93b1a194"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "6e07ef5e51b45ad1245c3b753af467e868cad7593cd6cd4989dc5070fa2ab73c"
+      "sha256": "49514985bcc6d6ae4baa1ea3158341b8ff9230821369a870f491880c292dd7b2"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "75392572aafba4cb77226c20b02c6c0bb98837ae77c77d8d10607f2724542a4e"
+      "sha256": "f7546cb4a148e6e0c245b23621f453245988e26ea27f6e6c26af701ed1688d2c"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "0173f31b249b355b0e03886bd989c519d4cda0b9d8ef467f0115891066cd3ebc"
+      "sha256": "2f2432519db7058528f5e47160441bdcf9d57880efe8a14ec7c145b1f8f831dc"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "d78d63243825e9eed5ed8a0539157b85768ef8d5c09014d5ee65ae8f133719ab"
+      "sha256": "da807f6b8e4626dfc64522712205442fc28ab0d938a905dd95dcc8bd859b815f"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -518,7 +518,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "76dea87f1a4012a80efe9d0a8268464cee9b4b0836ad24be42139e9f8613e69d"
+      "sha256": "c61d2124d350498ca6574df8ab6c6c811c23b88944cb7d3b36a191a5c167d50f"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "45dc9ff474209cf8ffb7010ccf12484186fb184d60a4be8d463ccec5cfdccf79"
+      "sha256": "69b37d112ab1cc10d963847a97cf28b3c9e0f166084409d510ceb166c3f76fb2"
     }
   ]
 }
