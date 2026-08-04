@@ -673,7 +673,7 @@ export function DiagnosticExperience() {
             Atlas does not transfer this brief or activate records. Say <code>records on</code>{" "}
             in that exact chat only if you want its configured concise-note policy.
           </p>
-          <Link href="/modules">Open the course library</Link>
+          <Link href="/modules">Open the lecture notes</Link>
           <button
             className="diagnostic-reset-action"
             type="button"

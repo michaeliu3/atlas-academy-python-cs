@@ -325,7 +325,7 @@ export default function AtlasCoreRoutePage() {
             informed.
           </p>
           <Link className={styles.primaryLink} href="/modules">
-            Browse the course library <span aria-hidden="true">→</span>
+            Browse the lecture notes <span aria-hidden="true">→</span>
           </Link>
         </section>
       </div>

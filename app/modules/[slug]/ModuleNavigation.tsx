@@ -142,7 +142,7 @@ export function ModuleNavigation({
         ) : (
           <Link className="sequence-link sequence-previous" href="/modules">
             <span>Previous</span>
-            <strong>← Course library</strong>
+            <strong>← Lecture notes</strong>
           </Link>
         )}
         {courseModule.nextRouteNumber ? (
@@ -150,7 +150,7 @@ export function ModuleNavigation({
         ) : (
           <Link className="sequence-link sequence-next" href="/modules">
             <span>Next</span>
-            <strong>Return to the course library →</strong>
+            <strong>Return to the lecture notes →</strong>
           </Link>
         )}
       </div>
