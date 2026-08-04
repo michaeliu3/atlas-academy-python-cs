@@ -18,6 +18,8 @@
     "validate:built-downloads": "node scripts/validate-built-downloads.mjs",
     "validate:performance-budget": "node scripts/validate-client-performance-budget.mjs",
     "check:generated": "node scripts/check-generated.mjs",
+    "generate:goal-compliance": "node scripts/generate-goal-compliance.mjs",
+    "check:goal-compliance": "node scripts/generate-goal-compliance.mjs --check",
     "types:worker": "wrangler types worker-configuration.d.ts --check",
     "typecheck": "tsc --noEmit",
     "predev": "pnpm sync:modules",

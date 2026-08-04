@@ -2,10 +2,11 @@
 
 > **Updated 2026-08-04.** This is the concise status record for the active
 > course-authoring goal. It separates usable learning material from portal
-> access, release evidence, and learner mastery. The detailed
-> [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) remains the historical
-> release-hardening record; it is not the best summary of current learning
-> progress. Neither document is the final goal-completion audit.
+> access, release evidence, and learner mastery. The generated
+> [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) is the compact current
+> truth surface; its [append-only history](GOAL_COMPLIANCE_HISTORY.md) preserves
+> detailed release-hardening evidence. Neither document is the final
+> goal-completion audit.
 
 | Goal area | Current evidence | Status and honest boundary |
 | --- | --- | --- |

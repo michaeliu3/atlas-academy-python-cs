@@ -107,6 +107,12 @@ const releaseInputsPath = resolve(
   "course",
   "release-inputs.v1.json",
 );
+const goalComplianceSourcePath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "goal-compliance.v1.json",
+);
 const legacyModuleContractAuditPath = resolve(siteRoot, legacyModuleContractAuditRelativePath);
 const legacyModuleContractAuditReportPath = resolve(
   siteRoot,
@@ -303,6 +309,7 @@ const legacyCandidatePreflightProfilesReport = await validateLegacyCandidatePref
 );
 const releaseInputPaths = new Set([
   graphPath,
+  goalComplianceSourcePath,
   synthesisPreviewConversationsPath,
   performanceBudgetPolicyPath,
   contractPath,

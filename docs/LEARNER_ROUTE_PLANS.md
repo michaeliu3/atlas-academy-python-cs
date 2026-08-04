@@ -327,8 +327,9 @@ say `end session` to close automatic session-summary authority until a new
 `records on`; an explicit correction or deletion remains separately authorized.
 Keep secrets, raw voice/transcripts, personal diagnostics, and private notes
 out of Git; a successful write still needs direct evidence. See the [live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md)
-and the [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) for the remaining
-implementation work.
+and the generated [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) for the
+remaining implementation work. Its [append-only history](GOAL_COMPLIANCE_HISTORY.md)
+preserves the older detailed release-hardening record.
 
 ## What this plan does and does not promise
 

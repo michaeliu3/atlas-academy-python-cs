@@ -70,7 +70,7 @@ test("private guided continuation remains distinct from portal release", async (
     readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../docs/LIVE_CODEX_LEARNING_WORKFLOW.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/COURSE_COMPLETION_SNAPSHOT.md", import.meta.url), "utf8"),
-    readFile(new URL("../docs/GOAL_COMPLIANCE_MATRIX.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/GOAL_COMPLIANCE_HISTORY.md", import.meta.url), "utf8"),
   ]);
 
   assert.match(

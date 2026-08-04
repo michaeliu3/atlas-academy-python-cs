@@ -19,7 +19,7 @@ test("M32 primary-source research remains a bounded authoring input, not a sourc
     readJson("../content/course/contracts/module-contract-registry.v3.json"),
     readJson("../content/course/release-inputs.v1.json"),
     readFile(new URL("../CHANGELOG.md", import.meta.url), "utf8"),
-    readFile(new URL("../docs/GOAL_COMPLIANCE_MATRIX.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/GOAL_COMPLIANCE_HISTORY.md", import.meta.url), "utf8"),
   ]);
 
   assert.match(research, /^# Module 32 .*Primary-Source Research/mu);

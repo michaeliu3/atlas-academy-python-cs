@@ -212,6 +212,7 @@ export async function validateCourseContracts(
   let provenanceSourceReady = false;
   const releaseInputPaths = new Set([
     courseGraphPathFor(validationSiteRoot),
+    resolve(validationSiteRoot, "content", "course", "goal-compliance.v1.json"),
     synthesisPreviewConversationsPathFor(validationSiteRoot),
     performanceBudgetPolicyPathFor(validationSiteRoot),
     moduleContractRegistryPath(validationSiteRoot),

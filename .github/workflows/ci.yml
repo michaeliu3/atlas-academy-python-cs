@@ -98,6 +98,8 @@ jobs:
         run: pnpm sync:modules
       - name: Verify generated course artifacts are committed
         run: pnpm check:generated
+      - name: Verify generated goal-compliance matrix
+        run: pnpm check:goal-compliance
       - name: Verify generated Worker types
         run: pnpm types:worker
       - name: Strict TypeScript typecheck
@@ -142,6 +144,8 @@ jobs:
         run: pnpm sync:modules
       - name: Verify generated course artifacts are committed
         run: pnpm check:generated
+      - name: Verify generated goal-compliance matrix
+        run: pnpm check:goal-compliance
       - name: Run the content-focused feedback suite
         run: pnpm test:content
 
@@ -244,6 +248,8 @@ jobs:
         run: pnpm sync:modules
       - name: Verify generated course artifacts are committed
         run: pnpm check:generated
+      - name: Verify generated goal-compliance matrix
+        run: pnpm check:goal-compliance
       - name: Reuse the portal build from the quality gate
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
