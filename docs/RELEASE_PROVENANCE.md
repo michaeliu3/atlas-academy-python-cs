@@ -279,3 +279,17 @@ snapshot. For the current alert count and exact default-branch/review-branch
 disposition, consult the living [dependency risk register](DEPENDENCY_RISK_REGISTER.md),
 last examined 2026-08-03. This pointer does not claim a merged remediation,
 alert closure, private deployment, or security-clean state.
+
+## Recorded source-ref observation (2026-08-04)
+
+At this direct GitHub API readback,
+[`codex/atlas-60-day-route-history`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/codex/atlas-60-day-route-history)
+resolved to [`d5bce33582eb7f54a01d3edd9299d2f5cb0b951f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/d5bce33582eb7f54a01d3edd9299d2f5cb0b951f)
+after its ordinary additive push. A GitHub Actions query for that exact SHA
+returned zero workflow runs, as expected because Course CI only reacts to
+`push` on `main` and no pull-request state was changed.
+
+This records current, reviewable source provenance and the absence of an
+unnecessary hosted-run cost for that history-only push. It does **not** record
+a successful CI gate, human review, release, deployment, security clearance,
+or learner outcome for the commit.

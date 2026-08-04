@@ -365,6 +365,44 @@ function criterionLabel(criterionId) {
   return criterionId.replaceAll("-", " ");
 }
 
+function materialReadinessSummary(audit, graph) {
+  const auditEntryByModuleId = new Map(audit.modules.map((entry) => [entry.moduleId, entry]));
+  const moduleIdsForReaderAccess = (readerAccess) => graph.modules
+    .filter((module) => module.number <= 30 && module.state?.readerAccess === readerAccess)
+    .map(({ id }) => id);
+  const hasCompleteStructuralEvidence = (moduleId) => {
+    const entry = auditEntryByModuleId.get(moduleId);
+    return entry !== undefined && exactCriterionIds.every(
+      (criterionId) => entry.evidence[criterionId]?.status === "pointer-present",
+    );
+  };
+  const hasOnlyPrerequisiteMapAmbiguity = (moduleId) => {
+    const entry = auditEntryByModuleId.get(moduleId);
+    return entry !== undefined && exactCriterionIds.every((criterionId) => {
+      const status = entry.evidence[criterionId]?.status;
+      return criterionId === "prerequisite-forward-map"
+        ? status === "ambiguous"
+        : status === "pointer-present";
+    });
+  };
+
+  const openModuleIds = moduleIdsForReaderAccess("full");
+  const previewModuleIds = moduleIdsForReaderAccess("preview");
+  return {
+    openModuleIds,
+    openModulesWithCompleteStructuralEvidence: openModuleIds.filter(hasCompleteStructuralEvidence),
+    previewModuleIds,
+    previewModulesWithOnlyPrerequisiteMapAmbiguity: previewModuleIds.filter(
+      hasOnlyPrerequisiteMapAmbiguity,
+    ),
+    modulesWithMissingStructuralEvidence: audit.modules
+      .filter(({ evidence }) => exactCriterionIds.some(
+        (criterionId) => evidence[criterionId]?.status === "missing",
+      ))
+      .map(({ moduleId }) => moduleId),
+  };
+}
+
 /**
  * Render the checked-in review report from the validated audit registry. The
  * output intentionally contains only pointer status and scope—not approval,
@@ -414,6 +452,23 @@ export function renderLegacyModuleContractAuditReport(audit, report) {
 - M25/M26 remain preview-only in the canonical graph. This audit neither changes their availability nor permits their authoring-only prerequisites to be bypassed.
 
 The validator resolved ${report.summary.modules} modules and ${report.summary.totalCriteria} criteria: **${report.summary.byStatus["pointer-present"]} P**, **${report.summary.byStatus.ambiguous} A**, **${report.summary.byStatus.missing} M**. It records **0 human approvals** and **0 publication changes**.
+
+## Study-pack structural floor
+
+The active study-ready standard is represented here by the existing sixteen
+criteria: knowledge position/progression (map, six sessions, handoff),
+first-principles rigor, code-reading/debugging/design, prediction, transfer,
+source/reuse route, accessible visual alternative, confidence diagnostic,
+retrieval, dossier/rubric, oral defense, and distinct Teaching Assistant and
+Study Partner handoffs.
+
+- **${report.summary.materialReadiness.openModulesWithCompleteStructuralEvidence.length} / ${report.summary.materialReadiness.openModuleIds.length}** portal-open study packs have every structural criterion present.
+- **${report.summary.materialReadiness.previewModulesWithOnlyPrerequisiteMapAmbiguity.length} / ${report.summary.materialReadiness.previewModuleIds.length}** preview packs have no missing structural criterion, but retain the intentional prerequisite/forward-map ambiguity that keeps M25/M26 reference-only.
+- Modules with missing structural evidence: **${report.summary.materialReadiness.modulesWithMissingStructuralEvidence.length}**.
+
+This is a content-completeness floor for private study. It is not a human
+quality approval, accessibility conformance result, source-license clearance,
+learner outcome, Core credit, publication, or deployment claim.
 
 ## Matrix
 
@@ -640,6 +695,7 @@ export async function validateLegacyModuleContractAudit(
     errors.push("Audit module entries must exactly match canonical learner-ready M1–M30 scope.");
   }
 
+  summary.materialReadiness = materialReadinessSummary(audit, graph);
   auditFailure(errors);
   return { audit, summary };
 }

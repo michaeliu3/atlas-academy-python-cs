@@ -621,7 +621,10 @@ test("the advanced bridge derives direct academic consumers from the canonical g
 });
 
 test("the legacy module-contract audit resolves every M1–M30 pointer without approval or publication claims", async () => {
-  const audit = await loadLegacyModuleContractAudit();
+  const [audit, graph] = await Promise.all([
+    loadLegacyModuleContractAudit(),
+    loadCourseGraph(),
+  ]);
   const report = await validateLegacyModuleContractAudit(audit);
 
   assert.equal(report.summary.modules, 30);
@@ -640,6 +643,16 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   );
   assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 0);
   assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 0);
+  const expectedOpenModuleIds = graph.modules
+    .filter(({ number, state }) => number <= 30 && state.readerAccess === "full")
+    .map(({ id }) => id);
+  assert.deepEqual(report.summary.materialReadiness, {
+    openModuleIds: expectedOpenModuleIds,
+    openModulesWithCompleteStructuralEvidence: expectedOpenModuleIds,
+    previewModuleIds: ["m25", "m26"],
+    previewModulesWithOnlyPrerequisiteMapAmbiguity: ["m25", "m26"],
+    modulesWithMissingStructuralEvidence: [],
+  });
   const expectedAmbiguousByModule = new Map([
     ["m25", ["prerequisite-forward-map"]],
     ["m26", ["prerequisite-forward-map"]],
