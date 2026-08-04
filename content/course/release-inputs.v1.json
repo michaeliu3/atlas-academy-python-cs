@@ -778,11 +778,11 @@
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
-      "sha256": "0ce26f130bcc9c7b3550afbfa6a6d6783e8e7b2c0a1aa35054825b6bc2c53773"
+      "sha256": "86d067db872daef5bb185ca23445bb05a276c1435e20e52f89b4d8bb7412ed4e"
     },
     {
       "path": "content/source-maps/module26_systems_capstone_source_map.md",
-      "sha256": "bca08e1d237706b3ef051e0c9f301c2a785adbc7899d4af8bd65810ce060aa73"
+      "sha256": "ee89792323183f3d72d644485a38f135b595b36fc7a90e7b04a943ccc9ad0ec1"
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "6b0ec85e94a9c3346cbb022d50357162bdb99d0da699a9f37a8314f315365162"
+      "sha256": "5ea00663e4aa773b4c2587bc59990a66d363cf9aca5cf05257a755b4c3d0c396"
     }
   ]
 }
