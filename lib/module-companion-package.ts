@@ -3,17 +3,20 @@ import {
   courseCatalog,
   getCourseGraphModule,
   type CourseAvailability,
-  type CoursePrivateGuidedStudy,
 } from "./course-catalog";
 import { getModuleCompanionGuide, type ModuleCompanionGuide } from "./module-companion-guides";
 import { buildModuleCompanionPackage } from "./module-companion-package-builder.mjs";
+
+export type ModuleCompanionPrivateGuidedStudy = {
+  status: "ready";
+};
 
 export type ModuleCompanionForwardHandoff = {
   moduleId: string;
   number: number;
   title: string;
   availability: CourseAvailability;
-  privateGuidedStudy: CoursePrivateGuidedStudy | null;
+  privateGuidedStudy: ModuleCompanionPrivateGuidedStudy | null;
 };
 
 export type ModuleCompanionPackage = {
@@ -24,7 +27,7 @@ export type ModuleCompanionPackage = {
     title: string;
     purpose: string;
     availability: CourseAvailability;
-    privateGuidedStudy: CoursePrivateGuidedStudy | null;
+    privateGuidedStudy: ModuleCompanionPrivateGuidedStudy | null;
     academicPrerequisites: ModuleCompanionForwardHandoff[];
     declaredForwardHandoff: ModuleCompanionForwardHandoff | null;
   };

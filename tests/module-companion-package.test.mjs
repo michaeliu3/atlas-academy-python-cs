@@ -95,12 +95,13 @@ test("the M31 private-pack fact reaches chat handoffs without opening the portal
 
   assert.deepEqual(m31Companion.module.privateGuidedStudy, {
     status: "ready",
-    workbookPath: "content/authoring/m31_optimization_information_workbook.v1.md",
   });
   assert.deepEqual(m30Companion.module.declaredForwardHandoff.privateGuidedStudy, m31Companion.module.privateGuidedStudy);
   assert.match(m30Companion.studyPartner.contextPrompt, /private guided-study pack is ready for direct chat-led study/i);
   assert.match(m31Companion.teachingAssistant.contextPrompt, /portal remains hidden and authoring-only/i);
   assert.match(m31Companion.studyPartner.contextPrompt, /does not create reader access, Core credit, a release, or a mastery claim/i);
+  assert.doesNotMatch(JSON.stringify(m30Companion), /m31_optimization_information_workbook\.v1\.md/u);
+  assert.doesNotMatch(JSON.stringify(m31Companion), /content\/authoring\//u);
 });
 
 test("M1 chat contexts state the reachable-Notion and unavailable-write boundary", async () => {

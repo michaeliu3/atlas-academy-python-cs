@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -111,7 +112,10 @@ function validatePrivateGuidedStudy(value, number) {
   const expectedPrefix = `content/authoring/m${String(number).padStart(2, "0")}_`;
   if (
     !value.workbookPath.startsWith(expectedPrefix) ||
-    !value.workbookPath.endsWith("_workbook.v1.md")
+    !value.workbookPath.endsWith("_workbook.v1.md") ||
+    value.workbookPath.includes("\\") ||
+    value.workbookPath.split("/").some((segment) => segment === "" || segment === "." || segment === "..") ||
+    !existsSync(resolve(siteRoot, value.workbookPath))
   ) {
     fail(`Module ${number} private guided-study workbookPath must name its checked-in authoring workbook.`);
   }
