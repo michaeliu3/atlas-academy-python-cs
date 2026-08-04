@@ -196,6 +196,13 @@ test("only the six hidden advanced modules may declare a ready private guided-st
     () => validateCourseGraph(forgedPackPath),
     /Module 31 private guided-study workbookPath must name its checked-in authoring workbook/u,
   );
+
+  const traversalPackPath = structuredClone(graph);
+  traversalPackPath.modules.find(({ number }) => number === 31).state.privateGuidedStudy.workbookPath = "content/authoring/m31_/../../../lib/not_a_workbook_workbook.v1.md";
+  assert.throws(
+    () => validateCourseGraph(traversalPackPath),
+    /Module 31 private guided-study workbookPath must name its checked-in authoring workbook/u,
+  );
 });
 
 test("the canonical Scope Matrix maps every calibration level without turning a planned target into access", async () => {
