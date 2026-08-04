@@ -80,6 +80,11 @@ test("private guided continuation remains distinct from portal release", async (
   assert.match(privateRoute, /M18–M24 → M32/u);
   assert.equal(graph.modules.find(({ id }) => id === "m31").forwardModuleNumber, 18);
   assert.match(
+    routePage,
+    /ready for designated private guided study[\s\S]{0,180}formal review and release evidence remain pending/u,
+  );
+  assert.doesNotMatch(routePage, /release material is reviewed/u);
+  assert.match(
     privateRoute,
     /four short M28\/M29\/M30\s+retrieval checks/u,
   );

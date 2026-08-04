@@ -133,7 +133,7 @@ export default function AtlasCoreRoutePage() {
             orientation-only previews.
           </p>
           <p className={styles.availability}>
-            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules are ready for designated private guided study while their portal reader remains hidden and their release material is reviewed.
+            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules are ready for designated private guided study while their portal reader remains hidden and formal review and release evidence remain pending.
           </p>
           <p className={styles.availability}>
             <strong>Open material is available for study, not a published,
