@@ -12,10 +12,10 @@ The comparison is about intellectual scope, prerequisite logic, and evidence
 standards. It is not a claim of enrollment, faculty feedback, contact hours,
 grading, peer learning, credit, a degree, or equivalence to any course.
 
-M27–M30 are reader-visible legacy workbooks. M31–M36 are candidate workbooks
-for **private instructor-led draft study only**: they remain authoring-only and
-hidden in the Atlas portal. Their use does not create portal access, Core
-credit, publication, release readiness, or mastery evidence.
+M27–M30 are reader-visible legacy workbooks. M31–M36 are ready for
+**designated private guided study** while their portal reader remains hidden.
+Their use does not create portal access, Core credit, publication, release
+readiness, or mastery evidence.
 
 Atlas links to and paraphrases these sources. It does not copy their lecture
 notes, slides, assignments, solutions, figures, recordings, or code without a

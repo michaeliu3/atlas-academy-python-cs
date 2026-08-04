@@ -47,12 +47,12 @@ Expanding the calendar is a repair, not failure.
 
 ## Private advanced study packs
 
-These six packs are structured for private instructor-led study. They remain
+These six packs are ready for designated private guided study. They remain
 **authoring-only in the portal**: they are not reader-visible, published,
 reviewed-release material, or evidence that a learner has completed the
 advanced chain.
 
-| Module | Private guided-study draft | Frozen hidden review candidate | Use it to build |
+| Module | Private guided-study pack | Frozen hidden review candidate | Use it to build |
 | --- | --- | --- | --- |
 | M31 | [Optimization & Information](../content/authoring/m31_optimization_information_workbook.v1.md) | [M31 candidate](../content/modules/31_optimization_information.md) | Formulation, constraints, finite optimization evidence, and information trade-offs. |
 | M32 | [Systems Languages, Scientific Python & Accelerators](../content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md) | [M32 candidate](../content/modules/32_systems_languages_scientific_python_accelerators.md) | Array/ownership/execution traces, numerical policy, and reproducible measurements. |
@@ -66,7 +66,7 @@ section to the designated chat when the chat cannot see the private repository;
 do not ask it to invent missing sources, experiments, or results.
 
 The two columns have different jobs. The authoring workbook is the private
-guided-study draft. The candidate is a separate, fixed review scope selected by
+guided-study pack. The candidate is a separate, fixed review scope selected by
 `content/course/contracts/review-candidates/m31.v1.json` through `m36.v1.json`,
 with its own adjacent candidate source ledger. A file under `content/modules/`
 does **not** make it a portal module: M31–M36 remain absent from the manifest,
@@ -74,7 +74,7 @@ hidden from the reader, and authoring-only in the canonical graph.
 
 Name the exact copy in a chat handoff. Use the frozen candidate when a session
 is intended to inform a qualified delivery/readability review; use the
-authoring workbook for private drafting or exploration. Do not silently treat
+authoring workbook for private guided instruction or exploration. Do not silently treat
 feedback about one copy as evidence about the other, and do not call either a
 portal release, Core credit, or mastery evidence.
 
@@ -83,7 +83,7 @@ portal release, Core credit, or mastery evidence.
 Use this same short bridge for **M31, M32, M33, M34, M35, and M36**. It keeps a
 session artifact, uncertainty, and next question visible when the learner moves
 between the Study Partner and Teaching Assistant chats. These remain private,
-authoring-only guided-study sessions—not a grade, release, unlock, or credit.
+portal-hidden guided-study sessions—not a grade, release, unlock, or credit.
 
 ### Sessions 2–5 — Study Partner → TA checkpoint
 
@@ -197,7 +197,7 @@ solver comparison, numerical robustness, proxy validity, or authority to decide.
 
 ### Start the M32 private session
 
-M32 remains a private, authoring-only instructor-led pack. Start it only after
+M32 is a ready private guided-study pack whose portal reader remains hidden. Start it only after
 the connected M12, M17, M19, M24/M28, and M31 ideas are available for repair;
 this begins a learning conversation, not a portal route, grade, or completion
 record. In the designated **Study Partner** chat, say `records on` only if you
@@ -252,7 +252,7 @@ still missing, and which broad claim must remain withdrawn.
 
 ### Start the M33 private session
 
-M33 remains a private, authoring-only instructor-led pack. In the designated
+M33 is a ready private guided-study pack whose portal reader remains hidden. In the designated
 **Study Partner** chat, say `records on` only if you want the configured concise
 Notion-note policy to apply. Then send or say:
 
@@ -296,7 +296,7 @@ and what proof obligation remains.
 
 ### Start the M34 private session
 
-M34 remains a private, authoring-only instructor-led pack. In the designated
+M34 is a ready private guided-study pack whose portal reader remains hidden. In the designated
 **Study Partner** chat, say `records on` only if you want the configured concise
 Notion-note policy to apply. Then send or say:
 
@@ -341,7 +341,7 @@ general solvers, planners, or decision authority.
 
 ### Start the M35 private session
 
-M35 remains a private, authoring-only instructor-led pack. In the designated
+M35 is a ready private guided-study pack whose portal reader remains hidden. In the designated
 **Study Partner** chat, say `records on` only if you want the configured concise
 Notion-note policy to apply. Then send or say:
 
@@ -387,7 +387,7 @@ they do not describe people, a trained production model, or a deployment.
 
 ### Start the M36 private session
 
-M36 remains a private, authoring-only instructor-led pack. In the designated
+M36 is a ready private guided-study pack whose portal reader remains hidden. In the designated
 **Study Partner** chat, say `records on` only if you want the configured concise
 Notion-note policy to apply. Then send or say:
 

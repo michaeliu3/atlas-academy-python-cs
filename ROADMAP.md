@@ -12,7 +12,7 @@ oral-defense, or project evidence shows a necessary bridge.
 - **28** `legacy-open` (M1–M24, M27–M30); full reader access, review pending.
 - **0** `published` (—); only verified, deployed releases count here.
 - **2** `preview` (M25–M26); reference-only, never route credit.
-- **6** `authoring-only` (M31–M36); hidden from the learner reader.
+- **6** `authoring-only` (M31–M36); portal reader hidden; see designated private guided-study availability below when declared.
 - Designated private guided-study packs: **6** (M31–M36); portal reader remains hidden and this creates no route credit, release, or mastery evidence.
 - Contract states: **30** legacy baselines; **0** verified.
 <!-- atlas-course-status:end -->

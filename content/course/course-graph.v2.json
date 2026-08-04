@@ -5161,7 +5161,8 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready"
+          "status": "ready",
+          "delivery": "designated-codex-chats"
         }
       }
     },
@@ -5211,7 +5212,8 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready"
+          "status": "ready",
+          "delivery": "designated-codex-chats"
         }
       }
     },
@@ -5259,7 +5261,8 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready"
+          "status": "ready",
+          "delivery": "designated-codex-chats"
         }
       }
     },
@@ -5308,7 +5311,8 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready"
+          "status": "ready",
+          "delivery": "designated-codex-chats"
         }
       }
     },
@@ -5359,7 +5363,8 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready"
+          "status": "ready",
+          "delivery": "designated-codex-chats"
         }
       }
     },
@@ -5409,7 +5414,8 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready"
+          "status": "ready",
+          "delivery": "designated-codex-chats"
         }
       }
     }

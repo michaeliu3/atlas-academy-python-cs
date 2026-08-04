@@ -34,13 +34,14 @@ export default function LearningPartnersPage() {
             once, then use the module-specific follow-on context in each open
             module&apos;s oral-defense panel. For M31–M36, use the
             {" "}
-            <a href="https://github.com/michaeliu3/atlas-academy-python-cs/blob/agent/60-day-route/docs/PRIVATE_GUIDED_LEARNING_ROUTE.md">
+            <a href="https://github.com/michaeliu3/atlas-academy-python-cs/blob/codex/atlas-60-day-route-history/docs/PRIVATE_GUIDED_LEARNING_ROUTE.md">
               private advanced-study launch guide
             </a>{" "}
             in the authenticated source repository, one named session at a
-            time. That guide remains authoring-only: it does not unlock a
-            portal reader, create Core credit, or create a record. Share only
-            the smallest context needed for the next learning move.
+            time. Those packs are ready for designated private guided learning;
+            their portal reader remains hidden, and they do not create Core
+            credit, a publication claim, or a record. Share only the smallest
+            context needed for the next learning move.
           </p>
         </header>
 

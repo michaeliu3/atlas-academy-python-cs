@@ -12,7 +12,12 @@ type ModuleNavigationProps = {
 
 type AccessState = CourseModule["state"];
 
-function availabilityLabel({ availability }: AccessState) {
+function availabilityLabel(state: AccessState) {
+  if (state.privateGuidedStudy?.status === "ready") {
+    return "Private guided study ready";
+  }
+
+  const { availability } = state;
   switch (availability) {
     case "legacy-open":
       return "Open material · review pending";
@@ -29,7 +34,12 @@ function availabilityLabel({ availability }: AccessState) {
   }
 }
 
-function routeAccessNote({ availability }: AccessState) {
+function routeAccessNote(state: AccessState) {
+  if (state.privateGuidedStudy?.status === "ready") {
+    return "Private guided study is ready in the designated Codex chats after prerequisites are in place. The portal reader stays hidden and does not grant Core credit.";
+  }
+
+  const { availability } = state;
   switch (availability) {
     case "legacy-open":
       return "Open legacy workbook. Route order does not verify academic prerequisites, contract review, or release evidence.";
@@ -42,7 +52,7 @@ function routeAccessNote({ availability }: AccessState) {
     case "locked":
       return "Locked. Return to the route to review its prerequisites and release boundary.";
     case "authoring-only":
-      return "In authoring. The portal reader pauses here; private instructor-led draft study does not unlock this page or grant Core credit.";
+      return "In authoring. The portal reader pauses here; designated private guided study does not unlock this page or grant Core credit.";
   }
 }
 

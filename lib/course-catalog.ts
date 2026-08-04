@@ -25,6 +25,7 @@ export type CourseRouteRole = "required" | "optional";
 
 export type CoursePrivateGuidedStudy = {
   status: "ready";
+  delivery: "designated-codex-chats";
 };
 
 export type FocusedStudyMinutes = {

@@ -95,6 +95,7 @@ test("the M31 private-pack fact reaches chat handoffs without opening the portal
 
   assert.deepEqual(m31Companion.module.privateGuidedStudy, {
     status: "ready",
+    delivery: "designated-codex-chats",
   });
   assert.deepEqual(m30Companion.module.declaredForwardHandoff.privateGuidedStudy, m31Companion.module.privateGuidedStudy);
   assert.match(m30Companion.studyPartner.contextPrompt, /private guided-study pack is ready for direct chat-led study/i);
@@ -105,14 +106,20 @@ test("the M31 private-pack fact reaches chat handoffs without opening the portal
 
   const statusOnlyModules = clone(graph.modules);
   const statusOnlyM31 = statusOnlyModules.find(({ id }) => id === "m31");
-  assert.deepEqual(statusOnlyM31.state.privateGuidedStudy, { status: "ready" });
+  assert.deepEqual(statusOnlyM31.state.privateGuidedStudy, {
+    status: "ready",
+    delivery: "designated-codex-chats",
+  });
   const statusOnlyCompanion = buildModuleCompanionPackage({
     courseModule: statusOnlyM31,
     graphModules: statusOnlyModules,
     guide: guideById.get("m31"),
     liveWorkflow: workflow,
   });
-  assert.deepEqual(statusOnlyCompanion.module.privateGuidedStudy, { status: "ready" });
+  assert.deepEqual(statusOnlyCompanion.module.privateGuidedStudy, {
+    status: "ready",
+    delivery: "designated-codex-chats",
+  });
 
   const exposedPathModules = clone(statusOnlyModules);
   exposedPathModules.find(({ id }) => id === "m31").state.privateGuidedStudy.workbookPath =
@@ -124,7 +131,7 @@ test("the M31 private-pack fact reaches chat handoffs without opening the portal
       guide: guideById.get("m31"),
       liveWorkflow: workflow,
     }),
-    /privateGuidedStudy must contain only the ready status/u,
+    /privateGuidedStudy must contain the ready status and designated-chat delivery only/u,
   );
 });
 

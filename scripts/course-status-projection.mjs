@@ -124,7 +124,7 @@ export function renderCourseStatusSummary(graph) {
     `- **${legacyOpen?.count ?? 0}** \`legacy-open\` (${formatModuleNumbers(legacyOpen?.moduleNumbers ?? [])}); full reader access, review pending.`,
     `- **${published?.count ?? 0}** \`published\` (${formatModuleNumbers(published?.moduleNumbers ?? [])}); only verified, deployed releases count here.`,
     `- **${preview?.count ?? 0}** \`preview\` (${formatModuleNumbers(preview?.moduleNumbers ?? [])}); reference-only, never route credit.`,
-    `- **${authoringOnly?.count ?? 0}** \`authoring-only\` (${formatModuleNumbers(authoringOnly?.moduleNumbers ?? [])}); hidden from the learner reader.`,
+    `- **${authoringOnly?.count ?? 0}** \`authoring-only\` (${formatModuleNumbers(authoringOnly?.moduleNumbers ?? [])}); portal reader hidden; see designated private guided-study availability below when declared.`,
     `- Designated private guided-study packs: **${status.privateGuidedStudyReady.count}** (${formatModuleNumbers(status.privateGuidedStudyReady.moduleNumbers)}); portal reader remains hidden and this creates no route credit, release, or mastery evidence.`,
     `- Contract states: **${status.contractCounts.get("legacy-baseline") ?? 0}** legacy baselines; **${status.contractCounts.get("verified") ?? 0}** verified.`,
   ].join("\n");

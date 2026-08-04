@@ -38,7 +38,7 @@ personal progress.
 - **28** `legacy-open` (M1–M24, M27–M30); full reader access, review pending.
 - **0** `published` (—); only verified, deployed releases count here.
 - **2** `preview` (M25–M26); reference-only, never route credit.
-- **6** `authoring-only` (M31–M36); hidden from the learner reader.
+- **6** `authoring-only` (M31–M36); portal reader hidden; see designated private guided-study availability below when declared.
 - Designated private guided-study packs: **6** (M31–M36); portal reader remains hidden and this creates no route credit, release, or mastery evidence.
 - Contract states: **30** legacy baselines; **0** verified.
 <!-- atlas-course-status:end -->
@@ -68,7 +68,7 @@ Open legacy material is suitable for study while its full module-contract
 review remains pending. Reference previews are orientation only and do not
 create synthesis or capstone credit. In the **portal/open-material route**,
 authoring-only modules must not be scheduled as Core steps, simulated, or
-self-certified as Atlas completion. Designated private chat-led draft study is
+self-certified as Atlas completion. Designated private chat-led guided study is
 separate and carries the same no-credit/no-release boundary. In the graph,
 `published` is reserved for a verified contract with recorded deployment
 evidence—not a learner-completion signal.

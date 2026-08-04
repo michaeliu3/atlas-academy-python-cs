@@ -75,7 +75,7 @@ test("private guided continuation remains distinct from portal release", async (
 
   assert.match(
     moduleTwentyFour,
-    /private instructor-led draft study[\s\S]{0,260}not a portal unlock, Core credit, or\s+release claim/u,
+    /designated private guided study[\s\S]{0,260}not a portal unlock, Core credit, or\s+release claim/u,
   );
   assert.match(privateRoute, /M18–M24 → M32/u);
   assert.equal(graph.modules.find(({ id }) => id === "m31").forwardModuleNumber, 18);
@@ -149,7 +149,7 @@ test("private guided continuation remains distinct from portal release", async (
   );
   assert.match(
     openMaterialPlans,
-    /In the \*\*portal\/open-material route\*\*,[\s\S]{0,300}private chat-led draft study/u,
+    /In the \*\*portal\/open-material route\*\*,[\s\S]{0,300}private chat-led guided study/u,
   );
   assert.match(routePage, /intended 36-module dependency sequence/u);
   assert.match(routePage, /Primary guided learning happens in Codex/u);

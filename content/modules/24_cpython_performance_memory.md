@@ -955,8 +955,8 @@ reporting incident and include:
 **Canonical forward handoff: Module 32.** Module 32 is authoring-only in the
 portal, so this dossier is a stopping point for the reader-visible
 runtime-evidence branch—not an unlock token for another module. In the
-designated private guided route, the M32 draft pack may be used only for
-private instructor-led draft study; it is not a portal unlock, Core credit, or
+designated private guided route, the ready M32 pack may be used only for
+designated private guided study; it is not a portal unlock, Core credit, or
 release claim. Carry this discipline into its systems-language and accelerator
 work there. Modules 25 and 26 remain later preview-only synthesis and capstone
 material after M31–M36, not Module 24's next learning step. Their shared

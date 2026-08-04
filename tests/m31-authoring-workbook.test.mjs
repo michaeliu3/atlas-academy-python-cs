@@ -37,7 +37,10 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
       availability: "authoring-only",
       contract: { track: "advanced-v1", state: "authoring-only" },
       release: { state: "unrecorded", recordId: null },
-      privateGuidedStudy: { status: "ready" },
+      privateGuidedStudy: {
+        status: "ready",
+        delivery: "designated-codex-chats",
+      },
     },
   );
   assert.deepEqual(workbookInput, {
