@@ -793,10 +793,10 @@
       "title": "Concurrency and Parallelism",
       "summary": "Arc IV: make overlapping work explainable One worker can be correct in isolation while two workers, each doing locally valid work, produce a globally invalid result. Concurrency begins at that seam.",
       "arcId": "arc-iv",
-      "wordCount": 23646,
+      "wordCount": 23642,
       "estimatedMinutes": 104,
       "focusedStudyMinutes": null,
-      "sourceHash": "775d94ea4d4d5e935eb29a19df2232172bcbdb3571ac7cda574280b4b15c3d57",
+      "sourceHash": "470bcd778a4793ef5a9d11cd1582f11ec138c76c973f8a98ec1a51e8537f694e",
       "id": "m19",
       "state": {
         "lifecycle": "learner-material-ready",

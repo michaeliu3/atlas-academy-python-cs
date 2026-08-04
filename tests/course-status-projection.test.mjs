@@ -49,7 +49,10 @@ test("the generated course-status projection derives the current availability tu
     /\*\*6\*\* designated private guided-study packs are ready \(M31–M36\); the portal reader remains hidden/u,
   );
   assert.doesNotMatch(projection, /content\/authoring|workbookPath/u);
-  assert.equal(checkedInProjection, projection);
+  assert.equal(
+    checkedInProjection.replace(/\r\n?/gu, "\n"),
+    projection.replace(/\r\n?/gu, "\n"),
+  );
   await validateCourseStatusProjection(graph);
 });
 

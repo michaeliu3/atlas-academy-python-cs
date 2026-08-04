@@ -398,7 +398,7 @@ test("the M19-M24 candidate oral protocols keep their reader-visible repair anch
     [
       "19_concurrency_parallelism.md",
       [
-        "supportive-oral-defense-protocol--adaptive-non-grading-and-learner-controlled",
+        "supportive-oral-defense-route",
         "123-hint-ladder",
         "level-8--transfer-to-m20-m21-and-m24",
         "study-partner-rehearsal-and-ta-handoff",

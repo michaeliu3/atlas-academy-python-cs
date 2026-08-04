@@ -142,7 +142,6 @@
       "criterionId": "supportive-oral-defense",
       "claim": "The current M19 workbook exposes a constructive oral-defense prompt, candidate-only route, intake, response loop, and hint-ladder anchors for later review.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "session-6-oral-defense"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "supportive-oral-defense-route"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "121-learner-intake-before-a-hint"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/19_concurrency_parallelism.md", "locator": "122-ta-response-loop"},

@@ -646,7 +646,7 @@
         "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["10-confidence-aware-understanding-check", "quiz-routing", "misconception-repair-map"]},
         "retrieval-and-spaced-review": {"status": "pointer-present", "anchors": ["135-spaced-retrieval"]},
         "project-and-evidence-rubric": {"status": "pointer-present", "anchors": ["11-cumulative-project--atlas-multi-worker-correctness-dossier", "119-acceptance-invariants"]},
-        "supportive-oral-defense": {"status": "pointer-present", "anchors": ["supportive-oral-defense-protocol--adaptive-non-grading-and-learner-controlled", "hint-ladder-smallest-repair-and-learner-evidence-summary"]},
+        "supportive-oral-defense": {"status": "pointer-present", "anchors": ["supportive-oral-defense-route", "hint-ladder-smallest-repair-and-learner-evidence-summary"]},
         "ta-prompt": {"status": "pointer-present", "anchors": ["12-teaching-assistant-protocol"]},
         "study-partner-prompt": {"status": "pointer-present", "anchors": ["study-partner-rehearsal-and-ta-handoff"]},
         "forward-handoff": {"status": "pointer-present", "anchors": ["15-exact-boundaries-and-handoffs"]}

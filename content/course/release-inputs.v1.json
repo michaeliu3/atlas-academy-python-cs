@@ -458,7 +458,7 @@
     },
     {
       "path": "content/course/contracts/evidence/m19.v1.json",
-      "sha256": "2c26e6d5bcc69dfc0ceb4f5899acf92f4c6fc4f97b59b8fe365601c3858cabfe"
+      "sha256": "4a7dd46c11d51300eb51e345c21f7216866d148562fb6ddb5ec5e1f9ecfd7a25"
     },
     {
       "path": "content/course/contracts/evidence/m20.v1.json",
@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "4f55fbf1b3fb1fe17364da19e4cc8fc1e527e9991cb76f200b6d2fc8361d58e2"
+      "sha256": "19b394ce9d63bf8e68791f231cc7812db91266a93bc50ff18072dda1335080dc"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "ba720fb973062a9a8cfcd3ce03ecf2e49e34fbe63a930b05982330336101068f"
+      "sha256": "de5a2bec29f5f0f45f9079028ec14852b1bfed80ae85e42af6c295db79678085"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -622,7 +622,7 @@
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "775d94ea4d4d5e935eb29a19df2232172bcbdb3571ac7cda574280b4b15c3d57"
+      "sha256": "470bcd778a4793ef5a9d11cd1582f11ec138c76c973f8a98ec1a51e8537f694e"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "2f773fafc12f68fdf8fa822d07235d84fc19f4ec5f445ecf442ff74ac4dac820"
+      "sha256": "ae8f1eedee205036f9767e9e504767775921e68f47d13a95d795e9ee367e7229"
     }
   ]
 }

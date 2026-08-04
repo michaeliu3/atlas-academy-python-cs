@@ -2000,7 +2000,7 @@ one ordinary run
 
 Even the strongest row is scoped to its assumptions and abstraction map.
 
-### Session 6 oral defense
+### Supportive oral-defense route
 
 Answer the governing question in 300 words:
 
@@ -2022,7 +2022,7 @@ Then provide:
 
 Defend one accepted decision, one rejected patch, and one remaining unknown.
 
-### Supportive oral-defense protocol — adaptive, non-grading, and learner-controlled
+**Adaptive protocol — non-grading and learner-controlled.**
 
 **Current candidate-only supplement.** This route makes the existing Session 6
 defense easier to conduct as a constructive conversation. It is not evidence of
