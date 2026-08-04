@@ -8,26 +8,38 @@
 > product without borrowing authority from a demo, a green check, a benchmark,
 > an agent, or a polished interface?
 
-## Preview boundary
+## Preview boundary — portal preview and private guided-study gate
 
-This is a full orientation preview, not an unlocked Days 56–60 capstone or a
-source of synthesis credit. Its prerequisite path includes the authoring-only
-M31–M36 chain through Module 25. Read it to see the eventual integration
-standard; do not treat its project, studio, or oral-defense material as a
-substitute for the unavailable prerequisite evidence.
+This is a full orientation preview in the portal, not an unlocked Days 56–60
+capstone or a source of synthesis credit. Its prerequisite path includes the
+authoring-only M31–M36 chain through Module 25. Read it to see the eventual
+integration standard; do not treat its project, studio, or oral-defense
+material as a substitute for the unavailable prerequisite evidence.
 
-> Preview mode now: you may make only a `REHEARSAL ONLY` framing card.
-> Do not use the later studio, project, oral defense, or `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` language as a current capstone decision.
+> **Portal preview mode now:** you may make only a `REHEARSAL ONLY` framing
+> card. Do not use the later studio, project, oral defense, or
+> `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` language as a current capstone decision.
+>
+> **Private guided-study evidence gate:** In the learner-designated Teaching
+> Assistant and Study Partner chats, the full six-session M26 work may begin
+> only after the learner supplies a private M25 Next-Step Evidence Dossier with
+> Advanced Evidence Annex, the actual M31–M36 named dossier/packet outputs and
+> TA handoffs behind that annex, and relevant M27–M30 artifacts or explicit
+> `[UNAVAILABLE — …]` markers that narrow or defer the affected claim. A fluent
+> model summary is never a receipt. This permits only a learner-owned,
+> simulated/local `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` recommendation. It does
+> not change the graph or portal access, grant route/Core credit, authorize a
+> real deployment, publish a capstone, or establish release status or mastery.
 
-**Prospective Days 56–60 of the 60-day Atlas Core—only after M25 and its
-M31–M36 prerequisite chain have actual learner-ready release evidence**
+**Private guided Days 56–60 of the 60-day Atlas Core—only after the private
+guided-study evidence gate is met**
 
-**Intended outcome only after that reviewed learner-ready prerequisite chain
-exists:** You can make
-and defend a bounded release decision for one Atlas capability (or a comparable
-open-source contribution). You can trace the claim through representation,
-algorithms, contracts, tests, data, runtime, network, trust, human control,
-packaging, maintenance, and known unknowns.
+**Intended private-study outcome only after that evidence gate is met:** You
+can make and defend a bounded simulated/local release recommendation for one
+Atlas capability (or a comparable open-source contribution proposal). You can
+trace the claim through representation, algorithms, contracts, tests, data,
+runtime, network, trust, human control, packaging, maintenance, and known
+unknowns.
 
 This is not a last-minute build marathon. It is an advanced evidence exercise:
 read the system, recover its architecture, diagnose a failure, review a
@@ -38,10 +50,14 @@ under a changed constraint.
 
 ## How to study this module
 
-> **Preview reading boundary:** The six-session orientation material below is
-> for after the prerequisite gate opens. In preview mode, make only the
-> `REHEARSAL ONLY` framing card; do not use the later layers, project, studio,
-> oral defense, or release-decision language as current capstone work.
+> **Preview reading boundary:** In the portal, the six-session orientation
+> material below is for after the prerequisite gate opens. In preview mode,
+> make only the `REHEARSAL ONLY` framing card; do not use the later layers,
+> project, studio, oral defense, or release-decision language as current
+> capstone work. In the designated private chats, the private guided-study
+> evidence gate above permits the same six sessions as current learning work;
+> the resulting decision remains simulated/local and never changes portal or
+> release state.
 
 ### The exact cumulative invariant
 
@@ -200,8 +216,10 @@ filled from inspected learner-ready artifacts.
 Each row must cite one narrow claim, one assumption, one counterexample or
 non-claim, and one release consequence. A missing row does not become a
 generated summary. It means **[UNAVAILABLE — DEFER OR NARROW CLAIM]**. The
-authoring-only M31–M36 packs are private guided drafts today, not learner
-credit, release proof, or a reason to unlock this preview.
+M31–M36 packs remain authoring-only in the portal. In the private guided route,
+they may contribute only when the learner supplies their actual named outputs
+and handoffs through the private evidence gate; that is not learner credit,
+release proof, or a reason to unlock this portal preview.
 
 ### 1.2 The forward connection
 
@@ -271,6 +289,12 @@ Choose one track, but use the same dossier and rubric.
 Neither track requires a public deployment, real learner data, secrets, or
 external AI access. If these would be needed to make the claim, mark the claim
 as **[UNKNOWN]** and choose a safer local fixture or defer the release.
+
+> **Private guided-route constraint:** In the designated chats, use the Atlas
+> integration track or a local-only external review/proposal. Public submission,
+> maintainer contact, or modification to an external project is outside this
+> private guided route, requires the learner's separate choice, and is not a
+> requested course artifact or evidence.
 
 ### External-track selection check
 
@@ -1180,9 +1204,9 @@ decision still supported by the evidence.
 
 ### Project — Atlas Release Dossier / Open-Source Stewardship Track
 
-> **Future full-module project:** Use this only after M25 and its M31–M36
-> prerequisite chain has actual learner-ready release evidence. In preview,
-> create only the `REHEARSAL ONLY` framing card; do not create a release dossier.
+> **Full private-module project:** Use this only after the private
+> guided-study evidence gate is satisfied. In the portal preview, create only
+> the `REHEARSAL ONLY` framing card; do not create a release dossier.
 
 Produce one integrated dossier for a single vertical capability. It can be a
 small but genuine Atlas slice or a comparable contribution to an existing
@@ -1327,13 +1351,15 @@ sequence.
 
 ~~~text
 You are Atlas Academy's M26 Teaching Assistant. Use this full-module
-oral-defense prompt only after M25 and its M31–M36 prerequisite chain has
-actual learner-ready release evidence. During preview, use only the
-`REHEARSAL ONLY` framing card; do not conduct an oral defense or make a
-release/revise/defer/rollback decision. Conduct a supportive, non-pass/fail
-architecture conversation only after the learner has prepared a Release Dossier
-and its advanced-evidence annex. Start with the release claim,
-owner, invariant, and defer/rollback path. Ask the learner to trace one
+oral-defense prompt only after the private guided-study evidence gate is met:
+the learner supplies the private M25 dossier/annex, the actual M31–M36 named
+outputs and handoffs, and relevant M27–M30 artifacts or explicit unavailable
+markers. During the portal-preview path, use only the `REHEARSAL ONLY` framing
+card; do not conduct an oral defense or make a release/revise/defer/rollback
+decision. Conduct a supportive, non-pass/fail architecture conversation only
+after the learner has prepared a Release Dossier and its advanced-evidence
+annex. Start with the simulated/local release claim, owner, invariant, and
+defer/rollback path. Ask the learner to trace one
 request through the architecture, defend one representation/algorithm or
 learning-system evidence claim, replay one failure, and distinguish one
 observed result from what it does not establish. Then change one premise:
@@ -1342,12 +1368,12 @@ theorem assumption, user refusal, permission boundary, or unavailable M27–M36
 artifact. Ask for a prediction before correcting. Use a hint ladder: locate
 the evidence row; identify its scope/assumption; offer a counterexample;
 ask which exact upstream field changes the decision; require a narrower
-release/revise/defer/rollback decision. Use the visible chat
+simulated/local release/revise/defer/rollback recommendation. Use the visible chat
 as an accessible whiteboard: define symbols, provide equation prose/ASCII
 fallbacks, put code in labelled fences, and make architecture diagrams/traces
 readable after the conversation. End with a learner-controlled evidence
 summary and maintenance handoff. Do not grade, claim platform voice settings,
-or save a raw transcript.
+authorize a real deployment, or save a raw transcript.
 ~~~
 
 ### Learner-controlled evidence summary
@@ -1361,17 +1387,20 @@ raw transcript.
 
 ~~~text
 You are Atlas Academy's M26 Study Partner. Use this full-module rehearsal
-prompt only after M25 and its M31–M36 prerequisite chain has actual learner-ready
-release evidence. During preview, use only the `REHEARSAL ONLY` framing card;
-do not issue a capstone decision or TA handoff. Run a non-grading architecture
-rehearsal for the learner's bounded capstone claim. Use the visible chat as a
+prompt only after the private guided-study evidence gate is met: the learner
+supplies the private M25 dossier/annex, the actual M31–M36 named outputs and
+handoffs, and relevant M27–M30 artifacts or explicit unavailable markers.
+During the portal-preview path, use only the `REHEARSAL ONLY` framing card; do
+not issue a capstone decision or TA handoff. Run a non-grading architecture
+rehearsal for the learner's bounded simulated/local capstone claim. Use the visible chat as a
 readable whiteboard: give diagrams a title and prose alternative, define
 notation, use concise labelled tables, and put code/diffs in language-labelled
 fences. Ask for a 90-second claim-and-invariant explanation, then challenge
 one M27–M36 evidence row: ask what it supports, which assumption it needs,
 what counterexample or non-claim applies, and whether the release decision
 changes when the artifact is unavailable. Change one operational or human
-premise and require a bounded release, revise, defer, or rollback response.
+premise and require a bounded simulated/local release, revise, defer, or
+rollback recommendation.
 End with a compact TA handoff: strongest insight, unresolved misconception,
 exact dossier anchor, decision status, and next falsifier. Do not administer
 the formal oral defense or manufacture missing evidence.

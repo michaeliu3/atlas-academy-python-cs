@@ -46,9 +46,15 @@ The packet is a useful conversation starting point, not completion evidence,
 a route unlock, a platform integration, or a claim that the underlying module
 contract has been reviewed. Reference-preview pages do not expose full-module
 follow-on contexts; authoring-only guide content is not shipped into the public
-reader. The deliberate M25/M26 synthesis-preview exception exposes only
-copyable **preview-preparation** cards—never a full oral defense, studio,
-project, route unlock, or completion claim.
+reader. The M25/M26 portal exception exposes only copyable
+**preview-preparation** cards—never a full oral defense, studio, project,
+route unlock, or completion claim. Separately, after the learner supplies the
+  private guided route's named upstream dossiers and handoffs, the designated
+  chats may begin the full M25 workbook prompts. M26 additionally requires the
+  resulting M25 Next-Step Evidence Dossier, Advanced Evidence Annex, and
+  carried-forward receipts. That private evidence gate does not alter portal
+  access, route/Core credit, publication, release status, or the
+  record/whiteboard policy below.
 
 ## Learner-authorized Notion notes
 

@@ -51,8 +51,13 @@ Atlas deliberately separates two ways to use the same canonical sequence:
   [private guided learning route](PRIVATE_GUIDED_LEARNING_ROUTE.md) for the
   complete chat-led sequence, including the six M31–M36 private draft packs.
   Those packs remain authoring-only in the portal and create no portal access,
-  Core credit, review, or publication claim. M25/M26 remain guided
-  reference-preview/rehearsal material, not synthesis or capstone credit.
+  Core credit, review, or publication claim. After the learner supplies the
+  route's named M31–M36 dossiers/packets, relevant M27–M30 artifacts or honest
+  unavailable markers, and the required TA handoffs, the same private route may
+  begin M25 as evidence-gated guided study. M26 additionally requires the
+  resulting M25 Next-Step Evidence Dossier, Advanced Evidence Annex, and
+  carried-forward receipts. That never changes their portal preview status, Core
+  credit, release, or publication boundary.
 - **Portal/open-material route — the visual and reference mode.** The
   calendar plans below schedule only reader-visible open material. They are a
   truthful availability plan, not a substitute for the private guided route or

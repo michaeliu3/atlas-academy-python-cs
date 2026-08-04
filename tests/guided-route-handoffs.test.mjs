@@ -41,7 +41,7 @@ test("guided handoff copy preserves the required mathematical bridges", async ()
 });
 
 test("private guided continuation remains distinct from portal release", async () => {
-  const [graph, moduleTwentyFour, moduleThirtyOne, moduleThirtyTwo, moduleThirtySix, privateRoute, openMaterialPlans, routePage] = await Promise.all([
+  const [graph, moduleTwentyFour, moduleThirtyOne, moduleThirtyTwo, moduleThirtySix, privateRoute, openMaterialPlans, routePage, liveWorkflow, completionSnapshot, complianceMatrix] = await Promise.all([
     loadCourseGraph(),
     workbook("24_cpython_performance_memory.md"),
     readFile(
@@ -68,6 +68,9 @@ test("private guided continuation remains distinct from portal release", async (
     readFile(new URL("../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/LEARNER_ROUTE_PLANS.md", import.meta.url), "utf8"),
     readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../docs/LIVE_CODEX_LEARNING_WORKFLOW.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/COURSE_COMPLETION_SNAPSHOT.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/GOAL_COMPLIANCE_MATRIX.md", import.meta.url), "utf8"),
   ]);
 
   assert.match(
@@ -114,8 +117,32 @@ test("private guided continuation remains distinct from portal release", async (
   );
   assert.match(
     privateRoute,
-    /M25 reference-preview orientation[\s\S]{0,220}M26 pre-capstone rehearsal preview/u,
+    /M25 private evidence-gated synthesis[\s\S]{0,220}M26 private evidence-gated local capstone/u,
   );
+  assert.match(privateRoute, /## Private M25\/M26 evidence gate/u);
+  assert.match(privateRoute, /Start M25 private study/u);
+  assert.match(privateRoute, /Start M26 private study/u);
+  assert.match(
+    privateRoute,
+    /final named dossier\/packet from \*\*each of\s+M31–M36\*\*/u,
+  );
+  assert.match(privateRoute, /instruction-start gate, not a grade, platform feature, or portal-state\s+change/u);
+  assert.match(
+    privateRoute,
+    /simulated\/local `RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` recommendation[\s\S]{0,260}never authorizes an\s+actual deployment/u,
+  );
+  for (const summary of [openMaterialPlans, liveWorkflow, completionSnapshot, complianceMatrix]) {
+    assert.match(
+      summary,
+      /M26 additionally requires the\s+resulting M25 Next-Step Evidence Dossier, Advanced Evidence Annex, and\s+carried-forward receipts/u,
+    );
+  }
+  const m25 = graph.modules.find(({ id }) => id === "m25");
+  const m26 = graph.modules.find(({ id }) => id === "m26");
+  assert.equal(m25?.state.readerAccess, "preview");
+  assert.equal(m25?.state.availability, "preview");
+  assert.equal(m26?.state.readerAccess, "preview");
+  assert.equal(m26?.state.availability, "preview");
   assert.match(
     openMaterialPlans,
     /## Choose the study surface before choosing a calendar[\s\S]{0,720}Private guided course/u,
