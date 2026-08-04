@@ -325,3 +325,21 @@ This is not a successful full Course CI gate, deployment, private release,
 security clearance, or proof of cancellation of an already-running superseded
 run. The current linearized content batch needs its own normal review-ready
 gate before any release interpretation.
+
+## Current non-draft full-gate observation (2026-08-04)
+
+The additive source head
+[`a5bf821`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a5bf821ed3f1b7f52f039b0706d45d34561ec41a)
+on `agent/60-day-route` received the normal non-draft pull-request Course CI
+run
+[`30958237679`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679)
+with a successful conclusion. The run's generated merge candidate was
+`16ffa9142ca6c840999b6cfa31eed580cabfb973`; its successful jobs were Portal
+quality gate (including the bounded live source-link audit), Node apparatus
+validation (416/416), Teaching models on Python 3.12, Teaching models on
+Python 3.14, and Browser accessibility acceptance (63/63 Chromium/axe routes).
+
+This records automated workflow evidence for that merge candidate and its
+source head. It does not establish human module review, assistive-technology
+completion, Notion or voice-platform behavior, dependency-alert closure,
+private deployment, publication, certification, credit, or learner mastery.

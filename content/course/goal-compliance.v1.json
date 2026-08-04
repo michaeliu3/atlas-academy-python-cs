@@ -6,11 +6,11 @@
   "truth": {
     "lastFullGate": {
       "state": "success",
-      "commit": "2bccea04a2236c734d4d444edfa0c7d930521ffd",
-      "date": "2026-08-02",
-      "runId": "30741679780",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30741679780",
-      "note": "Historical full Course CI gate; it predates the current Draft head."
+      "commit": "a5bf821ed3f1b7f52f039b0706d45d34561ec41a",
+      "date": "2026-08-04",
+      "runId": "30958237679",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679",
+      "note": "Current normal non-draft pull-request Course CI gate; portal, live source links, 416/416 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The run validates the generated merge candidate; the source head is recorded separately."
     },
     "currentDraftContent": {
       "state": "success",
@@ -23,26 +23,30 @@
       "note": "Latest observed Draft content evidence for the preceding material head; source-link shape/freshness checks and the 83-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
     },
     "currentHeadApparatus": {
-      "state": "not-run",
-      "pass": null,
-      "fail": null,
-      "note": "The PR is Draft; apparatus checks are reserved for a non-draft gate."
+      "state": "success",
+      "pass": 416,
+      "fail": 0,
+      "runId": "30958237679",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679",
+      "note": "Current non-draft apparatus job passed all 416 tests on the generated merge candidate; this is automated evidence, not module promotion or learner mastery."
     },
     "currentHeadBrowser": {
-      "state": "not-run",
-      "pass": null,
-      "fail": null,
-      "note": "The current Draft head has no browser/axe run."
+      "state": "success",
+      "pass": 63,
+      "fail": 0,
+      "runId": "30958237679",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679",
+      "note": "Current non-draft Chromium/axe job passed all 63 audited routes on the generated merge candidate; representative assistive-technology review remains open."
     },
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "The latest observed Draft content run 30942073857 passed; this is not a full-gate result."
+      "basis": "Current normal non-draft Course CI run 30958237679 passed the full 416-test Node apparatus suite; this does not promote legacy modules or prove learner outcomes."
     },
     "openAxeViolations": {
-      "count": null,
-      "state": "unknown",
-      "basis": "No current-head browser run; authored Mermaid alternatives are separately reported as 245/245 complete."
+      "count": 0,
+      "state": "none-detected",
+      "basis": "Current normal non-draft browser job in run 30958237679 passed 63/63 Chromium/axe routes; authored Mermaid alternatives are separately reported as 245/245 complete."
     },
     "openDependencyAlerts": {
       "count": 5,
@@ -127,7 +131,7 @@
       "requirement": "Official MIT, CMU, Stanford, Georgia Tech, Berkeley, and comparable materials calibrate claims without copied assets.",
       "state": "partial",
       "evidence": "docs/ACADEMIC_CALIBRATION.md; content/source-maps/; docs/research/; scripts/check-source-links.mjs; tests/source-link-audit.test.mjs",
-      "openItem": "Recheck the bounded live corpus when sources change, expand liveness beyond calibration notes, and finish remaining citation corrections."
+      "openItem": "The current full gate checked 285 calibration URLs with bounded retries; recheck when sources change, expand liveness beyond calibration notes, and finish remaining citation corrections."
     },
     {
       "id": "chat-roles",
@@ -148,7 +152,7 @@
       "requirement": "Instructional visuals, keyboard flows, screen-reader structure, and performance are accessible without reducing rigor.",
       "state": "partial",
       "evidence": "scripts/validate-mermaid-alternatives.mjs; e2e/accessibility.spec.ts; content/course/client-performance-budget.v1.json",
-      "openItem": "Run current-head browser/axe checks and conduct representative assistive-technology review."
+      "openItem": "Current non-draft Chromium/axe acceptance passed 63/63 routes; conduct representative assistive-technology and visual review."
     },
     {
       "id": "safety-privacy-build",
@@ -162,14 +166,14 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs",
-      "openItem": "Obtain one normal non-draft full gate and verify cancellation/required-check behavior."
+      "openItem": "One normal non-draft full gate now passes on run 30958237679; continue verifying cancellation/required-check behavior before release."
     },
     {
       "id": "history-provenance",
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
-      "openItem": "Record the exact final reviewed commit, workflow run, limitations, and deployment state."
+      "openItem": "Run 30958237679 and source head a5bf821 are recorded; still record the final reviewed ref, limitations, and any private deployment state separately."
     },
     {
       "id": "final-audit",

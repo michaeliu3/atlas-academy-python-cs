@@ -83,6 +83,23 @@ matrix without erasing their dated evidence:
   the old “not yet active” statement, but is neither a full gate nor release
   evidence; a review-ready batch must still receive its normal gate.
 
+## Dated full-gate supersession — 2026-08-04
+
+The later additive source head
+[`a5bf821`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a5bf821ed3f1b7f52f039b0706d45d34561ec41a)
+received the normal non-draft pull-request Course CI run
+[`30958237679`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679)
+and passed Portal quality gate (including 285 bounded live source-link checks),
+Node apparatus validation (416/416), both Python teaching-model jobs, and
+Browser accessibility acceptance (63/63 Chromium/axe routes). The run checked
+generated merge candidate `16ffa9142ca6c840999b6cfa31eed580cabfb973` for the
+recorded source head.
+
+This supersedes only the older “no current-head apparatus/browser run” wording
+in the active compliance snapshot. It does not promote any module, replace
+human or assistive-technology review, close dependency alerts, prove Notion or
+voice behavior, establish a private deployment, or establish learner mastery.
+
 ## Evidence interpretation
 
 - **Structural baseline**: automation has checked file/graph/session/path facts.
