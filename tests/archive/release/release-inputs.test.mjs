@@ -4,48 +4,48 @@ import { lstat, readFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { advancedModuleBridgeRelativePath } from "../scripts/advanced-module-bridge.mjs";
+import { advancedModuleBridgeRelativePath } from "../../../scripts/advanced-module-bridge.mjs";
 import {
   advancedModuleContractRelativePath,
   historicalAdvancedProvenanceLedgerPaths,
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
-} from "../scripts/advanced-module-contract.mjs";
-import { loadCourseGraph } from "../scripts/course-graph.mjs";
+} from "../../../scripts/advanced-module-contract.mjs";
+import { loadCourseGraph } from "../../../scripts/course-graph.mjs";
 import {
   legacyModuleContractPacketRelativePath,
   loadModuleContractCandidatePacketRegistry,
   moduleContractCandidatePacketRelativePath,
   validateModuleContractCandidatePacketRegistry,
-} from "../scripts/legacy-module-contract-packet.mjs";
+} from "../../../scripts/legacy-module-contract-packet.mjs";
 import {
   loadLegacyCandidatePreflightProfiles,
   validateLegacyCandidatePreflightProfiles,
-} from "../scripts/legacy-candidate-preflight-profiles.mjs";
-import { moduleContractRegistryRelativePath } from "../scripts/module-contract-registry.mjs";
+} from "../../../scripts/legacy-candidate-preflight-profiles.mjs";
+import { moduleContractRegistryRelativePath } from "../../../scripts/module-contract-registry.mjs";
 import {
   manualLearningRecordWorkflowGuideRelativePath,
   manualLearningRecordWorkflowRelativePath,
-} from "../scripts/manual-learning-record-workflow.mjs";
+} from "../../../scripts/manual-learning-record-workflow.mjs";
 import {
   liveCodexLearningWorkflowGuideRelativePath,
   liveCodexLearningWorkflowRelativePath,
-} from "../scripts/live-codex-learning-workflow.mjs";
-import { moduleLearningCompanionRelativePath } from "../scripts/module-learning-companion.mjs";
-import { legacyModuleContractAuditRelativePath } from "../scripts/validate-legacy-module-contract-audit.mjs";
+} from "../../../scripts/live-codex-learning-workflow.mjs";
+import { moduleLearningCompanionRelativePath } from "../../../scripts/module-learning-companion.mjs";
+import { legacyModuleContractAuditRelativePath } from "../../../scripts/validate-legacy-module-contract-audit.mjs";
 import {
   loadReleaseEvidencePolicy,
   releaseEvidencePolicyRelativePath,
-} from "../scripts/release-evidence-verifier.mjs";
+} from "../../../scripts/release-evidence-verifier.mjs";
 import {
   browserProgressOwnerBindingPolicyRelativePath,
   browserProgressSurfacePolicyRelativePath,
-} from "../scripts/browser-progress-surface-policy.mjs";
-import { loadReleaseInputPolicy } from "../scripts/release-input-policy.mjs";
-import { validateBuiltDownloads } from "../scripts/validate-built-downloads.mjs";
+} from "../../../scripts/browser-progress-surface-policy.mjs";
+import { loadReleaseInputPolicy } from "../../../scripts/release-input-policy.mjs";
+import { validateBuiltDownloads } from "../../../scripts/validate-built-downloads.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
-const siteRoot = resolve(testDirectory, "..");
+const siteRoot = resolve(testDirectory, "../../..");
 const ledgerPath = resolve(siteRoot, "content", "course", "release-inputs.v1.json");
 const advancedProvenanceDocumentPath =
   /^docs\/advanced-evidence\/(m3[1-6])\/(?:provenance|source-review|known-limitations)\.md$/u;
@@ -124,7 +124,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
       "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
     ),
   );
-  assert.ok(paths.includes("docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"));
+  assert.ok(paths.includes("docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"));
   assert.ok(paths.includes("public/downloads/module18_reference.py"));
   assert.doesNotMatch(paths.join("\n"), /(?:^|\/)__pycache__(?:\/|$)|\.py[co](?:\n|$)/u);
 

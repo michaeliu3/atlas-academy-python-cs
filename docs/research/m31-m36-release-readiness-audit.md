@@ -72,7 +72,7 @@ and release evidence is `planned` with no release record.
   and review/evidence schemas are the right seams; do not create another
   registry or delivery-map format.
 - **Historical-audit boundary:**
-  [`docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json`](../M31_M36_PUBLICATION_READINESS_AUDIT.v1.json)
+  [`docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json`](../archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json)
   is explicitly a 2026-07-30 / `a89fcae…` negative snapshot. Preserve it as
   provenance; it cannot describe the newer M32–M36 packs or prove current
   readiness.

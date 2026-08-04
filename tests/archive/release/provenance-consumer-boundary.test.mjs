@@ -7,14 +7,14 @@ import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
-import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
-import { validateLegacyCandidatePreflightProfiles } from "../scripts/legacy-candidate-preflight-profiles.mjs";
-import { validateModuleEvidencePreflight } from "../scripts/module-evidence-preflight.mjs";
-import { validateCourseContracts } from "../scripts/validate-course.mjs";
+import { openGitIndexSnapshot } from "../../../scripts/git-index-snapshot.mjs";
+import { validateLegacyCandidatePreflightProfiles } from "../../../scripts/legacy-candidate-preflight-profiles.mjs";
+import { validateModuleEvidencePreflight } from "../../../scripts/module-evidence-preflight.mjs";
+import { validateCourseContracts } from "../../../scripts/validate-course.mjs";
 
 const execFileAsync = promisify(execFile);
 const testDirectory = dirname(fileURLToPath(import.meta.url));
-const sourceSiteRoot = resolve(testDirectory, "..");
+const sourceSiteRoot = resolve(testDirectory, "../../..");
 
 async function git(root, args) {
   return execFileAsync("git", args, { cwd: root, encoding: "utf8" });

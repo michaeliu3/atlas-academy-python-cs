@@ -7,8 +7,8 @@ import { dirname, join } from "node:path";
 import { promisify } from "node:util";
 import test from "node:test";
 
-import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
-import { validateReleaseInputLedger } from "../scripts/release-input-ledger.mjs";
+import { openGitIndexSnapshot } from "../../../scripts/git-index-snapshot.mjs";
+import { validateReleaseInputLedger } from "../../../scripts/release-input-ledger.mjs";
 
 const execFileAsync = promisify(execFile);
 

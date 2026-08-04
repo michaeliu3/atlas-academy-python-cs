@@ -10,7 +10,7 @@ const defaultSiteRoot = resolve(scriptDirectory, "..");
 const execFileAsync = promisify(execFile);
 
 export const m31M36PublicationReadinessAuditRelativePath =
-  "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json";
+  "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json";
 export const frozenHistoricalCourseGraphRelativePath = "content/course/course-graph.v1.json";
 export const canonicalModuleManifestRelativePath = "content/modules/manifest.json";
 

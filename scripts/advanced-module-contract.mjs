@@ -37,7 +37,7 @@ const allowedRoots = new Set(["app", "content", "docs", "lib", "public", "tests"
 const allowedExtensions = new Set([".json", ".js", ".md", ".mjs", ".py", ".svg", ".ts", ".tsx"]);
 const advancedModuleIds = new Set(["m31", "m32", "m33", "m34", "m35", "m36"]);
 export const historicalAdvancedProvenanceLedgerPaths = [
-  "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+  "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
 ];
 const historicalAdvancedProvenancePaths = new Set(historicalAdvancedProvenanceLedgerPaths);
 const advancedProvenanceDocumentSlots = new Set([

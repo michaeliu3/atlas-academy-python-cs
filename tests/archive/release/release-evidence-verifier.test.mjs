@@ -6,10 +6,10 @@ import {
   loadReleaseEvidencePolicy,
   validateReleaseEvidencePolicy,
   verifyCourseCiEvidence,
-} from "../scripts/release-evidence-verifier.mjs";
+} from "../../../scripts/release-evidence-verifier.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
-const siteRoot = resolve(testDirectory, "..");
+const siteRoot = resolve(testDirectory, "../../..");
 const sourceHeadSha = "0123456789abcdef0123456789abcdef01234567";
 
 function completeEvidence(policy) {
@@ -59,7 +59,7 @@ test("a complete same-repository Course CI snapshot is structurally bound to its
     runId: 9000000001,
     runAttempt: 7,
     runUrl: "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/9000000001",
-    workflowSourceSha256: "b11fc3e03ac8c095dd12643982e06ee441b2f82892c8ef2705e7711b76fb8b0b",
+    workflowSourceSha256: policy.courseCi.workflowSourceSha256,
     requiredJobNames: [
       "Portal quality gate",
       "Teaching models on Python 3.12",

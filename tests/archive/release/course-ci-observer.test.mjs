@@ -3,10 +3,10 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { loadReleaseEvidencePolicy } from "../scripts/release-evidence-verifier.mjs";
+import { loadReleaseEvidencePolicy } from "../../../scripts/release-evidence-verifier.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
-const siteRoot = resolve(testDirectory, "..");
+const siteRoot = resolve(testDirectory, "../../..");
 const observerWorkflowPath = resolve(
   siteRoot,
   ".github",

@@ -326,7 +326,7 @@
           "id": "m31-readiness-audit",
           "kind": "json-pointer",
           "role": "provenance",
-          "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+          "path": "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
           "locator": "/modules/0",
           "note": "Historical negative audit: M31 remains authoring-only and must not be published from planning evidence."
         },

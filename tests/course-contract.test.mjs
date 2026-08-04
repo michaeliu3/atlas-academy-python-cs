@@ -181,11 +181,11 @@ test("the advanced contract rejects premature M31 promotion and broken authoring
 
 test("advanced provenance inputs use fixed historical records or narrow module-scoped slots", () => {
   assert.equal(
-    isAllowedAdvancedProvenancePath("m31", "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"),
+    isAllowedAdvancedProvenancePath("m31", "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"),
     true,
   );
   assert.equal(
-    isAllowedAdvancedProvenancePath("m36", "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"),
+    isAllowedAdvancedProvenancePath("m36", "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json"),
     true,
   );
   assert.equal(

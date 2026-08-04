@@ -11,6 +11,11 @@ const testFiles = (await readdir(testDirectory))
   .filter((filename) => filename.endsWith(".test.mjs"))
   .sort()
   .map((filename) => resolve(testDirectory, filename));
+const archivedReleaseTestDirectory = resolve(testDirectory, "archive", "release");
+const archivedReleaseTestFiles = (await readdir(archivedReleaseTestDirectory))
+  .filter((filename) => filename.endsWith(".test.mjs"))
+  .sort()
+  .map((filename) => resolve(archivedReleaseTestDirectory, filename));
 
 const apparatusTestPatterns = [
   /^(?:advanced-|browser-harness|browser-progress-storage|browser-progress-surface-policy|candidate-preflight|ci-workflow|client-performance-budget|cloudflare-|course-ci-observer|course-contract|course-graph|course-status|dependency-risk|diagnostic-progress-codec|durable-software-studio-accessibility|git-index|guided-route-handoffs|hidden-review|http-security-headers|learner-controlled-export|legacy-|live-codex-learning-workflow|local-progress-codec|manual-learning-record-workflow|math-candidate|mermaid-accessibility|module-companion-package|module-contract|module-learning-companion|module-review|module-session-launches|multiple-choice-prediction-gate|rendered-html|rich-rendering|source-artifact|vinext-)/u,
@@ -26,12 +31,14 @@ function isApparatusTest(path) {
 
 const suiteArgument = process.argv.find((argument) => argument.startsWith("--suite="));
 const suite = suiteArgument?.slice("--suite=".length) ?? "all";
-if (!["all", "content", "apparatus"].includes(suite)) {
-  throw new Error(`Unknown test suite ${suite}; expected all, content, or apparatus.`);
+if (!["all", "content", "apparatus", "release"].includes(suite)) {
+  throw new Error(`Unknown test suite ${suite}; expected all, content, apparatus, or release.`);
 }
-const selectedTestFiles = testFiles.filter((path) =>
-  suite === "all" || (suite === "apparatus" ? isApparatusTest(path) : !isApparatusTest(path)),
-);
+const selectedTestFiles = suite === "release"
+  ? archivedReleaseTestFiles
+  : testFiles.filter((path) =>
+    suite === "all" || (suite === "apparatus" ? isApparatusTest(path) : !isApparatusTest(path)),
+  );
 
 // Several contract/preflight suites each take a Git-index snapshot and verify
 // a large cohort. Letting Node fan every file out to all host cores causes

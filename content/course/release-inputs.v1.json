@@ -110,7 +110,7 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "635ef09eeffea063c5a9d410ef495150708f9884758a3a10d98dd343ac934940"
+      "sha256": "5ca9a2fb4f9ffe51e3b79cefa2ecb212b4144938c980dadf923e7ec61b16dd9a"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m31.v1.json",
@@ -909,7 +909,7 @@
       "sha256": "aada879736dca75b3562926a30d3a0a97560debc7b7f1f4c9b7a014bbcea75f1"
     },
     {
-      "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+      "path": "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
       "sha256": "b35a491ce2c3e33f564b684d468899961dfb8a3dd8a21499de14f94752cc1397"
     },
     {
@@ -1034,7 +1034,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "22ebb27c919cabb110865b00bd4dbb8166c70cc005d10e7c0328d9f2d8cf38e6"
+      "sha256": "93eb45d15397a19487b7db5babc4e6a868d6d6593c8ad5a60a1eb7ed2912dbef"
     },
     {
       "path": "playwright.config.ts",

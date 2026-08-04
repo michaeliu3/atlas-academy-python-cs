@@ -176,7 +176,7 @@ Each contract input has a versioned role. `course-content` and `provenance`
 inputs are included in the generated course-input hash ledger; `source-code`
 and `test` inputs are Git-tracked structural references but are not silently
 reclassified as deployed course content. The current
-`docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` ledger entry is an explicit
+`docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` ledger entry is an explicit
 provenance-only exception: its hash preserves the *do not publish* boundary;
 it does not deploy or expose M31.
 
@@ -258,7 +258,7 @@ structural checks—not prose-quality or learner-experience approval. An
 `authoring-only` entry keeps the adapter's delivery-map field `null`.
 
 Advanced release inputs under `docs/` are deliberately narrow: the historical
-`M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` remains part of the hashed
+`archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json` remains part of the hashed
 ledger, while a future v3 verified module must use only
 `docs/module-evidence/mXX/provenance.md`, `source-review.md`,
 `known-limitations.md`, and `course-ci-evidence.v1.json` for that same module.

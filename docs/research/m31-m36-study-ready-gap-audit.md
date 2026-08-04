@@ -48,7 +48,7 @@ The review-candidate files are not in `content/modules/manifest.json` or the
 generated reader import set. Their presence therefore does not establish a
 learner route, source-map selection, studio, review, release, or completed
 prerequisite. The historical
-[`M31_M36_PUBLICATION_READINESS_AUDIT.v1.json`](../M31_M36_PUBLICATION_READINESS_AUDIT.v1.json)
+[`M31_M36_PUBLICATION_READINESS_AUDIT.v1.json`](../archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json)
 remains a pinned historical snapshot and is not a current file inventory.
 
 ## Concrete gates

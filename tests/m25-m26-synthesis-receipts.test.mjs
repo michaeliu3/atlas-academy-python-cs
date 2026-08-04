@@ -152,7 +152,7 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
 
 test("the v1 M31–M36 audit identifies its graph as a frozen historical fixture", async () => {
   const audit = JSON.parse(
-    await readFile(new URL("../docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json", import.meta.url), "utf8"),
+    await readFile(new URL("../docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json", import.meta.url), "utf8"),
   );
 
   assert.match(audit.scope.purpose, /audited historical commit/u);
