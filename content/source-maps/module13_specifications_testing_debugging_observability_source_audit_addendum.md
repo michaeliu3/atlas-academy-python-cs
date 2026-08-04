@@ -88,3 +88,10 @@ oral-defense quality; confirm the Teaching Assistant and Study Partner roles
 remain distinct; and bind any release claim to the reviewed Git commit, CI,
 known limitations, and verified deployment evidence. This addendum intentionally
 does none of those approvals.
+
+## 2026-08-03 visible-text follow-up
+
+The workbook now adds `Text equivalent — specification to regression evidence
+loop` for its knowledge graph. This resolves one current structural pointer;
+it does not alter the historical audit narrative or prove rendered
+accessibility, learner interaction, review, release, or mastery.

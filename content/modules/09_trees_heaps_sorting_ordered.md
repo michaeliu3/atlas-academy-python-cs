@@ -242,6 +242,26 @@ By the end, Michael can:
 
 Hashing from Module 8 creates a candidate region from equality-compatible keys. It does not maintain comparison order. Before choosing a structure, classify the client operation.
 
+### First-principles derivation — client operations constrain representations
+
+Start by naming what must be recovered: exact identity, one minimum, a
+successor or range, a whole sorted sequence, or a shared prefix. That question
+sets the smallest useful order: equality indexing, parent/child extremum order,
+ordered regions, a total sequence, or symbol paths. An invariant is then the
+local fact that preserves that order through updates; a drawn tree or familiar
+container name is not the invariant.
+
+```text
+client question -> comparison/policy -> minimum useful order
+-> representation invariant -> cost under stated structure assumptions
+```
+
+Change the question and the representation may change: a heap can answer
+`find_min()` without supporting successor, while a BST can support successor
+only under its ordered-region invariant. The next sections test this chain with
+definitions, assumptions, counterexamples, and a fixed workload—not a generic
+claim that one structure is best.
+
 ### Definition — ordered operation, key, and invariant
 
 An **ordered operation** asks for a relation such as minimum, successor,

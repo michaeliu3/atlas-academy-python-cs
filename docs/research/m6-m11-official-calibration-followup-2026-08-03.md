@@ -31,3 +31,12 @@ for its public API boundary. Link or briefly paraphrase with attribution; do
 not copy lectures, slides, exercises, problem sets, solutions, transcripts, or
 course-specific assessment workflows. MIT OCW's terms and individual asset
 licenses must be checked before any reuse beyond this link/cite-only boundary.
+
+## Structural clarity continuation
+
+On 2026-08-03, the same MIT 6.006 and CMU 15-122 sources were rechecked for a
+small M8/M9 presentation repair. The workbooks already teach lookup → index →
+collision/equality and ordered question → invariant → representation; named
+first-principles derivations now make those existing reasoning paths easier to
+find and rehearse. This is an aligned clarity adaptation, not new scope,
+assessment, release evidence, or institutional-equivalence claim.

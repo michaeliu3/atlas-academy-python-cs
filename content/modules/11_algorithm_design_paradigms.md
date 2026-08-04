@@ -107,6 +107,23 @@ flowchart TD
     AI["agent-generated patch"] -.-> VERIFY
 ```
 
+### Text equivalent — strategy selection from contract to evidence
+
+Read the two diagrams as one linear route. M6 fixes what state represents; M7
+controls how candidate work arrives; M8 supplies identity and repeated-state
+lookup; M9 supplies priority or ordered access; and M10 supplies prerequisite
+structure. M11 turns those inputs into a declared candidate space, feasibility
+predicate, objective, and tie policy. An independent verifier checks feasibility;
+a proof or bounded quality argument supports the selected strategy; and a
+decision ledger records both the result and its limitation.
+
+The forward route is equally narrow: M12 preserves the chosen boundary in
+components, M13 tests it, M16 makes it durable, M19 schedules it under
+concurrency, and M25 later evaluates evidence-grounded intelligent support.
+This text is the complete nonvisual route for the two overview diagrams; it
+does not make a strategy correct before its own assumptions and evidence are
+checked.
+
 Module 11 does not discard the earlier structures. An exact planner coordinates:
 
 - tuples/lists for stable task order;

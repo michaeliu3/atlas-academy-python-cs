@@ -158,6 +158,23 @@ flowchart TB
 
 The dashed arrows are prohibited dependency directions.
 
+### Text equivalent — component boundaries from change pressure to evidence
+
+Read the architecture in this order. Earlier modules contribute execution,
+contracts, evidence discipline, authority, policy/mechanism separation, and
+dependency-graph reasoning. M12 uses those inputs to decide which behavior is
+public and which changes independently. The composition root is the only place
+that knows both the application and concrete plugins; application code and
+plugins may depend on shared ports and domain values, but application code must
+not import concrete plugins and domain values must not import ports.
+
+That direction keeps a public promise inspectable: static annotations offer
+one scoped signal, runtime validation protects external input, and contract
+tests provide separate behavioral evidence. The forward path is M13 testing
+and diagnosis, M14 change, M15 delivery, and M16 persistence. This is the
+complete text route for the two opening boundary diagrams, not a claim that a
+diagram or type checker proves architectural correctness.
+
 ### Backward connections
 
 | Earlier module | Retrieved idea | Module 12 use |

@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Clarified five older learning routes without expanding scope: M8/M9 now make
+  their existing first-principles derivations visible, while M11–M13 provide
+  concise nonvisual routes through their core diagrams. The structural audit
+  now records 476 present pointers and four M25/M26 entries still open, two of
+  which intentionally preserve the preview gate; none of this promotes review,
+  accessibility approval, release, or learner mastery.
 - Strengthened the M19–M24 systems-and-runtime reasoning chain with compact
   rigor cards, code-reading/design checkpoints, explicit visual-text routes,
   and named Teaching Assistant support where those structural anchors were

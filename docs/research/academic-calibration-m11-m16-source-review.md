@@ -126,3 +126,12 @@ fact-identity and the fact-map readable without its diagram. These changes
 support the existing MIT/Georgia Tech/CMU/Berkeley-calibrated reasoning sequence.
 They do not add team-scale review, CI/CD, storage-engine work, a release claim,
 or institutional equivalence.
+
+## 2026-08-03 visual-text continuation
+
+MIT 6.102's current objectives and readings were rechecked for a narrow M11–M13
+reader improvement. Their original text equivalents make the existing planner,
+component-boundary, and specification-to-regression routes explicit without
+adding new course topics or reusing any external asset. They are aligned
+accessibility/cognitive-load support, not evidence of a completed assistive
+technology review, human review, learner access, or release.

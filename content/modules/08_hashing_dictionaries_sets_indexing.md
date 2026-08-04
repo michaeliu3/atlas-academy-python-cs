@@ -171,6 +171,27 @@ This is the same design pattern as a book index, a database index, a compiler sy
 
 > Which relation is expensive to rediscover, and when should we materialize it?
 
+### First-principles derivation — repeated lookup creates the need for an index
+
+Start from the client contract, not a table shape: `get(key)` must recover the
+value associated with the semantic key. If keys are small, dense, and bounded,
+direct addressing can put each key at its own slot; its space cost exposes why
+that is often the wrong model for a sparse key universe. A finite table then
+uses a hash route to select a *candidate* region. By the pigeonhole principle,
+that route cannot settle identity for every possible key, so equality must make
+the final decision after a collision.
+
+The resulting chain is:
+
+```text
+repeated lookup -> operation contract -> sparse-address pressure
+-> hash route -> collision policy + equality -> qualified cost claim
+```
+
+The last step needs declared load, input, randomness, and growth assumptions.
+It does not derive a CPython layout, a durable identifier, or a universal
+constant-time guarantee.
+
 ## 2. Start with the operation family, not the representation
 
 A finite mapping supports a relation from unique keys to values:

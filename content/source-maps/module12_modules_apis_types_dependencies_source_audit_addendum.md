@@ -59,3 +59,11 @@ Until that review exists, all new material must be described only as a current
 unreviewed structural candidate. A tracked path, resolved heading, diagram
 metadata field, or hash is not human approval, learner evidence, CI evidence,
 security clearance, deployment evidence, release evidence, or publication.
+
+## 2026-08-03 visible-text follow-up
+
+The workbook now adds `Text equivalent — component boundaries from change
+pressure to evidence` for the two opening component diagrams. This changes a
+current audit pointer only; the historical table above remains historical, and
+the new route is not evidence of rendered accessibility, review, release, or
+learner understanding.
