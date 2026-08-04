@@ -74,3 +74,14 @@ lectures, slides, assignments, figures, lab solutions, or autograders. In
 particular, Stanford course material is protected by its stated terms; any
 asset-level reuse from MIT, Berkeley, CMU, or Georgia Tech requires a separate
 license check.
+
+## 2026-08-03 clarity follow-up
+
+Re-reading the same MIT/Berkeley/CMU/Stanford-calibrated spine led to small
+whiteboard cards, not new systems scope. M17 now names the semantic-contract to
+machine-claim route, a linear text route through the execution stack, and a
+bytecode-versus-hardware evidence check. M18 now makes finite-resource mediation,
+the four OS responsibilities, and the owner/transition/claim/evidence distinction
+easier to reconstruct. These remain original Atlas explanations with explicit
+model/platform limits; they do not claim a kernel lab, host observation, release,
+or university-equivalent outcome.

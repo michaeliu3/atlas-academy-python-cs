@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "454329676a7011f19fcf82c70ee7fe3883db5f3e6e62ddce94a5d93c12916e8f"
+      "sha256": "1606a0ba5a0dc437918c8faa5129aad53357f8004228358332a1be1c8910c7b8"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "2cda7e1f25ac3cc41ad4fa3ee547bb1e634228d4ac1ffc823ba37043ae553ca0"
+      "sha256": "82fb9d22368f8b7c15dc2595cb6cac68b04d118f4b473941e39f280ce7a490db"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "ca77caded4a3751fe287a58b2cfdc271fda3c162eefc89f3502c5e783b10f9c8"
+      "sha256": "5db1d3d7b400f7b9c2c5bb9acf2120ad7f5808f1e08d23c4d76cd3600cc3df60"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -602,23 +602,23 @@
     },
     {
       "path": "content/modules/14_software_design_and_change.md",
-      "sha256": "d54beaa1558cd3f4cc97330ada32916d274fd028976af8a761252ef2c4f02206"
+      "sha256": "a55f501a678344c5ea3eaa5e277044c3985a1bb247560c0a4e125d9b552ddf73"
     },
     {
       "path": "content/modules/15_files_serialization_packaging_delivery.md",
-      "sha256": "c7ffe0fc23254b70704cd5b661106bb3daf5b3ab7d65461d07a0dbfb141c29ea"
+      "sha256": "cc600577a33bc04b716fa48818b24591bfb4a8265d9ee9d00c86a24270fe6c21"
     },
     {
       "path": "content/modules/16_relational_data_transactions.md",
-      "sha256": "3d16a7ae33884eaaabc6e301206804e0b0a65b4d44f21d9814740a63c5958831"
+      "sha256": "b600b19dffe7895ca4bdb0bdc7e0f27ddd9a60a76f52dd326f395d23268cc5fd"
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
-      "sha256": "3ec87feb851b821539f71e5b82866086b177c306324aab0900eb5a8fa3610b84"
+      "sha256": "a1d57af651d91b96a358c52ef6a93d1787d6aa25341665d2ec5ac9d7394cd326"
     },
     {
       "path": "content/modules/18_operating_systems_resource_mediation.md",
-      "sha256": "6231120c24b905cfd3f2e3486a2f1168854a626a7dba4ecebda98842324687b8"
+      "sha256": "18d3d21be6e26ee565315902ee74fe88609e690e98b57ffd0a8b239ba009bf57"
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",

@@ -1031,6 +1031,27 @@ The runnable model:
 
 This is stronger than direct truncation and weaker than a transactional storage guarantee.
 
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+Define the claim narrowly: one bounded target has a **process-visible
+replacement** when a complete temporary candidate in its target directory is
+successfully passed to the named replacement primitive. The claim assumes one
+writer, the same target filesystem/directory, a closed complete temporary file,
+successful `os.replace()`, and the documented platform behavior for that
+operation.
+
+The trace is the proof idea: before replacement, readers use the old target;
+the candidate is written and checked without exposing a prefix at the target
+name; after successful replacement, the target name selects the new candidate.
+Direct truncation is the counterexample: a failure after truncation can expose a
+prefix. Two independent writers are another counterexample: both replacements
+can be complete while one update is lost.
+
+For \(b=1\ \mathrm{MiB}\), keeping the old target and a complete temporary
+candidate can temporarily require roughly \(2\ \mathrm{MiB}\) before any
+backup. That scale check says nothing about latency, power-loss durability, or
+directory persistence; those remain named filesystem and hardware assumptions.
+
 ### 9.4 Replacement is not multi-writer coordination
 
 Two processes can both:
@@ -2161,6 +2182,27 @@ Before opening source again:
 8. record discrepancies as release defects.
 
 The artifact is the thing delivered. Source configuration is only evidence about intent.
+
+### Artifact-first debugging checkpoint — inspect delivery before intent
+
+**Prediction.** A source-checkout import works, but a fresh installation cannot
+run `atlas-learning`. Which delivered fact is missing: the module, the wheel
+member, or the launcher declaration?
+
+Read the chain in order:
+
+```text
+pyproject.toml declaration
+→ wheel member inventory (is atlas_cli/cli.py present?)
+→ dist-info/entry_points.txt mapping
+→ fresh-environment installed command
+```
+
+If the source tree works but `cli.py` is absent from the wheel, the defect is a
+delivery artifact boundary. If it is present but `entry_points.txt` lacks the
+mapping, the module exists but the command contract does not. A successful local
+import is neither result. Record the artifact evidence and the smallest repair;
+do not infer a release or portability guarantee.
 
 ---
 
@@ -3697,6 +3739,19 @@ flowchart TB
     COST["time + memory + I/O<br/>latency + human review"] -. "cross-cuts" .-> VALUE
     COST -. "cross-cuts" .-> ENV
 ```
+
+### Visual text equivalent — durable delivery from value to rollback
+
+The route begins with a domain value and its invariants. A schema selects what
+meaning crosses a boundary; grammar and encoding turn it into bytes; a manifest
+can compare those bytes with an expected identity. Resource lifetime and staged
+file publication then govern a bounded local artifact. A CLI exposes that
+artifact, while `pyproject.toml`, a build backend, and sdist/wheel outputs turn
+source intent into inspectable deliverables. A resolver installs one chosen
+artifact in a target environment; only then can an authorized release decision
+and a code-plus-data rollback plan be discussed. Trust and cost cross every
+step: a matching digest does not establish origin, and a successful install does
+not prove compatibility or recovery.
 
 ### 22.1 The connected explanation
 

@@ -9066,7 +9066,7 @@
         },
         {
           "criterionId": "first-principles",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m14-first-principles",
@@ -9075,7 +9075,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m14-definition",
@@ -9124,7 +9124,7 @@
         },
         {
           "criterionId": "accessible-visual-text-alternative",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m14-visual",
@@ -9919,7 +9919,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m15-definition",
@@ -9968,7 +9968,7 @@
         },
         {
           "criterionId": "accessible-visual-text-alternative",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m15-visual",
@@ -10754,7 +10754,7 @@
         },
         {
           "criterionId": "first-principles",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-first-principles",
@@ -10812,7 +10812,7 @@
         },
         {
           "criterionId": "accessible-visual-text-alternative",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m16-visual",
@@ -11598,7 +11598,7 @@
         },
         {
           "criterionId": "first-principles",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-first-principles",
@@ -11619,7 +11619,7 @@
         },
         {
           "criterionId": "code-reading-debugging-design",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-code-reading",
@@ -11656,7 +11656,7 @@
         },
         {
           "criterionId": "accessible-visual-text-alternative",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m17-visual",
@@ -12437,7 +12437,7 @@
         },
         {
           "criterionId": "first-principles",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-first-principles"
@@ -12445,7 +12445,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-definition",
@@ -12494,7 +12494,7 @@
         },
         {
           "criterionId": "accessible-visual-text-alternative",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m18-visual",

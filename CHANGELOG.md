@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Strengthened the M14–M18 software-to-machine reasoning chain with compact
+  first-principles, rigorous-claim, code-reading, and linear visual-text cards.
+  The cards make existing change, artifact, relational, execution, and OS
+  evidence easier to reconstruct without adding a release, learner-completion,
+  or university-equivalence claim.
 - Refined preview and advanced learning evidence after targeted source checks:
   M25/M26 now expose explicit prediction, transfer, confidence, and constructive
   oral-routing anchors without changing their preview gate; M33/M34 clarify

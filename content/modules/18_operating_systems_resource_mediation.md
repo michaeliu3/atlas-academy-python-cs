@@ -387,6 +387,17 @@ flowchart TB
     D --> FS["filesystem + sync + recovery"]
 ```
 
+### Visual text equivalent — why the mediator has four jobs
+
+Finite CPU, memory, devices, and named state meet multiple independent programs
+and possible failure. The OS therefore gives each program a useful
+private-looking process/address-space abstraction, allocates scarce service
+over time, checks which transitions an identity may request, and preserves or
+classifies named state after interruption. Process lifecycle, scheduling,
+permissions, files, synchronization, and recovery are not separate tricks:
+they are different consequences of the same finite-resource and authority
+problem.
+
 - **Virtualize:** present a process with a useful execution and address-space
   model.
 - **Multiplex:** share processors, memory, and I/O over time and space.
@@ -398,6 +409,23 @@ flowchart TB
 These are connected. A process is useful because it bundles execution,
 address-space, resource, and protection state. A file is useful because names,
 open lifetime, access rights, cached data, and persistence rules compose.
+
+### First-principles checkpoint — finite resources require mediated transitions
+
+Call a resource claim a statement that a named transition may consume, expose,
+or preserve a finite asset. If one declared CPU serves two runnable jobs, then at
+each teaching time slice the allocation count satisfies
+\(\operatorname{running}(t) \leq 1\). A schedule such as `A, B, A` is not a
+host observation; it is a tiny model that forces a policy, current state, and
+an ownership record into view. The derivation is simple: both jobs cannot hold
+the only CPU at the same instant, so an interface must mediate competing legal
+transitions rather than granting unrestricted control.
+
+**Counterexample.** If every caller could replace any named file without an
+operation-time authority check, one incorrect program could change another
+program's state. The useful abstraction and the protection claim would conflict.
+Record the capacity, policy, and unmodelled platform behavior before treating a
+trace as evidence.
 
 ### 2.2 User mode and kernel mode
 
@@ -458,6 +486,23 @@ Keep four questions separate:
 
 An OS course becomes confusing when a mechanism diagram is presented as a
 portable contract or a classroom policy is presented as a host observation.
+
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+For each code-reading claim, fill this small whiteboard before expanding the
+trace:
+
+```text
+owner → legal transition → claim label → observed evidence / unknown
+```
+
+For `save_note()`, Python owns acceptance of text characters; the open stream
+and OS resource own later I/O transitions; the code may claim a returned
+character count under the Python contract. It cannot claim one physical write,
+device persistence, or a universally portable OS sequence. The assumption is a
+named stream/platform contract; the counterexample is a buffered write or an
+exception during context exit. A numerical return value is therefore evidence
+about one layer, not a count of lower-layer operations.
 
 ### 2.4 Code-reading lab — one `write`, many owners
 
