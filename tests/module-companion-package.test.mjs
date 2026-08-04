@@ -127,6 +127,7 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   assert.deepEqual(companion.recordBoundary, {
     portableStartupMode: "keep-local",
     designatedChatMode: "automatic-after-substantive-session",
+    closurePhrase: "end session",
   });
   assert.deepEqual(
     companion.whiteboardProtocol,
@@ -138,7 +139,8 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   assert.doesNotMatch(companion.studyPartner.contextPrompt, /; legacy-open\)/i);
   assert.match(companion.teachingAssistant.contextPrompt, /automatically create at most one concise note/i);
   assert.match(companion.teachingAssistant.contextPrompt, /confirm “records on”/u);
-  assert.match(companion.teachingAssistant.contextPrompt, /authorization expires when this substantive session ends/u);
+  assert.match(companion.teachingAssistant.contextPrompt, /say “end session”/u);
+  assert.match(companion.teachingAssistant.contextPrompt, /explicit correction or deletion request remains separately learner-authorized/u);
   assert.match(companion.studyPartner.contextPrompt, /names a module or learning topic/i);
   assert.match(companion.studyPartner.contextPrompt, /direct evidence of the successful write/i);
 });
@@ -209,6 +211,19 @@ test("the companion package refuses a workflow that changes the learner-record b
         graphModules: graph.modules,
         guide,
         liveWorkflow: missingRecordsOnConfirmation,
+      }),
+    /scoped records-on confirmation/i,
+  );
+
+  const missingSessionClosure = clone(workflow);
+  missingSessionClosure.notionSessionNotes.recordingAuthorization.closurePhrase = "close records";
+  assert.throws(
+    () =>
+      buildModuleCompanionPackage({
+        courseModule: m01,
+        graphModules: graph.modules,
+        guide,
+        liveWorkflow: missingSessionClosure,
       }),
     /scoped records-on confirmation/i,
   );

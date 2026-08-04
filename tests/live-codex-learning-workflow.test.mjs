@@ -18,7 +18,8 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.deepEqual(report.notionSessionNotes.recordingAuthorization, {
     initialState: "require-explicit-records-on-confirmation",
     activationPhrase: "records on",
-    scope: "the current substantive session in that designated chat; re-confirm records on for a later session",
+    closurePhrase: "end session",
+    scope: "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized",
   });
   assert.deepEqual(report.notionSessionNotes.substantiveSession.minimumEvidence, [
     "a named module or learning topic",
@@ -44,6 +45,7 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   });
   assert.deepEqual(report.notionSessionNotes.learnerControlAcknowledgements, {
     recordsOn: "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+    endSession: "Acknowledge end session as chat-level intent; stop automatic session-summary creation or updates until a new records on, while honoring an explicitly requested correction or deletion separately.",
     pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
     confirmedSave: "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
     deletionUnavailable: "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI.",
@@ -53,6 +55,7 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.match(report.roles[1].liveResponsibility, /non-grading/u);
   assert.ok(report.privacyBoundary.excludedFromRecords.includes("raw voice recordings"));
   assert.ok(report.learnerControls.includes("pause records"));
+  assert.ok(report.learnerControls.includes("end session"));
   assert.equal(report.learnerGuidePath, "docs/LIVE_CODEX_LEARNING_WORKFLOW.md");
 });
 
@@ -65,10 +68,14 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   assert.match(guide, /chat-level intent/u);
   assert.match(guide, /delete or archive.*own Notion UI/u);
   assert.match(guide, /current substantive session/u);
+  assert.match(guide, /say “end session” to close automatic\s+session-summary authorization/iu);
+  assert.match(guide, /explicitly requested correction or deletion remains\s+separately authorized/iu);
   assert.match(guide, /Notion unavailable — local session note/u);
   assert.match(promptSource, /chat-level intent/u);
   assert.match(promptSource, /delete or archive.*own Notion UI/u);
-  assert.match(promptSource, /authorization expires when the substantive session ends/u);
+  assert.match(promptSource, /close automatic session-summary authority/u);
+  assert.match(promptSource, /explicit correction or deletion request remains separately learner-authorized/u);
+  assert.match(promptSource, /end session/u);
   assert.match(promptSource, /unavailableNoteTemplate/u);
 });
 
@@ -122,6 +129,13 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
     /scoped records-on confirmation/u,
   );
 
+  const missingSessionClosure = structuredClone(workflow);
+  missingSessionClosure.notionSessionNotes.recordingAuthorization.closurePhrase = "close records";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(missingSessionClosure),
+    /scoped records-on confirmation/u,
+  );
+
   const missingActivation = structuredClone(workflow);
   missingActivation.notionSessionNotes.requiredConditions.pop();
   await assert.rejects(
@@ -170,6 +184,13 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   missingPause.learnerControls = missingPause.learnerControls.filter((value) => value !== "pause records");
   await assert.rejects(
     validateLiveCodexLearningWorkflow(missingPause),
+    /learnerControls must preserve the reviewed values and order/u,
+  );
+
+  const missingEndSession = structuredClone(workflow);
+  missingEndSession.learnerControls = missingEndSession.learnerControls.filter((value) => value !== "end session");
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(missingEndSession),
     /learnerControls must preserve the reviewed values and order/u,
   );
 

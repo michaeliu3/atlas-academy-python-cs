@@ -30,6 +30,7 @@ export type ModuleCompanionPackage = {
   recordBoundary: {
     portableStartupMode: "keep-local";
     designatedChatMode: "automatic-after-substantive-session";
+    closurePhrase: "end session";
   };
   teachingAssistant: {
     role: "supportive-oral-defense";

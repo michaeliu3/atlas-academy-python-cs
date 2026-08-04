@@ -70,16 +70,18 @@ conversation.
 
 The active designated-chat policy is `automatic-after-substantive-session`.
 Before an automatic note, say “records on” in that designated chat **for the
-current substantive session**. That confirmation expires when the session
-ends; a later session requires a fresh `records on`. It may then create at most
-one concise note for the current substantive session only when all four
-conditions hold:
+current substantive session**. Say “end session” to close automatic
+session-summary authorization: the chat must not automatically create or update
+a further session note unless the learner later says `records on` for a new
+substantive session. An explicitly requested correction or deletion remains
+separately authorized. It may then create at most one concise note for the
+current substantive session only when all four conditions hold:
 
-The chat should visibly acknowledge `records on` as **chat-level intent** to
-use this configured policy, not as proof that a write or platform setting took
-effect. It should likewise acknowledge `pause records` or `off-record` as
-chat-level intent to stop the policy; neither acknowledgement is a claim of
-platform enforcement.
+The chat should visibly acknowledge `records on` and `end session` as
+**chat-level intent** to start or close this configured policy, not as proof
+that a write or platform setting took effect. It should likewise acknowledge
+`pause records` or `off-record` as chat-level intent to stop the policy;
+neither acknowledgement is a claim of platform enforcement.
 
 1. the conversation is in the designated TA or Study Partner chat;
 2. that chat's private Notion destination is configured and reachable;
@@ -129,10 +131,12 @@ mastery.
 <!-- live-codex-workflow: controls -->
 
 Never place credentials, raw voice, sensitive personal data, or material marked
-off-record in Notion. The learner can say “pause records”, “off-record”,
-“correct [note]”, or “delete [note]” at any time. A pause or off-record request
-prevents a write until the learner explicitly re-enables it; a correction or
-deletion request is completed only if the configured access allows it, and the
+off-record in Notion. The learner can say “end session”, “pause records”,
+“off-record”, “correct [note]”, or “delete [note]” at any time. `end session`
+closes automatic session-summary authorization; an explicit correction or
+deletion request remains separately learner-authorized. A pause or off-record
+request prevents a write until the learner explicitly re-enables it. A correction
+or deletion request is completed only if the configured access allows it, and the
 chat must say plainly if it could not complete the request. The target
 page/database is configured in the designated chats rather than embedded in the
 portal or repository.
