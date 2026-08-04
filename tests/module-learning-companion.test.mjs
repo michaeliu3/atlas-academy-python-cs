@@ -223,7 +223,7 @@ test("foundations, software, systems, mathematics, and authoring companions rema
   assert.match(m32.teachingAssistant.artifactFocus, /0–100 confidence/u);
   assert.match(m33.studyPartner.rehearsalMove, /M27 all-input proof versus finite trace/u);
   assert.match(m33.studyPartner.rehearsalMove, /0–100 confidence/u);
-  assert.match(m34.studyPartner.rehearsalMove, /five retrieval checks/u);
+  assert.match(m34.studyPartner.rehearsalMove, /six retrieval checks/u);
   assert.match(m34.studyPartner.rehearsalMove, /0–100 confidence/u);
   assert.match(m35.studyPartner.rehearsalMove, /claim\/failure probe/u);
   assert.match(m35.studyPartner.rehearsalMove, /0–100 confidence/u);
