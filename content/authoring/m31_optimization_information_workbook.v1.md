@@ -1618,7 +1618,7 @@ Core-credit-gated until their own contract and release evidence are complete.
 This workbook’s explanations, examples, diagrams, tables, and code are
 original Atlas material. It links to sources for study and provenance; it does
 not reproduce their slides, textbook prose, assignments, figures, or
-solutions. Individual access/recheck dates and reuse statuses are recorded in
+solutions. Sources were rechecked on 2026-08-02; individual access/recheck dates and reuse statuses are recorded in
 the linked source map and audit; the dated focused calibration records its own
 cross-source check.
 

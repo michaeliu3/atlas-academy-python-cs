@@ -30,7 +30,7 @@ test("Course CI pins every third-party action to a reviewed immutable commit", a
   assert.match(workflow, /actions\/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065/u);
 });
 
-test("Course CI skips hosted jobs for draft PR updates but reruns them when review begins", async () => {
+test("Course CI keeps full gates out of draft PR updates while running focused content feedback", async () => {
   const workflow = await readCourseWorkflow();
 
   assert.ok(
@@ -57,8 +57,13 @@ test("Course CI skips hosted jobs for draft PR updates but reruns them when revi
   );
   assert.match(
     workflow,
-    /portal:\n\s*name: Portal quality gate\n\s*if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
+    /portal:\n\s*name: Portal quality gate\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
     "only explicit draft pull-request updates skip the hosted quality gates",
+  );
+  assert.match(
+    workflow,
+    /draft-content:\n\s*name: Draft content feedback\n\s*(?:needs: change-scope\n\s*)?if: github\.event_name == 'pull_request' && github\.event\.pull_request\.draft == true[\s\S]*?run: pnpm test:content/mu,
+    "draft pull requests retain a bounded content-feedback suite",
   );
 });
 
@@ -67,10 +72,12 @@ test("Teaching-model CI proves the runtime exercise verifier before the ordinary
   const verifierTests = 'python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"';
   const verifier = teachingModelRuntimeExerciseVerifierCommand;
   const suite = 'python -m unittest discover -s public/downloads -p "test_module*_reference.py"';
+  const privatePreviewSuite = 'python -m unittest discover -s content/course/reference-models -p "test_module26_reference.py"';
 
   assert.ok(courseWorkflowRunsCommand(workflow, verifierTests));
   assert.ok(courseWorkflowRunsCommand(workflow, verifier));
   assert.ok(courseWorkflowRunsCommand(workflow, suite));
+  assert.ok(courseWorkflowRunsCommand(workflow, privatePreviewSuite));
   assert.ok(workflow.indexOf(verifierTests) < workflow.indexOf(verifier));
   assert.ok(workflow.indexOf(verifier) < workflow.indexOf(suite));
   assert.equal(courseWorkflowRunsCommand(`# run: ${verifier}`, verifier), false);
@@ -88,8 +95,8 @@ test("Teaching-model CI proves the runtime exercise verifier before the ordinary
   assert.equal(
     courseWorkflowRunsCommand(
       workflow.replace(
-        "    runs-on: ubuntu-latest\n    needs: portal",
-        "    runs-on: ubuntu-latest\n    if: false\n    needs: portal",
+        "    runs-on: ubuntu-latest\n    needs: [change-scope, portal]",
+        "    runs-on: ubuntu-latest\n    if: false\n    needs: [change-scope, portal]",
       ),
       verifier,
     ),

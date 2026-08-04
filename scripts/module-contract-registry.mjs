@@ -1141,6 +1141,7 @@ const standardTeachingModelsJobKeys = new Set([
   "name",
   "runs-on",
   "needs",
+  "if",
   "timeout-minutes",
   "strategy",
   "steps",
@@ -1159,6 +1160,17 @@ function teachingModelsWorkflow(workflow) {
 }
 
 function isStandardTeachingModelsJob(document, job) {
+  const needsPortal = job.needs === "portal" || (
+    Array.isArray(job.needs) &&
+    job.needs.length === 2 &&
+    job.needs[0] === "change-scope" &&
+    job.needs[1] === "portal"
+  );
+  const conditionalScope = job.if === undefined || (
+    typeof job.if === "string" &&
+    job.if !== "false" &&
+    job.if.includes("needs.change-scope.outputs.apparatus")
+  );
   return (
     workflowRecord(document) &&
     !Object.hasOwn(document, "env") &&
@@ -1166,7 +1178,8 @@ function isStandardTeachingModelsJob(document, job) {
     hasOnlyAllowedKeys(job, standardTeachingModelsJobKeys) &&
     job.name === "Teaching models on Python ${{ matrix.python-version }}" &&
     job["runs-on"] === "ubuntu-latest" &&
-    job.needs === "portal" &&
+    needsPortal &&
+    conditionalScope &&
     job["timeout-minutes"] === 15 &&
     Array.isArray(job.steps)
   );

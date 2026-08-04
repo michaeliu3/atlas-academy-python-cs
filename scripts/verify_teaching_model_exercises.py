@@ -78,7 +78,7 @@ def verify_teaching_model_pair(model_path: Path, test_path: Path) -> TeachingMod
     model_path = model_path.resolve()
     test_path = test_path.resolve()
     if model_path.parent != test_path.parent:
-        raise TeachingModelExerciseError("A teaching-model test must be paired from the same downloads directory.")
+        raise TeachingModelExerciseError("A teaching-model test must be paired from the same teaching-model directory.")
     expected_test_name = f"test_{model_path.stem}.py"
     if test_path.name != expected_test_name:
         raise TeachingModelExerciseError(
@@ -184,10 +184,23 @@ def verify_teaching_model_pairs(downloads_directory: Path) -> list[TeachingModel
     return records
 
 
+def verify_teaching_model_roots(*directories: Path) -> list[TeachingModelExerciseRecord]:
+    """Verify public and private teaching-model directories as one suite."""
+
+    records: list[TeachingModelExerciseRecord] = []
+    for directory in directories:
+        records.extend(verify_teaching_model_pairs(directory))
+    return records
+
+
 def main() -> int:
-    downloads_directory = Path(__file__).resolve().parents[1] / "public" / "downloads"
+    site_root = Path(__file__).resolve().parents[1]
+    model_directories = (
+        site_root / "public" / "downloads",
+        site_root / "content" / "course" / "reference-models",
+    )
     try:
-        records = verify_teaching_model_pairs(downloads_directory)
+        records = verify_teaching_model_roots(*model_directories)
     except TeachingModelExerciseError as error:
         print(f"Teaching-model runtime exercise verification failed: {error}", file=sys.stderr)
         return 1

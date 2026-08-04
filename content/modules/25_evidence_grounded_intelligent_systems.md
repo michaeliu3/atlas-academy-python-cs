@@ -17,7 +17,7 @@
 > the **private guided-study evidence gate** below—not from a score, an agent
 > explanation, or a portal click.
 
-> **Portal preview boundary:** M25 is readable as a bounded preparation
+> **Preview boundary (portal):** M25 is readable as a bounded preparation
 > workbook. In the portal, until the direct prerequisites have learner-ready
 > release evidence and M25's own contract/review evidence exists, its Studio,
 > dossier, and rehearsal below are specifications for later use—not an unlocked

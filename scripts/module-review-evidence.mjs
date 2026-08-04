@@ -68,7 +68,7 @@ const reviewCandidateDeliveryPathPattern =
   /^content\/course\/contracts\/review-candidates\/m(?:0[1-9]|[1-9]\d)\.v1\.json$/u;
 const discoveredNodeTestPathPattern = /^tests\/[a-z0-9][a-z0-9._-]*\.test\.mjs$/u;
 const discoveredPythonTeachingTestPathPattern =
-  /^public\/downloads\/test_module(?:0[1-9]|[1-9]\d)_reference\.py$/u;
+  /^(?:public\/downloads|content\/course\/reference-models)\/test_module(?:0[1-9]|[1-9]\d)_reference\.py$/u;
 const discoveredBrowserTestPathPattern = /^e2e\/[a-z0-9][a-z0-9._-]*\.spec\.ts$/u;
 const browserTestTitleMaxLength = 160;
 export const browserTestRunnerPath = "package.json";

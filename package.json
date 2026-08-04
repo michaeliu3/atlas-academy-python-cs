@@ -26,7 +26,10 @@
     "build": "vinext build && pnpm validate:built-downloads && pnpm validate:performance-budget",
     "start": "vinext start",
     "test": "pnpm build && node scripts/run-course-tests.mjs",
+    "test:content": "node scripts/run-course-tests.mjs --suite=content",
+    "test:apparatus": "node scripts/run-course-tests.mjs --suite=apparatus",
     "test:browser": "pnpm build && playwright test",
+    "test:browser:ci": "playwright test",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern .wrangler --ignore-pattern playwright-report --ignore-pattern test-results --ignore-pattern worker-configuration.d.ts",
     "db:generate": "drizzle-kit generate"
   },

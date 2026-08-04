@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "b11fc3e03ac8c095dd12643982e06ee441b2f82892c8ef2705e7711b76fb8b0b"
+      "sha256": "d81d8db21e7328b988ba0b4e0191927efc41ce63a8728848bb2a9a992569e261"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -74,7 +74,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "63970fb9ed31f60b4a5675cbdd000ab6d6d67fcf691c794649ac7da3414225b8"
+      "sha256": "7ce7c0703894c964679818bb4c70e1f0cf15c3f2acc51dc883018bb5827b04a3"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
@@ -550,7 +550,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "f386d0b0afab0426d356de7fde93412d629633e91b2924c33bdf7dcf2d63582c"
+      "sha256": "3d3d6f26b5186f5a7bcda0451a3b310248c40ed48a10d2af5b766843763e2626"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -658,7 +658,7 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "f46f7c2882ade5fa4c403c6a012e8a32d46f3557a468632d85d80d7f6ba6dfc2"
+      "sha256": "1c487c5e547d22243ea3458c39f2b0b4e1b36117e4f6d333ede2f42fd5d0d96b"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
@@ -1026,7 +1026,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "89a324099fd1192e665f9a140de822bcf51436fe0436ef60580433d5b923a62a"
+      "sha256": "e69f2ffedb23a768f7b93ed273d24874513278a6d82823a6bcbc3f874349a255"
     },
     {
       "path": "playwright.config.ts",
