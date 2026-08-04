@@ -93,7 +93,7 @@ test("an M32 authoring adapter cannot become learner-visible before review and r
 
   await assert.rejects(
     () => validateModuleContractRegistry(candidateGraph, candidateRegistry),
-    /m32 authoring-only v3 entry must remain hidden learner material/i,
+    /private guided study must not change its portal availability/i,
   );
 });
 
@@ -363,7 +363,7 @@ test("promotion evidence must bind and scan the module's own Mermaid content", a
   assert.deepEqual(completeM09.errors, []);
 });
 
-test("the registry rejects missing modules, forged audit evidence, and a direct preview-to-verified jump", async () => {
+test("the registry rejects missing modules, forged audit evidence, and a graph-invalid preview-to-verified jump", async () => {
   const [graph, registry] = await Promise.all([
     loadCourseGraph(),
     loadModuleContractRegistry(),
@@ -402,7 +402,7 @@ test("the registry rejects missing modules, forged audit evidence, and a direct 
   };
   await assert.rejects(
     () => validateModuleContractRegistry(forgedPromotionGraph, forgedPromotionRegistry),
-    /reviewReadyCommit/i,
+    /requires authoring-only prerequisite\(s\).*must remain preview or locked/i,
   );
 });
 
@@ -415,24 +415,23 @@ test("a review-ready transition needs resolved module-specific evidence rather t
   const candidateRegistry = copy(registry);
   const baseline = await validateModuleContractRegistry(graph, registry);
   const candidateManifest = copy(baseline.manifest);
-  candidateManifest.modules = candidateManifest.modules.filter(({ id }) => id !== "m01");
-  const graphM01 = candidateGraph.modules.find(({ id }) => id === "m01");
-  const registryM01 = candidateRegistry.modules.find(({ moduleId }) => moduleId === "m01");
+  const graphM31 = candidateGraph.modules.find(({ id }) => id === "m31");
+  const registryM31 = candidateRegistry.modules.find(({ moduleId }) => moduleId === "m31");
 
-  graphM01.state.lifecycle = "authoring-only";
-  graphM01.state.readerAccess = "hidden";
-  graphM01.state.availability = "authoring-only";
-  graphM01.state.contract.state = "review-ready";
-  registryM01.contractState = "review-ready";
-  registryM01.criteria = registryM01.criteria.map((criterion) => ({
+  // Keep M31's hidden/private route state valid while testing the unified
+  // registry's evidence requirement. The retained advanced adapter remains
+  // frozen separately; this fixture does not promote portal access.
+  graphM31.state.contract.state = "review-ready";
+  registryM31.contractState = "review-ready";
+  registryM31.criteria = registryM31.criteria.map((criterion) => ({
     ...criterion,
     status: "reviewed",
     source: { kind: "none", path: null, locator: null },
   }));
-  registryM01.humanReview = Object.fromEntries(
+  registryM31.humanReview = Object.fromEntries(
     candidateRegistry.humanReviewDimensions.map((dimension) => [dimension, "approved"]),
   );
-  registryM01.reviewReadyCommit = "0123456789abcdef0123456789abcdef01234567";
+  registryM31.reviewReadyCommit = "0123456789abcdef0123456789abcdef01234567";
 
   await assert.rejects(
     () => validateModuleContractRegistry(candidateGraph, candidateRegistry, {

@@ -257,7 +257,7 @@
 .tabs button span {
   display: block;
   margin-bottom: 0.35rem;
-  color: #8194a3;
+  color: #4b6878;
   font-size: 0.65rem;
   letter-spacing: 0.1em;
 }
@@ -781,7 +781,7 @@
   margin: 1rem 0 0;
   padding: 0.68rem 0.78rem;
   border-radius: 0.55rem;
-  color: #687482;
+  color: #4e5e6b;
   background: #eef2f4;
   font-size: 0.82rem;
 }

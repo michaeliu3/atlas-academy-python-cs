@@ -42,6 +42,10 @@
           "manifestName": "SpecificationTraceStudio"
         },
         {
+          "studioId": "operating-systems",
+          "manifestName": "OperatingSystemsStudio"
+        },
+        {
           "studioId": "concurrency",
           "manifestName": "ConcurrencyStudioReader"
         },

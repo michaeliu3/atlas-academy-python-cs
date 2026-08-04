@@ -319,13 +319,14 @@ function validateModuleState(courseModule) {
     );
   }
   if (privateGuidedReadyModuleNumbers.has(number)) {
-    if (!hasPrivateGuidedStudy) {
-      fail(`Module ${number} must declare its private guided-study readiness.`);
-    }
-    if (availability !== "authoring-only") {
+    if (availability === "authoring-only") {
+      if (!hasPrivateGuidedStudy) {
+        fail(`Module ${number} must declare its private guided-study readiness.`);
+      }
+      validatePrivateGuidedStudy(privateGuidedStudy, number);
+    } else if (hasPrivateGuidedStudy) {
       fail(`Module ${number} private guided study must not change its portal availability.`);
     }
-    validatePrivateGuidedStudy(privateGuidedStudy, number);
   } else if (hasPrivateGuidedStudy) {
     fail(`Only M31–M36 may declare a private guided-study pack in the canonical graph.`);
   }

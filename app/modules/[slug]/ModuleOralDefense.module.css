@@ -210,6 +210,13 @@
   margin-top: 0.95rem !important;
 }
 
+/* The global module-prose rule styles strong elements more specifically than
+   the card's inherited foreground. Keep the short role prompt readable on
+   the cobalt live-card surface. */
+.liveCard .setupNote strong {
+  color: #fffdf7;
+}
+
 .liveCard .setupLink {
   color: #fffdf7;
   font-weight: 800;

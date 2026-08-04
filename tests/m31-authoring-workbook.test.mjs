@@ -92,7 +92,7 @@ test("the M31 six-session candidate is tracked as authoring evidence without bec
   assert.match(candidate, /p\^\\star=2,\\qquad d\^\\star=q\(2\)=2,\\qquad p\^\\star-d\^\\star=0/u);
   assert.match(candidate, /usual convex\s+Slater\/KKT theorem applies/u);
   assert.match(candidate, /all-affine-constraint qualification\s+route/u);
-  assert.match(candidate, /Individual access\/recheck dates and reuse statuses/u);
+  assert.match(candidate, /individual access\/recheck dates and reuse statuses/iu);
   assert.ok(candidate.includes("If \\(\\mathcal F_{t-1}\\) is unfamiliar"));
   assert.match(candidate, /Convexity, smoothness, and strong-convexity bridge/u);
   assert.ok(candidate.includes("A declared feasible domain \\(C\\) is **convex**"));
@@ -176,7 +176,7 @@ test("the frozen M31 review candidate retains the study-ready structural spine",
   assert.match(candidate, /small displayed primal\/dual gap/u);
   assert.match(candidate, /mean-field variational family reaches a higher ELBO/u);
   assert.match(candidate, /all-affine-constraint qualification\s+route/u);
-  assert.match(candidate, /Individual access\/recheck dates and reuse statuses/u);
+  assert.match(candidate, /individual access\/recheck dates and reuse statuses/iu);
   assert.ok(candidate.includes("If \\(\\mathcal F_{t-1}\\) is unfamiliar"));
   assert.match(candidate, /same KL notation does not make the questions interchangeable/u);
   assert.match(candidate, /finite block code as an exact asymptotic\s+benchmark/u);

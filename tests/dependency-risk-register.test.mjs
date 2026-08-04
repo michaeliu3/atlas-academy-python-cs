@@ -28,8 +28,8 @@ test("the dependency ledger records the withdrawn brace-expansion alert without 
   );
   assert.match(
     workspace,
-    /"minimatch@3>brace-expansion": 1\.1\.17/u,
+    /"minimatch@3>brace-expansion": 1\.1\.18/u,
   );
-  assert.match(lockfile, /minimatch@3>brace-expansion: 1\.1\.17/u);
-  assert.match(lockfile, /brace-expansion@1\.1\.17:/u);
+  assert.match(lockfile, /minimatch@3>brace-expansion: 1\.1\.18/u);
+  assert.match(lockfile, /brace-expansion@1\.1\.18:/u);
 });
