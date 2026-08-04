@@ -13,14 +13,19 @@ This is an implementation-status projection, not a learner-mastery, external-CI,
 | `preview` | 2 | M25–M26 | preview | Reference-only reader access; it does not unlock route progress or synthesis evidence. |
 | `locked` | 0 | — | — | Not currently reader-visible. |
 | `optional` | 0 | — | — | Reader-visible optional material outside required route progression. |
-| `authoring-only` | 6 | M31–M36 | hidden | Hidden from the learner reader until future promotion evidence exists. |
+| `authoring-only` | 6 | M31–M36 | hidden | Hidden from the learner reader; a separately recorded private guided-study pack does not promote portal access. |
 
 ## Aggregate truth
 
 - Defined modules: **36**
 - Reader-visible modules: **30**
-- Open for study (`legacy-open` + `published`): **28**
+- Open reader materials (`legacy-open` + `published`): **28**
 - Legacy-baseline contracts: **30**
 - Verified contracts: **0**
+
+## Private guided-study availability
+
+- **6** designated private guided-study packs are ready (M31–M36); the portal reader remains hidden, with no route credit, publication, release, or mastery claim.
+- Private workbook paths are intentionally not projected into portal or status surfaces.
 
 `published` is reserved for a module whose canonical graph state carries both a verified contract and deployed-recorded release evidence. It never means that a learner has mastered the module.

@@ -62,11 +62,12 @@ availability, contract state, release state, and generated projections.
 
 <!-- atlas-course-status:start -->
 **Canonical availability (generated from `course-graph.v2.json`):**
-**36** defined modules; **30** reader-visible; **28** open for study.
+**36** defined modules; **30** reader-visible; **28** open reader materials.
 - **28** `legacy-open` (M1–M24, M27–M30); full reader access, review pending.
 - **0** `published` (—); only verified, deployed releases count here.
 - **2** `preview` (M25–M26); reference-only, never route credit.
 - **6** `authoring-only` (M31–M36); hidden from the learner reader.
+- Designated private guided-study packs: **6** (M31–M36); portal reader remains hidden and this creates no route credit, release, or mastery evidence.
 - Contract states: **30** legacy baselines; **0** verified.
 <!-- atlas-course-status:end -->
 
