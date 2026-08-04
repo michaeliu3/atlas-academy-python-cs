@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Documented a no-Actions, read-only Course CI evidence-capture path: select an
+  already-successful run, read its exact attempt and jobs, normalize only the
+  existing verifier schema, validate locally, and record it later through an
+  additive provenance commit. The procedure creates no remote observation,
+  deployment, release, or learner claim by itself.
 - Added two compact, scoped rigor cards to the preview M25/M26 synthesis
   workbooks: a five-item calibration fixture and a two-attempt idempotency
   fixture. They resolve only their structural rigor pointers; the current audit
