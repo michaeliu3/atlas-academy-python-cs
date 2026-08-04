@@ -77,8 +77,8 @@
       "id": "advanced-packs",
       "requirement": "M31–M36 are complete private-chat teaching packs and remain hidden from the portal.",
       "state": "partial",
-      "evidence": "content/authoring/; content/source-maps/; content/course/course-graph.v2.json; tests/module35-36-breadth.test.mjs",
-      "openItem": "Complete misconception repair, visual/code density, human review, and module-specific evidence."
+      "evidence": "content/authoring/; content/source-maps/; content/course/course-graph.v2.json; tests/module35-36-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
+      "openItem": "Complete the human visual/code-density review and module-specific release evidence; ladder and per-distractor repair checks now pass structurally."
     },
     {
       "id": "synthesis-boundary",
@@ -105,8 +105,8 @@
       "id": "theory-computation",
       "requirement": "M33 teaches the named formal-language, computability, and complexity breadth.",
       "state": "partial",
-      "evidence": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md; tests/module33-breadth.test.mjs",
-      "openItem": "Add the remaining graduated practice and misconception-repair evidence before promotion."
+      "evidence": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md; tests/module33-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
+      "openItem": "Complete human/source review and promotion evidence; breadth, graduated ladder, and per-distractor repair checks now pass structurally."
     },
     {
       "id": "systems-ai-ml",
