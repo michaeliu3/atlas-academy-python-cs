@@ -185,3 +185,10 @@ M21 should therefore hand M22 a precise uncertainty boundary and hand later
 systems work an evidence discipline. It should not fill those open questions
 with a source citation, a passing synthetic test, an AI-generated patch, or a
 claim that a local await became a distributed guarantee.
+
+## 2026-08-03 structural clarity follow-up
+
+The current canonical audit now maps M21's timeout-indistinguishability rigor
+card as **pointer-present**. It explains a bounded local evidence argument;
+it does not introduce a distributed service, add source/reuse approval, or
+establish human review, learner mastery, release, or publication.

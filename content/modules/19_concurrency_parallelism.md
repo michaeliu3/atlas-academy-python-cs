@@ -1596,6 +1596,42 @@ Observed elapsed time also contains startup, serialization, queueing,
 contention, imbalance, merge, publication, system load, and measurement noise.
 Attribution waits for Module 24.
 
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+**Definitions.** `W` is the total declared work, `S` is the longest declared
+dependency path (the span), `N` is the number of ideal workers, and `T_N` is
+the model's completion time with those workers. These are properties of a
+specified work graph—not measurements of a Python process or a host CPU.
+
+**Assumptions.** The work graph and sequential oracle are already fixed; every
+worker preserves the same semantic result; workers have equal abstract speed;
+and startup, communication, contention, cache effects, and scheduling noise
+are deliberately excluded. If any assumption changes, this card is no longer
+the right model.
+
+**Derivation / proof idea.** Any legal execution must perform `W` units across
+at most `N` workers, so it cannot finish in less than `W / N` abstract units.
+It must also preserve the dependency path of length `S`. Therefore:
+
+```text
+T_N >= max(W / N, S)
+```
+
+The inequality is a lower bound, not a promise that a program reaches it.
+The Amdahl ceiling adds a second constraint when a declared fraction `s` is
+serial: `1 / (s + (1 - s) / N)`.
+
+**Counterexample.** A correct four-worker program can finish far below either
+ceiling when serialization, uneven input, lock contention, or publication work
+dominates. A faster program whose final index no longer matches the sequential
+oracle is not a speedup of the same computation at all.
+
+**Finite numerical experiment.** For the fixed model `W=120`, `S=30`, `N=4`,
+and `s=0.25`, the work/span lower bound is `max(120 / 4, 30) = 30`; the Amdahl
+ceiling is `16 / 7`, about `2.286`; and the tighter combined ceiling is also
+`16 / 7`. This is arithmetic over declared values, not an observed speedup or
+a claim about CPython, Windows, or a particular machine.
+
 ### 6.5 Workload-first decision
 
 #### D17 — Refuse a model until meaning and ownership are known
@@ -1986,11 +2022,13 @@ Then provide:
 
 Defend one accepted decision, one rejected patch, and one remaining unknown.
 
-### Supportive oral-defense route
+### Supportive oral-defense protocol — adaptive, non-grading, and learner-controlled
 
 **Current candidate-only supplement.** This route makes the existing Session 6
 defense easier to conduct as a constructive conversation. It is not evidence of
 review, release, or learner mastery.
+
+### Hint ladder, smallest repair, and learner evidence summary
 
 Start with one learner-selected claim card: the sequential postcondition, one
 shared transition, a progress premise, or the execution-model choice. Before a
@@ -2003,6 +2041,9 @@ Close by changing one premise—replace local queue ownership with a remote
 message (M20), an async task boundary (M21), or a runtime/performance claim
 (M24). The learner states what transfers, what does not, one remaining
 uncertainty, and the next evidence to collect in a learner-controlled summary.
+
+Incomplete explanations select the smallest repair or retrieval step; the
+Teaching Assistant assigns neither a pass/fail result nor a mastery claim.
 
 ---
 
@@ -2041,6 +2082,16 @@ separate non-destructive view reset are available. It never stores raw private
 code, absolute paths, runtime secrets, or production data. Model results and
 empirical observations have distinct labels. The invariant and current runtime
 profile stay reachable from every view. Coverage is not labeled mastery.
+
+### Visual text equivalent — concurrency route from history to evidence
+
+Read the nonvisual route in this order: first reconstruct histories and the
+sequential specification (D1–D5); then identify ownership, predicates, and
+coordination (D6–D11); then separate progress from completion (D12–D13); then
+choose an execution model from workload and contracts (D14–D17); finally audit
+the evidence and the agent patch (D18–D19). Each group has an adjacent prose,
+trace, or table alternative that gives the complete reading path without a
+diagram, drag action, colour cue, or timing observation.
 
 ### View 1 — History explorer
 

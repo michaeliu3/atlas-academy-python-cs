@@ -209,3 +209,11 @@ distributed coordination; M22 must establish trust/security boundaries; and
 M24 must establish implementation/performance attribution. M20 should leave
 those claims visibly unresolved rather than borrowing their authority from a
 socket call, RFC citation, or passing local test.
+
+## 2026-08-03 structural clarity follow-up
+
+The current canonical audit now maps M20's operation-ID rigor card, linear
+visual text route, and adaptive oral-defense protocol as **pointer-present**.
+They clarify the existing server-local model without adding an external source,
+changing a reuse decision, or claiming response delivery, human review,
+learner evidence, release, or publication.

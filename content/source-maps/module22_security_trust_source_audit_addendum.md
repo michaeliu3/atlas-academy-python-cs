@@ -173,3 +173,11 @@ service, prescribe a TLS/OAuth/Argon2 deployment, offer legal advice, or
 claim security/accessibility certification. A later module must name its
 grammar, resource limits, evaluator semantics, capability boundary, source
 version, and evidence stopping line explicitly.
+
+## 2026-08-03 structural clarity follow-up
+
+The current canonical audit now maps M22's authorization-predicate rigor card
+and input-to-effect reading/debugging/design checkpoint as **pointer-present**.
+They use the existing fake-adapter boundary and add no live target, exploit,
+source/reuse approval, security certification, human review, release, or
+learner-mastery claim.

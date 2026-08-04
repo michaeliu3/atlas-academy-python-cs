@@ -1240,6 +1240,41 @@ Client policy in this teaching model:
 the unknown history. Status lookup can resolve only what the server's declared
 retention/status contract actually supplies.
 
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+**Definitions.** In this declared single-server model, the ledger maps an
+operation identity and canonical request digest to one decision:
+
+```text
+(operation_id, canonical_digest) -> decision
+```
+
+The client observation and the server's ledger are different evidence
+surfaces. A digest is an equality value for the declared request bytes, not an
+authentication token or a delivery guarantee.
+
+**Assumptions.** The model has one serialized ledger, deterministic
+canonicalization, a stated retention rule, and no replica-agreement or crash
+survival claim. A request is validated before it reaches the ledger.
+
+**Derivation / proof idea.** Case analysis over one operation ID gives the
+only three ledger outcomes: absent ID records a decision; the same ID with the
+same digest replays it; and the same ID with a different digest conflicts.
+Under the serialized-ledger assumption, one ID cannot bind two digests in this
+model. That does not prove that a response arrived or that another service
+agrees.
+
+**Counterexample.** Retrying the same declared request with a *new* ID can be
+a distinct operation, not a replay. Likewise, two uncoordinated ledgers could
+make incompatible decisions; this module does not model that distributed case.
+
+**Finite numerical experiment.** In D9, `op-0007` with digest `A` records one
+decision; the same ID/digest replay leaves ledger cardinality at one; and the
+same ID with digest `B` conflicts, still leaving cardinality at one. A new
+`op-0008` with digest `A` may create a second record. This is a finite
+server-local state check—not proof of response delivery, durability after a
+crash, or distributed exactly-once behavior.
+
 ### Code-reading lab L5 — Reject a false “exactly once” claim
 
 Review this generated documentation sentence:
@@ -1465,11 +1500,13 @@ Explain this in ninety seconds without using “it probably worked”:
 Your answer must contain `CLIENT_OBSERVATION`, `SERVER_OBSERVATION`,
 `UNKNOWN`, the same ID+digest rule, and one Module 21 or 22 boundary.
 
-### Supportive oral-defense route
+### Supportive oral-defense protocol — adaptive, non-grading, and learner-controlled
 
 **Current candidate-only supplement.** This makes the existing Session 6
 defense a constructive teaching conversation. It is not evidence of review,
 release, or learner mastery.
+
+### Hint ladder, smallest repair, and learner evidence summary
 
 Begin with the learner's narrowest claim about one timeout history. Before a
 hint, they predict which facts are client-local, server-local, or still
@@ -1483,6 +1520,9 @@ endpoint must become a trusted peer (M22), or a timing observation becomes a
 performance explanation (M24). End with the claim, its scope, the rejected
 overclaim, the next observation, and a learner-controlled evidence summary.
 
+Incomplete explanations select the smallest repair or retrieval step; the
+Teaching Assistant assigns neither a pass/fail result nor a mastery claim.
+
 ---
 
 ## 8. Six-view interactive HTML studio
@@ -1491,6 +1531,16 @@ The portal is a visual/reference companion, not the primary guided-learning
 surface. It is a **protocol observatory**, not a slide deck: every control
 changes a small declared model; every visual has a text equivalent and reset;
 no colour, animation, or score is needed to understand a claim.
+
+### Visual text equivalent — remote effect from intent to auditable knowledge
+
+Read the nonvisual route as a chain of narrower facts: resource intent becomes
+an endpoint candidate; a byte stream becomes a declared frame; a response
+becomes client- or server-scoped evidence; HTTP supplies semantics while Atlas
+owns policy; a stable ID plus digest governs retry; and the final architecture
+packet records both facts and unknowns. The adjacent prose, tables, and traces
+for each view are the complete text route—no connection animation, colour
+state, or interactive control establishes an extra fact.
 
 ### Studio operating rule
 

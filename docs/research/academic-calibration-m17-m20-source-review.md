@@ -85,3 +85,16 @@ the four OS responsibilities, and the owner/transition/claim/evidence distinctio
 easier to reconstruct. These remain original Atlas explanations with explicit
 model/platform limits; they do not claim a kernel lab, host observation, release,
 or university-equivalent outcome.
+
+## 2026-08-03 systems clarity continuation
+
+The official [CMU 15-418/618](https://www.cs.cmu.edu/~418/) and
+[Stanford CS144](https://cs144.github.io/) routes were rechecked on
+**2026-08-03**. Atlas does not add their full programming-project volume,
+hardware/parallel implementation work, routing, congestion-control, or peer
+feedback. Instead, M19 now makes work/span and Amdahl bounds visibly derive
+from declared assumptions, while M20 makes its server-local ID/digest case
+analysis explicit. Both modules now provide a compact linear route through
+their visual studios and explicitly non-grading adaptive oral protocols.
+These are original clarity aids, not a claim of enrollment, course equivalence,
+performance measurement, remote delivery, release, or mastery.

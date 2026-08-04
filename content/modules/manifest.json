@@ -793,10 +793,10 @@
       "title": "Concurrency and Parallelism",
       "summary": "Arc IV: make overlapping work explainable One worker can be correct in isolation while two workers, each doing locally valid work, produce a globally invalid result. Concurrency begins at that seam.",
       "arcId": "arc-iv",
-      "wordCount": 23231,
+      "wordCount": 23646,
       "estimatedMinutes": 104,
       "focusedStudyMinutes": null,
-      "sourceHash": "ff159c079fdec8b1ba099b688de0fc719afd5215e42d303fde28fe0b1ac9d23f",
+      "sourceHash": "775d94ea4d4d5e935eb29a19df2232172bcbdb3571ac7cda574280b4b15c3d57",
       "id": "m19",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -834,10 +834,10 @@
       "title": "Networks and Application Protocols",
       "summary": "Arc IV: carry a local result across an uncertain boundary A local program can know that it produced a valid value. The moment that value must cross a network, it must stop pretending that one local event is a remote fact.",
       "arcId": "arc-iv",
-      "wordCount": 16279,
+      "wordCount": 16663,
       "estimatedMinutes": 72,
       "focusedStudyMinutes": null,
-      "sourceHash": "f5ce154da17243cc4df2796b6a3afb81eca06dba433bcf3b6e5dee67f4a36f5a",
+      "sourceHash": "26502e47d15c77be826b6a5413e92a4da434c8742db1abd8cd17a64e75595881",
       "id": "m20",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -875,7 +875,7 @@
       "title": "Async and Distributed Systems",
       "summary": "Arc IV: coordinate local work without inventing remote certainty A program can own a task. It cannot own every queue, clock, replica, or response path beyond its boundary. This module makes that distinction useful.",
       "arcId": "arc-iv",
-      "wordCount": 8962,
+      "wordCount": 9195,
       "estimatedMinutes": 39,
       "focusedStudyMinutes": {
         "minimumEvidence": [
@@ -887,7 +887,7 @@
           780
         ]
       },
-      "sourceHash": "1339aebb2d01ccd78f9cd2ea5eb63fbab6386a989fbe38f8bd52a50cf4d1dedf",
+      "sourceHash": "dece49bedda7a2f7f740dd90e5bcce265d52f9430761dc76368f38c5cf898d24",
       "id": "m21",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -925,7 +925,7 @@
       "title": "Security, Privacy & Trust Boundaries",
       "summary": "Arc IV — Machine, network, trust, and responsibility Bridge: Module 21 taught that asynchronous and distributed evidence can be incomplete. Module 22 asks a prior question: which input, identity, authority, and evidence may Atlas trust e…",
       "arcId": "arc-iv",
-      "wordCount": 7749,
+      "wordCount": 8166,
       "estimatedMinutes": 31,
       "focusedStudyMinutes": {
         "minimumEvidence": [
@@ -937,7 +937,7 @@
           780
         ]
       },
-      "sourceHash": "49def9e86deb35fc2669215b7f26b19f3ce04da104f11284baa488df4624f0f6",
+      "sourceHash": "e49439d9f17ba353653852fed2c89918dea4bd76c90de822d0ca3e507820f005",
       "id": "m22",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1025,7 +1025,7 @@
       "title": "CPython, Performance & Memory Evidence",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 23 gave a program a semantic path: source, structure, environment, evaluator, and bounded result. This module asks a different question: when a trusted Python program runs,…",
       "arcId": "arc-v",
-      "wordCount": 5391,
+      "wordCount": 5623,
       "estimatedMinutes": 21,
       "focusedStudyMinutes": {
         "minimumEvidence": [
@@ -1037,7 +1037,7 @@
           720
         ]
       },
-      "sourceHash": "6b8e473148ffc4d232225be1a14aafadf477ebfa8b5b443ebd0198c1e63803e4",
+      "sourceHash": "33c5629e151d74df986965fdc4b4fb07686b14cac4066ff81f91cf96da47c853",
       "id": "m24",
       "state": {
         "lifecycle": "learner-material-ready",

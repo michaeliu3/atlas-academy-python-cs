@@ -7,6 +7,11 @@ actually published.
 
 ## Unreleased
 
+- Strengthened the M19–M24 systems-and-runtime reasoning chain with compact
+  rigor cards, code-reading/design checkpoints, explicit visual-text routes,
+  and named Teaching Assistant support where those structural anchors were
+  previously ambiguous. These are current unreviewed learning-material
+  pointers, not publication, human-review, accessibility, or mastery claims.
 - Strengthened the M14–M18 software-to-machine reasoning chain with compact
   first-principles, rigorous-claim, code-reading, and linear visual-text cards.
   The cards make existing change, artifact, relational, execution, and OS

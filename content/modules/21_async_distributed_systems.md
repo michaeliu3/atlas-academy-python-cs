@@ -617,6 +617,39 @@ replies and procedure execution; Module 20's [HTTP method semantics](https://www
 remain a reminder that a protocol verb does not remove application-level
 identity and evidence design.
 
+### Rigor card — definitions, assumptions, derivation, counterexample, and numerical experiment
+
+**Definitions.** Let `o` be the client's local timeout observation,
+`H0` and `H1` be compatible remote histories, and `UNKNOWN_REMOTE` be the
+only classification when the available evidence does not distinguish those
+histories. The operation ID and canonical digest name one declared operation;
+they do not reveal its remote outcome.
+
+**Assumptions.** The evidence is local, the ID/digest remains stable, and no
+matching status or response has yet distinguished the histories. The teaching
+fixture is not a replica, a durable production ledger, or a general network
+model.
+
+**Derivation / proof idea.** If the local observation is the same in both
+histories while the remote outcomes differ, a classifier that sees only that
+observation cannot soundly declare either remote outcome:
+
+```text
+observe(H0) = observe(H1) = o
+remote_outcome(H0) != remote_outcome(H1)
+therefore local classifier(o) must not promote either outcome
+```
+
+**Counterexample.** A source can decide an operation and have its reply lost;
+the client then sees the same timeout it would see if no source admission ever
+occurred. Calling the timeout “not committed” is an unsupported promotion.
+
+**Finite numerical experiment.** With the same ID/digest and a declared
+two-second local timeout, `H0` (no remote decision) and `H1` (decision plus
+lost reply) both initially classify as `UNKNOWN_REMOTE`. A later matching
+status record is the discriminating evidence. This is a two-row model check,
+not an observation of a real distributed service.
+
 ### Code-reading lab A4 — new ID after timeout
 
 ```python

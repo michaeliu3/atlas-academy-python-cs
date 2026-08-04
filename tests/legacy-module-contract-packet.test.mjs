@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "861dd704ec83efd84ac2eb68330b979a213e705f91ae631ad075409a8051e32a");
+  assert.equal(digest, "a64812ab5d1e0492c184487710f9ccd6bf5dc760115b5ce5d693bedc3eec3ffb");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {

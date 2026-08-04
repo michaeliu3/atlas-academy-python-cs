@@ -206,3 +206,11 @@ handoff, designated-chat delivery, voice or rendering behavior, Notion
 activity, learner mastery, CI, deployment, release, or publication. Any later
 reviewer must assess the actual learner experience and record separate evidence
 before changing a lifecycle or audit claim.
+
+## 2026-08-03 structural clarity follow-up
+
+The current canonical audit now maps the named memory-lens text equivalent and
+the module-specific runtime-evidence Teaching Assistant prompt as
+**pointer-present**. They clarify the existing local-only evidence route; they
+do not turn the Observatory into a profiler, prove chat/voice/Notion behavior,
+or grant human review, learner mastery, release, or publication.

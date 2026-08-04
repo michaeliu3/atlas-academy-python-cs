@@ -170,3 +170,12 @@ does not retrospectively change the audit status, human-review state, release
 evidence, availability, publication state, or learner-mastery record. A later
 review must inspect any module-specific companion prompt and learner-facing
 rehearsal route before making any stronger claim.
+
+## 2026-08-03 structural clarity follow-up
+
+The current canonical audit now maps M19's work/span rigor card, linear visual
+text route, and adaptive oral-defense protocol as **pointer-present**. These
+are original workbook additions; they make existing bounded-model reasoning
+easier to inspect and do not add a source, reuse approval, human-quality
+review, learner result, release, or publication claim. Historical audit
+findings above remain historical evidence rather than current status labels.
