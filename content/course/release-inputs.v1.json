@@ -522,7 +522,7 @@
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
-      "sha256": "d3d858293f598c4a04f5e4dd6720da5f383969292fded9c231fab3fbaadc9464"
+      "sha256": "4722aa069671e13ff1823963d8c0e39fc71860966df3805f7e6ccaabeeb306c8"
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
@@ -546,7 +546,7 @@
     },
     {
       "path": "content/course/synthesis-preview-conversations.v1.json",
-      "sha256": "bd84cddb0c2f8d8034d271c2949f9f49062b62b6a587b695382f6708bf53e45d"
+      "sha256": "64233818f543da9614721a6c888660d22c9c3d4d1986ad25d79a879e7b9659fa"
     },
     {
       "path": "content/modules/01_values_state_execution.md",
@@ -886,7 +886,7 @@
     },
     {
       "path": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md",
-      "sha256": "65315ef9839bdf02269c39122b20a3cfa1d090780f786ffcfea34fe3c0413286"
+      "sha256": "e163417d35d8e80573e4c124397e089ed17f3808c8458be018af862f2e2cb542"
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "997cd88576ef888f4601e4da46ffdbf8c506a575bbcfb4e104090beaa30a2787"
+      "sha256": "b762f8cae9087f160a4db066b0ca438f5cd79259bdf1a97ed5c18390fbdd8503"
     }
   ]
 }

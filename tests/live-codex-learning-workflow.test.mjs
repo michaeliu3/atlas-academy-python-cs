@@ -29,10 +29,10 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.equal(report.notionSessionNotes.writeCadence, "at-most-one-concise-note-per-substantive-session");
   assert.ok(report.notionSessionNotes.requiredConditions.includes("the learning conversation is substantive"));
   assert.ok(report.notionSessionNotes.requiredConditions.includes("records are not paused and the material is not marked off-record"));
-  assert.equal(report.notionSessionNotes.onUnavailable, "state-unavailable-and-provide-ready-to-paste-summary");
+  assert.equal(report.notionSessionNotes.onUnavailable, "state-write-unverified-and-provide-ready-to-paste-summary");
   assert.deepEqual(report.notionSessionNotes.unavailableNoteTemplate, {
-    title: "Notion unavailable — local session note",
-    intro: "No Notion write occurred. Copy only this concise, learner-approved summary if useful.",
+    title: "Notion write unverified — local session note",
+    intro: "No Notion write is verified. Copy only this concise, learner-approved summary if useful.",
     fields: [
       "Date / role / module or topic:",
       "Question and prediction:",
@@ -48,7 +48,7 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
     endSession: "Acknowledge end session as chat-level intent; stop automatic session-summary creation or updates until a new records on, while honoring an explicitly requested correction or deletion separately.",
     pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
     confirmedSave: "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
-    deletionUnavailable: "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI.",
+    deletionUnavailable: "If deletion access is unavailable or a result cannot be verified, say no deletion is verified and direct the learner to delete or archive the note in their own Notion UI.",
   });
   assert.deepEqual(report.roles.map(({ id }) => id), ["teaching-assistant", "study-partner"]);
   assert.match(report.roles[0].liveResponsibility, /oral defense/u);
@@ -69,8 +69,13 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   assert.match(guide, /delete or archive.*own Notion UI/u);
   assert.match(guide, /current substantive session/u);
   assert.match(guide, /say “end session” to close automatic\s+session-summary authorization/iu);
-  assert.match(guide, /explicitly requested correction or deletion remains\s+separately authorized/iu);
-  assert.match(guide, /Notion unavailable — local session note/u);
+  assert.match(
+    guide,
+    /explicitly\s+requested\s+correction\s+or\s+deletion\s+remains\s+separately\s+authorized/iu,
+  );
+  assert.match(guide, /Notion write unverified — local session note/u);
+  assert.match(guide, /No Notion write is verified/u);
+  assert.doesNotMatch(guide, /No Notion write occurred/u);
   assert.match(promptSource, /chat-level intent/u);
   assert.match(promptSource, /delete or archive.*own Notion UI/u);
   assert.match(promptSource, /close automatic session-summary authority/u);

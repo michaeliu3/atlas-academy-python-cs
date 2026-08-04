@@ -293,3 +293,20 @@ This records current, reviewable source provenance and the absence of an
 unnecessary hosted-run cost for that history-only push. It does **not** record
 a successful CI gate, human review, release, deployment, security clearance,
 or learner outcome for the commit.
+
+## Follow-up source-ref observation (2026-08-04)
+
+A later direct GitHub API readback resolved
+[`codex/atlas-60-day-route-history`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/codex/atlas-60-day-route-history)
+to [`0e3a51d088e36c0b02e140b9caedb12dbff50115`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/0e3a51d088e36c0b02e140b9caedb12dbff50115).
+Its exact-SHA Actions query again returned zero workflow runs. This ref is
+separate from open Draft PR #21, whose head remained
+[`54b894fb011c341373085747c43829be362c894a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/54b894fb011c341373085747c43829be362c894a).
+
+An ordinary atomic fast-forward attempt to bring the current history to that
+protected PR branch was rejected because the local ancestry contains the older
+merge commit `df217f5b9f0211dc025169d9c48d5a2aeb890ec3`; GitHub made no ref
+change. No force-push, rebase, squash, deletion, or history rewrite was
+attempted. This observation records provenance and the still-pending PR path;
+it does not establish a CI gate, release, deployment, security clearance, or
+learner outcome.

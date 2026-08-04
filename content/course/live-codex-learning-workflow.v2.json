@@ -32,10 +32,10 @@
       "records are not paused and the material is not marked off-record"
     ],
     "writeCadence": "at-most-one-concise-note-per-substantive-session",
-    "onUnavailable": "state-unavailable-and-provide-ready-to-paste-summary",
+    "onUnavailable": "state-write-unverified-and-provide-ready-to-paste-summary",
     "unavailableNoteTemplate": {
-      "title": "Notion unavailable — local session note",
-      "intro": "No Notion write occurred. Copy only this concise, learner-approved summary if useful.",
+      "title": "Notion write unverified — local session note",
+      "intro": "No Notion write is verified. Copy only this concise, learner-approved summary if useful.",
       "fields": [
         "Date / role / module or topic:",
         "Question and prediction:",
@@ -50,7 +50,7 @@
       "endSession": "Acknowledge end session as chat-level intent; stop automatic session-summary creation or updates until a new records on, while honoring an explicitly requested correction or deletion separately.",
       "pauseOrOffRecord": "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
       "confirmedSave": "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
-      "deletionUnavailable": "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI."
+      "deletionUnavailable": "If deletion access is unavailable or a result cannot be verified, say no deletion is verified and direct the learner to delete or archive the note in their own Notion UI."
     },
     "recordFields": [
       "date, role, module/topic, and learner question",

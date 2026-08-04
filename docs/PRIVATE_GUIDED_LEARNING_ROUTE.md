@@ -583,9 +583,10 @@ gap, not to duplicate a university course wholesale.
 
 ## Honest boundaries
 
-- M25/M26 remain reader-visible portal previews until the advanced chain has
-  the required release evidence. The separate private evidence gate permits
-  instruction only; it does not unlock or publish them.
+- M25/M26 remain reader-visible portal previews. Their separate private
+  evidence gate permits instruction only after the named learner dossiers or
+  packets, relevant M27–M30 evidence or unavailable markers, and TA handoffs;
+  it does not unlock, publish, or otherwise change the portal state.
 - A completed calendar, fluent oral explanation, green test, or AI-generated
   patch is not mastery by itself.
 - The course is calibrated against rigorous open-course ideas, not equivalent
