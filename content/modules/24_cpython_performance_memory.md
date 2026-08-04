@@ -429,6 +429,18 @@ flowchart TB
     P --> W["Do not infer Python allocation site"]
 ~~~
 
+### Text equivalent — choose a memory lens by claim
+
+Use a direct four-branch reading route. For an immediate object's direct size,
+use `sys.getsizeof`; it does not establish the retained graph. For changes in
+traced Python allocations, use `tracemalloc`; it does not establish RSS or
+native/extension allocation. For a native or extension path, require explicitly
+scoped native evidence; it does not identify a Python owner. For process or OS
+memory, use a host metric; it does not identify a Python allocation site.
+
+Choose the lens from the question, then state its omitted scope. Never silently
+convert one lens into another.
+
 ### Prediction exercise
 
 Which conclusion is justified?
@@ -649,6 +661,26 @@ The TA asks five questions:
 The Study Partner changes exactly one fact — runtime version, input
 distribution, GC setting, CPU condition, native allocation, or cache policy —
 and asks which conclusions survive. Swap roles after ten minutes.
+
+### Teaching Assistant prompt — M24 runtime-evidence review
+
+### TA guide
+
+Begin with one learner-selected runtime claim. Before correction, ask for a
+prediction and confidence `1–4`, then make this whiteboard trace visible:
+
+```text
+claim -> semantic invariant/oracle -> runtime and build -> workload/baseline
+-> metric and scope -> missing control -> limitation -> next falsifier
+```
+
+Ask the learner to reconstruct one profiler, allocation, or benchmark trace;
+name the chosen metric and what it omits; and change exactly one premise such
+as runtime version, workload distribution, warm-up rule, allocator, data
+shape, hardware condition, or statistical summary. Offer the smallest useful
+counterexample or repair without pass/fail framing. Keep raw profiles and host
+identifiers local, let the learner control any summary, and retain the M32
+authoring-only boundary rather than treating this as an unlock.
 
 ### Conversational oral defense — M24
 

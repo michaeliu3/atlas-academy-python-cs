@@ -83,3 +83,17 @@ sources unless a particular asset grants reuse rights.
 This review supports M21–M24 as a rigorous connected accelerated sequence with
 one optional empirical deepening. It does not establish university equivalence,
 credit, a degree, universal mastery, or a release-complete Atlas product.
+
+## 2026-08-03 clarity continuation
+
+The official [MIT 6.5840](https://pdos.csail.mit.edu/6.5840/),
+[Stanford CS155](https://cs155.stanford.edu/info.html), and
+[MIT 6.172](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/)
+routes were rechecked on **2026-08-03**. Atlas keeps their substantial labs,
+offensive-security work, replication work, and C/hardware performance projects
+outside this accelerated core. The new M21 timeout-indistinguishability card,
+M22 authorization-predicate and code-review card, and M24 memory-lens text
+route/TA prompt make existing first-principles reasoning easier to reconstruct
+without widening scope. They remain original, bounded teaching material—not
+evidence of security approval, a real distributed observation, a benchmark,
+platform behavior, release, or learner mastery.

@@ -342,6 +342,50 @@ flowchart TD
     N --> E
 ~~~
 
+### Rigor card — authorization is a predicate, not a property of a trace
+
+### Definitions
+
+A verifier turns a presented claim into a scoped subject or a
+failure. A separate policy then evaluates one explicit tuple:
+
+```text
+verify(claim) -> subject | failure
+allow(subject, tenant, resource, action, purpose, policy_version, freshness)
+  -> PERMIT | DENY | DEFER
+```
+
+A trace ID may correlate observations, but it is not by itself a subject,
+authority grant, or protected effect.
+
+### Assumptions and boundary
+
+Tuple fields are canonicalized before policy evaluation; the
+policy version and freshness/revocation rule are named; and the decision owner
+enforces the result at the narrow effect boundary. A receiving API, a log line,
+or an encrypted transport does not silently satisfy those assumptions.
+
+### Derivation and proof idea
+
+Authorization must depend on the exact action and
+resource because a verified subject can be permitted for one effect and denied
+for another. Therefore a correct decision cannot be derived from correlation
+alone; it needs the verified subject plus the full scoped tuple at the point
+where an effect would occur.
+
+### Counterexample and numerical experiment
+
+Under one declared illustrative policy,
+the same trace ID can lead to different decisions because the tuple changed:
+
+| Trace | subject | tenant/action | illustrative result | Why |
+| --- | --- | --- | --- | --- |
+| `T-17` | `editor-1` | `atlas-a` / publish | `PERMIT` | exact policy rule matches |
+| `T-17` | `editor-1` | `atlas-b` / publish | `DENY` or `DEFER` | same correlation, different protected effect |
+
+This two-row policy check is not a security assessment or a claim about any
+real identity provider; it makes the missing decision inputs visible.
+
 ### What Module 21 contributes
 
 A retry uses a stable operation ID because one intended distributed operation
@@ -511,6 +555,22 @@ statement = "SELECT record_id FROM atlas_records WHERE label = " + label
 The second line is not validation. It lets a value select statement structure.
 The correct repair begins with a fixed statement shape, separate value binding,
 and a separate authorization decision.
+
+### Code-reading, debugging, and design checkpoint — one input, three separate decisions
+
+**Read.** Trace where `packet["query_label"]` changes from received data into
+statement structure. **Debug.** Name the first false promotion: an external
+value now selects SQL structure before a boundary has constrained it.
+**Design.** Keep the statement shape fixed, bind the label as a value, require
+the exact authority decision before creating the local fake `QueryPlan`, and
+retain only redacted decision evidence.
+
+Use four bounded acceptance checks: statement shape does not change when the
+label changes; parameters may change without becoming structure; a
+cross-tenant denial creates no plan; and retained evidence contains no raw
+label. Parameter binding is still not authorization for another tenant's
+effect. This is a code-reading and design exercise against the fake adapter,
+not a database target or an attack demonstration.
 
 ### Session artifact — five no-promotion rules
 

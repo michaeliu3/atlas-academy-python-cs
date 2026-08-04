@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "1606a0ba5a0dc437918c8faa5129aad53357f8004228358332a1be1c8910c7b8"
+      "sha256": "ab7d7295e429ddb57229bb6af09b5feba4bca2466ebf796c98f7654881342c95"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "82fb9d22368f8b7c15dc2595cb6cac68b04d118f4b473941e39f280ce7a490db"
+      "sha256": "a64812ab5d1e0492c184487710f9ccd6bf5dc760115b5ce5d693bedc3eec3ffb"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "5db1d3d7b400f7b9c2c5bb9acf2120ad7f5808f1e08d23c4d76cd3600cc3df60"
+      "sha256": "bf90dd5cf022483915ea8e92513ed4f7183b28e8378433be4dc13a5ef9076430"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -622,19 +622,19 @@
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "ff159c079fdec8b1ba099b688de0fc719afd5215e42d303fde28fe0b1ac9d23f"
+      "sha256": "775d94ea4d4d5e935eb29a19df2232172bcbdb3571ac7cda574280b4b15c3d57"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "f5ce154da17243cc4df2796b6a3afb81eca06dba433bcf3b6e5dee67f4a36f5a"
+      "sha256": "26502e47d15c77be826b6a5413e92a4da434c8742db1abd8cd17a64e75595881"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
-      "sha256": "1339aebb2d01ccd78f9cd2ea5eb63fbab6386a989fbe38f8bd52a50cf4d1dedf"
+      "sha256": "dece49bedda7a2f7f740dd90e5bcce265d52f9430761dc76368f38c5cf898d24"
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
-      "sha256": "49def9e86deb35fc2669215b7f26b19f3ce04da104f11284baa488df4624f0f6"
+      "sha256": "e49439d9f17ba353653852fed2c89918dea4bd76c90de822d0ca3e507820f005"
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
@@ -642,7 +642,7 @@
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "6b8e473148ffc4d232225be1a14aafadf477ebfa8b5b443ebd0198c1e63803e4"
+      "sha256": "33c5629e151d74df986965fdc4b4fb07686b14cac4066ff81f91cf96da47c853"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
@@ -722,7 +722,7 @@
     },
     {
       "path": "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md",
-      "sha256": "1e4028a0d45eac0ce481d192ae494c8344669e346d91bc8d93f5009c3dea0fbd"
+      "sha256": "eaed6aa593715eb33c67744820c4079ff290ba92254052c49b323e621acd1882"
     },
     {
       "path": "content/source-maps/module19_concurrency_parallelism_source_map.md",
@@ -734,7 +734,7 @@
     },
     {
       "path": "content/source-maps/module20_networks_protocols_source_audit_addendum.md",
-      "sha256": "24c2b601fa71b21de16dd0ab1dfc4f4be931d45e3a95a9da2e859beae3591143"
+      "sha256": "f0da68c3ee4716478693369e1761b10bded2ed3a749f6e267a95f523f6fd3a7c"
     },
     {
       "path": "content/source-maps/module20_networks_protocols_source_map.md",
@@ -742,7 +742,7 @@
     },
     {
       "path": "content/source-maps/module21_async_distributed_source_audit_addendum.md",
-      "sha256": "52364a222136db3f80bb1c5ebf784f9f3345aad761f7bee840a38917eba37189"
+      "sha256": "a25d254801c11f96be6a0588cda5fedb4cef6c896137896d9f29545b9d915e32"
     },
     {
       "path": "content/source-maps/module21_async_distributed_source_map.md",
@@ -750,7 +750,7 @@
     },
     {
       "path": "content/source-maps/module22_security_trust_source_audit_addendum.md",
-      "sha256": "f7d14feb10a96224875e568fa2111ff72a8cd5e89d2f460294c417db296d313b"
+      "sha256": "11c48cad300aa481ffdc320c509ca1e4865f5022ae5fcdf025d8801efe16434b"
     },
     {
       "path": "content/source-maps/module22_security_trust_source_map.md",
@@ -766,7 +766,7 @@
     },
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md",
-      "sha256": "ca721d6e42f661e3c6a343f44c6d6ddc40c901df3e4e096d627d28e380a1a0f9"
+      "sha256": "f625eec89c01f0fbfa78410209d8c013411b54cb08d557d9a05e237162bb456e"
     },
     {
       "path": "content/source-maps/module24_cpython_performance_memory_source_map.md",
