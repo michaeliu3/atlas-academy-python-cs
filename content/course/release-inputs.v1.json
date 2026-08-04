@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "5ea00663e4aa773b4c2587bc59990a66d363cf9aca5cf05257a755b4c3d0c396"
+      "sha256": "b909a1de9f9ac20931da0618755c65c3245da54963be5c7685ad716cef8521cc"
     }
   ]
 }
