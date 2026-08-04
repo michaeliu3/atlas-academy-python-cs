@@ -7,9 +7,9 @@ Atlas has two intentionally distinct access modes:
   authoring-only.
 - The **private guided route** is how the course owner works through the full
   connected sequence with the designated Codex Teaching Assistant and Study
-  Partner chats. It may use the six private advanced study packs below, but it
-  does not change their portal availability, create route credit, or make a
-  publication claim.
+  Partner chats. For M31–M36, the canonical graph separately records a ready
+  private pack; this does not change portal availability, create route credit,
+  or make a publication claim.
 
 This is one route, not a second curriculum. If this page and
 [`course-graph.v2.json`](../content/course/course-graph.v2.json) ever differ

@@ -255,8 +255,10 @@ rehearsal, not a pass/fail exam. In the two learner-designated chats with a
 configured private record, the role handoff authorizes at most one automatic
 concise Notion evidence note only after the learner says `records on` in that
 exact designated chat for the current substantive learning conversation;
-permission expires when that session ends. Never save raw voice or a full
-transcript, and never claim the note was saved without direct evidence.
+say `end session` to close automatic session-summary authority until a new
+`records on`; an explicit correction or deletion remains separately authorized.
+Never save raw voice or a full transcript, and never claim the note was saved
+without direct evidence.
 
 ## Catch-up without breaking the chain
 
@@ -320,9 +322,10 @@ Portal progress is local-first: Atlas itself does not write or export to
 Notion. The learner-designated Codex chats may automatically make at most one
 concise Notion session note only after the learner says `records on` in that
 exact designated chat for the current substantive learning conversation;
-permission expires when that session ends. Keep secrets, raw voice/transcripts, personal
-diagnostics, and private notes out of Git; a successful write still needs
-direct evidence. See the [live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md)
+say `end session` to close automatic session-summary authority until a new
+`records on`; an explicit correction or deletion remains separately authorized.
+Keep secrets, raw voice/transcripts, personal diagnostics, and private notes
+out of Git; a successful write still needs direct evidence. See the [live Codex learning workflow](LIVE_CODEX_LEARNING_WORKFLOW.md)
 and the [goal-compliance matrix](GOAL_COMPLIANCE_MATRIX.md) for the remaining
 implementation work.
 

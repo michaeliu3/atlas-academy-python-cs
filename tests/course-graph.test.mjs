@@ -38,6 +38,10 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
     availability: "authoring-only",
     contract: { track: "advanced-v1", state: "authoring-only" },
     release: { state: "unrecorded", recordId: null },
+    privateGuidedStudy: {
+      status: "ready",
+      workbookPath: "content/authoring/m31_optimization_information_workbook.v1.md",
+    },
   });
   assert.equal(byNumber.get(25)?.sequencePosition, 35);
   assert.equal(byNumber.get(31)?.sequencePosition, 22);
@@ -72,6 +76,14 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
     mode: "unavailable",
     readerAccess: "hidden",
   });
+
+  for (const number of [31, 32, 33, 34, 35, 36]) {
+    const privateStudy = byNumber.get(number)?.state.privateGuidedStudy;
+    assert.equal(privateStudy?.status, "ready");
+    assert.match(privateStudy?.workbookPath ?? "", new RegExp(`^content/authoring/m${number}_.*_workbook\\.v1\\.md$`, "u"));
+    const workbook = await readFile(new URL(`../${privateStudy.workbookPath}`, import.meta.url), "utf8");
+    assert.match(workbook, /## Session 1/u, `M${number} private guided-study pack must contain its first session.`);
+  }
 });
 
 test("readable projections stop at unavailable route nodes instead of bypassing them", async () => {
@@ -155,6 +167,34 @@ test("the graph refuses access states that would turn a preview or authoring nod
   assert.throws(
     () => validateCourseGraph(authoringAsReader),
     /authoring-only Module 31 must be hidden from the reader/u,
+  );
+});
+
+test("only the six hidden advanced modules may declare a ready private guided-study pack", async () => {
+  const graph = await loadCourseGraph();
+
+  const missingPack = structuredClone(graph);
+  delete missingPack.modules.find(({ number }) => number === 31).state.privateGuidedStudy;
+  assert.throws(
+    () => validateCourseGraph(missingPack),
+    /Module 31 must declare its private guided-study readiness/u,
+  );
+
+  const leakedPack = structuredClone(graph);
+  leakedPack.modules.find(({ number }) => number === 30).state.privateGuidedStudy = {
+    status: "ready",
+    workbookPath: "content/authoring/m30_not_a_private_pack_workbook.v1.md",
+  };
+  assert.throws(
+    () => validateCourseGraph(leakedPack),
+    /Only M31–M36 may declare a private guided-study pack/u,
+  );
+
+  const forgedPackPath = structuredClone(graph);
+  forgedPackPath.modules.find(({ number }) => number === 31).state.privateGuidedStudy.workbookPath = "content/authoring/m32_wrong_workbook.v1.md";
+  assert.throws(
+    () => validateCourseGraph(forgedPackPath),
+    /Module 31 private guided-study workbookPath must name its checked-in authoring workbook/u,
   );
 });
 
