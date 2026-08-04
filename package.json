@@ -20,6 +20,8 @@
     "check:generated": "node scripts/check-generated.mjs",
     "generate:goal-compliance": "node scripts/generate-goal-compliance.mjs",
     "check:goal-compliance": "node scripts/generate-goal-compliance.mjs --check",
+    "check:source-links": "node scripts/check-source-links.mjs",
+    "check:source-links:live": "node scripts/check-source-links.mjs --live",
     "types:worker": "wrangler types worker-configuration.d.ts --check",
     "typecheck": "tsc --noEmit",
     "predev": "pnpm sync:modules",

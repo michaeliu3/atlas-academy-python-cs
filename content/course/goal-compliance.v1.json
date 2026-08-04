@@ -126,8 +126,8 @@
       "id": "calibration",
       "requirement": "Official MIT, CMU, Stanford, Georgia Tech, Berkeley, and comparable materials calibrate claims without copied assets.",
       "state": "partial",
-      "evidence": "docs/ACADEMIC_CALIBRATION.md; content/source-maps/; research/",
-      "openItem": "Finish URL liveness, access-date staleness, and the remaining citation corrections."
+      "evidence": "docs/ACADEMIC_CALIBRATION.md; content/source-maps/; docs/research/; scripts/check-source-links.mjs; tests/source-link-audit.test.mjs",
+      "openItem": "Recheck the bounded live corpus when sources change, expand liveness beyond calibration notes, and finish remaining citation corrections."
     },
     {
       "id": "chat-roles",

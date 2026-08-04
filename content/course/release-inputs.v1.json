@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "55d2ff4d4a30afad6477bcd6b55527e37a437206d73035924d7e34202bb7959b"
+      "sha256": "ccb2fb72724aeb0ef9e524126b0dd6e0084e1bae6f1b57807d2dc97707d43437"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "c738f8dddae62e887c7d3d675e479c5f1a80bfc931861a389475d99d4dd8a15b"
+      "sha256": "5c0a3e0540b362e1af1a7799a664590a57df6f9d047272cd598945c222029f1e"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -554,7 +554,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "5c4b30a8e6a5b1f6faa48eb67bdab6da96a906971836a49a8d2cf87558bdfdcc"
+      "sha256": "e3fd3180a1d4aee2f1ebd2577c2fee4aecec0f7d88ec908c8b40146f3b815099"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -1030,7 +1030,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "ee60c8085307c7774199d14ec4811f19b09b1b71686b52e9550bb2068766d160"
+      "sha256": "22ebb27c919cabb110865b00bd4dbb8166c70cc005d10e7c0328d9f2d8cf38e6"
     },
     {
       "path": "playwright.config.ts",

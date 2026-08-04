@@ -25,7 +25,7 @@ asset-level review.
    The publisher source remains historical background, not the formula-reading
    route.
 2. **M34 Session 5 NIST route:** the learner-facing entry now uses the direct
-   official HTTPS [NIST AI RMF 1.0 PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf),
+   official HTTPS [NIST AI RMF 1.0 PDF](https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf),
    while a DOI may remain a citation record.
 3. **M33 Session 4 malformed-input reduction branch:** the workbook now makes
    the referent explicit: a malformed *source* string is outside `VC`, while

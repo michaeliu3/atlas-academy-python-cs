@@ -5,6 +5,24 @@ connected route has comparable **intellectual scope and standards of evidence**
 where feasible. It is not equivalent to enrollment, faculty feedback, graded
 coursework, peer learning, academic credit, or a degree.
 
+## Automated source-audit boundary
+
+`pnpm check:source-links` validates every URL in `content/source-maps/` and
+the calibration notes, requires HTTPS, and rejects missing, future, or more
+than 180-day-old document-level review/access dates. Dates are intentionally
+document-level: a source-map ledger inherits the map's audit date rather than
+duplicating the same date beside every URL line.
+
+`pnpm check:source-links:live` performs bounded live checks against the
+academic-calibration corpus (`docs/ACADEMIC_CALIBRATION.md` and
+`docs/research/`). It runs in Course CI only when those source files change,
+uses redirects and a bounded request, and treats a reachable access-controlled
+endpoint as reachable-with-boundary rather than silently dropping it. The
+2026-08-04 audit checked 302 unique calibration URLs: 297 returned 200, one
+202, one ranged 206, and three returned 403; no dead URL remained. This is
+evidence of link reachability at that review point, not a promise that a
+third-party page will remain unchanged.
+
 The baseline calibration corpus was checked on **2026-08-01**. Targeted
 follow-up notes record their own later access dates. Sources are used as
 link-only comparison anchors: Atlas links to and paraphrases them, but does not
