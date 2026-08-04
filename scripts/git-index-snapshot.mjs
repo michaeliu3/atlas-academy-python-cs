@@ -55,14 +55,22 @@ function commandFailure(command, error) {
 // Git child processes in release validation must describe the worktree selected
 // by their `cwd`, not a caller-selected alternate Git directory, worktree, or
 // index. Keep this boundary shared so transitive validators cannot quietly read
-// different repository facts from the snapshot that anchors their proof.
-export function isolatedGitEnvironment() {
+// different repository facts from the snapshot that anchors their proof. The
+// one generated Git setting is the exact current worktree's safe-directory
+// allowance; it replaces, rather than inherits, any caller-supplied Git config.
+export function isolatedGitEnvironment({ safeDirectory = process.cwd() } = {}) {
+  if (typeof safeDirectory !== "string" || safeDirectory.trim() === "" || !isAbsolute(safeDirectory)) {
+    throw new TypeError("Git-index snapshot needs an absolute safe-directory path.");
+  }
   const environment = { ...process.env };
   for (const key of Object.keys(environment)) {
     if (key.toUpperCase().startsWith("GIT_")) {
       delete environment[key];
     }
   }
+  environment.GIT_CONFIG_COUNT = "1";
+  environment.GIT_CONFIG_KEY_0 = "safe.directory";
+  environment.GIT_CONFIG_VALUE_0 = safeDirectory;
   return environment;
 }
 

@@ -7,11 +7,19 @@ import { promisify } from "node:util";
 import test from "node:test";
 import {
   GitIndexSnapshotError,
+  isolatedGitEnvironment,
   openGitIndexSnapshot,
   readGitIndexText,
 } from "../scripts/git-index-snapshot.mjs";
 
 const execFileAsync = promisify(execFile);
+
+test("the isolated Git environment supplies only the current worktree safe-directory setting", () => {
+  const environment = isolatedGitEnvironment({ safeDirectory: process.cwd() });
+  assert.equal(environment.GIT_CONFIG_COUNT, "1");
+  assert.equal(environment.GIT_CONFIG_KEY_0, "safe.directory");
+  assert.equal(environment.GIT_CONFIG_VALUE_0, process.cwd());
+});
 
 async function git(root, args) {
   return execFileAsync("git", args, { cwd: root, encoding: "utf8" });
