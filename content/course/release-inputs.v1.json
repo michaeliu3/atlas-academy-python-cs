@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "b5802782505bbd1b2678b81382ae3851eda1d7582326b1baa4b8de2e8ebaf6f7"
+      "sha256": "b11fc3e03ac8c095dd12643982e06ee441b2f82892c8ef2705e7711b76fb8b0b"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -538,7 +538,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "a05e17388a538a8ae12f22d8155211d9da3b4343f75c0ef5822fb8f0835d48e6"
+      "sha256": "f386d0b0afab0426d356de7fde93412d629633e91b2924c33bdf7dcf2d63582c"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -774,7 +774,7 @@
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-      "sha256": "f6ee8e62d34428891a2cb3bbd7015226c6092e852161acfa3a2a87385132d854"
+      "sha256": "e3b6d7cf41e2c746178813ff4dcd5b71071b1aecd0c089c57238917e32ddaa37"
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
