@@ -158,7 +158,8 @@ test("the reader integrates the path before the workbook and preserves TA timing
   assert.match(page, /extractSessionLaunches\(lessonMarkdown\)/u);
   assert.match(page, /sessionLaunches=\{sessionLaunches\}/u);
   assert.match(interaction, /Start Session 1 with the Study Partner/u);
-  assert.match(interaction, /oral defense for after Session 6 and a\s+concrete dossier/u);
+  assert.match(interaction, /Study Partner discussion during the session when it helps/u);
+  assert.match(interaction, /oral\s+defense\s+for\s+after\s+Session\s+6\s+and\s+a\s+concrete\s+dossier/u);
   assert.match(
     interaction,
     /resolution\.kind === "studio"[\s\S]*renderSessionRoute\([\s\S]*StudioLoader/u,
