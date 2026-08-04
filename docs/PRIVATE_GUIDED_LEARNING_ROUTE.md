@@ -354,15 +354,17 @@ Notion-note policy to apply. Then send or say:
 
 ```text
 Start M35, Session 1 — Representation, inductive bias, and what a model can
-discard. Before Session 1, give me the six entry-retrieval checks below and
-direct me to the named bridge if my reasoning is fragile. Help me state the
-representation, target, baseline information boundary, split/evaluation
-relation, evidence, authority boundary, and one non-claim before discussing a
-model. Make me predict one consequence of changing a feature, split, metric,
-shift, seed, precision, or authority. For every multiple-choice diagnostic,
-ask for my A–D answer and 0–100 confidence before explaining it. Use readable
-math, labelled code, and prose/ASCII fallbacks; do not grade me. End with the
-smallest ML-evidence artifact and uncertainty for the Teaching Assistant.
+discard. Work only from the named M35 authoring-workbook Session 1 section, not
+the frozen review candidate. Before Session 1, give me the six entry-retrieval
+checks below and direct me to the named bridge if my reasoning is fragile. Help
+me build the Representation-Assumption Sheet: representation, target, baseline
+information boundary, split/evaluation relation, evidence, authority boundary,
+and one non-claim before discussing a model. Make me predict one consequence
+of changing a feature, split, metric, shift, seed, precision, or authority. For
+every multiple-choice diagnostic, ask for my A–D answer and 0–100 confidence
+before explaining it. Use readable math, labelled code, and prose/ASCII
+fallbacks; do not grade me. End with the smallest ML-evidence artifact and
+uncertainty for the Teaching Assistant.
 ```
 
 **M35 entry retrieval.** Before Session 1, answer without notes: (1) one
@@ -399,17 +401,19 @@ M36 is a ready private guided-study pack whose portal reader remains hidden. In 
 Notion-note policy to apply. Then send or say:
 
 ```text
-Start M36, Session 1 — Risk, representation, data, and assumption scope. Before
-Session 1, give me the five entry-retrieval checks below and direct me to the
-named bridge if my reasoning is fragile. Help me state the population/sample
-relation, loss, hypothesis class, theorem or finite-evidence scope, systems
-variables, response owner, stop condition, and one non-claim before a
-reliability claim. Make me predict one consequence of changing sampling,
-precision, reduction order, shift, or authority. For every multiple-choice
-diagnostic, ask for my A–D answer and 0–100 confidence before explaining it.
-Use readable notation, code, and prose/ASCII fallbacks; do not grade me. End
-with the smallest reliable-learning artifact and uncertainty for the Teaching
-Assistant.
+Start M36, Session 1 — Risk, representation, data, and assumption scope. Work
+only from the named M36 authoring-workbook Session 1 section, not the frozen
+review candidate. Before Session 1, give me the five entry-retrieval checks
+below and direct me to the named bridge if my reasoning is fragile. Help me
+build the Assumption-Scope Sheet, Empirical–Population Scope Card, and Initial
+Reliable-Learning Evidence Map: population/sample relation, loss, hypothesis
+class, theorem or finite-evidence scope, systems variables, response owner,
+stop condition, and one non-claim before a reliability claim. Make me predict
+one consequence of changing sampling, precision, reduction order, shift, or
+authority. For every multiple-choice diagnostic, ask for my A–D answer and
+0–100 confidence before explaining it. Use readable notation, code, and
+prose/ASCII fallbacks; do not grade me. End with the smallest reliable-learning
+artifact and uncertainty for the Teaching Assistant.
 ```
 
 **M36 entry retrieval.** Before Session 1, answer without notes: (1) why a

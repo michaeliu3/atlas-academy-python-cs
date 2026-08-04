@@ -33,8 +33,12 @@
 > not change the graph, portal reader access, route/Core credit, publication,
 > release status, or mastery claim.
 
-> Preview mode now: you may create only a `PREVIEW ONLY` gate card and one future-M26 question.
-> Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff/unlock language as current learner work.
+> Preview mode now: as preview artifacts, you may create only a `PREVIEW ONLY`
+> gate card and one future-M26 question. You may also use the built-in bounded,
+> non-credit orientation diagnostics for prediction and misconception repair;
+> their answers create no receipt, credit, handoff, or unlock. Do not use the
+> later studio, dossier, oral-defense, project, or Module 26 handoff/unlock
+> language as current learner work.
 
 **Full-module outcome — after the gate opens:** You can read an intelligent-feature proposal as a chain
 of purpose, authorized data, representation, candidate generation, score or
@@ -58,11 +62,13 @@ decision and collect the right evidence.
 
 > **Preview reading boundary:** In the portal, the six-session material below
 > is an orientation map for after the gate opens. Until then, create only the
-> named `PREVIEW ONLY` gate card and one future-M26 question; do not turn the
-> later loop, studio, dossier, rehearsal, project, or handoff into current
-> work. In the designated private chats, the private guided-study evidence gate
-> above permits the same six sessions as current learning work without changing
-> portal availability or granting credit.
+> named `PREVIEW ONLY` gate card and one future-M26 question as preview
+> artifacts, while using the built-in non-credit orientation diagnostics only
+> for prediction and misconception repair. Do not turn the later loop, studio,
+> dossier, rehearsal, project, or handoff into current work. In the designated
+> private chats, the private guided-study evidence gate above permits the same
+> six sessions as current learning work without changing portal availability or
+> granting credit.
 
 Use this loop in every session:
 
@@ -1480,8 +1486,9 @@ Module 26 turns the M25 packet into a maintained Atlas capstone. The capstone
 must connect the decision feature to its data, algorithms, contracts,
 transaction, systems behavior, security/privacy boundary, runtime evidence,
 human impact, deployment, and known unknowns. It does not require a public
-launch or a live third-party model. A private deployable GitHub project with a
-sanitized documentation/demo surface is the default safe release target.
+launch or a live third-party model. A future, privately deployable GitHub
+project with a sanitized documentation/demo surface can be a safe post-gate
+target; this is not evidence that a deployment or release currently exists.
 
 ---
 

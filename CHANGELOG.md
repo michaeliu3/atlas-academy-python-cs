@@ -24,6 +24,10 @@ actually published.
 - Kept advanced private study on the active authenticated review source, made
   M33/M34 Session 1 launches name their exact authoring copy and first
   artifact, and let the shared continuation prompt carry multiple outputs.
+- Made M35/M36 private-session starts equally self-contained, corrected M35's
+  authoring-only ledger to its actual `unrecorded` release state, and clarified
+  that M25/M26 portal diagnostics are non-credit orientation work rather than
+  dossier, handoff, synthesis, capstone, or release evidence.
 - Updated scoped lockfile overrides to `postcss@8.5.24`,
   `brace-expansion@1.1.18`/`5.0.9`, and `fast-uri@3.1.5`. The current
   production-only audit is clean; the remaining Drizzle/esbuild and

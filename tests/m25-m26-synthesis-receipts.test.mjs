@@ -63,17 +63,17 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
 
   assert.match(
     m25,
-    /Preview mode now: you may create only a `PREVIEW ONLY` gate card and one future-M26 question/u,
+    /Preview mode now: as preview artifacts, you may create only a `PREVIEW ONLY`[\s>]+gate card and one future-M26 question[\s\S]{0,260}built-in bounded,[\s>]+non-credit orientation diagnostics/u,
   );
   assert.match(
     m25,
-    /Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff\/unlock language as current learner work/u,
+    /Do not use the[\s>]+later studio, dossier, oral-defense, project, or Module 26 handoff\/unlock[\s>]+language as current learner work/u,
   );
   assert.match(m25, /private guided-study evidence gate/u);
   assert.match(m25, /Full-module outcome — after the gate opens/u);
   assert.match(
     m25,
-    /Preview reading boundary:[\s\S]{0,420}private guided-study evidence gate/u,
+    /Preview reading boundary:[\s\S]{0,720}private guided-study evidence gate/u,
   );
   const m25TaPromptStart = m25.indexOf("### Teaching Assistant oral-defense prompt — M25");
   const m25TaPromptEnd = m25.indexOf("### Study Partner live-rehearsal prompt — M25", m25TaPromptStart);
@@ -105,15 +105,15 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   );
   assert.match(
     m26,
-    /(?:>\s*)?\*{0,2}Portal preview mode now:\*{0,2}\s+you may make only a `REHEARSAL ONLY` framing[\s>]+card/u,
+    /(?:>\s*)?\*{0,2}Portal preview mode now:\*{0,2}\s+as a preview artifact, you may make only a[\s>]+`REHEARSAL ONLY` framing[\s>]+card[\s\S]{0,260}built-in bounded,[\s>]+non-credit orientation diagnostics/u,
   );
   assert.match(
     m26,
-    /Do not use the later studio, project, oral defense, or[\s>]+`RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` language as a current capstone decision/u,
+    /Do not[\s>]+use the later studio, project, oral defense, or[\s>]+`RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` language as a current capstone decision/u,
   );
   assert.match(
     m26,
-    /Preview reading boundary:[\s\S]{0,440}private guided-study[\s>]+evidence gate above permits the same six sessions/u,
+    /Preview reading boundary:[\s\S]{0,720}private guided-study[\s>]+evidence gate above permits[\s>]+the same six sessions/u,
   );
   const m26TaPromptStart = m26.indexOf("### Teaching Assistant oral-defense prompt — M26");
   const m26TaPromptEnd = m26.indexOf("### Study Partner live-rehearsal prompt — M26", m26TaPromptStart);

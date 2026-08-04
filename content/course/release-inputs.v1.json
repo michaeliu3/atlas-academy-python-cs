@@ -646,11 +646,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "3d1667a37fdadbe859d773509c1b37bbb6d8d5db1ebdbdc4564a6f3e6e7f6b9f"
+      "sha256": "f46f7c2882ade5fa4c403c6a012e8a32d46f3557a468632d85d80d7f6ba6dfc2"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "96c90d496e552c985a0b2c6fb9b9381bc90d9fa8d489535177c99269b7cef2d6"
+      "sha256": "a2fc1f10eeba70506e0c4fc6f02047985f0fcd9a2fa47617c51ac85c601a06e8"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -842,7 +842,7 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "3d06298c2212d3a7331529c97637cb7c65e6eb6eaee94bd896b05a4b459c6100"
+      "sha256": "dbba74dd7904bf78f9aa054d1302cd4af1a5778427e1cf5e7779efa4a9ad44da"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",

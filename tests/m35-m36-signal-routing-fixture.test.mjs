@@ -314,10 +314,18 @@ test("each probe is deterministic and does not mutate the shared declaration", (
 
 test("the M35 and M36 workbooks turn the shared fixture into bounded prediction work", async () => {
   const [m35Workbook, m36Workbook, m35Candidate, m36Candidate] = await Promise.all([
-    readFile("content/authoring/m35_machine_learning_representation_workbook.v1.md", "utf8"),
-    readFile("content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "utf8"),
-    readFile("content/modules/35_machine_learning_representation.md", "utf8"),
-    readFile("content/modules/36_statistical_learning_theory_reliable_deep_learning.md", "utf8"),
+    readFile("content/authoring/m35_machine_learning_representation_workbook.v1.md", "utf8").then((markdown) =>
+      markdown.replace(/\r\n?/gu, "\n"),
+    ),
+    readFile("content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "utf8").then((markdown) =>
+      markdown.replace(/\r\n?/gu, "\n"),
+    ),
+    readFile("content/modules/35_machine_learning_representation.md", "utf8").then((markdown) =>
+      markdown.replace(/\r\n?/gu, "\n"),
+    ),
+    readFile("content/modules/36_statistical_learning_theory_reliable_deep_learning.md", "utf8").then((markdown) =>
+      markdown.replace(/\r\n?/gu, "\n"),
+    ),
   ]);
 
   assert.match(m35Workbook, /m35RepresentationCollisionWitness\(\)/u);

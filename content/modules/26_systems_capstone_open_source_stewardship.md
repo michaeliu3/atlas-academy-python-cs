@@ -16,8 +16,11 @@ authoring-only M31–M36 chain through Module 25. Read it to see the eventual
 integration standard; do not treat its project, studio, or oral-defense
 material as a substitute for the unavailable prerequisite evidence.
 
-> **Portal preview mode now:** you may make only a `REHEARSAL ONLY` framing
-> card. Do not use the later studio, project, oral defense, or
+> **Portal preview mode now:** as a preview artifact, you may make only a
+> `REHEARSAL ONLY` framing card. You may also use the built-in bounded,
+> non-credit orientation diagnostics for prediction and misconception repair;
+> their answers create no receipt, credit, handoff, or capstone decision. Do not
+> use the later studio, project, oral defense, or
 > `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` language as a current capstone decision.
 >
 > **Private guided-study evidence gate:** In the learner-designated Teaching
@@ -52,12 +55,13 @@ under a changed constraint.
 
 > **Preview reading boundary:** In the portal, the six-session orientation
 > material below is for after the prerequisite gate opens. In preview mode,
-> make only the `REHEARSAL ONLY` framing card; do not use the later layers,
-> project, studio, oral defense, or release-decision language as current
-> capstone work. In the designated private chats, the private guided-study
-> evidence gate above permits the same six sessions as current learning work;
-> the resulting decision remains simulated/local and never changes portal or
-> release state.
+> make only the `REHEARSAL ONLY` framing card as a preview artifact, while using
+> the built-in non-credit orientation diagnostics only for prediction and
+> misconception repair. Do not use the later layers, project, studio, oral
+> defense, or release-decision language as current capstone work. In the
+> designated private chats, the private guided-study evidence gate above permits
+> the same six sessions as current learning work; the resulting decision remains
+> simulated/local and never changes portal or release state.
 
 ### The exact cumulative invariant
 

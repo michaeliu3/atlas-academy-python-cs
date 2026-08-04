@@ -23,6 +23,7 @@ test("M35 primary-source research remains a bounded authoring input, not a sourc
   assert.match(research, /^# Module 35 .*Primary-Source Research/mu);
   assert.match(research, /\*\*Status on 2026-07-31:\*\* authoring-only research/u);
   assert.match(research, /not a learner workbook, canonical source map, module-contract record,/u);
+  assert.match(research, /`unrecorded`\s+release state/u);
   assert.match(research, /This note must not be used to\s+mark M35 published, review-ready, available, or complete\./u);
   assert.match(research, /## Primary-source ledger and reuse boundary/u);
   assert.match(research, /## First-principles definition and derivation sheet/u);
@@ -52,6 +53,7 @@ test("M35 primary-source research remains a bounded authoring input, not a sourc
     availability: "authoring-only",
     contract: { track: "advanced-v1", state: "authoring-only" },
     release: { state: "unrecorded", recordId: null },
+    privateGuidedStudy: { status: "ready", delivery: "designated-codex-chats" },
   });
   assert.equal(contract?.contractState, "authoring-only");
   assert.deepEqual([...new Set(contract?.criteria.map(({ status }) => status))].sort(), [

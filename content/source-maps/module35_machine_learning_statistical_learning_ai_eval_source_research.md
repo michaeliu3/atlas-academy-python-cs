@@ -7,8 +7,8 @@ not a learner workbook, canonical source map, module-contract record, release
 record, assessment, studio, route change, or proof of learner competence.
 
 The canonical graph currently describes M35 as **Machine Learning &
-Representation**, `authoring-only`, `readerAccess: hidden`, with a planned
-release record, a `null` source-map field, no studio, and a v3 contract state
+Representation**, `authoring-only`, `readerAccess: hidden`, with an
+`unrecorded` release state, a `null` source-map field, no studio, and a v3 contract state
 of `authoring-only`. Those facts remain unchanged. This note must not be used to
 mark M35 published, review-ready, available, or complete.
 

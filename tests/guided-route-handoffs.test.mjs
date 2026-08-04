@@ -104,11 +104,19 @@ test("private guided continuation remains distinct from portal release", async (
   assert.match(privateRoute, /m31TwoStateElboCard\(\)/u);
   assert.match(
     privateRoute,
-    /Start M33, Session 1[\s\S]{0,360}named M33 authoring-workbook Session 1 section, not the frozen\s+review candidate[\s\S]{0,260}Language–Machine Separation Sheet/u,
+    /Start M33, Session 1[\s\S]{0,360}named M33 authoring-workbook Session 1 section, not\s+the\s+frozen\s+review\s+candidate[\s\S]{0,260}Language–Machine Separation Sheet/u,
   );
   assert.match(
     privateRoute,
-    /Start M34, Session 1[\s\S]{0,360}named M34 authoring-workbook Session 1 section, not the frozen\s+review candidate[\s\S]{0,260}State-Space Model Card/u,
+    /Start M34, Session 1[\s\S]{0,360}named M34 authoring-workbook Session 1 section, not\s+the\s+frozen\s+review\s+candidate[\s\S]{0,260}State-Space Model Card/u,
+  );
+  assert.match(
+    privateRoute,
+    /Start M35, Session 1[\s\S]{0,720}named M35 authoring-workbook Session 1 section, not\s+the\s+frozen\s+review\s+candidate[\s\S]{0,320}Representation-Assumption Sheet/u,
+  );
+  assert.match(
+    privateRoute,
+    /Start M36, Session 1[\s\S]{0,720}named M36 authoring-workbook Session 1 section, not\s+the\s+frozen\s+review\s+candidate[\s\S]{0,420}Assumption-Scope Sheet, Empirical–Population Scope Card, and Initial\s+Reliable-Learning Evidence Map/u,
   );
   assert.match(moduleThirtyTwo, /\*\*Canonical academic prerequisites:\*\*/u);
   assert.match(

@@ -56,6 +56,7 @@ test("M36 primary-source research remains a bounded authoring input, not a sourc
     availability: "authoring-only",
     contract: { track: "advanced-v1", state: "authoring-only" },
     release: { state: "unrecorded", recordId: null },
+    privateGuidedStudy: { status: "ready", delivery: "designated-codex-chats" },
   });
   assert.equal(contract?.contractState, "authoring-only");
   assert.deepEqual([...new Set(contract?.criteria.map(({ status }) => status))].sort(), [
@@ -97,7 +98,11 @@ test("M36 keeps finite-example and realizable-PAC probability spaces distinct", 
     "../content/modules/36_statistical_learning_theory_reliable_deep_learning.md",
   ];
   const workbooks = await Promise.all(
-    workbookPaths.map((relativePath) => readFile(new URL(relativePath, import.meta.url), "utf8")),
+    workbookPaths.map((relativePath) =>
+      readFile(new URL(relativePath, import.meta.url), "utf8").then((markdown) =>
+        markdown.replace(/\r\n?/gu, "\n"),
+      ),
+    ),
   );
 
   for (const workbook of workbooks) {
