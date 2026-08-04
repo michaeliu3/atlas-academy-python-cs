@@ -15,7 +15,12 @@ const observerWorkflowPath = resolve(
 );
 const observerActionSha = "ed597411d8f924073f98dfc5c65a23a2325f34cd";
 
+async function readVerifierWorkflow() {
+  return (await readFile(observerWorkflowPath, "utf8")).replace(/\r\n?/gu, "\n");
+}
+
 function verifierSafetyErrors(workflow) {
+  workflow = workflow.replace(/\r\n?/gu, "\n");
   const errors = [];
   const requiredFragments = [
     "name: Verify Course CI metadata on demand",
@@ -91,7 +96,7 @@ function requireSafeVerifier(workflow) {
 
 test("the Course CI metadata verifier is on-demand, read-only, and source-head-bound", async () => {
   const [workflow, releaseEvidencePolicy] = await Promise.all([
-    readFile(observerWorkflowPath, "utf8"),
+    readVerifierWorkflow(),
     loadReleaseEvidencePolicy(siteRoot),
   ]);
   requireSafeVerifier(workflow);
@@ -111,7 +116,7 @@ test("the Course CI metadata verifier is on-demand, read-only, and source-head-b
 });
 
 test("the on-demand verifier rejects automatic triggers, writes, and unvalidated script input", async () => {
-  const workflow = await readFile(observerWorkflowPath, "utf8");
+  const workflow = await readVerifierWorkflow();
   const unsafeCases = [
     ["automatic workflow run", workflow.replace("workflow_dispatch:", "workflow_run:")],
     ["checkout", workflow.replace("steps:", "steps:\n      - uses: actions/checkout@deadbeef")],

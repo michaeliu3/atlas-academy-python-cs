@@ -12,8 +12,12 @@ const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const workflowPath = resolve(siteRoot, ".github", "workflows", "ci.yml");
 
+async function readCourseWorkflow() {
+  return (await readFile(workflowPath, "utf8")).replace(/\r\n?/gu, "\n");
+}
+
 test("Course CI pins every third-party action to a reviewed immutable commit", async () => {
-  const workflow = await readFile(workflowPath, "utf8");
+  const workflow = await readCourseWorkflow();
   const actionReferences = [...workflow.matchAll(/^\s*uses:\s+([^@\s]+)@([^\s#]+)\s+#\s+v[\d.]+\s*$/gmu)];
   assert.ok(actionReferences.length > 0, "Course CI declares third-party action references");
   for (const [, action, revision] of actionReferences) {
@@ -27,7 +31,7 @@ test("Course CI pins every third-party action to a reviewed immutable commit", a
 });
 
 test("Course CI skips hosted jobs for draft PR updates but reruns them when review begins", async () => {
-  const workflow = await readFile(workflowPath, "utf8");
+  const workflow = await readCourseWorkflow();
 
   assert.ok(
     workflow.includes(
@@ -37,7 +41,7 @@ test("Course CI skips hosted jobs for draft PR updates but reruns them when revi
   );
   assert.match(
     workflow,
-    /pull_request:\n(?:\s*#.*\n)*\s*types:\n\s*- opened\n\s*- reopened\n\s*- ready_for_review\n\s*- synchronize/mu,
+    /pull_request:\n(?:\s*#.*\n)*\s*types:\n\s*- opened\n\s*- reopened\n\s*- ready_for_review\n(?:\s*#.*\n)*\s*- converted_to_draft\n\s*- synchronize/mu,
     "the ready-for-review transition is a full CI trigger",
   );
   assert.match(
@@ -48,7 +52,7 @@ test("Course CI skips hosted jobs for draft PR updates but reruns them when revi
 });
 
 test("Teaching-model CI proves the runtime exercise verifier before the ordinary suite", async () => {
-  const workflow = await readFile(workflowPath, "utf8");
+  const workflow = await readCourseWorkflow();
   const verifierTests = 'python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"';
   const verifier = teachingModelRuntimeExerciseVerifierCommand;
   const suite = 'python -m unittest discover -s public/downloads -p "test_module*_reference.py"';
