@@ -31,6 +31,15 @@ function availabilityPresentation(state: CourseModuleState) {
     };
   }
 
+  if (state.privateGuidedStudy?.status === "ready") {
+    return {
+      label: "Private guided study ready",
+      className: styles.authoringStatus,
+      unavailableNote:
+        "Start in the designated Codex chats after the academic prerequisites are in place. The portal reader stays hidden and this creates no route credit, publication, or record.",
+    };
+  }
+
   switch (state.availability) {
     case "legacy-open":
       return {
@@ -105,7 +114,7 @@ export default function AtlasCoreRoutePage() {
             </div>
             <div>
               <dt>{availabilitySummary}</dt>
-              <dd>open / preview / authoring</dd>
+              <dd>open / preview / private guided</dd>
             </div>
             <div>
               <dt>{atlasCoreRouteTotals.focusedHoursPerWeek}</dt>
@@ -119,12 +128,12 @@ export default function AtlasCoreRoutePage() {
           <p className={styles.availability}>
             <strong>This page maps the intended 36-module dependency sequence
             and current portal access.</strong> It is not a promise that every
-            phase can be completed in the reader today: M31–M36 require
-            designated private chat-led draft study, while M25/M26 remain
+            phase can be completed in the reader today: M31–M36 have ready
+            designated private chat-led study packs, while M25/M26 remain
             orientation-only previews.
           </p>
           <p className={styles.availability}>
-            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules remain unavailable as portal reader pages while their release material is reviewed.
+            Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules are ready for designated private guided study while their portal reader remains hidden and their release material is reviewed.
           </p>
           <p className={styles.availability}>
             <strong>Open material is available for study, not a published,
@@ -136,13 +145,13 @@ export default function AtlasCoreRoutePage() {
           </p>
           <p className={styles.availability}>
             <strong>Primary guided learning happens in Codex.</strong> The
-            course owner may use the authoring-only M31–M36 draft packs only
-            with the designated Teaching Assistant and Study Partner chats.
+            course owner may use the ready M31–M36 private guided-study packs
+            only with the designated Teaching Assistant and Study Partner chats.
             That private instructor-led study does not make a portal page
             available, record Core credit, or create a publication claim. Use
             the{" "}
             <Link href="/learning-partners">Teaching Assistant and Study Partner guide</Link>{" "}
-            to prepare the conversation and keep the private draft boundary
+            to prepare the conversation and keep the private-delivery boundary
             explicit.
           </p>
         </header>
@@ -260,8 +269,8 @@ export default function AtlasCoreRoutePage() {
                         {entry.focusedStudyMinutes ? (
                           <div>
                             <dt>
-                              {entry.state.availability === "authoring-only"
-                                ? "Private study draft"
+                              {entry.state.privateGuidedStudy?.status === "ready"
+                                ? "Private guided study"
                                 : "Evidence"}
                             </dt>
                             <dd>

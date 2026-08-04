@@ -40,6 +40,7 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
     release: { state: "unrecorded", recordId: null },
     privateGuidedStudy: {
       status: "ready",
+      delivery: "designated-codex-chats",
     },
   });
   assert.equal(byNumber.get(25)?.sequencePosition, 35);
@@ -78,7 +79,10 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
 
   for (const number of [31, 32, 33, 34, 35, 36]) {
     const privateStudy = byNumber.get(number)?.state.privateGuidedStudy;
-    assert.deepEqual(privateStudy, { status: "ready" });
+    assert.deepEqual(privateStudy, {
+      status: "ready",
+      delivery: "designated-codex-chats",
+    });
   }
 });
 
@@ -189,7 +193,7 @@ test("only the six hidden advanced modules may declare a ready private guided-st
   exposedPackPath.modules.find(({ number }) => number === 31).state.privateGuidedStudy.workbookPath = "content/authoring/m31_optimization_information_workbook.v1.md";
   assert.throws(
     () => validateCourseGraph(exposedPackPath),
-    /Module 31 private guided study must use exactly these keys: status/u,
+    /Module 31 private guided study must use exactly these keys: delivery, status/u,
   );
 });
 

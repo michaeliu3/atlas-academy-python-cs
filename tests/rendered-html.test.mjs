@@ -161,10 +161,13 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /private advanced-study launch guide/);
   assert.match(
     html,
-    /href="https:\/\/github\.com\/michaeliu3\/atlas-academy-python-cs\/blob\/agent\/60-day-route\/docs\/PRIVATE_GUIDED_LEARNING_ROUTE\.md"/,
+    /href="https:\/\/github\.com\/michaeliu3\/atlas-academy-python-cs\/blob\/codex\/atlas-60-day-route-history\/docs\/PRIVATE_GUIDED_LEARNING_ROUTE\.md"/,
   );
-  assert.match(html, /That guide remains authoring-only/);
-  assert.match(html, /does not unlock a\s+portal reader, create Core credit, or create a record/);
+  assert.match(html, /Those packs are ready for designated private guided learning/);
+  assert.match(
+    html,
+    /portal reader remains hidden, and they do not create Core\s+credit, a publication claim, or a record/,
+  );
 });
 
 test("renders synthesis previews as reference workbooks rather than completable Core modules", async () => {
@@ -643,7 +646,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /full-time 35–45 focused-hours-per-week intensive/u);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
   assert.match(readable, /28 \/ 2 \/ 6/);
-  assert.match(readable, /open \/ preview \/ authoring/i);
+  assert.match(readable, /open \/ preview \/ private guided/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
@@ -652,7 +655,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /Module 30/);
   assert.match(readable, /Open material · review pending/);
   assert.match(readable, /Reference preview/);
-  assert.match(readable, /In authoring/);
+  assert.match(readable, /Private guided study ready/);
   assert.match(readable, /Read as reference—not an unlocked Core step/);
   assert.match(
     readable,
@@ -660,7 +663,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   );
   assert.match(
     readable,
-    /Source map, studio, and release evidence are being completed before learner release\./,
+    /Start in the designated Codex chats after the academic prerequisites are in place\./,
   );
   assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
   assert.match(readable, /Module 25/);

@@ -54,15 +54,39 @@ const expectedInventoryDirectives = new Set([
 const expectedAtomicInventoryItemCount = 362;
 const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
 // Kept in server-side validation only: the canonical graph is client-reachable.
-const privateGuidedStudyWorkbookPaths = new Map([
-  [31, "content/authoring/m31_optimization_information_workbook.v1.md"],
-  [32, "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md"],
-  [33, "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md"],
-  [34, "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md"],
-  [35, "content/authoring/m35_machine_learning_representation_workbook.v1.md"],
-  [36, "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md"],
+const privateGuidedStudyArtifacts = new Map([
+  [31, {
+    workbookPath: "content/authoring/m31_optimization_information_workbook.v1.md",
+    sourceLedgerPath: "content/source-maps/module31_optimization_information_source_map.md",
+    companionPath: "content/course/contracts/companions/m31.v1.json",
+  }],
+  [32, {
+    workbookPath: "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
+    sourceLedgerPath: "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+    companionPath: "content/course/contracts/companions/m32.v1.json",
+  }],
+  [33, {
+    workbookPath: "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+    sourceLedgerPath: "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+    companionPath: "content/course/contracts/companions/m33.v1.json",
+  }],
+  [34, {
+    workbookPath: "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+    sourceLedgerPath: "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+    companionPath: "content/course/contracts/companions/m34.v1.json",
+  }],
+  [35, {
+    workbookPath: "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+    sourceLedgerPath: "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+    companionPath: "content/course/contracts/companions/m35.v1.json",
+  }],
+  [36, {
+    workbookPath: "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+    sourceLedgerPath: "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+    companionPath: "content/course/contracts/companions/m36.v1.json",
+  }],
 ]);
-const privateGuidedReadyModuleNumbers = new Set(privateGuidedStudyWorkbookPaths.keys());
+const privateGuidedReadyModuleNumbers = new Set(privateGuidedStudyArtifacts.keys());
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);
@@ -113,13 +137,21 @@ function validateFocusedStudyMinutes(value, number) {
 }
 
 function validatePrivateGuidedStudy(value, number) {
-  assertExactKeys(value, ["status"], `Module ${number} private guided study`);
+  assertExactKeys(value, ["status", "delivery"], `Module ${number} private guided study`);
   if (value.status !== "ready") {
     fail(`Module ${number} private guided study must be ready when it is declared.`);
   }
-  const workbookPath = privateGuidedStudyWorkbookPaths.get(number);
-  if (!workbookPath || !existsSync(resolve(siteRoot, workbookPath))) {
-    fail(`Module ${number} private guided-study pack must have its checked-in authoring workbook.`);
+  if (value.delivery !== "designated-codex-chats") {
+    fail(`Module ${number} private guided study must use the designated Codex chats.`);
+  }
+  const artifacts = privateGuidedStudyArtifacts.get(number);
+  if (!artifacts) {
+    fail(`Module ${number} private guided-study pack has no server-side artifact binding.`);
+  }
+  for (const [artifactName, artifactPath] of Object.entries(artifacts)) {
+    if (!existsSync(resolve(siteRoot, artifactPath))) {
+      fail(`Module ${number} private guided-study ${artifactName} must be checked in.`);
+    }
   }
 }
 

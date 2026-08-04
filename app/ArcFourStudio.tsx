@@ -94,7 +94,10 @@ const arcModules = arcModuleDetails.map((moduleDetail) => {
   return {
     ...moduleDetail,
     availability: courseModule.state.availability,
-    status: availabilityLabel[courseModule.state.availability],
+    status:
+      courseModule.state.privateGuidedStudy?.status === "ready"
+        ? "Private guided study"
+        : availabilityLabel[courseModule.state.availability],
   };
 });
 

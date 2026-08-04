@@ -518,7 +518,7 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "e6029c364e5a7d95f35a3fa6b622512f083e2f5f565f77ff2f9eb8b18007a98f"
+      "sha256": "32b971d6bbf6a1266f67011484cc6a5ecd24ca993747ee0b519cfbc18ab573d2"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -642,7 +642,7 @@
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "33c5629e151d74df986965fdc4b4fb07686b14cac4066ff81f91cf96da47c853"
+      "sha256": "ec25862518190782986de573393d769eb6dc6f8cf9eed0baacd8c77bcb919224"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
@@ -1198,7 +1198,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "b6cae9da9b6f41bcb59b4f3644180b98acc367bfa4d1a1a43bf00cfaa3e8ffe0"
+      "sha256": "997cd88576ef888f4601e4da46ffdbf8c506a575bbcfb4e104090beaa30a2787"
     }
   ]
 }

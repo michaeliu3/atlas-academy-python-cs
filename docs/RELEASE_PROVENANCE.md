@@ -25,9 +25,14 @@ branches, rewrite or delete published history, or squash away evidence-bearing
 commits. A hosting push is separate from GitHub source history and never
 substitutes for it.
 
-The current review path is [`agent/60-day-route`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/agent/60-day-route), with
-[pull request #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
-as the source-review record.
+The integrated source history is mirrored on
+[`codex/atlas-60-day-route-history`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/codex/atlas-60-day-route-history).
+It resolved to `3cf2b7c8069bfd7bfbd7df1402f52860c1a82854` at the direct
+readback immediately before this batch; subsequent changes advance that ref
+only through ordinary additive commits. The protected
+[`agent/60-day-route`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/agent/60-day-route)
+branch and [pull request #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
+remain the earlier review record; they do not by themselves identify the integrated head.
 
 ### Verified GitHub history-protection snapshot
 
