@@ -502,19 +502,19 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "ab7d7295e429ddb57229bb6af09b5feba4bca2466ebf796c98f7654881342c95"
+      "sha256": "1d5495d70c975607ece8fa2c4f84caa340a0dc36369f17a0ba675c507b372960"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "a64812ab5d1e0492c184487710f9ccd6bf5dc760115b5ce5d693bedc3eec3ffb"
+      "sha256": "c56c79b8f2061fa5daf7befdc270bf376fc8ac5550310ce7a7bf78ec2a8e2235"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
-      "sha256": "2d7a226235cb1d4881f3f7e7db55745cfca7e7472f8abf91dd70ddf20e574c9a"
+      "sha256": "cd1156abf11c6c5f3c900c12b679941b12b7a89b431dca2778003b353fb4c3ba"
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "bf90dd5cf022483915ea8e92513ed4f7183b28e8378433be4dc13a5ef9076430"
+      "sha256": "1ddcb8814be1eee449213e88390505f0e49a167376b12015439ea94c504050d2"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -578,11 +578,11 @@
     },
     {
       "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
-      "sha256": "abdd47b9fe8afe4aed174f92e71dd5e17cc614dedb5012ac659a6f263895ff1a"
+      "sha256": "83b892ed52d5c14a164896fde76b28b96aa185c6f9288256d297138f5a5c5efd"
     },
     {
       "path": "content/modules/09_trees_heaps_sorting_ordered.md",
-      "sha256": "47d69b832c408776b96c62c7a614f739bce1e7c07dc4c21038bee891c44d6592"
+      "sha256": "3b18e884dcd2996eee99e0c2fd40a23a7857595a3053dfcde3324ad48750950d"
     },
     {
       "path": "content/modules/10_graph_algorithms_network_models.md",
@@ -590,15 +590,15 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "4cc4595cebc57b90c18fa39718023a126d4fec2ce671c0f344fdf61c123c33b1"
+      "sha256": "aa582698f3a212567dd0ad886d4a6f312cdf61f168b9bfaf8d0b340a883a3c5d"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
-      "sha256": "45986af30bac321f67c8dbd9704051349937d15d394fc85c30cfe8f4120b7051"
+      "sha256": "637f88c2b50b0e7f5aa8568550fc773458c7a742e0642f51910b2f5c5e50ea9a"
     },
     {
       "path": "content/modules/13_specifications_testing_debugging_observability.md",
-      "sha256": "894260ca6595823d262e9e20eb933ef674fc344bd9492895a9724f189e9c9c22"
+      "sha256": "086da9c68a72af1f11b4a4b02e03698925839a63960d4e05044d3f479b2ab006"
     },
     {
       "path": "content/modules/14_software_design_and_change.md",
@@ -682,15 +682,15 @@
     },
     {
       "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
-      "sha256": "6e2eadd6ea55fa41dd6df7120162fa117b35ce5b93cfb03f56a0a31d34fcd5c9"
+      "sha256": "36be634e4008c91d77d1af9b6ac6037fb06124981f644ebbaf83dbef540b2d68"
     },
     {
       "path": "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md",
-      "sha256": "2e9697b0949e6b0ed040a52d2622dd40a50e957d2a7549d339716426d2211c9b"
+      "sha256": "01298aff3d4927bfe7e41a459402f3af1334d9cd8f4bbc717c9f8d3de8f08222"
     },
     {
       "path": "content/source-maps/module13_specifications_testing_debugging_observability_source_audit_addendum.md",
-      "sha256": "260503d516e89ae0fa84928b3dbbe94984bd23ef900986d6dd2ad4f2ebf13383"
+      "sha256": "efe4ae4b1357701d8dfc225bd92e9b08a2475a57b822cd7f431f4ce7f03d917d"
     },
     {
       "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",

@@ -66,7 +66,9 @@ key, a reading pile, or authority to bypass M10 or M12.
 ## Visual and text-alternative review boundary
 
 M11's ten Mermaid blocks carry local ID, title, and concise text-alternative
-metadata for the shared reader. This resolves a structural reader input only;
+metadata for the shared reader. The workbook now also provides a visible
+`Text equivalent — strategy selection from contract to evidence` route for its
+two overview diagrams. This resolves a current structural reader pointer only;
 it does not establish semantic rendering, keyboard behavior, screen-reader
 experience, cognitive load, or learner comprehension.
 

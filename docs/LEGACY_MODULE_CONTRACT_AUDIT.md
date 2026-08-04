@@ -10,7 +10,7 @@
 - Each module's `humanQualityReview: not-reviewed` uniformly applies to all 16 criteria. This audit records no per-criterion approvals; future granular human review needs a different reviewed contract record.
 - M25/M26 remain preview-only in the canonical graph. This audit neither changes their availability nor permits their authoring-only prerequisites to be bypassed.
 
-The validator resolved 30 modules and 480 criteria: **471 P**, **9 A**, **0 M**. It records **0 human approvals** and **0 publication changes**.
+The validator resolved 30 modules and 480 criteria: **476 P**, **4 A**, **0 M**. It records **0 human approvals** and **0 publication changes**.
 
 ## Matrix
 
@@ -23,12 +23,12 @@ The validator resolved 30 modules and 480 criteria: **471 P**, **9 A**, **0 M**.
 | M05 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M06 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M07 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
-| M08 | P | P | A | P | P | P | P | P | P | P | P | P | P | P | P | P |
-| M09 | P | P | A | P | P | P | P | P | P | P | P | P | P | P | P | P |
+| M08 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
+| M09 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M10 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
-| M11 | P | P | P | P | P | P | P | P | A | P | P | P | P | P | P | P |
-| M12 | P | P | P | P | P | P | P | P | A | P | P | P | P | P | P | P |
-| M13 | P | P | P | P | P | P | P | P | A | P | P | P | P | P | P | P |
+| M11 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
+| M12 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
+| M13 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M14 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M15 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M16 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
@@ -53,13 +53,13 @@ The validator resolved 30 modules and 480 criteria: **471 P**, **9 A**, **0 M**.
 | --- | ---: | ---: | ---: |
 | prerequisite forward map | 28 | 2 | 0 |
 | six connected sessions | 30 | 0 | 0 |
-| first principles | 28 | 2 | 0 |
+| first principles | 30 | 0 | 0 |
 | rigor definitions assumptions derivations proofs counterexamples numerical experiments | 28 | 2 | 0 |
 | code reading debugging design | 30 | 0 | 0 |
 | prediction before reveal | 30 | 0 | 0 |
 | transfer task | 30 | 0 | 0 |
 | source ledger | 30 | 0 | 0 |
-| accessible visual text alternative | 27 | 3 | 0 |
+| accessible visual text alternative | 30 | 0 | 0 |
 | confidence diagnostic misconceptions | 30 | 0 | 0 |
 | retrieval and spaced review | 30 | 0 | 0 |
 | project and evidence rubric | 30 | 0 | 0 |

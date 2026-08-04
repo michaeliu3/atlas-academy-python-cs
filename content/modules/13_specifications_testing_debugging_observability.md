@@ -79,6 +79,21 @@ flowchart LR
     M13 --> M21["M21 · async failure and tracing"]
 ```
 
+### Text equivalent — specification to regression evidence loop
+
+Read the route from obligation to learning. M3 and M12 supply a behavioral
+contract and component seam; M7 determines what partial failure can escape;
+M10 supplies causal-path reasoning; and M11 supplies selected finite evidence
+and an independent verifier. M13 turns them into a precise specification,
+input/state partitions, a small evidence suite, a preserved symptom,
+competing hypotheses, the earliest justified repair, and a regression claim.
+
+The result then travels forward: M14 changes safely, M15 preserves delivery
+contracts, M16 tests durable boundaries, and M20/M21 extend observation to
+protocol and asynchronous failure. This is the complete nonvisual reading path
+for the knowledge graph; a passing test, trace, or log is still scoped evidence
+rather than a universal correctness verdict.
+
 ### The problem that forces this module
 
 The Module 12 importer surface says:

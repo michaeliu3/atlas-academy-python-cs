@@ -5356,12 +5356,12 @@
           "roles": [
             "first-principles"
           ],
-          "label": "M08 first principles",
+          "label": "Lookup-to-index first-principles derivation",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
-            "headingAnchor": "1-the-concrete-observation-repeated-scans-do-repeated-work"
+            "headingAnchor": "first-principles-derivation--repeated-lookup-creates-the-need-for-an-index"
           }
         },
         {
@@ -5769,7 +5769,7 @@
         },
         {
           "criterionId": "first-principles",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m08-first-principles"
@@ -6162,12 +6162,12 @@
           "roles": [
             "first-principles"
           ],
-          "label": "M09 first principles",
+          "label": "Client-operation first-principles derivation",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/09_trees_heaps_sorting_ordered.md",
-            "headingAnchor": "4-start-with-the-ordered-question-not-the-tree"
+            "headingAnchor": "first-principles-derivation--client-operations-constrain-representations"
           }
         },
         {
@@ -6575,7 +6575,7 @@
         },
         {
           "criterionId": "first-principles",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m09-first-principles"
@@ -7994,12 +7994,12 @@
               "roles": [
                 "text-alternative"
               ],
-              "label": "M11 text alternative",
+              "label": "Strategy-selection text equivalent",
               "sessionNumber": null,
               "target": {
-                "surface": "source-audit-addendum",
-                "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
-                "headingAnchor": "visual-and-text-alternative-review-boundary"
+                "surface": "workbook",
+                "path": "content/modules/11_algorithm_design_paradigms.md",
+                "headingAnchor": "text-equivalent--strategy-selection-from-contract-to-evidence"
               }
             },
             {
@@ -8280,7 +8280,7 @@
             },
             {
               "criterionId": "accessible-visual-text-alternative",
-              "legacyAuditStatus": "ambiguous",
+              "legacyAuditStatus": "pointer-present",
               "structuralState": "mapped-not-reviewed",
               "pointerIds": [
                 "m11-visual",
