@@ -14,13 +14,13 @@
     },
     "currentDraftContent": {
       "state": "success",
-      "commit": "a692dc170d8313c6a4bb2226daeb2ae5d90f97f8",
+      "commit": "73b23ede3b878b6d8d47ff5ac35fc20319665c6b",
       "date": "2026-08-04",
-      "runId": "30934480458",
-      "pass": 79,
+      "runId": "30936611338",
+      "pass": 80,
       "fail": 0,
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30934480458",
-      "note": "Latest observed Draft content run; the compliance matrix and subsequent commits may be newer than this observation."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30936611338",
+      "note": "Latest observed Draft content run for the preceding checkpoint; subsequent evidence-snapshot commits may be newer than this observation."
     },
     "currentHeadApparatus": {
       "state": "not-run",

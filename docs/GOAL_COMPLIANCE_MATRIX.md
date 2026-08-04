@@ -5,7 +5,7 @@
 > **Generated current truth — 2026-08-04**
 >
 > - Last successful full gate: `2bccea04a2236c734d4d444edfa0c7d930521ffd` on 2026-08-02 ([Course CI run 30741679780](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30741679780)); this predates the current Draft head.
-> - Latest observed Draft content check: `a692dc170d8313c6a4bb2226daeb2ae5d90f97f8`, 79 pass / 0 fail ([run 30934480458](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30934480458)).
+> - Latest observed Draft content check: `73b23ede3b878b6d8d47ff5ac35fc20319665c6b`, 80 pass / 0 fail ([run 30936611338](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30936611338)).
 > - Current-head apparatus check: **not run**; current-head browser/axe check: **not run**.
 > - Open red tests: **0**. Open axe violations: **unknown** (unknown for the current head).
 > - Open Dependabot alerts on `main`: **5** as of 2026-08-04; see [the dependency risk register](DEPENDENCY_RISK_REGISTER.md).
