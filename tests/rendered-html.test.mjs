@@ -671,6 +671,8 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   );
   assert.match(readable, /Post-core extension routes \(design only\)/);
   assert.match(readable, /Authoring-only — no learner reader route/);
+  assert.match(readable, /Private guided study ready · portal reader hidden/);
+  assert.match(readable, /designated private guided-study pack ready; portal reader remains hidden/i);
 
   const scopeDocument = new JSDOM(html).window.document;
   assert.ok(
@@ -743,6 +745,7 @@ test("renders the on-demand Levels 1–9 atomic source crosswalk", async () => {
   assert.match(readable, /Source target/);
   assert.match(readable, /Atlas target/);
   assert.match(readable, /Current delivery/);
+  assert.match(readable, /private guided-study pack ready; portal reader remains hidden/i);
   assert.match(readable, /Propositional and predicate logic/);
   assert.match(readable, /Graduate master/);
   assert.match(readable, /Also know/);

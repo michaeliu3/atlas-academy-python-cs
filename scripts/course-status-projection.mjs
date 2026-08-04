@@ -27,7 +27,7 @@ const availabilityDescriptions = {
     "Reference-only reader access; it does not unlock route progress or synthesis evidence.",
   locked: "Not currently reader-visible.",
   optional: "Reader-visible optional material outside required route progression.",
-  "authoring-only": "Hidden from the learner reader until future promotion evidence exists.",
+  "authoring-only": "Hidden from the learner reader; a separately recorded private guided-study pack does not promote portal access.",
 };
 
 function normalizeNewlines(value) {
@@ -83,11 +83,19 @@ export function deriveCourseStatus(graph) {
   const openForStudy = graph.modules.filter(
     ({ state }) => state.availability === "legacy-open" || state.availability === "published",
   );
+  const privateGuidedStudyReady = graph.modules
+    .filter(({ state }) => state.privateGuidedStudy?.status === "ready")
+    .map(({ number }) => number)
+    .sort((left, right) => left - right);
 
   return {
     definedModules: graph.modules.length,
     readerVisible: readerVisible.length,
     openForStudy: openForStudy.length,
+    privateGuidedStudyReady: {
+      count: privateGuidedStudyReady.length,
+      moduleNumbers: privateGuidedStudyReady,
+    },
     contractCounts,
     availability: graph.availabilityStates.map((availability) => {
       const modules = modulesByAvailability.get(availability) ?? [];
@@ -112,11 +120,12 @@ export function renderCourseStatusSummary(graph) {
 
   return [
     "**Canonical availability (generated from `course-graph.v2.json`):**",
-    `**${status.definedModules}** defined modules; **${status.readerVisible}** reader-visible; **${status.openForStudy}** open for study.`,
+    `**${status.definedModules}** defined modules; **${status.readerVisible}** reader-visible; **${status.openForStudy}** open reader materials.`,
     `- **${legacyOpen?.count ?? 0}** \`legacy-open\` (${formatModuleNumbers(legacyOpen?.moduleNumbers ?? [])}); full reader access, review pending.`,
     `- **${published?.count ?? 0}** \`published\` (${formatModuleNumbers(published?.moduleNumbers ?? [])}); only verified, deployed releases count here.`,
     `- **${preview?.count ?? 0}** \`preview\` (${formatModuleNumbers(preview?.moduleNumbers ?? [])}); reference-only, never route credit.`,
     `- **${authoringOnly?.count ?? 0}** \`authoring-only\` (${formatModuleNumbers(authoringOnly?.moduleNumbers ?? [])}); hidden from the learner reader.`,
+    `- Designated private guided-study packs: **${status.privateGuidedStudyReady.count}** (${formatModuleNumbers(status.privateGuidedStudyReady.moduleNumbers)}); portal reader remains hidden and this creates no route credit, release, or mastery evidence.`,
     `- Contract states: **${status.contractCounts.get("legacy-baseline") ?? 0}** legacy baselines; **${status.contractCounts.get("verified") ?? 0}** verified.`,
   ].join("\n");
 }
@@ -145,9 +154,14 @@ export function renderCourseStatusProjection(graph) {
     "",
     `- Defined modules: **${status.definedModules}**`,
     `- Reader-visible modules: **${status.readerVisible}**`,
-    `- Open for study (\`legacy-open\` + \`published\`): **${status.openForStudy}**`,
+    `- Open reader materials (\`legacy-open\` + \`published\`): **${status.openForStudy}**`,
     `- Legacy-baseline contracts: **${status.contractCounts.get("legacy-baseline") ?? 0}**`,
     `- Verified contracts: **${status.contractCounts.get("verified") ?? 0}**`,
+    "",
+    "## Private guided-study availability",
+    "",
+    `- **${status.privateGuidedStudyReady.count}** designated private guided-study packs are ready (${formatModuleNumbers(status.privateGuidedStudyReady.moduleNumbers)}); the portal reader remains hidden, with no route credit, publication, release, or mastery claim.`,
+    "- Private workbook paths are intentionally not projected into portal or status surfaces.",
     "",
     "`published` is reserved for a module whose canonical graph state carries both a verified contract and deployed-recorded release evidence. It never means that a learner has mastered the module.",
     "",

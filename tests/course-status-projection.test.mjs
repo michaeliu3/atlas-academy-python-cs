@@ -24,6 +24,10 @@ test("the generated course-status projection derives the current availability tu
   assert.equal(status.definedModules, 36);
   assert.equal(status.readerVisible, 30);
   assert.equal(status.openForStudy, 28);
+  assert.deepEqual(status.privateGuidedStudyReady, {
+    count: 6,
+    moduleNumbers: [31, 32, 33, 34, 35, 36],
+  });
   assert.equal(
     status.availability.find(({ availability }) => availability === "legacy-open")?.count,
     28,
@@ -34,7 +38,17 @@ test("the generated course-status projection derives the current availability tu
   );
   assert.match(summary, /\*\*28\*\* `legacy-open` \(M1–M24, M27–M30\)/u);
   assert.match(summary, /\*\*0\*\* `published` \(—\)/u);
+  assert.match(
+    summary,
+    /Designated private guided-study packs: \*\*6\*\* \(M31–M36\); portal reader remains hidden and this creates no route credit, release, or mastery evidence\./u,
+  );
   assert.match(projection, /\| `authoring-only` \| 6 \| M31–M36 \| hidden \|/u);
+  assert.match(projection, /## Private guided-study availability/u);
+  assert.match(
+    projection,
+    /\*\*6\*\* designated private guided-study packs are ready \(M31–M36\); the portal reader remains hidden/u,
+  );
+  assert.doesNotMatch(projection, /content\/authoring|workbookPath/u);
   assert.equal(checkedInProjection, projection);
   await validateCourseStatusProjection(graph);
 });

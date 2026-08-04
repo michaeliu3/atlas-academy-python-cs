@@ -17,11 +17,10 @@
   M25 asks the analogous intelligent-feature question: **when does a score,
   ranking, prediction, explanation, or generated proposal deserve to influence
   a person?**
-- **Forward connection:** Only after M31–M36 prerequisite evidence and M25's
-  own reviewed release evidence exist, Module 26, *Systems Capstone,
-  Open-Source Stewardship, and Oral Architecture Defense*, may join M25's
-  decision, data, evaluation, accessibility, and authority evidence with the
-  earlier systems evidence into a release argument.
+- **Forward connection:** Portal promotion of Module 26 requires M31–M36
+  prerequisite evidence and M25's own reviewed release evidence. Its separate
+  private guided-study route begins from the learner-supplied evidence gate,
+  not a portal promotion, pilot, or rehearsal.
 - **Research snapshot:** original map snapshot **2026-07-30**; a scoped source
   audit rechecked mutable/versioned routes on **2026-07-31**, and the synthesis
   calibration routes below were rechecked on **2026-08-02**. Stable
@@ -62,6 +61,20 @@ claim.
 
 ---
 
+## Two access gates: portal promotion and private guided study
+
+**Portal promotion** requires reviewed contract and release evidence. It is the
+only route that can change reader availability or support a publication claim.
+
+**Private guided study may begin only from learner-supplied upstream artifacts**
+under [`PRIVATE_GUIDED_LEARNING_ROUTE.md`](../../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md):
+the named M31–M36 dossiers, relevant M27–M30 artifacts or unavailable markers,
+and then the resulting M25 dossier/annex for M26. It never changes portal
+access, route credit, publication, or release state. No pilot or rehearsal is a
+prerequisite once those actual learner artifacts are present.
+
+---
+
 ## Executive teaching decision
 
 An intelligent feature is often introduced backwards: select a model, report
@@ -87,7 +100,9 @@ user need + harm / non-goal + accountable decision owner
 The following table compares connected **evidence roles**, not next/previous
 navigation. M24 contributes runtime-evidence discipline; the M31–M36 chain
 supplies the advanced mathematical, systems, AI/ML, and learning-theory
-evidence before M25's synthesis; M26 follows only after M25's own gate.
+evidence before M25's synthesis. Portal M26 promotion follows M25's review
+gate; private guided M26 instruction instead follows the named learner-artifact
+gate above.
 
 | Boundary | Module 24 gives the learner | Module 25 adds after M31–M36 | Module 26 must defend |
 |---|---|---|---|

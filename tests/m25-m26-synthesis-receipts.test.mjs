@@ -3,12 +3,13 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("M25 and M26 name the actual advanced candidate receipts", async () => {
-  const [m25, m26, m26SourceMap, contracts, guidedRoute] = await Promise.all([
+  const [m25, m26, m25SourceMap, m26SourceMap, contracts, guidedRoute] = await Promise.all([
     readFile(new URL("../content/modules/25_evidence_grounded_intelligent_systems.md", import.meta.url), "utf8"),
     readFile(
       new URL("../content/modules/26_systems_capstone_open_source_stewardship.md", import.meta.url),
       "utf8",
     ),
+    readFile(new URL("../content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md", import.meta.url), "utf8"),
     readFile(new URL("../content/source-maps/module26_systems_capstone_source_map.md", import.meta.url), "utf8"),
     readFile(new URL("../content/course/contracts/advanced-module-contracts.v1.json", import.meta.url), "utf8"),
     readFile(new URL("../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md", import.meta.url), "utf8"),
@@ -31,6 +32,12 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.match(m26SourceMap, /M24 evidence thread → M31–M36 synthesis gate → M25 → M26/u);
   assert.match(m26SourceMap, /connected \*\*evidence roles\*\*, not next\/previous navigation/u);
   assert.doesNotMatch(m26SourceMap, /M24 → M25 → M26 connected sequence/u);
+  for (const sourceMap of [m25SourceMap, m26SourceMap]) {
+    assert.match(sourceMap, /## Two access gates: portal promotion and private guided study/u);
+    assert.match(sourceMap, /Private guided study may begin only from learner-supplied upstream artifacts/u);
+    assert.match(sourceMap, /PRIVATE_GUIDED_LEARNING_ROUTE\.md/u);
+    assert.match(sourceMap, /never changes portal\s+access,\s+route\s+credit,\s+publication,\s+or\s+release state/u);
+  }
   assert.match(contracts, /Machine Learning & Representation Dossier and learner-controlled oral-defense summary/u);
   assert.match(
     contracts,

@@ -58,6 +58,7 @@ const availabilitySummaryLabels: Record<CourseAvailability, string> = {
 
 function deliveryLabel(topic: ScopeMatrixTopic) {
   const availabilityCounts = new Map<CourseAvailability, number>();
+  let privateGuidedReadyCount = 0;
   for (const { moduleId } of topic.anchors) {
     const courseModule = modulesById.get(moduleId);
     if (!courseModule) {
@@ -65,12 +66,21 @@ function deliveryLabel(topic: ScopeMatrixTopic) {
     }
     const availability = courseModule.state.availability;
     availabilityCounts.set(availability, (availabilityCounts.get(availability) ?? 0) + 1);
+    if (courseModule.state.privateGuidedStudy?.status === "ready") {
+      privateGuidedReadyCount += 1;
+    }
   }
   const deliveryStates = availabilityOrder.filter((availability) => availabilityCounts.has(availability));
   if (deliveryStates.length === 0) {
     return "No mapped delivery";
   }
   if (deliveryStates.length === 1) {
+    if (
+      deliveryStates[0] === "authoring-only" &&
+      privateGuidedReadyCount === topic.anchors.length
+    ) {
+      return "Private guided study ready · portal reader hidden";
+    }
     return availabilityLabels[deliveryStates[0]];
   }
   const detail = deliveryStates
@@ -79,7 +89,13 @@ function deliveryLabel(topic: ScopeMatrixTopic) {
       return `${count} ${availabilitySummaryLabels[availability]} ${count === 1 ? "anchor" : "anchors"}`;
     })
     .join("; ");
-  return `Mixed anchor delivery · ${detail}`;
+  const privateGuidedDetail =
+    privateGuidedReadyCount > 0
+      ? `; ${privateGuidedReadyCount} private guided-study ${
+          privateGuidedReadyCount === 1 ? "pack" : "packs"
+        } ready; portal reader remains hidden`
+      : "";
+  return `Mixed anchor delivery · ${detail}${privateGuidedDetail}`;
 }
 
 export function ScopeInventory() {
@@ -128,8 +144,9 @@ export function ScopeInventory() {
           </p>
           <p className={styles.scopeBoundary}>
             <strong>It proves calibration, not completion.</strong>
-            {" "}A source target can map to authoring-only, preview, or
-            open-but-unreviewed material; none of those labels is learner
+            {" "}A source target can map to authoring-only, a designated private
+            guided-study pack, preview, or open-but-unreviewed material; none of
+            those labels is learner
             mastery, formal review, or release evidence.
           </p>
           <a className={styles.inventoryBack} href="/route#scope-matrix-title">
@@ -141,7 +158,7 @@ export function ScopeInventory() {
       <div className={styles.inventoryPageLegend}>
         <span><strong>Source target</strong> preserves the supplied learning-target wording.</span>
         <span><strong>Atlas target</strong> links to the concise route card with sessions and evidence.</span>
-        <span><strong>Current delivery</strong> lists every distinct state among that target’s mapped modules.</span>
+        <span><strong>Current delivery</strong> lists reader availability and any designated private guided-study pack among that target’s mapped modules.</span>
       </div>
 
       <div className={styles.scopeLevels}>

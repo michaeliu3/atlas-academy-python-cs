@@ -95,7 +95,9 @@ function moduleReference(moduleId: string) {
 
   const shortLabel = `M${courseModule.number}`;
   if (courseModule.state.readerAccess === "hidden") {
-    return <span>{shortLabel} · authoring-only</span>;
+    return courseModule.state.privateGuidedStudy?.status === "ready"
+      ? <span>{shortLabel} · Private guided study ready · portal reader hidden</span>
+      : <span>{shortLabel} · authoring-only</span>;
   }
 
   return <Link href={moduleHref(courseModule.slug)}>{shortLabel} · {courseModule.title}</Link>;
@@ -114,21 +116,37 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
     const count = availabilityCounts.get(availability) ?? 0;
     return count === 0 ? [] : [{ availability, count }];
   });
+  const privateGuidedReadyCount = anchorModules.filter(
+    ({ state }) => state.privateGuidedStudy?.status === "ready",
+  ).length;
   const label =
-    deliveryStates.length === 1
+    deliveryStates.length === 1 &&
+    deliveryStates[0].availability === "authoring-only" &&
+    privateGuidedReadyCount === anchorModules.length
+      ? "Private guided study ready · portal reader hidden"
+      : deliveryStates.length === 1
       ? availabilityLabels[deliveryStates[0].availability]
       : "Mixed anchor delivery";
-  const deliverySummary = deliveryStates
-    .map(
+  const deliverySummary = [
+    ...deliveryStates.map(
       ({ availability, count }) =>
         deliveryStates.length === 1
           ? `${count} mapped ${count === 1 ? "anchor" : "anchors"}`
           : `${count} ${count === 1 ? "anchor" : "anchors"} · ${availabilityLabels[availability]}`,
-    )
-    .join("; ");
+    ),
+    ...(privateGuidedReadyCount > 0
+      ? [
+          `${privateGuidedReadyCount} designated private guided-study ${
+            privateGuidedReadyCount === 1 ? "pack" : "packs"
+          } ready; portal reader remains hidden`,
+        ]
+      : []),
+  ].join("; ");
 
   const scopeNote =
-    topic.scope === "post-core-specialization"
+    privateGuidedReadyCount > 0
+      ? "A ready designated-chat pack is not a portal unlock, route credit, release, or mastery claim."
+      : topic.scope === "post-core-specialization"
       ? "This is a post-core study design; its Core anchors are bridges, not completed specialization."
       : topic.scope === "explicitly-deferred"
         ? "This needs a longer sequence and feedback cycle than the Atlas Core claims."
