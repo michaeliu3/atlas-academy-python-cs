@@ -109,6 +109,6 @@ test("the preview reader has a distinct copyable conversation surface, not a res
   assert.match(guidedRoute, /synthesis-preview-conversations\.v1\.json/u);
   assert.match(guidedRoute, /Codex preview conversation/u);
   assert.doesNotMatch(guidedRoute, /Run the M25 evidence-synthesis orientation/u);
-  assert.match(liveWorkflowGuide, /M25\/M26 synthesis-preview exception/u);
-  assert.match(liveWorkflowGuide, /preview-preparation.*full oral defense, studio,\s+project, route unlock, or completion claim/isu);
+  assert.match(liveWorkflowGuide, /M25\/M26 portal exception/u);
+  assert.match(liveWorkflowGuide, /\*{0,2}preview-preparation\*{0,2}.*full oral defense, studio,\s+project,\s+route unlock, or completion claim/isu);
 });

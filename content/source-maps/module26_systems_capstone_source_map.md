@@ -6,9 +6,11 @@
   teaching map for the Module 26 learner workbook, visual capstone studio,
   deterministic reference model, TA sessions, study-partner prompts, final
   dossier, and oral architecture defense.
-- **Course position:** **Prospective only:** once the M31–M36 evidence chain
-  and Module 25's own gate are satisfied, Module 26 concludes planned days
-  56–60 of the 60-day Atlas Core. It follows Module 25,
+- **Course position:** **Prospective only:** portal promotion requires the
+  M31–M36 evidence chain and Module 25's reviewed gate. The separate private
+  guided-study route begins from learner-supplied artifacts, not a portal
+  promotion, pilot, or rehearsal. Module 26 concludes planned days 56–60 of
+  the 60-day Atlas Core. It follows Module 25,
   *Evidence-Grounded Intelligent and Human-Centered Systems*, after the
   M27–M36 mathematics, theory, systems-for-learning, AI, ML, and
   learning-theory bridge. Module 25 established that a score, generated
@@ -51,6 +53,20 @@ remain visible.
 
 ---
 
+## Two access gates: portal promotion and private guided study
+
+**Portal promotion** requires reviewed contract and release evidence. It is the
+only route that can change reader availability or support a publication claim.
+
+**Private guided study may begin only from learner-supplied upstream artifacts**
+under [`PRIVATE_GUIDED_LEARNING_ROUTE.md`](../../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md):
+the named M31–M36 dossiers, relevant M27–M30 artifacts or unavailable markers,
+and the resulting M25 dossier and annex. It never changes portal access, route
+credit, publication, or release state. No pilot or rehearsal is a prerequisite
+once those actual learner artifacts are present.
+
+---
+
 ## Executive teaching decision
 
 A final project is often taught as a polishing sprint: make a demo look smooth,
@@ -78,9 +94,9 @@ bounded human need + non-goal + accountable release owner
 
 This table compares connected **evidence roles**, not next/previous navigation.
 M24 supplies a systems-evidence thread; the M31–M36 chain supplies the
-advanced mathematics, systems-for-learning, AI/ML, and learning-theory bridge;
-M25 remains preview-gated until that prerequisite and its own review evidence
-exist. M26 follows only after M25's gate.
+advanced mathematics, systems-for-learning, AI/ML, and learning-theory bridge.
+M25's portal reader remains preview-gated until review evidence exists; private
+guided M25/M26 instruction follows the named learner-artifact gate above.
 
 | Boundary | Module 24 gives the learner | Module 25 adds after M31–M36 | Module 26 must defend |
 |---|---|---|---|
