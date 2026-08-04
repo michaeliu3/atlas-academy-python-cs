@@ -68,14 +68,15 @@ conversation.
 
 <!-- live-codex-workflow: activation -->
 
-The active designated-chat policy is `automatic-after-substantive-session`.
-Before an automatic note, say “records on” in that designated chat **for the
-current substantive session**. Say “end session” to close automatic
-session-summary authorization: the chat must not automatically create or update
-a further session note unless the learner later says `records on` for a new
-substantive session. An explicitly requested correction or deletion remains
-separately authorized. It may then create at most one concise note for the
-current substantive session only when all four conditions hold:
+The documented designated-chat role policy is
+`automatic-after-substantive-session`. Before a role may request an automatic
+note, say “records on” in that designated chat **for the current substantive
+session**. Say “end session” to close automatic session-summary authorization:
+the role must not request, create, or claim a further session note unless the
+learner later says `records on` for a new substantive session. An explicitly
+requested correction or deletion remains separately authorized. The policy
+permits at most one concise note for the current substantive session only when
+all four conditions hold:
 
 The chat should visibly acknowledge `records on` and `end session` as
 **chat-level intent** to start or close this configured policy, not as proof
@@ -96,17 +97,17 @@ Treat a conversation as substantive only when all three are present:
 3. a learner-controlled next action or cross-role handoff.
 
 A greeting, scheduling exchange, or isolated administrative question is not a
-substantive session and creates no note.
+substantive session and does not qualify for a note under this role policy.
 
-The chat never creates a note after every exchange or for a greeting. “Automatic”
-does not prove that a write worked: neither role may claim a note was saved
-without direct evidence of the successful write. If access is unavailable, it
-says plainly that no write occurred and leaves this ready-to-paste local packet
-in the visible chat:
+The role policy never authorizes a note after every exchange or for a greeting.
+“Automatic” does not prove that a write worked: neither role may claim a note
+was saved without direct evidence of the successful write. If access is
+unavailable or a write is not directly evidenced, it must say that no write is
+verified and leave this ready-to-paste local packet in the visible chat:
 
 ```text
-Notion unavailable — local session note
-No Notion write occurred. Copy only this concise, learner-approved summary if useful.
+Notion write unverified — local session note
+No Notion write is verified. Copy only this concise, learner-approved summary if useful.
 - Date / role / module or topic:
 - Question and prediction:
 - Whiteboard trace: definition, derivation, code/architecture observation, or counterexample:
@@ -134,18 +135,19 @@ Never place credentials, raw voice, sensitive personal data, or material marked
 off-record in Notion. The learner can say “end session”, “pause records”,
 “off-record”, “correct [note]”, or “delete [note]” at any time. `end session`
 closes automatic session-summary authorization; an explicit correction or
-deletion request remains separately learner-authorized. A pause or off-record
-request prevents a write until the learner explicitly re-enables it. A correction
-or deletion request is completed only if the configured access allows it, and the
-chat must say plainly if it could not complete the request. The target
+deletion request remains separately learner-authorized. The role policy treats
+a pause or off-record request as a no-write request until the learner explicitly
+re-enables it; the chat must not claim platform enforcement. A correction or
+deletion request is completed only if direct evidence confirms it; otherwise
+the chat must say no correction or deletion is verified. The target
 page/database is configured in the designated chats rather than embedded in the
 portal or repository.
 
-After direct evidence of a successful save, the chat reports the concise note
-title and date, plus a link only if the platform provides one. If deletion
-access is unavailable, it says deletion did not occur and directs the learner to
-delete or archive the note in their own Notion UI; it never implies that an
-unavailable deletion succeeded.
+Only after direct evidence of a successful save may the chat report the concise
+note title and date, plus a link only if the platform provides one. If deletion
+access is unavailable or a result cannot be verified, it must say no deletion is verified and direct the
+learner to delete or archive the note in their own Notion UI; it never implies
+that an unavailable deletion succeeded.
 
 ## Handoff rule
 

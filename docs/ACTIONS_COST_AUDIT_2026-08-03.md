@@ -65,16 +65,27 @@ Push a reviewed batch and request the full gate only at a review, weekly
 milestone, or release boundary. Do not remove the portal, two Python, browser,
 or post-merge checks without a separate branch-protection decision.
 
-## Follow-up local correction (awaiting normal push)
+## Follow-up correction status (2026-08-04)
 
-The local workflow additionally subscribes to `converted_to_draft`. That event
-creates a skipped, zero-runner workflow which shares the existing concurrency
-group and can cancel an obsolete full PR gate when a review returns to Draft.
-The expensive full-course `workflow_dispatch` trigger was removed: the bounded
+The current history ref
+[`codex/atlas-60-day-route-history`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/codex/atlas-60-day-route-history)
+contains the correction at
+[`0e3a51d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/0e3a51d088e36c0b02e140b9caedb12dbff50115): Course CI additionally subscribes
+to `converted_to_draft`, and the expensive full-course `workflow_dispatch`
+trigger is removed. The history-ref SHA has zero workflow runs, as expected for
+a non-`main` history-only push.
+
+This correction is **not yet live on active Draft PR #21**. Its head remains
+[`54b894f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/54b894fb011c341373085747c43829be362c894a), whose workflow still lacks
+`converted_to_draft` and retains `workflow_dispatch`. GitHub CLI authentication
+is available for readback. An ordinary atomic fast-forward was rejected by the
+protected review branch because the local history contains the older merge
+commit `df217f5`; no ref changed and no force-push, rebase, or history rewrite
+was attempted.
+
+The cancellation behavior therefore remains unobserved—not because of missing
+authentication, but because the correction has not reached the PR workflow.
+Use a safe non-rewriting review-branch path before treating it as operational;
+do not manually dispatch Course CI merely to create evidence. The bounded
 metadata observer remains the documented manual final-verification path, while
 PR gates and `push: main` retain required verification.
-
-GitHub CLI authentication is currently unavailable on this workstation, so this
-follow-up cannot claim that the local correction is live or observe its remote
-cancellation behavior. Re-authenticate, inspect runs read-only, then use a
-normal additive push when the reviewed batch is ready.

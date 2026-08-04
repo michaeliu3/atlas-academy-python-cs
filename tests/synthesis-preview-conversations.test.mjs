@@ -74,7 +74,7 @@ test("M25 and M26 preview conversations allow only bounded preparation artifacts
     assert.match(previewPackage.notionEvidencePacket.conditions, /pause records|off-record/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /at most one concise/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /chat-level intent/i);
-    assert.match(previewPackage.notionEvidencePacket.conditions, /Notion unavailable — local session note/i);
+    assert.match(previewPackage.notionEvidencePacket.conditions, /Notion write unverified — local session note/i);
     assert.match(previewPackage.notionEvidencePacket.boundary, /portal.*notion write/i);
     assert.match(previewPackage.notionEvidencePacket.boundary, /raw voice|transcript/i);
     assert.match(previewPackage.notionEvidencePacket.boundary, /fresh or generic chat.*no recording authority/i);

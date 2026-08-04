@@ -141,7 +141,7 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /automatic-after-substantive-session/);
   assert.match(html, /at most one concise structured note for that session/);
   assert.match(html, /say “records on”/);
-  assert.match(html, /Notion unavailable — local session note/);
+  assert.match(html, /Notion write unverified — local session note/);
   assert.match(html, /names a module or learning topic/);
   assert.match(html, /pause records/);
   assert.match(readable, /configured private learning\s+record/i);
@@ -1999,6 +1999,7 @@ test("renders a complete generated module reading route", async () => {
   assert.match(html, /aria-label="Link to this section"/);
   assert.match(html, /Workbook-led interaction/);
   assert.match(html, /This open workbook has no separate visual studio/);
+  assert.match(html, /no deletion is verified/u);
   assert.match(html, /href="#oral-defense-1-title"/);
   assert.match(
     html,

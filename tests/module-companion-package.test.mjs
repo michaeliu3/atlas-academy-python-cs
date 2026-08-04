@@ -160,11 +160,25 @@ test("M1 chat contexts state the reachable-Notion and unavailable-write boundary
     assert.match(contextPrompt, /configured private Notion destination is reachable/i);
     assert.match(
       contextPrompt,
-      /if that destination is unavailable, say plainly that no write occurred and provide this ready-to-paste local summary in chat/i,
+      /if that destination is unavailable or a result cannot be verified, say plainly that no Notion write is verified and provide this ready-to-paste local summary in chat/i,
     );
-    assert.match(contextPrompt, /Notion unavailable — local session note/u);
+    assert.match(contextPrompt, /Notion write unverified — local session note/u);
+    assert.match(contextPrompt, /no deletion is verified/u);
     assert.match(contextPrompt, /Question and prediction:/u);
   }
+
+  const missingDeletionAcknowledgement = clone(workflow);
+  missingDeletionAcknowledgement.notionSessionNotes.learnerControlAcknowledgements.deletionUnavailable =
+    "Report deletion without confirming it.";
+  assert.throws(
+    () => buildModuleCompanionPackage({
+      courseModule: m01,
+      graphModules: graph.modules,
+      guide,
+      liveWorkflow: missingDeletionAcknowledgement,
+    }),
+    /unverified-deletion acknowledgement/u,
+  );
 });
 
 test("the TA and Study Partner packets stay distinct, constructive, and bounded", async () => {

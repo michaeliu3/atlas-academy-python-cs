@@ -33,7 +33,7 @@ const requiredLearnerControlAcknowledgements = {
   pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
   confirmedSave: "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
   deletionUnavailable:
-    "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI.",
+    "If deletion access is unavailable or a result cannot be verified, say no deletion is verified and direct the learner to delete or archive the note in their own Notion UI.",
 };
 const requiredRecordFields = [
   "date, role, module/topic, and learner question",
@@ -42,8 +42,8 @@ const requiredRecordFields = [
   "Teaching Assistant oral-defense evidence or Study Partner discussion/rehearsal handoff",
 ];
 const requiredUnavailableNoteTemplate = {
-  title: "Notion unavailable — local session note",
-  intro: "No Notion write occurred. Copy only this concise, learner-approved summary if useful.",
+  title: "Notion write unverified — local session note",
+  intro: "No Notion write is verified. Copy only this concise, learner-approved summary if useful.",
   fields: [
     "Date / role / module or topic:",
     "Question and prediction:",
@@ -240,8 +240,8 @@ export async function validateLiveCodexLearningWorkflow(
     if (notionSessionNotes.writeCadence !== "at-most-one-concise-note-per-substantive-session") {
       errors.push("Live Codex workflow must limit writes to one concise note per substantive session.");
     }
-    if (notionSessionNotes.onUnavailable !== "state-unavailable-and-provide-ready-to-paste-summary") {
-      errors.push("Live Codex workflow must state unavailable writes plainly and provide a ready-to-paste local summary.");
+    if (notionSessionNotes.onUnavailable !== "state-write-unverified-and-provide-ready-to-paste-summary") {
+      errors.push("Live Codex workflow must state unverified writes plainly and provide a ready-to-paste local summary.");
     }
     const unavailableNoteTemplate = notionSessionNotes.unavailableNoteTemplate;
     if (
