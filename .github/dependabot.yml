@@ -4,9 +4,27 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    # One reviewed routine batch avoids five independent full CI runs. Major
+    # upgrades and security updates stay isolated for a narrower review.
+    open-pull-requests-limit: 1
+    groups:
+      routine-minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
-    open-pull-requests-limit: 3
+    # Keep routine action updates reviewable as one full, protected CI gate.
+    # Major action upgrades remain distinct.
+    open-pull-requests-limit: 1
+    groups:
+      routine-minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch

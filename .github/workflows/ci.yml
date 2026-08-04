@@ -1,5 +1,9 @@
 name: Course CI
 
+run-name: >-
+  atlas-course-ci-${{ github.event_name == 'pull_request' &&
+  (github.event.pull_request.draft && 'draft' || 'gate') || github.event_name }}
+
 on:
   push:
     branches:
@@ -12,8 +16,10 @@ on:
       - opened
       - reopened
       - ready_for_review
+      # Emit a skipped, zero-runner workflow when a PR returns to draft so the
+      # concurrency group cancels any now-obsolete full gate for that PR.
+      - converted_to_draft
       - synchronize
-  workflow_dispatch:
 
 permissions:
   contents: read
