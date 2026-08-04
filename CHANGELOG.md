@@ -18,6 +18,9 @@ actually published.
   learner-facing routes, and mutation checks all default such a session to
   records-off until a fresh visible request. This is a local-first instruction
   and validation boundary, not a claim that the portal controls Codex or Notion.
+- Aligned the M25/M26 preview packets and the privacy/architecture summaries
+  with that same fresh-session rule, and corrected the completion snapshot to
+  distinguish role-material readiness from unobserved chat acknowledgement.
 - Updated scoped lockfile overrides to `postcss@8.5.24`,
   `brace-expansion@1.1.18`/`5.0.9`, and `fast-uri@3.1.5`. The current
   production-only audit is clean; the remaining Drizzle/esbuild and

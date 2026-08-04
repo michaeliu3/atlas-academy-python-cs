@@ -29,10 +29,12 @@ flowchart LR
   portal-to-Notion data flow. The learner may use the manual private Notion
 workflow, while the two designated external Codex learning chats may
 automatically create concise session notes only after the learner says
-`records on` in that exact designated chat for the current substantive session;
-saying `end session` closes automatic session-summary authority until a new
-`records on`; an explicitly requested correction or deletion remains separately
-authorized. A substantive conversation may then end in their configured private
+`records on` in that exact designated chat for the current substantive session.
+Saying `end session` closes automatic session-summary authority. A prior
+`records on` never carries into a new or ambiguously resumed substantive
+session; records are off until a fresh visible `records on` in that session.
+An explicitly requested correction or deletion remains separately authorized.
+A substantive conversation may then end in their configured private
 record. Portable copied prompts remain local. That
   external workflow does not grant the portal microphone, voice, transcript,
   or Notion-write capability, and a saved-note claim still requires direct

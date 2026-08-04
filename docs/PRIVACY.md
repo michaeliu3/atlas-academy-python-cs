@@ -36,9 +36,11 @@ This is a user-interface consent boundary, not a claim that a browser can stop
 someone from selecting visible text manually. The portal never creates a Notion
 write. The two learner-designated external Codex learning chats may
 automatically create one concise record only after the learner says `records on`
-in that exact designated chat for the current substantive conversation;
-saying `end session` closes automatic session-summary authority until a new
-`records on`; an explicit correction or deletion remains separately authorized.
+in that exact designated chat for the current substantive conversation.
+Saying `end session` closes automatic session-summary authority. A prior
+`records on` never carries into a new or ambiguously resumed substantive
+session; records are off until a fresh visible `records on` in that session.
+An explicit correction or deletion remains separately authorized.
 Portable copied prompts remain local.
 They must exclude raw voice, sensitive data, credentials, and off-record
 material, and may claim a saved note only with direct evidence. See [the live

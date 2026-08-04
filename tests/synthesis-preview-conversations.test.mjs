@@ -71,6 +71,10 @@ test("M25 and M26 preview conversations allow only bounded preparation artifacts
     assert.match(previewPackage.teachingAssistantClarificationPrompt, /does not configure a chat or grant recording authority/i);
     assert.match(previewPackage.studyPartnerPrompt, /does not configure a chat or grant recording authority/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /records on/i);
+    assert.match(
+      previewPackage.notionEvidencePacket.conditions,
+      /prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session/i,
+    );
     assert.match(previewPackage.notionEvidencePacket.conditions, /pause records|off-record/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /at most one concise/i);
     assert.match(previewPackage.notionEvidencePacket.conditions, /chat-level intent/i);
