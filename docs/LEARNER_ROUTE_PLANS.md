@@ -178,7 +178,7 @@ still does not unlock portal modules or create review/release credit.
 | Days 35–44 | M18–M24 as the labelled open systems branch | Study OS, concurrency, networks, trust, languages, and runtime evidence from M17. Do not represent this branch as completing M31 or as entering M32. |
 | Days 45–53 | Retrieval, debugging, and dossier revision | No reader-open or verified M32–M36 substitute exists today. Private authoring drafts remain hidden and do not count toward this open-material route; revisit claims, math, and systems evidence instead. |
 | Days 54–55 | Optional M25 preview orientation | If read, record questions and assumptions only. It produces no synthesis credit. |
-| Days 56–60 | Pre-capstone evidence bundle and constructive oral rehearsal | Build a learner-owned dossier from open material. This is **not** the M26 capstone or a release defense. |
+| Days 56–60 | Pre-capstone evidence bundle and constructive oral-defense conversation | Build a learner-owned dossier from open material. This is **not** the M26 capstone or a release defense. |
 
 For this route, reserve at least one short buffer block every week. When a
 buffer is used, move a later nonessential reading or optional preview—not the

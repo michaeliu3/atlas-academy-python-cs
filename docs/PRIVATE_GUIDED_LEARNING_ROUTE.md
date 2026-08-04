@@ -83,7 +83,7 @@ portal release, Core credit, or mastery evidence.
 Use this same short bridge for **M31, M32, M33, M34, M35, and M36**. It keeps a
 session artifact, uncertainty, and next question visible when the learner moves
 between the Study Partner and Teaching Assistant chats. These remain private,
-authoring-only rehearsals—not a grade, release, unlock, or credit.
+authoring-only guided-study sessions—not a grade, release, unlock, or credit.
 
 ### Sessions 2–5 — Study Partner → TA checkpoint
 
@@ -168,7 +168,8 @@ a gate or grade.
 
 **M31 time budget.** Budget about **6–8 focused hours** for a minimum-evidence
 first pass, or **10–14 hours** when you re-derive the arguments, inspect the
-traces, and complete the dossier/oral rehearsal. If the first-week calibration
+traces, complete the dossier, and hold an optional supportive oral-defense
+conversation. If the first-week calibration
 in the pace guide already exceeds its threshold, choose the 90-day route rather
 than skimming the mathematics.
 
@@ -224,7 +225,8 @@ this is a repair route, not a gate or grade.
 
 **M32 time budget.** Provisionally budget **7–9 focused hours** for a
 minimum-evidence first pass, or **12–16 hours** when you inspect the four
-reference cards, complete the dossier, and rehearse the oral defense. Use the
+reference cards, complete the dossier, and hold an optional supportive
+oral-defense conversation. Use the
 90-day route if the first-week calibration already shows that the 60-day pace
 would force you to skip the evidence work.
 
@@ -275,7 +277,8 @@ grade.
 
 **M33 time budget.** Provisionally budget **6–8 focused hours** for a
 minimum-evidence first pass, or **10–14 hours** for proof reconstruction,
-counterexamples, and the dossier/oral rehearsal. Work one session at a time;
+counterexamples, the dossier, and an optional supportive oral-defense
+conversation. Work one session at a time;
 use the 90-day route if a faster calendar would make you skip the formal
 argument.
 
@@ -318,7 +321,8 @@ this is a repair route, not a gate or grade.
 
 **M34 time budget.** Provisionally budget **7–9 focused hours** for a
 minimum-evidence first pass, or **12–16 hours** for search/constraint/decision
-traces, counterexamples, and the dossier/oral rehearsal.
+traces, counterexamples, the dossier, and an optional supportive oral-defense
+conversation.
 
 ### M34 bounded reference-card set
 
@@ -364,7 +368,8 @@ grade.
 
 **M35 time budget.** Provisionally budget **7–9 focused hours** for a
 minimum-evidence first pass, or **12–16 hours** for the evaluation/shift plan,
-training evidence, dossier, and oral rehearsal.
+training evidence, dossier, and an optional supportive oral-defense
+conversation.
 
 ### M35 bounded reference-card set
 
@@ -409,7 +414,8 @@ remaining checks respectively. This is a repair route, not a gate or grade.
 
 **M36 time budget.** Provisionally budget **8–10 focused hours** for a
 minimum-evidence first pass, or **14–18 hours** for theorem reconstruction,
-reproducibility/monitoring evidence, dossier, and oral rehearsal.
+reproducibility/monitoring evidence, dossier, and an optional supportive
+oral-defense conversation.
 
 ### M36 bounded reference-card set
 
@@ -458,7 +464,7 @@ unreviewed receipt; and the resulting `PREVIEW ONLY` decision. It must not
 invent an M31–M36 result or claim benefit, calibration, generalization,
 authority, or completion. A future full M25 pass should budget about **6–8
 focused hours** for minimum evidence or **10–14 hours** for a deep dossier and
-supportive TA rehearsal; use the 90- or 180-day route rather than compressing
+supportive TA oral-defense conversation; use the 90- or 180-day route rather than compressing
 that work into a preview window.
 
 ### M26 pre-capstone architecture rehearsal (60–90 minutes)
