@@ -39,11 +39,29 @@ the final AI/systems modules integrate prior evidence rather than replacing it.
 | Days 54–55 | M25 private evidence-gated synthesis | Next-Step Evidence Dossier, Advanced Evidence Annex, and a narrowed/deferred claim when a receipt is unavailable. |
 | Days 56–60 | M26 private evidence-gated local capstone | Simulated/local architecture recommendation, maintenance handoff, and constructive oral defense; never a deployment or release claim. |
 
-The 60-day plan is a demanding first pass. Use the existing
-[90- and 180-day pacing rules](LEARNER_ROUTE_PLANS.md) whenever a proof, trace,
-or retrieval needs more time. That document's portal/open-material schedules
-are an availability plan; this page remains the full private chat-led sequence.
-Expanding the calendar is a repair, not failure.
+The 60-day plan is a demanding first pass. The portal/open-material
+[90- and 180-day pacing rules](LEARNER_ROUTE_PLANS.md) remain useful for their
+weekly bands, calibration rule, buffers, and catch-up guidance. Their calendars
+are deliberately portal-only; use the private extensions below for the full
+chat-led sequence. Expanding the calendar is a repair, not failure.
+
+## Private guided 90- and 180-day extensions
+
+These are calendar extensions of the same connected private route—not new
+curricula, portal schedules, or release plans. A window may contain several
+focused blocks; it does not imply one session per day. Preserve the six-session
+spine, prediction, artifact, retrieval, and supportive TA conversation for
+each module. Keep one buffer block each week for a missed prerequisite repair
+or delayed retrieval rather than silently dropping it.
+
+| Calendar | Suggested private sequence | What must remain true |
+| --- | --- | --- |
+| **90 days** | Days 1–13: M0, M1–M5, M27. Days 14–29: M6–M11. Days 30–43: M12–M16. Days 44–55: M17, M28–M30, M31. Days 56–68: M18–M24, M32. Days 69–82: M33–M36. Days 83–86: M25. Days 87–90: M26. | Use the 20–25 focused-hours/week band only when it leaves enough time for the named evidence; otherwise choose 180 days. M25 begins only after its full private evidence gate is met; M26 additionally needs the completed M25 dossier/annex and carried-forward receipts. |
+| **180 days** | Days 1–24: M0, M1–M5, M27. Days 25–48: M6–M11. Days 49–70: M12–M16. Days 71–89: M17, M28–M30, M31. Days 90–113: M18–M24, M32. Days 114–137: M33–M36. Days 138–158: M25. Days 159–180: M26. | Use the 10–15 focused-hours/week band for more spaced retrieval, source reading, repair, and dossier revision. The slower calendar does not turn authoring-only packs into portal material or convert M25/M26 into credit, deployment, publication, or mastery evidence. |
+
+If an M25 or M26 prerequisite artifact is absent at its calendar window, use
+that window for the smallest upstream repair and reschedule the synthesis work.
+Do not skip the gate, fabricate a receipt, or replace it with a preview.
 
 ## Private advanced study packs
 

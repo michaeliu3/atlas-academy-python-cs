@@ -140,6 +140,19 @@ test("private guided continuation remains distinct from portal release", async (
     privateRoute,
     /M25 private evidence-gated synthesis[\s\S]{0,220}M26 private evidence-gated local capstone/u,
   );
+  assert.match(privateRoute, /## Private guided 90- and 180-day extensions/u);
+  assert.match(
+    privateRoute,
+    /Days 69–82: M33–M36[\s\S]{0,180}Days 83–86: M25[\s\S]{0,120}Days 87–90: M26/u,
+  );
+  assert.match(
+    privateRoute,
+    /Days 114–137: M33–M36[\s\S]{0,180}Days 138–158: M25[\s\S]{0,120}Days 159–180: M26/u,
+  );
+  assert.match(
+    privateRoute,
+    /Do not skip the gate, fabricate a receipt, or replace it with a preview/u,
+  );
   assert.match(privateRoute, /## Private M25\/M26 evidence gate/u);
   assert.match(privateRoute, /Start M25 private study/u);
   assert.match(privateRoute, /Start M26 private study/u);

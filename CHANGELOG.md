@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Added explicit 90- and 180-day **private chat-led** calendar extensions for
+  the full M1–M36 → M25 → M26 sequence. They retain the authoring-only portal
+  boundary, six-session evidence work, and M25/M26 artifact gates; they are
+  pacing guidance, not a release, credit, or mastery claim.
 - Replayed the preserved Atlas course-history lineage onto the cost-controlled
   review path through additive commits only; no force-push, rebase, squash,
   deletion, or history rewrite was used. The Draft Course CI policy now has
