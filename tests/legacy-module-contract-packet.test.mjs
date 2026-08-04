@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "c56c79b8f2061fa5daf7befdc270bf376fc8ac5550310ce7a7bf78ec2a8e2235");
+  assert.equal(digest, "ba720fb973062a9a8cfcd3ce03ecf2e49e34fbe63a930b05982330336101068f");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -333,7 +333,7 @@ test("the M25 structural packet records its preview-gated synthesis spine withou
     statusByCriterion.get(
       "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
     ),
-    "ambiguous",
+    "pointer-present",
   );
   assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
   assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");

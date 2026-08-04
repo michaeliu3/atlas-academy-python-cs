@@ -128,7 +128,8 @@ because files exist.
 ## Preserved audit ambiguities and review boundary
 
 The immutable legacy audit marks M25's human quality as **not-reviewed** and
-retains two **ambiguous** criteria. Prediction, transfer,
+retains one **ambiguous** criterion: the preview-gated prerequisite/forward
+map. Prediction, transfer,
 confidence-diagnostic, and supportive-oral pointers are present structurally,
 but a source ledger, version check, fixed local model, resolved anchor, or this
 addendum does not substitute for qualified learner-facing review.
@@ -136,14 +137,16 @@ addendum does not substitute for qualified learner-facing review.
 | Legacy criterion | Status that remains | Why this audit cannot promote it |
 | --- | --- | --- |
 | **prerequisite/forward map** | **ambiguous** | The canonical route is now stated accurately, but prerequisite evidence includes authoring-only M31/M34–M36 and preview gating remains; this is not learner-ready release evidence. |
-| **rigor bundle**: definitions, assumptions, derivations/proof ideas, counterexamples, and numerical experiments | **ambiguous** | The source map contains useful claim boundaries, but this audit does not establish a coherent, accurate, reviewed rigor bundle. |
+| **rigor bundle**: definitions, assumptions, derivations/proof ideas, counterexamples, and numerical experiments | **pointer-present** | The visible workbook now has a bounded **Rigor card — conditional evidence-to-decision inference** with a five-item `0.8` fixture, stated assumptions, derivation, shifted-slice counterexample, and narrow decision consequence. This is a structural pointer only; it does not establish reviewed statistical correctness, accessibility, learner comprehension, release evidence, or mastery. |
 
-The six-session spine, first-principles pointer, code-reading/debugging/design
+The six-session spine, first-principles pointer, rigor-bundle pointer,
+code-reading/debugging/design
 pointers, prediction pointer, source-ledger pointer, accessible-visual/text
 alternative pointer, retrieval pointer, project/rubric pointers, TA pointer,
 Study Partner pointer, supportive-oral pointer, and forward handoff remain
 structural pointers. This record neither changes their status nor upgrades the
-two ambiguities into learner-facing review, release evidence, or mastery.
+remaining prerequisite/forward-map ambiguity into learner-facing review,
+release evidence, or mastery.
 
 ## Release-truth checks and unresolved provenance
 
@@ -154,7 +157,7 @@ two ambiguities into learner-facing review, release evidence, or mastery.
 | Asset/reuse inventory | No non-original external asset is approved by this audit. | Record owner, exact URL/version, access date, license/notice, attribution, modification, distribution decision, and reviewer for any shipped non-original asset. |
 | Preview route | M25/M26 stay preview-only behind authoring-only prerequisite evidence. | Complete/review/release M31–M36, reweave M25, pass its own contract/provenance checks, then separately review M26. |
 | Bounded model/studio | The local model and studio specification are deterministic teaching artifacts with bounded tooling/local progress behavior. | Run declared tests, inspect effects and UI interaction, record environment/results, and preserve course-model versus real-system distinctions. |
-| Human quality/accessibility/oral review | Two ambiguous criteria and the structurally mapped but unreviewed M25 oral-defense route remain unresolved. | Preserve the exact statuses until qualified review records learner-facing evidence, including accessible interaction, cognitive clarity, and a supportive adaptive oral flow. |
+| Human quality/accessibility/oral review | The one preview-gated prerequisite/forward-map ambiguity and the structurally mapped but unreviewed M25 oral-defense route remain unresolved. | Preserve the exact statuses until qualified review records learner-facing evidence, including accessible interaction, cognitive clarity, and a supportive adaptive oral flow. |
 | Provenance chain | A path, source card, test, or hash alone does not prove delivery, reviewability, CI, deployment, or a release. | Bind a reviewed Git commit, source ref, exact CI run, source review, limitations, and any verified deployment fact without changing publication by implication. |
 
 ## Evidence language for the later M25 synthesis

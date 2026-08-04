@@ -702,6 +702,50 @@ Do not manufacture precision from a tiny fixture. A confidence interval,
 resampling method, or sample-size limitation is evidence of uncertainty, not a
 failure of the project.
 
+### Rigor card — conditional evidence-to-decision inference
+
+### Definition — a calibration observation is scoped
+
+A calibration observation compares a stated probability with
+an observed outcome *within one declared population, split, label rule, and
+score bin*. It is not the same claim as ranking quality, causal benefit,
+permission to act, or a release decision.
+
+### Numerical experiment — five fixed `0.8` predictions
+
+Suppose exactly five held-out, equally eligible candidate opportunities are
+each assigned a reported probability of `0.8`, and the observed outcomes are
+`[1, 1, 1, 1, 0]`. Then, for this one bin,
+
+~~~text
+mean reported probability = (0.8 + 0.8 + 0.8 + 0.8 + 0.8) / 5 = 4 / 5 = 0.8
+mean observed outcome     = (1 + 1 + 1 + 1 + 0) / 5         = 4 / 5 = 0.8
+bin difference            = observed mean - reported mean    = 0
+~~~
+
+### Derivation / proof idea — compare the two fixed means
+
+The derivation supports only this narrow statement: the fixture's sole bin
+matches its reported mean. It does **not** prove calibration for another time
+window, slice, threshold, model version, or real learner population.
+
+### Assumption boundary — held-out opportunities and declared labels
+
+The five labels faithfully represent the stated
+outcome; all five opportunities came from the named holdout rather than a
+hand-picked success set; the score was not tuned on this same fixture; and the
+decision policy did not hide abstentions or unavailable candidates.
+
+### Counterexample — a shifted slice breaks the inference
+
+Keep the five `0.8` scores but
+move to a shifted slice with outcomes `[0, 0, 0, 0, 0]`. The reported mean is
+still `0.8`, while the observed mean is `0`. The original calculation therefore
+cannot justify a probability label in that slice. A responsible next step is to
+retain the score as an ordering candidate, collect declared holdout evidence,
+or narrow/defer the decision—not to promote this fixture into a benefit,
+causal, authority, or release claim.
+
 ### Code-reading lab — reject the wrong conclusion
 
 ~~~text

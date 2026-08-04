@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "1d5495d70c975607ece8fa2c4f84caa340a0dc36369f17a0ba675c507b372960"
+      "sha256": "4f55fbf1b3fb1fe17364da19e4cc8fc1e527e9991cb76f200b6d2fc8361d58e2"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "c56c79b8f2061fa5daf7befdc270bf376fc8ac5550310ce7a7bf78ec2a8e2235"
+      "sha256": "ba720fb973062a9a8cfcd3ce03ecf2e49e34fbe63a930b05982330336101068f"
     },
     {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
@@ -514,7 +514,7 @@
     },
     {
       "path": "content/course/contracts/module-contract-registry.v3.json",
-      "sha256": "1ddcb8814be1eee449213e88390505f0e49a167376b12015439ea94c504050d2"
+      "sha256": "c76138b3b0171e7faf5b0f296d760f35786015abfec61533df11469c0698519c"
     },
     {
       "path": "content/course/course-graph.v2.json",
@@ -646,11 +646,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "9de7d9210f389d73529fd2e17eca8197a05dec43743c802e3802078d68a830c1"
+      "sha256": "0d1b741a36a26d757dae33d5417671109492ab86a91933b9cb1e34e1431d0982"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "e85c9e6cc5ecbc0cda48826c6660475542d8b7f4e6792a4caccce8f43e3f85f3"
+      "sha256": "7f78e72f7e1ce3a13e5f1e2f3cfc0cd756c6a8f80c0598e8ceebdb9ea8fda26c"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -774,7 +774,7 @@
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_audit_addendum.md",
-      "sha256": "e3b6d7cf41e2c746178813ff4dcd5b71071b1aecd0c089c57238917e32ddaa37"
+      "sha256": "900f7259b15d795908f182bcaf1c551e3afe945c6c6e09301f4d85b1b93a0fda"
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
@@ -782,7 +782,7 @@
     },
     {
       "path": "content/source-maps/module26_systems_capstone_source_map.md",
-      "sha256": "3d8422cb9980aa96308b9ceb9f1b62278e48be831e434b84841168ea4dc6cd2e"
+      "sha256": "bca08e1d237706b3ef051e0c9f301c2a785adbc7899d4af8bd65810ce060aa73"
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",

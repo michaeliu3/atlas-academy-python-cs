@@ -10,7 +10,7 @@
 - Each module's `humanQualityReview: not-reviewed` uniformly applies to all 16 criteria. This audit records no per-criterion approvals; future granular human review needs a different reviewed contract record.
 - M25/M26 remain preview-only in the canonical graph. This audit neither changes their availability nor permits their authoring-only prerequisites to be bypassed.
 
-The validator resolved 30 modules and 480 criteria: **476 P**, **4 A**, **0 M**. It records **0 human approvals** and **0 publication changes**.
+The validator resolved 30 modules and 480 criteria: **478 P**, **2 A**, **0 M**. It records **0 human approvals** and **0 publication changes**.
 
 ## Matrix
 
@@ -40,8 +40,8 @@ The validator resolved 30 modules and 480 criteria: **476 P**, **4 A**, **0 M**.
 | M22 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M23 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M24 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
-| M25 | A | P | P | A | P | P | P | P | P | P | P | P | P | P | P | P |
-| M26 | A | P | P | A | P | P | P | P | P | P | P | P | P | P | P | P |
+| M25 | A | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
+| M26 | A | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M27 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M28 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
 | M29 | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P | P |
@@ -54,7 +54,7 @@ The validator resolved 30 modules and 480 criteria: **476 P**, **4 A**, **0 M**.
 | prerequisite forward map | 28 | 2 | 0 |
 | six connected sessions | 30 | 0 | 0 |
 | first principles | 30 | 0 | 0 |
-| rigor definitions assumptions derivations proofs counterexamples numerical experiments | 28 | 2 | 0 |
+| rigor definitions assumptions derivations proofs counterexamples numerical experiments | 30 | 0 | 0 |
 | code reading debugging design | 30 | 0 | 0 |
 | prediction before reveal | 30 | 0 | 0 |
 | transfer task | 30 | 0 | 0 |

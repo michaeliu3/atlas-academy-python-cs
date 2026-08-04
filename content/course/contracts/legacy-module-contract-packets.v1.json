@@ -2495,12 +2495,12 @@
           "roles": [
             "definition"
           ],
-          "label": "Evidence-label definition candidate",
+          "label": "Conditional-evidence rigor-card definition",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-            "headingAnchor": "evidence-labels"
+            "headingAnchor": "definition--a-calibration-observation-is-scoped"
           }
         },
         {
@@ -2508,12 +2508,12 @@
           "roles": [
             "assumption"
           ],
-          "label": "Denominator and uncertainty assumption candidate",
+          "label": "Conditional-evidence rigor-card assumptions",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-            "headingAnchor": "denominators-and-uncertainty"
+            "headingAnchor": "assumption-boundary--held-out-opportunities-and-declared-labels"
           }
         },
         {
@@ -2521,12 +2521,12 @@
           "roles": [
             "derivation-proof"
           ],
-          "label": "Decision-support derivation candidate",
+          "label": "Conditional-evidence rigor-card derivation",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-            "headingAnchor": "derive-decision-support-from-a-real-choice"
+            "headingAnchor": "derivation--proof-idea--compare-the-two-fixed-means"
           }
         },
         {
@@ -2534,12 +2534,12 @@
           "roles": [
             "counterexample"
           ],
-          "label": "Fixed Atlas incident counterexample candidate",
+          "label": "Conditional-evidence rigor-card counterexample",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-            "headingAnchor": "12-the-fixed-atlas-incident"
+            "headingAnchor": "counterexample--a-shifted-slice-breaks-the-inference"
           }
         },
         {
@@ -2547,12 +2547,12 @@
           "roles": [
             "numerical-experiment"
           ],
-          "label": "Evaluation-card numerical experiment candidate",
+          "label": "Conditional-evidence rigor-card numerical fixture",
           "sessionNumber": null,
           "target": {
             "surface": "workbook",
             "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-            "headingAnchor": "choose-the-metric-from-the-product-question"
+            "headingAnchor": "numerical-experiment--five-fixed-08-predictions"
           }
         },
         {
@@ -2891,7 +2891,7 @@
         },
         {
           "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "legacyAuditStatus": "ambiguous",
+          "legacyAuditStatus": "pointer-present",
           "structuralState": "mapped-not-reviewed",
           "pointerIds": [
             "m25-definition",
