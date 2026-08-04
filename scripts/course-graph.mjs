@@ -842,6 +842,8 @@ export function validateCourseGraph(graph) {
     }
   }
 
+  validateAuthoringPrerequisiteBoundary(graph, moduleByNumber);
+
   validateScopeMatrix(graph.scopeMatrix, moduleById);
 
   const routePlan = routePlanFor(graph);
@@ -897,6 +899,57 @@ export function validateCourseGraph(graph) {
   }
 
   return graph;
+}
+
+function transitiveAcademicPrerequisites(moduleNumber, moduleByNumber) {
+  const visited = new Set();
+  const visiting = new Set();
+
+  function visit(number) {
+    if (visited.has(number)) return;
+    if (visiting.has(number)) {
+      fail(`academic prerequisite cycle includes Module ${number}.`);
+    }
+    const courseModule = moduleByNumber.get(number);
+    if (!courseModule) {
+      fail(`academic prerequisite closure references missing Module ${number}.`);
+    }
+    visiting.add(number);
+    for (const prerequisiteNumber of courseModule.academicPrerequisiteNumbers) {
+      visit(prerequisiteNumber);
+    }
+    visiting.delete(number);
+    visited.add(number);
+  }
+
+  for (const prerequisiteNumber of moduleByNumber.get(moduleNumber).academicPrerequisiteNumbers) {
+    visit(prerequisiteNumber);
+  }
+  return visited;
+}
+
+function validateAuthoringPrerequisiteBoundary(graph, moduleByNumber) {
+  for (const courseModule of graph.modules) {
+    // An authoring-only workbook is allowed to depend on another hidden
+    // workbook. The invariant protects every other availability state from
+    // silently exposing a route through an unavailable academic prerequisite.
+    if (courseModule.state.availability === "authoring-only") continue;
+    const hiddenPrerequisites = [...transitiveAcademicPrerequisites(courseModule.number, moduleByNumber)]
+      .filter((number) => {
+        const prerequisite = moduleByNumber.get(number);
+        return (
+          prerequisite.state.lifecycle === "authoring-only" ||
+          prerequisite.state.availability === "authoring-only"
+        );
+      });
+    if (hiddenPrerequisites.length > 0 && !["preview", "locked"].includes(courseModule.state.availability)) {
+      fail(
+        `Module ${courseModule.number} requires authoring-only prerequisite(s) ${hiddenPrerequisites
+          .map((number) => `M${String(number).padStart(2, "0")}`)
+          .join(", ")} and must remain preview or locked.`,
+      );
+    }
+  }
 }
 
 export async function loadCourseGraph() {

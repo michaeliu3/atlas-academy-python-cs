@@ -100,6 +100,19 @@ test("readable projections stop at unavailable route nodes instead of bypassing 
   assert.equal(byNumber.get(25)?.previousRouteNumber, 36);
 });
 
+test("the graph rejects an open route whose transitive academic prerequisite is authoring-only", async () => {
+  const graph = await loadCourseGraph();
+  const forgedOpenSynthesis = structuredClone(graph);
+  const m25 = forgedOpenSynthesis.modules.find(({ id }) => id === "m25");
+  m25.state.availability = "optional";
+  m25.state.readerAccess = "full";
+
+  assert.throws(
+    () => validateCourseGraph(forgedOpenSynthesis),
+    /Module 25 requires authoring-only prerequisite\(s\).*must remain preview or locked/u,
+  );
+});
+
 test("the dense systems-and-mathematics route exposes conservative evidence-time bands without relabeling reading time", async () => {
   const graph = await loadCourseGraph();
   const byNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
