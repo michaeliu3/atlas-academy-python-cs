@@ -382,7 +382,7 @@ test("the M19-M24 candidate oral protocols keep their reader-visible repair anch
     [
       "19_concurrency_parallelism.md",
       [
-        "supportive-oral-defense-route",
+        "supportive-oral-defense-protocol--adaptive-non-grading-and-learner-controlled",
         "123-hint-ladder",
         "level-8--transfer-to-m20-m21-and-m24",
         "study-partner-rehearsal-and-ta-handoff",
@@ -392,7 +392,7 @@ test("the M19-M24 candidate oral protocols keep their reader-visible repair anch
     [
       "20_networks_application_protocols.md",
       [
-        "supportive-oral-defense-route",
+        "supportive-oral-defense-protocol--adaptive-non-grading-and-learner-controlled",
         "session-6-oral-defense",
         "123-hint-ladder",
         "level-8--transfer-without-overclaiming",
@@ -3061,7 +3061,7 @@ test("renders the probability, statistics, and scientific-inference workbook and
   assert.match(html, /M30 working invariant/);
   assert.match(html, /Hoeffding/);
   assert.match(html, /Common distributions and the multivariate-Gaussian bridge/);
-  assert.match(html, /countable additivity\s+over pairwise disjoint events/);
+  assert.match(html, /pairwise disjoint.*countable additivity/isu);
   assert.match(html, /bivariate_normal_affine_report/);
   assert.match(html, /unique boundary mode/);
   assert.match(html, /Uncertainty &amp; Inference Evidence Dossier/);
