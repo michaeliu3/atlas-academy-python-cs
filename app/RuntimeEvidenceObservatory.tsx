@@ -759,7 +759,14 @@ export function RuntimeEvidenceObservatory() {
         <div>
           <span>Exploration coverage: revealed runtime-evidence views</span>
           <strong>{revealed} / {views.length}</strong>
-          <div className={styles.coverageMeter} aria-label={"Exploration coverage: revealed runtime-evidence views " + revealed + " of " + views.length}>
+          <div
+            aria-label={"Exploration coverage: revealed runtime-evidence views " + revealed + " of " + views.length}
+            aria-valuemax={views.length}
+            aria-valuemin={0}
+            aria-valuenow={revealed}
+            className={styles.coverageMeter}
+            role="progressbar"
+          >
             <span style={{ width: (revealed / views.length) * 100 + "%" }} />
           </div>
         </div>

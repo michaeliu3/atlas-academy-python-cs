@@ -591,7 +591,7 @@ binary.” It is:
 
 A Boolean function maps current inputs to current outputs. For two input bits:
 
-| \(a\) | \(b\) | \(a \land b\) | \(a \lor b\) | \(a \oplus b\) |
+| input a (\(a\)) | input b (\(b\)) | AND output (\(a \land b\)) | OR output (\(a \lor b\)) | XOR output (\(a \oplus b\)) |
 |---:|---:|---:|---:|---:|
 | 0 | 0 | 0 | 0 | 0 |
 | 0 | 1 | 0 | 1 | 1 |
@@ -1900,7 +1900,7 @@ cause. A professionally useful outcome can be:
 
 Use a \(2\times2\) design:
 
-| | sequential order | permuted order |
+| factor | sequential order | permuted order |
 |---|---|---|
 | explicit Python loop | vector A | vector B |
 | gathered/alternative implementation | vector C | vector D |

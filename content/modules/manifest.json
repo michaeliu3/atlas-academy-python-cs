@@ -711,10 +711,10 @@
       "title": "Computer Architecture and the Execution Stack",
       "summary": "Arc IV: machine, operating system, and network — from durable Atlas values to bounded explanations of how work becomes state change A Python operation is not a single machine action. It is a semantic request realized through several cont…",
       "arcId": "arc-iv",
-      "wordCount": 21995,
+      "wordCount": 22006,
       "estimatedMinutes": 96,
       "focusedStudyMinutes": null,
-      "sourceHash": "a1d57af651d91b96a358c52ef6a93d1787d6aa25341665d2ec5ac9d7394cd326",
+      "sourceHash": "7908f59a51d3eeb7854d3958220f09e1d42b078d0f1ffda29ea2f84e073602a3",
       "id": "m17",
       "state": {
         "lifecycle": "learner-material-ready",
