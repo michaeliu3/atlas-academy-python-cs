@@ -522,11 +522,15 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "32b971d6bbf6a1266f67011484cc6a5ecd24ca993747ee0b519cfbc18ab573d2"
+      "sha256": "e148136671a007885c2fb77be856e834b5cef3f20f8466300f1c0802ceca1716"
     },
     {
       "path": "content/course/goal-compliance.v1.json",
       "sha256": "4e35df9c857427f997a4c6f068cd96009324c06cadf4f158609d9758ead091c6"
+    },
+    {
+      "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
+      "sha256": "ab2d9c6b950a2f0901b2a07b2cb3b35b3d2b02c383b932bd72b455a6b3609b54"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",

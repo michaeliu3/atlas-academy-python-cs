@@ -7,7 +7,11 @@ import {
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
 } from "./advanced-module-contract.mjs";
-import { loadCourseGraph, validateCourseGraph } from "./course-graph.mjs";
+import {
+  inventoryCrosswalkRelativePath,
+  loadCourseGraph,
+  validateCourseGraph,
+} from "./course-graph.mjs";
 import {
   combineModuleContractPacketReports,
   loadLegacyModuleContractPacketRegistry,
@@ -212,6 +216,7 @@ export async function validateCourseContracts(
   let provenanceSourceReady = false;
   const releaseInputPaths = new Set([
     courseGraphPathFor(validationSiteRoot),
+    resolve(validationSiteRoot, inventoryCrosswalkRelativePath),
     resolve(validationSiteRoot, "content", "course", "goal-compliance.v1.json"),
     synthesisPreviewConversationsPathFor(validationSiteRoot),
     performanceBudgetPolicyPathFor(validationSiteRoot),

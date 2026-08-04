@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,6 +6,9 @@ import { fileURLToPath } from "node:url";
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
+export const inventoryCrosswalkRelativePath =
+  "content/course/levels-1-9-inventory-crosswalk.v1.json";
+const inventoryCrosswalkPath = resolve(siteRoot, inventoryCrosswalkRelativePath);
 
 const expectedAvailabilityStates = new Set([
   "legacy-open",
@@ -328,6 +331,127 @@ function validateModuleState(courseModule) {
   }
 }
 
+export function loadScopeInventoryCrosswalk() {
+  return JSON.parse(readFileSync(inventoryCrosswalkPath, "utf8"));
+}
+
+export function validateScopeInventoryCrosswalk(crosswalk, scopeMatrix) {
+  assertExactKeys(
+    crosswalk,
+    ["schemaVersion", "kind", "benchmarkId", "sourceDigest", "sourceTargetCount", "atomicItems"],
+    "Levels 1–9 inventory crosswalk",
+  );
+  if (crosswalk.schemaVersion !== 1 || crosswalk.kind !== "atlas-levels-1-to-9-inventory-crosswalk") {
+    fail("Levels 1–9 inventory crosswalk must use schemaVersion 1 and its canonical kind.");
+  }
+  if (crosswalk.benchmarkId !== scopeMatrix.benchmark.id) {
+    fail("Levels 1–9 inventory crosswalk benchmarkId must match the canonical Scope Matrix benchmark.");
+  }
+  if (crosswalk.sourceDigest !== scopeMatrix.benchmark.sourceDigest) {
+    fail("Levels 1–9 inventory crosswalk sourceDigest must match the canonical Scope Matrix benchmark.");
+  }
+  if (crosswalk.sourceTargetCount !== expectedAtomicInventoryItemCount) {
+    fail(
+      `Levels 1–9 inventory crosswalk sourceTargetCount must be ${expectedAtomicInventoryItemCount}.`,
+    );
+  }
+  if (
+    !Array.isArray(crosswalk.atomicItems) ||
+    crosswalk.atomicItems.length !== crosswalk.sourceTargetCount
+  ) {
+    fail("Levels 1–9 inventory crosswalk atomicItems must match sourceTargetCount.");
+  }
+
+  const benchmarkItemsById = new Map(scopeMatrix.benchmark.items.map((item) => [item.id, item]));
+  const declaredSourceLines = new Map();
+  for (const sourceList of scopeMatrix.benchmark.sourceLists) {
+    for (let sourceLine = sourceList.sourceLineStart; sourceLine <= sourceList.sourceLineEnd; sourceLine += 1) {
+      declaredSourceLines.set(sourceLine, sourceList.sectionId);
+    }
+  }
+  const topicsById = new Map(scopeMatrix.topics.map((topic) => [topic.id, topic]));
+  const mappedTopicIds = new Set();
+  const atomicSourceLines = new Set();
+  const atomicTopicIdsBySection = new Map();
+  for (const atomicItem of crosswalk.atomicItems) {
+    assertExactKeys(
+      atomicItem,
+      ["sourceLine", "sectionId", "label", "scopeTopicIds"],
+      "Levels 1–9 inventory crosswalk atomic item",
+    );
+    if (!Number.isInteger(atomicItem.sourceLine) || atomicItem.sourceLine < 1) {
+      fail("scopeMatrix benchmark atomic item needs a positive integer sourceLine.");
+    }
+    if (atomicSourceLines.has(atomicItem.sourceLine)) {
+      fail(`scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} is duplicated.`);
+    }
+    atomicSourceLines.add(atomicItem.sourceLine);
+    const declaredSectionId = declaredSourceLines.get(atomicItem.sourceLine);
+    if (!declaredSectionId) {
+      fail(`scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} is not declared by a source list.`);
+    }
+    assertString(atomicItem.sectionId, "scopeMatrix benchmark atomic item sectionId");
+    if (atomicItem.sectionId !== declaredSectionId) {
+      fail(
+        `scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} must remain in section ${declaredSectionId}.`,
+      );
+    }
+    assertString(atomicItem.label, `scopeMatrix benchmark atomic item ${atomicItem.sourceLine} label`);
+    if (!Array.isArray(atomicItem.scopeTopicIds) || atomicItem.scopeTopicIds.length === 0) {
+      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} needs mapped Scope Matrix topics.`);
+    }
+    if (new Set(atomicItem.scopeTopicIds).size !== atomicItem.scopeTopicIds.length) {
+      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} repeats a mapped Scope Matrix topic.`);
+    }
+    const item = benchmarkItemsById.get(atomicItem.sectionId);
+    if (!item) {
+      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} references an unknown section.`);
+    }
+    const sectionTopicIds = atomicTopicIdsBySection.get(item.id) ?? new Set();
+    for (const topicId of atomicItem.scopeTopicIds) {
+      const topic = topicsById.get(topicId);
+      if (!topic) {
+        fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} references missing Scope Matrix topic ${topicId}.`);
+      }
+      if (topic.level !== item.level) {
+        fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} must map only Level ${item.level} Scope Matrix topics.`);
+      }
+      mappedTopicIds.add(topicId);
+      sectionTopicIds.add(topicId);
+    }
+    atomicTopicIdsBySection.set(item.id, sectionTopicIds);
+  }
+  if (atomicSourceLines.size !== declaredSourceLines.size) {
+    fail("scopeMatrix benchmark must index every declared atomic source line exactly once.");
+  }
+  for (const sourceLine of declaredSourceLines.keys()) {
+    if (!atomicSourceLines.has(sourceLine)) {
+      fail(`scopeMatrix benchmark source line ${sourceLine} is missing its atomic crosswalk.`);
+    }
+  }
+  for (const item of benchmarkItemsById.values()) {
+    const declaredTopicIds = [...item.scopeTopicIds].sort();
+    const derivedTopicIds = [...(atomicTopicIdsBySection.get(item.id) ?? new Set())].sort();
+    if (
+      declaredTopicIds.length !== derivedTopicIds.length ||
+      declaredTopicIds.some((topicId, index) => topicId !== derivedTopicIds[index])
+    ) {
+      fail(`scopeMatrix benchmark item ${item.id} must match its derived atomic topic rollup.`);
+    }
+  }
+  for (const topic of scopeMatrix.topics) {
+    if (topic.scope === "explicitly-deferred") {
+      if (mappedTopicIds.has(topic.id)) {
+        fail(`explicitly deferred Scope Matrix topic ${topic.id} must remain an Atlas boundary, not an inventory-coverage claim.`);
+      }
+      continue;
+    }
+    if (!mappedTopicIds.has(topic.id)) {
+      fail(`Scope Matrix topic ${topic.id} is missing a learner-inventory crosswalk.`);
+    }
+  }
+}
+
 function validateScopeMatrix(scopeMatrix, moduleById) {
   assertExactKeys(
     scopeMatrix,
@@ -345,10 +469,9 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
       "accessedOn",
       "sourceDigest",
       "sourceBoundary",
+      "inventoryCrosswalkPath",
       "items",
       "sourceLists",
-      "atomicItemCount",
-      "atomicItems",
     ],
     "scopeMatrix benchmark",
   );
@@ -361,6 +484,11 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     fail("scopeMatrix benchmark sourceDigest must be a lowercase sha256 digest.");
   }
   assertString(scopeMatrix.benchmark.sourceBoundary, "scopeMatrix benchmark sourceBoundary");
+  if (scopeMatrix.benchmark.inventoryCrosswalkPath !== inventoryCrosswalkRelativePath) {
+    fail(
+      `scopeMatrix benchmark inventoryCrosswalkPath must be ${inventoryCrosswalkRelativePath}.`,
+    );
+  }
   if (!Array.isArray(scopeMatrix.benchmark.items) || scopeMatrix.benchmark.items.length === 0) {
     fail("scopeMatrix benchmark must define source-inventory items.");
   }
@@ -389,11 +517,6 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     for (const topicId of item.scopeTopicIds) {
       assertString(topicId, `scopeMatrix benchmark item ${item.id} mapped topic`);
     }
-  }
-  if (scopeMatrix.benchmark.atomicItemCount !== expectedAtomicInventoryItemCount) {
-    fail(
-      `scopeMatrix benchmark atomicItemCount must be ${expectedAtomicInventoryItemCount} for its pinned inventory digest.`,
-    );
   }
   if (!Array.isArray(scopeMatrix.benchmark.sourceLists) || scopeMatrix.benchmark.sourceLists.length !== 25) {
     fail("scopeMatrix benchmark must define its 25 source target lists.");
@@ -431,12 +554,6 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     fail(
       `scopeMatrix benchmark source lists must declare exactly ${expectedAtomicInventoryItemCount} atomic source lines.`,
     );
-  }
-  if (
-    !Array.isArray(scopeMatrix.benchmark.atomicItems) ||
-    scopeMatrix.benchmark.atomicItems.length !== scopeMatrix.benchmark.atomicItemCount
-  ) {
-    fail("scopeMatrix benchmark atomicItems must match atomicItemCount.");
   }
   for (let level = 1; level <= 9; level += 1) {
     if (!benchmarkLevels.has(level)) {
@@ -527,7 +644,6 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     fail("scopeMatrix must map benchmark topics.");
   }
   const topicIds = new Set();
-  const topicsById = new Map();
   const levels = new Set();
   const scopes = new Set();
   for (const topic of scopeMatrix.topics) {
@@ -551,7 +667,6 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
       fail(`scopeMatrix topic ${topic.id} is duplicated.`);
     }
     topicIds.add(topic.id);
-    topicsById.set(topic.id, topic);
     if (!Number.isInteger(topic.level) || topic.level < 1 || topic.level > 9) {
       fail(`scopeMatrix topic ${topic.id} level must be an integer from 1 through 9.`);
     }
@@ -629,83 +744,7 @@ function validateScopeMatrix(scopeMatrix, moduleById) {
     }
   }
 
-  const mappedTopicIds = new Set();
-  const atomicSourceLines = new Set();
-  const atomicTopicIdsBySection = new Map();
-  for (const atomicItem of scopeMatrix.benchmark.atomicItems) {
-    assertExactKeys(
-      atomicItem,
-      ["sourceLine", "sectionId", "label", "scopeTopicIds"],
-      "scopeMatrix benchmark atomic item",
-    );
-    if (!Number.isInteger(atomicItem.sourceLine) || atomicItem.sourceLine < 1) {
-      fail("scopeMatrix benchmark atomic item needs a positive integer sourceLine.");
-    }
-    if (atomicSourceLines.has(atomicItem.sourceLine)) {
-      fail(`scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} is duplicated.`);
-    }
-    atomicSourceLines.add(atomicItem.sourceLine);
-    const declaredSectionId = declaredSourceLines.get(atomicItem.sourceLine);
-    if (!declaredSectionId) {
-      fail(`scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} is not declared by a source list.`);
-    }
-    assertString(atomicItem.sectionId, "scopeMatrix benchmark atomic item sectionId");
-    if (atomicItem.sectionId !== declaredSectionId) {
-      fail(
-        `scopeMatrix benchmark atomic source line ${atomicItem.sourceLine} must remain in section ${declaredSectionId}.`,
-      );
-    }
-    assertString(atomicItem.label, `scopeMatrix benchmark atomic item ${atomicItem.sourceLine} label`);
-    if (!Array.isArray(atomicItem.scopeTopicIds) || atomicItem.scopeTopicIds.length === 0) {
-      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} needs mapped Scope Matrix topics.`);
-    }
-    if (new Set(atomicItem.scopeTopicIds).size !== atomicItem.scopeTopicIds.length) {
-      fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} repeats a mapped Scope Matrix topic.`);
-    }
-    const item = benchmarkItemsById.get(atomicItem.sectionId);
-    const sectionTopicIds = atomicTopicIdsBySection.get(item.id) ?? new Set();
-    for (const topicId of atomicItem.scopeTopicIds) {
-      const topic = topicsById.get(topicId);
-      if (!topic) {
-        fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} references missing Scope Matrix topic ${topicId}.`);
-      }
-      if (topic.level !== item.level) {
-        fail(`scopeMatrix benchmark atomic item ${atomicItem.sourceLine} must map only Level ${item.level} Scope Matrix topics.`);
-      }
-      mappedTopicIds.add(topicId);
-      sectionTopicIds.add(topicId);
-    }
-    atomicTopicIdsBySection.set(item.id, sectionTopicIds);
-  }
-  if (atomicSourceLines.size !== declaredSourceLines.size) {
-    fail("scopeMatrix benchmark must index every declared atomic source line exactly once.");
-  }
-  for (const sourceLine of declaredSourceLines.keys()) {
-    if (!atomicSourceLines.has(sourceLine)) {
-      fail(`scopeMatrix benchmark source line ${sourceLine} is missing its atomic crosswalk.`);
-    }
-  }
-  for (const item of benchmarkItemsById.values()) {
-    const declaredTopicIds = [...item.scopeTopicIds].sort();
-    const derivedTopicIds = [...(atomicTopicIdsBySection.get(item.id) ?? new Set())].sort();
-    if (
-      declaredTopicIds.length !== derivedTopicIds.length ||
-      declaredTopicIds.some((topicId, index) => topicId !== derivedTopicIds[index])
-    ) {
-      fail(`scopeMatrix benchmark item ${item.id} must match its derived atomic topic rollup.`);
-    }
-  }
-  for (const topic of scopeMatrix.topics) {
-    if (topic.scope === "explicitly-deferred") {
-      if (mappedTopicIds.has(topic.id)) {
-        fail(`explicitly deferred Scope Matrix topic ${topic.id} must remain an Atlas boundary, not an inventory-coverage claim.`);
-      }
-      continue;
-    }
-    if (!mappedTopicIds.has(topic.id)) {
-      fail(`Scope Matrix topic ${topic.id} is missing a learner-inventory crosswalk.`);
-    }
-  }
+  validateScopeInventoryCrosswalk(loadScopeInventoryCrosswalk(), scopeMatrix);
 }
 
 export function resolveLearnerAccess(courseModule) {

@@ -3,8 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   loadCourseGraph,
+  loadScopeInventoryCrosswalk,
   projectReaderModules,
   resolveLearnerAccess,
+  validateScopeInventoryCrosswalk,
   validateCourseGraph,
 } from "../scripts/course-graph.mjs";
 
@@ -226,6 +228,10 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
     matrix.benchmark.sourceDigest,
     "sha256:1d8aa72a7084cc46a351a21be3c2e1e2dbf7ede24414d3eca50e25697cf701a2",
   );
+  assert.equal(
+    matrix.benchmark.inventoryCrosswalkPath,
+    "content/course/levels-1-9-inventory-crosswalk.v1.json",
+  );
   assert.deepEqual(
     matrix.benchmark.items.map(({ id }) => id),
     [
@@ -256,11 +262,12 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
     ],
     "the full learner-supplied Levels 1–9 heading index remains present in the canonical crosswalk",
   );
-  assert.equal(matrix.benchmark.atomicItemCount, 362);
-  assert.equal(matrix.benchmark.atomicItems.length, 362);
+  const crosswalk = await loadScopeInventoryCrosswalk();
+  assert.equal(crosswalk.sourceTargetCount, 362);
+  assert.equal(crosswalk.atomicItems.length, 362);
   assert.equal(matrix.benchmark.sourceLists.length, 25);
   assert.deepEqual(
-    [...new Set(matrix.benchmark.atomicItems.map(({ sourceLine }) => sourceLine))].length,
+    [...new Set(crosswalk.atomicItems.map(({ sourceLine }) => sourceLine))].length,
     362,
     "every pinned source target line is represented exactly once",
   );
@@ -272,23 +279,23 @@ test("the canonical Scope Matrix maps every calibration level without turning a 
     "the explicit Level-2 AI-research additions remain visible rather than being silently dropped",
   );
   assert.deepEqual(
-    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 71)?.scopeTopicIds,
+    crosswalk.atomicItems.find(({ sourceLine }) => sourceLine === 71)?.scopeTopicIds,
     ["l1.analysis.interchange-and-measure"],
   );
   assert.deepEqual(
-    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 124)?.scopeTopicIds,
+    crosswalk.atomicItems.find(({ sourceLine }) => sourceLine === 124)?.scopeTopicIds,
     ["l1.statistics.robust-high-dimensional"],
   );
   assert.deepEqual(
-    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 228)?.scopeTopicIds,
+    crosswalk.atomicItems.find(({ sourceLine }) => sourceLine === 228)?.scopeTopicIds,
     ["l2.dsa.graphs-and-paradigms", "l2.dsa.advanced-analysis"],
   );
   assert.deepEqual(
-    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 250)?.scopeTopicIds,
+    crosswalk.atomicItems.find(({ sourceLine }) => sourceLine === 250)?.scopeTopicIds,
     ["l2.theory.formal-foundations", "l2.theory.advanced-complexity"],
   );
   assert.deepEqual(
-    matrix.benchmark.atomicItems.find(({ sourceLine }) => sourceLine === 272)?.scopeTopicIds,
+    crosswalk.atomicItems.find(({ sourceLine }) => sourceLine === 272)?.scopeTopicIds,
     ["l2.systems-data-distributed"],
   );
   assert.equal(matrix.topics.length, 63);
@@ -362,30 +369,31 @@ test("the graph rejects Scope Matrix gaps and fabricated post-core routes", asyn
     /scopeMatrix topic l1\.proofs\.logic-relations anchor m04 sessions must be 1 through 6/u,
   );
 
-  const missingInventoryCrosswalk = structuredClone(graph);
-  missingInventoryCrosswalk.scopeMatrix.benchmark.atomicItems
+  const crosswalk = await loadScopeInventoryCrosswalk();
+  const missingInventoryCrosswalk = structuredClone(crosswalk);
+  missingInventoryCrosswalk.atomicItems
     .find(({ sourceLine }) => sourceLine === 9)
     .scopeTopicIds = [];
   assert.throws(
-    () => validateCourseGraph(missingInventoryCrosswalk),
+    () => validateScopeInventoryCrosswalk(missingInventoryCrosswalk, graph.scopeMatrix),
     /scopeMatrix benchmark atomic item 9 needs mapped Scope Matrix topics/u,
   );
 
-  const crossLevelInventoryClaim = structuredClone(graph);
-  crossLevelInventoryClaim.scopeMatrix.benchmark.atomicItems
+  const crossLevelInventoryClaim = structuredClone(crosswalk);
+  crossLevelInventoryClaim.atomicItems
     .find(({ sourceLine }) => sourceLine === 9)
     .scopeTopicIds = ["l2.dsa.structures"];
   assert.throws(
-    () => validateCourseGraph(crossLevelInventoryClaim),
+    () => validateScopeInventoryCrosswalk(crossLevelInventoryClaim, graph.scopeMatrix),
     /scopeMatrix benchmark atomic item 9 must map only Level 1 Scope Matrix topics/u,
   );
 
-  const duplicateAtomicSourceLine = structuredClone(graph);
-  duplicateAtomicSourceLine.scopeMatrix.benchmark.atomicItems
+  const duplicateAtomicSourceLine = structuredClone(crosswalk);
+  duplicateAtomicSourceLine.atomicItems
     .find(({ sourceLine }) => sourceLine === 10)
     .sourceLine = 9;
   assert.throws(
-    () => validateCourseGraph(duplicateAtomicSourceLine),
+    () => validateScopeInventoryCrosswalk(duplicateAtomicSourceLine, graph.scopeMatrix),
     /scopeMatrix benchmark atomic source line 9 is duplicated/u,
   );
 

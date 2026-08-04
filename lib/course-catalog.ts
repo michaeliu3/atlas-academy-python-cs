@@ -1,4 +1,5 @@
 import courseGraphData from "@/content/course/course-graph.v2.json";
+import scopeInventoryCrosswalkData from "@/content/course/levels-1-9-inventory-crosswalk.v1.json";
 import type { ModuleStudioId } from "./module-studio-registry";
 
 export type CourseLifecycle = "learner-material-ready" | "authoring-only";
@@ -105,6 +106,15 @@ export type ScopeMatrixBenchmarkAtomicItem = {
   scopeTopicIds: string[];
 };
 
+export type ScopeInventoryCrosswalk = {
+  schemaVersion: 1;
+  kind: "atlas-levels-1-to-9-inventory-crosswalk";
+  benchmarkId: string;
+  sourceDigest: string;
+  sourceTargetCount: number;
+  atomicItems: ScopeMatrixBenchmarkAtomicItem[];
+};
+
 export type CourseScopeMatrix = {
   schemaVersion: 4;
   benchmark: {
@@ -113,10 +123,9 @@ export type CourseScopeMatrix = {
     accessedOn: string;
     sourceDigest: string;
     sourceBoundary: string;
+    inventoryCrosswalkPath: string;
     items: ScopeMatrixBenchmarkItem[];
     sourceLists: ScopeMatrixBenchmarkSourceList[];
-    atomicItemCount: number;
-    atomicItems: ScopeMatrixBenchmarkAtomicItem[];
   };
   scopeStates: ScopeMatrixState[];
   capabilities: ScopeMatrixCapability[];
@@ -220,6 +229,8 @@ type CourseGraph = {
 
 export const courseCatalog = courseGraphData as CourseGraph;
 export const courseScopeMatrix = courseCatalog.scopeMatrix;
+export const scopeInventoryCrosswalk =
+  scopeInventoryCrosswalkData as ScopeInventoryCrosswalk;
 
 const primaryRoutePlan = courseCatalog.routePlans.find(
   ({ id }) => id === "atlas-core-60",

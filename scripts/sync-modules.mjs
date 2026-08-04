@@ -14,7 +14,11 @@ import {
   loadAdvancedModuleContractRegistry,
   validateAdvancedModuleContractRegistry,
 } from "./advanced-module-contract.mjs";
-import { loadCourseGraph, projectReaderModules } from "./course-graph.mjs";
+import {
+  inventoryCrosswalkRelativePath,
+  loadCourseGraph,
+  projectReaderModules,
+} from "./course-graph.mjs";
 import {
   legacyModuleContractAuditRelativePath,
   loadLegacyModuleContractAudit,
@@ -87,6 +91,7 @@ const m26PreviewReferencePaths = [
   resolve(siteRoot, "content", "course", "reference-models", "test_module26_reference.py"),
 ];
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
+const inventoryCrosswalkPath = resolve(siteRoot, inventoryCrosswalkRelativePath);
 const synthesisPreviewConversationsPath = resolve(
   siteRoot,
   "content",
@@ -309,6 +314,7 @@ const legacyCandidatePreflightProfilesReport = await validateLegacyCandidatePref
 );
 const releaseInputPaths = new Set([
   graphPath,
+  inventoryCrosswalkPath,
   goalComplianceSourcePath,
   synthesisPreviewConversationsPath,
   performanceBudgetPolicyPath,

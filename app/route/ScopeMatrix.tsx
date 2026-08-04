@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   courseCatalog,
   courseScopeMatrix,
+  scopeInventoryCrosswalk,
   type CourseAvailability,
   type ScopeMatrixState,
   type ScopeMatrixTopic,
@@ -183,9 +184,9 @@ export function ScopeMatrix() {
   }
   const atomicItemsBySection = new Map<
     string,
-    typeof courseScopeMatrix.benchmark.atomicItems
+    typeof scopeInventoryCrosswalk.atomicItems
   >();
-  for (const atomicItem of courseScopeMatrix.benchmark.atomicItems) {
+  for (const atomicItem of scopeInventoryCrosswalk.atomicItems) {
     const items = atomicItemsBySection.get(atomicItem.sectionId) ?? [];
     items.push(atomicItem);
     atomicItemsBySection.set(atomicItem.sectionId, items);
