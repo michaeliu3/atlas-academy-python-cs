@@ -1,13 +1,55 @@
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { isAbsolute, relative } from "node:path";
+import { isAbsolute, relative, resolve } from "node:path";
 import { realpath } from "node:fs/promises";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 const snapshotMetadata = new WeakMap();
+// readGitIndexText is the compatibility path used by high-volume structural
+// validators. Capturing the complete index for every one-path read turns a
+// deterministic check into hundreds of Git child processes. Cache only the
+// immutable snapshot object; each read still calls assertClean for its path,
+// and a stale-generation/path miss below evicts and recaptures it.
+const readSnapshotCache = new Map();
 
 export const defaultMaximumGitIndexTextBytes = 2 * 1024 * 1024;
+
+function snapshotCacheKey(siteRoot, maximumTextBytes) {
+  return `${resolve(siteRoot)}\u0000${maximumTextBytes}`;
+}
+
+/**
+ * Share one immutable snapshot across high-volume validators in a test worker.
+ * This is opt-in from scripts/run-course-tests.mjs; direct callers retain the
+ * historical fresh-snapshot behavior unless they explicitly enable the cache.
+ */
+export async function openCachedGitIndexSnapshot(
+  siteRoot,
+  options = {},
+) {
+  if (process.env.ATLAS_GIT_INDEX_SNAPSHOT_CACHE !== "1") {
+    return openGitIndexSnapshot(siteRoot, options);
+  }
+  const maximumTextBytes = options.maximumTextBytes ?? defaultMaximumGitIndexTextBytes;
+  const cacheKey = snapshotCacheKey(siteRoot, maximumTextBytes);
+  let snapshotPromise = readSnapshotCache.get(cacheKey);
+  if (!snapshotPromise) {
+    snapshotPromise = openGitIndexSnapshot(siteRoot, options);
+    readSnapshotCache.set(cacheKey, snapshotPromise);
+    snapshotPromise.catch(() => {
+      if (readSnapshotCache.get(cacheKey) === snapshotPromise) {
+        readSnapshotCache.delete(cacheKey);
+      }
+    });
+  }
+  return snapshotPromise;
+}
+
+export function invalidateCachedGitIndexSnapshot(siteRoot, options = {}) {
+  const maximumTextBytes = options.maximumTextBytes ?? defaultMaximumGitIndexTextBytes;
+  readSnapshotCache.delete(snapshotCacheKey(siteRoot, maximumTextBytes));
+}
 
 export class GitIndexSnapshotError extends Error {
   constructor(code, message, { cause = undefined } = {}) {
@@ -217,6 +259,17 @@ function stageZeroRecord(entriesByPath, repositoryPath) {
 
 async function assertWorktreeMatchesIndex(siteRoot, repositoryPath, { wholeIndex = false } = {}) {
   const paths = Array.isArray(repositoryPath) ? repositoryPath : [repositoryPath];
+  // A large pathspec list is disproportionately expensive on Windows. Ask Git
+  // for changed tracked paths once, then intersect in memory. Unrelated dirty
+  // files remain outside the clean boundary.
+  if (!wholeIndex && paths.length > 32) {
+    const changed = await gitBuffer(siteRoot, ["diff", "--name-only", "--no-ext-diff", "-z"]);
+    const changedPaths = new Set(changed.toString("utf8").split("\0").filter(Boolean));
+    if (paths.some((path) => changedPaths.has(path))) {
+      fail("WORKTREE_DIVERGED", "Worktree content differs from the captured Git-index input set.");
+    }
+    return;
+  }
   const command = wholeIndex
     ? ["diff", "--quiet", "--no-ext-diff"]
     : ["diff", "--quiet", "--no-ext-diff", "--", ...paths.map(literalPathspec)];
@@ -336,11 +389,22 @@ export async function openGitIndexSnapshot(
   });
   const indexEntries = parseIndexEntries(capturedIndexStage, { includeWorktreeStatus: true });
   const capturedRepositoryPaths = Object.freeze([...indexEntries.keys()].sort());
+  const textCache = new Map();
 
   const readText = async (repositoryPath) => {
     const normalizedPath = normalizedRepositoryPath(repositoryPath);
     const entry = stageZeroRecord(indexEntries, normalizedPath);
-    return blobText(repositoryRoot, normalizedPath, entry, maximumTextBytes);
+    let recordPromise = textCache.get(normalizedPath);
+    if (!recordPromise) {
+      recordPromise = blobText(repositoryRoot, normalizedPath, entry, maximumTextBytes);
+      textCache.set(normalizedPath, recordPromise);
+      recordPromise.catch(() => {
+        if (textCache.get(normalizedPath) === recordPromise) {
+          textCache.delete(normalizedPath);
+        }
+      });
+    }
+    return recordPromise;
   };
   const readJson = async (repositoryPath) => {
     const record = await readText(repositoryPath);
@@ -407,7 +471,29 @@ export async function openGitIndexSnapshot(
  * before reading, so later index mutations cannot mix generations.
  */
 export async function readGitIndexText(siteRoot, repositoryPath, options = {}) {
-  const snapshot = await openGitIndexSnapshot(siteRoot, options);
-  await snapshot.assertClean([repositoryPath]);
-  return snapshot.readText(repositoryPath);
+  if (process.env.ATLAS_GIT_INDEX_SNAPSHOT_CACHE !== "1") {
+    const snapshot = await openGitIndexSnapshot(siteRoot, options);
+    await snapshot.assertClean([repositoryPath]);
+    return snapshot.readText(repositoryPath);
+  }
+  const maximumTextBytes = options.maximumTextBytes ?? defaultMaximumGitIndexTextBytes;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const snapshotPromise = openCachedGitIndexSnapshot(siteRoot, options);
+    const snapshot = await snapshotPromise;
+    try {
+      await snapshot.assertClean([repositoryPath]);
+      return snapshot.readText(repositoryPath);
+    } catch (error) {
+      // The old one-shot helper captured a fresh index on every call. Preserve
+      // that behavior when a cached generation is no longer usable, while
+      // never retrying worktree/encoding/size failures that should remain
+      // visible to the caller.
+      const refreshable =
+        error instanceof GitIndexSnapshotError &&
+        ["INDEX_SNAPSHOT_STALE", "INDEX_ENTRY_MISSING", "INDEX_ENTRY_UNMERGED", "INDEX_ENTRY_NOT_REGULAR"].includes(error.code);
+      if (!refreshable || attempt === 1) throw error;
+      invalidateCachedGitIndexSnapshot(siteRoot, options);
+    }
+  }
+  throw new GitIndexSnapshotError("GIT_COMMAND_FAILED", "Git-index text read did not produce a snapshot.");
 }

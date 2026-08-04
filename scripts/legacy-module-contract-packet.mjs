@@ -144,7 +144,16 @@ function normalizedAnchor(value, label, errors) {
   return value;
 }
 
-async function requireTrackedRegularFile(siteRoot, repositoryPath, label, errors) {
+async function loadTrackedPaths(siteRoot) {
+  const { stdout } = await execFileAsync("git", ["ls-files", "-z"], {
+    cwd: siteRoot,
+    env: isolatedGitEnvironment(),
+    encoding: "utf8",
+  });
+  return new Set(stdout.split("\0").filter(Boolean));
+}
+
+async function requireTrackedRegularFile(siteRoot, repositoryPath, label, errors, trackedPaths) {
   const absolutePath = resolve(siteRoot, repositoryPath);
   if (relative(siteRoot, absolutePath).replaceAll("\\", "/") !== repositoryPath) {
     errors.push(`${label} resolves outside the repository.`);
@@ -155,22 +164,16 @@ async function requireTrackedRegularFile(siteRoot, repositoryPath, label, errors
     errors.push(`${label} must resolve to a regular local file.`);
     return null;
   }
-  const tracked = await execFileAsync("git", ["ls-files", "--error-unmatch", "--", repositoryPath], {
-    cwd: siteRoot,
-    env: isolatedGitEnvironment(),
-  })
-    .then(() => true)
-    .catch(() => false);
-  if (!tracked) {
+  if (!trackedPaths.has(repositoryPath)) {
     errors.push(`${label} must target a Git-tracked file.`);
     return null;
   }
   return absolutePath;
 }
 
-async function headingsFor(siteRoot, repositoryPath, cache, label, errors) {
+async function headingsFor(siteRoot, repositoryPath, cache, label, errors, trackedPaths) {
   if (cache.has(repositoryPath)) return cache.get(repositoryPath);
-  const absolutePath = await requireTrackedRegularFile(siteRoot, repositoryPath, label, errors);
+  const absolutePath = await requireTrackedRegularFile(siteRoot, repositoryPath, label, errors, trackedPaths);
   if (!absolutePath) return null;
   const ordered = extractTableOfContents(await readFile(absolutePath, "utf8"));
   const headings = {
@@ -193,7 +196,7 @@ function packetPathForSurface(entry, surface) {
   }[surface];
 }
 
-async function resolvePointer(entry, pointer, siteRoot, headingCache, errors) {
+async function resolvePointer(entry, pointer, siteRoot, headingCache, errors, trackedPaths) {
   const label = `Module ${entry?.moduleId ?? "(missing)"} packet pointer ${pointer?.id ?? "(missing)"}`;
   requireExactKeys(pointer, ["id", "roles", "label", "sessionNumber", "target"], label, errors);
   const id = hasText(pointer?.id) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(pointer.id)
@@ -229,7 +232,7 @@ async function resolvePointer(entry, pointer, siteRoot, headingCache, errors) {
     errors.push(`${label}.target.path must match its declared ${surface} path.`);
     return null;
   }
-  const headings = await headingsFor(siteRoot, path, headingCache, label, errors);
+  const headings = await headingsFor(siteRoot, path, headingCache, label, errors, trackedPaths);
   const heading = headings?.byId.get(anchor);
   if (!heading) {
     errors.push(`${label} points to #${anchor}, which is not visible in ${path}.`);
@@ -242,7 +245,7 @@ async function resolvePointer(entry, pointer, siteRoot, headingCache, errors) {
   return { ...pointer, id, target: { surface, path, headingAnchor: anchor } };
 }
 
-async function validateImplementationArtifact(entry, artifact, siteRoot, errors) {
+async function validateImplementationArtifact(entry, artifact, siteRoot, errors, trackedPaths) {
   const label = `Module ${entry?.moduleId ?? "(missing)"} implementation artifact ${artifact?.id ?? "(missing)"}`;
   requireExactKeys(artifact, ["id", "kind", "paths"], label, errors);
   if (!hasText(artifact?.id) || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(artifact.id)) {
@@ -261,20 +264,30 @@ async function validateImplementationArtifact(entry, artifact, siteRoot, errors)
       errors.push(`${label}.paths[${index}] must be a normalized repository path.`);
       continue;
     }
-    const absolutePath = await requireTrackedRegularFile(siteRoot, path, `${label}.paths[${index}]`, errors);
+    const absolutePath = await requireTrackedRegularFile(siteRoot, path, `${label}.paths[${index}]`, errors, trackedPaths);
     if (absolutePath) paths.push(absolutePath);
   }
   return paths;
 }
 
-async function validateSessionSpine(entry, courseModule, auditEntry, pointerById, workbookPath, siteRoot, headingCache, errors) {
+async function validateSessionSpine(
+  entry,
+  courseModule,
+  auditEntry,
+  pointerById,
+  workbookPath,
+  siteRoot,
+  headingCache,
+  errors,
+  trackedPaths,
+) {
   const label = `Module ${entry.moduleId} packet sessionSpine`;
   if (!Array.isArray(entry?.sessionSpine) || entry.sessionSpine.length !== 6) {
     errors.push(`${label} must declare exactly six ordered sessions.`);
     return;
   }
   const workbookHeadings = workbookPath
-    ? await headingsFor(siteRoot, workbookPath, headingCache, `${label} workbook`, errors)
+    ? await headingsFor(siteRoot, workbookPath, headingCache, `${label} workbook`, errors, trackedPaths)
     : null;
   const artifactIds = new Set();
   const expectedPrerequisites = courseModule.academicPrerequisiteNumbers.map(moduleIdForNumber);
@@ -493,11 +506,19 @@ async function validateModuleContractPacketRegistry(
   if (!Array.isArray(registry?.modules) || registry.modules.length === 0) {
     errors.push(`${registryLabel} must contain at least one non-promoting packet.`);
   }
+  let trackedPaths;
+  try {
+    trackedPaths = await loadTrackedPaths(siteRoot);
+  } catch (error) {
+    errors.push(`${registryLabel} cannot enumerate Git-tracked inputs: ${error instanceof Error ? error.message : String(error)}`);
+    packetFailure(errors, registryLabel);
+  }
   await requireTrackedRegularFile(
     siteRoot,
     relativePath,
     registryLabel,
     errors,
+    trackedPaths,
   );
 
   let audit = canonicalLegacyAudit;
@@ -568,7 +589,7 @@ async function validateModuleContractPacketRegistry(
     const addendumPath = normalizedRepositoryPath(entry.sourceAuditAddendumPath, `${label}.sourceAuditAddendumPath`, errors);
     for (const [field, path] of [["workbookPath", workbookPath], ["sourceMapPath", sourceMapPath], ["sourceAuditAddendumPath", addendumPath]]) {
       if (path) {
-        const absolutePath = await requireTrackedRegularFile(siteRoot, path, `${label}.${field}`, errors);
+        const absolutePath = await requireTrackedRegularFile(siteRoot, path, `${label}.${field}`, errors, trackedPaths);
         if (absolutePath) releaseInputPaths.add(absolutePath);
       }
     }
@@ -582,7 +603,7 @@ async function validateModuleContractPacketRegistry(
     }
     const pointerById = new Map();
     for (const pointer of entry.pointers) {
-      const resolved = await resolvePointer(entry, pointer, siteRoot, headingCache, errors);
+      const resolved = await resolvePointer(entry, pointer, siteRoot, headingCache, errors, trackedPaths);
       if (!resolved) continue;
       if (pointerById.has(resolved.id)) {
         errors.push(`${label}.pointers IDs must be unique.`);
@@ -600,6 +621,7 @@ async function validateModuleContractPacketRegistry(
       siteRoot,
       headingCache,
       errors,
+      trackedPaths,
     );
     validateCriteria(entry, auditEntry, pointerById, errors);
 
@@ -612,7 +634,7 @@ async function validateModuleContractPacketRegistry(
           errors.push(`${label}.implementationArtifacts IDs must be unique.`);
         }
         if (hasText(artifact?.id)) artifactIds.add(artifact.id);
-        const artifactPaths = await validateImplementationArtifact(entry, artifact, siteRoot, errors);
+        const artifactPaths = await validateImplementationArtifact(entry, artifact, siteRoot, errors, trackedPaths);
         if (includeImplementationArtifactsInReleaseInputs) {
           for (const artifactPath of artifactPaths) releaseInputPaths.add(artifactPath);
         }

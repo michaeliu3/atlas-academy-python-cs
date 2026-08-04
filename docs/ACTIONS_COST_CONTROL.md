@@ -51,6 +51,21 @@ cancelled after minutes of work. Draft updates now skip those full jobs.
 4. The existing concurrency group remains enabled so a superseded full gate is
    cancelled. No required branch-protection job, Python version, browser check,
    or final full verification was removed.
+5. The test runner now opts its workers into a fail-closed Git-index cache:
+   one immutable snapshot and one blob read per worker are reused, every
+   requested path still receives a clean check, and index-generation changes
+   evict the cache and recapture. Packet validation also enumerates tracked
+   paths once per validation instead of spawning one Git process per pointer.
+
+The cache changes validation setup cost only; they do not skip tests, weaken
+the provenance boundary, or change the draft/non-draft job selection.
+
+Local verification on 2026-08-04 measured the legacy packet cohort at roughly
+1.6 seconds (previously about 9.5 seconds) and a representative full course
+contract test at roughly 18 seconds (previously about 54 seconds). The entire
+82-file apparatus suite still exceeded a five-minute local bound, so that run
+is recorded as a timeout rather than a pass; the CI job retains its explicit
+20-minute bound and full test selection.
 
 This record is an operational audit, not a claim about billed dollars. GitHub
 billing-minute exports remain account-scoped and are not inferred from wall

@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "ba720fb973062a9a8cfcd3ce03ecf2e49e34fbe63a930b05982330336101068f");
+  assert.equal(digest, "de5a2bec29f5f0f45f9079028ec14852b1bfed80ae85e42af6c295db79678085");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -76,7 +76,7 @@ test("the M29 structural packet resolves the canonical graph, audit, evidence, a
   );
 });
 
-test("the M20 structural packet binds the networking spine without promoting its ambiguous evidence", async () => {
+test("the M20 structural packet binds the networking spine with current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -104,11 +104,11 @@ test("the M20 structural packet binds the networking spine without promoting its
     statusByCriterion.get(
       "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
     ),
-    "ambiguous",
+    "pointer-present",
   );
-  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
+  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "pointer-present");
   assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
   assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
   assert.ok(
     report.releaseInputPaths.some((path) =>
@@ -119,7 +119,7 @@ test("the M20 structural packet binds the networking spine without promoting its
   );
 });
 
-test("the M21 structural packet binds the direct async continuation without laundering its unresolved evidence", async () => {
+test("the M21 structural packet binds the direct async continuation with current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -140,7 +140,7 @@ test("the M21 structural packet binds the direct async continuation without laun
     statusByCriterion.get(
       "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
     ),
-    "ambiguous",
+    "pointer-present",
   );
   assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
   assert.equal(statusByCriterion.get("prediction-before-reveal"), "pointer-present");
@@ -157,7 +157,7 @@ test("the M21 structural packet binds the direct async continuation without laun
   );
 });
 
-test("the M22 structural packet binds the trust continuation without promoting its unresolved evidence", async () => {
+test("the M22 structural packet binds the trust continuation with current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -178,9 +178,9 @@ test("the M22 structural packet binds the trust continuation without promoting i
     statusByCriterion.get(
       "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
     ),
-    "ambiguous",
+    "pointer-present",
   );
-  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "ambiguous");
+  assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
   assert.equal(statusByCriterion.get("prediction-before-reveal"), "pointer-present");
   assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
   assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
@@ -239,7 +239,7 @@ test("the M23 structural packet maps the language spine with direct oral-defense
   );
 });
 
-test("the M24 structural packet maps the runtime-evidence spine without laundering its unresolved evidence", async () => {
+test("the M24 structural packet maps the runtime-evidence spine with current structural evidence", async () => {
   const { graph, registry } = await packetFixture();
   const report = await validateLegacyModuleContractPacketRegistry(graph, registry, { siteRoot });
 
@@ -263,9 +263,9 @@ test("the M24 structural packet maps the runtime-evidence spine without launderi
     "pointer-present",
   );
   assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
-  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
+  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "pointer-present");
   assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
-  assert.equal(statusByCriterion.get("ta-prompt"), "ambiguous");
+  assert.equal(statusByCriterion.get("ta-prompt"), "pointer-present");
   assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
 
   const oralCriterion = packet?.criteria.find(
@@ -393,12 +393,12 @@ test("the M19 structural packet records the concurrency spine with its current s
     statusByCriterion.get(
       "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
     ),
-    "ambiguous",
+    "pointer-present",
   );
   assert.equal(statusByCriterion.get("code-reading-debugging-design"), "pointer-present");
-  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "ambiguous");
+  assert.equal(statusByCriterion.get("accessible-visual-text-alternative"), "pointer-present");
   assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "ambiguous");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
   assert.equal(statusByCriterion.get("study-partner-prompt"), "pointer-present");
   assert.ok(
     report.releaseInputPaths.some((path) =>

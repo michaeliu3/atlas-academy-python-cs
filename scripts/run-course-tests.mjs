@@ -54,6 +54,11 @@ const exitCode = await new Promise((resolveExitCode, reject) => {
     ...selectedTestFiles,
   ], {
     cwd: siteRoot,
+    // High-volume validators share one immutable Git-index snapshot per test
+    // worker. The read helper still verifies every requested path and refreshes
+    // on an index-generation change; this only removes redundant full-index
+    // captures from the apparatus/content runner.
+    env: { ...process.env, ATLAS_GIT_INDEX_SNAPSHOT_CACHE: "1" },
     stdio: "inherit",
   });
   child.once("error", reject);

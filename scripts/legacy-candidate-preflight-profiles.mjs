@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 import {
   GitIndexSnapshotError,
   assertGitIndexSnapshotForSiteRoot,
+  openGitIndexSnapshot,
+  openCachedGitIndexSnapshot,
 } from "./git-index-snapshot.mjs";
 import {
   declaresBrowserTestTitle,
@@ -182,22 +184,40 @@ export async function validateLegacyCandidatePreflightProfiles(
   const releaseInputPaths = new Set([
     legacyCandidatePreflightProfilesPath(siteRoot),
   ]);
+  const suppliedSnapshot = snapshot !== null;
+  // A complete preflight touches hundreds of inputs. Capture one immutable
+  // index generation for the whole closure, then perform one final clean check
+  // instead of spawning Git for every individual read. Callers may supply a
+  // stronger shared snapshot; otherwise this function owns the bounded one.
+  if (!snapshot) {
+    try {
+      snapshot = process.env.ATLAS_GIT_INDEX_SNAPSHOT_CACHE === "1"
+        ? await openCachedGitIndexSnapshot(siteRoot)
+        : await openGitIndexSnapshot(siteRoot);
+    } catch (error) {
+      errors.push(
+        `legacy candidate preflight-profile registry must resolve from one immutable Git-index snapshot: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
   if (snapshot) {
     try {
       await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
       await snapshot.assertClean([legacyCandidatePreflightProfilesRelativePath]);
-      const capturedProfileRegistry = (
-        await snapshot.readJson(legacyCandidatePreflightProfilesRelativePath)
-      ).value;
-      if (!sameJsonValue(profileRegistry, capturedProfileRegistry)) {
-        errors.push(
-          "legacy candidate preflight-profile supplied profile registry must match its captured Git-index profile registry.",
-        );
+      if (suppliedSnapshot) {
+        const capturedProfileRegistry = (
+          await snapshot.readJson(legacyCandidatePreflightProfilesRelativePath)
+        ).value;
+        if (!sameJsonValue(profileRegistry, capturedProfileRegistry)) {
+          errors.push(
+            "legacy candidate preflight-profile supplied profile registry must match its captured Git-index profile registry.",
+          );
+        }
+        // Snapshot-bound callers may provide values for a diagnostic comparison,
+        // but all semantic work below must use immutable captured JSON rather
+        // than a mutable object that could change after that comparison.
+        profileRegistry = capturedProfileRegistry;
       }
-      // Snapshot-bound callers may provide values for a diagnostic comparison,
-      // but all semantic work below must use immutable captured JSON rather
-      // than a mutable object that could change after that comparison.
-      profileRegistry = capturedProfileRegistry;
     } catch (error) {
       const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
       errors.push(
@@ -255,7 +275,10 @@ export async function validateLegacyCandidatePreflightProfiles(
         ["candidate preflight record", preflightPathFor(moduleId)],
       ]) {
         snapshotInputPaths.add(path);
-        const record = await readTrackedText(siteRoot, path, `${label}.${role}`, errors, { snapshot });
+        const record = await readTrackedText(siteRoot, path, `${label}.${role}`, errors, {
+          snapshot,
+          inputsAlreadyChecked: Boolean(snapshot),
+        });
         if (record) releaseInputPaths.add(resolve(siteRoot, path));
       }
     }
@@ -308,7 +331,7 @@ export async function validateLegacyCandidatePreflightProfiles(
           normalized,
           `${label}.sourceLedgerPaths[${pathIndex}]`,
           errors,
-          { snapshot },
+          { snapshot, inputsAlreadyChecked: Boolean(snapshot) },
         );
         if (record) releaseInputPaths.add(resolve(siteRoot, normalized));
       }
@@ -329,7 +352,7 @@ export async function validateLegacyCandidatePreflightProfiles(
         studioSourcePath,
         `${label}.studioSourcePath`,
         errors,
-        { snapshot },
+        { snapshot, inputsAlreadyChecked: Boolean(snapshot) },
       );
       if (record) releaseInputPaths.add(resolve(siteRoot, studioSourcePath));
     }
@@ -357,7 +380,7 @@ export async function validateLegacyCandidatePreflightProfiles(
         visualTestPath,
         `${label}.visualTestPath`,
         errors,
-        { snapshot },
+        { snapshot, inputsAlreadyChecked: Boolean(snapshot) },
       );
         if (record) {
           releaseInputPaths.add(resolve(siteRoot, visualTestPath));
@@ -378,7 +401,7 @@ export async function validateLegacyCandidatePreflightProfiles(
         documentationPath,
         `${label}.candidateDocumentation`,
         errors,
-        { snapshot },
+        { snapshot, inputsAlreadyChecked: Boolean(snapshot) },
       );
       if (record) {
         releaseInputPaths.add(resolve(siteRoot, documentationPath));
