@@ -36,8 +36,8 @@ the final AI/systems modules integrate prior evidence rather than replacing it.
 | Days 26–34 | M17, M28–M30, then M31 | Execution/mathematical assumptions and optimization evidence card. |
 | Days 35–44 | M18–M24, then M32 | Cross-layer trace, resource/authority boundary, and reproducibility card. |
 | Days 45–53 | M33–M36 | Formal-limit, search/decision, ML-evaluation, and reliability dossiers. |
-| Days 54–55 | M25 reference-preview orientation | Evidence-grounded AI/human-control questions; no invented prerequisite or synthesis credit. |
-| Days 56–60 | M26 pre-capstone rehearsal preview | Architecture-defense rehearsal and a bounded next-specialization plan; this is not the capstone. |
+| Days 54–55 | M25 private evidence-gated synthesis | Next-Step Evidence Dossier, Advanced Evidence Annex, and a narrowed/deferred claim when a receipt is unavailable. |
+| Days 56–60 | M26 private evidence-gated local capstone | Simulated/local architecture recommendation, maintenance handoff, and constructive oral defense; never a deployment or release claim. |
 
 The 60-day plan is a demanding first pass. Use the existing
 [90- and 180-day pacing rules](LEARNER_ROUTE_PLANS.md) whenever a proof, trace,
@@ -432,7 +432,79 @@ observation, execution scope, and authority decision separate.
 For every advanced card, ask which claim type it supports, which assumption is
 still missing, and which broader claim must be withdrawn before moving forward.
 
-## M25/M26 preview guides — preserve the synthesis gate
+## Private M25/M26 evidence gate
+
+The portal and the private route use two different surfaces without creating
+two curricula:
+
+- **Portal:** M25 and M26 remain reader-visible previews. A portal visit, card,
+  or conversation never unlocks either module or creates Core credit, a release,
+  or a mastery claim.
+- **Private guided route:** the designated chats may use the existing full M25
+  and M26 workbooks only after the learner supplies actual upstream work. This
+  is an instruction-start gate, not a grade, platform feature, or portal-state
+  change.
+
+Before **M25**, attach or paste: the final named dossier/packet from **each of
+M31–M36**; the relevant M27–M30 artifact or an explicit
+`[UNAVAILABLE — …]` marker that narrows or defers the affected claim; and one
+compact TA handoff naming the evidence, assumption/non-claim, uncertainty, and
+next question. A fluent model summary, a calendar entry, a portal click, or a
+green test is not a receipt.
+
+Before **M26**, attach or paste: the resulting M25 Next-Step Evidence Dossier
+and Advanced Evidence Annex; the cited M31–M36 dossiers/packets and handoffs;
+and the exact unavailable markers carried forward. M26 is then limited to a
+learner-owned simulated/local `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` recommendation.
+It never authorizes an actual deployment, portal unlock, Core credit, or release
+status. A public contribution, submission, or maintainer contact is outside this
+private guided route; it requires the learner's separate choice and is not
+course evidence.
+
+If a required M31–M36 dossier is absent, return to that source module. If a
+relevant M27–M30 artifact is absent, preserve the unavailable marker and make
+the smaller claim; do not let either chat invent the missing evidence.
+
+### Start M25 private study
+
+Use the full [M25 workbook](../content/modules/25_evidence_grounded_intelligent_systems.md)
+only after the private evidence gate above is met. In the designated **Study
+Partner** chat, attach the evidence set and say:
+
+```text
+Start M25, Session 1 — A score is not a useful outcome. I am using the private
+guided-study evidence gate. My attached evidence includes the final M31–M36
+dossiers/packets, the relevant M27–M30 artifacts or explicit unavailable
+markers, and a compact TA handoff. First identify any missing named artifact;
+if one is missing, stop and give me the smallest repair route rather than
+inventing evidence. If the gate is satisfied, work only from the attached M25
+workbook. Ask me to state the user, baseline, decision, and one non-claim
+before explaining. Ask for a prediction and 0–100 confidence before every
+diagnostic reveal. Keep equations, code, and evidence tables visible with a
+short prose or ASCII fallback. End with the smallest dossier increment and TA
+handoff; do not claim an unlock, credit, publication, or release.
+```
+
+### Start M26 private study
+
+Use the full [M26 workbook](../content/modules/26_systems_capstone_open_source_stewardship.md)
+only after the private evidence gate above is met. In the designated **Study
+Partner** chat, attach the M25 dossier/annex and upstream receipts and say:
+
+```text
+Start M26, Session 1 — Release claims begin with a boundary. I am using the
+private guided-study evidence gate. My attached M25 dossier/annex carries the
+actual M31–M36 outputs and handoffs, relevant M27–M30 artifacts, and every
+unavailable marker. First identify a missing receipt or unsupported claim; if
+one is missing, make me repair, narrow, or defer it rather than fabricating
+evidence. If the gate is satisfied, work only from the attached M26 workbook.
+Treat every release/revise/defer/rollback result as a simulated/local learning
+recommendation, never a real deployment or authorization. Ask for prediction
+and 0–100 confidence before a diagnostic reveal, keep the visible chat usable
+as a whiteboard, and end with the smallest dossier increment and TA handoff.
+```
+
+## Portal M25/M26 preview guides — preserve the synthesis gate
 
 M25 and M26 are reader-visible **previews**, not shortcuts around the advanced
 chain. Use the following small chat-led orientation/rehearsal only to make
@@ -509,8 +581,9 @@ gap, not to duplicate a university course wholesale.
 
 ## Honest boundaries
 
-- M25/M26 remain reader-visible previews until the advanced chain has the
-  required release evidence; private study use does not unlock or publish them.
+- M25/M26 remain reader-visible portal previews until the advanced chain has
+  the required release evidence. The separate private evidence gate permits
+  instruction only; it does not unlock or publish them.
 - A completed calendar, fluent oral explanation, green test, or AI-generated
   patch is not mastery by itself.
 - The course is calibrated against rigorous open-course ideas, not equivalent

@@ -12,15 +12,26 @@
 > and empirical evidence: discrete proof/complexity, numerical linear algebra,
 > calculus/analysis, probability/statistics, optimization/information,
 > systems-for-learning, formal limits, classical AI, ML evaluation, and learning
-> theory. This preview workbook remains readable now; its final-synthesis
-> claim is intentionally gated on those future verified artifacts rather than inferred
-> from a score or an agent explanation.
+> theory. A portal preview never changes that condition. In the designated
+> private guided route, the learner may begin the full M25 sequence only through
+> the **private guided-study evidence gate** below—not from a score, an agent
+> explanation, or a portal click.
 
-> **Preview boundary:** M25 is readable as a bounded preparation workbook.
-> Until the direct prerequisites have learner-ready release evidence and M25's
-> own contract/review evidence exists, its Studio, dossier, and rehearsal below
-> are specifications for later use—not an unlocked synthesis, oral-defense,
-> project, completion, or release-evidence claim.
+> **Portal preview boundary:** M25 is readable as a bounded preparation
+> workbook. In the portal, until the direct prerequisites have learner-ready
+> release evidence and M25's own contract/review evidence exists, its Studio,
+> dossier, and rehearsal below are specifications for later use—not an unlocked
+> synthesis, oral-defense, project, completion, or release-evidence claim.
+>
+> **Private guided-study evidence gate:** In the learner-designated Teaching
+> Assistant and Study Partner chats, the full six-session M25 work may begin
+> after the learner supplies their actual M31–M36 named dossier/packet outputs,
+> the relevant M27–M30 artifacts or an explicit `[UNAVAILABLE — …]` marker that
+> narrows or defers the affected claim, and a concise cross-module TA handoff
+> naming the evidence, assumptions, non-claims, and unresolved question. A
+> fluent model summary is never a receipt. This private instruction gate does
+> not change the graph, portal reader access, route/Core credit, publication,
+> release status, or mastery claim.
 
 > Preview mode now: you may create only a `PREVIEW ONLY` gate card and one future-M26 question.
 > Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff/unlock language as current learner work.
@@ -45,10 +56,13 @@ decision and collect the right evidence.
 
 ## How to study this module
 
-> **Preview reading boundary:** The six-session material below is an
-> orientation map for after the gate opens. Until then, create only the named
-> `PREVIEW ONLY` gate card and one future-M26 question; do not turn the later
-> loop, studio, dossier, rehearsal, project, or handoff into current work.
+> **Preview reading boundary:** In the portal, the six-session material below
+> is an orientation map for after the gate opens. Until then, create only the
+> named `PREVIEW ONLY` gate card and one future-M26 question; do not turn the
+> later loop, studio, dossier, rehearsal, project, or handoff into current
+> work. In the designated private chats, the private guided-study evidence gate
+> above permits the same six sessions as current learning work without changing
+> portal availability or granting credit.
 
 Use this loop in every session:
 
@@ -1241,8 +1255,9 @@ smallest claim that still has evidence.
 
 ### Project — Atlas Next-Step Evidence Studio
 
-> **Future full-module project:** Use this only after the M25 preview gate opens.
-> In preview, create only the `PREVIEW ONLY` gate card; do not create a Module 26 handoff packet.
+> **Full private-module project:** Use this only after the private guided-study
+> evidence gate is satisfied. In the portal preview, create only the `PREVIEW
+> ONLY` gate card; do not create a Module 26 handoff packet.
 
 Produce an evidence dossier and a small, local/reproducible vertical slice,
 not a production recommender race. The project includes:
@@ -1264,7 +1279,7 @@ not a production recommender race. The project includes:
 - a Module 26 handoff packet: architecture map, claim ledger, open questions,
   and release recommendation.
 
-### Advanced Evidence Annex — required only after the preview gate opens
+### Advanced Evidence Annex — required after the private evidence gate
 
 The final-synthesis version of this dossier also carries a short annex. It is
 not a request to recreate ten modules. It is a traceability table: every
@@ -1281,8 +1296,10 @@ non-claim to the feature decision.
 | M34 classical AI | state/candidate/constraint/utility/authority formulation | write **[UNAVAILABLE — no planner/decision authority]** |
 | M36 reliability | theorem/limit scope, reproducibility record, deployment non-claim | write **[UNAVAILABLE — no reliable-learning release claim]** |
 
-In the current preview, this annex is an orientation template only. A blank
-row is evidence of a gate, not a defect to paper over with generated prose.
+In the portal preview, this annex is an orientation template only. In private
+guided study, it is completed from the learner-supplied receipt set named
+above. A blank row is evidence of a gate, not a defect to paper over with
+generated prose.
 
 ### Cross-artifact conflict exercise — revise the claim, not the evidence
 
@@ -1379,13 +1396,16 @@ labels, not a rhetorical objection.
 
 ~~~text
 You are Atlas Academy's M25 Teaching Assistant. Use this full-module
-oral-defense prompt only after the M25 preview gate opens. During preview, ask
-only about the `PREVIEW ONLY` gate card and one future-M26 question; do not
-start from a dossier, annex, or handoff. This full-module conversation is a
-preparation and evidence-repair conversation, not a pass/fail examination or
-an unlock. Start from the learner's Next-Step Evidence Dossier and Advanced
-Evidence Annex. Ask them to defend one user decision, one data-time boundary,
-one representation/objective choice, one evaluation limitation, and one
+oral-defense prompt only after the private guided-study evidence gate is met:
+the learner supplies the actual M31–M36 dossier/packet outputs, relevant
+M27–M30 artifacts or explicit unavailable markers, and a concise cross-module
+handoff. During the portal-preview path, ask only about the `PREVIEW ONLY` gate
+card and one future-M26 question; do not start from a dossier, annex, or
+handoff. This full-module conversation is a preparation and evidence-repair
+conversation, not a pass/fail examination, portal unlock, or release claim.
+Start from the learner's Next-Step Evidence Dossier and Advanced Evidence
+Annex. Ask them to defend one user decision, one data-time boundary, one
+representation/objective choice, one evaluation limitation, and one
 human-control or abstention rule. Ask for a prediction before revealing a
 correction. When a claim is fragile, use this hint ladder: identify the
 evidence label; name the supporting M27–M36 artifact or mark it unavailable;
@@ -1396,9 +1416,9 @@ define notation, render equations when supported with a short prose/ASCII
 fallback, put code in labelled fences, and make a trace/table readable after
 the conversation. End with a learner-controlled summary: defended claim,
 repaired misconception, evidence inspected, unavailable advanced evidence,
-remaining uncertainty, and one future-M26 question, without a handoff or
-unlock. Do not grade, claim that voice/live settings are controlled, or save a
-raw transcript.
+remaining uncertainty, and one prospective M26 question. The conversation does
+not itself unlock M26. Do not grade, claim that voice/live settings are
+controlled, or save a raw transcript.
 ~~~
 
 ### Learner-controlled evidence summary
@@ -1412,10 +1432,12 @@ not a grade, unlock, or raw transcript.
 
 ~~~text
 You are Atlas Academy's M25 Study Partner. Use this full-module rehearsal
-prompt only after the M25 preview gate opens. During preview, discuss only the
-`PREVIEW ONLY` gate card and one future-M26 question; do not create a TA
-handoff. Lead a non-grading live discussion or text rehearsal about an
-evidence-grounded intelligent feature. Treat the
+prompt only after the private guided-study evidence gate is met: the learner
+supplies the actual M31–M36 dossier/packet outputs, relevant M27–M30 artifacts
+or explicit unavailable markers, and a concise cross-module handoff. During
+the portal-preview path, discuss only the `PREVIEW ONLY` gate card and one
+future-M26 question; do not create a TA handoff. Lead a non-grading live
+discussion or text rehearsal about an evidence-grounded intelligent feature. Treat the
 visible chat as a readable whiteboard: use concise labelled tables and
 diagrams only when helpful; define notation; provide prose/ASCII fallbacks for
 equations; and use language-labelled code fences. Ask the learner to inspect

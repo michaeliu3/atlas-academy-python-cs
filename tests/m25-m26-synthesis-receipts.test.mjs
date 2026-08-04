@@ -40,6 +40,15 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
     assert.match(material, /said `records on` in that exact chat/u);
     assert.match(material, /`pause records` nor\s+`off-record`/u);
   }
+  assert.match(guidedRoute, /## Private M25\/M26 evidence gate/u);
+  assert.match(guidedRoute, /Start M25 private study/u);
+  assert.match(guidedRoute, /Start M26 private study/u);
+  assert.match(guidedRoute, /final named dossier\/packet from \*\*each of\s+M31–M36\*\*/u);
+  assert.match(
+    guidedRoute,
+    /simulated\/local `RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK`\s+recommendation/u,
+  );
+  assert.match(guidedRoute, /Portal M25\/M26 preview guides/u);
   assert.match(guidedRoute, /M25 evidence-synthesis orientation/u);
   assert.match(guidedRoute, /M26 pre-capstone architecture rehearsal/u);
   assert.match(guidedRoute, /\[UNAVAILABLE — PRESERVE PREVIEW GATE\]/u);
@@ -53,76 +62,84 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
     m25,
     /Do not use the later studio, dossier, oral-defense, project, or Module 26 handoff\/unlock language as current learner work/u,
   );
+  assert.match(m25, /private guided-study evidence gate/u);
   assert.match(m25, /Full-module outcome — after the gate opens/u);
   assert.match(
     m25,
-    /Preview reading boundary:[\s\S]{0,260}orientation map for after the gate opens/u,
+    /Preview reading boundary:[\s\S]{0,420}private guided-study evidence gate/u,
   );
   const m25TaPromptStart = m25.indexOf("### Teaching Assistant oral-defense prompt — M25");
   const m25TaPromptEnd = m25.indexOf("### Study Partner live-rehearsal prompt — M25", m25TaPromptStart);
   const m25TaPrompt = m25.slice(m25TaPromptStart, m25TaPromptEnd);
-  assert.match(m25TaPrompt, /one future-M26 question, without a handoff or\s+unlock/u);
+  assert.match(m25TaPrompt, /one prospective M26 question[\s\S]{0,120}does\s+not itself unlock M26/u);
   assert.doesNotMatch(m25TaPrompt, /remaining uncertainty, and M26 handoff/u);
   assert.match(
     m25TaPrompt,
-    /Use this full-module\s+oral-defense prompt only after the M25 preview\s+gate opens/u,
+    /Use this full-module\s+oral-defense prompt only after the private guided-study evidence gate is met/u,
   );
   const m25StudyPartnerStart = m25TaPromptEnd;
   const m25StudyPartnerEnd = m25.indexOf("### Learner-controlled note boundary", m25StudyPartnerStart);
   const m25StudyPartner = m25.slice(m25StudyPartnerStart, m25StudyPartnerEnd);
   assert.match(
     m25StudyPartner,
-    /Use this full-module\s+rehearsal\s+prompt only after the M25\s+preview gate opens/u,
+    /Use this full-module\s+rehearsal\s+prompt only after the private guided-study evidence gate is met/u,
   );
   const m25ProjectStart = m25.indexOf("### Project — Atlas Next-Step Evidence Studio");
   const m25ProjectEnd = m25.indexOf("### Advanced Evidence Annex", m25ProjectStart);
   const m25Project = m25.slice(m25ProjectStart, m25ProjectEnd);
   assert.match(
     m25Project,
-    /Future full-module project:\*{0,2}\s+Use this only after the M25 preview gate opens/u,
+    /Full private-module project:\*{0,2}\s+Use this only after the private guided-study[\s>]+evidence gate is satisfied/u,
   );
 
   assert.match(
     m26,
-    /only after M25 and its\s+M31–M36\s+prerequisite chain have actual learner-ready\s+release evidence/u,
+    /Private guided Days 56–60[\s\S]{0,180}private\s+guided-study evidence gate is met/u,
   );
   assert.match(
     m26,
-    /Preview mode now: you may make only a `REHEARSAL ONLY` framing card/u,
+    /(?:>\s*)?\*{0,2}Portal preview mode now:\*{0,2}\s+you may make only a `REHEARSAL ONLY` framing[\s>]+card/u,
   );
   assert.match(
     m26,
-    /Do not use the later studio, project, oral defense, or `RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` language as a current capstone decision/u,
+    /Do not use the later studio, project, oral defense, or[\s>]+`RELEASE`\/`REVISE`\/`DEFER`\/`ROLLBACK` language as a current capstone decision/u,
   );
   assert.match(
     m26,
-    /Preview reading boundary:[\s\S]{0,260}for after the prerequisite gate opens/u,
+    /Preview reading boundary:[\s\S]{0,440}private guided-study[\s>]+evidence gate above permits the same six sessions/u,
   );
   const m26TaPromptStart = m26.indexOf("### Teaching Assistant oral-defense prompt — M26");
   const m26TaPromptEnd = m26.indexOf("### Study Partner live-rehearsal prompt — M26", m26TaPromptStart);
   const m26TaPrompt = m26.slice(m26TaPromptStart, m26TaPromptEnd);
   assert.match(
     m26TaPrompt,
-    /Use this full-module\s+oral-defense prompt only after M25 and its\s+M31–M36\s+prerequisite chain has\s+actual learner-ready\s+release evidence/u,
+    /Use this full-module\s+oral-defense prompt only after the private guided-study evidence gate is met/u,
   );
   const m26StudyPartnerStart = m26TaPromptEnd;
   const m26StudyPartnerEnd = m26.indexOf("### Learner-controlled note boundary", m26StudyPartnerStart);
   const m26StudyPartner = m26.slice(m26StudyPartnerStart, m26StudyPartnerEnd);
   assert.match(
     m26StudyPartner,
-    /Use this full-module\s+rehearsal\s+prompt only after M25 and its\s+M31–M36\s+prerequisite chain has\s+actual learner-ready\s+release evidence/u,
+    /Use this full-module\s+rehearsal\s+prompt only after the private guided-study evidence gate is met/u,
   );
   const m26ProjectStart = m26.indexOf("### Project — Atlas Release Dossier / Open-Source Stewardship Track");
   const m26ProjectEnd = m26.indexOf("### Release decisions are not pass/fail theater", m26ProjectStart);
   const m26Project = m26.slice(m26ProjectStart, m26ProjectEnd);
   assert.match(
     m26Project,
-    /Future full-module project:\*{0,2}\s+Use this only after M25 and its M31–M36/u,
+    /Full private-module project:\*{0,2}\s+Use this only after the private[\s>]+guided-study evidence gate is satisfied/u,
   );
-  assert.match(m26Project, /prerequisite chain has actual learner-ready release evidence/u);
+  assert.match(
+    m26Project,
+    /In the portal preview, create only[\s>]+the `REHEARSAL ONLY` framing card/u,
+  );
   assert.match(m26, /### External-track selection check/u);
   assert.match(m26, /recent release, commit, issue, or contribution\s+activity/u);
   assert.match(m26, /documented issue\/request/u);
+  assert.match(
+    m26,
+    /Private guided-route constraint:[\s\S]{0,420}outside this[\s>]+private guided route[\s\S]{0,220}not a[\s>]+requested course artifact or evidence/u,
+  );
   assert.match(m26SourceMap, /Open Source\s+Excursion/u);
 });
 
