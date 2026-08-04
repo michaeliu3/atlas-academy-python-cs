@@ -14,13 +14,13 @@
     },
     "currentDraftContent": {
       "state": "success",
-      "commit": "c2d891a49eb8f7d23a24294d8324131dccecf54a",
+      "commit": "5887978ea035788aee0ea55dc258eaaf49f6eafa",
       "date": "2026-08-04",
-      "runId": "30941840413",
+      "runId": "30942073857",
       "pass": 83,
       "fail": 0,
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30941840413",
-      "note": "Latest observed Draft content run for the current head; source-link shape/freshness checks and the 83-test content suite passed, while apparatus and browser jobs remain reserved for a non-draft gate."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30942073857",
+      "note": "Latest observed Draft content evidence for the preceding material head; source-link shape/freshness checks and the 83-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
     },
     "currentHeadApparatus": {
       "state": "not-run",
@@ -37,7 +37,7 @@
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "The latest observed Draft content run 30941840413 passed; this is not a full-gate result."
+      "basis": "The latest observed Draft content run 30942073857 passed; this is not a full-gate result."
     },
     "openAxeViolations": {
       "count": null,
