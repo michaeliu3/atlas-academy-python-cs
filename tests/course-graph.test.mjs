@@ -40,7 +40,6 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
     release: { state: "unrecorded", recordId: null },
     privateGuidedStudy: {
       status: "ready",
-      workbookPath: "content/authoring/m31_optimization_information_workbook.v1.md",
     },
   });
   assert.equal(byNumber.get(25)?.sequencePosition, 35);
@@ -79,10 +78,7 @@ test("the canonical v2 course graph separates academic prerequisites, reader acc
 
   for (const number of [31, 32, 33, 34, 35, 36]) {
     const privateStudy = byNumber.get(number)?.state.privateGuidedStudy;
-    assert.equal(privateStudy?.status, "ready");
-    assert.match(privateStudy?.workbookPath ?? "", new RegExp(`^content/authoring/m${number}_.*_workbook\\.v1\\.md$`, "u"));
-    const workbook = await readFile(new URL(`../${privateStudy.workbookPath}`, import.meta.url), "utf8");
-    assert.match(workbook, /## Session 1/u, `M${number} private guided-study pack must contain its first session.`);
+    assert.deepEqual(privateStudy, { status: "ready" });
   }
 });
 
@@ -183,25 +179,17 @@ test("only the six hidden advanced modules may declare a ready private guided-st
   const leakedPack = structuredClone(graph);
   leakedPack.modules.find(({ number }) => number === 30).state.privateGuidedStudy = {
     status: "ready",
-    workbookPath: "content/authoring/m30_not_a_private_pack_workbook.v1.md",
   };
   assert.throws(
     () => validateCourseGraph(leakedPack),
     /Only M31–M36 may declare a private guided-study pack/u,
   );
 
-  const forgedPackPath = structuredClone(graph);
-  forgedPackPath.modules.find(({ number }) => number === 31).state.privateGuidedStudy.workbookPath = "content/authoring/m32_wrong_workbook.v1.md";
+  const exposedPackPath = structuredClone(graph);
+  exposedPackPath.modules.find(({ number }) => number === 31).state.privateGuidedStudy.workbookPath = "content/authoring/m31_optimization_information_workbook.v1.md";
   assert.throws(
-    () => validateCourseGraph(forgedPackPath),
-    /Module 31 private guided-study workbookPath must name its checked-in authoring workbook/u,
-  );
-
-  const traversalPackPath = structuredClone(graph);
-  traversalPackPath.modules.find(({ number }) => number === 31).state.privateGuidedStudy.workbookPath = "content/authoring/m31_/../../../lib/not_a_workbook_workbook.v1.md";
-  assert.throws(
-    () => validateCourseGraph(traversalPackPath),
-    /Module 31 private guided-study workbookPath must name its checked-in authoring workbook/u,
+    () => validateCourseGraph(exposedPackPath),
+    /Module 31 private guided study must use exactly these keys: status/u,
   );
 });
 

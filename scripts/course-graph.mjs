@@ -53,7 +53,16 @@ const expectedInventoryDirectives = new Set([
 ]);
 const expectedAtomicInventoryItemCount = 362;
 const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
-const privateGuidedReadyModuleNumbers = new Set([31, 32, 33, 34, 35, 36]);
+// Kept in server-side validation only: the canonical graph is client-reachable.
+const privateGuidedStudyWorkbookPaths = new Map([
+  [31, "content/authoring/m31_optimization_information_workbook.v1.md"],
+  [32, "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md"],
+  [33, "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md"],
+  [34, "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md"],
+  [35, "content/authoring/m35_machine_learning_representation_workbook.v1.md"],
+  [36, "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md"],
+]);
+const privateGuidedReadyModuleNumbers = new Set(privateGuidedStudyWorkbookPaths.keys());
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);
@@ -104,20 +113,13 @@ function validateFocusedStudyMinutes(value, number) {
 }
 
 function validatePrivateGuidedStudy(value, number) {
-  assertExactKeys(value, ["status", "workbookPath"], `Module ${number} private guided study`);
+  assertExactKeys(value, ["status"], `Module ${number} private guided study`);
   if (value.status !== "ready") {
     fail(`Module ${number} private guided study must be ready when it is declared.`);
   }
-  assertString(value.workbookPath, `Module ${number} private guided-study workbookPath`);
-  const expectedPrefix = `content/authoring/m${String(number).padStart(2, "0")}_`;
-  if (
-    !value.workbookPath.startsWith(expectedPrefix) ||
-    !value.workbookPath.endsWith("_workbook.v1.md") ||
-    value.workbookPath.includes("\\") ||
-    value.workbookPath.split("/").some((segment) => segment === "" || segment === "." || segment === "..") ||
-    !existsSync(resolve(siteRoot, value.workbookPath))
-  ) {
-    fail(`Module ${number} private guided-study workbookPath must name its checked-in authoring workbook.`);
+  const workbookPath = privateGuidedStudyWorkbookPaths.get(number);
+  if (!workbookPath || !existsSync(resolve(siteRoot, workbookPath))) {
+    fail(`Module ${number} private guided-study pack must have its checked-in authoring workbook.`);
   }
 }
 

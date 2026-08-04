@@ -25,7 +25,6 @@ export type CourseRouteRole = "required" | "optional";
 
 export type CoursePrivateGuidedStudy = {
   status: "ready";
-  workbookPath: string;
 };
 
 export type FocusedStudyMinutes = {

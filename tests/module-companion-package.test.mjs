@@ -102,6 +102,30 @@ test("the M31 private-pack fact reaches chat handoffs without opening the portal
   assert.match(m31Companion.studyPartner.contextPrompt, /does not create reader access, Core credit, a release, or a mastery claim/i);
   assert.doesNotMatch(JSON.stringify(m30Companion), /m31_optimization_information_workbook\.v1\.md/u);
   assert.doesNotMatch(JSON.stringify(m31Companion), /content\/authoring\//u);
+
+  const statusOnlyModules = clone(graph.modules);
+  const statusOnlyM31 = statusOnlyModules.find(({ id }) => id === "m31");
+  assert.deepEqual(statusOnlyM31.state.privateGuidedStudy, { status: "ready" });
+  const statusOnlyCompanion = buildModuleCompanionPackage({
+    courseModule: statusOnlyM31,
+    graphModules: statusOnlyModules,
+    guide: guideById.get("m31"),
+    liveWorkflow: workflow,
+  });
+  assert.deepEqual(statusOnlyCompanion.module.privateGuidedStudy, { status: "ready" });
+
+  const exposedPathModules = clone(statusOnlyModules);
+  exposedPathModules.find(({ id }) => id === "m31").state.privateGuidedStudy.workbookPath =
+    "content/authoring/m31_optimization_information_workbook.v1.md";
+  assert.throws(
+    () => buildModuleCompanionPackage({
+      courseModule: exposedPathModules.find(({ id }) => id === "m31"),
+      graphModules: exposedPathModules,
+      guide: guideById.get("m31"),
+      liveWorkflow: workflow,
+    }),
+    /privateGuidedStudy must contain only the ready status/u,
+  );
 });
 
 test("M1 chat contexts state the reachable-Notion and unavailable-write boundary", async () => {

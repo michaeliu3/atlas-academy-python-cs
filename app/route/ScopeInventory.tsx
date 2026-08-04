@@ -93,7 +93,7 @@ function deliveryLabel(topic: ScopeMatrixTopic) {
     privateGuidedReadyCount > 0
       ? `; ${privateGuidedReadyCount} private guided-study ${
           privateGuidedReadyCount === 1 ? "pack" : "packs"
-        } ready; portal reader remains hidden`
+        } ready; the designated pack remains hidden in the portal`
       : "";
   return `Mixed anchor delivery · ${detail}${privateGuidedDetail}`;
 }
