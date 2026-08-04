@@ -21,6 +21,9 @@ actually published.
 - Aligned the M25/M26 preview packets and the privacy/architecture summaries
   with that same fresh-session rule, and corrected the completion snapshot to
   distinguish role-material readiness from unobserved chat acknowledgement.
+- Kept advanced private study on the active authenticated review source, made
+  M33/M34 Session 1 launches name their exact authoring copy and first
+  artifact, and let the shared continuation prompt carry multiple outputs.
 - Updated scoped lockfile overrides to `postcss@8.5.24`,
   `brace-expansion@1.1.18`/`5.0.9`, and `fast-uri@3.1.5`. The current
   production-only audit is clean; the remaining Drizzle/esbuild and

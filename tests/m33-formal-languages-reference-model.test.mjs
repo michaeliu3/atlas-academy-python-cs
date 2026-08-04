@@ -201,7 +201,7 @@ test("the M33 workbook connects the formal model classes with an original deriva
   const workbook = await readFile(
     "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
     "utf8",
-  );
+  ).then((markdown) => markdown.replace(/\r\n?/gu, "\n"));
 
   assert.match(workbook, /### Formal-model ladder — choose the smallest proven scope/u);
   assert.match(workbook, /\| DFA \|/u);
@@ -263,7 +263,7 @@ test("the M33 workbook exposes claim routes and labels interface-dependent sketc
   const workbook = await readFile(
     "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
     "utf8",
-  );
+  ).then((markdown) => markdown.replace(/\r\n?/gu, "\n"));
 
   assert.match(workbook, /### Claim\/source labels/u);
   assert.match(workbook, /M33-C01, M33-C04 -> S33-01, S33-03/u);

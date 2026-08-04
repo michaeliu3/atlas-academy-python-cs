@@ -102,6 +102,14 @@ test("private guided continuation remains distinct from portal release", async (
   assert.match(privateRoute, /m31GradientDescentRateCard\(10\)/u);
   assert.match(privateRoute, /evaluateM31BinaryChannelDistortion/u);
   assert.match(privateRoute, /m31TwoStateElboCard\(\)/u);
+  assert.match(
+    privateRoute,
+    /Start M33, Session 1[\s\S]{0,360}named M33 authoring-workbook Session 1 section, not the frozen\s+review candidate[\s\S]{0,260}Language–Machine Separation Sheet/u,
+  );
+  assert.match(
+    privateRoute,
+    /Start M34, Session 1[\s\S]{0,360}named M34 authoring-workbook Session 1 section, not the frozen\s+review candidate[\s\S]{0,260}State-Space Model Card/u,
+  );
   assert.match(moduleThirtyTwo, /\*\*Canonical academic prerequisites:\*\*/u);
   assert.match(
     moduleThirtyTwo,
@@ -198,6 +206,7 @@ test("private advanced packs provide a bounded Session 2–6 chat continuation",
     /records on[\s\S]{0,260}off-record/u,
   );
   assert.match(privateRoute, /Replace each bracketed field before sending/u);
+  assert.match(privateRoute, /exact artifact name\(s\); list each when the session has more than one/u);
   assert.match(
     privateRoute,
     /readable equations, labelled code, or compact traces[\s\S]{0,180}prose\/ASCII fallback/u,

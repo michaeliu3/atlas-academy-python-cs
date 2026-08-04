@@ -81,6 +81,7 @@ test("M34 primary-source research remains a bounded authoring input, not a sourc
     availability: "authoring-only",
     contract: { track: "advanced-v1", state: "authoring-only" },
     release: { state: "unrecorded", recordId: null },
+    privateGuidedStudy: { status: "ready", delivery: "designated-codex-chats" },
   });
   assert.equal(contract?.contractState, "authoring-only");
   assert.deepEqual([...new Set(contract?.criteria.map(({ status }) => status))].sort(), [

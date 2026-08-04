@@ -92,7 +92,7 @@ and say. Replace each bracketed field before sending:
 
 ```text
 Continue M[31–36], Session [2–5] — [workbook session title]. The named Output
-for this session is [exact artifact name]. Work only from the attached or named
+for this session is [exact artifact name(s); list each when the session has more than one]. Work only from the attached or named
 section. Before you explain, ask me to predict the result and give my confidence
 (0–100). Help me read or construct the artifact, change one premise, and name
 one assumption or non-claim. Do not invent an experiment, source, result, or
@@ -260,11 +260,13 @@ M33 is a ready private guided-study pack whose portal reader remains hidden. In 
 Notion-note policy to apply. Then send or say:
 
 ```text
-Start M33, Session 1 — Languages are objects; syntax is not authority. Before
-Session 1, give me the three short prerequisite retrieval checks below and
-direct me to the named bridge if my reasoning is fragile. Help me build a formal
-claim card with alphabet/input domain, object, invariant or witness, and one
-non-claim. Make me predict how one change in input, machine, or reduction
+Start M33, Session 1 — Languages are objects; syntax is not authority. Work
+only from the named M33 authoring-workbook Session 1 section, not the frozen
+review candidate. Before Session 1, give me the three short prerequisite
+retrieval checks below and direct me to the named bridge if my reasoning is
+fragile. Help me build the Language–Machine Separation Sheet: alphabet/input
+domain, object, invariant or witness, and one non-claim. Make me predict how
+one change in input, machine, or reduction
 direction changes the conclusion. For every multiple-choice diagnostic, ask for
 my A–D answer and 0–100 confidence before explaining it. Use readable formal
 notation, code, and a prose/ASCII fallback; do not grade me. End with the
@@ -304,11 +306,13 @@ M34 is a ready private guided-study pack whose portal reader remains hidden. In 
 Notion-note policy to apply. Then send or say:
 
 ```text
-Start M34, Session 1 — Model a state before searching it. Before Session 1,
-give me the five short prerequisite retrieval checks below and direct me to the
-named bridge if my reasoning is fragile. Then help me state the state, actions,
-costs, observations, uncertainty, authority boundary, and one non-claim before
-choosing an algorithm. Make me predict one consequence of changing an encoding,
+Start M34, Session 1 — Model a state before searching it. Work only from the
+named M34 authoring-workbook Session 1 section, not the frozen review candidate.
+Before Session 1, give me the five short prerequisite retrieval checks below and
+direct me to the named bridge if my reasoning is fragile. Then help me build the
+State-Space Model Card: state, actions, costs, observations, uncertainty,
+authority boundary, and one non-claim before choosing an algorithm. Make me
+predict one consequence of changing an encoding,
 duplicate policy, constraint, or utility. For every multiple-choice diagnostic,
 ask for my A–D answer and 0–100 confidence before explaining it. Use readable
 state tables, code, math, and prose/ASCII fallbacks; do not grade me. End with

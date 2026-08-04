@@ -161,7 +161,7 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(html, /private advanced-study launch guide/);
   assert.match(
     html,
-    /href="https:\/\/github\.com\/michaeliu3\/atlas-academy-python-cs\/blob\/codex\/atlas-60-day-route-history\/docs\/PRIVATE_GUIDED_LEARNING_ROUTE\.md"/,
+    /href="https:\/\/github\.com\/michaeliu3\/atlas-academy-python-cs\/blob\/agent\/60-day-route\/docs\/PRIVATE_GUIDED_LEARNING_ROUTE\.md"/,
   );
   assert.match(html, /Those packs are ready for designated private guided learning/);
   assert.match(
