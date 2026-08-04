@@ -454,6 +454,91 @@ information, representation, objective, hypothesis/decision class, selection
 procedure, and observable evidence**. A new family never removes the need for
 an authority boundary.
 
+### Bias–variance, kernels, SVMs, and boosting — compare contracts, not brands
+
+For a fixed input \(x\), suppose \(Y=f(x)+\epsilon\), with
+\(\mathbb E[\epsilon\mid x]=0\) and
+\(\operatorname{Var}(\epsilon\mid x)=\sigma^2_\epsilon\). Let
+\(\widehat f_D(x)\) be the predictor trained on dataset \(D\), and let
+\(\overline f(x)=\mathbb E_D[\widehat f_D(x)]\). Expanding the square and
+letting the centered cross-terms vanish gives
+
+\[
+\mathbb E_{D,\epsilon}\!\left[(Y-\widehat f_D(x))^2\mid x\right]
+=\underbrace{\sigma^2_\epsilon}_{\text{irreducible noise}}
++\underbrace{(\overline f(x)-f(x))^2}_{\text{bias}^2}
++\underbrace{\mathbb E_D[(\widehat f_D(x)-\overline f(x))^2]}_{\text{variance}}.
+\]
+
+**Prediction:** a highly constrained model that is wrong in the same way across
+resampled training sets tends to show larger bias; a flexible model whose
+predictions move substantially across those sets tends to show larger variance.
+The decomposition is a pointwise squared-loss identity under the stated
+assumptions. It is not a universal classification law, a reason to label one
+architecture “best,” or a license to treat noise as removable.
+
+<details>
+<summary>Reveal the cross-term check after making a prediction.</summary>
+
+Write \(Y-\widehat f_D=(f-\overline f)+(\overline f-\widehat f_D)+\epsilon\).
+The dataset-centered and noise-centered terms have zero conditional mean, so
+their cross-products disappear after the declared expectation. If the
+training procedure, loss, or sampling relation changes, re-check the
+decomposition instead of carrying the labels over by slogan.
+
+</details>
+
+**Kernel/SVM reading card.** A kernel declares a geometry through
+\(K(x,x')=\langle\phi(x),\phi(x')\rangle\) without requiring \(\phi(x)\) to be
+materialized. For \(y_i\in\{-1,+1\}\), a soft-margin linear SVM can be read
+through the objective
+
+\[
+\frac12\lVert w\rVert^2+
+C\sum_i\max(0,1-y_i(w^\top\phi(x_i)+b)).
+\]
+
+Before reading an API call, identify scaling, kernel, \(C\), class weights,
+the validation boundary, and whether “probability” output is a post-hoc
+calibration rather than the margin itself. Support vectors are the examples
+with active margin constraints (equivalently, non-zero dual influence in the
+declared formulation). This is a code-reading contract, not an SVM
+implementation requirement or a population-separation guarantee.
+
+**Boosting reading card.** A stagewise additive model has the shape
+\(F_t=F_{t-1}+\eta h_t\), where the next weak learner \(h_t\) is chosen using a
+declared residual or negative-gradient rule. Read n_estimators, learning_rate,
+base-learner depth, subsampling, early stopping, and the selection split
+together. More stages can reduce a training objective while worsening a
+fresh evaluation or changing calibration; the update equation alone proves
+neither generalization nor safe use.
+
+### Ranking and ablation are evidence designs
+
+Ranking asks whether candidate scores order pairs or lists as intended; it is
+not the same question as threshold accuracy, probability calibration, or
+decision utility. State the unit, tie rule, comparator, and slice before
+choosing a ranking metric. An ablation is a controlled intervention: remove or
+replace exactly one component, hold the data relation, split, selection budget,
+and execution record fixed, and report repeat variation. It can support a
+narrow component comparison in that protocol; it does not establish a causal
+story for every population or architecture.
+
+**Problem ladder:**
+
+1. **Recognize:** label the noise, bias, and variance terms in a fixed
+   squared-loss card and distinguish ranking from calibration.
+2. **Read:** inspect an SVM or boosting configuration and point to the kernel,
+   margin/regularization, stagewise budget, split, and post-hoc calibration
+   boundary.
+3. **Design:** propose one-component ablations with a prediction, paired
+   repetitions, a falsifier, and one retained claim/non-claim.
+
+**Claim/source trace:** M35-C02, M35-C04, and M35-C08 →
+S35-03–S35-04, S35-07, S35-16–S35-24. The cards synthesize the existing
+calibration routes with original derivations and fixtures; they are not copied
+course notes, a model leaderboard, or an approval decision.
+
 ### Output: Classical–Learning Baseline Comparison
 
 Create a **Baseline Comparison** that records:

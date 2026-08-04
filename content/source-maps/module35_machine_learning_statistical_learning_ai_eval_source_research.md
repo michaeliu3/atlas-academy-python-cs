@@ -137,6 +137,9 @@ release approval.
 | S35-25 | UC Davis, [Bootstrap methods](https://cameron.econ.ucdavis.edu/slides/bootstrap_2022.pdf) | University lecture route for making the independent sampling unit explicit and distinguishing ordinary resampling from clustered or serially dependent settings. Supports M35-S03's original sampling-unit card, not a universally valid confidence interval or block rule. | **Link/cite only**; no permissive reuse status was identified. Do not copy slides, figures, worked examples, or prose. Keep Atlas's rows, calculation, and boundary original. |
 | S35-26 | TensorFlow, [`sigmoid_cross_entropy_with_logits`](https://www.tensorflow.org/api_docs/python/tf/nn/sigmoid_cross_entropy_with_logits) | First-party derivation of an overflow-resistant logit-space binary cross-entropy form. Supports M35-S04's original code-reading card about numerical path versus loss identity; it does not support a calibration, generalization, or deployment claim. | TensorFlow documentation is CC BY 4.0 and code samples Apache 2.0; this Atlas card remains original and link/cite only pending full asset review. Preserve applicable attribution if any source asset is later reused. |
 
+| S35-27 | scikit-learn, [Support Vector Machines](https://scikit-learn.org/stable/modules/svm.html) | First-party implementation reference for reading kernels, margins, regularization, scaling, and support-vector configuration. Supports the bounded M35-S02 SVM code-reading card, not a theorem about separation or a recommendation for deployment. | BSD-3-Clause project; link-only/original objective and configuration cards. Recheck API/version before making a concrete implementation claim. |
+| S35-28 | scikit-learn, [Gradient Boosting](https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting) | First-party implementation reference for stagewise additive fitting, learning-rate/estimator trade-offs, base-learner depth, and early stopping. Supports the bounded M35-S02 boosting reading card, not a generalization or calibration guarantee. | BSD-3-Clause project; link-only/original update equations and configuration traces. Recheck API/version before a learner-facing code claim. |
+
 ### Targeted 2026-08-02 calibration
 
 - **M35-S03 / M35-C03:** S35-23 routes the learner to an official account of
@@ -149,6 +152,17 @@ release approval.
   signal-only expected-accuracy change from the stated synthetic relation and
   context frequencies, then label it a bounded calculation—not a robustness,
   deployment, or universal direction-of-change claim.
+
+### Targeted 2026-08-04 model-family breadth closure
+
+- **M35-S02 / M35-C02:** S35-16–S35-19 calibrate the connected
+  supervised-learning sequence; S35-27 and S35-28 provide first-party API
+  anchors for an original bias–variance, SVM, and boosting reading card.
+  The learner must still name the information, representation, objective,
+  selection budget, and evaluation relation before comparing families.
+- **M35-S03/M35-S05 / M35-C04/C08:** the ranking and one-component ablation
+  cards are evidence-design scaffolds. They do not convert a score ordering or
+  component intervention into a causal, population, or deployment claim.
 
 ### Targeted 2026-08-03 M35-S06 preflight calibration
 

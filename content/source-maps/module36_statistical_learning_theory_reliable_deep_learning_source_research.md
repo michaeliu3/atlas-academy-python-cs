@@ -145,6 +145,22 @@ for every actual use.
   sample bound alone does not prove that a consistent hypothesis can be found
   efficiently.
 
+### Targeted 2026-08-04 learning-theory breadth closure
+
+- **M36-S03 / M36-C02/C04/C05:** S36-01 and S36-03–S36-06 route the learner
+  from uniform convergence and stability to VC/Rademacher/margin language and
+  the conditional bias–variance/double-descent discussion. The new spine is
+  an original comparison card; it does not turn one bound or curve into an
+  architecture ranking.
+- **M36-S03 / M36-C04:** S36-13–S36-19 provide MIT, CMU, and Stanford
+  calibration routes for capacity, PAC quantifiers, sample-versus-computation,
+  and theorem-scope reading. The learner still has to name the exact class,
+  sample relation, algorithm, and non-conclusion.
+- **M36-S03 / M36-C04:** regret and bandit feedback are deliberately a
+  transfer bridge to Extension 3. A future publication-ready extension must
+  add its own reviewed sequential-decision source route; this authoring card
+  does not claim to teach reinforcement learning or authorize an experiment.
+
 ### What this ledger does *not* establish
 
 No source row proves that a prospective future lesson has the right theorem

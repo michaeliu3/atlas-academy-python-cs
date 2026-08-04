@@ -90,11 +90,11 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "56eb9a3c3fc90ad3e064d0cf2666e8740d1ff237fddbf01ec436f7e4c416f725"
+      "sha256": "cf9a84de91df803d42fdd78a0545106ea6f766ebecb4bf406cac966b2b4ee98b"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "ff4b51cf5d78a0f45a260bbd4e9c3fcf3b745e3b74aff7bc980dba90e5a006a1"
+      "sha256": "2dc1557587666d772563cc4775ee137e0c055d001967f6e83a1351186290c391"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -854,11 +854,11 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "dbba74dd7904bf78f9aa054d1302cd4af1a5778427e1cf5e7779efa4a9ad44da"
+      "sha256": "d6da8ed964c1d6162040b31a959f55c8e68ca1006e72322e042518c6dbb3e85b"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
-      "sha256": "221ad1ab78422d496edfc91f7cbfcc79f5b6dd61a7c1d20525d61c38d9cf7791"
+      "sha256": "ccb1b11ce3ca64f468c7a4915f9ee42c21dc71fd033537f021defa40fb05e621"
     },
     {
       "path": "content/source-maps/module3_abstraction_interfaces_adts_source_audit_addendum.md",

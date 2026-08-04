@@ -556,6 +556,59 @@ The point is not to choose the more impressive theorem name. It is to ask which
 objects, quantifiers, and conclusion are actually present before transferring a
 claim to a system.
 
+### Learning-theory spine — capacity, stability, margins, and feedback
+
+The M35 bias–variance card describes one squared-loss decomposition under fixed
+assumptions. M36 adds the lenses needed when the question is about a class,
+an algorithm, or an adaptive sequence:
+
+| Lens | First-principles object | What it can constrain | What it does not settle |
+| --- | --- | --- | --- |
+| VC dimension | The largest finite set shattered by a hypothesis class \(\mathcal H\). | A combinatorial capacity term in a stated sample/generalization setting. | The behavior of a chosen optimizer, representation, or deployment population. |
+| Rademacher complexity | For a sample \(S\), \(\widehat{\mathfrak R}_S(\mathcal H)=\mathbb E_\sigma[\sup_{h\in\mathcal H}\frac1n\sum_i\sigma_i h(X_i)]\) for declared bounded functions and random signs \(\sigma_i\). | How a class can correlate with random signs on this sample; it can enter a uniform-deviation bound. | A free-standing number that ranks architectures or proves robustness. |
+| Algorithmic stability | A replace-one or leave-one-out condition such as \(\sup_z|\ell(A(S),z)-\ell(A(S^{(i)}),z)|\leq\beta_n\). | Sensitivity of a specified learning algorithm to one training example under a specified loss. | Distribution shift, fairness, privacy, or all forms of robustness. |
+| Margin bounds | A declared score margin \(y f(x)\), normalization/complexity term, sample relation, and confidence statement. | A conditional bound whose exact constants and hypotheses must be read from the theorem. | A universal explanation of deep-learning generalization or an architecture ranking. |
+| Online regret | \(R_T=\sum_{t=1}^T\ell_t(a_t)-\min_{a\in\mathcal A}\sum_{t=1}^T\ell_t(a)\) against the best fixed action in hindsight. | An adaptive decision procedure's cumulative loss relative to a stated comparator and feedback model. | A guarantee against a changing comparator, an authorized intervention, or a real reward definition. |
+| Bandit feedback | At round \(t\), the learner observes the loss/reward of the selected action, not every counterfactual arm. | Why exploration, uncertainty, and feedback assumptions affect an online guarantee. | Permission to run an experiment, a causal effect, or a full sequential-decision solution. |
+
+**Prediction:** if the hypothesis class is fixed but the training algorithm changes,
+which lens can change without changing the class? If only the observed action's
+loss is available, which information needed for a full-information update is
+missing?
+
+<details>
+<summary>Reveal the distinction after writing a prediction.</summary>
+
+Algorithmic stability can change when the algorithm changes even if
+\(\mathcal H\) does not. Bandit feedback hides counterfactual losses, so a
+full-information regret update cannot be silently reused. VC/Rademacher cards
+describe class/sample capacity; they do not replace the algorithm or feedback
+model.
+
+</details>
+
+The **bias–variance bridge** is also conditional. A double-descent curve can
+motivate a question about parameterization and procedure, but it does not make
+error monotone in model size or invalidate the definitions above. State the
+data relation, loss, class, algorithm, and selection path before comparing
+curves.
+
+**Problem ladder:**
+
+1. **Recognize:** classify a claim as capacity, stability, margin, regret, or
+   bandit feedback, and name its missing assumption.
+2. **Read:** compute one empirical Rademacher supremum for two functions on a
+   three-point sample, then annotate a theorem card's class, sample, confidence,
+   and algorithm fields.
+3. **Derive/transfer:** calculate one two-round regret comparison, change the
+   feedback from full information to bandit feedback, and state the conclusion
+   that must be withdrawn.
+
+**Claim/source trace:** M36-C02, M36-C04, and M36-C05 →
+S36-01–S36-06, S36-13–S36-19. Regret and bandit language is a bounded bridge
+to Extension 3; it is not a completed reinforcement-learning module, reward
+definition, experiment, or authority decision.
+
 ### One numerical theorem card — calculation is not a deployment claim
 
 Keep every assumption fixed just long enough to calculate one consequence.
