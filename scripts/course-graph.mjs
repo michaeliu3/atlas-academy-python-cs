@@ -52,6 +52,7 @@ const expectedInventoryDirectives = new Set([
 ]);
 const expectedAtomicInventoryItemCount = 362;
 const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
+const privateGuidedReadyModuleNumbers = new Set([31, 32, 33, 34, 35, 36]);
 
 function fail(message) {
   throw new Error(`Invalid Atlas course graph: ${message}`);
@@ -98,6 +99,21 @@ function validateFocusedStudyMinutes(value, number) {
 
   if (value.deepDossier[0] < value.minimumEvidence[1]) {
     fail(`Module ${number} deep dossier time must include the complete minimum-evidence band.`);
+  }
+}
+
+function validatePrivateGuidedStudy(value, number) {
+  assertExactKeys(value, ["status", "workbookPath"], `Module ${number} private guided study`);
+  if (value.status !== "ready") {
+    fail(`Module ${number} private guided study must be ready when it is declared.`);
+  }
+  assertString(value.workbookPath, `Module ${number} private guided-study workbookPath`);
+  const expectedPrefix = `content/authoring/m${String(number).padStart(2, "0")}_`;
+  if (
+    !value.workbookPath.startsWith(expectedPrefix) ||
+    !value.workbookPath.endsWith("_workbook.v1.md")
+  ) {
+    fail(`Module ${number} private guided-study workbookPath must name its checked-in authoring workbook.`);
   }
 }
 
@@ -151,12 +167,20 @@ function validateModuleState(courseModule) {
     fail(`Module ${number} must place release evidence in its canonical state object.`);
   }
 
+  const hasPrivateGuidedStudy = Object.hasOwn(courseModule.state, "privateGuidedStudy");
   assertExactKeys(
     courseModule.state,
-    ["lifecycle", "readerAccess", "availability", "contract", "release"],
+    [
+      "lifecycle",
+      "readerAccess",
+      "availability",
+      "contract",
+      "release",
+      ...(hasPrivateGuidedStudy ? ["privateGuidedStudy"] : []),
+    ],
     `Module ${number} state`,
   );
-  const { lifecycle, readerAccess, availability, contract, release } = courseModule.state;
+  const { lifecycle, readerAccess, availability, contract, release, privateGuidedStudy } = courseModule.state;
   if (!expectedLifecycles.has(lifecycle)) {
     fail(`Module ${number} lifecycle is invalid.`);
   }
@@ -252,6 +276,17 @@ function validateModuleState(courseModule) {
     fail(
       `${contract.state} Module ${number} must leave release state unrecorded with a null recordId.`,
     );
+  }
+  if (privateGuidedReadyModuleNumbers.has(number)) {
+    if (!hasPrivateGuidedStudy) {
+      fail(`Module ${number} must declare its private guided-study readiness.`);
+    }
+    if (availability !== "authoring-only") {
+      fail(`Module ${number} private guided study must not change its portal availability.`);
+    }
+    validatePrivateGuidedStudy(privateGuidedStudy, number);
+  } else if (hasPrivateGuidedStudy) {
+    fail(`Only M31–M36 may declare a private guided-study pack in the canonical graph.`);
   }
 }
 
@@ -661,6 +696,13 @@ export function validateCourseGraph(graph) {
   }
   if (!Array.isArray(graph.modules) || graph.modules.length !== 36) {
     fail("must define exactly 36 modules.");
+  }
+  const declaredModuleNumbers = new Set(graph.modules.map(({ number }) => number));
+  if (
+    declaredModuleNumbers.size !== 36 ||
+    [...declaredModuleNumbers].some((number) => !Number.isInteger(number) || number < 1 || number > 36)
+  ) {
+    fail("must define modules numbered exactly 1 through 36.");
   }
   assertDeclaredStates(graph.availabilityStates, expectedAvailabilityStates, "availabilityStates");
   assertDeclaredStates(graph.lifecycleStates, expectedLifecycles, "lifecycleStates");

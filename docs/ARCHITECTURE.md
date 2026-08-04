@@ -30,23 +30,28 @@ flowchart LR
 workflow, while the two designated external Codex learning chats may
 automatically create concise session notes only after the learner says
 `records on` in that exact designated chat for the current substantive session;
-permission expires when that session ends. A substantive conversation may then
-end in their configured private record. Portable copied prompts remain local. That
+saying `end session` closes automatic session-summary authority until a new
+`records on`; an explicitly requested correction or deletion remains separately
+authorized. A substantive conversation may then end in their configured private
+record. Portable copied prompts remain local. That
   external workflow does not grant the portal microphone, voice, transcript,
   or Notion-write capability, and a saved-note claim still requires direct
   evidence.
 - The checked-in `content/course/course-graph.v2.json` is the canonical course
   catalog. It separates academic prerequisites from route order and records
-  source-map, studio, mastery-gate, and five independent truth facets:
-  lifecycle, reader access, route availability, contract state, and release
-  state.
+  source-map, studio, mastery-gate, and six independent truth facets:
+  lifecycle, reader access, route availability, contract state, release state,
+  and (where declared) private guided-study readiness.
   Route views and the generated reader manifest derive from it; no page or
   synchronizer may reconstruct its own prerequisite graph.
 - The five state facets prevent an overloaded `published` label from making a
   false claim. `readerAccess` says whether material is hidden, previewable, or
   fully readable; `availability` distinguishes open legacy material from a
   verified published release; `contract` records pedagogical-evidence maturity;
-  and `release` records deployment/provenance maturity. A reader visit is not
+  and `release` records deployment/provenance maturity. Private guided-study
+  readiness is separate: it can make a named M31–M36 private workbook usable in
+  the designated chats without making it reader-visible, credited, released, or
+  a mastery claim. A reader visit is not
   Core progression, and `legacy-open` material is deliberately not a published
   module. The graph enforces `published` only with a verified contract and
   deployed-recorded release evidence. M25/M26 have preview reader access and

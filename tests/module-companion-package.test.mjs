@@ -52,6 +52,7 @@ test("the companion package derives prerequisite and forward-handoff facts from 
     number: 2,
     title: "Functions, Recursion, and Induction",
     availability: "legacy-open",
+    privateGuidedStudy: null,
   });
 
   const changedGraph = clone(graph.modules);
@@ -64,6 +65,42 @@ test("the companion package derives prerequisite and forward-handoff facts from 
   });
   assert.equal(changedPackage.module.declaredForwardHandoff.moduleId, "m04");
   assert.equal(changedPackage.module.declaredForwardHandoff.number, 4);
+});
+
+test("the M31 private-pack fact reaches chat handoffs without opening the portal", async () => {
+  const [graph, guides, workflow] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleCompanionGuides(),
+    loadLiveCodexLearningWorkflow(),
+  ]);
+  const byId = new Map(graph.modules.map((courseModule) => [courseModule.id, courseModule]));
+  const guideById = new Map(guides.guides.map((guide) => [guide.moduleId, guide]));
+  const m30 = byId.get("m30");
+  const m31 = byId.get("m31");
+  assert.ok(m30);
+  assert.ok(m31);
+
+  const m30Companion = buildModuleCompanionPackage({
+    courseModule: m30,
+    graphModules: graph.modules,
+    guide: guideById.get("m30"),
+    liveWorkflow: workflow,
+  });
+  const m31Companion = buildModuleCompanionPackage({
+    courseModule: m31,
+    graphModules: graph.modules,
+    guide: guideById.get("m31"),
+    liveWorkflow: workflow,
+  });
+
+  assert.deepEqual(m31Companion.module.privateGuidedStudy, {
+    status: "ready",
+    workbookPath: "content/authoring/m31_optimization_information_workbook.v1.md",
+  });
+  assert.deepEqual(m30Companion.module.declaredForwardHandoff.privateGuidedStudy, m31Companion.module.privateGuidedStudy);
+  assert.match(m30Companion.studyPartner.contextPrompt, /private guided-study pack is ready for direct chat-led study/i);
+  assert.match(m31Companion.teachingAssistant.contextPrompt, /portal remains hidden and authoring-only/i);
+  assert.match(m31Companion.studyPartner.contextPrompt, /does not create reader access, Core credit, a release, or a mastery claim/i);
 });
 
 test("M1 chat contexts state the reachable-Notion and unavailable-write boundary", async () => {

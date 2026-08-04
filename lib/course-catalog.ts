@@ -23,6 +23,11 @@ export type CourseReleaseState =
   | "deployed-recorded";
 export type CourseRouteRole = "required" | "optional";
 
+export type CoursePrivateGuidedStudy = {
+  status: "ready";
+  workbookPath: string;
+};
+
 export type FocusedStudyMinutes = {
   minimumEvidence: [number, number];
   deepDossier: [number, number];
@@ -131,6 +136,7 @@ export type CourseModuleState = {
     state: CourseReleaseState;
     recordId: string | null;
   };
+  privateGuidedStudy?: CoursePrivateGuidedStudy;
 };
 
 export type CourseGraphModule = {

@@ -37,7 +37,9 @@ someone from selecting visible text manually. The portal never creates a Notion
 write. The two learner-designated external Codex learning chats may
 automatically create one concise record only after the learner says `records on`
 in that exact designated chat for the current substantive conversation;
-permission expires when that session ends. Portable copied prompts remain local.
+saying `end session` closes automatic session-summary authority until a new
+`records on`; an explicit correction or deletion remains separately authorized.
+Portable copied prompts remain local.
 They must exclude raw voice, sensitive data, credentials, and off-record
 material, and may claim a saved note only with direct evidence. See [the live
 Codex workflow](LIVE_CODEX_LEARNING_WORKFLOW.md).
