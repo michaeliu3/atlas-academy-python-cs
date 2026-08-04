@@ -127,13 +127,6 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
           ? `${count} mapped ${count === 1 ? "anchor" : "anchors"}`
           : `${count} ${count === 1 ? "anchor" : "anchors"} · ${availabilityLabels[availability]}`,
     ),
-    ...(privateGuidedReadyCount > 0
-      ? [
-          `${privateGuidedReadyCount} designated private guided-study ${
-            privateGuidedReadyCount === 1 ? "pack" : "packs"
-          } ready; the designated pack remains hidden in the portal`,
-        ]
-      : []),
   ].join("; ");
 
   const scopeNote =
@@ -150,6 +143,25 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
     detail: deliverySummary || "No mapped anchor delivery is available.",
     scopeNote,
   };
+}
+
+function privateGuidedPresentation(topic: ScopeMatrixTopic) {
+  const privateModules = topic.anchors
+    .map(({ moduleId }) => modulesById.get(moduleId))
+    .filter(
+      (courseModule): courseModule is NonNullable<typeof courseModule> =>
+        Boolean(courseModule?.state.privateGuidedStudy?.status === "ready"),
+    )
+    .filter(
+      (courseModule, index, modules) =>
+        modules.findIndex(({ id }) => id === courseModule.id) === index,
+    );
+
+  if (privateModules.length === 0) {
+    return "No designated private-chat pack is mapped to these anchors; portal mentions or previews do not imply chat delivery.";
+  }
+
+  return `${privateModules.map(({ number }) => `M${number}`).join(", ")} · workbook delivered in the designated Teaching Assistant and Study Partner Codex chats; portal reader remains hidden and this is not portal completion or mastery evidence.`;
 }
 
 function calibrationSourceName(url: string) {
@@ -250,6 +262,10 @@ export function ScopeMatrix() {
                             <span className={styles.deliveryTag}>{delivery.label}</span>
                             <span>{delivery.detail}</span>
                           </dd>
+                        </div>
+                        <div>
+                          <dt>Private-chat delivery</dt>
+                          <dd>{privateGuidedPresentation(topic)}</dd>
                         </div>
                         <div>
                           <dt>Sessions</dt>

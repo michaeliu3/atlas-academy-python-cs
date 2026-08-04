@@ -1206,7 +1206,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "72f0e038f49109d94c883039290a8a2b88b03a2fb0df7af4cd28ab0fb2fc6003"
+      "sha256": "86b6c7fd35fcbc347f791beb6d3ca97bffe0326b876fca3679d885202c385b51"
     }
   ]
 }

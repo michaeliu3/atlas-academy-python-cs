@@ -645,8 +645,11 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /60 days\./);
   assert.match(readable, /full-time 35–45 focused-hours-per-week intensive/u);
   assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
-  assert.match(readable, /28 \/ 2 \/ 6/);
-  assert.match(readable, /open \/ preview \/ private guided/i);
+  assert.match(
+    readable,
+    /28 legacy-open \/ 0 published \/ 2 preview \/ 0 locked \/ 0 optional \/ 6 authoring-only/,
+  );
+  assert.match(readable, /legacy-open.*preview.*authoring-only/i);
   assert.match(readable, /Days 2–9/);
   assert.match(readable, /Days 56–60/);
   assert.match(readable, /Module 27/);
@@ -655,7 +658,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /Module 30/);
   assert.match(readable, /Open material · review pending/);
   assert.match(readable, /Reference preview/);
-  assert.match(readable, /Private guided study ready/);
+  assert.match(readable, /workbook delivered in the designated Teaching Assistant and Study Partner Codex chats/i);
   assert.match(readable, /Read as reference—not an unlocked Core step/);
   assert.match(
     readable,
@@ -663,7 +666,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   );
   assert.match(
     readable,
-    /Start in the designated Codex chats after the academic prerequisites are in place\./,
+    /Primary guided learning happens in Codex\./,
   );
   assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
   assert.match(readable, /Module 25/);
@@ -697,8 +700,12 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   );
   assert.match(readable, /Post-core extension routes \(design only\)/);
   assert.match(readable, /Authoring-only — no learner reader route/);
-  assert.match(readable, /Private guided study ready · portal reader hidden/);
-  assert.match(readable, /designated private guided-study pack ready; the designated pack remains hidden in the portal/i);
+  assert.match(readable, /portal reader remains hidden and this is not portal completion or mastery evidence/i);
+  assert.match(readable, /Private-chat delivery/);
+  assert.match(
+    readable,
+    /workbook delivered in the designated Teaching Assistant and Study Partner Codex chats/i,
+  );
 
   const scopeDocument = new JSDOM(html).window.document;
   assert.ok(
@@ -708,9 +715,19 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
     "the full proof surface is available without placing all atomic rows in the normal route",
   );
   const scopeTopic = (label) =>
-    [...scopeDocument.querySelectorAll("article")].find(
+    [...scopeDocument.querySelectorAll('[id^="scope-topic-"]')].find(
       (topic) => topic.querySelector("h3")?.textContent === label,
     );
+  const scopeTopics = [...scopeDocument.querySelectorAll('[id^="scope-topic-"]')];
+  assert.ok(scopeTopics.length > 0, "the concise route renders scope topics");
+  for (const topic of scopeTopics) {
+    const labels = new Set(
+      [...topic.querySelectorAll("dl > div > dt")].map((fact) => fact.textContent),
+    );
+    assert.ok(labels.has("Target depth"), "every scope topic states target depth");
+    assert.ok(labels.has("Current delivery"), "every scope topic states portal delivery");
+    assert.ok(labels.has("Private-chat delivery"), "every scope topic states private-chat delivery");
+  }
   const currentDelivery = (topic) =>
     [...(topic?.querySelectorAll("dl > div") ?? [])].find(
       (fact) => fact.querySelector("dt")?.textContent === "Current delivery",
