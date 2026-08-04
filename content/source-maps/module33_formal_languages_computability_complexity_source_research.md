@@ -124,6 +124,14 @@ into later material.
 | Verifier, decision, search, and optimization distinction | S33-13 distinguishes decision and related search while locating certificates/verifiers in the decision formulation. | The three-row comparison is original Atlas scaffolding, not an NP-completeness proof or a generic reduction claim. |
 | Pumping-lemma quantifier audit | S33-11 sequences regular pumping; S33-12 provides the theorem reference. | Use an original proof-debugging prompt that makes the decomposition quantifiers inspectable; do not copy a course exercise or make pumping the only nonregularity proof method. |
 
+### Breadth-closure routing (2026-08-04)
+
+| Planned M33 addition | Claim-linked source route | Authoring boundary preserved |
+| --- | --- | --- |
+| Chomsky hierarchy, PDA/CFG bridge, and grammar-class boundaries | S33-03, S33-11, S33-12 | Original comparison table and balanced-parentheses trace; no copied grammar tables, figures, or parser implementation claims. |
+| Rice's theorem with semantic/nontriviality obligations | S33-01, S33-05 | Original scope card and counterexamples; no source proof text or claim that bounded interpreters inherit undecidability. |
+| coNP, PSPACE, Savitch, randomized complexity, approximation hardness, and circuit complexity orientation | S33-01, S33-08, S33-09, S33-13 | A compact calibration/transfer bridge, not a complete graduate complexity course; theorem statements retain model, encoding, and proof-obligation boundaries. |
+
 ### What the ledger does *not* establish
 
 No ledger row proves that a particular string parser is correct, that a

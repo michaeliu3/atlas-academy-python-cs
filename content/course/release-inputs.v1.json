@@ -82,7 +82,7 @@
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "77f2e09df793ae3e85ab4b6e270098c2d499480973a1855b0f12b0ee18a4a210"
+      "sha256": "df235f3ae2a67e709c058b3a648b0fb278709ff48a6066e3e7010c32449c4228"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
@@ -846,7 +846,7 @@
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
-      "sha256": "358083fb1f0fb57a111a9937f6b9ef459184590567848b102f556c377a8dc2b0"
+      "sha256": "5839f1b9014691c3ba7dcd15644ffd42c384487398c87c7ba50b5c4be68cb9af"
     },
     {
       "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",

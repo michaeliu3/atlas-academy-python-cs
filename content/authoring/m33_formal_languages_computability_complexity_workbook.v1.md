@@ -250,6 +250,47 @@ not a production parser design.
 
 </details>
 
+### Chomsky hierarchy — grammar power is a declared ladder
+
+The familiar grammar ladder is useful only when its machine and language
+conventions are named:
+
+**Claim/source trace:** M33-C04 → S33-03, S33-11, S33-12. The hierarchy is an
+original compact comparison of the source routes, not a copied grammar table
+or a claim about the implementation language used by a production parser.
+
+| Level | Grammar/machine picture | Learner boundary |
+| --- | --- | --- |
+| Type 3 | regular grammar / DFA or NFA | finite state; no unbounded stack memory |
+| Type 2 | context-free grammar / PDA | one stack can express nested structure |
+| Type 1 | context-sensitive grammar / linear-bounded automaton | bounded tape proportional to the input |
+| Type 0 | unrestricted grammar / Turing-machine recognizer | recursively enumerable languages; a recognizer may not halt on nonmembers |
+
+Under the standard formal conventions, the inclusions are strict (with the
+usual empty-string convention for context-sensitive grammars):
+
+\[
+\mathrm{REG}\subsetneq\mathrm{CFL}\subsetneq\mathrm{CSL}\subsetneq\mathrm{RE}.
+\]
+
+This is a statement about language classes and computational models. It is not
+a ranking of parser libraries, a claim that a production language has exactly
+one grammar class, or permission to infer semantics from syntax.
+
+**Prediction:** balanced parentheses, equal numbers of `0` and `1`, and a
+general program-termination property need which smallest memory models? Name
+the model before naming the class.
+
+<details>
+<summary>Reveal after making the model prediction.</summary>
+
+Balanced parentheses and `0^n1^n` fit the context-free/PDA level; a general
+termination property is semantic and reaches the Turing-machine/undecidability
+boundary. The hierarchy does not by itself prove a particular implementation
+correct.
+
+</details>
+
 ### Prediction before reveal
 
 Two snippets both satisfy a toy assignment grammar:
@@ -673,6 +714,35 @@ and on \(H\) being total and correct for all encoded pairs. It does not say
 that a finite whitelist of known scripts cannot be checked, nor that a timeout
 proves a result about arbitrary programs.
 
+### Rice's theorem — state the semantic-property conditions
+
+**Claim/source trace:** M33-C07 → S33-01, S33-05. The theorem card keeps the
+encoded partial-computable-function assumptions visible before using the name.
+
+**Rice's theorem (scope card):** for a nontrivial semantic property (P) of
+the partial computable function or language recognized by an encoded program,
+the set of program descriptions whose computed object has property (P) is
+undecidable. “Nontrivial” means that at least one encoded program has the
+property and at least one does not; “semantic” means the property depends on
+what the program computes, not on its spelling.
+
+The card has three obligations before the name is useful:
+
+1. identify the effective program encoding and the computed object;
+2. show that the property is semantic and nontrivial; and
+3. state the undecidable set of descriptions being classified.
+
+For example, “computes the empty language” is a semantic property under a
+chosen recognizer convention; “contains the token `while`” is syntactic and is
+not a Rice property. A finite whitelist or a bounded interpreter can decide a
+restricted engineering question without contradicting the theorem. The
+theorem also does not say that every semantic question has the same reduction
+or that a timeout is a proof of nontermination.
+
+**Smallest counterexample:** change a semantic property to a token property,
+or restrict the input to a finite, explicitly enumerated program set. Which
+Rice obligation disappeared, and what narrower claim remains true?
+
 ### Counterexample: syntax is not a semantic property
 
 “Contains a loop token” is a syntactic predicate. “Terminates” is a semantic
@@ -916,6 +986,44 @@ An NP-completeness claim requires both:
 2. a correctly directed polynomial reduction from a known NP-hard language.
 
 It is not a label for “a problem that looked hard in a notebook.”
+
+### Complexity breadth map — classes are contracts, not badges
+
+The Core route uses \(\mathrm{P}\) and \(\mathrm{NP}\) as a starting point. A
+complete reading needs the neighboring models too:
+
+**Claim/source trace:** M33-C09–M33-C10 → S33-01, S33-08, S33-09, S33-13. The
+advanced rows are an orientation and transfer bridge toward later theory
+study; they do not claim a complete graduate complexity course or a theorem
+proof merely from the card.
+
+| Topic | First-principles statement | What must not be inferred |
+| --- | --- | --- |
+| \(\mathrm{coNP}\) | complements of languages in \(\mathrm{NP}\); a decision language is in coNP when its complement has a polynomial verifier | \(\mathrm{NP}=\mathrm{coNP}\) is not known, and a hard-looking complement is not a proof |
+| \(\mathrm{PSPACE}\) | decision languages decidable with polynomial workspace, regardless of time | polynomial space does not mean polynomial time or practical feasibility |
+| Savitch's theorem | \(\mathrm{NSPACE}(f(n))\subseteq\mathrm{DSPACE}(f(n)^2)\) for suitable \(f\), hence \(\mathrm{NPSPACE}=\mathrm{PSPACE}\) | a nondeterministic proof sketch is not a fast algorithm; the square-space simulation can be expensive |
+| randomized complexity | classes such as BPP/RP add a random-bit model, error target, and amplification convention | a stochastic benchmark or random seed is not a BPP/RP membership proof |
+| approximation hardness | an optimization objective, approximation ratio, and a gap-preserving reduction are required | NP-hardness alone does not establish an approximation lower bound |
+| circuit complexity | Boolean circuits are measured by size/depth under a gate basis; a family needs a construction and, where claimed, uniformity | one circuit evaluation is not a complexity-class result or a neural-network generalization theorem |
+
+**Code/design reading:** annotate a proposed “polynomial-space solver” with its
+workspace, time, randomness, error probability, and input encoding. Then mark
+which row would need a theorem rather than a run. The labels are reusable
+contracts for M34 search and M35/M36 learning claims, not a catalogue of
+prestige classes.
+
+### Breadth practice ladder
+
+1. **Recognize:** classify five one-sentence claims as P, NP, coNP,
+   PSPACE, randomized, approximation, circuit, or “not enough information.”
+2. **Read:** inspect a short reachability recursion and identify the space
+   measure, the hidden exponential time, and whether randomness is present.
+3. **Derive:** write the missing direction of one gap reduction and state the
+   approximation promise it would preserve; give a nearby counterexample where
+   the promise is absent.
+
+Record the result in the Complexity-Claim Card. A correct class label without
+the model, encoding, proof obligation, and practical non-claim is incomplete.
 
 ### Prediction before reveal
 
