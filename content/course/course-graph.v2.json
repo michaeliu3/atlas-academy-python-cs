@@ -5161,8 +5161,7 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready",
-          "workbookPath": "content/authoring/m31_optimization_information_workbook.v1.md"
+          "status": "ready"
         }
       }
     },
@@ -5212,8 +5211,7 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready",
-          "workbookPath": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md"
+          "status": "ready"
         }
       }
     },
@@ -5261,8 +5259,7 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready",
-          "workbookPath": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md"
+          "status": "ready"
         }
       }
     },
@@ -5311,8 +5308,7 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready",
-          "workbookPath": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md"
+          "status": "ready"
         }
       }
     },
@@ -5363,8 +5359,7 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready",
-          "workbookPath": "content/authoring/m35_machine_learning_representation_workbook.v1.md"
+          "status": "ready"
         }
       }
     },
@@ -5414,8 +5409,7 @@
           "recordId": null
         },
         "privateGuidedStudy": {
-          "status": "ready",
-          "workbookPath": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md"
+          "status": "ready"
         }
       }
     }

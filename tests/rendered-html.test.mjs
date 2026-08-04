@@ -478,6 +478,16 @@ test("the built browser bundle excludes authoring-only companion content", async
     /reconstruct a generalization, regret, margin, or lower-bound proof idea/u,
     "M36's authoring-only guide must stay in the server-only reader path",
   );
+  assert.doesNotMatch(
+    browserSource,
+    /content\/authoring\/m3[1-6]_.*_workbook\.v1\.md/u,
+    "private workbook paths must not be shipped to the browser",
+  );
+  assert.doesNotMatch(
+    browserSource,
+    /workbookPath/u,
+    "the browser course graph must expose ready status, not private-pack metadata",
+  );
 });
 
 test("keeps every authored scrollable code region labelled and keyboard-focusable", async () => {
@@ -672,7 +682,7 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
   assert.match(readable, /Post-core extension routes \(design only\)/);
   assert.match(readable, /Authoring-only — no learner reader route/);
   assert.match(readable, /Private guided study ready · portal reader hidden/);
-  assert.match(readable, /designated private guided-study pack ready; portal reader remains hidden/i);
+  assert.match(readable, /designated private guided-study pack ready; the designated pack remains hidden in the portal/i);
 
   const scopeDocument = new JSDOM(html).window.document;
   assert.ok(
@@ -745,7 +755,7 @@ test("renders the on-demand Levels 1–9 atomic source crosswalk", async () => {
   assert.match(readable, /Source target/);
   assert.match(readable, /Atlas target/);
   assert.match(readable, /Current delivery/);
-  assert.match(readable, /private guided-study pack ready; portal reader remains hidden/i);
+  assert.match(readable, /private guided-study pack ready; the designated pack remains hidden in the portal/i);
   assert.match(readable, /Propositional and predicate logic/);
   assert.match(readable, /Graduate master/);
   assert.match(readable, /Also know/);

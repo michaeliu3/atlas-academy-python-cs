@@ -138,7 +138,7 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
       ? [
           `${privateGuidedReadyCount} designated private guided-study ${
             privateGuidedReadyCount === 1 ? "pack" : "packs"
-          } ready; portal reader remains hidden`,
+          } ready; the designated pack remains hidden in the portal`,
         ]
       : []),
   ].join("; ");
