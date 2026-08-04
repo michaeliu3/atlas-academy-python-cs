@@ -12,6 +12,23 @@
 
 The validator resolved 30 modules and 480 criteria: **478 P**, **2 A**, **0 M**. It records **0 human approvals** and **0 publication changes**.
 
+## Study-pack structural floor
+
+The active study-ready standard is represented here by the existing sixteen
+criteria: knowledge position/progression (map, six sessions, handoff),
+first-principles rigor, code-reading/debugging/design, prediction, transfer,
+source/reuse route, accessible visual alternative, confidence diagnostic,
+retrieval, dossier/rubric, oral defense, and distinct Teaching Assistant and
+Study Partner handoffs.
+
+- **28 / 28** portal-open study packs have every structural criterion present.
+- **2 / 2** preview packs have no missing structural criterion, but retain the intentional prerequisite/forward-map ambiguity that keeps M25/M26 reference-only.
+- Modules with missing structural evidence: **0**.
+
+This is a content-completeness floor for private study. It is not a human
+quality approval, accessibility conformance result, source-license clearance,
+learner outcome, Core credit, publication, or deployment claim.
+
 ## Matrix
 
 | Module | Map | Six | First | Rigor | Read | Predict | Transfer | Source | Visual | Quiz | Review | Project | Oral | TA | Partner | Handoff |
