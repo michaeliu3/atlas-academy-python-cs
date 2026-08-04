@@ -41,6 +41,17 @@ release succeeded. `In progress` means the boundary is known and tracked.
 
 | Mermaid visual alternatives | Structural coverage complete; broader accessibility review remains in progress | `lib/mermaid-accessibility.mjs`, `app/modules/[slug]/MermaidDiagram.tsx`, and `scripts/validate-mermaid-alternatives.mjs` define a title/text-alternative convention, render concise prose visibly, associate it with the sanitized SVG, and scan every reader diagram. The current scan reports **245/245 complete and 0 incomplete**: every Mermaid block now has an ID, title, concise text alternative, and immediate visible prose equivalent. `tests/m19-m24-mermaid-accessibility.test.mjs` protects the M19–M24 cohort, while `e2e/accessibility.spec.ts` checks rendered SVG-to-alternative behavior on a selected route. | Keep alternatives current as diagrams change; extend manual assistive-technology and representative browser checks. Complete authored alternatives are not by themselves a completed accessibility review. |
 
+## Current private-study delivery clarification
+
+The M31–M36 designated-chat materials are ready for normal private study
+without a separate learner rehearsal or pilot; use their private authoring
+workbooks. M25/M26 retain their prerequisite-gated portal preview boundary.
+This is a delivery-mode clarification, not a portal promotion: the canonical
+graph continues to control portal reader access, preview status, prerequisites,
+release claims, and credit boundaries. Voice, equation rendering, and Notion
+behavior remain platform facts to report only when directly observed, not
+prerequisites for starting the course.
+
 ## Evidence interpretation
 
 - **Structural baseline**: automation has checked file/graph/session/path facts.

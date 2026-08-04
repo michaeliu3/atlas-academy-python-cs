@@ -424,11 +424,11 @@ test("the M35 and M36 workbooks turn the shared fixture into bounded prediction 
     m36Workbook.includes("\\forall m\\ge m_{\\mathcal H}(\\varepsilon,\\delta)"),
     "The PAC card must state its sample-complexity threshold for every sufficient sample count.",
   );
-  assert.ok(m36Workbook.includes("\\Pr_{S\\sim P^m,\\,A}"));
+  assert.ok(m36Workbook.includes("\\Pr_{X_{1:m}\\sim D^m,\\,\\rho_A}"));
   assert.match(m36Workbook, /but\s+not on the later universally\s+quantified/u);
-  assert.ok(m36Workbook.includes("\\(P\\) or \\(c\\)"));
+  assert.ok(m36Workbook.includes("\\(D\\) or\n\\(c\\)"));
   assert.match(m36Workbook, /Computational\s+efficiency is an additional claim/u);
-  assert.match(m36Workbook, /Bartlett–Foster–Telgarsky spectral-normalized margin-bound example/u);
+  assert.match(m36Workbook, /Bartlett–Foster–Telgarsky spectrally-normalized margin-bound paper/u);
   assert.ok(m36Workbook.includes("2K e^{-2n\\varepsilon^2}"));
   assert.match(m36Workbook, /input-mixture \/ covariate shift/u);
   assert.match(m36Workbook, /conditional \/ label-relation shift/u);

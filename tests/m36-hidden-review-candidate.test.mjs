@@ -60,5 +60,5 @@ test("M36 freezes a hidden review candidate without changing its authoring-only 
     frozenCandidate.includes("\\forall m\\ge m_{\\mathcal H}(\\varepsilon,\\delta)"),
     "The frozen M36 candidate must retain the PAC sample-threshold quantifier.",
   );
-  assert.ok(frozenCandidate.includes("\\Pr_{S\\sim P^m,\\,A}"));
+  assert.ok(frozenCandidate.includes("\\Pr_{X_{1:m}\\sim D^m,\\,\\rho_A}"));
 });

@@ -124,77 +124,34 @@ substantive. Say `off-record` or `pause records` to keep the session out of that
 policy. Never claim that a Notion write, voice transcript, formatting event,
 publication, or completion occurred without direct evidence.
 
-### Start the first M31 pilot
+### Start M31 private study
 
-M31 remains a private, authoring-only instructor-led pack; this starts a
-learning conversation, not a release, grade, or completion record. In the
-designated **Study Partner** chat, first say `records on` only if you want its
-configured concise Notion-note policy to apply. This pilot uses the frozen
-[M31 hidden review candidate](../content/modules/31_optimization_information.md)
-and its [candidate source ledger](../content/source-maps/module31_optimization_information.md),
-not the authoring draft. Then send or say:
+M31 is ready for normal private, chat-led study; no separate pilot or rehearsal
+is needed to begin. Use the private [M31 authoring workbook](../content/authoring/m31_optimization_information_workbook.v1.md)
+for instruction. The frozen [M31 review candidate](../content/modules/31_optimization_information.md)
+and its [candidate source ledger](../content/source-maps/module31_optimization_information.md)
+remain a separate scope-review copy, not the default study text. Starting M31
+begins a learning conversation, not a portal release, grade, or completion
+record. In the designated **Study Partner** chat, say `records on` only if you
+want its configured concise Notion-note policy to apply. Then send or say:
 
 ```text
-Start M31, Session 1 — Formulate before you optimize. I will build the
-Objective Geometry Sheet. Before Session 1, give me the four short M28/M29/M30
-retrieval checks below and direct me to the named bridge if my reasoning is
-fragile. Then ask me to state the variables, feasible set, objective,
-observable evidence, and one non-claim before you correct me. Make me predict
-one consequence of changing a constraint. For every multiple-choice diagnostic,
-ask for my A–D answer and 0–100 confidence before explaining it. Use readable
-display math with defined notation and a short prose fallback; do not grade me.
-End with the smallest uncertainty or evidence artifact to bring to the Teaching
-Assistant.
+Start M31, Session 1 — Formulate before you optimize. Work from the attached
+M31 authoring workbook. I will build the Objective Geometry Sheet. Before
+Session 1, give me the four short M28/M29/M30 retrieval checks below and direct
+me to the named bridge if my reasoning is fragile. Then ask me to state the
+variables, feasible set, objective, observable evidence, and one non-claim
+before you correct me. Make me predict one consequence of changing a
+constraint. For every multiple-choice diagnostic, ask for my A–D answer and
+0–100 confidence before explaining it. Use readable display math with defined
+notation and a short prose fallback; do not grade me. End with the smallest
+uncertainty or evidence artifact to bring to the Teaching Assistant.
 ```
 
 Keep the session local by omitting `records on` or saying `off-record`.
 After the M31 dossier, use the workbook's Teaching Assistant prompt for the
-supportive oral defense; do not treat a Session 1 rehearsal as the module exam.
-
-#### M31 20–40-minute pilot run card
-
-Use this only to observe one bounded private learning delivery with the frozen
-M31 candidate named above. It joins existing M31 Session 1 material, the
-designated-chat whiteboard protocol, and the current record boundary; it adds
-no new mathematics, source claim, route access, or review state. Stop at forty
-minutes even if the larger M31 pack has more to explore.
-
-1. **0–3 minutes — choose the boundary.** Keep the pilot local by default.
-   Say `records on` only if the learner wants the configured concise-note
-   policy for this exact substantive session; otherwise omit it or say
-   `off-record`. Neither choice creates progress, review, or release evidence.
-2. **3–8 minutes — make the whiteboard observable.** Ask the Study Partner to
-   show the Session 1 objective
-   \(f(x,y)=(x-2)^2+(y-1)^2\), define `x` and `y`, and show the short
-   `objective`/`constraint_residual` Python trace from the named candidate.
-   Confirm that the visible equation, code block, and a prose or ASCII fallback
-   are readable. Voice is optional; if the platform exposes a quality setting,
-   prefer its highest available option without claiming Atlas controls it.
-3. **8–16 minutes — retrieve before reveal.** Run the four M28/M29/M30
-   prerequisite prompts below, one at a time. Ask for an answer and 0–100
-   confidence before a hint. A fragile response selects a named bridge; it is a
-   repair signal, not a pass/fail gate.
-4. **16–30 minutes — make one micro-artifact.** Build only the minimum
-   Objective–Geometry Sheet: decision owner, variables with units, feasible
-   set, objective, one omitted value or failure mode, and the sentence
-   “This objective does not establish …”. Predict whether `(2, 1)` is feasible
-   under `x + y <= 1` before checking the trace.
-5. **30–36 minutes — stress one premise.** Change exactly one constraint,
-   unit/normalization, or authority premise. Ask what changes in the claim and
-   what still cannot be concluded from the finite trace. End with the smallest
-   uncertainty or artifact for the Teaching Assistant.
-6. **36–40 minutes — keep a learner-controlled handoff.** Keep only the
-   current question, prediction versus observation, micro-artifact, one
-   boundary, and the next repair. If a configured note write is unavailable,
-   say that no write occurred and use the existing local-note template; never
-   retain raw voice or a full transcript.
-
-**What this pilot can show:** that one learner and the designated chats can
-follow the bounded prompt, see a readable whiteboard fallback, and make a small
-first-principles artifact. **What it cannot show:** M31 accessibility or source
-review quality, a successful Notion write, oral-defense completion, learner
-mastery, portal readiness, release, or a change to the M25/M26 gate. Record
-only directly observed facts, and keep the candidate authoring-only afterward.
+supportive oral defense. It is a constructive post-module conversation, not a
+gate, grade, release decision, or proof of mastery.
 
 **M31 prerequisite retrieval.** Before Session 1, answer without notes: (1)
 what a quadratic gradient and Hessian say locally, and why poor conditioning
