@@ -16,7 +16,8 @@
       "initialState": "require-explicit-records-on-confirmation",
       "activationPhrase": "records on",
       "closurePhrase": "end session",
-      "scope": "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized"
+      "scope": "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized",
+      "renewalRule": "A prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session."
     },
     "substantiveSession": {
       "minimumEvidence": [

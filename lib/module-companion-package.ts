@@ -36,6 +36,7 @@ export type ModuleCompanionPackage = {
     portableStartupMode: "keep-local";
     designatedChatMode: "automatic-after-substantive-session";
     closurePhrase: "end session";
+    renewalRule: "A prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session.";
   };
   teachingAssistant: {
     role: "supportive-oral-defense";

@@ -74,27 +74,27 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "7950074dce65188ee510841ff4d4ad221eb8aae085e40590def3df7e50d58e79"
+      "sha256": "63970fb9ed31f60b4a5675cbdd000ab6d6d67fcf691c794649ac7da3414225b8"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "75ab43e60913bedeeb67b8314c340290e1dd080208161238ebc087c5ee260cbe"
+      "sha256": "07fd9811af021bf929e935f6d6396885a630f2723d8bb32ab1b20ff8d1babe87"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "c60ea05e92c0b007d2885379a0de27310f35bfede6b6333bbd3d9ff5281641d4"
+      "sha256": "77f2e09df793ae3e85ab4b6e270098c2d499480973a1855b0f12b0ee18a4a210"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "6a5a47338cf0b76c33c67f716ddeb8976c478ddf0cdcc6dac1954614ab4db7dc"
+      "sha256": "1124d0bd123df253d9b44b5b40613173b7372544acbe4a6131e44558dcf2dca4"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "47a55fb09931561788d246f6d1586980075f6eb04709fcc6b2a0d16469b3ada9"
+      "sha256": "56eb9a3c3fc90ad3e064d0cf2666e8740d1ff237fddbf01ec436f7e4c416f725"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "e91ebd6812d62f9e9d8966d26cb62114db83422cace2ebbcbdaddf3bdb87d331"
+      "sha256": "ff4b51cf5d78a0f45a260bbd4e9c3fcf3b745e3b74aff7bc980dba90e5a006a1"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -522,7 +522,7 @@
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
-      "sha256": "4722aa069671e13ff1823963d8c0e39fc71860966df3805f7e6ccaabeeb306c8"
+      "sha256": "adee4109a4d74d9afa1dfe4ea581bbb49fb7d96e0dde65226ea0b7a863273901"
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
@@ -646,11 +646,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "8a08d8a5f6dba81ba8b8e81368976f84d99871552a19690ca9a4c489a60ad4e5"
+      "sha256": "3d1667a37fdadbe859d773509c1b37bbb6d8d5db1ebdbdc4564a6f3e6e7f6b9f"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "b068167ef45b9ed7efe2fea39f1fe5fac795ec91478aaf4d19034bfd50353bd0"
+      "sha256": "96c90d496e552c985a0b2c6fb9b9381bc90d9fa8d489535177c99269b7cef2d6"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -886,7 +886,7 @@
     },
     {
       "path": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md",
-      "sha256": "e163417d35d8e80573e4c124397e089ed17f3808c8458be018af862f2e2cb542"
+      "sha256": "aada879736dca75b3562926a30d3a0a97560debc7b7f1f4c9b7a014bbcea75f1"
     },
     {
       "path": "docs/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",

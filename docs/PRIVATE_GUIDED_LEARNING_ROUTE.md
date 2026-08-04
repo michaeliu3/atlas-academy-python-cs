@@ -122,6 +122,9 @@ For either path, say `records on` only when the learner wants the configured
 concise-note policy, its approved integration is available, and the session is
 substantive. Say `end session` to close automatic session-summary authorization;
 an explicit correction or deletion request remains separately learner-authorized.
+A prior `records on` never carries into a new or ambiguously resumed substantive
+session: records stay off until the learner makes a fresh visible `records on`
+request in that session.
 Say `off-record` or `pause records` to keep the session out of that policy. Never
 claim that a Notion write, voice transcript, formatting event, publication, or
 completion occurred without direct evidence.

@@ -1083,7 +1083,9 @@ designated Teaching Assistant or Study Partner chat, the learner says `records
 on` for this substantive session. Only then may the shared policy create at
 most one concise note if the configured private destination is reachable.
 `pause records` or `off-record` means create nothing; authorization ends with
-the session. Never save a raw transcript or claim a successful write without
+the session. A prior `records on` never carries into a new or ambiguously
+resumed substantive session; records are off until a fresh visible `records on`
+in that session. Never save a raw transcript or claim a successful write without
 direct evidence. Otherwise, keep the summary in chat or local notes.
 
 ### Forward handoff

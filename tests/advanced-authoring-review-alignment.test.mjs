@@ -8,10 +8,14 @@ const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 const moduleIds = ["m31", "m32", "m33", "m34", "m35", "m36"];
 const recordBoundaryModuleIds = new Set(["m32", "m33", "m34", "m35", "m36"]);
-const designatedChatRecordBoundary = /### Record boundary for designated chats[\s\S]*?exact\s+configured\s+designated\s+Teaching\s+Assistant\s+or\s+Study\s+Partner\s+chat[\s\S]*?`records\s+on`[\s\S]*?substantive\s+session[\s\S]*?at\s+most\s+one\s+concise\s+note[\s\S]*?private\s+destination\s+is\s+reachable[\s\S]*?`pause\s+records`[\s\S]*?`off-record`[\s\S]*?authorization\s+ends\s+with\s+the\s+session[\s\S]*?raw\s+transcript[\s\S]*?direct\s+evidence/u;
+const designatedChatRecordBoundary = /### Record boundary for designated chats[\s\S]*?exact\s+configured\s+designated\s+Teaching\s+Assistant\s+or\s+Study\s+Partner\s+chat[\s\S]*?`records\s+on`[\s\S]*?substantive\s+session[\s\S]*?at\s+most\s+one\s+concise\s+note[\s\S]*?private\s+destination\s+is\s+reachable[\s\S]*?`pause\s+records`[\s\S]*?`off-record`[\s\S]*?authorization\s+ends\s+with\s+the\s+session[\s\S]*?prior\s+`records\s+on`\s+never\s+carries[\s\S]*?raw\s+transcript[\s\S]*?direct\s+evidence/u;
+
+function normalized(markdown) {
+  return markdown.replace(/\r\n?/gu, "\n");
+}
 
 function recordBoundaryBlock(markdown, label) {
-  const match = markdown.match(
+  const match = normalized(markdown).match(
     /### Record boundary for designated chats[\s\S]*?(?=\n### Forward handoff)/u,
   );
   assert.ok(match, `${label} must contain one record-boundary block before its forward handoff`);
@@ -19,7 +23,7 @@ function recordBoundaryBlock(markdown, label) {
 }
 
 function sessionSpine(markdown, label) {
-  const headings = [...markdown.matchAll(/^## Session ([1-6]) — (.+)$/gmu)].map(
+  const headings = [...normalized(markdown).matchAll(/^## Session ([1-6]) — (.+)$/gmu)].map(
     ([, number, title]) => `${number}:${title}`,
   );
 
@@ -32,7 +36,7 @@ function sessionSpine(markdown, label) {
 }
 
 function sessionLaunches(markdown, label) {
-  const launches = [...markdown.matchAll(
+  const launches = [...normalized(markdown).matchAll(
     /^## Session [1-6] — .+\n\n\*\*Launch:\*\* (.+)$/gmu,
   )].map(([, launch]) => launch);
 

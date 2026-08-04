@@ -1457,7 +1457,9 @@ definitions or trace, prediction, evidence, misconception, counterexample,
 uncertainty, and next action only when all four conditions hold: the learner
 said `records on` in that exact chat, the configured private destination is
 reachable, the session was substantive, and neither `pause records` nor
-`off-record` applies. Otherwise, make no write and offer the same compact note
+`off-record` applies. A prior `records on` never carries into a new or
+ambiguously resumed substantive session; records are off until a fresh visible
+`records on` in that session. Otherwise, make no write and offer the same compact note
 for manual copy. Never save raw voice transcripts, credentials, private data,
 or an unverified claim that a live session or Notion write occurred.
 

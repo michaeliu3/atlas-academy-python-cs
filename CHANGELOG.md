@@ -7,6 +7,22 @@ actually published.
 
 ## Unreleased
 
+- Replayed the preserved Atlas course-history lineage onto the cost-controlled
+  review path through additive commits only; no force-push, rebase, squash,
+  deletion, or history rewrite was used. The Draft Course CI policy now has
+  direct zero-runner evidence, while a later review-ready content batch still
+  needs its ordinary full gate.
+- Tightened designated-chat recording consent: a prior `records on` now never
+  carries into a new or ambiguously resumed substantive session. The canonical
+  workflow, TA/Study Partner prompts, module handoffs, private advanced packs,
+  learner-facing routes, and mutation checks all default such a session to
+  records-off until a fresh visible request. This is a local-first instruction
+  and validation boundary, not a claim that the portal controls Codex or Notion.
+- Updated scoped lockfile overrides to `postcss@8.5.24`,
+  `brace-expansion@1.1.18`/`5.0.9`, and `fast-uri@3.1.5`. The current
+  production-only audit is clean; the remaining Drizzle/esbuild and
+  Miniflare/Undici development-tooling paths remain explicitly triaged rather
+  than being represented as resolved or security-clean.
 - Documented a no-Actions, read-only Course CI evidence-capture path: select an
   already-successful run, read its exact attempt and jobs, normalize only the
   existing verifier schema, validate locally, and record it later through an

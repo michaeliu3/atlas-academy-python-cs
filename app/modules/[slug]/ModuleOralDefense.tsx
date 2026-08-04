@@ -228,7 +228,9 @@ export function ModuleOralDefense({
           after you say “records on” in that exact designated chat for the
           current substantive learning conversation. Say “end session” to close
           automatic session-summary authorization; an explicit correction or
-          deletion request remains separately learner-authorized. Atlas does not
+          deletion request remains separately learner-authorized. A prior “records on”
+          never carries into a new or ambiguously resumed substantive session, so
+          records stay off until a fresh visible request. Atlas does not
           initiate it, and no successful write is claimed without direct evidence. Do not keep raw voice recordings,
           sensitive personal content, off-record material, or an unnecessary transcript.
         </p>

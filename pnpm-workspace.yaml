@@ -3,11 +3,12 @@ packages:
 
 # Keep advisory remediations scoped to their affected dependency paths.
 overrides:
-  "next>postcss": 8.5.18
+  "next>postcss": 8.5.24
   "next>sharp": 0.35.2
-  # `minimatch@3` accepts brace-expansion ^1.1.7; constrain only that
-  # development-tooling path to the advisory's patched 1.x line.
-  "minimatch@3>brace-expansion": 1.1.17
+  # Keep advisory repairs within each declared compatible dependency family.
+  "minimatch@3>brace-expansion": 1.1.18
+  "minimatch@10>brace-expansion": 5.0.9
+  "ajv>fast-uri": 3.1.5
 
 # This private site deploys only reviewed, committed lockfile state.
 trustLockfile: true

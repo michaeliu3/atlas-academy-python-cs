@@ -1590,7 +1590,9 @@ write occurred. In a configured designated Teaching Assistant or Study Partner
 chat, the shared record policy may create at most one concise note only when
 the learner has said `records on`, the configured private destination is
 reachable, the session is substantive, and records are not paused or
-off-record. It may report a saved note only after direct evidence of a
+off-record. A prior `records on` never carries into a new or ambiguously resumed
+substantive session; records are off until a fresh visible `records on` in that
+session. It may report a saved note only after direct evidence of a
 successful write. Otherwise, keep the card in chat or local notes.
 
 ### Forward handoff

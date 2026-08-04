@@ -75,17 +75,17 @@ to `converted_to_draft`, and the expensive full-course `workflow_dispatch`
 trigger is removed. The history-ref SHA has zero workflow runs, as expected for
 a non-`main` history-only push.
 
-This correction is **not yet live on active Draft PR #21**. Its head remains
-[`54b894f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/54b894fb011c341373085747c43829be362c894a), whose workflow still lacks
-`converted_to_draft` and retains `workflow_dispatch`. GitHub CLI authentication
-is available for readback. An ordinary atomic fast-forward was rejected by the
-protected review branch because the local history contains the older merge
-commit `df217f5`; no ref changed and no force-push, rebase, or history rewrite
-was attempted.
+The preceding `54b894f` observation is historical. A later direct GitHub
+readback found active Draft PR #21 at
+[`b69bfa8`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b69bfa8e3c8eded0bd7dc5e0f9b1f4718a491aab), where the correction is live:
+Course CI subscribes to `converted_to_draft`, exposes no expensive manual
+Course-CI dispatch, and the bounded metadata verifier is on-demand/read-only.
+Run [`30905783135`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30905783135)
+was a Draft preflight with all required hosted jobs skipped before runner
+allocation. This is direct evidence of the no-runner Draft behavior, not a
+full gate, release, deployment, or learner-readiness result.
 
-The cancellation behavior therefore remains unobserved—not because of missing
-authentication, but because the correction has not reached the PR workflow.
-Use a safe non-rewriting review-branch path before treating it as operational;
-do not manually dispatch Course CI merely to create evidence. The bounded
-metadata observer remains the documented manual final-verification path, while
-PR gates and `push: main` retain required verification.
+Cancellation of an already-running superseded gate remains unobserved; do not
+flip PR state or manually dispatch Course CI merely to manufacture that fact.
+The PR gates and `push: main` retain their required verification, and a later
+review-ready content batch still needs its normally requested full gate.

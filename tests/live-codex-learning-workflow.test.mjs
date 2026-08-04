@@ -20,6 +20,8 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
     activationPhrase: "records on",
     closurePhrase: "end session",
     scope: "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized",
+    renewalRule:
+      "A prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session.",
   });
   assert.deepEqual(report.notionSessionNotes.substantiveSession.minimumEvidence, [
     "a named module or learning topic",
@@ -68,6 +70,8 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   assert.match(guide, /chat-level intent/u);
   assert.match(guide, /delete or archive.*own Notion UI/u);
   assert.match(guide, /current substantive session/u);
+  assert.match(guide, /prior `records on` never carries into a new or ambiguously resumed/u);
+  assert.match(guide, /When the boundary is uncertain, records are \*\*off\*\* until\s+the learner makes a fresh visible `records on` request/u);
   assert.match(guide, /say “end session” to close automatic\s+session-summary authorization/iu);
   assert.match(
     guide,
@@ -81,6 +85,7 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   assert.match(promptSource, /close automatic session-summary authority/u);
   assert.match(promptSource, /explicit correction or deletion request remains separately learner-authorized/u);
   assert.match(promptSource, /end session/u);
+  assert.match(promptSource, /new or ambiguously resumed substantive session, keep records off/u);
   assert.match(promptSource, /unavailableNoteTemplate/u);
 });
 
@@ -99,6 +104,16 @@ test("learner-facing policy summaries retain explicit records-on authority", asy
 
   for (const [index, [path, expected]] of policySummaries.entries()) {
     assert.match(texts[index], expected, `${path} must retain the explicit designated-chat recording authority.`);
+  }
+
+  for (const [path, expected] of [
+    ["../docs/LIVE_CODEX_LEARNING_WORKFLOW.md", /prior `records on` never carries into a new or ambiguously resumed/u],
+    ["../app/learning-partners/page.tsx", /prior “records on”\s+never carries into a new or ambiguously resumed/u],
+    ["../app/modules/[slug]/ModuleOralDefense.tsx", /prior “records on”\s+never carries into a new or ambiguously resumed/u],
+    ["../lib/learning-partner-prompts.ts", /new or ambiguously resumed substantive session, keep records off/u],
+  ]) {
+    const text = await readFile(new URL(path, import.meta.url), "utf8");
+    assert.match(text, expected, `${path} must default an ambiguous resumed session to records-off.`);
   }
 });
 
@@ -138,6 +153,14 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   missingSessionClosure.notionSessionNotes.recordingAuthorization.closurePhrase = "close records";
   await assert.rejects(
     validateLiveCodexLearningWorkflow(missingSessionClosure),
+    /scoped records-on confirmation/u,
+  );
+
+  const staleSessionAuthorization = structuredClone(workflow);
+  staleSessionAuthorization.notionSessionNotes.recordingAuthorization.renewalRule =
+    "A prior records on remains active until the learner pauses records.";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(staleSessionAuthorization),
     /scoped records-on confirmation/u,
   );
 

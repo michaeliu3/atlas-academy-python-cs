@@ -21,6 +21,8 @@ const requiredRecordingAuthorization = {
   activationPhrase: "records on",
   closurePhrase: "end session",
   scope: "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized",
+  renewalRule:
+    "A prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session.",
 };
 const requiredSubstantiveEvidence = [
   "a named module or learning topic",
@@ -150,6 +152,9 @@ async function validateGuide(path, siteRoot, errors) {
   if (!guide.includes("say “records on”") || !guide.includes("say “end session”") || !guide.includes("all three are present")) {
     errors.push("Live Codex workflow learner guide must define recording activation and a substantive-session threshold.");
   }
+  if (!/A prior `records on` never carries into a new or ambiguously resumed\s+substantive session\. When the boundary is uncertain, records are \*\*off\*\* until\s+the learner makes a fresh visible `records on` request/u.test(guide)) {
+    errors.push("Live Codex workflow learner guide must require fresh records-on intent when a session is new or ambiguous.");
+  }
   if (!guide.includes("direct evidence")) {
     errors.push("Live Codex workflow learner guide must retain the direct-evidence claim boundary.");
   }
@@ -216,7 +221,8 @@ export async function validateLiveCodexLearningWorkflow(
       recordingAuthorization.initialState !== requiredRecordingAuthorization.initialState ||
       recordingAuthorization.activationPhrase !== requiredRecordingAuthorization.activationPhrase ||
       recordingAuthorization.closurePhrase !== requiredRecordingAuthorization.closurePhrase ||
-      recordingAuthorization.scope !== requiredRecordingAuthorization.scope
+      recordingAuthorization.scope !== requiredRecordingAuthorization.scope ||
+      recordingAuthorization.renewalRule !== requiredRecordingAuthorization.renewalRule
     ) {
       errors.push("Live Codex workflow must require a scoped records-on confirmation before automatic notes.");
     }

@@ -1414,7 +1414,9 @@ counterexample, uncertainty, decision, and next action only when all four
 conditions hold: the learner said `records on` in that exact chat, the
 configured private destination is reachable, the conversation was substantive,
 and neither `pause records` nor `off-record` applies. Otherwise, make no write
-and provide a copyable summary. Never save raw voice transcripts, credentials,
+and provide a copyable summary. A prior `records on` never carries into a new
+or ambiguously resumed substantive session; records are off until a fresh
+visible `records on` in that session. Never save raw voice transcripts, credentials,
 sensitive records, or an unverified claim that a live session or Notion write
 occurred.
 

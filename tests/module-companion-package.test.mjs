@@ -165,6 +165,7 @@ test("M1 chat contexts state the reachable-Notion and unavailable-write boundary
     assert.match(contextPrompt, /Notion write unverified — local session note/u);
     assert.match(contextPrompt, /no deletion is verified/u);
     assert.match(contextPrompt, /Question and prediction:/u);
+    assert.match(contextPrompt, /prior records on never carries into a new or ambiguously resumed substantive session/i);
   }
 
   const missingDeletionAcknowledgement = clone(workflow);
@@ -178,6 +179,19 @@ test("M1 chat contexts state the reachable-Notion and unavailable-write boundary
       liveWorkflow: missingDeletionAcknowledgement,
     }),
     /unverified-deletion acknowledgement/u,
+  );
+
+  const persistentSessionAuthorization = clone(workflow);
+  persistentSessionAuthorization.notionSessionNotes.recordingAuthorization.renewalRule =
+    "A prior records on remains active until the learner pauses records.";
+  assert.throws(
+    () => buildModuleCompanionPackage({
+      courseModule: m01,
+      graphModules: graph.modules,
+      guide,
+      liveWorkflow: persistentSessionAuthorization,
+    }),
+    /scoped records-on confirmation/u,
   );
 });
 
@@ -211,6 +225,8 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
     portableStartupMode: "keep-local",
     designatedChatMode: "automatic-after-substantive-session",
     closurePhrase: "end session",
+    renewalRule:
+      "A prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session.",
   });
   assert.deepEqual(
     companion.whiteboardProtocol,
@@ -223,6 +239,7 @@ test("the TA and Study Partner packets stay distinct, constructive, and bounded"
   assert.match(companion.teachingAssistant.contextPrompt, /automatically create at most one concise note/i);
   assert.match(companion.teachingAssistant.contextPrompt, /confirm “records on”/u);
   assert.match(companion.teachingAssistant.contextPrompt, /say “end session”/u);
+  assert.match(companion.teachingAssistant.contextPrompt, /prior records on never carries into a new or ambiguously resumed substantive session/i);
   assert.match(companion.teachingAssistant.contextPrompt, /explicit correction or deletion request remains separately learner-authorized/u);
   assert.match(companion.studyPartner.contextPrompt, /names a module or learning topic/i);
   assert.match(companion.studyPartner.contextPrompt, /direct evidence of the successful write/i);

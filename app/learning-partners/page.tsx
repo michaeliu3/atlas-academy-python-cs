@@ -112,7 +112,9 @@ export default function LearningPartnersPage() {
             automatically create one concise Notion session note for the current
             substantive learning conversation. Say “end session” to close
             automatic session-summary authorization; a correction or deletion
-            request remains separately learner-authorized. A successful write is recorded
+            request remains separately learner-authorized. A prior “records on”
+            never carries into a new or ambiguously resumed substantive session:
+            records stay off until you make a fresh visible request. A successful write is recorded
             only from direct evidence; voice, rendering, and platform-setting
             behavior remain separately unproven until observed.
           </p>

@@ -310,3 +310,18 @@ change. No force-push, rebase, squash, deletion, or history rewrite was
 attempted. This observation records provenance and the still-pending PR path;
 it does not establish a CI gate, release, deployment, security clearance, or
 learner outcome.
+
+## Active Draft cost-control observation (2026-08-04)
+
+The preceding `54b894f` state is a dated history record. A later direct GitHub
+readback found Draft PR #21 at
+[`b69bfa8e3c8eded0bd7dc5e0f9b1f4718a491aab`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b69bfa8e3c8eded0bd7dc5e0f9b1f4718a491aab).
+Its [Course CI run 30905783135](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30905783135)
+was labelled as a Draft preflight and skipped the hosted portal, two-Python,
+and browser checks before runner allocation. The source branch therefore has
+the intended cost control without altering required review/full-gate checks.
+
+This is not a successful full Course CI gate, deployment, private release,
+security clearance, or proof of cancellation of an already-running superseded
+run. The current linearized content batch needs its own normal review-ready
+gate before any release interpretation.

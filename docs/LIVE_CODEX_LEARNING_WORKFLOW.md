@@ -78,6 +78,10 @@ requested correction or deletion remains separately authorized. The policy
 permits at most one concise note for the current substantive session only when
 all four conditions hold:
 
+A prior `records on` never carries into a new or ambiguously resumed
+substantive session. When the boundary is uncertain, records are **off** until
+the learner makes a fresh visible `records on` request in that session.
+
 The chat should visibly acknowledge `records on` and `end session` as
 **chat-level intent** to start or close this configured policy, not as proof
 that a write or platform setting took effect. It should likewise acknowledge

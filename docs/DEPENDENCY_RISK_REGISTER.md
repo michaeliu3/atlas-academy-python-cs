@@ -7,19 +7,20 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-08-03 (live GitHub Dependabot API, the default and
-review-branch lockfile graphs, and `pnpm audit --prod --json`). The live API
+**Last examined:** 2026-08-04 (live GitHub Dependabot API, the default and
+review-branch lockfile graphs, and local production/full audits). The live API
 reported five open alerts on protected default branch `main` at
 `33fadbd49b0e33900f21aba06ed40845c3cbd641` (three high, two medium). That
 branch still resolves `next@16.2.11 → postcss@8.4.31` and `sharp@0.34.5`.
 The review branch for draft [PR #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
-resolves `next@16.2.12 → postcss@8.5.18` and `sharp@0.35.2`, beyond the
-alerts' first patched versions. Those are candidate remediations only until a
-normal reviewed merge reaches `main` and Dependabot recalculates. The push
-notice still reported six (four high, two moderate); direct API evidence of
-five open alerts is authoritative for this register. The current
-production-only audit returned zero findings; it does not close the live
-GitHub alerts or erase the separately triaged development path.
+resolves `next@16.2.12 → postcss@8.5.24` and `sharp@0.35.2`, beyond the
+alerts' first patched versions. `pnpm audit --prod --json` now exits zero on
+the review-candidate lockfile. The full local audit still exits nonzero with
+one high and five moderate **development-tooling** findings, triaged below.
+These are candidate remediations only until a normal reviewed merge reaches
+`main` and Dependabot recalculates. Direct API evidence of five open alerts is
+authoritative for this register; a clean production audit does not close them
+or erase the separate development path.
 **Owner:** Atlas repository maintainer. **Recheck trigger:** before any private
 deployment, after a relevant upstream release, and before closing or dismissing
 an alert. No alert is considered resolved until the reviewed branch is pushed,
@@ -36,21 +37,23 @@ gh api repos/michaeliu3/atlas-academy-python-cs/dependabot/alerts/<number>
 ## Patched runtime paths; Dependabot reconciliation outstanding
 
 The current branch updates `next` to 16.2.12 and uses workspace-scoped
-overrides. Its regenerated lockfile resolves `postcss@8.5.18` and
-`sharp@0.35.2` specifically underneath Next, and `brace-expansion@1.1.17`
-only beneath `minimatch@3`:
+overrides. Its regenerated lockfile resolves `postcss@8.5.24` and
+`sharp@0.35.2` specifically underneath Next; it also keeps compatible
+development-only patch fixes inside their declared dependency families:
 
 ```yaml
 overrides:
-  "next>postcss": 8.5.18
+  "next>postcss": 8.5.24
   "next>sharp": 0.35.2
-  "minimatch@3>brace-expansion": 1.1.17
+  "minimatch@3>brace-expansion": 1.1.18
+  "minimatch@10>brace-expansion": 5.0.9
+  "ajv>fast-uri": 3.1.5
 ```
 
 These are deliberately narrow: they do not claim a global dependency upgrade
 or a GitHub alert closure. `pnpm audit --prod --json` returned zero current
-branch findings on 2026-08-02; the full audit retained the separate
-Drizzle/esbuild path documented below. No direct `postcss().process` call over
+branch findings on 2026-08-04; the full audit retains the separate
+Drizzle/esbuild and Miniflare/Undici paths documented below. No direct `postcss().process` call over
 user-provided CSS, direct `sharp` call, or untrusted-image intake route was
 found in the checked-in portal on that review. Those reachability observations
 narrow the current portal model but do not close an advisory or establish
@@ -67,9 +70,9 @@ otherwise reconciled each corresponding alert state.
 
 | Alert | Scope | Candidate lockfile evidence | Required patched version | Candidate disposition |
 | --- | --- | --- | --- | --- |
-| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | review `next@16.2.12 → postcss@8.5.18`; default `next@16.2.11 → postcss@8.4.31` | 8.5.18 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
-| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | review `next@16.2.12 → postcss@8.5.18`; default `next@16.2.11 → postcss@8.4.31` | 8.5.12 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
-| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | review `next@16.2.12 → postcss@8.5.18`; default `next@16.2.11 → postcss@8.4.31` | 8.5.10 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
+| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | runtime | review `next@16.2.12 → postcss@8.5.24`; default `next@16.2.11 → postcss@8.4.31` | 8.5.18 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
+| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | runtime | review `next@16.2.12 → postcss@8.5.24`; default `next@16.2.11 → postcss@8.4.31` | 8.5.12 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
+| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | runtime | review `next@16.2.12 → postcss@8.5.24`; default `next@16.2.11 → postcss@8.4.31` | 8.5.10 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
 | [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | runtime | review `sharp@0.35.2`; default `sharp@0.34.5` | 0.35.0 | Candidate lock path is patched; alert remains open until normal merge and Dependabot refresh on `main`. |
 
 ## Withdrawn alert record
@@ -79,8 +82,8 @@ On 2026-07-31, a direct authenticated `gh api` read of Dependabot alert
 for `GHSA-mh99-v99m-4gvg` returned `Alert number 40 has been withdrawn` (HTTP
 404). The live default-branch alert list therefore contains five entries, not
 six. The scoped development lockfile path is still
-`eslint@9.39.4 → minimatch@3.1.5 → brace-expansion@1.1.17`, and its local
-audit/lint evidence remains useful. Withdrawal does **not** establish why the
+`eslint@9.39.4 → minimatch@3.1.5 → brace-expansion@1.1.18`, after the current
+compatible override repair. Withdrawal does **not** establish why the
 alert was withdrawn, a protected-branch merge, a deployment result, a GitHub
 alert closure for another path, or a security-clean state.
 
@@ -89,6 +92,7 @@ alert closure for another path, or a security-clean state.
 | Alert | Scope and path | Why it remains open | Current control and next action |
 | --- | --- | --- | --- |
 | [#13](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/13) — `GHSA-67mh-4wv8-2f99` | development: `drizzle-kit@0.31.10` → `@esbuild-kit/esm-loader@2.6.5` → `@esbuild-kit/core-utils@3.3.2` → `esbuild@0.18.20` | The top-level Drizzle package also resolves patched `esbuild@0.25.12`, but its legacy loader retains the vulnerable nested copy. No repository `esbuild` serve/context API use was found; the path is limited to maintainer-local `pnpm db:generate`. A blanket nested override would violate its declared range and has not been compatibility-validated, so it must not be represented as a fix. | Run database-generation tooling only locally with maintainer-controlled schema/configuration, not as an internet-exposed development server. `pnpm db:generate` completed against the empty intentional schema with no migration output on 2026-07-31. Recheck the Drizzle/loader chain for an upstream removal or patched release, then add a targeted compatibility test before changing the nested resolver. |
+| Local full-audit `GHSA-4cwx-7wf7-3272` (high) plus `GHSA-8xcm-r25x-g524`, `GHSA-m8rv-5g2x-5cg5`, `GHSA-jr45-8vmc-qm54`, and `GHSA-v3r7-h72x-cjcm` (moderate) | development: `@cloudflare/vite-plugin` / `wrangler` → `miniflare@4.20260722.1` → exact `undici@7.28.0` | The current Miniflare package pins `undici@7.28.0`; the audit requires `>=7.29.0`. An override would violate that exact upstream pin and has not been compatibility-tested. This is used by local Worker tooling, not a shipped portal runtime, but development placement is not a proof of harmlessness. | Do not run an exposed Miniflare development server on untrusted origins. Track a compatible Cloudflare/Miniflare release or validate a targeted upstream upgrade before changing the exact resolver. Recheck before any Worker-based deployment. |
 
 ## Limits
 
@@ -104,6 +108,6 @@ alert closure for another path, or a security-clean state.
   lockfile changes.
 - The candidate remediation does not verify a private deployment, production
   headers, or a GitHub Release.
-- This repository must not be described as **security-clean** while either
-  open path remains or while candidate alert closures are awaiting GitHub
+- This repository must not be described as **security-clean** while open
+  development paths remain or while candidate alert closures are awaiting GitHub
   verification.

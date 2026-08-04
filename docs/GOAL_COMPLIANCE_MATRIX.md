@@ -62,6 +62,27 @@ access, preview status, prerequisites, release claims, and credit boundaries.
 Voice, equation rendering, and Notion behavior remain platform facts to report
 only when directly observed, not prerequisites for starting the course.
 
+## Dated operational-state supersession — 2026-08-04
+
+The following facts supersede older present-tense references in this historical
+matrix without erasing their dated evidence:
+
+- The live workflow now defaults records **off** for a new or ambiguously
+  resumed substantive session until the learner gives a fresh visible
+  `records on` in that designated chat. The portal still cannot enforce an
+  external Codex/Notion write; this is a validated instruction and prompt
+  boundary, not platform-behavior evidence.
+- Current review-candidate `pnpm audit --prod --json` exits zero after scoped
+  PostCSS/brace-expansion/fast-uri repairs. The full local audit remains one
+  high and five moderate development-tooling findings: Drizzle's legacy
+  esbuild loader and Miniflare's exact Undici pin. The dependency risk register
+  gives their compatibility constraints and next actions; `main` still has five
+  open Dependabot alerts pending normal merge and recalculation.
+- Active Draft PR #21 reached `b69bfa8` with the cost-controlled Course CI.
+  Run `30905783135` skipped hosted jobs before runner allocation. This replaces
+  the old “not yet active” statement, but is neither a full gate nor release
+  evidence; a review-ready batch must still receive its normal gate.
+
 ## Evidence interpretation
 
 - **Structural baseline**: automation has checked file/graph/session/path facts.
