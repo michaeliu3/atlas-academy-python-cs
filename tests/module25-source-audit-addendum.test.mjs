@@ -35,21 +35,18 @@ test("the M25 source-audit addendum stays internal and preserves preview and unr
   assert.match(addendum, /## Six-session claim linkage/u);
   assert.match(addendum, /## Bounded reference-model and preview truth/u);
   assert.match(addendum, /CLI parses one enumerated[\s\S]*JSON packet/u);
-  assert.match(addendum, /## Preserved audit ambiguities and missing evidence/u);
+  assert.match(addendum, /## Preserved audit ambiguities and review boundary/u);
   assert.match(addendum, /prerequisite\/forward map[\s\S]*\*\*ambiguous\*\*/u);
   assert.match(addendum, /rigor bundle[\s\S]*\*\*ambiguous\*\*/u);
-  assert.match(addendum, /transfer task[\s\S]*\*\*ambiguous\*\*/u);
-  assert.match(addendum, /confidence diagnostic\/misconceptions[\s\S]*\*\*ambiguous\*\*/u);
-  assert.match(addendum, /supportive oral defense[\s\S]*\*\*missing\*\*/u);
   assert.match(
     addendum,
-    /Generic TA\/Study Partner rehearsal[\s\S]*module-specific[\s\S]*oral-defense protocol/u,
+    /Prediction, transfer,[\s\S]*confidence-diagnostic, and supportive-oral pointers are present structurally/u,
   );
-  assert.match(addendum, /## Unresolved supportive oral-defense route/u);
   assert.match(
     addendum,
-    /generic oral infrastructure does not satisfy the\s+module-specific\s+missing criterion/u,
+    /structurally mapped but unreviewed M25 oral-defense route/u,
   );
+  assert.doesNotMatch(addendum, /## Unresolved supportive oral-defense route/u);
 });
 
 test("the M25 learner and authoring surfaces distinguish route, preview, source freshness, and bounded I/O", async () => {

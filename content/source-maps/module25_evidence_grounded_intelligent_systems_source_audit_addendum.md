@@ -100,11 +100,11 @@ browser-local progress; it does not create a remote learner record or make a
 Notion request. This audit does not treat that local storage as a deployment,
 privacy-review, or shared-codec approval.
 
-The preview's Studio, dossier, TA/Study Partner rehearsal, and Session 6
-proposal-boundary packet are designs and structural pointers. They do not
-become an operational M25 studio, module-specific oral-defense protocol,
-learner mastery record, project acceptance, or M26 unlock merely because the
-files exist.
+The preview's Studio, dossier, TA/Study Partner rehearsal, Session 6 packet,
+and structurally mapped M25 oral-defense route remain preview-only instructional
+material. They do not establish an operational learner-delivered studio or oral
+outcome, learner mastery record, project acceptance, or M26 unlock merely
+because files exist.
 
 ## Learner-facing correction record
 
@@ -125,42 +125,25 @@ files exist.
    packet. It is an output-location correction, not oral-defense, project,
    review, release, or publication evidence.
 
-## Preserved audit ambiguities and missing evidence
+## Preserved audit ambiguities and review boundary
 
 The immutable legacy audit marks M25's human quality as **not-reviewed** and
-retains four **ambiguous** criteria plus one **missing** criterion. A source
-ledger, a version check, a fixed local model, a resolved anchor, or this
+retains two **ambiguous** criteria. Prediction, transfer,
+confidence-diagnostic, and supportive-oral pointers are present structurally,
+but a source ledger, version check, fixed local model, resolved anchor, or this
 addendum does not substitute for qualified learner-facing review.
 
 | Legacy criterion | Status that remains | Why this audit cannot promote it |
 | --- | --- | --- |
 | **prerequisite/forward map** | **ambiguous** | The canonical route is now stated accurately, but prerequisite evidence includes authoring-only M31/M34–M36 and preview gating remains; this is not learner-ready release evidence. |
 | **rigor bundle**: definitions, assumptions, derivations/proof ideas, counterexamples, and numerical experiments | **ambiguous** | The source map contains useful claim boundaries, but this audit does not establish a coherent, accurate, reviewed rigor bundle. |
-| **transfer task** | **ambiguous** | The problem ladder is a candidate transfer route, not reviewed evidence that a named task, rubric, and learner outcome work. |
-| **confidence diagnostic/misconceptions** | **ambiguous** | A diagnostic/routing surface does not prove valid misconception mapping, reveal timing, explanations, or learner repair records. |
-| **supportive oral defense** | **missing** in the immutable legacy audit | The current workbook now contains a module-specific candidate protocol, but Generic TA/Study Partner rehearsal, global live-chat guidance, and this addendum still do not constitute qualified learner-facing review of the current module-specific, psychologically safe, adaptive oral-defense protocol. |
 
 The six-session spine, first-principles pointer, code-reading/debugging/design
 pointers, prediction pointer, source-ledger pointer, accessible-visual/text
 alternative pointer, retrieval pointer, project/rubric pointers, TA pointer,
-Study Partner pointer, and forward handoff remain structural pointers wherever
-the immutable audit already records them as present. This record neither
-changes those statuses nor upgrades the four ambiguities or missing oral route.
-
-## Unresolved supportive oral-defense route
-
-Module 25's immutable legacy supportive-oral-defense criterion remains
-**missing**. The current workbook now contains a Module 25-specific candidate
-prompt with a learner-controlled evidence summary, hint ladder, counterexample,
-transfer prompts, and text/voice whiteboard guidance. Its presence is not a
-qualified learner-facing review. The global guide, designated live-chat
-workflow, and generic TA/Study Partner rehearsal are not review evidence:
-generic oral infrastructure does not satisfy the module-specific missing criterion.
-Before this status can change, qualified
-review must assess the candidate protocol's psychological safety, adaptation,
-accessibility-equivalent text route, and support/repair choices. This addendum
-records that unresolved review boundary; it does not silently create an
-oral-defense approval by pointing at a component or external chat.
+Study Partner pointer, supportive-oral pointer, and forward handoff remain
+structural pointers. This record neither changes their status nor upgrades the
+two ambiguities into learner-facing review, release evidence, or mastery.
 
 ## Release-truth checks and unresolved provenance
 
@@ -171,7 +154,7 @@ oral-defense approval by pointing at a component or external chat.
 | Asset/reuse inventory | No non-original external asset is approved by this audit. | Record owner, exact URL/version, access date, license/notice, attribution, modification, distribution decision, and reviewer for any shipped non-original asset. |
 | Preview route | M25/M26 stay preview-only behind authoring-only prerequisite evidence. | Complete/review/release M31–M36, reweave M25, pass its own contract/provenance checks, then separately review M26. |
 | Bounded model/studio | The local model and studio specification are deterministic teaching artifacts with bounded tooling/local progress behavior. | Run declared tests, inspect effects and UI interaction, record environment/results, and preserve course-model versus real-system distinctions. |
-| Human quality/accessibility/oral review | Four ambiguous criteria and the unreviewed M25-specific candidate oral-defense route remain unresolved. | Preserve the exact statuses until qualified review records learner-facing evidence, including accessible interaction, cognitive clarity, and a supportive adaptive oral flow. |
+| Human quality/accessibility/oral review | Two ambiguous criteria and the structurally mapped but unreviewed M25 oral-defense route remain unresolved. | Preserve the exact statuses until qualified review records learner-facing evidence, including accessible interaction, cognitive clarity, and a supportive adaptive oral flow. |
 | Provenance chain | A path, source card, test, or hash alone does not prove delivery, reviewability, CI, deployment, or a release. | Bind a reviewed Git commit, source ref, exact CI run, source review, limitations, and any verified deployment fact without changing publication by implication. |
 
 ## Evidence language for the later M25 synthesis

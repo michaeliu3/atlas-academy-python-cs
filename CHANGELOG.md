@@ -7,6 +7,12 @@ actually published.
 
 ## Unreleased
 
+- Refined preview and advanced learning evidence after targeted source checks:
+  M25/M26 now expose explicit prediction, transfer, confidence, and constructive
+  oral-routing anchors without changing their preview gate; M33/M34 clarify
+  bounded execution and A* goal-test timing; M35 adds sampling-unit and
+  stable-logit BCE code-reading cards. These remain unreviewed material:
+  M31–M36 are authoring-only and M25/M26 preview-only.
 - Made the first private M31 trial easier to run without loosening its boundary:
   the existing guided route now has one 20–40-minute pilot card that joins the
   frozen candidate, Session 1 micro-artifact, prerequisite retrieval,

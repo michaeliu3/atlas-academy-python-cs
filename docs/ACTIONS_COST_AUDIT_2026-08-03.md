@@ -64,3 +64,17 @@ Keep the PR in Draft during iterative authoring and use focused local checks.
 Push a reviewed batch and request the full gate only at a review, weekly
 milestone, or release boundary. Do not remove the portal, two Python, browser,
 or post-merge checks without a separate branch-protection decision.
+
+## Follow-up local correction (awaiting normal push)
+
+The local workflow additionally subscribes to `converted_to_draft`. That event
+creates a skipped, zero-runner workflow which shares the existing concurrency
+group and can cancel an obsolete full PR gate when a review returns to Draft.
+The expensive full-course `workflow_dispatch` trigger was removed: the bounded
+metadata observer remains the documented manual final-verification path, while
+PR gates and `push: main` retain required verification.
+
+GitHub CLI authentication is currently unavailable on this workstation, so this
+follow-up cannot claim that the local correction is live or observe its remote
+cancellation behavior. Re-authenticate, inspect runs read-only, then use a
+normal additive push when the reviewed batch is ready.

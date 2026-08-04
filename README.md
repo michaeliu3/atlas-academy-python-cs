@@ -17,8 +17,9 @@ a defended capstone.
 
 ## Learner experience
 
-The deployed portal is the general learner interface for independent reading and
-interactive course work. It contains:
+The portal is the general learner interface for independent reading and
+interactive course work. Its private deployment status is unverified; see
+[Deployment](docs/DEPLOYMENT.md). It contains:
 
 - accessible, responsive HTML workbooks and visual studios;
 - prediction-before-reveal investigations and confidence-aware diagnostics;

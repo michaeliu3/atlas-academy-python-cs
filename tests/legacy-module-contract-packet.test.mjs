@@ -31,7 +31,7 @@ test("the versioned legacy packet registry retains its canonical digest", async 
     .update(source.replace(/\r\n?/gu, "\n"))
     .digest("hex");
 
-  assert.equal(digest, "052865aec76bf95736c810d23a7b2eba25faa056464c8873a457a7a1bd9f485b");
+  assert.equal(digest, "2cda7e1f25ac3cc41ad4fa3ee547bb1e634228d4ac1ffc823ba37043ae553ca0");
 });
 
 test("the M29 structural packet resolves the canonical graph, audit, evidence, and bounded artifacts", async () => {
@@ -335,9 +335,9 @@ test("the M25 structural packet records its preview-gated synthesis spine withou
     ),
     "ambiguous",
   );
-  assert.equal(statusByCriterion.get("transfer-task"), "ambiguous");
-  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "ambiguous");
-  assert.equal(statusByCriterion.get("supportive-oral-defense"), "missing");
+  assert.equal(statusByCriterion.get("transfer-task"), "pointer-present");
+  assert.equal(statusByCriterion.get("confidence-diagnostic-misconceptions"), "pointer-present");
+  assert.equal(statusByCriterion.get("supportive-oral-defense"), "pointer-present");
 
   const sessionSixOutput = packet?.pointers.find(
     ({ id }) => id === "m25-proposal-boundary-packet",
@@ -350,18 +350,18 @@ test("the M25 structural packet records its preview-gated synthesis spine withou
     ({ criterionId }) => criterionId === "supportive-oral-defense",
   );
   assert.deepEqual(oralCriterion?.pointerIds, [
-    "m25-oral-missing-protocol-hint",
-    "m25-oral-missing-counterexample",
-    "m25-oral-missing-transfer",
-    "m25-oral-missing-reflection-summary",
+    "m25-oral-protocol-hint",
+    "m25-oral-counterexample",
+    "m25-oral-transfer",
+    "m25-oral-reflection-summary",
   ]);
-  const missingOralPointer = packet?.pointers.find(
-    ({ id }) => id === "m25-oral-missing-protocol-hint",
+  const oralPointer = packet?.pointers.find(
+    ({ id }) => id === "m25-oral-protocol-hint",
   );
-  assert.deepEqual(missingOralPointer?.roles, ["oral-protocol", "oral-hint"]);
+  assert.deepEqual(oralPointer?.roles, ["oral-protocol", "oral-hint"]);
   assert.equal(
-    missingOralPointer?.target.headingAnchor,
-    "unresolved-supportive-oral-defense-route",
+    oralPointer?.target.headingAnchor,
+    "supportive-hint-and-repair-ladder",
   );
   assert.ok(
     report.releaseInputPaths.some((path) =>
