@@ -1347,6 +1347,45 @@ it may not treat the packet as a generalization proof or deployment approval.
 
 ---
 
+## Graduated problem ladder
+
+The ladder connects representation, evaluation, optimization, and authority.
+Each step produces an artifact that the next step can inspect rather than
+turning a model score into an unexplained conclusion.
+
+### Ladder step 1 — Recognize the information boundary
+
+Identify the representation, target, available-at-inference features,
+sampling unit, decision owner, and the distinction between a collision and a
+global claim.
+
+### Ladder step 2 — Read a baseline and split trace
+
+Annotate preprocessing, train/validation/fresh partitions, leakage paths,
+metric, calibration, and the exact information each comparator received.
+
+### Ladder step 3 — Derive the local condition
+
+Derive one representation collision, bias–variance term, logit loss, margin,
+kernel, or calibration relation with the stated assumptions.
+
+### Ladder step 4 — Debug a misleading result
+
+Given a baseline mismatch, leakage, gradient check, calibration plot, or model
+card, predict the smallest probe that could falsify the proposed explanation.
+
+### Ladder step 5 — Design an evidence comparison
+
+Design an ablation or model comparison with fixed information, split, tuning
+budget, metric, uncertainty, subgroup/shift probe, and accountable use
+boundary.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—feature availability, entity/time split, dtype, threshold,
+shift, or authority—and defend the narrowest retained claim in the ML dossier
+and Teaching Assistant chat.
+
 ## 9. Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence *before* revealing
@@ -1436,6 +1475,20 @@ different claims.
 **Answer: B.** Repair: documentation is evidence infrastructure, not a
 substitute for accountable human governance.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: deeper model recovers a lost distinction; B: deterministic downstream predictor cannot separate a collision; C: representation is universally useless; D: more data removes the collision | Inspect the representation/task pair and the information lost | Two opposite labels map to the same representation | Add an invertible feature and predict which claim changes |
+| Q2 | A: architecture wins; B: information-boundary mismatch; C: baselines are useless; D: score means deployable | Equalize features, split, preprocessing, tuning, metric, and cost | A weaker model receives an extra predictive feature | Give both models the same feature set and revise attribution |
+| Q3 | A: transform changes every label; B: held-out statistics leak into fitting; C: no generalization is proved; D: seed is invalid | Trace the information path across the split | A global scaling parameter uses the test rows | Fit only on train rows and state the retained finite fact |
+| Q4 | A: model/data valid; B: shift robustness; C: local implementation probe; D: optimizer converged | Bound the objective, point, dtype, step, and tolerance | A gradient check passes while the target or optimizer is wrong | Change dtype and name the new probe |
+| Q5 | A: accuracy makes calibration irrelevant; B: calibration is a separate finite population question; C: confidence is always better; D: plot authorizes action | Separate accuracy, probability quality, utility, and authority | Equal accuracy hides different reliability on a subgroup | Change the subgroup relation and identify the missing evidence |
+| Q6 | A: documentation grants permission; B: documentation exposes limits but not governance; C: monitoring is unnecessary; D: model card proves fairness | Keep consent, legitimacy, monitoring, and fairness as separate claims | A complete card lacks a lawful data owner or escalation path | Change the decision owner and restate the retained documentation fact |
+
+Use each row as a conversation card: predict, inspect the counterexample, and
+transfer one changed premise before accepting an AI-generated explanation.
 
 **Review schedule:** retrieve one collision, one leakage path, one
 objective-to-target gap, and one authority boundary after 1, 3, 7, 14, and 30

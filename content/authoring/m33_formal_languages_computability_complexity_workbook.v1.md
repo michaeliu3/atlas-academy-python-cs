@@ -1209,6 +1209,45 @@ Your dossier must contain:
 
 ---
 
+## Graduated problem ladder
+
+The ladder makes formal theory readable before it becomes proof-heavy. Each
+step preserves the object, quantifier, machine/resource model, and practical
+non-claim from the previous step.
+
+### Ladder step 1 — Recognize the formal object
+
+Classify an alphabet, string, language, DFA/NFA, PDA, grammar, encoded
+machine, decision problem, or complexity resource before discussing behavior.
+
+### Ladder step 2 — Read a finite trace
+
+Trace a recognizer, parser, bounded evaluator, or solver on a concrete input;
+mark the exact observation and the universal claim it does not establish.
+
+### Ladder step 3 — Derive a proof obligation
+
+Write a structural-induction, pumping, closure, reduction, Rice-style, or
+complexity argument with its quantifiers and cost model made explicit.
+
+### Ladder step 4 — Debug a false inference
+
+Given an accepted string, timeout, failed reduction, or benchmark, predict the
+smallest counterexample that separates syntax, semantics, bounded execution,
+and theorem scope.
+
+### Ladder step 5 — Design a hardness or limit argument
+
+Choose a source problem, target problem, computable map, iff direction, or
+resource bound and record what the argument says about instances versus a
+problem family.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—encoding, machine memory, reduction direction, resource,
+or input family—and defend the repaired claim in the formal-limits dossier and
+Teaching Assistant conversation.
+
 ## Confidence-aware diagnostic and spaced review
 
 Choose an answer and record confidence **before** reading its explanation.
@@ -1275,6 +1314,20 @@ regularity or correctness claim.
 
 **Answer: C.** Repair: distinguish runtime evidence from a formal theorem.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: syntax implies safe termination; B: parser condition only; C: parsing grants authority; D: syntax proves semantics | Separate syntax, behavior, and authority layers | A syntactically valid program can diverge or perform an unauthorized action | Change the parser rule while keeping the semantic behavior fixed |
+| Q2 | A: finite tests prove regularity; B: all strings are covered; C: bounded implementation evidence; D: a stack is required | Quantify the language claim separately from the test set | One untested string is rejected by the implementation | Add a longer witness and state what remains unproved |
+| Q3 | A: budget exhaustion proves non-halting; B: no halt within the declared budget; C: halting is decidable; D: input is outside the language | Name the evaluator budget and its observation boundary | A longer budget later reaches a halt | Double the budget and preserve the finite observation wording |
+| Q4 | A: reverse reduction direction; B: source-to-target computable iff map; C: similarity is enough; D: benchmark proves hardness | Draw the arrow and follow the solver consequence | A map in the wrong direction says nothing about target hardness | Reverse the arrow and identify which implication fails |
+| Q5 | A: timeout proves NP-completeness; B: timeout proves no solution; C: configured run hit its limit; D: P≠NP follows | Keep runtime evidence, encoded problem, and theorem classification separate | A satisfiable instance remains after the time limit | Change the encoding or budget and state the retained fact |
+
+The repair card is deliberately constructive: name the exact object or
+quantifier, build the smallest counterexample, then transfer the argument
+before reading a broader theorem.
 
 **Review schedule:** Retrieve the working invariant and one counterexample
 after 1, 3, 7, 14, and 30 days. On days 7 and 30, change one premise: make a

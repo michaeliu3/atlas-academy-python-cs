@@ -1184,6 +1184,44 @@ larger unexamined implementation.
 
 ---
 
+## Graduated problem ladder
+
+Move from a state description to a bounded decision dossier. Every step keeps
+the representation, objective, assumptions, observation, and authority
+boundary visible.
+
+### Ladder step 1 — Recognize the model
+
+List states, observations, actions, goals, costs, constraints, utilities, and
+the decision owner before choosing search or inference machinery.
+
+### Ladder step 2 — Read a search or propagation trace
+
+Annotate frontier order, duplicate policy, heuristic value, constraint
+propagation, solver status, and the exact stopping event in a small instance.
+
+### Ladder step 3 — Derive the condition
+
+Derive one admissibility/consistency, relaxation-bound, feasibility, expected
+utility, belief-update, or MDP condition and state its premises.
+
+### Ladder step 4 — Debug an overclaim
+
+Given a merged state, non-cheapest BFS route, fractional relaxation, timeout,
+or high-probability action, predict the smallest counterexample and repair the
+claim.
+
+### Ladder step 5 — Design a bounded decision comparison
+
+Compare a baseline, solver, or policy with fixed inputs, objective, limits,
+uncertainty, sensitivity probe, abstention rule, and human review point.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—hidden state, edge cost, integrality, time limit, utility,
+or observation—and defend the narrower recommendation in the dossier and TA
+chat.
+
 ## Confidence-aware diagnostic and spaced review
 
 Choose and record confidence before revealing the explanation. A low
@@ -1254,6 +1292,20 @@ external-world claims.
 
 **Answer: B.** Repair: belief, value, and authority are separate inputs.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: room is the whole state; B: histories with different futures may merge; C: any merge makes search wrong; D: a larger heuristic repairs missing state | Add the variable that changes legal futures before searching | Same room with and without a key permits different actions | Add a hidden inventory bit and restate the state |
+| Q2 | A: BFS minimizes arbitrary cost; B: fewer edges means algorithm failure; C: BFS may optimize unit steps only; D: no route exists | Name the edge objective and algorithm guarantee | Two-edge cost-20 route beats a three-edge cost-3 route by edge count | Change all edges to unit cost and predict the conclusion |
+| Q3 | A: fractional candidate is deployable; B: relaxation is original feasible; C: relaxation value is a bound pending feasibility; D: solver is wrong | Keep relaxed and original feasible sets distinct | A fractional solution violates the binary constraint | Restore integrality and identify the new check |
+| Q4 | A: timeout proves infeasibility; B: configured run stopped at limit; C: status proves NP-completeness; D: model matches reality | Separate solver status, encoded model, theorem, and world claim | A longer limit finds a feasible solution | Double the limit and state the only retained observation |
+| Q5 | A: probability is invalid; B: expected utility includes utilities/actions; C: maximum probability never matters; D: calculation grants authority | Keep belief, value, and authority as separate inputs | A lower-probability inspection has higher consequence-weighted utility | Change the utility matrix and recompute the action boundary |
+
+The table is an oral-repair route, not a score: ask for a prediction, reveal
+the smallest counterexample, and then transfer the model under one changed
+premise.
 
 **Review schedule:** Retrieve the working invariant after 1, 3, 7, 14, and
 30 days. On days 7 and 30, change one premise: add a hidden state variable,

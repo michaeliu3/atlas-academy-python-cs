@@ -1342,6 +1342,42 @@ This is a dossier rubric, not a score or a pass/fail certification.
 
 ---
 
+## Graduated problem ladder
+
+The ladder moves from reading a boundary to defending a bounded systems claim.
+Do not skip the trace simply because an AI proposal produces plausible code.
+
+### Ladder step 1 — Recognize the boundary
+
+Label the Python object, native interface, ownership/lifetime promise, array
+shape, layout, device, queue, and measurement boundary in a short call path.
+
+### Ladder step 2 — Read an execution trace
+
+Annotate submission, transfer, enqueue, synchronization, completion, reuse,
+and observation events. Mark which event the code actually records.
+
+### Ladder step 3 — Derive the representation condition
+
+Derive one stride/alias, buffer, autodiff, dtype, or numerical-stability
+condition and state what the shape alone does not imply.
+
+### Ladder step 4 — Debug a tempting result
+
+Given a no-copy claim, early buffer reuse, stale gradient, or one-run speedup,
+predict the smallest probe that could falsify it and inspect the code path.
+
+### Ladder step 5 — Design a bounded measurement
+
+Design a CPU/device comparison with versions, backend, dtype, warm-up,
+repetitions, raw records, semantic-equivalence check, and an explicit
+non-claim about performance.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—layout, device, stream, seed, backend, or workload—and
+defend the narrower execution/transfer claim in the dossier and TA chat.
+
 ## Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence *before* reading the
@@ -1483,6 +1519,22 @@ Which statement is strongest after one timed run?
 **Answer: C.** Misconception repaired: a measurement is an observation, not a
 mechanism or recommendation.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: correct output proves no copy; B: shape/dtype are sufficient; C: exporter/consumer/layout/lifetime evidence; D: speed proves handoff | Read the buffer contract, strides, ownership, and observed conversion | Equal-shaped input is copied because contiguity is required | Change writability and identify the new contract field |
+| Q2 | A: completed kernel; B: host submission interval; C: end-to-end throughput; D: device-to-host transfer | Add the documented completion/synchronization event | An enqueue returns before device work starts | Time a synchronous version and state the narrower comparison |
+| Q3 | A: equal shape means equal strides/cost; B: independent mutation; C: more layout/alias/dtype evidence; D: suitable for every kernel | Inspect layout, ownership, backend, and numerical requirements | A transpose shares storage while retaining the same shape | Replace the view with a copy and predict alias evidence |
+| Q4 | A: semantic failure; B: correctness may hold while resources differ; C: GPU always fixes it; D: profiler gives one cause | Separate semantic equivalence from allocation and peak-memory evidence | Broadcasting materializes a temporary larger than available memory | Change dtype and predict the memory bound |
+| Q5 | A: submission return; B: deleted Python reference; C: documented last consumer; D: parallel call | Trace the last-use/ownership event before pool reuse | A device consumer reads a buffer after it has been recycled | Move the consumer to another stream and name the synchronization |
+| Q6 | A: global model correctness; B: bounded derivative probe; C: every device agrees; D: data has no stale values | Bound the objective, point, dtype, step, tolerance, and implementation | A local gradient check passes while the data label is stale | Perturb one input and state what the probe can still show |
+| Q7 | A: seed fixes all variation; B: environment record plus bounded output claim; C: screenshot; D: faster implementation | Record runtime, library, device, driver, order, and determinism settings | Same seed with a different backend changes reduction order | Change dtype and revise reproducibility wording |
+| Q8 | A: universal speedup; B: bottleneck proof; C: one protocol-scoped observation; D: compiler chose best algorithm | Repeat, retain raw records, check semantic equivalence, and compare alternatives | A warm-cache run hides transfer cost and reverses the recommendation | Add a cold-start condition and predict the new trace |
+
+The table is a repair route, not a grading key: a learner can ask for one
+hint, inspect the counterexample, and then answer the transfer prompt.
 
 ### Compact repair key
 

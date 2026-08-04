@@ -118,9 +118,9 @@
     {
       "id": "pedagogy",
       "requirement": "M31–M36 have six connected sessions, problem ladders, per-distractor repair, code/visual work, and constructive oral defense.",
-      "state": "open",
-      "evidence": "content/course/contracts/authoring-delivery/; content/authoring/; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md",
-      "openItem": "Systematically retrofit the six packs and add machine-checkable misconception and ladder evidence."
+      "state": "partial",
+      "evidence": "content/course/contracts/authoring-delivery/; content/authoring/; tests/m31-m36-pedagogy.test.mjs; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md",
+      "openItem": "Obtain human pedagogical and accessibility review of the repaired packs and retain module-specific evidence without treating structural checks as publication or mastery."
     },
     {
       "id": "calibration",

@@ -1152,6 +1152,43 @@ publication/release claim; M25's separate promotion requirements still apply.
 
 ---
 
+## Graduated problem ladder
+
+The ladder turns a learning-theory statement into a reliable-system dossier.
+At every step keep the population, class, loss, environment, finite
+observation, and human-control boundary distinct.
+
+### Ladder step 1 — Recognize the claim layer
+
+Label risk, empirical risk, representation, distribution, hypothesis class,
+loss, algorithm, execution environment, monitor, and decision owner.
+
+### Ladder step 2 — Read finite evidence
+
+Annotate a sample, training trace, theorem card, reproducibility record,
+calibration result, or shift alert and state exactly what was observed.
+
+### Ladder step 3 — Derive the theorem condition
+
+Write the PAC/VC, concentration, margin, stability, regret, or finite-class
+implication with quantifiers, sampling, class, loss, and non-conclusion.
+
+### Ladder step 4 — Debug an overgeneralization
+
+Given a low empirical risk, gradient norm, fixed seed, calibration plot, or
+drift alert, predict the smallest counterexample that blocks the broader claim.
+
+### Ladder step 5 — Design a reliable-learning protocol
+
+Specify repeated runs, environment fields, shift/robustness probes, monitor
+owners, intervention limits, uncertainty, escalation, and a bounded dossier.
+
+### Ladder step 6 — Transfer and defend
+
+Remove one premise—IID, representation information, fixed device, calibration
+relation, or human approval—and defend the strongest remaining claim in the TA
+oral conversation.
+
 ## 9. Confidence-aware diagnostic and spaced review
 
 Choose an answer and record confidence before reading its explanation. Low
@@ -1253,6 +1290,21 @@ action; B confuses an alert with a causal diagnosis; D ignores an observation
 that may matter. Repair: monitoring is evidence plus accountable action, not
 automatic authority.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: finite empirical risk equals population risk; B: one sample generalizes everywhere; C: finite empirical calculation under the declared sample/loss/procedure; D: objective choice is settled | Separate empirical risk, population risk, and use value | A predictor memorizes a finite sample and fails on the next relation | Change the sampling relation and restate the finite fact |
+| Q2 | A: gradient norm is a population guarantee; B: observation proves cross-platform reproducibility; C: bounded algorithm/objective observation; D: score grants safe authority | Keep optimization, generalization, execution, and authority gaps separate | A low gradient occurs for a misspecified objective on one device | Change the backend and identify the new execution evidence |
+| Q3 | A: brand name is a theorem object; B: distribution/class/loss/quantifiers/conditions/conclusion; C: one held-out score suffices; D: every network is covered | Write the quantified theorem card and its class boundary | A theorem excludes the chosen architecture or sampling rule | Restrict the hypothesis class and revise the conclusion |
+| Q4 | A: seed fixes every variation; B: runtime/device/backend/dtype/order also matter; C: theory forbids reproduction; D: seed proves numerical correctness | Build a bounded environment and output comparison record | Same seed with a different reduction order changes the result | Change precision and state the reproducibility non-claim |
+| Q5 | A: one calibration plot proves shifted calibration/utility; B: finite estimate with population/binning/selection limits; C: monitoring is unnecessary; D: calibration proves fairness | Separate calibration, shift, utility, fairness, and authority | A relation-specific calibration curve fails after representation shift | Change the relation and name the monitor/owner evidence |
+| Q6 | A: retrain autonomously; B: alert proves root cause; C: follow owner/probe/intervention/stop boundary; D: unchanged source means ignore alert | Treat monitoring as evidence plus accountable action | Input-frequency drift has several compatible causes | Change the owner or intervention budget and revise the handoff |
+
+Each row names the misconception, narrow repair, counterexample, and transfer
+prompt required for a constructive oral defense; it never turns the answer
+into a pass/fail score.
 
 **Review schedule:** after 1, 3, 7, 14, and 30 days, retrieve one definition,
 one theorem condition, one finite-experiment boundary, and one monitoring

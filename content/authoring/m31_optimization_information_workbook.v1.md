@@ -1352,6 +1352,46 @@ decision.
 
 ---
 
+## Graduated problem ladder
+
+Work upward only after the previous artifact is understandable. The ladder
+keeps recognition, reading, derivation, debugging, design, and transfer
+connected rather than turning the advanced pack into disconnected theory.
+
+### Ladder step 1 — Recognize the object
+
+Label the decision owner, variables, units, objective, feasible set, sampling
+story, and information boundary in a short optimization or rate-distortion
+claim.
+
+### Ladder step 2 — Read a trace
+
+Annotate a gradient, projection, solver-status, KL-support, or information
+trace. Mark which values are observations and which would require a theorem.
+
+### Ladder step 3 — Derive the condition
+
+Derive one stationary, convexity/KKT, concentration, support, or
+rate-distortion condition and state every assumption before using it.
+
+### Ladder step 4 — Debug a broken claim
+
+Given a finite-difference mismatch, infeasible point, support error, noisy
+run, or over-broad information formula, predict the first repair probe and
+write the smallest counterexample.
+
+### Ladder step 5 — Design bounded evidence
+
+Design a reproducible finite experiment with a declared estimator, units,
+configuration, uncertainty, stopping rule, and non-claim. Explain which
+alternative explanation remains open.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—objective, constraint, distribution, precision, source, or
+authority—and defend the narrower conclusion in the evidence dossier and
+Teaching Assistant conversation.
+
 ## Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence **before** revealing
@@ -1530,6 +1570,24 @@ the explanation.
 3, 7, 14, and 30 days. On days 7 and 30, change one premise: a nonconvex
 objective, a violated qualification, dependent gradients, a support mismatch,
 or a restricted variational family. Update—not erase—the earlier evidence card.
+
+### Distractor repair cards (per option)
+
+Each row is a compact route for every distractor, not merely an answer key.
+Use the named repair, then the counterexample and transfer prompt before
+returning to the explanation.
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: more data supplies purpose; B: declared target/owner; C: solver score decides meaning; D: agent infers authority | Write target, proxy gap, hard constraint, and owner | An optimizer cannot choose an omitted safety constraint | Replace the objective with a safety-sensitive proxy and name the owner |
+| Q2 | A: mismatch means nonconvexity; B: shrink step forever; C: inspect domain, dtype, implementation, and bounded direction; D: finite difference is proof | Separate local diagnostic evidence from a theorem | Cancellation makes a smaller step less informative | Change dtype and predict which probe remains valid |
+| Q3 | A: zero gradient proves constrained optimum; B: unconstrained stationarity only; C: nonconvexity follows; D: constraint can be ignored | Check feasibility and the certificate assumptions separately | A zero-gradient point lies outside the feasible half-space | Replace the inequality with an equality and restate the certificate |
+| Q4 | A: six decreases prove convergence; B: toy problem solved globally; C: six configured observations; D: projection validates the proxy | Record residuals, projection, initialization, and theorem conditions | A decreasing finite trace stops before a worse region | Double the step size and predict the evidence boundary |
+| Q5 | A: one run proves unbiasedness; B: general convergence; C: declared finite observation; D: noise may be hidden | State estimator, sampling/dependence, step-size, and repetition scope | One favorable noisy sequence differs from its expectation | Change the sampling dependence and revise the claim |
+| Q6 | A: support failure is zero; B: repair support mismatch; C: log base fixes it; D: KL direction proves information | Make the joint support/model boundary explicit | (p_i>0,q_i=0) makes the finite term undefined/infinite | Replace the source law and identify which formula must be rederived |
+| Q7 | A: units alone preserve the formula; B: biased source/asymmetric loss or finite block changes the regime; C: recording (D) is enough; D: renaming variables changes nothing | Restate source law, distortion, units, and theorem regime | A biased Bernoulli source invalidates the uniform binary expression | Change Hamming to asymmetric distortion and predict the new obligation |
+| Q8 | A: displayed gap supplies KKT; B: inspect feasibility, stationarity, complementarity, convexity, and qualification; C: constraints can be ignored; D: all nonconvex problems have strong duality | Separate solver output from a certificate and globality assumptions | A small numerical gap with violated feasibility is not a certificate | Remove Slater’s condition and state the retained finite fact |
+| Q9 | A: higher ELBO is exact; B: score proves calibration/safety; C: objective improved under the declared model/family; D: KL direction no longer matters | Name model, family, support, approximation gap, and decision value | A restricted variational family improves ELBO while missing the posterior | Change the family and state which conclusion must be withdrawn |
 
 ---
 

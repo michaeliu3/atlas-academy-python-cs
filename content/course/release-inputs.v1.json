@@ -74,27 +74,27 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "7ce7c0703894c964679818bb4c70e1f0cf15c3f2acc51dc883018bb5827b04a3"
+      "sha256": "6cfd2899112cd3937eb0d9b419ddfe50fad2d38247192aab3cd2aa11ffcbdf4c"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "07fd9811af021bf929e935f6d6396885a630f2723d8bb32ab1b20ff8d1babe87"
+      "sha256": "7b16952acad816cf04322210841c8a3b0ce8d37f62518aadc07b7749aead1770"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "df235f3ae2a67e709c058b3a648b0fb278709ff48a6066e3e7010c32449c4228"
+      "sha256": "d46eb9f2bfecbdb743898c0f1de8580fb14aca1f7e8843317482068bb28d2e08"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "1124d0bd123df253d9b44b5b40613173b7372544acbe4a6131e44558dcf2dca4"
+      "sha256": "43604ffb9ba5f08ad30abaeabaa2e36e27636d59bff1527dcb5d733bf3674bbd"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "cf9a84de91df803d42fdd78a0545106ea6f766ebecb4bf406cac966b2b4ee98b"
+      "sha256": "e0625194d21b3fe34502bf8fc2ceaab1077890073a719c069bc0922387780361"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "2dc1557587666d772563cc4775ee137e0c055d001967f6e83a1351186290c391"
+      "sha256": "ea55fc68af146ebbc46a8665e7944d0649cf8e7c83d01784cf38c5d978afd779"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "d38681ddb5184d3cbf9906151c15e3d6951323c6c6ac513fc98cf625d78b04d0"
+      "sha256": "ded0e6d666d65f59456efd56ee61a1555163c043d2204e2d3a92e068e3361675"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
