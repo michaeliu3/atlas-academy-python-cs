@@ -8,7 +8,7 @@ Atlas has four deliberately separate surfaces:
 | --- | --- | --- |
 | Atlas portal | Course map, workbooks, studios, diagnostics, text oral-defense route, and copyable role briefs | Voice, microphone access, live-chat rendering, platform transcript retention, or external Notion writes |
 | Teaching Assistant Codex chat | First-principles teaching, code/design reasoning, and the supportive post-module oral defense | Pass/fail grading or a claim that spoken fluency proves mastery |
-| Study Partner Codex chat | Live concept discussion, retrieval, brainstorming, code-reading, and low-pressure rehearsal | The formal oral-defense role or grading |
+| Study Partner Codex chat | Live concept discussion, retrieval, brainstorming, code-reading, and low-pressure practice | The formal oral-defense role or grading |
 | Notion | Concise, structured learning notes and handoffs | Raw voice/transcript archive, surveillance, or automatic proof of progress |
 
 ## Voice and whiteboard protocol
@@ -27,10 +27,11 @@ While speaking, both partners keep the visible chat usable as a whiteboard:
 - use small labelled tables or diagrams only when they clarify a relation; and
 - never rely on speech-only or visual-only explanation.
 
-Before relying on this workflow, manually check the exact two chats: start a
-voice session, request one display equation and one fenced Python trace, and
-verify that the visible fallback remains readable after the conversation. That
-is platform acceptance evidence, not an Atlas portal test.
+If you choose to use voice or live rendering, you may manually check the exact
+two chats: start a voice session, request one display equation and one fenced
+Python trace, and verify that the visible fallback remains readable after the
+conversation. That is optional platform acceptance evidence—not an Atlas portal
+test and never a prerequisite for normal study or the accessible text workflow.
 
 ## Module-specific follow-on contexts
 
