@@ -414,6 +414,25 @@ Choosing four bytes for a value whose fixture range is smaller is a deliberate
 experiment contract, not an optimal-format claim. A portable artifact would
 need an explicit endian encoder such as `struct`, as Module 15 required.
 
+### First-principles checkpoint — contract before mechanism
+
+Use this reasoning spine whenever a low-level explanation starts to drift:
+
+```text
+semantic result
+→ representation contract
+→ state transition
+→ declared model or observation
+→ permitted claim
+```
+
+The same bits do not choose their own meaning. `11111100` is \(-4\) only under
+the signed 8-bit two's-complement contract; under unsigned 8-bit interpretation
+it is \(252\). Changing the interpretation changes the conclusion without
+changing a bit. Likewise, a recorded bytecode sequence is an observation of a
+named CPython version, not evidence of a host instruction count or cache event.
+Name the contract before drawing the mechanism.
+
 ### 2.2 Width creates a finite algebra
 
 An unsigned \(w\)-bit field represents:
@@ -1465,6 +1484,16 @@ flowchart TB
     OS <--> DEV
 ```
 
+### Linear text alternative — one operation through the execution stack
+
+Start with the Python result contract, then follow the source into a CPython
+code object and an executing frame. Native runtime software implements that
+frame through a host ISA; a processor implementation and memory hierarchy
+realize those machine transitions. An I/O request branches separately into OS
+and device handling. This is a dependency and evidence route, not a one-to-one
+mapping from source line to process, bytecode, native instruction, cache access,
+or physical transfer.
+
 Arrow meanings differ:
 
 - source is compiled into a code object;
@@ -1523,6 +1552,22 @@ Unsafe interpretations:
 Do not grade memorized opcode names. Grade the ownership statement and the
 ability to explain why version-scoped observation differs from language or ISA
 guarantee.
+
+### Code-reading, debugging, and design checkpoint — source evidence is not hardware evidence
+
+Use the `dis` loop above to make four columns before drawing a performance
+conclusion:
+
+| Layer | Evidence you may record | Conclusion you may not make yet |
+|---|---|---|
+| Python semantics | the admitted input returns the specified count | which bytecodes or hardware operations occur |
+| CPython bytecode | opcode names on the recorded implementation/version | native instruction count or cache accesses |
+| declared teaching model | one finite ISA/cache trace under named rules | behavior of the host processor |
+| measurement | a timing vector and its controls | a unique causal explanation |
+
+**Prediction.** If `dis` prints an opcode named `LOAD_FAST`, which column did
+it fill? Repair the false comment “native instructions and cache accesses” to
+the narrower, version-scoped bytecode observation before continuing to M18.
 
 ### 7.4 A thin pinned CPython bridge
 

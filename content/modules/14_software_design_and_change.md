@@ -295,6 +295,23 @@ For each request, predict touched responsibilities before reading the code:
 This matrix is not proof of future maintainability. It is a falsifiable design
 hypothesis: future patches should touch fewer unrelated owners.
 
+### First-principles checkpoint — derive an owner before choosing a pattern
+
+Start with one requested change, not a pattern name. For “add recency ranking,”
+make the causal path explicit:
+
+| Question | Working answer | What would disprove the boundary? |
+|---|---|---|
+| What observation must remain? | callers still receive ordered, unique `items` | an unchanged-input regression changes the result |
+| What decision varies independently? | the ordering rule | a source-format change also requires editing the ranker |
+| Who owns that decision? | `RankingPolicy` plus its composition choice | unrelated workflow or presentation code must change |
+| What stays outside the owner? | parsing grammar, transition legality, legacy field spelling | the new policy needs to inspect or mutate those details |
+
+This is the first-principles move: a boundary follows an independently changing
+decision and a preserved observation. It is not proof that a class hierarchy is
+good. Predict a smallest test that could falsify the proposed boundary, state
+your confidence, then inspect the patch.
+
 ### 4.3 A syntax-valid broken prototype
 
 Predict all policies hidden inside `plan`:
@@ -396,6 +413,32 @@ This statement immediately forces questions:
 - Are side effects and partial results observed?
 
 Tests sample this relation; they do not prove it for all inputs.
+
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+Let \(P\) be the old program, \(P'\) the changed program, \(O\) the chosen
+observable behavior, and \(D_O\) the admitted inputs. The refactor claim is
+
+\[
+\forall x \in D_O,\quad O(P,x)=O(P',x).
+\]
+
+To reason about it, name the assumptions: which inputs are admitted, whether
+exception class/order/side effects count as observations, and which dependency
+or environment behavior is deliberately outside \(O\). The proof idea is to
+preserve each named observation through the changed owner; finite tests can
+refute the universal claim but cannot establish it for every \(x\).
+
+**Counterexample.** Two versions can return the same `items` while one changes
+an invalid-input exception into an empty result, reverses tied results, or sends
+an external request. They are not equivalent when that behavior is in \(O\).
+
+For the four pressures in the earlier matrix, record a local count
+\(C(r)\) of independently owned responsibilities predicted to change before
+and after the design. For example, a recency rule may move from
+\(C(r)=4\) coupled owners to \(C(r)=2\) (`RankingPolicy` and composition).
+That is a change-scope hypothesis—not a universal maintainability metric—and a
+later patch or regression can falsify it.
 
 ### 5.2 Observation ledger
 
@@ -2888,6 +2931,18 @@ flowchart TD
     Review --> Verification["Independent bounded evidence"]
     Verification --> Defense["Oral defense + handoff"]
 ```
+
+### Visual text equivalent — design and change from pressure to evidence
+
+Read the map as one causal route. A change pressure reveals a decision, which
+needs a named owner; cohesion keeps decisions that vary together there, while
+explicit coupling shows the remaining knowledge edges. M12 supplies the public
+contract and M13 supplies observations/evidence, so refactoring can preserve a
+defined behavior instead of merely moving lines. The chosen decomposition,
+dependency direction, and state invariants then constrain a staged change.
+Git records the reversible sequence; review compares the proposed model with
+the patch; bounded verification supports one carefully limited conclusion; the
+oral handoff names what remains unknown for M15.
 
 ### 22.1 One connected explanation
 

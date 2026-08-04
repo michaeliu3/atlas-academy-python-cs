@@ -116,3 +116,13 @@ This review supports a rigorous, connected M11–M16 learning route with clear
 adaptations and explicit limits. It does not establish university equivalence,
 credit, a degree, universal mastery, or a release-complete Atlas product.
 
+## 2026-08-03 clarity follow-up
+
+Using the same official calibration corpus, M14–M16 received small learner-facing
+reconstruction cards rather than new scope: M14 now makes ownership and a
+refactor claim's assumptions/counterexample explicit; M15 traces a narrow
+replacement claim and an installed-artifact investigation; M16 makes
+fact-identity and the fact-map readable without its diagram. These changes
+support the existing MIT/Georgia Tech/CMU/Berkeley-calibrated reasoning sequence.
+They do not add team-scale review, CI/CD, storage-engine work, a release claim,
+or institutional equivalence.

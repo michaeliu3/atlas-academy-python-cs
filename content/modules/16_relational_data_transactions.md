@@ -483,6 +483,23 @@ They support derivation; they do not discover domain meaning for us.
 > Facts with different identities and change lifetimes should not be forced to
 > share one tuple identity.
 
+### First-principles checkpoint — facts before tables
+
+Before naming a table or normal form, write one card for each proposed fact:
+
+| Fact | Identity | Change lifetime | Legal-state invariant |
+|---|---|---|---|
+| imported event | `event_id` | one observed learning event | belongs to one admitted run |
+| concept | `concept_id` | survives any one event | can exist with no event |
+| prerequisite edge | `(concept_id, prerequisite_id)` | survives event deletion | two concept identities form one directed edge |
+
+Now try to falsify an FD with a legal instance. Two `loops` events can have
+different confidence, so `concept_id → confidence` is false even when a small
+sample happens to agree. In a flattened record with two prerequisite rows, an
+event-confidence correction can require two updates; in the separated event
+fact it requires one. That count is an anomaly demonstration, not a performance
+benchmark or proof that every decomposition is better.
+
 ### 2.8 Normal forms, one pressure at a time
 
 **First normal form (1NF).** Attribute values are atomic relative to the chosen
@@ -583,6 +600,16 @@ erDiagram
         text prerequisite_id PK,FK
     }
 ```
+
+### Linear text alternative — one event through the fact map
+
+An import run owns the source and bundle digest for one admitted attempt. Each
+event belongs to exactly one run and records its position, concept, and
+confidence. A concept remains a separate identity even when it has no events.
+Each prerequisite row is an independent directed edge from one concept to a
+required concept. This route explains fact ownership and why duplicated facts
+create anomalies; it does not by itself establish transaction visibility,
+constraint enforcement, or recovery behavior.
 
 The two relationships from `CONCEPTS` to `PREREQUISITES` have different roles:
 one edge leaves the learned concept and the other points to the required
