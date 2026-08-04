@@ -120,6 +120,12 @@ recorded. It independently fetches the run and jobs, retains the observed run
 attempt, and never checks out, executes, caches, or handles artifacts from
 candidate code.
 
+For the normal no-Actions collection path, follow the
+[read-only Course CI evidence-capture procedure](RELEASE_EVIDENCE_CAPTURE.md).
+It specifies the same run/attempt/jobs boundary, the normalized local-verifier
+schema, and the rule that a later additive provenance commit is required before
+any record is claimed.
+
 ### On-demand Course CI metadata verifier
 
 `.github/workflows/observe-course-ci-metadata.yml` is an explicitly dispatched,
