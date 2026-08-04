@@ -629,43 +629,23 @@ test("the legacy module-contract audit resolves every M1–M30 pointer without a
   assert.equal(report.summary.humanApprovals, 0);
   assert.equal(report.summary.publicationChanges, 0);
   assert.deepEqual(report.summary.byStatus, {
-    "pointer-present": 439,
-    ambiguous: 40,
-    missing: 1,
+    "pointer-present": 478,
+    ambiguous: 2,
+    missing: 0,
   });
   assert.equal(audit.criterionIds.length, 16);
   assert.equal(
     report.summary.byCriterion["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"].ambiguous,
-    9,
+    0,
   );
   assert.equal(report.summary.byCriterion["study-partner-prompt"].missing, 0);
-  assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 1);
-  assert.ok(
-    audit.modules
-      .filter(({ moduleId }) => [
-        "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m10", "m23", "m27", "m28", "m29", "m30",
-      ].includes(moduleId))
-      .every(({ evidence }) => Object.values(evidence).every(({ status }) => status === "pointer-present")),
-  );
+  assert.equal(report.summary.byCriterion["supportive-oral-defense"].missing, 0);
   const expectedAmbiguousByModule = new Map([
-    ["m08", ["first-principles"]],
-    ["m09", ["first-principles"]],
-    ["m11", ["code-reading-debugging-design", "accessible-visual-text-alternative"]],
-    ["m12", ["accessible-visual-text-alternative"]],
-    ["m13", ["accessible-visual-text-alternative"]],
-    ["m14", ["first-principles", "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
-    ["m15", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
-    ["m16", ["first-principles", "accessible-visual-text-alternative"]],
-    ["m17", ["first-principles", "code-reading-debugging-design", "accessible-visual-text-alternative"]],
-    ["m18", ["first-principles", "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative"]],
-    ["m19", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative", "supportive-oral-defense"]],
-    ["m20", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "accessible-visual-text-alternative", "supportive-oral-defense"]],
-    ["m21", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments"]],
-    ["m22", ["rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "code-reading-debugging-design"]],
-    ["m24", ["accessible-visual-text-alternative", "ta-prompt"]],
+    ["m25", ["prerequisite-forward-map"]],
+    ["m26", ["prerequisite-forward-map"]],
   ]);
-  for (const [moduleId, ambiguousCriteria] of expectedAmbiguousByModule) {
-    const evidence = audit.modules.find((module) => module.moduleId === moduleId)?.evidence;
+  for (const { moduleId, evidence } of audit.modules) {
+    const ambiguousCriteria = expectedAmbiguousByModule.get(moduleId) ?? [];
     assert.deepEqual(
       Object.entries(evidence)
         .filter(([, { status }]) => status === "ambiguous")

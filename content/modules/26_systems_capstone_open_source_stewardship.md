@@ -712,6 +712,63 @@ next falsifier:
 release consequence if evidence changes:
 ~~~
 
+### Rigor card — a release claim is a conjunction of scoped evidence
+
+### Definition — a scoped release claim is a conjunction
+
+For a fixed local fixture, write a release claim as a
+conjunction, not a score:
+
+~~~text
+R_fixture = declared behavior ∧ traceable evidence ∧ recovery boundary ∧ human-control boundary
+~~~
+
+This is a minimal fixed-fixture teaching model, not a full release-admission
+checklist. A real evidence ledger still needs named owners, authority/data and
+architecture boundaries, version/scope, and known limits.
+
+### Derivation / proof idea — an unsupported conjunct blocks promotion
+
+Each conjunct has its own owner, artifact, scope, and limitation. If one
+conjunct is unsupported, then `R_fixture` is unsupported: a conjunction cannot
+be promoted by the strength of its other terms. This is a proof idea about the
+declared Boolean claim, not proof that a real service is safe to release.
+
+### Assumption boundary — one logical event and one atomic boundary
+
+Let `e-204` name one logical request. Assume that both attempts carry that same
+stable identifier and that a uniqueness-enforced conditional idempotency record
+and its effect share one atomic transaction boundary. Under those assumptions,
+two attempts can yield one durable effect:
+
+### Numerical experiment — two attempts and one durable effect
+
+~~~text
+attempt 1: e-204 absent -> atomically record e-204 and create effect  -> durable effects = 1
+attempt 2: e-204 present -> return the recorded result     -> durable effects = 1
+~~~
+
+The numerical observation is `2 attempts / 1 logical event / 1 durable effect`.
+It supports only that named fixture and transaction boundary; it does not claim
+global exactly-once delivery, a distributed guarantee, or operational release
+readiness.
+
+### Counterexample — check-then-append can duplicate an effect
+
+A convenient check-then-append sequence can interleave:
+
+~~~text
+attempt A: check e-204 absent
+attempt B: check e-204 absent
+attempt A: append effect
+attempt B: append effect
+~~~
+
+Now the same `2 attempts / 1 logical event` fixture has `2 durable effects`.
+The behavior and recovery conjuncts are no longer supported, so the correct
+release consequence is **narrow, defer, or repair the transaction boundary**—
+not “the tests mostly passed.”
+
 ### Fill the Advanced Claim Join before promoting an intelligent-feature claim
 
 Use the Section 1.1B table as a linked part of this ledger when the capstone

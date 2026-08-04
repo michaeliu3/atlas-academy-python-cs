@@ -37,7 +37,8 @@ test("the M25 source-audit addendum stays internal and preserves preview and unr
   assert.match(addendum, /CLI parses one enumerated[\s\S]*JSON packet/u);
   assert.match(addendum, /## Preserved audit ambiguities and review boundary/u);
   assert.match(addendum, /prerequisite\/forward map[\s\S]*\*\*ambiguous\*\*/u);
-  assert.match(addendum, /rigor bundle[\s\S]*\*\*ambiguous\*\*/u);
+  assert.match(addendum, /rigor bundle[\s\S]*\*\*pointer-present\*\*/u);
+  assert.match(addendum, /retains one \*\*ambiguous\*\* criterion/u);
   assert.match(
     addendum,
     /Prediction, transfer,[\s\S]*confidence-diagnostic, and supportive-oral pointers are present structurally/u,

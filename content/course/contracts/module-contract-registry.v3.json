@@ -4595,7 +4595,7 @@
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
@@ -4782,7 +4782,7 @@
         },
         {
           "id": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-          "status": "ambiguous",
+          "status": "pointer-present",
           "source": {
             "kind": "legacy-audit-criterion",
             "path": "content/course/contracts/legacy-module-contract-audit.v1.json",

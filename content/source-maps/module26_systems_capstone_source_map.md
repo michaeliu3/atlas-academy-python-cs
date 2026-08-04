@@ -1154,3 +1154,13 @@ purpose + non-goal + accountable owner
 That is the final standard: understand the system deeply enough to describe its
 architecture, defend its tradeoffs, challenge automated output, release it with
 a recovery path, and admit exactly what remains unknown.
+
+## 2026-08-03 structural rigor follow-up
+
+The workbook now makes its already-scoped evidence argument easier to inspect
+through **Rigor card — a release claim is a conjunction of scoped evidence**.
+Its two-attempt `e-204` fixture, assumptions, Boolean proof idea, and
+check-then-append counterexample are a bounded local teaching model. The card
+resolves only a structural audit pointer; it does not change M26's preview
+availability, the authoring-only prerequisite gate, human-review state,
+accessibility status, operational-release evidence, or learner mastery.

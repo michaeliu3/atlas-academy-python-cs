@@ -7,12 +7,18 @@ actually published.
 
 ## Unreleased
 
+- Added two compact, scoped rigor cards to the preview M25/M26 synthesis
+  workbooks: a five-item calibration fixture and a two-attempt idempotency
+  fixture. They resolve only their structural rigor pointers; the current audit
+  is 478 present / 2 intentional preview ambiguities / 0 missing. Both preview
+  prerequisites, review state, release state, and learner-mastery boundary
+  remain unchanged.
 - Clarified five older learning routes without expanding scope: M8/M9 now make
   their existing first-principles derivations visible, while M11–M13 provide
   concise nonvisual routes through their core diagrams. The structural audit
-  now records 476 present pointers and four M25/M26 entries still open, two of
-  which intentionally preserve the preview gate; none of this promotes review,
-  accessibility approval, release, or learner mastery.
+  at that point recorded 476 present pointers and four M25/M26 entries still
+  open, two of which intentionally preserved the preview gate; none of this
+  promoted review, accessibility approval, release, or learner mastery.
 - Strengthened the M19–M24 systems-and-runtime reasoning chain with compact
   rigor cards, code-reading/design checkpoints, explicit visual-text routes,
   and named Teaching Assistant support where those structural anchors were
