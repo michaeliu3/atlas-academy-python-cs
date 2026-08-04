@@ -4,9 +4,9 @@ import { moduleHref, moduleManifest } from "@/lib/module-catalog";
 import { CourseReaderHeader } from "./CourseReaderHeader";
 
 export const metadata: Metadata = {
-  title: "Course Library · Atlas Academy",
+  title: "Lecture Notes · Atlas Academy",
   description:
-    `Read the connected Atlas reference library: ${moduleManifest.readerVisibleModuleCount} learner-visible workbooks.`,
+    `Read the connected Atlas lecture notes: ${moduleManifest.readerVisibleModuleCount} learner-visible workbooks.`,
 };
 
 export default function ModuleLibraryPage() {
@@ -16,20 +16,27 @@ export default function ModuleLibraryPage() {
       <div id="main-content" tabIndex={-1}>
         <header className="library-hero">
           <p className="kicker">
-            The reading room · {moduleManifest.legacyOpenModuleCount} open legacy workbooks + {moduleManifest.previewReaderModuleCount} synthesis previews
+            Atlas lecture notes · {moduleManifest.legacyOpenModuleCount} open legacy workbooks + {moduleManifest.previewReaderModuleCount} synthesis previews
           </p>
           <h1>
-            One course.
+            Lecture notes.
             <em>Every connection visible.</em>
           </h1>
           <p>
-            These are the full authored workbooks—not summaries. This library
-            groups them by knowledge arc for reference browsing. For the
+            These are the full authored workbooks—not summaries. The notes
+            group the course by knowledge arc for reference browsing. For the
             prerequisite-first sequence, use the <Link href="/route">60-day route</Link>.
             Then follow every diagram and code trace, and use the quizzes as
             instruments for finding the exact model that needs repair.
           </p>
-          <dl className="library-measures" aria-label="Course library scale">
+          <aside className="library-boundary" aria-label="Advanced lecture-note boundary">
+            <strong>Where the advanced notes live</strong>
+            <span>
+              M31–M36 have ready private guided-study packs. Their portal
+              reader remains hidden; use the <Link href="/learning-partners">Teaching Assistant and Study Partner guide</Link> to prepare one named private session at a time.
+            </span>
+          </aside>
+          <dl className="library-measures" aria-label="Lecture notes scale">
             <div>
               <dt>{moduleManifest.legacyOpenModuleCount}</dt>
               <dd>open workbooks</dd>

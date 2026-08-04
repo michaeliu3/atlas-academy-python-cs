@@ -124,7 +124,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
       <div id="main-content" className="module-page" tabIndex={-1}>
         <header className="module-page-hero">
           <div className="module-page-breadcrumb">
-            <Link href="/modules">Course library</Link>
+            <Link href="/modules">Lecture notes</Link>
             <span aria-hidden="true">/</span>
             <Link href={`/modules#${courseModule.arcId}`}>
               Arc {arc?.numeral}: {arc?.title}

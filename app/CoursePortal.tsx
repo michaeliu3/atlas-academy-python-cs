@@ -107,7 +107,7 @@ export function CoursePortal() {
         </button>
         <nav aria-label="Course navigation">
           <Link className="header-link" href="/modules">
-            Course library
+            Lecture notes
           </Link>
           <Link className="header-link" href="/learning-partners">
             Learning partners

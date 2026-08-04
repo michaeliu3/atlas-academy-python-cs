@@ -42,7 +42,7 @@ export function CourseReaderHeader({ current }: CourseReaderHeaderProps) {
             aria-current={current === "library" ? "page" : undefined}
             href="/modules"
           >
-            Course library
+            Lecture notes
           </Link>
           <Link
             aria-current={current === "partners" ? "page" : undefined}

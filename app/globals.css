@@ -3959,6 +3959,33 @@ main.module-library-shell {
   max-width: 760px;
 }
 
+.library-boundary {
+  background: rgba(118, 84, 127, 0.08);
+  border-left: 3px solid var(--plum);
+  display: grid;
+  gap: 0.45rem;
+  line-height: 1.55;
+  margin: 2rem 0 -1.5rem;
+  max-width: 760px;
+  padding: 1rem 1.2rem;
+}
+
+.library-boundary strong {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.library-boundary span {
+  color: var(--muted);
+  font-family: var(--font-serif), serif;
+}
+
+.library-boundary a {
+  color: var(--cobalt);
+  font-weight: 700;
+}
+
 .library-measures {
   border-top: 1px solid var(--line);
   display: grid;

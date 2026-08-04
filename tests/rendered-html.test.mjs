@@ -100,7 +100,7 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Less typing\. More ownership\./);
   assert.match(html, /Data structures/);
   assert.match(html, /Durable software/);
-  assert.match(html, /Course library/);
+  assert.match(html, /Lecture notes/);
   assert.match(html, /Begin the diagnostic/);
   assert.match(html, /href="\/diagnostic"/);
   assert.match(html, /href="\/route"/);
@@ -108,6 +108,19 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /not this explorer—carry the learning sequence/);
   assert.match(html, /Twenty multiple-choice investigations/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+});
+
+test("makes the full workbooks discoverable as lecture notes", async () => {
+  const response = await render("/modules");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(html, /<title>Lecture Notes · Atlas Academy<\/title>/i);
+  assert.match(readable, /Atlas lecture notes/i);
+  assert.match(readable, /These are the full authored workbooks—not summaries\./u);
+  assert.match(readable, /M31–M36 have ready private guided-study packs/i);
+  assert.match(html, /href="\/learning-partners"/u);
 });
 
 test("renders separate live-learning Teaching Assistant and Study Partner packages", async () => {
@@ -1916,14 +1929,14 @@ test("table-of-contents IDs account for lower-level heading collisions", () => {
   ]);
 });
 
-test("renders the arc-grouped course library", async () => {
+test("renders the arc-grouped lecture notes", async () => {
   const response = await render("/modules");
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /One course\./);
+  assert.match(html, /Lecture notes\./);
   assert.match(html, /Every connection visible\./);
-  assert.match(html, /groups them by knowledge arc for reference browsing/);
+  assert.match(html, /notes group the course by knowledge arc for reference browsing/);
   assert.match(html, /href="\/route"/);
   assert.match(html, /60-day route/);
   assert.match(html, /Computation &amp; reasoning/);
