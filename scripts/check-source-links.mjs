@@ -162,9 +162,13 @@ function reachableStatus(status) {
   return (status >= 200 && status < 400) || [401, 403, 405, 429, 451].includes(status);
 }
 
-async function requestUrl(url, timeoutMs = 8_000) {
+// University and standards sites occasionally stall a single HEAD request on
+// a hosted runner even while the document is reachable. Keep the audit
+// fail-closed for HTTP errors, but give transient transport aborts a bounded
+// second chance before reporting a source as unavailable.
+async function requestUrl(url, timeoutMs = 12_000) {
   let lastError = null;
-  for (let attempt = 0; attempt < 2; attempt += 1) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
