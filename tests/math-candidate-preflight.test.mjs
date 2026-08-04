@@ -56,7 +56,7 @@ test("the release-input ledger hashes every profile-backed candidate record", as
       `${moduleId} candidate evidence must be an allowlisted hashed release input.`,
     );
     assert.ok(
-      hashedPaths.has(`content/course/contracts/evidence-preflight/${moduleId}.v1.json`),
+      hashedPaths.has(`content/course/contracts/evidence/preflight/${moduleId}.v1.json`),
       `${moduleId} candidate preflight must be an allowlisted hashed release input.`,
     );
   }

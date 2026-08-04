@@ -500,7 +500,7 @@
         {
           "kind": "json-pointer",
           "role": "provenance",
-          "path": "content/course/contracts/evidence-preflight/m17.v1.json",
+          "path": "content/course/contracts/evidence/preflight/m17.v1.json",
           "locator": "/truthBoundary/release"
         },
         {

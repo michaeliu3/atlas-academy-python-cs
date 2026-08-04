@@ -273,228 +273,228 @@
       "sha256": "2cc9fe6f83211756b1d2e92677240aaab9e5666446b4a776ed3ac5875a7a09ab"
     },
     {
-      "path": "content/course/contracts/evidence-preflight/m01.v1.json",
-      "sha256": "fe2ffb85fae6ae9421cb6df3816b38c78a8f9d27fdda8b94af03b487843261a5"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m02.v1.json",
-      "sha256": "324a55ed57c919d2f92743e8197118b36bf79179aca0d78e4d4d4722da465bd9"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m03.v1.json",
-      "sha256": "dff9c62f2c0b544ba780f29627c65df5d5f69c540813da43e951676ffe3459a8"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m04.v1.json",
-      "sha256": "1ac2c5a5495c7404cf69994debe59949aca4c8e6d4225c54a0028192ca3a6d6e"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m05.v1.json",
-      "sha256": "28021586595469966d502b54313ce8f625125ef4b90a7fae6c222150bd7d426c"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m06.v1.json",
-      "sha256": "aefbc5a170557859a635141b5df7c3eccde7a78f3e2657a652156a244e452539"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m07.v1.json",
-      "sha256": "6bfc547eae62e26333750f425047ca9abafd2610252efed58cae06340b27f6f3"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m08.v1.json",
-      "sha256": "0e1dce37065c98611e33075884ab308d9b827ccdeed197710f5fcf69ce239be0"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m09.v1.json",
-      "sha256": "9d181e16f9f06a3229dc87a4de0f36d87833ac16795990933843ce109f11ad77"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m10.v1.json",
-      "sha256": "6f919f59b637f6f74610399f84e09b39e604f603128215ac7c4fa19afc3cd82d"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m11.v1.json",
-      "sha256": "0cf35b69226d6e7f46763b1e4f4ea76741d3c9d5b2dbaca9bbb635e1daa769ef"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m12.v1.json",
-      "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m13.v1.json",
-      "sha256": "fa190d4fd615ac73162bc4a501e02a9dd585f242934770fe61ede5e817f61085"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m14.v1.json",
-      "sha256": "07056c41a198bea7dde85ef2892259202124b154fe0cc574017e269fa82a3f3d"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m15.v1.json",
-      "sha256": "0e895585c8e8f1592908a10ff1ff5e3d0d7f3441fe01ff3e09a32acd5072c702"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m16.v1.json",
-      "sha256": "f445826851ae06915d5ab58b6ceceda2d1933319578310f669ca437103e03017"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m17.v1.json",
-      "sha256": "4c205e57e8fa359830b5bbc117d6d39e8ea2735805537ad1942c9a0f949cc295"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m18.v1.json",
-      "sha256": "82de76f32854c2bf4d0383466939e7269f73a1efdc0c3afd3375b1daf7220159"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m19.v1.json",
-      "sha256": "1f0a2fd7849a2a3e17b4aa4827f300f0c0e747d09f2f7073f708363055c69ba8"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m20.v1.json",
-      "sha256": "e4406394783069340ee0817f0f50c89c24f7d3046ccf86365fea989a4f05556c"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m21.v1.json",
-      "sha256": "19a3adce935b47d5f4fff80a520b87ac3c4d741c76f19d5065c8529e3cbf0cbd"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m22.v1.json",
-      "sha256": "25a03fafb9b7ca0480fb761deb500e8201305470fb0a3bb65a25f42c8e228954"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m23.v1.json",
-      "sha256": "0230f059695a2cad10c16900580dd005a18277cc8f79a4a94eecf48789955fa1"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m24.v1.json",
-      "sha256": "2c919d9f5a3f970be4d528bdcb0c527bf8678b07525bacc37e290e3f13ee0e2d"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m27.v1.json",
-      "sha256": "7f81c3c24f4d0b5422a5daa7e9ce23114e6c17fdddd0908fdaf003dcc51396ea"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m28.v1.json",
-      "sha256": "dc4b9b41d052fd898296ffd7df95bac337b0987270bd8dc70c2f5dd0a817b682"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m29.v1.json",
-      "sha256": "c9e222cfa46266b52627febfac6ca74be8bc26c14c62e6479540c50616b964fc"
-    },
-    {
-      "path": "content/course/contracts/evidence-preflight/m30.v1.json",
-      "sha256": "794d1f1960490270ba33c699a88e23abeaef16f60389d66d9e981d779a98ad0d"
-    },
-    {
       "path": "content/course/contracts/evidence/m01.v1.json",
-      "sha256": "e12873bb29bdf250c16b4dae900a27f67507afd9a0c97da425d850c3d3256400"
+      "sha256": "e866681b444a78d33275a0e6bbd75bd757127f09e0c26c9384c67277873f41fc"
     },
     {
       "path": "content/course/contracts/evidence/m02.v1.json",
-      "sha256": "b6848457ca96f5d49cd9c5475ded84ca13fa05b50842a472e6329f85a46341db"
+      "sha256": "2158c1c0cd039bf077b930b95af3b17161f5e21888dbbf5121a3eb6c10a0a691"
     },
     {
       "path": "content/course/contracts/evidence/m03.v1.json",
-      "sha256": "cd9b0fe2c66fd922e58d2f2e58b624adbe642ca18bac8a93d37a852163ac7661"
+      "sha256": "7959e538dfc0ef0ca395bf0913020bf9899a658bb95a945a6f54495cb0fa1309"
     },
     {
       "path": "content/course/contracts/evidence/m04.v1.json",
-      "sha256": "4fd8da30efe9bf6259cd29c6f413d051bdd1ec721d220f4e92f5e975b0023342"
+      "sha256": "183bb2768e7302f11034e11faa2390af34916215c3d78fdb49c1ac6669be78db"
     },
     {
       "path": "content/course/contracts/evidence/m05.v1.json",
-      "sha256": "b3f19f4d954f1918cca7a8d3c8ef468fa697e381a286c27e909a5c64c1e8faec"
+      "sha256": "1ade5b1bccbbdf748ebce23291dac4cc71b792462c44057c194c8bb39d530cbb"
     },
     {
       "path": "content/course/contracts/evidence/m06.v1.json",
-      "sha256": "1a2033846b577f04bc3b9ad40bbc78d2743b6ad0124ea8bb55a0b75e15c2033f"
+      "sha256": "922a19b732b3ed6186cf8b1b75c2c14db979e5e96bbdccf1223d1c9dd0f0bf93"
     },
     {
       "path": "content/course/contracts/evidence/m07.v1.json",
-      "sha256": "f5e4f8e4207dd6d41ac426841e7d7b5691683645faaaf019293f9eab57ec2274"
+      "sha256": "3ffc0a4e29ae7fc4be4d470ffdff929d3a5deffcd9b56e125a699f14c6ada83c"
     },
     {
       "path": "content/course/contracts/evidence/m08.v1.json",
-      "sha256": "2edfd66db4a1f170fea9f8ce39a2546477b652d70087f4f8677a8183c6c78b2b"
+      "sha256": "48f93df7172fa95f7dfbe9cc233e4c0e0d663fb5197506a6647b360ba697870d"
     },
     {
       "path": "content/course/contracts/evidence/m09.v1.json",
-      "sha256": "4ddd470d2dbe2689e418ca46ae3d29ad86bf111d6e6436328e6734ef3a12ace7"
+      "sha256": "8122797ff083169a23341284cff07fb3b595c60cd73baf58643dd5be9e54d234"
     },
     {
       "path": "content/course/contracts/evidence/m10.v1.json",
-      "sha256": "04150abd2b5313c49a51d62c3e843452fe6c1551a0c6626863b309bee25cd686"
+      "sha256": "ea1215d795ecc5a7bdd3f7a7cc4bd8a8d6c382eacf1b9a5df55854dd79cbd4ca"
     },
     {
       "path": "content/course/contracts/evidence/m11.v1.json",
-      "sha256": "f5ef5a35bd3d1ceeb424c55419dc5208315e2aef170af89c43f06aa3a53f6285"
+      "sha256": "6bf1b69b2b7e9a154f9aaeba7067ade88801c0c7823567db480964559cf1c88a"
     },
     {
       "path": "content/course/contracts/evidence/m12.v1.json",
-      "sha256": "235cb3cd376d5b5bf762637c9c4ff4f15ad68ac06b914c258c65b062f5a0ce12"
+      "sha256": "eaa814069c95e7c68ac50fb62e8b1bfaad9e40c7b8ecdc0c2c59ed84a265aa38"
     },
     {
       "path": "content/course/contracts/evidence/m13.v1.json",
-      "sha256": "592c9f886ec791e340231b2306f84eff165f2fc4bb71ccb65c973efb6eb02a39"
+      "sha256": "acf587acd0a4156a56a783243d3c6c88bfd26a37a69194d08f72f4cfab283bcc"
     },
     {
       "path": "content/course/contracts/evidence/m14.v1.json",
-      "sha256": "7f2985d55166cbf3bf9de422ad7980ea05bf4797feda9599fce9ce8453ae57c6"
+      "sha256": "a6e63b2e089b00e88ddb3a91e141bf38866e2a39351f4cf129a120d84436cc46"
     },
     {
       "path": "content/course/contracts/evidence/m15.v1.json",
-      "sha256": "9fb04321ddf991ebd3777e56d7c98dcbaa05a9e45301bb9e4862a4900b6c8389"
+      "sha256": "ad7556089d1a2fc366a4b0111a2895b41bc096dba3e7da06de5818591bba4ce9"
     },
     {
       "path": "content/course/contracts/evidence/m16.v1.json",
-      "sha256": "2388c3bd80ec184b0824b7645db79246d1ec6c6c329f7c04f8b6a5b8ec9e1662"
+      "sha256": "84347b804122c80c52fe325eed010288976602e1c545ad55c2d7ffde800aca73"
     },
     {
       "path": "content/course/contracts/evidence/m17.v1.json",
-      "sha256": "3e693d0d1f61c14f546864d6dd0f5fe22203a6e6ef3be6a6afe697aa4dbd2894"
+      "sha256": "f9d297cb38c0882dddaa4366c1175aa41221f9e3b2840c92c0a7b6518b8e1150"
     },
     {
       "path": "content/course/contracts/evidence/m18.v1.json",
-      "sha256": "3add1bd0241c0f341301b65f6223b1aec31f7b1c099e0c9b85c660fdb1d9feb1"
+      "sha256": "813f1a7894ae56f9c27d3fc9402f8df275bcb0e7c490d9f67e803c84e6c63e24"
     },
     {
       "path": "content/course/contracts/evidence/m19.v1.json",
-      "sha256": "4a7dd46c11d51300eb51e345c21f7216866d148562fb6ddb5ec5e1f9ecfd7a25"
+      "sha256": "1953e5d11724110960d4e89ddc3999aaae51a93c88d1d0ce60d18934e91e17d3"
     },
     {
       "path": "content/course/contracts/evidence/m20.v1.json",
-      "sha256": "49465509d0f15a433f911f339fbb72bcda9fc71b34dd367816263782a7f52062"
+      "sha256": "f20f14dd7b43083296136ccad2ffd5deb24d91c3aaabcee3c7fcc8198ba8b6ac"
     },
     {
       "path": "content/course/contracts/evidence/m21.v1.json",
-      "sha256": "4046da5a4ebfcc561d8f70f663ec13f9ba369184cb23fb6ecffb41f872baf833"
+      "sha256": "b38fd32cd6a1cf3273f9cefa63e435b8779801339efcd4ab4d7dc08bc1ad594e"
     },
     {
       "path": "content/course/contracts/evidence/m22.v1.json",
-      "sha256": "2648cbab209ed10eae741cd624821f2b1d08f6a704fa6d3b331fe961d7891531"
+      "sha256": "2a1523f9ccf5b32d880b27e8bb6f2e5728b9989cc54f22f972dee3ab8a632251"
     },
     {
       "path": "content/course/contracts/evidence/m23.v1.json",
-      "sha256": "63154776fce6d09f78cff69a84b7b88ced5fb728f4a38414d966727ff7d33729"
+      "sha256": "cfb1567c89d0a9ce4662c1071e3b3e9b4467da7efd02a73b9ad85749dc7ac7bf"
     },
     {
       "path": "content/course/contracts/evidence/m24.v1.json",
-      "sha256": "15046f1e7b9841c3c63e97884ff73c5d2737590eb786d62761f73de0f67cdeb8"
+      "sha256": "68575eac9e8881090dde7822a9d7fbafa4f98e3c58b879f2d2551dc1416d77af"
     },
     {
       "path": "content/course/contracts/evidence/m27.v1.json",
-      "sha256": "459dfaa858b617235a64485a2a3815f5ce9872f8e1a25fc58777d89fca1bea03"
+      "sha256": "2d5d4636aa616f9df526d8865cd14c4606d0ccefcd20ec1a4f5bf136c58b090c"
     },
     {
       "path": "content/course/contracts/evidence/m28.v1.json",
-      "sha256": "23ef6f88b048ecb3d86d2911135f3fcf5020e9ca887ed7fc1cce88e96c2089ca"
+      "sha256": "e94d9a5586e2c0643cf4112cf14e1ff6eafc659e51fdd977628c49beca93078e"
     },
     {
       "path": "content/course/contracts/evidence/m29.v1.json",
-      "sha256": "5aec6204e178b98c0fc1e4abc811e5f3120d379ada18bfeb8e699251a9e3ab9e"
+      "sha256": "14465c557d7aba7cf8096377fa0aa1fd4e0cced38daae9e2e355d9c1ecee4cf0"
     },
     {
       "path": "content/course/contracts/evidence/m30.v1.json",
-      "sha256": "f3f936dd1ede4ea58d9407a2c132bbc25b96c27c461462c59c766e3958464cd4"
+      "sha256": "c19e8b3ad2703d500cb40d472192b69813f911727511533ca1a7f63f5f0267e8"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m01.v1.json",
+      "sha256": "fe2ffb85fae6ae9421cb6df3816b38c78a8f9d27fdda8b94af03b487843261a5"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m02.v1.json",
+      "sha256": "324a55ed57c919d2f92743e8197118b36bf79179aca0d78e4d4d4722da465bd9"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m03.v1.json",
+      "sha256": "dff9c62f2c0b544ba780f29627c65df5d5f69c540813da43e951676ffe3459a8"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m04.v1.json",
+      "sha256": "1ac2c5a5495c7404cf69994debe59949aca4c8e6d4225c54a0028192ca3a6d6e"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m05.v1.json",
+      "sha256": "28021586595469966d502b54313ce8f625125ef4b90a7fae6c222150bd7d426c"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m06.v1.json",
+      "sha256": "aefbc5a170557859a635141b5df7c3eccde7a78f3e2657a652156a244e452539"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m07.v1.json",
+      "sha256": "6bfc547eae62e26333750f425047ca9abafd2610252efed58cae06340b27f6f3"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m08.v1.json",
+      "sha256": "0e1dce37065c98611e33075884ab308d9b827ccdeed197710f5fcf69ce239be0"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m09.v1.json",
+      "sha256": "9d181e16f9f06a3229dc87a4de0f36d87833ac16795990933843ce109f11ad77"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m10.v1.json",
+      "sha256": "6f919f59b637f6f74610399f84e09b39e604f603128215ac7c4fa19afc3cd82d"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m11.v1.json",
+      "sha256": "0cf35b69226d6e7f46763b1e4f4ea76741d3c9d5b2dbaca9bbb635e1daa769ef"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m12.v1.json",
+      "sha256": "12db271e4121d536e79d76cca90f7ee40d3232aac86ebb860f85a668f7411d82"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m13.v1.json",
+      "sha256": "fa190d4fd615ac73162bc4a501e02a9dd585f242934770fe61ede5e817f61085"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m14.v1.json",
+      "sha256": "07056c41a198bea7dde85ef2892259202124b154fe0cc574017e269fa82a3f3d"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m15.v1.json",
+      "sha256": "0e895585c8e8f1592908a10ff1ff5e3d0d7f3441fe01ff3e09a32acd5072c702"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m16.v1.json",
+      "sha256": "f445826851ae06915d5ab58b6ceceda2d1933319578310f669ca437103e03017"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m17.v1.json",
+      "sha256": "4c205e57e8fa359830b5bbc117d6d39e8ea2735805537ad1942c9a0f949cc295"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m18.v1.json",
+      "sha256": "82de76f32854c2bf4d0383466939e7269f73a1efdc0c3afd3375b1daf7220159"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m19.v1.json",
+      "sha256": "1f0a2fd7849a2a3e17b4aa4827f300f0c0e747d09f2f7073f708363055c69ba8"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m20.v1.json",
+      "sha256": "e4406394783069340ee0817f0f50c89c24f7d3046ccf86365fea989a4f05556c"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m21.v1.json",
+      "sha256": "19a3adce935b47d5f4fff80a520b87ac3c4d741c76f19d5065c8529e3cbf0cbd"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m22.v1.json",
+      "sha256": "25a03fafb9b7ca0480fb761deb500e8201305470fb0a3bb65a25f42c8e228954"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m23.v1.json",
+      "sha256": "0230f059695a2cad10c16900580dd005a18277cc8f79a4a94eecf48789955fa1"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m24.v1.json",
+      "sha256": "2c919d9f5a3f970be4d528bdcb0c527bf8678b07525bacc37e290e3f13ee0e2d"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m27.v1.json",
+      "sha256": "7f81c3c24f4d0b5422a5daa7e9ce23114e6c17fdddd0908fdaf003dcc51396ea"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m28.v1.json",
+      "sha256": "dc4b9b41d052fd898296ffd7df95bac337b0987270bd8dc70c2f5dd0a817b682"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m29.v1.json",
+      "sha256": "c9e222cfa46266b52627febfac6ca74be8bc26c14c62e6479540c50616b964fc"
+    },
+    {
+      "path": "content/course/contracts/evidence/preflight/m30.v1.json",
+      "sha256": "794d1f1960490270ba33c699a88e23abeaef16f60389d66d9e981d779a98ad0d"
     },
     {
       "path": "content/course/contracts/legacy-candidate-preflight-profiles.v1.json",

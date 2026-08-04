@@ -130,7 +130,7 @@ function evidencePathFor(moduleId) {
 }
 
 function preflightPathFor(moduleId) {
-  return `content/course/contracts/evidence-preflight/${moduleId}.v1.json`;
+  return `content/course/contracts/evidence/preflight/${moduleId}.v1.json`;
 }
 
 function digest(value) {

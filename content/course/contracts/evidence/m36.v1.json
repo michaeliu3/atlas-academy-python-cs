@@ -207,7 +207,7 @@
       "criterionId": "release-provenance-ci-and-deployment-evidence",
       "claim": "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M36 material.",
       "inputs": [
-        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m36.v1.json", "locator": "/truthBoundary/release" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m36.v1.json", "locator": "/truthBoundary/release" },
         { "kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m36/candidate-preflight.md", "locator": "authoring-candidate-boundary" }
       ],
       "limitations": ["This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open."]

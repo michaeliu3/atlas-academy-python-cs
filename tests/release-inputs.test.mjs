@@ -165,7 +165,7 @@ test("the release-input ledger is a reproducible local allowlist", async () => {
     expectedDocumentationLedgerPaths.add(profile.candidateDocumentationPath);
     const profileBoundPaths = [
       `content/course/contracts/evidence/${profile.moduleId}.v1.json`,
-      `content/course/contracts/evidence-preflight/${profile.moduleId}.v1.json`,
+      `content/course/contracts/evidence/preflight/${profile.moduleId}.v1.json`,
       profile.candidateDocumentationPath,
       ...profile.sourceLedgerPaths,
       profile.studioSourcePath,

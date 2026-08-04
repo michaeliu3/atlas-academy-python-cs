@@ -47,7 +47,7 @@ const canonicalCourseGraphPath = "content/course/course-graph.v2.json";
 const canonicalModuleManifestPath = "content/modules/manifest.json";
 
 export const moduleEvidencePreflightDirectoryRelativePath =
-  "content/course/contracts/evidence-preflight";
+  "content/course/contracts/evidence/preflight";
 export const moduleEvidencePreflightKind = "atlas-module-evidence-preflight";
 export const moduleEvidencePreflightRecordVersion = "v1";
 
@@ -556,7 +556,7 @@ function canonicalPreflightRepositoryPath(recordPath) {
   if (typeof recordPath !== "string") {
     throw new Error("A module evidence-preflight loader requires a canonical module-scoped path.");
   }
-  const match = /^content\/course\/contracts\/evidence-preflight\/(m(?:0[1-9]|[1-9]\d))\.v1\.json$/u.exec(recordPath);
+  const match = /^content\/course\/contracts\/evidence\/preflight\/(m(?:0[1-9]|[1-9]\d))\.v1\.json$/u.exec(recordPath);
   if (!match || moduleEvidencePreflightRelativePath(match[1]) !== recordPath) {
     throw new Error("A module evidence-preflight loader requires a canonical module-scoped path.");
   }

@@ -207,7 +207,7 @@ behavior, review, or release.
 
 M29's candidate-only preflight is covered by its focused Node regression test,
 not by a release record. Its loader accepts only Git-tracked canonical
-`content/course/contracts/evidence-preflight/mNN.v1.json` paths whose working
+`content/course/contracts/evidence/preflight/mNN.v1.json` paths whose working
 content matches the Git index; evidence paths reject traversal, symlinks, Git
 pathspec interpretation, and unstaged input drift. For its v1 candidate record,
 the explicit stable release nonclaim, release-boundary claim and limitation,

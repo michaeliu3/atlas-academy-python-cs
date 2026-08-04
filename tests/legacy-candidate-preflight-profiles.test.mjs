@@ -60,7 +60,7 @@ test("the candidate profile registry allowlists the current, systems, and mathem
       `${moduleId} evidence record is profile-derived and hash-ledgered`,
     );
     assert.ok(
-      releaseInputPaths.some((path) => path.endsWith(`evidence-preflight/${moduleId}.v1.json`)),
+      releaseInputPaths.some((path) => path.endsWith(`evidence/preflight/${moduleId}.v1.json`)),
       `${moduleId} preflight record is profile-derived and hash-ledgered`,
     );
   }

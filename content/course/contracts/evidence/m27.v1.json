@@ -194,7 +194,7 @@
       "criterionId": "release-provenance-ci-and-deployment-evidence",
       "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
       "inputs": [
-        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence-preflight/m27.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m27.v1.json", "locator": "/truthBoundary/release"},
         {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m27/candidate-preflight.md", "locator": "candidate-boundary"}
       ],
       "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]

@@ -49,7 +49,7 @@ async function stagedM29Candidate(t, { mutateEvidence, mutatePreflight } = {}) {
 test("M29 has a complete candidate evidence dossier without a false promotion claim", async () => {
   assert.equal(
     moduleEvidencePreflightRelativePath(moduleId),
-    "content/course/contracts/evidence-preflight/m29.v1.json",
+    "content/course/contracts/evidence/preflight/m29.v1.json",
   );
   const report = await runM29CandidateEvidencePreflight({ siteRoot });
 
