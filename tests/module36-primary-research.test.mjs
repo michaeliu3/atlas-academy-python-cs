@@ -90,3 +90,42 @@ test("M36 Session 4 makes reproducibility-claim debugging explicit", async () =>
   assert.match(m36Guide.traceOrDerivation, /Hoeffding-plus-union-bound/u);
   assert.doesNotMatch(m36Guide.traceOrDerivation, /regret|lower-bound/u);
 });
+
+test("M36 keeps finite-example and realizable-PAC probability spaces distinct", async () => {
+  const workbookPaths = [
+    "../content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+    "../content/modules/36_statistical_learning_theory_reliable_deep_learning.md",
+  ];
+  const workbooks = await Promise.all(
+    workbookPaths.map((relativePath) => readFile(new URL(relativePath, import.meta.url), "utf8")),
+  );
+
+  for (const workbook of workbooks) {
+    assert.ok(
+      workbook.includes("population distribution over complete examples \\(Z\\)"),
+      "the finite-class card must type P over complete examples",
+    );
+    assert.ok(
+      workbook.includes("S=(Z_1,\\ldots,Z_n)\\sim P^n"),
+      "the finite-class card must name its IID sample law",
+    );
+    assert.ok(
+      workbook.includes("write \\(D\\) for a\n") && workbook.includes("distribution over inputs \\(X\\)"),
+      "the PAC card must distinguish its instance distribution",
+    );
+    assert.ok(
+      workbook.includes("R_{D,c}(h)=\\Pr_{X\\sim D}"),
+      "the PAC risk must use the instance distribution",
+    );
+    assert.ok(
+      workbook.includes("X_{1:m}\\sim D^m,\\,\\rho_A"),
+      "the PAC probability must type sampled inputs and learner randomness",
+    );
+    assert.ok(
+      workbook.includes("proper-learning convention \\(A(S;\\rho_A)\\in\\mathcal H\\)"),
+      "the PAC card must name its learner output convention",
+    );
+    assert.match(workbook, /spectrally-normalized margin-bound paper/u);
+    assert.match(workbook, /b22b257ad0519d4500539da3c8bcf4dd-Paper\.pdf/u);
+  }
+});

@@ -444,9 +444,9 @@ predeclared evaluation relation.
 
 </details>
 
-Here \(P\) is the named population relation, \(S=(Z_1,\ldots,Z_n)\) is the
-sample, and \(\ell\) is the declared loss. Changing any of those objects
-changes the claim that follows.
+Here \(P\) is the named population distribution over complete examples \(Z\),
+\(S=(Z_1,\ldots,Z_n)\sim P^n\) is the IID sample, and \(\ell\) is the
+declared loss. Changing any of those objects changes the claim that follows.
 
 ### Finite-class proof skeleton — the union-bound step has a home
 
@@ -504,22 +504,29 @@ logarithmically in \(K\) after solving for \(n\).
 The finite-class card controls a deviation event for a named class. A
 **distribution-free realizable PAC** claim adds a target-in-class assumption,
 a learner algorithm \(A\), and a sample regime selected before a particular
-distribution or target is named. With \(R_{P,c}(h)=\Pr_{X\sim P}[h(X)\ne
-c(X)]\), the relevant order is
+distribution or target is named. To keep this instance-level claim distinct
+from the earlier distribution over complete examples, write \(D\) for a
+distribution over inputs \(X\), and let the realizable label be \(Y=c(X)\).
+With \(R_{D,c}(h)=\Pr_{X\sim D}[h(X)\ne c(X)]\), the relevant order is
 
 \[
 \exists A\;\forall\varepsilon,\delta\in(0,1)\;\exists m_{\mathcal H}(\varepsilon,\delta)\;
-\forall m\ge m_{\mathcal H}(\varepsilon,\delta)\;\forall P\;\forall c\in\mathcal H:\quad
-\Pr_{S\sim P^m,\,A}
-\!\left[R_{P,c}(A(S))\le\varepsilon\right]\ge1-\delta.
+\forall m\ge m_{\mathcal H}(\varepsilon,\delta)\;\forall D\;\forall c\in\mathcal H:\quad
+\Pr_{X_{1:m}\sim D^m,\,\rho_A}
+\!\left[
+R_{D,c}\!\left(A\!\left((X_i,c(X_i))_{i=1}^{m};\rho_A\right)\right)
+\le\varepsilon
+\right]\ge1-\delta.
 \]
 
-Here the IID inputs in \(S\) are labelled by the realizable target \(c\).
-\(m_{\mathcal H}(\varepsilon,\delta)\) is a sufficient threshold: the
-conclusion must hold for every declared sample count \(m\) at or above it.
-The threshold may depend on the fixed class and \(\varepsilon,\delta\), but
-not on the later universally quantified \(P\) or \(c\). Computational
-efficiency is an additional claim:
+Here \(\rho_A\) denotes any declared internal randomness of \(A\), and the
+IID inputs are labelled by the realizable target \(c\). This card uses the
+proper-learning convention \(A(S;\rho_A)\in\mathcal H\); a later improper
+learner must name its output class. \(m_{\mathcal H}(\varepsilon,\delta)\)
+is a sufficient threshold: the conclusion must hold for every declared sample
+count \(m\) at or above it. The threshold may depend on the fixed class and
+\(\varepsilon,\delta\), but not on the later universally quantified \(D\) or
+\(c\). Computational efficiency is an additional claim:
 it needs a separately stated polynomial sample/runtime bound under named
 encoding and size conventions.
 
@@ -529,7 +536,7 @@ Before reading that as a slogan, mark the roles:
 | --- | --- |
 | **Assumed** | target concept in \(\mathcal H\), loss/error convention, eligible distributions, and IID sample relation |
 | **Existential** | learner \(A\) and sufficient \(m_{\mathcal H}(\varepsilon,\delta)\), selected before \(P\) and \(c\) |
-| **Universal** | \(\varepsilon\), \(\delta\), each declared \(m\ge m_{\mathcal H}(\varepsilon,\delta)\), each eligible \(P\), and each target \(c\in\mathcal H\) |
+| **Universal** | \(\varepsilon\), \(\delta\), each declared \(m\ge m_{\mathcal H}(\varepsilon,\delta)\), each eligible instance distribution \(D\), and each target \(c\in\mathcal H\) |
 | **Random** | sampled examples and any declared randomness in \(A\) |
 | **Claimed** | the stated error/confidence conclusion for \(A\), not an efficiency claim unless one is separately proved |
 
@@ -543,7 +550,7 @@ its future data relation.
 | Reading card | Assumptions/evidence to keep visible | What the result can support | Explicit non-claim |
 | --- | --- | --- | --- |
 | Finite-class Hoeffding route | fixed finite \(\mathcal H\), bounded loss, named IID relation, and declared \(K,\varepsilon,\delta,n\) | A simultaneous finite-class deviation statement under those assumptions | A deep-network, VC, deployment, or data-quality guarantee |
-| [Bartlett–Foster–Telgarsky spectral-normalized margin-bound example](https://proceedings.neurips.cc/paper/2017/hash/b22b257ad0519d4500539da3c8bcf4dd-Abstract.html) | Exact network/parameterization, margin and spectral-complexity terms, sample relation, theorem conditions, and any separate empirical study | A scoped research-bound reading exercise after checking the exact theorem | An architecture ranking, a universal explanation of generalization, or a reliability certificate |
+| [Bartlett–Foster–Telgarsky spectrally-normalized margin-bound paper](https://proceedings.neurips.cc/paper/2017/file/b22b257ad0519d4500539da3c8bcf4dd-Paper.pdf) | Exact network/parameterization, margin and spectral-complexity terms, sample relation, theorem conditions, and any separate empirical study | A scoped research-bound reading exercise after checking the exact theorem | An architecture ranking, a universal explanation of generalization, or a reliability certificate |
 
 The point is not to choose the more impressive theorem name. It is to ask which
 objects, quantifiers, and conclusion are actually present before transferring a
@@ -1216,7 +1223,7 @@ figures, code, datasets, benchmarks, weights, or course exercises.
 | [MIT 9.520 Statistical Learning Theory & Applications](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/) and its [VC-dimension notes](https://ocw.mit.edu/courses/9-520-statistical-learning-theory-and-applications-spring-2006/resources/class17/) | Sessions 1–3: empirical versus population risk, function classes, quantifiers, and theorem conditions. | MIT OCW assets have individual notices; link-only/original Atlas theorem cards, examples, and proof prompts. |
 | [MIT 6.7960 Deep Learning](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/), [generalization-theory lecture](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/resources/mit6_7960f24_lec06_mp4/), and [Lecture 17: Out-of-Distribution Generalization](https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/mit6_7960_f24_lec17.pdf) | Sessions 2–5: deep-learning foundations, overparameterization/generalization questions, experimental scope, and the distinction between a declared perturbation threat set and broader distribution shifts. | Link-only/original Atlas examples and synthetic threat cards; no copied videos, slides, homework, figures, or project assets. |
 | [CMU 10-301/601 Introduction to Machine Learning](https://www.cs.cmu.edu/~mgormley/courses/10601/), [CMU 10-806 PAC/efficiency notes](https://www.cs.cmu.edu/~avrim/ML07/lect1207.pdf), [MIT 6.080 PAC lecture](https://ocw.mit.edu/courses/6-080-great-ideas-in-theoretical-computer-science-spring-2008/838468541460ee9c1d08eb36c1921d30_lec20.pdf), and [Stanford CS229 course materials](https://cs229.stanford.edu/materials.html-full) | Session 3: learning-theory quantifiers, statistical-versus-computational conditions, regularization/model-selection, and fixed-versus-adaptive evaluation boundaries. | Link-only/original Atlas proof cards and examples; do not copy lectures, assignments, figures, data, notes, or solutions. |
-| [Hoeffding (1963)](https://doi.org/10.1080/01621459.1963.10500830), [Valiant's PAC paper](https://dl.acm.org/doi/10.1145/1968.1972), and the [Bartlett–Foster–Telgarsky margin-bound example](https://proceedings.neurips.cc/paper/2017/hash/b22b257ad0519d4500539da3c8bcf4dd-Abstract.html) | Session 3: finite-class concentration, PAC quantifiers, and reading a modern deep-learning bound with its conditions. | Link/cite only/original Atlas theorem cards. Read the exact theorem before applying it; no copied proofs, figures, constants, or benchmark conclusions. |
+| [Hoeffding (1963)](https://doi.org/10.1080/01621459.1963.10500830), [Valiant's PAC paper](https://dl.acm.org/doi/10.1145/1968.1972), and the [Bartlett–Foster–Telgarsky spectrally-normalized margin-bound paper](https://proceedings.neurips.cc/paper/2017/file/b22b257ad0519d4500539da3c8bcf4dd-Paper.pdf) | Session 3: finite-class concentration, PAC quantifiers, and reading a modern deep-learning bound with its conditions. | Link/cite only/original Atlas theorem cards. Read the exact theorem before applying it; no copied proofs, figures, constants, or benchmark conclusions. |
 | [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) and [numerical-accuracy documentation](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html) | Session 4: bounded environment, dtype, backend, and comparison claims. | Link-only/original reproduction record; pin framework, device, and versions before an implementation claim. |
 | [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 5–6: monitoring, management, governance, and human-control boundaries. | Link-only/original Atlas reliability maps; voluntary guidance is not legal advice, certification, or authorization. |
 
