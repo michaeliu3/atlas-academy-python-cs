@@ -2771,11 +2771,11 @@ test("renders M26 as a bounded capstone preview and retains its bounded model", 
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(
-    "../public/downloads/module26_reference.py",
+    "../content/course/reference-models/module26_reference.py",
     import.meta.url,
   );
   const testsUrl = new URL(
-    "../public/downloads/test_module26_reference.py",
+    "../content/course/reference-models/test_module26_reference.py",
     import.meta.url,
   );
   const [reference, referenceTests] = await Promise.all([

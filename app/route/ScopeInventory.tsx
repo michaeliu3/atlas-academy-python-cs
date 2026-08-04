@@ -38,15 +38,6 @@ const availabilityLabels: Record<CourseAvailability, string> = {
   "authoring-only": "Authoring-only — no learner reader route",
 };
 
-const availabilityOrder: CourseAvailability[] = [
-  "legacy-open",
-  "published",
-  "preview",
-  "locked",
-  "optional",
-  "authoring-only",
-];
-
 const availabilitySummaryLabels: Record<CourseAvailability, string> = {
   "legacy-open": "open legacy",
   published: "verified published",
@@ -70,18 +61,18 @@ function deliveryLabel(topic: ScopeMatrixTopic) {
       privateGuidedReadyCount += 1;
     }
   }
-  const deliveryStates = availabilityOrder.filter((availability) => availabilityCounts.has(availability));
+  const deliveryStates = courseCatalog.availabilityStates.filter((availability) => availabilityCounts.has(availability));
   if (deliveryStates.length === 0) {
     return "No mapped delivery";
   }
   if (deliveryStates.length === 1) {
-    if (
-      deliveryStates[0] === "authoring-only" &&
-      privateGuidedReadyCount === topic.anchors.length
-    ) {
-      return "Private guided study ready · portal reader hidden";
-    }
-    return availabilityLabels[deliveryStates[0]];
+    const privateGuidedDetail =
+      privateGuidedReadyCount > 0
+        ? `; ${privateGuidedReadyCount} designated private guided-study ${
+            privateGuidedReadyCount === 1 ? "pack" : "packs"
+          } ready; the designated pack remains hidden in the portal`
+        : "";
+    return `${availabilityLabels[deliveryStates[0]]}${privateGuidedDetail}`;
   }
   const detail = deliveryStates
     .map((availability) => {

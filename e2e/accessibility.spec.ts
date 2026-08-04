@@ -1,4 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
+import { readFileSync } from "node:fs";
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
 test.setTimeout(90_000);
@@ -56,7 +57,7 @@ async function openConcurrencyObservatory(page: Page) {
   return studio;
 }
 
-const browserAuditRoutes: ReadonlyArray<{
+const browserAuditBaseRoutes: ReadonlyArray<{
   name: string;
   path: string;
   ready: (page: Page) => Promise<void>;
@@ -155,6 +156,35 @@ const browserAuditRoutes: ReadonlyArray<{
       ).toBeVisible();
     },
   },
+];
+
+type ReaderManifestModule = {
+  number: number;
+  slug: string;
+  title: string;
+  state: { readerAccess: "hidden" | "preview" | "full" };
+};
+
+const readerManifest = JSON.parse(
+  readFileSync(new URL("../content/modules/manifest.json", import.meta.url), "utf8"),
+) as { modules: ReaderManifestModule[] };
+const auditedPaths = new Set(browserAuditBaseRoutes.map(({ path }) => path));
+const browserAuditRoutes: ReadonlyArray<{
+  name: string;
+  path: string;
+  ready: (page: Page) => Promise<void>;
+}> = [
+  ...browserAuditBaseRoutes,
+  ...readerManifest.modules
+    .filter(({ state }) => state.readerAccess !== "hidden")
+    .filter(({ slug }) => !auditedPaths.has(`/modules/${slug}`))
+    .map(({ number, slug, title }) => ({
+      name: `Module ${number} reader (${title})`,
+      path: `/modules/${slug}`,
+      ready: async (page: Page) => {
+        await expect(page.locator("main h1").first()).toBeVisible();
+      },
+    })),
 ];
 
 for (const route of browserAuditRoutes) {

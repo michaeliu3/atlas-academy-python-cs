@@ -6,7 +6,11 @@ import {
   atlasCoreRouteTotals,
   getAtlasRouteEntry,
 } from "@/lib/atlas-core-route";
-import { formatFocusedStudyHours, type CourseModuleState } from "@/lib/course-catalog";
+import {
+  courseCatalog,
+  formatFocusedStudyHours,
+  type CourseModuleState,
+} from "@/lib/course-catalog";
 import { moduleHref, moduleManifest } from "@/lib/module-catalog";
 import { CourseReaderHeader } from "../modules/CourseReaderHeader";
 import { ScopeMatrix } from "./ScopeMatrix";
@@ -28,15 +32,6 @@ function availabilityPresentation(state: CourseModuleState) {
       label: "Reference preview",
       className: styles.previewStatus,
       unavailableNote: null,
-    };
-  }
-
-  if (state.privateGuidedStudy?.status === "ready") {
-    return {
-      label: "Private guided study ready",
-      className: styles.authoringStatus,
-      unavailableNote:
-        "Start in the designated Codex chats after the academic prerequisites are in place. The portal reader stays hidden and this creates no route credit, publication, or record.",
     };
   }
 
@@ -71,7 +66,9 @@ function availabilityPresentation(state: CourseModuleState) {
         label: "In authoring",
         className: styles.authoringStatus,
         unavailableNote:
-          "Source map, studio, and release evidence are being completed before learner release.",
+          state.privateGuidedStudy?.status === "ready"
+            ? "A designated private chat pack is ready after academic prerequisites are evidenced; the portal reader remains hidden and this creates no route credit, publication, or record."
+            : "Source map, studio, and release evidence are being completed before learner release.",
       };
     case "preview":
       return {
@@ -83,7 +80,12 @@ function availabilityPresentation(state: CourseModuleState) {
 }
 
 export default function AtlasCoreRoutePage() {
-  const availabilitySummary = `${atlasCoreRouteAvailabilityStatus["legacy-open"]} / ${atlasCoreRouteAvailabilityStatus["preview-reader"]} / ${atlasCoreRouteAvailabilityStatus["authoring-only"]}`;
+  const availabilitySummary = courseCatalog.availabilityStates
+    .map(
+      (availability) =>
+        `${atlasCoreRouteAvailabilityStatus[availability]} ${availability}`,
+    )
+    .join(" / ");
 
   return (
     <main className={styles.shell}>
@@ -114,7 +116,7 @@ export default function AtlasCoreRoutePage() {
             </div>
             <div>
               <dt>{availabilitySummary}</dt>
-              <dd>open / preview / private guided</dd>
+              <dd>modules by canonical availability</dd>
             </div>
             <div>
               <dt>{atlasCoreRouteTotals.focusedHoursPerWeek}</dt>

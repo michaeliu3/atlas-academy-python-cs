@@ -4,6 +4,7 @@ import { type ReactNode, useId, useState } from "react";
 
 type PredictionRevealGateProps = {
   children: ReactNode;
+  checkpointNumber: number;
   mode?: "batch" | "individual";
   summaryLabel: string;
 };
@@ -23,6 +24,7 @@ const confidenceChoices = [
  */
 export function PredictionRevealGate({
   children,
+  checkpointNumber,
   mode = "individual",
   summaryLabel,
 }: PredictionRevealGateProps) {
@@ -34,6 +36,7 @@ export function PredictionRevealGate({
   const canReveal =
     (mode === "batch" ? batchPredictionRecorded : choice !== null) && confidence !== null;
   const hintId = `prediction-gate-${reactId}`;
+  const accessibleName = `${mode === "batch" ? "Multiple-choice diagnostic batch" : "Multiple-choice"} prediction: ${summaryLabel} (checkpoint ${checkpointNumber})`;
 
   const revisePrediction = (nextChoice?: string, nextConfidence?: string) => {
     if (nextChoice !== undefined) setChoice(nextChoice);
@@ -48,7 +51,7 @@ export function PredictionRevealGate({
 
   return (
     <section
-      aria-label={`${mode === "batch" ? "Multiple-choice diagnostic batch" : "Multiple-choice"} prediction: ${summaryLabel}`}
+      aria-label={accessibleName}
       className="prediction-reveal-gate"
     >
       <p className="prediction-reveal-kicker">Prediction before reveal</p>

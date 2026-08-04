@@ -1,5 +1,6 @@
 import {
   atlasCoreRoutePlan,
+  courseCatalog,
   courseCatalogTotals,
   getCourseGraphModule,
   type CourseModuleState,
@@ -60,11 +61,29 @@ export function getAtlasRouteEntry(number: number) {
   return atlasRouteEntries.find((entry) => entry.number === number);
 }
 
+const availabilityCounts = courseCatalog.availabilityStates.reduce(
+  (counts, availability) => {
+    counts[availability] = courseCatalog.modules.filter(
+      ({ state }) => state.availability === availability,
+    ).length;
+    return counts;
+  },
+  {} as Record<(typeof courseCatalog.availabilityStates)[number], number>,
+);
+
+const availabilityTotal = Object.values(availabilityCounts).reduce(
+  (total, count) => total + count,
+  0,
+);
+if (availabilityTotal !== courseCatalog.modules.length) {
+  throw new Error(
+    `Course availability projection covers ${availabilityTotal} modules, expected ${courseCatalog.modules.length}.`,
+  );
+}
+
 export const atlasCoreRouteAvailabilityStatus = {
-  "legacy-open": courseCatalogTotals.legacyOpen,
-  published: courseCatalogTotals.published,
-  "preview-reader": courseCatalogTotals.previewReader,
-  "authoring-only": courseCatalogTotals.authoring,
+  ...availabilityCounts,
+  "preview-reader": availabilityCounts.preview,
 };
 
 export const atlasCoreRouteTotals = {

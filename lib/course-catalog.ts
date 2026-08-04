@@ -319,7 +319,9 @@ export function isPreviewReader(courseModule: CourseGraphModule) {
   return courseModule.state.readerAccess === "preview";
 }
 
-export function isReferenceOnly(courseModule: CourseGraphModule) {
+export function isReferenceOnly(
+  courseModule: { state: Pick<CourseModuleState, "availability"> },
+) {
   return (
     courseModule.state.availability === "preview" ||
     courseModule.state.availability === "optional"

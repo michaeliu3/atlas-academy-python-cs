@@ -155,6 +155,8 @@ function wrapBatchDiagnosticRepairKeys(markdown: string): string {
 function createMarkdownComponents(
   enableMultipleChoicePredictionGates: boolean,
 ): Components {
+  let predictionGateCount = 0;
+
   return {
   a({
     "aria-label": ariaLabel,
@@ -195,8 +197,10 @@ function createMarkdownComponents(
         summaryLabel &&
         isMultipleChoiceAnswerRationaleSummary(summaryLabel)
       ) {
+        predictionGateCount += 1;
         return (
           <PredictionRevealGate
+            checkpointNumber={predictionGateCount}
             mode={
               className?.split(/\s+/u).includes(diagnosticRepairKeyClassName)
                 ? "batch"

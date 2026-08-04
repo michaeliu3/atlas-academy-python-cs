@@ -509,6 +509,10 @@
       "sha256": "de5a2bec29f5f0f45f9079028ec14852b1bfed80ae85e42af6c295db79678085"
     },
     {
+      "path": "content/course/contracts/m26-preview-contract-packet.v1.json",
+      "sha256": "613b53e5c12c590861c3b3eaf1cd5aace9374e6d7f79d5419223bfd8dedf5362"
+    },
+    {
       "path": "content/course/contracts/module-contract-candidate-packets.v1.json",
       "sha256": "cd1156abf11c6c5f3c900c12b679941b12b7a89b431dca2778003b353fb4c3ba"
     },
@@ -537,12 +541,20 @@
       "sha256": "4ad0653ae07a6ce283145365116e6ec9f1b9f9f6d3797bf82310cc8f2e5b1799"
     },
     {
+      "path": "content/course/reference-models/module26_reference.py",
+      "sha256": "7f1079d83acc2433972f4f959a541a2f2571655a1487ed481bd2340246e5769e"
+    },
+    {
+      "path": "content/course/reference-models/test_module26_reference.py",
+      "sha256": "1f4f692ff41e671d91233c241375ba443a5c730b12214e054fa9ca933de7d137"
+    },
+    {
       "path": "content/course/release-evidence-policy.v1.json",
       "sha256": "f386d0b0afab0426d356de7fde93412d629633e91b2924c33bdf7dcf2d63582c"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
-      "sha256": "f7f5f30cbb13f3b17cd8ba485b8b030747646e3452fd32fd70232bdfaff6cefc"
+      "sha256": "e3383ceba1c8c286af7c5291b27ae0b9a13e94ecf54a45c3b3ddbee777927476"
     },
     {
       "path": "content/course/synthesis-preview-conversations.v1.json",
@@ -1006,11 +1018,11 @@
     },
     {
       "path": "e2e/accessibility.spec.ts",
-      "sha256": "1add371ad50903dd81a7e2eb145904272c840f2c70052628ce087e7d61816040"
+      "sha256": "b4cc2f0b176b54e4da4a9ca48747916942252e616732bf9f4e7db139abecbf52"
     },
     {
       "path": "lib/module-studio-registry.ts",
-      "sha256": "ef9522b2ebdd31aaa60f04a75b229ac4fc4e7948851261fde4a38641cd8b3ecf"
+      "sha256": "35643a513f869f5ba8212692b4623f969c58ab5f29f3554e75c126d319bf5c43"
     },
     {
       "path": "package.json",
@@ -1075,10 +1087,6 @@
     {
       "path": "public/downloads/module25_reference.py",
       "sha256": "689439ccda7e54692929d3e53d7f9a813726a360bc24970abb1fc509cb49ef25"
-    },
-    {
-      "path": "public/downloads/module26_reference.py",
-      "sha256": "7f1079d83acc2433972f4f959a541a2f2571655a1487ed481bd2340246e5769e"
     },
     {
       "path": "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md",
@@ -1173,10 +1181,6 @@
       "sha256": "b9a459ecc2975ac92f7c97ff3d723325fd8e24818382e8e6e4942b036b013d72"
     },
     {
-      "path": "public/downloads/test_module26_reference.py",
-      "sha256": "1f4f692ff41e671d91233c241375ba443a5c730b12214e054fa9ca933de7d137"
-    },
-    {
       "path": "public/downloads/test_module27_reference.py",
       "sha256": "7ffe491afaed240c44b0e3f36030336a1006620893fa8333dc132ba408f11e51"
     },
@@ -1198,7 +1202,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "ae8f1eedee205036f9767e9e504767775921e68f47d13a95d795e9ee367e7229"
+      "sha256": "72f0e038f49109d94c883039290a8a2b88b03a2fb0df7af4cd28ab0fb2fc6003"
     }
   ]
 }

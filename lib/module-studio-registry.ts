@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { isReferenceOnly, type CourseAvailability } from "./course-catalog";
 
 /**
  * The complete, bounded set of reader studios that are actually publishable.
@@ -179,7 +180,7 @@ type ModuleStudioTarget = {
   state: {
     lifecycle: string;
     readerAccess: string;
-    availability: string;
+    availability: CourseAvailability;
   };
   studioId: string | null;
 };
@@ -239,7 +240,7 @@ export function resolveModuleStudio(
     };
   }
 
-  if (courseModule.state.availability === "preview") {
+  if (isReferenceOnly({ state: { availability: courseModule.state.availability } })) {
     return {
       kind: "preview",
       description:

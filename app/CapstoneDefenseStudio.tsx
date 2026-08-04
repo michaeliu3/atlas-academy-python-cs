@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   useEffect,
   useRef,
@@ -935,11 +934,7 @@ export function CapstoneDefenseStudio() {
       <footer className={styles.footer}>
         <div>
           <span className={styles.eyebrow}>Audit layer</span>
-          <p>Use the workbook for the six-session release dossier, architecture defense, TA protocol, and source route.</p>
-        </div>
-        <div className={styles.downloads}>
-          <Link href="/downloads/module26_reference.py">Download model</Link>
-          <Link href="/downloads/test_module26_reference.py">Download tests</Link>
+          <p>Use the workbook for the six-session release dossier, architecture defense, TA protocol, and source route. The deterministic reference model remains a private preview input until M26 is released.</p>
         </div>
       </footer>
     </section>

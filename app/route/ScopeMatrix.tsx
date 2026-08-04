@@ -41,15 +41,6 @@ const availabilityLabels: Record<CourseAvailability, string> = {
   "authoring-only": "Authoring-only — no learner reader route",
 };
 
-const availabilityOrder: CourseAvailability[] = [
-  "legacy-open",
-  "published",
-  "preview",
-  "locked",
-  "optional",
-  "authoring-only",
-];
-
 const calibrationSourceLabels = new Map([
   [
     "https://ocw.mit.edu/courses/6-854j-advanced-algorithms-fall-2005/",
@@ -95,9 +86,15 @@ function moduleReference(moduleId: string) {
 
   const shortLabel = `M${courseModule.number}`;
   if (courseModule.state.readerAccess === "hidden") {
-    return courseModule.state.privateGuidedStudy?.status === "ready"
-      ? <span>{shortLabel} · Private guided study ready · portal reader hidden</span>
-      : <span>{shortLabel} · authoring-only</span>;
+    const privatePack = courseModule.state.privateGuidedStudy?.status === "ready"
+      ? " · designated private chat pack ready"
+      : "";
+    return (
+      <span>
+        {shortLabel} · {availabilityLabels[courseModule.state.availability]} · portal reader hidden
+        {privatePack}
+      </span>
+    );
   }
 
   return <Link href={moduleHref(courseModule.slug)}>{shortLabel} · {courseModule.title}</Link>;
@@ -112,7 +109,7 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
     const availability = courseModule.state.availability;
     availabilityCounts.set(availability, (availabilityCounts.get(availability) ?? 0) + 1);
   }
-  const deliveryStates = availabilityOrder.flatMap((availability) => {
+  const deliveryStates = courseCatalog.availabilityStates.flatMap((availability) => {
     const count = availabilityCounts.get(availability) ?? 0;
     return count === 0 ? [] : [{ availability, count }];
   });
@@ -120,11 +117,7 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
     ({ state }) => state.privateGuidedStudy?.status === "ready",
   ).length;
   const label =
-    deliveryStates.length === 1 &&
-    deliveryStates[0].availability === "authoring-only" &&
-    privateGuidedReadyCount === anchorModules.length
-      ? "Private guided study ready · portal reader hidden"
-      : deliveryStates.length === 1
+    deliveryStates.length === 1
       ? availabilityLabels[deliveryStates[0].availability]
       : "Mixed anchor delivery";
   const deliverySummary = [

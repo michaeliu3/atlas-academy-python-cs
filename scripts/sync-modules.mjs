@@ -75,6 +75,17 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
 const moduleDirectory = resolve(siteRoot, "content", "modules");
 const contractPath = moduleContractRegistryPath(siteRoot);
+const m26PreviewContractPath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "contracts",
+  "m26-preview-contract-packet.v1.json",
+);
+const m26PreviewReferencePaths = [
+  resolve(siteRoot, "content", "course", "reference-models", "module26_reference.py"),
+  resolve(siteRoot, "content", "course", "reference-models", "test_module26_reference.py"),
+];
 const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
 const synthesisPreviewConversationsPath = resolve(
   siteRoot,
@@ -295,6 +306,7 @@ const releaseInputPaths = new Set([
   synthesisPreviewConversationsPath,
   performanceBudgetPolicyPath,
   contractPath,
+  m26PreviewContractPath,
   advancedModuleBridgePath(siteRoot),
   advancedModuleContractPath(siteRoot),
   releaseInputPolicyPath(siteRoot),
@@ -327,6 +339,8 @@ for (const path of browserProgressSurfacePolicyReport.releaseInputPaths) {
 for (const path of legacyCandidatePreflightProfilesReport.releaseInputPaths) {
   releaseInputPaths.add(path);
 }
+releaseInputPaths.add(m26PreviewContractPath);
+for (const path of m26PreviewReferencePaths) releaseInputPaths.add(path);
 
 for (const projectedModule of projectedModules) {
   const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
@@ -401,6 +415,10 @@ for (const projectedModule of projectedModules) {
 }
 
 await requireFile(contractPath, "Module contract registry v3");
+await requireFile(m26PreviewContractPath, "M26 preview contract packet");
+for (const path of m26PreviewReferencePaths) {
+  await requireFile(path, "M26 private preview reference input");
+}
 await requireFile(synthesisPreviewConversationsPath, "Synthesis preview conversations");
 await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
 await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
