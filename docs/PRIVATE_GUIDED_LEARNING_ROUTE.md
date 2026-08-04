@@ -120,9 +120,11 @@ adaptive and non-grading; no fluent answer alone proves mastery.
 
 For either path, say `records on` only when the learner wants the configured
 concise-note policy, its approved integration is available, and the session is
-substantive. Say `off-record` or `pause records` to keep the session out of that
-policy. Never claim that a Notion write, voice transcript, formatting event,
-publication, or completion occurred without direct evidence.
+substantive. Say `end session` to close automatic session-summary authorization;
+an explicit correction or deletion request remains separately learner-authorized.
+Say `off-record` or `pause records` to keep the session out of that policy. Never
+claim that a Notion write, voice transcript, formatting event, publication, or
+completion occurred without direct evidence.
 
 ### Start M31 private study
 

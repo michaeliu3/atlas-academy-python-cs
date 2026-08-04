@@ -19,7 +19,8 @@ const requiredNoteConditions = [
 const requiredRecordingAuthorization = {
   initialState: "require-explicit-records-on-confirmation",
   activationPhrase: "records on",
-  scope: "the current substantive session in that designated chat; re-confirm records on for a later session",
+  closurePhrase: "end session",
+  scope: "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized",
 };
 const requiredSubstantiveEvidence = [
   "a named module or learning topic",
@@ -28,6 +29,7 @@ const requiredSubstantiveEvidence = [
 ];
 const requiredLearnerControlAcknowledgements = {
   recordsOn: "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+  endSession: "Acknowledge end session as chat-level intent; stop automatic session-summary creation or updates until a new records on, while honoring an explicitly requested correction or deletion separately.",
   pauseOrOffRecord: "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
   confirmedSave: "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
   deletionUnavailable:
@@ -78,6 +80,7 @@ const requiredExclusions = [
   "off-record material",
 ];
 const requiredControls = [
+  "end session",
   "pause records",
   "off-record",
   "correct a saved note",
@@ -141,10 +144,10 @@ async function validateGuide(path, siteRoot, errors) {
   if (!guide.includes("automatic concise Notion note")) {
     errors.push("Live Codex workflow learner guide must name the designated-chat automatic note policy.");
   }
-  if (!/at most\s+one concise note for the current\s+substantive session/u.test(guide)) {
+  if (!/at\s+most\s+one\s+concise\s+note\s+for\s+the\s+current\s+substantive\s+session/u.test(guide)) {
     errors.push("Live Codex workflow learner guide must state the session-level write cadence.");
   }
-  if (!guide.includes("say “records on”") || !guide.includes("all three are present")) {
+  if (!guide.includes("say “records on”") || !guide.includes("say “end session”") || !guide.includes("all three are present")) {
     errors.push("Live Codex workflow learner guide must define recording activation and a substantive-session threshold.");
   }
   if (!guide.includes("direct evidence")) {
@@ -212,6 +215,7 @@ export async function validateLiveCodexLearningWorkflow(
       !isPlainObject(recordingAuthorization) ||
       recordingAuthorization.initialState !== requiredRecordingAuthorization.initialState ||
       recordingAuthorization.activationPhrase !== requiredRecordingAuthorization.activationPhrase ||
+      recordingAuthorization.closurePhrase !== requiredRecordingAuthorization.closurePhrase ||
       recordingAuthorization.scope !== requiredRecordingAuthorization.scope
     ) {
       errors.push("Live Codex workflow must require a scoped records-on confirmation before automatic notes.");

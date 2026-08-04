@@ -15,7 +15,8 @@
     "recordingAuthorization": {
       "initialState": "require-explicit-records-on-confirmation",
       "activationPhrase": "records on",
-      "scope": "the current substantive session in that designated chat; re-confirm records on for a later session"
+      "closurePhrase": "end session",
+      "scope": "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized"
     },
     "substantiveSession": {
       "minimumEvidence": [
@@ -46,6 +47,7 @@
     },
     "learnerControlAcknowledgements": {
       "recordsOn": "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+      "endSession": "Acknowledge end session as chat-level intent; stop automatic session-summary creation or updates until a new records on, while honoring an explicitly requested correction or deletion separately.",
       "pauseOrOffRecord": "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
       "confirmedSave": "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
       "deletionUnavailable": "If deletion access is unavailable, say deletion did not occur and direct the learner to delete or archive the note in their own Notion UI."
@@ -91,6 +93,7 @@
     ]
   },
   "learnerControls": [
+    "end session",
     "pause records",
     "off-record",
     "correct a saved note",
