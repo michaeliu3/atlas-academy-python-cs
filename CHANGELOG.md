@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Bounded the complete Node course-test runner to four workers. The suite still
+  discovers and executes every test file; the cap avoids Git-index/preflight
+  contention on high-core local machines and makes the review gate more
+  repeatable. A stopped local timeout is not represented as a passing full run.
 - Added explicit 90- and 180-day **private chat-led** calendar extensions for
   the full M1–M36 → M25 → M26 sequence. They retain the authoring-only portal
   boundary, six-session evidence work, and M25/M26 artifact gates; they are

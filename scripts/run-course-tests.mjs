@@ -11,12 +11,23 @@ const testFiles = (await readdir(testDirectory))
   .sort()
   .map((filename) => resolve(testDirectory, filename));
 
+// Several contract/preflight suites each take a Git-index snapshot and verify
+// a large cohort. Letting Node fan every file out to all host cores causes
+// contention rather than faster feedback on high-core developer machines.
+// Keep the full suite, but use a small deterministic worker pool in local and
+// CI runs alike.
+const testConcurrency = 4;
+
 if (testFiles.length === 0) {
   throw new Error("No Node course tests were discovered in tests/*.test.mjs.");
 }
 
 const exitCode = await new Promise((resolveExitCode, reject) => {
-  const child = spawn(process.execPath, ["--test", ...testFiles], {
+  const child = spawn(process.execPath, [
+    "--test",
+    `--test-concurrency=${testConcurrency}`,
+    ...testFiles,
+  ], {
     cwd: siteRoot,
     stdio: "inherit",
   });
