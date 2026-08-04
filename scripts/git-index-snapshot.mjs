@@ -476,7 +476,6 @@ export async function readGitIndexText(siteRoot, repositoryPath, options = {}) {
     await snapshot.assertClean([repositoryPath]);
     return snapshot.readText(repositoryPath);
   }
-  const maximumTextBytes = options.maximumTextBytes ?? defaultMaximumGitIndexTextBytes;
   for (let attempt = 0; attempt < 2; attempt += 1) {
     const snapshotPromise = openCachedGitIndexSnapshot(siteRoot, options);
     const snapshot = await snapshotPromise;
