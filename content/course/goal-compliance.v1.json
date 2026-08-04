@@ -56,7 +56,7 @@
       "id": "delivery-boundary",
       "requirement": "Portal is a reference companion; designated TA and Study Partner chats are the course.",
       "state": "complete",
-      "evidence": "app/route/page.tsx; docs/LIVE_CODEX_LEARNING_WORKFLOW.md; tests/guided-route-handoffs.test.mjs",
+      "evidence": "app/route/page.tsx; docs/LIVE_CODEX_LEARNING_WORKFLOW.md; tests/guided-route-handoffs.test.mjs; tests/rendered-html.test.mjs",
       "openItem": "Recheck the first-screen wording whenever route copy changes."
     },
     {
@@ -91,7 +91,7 @@
       "id": "levels-1-9",
       "requirement": "Levels 1–9 show target capability, portal delivery, and private-chat delivery as separate facts.",
       "state": "partial",
-      "evidence": "content/course/course-graph.v2.json; app/route/ScopeMatrix.tsx; tests/course-status-projection.test.mjs",
+      "evidence": "content/course/course-graph.v2.json; app/route/ScopeMatrix.tsx; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
       "openItem": "Audit every topic row for actual delivery rather than mentions or previews."
     },
     {

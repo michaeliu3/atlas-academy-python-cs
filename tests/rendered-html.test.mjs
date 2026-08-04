@@ -668,6 +668,12 @@ test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
     readable,
     /Primary guided learning happens in Codex\./,
   );
+  assert.match(
+    readable,
+    /The portal is a reference companion;\s*the designated Codex Teaching Assistant and Study Partner chats are the course\./,
+  );
+  assert.match(readable, /Study this next: placement diagnostic/);
+  assert.match(readable, /Read the route and evidence boundaries/);
   assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
   assert.match(readable, /Module 25/);
   assert.match(readable, /Module 26/);

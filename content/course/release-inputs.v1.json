@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "4ada1407b6230549c408f97c45800b899acee9838e47d5356c5ade49bc6f2e0a"
+      "sha256": "c738f8dddae62e887c7d3d675e479c5f1a80bfc931861a389475d99d4dd8a15b"
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
@@ -1206,7 +1206,7 @@
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "86b6c7fd35fcbc347f791beb6d3ca97bffe0326b876fca3679d885202c385b51"
+      "sha256": "7a423e48dcf5edca44321894c11b30089f66c4d47bf09d15e41385839a846806"
     }
   ]
 }

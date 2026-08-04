@@ -137,43 +137,46 @@ export default function AtlasCoreRoutePage() {
           <p className={styles.availability}>
             Day 1 is the placement diagnostic and learning contract. Today, {atlasCoreRouteAvailabilityStatus["legacy-open"]} legacy workbooks are open for guided study; {atlasCoreRouteAvailabilityStatus["preview-reader"]} synthesis workbooks are clearly marked as reference previews; the {atlasCoreRouteAvailabilityStatus["authoring-only"]} named depth modules are ready for designated private guided study while their portal reader remains hidden and formal review and release evidence remain pending.
           </p>
-          <p className={styles.availability}>
-            <strong>Open material is available for study, not a published,
-            verified module—and it does not mean a learner has completed its
-            prerequisites.</strong> Atlas does not infer progress from a click,
-            a scroll, or a studio interaction. Use the academic prerequisite
-            map and a Codex learning conversation to choose and record evidence
-            deliberately.
-          </p>
-          <p className={styles.availability}>
-            <strong>Primary guided learning happens in Codex.</strong> The
-            course owner may use the ready M31–M36 private guided-study packs
-            only with the designated Teaching Assistant and Study Partner chats.
-            That private instructor-led study does not make a portal page
-            available, record Core credit, or create a publication claim. Use
-            the{" "}
-            <Link href="/learning-partners">Teaching Assistant and Study Partner guide</Link>{" "}
-            to prepare the conversation and keep the private-delivery boundary
-            explicit.
-          </p>
+          <details className={styles.boundaryDetails}>
+            <summary>Read the route and evidence boundaries</summary>
+            <div className={styles.boundaryDetailsBody}>
+              <p className={styles.availability}>
+                <strong>Open material is available for study, not a published,
+                verified module—and it does not mean a learner has completed its
+                prerequisites.</strong> Atlas does not infer progress from a click,
+                a scroll, or a studio interaction. Use the academic prerequisite
+                map and a Codex learning conversation to choose and record evidence
+                deliberately.
+              </p>
+              <p className={styles.availability}>
+                <strong>Primary guided learning happens in Codex.</strong> The
+                course owner may use the ready M31–M36 private guided-study packs
+                only with the designated Teaching Assistant and Study Partner chats.
+                That private instructor-led study does not make a portal page
+                available, record Core credit, or create a publication claim. Use
+                the{" "}
+                <Link href="/learning-partners">Teaching Assistant and Study Partner guide</Link>{" "}
+                to prepare the conversation and keep the private-delivery boundary
+                explicit.
+              </p>
+            </div>
+          </details>
         </header>
 
         <section className={styles.truth} aria-labelledby="route-boundary">
           <div>
-            <p className="kicker">A truthful contract</p>
-            <h2 id="route-boundary">Coverage is not a trophy for speed.</h2>
+            <p className="kicker">Study this next</p>
+            <h2 id="route-boundary">Choose the conversation.</h2>
           </div>
           <p>
-            Every topic on this route needs a definition, derivation or trace,
-            misconception check, transfer task, and later retrieval. For
-            eligible learner-ready work, a Teaching Assistant oral defense
-            supports a learner-controlled summary after evidence; M25/M26
-            reference previews use only their bounded preparation and rehearsal
-            cards. A portal click, preview, or oral conversation never
-            automatically creates a record or Core credit.
+            The portal is a reference companion; the designated Codex Teaching
+            Assistant and Study Partner chats are the course. Use the academic
+            prerequisite map to choose the next conversation; a portal click,
+            preview, or oral conversation never automatically creates a record
+            or Core credit.
           </p>
           <Link className={styles.primaryLink} href="/diagnostic">
-            Begin with the placement diagnostic <span aria-hidden="true">→</span>
+            Study this next: placement diagnostic <span aria-hidden="true">→</span>
           </Link>
         </section>
 

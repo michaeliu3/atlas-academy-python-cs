@@ -88,6 +88,40 @@
   max-width: 54rem;
 }
 
+.boundaryDetails {
+  margin-top: 1.35rem;
+  max-width: 54rem;
+}
+
+.boundaryDetails summary {
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.boundaryDetails summary:focus-visible {
+  border-radius: 0.2rem;
+  outline: 3px solid var(--cobalt);
+  outline-offset: 0.2rem;
+}
+
+.boundaryDetailsBody {
+  border-left: 2px solid var(--line);
+  margin-top: 0.65rem;
+  padding-left: 0.9rem;
+}
+
+.boundaryDetailsBody .availability {
+  margin-top: 0.8rem;
+}
+
+.boundaryDetailsBody .availability:first-child {
+  margin-top: 0;
+}
+
 .truth {
   align-items: start;
   background: var(--ink);
