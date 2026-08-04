@@ -116,6 +116,7 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
 
   const html = await response.text();
   const readable = html.replaceAll("<!-- -->", "");
+  const renderedText = new JSDOM(html).window.document.body.textContent ?? "";
   assert.match(html, /Two separate chats\. Two different jobs\./);
   assert.match(html, /Teaching Assistant/);
   assert.match(html, /Study Partner/);
@@ -135,8 +136,14 @@ test("renders separate live-learning Teaching Assistant and Study Partner packag
   assert.match(readable, /designated Codex chats—not the portal/i);
   assert.match(readable, /authorized to\s+automatically create one concise Notion session note/i);
   assert.match(readable, /current\s+substantive learning conversation/i);
-  assert.match(readable, /permission expires when that\s+session ends/i);
+  assert.match(renderedText, /say “end session” to close\s+automatic\s+session-summary authorization/i);
+  assert.match(renderedText, /correction\s+or deletion\s+request remains separately learner-authorized/i);
   assert.match(readable, /successful write is recorded\s+only from direct evidence/i);
+  assert.match(html, /Reusable Session 1 launcher/);
+  assert.match(html, /Start Module \[NN\], Session 1/);
+  assert.match(html, /M1 · Values, State, and Execution/);
+  assert.match(html, /Start M01, Session 1 — The mystery of the changing record/);
+  assert.match(html, /href="\/modules\/01-values-state-execution"/);
   assert.match(html, /The Teaching Assistant conducts the actual post-module oral defense/);
   assert.match(html, /private advanced-study launch guide/);
   assert.match(
@@ -483,6 +490,14 @@ test("keeps every authored scrollable code region labelled and keyboard-focusabl
     [
       "../app/learning-partners/LearningPartnerPromptCards.tsx",
       "Scrollable ${prompt.title} startup prompt",
+    ],
+    [
+      "../app/learning-partners/page.tsx",
+      "Reusable open-module Session 1 starter",
+    ],
+    [
+      "../app/learning-partners/page.tsx",
+      "Module 1 Session 1 starter",
     ],
     [
       "../app/modules/[slug]/ModuleTextOralDefense.tsx",

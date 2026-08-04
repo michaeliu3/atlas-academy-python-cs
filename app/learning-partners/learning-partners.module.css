@@ -101,6 +101,74 @@
   margin: 0;
 }
 
+.launches {
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(16rem, 0.9fr) minmax(22rem, 1.1fr);
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 4.5rem 5vw;
+}
+
+.launches h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2.15rem, 4vw, 4rem);
+  font-weight: 450;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin: 0.55rem 0 0;
+}
+
+.launches > div > p:not(.kicker) {
+  color: #48564e;
+  line-height: 1.6;
+  margin: 1.1rem 0 0;
+}
+
+.launchGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.launchCard {
+  background: color-mix(in srgb, var(--paper) 92%, white);
+  border: 1px solid var(--line);
+  box-shadow: 0 1.25rem 3.25rem rgba(30, 37, 32, 0.04);
+  padding: 1.25rem;
+}
+
+.launchCard h3 {
+  color: var(--plum);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  margin: 0 0 0.85rem;
+  text-transform: uppercase;
+}
+
+.launchCard pre {
+  background: #202923;
+  color: #f5efe4;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.73rem;
+  line-height: 1.55;
+  margin: 0;
+  overflow: auto;
+  padding: 1rem;
+  white-space: pre-wrap;
+}
+
+.launchCard a {
+  color: var(--ink);
+  display: inline-block;
+  font-size: 0.84rem;
+  font-weight: 800;
+  margin-top: 1rem;
+  text-underline-offset: 0.25em;
+}
+
 .packages {
   padding-bottom: 5rem;
   padding-top: 5rem;
@@ -236,7 +304,8 @@
 
 @media (max-width: 760px) {
   .workflow,
-  .promptGrid {
+  .promptGrid,
+  .launches {
     grid-template-columns: 1fr;
   }
 

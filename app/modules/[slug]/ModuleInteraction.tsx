@@ -41,9 +41,9 @@ function renderSessionRoute({
       {hasSixSessionPath ? (
         <div className="module-session-launches">
           <p className="module-session-launches-intro">
-            Start with a Study Partner rehearsal during the session. Keep the
-            Teaching Assistant&apos;s oral defense for after Session 6 and a
-            concrete dossier.
+            Start a Study Partner discussion during the session when it helps.
+            Keep the Teaching Assistant&apos;s oral defense for after Session 6 and
+            a concrete dossier.
           </p>
           <ol aria-label={`Six-session study path for Module ${courseModule.number}`}>
             {coreSessions.map((session) => (

@@ -226,9 +226,10 @@ export function ModuleOralDefense({
           reflect; it is not sent or saved by Atlas. A designated Codex chat
           may automatically create at most one concise Notion session note only
           after you say “records on” in that exact designated chat for the
-          current substantive learning conversation. That permission expires
-          when the session ends. Atlas does not initiate it, and no successful
-          write is claimed without direct evidence. Do not keep raw voice recordings,
+          current substantive learning conversation. Say “end session” to close
+          automatic session-summary authorization; an explicit correction or
+          deletion request remains separately learner-authorized. Atlas does not
+          initiate it, and no successful write is claimed without direct evidence. Do not keep raw voice recordings,
           sensitive personal content, off-record material, or an unnecessary transcript.
         </p>
       </div>
