@@ -343,3 +343,16 @@ This records automated workflow evidence for that merge candidate and its
 source head. It does not establish human module review, assistive-technology
 completion, Notion or voice-platform behavior, dependency-alert closure,
 private deployment, publication, certification, credit, or learner mastery.
+
+## Current source-head revalidation (2026-08-04)
+
+The additive source head
+[`601296d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/601296deafd3ef4c44c98a0b088c67e198a62952)
+received the normal non-draft pull-request Course CI run
+[`30959390181`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30959390181)
+with a successful conclusion. Its jobs passed the portal quality gate, bounded
+live source-link audit, Node apparatus (416/416), Python 3.12 and 3.14 teaching
+models, and Chromium/axe browser acceptance (63/63 routes). This is the current
+automated gate record for the source head and is not module promotion, human
+review, private deployment, security clearance, publication, or learner outcome
+evidence.

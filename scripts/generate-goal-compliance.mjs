@@ -102,7 +102,7 @@ function render() {
       oneLine(gate.runId) +
       "](" +
       gate.url +
-      ")); this predates the current Draft head.",
+      ")); this is the recorded source-head gate; the separate Draft snapshot is historical evidence only.",
     "> - Latest observed Draft content check: " +
       tick +
       oneLine(draft.commit) +

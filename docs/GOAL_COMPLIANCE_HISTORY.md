@@ -100,6 +100,18 @@ in the active compliance snapshot. It does not promote any module, replace
 human or assistive-technology review, close dependency alerts, prove Notion or
 voice behavior, establish a private deployment, or establish learner mastery.
 
+## Current source-head revalidation — 2026-08-04
+
+The current additive source head
+[`601296d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/601296deafd3ef4c44c98a0b088c67e198a62952)
+received the normal non-draft pull-request Course CI run
+[`30959390181`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30959390181)
+and passed the portal gate, live source-link checks, Node apparatus (416/416),
+both Python teaching-model jobs, and browser accessibility (63/63). This
+revalidation refreshes the generated current-truth header; it does not promote
+modules or establish human review, private deployment, Notion/voice behavior,
+security clearance, publication, or learner mastery.
+
 ## Evidence interpretation
 
 - **Structural baseline**: automation has checked file/graph/session/path facts.

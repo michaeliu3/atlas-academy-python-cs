@@ -6,11 +6,11 @@
   "truth": {
     "lastFullGate": {
       "state": "success",
-      "commit": "a5bf821ed3f1b7f52f039b0706d45d34561ec41a",
+      "commit": "601296deafd3ef4c44c98a0b088c67e198a62952",
       "date": "2026-08-04",
-      "runId": "30958237679",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679",
-      "note": "Current normal non-draft pull-request Course CI gate; portal, live source links, 416/416 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The run validates the generated merge candidate; the source head is recorded separately."
+      "runId": "30959390181",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30959390181",
+      "note": "Current normal non-draft pull-request Course CI gate on the recorded source head; portal, live source links, 416/416 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
     },
     "currentDraftContent": {
       "state": "success",
@@ -26,27 +26,27 @@
       "state": "success",
       "pass": 416,
       "fail": 0,
-      "runId": "30958237679",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679",
+      "runId": "30959390181",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30959390181",
       "note": "Current non-draft apparatus job passed all 416 tests on the generated merge candidate; this is automated evidence, not module promotion or learner mastery."
     },
     "currentHeadBrowser": {
       "state": "success",
       "pass": 63,
       "fail": 0,
-      "runId": "30958237679",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30958237679",
+      "runId": "30959390181",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30959390181",
       "note": "Current non-draft Chromium/axe job passed all 63 audited routes on the generated merge candidate; representative assistive-technology review remains open."
     },
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "Current normal non-draft Course CI run 30958237679 passed the full 416-test Node apparatus suite; this does not promote legacy modules or prove learner outcomes."
+      "basis": "Current normal non-draft Course CI run 30959390181 passed the full 416-test Node apparatus suite; this does not promote legacy modules or prove learner outcomes."
     },
     "openAxeViolations": {
       "count": 0,
       "state": "none-detected",
-      "basis": "Current normal non-draft browser job in run 30958237679 passed 63/63 Chromium/axe routes; authored Mermaid alternatives are separately reported as 245/245 complete."
+      "basis": "Current normal non-draft browser job in run 30959390181 passed 63/63 Chromium/axe routes; authored Mermaid alternatives are separately reported as 245/245 complete."
     },
     "openDependencyAlerts": {
       "count": 5,
