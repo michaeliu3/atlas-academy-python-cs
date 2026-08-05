@@ -456,3 +456,12 @@ M28–M31 spine audit passed its 94-test content suite in Draft Course CI run
 Draft cost control intentionally skipped portal, apparatus, browser, and Python
 teaching-model jobs; this checkpoint is not a full gate, release, deployment,
 human review, or learner outcome.
+
+## Legacy-contract structural checkpoint (2026-08-05)
+
+The compliance matrix now records the checked-in M1–M30 contract audit and
+candidate-preflight evidence. Its deterministic report resolves 480 structural
+criteria (478 pointer-present, 2 intentional M25/M26 prerequisite-map
+ambiguities, 0 missing). This is not a module promotion or verification: all 30
+legacy entries remain non-verified pending module-specific human review,
+source/CI/deployment provenance, and an explicit promotion decision.

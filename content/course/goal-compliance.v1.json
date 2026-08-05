@@ -74,8 +74,8 @@
       "id": "module-contract",
       "requirement": "Every learner-ready module passes the versioned contract and release evidence gate.",
       "state": "partial",
-      "evidence": "content/course/contracts/module-contract-registry.v3.json; scripts/module-contract-registry.mjs; scripts/validate-course.mjs",
-      "openItem": "Thirty legacy modules remain unverified; six advanced modules remain authoring-only."
+      "evidence": "content/course/contracts/module-contract-registry.v3.json; content/course/contracts/legacy-module-contract-audit.v1.json; docs/LEGACY_MODULE_CONTRACT_AUDIT.md; scripts/module-contract-registry.mjs; scripts/validate-course.mjs; tests/course-contract.test.mjs; tests/math-candidate-preflight.test.mjs",
+      "openItem": "The legacy audit now resolves all 480 M1–M30 structural criteria (478 pointer-present, 2 intentional M25/M26 prerequisite-map ambiguities, 0 missing); all 30 remain legacy-baseline/non-verified until module-specific human quality review, exact source/CI/deployment evidence, and a recorded promotion decision. Six advanced modules remain authoring-only."
     },
     {
       "id": "advanced-packs",

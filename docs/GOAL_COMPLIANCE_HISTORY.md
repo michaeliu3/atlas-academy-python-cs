@@ -253,3 +253,13 @@ passed 94/94 tests in run [30976990411](https://github.com/michaeliu3/atlas-acad
 This is structural/content evidence; human theorem/derivation review,
 assistive-technology review, module promotion, deployment, and learner evidence
 remain open.
+
+## Dated legacy contract evidence clarification — 2026-08-05
+
+The generated matrix now cites the checked-in legacy contract audit and its
+candidate-preflight tests. The audit resolves all 480 M1–M30 structural
+criteria: 478 pointers are present, the only two ambiguous entries are the
+intentional M25/M26 prerequisite-map boundaries, and no criterion is missing.
+This improves the structural evidence boundary; every legacy entry remains
+`legacy-baseline`/non-verified until module-specific human review, exact
+source/CI/deployment provenance, and a recorded promotion decision exist.
