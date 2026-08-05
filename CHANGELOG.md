@@ -7,6 +7,7 @@ actually published.
 
 ## Unreleased
 
+- Recorded the latest PR #22 successor head [`7a90fd9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6) and successful required-context run [`31012584499`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499) as a non-promoting lightweight provenance check; the canonical review-ready ref remains `9242f79` and the last complete full execution remains `208d296`/`31009811465`.
 - Recorded the current PR #22 head [`9242f79`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/9242f79d53b1ec5d4b49e0ee6b113624b2435cec) and successful required-context run [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860). The provenance-only successor used lightweight unchanged-suite paths; the last complete full execution remains `208d296`/`31009811465`.
 - Recorded current PR #22 head [`b295f0f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b295f0f353c5227143311448544aa645ebf7942c) and required-context success in run [`31011177833`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31011177833). This was a provenance-only successor with explicit lightweight unchanged-suite paths; the last complete full execution remains `208d296`/`31009811465`.
 - Reconciled the generated current-truth evidence with the latest additive

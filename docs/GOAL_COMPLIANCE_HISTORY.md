@@ -683,3 +683,12 @@ The portal structural gate ran; Node apparatus, Python 3.12/3.14, and browser
 jobs reported their explicit lightweight unchanged-suite paths. The canonical
 truth now records this as the current review-ready head while retaining
 `208d296`/`31009811465` as the last complete full execution gate.
+
+## Latest PR successor check — 2026-08-05
+
+The current PR #22 head [`7a90fd9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6)
+passed every required Course CI context in run
+[`31012584499`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499).
+This is a non-promoting provenance successor with the explicit lightweight
+unchanged-suite paths; the canonical review-ready ref remains `9242f79`, and
+the last complete full execution remains `208d296`/`31009811465`.

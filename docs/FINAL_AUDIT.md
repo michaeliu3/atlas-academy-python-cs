@@ -148,7 +148,11 @@ present when the matrix grows.
   whose required contexts succeeded in run
   [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860)
   through the explicit lightweight path for unchanged apparatus, Python, and
-  browser suites. This is current provenance, not a second full execution gate;
+  browser suites. The latest PR #22 successor head [`7a90fd9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6)
+  also passed every required context in run
+  [`31012584499`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499)
+  through the same bounded lightweight paths. These are current provenance
+  checks, not a second full execution gate;
   neither run closes deployment, dependency, waived human-observation,
   publication, or mastery boundaries.
 

@@ -48,6 +48,16 @@
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
       "note": "Current review-ready ref 9242f79 passed every required Course CI context in run 31012232860; this provenance-only successor used the explicit lightweight paths for unchanged apparatus, Python, and browser suites. The last full execution gate remains 208d296/run 31009811465."
     },
+    "latestSuccessorCheck": {
+      "state": "success",
+      "commit": "7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6",
+      "date": "2026-08-05",
+      "prNumber": 22,
+      "runId": "31012584499",
+      "checkState": "success",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499",
+      "note": "Current PR #22 head 7a90fd9 passed every required Course CI context in run 31012584499. This is a provenance-only successor check using the explicit lightweight paths for unchanged apparatus, Python, and browser suites; the review-ready truth remains anchored to 9242f79 and the last full execution gate remains 208d296/run 31009811465."
+    },
     "openRedTests": {
       "count": 0,
       "items": [],

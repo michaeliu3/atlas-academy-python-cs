@@ -49,7 +49,7 @@ function validateSource() {
     }
     ids.add(requirement.id);
   }
-  for (const field of ["lastFullGate", "currentDraftContent", "lastFullGateApparatus", "lastFullGateBrowser", "reviewReadyRef"]) {
+  for (const field of ["lastFullGate", "currentDraftContent", "lastFullGateApparatus", "lastFullGateBrowser", "reviewReadyRef", "latestSuccessorCheck"]) {
     if (!source.truth?.[field] || typeof source.truth[field] !== "object") {
       throw new Error("goal-compliance truth." + field + " is required.");
     }
@@ -68,6 +68,7 @@ function render() {
   const gate = truth.lastFullGate;
   const draft = truth.currentDraftContent;
   const reviewReady = truth.reviewReadyRef;
+  const successor = truth.latestSuccessorCheck;
   const axe = truth.openAxeViolations;
   const dependencies = truth.openDependencyAlerts;
   const rows = source.requirements
@@ -120,6 +121,17 @@ function render() {
       tick +
       " (" +
       oneLine(reviewReady.note) +
+      ").",
+    "> - Latest PR successor check: `" +
+      oneLine(successor.commit) +
+      "` ([run " +
+      oneLine(successor.runId) +
+      "](" +
+      successor.url +
+      ")) is **" +
+      oneLine(successor.checkState) +
+      "** (" +
+      oneLine(successor.note) +
       ").",
     "> - Latest recorded content-bearing Draft check: " +
       tick +

@@ -15,6 +15,7 @@ test("goal compliance is a generated compact truth surface with preserved histor
   );
   assert.match(matrix, /Last successful full gate:/u);
   assert.match(matrix, /Current review-ready ref:/u);
+  assert.match(matrix, /Latest PR successor check:/u);
   assert.doesNotMatch(matrix, /predates the current Draft head/u);
   assert.match(matrix, /Latest recorded content-bearing Draft check:/u);
   assert.match(matrix, /Latest recorded full-gate apparatus check:/u);
