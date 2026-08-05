@@ -810,3 +810,17 @@ satisfaction path because no browser-affecting files changed. This successor
 check does not replace the canonical review-ready ref `9242f79` or the last
 complete Chromium execution `208d296`/`31009811465`, and makes no claim of
 publication, deployment, human review, or learner mastery.
+
+## Latest PR successor check (2026-08-05, current head)
+
+The current PR #22 head [`97d5764`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/97d5764232bd527dd4044cd1d4d3efae6a64cb43)
+passed every required Course CI context in run
+[`31019610532`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31019610532).
+Portal quality, 423/423 Node apparatus tests, and Python 3.12/3.14 teaching
+models passed; the browser context used its documented lightweight satisfaction
+path because no browser-affecting files changed. This is the current additive
+successor check, not a complete Chromium execution, module promotion,
+publication, deployment, human review, or learner mastery claim. The last
+complete full gate remains [`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
+in run
+[`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).

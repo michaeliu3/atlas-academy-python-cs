@@ -55,7 +55,7 @@ present when the matrix grows.
 | accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
 | safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
 | actions-cost | complete | Path-aware gating, superseded-run cancellation, portal-build reuse, and current required-check preservation are directly observed in the recorded full and successor gates. Release/deployment evidence is a separate requirement. |
-| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through current reviewed ref `208d296`; exact private deployment evidence remains absent. |
+| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through current head `97d5764` and successor run `31019610532`; exact private deployment evidence remains absent. |
 | final-audit | partial | This auditable reconciliation now exists; it cannot be closed while the open human/platform/deployment/release boundaries remain. |
 
 ## Complete evidence in this audit
@@ -73,6 +73,10 @@ present when the matrix grows.
   the focused pedagogy-density guard and hidden-candidate parity checks pass.
 - The current source tree is clean, additive, and reachable through review-ready PR #22;
   no history rewrite was used.
+- The current PR #22 head `97d5764` passed every required Course CI context in
+  successor run `31019610532`. Its browser context used the documented
+  lightweight path because no browser-affecting files changed; the last
+  complete Chromium execution remains `208d296`/`31009811465`.
 - The current 2026-08-05 bounded live source audit checked 1,068 unique
   source-map and calibration URLs: 1,038 returned 200, four 202, four 206,
   three 401, and 19 403 responses. This is reachability evidence only; it
