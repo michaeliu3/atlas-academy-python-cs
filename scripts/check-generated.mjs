@@ -10,6 +10,7 @@ const siteRoot = resolve(scriptDirectory, "..");
 const generatedPaths = [
   "content/modules/manifest.json",
   "content/modules/module-content.ts",
+  "content/course/module-teaching-packs.v1.json",
   "content/course/release-inputs.v1.json",
   "docs/COURSE_STATUS.md",
   "docs/LEGACY_MODULE_CONTRACT_AUDIT.md",
