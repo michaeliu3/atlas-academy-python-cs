@@ -275,3 +275,17 @@ source document. It also requires stable links, access provenance, a license or
 reuse boundary, and claim/rationale linkage for each module's source-ledger
 input. This strengthens structural source evidence without treating research
 files as human review, publication, or learner mastery.
+
+## Dated Worker security-boundary checkpoint — 2026-08-05
+
+The additive head [`b65ee26`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b65ee26)
+adds an apparatus regression proving that both the image-optimization and
+ordinary application paths in `worker/index.ts` pass through the shared
+security-header helper; the focused local test passed 3/3. The follow-up
+provenance record is [`c7153a4`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/c7153a4b9f0892a08f1f5b2e298b6a09436b8176).
+Draft Course CI run
+[`30978304554`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978304554)
+passed changed-file classification and the draft content path; apparatus,
+browser, and teaching-model jobs were intentionally skipped. This does not
+verify headers at the private deployment, close dependency alerts, or establish
+security-clean status.
