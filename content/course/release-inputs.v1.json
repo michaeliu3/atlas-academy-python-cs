@@ -74,7 +74,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "6cfd2899112cd3937eb0d9b419ddfe50fad2d38247192aab3cd2aa11ffcbdf4c"
+      "sha256": "bf9d013a34292a7b4a63aef208447d1fb68623dd8b3e2fa5c0e7ac2fc8e51aa0"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
@@ -110,11 +110,11 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "5ca9a2fb4f9ffe51e3b79cefa2ecb212b4144938c980dadf923e7ec61b16dd9a"
+      "sha256": "8c7f872fd140397599c08b400990c9f85c2e09e29317272967ea68ad7cbbdadb"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m31.v1.json",
-      "sha256": "99808ccf4783cd87ab1249562b210c11540bedb4c9a4b9e776ed169ec1c7900f"
+      "sha256": "b9b87a80f75a8c15d1b294033543ce5ec7fcbc30e4acbf48bb572b09e7018b99"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m32.v1.json",
@@ -538,7 +538,7 @@
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
-      "sha256": "0388edeaeb3692f2eb25d8a53e5e51c480ebbb3d9577af04720baa44cf60625b"
+      "sha256": "b0b6f0df08abc35269725bb482e862f8144d9539e9e54e37efc553da33619747"
     },
     {
       "path": "content/course/manual-learning-record-workflow.v1.json",
@@ -846,7 +846,7 @@
     },
     {
       "path": "content/source-maps/module31_optimization_information_source_map.md",
-      "sha256": "65a9a9471022e2d5d870f84904969a288ef70fbb74dab41b1610a8c7c475c86b"
+      "sha256": "601ff32cb07251341a975abe3ca6d2fce008aebbab42796e8c6b579460f0c639"
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",

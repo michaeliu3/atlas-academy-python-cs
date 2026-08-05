@@ -723,6 +723,61 @@ present. Then compare against a declared feasibility residual and an
 independent analytic/KKT check where the fixture permits one. A status flag is
 not a substitute for those fields.
 
+### Method-family bridge — the update rule carries the assumptions
+
+The phrase “the optimizer” hides different mathematical objects. Before
+reading a trace, classify the update by the information it uses, the geometry
+it assumes, and the quantity whose convergence is even being discussed.
+
+The family in this bridge includes Newton, quasi-Newton, subgradient,
+proximal, coordinate, momentum, and adaptive updates.
+
+| Method family | First-principles update or object | What must be declared | Smallest useful non-claim |
+| --- | --- | --- | --- |
+| Newton | \(x_{t+1}=x_t-H_f(x_t)^{-1}\nabla f(x_t)\) | twice differentiability, an invertible/usable Hessian, a local basin, linear-solve tolerance, and a globalization rule if one is used | an indefinite or ill-conditioned Hessian can produce an ascent or unstable step; a local rate is not a global result |
+| Quasi-Newton | maintain \(B_t\approx H_f(x_t)\) and enforce a secant relation such as \(B_{t+1}s_t\approx y_t\) | update formula, curvature safeguard, initialization, line search/trust rule, and whether \(B_t\) is a Hessian or an inverse-Hessian approximation | satisfying one secant equation does not prove that the approximation is positive definite or that the objective is globally minimized |
+| Subgradient | choose \(g_t\in\partial f(x_t)\), then \(x_{t+1}=x_t-\eta_tg_t\) | the nonsmooth function, selected subgradient, domain, step schedule, and the theorem’s convexity/boundedness assumptions | a subgradient is not an ordinary derivative; a decreasing finite trace is not a smooth-descent proof |
+| Proximal | \(x_{t+1}=\operatorname{prox}_{\eta r}(x_t-\eta\nabla f(x_t))\), where \(\operatorname{prox}_{\eta r}(v)=\arg\min_z\{r(z)+\|z-v\|^2/(2\eta)\}\) | which term is smooth \(f\), which term is handled by \(r\), existence/uniqueness, exact or approximate prox, and constraint/regularizer units | “proximal” is not a magic stability label; an approximate prox or a changed regularizer changes the claim |
+| Coordinate | update one coordinate/block at a time, often using a coordinate-specific oracle | selection schedule, coupling between coordinates, stale-read policy, scaling, and stopping rule | one well-behaved coordinate does not establish behavior of the coupled objective |
+| Momentum / adaptive | keep optimizer state, e.g. \(v_{t+1}=\beta v_t+g_t\), or a per-coordinate scale from past squared gradients | state initialization, \(\beta\)/decay, bias correction, epsilon, schedule, clipping, dtype, and the exact target of any theorem | a faster-looking trace may be a different effective step rule, not evidence that the objective or model is better |
+
+**Prediction before reveal.** For (f(x)=|x|) at (x=0), ordinary Newton
+has no derivative. A subgradient method may choose (g=0), while a proximal
+step with (r(x)=|x|) applies soft-thresholding. Predict which of these can
+move away from zero under the declared rule, then state which object—not
+“the optimizer”—was changed. The point is not to memorize a catalog: the
+oracle and geometry determine the evidence boundary.
+
+**Counterexample.** On the smooth saddle (f(x,y)=x^2-y^2), the Hessian is
+indefinite. Newton’s linear solve exists at the origin but returns the zero
+step, and a gradient norm of zero does not identify a minimum. On the
+nonsmooth (f(x)=|x|), choosing a fixed nonzero subgradient at the kink can
+oscillate when the step does not decay. These are two different failures:
+curvature does not certify a basin, and a valid subgradient does not supply a
+step schedule.
+
+**Code-reading task.** Inspect this language-neutral state update before
+assigning it a method name:
+
+```text
+g = gradient_or_subgradient(x)
+velocity = beta * velocity + g
+scale = sqrt(scale + g * g) + epsilon
+x = x - eta * velocity / scale
+```
+
+Mark every hidden contract: whether `g` is a full or sampled quantity, whether
+`scale` is elementwise, how `velocity` is initialized, when the square root is
+taken, whether bias correction exists, and which dtype controls the state.
+Then rewrite the record as “this implementation used these state updates,”
+not as a convergence theorem. A changed schedule, coordinate order, or
+epsilon is a changed algorithm and needs a new comparison.
+
+**Transfer task.** Take the projected-gradient trace above and replace its
+smooth step with either a proximal regularizer or a coordinate schedule. Name
+the new objective/constraint, the additional state, the independent check,
+and the exact premise that prevents you from reusing the original rate card.
+
 <details>
 <summary>Predict before revealing the claim boundary.</summary>
 

@@ -20,6 +20,8 @@ test("M31 exposes compact claim-to-source routes and labels non-runnable sketche
 
   assert.match(m31, /C04 -> S02–S04/u);
   assert.match(m31, /C05 -> S02–S04, S09–S10/u);
+  assert.match(m31, /Newton, quasi-Newton, subgradient,\s*proximal, coordinate, momentum, and adaptive updates/u);
+  assert.match(m31, /Method-family bridge — the update rule carries the assumptions/u);
   assert.match(m31, /C07 -> S05/iu);
   assert.match(m31, /C08 -> S06/iu);
   assert.match(m31, /Blei, Kucukelbir, and McAuliffe/u);
@@ -47,8 +49,12 @@ test("M31 exposes compact claim-to-source routes and labels non-runnable sketche
   const m31Sessions = JSON.parse(bridge).modules.find(({ moduleId }) => moduleId === "m31").sessionSpine;
   const sessionFour = m31Sessions.find(({ id }) => id === "m31-s04");
   const sessionFive = m31Sessions.find(({ id }) => id === "m31-s05");
-  assert.match(sessionFour.progression, /projected-gradient update/u);
-  assert.doesNotMatch(sessionFour.progression, /coordinate|proximal/u);
+  assert.match(sessionFour.progression, /projected-gradient/u);
+  assert.match(sessionFour.progression, /Newton\/quasi-Newton/u);
+  assert.match(sessionFour.progression, /subgradient\/proximal/u);
+  assert.match(sessionFour.progression, /coordinate/u);
+  assert.match(sessionFour.progression, /momentum/u);
+  assert.match(sessionFour.progression, /adaptive/u);
   assert.match(sessionFive.progression, /Information quantities begin in Session 6/u);
 });
 

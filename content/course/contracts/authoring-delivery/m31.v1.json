@@ -51,7 +51,7 @@
     },
     {
       "id": "m31-s04",
-      "title": "Projected updates, step rules, and bounded convergence evidence",
+      "title": "Projected updates, method families, and bounded convergence evidence",
       "sessionHeadingAnchor": "session-4--read-stopping-evidence-not-solver-mythology",
       "usesPrerequisiteModuleIds": ["m28", "m29"],
       "outputs": [

@@ -106,8 +106,8 @@
         },
         {
           "id": "m31-s04",
-          "title": "Projected updates, step rules, and bounded convergence evidence",
-          "progression": "Read a projected-gradient update beside an exact-gradient rate card; separate their objective and constraint assumptions, and explain why a finite trace, solver status, or one bound cannot transfer to another method.",
+          "title": "Projected updates, method families, and bounded convergence evidence",
+          "progression": "Read projected-gradient, Newton/quasi-Newton, subgradient/proximal, coordinate, momentum, and adaptive updates as different contracts beside an exact-gradient rate card; separate their objective, oracle, state, and constraint assumptions, and explain why a finite trace, solver status, or one bound cannot transfer to another method.",
           "usesPrerequisiteModuleIds": ["m28", "m29"],
           "plannedEvidence": "Solver-selection rationale with a convergence-condition checklist."
         },
