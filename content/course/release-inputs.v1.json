@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "4ec3c3dd89a35446ef8a4323984d58bd0ed218632cdb827ac39f6150ef4aa001"
+      "sha256": "e1d3feacf00016eb45ed88bbd4f2415db6d9c5113e5cc31b451f8155347b8458"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -1206,7 +1206,7 @@
     },
     {
       "path": "tests/mermaid-accessibility.test.mjs",
-      "sha256": "674a248fc5db94e74970eb07bc74226b91e31a93fbf04e2797efeb0ce9f97f21"
+      "sha256": "013328aa886f262ab352b991e6e66a8dfdafbab505082dd1fe4dd4e19fb1f8ac"
     },
     {
       "path": "tests/rendered-html.test.mjs",
