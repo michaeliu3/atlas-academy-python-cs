@@ -3,7 +3,7 @@
 **Audit date:** 2026-08-05  
 **Source of truth:** additive branch `codex/atlas-history-linearization`,
 current review PR [#22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)
-(draft)  
+(ready for review)  
 **Purpose:** reconcile the goal-compliance matrix with the learner route,
 materials, designated chats, Notion boundary, calibration, safety evidence, and
 release evidence. This document is an incomplete final-audit surface, not a
@@ -14,7 +14,8 @@ completion or university-equivalence claim.
 **The Atlas goal must remain open.** The repository has strong structural and
 content evidence. The learner has explicitly waived human-only requirements for
 this build phase; those items are recorded as waived, not complete. Private-
-deployment behavior and a current non-draft full gate remain open.
+deployment behavior, dependency disposition, and human-quality observations
+remain outside the machine gate.
 
 Evidence is classified conservatively:
 
@@ -70,7 +71,7 @@ present when the matrix grows.
 - The six canonical M31–M36 authoring workbooks now each include a bounded
   visual map, visible prose alternative, and code/native code-reading card;
   the focused pedagogy-density guard and hidden-candidate parity checks pass.
-- The current source tree is clean, additive, and reachable through draft PR #22;
+- The current source tree is clean, additive, and reachable through review-ready PR #22;
   no history rewrite was used.
 - A 2026-08-05 read-only Notion audit confirmed the connected evidence
   structure and the records-off checklist across the dashboard, lecture notes,
@@ -121,6 +122,15 @@ present when the matrix grows.
   source-link freshness, and the Draft content feedback suite; expensive jobs
   were correctly skipped while PR #22 remains draft. This is current Draft
   evidence only, not a non-draft full gate or release claim.
+- The current reviewed head [`01b2c72`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/01b2c725a2fe7c0e5535a77a271c7034df14efb0)
+  passed the normal non-draft Course CI gate in run
+  [`30997455314`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314):
+  portal quality, 421/421 Node apparatus tests, Python 3.12 and 3.14 teaching
+  models, and 63/63 Chromium/axe routes all passed. The live source-link audit
+  remains covered by the immediately preceding source-unchanged gate
+  [`30995803298`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30995803298),
+  which checked 1,064 URLs. This is automated release evidence, not module
+  promotion, deployment verification, human review, or learner mastery.
 
 ## Latest dependency evidence
 
@@ -178,13 +188,12 @@ so those interactions can begin later; no synthetic human evidence is created.
   configured private host returned HTTP 401 for both `/` and `/_vinext/image`,
   so the application headers remain unobservable without an authorized
   deployment session.
-- A successful current non-draft full Course CI gate at the final reviewed ref.
+- The actual private deployment headers and dependency-alert disposition.
 - Learner mastery or retention; no repository artifact substitutes for the
   learner's own explanations, debugging traces, dossiers, and oral defense.
-- A bounded local `scripts/run-course-tests.mjs --suite=apparatus` invocation
-  at the current head exceeded its 120-second shell limit and was terminated;
-  no local apparatus pass is counted. The latest hosted evidence remains the
-  Draft content path only.
+- The bounded local apparatus command is slower than the shell budget, but the
+  hosted full gate independently passed all 421 apparatus tests at the reviewed
+  head.
 
 ## Required closure sequence
 
@@ -192,8 +201,8 @@ so those interactions can begin later; no synthetic human evidence is created.
    writes explicitly waived; do not promote or claim evidence for them.
 2. Verify the exact private deployment headers, dependency-risk disposition,
    accessibility review, and bounded OS/process claims.
-3. Request one normal non-draft full gate at the reviewed source ref and record
-   its exact commit, run, jobs, limitations, and deployment state.
+3. Preserve the successful non-draft gate's exact commit, run, jobs, limitations,
+   and deployment state in the release ledger.
 4. Regenerate this audit and the compliance matrix, then close the goal only if
    every non-waived requirement has evidence, every waiver/deferral is explicit,
    and no required machine-verifiable work remains.

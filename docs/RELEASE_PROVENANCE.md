@@ -664,13 +664,14 @@ reduction remains pending a direct docs-only synchronize observation.
 
 ## Human-requirements phase waiver (2026-08-05)
 
-The learner authorized a temporary waiver of all human-only requirements.
+The learner authorized a build-phase waiver of all human-only requirements.
 Human review, learner-led TA/Study Partner sessions and oral defense, live
-whiteboard/rendering observation, and records-on Notion writes remain deferred
-and are not release evidence. Machine-verifiable contracts, tests, privacy and
-safety checks, dependency/deployment disposition, additive Git history, and a
-current non-draft full Course CI gate remain mandatory. The waiver does not
-support claims of mastery, certification, credit, or institutional equivalence.
+whiteboard/rendering observation, and records-on Notion writes are waived for
+this build and are not release evidence. Machine-verifiable contracts, tests,
+privacy and safety checks, dependency/deployment disposition, additive Git
+history, and a current non-draft full Course CI gate remain mandatory. The
+waiver does not support claims of mastery, certification, credit, or
+institutional equivalence.
 
 ## Current release-input binding checkpoint (2026-08-05)
 
@@ -708,4 +709,18 @@ passed the same 96-test Draft content path in run
 One local `scripts/run-course-tests.mjs --suite=apparatus` invocation at the
 current clean head exceeded the 120-second shell limit and was terminated with
 its identified worker tree. No local apparatus result is promoted to release
-evidence; the hosted Draft content result remains the latest bounded check.
+evidence; the hosted full-gate result below is the authoritative apparatus
+evidence.
+
+## Current non-draft full-gate checkpoint (2026-08-05)
+
+Additive commit [`01b2c72`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/01b2c725a2fe7c0e5535a77a271c7034df14efb0)
+passed the normal review-ready Course CI gate
+[`30997455314`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314).
+Portal quality, strict TypeScript, lint, build, content tests, 421/421 Node
+apparatus tests, Python 3.12 and 3.14 teaching models, and 63/63 Chromium/axe
+routes all passed. The source-link liveness audit remains separately recorded
+on the immediately preceding source-unchanged gate
+[`30995803298`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30995803298),
+which checked 1,064 URLs. This is automated provenance, not publication,
+deployment, human review, or learner mastery evidence.
