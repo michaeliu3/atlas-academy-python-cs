@@ -356,3 +356,15 @@ models, and Chromium/axe browser acceptance (63/63 routes). This is the current
 automated gate record for the source head and is not module promotion, human
 review, private deployment, security clearance, publication, or learner outcome
 evidence.
+
+## Latest source-head gate (2026-08-04)
+
+The next additive source head
+[`1a0e4da`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/1a0e4dae0c525832225293e13698b11f833f1b14)
+received Course CI run
+[`30961057821`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30961057821)
+with a successful conclusion. Portal quality, live source links, Node
+apparatus (416/416), Python 3.12 and 3.14 teaching models, and Chromium/axe
+browser acceptance (63/63 routes) all passed. This remains automated gate
+evidence only; it is not module promotion, human review, private deployment,
+security clearance, publication, or a learner outcome.

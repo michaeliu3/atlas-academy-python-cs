@@ -112,6 +112,18 @@ revalidation refreshes the generated current-truth header; it does not promote
 modules or establish human review, private deployment, Notion/voice behavior,
 security clearance, publication, or learner mastery.
 
+## Latest source-head gate — 2026-08-04
+
+The next additive source head
+[`1a0e4da`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/1a0e4dae0c525832225293e13698b11f833f1b14)
+received Course CI run
+[`30961057821`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30961057821)
+and passed the portal gate, live source-link checks, Node apparatus (416/416),
+both Python teaching-model jobs, and browser accessibility (63/63). This is
+the newest automated source-head evidence; it does not promote modules or
+establish human review, private deployment, Notion/voice behavior, security
+clearance, publication, or learner mastery.
+
 ## Evidence interpretation
 
 - **Structural baseline**: automation has checked file/graph/session/path facts.

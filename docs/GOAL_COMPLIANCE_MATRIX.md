@@ -4,7 +4,7 @@
 
 > **Generated current truth — 2026-08-04**
 >
-> - Last successful full gate: `601296deafd3ef4c44c98a0b088c67e198a62952` on 2026-08-04 ([Course CI run 30959390181](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30959390181)); this is the recorded source-head gate; the separate Draft snapshot is historical evidence only.
+> - Last successful full gate: `1a0e4dae0c525832225293e13698b11f833f1b14` on 2026-08-04 ([Course CI run 30961057821](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30961057821)); this is the recorded source-head gate; the separate Draft snapshot is historical evidence only.
 > - Latest observed Draft content check: `5887978ea035788aee0ea55dc258eaaf49f6eafa`, 83 pass / 0 fail ([run 30942073857](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30942073857)).
 > - Current-head apparatus check: **416 pass / 0 fail**; current-head browser/axe check: **63 pass / 0 fail**.
 > - Open red tests: **0**. Open axe violations: **0** (none-detected for the current head).
