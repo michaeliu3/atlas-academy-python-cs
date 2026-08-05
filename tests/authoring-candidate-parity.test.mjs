@@ -27,5 +27,17 @@ test("M31–M36 hidden candidates are generated from their canonical authoring w
       canonicalAdvancedReviewBody(authoringMarkdown, spec),
       spec.moduleId + " candidate body must remain aligned with its authoring workbook",
     );
+    if (spec.moduleId === "m35" || spec.moduleId === "m36") {
+      assert.match(
+        authoringMarkdown,
+        /^## Confidence-aware diagnostic and spaced review/mu,
+        spec.moduleId + " must use the shared diagnostic section heading",
+      );
+      assert.doesNotMatch(
+        authoringMarkdown,
+        /^## 9\. Confidence-aware diagnostic and spaced review/mu,
+        spec.moduleId + " must not retain the stale numbered diagnostic heading",
+      );
+    }
   }
 });

@@ -1386,7 +1386,7 @@ Change one premise—feature availability, entity/time split, dtype, threshold,
 shift, or authority—and defend the narrowest retained claim in the ML dossier
 and Teaching Assistant chat.
 
-## 9. Confidence-aware diagnostic and spaced review
+## Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence *before* revealing
 the explanation. Low confidence creates a review cue, not a failure label.

@@ -1166,7 +1166,7 @@ Remove one premise—IID, representation information, fixed device, calibration
 relation, or human approval—and defend the strongest remaining claim in the TA
 oral conversation.
 
-## 9. Confidence-aware diagnostic and spaced review
+## Confidence-aware diagnostic and spaced review
 
 Choose an answer and record confidence before reading its explanation. Low
 confidence adds a review item; it is never a pass/fail label.
