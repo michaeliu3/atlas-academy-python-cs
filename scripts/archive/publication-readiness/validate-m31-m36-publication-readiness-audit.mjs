@@ -3,10 +3,10 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
-import { isolatedGitEnvironment } from "./git-index-snapshot.mjs";
+import { isolatedGitEnvironment } from "../../git-index-snapshot.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
-const defaultSiteRoot = resolve(scriptDirectory, "..");
+const defaultSiteRoot = resolve(scriptDirectory, "../../..");
 const execFileAsync = promisify(execFile);
 
 export const m31M36PublicationReadinessAuditRelativePath =

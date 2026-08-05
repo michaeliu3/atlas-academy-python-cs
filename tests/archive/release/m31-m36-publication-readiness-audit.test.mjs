@@ -3,7 +3,7 @@ import test from "node:test";
 import {
   loadM31M36PublicationReadinessAudit,
   validateM31M36PublicationReadinessAudit,
-} from "../../../scripts/validate-m31-m36-publication-readiness-audit.mjs";
+} from "../../../scripts/archive/publication-readiness/validate-m31-m36-publication-readiness-audit.mjs";
 
 test("the M31–M36 readiness audit is a non-publication snapshot of its audited Git commit", async () => {
   const audit = await loadM31M36PublicationReadinessAudit();
