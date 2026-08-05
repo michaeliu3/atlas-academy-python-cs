@@ -110,6 +110,14 @@ present when the matrix grows.
   awaiting the learner's response. This proves reachable session initiation
   only; it is not learner evidence, a completed session, oral-defense evidence,
   live-rendering verification, or a Notion write.
+- The current reviewed branch head [`7951eba`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7951ebaabab1b8d875b0f1bc087c1e234485b580)
+  refreshed the release-evidence and release-input SHA-256 bindings after the
+  Actions classifier change. Draft Course CI run
+  [`30993424413`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30993424413)
+  passed structural/release-input validation, generated-artifact checks,
+  source-link freshness, and the Draft content feedback suite; expensive jobs
+  were correctly skipped while PR #22 remains draft. This is current Draft
+  evidence only, not a non-draft full gate or release claim.
 
 ## Intentionally deferred by design
 

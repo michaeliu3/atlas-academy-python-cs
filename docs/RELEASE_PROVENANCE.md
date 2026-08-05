@@ -671,3 +671,14 @@ and are not release evidence. Machine-verifiable contracts, tests, privacy and
 safety checks, dependency/deployment disposition, additive Git history, and a
 current non-draft full Course CI gate remain mandatory. The waiver does not
 support claims of mastery, certification, credit, or institutional equivalence.
+
+## Current release-input binding checkpoint (2026-08-05)
+
+Additive commit [`7951eba`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7951ebaabab1b8d875b0f1bc087c1e234485b580)
+refreshed the Course CI workflow digest in both the release-evidence policy and
+the generated release-input ledger. Draft Course CI run
+[`30993424413`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30993424413)
+passed structural/release-input, generated-artifact, generated-matrix,
+source-link freshness, and Draft content checks. Expensive jobs were skipped by
+the draft policy; this is current Draft provenance, not a non-draft full gate,
+deployment proof, or release approval.

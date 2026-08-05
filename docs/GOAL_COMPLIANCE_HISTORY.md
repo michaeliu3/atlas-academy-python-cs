@@ -560,3 +560,14 @@ deferred rather than inferred complete. Automated contracts, focused tests,
 privacy boundaries, dependency and deployment checks, additive provenance, and
 the current non-draft release gate remain required; this waiver does not
 permit a completion, mastery, certification, or university-equivalence claim.
+
+## Current release-input binding checkpoint — 2026-08-05
+
+Additive commit [`7951eba`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7951ebaabab1b8d875b0f1bc087c1e234485b580)
+refreshed the canonical SHA-256 binding for the changed Course CI workflow and
+regenerated the release-input ledger. Draft Course CI run
+[`30993424413`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30993424413)
+passed structural/release-input validation, generated-artifact and matrix
+checks, source-link freshness, and Draft content feedback. The expensive
+portal, apparatus, browser, and teaching-model jobs remained correctly skipped
+under the draft policy; this is not a non-draft full gate or release claim.
