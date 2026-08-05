@@ -375,11 +375,14 @@ module promotion, private deployment, human review, or learner evidence.
 
 ## Dated current-audit provenance reconciliation — 2026-08-05
 
-The current completion snapshot and final audit were reconciled to additive
-head [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
+The current completion snapshot and final audit were reconciled to the latest
+content-bearing snapshot [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
 and Draft Course CI run
 [`30983252123`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123).
-The run passed the classifier and 95-test content path while expensive
-apparatus, browser, Python, and portal jobs were skipped for the draft PR.
-This removes stale “current head” references without changing the open
-non-draft, deployment, human-review, platform, or learner-evidence boundaries.
+The subsequent documentation-only provenance head [`22f7e38`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/22f7e38b86815f55eb4da4f3ee165ba9c27d77a7)
+also passed its classifier and 95-test content path in run
+[`30984252292`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30984252292),
+while expensive apparatus, browser, Python, and portal jobs were skipped for
+the draft PR. This removes stale “current head” ambiguity without changing
+the open non-draft, deployment, human-review, platform, or learner-evidence
+boundaries.

@@ -66,10 +66,13 @@ present when the matrix grows.
 - The current source tree is clean, additive, and reachable through draft PR #22;
   no history rewrite was used.
 - The repaired release-input ledger and generated matrix pass local checks. The
-  latest additive head [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
+  latest content-bearing snapshot [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
   passed the draft content path in Draft Course CI run
-  [30983252123](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123).
-  The result remains draft content evidence, not a full gate.
+  [30983252123](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123);
+  the subsequent documentation-only provenance head [`22f7e38`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/22f7e38b86815f55eb4da4f3ee165ba9c27d77a7)
+  also passed its draft content path in run
+  [30984252292](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30984252292).
+  These remain draft content evidence, not a full gate.
 
 ## Intentionally deferred by design
 

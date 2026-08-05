@@ -553,6 +553,22 @@ the host trust chain; it never turns a transport failure into a passing link.
 This validates liveness and freshness evidence, not institutional alignment,
 source permission, human review, or learner mastery.
 
+## Documentation-only provenance reconciliation — 2026-08-05
+
+The completion snapshot and final audit were reconciled on documentation-only
+head [`22f7e38`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/22f7e38b86815f55eb4da4f3ee165ba9c27d77a7).
+Draft Course CI run
+[`30984252292`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30984252292)
+passed the changed-file classifier and 95-test content path; portal,
+apparatus, both Python teaching-model entries, and browser acceptance were
+skipped because PR #22 remains draft. The preceding content-bearing snapshot
+[`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
+was already checked by Draft run
+[`30983252123`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123).
+These are additive provenance and draft-content observations only; they do not
+establish a full non-draft gate, release, deployment, human review, or learner
+evidence.
+
 ## Current Draft content checkpoint (2026-08-05)
 
 Commit [`6e0a02c`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/6e0a02ca71d77bce7043594555f99800e8a9ee2d)
