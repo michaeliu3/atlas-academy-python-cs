@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Bound the learner-requested **GPT Live High** preference into the canonical
+  designated-chat workflow and validator, retaining the platform-owned setting
+  boundary; Draft run `30987956581` passed the bounded content path, without
+  implying live voice, Notion, deployment, or release evidence.
 - Named the learner-requested **GPT Live High** option in both designated
   live-chat startup prompts and the whiteboard workflow, while preserving the
   platform-owned-setting and text fallback boundaries.

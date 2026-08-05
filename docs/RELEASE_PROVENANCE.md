@@ -578,3 +578,14 @@ The classifier and 95-test content path passed; portal, Node apparatus, both
 Python teaching-model entries, and browser acceptance were skipped because
 PR #22 remains draft. This is current source/content evidence only, not a
 non-draft full gate, release, deployment, human review, or learner outcome.
+
+## GPT Live High policy-binding checkpoint (2026-08-05)
+
+Additive commit [`8b856cb`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8b856cbf94945746132afb860ea0277fe1b14c58)
+bound the learner-requested GPT Live High preference into the canonical
+designated-chat workflow and its fail-closed validator. Draft Course CI run
+[`30987956581`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30987956581)
+passed the changed-file classifier and Draft content feedback; expensive jobs
+were skipped under the draft cost-control policy. This records source and
+bounded Draft validation only, not live voice/rendering behavior, Notion writes,
+deployment verification, human review, module promotion, or a release.

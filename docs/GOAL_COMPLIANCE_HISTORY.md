@@ -361,6 +361,19 @@ transport failure as reachability. This strengthens link-liveness evidence only;
 the remaining citation, institutional-alignment, source-permission, and human
 review boundaries remain open.
 
+## Dated GPT Live High policy-binding checkpoint — 2026-08-05
+
+Additive commit [`8b856cb`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8b856cbf94945746132afb860ea0277fe1b14c58)
+bound the learner-requested **GPT Live High** preference into the canonical
+designated-chat workflow and validator, with a fail-closed regression test that
+keeps the quality setting platform-owned. Draft Course CI run
+[`30987956581`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30987956581)
+passed the changed-file classifier and Draft content feedback; the expensive
+portal, apparatus, browser, and teaching-model jobs correctly skipped because
+PR #22 remains draft. This is policy and structural evidence only: it does not
+prove live voice rendering, a Notion write, deployment headers, human review,
+module promotion, learner evidence, or a non-draft release gate.
+
 ## Dated calibration-snapshot and draft-content checkpoint — 2026-08-05
 
 Commit [`6e0a02c`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/6e0a02ca71d77bce7043594555f99800e8a9ee2d)
