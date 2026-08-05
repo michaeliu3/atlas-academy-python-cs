@@ -138,3 +138,18 @@ clearance, publication, or learner mastery.
 The strict contract gate is expected to fail while the table contains
 `In progress` rows. That failure is a safeguard, not a reason to weaken the
 gate or rewrite the course history.
+
+## Dated chat and Notion role-delivery record — 2026-08-04
+
+The two existing designated Codex chats received and acknowledged their
+role-specific Atlas contracts: the Teaching Assistant owns first-principles
+instruction and the constructive oral defense; the Study Partner owns live
+discussion, retrieval, code-reading, debugging, and non-grading rehearsal. The
+compact [role-delivery record](LIVE_CODEX_ROLE_DELIVERY_2026-08-04.md) records
+the opaque thread references without retaining a transcript.
+
+The connected Notion workspace and existing learner-controlled record pages
+were fetched successfully. No learner note was written during this audit,
+because `records on` was not enabled and no substantive learning session took
+place. Live voice quality, equation/code rendering, a consented note write, and
+pause/correction/deletion behavior remain explicitly unverified.

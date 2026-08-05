@@ -137,15 +137,15 @@
       "id": "chat-roles",
       "requirement": "TA and Study Partner startup packages are distinct, reusable, and support text/voice whiteboard learning.",
       "state": "partial",
-      "evidence": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md; lib/learning-partner-prompts.ts; app/learning-partners/page.tsx",
-      "openItem": "Observe platform-specific voice, equation/code rendering, and role handoff behavior when used."
+      "evidence": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md; docs/LIVE_CODEX_ROLE_DELIVERY_2026-08-04.md; lib/learning-partner-prompts.ts; app/learning-partners/page.tsx",
+      "openItem": "Role contracts were delivered and acknowledged; observe one real live session in each designated chat for voice quality, equation/code rendering, and the module handoff."
     },
     {
       "id": "notion-privacy",
       "requirement": "Notion notes are learner-controlled, concise, consent-gated, and never raw transcripts.",
       "state": "partial",
-      "evidence": "content/course/live-codex-learning-workflow.v2.json; docs/LEARNER_RECORD_WORKFLOW.md; tests/live-codex-learning-workflow.test.mjs",
-      "openItem": "Verify an actual configured write, pause/end-session behavior, and correction/deletion handling."
+      "evidence": "content/course/live-codex-learning-workflow.v2.json; docs/LEARNER_RECORD_WORKFLOW.md; docs/LIVE_CODEX_ROLE_DELIVERY_2026-08-04.md; tests/live-codex-learning-workflow.test.mjs",
+      "openItem": "The connected workspace and record-page structure were fetched; perform a learner-approved records-on write, then test pause/end-session, correction, off-record, and deletion handling."
     },
     {
       "id": "accessibility",
@@ -166,14 +166,14 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "One normal non-draft full gate now passes on run 30958237679; continue verifying cancellation/required-check behavior before release."
+      "openItem": "The latest recorded normal non-draft full gate is run 30961057821; continue verifying cancellation/required-check behavior on a future review-ready ref before release."
     },
     {
       "id": "history-provenance",
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
-      "openItem": "Run 30958237679 and source head a5bf821 are recorded; still record the final reviewed ref, limitations, and any private deployment state separately."
+      "openItem": "The branch continues through additive commits beyond the latest hosted gate, which is recorded at run 30961057821; still record the final reviewed ref, limitations, and any private deployment state separately."
     },
     {
       "id": "final-audit",
