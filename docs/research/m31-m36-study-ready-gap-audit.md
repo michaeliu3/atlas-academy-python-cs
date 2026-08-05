@@ -51,6 +51,17 @@ prerequisite. The historical
 [`M31_M36_PUBLICATION_READINESS_AUDIT.v1.json`](../archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json)
 remains a pinned historical snapshot and is not a current file inventory.
 
+### Duplication-control decision
+
+The repository uses the parity-test alternative to a hand-maintained duplicate:
+the six authoring workbooks are the canonical learning bodies, and
+`scripts/advanced-review-candidate-parity.mjs` generates the frozen hidden
+candidate copies. `tests/authoring-candidate-parity.test.mjs` rejects body drift
+and rejects duplicate or missing source mappings. The allow-list is explicit:
+only the candidate preamble, source-ledger relative-link rewrite, and candidate
+release-boundary footer may differ. This keeps the candidate review surface
+reproducible while preserving the portal-hidden/private-chat boundary.
+
 ## Concrete gates
 
 | Gate | Exact evidence | Effect | Smallest next action |

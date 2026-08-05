@@ -153,3 +153,13 @@ were fetched successfully. No learner note was written during this audit,
 because `records on` was not enabled and no substantive learning session took
 place. Live voice quality, equation/code rendering, a consented note write, and
 pause/correction/deletion behavior remain explicitly unverified.
+
+## Dated advanced-copy parity control — 2026-08-04
+
+The M31–M36 copy boundary now records the selected duplication-control design:
+the authoring workbooks are canonical and the hidden review candidates are
+generated derivatives. The parity test enforces the six unique mappings and
+allows only the candidate preamble, source-ledger relative-link rewrite, and
+candidate release-boundary footer. This closes the source-drift control gap;
+it does not promote the candidates, complete human review, or change their
+authoring-only/portal-hidden status.

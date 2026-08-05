@@ -16,6 +16,19 @@ const candidateReleaseBoundary = [
   "published module, live-chat event, Notion record, or learner-mastery claim.",
 ].join("\n");
 
+// The authoring workbook is the only canonical learning body. A frozen hidden
+// candidate is a generated review copy, not a second hand-maintained source.
+// Keep this allow-list deliberately small so parity failures cannot be hidden
+// behind an informal "candidate edit" convention.
+export const advancedReviewCandidateParityPolicy = Object.freeze({
+  canonicalSource: "authoring-workbook",
+  allowedDifferences: Object.freeze([
+    "candidate-preamble",
+    "source-ledger-relative-link-rewrite",
+    "candidate-release-boundary-footer",
+  ]),
+});
+
 function standardPreamble(number, title, finalLine) {
   return [
     "# Module " + number + " — " + title,

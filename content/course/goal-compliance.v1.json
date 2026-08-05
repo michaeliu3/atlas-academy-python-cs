@@ -81,7 +81,7 @@
       "id": "advanced-packs",
       "requirement": "M31–M36 are complete private-chat teaching packs and remain hidden from the portal.",
       "state": "partial",
-      "evidence": "content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; content/source-maps/; content/course/course-graph.v2.json; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; tests/module35-36-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
+      "evidence": "content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; content/source-maps/; content/course/course-graph.v2.json; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; docs/research/m31-m36-study-ready-gap-audit.md; tests/module35-36-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
       "openItem": "Complete the human visual/code-density review and module-specific release evidence; ladder and per-distractor repair checks now pass structurally."
     },
     {
@@ -123,7 +123,7 @@
       "id": "pedagogy",
       "requirement": "M31–M36 have six connected sessions, problem ladders, per-distractor repair, code/visual work, and constructive oral defense.",
       "state": "partial",
-      "evidence": "content/course/contracts/authoring-delivery/; content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; tests/m31-m36-pedagogy.test.mjs; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md",
+      "evidence": "content/course/contracts/authoring-delivery/; content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; docs/research/m31-m36-study-ready-gap-audit.md; tests/m31-m36-pedagogy.test.mjs; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md",
       "openItem": "Obtain human pedagogical and accessibility review of the repaired packs and retain module-specific evidence without treating structural checks as publication or mastery."
     },
     {

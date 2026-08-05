@@ -3,12 +3,27 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import {
+  advancedReviewCandidateParityPolicy,
   advancedReviewCandidateSpecs,
   canonicalAdvancedReviewBody,
   renderAdvancedReviewCandidate,
 } from "../scripts/advanced-review-candidate-parity.mjs";
 
 const siteRoot = resolve(import.meta.dirname, "..");
+
+test("advanced candidate parity has one canonical source and an explicit allow-list", () => {
+  assert.equal(advancedReviewCandidateParityPolicy.canonicalSource, "authoring-workbook");
+  assert.deepEqual(advancedReviewCandidateParityPolicy.allowedDifferences, [
+    "candidate-preamble",
+    "source-ledger-relative-link-rewrite",
+    "candidate-release-boundary-footer",
+  ]);
+
+  const moduleIds = advancedReviewCandidateSpecs.map((spec) => spec.moduleId);
+  assert.deepEqual(moduleIds, ["m31", "m32", "m33", "m34", "m35", "m36"]);
+  assert.equal(new Set(advancedReviewCandidateSpecs.map((spec) => spec.authoringPath)).size, moduleIds.length);
+  assert.equal(new Set(advancedReviewCandidateSpecs.map((spec) => spec.candidatePath)).size, moduleIds.length);
+});
 
 test("M31–M36 hidden candidates are generated from their canonical authoring workbooks", async () => {
   for (const spec of advancedReviewCandidateSpecs) {
