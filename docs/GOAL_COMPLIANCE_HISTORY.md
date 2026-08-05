@@ -506,3 +506,16 @@ portal, apparatus, browser, and teaching-model jobs were skipped because PR
 #22 remains draft. This reduces orphaned work without changing required test
 coverage, and it is not a non-draft full gate, deployment, human review,
 learner evidence, or release claim.
+
+## Dated Notion structure read-only checkpoint — 2026-08-05
+
+A read-only workspace search and fetch confirmed the existing learner-owned
+Notion structure: the course dashboard and knowledge map, lecture/module
+notebooks, completion/evidence record, Live Codex Session Records page,
+Assessments & Project Portfolio, TA Office Hours & Misconceptions, Study
+Partner Journal, and Problem-Solving Lab. The fetched live-session page keeps
+the records-off default, exact-chat `records on` gate, concise-note format,
+whiteboard rendering convention, and unchecked live acceptance items visible.
+This confirms page structure and policy text only; no learner record was
+created or changed, and the actual records-on write/pause/end/delete behavior
+remains open.

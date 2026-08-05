@@ -46,7 +46,7 @@ present when the matrix grows.
 | pedagogy | partial | Session, prediction, transfer, diagnostic, project, oral-defense, and handoff structures exist; a qualified human quality review is not recorded. |
 | calibration | partial | Official MIT/CMU/Georgia Tech/Stanford and primary-source routes are recorded; current source/access/license review for release is not complete. |
 | chat-roles | partial | TA and Study Partner role packages and whiteboard rules exist; no substantive module session or live rendering observation is recorded. |
-| notion-privacy | partial | Consent-gated concise-note workflow and Notion page structure exist; no learner-approved records-on write/pause/end/delete observation is recorded. |
+| notion-privacy | partial | A 2026-08-05 read-only Notion search/fetch confirmed the dashboard, lecture/module notebooks, completion record, Live Codex Session Records, project portfolio, TA misconceptions, Study Partner journal, and problem-solving lab templates; no learner-approved records-on write/pause/end/delete observation is recorded. |
 | accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
 | safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
 | actions-cost | partial | Path-aware gating and superseded-run cancellation are directly observed; a normal review-ready full gate is still required. |
@@ -68,6 +68,11 @@ present when the matrix grows.
   the focused pedagogy-density guard and hidden-candidate parity checks pass.
 - The current source tree is clean, additive, and reachable through draft PR #22;
   no history rewrite was used.
+- A 2026-08-05 read-only Notion audit confirmed the connected evidence
+  structure and the records-off checklist across the dashboard, lecture notes,
+  module notebooks, completion record, live-session record page, project
+  portfolio, TA/Study Partner handoff surfaces, and problem-solving lab. This
+  proves page structure and policy text only; no learner record was written.
 - The split Node test runner now forwards cancellation to its spawned worker
   tree (including Windows `taskkill /T` cleanup) and removes signal handlers on
   exit; its focused lifecycle regression passes. Local content and focused

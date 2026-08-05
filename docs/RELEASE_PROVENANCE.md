@@ -624,3 +624,14 @@ passed classification and Draft content feedback; expensive jobs skipped under
 the draft policy. This is cancellation-safety and bounded Draft evidence only,
 not a non-draft full gate, release, deployment, human review, or learner
 evidence.
+
+## Notion structure read-only checkpoint (2026-08-05)
+
+Read-only Notion search/fetch confirmed the existing dashboard, lecture and
+module notebooks, completion/evidence record, Live Codex Session Records page,
+project portfolio, TA misconceptions, Study Partner journal, and problem-
+solving lab surfaces. The fetched session-record page preserves the exact-chat
+`records on` gate, records-off default, concise-note format, and unchecked live
+acceptance checklist. No Notion page was created or edited, and this does not
+prove a successful records-on write, pause/end/delete handling, voice quality,
+or equation/code rendering.
