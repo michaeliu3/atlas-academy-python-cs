@@ -163,3 +163,11 @@ allows only the candidate preamble, source-ledger relative-link rewrite, and
 candidate release-boundary footer. This closes the source-drift control gap;
 it does not promote the candidates, complete human review, or change their
 authoring-only/portal-hidden status.
+
+## Dated recorded-gate wording correction — 2026-08-04
+
+The generated matrix now labels the 416-test apparatus and 63-route
+Chromium/axe results as the **latest recorded full-gate** evidence rather than
+calling them current-head checks. The local branch has later additive commits
+and has not received a hosted rerun; this wording prevents historical CI from
+being mistaken for verification of the current branch.

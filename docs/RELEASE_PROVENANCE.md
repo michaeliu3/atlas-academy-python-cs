@@ -368,3 +368,13 @@ apparatus (416/416), Python 3.12 and 3.14 teaching models, and Chromium/axe
 browser acceptance (63/63 routes) all passed. This remains automated gate
 evidence only; it is not module promotion, human review, private deployment,
 security clearance, publication, or a learner outcome.
+
+## Local additive continuation after latest hosted gate (2026-08-04)
+
+The working branch continued with ordinary additive commits after the latest
+hosted gate: `0794d0c` records the explicit M31–M36 canonical-workbook parity
+allow-list, and `6845db4` corrects the compliance matrix wording so historical
+gate results are not labelled as current-head verification. Neither commit
+has a hosted Actions rerun, private deployment verification, release record,
+or learner-outcome evidence. No history rewrite, force-push, amend, rebase, or
+squash was used.
