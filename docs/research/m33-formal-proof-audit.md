@@ -7,7 +7,7 @@ learner-readiness claim.
 ## Sources used as calibration
 
 - [MIT 6.045J lecture-note route](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/lecture-notes/) — official course sequence for automata, computability, reductions, and complexity.
-- [Stanford CS103 theorem and definition reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1134/reference/) and its [mapping-reductions lecture](https://web.stanford.edu/class/archive/cs/cs103/cs103.1142/lectures/24/Small24.pdf) — official definitions of a mapping reduction, `HALT`, recognizers/deciders, and direction-of-solver consequences.
+- [Stanford CS103 Spring 2026 course archive](https://web.stanford.edu/class/archive/cs/cs103/cs103.1266/) — the current-quarter calibration route. The previously checked [CS103 theorem and definition reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1134/reference/) and [mapping-reductions lecture](https://web.stanford.edu/class/archive/cs/cs103/cs103.1142/lectures/24/Small24.pdf) remain historical exact-audit anchors, not current-quarter calibration sources.
 - The existing M33 ledger's original-paper links to Rabin–Scott, Turing, Rice,
   Cook, and Karp were checked as appropriate historical anchors. Atlas correctly
   labels its explanations as original paraphrase; it does not depend on copied
