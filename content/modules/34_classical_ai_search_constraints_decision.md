@@ -1583,6 +1583,45 @@ For the fuller claim-linked original/official source ledger and reuse cautions,
 use the instructor-facing [M34 primary-source research
 map](../source-maps/module34_classical_ai_search_constraints_decision.md).
 
+## Visual and code-reading lab — model, search, decision
+
+This map keeps a search or decision result attached to the model that produced
+it. It is a reasoning aid, not a claim that the environment is fully known.
+
+```mermaid
+%% atlas-diagram-id: m34-model-search-decision-loop
+%% atlas-diagram-title: Model-search-decision loop
+%% atlas-diagram-alt: The loop moves from a state or observation to a belief or feasible set, an action or expansion policy, an outcome, and a value and authority check before updating the model.
+flowchart LR
+  S["State / observation"] --> B["Belief or feasible set"]
+  B --> A["Action / expansion policy"]
+  A --> O["Outcome / new observation"]
+  O --> V["Value, limit, and authority check"]
+  V --> B
+```
+
+### Prose alternative
+
+Start with the state or observation. Build the belief or feasible set, choose
+an action or frontier policy, inspect the outcome, and then update the model
+while checking value, limits, and authority. The loop is only as strong as the
+representation and transition assumptions named at its start.
+
+### Small search-policy reading card
+
+```python
+def best_frontier(frontier, cost, heuristic):
+    return min(
+        frontier,
+        key=lambda state: cost[state] + heuristic(state),
+    )
+```
+
+Read the selection policy before calling it A*. The snippet exposes a priority
+rule, but not duplicate detection, reopening, heuristic admissibility,
+consistency, termination, or an optimality theorem. Each missing condition is
+a separate design-review question.
+
 ## Candidate release boundary
 
 Before this draft may move into the released portal learner route, it still needs its

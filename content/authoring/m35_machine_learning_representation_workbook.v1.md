@@ -1498,6 +1498,45 @@ dtype/device, or introduce a synthetic shift.
 
 ---
 
+## Visual and code-reading lab — information flow to authority
+
+Use this map to keep representation and evaluation claims separate from a
+decision owner. A score is one observation inside the larger evidence path.
+
+```mermaid
+%% atlas-diagram-id: m35-information-to-authority
+%% atlas-diagram-title: Information-to-authority route
+%% atlas-diagram-alt: The route moves from raw data and its relation through a declared split, fitting, fresh evaluation, calibration or shift checks, and a human decision owner.
+flowchart LR
+  X["Raw data + relation"] --> S["Declared split"]
+  S --> F["Fit representation / model"]
+  F --> E["Fresh evaluation"]
+  E --> C["Calibration / shift check"]
+  C --> H["Human decision owner"]
+```
+
+### Prose alternative
+
+Declare the data-generating relation and split first. Fit the representation
+and model only on the allowed evidence, evaluate on fresh rows, check
+calibration and shift, and then hand the bounded result to an accountable
+decision owner. A model score never skips the split, calibration, or authority
+steps.
+
+### Small leakage-reading card
+
+```python
+scaler = fit_scaler(X_train)
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+model = fit_model(X_train_scaled, y_train)
+```
+
+The order preserves the declared train/test information boundary. Read the
+code for the data path, not just the API names: fitting `scaler` on all rows
+would change the evidence claim even if the final model and metric looked
+unchanged.
+
 ## Source and reuse boundary
 
 This workbook uses original Atlas explanations, synthetic examples, diagrams,

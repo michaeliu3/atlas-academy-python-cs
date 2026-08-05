@@ -331,11 +331,16 @@ test("the M34 authoring diagram keeps its declared prose alternative", async () 
   const blocks = scanMermaidBlocks(workbook, { sourcePath });
   const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-  assert.equal(blocks.length, 1);
-  assert.equal(report.summary.completeBlocks, 1);
+  assert.equal(blocks.length, 2);
+  assert.equal(report.summary.completeBlocks, 2);
   assert.deepEqual(blocks[0].metadata, {
     id: "m34-classical-ai-evidence-route",
     title: "The M34 route from a narrative to a bounded decision claim",
     alternative: "An accountable owner turns a narrative into states, observations, actions, goals, costs, constraints, and utilities. A search, CSP, planner, relaxation, or decision calculation is checked against theorem and implementation conditions. The result becomes a bounded recommendation with an abstention or review point, not automatic authority.",
+  });
+  assert.deepEqual(blocks[1].metadata, {
+    id: "m34-model-search-decision-loop",
+    title: "Model-search-decision loop",
+    alternative: "The loop moves from a state or observation to a belief or feasible set, an action or expansion policy, an outcome, and a value and authority check before updating the model.",
   });
 });

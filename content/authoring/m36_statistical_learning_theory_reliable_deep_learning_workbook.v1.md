@@ -1314,6 +1314,47 @@ strongest remaining claim rather than erasing the old one.
 
 ---
 
+## Visual and code-reading lab — theorem to monitored system
+
+This map makes the gap between a theorem, a finite experiment, and an operated
+system visible. Each arrow is a scope transition that needs its own evidence.
+
+```mermaid
+%% atlas-diagram-id: m36-theorem-to-system
+%% atlas-diagram-title: Theorem-to-system route
+%% atlas-diagram-alt: The route moves from theorem conditions through declared data and hypothesis class, a finite experiment, a reproduction record, monitoring with an owner, and an updated claim or nonclaim.
+flowchart LR
+  T["Theorem conditions"] --> D["Declared data / hypothesis class"]
+  D --> F["Finite experiment"]
+  F --> R["Reproduction record"]
+  R --> M["Monitor + accountable owner"]
+  M --> U["Updated claim / nonclaim"]
+```
+
+### Prose alternative
+
+Start with theorem conditions and the declared data and hypothesis class.
+Inspect a finite experiment, record its environment, then define monitoring,
+ownership, and escalation. The operated system does not inherit a theorem's
+guarantee without explicitly checking every transition.
+
+### Small evidence-record reading card
+
+```python
+def bounded_record(*, claim, sample, environment, shift_probe, owner):
+    return {
+        "claim": claim,
+        "sample": sample,
+        "environment": environment,
+        "shift_probe": shift_probe,
+        "owner": owner,
+    }
+```
+
+Read the record as a boundary object. It makes missing evidence visible, but
+it does not create a theorem, prove population performance, diagnose a shift,
+or authorize an intervention; those remain explicit follow-up claims.
+
 ## Source and reuse boundary
 
 All explanations, diagrams, examples, and code in this workbook are original

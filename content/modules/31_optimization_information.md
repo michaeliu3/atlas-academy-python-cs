@@ -1755,6 +1755,44 @@ Core-credit-gated until their own contract and release evidence are complete.
 
 ---
 
+## Visual and code-reading lab — objective to evidence
+
+Use this map before trusting an optimizer or information-theoretic number. The
+claim is carried by the assumptions and update/certificate contract, not by a
+plot or a small final residual.
+
+```mermaid
+%% atlas-diagram-id: m31-objective-to-evidence
+%% atlas-diagram-title: Objective-to-evidence route
+%% atlas-diagram-alt: The route moves from objective assumptions to geometry, an update rule or certificate, a finite trace, and a bounded claim with its nonclaim.
+flowchart LR
+  A["Objective + assumptions"] --> B["Geometry / feasible set"]
+  B --> C["Update rule or certificate"]
+  C --> D["Observed trace"]
+  D --> E["Bounded claim + nonclaim"]
+```
+
+### Prose alternative
+
+First name the objective and its assumptions. Next identify the feasible-set
+or information geometry. Then read the update rule or certificate, inspect the
+finite trace, and state exactly what that trace supports and what it cannot
+support. Removing any box removes a justification step; a good-looking number
+cannot replace it.
+
+### Small code-reading card
+
+```python
+def projected_step(x, gradient, learning_rate, project):
+    candidate = x - learning_rate * gradient
+    return project(candidate)
+```
+
+Read the helper as a contract: `project` changes the update family and may be
+the source of feasibility evidence. The function alone says nothing about
+convexity, convergence rate, noise, or global optimality; those claims need
+separate assumptions and traces.
+
 ## Source and reuse boundary
 
 This workbook’s explanations, examples, diagrams, tables, and code are

@@ -415,3 +415,12 @@ and Draft Course CI run
 as the latest **content-bearing** checkpoint. Its 95-test content path passed;
 later documentation-only commits remain separately recorded. This is not a
 non-draft full gate, module promotion, deployment, or learner evidence.
+
+## Advanced-pack visual and code-reading density checkpoint — 2026-08-05
+
+The canonical M31–M36 authoring workbooks now each carry a bounded visual map,
+visible prose alternative, and code/native code-reading card. The hidden review
+copies were regenerated from that single canonical body, and
+`tests/m31-m36-pedagogy.test.mjs` now enforces the minimum surface. This is a
+pedagogical improvement only: the six modules remain authoring-only, hidden,
+unreviewed, and without release or learner evidence.

@@ -1428,6 +1428,50 @@ own prerequisite and learner-evidence decisions.
 
 ---
 
+## Visual and code-reading lab — language, machine, theorem
+
+Keep a finite trace separate from a statement about an entire language or
+complexity family.
+
+```mermaid
+%% atlas-diagram-id: m33-language-to-theorem
+%% atlas-diagram-title: Language-to-theorem route
+%% atlas-diagram-alt: The route moves from a language definition through a recognizer, a trace invariant, a proof obligation or reduction, and theorem scope with limits.
+flowchart TB
+  L["Language definition"] --> M["Recognizer / machine"]
+  M --> I["Trace invariant"]
+  I --> P["Proof obligation or reduction"]
+  P --> B["Theorem scope + limit"]
+```
+
+### Prose alternative
+
+The language is the object of study. A machine is one proposed recognizer.
+An invariant explains a trace. A proof or reduction connects that invariant to
+a theorem, whose quantifiers and cost model define the final scope. A passing
+input is evidence about one trace, never by itself a decidability or
+complexity result.
+
+### Small code-reading card
+
+```python
+def accepts_balanced_parentheses(word):
+    depth = 0
+    for symbol in word:
+        if symbol == "(":
+            depth += 1
+        elif symbol == ")":
+            depth -= 1
+            if depth < 0:
+                return False
+    return depth == 0
+```
+
+Read the invariant `depth >= 0` while scanning each prefix and `depth == 0`
+at the end. The code gives a bounded recognizer argument for this particular
+language; it does not prove that every recognizer has the same memory model or
+that a different semantic property is decidable.
+
 ## Source and reuse boundary
 
 This workbook uses original explanations, fixtures, diagrams, and code. It

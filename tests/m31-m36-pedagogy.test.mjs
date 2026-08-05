@@ -15,6 +15,11 @@ test("M31–M36 hidden packs expose a connected ladder and per-distractor repair
   for (const [moduleId, filename, questionCount] of moduleFiles) {
     const workbook = await readFile(new URL(`../content/authoring/${filename}`, import.meta.url), "utf8");
 
+    assert.match(workbook, /^## Visual and code-reading lab —/mu, `${moduleId} needs a visual/code-reading lab`);
+    assert.match(workbook, /^### Prose alternative$/mu, `${moduleId} needs a visible prose alternative`);
+    const teachingCodeBlocks = workbook.match(/```(?:mermaid|python|c)\b/gmu) ?? [];
+    assert.ok(teachingCodeBlocks.length >= 2, `${moduleId} needs a diagram and a code-reading block`);
+
     assert.match(workbook, /^## Graduated problem ladder$/mu, `${moduleId} needs a problem ladder`);
     for (let step = 1; step <= 6; step += 1) {
       assert.match(

@@ -80,3 +80,15 @@ evidence; it is not a readiness gate. A focused candidate review remains
 required before any portal/release decision. The repository should not change
 its graph status, manifest, or M25/M26 gating until independent review and
 release evidence exist.
+
+## Pedagogy-density checkpoint — 2026-08-05
+
+The six canonical authoring workbooks now each include a bounded visual map, a
+visible prose alternative, and a code/native code-reading card. M33 and M34
+receive their first explicit code-reading cards; M35 and M36 now expose prose
+alternatives as reader-visible Markdown rather than relying on hidden diagram
+comments. `tests/m31-m36-pedagogy.test.mjs` enforces the minimum diagram/code
+surface, while `scripts/advanced-review-candidate-parity.mjs` regenerates the
+hidden review copies from the canonical workbooks. This improves study
+material; it does not change the authoring-only boundary or substitute for
+human accessibility, source, teaching, or release review.

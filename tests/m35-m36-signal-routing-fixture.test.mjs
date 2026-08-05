@@ -538,11 +538,11 @@ test("the M35 and M36 authoring diagrams keep their declared prose alternatives"
   const sources = [
     {
       path: "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      ids: ["m35-knowledge-map", "m35-evidence-chain"],
+      ids: ["m35-knowledge-map", "m35-evidence-chain", "m35-information-to-authority"],
     },
     {
       path: "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      ids: ["m36-theory-system-map", "m36-learning-claim-chain"],
+      ids: ["m36-theory-system-map", "m36-learning-claim-chain", "m36-theorem-to-system"],
     },
   ];
 
@@ -551,8 +551,8 @@ test("the M35 and M36 authoring diagrams keep their declared prose alternatives"
     const blocks = scanMermaidBlocks(workbook, { sourcePath: source.path });
     const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-    assert.equal(blocks.length, 2);
-    assert.equal(report.summary.completeBlocks, 2);
+    assert.equal(blocks.length, 3);
+    assert.equal(report.summary.completeBlocks, 3);
     assert.deepEqual(blocks.map(({ metadata }) => metadata?.id), source.ids);
     assert.ok(blocks.every(({ metadata }) => metadata?.title.length >= 20));
     assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 80));

@@ -1779,6 +1779,49 @@ remain gated synthesis work until their own requirements are complete.
 
 ---
 
+## Visual and code-reading lab — ownership before speed
+
+Use this map to keep a systems claim attached to its lifetime and measurement
+boundary. A faster-looking line is not evidence until ownership and timing are
+visible.
+
+```mermaid
+%% atlas-diagram-id: m32-ownership-before-speed
+%% atlas-diagram-title: Ownership-before-speed route
+%% atlas-diagram-alt: The route moves from a host-created view through ownership, a kernel or native call, synchronization, and a reproducibility record.
+flowchart LR
+  H["Host creates view"] --> O["Owner / lifetime"]
+  O --> K["Kernel or native call"]
+  K --> E["Event / synchronization"]
+  E --> R["Result and reproducibility record"]
+```
+
+### Prose alternative
+
+The host creates a view, an owner keeps the storage alive, a kernel or native
+call consumes it, an event makes completion observable, and the final record
+states the environment. If one link is missing, the result may still be
+useful, but it is not yet a defensible no-copy, timing, or reproducibility
+claim.
+
+### Small native-boundary reading card
+
+```c
+typedef struct {
+    float *data;
+    size_t length;
+    size_t stride;
+} View;
+
+float read_at(const View *view, size_t index) {
+    return view->data[index * view->stride];
+}
+```
+
+Read `stride` and the pointer lifetime before reasoning about layout or speed.
+This descriptor permits a logical view, not a guarantee of contiguity, device
+placement, synchronization, or ownership. Those are separate evidence fields.
+
 ## Sources, licensing, and responsible reading route
 
 This workbook uses original explanations, fixtures, diagrams, and prompts. The
