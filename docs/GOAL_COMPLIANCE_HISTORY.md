@@ -372,3 +372,14 @@ passed the 95-test content path; portal, apparatus, browser, and teaching-model
 jobs were intentionally skipped because PR #22 remains draft. The current
 Mermaid scan is 246/246 complete. None of this is a full non-draft gate,
 module promotion, private deployment, human review, or learner evidence.
+
+## Dated current-audit provenance reconciliation — 2026-08-05
+
+The current completion snapshot and final audit were reconciled to additive
+head [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
+and Draft Course CI run
+[`30983252123`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123).
+The run passed the classifier and 95-test content path while expensive
+apparatus, browser, Python, and portal jobs were skipped for the draft PR.
+This removes stale “current head” references without changing the open
+non-draft, deployment, human-review, platform, or learner-evidence boundaries.

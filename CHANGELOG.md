@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Reconciled the current completion snapshot and final audit with additive
+  head `49bda34` and Draft Course CI run `30983252123`; retained the explicit
+  draft-content/full-gate boundary and the observed superseded-run
+  cancellation evidence.
 - Added a bounded private-deployment header-verification procedure covering
   both ordinary and image-optimization Worker responses. Its focused
   regression passes 4/4; the repository still makes no remote-deployment or

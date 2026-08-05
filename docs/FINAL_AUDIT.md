@@ -65,9 +65,11 @@ present when the matrix grows.
   license/reuse boundaries, and claim linkage are structurally bound.
 - The current source tree is clean, additive, and reachable through draft PR #22;
   no history rewrite was used.
-- The repaired release-input ledger and generated matrix pass local checks and
-  Draft Course CI run [30978939601](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978939601)
-  passed the draft content path.
+- The repaired release-input ledger and generated matrix pass local checks. The
+  latest additive head [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
+  passed the draft content path in Draft Course CI run
+  [30983252123](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123).
+  The result remains draft content evidence, not a full gate.
 
 ## Intentionally deferred by design
 
