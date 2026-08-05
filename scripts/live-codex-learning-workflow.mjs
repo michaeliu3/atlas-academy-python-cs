@@ -91,6 +91,88 @@ const requiredControls = [
   "delete a saved note",
 ];
 
+const requiredModuleLoopPhases = [
+  {
+    id: "orient",
+    label: "Orient",
+    role: "study-partner",
+    objective: "Name the graph-approved module, session, prerequisite, and one learner question.",
+    requiredOutputs: ["module and session", "prerequisite or bridge", "learner question"],
+    nextPhase: "predict-inspect",
+  },
+  {
+    id: "predict-inspect",
+    label: "Predict and inspect",
+    role: "study-partner",
+    objective: "State a prediction and confidence before reading the code, diagram, derivation, or architecture trace; then change one premise.",
+    requiredOutputs: ["prediction and confidence", "inspected trace", "one changed premise"],
+    nextPhase: "artifact",
+  },
+  {
+    id: "artifact",
+    label: "Make one artifact",
+    role: "study-partner",
+    objective: "Create the smallest useful state trace, counterexample, proof step, numerical check, design card, or debugging note.",
+    requiredOutputs: ["smallest evidence artifact", "observation", "boundary or non-claim"],
+    nextPhase: "repair-defense",
+  },
+  {
+    id: "repair-defense",
+    label: "Repair and defend",
+    role: "teaching-assistant",
+    objective: "Repair one fragile model and conduct an encouraging oral defense with a changed-premise or counterexample and a transfer question.",
+    requiredOutputs: ["repaired model", "oral-defense synthesis", "transfer response"],
+    nextPhase: "record",
+  },
+  {
+    id: "record",
+    label: "Record only what is useful",
+    role: "designated-chat",
+    objective: "After a fresh records-on confirmation, keep at most one concise learner-approved note for the substantive session; otherwise keep the fallback local.",
+    requiredOutputs: ["question and prediction", "compact whiteboard or code trace", "misconception or uncertainty", "next action and handoff"],
+    nextPhase: "improve-forward",
+  },
+  {
+    id: "improve-forward",
+    label: "Retrieve and improve",
+    role: "learner",
+    objective: "Schedule one retrieval prompt, carry the smallest next action into the next session, and bridge a repeated misconception instead of silently skipping it.",
+    requiredOutputs: ["retrieval prompt and due date", "uncertainty or repair", "forward-module handoff"],
+    nextPhase: null,
+  },
+];
+const requiredModuleLoopRecordFields = [
+  "question and prediction with confidence",
+  "code, architecture, derivation, diagram, or state-trace observation",
+  "smallest evidence artifact and explicit boundary or non-claim",
+  "repaired misconception or unresolved uncertainty",
+  "retrieval prompt, next action, and cross-role handoff",
+];
+const requiredModuleLoopCompletionBoundary =
+  "Completing the loop creates learning evidence for the next step; it is not a pass/fail grade, route unlock, release decision, mastery claim, or university-equivalence claim.";
+const requiredImprovementAfterEachSession = [
+  "retain one honest uncertainty or repaired misconception",
+  "schedule one retrieval prompt with a due date",
+  "carry one learner-controlled next action or cross-role handoff",
+];
+const requiredImprovementWhenMisconceptionRepeats = [
+  "name the prerequisite bridge",
+  "change one example, input, premise, or representation",
+  "slow the pace or reschedule the module rather than silently bypassing the dependency",
+];
+const requiredImprovementInspect = [
+  "confidence compared with observed reasoning evidence",
+  "retrieval outcomes and repeated repair patterns",
+  "time spent and unresolved prerequisite bridges",
+];
+const requiredImprovementPossibleActions = [
+  "adjust the pace between the 60-, 90-, and 180-day routes",
+  "add a bridge example or targeted retrieval prompt",
+  "carry a bounded uncertainty into the next Teaching Assistant handoff",
+];
+const requiredImprovementCourseChangeBoundary =
+  "Learner records can propose a content or prompt improvement, but they never silently mutate the canonical graph or release state; a course change requires an explicit reviewed Git commit and regenerated evidence.";
+
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -137,6 +219,7 @@ async function validateGuide(path, siteRoot, errors) {
     "<!-- live-codex-workflow: boundaries -->",
     "<!-- live-codex-workflow: activation -->",
     "<!-- live-codex-workflow: controls -->",
+    "<!-- live-codex-workflow: module-loop -->",
   ]) {
     if (!guide.includes(marker)) {
       errors.push(`Live Codex workflow learner guide is missing the ${marker} marker.`);
@@ -159,6 +242,10 @@ async function validateGuide(path, siteRoot, errors) {
   }
   if (!guide.includes("direct evidence")) {
     errors.push("Live Codex workflow learner guide must retain the direct-evidence claim boundary.");
+  }
+  const guideLower = guide.toLowerCase();
+  if (!guideLower.includes("six-phase module loop") || !guideLower.includes("after three modules") || !guideLower.includes("never silently skip")) {
+    errors.push("Live Codex workflow learner guide must expose the six-phase record-and-improve loop.");
   }
   return absolutePath;
 }
@@ -302,6 +389,73 @@ export async function validateLiveCodexLearningWorkflow(
     }
   }
 
+  const moduleLoop = isPlainObject(workflow.moduleLoop) ? workflow.moduleLoop : null;
+  if (!moduleLoop || moduleLoop.version !== 1 || text(moduleLoop.purpose) === "") {
+    errors.push("Live Codex workflow moduleLoop must declare version 1 and a non-empty purpose.");
+  } else {
+    if (!Array.isArray(moduleLoop.phases) || moduleLoop.phases.length !== requiredModuleLoopPhases.length) {
+      errors.push("Live Codex workflow moduleLoop must declare exactly six connected phases.");
+    } else {
+      for (const [index, expected] of requiredModuleLoopPhases.entries()) {
+        const actual = moduleLoop.phases[index];
+        if (
+          !isPlainObject(actual) ||
+          actual.id !== expected.id ||
+          actual.label !== expected.label ||
+          actual.role !== expected.role ||
+          actual.objective !== expected.objective ||
+          actual.nextPhase !== expected.nextPhase
+        ) {
+          errors.push(`Live Codex workflow moduleLoop phase ${expected.id} must preserve its reviewed role, objective, and transition.`);
+          continue;
+        }
+        requiredStringArray(
+          actual.requiredOutputs,
+          `Live Codex workflow moduleLoop phase ${expected.id}.requiredOutputs`,
+          expected.requiredOutputs,
+          errors,
+        );
+      }
+    }
+    requiredStringArray(
+      moduleLoop.sessionRecordFields,
+      "Live Codex workflow moduleLoop.sessionRecordFields",
+      requiredModuleLoopRecordFields,
+      errors,
+    );
+    if (moduleLoop.completionBoundary !== requiredModuleLoopCompletionBoundary) {
+      errors.push("Live Codex workflow moduleLoop completionBoundary must preserve the non-grading claim boundary.");
+    }
+  }
+
+  const improvementPolicy = isPlainObject(workflow.improvementPolicy) ? workflow.improvementPolicy : null;
+  if (!improvementPolicy || improvementPolicy.version !== 1) {
+    errors.push("Live Codex workflow improvementPolicy must declare version 1.");
+  } else {
+    requiredStringArray(
+      improvementPolicy.afterEachSession,
+      "Live Codex workflow improvementPolicy.afterEachSession",
+      requiredImprovementAfterEachSession,
+      errors,
+    );
+    requiredStringArray(
+      improvementPolicy.whenMisconceptionRepeats,
+      "Live Codex workflow improvementPolicy.whenMisconceptionRepeats",
+      requiredImprovementWhenMisconceptionRepeats,
+      errors,
+    );
+    const cadence = isPlainObject(improvementPolicy.cadenceCalibration) ? improvementPolicy.cadenceCalibration : null;
+    if (!cadence || cadence.afterModuleCount !== 3) {
+      errors.push("Live Codex workflow improvementPolicy must calibrate after three modules.");
+    } else {
+      requiredStringArray(cadence.inspect, "Live Codex workflow improvementPolicy.cadenceCalibration.inspect", requiredImprovementInspect, errors);
+      requiredStringArray(cadence.possibleActions, "Live Codex workflow improvementPolicy.cadenceCalibration.possibleActions", requiredImprovementPossibleActions, errors);
+    }
+    if (improvementPolicy.courseChangeBoundary !== requiredImprovementCourseChangeBoundary) {
+      errors.push("Live Codex workflow improvementPolicy must preserve the explicit Git/course-change boundary.");
+    }
+  }
+
   const privacyBoundary = isPlainObject(workflow.privacyBoundary) ? workflow.privacyBoundary : null;
   if (!privacyBoundary) {
     errors.push("Live Codex workflow privacyBoundary must be an object.");
@@ -330,6 +484,8 @@ export async function validateLiveCodexLearningWorkflow(
     workflowPath: liveCodexLearningWorkflowRelativePath,
     learnerGuidePath: delivery.learnerGuidePath,
     delivery,
+    moduleLoop,
+    improvementPolicy,
     notionSessionNotes,
     roles: workflow.roles,
     whiteboardProtocol,

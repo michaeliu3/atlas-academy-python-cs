@@ -11,6 +11,8 @@ export type LearningPartnerPrompt = Readonly<{
 }>;
 
 const unavailableNoteTemplate = liveWorkflow.notionSessionNotes.unavailableNoteTemplate;
+export const liveModuleLoop = liveWorkflow.moduleLoop;
+export const liveImprovementPolicy = liveWorkflow.improvementPolicy;
 const sessionClosurePhrase = liveWorkflow.notionSessionNotes.recordingAuthorization.closurePhrase;
 const sessionRenewalRule = liveWorkflow.notionSessionNotes.recordingAuthorization.renewalRule;
 const readyToPasteUnavailableNote = `${unavailableNoteTemplate.title}

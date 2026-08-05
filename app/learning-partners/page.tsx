@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { learningPartnerPrompts } from "@/lib/learning-partner-prompts";
+import { learningPartnerPrompts, liveModuleLoop } from "@/lib/learning-partner-prompts";
 import { CourseReaderHeader } from "../modules/CourseReaderHeader";
 import { LearningPartnerPromptCards } from "./LearningPartnerPromptCards";
 import styles from "./learning-partners.module.css";
@@ -47,22 +47,16 @@ export default function LearningPartnersPage() {
 
         <section className={styles.workflow} aria-labelledby="partner-workflow">
           <div>
-            <p className="kicker">A simple operating rhythm</p>
+            <p className="kicker">A six-phase operating rhythm</p>
             <h2 id="partner-workflow">Choose the job before asking the question.</h2>
           </div>
           <ol>
-            <li>
-              <span>01</span>
-              <p><strong>Study Partner:</strong> retrieve, explain, and test one changed premise.</p>
-            </li>
-            <li>
-              <span>02</span>
-              <p><strong>Teaching Assistant:</strong> repair a model, diagnose a trace, or review an evidence boundary.</p>
-            </li>
-            <li>
-              <span>03</span>
-              <p><strong>Oral defense:</strong> the Teaching Assistant leads a supportive live or text conversation: explain, revise, transfer, and choose the next bridge.</p>
-            </li>
+            {liveModuleLoop.phases.map((phase, index) => (
+              <li key={phase.id}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p><strong>{phase.label}:</strong> {phase.objective}</p>
+              </li>
+            ))}
           </ol>
         </section>
 

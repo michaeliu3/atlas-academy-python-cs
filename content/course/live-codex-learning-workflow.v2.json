@@ -9,6 +9,95 @@
     "chatSurface": "user-designated-platform-chat",
     "learnerGuidePath": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md"
   },
+  "moduleLoop": {
+    "version": 1,
+    "purpose": "A repeatable six-phase route that turns each module conversation into inspectable reasoning, a compact learner-owned record, and a forward handoff without requiring a preliminary human review.",
+    "phases": [
+      {
+        "id": "orient",
+        "label": "Orient",
+        "role": "study-partner",
+        "objective": "Name the graph-approved module, session, prerequisite, and one learner question.",
+        "requiredOutputs": ["module and session", "prerequisite or bridge", "learner question"],
+        "nextPhase": "predict-inspect"
+      },
+      {
+        "id": "predict-inspect",
+        "label": "Predict and inspect",
+        "role": "study-partner",
+        "objective": "State a prediction and confidence before reading the code, diagram, derivation, or architecture trace; then change one premise.",
+        "requiredOutputs": ["prediction and confidence", "inspected trace", "one changed premise"],
+        "nextPhase": "artifact"
+      },
+      {
+        "id": "artifact",
+        "label": "Make one artifact",
+        "role": "study-partner",
+        "objective": "Create the smallest useful state trace, counterexample, proof step, numerical check, design card, or debugging note.",
+        "requiredOutputs": ["smallest evidence artifact", "observation", "boundary or non-claim"],
+        "nextPhase": "repair-defense"
+      },
+      {
+        "id": "repair-defense",
+        "label": "Repair and defend",
+        "role": "teaching-assistant",
+        "objective": "Repair one fragile model and conduct an encouraging oral defense with a changed-premise or counterexample and a transfer question.",
+        "requiredOutputs": ["repaired model", "oral-defense synthesis", "transfer response"],
+        "nextPhase": "record"
+      },
+      {
+        "id": "record",
+        "label": "Record only what is useful",
+        "role": "designated-chat",
+        "objective": "After a fresh records-on confirmation, keep at most one concise learner-approved note for the substantive session; otherwise keep the fallback local.",
+        "requiredOutputs": ["question and prediction", "compact whiteboard or code trace", "misconception or uncertainty", "next action and handoff"],
+        "nextPhase": "improve-forward"
+      },
+      {
+        "id": "improve-forward",
+        "label": "Retrieve and improve",
+        "role": "learner",
+        "objective": "Schedule one retrieval prompt, carry the smallest next action into the next session, and bridge a repeated misconception instead of silently skipping it.",
+        "requiredOutputs": ["retrieval prompt and due date", "uncertainty or repair", "forward-module handoff"],
+        "nextPhase": null
+      }
+    ],
+    "sessionRecordFields": [
+      "question and prediction with confidence",
+      "code, architecture, derivation, diagram, or state-trace observation",
+      "smallest evidence artifact and explicit boundary or non-claim",
+      "repaired misconception or unresolved uncertainty",
+      "retrieval prompt, next action, and cross-role handoff"
+    ],
+    "completionBoundary": "Completing the loop creates learning evidence for the next step; it is not a pass/fail grade, route unlock, release decision, mastery claim, or university-equivalence claim."
+  },
+  "improvementPolicy": {
+    "version": 1,
+    "afterEachSession": [
+      "retain one honest uncertainty or repaired misconception",
+      "schedule one retrieval prompt with a due date",
+      "carry one learner-controlled next action or cross-role handoff"
+    ],
+    "whenMisconceptionRepeats": [
+      "name the prerequisite bridge",
+      "change one example, input, premise, or representation",
+      "slow the pace or reschedule the module rather than silently bypassing the dependency"
+    ],
+    "cadenceCalibration": {
+      "afterModuleCount": 3,
+      "inspect": [
+        "confidence compared with observed reasoning evidence",
+        "retrieval outcomes and repeated repair patterns",
+        "time spent and unresolved prerequisite bridges"
+      ],
+      "possibleActions": [
+        "adjust the pace between the 60-, 90-, and 180-day routes",
+        "add a bridge example or targeted retrieval prompt",
+        "carry a bounded uncertainty into the next Teaching Assistant handoff"
+      ]
+    },
+    "courseChangeBoundary": "Learner records can propose a content or prompt improvement, but they never silently mutate the canonical graph or release state; a course change requires an explicit reviewed Git commit and regenerated evidence."
+  },
   "notionSessionNotes": {
     "portableStartupMode": "keep-local",
     "designatedChatMode": "automatic-after-substantive-session",

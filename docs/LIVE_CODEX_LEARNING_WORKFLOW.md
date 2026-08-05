@@ -11,6 +11,34 @@ Atlas has four deliberately separate surfaces:
 | Study Partner Codex chat | Live concept discussion, retrieval, brainstorming, code-reading, and low-pressure practice | The formal oral-defense role or grading |
 | Notion | Concise, structured learning notes and handoffs | Raw voice/transcript archive, surveillance, or automatic proof of progress |
 
+<!-- live-codex-workflow: module-loop -->
+
+## Six-phase module loop and improvement ledger
+
+Human review is not a prerequisite for starting a module. The learner begins
+with the graph-approved route and lets real conversations create the evidence
+needed to improve the next session. Run this **six-phase module loop** for each
+module:
+
+| Phase | Owner | Minimum output |
+| --- | --- | --- |
+| Orient | Study Partner | Module/session, prerequisite bridge, and one question. |
+| Predict and inspect | Study Partner | Prediction plus confidence, an inspected trace, and one changed premise. |
+| Make one artifact | Study Partner | Smallest trace, counterexample, proof step, numerical check, design card, or debugging note. |
+| Repair and defend | Teaching Assistant | Repaired model, constructive oral-defense synthesis, and transfer response. |
+| Record only what is useful | Designated chat | At most one concise approved note after fresh `records on`; otherwise a local fallback. |
+| Retrieve and improve | Learner | Retrieval prompt/date, uncertainty or repair, and forward handoff. |
+
+After every session, keep one uncertainty or repaired misconception, schedule
+one retrieval prompt, and carry one next action. When a misconception repeats,
+name its prerequisite, change one example or premise, and slow or reschedule;
+**never silently skip** the dependency. After three modules, compare confidence
+with observed reasoning, retrieval outcomes, repeated repairs, time, and
+unresolved bridges; adjust the 60/90/180-day pace or add a focused bridge.
+Learner notes may propose a content improvement, but they never mutate the
+canonical graph or release state: a course change requires an explicit Git
+commit and regenerated evidence.
+
 ## Voice and whiteboard protocol
 
 Use a learner-created, voice-enabled Codex chat when the platform makes it

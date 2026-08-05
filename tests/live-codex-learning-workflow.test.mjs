@@ -13,6 +13,24 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
 
   assert.equal(report.workflowPath, liveCodexLearningWorkflowRelativePath);
   assert.equal(report.delivery.portalRuntimeIntegration, "none");
+  assert.equal(report.moduleLoop.version, 1);
+  assert.deepEqual(report.moduleLoop.phases.map(({ id }) => id), [
+    "orient",
+    "predict-inspect",
+    "artifact",
+    "repair-defense",
+    "record",
+    "improve-forward",
+  ]);
+  assert.deepEqual(report.moduleLoop.sessionRecordFields, [
+    "question and prediction with confidence",
+    "code, architecture, derivation, diagram, or state-trace observation",
+    "smallest evidence artifact and explicit boundary or non-claim",
+    "repaired misconception or unresolved uncertainty",
+    "retrieval prompt, next action, and cross-role handoff",
+  ]);
+  assert.equal(report.improvementPolicy.version, 1);
+  assert.equal(report.improvementPolicy.cadenceCalibration.afterModuleCount, 3);
   assert.equal(report.notionSessionNotes.portableStartupMode, "keep-local");
   assert.equal(report.notionSessionNotes.designatedChatMode, "automatic-after-substantive-session");
   assert.deepEqual(report.notionSessionNotes.recordingAuthorization, {
@@ -92,6 +110,13 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   const voiceGuide = await readFile(new URL("../docs/LIVE_CODEX_LEARNING_WORKFLOW.md", import.meta.url), "utf8");
   assert.match(voiceGuide, /GPT Live High/u);
   assert.match(promptSource, /unavailableNoteTemplate/u);
+});
+
+test("the Learning Partners surface renders the canonical six-phase loop", async () => {
+  const page = await readFile(new URL("../app/learning-partners/page.tsx", import.meta.url), "utf8");
+  assert.match(page, /liveModuleLoop\.phases\.map/u);
+  assert.match(page, /A six-phase operating rhythm/u);
+  assert.doesNotMatch(page, /<strong>Study Partner:<\/strong> retrieve, explain/u);
 });
 
 test("learner-facing policy summaries retain explicit records-on authority", async () => {
@@ -239,5 +264,19 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   await assert.rejects(
     validateLiveCodexLearningWorkflow(missingDeletionFallback),
     /learnerControlAcknowledgements must preserve the reviewed values and order/u,
+  );
+
+  const missingModulePhase = structuredClone(workflow);
+  missingModulePhase.moduleLoop.phases.pop();
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(missingModulePhase),
+    /moduleLoop must declare exactly six connected phases/u,
+  );
+
+  const bypassedDependency = structuredClone(workflow);
+  bypassedDependency.improvementPolicy.whenMisconceptionRepeats[2] = "skip the dependency and continue";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(bypassedDependency),
+    /improvementPolicy\.whenMisconceptionRepeats must preserve the reviewed values and order/u,
   );
 });
