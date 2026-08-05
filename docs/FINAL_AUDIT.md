@@ -78,6 +78,13 @@ present when the matrix grows.
   [30986409371](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986409371)
   and [30986600642](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986600642).
   These remain draft content evidence, not a full gate.
+- The latest additive prompt/provenance checkpoint is [`a802275`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a802275b0defb4cf9017e72ba252bb19ba590e8f), whose Draft Course CI run
+  [`30987245310`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30987245310)
+  passed the structural, generated-input, source-freshness, and 95-test content
+  path after the expected stale-hash failure on the preceding prompt commit.
+  This verifies provenance repair and GPT Live High wording only; it does not
+  establish a full gate, voice/rendering behavior, Notion write, deployment, or
+  human/learner evidence.
 
 ## Intentionally deferred by design
 

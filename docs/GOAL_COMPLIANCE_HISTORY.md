@@ -434,3 +434,22 @@ passed Draft Course CI run
 structural contract and release-input validation, generated-artifact checks,
 source freshness, and all 95 content tests passed. This is not a non-draft
 full gate, module promotion, deployment, human review, or learner evidence.
+
+## Dated live-chat quality-setting and provenance checkpoint — 2026-08-05
+
+Additive commit
+[`38b0bf2`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/38b0bf2f75807add636f9fb2e49c4032bfd04fb2)
+names the learner-requested **GPT Live High** option in both designated
+Teaching Assistant and Study Partner startup prompts and the whiteboard guide,
+while keeping the voice-quality setting platform-owned and retaining the text
+fallback. Its first hosted Draft run
+[`30987062514`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30987062514)
+correctly failed because an allowlisted documentation input hash had not yet
+been regenerated. Additive hash-refresh commit
+[`a802275`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a802275b0defb4cf9017e72ba252bb19ba590e8f)
+and Draft run
+[`30987245310`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30987245310)
+then passed structural/release-input checks, generated-artifact checks, source
+freshness, and all 95 content tests. This remains Draft content evidence, not
+a non-draft full gate, live voice/rendering observation, Notion write, module
+promotion, deployment, or learner evidence.
