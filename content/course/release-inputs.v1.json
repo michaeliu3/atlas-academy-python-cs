@@ -86,7 +86,7 @@
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "43604ffb9ba5f08ad30abaeabaa2e36e27636d59bff1527dcb5d733bf3674bbd"
+      "sha256": "76487e60ed8222ff9f759f4e1e1920e5c87a3822337073c55cf48863729b60cb"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "46679dca58670942955bebe58dda8ed978cf964b5d04d3598696073b15408a5d"
+      "sha256": "2400ed20d224e0630cafd2a388c7499a2bcdcceedd04d0a7e1144ad28aa19103"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -858,7 +858,7 @@
     },
     {
       "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
-      "sha256": "5ea3bff95d3c842b5d4e319dd770bf13a129f26ab2b0aa9e1ccd48c337ab14bd"
+      "sha256": "dc4329979d6dd9b4e1f9899042bd1c1f615eb0b41472351d9e2035ff923c2094"
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",

@@ -116,8 +116,8 @@
       "id": "systems-ai-ml",
       "requirement": "M32–M36 connect systems, classical AI, ML, and learning-theory reasoning with honest boundaries.",
       "state": "partial",
-      "evidence": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md; content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md; tests/module35-36-breadth.test.mjs",
-      "openItem": "M32 now names lower-level Python/native boundaries, mixed precision, and distributed data-parallel contracts in its authoring workbook and source research; complete the human/source review and verify M34/M35/M36 breadth against their source ledgers."
+      "evidence": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md; content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md; content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md; tests/m34-classical-ai-reference-fixture.test.mjs; tests/module34-primary-research.test.mjs; tests/module35-36-breadth.test.mjs",
+      "openItem": "M32 names lower-level Python/native boundaries, mixed precision, and distributed data-parallel contracts; M34 now has bounded first-order resolution, Bayesian-network/HMM, POMDP, and game-theory cards with S34-20–S34-22 source routing. Complete human/source review and verify M35/M36 breadth against their source ledgers."
     },
     {
       "id": "pedagogy",

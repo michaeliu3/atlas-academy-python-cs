@@ -70,6 +70,11 @@ They are navigation aids, not borrowed proof text, a contract-bound source map,
 or release evidence: the named assumptions, original derivation, and non-claim
 still control what may be concluded.
 
+The theory-breadth extensions use `M34-C10–M34-C12 -> S34-20–S34-22` for
+first-order resolution, Bayesian/HMM factorization, POMDP belief updates, and
+multi-agent game boundaries. They remain code-reading and proof-scope cards,
+not general theorem-prover, inference-engine, planner, or game-player builds.
+
 ### Core evidence card
 
 Use this before, during, and after a calculation.
@@ -102,9 +107,12 @@ Answer briefly before looking back. Repair is directional, not punitive.
 4. Why can a most-probable state imply a different action than a
    maximum-expected-utility choice?
 5. What exact formal object must a complexity or reduction claim name?
+6. What substitution and clause conditions make one resolution step valid?
+7. What information distinguishes an HMM filter, a POMDP belief policy, and a
+   general-sum game equilibrium claim?
 
-Bridge through M10/M11 for 1–2, M31 for 3, M30 for 4, and M33 for 5. Do not
-begin by importing a solver library.
+Bridge through M10/M11 for 1–2, M31 for 3, M30 for 4, M33 for 5, and the
+theory-breadth cards for 6–7. Do not begin by importing a solver library.
 
 ---
 
@@ -192,6 +200,55 @@ is absent, so the implication is false. This is a compact finite
 model-checking boundary for inspecting a representation claim. It is not a
 resolution procedure, a first-order logic survey, a general model checker, or
 evidence that a real sensor is reliable.
+
+### First-order logic and resolution — normalize the claim before proving it
+
+First-order logic (FOL) adds **terms**, predicates, variables, functions, and
+quantifiers to propositional atoms. The extra expressive power is useful only
+when scope and domain are explicit. For a finite archive model:
+
+\[
+\forall x\; (\operatorname{archived}(x)\Rightarrow\operatorname{indexed}(x)),
+\qquad \operatorname{archived}(box7).
+\]
+
+The first statement becomes the clause
+\(\lnot\operatorname{archived}(x)\lor\operatorname{indexed}(x)\). Unifying
+\(x=box7\) with the second clause and applying resolution yields
+\(\operatorname{indexed}(box7)\). To prove a query by refutation, add its
+negation and derive the empty clause. The proof is conditional on the domain,
+clause transformation, equality semantics, and exact premises; it is not a
+sensor observation or a claim that every archive item is represented.
+
+**Prediction before reveal:** Does `indexed(box7)` imply
+`archived(box7)`? No—the implication has one direction. Does
+`archived(box8)` allow the same substitution as `archived(box7)`? No—the
+constant is different. If a variable is accidentally treated as a constant,
+or an existential witness is reused as though it were universal, the proof
+obligation changes.
+
+**Code-reading task:** Read this language-neutral resolver sketch:
+
+~~~text
+clauses = normalize_to_clauses(premises + negate(query))
+while new resolvents exist:
+    choose two clauses with complementary, unifiable literals
+    resolvent = resolve(unify(pair), clauses)
+    if resolvent == empty_clause:
+        return "refuted under these premises"
+return "not refuted by this search"
+~~~
+
+The final result is not automatically `false` or `true`: a bounded search may
+stop without finding a proof, and a malformed normalization or unsound
+unifier invalidates the argument. Inspect quantifier scope, substitution,
+duplicate clauses, equality, termination, and the distinction between “not
+proved” and “disproved.” This is a theorem-reading route, not a general FOL
+prover implementation.
+
+The [Berkeley CS188 logic route](https://inst.eecs.berkeley.edu/~cs188/textbook/logic/)
+and its [first-order inference section](https://inst.eecs.berkeley.edu/~cs188/textbook/logic/first-order-logic.html)
+are link-only calibration anchors; Atlas uses original notation and examples.
 
 ### Code-reading and debugging task
 
@@ -939,6 +996,47 @@ mechanism, authorize an action, or turn the one-shot table into a POMDP. Those
 are separate evidence and design questions; this bridge simply makes the
 M30-to-M34 update visible before utility enters.
 
+### Bayesian networks and hidden Markov models — factorization is a model
+
+A Bayesian network is a directed acyclic graph plus local conditional tables.
+Under its declared factorization,
+
+\[
+P(X_1,\ldots,X_n)=\prod_i P(X_i\mid Parents(X_i)).
+\]
+
+The graph makes conditional-independence claims inspectable; it does not by
+itself prove a causal direction, a complete variable list, or calibrated
+tables. A hidden Markov model (HMM) adds a time-indexed hidden state \(Z_t\),
+an observation \(Y_t\), an initial law, transition law, and emission law. A
+forward belief update has the shape
+
+\[
+\alpha_{t+1}(z')=P(Y_{t+1}\mid z')\sum_z
+P(z'\mid z)\alpha_t(z).
+\]
+
+An HMM performs inference over hidden state sequences; it is not an MDP
+policy because it has no action, reward, or decision authority in this
+formula. Conversely, an MDP state transition does not become an HMM merely
+because a sensor is noisy.
+
+**Prediction before reveal:** If two observations are conditionally independent
+given a hidden state, may they be treated as independent after marginalizing
+that state? Not in general. The shared hidden cause can create dependence.
+If a forward update uses the wrong emission likelihood, the arithmetic can still
+normalize while answering a different model.
+
+**Debugging task:** Mark the missing fields in a proposed sequence trace:
+initial distribution, transition matrix, emission model, observation order,
+normalization, and evidence boundary. Then state whether the trace supports a
+finite posterior, a predictive distribution, or a policy; never upgrade it to
+one of the others by naming a library.
+
+Use Berkeley's [Bayesian-network route](https://inst.eecs.berkeley.edu/~cs188/textbook/bayes-nets/)
+and [HMM route](https://inst.eecs.berkeley.edu/~cs188/textbook/hmms/) as
+learner-facing comparison anchors. The cards here are original and bounded.
+
 ### A synthetic decision table
 
 Use the posterior from the finite trace above:
@@ -1080,6 +1178,56 @@ selector.
 Use `m34TwoStageMdpBackupCard()` only to inspect this arithmetic and its stated
 scope. It is not a general MDP planner, learned policy, or authority to act.
 
+### POMDPs and games — belief policies versus strategic policies
+
+A **partially observable Markov decision process (POMDP)** makes the missing
+observation model explicit. A compact declaration is
+
+\[
+(S,A,T,R,O,\Omega,\gamma),
+\]
+
+with hidden states \(S\), actions \(A\), transition law \(T\), reward/cost
+\(R\), observations \(\Omega\), observation law \(O\), and a horizon or
+discount convention. The agent carries a belief distribution rather than a
+known state. After action \(a\) and observation \(o\), one finite update is
+
+\[
+b'(s')=\eta\,O(o\mid s')\sum_sT(s'\mid s,a)b(s),
+\]
+
+where \(\eta\) normalizes the distribution. A policy maps belief states to
+actions. An HMM can supply a filtering subproblem, but it has no reward or
+action; an MDP assumes the state needed by the transition/reward model is
+available. POMDPs are not solved by repeatedly calling a one-shot posterior
+selector.
+
+**Prediction before reveal:** If two histories produce the same visible label
+but different beliefs, may they share one MDP state? Only if the declared
+model proves the label is sufficient; otherwise retain the belief/history or
+withdraw the Markov claim. A policy that ignores observation timing can appear
+plausible while using information unavailable at decision time.
+
+Game theory adds another agent whose choices affect the outcome. In a finite
+two-player zero-sum game, a payoff matrix supports minimax reasoning. In a
+general-sum game, each player has a distinct payoff and a **Nash equilibrium**
+is a profile in which no single player can improve by deviating alone. An
+equilibrium is a property of the declared game, not a guarantee of uniqueness,
+fairness, truthful preferences, or a socially acceptable outcome. Multi-agent
+utilities must not be collapsed into one hidden “correct” value.
+
+**Code-reading/transfer task:** Given a two-by-two payoff table, label whether
+the claim is zero-sum, general-sum, or under-specified; compute one best
+response; and state what additional evidence would be needed before calling a
+profile an equilibrium. Then change one payoff or add an observation delay and
+say which theorem, algorithm, or policy claim must be rechecked.
+
+The [MIT 6.825 POMDP lecture](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/47a24e96943c8ee02a774dc52f300e29_Lecture20FinalPart1.pdf),
+[Berkeley CS188 games](https://inst.eecs.berkeley.edu/~cs188/textbook/games/),
+and [MIT 6.S890 game-theory notes](https://ocw.mit.edu/courses/6-s890-topics-in-multiagent-learning-fall-2024/resources/lecture-notes/)
+are link-only calibration routes. They do not authorize a cluster, a real
+agent deployment, or copied course assets.
+
 ### Human-impact boundary
 
 For any consequential context, do not turn this toy calculation into action.
@@ -1127,7 +1275,7 @@ the authority and value questions disappear.
 **Can a reviewer trace a recommendation back through its representation,
 algorithm conditions, evidence, and accountable boundary?**
 
-**Claim/source trace:** `M34-C01–M34-C09 -> S34-01–S34-18` — the dossier
+**Claim/source trace:** `M34-C01–M34-C12 -> S34-01–S34-22` — the dossier
 reconnects model, theorem conditions, finite evidence, and governance
 boundaries; it is not source approval or release evidence.
 
@@ -1152,9 +1300,15 @@ Submit one connected packet containing:
    one-shot artifact must state that it does not establish a transition model or
    policy, while a sequential artifact must name state, action, transition,
    reward/cost, horizon, and continuation policy;
-8. a formal-limits card naming an encoded problem and a practical non-claim;
-9. an accountable review/abstention condition; and
-10. a learner-controlled oral-defense summary and M35 handoff.
+8. a first-order clause/resolution trace with substitution and a bounded
+   “not proved” result;
+9. a Bayesian-network or HMM factorization/filtering trace with its
+   conditional-independence assumptions;
+10. a belief-state/POMDP or game-theory card that labels observation timing,
+    payoff/equilibrium scope, and non-claims;
+11. a formal-limits card naming an encoded problem and a practical non-claim;
+12. an accountable review/abstention condition; and
+13. a learner-controlled oral-defense summary and M35 handoff.
 
 ### Acceptance rubric
 
@@ -1430,15 +1584,18 @@ evidence.
 The Session 4 state-semantics card additionally uses [S34-19 — CMU planning
 semantics](https://www.cs.cmu.edu/~mmv/planning/schedule.html) to keep
 model-false, missing observation, and omitted representation distinct.
+The theory-breadth cards additionally use S34-20–S34-22 for first-order
+resolution, Bayesian/HMM filtering, POMDP belief updates, and game-theory
+boundaries.
 
 | Session | Claim/source route | Learner reading route |
 | --- | --- | --- |
-| M34-S01 | `M34-C01 -> S34-01, S34-04–S34-05, S34-18` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-18 — Berkeley CS188](https://inst.eecs.berkeley.edu/~cs188/textbook/) |
+| M34-S01 | `M34-C01, M34-C10 -> S34-01, S34-04–S34-05, S34-18, S34-20` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-18 — Berkeley CS188](https://inst.eecs.berkeley.edu/~cs188/textbook/); [S34-20 — Berkeley logic](https://inst.eecs.berkeley.edu/~cs188/textbook/logic/) |
 | M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02, S34-14, S34-18` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136); [S34-14 — MIT 6.034 planning/search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf); [S34-18 — Berkeley informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html) |
 | M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15, S34-18` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/); [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html); [S34-18 — Berkeley CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html) |
 | M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10, S34-16` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9); [S34-16 — MIT 6.825 planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) |
-| M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13, S34-17, S34-18` | [S34-08 — Berkeley decision networks](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html); [S34-11 — NIST AI RMF PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html); [S34-18 — Berkeley MDP](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) |
-| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-18` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
+| M34-S05 | `M34-C08–M34-C12 -> S34-08, S34-11–S34-13, S34-17–S34-18, S34-20–S34-22` | [S34-08 — Berkeley decision networks](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html); [S34-11 — NIST AI RMF PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html); [S34-18 — Berkeley MDP](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html); [S34-20 — Berkeley Bayes/HMM](https://inst.eecs.berkeley.edu/~cs188/textbook/bayes-nets/); [S34-21 — MIT POMDP](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/47a24e96943c8ee02a774dc52f300e29_Lecture20FinalPart1.pdf); [S34-22 — MIT game theory](https://ocw.mit.edu/courses/6-s890-topics-in-multiagent-learning-fall-2024/resources/lecture-notes/) |
+| M34-S06 | `M34-C01–M34-C12 -> S34-01–S34-22` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
 
 For the fuller claim-linked original/official source ledger and reuse cautions,
 use the instructor-facing [M34 primary-source research

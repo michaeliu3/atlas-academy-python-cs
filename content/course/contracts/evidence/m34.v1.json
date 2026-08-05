@@ -50,7 +50,7 @@
     {
       "id": "m34-rigor-bundle",
       "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-      "claim": "The candidate distinguishes completeness from optimality, provides an admissible-but-inconsistent no-reopen counterexample, a local-consistency counterexample, a relaxation derivation, a false-versus-unknown-versus-unmodelled planning-state card, a planning/encoding boundary, and a two-step Bellman backup with a decision-authority boundary.",
+      "claim": "The candidate distinguishes completeness from optimality, provides an admissible-but-inconsistent no-reopen counterexample, a local-consistency counterexample, a relaxation derivation, a false-versus-unknown-versus-unmodelled planning-state card, a planning/encoding boundary, a two-step Bellman backup, and bounded first-order-resolution, Bayesian-network/HMM, POMDP, and game-theory cards with a decision-authority boundary.",
       "inputs": [
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "completeness-is-not-optimality" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "exact-counterexample--admissible-is-not-enough-for-no-reopen-graph-search" },
@@ -58,7 +58,10 @@
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "relaxation-from-first-principles" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "state-semantics-card-false-unknown-or-unmodelled" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "formal-limit-and-encoding-boundary" },
-        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "a-two-step-bellman-backup" }
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "a-two-step-bellman-backup" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "first-order-logic-and-resolution--normalize-the-claim-before-proving-it" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "bayesian-networks-and-hidden-markov-models--factorization-is-a-model" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "pomdps-and-games--belief-policies-versus-strategic-policies" }
       ],
       "limitations": ["These draft anchors do not substitute for mathematical, source, numerical, or pedagogical review of definitions, hypotheses, derivations, counterexamples, or experiments."]
     },

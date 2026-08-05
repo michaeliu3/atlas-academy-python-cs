@@ -245,6 +245,34 @@ test("the M34 workbook makes the model-construction audits explicit", async () =
   assert.match(workbook, /observation becomes `clear` or `blocked` before the terminal action/u);
 });
 
+test("the M34 theory-breadth cards keep formal, probabilistic, partial-observation, and game claims bounded", async () => {
+  const [workbook, candidate, sourceResearch] = await Promise.all([
+    readFile("content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "utf8"),
+    readFile("content/modules/34_classical_ai_search_constraints_decision.md", "utf8"),
+    readFile(
+      "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+      "utf8",
+    ),
+  ]);
+
+  for (const pack of [workbook, candidate]) {
+    assert.match(pack, /### First-order logic and resolution/u);
+    assert.match(pack, /### Bayesian networks and hidden Markov models/u);
+    assert.match(pack, /### POMDPs and games/u);
+    assert.match(pack, /Nash equilibrium/u);
+    assert.match(pack, /M34-C10–M34-C12 -> S34-20–S34-22/u);
+    assert.match(pack, /not refuted by this search/u);
+    assert.match(pack, /belief distribution rather than a\s+known state/u);
+  }
+
+  for (const sourceId of ["S34-20", "S34-21", "S34-22"]) {
+    assert.match(sourceResearch, new RegExp(`\\| ${sourceId} \\|`, "u"));
+  }
+  assert.match(sourceResearch, /\| M34-C10 \|/u);
+  assert.match(sourceResearch, /\| M34-C11 \|/u);
+  assert.match(sourceResearch, /\| M34-C12 \|/u);
+});
+
 test("the M34 final dossier keeps one-shot and sequential decision claims distinct", async () => {
   const workbook = await readFile(
     "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
