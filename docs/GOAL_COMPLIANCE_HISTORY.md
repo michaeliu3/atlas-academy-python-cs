@@ -324,3 +324,13 @@ passed changed-file classification and the full draft content path on head
 apparatus, browser, and teaching-model jobs were intentionally skipped. This
 confirms the repaired source-input boundary; it is not a full non-draft gate,
 release, deployment, human review, or learner evidence.
+
+## Dated final-audit surface — 2026-08-05
+
+Commit [`1c9bd5f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/1c9bd5f904fe50f3230a5fcf7dfab3ff5b79f6b2)
+adds a current `docs/FINAL_AUDIT.md` that reconciles every generated matrix
+requirement and explicitly separates complete, deferred, and uncertain
+evidence. Its regression test passed locally, and Draft Course CI run
+[`30979206934`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30979206934)
+passed the draft content path. The audit deliberately keeps the goal open
+pending human, platform, deployment, and non-draft release evidence.

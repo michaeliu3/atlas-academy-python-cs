@@ -513,3 +513,14 @@ input, generated-artifact, source-link, and content-suite checks. Portal,
 apparatus, browser, and teaching-model jobs were skipped by draft cost control.
 This is repaired-source/content evidence, not a non-draft full gate, release,
 deployment, human review, or learner evidence.
+
+## Final-audit surface checkpoint (2026-08-05)
+
+Commit [`1c9bd5f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/1c9bd5f904fe50f3230a5fcf7dfab3ff5b79f6b2)
+adds `docs/FINAL_AUDIT.md` and the matrix-reconciliation regression
+`tests/release-final-audit.test.mjs`. The audit explicitly marks the goal
+**NOT COMPLETE** and lists current complete evidence, intentional deferrals,
+uncertainties, and the required closure sequence. Draft Course CI run
+[`30979206934`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30979206934)
+passed the draft content path; expensive non-draft checks were skipped by
+policy. The audit surface is now reviewable, but it is not a completion claim.
