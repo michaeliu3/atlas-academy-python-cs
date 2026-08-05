@@ -178,9 +178,9 @@
     {
       "id": "final-audit",
       "requirement": "The compact matrix and final audit agree with route, materials, chats, Notion, calibration, and full-gate evidence.",
-      "state": "open",
-      "evidence": "docs/GOAL_COMPLIANCE_MATRIX.md; docs/GOAL_COMPLIANCE_HISTORY.md; scripts/generate-goal-compliance.mjs",
-      "openItem": "Do not claim completion until every open row and the final non-draft gate are resolved or explicitly deferred."
+      "state": "partial",
+      "evidence": "docs/FINAL_AUDIT.md; docs/GOAL_COMPLIANCE_MATRIX.md; docs/GOAL_COMPLIANCE_HISTORY.md; scripts/generate-goal-compliance.mjs; tests/release-final-audit.test.mjs",
+      "openItem": "The current audit now reconciles every matrix requirement and explicitly lists complete, deferred, and uncertain evidence; keep the goal open until the remaining human, platform, deployment, and non-draft release gates are resolved or explicitly accepted as deferrals."
     }
   ]
 }
