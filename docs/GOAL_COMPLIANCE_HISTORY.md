@@ -593,6 +593,16 @@ The current audit/provenance head [`8ec003b`](https://github.com/michaeliu3/atla
 passed the same 96-test Draft content path in run
 [`30994493344`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994493344).
 
+## Latest current-truth full-gate checkpoint — 2026-08-05
+
+The additive review-ready ref [`2c8f219`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/2c8f21976e3c86ef93fc7b569bf6b01be295d403)
+passed normal non-draft Course CI run
+[`31001975188`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31001975188):
+portal quality, 422/422 Node apparatus tests, both Python teaching-model legs,
+and 63/63 browser routes succeeded. The result updates current-truth
+provenance only; it does not promote modules or establish deployment, human
+review, Notion/voice behavior, or learner mastery.
+
 ## Bounded local apparatus attempt — 2026-08-05
 
 The current clean head was given one bounded local
