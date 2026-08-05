@@ -15,6 +15,11 @@ actually published.
   for runtimes whose trust store cannot reach an otherwise live source. The
   current audit checked 1,068 URLs with no unreachable result; this is not a
   source-permission, institutional-alignment, or mastery claim.
+- Preserved all four required branch-protection contexts on non-draft
+  documentation-only pull requests with successful lightweight job paths,
+  while keeping the expensive portal, apparatus, Python, and browser checks
+  scoped to relevant changes and full main-branch verification. The workflow
+  and contract tests pass locally; hosted non-draft verification remains open.
 - Added an apparatus regression that proves both production Worker response
   paths retain the shared security-header policy, and recorded the focused
   3/3 result without claiming private-deployment verification or a

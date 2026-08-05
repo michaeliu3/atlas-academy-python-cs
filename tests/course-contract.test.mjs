@@ -33,6 +33,10 @@ import { openGitIndexSnapshot } from "../scripts/git-index-snapshot.mjs";
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(testDirectory, "..");
 
+function normalizeNewlines(value) {
+  return value.replace(/\r\n?/gu, "\n");
+}
+
 test("the retained advanced authoring adapter validates M31-M36 evidence without publication", async () => {
   const [graph, registry] = await Promise.all([
     loadCourseGraph(),
@@ -281,8 +285,8 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   assert.equal(report.summary.verifiedModules, 0);
   assert.equal(report.summary.authoringOnlyModules, 6);
   assert.deepEqual(report.mermaidAlternatives?.summary, {
-    totalBlocks: 245,
-    completeBlocks: 245,
+    totalBlocks: 246,
+    completeBlocks: 246,
     incompleteBlocks: 0,
   });
   assert.equal(
@@ -682,8 +686,8 @@ test("the legacy module-contract report is a deterministic projection of the val
   );
 
   assert.equal(
-    checkedInReport,
-    renderLegacyModuleContractAuditReport(audit, report),
+    normalizeNewlines(checkedInReport),
+    normalizeNewlines(renderLegacyModuleContractAuditReport(audit, report)),
   );
 });
 

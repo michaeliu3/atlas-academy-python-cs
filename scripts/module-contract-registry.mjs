@@ -1146,7 +1146,17 @@ const standardTeachingModelsJobKeys = new Set([
   "strategy",
   "steps",
 ]);
-const standardTeachingModelCommandStepKeys = new Set(["name", "run"]);
+const standardTeachingModelCommandStepKeys = new Set(["name", "run", "if"]);
+
+const scopedTeachingModelStepCondition =
+  "github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'";
+
+function isAllowedTeachingModelStepCondition(value) {
+  return value === undefined || (
+    typeof value === "string" &&
+    value.replace(/\s+/gu, " ").trim() === scopedTeachingModelStepCondition
+  );
+}
 
 function teachingModelsWorkflow(workflow) {
   try {
@@ -1169,7 +1179,13 @@ function isStandardTeachingModelsJob(document, job) {
   const conditionalScope = job.if === undefined || (
     typeof job.if === "string" &&
     job.if !== "false" &&
-    job.if.includes("needs.change-scope.outputs.apparatus")
+    (
+      job.if.includes("needs.change-scope.outputs.apparatus") ||
+      (
+        job.if.includes("github.event_name != 'pull_request'") &&
+        job.if.includes("github.event.pull_request.draft == false")
+      )
+    )
   );
   return (
     workflowRecord(document) &&
@@ -1201,6 +1217,7 @@ export function courseWorkflowRunsCommand(workflow, command) {
   return parsed.job.steps.some((step) => (
     hasOnlyAllowedKeys(step, standardTeachingModelCommandStepKeys) &&
     typeof step.name === "string" &&
+    isAllowedTeachingModelStepCondition(step.if) &&
     step.run === command
   ));
 }

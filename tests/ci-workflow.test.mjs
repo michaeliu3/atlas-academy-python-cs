@@ -62,8 +62,18 @@ test("Course CI keeps full gates out of draft PR updates while running focused c
   );
   assert.match(
     workflow,
-    /portal:\n\s*name: Portal quality gate\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*\(github\.event\.pull_request\.draft == false &&\n\s*needs\.change-scope\.outputs\.portal == 'true'\)/mu,
-    "docs-only non-draft updates skip the expensive portal gate while main pushes retain it",
+    /portal:\n\s*name: Portal quality gate\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
+    "the required portal context runs for every non-draft review and main push",
+  );
+  assert.match(
+    workflow,
+    /Satisfy required portal check for docs-only review[\s\S]*needs\.change-scope\.outputs\.portal != 'true'/u,
+    "docs-only non-draft updates use a lightweight successful portal context",
+  );
+  assert.match(
+    workflow,
+    /if: github\.event_name != 'pull_request' \|\| needs\.change-scope\.outputs\.portal == 'true'\n\s*uses: actions\/checkout/u,
+    "docs-only reviews skip the expensive portal steps",
   );
   assert.match(
     workflow,
@@ -72,13 +82,22 @@ test("Course CI keeps full gates out of draft PR updates while running focused c
   );
   assert.match(
     workflow,
-    /browser-accessibility:\n\s*name: Browser accessibility acceptance[\s\S]*?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*\(github\.event\.pull_request\.draft == false &&\n\s*needs\.change-scope\.outputs\.browser == 'true'\)/mu,
-    "docs-only non-draft updates skip browser acceptance while portal-affecting changes retain it",
+    /browser-accessibility:\n\s*name: Browser accessibility acceptance[\s\S]*?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
+    "the required browser context runs for every non-draft review and main push",
+  );
+  assert.match(
+    workflow,
+    /Satisfy required browser check for docs-only review[\s\S]*needs\.change-scope\.outputs\.browser != 'true'/u,
+    "docs-only non-draft updates use a lightweight successful browser context",
   );
 });
 
 test("Teaching-model CI proves the runtime exercise verifier before the ordinary suite", async () => {
-  const workflow = await readCourseWorkflow();
+  const actualWorkflow = await readCourseWorkflow();
+  const workflow = actualWorkflow.replaceAll(
+    "      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'\n        ",
+    "      - ",
+  );
   const verifierTests = 'python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"';
   const verifier = teachingModelRuntimeExerciseVerifierCommand;
   const suite = 'python -m unittest discover -s public/downloads -p "test_module*_reference.py"';
@@ -88,6 +107,10 @@ test("Teaching-model CI proves the runtime exercise verifier before the ordinary
   assert.ok(courseWorkflowRunsCommand(workflow, verifier));
   assert.ok(courseWorkflowRunsCommand(workflow, suite));
   assert.ok(courseWorkflowRunsCommand(workflow, privatePreviewSuite));
+  assert.ok(
+    courseWorkflowRunsCommand(actualWorkflow, verifier),
+    "the scoped non-draft condition remains an allowed teaching-model execution guard",
+  );
   assert.ok(workflow.indexOf(verifierTests) < workflow.indexOf(verifier));
   assert.ok(workflow.indexOf(verifier) < workflow.indexOf(suite));
   assert.equal(courseWorkflowRunsCommand(`# run: ${verifier}`, verifier), false);

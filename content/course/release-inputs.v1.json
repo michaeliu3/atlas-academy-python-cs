@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "57d36e5592136249c561fffedc925baf8c5ec03305687c10050c00c8f369341f"
+      "sha256": "57e0fd15e8eff2bfcd3e1efd66ee0de3914cc8d2d6e1469d796b120545d24618"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "a58dd9b965c63e8af3a1ad6facc2017e44273ef70078075607fad0717c782971"
+      "sha256": "e07e212f163267413c8711d84f871557127b51b45407740872354e0603c038b6"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -558,7 +558,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "78e85b021fa51307a1131f0317233cd12242b6f10d602181d72060564ccec7f8"
+      "sha256": "07869ebe3e9cae0bbc6c1a56bf234ec43a131fd65c07e09c98818b9c511adae3"
     },
     {
       "path": "content/course/release-input-policy.v1.json",

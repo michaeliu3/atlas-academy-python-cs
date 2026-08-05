@@ -61,10 +61,13 @@ cancelled after minutes of work. Draft updates now skip those full jobs.
    validates the shared registry and packet cohort once while retaining every
    module-specific evidence, scope, and clean-worktree check.
 7. The classifier now exposes portal/browser scopes. Non-draft PRs with only
-   documentation changes skip the expensive Portal and Browser jobs; content,
+   documentation changes still report every required branch-protection context
+   through a lightweight successful job path, but skip checkout, dependency
+   installation, builds, apparatus, Python suites, and Chromium. Content,
    application, test, dependency, workflow, and generated-input changes retain
-   the relevant checks. `main` pushes still run the full post-merge Portal and
-   Browser verification, and the required job names remain unchanged.
+   the relevant full checks. Main pushes still run the full post-merge Portal,
+   Browser, apparatus, and Python verification, and the required job names
+   remain unchanged.
 
 The cache changes validation setup cost only; they do not skip tests, weaken
 the provenance boundary, or change the draft/non-draft job selection.
