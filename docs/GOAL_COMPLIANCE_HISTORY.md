@@ -192,3 +192,11 @@ while preserving the push-summary discrepancy as unresolved evidence rather
 than claiming a security-clean state. Local `pnpm audit --prod --json` remains
 clean on the reviewed lockfile candidate; the full local audit remains
 non-zero for development tooling.
+
+## Dated draft-review PR and external Actions blocker — 2026-08-05
+
+The additive branch is available for review as draft [PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22).
+Its Draft Course CI run [30971088254](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971088254)
+was rejected before runner allocation because GitHub reported failed recent
+payments or an exceeded spending limit. Downstream jobs were skipped. This is
+external billing state, not a passing gate, a code failure, or learner evidence.

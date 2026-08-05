@@ -72,6 +72,13 @@ events. The changed conclusion counts above replace the earlier snapshot
 counts; they do not change the root-cause finding that repeated synchronize
 events were the volume driver.
 
+Draft PR #22 then produced Course CI run
+[`30971088254`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971088254),
+which GitHub rejected before runner allocation because the repository account
+reported failed recent payments or an exceeded spending limit. Its downstream
+jobs were skipped. This is an external billing-state blocker, not evidence that
+the workflow's draft gating failed and not billed test execution.
+
 Local verification on 2026-08-04 measured the legacy packet cohort at roughly
 1.6 seconds (previously about 9.5 seconds), a representative full course
 contract test at roughly 18 seconds (previously about 54 seconds), and the
