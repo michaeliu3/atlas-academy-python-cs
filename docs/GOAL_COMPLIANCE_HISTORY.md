@@ -171,3 +171,12 @@ Chromium/axe results as the **latest recorded full-gate** evidence rather than
 calling them current-head checks. The local branch has later additive commits
 and has not received a hosted rerun; this wording prevents historical CI from
 being mistaken for verification of the current branch.
+
+## Dated designated-chat reachability readback — 2026-08-04
+
+A direct Codex-app readback found a recent realtime response in both existing
+designated chats: the Teaching Assistant answered an audio check and the Study
+Partner returned a short greeting exchange. This is bounded channel
+reachability evidence only. It is not a substantive module lesson, oral
+defense, whiteboard-rendering observation, learner evidence, or Notion write;
+the repository retains no raw transcript or audio.

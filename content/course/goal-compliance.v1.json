@@ -138,7 +138,7 @@
       "requirement": "TA and Study Partner startup packages are distinct, reusable, and support text/voice whiteboard learning.",
       "state": "partial",
       "evidence": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md; docs/LIVE_CODEX_ROLE_DELIVERY_2026-08-04.md; lib/learning-partner-prompts.ts; app/learning-partners/page.tsx",
-      "openItem": "Role contracts were delivered and acknowledged; observe one real live session in each designated chat for voice quality, equation/code rendering, and the module handoff."
+      "openItem": "Role contracts were delivered and acknowledged; a direct readback confirms both realtime channels respond, but the observed turns were non-substantive. Conduct a real module session in each chat for voice quality, equation/code rendering, oral-defense flow, and the module handoff."
     },
     {
       "id": "notion-privacy",

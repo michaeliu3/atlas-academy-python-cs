@@ -24,6 +24,16 @@ the delivery boundary for the two existing designated Atlas Academy chats.
   message authorizes raw transcripts, audio, credentials, sensitive data, or
   off-record material to be retained or exported.
 
+## Latest designated-thread readback
+
+A direct Codex-app readback found a recent realtime handoff in each designated
+chat. The Teaching Assistant channel answered an audio check, and the Study
+Partner channel returned a short greeting exchange. These observations verify
+that both designated realtime channels are reachable; they are **not** a
+substantive module session, oral defense, whiteboard-rendering check, or
+learner-evidence record. No raw transcript or audio was copied into this
+repository.
+
 ## Notion connection check
 
 The connected workspace was read as **Michael Liu's Notion**. The existing
