@@ -114,6 +114,15 @@ function deliveryPresentation(topic: ScopeMatrixTopic) {
     const count = availabilityCounts.get(availability) ?? 0;
     return count === 0 ? [] : [{ availability, count }];
   });
+  const representedAnchorCount = deliveryStates.reduce(
+    (total, { count }) => total + count,
+    0,
+  );
+  if (representedAnchorCount !== anchorModules.length) {
+    throw new Error(
+      `Scope Matrix topic ${topic.id} has ${anchorModules.length} mapped anchors but ${representedAnchorCount} availability representations.`,
+    );
+  }
   const privateGuidedReadyCount = anchorModules.filter(
     ({ state }) => state.privateGuidedStudy?.status === "ready",
   ).length;
