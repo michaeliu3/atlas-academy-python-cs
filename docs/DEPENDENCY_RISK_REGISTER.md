@@ -59,6 +59,17 @@ that every development path is reachable from the shipped portal.
 | [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | medium | `postcss` | runtime |
 | [#13](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/13) — `GHSA-67mh-4wv8-2f99` | medium | `esbuild` | development |
 
+## Live API refresh — 2026-08-05
+
+An authenticated readback of the protected default branch at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` returned the same **11 open
+alerts**: five high and six medium. The package, advisory, and scope inventory
+matches the 2026-08-04 table above; no alert is called resolved by this
+unchanged readback. The separate GitHub push summary still reports 12
+vulnerabilities (six high, six moderate), so that presentation discrepancy
+remains recorded rather than normalized. Candidate lockfile fixes remain
+unmerged and must be rechecked after a normal merge to `main`.
+
 ## Patched runtime paths; Dependabot reconciliation outstanding
 
 The current branch updates `next` to 16.2.12 and uses workspace-scoped

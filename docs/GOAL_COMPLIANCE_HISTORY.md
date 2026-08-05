@@ -395,3 +395,13 @@ first `/route`, the on-demand Levels 1–9 source crosswalk, and availability /
 route-linkability parity against the generated manifest. This is current
 route-projection evidence; it does not replace human visual, assistive-
 technology, deployment, learner, or non-draft full-gate evidence.
+
+## Dated Dependabot boundary refresh — 2026-08-05
+
+An authenticated GitHub API readback against protected `main` at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` still returned 11 open alerts (five
+high, six medium), with the same package/advisory inventory recorded in the
+dependency-risk register. The separate push summary still reports 12
+vulnerabilities, so the discrepancy remains explicit. This refresh confirms
+the current count only; candidate fixes are not resolved until normally merged
+and recalculated by GitHub.

@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Refreshed the authenticated Dependabot boundary against protected `main` on
+  2026-08-05: 11 alerts remain open (5 high, 6 medium), while the separate
+  GitHub push summary still reports 12. Candidate lockfile remediations remain
+  explicitly unresolved until a normal merge and GitHub recalculation.
 - Recorded a bounded current-head rendered-route audit: the prerequisite-first
   route, Levels 1–9 source crosswalk, and graph/manifest availability
   linkability checks pass 3/3. This strengthens route truth without claiming
