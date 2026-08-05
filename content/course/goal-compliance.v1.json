@@ -89,7 +89,7 @@
       "requirement": "M25/M26 remain preview-only and unlock privately only on real upstream evidence.",
       "state": "partial",
       "evidence": "content/course/course-graph.v2.json; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md; tests/m25-m26-synthesis-receipts.test.mjs",
-      "openItem": "Preserve the evidence gate and finish the M25/M26 re-entry and licensing review."
+      "openItem": "Structural re-entry and licensing/versioning checks now pass; preserve the evidence gate and obtain qualified human source/accessibility review before promotion."
     },
     {
       "id": "levels-1-9",
