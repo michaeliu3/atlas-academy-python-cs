@@ -174,7 +174,7 @@
     },
     {
       "path": "content/course/contracts/companions/m10.v1.json",
-      "sha256": "7595724facaff1bddf0486ef5e05cb2e0ac8844dbe02cf5bb5fa75019af414f5"
+      "sha256": "a40093b1d4436dd901e67da33ef251bb912e7eea1e659367db33b008e75fb46b"
     },
     {
       "path": "content/course/contracts/companions/m11.v1.json",
@@ -310,7 +310,7 @@
     },
     {
       "path": "content/course/contracts/evidence/m10.v1.json",
-      "sha256": "ea1215d795ecc5a7bdd3f7a7cc4bd8a8d6c382eacf1b9a5df55854dd79cbd4ca"
+      "sha256": "5a2e46ed5340fc70918fdffbe0966824dcc04f34e90bcef52e1c0ef06e5b418b"
     },
     {
       "path": "content/course/contracts/evidence/m11.v1.json",
@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "19b394ce9d63bf8e68791f231cc7812db91266a93bc50ff18072dda1335080dc"
+      "sha256": "7ee62e0cd8f141d4187803e9ef38f9663cc56b8d1a7d90d66f6d48e8a26246aa"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "de5a2bec29f5f0f45f9079028ec14852b1bfed80ae85e42af6c295db79678085"
+      "sha256": "009635c167a223150eae6fcbc79dc02320700a8149f53d589c81f2fdbfb9034d"
     },
     {
       "path": "content/course/contracts/m26-preview-contract-packet.v1.json",
@@ -606,7 +606,7 @@
     },
     {
       "path": "content/modules/10_graph_algorithms_network_models.md",
-      "sha256": "5eb1fe817ffa599f96e311f94bf72dafb04f8eef288315b3424a6b406f511b69"
+      "sha256": "6ad6e35cee740d36668be0dd72ef65d2bc0e23cb397229b21b2c5987de62b1ba"
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
@@ -690,7 +690,7 @@
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
-      "sha256": "5f8a02ee7ec6bc239171104d80626796ae5a9aecb1ffb335b7da457d5e079684"
+      "sha256": "765d13f657ea6b83c652bb6d50d444ff6d7011d0e6c279f341d71118b16504f4"
     },
     {
       "path": "content/source-maps/arc_iii_source_map.md",
@@ -698,7 +698,7 @@
     },
     {
       "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md",
-      "sha256": "832f5a54068993c8d2b56887bf28c99522a61f825cdffcea2b60b6fcb161d416"
+      "sha256": "f87843dfebf542b369453fcef86b4add20c1c85d9904d6b4ac920b5b75524942"
     },
     {
       "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",

@@ -24,14 +24,15 @@
     {
       "id": "m10-six-connected-sessions",
       "criterionId": "six-connected-sessions",
-      "claim": "M10 exposes six ordered sessions that move from graph modeling and representations through traversal, weighted-path selection, Dijkstra, and spanning-network reasoning into an M11 handoff.",
+      "claim": "M10 exposes six ordered sessions that move from graph modeling and representations through traversal, weighted-path selection, Dijkstra, and spanning-network/capacity-flow reasoning into an M11 handoff.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-1--turn-graph-questions-into-representations"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-2--fifo-layers-create-shortest-unweighted-evidence"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-3--dfs-finishing-state-exposes-cycles-and-order"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-4--relaxation-plus-graph-structure-selects-a-path-method"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-5--dijkstra-coordinates-heap-currency-and-finalization"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-6--connectivity-spanning-forests-and-atlas-defense"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-6--connectivity-spanning-forests-and-atlas-defense"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "network-flow-bridge--conservation-residual-state-and-cut-evidence"}
       ],
       "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
     },
@@ -56,6 +57,8 @@
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "44-representation-invariant"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "45-why-the-path-is-shortest"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "46-intentionally-broken-bfs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "network-flow-bridge--conservation-residual-state-and-cut-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "max-flowmin-cut-proof-idea"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "numerical-experiment--representation-aware-cost-observation"}
       ],
       "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, proof ideas, counterexamples, measurements, or source claims."]
@@ -66,6 +69,7 @@
       "claim": "M10 contains a distinct code-reading and architecture-recovery studio, mechanism-defect diagnosis, and bounded graph-planner design/delegation work.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "22-code-reading-and-architecture-recovery-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "code-reading-studio-the-state-transition"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "mechanism-defects"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "23-design-and-delegate-a-bounded-atlas-change"}
       ],
@@ -74,17 +78,18 @@
     {
       "id": "m10-prediction-before-reveal",
       "criterionId": "prediction-before-reveal",
-      "claim": "M10 asks the learner to predict representation loss and traversal or weighted-path traces before the corresponding state explanation is revealed.",
+      "claim": "M10 asks the learner to predict representation loss, traversal or weighted-path traces, and a residual augmenting transition before the corresponding state explanation is revealed.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "prediction-representation-loss"},
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "42-predict-before-running"}
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "42-predict-before-running"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "residual-networks-make-earlier-choices-reversible"}
       ],
       "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
     },
     {
       "id": "m10-transfer-task",
       "criterionId": "transfer-task",
-      "claim": "M10 asks the learner to transfer graph roles and evidence requirements to a new domain rather than merely recognize a named algorithm.",
+      "claim": "M10 asks the learner to transfer graph and flow roles and evidence requirements to a new domain rather than merely recognize a named algorithm.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "level-8--transfer"}
       ],
@@ -120,7 +125,7 @@
       "criterionId": "confidence-diagnostic-misconceptions",
       "claim": "M10 exposes confidence-aware multiple-choice diagnostics, misconception routing, and a constructive response to high-confidence errors.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "26-understanding-check--eight-confidence-aware-mcqs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "26-understanding-check--nine-confidence-aware-mcqs"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "diagnostic-interpretation"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "likely-misconceptions"}
       ],

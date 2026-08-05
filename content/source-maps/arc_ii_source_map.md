@@ -151,6 +151,7 @@ Useful whole-course entry points:
 | [MIT 6.006 Lecture 11: Weighted Shortest Paths](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-11-weighted-shortest-paths/) and [Lecture 12: Bellman–Ford](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-12-bellman-ford/) | Session 4 sources for relaxation, graph restrictions, negative-cycle evidence, and qualified cost claims. |
 | [MIT 6.006 Lecture 13: Dijkstra](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/) | Session 5 source for nonnegative-edge finalization and priority-frontier reasoning. |
 | [MIT 6.046J Lecture 12: Minimum Spanning Tree](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) | Session 6 source for cut/exchange reasoning, Kruskal/Prim, and spanning-forest invariants. |
+| [MIT 6.046J Lecture 13: Incremental Improvement — Max Flow, Min Cut](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-13-incremental-improvement-max-flow-min-cut/) | Session 6 source for capacity/conservation definitions, residual augmenting paths, flow residual/cut reasoning, the max-flow/min-cut proof idea, and matching transfer. Link and paraphrase only; accessed 2026-08-04. |
 | [MIT 6.042J Mathematics for Computer Science](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) | Graph definitions, relations, induction, and proof techniques already introduced in Module 4. |
 | [Python 3.14 `collections.deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) | Appropriate FIFO frontier mechanism for BFS. |
 | [Python 3.14 `heapq`](https://docs.python.org/3.14/library/heapq.html) | Priority frontier mechanism for Dijkstra-style algorithms. |
@@ -161,6 +162,7 @@ Useful whole-course entry points:
 - Derive BFS and DFS by changing frontier discipline.
 - Prove traversal properties from explicit frontier invariants.
 - Make weight assumptions visible before choosing a shortest-path algorithm.
+- Make capacity, conservation, residual reversibility, and cut certificates visible before claiming throughput.
 - Use Atlas's prerequisite relation, already modeled in Module 4, so the mathematical graph becomes executable without changing its meaning.
 
 **Claims we will not make**
@@ -169,6 +171,7 @@ Useful whole-course entry points:
 - Dijkstra is not valid for arbitrary negative edge weights.
 - BFS does not find minimum-weight paths merely because it finds minimum-edge paths.
 - A topological order does not exist for a graph with a directed cycle.
+- A locally feasible flow is not automatically maximum; the residual stop rule or a cut certificate must be visible.
 
 ### Module 11 — Algorithm-design paradigms
 
@@ -216,7 +219,7 @@ The remaining sources are instructor references for triangulation and remediatio
 | Iterator state and generator tracing | CS 61A Summer 2026 Discussion 5 + Python expression reference | Module 7 middle |
 | Hash reasoning | MIT 6.006 Lecture 4 + Python data model | Module 8 core |
 | Ordered structure tradeoffs | MIT 6.006 Lectures 6–8 + `heapq` | Module 9 core |
-| Graph traversal invariants | MIT 6.006 Lectures 9–13 | Module 10 core |
+| Graph traversal and flow invariants | MIT 6.006 Lectures 9–13; MIT 6.046J Lecture 13 | Module 10 core |
 | Defining DP subproblems | MIT 6.006 Lectures 15–18 | Module 11 core |
 
 ## Bounded GitHub reading ladder

@@ -355,7 +355,7 @@
         "transfer-task": {"status": "pointer-present", "anchors": ["level-8--transfer"]},
         "source-ledger": {"status": "pointer-present", "anchors": ["sources-and-synthesis-notes", "source-wording-and-claim-boundary", "session-to-source-and-evidence-route"], "sourceReferences": [{"path": "content/source-maps/arc_ii_source_map.md", "headingAnchor": "module-10--graph-algorithms-and-network-models"}, {"path": "content/source-maps/arc_ii_source_map.md", "headingAnchor": "source-to-session-routing"}]},
         "accessible-visual-text-alternative": {"status": "pointer-present", "anchors": ["position-in-the-knowledge-system", "text-alternative--graph-search-state-machine-bridge"]},
-        "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["26-understanding-check--eight-confidence-aware-mcqs", "diagnostic-interpretation", "likely-misconceptions"]},
+        "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["26-understanding-check--nine-confidence-aware-mcqs", "diagnostic-interpretation", "likely-misconceptions"]},
         "retrieval-and-spaced-review": {"status": "pointer-present", "anchors": ["spaced-retrieval"]},
         "project-and-evidence-rubric": {"status": "pointer-present", "anchors": ["28-atlas-milestone-10--evidence-packet", "evidence-rubric"]},
         "supportive-oral-defense": {"status": "pointer-present", "anchors": ["teaching-assistant--supportive-oral-defense", "supportive-oral-defense-protocol", "oral-hint-ladder--graph-semantics-to-witness", "changed-premise-counterexample", "transfer--test-a-new-graph-question", "reflection--name-the-next-evidence", "learner-controlled-evidence-summary"]},

@@ -99,10 +99,18 @@ test("Arc II keeps compact session-level source and evidence boundaries", async 
   assert.match(m9, /CPython `v3\.14\.6` `heapq\.py`/u);
   assert.match(m10, /MIT 6\.006 Lecture 10/u);
   assert.match(m10, /MIT 6\.046J MST notes/u);
+  assert.match(m10, /Network flow bridge/u);
+  assert.match(m10, /feasible flow/u);
+  assert.match(m10, /reverse residual capacity/u);
+  assert.match(m10, /max-flow\/min-cut theorem/u);
+  assert.match(m10, /Question 9 — Residual capacity and cut evidence/u);
+  assert.match(m10, /MIT 6\.046J Lecture 13: Incremental Improvement/u);
 
   assert.match(sourceMap, /\*\*Access and reuse record\.\*\*.*2026-08-01/us);
   assert.match(sourceMap, /blob\/v3\.14\.6\/Objects\/listobject\.c/u);
   assert.match(sourceMap, /blob\/v3\.14\.6\/Objects\/dictobject\.c/u);
   assert.match(sourceMap, /blob\/v3\.14\.6\/Lib\/heapq\.py/u);
   assert.match(sourceMap, /Session 5 source for nonnegative-edge finalization/u);
+  assert.match(sourceMap, /Lecture 13: Incremental Improvement — Max Flow, Min Cut/u);
+  assert.match(sourceMap, /flow residual\/cut reasoning/u);
 });

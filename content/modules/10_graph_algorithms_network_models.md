@@ -23,6 +23,7 @@ The arrows are useful only if Atlas can answer questions about them:
 - What route uses the fewest prerequisite steps?
 - What route has the least estimated learning cost?
 - Which links connect a curriculum network at minimum total cost?
+- How much compatible material can move from a source to a sink when each link has a capacity?
 
 This module asks:
 
@@ -68,6 +69,8 @@ The structures have distinct jobs:
 - a distance map records the best claim known so far;
 - a heap makes the smallest tentative claim available;
 - a disjoint-set structure records which undirected components have already been joined.
+- a residual network records unused forward capacity and reversible flow so a
+  capacity algorithm can change an earlier routing decision.
 
 Changing one role can change the theorem. Replacing a FIFO queue with a heap does not merely “optimize BFS”; it creates a different algorithm with different assumptions and invariants.
 
@@ -163,7 +166,12 @@ By the end, Michael can:
 19. trace a disjoint set through `find` and `union`;
 20. analyze time and auxiliary space in terms of representation and operations;
 21. direct an agent through a bounded Atlas pathfinding change;
-22. reject a plausible patch using a minimal counterexample and evidence packet.
+22. reject a plausible patch using a minimal counterexample and evidence packet;
+23. define a feasible source-to-sink flow, its value, and conservation constraints;
+24. trace residual forward and reverse capacity without confusing it with an original edge;
+25. explain the max-flow/min-cut equality and its proof idea from conservation;
+26. distinguish throughput, shortest-path, and spanning-network objectives;
+27. transfer the flow model to matching or another capacity-constrained domain with explicit boundaries.
 
 ---
 
@@ -179,6 +187,7 @@ A graph is not an algorithm. It is a model that supports several different quest
 | Is the prerequisite relation valid? | cycle witness or topological order | directed graph | DFS state or indegree queue |
 | What is the least-cost route? | total weight and path witness | weight restrictions | DAG, Bellman–Ford, or Dijkstra |
 | What edges connect all topics cheaply? | minimum spanning tree/forest | weighted undirected graph | Kruskal or Prim |
+| What is the greatest source-to-sink throughput? | feasible flow plus value and bottleneck cut | directed capacities, conservation at intermediate vertices | residual augmenting paths |
 
 Two questions may consume the same adjacency representation and still require different frontier rules and proofs.
 
@@ -1523,6 +1532,163 @@ With lazy adjacency-edge pushes, time is `O(|E| log(|E|+1))` and the heap can co
 
 Do not use disjoint-set parent pointers as an Atlas prerequisite explanation. They witness the internal component partition after unions, not a path in the original graph. The parent map from BFS/DFS is the graph-edge witness.
 
+## Network flow bridge — conservation, residual state, and cut evidence
+
+Reachability, shortest paths, and spanning trees all ask which edges can be
+used or selected. A **flow network** asks a different question: how much
+material can move from a source `s` to a sink `t` when each directed edge
+`e` has a capacity `c(e)`?
+
+### First principles: a feasible flow
+
+For every directed edge, a flow assignment `f` must satisfy:
+
+1. **capacity:** `0 ≤ f(e) ≤ c(e)`;
+2. **conservation:** for every intermediate vertex `v ∉ {s, t}`, incoming flow
+   equals outgoing flow;
+3. **value:** `|f|` is net flow leaving `s` (equivalently, entering `t`).
+
+The capacity is not a path weight. It is a shared resource: two routes that
+use the same edge compete for its capacity. A shortest path can therefore be
+irrelevant to the maximum-throughput question.
+
+Consider this small network:
+
+```text
+          3             2
+      s ─────▶ a ─────────▶ t
+       ╲       │            ▲
+        ╲2     │1           │3
+         ▼     ▼            │
+          b ────────────────╯
+```
+
+Text alternative: the directed edges are `s→a` capacity 3, `s→b` capacity 2,
+`a→b` capacity 1, `a→t` capacity 2, and `b→t` capacity 3. The source and sink
+boundary capacities together permit value at most 5.
+
+**Predict before reveal.** Can a feasible flow of value 5 exist? Which edges
+must be saturated? What cut separates `s` from `t` with capacity 5? Write the
+edge flows before reading the route below.
+
+One feasible decomposition is:
+
+```text
+2 units on s→a→t
+1 unit on s→a→b→t
+2 units on s→b→t
+```
+
+It gives `f(s,a)=3`, `f(s,b)=2`, `f(a,b)=1`, `f(a,t)=2`, and `f(b,t)=3`.
+The cut `{s}` has capacity `3+2=5`, so no flow can exceed 5. This is a
+worked instance, not a proof that every maximum-flow implementation is correct.
+
+### Residual networks make earlier choices reversible
+
+Given a current feasible flow, the residual network contains:
+
+- a forward edge with residual capacity `c(u,v) - f(u,v)` when unused capacity
+  remains;
+- a reverse edge with residual capacity `f(u,v)` when earlier flow can be
+  cancelled or rerouted.
+
+An **augmenting path** is an `s`–`t` path in the residual network. Increase the
+flow by the smallest residual capacity on that path, decrease any original
+edge traversed backwards, and repeat. The reverse edge is not an original
+domain connection; it is algorithmic state that records permission to undo a
+previous choice.
+
+```mermaid
+%% atlas-diagram-id: m10-residual-flow-state
+%% atlas-diagram-title: Residual capacity lets a flow algorithm augment or reroute without violating conservation
+%% atlas-diagram-alt: A current flow on a directed capacity edge leaves forward residual capacity equal to capacity minus flow and creates reverse residual capacity equal to flow. An augmenting source-to-sink path consumes forward residual capacity and may use reverse residual capacity to reroute earlier flow before the verifier checks conservation and capacity.
+flowchart LR
+    CAP["Original edge<br/>capacity c"] --> STATE["Current flow f<br/>0 ≤ f ≤ c"]
+    STATE --> FORWARD["Forward residual<br/>c − f"]
+    STATE --> REVERSE["Reverse residual<br/>f"]
+    FORWARD --> AUG["Augmenting s→t path"]
+    REVERSE --> AUG
+    AUG --> CHECK["Recheck capacity,<br/>conservation, and value"]
+```
+
+### Code-reading studio: the state transition
+
+Read this mechanism as a state transition, not as a complete production
+solver. `residual` is the authoritative algorithmic state; the original
+capacity graph is kept separately for final verification.
+
+```python
+def augment(residual, path):
+    """Apply one residual s-to-t path and return its bottleneck."""
+    delta = min(residual[u][v] for u, v in zip(path, path[1:]))
+    for u, v in zip(path, path[1:]):
+        residual[u][v] -= delta
+        residual[v][u] = residual[v].get(u, 0) + delta
+    return delta
+```
+
+**Read, predict, then inspect:** if a patch subtracts forward residual
+capacity but never adds the reverse entry, a later augmenting path cannot undo
+an earlier route. The code may still succeed on the first example while
+silently returning a suboptimal value on a graph where rerouting is necessary.
+The smallest review artifact is a residual trace showing the missing reverse
+capacity, followed by a conservation and cut check.
+
+### Max-flow/min-cut proof idea
+
+An `s`–`t` cut partitions vertices into `S` and `T` with `s ∈ S` and `t ∈ T`.
+Its capacity is the sum of capacities of original edges from `S` to `T`.
+
+For any feasible flow and any cut:
+
+```text
+flow value = net flow crossing S→T ≤ capacity(S,T).
+```
+
+The equality follows by summing conservation over all vertices in `S` except
+the source: internal edge flows cancel, leaving only net flow across the cut.
+Therefore every cut is an upper bound on every feasible flow.
+
+If no residual `s`–`t` path remains, let `S` be the vertices reachable from `s`
+in the residual network and let `T = V − S`. Every original edge `S→T` is
+saturated, or it would have a forward residual edge; every original edge `T→S`
+has zero flow, or its reverse residual edge would make the tail reachable.
+Thus the current flow value equals the capacity of this cut. Combining the
+upper bound with this reachable-set construction gives the
+**max-flow/min-cut theorem**: a feasible flow is maximum exactly when its
+value equals the capacity of some cut, equivalently when no residual `s`–`t`
+path exists.
+
+For integer capacities, augmenting by an integral bottleneck terminates after
+finitely many value increases. The running time still depends on the path
+selection rule and representation; do not silently turn this proof idea into
+an arbitrary `O(E log V)` claim. Edmonds–Karp is a separate bounded algorithmic
+choice with its own proof and cost.
+
+### Transfer and boundaries
+
+Ask whether the same model fits:
+
+- bipartite matching (vertices on each side, unit-capacity choices, and a
+  source/sink construction);
+- assigning limited reviewers to documents;
+- routing bounded messages through a network.
+
+Name what transfers—capacity, conservation, residual reversibility, cut
+certificate—and what must be redefined: vertex meaning, parallel-edge policy,
+integrality, fairness, and whether a cut has a domain interpretation. Flow is
+not a generic replacement for BFS, Dijkstra, or MST, and this bridge does not
+claim a production routing service or an optimization library.
+
+### Bounded numerical experiment
+
+Enumerate all integer edge-flow assignments for the five-edge example, filter
+capacity and conservation constraints, and compare the largest value with the
+smallest enumerated cut capacity. Record the graph, capacity units, search
+bound, verifier, and Python version. The experiment can expose a bad residual
+update or a mistaken cut calculation; it does not replace the theorem or prove
+termination for real-valued capacities.
+
 ## 18. One boundary-case matrix for the whole module
 
 | Case | Representation decision | Traversal/ordering behavior | Shortest-path behavior | MST behavior | Required evidence |
@@ -1534,6 +1700,7 @@ Do not use disjoint-set parent pointers as an Atlas prerequisite explanation. Th
 | negative edge | weighted record | irrelevant to reachability | DAG/Bellman–Ford may allow; Dijkstra rejects | allowed | precondition test |
 | negative cycle | weighted directed cycle | still reachable/cyclic | no finite minimum for affected targets | not an MST concept | reachable cycle witness |
 | stale heap entry | physical heap record retained | not a BFS/DFS issue | Dijkstra skips if key is not current | Prim skips if endpoint already visited | trace plus invariant |
+| capacity edge | directed capacity record | residual state may add a reverse algorithmic edge | shortest-path weight is a different contract | not an MST objective | capacity, conservation, flow value, and cut certificate |
 | mutation during search | snapshot/version policy | may mix graph states | witness may not match distance | cut may change mid-run | immutable snapshot/version |
 
 This matrix is the adversarial regression plan, not an appendix. Every agent brief should select the rows relevant to its contract.
@@ -1949,7 +2116,7 @@ The same line can be correct or incorrect depending on its state-machine positio
 Each session begins with retrieval, alternates explanation with learner action, and ends by extending one Atlas planner. The sessions form one argument:
 
 ```text
-representation → frontier → finishing → relaxation → greedy order → network design
+representation → frontier → finishing → relaxation → greedy order → connectivity, flow, and network design
 ```
 
 ## Session 1 — Turn graph questions into representations
@@ -2023,12 +2190,15 @@ qualified complexity.
 **Launch:** contrast a shortest-path tree with an MST on the `2/2/1` triangle.  
 **Derive:** spanning tree/forest, cut property, Kruskal component test, disjoint-set invariants, and Prim crossing-edge frontier.  
 **Learner action:** trace parallel edges, a negative self-loop, and an isolated vertex through both algorithms.  
+**Flow extension:** model one source/sink capacity network, predict an augmenting path, update forward and reverse residual capacity, and certify the result with a cut.  
 **Architecture studio:** walk one Atlas request through immutable snapshot, algorithm selection, stale-entry handling, parent-edge evidence, independent verification, and UI response.  
 **Delegate and review:** issue the bounded `least_effort_path` brief, challenge the patch, and request one focused revision.  
 ### Output: planner-role oral-defense map
 
-Explain why queue, stack, heap, maps, and disjoint set have noninterchangeable
-roles in the same planner.
+Explain why queue, stack, heap, maps, disjoint set, and residual-network state
+have noninterchangeable roles in graph reasoning. Include one flow value and a
+matching cut certificate, while keeping throughput separate from path and
+spanning objectives.
 
 ## 25. Eight-level problem ladder
 
@@ -2038,6 +2208,7 @@ For twelve Atlas requests, label:
 
 - graph question;
 - directed/undirected and weighted/unweighted model;
+- capacity/source/sink model when the question is throughput;
 - required output evidence;
 - representation-sensitive boundary;
 - likely frontier or edge schedule.
@@ -2052,6 +2223,8 @@ On one graph with a self-loop, diamond, duplicate adjacency, and disconnected ve
 - trace DFS color/active/finishing state;
 - identify the first transition where their orders diverge;
 - independently check the returned path and topological/cycle evidence.
+- trace one residual augmenting path and identify which reverse edge is
+  algorithmic state rather than an original domain edge.
 
 ### Level 3 — Map
 
@@ -2062,6 +2235,7 @@ Given a repository slice, draw:
 - adjacency adapter;
 - algorithm strategy;
 - parent/distance evidence;
+- residual flow state when the graph question is throughput;
 - verifier;
 - result formatter;
 - scheduler dependency.
@@ -2080,14 +2254,15 @@ Update path evidence so it is unambiguous. State which existing mapping represen
 
 ### Level 5 — Debug and defend
 
-Diagnose six generated defects:
+Diagnose seven generated defects:
 
 1. BFS marks on dequeue;
 2. cycle detection uses one `seen` set;
 3. Dijkstra finalizes on push;
 4. negative edges are validated only after an early return;
 5. Bellman–Ford reports a disconnected negative cycle as source-reachable;
-6. a multigraph path returns vertices but no edge IDs.
+6. a multigraph path returns vertices but no edge IDs;
+7. a flow augmenter forgets to add reverse residual capacity.
 
 For each: minimal counterexample, first violated invariant, smallest repair, regression test, and proof/cost consequence.
 
@@ -2132,9 +2307,15 @@ Choose two:
 - electrical/network cabling;
 - game navigation.
 
+Also choose one capacity-constrained domain such as bipartite matching,
+reviewer assignment, or bounded message routing. Map source, sink, capacities,
+conservation, residual reversal, cut certificate, and the domain boundary; do
+not force a flow interpretation onto an objective that is really reachability,
+shortest path, or spanning connectivity.
+
 For each, map vertices, edges, direction, weights, frontier, invariant, failure case, witness, and representation. Then reconnect it to Atlas by naming what transfers unchanged and what domain meaning must be redefined.
 
-## 26. Understanding check — eight confidence-aware MCQs
+## 26. Understanding check — nine confidence-aware MCQs
 
 For every question:
 
@@ -2343,6 +2524,36 @@ Dijkstra finalizes on removal of the current minimum, not on insertion.
 
 </details>
 
+### Question 9 — Residual capacity and cut evidence
+
+An augmenting-path implementation updates `residual[u][v]` but never creates
+or increases the reverse residual entry. Which claim is most accurate?
+
+A. The implementation is correct because flow may only move along original edges.  
+B. It can fail to reroute earlier flow and therefore miss a maximum flow even when each local augmentation preserves capacity.  
+C. It has changed the problem into an MST, so only the cost bound is wrong.  
+D. The reverse entry is a display-only convenience and cannot affect the flow value.
+
+<details>
+<summary>Reveal answer, rationales, and routing</summary>
+
+**Answer: B.**
+
+Reverse residual capacity is the algorithm's permission to cancel or reroute
+earlier flow. Without it, a locally valid path choice can block the globally
+best routing.
+
+- **A** confuses original domain edges with algorithmic residual state.
+- **C** changes neither the objective nor the missing state transition.
+- **D** ignores the residual-network invariant and the max-flow/min-cut proof.
+
+**Misconception signal:** A or D treats the first path decomposition as fixed.  
+**Route:** draw the current flow, add both residual directions, then use the
+reachable residual set to identify a cut certificate. Keep integrality and the
+path-selection rule explicit.
+
+</details>
+
 ### Diagnostic interpretation
 
 - Miss Q1: revisit model-versus-representation and create a parallel-edge loss counterexample.
@@ -2351,6 +2562,8 @@ Dijkstra finalizes on removal of the current minimum, not on insertion.
 - Miss Q4–Q5: use the algorithm-selection diagram and say each precondition aloud.
 - Miss Q6 or Q8: return to Module 9's physical/logical heap distinction and Dijkstra finalization.
 - Miss Q7: write both objective functions before drawing either tree.
+- Miss Q9: trace one augmentation with forward and reverse residual capacity,
+  then verify conservation and compare the flow value with a cut upper bound.
 - **High confidence + wrong:** record the hidden assumption that made the distractor attractive and construct its smallest counterexample.
 - **Low confidence + right:** explain the invariant orally and solve one transfer case before marking retrieval secure.
 
@@ -2379,6 +2592,10 @@ Dijkstra finalizes on removal of the current minimum, not on insertion.
 - the cheapest edge in the whole graph is always the next safe MST edge without a cut/component condition;
 - a disjoint-set parent chain is a path in the original graph;
 - a disconnected graph has an MST over all vertices;
+- a capacity is interchangeable with a shortest-path weight;
+- a flow path can be fixed permanently after its first augmentation;
+- a reverse residual edge is an original domain edge rather than reversible algorithmic state;
+- a locally feasible flow is automatically maximum without a cut certificate;
 - tests on one graph prove an algorithm;
 - loading neighbors repeatedly from a mutable store still represents one stable `G`.
 
@@ -2396,6 +2613,10 @@ Dijkstra finalizes on removal of the current minimum, not on insertion.
 10. “Which cut makes that MST edge safe?”
 11. “Did the algorithm observe one immutable graph version?”
 12. “What would an independent verifier check?”
+13. “What is conserved at an intermediate flow vertex, and which residual edge
+    would let you undo the last routing choice?”
+14. “What cut bounds this flow, and what would no residual source-to-sink path
+    establish?”
 
 ### Staged hint ladder
 
@@ -2467,6 +2688,12 @@ The `2/2/1` triangle from Section 13.
 
 Union `a-b`, then `c-d`, then `a-c`; path compression can point `d` directly toward an internal representative even if no original edge corresponds to that parent link.
 
+#### A locally valid flow can still be suboptimal
+
+Route one unit along a path that consumes a shared middle edge, then show that
+the missing reverse residual edge prevents the later reroute that would reach a
+larger cut-certified value.
+
 ### Required regression tests
 
 Do not accept the Atlas checkpoint without:
@@ -2491,6 +2718,8 @@ Do not accept the Atlas checkpoint without:
 - stale heap record;
 - Kruskal parallel edge and self-loop;
 - disconnected minimum spanning forest;
+- integral flow augmentation with forward and reverse residual edges;
+- flow conservation and an independently enumerated cut certificate;
 - graph/metric version propagation;
 - independent path-weight recomputation;
 - no test coupled to dictionary/set incidental order or heap internal layout beyond documented invariants.
@@ -2535,9 +2764,10 @@ Produce one coherent planner checkpoint.
 6. **Negative-cycle diagnosis:** source reachability, extracted cycle edges, total cycle weight, and scope statement.
 7. **Heap-currency trace:** current and stale Dijkstra entries tied explicitly to Module 9's scheduler model.
 8. **MST/forest trace:** cut decision, Kruskal disjoint-set state, Prim frontier, parallel edge, self-loop, and isolated component.
-9. **Atlas architecture diagram:** one immutable snapshot, strategy boundary, scheduler coordination, evidence verifier, versions, and UI.
-10. **Agent brief and patch review:** bounded specification, diff inspection, adversarial test output, complexity audit, and acceptance decision.
-11. **Oral defense:** eight minutes without notes, moving from client question down to state transitions and back to architecture.
+9. **Flow trace:** source/sink capacities, conservation, one augmenting path, forward/reverse residual update, flow value, and cut certificate.
+10. **Atlas architecture diagram:** one immutable snapshot, strategy boundary, scheduler coordination, evidence verifier, versions, and UI.
+11. **Agent brief and patch review:** bounded specification, diff inspection, adversarial test output, complexity audit, and acceptance decision.
+12. **Oral defense:** eight minutes without notes, moving from client question down to state transitions and back to architecture.
 
 ### Evidence rubric
 
@@ -2552,7 +2782,7 @@ Produce one coherent planner checkpoint.
 | Design | versioned result and evidence contract | “use NetworkX” |
 | Delegate | bounded scope, assumptions, tests, definition of done | “implement Dijkstra” |
 | Review | challenge semantics, state, evidence, cost, and scope | accept agent summary |
-| Transfer | map graph roles and redefine domain meaning | name another graph use |
+| Transfer | map graph or flow roles and redefine domain meaning | name another graph use |
 
 ### Constructive next-step guide
 
@@ -2565,6 +2795,7 @@ Use this evidence to choose the M11 bridge or a repair path, not to decide wheth
 - explain negative-edge and negative-cycle scope precisely;
 - reuse but not confuse Module 9's stale-entry model;
 - distinguish source-path and spanning-network objectives;
+- distinguish capacity, conservation, residual reversal, and cut evidence from path and spanning claims;
 - reject a plausible generated patch with a minimal counterexample;
 - defend cost and architecture against representation and snapshot changes.
 
@@ -2579,7 +2810,7 @@ This guide is not a score, grade, release approval, Core advance, or mastery dec
 ```mermaid
 %% atlas-diagram-id: m10-consolidation-map
 %% atlas-diagram-title: Graph questions select coordinated algorithm roles and independently checkable evidence
-%% atlas-diagram-alt: A graph question fixes the model and representation, then assigns FIFO, LIFO, heap, edge-round, or disjoint-set roles. BFS, DFS, Bellman-Ford, Dijkstra, DAG relaxation, Prim, and Kruskal produce path or forest evidence that an independent verifier turns into a versioned Atlas planner result.
+%% atlas-diagram-alt: A graph question fixes the model and representation, then assigns FIFO, LIFO, heap, edge-round, disjoint-set, or residual-network roles. BFS, DFS, Bellman-Ford, Dijkstra, DAG relaxation, Prim, Kruskal, and augmenting paths produce path, forest, or flow evidence that an independent verifier turns into a versioned Atlas planner result.
 flowchart TD
     QUESTION["Graph question"] --> MODEL["V, E, direction, multiplicity,<br/>weights, scope, evidence"]
     MODEL --> REP["Representation<br/>adjacency · edge list · matrix"]
@@ -2589,6 +2820,7 @@ flowchart TD
     ROLES --> H["Minimum heap"]
     ROLES --> PASS["Full edge rounds"]
     ROLES --> DSU["Disjoint set"]
+    ROLES --> RES["Residual network<br/>forward + reverse capacity"]
     Q --> BFS["BFS<br/>unweighted layers"]
     S --> DFS["DFS<br/>cycle + topo"]
     PASS --> BF["Bellman–Ford<br/>general weights"]
@@ -2596,6 +2828,7 @@ flowchart TD
     DFS --> DAG["DAG relaxation<br/>acyclic weights"]
     H --> PRIM["Prim<br/>crossing edges"]
     DSU --> KRUSKAL["Kruskal<br/>component joins"]
+    RES --> FLOW["Augmenting paths<br/>max flow / cut"]
     BFS --> EVID["parent / distance evidence"]
     DFS --> EVID
     BF --> EVID
@@ -2603,12 +2836,14 @@ flowchart TD
     DAG --> EVID
     PRIM --> FOREST["spanning forest evidence"]
     KRUSKAL --> FOREST
+    FLOW --> FLOWEVID["flow value + cut certificate"]
     EVID --> VERIFY["independent verifier"]
     FOREST --> VERIFY
+    FLOWEVID --> VERIFY
     VERIFY --> ATLAS["Versioned Atlas planner result"]
 ```
 
-### Keep these seven invariants
+### Keep these ten invariants
 
 1. A represented neighbor/edge must match the declared graph model.
 2. Discovery state prevents accidental logical rediscovery.
@@ -2617,6 +2852,9 @@ flowchart TD
 5. DFS gray state means active, while black means finished.
 6. Dijkstra finalizes only a current minimum under nonnegative weights.
 7. An MST edge is safe because of a cut/exchange argument, not because it is locally attractive.
+8. Flow on every edge stays within capacity, and each intermediate vertex conserves flow.
+9. A residual reverse edge records reversible algorithmic state, not an invented domain connection.
+10. No residual source-to-sink path plus the reachable-set cut gives a max-flow certificate.
 
 ### Before / now reflection
 
@@ -2629,6 +2867,9 @@ Complete:
 - A negative edge differs from a negative cycle because ...
 - A stale heap entry is safe only when ...
 - A shortest-path tree and MST optimize ...
+- A feasible flow differs from a shortest path because ...
+- The reverse residual edge matters because ...
+- A cut certifies optimal throughput when ...
 - The first thing I will ask an agent before accepting graph code is ...
 - The architecture boundary that prevents mixed graph versions is ...
 
@@ -2636,7 +2877,7 @@ Complete:
 
 - **After 2 days:** draw the coordinated-role diagram and trace the `10/2/3` stale-entry graph.
 - **After 1 week:** derive the algorithm-selection tree from weight/structure assumptions without notes; verify one cycle and one path.
-- **After 3 weeks:** defend the cut property, compare Kruskal/Prim state, and review a generated pathfinding patch.
+- **After 3 weeks:** defend the cut property, compare Kruskal/Prim state, and review a generated residual update and pathfinding patch.
 - **During Module 11:** reconnect Bellman–Ford rounds, Dijkstra/Prim greedy safety, and graph-state decomposition to general algorithmic paradigms.
 
 ### Portfolio update
@@ -2649,6 +2890,7 @@ Save:
 - correctness arguments;
 - adversarial test output;
 - negative-cycle and stale-entry evidence;
+- source/sink flow table, residual trace, conservation check, and cut certificate;
 - agent brief;
 - review memo;
 - oral-defense recording/notes;
@@ -2670,7 +2912,7 @@ Save:
 
 ### Forward
 
-- **Module 11:** BFS/DFS are search strategies; Dijkstra/Prim are greedy algorithms with proof obligations; Bellman–Ford/DAG paths expose subproblem order and dynamic-programming structure.
+- **Module 11:** BFS/DFS are search strategies; Dijkstra/Prim are greedy algorithms with proof obligations; Bellman–Ford/DAG paths expose subproblem order and dynamic-programming structure; residual augmentation adds an incremental-improvement bridge.
 - **Module 12:** protocols and generics can formalize graph ports, result types, and read-only snapshots.
 - **Module 13:** property-based and metamorphic tests can compare paths, topological orders, forests, and generated counterexamples.
 - **Module 14:** repository and package architecture turns algorithm roles into maintainable dependency boundaries.
@@ -2688,8 +2930,8 @@ The teaching narrative and Atlas exercises are original. These primary sources w
 
 ### Source wording and claim boundary
 
-The linked sources calibrate graph theory, algorithm proof traditions, and
-documented Python container behavior. They do not make this compressed module
+The linked sources calibrate graph theory, algorithm proof traditions,
+network-flow reasoning, and documented Python container behavior. They do not make this compressed module
 equivalent to an institutional course, prove an Atlas result, or turn a
 mathematical theorem into a claim about malformed input, mutable storage, or a
 particular deployment. The module-specific source-audit addendum records the
@@ -2722,6 +2964,15 @@ These sources supply the model/proof layer; the Python representations remain a 
 
 The MST material is introduced at a first-principles level here and reconnects to greedy strategy in Module 11.
 
+### Network flow and cuts
+
+- [MIT 6.046J Lecture 13: Incremental Improvement — Max Flow, Min Cut](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-13-incremental-improvement-max-flow-min-cut/) — undergraduate calibration for capacity constraints, residual augmenting paths, and the max-flow/min-cut proof idea. Accessed 2026-08-04; link and paraphrase only.
+- [MIT 6.046J Recitation 7: Network Flow and Matching](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/pages/recitation-notes/) — application transfer to matching and capacity-constrained domains. Accessed 2026-08-04; use the linked recitation route for calibration, not copied exercises or solutions.
+
+The flow bridge is intentionally bounded: it exposes the model, residual
+state, certificate, and code-reading failure mode without claiming a complete
+production max-flow implementation or silently importing an external asset.
+
 ### Official Python 3.14 contracts
 
 - [Python 3.14 `collections.deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) — FIFO-end operations and documented performance guidance used by the BFS implementation.
@@ -2744,7 +2995,7 @@ assumption rather than proving the learner's result.
 | 3 | DFS active-path/cycle or topological-order evidence | [MIT 6.006 Lecture 10](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/) |
 | 4 | relaxation trace, graph-restriction choice, and negative-cycle diagnostic | [MIT 6.006 Lectures 11–12](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/resource-index/) for weighted-path and Bellman–Ford context |
 | 5 | Dijkstra finalization proof, stale-entry trace, and qualified heap cost | [MIT 6.006 Lecture 13](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/) plus [Python `heapq`](https://docs.python.org/3.14/library/heapq.html) for the mechanism boundary |
-| 6 | cut-property/forest evidence and planner defense | [MIT 6.046J MST notes](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) for MST reasoning |
+| 6 | cut-property/forest evidence, flow residual state, and planner defense | [MIT 6.046J MST notes](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) for MST reasoning; [Lecture 13](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-13-incremental-improvement-max-flow-min-cut/) for max-flow/min-cut |
 
 ## Instructor synthesis
 

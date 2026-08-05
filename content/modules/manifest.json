@@ -424,10 +424,10 @@
       "title": "Graph Algorithms and Network Models",
       "summary": "Atlas already stores events, processes streams, indexes notes, and schedules reviews. It also stores prerequisite claims such as:",
       "arcId": "arc-ii",
-      "wordCount": 17387,
+      "wordCount": 19333,
       "estimatedMinutes": 76,
       "focusedStudyMinutes": null,
-      "sourceHash": "5eb1fe817ffa599f96e311f94bf72dafb04f8eef288315b3424a6b406f511b69",
+      "sourceHash": "6ad6e35cee740d36668be0dd72ef65d2bc0e23cb397229b21b2c5987de62b1ba",
       "id": "m10",
       "state": {
         "lifecycle": "learner-material-ready",
