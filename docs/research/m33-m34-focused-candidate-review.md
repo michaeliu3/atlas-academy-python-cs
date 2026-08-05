@@ -12,7 +12,7 @@ learner-mastery claim.
 | Module | Official source (accessed 2026-08-01) | Narrow use |
 | --- | --- | --- |
 | M33 | [MIT 6.045J resources](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/download/) | automata → computability → reductions → complexity sequence |
-| M33 | [Stanford CS103](https://web.stanford.edu/class/archive/cs/cs103/cs103.1264/) | proof-first definitions, reductions, and complexity boundaries |
+| M33 | [Stanford CS103](https://web.stanford.edu/class/archive/cs/cs103/cs103.1266/) | proof-first definitions, reductions, and complexity boundaries |
 | M33 | [CMU FLAC](https://www.cs.cmu.edu/~flac/) | finite-state, hierarchy, computability, and complexity scope |
 | M33 | [Georgia Tech CS4510](https://faculty.cc.gatech.edu/~ladha/S26/4510/) | formal limits and easy-versus-hard framing |
 | M34 | [Berkeley CS188](https://inst.eecs.berkeley.edu/~cs188/) | search, A*, CSP, planning, and MDP sequence |

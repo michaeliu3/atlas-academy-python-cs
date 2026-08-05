@@ -131,7 +131,7 @@
       "requirement": "Official MIT, CMU, Stanford, Georgia Tech, Berkeley, and comparable materials calibrate claims without copied assets.",
       "state": "partial",
       "evidence": "docs/ACADEMIC_CALIBRATION.md; content/source-maps/; docs/research/; scripts/check-source-links.mjs; tests/source-link-audit.test.mjs",
-      "openItem": "The current full gate checked 285 calibration URLs with bounded retries; recheck when sources change, expand liveness beyond calibration notes, and finish remaining citation corrections."
+      "openItem": "The current full gate checked 285 calibration URLs with bounded retries; the active Stanford CS103 records now use one pinned Spring 2026 archive, but recheck when sources change, expand liveness beyond calibration notes, and finish the remaining citation review."
     },
     {
       "id": "chat-roles",

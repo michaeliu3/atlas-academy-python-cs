@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import test from "node:test";
 
 import {
   auditSourceCorpus,
   extractReviewDates,
   extractUrls,
+  siteRoot,
   validateProvenance,
 } from "../scripts/check-source-links.mjs";
 
@@ -13,6 +16,19 @@ test("source corpus has HTTPS links and a fresh document-level provenance date",
   assert.deepEqual(audit.errors, []);
   assert.ok(audit.files.length >= 60);
   assert.ok(audit.urls.size >= 300);
+});
+
+test("active calibration records pin the same current Stanford CS103 quarter", async () => {
+  const audit = await auditSourceCorpus({ today: "2026-08-04" });
+  const calibrationFiles = audit.files.filter(
+    (file) => file === "docs/ACADEMIC_CALIBRATION.md" || file.startsWith("docs/research/"),
+  );
+  const records = await Promise.all(
+    calibrationFiles.map(async (file) => [file, await readFile(resolve(siteRoot, file), "utf8")]),
+  );
+  const joined = records.map(([file, text]) => file + "\n" + text).join("\n");
+  assert.doesNotMatch(joined, /cs103\.1264/u);
+  assert.match(joined, /cs103\.1266/u);
 });
 
 test("provenance validation rejects future and stale review dates", () => {
