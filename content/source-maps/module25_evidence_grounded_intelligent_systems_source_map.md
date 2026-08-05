@@ -793,6 +793,12 @@ approval]. The next falsifier is [named test or review].
 - Create: a decision contract with user need, counterfactual baseline,
   non-goals, harm/failure costs, accountable action owner, and rollback
   condition.
+- **Advanced re-entry:** bring the M31 Optimization and Information Evidence
+  Dossier, M33 Formal Limits Claim Packet, M34 Classical AI Search, Constraints
+  & Decision Packet, M35 Machine Learning & Representation Dossier, and M36
+  Statistical Learning Theory & Reliable Deep-Learning Systems Dossier. Use an
+  exact claim/limitation or an `[UNAVAILABLE — …]` marker; never substitute a
+  module title for a receipt.
 
 **Source card:** NIST AI 100-1.  
 **Prediction prompt:** “If a ranker predicts a next step accurately, who is
@@ -809,6 +815,12 @@ future or silently changing purpose?
   original data card for synthetic fixtures.
 - Create: data-lineage diagram and split ledger showing availability, feature
   transformation ownership, label definition, and excluded fields.
+- **Advanced re-entry:** attach the M27 formal-scope packet, M28
+  representation/conditioning sheet, M29 convergence-scope sheet, M30
+  inference/evaluation manifest, and M32 Scientific Python & Accelerators
+  Dossier to the time arrow. Record which fields are available now, observed
+  later, and capable of invalidating the split; missing receipts narrow the
+  claim.
 
 **Source cards:** scikit-learn Common Pitfalls; Gebru et al.; NIST Privacy
 Framework.  
@@ -861,6 +873,11 @@ it, and operate it without a mouse or color-only signal?
 - Test the task/script before declaring the UI legible.
 - Create: accessible decision card and a brief human-use/accessibility
   observation sheet.
+- **Advanced re-entry:** annotate the card with M34's authority boundary, M35's
+  calibration/shift scope, M36's monitoring and non-claim boundary, M22's
+  accessibility/privacy control, and M32's execution/reproducibility fields.
+  An `[UNAVAILABLE — …]` marker must remain visible instead of being filled by
+  a generated explanation.
 
 **Source cards:** WCAG 2.2; WAI-ARIA APG; Amershi et al.  
 **Prediction prompt:** “If keyboard users can reach the score but cannot

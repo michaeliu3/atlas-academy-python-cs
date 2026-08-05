@@ -29,6 +29,21 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.doesNotMatch(m25, /ML representation\/evaluation evidence packet/u);
   assert.doesNotMatch(m26, /\| M35 \| ML evidence packet \|/u);
   assert.doesNotMatch(m26, /\| M36 \| reliable-learning limit\/non-claim and reproducibility record \|/u);
+  assert.match(m25, /### Cross-module re-entry — formulate the claim before the score/u);
+  assert.match(m25, /### Cross-module re-entry — lineage, representation, and execution/u);
+  assert.match(m25, /### Cross-module re-entry — control, calibration, and reliability/u);
+  for (const artifact of [
+    /Optimization and Information Evidence\s+Dossier/u,
+    /Formal Limits Claim Packet/u,
+    /Classical AI Search, Constraints\s+& Decision Packet/u,
+    /Machine Learning & Representation Dossier/u,
+    /Statistical Learning Theory & Reliable Deep-Learning Systems\s+Dossier/u,
+  ]) {
+    assert.match(m25, artifact);
+    assert.match(m25SourceMap, artifact);
+  }
+  assert.match(m25, /\[UNAVAILABLE — reason and affected\s+claim\]/u);
+  assert.match(m25SourceMap, /Advanced re-entry/u);
   assert.match(m26SourceMap, /M24 evidence thread → M31–M36 synthesis gate → M25 → M26/u);
   assert.match(m26SourceMap, /connected \*\*evidence roles\*\*, not next\/previous navigation/u);
   assert.doesNotMatch(m26SourceMap, /M24 → M25 → M26 connected sequence/u);

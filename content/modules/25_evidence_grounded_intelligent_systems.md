@@ -375,6 +375,24 @@ It is not:
 
 > “Atlas knows what this learner should do.”
 
+### Cross-module re-entry — formulate the claim before the score
+
+Before choosing a candidate or metric, bring one learner-owned artifact from
+each relevant advanced module. A topic name is not a receipt; use the exact
+claim, its assumptions, and its limitation.
+
+| Upstream artifact | Re-enter it here as | Do not silently infer |
+|---|---|---|
+| **Optimization and Information Evidence Dossier (M31)** | objective, hard constraint, proxy gap, and stopping rule | that minimizing the objective chooses the human action |
+| **Formal Limits Claim Packet (M33)** | encoding/resource boundary or an explicit “no formal claim” marker | that a timeout or theorem label settles usefulness |
+| **Classical AI Search, Constraints & Decision Packet (M34)** | candidate/state/constraint/policy separation | that a planner or expected-utility output owns authority |
+| **Machine Learning & Representation Dossier (M35)** | baseline, split, representation, and failure slice | that a validation score is calibrated or beneficial |
+| **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier (M36)** | theorem/limit scope and reliability non-claim | that a benchmark is a release guarantee |
+
+If an artifact is unavailable, write `[UNAVAILABLE — reason and affected
+claim]` and narrow the decision contract. Do not replace missing evidence with a
+summary generated from the module title.
+
 ### The decision-support ladder
 
 ~~~mermaid
@@ -493,6 +511,20 @@ know the answer before it is supposed to predict it. That is leakage. A random
 split is not automatically wrong, but it must be justified against the
 deployment history and correlations. A temporal question normally needs a
 temporal holdout.
+
+### Cross-module re-entry — lineage, representation, and execution
+
+Now attach the upstream evidence to the time arrow rather than merely naming
+“data quality.” Bring the **M27 Formal Limits Claim Packet** (encoding and
+quantifier scope), **M28 representation/conditioning sheet**, **M29
+convergence-scope sheet**, **M30 inference/evaluation manifest**, and **M32
+Scientific Python & Accelerators Dossier** (dtype, layout, device, seed, and
+semantic-oracle boundary). For each artifact, mark the exact field that is
+available at decision time, the field that is observed later, and the first
+assumption that could invalidate the split.
+
+An unavailable or redacted field is evidence to defer or narrow a claim, not an
+invitation to fill it with a plausible value.
 
 ### Code-reading lab — the flattering evaluation
 
@@ -863,6 +895,21 @@ flowchart TB
 | Comparison | “This item ranked above these eligible alternatives under this policy.” | “All other actions are wrong.” |
 | Limit | “This suggestion uses a fixed local fixture / limited history.” | “The system has no uncertainty.” |
 | Provenance | “This text came from a named, reviewed source bundle.” | “Retrieved text is automatically true or current.” |
+
+### Cross-module re-entry — control, calibration, and reliability
+
+Before drawing the explanation card, retrieve the **M34 Classical AI Search,
+Constraints & Decision Packet**, **M35 Machine Learning & Representation
+Dossier**, and **M36 Statistical Learning Theory & Reliable Deep-Learning
+Systems Dossier**. Use them to annotate the card with (1) the policy or
+authority boundary, (2) the calibration/shift scope of any number, and (3) the
+monitoring, stop-owner, or non-claim boundary. Add the relevant M22
+accessibility/privacy control and the M32 execution/reproducibility conditions
+when the display depends on a runtime observation.
+
+If one receipt is missing, write `[UNAVAILABLE — preserve learner control and
+defer the affected claim]`; a polished explanation must not conceal an empty
+evidence field.
 
 ### Accessible visualization rule
 
