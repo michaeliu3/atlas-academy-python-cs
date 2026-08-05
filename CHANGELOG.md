@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Recorded a bounded current-head rendered-route audit: the prerequisite-first
+  route, Levels 1–9 source crosswalk, and graph/manifest availability
+  linkability checks pass 3/3. This strengthens route truth without claiming
+  assistive-technology review, deployment, or learner completion.
 - Reconciled the current completion snapshot and final audit with the latest
   content-bearing snapshot `49bda34` and its Draft Course CI run `30983252123`,
   then recorded the documentation-only provenance head `22f7e38` and run

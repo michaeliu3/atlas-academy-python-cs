@@ -386,3 +386,12 @@ while expensive apparatus, browser, Python, and portal jobs were skipped for
 the draft PR. This removes stale “current head” ambiguity without changing
 the open non-draft, deployment, human-review, platform, or learner-evidence
 boundaries.
+
+## Dated rendered-route truth audit — 2026-08-05
+
+At additive head [`32a3114`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/32a3114e176d29fecd625b01f480b1e6180421a),
+the bounded Node rendered-output audit passed 3/3: the truthful prerequisite-
+first `/route`, the on-demand Levels 1–9 source crosswalk, and availability /
+route-linkability parity against the generated manifest. This is current
+route-projection evidence; it does not replace human visual, assistive-
+technology, deployment, learner, or non-draft full-gate evidence.

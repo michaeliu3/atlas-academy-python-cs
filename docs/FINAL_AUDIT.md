@@ -35,7 +35,7 @@ present when the matrix grows.
 | Requirement ID | State | Current evidence boundary |
 | --- | --- | --- |
 | delivery-boundary | complete | Canonical route, private guided-study boundary, and preview/authoring-only separation are implemented and tested. |
-| canonical-route-truth | partial | Graph-to-reader projection checks pass; rendered route/dashboard review remains open. |
+| canonical-route-truth | partial | Graph-to-reader projection checks pass; current-head rendered `/route`, `/route/inventory`, and availability/linkability checks pass 3/3, while human visual/dashboard review remains open. |
 | module-contract | partial | All 480 M1–M30 structural criteria resolve, but legacy modules remain non-verified; M31–M36 remain authoring-only. |
 | advanced-packs | partial | Six substantial private packs, hidden candidates, companions, session maps, and source-ledger markers exist; human review and release evidence are absent. |
 | synthesis-boundary | partial | M25/M26 are correctly preview-gated and depend on advanced evidence; synthesis promotion is not recorded. |
