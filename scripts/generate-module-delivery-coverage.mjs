@@ -26,15 +26,15 @@ const lines = [
   "",
   "The authoritative machine-readable record is [`module-teaching-packs.v1.json`](../content/course/module-teaching-packs.v1.json). Availability labels preserve the access boundary: M25/M26 are preview/evidence-gated and M31–M36 are private guided study only.",
   "",
-  "| Module | Availability | Workbook / six sessions | TA lecture | Study Partner project | Code / execution | PDF | Visual fallback | Oral defense | Evidence card |",
-  "|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|",
+  "| Module | Availability | Workbook | Source map | Six sessions | TA lecture | Study Partner project | Code / execution | PDF | Visual fallback | Oral defense | Evidence card |",
+  "|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|",
 ];
 
 for (const pack of packs.modules ?? []) {
   const number = `M${String(pack.number).padStart(2, "0")}`;
   const coverage = pack.coverage ?? {};
   lines.push(
-    `| ${number} · ${cell(pack.title)} | ${cell(availabilityLabel[pack.availability] ?? pack.availability)} | ${cell(coverage.workbook)} / ${cell(coverage.sixSessionSpine)} | ${cell(coverage.taLecture)} | ${cell(coverage.studyPartnerProject)} | ${cell(coverage.codeFixture)} | ${cell(coverage.pdf)} | ${cell(coverage.visualFallback)} | ${cell(coverage.oralDefense)} | ${cell(coverage.evidenceCard)} |`,
+    `| ${number} · ${cell(pack.title)} | ${cell(availabilityLabel[pack.availability] ?? pack.availability)} | ${cell(coverage.workbook)} | ${cell(coverage.sourceMap)} | ${cell(coverage.sixSessionSpine)} | ${cell(coverage.taLecture)} | ${cell(coverage.studyPartnerProject)} | ${cell(coverage.codeFixture)} | ${cell(coverage.pdf)} | ${cell(coverage.visualFallback)} | ${cell(coverage.oralDefense)} | ${cell(coverage.evidenceCard)} |`,
   );
 }
 

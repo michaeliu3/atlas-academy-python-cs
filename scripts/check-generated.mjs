@@ -15,6 +15,7 @@ const generatedPaths = [
   "content/course/arc-projects.v1.json",
   "content/course/release-inputs.v1.json",
   "docs/MODULE_DELIVERY_COVERAGE.md",
+  "docs/CHAT_LAUNCH_CARDS.md",
   "docs/COURSE_STATUS.md",
   "docs/LEGACY_MODULE_CONTRACT_AUDIT.md",
 ];

@@ -118,7 +118,7 @@ function sourceEvidenceFor({ markdown, workbookPath, module }) {
           endLine: code.endLine,
           lineCount: code.lineCount,
           selectionRule: "first non-diagram code fence, preferring Python",
-          curationRequired: true,
+          adaptationRequired: true,
         }
       : {
           status: "explicit-non-execution-boundary",
@@ -128,7 +128,7 @@ function sourceEvidenceFor({ markdown, workbookPath, module }) {
           endLine: null,
           lineCount: 0,
           selectionRule: "no executable fence found; use derivation, trace, or numerical whiteboard",
-          curationRequired: true,
+          adaptationRequired: true,
         },
     projectSection: projectSection
       ? { ...projectSection, sourcePath: workbookPath }
@@ -136,10 +136,39 @@ function sourceEvidenceFor({ markdown, workbookPath, module }) {
           sourcePath: workbookPath,
           startLine: null,
           heading: null,
-          curationRequired: true,
+          adaptationRequired: true,
         },
     sourceMap: sourceMapFor(module),
   };
+}
+
+function sourceMapRecord(relativePath) {
+  if (!relativePath) return null;
+  const absolutePath = path.join(siteRoot, relativePath);
+  if (!fs.existsSync(absolutePath)) return { path: relativePath, sourceHash: null };
+  return {
+    path: relativePath,
+    sourceHash: sha256(fs.readFileSync(absolutePath, "utf8")),
+  };
+}
+
+function lineAnnotationsFor(evidence, centralModel) {
+  const slice = evidence.codeSlice;
+  if (
+    !slice?.sourcePath ||
+    !Number.isInteger(slice.startLine) ||
+    !Number.isInteger(slice.endLine) ||
+    slice.endLine < slice.startLine
+  ) {
+    return [];
+  }
+  const source = fs.readFileSync(path.join(siteRoot, slice.sourcePath), "utf8");
+  const lines = source.split(/\r?\n/u);
+  return lines.slice(slice.startLine - 1, slice.endLine).map((code, index) => ({
+    line: slice.startLine + index,
+    code,
+    annotation: `Explain what this line changes in ${centralModel}: state, control flow, representation, cost, proof obligation, or boundary.`,
+  }));
 }
 
 function arcProjectId(module) {
@@ -150,6 +179,8 @@ function arcProjectId(module) {
 
 function buildTaLaunchCard(module, guide, session, evidence) {
   const centralModel = guide?.centralModel ?? module.purpose;
+  const lineByLineAnnotations = lineAnnotationsFor(evidence, centralModel);
+  const hasExecutableSlice = lineByLineAnnotations.length > 0;
   return {
     status: "prepared-derived",
     copyHeading: `Atlas TA · M${String(module.number).padStart(2, "0")} · Session ${session.number} · ${session.title}`,
@@ -161,6 +192,18 @@ function buildTaLaunchCard(module, guide, session, evidence) {
       startLine: evidence.codeSlice.startLine,
       endLine: evidence.codeSlice.endLine,
       instruction: "Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.",
+      lineByLineAnnotations,
+      expectedReveal: {
+        status: hasExecutableSlice ? "run-or-trace-boundary" : "explicit-non-execution-boundary",
+        expectedOutput: null,
+        expectedOutputKind: "learner-prediction-before-observation",
+        captureRule: "Ask for the learner prediction first. Reveal only an observed output/state or a clearly labelled hand-worked trace; otherwise record unverified.",
+      },
+    },
+    stateTrace: {
+      format: "before → line → after",
+      columns: ["line", "bindings/objects or symbols", "control flow", "representation/cost", "claim and boundary"],
+      prompt: `After each line, update the smallest visible state model for ${centralModel}.`,
     },
     whiteboard: [
       centralModel,
@@ -169,6 +212,11 @@ function buildTaLaunchCard(module, guide, session, evidence) {
       "display math, labelled fenced code, diagram, and prose/ASCII fallback",
     ],
     changedPremise: `Change one input, invariant, premise, or assumption related to ${guide?.misconception ?? module.purpose}; ask what changes and why.`,
+    changedPremiseQuestions: [
+      "Which predicted state or result changes first?",
+      "Which invariant, assumption, or proof obligation survives?",
+      "What new test, trace, or counterexample would separate the competing explanations?",
+    ],
     questionPause: "Pause for learner questions after the first trace and before the changed-premise reveal.",
     learnerArtifact: session.output ?? `A compact ${centralModel} evidence card`,
     studyPartnerHandoff: `Carry the ${session.output ?? "session artifact"} into the Study Partner design brief and visible implementation loop.`,
@@ -239,13 +287,15 @@ function buildSession(module, guide, session, evidence) {
         guide?.boundary ?? "the narrowest valid claim and its non-claim",
       ],
       rendering: "display-math, labelled fenced code, diagram, and prose-or-ASCII fallback",
-      curationRequired: true,
+      adaptationRequired: true,
       launchCard: buildTaLaunchCard(module, guide, session, evidence),
     },
     studyPartner: {
       status: "prepared-derived",
       mode: "ai-pair-programming",
       partnerMayWriteCode: true,
+      durationMinutes: [60, 90],
+      blocksPerModule: [2, 3],
       sequence: [
         "state the design brief and learner constraint",
         "predict behavior before the patch",
@@ -266,7 +316,7 @@ function buildSession(module, guide, session, evidence) {
         "The learner can explain the mechanism and the smallest remaining uncertainty.",
       ],
       debugScenario: guide?.misconception ?? "Change one input or assumption and locate the first broken claim.",
-      curationRequired: true,
+      adaptationRequired: true,
       launchCard: buildStudyPartnerLaunchCard(
         module,
         guide,
@@ -310,8 +360,20 @@ function buildPack(module) {
       visibility: workbook.visibility,
       sourceHash: sha256(markdown),
     },
+    sourceMap: sourceMapRecord(evidence.sourceMap),
     prerequisites: module.academicPrerequisiteNumbers,
     forwardModuleNumber: module.forwardModuleNumber,
+    deliverySchedule: {
+      recommendedRoute: "90-day",
+      intensiveRoute: "60-day",
+      durableRoute: "180-day",
+      taLectureMinutes: [40, 55],
+      studyPartnerBlocks: [2, 3],
+      studyPartnerBlockMinutes: [60, 90],
+      repairOralDefenseMinutes: [20, 30],
+      delayedRetrievalMinutes: [20, 30],
+      compressionRule: "Extend the calendar rather than skip a proof, trace, debugging step, or transfer task.",
+    },
     guide: guide ?? null,
     sessions: sessions.map((session) => buildSession(module, guide, session, evidence)),
     project: {
@@ -367,13 +429,14 @@ function buildPack(module) {
     },
     rendering: {
       printPath: `/print/modules/${module.slug}`,
-      pdfStatus: "not-generated",
+      pdfStatus: "local-release-pipeline",
       math: "KaTeX plus readable source/prose fallback",
       diagrams: "Mermaid SVG plus authored text alternative",
       interactiveStudio: module.studioId ? "static-print-companion-required" : "none-declared",
     },
     coverage: {
       workbook: "present",
+      sourceMap: evidence.sourceMap ? "bound-and-hashed" : "missing",
       sixSessionSpine: sessions.length === 6 ? "present" : "repair-required",
       taLecture: "prepared-derived-launch-cards",
       studyPartnerProject: "prepared-derived-project-loop",

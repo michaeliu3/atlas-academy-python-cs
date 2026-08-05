@@ -34,6 +34,18 @@ test("every teaching pack binds its project slice to the canonical spine", () =>
     assert.equal(packModule.project.tests.length, 3);
     assert.equal(packModule.project.debuggingScenarios.length, 3);
     assert.equal(packModule.project.codeReviewChecklist.length, 4);
+    assert.ok(packModule.sourceMap.path);
+    assert.match(packModule.sourceMap.sourceHash, /^[0-9a-f]{64}$/u);
+    assert.equal(packModule.rendering.pdfStatus, "local-release-pipeline");
+    assert.equal(packModule.deliverySchedule.recommendedRoute, "90-day");
+    assert.deepEqual(packModule.deliverySchedule.studyPartnerBlocks, [2, 3]);
+    assert.deepEqual(packModule.sessions[0].studyPartner.durationMinutes, [60, 90]);
+    assert.equal(packModule.sessions[0].taLecture.launchCard.stateTrace.columns.length, 5);
+    assert.ok(packModule.sessions[0].taLecture.launchCard.boundedWalk.expectedReveal);
+    assert.equal(
+      packModule.sessions[0].taLecture.launchCard.boundedWalk.expectedReveal.expectedOutputKind,
+      "learner-prediction-before-observation",
+    );
     assert.equal(packModule.sessions.length, 6);
   }
 });

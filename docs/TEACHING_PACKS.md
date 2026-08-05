@@ -20,6 +20,7 @@ It covers all 36 graph modules and records, for each module:
   failure injection, review, and handoff;
 - a project slice tied to a cumulative arc project;
 - a code fixture or explicit non-execution boundary;
+- the 60/90/180-day route labels and per-session chat delivery timing;
 - evidence, retrieval, forward handoff, and rendering fields.
 
 The registry is a contract and coverage index. `prepared-derived` means the
@@ -45,12 +46,18 @@ pnpm check:arc-projects
 pnpm validate:arc-projects
 pnpm generate:coverage
 pnpm check:coverage
+pnpm generate:chat-cards
+pnpm check:chat-cards
 ```
 
 The generated per-module status table is
 [`docs/MODULE_DELIVERY_COVERAGE.md`](MODULE_DELIVERY_COVERAGE.md). It keeps
 launch-card readiness distinct from executed learner evidence and from the
 local PDF release manifest.
+
+The human-readable session cards are
+[`docs/CHAT_LAUNCH_CARDS.md`](CHAT_LAUNCH_CARDS.md); the JSON registry remains
+the authoritative source for every field.
 
 The validator is deliberately cheap enough for ordinary development. It
 checks graph parity, six-session coverage, role boundaries, project fields,

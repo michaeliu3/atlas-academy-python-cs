@@ -23,6 +23,8 @@
     "validate:arc-projects": "node scripts/validate-arc-projects.mjs",
     "generate:coverage": "node scripts/generate-module-delivery-coverage.mjs",
     "check:coverage": "node scripts/generate-module-delivery-coverage.mjs --check",
+    "generate:chat-cards": "node scripts/generate-chat-launch-cards.mjs",
+    "check:chat-cards": "node scripts/generate-chat-launch-cards.mjs --check",
     "render:pdf": "node scripts/render-module-pdfs.mjs",
     "validate:pdf": "node scripts/validate-module-pdfs.mjs",
     "test:pdf-contract": "node --test tests/pdf-pipeline-contract.test.mjs",

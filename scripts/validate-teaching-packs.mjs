@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,6 +30,10 @@ function exists(relativePath) {
   return relativePath && fs.existsSync(path.join(siteRoot, relativePath));
 }
 
+function sha256File(relativePath) {
+  return crypto.createHash("sha256").update(fs.readFileSync(path.join(siteRoot, relativePath))).digest("hex");
+}
+
 for (const pack of packs.modules ?? []) {
   if (seen.has(pack.moduleId)) errors.push(`${pack.moduleId}: duplicate module id`);
   seen.add(pack.moduleId);
@@ -50,6 +55,28 @@ for (const pack of packs.modules ?? []) {
     }
   }
   if (!exists(pack.workbook?.path)) errors.push(`${pack.moduleId}: workbook missing: ${pack.workbook?.path}`);
+  if (!pack.sourceMap?.path || !pack.sourceMap?.sourceHash || !exists(pack.sourceMap.path)) {
+    errors.push(`${pack.moduleId}: source map binding is missing or unresolved`);
+  } else if (pack.sourceMap.sourceHash !== sha256File(pack.sourceMap.path)) {
+    errors.push(`${pack.moduleId}: source map hash does not match the checked-in source map`);
+  }
+  const schedule = pack.deliverySchedule;
+  if (
+    !schedule ||
+    schedule.recommendedRoute !== "90-day" ||
+    schedule.intensiveRoute !== "60-day" ||
+    schedule.durableRoute !== "180-day" ||
+    schedule.taLectureMinutes?.length !== 2 ||
+    schedule.studyPartnerBlocks?.length !== 2 ||
+    schedule.studyPartnerBlockMinutes?.length !== 2 ||
+    schedule.repairOralDefenseMinutes?.length !== 2 ||
+    schedule.delayedRetrievalMinutes?.length !== 2
+  ) {
+    errors.push(`${pack.moduleId}: chat-led delivery schedule is incomplete`);
+  }
+  if (pack.coverage?.sourceMap !== "bound-and-hashed") {
+    errors.push(`${pack.moduleId}: coverage source-map status is not bound-and-hashed`);
+  }
   if (pack.availability === "authoring-only" && pack.workbook?.visibility !== "private-guided-study") {
     errors.push(`${pack.moduleId}: authoring-only workbook must be private-guided-study`);
   }
@@ -65,10 +92,23 @@ for (const pack of packs.modules ?? []) {
     if (session.taLecture?.sequence?.length !== requiredTaSteps) errors.push(`${pack.moduleId}: session ${session.number} TA sequence is incomplete`);
     if (session.studyPartner?.sequence?.length !== requiredPartnerSteps) errors.push(`${pack.moduleId}: session ${session.number} Study Partner sequence is incomplete`);
     if (session.studyPartner?.partnerMayWriteCode !== true) errors.push(`${pack.moduleId}: session ${session.number} must explicitly permit visible partner code authorship`);
+    if (session.studyPartner?.durationMinutes?.length !== 2 || session.studyPartner?.blocksPerModule?.length !== 2) {
+      errors.push(`${pack.moduleId}: session ${session.number} Study Partner timing is incomplete`);
+    }
     if (!session.taLecture?.whiteboard?.length) errors.push(`${pack.moduleId}: session ${session.number} lacks whiteboard material`);
     if (session.taLecture?.launchCard?.status !== "prepared-derived") errors.push(`${pack.moduleId}: session ${session.number} lacks a prepared TA launch card`);
     if (!session.taLecture?.launchCard?.boundedWalk?.sourcePath || !session.taLecture?.launchCard?.predictionPrompt) {
       errors.push(`${pack.moduleId}: session ${session.number} TA launch card lacks source-bound prediction/walk fields`);
+    }
+    if (!Array.isArray(session.taLecture?.launchCard?.boundedWalk?.lineByLineAnnotations)) {
+      errors.push(`${pack.moduleId}: session ${session.number} TA launch card lacks line annotations`);
+    }
+    if (
+      !session.taLecture?.launchCard?.boundedWalk?.expectedReveal ||
+      session.taLecture.launchCard.boundedWalk.expectedReveal.expectedOutputKind !== "learner-prediction-before-observation" ||
+      !session.taLecture?.launchCard?.stateTrace?.columns?.length
+    ) {
+      errors.push(`${pack.moduleId}: session ${session.number} TA launch card lacks reveal/state-trace material`);
     }
     if (session.studyPartner?.launchCard?.status !== "prepared-derived") errors.push(`${pack.moduleId}: session ${session.number} lacks a prepared Study Partner launch card`);
     if (session.studyPartner?.launchCard?.patchSequence?.length !== 7 || !session.studyPartner?.launchCard?.starterSlice) {
