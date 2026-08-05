@@ -692,3 +692,7 @@ The review branch lockfile contains patched candidate versions, but the alerts
 remain open until the candidate is normally merged and GitHub recalculates.
 This refresh is dependency provenance only and is not a security-clean,
 deployment, or release claim.
+The same additive head [`b52ad41`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b52ad4195dfe21342880dfcfc613f3bab33d40c5)
+passed the 96-test Draft content path in Course CI run
+[`30994042442`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994042442);
+full-gate jobs were skipped under the draft policy.

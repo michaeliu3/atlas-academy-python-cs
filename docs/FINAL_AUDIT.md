@@ -127,6 +127,11 @@ returned two open alerts (one high `fast-uri`, one medium `postcss`). The
 review branch contains patched candidate versions, but protected-branch
 recalculation after merge remains open; this is a current dependency fact, not
 a security-clean claim.
+- The current head [`b52ad41`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b52ad4195dfe21342880dfcfc613f3bab33d40c5)
+  passed the 96-test Draft content path in Course CI run
+  [`30994042442`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994042442);
+  portal, apparatus, browser, and teaching-model jobs were skipped because the
+  PR remains draft. This is current Draft evidence, not a non-draft full gate.
 
 ## Intentionally deferred by design
 

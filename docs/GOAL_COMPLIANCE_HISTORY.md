@@ -581,3 +581,8 @@ The compliance source and generated matrix now use this latest count; the
 older 11-alert inventory remains preserved as historical evidence. The review
 branch lockfile contains patched candidate versions, but no alert is called
 resolved until a normal merge reaches `main` and GitHub recalculates.
+The same additive head [`b52ad41`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b52ad4195dfe21342880dfcfc613f3bab33d40c5)
+passed the 96-test Draft content path in Course CI run
+[`30994042442`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994042442);
+the full portal, apparatus, browser, and teaching-model jobs remained skipped
+because PR #22 is draft.
