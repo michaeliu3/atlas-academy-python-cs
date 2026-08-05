@@ -24,6 +24,18 @@ the delivery boundary for the two existing designated Atlas Academy chats.
   message authorizes raw transcripts, audio, credentials, sensitive data, or
   off-record material to be retained or exported.
 
+## Refreshed role-binding readback — 2026-08-05
+
+The same two designated threads received a refreshed role binding from the
+current Atlas source of truth. A direct Codex-app readback returned a concise
+acknowledgement from each chat: the Teaching Assistant retained records-off,
+prediction-first, evidence-based teaching and non-grading oral-defense duties;
+the Study Partner retained records-off, non-grading discussion/retrieval and
+handoff duties. Both messages explicitly named the platform-owned GPT Live High
+preference, visible equation/code whiteboard formatting, and the ready-to-paste
+fallback when a Notion write cannot be verified. This is role-delivery evidence,
+not a substantive module session or proof of live rendering.
+
 ## Latest designated-thread readback
 
 A direct Codex-app readback found a recent realtime handoff in each designated
