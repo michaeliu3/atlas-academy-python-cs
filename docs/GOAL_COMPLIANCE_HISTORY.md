@@ -549,3 +549,14 @@ content feedback path. The classifier falls back to the conservative base range
 when the previous-head field is absent; required checks and final verification
 remain unchanged. Hosted savings still require a future docs-only synchronize
 observation.
+
+## Human-requirements phase waiver — 2026-08-05
+
+The learner explicitly waived all human-only requirements for the current
+phase. Human source/reuse/pedagogical/visual review, learner-led TA and Study
+Partner sessions, oral-defense evidence, live rendering observation, and
+learner-approved records-on Notion writes are therefore documented as
+deferred rather than inferred complete. Automated contracts, focused tests,
+privacy boundaries, dependency and deployment checks, additive provenance, and
+the current non-draft release gate remain required; this waiver does not
+permit a completion, mastery, certification, or university-equivalence claim.

@@ -12,8 +12,9 @@ completion or university-equivalence claim.
 ## Decision
 
 **The Atlas goal must remain open.** The repository has strong structural and
-content evidence, but the evidence does not yet prove human review, learner
-enactment, private-deployment behavior, or a current non-draft full gate.
+content evidence. The learner has explicitly waived human-only requirements for
+this phase; those items are recorded as deferred, not complete. Private-
+deployment behavior and a current non-draft full gate remain open.
 
 Evidence is classified conservatively:
 
@@ -122,16 +123,18 @@ present when the matrix grows.
   equivalence to an institution.
 - A separate studio for every module when a bounded Codex conversation or
   read-only artifact is the declared interaction boundary.
+- The learner-authorized [human-requirements phase waiver](HUMAN_REQUIREMENTS_WAIVER_2026-08-05.md):
+  human source/reuse/pedagogical/visual review, learner-led chat sessions and
+  oral defenses, voice/rendering observation, and consent-gated Notion writes
+  are deferred for now and must not be counted as complete.
 
 ## Uncertain or unverified
 
-- Whether the designated voice chats render equations/code clearly at the
-  platform's highest available quality setting.
-- Whether a learner-approved `records on` session writes exactly one concise
-  Notion note and whether pause/end/correction/deletion behavior works in the
-  connected integration.
-- Human source/license review, visual equivalence review, assistive-technology
-  review, and pedagogical approval for every module.
+- Whether the deferred designated voice chats render equations/code clearly at
+  the platform's highest available quality setting, whether a learner-approved
+  `records on` session writes exactly one concise Notion note, and whether human
+  source/license, visual, assistive-technology, and pedagogical review would
+  pass. These are intentionally unverified under the phase waiver.
 - Production security headers at the actual private deployment, unresolved
   Dependabot states on `main`, and bounded OS/process behavior outside the
   checked-in teaching-model claims. A direct unauthenticated check of the
@@ -144,15 +147,12 @@ present when the matrix grows.
 
 ## Required closure sequence
 
-1. Conduct focused human review of each selected module candidate and record
-   only observed evidence; keep M31–M36 hidden until qualified promotion.
-2. Run one substantive, learner-approved TA and Study Partner session, including
-   the text/voice whiteboard and consent-gated Notion workflow, without copying
-   raw transcripts or audio.
-3. Verify the exact private deployment headers, dependency-risk disposition,
+1. Keep the waived human review, learner sessions, oral defenses, and Notion
+   writes explicitly deferred; do not promote or claim evidence for them.
+2. Verify the exact private deployment headers, dependency-risk disposition,
    accessibility review, and bounded OS/process claims.
-4. Request one normal non-draft full gate at the reviewed source ref and record
+3. Request one normal non-draft full gate at the reviewed source ref and record
    its exact commit, run, jobs, limitations, and deployment state.
-5. Regenerate this audit and the compliance matrix, then close the goal only if
+4. Regenerate this audit and the compliance matrix, then close the goal only if
    every requirement has evidence or an explicit, accepted deferral and no
    required work remains.

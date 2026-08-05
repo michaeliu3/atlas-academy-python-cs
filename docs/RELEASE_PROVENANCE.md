@@ -661,3 +661,13 @@ conservative base comparison for other event types and falls back to that range
 if the field is unavailable. This is intended to remove duplicate Draft content
 feedback on docs-only follow-ups without removing required checks. Hosted cost
 reduction remains pending a direct docs-only synchronize observation.
+
+## Human-requirements phase waiver (2026-08-05)
+
+The learner authorized a temporary waiver of all human-only requirements.
+Human review, learner-led TA/Study Partner sessions and oral defense, live
+whiteboard/rendering observation, and records-on Notion writes remain deferred
+and are not release evidence. Machine-verifiable contracts, tests, privacy and
+safety checks, dependency/deployment disposition, additive Git history, and a
+current non-draft full Course CI gate remain mandatory. The waiver does not
+support claims of mastery, certification, credit, or institutional equivalence.
