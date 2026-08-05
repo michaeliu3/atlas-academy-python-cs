@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Added a focused M32 traceability guard for the required native boundary,
+  Python, autodiff, GPU, profiler, mixed-precision, and distributed-data-
+  parallel reading scope across the canonical workbook and hidden candidate;
+  this remains authoring-only and does not promote M32.
 - Bound the learner-requested **GPT Live High** preference into the canonical
   designated-chat workflow and validator, retaining the platform-owned setting
   boundary; Draft run `30987956581` passed the bounded content path, without

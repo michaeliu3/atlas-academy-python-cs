@@ -374,6 +374,18 @@ PR #22 remains draft. This is policy and structural evidence only: it does not
 prove live voice rendering, a Notion write, deployment headers, human review,
 module promotion, learner evidence, or a non-draft release gate.
 
+## Dated M32 advanced-scope regression checkpoint — 2026-08-05
+
+Additive commit [`094195f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/094195f964a84d17ae95edd27ca1f6d6aaa6dc3a)
+added a focused traceability guard for M32's required native boundary, Python,
+autodiff, GPU, profiler, mixed-precision, and distributed-data-parallel
+reading scope in both the canonical workbook and hidden candidate. Draft Course
+CI run [`30988818302`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30988818302)
+passed the changed-file classifier and Draft content feedback. This strengthens
+regression evidence only; M32 remains authoring-only and the human review,
+learner delivery, deployment, release, and non-draft full-gate boundaries stay
+open.
+
 ## Dated calibration-snapshot and draft-content checkpoint — 2026-08-05
 
 Commit [`6e0a02c`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/6e0a02ca71d77bce7043594555f99800e8a9ee2d)

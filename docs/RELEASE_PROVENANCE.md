@@ -589,3 +589,14 @@ passed the changed-file classifier and Draft content feedback; expensive jobs
 were skipped under the draft cost-control policy. This records source and
 bounded Draft validation only, not live voice/rendering behavior, Notion writes,
 deployment verification, human review, module promotion, or a release.
+
+## M32 advanced-scope regression checkpoint (2026-08-05)
+
+Additive commit [`094195f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/094195f964a84d17ae95edd27ca1f6d6aaa6dc3a)
+added focused assertions for the hidden M32 workbook and generated candidate.
+Draft Course CI run
+[`30988818302`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30988818302)
+passed the changed-file classifier and Draft content feedback; expensive jobs
+were skipped under the draft cost-control policy. This records bounded source
+and test evidence only, not human review, learner delivery, deployment,
+publication, or release evidence.
