@@ -168,7 +168,7 @@ For course reproducibility, pin one Python minor version—currently 3.14—and 
 
 [Berkeley CS61C](https://cs61c.org/sp26/) and its [course notes](https://notes.cs61c.org/) cover number representation, C and pointers, RISC-V, CPU design, caches, virtual memory, and parallelism. The official [Berkeley catalog description](https://www2.eecs.berkeley.edu/Courses/CS61C/) documents the course’s architecture and machine-structure scope.
 
-[CMU 15-213 Introduction to Computer Systems](https://csd.cs.cmu.edu/15213-introduction-to-computer-systems) offers a programmer’s view of machine code, data representation, optimization, memory, linking, processes, networking, and concurrency; the [Spring 2025 site](https://www.cs.cmu.edu/afs/cs/academic/class/15213-s25/www/) shows the teaching structure.
+[CMU 15-213 Introduction to Computer Systems](https://csd.cs.cmu.edu/course/15213/s26) offers a programmer’s view of machine code, data representation, optimization, memory, linking, processes, networking, and concurrency; the [Spring 2025 site](https://www.cs.cmu.edu/afs/cs/academic/class/15213-s25/www/) shows the teaching structure.
 
 **Connection:** choose one primary route. Berkeley is strongest for architecture and RISC-V labs; CMU is strongest for the programmer’s systems perspective. Python simulations can introduce caches, scheduling, and binary formats, but a bounded C/assembly component is indispensable.
 
@@ -259,5 +259,5 @@ If the curriculum must start with a small set of sources, use:
 4. [Python 3.14 documentation](https://docs.python.org/3.14/) plus [PyPA](https://packaging.python.org/), [pytest](https://docs.pytest.org/en/stable/), and the [typing specification](https://typing.python.org/en/latest/spec/) for modern engineering.
 5. [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) and [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for mathematical and algorithmic foundations.
 6. [MIT 6.031](https://web.mit.edu/6.031/www/fa21/) for software construction.
-7. One systems route—[Berkeley CS61C](https://cs61c.org/sp26/) or [CMU 15-213](https://csd.cs.cmu.edu/15213-introduction-to-computer-systems)—followed by selected OS, networking, database, security, and PL sources above.
+7. One systems route—[Berkeley CS61C](https://cs61c.org/sp26/) or [CMU 15-213](https://csd.cs.cmu.edu/course/15213/s26)—followed by selected OS, networking, database, security, and PL sources above.
 8. UW/Purdue/Stanford capstone guidance for the culminating project.

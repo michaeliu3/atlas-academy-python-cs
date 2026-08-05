@@ -150,9 +150,9 @@ Targeted route:
 
 | Course unit | Use | Stop rule |
 |---|---|---|
-| [4 — Combinational Logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c04/) and [5 — Sequential Logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c05/) | current-input functions versus clocked state | no transistor timing derivation required for core mastery |
-| [7 — Performance Measures](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c07/) | latency, throughput, and cost vocabulary | Atlas evidence still comes from its recorded protocol |
-| [9 — Designing an Instruction Set](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c09/) and [10 — Assembly Language](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c10/) | ISA as software-visible state-transition contract | RISC-V defines the concrete ISA example |
+| [4 — Combinational Logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c4/) and [5 — Sequential Logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c5/) | current-input functions versus clocked state | no transistor timing derivation required for core mastery |
+| [7 — Performance Measures](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c7/) | latency, throughput, and cost vocabulary | Atlas evidence still comes from its recorded protocol |
+| [9 — Designing an Instruction Set](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c9/) and [10 — Assembly Language](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c10/) | ISA as software-visible state-transition contract | RISC-V defines the concrete ISA example |
 | [12 — Procedures and Stacks](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c12/) | call/return and a declared convention | do not equate architectural stack with CPython evaluation stack |
 | [13 — Building the Beta](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c13/) | datapath/control and instruction realization | Beta is a teaching processor, not the learner’s hardware |
 | [14 — Caches and the Memory Hierarchy](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c14/) | locality, cache organizations, line/block reasoning, write trade-offs | use a tiny original cache trace; no slide copying |
@@ -794,4 +794,3 @@ Without notes, answer:
 > observe—and what can none of them establish alone? Finally, where does the
 > I/O request cross into the operating-system questions reserved for Module 18,
 > and which CPython mechanisms remain reserved for Module 24?
-

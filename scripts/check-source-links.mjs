@@ -8,9 +8,16 @@ export const siteRoot = resolve(scriptDirectory, "..");
 const PROVENANCE_MARKER =
   /access(?:ed| date)?|audit(?:ed| date)?|calibrat|checked|check(?:ed)?|cutoff|baseline|snapshot|recheck|research|review(?:ed| date)?|follow[- ]?through|decision|scope|updated/iu;
 const ISO_DATE = /\b(20\d{2})-(\d{2})-(\d{2})\b/gu;
-const URL_PATTERN = /https?:\/\/[^\s<>"'`]+/gu;
+// Source ledgers are Markdown prose, so an em/en dash can follow a link as a
+// sentence separator. It is not a valid unescaped URL character in this
+// corpus; stop extraction there instead of swallowing the following prose.
+const URL_PATTERN = /https?:\/\/[^\s<>"'`\u2014\u2013]+/gu;
 const DEFAULT_MAX_AGE_DAYS = 180;
-const LIVE_ROOTS = ["docs/ACADEMIC_CALIBRATION.md", "docs/research"];
+// Live checks cover the learner-facing calibration notes and every checked-in
+// source-map ledger. Static URL/provenance checks still run across the same
+// corpus on every relevant build; the bounded network pass is reserved for
+// source changes in CI.
+export const LIVE_ROOTS = ["docs/ACADEMIC_CALIBRATION.md", "docs/research", "content/source-maps"];
 
 function isoDate(year, month, day) {
   const value = `${year}-${month}-${day}`;
@@ -245,7 +252,7 @@ async function main() {
     }
   }
   console.log(
-    `${live ? "Live source-link" : "Source-link"} audit: ${audit.files.length} documents, ${audit.urls.size} unique static URLs${live ? `, ${audit.liveUrls.length} calibration URLs checked` : ""}.`,
+    `${live ? "Live source-link" : "Source-link"} audit: ${audit.files.length} documents, ${audit.urls.size} unique static URLs${live ? `, ${audit.liveUrls.length} source URLs checked` : ""}.`,
   );
   if (errors.length > 0) {
     console.error(errors.slice(0, 40).map((error) => `- ${error}`).join("\n"));

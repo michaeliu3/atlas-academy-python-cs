@@ -14,12 +14,14 @@ document-level: a source-map ledger inherits the map's audit date rather than
 duplicating the same date beside every URL line.
 
 `pnpm check:source-links:live` performs bounded live checks against the
-academic-calibration corpus (`docs/ACADEMIC_CALIBRATION.md` and
-`docs/research/`). It runs in Course CI only when those source files change,
-uses redirects and a bounded request, and treats a reachable access-controlled
-endpoint as reachable-with-boundary rather than silently dropping it. The
-2026-08-04 audit checked 302 unique calibration URLs: 297 returned 200, one
-202, one ranged 206, and three returned 403; no dead URL remained. This is
+academic-calibration notes (`docs/ACADEMIC_CALIBRATION.md` and
+`docs/research/`) plus every checked-in `content/source-maps/` ledger. It runs
+in Course CI only when source material changes, uses redirects and a bounded
+request, and treats a reachable access-controlled endpoint as
+reachable-with-boundary rather than silently dropping it. The 2026-08-04
+audit checked 1,065 unique source URLs: 1,034 returned 200, four 202, and
+five ranged 206 responses; 22 returned an allowed access-controlled status
+(three 401 and 19 403). No dead URL remained. This is
 evidence of link reachability at that review point, not a promise that a
 third-party page will remain unchanged.
 

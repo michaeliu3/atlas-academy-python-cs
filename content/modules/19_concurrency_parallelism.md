@@ -3837,7 +3837,7 @@ Optional breadth checks:
   for safety, liveness, linearizability, monitors, and testing coverage;
 - [Stanford CS111](https://web.stanford.edu/class/cs111/) for mixed
   code-reading and architecture reasoning;
-- [UC Berkeley CS162](https://www-inst.eecs.berkeley.edu/~cs162/) for
+- [UC Berkeley CS162](https://cs162.org/) for
   synchronization curriculum breadth;
 - [MIT 6.1810](https://pdos.csail.mit.edu/6.S081/2025/schedule.html) for a
   bounded lock/contention operating-system comparison;

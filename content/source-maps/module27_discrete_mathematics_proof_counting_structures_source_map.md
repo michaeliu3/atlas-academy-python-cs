@@ -349,7 +349,7 @@ states.
   author-maintained open textbook project.
 - **URLs:**
   - [current project/home page](https://judsonbooks.org/abstract-algebra-theory-and-applications/)
-  - [open-source and GFDL explanation](https://abstract.ups.edu/abstract.ups.edu/)
+  - [open-source and GFDL project page](https://judsonbooks.org/abstract-algebra-theory-and-applications/)
   - [current HTML edition](https://judsonbooks.org/aata-files/aata-html/aata.html)
 - **Evidence class:** **primary to the author's algebra exposition**; a
   suitably rigorous, optional depth source for lattices/Boolean algebra.

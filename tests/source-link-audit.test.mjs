@@ -49,3 +49,10 @@ test("URL extraction removes Markdown punctuation without changing query strings
     ["https://example.com/path?q=one&x=two"],
   );
 });
+
+test("URL extraction stops before a prose em dash after a Markdown link", () => {
+  assert.deepEqual(
+    extractUrls("[CMU](https://csd.cs.cmu.edu/15213-introduction-to-computer-systems)—followed"),
+    ["https://csd.cs.cmu.edu/15213-introduction-to-computer-systems"],
+  );
+});

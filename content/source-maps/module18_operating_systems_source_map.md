@@ -226,7 +226,7 @@ course page.
 
 The
 [Berkeley CS 162 catalog](https://www2.eecs.berkeley.edu/Courses/CS162/) and
-official [Fall 2025 course site](https://www-inst.eecs.berkeley.edu/~cs162/)
+official [course site](https://cs162.org/)
 connect operating-system structure and protection to processes, scheduling,
 virtual memory, I/O, filesystems, and reliability. This is the best cross-check
 that the route is not merely a Unix API tutorial: every mechanism must answer a
@@ -1521,4 +1521,3 @@ Finish:
 > I can recover the OS-owned state, trace its lifecycle, name the source of each
 > guarantee, and design for interruption without claiming more than the
 > platform and evidence support.
-

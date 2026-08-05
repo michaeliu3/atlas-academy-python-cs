@@ -456,8 +456,8 @@ POSIX Issue 8 supplies a standards-level acquire/release-style model for its nam
 
 ### U19-06 — UC Berkeley CS 162, Fall 2025
 
-- **Course home:** https://www-inst.eecs.berkeley.edu/~cs162/
-- **Synchronization documentation:** https://www-inst.eecs.berkeley.edu/~cs162/fa25/static/proj/pintos-docs/docs/synch/
+- **Course home:** https://cs162.org/
+- **Synchronization documentation:** https://cs162.org/
 - **Accessed:** 2026-07-29; the main site was intermittently slow during the final audit.
 - **Use in Module 19:** secondary university sequence check for threads, mutual exclusion, synchronization primitives, monitors, and scheduling.
 - **Boundary:** Pintos-specific mechanisms and kernel lock implementation are not Python contracts.
@@ -1937,8 +1937,8 @@ M24 implementation knowledge
 - Oxford Concurrent Programming: https://www.cs.ox.ac.uk/teaching/courses/2025-2026/concurrentprogramming/
 - Stanford CS111: https://web.stanford.edu/class/cs111/
 - Stanford CS111 topic summary: https://web.stanford.edu/class/cs111/exams/final.html
-- Berkeley CS162: https://www-inst.eecs.berkeley.edu/~cs162/
-- Berkeley CS162 synchronization: https://www-inst.eecs.berkeley.edu/~cs162/fa25/static/proj/pintos-docs/docs/synch/
+- Berkeley CS162: https://cs162.org/
+- Berkeley CS162 synchronization: https://cs162.org/
 - MIT 6.1810 schedule: https://pdos.csail.mit.edu/6.S081/2025/schedule.html
 - MIT lock lab: https://pdos.csail.mit.edu/6.828/2025/labs/lock.html
 - xv6 book: https://pdos.csail.mit.edu/6.S081/2025/xv6/book-riscv-rev5.pdf

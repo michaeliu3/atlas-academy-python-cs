@@ -138,8 +138,8 @@ use remains contingent on the exact statement and hypotheses.
 - **URLs:**
   - [course home](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/)
   - [course syllabus](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/)
-  - [four fundamental subspaces](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/the-four-fundamental-subspaces/)
-  - [least squares and projections](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/least-squares-projections-and-orthogonal-matrices/)
+  - [four fundamental subspaces](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/ax-b-and-the-four-subspaces/the-four-fundamental-subspaces/)
+  - [least squares and projections](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/least-squares-determinants-and-eigenvalues/projection-matrices-and-least-squares/)
   - [singular value decomposition](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/singular-value-decomposition/)
   - [MIT OCW terms](https://ocw.mit.edu/pages/privacy-and-terms-of-use/)
 - **Evidence class:** primary for MIT's curriculum/learning sequence and its
