@@ -239,3 +239,17 @@ with `projectReaderModules(courseGraph)`. It passed together with the graph and
 status suites, and confirms that hidden M31–M36 arc data is retained in the
 canonical graph but not exposed in the reader manifest. Structural parity is
 now recorded; representative rendered/dashboard review remains open.
+
+## Dated M28–M31 mathematical-spine audit — 2026-08-05
+
+The additive head [`d9dcc8a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/d9dcc8aba28bc9d839bb76e31b5b23ffb8e28e96)
+adds an explicit M31 bridge for the data-processing inequality,
+maximum-entropy modeling, and coding interpretation, each with declared
+assumptions and counterexamples. `tests/m28-m31-mathematical-spine.test.mjs`
+now checks the named linear-algebra, calculus/analysis, probability/statistics,
+optimization, and information-theory topics across M28–M31, while the existing
+M30 breadth test remains in place. Local and Draft Course CI content validation
+passed 94/94 tests in run [30976990411](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30976990411).
+This is structural/content evidence; human theorem/derivation review,
+assistive-technology review, module promotion, deployment, and learner evidence
+remain open.

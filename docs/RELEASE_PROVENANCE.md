@@ -444,3 +444,15 @@ source-map, and navigation fields against the canonical graph projection. It
 also preserves the boundary that hidden M31–M36 arc data remains in the graph
 but is absent from the reader manifest. This is local structural evidence, not
 rendered human review, deployment, release, or learner evidence.
+
+## Mathematical-spine checkpoint (2026-08-05)
+
+The additive review branch now resolves to
+[`d9dcc8a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/d9dcc8aba28bc9d839bb76e31b5b23ffb8e28e96).
+M31's canonical authoring workbook and hidden candidate now explicitly include
+data-processing, maximum-entropy, and coding-interpretation boundaries, and the
+M28–M31 spine audit passed its 94-test content suite in Draft Course CI run
+[`30976990411`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30976990411).
+Draft cost control intentionally skipped portal, apparatus, browser, and Python
+teaching-model jobs; this checkpoint is not a full gate, release, deployment,
+human review, or learner outcome.

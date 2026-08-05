@@ -14,13 +14,13 @@
     },
     "currentDraftContent": {
       "state": "success",
-      "commit": "fd63dfb0f9d2554b7fefb3c1b0eebaa661e4f101",
+      "commit": "d9dcc8aba28bc9d839bb76e31b5b23ffb8e28e96",
       "date": "2026-08-05",
-      "runId": "30975709181",
-      "pass": 91,
+      "runId": "30976990411",
+      "pass": 94,
       "fail": 0,
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30975709181",
-      "note": "Latest observed Draft content evidence for the current additive head; source-link shape/freshness checks and the 91-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30976990411",
+      "note": "Latest observed Draft content evidence for the current additive head; the 94-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
     },
     "lastFullGateApparatus": {
       "state": "success",
