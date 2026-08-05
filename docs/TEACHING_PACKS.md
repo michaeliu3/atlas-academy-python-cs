@@ -13,19 +13,26 @@ It covers all 36 graph modules and records, for each module:
 
 - the graph-bound workbook and availability boundary;
 - six workbook session anchors;
-- a TA lecture scaffold with prediction, bounded code/trace, whiteboard, and
-  changed-premise moves;
-- a Study Partner AI-pair-programming scaffold that explicitly permits visible
-  partner-authored patches while keeping specification, review, and evidence
-  learner-owned;
+- a source-bound TA lecture pack with a copyable launch card for prediction,
+  bounded code/trace, whiteboard, changed-premise moves, and handoff;
+- a source-bound Study Partner project pack with a copyable launch card for
+  design, learner prediction, visible partner-authored patches, honest tests,
+  failure injection, review, and handoff;
 - a project slice tied to a cumulative arc project;
 - a code fixture or explicit non-execution boundary;
 - evidence, retrieval, forward handoff, and rendering fields.
 
-The registry is a contract and coverage index, not a claim that a scaffold is
-already a fully curated lecture or project. `scaffold`, `derived-locator`, and
-`not-generated` states remain visible until the corresponding learner material
-is authored and reviewed.
+The registry is a contract and coverage index. `prepared-derived` means the
+launch card is generated from the canonical workbook, guide, and project slice
+and is ready to copy into the designated chat; `adaptationRequired: true` keeps
+the live session responsive to the learner rather than pretending a script is
+evidence. It is not learner evidence and it does not claim that a test, run, or
+Notion write occurred. `derived-locator` remains visible where a source-bound
+code slice still needs a local fixture, while `local-release-pipeline` means
+the PDF can be generated and validated without committing binary output.
+
+The six-project spine and evidence-gated M26 capstone are canonical in
+[`content/course/arc-projects.v1.json`](../content/course/arc-projects.v1.json).
 
 ## Commands
 
@@ -33,14 +40,24 @@ is authored and reviewed.
 pnpm generate:teaching-packs
 pnpm check:teaching-packs
 pnpm validate:teaching-packs
+pnpm generate:arc-projects
+pnpm check:arc-projects
+pnpm validate:arc-projects
+pnpm generate:coverage
+pnpm check:coverage
 ```
+
+The generated per-module status table is
+[`docs/MODULE_DELIVERY_COVERAGE.md`](MODULE_DELIVERY_COVERAGE.md). It keeps
+launch-card readiness distinct from executed learner evidence and from the
+local PDF release manifest.
 
 The validator is deliberately cheap enough for ordinary development. It
 checks graph parity, six-session coverage, role boundaries, project fields,
-code execution boundaries, and preview/authoring-only restrictions. A future
-promotion gate may require every `scaffold` and `not-generated` value to be
-replaced, but this focused contract does not pretend that content curation or
-PDF rendering has happened merely because the registry exists.
+code execution boundaries, launch-card completeness, and preview/authoring-only
+restrictions. PDF generation and visual inspection remain separate local
+release checks; the registry does not pretend that a PDF render or learner
+interaction happened merely because a launch card exists.
 
 ## Role boundary
 
@@ -49,4 +66,3 @@ Partner is the collaborative implementation owner and may write visible code
 patches after the learner states the design brief and prediction. Neither role
 may invent execution output, a test result, a benchmark, a deployment, a
 Notion write, or a mastery claim.
-

@@ -10,6 +10,14 @@ const graph = JSON.parse(
 const packs = JSON.parse(
   fs.readFileSync(path.join(siteRoot, "content/course/module-teaching-packs.v1.json"), "utf8"),
 );
+const arcProjects = JSON.parse(
+  fs.readFileSync(path.join(siteRoot, "content/course/arc-projects.v1.json"), "utf8"),
+);
+const arcAssignmentByModuleId = new Map(
+  arcProjects.projects.flatMap((project) =>
+    project.moduleSlices.map((slice) => [slice.moduleId, { project, slice }]),
+  ),
+);
 
 const errors = [];
 const graphById = new Map(graph.modules.map((module) => [module.id, module]));
@@ -24,13 +32,20 @@ function exists(relativePath) {
 for (const pack of packs.modules ?? []) {
   if (seen.has(pack.moduleId)) errors.push(`${pack.moduleId}: duplicate module id`);
   seen.add(pack.moduleId);
-  const module = graphById.get(pack.moduleId);
-  if (!module) {
+  const graphModule = graphById.get(pack.moduleId);
+  if (!graphModule) {
     errors.push(`${pack.moduleId}: not present in canonical course graph`);
     continue;
   }
+  const arcAssignment = arcAssignmentByModuleId.get(pack.moduleId);
+  if (!arcAssignment || pack.project?.arcProjectId !== arcAssignment.project.id) {
+    errors.push(`${pack.moduleId}: project is not bound to the canonical arc-project spine`);
+  }
+  if (pack.project?.moduleSlice?.moduleId !== pack.moduleId) {
+    errors.push(`${pack.moduleId}: project module slice is missing or mismatched`);
+  }
   for (const field of ["number", "slug", "title", "purpose", "knowledgeArcId", "availability"]) {
-    if (pack[field] !== module[field] && !(field === "availability" && pack[field] === module.state?.availability)) {
+    if (pack[field] !== graphModule[field] && !(field === "availability" && pack[field] === graphModule.state?.availability)) {
       errors.push(`${pack.moduleId}: ${field} disagrees with canonical graph`);
     }
   }
@@ -51,9 +66,28 @@ for (const pack of packs.modules ?? []) {
     if (session.studyPartner?.sequence?.length !== requiredPartnerSteps) errors.push(`${pack.moduleId}: session ${session.number} Study Partner sequence is incomplete`);
     if (session.studyPartner?.partnerMayWriteCode !== true) errors.push(`${pack.moduleId}: session ${session.number} must explicitly permit visible partner code authorship`);
     if (!session.taLecture?.whiteboard?.length) errors.push(`${pack.moduleId}: session ${session.number} lacks whiteboard material`);
+    if (session.taLecture?.launchCard?.status !== "prepared-derived") errors.push(`${pack.moduleId}: session ${session.number} lacks a prepared TA launch card`);
+    if (!session.taLecture?.launchCard?.boundedWalk?.sourcePath || !session.taLecture?.launchCard?.predictionPrompt) {
+      errors.push(`${pack.moduleId}: session ${session.number} TA launch card lacks source-bound prediction/walk fields`);
+    }
+    if (session.studyPartner?.launchCard?.status !== "prepared-derived") errors.push(`${pack.moduleId}: session ${session.number} lacks a prepared Study Partner launch card`);
+    if (session.studyPartner?.launchCard?.patchSequence?.length !== 7 || !session.studyPartner?.launchCard?.starterSlice) {
+      errors.push(`${pack.moduleId}: session ${session.number} Study Partner launch card is incomplete`);
+    }
     if (!session.evidence?.artifact || !session.evidence?.retrievalPrompt) errors.push(`${pack.moduleId}: session ${session.number} lacks evidence/retrieval fields`);
   }
-  if (!pack.project?.arcProjectId || !pack.project?.scenario || pack.project?.definitionOfDone?.length !== 4) {
+  if (
+    pack.project?.status !== "prepared-derived" ||
+    !pack.project?.arcProjectId ||
+    !pack.project?.scenario ||
+    !pack.project?.architectureSketch ||
+    pack.project?.implementationPlan?.length !== 3 ||
+    pack.project?.expectedPatchSequence?.length !== 6 ||
+    pack.project?.tests?.length !== 3 ||
+    pack.project?.debuggingScenarios?.length !== 3 ||
+    pack.project?.codeReviewChecklist?.length !== 4 ||
+    pack.project?.definitionOfDone?.length !== 4
+  ) {
     errors.push(`${pack.moduleId}: project packet scaffold is incomplete`);
   }
   if (!pack.code?.executionBoundary || !pack.code?.codeSlice) errors.push(`${pack.moduleId}: code execution boundary is missing`);
@@ -61,8 +95,8 @@ for (const pack of packs.modules ?? []) {
   if (pack.availability === "authoring-only" && pack.rendering?.pdfStatus === "published") errors.push(`${pack.moduleId}: authoring-only PDF cannot be published`);
 }
 
-for (const module of graph.modules) {
-  if (!seen.has(module.id)) errors.push(`${module.id}: missing from teaching-pack registry`);
+for (const graphModule of graph.modules) {
+  if (!seen.has(graphModule.id)) errors.push(`${graphModule.id}: missing from teaching-pack registry`);
 }
 
 if (packs.modules?.length !== graph.modules.length) {
@@ -83,4 +117,3 @@ if (errors.length) {
 } else {
   console.log(JSON.stringify(summary, null, 2));
 }
-

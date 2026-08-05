@@ -82,7 +82,7 @@
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "725aa0cd2d69e29be6d54cb789d55b981b806d2d2c1644a149efbb8979118b46"
+      "sha256": "3b7410dcff4492c0853a43e3bf2d0a373f17987384b40ce5f3c1db63554a7bf2"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
@@ -1034,7 +1034,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "30d5596f69e34c50b6637df189c5b1dc76b0d9786b92e158984dd4e38cd5457d"
+      "sha256": "e983033baaabd2d65e0c5850faf71f333946f8995043bdd435b7e9fac50c99ba"
     },
     {
       "path": "playwright.config.ts",

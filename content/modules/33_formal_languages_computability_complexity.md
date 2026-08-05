@@ -813,7 +813,7 @@ has an independent set of size at least its threshold. For a valid `n#k#E`,
 set
 
 \[
-f(\texttt{n#k#E})=\texttt{n#(n-k)#E}.
+f(\operatorname{enc}(n,k,E))=\operatorname{enc}(n,n-k,E).
 \]
 
 For malformed input, use one named branch: **map malformed strings to a fixed no-instance (a fixed target no-instance).** This makes the reduction total rather than silently leaving an unencoded input outside the function's domain.

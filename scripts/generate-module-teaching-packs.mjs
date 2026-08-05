@@ -19,7 +19,16 @@ const readJson = (relativePath) =>
 
 const graph = readJson("content/course/course-graph.v2.json");
 const guides = readJson("content/course/module-companion-guides.v1.json");
+const arcProjects = readJson("content/course/arc-projects.v1.json");
 const guideByModule = new Map(guides.guides.map((guide) => [guide.moduleId, guide]));
+const arcProjectByModuleId = new Map(
+  arcProjects.projects.flatMap((project) =>
+    project.moduleIds.map((moduleId, index) => [
+      moduleId,
+      { project, slice: project.moduleSlices[index] },
+    ]),
+  ),
+);
 
 function sha256(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
@@ -134,7 +143,71 @@ function sourceEvidenceFor({ markdown, workbookPath, module }) {
 }
 
 function arcProjectId(module) {
-  return `${module.knowledgeArcId}-project`;
+  const assignment = arcProjectByModuleId.get(module.id);
+  if (!assignment) throw new Error(`No cumulative arc project is assigned to ${module.id}`);
+  return assignment.project.id;
+}
+
+function buildTaLaunchCard(module, guide, session, evidence) {
+  const centralModel = guide?.centralModel ?? module.purpose;
+  return {
+    status: "prepared-derived",
+    copyHeading: `Atlas TA · M${String(module.number).padStart(2, "0")} · Session ${session.number} · ${session.title}`,
+    openingProblem: session.launch ?? `Start with a small ${centralModel} mystery and make the current model explicit.`,
+    predictionPrompt: `Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.`,
+    boundedWalk: {
+      sourcePath: evidence.codeSlice.sourcePath,
+      language: evidence.codeSlice.language,
+      startLine: evidence.codeSlice.startLine,
+      endLine: evidence.codeSlice.endLine,
+      instruction: "Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.",
+    },
+    whiteboard: [
+      centralModel,
+      guide?.traceOrDerivation ?? "one visible trace or derivation",
+      guide?.boundary ?? "the narrowest valid claim and its non-claim",
+      "display math, labelled fenced code, diagram, and prose/ASCII fallback",
+    ],
+    changedPremise: `Change one input, invariant, premise, or assumption related to ${guide?.misconception ?? module.purpose}; ask what changes and why.`,
+    questionPause: "Pause for learner questions after the first trace and before the changed-premise reveal.",
+    learnerArtifact: session.output ?? `A compact ${centralModel} evidence card`,
+    studyPartnerHandoff: `Carry the ${session.output ?? "session artifact"} into the Study Partner design brief and visible implementation loop.`,
+    adaptationRequired: true,
+  };
+}
+
+function buildStudyPartnerLaunchCard(module, guide, session, evidence, arcAssignment) {
+  const centralModel = guide?.centralModel ?? module.purpose;
+  return {
+    status: "prepared-derived",
+    copyHeading: `Atlas Study Partner · M${String(module.number).padStart(2, "0")} · Session ${session.number} · ${session.title}`,
+    designBrief: `Implement or inspect one bounded ${centralModel} slice for ${arcAssignment.project.title}.`,
+    learnerBeforePatch: [
+      "State intent, system boundary, non-goals, constraints, and one safety/privacy concern.",
+      "Predict behavior and give confidence before the first patch.",
+      "Name the invariant, proof condition, or observable acceptance criterion.",
+    ],
+    architectureSketch: "Draw the smallest data-flow, state, call-graph, or proof map before writing code.",
+    starterSlice: evidence.codeSlice,
+    patchSequence: [
+      "write one visible incremental patch",
+      "explain each meaningful line and state transition",
+      "run a bounded test/trace or label it honestly as simulated/unverified",
+      "inject one failure, changed requirement, or counterexample",
+      "debug the smallest repair",
+      "review the diff against contract, tests, privacy/accessibility, and cost",
+      "ask the learner to explain the mechanism and record one non-claim",
+    ],
+    failureInjection: guide?.misconception ?? `change one assumption in ${centralModel}`,
+    acceptanceCriteria: [
+      "Generated code remains visible and reviewable; no opaque solution dump.",
+      "Observed execution is separated from prediction, simulation, assumption, and unverified claim.",
+      "One failure, counterexample, changed premise, or boundary is investigated.",
+      `The learner can explain the ${centralModel} mechanism and the smallest remaining uncertainty.`,
+    ],
+    projectHandoff: `Attach the reviewed patch or trace to the ${arcAssignment.project.id} slice and carry the unresolved boundary forward.`,
+    adaptationRequired: true,
+  };
 }
 
 function buildSession(module, guide, session, evidence) {
@@ -147,7 +220,7 @@ function buildSession(module, guide, session, evidence) {
     workbookLaunch: session.launch,
     workbookOutput: session.output,
     taLecture: {
-      status: "scaffold",
+      status: "prepared-derived",
       mode: "first-principles-live-code",
       durationMinutes: [40, 55],
       sequence: [
@@ -167,9 +240,10 @@ function buildSession(module, guide, session, evidence) {
       ],
       rendering: "display-math, labelled fenced code, diagram, and prose-or-ASCII fallback",
       curationRequired: true,
+      launchCard: buildTaLaunchCard(module, guide, session, evidence),
     },
     studyPartner: {
-      status: "scaffold",
+      status: "prepared-derived",
       mode: "ai-pair-programming",
       partnerMayWriteCode: true,
       sequence: [
@@ -193,6 +267,13 @@ function buildSession(module, guide, session, evidence) {
       ],
       debugScenario: guide?.misconception ?? "Change one input or assumption and locate the first broken claim.",
       curationRequired: true,
+      launchCard: buildStudyPartnerLaunchCard(
+        module,
+        guide,
+        session,
+        evidence,
+        arcProjectByModuleId.get(module.id),
+      ),
     },
     evidence: {
       artifact: output,
@@ -207,6 +288,7 @@ function buildPack(module) {
   const workbook = workbookFor(module);
   const markdown = fs.readFileSync(path.join(siteRoot, workbook.path), "utf8");
   const guide = guideByModule.get(module.id);
+  const arcAssignment = arcProjectByModuleId.get(module.id);
   const sessions = extractSessionLaunches(markdown).filter(({ number }) => number >= 1 && number <= 6);
   const evidence = sourceEvidenceFor({ markdown, workbookPath: workbook.path, module });
   const referenceNumber = String(module.number).padStart(2, "0");
@@ -233,10 +315,39 @@ function buildPack(module) {
     guide: guide ?? null,
     sessions: sessions.map((session) => buildSession(module, guide, session, evidence)),
     project: {
-      status: "scaffold",
-      arcProjectId: arcProjectId(module),
+      status: "prepared-derived",
+      arcProjectId: arcAssignment.project.id,
+      arcProjectTitle: arcAssignment.project.title,
       level: module.number >= 31 ? "graduate-depth-scoped" : "upper-undergraduate-to-graduate-slice",
-      scenario: `A bounded Atlas learning-system change that makes ${guide?.centralModel ?? module.purpose} inspectable.`,
+      scenario: arcAssignment.slice.scope,
+      moduleSlice: arcAssignment.slice,
+      architectureSketch: arcAssignment.project.architecture,
+      implementationPlan: arcAssignment.project.milestones,
+      starterState: evidence.codeSlice,
+      expectedPatchSequence: [
+        "state the contract, invariant, theorem condition, or numerical question",
+        "make a small visible patch, derivation, or experiment",
+        "trace the changed state, representation, cost, or proof obligation",
+        "run a bounded test/trace or label the result as simulated/unverified",
+        "inject a failure, counterexample, changed premise, or boundary",
+        "repair and review the smallest consequential change",
+      ],
+      tests: [
+        "Check the named contract or invariant against one small fixture.",
+        "Trace one expected behavior and record what the observation does and does not establish.",
+        "Re-run after the changed premise or failure injection; keep prediction separate from execution.",
+      ],
+      debuggingScenarios: [
+        guide?.misconception ?? `a false claim about ${guide?.centralModel ?? module.purpose}`,
+        `change one input, invariant, premise, or assumption in ${guide?.centralModel ?? module.purpose}`,
+        "find the first boundary where the observed behavior diverges from the stated contract",
+      ],
+      codeReviewChecklist: [
+        "Can the learner name the boundary, non-goals, and invariant before accepting the patch?",
+        "Does each generated line have an explained mechanism, cost, and relevant assumption?",
+        "Are observed output, prediction, simulation, theorem, and unverified claim labelled separately?",
+        "Does the diff preserve privacy, access boundaries, and the smallest useful design?",
+      ],
       sourceSection: evidence.projectSection,
       definitionOfDone: [
         "A named contract, invariant, or proof condition is written before implementation.",
@@ -244,7 +355,7 @@ function buildPack(module) {
         "A test, trace, counterexample, or numerical observation is attached.",
         "The learner reviews the final patch and states one non-claim.",
       ],
-      curationRequired: true,
+      adaptationRequired: true,
     },
     code: {
       referenceModel: hasReferenceModel ? referenceModelPath : null,
@@ -264,10 +375,10 @@ function buildPack(module) {
     coverage: {
       workbook: "present",
       sixSessionSpine: sessions.length === 6 ? "present" : "repair-required",
-      taLecture: "scaffold",
-      studyPartnerProject: "scaffold",
+      taLecture: "prepared-derived-launch-cards",
+      studyPartnerProject: "prepared-derived-project-loop",
       codeFixture: hasReferenceModel && hasReferenceTest ? "reference-pair" : evidence.codeSlice.status,
-      pdf: "not-generated",
+      pdf: "local-release-pipeline",
       visualFallback: "workbook-and-renderer-bound",
       oralDefense: "existing-companion-guide",
       evidenceCard: "derived",
@@ -305,4 +416,3 @@ if (checkOnly) {
   fs.writeFileSync(outputPath, serialized, "utf8");
   console.log(`Generated ${packs.length} module teaching packs at ${path.relative(siteRoot, outputPath)}.`);
 }
-

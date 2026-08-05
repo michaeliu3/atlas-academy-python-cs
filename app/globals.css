@@ -5119,6 +5119,7 @@ main.module-library-shell {
   height: auto;
   margin: 0 auto;
   max-width: 100%;
+  overflow: visible;
 }
 
 /* Mermaid's generated style block is intentionally removed before injection.
@@ -6940,6 +6941,243 @@ main.module-library-shell {
     content: " (" attr(href) ")";
     font-weight: 400;
     overflow-wrap: anywhere;
+  }
+}
+
+/* Printable learner workbooks. The browser reader remains the canonical
+   accessible surface; these rules make its derived PDF legible and stable. */
+.print-module-shell {
+  background: #fff;
+  color: #17211d;
+  margin: 0 auto;
+  max-width: 920px;
+  padding: 2.5rem 3rem 4rem;
+}
+
+.print-module-header {
+  border-bottom: 2px solid #173d32;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+}
+
+.print-module-header h1 {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.print-module-meta {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.25rem 0 0;
+}
+
+.print-module-meta div {
+  border-left: 3px solid #d29b42;
+  padding-left: 0.7rem;
+}
+
+.print-module-meta dt {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.print-module-meta dd {
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.print-session-index {
+  background: #f1f7f4;
+  border: 1px solid #c6ded2;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+}
+
+.print-studio-companion {
+  background: #fff8ea;
+  border: 1px solid #e0c28f;
+  border-left: 4px solid #d29b42;
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+}
+
+.print-studio-companion h2 {
+  margin: 0.25rem 0 0.65rem;
+}
+
+.print-studio-companion p {
+  margin: 0.5rem 0;
+}
+
+.print-studio-companion ul {
+  margin-bottom: 0;
+}
+
+.print-handbook-section {
+  margin: 2rem 0;
+}
+
+.print-handbook-section h2 {
+  border-bottom: 1px solid #c9d6d0;
+  padding-bottom: 0.35rem;
+}
+
+.print-handbook-project-grid,
+.print-handbook-role-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.print-handbook-project-card,
+.print-handbook-role-card {
+  background: #f7faf8;
+  border: 1px solid #c9d6d0;
+  break-inside: avoid;
+  padding: 1rem;
+}
+
+.print-handbook-project-card h3,
+.print-handbook-role-card h3 {
+  margin-top: 0;
+}
+
+.print-handbook-project-card p,
+.print-handbook-role-card p {
+  margin: 0.45rem 0;
+}
+
+.print-handbook-boundary {
+  border-left: 4px solid #76547f;
+  padding-left: 1rem;
+}
+
+.print-session-index h2 {
+  margin-top: 0;
+}
+
+.print-session-index ol {
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.print-session-index li {
+  break-inside: avoid;
+  margin-bottom: 0.45rem;
+}
+
+.print-module-prose .lesson-code,
+.print-module-prose .mermaid-figure,
+.print-module-prose .lesson-callout,
+.print-module-prose table,
+.print-module-prose .lesson-details {
+  break-inside: avoid;
+}
+
+.print-module-prose .lesson-code pre,
+.print-module-prose .diagram-source pre {
+  max-height: none;
+  overflow: visible;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.print-module-prose .diagram-canvas {
+  min-height: 0;
+  overflow: visible;
+}
+
+.print-module-prose .diagram-canvas svg {
+  height: auto;
+  max-width: 100%;
+}
+
+.print-module-footer {
+  border-top: 1px solid #c9d6d0;
+  color: #43534c;
+  font-size: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 0.75rem;
+}
+
+@media print {
+  @page {
+    margin: 0.7in;
+    size: Letter;
+  }
+
+  .print-module-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .print-module-header,
+  .print-session-index,
+  .print-studio-companion,
+  .print-module-footer,
+  .print-module-prose .lesson-code,
+  .print-module-prose .mermaid-figure,
+  .print-module-prose .lesson-callout,
+  .print-module-prose table,
+  .print-module-prose .lesson-details {
+    break-inside: avoid;
+  }
+
+  .print-session-index {
+    background: #fff;
+  }
+
+  .print-session-index ol {
+    columns: 2;
+  }
+
+  .print-module-prose .diagram-source {
+    display: none;
+  }
+
+  .print-module-prose .heading-anchor {
+    display: none;
+  }
+
+  .print-module-prose a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .print-module-prose pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .print-module-prose th + th,
+  .print-module-prose td + td {
+    border-left: 1px solid #c9d6d0;
+  }
+
+  .print-module-prose td,
+  .print-module-prose th {
+    padding-left: 0.95rem;
+    padding-right: 0.95rem;
+  }
+
+  .print-handbook-project-grid,
+  .print-handbook-role-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .print-module-shell {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .print-module-meta,
+  .print-session-index ol {
+    columns: 1;
+    grid-template-columns: 1fr;
   }
 }
 

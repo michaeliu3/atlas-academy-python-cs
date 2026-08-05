@@ -21,6 +21,7 @@ import { PredictionRevealGate } from "./PredictionRevealGate";
 type ModuleMarkdownProps = {
   enableMultipleChoicePredictionGates?: boolean;
   markdown: string;
+  printMode?: boolean;
 };
 
 const languageNames: Readonly<Record<string, string>> = {
@@ -154,6 +155,7 @@ function wrapBatchDiagnosticRepairKeys(markdown: string): string {
 
 function createMarkdownComponents(
   enableMultipleChoicePredictionGates: boolean,
+  printMode: boolean,
 ): Components {
   let predictionGateCount = 0;
 
@@ -214,7 +216,7 @@ function createMarkdownComponents(
       }
 
       return (
-        <details className={["lesson-details", className].filter(Boolean).join(" ")} open={open}>
+        <details className={["lesson-details", className].filter(Boolean).join(" ")} open={printMode ? true : open}>
           {children}
         </details>
       );
@@ -286,6 +288,7 @@ function createMarkdownComponents(
 export function ModuleMarkdown({
   enableMultipleChoicePredictionGates = false,
   markdown,
+  printMode = false,
 }: ModuleMarkdownProps) {
   const learnerMarkdown = enableMultipleChoicePredictionGates
     ? wrapBatchDiagnosticRepairKeys(normalizeMathDelimiters(markdown))
@@ -293,7 +296,7 @@ export function ModuleMarkdown({
 
   return (
     <ReactMarkdown
-      components={createMarkdownComponents(enableMultipleChoicePredictionGates)}
+      components={createMarkdownComponents(enableMultipleChoicePredictionGates, printMode)}
       rehypePlugins={[
         rehypeRaw,
         [rehypeSanitize, atlasMarkdownSanitizationSchema],
