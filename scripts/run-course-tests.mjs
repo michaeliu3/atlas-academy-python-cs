@@ -67,9 +67,56 @@ const exitCode = await new Promise((resolveExitCode, reject) => {
     // captures from the apparatus/content runner.
     env: { ...process.env, ATLAS_GIT_INDEX_SNAPSHOT_CACHE: "1" },
     stdio: "inherit",
+    windowsHide: true,
   });
-  child.once("error", reject);
+
+  let receivedSignal = null;
+  let childClosed = false;
+  const signalHandlers = new Map();
+  const removeSignalHandlers = () => {
+    for (const [signal, handler] of signalHandlers) {
+      process.removeListener(signal, handler);
+    }
+    signalHandlers.clear();
+  };
+  const terminateChildTree = (signal) => {
+    if (childClosed || receivedSignal) return;
+    receivedSignal = signal;
+    if (process.platform === "win32") {
+      // Node's child.kill() does not reliably include the test workers on
+      // Windows. taskkill /T terminates the exact runner tree; the fallback
+      // keeps the cleanup bounded if taskkill cannot be started.
+      try {
+        const killer = spawn("taskkill", ["/PID", String(child.pid), "/T", "/F"], {
+          stdio: "ignore",
+          windowsHide: true,
+        });
+        killer.once("error", () => child.kill());
+      } catch {
+        child.kill();
+      }
+      return;
+    }
+    child.kill(signal);
+  };
+  for (const signal of ["SIGINT", "SIGTERM"]) {
+    const handler = () => terminateChildTree(signal);
+    signalHandlers.set(signal, handler);
+    process.once(signal, handler);
+  }
+
+  child.once("error", (error) => {
+    childClosed = true;
+    removeSignalHandlers();
+    reject(error);
+  });
   child.once("exit", (code, signal) => {
+    childClosed = true;
+    removeSignalHandlers();
+    if (receivedSignal) {
+      resolveExitCode(receivedSignal === "SIGINT" ? 130 : 143);
+      return;
+    }
     if (signal) {
       reject(new Error(`Node course tests terminated with signal ${signal}.`));
       return;

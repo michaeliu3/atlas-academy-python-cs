@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Hardened the split Node test runner's cancellation path: SIGINT/SIGTERM now
+  terminate the spawned test tree (including Windows workers), handlers are
+  removed on exit, and a focused regression protects the cleanup. This reduces
+  orphaned work without changing the full test set or branch-protection gates.
 - Refreshed the role binding in the two existing designated realtime chats and
   recorded their concise acknowledgements; this confirms role delivery only,
   not a substantive module session, live rendering, or Notion write.

@@ -68,6 +68,11 @@ cancelled after minutes of work. Draft updates now skip those full jobs.
    the relevant full checks. Main pushes still run the full post-merge Portal,
    Browser, apparatus, and Python verification, and the required job names
    remain unchanged.
+8. `scripts/run-course-tests.mjs` now forwards SIGINT/SIGTERM to its spawned
+   Node test runner, removes its signal handlers on exit, and uses Windows
+   `taskkill /T` when cancellation must include worker processes. This prevents
+   a cancelled local or hosted runner from leaving an orphaned test tree; it
+   does not replace GitHub's concurrency cancellation or remove any check.
 
 The cache changes validation setup cost only; they do not skip tests, weaken
 the provenance boundary, or change the draft/non-draft job selection.
