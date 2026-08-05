@@ -519,3 +519,12 @@ whiteboard rendering convention, and unchecked live acceptance items visible.
 This confirms page structure and policy text only; no learner record was
 created or changed, and the actual records-on write/pause/end/delete behavior
 remains open.
+
+## Dated private-deployment access-boundary checkpoint — 2026-08-05
+
+Read-only requests to the configured private Sites host returned HTTP 401 for
+both `/` and `/_vinext/image` before the Worker application response. The
+platform access boundary therefore prevented direct verification of the
+repository's response-header policy. This records an authenticated-access
+limitation only; it does not claim deployment success, header compliance, or
+security cleanliness.

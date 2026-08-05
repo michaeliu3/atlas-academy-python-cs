@@ -129,7 +129,10 @@ present when the matrix grows.
   review, and pedagogical approval for every module.
 - Production security headers at the actual private deployment, unresolved
   Dependabot states on `main`, and bounded OS/process behavior outside the
-  checked-in teaching-model claims.
+  checked-in teaching-model claims. A direct unauthenticated check of the
+  configured private host returned HTTP 401 for both `/` and `/_vinext/image`,
+  so the application headers remain unobservable without an authorized
+  deployment session.
 - A successful current non-draft full Course CI gate at the final reviewed ref.
 - Learner mastery or retention; no repository artifact substitutes for the
   learner's own explanations, debugging traces, dossiers, and oral defense.

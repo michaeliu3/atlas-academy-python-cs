@@ -635,3 +635,11 @@ solving lab surfaces. The fetched session-record page preserves the exact-chat
 acceptance checklist. No Notion page was created or edited, and this does not
 prove a successful records-on write, pause/end/delete handling, voice quality,
 or equation/code rendering.
+
+## Private-deployment access-boundary checkpoint (2026-08-05)
+
+Unauthenticated read-only requests to the configured private Sites host returned
+HTTP 401 for both `/` and `/_vinext/image`, before the Worker application
+response. The platform access boundary prevented header observation, so this
+is only an authenticated-access limitation—not deployment, header-compliance,
+or security-clean evidence.

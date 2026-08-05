@@ -44,3 +44,12 @@ ordinary-route result, image-route result, and any platform-added headers.
 Keep credentials, private learner data, raw captures, and hosting tokens out of
 Git. A local unit test, a Worker source inspection, or a configured remote does
 not substitute for this direct deployment observation.
+
+## Access-boundary observation — 2026-08-05
+
+An unauthenticated read-only request to the configured private Sites host
+returned HTTP 401 for both `/` and `/_vinext/image`. The response was stopped
+at the platform access boundary, so the Worker application headers were not
+observable. This is evidence that an authorized session is required for the
+procedure; it is neither a deployment-header verification nor a security-clean
+claim.
