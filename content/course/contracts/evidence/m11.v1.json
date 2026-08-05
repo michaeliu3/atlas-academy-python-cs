@@ -24,7 +24,7 @@
     {
       "id": "m11-six-connected-sessions",
       "criterionId": "six-connected-sessions",
-      "claim": "M11 exposes six ordered sessions that move from formulation and exhaustive evidence through decomposition, dynamic-programming state, pruning, uncertainty, and an agent-directed strategy defense into M12.",
+      "claim": "M11 exposes six ordered sessions that move from formulation and exhaustive evidence through decomposition, dynamic-programming state, pruning, streaming/randomized uncertainty, and an agent-directed strategy defense into M12.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-1--formulate-before-optimizing"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-2--decomposition-and-safe-commitment"},
@@ -48,7 +48,7 @@
     {
       "id": "m11-rigor-bundle",
       "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-      "claim": "M11 exposes a candidate definition, explicit objective/tie assumptions, a correctness argument, a greedy counterexample, and a bounded numerical comparison.",
+      "claim": "M11 exposes a candidate definition, explicit objective/tie assumptions, a streaming candidate guarantee, a correctness argument, a greedy counterexample, and bounded numerical comparisons.",
       "inputs": [
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "layer-2--candidate"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "layer-4--objective-and-tie-policy"},
@@ -119,7 +119,7 @@
       "criterionId": "confidence-diagnostic-misconceptions",
       "claim": "M11 exposes confidence-aware multiple-choice diagnostics, a misconception-repair route, and a constructive response to high-confidence errors.",
       "inputs": [
-        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "21-understanding-check--eight-confidence-aware-mcqs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "21-understanding-check--nine-confidence-aware-mcqs"},
         {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "misconception-repair-map--claims-before-tactics"}
       ],
       "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]

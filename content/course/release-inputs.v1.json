@@ -178,7 +178,7 @@
     },
     {
       "path": "content/course/contracts/companions/m11.v1.json",
-      "sha256": "3e83def26a437cb7471aeeae6e6149f1c9fddff0f080eaf719008bbb3d68491f"
+      "sha256": "26d1506f5da6a5b4fc4428478f6e0e26997e834340fd1442695cbdfc965eee85"
     },
     {
       "path": "content/course/contracts/companions/m12.v1.json",
@@ -314,7 +314,7 @@
     },
     {
       "path": "content/course/contracts/evidence/m11.v1.json",
-      "sha256": "6bf1b69b2b7e9a154f9aaeba7067ade88801c0c7823567db480964559cf1c88a"
+      "sha256": "7cefb0d4332517994e04d2ee24f68c2091c3a3ee860169e3f839156e91f02a26"
     },
     {
       "path": "content/course/contracts/evidence/m12.v1.json",
@@ -502,11 +502,11 @@
     },
     {
       "path": "content/course/contracts/legacy-module-contract-audit.v1.json",
-      "sha256": "7ee62e0cd8f141d4187803e9ef38f9663cc56b8d1a7d90d66f6d48e8a26246aa"
+      "sha256": "3c726c20d8690f1e2211841eaa4dc6a1c2dbacd8f29281eb9aeff5dacb768702"
     },
     {
       "path": "content/course/contracts/legacy-module-contract-packets.v1.json",
-      "sha256": "009635c167a223150eae6fcbc79dc02320700a8149f53d589c81f2fdbfb9034d"
+      "sha256": "fe9f0b1506b294a47e09c2fd5b78580ef9b74e3646d837b14baa5cb6f813b070"
     },
     {
       "path": "content/course/contracts/m26-preview-contract-packet.v1.json",
@@ -610,7 +610,7 @@
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "aa582698f3a212567dd0ad886d4a6f312cdf61f168b9bfaf8d0b340a883a3c5d"
+      "sha256": "7322a337038f4e29c94e4a2558bc65a5c12f927cc48b6fe183803747eb2b8d06"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
@@ -690,7 +690,7 @@
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
-      "sha256": "765d13f657ea6b83c652bb6d50d444ff6d7011d0e6c279f341d71118b16504f4"
+      "sha256": "3f5f19f420aea57c24f83cf4797a5118b8bd194d913b7620805f6f52354aec2d"
     },
     {
       "path": "content/source-maps/arc_iii_source_map.md",
@@ -702,7 +702,7 @@
     },
     {
       "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md",
-      "sha256": "36be634e4008c91d77d1af9b6ac6037fb06124981f644ebbaf83dbef540b2d68"
+      "sha256": "1893ca6e24fced3a6c5969f457e76dea04863256e4d4e8b9004be148b2ea0c7a"
     },
     {
       "path": "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md",

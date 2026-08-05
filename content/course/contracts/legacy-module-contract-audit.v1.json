@@ -387,7 +387,7 @@
         "transfer-task": {"status": "pointer-present", "anchors": ["level-8--transfer"]},
         "source-ledger": {"status": "pointer-present", "anchors": ["26-sources-and-synthesis-notes", "focused-official-reading-links"], "sourceReferences": [{"path": "content/source-maps/arc_ii_source_map.md", "headingAnchor": "module-11--algorithm-design-paradigms"}, {"path": "content/source-maps/arc_ii_source_map.md", "headingAnchor": "source-to-session-routing"}]},
         "accessible-visual-text-alternative": {"status": "pointer-present", "anchors": ["text-equivalent--strategy-selection-from-contract-to-evidence"]},
-        "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["21-understanding-check--eight-confidence-aware-mcqs", "interpretation", "likely-misconceptions"]},
+        "confidence-diagnostic-misconceptions": {"status": "pointer-present", "anchors": ["21-understanding-check--nine-confidence-aware-mcqs", "interpretation", "likely-misconceptions"]},
         "retrieval-and-spaced-review": {"status": "pointer-present", "anchors": ["scheduled-retrieval"]},
         "project-and-evidence-rubric": {"status": "pointer-present", "anchors": ["23-atlas-milestone-11--evidence-packet", "evidence-rubric--strategy-dossier"]},
         "supportive-oral-defense": {"status": "pointer-present", "anchors": ["conversational-oral-defense--m11", "hint-ladder--model-to-evidence", "changed-premise-counterexample", "transfer-turn--m12-boundary", "reflection--learner-controlled-evidence-summary"]},

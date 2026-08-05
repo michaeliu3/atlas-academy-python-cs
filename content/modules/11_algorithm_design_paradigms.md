@@ -146,6 +146,7 @@ By the end, Michael can practice:
 - derive recurrence, base cases, dependency order, cost, and reconstruction;
 - distinguish recursion, memoization, tabulation, backtracking, and branch-and-bound;
 - classify randomized algorithms and keep pseudorandomness separate from security;
+- model a one-pass streaming computation, its retained state, and its exact-versus-summary claim;
 - report an approximation ratio or an upper/lower quality gap only within its proof boundary;
 - design, direct, review, and verify an Atlas planner without outsourcing judgment.
 
@@ -960,6 +961,78 @@ quality.
 **[PYTHON GUARANTEE]** Python’s `random` module provides deterministic pseudorandom generators suitable for modeling and simulation. Its documentation explicitly warns against using it for security tokens; use the `secrets` module for security-sensitive randomness.
 
 Do not pin tests to an exact long output sequence across Python versions unless the documented reproducibility scope supports that dependency. Test invariants and inject an RNG where control matters.
+
+## 12.5 Streaming algorithms: bounded state and heavy hitters
+
+Reservoir sampling is one streaming algorithm. The broader model matters:
+the input arrives as a sequence (a_1,a_2,ldots,a_n), usually in one pass,
+while the retained state is much smaller than the stream. A streaming claim
+must name the answer requested at each prefix, the update time, the memory
+bound, and whether the answer is exact, a lower/upper bound, or a randomized
+summary. A generator or iterator describes how values arrive; it does not by
+itself provide a bounded-memory algorithm.
+
+### Prediction before the summary
+
+Suppose a telemetry stream has billions of event IDs but the operator needs
+the IDs that occur more than (n/k) times. Predict before reading the code:
+can a fixed-size state return exact counts for every ID? Give a confidence
+from 0–100 and name the resource that forces your answer. The relevant design
+question is not “which dictionary API?” but “which information can this state
+retain, and what error or candidate guarantee follows?”
+
+### Misra–Gries as an inspectable summary
+
+With (k-1) counters, the Misra–Gries update keeps a candidate set for
+heavy hitters in an arrivals-only stream:
+
+```python
+from collections.abc import Iterable
+
+
+def misra_gries(stream: Iterable[str], k: int) -> dict[str, int]:
+    """Return candidates; stored counts are lower bounds, not exact totals."""
+    if k < 2:
+        raise ValueError("k must be at least 2")
+    counters: dict[str, int] = {}
+    for item in stream:
+        if item in counters:
+            counters[item] += 1
+        elif len(counters) < k - 1:
+            counters[item] = 1
+        else:
+            counters = {
+                candidate: count - 1
+                for candidate, count in counters.items()
+                if count > 1
+            }
+    return counters
+```
+
+The all-decrement branch represents deleting one occurrence of each of
+(k) distinct items: the (k-1) stored items and the new item. Therefore at
+most (lfloor n/kfloor) such deletion rounds can occur. If an item appears
+more than (n/k) times, its occurrences cannot all be deleted, so it remains
+in the final candidate set. Its stored counter may still be smaller than its
+true frequency. To report exact frequencies, make a second pass over the
+candidate IDs (or use an external exact counter); treating the first-pass
+counter as exact is a bug.
+
+**Trace.** For `stream = "A A B C A B D A C".split()` and `k = 3`, write the
+counter state after every item before revealing the trace. The final state may
+contain `A` and `C`, but only `A` has frequency greater than (n/k=3). Record
+which conclusion is guaranteed (candidate coverage), which is merely a finite
+observation (the exact final dictionary), and what a second pass would settle.
+
+### Code-reading and transfer boundary
+
+Read the update as a state machine: membership hit, free slot, or global
+decrement. Ask what information is intentionally discarded, why a heavy item
+cannot disappear, and why a reported counter is not an exact count. Then
+transfer the contract to a bounded log monitor, a search-index top-(k)
+preview, or a network counter. Change one premise—deletions, weighted events,
+or a required exact answer—and state which proof and memory claim must be
+replaced. A sketch is not a license to hide the error model.
 
 ### Randomized planning boundary
 
@@ -2169,23 +2242,27 @@ state key. Keep an unsafe prune alongside it as a contrast.
 
 **Encounter:** exact search exceeds the candidate limit and estimated values are uncertain.
 
-**Derive:** Las Vegas/Monte Carlo contracts, reservoir-sampling proof, approximation ratio, and lower/upper certificate.
+**Derive:** the one-pass streaming model, a Misra–Gries candidate guarantee,
+Las Vegas/Monte Carlo contracts, reservoir-sampling proof, approximation
+ratio, and lower/upper certificate.
 
 **Learner actions:**
 
 1. prove the reservoir invariant;
 2. separate seeded reproducibility from distribution evidence;
-3. derive the independent-knapsack half guarantee;
-4. mark precisely where prerequisites invalidate it;
-5. compare expected and conservative Atlas policies.
+3. trace `misra_gries` and explain why a stored counter is a lower bound;
+4. derive the independent-knapsack half guarantee;
+5. mark precisely where prerequisites invalidate it;
+6. compare expected and conservative Atlas policies.
 
 **Evidence:** a claim label, assumptions, and certificate—not “seems near optimal.”
 
 ### Session 5 output — probability and quality-bound ledger
 
-Record the random variable or guarantee type, the approximation or
-lower/upper-bound relation, every assumption, and the first changed premise
-that invalidates the claim. A seeded run is evidence of reproducibility only.
+Record the stream state and memory bound, candidate/error guarantee, random
+variable or guarantee type, approximation or lower/upper-bound relation, every
+assumption, and the first changed premise that invalidates the claim. A seeded
+run is evidence of reproducibility only.
 
 **TA check:** random testing, randomized algorithms, and uncertain inputs must remain three different ideas.
 
@@ -2264,6 +2341,7 @@ For each scenario, identify the first plausible strategy and the structural fact
 - choose indivisible tasks under one budget;
 - search a maze with early dead ends;
 - sample one event from an unknown-length stream;
+- retain a bounded candidate summary for heavy hitters in a one-pass stream;
 - return a feasible plan with a quantified bound.
 
 Do not name a paradigm without the missing evidence.
@@ -2277,6 +2355,10 @@ Trace the bottom-up knapsack table for items `(2,3)` and `(3,4)` with budget `5`
 - the final value;
 - reconstruction decisions;
 - what changes if the recurrence reads row `i` rather than `i-1`.
+
+Then trace `misra_gries("A A B C A B D A C".split(), 3)` one item at a time.
+Mark the global-decrement step, the candidate guarantee, and the exact-count
+fact that still requires a second pass.
 
 ### Level 3 — Map
 
@@ -2324,6 +2406,11 @@ solve(problem, resource_limit) -> PlanReport
 
 Specify when it may choose exact subset DP, backtracking, a bounded approximation, or a labeled heuristic. Give an agent one bounded implementation task and prohibit silent claim upgrades.
 
+For a telemetry stream, add a `summarize(stream, k)` option. State whether it
+returns exact counts, candidates, or a probabilistic estimate; name retained
+state, update cost, verification pass, and the changed premise that would
+invalidate the contract.
+
 ### Level 7 — Review and verify
 
 Review an agent patch that introduces pruning. Require:
@@ -2349,7 +2436,7 @@ Identify candidate space, objective, constraints, equivalence state, evidence, a
 
 ---
 
-## 21. Understanding check — eight confidence-aware MCQs
+## 21. Understanding check — nine confidence-aware MCQs
 
 For each question:
 
@@ -2552,6 +2639,35 @@ D. Rewrite it manually so authorship is known.
 
 </details>
 
+### Question 9 — Streaming summary boundary
+
+For `misra_gries(stream, k)` with (n) arrivals and (k-1) counters, which
+statement is justified without a second pass?
+
+A. Every returned counter is the exact frequency of its item.  
+B. Every item occurring more than (n/k) times remains among the candidates;
+the stored count can be a lower bound.  
+C. The algorithm stores every distinct item, so its memory is (O(n)).  
+D. A fixed seed proves the candidate threshold for every stream.
+
+<details>
+<summary>Answer and distractor diagnosis</summary>
+
+**Answer: B.**
+
+- **A** confuses a first-pass summary with an exact frequency table.
+- **C** ignores the fixed (k-1)-counter state and the information it discards.
+- **D** replaces a deletion-count proof with one empirical run.
+
+**Routing:** A → second-pass verification and lower bounds; C → state/memory
+contract; D → mathematical guarantee versus reproducibility.
+
+**Connection:** the streaming model extends Module 7's lazy arrival boundary
+and Module 8's dictionary identity without pretending that a dictionary is
+free memory.
+
+</details>
+
 ### Interpretation
 
 The check routes instruction. It is not a grade.
@@ -2583,6 +2699,7 @@ The check routes instruction. It is not a grade.
 | “Same elapsed time means same future.” | prerequisite counterexample | state sufficiency |
 | “Any prune improves performance safely.” | low partial score with high remaining value | monotone violation or valid bound |
 | “Random tests prove randomized correctness.” | seeded output versus reservoir induction | probability contract |
+| “A streaming counter is an exact frequency table.” | trace a global decrement and compare with a second pass | candidate coverage and lower-bound count |
 | “Approximate means no proof.” | lower/upper certificate | quantified guarantee |
 | “Exact plan means good educational policy.” | biased or miscalibrated values | model and human-impact boundary |
 | “Green tests prove optimality.” | shared planner/verifier defect | independent evidence |
@@ -2601,8 +2718,10 @@ Ask in order:
 8. Why is each prune safe for every descendant?
 9. How is a returned solution reconstructed and independently checked?
 10. Is the claim exact, approximate, expected, high-probability, empirical, or heuristic?
-11. What parameter controls cost, and how is it encoded?
-12. Which human decision remains outside the optimizer?
+11. For a stream, what state is retained, what is discarded, and what guarantee
+    survives the deletion or sampling step?
+12. What parameter controls cost, and how is it encoded?
+13. Which human decision remains outside the optimizer?
 
 ### Staged hint ladder
 
@@ -2629,6 +2748,7 @@ Before accepting a planner patch, require:
 - expected/conservative policy divergence;
 - duplicate/unknown task in fabricated output;
 - ratio-greedy counterexample;
+- Misra–Gries candidate coverage on a bounded stream plus a second-pass exact-count check;
 - exact subset DP versus backtracking/exhaustive agreement on bounded cases;
 - reconstruction score/minute recomputation;
 - every new prune compared against the oracle;
@@ -2825,6 +2945,8 @@ External sources verify and extend the integrated narrative; they do not replace
 - [MIT 6.006 Lecture 16 — LCS, LIS, and Coins](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-16-dynamic-programming-part-2-lcs-lis-coins/) — compare several state definitions and recover their dependency DAGs.
 - [MIT 6.046J Design and Analysis of Algorithms](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/) — broader design/proof sequence for divide-and-conquer, greedy methods, dynamic programming, randomization, and approximation.
 - [UC Berkeley CS 170](https://cs170.org/) — an advanced undergraduate route through divide-and-conquer, greedy algorithms, dynamic programming, randomized algorithms, approximation, and computational limits.
+- [Carnegie Mellon 15-451/651 Lecture 20 — Streaming Algorithms](https://www.cs.cmu.edu/~15451-s24/lectures/lecture20-streaming.pdf) — the arrivals-only streaming model and heavy-hitter analysis; it calibrates the summary/error boundary but does not validate an Atlas monitor.
+- [Stanford CS 368 — Algorithmic Techniques for Big Data](https://web.stanford.edu/class/cs368/) — scope calibration for streaming, sketching, and compact summaries; it is a graduate-level extension signal, not a claim that M11 covers its full syllabus.
 
 ### Focused official reading links
 
@@ -2845,6 +2967,7 @@ dossier format or grant reuse of course assets.
 | Greedy proof | [MIT 6.046J Lecture 12 — Greedy Algorithms & MST](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) | A cut/exchange proof pattern; it does not justify an Atlas value or ratio priority. |
 | Probability contract | [MIT 6.046J Lecture 6 — Randomized Algorithms](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/cb55cb123a557eed0738a1187a452c24_MIT6_046JS15_lec06.pdf) | Expected-time/error-bound vocabulary; it does not establish Python randomness security or an Atlas guarantee. |
 | Approximation boundary | [MIT 6.046J Lecture 17 — Approximation Algorithms](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/a4a7f356ba3e65a00ad2bdcfed6e0f35_MIT6_046JS15_lec17.pdf) | A proved approximation-ratio pattern; a benchmark alone grants no Atlas quality bound. |
+| Streaming summary | [CMU 15-451/651 Lecture 20 — Streaming Algorithms](https://www.cs.cmu.edu/~15451-s24/lectures/lecture20-streaming.pdf) and [Stanford CS 368](https://web.stanford.edu/class/cs368/) | One-pass state, heavy-hitter candidates, and memory/error trade-offs; neither source makes a first-pass counter exact or validates an Atlas deployment claim. |
 | Connected architecture reading | [MIT 6.006 resource index](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/resource-index/) and [CMU 15-122 course information](https://www.cs.cmu.edu/~15122/syllabus.shtml) | A connected data-structures-and-algorithms spine and correct-by-design cross-component reasoning; neither source dictates this Atlas table or validates an Atlas architecture. |
 
 ### Session-to-source-and-evidence route
@@ -2870,7 +2993,7 @@ dossier format or grant reuse of course assets.
 1. After Session 1, read one MIT formulation example and rewrite candidate/feasibility/objective in Atlas vocabulary.
 2. After Session 2, study one valid greedy proof; extract the exchange or cut sentence rather than memorizing pseudocode.
 3. After Session 3, watch/read MIT 6.006’s DP state derivation and label each subproblem dependency.
-4. During Session 5, read the Python `random` warning and explain why reproducible tests are not security or distribution proofs.
+4. During Session 5, read the CMU streaming summary setup and Python `random` warning; explain why a candidate/lower-bound record and a reproducible seed are not exact counts or distribution proofs.
 5. During Session 6, read only the generated Atlas planner diff and its call path; do not tour a large solver repository without an invariant question.
 
 ### Source-use discipline

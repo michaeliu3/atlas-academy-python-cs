@@ -16,14 +16,14 @@
   },
   "teachingAssistant": {
     "role": "supportive-oral-defense",
-    "openingMove": "Begin with one learner-selected problem contract, proposed paradigm, recurrence, greedy proof, prune, or quality bound. Ask for the candidate, feasibility, objective, structural fact, and confidence before accepting an algorithm name.",
-    "artifactFocus": "Ask the learner to make one compact candidate table, five-row M6→M10 handoff table (contract, invariant, cost, failure, changed premise), state DAG, exchange argument, counterexample, prune witness, lower/upper-bound calculation, or independent verifier trace visible, then separate what it establishes from its assumptions and excluded cases.",
-    "repairMove": "Ask for a prediction before correction; change exactly one premise such as a shared constraint, negative value, ordering bonus, missing state detail, unsafe bound, probability model, or tie rule; then offer the smallest counterexample or hint without pass/fail framing."
+    "openingMove": "Begin with one learner-selected problem contract, proposed paradigm, recurrence, greedy proof, prune, streaming summary, or quality bound. Ask for the candidate, feasibility, objective, retained state, guarantee, structural fact, and confidence before accepting an algorithm name.",
+    "artifactFocus": "Ask the learner to make one compact candidate table, five-row M6→M10 handoff table (contract, invariant, cost, failure, changed premise), state DAG, exchange argument, Misra–Gries trace, counterexample, prune witness, lower/upper-bound calculation, or independent verifier trace visible, then separate what it establishes from its assumptions and excluded cases.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as a shared constraint, negative value, ordering bonus, missing state detail, unsafe bound, stream deletion, exact-count requirement, probability model, or tie rule; then offer the smallest counterexample or hint without pass/fail framing."
   },
   "studyPartner": {
     "role": "non-grading-rehearsal",
     "rehearsalMove": "Use the visible chat as a readable whiteboard when available: draw a tiny candidate space, recurrence/state graph, or five-row M6→M10 contract → invariant → cost → failure → changed-premise handoff beside a short formula or code fragment, and provide a plain-language or ASCII fallback before rehearsing one claim at a time.",
-    "changedPremise": "Keep the requested decision fixed but change one constraint, reward, order rule, subproblem state, prune, randomized guarantee, or approximation assumption. Ask for a prediction and confidence before distinguishing the model, proof, implementation, verifier, cost, and human-policy claims that changed.",
+    "changedPremise": "Keep the requested decision fixed but change one constraint, reward, order rule, subproblem state, prune, stream update/deletion rule, exactness requirement, randomized guarantee, or approximation assumption. Ask for a prediction and confidence before distinguishing the model, proof, implementation, verifier, cost, and human-policy claims that changed.",
     "taHandoff": "End with the learner's selected M11 artifact, confidence, changed premise, proof or counterexample, independently checked evidence, one unresolved assumption, and a constructive M12 question for the Teaching Assistant; a completed five-row M6→M10 table is a discussion artifact, not route completion."
   },
   "forwardHandoff": {

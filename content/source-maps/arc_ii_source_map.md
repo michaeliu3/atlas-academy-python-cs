@@ -181,6 +181,8 @@ Useful whole-course entry points:
 | [MIT 6.006 Lecture 16: LCS, LIS, and Coins](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-16-dynamic-programming-part-2-lcs-lis-coins/) | Concrete practice defining subproblem state and dependencies. |
 | [UC Berkeley CS 170 Spring 2026](https://cs170.org/) | Broader advanced-algorithms sequence covering divide-and-conquer, greedy algorithms, dynamic programming, randomized algorithms, approximation, and complexity. |
 | [CS 170 course policies and scope](https://cs170.org/policies/) | Confirms current course coverage and provides a problem-solving/academic-integrity context for adaptation. |
+| [Carnegie Mellon 15-451/651 Lecture 20 — Streaming Algorithms](https://www.cs.cmu.edu/~15451-s24/lectures/lecture20-streaming.pdf) | Arrivals-only streaming model, bounded summaries, and heavy-hitter analysis for M11's one-pass state/error bridge. Link and paraphrase only; it does not validate an Atlas monitor. |
+| [Stanford CS 368 — Algorithmic Techniques for Big Data](https://web.stanford.edu/class/cs368/) | Scope calibration for streaming and sketching as optional advanced depth; it is not a claim that M11 covers the full course. |
 | [`functools.cache` and `lru_cache`](https://docs.python.org/3.14/library/functools.html#functools.cache) | Official Python mechanism for memoization experiments, after the recurrence and state definition are understood. |
 | [`random` security warning](https://docs.python.org/3.14/library/random.html) | Clarifies that simulation-oriented pseudorandomness and security-sensitive randomness are different concerns. |
 
@@ -220,6 +222,7 @@ The remaining sources are instructor references for triangulation and remediatio
 | Hash reasoning | MIT 6.006 Lecture 4 + Python data model | Module 8 core |
 | Ordered structure tradeoffs | MIT 6.006 Lectures 6–8 + `heapq` | Module 9 core |
 | Graph traversal and flow invariants | MIT 6.006 Lectures 9–13; MIT 6.046J Lecture 13 | Module 10 core |
+| Streaming state and error boundary | CMU 15-451/651 Lecture 20; Stanford CS 368 scope page | Module 11 Session 5 |
 | Defining DP subproblems | MIT 6.006 Lectures 15–18 | Module 11 core |
 
 ## Bounded GitHub reading ladder
@@ -246,7 +249,7 @@ The reading target is understanding, architecture recovery, and claim verificati
 | Trees, heaps, tries, sorting | 9 | scheduler/prefix-search architecture defense |
 | Graph representations and traversal | 10 | trace + correctness argument |
 | Shortest paths and topological ordering | 10 | algorithm selection under changed assumptions |
-| Divide-and-conquer, greedy, DP, backtracking, randomized/approximation intuition | 11 | strategy comparison + constrained planner |
+| Divide-and-conquer, greedy, DP, backtracking, randomized/approximation, and streaming intuition | 11 | strategy comparison + constrained planner + bounded heavy-hitter summary |
 | Worst/expected/amortized analysis | 5, 6, 8, 9 | explicit case labels and evidence |
 | Python language/CPython boundary | 6–9 | claim badges and source verification |
 | Code reading, debugging, design, delegation, review | all Arc II modules | evidence ledger + oral checkoffs |
