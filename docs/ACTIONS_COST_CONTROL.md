@@ -129,3 +129,14 @@ run [`30982815817`](https://github.com/michaeliu3/atlas-academy-python-cs/action
 Its 95-test content path passed in 52 seconds; the portal, apparatus, Python,
 and browser jobs were skipped because the pull request remains draft. This is
 the intended low-cost draft behavior, not a full-gate or release result.
+
+## Incremental synchronize classification (2026-08-05)
+
+The classifier now uses the `before` SHA supplied by a pull-request
+`synchronize` event when it is available. That makes the change scope represent
+the newly pushed PR-head update rather than the entire stacked PR range, so a
+documentation-only follow-up does not rerun Draft content feedback solely
+because an earlier commit changed content. Open/reopen/ready events and main
+pushes retain the conservative base-to-head comparison. If GitHub omits the
+event's previous-head field, the classifier falls back to the base range; no
+required check is weakened and no content change is silently ignored.

@@ -538,3 +538,14 @@ Records remain off, no transcript or audio was copied, and no Notion write was
 attempted. This proves session reachability and correct opening behavior only;
 it does not prove learner evidence, a completed oral defense, voice/equation/code
 rendering, or a saved note.
+
+## Incremental Actions synchronize-classification checkpoint — 2026-08-05
+
+The Course CI classifier now compares a pull-request `synchronize` event with
+that event's previous PR head when GitHub supplies it, while preserving the
+base-to-head range for opening/ready transitions and main pushes. This prevents
+docs-only follow-ups on a stacked draft PR from re-running the historical
+content feedback path. The classifier falls back to the conservative base range
+when the previous-head field is absent; required checks and final verification
+remain unchanged. Hosted savings still require a future docs-only synchronize
+observation.

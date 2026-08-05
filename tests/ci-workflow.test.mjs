@@ -62,6 +62,16 @@ test("Course CI keeps full gates out of draft PR updates while running focused c
   );
   assert.match(
     workflow,
+    /ATLAS_BEFORE_SHA: \$\{\{ github\.event_name == 'pull_request' && github\.event\.action == 'synchronize' && github\.event\.before \|\| '' \}\}/u,
+    "synchronize events expose the previous PR head for incremental classification",
+  );
+  assert.match(
+    workflow,
+    /ATLAS_EVENT_ACTION -eq 'synchronize'[\s\S]*?ATLAS_BEFORE_SHA[\s\S]*?\$baseSha = \$env:ATLAS_BEFORE_SHA/u,
+    "incremental synchronize classification falls back conservatively when the previous head is unavailable",
+  );
+  assert.match(
+    workflow,
     /portal:\n\s*name: Portal quality gate\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
     "the required portal context runs for every non-draft review and main push",
   );

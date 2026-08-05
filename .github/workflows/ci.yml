@@ -49,10 +49,23 @@ jobs:
         shell: pwsh
         env:
           ATLAS_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          ATLAS_EVENT_ACTION: ${{ github.event_name == 'pull_request' && github.event.action || '' }}
+          ATLAS_BEFORE_SHA: ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.event.before || '' }}
           ATLAS_HEAD_SHA: ${{ github.sha }}
         run: |
           $baseSha = $env:ATLAS_BASE_SHA
           $headSha = $env:ATLAS_HEAD_SHA
+          if (
+            $env:ATLAS_EVENT_ACTION -eq 'synchronize' -and
+            $env:ATLAS_BEFORE_SHA -and
+            $env:ATLAS_BEFORE_SHA -notmatch '^0+$'
+          ) {
+            # A synchronize event represents an incremental PR-head update.
+            # Classify only that update so docs-only follow-ups do not rerun
+            # the entire draft branch's content feedback suite. If GitHub does
+            # not provide `before`, retain the conservative base-to-head range.
+            $baseSha = $env:ATLAS_BEFORE_SHA
+          }
           if ($baseSha -match '^0+$') {
             $baseSha = "$headSha^"
           }

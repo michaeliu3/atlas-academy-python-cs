@@ -652,3 +652,12 @@ prompt and await the learner; no learner answer is inferred. Records stayed off,
 and no transcript, audio, or Notion write was captured. This is bounded session
 reachability evidence, not a completed session, oral-defense result, rendering
 verification, learner mastery, deployment, or release claim.
+
+## Incremental Actions synchronize-classification checkpoint (2026-08-05)
+
+The workflow classifier was tightened to use the previous PR head on
+`pull_request.synchronize` when GitHub supplies `event.before`; it retains the
+conservative base comparison for other event types and falls back to that range
+if the field is unavailable. This is intended to remove duplicate Draft content
+feedback on docs-only follow-ups without removing required checks. Hosted cost
+reduction remains pending a direct docs-only synchronize observation.
