@@ -424,3 +424,13 @@ copies were regenerated from that single canonical body, and
 `tests/m31-m36-pedagogy.test.mjs` now enforces the minimum surface. This is a
 pedagogical improvement only: the six modules remain authoring-only, hidden,
 unreviewed, and without release or learner evidence.
+
+## Hosted advanced-pack content checkpoint — 2026-08-05
+
+The content-bearing commit
+[`a6add42`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a6add42c0c135ec7e664af3241259d1df83f03f6)
+passed Draft Course CI run
+[`30986257553`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986257553):
+structural contract and release-input validation, generated-artifact checks,
+source freshness, and all 95 content tests passed. This is not a non-draft
+full gate, module promotion, deployment, human review, or learner evidence.

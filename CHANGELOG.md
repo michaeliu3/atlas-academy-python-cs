@@ -11,6 +11,9 @@ actually published.
   visible prose alternative, and code/native code-reading card per module;
   regenerated hidden candidates from the canonical workbooks and added a
   focused pedagogy-density guard. This does not promote or publish them.
+- Recorded hosted Draft CI success for the content-bearing advanced-pack update:
+  `a6add42` / run `30986257553` passed the contract, generated-input, source,
+  and 95-test content paths; no full-gate or promotion claim is implied.
 - Clarified the generated truth header's Draft entry as the latest
   **content-bearing** checkpoint and recorded head `80f9ff6` / run `30985254418`;
   later documentation-only commits remain separate provenance, not implied

@@ -14,13 +14,13 @@
     },
     "currentDraftContent": {
       "state": "success",
-      "commit": "80f9ff6658bd99332386fa7e66bb7c5f1721e544",
+      "commit": "a6add42c0c135ec7e664af3241259d1df83f03f6",
       "date": "2026-08-05",
-      "runId": "30985254418",
+      "runId": "30986257553",
       "pass": 95,
       "fail": 0,
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30985254418",
-      "note": "Latest recorded content-bearing Draft evidence at the dependency-refresh checkpoint; the 95-test content suite passed. Later documentation-only commits have separate provenance entries. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986257553",
+      "note": "Latest recorded content-bearing Draft evidence after the M31–M36 visual and code-reading density update; the 95-test content suite passed. Later truth-ledger commits have separate provenance entries. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
     },
     "lastFullGateApparatus": {
       "state": "success",
