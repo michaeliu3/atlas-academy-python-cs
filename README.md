@@ -51,6 +51,14 @@ The course privileges reading unfamiliar code, modelling, debugging,
 architectural reasoning, reviewing AI-generated changes, and evidence over
 rote typing or exam drill.
 
+You do not need to wait for a human review to begin. The [private guided
+learning route](docs/PRIVATE_GUIDED_LEARNING_ROUTE.md) starts with a repeatable
+Codex loop: Study Partner prediction and code/architecture reading, one small
+evidence artifact, Teaching Assistant repair and supportive oral defense, one
+learner-controlled record, then retrieval and a forward handoff. Human-only
+observations are waived during construction and are added only when real module
+sessions occur; no session, mastery, or Notion write is fabricated.
+
 ## 60-day Atlas Core: intended route and release status
 
 The 60-day Atlas Core is a **full-time intensive**: it targets **35–45 focused

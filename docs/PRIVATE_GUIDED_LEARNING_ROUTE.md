@@ -15,6 +15,51 @@ This is one route, not a second curriculum. If this page and
 [`course-graph.v2.json`](../content/course/course-graph.v2.json) ever differ
 about prerequisites or portal access, the graph wins.
 
+## Start now: the build is ready before human evidence
+
+Human-only observations are waived during course construction. They are not a
+reason to wait, and this waiver does not invent a learner session, mastery, or
+Notion write. Start the first real learning loop in the two designated Codex
+chats as soon as you choose a module:
+
+```text
+route → Study Partner prediction/retrieval → smallest artifact or trace
+      → TA repair and supportive oral defense → one concise record
+      → retrieval date + next-module handoff → revise the next session
+```
+
+Use the same six-step loop for every module:
+
+1. **Orient.** Open the graph-bound workbook and name the module, session,
+   prerequisite, and one question. The portal is the visual reference; the
+   designated chats are where guided learning happens.
+2. **Predict and inspect.** In the Study Partner chat, state a prediction and
+   confidence before the reveal. Read the code, diagram, derivation, or
+   architecture trace; change one premise and record the boundary you found.
+3. **Make one evidence artifact.** Produce the smallest useful state trace,
+   counterexample, proof step, numerical check, design card, or debugging note.
+   Typing a large implementation is optional; understanding and explaining the
+   mechanism is the requirement.
+4. **Repair and defend.** Carry the compact handoff to the Teaching Assistant.
+   The TA repairs one fragile model, asks a changed-premise/transfer question,
+   and conducts the encouraging oral defense. It is evidence for the next step,
+   not a pass/fail exam.
+5. **Record only what is useful.** Say `records on` in that exact designated
+   chat only when you want the configured concise Notion note. Keep records off
+   otherwise. If a write is not directly verified, keep the ready-to-paste
+   local summary; never save a transcript or claim a write.
+6. **Improve forward.** Add one retrieval prompt, one repaired misconception
+   or uncertainty, and the smallest next action/forward handoff. Begin the next
+   session by retrieving that prompt. If the same error recurs, slow the pace or
+   bridge to its prerequisite; do not silently skip the dependency.
+
+The record system therefore grows from learning rather than from a preliminary
+human review: each module contributes a compact notebook entry, repair,
+retrieval item, oral-defense synthesis, and forward handoff. After three
+modules, use those entries to adjust pace, examples, and bridge recommendations;
+the course content remains rigorous while the route becomes better fitted to
+the learner's observed uncertainty.
+
 ## Full connected sequence
 
 ```text
