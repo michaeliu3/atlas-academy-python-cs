@@ -6,11 +6,11 @@
   "truth": {
     "lastFullGate": {
       "state": "success",
-      "commit": "f4ea506a06eead4e697f7aa27d4f521492cfdc9f",
+      "commit": "82a130a688f9ce8e04b03bf3f1b490d337c6ec16",
       "date": "2026-08-05",
-      "runId": "31004629901",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31004629901",
-      "note": "Latest content-bearing normal non-draft pull-request Course CI gate on commit f4ea506; portal, 423/423 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit remains separately recorded on the preceding source-unchanged gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
+      "runId": "31008159124",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124",
+      "note": "Latest normal non-draft pull-request Course CI gate on commit 82a130a; portal quality, 423/423 Node apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility routes passed. The learner-facing start-now workflow and role surfaces are now covered by this gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
     },
     "currentDraftContent": {
       "state": "success",
@@ -26,37 +26,37 @@
       "state": "success",
       "pass": 423,
       "fail": 0,
-      "runId": "31004629901",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31004629901",
-      "note": "Latest recorded non-draft apparatus job passed all 423 tests on the generated merge candidate. This is automated evidence, not module promotion or learner mastery."
+      "runId": "31008159124",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124",
+      "note": "Latest recorded non-draft apparatus job passed all 423 tests on the 82a130a merge candidate. This is automated evidence, not module promotion or learner mastery."
     },
     "lastFullGateBrowser": {
       "state": "success",
       "pass": 63,
       "fail": 0,
-      "runId": "31004629901",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31004629901",
-      "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the generated merge candidate; representative assistive-technology review remains waived for the build phase."
+      "runId": "31008159124",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124",
+      "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the 82a130a merge candidate; representative assistive-technology review remains waived for the build phase."
     },
     "reviewReadyRef": {
       "state": "ready-for-review",
-      "commit": "f4ea506a06eead4e697f7aa27d4f521492cfdc9f",
+      "commit": "82a130a688f9ce8e04b03bf3f1b490d337c6ec16",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "31004629901",
+      "runId": "31008159124",
       "checkState": "success",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
-      "note": "Current review-ready ref passed the full content-bearing Course CI gate: portal, 422/422 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded"
+      "note": "Current review-ready ref 82a130a passed the full Course CI gate: portal, 423/423 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded"
     },
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "Latest recorded normal non-draft Course CI run 31004629901 passed the full 423-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
+      "basis": "Latest recorded normal non-draft Course CI run 31008159124 passed the full 423-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
     },
     "openAxeViolations": {
       "count": 0,
       "state": "none-detected",
-      "basis": "Latest recorded normal non-draft browser job in run 31004629901 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
+      "basis": "Latest recorded normal non-draft browser job in run 31008159124 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
     },
     "openDependencyAlerts": {
       "count": 2,
@@ -176,14 +176,14 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 30999161797 kept every required branch-protection context green while skipping expensive jobs for a docs-only successor; content, application, test, dependency, workflow, and generated-input changes retain full checks. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
+      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 31008159124 kept every required branch-protection context green; the changed learner surface correctly ran the portal, apparatus, Python, and browser checks. Metadata-only successors remain eligible for the cheaper path, while content, application, test, dependency, workflow, and generated-input changes retain full checks. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
     },
     {
       "id": "history-provenance",
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
-      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the current ref 24dc8bd and its lightweight required-check run are recorded, while exact private deployment state and final release limitations remain separate."
+      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the current ref 82a130a and its successful full-gate run are recorded, while exact private deployment state and final release limitations remain separate."
     },
     {
       "id": "final-audit",

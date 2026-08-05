@@ -556,7 +556,7 @@ The learner explicitly waived all human-only requirements for the current
 phase. Human source/reuse/pedagogical/visual review, learner-led TA and Study
 Partner sessions, oral-defense evidence, live rendering observation, and
 learner-approved records-on Notion writes are therefore documented as
-deferred rather than inferred complete. Automated contracts, focused tests,
+waived rather than inferred complete. Automated contracts, focused tests,
 privacy boundaries, dependency and deployment checks, additive provenance, and
 the current non-draft release gate remain required; this waiver does not
 permit a completion, mastery, certification, or university-equivalence claim.
@@ -610,3 +610,21 @@ The current clean head was given one bounded local
 120-second shell limit and was terminated with its identified Node worker tree;
 no pass or failure is inferred. This reinforces that the current hosted record
 is Draft content evidence, not a current apparatus/full-gate result.
+
+## Start-now workflow and refreshed full-gate checkpoint — 2026-08-05
+
+The additive review-ready ref [`82a130a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/82a130a688f9ce8e04b03bf3f1b490d337c6ec16)
+adds a machine-validated start-now entry to the canonical Codex learning
+workflow. It explicitly permits placement/M01 study while build-phase
+human-only evidence is waived, preserves the three availability boundaries,
+and binds the six-step choose → open → make → repair → record → improve
+structure to the learner-facing Learning Partners surface and role prompts.
+The compact record remains local by default and cannot create a grade, mastery,
+route unlock, release decision, or human-review evidence.
+
+The same ref passed normal non-draft Course CI run
+[`31008159124`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124):
+portal quality, 423/423 Node apparatus tests, both Python teaching-model legs,
+and 63/63 Chromium/axe routes succeeded. This is automated workflow and
+provenance evidence; the human/platform/deployment boundaries remain open or
+waived as documented.

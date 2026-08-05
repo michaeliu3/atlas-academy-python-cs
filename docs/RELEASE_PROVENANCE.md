@@ -747,3 +747,15 @@ routes all passed. The source-link liveness audit remains separately recorded
 on run [`30995803298`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30995803298),
 which checked 1,064 URLs. This is automated provenance, not publication,
 deployment, human review, or learner mastery evidence.
+
+## Current non-draft full-gate checkpoint (2026-08-05, latest)
+
+The current reviewed ref [`82a130a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/82a130a688f9ce8e04b03bf3f1b490d337c6ec16)
+passed normal non-draft Course CI run
+[`31008159124`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124).
+Portal quality, strict TypeScript, lint, build, content tests, 423/423 Node
+apparatus tests, Python 3.12 and 3.14 teaching models, and 63/63 Chromium/axe
+routes all passed. The run covers the canonical start-now learning workflow,
+learner-facing Learning Partners surface, and role-prompt changes. This is
+automated provenance, not publication, deployment, human review, or learner
+mastery evidence.

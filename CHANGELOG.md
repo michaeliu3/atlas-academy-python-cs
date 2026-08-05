@@ -8,11 +8,16 @@ actually published.
 ## Unreleased
 
 - Reconciled the generated current-truth evidence with the latest additive
-  review-ready head `f4ea506` and successful non-draft Course CI run
-  `31004629901`: portal quality, 423/423 Node apparatus tests, both Python
+  review-ready head `82a130a` and successful non-draft Course CI run
+  `31008159124`: portal quality, 423/423 Node apparatus tests, both Python
   teaching-model legs, and 63/63 browser routes passed. This updates provenance
   only; it does not promote modules or claim learner, deployment, or release
   completion.
+- Added the canonical **start-now** learning entry: human review is waived for
+  the build phase, the learner can begin with placement or M01, and each
+  conversation produces a compact record, retrieval prompt, and forward
+  improvement signal without creating a grade, mastery, route unlock, or
+  release claim.
 - Hardened the split Node test runner's cancellation path: SIGINT/SIGTERM now
   terminate the spawned test tree (including Windows workers), handlers are
   removed on exit, and a focused regression protects the cleanup. This reduces
