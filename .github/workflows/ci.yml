@@ -131,7 +131,7 @@ jobs:
             if (
               $path -like 'app/*' -or
               $path -like 'components/*' -or
-              $path -like 'content/*' -or
+              ($path -like 'content/*' -and -not $isProvenanceOnly) -or
               $path -like 'e2e/*' -or
               $path -like 'public/*' -or
               $path -like '*.css' -or

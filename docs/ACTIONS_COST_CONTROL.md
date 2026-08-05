@@ -155,3 +155,11 @@ spending another multi-minute test fan-out. Any learner content, course graph,
 source map, script, test, workflow, application, or main-branch push retains
 the existing broader verification. The distinction is enforced by a focused
 workflow regression test.
+
+The first stacked successor (`51e02e5`, run `31005593039`) still exercised
+Chromium because the browser branch initially retained the broad `content/*`
+match; its apparatus and both Python jobs already took the lightweight path.
+The browser predicate is now covered by the same allowlist regression and is
+excluded for the next isolated provenance-only update. The conservative
+base-range behavior remains intentional when a mixed historical range is the
+only available scope.

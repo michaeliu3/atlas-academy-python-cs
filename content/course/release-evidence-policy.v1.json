@@ -8,7 +8,7 @@
     "workflowId": 323581527,
     "workflowName": "Course CI",
     "workflowPath": ".github/workflows/ci.yml",
-    "workflowSourceSha256": "6274738efaecd0ec3228a760065cd6b213c950847e2a933cb9808c33d8194212",
+    "workflowSourceSha256": "42e974999a4ca2147914fa819b802d784713f794d9ac2a0a1d8231eca8886317",
     "event": "pull_request",
     "requiredJobNames": [
       "Portal quality gate",

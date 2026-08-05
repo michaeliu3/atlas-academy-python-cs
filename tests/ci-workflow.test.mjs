@@ -125,6 +125,11 @@ test("current-truth metadata keeps portal checks without fan-out multipliers", a
     /\(\$path -like 'content\/course\/\*' -and -not \$isProvenanceOnly\)/u,
     "provenance-only updates do not trigger the apparatus multiplier",
   );
+  assert.match(
+    workflow,
+    /\(\$path -like 'content\/\*' -and -not \$isProvenanceOnly\) -or/u,
+    "provenance-only updates do not trigger the browser multiplier",
+  );
 });
 
 test("Teaching-model CI proves the runtime exercise verifier before the ordinary suite", async () => {
