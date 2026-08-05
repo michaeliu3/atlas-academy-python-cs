@@ -289,3 +289,15 @@ passed changed-file classification and the draft content path; apparatus,
 browser, and teaching-model jobs were intentionally skipped. This does not
 verify headers at the private deployment, close dependency alerts, or establish
 security-clean status.
+
+## Dated Actions supersession observation — 2026-08-05
+
+Commit [`1012c58`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/1012c58)
+records direct PR #22 evidence for the remaining Actions setup-cost boundary:
+run [`30978504095`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978504095)
+was cancelled after classification and Draft-content setup, while the next
+run [`30978565589`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978565589)
+was cancelled at the classifier boundary because GitHub reported a higher-
+priority waiting request in the same concurrency group. This confirms
+superseded-run cancellation is observed; it does not replace the future
+required full non-draft gate or justify removing required checks.
