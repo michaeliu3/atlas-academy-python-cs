@@ -102,8 +102,8 @@
       "id": "mathematics-statistics",
       "requirement": "M28–M31 cover the specified linear algebra, analysis, statistics, optimization, and information theory spine.",
       "state": "partial",
-      "evidence": "content/modules/28_linear_algebra_numerical_stability_representation.md; content/modules/29_calculus_real_analysis_continuous_change.md; content/modules/30_probability_statistics_scientific_inference.md; content/authoring/m31_optimization_information_workbook.v1.md",
-      "openItem": "Confirm each named theorem and derivation against the Levels 1–9 inventory and evidence artifacts."
+      "evidence": "content/modules/28_linear_algebra_numerical_stability_representation.md; content/modules/29_calculus_real_analysis_continuous_change.md; content/modules/30_probability_statistics_scientific_inference.md; content/source-maps/module30_probability_statistics_scientific_inference_source_map.md; tests/m30-statistics-breadth.test.mjs; content/authoring/m31_optimization_information_workbook.v1.md",
+      "openItem": "The M30 breadth check now covers the named probability/statistics spine; retain human theorem/derivation review and keep high-dimensional/robust depth explicitly in Extension 1."
     },
     {
       "id": "theory-computation",
