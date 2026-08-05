@@ -7,6 +7,7 @@ import {
   auditSourceCorpus,
   extractReviewDates,
   extractUrls,
+  parseCurlProbe,
   siteRoot,
   validateProvenance,
 } from "../scripts/check-source-links.mjs";
@@ -55,4 +56,15 @@ test("URL extraction stops before a prose em dash after a Markdown link", () => 
     extractUrls("[CMU](https://csd.cs.cmu.edu/15213-introduction-to-computer-systems)—followed"),
     ["https://csd.cs.cmu.edu/15213-introduction-to-computer-systems"],
   );
+});
+
+test("curl probe parsing keeps the final redirected status and URL", () => {
+  assert.deepEqual(
+    parseCurlProbe(
+      "HTTP/2 301\nATLAS_STATUS:301\nATLAS_URL:https://example.test/old\n" +
+        "HTTP/2 200\nATLAS_STATUS:200\nATLAS_URL:https://example.test/new\n",
+    ),
+    { status: 200, finalUrl: "https://example.test/new" },
+  );
+  assert.match(parseCurlProbe("curl: could not resolve host").error, /final HTTP status/u);
 });

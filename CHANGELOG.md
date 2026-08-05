@@ -11,6 +11,10 @@ actually published.
   both ordinary and image-optimization Worker responses. Its focused
   regression passes 4/4; the repository still makes no remote-deployment or
   security-clean claim.
+- Hardened the live source-link audit with a fail-closed system-curl fallback
+  for runtimes whose trust store cannot reach an otherwise live source. The
+  current audit checked 1,068 URLs with no unreachable result; this is not a
+  source-permission, institutional-alignment, or mastery claim.
 - Added an apparatus regression that proves both production Worker response
   paths retain the shared security-header policy, and recorded the focused
   3/3 result without claiming private-deployment verification or a

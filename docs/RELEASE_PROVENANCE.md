@@ -541,3 +541,14 @@ then passed the changed-file classifier and draft content path for this
 checkpoint. Portal, apparatus, browser, and teaching-model jobs were skipped by
 draft cost control. The hosted result confirms the checked-in content path; it
 does not substitute for direct deployment observation or a non-draft full gate.
+
+## Live source-link transport checkpoint (2026-08-05)
+
+The live source audit now checks all 1,068 source-map and calibration URLs. The
+bounded run recorded 1,038 HTTP 200 responses, 4 HTTP 202 responses, 4 HTTP
+206 responses, 3 HTTP 401 responses, and 19 HTTP 403 responses; the latter
+statuses are accepted as reachable boundary responses. The audit uses a
+fail-closed system-curl fallback when the bundled Node runtime cannot establish
+the host trust chain; it never turns a transport failure into a passing link.
+This validates liveness and freshness evidence, not institutional alignment,
+source permission, human review, or learner mastery.

@@ -1,9 +1,12 @@
+import { execFile } from "node:child_process";
 import { readFile, readdir, stat } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 export const siteRoot = resolve(scriptDirectory, "..");
+const execFileAsync = promisify(execFile);
 
 const PROVENANCE_MARKER =
   /access(?:ed| date)?|audit(?:ed| date)?|calibrat|checked|check(?:ed)?|cutoff|baseline|snapshot|recheck|research|review(?:ed| date)?|follow[- ]?through|decision|scope|updated/iu;
@@ -169,6 +172,64 @@ function reachableStatus(status) {
   return (status >= 200 && status < 400) || [401, 403, 405, 429, 451].includes(status);
 }
 
+export function parseCurlProbe(stdout) {
+  const statusMatches = [...String(stdout).matchAll(/ATLAS_STATUS:(\d{3})/gu)];
+  const urlMatches = [...String(stdout).matchAll(/ATLAS_URL:(\S+)/gu)];
+  const status = Number(statusMatches.at(-1)?.[1]);
+  if (!Number.isInteger(status)) {
+    return { error: "curl response did not include a final HTTP status marker" };
+  }
+  return {
+    status,
+    finalUrl: urlMatches.at(-1)?.[1] ?? "",
+  };
+}
+
+// The bundled desktop Node runtime can lack the host's enterprise root CA
+// while the system curl trust store can still reach a source. A curl fallback
+// keeps live-link evidence fail-closed on the HTTP result without weakening
+// TLS verification or treating a transport failure as a reachable source.
+async function requestWithCurl(url, timeoutMs) {
+  const executable = process.platform === "win32" ? "curl.exe" : "curl";
+  const nullDevice = process.platform === "win32" ? "NUL" : "/dev/null";
+  const seconds = Math.max(1, Math.ceil(timeoutMs / 1000));
+  const commonArgs = [
+    "--location",
+    "--silent",
+    "--show-error",
+    "--max-time",
+    String(seconds),
+    "--user-agent",
+    "atlas-academy-source-audit/1",
+    "--write-out",
+    "\nATLAS_STATUS:%{http_code}\nATLAS_URL:%{url_effective}\n",
+  ];
+
+  async function run(args) {
+    try {
+      const result = await execFileAsync(
+        executable,
+        [...args, ...commonArgs, url],
+        {
+          encoding: "utf8",
+          maxBuffer: 128 * 1024,
+          timeout: timeoutMs + 2_000,
+          windowsHide: true,
+        },
+      );
+      return parseCurlProbe(result.stdout);
+    } catch (error) {
+      return { error: error instanceof Error ? error.message : String(error) };
+    }
+  }
+
+  let result = await run(["--head"]);
+  if (result.status && [404, 405, 501].includes(result.status)) {
+    result = await run(["--range", "0-1023", "--output", nullDevice]);
+  }
+  return result;
+}
+
 // University and standards sites occasionally stall a single HEAD request on
 // a hosted runner even while the document is reachable. Keep the audit
 // fail-closed for HTTP errors, but give transient transport aborts a bounded
@@ -210,6 +271,17 @@ async function requestUrl(url, timeoutMs = 12_000) {
       clearTimeout(timer);
       lastError = error;
     }
+  }
+  const curlResult = await requestWithCurl(url, timeoutMs);
+  if (curlResult.status) {
+    if (reachableStatus(curlResult.status)) {
+      return { status: curlResult.status, finalUrl: curlResult.finalUrl };
+    }
+    lastError = new Error("HTTP " + curlResult.status);
+  } else if (curlResult.error) {
+    lastError = new Error(
+      (lastError?.message ?? "fetch failed") + "; curl fallback: " + curlResult.error,
+    );
   }
   return { error: lastError?.message ?? "unknown request failure" };
 }

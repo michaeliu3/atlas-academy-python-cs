@@ -350,3 +350,13 @@ passed changed-file classification and the draft content path for this
 checkpoint. Portal, apparatus, browser, and teaching-model jobs were
 intentionally skipped by draft cost control; this is not a deployment or
 non-draft full-gate result.
+
+## Dated live source-link transport audit — 2026-08-05
+
+The live source audit checked all 1,068 source-map and calibration URLs and
+recorded 1,038 HTTP 200, 4 HTTP 202, 4 HTTP 206, 3 HTTP 401, and 19 HTTP 403
+responses. A fail-closed system-curl fallback handles the bundled Node
+runtime's local trust-chain limitation without weakening TLS or treating
+transport failure as reachability. This strengthens link-liveness evidence only;
+the remaining citation, institutional-alignment, source-permission, and human
+review boundaries remain open.
