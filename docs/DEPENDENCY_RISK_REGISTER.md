@@ -7,13 +7,13 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-08-04 (authenticated live GitHub Dependabot API, the
+**Last examined:** 2026-08-05 (authenticated live GitHub Dependabot API, the
 default and review-branch lockfile graphs, and local production/full audits).
 The live API readback for protected default branch `main` at
 `33fadbd49b0e33900f21aba06ed40845c3cbd641` returned **11 open alerts** (five
 high, six medium). That branch still resolves `next@16.2.11 → postcss@8.4.31`
 and `sharp@0.34.5`.
-The review branch for draft [PR #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
+The review branch for draft [PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)
 resolves `next@16.2.12 → postcss@8.5.24` and `sharp@0.35.2`, beyond the
 alerts' first patched versions. `pnpm audit --prod --json` now exits zero on
 the review-candidate lockfile. The full local audit still exits nonzero with

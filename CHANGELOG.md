@@ -14,6 +14,9 @@ actually published.
 - Recorded hosted Draft CI success for the content-bearing advanced-pack update:
   `a6add42` / run `30986257553` passed the contract, generated-input, source,
   and 95-test content paths; no full-gate or promotion claim is implied.
+- Corrected the dependency-risk register's current review-branch label from
+  superseded PR #21 to draft PR #22 and aligned its top-level examination date
+  with the authenticated 2026-08-05 refresh; alert dispositions are unchanged.
 - Clarified the generated truth header's Draft entry as the latest
   **content-bearing** checkpoint and recorded head `80f9ff6` / run `30985254418`;
   later documentation-only commits remain separate provenance, not implied
