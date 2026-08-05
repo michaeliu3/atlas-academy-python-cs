@@ -50,13 +50,13 @@
     },
     "latestSuccessorCheck": {
       "state": "success",
-      "commit": "adc104d374077dc80ebec8ca20c47d8c3f06e7d0",
+      "commit": "dc5f84b32a90ab147e75e480a4c192f069e4150f",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "31020839106",
+      "runId": "31023165133",
       "checkState": "success",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31020839106",
-      "note": "Latest audited PR #22 successor adc104d passed every required Course CI context in run 31020839106, including portal quality, 423/423 Node apparatus tests, and both Python teaching-model legs; the browser context used its documented lightweight satisfaction path because no browser-affecting files changed. This is a successor check, not a complete Chromium execution, module promotion, deployment, or learner-mastery claim; the last complete full gate remains 208d296/run 31009811465."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31023165133",
+      "note": "Latest audited PR #22 successor dc5f84b passed every required Course CI context in run 31023165133, including portal quality, 423/423 Node apparatus tests, both Python teaching-model legs, and the documented browser acceptance path. This is a successor check, not a complete Chromium execution, module promotion, deployment, or learner-mastery claim; the last complete full gate remains 208d296/run 31009811465."
     },
     "openRedTests": {
       "count": 0,
@@ -193,7 +193,7 @@
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #22 (stacked on PR #21); git log",
-      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the latest audited successor adc104d passed required checks in run 31020839106, while the last complete full gate remains 208d296/run 31009811465. Exact private deployment state and final release limitations remain separate."
+      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the latest audited successor dc5f84b passed required checks in run 31023165133, while the last complete full gate remains 208d296/run 31009811465. Exact private deployment state and final release limitations remain separate."
     },
     {
       "id": "final-audit",

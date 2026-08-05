@@ -716,3 +716,13 @@ legs passed; the browser context used its documented lightweight satisfaction
 path because no browser-affecting files changed. This remains non-promoting
 successor evidence; the canonical review-ready ref remains `9242f79`, and the
 last complete Chromium execution remains `208d296`/`31009811465`.
+
+## Latest audited PR successor — 2026-08-05 (current head)
+
+The latest audited PR #22 successor [`dc5f84b`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/dc5f84b32a90ab147e75e480a4c192f069e4150f)
+passed every required Course CI context in run
+[`31023165133`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31023165133).
+Portal quality, 423/423 Node apparatus tests, both Python teaching-model legs,
+and the documented browser acceptance path passed. This remains non-promoting
+successor evidence; the canonical review-ready ref remains `9242f79`, and the
+last complete Chromium execution remains `208d296`/`31009811465`.

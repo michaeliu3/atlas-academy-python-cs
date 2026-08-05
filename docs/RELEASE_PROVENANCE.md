@@ -813,6 +813,17 @@ in run
 This is current provenance only; it does not claim publication, deployment,
 human review, or learner mastery.
 
+## Latest audited PR successor — 2026-08-05 (current head)
+
+The latest audited PR #22 successor [`dc5f84b`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/dc5f84b32a90ab147e75e480a4c192f069e4150f)
+passed every required Course CI context in run
+[`31023165133`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31023165133).
+Portal quality, 423/423 Node apparatus tests, both Python teaching-model legs,
+and the documented browser acceptance path passed. This remains non-promoting
+successor evidence; it does not claim publication, deployment, human review,
+or learner mastery. The last complete Chromium execution remains
+`208d296`/`31009811465`.
+
 ## Latest PR successor check (2026-08-05)
 
 The current PR #22 head [`8b47215`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8b472152ba8c010b515f9ce3f866aba2bdba60f3)

@@ -55,7 +55,7 @@ present when the matrix grows.
 | accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
 | safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
 | actions-cost | complete | Path-aware gating, superseded-run cancellation, portal-build reuse, and current required-check preservation are directly observed in the recorded full and successor gates. Release/deployment evidence is a separate requirement. |
-| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through latest audited ref `adc104d` and successor run `31020839106`; exact private deployment evidence remains absent. |
+| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through latest audited ref `dc5f84b` and successor run `31023165133`; exact private deployment evidence remains absent. |
 | final-audit | partial | This auditable reconciliation now exists; it cannot be closed while the open human/platform/deployment/release boundaries remain. |
 
 ## Complete evidence in this audit
@@ -73,10 +73,10 @@ present when the matrix grows.
   the focused pedagogy-density guard and hidden-candidate parity checks pass.
 - The current source tree is clean, additive, and reachable through review-ready PR #22;
   no history rewrite was used.
-- The latest audited PR #22 successor `adc104d` passed every required Course CI
-  context in run `31020839106`. Its browser context used the documented
-  lightweight path because no browser-affecting files changed; the last
-  complete Chromium execution remains `208d296`/`31009811465`.
+- The latest audited PR #22 successor `dc5f84b` passed every required Course CI
+  context in run `31023165133`. Its browser context used the documented
+  acceptance path; the last complete Chromium execution remains
+  `208d296`/`31009811465`.
 - The current 2026-08-05 bounded live source audit checked 1,068 unique
   source-map and calibration URLs: 1,038 returned 200, four 202, four 206,
   three 401, and 19 403 responses. This is reachability evidence only; it
@@ -164,12 +164,11 @@ present when the matrix grows.
   whose required contexts succeeded in run
   [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860)
   through the explicit lightweight path for unchanged apparatus, Python, and
-  browser suites. The latest audited PR #22 successor [`adc104d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/adc104d374077dc80ebec8ca20c47d8c3f06e7d0)
+  browser suites. The latest audited PR #22 successor [`dc5f84b`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/dc5f84b32a90ab147e75e480a4c192f069e4150f)
   also passed every required context in run
-  [`31020839106`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31020839106),
-  including 423/423 Node apparatus tests and both Python legs; its browser
-  context used the documented lightweight satisfaction path because no
-  browser-affecting files changed. These are current provenance checks, not a
+  [`31023165133`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31023165133),
+  including 423/423 Node apparatus tests, both Python legs, and the documented
+  browser acceptance path. These are current provenance checks, not a
   second full Chromium execution gate;
   neither run closes deployment, dependency, waived human-observation,
   publication, or mastery boundaries.
