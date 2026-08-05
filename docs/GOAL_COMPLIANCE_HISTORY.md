@@ -661,3 +661,15 @@ with a focused regression test. Corrected successor run
 [`31010843631`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31010843631)
 then provided direct hosted savings evidence without removing a required
 check.
+
+## Current review-ready successor provenance — 2026-08-05
+
+The current PR #22 head [`b295f0f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b295f0f353c5227143311448544aa645ebf7942c)
+passed every required Course CI context in run
+[`31011177833`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31011177833).
+Because this successor changed only provenance/current-truth inputs, the Node
+apparatus, both Python versions, and Chromium jobs used their explicit
+lightweight unchanged-suite paths; the portal structural gate still ran. The
+last complete full execution remains `208d296`/`31009811465`. This distinction
+keeps the current review-ready ref current without mislabeling a cost-saving
+successor as another full gate.

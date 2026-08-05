@@ -770,3 +770,17 @@ apparatus tests, Python 3.12 and 3.14 teaching models, and 63/63 Chromium/axe
 routes all passed. The run covers the pull-request head-SHA Actions correction
 and its regression test. This is automated provenance, not publication,
 deployment, human review, or learner mastery evidence.
+
+## Current review-ready successor (2026-08-05)
+
+The current PR #22 head [`b295f0f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b295f0f353c5227143311448544aa645ebf7942c)
+passed every required Course CI context in run
+[`31011177833`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31011177833).
+This provenance-only successor used the explicit lightweight paths for the
+unchanged Node apparatus, Python 3.12/3.14, and browser suites; the portal
+structural gate still executed. The last complete full execution remains
+[`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
+in run
+[`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).
+This records the current source head without claiming a second full gate,
+publication, deployment, human review, or learner mastery.
