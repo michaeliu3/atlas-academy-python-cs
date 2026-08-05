@@ -99,6 +99,10 @@ source route in the [M32 source research dossier](../source-maps/module32_system
 They do not make a library call, a local observation, or a framework result
 portable: the stated assumptions and non-claim still control the conclusion.
 
+The distributed and precision extensions route `M32-C13–M32-C14 ->
+S32-15–S32-16`; these are architecture/code-reading anchors, not a cluster
+lab or a framework-specific performance promise.
+
 ### Code labels
 
 - A `text` fence is **language-neutral pseudocode** for reading a contract or
@@ -1014,6 +1018,54 @@ corrected claim that names resource availability, independent dependencies,
 host/device transfer path, synchronization, and an observation capable of
 distinguishing queueing from overlap.
 
+### Distributed data parallelism — communication is part of the algorithm
+
+Distributed data parallelism is not "the same model, more processes." Each
+rank owns a replica (or declared shard), consumes a non-overlapping data
+partition under a sampler contract, computes a local gradient, participates in
+a collective such as an all-reduce, and applies an update only after the
+collective's completion rule is satisfied. The effective batch, reduction
+operator, gradient scaling, parameter version, timeout, retry, and failure
+semantics are part of the algorithmic claim.
+
+~~~text
+for each rank r:
+    batch_r = sampler.next(rank=r, epoch=epoch, seed=seed)
+    local_gradient_r = model_r.loss(batch_r).backward()
+global_gradient = all_reduce(local_gradient_r, op="mean")
+model_r.step(global_gradient)
+~~~
+
+Read the pseudocode before revealing the traps:
+
+1. If every rank receives the same records, the nominal world size has not
+   created an independent effective batch; it has duplicated evidence.
+2. If one rank uses `sum` and another assumes `mean`, the learning-rate and
+   gradient-scale contract changes with world size.
+3. If a rank advances its parameters before the collective, replicas no
+   longer represent the same version even when one local loss decreases.
+4. If a worker stalls or drops, a successful-looking partial trace is not a
+   completed global update. The timeout, cancellation, and restart policy must
+   be named.
+
+**Prediction before reveal:** A report says that doubling the number of ranks
+halved step time. Which four fields must be requested before calling that a
+distributed speedup? A strong answer names the global useful-work unit, data
+partition/no-duplication rule, collective and synchronization boundary, and
+the same semantic/model-quality oracle. Add the communication volume and
+failure/straggler record when the claim is intended to transfer.
+
+**Debugging task:** Inspect a proposed training trace with a missing
+`all_reduce`. Decide whether it is (a) independent local training, (b) stale
+replica training, or (c) a genuinely synchronized update, and point to the
+smallest missing observation. Do not infer global convergence, fairness, or
+reproducibility from a single rank's loss curve.
+
+The [PyTorch DistributedDataParallel documentation](https://docs.pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html)
+is a vocabulary route, not a recipe or a claim that a learner has a cluster.
+The course stays at code-reading and architecture level: no network setup,
+credentials, cloud account, or unbounded process lab is required.
+
 ---
 
 ## Session 5 — Read autodiff as a program with a numerical contract
@@ -1155,6 +1207,50 @@ higher-precision accumulation path. Keep the function, reduction, data,
 device, and semantic oracle visible. A changed result can arise from
 representability, reduction order, overflow/underflow, or a different
 execution path; it does not automatically identify the mechanism.
+
+### Mixed precision — a policy across arithmetic, state, and evidence
+
+Mixed precision is a system contract, not a `dtype` toggle. A typical design
+may use FP16 or BF16 for selected forward/backward operations, FP32 for an
+accumulator or master weights, and a loss-scaling or overflow policy. The
+important questions are: which values use which format, where reductions
+accumulate, what detects non-finite values, how an update is skipped or
+unscaled, and what semantic/numerical oracle bounds the conclusion?
+
+~~~text
+loss_low = forward(batch, compute_dtype="bf16")
+scaled_gradient = autodiff(loss_low) * scale
+if finite(scaled_gradient):
+    gradient = scaled_gradient / scale
+    master_weights = master_weights - learning_rate * accumulate_fp32(gradient)
+else:
+    scale = scale / 2
+    skip_update()
+~~~
+
+This is a reading sketch, not a framework implementation. A review must still
+name the framework/backend, accumulation order, scale schedule, overflow
+behavior, device, and reference computation. A finite gradient check at one
+point cannot establish that a long training run is stable; a matching loss
+cannot show that no update was silently skipped.
+
+**Prediction before reveal:** If a BF16 run matches an FP32 reference on a
+small fixture but later diverges, list two plausible mechanisms before asking
+for a fix. Good candidates include accumulation/rounding error, overflow or
+underflow, a different reduction order, loss-scale state, or data/optimizer
+state drift. The smallest next experiment changes one field while preserving
+the semantic oracle.
+
+**Transfer task:** Add a mixed-precision row to the Reproduction Capsule:
+compute/accumulation/master formats, scale policy, non-finite handling,
+reference dtype, tolerance, and the exact claim that remains withdrawn. Then
+connect it to the distributed section: decide whether gradient averaging
+occurs before or after unscaling, and what evidence would catch a mismatch.
+
+The [PyTorch automatic mixed precision guide](https://docs.pytorch.org/docs/stable/amp.html)
+and its [distributed training documentation](https://docs.pytorch.org/tutorials/intermediate/ddp_tutorial.html)
+are official comparison anchors. They are link-only sources; do not copy
+framework code, settings, benchmark numbers, or diagrams into this pack.
 
 ### Output: Autodiff-Execution Trace
 

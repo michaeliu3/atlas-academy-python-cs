@@ -50,12 +50,14 @@
     {
       "id": "m32-rigor-bundle",
       "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
-      "claim": "The candidate visibly separates representation, allocation, ownership, synchronization, autodiff, numerical, and measurement boundaries, including bounded counterexamples and one pinned CPU-only NumPy view/copy/broadcast observation.",
+      "claim": "The candidate visibly separates representation, allocation, ownership, synchronization, autodiff, mixed-precision, distributed-data-parallel, numerical, and measurement boundaries, including bounded counterexamples and one pinned CPU-only NumPy view/copy/broadcast observation.",
       "inputs": [
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "numerical-boundary--representation-changes-the-claim" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "cpu-only-numpy-observation--inspect-a-real-view-copy-and-broadcast-result" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "failure-probe" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "a-readable-timeline" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "distributed-data-parallelism--communication-is-part-of-the-algorithm" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "mixed-precision--a-policy-across-arithmetic-state-and-evidence" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md", "locator": "start-with-a-scalar-claim" },
         { "kind": "file", "role": "source-code", "path": "scripts/m32_numpy_layout_observation.py", "locator": null },
         { "kind": "file", "role": "source-code", "path": "scripts/test_m32_numpy_layout_observation.py", "locator": null }

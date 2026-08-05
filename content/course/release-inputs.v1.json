@@ -78,7 +78,7 @@
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "7b16952acad816cf04322210841c8a3b0ce8d37f62518aadc07b7749aead1770"
+      "sha256": "40b21c242bf762fffefa6558999d5aa4599b37a39684b6233808affaf2ebbe5d"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "a567362c09a5f3b14fd88db2eb8900da060993d8e551149a24b85b1d39a3ec40"
+      "sha256": "46679dca58670942955bebe58dda8ed978cf964b5d04d3598696073b15408a5d"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -850,7 +850,7 @@
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "31e03d3b429433152377092e7347a75c0bc681aec3e01e21ad959d7f6f573037"
+      "sha256": "2b1d61ca774810abacf6c95f2d2cf981d1cad1abf1697ac8a7a85cf5ebded9fb"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
