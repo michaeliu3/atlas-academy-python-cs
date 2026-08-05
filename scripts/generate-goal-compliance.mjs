@@ -49,7 +49,7 @@ function validateSource() {
     }
     ids.add(requirement.id);
   }
-  for (const field of ["lastFullGate", "currentDraftContent", "lastFullGateApparatus", "lastFullGateBrowser"]) {
+  for (const field of ["lastFullGate", "currentDraftContent", "lastFullGateApparatus", "lastFullGateBrowser", "reviewReadyRef"]) {
     if (!source.truth?.[field] || typeof source.truth[field] !== "object") {
       throw new Error("goal-compliance truth." + field + " is required.");
     }
@@ -67,6 +67,7 @@ function render() {
   const truth = source.truth;
   const gate = truth.lastFullGate;
   const draft = truth.currentDraftContent;
+  const reviewReady = truth.reviewReadyRef;
   const axe = truth.openAxeViolations;
   const dependencies = truth.openDependencyAlerts;
   const rows = source.requirements
@@ -102,7 +103,24 @@ function render() {
       oneLine(gate.runId) +
       "](" +
       gate.url +
-      ")); this is the recorded source-head gate; the separate Draft snapshot is historical evidence only.",
+      ")); the current review-ready ref is recorded separately below; the separate Draft snapshot is historical evidence only.",
+    "> - Current review-ready ref: " +
+      tick +
+      oneLine(reviewReady.commit) +
+      tick +
+      " ([PR #" +
+      oneLine(reviewReady.prNumber) +
+      "](" +
+      reviewReady.url +
+      ")); required checks are **" +
+      oneLine(reviewReady.checkState) +
+      "** in Course CI run " +
+      tick +
+      oneLine(reviewReady.runId) +
+      tick +
+      " (" +
+      oneLine(reviewReady.note) +
+      ").",
     "> - Latest recorded content-bearing Draft check: " +
       tick +
       oneLine(draft.commit) +

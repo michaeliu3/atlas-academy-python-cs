@@ -54,8 +54,8 @@ present when the matrix grows.
 | notion-privacy | partial | A 2026-08-05 read-only Notion search/fetch confirmed the dashboard, lecture/module notebooks, completion record, Live Codex Session Records, project portfolio, TA misconceptions, Study Partner journal, and problem-solving lab templates; no learner-approved records-on write/pause/end/delete observation is recorded. |
 | accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
 | safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
-| actions-cost | partial | Path-aware gating and superseded-run cancellation are directly observed; a normal review-ready full gate is still required. |
-| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained; final reviewed ref/deployment evidence is absent. |
+| actions-cost | partial | Path-aware gating, superseded-run cancellation, and current docs-only required-check preservation are directly observed; release/deployment evidence remains separate. |
+| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through current review-ready ref `24dc8bd`; exact private deployment evidence remains absent. |
 | final-audit | partial | This auditable reconciliation now exists; it cannot be closed while the open human/platform/deployment/release boundaries remain. |
 
 ## Complete evidence in this audit
@@ -131,6 +131,13 @@ present when the matrix grows.
   [`30995803298`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30995803298),
   which checked 1,064 URLs. This is automated release evidence, not module
   promotion, deployment verification, human review, or learner mastery.
+- The current review-ready successor [`24dc8bd`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/24dc8bdf321b0ab6baa232f7a87b8053f84f329b)
+  changed only the startable Codex learning-loop documentation. Its Course CI
+  run [`30999161797`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30999161797)
+  passed every required branch-protection context while correctly skipping the
+  expensive content-bearing jobs. The earlier full gate remains the
+  authoritative content/build evidence; the current ref is not silently called
+  a second full gate.
 
 ## Latest dependency evidence
 
@@ -202,7 +209,9 @@ so those interactions can begin later; no synthetic human evidence is created.
 2. Verify the exact private deployment headers, dependency-risk disposition,
    accessibility review, and bounded OS/process claims.
 3. Preserve the successful non-draft gate's exact commit, run, jobs, limitations,
-   and deployment state in the release ledger.
-4. Regenerate this audit and the compliance matrix, then close the goal only if
+   and deployment state in the release ledger; this is recorded for `01b2c72`
+   and the current review-ready successor is `24dc8bd`.
+4. Regenerate this audit and the compliance matrix after each evidence change,
+   then close the goal only if
    every non-waived requirement has evidence, every waiver/deferral is explicit,
    and no required machine-verifiable work remains.

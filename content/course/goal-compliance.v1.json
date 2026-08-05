@@ -10,7 +10,7 @@
       "date": "2026-08-05",
       "runId": "30997455314",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314",
-      "note": "Current normal non-draft pull-request Course CI gate on the recorded source head; portal, 421/421 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit was separately passed on the immediately preceding source-unchanged gate 30995803298. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
+      "note": "Latest content-bearing normal non-draft pull-request Course CI gate on commit 01b2c72; portal, 421/421 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit was separately passed on the immediately preceding source-unchanged gate 30995803298. The docs-only successor is recorded separately as the current review-ready ref. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
     },
     "currentDraftContent": {
       "state": "success",
@@ -37,6 +37,16 @@
       "runId": "30997455314",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314",
       "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the generated merge candidate; representative assistive-technology review remains waived for the build phase."
+    },
+    "reviewReadyRef": {
+      "state": "ready-for-review",
+      "commit": "24dc8bdf321b0ab6baa232f7a87b8053f84f329b",
+      "date": "2026-08-05",
+      "prNumber": 22,
+      "runId": "30999161797",
+      "checkState": "success",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
+      "note": "Documentation-only successor after the content-bearing full gate; required branch-protection contexts passed while expensive jobs were correctly skipped by the change-aware policy"
     },
     "openRedTests": {
       "count": 0,
@@ -166,14 +176,14 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Non-draft documentation-only reviews now keep every required branch-protection context through lightweight successful jobs while skipping expensive steps; content, application, test, dependency, workflow, and generated-input changes retain full checks. Current PR #22 readback observed superseded runs 30978504095 and 30978565589 being cancelled; a normally requested review-ready ref still needs the full required-check gate before release."
+      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 30999161797 kept every required branch-protection context green while skipping expensive jobs for a docs-only successor; content, application, test, dependency, workflow, and generated-input changes retain full checks. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
     },
     {
       "id": "history-provenance",
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
-      "openItem": "The additive branch is preserved in draft PR #22 stacked on PR #21's lineage; still record the final reviewed ref, limitations, and any private deployment state separately after a non-draft gate."
+      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the current ref 24dc8bd and its lightweight required-check run are recorded, while exact private deployment state and final release limitations remain separate."
     },
     {
       "id": "final-audit",
