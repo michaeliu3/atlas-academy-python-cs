@@ -7,6 +7,9 @@ actually published.
 
 ## Unreleased
 
+- Named the learner-requested **GPT Live High** option in both designated
+  live-chat startup prompts and the whiteboard workflow, while preserving the
+  platform-owned-setting and text fallback boundaries.
 - Strengthened the six hidden M31–M36 study packs with one bounded visual map,
   visible prose alternative, and code/native code-reading card per module;
   regenerated hidden candidates from the canonical workbooks and added a

@@ -14,9 +14,10 @@ Atlas has four deliberately separate surfaces:
 ## Voice and whiteboard protocol
 
 Use a learner-created, voice-enabled Codex chat when the platform makes it
-available. Prefer the highest selectable live quality/reasoning setting, but
-the learner and platform—not Atlas—own that setting. A text-only oral-defense
-route remains available in the portal.
+available. If the chat offers a setting labelled **GPT Live High**, select or
+request it for the voice session; otherwise prefer the highest selectable live
+quality/reasoning setting. The learner and platform—not Atlas—own that setting.
+A text-only oral-defense route remains available in the portal.
 
 While speaking, both partners keep the visible chat usable as a whiteboard:
 

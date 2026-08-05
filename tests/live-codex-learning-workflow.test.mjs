@@ -86,6 +86,9 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
   assert.match(promptSource, /explicit correction or deletion request remains separately learner-authorized/u);
   assert.match(promptSource, /end session/u);
   assert.match(promptSource, /new or ambiguously resumed substantive session, keep records off/u);
+  assert.match(promptSource, /GPT Live High/u);
+  const voiceGuide = await readFile(new URL("../docs/LIVE_CODEX_LEARNING_WORKFLOW.md", import.meta.url), "utf8");
+  assert.match(voiceGuide, /GPT Live High/u);
   assert.match(promptSource, /unavailableNoteTemplate/u);
 });
 
