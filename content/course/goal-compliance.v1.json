@@ -6,11 +6,11 @@
   "truth": {
     "lastFullGate": {
       "state": "success",
-      "commit": "01b2c725a2fe7c0e5535a77a271c7034df14efb0",
+      "commit": "3592f333a3c321a76e6ee6663ddbd29af9bba6c1",
       "date": "2026-08-05",
-      "runId": "30997455314",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314",
-      "note": "Latest content-bearing normal non-draft pull-request Course CI gate on commit 01b2c72; portal, 421/421 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit was separately passed on the immediately preceding source-unchanged gate 30995803298. The docs-only successor is recorded separately as the current review-ready ref. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
+      "runId": "30999700508",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30999700508",
+      "note": "Latest content-bearing normal non-draft pull-request Course CI gate on commit 3592f33; portal, 421/421 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit was separately passed on the immediately preceding source-unchanged gate 30995803298. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
     },
     "currentDraftContent": {
       "state": "success",
@@ -26,37 +26,37 @@
       "state": "success",
       "pass": 421,
       "fail": 0,
-      "runId": "30997455314",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314",
+      "runId": "30999700508",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30999700508",
       "note": "Latest recorded non-draft apparatus job passed all 421 tests on the generated merge candidate. This is automated evidence, not module promotion or learner mastery."
     },
     "lastFullGateBrowser": {
       "state": "success",
       "pass": 63,
       "fail": 0,
-      "runId": "30997455314",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314",
+      "runId": "30999700508",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30999700508",
       "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the generated merge candidate; representative assistive-technology review remains waived for the build phase."
     },
     "reviewReadyRef": {
       "state": "ready-for-review",
-      "commit": "24dc8bdf321b0ab6baa232f7a87b8053f84f329b",
+      "commit": "3592f333a3c321a76e6ee6663ddbd29af9bba6c1",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "30999161797",
+      "runId": "30999700508",
       "checkState": "success",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
-      "note": "Documentation-only successor after the content-bearing full gate; required branch-protection contexts passed while expensive jobs were correctly skipped by the change-aware policy"
+      "note": "Current review-ready ref passed the full content-bearing Course CI gate: portal, 421/421 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded"
     },
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "Latest recorded normal non-draft Course CI run 30997455314 passed the full 421-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
+      "basis": "Latest recorded normal non-draft Course CI run 30999700508 passed the full 421-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
     },
     "openAxeViolations": {
       "count": 0,
       "state": "none-detected",
-      "basis": "Latest recorded normal non-draft browser job in run 30997455314 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
+      "basis": "Latest recorded normal non-draft browser job in run 30999700508 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
     },
     "openDependencyAlerts": {
       "count": 2,

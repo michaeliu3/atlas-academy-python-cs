@@ -4,8 +4,8 @@
 
 > **Generated current truth — 2026-08-05**
 >
-> - Last successful full gate: `01b2c725a2fe7c0e5535a77a271c7034df14efb0` on 2026-08-05 ([Course CI run 30997455314](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30997455314)); the current review-ready ref is recorded separately below; the separate Draft snapshot is historical evidence only.
-> - Current review-ready ref: `24dc8bdf321b0ab6baa232f7a87b8053f84f329b` ([PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)); required checks are **success** in Course CI run `30999161797` (Documentation-only successor after the content-bearing full gate; required branch-protection contexts passed while expensive jobs were correctly skipped by the change-aware policy).
+> - Last successful full gate: `3592f333a3c321a76e6ee6663ddbd29af9bba6c1` on 2026-08-05 ([Course CI run 30999700508](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30999700508)); the current review-ready ref is recorded separately below; the separate Draft snapshot is historical evidence only.
+> - Current review-ready ref: `3592f333a3c321a76e6ee6663ddbd29af9bba6c1` ([PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)); required checks are **success** in Course CI run `30999700508` (Current review-ready ref passed the full content-bearing Course CI gate: portal, 421/421 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded).
 > - Latest recorded content-bearing Draft check: `3e76de40980ecc6b76a8933b2fff53cd6487639f`, 96 pass / 0 fail ([run 30994244025](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994244025)).
 > - Latest recorded full-gate apparatus check: **421 pass / 0 fail**; latest recorded full-gate browser/axe check: **63 pass / 0 fail**.
 > - Open red tests: **0**. Open axe violations: **0** (latest recorded full-gate result: none-detected).
