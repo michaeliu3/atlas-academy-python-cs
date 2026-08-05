@@ -643,3 +643,12 @@ HTTP 401 for both `/` and `/_vinext/image`, before the Worker application
 response. The platform access boundary prevented header observation, so this
 is only an authenticated-access limitation—not deployment, header-compliance,
 or security-clean evidence.
+
+## Learner-led designated-chat kickoff checkpoint (2026-08-05)
+
+The existing Teaching Assistant and Study Partner chats were sent the canonical
+Module 30 learner-led kickoff. Both returned a single prediction-and-confidence
+prompt and await the learner; no learner answer is inferred. Records stayed off,
+and no transcript, audio, or Notion write was captured. This is bounded session
+reachability evidence, not a completed session, oral-defense result, rendering
+verification, learner mastery, deployment, or release claim.

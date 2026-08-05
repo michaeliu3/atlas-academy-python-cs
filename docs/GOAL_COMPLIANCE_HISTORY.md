@@ -528,3 +528,13 @@ platform access boundary therefore prevented direct verification of the
 repository's response-header policy. This records an authenticated-access
 limitation only; it does not claim deployment success, header compliance, or
 security cleanliness.
+
+## Learner-led designated-chat kickoff checkpoint — 2026-08-05
+
+The existing Teaching Assistant and Study Partner chats received a substantive
+Module 30 kickoff through the canonical Atlas workflow. Each chat returned one
+prediction-and-confidence prompt and is waiting for the learner's response.
+Records remain off, no transcript or audio was copied, and no Notion write was
+attempted. This proves session reachability and correct opening behavior only;
+it does not prove learner evidence, a completed oral defense, voice/equation/code
+rendering, or a saved note.

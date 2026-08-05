@@ -104,6 +104,11 @@ present when the matrix grows.
   limited to role delivery and preserves the records-off, whiteboard,
   platform-owned GPT Live High, and Notion fallback boundaries; it is not a
   substantive module session or evidence of live rendering or a saved note.
+- On 2026-08-05, the same two designated chats received a learner-led M30
+  session kickoff. Each returned one prediction-and-confidence prompt and is
+  awaiting the learner's response. This proves reachable session initiation
+  only; it is not learner evidence, a completed session, oral-defense evidence,
+  live-rendering verification, or a Notion write.
 
 ## Intentionally deferred by design
 
