@@ -478,3 +478,14 @@ source/session markers, stable links, access dates, license/reuse boundaries,
 and claim linkage. This is structural authoring evidence only; source-quality,
 visual/accessibility, human review, release, deployment, and learner evidence
 remain separate gates.
+
+## Worker security-boundary checkpoint (2026-08-05)
+
+Commit [`b65ee26`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b65ee26)
+adds an apparatus regression to `tests/http-security-headers.test.mjs`. It
+checks that the production Worker applies the shared security-header helper to
+both the image-optimization response and the ordinary application response,
+and that no direct application return bypasses that boundary. This is source
+and local-test evidence only; it does not verify headers at the actual private
+deployment, resolve open Dependabot alerts, or establish a security-clean
+state.
