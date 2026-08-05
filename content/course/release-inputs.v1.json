@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "a2685b08a0b71e14f956f3ba11e50ef7e84e1a5ce2d8bd76e7f643e8c9bb7008"
+      "sha256": "405b17854eccf1b10ab3c2796c9cad64bf08b71e44843e9a4023ea4367a4e001"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -1034,7 +1034,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "93eb45d15397a19487b7db5babc4e6a868d6d6593c8ad5a60a1eb7ed2912dbef"
+      "sha256": "30d5596f69e34c50b6637df189c5b1dc76b0d9786b92e158984dd4e38cd5457d"
     },
     {
       "path": "playwright.config.ts",

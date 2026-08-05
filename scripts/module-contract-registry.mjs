@@ -240,6 +240,16 @@ export const humanReviewDimensions = [
 ];
 
 const legacyCriterionIds = new Set(criterionIds.slice(0, 16));
+/**
+ * The minimum authored-course contract.  These criteria describe the
+ * instructional material itself (sequence, explanation, practice, sources,
+ * diagnostics, and handoff).  The final two criteria are deliberately kept
+ * outside this mode: an interactive reference-model studio and release
+ * provenance are promotion/deployment concerns, not prerequisites for
+ * authoring a coherent private study pack.
+ */
+export const contentCriterionIds = Object.freeze(criterionIds.slice(0, 16));
+const contentEvidenceStates = new Set(["pointer-present", "reviewed", "release-ready"]);
 const authoringAdapterEvidenceByCriterion = {
   "prerequisite-forward-map": "prerequisite-and-forward-map",
   "six-connected-sessions": "six-connected-sessions",
@@ -268,6 +278,64 @@ function registryFailure(errors) {
   if (errors.length > 0) {
     throw new Error(`Module-contract registry v3 validation failed:\n- ${errors.join("\n- ")}`);
   }
+}
+
+function validateAuthoredCourseContent(graph, registry) {
+  const errors = [];
+  const previewModuleIds = new Set(
+    graph.modules
+      .filter(({ state }) => state?.availability === "preview")
+      .map(({ id }) => id),
+  );
+  const registryById = new Map(registry.modules.map((module) => [module.moduleId, module]));
+  const intentionallyAmbiguous = [];
+  const contentReadyModuleIds = [];
+
+  for (const graphModule of graph.modules) {
+    const moduleEntry = registryById.get(graphModule.id);
+    if (!moduleEntry) {
+      errors.push(`Content contract cannot find a registry entry for ${graphModule.id}.`);
+      continue;
+    }
+    if (moduleEntry.contractState === "not-started") {
+      errors.push(`Content contract cannot pass while ${graphModule.id} remains not-started.`);
+    }
+
+    let moduleContentReady = true;
+    for (const criterionId of contentCriterionIds) {
+      const criterion = moduleEntry.criteria.find(({ id }) => id === criterionId);
+      if (!criterion) {
+        errors.push(`Content contract ${graphModule.id} is missing criterion ${criterionId}.`);
+        moduleContentReady = false;
+        continue;
+      }
+      if (contentEvidenceStates.has(criterion.status)) continue;
+
+      const previewMapAmbiguity =
+        criterionId === "prerequisite-forward-map" &&
+        criterion.status === "ambiguous" &&
+        previewModuleIds.has(graphModule.id);
+      if (previewMapAmbiguity) {
+        intentionallyAmbiguous.push(`${graphModule.id}:${criterionId}`);
+        continue;
+      }
+
+      errors.push(
+        `Content contract ${graphModule.id} criterion ${criterionId} must have authored evidence (pointer-present, reviewed, or release-ready); found ${criterion.status}.`,
+      );
+      moduleContentReady = false;
+    }
+    if (moduleContentReady) contentReadyModuleIds.push(graphModule.id);
+  }
+
+  return {
+    moduleCount: graph.modules.length,
+    contentCriterionIds: [...contentCriterionIds],
+    contentReadyModuleIds,
+    intentionallyAmbiguous,
+    promotionOnlyCriterionIds: criterionIds.slice(contentCriterionIds.length),
+    errors,
+  };
 }
 
 function isPlainObject(value) {
@@ -1973,7 +2041,7 @@ export async function validateModuleContractRegistry(
       `Module-contract registry v3 needs a validated canonical graph: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
-  if (!["integrity", "strict", "complete"].includes(mode)) {
+  if (!["integrity", "content", "strict", "complete"].includes(mode)) {
     throw new Error(`Unknown module-contract registry v3 validation mode: ${mode}.`);
   }
   if (!["git-index", "pre-write-projection"].includes(manifestTruth)) {
@@ -2169,9 +2237,16 @@ export async function validateModuleContractRegistry(
     }
   }
 
+  let contentValidation = null;
+  if (mode === "content") {
+    contentValidation = validateAuthoredCourseContent(graph, registry);
+    errors.push(...contentValidation.errors);
+  }
+
   registryFailure(errors);
   return {
     summary,
+    contentValidation,
     manifest,
     releaseInputPaths: [...referencedPaths].map((path) => resolve(siteRoot, path)),
   };

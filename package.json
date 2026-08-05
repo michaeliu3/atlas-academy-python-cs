@@ -9,6 +9,7 @@
   "scripts": {
     "sync:modules": "node scripts/sync-modules.mjs",
     "validate:course": "node scripts/validate-course.mjs",
+    "validate:course:content": "node scripts/validate-course.mjs --content",
     "validate:course:strict": "node scripts/validate-course.mjs --strict",
     "validate:course:complete": "node scripts/validate-course.mjs --complete",
     "validate:course:inputs": "node scripts/validate-course.mjs --require-git-tracked",

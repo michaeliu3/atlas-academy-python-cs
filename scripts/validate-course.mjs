@@ -184,6 +184,7 @@ export async function validateCourseContracts(
   graph,
   registry,
   {
+    content = false,
     strict = false,
     complete = false,
     requireGitTracked = false,
@@ -281,7 +282,7 @@ export async function validateCourseContracts(
   try {
     contractRegistry = await validateModuleContractRegistry(validationGraph, validationRegistry, {
       siteRoot: validationSiteRoot,
-      mode: complete ? "complete" : strict ? "strict" : "integrity",
+      mode: complete ? "complete" : strict ? "strict" : content ? "content" : "integrity",
     });
     for (const path of contractRegistry.releaseInputPaths) {
       releaseInputPaths.add(path);
@@ -581,10 +582,10 @@ export async function validateCourseContracts(
   };
 }
 
-export async function runCourseValidation({ strict = false, complete = false, requireGitTracked = false } = {}) {
+export async function runCourseValidation({ content = false, strict = false, complete = false, requireGitTracked = false } = {}) {
   if (!requireGitTracked) {
     const [graph, contracts] = await Promise.all([loadCourseGraph(), loadCourseContracts()]);
-    return validateCourseContracts(graph, contracts, { strict, complete, requireGitTracked });
+    return validateCourseContracts(graph, contracts, { content, strict, complete, requireGitTracked });
   }
 
   const snapshot = await openGitIndexSnapshot(siteRoot);
@@ -597,6 +598,7 @@ export async function runCourseValidation({ strict = false, complete = false, re
   ]);
   validateCourseGraph(graphRecord.value);
   return validateCourseContracts(graphRecord.value, registryRecord.value, {
+    content,
     strict,
     complete,
     requireGitTracked,
@@ -606,6 +608,7 @@ export async function runCourseValidation({ strict = false, complete = false, re
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const report = await runCourseValidation({
+    content: process.argv.includes("--content"),
     strict: process.argv.includes("--strict"),
     complete: process.argv.includes("--complete"),
     requireGitTracked: process.argv.includes("--require-git-tracked"),
@@ -613,6 +616,12 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   console.log(
     `Course contract v3: ${report.summary.legacyBaselineModules} legacy baselines, ${report.summary.verifiedModules} verified, ${report.summary.authoringOnlyModules} authoring-only, ${report.summary.reviewReadyModules} review-ready.`,
   );
+  if (report.contractRegistry?.contentValidation) {
+    const contentReport = report.contractRegistry.contentValidation;
+    console.log(
+      `Course content contract: ${contentReport.contentReadyModuleIds.length}/${contentReport.moduleCount} modules have all ${contentReport.contentCriterionIds.length} authored-content criteria; ${contentReport.intentionallyAmbiguous.length} intentional preview ambiguity(ies); promotion-only criteria remain separate.`,
+    );
+  }
   for (const warning of report.warnings) {
     console.warn(`warning: ${warning}`);
   }

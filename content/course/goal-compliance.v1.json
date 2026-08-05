@@ -94,8 +94,8 @@
       "id": "module-contract",
       "requirement": "Every learner-ready module passes the versioned contract and release evidence gate.",
       "state": "partial",
-      "evidence": "content/course/contracts/module-contract-registry.v3.json; content/course/contracts/legacy-module-contract-audit.v1.json; docs/LEGACY_MODULE_CONTRACT_AUDIT.md; scripts/module-contract-registry.mjs; scripts/validate-course.mjs; tests/course-contract.test.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The legacy audit now resolves all 480 M1–M30 structural criteria (478 pointer-present, 2 intentional M25/M26 prerequisite-map ambiguities, 0 missing); human quality review is waived for this build, while exact source/CI/deployment evidence and any later promotion decision remain separate. Six advanced modules remain authoring-only."
+      "evidence": "content/course/contracts/module-contract-registry.v3.json; content/course/contracts/legacy-module-contract-audit.v1.json; docs/LEGACY_MODULE_CONTRACT_AUDIT.md; docs/CONTENT_AUTHORING.md; scripts/module-contract-registry.mjs; scripts/validate-course.mjs; tests/course-contract.test.mjs; tests/module-contract-registry.test.mjs; tests/math-candidate-preflight.test.mjs",
+      "openItem": "The focused authored-content gate now passes all 36 packs across the first 16 instructional criteria (with only the intentional M25/M26 prerequisite-map ambiguities); it does not claim the optional studio, release/deployment, human-review, or learner-evidence gates. Exact promotion evidence remains separate, and six advanced modules remain authoring-only."
     },
     {
       "id": "advanced-packs",

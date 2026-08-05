@@ -3,6 +3,7 @@ import test from "node:test";
 import { loadCourseGraph } from "../scripts/course-graph.mjs";
 import {
   loadModuleContractRegistry,
+  contentCriterionIds,
   promotionLearningCompanionErrors,
   promotionEvidenceRoleErrors,
   promotionEvidenceRoleRequirements,
@@ -47,6 +48,38 @@ test("the unified v3 module-contract registry covers the canonical 36-module gra
       "planned",
     );
   }
+});
+
+test("the authored-course content mode proves instructional completeness without promotion claims", async () => {
+  const [graph, registry] = await Promise.all([
+    loadCourseGraph(),
+    loadModuleContractRegistry(),
+  ]);
+  const report = await validateModuleContractRegistry(graph, registry, { mode: "content" });
+
+  assert.deepEqual(report.contentValidation, {
+    moduleCount: 36,
+    contentCriterionIds: [...contentCriterionIds],
+    contentReadyModuleIds: graph.modules.map(({ id }) => id),
+    intentionallyAmbiguous: ["m25:prerequisite-forward-map", "m26:prerequisite-forward-map"],
+    promotionOnlyCriterionIds: [
+      "interaction-reference-model-and-teaching-tests",
+      "release-provenance-ci-and-deployment-evidence",
+    ],
+    errors: [],
+  });
+  assert.equal(
+    registry.modules
+      .find(({ moduleId }) => moduleId === "m25")
+      .criteria.find(({ id }) => id === "release-provenance-ci-and-deployment-evidence").status,
+    "missing",
+  );
+  assert.equal(
+    registry.modules
+      .find(({ moduleId }) => moduleId === "m31")
+      .criteria.find(({ id }) => id === "release-provenance-ci-and-deployment-evidence").status,
+    "planned",
+  );
 });
 
 test("the synchronizer-only pre-write manifest projection cannot weaken release validation", async () => {

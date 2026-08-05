@@ -102,6 +102,7 @@ Use the right gate for the claim being made:
 
 ~~~text
 pnpm validate:course          # structural migration gate; reports human-review gaps
+pnpm validate:course:content  # authored course-content gate; excludes human/release observations
 pnpm validate:course:inputs   # structural gate plus Git-tracked regular release inputs
 pnpm validate:course:strict   # full learner-route verification gate; currently fails by design
 pnpm sync:modules
@@ -121,6 +122,18 @@ weakened merely to make CI green.
 stage the intended tracked changes first, and ensure every tracked worktree file
 matches that index before running it. Use ordinary `validate:course` while
 authoring a dirty worktree; it remains the structural, authoring-friendly check.
+
+`validate:course:content` is the focused private-course authoring gate. It
+requires every canonical module, including hidden M31–M36 authoring packs, to
+have the first 16 instructional criteria resolved: route connections, six
+sessions, first-principles and rigorous explanations, code-reading practice,
+prediction/transfer, source and visual alternatives, diagnostics, retrieval,
+project rubric, oral-defense material, and the three companion handoffs. The
+intentional prerequisite-map ambiguity for preview-only M25/M26 is allowed and
+reported. The optional interaction/reference-model studio and release,
+deployment, human-review, learner, and Notion observations remain separate
+promotion concerns; a passing content gate must not be described as a
+published or human-verified course.
 
 ### Draft evidence-pointer pilot
 
