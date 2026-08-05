@@ -49,10 +49,10 @@
       "basis": "Latest recorded normal non-draft browser job in run 30961057821 passed 63/63 Chromium/axe routes; later additive commits have not received a hosted rerun. The current authored Mermaid scan reports 246/246 complete."
     },
     "openDependencyAlerts": {
-      "count": 11,
+      "count": 2,
       "branch": "main",
       "asOf": "2026-08-05",
-      "evidence": "docs/DEPENDENCY_RISK_REGISTER.md; live GitHub Dependabot API readback 2026-08-05 on main 33fadbd49b0e33900f21aba06ed40845c3cbd641 (11 open: 5 high, 6 medium)"
+      "evidence": "docs/DEPENDENCY_RISK_REGISTER.md; latest authenticated GitHub Dependabot API readback 2026-08-05 on main 33fadbd49b0e33900f21aba06ed40845c3cbd641 (2 open: 1 high, 1 medium; fast-uri and postcss)"
     }
   },
   "requirements": [
@@ -159,7 +159,7 @@
       "requirement": "Local progress, sanitization, headers, deterministic inputs, typechecking, and dependency risks are truthfully bounded.",
       "state": "partial",
       "evidence": "lib/local-progress-codec.js; lib/http-security-headers.js; scripts/release-input-ledger.mjs; docs/DEPENDENCY_RISK_REGISTER.md; docs/DEPLOYMENT_HEADER_VERIFICATION.md; tests/http-security-headers.test.mjs; pnpm typecheck",
-      "openItem": "Local header behavior is unit-tested and dependency paths are triaged; verify the headers at the actual private deployment, keep the live 11-alert Dependabot boundary (5 high, 6 medium) explicitly unresolved until candidate fixes reach main and GitHub recalculates, and keep OS/process lab claims source-scoped."
+      "openItem": "Local header behavior is unit-tested and dependency paths are triaged; verify the headers at the actual private deployment, keep the live 2-alert Dependabot boundary (1 high, 1 medium: fast-uri and postcss) explicitly unresolved until candidate fixes reach main and GitHub recalculates, and keep OS/process lab claims source-scoped."
     },
     {
       "id": "actions-cost",

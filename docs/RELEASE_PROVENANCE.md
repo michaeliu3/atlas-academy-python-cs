@@ -682,3 +682,13 @@ passed structural/release-input, generated-artifact, generated-matrix,
 source-link freshness, and Draft content checks. Expensive jobs were skipped by
 the draft policy; this is current Draft provenance, not a non-draft full gate,
 deployment proof, or release approval.
+
+## Latest dependency-alert refresh (2026-08-05)
+
+An authenticated GitHub Dependabot API readback for protected `main` commit
+[`33fadbd`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/33fadbd49b0e33900f21aba06ed40845c3cbd641)
+returned two open alerts: high `fast-uri` (#50) and medium `postcss` (#49).
+The review branch lockfile contains patched candidate versions, but the alerts
+remain open until the candidate is normally merged and GitHub recalculates.
+This refresh is dependency provenance only and is not a security-clean,
+deployment, or release claim.

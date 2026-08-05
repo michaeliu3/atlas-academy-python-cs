@@ -10,21 +10,22 @@ Atlas Academy portal.
 **Last examined:** 2026-08-05 (authenticated live GitHub Dependabot API, the
 default and review-branch lockfile graphs, and local production/full audits).
 The live API readback for protected default branch `main` at
-`33fadbd49b0e33900f21aba06ed40845c3cbd641` returned **11 open alerts** (five
-high, six medium). That branch still resolves `next@16.2.11 → postcss@8.4.31`
-and `sharp@0.34.5`.
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` most recently returned **2 open
+alerts** (one high, one medium): `fast-uri` and `postcss`. That branch still
+resolves the vulnerable runtime paths; the review branch resolves
+`fast-uri@3.1.5` and `postcss@8.5.24`.
 The review branch for draft [PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)
 resolves `next@16.2.12 → postcss@8.5.24` and `sharp@0.35.2`, beyond the
 alerts' first patched versions. `pnpm audit --prod --json` now exits zero on
 the review-candidate lockfile. The full local audit still exits nonzero with
 one high and five moderate **development-tooling** findings, triaged below.
 These are candidate remediations only until a normal reviewed merge reaches
-`main` and Dependabot recalculates. The API inventory below is authoritative for
-the current matrix count; a clean production audit does not close alerts or
-erase the separate development path. The feature-branch push on this date also
-printed a GitHub summary of 12 vulnerabilities (six high, six moderate), which
-does not match the authenticated 11-alert API readback; the discrepancy is
-recorded rather than silently normalized and must be rechecked before release.
+`main` and Dependabot recalculates. The latest authenticated API inventory is
+authoritative for the current matrix count; the older 11-alert inventory below
+is retained as historical evidence. A clean production audit does not close
+alerts or erase the separate development path. Earlier feature-branch push
+summaries reported different counts; those discrepancies remain historical and
+must be rechecked before release.
 **Owner:** Atlas repository maintainer. **Recheck trigger:** before any private
 deployment, after a relevant upstream release, and before closing or dismissing
 an alert. No alert is considered resolved until the reviewed branch is pushed,
@@ -59,23 +60,35 @@ that every development path is reachable from the shipped portal.
 | [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | medium | `postcss` | runtime |
 | [#13](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/13) — `GHSA-67mh-4wv8-2f99` | medium | `esbuild` | development |
 
-## Live API refresh — 2026-08-05
+## Live API refresh — 2026-08-05 (superseded snapshot)
 
-An authenticated readback of the protected default branch at
-`33fadbd49b0e33900f21aba06ed40845c3cbd641` returned the same **11 open
-alerts**: five high and six medium. The package, advisory, and scope inventory
-matches the 2026-08-04 table above; no alert is called resolved by this
-unchanged readback. The separate GitHub push summary still reports 12
-vulnerabilities (six high, six moderate), so that presentation discrepancy
-remains recorded rather than normalized. Candidate lockfile fixes remain
-unmerged and must be rechecked after a normal merge to `main`.
+An earlier authenticated readback of the protected default branch at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` returned 11 open alerts. That
+snapshot is retained for historical provenance; it is superseded by the later
+two-alert readback recorded below.
 
-## Patched runtime paths; Dependabot reconciliation outstanding
+## Live API refresh — 2026-08-05 (latest)
+
+The latest authenticated `state=open` readback for protected default branch
+`main` at `33fadbd49b0e33900f21aba06ed40845c3cbd641` returned **2 open alerts**:
+one high `fast-uri` alert [#50](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/50)
+(`GHSA-7p8r-x3mc-p8w7`, patched in 3.1.5) and one medium `postcss` alert
+[#49](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/49)
+(`GHSA-fxqj-rqcc-2cmp`, patched in 8.5.23). The review branch lockfile
+contains `fast-uri@3.1.5` and `postcss@8.5.24`, but neither alert is called
+resolved until the candidate reaches `main` and GitHub recalculates. This
+latest API observation supersedes the historical 11-alert matrix count.
+
+## Historical patched runtime paths; prior Dependabot set
 
 The current branch updates `next` to 16.2.12 and uses workspace-scoped
 overrides. Its regenerated lockfile resolves `postcss@8.5.24` and
 `sharp@0.35.2` specifically underneath Next; it also keeps compatible
 development-only patch fixes inside their declared dependency families:
+
+The four-alert runtime table below records the earlier advisory set and is
+retained for additive history; the latest API readback above is authoritative
+for the current two-alert matrix count.
 
 ```yaml
 overrides:

@@ -571,3 +571,13 @@ passed structural/release-input validation, generated-artifact and matrix
 checks, source-link freshness, and Draft content feedback. The expensive
 portal, apparatus, browser, and teaching-model jobs remained correctly skipped
 under the draft policy; this is not a non-draft full gate or release claim.
+
+## Latest dependency-alert refresh checkpoint — 2026-08-05
+
+An authenticated `state=open` Dependabot API readback for protected `main`
+commit [`33fadbd`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/33fadbd49b0e33900f21aba06ed40845c3cbd641)
+returned two current alerts: high `fast-uri` (#50) and medium `postcss` (#49).
+The compliance source and generated matrix now use this latest count; the
+older 11-alert inventory remains preserved as historical evidence. The review
+branch lockfile contains patched candidate versions, but no alert is called
+resolved until a normal merge reaches `main` and GitHub recalculates.

@@ -119,6 +119,15 @@ present when the matrix grows.
   were correctly skipped while PR #22 remains draft. This is current Draft
   evidence only, not a non-draft full gate or release claim.
 
+## Latest dependency evidence
+
+The latest authenticated Dependabot API refresh for `main` commit
+[`33fadbd`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/33fadbd49b0e33900f21aba06ed40845c3cbd641)
+returned two open alerts (one high `fast-uri`, one medium `postcss`). The
+review branch contains patched candidate versions, but protected-branch
+recalculation after merge remains open; this is a current dependency fact, not
+a security-clean claim.
+
 ## Intentionally deferred by design
 
 - Portal publication of M31–M36 until module-specific review and release
