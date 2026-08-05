@@ -397,9 +397,14 @@ learner evidence.
 The review branch is now available as draft [PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22),
 stacked on the preserved `agent/60-day-route` lineage used by PR #21. This
 keeps the additive history reviewable without presenting the inherited history
-as a new 424-commit change set. The PR head is
+as a new 424-commit change set. Its initial PR head was
 [`65b5510`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/65b5510f9dc5a62db3c02d041248414ba8782e5f),
 with 23 commits and 68 changed files relative to that base. It remains draft;
 the draft workflow was blocked before runner allocation by the repository
 account billing/spending-limit state. No release, deployment, or learner
 evidence is implied.
+
+The current PR head is [`8636972`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8636972fbaa9ff10f492a58fedd8529b4040b04d),
+with 24 commits and 68 changed files relative to that base. The later draft
+attempt [`30971257663`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971257663)
+was blocked by the same billing/spending-limit state before runner allocation.
