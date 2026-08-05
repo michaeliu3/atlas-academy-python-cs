@@ -168,6 +168,34 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.match(m26SourceMap, /Open Source\s+Excursion/u);
 });
 
+test("M25 keeps advanced re-entry in Sessions 1, 2, and 5, and M26 keeps stewardship obligations", async () => {
+  const [m25, m26, m26SourceMap] = await Promise.all([
+    readFile(new URL("../content/modules/25_evidence_grounded_intelligent_systems.md", import.meta.url), "utf8"),
+    readFile(
+      new URL("../content/modules/26_systems_capstone_open_source_stewardship.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../content/source-maps/module26_systems_capstone_source_map.md", import.meta.url), "utf8"),
+  ]);
+
+  const session1 = m25.slice(m25.indexOf("## 2. Session 1"), m25.indexOf("## 3. Session 2"));
+  const session2 = m25.slice(m25.indexOf("## 3. Session 2"), m25.indexOf("## 6. Session 5"));
+  const session5 = m25.slice(m25.indexOf("## 6. Session 5"));
+
+  assert.match(session1, /Cross-module re-entry[\s\S]*Optimization and Information Evidence Dossier/u);
+  assert.match(session2, /Cross-module re-entry[\s\S]*M27 Formal Limits Claim Packet[\s\S]*M32/u);
+  assert.match(session5, /Cross-module re-entry[\s\S]*M34 Classical AI Search[\s\S]*M36/u);
+
+  assert.match(m26, /### Versioning, compatibility, deprecation, and license obligations/u);
+  assert.match(m26, /schema\/API\/protocol version[\s\S]*migration or rollback path/u);
+  assert.match(m26, /owner, reason, affected versions[\s\S]*tested disable\/rollback path/u);
+  assert.match(m26, /private\/no public license/u);
+  assert.match(
+    m26SourceMap,
+    /Version\/deprecation move[\s\S]*interface and data compatibility promise[\s\S]*license\/notice obligations/u,
+  );
+});
+
 test("the v1 M31–M36 audit identifies its graph as a frozen historical fixture", async () => {
   const audit = JSON.parse(
     await readFile(new URL("../docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json", import.meta.url), "utf8"),
