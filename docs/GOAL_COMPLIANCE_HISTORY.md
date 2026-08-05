@@ -360,3 +360,15 @@ runtime's local trust-chain limitation without weakening TLS or treating
 transport failure as reachability. This strengthens link-liveness evidence only;
 the remaining citation, institutional-alignment, source-permission, and human
 review boundaries remain open.
+
+## Dated calibration-snapshot and draft-content checkpoint — 2026-08-05
+
+Commit [`6e0a02c`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/6e0a02ca71d77bce7043594555f99800e8a9ee2d)
+aligned the learner-facing academic-calibration page with the 1,068-URL live
+audit and corrected the deterministic source-audit fixture to use the current
+2026-08-05 review date. Draft Course CI run
+[`30982815817`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30982815817)
+passed the 95-test content path; portal, apparatus, browser, and teaching-model
+jobs were intentionally skipped because PR #22 remains draft. The current
+Mermaid scan is 246/246 complete. None of this is a full non-draft gate,
+module promotion, private deployment, human review, or learner evidence.

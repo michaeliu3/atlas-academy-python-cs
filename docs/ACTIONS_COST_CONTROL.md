@@ -118,3 +118,9 @@ also showing the remaining small setup cost of rapid `pull_request`
 `synchronize` events. The observation does not justify removing the classifier
 or required final checks; batching additive commits and requesting the normal
 non-draft gate only at a review-ready ref remain the safe controls.
+
+The latest additive calibration checkpoint, commit `6e0a02c`, produced Draft
+run [`30982815817`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30982815817).
+Its 95-test content path passed in 52 seconds; the portal, apparatus, Python,
+and browser jobs were skipped because the pull request remains draft. This is
+the intended low-cost draft behavior, not a full-gate or release result.

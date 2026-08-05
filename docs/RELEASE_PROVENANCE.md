@@ -552,3 +552,13 @@ fail-closed system-curl fallback when the bundled Node runtime cannot establish
 the host trust chain; it never turns a transport failure into a passing link.
 This validates liveness and freshness evidence, not institutional alignment,
 source permission, human review, or learner mastery.
+
+## Current Draft content checkpoint (2026-08-05)
+
+Commit [`6e0a02c`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/6e0a02ca71d77bce7043594555f99800e8a9ee2d)
+was checked by Draft Course CI run
+[`30982815817`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30982815817).
+The classifier and 95-test content path passed; portal, Node apparatus, both
+Python teaching-model entries, and browser acceptance were skipped because
+PR #22 remains draft. This is current source/content evidence only, not a
+non-draft full gate, release, deployment, human review, or learner outcome.
