@@ -628,3 +628,14 @@ portal quality, 423/423 Node apparatus tests, both Python teaching-model legs,
 and 63/63 Chromium/axe routes succeeded. This is automated workflow and
 provenance evidence; the human/platform/deployment boundaries remain open or
 waived as documented.
+
+## Pull-request synthetic merge-ref cost correction — 2026-08-05
+
+The provenance-only successor run [`31009410835`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009410835)
+passed all required jobs, but its classifier compared the previous branch head
+with GitHub's synthetic pull-request merge SHA and therefore re-included the
+base branch. That caused an unnecessary apparatus/Python/browser fan-out even
+though the changed files were current-truth metadata. The workflow now binds
+`ATLAS_HEAD_SHA` to `github.event.pull_request.head.sha` for pull requests,
+with a focused regression test; a future isolated metadata successor must still
+provide direct hosted savings evidence. No required check was removed.

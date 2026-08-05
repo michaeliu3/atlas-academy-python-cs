@@ -51,7 +51,10 @@ jobs:
           ATLAS_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           ATLAS_EVENT_ACTION: ${{ github.event_name == 'pull_request' && github.event.action || '' }}
           ATLAS_BEFORE_SHA: ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.event.before || '' }}
-          ATLAS_HEAD_SHA: ${{ github.sha }}
+          # On pull_request events github.sha is GitHub's synthetic merge ref,
+          # not the contributor's branch head. Use the real PR head so an
+          # incremental synchronize diff cannot re-include the base branch.
+          ATLAS_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
         run: |
           $baseSha = $env:ATLAS_BASE_SHA
           $headSha = $env:ATLAS_HEAD_SHA

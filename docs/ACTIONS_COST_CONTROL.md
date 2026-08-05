@@ -163,3 +163,21 @@ The browser predicate is now covered by the same allowlist regression and is
 excluded for the next isolated provenance-only update. The conservative
 base-range behavior remains intentional when a mixed historical range is the
 only available scope.
+
+## Synthetic merge-ref correction (2026-08-05)
+
+The next provenance-only successor exposed one remaining multiplier. Run
+[`31009410835`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009410835)
+was triggered by a change from `82a130a` to the current metadata head, but the
+classifier used `github.sha`. On `pull_request` events that value is GitHub's
+synthetic merge ref (`86df0ae` in the run), so the diff re-included the base
+branch and incorrectly selected the full apparatus, Python, and browser jobs.
+All required checks passed, but the run spent the very cost the provenance-only
+allowlist was intended to avoid.
+
+The classifier now uses
+`github.event.pull_request.head.sha` for pull-request events and reserves
+`github.sha` for main pushes. A focused CI regression protects this distinction.
+This is a structural correction; a future isolated provenance-only successor
+must provide the first direct hosted savings observation. No required check or
+final main-branch verification was removed.

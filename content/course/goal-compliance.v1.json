@@ -176,7 +176,7 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 31008159124 kept every required branch-protection context green; the changed learner surface correctly ran the portal, apparatus, Python, and browser checks. Metadata-only successors remain eligible for the cheaper path, while content, application, test, dependency, workflow, and generated-input changes retain full checks. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
+      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 31008159124 kept every required branch-protection context green; the changed learner surface correctly ran the portal, apparatus, Python, and browser checks. Follow-up run 31009410835 exposed that github.sha was the synthetic merge ref and re-included the base branch for a provenance-only successor; the classifier now uses the real pull-request head SHA, with a focused regression and a future hosted low-cost observation still required. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
     },
     {
       "id": "history-provenance",

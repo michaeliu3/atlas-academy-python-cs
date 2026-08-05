@@ -18,6 +18,11 @@ actually published.
   conversation produces a compact record, retrieval prompt, and forward
   improvement signal without creating a grade, mastery, route unlock, or
   release claim.
+- Corrected incremental Actions classification to diff the real pull-request
+  head rather than GitHub's synthetic merge SHA. The previous metadata-only
+  successor therefore re-included the base branch and ran the expensive fanout;
+  the new regression preserves required checks while making the provenance-only
+  path eligible for its intended low-cost behavior.
 - Hardened the split Node test runner's cancellation path: SIGINT/SIGTERM now
   terminate the spawned test tree (including Windows workers), handlers are
   removed on exit, and a focused regression protects the cleanup. This reduces

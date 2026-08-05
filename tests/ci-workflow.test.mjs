@@ -67,6 +67,16 @@ test("Course CI keeps full gates out of draft PR updates while running focused c
   );
   assert.match(
     workflow,
+    /ATLAS_HEAD_SHA: \$\{\{ github\.event_name == 'pull_request' && github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}/u,
+    "pull-request classification uses the real PR head rather than GitHub's synthetic merge ref",
+  );
+  assert.doesNotMatch(
+    workflow,
+    /ATLAS_HEAD_SHA: \$\{\{ github\.sha \}\}/u,
+    "pull-request classification must not diff against the synthetic merge SHA",
+  );
+  assert.match(
+    workflow,
     /ATLAS_EVENT_ACTION -eq 'synchronize'[\s\S]*?ATLAS_BEFORE_SHA[\s\S]*?\$baseSha = \$env:ATLAS_BEFORE_SHA/u,
     "incremental synchronize classification falls back conservatively when the previous head is unavailable",
   );
