@@ -313,3 +313,14 @@ allowlisted release-input ledger. Commit
 regenerated the ledger, and local tracked-input, generated-artifact, and
 matrix checks passed afterward. The failed run remains recorded as a real
 source-integrity finding; it is not a release or passing CI claim.
+
+## Dated repaired-source Draft content evidence — 2026-08-05
+
+After commit [`76b1f14`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/76b1f14)
+regenerated the release-input hash, Draft Course CI run
+[`30978814516`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978814516)
+passed changed-file classification and the full draft content path on head
+[`e59db9f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/e59db9f5a6b384c8452957dc28bab2b9f8ac07bb). The expensive portal,
+apparatus, browser, and teaching-model jobs were intentionally skipped. This
+confirms the repaired source-input boundary; it is not a full non-draft gate,
+release, deployment, human review, or learner evidence.

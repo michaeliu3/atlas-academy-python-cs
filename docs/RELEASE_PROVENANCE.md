@@ -502,3 +502,14 @@ regenerated that ledger; local `validate-course --require-git-tracked`,
 `check-generated`, and goal-matrix checks then passed. The failure is retained
 as provenance and is not represented as a passing gate; a subsequent hosted
 run is required to validate the repaired source head.
+
+## Repaired-source Draft content checkpoint (2026-08-05)
+
+After the release-input hash repair, Draft Course CI run
+[`30978814516`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978814516)
+validated head [`e59db9f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/e59db9f5a6b384c8452957dc28bab2b9f8ac07bb): changed-file
+classification and the full draft content path passed, including tracked
+input, generated-artifact, source-link, and content-suite checks. Portal,
+apparatus, browser, and teaching-model jobs were skipped by draft cost control.
+This is repaired-source/content evidence, not a non-draft full gate, release,
+deployment, human review, or learner evidence.
