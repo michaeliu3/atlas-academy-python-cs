@@ -101,6 +101,18 @@ contract test at roughly 18 seconds (previously about 54 seconds), and the
 The full apparatus suite remains a milestone check rather than a per-edit
 check; its CI job retains the explicit 20-minute bound and full test selection.
 
+On 2026-08-05, the staged candidate-preflight implementation added two bounded
+corrections: once the full Git-index/worktree boundary is checked, nested
+evidence readers reuse that boundary until the final full check; and a
+definitive caller-artifact or canonical-context mismatch fails immediately.
+The five-test `tests/math-candidate-preflight.test.mjs` suite passed in
+105.9 seconds, compared with 168.6 seconds immediately before the correction
+(about a 37% wall-time reduction in this Windows checkout). The change does
+not skip module evidence, scope validation, or final clean-snapshot checks; it
+only removes redundant Git subprocesses and downstream work after a proven
+provenance mismatch. This is a local timing observation, not a billed-minute
+or universal-host performance claim.
+
 This record is an operational audit, not a claim about billed dollars. GitHub
 billing-minute exports remain account-scoped and are not inferred from wall
 clock durations.

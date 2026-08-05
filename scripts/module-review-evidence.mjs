@@ -602,6 +602,7 @@ export async function validateModuleEvidenceRecord(
     expectedModuleId = null,
     requiredCriterionIds = null,
     snapshot = null,
+    inputsAlreadyChecked = false,
   } = {},
 ) {
   const errors = [];
@@ -638,12 +639,12 @@ export async function validateModuleEvidenceRecord(
     }
   }
   const declaredInputPaths = declaredEvidenceInputPaths(record);
-  let inputsAlreadyChecked = false;
-  if (evidenceSnapshot && declaredInputPaths.length > 0) {
+  let evidenceInputsAlreadyChecked = Boolean(evidenceSnapshot && inputsAlreadyChecked);
+  if (evidenceSnapshot && declaredInputPaths.length > 0 && !evidenceInputsAlreadyChecked) {
     try {
       evidenceSnapshot = await assertGitIndexSnapshotForSiteRoot(evidenceSnapshot, siteRoot);
       await evidenceSnapshot.assertClean(declaredInputPaths);
-      inputsAlreadyChecked = true;
+      evidenceInputsAlreadyChecked = true;
     } catch (error) {
       const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
       errors.push(
@@ -678,7 +679,7 @@ export async function validateModuleEvidenceRecord(
     for (const input of entry.inputs ?? []) {
       const resolved = await resolveEvidenceInput(siteRoot, input, label, caches, errors, {
         snapshot: evidenceSnapshot,
-        inputsAlreadyChecked,
+        inputsAlreadyChecked: evidenceInputsAlreadyChecked,
       });
       if (!resolved) continue;
       const key = `${resolved.kind}\u0000${resolved.path}\u0000${resolved.locator ?? ""}`;

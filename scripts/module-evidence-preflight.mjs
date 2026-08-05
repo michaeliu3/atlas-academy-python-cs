@@ -386,7 +386,7 @@ export async function loadCandidateStateContextFromSnapshot(
   siteRoot,
   snapshot,
   errors,
-  { label = "Candidate" } = {},
+  { label = "Candidate", inputsAlreadyChecked = false } = {},
 ) {
   const contextPaths = [
     canonicalCourseGraphPath,
@@ -395,7 +395,7 @@ export async function loadCandidateStateContextFromSnapshot(
   ];
   try {
     await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
-    await snapshot.assertClean(contextPaths);
+    if (!inputsAlreadyChecked) await snapshot.assertClean(contextPaths);
     const [graphRecord, registryRecord, manifestRecord] = await Promise.all(
       contextPaths.map((repositoryPath) => snapshot.readJson(repositoryPath)),
     );
@@ -510,6 +510,7 @@ async function validateSuppliedCandidateArtifactsMatchSnapshot(
   siteRoot,
   snapshot,
   errors,
+  { inputsAlreadyChecked = false } = {},
 ) {
   const label = candidateContextLabel(profile);
   const preflightPath = moduleEvidencePreflightRelativePath(profile.moduleId);
@@ -519,7 +520,7 @@ async function validateSuppliedCandidateArtifactsMatchSnapshot(
   let canonicalEvidenceRecord = null;
   try {
     await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
-    await snapshot.assertClean(artifactPaths);
+    if (!inputsAlreadyChecked) await snapshot.assertClean(artifactPaths);
     canonicalPreflight = (await snapshot.readJson(preflightPath)).value;
     if (!sameJsonValue(preflight, canonicalPreflight)) {
       errors.push(`${label} supplied preflight must match its captured Git-index preflight record.`);
@@ -735,16 +736,19 @@ async function validateLegacyCandidateProfileContext(
   siteRoot,
   snapshot,
   errors,
+  { inputsAlreadyChecked = false } = {},
 ) {
   const moduleLabel = profile.moduleId.toUpperCase();
   const label = `${moduleLabel} legacy candidate profile`;
   try {
     await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
-    await snapshot.assertClean([
-      legacyCandidatePreflightProfilesRelativePath,
-      legacyModuleContractPacketRelativePath,
-      moduleContractCandidatePacketRelativePath,
-    ]);
+    if (!inputsAlreadyChecked) {
+      await snapshot.assertClean([
+        legacyCandidatePreflightProfilesRelativePath,
+        legacyModuleContractPacketRelativePath,
+        moduleContractCandidatePacketRelativePath,
+      ]);
+    }
     let packetCohort = legacyPacketCohortCache.get(snapshot) ?? null;
     if (!packetCohort) {
       const [legacyPacketRegistry, currentPacketRegistry] = await Promise.all([
@@ -863,7 +867,7 @@ async function validateLegacyCandidateProfileEvidenceBindings(
   profile,
   evidenceReport,
   errors,
-  { siteRoot, snapshot = null },
+  { siteRoot, snapshot = null, inputsAlreadyChecked = false },
 ) {
   const moduleLabel = profile.moduleId.toUpperCase();
   const visualInputs = evidenceReport.evidenceByCriterion.get(
@@ -909,7 +913,7 @@ async function validateLegacyCandidateProfileEvidenceBindings(
       profile.visualTestPath,
       `${moduleLabel} candidate visual browser test`,
       errors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     );
     const body = source ? browserTestBody(source.text, profile.visualTestTitle) : null;
     if (
@@ -942,7 +946,7 @@ async function validateCandidateReleaseBoundary(
   preflight,
   evidenceReport,
   errors,
-  { siteRoot, snapshot = null },
+  { siteRoot, snapshot = null, inputsAlreadyChecked = false },
 ) {
   const moduleLabel = profile.moduleId.toUpperCase();
   const releaseEntry = evidenceReport.evidenceByCriterion.get(
@@ -988,7 +992,7 @@ async function validateCandidateReleaseBoundary(
     profile.candidateDocumentationPath,
     `${moduleLabel} candidate release documentation`,
     documentationErrors,
-    { snapshot },
+    { snapshot, inputsAlreadyChecked },
   );
   if (!documentation) {
     errors.push(...documentationErrors);
@@ -1014,7 +1018,7 @@ async function validateAuthoringCandidateScope(
   evidenceReport,
   graphModule,
   errors,
-  { siteRoot, snapshot },
+  { siteRoot, snapshot, inputsAlreadyChecked = false },
 ) {
   const moduleLabel = profile.moduleId.toUpperCase();
   const label = `${moduleLabel} authoring candidate evidence`;
@@ -1069,21 +1073,21 @@ async function validateAuthoringCandidateScope(
       profile.authoringDeliveryMapPath,
       `${label} delivery map`,
       deliveryMapErrors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     ),
     readTrackedText(
       siteRoot,
       profile.authoringWorkbookPath,
       `${label} workbook`,
       deliveryMapErrors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     ),
     readTrackedText(
       siteRoot,
       advancedModuleBridgeRelativePath,
       `${label} prerequisite-session bridge`,
       deliveryMapErrors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     ),
   ]);
   if (deliveryMapRecord && workbookRecord && bridgeRecord) {
@@ -1211,6 +1215,10 @@ export async function validateModuleEvidencePreflight(
     );
   }
   if (errors.length > 0) preflightFailure(errors);
+  // The full captured worktree/index boundary is checked once at entry and
+  // once again before returning. Nested readers can reuse that boundary
+  // instead of launching one Git clean check per input.
+  const snapshotInputsAlreadyChecked = true;
 
   const legacyCandidateProfiles = authoringCandidateProfiles.has(preflight?.moduleId)
     ? null
@@ -1268,8 +1276,15 @@ export async function validateModuleEvidencePreflight(
     siteRoot,
     evidenceSnapshot,
     errors,
+    { inputsAlreadyChecked: snapshotInputsAlreadyChecked },
   );
   if (!snapshotArtifacts?.canonicalPreflight) preflightFailure(errors);
+  // A supplied preflight/evidence mismatch is already a definitive
+  // provenance failure. Do not spend time resolving downstream contract
+  // inputs from caller-owned data after the snapshot has rejected it.
+  // Failing here preserves the same error boundary while keeping negative
+  // injection checks bounded.
+  if (errors.length > 0) preflightFailure(errors);
   // Report a caller mismatch, then discard caller-owned artifacts. All
   // subsequent semantics and returned evidence are based on immutable snapshot
   // records instead.
@@ -1282,7 +1297,10 @@ export async function validateModuleEvidencePreflight(
     siteRoot,
     evidenceSnapshot,
     errors,
-    { label: candidateContextLabel(profile) },
+    {
+      label: candidateContextLabel(profile),
+      inputsAlreadyChecked: snapshotInputsAlreadyChecked,
+    },
   );
   if (!stateContext) preflightFailure(errors);
   suppliedCandidateContextMatchesSnapshot(
@@ -1293,6 +1311,10 @@ export async function validateModuleEvidencePreflight(
     stateContext,
     errors,
   );
+  // The canonical context comparison is another fail-closed boundary. Once a
+  // caller-supplied graph, registry, or manifest is detached from the captured
+  // Git-index state, no later evidence validation can make it trustworthy.
+  if (errors.length > 0) preflightFailure(errors);
   const graph = stateContext.graph;
   const registry = stateContext.registry;
   let registryReport = null;
@@ -1327,6 +1349,7 @@ export async function validateModuleEvidencePreflight(
       siteRoot,
       evidenceSnapshot,
       errors,
+      { inputsAlreadyChecked: snapshotInputsAlreadyChecked },
     )
     : null;
   if (profile.scope === "legacy-canonical" && !legacyCandidateContext) {
@@ -1366,6 +1389,7 @@ export async function validateModuleEvidencePreflight(
         expectedModuleId: profile.moduleId,
         requiredCriterionIds: criterionIds,
         snapshot: evidenceSnapshot,
+        inputsAlreadyChecked: snapshotInputsAlreadyChecked,
       });
       for (const path of evidenceReport.releaseInputPaths) {
         addSnapshotInputPath(
@@ -1394,11 +1418,13 @@ export async function validateModuleEvidencePreflight(
       await validateLegacyCandidateProfileEvidenceBindings(profile, evidenceReport, errors, {
         siteRoot,
         snapshot: evidenceSnapshot,
+        inputsAlreadyChecked: snapshotInputsAlreadyChecked,
       });
     } else {
       await validateAuthoringCandidateScope(profile, evidenceReport, graphModule, errors, {
         siteRoot,
         snapshot: evidenceSnapshot,
+        inputsAlreadyChecked: snapshotInputsAlreadyChecked,
       });
     }
     errors.push(...await promotionEvidenceTestErrors({
@@ -1407,6 +1433,7 @@ export async function validateModuleEvidencePreflight(
       graphModule,
       evidenceReport,
       snapshot: evidenceSnapshot,
+      inputsAlreadyChecked: snapshotInputsAlreadyChecked,
     }));
     errors.push(...await promotionLearningCompanionErrors({
       siteRoot,
@@ -1414,6 +1441,7 @@ export async function validateModuleEvidencePreflight(
       graph,
       evidenceReport,
       snapshot: evidenceSnapshot,
+      inputsAlreadyChecked: snapshotInputsAlreadyChecked,
     }));
     const visual = await promotionVisualAlternativeErrors({
       siteRoot,
@@ -1423,11 +1451,13 @@ export async function validateModuleEvidencePreflight(
       evidenceReport,
       materialScope: legacyCandidateContext?.materialScope ?? null,
       snapshot: evidenceSnapshot,
+      inputsAlreadyChecked: snapshotInputsAlreadyChecked,
     });
     errors.push(...visual.errors);
     await validateCandidateReleaseBoundary(profile, preflight, evidenceReport, errors, {
       siteRoot,
       snapshot: evidenceSnapshot,
+      inputsAlreadyChecked: snapshotInputsAlreadyChecked,
     });
   }
 

@@ -50,11 +50,13 @@ export function moduleCompanionGuidesPath(siteRoot = defaultSiteRoot) {
 
 export async function loadModuleCompanionGuides(
   siteRoot = defaultSiteRoot,
-  { snapshot = null } = {},
+  { snapshot = null, inputsAlreadyChecked = false } = {},
 ) {
   if (snapshot) {
     await assertGitIndexSnapshotForSiteRoot(snapshot, siteRoot);
-    await snapshot.assertClean([moduleCompanionGuidesRelativePath]);
+    if (!inputsAlreadyChecked) {
+      await snapshot.assertClean([moduleCompanionGuidesRelativePath]);
+    }
     return (await snapshot.readJson(moduleCompanionGuidesRelativePath)).value;
   }
   return JSON.parse(await readFile(moduleCompanionGuidesPath(siteRoot), "utf8"));

@@ -147,6 +147,7 @@ export async function validateModuleLearningCompanion(
     repositoryPath = null,
     siteRoot = defaultSiteRoot,
     snapshot = null,
+    inputsAlreadyChecked = false,
   } = {},
 ) {
   const errors = [];
@@ -253,7 +254,10 @@ export async function validateModuleLearningCompanion(
   let guide = null;
   if (guidePath === moduleCompanionGuidesRelativePath && guideLocator && digestPattern.test(guideDigest ?? "")) {
     try {
-      const guideRegistry = await loadModuleCompanionGuides(siteRoot, { snapshot });
+      const guideRegistry = await loadModuleCompanionGuides(siteRoot, {
+        snapshot,
+        inputsAlreadyChecked,
+      });
       await validateModuleCompanionGuides(guideRegistry, {
         graph: courseGraph,
         siteRoot,

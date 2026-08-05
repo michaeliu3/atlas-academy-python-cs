@@ -1093,6 +1093,7 @@ async function browserTestExercisesBoundStudio({
   snapshot,
   errors,
   label,
+  inputsAlreadyChecked = false,
 }) {
   if (typeof graphModule?.studioId !== "string" || graphModule.studioId === "") return false;
   const studioId = escapeRegularExpression(graphModule.studioId);
@@ -1114,7 +1115,7 @@ async function browserTestExercisesBoundStudio({
       sourceInput.path,
       `${label} bound browser studio source`,
       errors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     );
     if (source && sourceModePattern.test(source.text)) return true;
   }
@@ -1234,6 +1235,7 @@ export async function promotionEvidenceTestErrors({
   graphModule,
   evidenceReport,
   snapshot = null,
+  inputsAlreadyChecked = false,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed evidence`;
   const errors = [];
@@ -1256,7 +1258,7 @@ export async function promotionEvidenceTestErrors({
         input.path,
         `${label} criterion ${entry.criterionId} test`,
         errors,
-        { snapshot },
+        { snapshot, inputsAlreadyChecked },
       );
       if (!trackedTest) continue;
       const testSource = trackedTest.text;
@@ -1272,6 +1274,7 @@ export async function promotionEvidenceTestErrors({
           snapshot,
           errors,
           label: `${label} criterion ${entry.criterionId}`,
+          inputsAlreadyChecked,
         }));
       if (!namesModule || !coversBoundArtifact) {
         errors.push(`${label} criterion ${entry.criterionId} test ${input.path} must be a module-specific discovered test that reads or exercises a bound module artifact.`);
@@ -1283,7 +1286,7 @@ export async function promotionEvidenceTestErrors({
             "scripts/run-course-tests.mjs",
             `${label} Node test discovery runner`,
             errors,
-            { snapshot },
+            { snapshot, inputsAlreadyChecked },
           ))?.text ?? "";
         }
         if (!runner.includes('filename.endsWith(".test.mjs")')) {
@@ -1296,7 +1299,7 @@ export async function promotionEvidenceTestErrors({
             ".github/workflows/ci.yml",
             `${label} Python test discovery workflow`,
             errors,
-            { snapshot },
+            { snapshot, inputsAlreadyChecked },
           ))?.text ?? "";
         }
         if (!courseWorkflowRunsCommand(
@@ -1364,6 +1367,7 @@ export async function promotionLearningCompanionErrors({
   graph,
   evidenceReport,
   snapshot = null,
+  inputsAlreadyChecked = false,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed learning companion`;
   const errors = [];
@@ -1394,7 +1398,7 @@ export async function promotionLearningCompanionErrors({
       expectedPath,
       `${label} module-scoped companion record`,
       companionErrors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     );
     if (!companion) throw new Error(companionErrors.join("\n"));
     const record = JSON.parse(companion.text);
@@ -1404,6 +1408,7 @@ export async function promotionLearningCompanionErrors({
       repositoryPath: expectedPath,
       siteRoot,
       snapshot,
+      inputsAlreadyChecked,
     });
   } catch (error) {
     errors.push(
@@ -1442,6 +1447,7 @@ export async function promotionVisualAlternativeErrors({
   evidenceReport,
   materialScope = null,
   snapshot = null,
+  inputsAlreadyChecked = false,
 }) {
   const label = `Module ${moduleEntry.moduleId} reviewed visual evidence`;
   const errors = [];
@@ -1493,7 +1499,7 @@ export async function promotionVisualAlternativeErrors({
       contentPath,
       `${label} visual content ${contentPath}`,
       errors,
-      { snapshot },
+      { snapshot, inputsAlreadyChecked },
     );
     if (markdown) blocks.push(...scanMermaidBlocks(markdown.text, { sourcePath: contentPath }));
   }
