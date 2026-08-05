@@ -166,7 +166,7 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume; path-aware portal/browser gating is now implemented, while draft PR #22 was prevented before runner start by the account billing/spending-limit state, so cancellation/required-check behavior still needs a future review-ready ref before release."
+      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Path-aware portal/browser gating is implemented, and current PR #22 readback observed superseded runs 30978504095 and 30978565589 being cancelled; the latter was cancelled before downstream jobs because a higher-priority waiting request existed. A normally requested review-ready ref still needs the full required-check gate before release."
     },
     {
       "id": "history-provenance",

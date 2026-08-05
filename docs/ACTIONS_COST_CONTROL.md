@@ -94,3 +94,24 @@ check; its CI job retains the explicit 20-minute bound and full test selection.
 This record is an operational audit, not a claim about billed dollars. GitHub
 billing-minute exports remain account-scoped and are not inferred from wall
 clock durations.
+
+## Current concurrency observation (2026-08-05)
+
+Two rapid additive documentation checkpoints on draft PR #22 provided direct
+evidence of the workflow's supersession boundary:
+
+- Run [`30978504095`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978504095)
+  for head `71ee5ad` completed classification, dependency setup, and the
+  structural/content-input steps before its Draft content job was cancelled;
+  the expensive portal, browser, apparatus, and teaching-model jobs were
+  skipped.
+- Run [`30978565589`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978565589)
+  for the next head was cancelled at the classifier boundary. GitHub reported
+  that a higher-priority waiting request for the same concurrency group existed,
+  so no downstream job started.
+
+This confirms `cancel-in-progress` is actively removing superseded work, while
+also showing the remaining small setup cost of rapid `pull_request`
+`synchronize` events. The observation does not justify removing the classifier
+or required final checks; batching additive commits and requesting the normal
+non-draft gate only at a review-ready ref remain the safe controls.
