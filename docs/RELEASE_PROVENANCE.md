@@ -524,3 +524,13 @@ uncertainties, and the required closure sequence. Draft Course CI run
 [`30979206934`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30979206934)
 passed the draft content path; expensive non-draft checks were skipped by
 policy. The audit surface is now reviewable, but it is not a completion claim.
+
+## Private-deployment header procedure checkpoint (2026-08-05)
+
+The additive head adds docs/DEPLOYMENT_HEADER_VERIFICATION.md, a bounded
+manual procedure for checking both the ordinary Worker response and the
+/_vinext/image response after a private deployment reports success. The focused
+tests/http-security-headers.test.mjs suite passes 4/4, including the procedure
+assertions. This documents how to collect deployment evidence; it does not
+record a deployment URL, imply that headers were observed remotely, resolve
+dependency alerts, or establish security-clean status.

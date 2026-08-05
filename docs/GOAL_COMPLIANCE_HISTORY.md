@@ -334,3 +334,12 @@ evidence. Its regression test passed locally, and Draft Course CI run
 [`30979206934`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30979206934)
 passed the draft content path. The audit deliberately keeps the goal open
 pending human, platform, deployment, and non-draft release evidence.
+
+## Dated private-deployment header procedure — 2026-08-05
+
+The additive head adds docs/DEPLOYMENT_HEADER_VERIFICATION.md, which defines a
+manual, bounded observation procedure for both the ordinary Worker route and
+the /_vinext/image route. The focused security-header suite passed 4/4,
+including a regression that keeps the required header values and the
+non-substitution claim visible. This is procedure and local-test evidence only;
+the actual private deployment remains unverified.

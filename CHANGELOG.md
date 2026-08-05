@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Added a bounded private-deployment header-verification procedure covering
+  both ordinary and image-optimization Worker responses. Its focused
+  regression passes 4/4; the repository still makes no remote-deployment or
+  security-clean claim.
 - Added an apparatus regression that proves both production Worker response
   paths retain the shared security-header policy, and recorded the focused
   3/3 result without claiming private-deployment verification or a
