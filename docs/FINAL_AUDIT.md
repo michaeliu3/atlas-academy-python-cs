@@ -68,6 +68,14 @@ present when the matrix grows.
   the focused pedagogy-density guard and hidden-candidate parity checks pass.
 - The current source tree is clean, additive, and reachable through draft PR #22;
   no history rewrite was used.
+- The split Node test runner now forwards cancellation to its spawned worker
+  tree (including Windows `taskkill /T` cleanup) and removes signal handlers on
+  exit; its focused lifecycle regression passes. Local content and focused
+  apparatus checks passed, and Draft CI run
+  [`30990920229`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30990920229)
+  passed the changed-file classifier and Draft content path. This strengthens
+  Actions cancellation safety but does not replace the required non-draft full
+  gate.
 - The repaired release-input ledger and generated matrix pass local checks. The
   latest content-bearing snapshot [`a6add42`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a6add42c0c135ec7e664af3241259d1df83f03f6)
   passed the draft content path in Draft Course CI run

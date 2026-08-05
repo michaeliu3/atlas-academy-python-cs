@@ -611,3 +611,16 @@ passed the changed-file classifier and Draft content feedback; expensive jobs
 were skipped under the draft cost-control policy. This records role-delivery
 and bounded source evidence only, not a substantive learner session, live
 rendering, Notion write, deployment, human review, publication, or release.
+
+## Test-runner cancellation checkpoint (2026-08-05)
+
+Additive commit [`ff839b4`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/ff839b4)
+added bounded SIGINT/SIGTERM forwarding and Windows worker-tree cleanup to the
+split Node test runner, with a focused lifecycle regression. Local checks also
+passed the 96-test content suite and a 41-test focused apparatus selection.
+Draft Course CI run
+[`30990920229`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30990920229)
+passed classification and Draft content feedback; expensive jobs skipped under
+the draft policy. This is cancellation-safety and bounded Draft evidence only,
+not a non-draft full gate, release, deployment, human review, or learner
+evidence.

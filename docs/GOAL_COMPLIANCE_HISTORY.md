@@ -491,3 +491,18 @@ then passed structural/release-input checks, generated-artifact checks, source
 freshness, and all 95 content tests. This remains Draft content evidence, not
 a non-draft full gate, live voice/rendering observation, Notion write, module
 promotion, deployment, or learner evidence.
+
+## Dated test-runner cancellation checkpoint — 2026-08-05
+
+Additive commit [`ff839b4`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/ff839b4)
+hardened `scripts/run-course-tests.mjs` so SIGINT/SIGTERM forward to the
+spawned test runner, Windows cancellation includes its worker tree, and signal
+handlers are removed after exit. The focused lifecycle regression, local
+96-test content suite, and 41-test graph/chat/advanced-pack apparatus selection
+passed. Draft Course CI run
+[`30990920229`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30990920229)
+passed changed-file classification and the Draft content path; expensive
+portal, apparatus, browser, and teaching-model jobs were skipped because PR
+#22 remains draft. This reduces orphaned work without changing required test
+coverage, and it is not a non-draft full gate, deployment, human review,
+learner evidence, or release claim.
