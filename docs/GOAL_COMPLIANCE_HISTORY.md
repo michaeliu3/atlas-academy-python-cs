@@ -405,3 +405,13 @@ dependency-risk register. The separate push summary still reports 12
 vulnerabilities, so the discrepancy remains explicit. This refresh confirms
 the current count only; candidate fixes are not resolved until normally merged
 and recalculated by GitHub.
+
+## Dated content-bearing Draft checkpoint refresh — 2026-08-05
+
+The generated truth source now records dependency-refresh head
+[`80f9ff6`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/80f9ff6658bd99332386fa7e66bb7c5f1721e544)
+and Draft Course CI run
+[`30985254418`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30985254418)
+as the latest **content-bearing** checkpoint. Its 95-test content path passed;
+later documentation-only commits remain separately recorded. This is not a
+non-draft full gate, module promotion, deployment, or learner evidence.

@@ -103,7 +103,7 @@ function render() {
       "](" +
       gate.url +
       ")); this is the recorded source-head gate; the separate Draft snapshot is historical evidence only.",
-    "> - Latest observed Draft content check: " +
+    "> - Latest recorded content-bearing Draft check: " +
       tick +
       oneLine(draft.commit) +
       tick +

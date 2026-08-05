@@ -7,6 +7,10 @@ actually published.
 
 ## Unreleased
 
+- Clarified the generated truth header's Draft entry as the latest
+  **content-bearing** checkpoint and recorded head `80f9ff6` / run `30985254418`;
+  later documentation-only commits remain separate provenance, not implied
+  teaching-content releases.
 - Refreshed the authenticated Dependabot boundary against protected `main` on
   2026-08-05: 11 alerts remain open (5 high, 6 medium), while the separate
   GitHub push summary still reports 12. Candidate lockfile remediations remain
