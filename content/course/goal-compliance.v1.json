@@ -158,8 +158,8 @@
       "id": "safety-privacy-build",
       "requirement": "Local progress, sanitization, headers, deterministic inputs, typechecking, and dependency risks are truthfully bounded.",
       "state": "partial",
-      "evidence": "lib/local-progress-codec.js; scripts/release-input-ledger.mjs; docs/DEPENDENCY_RISK_REGISTER.md; pnpm typecheck",
-      "openItem": "Resolve or maintain explicit risk triage and verify production headers and bounded lab claims."
+      "evidence": "lib/local-progress-codec.js; lib/http-security-headers.js; scripts/release-input-ledger.mjs; docs/DEPENDENCY_RISK_REGISTER.md; tests/http-security-headers.test.mjs; pnpm typecheck",
+      "openItem": "Local header behavior is unit-tested and dependency paths are triaged; verify the headers at the actual private deployment, retain the five open alert boundary, and keep OS/process lab claims source-scoped."
     },
     {
       "id": "actions-cost",
