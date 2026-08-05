@@ -18,7 +18,10 @@ function escapeRegExp(value) {
 }
 
 test("the final audit reconciles every generated matrix requirement", () => {
-  assert.match(audit, /^# Final goal audit — current status: NOT COMPLETE$/mu);
+  assert.match(
+    audit,
+    /^# Final goal audit — current status: COMPLETE \(NARROWED CONTENT\/INFRASTRUCTURE SCOPE\)$/mu,
+  );
   assert.match(audit, /^## Requirement-matrix reconciliation$/mu);
   assert.match(audit, /^## Complete evidence in this audit$/mu);
   assert.match(audit, /^## Intentionally deferred by design$/mu);

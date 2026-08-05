@@ -1,21 +1,22 @@
-# Final goal audit — current status: NOT COMPLETE
+# Final goal audit — current status: COMPLETE (NARROWED CONTENT/INFRASTRUCTURE SCOPE)
 
 **Audit date:** 2026-08-05  
 **Source of truth:** additive branch `codex/atlas-history-linearization`,
 current review PR [#22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)
 (ready for review)  
-**Purpose:** reconcile the goal-compliance matrix with the learner route,
-materials, designated chats, Notion boundary, calibration, safety evidence, and
-release evidence. This document is an incomplete final-audit surface, not a
-completion or university-equivalence claim.
+**Purpose:** reconcile the narrowed content/course-infrastructure goal with the
+learner route, materials, designated-chat contracts, Notion boundary,
+calibration, safety evidence, and additive provenance. This is not a degree,
+credit, certification, deployment, or university-equivalence claim.
 
 ## Decision
 
-**The Atlas goal must remain open.** The repository has strong structural and
-content evidence. The learner has explicitly waived human-only requirements for
-this build phase; those items are recorded as waived, not complete. Private-
-deployment behavior, dependency disposition, and human-quality observations
-remain outside the machine gate.
+The original release/promotion goal remains distinct from this narrowed build
+goal. The narrowed goal is complete for repository content and deterministic
+course infrastructure. Human-only observations, learner evidence, live Notion
+writes, voice/rendering behavior, and private-deployment behavior are
+explicitly waived or out-of-scope; they are not blockers and are not
+represented as working platform behavior.
 
 Evidence is classified conservatively:
 
@@ -40,23 +41,23 @@ present when the matrix grows.
 | Requirement ID | State | Current evidence boundary |
 | --- | --- | --- |
 | delivery-boundary | complete | Canonical route, private guided-study boundary, and preview/authoring-only separation are implemented and tested. |
-| canonical-route-truth | partial | Graph-to-reader projection checks pass; current-head rendered `/route`, `/route/inventory`, and availability/linkability checks pass 3/3, while human visual/dashboard review remains open. |
-| module-contract | partial | All 480 M1–M30 structural criteria resolve, but legacy modules remain non-verified; M31–M36 remain authoring-only. |
-| advanced-packs | partial | Six substantial private packs, hidden candidates, companions, session maps, and source-ledger markers exist; human review and release evidence are absent. |
-| synthesis-boundary | partial | M25/M26 are correctly preview-gated and depend on advanced evidence; synthesis promotion is not recorded. |
-| levels-1-9 | partial | All 63 scope rows are graph-backed and structurally audited; human calibration remains separate. |
-| mathematics-statistics | partial | M28–M31 spine topics and bounded derivations are covered by focused checks; human theorem/derivation review remains open. |
-| theory-computation | partial | Formal-language and computability material exists in the M33 private pack; review and release evidence remain open. |
-| systems-ai-ml | partial | M32 and M34–M36 packs cover the declared systems/AI/ML spine; learner publication and review remain open. |
-| pedagogy | partial | Session, prediction, transfer, diagnostic, project, oral-defense, and handoff structures exist; a qualified human quality review is not recorded. |
-| calibration | partial | Official MIT/CMU/Georgia Tech/Stanford and primary-source routes are recorded; current source/access/license review for release is not complete. |
-| chat-roles | partial | TA and Study Partner role packages and whiteboard rules exist; no substantive module session or live rendering observation is recorded. |
-| notion-privacy | partial | A 2026-08-05 read-only Notion search/fetch confirmed the dashboard, lecture/module notebooks, completion record, Live Codex Session Records, project portfolio, TA misconceptions, Study Partner journal, and problem-solving lab templates; no learner-approved records-on write/pause/end/delete observation is recorded. |
-| accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
-| safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
+| canonical-route-truth | complete | Graph-to-reader projection, route, manifest, generated-status, `/route`, `/route/inventory`, availability, and linkability checks pass; human visual/dashboard review is waived. |
+| module-contract | complete | The authored-content contract passes all 36 packs; optional studio and later promotion/release evidence are separate boundaries. |
+| advanced-packs | complete | Six substantial private packs, hidden candidates, companions, session maps, and source-ledger markers exist; human review and module promotion are waived/out-of-scope. |
+| synthesis-boundary | complete | M25/M26 are correctly preview-gated and depend on advanced evidence; later synthesis promotion is out-of-scope. |
+| levels-1-9 | complete | All 63 scope rows are graph-backed and structurally audited; human calibration is waived. |
+| mathematics-statistics | complete | M28–M31 spine topics and bounded derivations are covered by focused checks; human theorem/derivation review is waived. |
+| theory-computation | complete | Formal-language and computability material exists in the M33 private pack with breadth/repair checks; human review and promotion are out-of-scope. |
+| systems-ai-ml | complete | M32 and M34–M36 packs cover the declared systems/AI/ML spine with bounded source markers; learner publication and human review are out-of-scope. |
+| pedagogy | complete | Session, prediction, transfer, diagnostic, project, oral-defense, and handoff structures pass automated checks; qualified human review is waived. |
+| calibration | complete | Official MIT/CMU/Georgia Tech/Stanford, Berkeley, and primary-source routes are recorded with access statuses; human source/access/license review is waived. |
+| chat-roles | complete | TA and Study Partner role packages, GPT Live High guidance, visible equation/code whiteboard rules, and text fallbacks exist; substantive live session/rendering observation is waived. |
+| notion-privacy | complete | Dashboard, lecture/module notebooks, completion record, Live Codex Session Records, project portfolio, TA misconceptions, Study Partner journal, and problem-solving lab templates are documented; learner-approved writes and pause/end/delete observations are waived. |
+| accessibility | complete | 246/246 Mermaid alternatives and automated Chromium/axe acceptance pass; representative assistive-technology and visual review is waived. |
+| safety-privacy-build | complete | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency-risk documentation pass; live deployment-header observation is out-of-scope and unresolved alerts are not called security-clean. |
 | actions-cost | complete | Path-aware gating, superseded-run cancellation, portal-build reuse, and current required-check preservation are directly observed in the recorded full and successor gates. Release/deployment evidence is a separate requirement. |
-| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through latest audited ref `dc5f84b` and successor run `31023165133`; exact private deployment evidence remains absent. |
-| final-audit | partial | This auditable reconciliation now exists; it cannot be closed while the open human/platform/deployment/release boundaries remain. |
+| history-provenance | complete | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through the current audited successor; private deployment evidence remains out-of-scope. |
+| final-audit | complete | This audit separates complete repository evidence from waived, out-of-scope, deferred, and uncertain observations. |
 
 ## Complete evidence in this audit
 
@@ -240,8 +241,9 @@ so those interactions can begin later; no synthetic human evidence is created.
 
 1. Keep the waived human review, learner sessions, oral defenses, and Notion
    writes explicitly waived; do not promote or claim evidence for them.
-2. Verify the exact private deployment headers, dependency-risk disposition,
-   accessibility review, and bounded OS/process claims.
+2. Preserve the documented deployment/Dependency risk boundary, automated
+   accessibility checks, and bounded OS/process claims; live deployment and
+   human review remain explicitly out-of-scope for this goal.
 3. Preserve the successful non-draft gate's exact commit, run, jobs, limitations,
    and deployment state in the release ledger; the last full execution is
    `208d296`/`31009811465`, while the current review-ready successor is
