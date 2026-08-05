@@ -192,7 +192,7 @@
       "id": "history-provenance",
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
-      "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
+      "evidence": "docs/RELEASE_PROVENANCE.md; PR #22 (stacked on PR #21); git log",
       "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the latest audited successor adc104d passed required checks in run 31020839106, while the last complete full gate remains 208d296/run 31009811465. Exact private deployment state and final release limitations remain separate."
     },
     {

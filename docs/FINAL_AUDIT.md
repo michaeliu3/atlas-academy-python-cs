@@ -164,9 +164,9 @@ present when the matrix grows.
   whose required contexts succeeded in run
   [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860)
   through the explicit lightweight path for unchanged apparatus, Python, and
-  browser suites. The latest PR #22 successor head [`8b47215`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8b472152ba8c010b515f9ce3f866aba2bdba60f3)
+  browser suites. The latest audited PR #22 successor [`adc104d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/adc104d374077dc80ebec8ca20c47d8c3f06e7d0)
   also passed every required context in run
-  [`31014294962`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31014294962),
+  [`31020839106`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31020839106),
   including 423/423 Node apparatus tests and both Python legs; its browser
   context used the documented lightweight satisfaction path because no
   browser-affecting files changed. These are current provenance checks, not a
