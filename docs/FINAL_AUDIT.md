@@ -148,11 +148,13 @@ present when the matrix grows.
   whose required contexts succeeded in run
   [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860)
   through the explicit lightweight path for unchanged apparatus, Python, and
-  browser suites. The latest PR #22 successor head [`7a90fd9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6)
+  browser suites. The latest PR #22 successor head [`8b47215`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8b472152ba8c010b515f9ce3f866aba2bdba60f3)
   also passed every required context in run
-  [`31012584499`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499)
-  through the same bounded lightweight paths. These are current provenance
-  checks, not a second full execution gate;
+  [`31014294962`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31014294962),
+  including 423/423 Node apparatus tests and both Python legs; its browser
+  context used the documented lightweight satisfaction path because no
+  browser-affecting files changed. These are current provenance checks, not a
+  second full Chromium execution gate;
   neither run closes deployment, dependency, waived human-observation,
   publication, or mastery boundaries.
 

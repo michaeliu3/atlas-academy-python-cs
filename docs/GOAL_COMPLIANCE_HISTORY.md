@@ -686,9 +686,11 @@ truth now records this as the current review-ready head while retaining
 
 ## Latest PR successor check — 2026-08-05
 
-The current PR #22 head [`7a90fd9`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6)
+The current PR #22 head [`8b47215`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8b472152ba8c010b515f9ce3f866aba2bdba60f3)
 passed every required Course CI context in run
-[`31012584499`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499).
-This is a non-promoting provenance successor with the explicit lightweight
-unchanged-suite paths; the canonical review-ready ref remains `9242f79`, and
-the last complete full execution remains `208d296`/`31009811465`.
+[`31014294962`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31014294962),
+including 423/423 Node apparatus tests and both Python legs; the browser
+context used its documented lightweight satisfaction path because no
+browser-affecting files changed. This is a non-promoting provenance successor;
+the canonical review-ready ref remains `9242f79`, and the last complete
+Chromium execution remains `208d296`/`31009811465`.

@@ -50,13 +50,13 @@
     },
     "latestSuccessorCheck": {
       "state": "success",
-      "commit": "7a90fd9aaf2823c5c9393a63ec84b8c0d543daf6",
+      "commit": "8b472152ba8c010b515f9ce3f866aba2bdba60f3",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "31012584499",
+      "runId": "31014294962",
       "checkState": "success",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012584499",
-      "note": "Current PR #22 head 7a90fd9 passed every required Course CI context in run 31012584499. This is a provenance-only successor check using the explicit lightweight paths for unchanged apparatus, Python, and browser suites; the review-ready truth remains anchored to 9242f79 and the last full execution gate remains 208d296/run 31009811465."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31014294962",
+      "note": "Current PR #22 head 8b47215 passed every required Course CI context in run 31014294962, including 423/423 Node apparatus tests and both Python teaching-model legs; the browser context used its documented lightweight satisfaction path because no browser-affecting files changed. This is a provenance-only successor check; the review-ready truth remains anchored to 9242f79 and the last complete Chromium gate remains 208d296/run 31009811465."
     },
     "openRedTests": {
       "count": 0,
