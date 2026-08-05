@@ -796,6 +796,20 @@ The last complete full execution remains
 [`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
 in run
 [`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).
+
+## Latest audited PR successor (2026-08-05)
+
+The latest audited PR #22 successor [`adc104d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/adc104d374077dc80ebec8ca20c47d8c3f06e7d0)
+passed every required Course CI context in run
+[`31020839106`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31020839106).
+Portal quality, 423/423 Node apparatus tests, and Python 3.12/3.14 teaching
+models passed; the browser context used its documented lightweight satisfaction
+path because no browser-affecting files changed. This is the latest audited
+successor evidence, not a complete Chromium execution, module promotion,
+publication, deployment, human review, or learner mastery claim. The last
+complete full gate remains [`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
+in run
+[`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).
 This is current provenance only; it does not claim publication, deployment,
 human review, or learner mastery.
 
