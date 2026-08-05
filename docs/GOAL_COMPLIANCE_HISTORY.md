@@ -180,3 +180,15 @@ Partner returned a short greeting exchange. This is bounded channel
 reachability evidence only. It is not a substantive module lesson, oral
 defense, whiteboard-rendering observation, learner evidence, or Notion write;
 the repository retains no raw transcript or audio.
+
+## Dated Dependabot alert reconciliation — 2026-08-04
+
+An authenticated `gh api` readback of protected default branch `main` at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` returned 11 open Dependabot alert
+records: five high and six medium. The feature-branch push separately printed
+GitHub's summary of 12 vulnerabilities (six high, six moderate). The generated
+matrix and dependency register now use the explicit 11-record API inventory,
+while preserving the push-summary discrepancy as unresolved evidence rather
+than claiming a security-clean state. Local `pnpm audit --prod --json` remains
+clean on the reviewed lockfile candidate; the full local audit remains
+non-zero for development tooling.

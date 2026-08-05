@@ -7,20 +7,24 @@ equating a lockfile edit, a passing local command, or a GitHub Actions run with
 an absence of security risk. It is a living, reviewable record for the private
 Atlas Academy portal.
 
-**Last examined:** 2026-08-04 (live GitHub Dependabot API, the default and
-review-branch lockfile graphs, and local production/full audits). The live API
-reported five open alerts on protected default branch `main` at
-`33fadbd49b0e33900f21aba06ed40845c3cbd641` (three high, two medium). That
-branch still resolves `next@16.2.11 → postcss@8.4.31` and `sharp@0.34.5`.
+**Last examined:** 2026-08-04 (authenticated live GitHub Dependabot API, the
+default and review-branch lockfile graphs, and local production/full audits).
+The live API readback for protected default branch `main` at
+`33fadbd49b0e33900f21aba06ed40845c3cbd641` returned **11 open alerts** (five
+high, six medium). That branch still resolves `next@16.2.11 → postcss@8.4.31`
+and `sharp@0.34.5`.
 The review branch for draft [PR #21](https://github.com/michaeliu3/atlas-academy-python-cs/pull/21)
 resolves `next@16.2.12 → postcss@8.5.24` and `sharp@0.35.2`, beyond the
 alerts' first patched versions. `pnpm audit --prod --json` now exits zero on
 the review-candidate lockfile. The full local audit still exits nonzero with
 one high and five moderate **development-tooling** findings, triaged below.
 These are candidate remediations only until a normal reviewed merge reaches
-`main` and Dependabot recalculates. Direct API evidence of five open alerts is
-authoritative for this register; a clean production audit does not close them
-or erase the separate development path.
+`main` and Dependabot recalculates. The API inventory below is authoritative for
+the current matrix count; a clean production audit does not close alerts or
+erase the separate development path. The feature-branch push on this date also
+printed a GitHub summary of 12 vulnerabilities (six high, six moderate), which
+does not match the authenticated 11-alert API readback; the discrepancy is
+recorded rather than silently normalized and must be rechecked before release.
 **Owner:** Atlas repository maintainer. **Recheck trigger:** before any private
 deployment, after a relevant upstream release, and before closing or dismissing
 an alert. No alert is considered resolved until the reviewed branch is pushed,
@@ -32,7 +36,28 @@ The commands used to reproduce a path are:
 ```powershell
 pnpm why postcss sharp brace-expansion esbuild --recursive
 gh api repos/michaeliu3/atlas-academy-python-cs/dependabot/alerts/<number>
+gh api "repos/michaeliu3/atlas-academy-python-cs/dependabot/alerts?state=open&per_page=100"
 ```
+
+## Current live API inventory (2026-08-04)
+
+The authenticated `state=open` readback returned the following 11 alert
+records. Severity and scope are GitHub's current fields; they are not a claim
+that every development path is reachable from the shipped portal.
+
+| Alert | Severity | Package | Scope |
+| --- | --- | --- | --- |
+| [#46](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/46) — `GHSA-rgw5-rvv9-x895` | high | `brace-expansion` | development |
+| [#45](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/45) — `GHSA-m8rv-5g2x-5cg5` | medium | `undici` | development |
+| [#44](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/44) — `GHSA-v3r7-h72x-cjcm` | medium | `undici` | development |
+| [#43](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/43) — `GHSA-jr45-8vmc-qm54` | medium | `undici` | development |
+| [#42](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/42) — `GHSA-8xcm-r25x-g524` | medium | `undici` | development |
+| [#41](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/41) — `GHSA-4cwx-7wf7-3272` | high | `undici` | development |
+| [#38](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/38) — `GHSA-r28c-9q8g-f849` | high | `postcss` | runtime |
+| [#37](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/37) — `GHSA-6g55-p6wh-862q` | high | `postcss` | runtime |
+| [#27](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/27) — `GHSA-f88m-g3jw-g9cj` | high | `sharp` | runtime |
+| [#14](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/14) — `GHSA-qx2v-qp2m-jg93` | medium | `postcss` | runtime |
+| [#13](https://github.com/michaeliu3/atlas-academy-python-cs/security/dependabot/13) — `GHSA-67mh-4wv8-2f99` | medium | `esbuild` | development |
 
 ## Patched runtime paths; Dependabot reconciliation outstanding
 
