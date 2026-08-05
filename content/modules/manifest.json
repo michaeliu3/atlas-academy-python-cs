@@ -714,7 +714,7 @@
       "wordCount": 22006,
       "estimatedMinutes": 96,
       "focusedStudyMinutes": null,
-      "sourceHash": "7908f59a51d3eeb7854d3958220f09e1d42b078d0f1ffda29ea2f84e073602a3",
+      "sourceHash": "efc48fa13425958aa493db9ed704bdb3b6f1d245e01b71d23041da6ce02660cd",
       "id": "m17",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -796,7 +796,7 @@
       "wordCount": 23642,
       "estimatedMinutes": 104,
       "focusedStudyMinutes": null,
-      "sourceHash": "470bcd778a4793ef5a9d11cd1582f11ec138c76c973f8a98ec1a51e8537f694e",
+      "sourceHash": "ec983a58d3d9b76ffbd734deaf2df9240f58b714a363570168cb8214c37a1e40",
       "id": "m19",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1075,10 +1075,10 @@
       "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
       "arcId": "arc-v",
-      "wordCount": 10905,
+      "wordCount": 11334,
       "estimatedMinutes": 36,
       "focusedStudyMinutes": null,
-      "sourceHash": "1c487c5e547d22243ea3458c39f2b0b4e1b36117e4f6d333ede2f42fd5d0d96b",
+      "sourceHash": "58517d281d80bc152219875aea0c1524fc61aa3299a3d8daba2e7b1a3c83bd65",
       "id": "m25",
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1124,10 +1124,10 @@
       "title": "Systems Capstone, Open-Source Stewardship & Oral Architecture Defense",
       "summary": "Intended bridge after prerequisite evidence exists: Module 25 ends with a bounded decision-support feature and an evidence packet. This module then asks the harder systems question: can that feature live inside a maintained product witho…",
       "arcId": "arc-v",
-      "wordCount": 11282,
+      "wordCount": 11515,
       "estimatedMinutes": 38,
       "focusedStudyMinutes": null,
-      "sourceHash": "a2fc1f10eeba70506e0c4fc6f02047985f0fcd9a2fa47617c51ac85c601a06e8",
+      "sourceHash": "99df03b5d7e666e90f1ca88d41e93891cb8a9fcf594c87c61896ad1074b063ea",
       "id": "m26",
       "state": {
         "lifecycle": "learner-material-ready",

@@ -37,6 +37,8 @@ jobs:
       content: ${{ steps.scope.outputs.content }}
       apparatus: ${{ steps.scope.outputs.apparatus }}
       sources: ${{ steps.scope.outputs.sources }}
+      portal: ${{ steps.scope.outputs.portal }}
+      browser: ${{ steps.scope.outputs.browser }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -61,27 +63,72 @@ jobs:
           $contentChanged = $false
           $apparatusChanged = $false
           $sourcesChanged = $false
+          $portalChanged = $false
+          $browserChanged = $false
           foreach ($path in $changedFiles) {
             if ($path -like 'content/*') {
               $contentChanged = $true
+              $portalChanged = $true
+              $browserChanged = $true
             }
-            if ($path -like 'content/course/*' -or $path -like 'scripts/*') {
+            if (
+              $path -like 'content/course/*' -or
+              $path -like 'scripts/*' -or
+              $path -like 'tests/*' -or
+              $path -like 'package.json' -or
+              $path -like 'pnpm-lock.yaml' -or
+              $path -like '.github/workflows/ci.yml'
+            ) {
               $apparatusChanged = $true
+              $portalChanged = $true
             }
             if ($path -like 'content/source-maps/*' -or $path -like 'docs/ACADEMIC_CALIBRATION.md' -or $path -like 'docs/research/*') {
               $sourcesChanged = $true
+            }
+            if (
+              $path -like 'app/*' -or
+              $path -like 'components/*' -or
+              $path -like 'lib/*' -or
+              $path -like 'build/*' -or
+              $path -like 'public/*' -or
+              $path -like 'worker/*' -or
+              $path -like 'e2e/*' -or
+              $path -like 'tests/*' -or
+              $path -like '*.css' -or
+              $path -like 'package.json' -or
+              $path -like 'pnpm-lock.yaml' -or
+              $path -like 'tsconfig*.json' -or
+              $path -like 'vite.config.*' -or
+              $path -like '.github/workflows/ci.yml'
+            ) {
+              $portalChanged = $true
+            }
+            if (
+              $path -like 'app/*' -or
+              $path -like 'components/*' -or
+              $path -like 'content/*' -or
+              $path -like 'e2e/*' -or
+              $path -like 'public/*' -or
+              $path -like '*.css' -or
+              $path -like 'vite.config.*' -or
+              $path -like '.github/workflows/ci.yml'
+            ) {
+              $browserChanged = $true
             }
           }
           "content=$($contentChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           "apparatus=$($apparatusChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           "sources=$($sourcesChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "portal=$($portalChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "browser=$($browserChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
 
   portal:
     name: Portal quality gate
     needs: change-scope
     if: >-
       github.event_name != 'pull_request' ||
-      github.event.pull_request.draft == false
+      (github.event.pull_request.draft == false &&
+      needs.change-scope.outputs.portal == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -132,7 +179,12 @@ jobs:
   draft-content:
     name: Draft content feedback
     needs: change-scope
-    if: github.event_name == 'pull_request' && github.event.pull_request.draft == true
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == true &&
+      (needs.change-scope.outputs.content == 'true' ||
+      needs.change-scope.outputs.sources == 'true' ||
+      needs.change-scope.outputs.apparatus == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -237,7 +289,8 @@ jobs:
     needs: [change-scope, portal]
     if: >-
       github.event_name != 'pull_request' ||
-      github.event.pull_request.draft == false
+      (github.event.pull_request.draft == false &&
+      needs.change-scope.outputs.browser == 'true')
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

@@ -166,7 +166,7 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume; draft PR #22 was prevented before runner start by the account billing/spending-limit state, so cancellation/required-check behavior still needs a future review-ready ref before release."
+      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume; path-aware portal/browser gating is now implemented, while draft PR #22 was prevented before runner start by the account billing/spending-limit state, so cancellation/required-check behavior still needs a future review-ready ref before release."
     },
     {
       "id": "history-provenance",

@@ -57,13 +57,23 @@ test("Course CI keeps full gates out of draft PR updates while running focused c
   );
   assert.match(
     workflow,
-    /portal:\n\s*name: Portal quality gate\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*github\.event\.pull_request\.draft == false/mu,
-    "only explicit draft pull-request updates skip the hosted quality gates",
+    /outputs:\n[\s\S]*?portal: \$\{\{ steps\.scope\.outputs\.portal \}\}\n\s*browser: \$\{\{ steps\.scope\.outputs\.browser \}\}/mu,
+    "the classifier exposes portal and browser change scopes",
   );
   assert.match(
     workflow,
-    /draft-content:\n\s*name: Draft content feedback\n\s*(?:needs: change-scope\n\s*)?if: github\.event_name == 'pull_request' && github\.event\.pull_request\.draft == true[\s\S]*?run: pnpm test:content/mu,
-    "draft pull requests retain a bounded content-feedback suite",
+    /portal:\n\s*name: Portal quality gate\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*\(github\.event\.pull_request\.draft == false &&\n\s*needs\.change-scope\.outputs\.portal == 'true'\)/mu,
+    "docs-only non-draft updates skip the expensive portal gate while main pushes retain it",
+  );
+  assert.match(
+    workflow,
+    /draft-content:\n\s*name: Draft content feedback\n\s*(?:needs: change-scope\n\s*)?if: >-\n\s*github\.event_name == 'pull_request' &&\n\s*github\.event\.pull_request\.draft == true[\s\S]*?needs\.change-scope\.outputs\.content == 'true'[\s\S]*?run: pnpm test:content/mu,
+    "draft pull requests retain a bounded content-feedback suite for relevant changes",
+  );
+  assert.match(
+    workflow,
+    /browser-accessibility:\n\s*name: Browser accessibility acceptance[\s\S]*?if: >-\n\s*github\.event_name != 'pull_request' \|\|\n\s*\(github\.event\.pull_request\.draft == false &&\n\s*needs\.change-scope\.outputs\.browser == 'true'\)/mu,
+    "docs-only non-draft updates skip browser acceptance while portal-affecting changes retain it",
   );
 });
 

@@ -193,6 +193,16 @@ than claiming a security-clean state. Local `pnpm audit --prod --json` remains
 clean on the reviewed lockfile candidate; the full local audit remains
 non-zero for development tooling.
 
+## Dated path-aware Actions gating — 2026-08-05
+
+The Course CI classifier now emits explicit portal and browser scopes. On
+non-draft pull requests, documentation-only changes skip the expensive Portal
+and Browser jobs; content, application, test, dependency, workflow, and
+generated-input changes retain the relevant checks. `main` pushes still run the
+full post-merge Portal and Browser verification, and the required job names are
+unchanged. The workflow SHA and release-input ledger were regenerated together
+so this cost correction remains hash-bound and reviewable.
+
 ## Dated draft-review PR and external Actions blocker — 2026-08-05
 
 The additive branch is available for review as draft [PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22).

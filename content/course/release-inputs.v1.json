@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "ccb2fb72724aeb0ef9e524126b0dd6e0084e1bae6f1b57807d2dc97707d43437"
+      "sha256": "57d36e5592136249c561fffedc925baf8c5ec03305687c10050c00c8f369341f"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -82,7 +82,7 @@
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "d46eb9f2bfecbdb743898c0f1de8580fb14aca1f7e8843317482068bb28d2e08"
+      "sha256": "71d26d92881a28c3acbcd73c2947a590ec7942be7072affddb1ed83ddf800364"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
@@ -90,7 +90,7 @@
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "2cf1b9f44e7ad84f858af064fad2ffcc483302d8cd92030dc52c6152e83d9515"
+      "sha256": "5c07c0bcd837eeb5f126c7b1eb70ed0d3829def8fdbf5a1efa9d1a2973b9af52"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "2400ed20d224e0630cafd2a388c7499a2bcdcceedd04d0a7e1144ad28aa19103"
+      "sha256": "963ca46235b85b74b5f8ccf0df5fbc0ed744d143fb26e255fb1bb7616dd23054"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -558,7 +558,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "e3fd3180a1d4aee2f1ebd2577c2fee4aecec0f7d88ec908c8b40146f3b815099"
+      "sha256": "78e85b021fa51307a1131f0317233cd12242b6f10d602181d72060564ccec7f8"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -634,7 +634,7 @@
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
-      "sha256": "7908f59a51d3eeb7854d3958220f09e1d42b078d0f1ffda29ea2f84e073602a3"
+      "sha256": "efc48fa13425958aa493db9ed704bdb3b6f1d245e01b71d23041da6ce02660cd"
     },
     {
       "path": "content/modules/18_operating_systems_resource_mediation.md",
@@ -642,7 +642,7 @@
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "470bcd778a4793ef5a9d11cd1582f11ec138c76c973f8a98ec1a51e8537f694e"
+      "sha256": "ec983a58d3d9b76ffbd734deaf2df9240f58b714a363570168cb8214c37a1e40"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
@@ -666,11 +666,11 @@
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "1c487c5e547d22243ea3458c39f2b0b4e1b36117e4f6d333ede2f42fd5d0d96b"
+      "sha256": "58517d281d80bc152219875aea0c1524fc61aa3299a3d8daba2e7b1a3c83bd65"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "a2fc1f10eeba70506e0c4fc6f02047985f0fcd9a2fa47617c51ac85c601a06e8"
+      "sha256": "99df03b5d7e666e90f1ca88d41e93891cb8a9fcf594c87c61896ad1074b063ea"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
@@ -726,11 +726,11 @@
     },
     {
       "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
-      "sha256": "f6c4eefe58560fa2f7ea6cdb342d2a410d9cf3f8c35f9a469cebb24d545b8554"
+      "sha256": "877542455018c87c31b86bbf6bc73f9347cf3821ebfaa67f664335e5b692dc1b"
     },
     {
       "path": "content/source-maps/module17_architecture_execution_source_map.md",
-      "sha256": "7a4ac22a5b71aa9d430af3818ba64d0a051f9809b4267366cbcf4ae3c5125092"
+      "sha256": "5a5d6d4a57fad2ffb63f13f392292fa4e706fc157595e7e23bcd893534c4bada"
     },
     {
       "path": "content/source-maps/module18_operating_systems_source_audit_addendum.md",
@@ -738,7 +738,7 @@
     },
     {
       "path": "content/source-maps/module18_operating_systems_source_map.md",
-      "sha256": "f052e51dbc34863bc199cfabeb8fc06c32ad19b98082ada007a6d065d47ad5bd"
+      "sha256": "f876e0d7b971d4326c73a20f3a4dd6180e2739f07775f799160c98fa73d0fbcf"
     },
     {
       "path": "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md",
@@ -746,7 +746,7 @@
     },
     {
       "path": "content/source-maps/module19_concurrency_parallelism_source_map.md",
-      "sha256": "e82fe81592d9450fd31f08eeaa03fd5c1a7de112aaee20200fde31f7a2809b48"
+      "sha256": "da4fcddf0f07bba1defeb43415864bca9bfa9309d36d1d00eb427ace73edad65"
     },
     {
       "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md",
@@ -798,15 +798,15 @@
     },
     {
       "path": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
-      "sha256": "86d067db872daef5bb185ca23445bb05a276c1435e20e52f89b4d8bb7412ed4e"
+      "sha256": "a22cbba27b5ed981b05d5bb53a1b4cf431f17d4b11cfad2751161b0a2d2e8f99"
     },
     {
       "path": "content/source-maps/module26_systems_capstone_source_map.md",
-      "sha256": "ee89792323183f3d72d644485a38f135b595b36fc7a90e7b04a943ccc9ad0ec1"
+      "sha256": "d7bc6fbcbe9bff443c027b52799d9e32a96ddcfb6a415326f8938f3cebbe0194"
     },
     {
       "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
-      "sha256": "192cd3c35f8a668be2467e5551c1a38b3b4506bdf76172f5dded20df45874a67"
+      "sha256": "f41668f5e5d6ba34821aec0eab44ba16a89ba5432fd433bc88c9f710ff9a28b6"
     },
     {
       "path": "content/source-maps/module27_source_audit_addendum.md",
@@ -814,7 +814,7 @@
     },
     {
       "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
-      "sha256": "e1da598402056554613b9cfa325d6975da9391ea8168130c643879b6b1528ff6"
+      "sha256": "b8e409a690e3ec73901b940bd5374eb6300d758dad566cb24bd15ca6ef17fb5d"
     },
     {
       "path": "content/source-maps/module28_linear_algebra_source_audit_addendum.md",
@@ -850,11 +850,11 @@
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
-      "sha256": "2b1d61ca774810abacf6c95f2d2cf981d1cad1abf1697ac8a7a85cf5ebded9fb"
+      "sha256": "55974137aedc255bf3eeb2d0dd4bb2f407e7602068818b9c7d5db1dc433d206f"
     },
     {
       "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
-      "sha256": "5839f1b9014691c3ba7dcd15644ffd42c384487398c87c7ba50b5c4be68cb9af"
+      "sha256": "290e44277aa0983a2e9c71745bce055ce270d5af65b5fabc99e5a95057966b39"
     },
     {
       "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
@@ -862,7 +862,7 @@
     },
     {
       "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
-      "sha256": "d6da8ed964c1d6162040b31a959f55c8e68ca1006e72322e042518c6dbb3e85b"
+      "sha256": "f4b26ea59f7adab3c01feae822375bafca712fd1eb8fafbf3f21344ff7438216"
     },
     {
       "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
@@ -898,7 +898,7 @@
     },
     {
       "path": "content/source-maps/python_curriculum_sources.md",
-      "sha256": "65807d4ddc427e5d38a63f0bf95a3c04e6769ab4ab27f834f27da20a173f1508"
+      "sha256": "7e92c2a4903bf987cf423d955d22827bbf77e6185fdfb0a3d0648df5fba23555"
     },
     {
       "path": "docs/LEARNER_RECORD_WORKFLOW.md",
@@ -1058,7 +1058,7 @@
     },
     {
       "path": "public/downloads/module19_concurrency_parallelism_source_map.md",
-      "sha256": "e82fe81592d9450fd31f08eeaa03fd5c1a7de112aaee20200fde31f7a2809b48"
+      "sha256": "da4fcddf0f07bba1defeb43415864bca9bfa9309d36d1d00eb427ace73edad65"
     },
     {
       "path": "public/downloads/module19_reference.py",
@@ -1098,7 +1098,7 @@
     },
     {
       "path": "public/downloads/module27_discrete_mathematics_proof_counting_structures_source_map.md",
-      "sha256": "192cd3c35f8a668be2467e5551c1a38b3b4506bdf76172f5dded20df45874a67"
+      "sha256": "f41668f5e5d6ba34821aec0eab44ba16a89ba5432fd433bc88c9f710ff9a28b6"
     },
     {
       "path": "public/downloads/module27_reference.py",
@@ -1110,7 +1110,7 @@
     },
     {
       "path": "public/downloads/module28_linear_algebra_numerical_stability_representation_source_map.md",
-      "sha256": "e1da598402056554613b9cfa325d6975da9391ea8168130c643879b6b1528ff6"
+      "sha256": "b8e409a690e3ec73901b940bd5374eb6300d758dad566cb24bd15ca6ef17fb5d"
     },
     {
       "path": "public/downloads/module28_linear_algebra_source_audit_addendum.md",
