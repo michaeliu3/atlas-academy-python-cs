@@ -81,8 +81,8 @@
       "id": "advanced-packs",
       "requirement": "M31–M36 are complete private-chat teaching packs and remain hidden from the portal.",
       "state": "partial",
-      "evidence": "content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; content/source-maps/; content/course/course-graph.v2.json; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; docs/research/m31-m36-study-ready-gap-audit.md; tests/module35-36-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
-      "openItem": "Complete the human visual/code-density review and module-specific release evidence; ladder and per-distractor repair checks now pass structurally."
+      "evidence": "content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; content/source-maps/; content/course/course-graph.v2.json; content/course/contracts/advanced-module-contracts.v1.json; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; tests/advanced-source-ledger-audit.test.mjs; docs/research/m31-m36-study-ready-gap-audit.md; tests/module35-36-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
+      "openItem": "The advanced source-ledger audit now binds every planned source and claim marker for M31–M36 and preserves access/reuse boundaries; complete the human visual/code-density review and module-specific release evidence before any promotion."
     },
     {
       "id": "synthesis-boundary",
@@ -116,8 +116,8 @@
       "id": "systems-ai-ml",
       "requirement": "M32–M36 connect systems, classical AI, ML, and learning-theory reasoning with honest boundaries.",
       "state": "partial",
-      "evidence": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md; content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md; content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md; tests/m34-classical-ai-reference-fixture.test.mjs; tests/module34-primary-research.test.mjs; tests/module35-36-breadth.test.mjs",
-      "openItem": "M32 names lower-level Python/native boundaries, mixed precision, and distributed data-parallel contracts; M34 now has bounded first-order resolution, Bayesian-network/HMM, POMDP, and game-theory cards with S34-20–S34-22 source routing. Complete human/source review and verify M35/M36 breadth against their source ledgers."
+      "evidence": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md; content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md; content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md; content/course/contracts/advanced-module-contracts.v1.json; tests/advanced-source-ledger-audit.test.mjs; tests/m34-classical-ai-reference-fixture.test.mjs; tests/module34-primary-research.test.mjs; tests/module35-36-breadth.test.mjs",
+      "openItem": "M32 names lower-level Python/native boundaries, mixed precision, and distributed data-parallel contracts; M34 now has bounded first-order resolution, Bayesian-network/HMM, POMDP, and game-theory cards with S34-20–S34-22 source routing. The source-ledger markers are structurally bound; complete human/source review and module-specific release evidence."
     },
     {
       "id": "pedagogy",

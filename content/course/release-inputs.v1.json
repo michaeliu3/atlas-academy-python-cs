@@ -110,7 +110,7 @@
     },
     {
       "path": "content/course/contracts/advanced-module-contracts.v1.json",
-      "sha256": "8c7f872fd140397599c08b400990c9f85c2e09e29317272967ea68ad7cbbdadb"
+      "sha256": "4efeb2b3cd7592745eeae0085abe7c490ae714d5a316b6b48cfd5a9fad480d10"
     },
     {
       "path": "content/course/contracts/authoring-delivery/m31.v1.json",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "e8b0d08a16d1ac1356d66b396ebe4da63eaaa11508ac202409ff245d57db727b"
+      "sha256": "28e83266d2d0e3adcb7774a1af50e2c236f97c8daed692df2991c2708f30ff6c"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",

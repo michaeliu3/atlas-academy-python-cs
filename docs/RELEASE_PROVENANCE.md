@@ -469,3 +469,12 @@ source/CI/deployment provenance, and an explicit promotion decision. Draft Cours
 CI run [`30977716814`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30977716814)
 passed the content path; the remaining expensive jobs were skipped by draft
 cost control.
+
+## Advanced source-ledger checkpoint (2026-08-05)
+
+The authoring contract now binds the M31 claim marker `C10` and the new
+`tests/advanced-source-ledger-audit.test.mjs` verifies all planned M31–M36
+source/session markers, stable links, access dates, license/reuse boundaries,
+and claim linkage. This is structural authoring evidence only; source-quality,
+visual/accessibility, human review, release, deployment, and learner evidence
+remain separate gates.

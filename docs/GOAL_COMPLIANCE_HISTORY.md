@@ -266,3 +266,12 @@ source/CI/deployment provenance, and a recorded promotion decision exist. Draft
 Course CI run [30977716814](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30977716814)
 passed its content path with the expensive portal, apparatus, browser, and
 teaching-model jobs intentionally skipped.
+
+## Dated advanced source-ledger audit — 2026-08-05
+
+The new `tests/advanced-source-ledger-audit.test.mjs` check binds every planned
+source and claim marker in the M31–M36 authoring contracts to its checked-in
+source document. It also requires stable links, access provenance, a license or
+reuse boundary, and claim/rationale linkage for each module's source-ledger
+input. This strengthens structural source evidence without treating research
+files as human review, publication, or learner mastery.
