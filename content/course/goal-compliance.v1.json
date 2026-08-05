@@ -173,7 +173,7 @@
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
-      "openItem": "The branch continues through additive commits beyond the latest hosted gate, which is recorded at run 30961057821; still record the final reviewed ref, limitations, and any private deployment state separately."
+      "openItem": "The additive branch is preserved in draft PR #22 stacked on PR #21's lineage; still record the final reviewed ref, limitations, and any private deployment state separately after a non-draft gate."
     },
     {
       "id": "final-audit",
