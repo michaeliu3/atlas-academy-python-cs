@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { learningPartnerPrompts, liveModuleLoop } from "@/lib/learning-partner-prompts";
+import { learningPartnerPrompts, liveModuleLoop, liveStartNow } from "@/lib/learning-partner-prompts";
 import { CourseReaderHeader } from "../modules/CourseReaderHeader";
 import { LearningPartnerPromptCards } from "./LearningPartnerPromptCards";
 import styles from "./learning-partners.module.css";
@@ -44,6 +44,31 @@ export default function LearningPartnersPage() {
             context needed for the next learning move.
           </p>
         </header>
+
+        <section className={styles.workflow} aria-labelledby="start-now">
+          <div>
+            <p className="kicker">Start now · no human gate</p>
+            <h2 id="start-now">Begin with evidence, then improve the course.</h2>
+            <p>
+              Build-phase human-only requirements are waived, so you do not
+              need to wait for a reviewer or a pilot session. Choose the next
+              graph-approved conversation, produce a small reasoning artifact,
+              and let the learner-owned record show what needs a bridge later.
+              This starts learning; it does not create a grade, mastery claim,
+              route unlock, or release evidence.
+            </p>
+          </div>
+          <ol>
+            {liveStartNow.entrySteps.map((step, index) => (
+              <li key={step.id}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>
+                  <strong>{step.label}:</strong> {step.action} <em>Output: {step.output}</em>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
 
         <section className={styles.workflow} aria-labelledby="partner-workflow">
           <div>

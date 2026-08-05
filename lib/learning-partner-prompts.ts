@@ -13,6 +13,7 @@ export type LearningPartnerPrompt = Readonly<{
 const unavailableNoteTemplate = liveWorkflow.notionSessionNotes.unavailableNoteTemplate;
 export const liveModuleLoop = liveWorkflow.moduleLoop;
 export const liveImprovementPolicy = liveWorkflow.improvementPolicy;
+export const liveStartNow = liveWorkflow.startNow;
 const sessionClosurePhrase = liveWorkflow.notionSessionNotes.recordingAuthorization.closurePhrase;
 const sessionRenewalRule = liveWorkflow.notionSessionNotes.recordingAuthorization.renewalRule;
 const readyToPasteUnavailableNote = `${unavailableNoteTemplate.title}
@@ -50,6 +51,12 @@ My current context
 - Confidence (low / medium / high) and why: [[confidence]]
 - The smallest artifact I can share safely: [[code trace, diagram, derivation, test result, or question]]
 - Portable copied-chat record mode: keep local
+
+Start-now rule
+Human review is waived for this build phase and is not a prerequisite for
+learning. If I provide no module yet, help me choose the placement diagnostic
+or M01 Session 1, then begin the six-phase loop. Do not invent a human review,
+learner mastery, or route unlock.
 
 Live whiteboard rule
 If this exact live chat offers a setting labelled “GPT Live High”, select/request that option when you want voice; otherwise prefer the highest available quality/reasoning setting. The learner and platform—not Atlas—own that setting, so never claim control of it. Keep the visible chat an accessible whiteboard: write important equations in the platform's supported display-math form, define symbols, give a line-by-line prose or ASCII fallback if rendering is uncertain, and put code in language-labelled fenced blocks. Never rely on speech-only or visual-only explanation.
@@ -98,6 +105,12 @@ My current context
 - Confidence (low / medium / high): [[confidence]]
 - A safe small artifact, if useful: [[diagram, code excerpt, test result, or derivation]]
 - Portable copied-chat record mode: keep local
+
+Start-now rule
+Human review is waived for this build phase and is not a prerequisite for
+learning. If I provide no module yet, help me choose the placement diagnostic
+or M01 Session 1, then begin the six-phase loop. Do not invent a human review,
+learner mastery, or route unlock.
 
 Live whiteboard rule
 If this exact live chat offers a setting labelled “GPT Live High”, select/request that option when you want voice; otherwise prefer the highest available quality/reasoning setting. The learner and platform—not Atlas—own that setting, so never claim control of it. Keep the visible chat an accessible whiteboard: use supported display math, define symbols, give a line-by-line prose or ASCII fallback if rendering is uncertain, and put code in language-labelled fenced blocks. Never rely on speech-only or visual-only explanation.

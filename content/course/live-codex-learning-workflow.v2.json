@@ -9,6 +9,87 @@
     "chatSurface": "user-designated-platform-chat",
     "learnerGuidePath": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md"
   },
+  "startNow": {
+    "version": 1,
+    "purpose": "Let the learner begin immediately with a graph-approved module and let real module conversations create the learner evidence and improvement signals that human review can be added to later.",
+    "canBeginBeforeHumanReview": true,
+    "buildPhaseHumanEvidenceState": "waived",
+    "entrySteps": [
+      {
+        "id": "choose",
+        "owner": "learner",
+        "label": "Choose the next conversation",
+        "action": "Use the placement diagnostic or start at M01; follow academic prerequisites rather than waiting for a human sign-off.",
+        "output": "A graph-approved module and session"
+      },
+      {
+        "id": "launch-study-partner",
+        "owner": "study-partner",
+        "label": "Open the model",
+        "action": "Ask the Study Partner for one concrete trace, prediction, and confidence before the explanation is revealed.",
+        "output": "A question, prediction, confidence, and prerequisite bridge"
+      },
+      {
+        "id": "make-evidence",
+        "owner": "study-partner",
+        "label": "Make one small artifact",
+        "action": "Trace code or architecture, derive a step, draw the relation, test a counterexample, or run a bounded numerical check.",
+        "output": "One inspectable artifact and its boundary"
+      },
+      {
+        "id": "repair-and-defend",
+        "owner": "teaching-assistant",
+        "label": "Repair and discuss",
+        "action": "Bring the artifact to the Teaching Assistant for a constructive changed-premise conversation and oral defense; do not wait for a formal human examiner.",
+        "output": "A repaired model, transfer response, and remaining uncertainty"
+      },
+      {
+        "id": "record",
+        "owner": "learner",
+        "label": "Keep the smallest useful record",
+        "action": "Keep the compact summary local by default; say records on only in the exact designated chat when you want its configured one-note Notion policy.",
+        "output": "A learner-approved session note or a ready-to-paste local fallback"
+      },
+      {
+        "id": "improve-forward",
+        "owner": "learner",
+        "label": "Retrieve and improve",
+        "action": "Schedule one retrieval, carry one handoff, and change the bridge or pace when the same misconception returns.",
+        "output": "A next action and a forward-module handoff"
+      }
+    ],
+    "firstSessionDefaults": {
+      "preferredStart": "placement-diagnostic",
+      "fallbackStart": "M01 Session 1",
+      "starterRequest": "Name the module and session, ask for one prediction and confidence, then work toward the smallest Session 1 artifact.",
+      "recordsDefault": "off"
+    },
+    "availabilityBoundary": [
+      {
+        "route": "M01-M24 and M27-M30",
+        "delivery": "open portal workbook plus designated Codex chats",
+        "claim": "available for study; legacy review and release evidence remain separate"
+      },
+      {
+        "route": "M25-M26",
+        "delivery": "portal preview and evidence-gated private guided study",
+        "claim": "orientation and private preparation only; no Core unlock or completion claim"
+      },
+      {
+        "route": "M31-M36",
+        "delivery": "designated Codex-chat packs; portal hidden",
+        "claim": "ready for guided study; authoring-only, hidden, and non-release"
+      }
+    ],
+    "evidenceStates": [
+      "waived-build-human-review",
+      "automated-structural-evidence",
+      "learner-produced-session-evidence",
+      "platform-observed-evidence",
+      "human-reviewed-release-evidence"
+    ],
+    "claimBoundary": "Starting and completing a conversation creates learning evidence and improvement signals; it does not create a grade, mastery claim, route unlock, release decision, university equivalence, or human-review evidence."
+  },
   "moduleLoop": {
     "version": 1,
     "purpose": "A repeatable six-phase route that turns each module conversation into inspectable reasoning, a compact learner-owned record, and a forward handoff without requiring a preliminary human review.",

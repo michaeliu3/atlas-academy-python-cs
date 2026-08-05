@@ -13,6 +13,40 @@ Atlas has four deliberately separate surfaces:
 
 <!-- live-codex-workflow: module-loop -->
 
+## Start now: human input is not a prerequisite
+
+The build-phase human-only requirements are waived. You can begin with the
+placement diagnostic or M01 Session 1 today; no reviewer, pilot, oral-defense
+observer, or Notion write is required to open the first conversation. The
+waiver is a build-state label, not evidence that a human review or learner
+session happened.
+
+Use this small operating structure:
+
+1. **Choose:** follow the canonical academic-prerequisite route. If the
+   diagnostic is not useful yet, fall back to M01 Session 1.
+2. **Open:** start in the Study Partner chat with a module, session, question,
+   prediction, and confidence. Ask for a concrete trace before a reveal.
+3. **Make:** produce one smallest artifact—code/state trace, proof step,
+   counterexample, numerical check, design card, or debugging note.
+4. **Repair:** bring that artifact to the Teaching Assistant for a supportive
+   changed-premise conversation and oral defense. The TA repairs reasoning; it
+   does not issue a pass/fail result.
+5. **Record:** keep the compact summary local by default. In the exact
+   designated chat, say `records on` only when you want the configured
+   one-note Notion policy for the current substantive session; if the write is
+   unavailable, use the ready-to-paste fallback below.
+6. **Improve:** schedule one retrieval, carry one handoff, and change the
+   prerequisite bridge, example, representation, or pace when a misconception
+   repeats. After three modules, inspect confidence against reasoning evidence,
+   retrieval outcomes, time, and unresolved bridges.
+
+The live six-phase loop below is the detailed contract for steps 2–6. Its
+records are learner evidence and improvement signals, not grades, mastery,
+route unlocks, release decisions, or human-review evidence. A learner record
+may propose a better explanation or prompt, but course truth changes only in a
+reviewed Git commit with regenerated evidence.
+
 ## Six-phase module loop and improvement ledger
 
 Human review is not a prerequisite for starting a module. The learner begins

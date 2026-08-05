@@ -101,6 +101,16 @@
   margin: 0;
 }
 
+.workflow p em {
+  color: var(--plum);
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.76rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  margin-top: 0.35rem;
+}
+
 .launches {
   align-items: start;
   border-bottom: 1px solid var(--line);

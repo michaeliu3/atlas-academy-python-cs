@@ -141,6 +141,24 @@ const requiredModuleLoopPhases = [
     nextPhase: null,
   },
 ];
+const requiredStartNowEntrySteps = [
+  ["choose", "learner"],
+  ["launch-study-partner", "study-partner"],
+  ["make-evidence", "study-partner"],
+  ["repair-and-defend", "teaching-assistant"],
+  ["record", "learner"],
+  ["improve-forward", "learner"],
+];
+const requiredStartNowAvailabilityRoutes = ["M01-M24 and M27-M30", "M25-M26", "M31-M36"];
+const requiredStartNowEvidenceStates = [
+  "waived-build-human-review",
+  "automated-structural-evidence",
+  "learner-produced-session-evidence",
+  "platform-observed-evidence",
+  "human-reviewed-release-evidence",
+];
+const requiredStartNowClaimBoundary =
+  "Starting and completing a conversation creates learning evidence and improvement signals; it does not create a grade, mastery claim, route unlock, release decision, university equivalence, or human-review evidence.";
 const requiredModuleLoopRecordFields = [
   "question and prediction with confidence",
   "code, architecture, derivation, diagram, or state-trace observation",
@@ -289,6 +307,61 @@ export async function validateLiveCodexLearningWorkflow(
     }
     if (text(delivery.learnerGuidePath) === "") {
       errors.push("Live Codex workflow delivery must declare learnerGuidePath.");
+    }
+  }
+
+  const startNow = isPlainObject(workflow.startNow) ? workflow.startNow : null;
+  if (!startNow) {
+    errors.push("Live Codex workflow startNow must be an object so the learner can begin without human review.");
+  } else {
+    if (startNow.version !== 1 || text(startNow.purpose) === "") {
+      errors.push("Live Codex workflow startNow must declare version 1 and a non-empty purpose.");
+    }
+    if (startNow.canBeginBeforeHumanReview !== true || startNow.buildPhaseHumanEvidenceState !== "waived") {
+      errors.push("Live Codex workflow startNow must allow study to begin while build-phase human-only evidence is waived.");
+    }
+    if (!Array.isArray(startNow.entrySteps) || startNow.entrySteps.length !== requiredStartNowEntrySteps.length) {
+      errors.push("Live Codex workflow startNow must declare exactly six entry steps.");
+    } else {
+      for (const [index, [expectedId, expectedOwner]] of requiredStartNowEntrySteps.entries()) {
+        const actual = startNow.entrySteps[index];
+        if (
+          !isPlainObject(actual) ||
+          actual.id !== expectedId ||
+          actual.owner !== expectedOwner ||
+          text(actual.label) === "" ||
+          text(actual.action) === "" ||
+          text(actual.output) === ""
+        ) {
+          errors.push(`Live Codex workflow startNow entry step ${expectedId} must preserve its owner and actionable output.`);
+        }
+      }
+    }
+    const firstSessionDefaults = isPlainObject(startNow.firstSessionDefaults)
+      ? startNow.firstSessionDefaults
+      : null;
+    if (
+      !firstSessionDefaults ||
+      firstSessionDefaults.preferredStart !== "placement-diagnostic" ||
+      firstSessionDefaults.fallbackStart !== "M01 Session 1" ||
+      text(firstSessionDefaults.starterRequest) === "" ||
+      firstSessionDefaults.recordsDefault !== "off"
+    ) {
+      errors.push("Live Codex workflow startNow must provide a placement-first, records-off first-session default.");
+    }
+    if (!Array.isArray(startNow.availabilityBoundary) || startNow.availabilityBoundary.length !== requiredStartNowAvailabilityRoutes.length) {
+      errors.push("Live Codex workflow startNow must distinguish the three learner availability boundaries.");
+    } else {
+      for (const [index, route] of requiredStartNowAvailabilityRoutes.entries()) {
+        const actual = startNow.availabilityBoundary[index];
+        if (!isPlainObject(actual) || actual.route !== route || text(actual.delivery) === "" || text(actual.claim) === "") {
+          errors.push(`Live Codex workflow startNow availability boundary ${route} must declare delivery and claim limits.`);
+        }
+      }
+    }
+    requiredStringArray(startNow.evidenceStates, "Live Codex workflow startNow.evidenceStates", requiredStartNowEvidenceStates, errors);
+    if (startNow.claimBoundary !== requiredStartNowClaimBoundary) {
+      errors.push("Live Codex workflow startNow claimBoundary must preserve the start-now evidence boundary.");
     }
   }
 
@@ -484,6 +557,7 @@ export async function validateLiveCodexLearningWorkflow(
     workflowPath: liveCodexLearningWorkflowRelativePath,
     learnerGuidePath: delivery.learnerGuidePath,
     delivery,
+    startNow,
     moduleLoop,
     improvementPolicy,
     notionSessionNotes,

@@ -534,7 +534,7 @@
     },
     {
       "path": "content/course/live-codex-learning-workflow.v2.json",
-      "sha256": "eca09b4f4d2a2494f556385aa290ab31d5fe51ee67abb9beb753f2fc489beba7"
+      "sha256": "c2e5f40ef2db6bb26a1ae03a536e16f078735e1fc0f96740acf2da171f313f4a"
     },
     {
       "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
@@ -906,7 +906,7 @@
     },
     {
       "path": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md",
-      "sha256": "9c8c9229eab28c019158498e2c9e3cbc138f7515b3e9d3a6da0d4fa122ed1826"
+      "sha256": "8a256ffb6ce7efe39484612e6ce044496b99309a5fe7445ff9429d0b07131c09"
     },
     {
       "path": "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",

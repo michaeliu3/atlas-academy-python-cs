@@ -13,6 +13,27 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
 
   assert.equal(report.workflowPath, liveCodexLearningWorkflowRelativePath);
   assert.equal(report.delivery.portalRuntimeIntegration, "none");
+  assert.equal(report.startNow.version, 1);
+  assert.equal(report.startNow.canBeginBeforeHumanReview, true);
+  assert.equal(report.startNow.buildPhaseHumanEvidenceState, "waived");
+  assert.deepEqual(report.startNow.entrySteps.map(({ id, owner }) => [id, owner]), [
+    ["choose", "learner"],
+    ["launch-study-partner", "study-partner"],
+    ["make-evidence", "study-partner"],
+    ["repair-and-defend", "teaching-assistant"],
+    ["record", "learner"],
+    ["improve-forward", "learner"],
+  ]);
+  assert.equal(report.startNow.firstSessionDefaults.preferredStart, "placement-diagnostic");
+  assert.equal(report.startNow.firstSessionDefaults.fallbackStart, "M01 Session 1");
+  assert.equal(report.startNow.firstSessionDefaults.recordsDefault, "off");
+  assert.deepEqual(report.startNow.availabilityBoundary.map(({ route }) => route), [
+    "M01-M24 and M27-M30",
+    "M25-M26",
+    "M31-M36",
+  ]);
+  assert.ok(report.startNow.evidenceStates.includes("learner-produced-session-evidence"));
+  assert.match(report.startNow.claimBoundary, /does not create a grade, mastery claim/u);
   assert.equal(report.moduleLoop.version, 1);
   assert.deepEqual(report.moduleLoop.phases.map(({ id }) => id), [
     "orient",
@@ -115,6 +136,8 @@ test("the live Codex workflow makes record-control acknowledgements and the manu
 test("the Learning Partners surface renders the canonical six-phase loop", async () => {
   const page = await readFile(new URL("../app/learning-partners/page.tsx", import.meta.url), "utf8");
   assert.match(page, /liveModuleLoop\.phases\.map/u);
+  assert.match(page, /liveStartNow\.entrySteps\.map/u);
+  assert.match(page, /Start now · no human gate/u);
   assert.match(page, /A six-phase operating rhythm/u);
   assert.doesNotMatch(page, /<strong>Study Partner:<\/strong> retrieve, explain/u);
 });
@@ -149,6 +172,13 @@ test("learner-facing policy summaries retain explicit records-on authority", asy
 
 test("the live Codex workflow fails closed if note authority, cadence, controls, or privacy boundaries drift", async () => {
   const workflow = await loadLiveCodexLearningWorkflow();
+
+  const missingStartNow = structuredClone(workflow);
+  delete missingStartNow.startNow;
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(missingStartNow),
+    /startNow must be an object/u,
+  );
 
   const unsafePortablePrompt = structuredClone(workflow);
   unsafePortablePrompt.notionSessionNotes.portableStartupMode = "capture-everything";
