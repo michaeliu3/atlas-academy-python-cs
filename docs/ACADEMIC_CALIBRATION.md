@@ -18,15 +18,15 @@ academic-calibration notes (`docs/ACADEMIC_CALIBRATION.md` and
 `docs/research/`) plus every checked-in `content/source-maps/` ledger. It runs
 in Course CI only when source material changes, uses redirects and a bounded
 request, and treats a reachable access-controlled endpoint as
-reachable-with-boundary rather than silently dropping it. The 2026-08-04
-audit checked 1,065 unique source URLs: 1,034 returned 200, four 202, and
-five ranged 206 responses; 22 returned an allowed access-controlled status
-(three 401 and 19 403). No dead URL remained. This is
+reachable-with-boundary rather than silently dropping it. The 2026-08-05
+audit checked 1,068 unique source URLs: 1,038 returned 200, four 202, four
+206, three 401, and 19 403 responses. No dead URL remained. This is
 evidence of link reachability at that review point, not a promise that a
 third-party page will remain unchanged.
 
 The baseline calibration corpus was checked on **2026-08-01**. Targeted
-follow-up notes record their own later access dates. Sources are used as
+follow-up notes record their own later access dates. The latest live counts
+above are reachability evidence only; sources are used as
 link-only comparison anchors: Atlas links to and paraphrases them, but does not
 copy assignments, slides, recordings, solutions, or figures without
 asset-specific permission review.
