@@ -132,6 +132,10 @@ a security-clean claim.
   [`30994042442`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994042442);
   portal, apparatus, browser, and teaching-model jobs were skipped because the
   PR remains draft. This is current Draft evidence, not a non-draft full gate.
+- The compliance-pointer head [`3e76de4`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/3e76de40980ecc6b76a8933b2fff53cd6487639f)
+  also passed the 96-test Draft content path in run
+  [`30994244025`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994244025);
+  this remains Draft evidence only.
 
 ## Intentionally deferred by design
 
