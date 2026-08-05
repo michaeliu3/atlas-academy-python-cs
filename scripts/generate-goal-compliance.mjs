@@ -49,7 +49,7 @@ function validateSource() {
     }
     ids.add(requirement.id);
   }
-  for (const field of ["lastFullGate", "currentDraftContent", "currentHeadApparatus", "currentHeadBrowser"]) {
+  for (const field of ["lastFullGate", "currentDraftContent", "lastFullGateApparatus", "lastFullGateBrowser"]) {
     if (!source.truth?.[field] || typeof source.truth[field] !== "object") {
       throw new Error("goal-compliance truth." + field + " is required.");
     }
@@ -114,18 +114,18 @@ function render() {
       "](" +
       draft.url +
       ")).",
-    "> - Current-head apparatus check: **" +
-      checkSummary(truth.currentHeadApparatus) +
-      "**; current-head browser/axe check: **" +
-      checkSummary(truth.currentHeadBrowser) +
+    "> - Latest recorded full-gate apparatus check: **" +
+      checkSummary(truth.lastFullGateApparatus) +
+      "**; latest recorded full-gate browser/axe check: **" +
+      checkSummary(truth.lastFullGateBrowser) +
       "**.",
     "> - Open red tests: **" +
       oneLine(truth.openRedTests.count) +
       "**. Open axe violations: **" +
       oneLine(axe.count ?? "unknown") +
-      "** (" +
+      "** (latest recorded full-gate result: " +
       oneLine(axe.state) +
-      " for the current head).",
+      ").",
     "> - Open Dependabot alerts on " +
       tick +
       oneLine(dependencies.branch) +
