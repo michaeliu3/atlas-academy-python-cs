@@ -6,11 +6,11 @@
   "truth": {
     "lastFullGate": {
       "state": "success",
-      "commit": "2c8f21976e3c86ef93fc7b569bf6b01be295d403",
+      "commit": "0f14e4d891f84a6e199a6f1169b046a2e453a7e5",
       "date": "2026-08-05",
-      "runId": "31001975188",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31001975188",
-      "note": "Latest content-bearing normal non-draft pull-request Course CI gate on commit 2c8f219; portal, 422/422 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit remains separately recorded on the preceding source-unchanged gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
+      "runId": "31003327620",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620",
+      "note": "Latest content-bearing normal non-draft pull-request Course CI gate on commit 0f14e4d; portal, 422/422 apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility tests passed. The live source-link audit remains separately recorded on the preceding source-unchanged gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
     },
     "currentDraftContent": {
       "state": "success",
@@ -26,24 +26,24 @@
       "state": "success",
       "pass": 422,
       "fail": 0,
-      "runId": "31001975188",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31001975188",
+      "runId": "31003327620",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620",
       "note": "Latest recorded non-draft apparatus job passed all 422 tests on the generated merge candidate. This is automated evidence, not module promotion or learner mastery."
     },
     "lastFullGateBrowser": {
       "state": "success",
       "pass": 63,
       "fail": 0,
-      "runId": "31001975188",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31001975188",
+      "runId": "31003327620",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620",
       "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the generated merge candidate; representative assistive-technology review remains waived for the build phase."
     },
     "reviewReadyRef": {
       "state": "ready-for-review",
-      "commit": "2c8f21976e3c86ef93fc7b569bf6b01be295d403",
+      "commit": "0f14e4d891f84a6e199a6f1169b046a2e453a7e5",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "31001975188",
+      "runId": "31003327620",
       "checkState": "success",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
       "note": "Current review-ready ref passed the full content-bearing Course CI gate: portal, 422/422 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded"
@@ -51,12 +51,12 @@
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "Latest recorded normal non-draft Course CI run 31001975188 passed the full 422-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
+      "basis": "Latest recorded normal non-draft Course CI run 31003327620 passed the full 422-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
     },
     "openAxeViolations": {
       "count": 0,
       "state": "none-detected",
-      "basis": "Latest recorded normal non-draft browser job in run 31001975188 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
+      "basis": "Latest recorded normal non-draft browser job in run 31003327620 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
     },
     "openDependencyAlerts": {
       "count": 2,

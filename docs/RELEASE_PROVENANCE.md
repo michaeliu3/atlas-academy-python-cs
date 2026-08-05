@@ -727,9 +727,9 @@ deployment, human review, or learner mastery evidence.
 
 ## Current non-draft full-gate checkpoint (2026-08-05, latest)
 
-The additive review-ready ref [`2c8f219`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/2c8f21976e3c86ef93fc7b569bf6b01be295d403)
+The additive review-ready ref [`0f14e4d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/0f14e4d891f84a6e199a6f1169b046a2e453a7e5)
 passed normal non-draft Course CI run
-[`31001975188`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31001975188).
+[`31003327620`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620).
 Portal quality, strict TypeScript, lint, build, content tests, 422/422 Node
 apparatus tests, Python 3.12 and 3.14 teaching models, and 63/63 Chromium/axe
 routes all passed. The source-link liveness audit remains separately recorded

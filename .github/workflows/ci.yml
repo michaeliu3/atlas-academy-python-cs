@@ -78,14 +78,26 @@ jobs:
           $sourcesChanged = $false
           $portalChanged = $false
           $browserChanged = $false
+          $provenanceOnlyPaths = @(
+            'content/course/goal-compliance.v1.json',
+            'content/course/release-inputs.v1.json'
+          )
           foreach ($path in $changedFiles) {
-            if ($path -like 'content/*') {
+            $isProvenanceOnly = $provenanceOnlyPaths -contains $path
+            if ($isProvenanceOnly) {
+              # Current-truth/ledger metadata still needs the portal's
+              # structural and generated-artifact checks, but it cannot alter
+              # learner content or runtime behavior, so avoid the expensive
+              # apparatus/Python/Chromium fan-out.
+              $portalChanged = $true
+            }
+            if ($path -like 'content/*' -and -not $isProvenanceOnly) {
               $contentChanged = $true
               $portalChanged = $true
               $browserChanged = $true
             }
             if (
-              $path -like 'content/course/*' -or
+              ($path -like 'content/course/*' -and -not $isProvenanceOnly) -or
               $path -like 'scripts/*' -or
               $path -like 'tests/*' -or
               $path -like 'package.json' -or

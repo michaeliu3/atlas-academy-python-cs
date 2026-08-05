@@ -102,6 +102,31 @@ test("Course CI keeps full gates out of draft PR updates while running focused c
   );
 });
 
+test("current-truth metadata keeps portal checks without fan-out multipliers", async () => {
+  const workflow = await readCourseWorkflow();
+
+  assert.match(
+    workflow,
+    /\$provenanceOnlyPaths = @\([\s\S]*content\/course\/goal-compliance\.v1\.json[\s\S]*content\/course\/release-inputs\.v1\.json/u,
+    "the classifier names the two provenance-only course inputs",
+  );
+  assert.match(
+    workflow,
+    /\$isProvenanceOnly = \$provenanceOnlyPaths -contains \$path[\s\S]*\$portalChanged = \$true/u,
+    "provenance-only updates retain the portal quality gate",
+  );
+  assert.match(
+    workflow,
+    /\$path -like 'content\/\*' -and -not \$isProvenanceOnly/u,
+    "provenance-only updates do not count as learner-content changes",
+  );
+  assert.match(
+    workflow,
+    /\(\$path -like 'content\/course\/\*' -and -not \$isProvenanceOnly\)/u,
+    "provenance-only updates do not trigger the apparatus multiplier",
+  );
+});
+
 test("Teaching-model CI proves the runtime exercise verifier before the ordinary suite", async () => {
   const actualWorkflow = await readCourseWorkflow();
   const workflow = actualWorkflow.replaceAll(

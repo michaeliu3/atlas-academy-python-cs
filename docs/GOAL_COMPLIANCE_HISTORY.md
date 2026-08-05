@@ -595,9 +595,9 @@ passed the same 96-test Draft content path in run
 
 ## Latest current-truth full-gate checkpoint — 2026-08-05
 
-The additive review-ready ref [`2c8f219`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/2c8f21976e3c86ef93fc7b569bf6b01be295d403)
+The additive review-ready ref [`0f14e4d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/0f14e4d891f84a6e199a6f1169b046a2e453a7e5)
 passed normal non-draft Course CI run
-[`31001975188`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31001975188):
+[`31003327620`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620):
 portal quality, 422/422 Node apparatus tests, both Python teaching-model legs,
 and 63/63 browser routes succeeded. The result updates current-truth
 provenance only; it does not promote modules or establish deployment, human

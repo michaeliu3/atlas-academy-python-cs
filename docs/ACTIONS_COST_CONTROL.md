@@ -64,10 +64,12 @@ cancelled after minutes of work. Draft updates now skip those full jobs.
    documentation changes still report every required branch-protection context
    through a lightweight successful job path, but skip checkout, dependency
    installation, builds, apparatus, Python suites, and Chromium. Content,
-   application, test, dependency, workflow, and generated-input changes retain
-   the relevant full checks. Main pushes still run the full post-merge Portal,
-   Browser, apparatus, and Python verification, and the required job names
-   remain unchanged.
+   application, test, dependency, workflow, and learner-generated-input changes
+   retain the relevant full checks. The two current-truth/ledger metadata files
+   still run the portal structural/generated-artifact gate but skip the
+   apparatus/Python/Chromium fan-out. Main pushes still run the full post-merge
+   Portal, Browser, apparatus, and Python verification, and the required job
+   names remain unchanged.
 8. `scripts/run-course-tests.mjs` now forwards SIGINT/SIGTERM to its spawned
    Node test runner, removes its signal handlers on exit, and uses Windows
    `taskkill /T` when cancellation must include worker processes. This prevents
@@ -140,3 +142,16 @@ because an earlier commit changed content. Open/reopen/ready events and main
 pushes retain the conservative base-to-head comparison. If GitHub omits the
 event's previous-head field, the classifier falls back to the base range; no
 required check is weakened and no content change is silently ignored.
+
+## Provenance-only classifier boundary (2026-08-05)
+
+`content/course/goal-compliance.v1.json` and the derived
+`content/course/release-inputs.v1.json` are classified as provenance-only
+metadata. A change to either still executes the required portal contract,
+generated-artifact, type, lint, build, and content checks, while the required
+apparatus, Python, and browser contexts take their lightweight successful paths
+on pull requests. This prevents a current-truth bookkeeping correction from
+spending another multi-minute test fan-out. Any learner content, course graph,
+source map, script, test, workflow, application, or main-branch push retains
+the existing broader verification. The distinction is enforced by a focused
+workflow regression test.
