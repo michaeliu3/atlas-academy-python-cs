@@ -759,3 +759,14 @@ routes all passed. The run covers the canonical start-now learning workflow,
 learner-facing Learning Partners surface, and role-prompt changes. This is
 automated provenance, not publication, deployment, human review, or learner
 mastery evidence.
+
+## Current non-draft full-gate checkpoint (2026-08-05, latest)
+
+The current reviewed ref [`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
+passed normal non-draft Course CI run
+[`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).
+Portal quality, strict TypeScript, lint, build, content tests, 423/423 Node
+apparatus tests, Python 3.12 and 3.14 teaching models, and 63/63 Chromium/axe
+routes all passed. The run covers the pull-request head-SHA Actions correction
+and its regression test. This is automated provenance, not publication,
+deployment, human review, or learner mastery evidence.

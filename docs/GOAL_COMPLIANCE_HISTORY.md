@@ -629,6 +629,17 @@ and 63/63 Chromium/axe routes succeeded. This is automated workflow and
 provenance evidence; the human/platform/deployment boundaries remain open or
 waived as documented.
 
+## Actions head-SHA correction full gate — 2026-08-05
+
+The workflow correction in [`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
+passed normal non-draft Course CI run
+[`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465):
+portal quality, 423/423 Node apparatus tests, both Python teaching-model legs,
+and 63/63 Chromium/axe routes succeeded. The classifier log independently
+records the actual PR head SHA rather than the synthetic merge SHA. This is
+automated cost-control evidence; it is not deployment, human review, or
+learner evidence.
+
 ## Pull-request synthetic merge-ref cost correction — 2026-08-05
 
 The provenance-only successor run [`31009410835`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009410835)

@@ -6,11 +6,11 @@
   "truth": {
     "lastFullGate": {
       "state": "success",
-      "commit": "82a130a688f9ce8e04b03bf3f1b490d337c6ec16",
+      "commit": "208d296d63793814906ee218876546e7736a829b",
       "date": "2026-08-05",
-      "runId": "31008159124",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124",
-      "note": "Latest normal non-draft pull-request Course CI gate on commit 82a130a; portal quality, 423/423 Node apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility routes passed. The learner-facing start-now workflow and role surfaces are now covered by this gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
+      "runId": "31009811465",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465",
+      "note": "Latest normal non-draft pull-request Course CI gate on commit 208d296; portal quality, 423/423 Node apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility routes passed. The pull-request head-SHA Actions correction and its regression test are covered by this gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
     },
     "currentDraftContent": {
       "state": "success",
@@ -26,37 +26,37 @@
       "state": "success",
       "pass": 423,
       "fail": 0,
-      "runId": "31008159124",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124",
-      "note": "Latest recorded non-draft apparatus job passed all 423 tests on the 82a130a merge candidate. This is automated evidence, not module promotion or learner mastery."
+      "runId": "31009811465",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465",
+      "note": "Latest recorded non-draft apparatus job passed all 423 tests on the 208d296 merge candidate. This is automated evidence, not module promotion or learner mastery."
     },
     "lastFullGateBrowser": {
       "state": "success",
       "pass": 63,
       "fail": 0,
-      "runId": "31008159124",
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31008159124",
-      "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the 82a130a merge candidate; representative assistive-technology review remains waived for the build phase."
+      "runId": "31009811465",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465",
+      "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the 208d296 merge candidate; representative assistive-technology review remains waived for the build phase."
     },
     "reviewReadyRef": {
       "state": "ready-for-review",
-      "commit": "82a130a688f9ce8e04b03bf3f1b490d337c6ec16",
+      "commit": "208d296d63793814906ee218876546e7736a829b",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "31008159124",
+      "runId": "31009811465",
       "checkState": "success",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
-      "note": "Current review-ready ref 82a130a passed the full Course CI gate: portal, 423/423 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded"
+      "note": "Current review-ready ref 208d296 passed the full Course CI gate: portal, 423/423 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded"
     },
     "openRedTests": {
       "count": 0,
       "items": [],
-      "basis": "Latest recorded normal non-draft Course CI run 31008159124 passed the full 423-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
+      "basis": "Latest recorded normal non-draft Course CI run 31009811465 passed the full 423-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
     },
     "openAxeViolations": {
       "count": 0,
       "state": "none-detected",
-      "basis": "Latest recorded normal non-draft browser job in run 31008159124 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
+      "basis": "Latest recorded normal non-draft browser job in run 31009811465 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
     },
     "openDependencyAlerts": {
       "count": 2,
@@ -176,14 +176,14 @@
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 31008159124 kept every required branch-protection context green; the changed learner surface correctly ran the portal, apparatus, Python, and browser checks. Follow-up run 31009410835 exposed that github.sha was the synthetic merge ref and re-included the base branch for a provenance-only successor; the classifier now uses the real pull-request head SHA, with a focused regression and a future hosted low-cost observation still required. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
+      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 31009811465 kept every required branch-protection context green after the pull-request head-SHA correction; the workflow/test change correctly ran the portal, apparatus, Python, and browser checks. Provenance-only successor run 31009410835 exposed the earlier synthetic-merge-ref fan-out; the correction is now structurally tested and its first isolated low-cost hosted observation is the next evidence item. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
     },
     {
       "id": "history-provenance",
       "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
       "state": "partial",
       "evidence": "docs/RELEASE_PROVENANCE.md; PR #21; git log",
-      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the current ref 82a130a and its successful full-gate run are recorded, while exact private deployment state and final release limitations remain separate."
+      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the current ref 208d296 and its successful full-gate run are recorded, while exact private deployment state and final release limitations remain separate."
     },
     {
       "id": "final-audit",

@@ -8,8 +8,8 @@ actually published.
 ## Unreleased
 
 - Reconciled the generated current-truth evidence with the latest additive
-  review-ready head `82a130a` and successful non-draft Course CI run
-  `31008159124`: portal quality, 423/423 Node apparatus tests, both Python
+  review-ready head `208d296` and successful non-draft Course CI run
+  `31009811465`: portal quality, 423/423 Node apparatus tests, both Python
   teaching-model legs, and 63/63 browser routes passed. This updates provenance
   only; it does not promote modules or claim learner, deployment, or release
   completion.
