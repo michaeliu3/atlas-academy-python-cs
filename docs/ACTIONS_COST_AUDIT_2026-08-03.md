@@ -89,3 +89,15 @@ Cancellation of an already-running superseded gate remains unobserved; do not
 flip PR state or manually dispatch Course CI merely to manufacture that fact.
 The PR gates and `push: main` retain their required verification, and a later
 review-ready content batch still needs its normally requested full gate.
+
+## Live run-list refresh — 2026-08-04/05
+
+An authenticated `gh run list --limit 100` readback through
+`2026-08-05T00:00:51Z` still found 100 Course CI runs, all `pull_request`
+events on `agent/60-day-route`: 51 successful, 24 failed, 16 cancelled, and 9
+skipped. The refreshed counts differ from the earlier snapshot (47/23/21/9)
+because additional historical runs completed after that audit. No run was
+created for the additive `codex/atlas-history-linearization` pushes, which
+matched the intended trigger boundary. This confirms the cost-control changes
+are active but does not claim that previously spent runner minutes were
+recovered or that the current branch has a fresh full gate.

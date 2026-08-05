@@ -1,6 +1,6 @@
 # GitHub Actions cost-control record
 
-Audit date: 2026-08-04  
+Audit date: 2026-08-04 (readback through 2026-08-05T00:00:51Z)  
 Repository: `michaeliu3/atlas-academy-python-cs`  
 Workflow: `.github/workflows/ci.yml`
 
@@ -10,9 +10,9 @@ Workflow: `.github/workflows/ci.yml`
 
 | conclusion | runs |
 | --- | ---: |
-| success | 47 |
-| failure | 23 |
-| cancelled | 21 |
+| success | 51 |
+| failure | 24 |
+| cancelled | 16 |
 | skipped | 9 |
 
 There were no scheduled Course CI runs. The separate metadata observer is
@@ -63,6 +63,14 @@ cancelled after minutes of work. Draft updates now skip those full jobs.
 
 The cache changes validation setup cost only; they do not skip tests, weaken
 the provenance boundary, or change the draft/non-draft job selection.
+
+The live readback still shows all 100 listed runs as `pull_request` events on
+the historical `agent/60-day-route` branch; the new
+`codex/atlas-history-linearization` feature-branch pushes did not create Course
+CI runs because the workflow only runs on `main` pushes and pull-request
+events. The changed conclusion counts above replace the earlier snapshot
+counts; they do not change the root-cause finding that repeated synchronize
+events were the volume driver.
 
 Local verification on 2026-08-04 measured the legacy packet cohort at roughly
 1.6 seconds (previously about 9.5 seconds), a representative full course
