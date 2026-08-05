@@ -73,6 +73,11 @@ present when the matrix grows.
   the focused pedagogy-density guard and hidden-candidate parity checks pass.
 - The current source tree is clean, additive, and reachable through review-ready PR #22;
   no history rewrite was used.
+- The current 2026-08-05 bounded live source audit checked 1,068 unique
+  source-map and calibration URLs: 1,038 returned 200, four 202, four 206,
+  three 401, and 19 403 responses. This is reachability evidence only; it
+  does not close citation, institutional-alignment, source-permission, human,
+  or learner-mastery boundaries.
 - A 2026-08-05 read-only Notion audit confirmed the connected evidence
   structure and the records-off checklist across the dashboard, lecture notes,
   module notebooks, completion record, live-session record page, project
@@ -129,7 +134,8 @@ present when the matrix grows.
   models, and 63/63 Chromium/axe routes all passed. The live source-link audit
   remains covered by the immediately preceding source-unchanged gate
   [`30995803298`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30995803298),
-  which checked 1,064 URLs. This is automated release evidence, not module
+  which checked 1,064 URLs at that earlier checkpoint. The later 1,068-URL
+  audit is recorded above. This is automated release evidence, not module
   promotion, deployment verification, human review, or learner mastery.
 - The current review-ready successor [`24dc8bd`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/24dc8bdf321b0ab6baa232f7a87b8053f84f329b)
   changed only the startable Codex learning-loop documentation. Its Course CI

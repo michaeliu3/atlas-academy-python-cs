@@ -151,7 +151,7 @@
       "requirement": "Official MIT, CMU, Stanford, Georgia Tech, Berkeley, and comparable materials calibrate claims without copied assets.",
       "state": "partial",
       "evidence": "docs/ACADEMIC_CALIBRATION.md; content/source-maps/; docs/research/; scripts/check-source-links.mjs; tests/source-link-audit.test.mjs",
-      "openItem": "The 2026-08-05 bounded live audit checked all 1,064 source-map and calibration URLs (1,033 returned 200, 4 returned 202, 5 returned 206, 3 returned 401, and 19 returned 403); the active Stanford CS103 records use one pinned Spring 2026 archive, but finish the remaining citation and institutional-alignment review."
+      "openItem": "The 2026-08-05 bounded live audit checked all 1,068 source-map and calibration URLs (1,038 returned 200, 4 returned 202, 4 returned 206, 3 returned 401, and 19 returned 403); the active Stanford CS103 records use one pinned Spring 2026 archive, but finish the remaining citation and institutional-alignment review."
     },
     {
       "id": "chat-roles",
