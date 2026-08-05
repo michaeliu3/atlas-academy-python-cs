@@ -211,6 +211,16 @@ was rejected before runner allocation because GitHub reported failed recent
 payments or an exceeded spending limit. Downstream jobs were skipped. This is
 external billing state, not a passing gate, a code failure, or learner evidence.
 
+## Dated Levels 1–9 delivery audit — 2026-08-05
+
+The new `tests/levels-1-9-delivery-audit.test.mjs` check now audits all 63
+Scope Matrix topic rows against the canonical graph. It confirms that all nine
+levels are represented, every topic has graph-backed source and session
+anchors, sessions stay within S1–S6, and authoring-only, preview, and ready
+private-chat states are presented as delivery boundaries rather than coverage
+or mastery. This is structural evidence; representative human source, visual,
+and learner-facing calibration review remains open.
+
 ## Dated current-head draft content evidence — 2026-08-05
 
 The additive branch head [`fd63dfb`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/fd63dfb0f9d2554b7fefb3c1b0eebaa661e4f101)

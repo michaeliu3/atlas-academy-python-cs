@@ -424,3 +424,13 @@ browser accessibility, and Python teaching-model jobs were skipped by the
 intentional draft cost-control path. This is current source-head and bounded
 content evidence only; it is not a full Course CI gate, release, deployment,
 human review, module promotion, or learner evidence.
+
+## Levels 1–9 delivery-audit checkpoint (2026-08-05)
+
+The additive source tree now includes
+`tests/levels-1-9-delivery-audit.test.mjs`, which passed against the canonical
+course graph and audits all 63 calibrated Scope Matrix topics. The check
+verifies graph-backed anchors, source modules, S1–S6 session bounds, and the
+separation of reader, preview, authoring-only, and designated private-chat
+delivery. This is local structural evidence only; it does not establish human
+calibration, accessibility review, release, deployment, or learner mastery.

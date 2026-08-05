@@ -95,8 +95,8 @@
       "id": "levels-1-9",
       "requirement": "Levels 1–9 show target capability, portal delivery, and private-chat delivery as separate facts.",
       "state": "partial",
-      "evidence": "content/course/course-graph.v2.json; app/route/ScopeMatrix.tsx; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
-      "openItem": "Audit every topic row for actual delivery rather than mentions or previews."
+      "evidence": "content/course/course-graph.v2.json; app/route/ScopeMatrix.tsx; tests/levels-1-9-delivery-audit.test.mjs; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
+      "openItem": "The automated audit now covers all 63 topic rows and their graph-backed delivery states; complete representative human source, visual, and learner-facing calibration review."
     },
     {
       "id": "mathematics-statistics",
