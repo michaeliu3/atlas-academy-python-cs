@@ -4,10 +4,10 @@
 
 > **Generated current truth — 2026-08-05**
 >
-> - Last successful full gate: `0f14e4d891f84a6e199a6f1169b046a2e453a7e5` on 2026-08-05 ([Course CI run 31003327620](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620)); the current review-ready ref is recorded separately below; the separate Draft snapshot is historical evidence only.
-> - Current review-ready ref: `0f14e4d891f84a6e199a6f1169b046a2e453a7e5` ([PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)); required checks are **success** in Course CI run `31003327620` (Current review-ready ref passed the full content-bearing Course CI gate: portal, 422/422 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded).
+> - Last successful full gate: `f4ea506a06eead4e697f7aa27d4f521492cfdc9f` on 2026-08-05 ([Course CI run 31004629901](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31004629901)); the current review-ready ref is recorded separately below; the separate Draft snapshot is historical evidence only.
+> - Current review-ready ref: `f4ea506a06eead4e697f7aa27d4f521492cfdc9f` ([PR #22](https://github.com/michaeliu3/atlas-academy-python-cs/pull/22)); required checks are **success** in Course CI run `31004629901` (Current review-ready ref passed the full content-bearing Course CI gate: portal, 422/422 apparatus, both Python teaching-model legs, and 63/63 browser routes succeeded).
 > - Latest recorded content-bearing Draft check: `3e76de40980ecc6b76a8933b2fff53cd6487639f`, 96 pass / 0 fail ([run 30994244025](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994244025)).
-> - Latest recorded full-gate apparatus check: **422 pass / 0 fail**; latest recorded full-gate browser/axe check: **63 pass / 0 fail**.
+> - Latest recorded full-gate apparatus check: **423 pass / 0 fail**; latest recorded full-gate browser/axe check: **63 pass / 0 fail**.
 > - Open red tests: **0**. Open axe violations: **0** (latest recorded full-gate result: none-detected).
 > - Open Dependabot alerts on `main`: **2** as of 2026-08-05; see [the dependency risk register](DEPENDENCY_RISK_REGISTER.md).
 >

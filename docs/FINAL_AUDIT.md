@@ -55,7 +55,7 @@ present when the matrix grows.
 | accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
 | safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
 | actions-cost | partial | Path-aware gating, superseded-run cancellation, and current required-check preservation are directly observed in the latest full gate; release/deployment evidence remains separate. |
-| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through current reviewed ref `0f14e4d`; exact private deployment evidence remains absent. |
+| history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through current reviewed ref `f4ea506`; exact private deployment evidence remains absent. |
 | final-audit | partial | This auditable reconciliation now exists; it cannot be closed while the open human/platform/deployment/release boundaries remain. |
 
 ## Complete evidence in this audit
@@ -138,10 +138,10 @@ present when the matrix grows.
   expensive content-bearing jobs. The earlier full gate remains the
   authoritative content/build evidence; the current ref is not silently called
   a second full gate.
-- The latest content-bearing reviewed ref [`0f14e4d`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/0f14e4d891f84a6e199a6f1169b046a2e453a7e5)
+- The latest content-bearing reviewed ref [`f4ea506`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/f4ea506a06eead4e697f7aa27d4f521492cfdc9f)
   passed the complete normal non-draft Course CI gate
-  [`31003327620`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31003327620):
-  portal quality, 422/422 Node apparatus tests, Python 3.12 and 3.14 teaching
+  [`31004629901`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31004629901):
+  portal quality, 423/423 Node apparatus tests, Python 3.12 and 3.14 teaching
   models, and 63/63 Chromium/axe routes all passed. This is the current
   machine-gate evidence; it does not close deployment, dependency, waived
   human-observation, publication, or mastery boundaries.
@@ -206,7 +206,7 @@ so those interactions can begin later; no synthetic human evidence is created.
 - Learner mastery or retention; no repository artifact substitutes for the
   learner's own explanations, debugging traces, dossiers, and oral defense.
 - The bounded local apparatus command is slower than the shell budget, but the
-  hosted full gate independently passed all 422 apparatus tests at the reviewed
+  hosted full gate independently passed all 423 apparatus tests at the reviewed
   head.
 
 ## Required closure sequence
@@ -216,8 +216,8 @@ so those interactions can begin later; no synthetic human evidence is created.
 2. Verify the exact private deployment headers, dependency-risk disposition,
    accessibility review, and bounded OS/process claims.
 3. Preserve the successful non-draft gate's exact commit, run, jobs, limitations,
-   and deployment state in the release ledger; this is recorded for `0f14e4d`
-   and Course CI run `31003327620`.
+   and deployment state in the release ledger; this is recorded for `f4ea506`
+   and Course CI run `31004629901`.
 4. Regenerate this audit and the compliance matrix after each evidence change,
    then close the goal only if
    every non-waived requirement has evidence, every waiver/deferral is explicit,
