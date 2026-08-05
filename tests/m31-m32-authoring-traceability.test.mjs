@@ -70,6 +70,11 @@ test("M32 connects claim tags to one pinned CPU-only NumPy observation", async (
   assert.match(m32, /M32-C08–M32-C09 -> S32-10–S32-12/u);
   assert.match(m32, /Distributed data parallelism — communication is part of the algorithm/u);
   assert.match(m32, /Mixed precision — a policy across arithmetic, state, and evidence/u);
+  assert.match(m32, /Native code-reading card — a buffer descriptor is not a flat float array/u);
+  assert.match(m32, /~~~python\ndef relative_error\(reference, candidate\):/u);
+  assert.match(m32, /Session 5 — Read autodiff as a program with a numerical contract/u);
+  assert.match(m32, /Optional backend reading lens — PyTorch CUDA, not a GPU lab/u);
+  assert.match(m32, /Debugging probe — the profiler is a clue, not an explanation/u);
   assert.match(m32, /M32-C13–M32-C14 ->\s*S32-15–S32-16/u);
   assert.match(m32, /A `text` fence is \*\*language-neutral pseudocode\*\*/u);
   assert.match(m32, /CPU-only NumPy observation/u);
@@ -92,6 +97,10 @@ test("M32 connects claim tags to one pinned CPU-only NumPy observation", async (
     /\[`lib\/m32-systems-evidence-fixture\.js`\]\(\.\.\/\.\.\/lib\/m32-systems-evidence-fixture\.js\)/u,
   );
   for (const m32Pack of [m32, m32Candidate]) {
+    assert.match(m32Pack, /Native code-reading card — a buffer descriptor is not a flat float array/u);
+    assert.match(m32Pack, /~~~python\ndef relative_error\(reference, candidate\):/u);
+    assert.match(m32Pack, /Distributed data parallelism — communication is part of the algorithm/u);
+    assert.match(m32Pack, /Mixed precision — a policy across arithmetic, state, and evidence/u);
     assert.match(m32Pack, /CPU-only stride-to-locality hypothesis card/u);
     assert.match(m32Pack, /Adversarial reproduction-delta row/u);
     assert.match(m32Pack, /all_reduce\(local_gradient_r, op="mean"\)/u);
