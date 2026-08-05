@@ -158,6 +158,9 @@ test("M25 and M26 name the actual advanced candidate receipts", async () => {
   assert.match(m26, /### External-track selection check/u);
   assert.match(m26, /recent release, commit, issue, or contribution\s+activity/u);
   assert.match(m26, /documented issue\/request/u);
+  assert.match(m26, /### Versioning, compatibility, deprecation, and license obligations/u);
+  assert.match(m26, /\|\s*Deprecation\s*\|\s*owner,\s*reason,\s*affected versions/u);
+  assert.match(m26, /\|\s*Dependency and license\s*\|/u);
   assert.match(
     m26,
     /Private guided-route constraint:[\s\S]{0,420}outside this[\s>]+private guided route[\s\S]{0,220}not a[\s>]+requested course artifact or evidence/u,

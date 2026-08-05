@@ -341,6 +341,26 @@ proposal can demonstrate the reasoning. Never upload secrets, private records,
 or a generated patch that you cannot explain; a maintainer's capacity and
 project norms remain external boundaries, not grading targets.
 
+### Versioning, compatibility, deprecation, and license obligations
+
+Before a release decision, turn “the code works” into an identity and a
+stewardship record. Fill one row for every artifact that crosses the boundary:
+
+| Boundary | Required record | Failure or non-claim |
+|---|---|---|
+| Source and build | reviewed commit, release identifier, lockfile/toolchain, generated-artifact digest, and build date | a version label alone proves neither reproducibility nor safety |
+| Interface and data | schema/API/protocol version, compatibility promise, migration or rollback path, and supported runtime matrix | a passing fixture proves no unlisted client or future version |
+| Dependency and license | direct/transitive dependency, exact license or notice, attribution/source-offer duty, and any incompatible asset boundary | package metadata is not legal advice or a permission to copy course/project assets |
+| Deprecation | owner, reason, affected versions, notice date, migration target, removal window, security implication, and a tested disable/rollback path | “deprecated” without a migration owner or end condition is not stewardship |
+
+For the private Atlas track, record the decision as **private/no public license
+claim** when appropriate; public visibility and external contribution are not
+required. For the external track, read the project's `LICENSE`, notices,
+contribution/security route, and maintainer policy at the exact inspected
+commit. Link and attribute; do not paste license text or assume that a
+dependency's license covers your original material. This is an engineering
+evidence exercise, not legal counsel.
+
 ### The release admission question
 
 Before writing or asking an agent for code, fill this sentence:

@@ -520,6 +520,12 @@ repository](https://docs.github.com/en/repositories/managing-your-repositorys-se
   visibility, intended audience, license status or decision not to license,
   contribution route, vulnerability-reporting boundary, ownership, and
   maintenance limit.
+- **Version/deprecation move:** the Release Board also records the exact source
+  commit/build identity, interface and data compatibility promise, dependency
+  license/notice obligations, and any deprecation owner, migration target,
+  notice/removal window, security implication, and tested rollback/disable path.
+  A version label or package metadata alone is not reproducibility, permission,
+  legal advice, or a maintenance plan.
 - **Boundary:** health files do not create a healthy community, grant legal
   advice, eliminate maintainer burden, or mean a private course project accepts
   external contributions.
