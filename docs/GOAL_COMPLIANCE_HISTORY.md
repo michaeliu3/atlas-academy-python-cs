@@ -640,6 +640,15 @@ records the actual PR head SHA rather than the synthetic merge SHA. This is
 automated cost-control evidence; it is not deployment, human review, or
 learner evidence.
 
+## Direct Actions savings observation — 2026-08-05
+
+Corrected provenance-only successor run [`31010843631`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31010843631)
+kept every required branch-protection context green while the Node apparatus,
+Python 3.12, Python 3.14, and browser jobs each took their explicit lightweight
+path and reported that the expensive suites/Chromium were not run. The portal
+structural gate still executed. This is direct hosted evidence of reduced
+fan-out, not a removal of required checks or a release/deployment claim.
+
 ## Pull-request synthetic merge-ref cost correction — 2026-08-05
 
 The provenance-only successor run [`31009410835`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009410835)
@@ -648,5 +657,7 @@ with GitHub's synthetic pull-request merge SHA and therefore re-included the
 base branch. That caused an unnecessary apparatus/Python/browser fan-out even
 though the changed files were current-truth metadata. The workflow now binds
 `ATLAS_HEAD_SHA` to `github.event.pull_request.head.sha` for pull requests,
-with a focused regression test; a future isolated metadata successor must still
-provide direct hosted savings evidence. No required check was removed.
+with a focused regression test. Corrected successor run
+[`31010843631`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31010843631)
+then provided direct hosted savings evidence without removing a required
+check.

@@ -23,6 +23,9 @@ actually published.
   successor therefore re-included the base branch and ran the expensive fanout;
   the new regression preserves required checks while making the provenance-only
   path eligible for its intended low-cost behavior.
+- Recorded direct hosted savings in run `31010843631`: the required Node,
+  Python 3.12, Python 3.14, and browser contexts stayed green through
+  lightweight paths, while the portal structural gate remained active.
 - Hardened the split Node test runner's cancellation path: SIGINT/SIGTERM now
   terminate the spawned test tree (including Windows workers), handlers are
   removed on exit, and a focused regression protects the cleanup. This reduces

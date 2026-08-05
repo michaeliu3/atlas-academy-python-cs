@@ -178,6 +178,10 @@ allowlist was intended to avoid.
 The classifier now uses
 `github.event.pull_request.head.sha` for pull-request events and reserves
 `github.sha` for main pushes. A focused CI regression protects this distinction.
-This is a structural correction; a future isolated provenance-only successor
-must provide the first direct hosted savings observation. No required check or
-final main-branch verification was removed.
+The first isolated provenance-only successor,
+[`31010843631`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31010843631),
+now confirms the correction: the required Node apparatus, Python 3.12, Python
+3.14, and browser contexts all completed successfully through their lightweight
+paths, explicitly reporting that their suites/Chromium were not run. The
+portal structural gate still ran. No required check or final main-branch
+verification was removed.
