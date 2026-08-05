@@ -489,3 +489,16 @@ and that no direct application return bypasses that boundary. This is source
 and local-test evidence only; it does not verify headers at the actual private
 deployment, resolve open Dependabot alerts, or establish a security-clean
 state.
+
+## Release-input hash repair checkpoint (2026-08-05)
+
+Draft Course CI run
+[`30978655480`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978655480)
+correctly rejected the intermediate head because the edited
+`content/course/goal-compliance.v1.json` was not yet reflected in the
+allowlisted release-input hash ledger. Commit
+[`76b1f14`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/76b1f14)
+regenerated that ledger; local `validate-course --require-git-tracked`,
+`check-generated`, and goal-matrix checks then passed. The failure is retained
+as provenance and is not represented as a passing gate; a subsequent hosted
+run is required to validate the repaired source head.

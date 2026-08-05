@@ -301,3 +301,15 @@ was cancelled at the classifier boundary because GitHub reported a higher-
 priority waiting request in the same concurrency group. This confirms
 superseded-run cancellation is observed; it does not replace the future
 required full non-draft gate or justify removing required checks.
+
+## Dated release-input hash repair — 2026-08-05
+
+Draft Course CI run
+[`30978655480`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30978655480)
+correctly exposed a stale hash after the Actions-row update: the changed
+`content/course/goal-compliance.v1.json` was not yet present in the
+allowlisted release-input ledger. Commit
+[`76b1f14`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/76b1f14)
+regenerated the ledger, and local tracked-input, generated-artifact, and
+matrix checks passed afterward. The failed run remains recorded as a real
+source-integrity finding; it is not a release or passing CI claim.
