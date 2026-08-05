@@ -343,3 +343,10 @@ the /_vinext/image route. The focused security-header suite passed 4/4,
 including a regression that keeps the required header values and the
 non-substitution claim visible. This is procedure and local-test evidence only;
 the actual private deployment remains unverified.
+
+Draft Course CI run
+[30979754373](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30979754373)
+passed changed-file classification and the draft content path for this
+checkpoint. Portal, apparatus, browser, and teaching-model jobs were
+intentionally skipped by draft cost control; this is not a deployment or
+non-draft full-gate result.

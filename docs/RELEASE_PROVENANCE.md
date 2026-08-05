@@ -534,3 +534,10 @@ tests/http-security-headers.test.mjs suite passes 4/4, including the procedure
 assertions. This documents how to collect deployment evidence; it does not
 record a deployment URL, imply that headers were observed remotely, resolve
 dependency alerts, or establish security-clean status.
+
+Draft Course CI run
+[30979754373](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30979754373)
+then passed the changed-file classifier and draft content path for this
+checkpoint. Portal, apparatus, browser, and teaching-model jobs were skipped by
+draft cost control. The hosted result confirms the checked-in content path; it
+does not substitute for direct deployment observation or a non-draft full gate.
