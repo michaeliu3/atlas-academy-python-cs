@@ -404,8 +404,10 @@ the draft workflow was blocked before runner allocation by the repository
 account billing/spending-limit state. No release, deployment, or learner
 evidence is implied.
 
-The current PR head is [`809547a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/809547aa81a6114c1681d95f09b786bc3c2c0c96),
-with 25 commits and 68 changed files relative to that base. The later draft
+The preceding provenance checkpoint recorded PR head [`809547a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/809547aa81a6114c1681d95f09b786bc3c2c0c96),
+with 25 commits and 68 changed files relative to that base. The subsequent
+documentation-only [`3dd37aa`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/3dd37aa646454218fc446724cdb208f12729257f) commit extends this record.
+The later draft
 attempts [`30971257663`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971257663)
 and [`30971329351`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971329351)
 were blocked by the same billing/spending-limit state before runner allocation.
