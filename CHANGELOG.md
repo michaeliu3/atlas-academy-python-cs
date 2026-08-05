@@ -7,6 +7,13 @@ actually published.
 
 ## Unreleased
 
+- Added an apparatus regression that proves both production Worker response
+  paths retain the shared security-header policy, and recorded the focused
+  3/3 result without claiming private-deployment verification or a
+  security-clean state.
+- Refreshed the completion snapshot to the current additive PR #22 lineage,
+  246/246 Mermaid text alternatives, the latest bounded Draft CI evidence,
+  and the authenticated 11-alert Dependabot boundary.
 - Bounded the complete Node course-test runner to four workers. The suite still
   discovers and executes every test file; the cap avoids Git-index/preflight
   contention on high-core local machines and makes the review gate more
