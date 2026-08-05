@@ -1132,6 +1132,53 @@ These are definitions about the declared joint law. Use base-2 logarithms when
 the unit is bits. They do not say that an observed feature is useful, causal,
 private, or appropriate to use in a decision.
 
+### Three information-theory bridges that prevent overclaiming
+
+**Data-processing inequality.** If the variables form a Markov chain
+`X -> Y -> Z`—meaning that, once `Y` is known, the next representation `Z`
+does not receive additional information about `X` from `X` directly—then
+
+\[
+I(X;Z) \leq I(X;Y).
+\]
+
+The first-principles reason is the chain rule: the information carried by `Y`
+about `X` can be split into what survives in `Z` plus what is lost when `Y` is
+compressed into `Z`. The inequality is about the declared joint distribution
+and Markov condition. A smaller downstream mutual-information estimate on a
+finite sample is not a proof of the inequality, and a larger task score does
+not prove that a representation preserved the information relevant to a human
+decision. **Prediction:** if `Z` is a deterministic coarsening of `Y`, can it
+increase the true information about `X`? State the Markov or finite-sample
+boundary before revealing your answer.
+
+**Maximum entropy is a constrained modeling principle.** Among distributions
+that satisfy declared constraints, the maximum-entropy distribution is the one
+that adds the least extra structure beyond those constraints. For example, on a
+finite support with only a mean constraint, the optimizer of
+
+\[
+\max_p H(p) \quad \text{subject to } \sum_i p_i=1,
+\qquad \sum_i p_i a_i=\mu,
+\]
+
+is a particular exponential-family form after the support and feasibility
+conditions are declared. The principle does not say that the world is
+maximum-entropy, that a higher entropy is better, or that it chooses a product
+utility. If the constraints change, the optimizing distribution and the
+interpretation change. **Counterexample:** without the support, normalization,
+and moment constraint, “choose the maximum-entropy model” is not a complete
+specification.
+
+**Coding interpretation.** In a prefix-code setting, ideal code length is
+linked to surprise `-log_2 p(x)`, expected length is linked to cross-entropy,
+and the excess expected length from coding `p` with a code designed for `q`
+is represented by `D_KL(p\Vert q)` up to the coding theorem's integer and
+prefix-code conditions. This is an asymptotic/idealized interpretation, not a
+claim that a finite tokenizer, compression ratio, or language-model score is
+an information-theoretic proof. Keep the source law, code class, block regime,
+and loss visible before using a coding conclusion.
+
 ### Mutual-information and distortion card — derive one BSC first
 
 Let `X\sim\operatorname{Bernoulli}(1/2)`, let noise

@@ -74,7 +74,7 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "bf9d013a34292a7b4a63aef208447d1fb68623dd8b3e2fa5c0e7ac2fc8e51aa0"
+      "sha256": "15ef998b761f8feb54d73e8d05df8f310e544334725cb3a3871450aeac8aba7b"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
@@ -526,7 +526,7 @@
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "cf5be0d67036e4d5b3ed532c2464e9d2052d1918c3363e191bf3bde3ac70c567"
+      "sha256": "00c062f7ebb7c1a006e7c568da50ab1d17f0ca953ff3e362fea5e04bb655c6d2"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -846,7 +846,7 @@
     },
     {
       "path": "content/source-maps/module31_optimization_information_source_map.md",
-      "sha256": "601ff32cb07251341a975abe3ca6d2fce008aebbab42796e8c6b579460f0c639"
+      "sha256": "0a24c89a21e2d54a975e5bb05beaffc35d67c1dbfdde03646658e3e8163b1d33"
     },
     {
       "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
