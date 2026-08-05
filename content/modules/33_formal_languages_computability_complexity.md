@@ -3,26 +3,7 @@
 **Hidden review candidate — not learner-delivered.** This is the fixed
 learner-material scope for a future qualified review. M33 remains
 authoring-only, hidden from the reader manifest, and unrecorded for release.
-This file does not change the course graph, availability, prerequisite policy,
-source-map binding, release state, publication claim, or Core credit.
-
-**Knowledge arc:** systems, languages, and AI-era reasoning
-
-**Academic prerequisites:** M05 cost models and algorithm analysis; M11
-algorithms and reductions; M23 programming languages and bounded evaluation;
-M27 discrete mathematics, logic, and proof.
-
-**Primary outcome:** You can read a claim about syntax, computation, or
-complexity and reconstruct its exact object, machine/question, quantifiers,
-resource model, proof obligation, counterexample, and practical non-claim.
-You will be able to inspect an AI-generated explanation or a small recognizer
-trace critically rather than accepting a label such as “regular,”
-“undecidable,” or “NP-complete” on authority.
-
-This is not a six-session promise to master every automata theorem, proof
-system, programming-language semantics, or open problem in complexity theory.
-It is a rigorous foundation for reading, debugging, and directing formal
-reasoning.
+This file does not change the course graph, availability, prerequisite policy, source-map binding, release state, publication claim, or Core credit.
 
 ---
 
@@ -63,8 +44,8 @@ useful, safe, authorized, or fast on one instance.
 ### Claim/source labels
 
 Compact labels such as `M33-C01 -> S33-01, S33-03` point to the exact claim
-and source route in the [M33 candidate source
-ledger](../source-maps/module33_formal_languages_computability_complexity.md).
+and source route in the [M33 primary-source research
+map](../source-maps/module33_formal_languages_computability_complexity.md).
 They are navigation aids, not borrowed proof text: the named encoding,
 quantifiers, counterexample, and non-claim control the conclusion.
 
@@ -247,6 +228,47 @@ after `()`. A finite-state recognizer has only finitely many fixed summaries;
 this stack can retain an unbounded pending-nesting depth. That is an
 operational bridge to the CFG, not a proof of the full CFG–PDA equivalence and
 not a production parser design.
+
+</details>
+
+### Chomsky hierarchy — grammar power is a declared ladder
+
+The familiar grammar ladder is useful only when its machine and language
+conventions are named:
+
+**Claim/source trace:** M33-C04 → S33-03, S33-11, S33-12. The hierarchy is an
+original compact comparison of the source routes, not a copied grammar table
+or a claim about the implementation language used by a production parser.
+
+| Level | Grammar/machine picture | Learner boundary |
+| --- | --- | --- |
+| Type 3 | regular grammar / DFA or NFA | finite state; no unbounded stack memory |
+| Type 2 | context-free grammar / PDA | one stack can express nested structure |
+| Type 1 | context-sensitive grammar / linear-bounded automaton | bounded tape proportional to the input |
+| Type 0 | unrestricted grammar / Turing-machine recognizer | recursively enumerable languages; a recognizer may not halt on nonmembers |
+
+Under the standard formal conventions, the inclusions are strict (with the
+usual empty-string convention for context-sensitive grammars):
+
+\[
+\mathrm{REG}\subsetneq\mathrm{CFL}\subsetneq\mathrm{CSL}\subsetneq\mathrm{RE}.
+\]
+
+This is a statement about language classes and computational models. It is not
+a ranking of parser libraries, a claim that a production language has exactly
+one grammar class, or permission to infer semantics from syntax.
+
+**Prediction:** balanced parentheses, equal numbers of `0` and `1`, and a
+general program-termination property need which smallest memory models? Name
+the model before naming the class.
+
+<details>
+<summary>Reveal after making the model prediction.</summary>
+
+Balanced parentheses and `0^n1^n` fit the context-free/PDA level; a general
+termination property is semantic and reaches the Turing-machine/undecidability
+boundary. The hierarchy does not by itself prove a particular implementation
+correct.
 
 </details>
 
@@ -673,6 +695,35 @@ and on \(H\) being total and correct for all encoded pairs. It does not say
 that a finite whitelist of known scripts cannot be checked, nor that a timeout
 proves a result about arbitrary programs.
 
+### Rice's theorem — state the semantic-property conditions
+
+**Claim/source trace:** M33-C07 → S33-01, S33-05. The theorem card keeps the
+encoded partial-computable-function assumptions visible before using the name.
+
+**Rice's theorem (scope card):** for a nontrivial semantic property (P) of
+the partial computable function or language recognized by an encoded program,
+the set of program descriptions whose computed object has property (P) is
+undecidable. “Nontrivial” means that at least one encoded program has the
+property and at least one does not; “semantic” means the property depends on
+what the program computes, not on its spelling.
+
+The card has three obligations before the name is useful:
+
+1. identify the effective program encoding and the computed object;
+2. show that the property is semantic and nontrivial; and
+3. state the undecidable set of descriptions being classified.
+
+For example, “computes the empty language” is a semantic property under a
+chosen recognizer convention; “contains the token `while`” is syntactic and is
+not a Rice property. A finite whitelist or a bounded interpreter can decide a
+restricted engineering question without contradicting the theorem. The
+theorem also does not say that every semantic question has the same reduction
+or that a timeout is a proof of nontermination.
+
+**Smallest counterexample:** change a semantic property to a token property,
+or restrict the input to a finite, explicitly enumerated program set. Which
+Rice obligation disappeared, and what narrower claim remains true?
+
 ### Counterexample: syntax is not a semantic property
 
 “Contains a loop token” is a syntactic predicate. “Terminates” is a semantic
@@ -917,6 +968,44 @@ An NP-completeness claim requires both:
 
 It is not a label for “a problem that looked hard in a notebook.”
 
+### Complexity breadth map — classes are contracts, not badges
+
+The Core route uses \(\mathrm{P}\) and \(\mathrm{NP}\) as a starting point. A
+complete reading needs the neighboring models too:
+
+**Claim/source trace:** M33-C09–M33-C10 → S33-01, S33-08, S33-09, S33-13. The
+advanced rows are an orientation and transfer bridge toward later theory
+study; they do not claim a complete graduate complexity course or a theorem
+proof merely from the card.
+
+| Topic | First-principles statement | What must not be inferred |
+| --- | --- | --- |
+| \(\mathrm{coNP}\) | complements of languages in \(\mathrm{NP}\); a decision language is in coNP when its complement has a polynomial verifier | \(\mathrm{NP}=\mathrm{coNP}\) is not known, and a hard-looking complement is not a proof |
+| \(\mathrm{PSPACE}\) | decision languages decidable with polynomial workspace, regardless of time | polynomial space does not mean polynomial time or practical feasibility |
+| Savitch's theorem | \(\mathrm{NSPACE}(f(n))\subseteq\mathrm{DSPACE}(f(n)^2)\) for suitable \(f\), hence \(\mathrm{NPSPACE}=\mathrm{PSPACE}\) | a nondeterministic proof sketch is not a fast algorithm; the square-space simulation can be expensive |
+| randomized complexity | classes such as BPP/RP add a random-bit model, error target, and amplification convention | a stochastic benchmark or random seed is not a BPP/RP membership proof |
+| approximation hardness | an optimization objective, approximation ratio, and a gap-preserving reduction are required | NP-hardness alone does not establish an approximation lower bound |
+| circuit complexity | Boolean circuits are measured by size/depth under a gate basis; a family needs a construction and, where claimed, uniformity | one circuit evaluation is not a complexity-class result or a neural-network generalization theorem |
+
+**Code/design reading:** annotate a proposed “polynomial-space solver” with its
+workspace, time, randomness, error probability, and input encoding. Then mark
+which row would need a theorem rather than a run. The labels are reusable
+contracts for M34 search and M35/M36 learning claims, not a catalogue of
+prestige classes.
+
+### Breadth practice ladder
+
+1. **Recognize:** classify five one-sentence claims as P, NP, coNP,
+   PSPACE, randomized, approximation, circuit, or “not enough information.”
+2. **Read:** inspect a short reachability recursion and identify the space
+   measure, the hidden exponential time, and whether randomness is present.
+3. **Derive:** write the missing direction of one gap reduction and state the
+   approximation promise it would preserve; give a nearby counterexample where
+   the promise is absent.
+
+Record the result in the Complexity-Claim Card. A correct class label without
+the model, encoding, proof obligation, and practical non-claim is incomplete.
+
 ### Prediction before reveal
 
 An engineer reports: “My backtracking solver timed out after 30 seconds on
@@ -1101,6 +1190,45 @@ Your dossier must contain:
 
 ---
 
+## Graduated problem ladder
+
+The ladder makes formal theory readable before it becomes proof-heavy. Each
+step preserves the object, quantifier, machine/resource model, and practical
+non-claim from the previous step.
+
+### Ladder step 1 — Recognize the formal object
+
+Classify an alphabet, string, language, DFA/NFA, PDA, grammar, encoded
+machine, decision problem, or complexity resource before discussing behavior.
+
+### Ladder step 2 — Read a finite trace
+
+Trace a recognizer, parser, bounded evaluator, or solver on a concrete input;
+mark the exact observation and the universal claim it does not establish.
+
+### Ladder step 3 — Derive a proof obligation
+
+Write a structural-induction, pumping, closure, reduction, Rice-style, or
+complexity argument with its quantifiers and cost model made explicit.
+
+### Ladder step 4 — Debug a false inference
+
+Given an accepted string, timeout, failed reduction, or benchmark, predict the
+smallest counterexample that separates syntax, semantics, bounded execution,
+and theorem scope.
+
+### Ladder step 5 — Design a hardness or limit argument
+
+Choose a source problem, target problem, computable map, iff direction, or
+resource bound and record what the argument says about instances versus a
+problem family.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—encoding, machine memory, reduction direction, resource,
+or input family—and defend the repaired claim in the formal-limits dossier and
+Teaching Assistant conversation.
+
 ## Confidence-aware diagnostic and spaced review
 
 Choose an answer and record confidence **before** reading its explanation.
@@ -1167,6 +1295,20 @@ regularity or correctness claim.
 
 **Answer: C.** Repair: distinguish runtime evidence from a formal theorem.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: syntax implies safe termination; B: parser condition only; C: parsing grants authority; D: syntax proves semantics | Separate syntax, behavior, and authority layers | A syntactically valid program can diverge or perform an unauthorized action | Change the parser rule while keeping the semantic behavior fixed |
+| Q2 | A: finite tests prove regularity; B: all strings are covered; C: bounded implementation evidence; D: a stack is required | Quantify the language claim separately from the test set | One untested string is rejected by the implementation | Add a longer witness and state what remains unproved |
+| Q3 | A: budget exhaustion proves non-halting; B: no halt within the declared budget; C: halting is decidable; D: input is outside the language | Name the evaluator budget and its observation boundary | A longer budget later reaches a halt | Double the budget and preserve the finite observation wording |
+| Q4 | A: reverse reduction direction; B: source-to-target computable iff map; C: similarity is enough; D: benchmark proves hardness | Draw the arrow and follow the solver consequence | A map in the wrong direction says nothing about target hardness | Reverse the arrow and identify which implication fails |
+| Q5 | A: timeout proves NP-completeness; B: timeout proves no solution; C: configured run hit its limit; D: P≠NP follows | Keep runtime evidence, encoded problem, and theorem classification separate | A satisfiable instance remains after the time limit | Change the encoding or budget and state the retained fact |
+
+The repair card is deliberately constructive: name the exact object or
+quantifier, build the smallest counterexample, then transfer the argument
+before reading a broader theorem.
 
 **Review schedule:** Retrieve the working invariant and one counterexample
 after 1, 3, 7, 14, and 30 days. On days 7 and 30, change one premise: make a
@@ -1288,15 +1430,24 @@ the targeted construction and proof-audit routes were rechecked on
 | [MIT 18.404J Theory of Computation lecture notes](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/), [Lecture 6: TM Variants, Church–Turing Thesis](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/7405f6112c8ca7242e1edd9a021c1e63_MIT18_404f20_lec6.pdf), and [Stanford CS103 theorem/definition reference](https://web.stanford.edu/class/archive/cs/cs103/cs103.1132/reference/) | Sessions 1–3: regex/NFA/DFA progression, CFG/stack distinction, pumping-lemma quantifiers, and encoded-machine assumptions before a diagonal argument or bounded configuration trace. | Targeted 2026-08-02/03 calibration only; link-only/original Atlas traces, proof audits, and counterexamples. |
 | [MIT 6.046J Lecture 17: Complexity and NP-completeness](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2012/b4562881f2af637e09e806450e9b62c8_MIT6_046JS12_lec17.pdf) | Session 5: decision, certificate/verifier, and related search/optimization distinctions. | Link-only/original Atlas comparison table; do not copy lecture prose, figures, or exercises. |
 
-For the source-to-claim ledger, access/reuse cautions, and primary-source
-routes, use the adjacent [M33 candidate source
-ledger](../source-maps/module33_formal_languages_computability_complexity.md).
+For the fuller source-to-claim ledger, access/reuse cautions, and primary-source
+map, use the instructor-facing [M33 primary-source research
+map](../source-maps/module33_formal_languages_computability_complexity.md).
 
 ## Candidate release boundary
 
-Before this candidate may move into the released portal learner route, it still
-needs its contract-bound source ledger, reviewed accessible interaction or
-equivalent activity, diagnostic/review integration, source/visual review,
-candidate CI and release evidence, deployment provenance, and human approval.
-Until then it remains a hidden review candidate—not a published module or a
-learner-mastery claim.
+Before this draft may move into the released portal learner route, it still needs its
+contract-bound source ledger, reviewed accessible interaction or equivalent
+activity, diagnostic/review integration, source/visual review, candidate CI
+and release evidence, deployment provenance, and human approval. Until then
+it remains an authoring artifact—not a published module or a learner-mastery
+claim.
+
+## Candidate release boundary
+
+Before this candidate can move into the released portal learner route, it still
+needs the versioned review-ready delivery map, complete source/claim and
+accessibility review, a bounded interaction or equivalent activity,
+diagnostic/review evidence, exact CI and deployment provenance, and human
+approval. Until then it remains hidden and authoring-only; it is not a
+published module, live-chat event, Notion record, or learner-mastery claim.

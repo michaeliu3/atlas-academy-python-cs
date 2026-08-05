@@ -3,26 +3,7 @@
 **Hidden review candidate — not learner-delivered.** This is the fixed
 learner-material scope for a future qualified review. M34 remains
 authoring-only, hidden from the reader manifest, and unrecorded for release.
-This file does not change the course graph, availability, prerequisite policy,
-source-map binding, release state, publication claim, or Core credit. It does
-not satisfy or bypass M33, open M35, or grant authority to a solver.
-
-**Knowledge arc:** systems, formal reasoning, and AI-era design
-
-**Academic prerequisites:** M10 graphs and networks; M11 algorithms; M30
-probability and scientific inference; M31 optimization and information; M33
-formal languages, computability, and complexity.
-
-**Primary outcome:** You can formulate a small search, constraint, planning,
-or decision problem before choosing a method; read a frontier/solver trace
-without overstating it; reconstruct theorem assumptions and counterexamples;
-and explain where a formal recommendation stops and accountable human review
-begins.
-
-This module is not a promise that a toy graph, CSP, utility table, planner, or
-solver status models an outside world correctly. It is a foundation for
-reading, debugging, and directing classical AI systems before neural or agent
-methods are introduced.
+This file does not change the course graph, availability, prerequisite policy, source-map binding, release state, publication claim, or Core credit.
 
 ---
 
@@ -65,11 +46,11 @@ table represents affected people, or that a result is authorized to act.
 ### Claim/source labels
 
 Compact labels such as `M34-C01 -> S34-01, S34-04–S34-05, S34-18` point to the
-relevant claim and original/official reading route in the [M34 candidate source
-ledger](../source-maps/module34_classical_ai_search_constraints_decision.md).
-They are navigation aids, not borrowed proof text, a canonical graph
-source-map binding, or release evidence: the named assumptions, original
-derivation, and non-claim still control what may be concluded.
+relevant claim and original/official reading route in the [M34 primary-source
+research ledger](../source-maps/module34_classical_ai_search_constraints_decision.md).
+They are navigation aids, not borrowed proof text, a contract-bound source map,
+or release evidence: the named assumptions, original derivation, and non-claim
+still control what may be concluded.
 
 ### Core evidence card
 
@@ -1185,6 +1166,44 @@ larger unexamined implementation.
 
 ---
 
+## Graduated problem ladder
+
+Move from a state description to a bounded decision dossier. Every step keeps
+the representation, objective, assumptions, observation, and authority
+boundary visible.
+
+### Ladder step 1 — Recognize the model
+
+List states, observations, actions, goals, costs, constraints, utilities, and
+the decision owner before choosing search or inference machinery.
+
+### Ladder step 2 — Read a search or propagation trace
+
+Annotate frontier order, duplicate policy, heuristic value, constraint
+propagation, solver status, and the exact stopping event in a small instance.
+
+### Ladder step 3 — Derive the condition
+
+Derive one admissibility/consistency, relaxation-bound, feasibility, expected
+utility, belief-update, or MDP condition and state its premises.
+
+### Ladder step 4 — Debug an overclaim
+
+Given a merged state, non-cheapest BFS route, fractional relaxation, timeout,
+or high-probability action, predict the smallest counterexample and repair the
+claim.
+
+### Ladder step 5 — Design a bounded decision comparison
+
+Compare a baseline, solver, or policy with fixed inputs, objective, limits,
+uncertainty, sensitivity probe, abstention rule, and human review point.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—hidden state, edge cost, integrality, time limit, utility,
+or observation—and defend the narrower recommendation in the dossier and TA
+chat.
+
 ## Confidence-aware diagnostic and spaced review
 
 Choose and record confidence before revealing the explanation. A low
@@ -1255,6 +1274,20 @@ external-world claims.
 
 **Answer: B.** Repair: belief, value, and authority are separate inputs.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: room is the whole state; B: histories with different futures may merge; C: any merge makes search wrong; D: a larger heuristic repairs missing state | Add the variable that changes legal futures before searching | Same room with and without a key permits different actions | Add a hidden inventory bit and restate the state |
+| Q2 | A: BFS minimizes arbitrary cost; B: fewer edges means algorithm failure; C: BFS may optimize unit steps only; D: no route exists | Name the edge objective and algorithm guarantee | Two-edge cost-20 route beats a three-edge cost-3 route by edge count | Change all edges to unit cost and predict the conclusion |
+| Q3 | A: fractional candidate is deployable; B: relaxation is original feasible; C: relaxation value is a bound pending feasibility; D: solver is wrong | Keep relaxed and original feasible sets distinct | A fractional solution violates the binary constraint | Restore integrality and identify the new check |
+| Q4 | A: timeout proves infeasibility; B: configured run stopped at limit; C: status proves NP-completeness; D: model matches reality | Separate solver status, encoded model, theorem, and world claim | A longer limit finds a feasible solution | Double the limit and state the only retained observation |
+| Q5 | A: probability is invalid; B: expected utility includes utilities/actions; C: maximum probability never matters; D: calculation grants authority | Keep belief, value, and authority as separate inputs | A lower-probability inspection has higher consequence-weighted utility | Change the utility matrix and recompute the action boundary |
+
+The table is an oral-repair route, not a score: ask for a prediction, reveal
+the smallest counterexample, and then transfer the model under one changed
+premise.
 
 **Review schedule:** Retrieve the working invariant after 1, 3, 7, 14, and
 30 days. On days 7 and 30, change one premise: add a hidden state variable,
@@ -1387,18 +1420,27 @@ model-false, missing observation, and omitted representation distinct.
 | M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15, S34-18` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/); [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html); [S34-18 — Berkeley CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html) |
 | M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10, S34-16` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9); [S34-16 — MIT 6.825 planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) |
 | M34-S05 | `M34-C08–M34-C09 -> S34-08, S34-11–S34-13, S34-17, S34-18` | [S34-08 — Berkeley decision networks](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html); [S34-11 — NIST AI RMF PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html); [S34-18 — Berkeley MDP](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) |
-| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-18` | Revisit the applicable session route, then use the [M34 candidate source ledger](../source-maps/module34_classical_ai_search_constraints_decision.md) to check its narrower use and reuse boundary. |
+| M34-S06 | `M34-C01–M34-C09 -> S34-01–S34-18` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision.md) to check its narrower use and reuse boundary. |
 
-For the candidate's claim-linked original/official source routes and reuse
-cautions, use the adjacent [M34 candidate source
-ledger](../source-maps/module34_classical_ai_search_constraints_decision.md).
+For the fuller claim-linked original/official source ledger and reuse cautions,
+use the instructor-facing [M34 primary-source research
+map](../source-maps/module34_classical_ai_search_constraints_decision.md).
+
+## Candidate release boundary
+
+Before this draft may move into the released portal learner route, it still needs its
+contract-bound source ledger, reviewed accessible interaction or equivalent
+activity, deterministic reference checks where appropriate, diagnostic/review
+integration, source/visual review, candidate CI and release evidence,
+deployment provenance, and human approval. Until then it remains an authoring
+artifact—not a published module, solver authorization, or learner-mastery
+claim.
 
 ## Candidate release boundary
 
 Before this candidate can move into the released portal learner route, it still
-needs the versioned review-ready delivery map, full source/claim/accessibility
-review, a bounded interactive implementation or equivalent interaction,
-learner-facing diagnostic/review record, module evidence and review records,
-exact candidate CI evidence, deployment provenance, and human approval. Until
-then it is a hidden review candidate—not a completed module, solver
-authorization, or learner-mastery claim.
+needs the versioned review-ready delivery map, complete source/claim and
+accessibility review, a bounded interaction or equivalent activity,
+diagnostic/review evidence, exact CI and deployment provenance, and human
+approval. Until then it remains hidden and authoring-only; it is not a
+published module, live-chat event, Notion record, or learner-mastery claim.

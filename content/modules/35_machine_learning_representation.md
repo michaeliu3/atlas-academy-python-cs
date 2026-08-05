@@ -10,29 +10,6 @@
 > nothing in this workbook satisfies its prerequisites or opens M36, M25, or
 > M26.
 
-**Bridge.** M28 made representation a geometrical choice with numerical
-consequences. M30 made an evaluation result conditional on a data-generating
-process. M31 separated an objective from a decision. M32 made execution,
-precision, randomness, and environment part of the evidence. M34 required a
-problem formulation and a classical baseline before reaching for a learned
-model. M35 connects those ideas into one disciplined question:
-
-> **What does a trained model actually earn the right to claim?**
-
-**Primary outcome.** You can read a machine-learning proposal from first
-principles: name the data relation, representation, baseline, objective,
-training system, evaluation population, uncertainty and shift boundary, and
-human authority boundary. You can inspect an AI-generated model claim, trace
-the code or architecture that produces it, design a counterexample or failure
-probe, and make a limited recommendation without treating a score as a
-decision.
-
-This is an advanced connected first pass, not a claim of production-ML,
-causal-inference, fairness, privacy, or deep-learning mastery. It deliberately
-uses small synthetic fixtures. The intended skill is **reader, reviewer, and
-design readiness**: reconstruct the argument, locate its assumptions, and ask
-for the next evidence rather than blindly typing a training loop.
-
 ---
 
 ## How to study this module
@@ -65,11 +42,9 @@ target process → observed data → representation → baseline / model
 
 ### Claim/source trail
 
-The compact labels below point to the [M35 candidate source
-ledger](../source-maps/module35_machine_learning_representation.md) and the
-learner-facing links at the end. They make a source route inspectable; they do
-not convert a source into a result about this synthetic exercise or create a
-canonical graph source-map binding.
+The compact labels below point to the instructor-facing research ledger and
+the learner-facing links at the end. They make a source route inspectable; they
+do not convert a source into a result about this synthetic exercise.
 
 | Session | Claims to trace | Research route |
 | --- | --- | --- |
@@ -456,6 +431,91 @@ For any family, write the same six fields before trusting a result: **available
 information, representation, objective, hypothesis/decision class, selection
 procedure, and observable evidence**. A new family never removes the need for
 an authority boundary.
+
+### Bias–variance, kernels, SVMs, and boosting — compare contracts, not brands
+
+For a fixed input \(x\), suppose \(Y=f(x)+\epsilon\), with
+\(\mathbb E[\epsilon\mid x]=0\) and
+\(\operatorname{Var}(\epsilon\mid x)=\sigma^2_\epsilon\). Let
+\(\widehat f_D(x)\) be the predictor trained on dataset \(D\), and let
+\(\overline f(x)=\mathbb E_D[\widehat f_D(x)]\). Expanding the square and
+letting the centered cross-terms vanish gives
+
+\[
+\mathbb E_{D,\epsilon}\!\left[(Y-\widehat f_D(x))^2\mid x\right]
+=\underbrace{\sigma^2_\epsilon}_{\text{irreducible noise}}
++\underbrace{(\overline f(x)-f(x))^2}_{\text{bias}^2}
++\underbrace{\mathbb E_D[(\widehat f_D(x)-\overline f(x))^2]}_{\text{variance}}.
+\]
+
+**Prediction:** a highly constrained model that is wrong in the same way across
+resampled training sets tends to show larger bias; a flexible model whose
+predictions move substantially across those sets tends to show larger variance.
+The decomposition is a pointwise squared-loss identity under the stated
+assumptions. It is not a universal classification law, a reason to label one
+architecture “best,” or a license to treat noise as removable.
+
+<details>
+<summary>Reveal the cross-term check after making a prediction.</summary>
+
+Write \(Y-\widehat f_D=(f-\overline f)+(\overline f-\widehat f_D)+\epsilon\).
+The dataset-centered and noise-centered terms have zero conditional mean, so
+their cross-products disappear after the declared expectation. If the
+training procedure, loss, or sampling relation changes, re-check the
+decomposition instead of carrying the labels over by slogan.
+
+</details>
+
+**Kernel/SVM reading card.** A kernel declares a geometry through
+\(K(x,x')=\langle\phi(x),\phi(x')\rangle\) without requiring \(\phi(x)\) to be
+materialized. For \(y_i\in\{-1,+1\}\), a soft-margin linear SVM can be read
+through the objective
+
+\[
+\frac12\lVert w\rVert^2+
+C\sum_i\max(0,1-y_i(w^\top\phi(x_i)+b)).
+\]
+
+Before reading an API call, identify scaling, kernel, \(C\), class weights,
+the validation boundary, and whether “probability” output is a post-hoc
+calibration rather than the margin itself. Support vectors are the examples
+with active margin constraints (equivalently, non-zero dual influence in the
+declared formulation). This is a code-reading contract, not an SVM
+implementation requirement or a population-separation guarantee.
+
+**Boosting reading card.** A stagewise additive model has the shape
+\(F_t=F_{t-1}+\eta h_t\), where the next weak learner \(h_t\) is chosen using a
+declared residual or negative-gradient rule. Read n_estimators, learning_rate,
+base-learner depth, subsampling, early stopping, and the selection split
+together. More stages can reduce a training objective while worsening a
+fresh evaluation or changing calibration; the update equation alone proves
+neither generalization nor safe use.
+
+### Ranking and ablation are evidence designs
+
+Ranking asks whether candidate scores order pairs or lists as intended; it is
+not the same question as threshold accuracy, probability calibration, or
+decision utility. State the unit, tie rule, comparator, and slice before
+choosing a ranking metric. An ablation is a controlled intervention: remove or
+replace exactly one component, hold the data relation, split, selection budget,
+and execution record fixed, and report repeat variation. It can support a
+narrow component comparison in that protocol; it does not establish a causal
+story for every population or architecture.
+
+**Problem ladder:**
+
+1. **Recognize:** label the noise, bias, and variance terms in a fixed
+   squared-loss card and distinguish ranking from calibration.
+2. **Read:** inspect an SVM or boosting configuration and point to the kernel,
+   margin/regularization, stagewise budget, split, and post-hoc calibration
+   boundary.
+3. **Design:** propose one-component ablations with a prediction, paired
+   repetitions, a falsifier, and one retained claim/non-claim.
+
+**Claim/source trace:** M35-C02, M35-C04, and M35-C08 →
+S35-03–S35-04, S35-07, S35-16–S35-24. The cards synthesize the existing
+calibration routes with original derivations and fixtures; they are not copied
+course notes, a model leaderboard, or an approval decision.
 
 ### Output: Classical–Learning Baseline Comparison
 
@@ -1265,6 +1325,45 @@ it may not treat the packet as a generalization proof or deployment approval.
 
 ---
 
+## Graduated problem ladder
+
+The ladder connects representation, evaluation, optimization, and authority.
+Each step produces an artifact that the next step can inspect rather than
+turning a model score into an unexplained conclusion.
+
+### Ladder step 1 — Recognize the information boundary
+
+Identify the representation, target, available-at-inference features,
+sampling unit, decision owner, and the distinction between a collision and a
+global claim.
+
+### Ladder step 2 — Read a baseline and split trace
+
+Annotate preprocessing, train/validation/fresh partitions, leakage paths,
+metric, calibration, and the exact information each comparator received.
+
+### Ladder step 3 — Derive the local condition
+
+Derive one representation collision, bias–variance term, logit loss, margin,
+kernel, or calibration relation with the stated assumptions.
+
+### Ladder step 4 — Debug a misleading result
+
+Given a baseline mismatch, leakage, gradient check, calibration plot, or model
+card, predict the smallest probe that could falsify the proposed explanation.
+
+### Ladder step 5 — Design an evidence comparison
+
+Design an ablation or model comparison with fixed information, split, tuning
+budget, metric, uncertainty, subgroup/shift probe, and accountable use
+boundary.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—feature availability, entity/time split, dtype, threshold,
+shift, or authority—and defend the narrowest retained claim in the ML dossier
+and Teaching Assistant chat.
+
 ## 9. Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence *before* revealing
@@ -1355,6 +1454,20 @@ different claims.
 substitute for accountable human governance.
 </details>
 
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: deeper model recovers a lost distinction; B: deterministic downstream predictor cannot separate a collision; C: representation is universally useless; D: more data removes the collision | Inspect the representation/task pair and the information lost | Two opposite labels map to the same representation | Add an invertible feature and predict which claim changes |
+| Q2 | A: architecture wins; B: information-boundary mismatch; C: baselines are useless; D: score means deployable | Equalize features, split, preprocessing, tuning, metric, and cost | A weaker model receives an extra predictive feature | Give both models the same feature set and revise attribution |
+| Q3 | A: transform changes every label; B: held-out statistics leak into fitting; C: no generalization is proved; D: seed is invalid | Trace the information path across the split | A global scaling parameter uses the test rows | Fit only on train rows and state the retained finite fact |
+| Q4 | A: model/data valid; B: shift robustness; C: local implementation probe; D: optimizer converged | Bound the objective, point, dtype, step, and tolerance | A gradient check passes while the target or optimizer is wrong | Change dtype and name the new probe |
+| Q5 | A: accuracy makes calibration irrelevant; B: calibration is a separate finite population question; C: confidence is always better; D: plot authorizes action | Separate accuracy, probability quality, utility, and authority | Equal accuracy hides different reliability on a subgroup | Change the subgroup relation and identify the missing evidence |
+| Q6 | A: documentation grants permission; B: documentation exposes limits but not governance; C: monitoring is unnecessary; D: model card proves fairness | Keep consent, legitimacy, monitoring, and fairness as separate claims | A complete card lacks a lawful data owner or escalation path | Change the decision owner and restate the retained documentation fact |
+
+Use each row as a conversation card: predict, inspect the counterexample, and
+transfer one changed premise before accepting an AI-generated explanation.
+
 **Review schedule:** retrieve one collision, one leakage path, one
 objective-to-target gap, and one authority boundary after 1, 3, 7, 14, and 30
 days. On days 7 and 30, change a premise and update—do not erase—the evidence
@@ -1389,16 +1502,21 @@ assets.
 | [PyTorch reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Session 4: bounded execution and reproducibility. | Link-only/original examples. Pin library versions before making a concrete API or runtime claim. |
 | [TensorFlow sigmoid cross-entropy with logits](https://www.tensorflow.org/api_docs/python/tf/nn/sigmoid_cross_entropy_with_logits) and [PyTorch BCEWithLogitsLoss](https://docs.pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html) | Session 4: derive a logit-space binary loss, then inspect why fused/stable computation avoids the naïve sigmoid-plus-log path at extreme finite-precision inputs. | Link/cite only; use original Atlas derivation and code. A stable API call does not validate data, objective, calibration, or use. |
 
-For the candidate's claim-linked university, standards, framework, and primary
-research routes, consult the adjacent [M35 candidate source
+For the fuller claim-linked university, standards, framework, and primary
+research ledger, consult the instructor-facing [M35 primary-source research
 ledger](../source-maps/module35_machine_learning_representation.md).
+
+Before any publication review, reconcile every learner-facing claim, equation,
+visual, code sample, and numerical fixture with a canonical source map and
+structured module contract. Until then this is an authoring workbook and not a
+published learning route, complete accessibility record, live-chat event,
+Notion record, or learner-mastery claim.
 
 ## Candidate release boundary
 
 Before this candidate can move into the released portal learner route, it still
-needs the versioned review-ready delivery map, full source/claim/accessibility
-review, a bounded interactive implementation or equivalent interaction,
-learner-facing diagnostic/review record, module evidence and review records,
-exact candidate CI evidence, deployment provenance, and human approval. Until
-then it is a hidden review candidate—not a completed module, live-chat event,
-Notion record, or learner-mastery claim.
+needs the versioned review-ready delivery map, complete source/claim and
+accessibility review, a bounded interaction or equivalent activity,
+diagnostic/review evidence, exact CI and deployment provenance, and human
+approval. Until then it remains hidden and authoring-only; it is not a
+published module, live-chat event, Notion record, or learner-mastery claim.

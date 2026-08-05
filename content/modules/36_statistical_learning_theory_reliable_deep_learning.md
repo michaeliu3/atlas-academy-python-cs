@@ -9,28 +9,6 @@
 > source-map binding, release state, publication claim, or Core credit;
 > nothing in this workbook satisfies its prerequisites or opens M25 or M26.
 
-**Bridge.** M35 made a trained model claim traceable through representation,
-data, objective, execution, evaluation, shift, and authority. M36 adds the
-formal and systems discipline needed to read the next layer of claims:
-
-> **Which mathematical implication, finite experiment, systems observation,
-> and human-control boundary are actually present—and which are merely being
-> smuggled in by the phrase “the model generalizes”?**
-
-**Primary outcome.** You can reconstruct a learning claim from first
-principles: identify the population relation, loss, representation, hypothesis
-class, sample and regularity assumptions; separate empirical-risk,
-approximation, estimation, and optimization evidence; read a capacity or
-learnability statement with its quantifiers; inspect an experiment’s numerical
-and environment boundary; and design a bounded shift/monitoring response with
-a human owner.
-
-This is a rigorous foundation for reading theory and reliable-learning claims,
-not a claim of mastery of measure-theoretic probability, full PAC/VC proofs,
-all modern deep-learning theory, verified training systems, robustness
-certification, or permission to deploy a model. The module stays deliberately
-synthetic and evidence-bounded.
-
 ---
 
 ## How to study this module
@@ -65,11 +43,10 @@ target + decision boundary
 
 ### Claim/source trail
 
-The compact labels below point to the [M36 candidate source
-ledger](../source-maps/module36_statistical_learning_theory_reliable_deep_learning.md)
-and the learner-facing links at the end. They make the route behind a claim
+The compact labels below point to the instructor-facing research ledger and
+the learner-facing links at the end. They make the route behind a claim
 inspectable; they do not make a cited theorem or paper evidence about the
-synthetic learning system here or create a canonical graph source-map binding.
+synthetic learning system here.
 
 | Session | Claims to trace | Research route |
 | --- | --- | --- |
@@ -555,6 +532,59 @@ its future data relation.
 The point is not to choose the more impressive theorem name. It is to ask which
 objects, quantifiers, and conclusion are actually present before transferring a
 claim to a system.
+
+### Learning-theory spine — capacity, stability, margins, and feedback
+
+The M35 bias–variance card describes one squared-loss decomposition under fixed
+assumptions. M36 adds the lenses needed when the question is about a class,
+an algorithm, or an adaptive sequence:
+
+| Lens | First-principles object | What it can constrain | What it does not settle |
+| --- | --- | --- | --- |
+| VC dimension | The largest finite set shattered by a hypothesis class \(\mathcal H\). | A combinatorial capacity term in a stated sample/generalization setting. | The behavior of a chosen optimizer, representation, or deployment population. |
+| Rademacher complexity | For a sample \(S\), \(\widehat{\mathfrak R}_S(\mathcal H)=\mathbb E_\sigma[\sup_{h\in\mathcal H}\frac1n\sum_i\sigma_i h(X_i)]\) for declared bounded functions and random signs \(\sigma_i\). | How a class can correlate with random signs on this sample; it can enter a uniform-deviation bound. | A free-standing number that ranks architectures or proves robustness. |
+| Algorithmic stability | A replace-one or leave-one-out condition such as \(\sup_z|\ell(A(S),z)-\ell(A(S^{(i)}),z)|\leq\beta_n\). | Sensitivity of a specified learning algorithm to one training example under a specified loss. | Distribution shift, fairness, privacy, or all forms of robustness. |
+| Margin bounds | A declared score margin \(y f(x)\), normalization/complexity term, sample relation, and confidence statement. | A conditional bound whose exact constants and hypotheses must be read from the theorem. | A universal explanation of deep-learning generalization or an architecture ranking. |
+| Online regret | \(R_T=\sum_{t=1}^T\ell_t(a_t)-\min_{a\in\mathcal A}\sum_{t=1}^T\ell_t(a)\) against the best fixed action in hindsight. | An adaptive decision procedure's cumulative loss relative to a stated comparator and feedback model. | A guarantee against a changing comparator, an authorized intervention, or a real reward definition. |
+| Bandit feedback | At round \(t\), the learner observes the loss/reward of the selected action, not every counterfactual arm. | Why exploration, uncertainty, and feedback assumptions affect an online guarantee. | Permission to run an experiment, a causal effect, or a full sequential-decision solution. |
+
+**Prediction:** if the hypothesis class is fixed but the training algorithm changes,
+which lens can change without changing the class? If only the observed action's
+loss is available, which information needed for a full-information update is
+missing?
+
+<details>
+<summary>Reveal the distinction after writing a prediction.</summary>
+
+Algorithmic stability can change when the algorithm changes even if
+\(\mathcal H\) does not. Bandit feedback hides counterfactual losses, so a
+full-information regret update cannot be silently reused. VC/Rademacher cards
+describe class/sample capacity; they do not replace the algorithm or feedback
+model.
+
+</details>
+
+The **bias–variance bridge** is also conditional. A double-descent curve can
+motivate a question about parameterization and procedure, but it does not make
+error monotone in model size or invalidate the definitions above. State the
+data relation, loss, class, algorithm, and selection path before comparing
+curves.
+
+**Problem ladder:**
+
+1. **Recognize:** classify a claim as capacity, stability, margin, regret, or
+   bandit feedback, and name its missing assumption.
+2. **Read:** compute one empirical Rademacher supremum for two functions on a
+   three-point sample, then annotate a theorem card's class, sample, confidence,
+   and algorithm fields.
+3. **Derive/transfer:** calculate one two-round regret comparison, change the
+   feedback from full information to bandit feedback, and state the conclusion
+   that must be withdrawn.
+
+**Claim/source trace:** M36-C02, M36-C04, and M36-C05 →
+S36-01–S36-06, S36-13–S36-19. Regret and bandit language is a bounded bridge
+to Extension 3; it is not a completed reinforcement-learning module, reward
+definition, experiment, or authority decision.
 
 ### One numerical theorem card — calculation is not a deployment claim
 
@@ -1099,6 +1129,43 @@ publication/release claim; M25's separate promotion requirements still apply.
 
 ---
 
+## Graduated problem ladder
+
+The ladder turns a learning-theory statement into a reliable-system dossier.
+At every step keep the population, class, loss, environment, finite
+observation, and human-control boundary distinct.
+
+### Ladder step 1 — Recognize the claim layer
+
+Label risk, empirical risk, representation, distribution, hypothesis class,
+loss, algorithm, execution environment, monitor, and decision owner.
+
+### Ladder step 2 — Read finite evidence
+
+Annotate a sample, training trace, theorem card, reproducibility record,
+calibration result, or shift alert and state exactly what was observed.
+
+### Ladder step 3 — Derive the theorem condition
+
+Write the PAC/VC, concentration, margin, stability, regret, or finite-class
+implication with quantifiers, sampling, class, loss, and non-conclusion.
+
+### Ladder step 4 — Debug an overgeneralization
+
+Given a low empirical risk, gradient norm, fixed seed, calibration plot, or
+drift alert, predict the smallest counterexample that blocks the broader claim.
+
+### Ladder step 5 — Design a reliable-learning protocol
+
+Specify repeated runs, environment fields, shift/robustness probes, monitor
+owners, intervention limits, uncertainty, escalation, and a bounded dossier.
+
+### Ladder step 6 — Transfer and defend
+
+Remove one premise—IID, representation information, fixed device, calibration
+relation, or human approval—and defend the strongest remaining claim in the TA
+oral conversation.
+
 ## 9. Confidence-aware diagnostic and spaced review
 
 Choose an answer and record confidence before reading its explanation. Low
@@ -1201,6 +1268,21 @@ that may matter. Repair: monitoring is evidence plus accountable action, not
 automatic authority.
 </details>
 
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: finite empirical risk equals population risk; B: one sample generalizes everywhere; C: finite empirical calculation under the declared sample/loss/procedure; D: objective choice is settled | Separate empirical risk, population risk, and use value | A predictor memorizes a finite sample and fails on the next relation | Change the sampling relation and restate the finite fact |
+| Q2 | A: gradient norm is a population guarantee; B: observation proves cross-platform reproducibility; C: bounded algorithm/objective observation; D: score grants safe authority | Keep optimization, generalization, execution, and authority gaps separate | A low gradient occurs for a misspecified objective on one device | Change the backend and identify the new execution evidence |
+| Q3 | A: brand name is a theorem object; B: distribution/class/loss/quantifiers/conditions/conclusion; C: one held-out score suffices; D: every network is covered | Write the quantified theorem card and its class boundary | A theorem excludes the chosen architecture or sampling rule | Restrict the hypothesis class and revise the conclusion |
+| Q4 | A: seed fixes every variation; B: runtime/device/backend/dtype/order also matter; C: theory forbids reproduction; D: seed proves numerical correctness | Build a bounded environment and output comparison record | Same seed with a different reduction order changes the result | Change precision and state the reproducibility non-claim |
+| Q5 | A: one calibration plot proves shifted calibration/utility; B: finite estimate with population/binning/selection limits; C: monitoring is unnecessary; D: calibration proves fairness | Separate calibration, shift, utility, fairness, and authority | A relation-specific calibration curve fails after representation shift | Change the relation and name the monitor/owner evidence |
+| Q6 | A: retrain autonomously; B: alert proves root cause; C: follow owner/probe/intervention/stop boundary; D: unchanged source means ignore alert | Treat monitoring as evidence plus accountable action | Input-frequency drift has several compatible causes | Change the owner or intervention budget and revise the handoff |
+
+Each row names the misconception, narrow repair, counterexample, and transfer
+prompt required for a constructive oral defense; it never turns the answer
+into a pass/fail score.
+
 **Review schedule:** after 1, 3, 7, 14, and 30 days, retrieve one definition,
 one theorem condition, one finite-experiment boundary, and one monitoring
 owner. On days 7 and 30, remove one premise—IID, representation information,
@@ -1229,16 +1311,22 @@ figures, code, datasets, benchmarks, weights, or course exercises.
 | [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) and [numerical-accuracy documentation](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html) | Session 4: bounded environment, dtype, backend, and comparison claims. | Link-only/original reproduction record; pin framework, device, and versions before an implementation claim. |
 | [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) | Sessions 5–6: monitoring, management, governance, and human-control boundaries. | Link-only/original Atlas reliability maps; voluntary guidance is not legal advice, certification, or authorization. |
 
-For the candidate's original-research, university, standards, and framework
-source routes, consult the adjacent [M36 candidate source
+For the fuller original-research, university, standards, and framework source
+ledger, consult the instructor-facing [M36 primary-source research
 ledger](../source-maps/module36_statistical_learning_theory_reliable_deep_learning.md).
+
+Before publication, reconcile each learner-facing claim, theorem statement,
+formula, source, visual, code fixture, and numerical experiment with a
+canonical structured source map, module contract, accessibility evidence,
+teaching-model evidence, and release provenance. Until then this remains an
+authoring workbook, not a published route, formal course guarantee, live-chat
+record, Notion record, or learner-mastery claim.
 
 ## Candidate release boundary
 
 Before this candidate can move into the released portal learner route, it still
-needs the versioned review-ready delivery map, full source/claim/accessibility
-review, a bounded interactive implementation or equivalent interaction,
-learner-facing diagnostic/review record, module evidence and review records,
-exact candidate CI evidence, deployment provenance, and human approval. Until
-then it is a hidden review candidate—not a completed module, formal course
-guarantee, live-chat record, Notion record, or learner-mastery claim.
+needs the versioned review-ready delivery map, complete source/claim and
+accessibility review, a bounded interaction or equivalent activity,
+diagnostic/review evidence, exact CI and deployment provenance, and human
+approval. Until then it remains hidden and authoring-only; it is not a
+published module, live-chat event, Notion record, or learner-mastery claim.

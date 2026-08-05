@@ -3,25 +3,7 @@
 **Hidden review candidate — not learner-delivered.** This is the fixed
 learner-material scope for a future qualified review. M31 remains
 authoring-only, hidden from the reader manifest, and unrecorded for release.
-This file neither opens a portal route nor grants Core credit, publication,
-review, release, or mastery evidence.
-
-**Knowledge arc:** Mathematical foundations → systems/AI reasoning
-
-**Prerequisites:** M28 linear algebra and numerical stability; M29 calculus,
-real analysis, and continuous change; M30 probability, statistics, and
-scientific inference.
-
-**Primary outcome:** Given a decision or scientific claim, you can distinguish
-the stated objective from the real goal; define variables, units, feasible
-set, uncertainty model, and authority boundary; read a finite algorithm trace
-without overstating it; reconstruct a small dual/KKT or information argument;
-and prepare an evidence record that says what a result does *not* establish.
-
-This is not a six-session claim of mastery of all convex analysis, nonlinear
-programming, control, information theory, variational inference, or modern
-optimizer research. It is an advanced first-principles foundation for reading,
-debugging, reviewing, and directing such work.
+This file neither opens a portal route nor grants Core credit, publication, review, release, or mastery evidence.
 
 ---
 
@@ -71,7 +53,7 @@ not an automatic decision.
 ### Claim/source labels
 
 Compact labels such as `C04 -> S02–S04` identify the exact claim and its
-source route in the [M31 candidate source ledger](../source-maps/module31_optimization_information.md).
+source route in the [M31 source map](../source-maps/module31_optimization_information.md).
 They are navigation aids, not borrowed proof text: the assumptions and
 counterexample beside the card still control what may be concluded.
 
@@ -1352,6 +1334,46 @@ decision.
 
 ---
 
+## Graduated problem ladder
+
+Work upward only after the previous artifact is understandable. The ladder
+keeps recognition, reading, derivation, debugging, design, and transfer
+connected rather than turning the advanced pack into disconnected theory.
+
+### Ladder step 1 — Recognize the object
+
+Label the decision owner, variables, units, objective, feasible set, sampling
+story, and information boundary in a short optimization or rate-distortion
+claim.
+
+### Ladder step 2 — Read a trace
+
+Annotate a gradient, projection, solver-status, KL-support, or information
+trace. Mark which values are observations and which would require a theorem.
+
+### Ladder step 3 — Derive the condition
+
+Derive one stationary, convexity/KKT, concentration, support, or
+rate-distortion condition and state every assumption before using it.
+
+### Ladder step 4 — Debug a broken claim
+
+Given a finite-difference mismatch, infeasible point, support error, noisy
+run, or over-broad information formula, predict the first repair probe and
+write the smallest counterexample.
+
+### Ladder step 5 — Design bounded evidence
+
+Design a reproducible finite experiment with a declared estimator, units,
+configuration, uncertainty, stopping rule, and non-claim. Explain which
+alternative explanation remains open.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—objective, constraint, distribution, precision, source, or
+authority—and defend the narrower conclusion in the evidence dossier and
+Teaching Assistant conversation.
+
 ## Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence **before** revealing
@@ -1531,6 +1553,24 @@ the explanation.
 objective, a violated qualification, dependent gradients, a support mismatch,
 or a restricted variational family. Update—not erase—the earlier evidence card.
 
+### Distractor repair cards (per option)
+
+Each row is a compact route for every distractor, not merely an answer key.
+Use the named repair, then the counterexample and transfer prompt before
+returning to the explanation.
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: more data supplies purpose; B: declared target/owner; C: solver score decides meaning; D: agent infers authority | Write target, proxy gap, hard constraint, and owner | An optimizer cannot choose an omitted safety constraint | Replace the objective with a safety-sensitive proxy and name the owner |
+| Q2 | A: mismatch means nonconvexity; B: shrink step forever; C: inspect domain, dtype, implementation, and bounded direction; D: finite difference is proof | Separate local diagnostic evidence from a theorem | Cancellation makes a smaller step less informative | Change dtype and predict which probe remains valid |
+| Q3 | A: zero gradient proves constrained optimum; B: unconstrained stationarity only; C: nonconvexity follows; D: constraint can be ignored | Check feasibility and the certificate assumptions separately | A zero-gradient point lies outside the feasible half-space | Replace the inequality with an equality and restate the certificate |
+| Q4 | A: six decreases prove convergence; B: toy problem solved globally; C: six configured observations; D: projection validates the proxy | Record residuals, projection, initialization, and theorem conditions | A decreasing finite trace stops before a worse region | Double the step size and predict the evidence boundary |
+| Q5 | A: one run proves unbiasedness; B: general convergence; C: declared finite observation; D: noise may be hidden | State estimator, sampling/dependence, step-size, and repetition scope | One favorable noisy sequence differs from its expectation | Change the sampling dependence and revise the claim |
+| Q6 | A: support failure is zero; B: repair support mismatch; C: log base fixes it; D: KL direction proves information | Make the joint support/model boundary explicit | (p_i>0,q_i=0) makes the finite term undefined/infinite | Replace the source law and identify which formula must be rederived |
+| Q7 | A: units alone preserve the formula; B: biased source/asymmetric loss or finite block changes the regime; C: recording (D) is enough; D: renaming variables changes nothing | Restate source law, distortion, units, and theorem regime | A biased Bernoulli source invalidates the uniform binary expression | Change Hamming to asymmetric distortion and predict the new obligation |
+| Q8 | A: displayed gap supplies KKT; B: inspect feasibility, stationarity, complementarity, convexity, and qualification; C: constraints can be ignored; D: all nonconvex problems have strong duality | Separate solver output from a certificate and globality assumptions | A small numerical gap with violated feasibility is not a certificate | Remove Slater’s condition and state the retained finite fact |
+| Q9 | A: higher ELBO is exact; B: score proves calibration/safety; C: objective improved under the declared model/family; D: KL direction no longer matters | Name model, family, support, approximation gap, and decision value | A restricted variational family improves ELBO while missing the posterior | Change the family and state which conclusion must be withdrawn |
+
 ---
 
 ## Supportive oral defense and live learning handoff
@@ -1602,8 +1642,8 @@ with experiment conditions and known limits**. In the private guided route, the
 canonical forward handoff is a conceptual systems cross-link to **M18**, which
 applies its ownership and evidence discipline to operating-system resource
 mediation. The
-M32's later authoring workbook comes after M18–M24 and consumes representation,
-dtype/shape, seed,
+[M32 authoring workbook](m32_systems_languages_scientific_python_accelerators_workbook.v1.md)
+comes later, after M18–M24, and consumes representation, dtype/shape, seed,
 profiling, and solver-configuration fields. That later M31→M32 connection is
 an authoring-to-authoring handoff, not portal navigation or evidence that
 either module is released. M34–M36 consume the distinction between optimizing
@@ -1618,9 +1658,9 @@ Core-credit-gated until their own contract and release evidence are complete.
 This workbook’s explanations, examples, diagrams, tables, and code are
 original Atlas material. It links to sources for study and provenance; it does
 not reproduce their slides, textbook prose, assignments, figures, or
-solutions. Individual access/recheck dates and reuse statuses are recorded in
-the adjacent candidate source ledger; the dated focused calibration records
-its own cross-source check.
+solutions. Sources were rechecked on 2026-08-02; individual access/recheck dates and reuse statuses are recorded in
+the linked source map and audit; the dated focused calibration records its own
+cross-source check.
 
 ### Learner-facing source links
 
@@ -1629,21 +1669,29 @@ its own cross-source check.
 | [Stanford EE364a Convex Optimization I](https://web.stanford.edu/class/ee364a/) and its [lecture route](https://web.stanford.edu/class/ee364a/lectures.html) | `C01–C05`, Sessions 1–4: formulation, convexity, optimality conditions, duality, and algorithm scope. | Link-only and original Atlas paraphrase/examples; course assets and linked texts have their own terms. |
 | [MIT 6.251J Introduction to Mathematical Programming](https://ocw.mit.edu/courses/6-251j-introduction-to-mathematical-programming-fall-2009/) | `C01`, `C04–C05`, Sessions 1–4: feasible-set geometry, formulation, sensitivity, and mathematical-programming context. | MIT OCW material has item-specific notices; link-only/original Atlas work unless an asset is separately cleared. |
 | [CMU 10-725 Convex Optimization](https://stat.cmu.edu/~siva/teaching/725/) | `C02–C06`, Sessions 2–5: connect gradient, projected/stochastic methods, duality/KKT, and nonconvex boundaries without copying its course sequence or assessments. | Link-only/original Atlas cards. This is a calibration route, not a promise of CMU-equivalent coverage, labs, or grading. |
-| [Robbins and Monro, *A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586) and [Ghadimi and Lan, *Stochastic First- and Zeroth-Order Methods*](https://doi.org/10.1137/120880811) ([arXiv preprint](https://arxiv.org/abs/1309.5549)) | `C06`, Session 5: stated stochastic-estimator and approximate-stationarity boundaries. | Link-only/original Atlas examples; do not copy proofs, figures, experimental setups, or publisher text. |
+| [Robbins and Monro, *A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586) and [Ghadimi and Lan, *Stochastic First- and Zeroth-Order Methods*](https://doi.org/10.1137/120880811) | `C06`, Session 5: stated stochastic-estimator and approximate-stationarity boundaries. | Link-only/original Atlas examples; do not copy proofs, figures, experimental setups, or publisher text. |
 | [MIT 6.441 Information Theory lecture notes](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/) and [Stanford EE 376A Information Theory notes](https://web.stanford.edu/class/ee376a/files/scribes/lecture_notes.pdf) | `C07`, Session 6: entropy, conditional entropy, KL direction, support, the uniform-input BSC derivation, mutual information, and source/loss assumptions behind the bounded rate-distortion card. | Link-only/original Atlas derivations and finite experiments; do not copy notes, figures, or assignments. |
 | [Blei, Kucukelbir, and McAuliffe, *Variational Inference*](https://www.cs.columbia.edu/~blei/papers/BleiKucukelbirMcAuliffe2017.pdf) | `C08`, Session 6: ELBO/KL direction, variational-family assumptions, and approximation limits. | Link-only/original Atlas derivation and example; do not copy paper text, figures, tables, or proofs. |
 | [SciPy `minimize` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) and [CVXPY DCP tutorial](https://www.cvxpy.org/tutorial/dcp/) | `C04–C05`, Sessions 3–5: distinguish a mathematical condition from an API/grammar/solver contract. | Documentation is linked for contract reading; fixtures remain original and pin versions before a concrete implementation claim. |
 
-For claim-to-source linkage, source rationale, access/reuse cautions, and
-original-source links, use the adjacent
-[M31 candidate source ledger](../source-maps/module31_optimization_information.md).
+For the fuller claim-to-source ledger, source rationale, access/reuse cautions,
+and original-source links, use the instructor-facing [M31 source map](../source-maps/module31_optimization_information.md)
+and [source audit](../source-maps/module31_optimization_information.md).
+
+## Candidate release boundary
+
+Before this draft can move into the released portal learner route, it still needs the versioned
+review-ready delivery map, full source/claim/accessibility review, a bounded
+interactive implementation or equivalent interaction, learner-facing
+diagnostic/review record, module evidence and review records, exact candidate
+CI evidence, deployment provenance, and human approval. Until then it remains
+an authoring artifact—not a completed module or a learner mastery claim.
 
 ## Candidate release boundary
 
 Before this candidate can move into the released portal learner route, it still
-needs the versioned review-ready delivery map, full source/claim/accessibility
-review, a bounded interactive implementation or equivalent interaction,
-learner-facing diagnostic/review record, module evidence and review records,
-exact candidate CI evidence, deployment provenance, and human approval. Until
-then it is a hidden review candidate—not a completed module or a learner
-mastery claim.
+needs the versioned review-ready delivery map, complete source/claim and
+accessibility review, a bounded interaction or equivalent activity,
+diagnostic/review evidence, exact CI and deployment provenance, and human
+approval. Until then it remains hidden and authoring-only; it is not a
+published module, live-chat event, Notion record, or learner-mastery claim.

@@ -3,33 +3,7 @@
 **Hidden review candidate — not learner-delivered.** This is the fixed
 learner-material scope for a future qualified review. M32 remains
 authoring-only, hidden from the reader manifest, and unrecorded for release.
-This file neither opens a portal route nor grants Core credit, a source-map
-decision, contract review, accessibility review, release, or learner mastery.
-
-**Knowledge arc:** Systems reasoning → formal methods, machine learning, and
-reliable AI systems
-
-**Canonical academic prerequisites:** M12 API contracts and dependency
-boundaries; M17 architecture and execution; M19 concurrency and parallelism;
-M24 CPython performance and memory; M28 linear algebra and numerical
-stability; and M31 optimization and information. These remain required
-learning bridges. M31 and M32 being authoring-only means that no portal reader
-route, Core credit, or release claim exists; it does not make their academic
-prerequisites optional.
-
-**Primary outcome:** Given a small scientific-computing or accelerator claim,
-you can trace the public contract, representation, ownership, execution
-history, numerical assumptions, and measurement boundary; read a short
-Python/native or array/autodiff fragment without inventing its behavior; and
-produce a bounded evidence packet that distinguishes an observation from a
-portable performance, correctness, or architectural conclusion.
-
-This is not a promise of expertise in C/C++ extensions, CUDA, HIP, JAX,
-PyTorch, compilers, GPU administration, or one vendor's tools. It is an
-advanced foundation for reading, reviewing, debugging, and directing
-scientific and AI-era systems work. No GPU, framework installation, driver
-change, cloud account, or arbitrary code execution is required for this
-workbook.
+This file neither opens a portal route nor grants Core credit, contract review, source-map approval, release, or learner mastery.
 
 ---
 
@@ -95,7 +69,7 @@ a route or an unlock.
 ### Claim/source labels
 
 Compact labels such as `M32-C03 -> S32-03–S32-04` point to the exact claim and
-source route in the [M32 candidate source ledger](../source-maps/module32_systems_languages_scientific_python_accelerators.md).
+source route in the [M32 source research dossier](../source-maps/module32_systems_languages_scientific_python_accelerators.md).
 They do not make a library call, a local observation, or a framework result
 portable: the stated assumptions and non-claim still control the conclusion.
 
@@ -1342,6 +1316,42 @@ This is a dossier rubric, not a score or a pass/fail certification.
 
 ---
 
+## Graduated problem ladder
+
+The ladder moves from reading a boundary to defending a bounded systems claim.
+Do not skip the trace simply because an AI proposal produces plausible code.
+
+### Ladder step 1 — Recognize the boundary
+
+Label the Python object, native interface, ownership/lifetime promise, array
+shape, layout, device, queue, and measurement boundary in a short call path.
+
+### Ladder step 2 — Read an execution trace
+
+Annotate submission, transfer, enqueue, synchronization, completion, reuse,
+and observation events. Mark which event the code actually records.
+
+### Ladder step 3 — Derive the representation condition
+
+Derive one stride/alias, buffer, autodiff, dtype, or numerical-stability
+condition and state what the shape alone does not imply.
+
+### Ladder step 4 — Debug a tempting result
+
+Given a no-copy claim, early buffer reuse, stale gradient, or one-run speedup,
+predict the smallest probe that could falsify it and inspect the code path.
+
+### Ladder step 5 — Design a bounded measurement
+
+Design a CPU/device comparison with versions, backend, dtype, warm-up,
+repetitions, raw records, semantic-equivalence check, and an explicit
+non-claim about performance.
+
+### Ladder step 6 — Transfer and defend
+
+Change one premise—layout, device, stream, seed, backend, or workload—and
+defend the narrower execution/transfer claim in the dossier and TA chat.
+
 ## Confidence-aware diagnostic and spaced review
 
 For each question, choose an answer and record confidence *before* reading the
@@ -1483,6 +1493,22 @@ Which statement is strongest after one timed run?
 **Answer: C.** Misconception repaired: a measurement is an observation, not a
 mechanism or recommendation.
 </details>
+
+### Distractor repair cards (per option)
+
+| Question | Distractor routes (A/B/C/D) | Repair route | Smallest counterexample | Transfer prompt |
+| --- | --- | --- | --- | --- |
+| Q1 | A: correct output proves no copy; B: shape/dtype are sufficient; C: exporter/consumer/layout/lifetime evidence; D: speed proves handoff | Read the buffer contract, strides, ownership, and observed conversion | Equal-shaped input is copied because contiguity is required | Change writability and identify the new contract field |
+| Q2 | A: completed kernel; B: host submission interval; C: end-to-end throughput; D: device-to-host transfer | Add the documented completion/synchronization event | An enqueue returns before device work starts | Time a synchronous version and state the narrower comparison |
+| Q3 | A: equal shape means equal strides/cost; B: independent mutation; C: more layout/alias/dtype evidence; D: suitable for every kernel | Inspect layout, ownership, backend, and numerical requirements | A transpose shares storage while retaining the same shape | Replace the view with a copy and predict alias evidence |
+| Q4 | A: semantic failure; B: correctness may hold while resources differ; C: GPU always fixes it; D: profiler gives one cause | Separate semantic equivalence from allocation and peak-memory evidence | Broadcasting materializes a temporary larger than available memory | Change dtype and predict the memory bound |
+| Q5 | A: submission return; B: deleted Python reference; C: documented last consumer; D: parallel call | Trace the last-use/ownership event before pool reuse | A device consumer reads a buffer after it has been recycled | Move the consumer to another stream and name the synchronization |
+| Q6 | A: global model correctness; B: bounded derivative probe; C: every device agrees; D: data has no stale values | Bound the objective, point, dtype, step, tolerance, and implementation | A local gradient check passes while the data label is stale | Perturb one input and state what the probe can still show |
+| Q7 | A: seed fixes all variation; B: environment record plus bounded output claim; C: screenshot; D: faster implementation | Record runtime, library, device, driver, order, and determinism settings | Same seed with a different backend changes reduction order | Change dtype and revise reproducibility wording |
+| Q8 | A: universal speedup; B: bottleneck proof; C: one protocol-scoped observation; D: compiler chose best algorithm | Repeat, retain raw records, check semantic equivalence, and compare alternatives | A warm-cache run hides transfer cost and reverses the recommendation | Add a cold-start condition and predict the new trace |
+
+The table is a repair route, not a grading key: a learner can ask for one
+hint, inspect the counterexample, and then answer the transfer prompt.
 
 ### Compact repair key
 
@@ -1659,17 +1685,26 @@ versions, access dates, licenses, and exact environment scope.
 | [JAX asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html), [JAX autodiff](https://docs.jax.dev/en/latest/automatic-differentiation.html), [PyTorch CUDA semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html), [PyTorch autograd mechanics](https://docs.pytorch.org/docs/stable/notes/autograd.html) | Sessions 2, 4, and 5: readiness boundaries, framework-specific execution, and autodiff scope. | Apache-2.0/BSD-3-Clause projects; link-only/original paraphrase. Pin framework/backend/runtime/device versions. |
 | [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Session 6: bounded reproducibility/environment claims. | BSD-3-Clause; link-only. A seed is not cross-platform identity. |
 
-For primary-source links, source rationale, access/reuse cautions, and the
-claim/counterexample map, read the adjacent
-[M32 candidate source ledger](../source-maps/module32_systems_languages_scientific_python_accelerators.md).
+For the fuller primary-source ledger, source rationale, access/reuse cautions,
+and planned claim/counterexample map, read the instructor-facing
+[M32 source research dossier](../source-maps/module32_systems_languages_scientific_python_accelerators.md).
 
 ## Candidate release boundary
 
-Before this candidate can move into the released portal learner route, it needs
-an approved canonical source-map binding, structured delivery/contract review,
-original bounded reference fixtures or a safe equivalent interaction,
-diagnostics/review records, accessibility and teaching-flow review, exact
-CI/deployment provenance, and human approval. Hardware, compiler, framework,
-and benchmark claims also need their own versioned evidence records. Until then
-this remains a hidden review candidate—not a published module, navigable route,
-deployment claim, oral-defense result, or learner mastery claim.
+Before this draft can move into the released portal learner route, it needs an approved canonical
+source-map binding, structured delivery/contract review, original bounded
+reference fixtures or a safe equivalent interaction, diagnostics/review
+records, accessibility and teaching-flow review, exact CI/deployment
+provenance, and human approval. Hardware, compiler, framework, and benchmark
+claims also need their own versioned evidence records. Until then this remains
+an authoring artifact—not a published module, navigable route, deployment
+claim, oral-defense result, or learner mastery claim.
+
+## Candidate release boundary
+
+Before this candidate can move into the released portal learner route, it still
+needs the versioned review-ready delivery map, complete source/claim and
+accessibility review, a bounded interaction or equivalent activity,
+diagnostic/review evidence, exact CI and deployment provenance, and human
+approval. Until then it remains hidden and authoring-only; it is not a
+published module, live-chat event, Notion record, or learner-mastery claim.
