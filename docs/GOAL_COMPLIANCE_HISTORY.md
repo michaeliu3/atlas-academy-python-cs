@@ -210,3 +210,13 @@ Its Draft Course CI run [30971088254](https://github.com/michaeliu3/atlas-academ
 was rejected before runner allocation because GitHub reported failed recent
 payments or an exceeded spending limit. Downstream jobs were skipped. This is
 external billing state, not a passing gate, a code failure, or learner evidence.
+
+## Dated current-head draft content evidence — 2026-08-05
+
+The additive branch head [`fd63dfb`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/fd63dfb0f9d2554b7fefb3c1b0eebaa661e4f101)
+received Draft Course CI run [30975709181](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30975709181).
+The classifier completed successfully and the draft content check passed its
+91-test content suite; portal, apparatus, browser, and Python teaching-model
+jobs were intentionally skipped by draft cost control. This updates the
+current draft snapshot only. It is not a full-gate result, module promotion,
+deployment, human review, Notion/voice evidence, or learner outcome.

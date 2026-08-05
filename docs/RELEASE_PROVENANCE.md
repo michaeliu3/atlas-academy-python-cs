@@ -411,3 +411,16 @@ The later draft
 attempts [`30971257663`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971257663)
 and [`30971329351`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30971329351)
 were blocked by the same billing/spending-limit state before runner allocation.
+
+## Current draft content checkpoint (2026-08-05)
+
+The additive review branch now resolves to
+[`fd63dfb`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/fd63dfb0f9d2554b7fefb3c1b0eebaa661e4f101).
+Draft Course CI run
+[`30975709181`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30975709181)
+completed successfully: changed-file classification passed and the draft
+content check passed its 91-test content suite. Portal quality, apparatus,
+browser accessibility, and Python teaching-model jobs were skipped by the
+intentional draft cost-control path. This is current source-head and bounded
+content evidence only; it is not a full Course CI gate, release, deployment,
+human review, module promotion, or learner evidence.

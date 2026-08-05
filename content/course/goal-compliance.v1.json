@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-08-04",
+  "asOf": "2026-08-05",
   "outputPath": "docs/GOAL_COMPLIANCE_MATRIX.md",
   "historyPath": "docs/GOAL_COMPLIANCE_HISTORY.md",
   "truth": {
@@ -14,13 +14,13 @@
     },
     "currentDraftContent": {
       "state": "success",
-      "commit": "5887978ea035788aee0ea55dc258eaaf49f6eafa",
-      "date": "2026-08-04",
-      "runId": "30942073857",
-      "pass": 83,
+      "commit": "fd63dfb0f9d2554b7fefb3c1b0eebaa661e4f101",
+      "date": "2026-08-05",
+      "runId": "30975709181",
+      "pass": 91,
       "fail": 0,
-      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30942073857",
-      "note": "Latest observed Draft content evidence for the preceding material head; source-link shape/freshness checks and the 83-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30975709181",
+      "note": "Latest observed Draft content evidence for the current additive head; source-link shape/freshness checks and the 91-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
     },
     "lastFullGateApparatus": {
       "state": "success",
