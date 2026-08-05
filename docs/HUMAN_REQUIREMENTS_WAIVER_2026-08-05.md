@@ -3,11 +3,12 @@
 ## Authority and scope
 
 The learner explicitly instructed the Atlas Academy project to waive all
-human-only requirements for now. This is a temporary scope decision, not
-evidence that a human review, learner session, oral defense, voice rendering,
-or Notion write occurred.
+human-only requirements for the build phase. This is a scope decision while
+the course, chat roles, recording workflow, and evidence structure are being
+finished—not evidence that a human review, learner session, oral defense,
+voice rendering, or Notion write occurred.
 
-## Deferred human-only requirements
+## Waived human-only requirements
 
 - qualified human source, reuse, pedagogical, visual, and assistive-technology
   review;
@@ -31,5 +32,6 @@ or Notion write occurred.
 
 The compliance matrix must keep waived items open or partial rather than
 converting them to complete. The final audit must continue to distinguish
-deferred, uncertain, automated, and learner-produced evidence. The waiver can
-be revisited later without rewriting Git history.
+waived, deferred, uncertain, automated, and learner-produced evidence. Once
+the course is ready to study, the learner can exercise these workflows in the
+designated chats and add real evidence without rewriting Git history.

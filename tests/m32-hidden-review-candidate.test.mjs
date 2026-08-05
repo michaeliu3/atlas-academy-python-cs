@@ -91,8 +91,8 @@ test("the frozen M32 review candidate retains the study-ready structural spine",
 
   const visualBlocks = scanMermaidBlocks(candidate, { sourcePath: reviewCandidatePath });
   const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
-  assert.equal(visualBlocks.length, 2);
-  assert.equal(visualReport.summary.completeBlocks, 2);
+  assert.equal(visualBlocks.length, 3);
+  assert.equal(visualReport.summary.completeBlocks, 3);
   assert.ok(visualBlocks.every(({ metadata }) => metadata?.id.startsWith("m32-")));
   assert.ok(visualBlocks.every(({ metadata }) => metadata?.alternative.length >= 40));
 });

@@ -122,7 +122,7 @@
       "criterionId": "confidence-diagnostic-misconceptions",
       "claim": "The candidate contains confidence-before-reveal multiple-choice diagnostics with repair explanations for risk, generalization, theorem, numerical-system, monitoring, and authority misconceptions.",
       "inputs": [
-        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "locator": "9-confidence-aware-diagnostic-and-spaced-review" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "locator": "prediction-before-reveal" },
         { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md", "locator": "claim-assumption-derivation-and-counterexample-ledger" }
       ],
@@ -133,7 +133,7 @@
       "criterionId": "retrieval-and-spaced-review",
       "claim": "The hidden candidate specifies learner-controlled retrieval and changed-premise review for its reliable-learning invariant.",
       "inputs": [
-        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "locator": "9-confidence-aware-diagnostic-and-spaced-review" }
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" }
       ],
       "limitations": ["A proposed schedule is not an operational review queue, learner record, retention measure, or notification system."]
     },

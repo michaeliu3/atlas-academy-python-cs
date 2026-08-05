@@ -225,7 +225,7 @@ test("M31's hidden review candidate renders its authored diagram alternatives wi
     sourcePath: "content/modules/31_optimization_information.md",
   });
 
-  assert.equal(blocks.length, 2);
+  assert.equal(blocks.length, 3);
   for (const [index, block] of blocks.entries()) {
     assert.ok(block.metadata?.id?.startsWith("m31-"));
     assert.ok(block.metadata?.title);

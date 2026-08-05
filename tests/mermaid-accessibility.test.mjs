@@ -275,8 +275,8 @@ test("Module 10 is a complete graph-algorithms retrofit with scoped visual expla
   });
   const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-  assert.equal(blocks.length, 10);
-  assert.equal(report.summary.completeBlocks, 10);
+  assert.equal(blocks.length, 11);
+  assert.equal(report.summary.completeBlocks, 11);
   assert.equal(report.summary.incompleteBlocks, 0);
   assert.ok(blocks.every(({ metadata }) => metadata?.id.startsWith("m10-")));
   assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 40));

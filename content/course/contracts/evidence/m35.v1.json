@@ -123,7 +123,7 @@
       "criterionId": "confidence-diagnostic-misconceptions",
       "claim": "The candidate contains confidence-before-reveal multiple-choice diagnostics with repair explanations for representation, baseline, split, metric, optimization, and reliability misconceptions.",
       "inputs": [
-        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md", "locator": "9-confidence-aware-diagnostic-and-spaced-review" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" },
         { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md", "locator": "prediction-before-reveal" },
         { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md", "locator": "misconception-and-repair-map" }
       ],
@@ -134,7 +134,7 @@
       "criterionId": "retrieval-and-spaced-review",
       "claim": "The hidden candidate specifies learner-controlled retrieval and changed-premise review for its ML-evidence invariant.",
       "inputs": [
-        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md", "locator": "9-confidence-aware-diagnostic-and-spaced-review" }
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" }
       ],
       "limitations": ["A proposed schedule is not an operational review queue, learner record, retention measure, or notification system."]
     },

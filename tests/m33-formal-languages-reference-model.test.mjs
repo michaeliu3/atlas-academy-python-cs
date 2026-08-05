@@ -285,8 +285,8 @@ test("the M33 authoring diagram keeps its declared prose alternative", async () 
   const blocks = scanMermaidBlocks(workbook, { sourcePath });
   const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-  assert.equal(blocks.length, 1);
-  assert.equal(report.summary.completeBlocks, 1);
+  assert.equal(blocks.length, 2);
+  assert.equal(report.summary.completeBlocks, 2);
   assert.deepEqual(blocks[0].metadata, {
     id: "m33-formal-claim-route",
     title: "The M33 route from strings to bounded conclusions",

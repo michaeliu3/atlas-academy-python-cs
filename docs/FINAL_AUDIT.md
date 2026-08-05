@@ -13,7 +13,7 @@ completion or university-equivalence claim.
 
 **The Atlas goal must remain open.** The repository has strong structural and
 content evidence. The learner has explicitly waived human-only requirements for
-this phase; those items are recorded as deferred, not complete. Private-
+this build phase; those items are recorded as waived, not complete. Private-
 deployment behavior and a current non-draft full gate remain open.
 
 Evidence is classified conservatively:
@@ -22,6 +22,9 @@ Evidence is classified conservatively:
   artifact is present and its focused check passes.
 - **Partial** means meaningful evidence exists, but a required human,
   platform, deployment, or release boundary remains open.
+- **Waived** means the learner explicitly excluded a human-only observation
+  from this build phase; it is not evidence of completion and can be exercised
+  later in the designated learning chats.
 - **Deferred** means intentionally outside the current portal/private boundary;
   it is not silently counted as achieved.
 - **Uncertain** means the repository cannot infer the result and must not claim
@@ -153,14 +156,18 @@ a security-clean claim.
   equivalence to an institution.
 - A separate studio for every module when a bounded Codex conversation or
   read-only artifact is the declared interaction boundary.
-- The learner-authorized [human-requirements phase waiver](HUMAN_REQUIREMENTS_WAIVER_2026-08-05.md):
-  human source/reuse/pedagogical/visual review, learner-led chat sessions and
-  oral defenses, voice/rendering observation, and consent-gated Notion writes
-  are deferred for now and must not be counted as complete.
+
+## Explicitly waived for the build phase
+
+The learner-authorized [human-requirements phase waiver](HUMAN_REQUIREMENTS_WAIVER_2026-08-05.md)
+excludes qualified source/reuse/pedagogical/visual review, learner-led chat
+sessions and oral defenses, voice/rendering observation, and consent-gated
+Notion writes from this build's evidence. The course structure is being built
+so those interactions can begin later; no synthetic human evidence is created.
 
 ## Uncertain or unverified
 
-- Whether the deferred designated voice chats render equations/code clearly at
+- Whether the waived designated voice chats render equations/code clearly at
   the platform's highest available quality setting, whether a learner-approved
   `records on` session writes exactly one concise Notion note, and whether human
   source/license, visual, assistive-technology, and pedagogical review would
@@ -182,11 +189,11 @@ a security-clean claim.
 ## Required closure sequence
 
 1. Keep the waived human review, learner sessions, oral defenses, and Notion
-   writes explicitly deferred; do not promote or claim evidence for them.
+   writes explicitly waived; do not promote or claim evidence for them.
 2. Verify the exact private deployment headers, dependency-risk disposition,
    accessibility review, and bounded OS/process claims.
 3. Request one normal non-draft full gate at the reviewed source ref and record
    its exact commit, run, jobs, limitations, and deployment state.
 4. Regenerate this audit and the compliance matrix, then close the goal only if
-   every requirement has evidence or an explicit, accepted deferral and no
-   required work remains.
+   every non-waived requirement has evidence, every waiver/deferral is explicit,
+   and no required machine-verifiable work remains.

@@ -35,7 +35,7 @@ const authoringCandidates = [
     substituteLocator: "the-connected-teaching-argument",
     reviewSelectorPath: "content/course/contracts/review-candidates/m33.v1.json",
     expectedFrozenOutputCount: 6,
-    expectedFrozenMermaidCount: 1,
+    expectedFrozenMermaidCount: 2,
     run: runM33AuthoringCandidateEvidencePreflight,
   },
   {
@@ -46,7 +46,7 @@ const authoringCandidates = [
     substituteLocator: "the-connected-teaching-argument",
     reviewSelectorPath: "content/course/contracts/review-candidates/m34.v1.json",
     expectedFrozenOutputCount: 6,
-    expectedFrozenMermaidCount: 1,
+    expectedFrozenMermaidCount: 2,
     run: runM34AuthoringCandidateEvidencePreflight,
   },
   {
@@ -57,7 +57,7 @@ const authoringCandidates = [
     substituteLocator: "the-connected-teaching-argument",
     reviewSelectorPath: "content/course/contracts/review-candidates/m35.v1.json",
     expectedFrozenOutputCount: 8,
-    expectedFrozenMermaidCount: 2,
+    expectedFrozenMermaidCount: 3,
     run: runM35AuthoringCandidateEvidencePreflight,
   },
   {
@@ -68,7 +68,7 @@ const authoringCandidates = [
     substituteLocator: "the-connected-teaching-argument",
     reviewSelectorPath: "content/course/contracts/review-candidates/m36.v1.json",
     expectedFrozenOutputCount: 8,
-    expectedFrozenMermaidCount: 2,
+    expectedFrozenMermaidCount: 3,
     run: runM36AuthoringCandidateEvidencePreflight,
   },
 ];

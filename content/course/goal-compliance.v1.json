@@ -180,7 +180,7 @@
       "requirement": "The compact matrix and final audit agree with route, materials, chats, Notion, calibration, and full-gate evidence.",
       "state": "partial",
       "evidence": "docs/FINAL_AUDIT.md; docs/HUMAN_REQUIREMENTS_WAIVER_2026-08-05.md; docs/GOAL_COMPLIANCE_MATRIX.md; docs/GOAL_COMPLIANCE_HISTORY.md; scripts/generate-goal-compliance.mjs; tests/release-final-audit.test.mjs",
-      "openItem": "The current audit reconciles complete, deferred, and uncertain evidence; human-only requirements are explicitly deferred under the learner-authorized waiver, while platform, deployment, dependency, and non-draft release gates remain open."
+      "openItem": "The current audit reconciles complete, waived, deferred, and uncertain evidence; human-only requirements are explicitly waived for the build phase under the learner-authorized waiver, while platform, deployment, dependency, and non-draft release gates remain open."
     }
   ]
 }

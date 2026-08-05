@@ -5,7 +5,7 @@ import test from "node:test";
 const packs = [
   {
     path: "content/modules/11_algorithm_design_paradigms.md",
-    expectedMarkers: 8,
+    expectedMarkers: 9,
     expectedAnswerGates: 0,
     expectedPredictionGates: 2,
   },
