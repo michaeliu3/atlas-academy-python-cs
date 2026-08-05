@@ -378,3 +378,16 @@ gate results are not labelled as current-head verification. Neither commit
 has a hosted Actions rerun, private deployment verification, release record,
 or learner-outcome evidence. No history rewrite, force-push, amend, rebase, or
 squash was used.
+
+## Review branch published for external review (2026-08-04)
+
+The additive continuation was published with an ordinary fast-forward push to
+the review branch
+[`codex/atlas-history-linearization`](https://github.com/michaeliu3/atlas-academy-python-cs/tree/codex/atlas-history-linearization)
+at [`aeffb37`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/aeffb37005cb6e1d9a5147ea70db34541d13ae62).
+The branch is 19 commits ahead of the local `github/agent/60-day-route` base,
+and its exact remote ref was read back after the push. The feature-branch push
+matched the workflow's `main`/pull-request trigger boundary, so no hosted Course
+CI run was created for this push. This preserves the complete additive commit
+history and does not establish a current-head gate, deployment, release, or
+learner evidence.
