@@ -17,6 +17,8 @@ actually published.
 - Corrected the dependency-risk register's current review-branch label from
   superseded PR #21 to draft PR #22 and aligned its top-level examination date
   with the authenticated 2026-08-05 refresh; alert dispositions are unchanged.
+- Reconciled `docs/FINAL_AUDIT.md` with the latest content-bearing checkpoint
+  (`a6add42` / `30986257553`) and subsequent documentation-only Draft runs.
 - Clarified the generated truth header's Draft entry as the latest
   **content-bearing** checkpoint and recorded head `80f9ff6` / run `30985254418`;
   later documentation-only commits remain separate provenance, not implied

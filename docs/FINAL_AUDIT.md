@@ -63,15 +63,20 @@ present when the matrix grows.
   intentional M25/M26 prerequisite-map ambiguities, zero missing).
 - M31–M36 planned source/session/claim markers, stable links, access dates,
   license/reuse boundaries, and claim linkage are structurally bound.
+- The six canonical M31–M36 authoring workbooks now each include a bounded
+  visual map, visible prose alternative, and code/native code-reading card;
+  the focused pedagogy-density guard and hidden-candidate parity checks pass.
 - The current source tree is clean, additive, and reachable through draft PR #22;
   no history rewrite was used.
 - The repaired release-input ledger and generated matrix pass local checks. The
-  latest content-bearing snapshot [`49bda34`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/49bda3468e9dbd14ec934c5e60ac0b11b30d3e39)
+  latest content-bearing snapshot [`a6add42`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/a6add42c0c135ec7e664af3241259d1df83f03f6)
   passed the draft content path in Draft Course CI run
-  [30983252123](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30983252123);
-  the subsequent documentation-only provenance head [`22f7e38`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/22f7e38b86815f55eb4da4f3ee165ba9c27d77a7)
-  also passed its draft content path in run
-  [30984252292](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30984252292).
+  [30986257553](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986257553);
+  subsequent truth-ledger and dependency-register heads [`81e3e8a`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/81e3e8ae385677905ba8734f7bf4f17b83a55a6c)
+  and [`439c110`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/439c1107f3df4eb743519fcccf32cbbd91f0daa4)
+  also passed their Draft content paths in runs
+  [30986409371](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986409371)
+  and [30986600642](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30986600642).
   These remain draft content evidence, not a full gate.
 
 ## Intentionally deferred by design
