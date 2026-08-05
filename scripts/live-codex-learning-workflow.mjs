@@ -74,6 +74,8 @@ const requiredWhiteboardRules = [
   "prose or ASCII fallback for math, code, and diagrams",
   "no speech-only or visual-only explanation",
 ];
+const requiredLiveQualityPreference =
+  "If the exact live chat offers a setting labelled GPT Live High, select or request it for voice; otherwise prefer the highest available quality/reasoning setting. The learner and platform own that setting; Atlas does not control it.";
 const requiredExclusions = [
   "raw voice recordings",
   "full chat transcripts",
@@ -295,6 +297,9 @@ export async function validateLiveCodexLearningWorkflow(
     errors.push("Live Codex workflow whiteboardProtocol must be an object.");
   } else {
     requiredStringArray(whiteboardProtocol.required, "Live Codex workflow whiteboardProtocol.required", requiredWhiteboardRules, errors);
+    if (whiteboardProtocol.liveQualityPreference !== requiredLiveQualityPreference) {
+      errors.push("Live Codex workflow must preserve the platform-owned GPT Live High quality preference.");
+    }
   }
 
   const privacyBoundary = isPlainObject(workflow.privacyBoundary) ? workflow.privacyBoundary : null;
@@ -327,6 +332,7 @@ export async function validateLiveCodexLearningWorkflow(
     delivery,
     notionSessionNotes,
     roles: workflow.roles,
+    whiteboardProtocol,
     privacyBoundary,
     learnerControls: workflow.learnerControls,
     releaseInputPaths: [liveCodexLearningWorkflowPath(siteRoot), guidePath],

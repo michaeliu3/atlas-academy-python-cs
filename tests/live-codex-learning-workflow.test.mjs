@@ -55,6 +55,8 @@ test("the live Codex workflow keeps portal isolation while authorizing designate
   assert.deepEqual(report.roles.map(({ id }) => id), ["teaching-assistant", "study-partner"]);
   assert.match(report.roles[0].liveResponsibility, /oral defense/u);
   assert.match(report.roles[1].liveResponsibility, /non-grading/u);
+  assert.match(report.whiteboardProtocol.liveQualityPreference, /GPT Live High/u);
+  assert.match(report.whiteboardProtocol.liveQualityPreference, /Atlas does not control it/u);
   assert.ok(report.privacyBoundary.excludedFromRecords.includes("raw voice recordings"));
   assert.ok(report.learnerControls.includes("pause records"));
   assert.ok(report.learnerControls.includes("end session"));
@@ -128,6 +130,13 @@ test("the live Codex workflow fails closed if note authority, cadence, controls,
   await assert.rejects(
     validateLiveCodexLearningWorkflow(unsafePortablePrompt),
     /portableStartupMode must remain keep-local/u,
+  );
+
+  const qualityControlRegression = structuredClone(workflow);
+  qualityControlRegression.whiteboardProtocol.liveQualityPreference = "Atlas controls the voice quality setting.";
+  await assert.rejects(
+    validateLiveCodexLearningWorkflow(qualityControlRegression),
+    /platform-owned GPT Live High quality preference/u,
   );
 
   const manualModeRegression = structuredClone(workflow);

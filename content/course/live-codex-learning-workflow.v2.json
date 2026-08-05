@@ -73,6 +73,7 @@
     }
   ],
   "whiteboardProtocol": {
+    "liveQualityPreference": "If the exact live chat offers a setting labelled GPT Live High, select or request it for voice; otherwise prefer the highest available quality/reasoning setting. The learner and platform own that setting; Atlas does not control it.",
     "required": [
       "supported display math with defined symbols",
       "language-labelled fenced code with explicit state traces",
