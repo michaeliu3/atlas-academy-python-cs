@@ -86,6 +86,11 @@ present when the matrix grows.
   jobs skipped because PR #22 remains draft. This verifies policy and bounded
   Draft validation only; it does not establish a full gate, voice/rendering
   behavior, Notion write, deployment, or human/learner evidence.
+- On 2026-08-05, the two existing designated realtime chats received refreshed
+  role bindings and each returned a concise acknowledgement. The record is
+  limited to role delivery and preserves the records-off, whiteboard,
+  platform-owned GPT Live High, and Notion fallback boundaries; it is not a
+  substantive module session or evidence of live rendering or a saved note.
 
 ## Intentionally deferred by design
 

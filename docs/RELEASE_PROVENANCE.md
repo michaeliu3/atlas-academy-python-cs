@@ -600,3 +600,14 @@ passed the changed-file classifier and Draft content feedback; expensive jobs
 were skipped under the draft cost-control policy. This records bounded source
 and test evidence only, not human review, learner delivery, deployment,
 publication, or release evidence.
+
+## Designated-chat role-binding checkpoint (2026-08-05)
+
+Additive commit [`96a4427`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/96a4427571b9da0b967803d2caf2635d6c619e4b)
+recorded direct delivery and concise acknowledgements from the existing
+Teaching Assistant and Study Partner chats. Draft Course CI run
+[`30989313009`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30989313009)
+passed the changed-file classifier and Draft content feedback; expensive jobs
+were skipped under the draft cost-control policy. This records role-delivery
+and bounded source evidence only, not a substantive learner session, live
+rendering, Notion write, deployment, human review, publication, or release.

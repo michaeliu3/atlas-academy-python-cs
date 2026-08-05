@@ -386,6 +386,19 @@ regression evidence only; M32 remains authoring-only and the human review,
 learner delivery, deployment, release, and non-draft full-gate boundaries stay
 open.
 
+## Dated designated-chat role-binding checkpoint — 2026-08-05
+
+Additive commit [`96a4427`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/96a4427571b9da0b967803d2caf2635d6c619e4b)
+recorded the refreshed role binding delivered to the existing Teaching
+Assistant and Study Partner realtime threads. A direct Codex-app readback
+returned a concise acknowledgement from each chat, preserving records-off,
+non-grading role boundaries, whiteboard formatting, the platform-owned GPT Live
+High preference, and the ready-to-paste Notion fallback. Draft Course CI run
+[`30989313009`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30989313009)
+passed the changed-file classifier and Draft content feedback. This confirms
+role delivery only; substantive module teaching, voice/rendering, records-on
+Notion behavior, human review, deployment, and release gates remain open.
+
 ## Dated calibration-snapshot and draft-content checkpoint — 2026-08-05
 
 Commit [`6e0a02c`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/6e0a02ca71d77bce7043594555f99800e8a9ee2d)

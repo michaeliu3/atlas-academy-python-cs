@@ -7,6 +7,9 @@ actually published.
 
 ## Unreleased
 
+- Refreshed the role binding in the two existing designated realtime chats and
+  recorded their concise acknowledgements; this confirms role delivery only,
+  not a substantive module session, live rendering, or Notion write.
 - Added a focused M32 traceability guard for the required native boundary,
   Python, autodiff, GPU, profiler, mixed-precision, and distributed-data-
   parallel reading scope across the canonical workbook and hidden candidate;
