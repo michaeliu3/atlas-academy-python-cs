@@ -174,6 +174,10 @@ a security-clean claim.
 - A successful current non-draft full Course CI gate at the final reviewed ref.
 - Learner mastery or retention; no repository artifact substitutes for the
   learner's own explanations, debugging traces, dossiers, and oral defense.
+- A bounded local `scripts/run-course-tests.mjs --suite=apparatus` invocation
+  at the current head exceeded its 120-second shell limit and was terminated;
+  no local apparatus pass is counted. The latest hosted evidence remains the
+  Draft content path only.
 
 ## Required closure sequence
 

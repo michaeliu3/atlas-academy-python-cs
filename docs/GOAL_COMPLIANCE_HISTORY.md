@@ -592,3 +592,11 @@ also passed the 96-test Draft content path in run
 The current audit/provenance head [`8ec003b`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8ec003bb9528e0c6be340723a4ba36c9aea5440b)
 passed the same 96-test Draft content path in run
 [`30994493344`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994493344).
+
+## Bounded local apparatus attempt — 2026-08-05
+
+The current clean head was given one bounded local
+`scripts/run-course-tests.mjs --suite=apparatus` invocation. It exceeded the
+120-second shell limit and was terminated with its identified Node worker tree;
+no pass or failure is inferred. This reinforces that the current hosted record
+is Draft content evidence, not a current apparatus/full-gate result.
