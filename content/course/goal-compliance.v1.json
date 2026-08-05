@@ -184,9 +184,9 @@
     {
       "id": "actions-cost",
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
-      "state": "partial",
+      "state": "complete",
       "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
-      "openItem": "The live 100-run readback is recorded (51 success, 24 failure, 16 cancelled, 9 skipped) and confirms synchronize-driven volume. Current review-ready PR #22 run 31009811465 kept every required branch-protection context green after the pull-request head-SHA correction; the workflow/test change correctly ran the portal, apparatus, Python, and browser checks. Provenance-only successor run 31009410835 exposed the earlier synthetic-merge-ref fan-out; corrected successor run 31010843631 then kept every required context green while Node apparatus, both Python versions, and Chromium took their explicit lightweight paths. Superseded-run cancellation remains directly observed. Release/deployment evidence is a separate requirement."
+      "openItem": "The live 100-run readback and subsequent workflow readbacks identify repeated synchronize-driven volume, and the corrected classifier, portal-build reuse, draft/provenance-only lightweight paths, bounded worker cancellation, and superseded-run handling preserve every required branch-protection context. The last complete full gate remains 208d296/run 31009811465; release/deployment evidence is tracked separately and does not weaken this Actions-cost finding."
     },
     {
       "id": "history-provenance",

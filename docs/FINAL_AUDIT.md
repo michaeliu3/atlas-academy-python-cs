@@ -54,7 +54,7 @@ present when the matrix grows.
 | notion-privacy | partial | A 2026-08-05 read-only Notion search/fetch confirmed the dashboard, lecture/module notebooks, completion record, Live Codex Session Records, project portfolio, TA misconceptions, Study Partner journal, and problem-solving lab templates; no learner-approved records-on write/pause/end/delete observation is recorded. |
 | accessibility | partial | 246/246 Mermaid alternatives and prior Chromium/axe evidence pass; representative assistive-technology and visual review remain open. |
 | safety-privacy-build | partial | Local codec, sanitization, Worker-header wiring, deterministic input, typecheck, and dependency triage exist; deployment headers and alerts remain unresolved. |
-| actions-cost | partial | Path-aware gating, superseded-run cancellation, and current required-check preservation are directly observed in the latest full gate; release/deployment evidence remains separate. |
+| actions-cost | complete | Path-aware gating, superseded-run cancellation, portal-build reuse, and current required-check preservation are directly observed in the recorded full and successor gates. Release/deployment evidence is a separate requirement. |
 | history-provenance | partial | Additive PR #22 history, release-input hashes, CI records, and failure records are retained through current reviewed ref `208d296`; exact private deployment evidence remains absent. |
 | final-audit | partial | This auditable reconciliation now exists; it cannot be closed while the open human/platform/deployment/release boundaries remain. |
 
@@ -78,6 +78,12 @@ present when the matrix grows.
   three 401, and 19 403 responses. This is reachability evidence only; it
   does not close citation, institutional-alignment, source-permission, human,
   or learner-mastery boundaries.
+- The Actions-cost requirement is complete at the workflow boundary: the
+  recorded audit identifies repeated synchronize-driven volume, and the
+  change-aware classifier, draft/provenance-only lightweight paths,
+  portal-build reuse, superseded-run cancellation, and bounded worker cleanup
+  preserve all required branch-protection checks. This does not claim a
+  deployment or security release.
 - A 2026-08-05 read-only Notion audit confirmed the connected evidence
   structure and the records-off checklist across the dashboard, lecture notes,
   module notebooks, completion record, live-session record page, project
