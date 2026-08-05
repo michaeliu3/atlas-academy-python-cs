@@ -67,8 +67,8 @@
       "id": "canonical-route-truth",
       "requirement": "One graph separates academic prerequisites, navigation, availability, and release state.",
       "state": "partial",
-      "evidence": "content/course/course-graph.v2.json; scripts/course-graph.mjs; tests/course-graph.test.mjs",
-      "openItem": "Keep every dashboard, route, manifest, and status surface derived from the graph."
+      "evidence": "content/course/course-graph.v2.json; scripts/course-graph.mjs; tests/canonical-projection-integrity.test.mjs; tests/course-graph.test.mjs; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
+      "openItem": "Manifest, route, and generated-status parity now pass structural checks; complete representative rendered/dashboard review and retain the generated-input guard."
     },
     {
       "id": "module-contract",

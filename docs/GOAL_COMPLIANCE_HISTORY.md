@@ -230,3 +230,12 @@ The classifier completed successfully and the draft content check passed its
 jobs were intentionally skipped by draft cost control. This updates the
 current draft snapshot only. It is not a full-gate result, module promotion,
 deployment, human review, Notion/voice evidence, or learner outcome.
+
+## Dated canonical projection parity audit — 2026-08-05
+
+The new `tests/canonical-projection-integrity.test.mjs` check compares the
+reader manifest's state, route, prerequisite, source-map, and navigation fields
+with `projectReaderModules(courseGraph)`. It passed together with the graph and
+status suites, and confirms that hidden M31–M36 arc data is retained in the
+canonical graph but not exposed in the reader manifest. Structural parity is
+now recorded; representative rendered/dashboard review remains open.

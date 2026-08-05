@@ -434,3 +434,13 @@ verifies graph-backed anchors, source modules, S1–S6 session bounds, and the
 separation of reader, preview, authoring-only, and designated private-chat
 delivery. This is local structural evidence only; it does not establish human
 calibration, accessibility review, release, deployment, or learner mastery.
+
+## Canonical projection-parity checkpoint (2026-08-05)
+
+The additive source tree now includes
+`tests/canonical-projection-integrity.test.mjs`. It passed with the graph and
+status suites and compares the reader manifest's route, prerequisite, state,
+source-map, and navigation fields against the canonical graph projection. It
+also preserves the boundary that hidden M31–M36 arc data remains in the graph
+but is absent from the reader manifest. This is local structural evidence, not
+rendered human review, deployment, release, or learner evidence.
