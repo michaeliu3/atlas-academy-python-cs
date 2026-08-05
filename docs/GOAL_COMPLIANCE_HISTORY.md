@@ -256,10 +256,13 @@ remain open.
 
 ## Dated legacy contract evidence clarification — 2026-08-05
 
-The generated matrix now cites the checked-in legacy contract audit and its
+The additive head [`8065d40`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8065d40aeb6fbf1cafedcd3f15a240f689ff2b2d) now cites the checked-in legacy contract audit and its
 candidate-preflight tests. The audit resolves all 480 M1–M30 structural
 criteria: 478 pointers are present, the only two ambiguous entries are the
 intentional M25/M26 prerequisite-map boundaries, and no criterion is missing.
 This improves the structural evidence boundary; every legacy entry remains
 `legacy-baseline`/non-verified until module-specific human review, exact
-source/CI/deployment provenance, and a recorded promotion decision exist.
+source/CI/deployment provenance, and a recorded promotion decision exist. Draft
+Course CI run [30977716814](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30977716814)
+passed its content path with the expensive portal, apparatus, browser, and
+teaching-model jobs intentionally skipped.

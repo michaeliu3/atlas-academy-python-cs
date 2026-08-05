@@ -459,9 +459,13 @@ human review, or learner outcome.
 
 ## Legacy-contract structural checkpoint (2026-08-05)
 
-The compliance matrix now records the checked-in M1–M30 contract audit and
-candidate-preflight evidence. Its deterministic report resolves 480 structural
+Commit [`8065d40`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/8065d40aeb6fbf1cafedcd3f15a240f689ff2b2d)
+records the checked-in M1–M30 contract audit and candidate-preflight evidence.
+Its deterministic report resolves 480 structural
 criteria (478 pointer-present, 2 intentional M25/M26 prerequisite-map
 ambiguities, 0 missing). This is not a module promotion or verification: all 30
 legacy entries remain non-verified pending module-specific human review,
-source/CI/deployment provenance, and an explicit promotion decision.
+source/CI/deployment provenance, and an explicit promotion decision. Draft Course
+CI run [`30977716814`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30977716814)
+passed the content path; the remaining expensive jobs were skipped by draft
+cost control.
