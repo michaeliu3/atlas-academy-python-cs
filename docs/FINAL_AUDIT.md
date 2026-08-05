@@ -144,9 +144,9 @@ present when the matrix grows.
   [`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465):
   portal quality, 423/423 Node apparatus tests, Python 3.12 and 3.14 teaching
   models, and 63/63 Chromium/axe routes all passed. The current review-ready
-  successor is [`b295f0f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b295f0f353c5227143311448544aa645ebf7942c),
+  successor is [`9242f79`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/9242f79d53b1ec5d4b49e0ee6b113624b2435cec),
   whose required contexts succeeded in run
-  [`31011177833`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31011177833)
+  [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860)
   through the explicit lightweight path for unchanged apparatus, Python, and
   browser suites. This is current provenance, not a second full execution gate;
   neither run closes deployment, dependency, waived human-observation,
@@ -224,7 +224,7 @@ so those interactions can begin later; no synthetic human evidence is created.
 3. Preserve the successful non-draft gate's exact commit, run, jobs, limitations,
    and deployment state in the release ledger; the last full execution is
    `208d296`/`31009811465`, while the current review-ready successor is
-   `b295f0f`/`31011177833` with lightweight unchanged-suite paths.
+   `9242f79`/`31012232860` with lightweight unchanged-suite paths.
 4. Regenerate this audit and the compliance matrix after each evidence change,
    then close the goal only if
    every non-waived requirement has evidence, every waiver/deferral is explicit,

@@ -40,13 +40,13 @@
     },
     "reviewReadyRef": {
       "state": "ready-for-review",
-      "commit": "b295f0f353c5227143311448544aa645ebf7942c",
+      "commit": "9242f79d53b1ec5d4b49e0ee6b113624b2435cec",
       "date": "2026-08-05",
       "prNumber": 22,
-      "runId": "31011177833",
+      "runId": "31012232860",
       "checkState": "success",
       "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
-      "note": "Current review-ready ref b295f0f passed every required Course CI context in run 31011177833; this provenance-only successor used the explicit lightweight paths for unchanged apparatus, Python, and browser suites. The last full execution gate remains 208d296/run 31009811465."
+      "note": "Current review-ready ref 9242f79 passed every required Course CI context in run 31012232860; this provenance-only successor used the explicit lightweight paths for unchanged apparatus, Python, and browser suites. The last full execution gate remains 208d296/run 31009811465."
     },
     "openRedTests": {
       "count": 0,

@@ -7,6 +7,7 @@ actually published.
 
 ## Unreleased
 
+- Recorded the current PR #22 head [`9242f79`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/9242f79d53b1ec5d4b49e0ee6b113624b2435cec) and successful required-context run [`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860). The provenance-only successor used lightweight unchanged-suite paths; the last complete full execution remains `208d296`/`31009811465`.
 - Recorded current PR #22 head [`b295f0f`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/b295f0f353c5227143311448544aa645ebf7942c) and required-context success in run [`31011177833`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31011177833). This was a provenance-only successor with explicit lightweight unchanged-suite paths; the last complete full execution remains `208d296`/`31009811465`.
 - Reconciled the generated current-truth evidence with the latest additive
   review-ready head `208d296` and successful non-draft Course CI run

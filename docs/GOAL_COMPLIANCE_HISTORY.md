@@ -673,3 +673,13 @@ lightweight unchanged-suite paths; the portal structural gate still ran. The
 last complete full execution remains `208d296`/`31009811465`. This distinction
 keeps the current review-ready ref current without mislabeling a cost-saving
 successor as another full gate.
+
+## Current review-ready head after provenance reconciliation — 2026-08-05
+
+The next additive head [`9242f79`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/9242f79d53b1ec5d4b49e0ee6b113624b2435cec)
+passed every required Course CI context in run
+[`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860).
+The portal structural gate ran; Node apparatus, Python 3.12/3.14, and browser
+jobs reported their explicit lightweight unchanged-suite paths. The canonical
+truth now records this as the current review-ready head while retaining
+`208d296`/`31009811465` as the last complete full execution gate.

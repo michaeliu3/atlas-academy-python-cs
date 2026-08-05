@@ -784,3 +784,17 @@ in run
 [`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).
 This records the current source head without claiming a second full gate,
 publication, deployment, human review, or learner mastery.
+
+## Current review-ready head after provenance reconciliation (2026-08-05)
+
+The next additive head [`9242f79`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/9242f79d53b1ec5d4b49e0ee6b113624b2435cec)
+passed every required Course CI context in run
+[`31012232860`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31012232860).
+The portal structural gate executed, while Node apparatus, Python 3.12/3.14,
+and browser acceptance used their explicit lightweight unchanged-suite paths.
+The last complete full execution remains
+[`208d296`](https://github.com/michaeliu3/atlas-academy-python-cs/commit/208d296d63793814906ee218876546e7736a829b)
+in run
+[`31009811465`](https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465).
+This is current provenance only; it does not claim publication, deployment,
+human review, or learner mastery.
