@@ -834,11 +834,11 @@
     },
     {
       "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
-      "sha256": "30a590e7a89c3ee188c77a0f4e019286d3ed893fc5edaa1f54add4b5026cb85b"
+      "sha256": "dfffa2c2aa1619d0df81b96cb979a65cd91ca3ce3a29a62bc9b8f93a4990b7bb"
     },
     {
       "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
-      "sha256": "8de564289944de0f602aaebc86cbec0c1a56c4ca6b9e92e9c655211b071a15bc"
+      "sha256": "a9c03a1db784c35ad632c727804ac8dab59d7a98dddd12617c75ffe7d64ee8cb"
     },
     {
       "path": "content/source-maps/module31_optimization_information_source_audit.md",
@@ -1134,11 +1134,11 @@
     },
     {
       "path": "public/downloads/module30_probability_statistics_scientific_inference_source_audit_addendum.md",
-      "sha256": "30a590e7a89c3ee188c77a0f4e019286d3ed893fc5edaa1f54add4b5026cb85b"
+      "sha256": "dfffa2c2aa1619d0df81b96cb979a65cd91ca3ce3a29a62bc9b8f93a4990b7bb"
     },
     {
       "path": "public/downloads/module30_probability_statistics_scientific_inference_source_map.md",
-      "sha256": "8de564289944de0f602aaebc86cbec0c1a56c4ca6b9e92e9c655211b071a15bc"
+      "sha256": "a9c03a1db784c35ad632c727804ac8dab59d7a98dddd12617c75ffe7d64ee8cb"
     },
     {
       "path": "public/downloads/module30_reference.py",
