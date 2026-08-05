@@ -56,16 +56,20 @@ cancelled after minutes of work. Draft updates now skip those full jobs.
    requested path still receives a clean check, and index-generation changes
    evict the cache and recapture. Packet validation also enumerates tracked
    paths once per validation instead of spawning one Git process per pointer.
+6. Candidate preflight batches now reuse only derived reports keyed by the
+   same immutable snapshot. The 30-profile mathematics preflight therefore
+   validates the shared registry and packet cohort once while retaining every
+   module-specific evidence, scope, and clean-worktree check.
 
 The cache changes validation setup cost only; they do not skip tests, weaken
 the provenance boundary, or change the draft/non-draft job selection.
 
 Local verification on 2026-08-04 measured the legacy packet cohort at roughly
-1.6 seconds (previously about 9.5 seconds) and a representative full course
-contract test at roughly 18 seconds (previously about 54 seconds). The entire
-82-file apparatus suite still exceeded a five-minute local bound, so that run
-is recorded as a timeout rather than a pass; the CI job retains its explicit
-20-minute bound and full test selection.
+1.6 seconds (previously about 9.5 seconds), a representative full course
+contract test at roughly 18 seconds (previously about 54 seconds), and the
+30-profile mathematics preflight at 57.9 seconds after snapshot-keyed reuse.
+The full apparatus suite remains a milestone check rather than a per-edit
+check; its CI job retains the explicit 20-minute bound and full test selection.
 
 This record is an operational audit, not a claim about billed dollars. GitHub
 billing-minute exports remain account-scoped and are not inferred from wall

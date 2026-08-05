@@ -43,6 +43,13 @@ import { validateAdvancedAuthoringDeliveryMap } from "./advanced-module-delivery
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultSiteRoot = resolve(scriptDirectory, "..");
+// Candidate preflights in one test process all validate the same immutable
+// legacy-profile registry. Key the derived report by the snapshot object so
+// callers can share work without weakening the snapshot boundary or accepting
+// caller-supplied mutable state.
+const legacyCandidateProfileReportCache = new WeakMap();
+const moduleContractRegistryReportCache = new WeakMap();
+const legacyPacketCohortCache = new WeakMap();
 const canonicalCourseGraphPath = "content/course/course-graph.v2.json";
 const canonicalModuleManifestPath = "content/modules/manifest.json";
 
@@ -699,9 +706,14 @@ function validateNonPromotionState(profile, moduleEntry, graphModule, errors, { 
 }
 
 async function loadLegacyCandidateProfileReportFromSnapshot(siteRoot, snapshot, errors) {
+  if (legacyCandidateProfileReportCache.has(snapshot)) {
+    return legacyCandidateProfileReportCache.get(snapshot);
+  }
   try {
     const profiles = await loadLegacyCandidatePreflightProfiles(siteRoot, { snapshot });
-    return await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
+    const report = await validateLegacyCandidatePreflightProfiles(profiles, { siteRoot, snapshot });
+    legacyCandidateProfileReportCache.set(snapshot, report);
+    return report;
   } catch (error) {
     const errorCode = error instanceof GitIndexSnapshotError ? ` (${error.code})` : "";
     errors.push(
@@ -733,22 +745,26 @@ async function validateLegacyCandidateProfileContext(
       legacyModuleContractPacketRelativePath,
       moduleContractCandidatePacketRelativePath,
     ]);
-    const [legacyPacketRegistry, currentPacketRegistry] = await Promise.all([
-      snapshot.readJson(legacyModuleContractPacketRelativePath),
-      snapshot.readJson(moduleContractCandidatePacketRelativePath),
-    ]);
-    const [legacyPacketReport, currentPacketReport] = await Promise.all([
-      validateLegacyModuleContractPacketRegistry(stateContext.graph, legacyPacketRegistry.value, {
-        siteRoot,
-      }),
-      validateModuleContractCandidatePacketRegistry(stateContext.graph, currentPacketRegistry.value, {
-        siteRoot,
-      }),
-    ]);
-    const packetCohort = combineModuleContractPacketReports([
-      legacyPacketReport,
-      currentPacketReport,
-    ]);
+    let packetCohort = legacyPacketCohortCache.get(snapshot) ?? null;
+    if (!packetCohort) {
+      const [legacyPacketRegistry, currentPacketRegistry] = await Promise.all([
+        snapshot.readJson(legacyModuleContractPacketRelativePath),
+        snapshot.readJson(moduleContractCandidatePacketRelativePath),
+      ]);
+      const [legacyPacketReport, currentPacketReport] = await Promise.all([
+        validateLegacyModuleContractPacketRegistry(stateContext.graph, legacyPacketRegistry.value, {
+          siteRoot,
+        }),
+        validateModuleContractCandidatePacketRegistry(stateContext.graph, currentPacketRegistry.value, {
+          siteRoot,
+        }),
+      ]);
+      packetCohort = combineModuleContractPacketReports([
+        legacyPacketReport,
+        currentPacketReport,
+      ]);
+      legacyPacketCohortCache.set(snapshot, packetCohort);
+    }
     const packet = packetCohort.packetByModuleId.get(profile.moduleId) ?? null;
     if (!packet || packet.packetId !== profile.packetId) {
       errors.push(`${label} must resolve exactly one matching typed candidate packet.`);
@@ -1281,11 +1297,15 @@ export async function validateModuleEvidencePreflight(
   const registry = stateContext.registry;
   let registryReport = null;
   try {
-    registryReport = await validateModuleContractRegistry(
-      graph,
-      registry,
-      { siteRoot, manifest: stateContext.manifest },
-    );
+    registryReport = moduleContractRegistryReportCache.get(evidenceSnapshot) ?? null;
+    if (!registryReport) {
+      registryReport = await validateModuleContractRegistry(
+        graph,
+        registry,
+        { siteRoot, manifest: stateContext.manifest },
+      );
+      moduleContractRegistryReportCache.set(evidenceSnapshot, registryReport);
+    }
     for (const path of registryReport.releaseInputPaths) {
       addSnapshotInputPath(
         snapshotInputPaths,
@@ -1441,22 +1461,22 @@ export async function validateModuleEvidencePreflight(
  */
 export async function runModuleCandidateEvidencePreflight(
   moduleId,
-  { siteRoot = defaultSiteRoot } = {},
+  { siteRoot = defaultSiteRoot, snapshot = null } = {},
 ) {
-  const snapshot = await openGitIndexSnapshot(siteRoot);
+  const candidateSnapshot = snapshot ?? await openGitIndexSnapshot(siteRoot);
   const errors = [];
   const legacyCandidateProfiles = authoringCandidateProfiles.has(moduleId)
     ? null
-    : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, snapshot, errors);
+    : await loadLegacyCandidateProfileReportFromSnapshot(siteRoot, candidateSnapshot, errors);
   if (errors.length > 0) preflightFailure(errors);
   if (!candidatePreflightProfile(moduleId, legacyCandidateProfiles)) {
     throw new Error("A candidate evidence preflight runner requires an explicitly allowlisted module ID.");
   }
   const preflight = await loadModuleEvidencePreflight(
     moduleEvidencePreflightRelativePath(moduleId),
-    { siteRoot, snapshot },
+    { siteRoot, snapshot: candidateSnapshot },
   );
-  return validateModuleEvidencePreflight(preflight, { siteRoot, snapshot });
+  return validateModuleEvidencePreflight(preflight, { siteRoot, snapshot: candidateSnapshot });
 }
 
 export function runM29CandidateEvidencePreflight(options = {}) {

@@ -27,8 +27,9 @@ async function legacyCandidateModuleIds() {
 }
 
 test("every configured candidate profile has a non-promoting 18-criterion preflight", async () => {
+  const snapshot = await openGitIndexSnapshot(siteRoot);
   for (const moduleId of await legacyCandidateModuleIds()) {
-    const report = await runModuleCandidateEvidencePreflight(moduleId, { siteRoot });
+    const report = await runModuleCandidateEvidencePreflight(moduleId, { siteRoot, snapshot });
 
     assert.equal(report.moduleId, moduleId);
     assert.equal(report.state, "candidate-not-promoting");

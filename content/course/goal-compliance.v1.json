@@ -165,7 +165,7 @@
       "id": "actions-cost",
       "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
       "state": "partial",
-      "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs",
+      "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
       "openItem": "One normal non-draft full gate now passes on run 30958237679; continue verifying cancellation/required-check behavior before release."
     },
     {
