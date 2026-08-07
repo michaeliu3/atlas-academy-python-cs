@@ -2565,3 +2565,54 @@ why treating it as public breaks representation independence.
 Carry an interface claim, one RI/AF trace, and one counterexample into **M4**.
 The next module supplies the logical language needed to state such contracts,
 quantifiers, and proof obligations precisely.
+
+## Bench pack
+
+**Bench pack:** `m03` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures, mirroring the `EventStore` protocol and
+the `_check_rep()` discipline in section 5.
+
+### Bench 3 — AF/RI correspondence table
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** a chunked store whose representation invariant is checked *during*
+a mutator, not only at its boundaries. It holds before, holds after, and is false
+in between — and an exception raised in that window leaves the object permanently
+invalid.
+**Cannot establish:** that every mutator has such a window, or that this store is
+otherwise correct. Concurrency makes the window observable for reasons Module 19
+owns.
+
+### Bench 4 — structural-shape versus behavioral-law trace
+
+**Session:** 4. **Rungs:** review and verify, recognize.
+**Executes:** one store that reverses history, put in front of three judges.
+`isinstance` under `@runtime_checkable` accepts it; a required-arity signature
+check accepts it; only a suite encoding the protocol's behavioural laws rejects it.
+**Cannot establish:** completeness of the law suite. It covers emptiness, order,
+snapshot stability, and append-only, and nothing about type rejection or
+persistence.
+
+### Bench 5 — architecture and invariant repair note
+
+**Session:** 5. **Rungs:** debug and defend, map.
+**Executes:** a memoised store with two mutators and an unwritten cross-field
+invariant. Checking it after each mutator locates the one that forgets to
+invalidate, without the reader having to guess.
+**Cannot establish:** that the structural repair survives concurrency, a
+mid-mutation exception, or a future mutator that bypasses the shared route.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 2** — defining the abstract value is a specification argument, not a run.
+- **Session 6** — a design-and-review dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m03-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

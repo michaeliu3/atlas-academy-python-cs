@@ -4225,3 +4225,69 @@ failure. Preserve the unknown platform detail rather than inventing it.
 Carry the idea of an owned resource plus a legal lifecycle into **M19**.
 Concurrency makes the same ownership and timing reasoning explicit across
 multiple simultaneous histories.
+
+
+## Bench pack
+
+**Bench pack:** `m18` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 18 was initially excluded wholesale — an
+operating-systems module needs real processes, real scheduling, and real privilege,
+and a kernel that simulated them would model the mechanism dishonestly, which is
+this module's own subject. That verdict holds for four of the six sessions. It was
+wrong about two: address translation is **arithmetic over a declared geometry**,
+and path authority is a decision over strings and a directory this process owns.
+Neither needs a kernel, and neither claims one.
+
+### Bench 3 — translation and fault-classification trace
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** eight probes through a declared 16-bit, 256-byte-page table. Virtual
+address `0x0010` translates cleanly on **read** and raises `PROTECTION_FAULT` on
+**write** against the same entry — the permission belongs to the mapping, not the
+address. Four statuses are reachable, and the session's real work is telling them
+apart: `NOT_PRESENT` is the *mechanism* that makes demand paging and `mmap` work,
+`INVALID_MAPPING` is the segmentation fault, and `PROTECTION_FAULT` is genuinely
+ambiguous — the same status implements copy-on-write. "Page fault" names a hardware
+trap, not a diagnosis, so a fault count is not by itself evidence of a problem.
+**Cannot establish:** anything about this host. One page-table level where real
+hardware has four or five, no TLB, no huge pages — and it collapses never-mapped and
+explicitly-invalid into one status, which is a modelling choice rather than a fact.
+
+### Bench 4 — name, open-resource, and authority card
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** fourteen candidate names against a real temporary workspace, under
+two guards. A join-then-prefix check and the reference resolver disagree on eight,
+and the prefix check admits **five names that resolve outside the workspace** —
+including plain `"../escape.json"`, because `startswith` compares characters and
+the `..` is still sitting unresolved inside a string that satisfies the test. It
+fails the obvious cases, not just the subtle ones, and it fails silently by
+returning `True`. `"/etc/passwd"` is caught only by accident: `os.path.join`
+discards everything left of a leading separator, so the workspace is never applied.
+The resolver additionally refuses `""`, `"."`, and `".."` as not naming a member —
+a rule distinct from non-escape.
+**Cannot establish:** any operating-system permission check. No user identity, no
+capability, no privileged operation; the workspace is writable because this process
+created it. The symlink probe is *skipped rather than faked* on hosts that cannot
+create symlinks, and the time-of-check-to-time-of-use claim rests on argument, not
+on evidence gathered here.
+
+### Sessions without a bench
+
+- **Session 1** — ownership and privilege boundaries: real processes and real
+  identities.
+- **Session 2** — lifecycle and scheduling: a real scheduler, which a kernel cannot
+  model honestly in-process.
+- **Session 5** — shutdown and recovery: process death and durability, which this
+  process cannot inflict on itself truthfully.
+- **Session 6** — a dossier consuming Sessions 1–5. This was the plan's second pick
+  for the module; it was replaced by Session 4, because the selection rubric's own
+  A3 anti-signal disqualifies a synthesis artifact.
+
+### Bench pack completion record
+
+Records under `benches/records/m18-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

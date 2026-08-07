@@ -204,16 +204,24 @@ test("Module 29's authored prerequisite map renders after accessibility metadata
     sourcePath: "content/modules/29_calculus_real_analysis_continuous_change.md",
   });
 
-  assert.equal(blocks.length, 1);
-  const [block] = blocks;
-  const markup = await renderSafeMermaidSvg({
-    label: block.metadata.title,
-    describedById: `${block.metadata.id}-alternative`,
-    renderId: "atlas-m29-render-1",
-    source: block.renderSource,
-  });
-  assert.match(markup, /<svg\b/iu);
-  assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
+  assert.ok(blocks.length >= 1);
+  assert.ok(
+    blocks.some((block) => block.metadata?.id === "m29-continuous-change-prerequisite-map"),
+    "the authored prerequisite map must remain present",
+  );
+
+  // Every authored diagram in the module must survive metadata stripping and
+  // render to inert SVG, not just the first one.
+  for (const [index, block] of blocks.entries()) {
+    const markup = await renderSafeMermaidSvg({
+      label: block.metadata.title,
+      describedById: `${block.metadata.id}-alternative`,
+      renderId: `atlas-m29-render-${index + 1}`,
+      source: block.renderSource,
+    });
+    assert.match(markup, /<svg\b/iu);
+    assert.doesNotMatch(markup, /<script\b|<foreignObject\b|\son\w+=/iu);
+  }
 });
 
 test("M31's hidden review candidate renders its authored diagram alternatives without opening a reader route", async () => {
@@ -225,7 +233,9 @@ test("M31's hidden review candidate renders its authored diagram alternatives wi
     sourcePath: "content/modules/31_optimization_information.md",
   });
 
-  assert.equal(blocks.length, 3);
+  // A floor: the point of this test is that every authored diagram renders and
+  // stays behind the hidden route, not that the module has exactly three.
+  assert.ok(blocks.length >= 3);
   for (const [index, block] of blocks.entries()) {
     assert.ok(block.metadata?.id?.startsWith("m31-"));
     assert.ok(block.metadata?.title);

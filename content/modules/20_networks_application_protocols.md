@@ -453,6 +453,10 @@ question: when bytes arrive, how does a receiver know where one request ends?
 
 ---
 
+### Session 1 output — name-to-candidate scope map
+
+One map separates a name, an address, a port, and an endpoint candidate, and states what a resolver observation does not establish.
+
 ## 3. Session 2 — Transport carries bytes, not your request
 
 ### Pressure
@@ -682,6 +686,10 @@ right decision.
 
 ---
 
+### Session 2 output — frame admission trace
+
+One trace shows when a receiver may emit an application frame, with the rule that admitted each one.
+
 ## 4. Session 3 — A response is evidence with a scope
 
 ### Pressure
@@ -881,6 +889,10 @@ does not hand Atlas a free retry or idempotency policy.
 
 ---
 
+### Session 3 output — response evidence rung
+
+One rung assignment states what a received response establishes and names one compatible history it does not rule out.
+
 ## 5. Session 4 — HTTP gives semantics; Atlas still owns policy
 
 ### Pressure
@@ -1079,6 +1091,10 @@ The next session makes the ledger explicit and uses it to replace “retry with 
 new ID” by an evidence-preserving protocol.
 
 ---
+
+### Session 4 output — HTTP-and-policy contract table
+
+One table separates jobs HTTP semantics already perform from jobs Atlas must declare itself.
 
 ## 6. Session 5 — Retry is an epistemic problem before it is a loop
 
@@ -1346,6 +1362,10 @@ and teaches you how to review a patch that crosses the boundary incorrectly.
 
 ---
 
+### Session 5 output — ambiguous-outcome retry ledger
+
+One ledger enumerates the histories consistent with a timeout and states which retry preserves meaning under each.
+
 ## 7. Session 6 — Make network knowledge auditable
 
 ### Pressure
@@ -1524,6 +1544,10 @@ Incomplete explanations select the smallest repair or retrieval step; the
 Teaching Assistant assigns neither a pass/fail result nor a mastery claim.
 
 ---
+
+### Session 6 output — remote-publication protocol dossier
+
+One dossier makes an Atlas publication auditable: operation identity, request digest, response scope, and the first inference the evidence cannot support.
 
 ## 8. Six-view interactive HTML studio
 
@@ -2800,3 +2824,69 @@ Carry one local-versus-remote claim boundary, one idempotency or reconciliation
 rule, and one timeline into **M21**. The next module makes partial failure,
 cancellation, ordering, and distributed evidence explicit in asynchronous
 systems.
+
+
+## Bench pack
+
+**Bench pack:** `m20` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 20 was initially excluded wholesale as a
+networking module, and that verdict judged the subject rather than the sessions.
+Two of them need no peer at all: `FrameDecoder` is a pure byte-stream state
+machine, and `classify_client_observation` is a decision procedure over a
+client-local observation. Both are exactly as real here as they would be over a
+socket. The four that genuinely need a network are not benched.
+
+### Bench 2 — frame admission trace
+
+**Session:** 2. **Rungs:** debug and defend, trace.
+**Executes:** three requests written two ways — 639 bytes of bare JSON and 651
+bytes of length-prefixed frames — each delivered under the same eight chunk
+patterns. The length-prefixed decoder recovers all three, **byte-identical, in all
+eight**. The one-chunk-one-message reader is correct in exactly **one**: the
+pattern where boundaries happen to align, which is the pattern you see in
+development. It then fails in two more directions than people guard against —
+two coalesced messages yield **1 parse and 1 logged error**, losing two entirely
+valid requests, and one-byte chunks yield **142 successful parses** from a
+three-message stream, because every lone digit in the payload is valid JSON. It
+can lose real messages while reporting an error, and invent messages while
+reporting none. Admission bounds are probed separately: an oversized declared
+length raises before the body is read, and a decoder error is terminal.
+**Cannot establish:** which chunk patterns a real network produces, or how often.
+The splits are constructed rather than observed — which is what makes the result
+exhaustive rather than sampled.
+
+### Bench 5 — ambiguous-outcome retry ledger
+
+**Session:** 5. **Rungs:** review and verify, debug and defend.
+**Executes:** every client-local failure through the reference classifier. Timeout,
+connection error, and malformed response **all classify as `UNKNOWN` with
+`decision=None`** — the model offers no value that would assert a remote
+non-effect, because no client-local observation could justify one. The connection
+error is the costly case: it feels like proof that nothing landed, and a connection
+can break after the server committed. The ledger then shows what makes a retry
+sound rather than merely repeated — an identical replay returns the *same*
+decision marked `replayed=True`, and reusing the operation ID for a different
+request raises `IdempotencyConflict` rather than guessing which operation was
+meant.
+**Cannot establish:** any real service's behaviour. The failure kinds are declared
+inputs, not observed outcomes, and the ledger is explicitly single-owner and
+sequential — a concurrent adapter must serialize the whole lookup-and-write
+transition, which Module 19 shows a dictionary does not do for you.
+
+### Sessions without a bench
+
+- **Session 1** — name resolution: resolvers, caches, and TTLs this process does
+  not own.
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — HTTP semantics: status codes, methods, and header policy. Without
+  a real server, a bench would restate the specification rather than test anything
+  against it.
+- **Session 6** — a publication-protocol dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m20-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

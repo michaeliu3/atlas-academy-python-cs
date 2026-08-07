@@ -4,6 +4,112 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { extractSessionLaunches } from "../lib/heading-ids.js";
+import {
+  benchIdFor,
+  findBenchPack,
+  noBenchReasons,
+  primaryRung,
+} from "../lib/module-bench-registry.mjs";
+
+/**
+ * A bench is an executable file bound to one session, emitting that session's
+ * declared `workbookOutput`. The registry is the source of truth for what
+ * exists; these helpers project it into the generated pack so downstream
+ * consumers see the binding without importing the registry themselves.
+ */
+function benchForSession(module, session) {
+  const registration = findBenchPack(module.benchPackId ?? null);
+  if (!registration) return null;
+  const entry = (registration.sessions ?? []).find(
+    (candidate) => candidate.sessionNumber === session.number,
+  );
+  if (!entry) {
+    // A session inside a registered pack that has no bench is a decision, not a
+    // gap. Say which rule excluded it, so the absence carries its own reason —
+    // the same move the course teaches about evidence.
+    const excluded = (registration.unbenchedSessions ?? []).find(
+      (candidate) => candidate.sessionNumber === session.number,
+    );
+    if (!excluded) return null;
+    return {
+      status: "no-bench",
+      reason: excluded.reason,
+      note: noBenchReasons[excluded.reason] ?? "unstated",
+    };
+  }
+  return {
+    benchId: benchIdFor(registration.benchPackId, entry.sessionNumber),
+    sourcePath: entry.sourcePath,
+    emitsArtifact: entry.emitsArtifact,
+    artifactSource: session.output ? "workbookOutput" : "pending-workbook-output",
+    primaryRung: primaryRung(entry),
+    ladderRungs: entry.rungs,
+    recordPath: `benches/records/${benchIdFor(registration.benchPackId, entry.sessionNumber)}.json`,
+    sessionSha256: entry.sessionSha256 ?? null,
+    status: "registered",
+  };
+}
+
+function buildBenchPack(module) {
+  const registration = findBenchPack(module.benchPackId ?? null);
+  if (!registration) return { id: null, status: "none-declared", coverage: "none" };
+  const sessions = registration.sessions ?? [];
+  const rungHistogram = {};
+  for (const entry of sessions) {
+    for (const rung of entry.rungs ?? []) {
+      rungHistogram[rung] = (rungHistogram[rung] ?? 0) + 1;
+    }
+  }
+  const policy = registration.policy ?? "sparse";
+  return {
+    id: registration.benchPackId,
+    status: "registered",
+    policy,
+    sessionsWithBench: sessions.map((entry) => entry.sessionNumber).sort((a, b) => a - b),
+    // "3-of-6 (sparse)" is complete, not partial. Only sessions where running
+    // code reveals something reading cannot get a bench; the rest carry a
+    // stated exclusion reason.
+    coverage: `${sessions.length}-of-6${policy === "sparse" ? " (sparse)" : ""}`,
+    unbenchedSessions: (registration.unbenchedSessions ?? []).map((entry) => ({
+      sessionNumber: entry.sessionNumber,
+      reason: entry.reason,
+      note: noBenchReasons[entry.reason] ?? "unstated",
+    })),
+    rungHistogram,
+    pythonFloor: registration.pythonFloor,
+    visibility: registration.visibility,
+    dependencies: [...new Set(sessions.flatMap((entry) => entry.dependencies ?? []))].sort(),
+  };
+}
+
+/**
+ * Three-valued, because a bench and a reference model are different artifacts
+ * with different authority. A reference model is the instructor's checked-in
+ * fixture; a bench is the learner's working surface. When both exist the
+ * reference model stays authoritative and the bench reads it.
+ */
+function executionBoundaryFor(module, hasReferenceModel) {
+  const registration = findBenchPack(module.benchPackId ?? null);
+  if (registration && hasReferenceModel) {
+    return (
+      `Run the ${registration.benchPackId} bench pack under CPython ${registration.pythonFloor}+; ` +
+      "each bench emits one named session record. The checked-in reference model and its " +
+      "bounded tests remain the authoritative fixture — the bench reads and probes it, and " +
+      "does not replace it."
+    );
+  }
+  if (registration) {
+    return (
+      `Run the ${registration.benchPackId} bench pack under CPython ${registration.pythonFloor}+; ` +
+      "each bench emits one named session record. No checked-in reference model is bound, so " +
+      "the bench fixture is the only executable surface and its claims are scoped to that fixture."
+    );
+  }
+  if (hasReferenceModel) {
+    return "Run only the named local reference model and its bounded tests; record the actual command and output.";
+  }
+  return "No checked-in reference model is currently bound; use the workbook fixture or explicitly label the session as non-executing until a local fixture is authored.";
+}
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const siteRoot = path.resolve(scriptDirectory, "..");
@@ -267,6 +373,7 @@ function buildSession(module, guide, session, evidence) {
     workbookHeadingId: session.id,
     workbookLaunch: session.launch,
     workbookOutput: session.output,
+    bench: benchForSession(module, session),
     taLecture: {
       status: "prepared-derived",
       mode: "first-principles-live-code",
@@ -384,7 +491,16 @@ function buildPack(module) {
       scenario: arcAssignment.slice.scope,
       moduleSlice: arcAssignment.slice,
       architectureSketch: arcAssignment.project.architecture,
-      implementationPlan: arcAssignment.project.milestones,
+      // Previously the arc's milestones, which are identical for every module
+      // in an arc — so ten mathematics modules all showed the same three
+      // steps. These are derived per module from its companion guide; the arc
+      // thread is preserved separately below.
+      implementationPlan: [
+        `State the central model before building anything: ${guide?.centralModel ?? module.purpose}.`,
+        `Then ${guide?.traceOrDerivation ?? "trace one mechanism and state the assumption that makes each step legal"}.`,
+        `Name the boundary — ${guide?.boundary ?? "what this evidence cannot establish"} — then transfer the model to ${guide?.transfer ?? "one unfamiliar case"}.`,
+      ],
+      arcMilestones: arcAssignment.project.milestones,
       starterState: evidence.codeSlice,
       expectedPatchSequence: [
         "state the contract, invariant, theorem condition, or numerical question",
@@ -423,10 +539,9 @@ function buildPack(module) {
       referenceModel: hasReferenceModel ? referenceModelPath : null,
       referenceTest: hasReferenceTest ? referenceTestPath : null,
       codeSlice: evidence.codeSlice,
-      executionBoundary: hasReferenceModel
-        ? "Run only the named local reference model and its bounded tests; record the actual command and output."
-        : "No checked-in reference model is currently bound; use the workbook fixture or explicitly label the session as non-executing until a local fixture is authored.",
+      executionBoundary: executionBoundaryFor(module, hasReferenceModel),
     },
+    benchPack: buildBenchPack(module),
     rendering: {
       printPath: `/print/modules/${module.slug}`,
       pdfStatus: "local-release-pipeline",

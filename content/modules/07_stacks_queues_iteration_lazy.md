@@ -2450,3 +2450,53 @@ automatic record storage.
 Carry the idea that a data structure records a **relationship and access
 policy**, not merely values, into **M8**. Hashing adds a new question: how can
 lookup be fast while equality and collision behavior still preserve meaning?
+
+## Bench pack
+
+**Bench pack:** `m07` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 2 — iterator-state trace
+
+**Session:** 2. **Rungs:** review and verify, trace.
+**Executes:** two `take` implementations returning identical output while pulling
+three and four items from an instrumented source. On a shared source the second
+consumer resumes one item late, and the peeked item is delivered to nobody.
+**Cannot establish:** what the extra pull costs for any particular source. A
+database round trip and a list index differ by orders of magnitude.
+
+### Bench 3 — generator-suspension trace
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** `gi_frame`, `f_lasti`, and `f_locals` read between `next()` calls.
+All three suspensions park at the same instruction offset while the locals
+accumulate — so the state difference lives in what the generator holds, not where
+it is. The frame becomes None at exhaustion and does not come back.
+**Cannot establish:** anything portable about frame introspection. Suspend-and-
+resume is a language guarantee; reading an instruction offset is not.
+
+### Bench 4 — demand-and-ownership map
+
+**Session:** 4. **Rungs:** debug and defend, map.
+**Executes:** eager against lazy ingestion of the same generated batches — a
+roughly 170-fold difference in peak traced memory — then a consumer editing a
+delivered batch and changing the producer's state. Laziness bounds memory and
+confers no ownership; the copy that fixes it gives back part of the advantage.
+**Cannot establish:** absolute memory figures. Traced allocation compares the two
+pipelines against each other and nothing else.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 5** — capacity and backpressure need real concurrent producers and
+  consumers; a kernel would model the timing dishonestly.
+- **Session 6** — an agent-directed checkpoint dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m07-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

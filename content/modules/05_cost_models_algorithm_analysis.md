@@ -1039,6 +1039,90 @@ Keep one sentence:
 
 > Complexity predicts how resource use grows under an explicit model; measurement checks how a particular implementation behaves within a real system.
 
+## 21. Bench pack
+
+**Bench pack:** `m05` — six benches, one per session. CPython 3.12 floor.
+
+This module and Module 9 were authored before the sparse bench policy existed and
+carry a bench for every session. Later modules carry two or three, covering only
+the sessions where running code reveals something reading cannot; the rest state
+why they have none. Six is not a target.
+**Emits:** one bench record per session, naming that session's declared output.
+
+The bench pack is where this module's session claims get executed. It carries no
+teaching prose: everything a bench needs is stated above, and a bench that
+re-explains a concept has become a second source of truth. Each bench opens with
+a prediction whose reveal stays locked until you commit an answer and a
+confidence, and closes by emitting the named session output as a record.
+
+### Bench operating rule
+
+A bench is evidence, not attainment. A record showing four checks passed and two
+not attempted is an honest record. A bench you have not run is not a gap in the
+module; it is a gap in your evidence for it. `emit()` refuses a record whose
+answers are still the blank template, so an unrun bench cannot look like a
+finished one.
+
+### Bench 1 — explicit cost-model card
+
+**Session:** 1. **Rungs:** recognize, trace.
+**Executes:** the list-only deduplicator under an operation counter, across three
+input families at five sizes, against the hand-derived exact count.
+**Cannot establish:** that the counted growth is the asymptotic bound. Five exact
+counts are consistent with infinitely many functions that agree at those sizes.
+
+### Bench 2 — bound-and-case claim
+
+**Session:** 2. **Rungs:** recognize, review and verify.
+**Executes:** four agent-written performance statements, each classified by its
+defect, plus a constructed crossover where asymptotically better code is slower
+over the measured range.
+**Cannot establish:** that a statement surviving all four checks is therefore
+true. Review finds defects; it does not confer correctness.
+
+### Bench 3 — recurrence and recursion-tree trace
+
+**Session:** 3. **Rungs:** trace, map.
+**Executes:** a chain traversal, merge sort, and naive Fibonacci under a frame
+counter that separates total calls from peak simultaneous frames.
+**Cannot establish:** any of the three bounds. One trace shows the shapes differ;
+the bounds follow from solving the recurrences.
+
+### Bench 4 — amortized and space account
+
+**Session:** 4. **Rungs:** modify, trace.
+**Executes:** the reallocation sequence behind 2,000 appends, totalling copied
+elements against the observed growth factor, plus peak-memory comparison of two
+deduplicators returning identical values.
+**Cannot establish:** any absolute memory claim. Traced allocation counts Python
+objects only, so the numbers compare two representations, not two programs.
+
+### Bench 5 — measurement-boundary report
+
+**Session:** 5. **Rungs:** debug and defend, trace.
+**Executes:** the ratio test over both deduplicators, then two string builders
+differing only by an unused assignment — which changes the measured growth class,
+because the assignment raises a reference count and disables an in-place
+optimisation.
+**Cannot establish:** the difference between linear and n-log-n growth. Over four
+doublings the logarithmic factor changes by about a tenth, which the ratio test
+cannot resolve.
+
+### Bench 6 — representation decision dossier
+
+**Session:** 6. **Rungs:** review and verify, design and delegate, transfer.
+**Executes:** a route planner against a latency-declaring adapter, separating
+counted operations from round trips, then audits four agent conclusions drawn
+from that run.
+**Cannot establish:** anything about a real database. The adapter is a fixed
+sleep with no batching, connection reuse, or variance.
+
+### Bench pack completion record
+
+Six records under `benches/records/m05-s*.json`. Each names its session output,
+carries at least one labelled claim, and states exactly one thing its evidence
+cannot support.
+
 ## Backward and forward connections
 
 ### Backward

@@ -2287,3 +2287,53 @@ Carry the separation of abstract identity, representation, invariant, and cost
 into **M9**. Ordered structures answer a different client question: minimum,
 predecessor, prefix, and sorted traversal require order—not merely fast
 equality lookup.
+
+## Bench pack
+
+**Bench pack:** `m08` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 2 — collision-and-equality trace
+
+**Session:** 2. **Rungs:** trace, map.
+**Executes:** an open-addressed table where deletion clears the slot instead of
+writing a tombstone. Keys placed further along the probe chain become unreachable
+while remaining in the table, and a search establishes that two colliding keys
+suffice — one never fails, because nothing stands behind it.
+**Cannot establish:** how CPython's dict handles deletion, or when tombstone
+accumulation forces a rebuild.
+
+### Bench 3 — key-contract repair note
+
+**Session:** 3. **Rungs:** debug and defend, trace.
+**Executes:** a mutable key edited after insertion. `len` reports one and
+iteration yields the key, while `in` returns False and lookup returns None — an
+entry simultaneously stored and unreachable. Re-inserting produces a second entry
+and strands the original value.
+**Cannot establish:** anything about sets, or about keys whose `__eq__` rather
+than `__hash__` is unstable.
+
+### Bench 4 — qualified-cost card
+
+**Session:** 4. **Rungs:** recognize, trace.
+**Executes:** keys engineered to share one bucket. Equality calls per lookup run
+250, 500, 1000, 2000 across those table sizes — exactly linear — while integer-key
+lookup stays flat at about 5.7 microseconds and the colliding table climbs from
+5.4 to 49.9 milliseconds for the same work.
+**Cannot establish:** that any real key distribution approaches this case, or what
+CPython's collision handling costs in general.
+
+### Sessions without a bench
+
+- **Session 1** — deriving the need for an index is a modelling argument.
+- **Session 5** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a reviewed-index dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m08-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

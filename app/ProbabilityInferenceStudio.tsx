@@ -12,7 +12,36 @@ import {
   persistModule30Progress,
   restoreModule30Progress,
 } from "@/lib/module30-progress-codec";
+import { StudioFigure } from "./StudioFigure";
 import styles from "./ProbabilityInferenceStudio.module.css";
+
+/**
+ * The repetition-view fixture, plotted from the same six running means the
+ * fixture lead prints: 1, 1/2, 2/3, 1/2, 3/5, 1/2. Drawing the declared numbers
+ * rather than decorative bar heights keeps the picture and the trace identical.
+ */
+const runningMeanFigureSpec = {
+  kind: "plot",
+  width: 420,
+  height: 260,
+  xLabel: "trial",
+  yLabel: "running mean",
+  xRange: [0.6, 6.4],
+  yRange: [0, 1.15],
+  series: [
+    {
+      points: [
+        [1, 1],
+        [2, 0.5],
+        [3, 2 / 3],
+        [4, 0.5],
+        [5, 0.6],
+        [6, 0.5],
+      ],
+      label: "observed trace",
+    },
+  ],
+} as const;
 
 type StudioView =
   | "base-rate"
@@ -462,10 +491,19 @@ function Fixture({ view }: { view: StudioView }) {
           <div><span>Fixed repetition fixture</span><p className={styles.formula}>running means: 1, 1/2, 2/3, 1/2, 3/5, 1/2</p></div>
           <p>One trace is a finite observation. Keep target law, sampling unit, dependence, seed, stopping rule, and named convergence/bound conditions outside the line.</p>
         </div>
-        <div className={styles.traceBoard} aria-hidden="true">
-          {[100, 50, 67, 50, 60, 50].map((height, index) => <i key={height + index} style={{ height: `${height}%` }} />)}
-          <span>finite running-average trace</span>
+        <div className={styles.traceBoard}>
+          <StudioFigure
+            spec={runningMeanFigureSpec}
+            label="Six running means oscillating around one half, with no trend"
+            describedById="probability-repetition-alternative"
+          />
         </div>
+        <p className={styles.textEquivalent} id="probability-repetition-alternative">
+          <strong>Text equivalent:</strong> the six declared running means — 1,
+          1/2, 2/3, 1/2, 3/5, 1/2 — are plotted against trial number. The trace
+          oscillates and does not settle within six trials. A finite trace is an
+          observation, not a convergence claim.
+        </p>
         <div className={styles.assumptionRail}>
           <span>target expectation</span><i aria-hidden="true" /><span>sampling/dependence model</span><i aria-hidden="true" /><span>theorem or procedure</span><i aria-hidden="true" /><span>finite output</span>
         </div>

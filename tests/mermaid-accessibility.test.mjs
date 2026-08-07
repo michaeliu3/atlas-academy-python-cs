@@ -337,11 +337,18 @@ test("Module 29's continuous-change prerequisite map has a concise, scoped text 
   });
   const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-  assert.equal(blocks.length, 1);
-  assert.equal(report.summary.completeBlocks, 1);
+  // The module gains diagrams as it is illustrated, so assert the property
+  // that must hold — every visual carries a complete alternative — rather than
+  // freezing a count that grows.
+  assert.ok(blocks.length >= 1);
+  assert.equal(report.summary.completeBlocks, blocks.length);
   assert.equal(report.summary.incompleteBlocks, 0);
-  assert.equal(blocks[0].metadata.id, "m29-continuous-change-prerequisite-map");
-  assert.match(blocks[0].metadata.alternative, /M25 remains later synthesis/u);
+
+  const prerequisiteMap = blocks.find(
+    (block) => block.metadata?.id === "m29-continuous-change-prerequisite-map",
+  );
+  assert.ok(prerequisiteMap, "the authored prerequisite map must remain present");
+  assert.match(prerequisiteMap.metadata.alternative, /M25 remains later synthesis/u);
 });
 
 test("canonical workbooks do not duplicate renderer-owned Mermaid alternatives", async () => {

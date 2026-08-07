@@ -3960,3 +3960,65 @@ evidence into **M28**. M28–M31 turn representation, continuous change,
 uncertainty, and optimization into explicit mathematical evidence. After that
 bridge, carry the execution discipline into **M18**, where the operating system
 owns resources, scheduling, files, authority, and durability.
+
+## Bench pack
+
+**Bench pack:** `m17` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Every bench here **imports and probes**
+`public/downloads/module17_reference.py` rather than reimplementing it, and every
+one of them is careful about the same thing — a number produced by a declared
+model is a fact about the model, not about your CPU.
+
+### Bench 3 — ISA state and call-convention trace
+
+**Session:** 3. **Rungs:** debug and defend, trace.
+**Executes:** the toy machine's full state history against a corrupted run in
+which the STORE is neutralized by a redundant instruction, so both programs keep
+the same length and the same instruction at every position. The histories first
+differ at step 3, in **memory**, while every register still agrees exactly; the
+register file first differs at step 4 — and the instruction executing there is a
+correct LOAD, doing exactly what LOAD does with the memory it was given.
+**Cannot establish:** anything about a real instruction set. Four registers, four
+memory words, 8-bit words, no pipeline, no flags register.
+
+### Bench 4 — overlap/locality model and causal boundary
+
+**Session:** 4. **Rungs:** trace, recognize.
+**Executes:** both access orders over 64 items under a declared geometry —
+sequential gives 48 hits and 16 misses, a deterministic permutation gives 0 and
+64. Identical work by any count that ignores memory. Sweeping the line size alone
+then moves the miss count through four distinct values, which is the proof that
+the number belongs to the geometry.
+**Cannot establish:** any prediction about this or any host CPU, where multiple
+cache levels, stride prefetching, set-associative conflicts, and address
+translation all apply and none of them are modelled.
+
+### Bench 6 — bounded architecture claim and M28 handoff
+
+**Session:** 6. **Rungs:** review and verify, debug and defend.
+**Executes:** a counterbalanced ABBA/BAAB schedule that measures the first-exposure
+order effect **separately** from the comparison it would otherwise contaminate. The
+order effect is 1.3% and the between-condition ratio is 0.996× — the confound is
+the same magnitude as the signal. The audit's hard case is that repeating the
+uncrossed experiment does not fix it: more trials give a tighter estimate of the
+wrong quantity.
+**Cannot establish:** that either access order is faster on this machine. One
+process, one interpreter, no control over other load, and no cache instrument.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 2** — the 8-bit `ADD` wraparound at 250 + 10 is a genuine falsifiable
+  prediction, and was the fourth-ranked pick. It lost on the cut, not on merit.
+- **Session 5** — the artifact is a layer-ownership map and a routing queue: an
+  argument about what may be inferred from which layer, not evidence produced by
+  running. Its one runnable part would restate the causal boundary bench 4 already
+  establishes with a number that moves.
+
+### Bench pack completion record
+
+Records under `benches/records/m17-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

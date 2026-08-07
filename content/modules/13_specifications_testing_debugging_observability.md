@@ -2591,3 +2591,77 @@ coverage percentage, log volume, debugger fluency, or green agent summary does
 not replace that repair.
 
 This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+
+## Bench pack
+
+**Bench pack:** `m13` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Bench 4 **imports and probes**
+`public/downloads/module13_reference.py`; benches 2 and 3 carry their own subject,
+because mutation testing needs something to break and mutating the course's own
+published artifact would be breaking the wrong thing.
+
+### Bench 2 — M13 claim-to-test matrix
+
+**Session:** 2. **Rungs:** review and verify, recognize.
+**Executes:** a single happy-path test over a nine-line ranking function, measured
+two ways. Line coverage (`sys.settrace`, no third-party dependency) reports 100%.
+A bounded mutation run over the same code reports 57%: three of seven
+single-operator mutants survive, at the threshold boundary, the line-number guard,
+and the sort tie-break — which is two of the three blind spots the session names,
+derived by an instrument that never read the specification. Three tests chosen by
+reading the survivors take the mutation score to 100% while line coverage does not
+move. A NaN score is then silently dropped by every version, and no mutant detects
+it: mutation testing finds weak assertions, not input classes nobody thought of.
+**Cannot establish:** that a mutation score is a probability of catching real
+defects. Seven mutants from four operators on one function; 100% would not mean
+correct.
+
+### Bench 3 — M13 provider-contract suite and double rationale
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** one three-clause suite against two providers of the same port. It
+passes against both — and the same four raw rows make one raise `ValueError` and
+the other return three rows with no exception and no count. Adding one cardinality
+clause separates them. Then the patch-target experiment: patching `providers.load`
+leaves the consumer calling the real implementation, while patching
+`consumer.load` substitutes the double. Both patches apply and revert without
+error, so a patch that does nothing is indistinguishable from one that works.
+**Cannot establish:** anything about a real provider. The patch result is specific
+to `from X import Y`; a consumer written `import X` would answer the opposite way,
+which is the lesson rather than an exception.
+
+### Bench 4 — M13 failure dossier and regression claim
+
+**Session:** 4. **Rungs:** trace, debug and defend.
+**Executes:** `locate_causal_repair_boundary` over a declared trace where the
+traceback points at the renderer and the earliest contract contradiction sits three
+steps and three owner boundaries upstream, at the parser — with nothing in between
+contradicting anything. Then the part the session grades: for four candidate
+observations, which hypotheses each could rule out. None separates all three, one
+separates none, and the finiteness assertion settles it outright when it fails while
+leaving two hypotheses when it holds — so the plan carries two observations even
+when a given run needs one. Finally `inspect_terminal_contract` rejects the
+renderer-guard repair's trace as a premature success.
+**Cannot establish:** a complete cause. `contradicts_contract` is analyst-supplied
+and the hypothesis predictions are declared, not measured; the reference model's own
+scope string says locating the earliest mark proves no universal repair.
+
+### Sessions without a bench
+
+- **Session 1** — turns an ambiguous request into a behavioural contract. The
+  artifact *is* the contract, and running code cannot check whether the ambiguity
+  was resolved well.
+- **Session 5** — production observability: sampling, rate and cost models, and a
+  privacy boundary. It needs a running service and real traffic; an in-process
+  kernel would model the cost question dishonestly.
+- **Session 6** — an agent-directed evidence defence, consuming Sessions 1–5 rather
+  than producing new evidence.
+
+### Bench pack completion record
+
+Records under `benches/records/m13-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

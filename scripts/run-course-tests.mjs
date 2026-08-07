@@ -19,6 +19,7 @@ const archivedReleaseTestFiles = (await readdir(archivedReleaseTestDirectory))
 
 const apparatusTestPatterns = [
   /^(?:advanced-|browser-harness|browser-progress-storage|browser-progress-surface-policy|candidate-preflight|ci-workflow|client-performance-budget|cloudflare-|course-ci-observer|course-contract|course-graph|course-status|dependency-risk|diagnostic-progress-codec|durable-software-studio-accessibility|git-index|guided-route-handoffs|hidden-review|http-security-headers|learner-controlled-export|legacy-|live-codex-learning-workflow|local-progress-codec|manual-learning-record-workflow|math-candidate|mermaid-accessibility|module-companion-package|module-contract|module-learning-companion|module-review|module-session-launches|multiple-choice-prediction-gate|rendered-html|rich-rendering|source-artifact|vinext-)/u,
+  /^module-bench-registry/u,
   /^module(?:18-progress-codec|19-23-24-26-progress-lifecycle|19-progress-codec|20-22-25-progress-lifecycle|23-local-progress|24-local-progress|25-local-progress|26-local-progress|27-30-progress-codec|29-evidence-preflight|31-evidence-preflight|32-evidence-preflight)/u,
   /^m(?:0[1-9]|1[1-9]|2[0-4])-contract-candidate/u,
   /^m(?:0[2-8]-|1[14]-|11-m16-evidence-thread|17-m24-learning-route-boundary|19-m24-mermaid-accessibility|25-m26-synthesis-receipts|31-|32-hidden|33-|34-hidden|35-hidden|36-hidden)/u,

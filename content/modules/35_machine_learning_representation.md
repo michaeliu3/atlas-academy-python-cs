@@ -1325,6 +1325,38 @@ it may not treat the packet as a generalization proof or deployment approval.
 
 ---
 
+## One-page concept map
+
+M35 keeps one question in front of every technique: what does this number
+license, given how the data was split and what the representation already
+threw away?
+
+~~~mermaid
+%% atlas-diagram-id: m35-concept-map
+%% atlas-diagram-title: How M35's ideas depend on one another
+%% atlas-diagram-alt: Available information becomes a representation through preprocessing and embedding, which fixes what the hypothesis class can express. Task and loss define empirical risk minimization; autodiff and an optimizer produce a fitted model. The data relation determines a valid split, and leakage is a dependency path crossing it. Metrics, calibration, and ranking answer different questions, and selection consumes the split. Shift breaks the relation to the deployment population. Baselines and ablations are evidence designs, not results, and every route ends at a decision the model does not own.
+flowchart TB
+  INFO["available information"] --> REP["preprocessing, tokenization, embedding"]
+  REP --> CLASS["hypothesis class + inductive bias"]
+  TASK["task + loss"] --> ERM["empirical risk minimization"]
+  CLASS --> ERM
+  ERM --> FIT["objective + autodiff + optimizer -> fitted model"]
+  REL["data relation (unit, group, time)"] --> SPLIT["a valid split"]
+  SPLIT --> LEAK["leakage is a dependency path"]
+  FIT --> EVAL["metrics, calibration, ranking"]
+  SPLIT --> EVAL
+  EVAL --> SELECT["selection consumes the split"]
+  SHIFT["distribution shift"] -->|"breaks"| EVAL
+  EVAL --> BASE["baseline + ablation as evidence design"]
+  BASE --> DEC["a decision the model does not own"]
+  LEAK --> DEC
+  SELECT --> DEC
+~~~
+
+The arrow labelled *breaks* is the one to carry into any deployment review.
+Everything upstream of it can be done correctly and still describe a
+population you no longer have.
+
 ## Graduated problem ladder
 
 The ladder connects representation, evaluation, optimization, and authority.
@@ -1550,6 +1582,88 @@ visual, code sample, and numerical fixture with a canonical source map and
 structured module contract. Until then this is an authoring workbook and not a
 published learning route, complete accessibility record, live-chat event,
 Notion record, or learner-mastery claim.
+
+## Bench pack
+
+**Bench pack:** `m35` — sparse, two benches. CPython 3.12 floor.
+**Visibility:** private guided study — this module is authoring-only, so the pack is
+not reader-facing.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. The data here is generated with a **declared**
+truth, which is what makes "found the signal" and "memorised the sample"
+distinguishable by construction rather than by judgement.
+
+### Bench 3 — Evaluation-and-Shift Plan
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** polynomial fits of degree 1 through 9 on 20 rows drawn from
+`y = 2x + 1 + N(0, 1.5)`, scored two ways. Training RMSE falls monotonically — 1.22
+down to 0.96 — so **training error selects degree 9**, the most complex model offered.
+Held-out RMSE on 200 fresh rows selects **degree 1**, which is the truth, and the
+training-selected model scores 1.938 against 1.544 for the honest one.
+
+The monotone fall is arithmetic, not an empirical finding: a degree-9 polynomial can
+express every degree-8 one, so training error **cannot penalise capacity**. Any
+selection procedure reading it will always take the most complex option available.
+
+The sharpest number is the **noise floor**. The generator adds N(0, 1.5), so nothing
+can score below ≈1.5 on unseen data. Degree 9 reports a *training* RMSE of 0.956,
+below the floor — a model claiming to predict better than the noise allows has
+memorised its own sample, and the floor makes that checkable without knowing the true
+degree.
+
+A protocol audit separates four evaluation designs, including the one almost everyone
+ships: an honest split whose held-out score was used to *choose* among nine models and
+is then reported as the winner's performance.
+
+**Cannot establish:** how much any real model overfits. One synthetic dataset from one
+seed, no regularisation, no cross-validation, and least squares through normal
+equations — numerically poor at high degree, so the top coefficients carry conditioning
+error on top of the overfitting. Only one arm of the U-shape appears, because the true
+degree is the smallest offered, and nothing here measures distribution shift.
+
+### Bench 4 — Objective–Optimization–Generalization Trace
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** logistic regression trained by gradient descent on average log-loss over
+data that is 5% faulty. Training loss falls monotonically from 0.6931 to 0.1501,
+held-out loss falls with it — **so this is not overfitting** — and held-out recall on
+the faulty class falls from 1.000 to **0.000**. The bias is driven to −3.567: with 95%
+of rows sound, the cheapest reduction in average loss is to predict "sound", and
+gradient descent takes that trade 19 times out of 20 by the loss's own accounting.
+
+Nothing in the training curve shows this. Three things a single "the model is training
+well" conflates: optimisation (fine here), generalisation (fine here), and **objective
+alignment** (broken) — and only the third is a specification error that no amount of
+data or compute can fix.
+
+The repairs are honest about their price. Reading the *same weights* at threshold 0.1
+recovers recall to 0.231 with no retraining at all; class-weighted training reaches
+0.590. A threshold sweep traces the whole trade — recall 0.000 at 0% flagged up to
+0.906 at 67% flagged — so the 0.5 was part of the error and the class overlap bounds
+the rest. Picking a point on that curve is exactly the belief-plus-utility decision
+bench `m34-s5` measured.
+
+**Cannot establish:** how often this happens in practice. One synthetic imbalanced
+problem, one feature, one seed, no regularisation or early stopping. It does not
+establish that any of the three repairs is right — that needs the cost of a miss
+against the cost of a review, which no training run contains.
+
+### Sessions without a bench
+
+- **Session 1** — the representation-assumption sheet states what the features are
+  assumed to capture, which is a declaration rather than an executable claim.
+- **Session 2** — comparing classical baselines is a formulation argument.
+- **Session 5** — ML debugging and observability need a deployed system and real
+  traffic.
+- **Session 6** — a responsible-ML dossier and oral defence.
+
+### Bench pack completion record
+
+Records under `benches/records/m35-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.
 
 ## Candidate release boundary
 

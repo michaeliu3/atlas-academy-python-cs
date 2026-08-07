@@ -216,7 +216,9 @@ test("the M33 workbook connects the formal model classes with an original deriva
   assert.match(workbook, /strings ending in `01`/u);
   assert.match(workbook, /The\s+constructed DFA accepts exactly when its subset contains\s+`q2`/u);
   assert.match(workbook, /### A computability mapping reduction — halting becomes acceptance/u);
-  assert.match(workbook, /HALT_TM \\le_m A_TM/u);
+  // The reduction is now written as mathematics rather than as a code span,
+  // so the assertion tracks the relation rather than the old backticked text.
+  assert.match(workbook, /\\mathrm\{HALT\}.*\\le_m.*\\mathrm\{A\}/u);
   assert.match(workbook, /input encoding is malformed.*fixed no-instance/isu);
   assert.match(workbook, /`N` ignores its\s+own input/u);
 });
@@ -285,8 +287,11 @@ test("the M33 authoring diagram keeps its declared prose alternative", async () 
   const blocks = scanMermaidBlocks(workbook, { sourcePath });
   const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-  assert.equal(blocks.length, 2);
-  assert.equal(report.summary.completeBlocks, 2);
+  // The workbook gains diagrams as it is illustrated, so assert that every
+  // one carries a complete alternative and that the declared route diagram is
+  // still present, rather than freezing a count.
+  assert.ok(blocks.length >= 2);
+  assert.equal(report.summary.completeBlocks, blocks.length);
   assert.deepEqual(blocks[0].metadata, {
     id: "m33-formal-claim-route",
     title: "The M33 route from strings to bounded conclusions",

@@ -68,6 +68,21 @@ map](../source-maps/module33_formal_languages_computability_complexity_source_re
 They are navigation aids, not borrowed proof text: the named encoding,
 quantifiers, counterexample, and non-claim control the conclusion.
 
+### Evidence labels
+
+The claim codes above say *where* a claim came from. These labels say *what
+kind* of thing it is — the same taxonomy the rest of Arc VI and Arc VII use, so
+a reader moving between modules meets one vocabulary rather than six.
+
+| Label | What it can establish | What it does not establish |
+| --- | --- | --- |
+| **[DEFINITION / MODEL]** | An alphabet, encoding, grammar, automaton, machine model, or resource convention under stated notation. | That the model captures the informal problem, or that an implementation matches it. |
+| **[THEOREM / PROOF]** | A conditional implication with explicit quantifiers, a construction or invariant, and a stated closure or resource condition. | That a program meets the hypotheses, runs within the bound, or terminates on a real input. |
+| **[COUNTEREXAMPLE]** | That one named string, instance, or machine refutes a universal claim. | That the claim fails generally, or that a repaired claim is true. |
+| **[REDUCTION]** | That hardness transfers from one problem to another under a named mapping and resource bound. | An absolute difficulty, a lower bound on any particular algorithm, or infeasibility in practice. |
+| **[FINITE EXPERIMENT]** | An observed run on named inputs under a stated encoding and measure. | A decidability, closure, or complexity result — no finite trace settles a quantified claim. |
+| **[NON-CLAIM]** | An explicit boundary this module refuses to cross. | Anything positive; a non-claim is a fence, not evidence. |
+
 ### Core evidence card
 
 Keep this small card beside every claim. It prevents a theorem name from
@@ -719,9 +734,9 @@ proves a result about arbitrary programs.
 **Claim/source trace:** M33-C07 → S33-01, S33-05. The theorem card keeps the
 encoded partial-computable-function assumptions visible before using the name.
 
-**Rice's theorem (scope card):** for a nontrivial semantic property (P) of
+**Rice's theorem (scope card):** for a nontrivial semantic property \(P\) of
 the partial computable function or language recognized by an encoded program,
-the set of program descriptions whose computed object has property (P) is
+the set of program descriptions whose computed object has property \(P\) is
 undecidable. “Nontrivial” means that at least one encoded program has the
 property and at least one does not; “semantic” means the property depends on
 what the program computes, not on its spelling.
@@ -870,7 +885,8 @@ AI-generated reduction.
 The same direction discipline also matters outside polynomial complexity. Let
 `HALT_TM` contain well-formed encodings `⟨M,w⟩` for which machine `M` halts on
 input `w`; let `A_TM` contain encodings `⟨N,y⟩` for which machine `N` accepts
-input `y`. In shorthand, the reduction is `HALT_TM \le_m A_TM`.
+input `y`. In shorthand, the reduction is
+\(\mathrm{HALT}_{\mathrm{TM}}\le_m\mathrm{A}_{\mathrm{TM}}\).
 
 For a well-formed `⟨M,w⟩`, construct `N` and output `⟨N,ε⟩`. `N` ignores its
 own input, simulates `M` on `w`, and accepts if and only if that simulation
@@ -1209,6 +1225,40 @@ Your dossier must contain:
 
 ---
 
+## One-page concept map
+
+M33 is one ladder climbed twice: first asking what a machine can recognise,
+then asking what it can decide at all, and finally at what cost.
+
+~~~mermaid
+%% atlas-diagram-id: m33-concept-map
+%% atlas-diagram-title: How M33's ideas depend on one another
+%% atlas-diagram-alt: An alphabet gives strings and a language, which a recognizer classifies: finite state for regular languages, a stack for context-free, and Turing machines as the general model. Pumping and distinguishability arguments prove a language sits outside a class. Encoding a machine as data enables diagonalization, giving undecidability and Rice's theorem. Mapping reductions transfer undecidability and hardness in a stated direction, and resource bounds turn the same model into complexity classes. Every conclusion is about a language, not one program run.
+flowchart TB
+  ALPHA["alphabet + strings"] --> LANG["a language"]
+  LANG --> REC["recognizer"]
+  REC --> DFA["finite state -> regular"]
+  REC --> PDA["stack -> context-free"]
+  REC --> TM["Turing machine"]
+  SEP["pumping lemma, distinguishability"] -->|"proves exclusion"| DFA
+  TM --> ENC["encode a machine as data"]
+  ENC --> DIAG["diagonalization"]
+  DIAG --> UNDEC["undecidability"]
+  UNDEC --> RICE["Rice: semantic properties"]
+  RED["mapping reduction (a direction)"] --> UNDEC
+  RED --> HARD["hardness"]
+  TM --> RES["resource bound"]
+  RES --> CLASS["complexity classes"]
+  CLASS --> COMPLETE["completeness via reductions"]
+  HARD --> COMPLETE
+  COMPLETE --> SCOPE["a claim about a language, not a run"]
+  RICE --> SCOPE
+~~~
+
+The single arrow doing the most work is `RED`, and it has a direction. A
+reduction pointing the wrong way proves nothing, which is why the module keeps
+returning to which solver would solve which problem.
+
 ## Graduated problem ladder
 
 The ladder makes formal theory readable before it becomes proof-heavy. Each
@@ -1505,3 +1555,70 @@ activity, diagnostic/review integration, source/visual review, candidate CI
 and release evidence, deployment provenance, and human approval. Until then
 it remains an authoring artifact—not a published module or a learner-mastery
 claim.
+
+## Bench pack
+
+**Bench pack:** `m33` — sparse, two benches. CPython 3.12 floor.
+**Visibility:** private guided study — this module is authoring-only, so the pack is
+not reader-facing.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Nothing in this pack asserts a formal result. The
+reason a formal-methods module can be benched at all is that a **countermodel is not a
+claim, it is an object** — and a bench can build one and check it by evaluation.
+
+### Bench 2 — Formal-Claim Countermodel Ledger
+
+**Session:** 2. **Rungs:** trace, debug and defend.
+**Executes:** a pairwise-distinguishability search over words of length ≤ 6 on
+`{a, b}`. "Equal numbers of a and b" yields **13** mutually distinguishable prefixes,
+growing 5 → 7 → 9 → 11 → 13 as the bound rises. "Even number of a" yields exactly
+**2**, and no amount of searching makes it 3 — precisely the minimal DFA's state count,
+because Myhill–Nerode is an equality rather than a bound.
+
+That second number is what makes the procedure evidence rather than confirmation: the
+same search *stops* on a regular language. The bench prints one witness in full —
+prefixes `x`, `y` and suffix `z` with both memberships evaluated — so the claim
+transfers as an object anyone can check without following an argument.
+
+**Cannot establish:** that the balanced language is non-regular. That needs the
+distinguishable set to grow *without bound*, which no finite search can show. Nor does
+it prove the even-a language regular: failing to find a further witness rules one out
+only within the bound examined, and the asymmetry runs opposite to how an empty search
+result is usually read.
+
+### Bench 4 — Reduction-Proof Skeleton
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** the INDEPENDENT-SET-to-CLIQUE reduction as running code — keep the
+vertices, complement the edges — checked exhaustively across 5 graphs and every k, all
+**20 instances** agreeing, with 11 yes-instances so the check is not vacuous.
+
+The direction is the entire content of the proof. `A ≤ B` means "A is no harder than
+B", so it *upper*-bounds A and *lower*-bounds B: this reduction proves **CLIQUE** is
+hard, not INDEPENDENT-SET. Complementation happens to be its own inverse, which is
+exactly what makes this a dangerous example to learn the direction from.
+
+A plausible variant — drop isolated vertices first, since they "cannot be in a clique
+with anyone" — agrees on **15 of 20** instances and fails on 5, all involving isolated
+vertices. It would survive casual spot-checking.
+
+**Cannot establish:** any hardness result. Hardness is not a property a finite
+computation can observe, and this bench contains no reduction from a known-hard
+problem, no complexity-class argument, and no lower bound. The exhaustive check covers
+4-vertex graphs; the *proof* is an argument about all graphs.
+
+### Sessions without a bench
+
+- **Session 1** — the language–machine separation sheet is a distinction to be drawn.
+- **Session 3** — the machine–question–scope table is likewise a mapping argument.
+- **Session 5** — an **anti-bench**. Any single timed run is exactly the evidence this
+  session teaches you not to accept as a complexity-class claim, so benching it would
+  model the lesson backwards.
+- **Session 6** — a claim packet consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m33-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

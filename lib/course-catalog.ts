@@ -164,6 +164,7 @@ export type CourseGraphModule = {
   focusedStudyMinutes?: FocusedStudyMinutes;
   sourceMap: string | null;
   studioId: ModuleStudioId | null;
+  benchPackId: string | null;
   sequencePosition: number;
   state: CourseModuleState;
 };

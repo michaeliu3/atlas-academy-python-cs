@@ -551,9 +551,14 @@ test("the M35 and M36 authoring diagrams keep their declared prose alternatives"
     const blocks = scanMermaidBlocks(workbook, { sourcePath: source.path });
     const report = validateMermaidAccessibility(blocks, { requireComplete: true });
 
-    assert.equal(blocks.length, 3);
-    assert.equal(report.summary.completeBlocks, 3);
-    assert.deepEqual(blocks.map(({ metadata }) => metadata?.id), source.ids);
+    assert.ok(blocks.length >= 3);
+    assert.equal(report.summary.completeBlocks, blocks.length);
+    // The declared diagrams must all still be there; later additions may join
+    // them without this test needing a new hard-coded list.
+    const ids = blocks.map(({ metadata }) => metadata?.id);
+    for (const declared of source.ids) {
+      assert.ok(ids.includes(declared), `${source.path} lost ${declared}`);
+    }
     assert.ok(blocks.every(({ metadata }) => metadata?.title.length >= 20));
     assert.ok(blocks.every(({ metadata }) => metadata?.alternative.length >= 80));
   }

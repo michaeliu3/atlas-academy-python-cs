@@ -251,6 +251,10 @@ If you answer “the speed conclusion,” explain the missing distribution.
 
 ---
 
+### Session 1 output — runtime evidence baseline
+
+One baseline records the measurement, its environment, and its uncertainty before any optimization is attempted.
+
 ## 3. Session 2 — Objects, aliases, and lifetime
 
 ### Pressure
@@ -320,6 +324,10 @@ request finishes. Circle every root that can keep a cohort-derived object
 reachable. State one fact you can infer and one fact you cannot.
 
 ---
+
+### Session 2 output — alias and lifetime trace
+
+One trace shows which names refer to one object and when that object's lifetime actually ends.
 
 ## 4. Session 3 — Cycles, collection, and resource ownership
 
@@ -392,6 +400,10 @@ Explain the difference between “unreachable in this object graph” and
 not just garbage collection.
 
 ---
+
+### Session 3 output — collection and ownership account
+
+One account separates reference counting from cycle collection and names which resources each can and cannot release.
 
 ## 5. Session 4 — Allocation and memory lenses
 
@@ -482,6 +494,10 @@ or secrets.
 
 ---
 
+### Session 4 output — allocation lens comparison
+
+One comparison shows the same program through two allocation lenses and explains where they disagree.
+
 ## 6. Session 5 — Source, code object, frame, bytecode
 
 ### Pressure
@@ -547,6 +563,10 @@ still need semantic tests green. Ask whether a different Python implementation
 or future CPython release changes the conclusion.
 
 ---
+
+### Session 5 output — bytecode and frame trace
+
+One trace follows source through code object, frame, and bytecode, naming what each layer adds.
 
 ## 7. Session 6 — Experiment and AI-patch review
 
@@ -726,6 +746,10 @@ learner controls whether to keep that compact summary; this workbook does not
 assert a chat, voice session, or external record.
 
 ---
+
+### Session 6 output — performance evidence dossier
+
+One dossier defends a performance claim with a measurement, an environment, and one conclusion the evidence cannot support.
 
 ## 8. Runtime Evidence Observatory
 
@@ -983,3 +1007,85 @@ original prose, diagrams, fixtures, questions, and teaching code. Link to
 primary materials and preserve required notices if any excerpt or derivative
 is redistributed. University material is used for sequencing and links, not
 copied assignments or solutions.
+
+## 13. Bench pack
+
+**Bench pack:** `m24` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. The benches carry no teaching prose — everything
+they need is stated above — and each opens with a prediction whose reveal stays
+locked until you commit an answer and a confidence.
+
+This module has a checked-in reference model. Its benches **import and probe** that
+model rather than reimplementing it, which is why they are code-reading exercises
+that happen to execute, not implementation exercises.
+
+### Bench 2 — alias and lifetime trace
+
+**Session:** 2. **Rungs:** review and verify, trace.
+**Executes:** the reference model's declared object graph under
+`reference_count_sweep`, then the same question put to the interpreter —
+`sys.getrefcount` on a fresh list against `None`, `0`, `1`, `""`, and `True`.
+**Cannot establish:** which objects any other runtime treats as immortal.
+Immortality is an implementation choice, not a language guarantee.
+
+### Bench 4 — allocation lens comparison
+
+**Session:** 4. **Rungs:** trace, recognize.
+**Executes:** three lenses on the same 10,000 rows. `sys.getsizeof` reports **85 KB**
+for the list; `tracemalloc` measures **2.77 MB** allocated by the same construction —
+a factor of **32**, and neither is wrong. The list holds pointers, so the dicts are
+genuinely not in it. Summing `getsizeof` over elements and then over their values
+lands between the two, and chasing it further stops being a technique: sharing
+double-counts and cycles never terminate.
+
+Then the reachability lens, on a declared graph with one reachable cycle and one
+unreachable one. The reference-count sweep collects **nothing** — every garbage node
+still has a non-zero count, held by its cycle partner — while the cycle collector
+returns exactly the unreachable pair. Being in a cycle is not the same as being
+garbage, and reachability rather than counting is what settles it.
+
+**Cannot establish:** anything portable. Object headers and allocator behaviour are
+implementation details, and both Python-side lenses are blind to a NumPy buffer or a
+C extension's `malloc` — frequently most of the memory in the programs where the
+question is asked.
+
+### Bench 6 — performance evidence dossier
+
+**Session:** 6. **Rungs:** review and verify, debug and defend.
+**Executes:** six manifest fields varied one at a time against a matched baseline.
+All six are refused, and the model splits them into two verdicts that demand
+different work: **`INSUFFICIENT_EVIDENCE`** (two samples — sound design,
+underpowered, more data fixes it) and **`CONFOUNDED_EXPERIMENT`** (changed runtime,
+GC policy, warmup, host, or semantic fingerprint — more data gives a tighter estimate
+of the wrong quantity). "We need more data" is the wrong response to five of the six.
+
+The `semantic_fingerprint` case is the one to hold onto: the candidate no longer
+computes the same thing, so the benchmark is comparing two different programs. The
+speedup is real and is not an optimisation.
+
+Section 3 then finds that classification runs on the **metric name**. Five recognised
+metrics demand four distinct evidence labels, and `wall_clock` — the most
+natural-sounding one — is not recognised at all, returning `HYPOTHESIS` with no
+required label, because "how long did it take?" names no measurement method. Every
+proposed conclusion scope, including the narrowest, comes back `DECISION_DEFER` with
+a *next falsifier* attached.
+
+**Cannot establish:** that any real optimisation is sound. Nothing was benchmarked;
+these are declared manifests through a declared procedure, and a real experiment can
+be confounded by frequency scaling, thermal state, or background load — none of which
+are fields in this manifest.
+
+### Sessions without a bench
+
+- **Session 1**, **Session 3**, **Session 5** — each qualifies on the rubric and
+  ranked below this pack's cut. Sparse packs cap at three; these are the first
+  candidates if the pack is ever widened.
+- **Sessions 4 and 6** are selected and not yet authored.
+
+### Bench pack completion record
+
+Records under `benches/records/m24-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

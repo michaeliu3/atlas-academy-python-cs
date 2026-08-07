@@ -1929,3 +1929,54 @@ Carry one explicit function contract, one frame trace, and one proof/cost
 assumption into **M3**. The next module asks the same question at a larger
 boundary: what may a client rely on when an implementation is hidden behind an
 abstraction?
+
+## Bench pack
+
+**Bench pack:** `m02` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 3 — termination-and-induction proof note
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** a recursion whose measure is recorded at every call. From an even
+start it terminates; from an odd start the measure still strictly decreases —
+5, 3, 1, −1, −3 — while stepping over an equality base case and running off the
+bottom. The decrease half of the argument holds throughout; only the lower bound
+fails.
+**Cannot establish:** that this measure is the only valid one, or that every
+non-terminating recursion fails the same half.
+
+### Bench 4 — recurrence-and-stack-cost claim
+
+**Session:** 4. **Rungs:** trace, map.
+**Executes:** naive, memoized, and iterative Fibonacci under a frame counter.
+Memoization takes total calls from 57,313 to 43 and leaves peak depth at 22
+unchanged; only the iterative form reaches depth 1. The memoized version still
+raises `RecursionError` under the default limit.
+**Cannot establish:** that memoization leaves depth unchanged for every
+recurrence — a divide-and-conquer shape is logarithmic either way.
+
+### Bench 5 — recursive-failure-investigation memo
+
+**Session:** 5. **Rungs:** debug and defend, trace.
+**Executes:** a recursive accumulator with a mutable default parameter. The first
+call is correct; lengths captured at each call read 4, 8, 12 while lengths read
+afterwards read 12, 12, 12 — because there was only ever one list.
+**Cannot establish:** anything about class attributes, closures, or module-level
+state, which share state for different reasons.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 2** — the workbook works the decomposition through in print; a bench
+  would re-run it.
+- **Session 6** — a design-and-defence dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m02-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

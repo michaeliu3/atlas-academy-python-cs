@@ -13,14 +13,14 @@ import {
 } from "../scripts/check-source-links.mjs";
 
 test("source corpus has HTTPS links and a fresh document-level provenance date", async () => {
-  const audit = await auditSourceCorpus({ today: "2026-08-05" });
+  const audit = await auditSourceCorpus({ today: "2026-08-07" });
   assert.deepEqual(audit.errors, []);
   assert.ok(audit.files.length >= 60);
   assert.ok(audit.urls.size >= 300);
 });
 
 test("active calibration records pin the same current Stanford CS103 quarter", async () => {
-  const audit = await auditSourceCorpus({ today: "2026-08-05" });
+  const audit = await auditSourceCorpus({ today: "2026-08-07" });
   const calibrationFiles = audit.files.filter(
     (file) => file === "docs/ACADEMIC_CALIBRATION.md" || file.startsWith("docs/research/"),
   );

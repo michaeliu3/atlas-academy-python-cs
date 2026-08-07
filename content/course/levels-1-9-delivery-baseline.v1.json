@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-levels-1-to-9-delivery-baseline",
+  "benchmarkId": "learner-levels-1-to-9-2026-08",
+  "reviewedOn": "2026-08-06",
+  "purpose": "Record what the Levels 1-9 benchmark is actually taught by reader-visible material, separately from what the scope matrix's anchors imply. The two numbers differ, and the difference is the point of this file.",
+  "truthBoundary": {
+    "structural": "structuralAnchoredTargets counts atomic targets whose scope topic names at least one anchor module that is currently reader-visible. It is a graph property. It does NOT establish that the anchored module teaches the target: a Level 6 topic anchored to M30 counts as anchored even though M30 contains no inference algorithm.",
+    "reviewed": "reviewedDelivery is a dated human judgement about whether reader-visible material teaches the section at all. Where it says 'none', the absenceProbes below make the claim machine-checkable: every probe term must be absent from reader-visible modules, so the claim fails loudly if material is later added without updating this record.",
+    "nonClaim": "Neither number establishes learner mastery, module quality, or release readiness."
+  },
+  "levels": [
+    {
+      "level": 1,
+      "label": "Mathematical foundations",
+      "totalTargets": 97,
+      "structuralAnchoredTargets": 71,
+      "reviewedDelivery": "partial",
+      "deliveredBy": ["m27", "m28", "m29", "m30"],
+      "undeliveredBecause": "Optimization and information theory are authored in M31, which is hidden. Martingales, Markov chains, sufficient statistics, and exponential families are thin or absent in M30.",
+      "absenceProbes": []
+    },
+    {
+      "level": 2,
+      "label": "Core computer science",
+      "totalTargets": 78,
+      "structuralAnchoredTargets": 57,
+      "reviewedDelivery": "partial",
+      "deliveredBy": ["m01", "m24", "m26"],
+      "undeliveredBecause": "Theory of computation is authored in M33, which is hidden. No lower-level language (C, C++, Rust) is taught anywhere, and the NumPy/PyTorch/JAX/GPU material sits in the hidden M32.",
+      "absenceProbes": ["\\bRust\\b", "\\bC\\+\\+", "\\bpybind", "\\bCython\\b"],
+      "recordedDecisions": [
+        {
+          "target": "At least one lower-level language, preferably C, C++, or Rust",
+          "status": "deliberate-scope-difference",
+          "decidedOn": "2026-08-06",
+          "note": "The benchmark says 'master'; the course's own scope matrix sets l2.programming-lower-level-ml-runtime to scoped-exposure with capabilities recognize/read/debug/design and no implement. M32 teaches reading a native buffer descriptor, not writing C, C++, or Rust. This is a chosen ceiling, not an oversight, and the absence probes above keep it honest. Raising it needs either an implement-level section in M32 or a dedicated module; that is a curriculum decision, not an editing task."
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "label": "Classical artificial intelligence",
+      "totalTargets": 17,
+      "structuralAnchoredTargets": 11,
+      "reviewedDelivery": "partial",
+      "deliveredBy": ["m10", "m30"],
+      "undeliveredBecause": "M10 supplies graph search and M30 supplies decision-theoretic probability, but A*, admissible heuristics, CSPs, planning, resolution, and POMDPs are authored in M34, which is hidden.",
+      "absenceProbes": ["admissible heuristic", "alpha-beta", "constraint satisfaction"]
+    },
+    {
+      "level": 4,
+      "label": "Core machine learning",
+      "totalTargets": 57,
+      "structuralAnchoredTargets": 34,
+      "reviewedDelivery": "partial",
+      "deliveredBy": ["m30"],
+      "undeliveredBecause": "M30 supplies estimation, likelihood, and evaluation discipline. Model families and representation learning are authored in M35 and learning theory in M36, both hidden.",
+      "absenceProbes": ["random forest", "gradient boosting", "support.vector", "\\bk-means\\b"]
+    },
+    {
+      "level": 5,
+      "label": "Deep learning",
+      "totalTargets": 40,
+      "structuralAnchoredTargets": 0,
+      "reviewedDelivery": "none",
+      "deliveredBy": [],
+      "undeliveredBecause": "No module, hidden or visible, teaches backpropagation derivation, architecture families, or modern training methodology. Closing this level requires new authoring (planned M37-M39).",
+      "absenceProbes": [
+        "backpropagat",
+        "convolutional",
+        "\\bLSTM\\b",
+        "\\btransformer\\b",
+        "variational autoencoder",
+        "generative adversarial",
+        "mixture.of.experts",
+        "batch normalization"
+      ]
+    },
+    {
+      "level": 6,
+      "label": "Probabilistic modeling and inference",
+      "totalTargets": 16,
+      "structuralAnchoredTargets": 16,
+      "reviewedDelivery": "none",
+      "deliveredBy": [],
+      "undeliveredBecause": "The scope matrix anchors every Level 6 topic to M30 and M31, but no reader-visible module contains an inference algorithm. This is the clearest case where the structural number is misleading: 16 of 16 targets are anchored and 0 are taught.",
+      "absenceProbes": [
+        "belief propagation",
+        "variable elimination",
+        "expectation.maximi",
+        "\\bGibbs\\b",
+        "Metropolis",
+        "variational inference",
+        "Gaussian process",
+        "sequential Monte Carlo",
+        "factor graph"
+      ]
+    },
+    {
+      "level": 7,
+      "label": "Sequential decision-making and reinforcement learning",
+      "totalTargets": 19,
+      "structuralAnchoredTargets": 13,
+      "reviewedDelivery": "none",
+      "deliveredBy": [],
+      "undeliveredBecause": "M11 supplies dynamic programming as an algorithm-design paradigm, which is why targets appear anchored, but no reader-visible module teaches Bellman equations for MDPs, value or policy iteration, or any learning method.",
+      "absenceProbes": [
+        "Q-learning",
+        "\\bSARSA\\b",
+        "policy gradient",
+        "actor.critic",
+        "temporal.difference learning",
+        "multi-armed bandit",
+        "inverse reinforcement"
+      ]
+    },
+    {
+      "level": 8,
+      "label": "Foundation models, LLMs, and generative AI",
+      "totalTargets": 26,
+      "structuralAnchoredTargets": 20,
+      "reviewedDelivery": "none",
+      "deliveredBy": [],
+      "undeliveredBecause": "Targets appear anchored through M22, M25, and M26 because those modules discuss evaluation, security, and agent oversight in general terms. No reader-visible module teaches tokenization for language models, transformer internals, pretraining, preference learning, or retrieval-augmented generation.",
+      "absenceProbes": [
+        "instruction tuning",
+        "reward model",
+        "\\bRLHF\\b",
+        "direct preference",
+        "in-context learning",
+        "retrieval.augmented",
+        "mechanistic interpretab",
+        "scaling law"
+      ]
+    },
+    {
+      "level": 9,
+      "label": "Deep specialization: NLP and language models",
+      "totalTargets": 12,
+      "structuralAnchoredTargets": 12,
+      "reviewedDelivery": "none",
+      "deliveredBy": [],
+      "undeliveredBecause": "Every target is anchored through M20, M23, M25, and M35, but the only 'parsing' in reader-visible material is programming-language parsing in M23. No linguistic structure, translation, sequence labeling, or dialogue material exists.",
+      "absenceProbes": [
+        "machine translation",
+        "sequence labeling",
+        "question answering",
+        "named entity",
+        "multilingual",
+        "coreference"
+      ]
+    }
+  ]
+}

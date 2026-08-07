@@ -280,7 +280,7 @@ Grammar notation is a compact way to say what forms the parser may accept:
 | Notation | Read it as | Example here |
 |---|---|---|
 | `::=` | “may have this form” | `query ::= ...` |
-| `|` | “one alternative” | `count ... | mean ...` |
+| `\|` | “one alternative” | `count ... \| mean ...` |
 | quoted word | exact terminal token | `"where"` |
 | capital name | category checked elsewhere | `FIELD`, `METRIC` |
 | sequence | elements occur in this order | `FIELD CMP LITERAL` |
@@ -356,6 +356,10 @@ Draw your own eight-card pipeline. Write exactly one sentence below each card:
 End with: “A successful parse establishes ________, not ________.”
 
 ---
+
+### Session 1 output — token and form boundary note
+
+One note separates what a lexer establishes about form from what it cannot establish about permission or meaning.
 
 ## 3. Session 2 — A tree gets meaning from rules
 
@@ -466,6 +470,10 @@ At each row label either **AST**, **environment**, **value**, or **error**.
 Circle the line where a semantic rule—not the parser—decides the next action.
 
 ---
+
+### Session 2 output — evaluation rule table
+
+One table assigns each syntactic form its evaluation rule, so meaning comes from the rules rather than from intuition.
 
 ## 4. Session 3 — Names live in environments; functions close over them
 
@@ -591,6 +599,10 @@ to ________.”
 
 ---
 
+### Session 3 output — environment and closure trace
+
+One trace follows a name through nested environments and shows exactly what a closure captured.
+
 ## 5. Session 4 — Contracts make invalid states visible
 
 ### Pressure
@@ -686,6 +698,10 @@ type annotation ≠ runtime contract ≠ schema/domain meaning ≠ authorization
 For each `≠`, write a one-line example of a claim that can still be false.
 
 ---
+
+### Session 4 output — interpreter contract record
+
+One record states the interpreter's representation invariant and the invalid states its contracts make unrepresentable.
 
 ## 6. Session 5 — Bounded evaluation receives authority, never finds it
 
@@ -821,6 +837,10 @@ Do not write the raw query, raw event record, capability internals, or any
 external credential. State why each omission is purposeful.
 
 ---
+
+### Session 5 output — capability boundary note
+
+One note demonstrates that bounded evaluation receives authority from its caller and cannot acquire more by itself.
 
 ## 7. Session 6 — Implementation evidence is not semantic law
 
@@ -973,6 +993,10 @@ retrieval action. The learner controls whether to keep that compact summary;
 this workbook does not assert a chat, voice session, or external record.
 
 ---
+
+### Session 6 output — language semantics dossier
+
+One dossier separates the language's declared semantics from this implementation's observable behaviour, and names one difference.
 
 ## 8. Atlas Language Lab — visual studio text equivalent
 
@@ -1365,3 +1389,88 @@ Module 24 moves underneath the semantic boundary into CPython, performance,
 and memory. It preserves Module 23’s claim discipline: bytecode is a
 version-labelled observation, measurements need controlled evidence, and a
 fast-looking operation is not automatically a safe or portable conclusion.
+
+
+## Bench pack
+
+**Bench pack:** `m23` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot.
+
+### Bench 1 — token and form boundary note
+
+**Session:** 1. **Rungs:** trace, recognize.
+**Executes:** eight inputs through the reference lexer, comparing token boundaries
+against whitespace boundaries. They disagree in both directions: `label = "a b c d"`
+lexes to the same **five** tokens as `label = "a"` because a quoted space is
+content rather than a separator, and three extra spaces between every word change
+nothing because separators are discarded. Refusing `>` returns `LEX_ERROR` with a
+span naming character 18 exactly — **and the three tokens it had already built**,
+so the caller is not sent back to the raw string. The empty string lexes
+*successfully* to zero tokens, which is the cleanest demonstration that a lexical
+success is not a structural one.
+
+**Cannot establish:** anything about Python's tokenizer, Unicode identifier rules,
+or normalization; and it does not show that returning partial tokens is safe in a
+grammar where a later character can change an earlier token's meaning.
+
+### Bench 3 — environment and closure trace
+
+**Session:** 3. **Rungs:** trace, debug and defend.
+**Executes:** one AST — a function defined where `x` is 7 and applied where `x` is
+100 — handed to two evaluators. The reference model's declared lexical semantics
+return **12**. A dynamic-scope evaluator over the *same nodes* returns **105**. The
+AST object is constructed once and passed to both, so nothing in the program text
+distinguishes the answers: **you cannot determine what this program means by reading
+it**, because the deciding rule lives in the interpreter.
+
+A three-program sweep then isolates when the rules can disagree at all — a function
+with no free variables agrees, an unshadowed free variable agrees, and only a free
+variable *rebound between definition and call* diverges. A final probe shows a
+program that binds `x` only after the function is defined: an unbound-name error
+under lexical scope, and 105 under dynamic scope, where the function uses a binding
+that did not exist when it was written.
+
+The transfer is that dynamic scope is not a historical curiosity — shell environment
+variables, thread-locals, and `contextvars` are all bindings resolved by call
+position rather than source position, and they carry exactly this cost.
+
+**Cannot establish:** anything about CPython's own scoping. The dynamic evaluator is
+this bench's own contrast code, not part of the published model and not a
+specification of any real language; nothing here touches cell objects, `nonlocal`,
+comprehension scopes, or performance.
+
+### Bench 5 — capability boundary note
+
+**Session:** 5. **Rungs:** review and verify, trace.
+**Executes:** one query through **five** stages — lexical, syntactic, schema,
+authorization, capability — each reporting its own stage label. The headline: a
+query that is lexically fine, syntactically fine, schema-valid, and whose
+authorization decision reads `PERMITTED_MODEL_READ` is still refused as
+`CAPABILITY_DENIED` when no capability is passed. The decision did not become
+false; it was never *sufficient*. Five induced failures then produce five distinct
+outcome vocabularies across five distinct stages, each with a reason string and
+none a bare `False`.
+
+The capability carries an owner subject, scope, tenant, purpose, policy version,
+and metric vocabulary — and section 4 measures how far it reaches honestly: it
+*does* admit a second, different query, because it authorizes a named scope rather
+than a single plan. "Narrow" means narrowly described, not single-use.
+
+**Cannot establish:** that the capability is unforgeable in any adversarial sense.
+No delegation, expiry, or revocation is modelled, and nothing here addresses
+retrofitting this structure onto a system whose permission checks are already
+joined to its effects.
+
+### Sessions without a bench
+
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a language-semantics dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m23-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

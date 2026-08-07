@@ -75,6 +75,21 @@ first-order resolution, Bayesian/HMM factorization, POMDP belief updates, and
 multi-agent game boundaries. They remain code-reading and proof-scope cards,
 not general theorem-prover, inference-engine, planner, or game-player builds.
 
+### Evidence labels
+
+The claim codes above say *where* a claim came from. These labels say *what
+kind* of thing it is — the same taxonomy the rest of Arc VI and Arc VII use, so
+a reader moving between modules meets one vocabulary rather than six.
+
+| Label | What it can establish | What it does not establish |
+| --- | --- | --- |
+| **[DEFINITION / MODEL]** | A state space, action set, cost or reward, heuristic, constraint network, or utility under stated notation. | That the model matches the real decision, or that the numbers in it were chosen well. |
+| **[THEOREM / GUARANTEE]** | Completeness, optimality, consistency, or a complexity bound under explicitly named conditions. | That an implementation meets those conditions, or that the guarantee survives a changed cost, heuristic, or observation model. |
+| **[COUNTEREXAMPLE]** | That one named instance breaks a claimed guarantee. | That the method is generally unsuitable, or that a repaired claim holds. |
+| **[FINITE EXPERIMENT]** | An observed trace on a named instance under a stated expansion order, tie-break rule, and seed. | Behaviour on any other instance, scale, or solver version. |
+| **[SOLVER CONTRACT]** | A documented library or solver behaviour — search strategy, propagation level, determinism setting, or reported status. | Correctness of the encoding, or that a returned solution answers the intended question. |
+| **[GOVERNANCE / AUTHORITY]** | Who may inspect, override, or decline an automated decision. | Any mathematical or empirical conclusion. |
+
 ### Core evidence card
 
 Use this before, during, and after a calculation.
@@ -1338,6 +1353,41 @@ larger unexamined implementation.
 
 ---
 
+## One-page concept map
+
+M34's whole discipline is that the model is chosen before the method, and the
+method's guarantee belongs to the model rather than to the world.
+
+~~~mermaid
+%% atlas-diagram-id: m34-concept-map
+%% atlas-diagram-title: How M34's ideas depend on one another
+%% atlas-diagram-alt: A world description becomes a state space with actions and a goal test. Uninformed search gives completeness and optimality under stated conditions; an admissible and consistent heuristic gives A-star, whose optimality rests on exactly those two properties. Casting the problem as constraints gives propagation and backtracking, where local consistency is weaker than global satisfiability. Under uncertainty, Bayes gives a belief, and utility plus a horizon turn belief into a policy, extending to MDPs and POMDPs. Every route ends at an authority boundary: solving a model is not permission to act.
+flowchart TB
+  WORLD["world description"] --> STATE["states, actions, goal test"]
+  STATE --> UNINF["uninformed search"]
+  UNINF --> GUAR["completeness / optimality conditions"]
+  STATE --> HEUR["heuristic"]
+  HEUR --> ADM["admissible + consistent"]
+  ADM --> ASTAR["A* optimality"]
+  GUAR --> ASTAR
+  STATE --> CSP["constraints"]
+  CSP --> PROP["propagation + backtracking"]
+  PROP --> LOCAL["local consistency is not global satisfiability"]
+  STATE --> UNC["uncertain state"]
+  UNC --> BEL["probability model + Bayes belief"]
+  BEL --> UTIL["utility + horizon"]
+  UTIL --> MDP["MDP policy"]
+  MDP --> POMDP["POMDP belief policy"]
+  ASTAR --> AUTH["authority boundary"]
+  LOCAL --> AUTH
+  POMDP --> AUTH
+~~~
+
+`ADM → ASTAR` is the edge worth memorising: A\*'s optimality is a property of
+the heuristic, not of the algorithm. Change the heuristic and the guarantee
+leaves with it, which is why the module audits admissibility before it ever
+audits a frontier.
+
 ## Graduated problem ladder
 
 Move from a state description to a bounded decision dossier. Every step keeps
@@ -1588,14 +1638,60 @@ The theory-breadth cards additionally use S34-20–S34-22 for first-order
 resolution, Bayesian/HMM filtering, POMDP belief updates, and game-theory
 boundaries.
 
-| Session | Claim/source route | Learner reading route |
-| --- | --- | --- |
-| M34-S01 | `M34-C01, M34-C10 -> S34-01, S34-04–S34-05, S34-18, S34-20` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-18 — Berkeley CS188](https://inst.eecs.berkeley.edu/~cs188/textbook/); [S34-20 — Berkeley logic](https://inst.eecs.berkeley.edu/~cs188/textbook/logic/) |
-| M34-S02 | `M34-C02–M34-C03 -> S34-01–S34-02, S34-14, S34-18` | [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390); [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136); [S34-14 — MIT 6.034 planning/search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf); [S34-18 — Berkeley informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html) |
-| M34-S03 | `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15, S34-18` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver); [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/); [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html); [S34-18 — Berkeley CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html) |
-| M34-S04 | `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10, S34-16` | [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8); [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5); [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129); [S34-09 — Cook](https://doi.org/10.1145/800157.805047); [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9); [S34-16 — MIT 6.825 planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf) |
-| M34-S05 | `M34-C08–M34-C12 -> S34-08, S34-11–S34-13, S34-17–S34-18, S34-20–S34-22` | [S34-08 — Berkeley decision networks](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html); [S34-11 — NIST AI RMF PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf); [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/); [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html); [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html); [S34-18 — Berkeley MDP](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html); [S34-20 — Berkeley Bayes/HMM](https://inst.eecs.berkeley.edu/~cs188/textbook/bayes-nets/); [S34-21 — MIT POMDP](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/47a24e96943c8ee02a774dc52f300e29_Lecture20FinalPart1.pdf); [S34-22 — MIT game theory](https://ocw.mit.edu/courses/6-s890-topics-in-multiagent-learning-fall-2024/resources/lecture-notes/) |
-| M34-S06 | `M34-C01–M34-C12 -> S34-01–S34-22` | Revisit the applicable session route, then use the [full M34 primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md) to check its narrower use and reuse boundary. |
+These routes were a three-column table until the link inventories outgrew a
+grid cell — one row reached a thousand characters, which no type size makes
+scannable. Each session now carries its claim/source route on one line and its
+reading list below it.
+
+**M34-S01** · `M34-C01, M34-C10 -> S34-01, S34-04–S34-05, S34-18, S34-20`
+
+- [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390)
+- [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5)
+- [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129)
+- [S34-18 — Berkeley CS188](https://inst.eecs.berkeley.edu/~cs188/textbook/)
+- [S34-20 — Berkeley logic](https://inst.eecs.berkeley.edu/~cs188/textbook/logic/)
+
+**M34-S02** · `M34-C02–M34-C03 -> S34-01–S34-02, S34-14, S34-18`
+
+- [S34-01 — Dijkstra](https://doi.org/10.1007/BF01386390)
+- [S34-02 — Hart, Nilsson, and Raphael](https://doi.org/10.1109/TSSC.1968.300136)
+- [S34-14 — MIT 6.034 planning/search](https://courses.csail.mit.edu/6.034s/handouts/spring12/recitation6-planning.pdf)
+- [S34-18 — Berkeley informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html)
+
+**M34-S03** · `M34-C04, M34-C06 -> S34-03, S34-06–S34-07, S34-15, S34-18`
+
+- [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8)
+- [S34-06 — OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver)
+- [S34-07 — CVXPY DCP](https://www.cvxpy.org/tutorial/dcp/)
+- [S34-15 — Stanford CS221 CSP route](https://web.stanford.edu/class/archive/cs/cs221/cs221.1192/assignments/scheduling/index.html)
+- [S34-18 — Berkeley CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html)
+
+**M34-S04** · `M34-C05, M34-C07 -> S34-03–S34-05, S34-09–S34-10, S34-16`
+
+- [S34-03 — Mackworth](https://doi.org/10.1016/0004-3702(77)90007-8)
+- [S34-04 — STRIPS](https://doi.org/10.1016/0004-3702(71)90010-5)
+- [S34-05 — PDDL2.1](https://doi.org/10.1613/jair.1129)
+- [S34-09 — Cook](https://doi.org/10.1145/800157.805047)
+- [S34-10 — Karp](https://doi.org/10.1007/978-1-4684-2001-2_9)
+- [S34-16 — MIT 6.825 planning](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/1184a975225bdbab3e3d215bf173bde1_Lecture10FinalPart1.pdf)
+
+**M34-S05** · `M34-C08–M34-C12 -> S34-08, S34-11–S34-13, S34-17–S34-18, S34-20–S34-22`
+
+- [S34-08 — Berkeley decision networks](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html)
+- [S34-11 — NIST AI RMF PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
+- [S34-12 — MIT 18.600 notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/)
+- [S34-13 — CMU MDP notes](https://www.cs.cmu.edu/~07280/notes/mdps/index.html)
+- [S34-17 — Stanford CS221 Markov Decisions](https://web.stanford.edu/~cpiech/cs221/handouts/markovDecisions.html)
+- [S34-18 — Berkeley MDP](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html)
+- [S34-20 — Berkeley Bayes/HMM](https://inst.eecs.berkeley.edu/~cs188/textbook/bayes-nets/)
+- [S34-21 — MIT POMDP](https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/47a24e96943c8ee02a774dc52f300e29_Lecture20FinalPart1.pdf)
+- [S34-22 — MIT game theory](https://ocw.mit.edu/courses/6-s890-topics-in-multiagent-learning-fall-2024/resources/lecture-notes/)
+
+**M34-S06** · `M34-C01–M34-C12 -> S34-01–S34-22`
+
+- Revisit the applicable session route above, then use the [full M34
+  primary-source research ledger](../source-maps/module34_classical_ai_search_constraints_decision_source_research.md)
+  to check its narrower use and reuse boundary.
 
 For the fuller claim-linked original/official source ledger and reuse cautions,
 use the instructor-facing [M34 primary-source research
@@ -1649,3 +1745,99 @@ integration, source/visual review, candidate CI and release evidence,
 deployment provenance, and human approval. Until then it remains an authoring
 artifact—not a published module, solver authorization, or learner-mastery
 claim.
+
+## Bench pack
+
+**Bench pack:** `m34` — sparse, three benches. CPython 3.12 floor.
+**Visibility:** private guided study — this module is authoring-only, so the pack is
+not reader-facing.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Every problem in this pack is small enough to solve
+exhaustively, which is what lets a bench call a propagator "sound and incomplete", or
+a heuristic "inadmissible", as a counted fact rather than a remembered one.
+
+### Bench 2 — Search-Strategy Evidence Table
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** A* *graph search* — the textbook form, with a closed set — under four
+heuristics on one four-node graph. All three admissible heuristics return the optimal
+cost **3**. An inadmissible one that overestimates node `a` by 6 returns cost **6**,
+while expanding **2** nodes against Dijkstra's 3 — so it scores *better* on the usual
+efficiency metric. A benchmark ranking heuristics on expansion count alone would put
+the broken one first.
+
+The closed set is what makes the damage permanent: when the cheap route is finally
+discovered, its target is already closed and the improvement is discarded unexamined.
+A variant that re-opens nodes recovers the optimum even with this heuristic — so "we
+use A*" does not identify which guarantee you have.
+
+The set of heuristics that overestimate and the set that return a suboptimal path
+coincide exactly, which is the precondition doing visible work.
+
+**Cannot establish:** how often real heuristics are inadmissible. It does not
+distinguish admissibility from the stronger *consistency* condition graph-search A*
+actually needs, and nodes-expanded is a proxy that ignores the cost of evaluating the
+heuristic itself.
+
+### Bench 3 — Constraint–Objective–Relaxation Sheet
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** arc consistency on a four-variable clique with three colours and
+not-equal constraints on all six pairs. Propagation removes **0** values, leaves
+every domain at full size, and terminates arc-consistent. Exhaustive enumeration of
+all 81 assignments finds **0** solutions.
+
+Arc consistency asks a *pairwise* question, and with three colours every value has a
+supporter. The obstruction — four mutually adjacent variables needing four colours —
+is a property of the whole clique, and the instrument never looks at more than two
+variables at once.
+
+So **sound** and **complete** come apart, and only one direction of the implication
+holds: an emptied domain is a *proof* of unsatisfiability, while non-empty domains
+prove nothing. Dropping one variable gives a problem with **18** solutions on which
+the propagator is *equally silent* — which is what shows its silence carries no
+information either way.
+
+**Cannot establish:** anything about stronger consistency levels. Path or
+k-consistency would detect this clique, at higher cost. It measures no runtime and
+models no objective function, so the relaxation half of this session's artifact is
+argued rather than executed here.
+
+### Bench 5 — Decision-under-Uncertainty Card
+
+**Session:** 5. **Rungs:** review and verify, recognize.
+**Executes:** one belief — a classifier reporting 0.1 — against three utility tables.
+Expected-utility maximisation selects **two different actions** from that single
+probability: flag it when a miss costs a hundred times a review, let it through when
+the review costs more than the miss.
+
+So "the model is 90% confident, so we should act" is not a strong argument stated
+briefly; it is an argument with a missing premise, and the missing premise carries
+the organisation's values. It also means a **threshold is not a modelling decision** —
+it is the point where expected utilities cross, and where they cross depends entirely
+on the cost matrix.
+
+A crossover search then separates two columns that give the *same* recommendation:
+one flips at 0.60, half the probability scale away, and one at 0.12, two hundredths
+from the reported belief. Identical argmax, utterly different amounts to stand on,
+and the argmax reports neither.
+
+**Cannot establish:** that expected-utility maximisation is the right rule — risk
+aversion and regret minimisation give different, defensible answers on the same
+inputs. It computes nothing about **authority**, which is a constraint rather than a
+quantity, and says nothing about where a real cost matrix comes from.
+
+### Sessions without a bench
+
+- **Session 1** — the state-space model card is a modelling decision: what counts as
+  a state, and what the transitions are.
+- **Session 4** — the planning and solver limit claim card consumes results from the
+  earlier sessions rather than producing new evidence.
+- **Session 6** — a design dossier and oral defence.
+
+### Bench pack completion record
+
+Records under `benches/records/m34-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

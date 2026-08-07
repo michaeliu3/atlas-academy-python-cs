@@ -304,6 +304,10 @@ check* and record inputs, grid, units, threshold, and what it cannot establish.
 
 ---
 
+### Session 1 output — limit and continuity argument
+
+One argument establishes a limit or continuity claim and names the hypothesis that makes it work.
+
 ## 4. Session 2 — Derivatives, mean value, Taylor approximation, and finite differences
 
 ### Pressure
@@ -405,6 +409,10 @@ polynomial; it does not validate arbitrary finite-difference code on noisy or
 ill-conditioned data.
 
 ---
+
+### Session 2 output — approximation error account
+
+One account states a Taylor or finite-difference approximation together with its error term and valid range.
 
 ## 5. Session 3 — Integration, the Fundamental Theorem, multiple integrals, and change of variables
 
@@ -513,6 +521,10 @@ points, event discontinuities, or domain transforms occur? “Total response” 
 not a scientific or human-impact conclusion without this card.
 
 ---
+
+### Session 3 output — integration derivation record
+
+One record derives an integral, states the theorem invoked, and names the condition that theorem requires.
 
 ## 6. Session 4 — Multivariable derivatives, gradients, Jacobians, Hessians, and code contracts
 
@@ -643,6 +655,10 @@ What is differentiated through, and what is treated as a constant?
 
 ---
 
+### Session 4 output — gradient contract note
+
+One note states what a gradient, Jacobian, or Hessian means for the code that consumes it.
+
 ## 7. Session 5 — Sequences, series, pointwise versus uniform convergence, and legal exchanges
 
 ### Pressure
@@ -687,6 +703,45 @@ and 1 at \(x=1\). Each \(f_n\) is continuous, but the limit is discontinuous;
 therefore convergence cannot be uniform on \([0,1]\). On \([0,r]\) with
 \(0<r<1\), \(\sup_x|x^n|=r^n\to0\), so it *is* uniform. The declared domain
 changes the answer.
+
+```atlas-figure
+%% atlas-diagram-id: m29-pointwise-not-uniform
+%% atlas-diagram-title: x to the n on the unit interval
+%% atlas-diagram-alt: Three curves for n equal to 1, 4, and 16 on the interval from 0 to 1. Every curve starts at 0 and ends at 1. As n grows the curve is pressed toward the horizontal axis over more and more of the interval, but it must still climb to 1 at the right-hand endpoint, so the climb becomes a steeper and narrower cliff rather than disappearing. That trapped jump at x equals 1 is why the convergence is pointwise but never uniform on the closed interval.
+{
+  "kind": "plot",
+  "xRange": [0, 1.05],
+  "yRange": [0, 1.08],
+  "xLabel": "x",
+  "yLabel": "f_n(x)",
+  "width": 620,
+  "height": 360,
+  "series": [
+    {
+      "label": "n = 1",
+      "tone": 0,
+      "points": [[0,0],[0.2,0.2],[0.4,0.4],[0.6,0.6],[0.7,0.7],[0.8,0.8],[0.85,0.85],[0.9,0.9],[0.95,0.95],[0.98,0.98],[1,1]]
+    },
+    {
+      "label": "n = 4",
+      "tone": 1,
+      "points": [[0,0],[0.2,0.0016],[0.4,0.0256],[0.6,0.1296],[0.7,0.2401],[0.8,0.4096],[0.85,0.522],[0.9,0.6561],[0.95,0.8145],[0.98,0.9224],[1,1]]
+    },
+    {
+      "label": "n = 16",
+      "tone": 4,
+      "points": [[0,0],[0.2,0],[0.4,0],[0.6,0.0003],[0.7,0.0033],[0.8,0.0281],[0.85,0.0743],[0.9,0.1853],[0.95,0.4401],[0.98,0.7238],[1,1]]
+    }
+  ],
+  "points": [{ "at": [1, 1], "label": "limit = 1 here only" }]
+}
+```
+
+The picture makes the quantifier order visible. Fix any \(x<1\) and the curves
+drop to zero beneath it, which is the pointwise statement. But no matter how
+large \(n\) becomes, the curve still has to reach 1 at the endpoint, so
+\(\sup_{x\in[0,1]}|f_n(x)-f(x)|=1\) for every \(n\). One \(N\) that works for
+all \(x\) never exists — that is exactly the uniform statement failing.
 
 ### 7.3 Operations need their own interchange theorem
 
@@ -746,6 +801,10 @@ does not prove uniform convergence, nor does a closed-form series authorize a
 reordered floating-point sum.
 
 ---
+
+### Session 5 output — convergence and exchange justification
+
+One justification separates pointwise from uniform convergence and states which exchange of limits is legal.
 
 ## 8. Session 6 — Constrained extrema, ODE approximation, and the continuous-change dossier
 
@@ -815,6 +874,10 @@ or reference solution exists? What decision would this simulation *not*
 justify? M31/M32 will deepen optimization/solver and execution choices.
 
 ---
+
+### Session 6 output — continuous-change dossier
+
+One dossier solves a constrained or ODE-approximation problem and names one claim the discretization cannot support.
 
 ## 9. Continuous Change Studio
 
@@ -923,11 +986,16 @@ For \(\lim_{x\to a}f(x)=L\), which order captures the definition?
 
 - A. Choose one \(\delta\); samples choose \(\varepsilon\).
 - B. For every \(\varepsilon>0\), choose \(\delta>0\), then every sufficiently
-  close allowed \(x\) has \(f(x)\) close to \(L\). **Correct.**
+  close allowed \(x\) has \(f(x)\) close to \(L\).
 - C. Verify 100 inputs close to \(a\).
 
-**Why:** the quantified neighborhood, not a finite grid, establishes the
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The quantified neighborhood, not a finite grid, establishes the
 limit. The domain and excluded point still matter.
+
+</details>
 
 ### Question 2 — continuity boundary
 
@@ -935,10 +1003,15 @@ If \(\lim_{x\to a}f(x)=L\) but \(f(a)\ne L\), which statement is correct?
 
 - A. \(f\) is continuous because the nearby limit exists.
 - B. \(f\) is discontinuous at \(a\), although it may have a removable
-  discontinuity. **Correct.**
+  discontinuity.
 - C. The limit is undefined because the point value differs.
 
-**Why:** continuity requires the declared point value to equal the limit.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Continuity requires the declared point value to equal the limit.
+
+</details>
 
 ### Question 3 — local linearity
 
@@ -946,11 +1019,15 @@ What does differentiability at \(a\) most directly provide?
 
 - A. A global line that equals the function.
 - B. A local linear map whose remainder is small relative to the input change.
-  **Correct.**
 - C. A guarantee that every finite difference is accurate.
 
-**Why:** derivative information is local and its numerical estimation has
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** Derivative information is local and its numerical estimation has
 separate error trade-offs.
+
+</details>
 
 ### Question 4 — Mean Value Theorem
 
@@ -958,8 +1035,15 @@ Which conditions support the ordinary one-variable Mean Value Theorem on
 \([a,b]\)?
 
 - A. Differentiability only at endpoints.
-- B. Continuity on \([a,b]\) and differentiability on \((a,b)\). **Correct.**
+- B. Continuity on \([a,b]\) and differentiability on \((a,b)\).
 - C. A smooth-looking graph at selected points.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 5 — finite differences
 
@@ -967,8 +1051,15 @@ Why is “make \(h\) as small as possible” a poor universal policy?
 
 - A. Smaller \(h\) always increases truncation error.
 - B. Truncation can shrink while cancellation/rounding or noisy measurement
-  amplification grows. **Correct.**
+  amplification grows.
 - C. Derivatives are undefined for polynomials.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 6 — change of variables
 
@@ -976,8 +1067,15 @@ For a regular one-to-one two-dimensional coordinate map, which factor adjusts
 ordinary area?
 
 - A. \(\det DT\) without regard to sign.
-- B. \(|\det DT|\), with hypotheses/partitions stated. **Correct.**
+- B. \(\lvert\det DT\rvert\), with hypotheses/partitions stated.
 - C. The largest entry of \(DT\).
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 7 — gradient semantics
 
@@ -985,17 +1083,30 @@ Under the Euclidean inner product, what does \(\nabla f(x)\) represent?
 
 - A. The exact global improvement direction for any step.
 - B. The vector representing the derivative linear functional at \(x\).
-  **Correct.**
 - C. A proof that an objective is appropriate.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 8 — Hessian boundary
 
 At a stationary point, an indefinite Hessian supplies what evidence?
 
 - A. A saddle direction, so not a local extremum under the standard smooth
-  test. **Correct.**
+  test.
 - B. A global maximum.
 - C. A proof that an optimizer failed.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: A.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 9 — pointwise versus uniform
 
@@ -1004,8 +1115,15 @@ pointwise limit?
 
 - A. Each \(f_n\) is discontinuous.
 - B. The limit is discontinuous while uniform limits of continuous functions
-  are continuous. **Correct.**
+  are continuous.
 - C. The sequence has no pointwise limit.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 10 — exchanging operations
 
@@ -1013,8 +1131,15 @@ Which is enough by itself to exchange a limit and an expectation?
 
 - A. A large simulated sample looks stable.
 - B. A named theorem whose hypotheses are verified, such as dominated
-  convergence in its measure/probability setting. **Correct.**
+  convergence in its measure/probability setting.
 - C. Each function is differentiable once.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 11 — constrained extrema
 
@@ -1022,9 +1147,16 @@ What does \(\nabla f=\lambda\nabla g\) with \(g=0\) give at a regular
 equality-constrained extremum?
 
 - A. A candidate condition requiring feasibility, boundary/singularity, and
-  classification checks. **Correct.**
+  classification checks.
 - B. An automatic global optimum.
 - C. A numerical stopping rule.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: A.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Question 12 — ODE evidence
 
@@ -1033,8 +1165,15 @@ you conclude immediately?
 
 - A. The original continuous model is false.
 - B. The finite procedure is step-size sensitive; inspect regularity,
-  stability, tolerance, horizon, dtype, and a reference/error route. **Correct.**
+  stability, tolerance, horizon, dtype, and a reference/error route.
 - C. The new result is necessarily exact.
+
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Answer: B.** The compact repair key below states why each alternative fails.
+
+</details>
 
 ### Compact repair key — why the plausible alternatives fail
 
@@ -1237,6 +1376,42 @@ more transcript than needed for this learning record belongs in Notion.
 
 ## 15. Spaced review and mastery gate
 
+### One-page concept map
+
+M29 keeps returning to one question: which operations are you allowed to
+exchange, and what hypothesis buys that permission?
+
+~~~mermaid
+%% atlas-diagram-id: m29-concept-map
+%% atlas-diagram-title: How M29's ideas depend on one another
+%% atlas-diagram-alt: A domain with a distance gives limits, then continuity; compactness upgrades that to uniform continuity. Limits also give the derivative as a local linear map, extending to gradients, Jacobians, Hessians, Taylor approximation, and constrained extrema. Limits give the integral, extending to multiple integrals and change of variables. Sequences of functions split into pointwise and uniform convergence, and only uniform convergence or a dominating function licenses exchanging a limit with an integral or derivative. Numerical routes are separate finite claims with their own error.
+flowchart TB
+  METRIC["domain + distance"] --> LIM["limits"]
+  LIM --> CONT["continuity"]
+  COMPACT["compactness"] --> UNIF["uniform continuity"]
+  CONT --> UNIF
+  LIM --> DERIV["derivative = local linear map"]
+  DERIV --> MULTI["gradient, Jacobian, Hessian"]
+  MULTI --> TAYLOR["Taylor approximation"]
+  MULTI --> CONSTR["constrained extrema (Lagrange)"]
+  LIM --> INT["integral"]
+  INT --> MULTINT["multiple integrals"]
+  MULTINT --> CHANGE["change of variables (|det J|)"]
+  SEQ["sequences of functions"] --> PW["pointwise convergence"]
+  SEQ --> UC["uniform convergence"]
+  UC --> EXCH["legal exchange of limit with integral or derivative"]
+  DOM2["dominating function"] --> EXCH
+  PW -.->|"not sufficient"| EXCH
+  DERIV --> NUM["finite differences"]
+  INT --> QUAD["quadrature + ODE steps"]
+  NUM --> FINITE["a finite claim with its own error"]
+  QUAD --> FINITE
+~~~
+
+The dotted arrow is the one to memorise. Pointwise convergence *reaches*
+the exchange question and fails to answer it; that gap is where most incorrect
+interchange arguments live.
+
 ### Retrieval queue
 
 | When | Prompt |
@@ -1306,3 +1481,62 @@ derivation, and one numerical-error boundary into **M30**. Probability and
 inference add uncertainty to the same model-first discipline. In a rehearsal,
 change one distributional or sampling assumption; in the TA discussion, state
 which conclusion is mathematical, empirical, or still unsupported.
+
+## 17. Bench pack
+
+**Bench pack:** `m29` — sparse, three benches. CPython 3.12 floor. Requires `matplotlib`.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. The benches carry no teaching prose — everything
+they need is stated above.
+
+This module's reference model computes in **exact rational arithmetic**. That makes
+it an oracle rather than a competitor: it supplies the truncation error with no
+roundoff at all, so whatever a floating-point computation does differently is
+roundoff, isolated and attributable.
+
+### Bench 2 — approximation error account
+
+**Session:** 2. **Rungs:** debug and defend, trace.
+**Executes:** `quadratic_finite_difference_report` in exact arithmetic across
+sixteen decades of step size, then the same two formulas in `float`. The exact
+forward error falls monotonically; the float error falls, bottoms near the square
+root of machine epsilon, and then rises. The centered difference is provably exact
+for a quadratic, so its entire float residue is roundoff.
+**Cannot establish:** where any given function's optimal step lies. The balance
+point depends on the magnitude of the function and its second derivative, and on
+the precision — in single precision it sits several decades higher.
+
+### Bench 3 — integration derivation record
+
+**Session:** 3. **Rungs:** trace, map.
+**Executes:** the composite trapezoid rule on a quadratic across six halvings of
+the step, in exact rational arithmetic. The errors are 1/6, 1/24, 1/96, 1/384,
+1/1536 — each precisely a quarter of the previous, so the second-order rate is
+measured rather than quoted. Then the same rule on a straight line, where it is
+exact at one panel.
+**Cannot establish:** the rate for singular integrands, adaptive rules, or
+floating-point implementations. A smooth polynomial is the best case.
+
+### Bench 5 — convergence and exchange justification
+
+**Session:** 5. **Rungs:** trace, recognize.
+**Executes:** x to the n on the unit interval. The pointwise error at a fixed
+point falls toward zero while the supremum error stays exactly 1 at every n, and
+the witness point that achieves it slides toward 1 rather than disappearing.
+**Cannot establish:** anything about unrelated function sequences. This is an
+analytic fact about one named family, taken from its supremum rather than from a
+finite grid.
+
+### Sessions without a bench
+
+- **Session 1** — the workbook derives the delta for the affine limit directly, so
+  a bench would re-run a printed derivation rather than settle anything.
+- **Session 4**, **Session 6** — each qualifies on the rubric and ranked below this
+  pack's cut. Sparse packs cap at three.
+
+### Bench pack completion record
+
+Records under `benches/records/m29-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

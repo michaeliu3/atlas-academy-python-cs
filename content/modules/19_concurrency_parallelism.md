@@ -569,6 +569,10 @@ many passing histories ≠ every allowed history
 
 ---
 
+### Session 1 output — interleaving history table
+
+One table lists the distinct histories two workers can produce for one shared transition, and marks which are legal.
+
 ## 3. Session 2 — Protect one logical transition
 
 ### Pressure
@@ -786,6 +790,10 @@ why owner-reducer is simpler:
 ```
 
 ---
+
+### Session 2 output — critical-section boundary note
+
+One note derives the critical section from the invariant it protects, not from the code that happens to be adjacent.
 
 ## 4. Session 3 — Predicates, permits, and item ownership
 
@@ -1107,6 +1115,10 @@ opens the Atlas publication gate.
 
 ---
 
+### Session 3 output — ownership and permit ledger
+
+One ledger records which component owns each item, which permit admits it, and what happens when a permit is unavailable.
+
 ## 5. Session 4 — Progress can fail
 
 ### Pressure
@@ -1342,6 +1354,10 @@ remaining unknown:
 ```
 
 ---
+
+### Session 4 output — liveness failure dossier
+
+One dossier separates a stalled system from a slow one, and names the progress condition that failed.
 
 ## 6. Session 5 — Choose the Python execution model from first principles
 
@@ -1746,6 +1762,10 @@ For each, state one fact or measurement that could reverse the decision.
 
 ---
 
+### Session 5 output — execution-model decision record
+
+One record chooses threads, processes, or an interpreter pool from the workload's blocking behaviour, and states the assumption that would reverse it.
+
 ## 7. Session 6 — Atlas multi-worker evidence defense
 
 ### Pressure
@@ -2046,6 +2066,10 @@ Incomplete explanations select the smallest repair or retrieval step; the
 Teaching Assistant assigns neither a pass/fail result nor a mastery claim.
 
 ---
+
+### Session 6 output — multi-worker correctness dossier
+
+One dossier defends a concurrent Atlas run with an interleaving argument, an injected failure, and one claim the evidence cannot support.
 
 ## 8. Six-view interactive HTML studio
 
@@ -4130,3 +4154,75 @@ terminally visible, and one Module 18 publisher receives a candidate only
 after the complete deterministic gate. That local certainty is the foundation
 for the network, async/distributed, and runtime questions that follow—not a
 shortcut around them.
+
+
+## Bench pack
+
+**Bench pack:** `m19` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Every bench here **imports and probes**
+`public/downloads/module19_reference.py` rather than reimplementing it. The
+reference explores a **declared** model in which one shared update is three
+application-level transitions — R, C, W — and this module's own text is explicit
+that those are not bytecodes. Every count below belongs to that model.
+
+None of these benches starts a thread. That is deliberate: a running thread would
+sample one schedule, and the whole argument of this module is that the sample is
+not the property.
+
+### Bench 1 — interleaving history table
+
+**Session:** 1. **Rungs:** trace, recognize.
+**Executes:** the complete enumeration the session derives on the page. Twenty
+legal schedules; **eighteen lose an update**; the two that do not are exactly the
+two in which one worker finishes entirely before the other begins. Correctness is
+the narrow window, not the race — which inverts the intuition that lets this defect
+survive review, and explains why the test passes anyway.
+**Cannot establish:** how often a real machine produces a wrong answer. No GIL, no
+switch interval, no scheduler — which is precisely the quantity the bench argues
+you should stop reasoning from.
+
+### Bench 2 — critical-section boundary note
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** three state spaces. No lock: 20 schedules, 18 violations. A lock
+spanning the whole read-compute-write transition: 20 collapses to **2**, zero
+violations, linearization events `('A:WRITE', 'B:WRITE')`. A lock acquired after
+the read — real mutual exclusion, protecting the write, the version a reviewer is
+most likely to call sufficient: **42 schedules and 36 violations**, worse by count
+than no lock at all, because acquire and release are themselves steps that
+interleave. Its linearization events are empty, which is the diagnosis: there is no
+instant at which either update takes effect atomically.
+**Cannot establish:** any real lock's cost. No reentrancy, fairness, priority
+inversion, or GIL; a finer step decomposition would give different numbers and the
+same verdict.
+
+### Bench 5 — execution-model decision record
+
+**Session:** 5. **Rungs:** review and verify, recognize.
+**Executes:** six workload profiles through `choose_execution_model`. The
+recommendation moves with the profile, two profiles return `redesign` with an
+**empty** candidate list rather than a least-bad guess, and every single one carries
+`measurement_required=True`. Then the ceiling: 100 work units, span 10, 20% serial,
+4 workers gives **2.5×**, not 4× — and a worker sweep reaches 4.71× at 64 and 4.92×
+at 256, converging on 1/0.2 = 5× and never arriving. The binding constraint is
+Amdahl's, not the worker count, so buying parallelism is the wrong move.
+**Cannot establish:** any actual speedup. Nothing was timed; these are upper bounds
+that ignore process startup, pickling, and memory bandwidth, and the serial fraction
+itself was declared rather than measured.
+
+### Sessions without a bench
+
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — liveness: deadlock, livelock, starvation. The reference model's
+  lock-order and executor-wait analyses are static graph checks over declared
+  acquisitions, and bench 2 already carries a state-space exploration of the same
+  model. A second would be the same experiment in different clothing.
+- **Session 6** — a multi-worker correctness dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m19-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

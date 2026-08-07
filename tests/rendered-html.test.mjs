@@ -2688,7 +2688,10 @@ test("renders reader-visible MCQ rationales behind local prediction gates", asyn
     },
     {
       pathname: "/modules/29-calculus-real-analysis-continuous-change",
-      expectedInteractiveAnswerGates: 1,
+      // 1 -> 13. The module previously printed "**Correct.**" inline in every
+      // option list, so only its batch repair key was gated. Its twelve
+      // diagnostics now each reveal after the learner commits.
+      expectedInteractiveAnswerGates: 13,
       expectedNativeAnswerGates: 0,
       expectedPredictionGates: 0,
       hiddenRationaleText: "A reverses the quantifier responsibility",

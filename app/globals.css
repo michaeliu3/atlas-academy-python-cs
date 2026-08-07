@@ -4718,12 +4718,18 @@ main.module-library-shell {
   margin: 0;
 }
 
+/*
+ * Navigation was set at 10–11px in `--muted`, whose contrast on this paper
+ * sits right at the 4.5:1 AA threshold — acceptable at body size, marginal at
+ * that scale. A larger size plus a darker resting colour keeps the hierarchy
+ * without relying on borderline contrast.
+ */
 .desktop-module-toc a,
 .mobile-module-toc a {
   border-left: 3px solid transparent;
-  color: var(--muted);
+  color: #4d564f;
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   line-height: 1.45;
   margin-left: -2px;
   padding: 0.42rem 0 0.42rem 0.8rem;
@@ -4732,7 +4738,7 @@ main.module-library-shell {
 
 .desktop-module-toc .toc-depth-3 a,
 .mobile-module-toc .toc-depth-3 a {
-  font-size: 0.62rem;
+  font-size: 0.74rem;
   padding-left: 1.55rem;
 }
 
@@ -4769,6 +4775,18 @@ main.module-library-shell {
   font-size: calc(1.08em * var(--reader-scale));
 }
 
+/*
+ * KaTeX ships its own fonts and depends on them for delimiter and radical
+ * metrics, so the family is left alone. What made formulas read as a foreign
+ * insert was optical size: KaTeX's 1.21em default sits noticeably larger than
+ * Newsreader's x-height. Inline math inherits the already-scaled font size of
+ * its paragraph, so only the ratio is corrected here — no second reader-scale
+ * multiplier, which would compound.
+ */
+.module-prose :is(p, li, dd, td, th, summary) .katex {
+  font-size: 1.04em;
+}
+
 .module-prose > :first-child {
   margin-top: 0;
 }
@@ -4782,26 +4800,33 @@ main.module-library-shell {
   scroll-margin-top: 155px;
 }
 
+/*
+ * Workbooks carry 14–46 `h2` and 61–154 `h3` each. At the previous display
+ * sizes (h2 up to 52px with an 88px top margin and a full-bleed rule) a module
+ * read as a stack of dividers rather than as continuous argument. These sizes
+ * still separate sections clearly at a 38rem measure without dominating it.
+ */
 .module-prose h2 {
   border-top: 1px solid var(--line);
-  font-size: calc(clamp(2.1rem, 4vw, 3.25rem) * var(--reader-scale));
-  font-weight: 470;
-  letter-spacing: -0.035em;
-  line-height: 1.03;
-  margin: 5.5rem 0 1.5rem;
-  padding-top: 1.5rem;
+  font-size: calc(clamp(1.75rem, 2.6vw, 2.25rem) * var(--reader-scale));
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 1.35rem;
 }
 
 .module-prose h3 {
-  font-size: calc(clamp(1.45rem, 2.5vw, 2rem) * var(--reader-scale));
-  font-weight: 520;
-  line-height: 1.15;
-  margin: 3.4rem 0 1.1rem;
+  font-size: calc(clamp(1.25rem, 1.9vw, 1.5rem) * var(--reader-scale));
+  font-weight: 560;
+  line-height: 1.25;
+  margin: 2.4rem 0 0.9rem;
 }
 
 .module-prose h4 {
-  font-size: calc(1.2rem * var(--reader-scale));
-  margin: 2.4rem 0 0.8rem;
+  font-size: calc(1.08rem * var(--reader-scale));
+  font-weight: 600;
+  margin: 1.9rem 0 0.7rem;
 }
 
 .module-prose h3.session-heading {
@@ -4835,13 +4860,27 @@ main.module-library-shell {
   opacity: 1;
 }
 
+/*
+ * Measure, not column width. The reading column stays wide enough for tables,
+ * code, and diagrams; running text is capped separately so a line lands near
+ * 70 characters instead of the ~90 a full-width 48rem column produced. The cap
+ * scales with the reader control so characters-per-line stays constant as the
+ * type grows.
+ */
+.module-prose p,
+.module-prose li,
+.module-prose dd,
+.module-prose blockquote {
+  max-width: calc(38rem * var(--reader-scale));
+}
+
 .module-prose p,
 .module-prose li,
 .module-prose dd {
   color: #38443d;
   font-family: var(--font-serif), serif;
-  font-size: calc(1.08rem * var(--reader-scale));
-  line-height: 1.76;
+  font-size: calc(1.12rem * var(--reader-scale));
+  line-height: 1.72;
 }
 
 .module-prose li + li {
@@ -4860,6 +4899,111 @@ main.module-library-shell {
 
 .module-prose strong {
   color: var(--ink);
+}
+
+/*
+ * Evidence labels — `**[THEOREM / PROOF]**`, `**[FINITE EXPERIMENT]**`,
+ * `**[AI PROPOSAL]**` — are the course's way of separating what a sentence
+ * establishes from what it asserts. Authors have coined ~118 distinct labels
+ * across ~300 uses, so the label text itself is not styled; each is classified
+ * into one of eight epistemic categories (see lib/evidence-label-taxonomy.mjs)
+ * and the category carries the colour. A newly coined label inherits a
+ * sensible treatment without a CSS change.
+ */
+.evidence-label {
+  background: var(--evidence-tint, var(--paper-deep));
+  border-left: 3px solid var(--evidence-accent, var(--ink));
+  border-radius: 0.2rem;
+  color: var(--evidence-ink, var(--ink));
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.66em;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  margin-right: 0.4em;
+  padding: 0.2em 0.5em;
+  vertical-align: 0.06em;
+}
+
+/* Established by argument from stated hypotheses. */
+.evidence-label-proof {
+  --evidence-accent: var(--moss);
+  --evidence-tint: var(--moss-soft);
+  --evidence-ink: #2f4636;
+}
+
+/* A declared construct: definition, model, hypothesis, mechanism. */
+.evidence-label-model {
+  --evidence-accent: var(--cobalt);
+  --evidence-tint: var(--cobalt-soft);
+  --evidence-ink: #1f3765;
+}
+
+/* Documented behaviour of something outside this course's control. */
+.evidence-label-contract {
+  --evidence-accent: var(--plum);
+  --evidence-tint: var(--plum-soft);
+  --evidence-ink: #4b3352;
+}
+
+/* Finite, situated evidence: it happened, under named conditions. */
+.evidence-label-observation {
+  --evidence-accent: var(--saffron);
+  --evidence-tint: var(--saffron-soft);
+  --evidence-ink: #6d4313;
+}
+
+/* A refutation. It should never read as one more supporting claim. */
+.evidence-label-counterexample {
+  --evidence-accent: var(--rose);
+  --evidence-tint: var(--rose-soft);
+  --evidence-ink: #713a3e;
+}
+
+/* A choice this project made, which could have been made differently. */
+.evidence-label-policy {
+  --evidence-accent: var(--ink);
+  --evidence-tint: var(--paper-deep);
+  --evidence-ink: #2b3630;
+}
+
+/* Unchecked machine output and declared gaps stay visibly provisional: a
+   dashed edge reads as "not settled" even in grayscale or at a glance. */
+.evidence-label-proposal {
+  --evidence-accent: var(--saffron);
+  --evidence-tint: transparent;
+  --evidence-ink: #6d4313;
+  border-left-style: dashed;
+  border-left-width: 3px;
+  box-shadow: inset 0 0 0 1px rgba(199, 124, 42, 0.35);
+}
+
+.evidence-label-unknown {
+  --evidence-accent: var(--muted);
+  --evidence-tint: transparent;
+  --evidence-ink: #4d564f;
+  border-left-style: dashed;
+  border-left-width: 3px;
+  box-shadow: inset 0 0 0 1px rgba(102, 112, 106, 0.3);
+}
+
+@media (forced-colors: active) {
+  .evidence-label {
+    border: 1px solid CanvasText;
+    border-left-width: 3px;
+  }
+}
+
+/*
+ * A claim/source pointer (`M32-C03 -> S32-03`) routes a claim to its entry in
+ * the module's research map. It is navigation, not an identifier and not an
+ * evidence label, so it gets a quieter treatment than either.
+ */
+.module-prose :not(pre) > code.claim-source-pointer {
+  background: transparent;
+  border: 1px dashed rgba(23, 33, 29, 0.28);
+  color: #4d564f;
+  font-size: 0.78em;
+  letter-spacing: 0.02em;
 }
 
 .module-prose a {
@@ -4919,10 +5063,10 @@ main.module-library-shell {
 
 .lesson-code figcaption {
   border-bottom: 1px solid rgba(244, 239, 228, 0.14);
-  color: #e7b271;
-  font-size: 0.6rem;
+  color: #eec08a;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   padding: 0.7rem 1.2rem;
   text-transform: uppercase;
 }
@@ -4934,7 +5078,7 @@ main.module-library-shell {
 }
 
 .lesson-code pre {
-  font-size: calc(0.78rem * var(--reader-scale));
+  font-size: calc(0.86rem * var(--reader-scale));
   max-height: 42rem;
 }
 
@@ -4953,9 +5097,15 @@ main.module-library-shell {
   outline-offset: 3px;
 }
 
+/*
+ * Tables are the primary teaching device in the mathematics and theory arc
+ * (10–18 per module, many carrying multi-sentence cells). They were set a
+ * quarter smaller than body prose, which put the densest content in the
+ * smallest type on the page.
+ */
 .module-prose table {
   border-collapse: collapse;
-  font-size: calc(0.82rem * var(--reader-scale));
+  font-size: calc(0.95rem * var(--reader-scale));
   min-width: 100%;
 }
 
@@ -4963,8 +5113,8 @@ main.module-library-shell {
 .module-prose td {
   border-bottom: 1px solid var(--line);
   border-right: 1px solid var(--line);
-  line-height: 1.55;
-  padding: 0.75rem 0.85rem;
+  line-height: 1.6;
+  padding: 0.7rem 0.8rem;
   text-align: left;
   vertical-align: top;
 }
@@ -4972,8 +5122,8 @@ main.module-library-shell {
 .module-prose th {
   background: var(--ink);
   color: var(--paper);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
+  font-size: calc(0.85rem * var(--reader-scale));
+  letter-spacing: 0.03em;
 }
 
 .module-prose tr:nth-child(even) td {
@@ -5091,12 +5241,142 @@ main.module-library-shell {
   margin-top: 1.25rem;
 }
 
-.mermaid-figure {
+.mermaid-figure,
+.atlas-figure {
   background: rgba(255, 253, 247, 0.72);
   border: 1px solid var(--line);
   border-radius: 1rem;
   margin: 2.5rem 0;
   overflow: hidden;
+}
+
+/*
+ * Atlas figures — plots, vector diagrams, and bar charts built from a
+ * declarative spec (lib/atlas-figure.mjs). Colour is carried by class rather
+ * than by presentation attributes so a figure inherits the course palette and
+ * stays legible under forced colours.
+ */
+.atlas-figure-canvas {
+  overflow-x: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.atlas-figure-canvas > p {
+  color: var(--rose);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.atlas-figure-canvas svg {
+  display: block;
+  font-family: var(--font-sans), sans-serif;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.atlas-figure-canvas svg text {
+  fill: var(--ink);
+}
+
+.atlas-figure-axis {
+  stroke: rgba(23, 33, 29, 0.55);
+  stroke-width: 1.25;
+}
+
+.atlas-figure-tick {
+  fill: #4d564f;
+  font-size: 12px;
+}
+
+.atlas-figure-axis-label {
+  fill: #38443d;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.atlas-figure-series-label,
+.atlas-figure-bar-value {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.atlas-figure-guide {
+  stroke: rgba(23, 33, 29, 0.4);
+  stroke-width: 1.25;
+}
+
+.atlas-figure-dashed {
+  stroke-dasharray: 5 4;
+}
+
+.atlas-figure-series {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.25;
+}
+
+.atlas-figure-series-fill {
+  opacity: 0.16;
+  stroke: none;
+}
+
+.atlas-figure-vector {
+  stroke-linecap: round;
+  stroke-width: 2.5;
+}
+
+.atlas-figure-point {
+  fill: var(--ink);
+}
+
+.atlas-figure-right-angle {
+  fill: none;
+  stroke: rgba(23, 33, 29, 0.7);
+  stroke-width: 1.5;
+}
+
+.atlas-figure-bar {
+  stroke: none;
+}
+
+/* Five tones, reused across every figure kind so a colour means the same thing
+   from one figure to the next. */
+.atlas-figure-tone-0 { stroke: var(--cobalt); }
+.atlas-figure-tone-1 { stroke: var(--saffron); }
+.atlas-figure-tone-2 { stroke: var(--moss); }
+.atlas-figure-tone-3 { stroke: var(--plum); }
+.atlas-figure-tone-4 { stroke: var(--rose); }
+
+.atlas-figure-vector-head.atlas-figure-tone-0,
+.atlas-figure-series-fill.atlas-figure-tone-0,
+.atlas-figure-bar.atlas-figure-tone-0 { fill: var(--cobalt); }
+.atlas-figure-vector-head.atlas-figure-tone-1,
+.atlas-figure-series-fill.atlas-figure-tone-1,
+.atlas-figure-bar.atlas-figure-tone-1 { fill: var(--saffron); }
+.atlas-figure-vector-head.atlas-figure-tone-2,
+.atlas-figure-series-fill.atlas-figure-tone-2,
+.atlas-figure-bar.atlas-figure-tone-2 { fill: var(--moss); }
+.atlas-figure-vector-head.atlas-figure-tone-3,
+.atlas-figure-series-fill.atlas-figure-tone-3,
+.atlas-figure-bar.atlas-figure-tone-3 { fill: var(--plum); }
+.atlas-figure-vector-head.atlas-figure-tone-4,
+.atlas-figure-series-fill.atlas-figure-tone-4,
+.atlas-figure-bar.atlas-figure-tone-4 { fill: var(--rose); }
+
+.atlas-figure-series-label.atlas-figure-tone-0 { fill: var(--cobalt); }
+.atlas-figure-series-label.atlas-figure-tone-1 { fill: #8a5415; }
+.atlas-figure-series-label.atlas-figure-tone-2 { fill: var(--moss); }
+.atlas-figure-series-label.atlas-figure-tone-3 { fill: var(--plum); }
+.atlas-figure-series-label.atlas-figure-tone-4 { fill: var(--rose); }
+
+.atlas-figure-vector-head,
+.atlas-figure-bar,
+.atlas-figure-series-fill {
+  stroke: none;
 }
 
 .diagram-canvas {

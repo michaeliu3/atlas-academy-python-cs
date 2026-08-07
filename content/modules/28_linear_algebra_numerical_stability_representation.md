@@ -192,11 +192,11 @@ the chosen feature scaling may change the geometry we intended to inspect.
 
 ### First principle: a vector space is a promise about allowed combinations
 
-**[DEFINITION / MODEL]** A vector space (V) over a field (mathbb F) is a
+**[DEFINITION / MODEL]** A vector space \(V\) over a field \(\mathbb F\) is a
 set of vectors with addition and scalar multiplication satisfying the vector
 space axioms: closure, associativity, commutativity of addition, an additive
 identity and inverse, distributive laws, scalar compatibility, and scalar
-identity. In this module (mathbb F) is usually (mathbb R), but the field
+identity. In this module \(\mathbb F\) is usually \(\mathbb R\), but the field
 is part of the definition.
 
 Plain language: a space is a collection of allowed displacements for which
@@ -204,9 +204,9 @@ adding directions and scaling directions stays meaningful. A raw Python list
 is not automatically a vector; its elements, units, operations, and equality
 convention must be chosen first.
 
-**[DEFINITION / MODEL]** A subset (W\subseteq V) is a subspace when it
-contains (0) and is closed under every linear combination
-(\alpha u+\beta v) with (u,v\in W), (\alpha,\beta\in\mathbb F).
+**[DEFINITION / MODEL]** A subset \(W\subseteq V\) is a subspace when it
+contains \(0\) and is closed under every linear combination
+\(\alpha u+\beta v\) with \(u,v\in W\), \(\alpha,\beta\in\mathbb F\).
 
 **[COUNTEREXAMPLE]** The affine line
 
@@ -214,13 +214,13 @@ contains (0) and is closed under every linear combination
 L=\{(x,y)\in\mathbb R^2:x+y=1\}
 \]
 
-looks line-like but is not a subspace: it excludes (0), and adding two
-points of (L) produces a point with coordinate sum (2). “Flat” is not the
+looks line-like but is not a subspace: it excludes \(0\), and adding two
+points of \(L\) produces a point with coordinate sum \(2\). “Flat” is not the
 same as “subspace”; an affine translation matters.
 
 ### 3.1 Definitions: span, independence, basis, and dimension
 
-For vectors (v_1,\ldots,v_k\in V),
+For vectors \(v_1,\ldots,v_k\in V\),
 
 \[
 \operatorname{span}(v_1,\ldots,v_k)
@@ -238,8 +238,8 @@ has the same length, the **dimension**. This theorem is why “number of useful
 directions” is not simply the number of features or the number of array
 columns.
 
-**Worked contrast.** In (\mathbb R^2), ((1,0),(0,1)) is a basis. The list
-((1,0),(0,1),(1,1)) spans the same space but is dependent because
+**Worked contrast.** In \(\mathbb R^2\), \((1,0),(0,1)\) is a basis. The list
+\((1,0),(0,1),(1,1)\) spans the same space but is dependent because
 
 \[
 (1,0)+(0,1)-(1,1)=0.
@@ -251,14 +251,14 @@ does not create another independent *linear* direction.
 
 ### 3.2 Linear maps are the object; matrices are coordinate descriptions
 
-**[DEFINITION / MODEL]** A map (T:V\to W) is linear if
+**[DEFINITION / MODEL]** A map \(T:V\to W\) is linear if
 
 \[
 T(\alpha u+\beta v)=\alpha T(u)+\beta T(v).
 \]
 
-Once bases are chosen, an (m\times n) matrix (A) represents a map from
-(\mathbb R^n\) to (\mathbb R^m), with (x\mapsto Ax) under the column-vector
+Once bases are chosen, an \(m\times n\) matrix \(A\) represents a map from
+\(\mathbb R^n\) to \(\mathbb R^m\), with \(x\mapsto Ax\) under the column-vector
 convention. The map is basis-independent; its entries are not. A different
 basis can change the matrix while representing the same underlying map.
 
@@ -277,18 +277,18 @@ coordinate convention is fixed.
 
 ### 3.3 Four spaces and rank-nullity
 
-For (A\in\mathbb R^{m\times n}):
+For \(A\in\mathbb R^{m\times n}\):
 
-- (\operatorname{Col}(A)\subseteq\mathbb R^m) is the column space (image);
-- (\operatorname{Null}(A)=\{x\in\mathbb R^n:Ax=0\}\) is the null space
+- \(\operatorname{Col}(A)\subseteq\mathbb R^m\) is the column space (image);
+- \(\operatorname{Null}(A)=\{x\in\mathbb R^n:Ax=0\}\) is the null space
   (kernel);
-- (\operatorname{Row}(A)\subseteq\mathbb R^n) is the span of row vectors;
-- (\operatorname{Null}(A^\mathsf T)\subseteq\mathbb R^m) is the left null
+- \(\operatorname{Row}(A)\subseteq\mathbb R^n\) is the span of row vectors;
+- \(\operatorname{Null}(A^\mathsf T)\subseteq\mathbb R^m\) is the left null
   space.
 
 The rank is the dimension of the column space, equivalently the row space.
 
-**[THEOREM / PROOF] Rank-nullity.** If (T:V\to W) is linear and (V) is
+**[THEOREM / PROOF] Rank-nullity.** If \(T:V\to W\) is linear and \(V\) is
 finite-dimensional, then
 
 \[
@@ -296,18 +296,18 @@ finite-dimensional, then
 \]
 
 **Proof idea:** begin with a basis for the kernel, extend it to a basis for
-(V), then show images of the extension vectors form a basis for the image.
+\(V\), then show images of the extension vectors form a basis for the image.
 The theorem applies to the stated finite-dimensional linear map. It does not
 say a floating-point `matrix_rank` call has discovered a metaphysical number
 of factors; it has applied a tolerance-based numerical criterion.
 
 ### 3.4 Row reduction is an equivalence tool, not a semantic rewrite
 
-Elementary row operations preserve the solution set of (Ax=b). They help
+Elementary row operations preserve the solution set of \(Ax=b\). They help
 identify pivots, rank, and the null space. They do **not** preserve every
 geometric object: row operations can change the column space as a subset of
-(\mathbb R^m). Use the original pivot columns, not the columns of the
-reduced matrix, to build a basis for (\operatorname{Col}(A)).
+\(\mathbb R^m\). Use the original pivot columns, not the columns of the
+reduced matrix, to build a basis for \(\operatorname{Col}(A)\).
 
 **[COUNTEREXAMPLE]** If a code review returns pivot columns of reduced row
 echelon form as literal columns of the original feature matrix, it may return
@@ -336,6 +336,10 @@ feature/observation convention explicit.
 
 ---
 
+### Session 1 output — rank and lost-direction account
+
+One account states what a map's rank is and which directions its action destroys.
+
 ## 4. Session 2 — Inner products, orthogonality, projection, and least squares
 
 ### Pressure
@@ -348,21 +352,21 @@ the product and scientific claim.
 ### 4.1 Inner products create geometry
 
 **[DEFINITION / MODEL]** An inner product on a real vector space is a map
-(\langle\cdot,\cdot\rangle:V\times V\to\mathbb R) that is bilinear,
+\(\langle\cdot,\cdot\rangle:V\times V\to\mathbb R\) that is bilinear,
 symmetric, and positive definite:
 
 \[
 \langle x,x\rangle\ge0,\qquad \langle x,x\rangle=0\iff x=0.
 \]
 
-It induces a norm (\lVert x\rVert=\sqrt{\langle x,x\rangle}) and distance
-(\lVert x-y\rVert). In standard Euclidean coordinates,
-(\langle x,y\rangle=x^\mathsf Ty), but that is a modeling choice. A positive
-definite weight matrix (W) can define
-(\langle x,y\rangle_W=x^\mathsf TWy).
+It induces a norm \(\lVert x\rVert=\sqrt{\langle x,x\rangle}\) and distance
+\(\lVert x-y\rVert\). In standard Euclidean coordinates,
+\(\langle x,y\rangle=x^\mathsf Ty\), but that is a modeling choice. A positive
+definite weight matrix \(W\) can define
+\(\langle x,y\rangle_W=x^\mathsf TWy\).
 
-**[COUNTEREXAMPLE]** The formula (x^\mathsf T\begin{bmatrix}1&0\\0&-1\end{bmatrix}x)
-is symmetric and bilinear but not an inner product: ((0,1)) has negative
+**[COUNTEREXAMPLE]** The formula \(x^\mathsf T\begin{bmatrix}1&0\\0&-1\end{bmatrix}x\)
+is symmetric and bilinear but not an inner product: \((0,1)\) has negative
 “squared length.” Symmetry alone is insufficient.
 
 Two vectors are orthogonal when their inner product is zero. Orthogonality is
@@ -371,10 +375,10 @@ association. Those can coincide only under added assumptions.
 
 ### 4.2 Orthogonal projection makes the residual visible
 
-Let (S\) be a subspace of a finite-dimensional inner-product space. The
-orthogonal projection (p=\operatorname{proj}_S(b)) is the unique vector in
-(S) such that (b-p\perp S). If the columns of (Q\in\mathbb R^{m\times r})
-are orthonormal and span (S), then
+Let \(S\) be a subspace of a finite-dimensional inner-product space. The
+orthogonal projection \(p=\operatorname{proj}_S(b)\) is the unique vector in
+\(S\) such that \(b-p\perp S\). If the columns of \(Q\in\mathbb R^{m\times r}\)
+are orthonormal and span \(S\), then
 
 \[
 p=QQ^\mathsf Tb,\qquad P=QQ^\mathsf T.
@@ -388,20 +392,59 @@ P^\mathsf T=P,\qquad P^2=P.
 
 Symmetry tells us the operator is self-adjoint in the Euclidean inner product;
 idempotence tells us applying the projection again changes nothing. A matrix
-with (P^2=P) but (P\ne P^\mathsf T) is an oblique projection, not generally
+with \(P^2=P\) but \(P\ne P^\mathsf T\) is an oblique projection, not generally
 the nearest Euclidean projection.
+
+The whole of least squares is in one picture. Take
+\(S=\operatorname{span}\{(3,1)\}\) and \(b=(1,3)\). Then
+
+\[
+p=\frac{\langle b,a\rangle}{\langle a,a\rangle}a=\frac{6}{10}(3,1)=(1.8,\,0.6),
+\qquad
+r=b-p=(-0.8,\,2.4),
+\qquad
+\langle r,a\rangle=-2.4+2.4=0.
+\]
+
+```atlas-figure
+%% atlas-diagram-id: m28-orthogonal-projection
+%% atlas-diagram-title: Orthogonal projection and its residual
+%% atlas-diagram-alt: The subspace S is a line through the origin in the direction (3,1). The vector b reaches (1,3), off that line. Its projection p reaches (1.8,0.6) on the line, and the residual b-p runs from p to b. A right-angle mark at p shows the residual meets the line at ninety degrees, which is the property that defines p as the closest point of S to b.
+{
+  "kind": "vector2d",
+  "xRange": [-1, 4.2],
+  "yRange": [-0.8, 3.4],
+  "width": 620,
+  "height": 380,
+  "segments": [
+    { "from": [-0.75, -0.25], "to": [3.9, 1.3], "style": "dashed", "label": "S" },
+    { "from": [1.8, 0.6], "to": [1, 3], "style": "dashed", "label": "r = b - p" }
+  ],
+  "vectors": [
+    { "to": [1, 3], "label": "b", "tone": 0 },
+    { "to": [1.8, 0.6], "label": "p", "tone": 2 }
+  ],
+  "rightAngles": [
+    { "at": [1.8, 0.6], "toward": [[1, 3], [3.9, 1.3]] }
+  ]
+}
+```
+
+Read the right-angle mark as the definition, not as decoration: \(p\) is the
+point of \(S\) closest to \(b\) *because* the residual is orthogonal to \(S\).
+Every least-squares result below is this picture with more coordinates.
 
 ### 4.3 Least squares derives from residual orthogonality
 
-Given (A\in\mathbb R^{m\times n}) and response (b\in\mathbb R^m), least
+Given \(A\in\mathbb R^{m\times n}\) and response \(b\in\mathbb R^m\), least
 squares asks for
 
 \[
 \min_x f(x)=\tfrac12\lVert Ax-b\rVert_2^2.
 \]
 
-Use a directional derivative, not a slogan. Let (r=Ax-b). For a perturbation
-(h),
+Use a directional derivative, not a slogan. Let \(r=Ax-b\). For a perturbation
+\(h\),
 
 \[
 f(x+th)=\tfrac12\lVert r+tAh\rVert_2^2,
@@ -413,28 +456,28 @@ so
 \frac{d}{dt}f(x+th)\bigg|_{t=0}=h^\mathsf TA^\mathsf Tr.
 \]
 
-At a minimizer this is zero for every (h), giving the **normal equations**:
+At a minimizer this is zero for every \(h\), giving the **normal equations**:
 
 \[
 A^\mathsf T A\hat{x}=A^\mathsf Tb.
 \]
 
 The geometric reading is more valuable than the formula: the residual
-(b-A\hat{x}) is orthogonal to every column of (A). Therefore (A\hat{x})
-is the projection of (b) onto (\operatorname{Col}(A)).
+\(b-A\hat{x}\) is orthogonal to every column of \(A\). Therefore \(A\hat{x}\)
+is the projection of \(b\) onto \(\operatorname{Col}(A)\).
 
 **Boundary:** normal equations characterize a minimizer but do not promise
-that (A^\mathsf TA) is invertible. If columns are dependent, minimizers may
-not be unique. The fitted value (A\hat{x}) is unique, but the coefficients
+that \(A^\mathsf TA\) is invertible. If columns are dependent, minimizers may
+not be unique. The fitted value \(A\hat{x}\) is unique, but the coefficients
 need not be.
 
 ### 4.4 Why `inverse(A.T @ A) @ A.T @ b` is a review smell
 
-For full-column-rank (A), the algebraic expression
-((A^\mathsf TA)^{-1}A^\mathsf Tb) exists. It is usually a poor numerical
+For full-column-rank \(A\), the algebraic expression
+\((A^\mathsf TA)^{-1}A^\mathsf Tb\) exists. It is usually a poor numerical
 implementation plan:
 
-- forming (A^\mathsf TA) can square the two-norm condition number;
+- forming \(A^\mathsf TA\) can square the two-norm condition number;
 - explicitly computing an inverse does more work and hides error pathways;
 - rank deficiency makes the expression undefined while a least-squares problem
   can still have solutions;
@@ -454,23 +497,27 @@ b=\begin{bmatrix}0\\1\\3\end{bmatrix}.
 \]
 
 Before calculating, predict whether the least-squares residual can be zero.
-Then derive the best constant (x) from residual orthogonality:
+Then derive the best constant \(x\) from residual orthogonality:
 
-\(
-\sum_i(x-b_i)=0
-\).
+\[
+\sum_i(x-b_i)=0.
+\]
 
 <details>
 <summary>Reveal after writing your prediction.</summary>
 
-**Reveal:** the best constant is the mean (4/3), and the residual is not
-zero because (b\notin\operatorname{Col}(A)). This does not say a constant
+**Reveal:** the best constant is the mean \(4/3\), and the residual is not
+zero because \(b\notin\operatorname{Col}(A)\). This does not say a constant
 model is useful; it states which constant is closest under the declared
 squared-error geometry.
 
 </details>
 
 ---
+
+### Session 2 output — projection and residual record
+
+One record separates the projected component from the residual and states what the residual means.
 
 ## 5. Session 3 — Eigenstructure, symmetric maps, PSD matrices, and the spectral theorem
 
@@ -482,17 +529,17 @@ rectangular data matrix. The names overlap; the hypotheses do not.
 
 ### 5.1 Eigensystems and diagonalization
 
-**[DEFINITION / MODEL]** For a square matrix (A\), a nonzero vector (v) is
-an eigenvector with eigenvalue (\lambda) if
+**[DEFINITION / MODEL]** For a square matrix \(A\), a nonzero vector \(v\) is
+an eigenvector with eigenvalue \(\lambda\) if
 
 \[
 Av=\lambda v.
 \]
 
-An (n\times n) matrix is diagonalizable if there is an invertible (S) and
-diagonal (D) with (A=SDS^{-1}). Equivalently, it has a basis of
+An \(n\times n\) matrix is diagonalizable if there is an invertible \(S\) and
+diagonal \(D\) with \(A=SDS^{-1}\). Equivalently, it has a basis of
 eigenvectors. Diagonalization turns repeated application into
-(A^k=SD^kS^{-1}), but it is not guaranteed for every matrix.
+\(A^k=SD^kS^{-1}\), but it is not guaranteed for every matrix.
 
 **[COUNTEREXAMPLE]**
 
@@ -507,14 +554,14 @@ eigenvectors.
 ### 5.2 Symmetry changes the geometry
 
 **[THEOREM / PROOF] Spectral theorem, real finite-dimensional form.** If
-(A=A^\mathsf T\), then (A\) has an orthonormal basis of real eigenvectors;
+\(A=A^\mathsf T\), then \(A\) has an orthonormal basis of real eigenvectors;
 equivalently,
 
 \[
 A=Q\Lambda Q^\mathsf T
 \]
 
-for an orthogonal (Q) and real diagonal (\Lambda).
+for an orthogonal \(Q\) and real diagonal \(\Lambda\).
 
 **Proof idea:** symmetric maps are self-adjoint. Their eigenvalues are real;
 eigenspaces for distinct eigenvalues are orthogonal; within repeated-eigenvalue
@@ -525,22 +572,22 @@ the data/model.
 
 ### 5.3 Positive semidefinite is a quadratic-form claim
 
-**[DEFINITION / MODEL]** A real symmetric matrix (A) is positive
+**[DEFINITION / MODEL]** A real symmetric matrix \(A\) is positive
 semidefinite (PSD) when
 
 \[
 x^\mathsf TAx\ge0\quad\text{for every }x.
 \]
 
-It is positive definite (PD) when the inequality is strict for nonzero (x).
+It is positive definite (PD) when the inequality is strict for nonzero \(x\).
 For a real symmetric matrix, PSD is equivalent to every eigenvalue being
 nonnegative. The symmetry condition matters in the standard definition and
 equivalence.
 
 Examples:
 
-- (A^\mathsf TA) is PSD because
-  (x^\mathsf TA^\mathsf TAx=\lVert Ax\rVert_2^2\ge0).
+- \(A^\mathsf TA\) is PSD because
+  \(x^\mathsf TA^\mathsf TAx=\lVert Ax\rVert_2^2\ge0\).
 - A covariance matrix is theoretically PSD under its stated construction;
   finite samples and numerical procedures can still produce small negative
   eigenvalues through rounding or an invalid estimate.
@@ -549,7 +596,7 @@ Examples:
 
 ### 5.4 Quadratic forms diagnose curvature and energy, not causality
 
-The scalar (x^\mathsf TAx) is a quadratic form. With symmetric (A), the
+The scalar \(x^\mathsf TAx\) is a quadratic form. With symmetric \(A\), the
 spectral theorem writes it as a sum of eigenvalue-weighted squared coordinates
 in the eigenbasis. This explains why a negative eigenvalue gives a direction
 of negative curvature and why a zero eigenvalue gives a flat direction.
@@ -568,31 +615,35 @@ the distinction between a numerical diagnostic and an exact PSD proof.
 
 ---
 
+### Session 3 output — spectral structure card
+
+One card states the eigenstructure of a symmetric map and what positive semidefiniteness adds.
+
 ## 6. Session 4 — SVD, low-rank approximation, conditioning, and stable computation
 
 ### Pressure
 
-“Keep the top components” is often used as a recipe. Before choosing (k), a
+“Keep the top components” is often used as a recipe. Before choosing \(k\), a
 reviewer must ask: top components of which centered/scaled matrix, under which
 norm, for which error tradeoff, and with what sensitivity to perturbation?
 
 ### 6.1 Singular value decomposition works for every real rectangular matrix
 
-**[THEOREM / PROOF] SVD.** Every real (m\times n) matrix (A) has a
+**[THEOREM / PROOF] SVD.** Every real \(m\times n\) matrix \(A\) has a
 factorization
 
 \[
 A=U\Sigma V^\mathsf T,
 \]
 
-where (U\) and (V) are orthogonal and (\Sigma) is rectangular diagonal
+where \(U\) and \(V\) are orthogonal and \(\Sigma\) is rectangular diagonal
 with nonnegative singular values
-(\sigma_1\ge\sigma_2\ge\cdots\ge0). The positive singular values are the
-square roots of the positive eigenvalues of (A^\mathsf TA), but computing an
-SVD by explicitly forming (A^\mathsf TA) can worsen numerical behavior.
+\(\sigma_1\ge\sigma_2\ge\cdots\ge0\). The positive singular values are the
+square roots of the positive eigenvalues of \(A^\mathsf TA\), but computing an
+SVD by explicitly forming \(A^\mathsf TA\) can worsen numerical behavior.
 
-Plain language: (V^\mathsf T) expresses input coordinates in special
-orthogonal directions, (\Sigma) stretches or suppresses them, and (U)
+Plain language: \(V^\mathsf T\) expresses input coordinates in special
+orthogonal directions, \(\Sigma\) stretches or suppresses them, and \(U\)
 expresses output coordinates. It is a map decomposition, not an explanation of
 why real-world features exist.
 
@@ -605,7 +656,7 @@ A_k=U_{[:,1:k]}\Sigma_{1:k,1:k}V_{[:,1:k]}^\mathsf T.
 \]
 
 **[THEOREM / PROOF] Eckart–Young–Mirsky, stated boundary.** Among matrices of
-rank at most (k), (A_k) minimizes both the spectral-norm and Frobenius-norm
+rank at most \(k\), \(A_k\) minimizes both the spectral-norm and Frobenius-norm
 error; in Frobenius norm,
 
 \[
@@ -615,7 +666,7 @@ error; in Frobenius norm,
 **Proof idea:** orthogonal changes of coordinates preserve these norms, so the
 problem reduces to approximating a diagonal matrix; retaining the largest
 diagonal entries leaves the smallest squared tail. The theorem does not say
-that rank (k) is ethically, statistically, or operationally appropriate.
+that rank \(k\) is ethically, statistically, or operationally appropriate.
 It says what is optimal for one algebraic loss on one matrix.
 
 ### 6.3 Condition number measures sensitivity of the problem
@@ -633,9 +684,9 @@ with \(m\ge n\), use the corresponding nonzero-singular-value ratio
 when an inverse exists; it does not turn every least-squares sensitivity question
 into one scalar.
 
-Large (\kappa\) means some small relative input perturbations can cause much
+Large \(\kappa\) means some small relative input perturbations can cause much
 larger relative output perturbations. A singular matrix has infinite condition
-number for solving (Ax=b). Conditioning is a property of a problem plus a
+number for solving \(Ax=b\). Conditioning is a property of a problem plus a
 chosen norm/quantity of interest, not an accusation that the programmer used a
 bad algorithm.
 
@@ -655,8 +706,8 @@ by an unstable procedure. Never compress both ideas into “numerical error.”
 
 ### 6.5 The normal-equations amplification boundary
 
-For full-column-rank rectangular (A), the nonzero singular values of
-(A^\mathsf TA) are the squares of those of (A), so
+For full-column-rank rectangular \(A\), the nonzero singular values of
+\(A^\mathsf TA\) are the squares of those of \(A\), so
 
 \[
 \kappa_2(A^\mathsf TA)=\kappa_2(A)^2.
@@ -664,8 +715,40 @@ For full-column-rank rectangular (A), the nonzero singular values of
 
 This exact identity is why M28 treats normal equations as a derivation and
 residual certificate, not the default numerical path. QR/SVD may cost more but
-can preserve meaningful digits where explicitly forming (A^\mathsf TA)
+can preserve meaningful digits where explicitly forming \(A^\mathsf TA\)
 erases them.
+
+The squaring is not a small effect. For the near-parallel columns
+\(a_1=(1,1,1)^\mathsf T\) and \(a_2=(1,1+\varepsilon,1+2\varepsilon)^\mathsf T\),
+the condition number of \(A\) grows like \(1/\varepsilon\), so
+\(\kappa_2(A^\mathsf TA)\) grows like \(1/\varepsilon^2\):
+
+```atlas-figure
+%% atlas-diagram-id: m28-normal-equation-conditioning
+%% atlas-diagram-title: Digits available to a solver as columns become collinear
+%% atlas-diagram-alt: A bar chart comparing, for three separations epsilon of one thousandth, one ten-thousandth, and one hundred-thousandth, how many decimal digits survive in double precision. Working from A keeps roughly thirteen, twelve, and eleven digits. Forming A-transpose-A first keeps roughly ten, eight, and six. Each tenfold decrease in epsilon costs about one digit through A but about two digits through the normal equations, because squaring the condition number doubles the loss.
+{
+  "kind": "bars",
+  "yRange": [0, 16],
+  "yLabel": "surviving decimal digits (float64)",
+  "width": 620,
+  "height": 340,
+  "bars": [
+    { "label": "eps=1e-3 via A", "value": 13, "tone": 2 },
+    { "label": "via AtA", "value": 10, "tone": 4 },
+    { "label": "eps=1e-4 via A", "value": 12, "tone": 2 },
+    { "label": "via AtA", "value": 8, "tone": 4 },
+    { "label": "eps=1e-5 via A", "value": 11, "tone": 2 },
+    { "label": "via AtA", "value": 6, "tone": 4 }
+  ]
+}
+```
+
+**[ANALYTIC MODEL]** These heights are the digit budget implied by
+\(\log_{10}\kappa_2\) against float64's roughly sixteen decimal digits — an
+order-of-magnitude reading of the identity above, not a measurement. Run the
+Session 4 experiment to obtain the observed figures for your own dtype and
+solver, and label those separately.
 
 ### Session 4 numerical experiment
 
@@ -677,16 +760,20 @@ a_1=(1,1,1)^\mathsf T,\qquad
 a_2=(1,1+\varepsilon,1+2\varepsilon)^\mathsf T.
 \]
 
-For a declared (\varepsilon), dtype, and right-hand side:
+For a declared \(\varepsilon\), dtype, and right-hand side:
 
 1. predict the rank in exact arithmetic and the condition trend as
-   (\varepsilon\to0);
+   \(\varepsilon\to0\);
 2. compare residual norm with coefficient sensitivity;
 3. identify a tolerance at which a numerical rank routine changes its answer;
 4. record what the experiment does **not** establish about all inputs,
    production data, or the best feature policy.
 
 ---
+
+### Session 4 output — conditioning and stability report
+
+One report separates a problem's conditioning from an algorithm's stability, with a numerical observation for each.
 
 ## 7. Session 5 — Tensors, matrix calculus, and the representation-to-computation boundary
 
@@ -698,8 +785,8 @@ wrong loss, mixing batch and feature axes, or silently converting `float64` to
 
 ### 7.1 Tensor language begins with an index contract
 
-An order-​(r) tensor is a multilinear object or, after bases are chosen, an
-array with (r) indices. In software, a tensor also carries dtype, shape,
+An order-​\(r\) tensor is a multilinear object or, after bases are chosen, an
+array with \(r\) indices. In software, a tensor also carries dtype, shape,
 layout/stride information, device, and sometimes gradient history. Do not
 silently equate these layers.
 
@@ -707,11 +794,11 @@ Use a declared Atlas convention:
 
 | Symbol | Mathematical role | Example software shape |
 | --- | --- | --- |
-| (x\) | one feature column vector | `(d,)` only after documenting whether it is row- or column-like |
-| (X) | rows are observations, columns are features | `(n, d)` |
-| (W) | features to output coordinates | `(d, p)` |
-| (XW) | observation-by-output scores | `(n, p)` |
-| (B\) | batch of matrices | `(batch, m, n)` |
+| \(x\) | one feature column vector | `(d,)` only after documenting whether it is row- or column-like |
+| \(X\) | rows are observations, columns are features | `(n, d)` |
+| \(W\) | features to output coordinates | `(d, p)` |
+| \(XW\) | observation-by-output scores | `(n, p)` |
+| \(B\) | batch of matrices | `(batch, m, n)` |
 
 **[COUNTEREXAMPLE]** Broadcasting a `(d,)` mean across `(n, d)` often gives a
 useful column-wise centering. Broadcasting a `(n,)` vector may fail, or—after
@@ -726,7 +813,7 @@ For
 L(X)=\tfrac12\lVert XW-Y\rVert_F^2,
 \]
 
-let (R=XW-Y). The differential is
+let \(R=XW-Y\). The differential is
 
 \[
 dL=\operatorname{tr}(R^\mathsf T\,dX\,W)
@@ -740,7 +827,7 @@ so, under the Frobenius inner product,
 \]
 
 Check dimensions: `(n, p) @ (p, d)` becomes `(n, d)`, exactly the shape of
-(X). This is a derivation for the stated loss and convention. A framework's
+\(X\). This is a derivation for the stated loss and convention. A framework's
 automatic differentiation can compute a gradient of whatever graph it was
 given; it cannot decide whether axes, units, objective, labels, and
 regularization encode the intended claim.
@@ -780,6 +867,10 @@ equivalence nor a universal performance guarantee.
 
 ---
 
+### Session 5 output — representation-to-computation map
+
+One map connects a chosen representation to the computation it makes cheap and the one it makes expensive.
+
 ## 8. Session 6 — PCA from variance and low-rank approximation; representation dossier
 
 ### Pressure
@@ -791,19 +882,19 @@ discard a low-variance group signal.
 
 ### 8.1 Start with centered data and a declared convention
 
-Let (X\in\mathbb R^{n\times d}) have rows as observations. Let
+Let \(X\in\mathbb R^{n\times d}\) have rows as observations. Let
 
 \[
 X_c=X-\mathbf 1\mu^\mathsf T,
 \]
 
-where (\mu\) is the column-mean feature vector. Centering makes the origin
+where \(\mu\) is the column-mean feature vector. Centering makes the origin
 the empirical mean. It does not standardize units; dividing columns by scales
 creates a different geometry and potentially different principal directions.
 
 ### 8.2 Derivation one: maximize projected variance
 
-For a unit direction (v\in\mathbb R^d), projected scores are (X_cv). Their
+For a unit direction \(v\in\mathbb R^d\), projected scores are \(X_cv\). Their
 empirical squared magnitude is
 
 \[
@@ -811,8 +902,8 @@ empirical squared magnitude is
 =v^\mathsf T\left(\frac{1}{n}X_c^\mathsf TX_c\right)v.
 \]
 
-Let (C=X_c^\mathsf TX_c/n). It is symmetric PSD. By the spectral theorem,
-write (C=Q\Lambda Q^\mathsf T). Under (\lVert v\rVert_2=1), the Rayleigh
+Let \(C=X_c^\mathsf TX_c/n\). It is symmetric PSD. By the spectral theorem,
+write \(C=Q\Lambda Q^\mathsf T\). Under \(\lVert v\rVert_2=1\), the Rayleigh
 quotient is maximized by a top-eigenvalue eigenvector. The next direction is
 constrained orthogonal to earlier directions.
 
@@ -823,7 +914,7 @@ not confer semantic meaning on the component.
 
 ### 8.3 Derivation two: best rank-​k reconstruction
 
-With (X_c=U\Sigma V^\mathsf T), the truncated SVD
+With \(X_c=U\Sigma V^\mathsf T\), the truncated SVD
 
 \[
 X_{c,k}=U_k\Sigma_kV_k^\mathsf T
@@ -877,6 +968,10 @@ preserves 95% of what matters.” Produce a review card with:
 
 ---
 
+### Session 6 output — linear-algebra evidence dossier
+
+One dossier derives a low-rank approximation, states its error, and names one claim the numerics cannot support.
+
 ## 9. Linear Algebra & Stability Studio
 
 The portal's **Linear Algebra & Stability Studio** is a six-view, local-only
@@ -929,7 +1024,7 @@ Construct the smallest example for each false shortcut.
 
 Annotate each line of this proof sketch and find the first unearned step:
 
-> “(A^\mathsf TA) is symmetric, so it is invertible. Thus the least-squares
+> “\(A^\mathsf TA\) is symmetric, so it is invertible. Thus the least-squares
 > coefficient is unique.”
 
 Repair it using the correct condition. Explain why symmetry does not imply
@@ -937,7 +1032,7 @@ positive definiteness or invertibility.
 
 ### D. Trace
 
-Given a (3\times2) matrix with one column twice the other, trace exact RREF,
+Given a \(3\times2\) matrix with one column twice the other, trace exact RREF,
 rank, a null vector, a column-space basis from original pivot columns, and the
 effect on a least-squares coefficient. Label any finite calculation as a
 fixture-level observation.
@@ -947,11 +1042,11 @@ fixture-level observation.
 Derive one of the following without looking at the answer first:
 
 - normal equations from the directional derivative of squared residual;
-- (P^2=P) and (P^\mathsf T=P) for (P=QQ^\mathsf T);
+- \(P^2=P\) and \(P^\mathsf T=P\) for \(P=QQ^\mathsf T\);
 - the first PCA direction from a Rayleigh quotient under a unit-norm
   constraint;
-- why (A^\mathsf TA) is PSD;
-- the gradient of (\tfrac12\lVert XW-Y\rVert_F^2) with respect to (W).
+- why \(A^\mathsf TA\) is PSD;
+- the gradient of \(\tfrac12\lVert XW-Y\rVert_F^2\) with respect to \(W\).
 
 ### F. Debug
 
@@ -988,7 +1083,7 @@ repair, not assign a grade.
 
 ### Question 1 — subspace boundary
 
-Which set is a subspace of (\mathbb R^2)?
+Which set is a subspace of \(\mathbb R^2\)?
 
 A. \(\{(x,y):x+y=1\}\)  
 B. \(\{(x,y):y=2x\}\)  
@@ -1042,19 +1137,19 @@ domain and rank.
 
 ### Question 4 — projection
 
-If (p\) is the Euclidean projection of (b) onto
+If \(p\) is the Euclidean projection of \(b\) onto
 \(\operatorname{Col}(A)\), what must hold?
 
-A. (b-p\) is orthogonal to every column of (A).  
-B. (b-p=0) always.  
-C. (p\) is orthogonal to (b).  
+A. \(b-p\) is orthogonal to every column of \(A\).  
+B. \(b-p=0\) always.  
+C. \(p\) is orthogonal to \(b\).  
 D. Every least-squares coefficient vector is unique.
 
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
 
 **Answer: A.** Residual orthogonality characterizes the projection. B only
-holds when (b\) is in the column space; C is generally false; D fails under
+holds when \(b\) is in the column space; C is generally false; D fails under
 rank deficiency although the fitted vector can remain unique.
 
 </details>
@@ -1079,11 +1174,11 @@ algorithms for it.
 
 ### Question 6 — PSD
 
-Which statement is sufficient to show (A^\mathsf TA) is PSD?
+Which statement is sufficient to show \(A^\mathsf TA\) is PSD?
 
 A. It has positive diagonal entries.  
 B. It is square.  
-C. (x^\mathsf TA^\mathsf TAx=\lVert Ax\rVert_2^2\ge0\) for every (x).  
+C. \(x^\mathsf TA^\mathsf TAx=\lVert Ax\rVert_2^2\ge0\) for every \(x\).  
 D. A numerical eigensolver returned real values once.
 
 <details>
@@ -1099,10 +1194,10 @@ proof.
 
 Which hypothesis gives an orthonormal eigenbasis in the stated real theorem?
 
-A. (A) is any square matrix.  
-B. (A=A^\mathsf T).  
-C. (A) has a repeated eigenvalue.  
-D. (A) is invertible.
+A. \(A\) is any square matrix.  
+B. \(A=A^\mathsf T\).  
+C. \(A\) has a repeated eigenvalue.  
+D. \(A\) is invertible.
 
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
@@ -1115,11 +1210,11 @@ invertible but not diagonalizable.
 
 ### Question 8 — SVD versus eigendecomposition
 
-Which statement holds for every real rectangular matrix (A)?
+Which statement holds for every real rectangular matrix \(A\)?
 
 A. It has an eigendecomposition.  
 B. It is symmetric PSD.  
-C. It has an SVD (U\Sigma V^\mathsf T).  
+C. It has an SVD \(U\Sigma V^\mathsf T\).  
 D. Its columns are independent.
 
 <details>
@@ -1364,6 +1459,40 @@ more transcript than needed for this learning record belongs in Notion.
 
 ## 15. Spaced review and mastery gate
 
+### One-page concept map
+
+Everything in M28 hangs off one move: choosing coordinates, then asking what
+survives that choice.
+
+~~~mermaid
+%% atlas-diagram-id: m28-concept-map
+%% atlas-diagram-title: How M28's ideas depend on one another
+%% atlas-diagram-alt: Choosing a basis turns a vector space into coordinates and a linear map into a matrix, fixing the four subspaces and rank, and so whether a solution is unique. Choosing an inner product creates geometry, giving orthogonal projection and then least squares. Symmetry and positive semidefiniteness lead through the spectral theorem to eigen-decomposition; every rectangular matrix has an SVD, giving low-rank approximation. PCA is reached from both routes. Singular values set the condition number, which with algorithm stability decides how many computed digits are real.
+flowchart TB
+  BASIS["choose a basis"] --> COORD["coordinates + matrix"]
+  COORD --> SPACES["four subspaces + rank"]
+  SPACES --> SOLVE["existence + uniqueness"]
+  IP["choose an inner product"] --> GEOM["length, angle, orthogonality"]
+  GEOM --> PROJ["orthogonal projection"]
+  PROJ --> LSQ["least squares + normal equations"]
+  SPACES --> LSQ
+  SYM["symmetry + PSD"] --> SPEC["spectral theorem"]
+  SPEC --> EIG["eigen-decomposition"]
+  COORD --> SVD["SVD (any rectangular matrix)"]
+  SVD --> LOWRANK["low-rank approximation"]
+  EIG --> PCA["PCA"]
+  LOWRANK --> PCA
+  SVD --> COND["condition number"]
+  COND --> TRUST["how many digits are real"]
+  STAB["algorithm stability"] --> TRUST
+  LSQ --> COND
+~~~
+
+Two arrows carry most of the module's warnings. `SVD → COND → TRUST` is why a
+correct derivation can still produce a worthless number. The two arrows
+meeting at `PCA` are why the same computation answers two different questions,
+and why neither answer is "these components are what matters."
+
 ### Retrieval queue
 
 | When | Prompt |
@@ -1432,3 +1561,61 @@ boundary, and one code-reading trace into **M29**. Continuous change makes the
 same discipline explicit through limits, derivatives, approximation error, and
 coordinate changes. Ask the Study Partner to change a basis, scale, or tolerance;
 ask the TA to separate the theorem, numerical observation, and library claim.
+
+## 17. Bench pack
+
+**Bench pack:** `m28` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. These benches **import and probe** the checked-in
+reference model rather than reimplementing it.
+
+The reference computes in exact rational arithmetic. That makes it an oracle
+rather than a competitor — it supplies the mathematically true answer, so any
+difference a floating-point or finite-precision step introduces is attributable
+rather than merely visible.
+
+### Bench 1 — rank and lost-direction account
+
+**Session:** 1. **Rungs:** recognize, trace.
+**Executes:** `analyze_matrix` on a 3-by-3 with no zero entries and rank 2, then
+applies the matrix to its own null-space vector to confirm the loss; then perturbs
+one entry by one part in a trillion and watches the rank rise and the null space
+vanish.
+**Cannot establish:** what a floating-point routine would report. In floating
+point, rank becomes a tolerance choice — a decision, not a computation.
+
+### Bench 4 — conditioning and stability report
+
+**Session:** 4. **Rungs:** debug and defend, trace.
+**Executes:** an exactly-solved 2-by-2 whose condition number is about 40,000; a
+relative right-hand-side change of 3.5e-07 moves the solution by 7.1e-03, an
+amplification of roughly 20,000 with no floating point anywhere in the
+calculation. Then a subtraction at eight significant digits that returns exactly
+zero against a true difference of 0.001.
+**Cannot establish:** anything about a real solver. The cancellation model is a
+base-10 rounding rule in exact rationals and says so; it is not an IEEE-754
+emulator.
+
+### Bench 6 — linear-algebra evidence dossier
+
+**Session:** 6. **Rungs:** review and verify, trace.
+**Executes:** PCA on a dataset whose first component retains 99.95% of the
+variance while the rank-one reconstruction collapses a binary label to a spread
+of 0.07 — no threshold beats guessing.
+**Cannot establish:** how often this happens on real data, or PCA's behaviour in
+higher dimensions, where the reference does not operate.
+
+### Sessions without a bench
+
+- **Session 2**, **Session 3** — each qualifies on the rubric and ranked below
+  this pack's cut. Sparse packs cap at three.
+- **Session 5** — its broadcasting and dtype experiment belongs to Module 32
+  session 3, where the array-metadata machinery already lives. Running it in both
+  places would be the same experiment twice.
+
+### Bench pack completion record
+
+Records under `benches/records/m28-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

@@ -457,6 +457,10 @@ and harm moves forward.
 
 ---
 
+### Session 1 output — outcome definition record
+
+One record replaces a score with a stated user outcome and names how it would be observed.
+
 ## 3. Session 2 — Data becomes a claim only through lineage
 
 ### Pressure
@@ -586,6 +590,10 @@ time/availability model in plain language.
 
 ---
 
+### Session 2 output — data lineage claim map
+
+One map traces a claim back to the data that supports it, marking every point where meaning was assumed.
+
 ## 4. Session 3 — Candidates, rankers, and models do different jobs
 
 ### Pressure
@@ -698,6 +706,10 @@ optional model contract, score label, tie rule, display policy, learner
 override, and prohibited automatic effects.
 
 ---
+
+### Session 3 output — component responsibility map
+
+One map assigns candidate generation, ranking, and modelling to separate components with declared interfaces.
 
 ## 5. Session 4 — Evaluation, calibration, and uncertainty
 
@@ -851,6 +863,10 @@ threshold and asks which conclusion survives.
 
 ---
 
+### Session 4 output — calibration and uncertainty report
+
+One report states what the evaluation measured, how calibrated the outputs are, and what remains uncertain.
+
 ## 6. Session 5 — Explanations, accessibility, and meaningful control
 
 ### Pressure
@@ -969,6 +985,10 @@ If the answer is “add a tooltip,” redraw the decision card.
 
 ---
 
+### Session 5 output — human control account
+
+One account states where a human can inspect, override, or refuse the system's proposal.
+
 ## 7. Session 6 — AI/agent proposals are systems, not authorities
 
 ### Pressure
@@ -1075,6 +1095,10 @@ must identify the boundary, state a counterexample, and propose the next
 evidence-producing action.
 
 ---
+
+### Session 6 output — evidence and human-control packet
+
+One packet names the claim, its limitation, its owner, and the next observation that would revise it.
 
 ## 8. Intelligent Systems Evidence Studio
 
@@ -1583,3 +1607,76 @@ scikit-learn code is reused, preserve its BSD-3-Clause notices. Link to and
 paraphrase W3C material rather than copying substantial figures or prose.
 Every dataset needs explicit provenance, license, purpose, consent, retention,
 and external-model disclosure; synthetic/local fixtures are the default.
+
+
+## Bench pack
+
+**Bench pack:** `m25` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. No model is trained anywhere in this pack, and
+that is the right instrument rather than a compromise: whether an evaluation is
+*entitled* to its number is settled before any model exists.
+
+### Bench 2 — data lineage claim map
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** four rows, each breaking exactly one contract claim, all rejected
+with **four distinct messages**: a non-binary label, an outcome dated before its
+features, a feature observed after the decision cutoff, and an undeclared field.
+The fourth is the one worth arguing about — `support_ticket_sentiment` might be the
+most predictive field available, and the validator never looks. It is refused
+because it is **not in the contract**, on authority rather than on quality.
+
+That is the distinction the session turns on: every other pipeline check asks "is
+this value right?", and a lineage check asks "is this value *ours to use, for this
+purpose*?" The contract also carries a purpose written as a checkable sentence, a
+human-override requirement, a prohibition on automatic mutation, and
+`model_version=None` — the contract exists before any model does.
+
+**Cannot establish:** that any real dataset carries the columns these checks need
+— largely the point, since most do not. No consent, retention schedule, or
+population boundary can be verified by a validator reading rows.
+
+### Bench 4 — calibration and uncertainty report
+
+**Session:** 4. **Rungs:** review and verify, debug and defend.
+**Executes:** two independent failures that are usually confused.
+
+First, leakage. Twelve rows carry both a feature day and an outcome day. A temporal
+split at day 5 puts zero unknowable outcomes into training. A random 60/40 split over
+the **identical rows** puts five there — training on outcomes from days 6, 7, and 8
+for a model that predicts on day 5. Neither split raises, and the critical property
+is that **no downstream metric can detect it**: every accuracy figure, confusion
+matrix, and bootstrap interval is computed after the split and inherits its
+assumption. What made the check possible at all is the `outcome_day` column, which
+most datasets do not have — a data-lineage decision made long before anyone trains
+anything.
+
+Second, calibration. `evaluate_held_out` returns precision, recall, and accuracy all
+**1.0** while reporting `calibration_supported=False` — a field, not a footnote.
+Rescaling every score from (0.1, 0.9) to (0.45, 0.55) and to (0.001, 0.999) leaves
+all three metrics **identical**, because threshold metrics record which side of the
+line a score falls on and discard the magnitude entirely. So no threshold metric
+could ever detect miscalibration, and "rows scored 0.9 are right about 90% of the
+time" is a claim this card structurally cannot support.
+
+**Cannot establish:** any real model's leakage, and no quantity of inflation. It
+measures nothing about causal benefit, fairness across groups, distribution shift, or
+what threshold a deployment should use — the last needing the cost of each error
+type, a decision input no evaluation contains.
+
+### Sessions without a bench
+
+- **Session 1** — the outcome definition record is an argument about what is being
+  predicted and why that is the right target.
+- **Session 3** — a component responsibility map: a design artifact.
+- **Session 5** — the human-control account: who may override, when, and on what
+  evidence. An argument about authority.
+- **Session 6** — an evidence and human-control packet consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m25-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

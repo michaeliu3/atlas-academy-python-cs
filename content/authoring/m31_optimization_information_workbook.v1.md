@@ -266,33 +266,33 @@ f(\lambda u+(1-\lambda)v)\leq
 
 These definitions are the base layer for the three stronger or different
 statements that are often compressed into “the landscape is nice.” In the
-Euclidean norm, differentiable `f` is
-`\mu`-strongly convex on a declared convex domain when
+Euclidean norm, differentiable \(f\) is
+\(\mu\)-strongly convex on a declared convex domain when
 
 \[
 f(v)\geq f(u)+\nabla f(u)^T(v-u)+\frac{\mu}{2}\lVert v-u\rVert^2,
 \qquad \mu>0,
 \]
 
-and it is `L`-smooth there when
+and it is \(L\)-smooth there when
 
 \[
 f(v)\leq f(u)+\nabla f(u)^T(v-u)+\frac{L}{2}\lVert v-u\rVert^2.
 \]
 
-For the displayed quadratic, `\nabla^2 f=2I`, so `\mu=L=2` in these
+For the displayed quadratic, \(\nabla^2 f=2I\), so \(\mu=L=2\) in these
 coordinates. That is a statement about this exact objective and norm, not a
 property inherited by a data set, a penalty surrogate, or a library call.
 
 Here is the proof idea worth retaining. Strong convexity gives, for distinct
-minimizers `u` and `v`, a midpoint inequality with a strictly negative
-`-\mu\lVert u-v\rVert^2/8` term. The midpoint would then have lower value than
+minimizers \(u\) and \(v\), a midpoint inequality with a strictly negative
+\(-\mu\lVert u-v\rVert^2/8\) term. The midpoint would then have lower value than
 the two minimizers, a contradiction. Thus a minimizer is unique **if it
 exists**. Smoothness instead limits how quickly the gradient can change; it
 does not by itself establish convexity, feasibility, or a solver rate.
 
-The counterexample keeps the conditions honest: `h(t)=t^4` is convex, but its
-second derivative `12t^2` vanishes at zero, so no positive global strong-
+The counterexample keeps the conditions honest: \(h(t)=t^4\) is convex, but its
+second derivative \(12t^2\) vanishes at zero, so no positive global strong-
 convexity constant follows from this example. Its zero gradient at `t=0` is a
 minimum, yet a rate theorem that assumes strong convexity is still unavailable.
 
@@ -355,6 +355,36 @@ assumptions. A one-point Hessian observation is local finite evidence.
 At `(2, 1)`, the ordinary gradient is zero. Yet the point is infeasible.
 At `(1, 0)`, the point is feasible and ultimately becomes the constrained
 minimum, yet its ordinary objective gradient is `(-2, -2)`, not zero.
+
+```atlas-figure
+%% atlas-diagram-id: m31-constrained-stationarity-geometry
+%% atlas-diagram-title: A zero gradient outside the feasible set
+%% atlas-diagram-alt: The constraint line x plus y equals 1 cuts the plane; the feasible side lies below and left of it. The unconstrained minimiser sits at (2,1) with zero gradient but on the infeasible side. The constrained minimiser sits at (1,0) on the boundary line, where the objective gradient is not zero. An arrow from (1,0) shows the steepest-descent direction, which points directly at (2,1) and therefore straight out of the feasible set. Descent is blocked by the constraint rather than by any property of the objective.
+{
+  "kind": "vector2d",
+  "xRange": [-0.6, 2.9],
+  "yRange": [-0.9, 1.9],
+  "width": 620,
+  "height": 400,
+  "segments": [
+    { "from": [-0.5, 1.5], "to": [1.85, -0.85], "label": "x + y = 1" }
+  ],
+  "vectors": [
+    { "from": [1, 0], "to": [2, 1], "label": "steepest descent", "tone": 4 }
+  ],
+  "points": [
+    { "at": [2, 1], "label": "unconstrained min - infeasible" },
+    { "at": [1, 0], "label": "constrained min" }
+  ]
+}
+```
+
+The arrow is the whole lesson. From the constrained minimiser, the direction
+that most reduces the objective points *exactly* at the unconstrained
+minimiser — and therefore straight across the boundary. Nothing about the
+objective stops it; the feasible set does. That is why a constrained
+certificate has to talk about the constraint, and why a solver reporting
+"gradient norm small" has answered a question nobody asked.
 
 ```mermaid
 %% atlas-diagram-id: m31-constrained-stationarity-counterexample
@@ -912,16 +942,16 @@ R(\theta)=\mathbb E_{Z\sim P}[\ell(\theta;Z)],
 \]
 
 an “unbiased stochastic gradient” is not a label on an array. It is a
-conditional statement about the declared history `\mathcal F_{t-1}`:
+conditional statement about the declared history \(\mathcal F_{t-1}\):
 
 \[
 \mathbb E[\widehat g_t\mid\mathcal F_{t-1}]
 =g(\theta_t).
 \]
 
-Before using that statement, name all of the following: the population `P` and
+Before using that statement, name all of the following: the population \(P\) and
 loss, the sampling/weighting rule, the information already in
-`\mathcal F_{t-1}`, integrability of `\widehat g_t`, and the condition that
+\(\mathcal F_{t-1}\), integrability of \(\widehat g_t\), and the condition that
 lets the displayed expectation target the displayed gradient. An iid
 mini-batch rule is one sufficient route, not the definition; dependence may be
 acceptable only when the appropriate conditional claim is actually justified.
@@ -959,7 +989,7 @@ The population gradient is `-2`; the cached estimate is `-1`. It has bias
 `+1` for the stated population objective, and the repeated estimates are
 perfectly dependent through the cache. A fair one-time choice between `A` and
 `B` would make an *unconditional* first-draw average look right, but once the
-cached choice is part of `\mathcal F_{t-1}`, the conditional expectation is
+cached choice is part of \(\mathcal F_{t-1}\), the conditional expectation is
 still not the full-population gradient. Record the conditioning, selection
 rule, and target before calling either story “unbiased SGD.”
 
@@ -1173,7 +1203,7 @@ specification.
 **Coding interpretation.** In a prefix-code setting, ideal code length is
 linked to surprise `-log_2 p(x)`, expected length is linked to cross-entropy,
 and the excess expected length from coding `p` with a code designed for `q`
-is represented by `D_KL(p\Vert q)` up to the coding theorem's integer and
+is represented by \(D_{KL}(p\Vert q)\) up to the coding theorem's integer and
 prefix-code conditions. This is an asymptotic/idealized interpretation, not a
 claim that a finite tokenizer, compression ratio, or language-model score is
 an information-theoretic proof. Keep the source law, code class, block regime,
@@ -1181,9 +1211,9 @@ and loss visible before using a coding conclusion.
 
 ### Mutual-information and distortion card — derive one BSC first
 
-Let `X\sim\operatorname{Bernoulli}(1/2)`, let noise
-`N\sim\operatorname{Bernoulli}(q)` be independent of it, and let
-`Y=X\oplus N`, with `0\leq q\leq1/2`. In bits, define
+Let \(X\sim\operatorname{Bernoulli}(1/2)\), let noise
+\(N\sim\operatorname{Bernoulli}(q)\) be independent of it, and let
+\(Y=X\oplus N\), with \(0\leq q\leq1/2\). In bits, define
 
 \[
 h_2(q)=-q\log_2q-(1-q)\log_2(1-q).
@@ -1191,8 +1221,8 @@ h_2(q)=-q\log_2q-(1-q)\log_2(1-q).
 
 ### Prediction before reveal
 
-Before calculating, predict whether `Y` is also uniform. What is
-`P(Y=1)` when `q=0.1`, and which one assumption makes your calculation legal?
+Before calculating, predict whether \(Y\) is also uniform. What is
+\(P(Y=1)\) when \(q=0.1\), and which one assumption makes your calculation legal?
 
 <details>
 <summary>Reveal after writing the joint-law step.</summary>
@@ -1207,9 +1237,9 @@ P(Y=1)
 \end{aligned}
 \]
 
-So `H(Y)=1`. Given `X=x`, XOR by the known bit only relabels `N`, so
-`H(Y\mid X=x)=H(N)=h_2(q)`. Averaging over `X` gives
-`H(Y\mid X)=h_2(q)`, and therefore
+So \(H(Y)=1\). Given \(X=x\), XOR by the known bit only relabels \(N\), so
+\(H(Y\mid X=x)=H(N)=h_2(q)\). Averaging over \(X\) gives
+\(H(Y\mid X)=h_2(q)\), and therefore
 
 \[
 I(X;Y)=H(Y)-H(Y\mid X)=1-h_2(q).
@@ -1217,20 +1247,20 @@ I(X;Y)=H(Y)-H(Y\mid X)=1-h_2(q).
 
 </details>
 
-The equality `1-h_2(q)` is not the generic mutual information for a biased
-input: then `H(Y)` need not be one. This is a one-use BSC calculation; it is
+The equality \(1-h_2(q)\) is not the generic mutual information for a biased
+input: then \(H(Y)\) need not be one. This is a one-use BSC calculation; it is
 not yet the rate-distortion theorem or a finite-code benchmark.
 
 For this **uniform iid binary source** with **Hamming distortion**
-`d(x,\hat x)=\mathbf 1[x\ne\hat x]`, the asymptotic rate-distortion function
-is `R(D)=1-h_2(D)` bits per symbol for `0\leq D\leq1/2`. This is a theorem with
+\(d(x,\hat x)=\mathbf 1[x\ne\hat x]\), the asymptotic rate-distortion function
+is \(R(D)=1-h_2(D)\) bits per symbol for \(0\leq D\leq1/2\). This is a theorem with
 those source, distortion, and asymptotic coding assumptions—not a generic
 quality score, a finite-code benchmark, a privacy guarantee, or a reason to
 choose a stakeholder's acceptable error rate.
 
-At `q=0.1`, this declared channel/input pair has about
-`1-h_2(0.1)\approx0.531` bits of mutual information per use. At `q=0.5`, it
-has zero. The same numerical formula at a distortion level `D=0.1` belongs to
+At \(q=0.1\), this declared channel/input pair has about
+\(1-h_2(0.1)\approx0.531\) bits of mutual information per use. At \(q=0.5\), it
+has zero. The same numerical formula at a distortion level \(D=0.1\) belongs to
 a different question: how much representation rate is needed under the
 declared loss. Do not silently exchange those questions.
 
@@ -1240,9 +1270,9 @@ Before reusing either displayed formula, complete all four fields:
 
 | Field | One-use BSC calculation | Rate-distortion statement |
 | --- | --- | --- |
-| source law | `X~Bernoulli(1/2)` | iid `Bernoulli(1/2)` source |
-| channel or distortion law | independent BSC noise `N~Bernoulli(q)` and `Y=X\oplus N` | Hamming loss `d(x,\hat x)=\mathbf 1[x\ne\hat x]` at distortion `D` |
-| quantity | `I(X;Y)=1-h_2(q)` bits **per use** | `R(D)=1-h_2(D)` bits **per symbol** |
+| source law | \(X\sim\operatorname{Bernoulli}(1/2)\) | iid \(\operatorname{Bernoulli}(1/2)\) source |
+| channel or distortion law | independent BSC noise \(N\sim\operatorname{Bernoulli}(q)\) and \(Y=X\oplus N\) | Hamming loss \(d(x,\hat x)=\mathbf 1[x\ne\hat x]\) at distortion \(D\) |
+| quantity | \(I(X;Y)=1-h_2(q)\) bits **per use** | \(R(D)=1-h_2(D)\) bits **per symbol** |
 | regime | one declared channel use under its joint law | asymptotic coding theorem, not a finite-code score |
 
 **Changed field:** keep the uniform source and Hamming loss, but replace the
@@ -1250,7 +1280,7 @@ asymptotic regime with one finite block code. Which formula must be withdrawn
 as a finite-code benchmark, and which one-use distribution identity remains
 available if its BSC assumptions still hold? State the field that changed
 before answering. Then change the source law to biased input and identify the
-additional formula whose `1-h_2(\cdot)` form no longer follows.
+additional formula whose \(1-h_2(\cdot)\) form no longer follows.
 
 ### Inspect the matching-number trap
 
@@ -1275,7 +1305,7 @@ coding implementation or model-quality score.
 ### Transfer task — changed source or distortion
 
 Replace the uniform source with a biased one, or replace Hamming loss with an
-asymmetric cost. State exactly which displayed `1-h_2(\cdot)` formula must be
+asymmetric cost. State exactly which displayed \(1-h_2(\cdot)\) formula must be
 withdrawn, what joint/source/loss description must replace it, and why an
 improved information number still cannot set the product's acceptable harm or
 authority boundary.
@@ -1354,7 +1384,7 @@ For one fixed observation, take the original finite joint values
 | --- | ---: | --- |
 | `log p(x)` | about `-1.204` | a correct likelihood for real data |
 | `ELBO(q)` | about `-1.254` | a learned posterior or calibrated uncertainty |
-| `KL(q || p(z|x))` | about `0.050` | an acceptable approximation for a decision |
+| \(D_{KL}(q\Vert p(z\mid x))\) | about `0.050` | an acceptable approximation for a decision |
 | `ELBO + KL` | about `-1.204` | a framework, optimizer, or generalization result |
 
 Before reveal, change the joint to `(0.30, 0)` while `q=(0.5,0.5)`. Which
@@ -1453,6 +1483,43 @@ decision.
 | transfer | recommendation is limited and handoff is concrete | “Who may make the next decision, and with what evidence?” |
 
 ---
+
+## One-page concept map
+
+M31 runs one argument twice — once for optimization, once for information —
+and both times the question is what a number is allowed to certify.
+
+~~~mermaid
+%% atlas-diagram-id: m31-concept-map
+%% atlas-diagram-title: How M31's ideas depend on one another
+%% atlas-diagram-alt: A decision owner names variables, units, an objective, and a feasible set. Convexity and smoothness give uniqueness and rates; constraints give KKT conditions and duality; together they produce a certificate. An algorithm produces a finite trace, which is evidence about a run, not about the problem. Stochastic gradients add an unbiasedness condition relative to a declared history. On the information side, a declared law and log base give entropy, then cross-entropy and KL, then mutual information, the ELBO, and coding. Both halves end at a limited recommendation, never at authority to act.
+flowchart TB
+  OWN["decision owner + units"] --> OBJ["objective + feasible set"]
+  OBJ --> GEO["convexity, smoothness"]
+  GEO --> UNIQ["uniqueness + rate claims"]
+  OBJ --> CON["constraints"]
+  CON --> KKT["KKT + duality"]
+  KKT --> CERT["certificate"]
+  UNIQ --> CERT
+  OBJ --> ALG["algorithm"]
+  ALG --> TRACE["finite trace"]
+  STO["stochastic gradient"] --> COND["unbiased given a declared history"]
+  COND --> TRACE
+  DIST["declared law + log base"] --> ENT["entropy"]
+  ENT --> XKL["cross-entropy, KL"]
+  XKL --> MI["mutual information, DPI"]
+  XKL --> ELBO["ELBO identity"]
+  XKL --> CODE["coding interpretation"]
+  CERT --> REC["a limited recommendation"]
+  TRACE --> REC
+  MI --> REC
+  ELBO --> REC
+  CODE --> REC
+~~~
+
+Note what has no arrow into it: authority. Every path ends at a limited
+recommendation, and the gap between a certificate and a decision is a person,
+not a computation.
 
 ## Graduated problem ladder
 
@@ -1598,8 +1665,8 @@ new derivation?
    - B. Replacing the source with a biased distribution or the loss with an
      asymmetric one, or treating one finite block code as an exact asymptotic
      benchmark.
-   - C. Recording the value of `D` in the dossier.
-   - D. Naming the reconstruction variable `\hat x`.
+   - C. Recording the value of \(D\) in the dossier.
+   - D. Naming the reconstruction variable \(\hat x\).
 
 <details>
 <summary>Reveal after recording your answer and confidence.</summary>
@@ -1687,7 +1754,7 @@ returning to the explanation.
 | Q4 | A: six decreases prove convergence; B: toy problem solved globally; C: six configured observations; D: projection validates the proxy | Record residuals, projection, initialization, and theorem conditions | A decreasing finite trace stops before a worse region | Double the step size and predict the evidence boundary |
 | Q5 | A: one run proves unbiasedness; B: general convergence; C: declared finite observation; D: noise may be hidden | State estimator, sampling/dependence, step-size, and repetition scope | One favorable noisy sequence differs from its expectation | Change the sampling dependence and revise the claim |
 | Q6 | A: support failure is zero; B: repair support mismatch; C: log base fixes it; D: KL direction proves information | Make the joint support/model boundary explicit | (p_i>0,q_i=0) makes the finite term undefined/infinite | Replace the source law and identify which formula must be rederived |
-| Q7 | A: units alone preserve the formula; B: biased source/asymmetric loss or finite block changes the regime; C: recording (D) is enough; D: renaming variables changes nothing | Restate source law, distortion, units, and theorem regime | A biased Bernoulli source invalidates the uniform binary expression | Change Hamming to asymmetric distortion and predict the new obligation |
+| Q7 | A: units alone preserve the formula; B: biased source/asymmetric loss or finite block changes the regime; C: recording \(D\) is enough; D: renaming variables changes nothing | Restate source law, distortion, units, and theorem regime | A biased Bernoulli source invalidates the uniform binary expression | Change Hamming to asymmetric distortion and predict the new obligation |
 | Q8 | A: displayed gap supplies KKT; B: inspect feasibility, stationarity, complementarity, convexity, and qualification; C: constraints can be ignored; D: all nonconvex problems have strong duality | Separate solver output from a certificate and globality assumptions | A small numerical gap with violated feasibility is not a certificate | Remove Slater’s condition and state the retained finite fact |
 | Q9 | A: higher ELBO is exact; B: score proves calibration/safety; C: objective improved under the declared model/family; D: KL direction no longer matters | Name model, family, support, approximation gap, and decision value | A restricted variational family improves ELBO while missing the posterior | Change the family and state which conclusion must be withdrawn |
 
@@ -1844,3 +1911,98 @@ interactive implementation or equivalent interaction, learner-facing
 diagnostic/review record, module evidence and review records, exact candidate
 CI evidence, deployment provenance, and human approval. Until then it remains
 an authoring artifact—not a completed module or a learner mastery claim.
+
+## Bench pack
+
+**Bench pack:** `m31` — sparse, three benches. CPython 3.12 floor.
+**Visibility:** private guided study — this module is authoring-only, so the pack is
+not reader-facing.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 31 has no checked-in reference model, and
+this pack deliberately uses **no numerical library** — every figure is arithmetic on
+plain floats, reproducible on any machine, with the subject visible rather than
+buried in a library call.
+
+### Bench 4 — Solver-Selection Rationale
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** gradient descent on `f(x) = x²` from x = 1, changing **only** the step
+size. At 0.1 the iterate reaches 2.3e-12. At 1.0 it lands on exactly **1** — flipping
+between ±1 for all 120 iterations, with the objective at precisely its starting value.
+At 1.1 it reaches 3.2 billion. All three return status `completed` after the same 120
+iterations.
+
+The status field is not lying: the loop *did* complete. It answers "did the loop
+finish?" and is read as "did we find a minimum?". The oscillating run is the dangerous
+one — it returns an ordinary, finite, plausible number that passes any check for
+finiteness or magnitude, and is simply the answer you started with.
+
+A report naming its **reason** separates them: gradient tolerance at iteration 87,
+divergence bound at 77, budget exhausted at 120. The bench also records why the budget
+must exceed what its own criteria need — at 60 iterations all three would report
+"exhausted" and the distinction would vanish.
+
+**Cannot establish:** anything about a real optimizer. One dimension, one convex
+quadratic, no line search, momentum, adaptive step, or constraints — and nothing about
+non-convex objectives, where a small gradient norm is compatible with a saddle.
+
+### Bench 5 — Stochastic Information Experiment Card
+
+**Session:** 5. **Rungs:** trace, review and verify.
+**Executes:** minibatch gradient estimates at batch sizes 1, 10, 100, and 1000, four
+hundred trials each, against a full gradient the bench computes exactly. Every batch
+size is **unbiased within measurement error** — the largest deviation is 1.63 standard
+errors, and the bench judges the bias against its own sampling uncertainty rather than
+an absolute constant. Standard deviation follows `1/sqrt(n)`, measured: `std dev ×
+sqrt(n)` stays within 1.07× across the sampled sizes.
+
+A minibatch gradient is not a worse gradient; it is an estimate with a measurable bias
+and variance. The `1/sqrt(n)` law is unforgiving — halving the noise costs four times
+the batch — which is why huge batches buy little accuracy per unit of compute.
+
+The signal-to-noise ratio then does real work: 1.02 at batch 1, 9.54 at batch 100, and
+**0.11** near the optimum at that same batch size, with the noise unchanged and the
+signal gone. So a stalled loss has two causes with opposite repairs — an optimum, where
+you stop, and a noise floor, where a larger batch or smaller step still makes progress.
+
+**Cannot establish:** that the `1/sqrt(n)` law holds for any estimator. A non-uniform
+sampler is a different estimator with a bias this apparatus would not detect, and no
+training run, convergence rate, or wall-clock cost is measured.
+
+### Bench 6 — Optimization and Information Evidence Dossier
+
+**Session:** 6. **Rungs:** review and verify, trace.
+**Executes:** 2,000 confidence scores under four encodings, measuring bits per value
+against distinctions destroyed. The exact encoding carries 10.926 bits; a 0.5 threshold
+carries **0.999** and keeps 50% of pairwise distinctions — while separating **all
+38,645** pairs that straddle 0.5. It is *lossless with respect to the only question it
+was built to answer*.
+
+"Lossy" is not a defect a scheme has; it is a relationship between a scheme and a
+question. The threshold destroys the difference between 0.51 and 0.99 completely and
+preserves 0.49 against 0.51 perfectly. A query sweep confirms it: 100% agreement on
+above-0.5, **53.9%** on above-0.9, and a mean error of 0.0123 against 0.0000 for
+two-decimal rounding.
+
+So the honest description is a pair — bits spent, and distinctions preserved stated as
+a *question*. "One bit per value, exact on the above-0.5 test" is a specification;
+"lossy" is a shrug.
+
+**Cannot establish:** any figure transferable to other data. Entropy is a property of
+the scheme *and* the distribution jointly — scores clustered near the threshold lose far
+more to it. The pairwise count is a 40-neighbour window rather than a census, and no
+real encoder, byte size, or storage cost is measured.
+
+### Sessions without a bench
+
+- **Session 1** — the objective geometry sheet is a derivation about the problem's
+  shape, not an executable claim.
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+
+### Bench pack completion record
+
+Records under `benches/records/m31-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

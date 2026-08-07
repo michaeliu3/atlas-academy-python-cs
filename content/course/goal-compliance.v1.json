@@ -115,8 +115,8 @@
       "id": "levels-1-9",
       "requirement": "Levels 1–9 show target capability, portal delivery, and private-chat delivery as separate facts.",
       "state": "complete",
-      "evidence": "content/course/course-graph.v2.json; app/route/ScopeMatrix.tsx; tests/levels-1-9-delivery-audit.test.mjs; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
-      "openItem": "The automated audit covers all 63 topic rows and graph-backed delivery states; human source, visual, and learner-facing calibration review is waived."
+      "evidence": "content/course/course-graph.v2.json; content/course/levels-1-9-delivery-baseline.v1.json; app/route/ScopeMatrix.tsx; tests/levels-1-9-scope-matrix-integrity.test.mjs; tests/levels-1-9-coverage.test.mjs; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
+      "openItem": "Structural integrity of all 63 topic rows is automated, and the delivery baseline records reviewed coverage per level with machine-checkable absence probes. Structural anchoring overstates delivery at Levels 6–9, where every target is anchored to a reader-visible module but none of the subject is taught; the baseline records that gap explicitly. Levels 5–9 remain undelivered pending M37–M42 authoring."
     },
     {
       "id": "mathematics-statistics",

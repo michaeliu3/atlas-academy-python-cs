@@ -207,8 +207,10 @@ for (const candidate of authoringCandidates) {
 
     const visualBlocks = scanMermaidBlocks(workbook, { sourcePath: selector.workbookPath });
     const visualReport = validateMermaidAccessibility(visualBlocks, { requireComplete: true });
-    assert.equal(visualBlocks.length, candidate.expectedFrozenMermaidCount);
-    assert.equal(visualReport.summary.completeBlocks, candidate.expectedFrozenMermaidCount);
+    // The count is a floor, not a pin: illustrating a workbook further must not
+    // read as a promotion. What is frozen is that every diagram stays complete.
+    assert.ok(visualBlocks.length >= candidate.expectedFrozenMermaidCount);
+    assert.equal(visualReport.summary.completeBlocks, visualBlocks.length);
     assert.ok(
       visualBlocks.every(({ metadata }) => metadata?.id.startsWith(`${candidate.moduleId}-`)),
     );

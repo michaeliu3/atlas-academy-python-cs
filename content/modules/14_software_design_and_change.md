@@ -3302,3 +3302,74 @@ promise and dependency arrow, the M13 contract clause/regression and missing
 observation, this module's commit or reversal condition, and one durability
 question. The next module makes that connected evidence durable across files,
 bytes, packages, and release artifacts.
+
+
+## Bench pack
+
+**Bench pack:** `m14` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 14 has no checked-in reference model, so
+both benches carry their own subject. Neither performs real I/O: a retry boundary and
+a bisect predicate are both decisions about *structure*, and structure is checkable
+without a network or a repository.
+
+### Bench 3 — state, failure, and retry boundary
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** the same four-step publish under two retry boundaries, with the same
+three-attempt policy and the same flaky third step. Wrapping the **whole operation**
+runs every step three times: three IDs reserved, three records written, and `pub-1`
+and `pub-2` left orphaned with nothing to clean them up. Moving the *identical*
+retry to wrap only the failing step leaves that step's attempt count unchanged at
+three while reducing reservations and writes to **one**.
+
+The retry boundary — not the retry policy — decides which side effects become
+plural. And the coarse version *works*: it returns a valid ID, passes every test
+asserting the record exists, and leaks silently. The review question is therefore
+"which steps are inside the boundary, and is each safe to repeat?" The bench's own
+audit finds that `notify_subscribers` is still not idempotent even after the fix,
+which is why an idempotency key has to reach the subscriber and not just the
+publisher.
+
+**Cannot establish:** anything about real retry behaviour. No backoff, jitter,
+timeout, or concurrent retry, and it does not exercise the worse case where the
+failure is not transient — three sets of side effects, then a raise anyway.
+
+### Bench 5 — evidence-led review and bisect predicate
+
+**Session:** 5. **Rungs:** review and verify, debug and defend.
+**Executes:** bisection over sixteen commits under three predicates. All three return
+a confident single integer, in the same number of probes, with output of identical
+shape. One is correct. The **fixed-then-reintroduced** history answers 12 against a
+first bad commit of 2 — a real boundary, and a correct answer to a question nobody
+asked. The **flaky** predicate (genuinely bad from commit 9, caught 40% of the time)
+answers 10; every probe was honest and the property searched for is not a function of
+the commit at all.
+
+Bisection is a binary search, and binary search does not check that its input is
+sorted. The two precondition failures need **two different guards**, and the bench
+shows each catching only its own: sampling commits across the range refutes
+monotonicity on the reintroduced history and is blind to the flake, while repeating a
+single probe refutes determinism on the flake and is blind to the reintroduction.
+
+**Cannot establish:** how often real histories are non-monotone. No repository is
+cloned and no test is run; it does not model git's bisect over a DAG with merges,
+where "the range" is a harder notion than an index interval. The sampling guard can
+refute monotonicity but never establish it.
+
+### Sessions without a bench
+
+- **Session 1** — a preservation ledger and pressure map: an argument about what
+  behaviour must be preserved and why.
+- **Session 2** — comparing decompositions by change axis, which is a design
+  judgement rather than an executable claim.
+- **Session 4** — staging a refactor in the Git graph: real commits, branches, and a
+  working tree this pack does not own.
+- **Session 6** — a change defence consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m14-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

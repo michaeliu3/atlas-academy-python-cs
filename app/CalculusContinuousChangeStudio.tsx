@@ -13,7 +13,32 @@ import {
   persistModule29Progress,
   restoreModule29Progress,
 } from "@/lib/module29-progress-codec";
+import { StudioFigure } from "./StudioFigure";
 import styles from "./CalculusContinuousChangeStudio.module.css";
+
+/**
+ * The limit-view fixture: f(x) = (x² − 1)/(x − 1) reduces to x + 1 away from
+ * x = 1, so the graph is drawn as two segments with a gap there. Both carry
+ * tone 0 so they read as one rule; the two marked points are the limit height
+ * the rule approaches and the separately declared value f(1) = 0.
+ */
+const removableDiscontinuityFigureSpec = {
+  kind: "plot",
+  width: 420,
+  height: 300,
+  xLabel: "x",
+  yLabel: "f(x)",
+  xRange: [-0.4, 2.4],
+  yRange: [-0.4, 3.6],
+  series: [
+    { points: [[-0.4, 0.6], [0.94, 1.94]], tone: 0, label: "x + 1" },
+    { points: [[1.06, 2.06], [2.4, 3.4]], tone: 0 },
+  ],
+  points: [
+    { at: [1, 2], label: "approach: 2" },
+    { at: [1, 0], label: "declared f(1) = 0" },
+  ],
+} as const;
 
 type StudioView =
   | "limit"
@@ -458,17 +483,19 @@ function ViewFixture({ view }: { view: StudioView }) {
             simplifying: nearby behavior, point behavior, or continuity?
           </p>
         </div>
-        <div className={styles.limitLandscape} aria-hidden="true">
-          <span className={styles.limitLine} />
-          <span className={styles.hole} />
-          <span className={styles.declaredPoint} />
-          <i>approach</i>
-          <b>declared</b>
+        <div className={styles.limitLandscape}>
+          <StudioFigure
+            spec={removableDiscontinuityFigureSpec}
+            label="The algebraic rule approaches 2 at x = 1 while the declared value there is 0"
+            describedById="calculus-limit-alternative"
+          />
         </div>
-        <p className={styles.textEquivalent}>
-          <strong>Text equivalent:</strong> a rising line has an open point at
-          x = 1 and a separate filled point vertically below it. The picture is
-          a fixture, not a proof.
+        <p className={styles.textEquivalent} id="calculus-limit-alternative">
+          <strong>Text equivalent:</strong> the rule simplifies to x + 1 away
+          from x = 1, so the graph is a rising line broken at x = 1. The
+          two-sided approach heads toward the height 2, while the separately
+          declared value f(1) = 0 sits well below it. The picture is a fixture,
+          not a proof.
         </p>
       </>
     );

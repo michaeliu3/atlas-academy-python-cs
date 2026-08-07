@@ -13,7 +13,27 @@ import {
   persistModule28Progress,
   restoreModule28Progress,
 } from "@/lib/module28-progress-codec";
+import { StudioFigure } from "./StudioFigure";
 import styles from "./LinearAlgebraStabilityStudio.module.css";
+
+/**
+ * The space-view fixture, drawn from the declared set rather than decorated.
+ * The origin is marked as an ordinary point so the reader can see that it is
+ * not on the line — which is the whole subspace test for this fixture.
+ */
+const affineLineFigureSpec = {
+  kind: "vector2d",
+  width: 420,
+  height: 300,
+  xRange: [-0.7, 1.7],
+  yRange: [-0.7, 1.7],
+  segments: [{ from: [-0.5, 1.5], to: [1.5, -0.5], label: "L: x + y = 1" }],
+  points: [
+    { at: [0, 1], label: "(0, 1)" },
+    { at: [1, 0], label: "(1, 0)" },
+    { at: [0, 0], label: "0 — not on L" },
+  ],
+} as const;
 
 type StudioView =
   | "space"
@@ -633,13 +653,11 @@ export function LinearAlgebraStabilityStudio() {
                   its picture or its nonzero entries.
                 </p>
                 <div className={styles.spaceBoard}>
-                  <div className={styles.coordinateBoard} aria-hidden="true">
-                    <i className={styles.axisX} /><i className={styles.axisY} />
-                    <b className={styles.affineLine} />
-                    <em className={styles.originDot} />
-                    <span className={styles.linePointOne}>0, 1</span>
-                    <span className={styles.linePointTwo}>1, 0</span>
-                  </div>
+                  <StudioFigure
+                    spec={affineLineFigureSpec}
+                    label="The candidate set L is a line that misses the origin"
+                    describedById="linear-algebra-space-alternative"
+                  />
                   <div className={styles.definitionStack}>
                     <strong>declared model</strong>
                     <code>R²; ordinary operations</code>
@@ -648,10 +666,12 @@ export function LinearAlgebraStabilityStudio() {
                     <span>zero vector: (0, 0)</span>
                   </div>
                 </div>
-                <p className={styles.boundary}>
-                  Text equivalent: the board contains the candidate line, the
-                  origin, and two sample points. Test whether zero belongs to L,
-                  then whether B spans R² without a nontrivial relation.
+                <p className={styles.boundary} id="linear-algebra-space-alternative">
+                  Text equivalent: the board shows the candidate line x + y = 1
+                  passing through (0, 1) and (1, 0), with the origin marked
+                  separately below it — the line does not contain (0, 0). Test
+                  whether zero belongs to L, then whether B spans R² without a
+                  nontrivial relation.
                 </p>
               </section>
               <PredictionGate view="space" {...gateProps} />

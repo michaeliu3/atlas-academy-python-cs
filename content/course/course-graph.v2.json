@@ -17,30 +17,237 @@
       "sourceBoundary": "A line-by-line index of the learner-supplied inventory's Master/Study targets and explicit Level-2 AI-research additions. It preserves target wording and source-line locations, maps each target to an Atlas target, and excludes the inventory's reading lists. This calibration never claims current delivery, learner completion, or verified mastery.",
       "inventoryCrosswalkPath": "content/course/levels-1-9-inventory-crosswalk.v1.json",
       "items": [
-        { "id": "l1-01-proofs-discrete-mathematics", "level": 1, "label": "Proofs and discrete mathematics", "scopeTopicIds": ["l1.proofs.logic-relations", "l1.proofs.methods-invariants", "l1.discrete.counting-recurrences", "l1.discrete.graphs-orders-number-theory"] },
-        { "id": "l1-02-linear-algebra", "level": 1, "label": "Linear algebra", "scopeTopicIds": ["l1.linear.spaces-rank", "l1.linear.geometry", "l1.linear.spectral-pca", "l1.linear.tensor-stability"] },
-        { "id": "l1-03-calculus-real-analysis", "level": 1, "label": "Calculus and real analysis", "scopeTopicIds": ["l1.calculus.change-derivatives", "l1.analysis.limits-convergence", "l1.analysis.interchange-and-measure"] },
-        { "id": "l1-04-probability", "level": 1, "label": "Probability", "scopeTopicIds": ["l1.probability.foundations", "l1.probability.limits-concentration", "l1.probability.stochastic-processes"] },
-        { "id": "l1-05-statistics", "level": 1, "label": "Statistics", "scopeTopicIds": ["l1.statistics.models-estimation", "l1.statistics.inference-design", "l1.statistics.robust-high-dimensional"] },
-        { "id": "l1-06-optimization", "level": 1, "label": "Optimization", "scopeTopicIds": ["l1.optimization.formulation-convexity", "l1.optimization.methods-rates", "l1.optimization.advanced-methods"] },
-        { "id": "l1-07-information-theory", "level": 1, "label": "Information theory", "scopeTopicIds": ["l1.information.measures-variational", "l1.information.coding-principles"] },
-        { "id": "l2-08-programming-beyond-basic-python", "level": 2, "label": "Programming beyond basic Python", "scopeTopicIds": ["l2.programming.paradigms-abstraction", "l2.programming.types-testing-debugging", "l2.programming-shell-concurrency-data", "l2.programming-lower-level-ml-runtime"] },
-        { "id": "l2-09-data-structures-algorithms", "level": 2, "label": "Data structures and algorithms", "scopeTopicIds": ["l2.dsa.structures", "l2.dsa.graphs-and-paradigms", "l2.dsa.advanced-analysis", "l2.theory.formal-foundations"] },
-        { "id": "l2-10-theory-of-computation", "level": 2, "label": "Theory of computation", "scopeTopicIds": ["l2.theory.formal-foundations", "l2.theory.advanced-complexity"] },
-        { "id": "l2-11-computer-systems", "level": 2, "label": "Computer systems", "scopeTopicIds": ["l2.systems.machine-os-network", "l2.systems-data-distributed", "l2.systems-accelerators"] },
-        { "id": "l2-12-software-engineering", "level": 2, "label": "Software engineering", "scopeTopicIds": ["l2.software-engineering-durable-systems"] },
-        { "id": "l3-13-classical-artificial-intelligence", "level": 3, "label": "Classical artificial intelligence", "scopeTopicIds": ["l3.ai.state-search", "l3.ai.constraints-planning", "l3.ai.logic-knowledge-representation", "l3.ai.probabilistic-decision", "l3.ai.partial-observability-multiagent"] },
-        { "id": "l4-14-supervised-learning", "level": 4, "label": "Supervised learning", "scopeTopicIds": ["l4.ml.erm-supervised-foundations", "l4.ml.supervised-model-families"] },
-        { "id": "l4-15-unsupervised-representation-learning", "level": 4, "label": "Unsupervised and representation learning", "scopeTopicIds": ["l4.ml.unsupervised-representation"] },
-        { "id": "l4-16-generalization-model-selection", "level": 4, "label": "Generalization and model selection", "scopeTopicIds": ["l4.ml.generalization-selection-reliability"] },
-        { "id": "l4-17-statistical-learning-theory", "level": 4, "label": "Statistical learning theory", "scopeTopicIds": ["l4.ml.advanced-learning-theory"] },
-        { "id": "l5-18-neural-network-fundamentals", "level": 5, "label": "Neural-network fundamentals", "scopeTopicIds": ["l5.dl.computational-graphs-backprop"] },
-        { "id": "l5-19-major-architectures", "level": 5, "label": "Major architectures", "scopeTopicIds": ["l5.dl.architecture-families"] },
-        { "id": "l5-20-modern-training-methodology", "level": 5, "label": "Modern training methodology", "scopeTopicIds": ["l5.dl.modern-training-systems"] },
-        { "id": "l6-probabilistic-modeling-inference", "level": 6, "label": "Probabilistic modeling and inference", "scopeTopicIds": ["l6.pgm.structure-exact-inference", "l6.pgm.monte-carlo-variational", "l6.pgm.gaussian-processes-nonparametrics"] },
-        { "id": "l7-sequential-decision-making-rl", "level": 7, "label": "Sequential decision-making and reinforcement learning", "scopeTopicIds": ["l7.rl.bellman-dynamic-programming", "l7.rl.value-policy-methods", "l7.rl.advanced-control"] },
-        { "id": "l8-foundation-models-llms-generative-ai", "level": 8, "label": "Foundation models, LLMs, and generative AI", "scopeTopicIds": ["l8.fm.representations-transformers", "l8.fm.alignment-and-preference", "l8.fm.retrieval-tools-agents", "l8.fm.reliability-security-evaluation", "l8.fm.efficiency-multimodality"] },
-        { "id": "l9-deep-specialization-nlp-language-models", "level": 9, "label": "Deep specialization: NLP and language models", "scopeTopicIds": ["l9.nlp.linguistic-language-modeling", "l9.nlp.tasks-retrieval-dialogue", "l9.nlp.multilingual-specialty"] }
+        {
+          "id": "l1-01-proofs-discrete-mathematics",
+          "level": 1,
+          "label": "Proofs and discrete mathematics",
+          "scopeTopicIds": [
+            "l1.proofs.logic-relations",
+            "l1.proofs.methods-invariants",
+            "l1.discrete.counting-recurrences",
+            "l1.discrete.graphs-orders-number-theory"
+          ]
+        },
+        {
+          "id": "l1-02-linear-algebra",
+          "level": 1,
+          "label": "Linear algebra",
+          "scopeTopicIds": [
+            "l1.linear.spaces-rank",
+            "l1.linear.geometry",
+            "l1.linear.spectral-pca",
+            "l1.linear.tensor-stability"
+          ]
+        },
+        {
+          "id": "l1-03-calculus-real-analysis",
+          "level": 1,
+          "label": "Calculus and real analysis",
+          "scopeTopicIds": [
+            "l1.calculus.change-derivatives",
+            "l1.analysis.limits-convergence",
+            "l1.analysis.interchange-and-measure"
+          ]
+        },
+        {
+          "id": "l1-04-probability",
+          "level": 1,
+          "label": "Probability",
+          "scopeTopicIds": [
+            "l1.probability.foundations",
+            "l1.probability.limits-concentration",
+            "l1.probability.stochastic-processes"
+          ]
+        },
+        {
+          "id": "l1-05-statistics",
+          "level": 1,
+          "label": "Statistics",
+          "scopeTopicIds": [
+            "l1.statistics.models-estimation",
+            "l1.statistics.inference-design",
+            "l1.statistics.robust-high-dimensional"
+          ]
+        },
+        {
+          "id": "l1-06-optimization",
+          "level": 1,
+          "label": "Optimization",
+          "scopeTopicIds": [
+            "l1.optimization.formulation-convexity",
+            "l1.optimization.methods-rates",
+            "l1.optimization.advanced-methods"
+          ]
+        },
+        {
+          "id": "l1-07-information-theory",
+          "level": 1,
+          "label": "Information theory",
+          "scopeTopicIds": [
+            "l1.information.measures-variational",
+            "l1.information.coding-principles"
+          ]
+        },
+        {
+          "id": "l2-08-programming-beyond-basic-python",
+          "level": 2,
+          "label": "Programming beyond basic Python",
+          "scopeTopicIds": [
+            "l2.programming.paradigms-abstraction",
+            "l2.programming.types-testing-debugging",
+            "l2.programming-shell-concurrency-data",
+            "l2.programming-lower-level-ml-runtime"
+          ]
+        },
+        {
+          "id": "l2-09-data-structures-algorithms",
+          "level": 2,
+          "label": "Data structures and algorithms",
+          "scopeTopicIds": [
+            "l2.dsa.structures",
+            "l2.dsa.graphs-and-paradigms",
+            "l2.dsa.advanced-analysis",
+            "l2.theory.formal-foundations"
+          ]
+        },
+        {
+          "id": "l2-10-theory-of-computation",
+          "level": 2,
+          "label": "Theory of computation",
+          "scopeTopicIds": [
+            "l2.theory.formal-foundations",
+            "l2.theory.advanced-complexity"
+          ]
+        },
+        {
+          "id": "l2-11-computer-systems",
+          "level": 2,
+          "label": "Computer systems",
+          "scopeTopicIds": [
+            "l2.systems.machine-os-network",
+            "l2.systems-data-distributed",
+            "l2.systems-accelerators"
+          ]
+        },
+        {
+          "id": "l2-12-software-engineering",
+          "level": 2,
+          "label": "Software engineering",
+          "scopeTopicIds": [
+            "l2.software-engineering-durable-systems"
+          ]
+        },
+        {
+          "id": "l3-13-classical-artificial-intelligence",
+          "level": 3,
+          "label": "Classical artificial intelligence",
+          "scopeTopicIds": [
+            "l3.ai.state-search",
+            "l3.ai.constraints-planning",
+            "l3.ai.logic-knowledge-representation",
+            "l3.ai.probabilistic-decision",
+            "l3.ai.partial-observability-multiagent"
+          ]
+        },
+        {
+          "id": "l4-14-supervised-learning",
+          "level": 4,
+          "label": "Supervised learning",
+          "scopeTopicIds": [
+            "l4.ml.erm-supervised-foundations",
+            "l4.ml.supervised-model-families"
+          ]
+        },
+        {
+          "id": "l4-15-unsupervised-representation-learning",
+          "level": 4,
+          "label": "Unsupervised and representation learning",
+          "scopeTopicIds": [
+            "l4.ml.unsupervised-representation"
+          ]
+        },
+        {
+          "id": "l4-16-generalization-model-selection",
+          "level": 4,
+          "label": "Generalization and model selection",
+          "scopeTopicIds": [
+            "l4.ml.generalization-selection-reliability"
+          ]
+        },
+        {
+          "id": "l4-17-statistical-learning-theory",
+          "level": 4,
+          "label": "Statistical learning theory",
+          "scopeTopicIds": [
+            "l4.ml.advanced-learning-theory"
+          ]
+        },
+        {
+          "id": "l5-18-neural-network-fundamentals",
+          "level": 5,
+          "label": "Neural-network fundamentals",
+          "scopeTopicIds": [
+            "l5.dl.computational-graphs-backprop"
+          ]
+        },
+        {
+          "id": "l5-19-major-architectures",
+          "level": 5,
+          "label": "Major architectures",
+          "scopeTopicIds": [
+            "l5.dl.architecture-families"
+          ]
+        },
+        {
+          "id": "l5-20-modern-training-methodology",
+          "level": 5,
+          "label": "Modern training methodology",
+          "scopeTopicIds": [
+            "l5.dl.modern-training-systems"
+          ]
+        },
+        {
+          "id": "l6-probabilistic-modeling-inference",
+          "level": 6,
+          "label": "Probabilistic modeling and inference",
+          "scopeTopicIds": [
+            "l6.pgm.structure-exact-inference",
+            "l6.pgm.monte-carlo-variational",
+            "l6.pgm.gaussian-processes-nonparametrics"
+          ]
+        },
+        {
+          "id": "l7-sequential-decision-making-rl",
+          "level": 7,
+          "label": "Sequential decision-making and reinforcement learning",
+          "scopeTopicIds": [
+            "l7.rl.bellman-dynamic-programming",
+            "l7.rl.value-policy-methods",
+            "l7.rl.advanced-control"
+          ]
+        },
+        {
+          "id": "l8-foundation-models-llms-generative-ai",
+          "level": 8,
+          "label": "Foundation models, LLMs, and generative AI",
+          "scopeTopicIds": [
+            "l8.fm.representations-transformers",
+            "l8.fm.alignment-and-preference",
+            "l8.fm.retrieval-tools-agents",
+            "l8.fm.reliability-security-evaluation",
+            "l8.fm.efficiency-multimodality"
+          ]
+        },
+        {
+          "id": "l9-deep-specialization-nlp-language-models",
+          "level": 9,
+          "label": "Deep specialization: NLP and language models",
+          "scopeTopicIds": [
+            "l9.nlp.linguistic-language-modeling",
+            "l9.nlp.tasks-retrieval-dialogue",
+            "l9.nlp.multilingual-specialty"
+          ]
+        }
       ],
       "sourceLists": [
         {
@@ -215,9 +422,32 @@
         "level": 1,
         "label": "Propositional and predicate logic; sets, functions, relations, and equivalence relations.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m04", "sessions": [1, 2] }, { "moduleId": "m27", "sessions": [1, 2] }],
-        "sourceModuleIds": ["m04", "m27"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m04",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m27",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m04",
+          "m27"
+        ],
         "evidenceArtifact": "Formal claim, quantifier repair, and countermodel card.",
         "trackId": null
       },
@@ -226,9 +456,32 @@
         "level": 1,
         "label": "Direct proof, contradiction, contrapositive, ordinary and structural induction, invariants, and extremal arguments.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m05", "sessions": [1, 2] }, { "moduleId": "m27", "sessions": [2, 6] }],
-        "sourceModuleIds": ["m05", "m27"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m05",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m27",
+            "sessions": [
+              2,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m05",
+          "m27"
+        ],
         "evidenceArtifact": "Proof-and-counterexample dossier with an invariant repair.",
         "trackId": null
       },
@@ -237,9 +490,23 @@
         "level": 1,
         "label": "Counting, permutations, combinations, recurrences, and generating functions.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m27", "sessions": [3, 4] }],
-        "sourceModuleIds": ["m27"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m27",
+            "sessions": [
+              3,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m27"
+        ],
         "evidenceArtifact": "Counting-model and recurrence-evidence sheet.",
         "trackId": null
       },
@@ -248,9 +515,32 @@
         "level": 1,
         "label": "Graphs, trees, connectivity, matchings, partial orders, lattices, asymptotic notation, and basic number theory.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m10", "sessions": [1, 6] }, { "moduleId": "m27", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m10", "m27"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m27",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m27"
+        ],
         "evidenceArtifact": "Graph/order argument and asymptotic-claim boundary card.",
         "trackId": null
       },
@@ -259,9 +549,23 @@
         "level": 1,
         "label": "Vector spaces, subspaces, bases, dimension, linear independence, rank, null space, and column space.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m28", "sessions": [1, 2] }],
-        "sourceModuleIds": ["m28"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
         "evidenceArtifact": "Linear-map and rank-nullity reasoning trace.",
         "trackId": null
       },
@@ -270,9 +574,24 @@
         "level": 1,
         "label": "Inner products, norms, orthogonality, projections, and least squares.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m28", "sessions": [2, 3] }],
-        "sourceModuleIds": ["m28"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              2,
+              3
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
         "evidenceArtifact": "Projection and least-squares evidence card.",
         "trackId": null
       },
@@ -281,9 +600,24 @@
         "level": 1,
         "label": "Eigenvalues, eigenvectors, diagonalization, symmetric and positive-semidefinite matrices, SVD, low-rank approximation, spectral theorem, and PCA from both variance and reconstruction.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m28", "sessions": [3, 5] }],
-        "sourceModuleIds": ["m28"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              3,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
         "evidenceArtifact": "Spectral/PCA derivation and low-rank reconstruction dossier.",
         "trackId": null
       },
@@ -292,9 +626,24 @@
         "level": 1,
         "label": "Matrix calculus, tensor operations, conditioning, and numerical stability.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m28", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m28"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
         "evidenceArtifact": "Shape/dtype/conditioning trace and numerical counterexample.",
         "trackId": null
       },
@@ -303,9 +652,23 @@
         "level": 1,
         "label": "Single- and multivariable calculus; partial derivatives; gradients, Jacobians, Hessians; Taylor expansions; multiple integrals; change of variables; and constrained extrema.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m29", "sessions": [1, 4] }],
-        "sourceModuleIds": ["m29"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m29",
+            "sessions": [
+              1,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m29"
+        ],
         "evidenceArtifact": "Differential, Taylor-error, and constrained-extrema evidence sheet.",
         "trackId": null
       },
@@ -314,9 +677,23 @@
         "level": 1,
         "label": "Limits, continuity, sequences and series, pointwise versus uniform convergence, and basic metric-space concepts.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m29", "sessions": [1, 5] }],
-        "sourceModuleIds": ["m29"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m29",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m29"
+        ],
         "evidenceArtifact": "Limit/convergence proof sketch with a finite numerical boundary.",
         "trackId": null
       },
@@ -325,9 +702,31 @@
         "level": 1,
         "label": "Rigorous conditions for interchanging limits, derivatives, expectations, and integrals; measure theory and full real-analysis depth.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "design"],
-        "anchors": [{ "moduleId": "m29", "sessions": [5, 6] }, { "moduleId": "m30", "sessions": [2, 3] }],
-        "sourceModuleIds": ["m29", "m30"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m29",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m30",
+            "sessions": [
+              2,
+              3
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m29",
+          "m30"
+        ],
         "evidenceArtifact": "Hypothesis ledger for one interchange theorem and a counterexample.",
         "trackId": "math-algorithms-theory"
       },
@@ -336,9 +735,24 @@
         "level": 1,
         "label": "Sample spaces and random variables; joint, marginal, and conditional distributions; Bayes' rule; independence; expectation, variance, covariance; transformations; common distributions; multivariate Gaussians; and conditional expectation.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m30", "sessions": [1, 2] }],
-        "sourceModuleIds": ["m30"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
         "evidenceArtifact": "Probability-model, conditional-independence, and transformation trace.",
         "trackId": null
       },
@@ -347,9 +761,23 @@
         "level": 1,
         "label": "Laws of large numbers, central limit theorem, Markov and Chebyshev inequalities, Chernoff/Hoeffding/Bernstein bounds, and Monte Carlo methods.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m30", "sessions": [3, 4] }],
-        "sourceModuleIds": ["m30"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
         "evidenceArtifact": "Finite-sample concentration and simulation-boundary report.",
         "trackId": null
       },
@@ -358,9 +786,31 @@
         "level": 1,
         "label": "Martingales at an introductory level and finite Markov chains.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "debug"],
-        "anchors": [{ "moduleId": "m30", "sessions": [3, 4] }, { "moduleId": "m34", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m30", "m34"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m34"
+        ],
         "evidenceArtifact": "Finite-state transition and assumption card; not a stochastic-process specialization.",
         "trackId": null
       },
@@ -369,9 +819,24 @@
         "level": 1,
         "label": "Statistical models and sampling; bias, variance, consistency, efficiency; MLE, MAP, Bayesian inference; sufficient statistics; and exponential families.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m30", "sessions": [4, 5] }],
-        "sourceModuleIds": ["m30"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              4,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
         "evidenceArtifact": "Estimation-assumption and posterior-versus-likelihood dossier.",
         "trackId": null
       },
@@ -380,9 +845,24 @@
         "level": 1,
         "label": "Confidence intervals, hypothesis testing, multiple testing, linear and generalized linear models, logistic regression, bootstrap and permutation tests, experimental design, statistical power, and missing data.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m30", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m30"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
         "evidenceArtifact": "Inference-and-design decision card with a falsifier.",
         "trackId": null
       },
@@ -391,9 +871,32 @@
         "level": 1,
         "label": "Model misspecification, robust statistics, causal reasoning, nonparametrics, and high-dimensional estimation.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m30", "sessions": [5, 6] }, { "moduleId": "m36", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m30", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m36"
+        ],
         "evidenceArtifact": "Assumption stress test and uncertainty-source separation memo.",
         "trackId": "math-algorithms-theory"
       },
@@ -402,9 +905,24 @@
         "level": 1,
         "label": "Unconstrained and constrained optimization; convex sets/functions; first- and second-order conditions; Lagrange multipliers; duality; KKT conditions; regularization; nonconvexity; saddle points; and numerical stability.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m31", "sessions": [1, 3] }],
-        "sourceModuleIds": ["m31"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              1,
+              3
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
         "evidenceArtifact": "Optimization and Information Evidence Dossier with feasibility and stationarity checks.",
         "trackId": null
       },
@@ -413,9 +931,24 @@
         "level": 1,
         "label": "Gradient and stochastic-gradient methods, convergence-rate reasoning, and stopping evidence.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m31", "sessions": [3, 4] }],
-        "sourceModuleIds": ["m31"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              3,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
         "evidenceArtifact": "Descent/stochastic-assumption trace and stopping boundary.",
         "trackId": null
       },
@@ -424,9 +957,32 @@
         "level": 1,
         "label": "Momentum, adaptive methods, learning-rate schedules, Newton and quasi-Newton methods, subgradients, proximal methods, coordinate descent, and broad nonlinear-optimization theory.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "implement"],
-        "anchors": [{ "moduleId": "m31", "sessions": [3, 4] }, { "moduleId": "m36", "sessions": [2, 5] }],
-        "sourceModuleIds": ["m31", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              2,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31",
+          "m36"
+        ],
         "evidenceArtifact": "Optimizer comparison with assumptions, traces, and failure cases.",
         "trackId": "math-algorithms-theory"
       },
@@ -435,9 +991,23 @@
         "level": 1,
         "label": "Entropy, conditional entropy, cross-entropy, KL divergence, mutual information, rate-distortion intuition, and links to likelihood, representation learning, and variational inference.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m31", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m31"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
         "evidenceArtifact": "Information-measure direction/support and ELBO boundary card.",
         "trackId": null
       },
@@ -446,9 +1016,23 @@
         "level": 1,
         "label": "Data-processing inequality, maximum-entropy principles, coding interpretation, channel capacity, and coding-theorem depth.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "design"],
-        "anchors": [{ "moduleId": "m31", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m31"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
         "evidenceArtifact": "Information-theory proof/explanation packet with operational non-claims.",
         "trackId": "math-algorithms-theory"
       },
@@ -457,9 +1041,27 @@
         "level": 1,
         "label": "A full university-scale proof, numerical-linear-algebra, measure-theory, advanced-statistics, optimization, and information-theory sequence with term-long feedback cycles.",
         "scope": "explicitly-deferred",
-        "targetCapabilities": ["recognize"],
-        "anchors": [{ "moduleId": "m27", "sessions": [6] }, { "moduleId": "m36", "sessions": [6] }],
-        "sourceModuleIds": ["m27", "m36"],
+        "targetCapabilities": [
+          "recognize"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m27",
+            "sessions": [
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m27",
+          "m36"
+        ],
         "evidenceArtifact": "Scope boundary card; not a 60-day completion claim.",
         "trackId": null
       },
@@ -468,9 +1070,40 @@
         "level": 2,
         "label": "Data structures and algorithmic complexity; object-oriented, functional, and procedural styles; and abstraction/interface design.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m01", "sessions": [1, 6] }, { "moduleId": "m03", "sessions": [1, 6] }, { "moduleId": "m05", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m01", "m03", "m05"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m01",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m03",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m05",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m01",
+          "m03",
+          "m05"
+        ],
         "evidenceArtifact": "State/abstraction trace and complexity-backed design review.",
         "trackId": null
       },
@@ -479,9 +1112,48 @@
         "level": 2,
         "label": "Type systems and static analysis; testing, debugging, profiling; version control and code review; packaging, dependency management, and reproducible environments.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m12", "sessions": [1, 6] }, { "moduleId": "m13", "sessions": [1, 6] }, { "moduleId": "m15", "sessions": [1, 6] }, { "moduleId": "m24", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m12", "m13", "m15", "m24"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m12",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m13",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m15",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m24",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m12",
+          "m13",
+          "m15",
+          "m24"
+        ],
         "evidenceArtifact": "Specification-to-regression trace and reproducible change dossier.",
         "trackId": null
       },
@@ -490,9 +1162,48 @@
         "level": 2,
         "label": "Linux shell and process management, networking basics, concurrency and asynchronous programming, memory layout/cache behavior, vectorization, and SQL.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m16", "sessions": [1, 6] }, { "moduleId": "m18", "sessions": [1, 6] }, { "moduleId": "m19", "sessions": [1, 6] }, { "moduleId": "m20", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m16", "m18", "m19", "m20"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m16",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m18",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m19",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m20",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m16",
+          "m18",
+          "m19",
+          "m20"
+        ],
         "evidenceArtifact": "Process/network/data trace with a bounded performance claim.",
         "trackId": null
       },
@@ -501,9 +1212,32 @@
         "level": 2,
         "label": "Scoped lower-level-language reading; NumPy layout/broadcasting; JAX/PyTorch execution reasoning; automatic differentiation; GPU/precision/profiler evidence; and an explicit M35-led boundary for distributed data parallelism rather than replica/collective mastery.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "debug", "design"],
-        "anchors": [{ "moduleId": "m32", "sessions": [1, 6] }, { "moduleId": "m35", "sessions": [4, 5] }],
-        "sourceModuleIds": ["m32", "m35"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m35"
+        ],
         "evidenceArtifact": "Scientific Python & Accelerators Dossier plus an M35-led replica/collective boundary; no claimed C/C++/Rust, CUDA, framework, or distributed-data-parallel mastery.",
         "trackId": null
       },
@@ -512,9 +1246,49 @@
         "level": 2,
         "label": "Arrays, linked structures, stacks, queues, hash tables, trees, heaps, tries, union-find, sorting, selection, and graph representations.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m06", "sessions": [1, 6] }, { "moduleId": "m07", "sessions": [1, 6] }, { "moduleId": "m08", "sessions": [1, 6] }, { "moduleId": "m09", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m06", "m07", "m08", "m09"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m06",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m07",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m08",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m09",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m06",
+          "m07",
+          "m08",
+          "m09"
+        ],
         "evidenceArtifact": "Representation/invariant/cost dossier for an unfamiliar implementation.",
         "trackId": null
       },
@@ -523,9 +1297,33 @@
         "level": 2,
         "label": "Breadth-first and depth-first search, shortest paths, minimum spanning trees, greedy algorithms, divide and conquer, dynamic programming, randomized algorithms, and approximation-algorithm reasoning.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m10", "sessions": [1, 6] }, { "moduleId": "m11", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m10", "m11"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m11",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m11"
+        ],
         "evidenceArtifact": "Algorithm-choice justification and proof/counterexample trace.",
         "trackId": null
       },
@@ -534,9 +1332,41 @@
         "level": 2,
         "label": "Network flow, advanced amortized analysis, online and streaming algorithms, and full approximation-algorithm analysis.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m10", "sessions": [5, 6] }, { "moduleId": "m11", "sessions": [4, 6] }, { "moduleId": "m33", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m10", "m11", "m33"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m11",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m33",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m11",
+          "m33"
+        ],
         "evidenceArtifact": "Advanced algorithm proof and stress-input report.",
         "trackId": "math-algorithms-theory"
       },
@@ -545,9 +1375,24 @@
         "level": 2,
         "label": "Finite automata and regular languages, context-free languages, Turing machines, decidability, reductions, complexity classes, and NP-completeness.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m33", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m33"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m33",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m33"
+        ],
         "evidenceArtifact": "Formal Limits Claim Packet with a construction, reduction, and non-claim.",
         "trackId": null
       },
@@ -556,9 +1401,23 @@
         "level": 2,
         "label": "co-NP, PSPACE, randomized complexity, approximation hardness, and basic circuit complexity.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "design"],
-        "anchors": [{ "moduleId": "m33", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m33"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m33",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m33"
+        ],
         "evidenceArtifact": "Complexity-class reduction and scope memo.",
         "trackId": "math-algorithms-theory"
       },
@@ -567,9 +1426,47 @@
         "level": 2,
         "label": "Machine representation, assembly-level execution, memory hierarchy, virtual memory, processes and threads, synchronization/deadlocks, filesystems, scheduling, and networking fundamentals.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "debug", "design"],
-        "anchors": [{ "moduleId": "m17", "sessions": [1, 6] }, { "moduleId": "m18", "sessions": [1, 6] }, { "moduleId": "m19", "sessions": [1, 6] }, { "moduleId": "m20", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m17", "m18", "m19", "m20"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m17",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m18",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m19",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m20",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m17",
+          "m18",
+          "m19",
+          "m20"
+        ],
         "evidenceArtifact": "Cross-layer execution trace and failure-boundary argument.",
         "trackId": null
       },
@@ -578,9 +1475,40 @@
         "level": 2,
         "label": "Databases and indexing, transactions and consistency, distributed systems, replication, fault tolerance, and failure recovery.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m16", "sessions": [1, 6] }, { "moduleId": "m21", "sessions": [1, 6] }, { "moduleId": "m26", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m16", "m21", "m26"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m16",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m21",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m26",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m16",
+          "m21",
+          "m26"
+        ],
         "evidenceArtifact": "Consistency/retry/rollback evidence chain and release-boundary dossier.",
         "trackId": null
       },
@@ -589,9 +1517,24 @@
         "level": 2,
         "label": "GPUs and accelerators, including performance, memory, and reproducibility boundaries.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "debug", "design"],
-        "anchors": [{ "moduleId": "m32", "sessions": [2, 6] }],
-        "sourceModuleIds": ["m32"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              2,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32"
+        ],
         "evidenceArtifact": "CPU-only layout/autodiff observation with explicit no-speedup and no-portability claims.",
         "trackId": null
       },
@@ -600,9 +1543,56 @@
         "level": 2,
         "label": "Requirements and interface design, modular architecture, testing strategies, CI, observability, configuration, reproducible builds, API design, refactoring, performance engineering, secure coding, failure recovery, and technical documentation.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m12", "sessions": [1, 6] }, { "moduleId": "m13", "sessions": [1, 6] }, { "moduleId": "m14", "sessions": [1, 6] }, { "moduleId": "m15", "sessions": [1, 6] }, { "moduleId": "m26", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m12", "m13", "m14", "m15", "m26"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m12",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m13",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m14",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m15",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m26",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m12",
+          "m13",
+          "m14",
+          "m15",
+          "m26"
+        ],
         "evidenceArtifact": "Architecture, regression, provenance, and maintenance-handoff dossier.",
         "trackId": null
       },
@@ -611,9 +1601,33 @@
         "level": 3,
         "label": "State-space formulation; breadth-first, depth-first, uniform-cost, bidirectional, and A* search; admissible heuristics; and local-search boundaries.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m10", "sessions": [1, 4] }, { "moduleId": "m34", "sessions": [1, 2] }],
-        "sourceModuleIds": ["m10", "m34"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m34"
+        ],
         "evidenceArtifact": "Search-condition trace with a heuristic or cost-model counterexample.",
         "trackId": null
       },
@@ -622,9 +1636,24 @@
         "level": 3,
         "label": "Constraint-satisfaction problems, propagation, planning, and model/relaxation boundaries.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m34", "sessions": [2, 4] }],
-        "sourceModuleIds": ["m34"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m34",
+            "sessions": [
+              2,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m34"
+        ],
         "evidenceArtifact": "Classical AI Search, Constraints & Decision Packet.",
         "trackId": null
       },
@@ -633,9 +1662,40 @@
         "level": 3,
         "label": "Propositional and first-order logic, resolution and theorem proving, and richer knowledge representation.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m27", "sessions": [1, 2] }, { "moduleId": "m33", "sessions": [1, 4] }, { "moduleId": "m34", "sessions": [1, 4] }],
-        "sourceModuleIds": ["m27", "m33", "m34"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m27",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m33",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              1,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m27",
+          "m33",
+          "m34"
+        ],
         "evidenceArtifact": "Logic/representation proof packet with a resolution or model-checking boundary.",
         "trackId": "math-algorithms-theory"
       },
@@ -644,9 +1704,32 @@
         "level": 3,
         "label": "Bayesian-network and hidden-Markov-model vocabulary, decision theory, Markov decision processes, and Bellman reasoning.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m30", "sessions": [1, 4] }, { "moduleId": "m34", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m30", "m34"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m34"
+        ],
         "evidenceArtifact": "Finite-horizon decision trace; not a learned policy or full probabilistic-inference route.",
         "trackId": null
       },
@@ -655,9 +1738,25 @@
         "level": 3,
         "label": "Partially observable MDPs, multi-agent reasoning, game theory, minimax, and alpha-beta pruning.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m34", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m34"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m34"
+        ],
         "evidenceArtifact": "Changed-premise decision-policy defense with uncertainty and authority boundaries.",
         "trackId": "probabilistic-models-rl"
       },
@@ -666,9 +1765,32 @@
         "level": 4,
         "label": "Empirical-risk minimization; train/validation/test separation; linear and logistic regression; generalized linear models; class imbalance; calibration; ranking; and error analysis.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m30", "sessions": [4, 6] }, { "moduleId": "m35", "sessions": [1, 4] }],
-        "sourceModuleIds": ["m30", "m35"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m35"
+        ],
         "evidenceArtifact": "Baseline/split/metric/calibration dossier with a failure slice.",
         "trackId": null
       },
@@ -677,9 +1799,24 @@
         "level": 4,
         "label": "k-nearest neighbors, naive Bayes, decision trees, random forests, gradient boosting, support-vector machines, kernel methods, neural networks, multilabel prediction, and structured prediction.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "debug", "design"],
-        "anchors": [{ "moduleId": "m35", "sessions": [1, 5] }],
-        "sourceModuleIds": ["m35"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m35"
+        ],
         "evidenceArtifact": "Model-family boundary map and baseline-choice rationale; not a full implementation survey.",
         "trackId": null
       },
@@ -688,9 +1825,41 @@
         "level": 4,
         "label": "k-means and mixture models, hierarchical clustering, density estimation, PCA, matrix factorization, independent-component analysis, latent-variable models, manifold learning, autoencoders, contrastive/self-supervised learning, and representation evaluation.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m28", "sessions": [3, 5] }, { "moduleId": "m31", "sessions": [5, 6] }, { "moduleId": "m35", "sessions": [1, 5] }],
-        "sourceModuleIds": ["m28", "m31", "m35"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              3,
+              5
+            ]
+          },
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28",
+          "m31",
+          "m35"
+        ],
         "evidenceArtifact": "Representation/inductive-bias comparison and PCA/ELBO boundary card.",
         "trackId": null
       },
@@ -699,9 +1868,40 @@
         "level": 4,
         "label": "Underfitting and overfitting, bias-variance, cross-validation, regularization, hyperparameter selection, data leakage, distribution shift, domain adaptation, OOD generalization, calibration/uncertainty, learning curves, baselines, and ablations.",
         "scope": "core-mastery",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m30", "sessions": [4, 6] }, { "moduleId": "m35", "sessions": [2, 6] }, { "moduleId": "m36", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m30", "m35", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m35",
+          "m36"
+        ],
         "evidenceArtifact": "Learning/evaluation/reliability evidence map with a monitored non-claim.",
         "trackId": null
       },
@@ -710,9 +1910,24 @@
         "level": 4,
         "label": "PAC learning, hypothesis classes, VC dimension, growth functions, uniform convergence, Rademacher complexity, algorithmic stability, margin bounds, online learning, regret, multi-armed bandits, no-free-lunch, minimax lower bounds, and information-theoretic lower bounds.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m36", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m36"
+        ],
         "evidenceArtifact": "Theorem-scope, proof-reconstruction, and counterexample dossier.",
         "trackId": "math-algorithms-theory"
       },
@@ -721,9 +1936,40 @@
         "level": 5,
         "label": "Computational graphs, backpropagation, automatic differentiation, initialization, activations, normalization, residual connections, regularization, dropout, loss design, clipping, optimization dynamics, vanishing/exploding gradients, scaling, and numerical stability.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m32", "sessions": [3, 5] }, { "moduleId": "m35", "sessions": [4, 5] }, { "moduleId": "m36", "sessions": [3, 5] }],
-        "sourceModuleIds": ["m32", "m35", "m36"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              3,
+              5
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              5
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              3,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m35",
+          "m36"
+        ],
         "evidenceArtifact": "Fixed-network forward/backward trace with numerical and reliability boundaries.",
         "trackId": null
       },
@@ -732,9 +1978,41 @@
         "level": 5,
         "label": "Multilayer perceptrons, convolutional networks, recurrent networks, LSTMs/GRUs, attention, transformers, graph neural networks, autoencoders, VAEs, autoregressive models, GANs, diffusion/flow models, and mixture-of-experts architectures.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m32", "sessions": [3, 6] }, { "moduleId": "m35", "sessions": [4, 5] }, { "moduleId": "m36", "sessions": [3, 5] }],
-        "sourceModuleIds": ["m32", "m35", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              3,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              5
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              3,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m35",
+          "m36"
+        ],
         "evidenceArtifact": "Architecture trade-off dossier with a bounded reference implementation.",
         "trackId": "deep-learning-ml-systems"
       },
@@ -743,9 +2021,32 @@
         "level": 5,
         "label": "Large- and small-batch optimization, warmup and schedules, weight decay, mixed precision, gradient accumulation, checkpointing, distributed data parallelism, tensor/pipeline parallelism, quantization, pruning, distillation, efficient inference, and memory-compute trade-offs.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m32", "sessions": [4, 6] }, { "moduleId": "m36", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m32", "m36"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m36"
+        ],
         "evidenceArtifact": "Reproducible training/inference systems dossier with measured-scope limits.",
         "trackId": "deep-learning-ml-systems"
       },
@@ -754,9 +2055,41 @@
         "level": 6,
         "label": "Directed and undirected graphical models, conditional independence, factor graphs, exact inference, variable elimination, belief propagation, and expectation-maximization.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m30", "sessions": [1, 2] }, { "moduleId": "m31", "sessions": [5, 6] }, { "moduleId": "m34", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m30", "m31", "m34"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m31",
+          "m34"
+        ],
         "evidenceArtifact": "Graphical-model factorization/inference trace with an independence audit.",
         "trackId": "probabilistic-models-rl"
       },
@@ -765,9 +2098,33 @@
         "level": 6,
         "label": "Monte Carlo estimation, importance sampling, Markov-chain Monte Carlo, Gibbs and Metropolis-Hastings sampling, variational inference, ELBO, and sequential Monte Carlo.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m30", "sessions": [3, 4] }, { "moduleId": "m31", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m30", "m31"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m31"
+        ],
         "evidenceArtifact": "Inference-estimator comparison with support, variance, and convergence non-claims.",
         "trackId": "probabilistic-models-rl"
       },
@@ -776,9 +2133,32 @@
         "level": 6,
         "label": "Gaussian processes and introductory Bayesian nonparametrics.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m28", "sessions": [2, 5] }, { "moduleId": "m30", "sessions": [1, 5] }],
-        "sourceModuleIds": ["m28", "m30"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              2,
+              5
+            ]
+          },
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28",
+          "m30"
+        ],
         "evidenceArtifact": "Kernel/prior/posterior model card with a data-assumption stress test.",
         "trackId": "probabilistic-models-rl"
       },
@@ -787,9 +2167,32 @@
         "level": 7,
         "label": "Dynamic programming, Bellman equations, value iteration, policy iteration, and bounded decision-process reasoning.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "derive", "debug"],
-        "anchors": [{ "moduleId": "m11", "sessions": [3, 5] }, { "moduleId": "m34", "sessions": [5, 6] }],
-        "sourceModuleIds": ["m11", "m34"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m11",
+            "sessions": [
+              3,
+              5
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m11",
+          "m34"
+        ],
         "evidenceArtifact": "Finite-horizon Bellman trace; not a general planner or trained agent.",
         "trackId": null
       },
@@ -798,9 +2201,41 @@
         "level": 7,
         "label": "Monte Carlo estimation, temporal-difference learning, Q-learning, SARSA, function approximation, policy gradients, actor-critic methods, exploration, contextual/multi-armed bandits, model-based RL, and offline RL.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m30", "sessions": [3, 4] }, { "moduleId": "m34", "sessions": [5, 6] }, { "moduleId": "m35", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m30", "m34", "m35"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m34",
+          "m35"
+        ],
         "evidenceArtifact": "Policy/evaluation experiment with reward, distribution, and safety limits.",
         "trackId": "probabilistic-models-rl"
       },
@@ -809,9 +2244,32 @@
         "level": 7,
         "label": "Imitation learning, inverse reinforcement learning, partial observability, multi-agent RL, control theory basics, stability, and reward misspecification.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m34", "sessions": [5, 6] }, { "moduleId": "m36", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m34", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m34",
+          "m36"
+        ],
         "evidenceArtifact": "Changed-reward/changed-observation oral defense with stop-owner and rollback boundary.",
         "trackId": "probabilistic-models-rl"
       },
@@ -820,9 +2278,49 @@
         "level": 8,
         "label": "Tokenization and embeddings, transformer internals, positional representations, pretraining objectives, autoregressive generation, masked modeling, scaling behavior, and data curation/deduplication.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m23", "sessions": [1, 4] }, { "moduleId": "m28", "sessions": [1, 6] }, { "moduleId": "m32", "sessions": [3, 6] }, { "moduleId": "m35", "sessions": [1, 5] }],
-        "sourceModuleIds": ["m23", "m28", "m32", "m35"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m23",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m28",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m32",
+            "sessions": [
+              3,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m23",
+          "m28",
+          "m32",
+          "m35"
+        ],
         "evidenceArtifact": "Tokenizer-to-attention trace and data/objective provenance card.",
         "trackId": "foundation-models-nlp"
       },
@@ -831,9 +2329,48 @@
         "level": 8,
         "label": "Instruction tuning, preference learning, reward modeling, direct preference optimization, in-context learning, synthetic data, and alignment limits.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design"],
-        "anchors": [{ "moduleId": "m31", "sessions": [3, 6] }, { "moduleId": "m34", "sessions": [5, 6] }, { "moduleId": "m35", "sessions": [2, 6] }, { "moduleId": "m36", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m31", "m34", "m35", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              3,
+              6
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31",
+          "m34",
+          "m35",
+          "m36"
+        ],
         "evidenceArtifact": "Preference/objective/authority comparison with a reward-misspecification counterexample.",
         "trackId": "foundation-models-nlp"
       },
@@ -842,9 +2379,40 @@
         "level": 8,
         "label": "Retrieval-augmented generation, tool use, agent architectures, long-context methods, and bounded human authority over an AI proposal.",
         "scope": "scoped-exposure",
-        "targetCapabilities": ["recognize", "read", "debug", "design"],
-        "anchors": [{ "moduleId": "m22", "sessions": [1, 6] }, { "moduleId": "m25", "sessions": [1, 6] }, { "moduleId": "m26", "sessions": [1, 6] }],
-        "sourceModuleIds": ["m22", "m25", "m26"],
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m22",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m25",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m26",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m22",
+          "m25",
+          "m26"
+        ],
         "evidenceArtifact": "Evidence-grounded suggestion/authority trace; not an LLM trainer or production agent release.",
         "trackId": null
       },
@@ -853,9 +2421,40 @@
         "level": 8,
         "label": "Evaluation contamination, hallucination and factuality, prompt injection and model security, behavioral/mechanistic interpretability, and long-lived model evaluation.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m22", "sessions": [1, 6] }, { "moduleId": "m25", "sessions": [1, 6] }, { "moduleId": "m36", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m22", "m25", "m36"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m22",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m25",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m22",
+          "m25",
+          "m36"
+        ],
         "evidenceArtifact": "Model-evaluation and adversarial-boundary dossier with a monitoring plan.",
         "trackId": "foundation-models-nlp"
       },
@@ -864,9 +2463,40 @@
         "level": 8,
         "label": "Multimodal models, distillation and quantization, sparse and mixture-of-experts models, compute/data efficiency, and systems trade-offs.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m28", "sessions": [5, 6] }, { "moduleId": "m32", "sessions": [4, 6] }, { "moduleId": "m36", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m28", "m32", "m36"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m32",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28",
+          "m32",
+          "m36"
+        ],
         "evidenceArtifact": "Measured efficiency/quality trade-off report with hardware and data-scope limits.",
         "trackId": "foundation-models-nlp"
       },
@@ -875,9 +2505,41 @@
         "level": 9,
         "label": "Formal languages and linguistic structure, language modeling, parsing, sequence labeling, semantic representations, and neural language-model foundations.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m23", "sessions": [1, 4] }, { "moduleId": "m33", "sessions": [1, 3] }, { "moduleId": "m35", "sessions": [1, 5] }],
-        "sourceModuleIds": ["m23", "m33", "m35"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m23",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m33",
+            "sessions": [
+              1,
+              3
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m23",
+          "m33",
+          "m35"
+        ],
         "evidenceArtifact": "Language-structure/model trace with an evaluation and data boundary.",
         "trackId": "foundation-models-nlp"
       },
@@ -886,9 +2548,40 @@
         "level": 9,
         "label": "Machine translation, information extraction, question answering, retrieval, dialogue, and LLM training/evaluation.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m20", "sessions": [1, 6] }, { "moduleId": "m25", "sessions": [1, 6] }, { "moduleId": "m35", "sessions": [2, 6] }],
-        "sourceModuleIds": ["m20", "m25", "m35"],
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m20",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m25",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m20",
+          "m25",
+          "m35"
+        ],
         "evidenceArtifact": "Task/evaluation/retrieval dossier with data, metric, and human-override limits.",
         "trackId": "foundation-models-nlp"
       },
@@ -897,9 +2590,41 @@
         "level": 9,
         "label": "Multilingual learning and one research-level specialty with working competence in neighboring areas.",
         "scope": "post-core-specialization",
-        "targetCapabilities": ["read", "derive", "debug", "design", "implement"],
-        "anchors": [{ "moduleId": "m30", "sessions": [5, 6] }, { "moduleId": "m35", "sessions": [2, 6] }, { "moduleId": "m36", "sessions": [4, 6] }],
-        "sourceModuleIds": ["m30", "m35", "m36"],
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m35",
+          "m36"
+        ],
         "evidenceArtifact": "One bounded specialty portfolio, oral defense, and limitation ledger; not candidacy or degree equivalence.",
         "trackId": "foundation-models-nlp"
       }
@@ -914,7 +2639,16 @@
           "recommendedDays": 180,
           "rationale": "Theory needs spaced proof reconstruction, counterexamples, and one revised argument—not a single compressed survey."
         },
-        "prerequisiteModuleIds": ["m26", "m27", "m28", "m29", "m30", "m31", "m33", "m36"],
+        "prerequisiteModuleIds": [
+          "m26",
+          "m27",
+          "m28",
+          "m29",
+          "m30",
+          "m31",
+          "m33",
+          "m36"
+        ],
         "calibrationUrls": [
           "https://ocw.mit.edu/courses/6-854j-advanced-algorithms-fall-2005/",
           "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/",
@@ -933,7 +2667,16 @@
           "recommendedDays": 180,
           "rationale": "Repeatable experiments need time to inspect systems evidence, revise the baseline, and explain resource and reliability limits."
         },
-        "prerequisiteModuleIds": ["m26", "m28", "m29", "m30", "m31", "m32", "m35", "m36"],
+        "prerequisiteModuleIds": [
+          "m26",
+          "m28",
+          "m29",
+          "m30",
+          "m31",
+          "m32",
+          "m35",
+          "m36"
+        ],
         "calibrationUrls": [
           "https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/",
           "https://web.stanford.edu/class/cs329s/",
@@ -952,7 +2695,14 @@
           "recommendedDays": 180,
           "rationale": "Inference and decision claims need a separate calibration and revision cycle so a finite simulation is not mistaken for a policy guarantee."
         },
-        "prerequisiteModuleIds": ["m26", "m29", "m30", "m31", "m34", "m35"],
+        "prerequisiteModuleIds": [
+          "m26",
+          "m29",
+          "m30",
+          "m31",
+          "m34",
+          "m35"
+        ],
         "calibrationUrls": [
           "https://www.cs.cmu.edu/~pradeepr/708/",
           "https://rail.eecs.berkeley.edu/deeprlcourse/index.html",
@@ -971,7 +2721,18 @@
           "recommendedDays": 180,
           "rationale": "Model and data provenance, evaluation, red-teaming, and human-override reasoning need revision after the first dossier."
         },
-        "prerequisiteModuleIds": ["m26", "m23", "m28", "m29", "m30", "m31", "m32", "m33", "m35", "m36"],
+        "prerequisiteModuleIds": [
+          "m26",
+          "m23",
+          "m28",
+          "m29",
+          "m30",
+          "m31",
+          "m32",
+          "m33",
+          "m35",
+          "m36"
+        ],
         "calibrationUrls": [
           "https://ocw.mit.edu/courses/6-s087-foundation-models-and-generative-ai-january-iap-2024/",
           "https://web.stanford.edu/class/cs224n/",
@@ -1230,8 +2991,19 @@
       "masteryGateId": "claims",
       "routeRole": "required",
       "referenceReadMinutes": 21,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
+      "benchPackId": "m01",
       "sequencePosition": 1,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1262,8 +3034,19 @@
       "masteryGateId": "claims",
       "routeRole": "required",
       "referenceReadMinutes": 46,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
+      "benchPackId": "m02",
       "sequencePosition": 2,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1294,8 +3077,19 @@
       "masteryGateId": "claims",
       "routeRole": "required",
       "referenceReadMinutes": 64,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
+      "benchPackId": "m03",
       "sequencePosition": 3,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1326,8 +3120,19 @@
       "masteryGateId": "claims",
       "routeRole": "required",
       "referenceReadMinutes": 25,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
+      "benchPackId": "m04",
       "sequencePosition": 4,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1358,8 +3163,19 @@
       "masteryGateId": "claims",
       "routeRole": "required",
       "referenceReadMinutes": 24,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
       "sourceMap": "content/source-maps/python_curriculum_sources.md",
       "studioId": null,
+      "benchPackId": "m05",
       "sequencePosition": 5,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1390,8 +3206,19 @@
       "masteryGateId": "algorithms",
       "routeRole": "required",
       "referenceReadMinutes": 58,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
+      "benchPackId": "m06",
       "sequencePosition": 7,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1422,8 +3249,19 @@
       "masteryGateId": "algorithms",
       "routeRole": "required",
       "referenceReadMinutes": 52,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
+      "benchPackId": "m07",
       "sequencePosition": 8,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1454,8 +3292,19 @@
       "masteryGateId": "algorithms",
       "routeRole": "required",
       "referenceReadMinutes": 52,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
+      "benchPackId": "m08",
       "sequencePosition": 9,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1486,8 +3335,19 @@
       "masteryGateId": "algorithms",
       "routeRole": "required",
       "referenceReadMinutes": 74,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
+      "benchPackId": "m09",
       "sequencePosition": 10,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1518,8 +3378,19 @@
       "masteryGateId": "algorithms",
       "routeRole": "required",
       "referenceReadMinutes": 76,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
+      "benchPackId": "m10",
       "sequencePosition": 11,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1550,8 +3421,19 @@
       "masteryGateId": "algorithms",
       "routeRole": "required",
       "referenceReadMinutes": 63,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/arc_ii_source_map.md",
       "studioId": null,
+      "benchPackId": "m11",
       "sequencePosition": 12,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1582,8 +3464,19 @@
       "masteryGateId": "software",
       "routeRole": "required",
       "referenceReadMinutes": 82,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": "dependency-direction",
+      "benchPackId": "m12",
       "sequencePosition": 13,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1614,8 +3507,19 @@
       "masteryGateId": "software",
       "routeRole": "required",
       "referenceReadMinutes": 54,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": "specification-trace",
+      "benchPackId": "m13",
       "sequencePosition": 14,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1646,8 +3550,19 @@
       "masteryGateId": "software",
       "routeRole": "required",
       "referenceReadMinutes": 69,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
+      "benchPackId": "m14",
       "sequencePosition": 15,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1678,8 +3593,19 @@
       "masteryGateId": "software",
       "routeRole": "required",
       "referenceReadMinutes": 110,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          540,
+          660
+        ],
+        "deepDossier": [
+          660,
+          900
+        ]
+      },
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
+      "benchPackId": "m15",
       "sequencePosition": 16,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1710,8 +3636,19 @@
       "masteryGateId": "software",
       "routeRole": "required",
       "referenceReadMinutes": 93,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/arc_iii_source_map.md",
       "studioId": null,
+      "benchPackId": "m16",
       "sequencePosition": 17,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1742,8 +3679,19 @@
       "masteryGateId": "mathematics",
       "routeRole": "required",
       "referenceReadMinutes": 96,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/module17_architecture_execution_source_map.md",
       "studioId": null,
+      "benchPackId": "m17",
       "sequencePosition": 18,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1774,8 +3722,19 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 97,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
       "studioId": "operating-systems",
+      "benchPackId": "m18",
       "sequencePosition": 23,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1806,8 +3765,19 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 104,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          540,
+          660
+        ],
+        "deepDossier": [
+          660,
+          900
+        ]
+      },
       "sourceMap": "content/source-maps/module19_concurrency_parallelism_source_map.md",
       "studioId": "concurrency",
+      "benchPackId": "m19",
       "sequencePosition": 24,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1838,8 +3808,19 @@
       "masteryGateId": "systems",
       "routeRole": "required",
       "referenceReadMinutes": 72,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
       "sourceMap": "content/source-maps/module20_networks_protocols_source_map.md",
       "studioId": "network-protocol",
+      "benchPackId": "m20",
       "sequencePosition": 25,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1871,11 +3852,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 39,
       "focusedStudyMinutes": {
-        "minimumEvidence": [420, 540],
-        "deepDossier": [600, 780]
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
       },
       "sourceMap": "content/source-maps/module21_async_distributed_source_map.md",
       "studioId": "async-distributed",
+      "benchPackId": "m21",
       "sequencePosition": 26,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1907,11 +3895,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 31,
       "focusedStudyMinutes": {
-        "minimumEvidence": [420, 540],
-        "deepDossier": [600, 780]
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
       },
       "sourceMap": "content/source-maps/module22_security_trust_source_map.md",
       "studioId": "security-trust",
+      "benchPackId": "m22",
       "sequencePosition": 27,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1943,11 +3938,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 34,
       "focusedStudyMinutes": {
-        "minimumEvidence": [420, 540],
-        "deepDossier": [600, 780]
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
       },
       "sourceMap": "content/source-maps/module23_languages_interpreters_source_map.md",
       "studioId": "language-interpreter",
+      "benchPackId": "m23",
       "sequencePosition": 28,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -1979,11 +3981,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 21,
       "focusedStudyMinutes": {
-        "minimumEvidence": [360, 480],
-        "deepDossier": [540, 720]
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
       },
       "sourceMap": "content/source-maps/module24_cpython_performance_memory_source_map.md",
       "studioId": "runtime-evidence",
+      "benchPackId": "m24",
       "sequencePosition": 29,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2020,8 +4029,19 @@
       "masteryGateId": "evidence",
       "routeRole": "required",
       "referenceReadMinutes": 36,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
       "sourceMap": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
       "studioId": "evidence-grounded",
+      "benchPackId": "m25",
       "sequencePosition": 35,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2052,8 +4072,19 @@
       "masteryGateId": "defense",
       "routeRole": "required",
       "referenceReadMinutes": 38,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          600,
+          720
+        ],
+        "deepDossier": [
+          900,
+          1200
+        ]
+      },
       "sourceMap": "content/source-maps/module26_systems_capstone_source_map.md",
       "studioId": "capstone-defense",
+      "benchPackId": null,
       "sequencePosition": 36,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2087,11 +4118,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 48,
       "focusedStudyMinutes": {
-        "minimumEvidence": [780, 1020],
-        "deepDossier": [1200, 1680]
+        "minimumEvidence": [
+          780,
+          1020
+        ],
+        "deepDossier": [
+          1200,
+          1680
+        ]
       },
       "sourceMap": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
       "studioId": "discrete-math-proof",
+      "benchPackId": "m27",
       "sequencePosition": 6,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2124,11 +4162,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 39,
       "focusedStudyMinutes": {
-        "minimumEvidence": [840, 1080],
-        "deepDossier": [1380, 1920]
+        "minimumEvidence": [
+          840,
+          1080
+        ],
+        "deepDossier": [
+          1380,
+          1920
+        ]
       },
       "sourceMap": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
       "studioId": "linear-algebra-stability",
+      "benchPackId": "m28",
       "sequencePosition": 19,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2161,11 +4206,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 39,
       "focusedStudyMinutes": {
-        "minimumEvidence": [480, 600],
-        "deepDossier": [660, 840]
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
       },
       "sourceMap": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
       "studioId": "calculus-continuous-change",
+      "benchPackId": "m29",
       "sequencePosition": 20,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2198,11 +4250,18 @@
       "routeRole": "required",
       "referenceReadMinutes": 46,
       "focusedStudyMinutes": {
-        "minimumEvidence": [480, 600],
-        "deepDossier": [660, 840]
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
       },
       "sourceMap": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
       "studioId": "probability-inference",
+      "benchPackId": "m30",
       "sequencePosition": 21,
       "state": {
         "lifecycle": "learner-material-ready",
@@ -2247,6 +4306,7 @@
       },
       "sourceMap": null,
       "studioId": null,
+      "benchPackId": "m31",
       "sequencePosition": 22,
       "state": {
         "lifecycle": "authoring-only",
@@ -2298,6 +4358,7 @@
       },
       "sourceMap": null,
       "studioId": null,
+      "benchPackId": "m32",
       "sequencePosition": 30,
       "state": {
         "lifecycle": "authoring-only",
@@ -2347,6 +4408,7 @@
       },
       "sourceMap": null,
       "studioId": null,
+      "benchPackId": "m33",
       "sequencePosition": 31,
       "state": {
         "lifecycle": "authoring-only",
@@ -2397,6 +4459,7 @@
       },
       "sourceMap": null,
       "studioId": null,
+      "benchPackId": "m34",
       "sequencePosition": 32,
       "state": {
         "lifecycle": "authoring-only",
@@ -2449,6 +4512,7 @@
       },
       "sourceMap": null,
       "studioId": null,
+      "benchPackId": "m35",
       "sequencePosition": 33,
       "state": {
         "lifecycle": "authoring-only",
@@ -2500,6 +4564,7 @@
       },
       "sourceMap": null,
       "studioId": null,
+      "benchPackId": "m36",
       "sequencePosition": 34,
       "state": {
         "lifecycle": "authoring-only",

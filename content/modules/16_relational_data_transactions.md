@@ -764,7 +764,7 @@ Relational algebra states transformations over relations:
 | keep rows | selection \(\sigma_p(R)\) | `WHERE p` | three-valued predicates |
 | keep/derive attributes | projection \(\pi_A(R)\) | `SELECT A` | duplicates remain unless `DISTINCT` |
 | combine related tuples | join \(R \bowtie_p S\) | `JOIN ... ON p` | nulls and duplicate multiplicity matter |
-| all combinations | product \(R \times S\) | `CROSS JOIN` | usually large: \(|R||S|\) |
+| all combinations | product \(R \times S\) | `CROSS JOIN` | usually large: \(\lvert R\rvert\lvert S\rvert\) |
 | combine compatible sets | union \(R \cup S\) | `UNION` | `UNION` removes duplicates; `UNION ALL` does not |
 | remove members | difference \(R - S\) | `EXCEPT` | dialect/type/multiplicity rules matter |
 | summarize groups | extended algebra/grouping | `GROUP BY` | aggregation and null behavior require a precise contract |
@@ -4370,3 +4370,74 @@ history to the TA.
 Carry one representation invariant, one concurrency timeline, and one
 evidence boundary into **M17**. The next module explains the machine and
 execution layers beneath a high-level cost or concurrency story.
+
+
+## Bench pack
+
+**Bench pack:** `m16` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model, so
+the benches carry their own schema — the module's own domain (concepts, and events
+that reference them) reduced to the smallest shape that still has a foreign key, a
+one-to-many relationship, a domain constraint, and an ordering column. Everything
+runs against stdlib `sqlite3`.
+
+### Bench 2 — constraint and repository contract
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** seven negative probes against two connections whose DDL text is
+byte-identical. The orphan insert is accepted on one and raises `IntegrityError` on
+the other, decided entirely by `PRAGMA foreign_keys` — which, issued inside a
+transaction, raises nothing and does nothing. Two more probes are accepted under
+both configurations and neither is stored as sent: a NaN confidence is converted to
+NULL, satisfying the `CHECK` on its `IS NULL` branch, and the string `'seven'`
+sits in an `INTEGER NOT NULL` column as text.
+**Cannot establish:** anything about an engine where foreign keys are enforced by
+default and column types are checked. Also does not test whether `STRICT` tables
+close the affinity gap.
+
+### Bench 3 — result contract and query reasoning
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** the same `LEFT JOIN` with one predicate in `ON` and then in
+`WHERE`. The `WHERE` form drops the concept that has no events — `NULL > 0.5` is
+unknown, which `WHERE` discards — leaving every returned row correct and the row
+count wrong. Then an unordered query returns the same order on five consecutive
+runs and the exact reverse once a descending index exists, with `EXPLAIN QUERY PLAN`
+showing the scan become a search. Finally `avg(confidence)` returns 0.55 where
+`sum/count(*)` returns 0.3667.
+**Cannot establish:** which plan is faster. The specific row orders are artifacts of
+this planner on four rows; the ON/WHERE and NULL-aggregate rules are standard SQL.
+
+### Bench 5 — transaction schedule and retry boundary
+
+**Session:** 5. **Rungs:** review and verify, debug and defend.
+**Executes:** a four-event import failing on event three, under two implementations
+that raise the *same* `IntegrityError` — commit-per-event leaves a two-event prefix
+visible to a second connection, one transaction leaves nothing. Then the written
+`A1, B1, A2, B2` schedule against a named engine and mode: B's write is refused
+while A holds the write lock, B's read returns 0 until A commits. Then an identical,
+authorized replay of a committed import — safe when the event identity comes from
+the bundle content, and silently doubling the import when it comes from the run.
+**Cannot establish:** anything about durability or crash recovery, which needs a
+different apparatus. The schedule is executed in a fixed order, not raced, and WAL
+mode is untested.
+
+### Sessions without a bench
+
+- **Session 1** — the artifact is a derivation: facts, functional dependencies,
+  keys, and the argument for an ordering column. Running code would not check it.
+- **Session 4** — measures query plans. `EXPLAIN QUERY PLAN` already appears inside
+  bench 3, where it explains the row-order reversal; a separate timing bench on a
+  four-row fixture would report noise, and a fixture large enough to be honest
+  belongs to a performance harness this pack does not have.
+- **Session 6** — durability and restore: process death, fsync, and file-level
+  recovery. An in-process kernel cannot crash itself honestly, and a bench that
+  pretended to would model exactly the claim the session teaches you to refuse.
+
+### Bench pack completion record
+
+Records under `benches/records/m16-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

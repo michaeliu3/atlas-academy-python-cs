@@ -4121,3 +4121,74 @@ a concise TA handoff: observed fact, open risk, smallest next test.
 Carry a data contract, migration/recovery boundary, and artifact-provenance
 question into **M16**. The next module asks when the same durable invariants
 require keys, relations, transactions, isolation, and reconciliation.
+
+
+## Bench pack
+
+**Bench pack:** `m15` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 15 has no checked-in reference model, so
+both benches carry their own subject. Neither writes to a real filesystem: the
+boundaries under examination — text against bytes, a declared schema version against
+a migration — are decided before any I/O happens, which is what makes them checkable
+here and what leaves the packaging sessions out.
+
+### Bench 1 — representation boundary trace
+
+**Session:** 1. **Rungs:** trace, debug and defend.
+**Executes:** two pairs that look identical, followed across six boundaries. The NFC
+and NFD forms of `café` render the same on screen and disagree at **every**
+mechanical boundary: 4 against 5 code points, 5 against 6 UTF-8 bytes, different
+SHA-256, distinct dict keys, different JSON. Only the rendering says "same".
+
+The second pair fails the opposite way. `bool` subclasses `int`, so
+`{True: 'from True', 1: 'from 1'}` has **one** entry — and it keeps the *first key*
+with the *last value*, a combination neither line of code wrote. `json.dumps({True:
+1, 1: 2})` then produces `{"true": 2}`, which round-trips to a string key. Two keys
+went in, one string came out, and nothing raised at any point.
+
+The takeaway is that "the same" is relative to an equivalence, and Python's `==`, a
+hash table, a UTF-8 encoder, a digest, a serializer, and a filesystem are six judges
+that need not agree. The repair is to normalize *at the boundary*, not to compare
+more carefully.
+
+**Cannot establish:** the macOS/Linux path-normalization claim, which is stated from
+documentation rather than measured — no real filesystem is touched. Nothing here
+covers case folding, collation, or confusable characters.
+
+### Bench 3 — schema migration and trust contract
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** six records across three schema versions, through the only three
+reader policies there are. A reader that **ignores the version** computes 0.6667 by
+counting a record whose unrecognised `retracted: true` flag it treated as an
+unremarkable extra key. A reader that **accepts known-or-older** computes 0.6000
+after silently dropping both newest records. The correct answer is 0.6200. Neither
+wrong answer raises.
+
+The systematic part is the one to carry: version filtering does not drop records at
+random, it drops the *recent* ones — so the surviving sample is reliably stale, and
+drifts further from the truth the more the schema moves, while never failing. Only
+the refusing policy produces no number, and that refusal is the feature.
+
+**Cannot establish:** how often real schemas make load-bearing additions. It
+evaluates no serialization library's compatibility guarantees and says nothing about
+formats with declared evolution rules — Avro, Protobuf, and Parquet all address
+exactly this.
+
+### Sessions without a bench
+
+- **Session 2** — resource lifetime across a publication failure: open handles,
+  partial writes, and crash timing that this process cannot inflict on itself
+  honestly.
+- **Session 4** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 5** — packaging and delivery: building, installing, and inspecting a
+  real artifact, which needs a real toolchain and a real distribution channel.
+- **Session 6** — a release and rollback defence consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m15-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

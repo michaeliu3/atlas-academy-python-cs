@@ -543,10 +543,116 @@ an algorithm, or an adaptive sequence:
 | --- | --- | --- | --- |
 | VC dimension | The largest finite set shattered by a hypothesis class \(\mathcal H\). | A combinatorial capacity term in a stated sample/generalization setting. | The behavior of a chosen optimizer, representation, or deployment population. |
 | Rademacher complexity | For a sample \(S\), \(\widehat{\mathfrak R}_S(\mathcal H)=\mathbb E_\sigma[\sup_{h\in\mathcal H}\frac1n\sum_i\sigma_i h(X_i)]\) for declared bounded functions and random signs \(\sigma_i\). | How a class can correlate with random signs on this sample; it can enter a uniform-deviation bound. | A free-standing number that ranks architectures or proves robustness. |
-| Algorithmic stability | A replace-one or leave-one-out condition such as \(\sup_z|\ell(A(S),z)-\ell(A(S^{(i)}),z)|\leq\beta_n\). | Sensitivity of a specified learning algorithm to one training example under a specified loss. | Distribution shift, fairness, privacy, or all forms of robustness. |
+| Algorithmic stability | A replace-one or leave-one-out condition such as \(\sup_z\lvert\ell(A(S),z)-\ell(A(S^{(i)}),z)\rvert\leq\beta_n\). | Sensitivity of a specified learning algorithm to one training example under a specified loss. | Distribution shift, fairness, privacy, or all forms of robustness. |
 | Margin bounds | A declared score margin \(y f(x)\), normalization/complexity term, sample relation, and confidence statement. | A conditional bound whose exact constants and hypotheses must be read from the theorem. | A universal explanation of deep-learning generalization or an architecture ranking. |
 | Online regret | \(R_T=\sum_{t=1}^T\ell_t(a_t)-\min_{a\in\mathcal A}\sum_{t=1}^T\ell_t(a)\) against the best fixed action in hindsight. | An adaptive decision procedure's cumulative loss relative to a stated comparator and feedback model. | A guarantee against a changing comparator, an authorized intervention, or a real reward definition. |
 | Bandit feedback | At round \(t\), the learner observes the loss/reward of the selected action, not every counterfactual arm. | Why exploration, uncertainty, and feedback assumptions affect an online guarantee. | Permission to run an experiment, a causal effect, or a full sequential-decision solution. |
+
+### The shape the bounds predict
+
+A uniform-convergence bound says the gap between empirical and population risk
+grows with capacity and shrinks with sample size. Plotted against capacity at a
+fixed sample size, that produces the classical picture: empirical risk falls
+monotonically while the bound on the gap rises, so their sum turns.
+
+```atlas-figure
+%% atlas-diagram-id: m36-capacity-risk-tradeoff
+%% atlas-diagram-title: Empirical risk, capacity term, and their sum
+%% atlas-diagram-alt: Three curves plotted against hypothesis-class capacity at a fixed sample size. Empirical risk falls steadily as capacity grows. The capacity or complexity term rises. Their sum, the bound on population risk, falls then rises, reaching its lowest value at moderate capacity rather than at the smallest or largest class. The turning point is a property of the bound under its stated assumptions, not a measured optimum for any particular model or dataset.
+{
+  "kind": "plot",
+  "xRange": [0, 10.5],
+  "yRange": [0, 1.05],
+  "xLabel": "capacity of the hypothesis class",
+  "yLabel": "risk (declared units)",
+  "width": 640,
+  "height": 360,
+  "series": [
+    {
+      "label": "empirical risk",
+      "tone": 0,
+      "points": [[1,0.62],[2,0.44],[3,0.32],[4,0.24],[5,0.18],[6,0.14],[7,0.11],[8,0.09],[9,0.07],[10,0.06]]
+    },
+    {
+      "label": "capacity term",
+      "tone": 1,
+      "points": [[1,0.08],[2,0.12],[3,0.16],[4,0.21],[5,0.27],[6,0.34],[7,0.42],[8,0.51],[9,0.61],[10,0.72]]
+    },
+    {
+      "label": "bound on population risk",
+      "tone": 4,
+      "points": [[1,0.70],[2,0.56],[3,0.48],[4,0.45],[5,0.45],[6,0.48],[7,0.53],[8,0.60],[9,0.68],[10,0.78]]
+    }
+  ],
+  "points": [{ "at": [4.5, 0.45], "label": "bound is smallest here" }]
+}
+```
+
+**[ANALYTIC MODEL]** These are illustrative curves showing the shape the
+inequality forces, not a measurement. The third series is the sum of the first
+two, which is the point: the turn comes from adding a rising capacity term to a
+falling empirical term, and it moves whenever the sample size, the class, or
+the confidence level changes. Modern over-parameterised networks routinely sit
+far to the right of such a turn and still generalise, which is evidence that
+this bound is loose in that regime — not that the arithmetic is wrong.
+
+### From capacity to a bound: the growth function
+
+VC dimension is a single number; the object that actually enters a uniform
+convergence argument is the **growth function**, which counts how many distinct
+labelings a class can produce on \(n\) points:
+
+\[
+\Pi_{\mathcal H}(n)=\max_{x_1,\ldots,x_n}
+\left|\left\{\left(h(x_1),\ldots,h(x_n)\right):h\in\mathcal H\right\}\right|.
+\]
+
+**[THEOREM / PROOF] Sauer–Shelah.** If \(\mathrm{VCdim}(\mathcal H)=d\) then
+
+\[
+\Pi_{\mathcal H}(n)\;\leq\;\sum_{i=0}^{d}\binom{n}{i}\;\leq\;\left(\frac{en}{d}\right)^{d}
+\quad\text{for } n\geq d.
+\]
+
+This is the step that makes finite-class arguments useful for infinite classes.
+The finite-class proof skeleton above pays \(\log|\mathcal H|\) through a union
+bound; for an infinite class that term is meaningless, but Sauer–Shelah says
+the number of *behaviours on a sample* stops growing exponentially once \(n\)
+passes \(d\), and \(\log\Pi_{\mathcal H}(n)\approx d\log(n/d)\) takes its place.
+Capacity becomes a bound only through this counting move.
+
+### The lower-bound side: what no learner can do
+
+Every lens above bounds how badly a procedure *can* behave. The complementary
+results say no procedure can do better, and they are what stop a benchmark
+result from being read as a general capability.
+
+**[THEOREM / PROOF] No free lunch, informally stated.** For binary
+classification with 0–1 loss over a domain large enough relative to the sample
+size, for *every* learning algorithm there exists a distribution on which it
+fails badly, while some other predictor in the picture succeeds. Learning is
+possible only because a hypothesis class encodes an assumption; a learner with
+no inductive bias has no guarantee against an adversarially chosen
+distribution.
+
+**Minimax lower bounds** make the same move quantitatively. Rather than
+bounding one estimator, they bound the best achievable worst case over a
+parameter class \(\Theta\):
+
+\[
+\inf_{\hat\theta}\ \sup_{\theta\in\Theta}\ \mathbb E_\theta\left[\rho\!\left(\hat\theta,\theta\right)\right],
+\]
+
+the infimum running over *all* estimators. When an upper bound for a specific
+method matches a minimax lower bound in its rate, the method is rate-optimal
+for that class — and no amount of engineering improves the rate without
+changing the assumptions.
+
+**Why this belongs in a reliability module.** An upper bound alone can always
+be read optimistically. A matching lower bound tells you which improvements are
+impossible, so an unexpected result should prompt a check of whether the
+assumption set really holds rather than a claim of a breakthrough. Neither
+bound says anything about the population you deployed on.
 
 **Prediction:** if the hypothesis class is fixed but the training algorithm changes,
 which lens can change without changing the class? If only the observed action's
@@ -1129,6 +1235,38 @@ publication/release claim; M25's separate promotion requirements still apply.
 
 ---
 
+## One-page concept map
+
+M36 separates three gaps that a single test number silently merges, then asks
+what survives when the environment stops matching the assumption.
+
+~~~mermaid
+%% atlas-diagram-id: m36-concept-map
+%% atlas-diagram-title: How M36's ideas depend on one another
+%% atlas-diagram-alt: Population and loss define population risk; a finite sample gives empirical risk. Their difference splits into an approximation gap from the class, an estimation gap from finite data, and an optimization gap from the run. VC dimension, growth functions, Rademacher complexity, stability, and margins bound the estimation gap under stated hypotheses; no-free-lunch and minimax bound what any procedure can achieve. Numerical evidence bounds what one run shows. Shift and adversarial inputs break the relation to the deployment population, so monitoring and human control carry the reliability claim.
+flowchart TB
+  POP["population + loss"] --> RISK["population risk"]
+  SAMP["finite sample"] --> EMP["empirical risk"]
+  RISK --> GAP["the gap"]
+  EMP --> GAP
+  GAP --> APPROX["approximation: the class"]
+  GAP --> ESTIM["estimation: finite data"]
+  GAP --> OPTIM["optimization: the run"]
+  CAP["VC, growth function, Rademacher"] --> ESTIM
+  STAB["stability, margins"] --> ESTIM
+  LOWER["no free lunch, minimax"] -->|"limits everyone"| ESTIM
+  NUM["numerical + systems evidence"] --> OPTIM
+  SHIFT["shift, adversarial input"] -->|"breaks"| RISK
+  SHIFT --> MON["monitoring + human control"]
+  MON --> CLAIM["a reliability claim someone owns"]
+  ESTIM --> CLAIM
+  OPTIM --> CLAIM
+~~~
+
+Notice that no bound points directly at `CLAIM`. Every theorem here
+constrains one gap under its own hypotheses; the reliability claim is
+assembled by a person who checked that those hypotheses still hold.
+
 ## Graduated problem ladder
 
 The ladder turns a learning-theory statement into a reliable-system dossier.
@@ -1362,6 +1500,102 @@ canonical structured source map, module contract, accessibility evidence,
 teaching-model evidence, and release provenance. Until then this remains an
 authoring workbook, not a published route, formal course guarantee, live-chat
 record, Notion record, or learner-mastery claim.
+
+## Bench pack
+
+**Bench pack:** `m36` — sparse, three benches. CPython 3.12 floor.
+**Visibility:** private guided study — this module is authoring-only, so the pack is
+not reader-facing.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Every quantity here is evaluated in plain floats,
+because that is the whole point: a bound quoted as a theorem and a bound *evaluated at
+the n you actually have* are very different objects, and a proof over the reals is not
+a claim about your program.
+
+### Bench 2 — Optimization–Generalization Gap Ledger
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** an exact four-way decomposition of population risk for a linear model
+fitted to a quadratic truth. Total 2.3231 splits into irreducible **0.2500**,
+approximation **1.4300**, estimation **0.0078**, and optimization **0.6353** — the
+parts summing to the total exactly, because the bench generated the data and can
+compute every reference point.
+
+"The model isn't good enough" is one sentence covering three unrelated shortfalls with
+three different repairs. Here approximation dominates at 62%, and the usual reflex —
+train longer, because it is cheapest to try — would chase 27%. Applying each repair
+confirms the diagnosis: a quadratic class reaches 0.2658, essentially the irreducible
+floor, while ten times the data leaves a linear model at 1.6936.
+
+The uncomfortable half is that **only the optimization gap is measurable in practice**.
+Approximation and estimation need the population and the truth, which is why the bench
+had to generate them.
+
+**Cannot establish:** any real model's decomposition. The sizes follow from one seed,
+one truth, one class, and one early-stopping schedule; squared error is assumed
+throughout, which makes the split clean in a way other losses do not.
+
+### Bench 3 — Limit-and-Nonclaim Card
+
+**Session:** 3. **Rungs:** review and verify, trace.
+**Executes:** the finite-class uniform-deviation bound instantiated across six
+realistic settings at δ = 0.05. Two are **vacuous** — a 100-parameter float32 linear
+model on 1,000 examples gives a bound of **1.139**, and every error rate is at most 1
+by definition — while four are informative, from 0.554 down to 0.113 at n = 1,000,000.
+Same formula, empty in one regime and tight in another.
+
+The vacuous rows are still **true**. That is the distinction the session turns on:
+"true" is a property the theorem always supplies, and "informative" depends on numbers
+you bring. A 100-parameter model has `ln|H| ≈ 2,240`, and the entire difference between
+an empty guarantee and a useful one is what you divide it by. A sample-requirement
+sweep shows the cost shape: linear in the parameter count, quadratic as ε shrinks —
+111,032,897 examples for ε = 0.01 at d = 1000.
+
+So the reviewable question is never "is there a bound?" but **"is the bound non-vacuous
+at my n?"** — one line of arithmetic that almost nobody runs.
+
+**Cannot establish:** that no bound is informative here. The float32-counting argument
+is a standard teaching device and is crude; margin-based, PAC-Bayes, compression, and
+stability analyses give much smaller numbers on the same models.
+
+### Bench 4 — Theory–System Reproducibility Record
+
+**Session:** 4. **Rungs:** debug and defend, trace.
+**Executes:** the same 2,000 values summed in five orders, producing **4 distinct
+totals**. The spread is 4.7e-15 relative — a fifteenth-significant-figure
+disagreement, numerically irrelevant and *exactly* enough to break bit-exact equality,
+because "same inputs, same result" has no tolerance. A hash differs; an
+`assert result == expected` fails.
+
+A cancelling list then shows the other regime: with a hundred ones between `1e16` and
+`-1e16`, reordering changes the total between **0 and 100** — the entire answer.
+
+The reproducibility consequence is the session's subject. A pipeline with a pinned seed
+reproduces exactly *only when the summation order is also pinned*: same seed, different
+order, bit-identical data, different answer. So "we set the seed" covers one of at
+least two sources of variation, and the other is usually not something anyone chose —
+thread scheduling, reduction-tree shape, hash iteration order. Compensated summation
+narrows the error without removing the order dependence.
+
+**Cannot establish:** how large the effect is on any real workload — with values of
+similar magnitude it is often negligible. It exercises no thread, no GPU, and no
+parallel reduction, so the claims about worker counts are stated from how those
+mechanisms work rather than demonstrated.
+
+### Sessions without a bench
+
+- **Session 1** — the assumption-scope sheet states what is being assumed about the
+  data-generating process, which is a declaration rather than an executable claim.
+- **Session 5** — shift, robustness, and monitoring need a deployed system and real
+  distributional drift.
+- **Session 6** — a dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m36-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.
 
 ## Candidate release boundary
 

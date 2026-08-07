@@ -98,5 +98,9 @@ test("legacy-open workbooks retain their known multiple-choice answer-rationale 
     [24, { [ANSWER_CONFIDENCE_LABEL]: 6 }],
     [27, { [ANSWER_CONFIDENCE_LABEL]: 11 }],
     [28, { [ANSWER_CONFIDENCE_LABEL]: 12 }],
+    // M29 previously printed "**Correct.**" inline in every option list, so it
+    // had no gated summaries at all and did not appear here. Its twelve
+    // diagnostics now reveal only after the learner commits.
+    [29, { [ANSWER_CONFIDENCE_LABEL]: 12 }],
   ]);
 });

@@ -1837,7 +1837,7 @@ This small verifier exposes a representation limitation: a vertex sequence is am
 | cycle | starts/ends same, each adjacent pair is an edge, nonempty |
 | weighted path | each selected edge exists and weights sum to claim |
 | Bellman–Ford negative cycle | source reaches cycle and cycle weight is negative |
-| spanning tree | covers component, has `|V_c|-1` edges, connected, acyclic |
+| spanning tree | covers component, has `\|V_c\|-1` edges, connected, acyclic |
 | MST optimality | cut-property proof plus comparison on small exhaustive instances |
 
 The algorithm and verifier should not share every assumption or helper. Otherwise one representation defect can make both agree incorrectly.
@@ -3100,3 +3100,54 @@ successful run and a verified graph claim.
 Carry one graph state model, one frontier invariant, and one cost/witness
 argument into **M11**. The next module asks which algorithmic paradigm best
 matches a subproblem structure and how its correctness/cost evidence differs.
+
+## Bench pack
+
+**Bench pack:** `m10` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 2 — BFS witness-and-cost card
+
+**Session:** 2. **Rungs:** trace, map.
+**Executes:** two BFS variants differing only in when a vertex is marked
+discovered. One enqueues each vertex once; the other once per incoming edge, and
+its parent map records the last writer rather than a shortest-path witness — a
+three-edge route where a two-edge route exists. Reported depths stay correct in
+both, which is what makes it hard to catch.
+**Cannot establish:** the worst-case blow-up factor, or anything about weighted
+graphs, where neither policy yields a shortest-path witness.
+
+### Bench 3 — DFS cycle-or-order evidence card
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** a visited-set cycle detector against a three-colour one. The
+visited-set version reports a cycle in a three-vertex DAG, and an exhaustive
+search confirms three vertices is the minimum for that false positive.
+**Cannot establish:** the cost of either traversal, or the undirected case where
+the parent edge needs special handling.
+
+### Bench 5 — Dijkstra review card
+
+**Session:** 5. **Rungs:** review and verify, trace.
+**Executes:** an audit of two generated claims about a lazy-deletion Dijkstra.
+The heap exceeds the claimed vertex bound, and a single negative edge makes the
+implementation return silently wrong distances — verified against an exhaustive
+oracle. One claim turns out true for a reason its author did not give.
+**Cannot establish:** a worst-case bound. The oracle settles a five-vertex
+instance and proves nothing in general.
+
+### Sessions without a bench
+
+- **Session 1** — turning graph questions into representations is a modelling
+  argument.
+- **Session 4** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — an oral-defence map consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m10-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

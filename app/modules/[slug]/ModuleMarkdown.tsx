@@ -13,7 +13,10 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { atlasMarkdownSanitizationSchema } from "@/lib/rich-content-sanitization.mjs";
+import { splitInlineCode } from "@/lib/module-markup-integrity.mjs";
+import { isClaimSourcePointer, parseEvidenceLabel } from "@/lib/evidence-label-taxonomy.mjs";
 import { isMultipleChoiceAnswerRationaleSummary } from "@/lib/multiple-choice-prediction-gate.js";
+import { AtlasFigure } from "./AtlasFigure";
 import { LessonTable } from "./LessonTable";
 import { MermaidDiagram } from "./MermaidDiagram";
 import { PredictionRevealGate } from "./PredictionRevealGate";
@@ -25,6 +28,7 @@ type ModuleMarkdownProps = {
 };
 
 const languageNames: Readonly<Record<string, string>> = {
+  "atlas-figure": "Figure",
   asm: "Assembly",
   bash: "Shell",
   console: "Console",
@@ -44,6 +48,16 @@ const languageNames: Readonly<Record<string, string>> = {
   yaml: "YAML",
 };
 
+/**
+ * Workbooks author mathematics as `\( … \)` and `\[ … \]`; `remark-math` only
+ * recognises `$`/`$$`, so the delimiters are rewritten here.
+ *
+ * Inline code spans are skipped. A span such as `` `\(` `` documents a regex
+ * rather than opening mathematics, and rewriting it would emit an unmatched
+ * `$` that captures every following character up to the next one — turning
+ * ordinary prose into a KaTeX parse error. `splitInlineCode` is shared with
+ * the markup validator so both agree on where code spans begin and end.
+ */
 function normalizeMathDelimiters(markdown: string): string {
   let fenceMarker: "`" | "~" | null = null;
 
@@ -65,11 +79,17 @@ function normalizeMathDelimiters(markdown: string): string {
         return line;
       }
 
-      return line
-        .replaceAll("\\[", () => "$$")
-        .replaceAll("\\]", () => "$$")
-        .replaceAll("\\(", () => "$")
-        .replaceAll("\\)", () => "$");
+      return splitInlineCode(line)
+        .map((segment) =>
+          segment.code
+            ? segment.raw
+            : segment.raw
+                .replaceAll("\\[", () => "$$")
+                .replaceAll("\\]", () => "$$")
+                .replaceAll("\\(", () => "$")
+                .replaceAll("\\)", () => "$"),
+        )
+        .join("");
     })
     .join("\n");
 }
@@ -190,6 +210,11 @@ function createMarkdownComponents(
     return <blockquote className="lesson-callout">{children}</blockquote>;
   },
   code({ children, className }) {
+    // A claim/source pointer is navigation into the module's research map, not
+    // a code identifier. Marking it stops it from reading as a variable name.
+    if (!className && isClaimSourcePointer(textFromNode(children))) {
+      return <code className="claim-source-pointer">{children}</code>;
+    }
     return <code className={className}>{children}</code>;
   },
     details({ children, className, open }) {
@@ -264,6 +289,10 @@ function createMarkdownComponents(
       return <MermaidDiagram source={source} />;
     }
 
+    if (language === "atlas-figure") {
+      return <AtlasFigure source={source} />;
+    }
+
     return (
       <figure className="lesson-code">
         <figcaption>{languageNames[language] ?? language}</figcaption>
@@ -274,6 +303,26 @@ function createMarkdownComponents(
           <code className={child.props.className}>{child.props.children}</code>
         </pre>
       </figure>
+    );
+  },
+  /**
+   * A bold run of the form `**[FINITE EXPERIMENT]**` is an evidence label, not
+   * emphasis. Give it its own visual category so a learner can tell a declared
+   * model from a theorem, an observation, or an unchecked AI proposal without
+   * re-reading the sentence. Ordinary bold is returned untouched.
+   */
+  strong({ children }) {
+    const evidence = parseEvidenceLabel(textFromNode(children));
+    if (!evidence) {
+      return <strong>{children}</strong>;
+    }
+    return (
+      <strong
+        className={`evidence-label evidence-label-${evidence.category}`}
+        data-evidence-category={evidence.category}
+      >
+        {children}
+      </strong>
     );
   },
   summary({ children }) {

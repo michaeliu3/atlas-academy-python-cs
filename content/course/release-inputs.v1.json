@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "6c553e1949a7c32de77128180e8854b014a290cc135a5ff0e9c34007cd4bb99a"
+      "sha256": "f674db3b2fba8adf10575350b8bf8979d90e653abfafe5199881f4bff93639a8"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -14,7 +14,7 @@
     },
     {
       "path": "app/CalculusContinuousChangeStudio.tsx",
-      "sha256": "a63750479c68da8bc4e1fae1ccd229eb46d2f2c1d9339f13b6f7a81d71e6b806"
+      "sha256": "513bffa048541322b2cb6048eea241eee5ec0c00385d8fd98924a1ba1eff97a3"
     },
     {
       "path": "app/ConcurrencyStudio.tsx",
@@ -26,7 +26,7 @@
     },
     {
       "path": "app/DiscreteMathProofStudio.tsx",
-      "sha256": "5ccae1c4f4ec03666cf77155818bbeeecf672722215bd3e2bcdce30d1051bf1d"
+      "sha256": "ff60dd3241abb2f95c6eadffbddb1396a8c4f7f9c1b47a8915824e4ce2204b9e"
     },
     {
       "path": "app/DurableSoftwareStudio.module.css",
@@ -42,7 +42,7 @@
     },
     {
       "path": "app/LinearAlgebraStabilityStudio.tsx",
-      "sha256": "0306ba6821855892443f08c1032c0c3d84ec2937cba2b3b0081b6ec76e5f72fe"
+      "sha256": "ddfbff371c19bcdd23ee64af2cee5794d95a12cf22ad315ab019c416c59d2c3a"
     },
     {
       "path": "app/NetworkProtocolStudio.tsx",
@@ -54,7 +54,7 @@
     },
     {
       "path": "app/ProbabilityInferenceStudio.tsx",
-      "sha256": "dc387f6285e3ef7bbeea8f4936cb4a5f55072cfa813efe3fd0d0df4f1572691a"
+      "sha256": "7c22764a353cb63a585d2caa97af3f3f08d7e0e6bdfad64857b5a5d3ca32328e"
     },
     {
       "path": "app/RuntimeEvidenceObservatory.tsx",
@@ -74,27 +74,27 @@
     },
     {
       "path": "content/authoring/m31_optimization_information_workbook.v1.md",
-      "sha256": "e6077e7097d7653170ab25fc210d67e658135c5f0e99ce43e78187445ab360a9"
+      "sha256": "fc1a375cd6aa7f7221a275b6e2f5866ca21ce18e9470e8aba08c5280ee517695"
     },
     {
       "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
-      "sha256": "023db65527b2d2014edb2aa0d1b49ace84d16e4b56c912001d0e21dc117dd8ce"
+      "sha256": "d56a4078ab0f334f0b2f237907ad20aec86f011ebe970b2ca46dc4528ca2d7c2"
     },
     {
       "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
-      "sha256": "3b7410dcff4492c0853a43e3bf2d0a373f17987384b40ce5f3c1db63554a7bf2"
+      "sha256": "005eb32cadda02cb46dd89f28e945e3ea4d18a09186488b444e407f49f150735"
     },
     {
       "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
-      "sha256": "c18f83ff0f7604e5158cce369bc56b71f5d527977c7f33ea052a502f9cf7f9ee"
+      "sha256": "72e1695a81c07fc6b924f97d302e2f31f16c546d5583467d1649bb64083f8966"
     },
     {
       "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
-      "sha256": "4cfd03749ec0119925b1d79c0344f529fd838bc2295d514ca7220f662dab9795"
+      "sha256": "4f3cd65f9a142b09b7ce6b363d3e21c2a868f8dcf071811c7a9fbb31fa1de755"
     },
     {
       "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
-      "sha256": "81a7d698a1e70dd00ad8e3e025667203bb2abcaef3d4bb0f84593fe279754e3d"
+      "sha256": "43d21c419e62bc7994dc996f3fd6e565ad44032a47dee7e77b99ed6bfd8497f9"
     },
     {
       "path": "content/course/browser-progress-owner-bindings.v2.json",
@@ -522,11 +522,11 @@
     },
     {
       "path": "content/course/course-graph.v2.json",
-      "sha256": "e148136671a007885c2fb77be856e834b5cef3f20f8466300f1c0802ceca1716"
+      "sha256": "122963e51a231c5c6192f506b080a939aff629575c662be4959aa64f971a716c"
     },
     {
       "path": "content/course/goal-compliance.v1.json",
-      "sha256": "57f9d0ac1cb4ebda379441dd0b9ae88cf6099df17bf0de0b595362bcfa3500f6"
+      "sha256": "519f187bffcfe4ae0f0208cab5c1360d238cd997b1e159ba0c608e57649aa976"
     },
     {
       "path": "content/course/levels-1-9-inventory-crosswalk.v1.json",
@@ -558,7 +558,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "12fd5d6b7b52b3f7895235fc081f44d7c292da7e03892f4a6bd3e8e27bfaf6fe"
+      "sha256": "a1bd1476235cf16dc4853ba5a95fe2b9b9aa7f7650e9833aec7550da28c73c09"
     },
     {
       "path": "content/course/release-input-policy.v1.json",
@@ -570,123 +570,123 @@
     },
     {
       "path": "content/modules/01_values_state_execution.md",
-      "sha256": "e641ea4b3086697d7ca62437403ee39160947d056ac6ddc923e894c429bf3f6f"
+      "sha256": "4bde5a5a5a0357ec0dd723da0efb03185b7d5b9f080e7d12235d19c50a38848d"
     },
     {
       "path": "content/modules/02_functions_recursion_induction.md",
-      "sha256": "f15512100632d211b49c2aa03211e904bf76cb87ee42844269f32b04159c3033"
+      "sha256": "ab3ef7b296d3079b50f4163a336b9d258658cc121e1250ee2d2ca3640ad6df98"
     },
     {
       "path": "content/modules/03_abstraction_interfaces_adts.md",
-      "sha256": "994e91a894c121833469cdb97b6d1a70ed8b7b6fa6b5415bb89eee723d7e8377"
+      "sha256": "1e182effe1688c88a519b9134f074853cdadcd54cd80772dbd475382f45fc59d"
     },
     {
       "path": "content/modules/04_logic_sets_relations_graphs_proof.md",
-      "sha256": "fb78b83f824d6d1bf199be76823abc09fc04afe5b2308b07baee2d119267a306"
+      "sha256": "c10d862a5399d3a831a137508c20ba10683ac6088282268872f9236dab059090"
     },
     {
       "path": "content/modules/05_cost_models_algorithm_analysis.md",
-      "sha256": "8b65376c844f1f0c62ff7015f5836cd15f16c3be48ef02b2a0529d3a51644e5d"
+      "sha256": "8170d857ecee927dc599eea32a76571e390d8fdf9a0450307c49c1e09ce1bdbf"
     },
     {
       "path": "content/modules/06_representation_memory_sequences_linked.md",
-      "sha256": "42020c3323ac782b4c7baf300dc9645f40aec5e42bf8bd80f0f39f8b2c46e79f"
+      "sha256": "e593bcef3e261532d2cd1c27835ed5582ab29ed8db8e552f5bd291271e3dbc2c"
     },
     {
       "path": "content/modules/07_stacks_queues_iteration_lazy.md",
-      "sha256": "b9952203f92d3781b1e1fb62ea47aac8d1b157587b967fb9436a2136ab0b137c"
+      "sha256": "7947df9d16d41d8ee6139bc5d5992f378bdf0194b5738ec6380bd5fdc8f77c12"
     },
     {
       "path": "content/modules/08_hashing_dictionaries_sets_indexing.md",
-      "sha256": "83b892ed52d5c14a164896fde76b28b96aa185c6f9288256d297138f5a5c5efd"
+      "sha256": "b868c84fff0cbab7844b17e0d0ba8e1c040787f870a46c928649aa8412d9d0e3"
     },
     {
       "path": "content/modules/09_trees_heaps_sorting_ordered.md",
-      "sha256": "3b18e884dcd2996eee99e0c2fd40a23a7857595a3053dfcde3324ad48750950d"
+      "sha256": "a6dec0e4588b9b76b0d6a570a34294601268834739e80c66c941f873a28de0c3"
     },
     {
       "path": "content/modules/10_graph_algorithms_network_models.md",
-      "sha256": "6ad6e35cee740d36668be0dd72ef65d2bc0e23cb397229b21b2c5987de62b1ba"
+      "sha256": "78325122534bb00fd01f4abd368a3de22022f2fc15ecdb66b0a3025ce555d164"
     },
     {
       "path": "content/modules/11_algorithm_design_paradigms.md",
-      "sha256": "7322a337038f4e29c94e4a2558bc65a5c12f927cc48b6fe183803747eb2b8d06"
+      "sha256": "a6f55977d0c62e24e83a45d6a12a91b639323468dbf6545fd56ecd397530c92f"
     },
     {
       "path": "content/modules/12_modules_apis_types_dependencies.md",
-      "sha256": "637f88c2b50b0e7f5aa8568550fc773458c7a742e0642f51910b2f5c5e50ea9a"
+      "sha256": "34335fee635de3a4b3f1b760eddb2db32c6af9f2cb7a5c2351a935f22955be44"
     },
     {
       "path": "content/modules/13_specifications_testing_debugging_observability.md",
-      "sha256": "086da9c68a72af1f11b4a4b02e03698925839a63960d4e05044d3f479b2ab006"
+      "sha256": "450dac6fc6129aedf385284e87beabd9f4eec6987fa9e077bb1f5d2a62b4e4c1"
     },
     {
       "path": "content/modules/14_software_design_and_change.md",
-      "sha256": "a55f501a678344c5ea3eaa5e277044c3985a1bb247560c0a4e125d9b552ddf73"
+      "sha256": "0de7dc17ee67c4b7a08d2b9271d53403d01e1dbb909e66b3fd45c21180da7eee"
     },
     {
       "path": "content/modules/15_files_serialization_packaging_delivery.md",
-      "sha256": "cc600577a33bc04b716fa48818b24591bfb4a8265d9ee9d00c86a24270fe6c21"
+      "sha256": "8b8105a2a543008edbf23a4d2edec95a24dc9f05824fb28a3812ec22fbde91fe"
     },
     {
       "path": "content/modules/16_relational_data_transactions.md",
-      "sha256": "b600b19dffe7895ca4bdb0bdc7e0f27ddd9a60a76f52dd326f395d23268cc5fd"
+      "sha256": "bc965d312cfd4c4fd02a9473b86b70dadb7766f626d417ffd85acf2981d986b3"
     },
     {
       "path": "content/modules/17_computer_architecture_execution_stack.md",
-      "sha256": "efc48fa13425958aa493db9ed704bdb3b6f1d245e01b71d23041da6ce02660cd"
+      "sha256": "6d1a73efd884faa74b6f5095455bd76a2602f7863ccbadaed498aa7571c8f5ec"
     },
     {
       "path": "content/modules/18_operating_systems_resource_mediation.md",
-      "sha256": "18d3d21be6e26ee565315902ee74fe88609e690e98b57ffd0a8b239ba009bf57"
+      "sha256": "72f8a89ee279890200f791823e74b990d2c2caa9e87c34f112916f60fe5e5661"
     },
     {
       "path": "content/modules/19_concurrency_parallelism.md",
-      "sha256": "ec983a58d3d9b76ffbd734deaf2df9240f58b714a363570168cb8214c37a1e40"
+      "sha256": "5dd67cfb1bc6f8945adb4be689901c95218a2665e2f69fbabeb1a16741e35e02"
     },
     {
       "path": "content/modules/20_networks_application_protocols.md",
-      "sha256": "26502e47d15c77be826b6a5413e92a4da434c8742db1abd8cd17a64e75595881"
+      "sha256": "4b08d55852f05ea14be105ae375537d4f691f330e61630e8fef682d2f8cebfa4"
     },
     {
       "path": "content/modules/21_async_distributed_systems.md",
-      "sha256": "dece49bedda7a2f7f740dd90e5bcce265d52f9430761dc76368f38c5cf898d24"
+      "sha256": "6cb7d741b4cd350c9353541fdf2d18674716bafea39cefdf8eae595e159f459d"
     },
     {
       "path": "content/modules/22_security_privacy_trust_boundaries.md",
-      "sha256": "e49439d9f17ba353653852fed2c89918dea4bd76c90de822d0ca3e507820f005"
+      "sha256": "be7cbb242e84c12033de41d9ebe1099be098a91e21a81afe7d38e0a7c4e971bd"
     },
     {
       "path": "content/modules/23_programming_languages_interpreters.md",
-      "sha256": "aea8bd09e105c2c0ad8963312cae650bbd333841849b70e1dc6408eef9759e9f"
+      "sha256": "0a9afcfe8126cf20ff1cef36f9e80d10dee7ba5e0c7733f86e7ce0976c5be6d4"
     },
     {
       "path": "content/modules/24_cpython_performance_memory.md",
-      "sha256": "ec25862518190782986de573393d769eb6dc6f8cf9eed0baacd8c77bcb919224"
+      "sha256": "cb692ef0d0f1a404758a7bffc5b58b222c4a6970115c4fa4c1b63c48b00df531"
     },
     {
       "path": "content/modules/25_evidence_grounded_intelligent_systems.md",
-      "sha256": "58517d281d80bc152219875aea0c1524fc61aa3299a3d8daba2e7b1a3c83bd65"
+      "sha256": "df0ff7e7808d5dc4366a9d43d47d3aa9329fa0e74c14891cf8f6ee3179e4ad5d"
     },
     {
       "path": "content/modules/26_systems_capstone_open_source_stewardship.md",
-      "sha256": "99df03b5d7e666e90f1ca88d41e93891cb8a9fcf594c87c61896ad1074b063ea"
+      "sha256": "1490d0eeae741fd743655bf37ec4e81b37cc82cbe5736df54a2efc01651052d4"
     },
     {
       "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md",
-      "sha256": "735c077f822f873fc555bfe806477e86fe10522af506ae62705fa87ca75fa894"
+      "sha256": "3628b56fdc972600acf09285279e7f1ea5587bee4fccfd701e34d138ae0889db"
     },
     {
       "path": "content/modules/28_linear_algebra_numerical_stability_representation.md",
-      "sha256": "27d0527a5d5bc7311457124e655bcc5bcd57f9b4eb49a700a909e2182f20ceff"
+      "sha256": "f1c9ef9dc4adf5ccdc60f9afd295e49006739e2502eed3400b563d82f48bbac0"
     },
     {
       "path": "content/modules/29_calculus_real_analysis_continuous_change.md",
-      "sha256": "0a4e7257f0d6eb775054890182c3bf7d19e2783c84459058b69f812e9588f37f"
+      "sha256": "7021dc67640a6a85a056d75bfb97e39396f5a78356f637893754bc284ee4cc1a"
     },
     {
       "path": "content/modules/30_probability_statistics_scientific_inference.md",
-      "sha256": "72ab63e06acc55ce453ba4552a93c556268ad0e934a64a0bd2d103e3fb6c1145"
+      "sha256": "2801a22eaadaa97a7b01d7450fc44df9b64ecd00eeec6ad8de1962ff5f1bbe68"
     },
     {
       "path": "content/source-maps/arc_ii_source_map.md",
@@ -1034,7 +1034,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "af09c321ce72c546d2d2eda65a185b7a5965adc5bc5d9b948dd12bb1c02673af"
+      "sha256": "8b8f73559138901ea93eab955cc539f68b97e3b8525fa4d361a36f7fc7dce724"
     },
     {
       "path": "playwright.config.ts",
@@ -1206,11 +1206,11 @@
     },
     {
       "path": "tests/mermaid-accessibility.test.mjs",
-      "sha256": "013328aa886f262ab352b991e6e66a8dfdafbab505082dd1fe4dd4e19fb1f8ac"
+      "sha256": "60279855d181657fc807298a33e8e2f3878cf93c16acbac6d9d3e4b2668a7e05"
     },
     {
       "path": "tests/rendered-html.test.mjs",
-      "sha256": "7a423e48dcf5edca44321894c11b30089f66c4d47bf09d15e41385839a846806"
+      "sha256": "5a80605f0ff20b15be2e4989ccda2b310d562afd6bde4fc6f8be9efb25144796"
     }
   ]
 }

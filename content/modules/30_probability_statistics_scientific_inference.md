@@ -229,28 +229,31 @@ statement requiring design and execution evidence.
 
 ### 3.2 Definition: joint, marginal, and conditional are different questions
 
-Suppose `H` means a synthetic prompt is helpful under its declared model and
-`+` means an observed synthetic signal is positive. A joint table is one
+Suppose \(H\) means a synthetic prompt is helpful under its declared model and
+\(+\) means an observed synthetic signal is positive. A joint table is one
 model of their co-occurrence:
 
-| Helpfulness hypothesis / observed signal | `+` | `-` | marginal |
+| Helpfulness hypothesis / observed signal | \(+\) | \(-\) | marginal |
 | --- | ---: | ---: | ---: |
-| `H` | 0.009 | 0.001 | 0.010 |
-| `not H` | 0.0495 | 0.9405 | 0.990 |
+| \(H\) | 0.009 | 0.001 | 0.010 |
+| \(\lnot H\) | 0.0495 | 0.9405 | 0.990 |
 | marginal | 0.0585 | 0.9415 | 1 |
 
-- `P(H)` is a prior/base-rate model claim: `0.010`.
-- `P(+ | H)` is sensitivity in this declared model: `0.9`.
-- `P(H | +)` is the reverse conditional question: after a positive signal,
-  what is the modeled probability of `H`?
+- \(P(H)\) is a prior/base-rate model claim: \(0.010\).
+- \(P(+ \mid H)\) is sensitivity in this declared model: \(0.9\).
+- \(P(H \mid +)\) is the reverse conditional question: after a positive signal,
+  what is the modeled probability of \(H\)?
 
 Bayes’ rule is an accounting identity once the joint model is declared:
 
-~~~text
-P(H | +) = P(+ | H) P(H) / P(+)
-         = 0.9 * 0.01 / 0.0585
-         = 2 / 13  (about 0.154)
-~~~
+\[
+\begin{aligned}
+P(H \mid +)
+&= \frac{P(+ \mid H)\,P(H)}{P(+)}\\
+&= \frac{0.9 \times 0.01}{0.0585}
+= \frac{2}{13} \approx 0.154.
+\end{aligned}
+\]
 
 The result is not “the positive signal is 15.4% true.” It is conditional on
 the definitions, base rate, measurement model, and selected population. Change
@@ -260,16 +263,17 @@ answer changes.
 ### Prediction gate
 
 Before revealing the calculation, predict: if the false-positive rate is held
-fixed and the base rate becomes smaller, does `P(H | +)` rise, fall, or remain
+fixed and the base rate becomes smaller, does \(P(H \mid +)\) rise, fall, or remain
 unchanged? Then state which term in Bayes’ rule forced your answer.
 
 ### 3.3 Independence, mutual exclusion, and conditional-independence assumptions
 
-Events are **mutually exclusive** when they cannot co-occur: `P(A and B)=0`.
-They are **independent** when learning one leaves the probability of the other
-unchanged: `P(A and B)=P(A)P(B)`. Nontrivial mutually exclusive events cannot
-both be independent. A model can make two events conditionally independent
-only after a named condition `C`: `P(A and B | C)=P(A | C)P(B | C)`.
+Events are **mutually exclusive** when they cannot co-occur:
+\(P(A \cap B)=0\). They are **independent** when learning one leaves the
+probability of the other unchanged: \(P(A \cap B)=P(A)P(B)\). Nontrivial
+mutually exclusive events cannot both be independent. A model can make two
+events conditionally independent only after a named condition \(C\):
+\(P(A \cap B \mid C)=P(A \mid C)P(B \mid C)\).
 
 Do not infer conditional independence from a low correlation, a neat diagram,
 or an agent’s suggestion. It is a structural/model claim that must be defended
@@ -289,11 +293,11 @@ Trace each name:
 
 | Name | Mathematical role | Question to audit |
 | --- | --- | --- |
-| `prior_helpful` | `P(H)` | Which population/time window produced this base rate? |
-| `sensitivity` | `P(+ | H)` | How were `+` and `H` labeled and validated? |
-| `false_positive` | `P(+ | not H)` | Is the negative class comparable and complete? |
-| `evidence` | `P(+)` | Does the denominator match the same population/selection event? |
-| return value | `P(H | +)` | Is a probability update being misread as a causal or policy conclusion? |
+| `prior_helpful` | \(P(H)\) | Which population/time window produced this base rate? |
+| `sensitivity` | \(P(+ \mid H)\) | How were \(+\) and \(H\) labeled and validated? |
+| `false_positive` | \(P(+ \mid \lnot H)\) | Is the negative class comparable and complete? |
+| `evidence` | \(P(+)\) | Does the denominator match the same population/selection event? |
+| return value | \(P(H \mid +)\) | Is a probability update being misread as a causal or policy conclusion? |
 
 **Debugging investigation:** An AI changes the return line to
 `prior_helpful * sensitivity`. What number is now returned? Why is it a joint
@@ -315,6 +319,10 @@ would make the update invalid.
 
 ---
 
+### Session 1 output — probability model statement
+
+One statement turns a described situation into an explicit sample space, events, and assumptions.
+
 ## 4. Session 2 — Expectation, variation, covariance, and information
 
 ### Core trace
@@ -326,26 +334,27 @@ law of X → expectation / variation → joint law → covariance and conditioni
 
 ### 4.1 Expectation is a model-weighted quantity
 
-For a discrete variable `X`, `E[X] = sum_x x P(X=x)`. For a continuous law it
-is an integral, when the required integrability holds. It is not automatically
-the value a single run will return, the arithmetic mean of arbitrary observed
-data, or a guarantee that the corresponding real quantity exists.
+For a discrete variable \(X\), \(\mathbb E[X]=\sum_x x\,P(X=x)\). For a
+continuous law it is an integral, when the required integrability holds. It is
+not automatically the value a single run will return, the arithmetic mean of
+arbitrary observed data, or a guarantee that the corresponding real quantity
+exists.
 
-For a Bernoulli variable `X` with `P(X=1)=p`,
+For a Bernoulli variable \(X\) with \(P(X=1)=p\),
 
-~~~text
-E[X] = p
-Var(X) = E[(X - p)^2] = p(1-p)
-~~~
+\[
+\mathbb E[X]=p,\qquad
+\operatorname{Var}(X)=\mathbb E[(X-p)^2]=p(1-p).
+\]
 
-The first formula is linear: `E[aX+bY]=aE[X]+bE[Y]` when expectations exist.
-It does **not** let you move a nonlinear function inside: usually
-`E[g(X)] != g(E[X])`.
+The first formula is linear: \(\mathbb E[aX+bY]=a\mathbb E[X]+b\mathbb E[Y]\)
+when expectations exist. It does **not** let you move a nonlinear function
+inside: usually \(\mathbb E[g(X)]\neq g(\mathbb E[X])\).
 
 ### 4.2 Covariance connects M28 geometry to uncertainty
 
-`Cov(X,Y)=E[XY]-E[X]E[Y]` measures joint second-moment structure under the
-declared law. A covariance matrix is PSD because its quadratic form is the
+\(\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]\) measures
+joint second-moment structure under the declared law. A covariance matrix is PSD because its quadratic form is the
 variance of a linear combination. That mathematical fact does not establish
 independence, causality, fairness, stable estimation, or a unique regression
 coefficient.
@@ -357,11 +366,11 @@ causal effect size.
 
 ### 4.3 Derivation: conditional expectation and the total-expectation repair
 
-If a prompt outcome depends on a recorded stratum `S`, then
+If a prompt outcome depends on a recorded stratum \(S\), then
 
-~~~text
-E[X] = sum_s E[X | S=s] P(S=s)
-~~~
+\[
+\mathbb E[X]=\sum_s \mathbb E[X \mid S=s]\,P(S=s).
+\]
 
 This is not an invitation to condition on every available column. Conditioning
 on a selection/collider/after-outcome variable can manufacture an association.
@@ -384,38 +393,42 @@ using a PMF, density, or library constructor.
 
 | Family | Compact model statement | Ask before using it | It does **not** establish |
 | --- | --- | --- | --- |
-| Bernoulli(`p`) | one declared binary outcome | What makes the outcome binary and what population fixes `p`? | That repeated rows are independent or identically distributed. |
-| Binomial(`n`, `p`) | count across `n` declared Bernoulli trials | Are there exactly `n` comparable trials with a common `p`? | That a batch of duplicated, clustered, or selected rows is a binomial sample. |
-| Geometric(`p`) | trials until first success in a declared sequence | Does the memoryless repeated-trial model fit the mechanism? | That arbitrary elapsed time has a geometric law. |
-| Poisson(`lambda`) | count in a named exposure/window | Is exposure recorded and are rate/independent-increment claims credible? | That every nonnegative count is Poisson. |
-| Uniform(`a`, `b`) | equal density over a bounded support | Why are values equally plausible over this support? | That an unbounded or selected process is “random enough.” |
-| Exponential(`lambda`) | nonnegative waiting time with a memoryless model | Is a constant hazard / memoryless arrival approximation defensible? | That every latency, failure time, or queue delay is exponential. |
-| Normal(`mu`, `sigma^2`) | continuous location-and-scale model | What behavior, scale, tails, and measurement support it? | That a bell-shaped plot proves normality or validates an inference procedure. |
+| \(\mathrm{Bernoulli}(p)\) | one declared binary outcome | What makes the outcome binary and what population fixes \(p\)? | That repeated rows are independent or identically distributed. |
+| \(\mathrm{Binomial}(n,p)\) | count across \(n\) declared Bernoulli trials | Are there exactly \(n\) comparable trials with a common \(p\)? | That a batch of duplicated, clustered, or selected rows is a binomial sample. |
+| \(\mathrm{Geometric}(p)\) | trials until first success in a declared sequence | Does the memoryless repeated-trial model fit the mechanism? | That arbitrary elapsed time has a geometric law. |
+| \(\mathrm{Poisson}(\lambda)\) | count in a named exposure/window | Is exposure recorded and are rate/independent-increment claims credible? | That every nonnegative count is Poisson. |
+| \(\mathrm{Uniform}(a,b)\) | equal density over a bounded support | Why are values equally plausible over this support? | That an unbounded or selected process is “random enough.” |
+| \(\mathrm{Exponential}(\lambda)\) | nonnegative waiting time with a memoryless model | Is a constant hazard / memoryless arrival approximation defensible? | That every latency, failure time, or queue delay is exponential. |
+| \(\mathrm{Normal}(\mu,\sigma^2)\) | continuous location-and-scale model | What behavior, scale, tails, and measurement support it? | That a bell-shaped plot proves normality or validates an inference procedure. |
 
-**M28 bridge — multivariate normal.** A declared `d`-vector model is
+**M28 bridge — multivariate normal.** A declared \(d\)-vector model is
 
-~~~text
-X ~ Normal_d(mu, Sigma),      E[X] = mu,      Cov(X) = Sigma.
-Y = A X + b  =>  Y ~ Normal(A mu + b, A Sigma A^T).
-~~~
+\[
+X \sim \mathrm{Normal}_d(\mu,\Sigma),\qquad
+\mathbb E[X]=\mu,\qquad
+\operatorname{Cov}(X)=\Sigma,
+\]
+\[
+Y = AX + b \;\Longrightarrow\; Y \sim \mathrm{Normal}(A\mu + b,\; A\Sigma A^\mathsf T).
+\]
 
-Here `mu` is a vector and `Sigma` is symmetric positive semidefinite (PSD):
-M28's eigenvalue/principal-minor language says every variance
-`v^T Sigma v` must be nonnegative. Positive definite `Sigma` gives the usual
-full-dimensional density; PSD `Sigma` can describe a degenerate Gaussian
-concentrated on a lower-dimensional subspace. A covariance ellipse is a model
-geometry, not a causal diagram.
+Here \(\mu\) is a vector and \(\Sigma\) is symmetric positive semidefinite
+(PSD): M28's eigenvalue/principal-minor language says every variance
+\(v^\mathsf T\Sigma v\) must be nonnegative. Positive definite \(\Sigma\) gives
+the usual full-dimensional density; PSD \(\Sigma\) can describe a degenerate
+Gaussian concentrated on a lower-dimensional subspace. A covariance ellipse is
+a model geometry, not a causal diagram.
 
-Partition `X = (X_1, X_2)` and `Sigma` into compatible blocks. The marginal
-law of `X_1` uses `mu_1, Sigma_11`. If `Sigma_22` is invertible, the declared
-conditional model is
+Partition \(X=(X_1,X_2)\) and \(\Sigma\) into compatible blocks. The marginal
+law of \(X_1\) uses \(\mu_1,\Sigma_{11}\). If \(\Sigma_{22}\) is invertible,
+the declared conditional model is
 
-~~~text
-X_1 | X_2=x_2 ~ Normal(
-  mu_1 + Sigma_12 Sigma_22^{-1}(x_2 - mu_2),
-  Sigma_11 - Sigma_12 Sigma_22^{-1} Sigma_21
-).
-~~~
+\[
+X_1 \mid X_2 = x_2 \;\sim\; \mathrm{Normal}\!\left(
+\mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2),\;
+\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
+\right).
+\]
 
 This is a conditional-model calculation—not evidence that a scatterplot,
 histogram, or fitted covariance makes the observed population Gaussian. A
@@ -435,7 +448,7 @@ report = bivariate_normal_affine_report(mean, covariance, transform, (0, 0))
 # declared E[Y] = (3, -1); declared Cov(Y) = ((6, 0), (0, 2))
 ~~~
 
-Read the `A Sigma A^T` path before running it. Which statement is earned?
+Read the \(A\Sigma A^\mathsf T\) path before running it. Which statement is earned?
 
 A. The original data must be Gaussian because the covariance is PSD.  
 B. Under the declared bivariate-Gaussian and affine-map model, the transformed
@@ -464,22 +477,79 @@ the mean delay for all assigned units. Read the code aloud and ask:
 4. Are units, time zones, and censoring rules consistent?
 5. What target estimand would make this denominator correct?
 
-### Optional deepening — finite Markov and martingale vocabulary
+### 5.4 Dependence with structure: finite Markov chains
 
-A finite Markov chain says the next-state law depends on a declared current
-state through a transition matrix; it does **not** say observations are
-independent. A martingale says the conditional next expectation equals the
-current value with respect to a declared information history. Optional stopping,
-mixing, ergodic, and convergence claims require further conditions. The bounded
-model exposes a tiny exact transition trace, not a general theorem engine.
+Most of this session assumed independence. Real study events rarely are: a
+learner's next attempt depends on the last one. A Markov chain is the smallest
+useful weakening — dependence is allowed, but only through the current state.
+
+**[DEFINITION / MODEL]** A sequence \(X_0,X_1,\ldots\) on a finite state space
+is a **Markov chain** when
+
+\[
+P(X_{t+1}=j \mid X_t=i, X_{t-1},\ldots,X_0)=P(X_{t+1}=j \mid X_t=i)=P_{ij},
+\]
+
+so the whole history enters only through \(X_t\). The matrix \(P\) has
+nonnegative entries and rows summing to one. Multi-step behaviour is matrix
+powers: \(P(X_{t+k}=j\mid X_t=i)=(P^k)_{ij}\).
+
+A distribution \(\pi\) over states is **stationary** when \(\pi P=\pi\). For a
+two-state chain with \(P=\begin{bmatrix}1-a & a\\ b & 1-b\end{bmatrix}\) and
+\(a,b\in(0,1)\), solving \(\pi P=\pi\) with \(\pi_0+\pi_1=1\) gives
+
+\[
+\pi=\left(\frac{b}{a+b},\ \frac{a}{a+b}\right).
+\]
+
+**Boundary.** A stationary distribution existing is not the same as the chain
+*converging* to it, which needs irreducibility and aperiodicity, nor the same
+as a finite run having reached it. This matters directly for the LLN and CLT
+above: for dependent data the effective sample size is smaller than the row
+count, so a concentration bound assuming independence overstates what a run of
+\(n\) observations establishes.
+
+### 5.5 Martingales: a fair-game condition, not a trend claim
+
+**[DEFINITION / MODEL]** With respect to a declared information history
+\(\mathcal F_t\), a sequence is a **martingale** when \(\mathbb E[|M_t|]<\infty\)
+and
+
+\[
+\mathbb E[M_{t+1}\mid\mathcal F_t]=M_t.
+\]
+
+The next value is not predicted to rise or fall given everything known so far.
+Replacing \(=\) with \(\leq\) gives a supermartingale, with \(\geq\) a
+submartingale.
+
+The reason to meet this here is that a martingale licenses inference under
+dependence where independence arguments fail: optional stopping and
+Azuma–Hoeffding-style concentration hold for martingales with bounded
+differences, without any IID assumption.
+
+**Counterexample worth remembering.** A gambler doubling after each loss has a
+martingale wealth process under a fair game, yet the strategy looks like a
+guaranteed win over any finite horizon. Optional stopping fails because the
+required stopping time is not bounded and the wealth is not uniformly
+integrable. "It is a martingale" therefore establishes a conditional-expectation
+property and nothing about a strategy being safe.
+
+Optional stopping, mixing, ergodic, and convergence claims each require their
+own conditions. The bounded model exposes a tiny exact transition trace, not a
+general theorem engine.
 
 ### Session checkpoint
 
 From one joint table, compute a marginal, one conditional distribution,
-`E[X]`, `E[Y]`, and covariance. Then write one sentence that states what the
+\(\mathbb E[X]\), \(\mathbb E[Y]\), and covariance. Then write one sentence that states what the
 covariance does *not* establish.
 
 ---
+
+### Session 2 output — moment and dependence account
+
+One account states expectation, variation, and dependence, and what each does not tell you about the other.
 
 ## 5. Session 3 — Repetition, convergence, concentration, and Monte Carlo
 
@@ -495,35 +565,79 @@ population law + sampling/dependence contract → estimator → finite run
 | Tool | Core claim | Typical missing condition | What it does not say |
 | --- | --- | --- | --- |
 | **LLN** | Averages converge to an expectation under stated assumptions. | IID or an appropriate weaker dependence/integrability regime. | How close one finite sample is with a chosen probability. |
-| **CLT** | A normalized estimator has an approximately normal distribution in an asymptotic regime. | A correct normalization and regularity/variance conditions. | That data are normal, that `n` is automatically large enough, or that a tail probability is exact. |
-| **Markov inequality** | A nonnegative random quantity has a mean-based upper-tail bound. | `X >= 0`, `E[X] < infinity`, and threshold `t > 0`. | A variance-sensitive or two-sided deviation statement. |
-| **Chebyshev inequality** | A finite-variance random quantity has a mean-centered deviation bound. | `Var(X) < infinity` and threshold `t > 0`. | A sharp bounded-variable or IID exponential tail rate. |
+| **CLT** | A normalized estimator has an approximately normal distribution in an asymptotic regime. | A correct normalization and regularity/variance conditions. | That data are normal, that \(n\) is automatically large enough, or that a tail probability is exact. |
+| **Markov inequality** | A nonnegative random quantity has a mean-based upper-tail bound. | \(X\geq 0\), \(\mathbb E[X]<\infty\), and threshold \(t>0\). | A variance-sensitive or two-sided deviation statement. |
+| **Chebyshev inequality** | A finite-variance random quantity has a mean-centered deviation bound. | \(\operatorname{Var}(X)<\infty\) and threshold \(t>0\). | A sharp bounded-variable or IID exponential tail rate. |
 | **Concentration bound** | A finite tail probability is bounded under named conditions. | Boundedness/sub-Gaussian/moment and independence or a suitable dependence condition. | That the data collector/model meets those conditions. |
 
 Markov's inequality begins with only nonnegativity and a finite mean:
 
-~~~text
-X >= 0, E[X] < infinity, t > 0  =>  P(X >= t) <= E[X] / t.
-~~~
+\[
+X\geq 0,\quad \mathbb E[X]<\infty,\quad t>0
+\;\Longrightarrow\;
+P(X\geq t)\leq \frac{\mathbb E[X]}{t}.
+\]
 
 Chebyshev applies the same idea to the nonnegative squared deviation
-`(X - E[X])^2`, so it needs finite variance and gives
-`P(|X - E[X]| >= t) <= Var(X) / t^2`. It can be broadly applicable but loose.
+\((X-\mathbb E[X])^2\), so it needs finite variance and gives
+\(P(\lvert X-\mathbb E[X]\rvert\geq t)\leq \operatorname{Var}(X)/t^2\). It can
+be broadly applicable but loose.
 Chernoff/Hoeffding use sharper exponential behavior under bounded/independent
 structure. Bernstein can use both a boundedness condition and variance scale.
 State the theorem name and hypotheses; do not call every decreasing curve a
 “concentration result.”
 
-For IID Bernoulli observations `X_i in {0, 1}` with mean `p`, sample size
-`n >= 1`, and `epsilon > 0`, one named Hoeffding statement is
+For IID Bernoulli observations \(X_i\in\{0,1\}\) with mean \(p\), sample size
+\(n\geq 1\), and \(\varepsilon>0\), one named Hoeffding statement is
 
-~~~text
-P(|mean(X_1,...,X_n) - p| >= epsilon) <= 2 exp(-2 n epsilon^2).
-~~~
+\[
+P\!\left(\left\lvert \frac{1}{n}\sum_{i=1}^{n}X_i - p \right\rvert \geq \varepsilon\right)
+\leq 2\exp\!\left(-2n\varepsilon^2\right).
+\]
 
 It does not check whether telemetry rows are IID. Reused learners, clustered
-devices, prompt interference, retries, and time drift can make `n` much less
+devices, prompt interference, retries, and time drift can make \(n\) much less
 informative than the row count suggests.
+
+```atlas-figure
+%% atlas-diagram-id: m30-hoeffding-bound-decay
+%% atlas-diagram-title: The Hoeffding bound against sample size
+%% atlas-diagram-alt: Two curves show the bound two times e to the minus two n epsilon squared as the sample size n grows from 0 to 800. Both start at 2 and fall toward zero. The curve for a tolerance of 0.10 collapses within roughly 200 observations; the curve for the tighter tolerance of 0.05 is still above 0.03 at 800. A horizontal line at probability 1 marks where the bound first says anything at all, since a bound above 1 is true but empty.
+{
+  "kind": "plot",
+  "xRange": [0, 820],
+  "yRange": [0, 2.1],
+  "xLabel": "sample size n",
+  "yLabel": "bound on P(|mean - p| >= eps)",
+  "width": 640,
+  "height": 360,
+  "series": [
+    {
+      "label": "vacuous above 1",
+      "tone": 3,
+      "style": "dashed",
+      "points": [[0,1],[820,1]]
+    },
+    {
+      "label": "eps = 0.05",
+      "tone": 0,
+      "points": [[0,2],[100,1.2131],[200,0.7358],[300,0.4463],[400,0.2707],[500,0.1642],[600,0.0996],[700,0.0604],[800,0.0366]]
+    },
+    {
+      "label": "eps = 0.10",
+      "tone": 4,
+      "points": [[0,2],[50,0.7358],[100,0.2707],[150,0.0996],[200,0.0366],[300,0.005],[400,0.0007],[600,0],[800,0]]
+    }
+  ]
+}
+```
+
+Three things are visible that the formula alone hides. The bound starts
+*above 1*, where it is true but says nothing. Halving the tolerance
+\(\varepsilon\) costs roughly four times the sample, because \(\varepsilon\)
+enters squared. And the curve is a statement about the declared model, not
+about your rows: if the observations are not independent, this picture
+describes a population you do not have.
 
 ### 5.2 Monte Carlo numerical experiment: an estimator, not a spell
 
@@ -564,11 +678,15 @@ looks stable is a useful question generator—not a proof.
 
 ### Session checkpoint
 
-For one fixed fixture, record `n`, target, observed estimate, declared law,
+For one fixed fixture, record \(n\), target, observed estimate, declared law,
 one relevant LLN/CLT/bound statement, a counterexample to its assumptions, and
 the strongest conclusion you will *not* make.
 
 ---
+
+### Session 3 output — convergence and simulation record
+
+One record separates a convergence theorem from a finite simulation and states the concentration bound that connects them.
 
 ## 6. Session 4 — Models, likelihood, estimation, and criticism
 
@@ -594,26 +712,29 @@ between them. Before optimizing or fitting, ask:
 
 ### 6.2 Bernoulli likelihood, MLE, MAP, and posterior are different objects
 
-For `k` successes in `n` declared independent Bernoulli trials with parameter
-`p`, the likelihood as a function of `p` is
+For \(k\) successes in \(n\) declared independent Bernoulli trials with
+parameter \(p\), the likelihood as a function of \(p\) is
 
-~~~text
-L(p; k, n) = choose(n, k) p^k (1-p)^(n-k),   0 <= p <= 1.
-~~~
+\[
+L(p; k, n) = \binom{n}{k} p^k (1-p)^{n-k},
+\qquad 0 \leq p \leq 1.
+\]
 
 Taking a log where the terms are defined gives
 
-~~~text
-log L(p) = constant + k log(p) + (n-k) log(1-p).
-~~~
+\[
+\log L(p) = \text{constant} + k\log p + (n-k)\log(1-p).
+\]
 
-Its interior derivative is `k/p - (n-k)/(1-p)`. Setting it to zero yields
-the MLE `p_hat = k/n` when the boundary cases are handled separately. This is
-a derivation inside a model; it does not show that the trials are independent,
-that `p` is stable, or that `p_hat` is a safe decision score.
+Its interior derivative is \(\dfrac{k}{p}-\dfrac{n-k}{1-p}\). Setting it to
+zero yields the MLE \(\hat p = k/n\) when the boundary cases are handled
+separately. This is a derivation inside a model; it does not show that the
+trials are independent, that \(p\) is stable, or that \(\hat p\) is a safe
+decision score.
 
-With a declared Beta(`alpha`, `beta`) prior, the posterior for the same
-conjugate model is Beta(`alpha+k`, `beta+n-k`). A **posterior** is a probability
+With a declared \(\mathrm{Beta}(\alpha,\beta)\) prior, the posterior for the
+same conjugate model is \(\mathrm{Beta}(\alpha+k,\;\beta+n-k)\). A
+**posterior** is a probability
 distribution over the parameter conditional on the prior and likelihood.
 A **MAP** maximizes that posterior density; it is not identical to MLE and can
 be sensitive to parameterization/prior. A **likelihood** ranks parameters for
@@ -621,10 +742,11 @@ observed data; it is not a probability distribution over parameters until a
 prior and normalization are supplied.
 
 The familiar Beta MAP formula
-`(alpha_post - 1) / (alpha_post + beta_post - 2)` is an **interior** formula:
-it applies only when both posterior parameters exceed one. A posterior such as
-Beta(1, 2) has its unique MAP at the boundary `p=0`; Beta(2, 1) has it at
-`p=1`; other parameter combinations can be flat or have two boundary modes.
+\(\dfrac{\alpha_{\text{post}}-1}{\alpha_{\text{post}}+\beta_{\text{post}}-2}\)
+is an **interior** formula: it applies only when both posterior parameters
+exceed one. A posterior such as \(\mathrm{Beta}(1,2)\) has its unique MAP at
+the boundary \(p=0\); \(\mathrm{Beta}(2,1)\) has it at \(p=1\); other
+parameter combinations can be flat or have two boundary modes.
 When reading an AI-produced Bayesian helper, distinguish “unique interior
 mode,” “unique boundary mode,” and “non-unique mode”—do not let `None` erase
 the mathematical case.
@@ -636,7 +758,7 @@ and sample-size regime.
 
 | Word | Precise question | Shortcut to reject |
 | --- | --- | --- |
-| Bias | What is `E[estimate] - target` under which law? | “Unbiased therefore best.” |
+| Bias | What is \(\mathbb E[\hat\theta]-\theta\) under which law? | “Unbiased therefore best.” |
 | Variance / MSE | How variable is the estimator; what bias–variance tradeoff follows under this loss? | “Lower variance always means less error.” |
 | Consistency | Does it approach the target as the relevant sample size grows under named assumptions? | “Consistent means accurate at this n.” |
 | Efficiency | Efficient relative to which comparison class/bound and regularity regime? | “Efficient means faster code.” |
@@ -647,15 +769,70 @@ justify this bias–variance tradeoff?”
 
 ### 6.4 Sufficiency and exponential-family boundaries
 
-A statistic is **sufficient** only for a named model and parameter, typically
-via a factorization argument. It is not a universal lossless summary for every
-future task. Exponential-family structure can make certain sufficient
-statistics and likelihood calculations tractable, but support and regularity
-conditions still matter.
+A statistic is **sufficient** only for a named model and parameter. The
+criterion is a factorization, not an intuition about information.
 
-The only safe move in this first pass is to state the model, parameter,
-candidate summary, and factorization route; do not label a dashboard feature
-“sufficient” because it is convenient.
+**[THEOREM / PROOF] Fisher–Neyman factorization.** For a model with density or
+mass function \(p(x\mid\theta)\), a statistic \(T\) is sufficient for
+\(\theta\) exactly when
+
+\[
+p(x\mid\theta)=h(x)\,g\!\left(T(x),\theta\right)
+\]
+
+for some \(h\) not depending on \(\theta\) and some \(g\) depending on the data
+only through \(T(x)\).
+
+**Worked case.** For \(n\) independent \(\mathrm{Bernoulli}(\theta)\)
+observations with \(x_i\in\{0,1\}\),
+
+\[
+p(x\mid\theta)=\prod_{i=1}^{n}\theta^{x_i}(1-\theta)^{1-x_i}
+=\theta^{\sum_i x_i}(1-\theta)^{\,n-\sum_i x_i},
+\]
+
+which already has the factored form with \(h(x)=1\) and
+\(T(x)=\sum_i x_i\). The success count is sufficient for \(\theta\)
+*in this model*: given the count, the particular arrangement of successes
+carries no further information about \(\theta\). It carries plenty of
+information about other things — drift over time, clustering by learner,
+a broken instrument — which is exactly why sufficiency is not a licence to
+discard the raw rows.
+
+### 6.4a Exponential families make that structure explicit
+
+**[DEFINITION / MODEL]** A family is a one-parameter **exponential family** in
+natural form when
+
+\[
+p(x\mid\eta)=h(x)\exp\!\left(\eta\,T(x)-A(\eta)\right),
+\]
+
+with \(\eta\) the natural parameter, \(T\) the natural sufficient statistic,
+and \(A\) the log-partition function that makes the density integrate to one.
+
+Bernoulli is the family the rest of this module already uses. Rewriting it:
+
+\[
+\theta^{x}(1-\theta)^{1-x}
+=\exp\!\left(x\log\frac{\theta}{1-\theta}+\log(1-\theta)\right),
+\]
+
+so \(\eta=\log\dfrac{\theta}{1-\theta}\) — the logit — with \(T(x)=x\),
+\(h(x)=1\), and \(A(\eta)=\log\!\left(1+e^{\eta}\right)\).
+
+Two consequences worth carrying forward. The natural parameter of the
+Bernoulli family *is* the logit, which is why logistic regression models the
+log-odds linearly rather than the probability (§6.6). And derivatives of \(A\)
+generate the moments: \(A'(\eta)=\mathbb E[T(X)]\), which for Bernoulli
+returns \(e^{\eta}/(1+e^{\eta})=\theta\), the mean.
+
+**Boundary.** The form above assumes a support that does not depend on
+\(\theta\). A uniform family on \([0,\theta]\) is not an exponential family for
+that reason, and its sufficient statistic \(\max_i x_i\) behaves differently
+from a sum. State the model, parameter, candidate summary, and factorization
+route before using any of this; do not label a dashboard feature “sufficient”
+because it is convenient.
 
 ### 6.5 Code-reading lab — likelihood is not posterior
 
@@ -669,11 +846,11 @@ def choose_parameter(grid, successes, trials):
 
 Trace this carefully:
 
-- `p` must lie strictly between 0 and 1 for this particular log expression.
+- \(p\) must lie strictly between 0 and 1 for this particular log expression.
 - The function chooses a grid-based MLE approximation, not an exact proof of a
   unique optimum or a Bayesian posterior.
 - It assumes the likelihood form is appropriate; it does not check trial
-  dependence, repeated units, shifting `p`, mislabeled outcomes, or selection.
+  dependence, repeated units, shifting \(p\), mislabeled outcomes, or selection.
 - The grid resolution is an algorithmic choice. M31 will own general
   optimization/convergence questions; M30 owns the target/model evidence.
 
@@ -704,6 +881,10 @@ write three separate sentences: what the likelihood says, what the posterior
 says under its prior, and what neither says about a real intervention.
 
 ---
+
+### Session 4 output — estimation and criticism report
+
+One report fits a model, states the likelihood assumption, and criticizes the fit rather than defending it.
 
 ## 7. Session 5 — Intervals, tests, multiplicity, and resampling
 
@@ -814,6 +995,10 @@ strongest statement that the procedure cannot support.
 
 ---
 
+### Session 5 output — inference boundary report
+
+One report states what an interval or test establishes, and what multiplicity or resampling does to that claim.
+
 ## 8. Session 6 — Design, criticism, missingness, robustness, and dimension
 
 ### Core trace
@@ -866,14 +1051,14 @@ robust.
 
 ### 8.4 Counterexample: high-dimensional estimation exposes an identification boundary
 
-When feature count `p` can meet or exceed observation count `n`, ordinary
+When feature count \(p\) can meet or exceed observation count \(n\), ordinary
 least-squares coefficients may be nonunique without extra structure. A
 regularizer/structural assumption (sparsity, low rank, restricted geometry,
 prediction-only target, or prior) changes the problem and introduces a
 bias–variance/selection tradeoff. A selected feature is not automatically a
 cause, stable explanation, or portable variable.
 
-Connect this to M28: a design matrix has rank at most `min(n, p)`. Connect it
+Connect this to M28: a design matrix has rank at most \(\min(n,p)\). Connect it
 to M31: regularization is an objective/constraint choice. Connect it to M35:
 tuning and evaluation must be separated to avoid leakage and selection bias.
 
@@ -909,6 +1094,10 @@ log. State which sentence in the final report must be weakened.
 
 ---
 
+### Session 6 output — scientific inference dossier
+
+One dossier defends a conclusion under stated design, missingness, and robustness assumptions, and names its first falsifier.
+
 ## 9. Probability & Inference Studio — six prediction gates
 
 The interactive studio uses only fixed synthetic fixtures. It stores only
@@ -940,7 +1129,7 @@ bridge and a later retrieval prompt, not a penalty.
 
 ### Q1 — Statistic, estimand, and population
 
-A table shows that 63% of records with nonmissing outcomes had `recall=1`.
+A table shows that 63% of records with nonmissing outcomes had \(\text{recall}=1\).
 Which statement is strongest?
 
 A. The population recall probability is 0.63.  
@@ -951,12 +1140,12 @@ D. The event is independent because the sample is large.
 
 ### Q2 — Conditional direction and base rate
 
-Which expression answers “given a positive signal, how likely is `H`?”
+Which expression answers “given a positive signal, how likely is \(H\)?”
 
-A. `P(+ | H)`  
-B. `P(H) P(+ | H)`  
-C. `P(H | +)`  
-D. `P(+) / P(H)`
+A. \(P(+ \mid H)\)  
+B. \(P(H)\,P(+ \mid H)\)  
+C. \(P(H \mid +)\)  
+D. \(P(+) / P(H)\)
 
 ### Q3 — Exclusivity versus independence
 
@@ -972,17 +1161,17 @@ D. They have correlation zero.
 
 Which identity is always safe when the expectations exist?
 
-A. `E[g(X)] = g(E[X])` for every function `g`.  
-B. `E[X^2] = (E[X])^2`.  
-C. `E[aX + bY] = aE[X] + bE[Y]`.  
-D. `Var(X+Y) = Var(X)+Var(Y)` without any covariance condition.
+A. \(\mathbb E[g(X)] = g(\mathbb E[X])\) for every function \(g\).  
+B. \(\mathbb E[X^2] = (\mathbb E[X])^2\).  
+C. \(\mathbb E[aX + bY] = a\mathbb E[X] + b\mathbb E[Y]\).  
+D. \(\operatorname{Var}(X+Y) = \operatorname{Var}(X)+\operatorname{Var}(Y)\) without any covariance condition.
 
 ### Q5 — Covariance and causal claims
 
-An analysis finds zero covariance between `X` and `Y`. What follows?
+An analysis finds zero covariance between \(X\) and \(Y\). What follows?
 
-A. `X` and `Y` are independent.  
-B. `X` does not cause `Y`.  
+A. \(X\) and \(Y\) are independent.  
+B. \(X\) does not cause \(Y\).  
 C. The declared joint model has zero second-moment covariance; independence or
 causality needs additional conditions/evidence.  
 D. A linear regression coefficient must be zero in every adjusted model.
@@ -1058,7 +1247,7 @@ more often after a poor experience. Which statement is strongest?
 A. Ordinary least squares has unique coefficients because software returned
 some numbers.  
 B. The missingness is MAR because a missingness column exists.  
-C. `p > n` and outcome-linked missingness require explicit structural and
+C. \(p>n\) and outcome-linked missingness require explicit structural and
 missingness assumptions/sensitivity analysis; neither is solved by a fit call.  
 D. Lasso-selected features prove causes.
 
@@ -1067,7 +1256,7 @@ D. Lasso-selected features prove causes.
 | Q | Correct | Why it is correct | Repair for plausible wrong answer |
 | ---:| --- | --- | --- |
 | 1 | B | It names the observed denominator and requests the path to the target population. | A confuses a statistic with an estimand; C adds causality; D adds an untested independence claim. |
-| 2 | C | It conditions `H` on the observed positive evidence. | A reverses the question; B is a joint probability; D is not a conditional probability rule. |
+| 2 | C | It conditions \(H\) on the observed positive evidence. | A reverses the question; B is a joint probability; D is not a conditional probability rule. |
 | 3 | B | Positive marginal probabilities make the product positive while the joint is zero. | A confuses exclusivity with noninteraction; C/D do not follow. |
 | 4 | C | Linearity is the relevant expectation law. | A/B fail for nonlinear transforms; D requires zero covariance or another condition. |
 | 5 | C | Zero covariance is a limited second-moment statement. | A/B/D upgrade it to independence, causality, or an adjusted-model claim. |
@@ -1249,11 +1438,44 @@ more transcript than necessary belongs in Notion.
 
 ## 14. Spaced review and mastery gate
 
+### One-page concept map
+
+M30's spine is that a number becomes evidence only after the path from
+population to claim is named at every step.
+
+~~~mermaid
+%% atlas-diagram-id: m30-concept-map
+%% atlas-diagram-title: How M30's ideas depend on one another
+%% atlas-diagram-alt: A population and estimand, with a sampling or assignment mechanism, produce the observed data. A probability model supplies random variables, conditioning and Bayes, and moments. Repetition gives the law of large numbers, central limit theorem, and concentration bounds. Likelihood gives maximum likelihood, MAP, and posteriors; procedures give intervals, tests, and resampling. Both feed an uncertainty statement, which supports only a bounded decision. Selection, dependence, missingness, and measurement error can break the path at any point.
+flowchart TB
+  POP["population + estimand"] --> MECH["sampling / assignment mechanism"]
+  MECH --> DATA["observed data"]
+  MODEL["probability model"] --> RV["random variables + joint law"]
+  RV --> COND["conditioning + Bayes"]
+  RV --> MOM["expectation, variance, covariance"]
+  MOM --> REPEAT["LLN, CLT, concentration"]
+  DATA --> LIK["likelihood"]
+  MODEL --> LIK
+  LIK --> EST["MLE / MAP / posterior"]
+  DATA --> PROC["intervals, tests, resampling"]
+  REPEAT --> UNC["uncertainty statement"]
+  EST --> UNC
+  PROC --> UNC
+  UNC --> DEC["a bounded decision"]
+  HAZ["selection, dependence, missingness, measurement"] -.->|"breaks the path"| DATA
+  HAZ -.-> UNC
+  POP --> UNC
+~~~
+
+The dotted arrows are the module. Every technique above them is correct
+mathematics; the hazards decide whether that mathematics is about the
+population you meant, and no amount of procedure repairs a broken path.
+
 ### Retrieval queue
 
 | When | Prompt |
 | --- | --- |
-| +1 day | Draw a joint table and state the difference between `P(A|B)` and `P(B|A)`. |
+| +1 day | Draw a joint table and state the difference between \(P(A\mid B)\) and \(P(B\mid A)\). |
 | +3 days | Derive expectation/variance/covariance on a small law and name a non-claim. |
 | +7 days | Classify a statement as LLN, CLT, or concentration; name its assumptions. |
 | +14 days | Compare likelihood, MLE, MAP, posterior, confidence interval, p-value, and bootstrap range. |
@@ -1344,3 +1566,54 @@ history and sampling rule. That is an estimator fact about a fixed empirical
 objective—not evidence that one step decreases the objective, that an algorithm
 converges, or that population risk improves. M31 owns those optimization and
 stochastic-convergence claims.
+
+## 17. Bench pack
+
+**Bench pack:** `m30` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. These benches **import and probe** the checked-in
+reference model rather than reimplementing it. The reference works in exact
+rational arithmetic and caps observations at 64, so every result is a finite exact
+computation rather than a simulation whose seed would need reporting.
+
+### Bench 2 — moment and dependence account
+
+**Session:** 2. **Rungs:** recognize, trace.
+**Executes:** a three-point joint distribution where Y is X squared. Covariance is
+exactly zero while the joint does not factor as independent, and conditioning on
+Y collapses X to a single value.
+**Cannot establish:** how often zero covariance and independence diverge in
+practice, or which dependence measure would detect this case.
+
+### Bench 3 — convergence and simulation record
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** Hoeffding's bound instantiated across sample sizes and epsilons. At
+epsilon 0.1 it evaluates to exactly 1.0 for n = 8, 16, and 32 — true and
+completely vacuous — and only drops below 1 at n = 64.
+**Cannot establish:** that the fixture's frequency validates independence or the
+declared rate. A vacuous bound at these n reflects the sample sizes available,
+not a defect in the theorem.
+
+### Bench 5 — inference boundary report
+
+**Session:** 5. **Rungs:** review and verify, trace.
+**Executes:** six comparisons, four of which clear an uncorrected 0.05 threshold.
+Bonferroni admits none; Benjamini–Hochberg, the more permissive procedure, also
+admits none.
+**Cannot establish:** whether the family of six is the right family. A correction
+applied to the wrong family is not a correction, and the reference says so itself.
+
+### Sessions without a bench
+
+- **Session 1**, **Session 4** — each qualifies on the rubric and ranked below
+  this pack's cut. Sparse packs cap at three.
+- **Session 6** — a dossier consuming Sessions 1–5 rather than producing new
+  evidence.
+
+### Bench pack completion record
+
+Records under `benches/records/m30-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

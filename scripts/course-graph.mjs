@@ -55,7 +55,12 @@ const expectedInventoryDirectives = new Set([
   "study",
 ]);
 const expectedAtomicInventoryItemCount = 362;
-const focusedStudyModuleNumbers = new Set([21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
+// Every module declares an evidence-planning band. This was previously a
+// fourteen-module allowlist, which left the published Arc I–IV route with no
+// computable pacing at all and made any course-level hour total guesswork.
+const focusedStudyModuleNumbers = new Set(
+  Array.from({ length: 36 }, (_, index) => index + 1),
+);
 // Kept in server-side validation only: the canonical graph is client-reachable.
 const privateGuidedStudyArtifacts = new Map([
   [31, {

@@ -1070,3 +1070,54 @@ contract, and (3) design one test that distinguishes rebinding from mutation.
 Carry that trace and contract into **M2**: recursion is also a changing
 execution state, but its state lives in frames and call relationships rather
 than one shared container.
+
+## Bench pack
+
+**Bench pack:** `m01` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures — the three event logs mirror the ones
+read in session 4.
+
+### Bench 2 — environment trace and scope claim
+
+**Session:** 2. **Rungs:** trace, map.
+**Executes:** three closures over one enclosing binding. Two hold the *identical*
+cell object; the third, which assigns without `nonlocal`, captured nothing and
+leaves the cell untouched. Then a read that raises `UnboundLocalError` because of
+an assignment on a line that never runs.
+**Cannot establish:** anything portable about `__closure__` or `cell_contents`.
+The scoping rule is a language guarantee; the ability to inspect a cell is a
+CPython surface.
+
+### Bench 3 — ownership contract card
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** the four clauses of `record()` as separate predicates, then a
+subclass that appends an audit tag to the caller's list. The postcondition and
+the representation invariant both hold; only the frame condition fails.
+**Cannot establish:** completeness. Four predicates on one method show the clauses
+are independent, not that they cover concurrency or exception safety.
+
+### Bench 4 — event-log comparison and repair memo
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** three implementations that share one public contract and pass the
+same equality assertion, then a caller edit after `record()` — two follow it to
+999 minutes with a spurious tag, one does not. Then five properties a single
+assertion never checks, and an agent patch run unmodified against them.
+**Cannot establish:** that the surviving implementation is correct, only that it
+survives this window. Concurrent recording is Module 19's question.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 5** — a TA studio; the artifact is a misconception card, not a run.
+- **Session 6** — a synthesis dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m01-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

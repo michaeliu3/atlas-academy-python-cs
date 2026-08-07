@@ -455,6 +455,10 @@ failure path, or evidence—not merely “more testing.”
 
 ---
 
+### Session 1 output — release boundary statement
+
+One statement declares what this release claims and what it explicitly does not.
+
 ## 4. Session 2 — Architecture is a traceable set of responsibilities
 
 ### Pressure
@@ -542,6 +546,10 @@ Ask the TA to point at any arrow. Explain its protocol, data shape, owner,
 failure mode, and what evidence would show that it behaved as claimed.
 
 ---
+
+### Session 2 output — responsibility trace map
+
+One map traces each architectural responsibility to the component that owns it.
 
 ## 5. Session 3 — A retry is a systems event, not a duplicate line of code
 
@@ -634,6 +642,10 @@ effect within the stated local transaction boundary.
 
 ---
 
+### Session 3 output — retry semantics record
+
+One record states what a retry means to the system, not merely what it does in code.
+
 ## 6. Session 4 — A patch is a supply-chain and ownership proposal
 
 ### Pressure
@@ -721,6 +733,10 @@ non-claim:
 ~~~
 
 ---
+
+### Session 4 output — patch provenance review
+
+One review treats a patch as a supply-chain and ownership proposal and states what it would take to accept it.
 
 ## 7. Session 5 — Operational evidence is scoped evidence
 
@@ -879,6 +895,10 @@ observation **[UNKNOWN]** rather than inventing a result.
 
 ---
 
+### Session 5 output — scoped operational evidence log
+
+One log records operational observations with their scope, so none is read as a stronger claim than it is.
+
 ## 8. Session 6 — The defense tests the architecture, not presentation skill
 
 ### Pressure
@@ -959,6 +979,10 @@ decision with a sharp evidence gap is stronger than an enthusiastic release
 claim with invented certainty.
 
 ---
+
+### Session 6 output — versioned evidence bundle
+
+One bundle carries claim, trace, test or observation, human impact, limitation, rollback, and the next reason to revise.
 
 ## 9. The Integrated Release Studio
 
@@ -1537,3 +1561,43 @@ That is the durable AI-era skill: not competing with agents at raw code volume,
 but directing, reading, testing, constraining, explaining, and sometimes
 rejecting systems with enough precision that the people affected by them retain
 control.
+
+## Bench pack
+
+**Bench pack:** none. This is the only module in the course with no executable bench
+pack, and that is a decision rather than an omission.
+
+Every other module carries two or three benches, covering the sessions where running
+code reveals something reading cannot. The selection rubric admits a session on any
+of five signals — an observable mechanism, a measurement, an invariant that can be
+violated on purpose, a falsifiable prediction, or an agent patch run against tests —
+and disqualifies it when the artifact is prose or design, when a kernel would have to
+model the mechanism dishonestly, when the session synthesises earlier work rather
+than producing new evidence, or when a bench would only re-execute what the workbook
+already prints.
+
+This capstone's six sessions are disqualified on the first and third of those, every
+time:
+
+- **Session 1** — a stewardship statement: what this project is for and who it
+  serves.
+- **Session 2** — a contribution and governance map, which is an argument about
+  authority.
+- **Session 3** — a provenance and licensing record: claims about where things came
+  from, checkable against sources rather than by execution.
+- **Session 4** — a maintenance and succession plan.
+- **Session 5** — a release bundle assembled from artifacts the earlier modules
+  produced.
+- **Session 6** — the oral defence.
+
+None of these is a claim a kernel can settle. A bench here would either re-run code
+that belongs to another module — where it is already benched — or dress a design
+argument in executable clothing, which is exactly what the production standard's own
+rule calls noise.
+
+Recorded rather than silently omitted, because "this module has no bench, and here is
+the reason" is itself the epistemic move the course teaches. The absence is evidence
+about the subject matter, not a gap in the work.
+
+Every artifact this capstone consumes was produced under a bench pack elsewhere; see
+`benches/README.md` for the corpus-wide policy and the per-module reasons.

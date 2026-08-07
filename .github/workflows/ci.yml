@@ -110,6 +110,12 @@ jobs:
               $apparatusChanged = $true
               $portalChanged = $true
             }
+            if ($path -like 'benches/*') {
+              # Benches are executable teaching apparatus, not portal content.
+              # Deliberately does NOT set contentChanged or browserChanged: a
+              # notebook edit must not trigger the Chromium acceptance run.
+              $apparatusChanged = $true
+            }
             if ($path -like 'content/source-maps/*' -or $path -like 'docs/ACADEMIC_CALIBRATION.md' -or $path -like 'docs/research/*') {
               $sourcesChanged = $true
             }
@@ -188,6 +194,18 @@ jobs:
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
         name: Verify generated course artifacts are committed
         run: pnpm check:generated
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Validate the bench registry against the graph and teaching packs
+        run: pnpm validate:benches
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Verify each bench still matches its workbook session
+        run: pnpm check:bench-sync
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Proofread the workbook bench sections against the registry
+        run: pnpm audit:bench-sections
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Verify generated bench notebooks match their sources
+        run: pnpm check:bench-notebooks
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
         name: Verify generated goal-compliance matrix
         run: pnpm check:goal-compliance
@@ -346,6 +364,18 @@ jobs:
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
         name: Run private preview teaching model inputs
         run: python -m unittest discover -s content/course/reference-models -p "test_module26_reference.py"
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Execute the bench packs
+        # Notebooks are generated in place so each bench keeps its pack directory
+        # on sys.path and can import its shared _fixture. Runs with exercises
+        # UNSOLVED by design: this gates the bench's machinery, not a learner's
+        # answers, so an unattempted check reports rather than fails.
+        run: |
+          python -m pip install --disable-pip-version-check --only-binary=:all: \
+            jupytext==1.19.* nbmake==1.5.* pytest matplotlib
+          python -m jupytext --to ipynb benches/src/m*/s*.py
+          MPLBACKEND=Agg python -m pytest --nbmake benches/src \
+            --nbmake-kernel=python3 --nbmake-timeout=300 -q
 
   browser-accessibility:
     name: Browser accessibility acceptance

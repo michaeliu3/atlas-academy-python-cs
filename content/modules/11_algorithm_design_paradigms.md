@@ -2000,7 +2000,7 @@ the next.
 | **M7 → M8** | M7 access-and-demand card | **Contract:** when may a consumer request the next normalized event or stop? **Invariant:** which frame and named buffer state is retained? **Cost:** name capacity `B`, work per requested item, and the sink assumption. **Failure:** identify `list(...)`, an unnamed collector, ownership leak, or false backpressure claim. **Changed premise:** if the sink slows, cancels, or becomes asynchronous, which queue, ownership, cancellation, and failure policy is now missing? |
 | **M8 → M9** | M8 identity-and-index card | **Contract:** what candidate IDs may a key or token query return before final equality/query checking? **Invariant:** which stable key and source-of-truth version does the derived index represent? **Cost:** qualify expected lookup with hashing, equality, load, update, and retained-index assumptions. **Failure:** name a mutable key, collision mistake, stale entry, or changed normalization rule. **Changed premise:** if an event or tokenizer changes, which entries must be invalidated, rebuilt, or versioned? |
 | **M9 → M10** | M9 ordered-evidence card | **Contract:** which review is next under an explicit `(priority, revision)` key and tie rule? **Invariant:** why does the identity record remain authoritative while a heap exposes only a candidate minimum? **Cost:** separate heap insert/remove, exact-key lookup, and full-sort work. **Failure:** name a stale heap entry, hidden tie policy, or heap-as-sorted-list error. **Changed premise:** if priority or stable ordering changes, what key, revision check, and trace must be repaired? |
-| **M10 → M11** | M10 graph-decision card | **Contract:** which prerequisite relation, order, or witness is being returned? **Invariant:** what does each directed edge mean, and why must every edge point forward in a topological order? **Cost:** name `|V|`, `|E|`, representation, frontier, and the qualified traversal/order bound. **Failure:** name a missing edge, cycle, wrong frontier, or theorem mismatch. **Changed premise:** if a new edge creates a cycle, what must be rejected or recomputed before the planner uses the graph? |
+| **M10 → M11** | M10 graph-decision card | **Contract:** which prerequisite relation, order, or witness is being returned? **Invariant:** what does each directed edge mean, and why must every edge point forward in a topological order? **Cost:** name `\|V\|`, `\|E\|`, representation, frontier, and the qualified traversal/order bound. **Failure:** name a missing edge, cycle, wrong frontier, or theorem mismatch. **Changed premise:** if a new edge creates a cycle, what must be rejected or recomputed before the planner uses the graph? |
 
 **Acceptance boundary:** attach these exactly five rows as page one of the
 existing Session 6 strategy-defense dossier. Finish with a four-to-six-sentence
@@ -3101,3 +3101,55 @@ Carry the five-row architecture-reading table, a written problem contract, an
 invariant or recurrence, and one evidence boundary into **M12**. The next
 module turns those reasoning obligations into explicit Python module, API,
 type, and dependency contracts.
+
+## Bench pack
+
+**Bench pack:** `m11` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures — a small selection problem with an
+exhaustive oracle, which is what makes every claim here checkable.
+
+### Bench 2 — strategy proof and counterexample card
+
+**Session:** 2. **Rungs:** recognize, trace.
+**Executes:** a search for the smallest instance where value-density greedy is
+beaten. Two items suffice — one is never enough — and greedy scores 1 against an
+optimum of 2. Then two settings where greedy becomes optimal again, isolating the
+structural feature that broke it.
+**Cannot establish:** greedy's worst-case approximation ratio, or the fractional
+case, which needs an exchange argument rather than a search.
+
+### Bench 4 — pruning and state-sufficiency proof
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** three search strategies swept against the oracle across 14,742
+instances. An optimistic-bound prune agrees everywhere while removing 42% of the
+nodes; a prune comparing current value against the incumbent agrees on the worked
+example and fails at instance 39.
+**Cannot establish:** the safe prune's soundness in general. That comes from the
+optimistic-bound argument; the sweep's job is to refute the other one.
+
+### Bench 5 — probability and quality-bound ledger
+
+**Session:** 5. **Rungs:** trace, recognize.
+**Executes:** reservoir sampling over 100,000 runs, giving each item a share
+within 0.0011 of 1/n, against an off-by-one variant deviating by 0.0112. A single
+seeded run of either returns an unremarkable item and distinguishes nothing.
+**Cannot establish:** uniformity. A frequency table is evidence about the
+distribution; the proof is the per-step induction, which this bench does not carry
+out.
+
+### Sessions without a bench
+
+- **Session 1** — its exhaustive oracle is folded into bench 4, where the prune
+  sweep uses it; running it separately would be the same experiment.
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a strategy-defence dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m11-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

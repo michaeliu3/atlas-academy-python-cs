@@ -74,6 +74,7 @@ import {
 } from "./git-index-snapshot.mjs";
 import { validateReleaseInputLedger } from "./release-input-ledger.mjs";
 import { validateReaderMermaidAlternatives } from "./validate-mermaid-alternatives.mjs";
+import { validateCourseMarkup } from "./validate-module-markup.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
@@ -507,6 +508,18 @@ export async function validateCourseContracts(
   } catch (error) {
     errors.push(
       `Reader Mermaid text alternatives must validate before a complete-course claim: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  try {
+    // Structural markup breakage (orphaned math delimiters, LaTeX stranded in
+    // code spans, table rows whose cell count does not match their header) is a
+    // correctness fault rather than an authoring-completeness question, so this
+    // is always fail-closed and covers authoring material too.
+    await validateCourseMarkup({ siteRoot: validationSiteRoot });
+  } catch (error) {
+    errors.push(
+      `Workbook Markdown must render as authored: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 

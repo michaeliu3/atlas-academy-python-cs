@@ -2914,6 +2914,83 @@ Add:
 
 ---
 
+## 25. Bench pack
+
+**Bench pack:** `m09` — six benches, one per session. CPython 3.12 floor.
+
+This module and Module 5 were authored before the sparse bench policy existed and
+carry a bench for every session. Later modules carry two or three, covering only
+the sessions where running code reveals something reading cannot; the rest state
+why they have none. Six is not a target.
+**Emits:** one bench record per session, naming that session's declared output.
+
+The bench pack is where this module's session claims get executed. It carries no
+teaching prose: everything a bench needs is stated above, and a bench that
+re-explains a concept has become a second source of truth. Several benches adapt
+problem framings and test cases from an Apache-2.0 challenge collection; the
+narrative is this course's own, and provenance is recorded in the bench files and
+in `benches/BENCH_ATTRIBUTION.md`.
+
+### Bench operating rule
+
+A bench is evidence, not attainment. A record showing four checks passed and two
+not attempted is an honest record. `emit()` refuses a record whose answers are
+still the blank template, so an unrun bench cannot look like a finished one.
+
+### Bench 1 — ordered-operation decision ledger
+
+**Session:** 1. **Rungs:** recognize.
+**Executes:** five Atlas queries classified by the abstract operation each needs,
+and a tie resolved through the third element of the ordering key.
+**Cannot establish:** which representation to choose. Naming an operation does
+not select a structure; that needs the workload's operation mix.
+
+### Bench 2 — BST path-and-proof trace
+
+**Session:** 2. **Rungs:** debug and defend, trace.
+**Executes:** a representation-invariant checker against a tree whose violation
+is two levels deep, then an insert whose `else` branch silently admits equal keys.
+**Cannot establish:** anything about shape. A degenerate chain satisfies every
+clause of the invariant.
+
+### Bench 3 — rotation-preservation dossier
+
+**Session:** 3. **Rungs:** trace, map.
+**Executes:** ascending versus shuffled insertion at four sizes, then a rotation
+checked separately for what it preserves and what it changes.
+**Cannot establish:** that a rebalancing scheme terminates or restores a height
+bound. Those are properties of the policy choosing rotations.
+
+### Bench 4 — heap invariant trace
+
+**Session:** 4. **Rungs:** modify, trace.
+**Executes:** a min-heap scheduler over the review priority key, with the order
+invariant checked after every push and the drain order checked against the
+contract.
+**Cannot establish:** behaviour at depth. Five elements sift at most two levels.
+
+### Bench 5 — ordering-contract comparison memo
+
+**Session:** 5. **Rungs:** review and verify, map.
+**Executes:** a prefix index against the one-line filter it replaces, and audits
+four claims about which is better.
+**Cannot establish:** a comparative performance claim. Only the linear filter was
+measured; the trie's build time and memory were not.
+
+### Bench 6 — ordered-index defense dossier
+
+**Session:** 6. **Rungs:** design and delegate, transfer.
+**Executes:** a two-index coordinator whose removal opens a window where the
+scheduler and the id map disagree, reproduced in program order.
+**Cannot establish:** what concurrent readers observe. Closing this window does
+not make the coordinator thread-safe.
+
+### Bench pack completion record
+
+Six records under `benches/records/m09-s*.json`. Each names its session output,
+carries at least one labelled claim, and states exactly one thing its evidence
+cannot support.
+
 ## Backward and forward connections
 
 ### Backward

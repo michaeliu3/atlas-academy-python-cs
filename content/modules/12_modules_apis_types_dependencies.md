@@ -3840,3 +3840,78 @@ Then answer three transfer questions:
 
 If any blank can be filled only with a memorized slogan, return to its minimal
 counterexample and rebuild the causal explanation.
+
+
+## Bench pack
+
+**Bench pack:** `m12` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Benches 4 and 6 **import and probe**
+`public/downloads/module12_reference.py`. Bench 1 does not use it, deliberately:
+the reference model inspects *declared* architecture, and Session 1's question is
+what the import machinery does with real files — so bench 1 writes real modules to
+a temporary directory and imports them for real.
+
+### Bench 1 — import execution and dependency trace
+
+**Session:** 1. **Rungs:** trace, debug and defend.
+**Executes:** five arrangements of the same two responsibilities, each written to
+disk and imported through the real machinery with a clean `sys.modules`. The
+mutual-import arrangement raises `ImportError: cannot import name 'REGISTRY' from
+partially initialized module`. Changing **only** how the dependency is named —
+`import atlas_registry` instead of `from atlas_registry import REGISTRY` — makes
+the identical cycle import successfully. Four arrangements import, all four produce
+byte-identical behaviour, and three of them still contain a cycle: which is why the
+session's grade is *symptom relief or graph repair*, and why watching the error
+disappear cannot decide it.
+**Cannot establish:** anything about packages, `__init__.py` ordering, namespace
+packages, import hooks, or reloaders — nor that a composition root is the right
+design for a given application, which is an argument about change pressure.
+
+### Bench 4 — client-owned port map
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** four candidate implementations against a `@runtime_checkable`
+Protocol. **All four pass `isinstance`** — including one a parameter short, one
+returning a `str` where the port promises a `list`, and one whose `load` is a
+string rather than a method. A contract test that calls the operation accepts
+exactly one. Then the session's edge reversal: `inspect_architecture` accepts the
+designed graph and reports the reversed Ports-to-Pipe edge as a
+`forbidden-concrete-dependency` — the port would have to know which adapter exists.
+**Cannot establish:** how often the gap bites. Nothing here runs a static type
+checker, which would reject three of the four candidates before execution — an
+omission that is the point rather than a limitation.
+
+### Bench 6 — architecture review dossier
+
+**Session:** 6. **Rungs:** review and verify, recognize.
+**Executes:** an audit of the sentence *"no violations, so the architecture is
+sound and the modules are correctly decoupled."* The report is genuine and the
+conclusion is not: the clean report's own allowed-edge list **contains a cycle**,
+permitted because domain-policy may depend on domain-policy and cycle detection is
+not among the checks. Two more clauses are refused on the model's own authority —
+its `scope` string names runtime imports, trust, and substitutability as outside
+its reach — and benches 1 and 4 supply the evidence for those. Control graphs
+confirm the inspector does reject an application-to-adapter edge and a selection
+made outside the composition root, so the clean report is real evidence about
+exactly two things.
+**Cannot establish:** that cycles among domain values are harmful, or anything
+about other architecture tools, several of which do check acyclicity and would have
+reported this graph differently.
+
+### Sessions without a bench
+
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 3** — static type relationships: narrowing, generics, variance. A type
+  checker decides those before the code runs; a kernel that executes the code sees
+  only what survives to runtime, which is the wrong instrument for the question.
+- **Session 5** — plugin discovery and trust: entry points, third-party packages,
+  and whether loading one is safe. That needs a real package environment, and a
+  bench that faked one would be modelling the trust question dishonestly.
+
+### Bench pack completion record
+
+Records under `benches/records/m12-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

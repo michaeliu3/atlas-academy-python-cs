@@ -62,10 +62,24 @@ async function renderPdf({ url, outputPath, label }) {
     rawMermaid: [...document.querySelectorAll("pre code.language-mermaid")].filter(
       (node) => !node.closest(".diagram-source"),
     ).length,
+    // An Atlas figure that cannot be laid out renders an alert paragraph in
+    // place of its drawing. Without this the export would embed that error
+    // text into a learner PDF and still report success.
+    failedFigures: document.querySelectorAll(".atlas-figure-canvas p[role='alert']").length,
+    rawFigures: [...document.querySelectorAll("pre code.language-atlas-figure")].filter(
+      (node) => !node.closest(".diagram-source"),
+    ).length,
     diagrams: document.querySelectorAll(".mermaid-figure svg[role='img']").length,
+    figures: document.querySelectorAll(".atlas-figure svg[role='img']").length,
     codeBlocks: document.querySelectorAll(".lesson-code pre").length,
   }));
-  if (checks.pendingDiagrams || checks.failedMath || checks.rawMermaid) {
+  if (
+    checks.pendingDiagrams ||
+    checks.failedMath ||
+    checks.rawMermaid ||
+    checks.failedFigures ||
+    checks.rawFigures
+  ) {
     throw new Error(`${label}: render readiness failed: ${JSON.stringify(checks)}`);
   }
   await page.pdf({
@@ -128,7 +142,7 @@ try {
       ...rendered,
       sourceHash: pack.workbook.sourceHash,
     });
-    console.log(`${pack.moduleId}: ${filename} (${rendered.bytes} bytes; ${rendered.checks.diagrams} diagrams, ${rendered.checks.codeBlocks} code blocks)`);
+    console.log(`${pack.moduleId}: ${filename} (${rendered.bytes} bytes; ${rendered.checks.diagrams} diagrams, ${rendered.checks.figures} figures, ${rendered.checks.codeBlocks} code blocks)`);
   }
 } finally {
   await browser.close();

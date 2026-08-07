@@ -1,8 +1,54 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 
 const readerScales = [0.9, 1, 1.1, 1.2] as const;
+
+/**
+ * A text-size choice is a reading accommodation, not a per-page preference.
+ * The control used to reset to 100% every time the learner opened another
+ * module, so anyone who needed larger type had to set it again at each step.
+ *
+ * The preference is held in module scope rather than in browser storage. That
+ * is deliberate: `content/course/browser-progress-surfaces.v1.json` governs
+ * every localStorage key as a *learner-progress record* with an owning module,
+ * a codec, and an allowlisted data class, and a reading accommodation is none
+ * of those things. Module scope survives client-side navigation between
+ * modules, which is the reset the learner actually experienced, without
+ * putting an ungoverned key in browser storage.
+ *
+ * The cost is honest and bounded: the choice does not survive a full page
+ * reload. Making it durable needs a policy decision about whether that
+ * contract should cover interface preferences at all.
+ *
+ * It is read through `useSyncExternalStore` because it is exactly that — an
+ * external store. A `useState` initialiser would desynchronise hydration, and
+ * restoring through `setState` inside an effect causes a cascading render.
+ */
+let sessionReaderScale = 1;
+const readerScaleListeners = new Set<() => void>();
+
+function currentReaderScale(): number {
+  return sessionReaderScale;
+}
+
+function serverReaderScale(): number {
+  return 1;
+}
+
+function subscribeToReaderScale(onStoreChange: () => void) {
+  readerScaleListeners.add(onStoreChange);
+  return () => {
+    readerScaleListeners.delete(onStoreChange);
+  };
+}
+
+function writeReaderScale(nextScale: number) {
+  sessionReaderScale = nextScale;
+  for (const listener of readerScaleListeners) {
+    listener();
+  }
+}
 
 type ReadingToolsProps = {
   articleId: string;
@@ -10,16 +56,17 @@ type ReadingToolsProps = {
 
 export function ReadingTools({ articleId }: ReadingToolsProps) {
   const [progress, setProgress] = useState(0);
-  const [scale, setScale] = useState<number>(1);
+  const scale = useSyncExternalStore(subscribeToReaderScale, currentReaderScale, serverReaderScale);
 
-  const applyScale = useCallback(
-    (nextScale: number) => {
-      const article = document.getElementById(articleId);
-      article?.style.setProperty("--reader-scale", String(nextScale));
-      setScale(nextScale);
-    },
-    [articleId],
-  );
+  const applyScale = useCallback((nextScale: number) => {
+    writeReaderScale(nextScale);
+  }, []);
+
+  // Push the current scale onto the article. This updates an external system
+  // from React state, which is what an effect is for; it sets no state itself.
+  useEffect(() => {
+    document.getElementById(articleId)?.style.setProperty("--reader-scale", String(scale));
+  }, [articleId, scale]);
 
   useEffect(() => {
     let animationFrame = 0;

@@ -370,6 +370,10 @@ until you state **whose** lifecycle and **which** effect it names.
 
 ---
 
+### Session 1 output — await responsibility trace
+
+One trace shows where control was released and demonstrates that responsibility for the operation did not move with it.
+
 ## 3. Session 2 — Structured lifetime gives a boundary, not magic rollback
 
 ### Pressure
@@ -466,6 +470,10 @@ retry:
 
 ---
 
+### Session 2 output — task lifetime boundary note
+
+One note states what structured lifetime guarantees at a scope exit, and what it explicitly does not roll back.
+
 ## 4. Session 3 — Bounded admission makes overload a policy decision
 
 ### Pressure
@@ -493,7 +501,7 @@ first, fair waiting, network throughput, or upstream capacity.
 ### Queue, semaphore, and task group protect different invariants
 
 | Mechanism | Useful question | Documented/local fact | Not a substitute for |
-|---|---|---|
+|---|---|---|---|
 | `TaskGroup` | who owns child lifetime/failure cleanup? | parent owns child tasks in its scope | capacity policy |
 | `Semaphore` | how many named sections may be in flight? | local admission bound | durable queueing or fairness |
 | positive-size `asyncio.Queue` | where does local `put()` wait when full? | bounded local queue capacity | remote broker durability |
@@ -565,6 +573,10 @@ what changes? **Only** a local admission slot is available under policy.
 Nothing about catalog's upstream work is settled by that release.
 
 ---
+
+### Session 3 output — admission policy record
+
+One record turns overload from an emergent behaviour into a declared bound with a stated consequence when it is reached.
 
 ## 5. Session 4 — Partial failure is an evidence problem before it is retry code
 
@@ -698,6 +710,10 @@ local record.
 
 ---
 
+### Session 4 output — partial-failure evidence matrix
+
+One matrix maps each observation to the failure histories it is compatible with, before any retry code is written.
+
 ## 6. Session 5 — Time is a local instrument; order is a declared relation
 
 ### Pressure
@@ -789,6 +805,10 @@ For each assertion you hear, write one of these verdicts:
 | “The whole snapshot is newest.” | not established | cross-source cut/freshness contract |
 
 ---
+
+### Session 5 output — ordering and clock assumption note
+
+One note separates a local timestamp from a declared ordering relation and names the assumption each conclusion rests on.
 
 ## 7. Session 6 — Consistency and availability are choices with assumptions
 
@@ -924,6 +944,10 @@ authorization remain separate questions.
 </details>
 
 ---
+
+### Session 6 output — consistency choice dossier
+
+One dossier states the consistency and availability choice, its assumptions, and the observation that would falsify it.
 
 ## 8. The Atlas Run Control Room — visual studio text equivalent
 
@@ -1318,3 +1342,65 @@ correlation ≠ causality or trust
 one observation ≠ distributed agreement
 an allowed cut ≠ an unstated global consistency property
 ```
+
+
+## Bench pack
+
+**Bench pack:** `m21` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 21 was initially excluded wholesale as a
+distributed-systems module, and that verdict judged the subject matter rather than
+the sessions. Two of them are not about a remote peer at all — they are about
+`asyncio` semantics, which are entirely observable in this process, with no socket,
+no clock, and no second machine. Those two are benched. The four that genuinely need
+a peer are not.
+
+### Bench 2 — task lifetime boundary note
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** the reference model's `run_taskgroup_failure_probe` on the **real
+event loop**, then this bench's own `TaskGroup` in which the sibling records a
+decision *before* the failing child raises. Every guarantee is delivered — the
+sibling is cancelled, observes its own `CancelledError`, and the owner gets an
+`ExceptionGroup` — and the recorded decision is still there afterwards.
+Cancellation unwound the task, not the effect, because `CancelledError` arrives at
+the next await and everything before it already happened. A control shows an
+unstructured `create_task` outliving its failed owner while a `TaskGroup` child
+does not, so the lifetime guarantee is real and is not a transaction.
+**Cannot establish:** anything about a remote peer. No I/O of any kind, so nothing
+about whether a service saw a partial result — which is Module 20's subject.
+
+### Bench 3 — admission policy record
+
+**Session:** 3. **Rungs:** trace, review and verify.
+**Executes:** a declared single-clock queueing model — 30 arrivals at one per tick,
+a consumer taking three — under two admission policies. The unbounded queue rejects
+**nothing**: zero errors, 100% availability, and a last request that waits 61 ticks
+against the first request's 3, monotonically non-decreasing throughout. Bounding at
+4 rejects 16 arrivals and holds every admitted request under the 15-tick bound the
+capacity implies, plateauing at 13–14 ticks once the queue fills: the queue length
+*is* the latency budget. The bench also measures what that costs — 14 requests
+completed against 30 — because bounding admission is a trade with a loser, and
+naming who absorbs it is the review question.
+**Cannot establish:** anything about a real server. No variable service time, no
+bursty arrivals, and no client retries — and retries are the feedback loop that
+turns a slow system into a collapsed one.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — partial failure across a real network: a peer that may or may
+  not have received the request. An in-process kernel would have to *script* the
+  ambiguity that is supposed to be the evidence, which makes the bench a
+  restatement of its own answer.
+- **Session 5** — replica claims and collection cuts, which need ordering and
+  clocks this process does not own.
+- **Session 6** — a dossier consuming the earlier sessions rather than producing new
+  evidence.
+
+### Bench pack completion record
+
+Records under `benches/records/m21-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

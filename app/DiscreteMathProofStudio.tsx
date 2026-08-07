@@ -13,7 +13,31 @@ import {
   persistModule27Progress,
   restoreModule27Progress,
 } from "@/lib/module27-progress-codec";
+import { StudioFigure } from "./StudioFigure";
 import styles from "./DiscreteMathProofStudio.module.css";
+
+/**
+ * The graph-view fixture drawn from the same three declared edges the edge list
+ * prints. The chosen edge is solid; the two it blocks are dashed guides.
+ */
+const matchingFigureSpec = {
+  kind: "vector2d",
+  width: 420,
+  height: 240,
+  xRange: [-0.35, 2.35],
+  yRange: [0.55, 2.45],
+  segments: [
+    { from: [0, 2], to: [2, 2], style: "dashed" },
+    { from: [0, 1], to: [2, 1], style: "dashed" },
+    { from: [0, 2], to: [2, 1], label: "chosen" },
+  ],
+  points: [
+    { at: [0, 2], label: "p" },
+    { at: [0, 1], label: "q" },
+    { at: [2, 2], label: "1" },
+    { at: [2, 1], label: "2" },
+  ],
+} as const;
 
 type StudioView =
   | "scope"
@@ -847,21 +871,16 @@ export function DiscreteMathProofStudio() {
                   claiming it is globally largest.
                 </p>
                 <div className={styles.matchingBoard}>
-                  <div className={styles.matchingSide}>
-                    <strong>tasks</strong>
-                    <span>p</span>
-                    <span>q</span>
-                  </div>
+                  <StudioFigure
+                    spec={matchingFigureSpec}
+                    label="Bipartite matching: the chosen edge p to 2 blocks both remaining edges"
+                    describedById="discrete-math-matching-alternative"
+                  />
                   <div className={styles.edgeList}>
                     <strong>declared edges</strong>
                     <span>p — 1</span>
                     <span className={styles.chosenEdge}>p — 2 (chosen)</span>
                     <span>q — 2</span>
-                  </div>
-                  <div className={styles.matchingSide}>
-                    <strong>reviewers</strong>
-                    <span>1</span>
-                    <span>2</span>
                   </div>
                 </div>
                 <div className={styles.alternatingWitness}>
@@ -869,10 +888,12 @@ export function DiscreteMathProofStudio() {
                   <span>replace p—2 with p—1 and q—2</span>
                   <b>size 2</b>
                 </div>
-                <p className={styles.boundary}>
-                  Text equivalent: the selected edge uses p and 2, so neither
-                  remaining edge can be added. It is maximal. Replacing it
-                  exposes a matching of size two, so it was not maximum.
+                <p className={styles.boundary} id="discrete-math-matching-alternative">
+                  Text equivalent: tasks p and q sit on the left, reviewers 1 and
+                  2 on the right. Three declared edges run p—1, p—2, and q—2. The
+                  selected edge uses p and 2, so neither remaining edge can be
+                  added. It is maximal. Replacing it exposes a matching of size
+                  two, so it was not maximum.
                 </p>
               </section>
               <PredictionGate view="graph" {...gateProps} />

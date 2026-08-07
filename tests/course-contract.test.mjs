@@ -284,9 +284,12 @@ test("the v3 contract registry covers every legacy reader module structurally", 
   assert.equal(report.summary.legacyBaselineModules, 30);
   assert.equal(report.summary.verifiedModules, 0);
   assert.equal(report.summary.authoringOnlyModules, 6);
+  // 246 -> 251: four one-page concept maps (M27–M30) plus the M27
+  // maximal-versus-maximum matching counterexample. Every block still carries a
+  // complete authored alternative, which is the property that matters here.
   assert.deepEqual(report.mermaidAlternatives?.summary, {
-    totalBlocks: 246,
-    completeBlocks: 246,
+    totalBlocks: 251,
+    completeBlocks: 251,
     incompleteBlocks: 0,
   });
   assert.equal(

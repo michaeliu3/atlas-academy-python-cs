@@ -1171,3 +1171,48 @@ claim still needing evidence. The M4 evidence supports the M5 handoff when the
 learner can construct and explain a counterexample rather than merely name a
 theorem. Carry the input model, relation, and proof obligation into **M5**,
 where those same choices become an explicit cost model.
+
+## Bench pack
+
+**Bench pack:** `m04` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module warrants two rather than three, and
+the pack says so rather than padding. It has no checked-in reference model, so the
+benches carry their own fixtures.
+
+### Bench 3 — prerequisite-graph and cycle witness
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** three prerequisite graphs with identical field shape against a
+per-node validator, which accepts all three — including one containing a cycle.
+A white/grey/black traversal then separates the two distinct non-tree conditions:
+a shared prerequisite, which is workable, and a cycle, which is not, returned as a
+checkable edge sequence.
+**Cannot establish:** how often real prerequisite data contains cycles, or the
+cost of the traversal at scale.
+
+### Bench 4 — proof-and-probability boundary note
+
+**Session:** 4. **Rungs:** review and verify, trace.
+**Executes:** two optimisations of one specification. Ten thousand uniform random
+routes report zero disagreements for both. Exhausting all 1,771,561 routes proves
+the first correct and finds fifteen counterexamples in the second — a rate of
+8.5e-06, or 0.085 expected hits in the sample. The number of trials actually
+needed to stumble on one runs to hundreds of thousands.
+**Cannot establish:** anything outside the declared finite domain. The technique
+does not transfer to an unbounded one, where sampling is the only option.
+
+### Sessions without a bench
+
+- **Session 1**, **Session 2** — claims, quantifiers, and relation modelling are
+  specification arguments, not runs.
+- **Session 5** — its three-implementations-one-verdict experiment is already
+  benched at `m01-s4` and `m03-s4`; a third would be the same experiment.
+- **Session 6** — a review-and-evidence dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m04-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

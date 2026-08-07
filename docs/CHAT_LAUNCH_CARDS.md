@@ -2476,7 +2476,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules; reconstruct a short interleaving and state the violated or preserved invariant; what scheduling, visibility, and synchronization guarantees the reasoning needs; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a passing run rules out a race or parallelism is merely faster concurrency; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: interleaving history table → Carry the interleaving history table into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M19 · Session 1 · A second worker creates histories**
 
@@ -2498,7 +2498,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules; reconstruct a short interleaving and state the violated or preserved invariant; what scheduling, visibility, and synchronization guarantees the reasoning needs; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a passing run rules out a race or parallelism is merely faster concurrency; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: critical-section boundary note → Carry the critical-section boundary note into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M19 · Session 2 · Protect one logical transition**
 
@@ -2520,7 +2520,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules; reconstruct a short interleaving and state the violated or preserved invariant; what scheduling, visibility, and synchronization guarantees the reasoning needs; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a passing run rules out a race or parallelism is merely faster concurrency; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: ownership and permit ledger → Carry the ownership and permit ledger into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M19 · Session 3 · Predicates, permits, and item ownership**
 
@@ -2542,7 +2542,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules; reconstruct a short interleaving and state the violated or preserved invariant; what scheduling, visibility, and synchronization guarantees the reasoning needs; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a passing run rules out a race or parallelism is merely faster concurrency; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: liveness failure dossier → Carry the liveness failure dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M19 · Session 4 · Progress can fail**
 
@@ -2564,7 +2564,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules; reconstruct a short interleaving and state the violated or preserved invariant; what scheduling, visibility, and synchronization guarantees the reasoning needs; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a passing run rules out a race or parallelism is merely faster concurrency; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: execution-model decision record → Carry the execution-model decision record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M19 · Session 5 · Choose the Python execution model from first principles**
 
@@ -2586,7 +2586,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules; reconstruct a short interleaving and state the violated or preserved invariant; what scheduling, visibility, and synchronization guarantees the reasoning needs; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a passing run rules out a race or parallelism is merely faster concurrency; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: multi-worker correctness dossier → Carry the multi-worker correctness dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M19 · Session 6 · Atlas multi-worker evidence defense**
 
@@ -2612,7 +2612,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: an application protocol as a sequence of scoped messages, states, and durability claims; trace one request, response, retry, and timeout without inventing a remote fact; the protocol version, idempotency, ordering, and failure assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a local send or HTTP success proves the receiver durably applied the intended effect; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an application protocol as a sequence of scoped messages, states, and durability claims evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: name-to-candidate scope map → Carry the name-to-candidate scope map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M20 · Session 1 · A name is not a remote effect**
 
@@ -2634,7 +2634,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: an application protocol as a sequence of scoped messages, states, and durability claims; trace one request, response, retry, and timeout without inventing a remote fact; the protocol version, idempotency, ordering, and failure assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a local send or HTTP success proves the receiver durably applied the intended effect; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an application protocol as a sequence of scoped messages, states, and durability claims evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: frame admission trace → Carry the frame admission trace into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M20 · Session 2 · Transport carries bytes, not your request**
 
@@ -2656,7 +2656,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: an application protocol as a sequence of scoped messages, states, and durability claims; trace one request, response, retry, and timeout without inventing a remote fact; the protocol version, idempotency, ordering, and failure assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a local send or HTTP success proves the receiver durably applied the intended effect; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an application protocol as a sequence of scoped messages, states, and durability claims evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: response evidence rung → Carry the response evidence rung into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M20 · Session 3 · A response is evidence with a scope**
 
@@ -2678,7 +2678,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: an application protocol as a sequence of scoped messages, states, and durability claims; trace one request, response, retry, and timeout without inventing a remote fact; the protocol version, idempotency, ordering, and failure assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a local send or HTTP success proves the receiver durably applied the intended effect; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an application protocol as a sequence of scoped messages, states, and durability claims evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: HTTP-and-policy contract table → Carry the HTTP-and-policy contract table into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M20 · Session 4 · HTTP gives semantics; Atlas still owns policy**
 
@@ -2700,7 +2700,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: an application protocol as a sequence of scoped messages, states, and durability claims; trace one request, response, retry, and timeout without inventing a remote fact; the protocol version, idempotency, ordering, and failure assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a local send or HTTP success proves the receiver durably applied the intended effect; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an application protocol as a sequence of scoped messages, states, and durability claims evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: ambiguous-outcome retry ledger → Carry the ambiguous-outcome retry ledger into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M20 · Session 5 · Retry is an epistemic problem before it is a loop**
 
@@ -2722,7 +2722,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: an application protocol as a sequence of scoped messages, states, and durability claims; trace one request, response, retry, and timeout without inventing a remote fact; the protocol version, idempotency, ordering, and failure assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a local send or HTTP success proves the receiver durably applied the intended effect; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an application protocol as a sequence of scoped messages, states, and durability claims evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: remote-publication protocol dossier → Carry the remote-publication protocol dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M20 · Session 6 · Make network knowledge auditable**
 
@@ -2748,7 +2748,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: partial failure, async coordination, and recovery without pretending a distributed system has global certainty; walk through an event attempt and separate local completion, remote observation, and durable effect; the retry, ordering, timeout, and compensation assumptions behind the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to retries guarantee delivery exactly once or an awaited call made the whole workflow atomic; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact partial failure, async coordination, and recovery without pretending a distributed system has global certainty evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: await responsibility trace → Carry the await responsibility trace into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M21 · Session 1 · await releases control; it does not transfer responsibility**
 
@@ -2770,7 +2770,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: partial failure, async coordination, and recovery without pretending a distributed system has global certainty; walk through an event attempt and separate local completion, remote observation, and durable effect; the retry, ordering, timeout, and compensation assumptions behind the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to retries guarantee delivery exactly once or an awaited call made the whole workflow atomic; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact partial failure, async coordination, and recovery without pretending a distributed system has global certainty evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: task lifetime boundary note → Carry the task lifetime boundary note into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M21 · Session 2 · Structured lifetime gives a boundary, not magic rollback**
 
@@ -2792,7 +2792,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: partial failure, async coordination, and recovery without pretending a distributed system has global certainty; walk through an event attempt and separate local completion, remote observation, and durable effect; the retry, ordering, timeout, and compensation assumptions behind the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to retries guarantee delivery exactly once or an awaited call made the whole workflow atomic; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact partial failure, async coordination, and recovery without pretending a distributed system has global certainty evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: admission policy record → Carry the admission policy record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M21 · Session 3 · Bounded admission makes overload a policy decision**
 
@@ -2814,7 +2814,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: partial failure, async coordination, and recovery without pretending a distributed system has global certainty; walk through an event attempt and separate local completion, remote observation, and durable effect; the retry, ordering, timeout, and compensation assumptions behind the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to retries guarantee delivery exactly once or an awaited call made the whole workflow atomic; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact partial failure, async coordination, and recovery without pretending a distributed system has global certainty evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: partial-failure evidence matrix → Carry the partial-failure evidence matrix into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M21 · Session 4 · Partial failure is an evidence problem before it is retry code**
 
@@ -2836,7 +2836,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: partial failure, async coordination, and recovery without pretending a distributed system has global certainty; walk through an event attempt and separate local completion, remote observation, and durable effect; the retry, ordering, timeout, and compensation assumptions behind the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to retries guarantee delivery exactly once or an awaited call made the whole workflow atomic; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact partial failure, async coordination, and recovery without pretending a distributed system has global certainty evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: ordering and clock assumption note → Carry the ordering and clock assumption note into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M21 · Session 5 · Time is a local instrument; order is a declared relation**
 
@@ -2858,7 +2858,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: partial failure, async coordination, and recovery without pretending a distributed system has global certainty; walk through an event attempt and separate local completion, remote observation, and durable effect; the retry, ordering, timeout, and compensation assumptions behind the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to retries guarantee delivery exactly once or an awaited call made the whole workflow atomic; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact partial failure, async coordination, and recovery without pretending a distributed system has global certainty evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: consistency choice dossier → Carry the consistency choice dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M21 · Session 6 · Consistency and availability are choices with assumptions**
 
@@ -2884,7 +2884,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: trust boundaries among data, identity, authority, provenance, privacy, and human control; follow one sensitive action through its actor, capability, data recipient, and audit evidence; who may act, what is retained, what is reversible, and what evidence is still missing; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to authentication, encryption, or a trusted vendor automatically establishes authorization and safety; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact trust boundaries among data, identity, authority, provenance, privacy, and human control evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: trust-boundary atlas → Carry the trust-boundary atlas into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M22 · Session 1 · Trust-boundary atlas: what can Atlas lose, and where does meaning change?**
 
@@ -2906,7 +2906,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: trust boundaries among data, identity, authority, provenance, privacy, and human control; follow one sensitive action through its actor, capability, data recipient, and audit evidence; who may act, what is retained, what is reversible, and what evidence is still missing; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to authentication, encryption, or a trusted vendor automatically establishes authorization and safety; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact trust boundaries among data, identity, authority, provenance, privacy, and human control evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: identity-to-decision ladder → Carry the identity-to-decision ladder into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M22 · Session 2 · Identity-to-decision ladder: who may cause this effect?**
 
@@ -2928,7 +2928,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: trust boundaries among data, identity, authority, provenance, privacy, and human control; follow one sensitive action through its actor, capability, data recipient, and audit evidence; who may act, what is retained, what is reversible, and what evidence is still missing; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to authentication, encryption, or a trusted vendor automatically establishes authorization and safety; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact trust boundaries among data, identity, authority, provenance, privacy, and human control evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: sink-specific encoding map → Carry the sink-specific encoding map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M22 · Session 3 · Data-to-authority pipeline: why one sanitize box cannot protect every sink**
 
@@ -2950,7 +2950,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: trust boundaries among data, identity, authority, provenance, privacy, and human control; follow one sensitive action through its actor, capability, data recipient, and audit evidence; who may act, what is retained, what is reversible, and what evidence is still missing; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to authentication, encryption, or a trusted vendor automatically establishes authorization and safety; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact trust boundaries among data, identity, authority, provenance, privacy, and human control evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: cryptographic purpose map → Carry the cryptographic purpose map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M22 · Session 4 · Cryptographic purpose map: what does this primitive actually establish?**
 
@@ -2972,7 +2972,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: trust boundaries among data, identity, authority, provenance, privacy, and human control; follow one sensitive action through its actor, capability, data recipient, and audit evidence; who may act, what is retained, what is reversible, and what evidence is still missing; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to authentication, encryption, or a trusted vendor automatically establishes authorization and safety; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact trust boundaries among data, identity, authority, provenance, privacy, and human control evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: release provenance record → Carry the release provenance record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M22 · Session 5 · Release provenance and human impact: what must be true to ship responsibly?**
 
@@ -2994,7 +2994,7 @@ Availability: **legacy-open** · Arc project: **Failure-aware local protocol** �
 4. Whiteboard: trust boundaries among data, identity, authority, provenance, privacy, and human control; follow one sensitive action through its actor, capability, data recipient, and audit evidence; who may act, what is retained, what is reversible, and what evidence is still missing; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to authentication, encryption, or a trusted vendor automatically establishes authorization and safety; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact trust boundaries among data, identity, authority, provenance, privacy, and human control evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: trust and release dossier → Carry the trust and release dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M22 · Session 6 · Privacy-aware incident reconstruction: how do we learn without overclaiming?**
 
@@ -3020,7 +3020,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the separation of text, syntax tree, evaluation, type/capability boundary, and authority; parse and evaluate a small expression while naming the permitted language and environment; the language, evaluation, resource, and authority limits that must be independently enforced; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to parsing validates safety or restricting syntax automatically controls capabilities; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the separation of text, syntax tree, evaluation, type/capability boundary, and authority evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: token and form boundary note → Carry the token and form boundary note into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M23 · Session 1 · Text has form, not permission**
 
@@ -3042,7 +3042,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the separation of text, syntax tree, evaluation, type/capability boundary, and authority; parse and evaluate a small expression while naming the permitted language and environment; the language, evaluation, resource, and authority limits that must be independently enforced; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to parsing validates safety or restricting syntax automatically controls capabilities; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the separation of text, syntax tree, evaluation, type/capability boundary, and authority evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: evaluation rule table → Carry the evaluation rule table into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M23 · Session 2 · A tree gets meaning from rules**
 
@@ -3064,7 +3064,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the separation of text, syntax tree, evaluation, type/capability boundary, and authority; parse and evaluate a small expression while naming the permitted language and environment; the language, evaluation, resource, and authority limits that must be independently enforced; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to parsing validates safety or restricting syntax automatically controls capabilities; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the separation of text, syntax tree, evaluation, type/capability boundary, and authority evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: environment and closure trace → Carry the environment and closure trace into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M23 · Session 3 · Names live in environments; functions close over them**
 
@@ -3086,7 +3086,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the separation of text, syntax tree, evaluation, type/capability boundary, and authority; parse and evaluate a small expression while naming the permitted language and environment; the language, evaluation, resource, and authority limits that must be independently enforced; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to parsing validates safety or restricting syntax automatically controls capabilities; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the separation of text, syntax tree, evaluation, type/capability boundary, and authority evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: interpreter contract record → Carry the interpreter contract record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M23 · Session 4 · Contracts make invalid states visible**
 
@@ -3108,7 +3108,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the separation of text, syntax tree, evaluation, type/capability boundary, and authority; parse and evaluate a small expression while naming the permitted language and environment; the language, evaluation, resource, and authority limits that must be independently enforced; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to parsing validates safety or restricting syntax automatically controls capabilities; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the separation of text, syntax tree, evaluation, type/capability boundary, and authority evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: capability boundary note → Carry the capability boundary note into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M23 · Session 5 · Bounded evaluation receives authority, never finds it**
 
@@ -3130,7 +3130,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the separation of text, syntax tree, evaluation, type/capability boundary, and authority; parse and evaluate a small expression while naming the permitted language and environment; the language, evaluation, resource, and authority limits that must be independently enforced; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to parsing validates safety or restricting syntax automatically controls capabilities; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the separation of text, syntax tree, evaluation, type/capability boundary, and authority evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: language semantics dossier → Carry the language semantics dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M23 · Session 6 · Implementation evidence is not semantic law**
 
@@ -3156,7 +3156,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation; read a measurement and reconstruct its workload, runtime, baseline, and limitation; which version, allocator, workload, hardware, and statistical limits prevent generalization; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to one benchmark or profiler output proves a portable performance claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: runtime evidence baseline → Carry the runtime evidence baseline into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M24 · Session 1 · Evidence before optimization**
 
@@ -3178,7 +3178,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation; read a measurement and reconstruct its workload, runtime, baseline, and limitation; which version, allocator, workload, hardware, and statistical limits prevent generalization; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to one benchmark or profiler output proves a portable performance claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: alias and lifetime trace → Carry the alias and lifetime trace into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M24 · Session 2 · Objects, aliases, and lifetime**
 
@@ -3200,7 +3200,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation; read a measurement and reconstruct its workload, runtime, baseline, and limitation; which version, allocator, workload, hardware, and statistical limits prevent generalization; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to one benchmark or profiler output proves a portable performance claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: collection and ownership account → Carry the collection and ownership account into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M24 · Session 3 · Cycles, collection, and resource ownership**
 
@@ -3222,7 +3222,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation; read a measurement and reconstruct its workload, runtime, baseline, and limitation; which version, allocator, workload, hardware, and statistical limits prevent generalization; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to one benchmark or profiler output proves a portable performance claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: allocation lens comparison → Carry the allocation lens comparison into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M24 · Session 4 · Allocation and memory lenses**
 
@@ -3244,7 +3244,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation; read a measurement and reconstruct its workload, runtime, baseline, and limitation; which version, allocator, workload, hardware, and statistical limits prevent generalization; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to one benchmark or profiler output proves a portable performance claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: bytecode and frame trace → Carry the bytecode and frame trace into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M24 · Session 5 · Source, code object, frame, bytecode**
 
@@ -3266,7 +3266,7 @@ Availability: **legacy-open** · Arc project: **Inspectable language-and-evidenc
 4. Whiteboard: the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation; read a measurement and reconstruct its workload, runtime, baseline, and limitation; which version, allocator, workload, hardware, and statistical limits prevent generalization; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to one benchmark or profiler output proves a portable performance claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: performance evidence dossier → Carry the performance evidence dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M24 · Session 6 · Experiment and AI-patch review**
 
@@ -3292,7 +3292,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct; trace one suggestion from input through model/evidence, display policy, and a reversible human decision; the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a high score, agent explanation, or green evaluation creates permission to act; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: outcome definition record → Carry the outcome definition record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M25 · Session 1 · A score is not a useful outcome**
 
@@ -3314,7 +3314,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct; trace one suggestion from input through model/evidence, display policy, and a reversible human decision; the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a high score, agent explanation, or green evaluation creates permission to act; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: data lineage claim map → Carry the data lineage claim map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M25 · Session 2 · Data becomes a claim only through lineage**
 
@@ -3336,7 +3336,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct; trace one suggestion from input through model/evidence, display policy, and a reversible human decision; the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a high score, agent explanation, or green evaluation creates permission to act; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: component responsibility map → Carry the component responsibility map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M25 · Session 3 · Candidates, rankers, and models do different jobs**
 
@@ -3358,7 +3358,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct; trace one suggestion from input through model/evidence, display policy, and a reversible human decision; the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a high score, agent explanation, or green evaluation creates permission to act; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: calibration and uncertainty report → Carry the calibration and uncertainty report into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M25 · Session 4 · Evaluation, calibration, and uncertainty**
 
@@ -3380,7 +3380,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct; trace one suggestion from input through model/evidence, display policy, and a reversible human decision; the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a high score, agent explanation, or green evaluation creates permission to act; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: human control account → Carry the human control account into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M25 · Session 5 · Explanations, accessibility, and meaningful control**
 
@@ -3402,7 +3402,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct; trace one suggestion from input through model/evidence, display policy, and a reversible human decision; the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a high score, agent explanation, or green evaluation creates permission to act; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: evidence and human-control packet → Carry the evidence and human-control packet into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M25 · Session 6 · AI/agent proposals are systems, not authorities**
 
@@ -3428,7 +3428,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback; defend one architecture thread while a reviewer changes a premise or removes an evidence source; the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a polished demo, CI pass, or agent-generated dossier is a release decision; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: release boundary statement → Carry the release boundary statement into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M26 · Session 1 · Release claims begin with a boundary**
 
@@ -3450,7 +3450,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback; defend one architecture thread while a reviewer changes a premise or removes an evidence source; the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a polished demo, CI pass, or agent-generated dossier is a release decision; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: responsibility trace map → Carry the responsibility trace map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M26 · Session 2 · Architecture is a traceable set of responsibilities**
 
@@ -3472,7 +3472,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback; defend one architecture thread while a reviewer changes a premise or removes an evidence source; the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a polished demo, CI pass, or agent-generated dossier is a release decision; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: retry semantics record → Carry the retry semantics record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M26 · Session 3 · A retry is a systems event, not a duplicate line of code**
 
@@ -3494,7 +3494,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback; defend one architecture thread while a reviewer changes a premise or removes an evidence source; the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a polished demo, CI pass, or agent-generated dossier is a release decision; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: patch provenance review → Carry the patch provenance review into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M26 · Session 4 · A patch is a supply-chain and ownership proposal**
 
@@ -3516,7 +3516,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback; defend one architecture thread while a reviewer changes a premise or removes an evidence source; the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a polished demo, CI pass, or agent-generated dossier is a release decision; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: scoped operational evidence log → Carry the scoped operational evidence log into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M26 · Session 5 · Operational evidence is scoped evidence**
 
@@ -3538,7 +3538,7 @@ Availability: **preview** · Arc project: **Inspectable language-and-evidence as
 4. Whiteboard: a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback; defend one architecture thread while a reviewer changes a premise or removes an evidence source; the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a polished demo, CI pass, or agent-generated dossier is a release decision; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: versioned evidence bundle → Carry the versioned evidence bundle into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M26 · Session 6 · The defense tests the architecture, not presentation skill**
 
@@ -3564,7 +3564,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample; reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace; the missing quantifier, base case, invariant, or hypothesis that makes a claim false; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to examples prove universals or a recurrence is complete without bases and a domain; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: definition and countermodel card → Carry the definition and countermodel card into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M27 · Session 1 · Definitions, logic, and countermodels**
 
@@ -3586,7 +3586,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample; reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace; the missing quantifier, base case, invariant, or hypothesis that makes a claim false; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to examples prove universals or a recurrence is complete without bases and a domain; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: constructed proof with invariant → Carry the constructed proof with invariant into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M27 · Session 2 · Proof construction, induction, invariants, and extremal choice**
 
@@ -3608,7 +3608,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample; reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace; the missing quantifier, base case, invariant, or hypothesis that makes a claim false; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to examples prove universals or a recurrence is complete without bases and a domain; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: counting and recurrence derivation → Carry the counting and recurrence derivation into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M27 · Session 3 · Counting, recurrences, generating functions, and asymptotics**
 
@@ -3630,7 +3630,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample; reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace; the missing quantifier, base case, invariant, or hypothesis that makes a claim false; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to examples prove universals or a recurrence is complete without bases and a domain; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: graph structure argument → Carry the graph structure argument into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M27 · Session 4 · Graphs, trees, connectivity, and matchings**
 
@@ -3652,7 +3652,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample; reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace; the missing quantifier, base case, invariant, or hypothesis that makes a claim false; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to examples prove universals or a recurrence is complete without bases and a domain; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: order and divisibility record → Carry the order and divisibility record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M27 · Session 5 · Partial orders, lattices, and elementary number theory**
 
@@ -3674,7 +3674,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample; reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace; the missing quantifier, base case, invariant, or hypothesis that makes a claim false; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to examples prove universals or a recurrence is complete without bases and a domain; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: claim and constraint dossier → Carry the claim and constraint dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M27 · Session 6 · Integrate the models: proof dossier and AI review**
 
@@ -3700,7 +3700,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: linear maps, projections, rank, spectra, and conditioning as a model of representable information; derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary; the conditioning, scale, rank, and approximation assumptions behind the numerical result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a matrix formula automatically yields a stable computation or PCA is merely an API call; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact linear maps, projections, rank, spectra, and conditioning as a model of representable information evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: rank and lost-direction account → Carry the rank and lost-direction account into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M28 · Session 1 · Vectors, spaces, coordinates, rank, and lost directions**
 
@@ -3722,7 +3722,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: linear maps, projections, rank, spectra, and conditioning as a model of representable information; derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary; the conditioning, scale, rank, and approximation assumptions behind the numerical result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a matrix formula automatically yields a stable computation or PCA is merely an API call; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact linear maps, projections, rank, spectra, and conditioning as a model of representable information evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: projection and residual record → Carry the projection and residual record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M28 · Session 2 · Inner products, orthogonality, projection, and least squares**
 
@@ -3744,7 +3744,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: linear maps, projections, rank, spectra, and conditioning as a model of representable information; derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary; the conditioning, scale, rank, and approximation assumptions behind the numerical result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a matrix formula automatically yields a stable computation or PCA is merely an API call; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact linear maps, projections, rank, spectra, and conditioning as a model of representable information evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: spectral structure card → Carry the spectral structure card into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M28 · Session 3 · Eigenstructure, symmetric maps, PSD matrices, and the spectral theorem**
 
@@ -3766,7 +3766,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: linear maps, projections, rank, spectra, and conditioning as a model of representable information; derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary; the conditioning, scale, rank, and approximation assumptions behind the numerical result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a matrix formula automatically yields a stable computation or PCA is merely an API call; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact linear maps, projections, rank, spectra, and conditioning as a model of representable information evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: conditioning and stability report → Carry the conditioning and stability report into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M28 · Session 4 · SVD, low-rank approximation, conditioning, and stable computation**
 
@@ -3788,7 +3788,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: linear maps, projections, rank, spectra, and conditioning as a model of representable information; derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary; the conditioning, scale, rank, and approximation assumptions behind the numerical result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a matrix formula automatically yields a stable computation or PCA is merely an API call; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact linear maps, projections, rank, spectra, and conditioning as a model of representable information evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: representation-to-computation map → Carry the representation-to-computation map into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M28 · Session 5 · Tensors, matrix calculus, and the representation-to-computation boundary**
 
@@ -3810,7 +3810,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: linear maps, projections, rank, spectra, and conditioning as a model of representable information; derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary; the conditioning, scale, rank, and approximation assumptions behind the numerical result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a matrix formula automatically yields a stable computation or PCA is merely an API call; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact linear maps, projections, rank, spectra, and conditioning as a model of representable information evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: linear-algebra evidence dossier → Carry the linear-algebra evidence dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M28 · Session 6 · PCA from variance and low-rank approximation; representation dossier**
 
@@ -3836,7 +3836,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition; derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace; the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: limit and continuity argument → Carry the limit and continuity argument into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M29 · Session 1 · Limits, continuity, metric spaces, and compactness**
 
@@ -3858,7 +3858,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition; derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace; the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: approximation error account → Carry the approximation error account into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M29 · Session 2 · Derivatives, mean value, Taylor approximation, and finite differences**
 
@@ -3880,7 +3880,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition; derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace; the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: integration derivation record → Carry the integration derivation record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M29 · Session 3 · Integration, the Fundamental Theorem, multiple integrals, and change of variables**
 
@@ -3902,7 +3902,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition; derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace; the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: gradient contract note → Carry the gradient contract note into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M29 · Session 4 · Multivariable derivatives, gradients, Jacobians, Hessians, and code contracts**
 
@@ -3924,7 +3924,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition; derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace; the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: convergence and exchange justification → Carry the convergence and exchange justification into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M29 · Session 5 · Sequences, series, pointwise versus uniform convergence, and legal exchanges**
 
@@ -3946,7 +3946,7 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 4. Whiteboard: a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition; derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace; the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: continuous-change dossier → Carry the continuous-change dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M29 · Session 6 · Constrained extrema, ODE approximation, and the continuous-change dossier**
 
@@ -3968,18 +3968,18 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 
 1. Opening problem: Start with a small probability models, conditional structure, inference, uncertainty, and sampling assumptions mystery and make the current model explicit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: probability models, conditional structure, inference, uncertainty, and sampling assumptions; derive a Bayes, likelihood, confidence, or concentration argument before simulating it; the sampling, independence, missingness, misspecification, and multiple-testing assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact probability models, conditional structure, inference, uncertainty, and sampling assumptions evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: probability model statement → Carry the probability model statement into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M30 · Session 1 · From a story to a probability model**
 
 1. Design brief: Implement or inspect one bounded probability models, conditional structure, inference, uncertainty, and sampling assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285
+4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the probability models, conditional structure, inference, uncertainty, and sampling assumptions mechanism and the smallest remaining uncertainty.
@@ -3990,18 +3990,18 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 
 1. Opening problem: Start with a small probability models, conditional structure, inference, uncertainty, and sampling assumptions mystery and make the current model explicit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: probability models, conditional structure, inference, uncertainty, and sampling assumptions; derive a Bayes, likelihood, confidence, or concentration argument before simulating it; the sampling, independence, missingness, misspecification, and multiple-testing assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact probability models, conditional structure, inference, uncertainty, and sampling assumptions evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: moment and dependence account → Carry the moment and dependence account into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M30 · Session 2 · Expectation, variation, covariance, and information**
 
 1. Design brief: Implement or inspect one bounded probability models, conditional structure, inference, uncertainty, and sampling assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285
+4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the probability models, conditional structure, inference, uncertainty, and sampling assumptions mechanism and the smallest remaining uncertainty.
@@ -4012,18 +4012,18 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 
 1. Opening problem: Start with a small probability models, conditional structure, inference, uncertainty, and sampling assumptions mystery and make the current model explicit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: probability models, conditional structure, inference, uncertainty, and sampling assumptions; derive a Bayes, likelihood, confidence, or concentration argument before simulating it; the sampling, independence, missingness, misspecification, and multiple-testing assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact probability models, conditional structure, inference, uncertainty, and sampling assumptions evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: convergence and simulation record → Carry the convergence and simulation record into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M30 · Session 3 · Repetition, convergence, concentration, and Monte Carlo**
 
 1. Design brief: Implement or inspect one bounded probability models, conditional structure, inference, uncertainty, and sampling assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285
+4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the probability models, conditional structure, inference, uncertainty, and sampling assumptions mechanism and the smallest remaining uncertainty.
@@ -4034,18 +4034,18 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 
 1. Opening problem: Start with a small probability models, conditional structure, inference, uncertainty, and sampling assumptions mystery and make the current model explicit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: probability models, conditional structure, inference, uncertainty, and sampling assumptions; derive a Bayes, likelihood, confidence, or concentration argument before simulating it; the sampling, independence, missingness, misspecification, and multiple-testing assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact probability models, conditional structure, inference, uncertainty, and sampling assumptions evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: estimation and criticism report → Carry the estimation and criticism report into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M30 · Session 4 · Models, likelihood, estimation, and criticism**
 
 1. Design brief: Implement or inspect one bounded probability models, conditional structure, inference, uncertainty, and sampling assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285
+4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the probability models, conditional structure, inference, uncertainty, and sampling assumptions mechanism and the smallest remaining uncertainty.
@@ -4056,18 +4056,18 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 
 1. Opening problem: Start with a small probability models, conditional structure, inference, uncertainty, and sampling assumptions mystery and make the current model explicit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: probability models, conditional structure, inference, uncertainty, and sampling assumptions; derive a Bayes, likelihood, confidence, or concentration argument before simulating it; the sampling, independence, missingness, misspecification, and multiple-testing assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact probability models, conditional structure, inference, uncertainty, and sampling assumptions evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: inference boundary report → Carry the inference boundary report into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M30 · Session 5 · Intervals, tests, multiplicity, and resampling**
 
 1. Design brief: Implement or inspect one bounded probability models, conditional structure, inference, uncertainty, and sampling assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285
+4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the probability models, conditional structure, inference, uncertainty, and sampling assumptions mechanism and the smallest remaining uncertainty.
@@ -4078,18 +4078,18 @@ Availability: **legacy-open** · Arc project: **Mathematical and reliable-learni
 
 1. Opening problem: Start with a small probability models, conditional structure, inference, uncertainty, and sampling assumptions mystery and make the current model explicit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: probability models, conditional structure, inference, uncertainty, and sampling assumptions; derive a Bayes, likelihood, confidence, or concentration argument before simulating it; the sampling, independence, missingness, misspecification, and multiple-testing assumptions; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
-7. Artifact and handoff: A compact probability models, conditional structure, inference, uncertainty, and sampling assumptions evidence card → Carry the session artifact into the Study Partner design brief and visible implementation loop.
+7. Artifact and handoff: scientific inference dossier → Carry the scientific inference dossier into the Study Partner design brief and visible implementation loop.
 
 **Study Partner — Atlas Study Partner · M30 · Session 6 · Design, criticism, missingness, robustness, and dimension**
 
 1. Design brief: Implement or inspect one bounded probability models, conditional structure, inference, uncertainty, and sampling assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 283–285
+4. Starter slice: `content/modules/30_probability_statistics_scientific_inference.md` lines 287–289
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the probability models, conditional structure, inference, uncertainty, and sampling assumptions mechanism and the smallest remaining uncertainty.
@@ -4376,7 +4376,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: With the Study Partner, name the alphabet, language, grammar or machine, and question; identify which parts are syntax and which are semantic claims.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable; classify a small language or reconstruct a reduction while preserving the yes/no relationship; the computational model, input encoding, reduction direction, and resource definition; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to NP means impossible, a parser solves every language question, or a hard instance proves a class claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4387,7 +4387,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333
+4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: NP means impossible, a parser solves every language question, or a hard instance proves a class claim
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable mechanism and the smallest remaining uncertainty.
@@ -4398,7 +4398,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Before tracing a recognizer, predict what finite state can remember and name the proof obligation that would justify a universal limit.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable; classify a small language or reconstruct a reduction while preserving the yes/no relationship; the computational model, input encoding, reduction direction, and resource definition; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to NP means impossible, a parser solves every language question, or a hard instance proves a class claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4409,7 +4409,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333
+4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: NP means impossible, a parser solves every language question, or a hard instance proves a class claim
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable mechanism and the smallest remaining uncertainty.
@@ -4420,7 +4420,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: State the input encoding, machine, acceptance or halting condition, and property before deciding whether the machine answers the intended question.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable; classify a small language or reconstruct a reduction while preserving the yes/no relationship; the computational model, input encoding, reduction direction, and resource definition; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to NP means impossible, a parser solves every language question, or a hard instance proves a class claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4431,7 +4431,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333
+4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: NP means impossible, a parser solves every language question, or a hard instance proves a class claim
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable mechanism and the smallest remaining uncertainty.
@@ -4442,7 +4442,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Write the source and target languages, transformation direction, resource bound, and required iff statement before calling two problems reducible.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable; classify a small language or reconstruct a reduction while preserving the yes/no relationship; the computational model, input encoding, reduction direction, and resource definition; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to NP means impossible, a parser solves every language question, or a hard instance proves a class claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4453,7 +4453,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333
+4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: NP means impossible, a parser solves every language question, or a hard instance proves a class claim
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable mechanism and the smallest remaining uncertainty.
@@ -4464,7 +4464,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Name the encoded language, computation model, resource bound, and membership or hardness direction before invoking a complexity class.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable; classify a small language or reconstruct a reduction while preserving the yes/no relationship; the computational model, input encoding, reduction direction, and resource definition; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to NP means impossible, a parser solves every language question, or a hard instance proves a class claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4475,7 +4475,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333
+4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: NP means impossible, a parser solves every language question, or a hard instance proves a class claim
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable mechanism and the smallest remaining uncertainty.
@@ -4486,7 +4486,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Choose one formal claim and rehearse its definitions, proof skeleton, smallest counterexample boundary, and practical non-claim with the Study Partner.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable; classify a small language or reconstruct a reduction while preserving the yes/no relationship; the computational model, input encoding, reduction direction, and resource definition; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to NP means impossible, a parser solves every language question, or a hard instance proves a class claim; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4497,7 +4497,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 323–333
+4. Starter slice: `content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md` lines 338–348
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: NP means impossible, a parser solves every language question, or a hard instance proves a class claim
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable mechanism and the smallest remaining uncertainty.
@@ -4512,7 +4512,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: With the Study Partner, list the state variables, actions, costs, observations, and one omitted factor before choosing a search method.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions; defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions; the state abstraction, heuristic, objective, and uncertainty assumptions that change the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4523,7 +4523,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264
+4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions mechanism and the smallest remaining uncertainty.
@@ -4534,7 +4534,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Trace one frontier policy, then name the cost, heuristic, duplicate-handling, and termination assumptions needed for its claim.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions; defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions; the state abstraction, heuristic, objective, and uncertainty assumptions that change the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4545,7 +4545,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264
+4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions mechanism and the smallest remaining uncertainty.
@@ -4556,7 +4556,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Mark which candidates are feasible in the original model and which values are only relaxation bounds before reading a solver result.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions; defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions; the state abstraction, heuristic, objective, and uncertainty assumptions that change the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4567,7 +4567,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264
+4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions mechanism and the smallest remaining uncertainty.
@@ -4578,7 +4578,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Map the symbolic state update, constraints, solver status, and one unencoded cause that the system therefore cannot know.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions; defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions; the state abstraction, heuristic, objective, and uncertainty assumptions that change the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4589,7 +4589,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264
+4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions mechanism and the smallest remaining uncertainty.
@@ -4600,7 +4600,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Write belief, utility, and decision authority in separate lines; predict how changing one can change an action without changing the others.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions; defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions; the state abstraction, heuristic, objective, and uncertainty assumptions that change the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4611,7 +4611,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264
+4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions mechanism and the smallest remaining uncertainty.
@@ -4622,7 +4622,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 
 1. Opening problem: Draft a one-sentence recommendation, then attach its representation, algorithm conditions, evidence, limitation, accountable owner, and next falsifier.
 2. Prediction: Before the reveal, predict the next state, output, proof step, or numerical result and give a confidence from 0–100.
-3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
+3. Bounded walk: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279 — Show only this small slice first; explain each meaningful line, state change, cost, proof obligation, and system boundary.
 4. Whiteboard: problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions; defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions; the state abstraction, heuristic, objective, and uncertainty assumptions that change the result; display math, labelled fenced code, diagram, and prose/ASCII fallback
 5. State trace: before → line → after using line, bindings/objects or symbols, control flow, representation/cost, claim and boundary.
 6. Changed premise: Change one input, invariant, premise, or assumption related to a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe; ask what changes and why. Pause: Pause for learner questions after the first trace and before the changed-premise reveal.
@@ -4633,7 +4633,7 @@ Availability: **authoring-only** · Arc project: **Mathematical and reliable-lea
 1. Design brief: Implement or inspect one bounded problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions slice for Mathematical and reliable-learning notebook.
 2. Before patch: State intent, system boundary, non-goals, constraints, and one safety/privacy concern.; Predict behavior and give confidence before the first patch.; Name the invariant, proof condition, or observable acceptance criterion.
 3. Architecture: Draw the smallest data-flow, state, call-graph, or proof map before writing code.
-4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 258–264
+4. Starter slice: `content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md` lines 273–279
 5. Visible loop: write one visible incremental patch → explain each meaningful line and state transition → run a bounded test/trace or label it honestly as simulated/unverified → inject one failure, changed requirement, or counterexample → debug the smallest repair → review the diff against contract, tests, privacy/accessibility, and cost → ask the learner to explain the mechanism and record one non-claim
 6. Failure injection: a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe
 7. Done/review: Generated code remains visible and reviewable; no opaque solution dump.; Observed execution is separated from prediction, simulation, assumption, and unverified claim.; One failure, counterexample, changed premise, or boundary is investigated.; The learner can explain the problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions mechanism and the smallest remaining uncertainty.

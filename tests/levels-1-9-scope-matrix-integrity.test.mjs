@@ -12,7 +12,21 @@ const availabilityStates = new Set([
   "authoring-only",
 ]);
 
-test("Levels 1–9 audit maps every target to graph-backed delivery evidence", async () => {
+/**
+ * This suite checks the *shape* of the Levels 1–9 scope matrix: that every
+ * topic has an id, a label, target capabilities, an evidence artifact, and
+ * graph-backed anchors whose modules exist and whose states are internally
+ * consistent.
+ *
+ * It deliberately says nothing about whether any target is taught. A topic can
+ * satisfy every assertion here while its anchor module contains none of the
+ * subject — which is exactly the case at Levels 6 to 9, where all 16 and all
+ * 12 targets respectively are anchored to reader-visible modules that hold no
+ * inference algorithm and no linguistic material. `levels-1-9-coverage.test.mjs`
+ * is the suite that measures delivery; this one only stops the map from
+ * becoming malformed.
+ */
+test("Levels 1–9 scope matrix is structurally well formed", async () => {
   const graph = await loadCourseGraph();
   const modulesById = new Map(graph.modules.map((courseModule) => [courseModule.id, courseModule]));
   const tracksById = new Map(graph.scopeMatrix.extensionTracks.map((track) => [track.id, track]));

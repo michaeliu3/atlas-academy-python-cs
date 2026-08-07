@@ -2401,3 +2401,53 @@ to retain or export this summary; no automatic external write is assumed.
 Carry one sequence invariant, ownership boundary, and cost comparison into
 **M7**. The next module turns access order and demand timing into explicit
 stack, queue, iterator, and generator contracts.
+
+## Bench pack
+
+**Bench pack:** `m06` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 3 — growth-and-capacity evidence card
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** the capacity ladder in pointer slots across 2,000 appends. Growth
+is geometric at a factor near 1.13 — not the doubling used to illustrate the
+amortized argument — and a modelled constant-bump policy needs many times more
+reallocations. Separates the portable guarantee from the interpreter's arithmetic.
+**Cannot establish:** that the factor is documented or stable. It is one build's
+tuning, and the slot conversion assumes 8-byte pointers.
+
+### Bench 4 — linked-invariant and boundary-transition trace
+
+**Session:** 4. **Rungs:** debug and defend, trace.
+**Executes:** a three-clause invariant checked after every boundary transition.
+The first failure is the tail pointer on emptying, with the other two clauses
+still true; the damage then propagates into the next append, which also breaks
+length agreement. The first violated clause names the cause; the rest are fallout.
+**Cannot establish:** correctness of the repair under every operation sequence,
+and it tests no concurrent access.
+
+### Bench 5 — memory-scope and architecture memo
+
+**Session:** 5. **Rungs:** trace, map.
+**Executes:** `sys.getsizeof` on a list of 10,000 objects — about 8.5 bytes per
+element, pointer-sized — against a sum one level deep that is roughly 19× larger.
+Then a contiguous scan against a pointer-chasing scan at the same complexity.
+**Cannot establish:** that the timing gap is cache behaviour. Locality, attribute
+lookup, and iteration machinery all vary at once, so the ratio is labelled a
+hypothesis rather than a measurement of locality.
+
+### Sessions without a bench
+
+- **Session 1** — the workbook walks the object graph through in print.
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a decision-and-handoff dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m06-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

@@ -54,3 +54,11 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
+
+# Bench layer. Source of truth is benches/src/**/*.py (jupytext py:percent).
+# Notebooks are generated on demand; records are the learner's own evidence.
+/benches/.venv/
+/benches/build/
+/benches/records/
+benches/**/*.ipynb
+.ipynb_checkpoints/

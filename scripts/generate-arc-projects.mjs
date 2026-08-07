@@ -117,8 +117,18 @@ const projects = arcDefinitions.map((definition) => ({
       number,
       title: graphModule.title,
       scope: `One bounded implementation, trace, proof, or experiment for ${guide?.centralModel ?? graphModule.purpose}.`,
-      learnerArtifact: `A reviewed ${guide?.traceOrDerivation ?? "mechanism trace"} with one assumption, one changed-premise result, and one non-claim.`,
-      status: "scaffold",
+      // `traceOrDerivation` is authored as an imperative verb phrase because its
+      // other consumers read "Ask me to ${…}" / "explain or trace: ${…}". It
+      // therefore needs a verb slot here too; dropping it into a noun slot
+      // produced "A reviewed derive least squares…" for all 36 slices.
+      learnerArtifact: `A reviewed artifact in which you ${guide?.traceOrDerivation ?? "trace one mechanism"}, with one assumption, one changed-premise result, and one non-claim.`,
+      // The companion guide authors five fields per module; a slice that
+      // carried only the central model and the trace left the misconception,
+      // boundary, and transfer unused, so every slice in an arc read alike.
+      misconceptionToRepair: guide?.misconception ?? null,
+      boundaryToName: guide?.boundary ?? null,
+      transferTarget: guide?.transfer ?? null,
+      status: guide ? "derived-from-companion-guide" : "scaffold",
     };
   }),
   acceptanceCriteria: [

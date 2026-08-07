@@ -354,6 +354,10 @@ finite checker for a declared relation, not as a theorem prover.
 
 ---
 
+### Session 1 output — definition and countermodel card
+
+One card states a definition precisely and exhibits the smallest countermodel that separates it from a near-miss.
+
 ## 4. Session 2 — Proof construction, induction, invariants, and extremal choice
 
 ### Pressure
@@ -529,6 +533,10 @@ If this explanation feels unclear, do not add notation. Draw prefixes of size
 0, 1, and 2 and state the invariant at each.
 ---
 
+### Session 2 output — constructed proof with invariant
+
+One proof is constructed rather than recalled, and names the invariant or extremal choice that carries it.
+
 ## 5. Session 3 — Counting, recurrences, generating functions, and asymptotics
 
 ### Pressure
@@ -547,7 +555,7 @@ by giving an invertible one-to-one correspondence.
 
 | Rule | Safe form | Boundary that breaks a careless use |
 | --- | --- | --- |
-| Addition | \( |A\cup B|=|A|+|B| \) if \(A\cap B=\varnothing\). | “Tasks requiring proof or graphs” double-counts tasks requiring both. |
+| Addition | \( \lvert A\cup B\rvert=\lvert A\rvert+\lvert B\rvert \) if \(A\cap B=\varnothing\). | “Tasks requiring proof or graphs” double-counts tasks requiring both. |
 | Product | a choices then b choices yields ab ordered pairs. | The second choice may depend on the first; count the actual branch sizes. |
 | Bijection | Map each object to exactly one distinct object and back. | A rule that loses information is not a bijection. |
 | Pigeonhole | More objects than boxes force a shared box. | You must name the objects, boxes, and mapping; “many” is not a bound. |
@@ -708,6 +716,10 @@ Trace n=0, n=1, and n=4. Then answer:
 
 ---
 
+### Session 3 output — counting and recurrence derivation
+
+One derivation counts a structure, states its recurrence, and gives an asymptotic bound with its assumption.
+
 ## 6. Session 4 — Graphs, trees, connectivity, and matchings
 
 ### Pressure
@@ -772,10 +784,14 @@ condition. It is **maximum** if no other matching contains more edges.
 
 **[COUNTEREXAMPLE]** In the three-edge path:
 
-~~~text
-left p — right 1
-left p — right 2
-left q — right 2
+~~~mermaid
+%% atlas-diagram-id: m27-maximal-not-maximum
+%% atlas-diagram-title: A maximal matching that is not maximum
+%% atlas-diagram-alt: A bipartite graph with left vertices p and q and right vertices 1 and 2. Edges join p to 1, p to 2, and q to 2. Choosing the single edge from p to 2 is maximal, because the other two edges each reuse p or 2 and so cannot be added. It is not maximum: taking p to 1 together with q to 2 covers both left vertices with two edges. The greedy choice was locally valid and globally worse.
+flowchart LR
+  P["p"] ---|"available"| R1["1"]
+  P ===|"greedy pick"| R2["2"]
+  Q["q"] ---|"now blocked"| R2
 ~~~
 
 The single edge \(p\text{—}2\) is maximal: adding either remaining edge
@@ -833,6 +849,10 @@ appears. In its matching pane:
 
 
 ---
+
+### Session 4 output — graph structure argument
+
+One argument establishes a connectivity, tree, or matching property and names the hypothesis it requires.
 
 ## 7. Session 5 — Partial orders, lattices, and elementary number theory
 
@@ -959,6 +979,10 @@ Before running it:
 
 ---
 
+### Session 5 output — order and divisibility record
+
+One record states an order-theoretic or number-theoretic property and the smallest example that witnesses it.
+
 ## 8. Session 6 — Integrate the models: proof dossier and AI review
 
 ### Pressure
@@ -1035,6 +1059,10 @@ actually establish?**
 | 6 | evidence integration and AI review | what premise changes the result? | Atlas proof dossier + oral summary | M28–M36 and M26 capstone |
 
 ---
+
+### Session 6 output — claim and constraint dossier
+
+One dossier collects the module's claims with their constraints, and rejects one AI-proposed proof step that does not follow.
 
 ## 9. Proof & Counterexample Workbench
 
@@ -1541,6 +1569,42 @@ code/model reading, dossier evidence, and later transfer.
 
 ## 15. Spaced review and mastery gate
 
+### One-page concept map
+
+M27 is one discipline applied to four kinds of object: say exactly what you
+claim, then earn it.
+
+~~~mermaid
+%% atlas-diagram-id: m27-concept-map
+%% atlas-diagram-title: How M27's ideas depend on one another
+%% atlas-diagram-alt: A precise claim needs a named domain and quantifier order, which fix the proof obligation. That obligation is met by a direct or contrapositive argument, by contradiction, by induction with a decreasing measure, or refuted by one counterexample. Sets, relations, and functions supply the objects, and specialise into counting, graphs, partial orders, and modular arithmetic. Counting leads to recurrences and generating functions, and then to asymptotic growth. Every route ends at the same boundary: what the argument does not establish.
+flowchart TB
+  CLAIM["a precise claim"] --> DOM["named domain"]
+  CLAIM --> QUANT["quantifier order"]
+  DOM --> OBL["proof obligation"]
+  QUANT --> OBL
+  OBL --> DIRECT["direct / contrapositive"]
+  OBL --> CONTRA["contradiction"]
+  OBL --> IND["induction + decreasing measure"]
+  OBL --> CEX["counterexample refutes a universal"]
+  OBJ["sets, relations, functions"] --> CLAIM
+  OBJ --> COUNT["counting"]
+  OBJ --> GRAPH["graphs, trees, matchings"]
+  OBJ --> ORDER["partial orders + lattices"]
+  OBJ --> NUM["modular arithmetic"]
+  COUNT --> REC["recurrences + generating functions"]
+  REC --> ASYM["asymptotic growth"]
+  DIRECT --> BOUND["what this does not establish"]
+  CONTRA --> BOUND
+  IND --> BOUND
+  CEX --> BOUND
+  ASYM --> BOUND
+~~~
+
+The map has no arrow from a finite trace to a proof, and that absence is the
+module. Every route reaches `BOUND` because naming what an argument fails to
+cover is part of making the argument, not an apology for it.
+
 ### Retrieval queue
 
 | When | Prompt |
@@ -1612,3 +1676,49 @@ separate from discrete mathematics: their correctness depends on the same
 domain, relation, induction, and counting habits. In the Study Partner chat,
 rehearse one invariant under a changed operation; in the TA chat, defend why a
 finite test trace is useful evidence but not a universal proof.
+
+## 17. Bench pack
+
+**Bench pack:** `m27` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. These benches **import and probe** the checked-in
+reference model rather than reimplementing it, so they are code-reading exercises
+that happen to execute.
+
+### Bench 1 — definition and countermodel card
+
+**Session:** 1. **Rungs:** recognize, trace.
+**Executes:** an exhaustive search over relations on one, two, and three nodes for
+the smallest reflexive-and-transitive relation that is not an equivalence.
+**Cannot establish:** minimality for separations that turn on transitivity rather
+than symmetry — a different search.
+
+### Bench 3 — counting and recurrence derivation
+
+**Session:** 3. **Rungs:** review and verify, trace.
+**Executes:** the binomial identity against `binomial_coefficient`, then two closed
+forms for the circle-region count that agree on five terms and part on the sixth.
+**Cannot establish:** that the derived form is correct. One divergence refutes the
+guess; correctness comes from the counting argument.
+
+### Bench 4 — graph structure argument
+
+**Session:** 4. **Rungs:** debug and defend, recognize.
+**Executes:** greedy matching under two edge orders on a three-edge path — maximal
+at size one under the first, maximum at size two under the second — then exhausts
+all smaller graphs to establish the witness is minimal.
+**Cannot establish:** how badly greedy can fail in general. The reference's
+exhaustive comparison is bounded at twelve edges and says so.
+
+### Sessions without a bench
+
+- **Session 2**, **Session 5** — each qualifies on the rubric and ranked below this
+  pack's cut. Sparse packs cap at three.
+- **Session 6** — a dossier consuming Sessions 1–5 rather than producing new evidence.
+
+### Bench pack completion record
+
+Records under `benches/records/m27-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

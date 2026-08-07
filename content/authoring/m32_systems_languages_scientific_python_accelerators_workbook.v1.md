@@ -1438,6 +1438,37 @@ This is a dossier rubric, not a score or a pass/fail certification.
 
 ---
 
+## One-page concept map
+
+M32 is about the distance between what a line of Python says and what the
+machine does, and about which of those two a measurement describes.
+
+~~~mermaid
+%% atlas-diagram-id: m32-concept-map
+%% atlas-diagram-title: How M32's ideas depend on one another
+%% atlas-diagram-alt: A public interface implies a data contract, which fixes dtype, shape, and strides. That representation decides whether an operation is a view or a copy and whether broadcasting allocates a temporary. Crossing into native code or an accelerator adds a device and a buffer lifetime, so execution becomes asynchronous and needs explicit events before any timing means anything. Autodiff transforms a recorded computation under framework and dtype rules. Only a measurement with a declared clock, workload, and repetition supports a limited performance claim.
+flowchart TB
+  API["public interface"] --> CONTRACT["data contract"]
+  CONTRACT --> REP["dtype, shape, strides"]
+  REP --> VIEW["view or copy"]
+  REP --> TEMP["broadcast temporaries"]
+  CONTRACT --> NATIVE["native / accelerator boundary"]
+  NATIVE --> BUF["device + buffer lifetime"]
+  BUF --> ASYNC["asynchronous execution"]
+  ASYNC --> EVENT["explicit events before timing"]
+  REP --> AD["autodiff over a recorded graph"]
+  AD --> PREC["mixed-precision policy"]
+  EVENT --> MEAS["declared clock, workload, repetition"]
+  VIEW --> MEAS
+  TEMP --> MEAS
+  PREC --> MEAS
+  MEAS --> CLAIM["one limited performance claim"]
+~~~
+
+`ASYNC → EVENT → MEAS` is the chain that most benchmark reports skip. Without
+an event boundary the clock measures queueing rather than work, and the number
+that results is not wrong so much as about something else.
+
 ## Graduated problem ladder
 
 The ladder moves from reading a boundary to defending a bounded systems claim.
@@ -1864,3 +1895,82 @@ provenance, and human approval. Hardware, compiler, framework, and benchmark
 claims also need their own versioned evidence records. Until then this remains
 an authoring artifact—not a published module, navigable route, deployment
 claim, oral-defense result, or learner mastery claim.
+
+## Bench pack
+
+**Bench pack:** `m32` — sparse, two benches. CPython 3.12 floor. Bench 3 requires
+`numpy`.
+**Visibility:** private guided study — this module is authoring-only, so the pack is
+not reader-facing.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Bench 3 is the one bench in the corpus with a
+third-party dependency, and that is not incidental: its subject **is** array metadata,
+and shape, dtype, and strides are numpy's own concepts.
+
+Nothing here touches an accelerator. The workbook itself concedes a "CPU-only imagined
+queue" for the device sessions, and those are not benched.
+
+### Bench 3 — Layout-Numerics Note
+
+**Session:** 3. **Rungs:** trace, debug and defend.
+**Executes:** four views over one buffer. `BASE[:, ::-1]` has the **same shape and the
+same dtype** as its base — and strides `(32, -8)` against `(32, 8)`, is not
+C-contiguous, shares memory, and returns different `tobytes()`. A write to `BASE[0, 0]`
+is visible through the view; an `ascontiguousarray` copy with *identical* shape and
+dtype is unaffected. So a function signature, a type annotation, and an `isinstance`
+check all see the same thing while the two behave oppositely.
+
+A view-versus-copy sweep then finds `reshape`, `transpose`, slicing, and `ravel`
+returning views while `astype` allocates **even to the dtype the array already has** —
+and nothing in the call syntax distinguishes them.
+
+**Array metadata is part of the algorithm.** Shape and dtype say what the values mean;
+strides say how they are reached, and that decides copying, aliasing, and whether a
+foreign library can accept the buffer.
+
+**Cannot establish:** any performance claim. Nothing is timed — the access-order cost
+is argued from bench `m17-s4`'s declared cache model. It touches no device memory and
+no kernel dispatch, and which operations return views is a numpy implementation detail
+that has changed across versions.
+
+### Bench 5 — Autodiff-Execution Trace
+
+**Session:** 5. **Rungs:** trace, debug and defend.
+**Executes:** forward-mode autodiff via twenty lines of dual-number operator
+overloading, on `f(x) = x·sin(x) + exp(2x)`. It matches the hand-derived derivative
+**exactly** — difference 0.0 — with the same function body running unchanged on floats
+and on duals. Autodiff is a program transformation, not symbolic differentiation and
+not finite differences.
+
+A 14-step sweep then shows the finite-difference error is **not monotone**: it falls,
+bottoms out at h = 1e-8 for forward differences and h = 1e-6 for central, then *rises*
+— truncation error shrinking with h while cancellation error grows. At h = 1e-14 the
+forward estimate is worse than it was at 1e-4.
+
+Then the review point: a deliberately wrong gradient, differing from the truth by
+9.0e-8, **passes** a central-difference check at three of four tolerances. A gradient
+check compares two estimates and reports agreement; if it disagrees you do not know
+which side is wrong, and the finite-difference side has a knob that changes its answer.
+
+**Cannot establish:** anything about reverse mode, which is what real training uses and
+has the opposite cost structure — one pass per *output* rather than per input. It does
+not exercise control flow, where autodiff differentiates the branch taken and not the
+function, nor non-differentiable points, and it measures no memory, which is reverse
+mode's real cost.
+
+### Sessions without a bench
+
+- **Session 1** — the boundary contract map is a design argument about which layer
+  owns what.
+- **Session 2** — execution transfer across a device boundary.
+- **Session 4** — buffer ownership across that same boundary. For both, the workbook
+  concedes a CPU-only imagined queue, so a bench would be scripting the answer it
+  claims to observe.
+- **Session 6** — a dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m32-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

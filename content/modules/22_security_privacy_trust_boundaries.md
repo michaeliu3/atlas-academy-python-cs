@@ -293,6 +293,10 @@ Complete this sentence in your notes:
 
 ---
 
+### Session 1 output — trust-boundary atlas
+
+One atlas marks every point where Atlas data changes hands, and states what meaning can be lost at each.
+
 ## 3. Session 2 — Identity-to-decision ladder: who may cause this effect?
 
 ### Pressure
@@ -433,6 +437,10 @@ Create a four-row authority table:
 | same operation ID, different subject | atlas-learning | guide-042 | status | recovery | current model state | new policy decision |
 +
 ---
+
+### Session 2 output — identity-to-decision ladder
+
+One ladder traces a request from claimed identity to authorized effect, naming the rung where authority is actually decided.
 
 ## 4. Session 3 — Data-to-authority pipeline: why one sanitize box cannot protect every sink
 
@@ -584,6 +592,10 @@ Finish these statements:
 
 ---
 
+### Session 3 output — sink-specific encoding map
+
+One map shows why a single sanitize step cannot protect sinks with different grammars, and assigns an encoding to each.
+
 ## 5. Session 4 — Cryptographic purpose map: what does this primitive actually establish?
 
 ### Pressure
@@ -682,6 +694,10 @@ need → mechanism → trust assumption → evidence → nonclaim → lifecycle 
 If you cannot fill the nonclaim, you are likely over-promoting the mechanism.
 
 ---
+
+### Session 4 output — cryptographic purpose map
+
+One map states what each primitive establishes — confidentiality, integrity, authenticity, or freshness — and what it does not.
 
 ## 6. Session 5 — Release provenance and human impact: what must be true to ship responsibly?
 
@@ -794,6 +810,10 @@ D. “Log more raw diagnostics to help support.”
 | user message | explains next action | leaks tenant/system detail if excessive | minimal accessible wording | product/support owner |
 +
 ---
+
+### Session 5 output — release provenance record
+
+One record states what must be true about an artifact's origin before it ships, and who owns each claim.
 
 ## 7. Session 6 — Privacy-aware incident reconstruction: how do we learn without overclaiming?
 
@@ -958,6 +978,10 @@ sentence beginning “Atlas does not know whether…”. Keeping UNKNOWN visible
 mastery skill.
 
 ---
+
+### Session 6 output — trust and release dossier
+
+One dossier reconstructs an incident without overclaiming: what was observed, what was inferred, and what remains unknown.
 
 ## 8. Atlas Trust Control Room — visual studio text equivalent
 
@@ -1329,3 +1353,76 @@ central rule:
 
 > A parsed expression is data until a declared evaluator gives it bounded
 > meaning and a narrow, authorized capability.
+
+
+## Bench pack
+
+**Bench pack:** `m22` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Nothing in this pack opens a connection, extracts
+an archive, runs a shell, or contacts anything — the reference model reports
+`connection_opened=False` and `adapter_called=False`, because the decisions under
+test are decisions about *metadata and structure*, made before any effect.
+
+### Bench 2 — identity-to-decision ladder
+
+**Session:** 2. **Rungs:** review and verify, recognize.
+**Executes:** one authenticated subject against a policy context with six
+dimensions — subject, tenant, resource, action, purpose, policy version. Varying
+**any single one** while holding the other five fixed is refused, and
+authentication succeeds in all six cases: a genuine user of the wrong tenant, the
+right tenant and wrong document, read-instead-of-delete, the same read for a
+different *purpose*, and a decision evaluated under a superseded policy version.
+The model names the two refusals differently — `DENIED_AUTHENTICATION` against
+`DENIED_AUTHORIZATION` — so the ladder is in the vocabulary rather than in the
+documentation, and a permitted decision returns an *effect scope* rather than a
+boolean, keeping what was permitted attached to the permission.
+
+The result: authorization is a decision about a **tuple**, not about a user, so
+caching "this user is allowed" has discarded five of six dimensions.
+
+**Cannot establish:** anything about a real authorization system. Nothing is
+authenticated for real, no credential is verified, and the model covers no role
+inheritance, delegation, or revocation.
+
+### Bench 3 — sink-specific encoding map
+
+**Session:** 3. **Rungs:** debug and defend, recognize.
+**Executes:** one string — carrying a traversal, an SQL quote, and a script tag —
+sent to five sinks. The reference planner refuses it at a **character allowlist**
+before parameterization is reached; with that allowlist removed, binding alone
+still keeps it out of the statement text, so for the value sink the allowlist is
+defence in depth rather than the defence. As an **SQL identifier** the relationship
+inverts exactly: binding produces a query that sorts by a constant rather than by
+the column (no error, no injection, and not the query anyone wanted), interpolation
+places the string into executable SQL, and the allowlist becomes the *only* control
+that refuses it. The archive policy rejects it as a member path without extracting.
+HTML escaping neutralises the angle brackets and leaves the traversal completely
+intact — an encoder for the wrong grammar is not a partial defence.
+
+The result worth carrying: **the same mechanism is redundant in one sink and
+load-bearing in the next**, so ranking defences as strong or weak in the abstract is
+what produces a codebase that parameterizes diligently and interpolates its column
+names.
+
+**Cannot establish:** a successful exploit against any real system. It enumerates no
+application's actual sinks, and says nothing about second-order injection or
+grammars whose parsers disagree with their specifications — where real incidents
+usually live.
+
+### Sessions without a bench
+
+- **Session 1** — the trust-boundary atlas is a design argument about where the
+  boundaries are.
+- **Session 4** — cryptographic purpose selection is an argument about which
+  primitive answers which question. Running one would demonstrate that a library
+  computes, not that the choice was right.
+- **Session 5** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a trust and release dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m22-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.
