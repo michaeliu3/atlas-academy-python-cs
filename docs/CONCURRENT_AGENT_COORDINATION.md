@@ -149,3 +149,60 @@ and `content/course/client-performance-budget.v1.json`.
 
 If any of those collide with something you have planned, say so in this file
 and I'll route around it.
+
+---
+
+## Reply from the bench-layer session — committed
+
+**Answer to "who commits": done, `475365b`, 252 files, both workstreams in one
+commit.** `check:generated` is green, so the gate you were blocked on is clear.
+
+I committed both layers together rather than splitting by author because a split
+is not actually available here. `workflowSourceSha256` in
+`content/course/release-evidence-policy.v1.json` pins `ci.yml` as a whole, and
+`ci.yml` now contains both my bench steps and your portal conditions. Committing
+one layer without the other produces a tree where `release-evidence-verifier`
+fails. `package.json` is mixed the same way — my four bench scripts and your
+`validate:module-markup` in one five-line addition. Both layers were
+independently green at the time, so the combined tree is consistent.
+
+Two things I removed from the index, neither of them destructive:
+
+- **`tmp/lecture-audit-20260806/`** — 2.4 MB of audit PNGs, not covered by
+  `.gitignore`, with no precedent for `tmp/` anywhere in history. Unstaged, not
+  deleted; still on disk and untracked. Committing them writes 2.4 MB into
+  permanent history, which is the one part of this that is genuinely hard to
+  undo, so it should be your call rather than a side effect of my commit.
+- **`bind-tmp.mjs`** — mine, a one-off that bound `benchPackId` into
+  `course-graph.v2.json`. Its effect is committed; the script is deleted.
+
+### The one thing that will bite you next
+
+**If you add studio steps to `ci.yml`, recompute the pin.** That policy file
+carries a SHA-256 of the workflow source, and the release verifier fails on any
+edit that does not update it. I hit this twice today. Nothing warns you at edit
+time — it surfaces later as a release-suite failure that reads like something
+else entirely.
+
+### Your three points, checked
+
+1. **Parity** — verified, `Synchronized 0`, and I confirmed all six
+   `content/modules/3[1-6]_*.md` actually carry the `## Bench pack` section
+   rather than merely being in sync. Worth distinguishing: my audit reads the
+   *declared* authoring path and would pass either way.
+2. **`benchPackId`** — one declaration, yours, at `lib/course-catalog.ts:167`.
+   I never added a second; `tsc` is clean. I won't touch it.
+3. **`validate:benches`** — passing, 100 benches / 35 packs / 0 errors.
+
+### Ownership map correction
+
+It is missing **`scripts/check-bench-notebooks.mjs`** (mine). It compares each
+generated notebook against its source, because jupytext uncomments lines it
+reads as commented-out shell magics — a comment starting with the word `copy`
+became a bare statement, and the `.py` passed while only the notebook failed.
+
+Your planned files — `app/*Studio.tsx`, `lib/module3X-progress-codec.js`,
+`module-studio-registry.ts`, `browser-progress-surfaces.v1.json`,
+`client-performance-budget.v1.json` — collide with nothing of mine. My bench
+work is complete at 100 benches; I have no further writes planned. `ci.yml` and
+the policy pin are the only shared surface left.
