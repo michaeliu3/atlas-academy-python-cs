@@ -134,8 +134,13 @@ def test_session_hash_actually_reads_the_declared_file(monkeypatch):
 
 def _node_digest(module_number: int, session: int) -> str | None:
     node = shutil.which("node")
-    if node is None:  # pragma: no cover - environment without node
-        pytest.skip("node is not on PATH; cross-language check cannot run")
+    if node is None:
+        # Deliberately a failure, not a skip. This is the only check that
+        # compares the two hashers, and a skip would let CI report green while
+        # the contract went unverified — which is the failure mode this whole
+        # file exists to catch. Node is a hard dependency of the repository
+        # anyway, so its absence is a broken environment, not a reason to pass.
+        pytest.fail("node is not on PATH; the cross-language check cannot run")
     result = subprocess.run(
         [node, "scripts/bench-session-hash.mjs", str(module_number), str(session)],
         cwd=SITE_DIR,

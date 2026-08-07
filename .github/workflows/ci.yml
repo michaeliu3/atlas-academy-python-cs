@@ -348,6 +348,17 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        # This job is otherwise Python-only. Node is here for one step: the
+        # session-hash suite shells out to `bench-session-hash.mjs` to compare
+        # the Python and Node hashers against each other. Declared explicitly
+        # rather than relying on the runner image happening to ship a node --
+        # that version is unpinned and could change without notice, and the
+        # test now fails rather than skips when node is absent, so an
+        # undeclared dependency would surface as a confusing red build.
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.13.0
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
         name: Test the runtime teaching-model exercise verifier
         run: python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
