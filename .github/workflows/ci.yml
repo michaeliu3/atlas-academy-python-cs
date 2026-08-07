@@ -376,6 +376,16 @@ jobs:
           python -m jupytext --to ipynb benches/src/m*/s*.py
           MPLBACKEND=Agg python -m pytest --nbmake benches/src \
             --nbmake-kernel=python3 --nbmake-timeout=300 -q
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Check the Python and Node session hashers still agree
+        # Python writes `sessionSha256` into every bench record and
+        # `check:bench-sync` verifies it, so the two implementations must hash
+        # identical bytes. Both have broken silently: once on the heading form
+        # (`## 2. Session 1` vs `## Session 1`), once on which file is canonical
+        # (M31-M36 live under content/authoring/, with content/modules/ a mirror).
+        # Neither raised an error -- they returned a wrong answer that agreed with
+        # nothing, so only a cross-language comparison catches them.
+        run: MPLBACKEND=Agg python -m pytest benches/tests -q
 
   browser-accessibility:
     name: Browser accessibility acceptance

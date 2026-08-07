@@ -574,6 +574,50 @@ def _looks_unanswered(text: str) -> bool:
     return bool(lines) and any(_UNANSWERED_LINE.match(line) for line in lines)
 
 
+def _declared_workbook(site_root: Path, number: str) -> Path | None:
+    """Resolve the workbook path the teaching-pack manifest declares.
+
+    Not always `content/modules/`. Authoring-only modules (M31 and up) are
+    canonical under `content/authoring/`, and `content/modules/` holds a mirror
+    regenerated from them. Hashing the mirror agrees with the canonical file only
+    for as long as the regeneration is current -- and it has drifted in practice.
+
+    That mattered: `check-bench-workbook-sync.mjs` reads the declared path, and
+    this function used to read the mirror unconditionally. While the two agreed
+    the gap was invisible; the moment the mirror went stale, every M31-M36 bench
+    would fail CI with a hash mismatch that named the wrong file and gave no hint
+    that two different documents were being compared.
+
+    Returns None when nothing is declared, so the caller keeps its old glob.
+    """
+    manifest = site_root / "content" / "course" / "module-teaching-packs.v1.json"
+    if not manifest.is_file():
+        return None
+    try:
+        data = json.loads(manifest.read_text(encoding="utf8"))
+    except (OSError, ValueError):
+        return None
+
+    packs = data.get("packs") or data.get("modules") or data
+    entries = packs if isinstance(packs, list) else list(packs.values())
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        if str(entry.get("moduleNumber")) != str(int(number)) and entry.get(
+            "moduleId"
+        ) != f"m{number}" and entry.get("id") != f"m{number}":
+            continue
+        declared = entry.get("workbook")
+        if isinstance(declared, dict):
+            declared = declared.get("path")
+        if isinstance(declared, str):
+            resolved = site_root / declared
+            return resolved if resolved.is_file() else None
+        return None
+    return None
+
+
 def _session_sha256(module_id: str, session: int) -> str | None:
     """Hash the workbook slice for this session, so drift is detectable.
 
@@ -593,10 +637,13 @@ def _session_sha256(module_id: str, session: int) -> str | None:
         modules = candidate / "content" / "modules"
         if modules.is_dir():
             number = module_id[1:]
-            matches = sorted(modules.glob(f"{number}_*.md"))
-            if not matches:
-                return None
-            text = matches[0].read_text(encoding="utf8").replace("\r\n", "\n")
+            workbook = _declared_workbook(candidate, number)
+            if workbook is None:
+                matches = sorted(modules.glob(f"{number}_*.md"))
+                if not matches:
+                    return None
+                workbook = matches[0]
+            text = workbook.read_text(encoding="utf8").replace("\r\n", "\n")
             for match in _SESSION_HEADING.finditer(text):
                 if int(match.group(1)) != session:
                     continue
