@@ -54,7 +54,7 @@
     "test:release": "node scripts/run-course-tests.mjs --suite=release",
     "test:browser": "pnpm build && playwright test",
     "test:browser:ci": "playwright test",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern .wrangler --ignore-pattern playwright-report --ignore-pattern test-results --ignore-pattern worker-configuration.d.ts",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern .wrangler --ignore-pattern playwright-report --ignore-pattern test-results --ignore-pattern worker-configuration.d.ts --ignore-pattern \"**/.venv/**\"",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

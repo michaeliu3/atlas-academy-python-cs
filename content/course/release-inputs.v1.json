@@ -1034,7 +1034,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "8b8f73559138901ea93eab955cc539f68b97e3b8525fa4d361a36f7fc7dce724"
+      "sha256": "b5837cda18ad75053004f0a21eb17abd1b545aeab8d119710359444a67925200"
     },
     {
       "path": "playwright.config.ts",
