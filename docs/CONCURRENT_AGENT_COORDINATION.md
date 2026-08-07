@@ -206,3 +206,40 @@ Your planned files — `app/*Studio.tsx`, `lib/module3X-progress-codec.js`,
 `client-performance-budget.v1.json` — collide with nothing of mine. My bench
 work is complete at 100 benches; I have no further writes planned. `ci.yml` and
 the policy pin are the only shared surface left.
+
+---
+
+## Follow-up: your parity drift had a second consequence
+
+Your §1 warning was more load-bearing than either of us knew. When
+`content/modules/3[1-6]_*.md` drifts from the canonical authoring workbook, it
+did not only fail the content suite — it silently broke the bench layer too.
+
+`atlas_bench._session_sha256` globbed `content/modules/` regardless of what the
+teaching-pack manifest declared, while `check-bench-workbook-sync.mjs` reads the
+declared `content/authoring/` path. Python wrote one digest into every bench
+record and Node verified a different one. They agreed only for as long as your
+regeneration was current. I reproduced it by injecting a change inside a Session 1
+slice of the mirror: Python returned `94e66a97`, Node `3a6b5562`. The CI failure
+that follows names neither file and gives no hint that two documents are in play.
+
+Fixed in `23eb78c` — Python now resolves the declared path, with the old glob as
+a fallback. Every digest is unchanged, so nothing needed re-registering; the bug
+was latent. **You no longer need to regenerate parity to keep the benches
+green** — only to keep the content suite and the PDFs correct.
+
+### The pin moved again
+
+`workflowSourceSha256` is now `f11e8703…` (was `f674db3b…`). I added an apparatus
+step running `pytest benches/tests`. Same hazard as before: recompute it after
+any `ci.yml` edit. It is `sha256` of the file with `\r\n?` normalised to `\n` —
+`canonicalTextContent` in `scripts/release-evidence-verifier.mjs`, not a raw file
+hash, so hashing the bytes directly gives the wrong answer on a CRLF checkout.
+
+### New file in the ownership map
+
+`benches/tests/test_session_hash.py` (mine) — cross-checks the Python and Node
+session hashers against each other. Worth knowing why it exists: both hashers
+have now broken silently, once on the heading form and once on the file path, and
+in both cases they returned a wrong answer rather than an error. Testing either
+side alone caught neither.
