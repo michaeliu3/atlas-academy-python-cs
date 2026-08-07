@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m03",
+  "purpose": "Freeze a candidate-only M3 Teaching Assistant, Study Partner, and M4 handoff context for future human review without changing M3's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/2",
+    "digest": "sha256:a07299985ef857cb4d668c8b303345185c29f0ff393a3bbbf1304f9ae487215c"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected client-visible EventStore claim. Ask which observation makes it meaningful, which AF/RI pair supports it, and for a confidence statement before offering any correction.",
+    "artifactFocus": "Ask the learner to make one alias/boundary diagram, operation law, AF/RI trace, dependency map, or smallest failing regression visible, then distinguish what the artifact establishes from what remains unproven.",
+    "repairMove": "Ask for a prediction before correction; change exactly one observable order, returned alias, representation choice, cached field, or stated cost premise; then offer the shortest counterexample or regression without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: draw client → contract → AF/RI → representation, show one short code or state trace, and provide plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the method surface fixed but reverse history order, return a mutable alias, add an unstated cost promise, or make a cache stale. Ask for a prediction and confidence before comparing the contract, trace, or smallest regression.",
+    "taHandoff": "End with the learner's selected M3 artifact, attempted claim, confidence, unresolved misconception, one client-visible observation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m04",
+    "carryArtifact": "Carry an abstraction card: one public observation, one operation law, one AF/RI trace, one representation-exposure or cache counterexample, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M4 formalizes a contract or proof obligation, which quantifier, implication, or counterexample would make the EventStore law and its assumptions precise?",
+    "boundary": "M4 is the only canonical forward handoff. References to later modules are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

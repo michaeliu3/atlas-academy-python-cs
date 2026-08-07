@@ -1,0 +1,2177 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "v1",
+  "kind": "atlas-advanced-module-contract-registry",
+  "purpose": "Retain checked-in authoring evidence for Modules 31–36 without turning plans, pointers, or research into learner publication, approval, CI, deployment, or mastery claims. The unified v3 registry is the sole review and promotion authority.",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
+  "canonicalAuthoringBridge": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "truthBoundary": {
+    "pointerPresent": "A resolving contract input proves only that a bounded local plan or research reference exists; it is not a learner artifact, quality review, or release claim.",
+    "reviewReady": "The retained adapter may not enter review-ready. A future review-ready decision belongs only to the unified v3 registry, its module evidence record, and its digest-bound human review record.",
+    "published": "The retained adapter may not publish a module. A future verified release belongs only to the unified v3 registry and separately recorded source-commit, CI, deployment, and limitation evidence."
+  },
+  "contractStates": [
+    "authoring-only",
+    "review-ready",
+    "published"
+  ],
+  "evidenceStates": [
+    "planned",
+    "pointer-present",
+    "reviewed",
+    "release-ready"
+  ],
+  "humanReviewDimensions": [
+    "first-principles-quality",
+    "rigor-and-counterexamples",
+    "source-claim-correctness",
+    "visual-text-equivalent-quality",
+    "assessment-explanation-quality",
+    "project-evidence-quality",
+    "ta-study-partner-usefulness",
+    "oral-defense-quality"
+  ],
+  "evidenceRequirements": [
+    {
+      "id": "prerequisite-and-forward-map",
+      "evidenceDetailKeys": [
+        "academic-prerequisite-map",
+        "forward-handoff"
+      ]
+    },
+    {
+      "id": "six-connected-sessions",
+      "evidenceDetailKeys": [
+        "session-anchors",
+        "learning-progression"
+      ]
+    },
+    {
+      "id": "first-principles-code-reading-prediction-and-transfer",
+      "evidenceDetailKeys": [
+        "first-principles-explanation",
+        "code-reading-debugging-design",
+        "prediction-before-reveal",
+        "transfer-task"
+      ]
+    },
+    {
+      "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+      "evidenceDetailKeys": [
+        "definitions-and-assumptions",
+        "derivation-or-proof-idea",
+        "counterexample",
+        "numerical-experiment"
+      ]
+    },
+    {
+      "id": "source-ledger-claim-license-and-link-boundary",
+      "evidenceDetailKeys": [
+        "source-rationale",
+        "claim-linkage",
+        "access-date",
+        "license-reuse-status",
+        "stable-learner-link"
+      ]
+    },
+    {
+      "id": "accessible-visuals-and-concise-text-alternatives",
+      "evidenceDetailKeys": [
+        "visual-purpose",
+        "concise-prose-alternative"
+      ]
+    },
+    {
+      "id": "confidence-aware-multiple-choice-diagnostic",
+      "evidenceDetailKeys": [
+        "multiple-choice-items",
+        "prediction-and-confidence-gate",
+        "explanations",
+        "misconception-map"
+      ]
+    },
+    {
+      "id": "retrieval-and-spaced-review",
+      "evidenceDetailKeys": [
+        "retrieval-prompts",
+        "review-intervals"
+      ]
+    },
+    {
+      "id": "dossier-rubric-and-acceptance-evidence",
+      "evidenceDetailKeys": [
+        "dossier",
+        "acceptance-criteria",
+        "evidence-rubric"
+      ]
+    },
+    {
+      "id": "supportive-oral-defense",
+      "evidenceDetailKeys": [
+        "live-when-available",
+        "accessible-text-flow",
+        "hint-ladder",
+        "counterexample",
+        "transfer",
+        "reflection",
+        "learner-evidence-summary",
+        "constructive-next-steps"
+      ]
+    },
+    {
+      "id": "ta-study-partner-and-forward-handoff",
+      "evidenceDetailKeys": [
+        "ta-prompt",
+        "study-partner-prompt",
+        "forward-handoff"
+      ]
+    },
+    {
+      "id": "studio-reference-model-and-teaching-tests",
+      "evidenceDetailKeys": [
+        "interaction-kind",
+        "implementation-path",
+        "reference-model-path",
+        "teaching-test-path"
+      ]
+    },
+    {
+      "id": "release-provenance-ci-and-deployment-evidence",
+      "evidenceDetailKeys": [
+        "source-commit",
+        "provenance-path",
+        "source-review",
+        "ci-run-url",
+        "private-deployment-version",
+        "known-limitations"
+      ]
+    }
+  ],
+  "scopeModuleIds": [
+    "m31",
+    "m32",
+    "m33",
+    "m34",
+    "m35",
+    "m36"
+  ],
+  "modules": [
+    {
+      "moduleId": "m31",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 31,
+        "slug": "31-optimization-information",
+        "academicPrerequisiteNumbers": [
+          28,
+          29,
+          30
+        ],
+        "forwardModuleNumber": 18,
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
+        "sourceMap": null,
+        "studioId": null
+      },
+      "contractInputs": [
+        {
+          "id": "m31-prerequisite-session-bridge",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/0",
+          "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."
+        },
+        {
+          "id": "m31-source-map-connected-argument",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "the-one-connected-argument",
+          "note": "Connected first-principles teaching argument for authoring, not learner-ready material."
+        },
+        {
+          "id": "m31-authoring-workbook-draft",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": null,
+          "note": "Complete authoring-only M31 workbook candidate; it is not a reader route, review approval, or release record."
+        },
+        {
+          "id": "m31-authoring-delivery-map",
+          "kind": "file",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m31.v1.json",
+          "locator": null,
+          "note": "Hidden authoring-candidate delivery topology for M31's six visible sessions and typed local outputs; it does not select learner delivery, canonical graph sources, review approval, or release."
+        },
+        {
+          "id": "m31-module-learning-companion",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/course/contracts/companions/m31.v1.json",
+          "locator": null,
+          "note": "Module-scoped M31 Teaching Assistant, Study Partner, guide-binding, and canonical-forward-handoff context; it remains authoring-only evidence rather than review, release, or learner access."
+        },
+        {
+          "id": "m31-source-map-prerequisites",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "prerequisite-bridge-and-forward-handoff",
+          "note": "Authoring plan that preserves the academic prerequisite and forward map."
+        },
+        {
+          "id": "m31-source-map-ledger",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "source-ledger-and-reuse-decisions",
+          "note": "Source-link and reuse-decision planning reference."
+        },
+        {
+          "id": "m31-source-map-claims",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "claim-assumption-and-counterexample-ledger",
+          "note": "Planned claim, assumption, and counterexample coverage."
+        },
+        {
+          "id": "m31-source-map-sessions",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "six-session-authoring-route",
+          "note": "Six-session authoring route with understanding-first moves."
+        },
+        {
+          "id": "m31-source-map-numerical",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "numerical-code-reading-and-reference-model-boundary",
+          "note": "Bounded numerical, code-reading, and authoring-model constraints."
+        },
+        {
+          "id": "m31-source-map-visual",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "visual-and-accessible-explanation-authoring-brief",
+          "note": "Planned visual questions and concise text alternatives."
+        },
+        {
+          "id": "m31-source-map-diagnostic",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "diagnostic-retrieval-and-misconception-design",
+          "note": "Planned confidence-aware diagnostic, retrieval, and misconception design."
+        },
+        {
+          "id": "m31-source-map-dossier",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "optimization--information-evidence-dossier",
+          "note": "Planned small evidence dossier, acceptance boundary, and constructive rubric."
+        },
+        {
+          "id": "m31-source-map-support",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "ta-study-partner-and-oral-defense-protocol",
+          "note": "Planned TA, Study Partner, and psychologically safe oral-defense protocol."
+        },
+        {
+          "id": "m31-source-map-release",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "release-and-provenance-gates",
+          "note": "Explicit unchecked release/provenance boundary."
+        },
+        {
+          "id": "m31-source-audit-sources",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_audit.md",
+          "locator": "recommended-source-set",
+          "note": "Research-only source, claim-linkage, access-date, and license/reuse planning."
+        },
+        {
+          "id": "m31-source-audit-boundaries",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module31_optimization_information_source_audit.md",
+          "locator": "claim-and-assumption-boundaries",
+          "note": "Research-only theorem, code, numerical, and non-claim boundaries."
+        },
+        {
+          "id": "m31-readiness-audit",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "docs/archive/publication-readiness/M31_M36_PUBLICATION_READINESS_AUDIT.v1.json",
+          "locator": "/modules/0",
+          "note": "Historical negative audit: M31 remains authoring-only and must not be published from planning evidence."
+        },
+        {
+          "id": "m31-optimization-authoring-model",
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/m31-optimization-authoring-model.js",
+          "locator": null,
+          "note": "Bounded deterministic M31-S01–S06 authoring fixture for objective/constraint analysis, KKT checks, projected-gradient traces, fixed noisy-gradient evidence, and finite categorical information quantities; it creates no learner route or studio."
+        },
+        {
+          "id": "m31-optimization-authoring-model-tests",
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m31-optimization-authoring-model.test.mjs",
+          "locator": null,
+          "note": "Focused teaching tests check fixture values, feasibility, analytic/numerical gradients, constrained stationarity/KKT conditions, projected-trace invariants, fixed noisy-gradient boundaries, and finite-information support checks."
+        }
+      ],
+      "deliveryMapInputId": null,
+      "authoringDeliveryMapInputId": "m31-authoring-delivery-map",
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {
+            "id": "m31-s01",
+            "title": "Objectives, variables, constraints, and geometry",
+            "plannedArtifact": "Objective-geometry sheet"
+          },
+          {
+            "id": "m31-s02",
+            "title": "Local reasoning: derivatives, stationarity, curvature, and feasibility",
+            "plannedArtifact": "Stationarity-counterexample ledger"
+          },
+          {
+            "id": "m31-s03",
+            "title": "Convex structure, dual views, and certificates",
+            "plannedArtifact": "Claim table"
+          },
+          {
+            "id": "m31-s04",
+            "title": "Projected updates, method families, and bounded convergence evidence",
+            "plannedArtifact": "Solver-selection rationale"
+          },
+          {
+            "id": "m31-s05",
+            "title": "Stochastic optimization, sampling, and finite evidence",
+            "plannedArtifact": "Stochastic-information experiment card"
+          },
+          {
+            "id": "m31-s06",
+            "title": "Optimization & information evidence defense",
+            "plannedArtifact": "Optimization & Information Dossier"
+          }
+        ],
+        "plannedCoverage": [
+          {
+            "inputId": "m31-source-audit-sources",
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10"
+            ]
+          },
+          {
+            "inputId": "m31-source-map-claims",
+            "markers": [
+              "C01",
+              "C02",
+              "C03",
+              "C04",
+              "C05",
+              "C06",
+              "C07",
+              "C08",
+              "C10"
+            ]
+          }
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {
+          "id": "prerequisite-and-forward-map",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-prerequisite-session-bridge",
+            "m31-source-map-prerequisites"
+          ],
+          "note": "The prerequisite/forward relationship is an authoring plan and does not change learner navigation.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "six-connected-sessions",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-prerequisite-session-bridge",
+            "m31-source-map-sessions",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "Six connected authoring sessions now exist in a hidden candidate workbook; no learner workbook or route exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "first-principles-code-reading-prediction-and-transfer",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-connected-argument",
+            "m31-source-map-sessions",
+            "m31-source-map-numerical",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains understanding-first moves, code reading, prediction, and transfer, but has not received delivery review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-claims",
+            "m31-source-map-numerical",
+            "m31-source-audit-boundaries",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains bounded derivations, counterexamples, and numerical traces; mathematical/source review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "source-ledger-claim-license-and-link-boundary",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-ledger",
+            "m31-source-audit-sources",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The candidate links to the source ledger and retains the source/reuse boundary; future learner claims still require source review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "accessible-visuals-and-concise-text-alternatives",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-visual",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate adds labelled diagrams with prose alternatives, but accessibility review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "confidence-aware-multiple-choice-diagnostic",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-diagnostic",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains confidence-before-reveal diagnostic items and misconception explanations; no learner progress record is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "retrieval-and-spaced-review",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-diagnostic",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The candidate specifies a retrieval schedule and changed-premise review, not an operational learner record.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "dossier-rubric-and-acceptance-evidence",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-dossier",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The candidate includes a dossier and constructive rubric; no assessed project evidence exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "supportive-oral-defense",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-support",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "The candidate includes a psychologically safe TA oral-defense protocol but does not claim a Live/text session occurred.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "ta-study-partner-and-forward-handoff",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-source-map-support",
+            "m31-source-map-prerequisites",
+            "m31-authoring-workbook-draft",
+            "m31-module-learning-companion"
+          ],
+          "note": "The candidate includes module-specific TA, Study Partner, and canonical forward-handoff context; no chat behavior, review, or learner access is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "studio-reference-model-and-teaching-tests",
+          "state": "pointer-present",
+          "inputIds": [
+            "m31-optimization-authoring-model",
+            "m31-optimization-authoring-model-tests",
+            "m31-authoring-workbook-draft"
+          ],
+          "note": "A bounded deterministic authoring model and focused teaching tests now cover M31-S01–S06. They are checked-in pointers only: no learner-facing studio, review, publication, CI, deployment, or mastery evidence is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "release-provenance-ci-and-deployment-evidence",
+          "state": "planned",
+          "inputIds": [],
+          "note": "No M31 source review, CI validation, deployment version, or release record exists.",
+          "evidenceDetails": null
+        }
+      ],
+      "release": null
+    },
+    {
+      "moduleId": "m32",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 32,
+        "slug": "32-systems-languages-scientific-python-accelerators",
+        "academicPrerequisiteNumbers": [
+          12,
+          17,
+          19,
+          24,
+          28,
+          31
+        ],
+        "forwardModuleNumber": 33,
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
+        "sourceMap": null,
+        "studioId": null
+      },
+      "contractInputs": [
+        {
+          "id": "m32-prerequisite-session-bridge",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/1",
+          "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."
+        },
+        {
+          "id": "m32-source-research-connected-argument",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+          "locator": "the-connected-teaching-argument",
+          "note": "Connected first-principles authoring argument, not learner-ready source-map evidence."
+        },
+        {
+          "id": "m32-source-research-ledger",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+          "locator": "primary-source-ledger-and-reuse-boundary",
+          "note": "Source links, rationale, access, and reuse boundary for authoring only."
+        },
+        {
+          "id": "m32-source-research-claims",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+          "locator": "claim-assumption-and-counterexample-ledger",
+          "note": "Claim, assumption, derivation/proof, and counterexample planning reference."
+        },
+        {
+          "id": "m32-source-research-sessions",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+          "locator": "likely-six-session-source-routing",
+          "note": "Six-session source-conscious authoring route with bounded learning moves."
+        },
+        {
+          "id": "m32-source-research-project",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+          "locator": "required-evidence-record-for-any-future-experiment",
+          "note": "Bounded dossier or numerical-experiment planning reference."
+        },
+        {
+          "id": "m32-authoring-workbook-draft",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
+          "locator": null,
+          "note": "Complete hidden authoring workbook candidate; it is not a reader route, review approval, or release record."
+        },
+        {
+          "id": "m32-authoring-delivery-map",
+          "kind": "file",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m32.v1.json",
+          "locator": null,
+          "note": "Hidden authoring delivery topology for six visible sessions and typed outputs; it does not select learner delivery or release."
+        },
+        {
+          "id": "m32-module-learning-companion",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/course/contracts/companions/m32.v1.json",
+          "locator": null,
+          "note": "Module-scoped Teaching Assistant, Study Partner, and canonical-forward-handoff context; it remains authoring-only evidence."
+        },
+        {
+          "id": "m32-authoring-reference-fixture",
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/m32-systems-evidence-fixture.js",
+          "locator": null,
+          "note": "Bounded deterministic authoring fixture for inspecting a narrow reasoning trace; it creates no learner route or studio."
+        },
+        {
+          "id": "m32-authoring-reference-fixture-tests",
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m32-systems-evidence-fixture.test.mjs",
+          "locator": null,
+          "note": "Focused teaching tests for the bounded authoring fixture; they are pointers, not a publication or deployment claim."
+        }
+      ],
+      "deliveryMapInputId": null,
+      "authoringDeliveryMapInputId": "m32-authoring-delivery-map",
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {
+            "id": "m32-s01",
+            "title": "System boundaries: Python orchestration, native kernels, and scientific-array contracts",
+            "plannedArtifact": "Boundary-contract map."
+          },
+          {
+            "id": "m32-s02",
+            "title": "Execution and transfer: from Python request to CPU, device, and memory hierarchy",
+            "plannedArtifact": "Execution-transfer trace with one falsifiable performance prediction."
+          },
+          {
+            "id": "m32-s03",
+            "title": "Array layout, vectorization, numerical behavior, and measurement",
+            "plannedArtifact": "Layout-numerics note and performance-evidence card."
+          },
+          {
+            "id": "m32-s04",
+            "title": "Parallel execution, buffer ownership, and synchronization",
+            "plannedArtifact": "Buffer-ownership timeline and failure probe."
+          },
+          {
+            "id": "m32-s05",
+            "title": "Autodiff, kernels, precision, and optimization traces",
+            "plannedArtifact": "Autodiff-execution trace with a numerical or finite-difference cross-check."
+          },
+          {
+            "id": "m32-s06",
+            "title": "Reproducible accelerator systems architecture defense",
+            "plannedArtifact": "Scientific Python & Accelerators Dossier and learner-controlled oral-defense summary."
+          }
+        ],
+        "plannedCoverage": [
+          {
+            "inputId": "m32-source-research-sessions",
+            "markers": [
+              "M32-S01",
+              "M32-S02",
+              "M32-S03",
+              "M32-S04",
+              "M32-S05",
+              "M32-S06"
+            ]
+          }
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {
+          "id": "prerequisite-and-forward-map",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-prerequisite-session-bridge",
+            "m32-source-research-sessions"
+          ],
+          "note": "The prerequisite and forward relationship is an authoring plan and does not change learner navigation.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "six-connected-sessions",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-prerequisite-session-bridge",
+            "m32-source-research-sessions",
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "Six connected authoring sessions exist in a hidden candidate workbook; no learner workbook or route exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "first-principles-code-reading-prediction-and-transfer",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-source-research-connected-argument",
+            "m32-source-research-claims",
+            "m32-source-research-sessions",
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains understanding-first explanation, code reading, prediction, and transfer; delivery review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-source-research-claims",
+            "m32-source-research-project",
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains bounded formal or numerical traces and counterexamples; independent mathematical and source review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "source-ledger-claim-license-and-link-boundary",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-source-research-ledger",
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The candidate links to its source/reuse planning and remains subject to future learner-facing source review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "accessible-visuals-and-concise-text-alternatives",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains authored visual and prose-alternative planning, but accessibility review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "confidence-aware-multiple-choice-diagnostic",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains confidence-before-reveal diagnostics and repair explanations; no learner-progress record is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "retrieval-and-spaced-review",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The candidate specifies retrieval and changed-premise review, not an operational learner record.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "dossier-rubric-and-acceptance-evidence",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-source-research-project",
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains a bounded dossier and constructive rubric; no assessed project evidence exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "supportive-oral-defense",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-authoring-workbook-draft",
+            "m32-module-learning-companion"
+          ],
+          "note": "The candidate includes a psychologically safe oral-defense protocol but does not claim a Live or text session occurred.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "ta-study-partner-and-forward-handoff",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-prerequisite-session-bridge",
+            "m32-authoring-workbook-draft",
+            "m32-module-learning-companion"
+          ],
+          "note": "The candidate includes module-specific TA, Study Partner, and canonical-forward-handoff context; no chat behavior, review, or learner access is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "studio-reference-model-and-teaching-tests",
+          "state": "pointer-present",
+          "inputIds": [
+            "m32-authoring-reference-fixture",
+            "m32-authoring-reference-fixture-tests",
+            "m32-authoring-workbook-draft"
+          ],
+          "note": "A bounded deterministic authoring fixture and focused tests cover selected reasoning traces. They are checked-in pointers only: no learner-facing studio, review, publication, CI, deployment, or mastery evidence is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "release-provenance-ci-and-deployment-evidence",
+          "state": "planned",
+          "inputIds": [],
+          "note": "No module-specific source review, CI validation, deployment version, or release record exists.",
+          "evidenceDetails": null
+        }
+      ],
+      "release": null
+    },
+    {
+      "moduleId": "m33",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 33,
+        "slug": "33-formal-languages-computability-complexity",
+        "academicPrerequisiteNumbers": [
+          5,
+          11,
+          23,
+          27
+        ],
+        "forwardModuleNumber": 34,
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
+        "sourceMap": null,
+        "studioId": null
+      },
+      "contractInputs": [
+        {
+          "id": "m33-prerequisite-session-bridge",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/2",
+          "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."
+        },
+        {
+          "id": "m33-source-research-connected-argument",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+          "locator": "the-connected-teaching-argument",
+          "note": "Connected first-principles authoring argument, not learner-ready source-map evidence."
+        },
+        {
+          "id": "m33-source-research-ledger",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+          "locator": "primaryofficial-source-ledger-and-reuse-boundary",
+          "note": "Source links, rationale, access, and reuse boundary for authoring only."
+        },
+        {
+          "id": "m33-source-research-claims",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+          "locator": "claim-assumption-and-counterexample-ledger",
+          "note": "Claim, assumption, derivation/proof, and counterexample planning reference."
+        },
+        {
+          "id": "m33-source-research-sessions",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+          "locator": "likely-six-session-source-routing",
+          "note": "Six-session source-conscious authoring route with bounded learning moves."
+        },
+        {
+          "id": "m33-source-research-project",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md",
+          "locator": "suggested-dossier-evidence-boundary",
+          "note": "Bounded dossier or numerical-experiment planning reference."
+        },
+        {
+          "id": "m33-authoring-workbook-draft",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md",
+          "locator": null,
+          "note": "Complete hidden authoring workbook candidate; it is not a reader route, review approval, or release record."
+        },
+        {
+          "id": "m33-authoring-delivery-map",
+          "kind": "file",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m33.v1.json",
+          "locator": null,
+          "note": "Hidden authoring delivery topology for six visible sessions and typed outputs; it does not select learner delivery or release."
+        },
+        {
+          "id": "m33-module-learning-companion",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/course/contracts/companions/m33.v1.json",
+          "locator": null,
+          "note": "Module-scoped Teaching Assistant, Study Partner, and canonical-forward-handoff context; it remains authoring-only evidence."
+        },
+        {
+          "id": "m33-authoring-reference-fixture",
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/m33-formal-languages-reference-model.js",
+          "locator": null,
+          "note": "Bounded deterministic authoring fixture for inspecting a narrow reasoning trace; it creates no learner route or studio."
+        },
+        {
+          "id": "m33-authoring-reference-fixture-tests",
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m33-formal-languages-reference-model.test.mjs",
+          "locator": null,
+          "note": "Focused teaching tests for the bounded authoring fixture; they are pointers, not a publication or deployment claim."
+        }
+      ],
+      "deliveryMapInputId": null,
+      "authoringDeliveryMapInputId": "m33-authoring-delivery-map",
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {
+            "id": "m33-s01",
+            "title": "Languages, syntax, semantics, and machine models",
+            "plannedArtifact": "Language-machine separation sheet."
+          },
+          {
+            "id": "m33-s02",
+            "title": "Finite automata, regularity, and proof by distinguishing behavior",
+            "plannedArtifact": "Formal-claim countermodel ledger."
+          },
+          {
+            "id": "m33-s03",
+            "title": "Grammars, machines, decidability, and semantic limits",
+            "plannedArtifact": "Machine/question/scope table with a halting-style boundary case."
+          },
+          {
+            "id": "m33-s04",
+            "title": "Reductions and undecidability as directed proof tools",
+            "plannedArtifact": "Reduction-proof skeleton and a reversed-direction counterexample."
+          },
+          {
+            "id": "m33-s05",
+            "title": "Complexity classes, completeness, and practical limits",
+            "plannedArtifact": "Complexity-claim card with a stated model and non-claim."
+          },
+          {
+            "id": "m33-s06",
+            "title": "Formal limits dossier and oral defense",
+            "plannedArtifact": "Formal Languages, Computability & Complexity Dossier and learner-controlled oral-defense summary."
+          }
+        ],
+        "plannedCoverage": [
+          {
+            "inputId": "m33-source-research-sessions",
+            "markers": [
+              "M33-S01",
+              "M33-S02",
+              "M33-S03",
+              "M33-S04",
+              "M33-S05",
+              "M33-S06"
+            ]
+          }
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {
+          "id": "prerequisite-and-forward-map",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-prerequisite-session-bridge",
+            "m33-source-research-sessions"
+          ],
+          "note": "The prerequisite and forward relationship is an authoring plan and does not change learner navigation.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "six-connected-sessions",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-prerequisite-session-bridge",
+            "m33-source-research-sessions",
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "Six connected authoring sessions exist in a hidden candidate workbook; no learner workbook or route exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "first-principles-code-reading-prediction-and-transfer",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-source-research-connected-argument",
+            "m33-source-research-claims",
+            "m33-source-research-sessions",
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains understanding-first explanation, code reading, prediction, and transfer; delivery review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-source-research-claims",
+            "m33-source-research-project",
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains bounded formal or numerical traces and counterexamples; independent mathematical and source review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "source-ledger-claim-license-and-link-boundary",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-source-research-ledger",
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The candidate links to its source/reuse planning and remains subject to future learner-facing source review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "accessible-visuals-and-concise-text-alternatives",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains authored visual and prose-alternative planning, but accessibility review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "confidence-aware-multiple-choice-diagnostic",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains confidence-before-reveal diagnostics and repair explanations; no learner-progress record is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "retrieval-and-spaced-review",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The candidate specifies retrieval and changed-premise review, not an operational learner record.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "dossier-rubric-and-acceptance-evidence",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-source-research-project",
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains a bounded dossier and constructive rubric; no assessed project evidence exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "supportive-oral-defense",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-authoring-workbook-draft",
+            "m33-module-learning-companion"
+          ],
+          "note": "The candidate includes a psychologically safe oral-defense protocol but does not claim a Live or text session occurred.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "ta-study-partner-and-forward-handoff",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-prerequisite-session-bridge",
+            "m33-authoring-workbook-draft",
+            "m33-module-learning-companion"
+          ],
+          "note": "The candidate includes module-specific TA, Study Partner, and canonical-forward-handoff context; no chat behavior, review, or learner access is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "studio-reference-model-and-teaching-tests",
+          "state": "pointer-present",
+          "inputIds": [
+            "m33-authoring-reference-fixture",
+            "m33-authoring-reference-fixture-tests",
+            "m33-authoring-workbook-draft"
+          ],
+          "note": "A bounded deterministic authoring fixture and focused tests cover selected reasoning traces. They are checked-in pointers only: no learner-facing studio, review, publication, CI, deployment, or mastery evidence is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "release-provenance-ci-and-deployment-evidence",
+          "state": "planned",
+          "inputIds": [],
+          "note": "No module-specific source review, CI validation, deployment version, or release record exists.",
+          "evidenceDetails": null
+        }
+      ],
+      "release": null
+    },
+    {
+      "moduleId": "m34",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 34,
+        "slug": "34-classical-ai-search-constraints-decision",
+        "academicPrerequisiteNumbers": [
+          10,
+          11,
+          30,
+          31,
+          33
+        ],
+        "forwardModuleNumber": 35,
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
+        "sourceMap": null,
+        "studioId": null
+      },
+      "contractInputs": [
+        {
+          "id": "m34-prerequisite-session-bridge",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/3",
+          "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."
+        },
+        {
+          "id": "m34-source-research-connected-argument",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+          "locator": "the-connected-teaching-argument",
+          "note": "Connected first-principles authoring argument, not learner-ready source-map evidence."
+        },
+        {
+          "id": "m34-source-research-ledger",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+          "locator": "primary-source-ledger-and-reuse-boundary",
+          "note": "Source links, rationale, access, and reuse boundary for authoring only."
+        },
+        {
+          "id": "m34-source-research-claims",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+          "locator": "definitions-assumptions-proof-ideas-and-counterexamples",
+          "note": "Claim, assumption, derivation/proof, and counterexample planning reference."
+        },
+        {
+          "id": "m34-source-research-sessions",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+          "locator": "likely-six-session-source-routing",
+          "note": "Six-session source-conscious authoring route with bounded learning moves."
+        },
+        {
+          "id": "m34-source-research-project",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md",
+          "locator": "bounded-project-and-numerical-experiment-plan",
+          "note": "Bounded dossier or numerical-experiment planning reference."
+        },
+        {
+          "id": "m34-authoring-workbook-draft",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md",
+          "locator": null,
+          "note": "Complete hidden authoring workbook candidate; it is not a reader route, review approval, or release record."
+        },
+        {
+          "id": "m34-authoring-delivery-map",
+          "kind": "file",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m34.v1.json",
+          "locator": null,
+          "note": "Hidden authoring delivery topology for six visible sessions and typed outputs; it does not select learner delivery or release."
+        },
+        {
+          "id": "m34-module-learning-companion",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/course/contracts/companions/m34.v1.json",
+          "locator": null,
+          "note": "Module-scoped Teaching Assistant, Study Partner, and canonical-forward-handoff context; it remains authoring-only evidence."
+        },
+        {
+          "id": "m34-authoring-reference-fixture",
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/m34-classical-ai-reference-fixture.js",
+          "locator": null,
+          "note": "Bounded deterministic authoring fixture for inspecting a narrow reasoning trace; it creates no learner route or studio."
+        },
+        {
+          "id": "m34-authoring-reference-fixture-tests",
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m34-classical-ai-reference-fixture.test.mjs",
+          "locator": null,
+          "note": "Focused teaching tests for the bounded authoring fixture; they are pointers, not a publication or deployment claim."
+        }
+      ],
+      "deliveryMapInputId": null,
+      "authoringDeliveryMapInputId": "m34-authoring-delivery-map",
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {
+            "id": "m34-s01",
+            "title": "Problem formulation: states, actions, goals, costs, and observations",
+            "plannedArtifact": "State-space model card."
+          },
+          {
+            "id": "m34-s02",
+            "title": "Search strategies, heuristics, and evidence of completeness or optimality",
+            "plannedArtifact": "Search-strategy evidence table."
+          },
+          {
+            "id": "m34-s03",
+            "title": "Constraints, optimization, relaxations, and explanation",
+            "plannedArtifact": "Constraint-objective-relaxation sheet."
+          },
+          {
+            "id": "m34-s04",
+            "title": "Planning/CSP limits: encoding, reductions, and solver boundaries",
+            "plannedArtifact": "CSP-limit claim card."
+          },
+          {
+            "id": "m34-s05",
+            "title": "Uncertainty, utility, and decision under incomplete information",
+            "plannedArtifact": "Decision-under-uncertainty card."
+          },
+          {
+            "id": "m34-s06",
+            "title": "Classical AI design dossier and oral defense",
+            "plannedArtifact": "Classical AI Search, Constraints & Decision Dossier and learner-controlled oral-defense summary."
+          }
+        ],
+        "plannedCoverage": [
+          {
+            "inputId": "m34-source-research-sessions",
+            "markers": [
+              "M34-S01",
+              "M34-S02",
+              "M34-S03",
+              "M34-S04",
+              "M34-S05",
+              "M34-S06"
+            ]
+          }
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {
+          "id": "prerequisite-and-forward-map",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-prerequisite-session-bridge",
+            "m34-source-research-sessions"
+          ],
+          "note": "The prerequisite and forward relationship is an authoring plan and does not change learner navigation.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "six-connected-sessions",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-prerequisite-session-bridge",
+            "m34-source-research-sessions",
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "Six connected authoring sessions exist in a hidden candidate workbook; no learner workbook or route exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "first-principles-code-reading-prediction-and-transfer",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-source-research-connected-argument",
+            "m34-source-research-claims",
+            "m34-source-research-sessions",
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains understanding-first explanation, code reading, prediction, and transfer; delivery review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-source-research-claims",
+            "m34-source-research-project",
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains bounded formal or numerical traces and counterexamples; independent mathematical and source review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "source-ledger-claim-license-and-link-boundary",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-source-research-ledger",
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The candidate links to its source/reuse planning and remains subject to future learner-facing source review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "accessible-visuals-and-concise-text-alternatives",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains authored visual and prose-alternative planning, but accessibility review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "confidence-aware-multiple-choice-diagnostic",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains confidence-before-reveal diagnostics and repair explanations; no learner-progress record is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "retrieval-and-spaced-review",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The candidate specifies retrieval and changed-premise review, not an operational learner record.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "dossier-rubric-and-acceptance-evidence",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-source-research-project",
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains a bounded dossier and constructive rubric; no assessed project evidence exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "supportive-oral-defense",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-authoring-workbook-draft",
+            "m34-module-learning-companion"
+          ],
+          "note": "The candidate includes a psychologically safe oral-defense protocol but does not claim a Live or text session occurred.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "ta-study-partner-and-forward-handoff",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-prerequisite-session-bridge",
+            "m34-authoring-workbook-draft",
+            "m34-module-learning-companion"
+          ],
+          "note": "The candidate includes module-specific TA, Study Partner, and canonical-forward-handoff context; no chat behavior, review, or learner access is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "studio-reference-model-and-teaching-tests",
+          "state": "pointer-present",
+          "inputIds": [
+            "m34-authoring-reference-fixture",
+            "m34-authoring-reference-fixture-tests",
+            "m34-authoring-workbook-draft"
+          ],
+          "note": "A bounded deterministic authoring fixture and focused tests cover selected reasoning traces. They are checked-in pointers only: no learner-facing studio, review, publication, CI, deployment, or mastery evidence is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "release-provenance-ci-and-deployment-evidence",
+          "state": "planned",
+          "inputIds": [],
+          "note": "No module-specific source review, CI validation, deployment version, or release record exists.",
+          "evidenceDetails": null
+        }
+      ],
+      "release": null
+    },
+    {
+      "moduleId": "m35",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 35,
+        "slug": "35-machine-learning-representation",
+        "academicPrerequisiteNumbers": [
+          13,
+          22,
+          28,
+          30,
+          31,
+          32,
+          34
+        ],
+        "forwardModuleNumber": 36,
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
+        "sourceMap": null,
+        "studioId": null
+      },
+      "contractInputs": [
+        {
+          "id": "m35-prerequisite-session-bridge",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/4",
+          "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."
+        },
+        {
+          "id": "m35-source-research-connected-argument",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+          "locator": "the-connected-teaching-argument",
+          "note": "Connected first-principles authoring argument, not learner-ready source-map evidence."
+        },
+        {
+          "id": "m35-source-research-ledger",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+          "locator": "primary-source-ledger-and-reuse-boundary",
+          "note": "Source links, rationale, access, and reuse boundary for authoring only."
+        },
+        {
+          "id": "m35-source-research-claims",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+          "locator": "claim-assumption-derivation-and-counterexample-ledger",
+          "note": "Claim, assumption, derivation/proof, and counterexample planning reference."
+        },
+        {
+          "id": "m35-source-research-sessions",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+          "locator": "likely-six-session-source-routing",
+          "note": "Six-session source-conscious authoring route with bounded learning moves."
+        },
+        {
+          "id": "m35-source-research-project",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+          "locator": "bounded-project-and-numerical-experiment-plan",
+          "note": "Bounded dossier or numerical-experiment planning reference."
+        },
+        {
+          "id": "m35-authoring-workbook-draft",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+          "locator": null,
+          "note": "Complete hidden authoring workbook candidate; it is not a reader route, review approval, or release record."
+        },
+        {
+          "id": "m35-authoring-delivery-map",
+          "kind": "file",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m35.v1.json",
+          "locator": null,
+          "note": "Hidden authoring delivery topology for six visible sessions and typed outputs; it does not select learner delivery or release."
+        },
+        {
+          "id": "m35-module-learning-companion",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/course/contracts/companions/m35.v1.json",
+          "locator": null,
+          "note": "Module-scoped Teaching Assistant, Study Partner, and canonical-forward-handoff context; it remains authoring-only evidence."
+        },
+        {
+          "id": "m35-authoring-reference-fixture",
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/m35-m36-signal-routing-fixture.js",
+          "locator": null,
+          "note": "Bounded deterministic authoring fixture for inspecting a narrow reasoning trace; it creates no learner route or studio."
+        },
+        {
+          "id": "m35-authoring-reference-fixture-tests",
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m35-m36-signal-routing-fixture.test.mjs",
+          "locator": null,
+          "note": "Focused teaching tests for the bounded authoring fixture; they are pointers, not a publication or deployment claim."
+        }
+      ],
+      "deliveryMapInputId": null,
+      "authoringDeliveryMapInputId": "m35-authoring-delivery-map",
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {
+            "id": "m35-s01",
+            "title": "Representation, inductive bias, and what a model can discard",
+            "plannedArtifact": "Representation-assumption sheet."
+          },
+          {
+            "id": "m35-s02",
+            "title": "Problem formulation and classical baselines before learned models",
+            "plannedArtifact": "Classical-learning baseline comparison."
+          },
+          {
+            "id": "m35-s03",
+            "title": "Data-generating process, splits, metrics, uncertainty, and shift",
+            "plannedArtifact": "Evaluation-and-shift plan."
+          },
+          {
+            "id": "m35-s04",
+            "title": "Learning dynamics: objectives, autodiff, optimization, and training systems",
+            "plannedArtifact": "Objective-optimization-generalization trace and training-systems reproducibility card."
+          },
+          {
+            "id": "m35-s05",
+            "title": "ML debugging, observability, and evidence that can fail usefully",
+            "plannedArtifact": "ML claim-test-observability matrix."
+          },
+          {
+            "id": "m35-s06",
+            "title": "Responsible ML representation dossier and oral defense",
+            "plannedArtifact": "Machine Learning & Representation Dossier and learner-controlled oral-defense summary."
+          }
+        ],
+        "plannedCoverage": [
+          {
+            "inputId": "m35-source-research-sessions",
+            "markers": [
+              "M35-S01",
+              "M35-S02",
+              "M35-S03",
+              "M35-S04",
+              "M35-S05",
+              "M35-S06"
+            ]
+          }
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {
+          "id": "prerequisite-and-forward-map",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-prerequisite-session-bridge",
+            "m35-source-research-sessions"
+          ],
+          "note": "The prerequisite and forward relationship is an authoring plan and does not change learner navigation.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "six-connected-sessions",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-prerequisite-session-bridge",
+            "m35-source-research-sessions",
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "Six connected authoring sessions exist in a hidden candidate workbook; no learner workbook or route exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "first-principles-code-reading-prediction-and-transfer",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-source-research-connected-argument",
+            "m35-source-research-claims",
+            "m35-source-research-sessions",
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains understanding-first explanation, code reading, prediction, and transfer; delivery review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-source-research-claims",
+            "m35-source-research-project",
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains bounded formal or numerical traces and counterexamples; independent mathematical and source review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "source-ledger-claim-license-and-link-boundary",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-source-research-ledger",
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The candidate links to its source/reuse planning and remains subject to future learner-facing source review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "accessible-visuals-and-concise-text-alternatives",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains authored visual and prose-alternative planning, but accessibility review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "confidence-aware-multiple-choice-diagnostic",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains confidence-before-reveal diagnostics and repair explanations; no learner-progress record is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "retrieval-and-spaced-review",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The candidate specifies retrieval and changed-premise review, not an operational learner record.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "dossier-rubric-and-acceptance-evidence",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-source-research-project",
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains a bounded dossier and constructive rubric; no assessed project evidence exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "supportive-oral-defense",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-authoring-workbook-draft",
+            "m35-module-learning-companion"
+          ],
+          "note": "The candidate includes a psychologically safe oral-defense protocol but does not claim a Live or text session occurred.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "ta-study-partner-and-forward-handoff",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-prerequisite-session-bridge",
+            "m35-authoring-workbook-draft",
+            "m35-module-learning-companion"
+          ],
+          "note": "The candidate includes module-specific TA, Study Partner, and canonical-forward-handoff context; no chat behavior, review, or learner access is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "studio-reference-model-and-teaching-tests",
+          "state": "pointer-present",
+          "inputIds": [
+            "m35-authoring-reference-fixture",
+            "m35-authoring-reference-fixture-tests",
+            "m35-authoring-workbook-draft"
+          ],
+          "note": "A bounded deterministic authoring fixture and focused tests cover selected reasoning traces. They are checked-in pointers only: no learner-facing studio, review, publication, CI, deployment, or mastery evidence is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "release-provenance-ci-and-deployment-evidence",
+          "state": "planned",
+          "inputIds": [],
+          "note": "No module-specific source review, CI validation, deployment version, or release record exists.",
+          "evidenceDetails": null
+        }
+      ],
+      "release": null
+    },
+    {
+      "moduleId": "m36",
+      "contractState": "authoring-only",
+      "publicationEffect": "none",
+      "graphSnapshot": {
+        "number": 36,
+        "slug": "36-statistical-learning-theory-reliable-deep-learning",
+        "academicPrerequisiteNumbers": [
+          29,
+          30,
+          31,
+          32,
+          33,
+          35
+        ],
+        "forwardModuleNumber": 25,
+        "state": {
+          "lifecycle": "authoring-only",
+          "readerAccess": "hidden",
+          "availability": "authoring-only",
+          "contract": {
+            "track": "advanced-v1",
+            "state": "authoring-only"
+          },
+          "release": {
+            "state": "unrecorded",
+            "recordId": null
+          }
+        },
+        "sourceMap": null,
+        "studioId": null
+      },
+      "contractInputs": [
+        {
+          "id": "m36-prerequisite-session-bridge",
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/5",
+          "note": "Bounded authoring-only prerequisite, session-spine, and forward-handoff plan."
+        },
+        {
+          "id": "m36-source-research-connected-argument",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+          "locator": "the-connected-teaching-argument",
+          "note": "Connected first-principles authoring argument, not learner-ready source-map evidence."
+        },
+        {
+          "id": "m36-source-research-ledger",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+          "locator": "primary-source-ledger-and-reuse-boundary",
+          "note": "Source links, rationale, access, and reuse boundary for authoring only."
+        },
+        {
+          "id": "m36-source-research-claims",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+          "locator": "claim-assumption-derivation-and-counterexample-ledger",
+          "note": "Claim, assumption, derivation/proof, and counterexample planning reference."
+        },
+        {
+          "id": "m36-source-research-sessions",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+          "locator": "likely-six-session-source-routing",
+          "note": "Six-session source-conscious authoring route with bounded learning moves."
+        },
+        {
+          "id": "m36-source-research-project",
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/source-maps/module36_statistical_learning_theory_reliable_deep_learning_source_research.md",
+          "locator": "bounded-project-and-numerical-experiment-plan",
+          "note": "Bounded dossier or numerical-experiment planning reference."
+        },
+        {
+          "id": "m36-authoring-workbook-draft",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/authoring/m36_statistical_learning_theory_reliable_deep_learning_workbook.v1.md",
+          "locator": null,
+          "note": "Complete hidden authoring workbook candidate; it is not a reader route, review approval, or release record."
+        },
+        {
+          "id": "m36-authoring-delivery-map",
+          "kind": "file",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m36.v1.json",
+          "locator": null,
+          "note": "Hidden authoring delivery topology for six visible sessions and typed outputs; it does not select learner delivery or release."
+        },
+        {
+          "id": "m36-module-learning-companion",
+          "kind": "file",
+          "role": "course-content",
+          "path": "content/course/contracts/companions/m36.v1.json",
+          "locator": null,
+          "note": "Module-scoped Teaching Assistant, Study Partner, and canonical-forward-handoff context; it remains authoring-only evidence."
+        },
+        {
+          "id": "m36-authoring-reference-fixture",
+          "kind": "file",
+          "role": "source-code",
+          "path": "lib/m35-m36-signal-routing-fixture.js",
+          "locator": null,
+          "note": "Bounded deterministic authoring fixture for inspecting a narrow reasoning trace; it creates no learner route or studio."
+        },
+        {
+          "id": "m36-authoring-reference-fixture-tests",
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m35-m36-signal-routing-fixture.test.mjs",
+          "locator": null,
+          "note": "Focused teaching tests for the bounded authoring fixture; they are pointers, not a publication or deployment claim."
+        }
+      ],
+      "deliveryMapInputId": null,
+      "authoringDeliveryMapInputId": "m36-authoring-delivery-map",
+      "authoringPlan": {
+        "plannedSessionSpine": [
+          {
+            "id": "m36-s01",
+            "title": "What learning claims mean: risk, representation, data, and assumptions",
+            "plannedArtifact": "Empirical-population scope card, assumption-scope sheet, and a first reliable-learning evidence map."
+          },
+          {
+            "id": "m36-s02",
+            "title": "Optimization, estimation, and generalization are different gaps",
+            "plannedArtifact": "Optimization-generalization gap ledger."
+          },
+          {
+            "id": "m36-s03",
+            "title": "Capacity, learnability, computational limits, and theorem scope",
+            "plannedArtifact": "Limit-and-nonclaim card."
+          },
+          {
+            "id": "m36-s04",
+            "title": "Reliable deep-learning systems: numerical, systems, and reproducibility evidence",
+            "plannedArtifact": "Theory-system reproducibility record."
+          },
+          {
+            "id": "m36-s05",
+            "title": "Shift, robustness, monitoring, and bounded human control",
+            "plannedArtifact": "Expanded reliable-learning evidence map with monitoring and intervention design."
+          },
+          {
+            "id": "m36-s06",
+            "title": "Reliable learning systems dossier and bridge to synthesis",
+            "plannedArtifact": "Statistical Learning Theory & Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary."
+          }
+        ],
+        "plannedCoverage": [
+          {
+            "inputId": "m36-source-research-sessions",
+            "markers": [
+              "M36-S01",
+              "M36-S02",
+              "M36-S03",
+              "M36-S04",
+              "M36-S05",
+              "M36-S06"
+            ]
+          }
+        ],
+        "promotionBlock": {
+          "learnerManifest": "absent",
+          "learnerRoute": "absent",
+          "humanReview": "not-reviewed",
+          "releaseEvidence": "not-evidenced"
+        }
+      },
+      "humanReview": {
+        "first-principles-quality": "pending",
+        "rigor-and-counterexamples": "pending",
+        "source-claim-correctness": "pending",
+        "visual-text-equivalent-quality": "pending",
+        "assessment-explanation-quality": "pending",
+        "project-evidence-quality": "pending",
+        "ta-study-partner-usefulness": "pending",
+        "oral-defense-quality": "pending"
+      },
+      "evidence": [
+        {
+          "id": "prerequisite-and-forward-map",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-prerequisite-session-bridge",
+            "m36-source-research-sessions"
+          ],
+          "note": "The prerequisite and forward relationship is an authoring plan and does not change learner navigation.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "six-connected-sessions",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-prerequisite-session-bridge",
+            "m36-source-research-sessions",
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "Six connected authoring sessions exist in a hidden candidate workbook; no learner workbook or route exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "first-principles-code-reading-prediction-and-transfer",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-source-research-connected-argument",
+            "m36-source-research-claims",
+            "m36-source-research-sessions",
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains understanding-first explanation, code reading, prediction, and transfer; delivery review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "rigor-derivations-counterexamples-and-numerical-experiments",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-source-research-claims",
+            "m36-source-research-project",
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains bounded formal or numerical traces and counterexamples; independent mathematical and source review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "source-ledger-claim-license-and-link-boundary",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-source-research-ledger",
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The candidate links to its source/reuse planning and remains subject to future learner-facing source review.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "accessible-visuals-and-concise-text-alternatives",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The hidden candidate contains authored visual and prose-alternative planning, but accessibility review remains pending.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "confidence-aware-multiple-choice-diagnostic",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains confidence-before-reveal diagnostics and repair explanations; no learner-progress record is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "retrieval-and-spaced-review",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The candidate specifies retrieval and changed-premise review, not an operational learner record.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "dossier-rubric-and-acceptance-evidence",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-source-research-project",
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "The candidate contains a bounded dossier and constructive rubric; no assessed project evidence exists.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "supportive-oral-defense",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-authoring-workbook-draft",
+            "m36-module-learning-companion"
+          ],
+          "note": "The candidate includes a psychologically safe oral-defense protocol but does not claim a Live or text session occurred.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "ta-study-partner-and-forward-handoff",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-prerequisite-session-bridge",
+            "m36-authoring-workbook-draft",
+            "m36-module-learning-companion"
+          ],
+          "note": "The candidate includes module-specific TA, Study Partner, and canonical-forward-handoff context; no chat behavior, review, or learner access is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "studio-reference-model-and-teaching-tests",
+          "state": "pointer-present",
+          "inputIds": [
+            "m36-authoring-reference-fixture",
+            "m36-authoring-reference-fixture-tests",
+            "m36-authoring-workbook-draft"
+          ],
+          "note": "A bounded deterministic authoring fixture and focused tests cover selected reasoning traces. They are checked-in pointers only: no learner-facing studio, review, publication, CI, deployment, or mastery evidence is claimed.",
+          "evidenceDetails": null
+        },
+        {
+          "id": "release-provenance-ci-and-deployment-evidence",
+          "state": "planned",
+          "inputIds": [],
+          "note": "No module-specific source review, CI validation, deployment version, or release record exists.",
+          "evidenceDetails": null
+        }
+      ],
+      "release": null
+    }
+  ]
+}

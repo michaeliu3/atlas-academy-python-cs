@@ -112,6 +112,9 @@ identity, trace correlation, partial failure, and distributed claim limits.
 Module 22 preserves all of those boundaries.
 
 ~~~mermaid
+%% atlas-diagram-id: m22-trust-boundary-knowledge-route
+%% atlas-diagram-title: Network observations become bounded security decisions before later language capabilities
+%% atlas-diagram-alt: Module 20 supplies endpoints and replies, and Module 21 adds tasks, retries, traces, and UNKNOWN. Module 22 treats each received value as an input claim, then bounds parsing, authorization, adapters, and redacted evidence before Module 23 exposes a narrow language capability.
 flowchart LR
     M20["M20: endpoint, bytes, request, reply"] --> M21["M21: task, retry, trace, UNKNOWN"]
     M21 --> C["A trace or operation ID correlates declared observations"]
@@ -122,11 +125,6 @@ flowchart LR
     E --> R["redacted evidence + human recovery"]
     R --> M23["M23: grammar, bounded evaluator, narrow capability"]
 ~~~
-
-**Text equivalent:** A request can have a stable operation ID and a trace from
-Module 21. That can help Atlas connect local records. It does not establish who
-sent the request, whether they can request an import, or whether their
-information should be retained.
 
 ### 1.2 The fixed Atlas incident
 
@@ -156,6 +154,9 @@ decision. The question for the module is:
 ### 1.3 Six decision states, not one word called trusted
 
 ~~~mermaid
+%% atlas-diagram-id: m22-claim-to-redacted-evidence-state
+%% atlas-diagram-title: A received claim reaches a narrow plan or a bounded rejection with redacted evidence
+%% atlas-diagram-alt: A received input claim first passes declared format and limit checks. A valid format is authenticated, then either authorized for a context-limited adapter plan or rejected by policy; malformed, unauthorized, and unsafe requests all end in redacted evidence rather than unbounded execution.
 stateDiagram-v2
     [*] --> InputClaim
     InputClaim --> ValidatedFormat: declared shape and limit check
@@ -202,6 +203,9 @@ Before naming a library, ask six questions:
 6. What evidence is legitimate to retain?
 
 ~~~mermaid
+%% atlas-diagram-id: m22-importer-trust-boundaries
+%% atlas-diagram-title: An importer crosses explicit parsing, worker, adapter, review, and evidence boundaries
+%% atlas-diagram-alt: A supplied importer request enters the Atlas API for parsing and limits, carries only correlation through a queue, and reaches a policy-bound worker. That worker selects fixed database, archive, transform, release-review, and redacted-evidence paths rather than handing the request unrestricted authority.
 flowchart LR
     U["Supplied importer request: INPUT CLAIM"] --> API["Atlas API: parse and limits"]
     API --> Q["Module 21 queue/task: correlation only"]
@@ -213,10 +217,6 @@ flowchart LR
     W --> L["evidence store: redacted fields only"]
     U -. trace and operation ID .-> Q
 ~~~
-
-**Text equivalent:** Every arrow crosses a boundary. A field that is only data
-at the API must not quietly become authority at the worker, database,
-filesystem, process, or evidence store.
 
 ### Boundary card
 
@@ -243,8 +243,45 @@ B. The trace can correlate local observations but needs separate identity eviden
 C. A trace proves the request is authorized for this tenant.<br>
 D. A trace proves the remote importer completed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer:** B. Trace correlation is useful but it is not identity,
 authorization, or remote completion.
+
+</details>
+
+### Prediction checkpoint — correlation is not authority
+
+Use a fresh, fixed local packet: it has the same `trace_id` as an earlier
+import attempt, but no subject evidence or policy decision. Before opening the
+reveal, write one choice and confidence from 1 (guessing) to 4 (could explain
+the boundary):
+
+- A. The trace proves the caller is the earlier subject.
+- B. The trace permits this tenant's requested effect.
+- C. The trace is correlation input until another boundary establishes more.
+- D. The trace proves the remote importer did not act.
+
+<details>
+<summary>Reveal after recording your prediction and confidence</summary>
+
+**C** is the strongest allowed claim. A trace can connect local observations,
+but it does not establish identity, authorization, or a remote effect. If your
+answer was A, B, or D, redraw the distinction between a received value, an
+identity assertion, an exact authorization tuple, and an observed effect.
+
+</details>
+
+### Trace-disposition card — context is not a credential
+
+An inbound `traceparent` / `tracestate` needs a boundary disposition, not a
+promotion. The boundary owner chooses to **drop** it, **restart** a local
+context, or **continue** only a permitted context after format, size, privacy,
+and trust rules. Treat `tracestate` as opaque vendor data, not a safe raw log
+field. A redacted local correlation reference and policy version can support
+diagnosis; separately verified identity and authorization still govern every
+protected effect.
 
 ### Session artifact
 
@@ -255,6 +292,10 @@ Complete this sentence in your notes:
 > and apply **[authority tuple or policy]**. It may retain only **[minimum record]**.
 
 ---
+
+### Session 1 output — trust-boundary atlas
+
+One atlas marks every point where Atlas data changes hands, and states what meaning can be lost at each.
 
 ## 3. Session 2 — Identity-to-decision ladder: who may cause this effect?
 
@@ -288,6 +329,9 @@ subject
 ~~~
 
 ~~~mermaid
+%% atlas-diagram-id: m22-authorization-tuple-decision
+%% atlas-diagram-title: Authorization resolves an exact canonical tuple through a versioned explicit rule
+%% atlas-diagram-alt: A presented claim is verified for a scoped subject, canonical tenant and resource, action and purpose, then policy version and freshness. An explicit matching rule authorizes only that tuple; otherwise the system denies, defers, or escalates while retaining redacted decision evidence.
 flowchart TD
     C["Presented claim"] --> V["Declared verifier"]
     V --> S["Scoped subject result"]
@@ -301,6 +345,50 @@ flowchart TD
     P --> E["redacted decision evidence"]
     N --> E
 ~~~
+
+### Rigor card — authorization is a predicate, not a property of a trace
+
+### Definitions
+
+A verifier turns a presented claim into a scoped subject or a
+failure. A separate policy then evaluates one explicit tuple:
+
+```text
+verify(claim) -> subject | failure
+allow(subject, tenant, resource, action, purpose, policy_version, freshness)
+  -> PERMIT | DENY | DEFER
+```
+
+A trace ID may correlate observations, but it is not by itself a subject,
+authority grant, or protected effect.
+
+### Assumptions and boundary
+
+Tuple fields are canonicalized before policy evaluation; the
+policy version and freshness/revocation rule are named; and the decision owner
+enforces the result at the narrow effect boundary. A receiving API, a log line,
+or an encrypted transport does not silently satisfy those assumptions.
+
+### Derivation and proof idea
+
+Authorization must depend on the exact action and
+resource because a verified subject can be permitted for one effect and denied
+for another. Therefore a correct decision cannot be derived from correlation
+alone; it needs the verified subject plus the full scoped tuple at the point
+where an effect would occur.
+
+### Counterexample and numerical experiment
+
+Under one declared illustrative policy,
+the same trace ID can lead to different decisions because the tuple changed:
+
+| Trace | subject | tenant/action | illustrative result | Why |
+| --- | --- | --- | --- | --- |
+| `T-17` | `editor-1` | `atlas-a` / publish | `PERMIT` | exact policy rule matches |
+| `T-17` | `editor-1` | `atlas-b` / publish | `DENY` or `DEFER` | same correlation, different protected effect |
+
+This two-row policy check is not a security assessment or a claim about any
+real identity provider; it makes the missing decision inputs visible.
 
 ### What Module 21 contributes
 
@@ -350,6 +438,10 @@ Create a four-row authority table:
 +
 ---
 
+### Session 2 output — identity-to-decision ladder
+
+One ladder traces a request from claimed identity to authorized effect, naming the rung where authority is actually decided.
+
 ## 4. Session 3 — Data-to-authority pipeline: why one sanitize box cannot protect every sink
 
 ### Pressure
@@ -364,6 +456,9 @@ next decision.
 ### The pipeline
 
 ~~~mermaid
+%% atlas-diagram-id: m22-validate-canonicalize-authorize-pipeline
+%% atlas-diagram-title: External data becomes an authorized narrow plan only after bounded validation and policy
+%% atlas-diagram-alt: An external representation is checked for syntax, shape, and size; semantic rules then produce canonical form within a resource budget. A context-specific adapter policy either authorizes a narrow plan or returns a bounded rejection, and both paths yield redacted local evidence.
 flowchart LR
     I["external representation"] --> S["syntax, shape, size"]
     S --> M["schema and semantic rule"]
@@ -419,6 +514,12 @@ member path: notes-link       kind: symlink    size: 0
 No archive is opened. No filesystem is touched. The question is purely: which
 metadata violates Atlas policy before any effect is possible?
 
+Metadata preflight is not an effect-time guarantee. If a future product ever
+extracts, an operation owner must enforce member policy immediately before each
+effect into an owned destination, keep resource/collision/link limits, and
+account for or clean up partial output after failure. Atlas deliberately does
+none of that here: it remains a metadata-only exercise, not an extraction lab.
+
 ### Database boundary
 
 A value belongs in a placeholder. Statement structure is an application
@@ -463,6 +564,22 @@ The second line is not validation. It lets a value select statement structure.
 The correct repair begins with a fixed statement shape, separate value binding,
 and a separate authorization decision.
 
+### Code-reading, debugging, and design checkpoint — one input, three separate decisions
+
+**Read.** Trace where `packet["query_label"]` changes from received data into
+statement structure. **Debug.** Name the first false promotion: an external
+value now selects SQL structure before a boundary has constrained it.
+**Design.** Keep the statement shape fixed, bind the label as a value, require
+the exact authority decision before creating the local fake `QueryPlan`, and
+retain only redacted decision evidence.
+
+Use four bounded acceptance checks: statement shape does not change when the
+label changes; parameters may change without becoming structure; a
+cross-tenant denial creates no plan; and retained evidence contains no raw
+label. Parameter binding is still not authorization for another tenant's
+effect. This is a code-reading and design exercise against the fake adapter,
+not a database target or an attack demonstration.
+
 ### Session artifact — five no-promotion rules
 
 Finish these statements:
@@ -475,6 +592,10 @@ Finish these statements:
 
 ---
 
+### Session 3 output — sink-specific encoding map
+
+One map shows why a single sanitize step cannot protect sinks with different grammars, and assigns an encoding to each.
+
 ## 5. Session 4 — Cryptographic purpose map: what does this primitive actually establish?
 
 ### Pressure
@@ -485,6 +606,9 @@ Security mechanisms have purposes and assumptions. Treating them as magic
 stickers creates serious design errors.
 
 ~~~mermaid
+%% atlas-diagram-id: m22-security-property-mechanism-selection
+%% atlas-diagram-title: Security mechanisms follow the needed property and still do not replace authorization
+%% atlas-diagram-alt: A required property leads to a distinct mechanism: reviewed randomness for hard-to-guess values, a slow salted verifier for passwords, a MAC for shared-key integrity, peer and certificate policy for transport, or a declared public-key identity system. Each still feeds a separate authorization decision.
 flowchart TD
     N["What property is needed?"] --> R["hard-to-guess value"]
     N --> K["password verifier"]
@@ -571,6 +695,10 @@ If you cannot fill the nonclaim, you are likely over-promoting the mechanism.
 
 ---
 
+### Session 4 output — cryptographic purpose map
+
+One map states what each primitive establishes — confidentiality, integrity, authenticity, or freshness — and what it does not.
+
 ## 6. Session 5 — Release provenance and human impact: what must be true to ship responsibly?
 
 ### Pressure
@@ -584,6 +712,9 @@ safety, not decoration added afterward.
 ### Provenance chain
 
 ~~~mermaid
+%% atlas-diagram-id: m22-release-provenance-chain
+%% atlas-diagram-title: Release trust depends on linked source, review, build, publisher, deployment, and recovery evidence
+%% atlas-diagram-alt: A source change is connected to review evidence, dependency declaration, local integrity control, build-environment and publisher assumptions, and a release artifact. Deployment and recovery review then connect that artifact to user impact and a support path, making the trust chain inspectable rather than automatic.
 flowchart LR
     S["source change"] --> R["review evidence"]
     R --> D["dependency declaration"]
@@ -662,7 +793,12 @@ C. “Release review is incomplete; outcome needs named recovery and accessible
    explanation.”<br>
 D. “Log more raw diagnostics to help support.”
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer:** C.
+
+</details>
 
 ### Session artifact — consequence ledger
 
@@ -674,6 +810,10 @@ D. “Log more raw diagnostics to help support.”
 | user message | explains next action | leaks tenant/system detail if excessive | minimal accessible wording | product/support owner |
 +
 ---
+
+### Session 5 output — release provenance record
+
+One record states what must be true about an artifact's origin before it ships, and who owns each claim.
 
 ## 7. Session 6 — Privacy-aware incident reconstruction: how do we learn without overclaiming?
 
@@ -688,6 +828,9 @@ history, proves successful containment, or permits an unbounded status query.
 ### Facts, hypotheses, and unknowns
 
 ~~~mermaid
+%% atlas-diagram-id: m22-facts-hypotheses-unknown-recovery
+%% atlas-diagram-title: Redacted facts, hypotheses, and visible unknowns guide bounded recovery and improvement
+%% atlas-diagram-alt: A redacted local timeline splits into facts that can be labeled, compatible hypotheses, and visible UNKNOWNs. Facts and hypotheses support a bounded containment or recovery candidate, while unknowns require an authorized status check or escalation; both routes lead to improvement and regression testing.
 flowchart TD
     L["redacted local timeline"] --> F["facts we can label"]
     L --> H["compatible hypotheses"]
@@ -766,6 +909,68 @@ input text
 An input string is not a Python expression. An abstract syntax tree is not a
 capability. A successful parse is not an authorization result.
 
+### Transfer task — one new sink, same boundary rule
+
+A fictional local reporting repair proposes a new `report_format` field. Do
+not implement or call a renderer. Instead, make a five-box whiteboard trace:
+
+```text
+received report_format claim
+→ declared fixed representation
+→ exact policy decision
+→ fixed local rendering effect
+→ redacted evidence and nonclaim
+```
+
+For each arrow, name the owner and the fact that must still be established.
+Then change one premise: the same value now names a report for another tenant.
+Predict the first boundary that must reject, defer, or escalate it. This is a
+transfer exercise, not permission to contact a service or a route around
+Module 23's prerequisites.
+
+### Conversational oral defense — M22
+
+The Teaching Assistant leads this supportive, post-module conversation; the
+Study Partner may rehearse the same ideas but does **not** administer or grade
+the defense. Begin with one learner-selected claim, a prediction about its
+strongest supported conclusion, and confidence from 1 to 4. The aim is to make
+reasoning visible and repairable, never to produce a pass/fail result.
+
+Use the visible chat as a readable whiteboard. Write a labelled trace such as
+`claim → boundary → decision → protected effect → redacted evidence`. If an
+equation or notation helps, use supported inline or display math, define every
+symbol, and give a plain-language or ASCII fallback; put code or state traces
+in a language-labelled fence and then summarize them in prose. Do not rely on
+speech, color, or an unlabelled diagram alone.
+
+### Hint ladder
+
+Start with: “Which value is only a claim?” Then ask which boundary owns the
+next decision, which authority tuple is still missing, and which smallest
+local observation could narrow the conclusion. Offer one small prompt at a
+time rather than replacing the learner's reasoning.
+
+### Counterexample turn
+
+Change exactly one premise: a trace matches but the tenant changes, a valid
+MAC appears but the policy denies, or a local timeout occurs while remote
+status remains UNKNOWN. Ask which earlier conclusion no longer follows and
+which nonclaim must remain visible.
+
+### Transfer turn
+
+Move the same boundary model to the fictional `report_format` repair above.
+The learner explains why parsing, a fixed enum, authentication, authorization,
+and a renderer answer distinct questions. Keep all examples synthetic and
+local.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's chosen claim, prediction/confidence, repaired boundary
+trace, one remaining uncertainty, and one next retrieval action. The learner
+controls whether to keep that compact summary; this workbook does not assert
+that any chat, voice session, or external record occurred.
+
 ### Session artifact
 
 Write a one-page incident reconstruction. Your final paragraph must contain one
@@ -773,6 +978,10 @@ sentence beginning “Atlas does not know whether…”. Keeping UNKNOWN visible
 mastery skill.
 
 ---
+
+### Session 6 output — trust and release dossier
+
+One dossier reconstructs an incident without overclaiming: what was observed, what was inferred, and what remains unknown.
 
 ## 8. Atlas Trust Control Room — visual studio text equivalent
 
@@ -829,8 +1038,13 @@ B. Sender is authorized to retry.<br>
 C. Atlas has correlation input until relevant trust model validates more.<br>
 D. Remote effect is known.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. Trace correlation is not identity, authorization, or remote
 completion.
+
+</details>
 
 ### Q2 — Authentication versus authorization
 
@@ -842,7 +1056,12 @@ B. Evaluate exact tenant/resource/action/purpose/policy decision.<br>
 C. Treat trace as proof of tenant membership.<br>
 D. Ask database to decide from a string.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Authentication and authorization answer different questions.
+
+</details>
 
 ### Q3 — Input boundary
 
@@ -853,7 +1072,12 @@ B. Values may build SQL structure.<br>
 C. Every receiving context still needs meaning and resource policy.<br>
 D. It may select a Python object loader.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. Parsing is not universal semantic or authority validation.
+
+</details>
 
 ### Q4 — Parameter binding
 
@@ -864,7 +1088,12 @@ B. It keeps value from selecting statement structure in that context.<br>
 C. It proves value came from trusted user.<br>
 D. It makes all queries safe regardless of policy.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Authorization and business rules remain separate.
+
+</details>
 
 ### Q5 — Cryptographic purpose
 
@@ -875,7 +1104,12 @@ B. HMAC is public signature with non-repudiation.<br>
 C. Under fixture key model, bounded message matched; policy is still separate.<br>
 D. Remote importer certainly executed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. MAC has a key/trust model and does not decide authorization.
+
+</details>
 
 ### Q6 — TLS scope
 
@@ -887,7 +1121,12 @@ B. Static configuration review found declared transport policy fields.<br>
 C. Every request field is safe.<br>
 D. Peer completed a real connection.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Reference opens no connection, and TLS is not app policy.
+
+</details>
 
 ### Q7 — Provenance
 
@@ -899,7 +1138,12 @@ B. Source review, publisher/build assumptions, vulnerability posture, and
 C. Package cannot run code.<br>
 D. User experience is accessible.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** B. Local integrity control is valuable but narrow.
+
+</details>
 
 ### Q8 — Incident evidence
 
@@ -912,7 +1156,22 @@ C. Remote effect can remain UNKNOWN; later status check needs authorization and
    evidence scope.<br>
 D. Store full raw request forever to be safe.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer:** C. Preserve uncertainty and minimize retained data.
+
+</details>
+
+### Misconception map — nearest tempting overclaims
+
+| Tempting shortcut | Repair question | Return route |
+|---|---|---|
+| “The trace identifies the caller.” | What independent evidence binds a subject to this request? | Session 1 and Session 2 |
+| “Authentication permits the effect.” | Which tenant/resource/action/purpose/policy tuple still needs a decision? | Session 2 |
+| “It parsed, so every sink is safe.” | Which receiving context gives the value a new meaning or effect? | Session 3 |
+| “A MAC or TLS decision grants policy.” | What mechanism-specific claim is supported, and what policy claim remains separate? | Session 4 |
+| “The packet tells the whole incident.” | Which facts are observed, which are hypotheses, and which remain UNKNOWN? | Session 6 |
 
 ---
 
@@ -1047,10 +1306,10 @@ Read sources as contracts and evidence, not substitutes for explanation.
   [NIST incident response guidance](https://csrc.nist.gov/pubs/sp/800/61/r3/final)
   — secure development and learning/recovery lifecycle.
 - [NIST Privacy Framework](https://www.nist.gov/privacy-framework) and
-  [NIST Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63.html)
+  [NIST Digital Identity Guidelines, SP 800-63-4 final](https://csrc.nist.gov/pubs/sp/800/63/4/final)
   — privacy risk to people and authentication scope.
-- [TLS 1.3](https://www.rfc-editor.org/rfc/rfc8446.html),
-  [TLS/DTLS secure-use guidance](https://www.rfc-editor.org/rfc/rfc9325.html),
+- [TLS 1.3, RFC 9846](https://www.rfc-editor.org/rfc/rfc9846.html),
+  [BCP 195 TLS/DTLS guidance status](https://www.rfc-editor.org/info/rfc9325/),
   and [OAuth 2.0 security BCP](https://www.rfc-editor.org/rfc/rfc9700.html) —
   advanced integration context, not Atlas implementation requirements.
 - [pip secure installs](https://pip.pypa.io/en/stable/topics/secure-installs/)
@@ -1094,3 +1353,76 @@ central rule:
 
 > A parsed expression is data until a declared evaluator gives it bounded
 > meaning and a narrow, authorized capability.
+
+
+## Bench pack
+
+**Bench pack:** `m22` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Nothing in this pack opens a connection, extracts
+an archive, runs a shell, or contacts anything — the reference model reports
+`connection_opened=False` and `adapter_called=False`, because the decisions under
+test are decisions about *metadata and structure*, made before any effect.
+
+### Bench 2 — identity-to-decision ladder
+
+**Session:** 2. **Rungs:** review and verify, recognize.
+**Executes:** one authenticated subject against a policy context with six
+dimensions — subject, tenant, resource, action, purpose, policy version. Varying
+**any single one** while holding the other five fixed is refused, and
+authentication succeeds in all six cases: a genuine user of the wrong tenant, the
+right tenant and wrong document, read-instead-of-delete, the same read for a
+different *purpose*, and a decision evaluated under a superseded policy version.
+The model names the two refusals differently — `DENIED_AUTHENTICATION` against
+`DENIED_AUTHORIZATION` — so the ladder is in the vocabulary rather than in the
+documentation, and a permitted decision returns an *effect scope* rather than a
+boolean, keeping what was permitted attached to the permission.
+
+The result: authorization is a decision about a **tuple**, not about a user, so
+caching "this user is allowed" has discarded five of six dimensions.
+
+**Cannot establish:** anything about a real authorization system. Nothing is
+authenticated for real, no credential is verified, and the model covers no role
+inheritance, delegation, or revocation.
+
+### Bench 3 — sink-specific encoding map
+
+**Session:** 3. **Rungs:** debug and defend, recognize.
+**Executes:** one string — carrying a traversal, an SQL quote, and a script tag —
+sent to five sinks. The reference planner refuses it at a **character allowlist**
+before parameterization is reached; with that allowlist removed, binding alone
+still keeps it out of the statement text, so for the value sink the allowlist is
+defence in depth rather than the defence. As an **SQL identifier** the relationship
+inverts exactly: binding produces a query that sorts by a constant rather than by
+the column (no error, no injection, and not the query anyone wanted), interpolation
+places the string into executable SQL, and the allowlist becomes the *only* control
+that refuses it. The archive policy rejects it as a member path without extracting.
+HTML escaping neutralises the angle brackets and leaves the traversal completely
+intact — an encoder for the wrong grammar is not a partial defence.
+
+The result worth carrying: **the same mechanism is redundant in one sink and
+load-bearing in the next**, so ranking defences as strong or weak in the abstract is
+what produces a codebase that parameterizes diligently and interpolates its column
+names.
+
+**Cannot establish:** a successful exploit against any real system. It enumerates no
+application's actual sinks, and says nothing about second-order injection or
+grammars whose parsers disagree with their specifications — where real incidents
+usually live.
+
+### Sessions without a bench
+
+- **Session 1** — the trust-boundary atlas is a design argument about where the
+  boundaries are.
+- **Session 4** — cryptographic purpose selection is an argument about which
+  primitive answers which question. Running one would demonstrate that a library
+  computes, not that the choice was right.
+- **Session 5** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a trust and release dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m22-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

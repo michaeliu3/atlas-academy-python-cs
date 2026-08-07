@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "deliveryMapVersion": "v1",
+  "kind": "atlas-advanced-authoring-delivery-map",
+  "moduleId": "m35",
+  "workbookPath": "content/authoring/m35_machine_learning_representation_workbook.v1.md",
+  "authoringSourcePlanPath": "content/source-maps/module35_machine_learning_statistical_learning_ai_eval_source_research.md",
+  "bridgePath": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "sessions": [
+    {
+      "id": "m35-s01",
+      "title": "Representation, inductive bias, and what a model can discard",
+      "sessionHeadingAnchor": "session-1--representation-inductive-bias-and-what-a-model-can-discard",
+      "usesPrerequisiteModuleIds": [
+        "m28"
+      ],
+      "outputs": [
+        {
+          "id": "m35-representation-assumption-sheet",
+          "kind": "worksheet",
+          "headingAnchor": "output-representation-assumption-sheet",
+          "forwardArtifactId": "m35-representation-assumption-sheet"
+        }
+      ]
+    },
+    {
+      "id": "m35-s02",
+      "title": "Problem formulation and classical baselines before learned models",
+      "sessionHeadingAnchor": "session-2--formulation-and-classical-baselines-before-learned-models",
+      "usesPrerequisiteModuleIds": [
+        "m28",
+        "m34"
+      ],
+      "outputs": [
+        {
+          "id": "m35-classical-learning-baseline-comparison",
+          "kind": "claim-table",
+          "headingAnchor": "output-classicallearning-baseline-comparison",
+          "forwardArtifactId": "m35-classical-learning-baseline-comparison"
+        }
+      ]
+    },
+    {
+      "id": "m35-s03",
+      "title": "Data-generating process, splits, metrics, uncertainty, and shift",
+      "sessionHeadingAnchor": "session-3--data-relations-splits-metrics-calibration-and-shift",
+      "usesPrerequisiteModuleIds": [
+        "m30"
+      ],
+      "outputs": [
+        {
+          "id": "m35-evaluation-and-shift-plan",
+          "kind": "worksheet",
+          "headingAnchor": "output-evaluation-and-shift-plan",
+          "forwardArtifactId": "m35-evaluation-and-shift-plan"
+        }
+      ]
+    },
+    {
+      "id": "m35-s04",
+      "title": "Learning dynamics: objectives, autodiff, optimization, and training systems",
+      "sessionHeadingAnchor": "session-4--objectives-autodiff-optimization-and-training-systems",
+      "usesPrerequisiteModuleIds": [
+        "m28",
+        "m31",
+        "m32"
+      ],
+      "outputs": [
+        {
+          "id": "m35-objective-optimization-generalization-trace",
+          "kind": "worksheet",
+          "headingAnchor": "output-objectiveoptimizationgeneralization-trace",
+          "forwardArtifactId": "m35-objective-optimization-generalization-trace"
+        },
+        {
+          "id": "m35-training-systems-reproducibility-card",
+          "kind": "experiment-card",
+          "headingAnchor": "output-training-systems-reproducibility-card",
+          "forwardArtifactId": "m35-training-systems-reproducibility-card"
+        }
+      ]
+    },
+    {
+      "id": "m35-s05",
+      "title": "ML debugging, observability, and evidence that can fail usefully",
+      "sessionHeadingAnchor": "session-5--ml-debugging-observability-and-evidence-that-can-fail-usefully",
+      "usesPrerequisiteModuleIds": [
+        "m13",
+        "m30"
+      ],
+      "outputs": [
+        {
+          "id": "m35-ml-claim-test-observability-matrix",
+          "kind": "claim-table",
+          "headingAnchor": "output-ml-claimtestobservability-matrix",
+          "forwardArtifactId": "m35-ml-claim-test-observability-matrix"
+        }
+      ]
+    },
+    {
+      "id": "m35-s06",
+      "title": "Responsible ML representation dossier and oral defense",
+      "sessionHeadingAnchor": "session-6--responsible-ml-representation-dossier-and-oral-defense",
+      "usesPrerequisiteModuleIds": [
+        "m13",
+        "m22",
+        "m28",
+        "m30",
+        "m31",
+        "m32",
+        "m34"
+      ],
+      "outputs": [
+        {
+          "id": "m35-data-authority-impact-boundary-map",
+          "kind": "worksheet",
+          "headingAnchor": "output-data-authority-impact-map",
+          "forwardArtifactId": "m35-data-authority-impact-boundary-map"
+        },
+        {
+          "id": "m35-machine-learning-representation-dossier",
+          "kind": "dossier",
+          "headingAnchor": "output-machine-learning--representation-dossier",
+          "forwardArtifactId": null
+        }
+      ]
+    }
+  ],
+  "forwardHandoff": {
+    "declaredForwardModuleId": "m36",
+    "directAcademicConsumerModuleIds": [
+      "m25",
+      "m36"
+    ],
+    "handoffArtifact": "ML evidence packet: representation assumptions, baseline comparison, evaluation/shift plan, objective/training trace, reproducibility record, and data-authority boundary map.",
+    "note": "M36 is the graph's declared forward handoff. M25 and M36 are its direct academic consumers; M25 remains gated by the canonical graph."
+  },
+  "localForwardHandoffOutputId": "m35-machine-learning-representation-dossier",
+  "truthBoundary": "This hidden M35 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m16",
+  "purpose": "Freeze a candidate-only M16 Teaching Assistant, Study Partner, and M17 handoff context without changing M16's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/15",
+    "digest": "sha256:ff90281fb6e5fcc912f7af61a68cf05909c4fc8849a2c484cad7184b1d7b9db4"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected legal-state claim, functional dependency, result contract, plan prediction, transaction history, retry rule, or restore claim. Ask for the rows or schedule, engine/configuration assumptions, confidence, and one uncertainty before accepting an isolation or WAL label.",
+    "artifactFocus": "Ask the learner to make a fact/FD/key card, result contract, plan evidence record, two-connection timeline, retry classification, or recovery-owner map visible. Separate theory, wrapper, engine, observed experiment, and operational policy claims.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as a duplicate retry key, missing ORDER BY, disabled foreign keys, stale plan statistics, lost update, or WAL substituted for backup. Offer the smallest counterexample or trace without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard when available: draw a relation/FD table, query-result contract, plan path, or A1/B1/A2/B2 schedule beside small SQL or Python fragments, and provide a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the import goal fixed but change one fact, identity, engine setting, read/write/commit event, plan condition, or recovery assumption. Ask for a prediction and confidence before distinguishing model, engine, wrapper, test, observed result, and operational-policy claims.",
+    "taHandoff": "End with the learner's selected M16 artifact, confidence, changed premise, invariant or schedule, observed evidence, one engine/configuration limit, and a constructive M17 question for the Teaching Assistant."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m17",
+    "carryArtifact": "Carry a relational-systems dossier: fact/FD/key and result contract; plan prediction with environment evidence; transaction owner and two-connection visibility trace; retry/reconciliation rule; recovery/restore boundary; engine/configuration assumptions; and the machine-layer question behind cost or durability—not a mastery claim.",
+    "targetQuestion": "Before M17 explains the execution stack, which plan, journal, visibility, or cost claim relies on pages, caches, instructions, system calls, or storage ordering that remains outside the current database model?",
+    "boundary": "M15 is M16's only canonical academic prerequisite and M17 is its only canonical forward handoff. References to M18–M36 or M25/M26 are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

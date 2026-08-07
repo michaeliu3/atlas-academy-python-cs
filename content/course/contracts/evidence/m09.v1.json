@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m09",
+  "purpose": "Bind M9's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M9 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m09-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M9 workbook distinguishes M8 as its academic prerequisite, retrieves earlier foundations without making them new route authorizations, and carries a canonical M10 handoff without treating later connections as bypasses.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "text-alternative--ordered-structure-knowledge-bridge"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "backward-and-forward-connections"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m09.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m09-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M9 exposes six ordered sessions that move from ordered operations through trees, balance, heaps, sorting and prefix structures to a coordinated Atlas index defense.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "session-1--ordered-questions-force-new-operations"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "session-2--recursive-shape-becomes-ordered-search"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "session-3--balance-is-a-repairable-shape-constraint"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "session-4--a-complete-tree-becomes-a-priority-mechanism"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "session-5--sorting-and-prefix-paths-organize-different-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "session-6--coordinate-indexes-direct-an-agent-defend-the-system"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m09-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M9 starts from the ordered client operation, then derives the key, policy, invariant, and representation needed to make that operation inspectable.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "4-start-with-the-ordered-question-not-the-tree"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "definition--ordered-operation-key-and-invariant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "derivation-and-proof-idea--an-operation-constrains-the-useful-order"}
+      ],
+      "limitations": ["A named first-principles section does not prove conceptual adequacy, a correct derivation, or learner comprehension."]
+    },
+    {
+      "id": "m09-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M9 exposes separate definition, assumption, derivation/proof idea, counterexample, and bounded workload-observation locations for ordered-structure claims.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "definition--ordered-operation-key-and-invariant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "assumption--comparison-model-and-policy-stay-separate"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "derivation-and-proof-idea--an-operation-constrains-the-useful-order"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "counterexample--a-familiar-shape-does-not-answer-every-ordered-question"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "numerical-experiment--measure-a-declared-workload-not-a-structure-name"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical observations, or source claims."]
+    },
+    {
+      "id": "m09-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M9 contains distinct code/architecture reading, stale-generation debugging, and bounded authoritative-versus-derived-index design work centred on the Atlas scheduler and prefix index.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "18-code-and-architecture-reading-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "183-suspicious-agent-patch"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "185-bounded-agent-task"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design an ordered-index component."]
+    },
+    {
+      "id": "m09-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M9 asks the learner to predict current and stale heap generations with confidence before inspecting the scheduler trace.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "predict-before-revealing--scheduler-generation-trace"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m09-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M9 asks the learner to transfer an explicit ordering contract, invariant, parameterized cost, and human consequence to another systems or CS setting.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "level-8--transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m09-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M9 exposes learner source wording plus a scoped canonical source map and module-specific source/reuse audit addendum with claim-linkage stopping lines.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "sources-and-synthesis-notes"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/arc_ii_source_map.md", "locator": "module-9--trees-heaps-sorting-and-ordered-data"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m09-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M9 binds its ordered-structure knowledge bridge to a concise text alternative, the shared Mermaid reader, shared Arc II studio, and module accessibility regression surface without claiming a graph-bound dedicated studio.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "text-alternative--ordered-structure-knowledge-bridge"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "app/ArcTwoStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and renderer test do not replace screen-reader, keyboard, browser, shared-studio, or human-comprehension review."]
+    },
+    {
+      "id": "m09-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M9 exposes a confidence-aware understanding diagnostic and misconception routing rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "21-understanding-check--eight-confidence-aware-mcqs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "diagnostic-interpretation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "likely-misconceptions"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m09-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M9 includes a learner-controlled after-two-days, after-one-week, and later retrieval route tied to tree, heap, sorting, and prefix evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "scheduled-retrieval"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m09-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M9 specifies a constructive ordered-index evidence packet with discussion-ready acceptance criteria and an evidence rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "23-atlas-milestone-9--evidence-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "project-acceptance-criteria"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "evidence-rubric"}
+      ],
+      "limitations": ["A project brief, acceptance criteria, and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m09-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M9 contains an encouraging conversational oral-defense protocol with invitation, hint ladder, changed-premise counterexample, M10 transfer, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "supportive-oral-defense-protocol"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "invitation--recover-one-ordered-question-before-naming-a-structure"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "hint-ladder--expose-one-invariant-at-a-time"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "transfer--carry-a-priority-frontier-into-m10"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "reflection--name-the-next-smallest-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m09-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M9 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated ordered-operation claim.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m09.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m09-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M9 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m09.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m09-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M9 companion carries an ordered-evidence card into the canonical M10 graph-frontier handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m09.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M9, or authorization to bypass M10 prerequisites."]
+    },
+    {
+      "id": "m09-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M9 binds the accessible Mermaid rendering surface, shared Arc II overview, and direct module accessibility test to its ordered-structure bridge; M9 declares no graph-bound dedicated studio or separate executable reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/09_trees_heaps_sorting_ordered.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "app/ArcTwoStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m09-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m09.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m09/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

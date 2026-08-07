@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m06",
+  "purpose": "Bind M6's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M6 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m06-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M6 workbook distinguishes M5 as its academic prerequisite, M27 as a prior-reader navigation bridge, and M7 as its canonical forward handoff without treating a navigation link as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "text-alternative--representation-knowledge-bridge"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "backward-and-forward-connections"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m06.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m06-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M6 exposes six ordered sessions that move from representation layers through array and linked mechanisms to memory/architecture reading and a bounded M7 decision handoff.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "session-1--from-values-to-bits-without-losing-meaning"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "session-2--derive-an-array-from-indexed-access"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "session-3--make-growth-visible"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "session-4--derive-linked-order-and-its-invariants"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "session-5--locality-memory-and-architecture-reading"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "session-6--changing-constraints-delegation-and-defense"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m06-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M6 begins from the difference between an abstract sequence value and a physical representation, then derives indexed access and correctness obligations from a stated model and invariant.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "4-first-principles-a-value-needs-a-physical-story"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "derivation-and-proof-idea--indexed-access-follows-the-invariant"}
+      ],
+      "limitations": ["A named first-principles section does not prove conceptual adequacy, a correct analysis, or learner comprehension."]
+    },
+    {
+      "id": "m06-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M6 exposes separate definition, assumption, derivation/proof idea, counterexample, and bounded numerical-experiment locations for representation claims.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "definition--sequence-value-representation-and-invariant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "assumption--keep-the-model-language-and-implementation-separate"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "derivation-and-proof-idea--indexed-access-follows-the-invariant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "counterexample--linked-does-not-mean-every-insertion-is-constant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "numerical-experiment--a-measurement-checks-one-named-setup"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical checks, or source claims."]
+    },
+    {
+      "id": "m06-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M6 contains distinct code-reading, representation-invariant debugging, and behavior-preserving architecture-design work centred on the Atlas history buffer.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "code-reading--recover-the-sequence-contract-before-fields"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "debugging--isolate-a-representation-invariant-failure"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "design--preserve-observations-before-replacing-representation"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a representation-sensitive component."]
+    },
+    {
+      "id": "m06-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M6 asks the learner to predict the first invariant break and a shortest revealing sequence before the stale-tail diagnosis is shown.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "predict-before-revealing"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m06-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M6 asks the learner to transfer representation, contract, correctness, cost, failure, and human-impact reasoning to a database, layout, DOM, packet, or reachability setting.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "h-transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m06-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M6 exposes learner source wording, a scoped source/reuse ledger, and claim-linkage stopping lines that separate language semantics, CPython observations, and later machine-model depth.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "sources-and-synthesis-notes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "source-wording-and-claim-boundary"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/arc_ii_source_map.md", "locator": "module-6--representation-memory-sequences-and-linked-structures"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module6_representation_memory_sequences_linked_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module6_representation_memory_sequences_linked_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m06-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M6 binds its representation knowledge bridge to a concise text alternative and the shared Mermaid reader plus module-specific accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "text-alternative--representation-knowledge-bridge"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m06-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M6 exposes a confidence-aware multiple-choice diagnostic, misconception routing, and a non-penalizing high-confidence-error response.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "18-understanding-check--confidence-aware-multiple-choice"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "diagnostic-interpretation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "likely-misconceptions"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m06-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M6 includes a learner-controlled two-day, one-week, and M7 retrieval route tied to its representation-decision artifact.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "retrieval-schedule"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m06-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M6 specifies a representation comprehension-and-design portfolio with constructive acceptance criteria and an evidence rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "20-atlas-milestone-6--mastery-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "project-acceptance-criteria"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "evidence-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m06-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M6 contains an encouraging conversational oral-defense protocol with invitation, hint ladder, changed-premise counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "supportive-oral-defense-protocol"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "invitation--start-from-one-observable-behavior"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "oral-hint-ladder--expose-one-representation-decision-at-a-time"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "transfer--diagnose-a-queue-like-slow-path"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "reflection--name-the-next-smallest-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m06-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M6 companion binds a Teaching Assistant opening, artifact focus, and repair move to a representation claim.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m06.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m06-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M6 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m06.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m06-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M6 companion carries a bounded representation-decision card into the canonical M7 queue/deque handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m06.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M6, or authorization to bypass M7 prerequisites."]
+    },
+    {
+      "id": "m06-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M6 binds the accessible Mermaid rendering surface and its direct module accessibility test to the workbook's representation knowledge bridge; M6 declares no separate executable studio or reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/06_representation_memory_sequences_linked.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m06-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m06.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m06/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

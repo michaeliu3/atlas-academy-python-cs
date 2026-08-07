@@ -2,7 +2,7 @@
 
 > **Central idea:** crossing a boundary turns implicit process state into an explicit artifact; that artifact deserves a representation, schema, compatibility policy, trust model, failure model, and evidence record.
 
-> **Mastery claim:** “I can trace an Atlas event from a Python value to schema values, Unicode text, UTF-8 bytes, a safely replaced file, a built wheel, and an installed CLI; I can say which layer owns every promise, inspect rather than trust generated artifacts, migrate old data deliberately, review a release patch, and bound every portability, atomicity, reproducibility, and supply-chain claim.”
+> **Learning aim:** “I can trace an Atlas event from a Python value to schema values, Unicode text, UTF-8 bytes, a safely replaced file, a built wheel, and an installed CLI; I can say which layer owns every promise, inspect rather than trust generated artifacts, migrate old data deliberately, review a release patch, and bound every portability, atomicity, reproducibility, and supply-chain claim.”
 
 Module 14 leaves Atlas changeable inside one checkout: `PlannerService` depends on the distinct `BatchEventLoader` and the Module 12 v1 `RankingPolicy`; `LegacyPlanFacade` preserves old output; `build_legacy_compatible_app()` owns concrete assembly; and Module 13 evidence protects the raw importer contract. No persistence repository exists yet. A new pressure now appears:
 
@@ -79,6 +79,9 @@ No label upgrades another:
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m15-course-position
+%% atlas-diagram-title: M15 prerequisites and forward connections
+%% atlas-diagram-alt: Earlier modules on values, abstraction, bytes, iteration, identity, components, evidence, and change feed durable artifacts. M15 then supports transactions, operating systems, network protocols, and security.
 flowchart LR
     M1["M1 · values, state,<br/>exceptions"] --> REP["representation + failure"]
     M3["M3 · ADTs,<br/>RI and abstraction"] --> SCHEMA["external schema"]
@@ -156,6 +159,9 @@ Build and inspect one **versioned learning-event bundle plus installable CLI**:
 The bundle is a **single file** so one local publish can use one replacement boundary. It is not a database and does not solve concurrent multi-record transactions; that pressure deliberately hands forward to Module 16.
 
 ```mermaid
+%% atlas-diagram-id: m15-durable-artifact-lifecycle
+%% atlas-diagram-title: A StudyEvent becomes an installed and releasable artifact
+%% atlas-diagram-alt: Domain values become schema values, canonical JSON text, UTF-8 bytes, a staged file, a CLI, source and built distributions, a fresh installation, and a release record with rollback evidence.
 flowchart LR
     VALUE["StudyEvent values<br/>domain invariants"] --> SCHEMA["v1 schema values<br/>stable field meaning"]
     SCHEMA --> TEXT["canonical JSON text<br/>grammar + order policy"]
@@ -250,7 +256,7 @@ If four or more answers are weak, pause for targeted repair. The new module shou
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -317,6 +323,9 @@ The rows are obligations, not decorations. If “version” or “trust” is bl
 ### 4.2 Boundary expansion
 
 ```mermaid
+%% atlas-diagram-id: m15-boundary-expansion
+%% atlas-diagram-title: Durable boundaries widen the failure model
+%% atlas-diagram-alt: A live process crosses file, version, artifact, environment, and release boundaries. Each boundary removes an implicit assumption and introduces a wider compatibility, build, trust, or rollback obligation.
 flowchart TB
     P["live process<br/>objects + open resources"] --> F["file boundary<br/>bytes + name + schema"]
     F --> T["time/version boundary<br/>migration + compatibility"]
@@ -350,6 +359,9 @@ Each outer layer preserves earlier meaning while adding a wider fault model. Pac
 **Transaction** groups related state changes under atomicity/isolation/durability rules. A single replaced bundle is not a general transaction manager.
 
 ```mermaid
+%% atlas-diagram-id: m15-persistence-promise-ladder
+%% atlas-diagram-title: Persistence promises are distinct layers
+%% atlas-diagram-alt: Serialization maps values to bytes, persistence gives them a name and lifetime, publication changes visibility, durability concerns survival, recovery finds usable post-failure state, and backup keeps an independent copy.
 flowchart LR
     S["serialize<br/>value ↔ bytes"] --> P["persist<br/>name + lifetime"]
     P --> A["publish<br/>visibility transition"]
@@ -391,6 +403,9 @@ More precisely:
 ### 5.1 One value, several representations
 
 ```mermaid
+%% atlas-diagram-id: m15-text-encoding-branches
+%% atlas-diagram-title: One text value under different encoding contracts
+%% atlas-diagram-alt: The text value café can encode as different UTF-8 or UTF-16-LE byte sequences. Decoding with the matching codec restores the value, while using a wrong decoder can fail or produce different text.
 flowchart LR
     CP["text value<br/>'café'"] -->|UTF-8 encode| U8["63 61 66 c3 a9"]
     CP -->|UTF-16-LE encode| U16["63 00 61 00 66 00 e9 00"]
@@ -482,6 +497,9 @@ A path object is a value describing a path according to lexical/platform rules. 
 - replacement will succeed.
 
 ```mermaid
+%% atlas-diagram-id: m15-path-to-open-resource
+%% atlas-diagram-title: From untrusted path text to an open resource
+%% atlas-diagram-alt: Untrusted path text becomes a lexical path, resolves through filesystem rules to a current object, and then becomes an opened handle used for I/O. Symlink, mount, case, and check-use race rules require platform policy.
 flowchart LR
     RAW["untrusted path text"] --> LEX["lexical path value"]
     LEX --> RES["filesystem resolution"]
@@ -517,6 +535,9 @@ A file object is both:
 ### 6.1 Capability layers
 
 ```mermaid
+%% atlas-diagram-id: m15-io-layer-stack
+%% atlas-diagram-title: Text, buffered, raw, and OS I/O layers
+%% atlas-diagram-alt: A TextIOWrapper translates strings and encoding/newline policy to buffered bytes. The buffered stream performs fewer larger operations over a raw binary stream, which uses an OS handle and filesystem or device.
 flowchart TB
     TEXT["TextIOWrapper<br/>str ↔ bytes, encoding, newlines"] --> BUFFER["buffered stream<br/>fewer/larger raw operations"]
     BUFFER --> RAW["raw binary stream<br/>read/write/seek capabilities"]
@@ -530,6 +551,9 @@ The exact stack depends on how the stream is opened. A stream can be readable bu
 **[PYTHON 3.14 GUARANTEE]** A context manager implements an enter/exit protocol. If `__enter__` succeeds, Python calls `__exit__` when control leaves the `with` suite through normal completion, return, or exception. `__exit__` can suppress an exception by returning a truthy value.
 
 ```mermaid
+%% atlas-diagram-id: m15-context-manager-exit-flow
+%% atlas-diagram-title: Context manager entry and exit control flow
+%% atlas-diagram-alt: Evaluating a context expression calls __enter__. If it raises, the body never starts; otherwise the body runs and __exit__ receives either no exception or exception details, then propagates or suppresses the exception.
 flowchart TD
     A["evaluate context expression"] --> B["call __enter__"]
     B -->|raises| E0["body never starts<br/>__exit__ not entered for this manager"]
@@ -656,6 +680,9 @@ No choice removes the need to define:
 ### 7.2 JSON has at least four validation layers
 
 ```mermaid
+%% atlas-diagram-id: m15-layered-input-validation
+%% atlas-diagram-title: Layered bundle input validation
+%% atlas-diagram-alt: Bytes decode as strict UTF-8 text, JSON parses grammar, a schema validator accepts a v1 value, and domain constructors create StudyEvent values. Each stage has its own failure category.
 flowchart LR
     B["bytes"] -->|strict UTF-8| T["text"]
     T -->|JSON parser| G["grammar value"]
@@ -832,6 +859,9 @@ Additional **[ATLAS POLICY]**:
 - v1 readers validate the digest before returning domain values.
 
 ```mermaid
+%% atlas-diagram-id: m15-bundle-schema-tree
+%% atlas-diagram-title: Versioned Atlas bundle structure
+%% atlas-diagram-alt: The bundle root contains format identity, schema version, a manifest, and ordered events. The manifest carries event count and a SHA-256 digest of canonical event bytes; every event must satisfy StudyEvent invariants.
 flowchart TD
     ROOT["root object"] --> ID["format identity"]
     ROOT --> VER["schema version"]
@@ -850,6 +880,9 @@ The manifest is deterministic for the same ordered domain values under the pinne
 ### 8.2 Version dispatch precedes interpretation
 
 ```mermaid
+%% atlas-diagram-id: m15-version-dispatch
+%% atlas-diagram-title: Explicit schema-version dispatch
+%% atlas-diagram-alt: Bounded bytes are parsed as JSON and checked for a root object and integer version. Version v0 is validated, migrated purely, and revalidated as v1; v1 is validated directly; all other versions are rejected before domain construction.
 flowchart TD
     P["bounded bytes parsed as JSON"] --> O{"root object + integer version?"}
     O -->|no| BAD["reject schema"]
@@ -905,6 +938,9 @@ Its correctness argument can therefore focus on a deterministic value transforma
 ### 8.5 Migration graph, not migration wish
 
 ```mermaid
+%% atlas-diagram-id: m15-version-migration-path
+%% atlas-diagram-title: Supported migration paths and an unsupported future version
+%% atlas-diagram-alt: Validated v0 scores from 0 to 100 migrate purely to v1 confidence from 0 to 1, then become StudyEvent values. A future v2 has no declared path and is rejected.
 flowchart LR
     V0["v0 score 0..100"] -->|validated pure edge| V1["v1 confidence 0..1"]
     V1 -->|native reader| APP["StudyEvent domain"]
@@ -994,6 +1030,27 @@ The runnable model:
 - records no universal guarantee about crashes, directory persistence, network filesystems, simultaneous writers, symlink races, or hostile local users.
 
 This is stronger than direct truncation and weaker than a transactional storage guarantee.
+
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+Define the claim narrowly: one bounded target has a **process-visible
+replacement** when a complete temporary candidate in its target directory is
+successfully passed to the named replacement primitive. The claim assumes one
+writer, the same target filesystem/directory, a closed complete temporary file,
+successful `os.replace()`, and the documented platform behavior for that
+operation.
+
+The trace is the proof idea: before replacement, readers use the old target;
+the candidate is written and checked without exposing a prefix at the target
+name; after successful replacement, the target name selects the new candidate.
+Direct truncation is the counterexample: a failure after truncation can expose a
+prefix. Two independent writers are another counterexample: both replacements
+can be complete while one update is lost.
+
+For \(b=1\ \mathrm{MiB}\), keeping the old target and a complete temporary
+candidate can temporarily require roughly \(2\ \mathrm{MiB}\) before any
+backup. That scale check says nothing about latency, power-loss durability, or
+directory persistence; those remain named filesystem and hardware assumptions.
 
 ### 9.4 Replacement is not multi-writer coordination
 
@@ -1962,6 +2019,9 @@ The `src/` layout makes one common checkout illusion less likely: tests should n
 ### 11.2 Public boundaries
 
 ```mermaid
+%% atlas-diagram-id: m15-installed-cli-boundaries
+%% atlas-diagram-title: Installed CLI, package, and build boundaries
+%% atlas-diagram-alt: A shell user invokes the atlas-bundle launcher, which calls the CLI main function and public bundle operations over domain and JSON/file adapters. Build output creates a wheel that an installer uses to provide the launcher and main module.
 flowchart TB
     SHELL["shell user/script"] --> CMD["atlas-bundle launcher"]
     CMD --> MAIN["atlas_cli.cli:main"]
@@ -2030,6 +2090,9 @@ This is an **illustrative configuration**, not the freshly pinned course release
 ### 12.2 Build participants
 
 ```mermaid
+%% atlas-diagram-id: m15-build-frontend-sequence
+%% atlas-diagram-title: Build frontend and backend artifact sequence
+%% atlas-diagram-alt: A learner or release job asks a build frontend for sdist and wheel artifacts. The frontend reads pyproject build settings, creates an isolated environment, invokes backend hooks, and reports the artifacts selected from the source tree.
 sequenceDiagram
     participant U as Learner/release job
     participant F as Build frontend
@@ -2120,6 +2183,27 @@ Before opening source again:
 
 The artifact is the thing delivered. Source configuration is only evidence about intent.
 
+### Artifact-first debugging checkpoint — inspect delivery before intent
+
+**Prediction.** A source-checkout import works, but a fresh installation cannot
+run `atlas-learning`. Which delivered fact is missing: the module, the wheel
+member, or the launcher declaration?
+
+Read the chain in order:
+
+```text
+pyproject.toml declaration
+→ wheel member inventory (is atlas_cli/cli.py present?)
+→ dist-info/entry_points.txt mapping
+→ fresh-environment installed command
+```
+
+If the source tree works but `cli.py` is absent from the wheel, the defect is a
+delivery artifact boundary. If it is present but `entry_points.txt` lacks the
+mapping, the module exists but the command contract does not. A successful local
+import is neither result. Record the artifact evidence and the smallest repair;
+do not infer a release or portability guarantee.
+
 ---
 
 ## 13. Dependency declarations, constraints, locks, and environments answer different questions
@@ -2140,6 +2224,9 @@ The artifact is the thing delivered. Source configuration is only evidence about
 ### 13.2 Direct and transitive dependencies
 
 ```mermaid
+%% atlas-diagram-id: m15-dependency-resolution-graph
+%% atlas-diagram-title: Requirements, resolver, and transitive dependency graph
+%% atlas-diagram-alt: Atlas declares direct requirement A, which brings transitive requirements B and C that both select artifact D. Project metadata permits candidates, while resolver, index, environment, and lock or constraint policy determine selection.
 flowchart TD
     ATLAS["atlas-learning-cli<br/>declares direct requirement A"] --> A["A chosen version"]
     A --> B["B transitive requirement"]
@@ -2261,6 +2348,9 @@ Use versioning as a reviewed communication rule, backed by compatibility evidenc
 ### 14.2 Release state machine
 
 ```mermaid
+%% atlas-diagram-id: m15-release-state-machine
+%% atlas-diagram-title: Evidence-gated release and rollback states
+%% atlas-diagram-alt: A candidate progresses from proposed through built, inspected, installed, verified, approved, promoted, and observed. After observation it is retained when the acceptance window passes or rolled back through a compatible route when a trigger occurs.
 stateDiagram-v2
     [*] --> Proposed
     Proposed --> Built: reviewed source + pinned build request
@@ -2279,6 +2369,9 @@ An artifact can move only when the transition’s evidence exists. “CI is gree
 ### 14.3 Supply-chain trust map
 
 ```mermaid
+%% atlas-diagram-id: m15-supply-chain-path
+%% atlas-diagram-title: Source to runtime supply-chain path
+%% atlas-diagram-alt: Authors and reviewers create a source revision, a build runner and backend produce an sdist or wheel, an artifact store serves it to an installer, and the installer creates a runtime environment. Identity, provenance, and minimal permissions constrain different edges.
 flowchart LR
     DEV["source authors + reviewers"] --> VCS["source revision"]
     VCS --> RUNNER["build runner + workflow"]
@@ -2322,6 +2415,9 @@ Do not publish course artifacts to public PyPI merely to demonstrate packaging. 
 ### 14.5 Rollback has two axes
 
 ```mermaid
+%% atlas-diagram-id: m15-code-data-rollback-decision
+%% atlas-diagram-title: Rollback depends on code and data compatibility
+%% atlas-diagram-alt: A new wheel and v1 bundle meet at the question of whether old code can read new data. If tested compatibility holds, artifact rollback may be viable; otherwise use a forward fix, dual reader, backup restore, or explicit downgrade migration.
 flowchart TB
     CODE["code/artifact version"] --> CNEW["new wheel"]
     DATA["data schema/version"] --> DNEW["v1 bundle"]
@@ -2560,9 +2656,11 @@ Disposition: reject, preserve the good entry-point line if it was absent, and re
 | release artifact is unchanged | compare promotion artifact to approved external digest | expected-digest channel remains trusted |
 | rollback is viable | install previous wheel + read current data/restore disposable backup | rehearsed data/environment only |
 
-### 16.5 Oral defense
+### 16.5 Conversation rehearsal — use the canonical oral-defense flow below
 
-Without code, explain in six minutes:
+Use this as an optional prompt bank for the single conversational oral-defense
+flow below. The learner may keep a code, byte, or artifact sketch visible,
+choose any subset, pause for a hint, and finish with an uncertainty:
 
 1. why the same event is a Python value, schema value, text, bytes, file, and installed-system input without those being the same representation;
 2. the exact v0 → v1 path and unsupported-version behavior;
@@ -2571,7 +2669,8 @@ Without code, explain in six minutes:
 5. what hashes, clean install, and Trusted Publishing each establish and omit;
 6. the strongest rollback uncertainty.
 
-If the explanation skips a boundary, the artifact is not yet owned.
+If the explanation skips a boundary, name a useful next question or evidence
+request; it is not a readiness, ownership, or pass/fail gate.
 
 ---
 
@@ -2579,7 +2678,7 @@ If the explanation skips a boundary, the artifact is not yet owned.
 
 Every session consumes the preceding artifact. The instructor alternates brief explanation with prediction, tracing, comparison, inspection, and defense. No session is a packaging-command recital.
 
-### Session 1 — One event crosses text, byte, and path boundaries
+## Session 1 — One event crosses text, byte, and path boundaries
 
 **Consumes:** Module 14’s validated `StudyEvent`, in-memory `ImportSource.text`, explicit composition boundary, and compatibility ledger.
 
@@ -2631,13 +2730,20 @@ Which can change the bytes while preserving intended event meaning: object-key o
 - encoding/newline/path decision note;
 - three failure examples and their responsible boundaries.
 
+### Session 1 output — representation boundary trace
+
+Keep the value → schema → text → bytes → path trace, named encoding/newline
+policy, authority boundary, and one prediction that distinguishes data meaning
+from its representation. Session 2 uses this trace to reason about resource
+lifetime and visible partial effects.
+
 **TA handoff**
 
 If text and bytes remain fused, return to Module 6 before schema work. If a path object is described as a capability or security proof, use the lexical/resolution/handle diagram and one check/use counterexample.
 
 ---
 
-### Session 2 — Resource lifetime becomes a publication failure timeline
+## Session 2 — Resource lifetime becomes a publication failure timeline
 
 **Consumes:** explicit v1 bytes and target-path policy from Session 1.
 
@@ -2694,13 +2800,19 @@ Even if the caller owns `stream` with a context manager, a later iterator failur
 - injected-failure expectation;
 - cost comparison and one unresolved multi-writer question.
 
+### Session 2 output — resource and publication failure timeline
+
+Record acquire/use/flush/close/replace/observer events, what can be visible at
+each point, the filesystem assumptions, and the strongest honest nonclaim.
+Session 3 turns that timeline into an explicit schema and migration decision.
+
 **TA handoff**
 
 If “closed” means “durable,” ask the learner to place Python buffer, OS/page cache, filesystem metadata, controller, device, recovery, and backup on separate rows. Do not teach unqualified folklore about `fsync` or rename.
 
 ---
 
-### Session 3 — A schema version becomes a migration and trust decision
+## Session 3 — A schema version becomes a migration and trust decision
 
 **Consumes:** bounded canonical bytes and publication model from Sessions 1–2.
 
@@ -2755,13 +2867,19 @@ Byte identity relative to a compromised assertion may be established; trustworth
 - format-selection note rejecting pickle;
 - archive allowlist and resource-limit note.
 
+### Session 3 output — schema migration and trust contract
+
+Preserve accepted versions, rejected inputs, migration purity/order claims,
+resource limits, one adversarial fixture, and the evidence still needed before
+treating an artifact as trustworthy. Session 4 attacks this boundary.
+
 **TA handoff**
 
 If parsing and validation are fused, use a valid JSON string with wrong Atlas shape. If digest and authentication are fused, change both artifact and adjacent expected digest in the counterexample.
 
 ---
 
-### Session 4 — Read, attack, and defend the Atlas bundle implementation
+## Session 4 — Read, attack, and defend the Atlas bundle implementation
 
 **Consumes:** schemas, migration map, manifest, and failure model from Sessions 1–3.
 
@@ -2806,13 +2924,20 @@ There is no universal answer; choose based on what the artifact identity is mean
 - one accepted/rejected patch disposition;
 - updated boundary and limitation ledger.
 
+### Session 4 output — attack and defense boundary review
+
+Write the smallest allowed input surface, byte/grammar/schema/domain checks,
+one failure trace, one proposed repair, and the library/platform fact that must
+be verified rather than assumed. Session 5 carries that contract into the
+built artifact.
+
 **TA handoff**
 
 If test success replaces explanation, ask the learner to prove one loop/transition property and name two untested platform assumptions. If review starts with style, return to public contract and failure order.
 
 ---
 
-### Session 5 — The source tree becomes an inspected installed command
+## Session 5 — The source tree becomes an inspected installed command
 
 **Consumes:** reviewed bundle/CLI core and evidence from Session 4.
 
@@ -2868,13 +2993,19 @@ Use local built artifacts and a disposable environment. If the pinned build depe
 - fresh-install transcript;
 - discrepancies and acceptance disposition.
 
+### Session 5 output — artifact and clean-install receipt
+
+Keep source, sdist, wheel, installed files, and command observations in one
+five-column map, including `METADATA`/`WHEEL`/`RECORD`, interpreter and
+resolver context, exact artifact identity, and one compatibility limit.
+
 **TA handoff**
 
 If the learner describes build frontend, backend, resolver, installer, and environment as “pip,” redraw participants and require one file/evidence item owned by each.
 
 ---
 
-### Session 6 — Rehearse release, rollback, and agent-patch defense
+## Session 6 — Rehearse release, rollback, and agent-patch defense
 
 **Consumes:** one verified local wheel, clean-install evidence, and the entire bundle compatibility record.
 
@@ -2892,7 +3023,8 @@ If the learner describes build frontend, backend, resolver, installer, and envir
 8. run post-promotion CLI evidence in a disposable environment;
 9. rehearse code rollback and test whether the old command can read current v1 data;
 10. decide forward fix versus rollback when data compatibility is absent;
-11. conduct the six-minute oral defense;
+11. use the conversational oral-defense flow below with a learner-selected
+    prompt and stopping point;
 12. hand the bundle limitations to Module 16.
 
 **Release incident**
@@ -2910,9 +3042,16 @@ No. Code artifact rollback would restore an old binary that cannot interpret cur
 - code/data rollback rehearsal;
 - Arc III handoff stating why a relational transaction boundary is next.
 
-**Mastery gate**
+### Session 6 output — release and rollback defense with M16 handoff
 
-Advance only if Michael can:
+Package the durable-boundary record, migration/failure evidence, artifact
+receipt, rollback limits, unresolved trust or platform assumption, and the
+M16 question: which linked facts now require one transactional visibility and
+reconciliation boundary rather than independent files?
+
+**Evidence to inspect before choosing a next step**
+
+Use the following evidence to choose a next bridge or repair. Look for whether Michael can:
 
 - traverse value → schema → bytes → file → CLI → wheel → installed environment without collapsing layers;
 - explain the strongest evidence and remaining uncertainty at each transition;
@@ -3485,6 +3624,17 @@ evidence/module15/
 
 The exact filenames may change, but every evidence role must remain and personal data/secrets must not enter the packet.
 
+### Artifact/release receipt — M12–M15
+
+Add one short receipt inside the existing packet (for example beside the build
+or release record), not a second registry. It points to the M12 public promise
+and dependency arrow, the M13 regression and evidence limit, the M14
+change/reversal condition, and the M15 artifact/recovery decision. Its
+`toolchain.txt` records at least the interpreter; build frontend/backend;
+installer/resolver; platform; resolution or lock state; artifact hashes; and
+access date. Record the clean-install result and rollback limit beside those
+facts; a digest or successful build alone is not a release proof.
+
 ### 21.3 Evidence claims
 
 | Claim | Required evidence | Automatic rejection |
@@ -3513,9 +3663,11 @@ The exact filenames may change, but every evidence role must remain and personal
 | delivery/rollback | keeps old wheel | evidence-gated release + data check | handles incident tradeoffs/authority/uncertainty |
 | explanation | uses terminology | connected first-principles story | precise multi-layer oral defense with limits/costs |
 
-### 21.5 Oral defense prompts
+### 21.5 Optional prompt bank for the same conversation
 
-Select four:
+Choose any four only if useful for the canonical conversational oral-defense
+flow below. They are not timed, recorded, scored, or used as a completion
+decision:
 
 1. A user says the JSON “looks fine.” Walk from bytes to domain truth.
 2. Prove what the v0 → v1 score mapping preserves.
@@ -3528,11 +3680,11 @@ Select four:
 9. Decide whether a CLI wording change is patch/minor/major under the documented contract.
 10. Handle an old-wheel/new-schema rollback incident.
 
-### 21.6 Instructor decision rule
+### 21.6 Constructive next-step guide
 
-Module 15 is mastered when Michael can receive an unfamiliar serialized artifact and Python distribution, recover the representation/compatibility/trust/failure model, inspect the built artifact, direct and review a bounded change, verify it in a clean environment, and defend the release/rollback limits.
-
-Do not advance because:
+Use the representation, compatibility, trust, failure, clean-environment, and
+rollback evidence to choose a next bridge or repair—not to decide whether
+Michael passes. Do not treat these signals as a reason to skip repair:
 
 - the reference tests passed;
 - the JSON is readable;
@@ -3541,13 +3693,28 @@ Do not advance because:
 - the command ran once;
 - the agent said the release is reproducible.
 
-Advance when each claim has the right owner, artifact, evidence, cost, and explicit boundary.
+If each claim has the right owner, artifact, evidence, cost, and explicit
+boundary while Michael can recover an unfamiliar serialized artifact and Python
+distribution, inspect the built artifact, direct and review a bounded change,
+verify it in a clean environment, and defend the release/rollback limits,
+continue with the M16 handoff.
+
+Otherwise, repair the first collapsed boundary: trace one value from domain
+meaning through bytes and installation, create a version/corruption
+counterexample, inspect the built artifact in a fresh environment, or rehearse
+the code-and-data rollback decision with its explicit recovery limit. Keep the
+release-policy gates above intact while making the missing evidence visible.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ---
 
 ## 22. Consolidated knowledge map
 
 ```mermaid
+%% atlas-diagram-id: m15-durable-delivery-knowledge-map
+%% atlas-diagram-title: Durable delivery from value to rollback
+%% atlas-diagram-alt: Domain values move through schema, grammar, bytes, integrity evidence, resource lifetime, file publication, CLI, build artifacts, installation, release, and rollback. Trust and resource costs cross-cut the chain.
 flowchart TB
     VALUE["domain value<br/>meaning + invariants"] --> SCHEMA["external schema<br/>fields + order + version"]
     SCHEMA --> SERIAL["serializer/parser<br/>grammar policy"]
@@ -3572,6 +3739,19 @@ flowchart TB
     COST["time + memory + I/O<br/>latency + human review"] -. "cross-cuts" .-> VALUE
     COST -. "cross-cuts" .-> ENV
 ```
+
+### Visual text equivalent — durable delivery from value to rollback
+
+The route begins with a domain value and its invariants. A schema selects what
+meaning crosses a boundary; grammar and encoding turn it into bytes; a manifest
+can compare those bytes with an expected identity. Resource lifetime and staged
+file publication then govern a bounded local artifact. A CLI exposes that
+artifact, while `pyproject.toml`, a build backend, and sdist/wheel outputs turn
+source intent into inspectable deliverables. A resolver installs one chosen
+artifact in a target environment; only then can an authorized release decision
+and a code-plus-data rollback plan be discussed. Trust and cost cross every
+step: a matching digest does not establish origin, and a successful install does
+not prove compatibility or recovery.
 
 ### 22.1 The connected explanation
 
@@ -3871,3 +4051,144 @@ Then answer:
 > A generated patch builds a wheel, passes tests, and produces a matching digest. What must you still inspect, challenge, and verify before Atlas deserves release?
 
 A complete answer traverses public/schema behavior, error and cleanup paths, artifact contents/metadata, dependency graph, fresh install, target compatibility, publisher/build authority, data migration, promotion identity, post-promotion observation, rollback, costs, and unsupported claims.
+
+## Conversational oral defense — M15
+
+This is a supportive Teaching Assistant conversation, not a release approval or
+pass/fail exam. If the learner chooses GPT Live at a preferred setting and
+their client renders the material, use the byte trace, schema table, artifact
+listing, code, and formulae as a shared whiteboard. This workbook cannot
+control voice availability, quality settings, rendering, retention, or
+integrations. The same conversation protocol can instead use readable text
+with Markdown and an ASCII value → bytes → artifact sketch; nothing is
+automatically written to Notion or treated as completion evidence.
+
+### Invitation — trace one durable claim
+
+Invite the learner to choose one artifact and say: “This value crosses
+[boundary]; this evidence supports [claim]; this assumption remains
+[assumption]; my confidence is [level].” Ask for the trace before a command or
+tool name.
+
+### Hint ladder — meaning to reversible operation
+
+Move one rung at a time: domain contract → schema/version → text/bytes policy
+→ resource/failure timeline → validation/trust boundary → built artifact and
+fresh-install observation → code/data rollback condition. Offer the smallest
+counterexample or evidence request instead of a judgment.
+
+### Changed-premise counterexample
+
+Keep the release goal but change one premise: an old reader rejects the new
+schema, a ZIP has a duplicate logical member, or the exact wheel installs but
+the resolver chooses a different dependency graph. Ask which claim, artifact,
+test, or recovery plan must change and which layer remains outside the proof.
+
+### Transfer turn — M16 transaction boundary
+
+Ask which two durable facts can no longer be safely published as independent
+file effects, and what key, atomic visibility, retry identity, or recovery
+evidence M16 must introduce.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may retain a compact record: boundary trace, prediction, observed
+artifact evidence, changed-premise repair, confidence, unresolved assumption,
+and one M16 question. Copy/export only with learner approval.
+
+## Guided Codex handoff — M15
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M15. This domain value becomes these bytes and
+artifact claims; this validation/recovery boundary protects [invariant]; my
+confidence is [level].”** Ask for the round-trip and authority path before
+discussing a package command. Use this hint ladder: domain contract → schema →
+parse/validate → deterministic bytes → artifact inventory → fresh-install or
+recovery observation → publisher/provenance boundary. Change one premise (old
+schema, corrupt archive, untrusted pickle, missing lock, or interrupted write)
+and ask what the current evidence fails to establish.
+
+### Study Partner — durable-artifact rehearsal
+
+Ask the learner to trace one event from in-memory value through serialized
+bytes to a newly loaded value. Then change one byte, version, dependency, or
+publisher fact and ask which validation must reject or reconcile it. End with
+a concise TA handoff: observed fact, open risk, smallest next test.
+
+### Forward handoff — M16
+
+Carry a data contract, migration/recovery boundary, and artifact-provenance
+question into **M16**. The next module asks when the same durable invariants
+require keys, relations, transactions, isolation, and reconciliation.
+
+
+## Bench pack
+
+**Bench pack:** `m15` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 15 has no checked-in reference model, so
+both benches carry their own subject. Neither writes to a real filesystem: the
+boundaries under examination — text against bytes, a declared schema version against
+a migration — are decided before any I/O happens, which is what makes them checkable
+here and what leaves the packaging sessions out.
+
+### Bench 1 — representation boundary trace
+
+**Session:** 1. **Rungs:** trace, debug and defend.
+**Executes:** two pairs that look identical, followed across six boundaries. The NFC
+and NFD forms of `café` render the same on screen and disagree at **every**
+mechanical boundary: 4 against 5 code points, 5 against 6 UTF-8 bytes, different
+SHA-256, distinct dict keys, different JSON. Only the rendering says "same".
+
+The second pair fails the opposite way. `bool` subclasses `int`, so
+`{True: 'from True', 1: 'from 1'}` has **one** entry — and it keeps the *first key*
+with the *last value*, a combination neither line of code wrote. `json.dumps({True:
+1, 1: 2})` then produces `{"true": 2}`, which round-trips to a string key. Two keys
+went in, one string came out, and nothing raised at any point.
+
+The takeaway is that "the same" is relative to an equivalence, and Python's `==`, a
+hash table, a UTF-8 encoder, a digest, a serializer, and a filesystem are six judges
+that need not agree. The repair is to normalize *at the boundary*, not to compare
+more carefully.
+
+**Cannot establish:** the macOS/Linux path-normalization claim, which is stated from
+documentation rather than measured — no real filesystem is touched. Nothing here
+covers case folding, collation, or confusable characters.
+
+### Bench 3 — schema migration and trust contract
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** six records across three schema versions, through the only three
+reader policies there are. A reader that **ignores the version** computes 0.6667 by
+counting a record whose unrecognised `retracted: true` flag it treated as an
+unremarkable extra key. A reader that **accepts known-or-older** computes 0.6000
+after silently dropping both newest records. The correct answer is 0.6200. Neither
+wrong answer raises.
+
+The systematic part is the one to carry: version filtering does not drop records at
+random, it drops the *recent* ones — so the surviving sample is reliably stale, and
+drifts further from the truth the more the schema moves, while never failing. Only
+the refusing policy produces no number, and that refusal is the feature.
+
+**Cannot establish:** how often real schemas make load-bearing additions. It
+evaluates no serialization library's compatibility guarantees and says nothing about
+formats with declared evolution rules — Avro, Protobuf, and Parquet all address
+exactly this.
+
+### Sessions without a bench
+
+- **Session 2** — resource lifetime across a publication failure: open handles,
+  partial writes, and crash timing that this process cannot inflict on itself
+  honestly.
+- **Session 4** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 5** — packaging and delivery: building, installing, and inspecting a
+  real artifact, which needs a real toolchain and a real distribution channel.
+- **Session 6** — a release and rollback defence consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m15-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

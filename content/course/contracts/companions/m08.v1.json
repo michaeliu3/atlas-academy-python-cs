@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m08",
+  "purpose": "Freeze a candidate-only M8 Teaching Assistant, Study Partner, and M9 handoff context for future human review without changing M8's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/7",
+    "digest": "sha256:5042396940e21466aabb65f03b25c890ae93282c6a95f97b34c30c9ae0af961c"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected lookup or collision trace. Ask for the mapping operation, hash route, equality decision, invariant, predicted result, claim label, and confidence before offering correction.",
+    "artifactFocus": "Ask the learner to make one lookup-to-index card, collision/equality trace, key-contract repair, qualified-cost card, index-proof sheet, or reviewed patch observation visible, then distinguish what it establishes from its model, Python, CPython, recovery, or adversarial limits.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as colliding unequal keys, mutable equality state, an empty tombstone, a failed update, or persisted process-local hashes; then offer the smallest counterexample, invariant repair, or test without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: show one compact bucket/probe trace, equality table, cost inequality, posting-set proof, or code trace and give a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the desired lookup result fixed but make two unequal keys collide, change an equality-relevant field, allow load to grow, replace a stored posting alias, or ask for an ordered query. Ask for a prediction and confidence before separating the changed correctness, cost, ownership, or capability claim from the unchanged one.",
+    "taHandoff": "End with the learner's selected M8 artifact, attempted claim and evidence label, confidence, unresolved assumption, one changed premise, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m09",
+    "carryArtifact": "Carry an identity-and-index card: key equality policy, hash route/equality trace, collision invariant, qualified cost claim, source-of-truth/recovery boundary, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M9 introduces ordered structures, which client question needs order—minimum, predecessor, range, or sorted traversal—and which equality, invariant, and cost assumptions still apply?",
+    "boundary": "M7 is M8's academic prerequisite and M9 is its only canonical forward handoff. References to M10–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

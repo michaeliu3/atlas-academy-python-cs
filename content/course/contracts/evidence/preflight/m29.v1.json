@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-preflight",
+  "recordVersion": "v1",
+  "moduleId": "m29",
+  "purpose": "Record a non-promoting M29 structural evidence preflight so the course can improve its contract gate without falsely converting legacy material into reviewed, released, or verified material.",
+  "truthBoundary": {
+    "candidate": "This record establishes only that declared M29 candidate inputs can be structurally resolved and scoped under the current local contract rules.",
+    "review": "This record is not a human review, source-quality approval, learner-mastery result, oral-defense result, or review-ready transition.",
+    "release": "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. The required release criterion remains explicitly open."
+  },
+  "state": "candidate-not-promoting",
+  "evidenceRecordPath": "content/course/contracts/evidence/m29.v1.json",
+  "openCriterionIds": [
+    "release-provenance-ci-and-deployment-evidence"
+  ],
+  "promotionBlockers": [
+    "human-review",
+    "review-ready-commit",
+    "source-commit-ci-run",
+    "private-deployment-record"
+  ]
+}

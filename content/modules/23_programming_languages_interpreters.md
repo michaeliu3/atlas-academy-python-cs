@@ -23,9 +23,12 @@ visible. We will build two tiny, original teaching languages:
   over a redacted local fixture after a separately authorized, narrow read
   capability is supplied.
 
-Neither language is a subset of Python. Neither is a general sandbox. The
-reference model performs no network, filesystem, process, database, package,
-credential, or remote-code operation.
+Neither language is a subset of Python. Neither is a general sandbox. Within
+its query-evaluation path, the reference model uses fixed in-memory fixtures
+and performs no network, filesystem, child-process, database, package,
+credential, or remote-code operation. Its fixed CLI writes bounded output to
+standard output, and its separate behavioral test harness reads the checked-in
+model source for one structural regression check.
 
 ---
 
@@ -82,8 +85,9 @@ operating-system boundary, or performance guarantee.
 ~~~text
 Reference: module23_reference.py
 Tests:     test_module23_reference.py (43 behavioral checks)
-Runtime:   local CPython evidence environment
-Effects:   no network, file, process, database, package, credential, or remote-code action
+Runtime:   local Python implementation/version evidence environment (reported by the bridge packet)
+Evaluator: no network, filesystem, child-process, database, package, credential, or remote-code action
+Local test-harness I/O: reads checked-in model source for one structural safety check; fixed CLI only writes bounded output
 Input:     fixed scenario names only; the CLI does not accept arbitrary query text
 Core rule: custom Atlas Query lexer/parser; never source → Python evaluator
 Provenance: private seals model the course path; they are not hostile same-process isolation
@@ -136,6 +140,9 @@ earlier Atlas ideas:
   smaller, justified decision.
 
 ~~~mermaid
+%% atlas-diagram-id: m23-language-semantics-knowledge-route
+%% atlas-diagram-title: Earlier state, representations, effects, and trust boundaries yield bounded language meaning
+%% atlas-diagram-alt: Modules on bindings, invariants, APIs and effects, and network trust feed Pebble names and environments, AST and grammar contracts, parse-validate-evaluate flow, and an Atlas Query boundary. Together they produce deterministic language meaning and bounded evidence before Module 24 studies CPython observations.
 flowchart LR
     M1["M1: bindings and state"] --> P["Pebble: names, environments, values"]
     M3["M3/6: invariants + representation"] --> A["AST and grammar contracts"]
@@ -147,13 +154,6 @@ flowchart LR
     Q --> B["bounded local result + evidence"]
     B --> M24["M24: CPython implementation and measured cost"]
 ~~~
-
-**Text equivalent:** Pebble explains how a tree gets meaning from environments
-and rules. Atlas Query applies the same parser/evaluator separation to a
-read-only learning metric, then adds Module 22’s scoped authorization before a
-fixed capability is handed in. Module 24 will ask how CPython implements and
-measures a trusted Python program; it does not retroactively make bytecode
-the language specification.
 
 ### 1.2 The fixed Atlas incident
 
@@ -237,6 +237,9 @@ arrangement is not a domain request. A domain request is not a permission.
 Name the representation at every transition:
 
 ~~~mermaid
+%% atlas-diagram-id: m23-query-representation-pipeline
+%% atlas-diagram-title: A query moves from input text through lexical and syntax forms to an authorized capability
+%% atlas-diagram-alt: The input query count(where cohort = atlas) becomes lexical tokens, then a syntax-only Count(Filter(...)) tree. Contract validation checks the field and comparator, Module 22 authorization approves an exact tuple, and a fixed ReadLearningMetric capability produces the local count result.
 flowchart LR
     T["count(where cohort = &quot;atlas&quot;)\
 [INPUT DATA]"] --> L["COUNT · WHERE · FIELD · = · STRING\
@@ -277,7 +280,7 @@ Grammar notation is a compact way to say what forms the parser may accept:
 | Notation | Read it as | Example here |
 |---|---|---|
 | `::=` | “may have this form” | `query ::= ...` |
-| `|` | “one alternative” | `count ... | mean ...` |
+| `\|` | “one alternative” | `count ... \| mean ...` |
 | quoted word | exact terminal token | `"where"` |
 | capital name | category checked elsewhere | `FIELD`, `METRIC` |
 | sequence | elements occur in this order | `FIELD CMP LITERAL` |
@@ -321,6 +324,27 @@ D. count(where cohort = "atlas") extra
 | C | contract error | The grammar can accept a METRIC-shaped token before the schema recognizes it. |
 | D | parse error | The parser must reject trailing undeclared structure. |
 
+### Prediction checkpoint — parsing is not permission
+
+For the fixed query `count(where cohort = "atlas")`, record one choice and
+confidence from 1 (guessing) to 4 (could explain the boundary) before opening
+the reveal:
+
+- A. It may read the learning metric because it parsed.
+- B. It has grammar shape only; contract, authorization, capability, and fuel
+  decisions remain.
+- C. Its subject is authenticated because a field is present.
+- D. It is safe host-language source.
+
+<details>
+<summary>Reveal after recording your prediction and confidence</summary>
+
+**B** is the strongest conclusion. Parsing establishes only the declared
+syntax shape. If you chose A, C, or D, name the missing contract, authority,
+capability, and resource boundaries in order before continuing.
+
+</details>
+
 ### Session artifact
 
 Draw your own eight-card pipeline. Write exactly one sentence below each card:
@@ -332,6 +356,10 @@ Draw your own eight-card pipeline. Write exactly one sentence below each card:
 End with: “A successful parse establishes ________, not ________.”
 
 ---
+
+### Session 1 output — token and form boundary note
+
+One note separates what a lexer establishes about form from what it cannot establish about permission or meaning.
 
 ## 3. Session 2 — A tree gets meaning from rules
 
@@ -407,6 +435,9 @@ This matters because an AST does not tell you whether both branches run.
 Semantics is the rule that says what the tree means.
 
 ~~~mermaid
+%% atlas-diagram-id: m23-conditional-evaluation-short-circuit
+%% atlas-diagram-title: A conditional evaluates its selected branch while leaving the other branch unevaluated
+%% atlas-diagram-alt: Evaluating If(True, 7, unknown_name) first evaluates the test to True, then evaluates only the selected then branch to 7. The otherwise branch containing unknown_name is not evaluated, so the resulting value is Value(7).
 flowchart TD
     I["If(True, 7, unknown_name)"] --> T["evaluate test → True"]
     T --> Y["evaluate then branch → 7"]
@@ -440,6 +471,10 @@ Circle the line where a semantic rule—not the parser—decides the next action
 
 ---
 
+### Session 2 output — evaluation rule table
+
+One table assigns each syntactic form its evaluation rule, so meaning comes from the rules rather than from intuition.
+
 ## 4. Session 3 — Names live in environments; functions close over them
 
 ### Pressure
@@ -465,6 +500,9 @@ Name lookup proceeds from the current frame outward through parents. A new
 binding can shadow an older one without altering the older value.
 
 ~~~mermaid
+%% atlas-diagram-id: m23-closure-environment-chain
+%% atlas-diagram-title: A closure value carries its outer environment into a later call frame
+%% atlas-diagram-alt: A global frame binds rate, an outer frame binds threshold and points to global, and a closure stores parameter, body, and that outer environment. A later call frame binds record and points to outer, allowing the closure body to resolve threshold through its captured environment.
 flowchart BT
     G["global frame<br>rate → 1"]
     O["outer frame<br>threshold → 3<br>parent → global"]
@@ -472,10 +510,6 @@ flowchart BT
     A["call frame<br>record → 4<br>parent → outer"]
     G --> O --> C --> A
 ~~~
-
-**Text equivalent:** The closure carries a lexical parent. During the call,
-`record` comes from the new call frame and `threshold` comes from the captured
-outer frame. A caller’s unrelated `threshold` is not consulted.
 
 ### Function values are data plus a remembered environment
 
@@ -564,6 +598,10 @@ Put an arrow beside every name lookup. Then finish this sentence:
 to ________.”
 
 ---
+
+### Session 3 output — environment and closure trace
+
+One trace follows a name through nested environments and shows exactly what a closure captured.
 
 ## 5. Session 4 — Contracts make invalid states visible
 
@@ -661,6 +699,10 @@ For each `≠`, write a one-line example of a claim that can still be false.
 
 ---
 
+### Session 4 output — interpreter contract record
+
+One record states the interpreter's representation invariant and the invalid states its contracts make unrepresentable.
+
 ## 6. Session 5 — Bounded evaluation receives authority, never finds it
 
 ### Pressure
@@ -683,6 +725,9 @@ evaluator receives a pre-minted model object only after Module 22
 authorization:
 
 ~~~mermaid
+%% atlas-diagram-id: m23-query-capability-authorization-boundary
+%% atlas-diagram-title: A validated query crosses exact authorization before a bounded evaluator returns an observation
+%% atlas-diagram-alt: A contract-checked query plan supplies the exact Module 22 subject, action, resource, tenant, and purpose tuple. A denied policy produces redacted evidence; an allowed policy invokes only the host-fixed ReadLearningMetric capability and bounded evaluator, which can return a result, fuel exhaustion, or result-limit exhaustion.
 flowchart LR
     Q["validated query plan<br>[CONTRACT CHECKED]"] --> A["exact M22 tuple<br>subject/action/resource/tenant/purpose"]
     A --> D{"policy permits?"}
@@ -793,16 +838,21 @@ external credential. State why each omission is purposeful.
 
 ---
 
+### Session 5 output — capability boundary note
+
+One note demonstrates that bounded evaluation receives authority from its caller and cannot acquire more by itself.
+
 ## 7. Session 6 — Implementation evidence is not semantic law
 
 ### Pressure
 
 “The disassembly proves what Python means and what will be fast.”
 
-Disassembly is an observation of a particular CPython build and version. It
-can help you ask sharper implementation and performance questions. It is not
-the Python language specification, a portable opcode contract, a sandbox
-boundary, or a benchmark result.
+Disassembly is an observation of one local Python implementation and version.
+When its runtime label is `cpython`, it can support a CPython-specific
+implementation observation. It can help you ask sharper implementation and
+performance questions. It is not the Python language specification, a
+portable opcode contract, a sandbox boundary, or a benchmark result.
 
 ### From trusted Python source to an implementation observation
 
@@ -820,7 +870,7 @@ trusted bundled source
   → ast.parse observation
   → compiler/code-object idea
   → disassembly observation
-  → CPython / Python-version-specific question
+  → local Python-implementation/version-specific question
 ~~~
 
 The word **trusted** matters. Module 23 never sends external Atlas Query text
@@ -834,16 +884,25 @@ returns AST node kinds, opcode names, and the exact local implementation and
 version label. That is evidence about this local runtime—not a portable
 semantic, authorization, or performance claim.
 
+**Bridge provenance note:** the AST comes from the fixed bundled text. The
+instruction names come from a separately declared, course-owned function with
+intentionally matching source. This model does not compile that text at bridge
+time or prove that the inspected code object originated from it; treat the two
+as parallel fixed teaching observations.
+
 ### Four claim owners
 
 | Claim | Correct owner |
 |---|---|
 | “This Pebble expression evaluates left-to-right.” | Atlas/Pebble language rule |
 | “Python resolves this nested name under its execution model.” | Python language reference |
-| “This local CPython build displays these instructions.” | version-labelled CPython observation |
+| “This local Python implementation/version displays these instructions.” | version-labelled implementation observation |
 | “This version is faster for our workload.” | a measured, reproducible performance study |
 
 ~~~mermaid
+%% atlas-diagram-id: m23-semantics-to-cpython-observation
+%% atlas-diagram-title: Specified language meaning stays distinct from CPython observations and measured costs
+%% atlas-diagram-alt: Specified language rules lead to trusted Python source, AST observation, a compile or code-object concept, and disassembly. That evidence motivates Module 24 questions about cost, allocation, and version effects, but it does not prove portable semantics or safe execution.
 flowchart TD
     S["language meaning<br>specified rules"] --> P["trusted Python source"]
     P --> A["AST observation"]
@@ -875,7 +934,69 @@ bytecode—write:
 End with one Module 24 question you would answer by measurement rather than
 intuition.
 
+### Transfer task — new rule language, same authority boundary
+
+A fictional learner-facing automation needs a tiny rule language that may
+select one of two fixed local explanations. Do not implement the language or
+invoke an adapter. Draw this bounded route instead:
+
+```text
+rule text → declared tokens → original AST → domain contract
+→ exact authorization decision → fixed explanation capability → redacted result
+```
+
+Change one premise: a valid AST now asks for an explanation owned by another
+learner cohort. Predict the earliest boundary that changes and state the
+strongest remaining nonclaim. This is a transfer task, not a host-language
+evaluation exercise and not a bypass around Module 24's evidence boundary.
+
+### Conversational oral defense — M23
+
+The Teaching Assistant leads this supportive, post-module oral-defense
+conversation. The Study Partner may conduct non-grading rehearsal but does
+**not** administer or grade the defense. Start with one learner-selected
+parse-to-capability claim, a prediction of the next result, and confidence from
+1 to 4. The purpose is constructive diagnosis and repair, never pass/fail.
+
+Use the visible chat as a readable whiteboard: show a labelled
+`text → token → AST → environment → capability` trace. If notation or an
+equation is useful, use supported inline or display math, define symbols, and
+give a prose or ASCII fallback; put code, grammar, or evaluation traces in a
+language-labelled fence and explain their state changes in direct prose. Do not
+depend on speech, color, or a visual-only trace.
+
+### Hint ladder
+
+Ask first which representation is present and what it establishes. Then ask
+which semantic rule selects the next evaluation step, what authority is still
+absent, and what bounded observation would strengthen the claim. Offer the
+smallest useful hint before showing a repair.
+
+### Counterexample turn
+
+Change one premise: an AST is well formed but a schema field is unknown, a
+closure's parent is replaced by its caller, or a fuel budget is exhausted. The
+learner identifies which claim fails and which boundary remains intact without
+constructing an exploit.
+
+### Transfer turn
+
+Use the fictional rule-language route above. The learner separates syntax,
+semantics, authorization, capability, and evidence, then asks one Module 24
+measurement question rather than inferring a performance result from bytecode.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's selected trace, prediction/confidence, one repaired
+layer confusion, one counterexample, one remaining uncertainty, and a next
+retrieval action. The learner controls whether to keep that compact summary;
+this workbook does not assert a chat, voice session, or external record.
+
 ---
+
+### Session 6 output — language semantics dossier
+
+One dossier separates the language's declared semantics from this implementation's observable behaviour, and names one difference.
 
 ## 8. Atlas Language Lab — visual studio text equivalent
 
@@ -889,7 +1010,7 @@ contains the same learning route without relying on color or animation.
 | **Environment theatre** | Which `threshold` does a closure see? | The closure captures its lexical parent, not its caller. | A closure is not a security boundary. |
 | **Evaluation trace** | Which branch/value is evaluated next? | Left-to-right/call-by-value and conditional/short-circuit rules. | Tree shape alone does not choose an evaluation order. |
 | **Contract + capability checkpoint** | What is the earliest rejecting layer? | Syntax, contract, authority, capability, and fuel are distinct outcomes. | A permitted AST does not choose a host adapter. |
-| **Trusted compilation bridge** | What does one disassembly establish? | A CPython/Python-version-specific implementation observation. | Bytecode is not portable language law or a performance proof. |
+| **Trusted compilation bridge** | What does one disassembly establish? | A local implementation/version-specific observation. | Bytecode is not portable language law or a performance proof. |
 
 Accessibility requirement: every view has a text label, keyboard-reachable
 native control, visible focus, high contrast, a prose traversal order, and a
@@ -931,8 +1052,13 @@ An Atlas Query string successfully parses. What is the strongest conclusion?
 - C. The supplied subject is authenticated.
 - D. The source is safe Python.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** A grammar establishes syntax only. The other choices
 require different evidence and boundaries.
+
+</details>
 
 ### Q2 — Lexer boundary
 
@@ -943,8 +1069,13 @@ Where should an undeclared character be rejected?
 - C. During lexical scanning, with a source span
 - D. By a static type checker
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** An unknown character has not become a valid token or AST.
 Later work should not occur.
+
+</details>
 
 ### Q3 — Closure parent
 
@@ -956,8 +1087,13 @@ to which parent environment?
 - C. A global dictionary containing every host name
 - D. The latest environment that defines the same spelling
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** This makes free-name meaning depend on the definition
 context rather than an unrelated caller.
+
+</details>
 
 ### Q4 — Conditional trace
 
@@ -968,7 +1104,12 @@ Pebble evaluates `if true then 7 else missing`. Which name lookup occurs?
 - C. Neither branch is evaluated.
 - D. The selected then branch evaluates; `missing` is not looked up.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: D.** Conditional branch selection is a named semantic rule.
+
+</details>
 
 ### Q5 — Type claims
 
@@ -979,8 +1120,13 @@ What does a clean static type-checker result establish?
 - C. The request is authorized for a tenant and purpose.
 - D. The evaluator cannot consume resources.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: A.** Static communication is useful, but runtime data,
 authority, and resource boundaries remain separate.
+
+</details>
 
 ### Q6 — Narrow authority
 
@@ -992,7 +1138,12 @@ receive?
 - C. A fixed-scope, pre-minted read capability.
 - D. A newly opened database connection.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** Query text cannot select a host adapter or scope.
+
+</details>
 
 ### Q7 — Fuel result
 
@@ -1003,8 +1154,13 @@ What does `FUEL_EXHAUSTED` mean in the reference model?
 - C. The query was malformed.
 - D. The subject was denied authorization.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** It is a local resource observation, not a global
 security or availability result.
+
+</details>
 
 ### Q8 — Bytecode observation
 
@@ -1012,12 +1168,27 @@ What can a `dis` listing contribute here?
 
 - A. A permanent definition of Python semantics.
 - B. Proof that a query sandbox is secure.
-- C. A version-labelled CPython implementation observation that motivates
+- C. A version-labelled local implementation observation that motivates
   Module 24 measurement.
 - D. An authorization result.
 
-**Best answer: C.** CPython bytecode is implementation detail and can change
-across versions and VMs.
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
+**Best answer: C.** Bytecode is implementation detail and can change across
+versions and implementations.
+
+</details>
+
+### Misconception map — repair layer confusion
+
+| Tempting shortcut | Repair question | Return route |
+|---|---|---|
+| “It parsed, so it is allowed.” | What contract, authorization, and capability decisions remain? | Session 1 and Session 5 |
+| “The AST already tells us what to do.” | Which declared semantic rule chooses the next evaluation step? | Session 2 |
+| “A type hint validates this received value.” | What runtime contract still checks the concrete representation? | Session 4 |
+| “Fuel makes the evaluator a sandbox.” | Which host authority is absent, and what resource claim is actually bounded? | Session 5 |
+| “Bytecode proves Python law or speed.” | Which version-labelled implementation observation is present, and what measurement is still missing? | Session 6 and Module 24 |
 
 ---
 
@@ -1078,7 +1249,7 @@ outcomes and prove the evaluator cannot select ambient host authority.
 | Authority | Capability scope/lifetime/owner are explicit. | Parse result or type hint becomes permission. |
 | Resources | Input, tree, fuel, and output constraints are named. | “Fuel makes it universally safe.” |
 | Evidence | Packet is redacted, versioned, and limits its claim. | Raw query/records or inferred remote success appear in logs. |
-| Implementation bridge | CPython facts are version-labelled. | An opcode is treated as language law. |
+| Implementation bridge | Local implementation facts are version-labelled. | An opcode is treated as language law. |
 
 ---
 
@@ -1107,7 +1278,7 @@ scope question by assigning more parser typing drills.
 | Closure clinic | “Which parent environment owns this free name?” | Three-frame environment diagram |
 | Contract split | “What does this annotation/check actually establish?” | Not-the-same-as chain |
 | Capability review | “Where first does authority appear, and what cannot the evaluator do?” | Capability card |
-| CPython claim audit | “Is this language law, CPython evidence, Atlas fixture, or unknown?” | Claim-owner table |
+| Implementation claim audit | “Is this language law, local implementation evidence, Atlas fixture, or unknown?” | Claim-owner table |
 
 ### Study Partner routine — 20 to 30 minutes
 
@@ -1176,6 +1347,10 @@ These guide teaching order, not Python semantics or security guarantees:
   VM, and JIT.
 - [UC Berkeley CS 61A Scheme specification](https://site.cs61a.org/articles/scheme-spec/)
   for visual environment/frame teaching inspiration.
+- [Stanford CS242 coursework](https://web.stanford.edu/class/cs242/coursework.html)
+  as an optional, link-only theory/semantics route after the bounded evaluator;
+  use it to locate further study, not to copy assignments, solutions, or a
+  grading workflow.
 
 ### Licensing note
 
@@ -1214,3 +1389,88 @@ Module 24 moves underneath the semantic boundary into CPython, performance,
 and memory. It preserves Module 23’s claim discipline: bytecode is a
 version-labelled observation, measurements need controlled evidence, and a
 fast-looking operation is not automatically a safe or portable conclusion.
+
+
+## Bench pack
+
+**Bench pack:** `m23` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot.
+
+### Bench 1 — token and form boundary note
+
+**Session:** 1. **Rungs:** trace, recognize.
+**Executes:** eight inputs through the reference lexer, comparing token boundaries
+against whitespace boundaries. They disagree in both directions: `label = "a b c d"`
+lexes to the same **five** tokens as `label = "a"` because a quoted space is
+content rather than a separator, and three extra spaces between every word change
+nothing because separators are discarded. Refusing `>` returns `LEX_ERROR` with a
+span naming character 18 exactly — **and the three tokens it had already built**,
+so the caller is not sent back to the raw string. The empty string lexes
+*successfully* to zero tokens, which is the cleanest demonstration that a lexical
+success is not a structural one.
+
+**Cannot establish:** anything about Python's tokenizer, Unicode identifier rules,
+or normalization; and it does not show that returning partial tokens is safe in a
+grammar where a later character can change an earlier token's meaning.
+
+### Bench 3 — environment and closure trace
+
+**Session:** 3. **Rungs:** trace, debug and defend.
+**Executes:** one AST — a function defined where `x` is 7 and applied where `x` is
+100 — handed to two evaluators. The reference model's declared lexical semantics
+return **12**. A dynamic-scope evaluator over the *same nodes* returns **105**. The
+AST object is constructed once and passed to both, so nothing in the program text
+distinguishes the answers: **you cannot determine what this program means by reading
+it**, because the deciding rule lives in the interpreter.
+
+A three-program sweep then isolates when the rules can disagree at all — a function
+with no free variables agrees, an unshadowed free variable agrees, and only a free
+variable *rebound between definition and call* diverges. A final probe shows a
+program that binds `x` only after the function is defined: an unbound-name error
+under lexical scope, and 105 under dynamic scope, where the function uses a binding
+that did not exist when it was written.
+
+The transfer is that dynamic scope is not a historical curiosity — shell environment
+variables, thread-locals, and `contextvars` are all bindings resolved by call
+position rather than source position, and they carry exactly this cost.
+
+**Cannot establish:** anything about CPython's own scoping. The dynamic evaluator is
+this bench's own contrast code, not part of the published model and not a
+specification of any real language; nothing here touches cell objects, `nonlocal`,
+comprehension scopes, or performance.
+
+### Bench 5 — capability boundary note
+
+**Session:** 5. **Rungs:** review and verify, trace.
+**Executes:** one query through **five** stages — lexical, syntactic, schema,
+authorization, capability — each reporting its own stage label. The headline: a
+query that is lexically fine, syntactically fine, schema-valid, and whose
+authorization decision reads `PERMITTED_MODEL_READ` is still refused as
+`CAPABILITY_DENIED` when no capability is passed. The decision did not become
+false; it was never *sufficient*. Five induced failures then produce five distinct
+outcome vocabularies across five distinct stages, each with a reason string and
+none a bare `False`.
+
+The capability carries an owner subject, scope, tenant, purpose, policy version,
+and metric vocabulary — and section 4 measures how far it reaches honestly: it
+*does* admit a second, different query, because it authorizes a named scope rather
+than a single plan. "Narrow" means narrowly described, not single-use.
+
+**Cannot establish:** that the capability is unforgeable in any adversarial sense.
+No delegation, expiry, or revocation is modelled, and nothing here addresses
+retrofitting this structure onto a system whose permission checks are already
+joined to its effects.
+
+### Sessions without a bench
+
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a language-semantics dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m23-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

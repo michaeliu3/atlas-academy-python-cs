@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m14",
+  "purpose": "Freeze a candidate-only M14 Teaching Assistant, Study Partner, and M15 handoff context without changing M14's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/13",
+    "digest": "sha256:2bed9d1431e7d371780a8033520f1c0a4371d40d8d5d7bd25edd1026cf60d31d"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected change pressure, observable behavior, dependency arrow, state transition, or rollback condition. Ask for the preserved claim, evidence, confidence, and one uncertainty before accepting a pattern or Git command.",
+    "artifactFocus": "Ask the learner to make a small pressure-to-owner map, dependency-versus-runtime sketch, transition table, commit graph, characterization matrix, or review finding visible. Separate what the trace establishes from the assumptions it does not test.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as a non-idempotent retry, a compatibility window, a hidden dynamic dependency, an invalid subtype, or a non-reproducible bisect predicate. Offer the smallest counterexample or hint without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard when available: draw source dependencies separately from runtime calls, a tiny state table, or commit/ref graph beside a short code or contract fragment, and provide a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the requested feature fixed but change one observation, failure, compatibility, history, or policy premise. Ask for a prediction and confidence before distinguishing specification, design, implementation, test, review, rollback, and human-policy claims.",
+    "taHandoff": "End with the learner's selected M14 artifact, confidence, changed premise, preserved observation, evidence or counterexample, one unresolved assumption, and a constructive M15 question for the Teaching Assistant."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m15",
+    "carryArtifact": "Carry a change-and-rollback card: pressure; preserved public observation; selected owner/dependency direction; state/failure/retry boundary; characterization or regression evidence; coherent commit/reversal condition; residual uncertainty; and the durable field that now needs an explicit schema—not a mastery claim.",
+    "targetQuestion": "Before M15 turns this behavior into bytes, a schema, or an installed artifact, which observation becomes a compatibility promise, what version/migration boundary follows, and what artifact evidence can independently challenge the source intent?",
+    "boundary": "M13 is M14's only canonical academic prerequisite and M15 is its only canonical forward handoff. References to M16–M36 or M25/M26 are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

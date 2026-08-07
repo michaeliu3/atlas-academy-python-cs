@@ -6,12 +6,17 @@
   teaching map for the Module 26 learner workbook, visual capstone studio,
   deterministic reference model, TA sessions, study-partner prompts, final
   dossier, and oral architecture defense.
-- **Course position:** Module 26 concludes the 45-day Atlas Academy. It follows
-  Module 25, *Evidence-Grounded Intelligent and Human-Centered Systems*.
-  Module 25 established that a score, generated proposal, or accessible-looking
-  interface does not own authority and does not prove benefit. Module 26 asks:
-  **what evidence makes a versioned release argument reviewable, recoverable,
-  and honest?**
+- **Course position:** **Prospective only:** portal promotion requires the
+  M31–M36 evidence chain and Module 25's reviewed gate. The separate private
+  guided-study route begins from learner-supplied artifacts, not a portal
+  promotion, pilot, or rehearsal. Module 26 concludes planned days 56–60 of
+  the 60-day Atlas Core. It follows Module 25,
+  *Evidence-Grounded Intelligent and Human-Centered Systems*, after the
+  M27–M36 mathematics, theory, systems-for-learning, AI, ML, and
+  learning-theory bridge. Module 25 established that a score, generated
+  proposal, or accessible-looking interface does not own authority and does not
+  prove benefit. Module 26 asks: **what evidence makes a versioned release
+  argument reviewable, recoverable, and honest?**
 - **Research snapshot:** **2026-07-30**. Links refer to official, primary, or
   author-maintained sources available on that date. Vendor docs, standards
   status, platform capabilities, and licenses can change; a capstone records
@@ -48,6 +53,20 @@ remain visible.
 
 ---
 
+## Two access gates: portal promotion and private guided study
+
+**Portal promotion** requires reviewed contract and release evidence. It is the
+only route that can change reader availability or support a publication claim.
+
+**Private guided study may begin only from learner-supplied upstream artifacts**
+under [`PRIVATE_GUIDED_LEARNING_ROUTE.md`](../../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md):
+the named M31–M36 dossiers, relevant M27–M30 artifacts or unavailable markers,
+and the resulting M25 dossier and annex. It never changes portal access, route
+credit, publication, or release state. No pilot or rehearsal is a prerequisite
+once those actual learner artifacts are present.
+
+---
+
 ## Executive teaching decision
 
 A final project is often taught as a polishing sprint: make a demo look smooth,
@@ -71,9 +90,15 @@ bounded human need + non-goal + accountable release owner
     → dossier + oral defense + explicit unknowns
 ~~~
 
-### M24 → M25 → M26 connected sequence
+### M24 evidence thread → M31–M36 synthesis gate → M25 → M26
 
-| Boundary | Module 24 gives the learner | Module 25 adds | Module 26 must defend |
+This table compares connected **evidence roles**, not next/previous navigation.
+M24 supplies a systems-evidence thread; the M31–M36 chain supplies the
+advanced mathematics, systems-for-learning, AI/ML, and learning-theory bridge.
+M25's portal reader remains preview-gated until review evidence exists; private
+guided M25/M26 instruction follows the named learner-artifact gate above.
+
+| Boundary | Module 24 gives the learner | Module 25 adds after M31–M36 | Module 26 must defend |
 |---|---|---|---|
 | Claim | A performance conclusion needs a named workload, layer, mechanism, and uncertainty. | A decision-support conclusion needs a purpose, data/candidate/model/policy contract, evaluation scope, and human-control boundary. | A release claim needs an owner, source version, representation/contract, appropriate evidence, cost/failure boundary, and explicit limitation. |
 | Architecture | Runtime, interpreter, native boundary, allocation, and operating-system layers stay distinct. | Data, candidate generation, ranker/model, interface, authorization, and mutation stay distinct. | Purpose, context, code/runtime, data/trust, deployment/recovery, and change/release views are connected without pretending one diagram proves all. |
@@ -495,11 +520,38 @@ repository](https://docs.github.com/en/repositories/managing-your-repositorys-se
   visibility, intended audience, license status or decision not to license,
   contribution route, vulnerability-reporting boundary, ownership, and
   maintenance limit.
+- **Version/deprecation move:** the Release Board also records the exact source
+  commit/build identity, interface and data compatibility promise, dependency
+  license/notice obligations, and any deprecation owner, migration target,
+  notice/removal window, security implication, and tested rollback/disable path.
+  A version label or package metadata alone is not reproducibility, permission,
+  legal advice, or a maintenance plan.
 - **Boundary:** health files do not create a healthy community, grant legal
   advice, eliminate maintainer burden, or mean a private course project accepts
   external contributions.
 - **Access/reuse:** use vendor guidance for mechanics only; it is not legal
   counsel.
+
+#### B2a. External-track selection: active project and documented need
+
+Primary source: [CMU 15-313 Open Source
+Excursion](https://www.cs.cmu.edu/~ckaestne/15313/2016/extra/Homework6.pdf)
+within the official [Foundations of Software
+Engineering](https://www.cs.cmu.edu/~ckaestne/15313/2017/) course route.
+
+- **Status/date:** historical official course material, accessed 2026-08-03.
+- **Narrow use:** calibrate the selection boundary for an optional external
+  stewardship exercise: inspect a living project and contribution route, then
+  ground work in a documented issue/request before proposing a bounded change.
+- **Teaching move:** the M26 external-track selection check records one recent
+  activity signal, one documented need, and the maintainer/community boundary.
+  If any is unavailable, the learner chooses the private Atlas integration
+  track rather than inventing an external task.
+- **Boundary:** this does not require public contact, submission, a merge,
+  maintainer feedback, or a claim that Atlas reproduces CMU's team/project
+  experience.
+- **Access/reuse:** link and paraphrase only; do not reproduce the assignment,
+  its grading, or its project artifacts.
 
 #### B3. GitHub guidance on AI-generated code
 
@@ -1017,6 +1069,10 @@ transparent local choice.
 - [ ] Retrieves M12–16 contracts/tests/data/transactions, M17 architecture,
   M18–21 systems/distributed boundaries, M22 trust/privacy, M23 language,
   M24 performance, and M25 human-centered decision boundaries as relevant.
+- [ ] When a capstone makes an optimization, execution, formal, classical-AI,
+  ML, or learning-theory claim, retrieves the exact M31–M36 evidence field,
+  states its assumption/non-claim, and records the release consequence if it
+  fails; unavailable authoring-only material narrows or defers the claim.
 - [ ] Uses all six views and five maps to connect, not fragment, knowledge.
 - [ ] Oral defense includes rejected alternative, evidence scope, owner,
   unknown, and recovery path.
@@ -1120,3 +1176,13 @@ purpose + non-goal + accountable owner
 That is the final standard: understand the system deeply enough to describe its
 architecture, defend its tradeoffs, challenge automated output, release it with
 a recovery path, and admit exactly what remains unknown.
+
+## 2026-08-03 structural rigor follow-up
+
+The workbook now makes its already-scoped evidence argument easier to inspect
+through **Rigor card — a release claim is a conjunction of scoped evidence**.
+Its two-attempt `e-204` fixture, assumptions, Boolean proof idea, and
+check-then-append counterexample are a bounded local teaching model. The card
+resolves only a structural audit pointer; it does not change M26's preview
+availability, the authoring-only prerequisite gate, human-review state,
+accessibility status, operational-release evidence, or learner mastery.

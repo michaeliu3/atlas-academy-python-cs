@@ -6,19 +6,26 @@
   teaching map for the Module 25 learner workbook, visual studio, deterministic
   reference model, TA sessions, study-partner prompts, and Atlas evidence
   checkpoint.
-- **Course position:** Module 25 follows Module 24, *CPython, Performance, and
-  Memory Evidence*. Module 24 taught that a local timing or memory observation
-  is meaningful only when its workload, mechanism, layer, and uncertainty are
-  named. Module 25 asks the analogous question for an intelligent feature:
-  **when does a score, ranking, prediction, explanation, or generated proposal
-  deserve to influence a person?**
-- **Forward connection:** Module 26, *Systems Capstone, Open-Source
-  Stewardship, and Oral Architecture Defense*, joins this module's decision,
-  data, evaluation, accessibility, and authority evidence with the earlier
-  systems evidence into one release argument.
-- **Research snapshot:** **2026-07-30**. Links point to official or primary
-  sources current on that date. Stable documentation can change; a runnable
-  workbook must record and pin its exact library/package/version separately.
+- **Course position:** M25 is a gated, preview-only synthesis. M24, *CPython,
+  Performance, and Memory Evidence*, is a required systems-evidence thread: a
+  local timing or memory observation is meaningful only when its workload,
+  mechanism, layer, and uncertainty are named. It does **not** navigate
+  directly to M25. The full canonical route reaches M31 before M18–M24; the
+  downstream navigation segment from M24 is M24 → M32 → M33 → M34 → M35 → M36
+  → M25 → M26. M25's direct graph prerequisites are M22, M24, M30, M31, M34,
+  M35, and M36; their transitive closure supplies the M27–M36 evidence spine.
+  M25 asks the analogous intelligent-feature question: **when does a score,
+  ranking, prediction, explanation, or generated proposal deserve to influence
+  a person?**
+- **Forward connection:** Portal promotion of Module 26 requires M31–M36
+  prerequisite evidence and M25's own reviewed release evidence. Its separate
+  private guided-study route begins from the learner-supplied evidence gate,
+  not a portal promotion, pilot, or rehearsal.
+- **Research snapshot:** original map snapshot **2026-07-30**; a scoped source
+  audit rechecked mutable/versioned routes on **2026-07-31**, and the synthesis
+  calibration routes below were rechecked on **2026-08-02**. Stable
+  documentation can change; a runnable workbook must record and pin its exact
+  library/package/version separately.
 - **Evidence hierarchy:** (1) public specifications and official library
   documentation for their own contracts, (2) NIST publications for their
   stated risk-management vocabulary and guidance, (3) original peer-reviewed
@@ -47,6 +54,24 @@
 This is an authoring and evidence boundary, not the learner-facing workbook.
 It tells an instructor, TA, study partner, and any coding agent which claims
 Module 25 may make, what must support them, and which limits must stay visible.
+The dated source/status/reuse record is the authoring-only
+[source-audit addendum](module25_evidence_grounded_intelligent_systems_source_audit_addendum.md),
+which is not a learner download, review, publication, or release-evidence
+claim.
+
+---
+
+## Two access gates: portal promotion and private guided study
+
+**Portal promotion** requires reviewed contract and release evidence. It is the
+only route that can change reader availability or support a publication claim.
+
+**Private guided study may begin only from learner-supplied upstream artifacts**
+under [`PRIVATE_GUIDED_LEARNING_ROUTE.md`](../../docs/PRIVATE_GUIDED_LEARNING_ROUTE.md):
+the named M31–M36 dossiers, relevant M27–M30 artifacts or unavailable markers,
+and then the resulting M25 dossier/annex for M26. It never changes portal
+access, route credit, publication, or release state. No pilot or rehearsal is a
+prerequisite once those actual learner artifacts are present.
 
 ---
 
@@ -70,9 +95,16 @@ user need + harm / non-goal + accountable decision owner
     → evidence card: benefit, limitations, privacy, accessibility, cost, risks
 ~~~
 
-### M24 → M25 → M26 connected sequence
+### M24 evidence thread → M31–M36 synthesis gate → M25 → M26
 
-| Boundary | Module 24 gives the learner | Module 25 adds | Module 26 must defend |
+The following table compares connected **evidence roles**, not next/previous
+navigation. M24 contributes runtime-evidence discipline; the M31–M36 chain
+supplies the advanced mathematical, systems, AI/ML, and learning-theory
+evidence before M25's synthesis. Portal M26 promotion follows M25's review
+gate; private guided M26 instruction instead follows the named learner-artifact
+gate above.
+
+| Boundary | Module 24 gives the learner | Module 25 adds after M31–M36 | Module 26 must defend |
 |---|---|---|---|
 | Claim | A benchmark result needs an exact workload and observation layer. | A model metric needs a target, split, population/time scope, decision context, and limitation. | Each release claim is connected to an owner, contract, test or observation, and known limit. |
 | Evidence | A timer, profile, allocation trace, and OS metric measure different things. | Offline score, calibration check, slice, accessibility test, user observation, and risk review measure different things. | The capstone does not collapse those layers into a green CI badge. |
@@ -282,6 +314,10 @@ an architectural choice that needs extra evidence, not a sign of intelligence.
 #### A1. Model selection and evaluation
 
 Primary source: [scikit-learn — Model selection and evaluation](https://scikit-learn.org/stable/model_selection.html)
+
+The `stable` documentation route was observed as **scikit-learn 1.9.0** on
+2026-07-31. It is a mutable version-family route, not a reproducibility pin;
+an executable exercise must separately record its installed package version.
 
 Use this official documentation for:
 
@@ -531,8 +567,13 @@ a substitute for a specific threat model and validation design.
 
 #### C3. Privacy context
 
-Primary source: [NIST Privacy Framework](https://www.nist.gov/privacy-framework)
-and [Using Privacy Framework 1.1](https://www.nist.gov/privacy-framework/using-privacy-framework-11)
+Primary sources: [NIST Privacy Framework 1.0 and current project page](https://www.nist.gov/privacy-framework)
+and [Privacy Framework 1.1 Initial Public Draft](https://www.nist.gov/privacy-framework/using-privacy-framework-11)
+
+At the 2026-07-31 recheck, NIST presented Privacy Framework 1.1 as an
+**Initial Public Draft**, not a finalized framework. The module uses its
+risk-management framing only; it does not claim PF 1.1 final status,
+certification, legal compliance, or endorsement.
 
 Use NIST's data-processing-ecosystem framing to explain why a data boundary
 does not end at the first model function: collection, processors, external
@@ -615,11 +656,11 @@ identically.
 #### E1. Model Context Protocol as a concrete protocol reading
 
 Primary source (dated specification):
-[Model Context Protocol specification — 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/index)
-and [Authorization — 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)
+[Model Context Protocol specification — 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25)
+and [Authorization — 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
 
-The specification is not an Atlas dependency. It is a useful current example
-of explicit boundaries:
+The specification is not an Atlas dependency or conformance claim. It is a
+useful dated example of explicit boundaries:
 
 - tool descriptions/annotations are not intrinsically trustworthy;
 - tools can represent arbitrary code execution and need caution;
@@ -642,16 +683,17 @@ version in a source card and re-review it before implementing an integration.
 
 #### E2. Threat vocabulary, kept secondary
 
-Supplementary source: [OWASP Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+Supplementary source: [OWASP Top 10 for Large Language Model Applications —
+v2025](https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf)
 
 Use this living community resource only for threat-review vocabulary—prompt
 injection, insecure output handling, sensitive-information disclosure,
 excessive agency, and overreliance. It illustrates why an LLM must not be its
 own permission system.
 
-Boundary: OWASP's page is a changing community resource, not a primary law,
-formal standard, or a complete threat model. Record the accessed edition/date
-if it is used; do not claim compliance, security, or immunity from its list.
+Boundary: OWASP's v2025 document is a dated, changing community resource, not
+a primary law, formal standard, or a complete threat model. It was rechecked on
+2026-07-31; do not claim compliance, security, or immunity from its list.
 
 #### E3. Required Atlas agent boundary
 
@@ -680,6 +722,8 @@ not license copying course assets or make their material Atlas's own.
 | [Berkeley CS 188: Introduction to AI](https://inst.eecs.berkeley.edu/~cs188/) | Retrieve the progression from uncertainty/search/decision concepts to a small bounded decision-support case. | Copy projects, autograders, assignments, slides, solutions, or grading scheme. |
 | [Stanford CS229: Machine Learning](https://cs229.stanford.edu/) | Optional theory bridge for supervised learning, bias/variance, regularization, and evaluation vocabulary. | Treat lecture material as a reusable Atlas textbook or reproduce notes/problem sets. |
 | [MIT 6.036: Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/) | Optional structured review of learning/evaluation foundations before the small learned alternative. | Reuse OCW video, images, labs, solutions, or assets without checking exact terms. |
+| [CMU 10-718: Machine Learning in Practice](https://www.cs.cmu.edu/~smithv/10718/) | Calibrate problem formulation, messy-data boundaries, reproducible pipelines, deployment impact, and concerns beyond accuracy. | Link and paraphrase only; the synthetic Atlas case is not its semester project, discussion, feedback, or real-data experience. |
+| [Georgia Tech CS 7641: Machine Learning](https://omscs.gatech.edu/cs-7641-machine-learning) and [CS 6601: Artificial Intelligence](https://omscs.gatech.edu/cs-6601-artificial-intelligence) | Check that model/evidence work stays connected to Python, algorithms, probability, and accountable policy rather than a detached model demo. | Link and paraphrase only; do not copy restricted course material or imply equivalent instruction, grading, or credit. |
 | [Stanford Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/) | Optional background for candidate generation, ranking, relevance judgments, and offline evaluation. | Present an IR metric as a learner-benefit or policy decision proof. |
 
 The Module 25 pathway deliberately uses these sources to **connect** to
@@ -749,6 +793,12 @@ approval]. The next falsifier is [named test or review].
 - Create: a decision contract with user need, counterfactual baseline,
   non-goals, harm/failure costs, accountable action owner, and rollback
   condition.
+- **Advanced re-entry:** bring the M31 Optimization and Information Evidence
+  Dossier, M33 Formal Limits Claim Packet, M34 Classical AI Search, Constraints
+  & Decision Packet, M35 Machine Learning & Representation Dossier, and M36
+  Statistical Learning Theory & Reliable Deep-Learning Systems Dossier. Use an
+  exact claim/limitation or an `[UNAVAILABLE — …]` marker; never substitute a
+  module title for a receipt.
 
 **Source card:** NIST AI 100-1.  
 **Prediction prompt:** “If a ranker predicts a next step accurately, who is
@@ -765,6 +815,12 @@ future or silently changing purpose?
   original data card for synthetic fixtures.
 - Create: data-lineage diagram and split ledger showing availability, feature
   transformation ownership, label definition, and excluded fields.
+- **Advanced re-entry:** attach the M27 formal-scope packet, M28
+  representation/conditioning sheet, M29 convergence-scope sheet, M30
+  inference/evaluation manifest, and M32 Scientific Python & Accelerators
+  Dossier to the time arrow. Record which fields are available now, observed
+  later, and capable of invalidating the split; missing receipts narrow the
+  claim.
 
 **Source cards:** scikit-learn Common Pitfalls; Gebru et al.; NIST Privacy
 Framework.  
@@ -817,6 +873,11 @@ it, and operate it without a mouse or color-only signal?
 - Test the task/script before declaring the UI legible.
 - Create: accessible decision card and a brief human-use/accessibility
   observation sheet.
+- **Advanced re-entry:** annotate the card with M34's authority boundary, M35's
+  calibration/shift scope, M36's monitoring and non-claim boundary, M22's
+  accessibility/privacy control, and M32's execution/reproducibility fields.
+  An `[UNAVAILABLE — …]` marker must remain visible instead of being filled by
+  a generated explanation.
 
 **Source cards:** WCAG 2.2; WAI-ARIA APG; Amershi et al.  
 **Prediction prompt:** “If keyboard users can reach the score but cannot
@@ -1034,9 +1095,9 @@ TA repair prompts:
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 - [WAI-ARIA Authoring Practices: Disclosure](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)
 - [WAI-ARIA APG: Accessible Names and Descriptions](https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/)
-- [MCP specification — 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/index)
-- [MCP authorization — 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)
-- [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- [MCP specification — 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25)
+- [MCP authorization — 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
+- [OWASP LLM Top 10 — v2025](https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf)
 
 ### Primary research and university context
 
@@ -1049,6 +1110,8 @@ TA repair prompts:
 - [Berkeley CS 188](https://inst.eecs.berkeley.edu/~cs188/)
 - [Stanford CS229](https://cs229.stanford.edu/)
 - [MIT 6.036 OCW](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/)
+- [CMU 10-718](https://www.cs.cmu.edu/~smithv/10718/)
+- [Georgia Tech CS 7641](https://omscs.gatech.edu/cs-7641-machine-learning) and [CS 6601](https://omscs.gatech.edu/cs-6601-artificial-intelligence)
 - [Stanford Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/)
 
 ## Final research verdict
@@ -1070,4 +1133,3 @@ purpose + non-goal + accountable authority
 That standard carries forward the learner's first-principles philosophy in the
 AI era: models and agents are components to read, test, constrain, explain,
 and sometimes reject—not authorities that turn output into truth or action.
-

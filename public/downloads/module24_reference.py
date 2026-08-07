@@ -1,8 +1,13 @@
-"""Deterministic, local-only runtime-evidence teaching model for Module 24.
+"""Deterministic, bounded runtime-evidence teaching model for Module 24.
 
-This models how to reason about roots, cycles, evidence scope, and controlled
-experiments. It deliberately does not inspect a Python process, emulate
-CPython, execute supplied code, or benchmark the host.
+This model teaches how to reason about roots, cycles, evidence scope, and
+controlled experiments. It has no caller-provided program or data path: every
+case is an enumerated synthetic fixture. It deliberately does not inspect a
+Python process, emulate CPython, execute supplied code, profile, or benchmark
+the host. Its CLI parses one fixed scenario and writes one bounded JSON packet
+to standard output; the accompanying test harness imports this local source.
+Neither local tooling operation turns the model into a no-I/O sandbox or real
+CPython, measurement, or operating-system evidence.
 """
 
 from __future__ import annotations
@@ -13,8 +18,10 @@ from dataclasses import asdict, dataclass
 from typing import Mapping, Sequence
 
 
-MODEL_VERSION = "atlas-module24-reference/1"
-PINNED_RUNTIME = "CPython 3.14.6"
+MODEL_VERSION = "atlas-module24-reference/2"
+# Fixed fixture label, not the detected interpreter or evidence about the CLI host.
+FIXTURE_RUNTIME_LABEL = "CPython 3.14.6"
+PINNED_RUNTIME = FIXTURE_RUNTIME_LABEL
 LIMITATION = (
     "Deterministic teaching model only; not a CPython emulator, heap profiler, "
     "benchmark harness, memory-leak detector, production release gate, or "
@@ -22,10 +29,12 @@ LIMITATION = (
 )
 
 SEMANTIC_CONTRACT = "SEMANTIC_CONTRACT"
+COURSE_MODEL = "COURSE_MODEL"
 CPYTHON_OBSERVATION = "CPYTHON_OBSERVATION"
 MEASUREMENT = "MEASUREMENT"
 OS_NATIVE_OBSERVATION = "OS_NATIVE_OBSERVATION"
 HYPOTHESIS = "HYPOTHESIS"
+MANIFEST_READY = "MANIFEST_READY"
 MEASUREMENT_SCOPE_ERROR = "MEASUREMENT_SCOPE_ERROR"
 CONFOUNDED_EXPERIMENT = "CONFOUNDED_EXPERIMENT"
 INSUFFICIENT_EVIDENCE = "INSUFFICIENT_EVIDENCE"
@@ -54,13 +63,14 @@ class SweepResult:
 
 @dataclass(frozen=True)
 class Observation:
-    """A labelled observation with a deliberately narrow allowed conclusion."""
+    """A fixed evidence-requirement card, not a captured runtime observation."""
 
     metric: str
     label: str
     establishes: str
     excludes: tuple[str, ...]
-    runtime: str | None
+    required_evidence_label: str | None
+    required_runtime: str | None
 
 
 @dataclass(frozen=True)
@@ -81,7 +91,7 @@ class ExperimentManifest:
 
 @dataclass(frozen=True)
 class ExperimentReview:
-    """A bounded comparison outcome; no timing value is interpreted here."""
+    """A bounded protocol review; no timing value is interpreted here."""
 
     outcome: str
     reason: str
@@ -166,55 +176,79 @@ def collect_unreachable_cycles(graph: ObjectGraph) -> tuple[str, ...]:
     return tuple(node for node in _nodes(graph) if node not in reachable)
 
 
-def classify_observation(metric: str, runtime: str | None = None) -> Observation:
-    """Classify metric scope rather than pretending every number means memory."""
+def _course_model_card(
+    *,
+    metric: str,
+    establishes: str,
+    excludes: tuple[str, ...],
+    required_evidence_label: str,
+    required_runtime: str | None,
+) -> Observation:
+    """Describe evidence needed for a claim without fabricating that evidence."""
+
+    return Observation(
+        metric=metric,
+        label=COURSE_MODEL,
+        establishes=establishes,
+        excludes=excludes,
+        required_evidence_label=required_evidence_label,
+        required_runtime=required_runtime,
+    )
+
+
+def classify_observation(
+    metric: str,
+    required_runtime: str | None = None,
+) -> Observation:
+    """Return a fixed scope card; no branch executes or captures the metric."""
 
     if metric == "semantic_fixture":
-        return Observation(
+        return _course_model_card(
             metric=metric,
-            label=SEMANTIC_CONTRACT,
-            establishes="fixed baseline and candidate fixtures agree on declared behavior",
+            establishes="the course fixture names a semantic comparison boundary",
             excludes=("performance", "retained graph", "production correctness"),
-            runtime=None,
+            required_evidence_label=SEMANTIC_CONTRACT,
+            required_runtime=None,
         )
     if metric == "shallow_size":
-        return Observation(
+        return _course_model_card(
             metric=metric,
-            label=CPYTHON_OBSERVATION,
-            establishes="reported shallow size of one object on the named runtime",
+            establishes="a shallow-size read needs a named implementation/runtime",
             excludes=("retained graph", "RSS", "native allocation"),
-            runtime=runtime,
+            required_evidence_label=CPYTHON_OBSERVATION,
+            required_runtime=required_runtime,
         )
     if metric == "traced_peak":
-        return Observation(
+        return _course_model_card(
             metric=metric,
-            label=MEASUREMENT,
-            establishes="traced Python allocation peak under the declared manifest",
+            establishes="a traced-allocation claim needs snapshots and a declared manifest",
             excludes=("RSS", "all native allocation", "production SLO"),
-            runtime=runtime,
+            required_evidence_label=MEASUREMENT,
+            required_runtime=required_runtime,
         )
     if metric == "process_rss":
-        return Observation(
+        return _course_model_card(
             metric=metric,
-            label=OS_NATIVE_OBSERVATION,
-            establishes="host/process memory observation under the declared manifest",
+            establishes="an OS-memory claim needs a named host/API result and manifest",
             excludes=("Python object attribution", "portable value", "leak cause"),
-            runtime=runtime,
+            required_evidence_label=OS_NATIVE_OBSERVATION,
+            required_runtime=required_runtime,
         )
     if metric == "bytecode_card":
-        return Observation(
+        return _course_model_card(
             metric=metric,
-            label=CPYTHON_OBSERVATION,
-            establishes="version-pinned CPython bytecode/implementation observation",
+            establishes="a bytecode claim needs captured dis output and named runtime/options",
             excludes=("Python language guarantee", "cross-VM behavior", "speedup"),
-            runtime=runtime,
+            required_evidence_label=CPYTHON_OBSERVATION,
+            required_runtime=required_runtime,
         )
     return Observation(
         metric=metric,
         label=HYPOTHESIS,
         establishes="a proposed question awaiting a named evidence method",
         excludes=("measurement result", "implementation guarantee"),
-        runtime=runtime,
+        required_evidence_label=None,
+        required_runtime=required_runtime,
     )
 
 
@@ -270,8 +304,11 @@ def validate_experiment(
             missing_or_changed=("runtime", "build"),
         )
     return ExperimentReview(
-        outcome=MEASUREMENT,
-        reason="manifests support a scoped comparison; inspect results separately",
+        outcome=MANIFEST_READY,
+        reason=(
+            "manifests describe a comparable protocol; execute it and record real "
+            "results separately before making a measurement claim"
+        ),
         missing_or_changed=(),
     )
 
@@ -289,12 +326,32 @@ def validate_conclusion(
             limitation="the proposed conclusion crosses the metric's stated scope",
             next_falsifier="choose a metric whose scope directly covers the proposed claim",
         )
-    if observation.label == CPYTHON_OBSERVATION and not observation.runtime:
+    if (
+        observation.required_evidence_label == CPYTHON_OBSERVATION
+        and not observation.required_runtime
+    ):
         return Decision(
             outcome=DECISION_DEFER,
-            reason="CPython observation lacks runtime/version metadata",
-            limitation="implementation details require a named build and version",
-            next_falsifier="record the producing runtime before interpreting the observation",
+            reason="CPython evidence requirement lacks runtime/version metadata",
+            limitation="implementation details require a named actual build and version",
+            next_falsifier="record the producing runtime before collecting a dis/source observation",
+        )
+    if observation.label == COURSE_MODEL:
+        required = observation.required_evidence_label or "named evidence"
+        return Decision(
+            outcome=DECISION_DEFER,
+            reason=(
+                f"{observation.metric} is a fixed course-model card; collect "
+                f"{required} before accepting a scoped runtime conclusion"
+            ),
+            limitation=(
+                "the model describes an evidence requirement but does not capture "
+                "a CPython, measurement, or OS/native result"
+            ),
+            next_falsifier=(
+                "run the declared measurement or source-reading procedure and record "
+                "its runtime, options, raw result, and manifest"
+            ),
         )
     if observation.label == HYPOTHESIS:
         return Decision(
@@ -347,9 +404,9 @@ def run_scenario(name: str) -> dict[str, object]:
             roots=frozenset({"audit_view"}),
         )
         return {
-            "outcome": SEMANTIC_CONTRACT,
+            "outcome": COURSE_MODEL,
             "reachable": reachable_nodes(graph),
-            "message": "removing one binding does not remove an object with another root",
+            "message": "fixed graph model: removing one binding does not remove an object with another root",
         }
     if name == "cycle_collection":
         graph = ObjectGraph(
@@ -358,10 +415,10 @@ def run_scenario(name: str) -> dict[str, object]:
         )
         sweep = reference_count_sweep(graph)
         return {
-            "outcome": CPYTHON_OBSERVATION,
+            "outcome": COURSE_MODEL,
             "sweep_remaining": sweep.remaining,
             "cycle_candidates": collect_unreachable_cycles(graph),
-            "message": "teaching graph distinguishes reference-count sweep from reachability",
+            "message": "fixed teaching graph distinguishes reference-count sweep from reachability",
         }
     if name == "shallow_scope":
         observation = classify_observation("shallow_size", PINNED_RUNTIME)
@@ -373,7 +430,7 @@ def run_scenario(name: str) -> dict[str, object]:
     if name == "traced_scope":
         observation = classify_observation("traced_peak", PINNED_RUNTIME)
         return {
-            "outcome": MEASUREMENT,
+            "outcome": COURSE_MODEL,
             "observation": asdict(observation),
             "decision": asdict(validate_conclusion(observation, "traced allocation peak")),
         }
@@ -383,12 +440,15 @@ def run_scenario(name: str) -> dict[str, object]:
             _manifest(workload_id="different-input-distribution", gc_policy="disabled"),
         )
         return {"outcome": review.outcome, "review": asdict(review)}
-    if name == "accept_stream":
+    if name == "defer_without_results":
         review = validate_experiment(_manifest(), _manifest())
         return {
-            "outcome": DECISION_ACCEPT if review.outcome == MEASUREMENT else DECISION_DEFER,
+            "outcome": DECISION_DEFER,
             "review": asdict(review),
-            "limitation": "fixed manifests do not contain real timing or deployment evidence",
+            "limitation": (
+                "matching fixed manifests do not contain real timing, allocation, "
+                "deployment, or user-impact evidence"
+            ),
         }
     if name == "defer_missing_version":
         observation = classify_observation("bytecode_card", None)
@@ -405,14 +465,17 @@ SCENARIOS = (
     "shallow_scope",
     "traced_scope",
     "reject_confound",
-    "accept_stream",
+    "defer_without_results",
     "defer_missing_version",
 )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Run a fixed, local-only Module 24 runtime-evidence teaching scenario."
+        description=(
+            "Run a fixed, bounded Module 24 teaching scenario; writes one JSON "
+            "packet to standard output."
+        )
     )
     parser.add_argument("scenario", choices=SCENARIOS)
     args = parser.parse_args(argv)

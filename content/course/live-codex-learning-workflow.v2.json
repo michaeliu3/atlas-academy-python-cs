@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 2,
+  "workflowVersion": "v2",
+  "kind": "atlas-live-codex-learning-workflow",
+  "title": "Atlas designated-chat learning workflow",
+  "purpose": "Define the bounded Teaching Assistant and Study Partner roles, accessible whiteboard practice, and automatic concise Notion-session-note policy for the learner-designated Codex chats without granting the Atlas portal voice, transcript, or Notion-write capability.",
+  "delivery": {
+    "portalRuntimeIntegration": "none",
+    "chatSurface": "user-designated-platform-chat",
+    "learnerGuidePath": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md"
+  },
+  "startNow": {
+    "version": 1,
+    "purpose": "Let the learner begin immediately with a graph-approved module and let real module conversations create the learner evidence and improvement signals that human review can be added to later.",
+    "canBeginBeforeHumanReview": true,
+    "buildPhaseHumanEvidenceState": "waived",
+    "entrySteps": [
+      {
+        "id": "choose",
+        "owner": "learner",
+        "label": "Choose the next conversation",
+        "action": "Use the placement diagnostic or start at M01; follow academic prerequisites rather than waiting for a human sign-off.",
+        "output": "A graph-approved module and session"
+      },
+      {
+        "id": "launch-study-partner",
+        "owner": "study-partner",
+        "label": "Open the model",
+        "action": "Ask the Study Partner for one concrete trace, prediction, and confidence before the explanation is revealed.",
+        "output": "A question, prediction, confidence, and prerequisite bridge"
+      },
+      {
+        "id": "make-evidence",
+        "owner": "study-partner",
+        "label": "Make one small artifact",
+        "action": "Trace code or architecture, derive a step, draw the relation, test a counterexample, or run a bounded numerical check.",
+        "output": "One inspectable artifact and its boundary"
+      },
+      {
+        "id": "repair-and-defend",
+        "owner": "teaching-assistant",
+        "label": "Repair and discuss",
+        "action": "Bring the artifact to the Teaching Assistant for a constructive changed-premise conversation and oral defense; do not wait for a formal human examiner.",
+        "output": "A repaired model, transfer response, and remaining uncertainty"
+      },
+      {
+        "id": "record",
+        "owner": "learner",
+        "label": "Keep the smallest useful record",
+        "action": "Keep the compact summary local by default; say records on only in the exact designated chat when you want its configured one-note Notion policy.",
+        "output": "A learner-approved session note or a ready-to-paste local fallback"
+      },
+      {
+        "id": "improve-forward",
+        "owner": "learner",
+        "label": "Retrieve and improve",
+        "action": "Schedule one retrieval, carry one handoff, and change the bridge or pace when the same misconception returns.",
+        "output": "A next action and a forward-module handoff"
+      }
+    ],
+    "firstSessionDefaults": {
+      "preferredStart": "placement-diagnostic",
+      "fallbackStart": "M01 Session 1",
+      "starterRequest": "Name the module and session, ask for one prediction and confidence, then work toward the smallest Session 1 artifact.",
+      "recordsDefault": "off"
+    },
+    "availabilityBoundary": [
+      {
+        "route": "M01-M24 and M27-M30",
+        "delivery": "open portal workbook plus designated Codex chats",
+        "claim": "available for study; legacy review and release evidence remain separate"
+      },
+      {
+        "route": "M25-M26",
+        "delivery": "portal preview and evidence-gated private guided study",
+        "claim": "orientation and private preparation only; no Core unlock or completion claim"
+      },
+      {
+        "route": "M31-M36",
+        "delivery": "designated Codex-chat packs; portal hidden",
+        "claim": "ready for guided study; authoring-only, hidden, and non-release"
+      }
+    ],
+    "evidenceStates": [
+      "waived-build-human-review",
+      "automated-structural-evidence",
+      "learner-produced-session-evidence",
+      "platform-observed-evidence",
+      "human-reviewed-release-evidence"
+    ],
+    "claimBoundary": "Starting and completing a conversation creates learning evidence and improvement signals; it does not create a grade, mastery claim, route unlock, release decision, university equivalence, or human-review evidence."
+  },
+  "moduleLoop": {
+    "version": 1,
+    "purpose": "A repeatable six-phase route that turns each module conversation into inspectable reasoning, a compact learner-owned record, and a forward handoff without requiring a preliminary human review.",
+    "phases": [
+      {
+        "id": "orient",
+        "label": "Orient",
+        "role": "study-partner",
+        "objective": "Name the graph-approved module, session, prerequisite, and one learner question.",
+        "requiredOutputs": ["module and session", "prerequisite or bridge", "learner question"],
+        "nextPhase": "predict-inspect"
+      },
+      {
+        "id": "predict-inspect",
+        "label": "Predict and inspect",
+        "role": "study-partner",
+        "objective": "State a prediction and confidence before reading the code, diagram, derivation, or architecture trace; then change one premise.",
+        "requiredOutputs": ["prediction and confidence", "inspected trace", "one changed premise"],
+        "nextPhase": "artifact"
+      },
+      {
+        "id": "artifact",
+        "label": "Make one artifact",
+        "role": "study-partner",
+        "objective": "Create the smallest useful state trace, counterexample, proof step, numerical check, design card, or debugging note.",
+        "requiredOutputs": ["smallest evidence artifact", "observation", "boundary or non-claim"],
+        "nextPhase": "repair-defense"
+      },
+      {
+        "id": "repair-defense",
+        "label": "Repair and defend",
+        "role": "teaching-assistant",
+        "objective": "Repair one fragile model and conduct an encouraging oral defense with a changed-premise or counterexample and a transfer question.",
+        "requiredOutputs": ["repaired model", "oral-defense synthesis", "transfer response"],
+        "nextPhase": "record"
+      },
+      {
+        "id": "record",
+        "label": "Record only what is useful",
+        "role": "designated-chat",
+        "objective": "After a fresh records-on confirmation, keep at most one concise learner-approved note for the substantive session; otherwise keep the fallback local.",
+        "requiredOutputs": ["question and prediction", "compact whiteboard or code trace", "misconception or uncertainty", "next action and handoff"],
+        "nextPhase": "improve-forward"
+      },
+      {
+        "id": "improve-forward",
+        "label": "Retrieve and improve",
+        "role": "learner",
+        "objective": "Schedule one retrieval prompt, carry the smallest next action into the next session, and bridge a repeated misconception instead of silently skipping it.",
+        "requiredOutputs": ["retrieval prompt and due date", "uncertainty or repair", "forward-module handoff"],
+        "nextPhase": null
+      }
+    ],
+    "sessionRecordFields": [
+      "question and prediction with confidence",
+      "code, architecture, derivation, diagram, or state-trace observation",
+      "smallest evidence artifact and explicit boundary or non-claim",
+      "repaired misconception or unresolved uncertainty",
+      "retrieval prompt, next action, and cross-role handoff"
+    ],
+    "completionBoundary": "Completing the loop creates learning evidence for the next step; it is not a pass/fail grade, route unlock, release decision, mastery claim, or university-equivalence claim."
+  },
+  "improvementPolicy": {
+    "version": 1,
+    "afterEachSession": [
+      "retain one honest uncertainty or repaired misconception",
+      "schedule one retrieval prompt with a due date",
+      "carry one learner-controlled next action or cross-role handoff"
+    ],
+    "whenMisconceptionRepeats": [
+      "name the prerequisite bridge",
+      "change one example, input, premise, or representation",
+      "slow the pace or reschedule the module rather than silently bypassing the dependency"
+    ],
+    "cadenceCalibration": {
+      "afterModuleCount": 3,
+      "inspect": [
+        "confidence compared with observed reasoning evidence",
+        "retrieval outcomes and repeated repair patterns",
+        "time spent and unresolved prerequisite bridges"
+      ],
+      "possibleActions": [
+        "adjust the pace between the 60-, 90-, and 180-day routes",
+        "add a bridge example or targeted retrieval prompt",
+        "carry a bounded uncertainty into the next Teaching Assistant handoff"
+      ]
+    },
+    "courseChangeBoundary": "Learner records can propose a content or prompt improvement, but they never silently mutate the canonical graph or release state; a course change requires an explicit reviewed Git commit and regenerated evidence."
+  },
+  "notionSessionNotes": {
+    "portableStartupMode": "keep-local",
+    "designatedChatMode": "automatic-after-substantive-session",
+    "recordingAuthorization": {
+      "initialState": "require-explicit-records-on-confirmation",
+      "activationPhrase": "records on",
+      "closurePhrase": "end session",
+      "scope": "the current substantive session in that designated chat; say end session to close automatic session-summary authority, then re-confirm records on for a later automatic note; an explicitly requested correction or deletion remains separately authorized",
+      "renewalRule": "A prior records on never carries into a new or ambiguously resumed substantive session; records are off until a fresh visible records on in that session."
+    },
+    "substantiveSession": {
+      "minimumEvidence": [
+        "a named module or learning topic",
+        "learner reasoning, a concrete evidence artifact, a misconception, or a counterexample",
+        "a learner-controlled next action or cross-role handoff"
+      ]
+    },
+    "requiredConditions": [
+      "this is the designated Teaching Assistant or Study Partner chat",
+      "the configured private Notion destination is reachable",
+      "the learning conversation is substantive",
+      "records are not paused and the material is not marked off-record"
+    ],
+    "writeCadence": "at-most-one-concise-note-per-substantive-session",
+    "onUnavailable": "state-write-unverified-and-provide-ready-to-paste-summary",
+    "unavailableNoteTemplate": {
+      "title": "Notion write unverified — local session note",
+      "intro": "No Notion write is verified. Copy only this concise, learner-approved summary if useful.",
+      "fields": [
+        "Date / role / module or topic:",
+        "Question and prediction:",
+        "Whiteboard trace: definition, derivation, code/architecture observation, or counterexample:",
+        "Misconception, uncertainty, or boundary:",
+        "Smallest next action and cross-role handoff:"
+      ],
+      "privacyReminder": "Do not include raw voice, full transcripts, credentials, sensitive data, or off-record material."
+    },
+    "learnerControlAcknowledgements": {
+      "recordsOn": "Acknowledge records on as chat-level intent; do not claim a write or platform enforcement.",
+      "endSession": "Acknowledge end session as chat-level intent; stop automatic session-summary creation or updates until a new records on, while honoring an explicitly requested correction or deletion separately.",
+      "pauseOrOffRecord": "Acknowledge pause records or off-record as chat-level intent; do not claim platform enforcement.",
+      "confirmedSave": "After direct evidence of a save, report the note title and date, plus a link only if the platform provides one.",
+      "deletionUnavailable": "If deletion access is unavailable or a result cannot be verified, say no deletion is verified and direct the learner to delete or archive the note in their own Notion UI."
+    },
+    "recordFields": [
+      "date, role, module/topic, and learner question",
+      "key definition, derivation, code/architecture trace, or whiteboard snapshot",
+      "prediction, evidence, misconception, counterexample, uncertainty, and next action",
+      "Teaching Assistant oral-defense evidence or Study Partner discussion/rehearsal handoff"
+    ]
+  },
+  "roles": [
+    {
+      "id": "teaching-assistant",
+      "liveResponsibility": "first-principles teaching and the supportive post-module oral defense",
+      "recordFocus": "oral-defense prompt, repair, transfer, uncertainty, and constructive next bridge"
+    },
+    {
+      "id": "study-partner",
+      "liveResponsibility": "non-grading concept discussion, retrieval, rehearsal, and handoff preparation",
+      "recordFocus": "discussion, rehearsal, uncertainty, and focused Teaching Assistant handoff"
+    }
+  ],
+  "whiteboardProtocol": {
+    "liveQualityPreference": "If the exact live chat offers a setting labelled GPT Live High, select or request it for voice; otherwise prefer the highest available quality/reasoning setting. The learner and platform own that setting; Atlas does not control it.",
+    "required": [
+      "supported display math with defined symbols",
+      "language-labelled fenced code with explicit state traces",
+      "prose or ASCII fallback for math, code, and diagrams",
+      "no speech-only or visual-only explanation"
+    ]
+  },
+  "privacyBoundary": {
+    "excludedFromRecords": [
+      "raw voice recordings",
+      "full chat transcripts",
+      "credentials, keys, or tokens",
+      "sensitive personal data",
+      "off-record material"
+    ],
+    "forbiddenClaims": [
+      "portal control of voice, microphone, live rendering, platform retention, or Notion writes",
+      "a note was saved without direct evidence of the successful write"
+    ]
+  },
+  "learnerControls": [
+    "end session",
+    "pause records",
+    "off-record",
+    "correct a saved note",
+    "delete a saved note"
+  ],
+  "claimBoundary": {
+    "platformAcceptanceEvidenceRequired": true,
+    "successfulWriteRequiresDirectEvidence": true,
+    "noPassFail": true
+  }
+}

@@ -46,6 +46,9 @@ Every strong claim should be classifiable. “The AI says this is optimal” has
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m11-course-position
+%% atlas-diagram-title: M11 prerequisites and forward connections
+%% atlas-diagram-alt: Modules 6 through 10 converge on Module 11 strategy selection. Module 11 then connects forward to components, testing, transactions, concurrency, and intelligent systems.
 flowchart LR
     M6["M6 · Representation<br/>state and memory"] --> SYN["M11 · Strategy selection"]
     M7["M7 · Stacks, queues,<br/>lazy search"] --> SYN
@@ -84,6 +87,9 @@ The tempting rule “always take the largest value per minute” is fast and oft
 ### Arc II synthesis map
 
 ```mermaid
+%% atlas-diagram-id: m11-arc-two-planner-map
+%% atlas-diagram-title: Arc II structures feeding the Atlas planner
+%% atlas-diagram-alt: Representation, ingestion, indexing, ordering, and prerequisite graphs feed constrained plan search. The planner produces verification, a quality certificate, and a decision ledger.
 flowchart TD
     HISTORY["M6 · history representation"] --> STREAM["M7 · bounded ingestion"]
     STREAM --> INDEX["M8 · identity/search indexes"]
@@ -101,6 +107,23 @@ flowchart TD
     AI["agent-generated patch"] -.-> VERIFY
 ```
 
+### Text equivalent — strategy selection from contract to evidence
+
+Read the two diagrams as one linear route. M6 fixes what state represents; M7
+controls how candidate work arrives; M8 supplies identity and repeated-state
+lookup; M9 supplies priority or ordered access; and M10 supplies prerequisite
+structure. M11 turns those inputs into a declared candidate space, feasibility
+predicate, objective, and tie policy. An independent verifier checks feasibility;
+a proof or bounded quality argument supports the selected strategy; and a
+decision ledger records both the result and its limitation.
+
+The forward route is equally narrow: M12 preserves the chosen boundary in
+components, M13 tests it, M16 makes it durable, M19 schedules it under
+concurrency, and M25 later evaluates evidence-grounded intelligent support.
+This text is the complete nonvisual route for the two overview diagrams; it
+does not make a strategy correct before its own assumptions and evidence are
+checked.
+
 Module 11 does not discard the earlier structures. An exact planner coordinates:
 
 - tuples/lists for stable task order;
@@ -113,7 +136,7 @@ Module 11 does not discard the earlier structures. An exact planner coordinates:
 
 ### Capabilities unlocked
 
-After mastery, Michael can:
+By the end, Michael can practice:
 
 - formulate a candidate space, feasibility predicate, objective, and tie policy;
 - use exhaustive search as a specification oracle rather than dismissing it as “slow”;
@@ -123,6 +146,7 @@ After mastery, Michael can:
 - derive recurrence, base cases, dependency order, cost, and reconstruction;
 - distinguish recursion, memoization, tabulation, backtracking, and branch-and-bound;
 - classify randomized algorithms and keep pseudorandomness separate from security;
+- model a one-pass streaming computation, its retained state, and its exact-versus-summary claim;
 - report an approximation ratio or an upper/lower quality gap only within its proof boundary;
 - design, direct, review, and verify an Atlas planner without outsourcing judgment.
 
@@ -186,7 +210,7 @@ A recurrence calls `OPT(i - 1, b)` and `OPT(i - 1, b - wᵢ)`. What must be defi
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -260,6 +284,9 @@ The result needs:
 - unresolved policy and uncertainty notes.
 
 ```mermaid
+%% atlas-diagram-id: m11-decision-evidence-chain
+%% atlas-diagram-title: From human need to a verified planning decision
+%% atlas-diagram-alt: A human need is modeled as candidates, feasibility, objectives, and an algorithm. The returned plan is independently checked and given a quality label before a human decision.
 flowchart LR
     NEED["Human need"] --> MODEL["Instance + candidate model"]
     MODEL --> FEAS["Feasibility predicate"]
@@ -365,7 +392,20 @@ def best_independent_subset(items, budget):
     return best_ids, best_value
 ```
 
-Prediction: how many subsets does it inspect for 20 items? `2²⁰ = 1,048,576`.
+### Prediction — exhaustive-search scale
+
+Before revealing the count, write an estimate and the rule that produced it:
+how many subsets can an exhaustive search inspect for 20 independently chosen
+items?
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+Each item is either absent or present, so the search examines `2²⁰ = 1,048,576`
+subsets. The point is not merely the number: add one independent binary choice
+and the candidate space doubles.
+
+</details>
 
 ### Correctness pattern
 
@@ -424,6 +464,9 @@ Suppose an agent splits tasks in half, independently finds the best plan for the
 The shared budget couples the halves. Both subplans may spend 60 minutes. The combine step needs more than two already-optimized answers: it needs the best left and right value for every possible allocated budget, or another frontier of tradeoffs.
 
 ```mermaid
+%% atlas-diagram-id: m11-divide-conquer-budget-combine
+%% atlas-diagram-title: Divide and conquer with a shared budget
+%% atlas-diagram-alt: Tasks split into left and right groups, but each side must report its best value for every budget. The final answer maximizes left value plus right value over split budgets.
 flowchart TD
     ALL["Tasks + one shared budget B"] --> L["left tasks"]
     ALL --> R["right tasks"]
@@ -479,6 +522,9 @@ In Module 10’s minimum-spanning-tree setting, a lightest edge crossing an appr
 The reusable shape is:
 
 ```mermaid
+%% atlas-diagram-id: m11-greedy-exchange-proof
+%% atlas-diagram-title: Greedy exchange proof structure
+%% atlas-diagram-alt: A greedy local choice is compared with an arbitrary optimum. If exchanging it into that optimum remains feasible and no worse, the remaining problem can be reduced; otherwise the greedy rule is unproved.
 flowchart LR
     LOCAL["Choose local candidate g"] --> OPT["Take an arbitrary optimum O"]
     OPT --> EX["Exchange part of O for g"]
@@ -567,6 +613,9 @@ Why exhaustive? Every feasible solution either excludes the last task or include
 ### Subproblem dependency DAG
 
 ```mermaid
+%% atlas-diagram-id: m11-knapsack-state-dependencies
+%% atlas-diagram-title: Knapsack dynamic-programming state dependencies
+%% atlas-diagram-alt: State OPT(i,b) depends either on skipping item i, OPT(i-1,b), or taking it, OPT(i-1,b-w_i) plus v_i. Both routes reduce the item count.
 flowchart TD
     X["OPT(i,b)"] --> SKIP["OPT(i-1,b)"]
     X --> TAKE["OPT(i-1,b-wᵢ) + vᵢ"]
@@ -627,7 +676,20 @@ def knapsack_bottom_up(
     return value[n][budget], tuple(chosen)
 ```
 
-Prediction for A/B/C above: the result is value 220 with `("B", "C")`.
+### Prediction — reconstructing the chosen plan
+
+For the A/B/C example above, predict both the optimum value and the selected
+IDs before inspecting the table’s reconstruction path. Record the state whose
+choice you believe changes the result.
+
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
+The result is value 220 with `("B", "C")`. The reconstruction evidence matters:
+the dynamic-programming value alone is not yet a usable plan until the recorded
+choices trace back to those task IDs.
+
+</details>
 
 ### Correctness argument
 
@@ -745,6 +807,9 @@ For the Atlas planner, a partial state needs:
 If the selected set determines elapsed time and value, some fields are derivable rather than independent.
 
 ```mermaid
+%% atlas-diagram-id: m11-backtracking-prefix-tree
+%% atlas-diagram-title: Backtracking prefixes with legal and pruned branches
+%% atlas-diagram-alt: From the empty plan, task A or C may be chosen. A then permits B, while an A-to-C path misses a deadline and a C-to-B path violates B's prerequisite; legal paths end at candidate plans.
 flowchart TD
     R["() · 0 min"] --> A["take A"]
     R --> C["take C"]
@@ -856,6 +921,29 @@ def reservoir_one(items: Iterable[str], rng: Random) -> str:
     return chosen
 ```
 
+### Proof model — finite prefix and ideal draws
+
+Fix a finite prefix of `k ≥ 1` stream items. For the mathematical proof, let
+`U_i` be the draw made after item `i` is seen, and let `H_(i-1)` contain every
+earlier draw and selection state. Assume the ideal model
+
+$$
+\Pr(U_i = j \mid \mathcal H_{i-1}) = \frac{1}{i}
+\qquad\text{for each } j \in \{0, \ldots, i - 1\}.
+$$
+
+**Prose fallback:** given every earlier draw and selection state, each of the
+`i` possible draw positions is equally likely at step `i`.
+
+A fresh independent uniform draw at each step is one sufficient way to obtain
+that conditional model. The program call `rng.randrange(i)` is an
+implementation mechanism to inspect; a seed gives a reproducible trace, not
+the probability assumption itself.
+
+**Prediction before proof:** Which statement is needed for the induction:
+“the seed is fixed,” “one test looked balanced,” or “each next draw has the
+stated conditional uniform distribution”? Give a confidence from 0–100.
+
 **[MATHEMATICAL CLAIM]** After processing `k ≥ 1` items, each has probability `1/k` of being retained.
 
 Inductive step:
@@ -864,13 +952,87 @@ Inductive step:
 - each old item was present with probability `1/(k-1)` and survives with probability `(k-1)/k`;
 - its final probability is `(1/(k-1))((k-1)/k) = 1/k`.
 
-This is a proof about a mathematical uniform-choice model. A deterministic seed supports reproducible debugging, not proof of distribution quality.
+This is a proof about the stated mathematical uniform-choice model. A
+deterministic seed supports reproducible debugging, not proof of distribution
+quality.
 
 ### Python boundary
 
 **[PYTHON GUARANTEE]** Python’s `random` module provides deterministic pseudorandom generators suitable for modeling and simulation. Its documentation explicitly warns against using it for security tokens; use the `secrets` module for security-sensitive randomness.
 
 Do not pin tests to an exact long output sequence across Python versions unless the documented reproducibility scope supports that dependency. Test invariants and inject an RNG where control matters.
+
+## 12.5 Streaming algorithms: bounded state and heavy hitters
+
+Reservoir sampling is one streaming algorithm. The broader model matters:
+the input arrives as a sequence (a_1,a_2,ldots,a_n), usually in one pass,
+while the retained state is much smaller than the stream. A streaming claim
+must name the answer requested at each prefix, the update time, the memory
+bound, and whether the answer is exact, a lower/upper bound, or a randomized
+summary. A generator or iterator describes how values arrive; it does not by
+itself provide a bounded-memory algorithm.
+
+### Prediction before the summary
+
+Suppose a telemetry stream has billions of event IDs but the operator needs
+the IDs that occur more than (n/k) times. Predict before reading the code:
+can a fixed-size state return exact counts for every ID? Give a confidence
+from 0–100 and name the resource that forces your answer. The relevant design
+question is not “which dictionary API?” but “which information can this state
+retain, and what error or candidate guarantee follows?”
+
+### Misra–Gries as an inspectable summary
+
+With (k-1) counters, the Misra–Gries update keeps a candidate set for
+heavy hitters in an arrivals-only stream:
+
+```python
+from collections.abc import Iterable
+
+
+def misra_gries(stream: Iterable[str], k: int) -> dict[str, int]:
+    """Return candidates; stored counts are lower bounds, not exact totals."""
+    if k < 2:
+        raise ValueError("k must be at least 2")
+    counters: dict[str, int] = {}
+    for item in stream:
+        if item in counters:
+            counters[item] += 1
+        elif len(counters) < k - 1:
+            counters[item] = 1
+        else:
+            counters = {
+                candidate: count - 1
+                for candidate, count in counters.items()
+                if count > 1
+            }
+    return counters
+```
+
+The all-decrement branch represents deleting one occurrence of each of
+(k) distinct items: the (k-1) stored items and the new item. Therefore at
+most (lfloor n/kfloor) such deletion rounds can occur. If an item appears
+more than (n/k) times, its occurrences cannot all be deleted, so it remains
+in the final candidate set. Its stored counter may still be smaller than its
+true frequency. To report exact frequencies, make a second pass over the
+candidate IDs (or use an external exact counter); treating the first-pass
+counter as exact is a bug.
+
+**Trace.** For `stream = "A A B C A B D A C".split()` and `k = 3`, write the
+counter state after every item before revealing the trace. The final state may
+contain `A` and `C`, but only `A` has frequency greater than (n/k=3). Record
+which conclusion is guaranteed (candidate coverage), which is merely a finite
+observation (the exact final dictionary), and what a second pass would settle.
+
+### Code-reading and transfer boundary
+
+Read the update as a state machine: membership hit, free slot, or global
+decrement. Ask what information is intentionally discarded, why a heavy item
+cannot disappear, and why a reported counter is not an exact count. Then
+transfer the contract to a bounded log monitor, a search-index top-(k)
+preview, or a network counter. Change one premise—deletions, weighted events,
+or a required exact answer—and state which proof and memory claim must be
+replaced. A sketch is not a license to hide the error model.
 
 ### Randomized planning boundary
 
@@ -932,6 +1094,14 @@ Proof boundary:
 - therefore the better of prefix and singleton is at least half the upper bound and at least half `OPT`.
 
 The A/B/C counterexample returns value 160, while `OPT=220`; it is non-optimal but above 110.
+
+### Numerical experiment — compare a fixed tiny instance
+
+Run the bounded reference model on the A/B/C instance and record
+`ratio_greedy = 160`, `exact = 220`, and the 60-point gap. Then change one
+assumption—add a prerequisite, a deadline, or a negative value—and state which
+calculation remains valid. This is a worked finite observation, not evidence
+that the approximation theorem or any Atlas policy holds in general.
 
 ### A certificate can be more useful than a generic ratio
 
@@ -1036,6 +1206,9 @@ Atlas presents a plan, evidence, alternatives, and model limits. The learner rem
 ### Component architecture
 
 ```mermaid
+%% atlas-diagram-id: m11-planner-architecture
+%% atlas-diagram-title: Atlas planning architecture and evidence flow
+%% atlas-diagram-alt: An immutable task snapshot is validated, valued, and passed to an exact or bounded strategy. The resulting plan is independently verified and paired with a relaxation bound and evidence ledger in a decision report.
 flowchart LR
     SNAP["TaskSnapshot<br/>immutable input"] --> VALID["ProblemValidator<br/>IDs, graph, ranges"]
     VALID --> SCORE["ValuePolicy<br/>expected / conservative"]
@@ -1734,6 +1907,9 @@ The words **small**, **validated**, **indivisible**, **ordered**, and **additive
 ### 16.2 Map
 
 ```mermaid
+%% atlas-diagram-id: m11-planner-code-reading-map
+%% atlas-diagram-title: Planner code-reading dependency map
+%% atlas-diagram-alt: A task and policy contract is validated and prepared as masks for exact subset and backtracking planners. Both create a plan checked by an independent verifier, while a fractional bound and the plan determine a quality gap.
 flowchart TD
     TASK["Task + Policy contract"] --> VALID["_validate_problem"]
     VALID --> MASK["_prepared_masks"]
@@ -1804,6 +1980,36 @@ Boundaries:
 - a mutable task snapshot would invalidate the reasoning;
 - fatigue, transfer, partial tasks, multiple resources, fairness, and learner overrides need new models;
 - “exact” says nothing about whether the model represents a good education.
+
+### 16.6 Architecture-reading dossier: five M6→M10 handoffs (20–30 minutes)
+
+Before choosing a planner strategy, make the earlier data-structure arc
+visible as one argument. This is an original reading-and-design artifact, not
+a new implementation project and not a claim that a completed table proves
+route completion.
+
+Use the fixed Atlas story: an event enters a bounded flow, supports identity
+lookup, informs a next-review choice, and participates in a prerequisite
+graph. Reopen the five earlier artifacts below and complete one row at a time.
+On a narrow screen, finish the five short lines in one row before moving to
+the next.
+
+| Handoff | Existing artifact to reopen | Fill these five short lines |
+| --- | --- | --- |
+| **M6 → M7** | `HistoryBuffer` and the M6 representation-decision/M7-handoff dossier | **Contract:** what ordered history or snapshot may a client request? **Invariant:** what does the reachable structure denote, and who may mutate it? **Cost:** name `n` and the relevant access, append, eviction, traversal, or copy operation. **Failure:** name one alias, stale-link, cycle, or hidden front-shift boundary. **Changed premise:** if only the newest `C` events may remain, what must be re-proved about eviction or snapshots? |
+| **M7 → M8** | M7 access-and-demand card | **Contract:** when may a consumer request the next normalized event or stop? **Invariant:** which frame and named buffer state is retained? **Cost:** name capacity `B`, work per requested item, and the sink assumption. **Failure:** identify `list(...)`, an unnamed collector, ownership leak, or false backpressure claim. **Changed premise:** if the sink slows, cancels, or becomes asynchronous, which queue, ownership, cancellation, and failure policy is now missing? |
+| **M8 → M9** | M8 identity-and-index card | **Contract:** what candidate IDs may a key or token query return before final equality/query checking? **Invariant:** which stable key and source-of-truth version does the derived index represent? **Cost:** qualify expected lookup with hashing, equality, load, update, and retained-index assumptions. **Failure:** name a mutable key, collision mistake, stale entry, or changed normalization rule. **Changed premise:** if an event or tokenizer changes, which entries must be invalidated, rebuilt, or versioned? |
+| **M9 → M10** | M9 ordered-evidence card | **Contract:** which review is next under an explicit `(priority, revision)` key and tie rule? **Invariant:** why does the identity record remain authoritative while a heap exposes only a candidate minimum? **Cost:** separate heap insert/remove, exact-key lookup, and full-sort work. **Failure:** name a stale heap entry, hidden tie policy, or heap-as-sorted-list error. **Changed premise:** if priority or stable ordering changes, what key, revision check, and trace must be repaired? |
+| **M10 → M11** | M10 graph-decision card | **Contract:** which prerequisite relation, order, or witness is being returned? **Invariant:** what does each directed edge mean, and why must every edge point forward in a topological order? **Cost:** name `\|V\|`, `\|E\|`, representation, frontier, and the qualified traversal/order bound. **Failure:** name a missing edge, cycle, wrong frontier, or theorem mismatch. **Changed premise:** if a new edge creates a cycle, what must be rejected or recomputed before the planner uses the graph? |
+
+**Acceptance boundary:** attach these exactly five rows as page one of the
+existing Session 6 strategy-defense dossier. Finish with a four-to-six-sentence
+**evidence-boundary conclusion**: name one claim the table supports, one it
+does *not* support, and the earliest component whose invariant or cost model
+must be revisited after the changed premise. Do not add a sixth subsystem,
+new registry, score, or mastery claim. Then carry the table into §17: the
+planner state must preserve every future-relevant distinction these handoffs
+expose.
 
 ---
 
@@ -1922,7 +2128,9 @@ A defensible report can state `lower_score`, `upper_bound`, and—only when `upp
 
 Each session is 75–90 focused minutes. The instructor explains one abstraction jump, then Michael predicts, traces, maps, challenges, or defends it.
 
-### Session 1 — Formulate before optimizing
+> **Time boundary:** the portal's 63-minute value is a reference-reading estimate, not a promise that the six-session route can be completed in 63 minutes. Plan 75–90 minutes per session; use the 60-day route to distribute the work, and keep the optional scope boundary optional.
+
+## Session 1 — Formulate before optimizing
 
 **Retrieve:** contracts, graph direction, cost cases, and evidence labels.
 
@@ -1940,9 +2148,16 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 **Evidence:** a one-page problem contract and one minimal invalid candidate.
 
+### Session 1 output — problem contract and oracle boundary
+
+One concise contract states the candidate representation, feasibility predicate,
+objective, tie rule, uncertainty policy, and the smallest exhaustive oracle
+that can challenge a faster proposal. It also labels what the oracle cannot
+prove beyond its bounded instance set.
+
 **TA check:** if code appears before candidate and feasibility meanings, pause and rebuild the model.
 
-### Session 2 — Decomposition and safe commitment
+## Session 2 — Decomposition and safe commitment
 
 **Retrieve:** recursive induction, merge sort, and MST cut reasoning.
 
@@ -1960,9 +2175,16 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 **Evidence:** one valid exchange argument and one rejected greedy rule with a minimal witness.
 
+### Session 2 output — strategy proof and counterexample card
+
+Name the shared constraint that blocks naïve division, then keep one valid
+exchange or cut argument beside one minimal counterexample to an unjustified
+greedy choice. The card distinguishes structural proof from a successful test
+run.
+
 **TA check:** do not accept “greedy is faster” as a correctness justification.
 
-### Session 3 — Dynamic programming as a state DAG
+## Session 3 — Dynamic programming as a state DAG
 
 **Retrieve:** recursion, hashing of stable keys, DAG dependency order, and reconstruction parents.
 
@@ -1980,9 +2202,15 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 **Evidence:** a recurrence annotated with meanings and a reconstructed optimal subset.
 
+### Session 3 output — state-DAG and reconstruction note
+
+Define one subproblem in a sentence, show its base cases and dependency arrows,
+then trace the parent information required to reconstruct a selected subset.
+Include the encoded parameter that makes the claimed cost pseudopolynomial.
+
 **TA check:** if the learner can fill a table but cannot say what one cell means, return to the subproblem sentence.
 
-### Session 4 — Search, pruning, and state sufficiency
+## Session 4 — Search, pruning, and state sufficiency
 
 **Retrieve:** stack/lazy traversal, set identity, and graph-state equivalence.
 
@@ -2000,29 +2228,45 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 **Evidence:** a state-sufficiency argument plus one safe optimistic bound.
 
+### Session 4 output — pruning and state-sufficiency proof
+
+For one rejected prefix or bound, state the descendants removed, the invariant
+that makes removal safe, and the future-relevant information preserved by the
+state key. Keep an unsafe prune alongside it as a contrast.
+
 **TA check:** every prune must name the descendants it excludes and why none can contain a better legal answer.
 
-### Session 5 — Randomness, approximation, and uncertainty
+## Session 5 — Randomness, approximation, and uncertainty
 
 **Retrieve:** expected-case analysis, induction, and relaxed models.
 
 **Encounter:** exact search exceeds the candidate limit and estimated values are uncertain.
 
-**Derive:** Las Vegas/Monte Carlo contracts, reservoir-sampling proof, approximation ratio, and lower/upper certificate.
+**Derive:** the one-pass streaming model, a Misra–Gries candidate guarantee,
+Las Vegas/Monte Carlo contracts, reservoir-sampling proof, approximation
+ratio, and lower/upper certificate.
 
 **Learner actions:**
 
 1. prove the reservoir invariant;
 2. separate seeded reproducibility from distribution evidence;
-3. derive the independent-knapsack half guarantee;
-4. mark precisely where prerequisites invalidate it;
-5. compare expected and conservative Atlas policies.
+3. trace `misra_gries` and explain why a stored counter is a lower bound;
+4. derive the independent-knapsack half guarantee;
+5. mark precisely where prerequisites invalidate it;
+6. compare expected and conservative Atlas policies.
 
 **Evidence:** a claim label, assumptions, and certificate—not “seems near optimal.”
 
+### Session 5 output — probability and quality-bound ledger
+
+Record the stream state and memory bound, candidate/error guarantee, random
+variable or guarantee type, approximation or lower/upper-bound relation, every
+assumption, and the first changed premise that invalidates the claim. A seeded
+run is evidence of reproducibility only.
+
 **TA check:** random testing, randomized algorithms, and uncertain inputs must remain three different ideas.
 
-### Session 6 — Agent-directed Atlas strategy defense
+## Session 6 — Agent-directed Atlas strategy defense
 
 **Retrieve:** the full Arc II chain.
 
@@ -2040,7 +2284,49 @@ Each session is 75–90 focused minutes. The instructor explains one abstraction
 
 **Evidence:** an inspected diff, regression record, quality report, and unresolved decision ledger.
 
-**TA check:** mastery means Michael owns the claim and counterexample even if the agent wrote every production line.
+### Session 6 output — strategy-defense dossier
+
+Assemble the five-row M6→M10 architecture-reading dossier as page one, then
+the problem contract, selected paradigm, proof or counterexample, independent
+verifier result, resource/quality boundary, inspected agent diff, and one
+unresolved human decision. This dossier is evidence for a constructive
+conversation, never a pass/fail verdict.
+
+**TA check:** ownership means Michael owns the claim and counterexample even if the agent wrote every production line.
+
+---
+
+### Optional scope boundary — proof under a model, not a general hardness claim (20 minutes)
+
+This is a short bridge to later theory, not an early substitute for Module 33.
+An M11 proof establishes a chosen strategy's behavior **for its stated model**.
+It does not by itself establish that every alternative model is hard, that no
+better algorithm exists, or that a finite test suite proves a universal claim.
+
+### Prediction before reveal — state sufficiency under a changed premise
+
+The Session 6 planner uses `selected_set` as its
+dynamic-programming state. Suppose a task earns a bonus only when it follows a
+particular earlier task. Is `selected_set` still sufficient? Write yes/no,
+confidence, and the future information your answer needs before opening the
+contrast.
+
+<details>
+<summary>Reveal the model boundary</summary>
+
+No. Two histories can contain the same selected tasks while ending with
+different earlier tasks, so their next bonus can differ. The old state merged
+histories that have different futures; the recurrence proof no longer applies
+unless the state records the needed order/history. This is a counterexample to
+the **state-sufficiency claim**, not evidence that the changed problem is
+NP-complete or impossible to solve efficiently.
+</details>
+
+Make a four-line scope card for one Session 6 strategy: (1) model and
+assumptions, (2) correctness or counterexample argument, (3) cost claim and
+input measure, and (4) one changed premise that invalidates the argument. Keep
+reductions, decidability, NP-completeness, and formal lower-bound arguments for
+**Module 33**, where their definitions and proof obligations are introduced.
 
 ---
 
@@ -2055,6 +2341,7 @@ For each scenario, identify the first plausible strategy and the structural fact
 - choose indivisible tasks under one budget;
 - search a maze with early dead ends;
 - sample one event from an unknown-length stream;
+- retain a bounded candidate summary for heavy hitters in a one-pass stream;
 - return a feasible plan with a quantified bound.
 
 Do not name a paradigm without the missing evidence.
@@ -2068,6 +2355,10 @@ Trace the bottom-up knapsack table for items `(2,3)` and `(3,4)` with budget `5`
 - the final value;
 - reconstruction decisions;
 - what changes if the recurrence reads row `i` rather than `i-1`.
+
+Then trace `misra_gries("A A B C A B D A C".split(), 3)` one item at a time.
+Mark the global-decrement step, the candidate guarantee, and the exact-count
+fact that still requires a second pass.
 
 ### Level 3 — Map
 
@@ -2115,6 +2406,11 @@ solve(problem, resource_limit) -> PlanReport
 
 Specify when it may choose exact subset DP, backtracking, a bounded approximation, or a labeled heuristic. Give an agent one bounded implementation task and prohibit silent claim upgrades.
 
+For a telemetry stream, add a `summarize(stream, k)` option. State whether it
+returns exact counts, candidates, or a probabilistic estimate; name retained
+state, update cost, verification pass, and the changed premise that would
+invalidate the contract.
+
 ### Level 7 — Review and verify
 
 Review an agent patch that introduces pruning. Require:
@@ -2140,7 +2436,7 @@ Identify candidate space, objective, constraints, equivalence state, evidence, a
 
 ---
 
-## 21. Understanding check — eight confidence-aware MCQs
+## 21. Understanding check — nine confidence-aware MCQs
 
 For each question:
 
@@ -2343,17 +2639,48 @@ D. Rewrite it manually so authorship is known.
 
 </details>
 
+### Question 9 — Streaming summary boundary
+
+For `misra_gries(stream, k)` with (n) arrivals and (k-1) counters, which
+statement is justified without a second pass?
+
+A. Every returned counter is the exact frequency of its item.  
+B. Every item occurring more than (n/k) times remains among the candidates;
+the stored count can be a lower bound.  
+C. The algorithm stores every distinct item, so its memory is (O(n)).  
+D. A fixed seed proves the candidate threshold for every stream.
+
+<details>
+<summary>Answer and distractor diagnosis</summary>
+
+**Answer: B.**
+
+- **A** confuses a first-pass summary with an exact frequency table.
+- **C** ignores the fixed (k-1)-counter state and the information it discards.
+- **D** replaces a deletion-count proof with one empirical run.
+
+**Routing:** A → second-pass verification and lower bounds; C → state/memory
+contract; D → mathematical guarantee versus reproducibility.
+
+**Connection:** the streaming model extends Module 7's lazy arrival boundary
+and Module 8's dictionary identity without pretending that a dictionary is
+free memory.
+
+</details>
+
 ### Interpretation
+
+The check routes instruction. It is not a grade.
+
+### Misconception repair map — claims before tactics
 
 | Pattern | Instructional response |
 |---|---|
-| 7–8 correct with calibrated confidence and sound distractor rejection | proceed to Atlas strategy defense |
+| 7–8 correct with calibrated confidence and sound distractor rejection | rehearse the Atlas strategy defense and preserve one uncertainty |
 | 5–6 correct | repair the named state/proof/bound misconception, then solve one unseen contrast |
-| 0–4 correct | repeat formulation, exhaustive oracle, and DP-state derivation before agent work |
+| 0–4 correct | return to formulation, the exhaustive oracle, and DP-state derivation before the next agent review |
 | any confidence-4 error | construct a minimal counterexample and schedule retrieval |
-| correct choice but weak rationale | treat as recognition, not mastery |
-
-The check routes instruction. It is not a grade.
+| correct choice but weak rationale | treat as recognition; write one explanation trace before the defense |
 
 ---
 
@@ -2372,6 +2699,7 @@ The check routes instruction. It is not a grade.
 | “Same elapsed time means same future.” | prerequisite counterexample | state sufficiency |
 | “Any prune improves performance safely.” | low partial score with high remaining value | monotone violation or valid bound |
 | “Random tests prove randomized correctness.” | seeded output versus reservoir induction | probability contract |
+| “A streaming counter is an exact frequency table.” | trace a global decrement and compare with a second pass | candidate coverage and lower-bound count |
 | “Approximate means no proof.” | lower/upper certificate | quantified guarantee |
 | “Exact plan means good educational policy.” | biased or miscalibrated values | model and human-impact boundary |
 | “Green tests prove optimality.” | shared planner/verifier defect | independent evidence |
@@ -2390,8 +2718,10 @@ Ask in order:
 8. Why is each prune safe for every descendant?
 9. How is a returned solution reconstructed and independently checked?
 10. Is the claim exact, approximate, expected, high-probability, empirical, or heuristic?
-11. What parameter controls cost, and how is it encoded?
-12. Which human decision remains outside the optimizer?
+11. For a stream, what state is retained, what is discarded, and what guarantee
+    survives the deletion or sampling step?
+12. What parameter controls cost, and how is it encoded?
+13. Which human decision remains outside the optimizer?
 
 ### Staged hint ladder
 
@@ -2418,6 +2748,7 @@ Before accepting a planner patch, require:
 - expected/conservative policy divergence;
 - duplicate/unknown task in fabricated output;
 - ratio-greedy counterexample;
+- Misra–Gries candidate coverage on a bounded stream plus a second-pass exact-count check;
 - exact subset DP versus backtracking/exhaustive agreement on bounded cases;
 - reconstruction score/minute recomputation;
 - every new prune compared against the oracle;
@@ -2455,23 +2786,24 @@ Before accepting a planner patch, require:
 Produce:
 
 1. problem contract with candidate, feasibility, objective, tie, and uncertainty policy;
-2. Arc II architecture diagram locating validation, policy, strategy, verification, and reporting;
-3. one exhaustive tiny-instance oracle;
-4. one valid greedy proof and one minimal invalid-greedy counterexample;
-5. a DP state sentence, recurrence, bases, dependency order, answer location, and reconstruction path;
-6. a state-sufficiency proof for selected-set masks;
-7. a safe prune or optimistic bound with proof;
-8. exact subset and backtracking agreement evidence;
-9. an independent feasibility/accounting verifier;
-10. a feasible lower score and valid relaxed upper bound;
-11. a bounded agent brief, inspected diff, and patch disposition;
-12. cost claims including the exponential and pseudopolynomial boundaries;
-13. a model-limit and human-impact decision ledger;
-14. a five-minute oral strategy defense.
+2. five M6→M10 handoff rows: public contract, representation invariant, named cost model, failure boundary, and changed-premise consequence;
+3. Arc II architecture diagram locating validation, policy, strategy, verification, and reporting;
+4. one exhaustive tiny-instance oracle;
+5. one valid greedy proof and one minimal invalid-greedy counterexample;
+6. a DP state sentence, recurrence, bases, dependency order, answer location, and reconstruction path;
+7. a state-sufficiency proof for selected-set masks;
+8. a safe prune or optimistic bound with proof;
+9. exact subset and backtracking agreement evidence;
+10. an independent feasibility/accounting verifier;
+11. a feasible lower score and valid relaxed upper bound;
+12. a bounded agent brief, inspected diff, and patch disposition;
+13. cost claims including the exponential and pseudopolynomial boundaries;
+14. a model-limit and human-impact decision ledger;
+15. a five-minute oral strategy defense.
 
 ### Mastery evidence
 
-Advance only when Michael can take an unseen optimization patch and:
+Use an unseen optimization patch to choose a next bridge or repair. Look for whether Michael can:
 
 - reconstruct the actual mathematical/product problem it solves;
 - identify a missing constraint or tie policy;
@@ -2484,7 +2816,22 @@ Advance only when Michael can take an unseen optimization patch and:
 - label exactness, probability, approximation, and empirical evidence correctly;
 - direct an agent through a bounded change and defend the accepted result.
 
-MCQ recognition or syntax fluency alone is insufficient.
+MCQ recognition or syntax fluency alone does not choose the next step.
+
+### Evidence rubric — strategy dossier
+
+| Evidence dimension | Constructive check |
+|---|---|
+| Model | Candidate, feasibility, objective, tie policy, and uncertainty assumptions are explicit. |
+| Strategy | The chosen paradigm is tied to a structural fact; a tempting alternative has a proof obligation or minimal counterexample. |
+| Implementation | The state, transition, reconstruction, and every prune can be explained from the written model. |
+| System thread | Exactly five M6→M10 handoff rows name a public contract, representation invariant, cost model, failure boundary, and changed-premise consequence without inventing a route-completion claim. |
+| Verification | A tiny oracle or second exact method, plus an independent feasibility/accounting check, challenges the planner. |
+| Boundary | Cost, probability, approximation, and human-impact limits are named without inflating a local result into a general claim. |
+| Communication | The learner can revise one claim after a changed premise and choose a small evidence summary to carry forward. |
+
+This rubric guides a repair conversation. It is not a grade, release decision,
+or claim that the dossier proves mastery.
 
 ---
 
@@ -2493,6 +2840,9 @@ MCQ recognition or syntax fluency alone is insufficient.
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m11-algorithm-selection-knowledge-map
+%% atlas-diagram-title: Algorithm selection from structure to evidence
+%% atlas-diagram-alt: A problem contract leads to exhaustive evidence and a proved structural choice among divide and conquer, greedy, dynamic programming, backtracking, randomization, and approximation. Each route feeds verification and an honest report.
 flowchart TD
     PROB["Problem contract"] --> ENUM["Exhaustive oracle"]
     PROB --> STRUCT{"What structure is proved?"}
@@ -2578,6 +2928,8 @@ Add:
 - Module 19 adds concurrent scheduling, shared state, and interleaving constraints.
 - Module 21 adds cancellation, partial failure, and distributed work queues.
 - Module 24 measures Python implementation costs without changing the mathematical contract.
+- Module 33 supplies reductions, decidability, NP-completeness, and formal
+  complexity limits after the M11 model/counterexample boundary is clear.
 - Module 25 treats uncertain predictions, optimization metrics, bias, evaluation, and human agency as first-class concerns.
 - Module 26 requires a capstone defense that separates model, implementation, evidence, and impact.
 
@@ -2593,6 +2945,41 @@ External sources verify and extend the integrated narrative; they do not replace
 - [MIT 6.006 Lecture 16 — LCS, LIS, and Coins](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-16-dynamic-programming-part-2-lcs-lis-coins/) — compare several state definitions and recover their dependency DAGs.
 - [MIT 6.046J Design and Analysis of Algorithms](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/) — broader design/proof sequence for divide-and-conquer, greedy methods, dynamic programming, randomization, and approximation.
 - [UC Berkeley CS 170](https://cs170.org/) — an advanced undergraduate route through divide-and-conquer, greedy algorithms, dynamic programming, randomized algorithms, approximation, and computational limits.
+- [Carnegie Mellon 15-451/651 Lecture 20 — Streaming Algorithms](https://www.cs.cmu.edu/~15451-s24/lectures/lecture20-streaming.pdf) — the arrivals-only streaming model and heavy-hitter analysis; it calibrates the summary/error boundary but does not validate an Atlas monitor.
+- [Stanford CS 368 — Algorithmic Techniques for Big Data](https://web.stanford.edu/class/cs368/) — scope calibration for streaming, sketching, and compact summaries; it is a graduate-level extension signal, not a claim that M11 covers its full syllabus.
+
+### Focused official reading links
+
+Sources were checked **2026-08-02**. Atlas's explanations, diagrams, tasks,
+diagnostics, and dossiers are original synthesis. External material is
+linked/cited or briefly paraphrased only; this module imports no external
+slides, diagrams, solutions, code, or assessment assets.
+
+The connected-architecture calibration was rechecked **2026-08-03**. It uses
+the MIT and CMU links below to calibrate a connected undergraduate spine and
+cross-component correctness reasoning; it does not prescribe the Atlas
+dossier format or grant reuse of course assets.
+
+| Need | Focused source | What it supports—and does not support |
+|---|---|---|
+| Divide and combine | [MIT 6.046J Lecture 2 — Divide & Conquer](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/7463c413c944ed72b46a3c3d02b49448_MIT6_046JS15_lec02.pdf) | A decomposition/combine and recurrence-proof pattern; it does not establish that an Atlas split preserves a shared constraint. |
+| DP state and order | [MIT 6.006 Lecture 15 — Recursive Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/9eb3e9a51a7b5b60b0f67c2277f8b0ee_MIT6_006S20_lec15.pdf) | The difference between a call tree and reused subproblem state; it does not validate an Atlas state key or policy. |
+| Greedy proof | [MIT 6.046J Lecture 12 — Greedy Algorithms & MST](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) | A cut/exchange proof pattern; it does not justify an Atlas value or ratio priority. |
+| Probability contract | [MIT 6.046J Lecture 6 — Randomized Algorithms](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/cb55cb123a557eed0738a1187a452c24_MIT6_046JS15_lec06.pdf) | Expected-time/error-bound vocabulary; it does not establish Python randomness security or an Atlas guarantee. |
+| Approximation boundary | [MIT 6.046J Lecture 17 — Approximation Algorithms](https://www.ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/a4a7f356ba3e65a00ad2bdcfed6e0f35_MIT6_046JS15_lec17.pdf) | A proved approximation-ratio pattern; a benchmark alone grants no Atlas quality bound. |
+| Streaming summary | [CMU 15-451/651 Lecture 20 — Streaming Algorithms](https://www.cs.cmu.edu/~15451-s24/lectures/lecture20-streaming.pdf) and [Stanford CS 368](https://web.stanford.edu/class/cs368/) | One-pass state, heavy-hitter candidates, and memory/error trade-offs; neither source makes a first-pass counter exact or validates an Atlas deployment claim. |
+| Connected architecture reading | [MIT 6.006 resource index](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/resource-index/) and [CMU 15-122 course information](https://www.cs.cmu.edu/~15122/syllabus.shtml) | A connected data-structures-and-algorithms spine and correct-by-design cross-component reasoning; neither source dictates this Atlas table or validates an Atlas architecture. |
+
+### Session-to-source-and-evidence route
+
+| Session | Read only after the local model is written | Keep this evidence |
+|---|---|---|
+| 1 | MIT problem-formulation/recursive-algorithm framing | Candidate, feasibility, objective, and tiny-oracle boundary |
+| 2 | MIT divide-and-conquer and greedy proof patterns | One combine condition and one exchange/counterexample card |
+| 3 | MIT 6.006 DP-state derivation | State sentence, dependency graph, and reconstruction trace |
+| 4 | The local planner's bounded search code | One safe prune proof and one insufficient-state witness |
+| 5 | MIT randomized/approximation notes plus Python `random` | Probability/quality-bound ledger and assumption list |
+| 6 | The generated Atlas planner diff and its local tests | Strategy-defense dossier with one unresolved decision |
 
 ### Official Python 3.14 references
 
@@ -2606,7 +2993,7 @@ External sources verify and extend the integrated narrative; they do not replace
 1. After Session 1, read one MIT formulation example and rewrite candidate/feasibility/objective in Atlas vocabulary.
 2. After Session 2, study one valid greedy proof; extract the exchange or cut sentence rather than memorizing pseudocode.
 3. After Session 3, watch/read MIT 6.006’s DP state derivation and label each subproblem dependency.
-4. During Session 5, read the Python `random` warning and explain why reproducible tests are not security or distribution proofs.
+4. During Session 5, read the CMU streaming summary setup and Python `random` warning; explain why a candidate/lower-bound record and a reproducible seed are not exact counts or distribution proofs.
 5. During Session 6, read only the generated Atlas planner diff and its call path; do not tour a large solver repository without an invariant question.
 
 ### Source-use discipline
@@ -2618,8 +3005,151 @@ External sources verify and extend the integrated narrative; they do not replace
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance to durable-software design when Michael can formulate an unseen optimization problem, select a strategy from a proved structural fact, recover and challenge an implementation, verify a returned plan independently, state cost and quality honestly, and defend both the mathematical boundary and the human decision boundary.
+Use the problem contract, proof or counterexample, independent verification,
+cost/quality statement, and human-decision boundary to choose a next bridge or
+repair—not to decide whether Michael passes. If Michael can formulate an unseen
+optimization problem, select a strategy from a proved structural fact, recover
+and challenge an implementation, verify a returned plan independently, and
+state the mathematical and human decision boundaries honestly, continue with the M12 handoff.
 
-Do not advance because a named algorithm was recognized or an agent produced green tests.
+Otherwise, repair the first missing link: return to the problem contract when
+the model is unclear, the smallest counterexample or proof obligation when a
+strategy is unsupported, the state/recurrence trace when futures were merged,
+or the independent verifier when a result was trusted too quickly. Then repeat
+one changed-premise explanation with the Teaching Assistant or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+## Conversational oral defense — M11
+
+The **Teaching Assistant** leads this as a constructive discussion after the
+strategy-defense dossier exists. It is an invitation to explain and repair a
+model, not a timed coding or written exam. Use GPT Live only when the learner
+chooses and the platform supports it; otherwise use the equivalent text
+conversation. In either mode, render formulas as readable Markdown/LaTex and
+code as small fenced snippets, with a plain-language or ASCII alternative when
+rich rendering is uncertain.
+
+### Invitation and starting evidence
+
+Ask the learner to choose one claim from the dossier: the candidate model, a
+greedy safe-choice argument, a DP state, a prune, a quality bound, or one row
+of the M6→M10 architecture-reading dossier. Start with their confidence and
+the artifact they want to show; do not infer a score or force a recording.
+
+### Hint ladder — model to evidence
+
+1. Restate the candidate, feasibility rule, and objective without an algorithm name.
+2. Draw two tiny candidates or subproblems and identify the future information that differs.
+3. Name the structural fact needed for the chosen paradigm.
+4. Trace one transition, proof step, or independent verification check.
+5. State the cost or quality boundary and what it does not establish.
+
+### Changed-premise counterexample
+
+Change exactly one premise: make a value negative, add an ordering-dependent
+bonus, remove an interval assumption, weaken an optimistic bound, or change a
+tie rule. Ask whether the proof, state key, implementation, or decision policy
+survives. Prefer the smallest counterexample that lets the learner repair the
+claim in their own words.
+
+### Transfer turn — M12 boundary
+
+Ask: “Which part of this strategy must become an explicit Python module, API,
+type, or dependency contract before another component can safely call it?”
+Carry the answer into M12 rather than treating a strategy name as an interface.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a compact note containing the chosen claim, confidence,
+one corrected premise, an evidence artifact, and the next question for M12.
+No automatic Notion write, transcript retention, completion mark, or mastery
+claim follows from this conversation.
+
+## Guided Codex handoff — M11
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M11. The problem structure is [subproblems/
+choice/ordering], my chosen paradigm is [claim], and my confidence is
+[level].”** Ask for the structural fact before accepting a strategy name. Use
+this hint ladder: objective and feasibility → smallest subproblem/choice →
+candidate recurrence or exchange → invariant/optimal-substructure proof idea →
+cost and approximation/quality boundary. Change one premise (negative value,
+non-overlapping interval failure, a greedy tie, or an adversarial input) and
+ask whether the proof, implementation, or decision claim survives.
+
+Before accepting the final defense, ask the learner to put the weakest row of
+the five-handoff table on the visible whiteboard and repair it in this order:
+**contract → invariant → cost → failure → changed premise**. Treat a missing
+row as a repair target, not a score.
+
+### Study Partner — design-paradigm rehearsal
+
+Ask the learner to classify one unfamiliar problem by its state, choices, and
+repeated work. Offer a tempting but unjustified greedy/DP/divide-and-conquer
+choice, then ask for the smallest counterexample or missing theorem condition.
+Rehearse the five M6→M10 handoffs left-to-right, one changed premise at a time:
+ask for prediction and confidence before offering the smallest repair. Finish
+with the evidence artifact that the TA should challenge.
+
+### Forward handoff — M12
+
+Carry the five-row architecture-reading table, a written problem contract, an
+invariant or recurrence, and one evidence boundary into **M12**. The next
+module turns those reasoning obligations into explicit Python module, API,
+type, and dependency contracts.
+
+## Bench pack
+
+**Bench pack:** `m11` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures — a small selection problem with an
+exhaustive oracle, which is what makes every claim here checkable.
+
+### Bench 2 — strategy proof and counterexample card
+
+**Session:** 2. **Rungs:** recognize, trace.
+**Executes:** a search for the smallest instance where value-density greedy is
+beaten. Two items suffice — one is never enough — and greedy scores 1 against an
+optimum of 2. Then two settings where greedy becomes optimal again, isolating the
+structural feature that broke it.
+**Cannot establish:** greedy's worst-case approximation ratio, or the fractional
+case, which needs an exchange argument rather than a search.
+
+### Bench 4 — pruning and state-sufficiency proof
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** three search strategies swept against the oracle across 14,742
+instances. An optimistic-bound prune agrees everywhere while removing 42% of the
+nodes; a prune comparing current value against the incumbent agrees on the worked
+example and fails at instance 39.
+**Cannot establish:** the safe prune's soundness in general. That comes from the
+optimistic-bound argument; the sweep's job is to refute the other one.
+
+### Bench 5 — probability and quality-bound ledger
+
+**Session:** 5. **Rungs:** trace, recognize.
+**Executes:** reservoir sampling over 100,000 runs, giving each item a share
+within 0.0011 of 1/n, against an off-by-one variant deviating by 0.0112. A single
+seeded run of either returns an unremarkable item and distinguishes nothing.
+**Cannot establish:** uniformity. A frequency table is evidence about the
+distribution; the proof is the per-step induction, which this bench does not carry
+out.
+
+### Sessions without a bench
+
+- **Session 1** — its exhaustive oracle is folded into bench 4, where the prune
+  sweep uses it; running it separately would be the same experiment.
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a strategy-defence dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m11-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

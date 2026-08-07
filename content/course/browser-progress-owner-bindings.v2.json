@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "policyVersion": "v2",
+  "kind": "atlas-browser-progress-owner-binding-policy",
+  "purpose": "Bind every active browser-progress surface to the current canonical course-graph availability without rewriting the v1 surface policy's historical {moduleId, lifecycle} owner schema. The v1 lifecycle labels remain historical policy metadata, never current publication or release claims. This v2 binding is required alongside the v1 surface policy for active validation and release-input provenance.",
+  "surfacePolicy": {
+    "path": "content/course/browser-progress-surfaces.v1.json",
+    "schemaVersion": 1,
+    "policyVersion": "v1"
+  },
+  "bindings": [
+    {
+      "surfaceId": "intake",
+      "owner": { "moduleId": "intake", "availability": "diagnostic" }
+    },
+    {
+      "surfaceId": "m18-os-studio",
+      "owner": { "moduleId": "m18", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m19-concurrency-studio",
+      "owner": { "moduleId": "m19", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m20-protocol-studio",
+      "owner": { "moduleId": "m20", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m21-async-distributed-studio",
+      "owner": { "moduleId": "m21", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m22-security-trust-studio",
+      "owner": { "moduleId": "m22", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m23-language-lab",
+      "owner": { "moduleId": "m23", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m24-runtime-observatory",
+      "owner": { "moduleId": "m24", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m25-evidence-studio",
+      "owner": { "moduleId": "m25", "availability": "preview" }
+    },
+    {
+      "surfaceId": "m26-capstone-defense",
+      "owner": { "moduleId": "m26", "availability": "preview" }
+    },
+    {
+      "surfaceId": "m27-discrete-math-studio",
+      "owner": { "moduleId": "m27", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m28-linear-algebra-studio",
+      "owner": { "moduleId": "m28", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m29-calculus-studio",
+      "owner": { "moduleId": "m29", "availability": "legacy-open" }
+    },
+    {
+      "surfaceId": "m30-probability-studio",
+      "owner": { "moduleId": "m30", "availability": "legacy-open" }
+    }
+  ]
+}

@@ -12,6 +12,14 @@ External sources serve three different roles:
 
 The course narrative is original and dependency-ordered. We link rather than copy assignments, respect source licenses, and verify Python claims against current official documentation.
 
+**Access and reuse record.** The linked sources in the Arc II recheck were
+verified on **2026-08-01**. They are link/cite-only calibration and lookup
+sources: Atlas retains its own explanations, diagrams, code, prompts, and
+diagnostics. Do not reproduce course prose, figures, assignments, solutions,
+or course-specific assessments. A Python language reference supports portable
+behavior; a pinned CPython path supports only the named implementation
+observation; a university page calibrates scope and evidence expectations.
+
 ## Arc-level anchor
 
 [MIT 6.006 Introduction to Algorithms, Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) is the primary university spine. Its prerequisites explicitly include Python programming plus the discrete mathematics covered in our Arc I. Its sequence connects data structures, graph algorithms, dynamic programming, correctness, and performance analysis.
@@ -37,7 +45,7 @@ Useful whole-course entry points:
 | [Python 3.14 data model](https://docs.python.org/3.14/reference/datamodel.html) | Canonical basis for objects, identity, type, value, mutability, and references at the language level. |
 | [Python 3.14 built-in sequence types](https://docs.python.org/3.14/library/stdtypes.html#sequence-types-list-tuple-range) | Defines the public behavior of lists, tuples, ranges, and common sequence operations. |
 | [`sys.getsizeof`](https://docs.python.org/3.14/library/sys.html#sys.getsizeof) and [`tracemalloc`](https://docs.python.org/3.14/library/tracemalloc.html) | Supports careful experiments about shallow size and traced allocations, including their limitations. |
-| [CPython `listobject.c`, 3.14 branch](https://github.com/python/cpython/blob/3.14/Objects/listobject.c) | A bounded implementation-reading lab for allocation, resizing, and list operations. |
+| [CPython `v3.14.6` `listobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/listobject.c) | A bounded implementation-reading lab for allocation, resizing, and list operations; it is not a Python language contract. |
 
 **Synthesis decisions**
 
@@ -58,7 +66,7 @@ Useful whole-course entry points:
 
 | Source | Role in our module |
 |---|---|
-| [CS 61A Spring 2026 Discussion 6: Iterators and Generators](https://cs61a.org/disc/disc06/disc06.pdf) | Current university exercise tradition for iterator consumption, infinite streams, and generator tracing. |
+| [CS 61A Summer 2026 Discussion 5: Iterators and Generators](https://cs61a.org/disc/disc05/disc05.pdf) | Term-sensitive university exercise route for iterator consumption, infinite streams, and generator tracing; recheck the link and topic before a later review or release claim. |
 | [Composing Programs: Iterators](https://www.composingprograms.com/pages/42-implicit-sequences.html) | Conceptual bridge from sequence abstraction to implicit/lazy sequences. |
 | [Python 3.14 data model — iterator types](https://docs.python.org/3.14/reference/datamodel.html#iterator-types) | Canonical iterable/iterator protocol. |
 | [Python 3.14 expressions — generator expressions and `yield`](https://docs.python.org/3.14/reference/expressions.html#yield-expressions) | Precise suspension, retained state, resumption, delegation, and finalization semantics. |
@@ -70,7 +78,7 @@ Useful whole-course entry points:
 - Derive stack and queue interfaces by restricting sequence access.
 - Connect the call stack backward to recursion and forward to DFS.
 - Treat iteration as a pull protocol with state, not as syntax sugar to memorize.
-- Connect laziness to bounded-memory architecture, while showing that a lazy source alone cannot enforce backpressure.
+- Connect laziness to a bounded-memory architectural question, while showing that a lazy source alone cannot guarantee bounded memory or enforce backpressure.
 - Keep asynchronous iteration for Module 21; this module establishes the synchronous mechanism it depends on.
 
 **Claims we will not make**
@@ -89,7 +97,7 @@ Useful whole-course entry points:
 | [Python 3.14 data model — `__eq__` and `__hash__`](https://docs.python.org/3.14/reference/datamodel.html#object.__hash__) | Canonical equality/hash contract, mutability cautions, and hash randomization notes. |
 | [Python 3.14 mapping types](https://docs.python.org/3.14/library/stdtypes.html#mapping-types-dict) | Public `dict` semantics, key equivalence, insertion order, views, and operations. |
 | [Python 3.14 set types](https://docs.python.org/3.14/library/stdtypes.html#set-types-set-frozenset) | Public set/frozenset behavior and set algebra. |
-| [CPython `dictobject.c`, 3.14 branch](https://github.com/python/cpython/blob/3.14/Objects/dictobject.c) | Bounded code reading for a real implementation after the course model is understood. |
+| [CPython `v3.14.6` `dictobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/dictobject.c) | Bounded code reading for a real implementation after the course model is understood; it is not a Python language contract. |
 
 **Synthesis decisions**
 
@@ -117,6 +125,7 @@ Useful whole-course entry points:
 | [Python 3.14 `heapq`](https://docs.python.org/3.14/library/heapq.html) | Public heap operations and priority-queue implementation patterns. |
 | [Python 3.14 `bisect`](https://docs.python.org/3.14/library/bisect.html) | Ordered-array search and the crucial distinction between logarithmic search and linear insertion. |
 | [Python Sorting HOWTO](https://docs.python.org/3.14/howto/sorting.html) | Stable sorting, key functions, and practical composition of ordering requirements. |
+| [CPython `v3.14.6` `Lib/heapq.py`](https://github.com/python/cpython/blob/v3.14.6/Lib/heapq.py) | Bounded Session 4 call-path reading for sift/heapify mechanics; helper shape is versioned implementation evidence, not a portable heap guarantee. |
 
 **Synthesis decisions**
 
@@ -138,7 +147,11 @@ Useful whole-course entry points:
 | Source | Role in our module |
 |---|---|
 | [MIT 6.006 Lecture 9: Breadth-First Search](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-9-breadth-first-search/) | Graph representations, adjacency, paths, shortest-path trees, and BFS. |
-| [MIT 6.006 Lectures 9–14 in the lecture-note index](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/) | BFS, DFS, weighted shortest paths, Bellman–Ford, Dijkstra, and all-pairs shortest paths. |
+| [MIT 6.006 Lecture 10: Depth-First Search](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/) | Session 3 source for DFS finishing state, cycle evidence, and topological ordering. |
+| [MIT 6.006 Lecture 11: Weighted Shortest Paths](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-11-weighted-shortest-paths/) and [Lecture 12: Bellman–Ford](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-12-bellman-ford/) | Session 4 sources for relaxation, graph restrictions, negative-cycle evidence, and qualified cost claims. |
+| [MIT 6.006 Lecture 13: Dijkstra](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-13-dijkstra/) | Session 5 source for nonnegative-edge finalization and priority-frontier reasoning. |
+| [MIT 6.046J Lecture 12: Minimum Spanning Tree](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/4a7fdddff3bc419c70bb470106a1663a_MIT6_046JS15_lec12.pdf) | Session 6 source for cut/exchange reasoning, Kruskal/Prim, and spanning-forest invariants. |
+| [MIT 6.046J Lecture 13: Incremental Improvement — Max Flow, Min Cut](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/resources/lecture-13-incremental-improvement-max-flow-min-cut/) | Session 6 source for capacity/conservation definitions, residual augmenting paths, flow residual/cut reasoning, the max-flow/min-cut proof idea, and matching transfer. Link and paraphrase only; accessed 2026-08-04. |
 | [MIT 6.042J Mathematics for Computer Science](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) | Graph definitions, relations, induction, and proof techniques already introduced in Module 4. |
 | [Python 3.14 `collections.deque`](https://docs.python.org/3.14/library/collections.html#collections.deque) | Appropriate FIFO frontier mechanism for BFS. |
 | [Python 3.14 `heapq`](https://docs.python.org/3.14/library/heapq.html) | Priority frontier mechanism for Dijkstra-style algorithms. |
@@ -149,6 +162,7 @@ Useful whole-course entry points:
 - Derive BFS and DFS by changing frontier discipline.
 - Prove traversal properties from explicit frontier invariants.
 - Make weight assumptions visible before choosing a shortest-path algorithm.
+- Make capacity, conservation, residual reversibility, and cut certificates visible before claiming throughput.
 - Use Atlas's prerequisite relation, already modeled in Module 4, so the mathematical graph becomes executable without changing its meaning.
 
 **Claims we will not make**
@@ -157,6 +171,7 @@ Useful whole-course entry points:
 - Dijkstra is not valid for arbitrary negative edge weights.
 - BFS does not find minimum-weight paths merely because it finds minimum-edge paths.
 - A topological order does not exist for a graph with a directed cycle.
+- A locally feasible flow is not automatically maximum; the residual stop rule or a cut certificate must be visible.
 
 ### Module 11 — Algorithm-design paradigms
 
@@ -166,6 +181,8 @@ Useful whole-course entry points:
 | [MIT 6.006 Lecture 16: LCS, LIS, and Coins](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-16-dynamic-programming-part-2-lcs-lis-coins/) | Concrete practice defining subproblem state and dependencies. |
 | [UC Berkeley CS 170 Spring 2026](https://cs170.org/) | Broader advanced-algorithms sequence covering divide-and-conquer, greedy algorithms, dynamic programming, randomized algorithms, approximation, and complexity. |
 | [CS 170 course policies and scope](https://cs170.org/policies/) | Confirms current course coverage and provides a problem-solving/academic-integrity context for adaptation. |
+| [Carnegie Mellon 15-451/651 Lecture 20 — Streaming Algorithms](https://www.cs.cmu.edu/~15451-s24/lectures/lecture20-streaming.pdf) | Arrivals-only streaming model, bounded summaries, and heavy-hitter analysis for M11's one-pass state/error bridge. Link and paraphrase only; it does not validate an Atlas monitor. |
+| [Stanford CS 368 — Algorithmic Techniques for Big Data](https://web.stanford.edu/class/cs368/) | Scope calibration for streaming and sketching as optional advanced depth; it is not a claim that M11 covers the full course. |
 | [`functools.cache` and `lru_cache`](https://docs.python.org/3.14/library/functools.html#functools.cache) | Official Python mechanism for memoization experiments, after the recurrence and state definition are understood. |
 | [`random` security warning](https://docs.python.org/3.14/library/random.html) | Clarifies that simulation-oriented pseudorandomness and security-sensitive randomness are different concerns. |
 
@@ -201,10 +218,11 @@ The remaining sources are instructor references for triangulation and remediatio
 | Learning need | Primary learner source | When it appears |
 |---|---|---|
 | Interface versus representation | MIT 6.006 Lecture 2 | Module 6 opening |
-| Iterator state and generator tracing | CS 61A Discussion 6 + Python expression reference | Module 7 middle |
+| Iterator state and generator tracing | CS 61A Summer 2026 Discussion 5 + Python expression reference | Module 7 middle |
 | Hash reasoning | MIT 6.006 Lecture 4 + Python data model | Module 8 core |
 | Ordered structure tradeoffs | MIT 6.006 Lectures 6–8 + `heapq` | Module 9 core |
-| Graph traversal invariants | MIT 6.006 Lectures 9–13 | Module 10 core |
+| Graph traversal and flow invariants | MIT 6.006 Lectures 9–13; MIT 6.046J Lecture 13 | Module 10 core |
+| Streaming state and error boundary | CMU 15-451/651 Lecture 20; Stanford CS 368 scope page | Module 11 Session 5 |
 | Defining DP subproblems | MIT 6.006 Lectures 15–18 | Module 11 core |
 
 ## Bounded GitHub reading ladder
@@ -231,7 +249,7 @@ The reading target is understanding, architecture recovery, and claim verificati
 | Trees, heaps, tries, sorting | 9 | scheduler/prefix-search architecture defense |
 | Graph representations and traversal | 10 | trace + correctness argument |
 | Shortest paths and topological ordering | 10 | algorithm selection under changed assumptions |
-| Divide-and-conquer, greedy, DP, backtracking, randomized/approximation intuition | 11 | strategy comparison + constrained planner |
+| Divide-and-conquer, greedy, DP, backtracking, randomized/approximation, and streaming intuition | 11 | strategy comparison + constrained planner + bounded heavy-hitter summary |
 | Worst/expected/amortized analysis | 5, 6, 8, 9 | explicit case labels and evidence |
 | Python language/CPython boundary | 6–9 | claim badges and source verification |
 | Code reading, debugging, design, delegation, review | all Arc II modules | evidence ledger + oral checkoffs |

@@ -72,11 +72,15 @@ implementation, or suitability of a cache for real learner records.
 ~~~text
 Reference: module24_reference.py
 Tests:     test_module24_reference.py
-Scope:     deterministic model of evidence review, not a CPython emulator
-Runtime:   local CPython evidence environment for the teaching tests
-Effects:   no network, profiler attachment, process inspection, file input,
-           subprocess, package, credential, or learner-data action
-Input:     fixed scenario names only; no arbitrary code or profiling dump
+Scope:     deterministic, bounded model of evidence review, not a CPython emulator
+Runtime:   local Python implementation/version evidence environment for a separately
+           captured experiment; CPython 3.14.6 is a source-reading baseline,
+           not the detected CLI host
+Core model: fixed scenario names only; no caller-provided program or data path
+Core effects: no network, profiler attachment, process inspection, subprocess,
+              package, credential, learner-data, or caller-provided file action
+Local test-harness I/O: CLI selects a fixed scenario and writes JSON to stdout;
+                        behavioral tests import the checked-in local model
 Core rule: semantic behavior before performance conclusion
 ~~~
 
@@ -101,6 +105,9 @@ count CPython references, collect an actual heap, or infer a real leak.
 ### 1.1 The connected route
 
 ~~~mermaid
+%% atlas-diagram-id: m24-cpython-observation-knowledge-route
+%% atlas-diagram-title: Semantic contracts, object graphs, system lenses, and experiments bound CPython observations
+%% atlas-diagram-alt: Cost-model assumptions and Module 23 semantic paths inform a CPython observation, while representation work supplies an object graph. Tests, machine and OS resource lenses, concurrency limits, and privacy retention boundaries shape an experiment manifest and bounded decision; Module 32 remains authoring-only.
 flowchart LR
     M5["M5: cost model<br/>assumptions"] --> C["semantic contract"]
     M6["M6/8/9: representation,<br/>aliasing, indexes"] --> O["object graph"]
@@ -116,16 +123,8 @@ flowchart LR
     R --> D["bounded decision"]
     P --> D
     X --> D
-    D --> M25["M25: evidence-grounded<br/>intelligent systems"]
+    D --> M32["M32: systems languages,<br/>scientific Python & accelerators<br/>(authoring-only)"]
 ~~~
-
-**Text equivalent:** earlier modules tell us what the program means, what data
-structures and APIs promise, what resources the operating system mediates, and
-why an observation has limited scope. Module 24 adds a disciplined bridge from
-that semantic model to a particular CPython implementation and a controlled
-experiment. Module 25 applies the same restraint to a score, model, or AI
-suggestion; Module 26 requires a capstone owner to defend the whole evidence
-chain.
 
 ### 1.2 The fixed Atlas incident
 
@@ -215,10 +214,15 @@ Before revealing the ledger, classify each line:
 3. “This workload’s median wall-clock sample fell by 12% on one host.”
 4. “The cache will reduce production latency for every cohort.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** 1 is a language/API claim whose exact scope still needs a source.
 2 is an implementation observation. 3 is a measurement under a manifest.
 4 is a hypothesis that needs deployment-representative evidence and a
 retention review.
+
+</details>
 
 ### Code-reading lab
 
@@ -247,6 +251,10 @@ If you answer “the speed conclusion,” explain the missing distribution.
 
 ---
 
+### Session 1 output — runtime evidence baseline
+
+One baseline records the measurement, its environment, and its uncertainty before any optimization is attempted.
+
 ## 3. Session 2 — Objects, aliases, and lifetime
 
 ### Pressure
@@ -259,6 +267,9 @@ that model. Now apply it to a graph.
 ### First-principles model
 
 ~~~mermaid
+%% atlas-diagram-id: m24-shared-reference-lifetime
+%% atlas-diagram-title: Deleting one name leaves a shared list reachable through another binding
+%% atlas-diagram-alt: The names report and debug_snapshot both refer to one shared list containing two events. Deleting report removes only that binding, while debug_snapshot still reaches the list and its events; the diagram distinguishes name deletion from object destruction.
 flowchart LR
     A["report"] --> L["shared list"]
     B["debug_snapshot"] --> L
@@ -267,10 +278,6 @@ flowchart LR
     C["del report"] -. "removes one binding" .-> A
     B --> L
 ~~~
-
-**Text equivalent:** report and debug_snapshot both point to the same list.
-Deleting report removes that binding. It does not prove the list is
-unreachable because debug_snapshot still points to it.
 
 ### What Python promises and what it does not
 
@@ -293,9 +300,14 @@ Predict:
 2. Did rebinding events mutate the prior list?
 3. What does this trace say about when the prior list is reclaimed?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** audit_view still references the original one-item list. Rebinding
 events did not mutate it. The trace establishes neither an address nor a
 portable reclamation schedule.
+
+</details>
 
 ### CPython observation boundary
 
@@ -312,6 +324,10 @@ request finishes. Circle every root that can keep a cohort-derived object
 reachable. State one fact you can infer and one fact you cannot.
 
 ---
+
+### Session 2 output — alias and lifetime trace
+
+One trace shows which names refer to one object and when that object's lifetime actually ends.
 
 ## 4. Session 3 — Cycles, collection, and resource ownership
 
@@ -348,10 +364,15 @@ root → A → B
 If root is removed, what remains after a simplified reference-count sweep?
 What additional reasoning can identify the cycle as unreachable?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** the internal A↔B references prevent a simple local-count rule from
 reducing both to zero. Reachability from roots, or a cycle-collection phase,
 can identify the cycle. Exact CPython collector behavior remains
 version-specific.
+
+</details>
 
 ### Resource boundary
 
@@ -380,6 +401,10 @@ not just garbage collection.
 
 ---
 
+### Session 3 output — collection and ownership account
+
+One account separates reference counting from cycle collection and names which resources each can and cannot release.
+
 ## 5. Session 4 — Allocation and memory lenses
 
 ### Pressure
@@ -402,6 +427,9 @@ Python-allocation, native-allocation, or process-memory question.
 ### The memory-lens diagram
 
 ~~~mermaid
+%% atlas-diagram-id: m24-memory-measurement-lenses
+%% atlas-diagram-title: Distinct memory measurements answer different questions and forbid different inferences
+%% atlas-diagram-alt: A memory question can use shallow object size, traced Python allocations, native or extension allocation, or process and OS memory. Each lens has a limit: shallow size does not reveal retained graphs, traced allocations do not reveal RSS, native memory does not identify a Python owner, and process memory does not identify a Python allocation site.
 flowchart TB
     Q["Memory question"] --> S["shallow object size"]
     Q --> T["traced Python allocations"]
@@ -413,8 +441,17 @@ flowchart TB
     P --> W["Do not infer Python allocation site"]
 ~~~
 
-**Text equivalent:** each lens answers a different question. A number from one
-lens cannot silently answer another lens’s question.
+### Text equivalent — choose a memory lens by claim
+
+Use a direct four-branch reading route. For an immediate object's direct size,
+use `sys.getsizeof`; it does not establish the retained graph. For changes in
+traced Python allocations, use `tracemalloc`; it does not establish RSS or
+native/extension allocation. For a native or extension path, require explicitly
+scoped native evidence; it does not identify a Python owner. For process or OS
+memory, use a host metric; it does not identify a Python allocation site.
+
+Choose the lens from the question, then state its omitted scope. Never silently
+convert one lens into another.
 
 ### Prediction exercise
 
@@ -427,7 +464,12 @@ C. A snapshot difference can support a scoped claim about traced Python
 allocations.  
 D. A process RSS observation names the exact Python list responsible.
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** C only. The other answers cross a scope boundary without evidence.
+
+</details>
 
 ### Code-reading lab
 
@@ -451,6 +493,10 @@ record whether a metric or dump could expose identities, raw payloads, paths,
 or secrets.
 
 ---
+
+### Session 4 output — allocation lens comparison
+
+One comparison shows the same program through two allocation lenses and explains where they disagree.
 
 ## 6. Session 5 — Source, code object, frame, bytecode
 
@@ -482,19 +528,22 @@ Read only short, pinned excerpts with a question:
 | Modules/gcmodule.c | Which collector structures exist in this revision? | Exact collection timing |
 | Objects/obmalloc.c | Which allocator mechanism is described? | Process RSS behavior on every host |
 
-### Fixed disassembly packet
+### Fixed source-inspection plan, not a captured disassembly
 
-Use a version-labelled, fixed display:
+This fixed source snippet is a question prompt, not `dis` output. It does not
+establish an opcode sequence, a local runtime/version, or a speed result.
 
 ~~~python
 def total(values):
     return sum(values)
 ~~~
 
+Before a learner reads any actual disassembly, record the implementation,
+Python patch version, `dis` options, trusted function, and captured output.
 Do not ask a learner to optimize from an opcode list. Instead ask:
 
-1. Which runtime and version produced this display?
-2. What semantic behavior remains independent of the display?
+1. Which runtime and version would have to produce a real display?
+2. What semantic behavior remains independent of any display?
 3. Which experiment would be required before claiming a speed effect?
 
 ### Warm-up is a measurement condition
@@ -507,11 +556,17 @@ assumptions. It does not merely print one elapsed time.
 ### AI-patch review
 
 The generated patch says “this specialization makes the loop fast.” Mark it
-**[CPYTHON OBSERVATION]** at best until it shows a controlled measurement and
-keeps semantic tests green. Ask whether a different Python implementation or
-future CPython release changes the conclusion.
+**[HYPOTHESIS]**. Treat the causal sentence as a hypothesis, not a CPython
+observation. A pinned `dis` capture could support a narrow implementation
+observation; a controlled experiment could support a narrow measurement. Both
+still need semantic tests green. Ask whether a different Python implementation
+or future CPython release changes the conclusion.
 
 ---
+
+### Session 5 output — bytecode and frame trace
+
+One trace follows source through code object, frame, and bytecode, naming what each layer adds.
 
 ## 7. Session 6 — Experiment and AI-patch review
 
@@ -574,6 +629,44 @@ The Runtime Evidence Casebook contains fixed packets. For each:
 4. choose accept, reject, or defer;
 5. name one next falsifying test.
 
+### Optional local measurement receipt
+
+The fixed casebook is a complete path through this module. If you choose to
+run one small local probe, use the same fixed baseline/candidate fixture and
+record only a narrow, learner-controlled receipt:
+
+~~~text
+runtime / build:
+OS and coarse host condition:
+fixture and workload ID:
+warm-up, GC policy, repetitions, and statistic:
+chosen metric and result:
+one nonclaim:
+next falsifier:
+~~~
+
+Keep raw profiles, paths, payloads, and machine identifiers local. Share only
+a redacted summary with the Teaching Assistant or Study Partner if you choose
+to discuss it; no portal upload, automatic collection, comparison leaderboard,
+or production-performance claim follows from this exercise. A result is still
+only a measurement under its declared manifest.
+
+### Transfer task — new runtime claim, same evidence discipline
+
+An AI proposal says that changing a fixed local report from a list to a stream
+“makes Atlas faster and fixes memory.” Do not run, benchmark, or merge it.
+Transfer the Module 24 evidence model by writing:
+
+```text
+claim owner → semantic invariant → runtime/version label → workload and metric
+→ controlled comparison → limitation → next falsifier → bounded decision
+```
+
+Then change one premise—input distribution, GC policy, runtime build, or cache
+retention rule—and predict which conclusion must be deferred. This is a
+synthetic transfer task, not an unlock for authoring-only Module 32 or a claim
+about a production system.
+
 ### TA and Study Partner rehearsal
 
 The TA asks five questions:
@@ -589,7 +682,74 @@ The Study Partner changes exactly one fact — runtime version, input
 distribution, GC setting, CPU condition, native allocation, or cache policy —
 and asks which conclusions survive. Swap roles after ten minutes.
 
+### Teaching Assistant prompt — M24 runtime-evidence review
+
+### TA guide
+
+Begin with one learner-selected runtime claim. Before correction, ask for a
+prediction and confidence `1–4`, then make this whiteboard trace visible:
+
+```text
+claim -> semantic invariant/oracle -> runtime and build -> workload/baseline
+-> metric and scope -> missing control -> limitation -> next falsifier
+```
+
+Ask the learner to reconstruct one profiler, allocation, or benchmark trace;
+name the chosen metric and what it omits; and change exactly one premise such
+as runtime version, workload distribution, warm-up rule, allocator, data
+shape, hardware condition, or statistical summary. Offer the smallest useful
+counterexample or repair without pass/fail framing. Keep raw profiles and host
+identifiers local, let the learner control any summary, and retain the M32
+authoring-only boundary rather than treating this as an unlock.
+
+### Conversational oral defense — M24
+
+The Teaching Assistant leads this supportive, post-module oral-defense
+conversation. The Study Partner can rehearse evidence reasoning but does
+**not** administer or grade the defense. Begin with a learner-selected runtime
+claim, a prediction about the strongest justified conclusion, and confidence
+from 1 to 4. Treat mistakes as evidence for the next repair, never as a
+pass/fail result.
+
+Use the visible chat as a readable whiteboard: show a labelled
+`claim → evidence owner → scope → limitation → falsifier` trace. If an
+equation or statistic is useful, use supported inline or display math, define
+its notation, and give a prose or ASCII fallback; put code, benchmark
+manifests, and state traces in language-labelled fences and explain them in
+prose. Do not depend on speech, color, or an unlabelled visualization.
+
+### Hint ladder
+
+Ask first whether the statement is a Python contract, CPython observation,
+measurement, OS/native observation, or hypothesis. Then ask which version,
+workload, metric, control, and limitation are missing. Give the smallest
+possible prompt before naming a repair.
+
+### Counterexample turn
+
+Change exactly one condition: shallow size becomes process RSS, traced Python
+allocation becomes native allocation, a cold run becomes a warm run, or a
+cache changes retention. The learner identifies which inference breaks and
+what scoped conclusion still survives.
+
+### Transfer turn
+
+Use the fixed list-to-stream proposal above. The learner carries the evidence
+discipline to a fresh design claim, supplies a falsifier, and keeps the Module
+32 forward boundary explicit rather than treating it as an unlock.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's chosen claim, prediction/confidence, corrected scope,
+one counterexample, limitation, falsifier, and next retrieval action. The
+learner controls whether to keep that compact summary; this workbook does not
+assert a chat, voice session, or external record.
+
 ---
+
+### Session 6 output — performance evidence dossier
+
+One dossier defends a performance claim with a measurement, an environment, and one conclusion the evidence cannot support.
 
 ## 8. Runtime Evidence Observatory
 
@@ -643,9 +803,14 @@ B. An object has identity, type, and value.
 C. sys.getrefcount(x) gives the exact graph in-degree.  
 D. del x immediately destroys x.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** The language data model uses identity/type/value. A is a
 CPython-specific observation at most; C includes implementation effects; D
 removes a binding, not a portable destruction promise.
+
+</details>
 
 ### Q2 — Shallow size
 
@@ -656,8 +821,13 @@ B. Process RSS will fall.
 C. This immediate object’s reported shallow size is lower.  
 D. A native extension allocated less.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** The function reports a direct/shallow size. A, B, and D cross
 to different memory lenses.
+
+</details>
 
 ### Q3 — Tracing
 
@@ -668,8 +838,13 @@ B. A guarantee of lower total native memory.
 C. Proof that no memory is retained.  
 D. A production memory SLO.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: A.** The metric has a declared tracing scope. It does not become RSS,
 native allocation, retention analysis, or production evidence.
+
+</details>
 
 ### Q4 — Bytecode
 
@@ -680,8 +855,13 @@ B. every Python implementation has the same optimization.
 C. a version-pinned CPython implementation observation only.  
 D. the program is faster for every workload.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Bytecode and specialization are CPython/version-specific
 implementation evidence. A, B, and D require different sources or experiments.
+
+</details>
 
 ### Q5 — Benchmark
 
@@ -693,8 +873,13 @@ B. reject the language.
 C. defer the performance conclusion as confounded.  
 D. call it a memory leak.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** The change may still be useful, but the comparison no longer
 answers a controlled question.
+
+</details>
 
 ### Q6 — Cache
 
@@ -706,8 +891,13 @@ B. It may retain derived learner/cohort information across requests and change
 C. Python forbids dictionaries.  
 D. A cache automatically changes language semantics.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Retention and authority are system-design questions. The other
 answers overgeneralize.
+
+</details>
 
 ### Diagnostic routing
 
@@ -718,6 +908,16 @@ answers overgeneralize.
 | implementation-overclaim | Module 17, Module 23, Session 5 |
 | experiment confusion | Module 5, Module 19, Session 6 |
 | trust/retention confusion | Module 22, Session 4 and 6 |
+
+### Misconception map — evidence-lens repairs
+
+| Tempting shortcut | Repair question | Return route |
+|---|---|---|
+| “A smaller shallow object is lower RSS.” | Which memory lens produced the number, and what does it omit? | Session 4 |
+| “Lower traced allocation proves native memory fell.” | Does the metric observe Python allocations, native allocations, or process memory? | Session 4 |
+| “An opcode explains Python semantics or speed.” | Which version-labelled CPython observation exists, and what experiment is still missing? | Session 5 |
+| “One faster timing proves the patch.” | Which workload, GC, warm-up, and sample controls make the comparison meaningful? | Session 6 |
+| “A cache is only an optimization.” | What retention, access, invalidation, and privacy boundary changed? | Session 4 and Session 6 |
 
 ---
 
@@ -747,12 +947,14 @@ reporting incident and include:
 - one CPython 3.14.6 source-reading card labelled as an observation;
 - memory-metric selection table with stated omissions;
 - controlled timing/allocation manifest, fixed sample packet, and limitation;
+- optional local measurement receipt or an explicit decision to use only the
+  fixed casebook packet;
 - AI-patch review that accepts, rejects, or splits the proposal;
 - rollback condition, privacy consequence, and next falsifying experiment.
 
 ### Acceptance rubric
 
-| Dimension | Emerging | Ready for Module 25 |
+| Dimension | Emerging | Evidence-ready handoff |
 |---|---|---|
 | Semantic discipline | repeats “same output” | names outputs, errors, invariants, and tests |
 | Evidence scope | treats all numbers alike | labels contract, CPython, measurement, OS/native, hypothesis |
@@ -774,23 +976,30 @@ reporting incident and include:
 - **In two weeks:** defend one Atlas patch to a Study Partner who changes the
   workload or runtime version.
 
-Module 25 transfers this discipline to evidence-grounded intelligent and
-human-centered systems. A score, ranking, model, agent output, or retrieved
-text is not a decision, an authority grant, a probability, or a human benefit
-until its data lineage, evaluation, policy, explanation, and override path are
-explicit.
+**Canonical forward handoff: Module 32.** Module 32 is authoring-only in the
+portal, so this dossier is a stopping point for the reader-visible
+runtime-evidence branch—not an unlock token for another module. In the
+designated private guided route, the ready M32 pack may be used only for
+designated private guided study; it is not a portal unlock, Core credit, or
+release claim. Carry this discipline into its systems-language and accelerator
+work there. Modules 25 and 26 remain later preview-only synthesis and capstone
+material after M31–M36, not Module 24's next learning step. Their shared
+conceptual lesson remains useful: a score, ranking, model, agent output, or
+retrieved text is not a decision, an authority grant, a probability, or a human
+benefit until its data lineage, evaluation, policy, explanation, and override
+path are explicit.
 
 ---
 
 ## 12. Source route and reuse boundary
 
-Use the companion Module 24 source map for claim-to-source routing. Core
-reading includes the Python 3.14 data model, sys, gc, tracemalloc, timeit,
-profile, dis, and C-API memory/reference-count documentation; pinned CPython
-3.14.6 interpreter, bytecode, specialization, garbage-collection, and
-allocator source routes; PEPs 659, 683, and 703 for historical/design context;
-and MIT 6.172 / Berkeley CS 61C for performance and memory-hierarchy
-pedagogy.
+Use the companion [Module 24 source map](https://github.com/michaeliu3/atlas-academy-python-cs/blob/main/content/source-maps/module24_cpython_performance_memory_source_map.md)
+for claim-to-source routing. Core reading includes the Python 3.14 data model,
+sys, gc, tracemalloc, timeit, profile, dis, and C-API memory/reference-count
+documentation; pinned CPython 3.14.6 interpreter, bytecode, specialization,
+garbage-collection, and allocator source routes; PEPs 659, 683, and 703 for
+historical/design context; and MIT 6.172 / Berkeley CS 61C for performance and
+memory-hierarchy pedagogy.
 
 Python documentation and CPython source are governed by the PSF License v2;
 documentation examples/recipes additionally carry a 0BSD grant. Atlas uses
@@ -798,3 +1007,85 @@ original prose, diagrams, fixtures, questions, and teaching code. Link to
 primary materials and preserve required notices if any excerpt or derivative
 is redistributed. University material is used for sequencing and links, not
 copied assignments or solutions.
+
+## 13. Bench pack
+
+**Bench pack:** `m24` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. The benches carry no teaching prose — everything
+they need is stated above — and each opens with a prediction whose reveal stays
+locked until you commit an answer and a confidence.
+
+This module has a checked-in reference model. Its benches **import and probe** that
+model rather than reimplementing it, which is why they are code-reading exercises
+that happen to execute, not implementation exercises.
+
+### Bench 2 — alias and lifetime trace
+
+**Session:** 2. **Rungs:** review and verify, trace.
+**Executes:** the reference model's declared object graph under
+`reference_count_sweep`, then the same question put to the interpreter —
+`sys.getrefcount` on a fresh list against `None`, `0`, `1`, `""`, and `True`.
+**Cannot establish:** which objects any other runtime treats as immortal.
+Immortality is an implementation choice, not a language guarantee.
+
+### Bench 4 — allocation lens comparison
+
+**Session:** 4. **Rungs:** trace, recognize.
+**Executes:** three lenses on the same 10,000 rows. `sys.getsizeof` reports **85 KB**
+for the list; `tracemalloc` measures **2.77 MB** allocated by the same construction —
+a factor of **32**, and neither is wrong. The list holds pointers, so the dicts are
+genuinely not in it. Summing `getsizeof` over elements and then over their values
+lands between the two, and chasing it further stops being a technique: sharing
+double-counts and cycles never terminate.
+
+Then the reachability lens, on a declared graph with one reachable cycle and one
+unreachable one. The reference-count sweep collects **nothing** — every garbage node
+still has a non-zero count, held by its cycle partner — while the cycle collector
+returns exactly the unreachable pair. Being in a cycle is not the same as being
+garbage, and reachability rather than counting is what settles it.
+
+**Cannot establish:** anything portable. Object headers and allocator behaviour are
+implementation details, and both Python-side lenses are blind to a NumPy buffer or a
+C extension's `malloc` — frequently most of the memory in the programs where the
+question is asked.
+
+### Bench 6 — performance evidence dossier
+
+**Session:** 6. **Rungs:** review and verify, debug and defend.
+**Executes:** six manifest fields varied one at a time against a matched baseline.
+All six are refused, and the model splits them into two verdicts that demand
+different work: **`INSUFFICIENT_EVIDENCE`** (two samples — sound design,
+underpowered, more data fixes it) and **`CONFOUNDED_EXPERIMENT`** (changed runtime,
+GC policy, warmup, host, or semantic fingerprint — more data gives a tighter estimate
+of the wrong quantity). "We need more data" is the wrong response to five of the six.
+
+The `semantic_fingerprint` case is the one to hold onto: the candidate no longer
+computes the same thing, so the benchmark is comparing two different programs. The
+speedup is real and is not an optimisation.
+
+Section 3 then finds that classification runs on the **metric name**. Five recognised
+metrics demand four distinct evidence labels, and `wall_clock` — the most
+natural-sounding one — is not recognised at all, returning `HYPOTHESIS` with no
+required label, because "how long did it take?" names no measurement method. Every
+proposed conclusion scope, including the narrowest, comes back `DECISION_DEFER` with
+a *next falsifier* attached.
+
+**Cannot establish:** that any real optimisation is sound. Nothing was benchmarked;
+these are declared manifests through a declared procedure, and a real experiment can
+be confounded by frequency scaling, thermal state, or background load — none of which
+are fields in this manifest.
+
+### Sessions without a bench
+
+- **Session 1**, **Session 3**, **Session 5** — each qualifies on the rubric and
+  ranked below this pack's cut. Sparse packs cap at three; these are the first
+  candidates if the pack is ever widened.
+- **Sessions 4 and 6** are selected and not yet authored.
+
+### Bench pack completion record
+
+Records under `benches/records/m24-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

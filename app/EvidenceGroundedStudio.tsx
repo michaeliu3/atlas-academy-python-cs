@@ -7,6 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import {
+  clearModule25Progress,
+  persistModule25Progress,
+  restoreModule25Progress,
+} from "@/lib/module25-progress-codec";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
 import styles from "./EvidenceGroundedStudio.module.css";
 
 type StudioView =
@@ -25,7 +31,6 @@ type ViewRecord = {
 type StudioRecord = Record<StudioView, ViewRecord>;
 type DecisionResponse = "accept" | "dismiss" | "alternative";
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module25-evidence-studio.v1";
 const CORE_RULE =
   "Atlas may present a versioned, purpose-scoped suggestion only from authorized minimal data, a declared candidate set, and a named policy or model. Every suggestion preserves provenance, version, evaluation scope, and limitations; it exposes an accessible explanation and meaningful override. A score never silently changes learner state, grants authority, proves truth, establishes causality, or turns feedback into ground truth.";
 
@@ -72,15 +77,6 @@ const views: ReadonlyArray<{
     question: "What does an AI output authorize?",
   },
 ];
-
-const choiceIdsByView: Record<StudioView, ReadonlyArray<string>> = {
-  purpose: ["optional", "automatic", "engagement"],
-  lineage: ["before", "after", "all"],
-  ranking: ["set", "score", "click"],
-  evaluation: ["bounded", "truth", "fair"],
-  control: ["person", "policy", "score"],
-  agent: ["proposal", "permission", "citation"],
-};
 
 const choices: Record<StudioView, ReadonlyArray<{ id: string; label: string }>> = {
   purpose: [
@@ -286,29 +282,6 @@ function blankRecord(): StudioRecord {
   ) as StudioRecord;
 }
 
-function isConfidence(value: unknown): value is Confidence {
-  return value === 1 || value === 2 || value === 3 || value === 4;
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  return views.every(({ id }) => {
-    const candidate = (value as Record<string, unknown>)[id];
-    if (!candidate || typeof candidate !== "object") {
-      return false;
-    }
-    const record = candidate as Record<string, unknown>;
-    return (
-      (record.choice === null || choiceIdsByView[id].includes(String(record.choice))) &&
-      (record.confidence === null || isConfidence(record.confidence)) &&
-      typeof record.revealed === "boolean" &&
-      (!record.revealed || (record.choice !== null && record.confidence !== null))
-    );
-  });
-}
-
 function EvidenceLock() {
   return (
     <div className={styles.evidenceLock} role="status">
@@ -411,19 +384,18 @@ export function EvidenceGroundedStudio() {
   const [record, setRecord] = useState<StudioRecord>(blankRecord);
   const [storageReady, setStorageReady] = useState(false);
   const [decisionResponse, setDecisionResponse] = useState<DecisionResponse | null>(null);
+  const [clearNotice, setClearNotice] = useState("");
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressStorageRef = useRef<ReturnType<typeof getBrowserProgressStorage>>(null);
   const activeRecord = record[activeView];
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (stored) {
-          const parsed: unknown = JSON.parse(stored);
-          if (isStudioRecord(parsed)) {
-            setRecord(parsed);
-          }
-        }
+        const storage = getBrowserProgressStorage();
+        progressStorageRef.current = storage;
+        const stored = storage ? restoreModule25Progress(storage) : null;
+        if (stored) setRecord(stored as StudioRecord);
       } catch {
         // Local progress is optional. A malformed or unavailable store changes no lesson evidence.
       } finally {
@@ -438,7 +410,8 @@ export function EvidenceGroundedStudio() {
       return;
     }
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      const storage = progressStorageRef.current;
+      if (storage) persistModule25Progress(storage, record);
     } catch {
       // Privacy/browser settings may block local storage; the studio still works in-memory.
     }
@@ -470,6 +443,19 @@ export function EvidenceGroundedStudio() {
         [activeView]: { ...candidate, revealed: true },
       };
     });
+  }
+
+  function clearPredictionEvidence() {
+    const storage = progressStorageRef.current ?? getBrowserProgressStorage();
+    progressStorageRef.current = storage;
+    const cleared = storage ? clearModule25Progress(storage) : false;
+    setRecord(blankRecord);
+    setDecisionResponse(null);
+    setClearNotice(
+      cleared
+        ? "Saved prediction evidence cleared from this browser."
+        : "Browser storage is unavailable; this visit was reset in memory.",
+    );
   }
 
   function selectView(nextIndex: number, focus = false) {
@@ -731,7 +717,21 @@ export function EvidenceGroundedStudio() {
                     >
                       Choose another route
                     </button>
+                    <button
+                      aria-describedby="module25-clear-progress-description"
+                      onClick={clearPredictionEvidence}
+                      type="button"
+                    >
+                      Clear saved prediction evidence
+                    </button>
                   </div>
+                  <p id="module25-clear-progress-description">
+                    This clears only saved choices, confidence, and revealed
+                    explanations from this browser.
+                  </p>
+                  <p className={styles.responseStatus} role="status">
+                    {clearNotice}
+                  </p>
                   {decisionResponse && (
                     <p className={styles.responseStatus} role="status">
                       {decisionResponse === "accept"

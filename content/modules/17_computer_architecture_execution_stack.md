@@ -183,6 +183,9 @@ result:            3
 Those questions are connected by ownership, not by vocabulary.
 
 ```mermaid
+    %% atlas-diagram-id: m17-execution-stack-roadmap
+    %% atlas-diagram-title: From durable data to a bounded machine explanation
+    %% atlas-diagram-alt: A validated M16 export is represented, transformed by logic and clocked state, implemented by an ISA and processor, shaped by memory hierarchy, and observed. Modules 28 through 31 are the canonical reader route for numerical and optimization evidence. The dotted line marks M18 as a separate open systems branch whose sole academic prerequisite is M17, not Modules 28 through 31.
 %% Module dependency path from durable Atlas data to a bounded machine explanation
 flowchart LR
     M16["M16 durable rows<br/>validated synthetic export"] --> PACK["Experiment representation<br/>priority value → array('I'), 4 B/item"]
@@ -194,13 +197,18 @@ flowchart LR
     HIER --> PY["Python execution bridge<br/>language → runtime → native software"]
     PY --> OBS["Evidence packet<br/>encoding + state trace + dis + timing"]
     OBS --> CLAIM["Bounded explanation<br/>alternatives + uncertainty"]
-    CLAIM --> M18["M18 handoff<br/>process + VM + syscall + filesystem"]
+    CLAIM --> M28["M28–M31 canonical reader route<br/>numerical + optimization evidence"]
+    CLAIM -.-> M18["M18 open systems branch<br/>academic prerequisite: M17"]
 ```
 
-The arrows are prerequisites. Timing cannot repair a wrong semantic oracle.
-Bytecode cannot establish native events. A cache simulator cannot measure the
-executing cache. An ISA cannot specify a particular cache. A low elapsed time
-cannot identify its own cause.
+The solid arrows through the execution stack are evidence and implementation
+relationships, not module prerequisites. At the end, the solid M17 → M28–M31
+edge names the canonical reader route. The dotted M17 → M18 edge names a
+separately reachable systems branch: M18's sole academic prerequisite is M17,
+even though the canonical reader narrative returns to M18 after M28–M31.
+Timing cannot repair a wrong semantic oracle. Bytecode cannot establish native
+events. A cache simulator cannot measure the executing cache. An ISA cannot
+specify a particular cache. A low elapsed time cannot identify its own cause.
 
 ### 1.2 Continuity contract
 
@@ -308,7 +316,7 @@ M17 uses one narrow `dis` observation and raw elapsed trials to teach evidence
 boundaries. It deliberately leaves object layout, retained-size traversal,
 allocation tracing, GC, specialization, and profiling to Module 24.
 
-### 1.5 Mastery outcomes
+### 1.5 Learning outcomes
 
 At exit, Michael can:
 
@@ -405,6 +413,25 @@ portable interchange status: none; this is an in-memory experiment contract
 Choosing four bytes for a value whose fixture range is smaller is a deliberate
 experiment contract, not an optimal-format claim. A portable artifact would
 need an explicit endian encoder such as `struct`, as Module 15 required.
+
+### First-principles checkpoint — contract before mechanism
+
+Use this reasoning spine whenever a low-level explanation starts to drift:
+
+```text
+semantic result
+→ representation contract
+→ state transition
+→ declared model or observation
+→ permitted claim
+```
+
+The same bits do not choose their own meaning. `11111100` is \(-4\) only under
+the signed 8-bit two's-complement contract; under unsigned 8-bit interpretation
+it is \(252\). Changing the interpretation changes the conclusion without
+changing a bit. Likewise, a recorded bytecode sequence is an observation of a
+named CPython version, not evidence of a host instruction count or cache event.
+Name the contract before drawing the mechanism.
 
 ### 2.2 Width creates a finite algebra
 
@@ -564,7 +591,7 @@ binary.” It is:
 
 A Boolean function maps current inputs to current outputs. For two input bits:
 
-| \(a\) | \(b\) | \(a \land b\) | \(a \lor b\) | \(a \oplus b\) |
+| input a (\(a\)) | input b (\(b\)) | AND output (\(a \land b\)) | OR output (\(a \lor b\)) | XOR output (\(a \oplus b\)) |
 |---:|---:|---:|---:|---:|
 | 0 | 0 | 0 | 0 | 0 |
 | 0 | 1 | 0 | 1 | 1 |
@@ -638,6 +665,9 @@ The register's output between modeled clock transitions reflects stored state,
 not merely the current data input.
 
 ```mermaid
+    %% atlas-diagram-id: m17-clocked-state-construction
+    %% atlas-diagram-title: From bits and gates to clocked state
+    %% atlas-diagram-alt: Named bits feed Boolean gates and combinational next-state logic; clocked registers retain state and expose the program counter, register file, and remembered control to later machine operations.
 %% Construction from named bits and gates to clocked machine state
 flowchart LR
     BITS["bits<br/>named width + meaning"] --> GATES["gates<br/>Boolean functions"]
@@ -686,6 +716,9 @@ A datapath carries and transforms values. Control selects what the datapath
 does and which state elements update.
 
 ```mermaid
+    %% atlas-diagram-id: m17-datapath-control-loop
+    %% atlas-diagram-title: Datapath and control feedback loop
+    %% atlas-diagram-alt: The PC fetches an instruction, decoding selects operands and destinations, the ALU and data-memory path produce a write-back value, and control chooses the next PC and updates architectural state.
 %% Teaching datapath showing control, value flow, and state updates
 flowchart TB
     PC["PC register"] --> IM["instruction memory<br/>teaching model"]
@@ -854,6 +887,9 @@ store instruction and target address.
 ### 4.5 Instruction state inspector
 
 ```mermaid
+    %% atlas-diagram-id: m17-instruction-state-cycle
+    %% atlas-diagram-title: Instruction state transition cycle
+    %% atlas-diagram-alt: Each instruction is fetched, decoded, and evaluated against current state, then follows a load, store, arithmetic, branch, or jump path before choosing the next architectural PC and fetching again.
 %% Instruction-effects inspector for PC, register, and memory transitions
 stateDiagram-v2
     [*] --> Fetch
@@ -973,6 +1009,9 @@ clock rate, or in-order completion.
 ### 5.2 Combinational work and registers alternate
 
 ```mermaid
+    %% atlas-diagram-id: m17-five-stage-pipeline
+    %% atlas-diagram-title: Five-stage teaching pipeline
+    %% atlas-diagram-alt: Instructions pass through fetch, decode, execute, memory, and write-back stages separated by pipeline registers; later instructions receive register operands and execute-stage control can redirect the PC.
 %% Five-stage teaching pipeline with state carried between combinational stages
 flowchart LR
     PC["PC state"] --> IF["IF<br/>select + fetch"]
@@ -1149,6 +1188,9 @@ uniform cost. Implementations face a trade-off among access time, capacity,
 energy, physical area, and price. They compose levels:
 
 ```mermaid
+    %% atlas-diagram-id: m17-memory-hierarchy
+    %% atlas-diagram-title: Qualitative memory hierarchy
+    %% atlas-diagram-alt: Registers, processor caches, main memory, and persistent storage form levels with different capacities, access costs, and transfer paths; the exact cache structure is implementation-specific.
 %% Qualitative memory hierarchy from registers to persistent storage
 flowchart TB
     REG["registers<br/>explicit ISA operands<br/>very small / closest"]
@@ -1195,6 +1237,9 @@ tag bits    = 16 - 6 - 3 = 7
 ```
 
 ```mermaid
+    %% atlas-diagram-id: m17-toy-cache-decomposition
+    %% atlas-diagram-title: Toy-cache address decomposition
+    %% atlas-diagram-alt: An item index becomes a byte address split into tag, slot index, and byte offset. The selected slot either matches and supplies bytes or misses, fetches a modeled line, replaces the slot, and then supplies bytes.
 %% Direct-mapped toy-cache address decomposition and hit-or-fill decision
 flowchart LR
     ITEM["item index"] --> ADDR["byte address<br/>index × 4"]
@@ -1412,6 +1457,9 @@ order container. A rigorous explanation must name those alternatives.
 ### 7.1 The connected execution stack
 
 ```mermaid
+    %% atlas-diagram-id: m17-python-to-device-stack
+    %% atlas-diagram-title: Python meaning through machine and device boundaries
+    %% atlas-diagram-alt: A Python result contract passes through source, CPython code and frame state, native runtime software, host ISA and microarchitecture, memory, and separately through operating-system and device boundaries for I/O.
 %% Cross-layer path from Python meaning through runtime and machine to I/O
 flowchart TB
     SEM["Python language meaning<br/>count_due result contract"]
@@ -1435,6 +1483,16 @@ flowchart TB
     CEVAL -. "library or I/O request" .-> OS
     OS <--> DEV
 ```
+
+### Linear text alternative — one operation through the execution stack
+
+Start with the Python result contract, then follow the source into a CPython
+code object and an executing frame. Native runtime software implements that
+frame through a host ISA; a processor implementation and memory hierarchy
+realize those machine transitions. An I/O request branches separately into OS
+and device handling. This is a dependency and evidence route, not a one-to-one
+mapping from source line to process, bytecode, native instruction, cache access,
+or physical transfer.
 
 Arrow meanings differ:
 
@@ -1494,6 +1552,22 @@ Unsafe interpretations:
 Do not grade memorized opcode names. Grade the ownership statement and the
 ability to explain why version-scoped observation differs from language or ISA
 guarantee.
+
+### Code-reading, debugging, and design checkpoint — source evidence is not hardware evidence
+
+Use the `dis` loop above to make four columns before drawing a performance
+conclusion:
+
+| Layer | Evidence you may record | Conclusion you may not make yet |
+|---|---|---|
+| Python semantics | the admitted input returns the specified count | which bytecodes or hardware operations occur |
+| CPython bytecode | opcode names on the recorded implementation/version | native instruction count or cache accesses |
+| declared teaching model | one finite ISA/cache trace under named rules | behavior of the host processor |
+| measurement | a timing vector and its controls | a unique causal explanation |
+
+**Prediction.** If `dis` prints an opcode named `LOAD_FAST`, which column did
+it fill? Repair the false comment “native instructions and cache accesses” to
+the narrower, version-scoped bytecode observation before continuing to M18.
 
 ### 7.4 A thin pinned CPython bridge
 
@@ -1707,6 +1781,9 @@ After timing:
 ### 8.3 Observation points around the incident
 
 ```mermaid
+    %% atlas-diagram-id: m17-comparison-observation-points
+    %% atlas-diagram-title: Observation points for a bounded comparison
+    %% atlas-diagram-alt: The same packed data takes sequential and deterministic-permutation routes through one kernel; matching result oracles, version-scoped disassembly, toy-cache traces, and counterbalanced timing vectors feed one bounded comparison.
 %% Observation points for the sequential-versus-permuted Atlas incident
 flowchart LR
     ROWS["synthetic M16 rows"] -->|outside timing| CODES["packed codes<br/>digest + encoding"]
@@ -1786,6 +1863,9 @@ does not imply semantic uselessness. Split the decisions:
 ### 8.5 Performance-claim causal map
 
 ```mermaid
+    %% atlas-diagram-id: m17-performance-causal-alternatives
+    %% atlas-diagram-title: Alternative explanations for performance observations
+    %% atlas-diagram-alt: An elapsed-time vector has many compatible causes, including native work, pipeline and cache effects, power, OS interference, and measurement choices; separate evidence narrows only a bounded causal statement.
 %% Alternative causes compatible with an observed elapsed-time vector
 flowchart TB
     TIME["observed elapsed vector"] --> ALT["compatible explanations"]
@@ -1820,7 +1900,7 @@ cause. A professionally useful outcome can be:
 
 Use a \(2\times2\) design:
 
-| | sequential order | permuted order |
+| factor | sequential order | permuted order |
 |---|---|---|
 | explicit Python loop | vector A | vector B |
 | gathered/alternative implementation | vector C | vector D |
@@ -1873,6 +1953,9 @@ python-advanced-course/work/module17_reference_candidate.py
 ```
 
 [Download the complete runnable Module 17 reference](/downloads/module17_reference.py).
+[Read the small behavioral test beside it](/downloads/test_module17_reference.py)
+to see which semantic, cache-model, and uncertainty boundaries are treated as
+stable claims.
 
 It is standard-library only and builds a machine-readable evidence packet with:
 
@@ -2333,6 +2416,9 @@ medians only. It emits no minimum ratio, winner scalar, or hardware cause.
 The expanded candidate separates responsibilities:
 
 ```mermaid
+    %% atlas-diagram-id: m17-machine-evidence-packet
+    %% atlas-diagram-title: Machine evidence packet inputs
+    %% atlas-diagram-alt: Encoding probes, fixed fixtures, order choices, a toy cache, finite ISA, disassembly, timing, provenance, and claim boundaries contribute distinct evidence to one JSON packet.
 %% Responsibilities combined into the Module 17 JSON evidence packet
 flowchart TD
     ENC["signed16 struct probe<br/>width + signedness + byte order"] --> REPORT["JSON evidence packet"]
@@ -2477,7 +2563,7 @@ decision: bounded explanation, not a universal winner
 Each session consumes the prior artifact. A session adds one abstraction jump,
 not a fresh toy problem.
 
-### Session 1 — Make bits earn their meaning
+## Session 1 — Make bits earn their meaning
 
 **Consumes:** M6 value/representation, M15 portable encoding, the M16 synthetic
 projection.
@@ -2489,6 +2575,14 @@ as if “the bytes explain themselves.”
 
 **Pre-reading:** Nand2Tetris Projects 1–2 background/objective; Python 3.14
 `struct` byte-order table. Stop before project solutions.
+
+### Prediction before reveal — one bit pattern, one named interpretation
+
+Before opening the decoder or reference code, choose one interpretation for
+11111100 and write the width, signedness, byte order, confidence, and one
+reason it could be wrong. Keep the prediction visible until the representation
+contract is named; a plausible answer without that contract is deliberately
+incomplete.
 
 **Interactive sequence:**
 
@@ -2512,11 +2606,18 @@ implementation, then reviews the actual code for stronger or weaker claims.
 **Artifact:** signed-16 trace, Atlas representation card, round-trip evidence,
 and a three-column “value / representation / observation” map.
 
+### Session 1 output — representation and semantic trace
+
+Save the signed-16 trace, named representation contract, range proof, and one
+invalid-input counterexample. Session 2 treats that explicit bit-level
+interpretation as the input to a state transition rather than silently
+reinterpreting it.
+
 **Exit:** explain why `fc ff` can mean \(-4\) only after width, signedness, and
 byte order are named—and why this says nothing about a Python integer object's
 layout.
 
-### Session 2 — Derive remembered state from current-input logic
+## Session 2 — Derive remembered state from current-input logic
 
 **Consumes:** Session 1 bit meanings.
 
@@ -2549,10 +2650,16 @@ history lives.
 **Artifact:** gates→adder→register dependency map, transition table, width
 failure, and reviewed control-path correction.
 
+### Session 2 output — state-table and clock-boundary trace
+
+Save the current/next-state table, one width failure, and the corrected
+control-path claim. Session 3 uses that trace to distinguish an instruction's
+visible state change from an implementation detail.
+
 **Exit:** answer “what stores the previous batch total?” without saying that a
 combinational feedback wire magically remembers it.
 
-### Session 3 — Read instructions as state transitions
+## Session 3 — Read instructions as state transitions
 
 **Consumes:** bit width, current/next state, PC/register/memory separation.
 
@@ -2590,10 +2697,16 @@ locates the first impossible transition before seeing the source.
 **Artifact:** six-instruction toy history, RISC-V state table, call/return
 trace, and ISA/microarchitecture/calling-convention ownership matrix.
 
+### Session 3 output — ISA state and call-convention trace
+
+Save the PC/register/memory trace and the ownership matrix. Session 4 may add
+overlap and locality hypotheses only after those ISA-visible transitions remain
+separate from microarchitecture choices.
+
 **Exit:** explain why `LOAD` and `ADD` without `STORE` leave data memory
 unchanged.
 
-### Session 4 — Explain overlap and locality without promising hardware
+## Session 4 — Explain overlap and locality without promising hardware
 
 **Consumes:** instruction state transitions and address generation.
 
@@ -2630,10 +2743,16 @@ physical transfer.
 **Artifact:** pipeline/hazard annotation, CPU-time factor table, two complete
 toy-cache traces, and “not the host CPU cache” boundary card.
 
+### Session 4 output — overlap/locality model and causal boundary
+
+Save the declared pipeline/cache assumptions, both hand traces, and the
+non-host boundary card. Session 5 carries those limits upward so a Python or
+CPython observation cannot be relabeled as a measured cache event.
+
 **Exit:** explain why same \(\Theta(n)\) work and same result permit different
 locality and elapsed observations.
 
-### Session 5 — Bridge Python to the machine one owned layer at a time
+## Session 5 — Bridge Python to the machine one owned layer at a time
 
 **Consumes:** language contract, ISA, microarchitecture, hierarchy.
 
@@ -2671,10 +2790,16 @@ permitted inference.
 **Artifact:** cross-layer execution map, three-stack comparison, I/O boundary
 trace, and later-module question queue.
 
+### Session 5 output — execution-stack ownership and observation record
+
+Save the source-to-observation map, exact CPython/runtime provenance, three
+stack meanings, and one I/O stopping line. Session 6 uses them to audit whether
+an agent's performance explanation exceeds the recorded evidence.
+
 **Exit:** explain why bytecode is neither Python source nor the host ISA and
 why one Python operation need not map to one of anything below it.
 
-### Session 6 — Review the incident and defend a bounded claim
+## Session 6 — Review the incident and defend a bounded claim
 
 **Consumes:** all prior contracts, traces, model outputs, and ownership maps.
 
@@ -2709,7 +2834,15 @@ acceptance tests. Michael reviews the diff and raw evidence rather than the
 agent summary.
 
 **Artifact:** annotated patch, crossed design, raw evidence packet, claim
-rewrite ladder, decision record, and six-minute oral defense.
+rewrite ladder, decision record, and learner-selected conversation summary.
+
+### Session 6 output — bounded architecture claim and M28 handoff
+
+Save one observation, one declared-model result, one remaining hypothesis, and
+one next falsification step beside the M28 question: which vector, matrix,
+continuous-change, uncertainty, or optimization model would make this
+architecture evidence more explicit? This is an evidence handoff, not a score,
+route bypass, or learner-mastery declaration.
 
 **Exit:** “Under this exact setup we observed ___. The toy model establishes
 ___. We did not measure ___. The leading alternatives are ___. The next
@@ -3033,8 +3166,9 @@ transfer.
 **Counterexample:** the byte may already be in a Python buffer or OS-managed
 cache, so no new physical storage transfer is required for this call.
 
-**Route:** confident miss → Section 7.7 and prepare the M18 handoff. Correct at
-low confidence → name three possible paths without claiming which occurred.
+**Route:** confident miss → Section 7.7, record the later M18 question, and
+continue through the M28–M31 mathematical bridge. Correct at low confidence →
+name three possible paths without claiming which occurred.
 </details>
 
 ### Question 8 — Benchmark evidence and causal claims
@@ -3402,10 +3536,10 @@ Checkoff: model, host event, and elapsed observation remain distinct.
 Checkoff: the claim improves incrementally without correlation becoming
 universal cause.
 
-### 13.16 Mastery gate
+### 13.16 Constructive next-step guide
 
-Module 17 is ready for progression only when Michael can explain, without
-notes:
+Use the following evidence to choose a next bridge or repair—not to decide
+whether Michael passes. Look for whether Michael can explain, without notes:
 
 1. why bits need width and interpretation;
 2. why clocked state differs from a combinational function;
@@ -3429,15 +3563,24 @@ Integrated performance ownership demonstration on a fresh fixture:
 - propose an independent falsification step;
 - route one question each to M18, M19, and M24.
 
-| State | Meaning | Action |
-|---|---|---|
-| Ready | reasoning transfers and all boundaries hold | proceed to M18 |
-| Ready with retrieval plan | ownership is correct but recall is slow/low confidence | proceed with scheduled consolidation |
-| Bridge required | one or two named dependencies are unstable | repeat matching ladder/TA microcase |
-| Reconstruct | semantics or evidence ownership is missing | return to earliest missing session |
+| Evidence pattern | Next bridge or repair |
+|---|---|
+| reasoning transfers and all boundaries hold | continue with the M28 handoff; retain M18 questions for the later systems bridge |
+| ownership is correct but recall is slow or low confidence | use scheduled consolidation |
+| one or two named dependencies are unstable | repeat the matching ladder or TA microcase |
+| semantics or evidence ownership is missing | return to the earliest missing session |
 
-MCQ percentage alone cannot pass the gate. A high-confidence layer collapse
-triggers a targeted bridge even when the dossier looks polished.
+MCQ percentage alone does not choose the next step. A high-confidence layer
+collapse calls for a targeted bridge even when the dossier looks polished.
+
+Otherwise, name the collapsed layer first: rebuild a width/interpretation or
+clocked-state trace for a representation error, compare ISA and
+microarchitecture for a layer collapse, rerun the declared toy model for a
+locality claim, or rewrite the experiment as observation rather than cause.
+Then bring one revised trace and one uncertainty to the Teaching Assistant or
+Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ### 13.17 Evidence packet
 
@@ -3483,7 +3626,8 @@ the evidence of mastery.
   reversed ABBA/BAAB start; predict before running.
 - **1 week:** read an unseen sequence-scan function and audit an agent
   performance explanation without implementing first.
-- **3 weeks:** five-minute oral retrieval before M18:
+- **3 weeks:** learner-selected conversational retrieval while retaining the
+  later M18 question:
 
 > How can one Python operation, one byte request, and one elapsed-time sample
 > each be real observations while none uniquely identifies the physical work
@@ -3516,7 +3660,7 @@ Reflection:
 | M15 — files/serialization | explicit byte format and I/O contract | connects portable fields to machine representation and opens OS handoff |
 | M16 — relational/transactions | pages, plans, DB caches, synthetic export | prevents database physical vocabulary becoming CPU-cache claims |
 
-### 14.2 Module 18 — Operating systems
+### 14.2 Module 18 — later systems continuation
 
 M17 ends with:
 
@@ -3525,8 +3669,10 @@ M17 ends with:
 > devices?
 
 M18 owns process state, system calls, scheduling, virtual memory/page tables,
-filesystems, permissions, signals, page cache, and shutdown. M17 supplies the
-execution-stack and evidence-layer prerequisite.
+filesystems, permissions, signals, page cache, and shutdown. Its sole academic
+prerequisite is M17's execution-stack and evidence-layer work. The canonical
+reader narrative reaches M18 after the M28–M31 mathematical bridge; that
+narrative continuation is not an additional academic prerequisite.
 
 ### 14.3 Module 19 — Concurrency and parallelism
 
@@ -3597,8 +3743,8 @@ dependency routes; they do not supply copied assignment solutions.
 | [Project 5 — Computer Architecture](https://www.nand2tetris.org/project05) | CPU/memory/stored-program dependency | pedagogical machine, not host description |
 | [Nand2Tetris license](https://www.nand2tetris.org/license) | CC BY-NC-SA 3.0 and academic-integrity request | link/attribute; do not publish project solutions |
 | [MIT 6.004 Computation Structures](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/) | dependency route from information through devices | selected units only |
-| [MIT 6.004 combinational logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c04/) and [sequential logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c05/) | functions versus state | no transistor-depth requirement |
-| [MIT ISA](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c09/), [procedures/stacks](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c12/), and [processor](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c13/) | ISA/datapath/call pressures | teaching models labeled |
+| [MIT 6.004 combinational logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c4/) and [sequential logic](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c5/) | functions versus state | no transistor-depth requirement |
+| [MIT ISA](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c9/), [procedures/stacks](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c12/), and [processor](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c13/) | ISA/datapath/call pressures | teaching models labeled |
 | [MIT caches](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c14/) and [pipelining](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c15/) | hierarchy/locality/overlap/hazards | original figures and cache traces |
 | [Berkeley CS 61C notes](https://notes.cs61c.org/) and [memory hierarchy](https://notes.cs61c.org/content/caches-intro/memory-hierarchy/) | modern RISC-V/hierarchy route | concepts only; ISA authority remains spec |
 
@@ -3737,3 +3883,142 @@ Finish:
 > experiment. I also know which hardware, OS, concurrency, and CPython
 > mechanisms I have not measured. The explanation is strong because every
 > boundary and uncertainty is visible.
+
+## Conversational oral defense — M17
+
+This is a constructive Teaching Assistant conversation: it is not timed,
+scored, gated, or an architecture-certification claim. If the learner chooses GPT Live at a
+preferred setting and their client renders the material, use the
+representation card, state table, instruction trace, cache model, and
+Markdown/ASCII evidence ladder as a shared whiteboard. This workbook cannot
+control voice availability, quality settings, rendering, retention, or
+integrations. The same conversation protocol can instead use readable text
+with Markdown and an ASCII trace; the course cannot write Notion evidence
+automatically.
+
+### Invitation — separate the layers before naming a cause
+
+Ask the learner to choose one claim and say: “This source operation has
+[semantic contract]; this declared model or observation shows [evidence]; my
+confidence is [level]; and this is still uncertain.” Have them draw the
+value/representation/observation map or one PC/register/memory trace before
+they name a cache, pipeline, or hardware cause.
+
+### Hint ladder — representation to bounded evidence
+
+Move one rung at a time: value and representation → current/next state → ISA
+transition → implementation/model assumption → runtime provenance → raw
+observation → alternative explanation → next discriminating test. Offer one
+smaller trace or counterexample without pass/fail framing.
+
+### Changed-premise counterexample
+
+Keep the priority-code result contract but change one premise: signedness or
+byte order, register width, one cache geometry field, the access permutation,
+the CPython version, or a missing raw trial. Ask which claim remains valid,
+which artifact must change, and which inference is no longer justified.
+
+### Transfer turn — M28 vector and numerical model
+
+Ask how a vector/matrix representation, numerical stability boundary,
+continuous-change model, probability model, or optimization objective in M28–M31
+could make one present architecture claim more precise. M18 remains a later
+systems branch after that mathematical bridge; this turn does not advance the
+learner there.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a compact record: selected claim, visible trace,
+prediction, changed-premise repair, recorded provenance, confidence,
+unresolved limit, and one M28 question. Copy or export it only with the
+learner's approval.
+
+## Guided Codex handoff — M17
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M17. This source operation becomes these
+execution-layer events, this cost claim assumes [model], and my confidence is
+[level].”** Ask for a source → bytecode → machine/toy-model trace before
+discussing speed. Use this hint ladder: semantic operation → representation →
+instruction/memory event → locality or pipeline assumption → bounded
+measurement → non-claim. Change one premise (cache layout, input size,
+interpreter version, or concurrent workload) and ask which observation cannot
+be transferred.
+
+### Study Partner — execution-stack rehearsal
+
+Ask the learner to label one event as Python semantics, CPython observation,
+toy-ISA model, hardware mechanism, or measured result. Then change one label
+and ask what claim becomes invalid. Finish with one readable whiteboard trace
+and an uncertainty for the TA.
+
+### Forward handoff — M28
+
+Carry the separation of semantic contract, execution model, and measurement
+evidence into **M28**. M28–M31 turn representation, continuous change,
+uncertainty, and optimization into explicit mathematical evidence. After that
+bridge, carry the execution discipline into **M18**, where the operating system
+owns resources, scheduling, files, authority, and durability.
+
+## Bench pack
+
+**Bench pack:** `m17` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Every bench here **imports and probes**
+`public/downloads/module17_reference.py` rather than reimplementing it, and every
+one of them is careful about the same thing — a number produced by a declared
+model is a fact about the model, not about your CPU.
+
+### Bench 3 — ISA state and call-convention trace
+
+**Session:** 3. **Rungs:** debug and defend, trace.
+**Executes:** the toy machine's full state history against a corrupted run in
+which the STORE is neutralized by a redundant instruction, so both programs keep
+the same length and the same instruction at every position. The histories first
+differ at step 3, in **memory**, while every register still agrees exactly; the
+register file first differs at step 4 — and the instruction executing there is a
+correct LOAD, doing exactly what LOAD does with the memory it was given.
+**Cannot establish:** anything about a real instruction set. Four registers, four
+memory words, 8-bit words, no pipeline, no flags register.
+
+### Bench 4 — overlap/locality model and causal boundary
+
+**Session:** 4. **Rungs:** trace, recognize.
+**Executes:** both access orders over 64 items under a declared geometry —
+sequential gives 48 hits and 16 misses, a deterministic permutation gives 0 and
+64. Identical work by any count that ignores memory. Sweeping the line size alone
+then moves the miss count through four distinct values, which is the proof that
+the number belongs to the geometry.
+**Cannot establish:** any prediction about this or any host CPU, where multiple
+cache levels, stride prefetching, set-associative conflicts, and address
+translation all apply and none of them are modelled.
+
+### Bench 6 — bounded architecture claim and M28 handoff
+
+**Session:** 6. **Rungs:** review and verify, debug and defend.
+**Executes:** a counterbalanced ABBA/BAAB schedule that measures the first-exposure
+order effect **separately** from the comparison it would otherwise contaminate. The
+order effect is 1.3% and the between-condition ratio is 0.996× — the confound is
+the same magnitude as the signal. The audit's hard case is that repeating the
+uncrossed experiment does not fix it: more trials give a tighter estimate of the
+wrong quantity.
+**Cannot establish:** that either access order is faster on this machine. One
+process, one interpreter, no control over other load, and no cache instrument.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 2** — the 8-bit `ADD` wraparound at 250 + 10 is a genuine falsifiable
+  prediction, and was the fourth-ranked pick. It lost on the cut, not on merit.
+- **Session 5** — the artifact is a layer-ownership map and a routing queue: an
+  argument about what may be inferred from which layer, not evidence produced by
+  running. Its one runnable part would restate the causal boundary bench 4 already
+  establishes with a number that moves.
+
+### Bench pack completion record
+
+Records under `benches/records/m17-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

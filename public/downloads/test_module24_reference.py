@@ -57,14 +57,32 @@ class ObjectGraphSeamTests(unittest.TestCase):
 
 
 class ObservationScopeSeamTests(unittest.TestCase):
-    def test_semantic_fixture_does_not_establish_performance(self) -> None:
+    def test_semantic_fixture_is_a_course_model_and_does_not_establish_performance(self) -> None:
         observed = model.classify_observation("semantic_fixture")
         decision = model.validate_conclusion(observed, "performance")
 
-        self.assertEqual(observed.label, model.SEMANTIC_CONTRACT)
+        self.assertEqual(observed.label, model.COURSE_MODEL)
+        self.assertEqual(observed.required_evidence_label, model.SEMANTIC_CONTRACT)
         self.assertEqual(decision.outcome, model.DECISION_REJECT)
 
-    def test_shallow_size_refuses_retained_graph_and_rss_conclusions(self) -> None:
+    def test_static_scope_cards_name_required_evidence_instead_of_claiming_observations(
+        self,
+    ) -> None:
+        cases = (
+            ("shallow_size", model.CPYTHON_OBSERVATION),
+            ("traced_peak", model.MEASUREMENT),
+            ("process_rss", model.OS_NATIVE_OBSERVATION),
+            ("bytecode_card", model.CPYTHON_OBSERVATION),
+        )
+
+        for metric, required_label in cases:
+            with self.subTest(metric=metric):
+                observed = model.classify_observation(metric, model.PINNED_RUNTIME)
+                self.assertEqual(observed.label, model.COURSE_MODEL)
+                self.assertEqual(observed.required_evidence_label, required_label)
+                self.assertEqual(observed.required_runtime, model.PINNED_RUNTIME)
+
+    def test_shallow_size_card_refuses_retained_graph_and_rss_conclusions(self) -> None:
         observed = model.classify_observation("shallow_size", model.PINNED_RUNTIME)
 
         self.assertEqual(
@@ -76,10 +94,10 @@ class ObservationScopeSeamTests(unittest.TestCase):
             model.DECISION_REJECT,
         )
 
-    def test_traced_peak_refuses_native_and_process_scope(self) -> None:
+    def test_traced_peak_card_refuses_native_and_process_scope_then_defers_real_claims(self) -> None:
         observed = model.classify_observation("traced_peak", model.PINNED_RUNTIME)
 
-        self.assertEqual(observed.label, model.MEASUREMENT)
+        self.assertEqual(observed.label, model.COURSE_MODEL)
         self.assertEqual(
             model.validate_conclusion(observed, "all native allocation").outcome,
             model.DECISION_REJECT,
@@ -88,13 +106,22 @@ class ObservationScopeSeamTests(unittest.TestCase):
             model.validate_conclusion(observed, "production SLO").outcome,
             model.DECISION_REJECT,
         )
+        self.assertEqual(
+            model.validate_conclusion(observed, "traced allocation peak").outcome,
+            model.DECISION_DEFER,
+        )
 
-    def test_process_rss_does_not_name_a_python_owner(self) -> None:
+    def test_process_rss_card_does_not_name_a_python_owner_or_fake_an_os_result(self) -> None:
         observed = model.classify_observation("process_rss", model.PINNED_RUNTIME)
         decision = model.validate_conclusion(observed, "Python object attribution")
 
-        self.assertEqual(observed.label, model.OS_NATIVE_OBSERVATION)
+        self.assertEqual(observed.label, model.COURSE_MODEL)
+        self.assertEqual(observed.required_evidence_label, model.OS_NATIVE_OBSERVATION)
         self.assertEqual(decision.outcome, model.DECISION_REJECT)
+        self.assertEqual(
+            model.validate_conclusion(observed, "host/process memory observation").outcome,
+            model.DECISION_DEFER,
+        )
 
     def test_bytecode_card_without_version_is_deferred(self) -> None:
         observed = model.classify_observation("bytecode_card")
@@ -121,14 +148,24 @@ class ObservationScopeSeamTests(unittest.TestCase):
             model.validate_conclusion(observed, "speedup").outcome,
             model.DECISION_REJECT,
         )
+        self.assertEqual(
+            model.validate_conclusion(observed, "implementation observation").outcome,
+            model.DECISION_DEFER,
+        )
+
+    def test_fixture_runtime_label_is_not_the_detected_interpreter(self) -> None:
+        self.assertEqual(model.FIXTURE_RUNTIME_LABEL, "CPython 3.14.6")
+        self.assertEqual(model.PINNED_RUNTIME, model.FIXTURE_RUNTIME_LABEL)
 
 
 class ExperimentManifestSeamTests(unittest.TestCase):
-    def test_matching_manifest_with_enough_samples_supports_scoped_review(self) -> None:
+    def test_matching_manifest_with_enough_samples_is_ready_for_evidence_not_a_measurement(
+        self,
+    ) -> None:
         baseline = model._manifest()
         review = model.validate_experiment(baseline, model._manifest())
 
-        self.assertEqual(review.outcome, model.MEASUREMENT)
+        self.assertEqual(review.outcome, model.MANIFEST_READY)
         self.assertEqual(review.missing_or_changed, ())
 
     def test_semantic_change_is_rejected_before_performance_interpretation(self) -> None:
@@ -195,7 +232,7 @@ class FixedScenarioAndCliTests(unittest.TestCase):
                 "shallow_scope",
                 "traced_scope",
                 "reject_confound",
-                "accept_stream",
+                "defer_without_results",
                 "defer_missing_version",
             ),
         )
@@ -204,7 +241,8 @@ class FixedScenarioAndCliTests(unittest.TestCase):
         alias = model.run_scenario("alias_rebind")
         cycle = model.run_scenario("cycle_collection")
 
-        self.assertEqual(alias["outcome"], model.SEMANTIC_CONTRACT)
+        self.assertEqual(alias["outcome"], model.COURSE_MODEL)
+        self.assertEqual(cycle["outcome"], model.COURSE_MODEL)
         self.assertEqual(alias["reachable"], ("audit_view", "events"))
         self.assertEqual(cycle["sweep_remaining"], ("A", "B"))
         self.assertEqual(cycle["cycle_candidates"], ("A", "B"))
@@ -215,23 +253,24 @@ class FixedScenarioAndCliTests(unittest.TestCase):
 
         self.assertEqual(shallow["outcome"], model.MEASUREMENT_SCOPE_ERROR)
         self.assertEqual(shallow["decision"]["outcome"], model.DECISION_REJECT)
-        self.assertEqual(traced["outcome"], model.MEASUREMENT)
-        self.assertEqual(traced["decision"]["outcome"], model.DECISION_ACCEPT)
+        self.assertEqual(traced["outcome"], model.COURSE_MODEL)
+        self.assertEqual(traced["decision"]["outcome"], model.DECISION_DEFER)
 
-    def test_confound_accept_and_missing_version_packets_are_distinct(self) -> None:
+    def test_confound_missing_results_and_missing_version_packets_are_distinct(self) -> None:
         confounded = model.run_scenario("reject_confound")
-        accepted = model.run_scenario("accept_stream")
+        missing_results = model.run_scenario("defer_without_results")
         deferred = model.run_scenario("defer_missing_version")
 
         self.assertEqual(confounded["outcome"], model.CONFOUNDED_EXPERIMENT)
-        self.assertEqual(accepted["outcome"], model.DECISION_ACCEPT)
+        self.assertEqual(missing_results["outcome"], model.DECISION_DEFER)
+        self.assertEqual(missing_results["review"]["outcome"], model.MANIFEST_READY)
         self.assertEqual(deferred["outcome"], model.DECISION_DEFER)
 
     def test_unknown_scenario_does_not_accept_dynamic_input(self) -> None:
         with self.assertRaisesRegex(ValueError, "unknown fixed scenario"):
             model.run_scenario("run arbitrary text")
 
-    def test_cli_help_and_scenario_do_not_write_stderr(self) -> None:
+    def test_cli_writes_one_bounded_json_packet_to_stdout_and_no_stderr(self) -> None:
         stdout = StringIO()
         stderr = StringIO()
         with redirect_stdout(stdout), redirect_stderr(stderr):

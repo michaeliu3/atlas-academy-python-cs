@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m31",
+  "purpose": "Bind M31's checked-in authoring-only workbook candidate, instructor-facing planning sources, hidden session/output topology, module companion, and bounded Node authoring model into a non-promoting structural candidate package. This record neither changes M31's authoring-only/hidden graph state nor supplies a learner route, canonical learner-source-map binding, studio, review, CI, deployment, or release record.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs can show only that the declared authoring-only candidate files and locators exist in a checked Git candidate, including a hidden session/output topology. They do not establish that the instructor-facing source plan is canonical, that the hidden workbook is learner-ready, that an interaction is a learner-facing studio, or that the material is pedagogically, mathematically, visually, or operationally adequate.",
+    "humanReview": "This candidate record is not human approval, a source or license review, an oral-defense result, a learner grade, a mastery determination, or authorization to change M31's lifecycle.",
+    "release": "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M31 remains authoring-only, hidden from the reader, and unreleased."
+  },
+  "evidence": [
+    {
+      "id": "m31-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The hidden M31 workbook directs repair through M28, M29, and M30, while the authoring bridge, hidden delivery map, and module-scoped companion preserve M18 as the existing canonical forward handoff; references to later modules remain contextual authoring connections rather than learner navigation.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prerequisite-retrieval"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+          "locator": "/modules/0"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m31.v1.json",
+          "locator": "/forwardHandoff"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m31.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "These authoring connections do not prove that a learner met prerequisites, that M31 has a reader route, or that any later-module reference is an approved navigation path."
+      ]
+    },
+    {
+      "id": "m31-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "The hidden M31 candidate declares six ordered sessions from formulation through local reasoning, certificates, algorithm traces, stochastic evidence, and information trade-offs; its authoring delivery map resolves one typed visible local output in each session and binds each prerequisite bridge artifact to its first-consuming session.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-1--formulate-before-you-optimize"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-2--local-equations-are-not-global-decisions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-3--constraints-become-certificates-only-under-conditions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-4--read-stopping-evidence-not-solver-mythology"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-5--noise-is-evidence-not-a-nuisance-to-hide"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-6--information-is-a-declared-trade-off"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/authoring-delivery/m31.v1.json",
+          "locator": "/sessions"
+        }
+      ],
+      "limitations": [
+        "Six draft headings and their order do not establish a learner-visible progression, appropriate pace, delivery quality, or completion evidence."
+      ]
+    },
+    {
+      "id": "m31-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M31 begins from a visible optimization-and-information invariant and constructs a bounded problem through owner, variables, units, objective, feasible set, and authority boundary before choosing an algorithm.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "the-working-invariant"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "build-the-object-in-this-order"
+        }
+      ],
+      "limitations": [
+        "Visible first-principles framing does not prove that the formulation is adequate for a real decision or that a learner can apply it independently."
+      ]
+    },
+    {
+      "id": "m31-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "The candidate visibly separates local derivative reasoning, a constrained-stationarity counterexample, KKT conditions and qualification language, certificate fields, a finite algorithm record, and finite information trade-offs.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-2--local-equations-are-not-global-decisions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "a-counterexample-worth-remembering"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-3--constraints-become-certificates-only-under-conditions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "certificate-reading-table"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "read-this-record"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-6--information-is-a-declared-trade-off"
+        }
+      ],
+      "limitations": [
+        "These draft anchors do not substitute for mathematical, numerical, source, or pedagogical review of definitions, hypotheses, derivations, counterexamples, or experiments."
+      ]
+    },
+    {
+      "id": "m31-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M31 includes code-reading of a declared objective and residual, debugging of a clipped constraint, a derivative-reading task, a projected-update debugging task, and an objective-geometry design artifact.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "read-the-model-do-not-rewrite-it"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "debugging-probe"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "code-reading-task"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "code-readingdebugging-task"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "output-objective-geometry-sheet"
+        }
+      ],
+      "limitations": [
+        "Draft prompts do not show that a learner can read unfamiliar code, locate a fault, design a bounded model, or review an AI-generated optimization claim."
+      ]
+    },
+    {
+      "id": "m31-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "Each candidate session contains a prediction-before-reveal move that asks the learner to commit to a consequence before the local correction or boundary is explained.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prediction-before-reveal"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prediction-before-reveal-1"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prediction-before-reveal-2"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prediction-before-reveal-3"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prediction-before-reveal-4"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "prediction-before-reveal-5"
+        }
+      ],
+      "limitations": [
+        "A draft prediction prompt does not show that a learner predicted, recorded confidence, received a useful reveal, or retained the repair."
+      ]
+    },
+    {
+      "id": "m31-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "The candidate ends with an Optimization & Information Evidence Dossier that transfers formulation, certificate, finite-trace, uncertainty, and information boundaries into a bounded recommendation.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "output-optimization-and-information-evidence-dossier"
+        }
+      ],
+      "limitations": [
+        "A proposed dossier does not establish a completed learner artifact, valid transfer, or authority to use an optimization result in a consequential decision."
+      ]
+    },
+    {
+      "id": "m31-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M31's instructor-facing candidate source map and source audit expose source, claim, assumption, counterexample, access, and reuse-planning material, while the hidden workbook directs the author to its source-and-reuse boundary.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "source-ledger-and-reuse-decisions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "claim-assumption-and-counterexample-ledger"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module31_optimization_information_source_audit.md",
+          "locator": "recommended-source-set"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "source-and-reuse-boundary"
+        }
+      ],
+      "limitations": [
+        "These are instructor-facing candidate sources, not a canonical graph source-map binding or learner-facing source ledger; their URLs, claims, access dates, licenses, and reuse decisions still require release review."
+      ]
+    },
+    {
+      "id": "m31-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "The hidden workbook presents a connected-argument diagram and a constrained-stationarity diagram with concise prose text alternatives, while a focused authoring test checks that the candidate contains a text-alternative surface.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "how-this-module-stays-connected"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "a-counterexample-worth-remembering"
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m31-authoring-workbook.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "A static authoring test and text alternatives do not establish browser rendering, semantic diagram structure, keyboard behavior, screen-reader quality, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m31-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "The candidate contains confidence-before-reveal multiple-choice diagnostics with explanations that repair constrained-stationarity, finite-trace, and information-support misconceptions.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "confidence-aware-diagnostic-and-spaced-review"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "misconception-repair-key"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "diagnostic-retrieval-and-misconception-design"
+        }
+      ],
+      "limitations": [
+        "Candidate questions and explanations do not establish diagnostic validity, accessible interaction, stored confidence evidence, or learner calibration."
+      ]
+    },
+    {
+      "id": "m31-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "The hidden candidate specifies a learner-controlled 1/3/7/14/30-day retrieval schedule and changed-premise review for the optimization-and-information invariant.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "confidence-aware-diagnostic-and-spaced-review"
+        }
+      ],
+      "limitations": [
+        "A proposed schedule is not an operational review queue, learner record, retention measure, or notification system."
+      ]
+    },
+    {
+      "id": "m31-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M31's candidate dossier names bounded required evidence and a constructive acceptance rubric that distinguishes formulation, mathematics, computation, information, and transfer evidence.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "output-optimization-and-information-evidence-dossier"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "required-evidence"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "acceptance-rubric"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "optimization--information-evidence-dossier"
+        }
+      ],
+      "limitations": [
+        "A candidate brief and rubric do not establish a reviewed project, an assessed portfolio, learner mastery, or authority for a real-world recommendation."
+      ]
+    },
+    {
+      "id": "m31-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "The candidate describes a constructive post-dossier Teaching Assistant conversation with prediction, a hint ladder, counterexamples, transfer, learner choice to pause or write, and a learner-controlled evidence summary; the Study Partner rehearses without grading.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "supportive-oral-defense-and-live-learning-handoff"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "teaching-assistant-prompt--m31"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "hint-ladder-and-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "study-partner-prompt--m31"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "learner-controlled-evidence-summary"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m31.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A written protocol does not prove that a GPT Live or accessible text conversation occurred, rendered equations or code correctly, was psychologically safe in practice, or produced learner-authorized evidence."
+      ]
+    },
+    {
+      "id": "m31-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M31 companion gives the Teaching Assistant an objective/constraint/evidence-card opening, an assumption-and-trace artifact focus, and a prediction-first repair move.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m31.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "The prompt does not prove that a particular Codex Teaching Assistant chat received it, used a high-quality voice setting, rendered a whiteboard, or wrote a learner-approved Notion note."
+      ]
+    },
+    {
+      "id": "m31-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M31 companion gives the Study Partner a non-grading rehearsal, changed-premise routine, and bounded Teaching Assistant handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m31.v1.json",
+          "locator": "/studyPartner"
+        }
+      ],
+      "limitations": [
+        "The prompt does not prove that a Study Partner live discussion happened, formulas or code rendered accessibly, or a learner-authorized note was captured."
+      ]
+    },
+    {
+      "id": "m31-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M31 companion carries an objective/constraint/convergence claim sheet with experiment conditions, known limits, and one uncertainty to the canonical M18 handoff without treating planning references as learner navigation.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m31.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A declared authoring handoff does not establish learner readiness, successful completion, a navigable route, or permission to bypass any downstream prerequisite."
+      ]
+    },
+    {
+      "id": "m31-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M31 binds a deterministic, bounded Node authoring model for small objective/constraint, KKT, projected-gradient, stochastic-trace, and finite-information fixtures with a focused Node teaching test; it is an inspectable authoring fixture, not a learner-facing studio.",
+      "inputs": [
+        {
+          "kind": "file",
+          "role": "reference-model",
+          "path": "lib/m31-optimization-authoring-model.js",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m31-optimization-authoring-model.test.mjs",
+          "locator": null
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/authoring/m31_optimization_information_workbook.v1.md",
+          "locator": "session-4--read-stopping-evidence-not-solver-mythology"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module31_optimization_information_source_map.md",
+          "locator": "numerical-code-reading-and-reference-model-boundary"
+        }
+      ],
+      "limitations": [
+        "Static references and local Node tests do not establish browser interaction, a learner-facing studio, model correctness beyond its declared fixtures, CI success, deployment, or a general optimization guarantee."
+      ]
+    },
+    {
+      "id": "m31-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M31 material.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/evidence/preflight/m31.v1.json",
+          "locator": "/truthBoundary/release"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "provenance",
+          "path": "docs/module-evidence/m31/candidate-preflight.md",
+          "locator": "authoring-candidate-boundary"
+        }
+      ],
+      "limitations": [
+        "This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open."
+      ]
+    }
+  ]
+}

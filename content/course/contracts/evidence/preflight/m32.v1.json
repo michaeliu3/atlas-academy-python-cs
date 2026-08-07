@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-preflight",
+  "recordVersion": "v1",
+  "moduleId": "m32",
+  "purpose": "Record a non-promoting structural candidate package for hidden, authoring-only M32 material. It improves traceability of the existing draft without changing the graph, manifest, route, studio, source-map binding, contract state, review state, release state, or learner access.",
+  "truthBoundary": {
+    "candidate": "This record declares only candidate inputs and their intended structural checks. It preserves M32 as authoring-only and hidden; it is not a declaration that the draft is learner-ready or that every instructional surface is adequate.",
+    "review": "This record is not a human review, source-quality decision, license approval, accessibility review, oral-defense result, learner-mastery result, or review-ready transition.",
+    "release": "This record is not CI, source-commit, private-deployment, security, release, or publication evidence. M32 remains authoring-only, hidden from the reader, and unreleased; the required release criterion remains explicitly open."
+  },
+  "state": "authoring-only-candidate-not-promoting",
+  "evidenceRecordPath": "content/course/contracts/evidence/m32.v1.json",
+  "openCriterionIds": [
+    "release-provenance-ci-and-deployment-evidence"
+  ],
+  "promotionBlockers": [
+    "human-review",
+    "review-ready-commit",
+    "source-commit-ci-run",
+    "private-deployment-record",
+    "learner-delivery-review"
+  ]
+}

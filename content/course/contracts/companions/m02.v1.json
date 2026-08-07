@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m02",
+  "purpose": "Freeze a candidate-only M2 Teaching Assistant, Study Partner, and M3 handoff context for future human review without changing M2's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/1",
+    "digest": "sha256:1723501c26e9eaca204ebc0231123e4ff7302626b673ab8db9dd241d5670c164"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected recursive claim. Ask for the shortest input and frame trace, the supported domain, the decreasing measure, and a confidence statement before offering correction.",
+    "artifactFocus": "Ask the learner to make one recursive contract, call-and-return trace, termination measure, induction step, recurrence, or failed-assumption regression visible, then distinguish what that artifact establishes from what remains unproven.",
+    "repairMove": "Ask for a prediction before correction; change exactly one domain premise, recursive call, accumulator boundary, or cost assumption; then offer the smallest counterexample or regression without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: show one small input tree, its next frames, a base case, returned values, and a plain-language fallback before rehearsing one claim at a time.",
+    "changedPremise": "Change a finite tree into a cycle, make one recursive input non-smaller, or reuse a caller-owned accumulator. Ask for a prediction and confidence before comparing the contract, trace, or regression result.",
+    "taHandoff": "End with the learner's selected M2 artifact, attempted trace or proof step, confidence, unresolved misconception, one domain or ownership boundary, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m03",
+    "carryArtifact": "Carry a recursive-boundary card: one function contract, one frame trace, one decreasing measure or induction step, one cost/domain assumption, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before defining an M3 abstraction boundary, which observations may a client rely on, and which representation or recursive mechanism details must remain outside the contract?",
+    "boundary": "M3 is the only canonical forward handoff. References to later modules are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

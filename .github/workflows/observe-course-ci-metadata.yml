@@ -1,0 +1,129 @@
+name: Verify Course CI metadata on demand
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Completed successful pull-request Course CI run ID to verify
+        required: true
+        type: string
+
+permissions:
+  actions: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read and validate selected Course CI metadata
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          ATLAS_CI_RUN_ID: ${{ inputs.run_id }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const expected = Object.freeze({
+              repository: "michaeliu3/atlas-academy-python-cs",
+              workflowId: 323581527,
+              workflowName: "Course CI",
+              workflowPath: ".github/workflows/ci.yml",
+              displayTitle: "atlas-course-ci-gate",
+              event: "pull_request",
+              requiredJobNames: [
+                "Portal quality gate",
+                "Teaching models on Python 3.12",
+                "Teaching models on Python 3.14",
+                "Browser accessibility acceptance",
+              ],
+            });
+            const fail = (message) => {
+              throw new Error(`Course CI metadata verification rejected: ${message}`);
+            };
+            const assert = (condition, message) => {
+              if (!condition) fail(message);
+            };
+            const suppliedRunId = (process.env.ATLAS_CI_RUN_ID ?? "").trim();
+            assert(/^[1-9]\d*$/u.test(suppliedRunId), "run_id must be a positive decimal integer");
+            const runId = Number(suppliedRunId);
+            assert(Number.isSafeInteger(runId) && runId > 0, "run_id is not a safe positive integer");
+
+            const request = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            };
+            const { data: selectedRun } = await github.request(
+              "GET /repos/{owner}/{repo}/actions/runs/{run_id}",
+              request,
+            );
+            const sourceHeadSha = selectedRun.head_sha;
+            const runAttempt = selectedRun.run_attempt;
+            const fullSha = /^[0-9a-f]{40}$/u;
+            assert(selectedRun.id === runId, "selected run id differs from the requested run id");
+            assert(Number.isSafeInteger(runAttempt) && runAttempt > 0, "selected run attempt is invalid");
+            assert(fullSha.test(sourceHeadSha), "selected source head SHA is invalid");
+
+            const attemptRequest = { ...request, attempt_number: runAttempt };
+            const { data: run } = await github.request(
+              "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}",
+              attemptRequest,
+            );
+            assert(run.id === runId, "readback run id differs from the requested run id");
+            assert(run.run_attempt === runAttempt, "readback run attempt differs from the selected run attempt");
+            assert(run.repository?.full_name === expected.repository, "readback repository is not canonical");
+            assert(run.head_repository?.full_name === expected.repository, "readback head repository is not canonical");
+            assert(run.head_sha === sourceHeadSha, "readback source head differs from selected source head");
+            assert(
+              run.workflow_id === expected.workflowId &&
+                run.name === expected.workflowName &&
+                run.path === expected.workflowPath &&
+                run.event === expected.event,
+              "readback workflow identity differs from the bounded verification policy",
+            );
+            assert(
+              run.display_title === expected.displayTitle,
+              "readback workflow display title differs from the bounded verification policy",
+            );
+            assert(run.status === "completed" && run.conclusion === "success", "readback run is not successful");
+            assert(
+              run.html_url === `https://github.com/${expected.repository}/actions/runs/${runId}`,
+              "readback run URL is inconsistent",
+            );
+
+            const jobs = await github.paginate(
+              "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs",
+              attemptRequest,
+              (response) => response.data.jobs,
+            );
+            const jobIds = new Set();
+            const jobNames = new Set();
+            for (const job of jobs) {
+              assert(Number.isSafeInteger(job.id) && job.id > 0, "readback job id is invalid");
+              assert(!jobIds.has(job.id), `duplicate readback job id: ${job.id}`);
+              assert(!jobNames.has(job.name), `duplicate readback job name: ${job.name}`);
+              assert(job.run_id === runId, `job ${job.name} belongs to another run`);
+              assert(job.run_attempt === runAttempt, `job ${job.name} belongs to another run attempt`);
+              assert(job.head_sha === sourceHeadSha, `job ${job.name} belongs to another source head`);
+              assert(
+                job.status === "completed" && job.conclusion === "success",
+                `job ${job.name} is not successful`,
+              );
+              jobIds.add(job.id);
+              jobNames.add(job.name);
+            }
+            for (const requiredJobName of expected.requiredJobNames) {
+              assert(jobNames.has(requiredJobName), `missing required job: ${requiredJobName}`);
+            }
+
+            core.notice(
+              JSON.stringify({
+                kind: "on-demand source-head-attached Course CI metadata observation",
+                repository: expected.repository,
+                sourceHeadSha,
+                runId,
+                runAttempt,
+                runUrl: run.html_url,
+                requiredJobNames: expected.requiredJobNames,
+              }),
+            );

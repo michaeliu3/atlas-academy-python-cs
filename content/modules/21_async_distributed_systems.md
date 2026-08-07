@@ -8,7 +8,7 @@
 **Documentation and source baseline:** Python 3.14.6; Python public API docs,
 PEP 654, IETF/W3C standards, original distributed-systems papers, and public
 university course routes last audited 2026-07-30. The full research, licensing,
-and claim map is [Module 21 source map](../research/module21_async_distributed_source_map.md).
+and claim map is [Module 21 source map](/downloads/module21_async_distributed_source_map.md).
 
 **Executed production baseline:** the local-only reference and its test suite
 run on CPython 3.14.6 on Windows. They use synthetic fixtures and make no DNS
@@ -169,18 +169,15 @@ while Atlas owns **several overlapping local tasks** and faces possible
 cross-system ambiguity.
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m21-module-boundaries
+    %% atlas-diagram-title: From local concurrency to bounded async collection
+    %% atlas-diagram-alt: M19 supplies local concurrency and ownership, and M20 adds an identified remote operation that can remain UNKNOWN. M21 adds a bounded owned async collector and cut/evidence discipline, then routes security to M22 and query and storage concerns to M23.
+    flowchart LR
     M19["M19\nlocal concurrency and ownership"] --> M20["M20\none remote operation\nID + digest + UNKNOWN"]
     M20 --> M21["M21\nbounded owned async collector\ncut + causal/evidence discipline"]
     M21 --> M22["M22\nsecurity and trust boundaries"]
     M21 --> M23["M23\nquery, storage, and indexing semantics"]
 ```
-
-**Text equivalent.** Module 21 does not replace concurrent local reasoning or
-Module 20's request identity rule. It adds an explicitly owned async pipeline
-and asks what may be concluded about a group of source operations. Module 22
-later asks whether an observation was authenticated and protected; Module 23
-later asks how validated records are queried and stored.
 
 ### 1.2 Four state machines, not one story
 
@@ -196,7 +193,10 @@ service.
 | cross-system knowledge | matching status lookup returned the declared ID/digest | this policy permits a scoped confirmation | global agreement, freshness, or security |
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m21-collection-state-machine
+    %% atlas-diagram-title: Local collection and reconciliation states
+    %% atlas-diagram-alt: Each declared source waits for admission, starts a local task and attempt, then becomes collected, a definite local failure, a local cancellation, or an unknown remote outcome. Unknown outcomes can enter same-ID reconciliation and become collected only with matching retained status evidence.
+    stateDiagram-v2
     [*] --> DECLARED
     DECLARED --> WAITING_ADMISSION
     WAITING_ADMISSION --> ADMITTED
@@ -276,7 +276,7 @@ pending = fetch_catalog()             # a coroutine object exists
 
 async with asyncio.TaskGroup() as group:
     task = group.create_task(fetch_catalog(), name="atlas-collect:catalog")
-    # An owned local Task now exists. No remote effect is implied.
+    # An owned local Task now exists. It may start eagerly; no remote effect is implied.
 
 result = task.result()                # parent observes its local terminal result
 ```
@@ -284,9 +284,15 @@ result = task.result()                # parent observes its local terminal resul
 | Moment | May say | Must not say |
 |---|---|---|
 | `fetch_catalog()` returned | a coroutine object was constructed | a fetch began |
-| `create_task(...)` returned | a task is scheduled and owned by this scope | catalog received a request |
+| `create_task(...)` returned | this scope owns a local task; it may already have begun under an eager-start policy | catalog received a request or the child has not run yet |
 | child reaches `await adapter.fetch(...)` | local task yielded at a declared boundary | an adapter made a remote decision |
 | parent reads a result/exception | parent observed a local task outcome | every external effect is known |
+
+**Timing boundary.** Returning from `create_task` establishes ownership, not
+that no child code has run. Python 3.14 can start a task eagerly through the
+loop/task-factory policy, so creation order is not necessarily start order. If
+admission must precede child work, put an explicit start/admission gate in the
+declared protocol rather than infer it from the return of `create_task`.
 
 ### Code-reading lab A1 — the orphaned coroutine
 
@@ -325,8 +331,27 @@ Choose one statement and record confidence 1–4 in the visual studio.
 <details>
 <summary>Reveal after predicting</summary>
 
-**B** is the narrow answer. It is a local task-ownership fact. A request send,
-remote admission, and collection cut need other evidence and policy steps.
+**B** is the narrow answer. It is a local task-ownership fact. Under an
+eager-start policy, child code may already have begun; a request send, remote
+admission, and collection cut still need other evidence and policy steps.
+
+</details>
+
+### Prediction before reveal — task ownership
+
+**Current candidate-only supplement.** Before opening the answer below,
+predict the narrowest fact after a collector creates a coroutine and then
+passes it to `TaskGroup.create_task`. Record confidence `1–4`, the local owner,
+and one remote fact that is still not established. This is not evidence of
+review, release, or learner mastery.
+
+<details>
+<summary>Reveal after the prediction and confidence record</summary>
+
+The task group owns a local task. It may already have begun if the loop uses an
+eager-start policy. Neither fact establishes a request send, remote admission,
+remote effect, rollback, or a complete collection cut. The smallest repair for
+a broader claim is to name the event boundary and the evidence that reaches it.
 
 </details>
 
@@ -345,6 +370,10 @@ until you state **whose** lifecycle and **which** effect it names.
 
 ---
 
+### Session 1 output — await responsibility trace
+
+One trace shows where control was released and demonstrates that responsibility for the operation did not move with it.
+
 ## 3. Session 2 — Structured lifetime gives a boundary, not magic rollback
 
 ### Pressure
@@ -361,7 +390,10 @@ turn cancellation into an external rollback protocol. Read the [TaskGroup API](h
 and [PEP 654](https://peps.python.org/pep-0654/).
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m21-taskgroup-boundary
+    %% atlas-diagram-title: TaskGroup owns local task lifetime
+    %% atlas-diagram-alt: An Atlas owner creates catalog, exercises, and progress child tasks in one TaskGroup. An exercises failure becomes a local ExceptionGroup and triggers sibling cleanup, while a catalog operation that crossed a boundary can still have an UNKNOWN remote result.
+    flowchart TB
     Owner["Atlas collection owner"] --> TG["TaskGroup\nowned local lifetime"]
     TG --> C["catalog child\nserver-model decision may exist"]
     TG --> E["exercises child\nnon-cancellation failure"]
@@ -369,12 +401,6 @@ flowchart TB
     C --> Unknown["remote result can remain UNKNOWN"]
     E --> Failure["owner observes local ExceptionGroup"]
 ```
-
-**Text equivalent.** The owner creates three child tasks. If `exercises`
-raises a non-cancellation error, the TaskGroup owns cancelling and waiting for
-siblings. If `catalog` had already crossed an adapter/server boundary, the
-TaskGroup cleanup does not prove that effect rolled back. The parent observes a
-local grouped failure after child handling.
 
 ### Cancellation vocabulary: do not collapse the verbs
 
@@ -444,6 +470,10 @@ retry:
 
 ---
 
+### Session 2 output — task lifetime boundary note
+
+One note states what structured lifetime guarantees at a scope exit, and what it explicitly does not roll back.
+
 ## 4. Session 3 — Bounded admission makes overload a policy decision
 
 ### Pressure
@@ -471,7 +501,7 @@ first, fair waiting, network throughput, or upstream capacity.
 ### Queue, semaphore, and task group protect different invariants
 
 | Mechanism | Useful question | Documented/local fact | Not a substitute for |
-|---|---|---|
+|---|---|---|---|
 | `TaskGroup` | who owns child lifetime/failure cleanup? | parent owns child tasks in its scope | capacity policy |
 | `Semaphore` | how many named sections may be in flight? | local admission bound | durable queueing or fairness |
 | positive-size `asyncio.Queue` | where does local `put()` wait when full? | bounded local queue capacity | remote broker durability |
@@ -487,19 +517,16 @@ The queue documentation also warns that immediate shutdown can break the usual
 ### A pressure diagram with stopping lines
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m21-local-pressure-boundary
+    %% atlas-diagram-title: Local admission and pressure boundaries
+    %% atlas-diagram-alt: Declared sources pass through an Atlas-owned admission bound into TaskGroup tasks and perhaps a local stream or write buffer. Upstream service capacity remains unobserved, while every admitted source still receives a terminal local accounting record.
+    flowchart LR
     D["declared sources"] --> A["Atlas admission bound\nlocal policy"]
     A --> T["owned TaskGroup tasks\nlocal lifetime"]
     T --> B["local stream/write buffer\nlocal flow control"]
     B --> U["upstream service\nunobserved capacity/queue"]
     T --> R["terminal local accounting record"]
 ```
-
-**Text equivalent.** The source list enters an Atlas-owned local admission
-policy. Admitted work belongs to a TaskGroup and may touch a local buffer. The
-upstream service is beyond the model's direct capacity evidence. Every
-admitted item must still receive a terminal **local** accounting record even
-when the remote result is unresolved.
 
 ### Code-reading lab A3 — the fake bound
 
@@ -546,6 +573,10 @@ what changes? **Only** a local admission slot is available under policy.
 Nothing about catalog's upstream work is settled by that release.
 
 ---
+
+### Session 3 output — admission policy record
+
+One record turns overload from an emergent behaviour into a declared bound with a stated consequence when it is reached.
 
 ## 5. Session 4 — Partial failure is an evidence problem before it is retry code
 
@@ -598,6 +629,39 @@ replies and procedure execution; Module 20's [HTTP method semantics](https://www
 remain a reminder that a protocol verb does not remove application-level
 identity and evidence design.
 
+### Rigor card — definitions, assumptions, derivation, counterexample, and numerical experiment
+
+**Definitions.** Let `o` be the client's local timeout observation,
+`H0` and `H1` be compatible remote histories, and `UNKNOWN_REMOTE` be the
+only classification when the available evidence does not distinguish those
+histories. The operation ID and canonical digest name one declared operation;
+they do not reveal its remote outcome.
+
+**Assumptions.** The evidence is local, the ID/digest remains stable, and no
+matching status or response has yet distinguished the histories. The teaching
+fixture is not a replica, a durable production ledger, or a general network
+model.
+
+**Derivation / proof idea.** If the local observation is the same in both
+histories while the remote outcomes differ, a classifier that sees only that
+observation cannot soundly declare either remote outcome:
+
+```text
+observe(H0) = observe(H1) = o
+remote_outcome(H0) != remote_outcome(H1)
+therefore local classifier(o) must not promote either outcome
+```
+
+**Counterexample.** A source can decide an operation and have its reply lost;
+the client then sees the same timeout it would see if no source admission ever
+occurred. Calling the timeout “not committed” is an unsupported promotion.
+
+**Finite numerical experiment.** With the same ID/digest and a declared
+two-second local timeout, `H0` (no remote decision) and `H1` (decision plus
+lost reply) both initially classify as `UNKNOWN_REMOTE`. A later matching
+status record is the discriminating evidence. This is a two-row model check,
+not an observation of a real distributed service.
+
 ### Code-reading lab A4 — new ID after timeout
 
 ```python
@@ -646,6 +710,10 @@ local record.
 
 ---
 
+### Session 4 output — partial-failure evidence matrix
+
+One matrix maps each observation to the failure histories it is compatible with, before any retry code is written.
+
 ## 6. Session 5 — Time is a local instrument; order is a declared relation
 
 ### Pressure
@@ -681,18 +749,14 @@ It refuses to infer an edge from a shared trace ID or a timestamp because
 neither occurs in its causal input. That refusal is the feature.
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m21-causal-edge-discipline
+    %% atlas-diagram-title: Declared causal edge versus incomparable event
+    %% atlas-diagram-alt: Catalog's declared send precedes the collector's receive in one causal relation. The independent progress event has no declared path to or from that receipt, so it is incomparable rather than probably earlier or later.
+    flowchart LR
     CS["catalog: send\nlocal sequence 1"] --> CR["collector: receive\nlocal sequence 1"]
     PL["progress: local event\nlocal sequence 1"]
     CR -. "no declared causal edge" .-> PL
 ```
-
-**Text equivalent.** A send-to-receive edge establishes that catalog's send
-precedes collector's receipt in the fixture's causal relation. The independent
-progress event has no path to or from that receipt, so the events are
-incomparable. A diagrammed dashed absence is not an unknown relation waiting
-to become “probably after”; it is a reason to avoid an unsupported order
-claim.
 
 ### Order-claim matrix
 
@@ -741,6 +805,10 @@ For each assertion you hear, write one of these verdicts:
 | “The whole snapshot is newest.” | not established | cross-source cut/freshness contract |
 
 ---
+
+### Session 5 output — ordering and clock assumption note
+
+One note separates a local timestamp from a declared ordering relation and names the assumption each conclusion rests on.
 
 ## 7. Session 6 — Consistency and availability are choices with assumptions
 
@@ -850,7 +918,36 @@ it is to state the actual tested policy and non-claims:
 | bounded local pressure | work can arrive faster than local processing | admission bound/queue policy | in-flight trace | local max in flight | upstream throughput guarantee |
 | debug one incident | observations need correlation | trace context + scope labels | redacted packet | correlation of named records | trust/completeness/causality |
 
+### Transfer task — trace is not trust
+
+**Current candidate-only supplement.** Change one premise in the matrix: the
+trace field now arrives from an untrusted external service. Before inspecting
+any answer, predict which local correlation claim remains and which claim must
+move to the Module 22 trust boundary. Record confidence `1–4` and one
+observation that would be needed before a stronger claim. This is a conceptual
+handoff, not a navigation, review, release, or mastery change.
+
+<details>
+<summary>Reveal after the prediction and confidence record</summary>
+
+The named trace may still correlate the local records that Atlas chose to
+record. It does not authenticate a source, make the trace complete, or prove a
+causal remote history. The transfer is to state the trust question and retain
+the local non-claim rather than silently strengthening it.
+
+At the external boundary, do not silently forward the received context. Module
+22 requires the owner to choose a trace disposition—drop it, restart a local
+context, or continue only under a format, size, privacy, and trust policy—then
+use a generated/redacted local reference for evidence. Authentication and
+authorization remain separate questions.
+
+</details>
+
 ---
+
+### Session 6 output — consistency choice dossier
+
+One dossier states the consistency and availability choice, its assumptions, and the observation that would falsify it.
 
 ## 8. The Atlas Run Control Room — visual studio text equivalent
 
@@ -1038,6 +1135,20 @@ distributed or security guarantees.
 
 </details>
 
+### Diagnostic misconception-repair map
+
+**Current candidate-only supplement.** Use the pattern of a response and its
+confidence to choose a repair, not to assign a verdict. It does not change the
+historical audit, review, release, or mastery state.
+
+| Misconception label | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| `await-is-remote-effect` | draw the local owner, await point, and unresolved remote fact | replace the awaited call with a timeout |
+| `cancellation-is-rollback` | name cleanup, local terminal record, and the remote non-claim | let the remote outcome remain unknown |
+| `bound-is-end-to-end-capacity` | locate every task, queue, stream, and downstream allocation boundary | add one unbounded adapter buffer |
+| `trace-is-causality-or-trust` | distinguish correlation, causal edge, and authenticated source | vary the clock or an incoming trace field |
+| `one-replica-is-global-agreement` | write the contract and fault assumptions before the claim | remove one replica observation or add a partition |
+
 ---
 
 ## 11. Cumulative project — Atlas async collector evidence dossier
@@ -1121,6 +1232,43 @@ boundary you are about to cross.
 | Pressure clinic | generated code with a “limit” | locate allocation/task/queue/adaptor boundaries | declared admission/overload policy |
 | Distributed-claim clinic | one release sentence or diagram | find earliest unsupported causal/replica/availability claim | narrower defensible statement |
 
+### Supportive oral-defense protocol
+
+**Current candidate-only supplement.** This is a module-specific constructive
+oral-defense route for Session 6 evidence. It is not evidence of review,
+release, or learner mastery.
+
+### Invitation and starting evidence
+
+Invite the learner to choose one task tree, timeout/reconciliation packet,
+causal board, or replica claim. Ask for the exact claim, assumptions, evidence
+scope, and confidence before any correction.
+
+### Hint ladder
+
+Use the smallest move that preserves agency: retrieve one definition; point to
+one owner or event; show one missing assumption; give one compatible history;
+or work a different micro-case. Return the learner to the chosen artifact after
+each move.
+
+### Counterexample repair
+
+Use a local timeout with two compatible remote histories, a detached task, or
+one-replica observation to narrow an overclaim. The learner repairs the first
+unsupported phrase and states what remains unknown.
+
+### Transfer question
+
+Change exactly one premise: make the trace untrusted (M22), increase a local
+runtime/performance claim (M24), or vary the asynchronous boundary. Ask which
+claim survives, which evidence is missing, and where the question belongs.
+
+### Reflection and learner-controlled evidence summary
+
+End with the chosen claim, confidence, repair, counterexample, transfer,
+remaining uncertainty, and next observation. The learner controls this compact
+summary; it is not a score or a mastery result.
+
 ### Study partner routine (20–30 minutes)
 
 1. **Two-minute teach-back.** Partner A explains one invariant clause without
@@ -1194,3 +1342,65 @@ correlation ≠ causality or trust
 one observation ≠ distributed agreement
 an allowed cut ≠ an unstated global consistency property
 ```
+
+
+## Bench pack
+
+**Bench pack:** `m21` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 21 was initially excluded wholesale as a
+distributed-systems module, and that verdict judged the subject matter rather than
+the sessions. Two of them are not about a remote peer at all — they are about
+`asyncio` semantics, which are entirely observable in this process, with no socket,
+no clock, and no second machine. Those two are benched. The four that genuinely need
+a peer are not.
+
+### Bench 2 — task lifetime boundary note
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** the reference model's `run_taskgroup_failure_probe` on the **real
+event loop**, then this bench's own `TaskGroup` in which the sibling records a
+decision *before* the failing child raises. Every guarantee is delivered — the
+sibling is cancelled, observes its own `CancelledError`, and the owner gets an
+`ExceptionGroup` — and the recorded decision is still there afterwards.
+Cancellation unwound the task, not the effect, because `CancelledError` arrives at
+the next await and everything before it already happened. A control shows an
+unstructured `create_task` outliving its failed owner while a `TaskGroup` child
+does not, so the lifetime guarantee is real and is not a transaction.
+**Cannot establish:** anything about a remote peer. No I/O of any kind, so nothing
+about whether a service saw a partial result — which is Module 20's subject.
+
+### Bench 3 — admission policy record
+
+**Session:** 3. **Rungs:** trace, review and verify.
+**Executes:** a declared single-clock queueing model — 30 arrivals at one per tick,
+a consumer taking three — under two admission policies. The unbounded queue rejects
+**nothing**: zero errors, 100% availability, and a last request that waits 61 ticks
+against the first request's 3, monotonically non-decreasing throughout. Bounding at
+4 rejects 16 arrivals and holds every admitted request under the 15-tick bound the
+capacity implies, plateauing at 13–14 ticks once the queue fills: the queue length
+*is* the latency budget. The bench also measures what that costs — 14 requests
+completed against 30 — because bounding admission is a trade with a loser, and
+naming who absorbs it is the review question.
+**Cannot establish:** anything about a real server. No variable service time, no
+bursty arrivals, and no client retries — and retries are the feedback loop that
+turns a slow system into a collapsed one.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — partial failure across a real network: a peer that may or may
+  not have received the request. An in-process kernel would have to *script* the
+  ambiguity that is supposed to be the evidence, which makes the bench a
+  restatement of its own answer.
+- **Session 5** — replica claims and collection cuts, which need ordering and
+  clocks this process does not own.
+- **Session 6** — a dossier consuming the earlier sessions rather than producing new
+  evidence.
+
+### Bench pack completion record
+
+Records under `benches/records/m21-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

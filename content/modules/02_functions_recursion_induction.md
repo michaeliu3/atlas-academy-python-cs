@@ -13,6 +13,9 @@ Module 1 established that a call creates a new execution frame, parameter names 
 > How can a finite function definition describe a computation whose input may have an unknown depth, and how can we know that the computation terminates, returns the right result, and uses acceptable resources?
 
 ```mermaid
+%% atlas-diagram-id: m02-course-role-map
+%% atlas-diagram-title: Module 2 connects recursion to later Atlas work
+%% atlas-diagram-alt: Module 1 leads to Module 2. Module 2 then supports Modules 3, 4, 5, 6, 10, 11, and 23, connecting functions and recursion to contracts, proof, cost, recursive data, traversal, algorithm design, and interpreters.
 flowchart LR
     M1["Module 1<br/>Values, state, execution"] --> M2["Module 2<br/>Functions, recursion, induction"]
     M2 --> M3["Module 3<br/>Contracts and ADTs"]
@@ -123,7 +126,7 @@ If items 1–3 are unclear, return to Module 1's binding diagrams before continu
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end of this module, Michael can:
 
@@ -189,6 +192,52 @@ The computation should follow that shape:
 
 That is the need from which recursion is derived. Recursion is not “a function doing something magical to itself.” It is a finite rule that delegates structurally smaller instances to new calls.
 
+### First-principles derivation — finite rules for unknown depth
+
+Start with the finite grammar: a `Note` is one root contribution plus a
+finite sequence of smaller `Note` values. A function can therefore use one
+base rule for an empty child sequence and one combining rule that reuses the
+same contract only on those structurally smaller children; no fixed nesting
+depth needs to be guessed in advance.
+
+### Definition — recursive contract and supported domain
+
+A recursive contract names a supported input domain, a base case, the result
+for that case, the strictly smaller inputs delegated to recursive calls, and
+the rule that combines their results. For `total_minutes`, the supported
+domain is a finite `Note` tree rather than every object that happens to have a
+`children` attribute.
+
+### Assumption — finite-tree input and ownership boundary
+
+The tree argument assumes each child occurrence denotes a smaller finite
+subtree and that the traversal only reads the tree. A cycle or an ownership
+boundary that lets a call mutate a shared input is not silently covered by
+that argument; it must be rejected by the contract or reasoned about under a
+different graph-and-effects model.
+
+### Derivation and proof idea — recursive decomposition
+
+The data definition gives the computation shape: solve the root contribution
+directly, ask the same contract of each smaller child, then combine one result
+per child. The correctness argument follows the same decomposition: establish
+the leaf case, assume the contract for child trees, and show the combination
+rule establishes it for the parent.
+
+### Counterexample — a base case without progress
+
+`countdown(3)` that stops only at zero but calls `countdown(number - 2)` has a
+base case and still fails to reach it. A base case is a branch; a termination
+argument also needs a measure that stays in its stated domain and strictly
+decreases on every recursive call.
+
+### Numerical experiment — call count versus active stack depth
+
+For a finite tree, record two quantities rather than treating “recursive” as
+a cost claim: total calls (one per visited node for this traversal) and the
+maximum simultaneous call depth (the tree height). Compare a balanced tree
+and a chain with the same node count before reading the cost conclusion.
+
 ### 4.2 A function is an executable boundary
 
 Plain language:
@@ -200,6 +249,9 @@ More precisely:
 > A Python function definition creates a function object and binds a name to it. Calling that object evaluates arguments, creates an execution frame, binds parameters, executes the body, and either returns an object or raises an exception.
 
 ```mermaid
+%% atlas-diagram-id: m02-function-call-lifecycle
+%% atlas-diagram-title: A function call creates and resolves an execution frame
+%% atlas-diagram-alt: A caller evaluates argument expressions and calls a function object. A new call frame binds parameters and executes the body, then either returns an object reference to the caller or propagates an exception.
 sequenceDiagram
     participant C as Caller frame
     participant F as Function object
@@ -228,7 +280,7 @@ result = normalizer("  Recursion  ")     # calls the object and returns "recursi
 
 `normalizer` and `canonical_title` reach the same function object. Functions are values in Python: they can be stored, passed, and returned. Later modules will use that fact for policies, callbacks, decorators, and dependency injection.
 
-#### Prediction checkpoint
+### Prediction before reveal — identify the recursive boundary
 
 ```python
 def twice(operation, value):
@@ -352,6 +404,9 @@ execution = Note("Python execution", 5, (names, mutation))
 **Prediction:** What value is returned? What is the greatest number of active `total_minutes` frames at once?
 
 ```mermaid
+%% atlas-diagram-id: m02-recursive-note-tree
+%% atlas-diagram-title: A note tree for a recursive total-minutes trace
+%% atlas-diagram-alt: The root Python execution node has a names leaf and a mutation node. Mutation has aliasing and immutable-boundaries leaves; the values 5, 12, 8, 10, and 7 form the tree that the recursive traversal totals.
 flowchart TD
     E["Python execution<br/>5"] --> N["Names and bindings<br/>12"]
     E --> M["Mutation<br/>8"]
@@ -374,6 +429,9 @@ Selected execution states:
 | 9 | caller only | root returns `42` |
 
 ```mermaid
+%% atlas-diagram-id: m02-total-minutes-call-trace
+%% atlas-diagram-title: Recursive calls and returns for the total-minutes tree
+%% atlas-diagram-alt: The caller invokes total on execution. Execution gets 12 from names, then mutation gets 10 from aliasing and 7 from boundaries before returning 25; execution returns the final total 42 to the caller.
 sequenceDiagram
     participant C as Caller
     participant E as total(execution)
@@ -508,6 +566,9 @@ For `total_minutes`, choose:
 Every child subtree has at least one fewer node than the whole tree, so every recursive call decreases \(\mu\). A leaf makes no recursive calls. Therefore the traversal terminates for every finite tree.
 
 ```mermaid
+%% atlas-diagram-id: m02-termination-measure
+%% atlas-diagram-title: A decreasing node-count measure proves tree traversal terminates
+%% atlas-diagram-alt: For a supported finite tree, the node-count measure decreases on every child call. A leaf makes no recursive call, so there can be no infinite descent and the traversal terminates.
 flowchart LR
     I["Supported input<br/>finite tree"] --> M["Measure μ(t)<br/>node count"]
     M --> D["Every child has<br/>smaller μ"]
@@ -520,6 +581,9 @@ flowchart LR
 Python objects can form a graph even when their fields are named `children`. If an input contains a cycle, “child subtree has fewer nodes” is false because there is no finite subtree unfolding:
 
 ```mermaid
+%% atlas-diagram-id: m02-cycle-counterexample
+%% atlas-diagram-title: A two-note cycle breaks the finite-tree termination argument
+%% atlas-diagram-alt: Note A points to Note B and Note B points back to Note A. This cycle is not a finite subtree, so a child does not necessarily have a smaller node-count measure and the tree proof does not apply.
 flowchart LR
     A["Note A"] --> B["Note B"]
     B --> A
@@ -539,6 +603,9 @@ The algorithm follows the contract. Adding a `visited` set without deciding the 
 Recursion is an execution technique. Induction is a reasoning technique. They often align because both decompose a structure into smaller instances.
 
 ```mermaid
+%% atlas-diagram-id: m02-recursion-induction-alignment
+%% atlas-diagram-title: Recursive data, computation, and structural induction share a decomposition
+%% atlas-diagram-alt: A recursive data definition supports both a recursive computation and a structural induction proof. Base calls align with leaf cases, while combining child results aligns with assuming the property for children and proving it for the parent.
 flowchart TB
     D["Recursive data definition"] --> C["Recursive computation"]
     D --> P["Structural induction proof"]
@@ -668,6 +735,9 @@ That distinction will matter later:
 This module adds one computation boundary, not an entire framework.
 
 ```mermaid
+%% atlas-diagram-id: m02-atlas-recursive-architecture
+%% atlas-diagram-title: A narrow Atlas boundary for recursive traversal
+%% atlas-diagram-alt: A caller uses pure recursive operations in atlas/traversal.py, which reads immutable Note values from atlas/model.py. Traversal tests provide contract evidence, returned values flow back to the caller, and file, database, and network work remain deliberately unconnected future concerns.
 flowchart LR
     C["Caller<br/>CLI or report"] --> R["atlas/traversal.py<br/>pure recursive operations"]
     R --> M["atlas/model.py<br/>immutable Note values"]
@@ -679,6 +749,15 @@ flowchart LR
 ```
 
 The dashed future component is deliberately not connected. Persistence and networking arrive later. Adding them now would mix recursive reasoning with unrelated failure modes.
+
+### Text alternative — recursive study-tree architecture
+
+Read the architecture as one narrow route: a caller asks
+`atlas/traversal.py` for a value; traversal reads immutable `Note` values from
+`atlas/model.py`; traversal tests supply contract evidence; the returned value
+goes back to the caller. Files, databases, and networks are deliberately
+outside this module's boundary, so none of their failure or persistence claims
+belong to the recursion argument.
 
 ### Component responsibilities
 
@@ -1046,7 +1125,7 @@ Then inspect the diff, run focused tests, and explain the implementation without
 
 Each session alternates explanation with learner action. There is no long lecture followed by disconnected exercises.
 
-### Session 1 — Functions as contracts, not syntax
+## Session 1 — Functions as contracts, not syntax
 
 **Recall:** binding versus mutation; anatomy of a call frame.  
 **Model:** function object → call → frame → returned object/exception.  
@@ -1055,7 +1134,12 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** separate `summary_line` from `write_summary`.  
 **Exit ticket:** explain why a Python function may not behave like a mathematical function and how a contract repairs the gap.
 
-### Session 2 — Recursion follows the input
+### Output: contract-and-frame trace
+
+Carry one short function contract, one caller-to-frame-to-result trace, and
+one stated effect boundary into Session 2.
+
+## Session 2 — Recursion follows the input
 
 **Recall:** each call receives its own frame-local bindings.  
 **Model:** base case, smaller call, progress measure, combination.  
@@ -1064,7 +1148,12 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** draw the note tree and its call tree side by side.  
 **Exit ticket:** identify all four recursive obligations for a new `count_notes` function.
 
-### Session 3 — Termination and induction
+### Output: recursive-decomposition card
+
+Carry a base case, recursive-call input, decreasing measure, and combination
+rule for one note-tree operation into Session 3.
+
+## Session 3 — Termination and induction
 
 **Recall:** why a base case alone does not prove termination.  
 **Model:** decreasing measure; structural induction.  
@@ -1073,7 +1162,46 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** write the claim and proof skeleton for `find_path`.  
 **Exit ticket:** distinguish the recursive call from the induction hypothesis.
 
-### Session 4 — Call shape and resource cost
+### Output: termination-and-induction proof note
+
+Carry one quantified claim, its supported input domain, a decreasing measure,
+and the exact place where the induction hypothesis may be used.
+
+#### Transfer checkpoint — a decreasing measure need not be one tree size
+
+Before reading the repair, choose a domain and record a **low / medium / high**
+confidence answer for this recursive scan:
+
+```python
+def scan(row: int, column: int, width: int) -> None:
+    if row == 0 and column == 0:
+        return
+    if column > 0:
+        scan(row, column - 1, width)
+    else:
+        scan(row - 1, width, width)
+```
+
+Assume `row >= 0`, `0 <= column <= width`, and `width` is fixed and
+nonnegative. State (1) a well-founded measure, (2) which branch must be
+rejected outside that domain, and (3) one sentence of the induction or
+well-foundedness argument.
+
+<details>
+<summary>Reveal after committing to a measure and confidence.</summary>
+
+Use the lexicographic pair `(row, column)`: a pair is smaller when its first
+component is smaller, or when its first components agree and its second
+component is smaller. The `column > 0` branch reduces the second component.
+The `else` branch changes `(row, 0)` to `(row - 1, width)`, which is smaller
+because the first component falls. The negative-row branch is excluded by the
+input domain; if it were reachable, the argument would no longer establish
+termination. This is the same obligation as a tree-node measure, generalized
+to a different well-founded order.
+
+</details>
+
+## Session 4 — Call shape and resource cost
 
 **Recall:** active frames versus total calls.  
 **Model:** recurrence, node count \(n\), height \(h\), repeated subproblems.  
@@ -1082,7 +1210,12 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** state time, stack, and output-space costs separately.  
 **Exit ticket:** explain why two linear-time traversals can have different stack risks.
 
-### Session 5 — Code-reading and debugging studio
+### Output: recurrence-and-stack-cost claim
+
+Carry a cost statement that separates visited-node work, maximum active stack,
+output space, and the input-shape assumption that makes the statement true.
+
+## Session 5 — Code-reading and debugging studio
 
 **Recall:** default argument creation and aliasing from Module 1.  
 **Model:** purpose → map → flow → mechanism → evaluation.  
@@ -1091,7 +1224,13 @@ Each session alternates explanation with learner action. There is no long lectur
 **Atlas action:** reconstruct the four-component architecture.  
 **Exit ticket:** name one symptom, one cause, and one contract-level repair.
 
-### Session 6 — Design, delegate, review, defend
+### Output: recursive-failure-investigation memo
+
+Carry the smallest two-call reproduction, a falsifiable cause, one ownership
+or domain repair, and a regression test that would distinguish repair from
+plausible-looking code.
+
+## Session 6 — Design, delegate, review, defend
 
 **Recall:** the difference between requested behavior and implementation idea.  
 **Model:** frame → explore → delegate → review → challenge → verify → explain.  
@@ -1099,6 +1238,12 @@ Each session alternates explanation with learner action. There is no long lectur
 **You drive:** issue a bounded revision request and choose missing tests.  
 **Atlas action:** finish the checkpoint evidence pack.  
 **Exit ticket:** identify one claim still unproven by the tests and propose evidence.
+
+### Output: design-review-and-oral-defense dossier
+
+Carry the bounded task, one reviewed claim, one missing-evidence question,
+and a short explanation of the recursive contract into the constructive TA
+conversation and M3 handoff.
 
 ---
 
@@ -1535,7 +1680,8 @@ End every help session with:
 
 ## 16. Mastery evidence and Atlas checkpoint
 
-Familiar vocabulary is not mastery. The module is complete when the following evidence agrees.
+Familiar vocabulary is not enough. Use the following evidence to choose the
+next bridge or repair, not to decide whether Michael passes.
 
 ### Evidence pack
 
@@ -1565,9 +1711,18 @@ Deliver:
 - focused test evidence;
 - a short design note separating correctness, termination, time, stack, and input-domain limits.
 
-### Mastery gate
+### Project acceptance criteria — Atlas traversal dossier
 
-Advance when Michael can, without relying on memorized templates:
+The dossier is ready for a constructive next-step conversation when it makes
+the supported tree domain explicit; links every recursive call to a decreasing
+measure and combination rule; separates correctness, termination, and cost
+claims; includes one minimal regression for a broken assumption; and names
+one claim still requiring a different kind of evidence. This is not a
+pass/fail score or a claim of mastery.
+
+### Evidence route
+
+Use the following rigorous criteria without relying on memorized templates:
 
 1. derive recursion from a new recursive structure;
 2. identify a valid decreasing measure;
@@ -1577,13 +1732,17 @@ Advance when Michael can, without relying on memorized templates:
 6. catch a hidden state or domain-contract defect in an agent patch;
 7. defend why the final evidence covers the stated contract.
 
-If one area is weak, assign the corresponding TA counterexample and retrieve it later. Do not repeat unrelated material.
+If one area is weak, assign the corresponding TA counterexample and retrieve
+it later. Do not repeat unrelated material.
 
 ---
 
 ## 17. Consolidation: one connected model
 
 ```mermaid
+%% atlas-diagram-id: m02-recursion-consolidation
+%% atlas-diagram-title: One connected model for recursive design, proof, cost, and debugging
+%% atlas-diagram-alt: A self-similar problem leads to a function contract and recursive definition. The definition creates execution, termination, correctness, and cost obligations; debugging traces execution, and all of those checks converge on an owned Atlas traversal that can be reviewed and defended.
 flowchart TD
     P["Problem has repeated<br/>self-similar structure"] --> F["Function contract<br/>names supported behavior"]
     F --> R["Recursive definition<br/>smaller instances + combine"]
@@ -1645,7 +1804,17 @@ Complete these in your own words:
 
 ---
 
-## 19. Source synthesis and further study
+## 19. Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–6: recursive contracts, call-frame traces, a decreasing measure, an induction argument, a recurrence, debugging evidence, and a defended synthesis | [MIT 6.042J syllabus](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) names induction, well-founded ordering, correctness, and termination reasoning as outcomes. | **Aligned, adapted.** Atlas makes execution → recursion → proof → cost explicit; university-scale repeated recursion practice remains an intentional extension. |
+
+**Access and reuse.** Checked 2026-08-01. Link to the original course;
+Atlas's trace, proof, code-review, and diagnostic materials are original and
+must not reproduce institutional exercises, solutions, figures, or prose.
+
+## 20. Source synthesis and further study
 
 The workbook's narrative is original and organized around Atlas. These sources provide independent explanations, formal grounding, language guarantees, and problem traditions.
 
@@ -1669,10 +1838,145 @@ Use one source for each purpose, not all sources at once:
 4. Read the relevant MIT 6.042J sections while writing the proof.
 5. Save the deeper MIT 6.006 recurrence exercises for Module 5.
 
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | function contract and frame trace | [Python execution model](https://docs.python.org/3.14/reference/executionmodel.html) for blocks and frames |
+| 2 | recursive input decomposition and call tree | [Composing Programs §1.7](https://www.composingprograms.com/pages/17-recursive-functions.html) for a complementary explanation |
+| 3 | termination domain, measure, and induction skeleton | [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) for induction and well-founded reasoning |
+| 4 | recurrence, work, stack, and output-space claim | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) as a preview of later cost analysis |
+| 5 | minimal recursive bug reproduction and regression | [Berkeley CS61A recursion discussion](https://cs61a.org/disc/disc03/) only as optional explain-first practice |
+| 6 | reviewed design dossier and oral defense | the Atlas evidence pack; sources verify terminology, not the learner's reasoning |
+
 University worksheets are inspiration and optional practice, not material to copy blindly. Their institutional prerequisites, grading infrastructure, and assignment scale differ from this coached course.
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Do not advance because Michael can recognize a base case or recite “\(\Theta(n)\).” Advance when he can read an unfamiliar recursive function, reconstruct its frames and architecture, state its domain, prove progress and correctness, derive cost from the call structure, expose a hidden assumption with a test, and review an agent's patch as the responsible system owner.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M3 handoff.
+That explanation should cover an unfamiliar recursive function's domain,
+frames, decreasing measure, correctness argument, call-cost model, hidden
+assumption, and patch review. Otherwise, rebuild the smallest frame trace and
+decreasing-measure argument with the Teaching Assistant's recursive-design
+hint ladder, then retry an isomorphic example.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+## Guided Codex handoff — M2
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M2. Here is my recursive contract, my predicted
+call trace, and my confidence.”** Ask first for the domain and the measure that
+must decrease; only then inspect the base case and recursive call. If the
+argument stalls, climb this hint ladder: one concrete input → frame tree →
+decreasing measure → induction hypothesis → cost recurrence. Change one
+premise (an empty input, an invalid domain value, or a non-decreasing call) and
+ask the learner to repair the contract and test. End by asking what the trace
+does *not* prove about memory, performance, or a different input domain.
+
+### Invitation — choose one trace to defend
+
+Invite the learner to choose one recursive claim, show the smallest supporting
+trace, state a confidence level, and name the input-domain assumption before
+the Teaching Assistant offers correction.
+
+### Hint ladder — repair one recursive obligation
+
+Use the smallest needed prompt in order: concrete input, frame tree,
+decreasing measure, induction hypothesis, combination rule, then cost
+recurrence. Do not turn the conversation into a pass/fail interrogation.
+
+### Changed-premise counterexample
+
+Change exactly one premise—allow a cycle, make a recursive input non-smaller,
+or reuse a caller-owned accumulator—and ask which proof or contract step no
+longer holds and what evidence would repair the boundary.
+
+### Transfer — from note tree to expression evaluator
+
+Ask the learner to transfer the same base-case, recursive-decomposition,
+termination, and returned-value reasoning to a small expression tree without
+claiming that the two domains have identical effects or costs.
+
+### Reflection — name the next smallest repair
+
+Ask what the current trace establishes, what it does not establish, and which
+single counterexample, regression, or source check would most reduce the
+remaining uncertainty.
+
+### Learner-controlled evidence summary
+
+Keep only a learner-selected short summary: chosen claim, displayed artifact,
+confidence, revised model, unresolved question, and next retrieval prompt. No
+voice transcript, Notion write, score, or mastery claim follows from this
+workbook alone.
+
+### Study Partner — recursion rehearsal
+
+Ask the learner to predict the next two frames of one unfamiliar function,
+then hide the code and reconstruct its base case, recursive promise, and one
+termination measure. Offer one tempting false claim—“the recursive call is
+smaller, so it must terminate”—and ask for the missing assumption. Hand off
+the smallest fragile proof step to the TA if it remains unclear.
+
+### Forward handoff — M3
+
+Carry one explicit function contract, one frame trace, and one proof/cost
+assumption into **M3**. The next module asks the same question at a larger
+boundary: what may a client rely on when an implementation is hidden behind an
+abstraction?
+
+## Bench pack
+
+**Bench pack:** `m02` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 3 — termination-and-induction proof note
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** a recursion whose measure is recorded at every call. From an even
+start it terminates; from an odd start the measure still strictly decreases —
+5, 3, 1, −1, −3 — while stepping over an equality base case and running off the
+bottom. The decrease half of the argument holds throughout; only the lower bound
+fails.
+**Cannot establish:** that this measure is the only valid one, or that every
+non-terminating recursion fails the same half.
+
+### Bench 4 — recurrence-and-stack-cost claim
+
+**Session:** 4. **Rungs:** trace, map.
+**Executes:** naive, memoized, and iterative Fibonacci under a frame counter.
+Memoization takes total calls from 57,313 to 43 and leaves peak depth at 22
+unchanged; only the iterative form reaches depth 1. The memoized version still
+raises `RecursionError` under the default limit.
+**Cannot establish:** that memoization leaves depth unchanged for every
+recurrence — a divide-and-conquer shape is logarithmic either way.
+
+### Bench 5 — recursive-failure-investigation memo
+
+**Session:** 5. **Rungs:** debug and defend, trace.
+**Executes:** a recursive accumulator with a mutable default parameter. The first
+call is correct; lengths captured at each call read 4, 8, 12 while lengths read
+afterwards read 12, 12, 12 — because there was only ever one list.
+**Cannot establish:** anything about class attributes, closures, or module-level
+state, which share state for different reasons.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 2** — the workbook works the decomposition through in print; a bench
+  would re-run it.
+- **Session 6** — a design-and-defence dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m02-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

@@ -1,12 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import {
   useEffect,
   useRef,
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule26Progress,
+  persistModule26Progress,
+  restoreModule26Progress,
+} from "@/lib/module26-progress-codec";
 import styles from "./CapstoneDefenseStudio.module.css";
 
 type StudioView =
@@ -23,11 +28,11 @@ type ViewRecord = {
   revealed: boolean;
 };
 type StudioRecord = Record<StudioView, ViewRecord>;
+type ProgressPersistence = "loading" | "ready" | "saved" | "unavailable";
 type PatchDecision = "accept" | "revise" | "reject" | null;
 type FailureMode = "normal" | "retry" | "authority";
 type Challenge = "rollback" | "dependency" | "invariant";
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module26-capstone-defense.v1";
 const CORE_RULE =
   "A capstone release is a versioned evidence bundle, not a polished demo. Each consequential claim needs a named owner, representation or contract, appropriate test or observation, cost and failure boundary, security/privacy implication, human-impact evaluation, and explicit limitation. Agent-generated work remains an untrusted proposal until independently reviewed and verified.";
 
@@ -81,15 +86,6 @@ const views: ReadonlyArray<{
     artifact: "defense packet",
   },
 ];
-
-const choiceIdsByView: Record<StudioView, ReadonlyArray<string>> = {
-  brief: ["bounded", "demo", "metric"],
-  threads: ["trace", "diagram", "folders"],
-  ledger: ["scoped", "quality", "security"],
-  failure: ["idempotent", "timeout", "lock"],
-  patch: ["review", "merge", "ban"],
-  board: ["defer", "release", "confidence"],
-};
 
 const choices: Record<StudioView, ReadonlyArray<{ id: string; label: string }>> = {
   brief: [
@@ -345,31 +341,6 @@ function emptyRecord(): StudioRecord {
     patch: { choice: null, confidence: null, revealed: false },
     board: { choice: null, confidence: null, revealed: false },
   };
-}
-
-function isConfidence(value: unknown): value is Confidence {
-  return value === 1 || value === 2 || value === 3 || value === 4;
-}
-
-function isViewRecord(value: unknown, choiceIds: ReadonlyArray<string>): value is ViewRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  const record = value as Record<string, unknown>;
-  return (
-    (record.choice === null || (typeof record.choice === "string" && choiceIds.includes(record.choice))) &&
-    (record.confidence === null || isConfidence(record.confidence)) &&
-    typeof record.revealed === "boolean" &&
-    (!record.revealed || (record.choice !== null && record.confidence !== null))
-  );
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  const record = value as Record<string, unknown>;
-  return views.every((view) => isViewRecord(record[view.id], choiceIdsByView[view.id]));
 }
 
 function EvidenceLock({ artifact }: { artifact: string }) {
@@ -666,7 +637,11 @@ function PatchBayEvidence({
           <p>The smallest visible diff can introduce a data recipient, mutable supply-chain reference, new authority, or loss of recovery.</p>
         </div>
       </div>
-      <pre className={styles.patchCode} aria-label="Small proposed patch">
+      <pre
+        aria-label="Scrollable small proposed patch"
+        className={styles.patchCode}
+        tabIndex={0}
+      >
         <code><span className={styles.patchContext}>def render_release_note(packet):</span>{"\n"}<span className={styles.patchRemove}>-    return local_template(packet)</span>{"\n"}<span className={styles.patchAdd}>+    return hosted_agent.summarize(packet)</span>{"\n\n"}<span className={styles.patchContext}>workflow:</span>{"\n"}<span className={styles.patchRemove}>-  uses: actions/checkout@&lt;pinned-revision&gt;</span>{"\n"}<span className={styles.patchAdd}>+  uses: some-action/checkout-helper@main</span></code>
       </pre>
       <div className={styles.patchQuestions}>
@@ -741,24 +716,32 @@ export function CapstoneDefenseStudio() {
   const [activeView, setActiveView] = useState<StudioView>("brief");
   const [record, setRecord] = useState<StudioRecord>(emptyRecord);
   const [storageReady, setStorageReady] = useState(false);
+  const [persistence, setPersistence] = useState<ProgressPersistence>("loading");
   const [selectedThread, setSelectedThread] = useState<"record" | "proposal">("record");
   const [failureMode, setFailureMode] = useState<FailureMode>("retry");
   const [patchDecision, setPatchDecision] = useState<PatchDecision>(null);
   const [challenge, setChallenge] = useState<Challenge>("rollback");
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressDirtyRef = useRef(false);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (stored) {
-          const parsed: unknown = JSON.parse(stored);
-          if (isStudioRecord(parsed)) {
-            setRecord(parsed);
+        const storage = getBrowserProgressStorage();
+        if (!storage) {
+          setPersistence("unavailable");
+        } else {
+          const stored = restoreModule26Progress(storage);
+          if (stored) {
+            setRecord(stored as StudioRecord);
+            setPersistence("saved");
+          } else {
+            setPersistence("ready");
           }
         }
       } catch {
         // Local learning progress is optional; an unavailable/corrupt store never blocks the studio.
+        setPersistence("unavailable");
       } finally {
         setStorageReady(true);
       }
@@ -767,13 +750,20 @@ export function CapstoneDefenseStudio() {
   }, []);
 
   useEffect(() => {
-    if (!storageReady) {
+    if (!storageReady || !progressDirtyRef.current) {
       return;
     }
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      const storage = getBrowserProgressStorage();
+      const nextPersistence =
+        storage && persistModule26Progress(storage, record)
+          ? "saved"
+          : "unavailable";
+      window.queueMicrotask(() => setPersistence(nextPersistence));
     } catch {
       // Deliberately no remote fallback: this studio never sends learning data elsewhere.
+    } finally {
+      progressDirtyRef.current = false;
     }
   }, [record, storageReady]);
 
@@ -782,10 +772,24 @@ export function CapstoneDefenseStudio() {
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
 
   function updateRecord(view: StudioView, update: Partial<ViewRecord>) {
+    progressDirtyRef.current = true;
     setRecord((currentRecordValue) => ({
       ...currentRecordValue,
       [view]: { ...currentRecordValue[view], ...update },
     }));
+  }
+
+  function resetProgress() {
+    progressDirtyRef.current = false;
+    try {
+      const storage = getBrowserProgressStorage();
+      setPersistence(
+        storage && clearModule26Progress(storage) ? "ready" : "unavailable",
+      );
+    } catch {
+      // Local persistence is optional; reset the in-memory study state either way.
+    }
+    setRecord(emptyRecord());
   }
 
   function handleTabKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>, index: number) {
@@ -835,7 +839,7 @@ export function CapstoneDefenseStudio() {
   return (
     <section className={styles.studio} aria-labelledby="capstone-defense-studio-title">
       <header className={styles.hero}>
-        <div className={styles.heroEyebrow}><span>Module 26</span><span aria-hidden="true">/</span><span>Days 41–45</span><span aria-hidden="true">/</span><span>Capstone evidence studio</span></div>
+        <div className={styles.heroEyebrow}><span>Module 26</span><span aria-hidden="true">/</span><span>Days 56–60</span><span aria-hidden="true">/</span><span>Capstone evidence studio</span></div>
         <h2 id="capstone-defense-studio-title">Make the release argument.</h2>
         <p>Read one bounded capability like a maintainer: define what it may promise, trace how it works, challenge its evidence, and decide whether to release, revise, defer, or roll back.</p>
       </header>
@@ -852,9 +856,18 @@ export function CapstoneDefenseStudio() {
         <p>{CORE_RULE}</p>
       </div>
 
-      <div className={styles.progressNote} role="status">
-        <span>{storageReady ? "Your answers and confidence are saved only in this browser." : "Preparing optional local-only progress…"}</span>
+      <div className={styles.progressNote}>
+        <span role="status">
+          {persistence === "loading"
+            ? "Preparing optional local-only progress…"
+            : persistence === "saved"
+              ? "Your answers and confidence are saved only in this browser."
+              : persistence === "ready"
+                ? "Local-only progress is available in this browser."
+                : "Browser storage is unavailable; this visit stays in memory."}
+        </span>
         <span><b>0</b> live learner records · <b>0</b> external calls · no release, merge, plan, or schedule can change here.</span>
+        <button className={styles.resetProgress} onClick={resetProgress} type="button">Reset local progress</button>
       </div>
 
       <div className={styles.tabList} role="tablist" aria-label="Capstone studio views">
@@ -921,11 +934,7 @@ export function CapstoneDefenseStudio() {
       <footer className={styles.footer}>
         <div>
           <span className={styles.eyebrow}>Audit layer</span>
-          <p>Use the workbook for the six-session release dossier, architecture defense, TA protocol, and source route.</p>
-        </div>
-        <div className={styles.downloads}>
-          <Link href="/downloads/module26_reference.py">Download model</Link>
-          <Link href="/downloads/test_module26_reference.py">Download tests</Link>
+          <p>Use the workbook for the six-session release dossier, architecture defense, TA protocol, and source route. The deterministic reference model remains a private preview input until M26 is released.</p>
         </div>
       </footer>
     </section>

@@ -1,0 +1,97 @@
+# M33–M34 official calibration — 2026-08-03
+
+## Scope and boundary
+
+This is a narrow, read-only check of the current **authoring-only** M33 and
+M34 workbooks, their claim routes, and their learner-facing source links.
+It compares the present six-session cores with official primary or
+institutional material; it does not change curriculum content, graph state,
+reader access, contracts, releases, or learner evidence. All links below were
+accessed **2026-08-03**. Atlas remains link-only and original-paraphrase: no
+source prose, figures, assignments, or code may be reused without a separate
+asset-level review.
+
+## Alignment found
+
+| Pack | Current alignment | Calibration routes |
+| --- | --- | --- |
+| **M33 — Formal Languages, Computability & Complexity** | The connected route from formal objects through automata, computability, reductions, and complexity is mathematically sound at its stated scope. The CFG/PDA, pumping-lemma quantifiers, diagonal argument, VC-to-IS construction, and `HALT_TM <=m A_TM` reasoning are appropriately bounded. | MIT [18.404J Theory of Computation notes](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/lecture-notes/) and the current-quarter Stanford [CS103 Spring 2026 course archive](https://web.stanford.edu/class/archive/cs/cs103/cs103.1266/). Older Stanford reference anchors are historical provenance only, not current-quarter calibration. |
+| **M34 — Classical AI: Search, Constraints & Decision** | State formulation before search; the A* counterexample; CSP propagation, relaxation, planning, solver-status, and finite-horizon MDP distinctions are sound. The CP-SAT status wording matches the official documentation. | UC Berkeley [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html), [CSP filtering](https://inst.eecs.berkeley.edu/~cs188/textbook/csp/filtering.html), [MDPs](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html), [CMU 15-887 planning](https://www.cs.cmu.edu/~mmv/planning/schedule.html), and [OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver). |
+
+## Concrete repairs applied after this audit
+
+1. **M34 Session 5 source route:** `S34-08` now uses Berkeley CS188's official
+   [Decision Networks page](https://inst.eecs.berkeley.edu/~cs188/textbook/vpis/decision-networks.html).
+   The publisher source remains historical background, not the formula-reading
+   route.
+2. **M34 Session 5 NIST route:** the learner-facing entry now uses the direct
+   official HTTPS [NIST AI RMF 1.0 PDF](https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf),
+   while a DOI may remain a citation record.
+3. **M33 Session 4 malformed-input reduction branch:** the workbook now makes
+   the referent explicit: a malformed *source* string is outside `VC`, while
+   `2#2#0,1` is outside `IS` but remains in `VC`.
+4. **M34 Session 2 A* guarantee table:** the no-reopen graph-search row now
+   carries a finite/stated termination regime alongside its consistency and
+   nonnegative-cost conditions, matching the scoped treatment in Hart,
+   Nilsson, and Raphael's
+   [primary paper](https://doi.org/10.1109/TSSC.1968.300136).
+5. **M34 Session 4 state-update table:** the header now says “explicit field
+   updates,” and the text names symbolic as well as numeric assignments, so a
+   location transition is not misleadingly presented as arithmetic.
+6. **M34 Session 4 state semantics:** the archive card now separates a fact
+   assigned false by a declared closed-world state from a missing observation
+   and a wholly unmodelled factor. The learner predicts whether a silent
+   key-location sensor authorizes a false state fact, then must add an
+   observation/belief boundary, revise the representation, or withdraw the
+   plan claim. This uses CMU 15-887 as a link-only calibration route and does
+   not add a POMDP, solver, or real-world planning lab.
+7. **M33 Session 3 bounded execution:** the configuration trace now defines
+   \(c_0,\ldots,c_k\) for a budget of \(k\) transitions and checks the terminal
+   configuration after the final permitted transition. A one-step halting trace
+   makes the former off-by-one ambiguity visible while preserving the finite
+   observation/non-decider boundary. It is calibrated against MIT
+   [18.404J Lecture 6](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/7405f6112c8ca7242e1edd9a021c1e63_MIT18_404f20_lec6.pdf)
+   and the Stanford CS103 reference, with original Atlas pseudocode only.
+8. **M34 Session 2 goal-test timing:** an original \(h=0\) trace now contrasts
+   a generation-time goal return with goal-on-frontier-removal under a declared
+   lower-\(g\) replacement policy. The first returns a cost-10 successor before
+   the cost-1 frontier entry is removed; the second reaches the cost-2 goal
+   path. This is a scoped code-reading counterexample, not a universal theorem,
+   calibrated against Berkeley [CS188 informed search](https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html)
+   and its [A* graph-search exam analysis](https://inst.eecs.berkeley.edu/~cs188/assets/exam/cs188-sp11-mt1-sol.pdf).
+
+## Targeted follow-up — proof and posterior continuity
+
+After rechecking Stanford CS103's formal-definition route, MIT 6.046J's
+decision/verifier/reduction treatment, and Berkeley CS188's decision-network
+route on 2026-08-03, three small repairs strengthen the connected reasoning
+without expanding scope:
+
+1. M33 Session 1 now turns the repaired finite recognizer into a
+   code-to-spec loop-invariant proof sketch, including the exact alphabet and
+   change-premise boundary.
+2. M33 Sessions 4–5 now compose the existing directed VC-to-IS reduction with
+   a certificate verifier under an explicitly listed graph encoding. The
+   result is visibly conditional on the known VC premise and certificate-size
+   assumptions rather than an unqualified theorem label.
+3. M34 Session 5 now derives its finite posterior from a declared prior,
+   likelihood, and normalizer before the existing expected-utility table. It
+   still does not claim calibration, causal validity, authority, or a POMDP.
+
+These are aligned first-principles bridges: they reuse no course prose or
+assignments, add no solver/framework/lab, and keep the modules authoring-only.
+
+## Deliberate limits and release boundary
+
+No expansion is indicated: the packs deliberately adapt term-length
+proof/problem-set and programming sequences into original, small
+proof/trace/design artifacts and supportive oral discussion. They do **not**
+claim coverage of every advanced formal-language, planning, game, graphical
+model, or reinforcement-learning topic, university-course equivalence, or
+learner mastery.
+
+M33 and M34 remain authoring-only. This finding is not a source approval,
+module-contract review, accessibility/voice-chat check, CI or deployment
+record, GitHub release/provenance receipt, Notion write, or publication
+decision. Those require separate evidence before either module can be called
+published or complete.

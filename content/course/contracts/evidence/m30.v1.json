@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m30",
+  "purpose": "Bind M30's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M30 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m30-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M30 workbook visibly relates its M27/M28/M29 prerequisites to the bounded conceptual M31 handoff while marking later applications and synthesis as non-route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "12-prerequisite-and-forward-map"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, M31 availability, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m30-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M30 declares six ordered sessions spanning probability models, expectation and information, repetition and Monte Carlo, likelihood and criticism, intervals/tests/resampling, and robust scientific-inference design.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "3-session-1--from-a-story-to-a-probability-model"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "4-session-2--expectation-variation-covariance-and-information"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "5-session-3--repetition-convergence-concentration-and-monte-carlo"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "6-session-4--models-likelihood-estimation-and-criticism"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "7-session-5--intervals-tests-multiplicity-and-resampling"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "8-session-6--design-criticism-missingness-robustness-and-dimension"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m30-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M30 begins inference from an explicit probability model before arithmetic, simulation, or API output is interpreted.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "31-first-principle-model-before-arithmetic"}
+      ],
+      "limitations": ["A named first-principles section does not prove statistical adequacy or learner comprehension."]
+    },
+    {
+      "id": "m30-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M30 binds separate visible locations for a definition, independence assumption, conditional-expectation derivation, high-dimensional identification counterexample, and Monte-Carlo numerical experiment.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "32-definition-joint-marginal-and-conditional-are-different-questions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "33-independence-mutual-exclusion-and-conditional-independence-assumptions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "43-derivation-conditional-expectation-and-the-total-expectation-repair"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "84-counterexample-high-dimensional-estimation-exposes-an-identification-boundary"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "52-monte-carlo-numerical-experiment-an-estimator-not-a-spell"}
+      ],
+      "limitations": ["These structural anchors do not substitute for a qualified review of probability assumptions, derivations, counterexamples, numerical procedures, or source claims."]
+    },
+    {
+      "id": "m30-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M30 includes distinct code-reading, debugging, and design tasks that require tracing a conditional or decision assumption before making an inference claim.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "34-code-reading-lab--conditional-direction-and-denominator"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-debug-lab--a-small-but-invalid-decision-path-repair"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--transfer-and-design-audit-across-systems-boundaries"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design an inference system."]
+    },
+    {
+      "id": "m30-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M30 visibly asks for a probability-model prediction before revealing the analysis and its boundary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "prediction-gate"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m30-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M30 includes a transfer task that asks the learner to audit an inference design across a new systems boundary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--transfer-and-design-audit-across-systems-boundaries"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
+    },
+    {
+      "id": "m30-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M30's canonical source map exposes source cards and six-session claim routing, while its workbook makes the licensing and responsible-reading route visible to the learner.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md", "locator": "source-cards"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md", "locator": "six-session-source-routing"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "15-sources-licensing-and-responsible-reading-route"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m30-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M30 binds its interactive probability studio to concise text alternatives and a module-specific rendered accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "accessible-visual-text-alternative"},
+        {"kind": "file", "role": "source-code", "path": "app/ProbabilityInferenceStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m30-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M30 exposes confidence-aware diagnostic questions and a diagnostic repair key rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "10-confidence-aware-diagnostic--12-high-value-checks"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "diagnostic-repair-key"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m30-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M30 includes a visible retrieval queue and probability/inference mastery gate for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "retrieval-queue"}
+      ],
+      "limitations": ["A retrieval queue does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m30-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M30 specifies an uncertainty and inference evidence dossier with a brief, required artifacts, and constructive acceptance criteria.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "11-project--uncertainty--inference-evidence-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "brief"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "required-artifacts"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "acceptance-criteria"}
+      ],
+      "limitations": ["A project brief and criteria do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m30-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M30 contains an encouraging conversational oral-defense protocol with hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "13-conversational-oral-defense--m30"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "hint-ladder--preserve-agency"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "misconception-repair-moments"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "code-reading-lab--transfer-and-design-audit-across-systems-boundaries"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "constructive-evidence-lenses--visible-adaptive-and-non-scored"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/30_probability_statistics_scientific_inference.md", "locator": "end-of-defense-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m30-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M30 companion binds a Teaching Assistant opening, artifact focus, and repair move to the module's inference and uncertainty boundary.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m30.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m30-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M30 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m30.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m30-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M30 companion carries a bounded uncertainty-and-inference evidence card into the canonical but authoring-only M31 conceptual handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m30.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M30, M31 learner availability, or authorization to bypass prerequisites."]
+    },
+    {
+      "id": "m30-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M30 binds its interactive probability studio, explicit registry entry, bounded Python reference model, and exact CI-discovered behavioral teaching-model suite.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/ProbabilityInferenceStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module30_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module30_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, statistical validity, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m30-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m30.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m30/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

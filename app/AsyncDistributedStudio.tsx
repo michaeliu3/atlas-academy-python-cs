@@ -7,6 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule21Progress,
+  persistModule21Progress,
+  restoreModule21Progress,
+} from "@/lib/module21-progress-codec";
 import styles from "./AsyncDistributedStudio.module.css";
 
 type RunView = "task" | "scope" | "pressure" | "reconcile" | "order" | "audit";
@@ -20,7 +26,6 @@ type StudioRecord = Record<RunView, ViewRecord>;
 
 const CENTRAL_INVARIANT =
   "Every Atlas dispatch has one stable operation ID, canonical request digest, deadline, and evidence record. Local work is admitted through a bounded, explicitly owned async pipeline; every admitted local item receives one terminal local accounting record. Cancellation is cleaned up and propagated according to the owning structured scope, but is never mislabeled as a remote rollback. Every remote retry retains the same operation identity and is classified separately from a transport write, a server/replica observation, a matching reply, and an unresolved outcome. A trace context correlates declared observations; it does not authenticate them, make them complete, or prove causality, durability, or replicated agreement. In this collector case, the dispatch additionally declares its source set, admission bound, deadline/cancellation policy, and publication-cut rule before work starts.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module21-run-control.v1";
 
 const views: ReadonlyArray<{
   id: RunView;
@@ -65,6 +70,42 @@ const views: ReadonlyArray<{
     question: "What does a FULL cut actually defend?",
   },
 ];
+
+const predictionChoices: Record<
+  RunView,
+  ReadonlyArray<{ id: string; label: string }>
+> = {
+  task: [
+    { id: "owned", label: "A locally scheduled task has a declared owner." },
+    { id: "received", label: "Catalog received the source request." },
+    { id: "self", label: "The coroutine now owns its own cleanup." },
+  ],
+  scope: [
+    { id: "scope", label: "Local sibling cancellation and cleanup are owned; catalog's remote result is separate." },
+    { id: "rollback", label: "Catalog's source-side effect is rolled back." },
+    { id: "full", label: "The group has produced a valid full collection cut." },
+  ],
+  pressure: [
+    { id: "slot", label: "One local admission slot can be used under Atlas policy." },
+    { id: "capacity", label: "The upstream has capacity for a new request." },
+    { id: "rollback", label: "The timed-out source operation did not happen." },
+  ],
+  reconcile: [
+    { id: "same", label: "Retain the source operation ID and canonical digest; classify UNKNOWN_REMOTE, then reconcile." },
+    { id: "new", label: "Generate a new ID so the retry cannot conflict." },
+    { id: "failed", label: "Log remote failure because the response timed out." },
+  ],
+  order: [
+    { id: "local", label: "Only local callback order and correlation are established." },
+    { id: "causal", label: "Progress causally followed catalog." },
+    { id: "fresh", label: "Progress has the newer source epoch." },
+  ],
+  audit: [
+    { id: "full", label: "The named synthetic fixture produced a FULL cut under the declared Atlas policy." },
+    { id: "global", label: "Atlas now guarantees global consistency and exactly-once refresh." },
+    { id: "trust", label: "Trace correlation authenticated every source." },
+  ],
+};
 
 const taskStages = [
   {
@@ -208,28 +249,6 @@ function panelId(view: RunView) {
   return `async-run-control-panel-${view}`;
 }
 
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") return false;
-  return views.every((view) => {
-    const candidate = (value as Record<string, unknown>)[view.id];
-    if (!candidate || typeof candidate !== "object") return false;
-    const record = candidate as Record<string, unknown>;
-    return (
-      (record.choice === null || typeof record.choice === "string") &&
-      (record.confidence === null || [1, 2, 3, 4].includes(record.confidence as number)) &&
-      typeof record.revealed === "boolean"
-    );
-  });
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // The control room still works when local storage is unavailable.
-  }
-}
-
 function EvidenceLock() {
   return (
     <p className={styles.evidenceLock}>
@@ -348,11 +367,7 @@ function TaskLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "owned", label: "A locally scheduled task has a declared owner." },
-          { id: "received", label: "Catalog received the source request." },
-          { id: "self", label: "The coroutine now owns its own cleanup." },
-        ]}
+        choices={predictionChoices.task}
         id="task"
         onChange={onChange}
         prompt="Immediately after TaskGroup.create_task(fetch(catalog)), what is established?"
@@ -445,11 +460,7 @@ function ScopeLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "scope", label: "Local sibling cancellation and cleanup are owned; catalog's remote result is separate." },
-          { id: "rollback", label: "Catalog's source-side effect is rolled back." },
-          { id: "full", label: "The group has produced a valid full collection cut." },
-        ]}
+        choices={predictionChoices.scope}
         id="scope"
         onChange={onChange}
         prompt="Exercises raises a non-cancellation error after catalog has a modelled decision but before its matching reply. What does TaskGroup establish?"
@@ -503,11 +514,7 @@ function PressureLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "slot", label: "One local admission slot can be used under Atlas policy." },
-          { id: "capacity", label: "The upstream has capacity for a new request." },
-          { id: "rollback", label: "The timed-out source operation did not happen." },
-        ]}
+        choices={predictionChoices.pressure}
         id="pressure"
         onChange={onChange}
         prompt="With three sources and max_in_flight = 2, catalog reaches a named local terminal record. What changes?"
@@ -562,11 +569,7 @@ function ReconcileLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "same", label: "Retain the source operation ID and canonical digest; classify UNKNOWN_REMOTE, then reconcile." },
-          { id: "new", label: "Generate a new ID so the retry cannot conflict." },
-          { id: "failed", label: "Log remote failure because the response timed out." },
-        ]}
+        choices={predictionChoices.reconcile}
         id="reconcile"
         onChange={onChange}
         prompt="A source attempt times out before a matching reply and the intended request is unchanged. What preserves meaning?"
@@ -633,11 +636,7 @@ function OrderLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "local", label: "Only local callback order and correlation are established." },
-          { id: "causal", label: "Progress causally followed catalog." },
-          { id: "fresh", label: "Progress has the newer source epoch." },
-        ]}
+        choices={predictionChoices.order}
         id="order"
         onChange={onChange}
         prompt="Catalog's callback runs before progress's callback locally; both have the same trace ID. What follows?"
@@ -686,11 +685,7 @@ function AuditLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "full", label: "The named synthetic fixture produced a FULL cut under the declared Atlas policy." },
-          { id: "global", label: "Atlas now guarantees global consistency and exactly-once refresh." },
-          { id: "trust", label: "Trace correlation authenticated every source." },
-        ]}
+        choices={predictionChoices.audit}
         id="audit"
         onChange={onChange}
         prompt="After three validating synthetic records under the declared full-cut policy, which claim can Atlas defend?"
@@ -746,24 +741,17 @@ export function AsyncDistributedStudio() {
   const [auditField, setAuditField] = useState<(typeof auditFields)[number]["id"]>("task_trace");
   const [resetArmed, setResetArmed] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressStorageRef = useRef<ReturnType<typeof getBrowserProgressStorage>>(null);
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
   const coverage = Math.round((revealedCount / views.length) * 100);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const stored: unknown = JSON.parse(raw);
-          if (
-            stored &&
-            typeof stored === "object" &&
-            (stored as { version?: unknown }).version === 1 &&
-            isStudioRecord((stored as { record?: unknown }).record)
-          ) {
-            setRecord((stored as { record: StudioRecord }).record);
-          }
-        }
+        const storage = getBrowserProgressStorage();
+        progressStorageRef.current = storage;
+        const stored = storage ? restoreModule21Progress(storage) : null;
+        if (stored) setRecord(stored as StudioRecord);
       } catch {
         // Ignore corrupted/unavailable browser storage; no learner record is required.
       } finally {
@@ -776,10 +764,8 @@ export function AsyncDistributedStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(
-        STUDIO_STORAGE_KEY,
-        JSON.stringify({ version: 1, record }),
-      );
+      const storage = progressStorageRef.current;
+      if (storage) persistModule21Progress(storage, record);
     } catch {
       // Local persistence is optional and contains no notes, payloads, or endpoints.
     }
@@ -827,7 +813,9 @@ export function AsyncDistributedStudio() {
       setResetArmed(true);
       return;
     }
-    clearStoredStudio();
+    const storage = progressStorageRef.current ?? getBrowserProgressStorage();
+    progressStorageRef.current = storage;
+    if (storage) clearModule21Progress(storage);
     setRecord(emptyRecord());
     setActiveView("task");
     setTaskStage(2);

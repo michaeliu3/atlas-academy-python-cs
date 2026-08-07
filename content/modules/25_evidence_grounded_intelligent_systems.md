@@ -7,7 +7,40 @@
 > suggestion. Atlas may become more helpful only if its help remains
 > inspectable, bounded, and under the learner's control.
 
-**Primary outcome:** You can read an intelligent-feature proposal as a chain
+> **Expanded Atlas Core gate:** In the 60-day prerequisite-first route, do not
+> use M25 as the final synthesis until M27–M36 have supplied the needed formal
+> and empirical evidence: discrete proof/complexity, numerical linear algebra,
+> calculus/analysis, probability/statistics, optimization/information,
+> systems-for-learning, formal limits, classical AI, ML evaluation, and learning
+> theory. A portal preview never changes that condition. In the designated
+> private guided route, the learner may begin the full M25 sequence only through
+> the **private guided-study evidence gate** below—not from a score, an agent
+> explanation, or a portal click.
+
+> **Preview boundary (portal):** M25 is readable as a bounded preparation
+> workbook. In the portal, until the direct prerequisites have learner-ready
+> release evidence and M25's own contract/review evidence exists, its Studio,
+> dossier, and rehearsal below are specifications for later use—not an unlocked
+> synthesis, oral-defense, project, completion, or release-evidence claim.
+>
+> **Private guided-study evidence gate:** In the learner-designated Teaching
+> Assistant and Study Partner chats, the full six-session M25 work may begin
+> after the learner supplies their actual M31–M36 named dossier/packet outputs,
+> the relevant M27–M30 artifacts or an explicit `[UNAVAILABLE — …]` marker that
+> narrows or defers the affected claim, and a concise cross-module TA handoff
+> naming the evidence, assumptions, non-claims, and unresolved question. A
+> fluent model summary is never a receipt. This private instruction gate does
+> not change the graph, portal reader access, route/Core credit, publication,
+> release status, or mastery claim.
+
+> Preview mode now: as preview artifacts, you may create only a `PREVIEW ONLY`
+> gate card and one future-M26 question. You may also use the built-in bounded,
+> non-credit orientation diagnostics for prediction and misconception repair;
+> their answers create no receipt, credit, handoff, or unlock. Do not use the
+> later studio, dossier, oral-defense, project, or Module 26 handoff/unlock
+> language as current learner work.
+
+**Full-module outcome — after the gate opens:** You can read an intelligent-feature proposal as a chain
 of purpose, authorized data, representation, candidate generation, score or
 model, evaluation, explanation, human decision, and evidence. You can detect
 leakage, distinguish a score from a calibrated probability, choose an
@@ -26,6 +59,16 @@ decision and collect the right evidence.
 ---
 
 ## How to study this module
+
+> **Preview reading boundary:** In the portal, the six-session material below
+> is an orientation map for after the gate opens. Until then, create only the
+> named `PREVIEW ONLY` gate card and one future-M26 question as preview
+> artifacts, while using the built-in non-credit orientation diagnostics only
+> for prediction and misconception repair. Do not turn the later loop, studio,
+> dossier, rehearsal, project, or handoff into current work. In the designated
+> private chats, the private guided-study evidence gate above permits the same
+> six sessions as current learning work without changing portal availability or
+> granting credit.
 
 Use this loop in every session:
 
@@ -81,6 +124,9 @@ Scope:     evidence-review model, not a model trainer, LLM client, or service
 Runtime:   local Python evidence environment
 Effects:   no network, filesystem input, external model, prompt, credential,
            learner-data, package, database, or remote-code action
+Tooling I/O: the CLI accepts one enumerated scenario and writes one JSON packet
+             to stdout; the behavioral test harness imports the checked-in
+             local model. Those bounded tooling operations are not model effects.
 Input:     fixed scenario names only
 Core rule: score/output is advisory data; policy and learner control remain
            separate owners
@@ -110,6 +156,9 @@ learner, call a provider, collect a prompt, or make a production decision.
 ### 1.1 The connected route
 
 ~~~mermaid
+%% atlas-diagram-id: m25-connected-route
+%% atlas-diagram-title: The M25 evidence route into a human-controlled decision
+%% atlas-diagram-alt: Earlier modules provide logic, cost models, data contracts, systems reliability, authorization, language boundaries, and runtime evidence. These feed a declared need, candidate set, evaluation, score or model proposal, accessible human decision, and then the gated M26 capstone.
 flowchart LR
     M4["M4: probability,<br/>logic, relations"] --> N["declared need + outcome"]
     M5["M5: cost and<br/>measurement"] --> E["evaluation manifest"]
@@ -128,13 +177,97 @@ flowchart LR
     H --> M26["M26: maintained<br/>capstone + defense"]
 ~~~
 
-**Text equivalent:** Modules 8–11 already let Atlas enumerate and rank
-possible actions. Modules 12–16 make data and behavior durable and reviewable.
-Modules 20–22 prevent a network response, trace, or permission-shaped field
-from becoming unjustified authority. Module 23 gives a narrow query path;
-Module 24 demands controlled measurement. Module 25 joins those inputs only
-at a human decision surface. Module 26 then requires the resulting feature to
-be defended as part of one maintained system.
+This is a concept/evidence map, not next/previous navigation. The full
+canonical route reaches M31 before M18–M24. From M24, the downstream navigation
+segment is **M24 → M32 → M33 → M34 → M35 → M36 → M25 → M26**. M24 is a required
+systems-evidence thread, not M25's immediate navigation predecessor; the direct
+M25 prerequisites in the graph have a transitive evidence closure of M27–M36.
+
+### 1.1A The expanded-route evidence gate
+
+The original 26-module route established the software, systems, and trust
+boundaries visible above. The expanded 60-day Atlas Core adds a second evidence
+spine before M25 becomes its final AI-system synthesis:
+
+| Required earlier evidence | Why M25 needs it | What cannot be skipped |
+|---|---|---|
+| M27 discrete mathematics and M33 formal limits | Lets the learner distinguish a valid argument, a reduction/complexity boundary, and a plausible explanation. | A fluent AI-generated proof or solver claim is not evidence. |
+| M28–M31 linear algebra, analysis, probability/statistics, optimization, and information | Lets the learner read assumptions, numerical conditioning, uncertainty, inference, objectives, constraints, and information losses. | A model metric or optimizer trace does not replace the model/data assumptions. |
+| M32 systems languages, scientific Python, and accelerators | Lets the learner trace layout, precision, reproducibility, profiling, and distributed execution claims. | A GPU result does not make a numerical or operational claim portable. |
+| M34–M36 classical AI, ML, and learning theory | Lets the learner formulate a decision, evaluate a model, test for shift/leakage, and read a guarantee or limitation. | A validation score does not become authority, causal benefit, or a deployment guarantee. |
+
+At this gate, the learner must be able to name which earlier artifact supports a
+claim, which assumption remains fragile, and what observation would change the
+release decision. If a named depth module is still in authoring, this is an
+honest reason to use M25 as a bounded preparation workbook rather than declare
+the full Core synthesis complete.
+
+### 1.1B The advanced-artifact weave
+
+M25 is not allowed to treat M27–M36 as a list of impressive topic names. A
+final-synthesis dossier must use each earlier module as a specific kind of
+evidence and preserve its limitation. Until a learner-ready artifact exists,
+write **[UNAVAILABLE — PRESERVE PREVIEW GATE]** rather than inventing an
+equivalent claim from an AI summary, a test result, or a familiar buzzword.
+
+| Earlier module | Artifact M25 must inspect | Where it changes the intelligent-feature decision | What M25 must refuse to infer |
+| --- | --- | --- | --- |
+| M27 discrete mathematics | proof/claim ledger, countermodel, and stated quantifiers | checks whether a model, metric, or policy claim actually follows from its premises | a finite positive example proves a universal property |
+| M28 linear algebra and numerical stability | representation/conditioning note | checks transformations, embeddings, precision, and distance claims | a vector output is stable or meaningful because it has many dimensions |
+| M29 calculus and real analysis | derivative, limit, and convergence-scope sheet | distinguishes an optimization observation from a valid local/global conclusion | a small gradient or a converged trace validates the product objective |
+| M30 probability and inference | uncertainty/evaluation manifest | names the population, split, denominator, uncertainty, and alternative explanation | a score, posterior, or held-out result proves causality or user benefit |
+| M31 optimization and information | objective/constraint/evidence dossier | tests proxy gaps, feasible-set changes, stopping criteria, and information-loss claims | optimizing a loss automatically chooses the right action |
+| M32 systems and scientific execution | execution-transfer/reproducibility dossier | records dtype, layout, device, seed, resource, profiling, and semantic-oracle boundaries | a fast accelerator result is portable, numerically identical, or operationally safe |
+| M33 formal limits | Formal Limits Claim Packet | checks encoding, reduction direction, complexity claim, and practical boundary | a timeout, failed run, or theorem label decides the usefulness of this instance |
+| M34 classical AI | problem-formulation/search/constraint/decision packet | separates candidates, state, constraints, uncertainty, search result, and authority | a planner, CSP, or expected-utility output is self-authorizing |
+| M35 machine learning | **Machine Learning & Representation Dossier** | checks baseline, data split, shift, objective, observability, and failure slices | a validation metric generalizes, is calibrated, or improves a learner's outcome |
+| M36 learning theory and reliable deep learning | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its **Limit-and-Nonclaim Card**, **Theory–System Reproducibility Record**, and **Monitoring Extension to Reliable-Learning Evidence Map** | bounds generalization, reliability, precision, distribution, and deployment claims | a theorem, benchmark, or green reliability check is a release guarantee |
+
+The working synthesis move is deliberately small:
+
+~~~text
+M25 decision claim
+    -> cite one earlier artifact that supports one narrow part
+    -> name its assumptions and non-claim
+    -> add a new local observation only if it tests the same scoped question
+    -> retain human control, abstention, and the next falsifier
+~~~
+
+For example, a next-step suggestion may cite M35 for an evaluation manifest,
+M31 for its proxy-objective boundary, M32 for its reproducibility record,
+M33 for a complexity non-claim, M34 for its candidate/constraint formulation,
+and M36 for generalization limits. None of those artifacts authorizes a
+learner-state mutation or a consequential decision.
+
+### 1.1C One advanced-evidence synthesis rehearsal
+
+After the gate opens, do not merely attach ten summaries. Revisit the fixed
+next-step suggestion in Section 1.2 and write one **evidence receipt** for
+each relevant earlier artifact. The narrow claim under review is:
+
+> “For a declared synthetic fixture, Atlas may display a reversible local
+> next-step suggestion with its reason and alternatives. It does not claim that
+> the suggested action improves learning, diagnoses ability, or changes a plan.”
+
+| Earlier evidence | Exact receipt to inspect | Narrow contribution to the same decision | Assumption / non-claim retained |
+| --- | --- | --- | --- |
+| M27 discrete mathematics | proof/claim ledger and countermodel | Makes any invariant or implication in the displayed reason explicit. | Passing fixtures do not prove a universal route property. |
+| M28 linear algebra | representation/stability note | Names the representation and precision condition behind a similarity or distance statement. | A vector is not meaningful or stable merely because it has many coordinates. |
+| M29 calculus/analysis | limit/derivative/convergence scope sheet | Separates a local optimization observation from a global product conclusion. | A small derivative or finite trace is not a benefit claim. |
+| M30 probability/inference | inference and evaluation manifest | Declares population, time split, denominator, uncertainty, and alternative explanation. | A held-out score is not causality or user benefit. |
+| M31 optimization/information | **Optimization and Information Evidence Dossier** | Exposes the ranking objective, hard constraints, proxy gap, and stopping/support boundary. | Lower loss does not choose the right human action. |
+| M32 systems execution | **Scientific Python & Accelerators Dossier** | Records semantic oracle, dtype/layout/device/seed, and reproducibility conditions for an execution claim. | A local fast result is not portable, numerically identical, or operationally safe. |
+| M33 formal limits | **Formal Limits Claim Packet** | States any encoding, reduction direction, resource model, or complexity claim actually used. | A timeout or theorem label does not decide this product outcome. If no formal claim is used, say so rather than decorating the dossier. |
+| M34 classical AI | **Classical AI Search, Constraints & Decision Packet** | Separates candidate eligibility, constraints, state, uncertainty, and policy authority. | A solver or planner output is not self-authorizing. |
+| M35 machine learning | **Machine Learning & Representation Dossier** | Supplies the baseline, split, representation, failure slice, and shift evidence for a learned proposal. | A validation result is not calibrated generalization or learner benefit. |
+| M36 reliable learning | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its **Limit-and-Nonclaim Card**, **Theory–System Reproducibility Record**, and **Monitoring Extension to Reliable-Learning Evidence Map** | Names the theorem/limit scope, monitoring hypothesis, stop owner, and deployment non-claim. | A guarantee or benchmark is not a release certificate. |
+
+One receipt may support only one narrow fragment of the claim. When the required
+learner-ready artifact has not been inspected, write **[UNAVAILABLE — DEFER OR
+NARROW CLAIM]**. Current authoring-only packs are private guided drafts, not
+release evidence or learner credit. In the current preview, the stronger
+learned-order claim therefore stays deferred; only the transparent baseline is
+an orientation case.
 
 ### 1.2 The fixed Atlas incident
 
@@ -242,9 +375,30 @@ It is not:
 
 > “Atlas knows what this learner should do.”
 
+### Cross-module re-entry — formulate the claim before the score
+
+Before choosing a candidate or metric, bring one learner-owned artifact from
+each relevant advanced module. A topic name is not a receipt; use the exact
+claim, its assumptions, and its limitation.
+
+| Upstream artifact | Re-enter it here as | Do not silently infer |
+|---|---|---|
+| **Optimization and Information Evidence Dossier (M31)** | objective, hard constraint, proxy gap, and stopping rule | that minimizing the objective chooses the human action |
+| **Formal Limits Claim Packet (M33)** | encoding/resource boundary or an explicit “no formal claim” marker | that a timeout or theorem label settles usefulness |
+| **Classical AI Search, Constraints & Decision Packet (M34)** | candidate/state/constraint/policy separation | that a planner or expected-utility output owns authority |
+| **Machine Learning & Representation Dossier (M35)** | baseline, split, representation, and failure slice | that a validation score is calibrated or beneficial |
+| **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier (M36)** | theorem/limit scope and reliability non-claim | that a benchmark is a release guarantee |
+
+If an artifact is unavailable, write `[UNAVAILABLE — reason and affected
+claim]` and narrow the decision contract. Do not replace missing evidence with a
+summary generated from the module title.
+
 ### The decision-support ladder
 
 ~~~mermaid
+%% atlas-diagram-id: m25-decision-support-ladder
+%% atlas-diagram-title: Decision support keeps model output separate from human choice
+%% atlas-diagram-alt: A person and task establish a baseline and candidate set. A score proposes an ordering, while evaluation and authorization constrain the display. An accessible human decision produces only bounded, redacted evidence rather than an automatic state change.
 flowchart LR
     U["person + task<br/>[DECLARED USER NEED]"] --> B["existing baseline"]
     B --> C["declared candidates"]
@@ -253,12 +407,6 @@ flowchart LR
     X --> H["learner chooses, dismisses,<br/>or requests an action"]
     H --> R["bounded, redacted evidence"]
 ~~~
-
-**Text equivalent:** a baseline lets us ask whether a new aid is better than
-the existing interface. A candidate set prevents an opaque score from silently
-choosing what exists. The score is an advisory proposal. Explanation and
-uncertainty let a person judge it. The learner remains able to choose or
-refuse; the resulting observation is limited evidence, not a universal claim.
 
 ### Prediction exercise
 
@@ -270,8 +418,13 @@ C. “For a declared candidate set, display one reversible suggestion with its
 reason and alternatives.”  
 D. “Automatically set the next action whenever confidence is high.”
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal:** C. A and B do not name a person-facing decision or safety
 boundary. D gives a score authority it has not earned.
+
+</details>
 
 ### Code-reading lab — find the missing owner
 
@@ -304,6 +457,10 @@ and harm moves forward.
 
 ---
 
+### Session 1 output — outcome definition record
+
+One record replaces a score with a stated user outcome and names how it would be observed.
+
 ## 3. Session 2 — Data becomes a claim only through lineage
 
 ### Pressure
@@ -320,6 +477,9 @@ An event can support different questions at different times. Make every
 transformation visible:
 
 ~~~mermaid
+%% atlas-diagram-id: m25-lineage-time-boundary
+%% atlas-diagram-title: Event lineage and the temporal evaluation boundary
+%% atlas-diagram-alt: A study event enters a validated store, then a past-only feature builder, an explicitly defined label/outcome, a time-aware split, an evaluation record, and a minimized observation. Each arrow names a separate time, purpose, or authority boundary.
 flowchart LR
     E["StudyEvent<br/>time, action, confidence"] --> V["validated event store"]
     V --> F["feature builder<br/>past-only window"]
@@ -331,12 +491,6 @@ flowchart LR
     Q --> A["purpose-scoped display"]
     A --> O["minimized observation"]
 ~~~
-
-**Text equivalent:** the feature builder may use only records available at
-the stated prediction time. A later result can be a label only when its
-meaning is declared. The split is a boundary between development evidence and
-held-out evaluation. The display has a separate purpose/authority check. A
-dismissal remains an observation whose meaning must be interpreted carefully.
 
 ### Feature, label, and outcome are different things
 
@@ -362,6 +516,20 @@ split is not automatically wrong, but it must be justified against the
 deployment history and correlations. A temporal question normally needs a
 temporal holdout.
 
+### Cross-module re-entry — lineage, representation, and execution
+
+Now attach the upstream evidence to the time arrow rather than merely naming
+“data quality.” Bring the **M27 Formal Limits Claim Packet** (encoding and
+quantifier scope), **M28 representation/conditioning sheet**, **M29
+convergence-scope sheet**, **M30 inference/evaluation manifest**, and **M32
+Scientific Python & Accelerators Dossier** (dtype, layout, device, seed, and
+semantic-oracle boundary). For each artifact, mark the exact field that is
+available at decision time, the field that is observed later, and the first
+assumption that could invalidate the split.
+
+An unavailable or redacted field is evidence to defer or narrow a claim, not an
+invitation to fill it with a plausible value.
+
 ### Code-reading lab — the flattering evaluation
 
 ~~~python
@@ -383,6 +551,19 @@ Ask:
 Replace none of the code yet. First write a data contract that says what
 would make the evaluation invalid.
 
+### Data-readiness veto
+
+Before a row can become training or evaluation material, name its label origin
+and likely error path. A missing, selectively observed, or post-decision label
+can change the question rather than merely reduce sample size. For the fixed
+case, ask whether a learner saw the item, could decline it, had time to act,
+and whether the later recall check actually measures the intended outcome.
+
+Write a **do-not-train/defer trigger** such as: “Do not fit or compare a model
+until the label origin, missingness/selection mechanism, and decision-time
+availability are specified.” This is an evidence boundary, not a data-cleaning
+ritual or a claim about a real learner population.
+
 ### Session artifact
 
 Create a **Lineage and Split Card**:
@@ -392,9 +573,11 @@ decision time:
 authorized source fields:
 feature definitions:
 label/outcome definition:
+label origin, likely error, and exposure/selection risk:
 candidate population:
 train / validation / held-out rule:
 known missingness or selection risk:
+do-not-train/defer trigger:
 retention/redaction rule:
 strongest allowed claim:
 ~~~
@@ -406,6 +589,10 @@ the evidence changes. If the answer is only “that is cheating,” restate the
 time/availability model in plain language.
 
 ---
+
+### Session 2 output — data lineage claim map
+
+One map traces a claim back to the data that supports it, marking every point where meaning was assumed.
 
 ## 4. Session 3 — Candidates, rankers, and models do different jobs
 
@@ -444,6 +631,9 @@ that we can trace it before comparing it with a learned alternative.
 ### Candidate generation, scoring, ranking, and policy
 
 ~~~mermaid
+%% atlas-diagram-id: m25-candidate-score-policy
+%% atlas-diagram-title: Candidate generation, scoring, ranking, and policy are distinct
+%% atlas-diagram-alt: A candidate generator produces eligible actions. A baseline or model assigns scores, a stable rank applies a tie rule, policy selects a display, and the learner can choose or override. M22 authorization constrains the display path.
 flowchart LR
     G["candidate generator<br/>M9/M10 constraints"] --> S["baseline or model score"]
     S --> R["stable rank + tie rule"]
@@ -452,12 +642,6 @@ flowchart LR
     H --> W["optional state-change workflow"]
     A["M22 authorization"] --> W
 ~~~
-
-**Text equivalent:** candidate generation says what actions are eligible.
-Scoring gives a value under one mechanism. Ranking compares eligible values
-with an explicit tie policy. Product policy decides what to display. The
-learner can choose or override. A later state change has a separate Module 22
-authorization/workflow boundary.
 
 ### A small model is still a model
 
@@ -523,6 +707,10 @@ override, and prohibited automatic effects.
 
 ---
 
+### Session 3 output — component responsibility map
+
+One map assigns candidate generation, ranking, and modelling to separate components with declared interfaces.
+
 ## 5. Session 4 — Evaluation, calibration, and uncertainty
 
 ### Pressure
@@ -551,6 +739,9 @@ useful for ranking without being calibrated. Conversely, a calibrated
 probability does not establish that the chosen action will cause the outcome.
 
 ~~~mermaid
+%% atlas-diagram-id: m25-calibration-control
+%% atlas-diagram-title: A raw score, calibration evidence, and human choice are different claims
+%% atlas-diagram-alt: A raw score can support ordering. Separate calibration evidence can support a probability interpretation for a stated population. A policy chooses a display, and a human makes the final choice.
 flowchart LR
     S["raw score"] --> R["may support ordering"]
     S --> C["separate calibration evidence"]
@@ -558,11 +749,6 @@ flowchart LR
     P --> D["display/decision policy"]
     D --> H["human choice"]
 ~~~
-
-**Text equivalent:** a raw score may support ranking. Calibration is additional
-evaluation evidence. A probability label is limited to the evaluated
-population and outcome. A policy decides how to display it; a person still
-makes the choice.
 
 ### Denominators and uncertainty
 
@@ -579,6 +765,50 @@ population, class balance, sampling rule, threshold, and uncertainty. Ask:
 Do not manufacture precision from a tiny fixture. A confidence interval,
 resampling method, or sample-size limitation is evidence of uncertainty, not a
 failure of the project.
+
+### Rigor card — conditional evidence-to-decision inference
+
+### Definition — a calibration observation is scoped
+
+A calibration observation compares a stated probability with
+an observed outcome *within one declared population, split, label rule, and
+score bin*. It is not the same claim as ranking quality, causal benefit,
+permission to act, or a release decision.
+
+### Numerical experiment — five fixed `0.8` predictions
+
+Suppose exactly five held-out, equally eligible candidate opportunities are
+each assigned a reported probability of `0.8`, and the observed outcomes are
+`[1, 1, 1, 1, 0]`. Then, for this one bin,
+
+~~~text
+mean reported probability = (0.8 + 0.8 + 0.8 + 0.8 + 0.8) / 5 = 4 / 5 = 0.8
+mean observed outcome     = (1 + 1 + 1 + 1 + 0) / 5         = 4 / 5 = 0.8
+bin difference            = observed mean - reported mean    = 0
+~~~
+
+### Derivation / proof idea — compare the two fixed means
+
+The derivation supports only this narrow statement: the fixture's sole bin
+matches its reported mean. It does **not** prove calibration for another time
+window, slice, threshold, model version, or real learner population.
+
+### Assumption boundary — held-out opportunities and declared labels
+
+The five labels faithfully represent the stated
+outcome; all five opportunities came from the named holdout rather than a
+hand-picked success set; the score was not tuned on this same fixture; and the
+decision policy did not hide abstentions or unavailable candidates.
+
+### Counterexample — a shifted slice breaks the inference
+
+Keep the five `0.8` scores but
+move to a shifted slice with outcomes `[0, 0, 0, 0, 0]`. The reported mean is
+still `0.8`, while the observed mean is `0`. The original calculation therefore
+cannot justify a probability label in that slice. A responsible next step is to
+retain the score as an ordering candidate, collect declared holdout evidence,
+or narrow/defer the decision—not to promote this fixture into a benefit,
+causal, authority, or release claim.
 
 ### Code-reading lab — reject the wrong conclusion
 
@@ -618,6 +848,7 @@ label/outcome:
 metrics and denominators:
 threshold/rank/display rule:
 uncertainty and unsupported slices:
+slice/temporal-shift challenge and display/revise/defer consequence:
 runtime/resource manifest:
 privacy/retention effect:
 strongest allowed conclusion:
@@ -631,6 +862,10 @@ probability?” Then changes either the base rate, population, time window, or
 threshold and asks which conclusion survives.
 
 ---
+
+### Session 4 output — calibration and uncertainty report
+
+One report states what the evaluation measured, how calibrated the outputs are, and what remains uncertain.
 
 ## 6. Session 5 — Explanations, accessibility, and meaningful control
 
@@ -653,6 +888,9 @@ An Atlas suggestion should let the learner answer four ordinary questions:
 4. What can I choose, change, dismiss, or inspect next?
 
 ~~~mermaid
+%% atlas-diagram-id: m25-accessible-decision-card
+%% atlas-diagram-title: The accessible decision card gives a reason, limitation, alternatives, and control
+%% atlas-diagram-alt: Suggestion identity leads to a plain-language reason, a limit or uncertainty label, alternatives, and controls. The same information is available by text and assistive-technology paths; feedback does not automatically become a reward label.
 flowchart TB
     I["suggestion identity"] --> R["plain-language reason"]
     R --> L["limit / uncertainty label"]
@@ -664,11 +902,6 @@ flowchart TB
     T --- A
 ~~~
 
-**Text equivalent:** every suggestion has a visible identity, a limited reason,
-an uncertainty statement, alternatives, and controls. The same information
-has a text equivalent and a keyboard/assistive-technology path. Feedback is
-an observation with a stated meaning, not an automatic reward signal.
-
 ### Explanation categories
 
 | Explanation | What it may honestly say | What it must not imply |
@@ -678,6 +911,21 @@ an observation with a stated meaning, not an automatic reward signal.
 | Comparison | “This item ranked above these eligible alternatives under this policy.” | “All other actions are wrong.” |
 | Limit | “This suggestion uses a fixed local fixture / limited history.” | “The system has no uncertainty.” |
 | Provenance | “This text came from a named, reviewed source bundle.” | “Retrieved text is automatically true or current.” |
+
+### Cross-module re-entry — control, calibration, and reliability
+
+Before drawing the explanation card, retrieve the **M34 Classical AI Search,
+Constraints & Decision Packet**, **M35 Machine Learning & Representation
+Dossier**, and **M36 Statistical Learning Theory & Reliable Deep-Learning
+Systems Dossier**. Use them to annotate the card with (1) the policy or
+authority boundary, (2) the calibration/shift scope of any number, and (3) the
+monitoring, stop-owner, or non-claim boundary. Add the relevant M22
+accessibility/privacy control and the M32 execution/reproducibility conditions
+when the display depends on a runtime observation.
+
+If one receipt is missing, write `[UNAVAILABLE — preserve learner control and
+defer the affected claim]`; a polished explanation must not conceal an empty
+evidence field.
 
 ### Accessible visualization rule
 
@@ -737,6 +985,10 @@ If the answer is “add a tooltip,” redraw the decision card.
 
 ---
 
+### Session 5 output — human control account
+
+One account states where a human can inspect, override, or refuse the system's proposal.
+
 ## 7. Session 6 — AI/agent proposals are systems, not authorities
 
 ### Pressure
@@ -753,6 +1005,9 @@ evidence still applies.
 ### A bounded AI-assistance architecture
 
 ~~~mermaid
+%% atlas-diagram-id: m25-bounded-ai-assistance
+%% atlas-diagram-title: Bounded AI assistance keeps proposal generation separate from action authority
+%% atlas-diagram-alt: A learner request is validated, then a fixed authorized context builder feeds a model or retrieval adapter. Output validation and provenance produce a proposal for learner choice. A separate evaluation harness records limits; no model proposal receives automatic state-changing authority.
 flowchart LR
     Q["learner request<br/>[INPUT DATA]"] --> V["validate intent + scope"]
     V --> C["fixed context builder<br/>authorized, redacted facts"]
@@ -764,12 +1019,6 @@ flowchart LR
     P["tool/capability policy"] --> W
     X["evaluation harness + limits"] --> M
 ~~~
-
-**Text equivalent:** input is validated for the declared task. A trusted
-context builder selects only allowed, redacted facts. The model/retrieval
-adapter emits a proposal. Output validation and provenance make its limits
-visible. The learner chooses. A state-changing workflow needs separate
-authority; a model response cannot mint it.
 
 ### Retrieval, generation, and tool use are different boundaries
 
@@ -820,6 +1069,14 @@ still requires the earlier boundaries.
 | **DEFER** | plausible idea lacks representative data/evaluation or runtime/supplier boundary | external-model feature has no consent, retention, or failure plan |
 | **REJECT** | authority, privacy, accessibility, or semantic violation | model response directly mutates learner schedule |
 
+### Session artifact
+
+Create a **proposal-boundary packet** containing a capability ledger, one
+rejected-action test, a redacted/local-only fallback, and an evidence-card
+release recommendation. While M25 is preview-gated, this is a preparation
+artifact only: it creates no oral-defense, project, completion, or release
+credit and cannot unlock Module 26.
+
 ### TA and Study Partner rehearsal
 
 The TA asks:
@@ -839,10 +1096,16 @@ evidence-producing action.
 
 ---
 
+### Session 6 output — evidence and human-control packet
+
+One packet names the claim, its limitation, its owner, and the next observation that would revise it.
+
 ## 8. Intelligent Systems Evidence Studio
 
-The visual studio for this module is a fixed, accessible **Intelligent Systems
-Evidence Studio**, not a live model dashboard.
+When M25 is eligible after its gate, its visual studio is a fixed, accessible
+**Intelligent Systems Evidence Studio**, not a live model dashboard. The current
+preview records this interaction specification; it does not expose a completed
+studio, mastery record, or final-synthesis route.
 
 ~~~text
 declared learner task
@@ -897,9 +1160,12 @@ C. “For a declared candidate set, Atlas can show a reversible suggestion with
 its reason and alternatives.”  
 D. “The feature maximizes engagement.”
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** It names the bounded task and preserves human control. A and D
-are vague/overclaiming. B grants an inference result authority it does not
-own.
+are vague/overclaiming. B grants an inference result authority it does not own.
+</details>
 
 ### Q2 — Leakage
 
@@ -910,9 +1176,12 @@ B. The prerequisite graph version available on Monday.
 C. The learner's recall result recorded on Wednesday.  
 D. The candidate's stable identifier.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Wednesday's result is future information for a Monday
-prediction. It may be a declared later outcome/label, not an available
-feature.
+prediction. It may be a declared later outcome/label, not an available feature.
+</details>
 
 ### Q3 — Score versus probability
 
@@ -924,8 +1193,12 @@ C. The named mechanism emitted 0.82 for this candidate under its input
 contract.  
 D. Atlas may automatically select the action.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Calibration and an outcome definition are needed for A. The
 candidate set and tie rule constrain B. D is a policy/authority decision.
+</details>
 
 ### Q4 — Baseline
 
@@ -937,8 +1210,12 @@ complexity improves the stated decision under the same evidence conditions.
 C. It makes evaluation unnecessary.  
 D. It proves a model is unfair.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A baseline is a reference point, not a verdict. It supports a
 like-for-like comparison and makes complexity/cost visible.
+</details>
 
 ### Q5 — Evaluation
 
@@ -951,8 +1228,12 @@ policy.
 C. A larger font.  
 D. Direct permission to mutate learner state.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Accuracy and calibration answer different questions. A
 probability label also needs a policy decision. D remains separate.
+</details>
 
 ### Q6 — Feedback
 
@@ -964,8 +1245,12 @@ if anything, this observation means and may retain.
 C. The model should always lower this item's score.  
 D. The learner has revoked every data permission.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A dismissal has several possible meanings. It is not automatic
 ground truth, a training rule, or a universal consent signal.
+</details>
 
 ### Q7 — Accessibility
 
@@ -976,8 +1261,12 @@ B. An equivalent text/table explanation and keyboard-operable alternatives.
 C. A longer model name.  
 D. A hidden hover tooltip.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** A chart cannot be the only semantic path. Color-only and
 hover-only information exclude users and make the decision harder to audit.
+</details>
 
 ### Q8 — AI-era authority
 
@@ -990,8 +1279,12 @@ separate policy/human authority for any effect.
 C. Trust it if the model labels itself confident.  
 D. Store the full prompt and response indefinitely.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Structure is not authority. Retrieval, generation, confidence,
 and logging each need their own boundary and retention decision.
+</details>
 
 ### Diagnostic routing
 
@@ -1000,7 +1293,7 @@ and logging each need their own boundary and retention decision.
 | outcome/baseline confusion | Module 4 probability/logic; Module 11 objectives; Session 1 |
 | lineage/leakage confusion | Module 13 specifications; Module 16 data; Session 2 |
 | score/model boundary confusion | Modules 8–11; Session 3 |
-| metric/calibration/cost confusion | Module 5; Module 24; Session 4 |
+| metric/calibration/cost/shift confusion | Module 5; Module 24; M35–M36 evidence routes; Session 4 |
 | explanation/accessibility/control confusion | Module 22; Session 5 |
 | model/agent authority confusion | Modules 22–23; Session 6 |
 
@@ -1030,7 +1323,18 @@ and logging each need their own boundary and retention decision.
    ranking, a dashboard, an external LLM assistant, or an unfamiliar
    open-source recommendation feature.
 
+### Transfer task — preserve the boundary in an unfamiliar system
+
+Choose one unfamiliar ranking, dashboard, or assistant feature. Carry the same
+candidate/model-or-policy/human-choice separation into it, then change one
+premise—data purpose, time window, uncertainty, or authority—and state the
+smallest claim that still has evidence.
+
 ### Project — Atlas Next-Step Evidence Studio
+
+> **Full private-module project:** Use this only after the private guided-study
+> evidence gate is satisfied. In the portal preview, create only the `PREVIEW
+> ONLY` gate card; do not create a Module 26 handoff packet.
 
 Produce an evidence dossier and a small, local/reproducible vertical slice,
 not a production recommender race. The project includes:
@@ -1052,6 +1356,48 @@ not a production recommender race. The project includes:
 - a Module 26 handoff packet: architecture map, claim ledger, open questions,
   and release recommendation.
 
+### Advanced Evidence Annex — required after the private evidence gate
+
+The final-synthesis version of this dossier also carries a short annex. It is
+not a request to recreate ten modules. It is a traceability table: every
+advanced artifact supplies one bounded claim, its assumptions, and its
+non-claim to the feature decision.
+
+| Evidence row | Minimum visible anchor | If the artifact is not learner-ready |
+| --- | --- | --- |
+| M27/M33 formal reasoning | claim, quantifiers/encoding, counterexample or reduction boundary | write **[UNAVAILABLE — no formal claim promoted]** |
+| M28/M29 numerical reasoning | representation, numerical condition, derivative/limit scope | write **[UNAVAILABLE — no numerical/convergence claim promoted]** |
+| M30/M35 empirical learning | population, split, baseline, uncertainty, shift/failure slice | write **[UNAVAILABLE — no benefit/generalization claim promoted]** |
+| M31 objective and information | objective, constraint, proxy gap, stopping/support boundary | write **[UNAVAILABLE — no optimization-to-value inference]** |
+| M32 execution | semantic oracle, precision/layout/device/seed/profiling note | write **[UNAVAILABLE — no portability/performance claim promoted]** |
+| M34 classical AI | state/candidate/constraint/utility/authority formulation | write **[UNAVAILABLE — no planner/decision authority]** |
+| M36 reliability | theorem/limit scope, reproducibility record, deployment non-claim | write **[UNAVAILABLE — no reliable-learning release claim]** |
+
+In the portal preview, this annex is an orientation template only. In private
+guided study, it is completed from the learner-supplied receipt set named
+above. A blank row is evidence of a gate, not a defect to paper over with
+generated prose.
+
+### Cross-artifact conflict exercise — revise the claim, not the evidence
+
+Suppose the M35 receipt shows a higher held-out ranking metric, but the M31
+receipt shows that the objective optimizes a click proxy rather than the stated
+learner outcome. M32 then reveals that the comparison changed dtype/layout and
+cannot yet reproduce the same semantic result. M33 limits a claimed solver
+guarantee, M34 changes the candidate constraint, and M36 withdraws an IID or
+reliability conclusion after a named temporal shift.
+
+Do not average these concerns into a confidence score. Fill this compact board:
+
+| Evidence conflict | Smallest justified repair | Decision now | Next falsifier |
+| --- | --- | --- | --- |
+| Metric improved but the proxy/constraint is wrong | restore the decision contract or compare against a better-aligned baseline | **REVISE** or **DEFER** | a scoped outcome/utility observation |
+| Reproduction or semantics changed | restore the declared execution condition before comparing | **DEFER** learned-order claim | semantic-oracle and environment record |
+| Candidate, formal, or distribution premise changed | restate the candidate set, formal scope, or population | **NARROW** to the remaining supported display claim | counterexample or shifted-slice evaluation |
+
+End with one counterexample and one revised claim. A fluent agent explanation,
+green test, or higher metric cannot overrule the narrowest missing receipt.
+
 The reference implementation may be mostly agent-generated only after the
 learner has named the contracts and tests. Manual coding is limited to the
 small portions that reveal a mechanism: candidate eligibility, deterministic
@@ -1066,6 +1412,7 @@ accessible control state.
 | Data lineage | calls database rows “training data” | states availability time, authorized fields, outcome, split, and retention |
 | Ranking/model | treats score as recommendation | separates candidates, score, rank, display policy, and state authority |
 | Evaluation | reports one accuracy number | supplies metric, denominator, baseline, split, uncertainty, and nonclaim |
+| Advanced synthesis | invokes mathematics, systems, or ML by reputation | attaches every relevant M27–M36 receipt, exposes one genuine evidence conflict, revises the claim under a changed premise, and preserves the preview gate when a receipt is unavailable |
 | Human-centered design | adds visual polish after scoring | provides reason, limit, alternatives, accessible path, and meaningful override |
 | AI-era judgment | accepts fluent output or green tests | bounds context/tools/effects and independently reviews patch evidence |
 | Communication | announces a feature | gives claim, evidence, scope, limitation, and next falsifier |
@@ -1077,6 +1424,8 @@ accessible control state.
 ### TA guide
 
 The TA does not begin by teaching a library call. Use this hint ladder:
+
+### Supportive hint and repair ladder
 
 1. **Purpose hint:** “Who is deciding what, and what exists before your
    feature?”
@@ -1120,6 +1469,77 @@ At the final checkoff, the Study Partner plays an AI agent that summarizes the
 feature with one subtle overclaim. The learner corrects it using the evidence
 labels, not a rhetorical objection.
 
+### Teaching Assistant oral-defense prompt — M25
+
+~~~text
+You are Atlas Academy's M25 Teaching Assistant. Use this full-module
+oral-defense prompt only after the private guided-study evidence gate is met:
+the learner supplies the actual M31–M36 dossier/packet outputs, relevant
+M27–M30 artifacts or explicit unavailable markers, and a concise cross-module
+handoff. During the portal-preview path, ask only about the `PREVIEW ONLY` gate
+card and one future-M26 question; do not start from a dossier, annex, or
+handoff. This full-module conversation is a preparation and evidence-repair
+conversation, not a pass/fail examination, portal unlock, or release claim.
+Start from the learner's Next-Step Evidence Dossier and Advanced Evidence
+Annex. Ask them to defend one user decision, one data-time boundary, one
+representation/objective choice, one evaluation limitation, and one
+human-control or abstention rule. Ask for a prediction before revealing a
+correction. When a claim is fragile, use this hint ladder: identify the
+evidence label; name the supporting M27–M36 artifact or mark it unavailable;
+select two receipts that conflict; change one premise; offer a counterexample;
+help the learner restate the narrowest supported claim. Use the visible chat as
+an accessible whiteboard:
+define notation, render equations when supported with a short prose/ASCII
+fallback, put code in labelled fences, and make a trace/table readable after
+the conversation. End with a learner-controlled summary: defended claim,
+repaired misconception, evidence inspected, unavailable advanced evidence,
+remaining uncertainty, and one prospective M26 question. The conversation does
+not itself unlock M26. Do not grade, claim that voice/live settings are
+controlled, or save a raw transcript.
+~~~
+
+### Learner-controlled evidence summary
+
+End the conversation with the learner's defended claim, the smallest repaired
+misconception, evidence inspected, an unavailable-evidence marker when needed,
+remaining uncertainty, and one future-M26 question. This is a learning record,
+not a grade, unlock, or raw transcript.
+
+### Study Partner live-rehearsal prompt — M25
+
+~~~text
+You are Atlas Academy's M25 Study Partner. Use this full-module rehearsal
+prompt only after the private guided-study evidence gate is met: the learner
+supplies the actual M31–M36 dossier/packet outputs, relevant M27–M30 artifacts
+or explicit unavailable markers, and a concise cross-module handoff. During
+the portal-preview path, discuss only the `PREVIEW ONLY` gate card and one
+future-M26 question; do not create a TA handoff. Lead a non-grading live
+discussion or text rehearsal about an evidence-grounded intelligent feature. Treat the
+visible chat as a readable whiteboard: use concise labelled tables and
+diagrams only when helpful; define notation; provide prose/ASCII fallbacks for
+equations; and use language-labelled code fences. Ask the learner to inspect
+an AI-generated feature claim, trace it backward through data, model/policy,
+evaluation, and authority, then change one premise such as time window,
+candidate set, uncertainty, objective, execution constraint, or deployment
+assumption. Require a named M27–M36 artifact or an honest unavailable marker;
+never fill a missing artifact with confidence. End with a compact TA handoff:
+strongest insight, unresolved misconception, dossier evidence, gate status,
+and next question. Do not administer the formal oral defense.
+~~~
+
+### Learner-controlled note boundary
+
+The designated chat may create at most one compact note with module/topic,
+definitions or trace, prediction, evidence, misconception, counterexample,
+uncertainty, and next action only when all four conditions hold: the learner
+said `records on` in that exact chat, the configured private destination is
+reachable, the session was substantive, and neither `pause records` nor
+`off-record` applies. A prior `records on` never carries into a new or
+ambiguously resumed substantive session; records are off until a fresh visible
+`records on` in that session. Otherwise, make no write and offer the same compact note
+for manual copy. Never save raw voice transcripts, credentials, private data,
+or an unverified claim that a live session or Notion write occurred.
+
 ---
 
 ## 12. Retrieval schedule and handoff
@@ -1137,24 +1557,38 @@ Module 26 turns the M25 packet into a maintained Atlas capstone. The capstone
 must connect the decision feature to its data, algorithms, contracts,
 transaction, systems behavior, security/privacy boundary, runtime evidence,
 human impact, deployment, and known unknowns. It does not require a public
-launch or a live third-party model. A private deployable GitHub project with a
-sanitized documentation/demo surface is the default safe release target.
+launch or a live third-party model. A future, privately deployable GitHub
+project with a sanitized documentation/demo surface can be a safe post-gate
+target; this is not evidence that a deployment or release currently exists.
 
 ---
 
 ## 13. Source route and reuse boundary
 
-The Module 25 source map is authoritative for claim-to-source routing, version
-pinning, access dates, and licensing details. Its source roles include:
+The Module 25 source map and its authoring-only source-audit addendum provide
+claim-to-source routing plus the dated source/status/reuse record. The
+university calibration routes below were rechecked on **2026-08-01**; moving
+documentation remains a recheck target rather than a reproducibility pin. Its
+source roles include:
 
 - [MIT 18.05: Introduction to Probability and Statistics](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/)
   for probability/statistics retrieval and experiment reasoning;
+- [MIT 6.036: Introduction to Machine Learning](https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/)
+  and [CMU 10-718: Machine Learning in Practice](https://www.cs.cmu.edu/~smithv/10718/spring2024/)
+  for problem formulation, representation, reproducible pipelines, evaluation,
+  and the boundary between an end-to-end project and this bounded synthetic
+  rehearsal;
+- [Stanford CS229](https://cs229.stanford.edu/syllabus-spring2020.html) and
+  [Georgia Tech CS 6601](https://omscs.gatech.edu/cs-6601-artificial-intelligence)
+  for the prerequisite mathematical/AI sequence that M31–M36 supply before
+  M25's synthesis; they are calibration routes, not copied assignments;
 - [Berkeley CS 188](https://inst.eecs.berkeley.edu/~cs188/) and
   [Stanford CS221](https://bulletin.stanford.edu/courses/1057301) for the
   dependency sequence from algorithms/probability to intelligent systems;
 - [scikit-learn model evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
   and [probability calibration](https://scikit-learn.org/stable/modules/calibration.html)
-  for version-pinned tool/API behavior and reproducible small examples;
+  for version-labelled tool/API behavior and original, reproducible small
+  examples;
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
   and its [Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
   for governance/risk framing, with the exact version/status recorded before
@@ -1173,3 +1607,76 @@ scikit-learn code is reused, preserve its BSD-3-Clause notices. Link to and
 paraphrase W3C material rather than copying substantial figures or prose.
 Every dataset needs explicit provenance, license, purpose, consent, retention,
 and external-model disclosure; synthetic/local fixtures are the default.
+
+
+## Bench pack
+
+**Bench pack:** `m25` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. No model is trained anywhere in this pack, and
+that is the right instrument rather than a compromise: whether an evaluation is
+*entitled* to its number is settled before any model exists.
+
+### Bench 2 — data lineage claim map
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** four rows, each breaking exactly one contract claim, all rejected
+with **four distinct messages**: a non-binary label, an outcome dated before its
+features, a feature observed after the decision cutoff, and an undeclared field.
+The fourth is the one worth arguing about — `support_ticket_sentiment` might be the
+most predictive field available, and the validator never looks. It is refused
+because it is **not in the contract**, on authority rather than on quality.
+
+That is the distinction the session turns on: every other pipeline check asks "is
+this value right?", and a lineage check asks "is this value *ours to use, for this
+purpose*?" The contract also carries a purpose written as a checkable sentence, a
+human-override requirement, a prohibition on automatic mutation, and
+`model_version=None` — the contract exists before any model does.
+
+**Cannot establish:** that any real dataset carries the columns these checks need
+— largely the point, since most do not. No consent, retention schedule, or
+population boundary can be verified by a validator reading rows.
+
+### Bench 4 — calibration and uncertainty report
+
+**Session:** 4. **Rungs:** review and verify, debug and defend.
+**Executes:** two independent failures that are usually confused.
+
+First, leakage. Twelve rows carry both a feature day and an outcome day. A temporal
+split at day 5 puts zero unknowable outcomes into training. A random 60/40 split over
+the **identical rows** puts five there — training on outcomes from days 6, 7, and 8
+for a model that predicts on day 5. Neither split raises, and the critical property
+is that **no downstream metric can detect it**: every accuracy figure, confusion
+matrix, and bootstrap interval is computed after the split and inherits its
+assumption. What made the check possible at all is the `outcome_day` column, which
+most datasets do not have — a data-lineage decision made long before anyone trains
+anything.
+
+Second, calibration. `evaluate_held_out` returns precision, recall, and accuracy all
+**1.0** while reporting `calibration_supported=False` — a field, not a footnote.
+Rescaling every score from (0.1, 0.9) to (0.45, 0.55) and to (0.001, 0.999) leaves
+all three metrics **identical**, because threshold metrics record which side of the
+line a score falls on and discard the magnitude entirely. So no threshold metric
+could ever detect miscalibration, and "rows scored 0.9 are right about 90% of the
+time" is a claim this card structurally cannot support.
+
+**Cannot establish:** any real model's leakage, and no quantity of inflation. It
+measures nothing about causal benefit, fairness across groups, distribution shift, or
+what threshold a deployment should use — the last needing the cost of each error
+type, a decision input no evaluation contains.
+
+### Sessions without a bench
+
+- **Session 1** — the outcome definition record is an argument about what is being
+  predicted and why that is the right target.
+- **Session 3** — a component responsibility map: a design artifact.
+- **Session 5** — the human-control account: who may override, when, and on what
+  evidence. An argument about authority.
+- **Session 6** — an evidence and human-control packet consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m25-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

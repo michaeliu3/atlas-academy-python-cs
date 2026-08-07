@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m34",
+  "purpose": "Bind M34's checked-in authoring-only workbook candidate, instructor-facing source research, hidden session/output topology, module companion, and bounded classical-AI reference fixture into a non-promoting structural candidate package. This record neither changes M34's authoring-only/hidden graph state nor supplies a learner route, canonical learner-source-map binding, studio, review, CI, deployment, or release record.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs can show only that the declared authoring-only candidate files and locators exist in a checked Git candidate, including a hidden session/output topology and bounded fixtures. They do not establish that the instructor-facing source plan is canonical, that the hidden workbook is learner-ready, that a fixture proves a general algorithmic claim, that an interaction is a learner-facing studio, or that the material is pedagogically, mathematically, visually, or operationally adequate.",
+    "humanReview": "This candidate record is not human approval, a source or license review, an oral-defense result, a learner grade, a mastery determination, or authorization to change M34's lifecycle.",
+    "release": "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M34 remains authoring-only, hidden from the reader, and unreleased."
+  },
+  "evidence": [
+    {
+      "id": "m34-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The hidden M34 workbook directs prerequisite retrieval through M10, M11, M30, M31, and M33, while its authoring bridge, hidden delivery map, and module-scoped companion preserve M35 as the existing canonical forward handoff; direct academic consumers remain contextual authoring connections rather than learner navigation.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prerequisite-retrieval" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json", "locator": "/modules/3" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/authoring-delivery/m34.v1.json", "locator": "/forwardHandoff" },
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m34.v1.json", "locator": "/forwardHandoff" }
+      ],
+      "limitations": ["These authoring connections do not prove that a learner met prerequisites, that M34 has a reader route, or that any advanced-module reference is approved navigation."]
+    },
+    {
+      "id": "m34-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "The hidden M34 candidate declares six ordered sessions from state formulation through search conditions, constraint/relaxation boundaries, planning limits, uncertainty and authority, and a classical-AI design defense; its authoring delivery map resolves typed visible local outputs in every session and binds prerequisite bridge artifacts to their first-consuming session.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-1--model-a-state-before-searching-it" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-2--search-traces-need-their-theorem-conditions" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-3--constraints-and-relaxations-change-the-mathematical-object" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-4--planning-and-solver-limits-must-be-stated-not-guessed" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-5--belief-utility-and-authority-are-different-inputs" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-6--defend-a-classical-ai-design-dossier" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/authoring-delivery/m34.v1.json", "locator": "/sessions" }
+      ],
+      "limitations": ["Six draft headings and their order do not establish a learner-visible progression, appropriate pace, delivery quality, or completion evidence."]
+    },
+    {
+      "id": "m34-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M34 begins from a visible decision invariant and asks the learner to define state, action, observation, goal, cost, representation, authority, and a non-claim before choosing a search, constraint, or decision method.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "the-working-invariant" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "session-1--model-a-state-before-searching-it" }
+      ],
+      "limitations": ["Visible first-principles framing does not prove that a formulation is adequate for a real decision or that a learner can build one independently."]
+    },
+    {
+      "id": "m34-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "The candidate distinguishes completeness from optimality, provides an admissible-but-inconsistent no-reopen counterexample, a local-consistency counterexample, a relaxation derivation, a false-versus-unknown-versus-unmodelled planning-state card, a planning/encoding boundary, a two-step Bellman backup, and bounded first-order-resolution, Bayesian-network/HMM, POMDP, and game-theory cards with a decision-authority boundary.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "completeness-is-not-optimality" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "exact-counterexample--admissible-is-not-enough-for-no-reopen-graph-search" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "counterexample-local-consistency-is-not-global-satisfiability" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "relaxation-from-first-principles" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "state-semantics-card-false-unknown-or-unmodelled" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "formal-limit-and-encoding-boundary" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "a-two-step-bellman-backup" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "first-order-logic-and-resolution--normalize-the-claim-before-proving-it" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "bayesian-networks-and-hidden-markov-models--factorization-is-a-model" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "pomdps-and-games--belief-policies-versus-strategic-policies" }
+      ],
+      "limitations": ["These draft anchors do not substitute for mathematical, source, numerical, or pedagogical review of definitions, hypotheses, derivations, counterexamples, or experiments."]
+    },
+    {
+      "id": "m34-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M34 includes code reading and debugging of a state model, a priority policy, a constraint/relaxation trace, a planning/solver boundary, and an expected-utility calculation.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "code-reading-and-debugging-task" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "read-the-priority-policy" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "code-reading-task" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "debugging--design-inspection" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "code-reading-task-1" }
+      ],
+      "limitations": ["Draft prompts do not show that a learner can read unfamiliar code, locate a fault, design a bounded model, or review an AI-generated search or decision claim."]
+    },
+    {
+      "id": "m34-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "The candidate contains prediction-before-reveal prompts about state representations, search obligations, propagation, relaxations, planning limits, and decision consequences before local corrections are explained.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal-1" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal--propagation-and-branching-trace" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal-2" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal-3" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal-4" }
+      ],
+      "limitations": ["A written prediction prompt does not establish that a learner committed before revealing the explanation or revised a misconception."]
+    },
+    {
+      "id": "m34-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "The M34 dossier and forward handoff ask the learner to carry a problem formulation, solver rationale, uncertainty model, and human-impact boundary into M35 without treating a successful bounded trace as a general deployment decision.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "output-classical-ai-search-constraints--decision-packet" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "forward-handoff" }
+      ],
+      "limitations": ["A proposed handoff does not establish transfer, downstream readiness, or permission to navigate past academic prerequisites."]
+    },
+    {
+      "id": "m34-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M34's instructor-facing candidate source research exposes a primary-source ledger, reuse boundary, definitions/proof/counterexample sheet, misconception repairs, and six-session routing while the hidden workbook provides compact claim/source labels and a claim-linked session route table.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md", "locator": "primary-source-ledger-and-reuse-boundary" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md", "locator": "likely-six-session-source-routing" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "claimsource-labels" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "claim-linked-session-routes" }
+      ],
+      "limitations": ["These are instructor-facing candidate sources and draft learner links, not a canonical graph source-map binding or a completed learner-facing source/license review."]
+    },
+    {
+      "id": "m34-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "The hidden workbook presents a connected state/search/constraint/decision diagram with a concise prose alternative, while the focused authoring test checks the diagram metadata and alternative.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "how-this-module-stays-connected" },
+        { "kind": "file", "role": "test", "path": "tests/m34-classical-ai-reference-fixture.test.mjs", "locator": null }
+      ],
+      "limitations": ["A static authoring test and text alternative do not establish browser rendering, semantic diagram structure, keyboard behavior, screen-reader quality, or learner comprehension."]
+    },
+    {
+      "id": "m34-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "The candidate contains confidence-before-reveal multiple-choice diagnostics with concise repair explanations for formulation, search conditions, relaxation, solver-status, uncertainty, and authority misconceptions.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "prediction-before-reveal" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md", "locator": "misconception-and-repair-map" }
+      ],
+      "limitations": ["Candidate questions and explanations do not establish diagnostic validity, accessible interaction, stored confidence evidence, or learner calibration."]
+    },
+    {
+      "id": "m34-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "The hidden candidate specifies learner-controlled retrieval and changed-premise review for the classical-AI decision invariant.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" }
+      ],
+      "limitations": ["A proposed schedule is not an operational review queue, learner record, retention measure, or notification system."]
+    },
+    {
+      "id": "m34-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M34's candidate design packet names bounded required evidence and a constructive acceptance rubric that distinguishes state/representation, search or solver conditions, uncertainty, authority, and practical limits.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "output-classical-ai-search-constraints--decision-packet" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "acceptance-rubric" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "design-review-exercise" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md", "locator": "bounded-project-and-numerical-experiment-plan" }
+      ],
+      "limitations": ["A candidate brief and rubric do not establish a reviewed project, an assessed portfolio, learner mastery, or authority for a real-world recommendation."]
+    },
+    {
+      "id": "m34-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "The candidate describes a constructive Teaching Assistant conversation with prediction, a hint ladder, counterexamples, transfer, learner choice to pause or write, and a learner-controlled evidence summary; the Study Partner rehearses without grading.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "supportive-oral-defense-and-live-learning-handoff" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "teaching-assistant-prompt--m34" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "hint-ladder" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "study-partner-prompt--m34" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "learner-controlled-evidence-summary" },
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m34.v1.json", "locator": "/teachingAssistant" }
+      ],
+      "limitations": ["Draft prompts do not establish a live or text conversation, accessible voice/whiteboard behavior, a learner-controlled saved summary, or oral-defense quality."]
+    },
+    {
+      "id": "m34-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The module-scoped companion preserves the M34 Teaching Assistant's supportive oral-defense role and its assumption-and-trace repair move.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m34.v1.json", "locator": "/teachingAssistant" }
+      ],
+      "limitations": ["A stored prompt does not prove chat creation, model capability, voice availability, equation/code rendering, or useful teaching behavior."]
+    },
+    {
+      "id": "m34-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The module-scoped companion preserves the M34 Study Partner's non-grading rehearsal, changed-premise, readable-whiteboard, and Teaching Assistant handoff moves.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m34.v1.json", "locator": "/studyPartner" }
+      ],
+      "limitations": ["A stored prompt does not prove chat creation, model capability, voice availability, equation/code rendering, or useful study-partner behavior."]
+    },
+    {
+      "id": "m34-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The module-scoped companion preserves M35 as the canonical forward handoff and names the problem-formulation packet to carry forward without treating later references as navigation or credit.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m34.v1.json", "locator": "/forwardHandoff" }
+      ],
+      "limitations": ["A forward-handoff prompt does not prove that a learner produced the packet, may navigate to M35, or satisfies M35 prerequisites."]
+    },
+    {
+      "id": "m34-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M34 binds a deterministic, bounded classical-AI reference fixture and focused Node test so selected frontier, relaxation, heuristic, and Bellman-backup traces are inspectable without claiming a learner-facing studio or a general solver.",
+      "inputs": [
+        { "kind": "file", "role": "reference-model", "path": "lib/m34-classical-ai-reference-fixture.js", "locator": null },
+        { "kind": "file", "role": "test", "path": "tests/m34-classical-ai-reference-fixture.test.mjs", "locator": null },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md", "locator": "bounded-reference-fixture--frontier-policy" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md", "locator": "bounded-project-and-numerical-experiment-plan" }
+      ],
+      "limitations": ["A bounded fixture and focused Node test do not establish an interactive learner studio, browser behavior, a general algorithmic guarantee, CI completion, deployment, or mastery."]
+    },
+    {
+      "id": "m34-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M34 material.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m34.v1.json", "locator": "/truthBoundary/release" },
+        { "kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m34/candidate-preflight.md", "locator": "authoring-candidate-boundary" }
+      ],
+      "limitations": ["This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

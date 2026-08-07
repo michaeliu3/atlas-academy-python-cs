@@ -2,17 +2,47 @@
 
 **Arc V — Languages, intelligence, and integrated systems defense**
 
-> **Bridge:** Module 25 ended with a bounded decision-support feature and an
-> evidence packet. This module asks the harder systems question: can that
-> feature live inside a maintained product without borrowing authority from a
-> demo, a green check, a benchmark, an agent, or a polished interface?
+> **Intended bridge after prerequisite evidence exists:** Module 25 ends with a
+> bounded decision-support feature and an evidence packet. This module then
+> asks the harder systems question: can that feature live inside a maintained
+> product without borrowing authority from a demo, a green check, a benchmark,
+> an agent, or a polished interface?
 
-**Days 41–45 of the 45-day intensive**
+## Preview boundary — portal preview and private guided-study gate
 
-**Primary outcome:** You can make and defend a bounded release decision for one
-Atlas capability (or a comparable open-source contribution). You can trace the
-claim through representation, algorithms, contracts, tests, data, runtime,
-network, trust, human control, packaging, maintenance, and known unknowns.
+This is a full orientation preview in the portal, not an unlocked Days 56–60
+capstone or a source of synthesis credit. Its prerequisite path includes the
+authoring-only M31–M36 chain through Module 25. Read it to see the eventual
+integration standard; do not treat its project, studio, or oral-defense
+material as a substitute for the unavailable prerequisite evidence.
+
+> **Portal preview mode now:** as a preview artifact, you may make only a
+> `REHEARSAL ONLY` framing card. You may also use the built-in bounded,
+> non-credit orientation diagnostics for prediction and misconception repair;
+> their answers create no receipt, credit, handoff, or capstone decision. Do not
+> use the later studio, project, oral defense, or
+> `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` language as a current capstone decision.
+>
+> **Private guided-study evidence gate:** In the learner-designated Teaching
+> Assistant and Study Partner chats, the full six-session M26 work may begin
+> only after the learner supplies a private M25 Next-Step Evidence Dossier with
+> Advanced Evidence Annex, the actual M31–M36 named dossier/packet outputs and
+> TA handoffs behind that annex, and relevant M27–M30 artifacts or explicit
+> `[UNAVAILABLE — …]` markers that narrow or defer the affected claim. A fluent
+> model summary is never a receipt. This permits only a learner-owned,
+> simulated/local `RELEASE`/`REVISE`/`DEFER`/`ROLLBACK` recommendation. It does
+> not change the graph or portal access, grant route/Core credit, authorize a
+> real deployment, publish a capstone, or establish release status or mastery.
+
+**Private guided Days 56–60 of the 60-day Atlas Core—only after the private
+guided-study evidence gate is met**
+
+**Intended private-study outcome only after that evidence gate is met:** You
+can make and defend a bounded simulated/local release recommendation for one
+Atlas capability (or a comparable open-source contribution proposal). You can
+trace the claim through representation, algorithms, contracts, tests, data,
+runtime, network, trust, human control, packaging, maintenance, and known
+unknowns.
 
 This is not a last-minute build marathon. It is an advanced evidence exercise:
 read the system, recover its architecture, diagnose a failure, review a
@@ -22,6 +52,16 @@ under a changed constraint.
 ---
 
 ## How to study this module
+
+> **Preview reading boundary:** In the portal, the six-session orientation
+> material below is for after the prerequisite gate opens. In preview mode,
+> make only the `REHEARSAL ONLY` framing card as a preview artifact, while using
+> the built-in non-credit orientation diagnostics only for prediction and
+> misconception repair. Do not use the later layers, project, studio, oral
+> defense, or release-decision language as current capstone work. In the
+> designated private chats, the private guided-study evidence gate above permits
+> the same six sessions as current learning work; the resulting decision remains
+> simulated/local and never changes portal or release state.
 
 ### The exact cumulative invariant
 
@@ -105,16 +145,25 @@ artifacts into one release argument.
 | M6–M11 representation, index/graph, and algorithm decision memo | The data structure, candidate set, dependency path, and complexity tradeoff behind the behavior. | Why this representation and algorithm are suitable for the workload and failure mode. |
 | M12–M16 API contract, test suite, package boundary, schema, and transaction trace | A changeable software boundary with validation, persistence, recovery, and atomicity evidence. | Why a request, migration, retry, or failure preserves the stated invariant. |
 | M17–M22 execution, OS, concurrency, protocol, partial-failure, and trust dossier | A model of resources, races, remote uncertainty, authentication/authorization, privacy, and failure recovery. | Which component owns a failure, who may act, and what remains outside the system's authority. |
-| M23–M25 language/runtime evidence and human-centered feature packet | Meaning-preserving query/representation behavior, scoped performance evidence, and an accessible, bounded decision surface. | Why a local observation or suggestion is not promoted into a universal claim, command, or user benefit. |
+| M23–M24 language/runtime evidence | Meaning-preserving query/representation behavior and scoped performance evidence. | Why a local observation is not promoted into a universal claim. |
+| M27–M31 formal mathematics, inference, and optimization evidence | Definitions, assumptions, derivations, numerical boundaries, statistical models, and information/optimization tradeoffs. | Why a mathematical or empirical claim is valid only under its stated model, data, and finite-precision conditions. |
+| M32–M36 systems-for-learning, formal limits, AI, ML, and learning-theory evidence | Cross-layer execution evidence, reductions, search/decision formulation, evaluation manifests, generalization/limit arguments, and reliability boundaries. | Why an apparent model result does not silently become a deployable guarantee, authority, or human benefit. |
+| M25 human-centered evidence packet | An accessible, bounded decision surface with authority, provenance, explanation, uncertainty, and override evidence. | Why a suggestion remains contestable and does not become a command or a user benefit claim. |
 
 ~~~mermaid
+%% atlas-diagram-id: m26-prerequisite-release-evidence
+%% atlas-diagram-title: Advanced course artifacts converge on the M26 release decision
+%% atlas-diagram-alt: Retrieval evidence, software foundations, data structures, contracts, systems, trust, semantics, mathematics, advanced AI/ML evidence, and the M25 human-control packet combine into a release claim, architecture thread, failure and authority boundary, evidence ledger, and a bounded release decision with a maintenance handoff.
 flowchart LR
     R["M0 retrieval + uncertainty map"] --> C["release claim + owner"]
     S["M1–M5 state, proof, cost artifacts"] --> I["invariant + workload"]
     A["M6–M11 representation / algorithm memo"] --> X["architecture thread"]
     D["M12–M16 contracts, tests, transaction trace"] --> X
     O["M17–M22 systems / trust dossier"] --> F["failure + authority boundary"]
-    H["M23–M25 semantics, runtime, human evidence"] --> E["evidence ledger"]
+    H["M23–M24 semantics + runtime evidence"] --> E["evidence ledger"]
+    Q["M27–M31 mathematical / statistical evidence"] --> E
+    T["M32–M36 AI / ML / theory evidence"] --> E
+    U["M25 human-control packet"] --> E
     C --> X
     I --> X
     X --> F
@@ -123,12 +172,58 @@ flowchart LR
     B --> M["maintained product / responsible contribution"]
 ~~~
 
-**Text equivalent:** Start with a release claim owned by a named person. Join
-the prior state, proof, cost, representation, contract, transaction, systems,
-trust, runtime, and human-impact artifacts into a single architecture thread.
-Use that thread to diagnose failure and judge evidence. The output is a
-bounded release decision and a maintenance handoff, not a claim that every
-unknown is solved.
+### 1.1A The advanced-evidence annex
+
+The capstone does not ask for a ceremonial appendix of M27–M36 topic names. It
+asks for one exact contribution from each advanced artifact that is relevant to
+the release claim. If an artifact is unavailable because the learner pack is
+still authoring-only, the correct dossier entry is
+**[UNAVAILABLE — DEFER OR NARROW CLAIM]**. Do not reproduce a theorem,
+benchmark, agent answer, or test result as a substitute.
+
+| Module | Capstone artifact to attach or cite | Capstone question it must answer | Boundary retained in M26 |
+| --- | --- | --- | --- |
+| M27 | proof/claim ledger with countermodel | Which invariant, quantifier, or implication in the release claim is actually justified? | A few passing cases do not prove a universal property. |
+| M28 | representation and numerical-stability note | Which representation, conditioning, precision, or distance assumption affects correctness? | A numerical output is not automatically stable or meaningful. |
+| M29 | limit/derivative/convergence scope sheet | Which continuous or iterative conclusion is valid under which domain and assumptions? | A finite trace or small derivative is not a global guarantee. |
+| M30 | inference/evaluation manifest | Which population, data-generation story, uncertainty, and alternative explanation bound an empirical claim? | A metric is not causality, benefit, or universal quality. |
+| M31 | optimization/information evidence dossier | Which objective, hard constraint, proxy gap, and stopping/support condition make the algorithmic result interpretable? | A minimized loss does not decide what should be released. |
+| M32 | execution-transfer/reproducibility dossier | Which dtype, layout, device, seed, profiling, memory, or semantic-oracle fields make the system observation reproducible? | A local accelerator result is not a portable operational guarantee. |
+| M33 | Formal Limits Claim Packet | What exact encoding, reduction, resource model, or complexity limit constrains the capability? | A timeout or a theory label does not decide a particular product outcome. |
+| M34 | Classical AI Search, Constraints & Decision Packet | Which state, action, constraint, search/solver condition, uncertainty model, and authority boundary shaped the proposed behavior? | A solver/planner recommendation is not self-authorizing. |
+| M35 | **Machine Learning & Representation Dossier** | Which representation, baseline, split, shift test, objective, and failure slice support the learned component? | A validation result is not generalization, calibration, or user benefit. |
+| M36 | **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its **Limit-and-Nonclaim Card**, **Theory–System Reproducibility Record**, and **Monitoring Extension to Reliable-Learning Evidence Map** | Which guarantee/limitation survives the declared distribution, precision, implementation, and deployment conditions? | A theorem or benchmark is not a release certificate. |
+
+The M25 handoff supplies the human-control side of this annex: user purpose,
+decision authority, accessible explanation, meaningful override, retention
+boundary, and evidence ledger. The release decision must remain **REVISE** or
+**DEFER** when the exact advanced claim being relied upon has no learner-ready
+artifact.
+
+### 1.1B Advanced Claim Join — one claim, one consequence
+
+The annex becomes useful only when an upstream field changes the capstone
+decision. For the fixed optional next-action feature, the baseline display may
+remain a bounded orientation case. The stronger claim—“a learned order improves
+the next action”—must be narrowed or deferred unless the following join is
+filled from inspected learner-ready artifacts.
+
+| Capstone subclaim | Exact upstream receipt | Assumption that can fail | Release consequence if it fails |
+| --- | --- | --- | --- |
+| The optimized rank expresses the intended choice | M31 **Optimization and Information Evidence Dossier**: objective, hard constraint, proxy gap, stopping/support boundary | the objective is a valid proxy for the declared user outcome | **DEFER** learned-order claim; retain a transparent baseline only |
+| The observed execution result can be compared | M32 **Scientific Python & Accelerators Dossier**: semantic oracle, dtype/layout/device/seed and environment record | the compared runs preserve the same semantics and stated environment | **REVISE** reproduction record before using a performance or model comparison |
+| A formal or complexity statement applies | M33 **Formal Limits Claim Packet**: encoding, reduction direction, resource model | the product actually makes that formal claim | **NARROW** the claim or mark the formal row not relied upon; do not decorate the dossier |
+| Candidate eligibility and decision policy are explicit | M34 **Classical AI Search, Constraints & Decision Packet**: state, candidate set, constraint, uncertainty, authority | the candidate set and constraint remain the ones evaluated | **REVISE** formulation; no solver/planner output may authorize action |
+| A learned proposal outperforms a baseline under scope | M35 **Machine Learning & Representation Dossier**: split, baseline, failure slice, shift result | data relation, representation, and evaluation population still hold | **DEFER** broader benefit/generalization claim; display only the bounded evidence |
+| A reliability or monitoring statement survives its scope | M36 **Statistical Learning Theory & Reliable Deep-Learning Systems Dossier**, with its **Limit-and-Nonclaim Card**, **Theory–System Reproducibility Record**, and **Monitoring Extension to Reliable-Learning Evidence Map**: theorem/non-claim, shift monitor, stop owner | distribution, precision, implementation, and human-control assumptions hold | **NARROW**, **DEFER**, or **DISABLE** according to the named stop condition |
+
+Each row must cite one narrow claim, one assumption, one counterexample or
+non-claim, and one release consequence. A missing row does not become a
+generated summary. It means **[UNAVAILABLE — DEFER OR NARROW CLAIM]**. The
+M31–M36 packs remain authoring-only in the portal. In the private guided route,
+they may contribute only when the learner supplies their actual named outputs
+and handoffs through the private evidence gate; that is not learner credit,
+release proof, or a reason to unlock this portal preview.
 
 ### 1.2 The forward connection
 
@@ -152,11 +247,11 @@ someone else can understand, test, maintain, and reverse.
 
 | Day | Capstone pressure | Sessions | Dossier increment |
 |---|---|---|---|
-| 41 | Define the release rather than the feature wish. | 1 | Release contract and pre-mortem |
-| 42 | Recover the real architecture and ownership boundaries. | 2 | Architecture thread and dependency closure |
-| 43 | Trace a failure across persistence, concurrency, and remote uncertainty. | 3 | Incident report and regression specification |
-| 44 | Review the patch, supply chain, and operational evidence. | 4 and 5 | Change review, evidence ledger, rollback/canary plan |
-| 45 | Decide, hand off, and defend under challenge. | 6 | Final release dossier and oral defense |
+| 56 | Define the release rather than the feature wish. | 1 | Release contract and pre-mortem |
+| 57 | Recover the real architecture and ownership boundaries. | 2 | Architecture thread and dependency closure |
+| 58 | Trace a failure across persistence, concurrency, and remote uncertainty. | 3 | Incident report and regression specification |
+| 59 | Review the patch, supply chain, and operational evidence. | 4 and 5 | Change review, evidence ledger, rollback/canary plan |
+| 60 | Decide, hand off, and defend under challenge. | 6 | Final release dossier and oral defense |
 
 The default workday remains evidence-first: retrieval and prediction; a
 first-principles model and trace; unfamiliar-code or architecture reading;
@@ -193,11 +288,78 @@ Choose one track, but use the same dossier and rubric.
 | Track | Scope | Evidence requirement |
 |---|---|---|
 | **Atlas integration (default)** | Finish one bounded vertical slice in the course system. | Trace the capability through architecture, tests, failure handling, trust, and maintenance. |
-| **Open-source stewardship** | Make a comparable small contribution to an established Python project. | Read project norms, reproduce a bounded issue, propose/review a patch, respect maintainers' authority, and document the evidence. |
+| **Open-source stewardship** | Make a comparable small contribution to an established Python project. | Confirm that the project is active, ground the task in a documented issue/request, read project norms, reproduce a bounded issue, propose/review a patch, respect maintainers' authority, and document the evidence. |
 
 Neither track requires a public deployment, real learner data, secrets, or
 external AI access. If these would be needed to make the claim, mark the claim
 as **[UNKNOWN]** and choose a safer local fixture or defer the release.
+
+> **Private guided-route constraint:** In the designated chats, use the Atlas
+> integration track or a local-only external review/proposal. Public submission,
+> maintainer contact, or modification to an external project is outside this
+> private guided route, requires the learner's separate choice, and is not a
+> requested course artifact or evidence.
+
+### External-track selection check
+
+Choose the open-source track only when all three facts are inspectable:
+
+1. **Active project:** record one recent release, commit, issue, or contribution
+   activity signal and the route by which a contributor would work.
+2. **Tracked need:** link or quote the title of one documented issue/request
+   that the bounded reproducer or proposal addresses. Do not manufacture an
+   issue after the fact.
+3. **Authority boundary:** name the maintainer/community route and what remains
+   their decision.
+
+If any fact is unavailable, choose the Atlas integration track instead. The
+local track is not a lesser substitute: it is the correct privacy-safe route
+when there is no active project, no documented need, or no appropriate public
+interaction. A public submission, merge, contact, or endorsement is never
+required.
+
+### Stewardship Boundary — required only for the external track
+
+Open-source stewardship is not “send a patch and hope it merges.” Before any
+public interaction, create one small boundary record:
+
+~~~text
+project and exact version/commit inspected:
+activity evidence and contribution route (recent release, commit, issue, or contribution activity):
+documented issue/request tied to this task:
+issue or bounded problem, reproducer, and affected behavior:
+contribution, license, security, and communication routes read:
+maintainer / reviewer authority and what the learner may not decide:
+smallest local patch or review proposal:
+tests, evidence, and documentation expected by the project:
+submission status: not submitted / draft / submitted / feedback observed:
+explicit non-claim: no merge, maintainer endorsement, deployment, or project-wide quality claim:
+~~~
+
+Public submission is optional. A private, well-scoped reproducer or review
+proposal can demonstrate the reasoning. Never upload secrets, private records,
+or a generated patch that you cannot explain; a maintainer's capacity and
+project norms remain external boundaries, not grading targets.
+
+### Versioning, compatibility, deprecation, and license obligations
+
+Before a release decision, turn “the code works” into an identity and a
+stewardship record. Fill one row for every artifact that crosses the boundary:
+
+| Boundary | Required record | Failure or non-claim |
+|---|---|---|
+| Source and build | reviewed commit, release identifier, lockfile/toolchain, generated-artifact digest, and build date | a version label alone proves neither reproducibility nor safety |
+| Interface and data | schema/API/protocol version, compatibility promise, migration or rollback path, and supported runtime matrix | a passing fixture proves no unlisted client or future version |
+| Dependency and license | direct/transitive dependency, exact license or notice, attribution/source-offer duty, and any incompatible asset boundary | package metadata is not legal advice or a permission to copy course/project assets |
+| Deprecation | owner, reason, affected versions, notice date, migration target, removal window, security implication, and a tested disable/rollback path | “deprecated” without a migration owner or end condition is not stewardship |
+
+For the private Atlas track, record the decision as **private/no public license
+claim** when appropriate; public visibility and external contribution are not
+required. For the external track, read the project's `LICENSE`, notices,
+contribution/security route, and maintainer policy at the exact inspected
+commit. Link and attribute; do not paste license text or assume that a
+dependency's license covers your original material. This is an engineering
+evidence exercise, not legal counsel.
 
 ### The release admission question
 
@@ -293,6 +455,10 @@ failure path, or evidence—not merely “more testing.”
 
 ---
 
+### Session 1 output — release boundary statement
+
+One statement declares what this release claims and what it explicitly does not.
+
 ## 4. Session 2 — Architecture is a traceable set of responsibilities
 
 ### Pressure
@@ -305,6 +471,9 @@ who can mutate it, which dependency can fail, or why a response is trustworthy.
 Use only the architecture view needed to answer the current question.
 
 ~~~mermaid
+%% atlas-diagram-id: m26-architecture-thread
+%% atlas-diagram-title: One Atlas request crosses interface, API, local state, graph, policy, and log boundaries
+%% atlas-diagram-alt: A learner records a session through the Atlas interface. The interface sends a validated request to an event API. The API owns durable writes and reads the progress store, consults the prerequisite graph, applies a transparent ranking policy, returns an optional suggestion, and records a structured local audit outcome.
 flowchart LR
     P["Learner\nperson"] -->|records session| UI["Atlas interface\ncontainer"]
     UI -->|validated request| API["event API\ncomponent"]
@@ -314,13 +483,6 @@ flowchart LR
     R --> UI
     API -->|audit outcome| L["structured local log\nobservation boundary"]
 ~~~
-
-**Text equivalent:** A learner uses the Atlas interface. The interface sends a
-validated request to an event API. The API owns the durable write and reads the
-progress store. It queries the prerequisite graph, applies a transparent
-ranking policy, and returns an optional displayable suggestion. It records a
-bounded audit outcome. The learner, not the ranker, owns whether to act on the
-suggestion.
 
 This is a context-and-container story. Zoom into a component only when the
 question needs a data structure, contract, transaction, or algorithm. Do not
@@ -385,6 +547,10 @@ failure mode, and what evidence would show that it behaved as claimed.
 
 ---
 
+### Session 2 output — responsibility trace map
+
+One map traces each architectural responsibility to the component that owns it.
+
 ## 5. Session 3 — A retry is a systems event, not a duplicate line of code
 
 ### Pressure
@@ -414,6 +580,9 @@ what occurred.
 ### Failure playback
 
 ~~~mermaid
+%% atlas-diagram-id: m26-retry-failure-playback
+%% atlas-diagram-title: A retry must preserve one logical durable event
+%% atlas-diagram-alt: A client submits event e-204 to the event API. The API commits it to storage, but the response is lost. The client retries with the same event identity. The API and store recognize the already committed logical event and return the prior outcome without creating a second durable effect.
 sequenceDiagram
     participant C as client
     participant A as event API
@@ -427,11 +596,6 @@ sequenceDiagram
     S-->>A: existing committed event
     A-->>C: same logical outcome, no second effect
 ~~~
-
-**Text equivalent:** The client submits event e-204. The API commits it, but
-the client never receives the response. The client retries using the same
-event identity. The API and store recognize the prior committed event and
-return the logical outcome without writing a second durable effect.
 
 ### Debugging lab — find the race
 
@@ -477,6 +641,10 @@ claim is usually narrower: one declared logical event has at most one durable
 effect within the stated local transaction boundary.
 
 ---
+
+### Session 3 output — retry semantics record
+
+One record states what a retry means to the system, not merely what it does in code.
 
 ## 6. Session 4 — A patch is a supply-chain and ownership proposal
 
@@ -566,6 +734,10 @@ non-claim:
 
 ---
 
+### Session 4 output — patch provenance review
+
+One review treats a patch as a supply-chain and ownership proposal and states what it would take to accept it.
+
 ## 7. Session 5 — Operational evidence is scoped evidence
 
 ### Pressure
@@ -603,6 +775,77 @@ limitation:
 next falsifier:
 release consequence if evidence changes:
 ~~~
+
+### Rigor card — a release claim is a conjunction of scoped evidence
+
+### Definition — a scoped release claim is a conjunction
+
+For a fixed local fixture, write a release claim as a
+conjunction, not a score:
+
+~~~text
+R_fixture = declared behavior ∧ traceable evidence ∧ recovery boundary ∧ human-control boundary
+~~~
+
+This is a minimal fixed-fixture teaching model, not a full release-admission
+checklist. A real evidence ledger still needs named owners, authority/data and
+architecture boundaries, version/scope, and known limits.
+
+### Derivation / proof idea — an unsupported conjunct blocks promotion
+
+Each conjunct has its own owner, artifact, scope, and limitation. If one
+conjunct is unsupported, then `R_fixture` is unsupported: a conjunction cannot
+be promoted by the strength of its other terms. This is a proof idea about the
+declared Boolean claim, not proof that a real service is safe to release.
+
+### Assumption boundary — one logical event and one atomic boundary
+
+Let `e-204` name one logical request. Assume that both attempts carry that same
+stable identifier and that a uniqueness-enforced conditional idempotency record
+and its effect share one atomic transaction boundary. Under those assumptions,
+two attempts can yield one durable effect:
+
+### Numerical experiment — two attempts and one durable effect
+
+~~~text
+attempt 1: e-204 absent -> atomically record e-204 and create effect  -> durable effects = 1
+attempt 2: e-204 present -> return the recorded result     -> durable effects = 1
+~~~
+
+The numerical observation is `2 attempts / 1 logical event / 1 durable effect`.
+It supports only that named fixture and transaction boundary; it does not claim
+global exactly-once delivery, a distributed guarantee, or operational release
+readiness.
+
+### Counterexample — check-then-append can duplicate an effect
+
+A convenient check-then-append sequence can interleave:
+
+~~~text
+attempt A: check e-204 absent
+attempt B: check e-204 absent
+attempt A: append effect
+attempt B: append effect
+~~~
+
+Now the same `2 attempts / 1 logical event` fixture has `2 durable effects`.
+The behavior and recovery conjuncts are no longer supported, so the correct
+release consequence is **narrow, defer, or repair the transaction boundary**—
+not “the tests mostly passed.”
+
+### Fill the Advanced Claim Join before promoting an intelligent-feature claim
+
+Use the Section 1.1B table as a linked part of this ledger when the capstone
+relies on optimization, execution, formal, classical-AI, ML, or learning-theory
+evidence. Ask a deliberately uncomfortable question:
+
+> Which exact upstream field would change your release decision if its
+> assumption failed?
+
+For the fixed case, a good answer may be: “If the M35 shifted-slice result or
+M31 proxy boundary fails, we do not release a learned order. We keep or return
+to the optional transparent baseline.” This is not a lesser outcome—it is the
+correct use of evidence.
 
 ### Code-reading lab — reject the convenient metric
 
@@ -646,11 +889,15 @@ does not demonstrate production safety.
 
 ### Session artifact
 
-Add the evidence ledger and an operational/rollback plan to the release
-dossier. Mark every unperformed observation **[UNKNOWN]** rather than
-inventing a result.
+Add the evidence ledger, Advanced Claim Join when relevant, and an
+operational/rollback plan to the release dossier. Mark every unperformed
+observation **[UNKNOWN]** rather than inventing a result.
 
 ---
+
+### Session 5 output — scoped operational evidence log
+
+One log records operational observations with their scope, so none is read as a stronger claim than it is.
 
 ## 8. Session 6 — The defense tests the architecture, not presentation skill
 
@@ -683,6 +930,9 @@ choice with a quality scenario, evidence, owner, alternative, and known cost.
 ### Architecture-defense board
 
 ~~~mermaid
+%% atlas-diagram-id: m26-defense-board
+%% atlas-diagram-title: The M26 evidence board supports release, revise/defer, or rollback
+%% atlas-diagram-alt: A release claim leads to an architecture thread. Tests and incident traces, security and authority review, operational and rollback evidence, and human-control/accessibility evidence feed a claim ledger. The named owner chooses bounded release, revise/defer for a repairable gap, or rollback/disable for an active harm or invariant break.
 flowchart TD
     Q["release claim"] --> A["architecture thread"]
     A --> T["tests + incident trace"]
@@ -698,12 +948,6 @@ flowchart TD
     D -->|repairable gap| V["REVISE / DEFER"]
     D -->|active harm or invariant break| B["ROLL BACK / DISABLE"]
 ~~~
-
-**Text equivalent:** The release claim leads to an architecture thread. Tests,
-incident traces, security/authority review, operational/rollback evidence, and
-human-control evidence feed a claim ledger. The named owner chooses one of
-three bounded outcomes: release within scope, revise/defer because evidence is
-missing, or roll back/disable because an invariant is broken or harm is active.
 
 ### Defense format
 
@@ -723,6 +967,11 @@ Your reviewer then changes one premise: the request retries, the dependency is
 unavailable, the metric regresses in one slice, the user refuses the suggestion,
 or an agent asks for a write capability. Re-evaluate the decision aloud.
 
+One changed-constraint question must target the **Advanced Claim Join**: “Which
+exact upstream field changes your release decision if its assumption fails?”
+The learner should name the revised bounded decision, not recite a theorem or
+model label.
+
 ### Session artifact
 
 Finish the **Release Dossier and Oral Defense Packet**. A high-quality defer
@@ -730,6 +979,10 @@ decision with a sharp evidence gap is stronger than an enthusiastic release
 claim with invented certainty.
 
 ---
+
+### Session 6 output — versioned evidence bundle
+
+One bundle carries claim, trace, test or observation, human impact, limitation, rollback, and the next reason to revise.
 
 ## 9. The Integrated Release Studio
 
@@ -745,7 +998,7 @@ mini-apps.
 | 5. Evidence Ledger | What does each result actually prove? | Test, metric, task, and runtime cards. | Scope, denominator, version, limitation, next falsifier. | Establishes release evidence. |
 | 6. Release Board | Release, revise/defer, or disable? | Claim ledger and quality scenarios. | Challenge card, decision owner, maintenance plan. | Produces oral defense/handoff. |
 
-### Interaction pattern
+### Prediction-before-reveal interaction pattern
 
 Every view uses the same accessible, prediction-first sequence:
 
@@ -797,12 +1050,16 @@ C. The AI release note is sufficient documentation because it summarizes the
 diff.  
 D. A scan and tests prove the absence of security and operational risk.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** Tests, scans, and generated prose can be useful artifacts,
 but each establishes a narrow fact. They do not merge into authority.
 
 **Why the alternatives fail:** A turns several partial observations into a
 universal conclusion. C promotes generated text into reviewed evidence. D
 mistakes detection under a scope for proof that all risks are absent.
+</details>
 
 ### Q2 — Retry and durable effects
 
@@ -815,6 +1072,9 @@ boundary.
 C. The user never sees a timeout.  
 D. The server never performs a lookup.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** The system cannot control every network outcome; it can
 bound its durable state transition by identity, transaction, and recovery
 contract.
@@ -822,6 +1082,7 @@ contract.
 **Why the alternatives fail:** A overclaims distributed guarantees. C hides a
 user-observable partial failure instead of modeling it. D removes a mechanism
 that can support idempotent recovery.
+</details>
 
 ### Q3 — Architecture view selection
 
@@ -834,12 +1095,16 @@ the fallback path.
 C. A folder tree.  
 D. A screenshot of the user interface.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** The question is about order, ownership, and failure
 containment, so a small dynamic trace is the right abstraction.
 
 **Why the alternatives fail:** A creates cognitive load without clarifying the
 event sequence. C says little about runtime ownership. D can show a symptom but
 not the boundary that protects state.
+</details>
 
 ### Q4 — Patch and supply-chain review
 
@@ -853,12 +1118,16 @@ information, tests, and rollback effect before deciding.
 D. Ask an agent to summarize the package repository and merge if the summary is
 positive.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** A dependency or workflow change is a reviewable supply-chain
 and maintenance change, not an automatic rejection or acceptance.
 
 **Why the alternatives fail:** A confuses popularity with suitability. B is an
 absolute rule that ignores legitimate bounded use. D leaves authority and
 verification with untrusted generated text.
+</details>
 
 ### Q5 — Performance evidence
 
@@ -871,12 +1140,16 @@ workload/runtime, subject to the measurement's limits.
 C. The algorithm is asymptotically better.  
 D. The cache is safe to store any learner record.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** It preserves the workload, mechanism, and measurement
 boundary from Module 24.
 
 **Why the alternatives fail:** A expands the population and workload without
 evidence. C changes a runtime observation into a complexity proof. D confuses
 performance with privacy/retention authorization.
+</details>
 
 ### Q6 — Human control and intelligence
 
@@ -889,11 +1162,15 @@ C. Present a labeled, optional suggestion with explanation and a meaningful
 alternative or dismissal path.  
 D. Treat the learner's click as ground truth for future training.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: C.** A ranked output can support a bounded display policy only
 when the decision contract permits it.
 
 **Why the alternatives fail:** A and B cross authority boundaries. D erases
 exposure, intent, friction, and feedback meaning.
+</details>
 
 ### Q7 — Evidence gap
 
@@ -905,12 +1182,16 @@ B. Defer or revise until a named rollback/disable path and owner exist.
 C. Remove the architecture map because it did not solve the gap.  
 D. Add more UI polish so users can report a problem.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** A missing recovery path is a release-evidence gap, not a
 reason to invent confidence.
 
 **Why the alternatives fail:** A turns probability into authority. C discards
 useful evidence rather than addressing the missing evidence. D may improve
 reporting but does not create a bounded recovery mechanism.
+</details>
 
 ### Q8 — Oral defense under changed constraints
 
@@ -923,12 +1204,16 @@ release under the local/baseline path.
 C. Claim the provider is safe because it is widely used.  
 D. Let the agent decide whether it needs its own provider call.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Best answer: B.** A defense is successful when it can narrow a claim as a
 constraint changes.
 
 **Why the alternatives fail:** A substitutes a demo for availability and
 privacy evidence. C substitutes popularity for a contract. D lets a model mint
 capability and authority.
+</details>
 
 ### Diagnostic routing
 
@@ -957,7 +1242,19 @@ capability and authority.
 | 7. Review and verify | Inspect a patch/workflow/dependency proposal. | Evidence-based accept, revise, defer, or reject decision. |
 | 8. Transfer | Defend the same release logic in Atlas or an unfamiliar open-source project. | A changed-constraint oral explanation. |
 
+### Transfer task — defend the same logic under a changed constraint
+
+Apply the release contract, owner, invariant, evidence ledger, and rollback
+logic to one unfamiliar project or capability. Change exactly one premise—a
+dependency outage, retry, shifted metric slice, user refusal, or unavailable
+advanced artifact—then defend the narrowest release, revise/defer, or rollback
+decision still supported by the evidence.
+
 ### Project — Atlas Release Dossier / Open-Source Stewardship Track
+
+> **Full private-module project:** Use this only after the private
+> guided-study evidence gate is satisfied. In the portal preview, create only
+> the `REHEARSAL ONLY` framing card; do not create a release dossier.
 
 Produce one integrated dossier for a single vertical capability. It can be a
 small but genuine Atlas slice or a comparable contribution to an existing
@@ -966,8 +1263,10 @@ application.”
 
 **Required artifacts**
 
-1. **Release contract** — user task, baseline, version/scope, invariant,
-   owners, non-goals, risk, rollback/disable plan.
+1. **Release contract and quality scenario** — user task, baseline,
+   version/scope, invariant, owners, non-goals, risk, rollback/disable plan,
+   plus one stakeholder/stimulus/context/response-measure scenario with two
+   options, the chosen tradeoff, rejected alternative, and rollback consequence.
 2. **Architecture thread** — one context/container view and one dynamic
    request/failure trace with text equivalents.
 3. **Code-reading dossier** — annotated route through unfamiliar code; identify
@@ -982,6 +1281,20 @@ application.”
    or disable procedure, observable signals, and open questions.
 8. **Oral defense packet** — seven-minute architecture explanation and five
    changed-constraint prompts with prepared evidence anchors.
+9. **Advanced-evidence annex** — for each M27–M36 artifact actually relied
+   upon, name the exact claim, assumption, counterexample/limitation,
+   version/scope, and release consequence. Mark unavailable artifacts
+   **[UNAVAILABLE — DEFER OR NARROW CLAIM]**; never replace them with a
+   plausible generated summary.
+10. **Advanced Claim Join** — for every advanced claim that matters to the
+    decision, cite the exact upstream field, the assumption that can fail, and
+    the revised release/revise/defer/disable consequence.
+11. **Stewardship Boundary** *(external track only)* — record project/version,
+    activity evidence, contribution and security routes, the documented
+    issue/request and reproducer, maintainer authority, local review evidence,
+    submission status, and the explicit no-merge/no-endorsement/non-deployment
+    boundary. If no active project or documented need is available, switch to
+    the Atlas integration track rather than inventing external stewardship.
 
 ### Release decisions are not pass/fail theater
 
@@ -1002,6 +1315,9 @@ application.”
 | Failure reasoning | Lists generic risks. | Reproduces one concrete failure, names the invariant, and supplies a regression test/plan plus residual uncertainty. |
 | Change stewardship | Treats the diff as implementation detail. | Reviews dependency, provenance, authority, tests, compatibility, documentation, and rollback. |
 | Evidence | Collects screenshots/checkmarks. | Separates test, observation, measurement, decision, scope, limitation, and next falsifier. |
+| Quality tradeoff | Names only a preferred tool or slogan. | States stakeholder, stimulus/context, response measure/bound, two options, rejected alternative, and rollback consequence. |
+| Advanced integration | Invokes theorem, model, performance, or reliability vocabulary without an artifact. | Uses the exact M27–M36 Claim Join field, retains its assumptions/non-claim, and changes the release/revise/defer/disable decision when it fails or is unavailable. |
+| Open-source stewardship | Equates opening a pull request with a successful contribution. | Respects project/license/security routes and maintainer authority; records local evidence, submission status, and no-merge/no-endorsement/non-deployment boundary. |
 | Human/trust judgment | Treats security/accessibility/AI as a checklist. | Names the person/owner, control path, data/authority limit, and consequence of disagreement or failure. |
 | Defense | Repeats prepared prose. | Revises a bounded conclusion when a reviewer changes a premise. |
 
@@ -1072,6 +1388,86 @@ Useful Study Partner questions:
 - “Which new dependency, recipient, or capability did the patch add?”
 - “What is your rollback trigger, and who may pull it?”
 
+### Teaching Assistant oral-defense prompt — M26
+
+### Supportive hint and repair ladder
+
+Move from the learner's claim to its owner, invariant, evidence row, changed
+premise, counterexample, and narrowed decision. Offer the smallest useful hint
+before an explanation; the full prompt below supplies the exact conversation
+sequence.
+
+~~~text
+You are Atlas Academy's M26 Teaching Assistant. Use this full-module
+oral-defense prompt only after the private guided-study evidence gate is met:
+the learner supplies the private M25 dossier/annex, the actual M31–M36 named
+outputs and handoffs, and relevant M27–M30 artifacts or explicit unavailable
+markers. During the portal-preview path, use only the `REHEARSAL ONLY` framing
+card; do not conduct an oral defense or make a release/revise/defer/rollback
+decision. Conduct a supportive, non-pass/fail architecture conversation only
+after the learner has prepared a Release Dossier and its advanced-evidence
+annex. Start with the simulated/local release claim, owner, invariant, and
+defer/rollback path. Ask the learner to trace one
+request through the architecture, defend one representation/algorithm or
+learning-system evidence claim, replay one failure, and distinguish one
+observed result from what it does not establish. Then change one premise:
+retry, dependency outage, resource/precision change, distribution shift,
+theorem assumption, user refusal, permission boundary, or unavailable M27–M36
+artifact. Ask for a prediction before correcting. Use a hint ladder: locate
+the evidence row; identify its scope/assumption; offer a counterexample;
+ask which exact upstream field changes the decision; require a narrower
+simulated/local release/revise/defer/rollback recommendation. Use the visible chat
+as an accessible whiteboard: define symbols, provide equation prose/ASCII
+fallbacks, put code in labelled fences, and make architecture diagrams/traces
+readable after the conversation. End with a learner-controlled evidence
+summary and maintenance handoff. Do not grade, claim platform voice settings,
+authorize a real deployment, or save a raw transcript.
+~~~
+
+### Learner-controlled evidence summary
+
+End with the learner's defended decision, evidence anchor, repaired premise,
+remaining uncertainty, next falsifier, and maintenance handoff. It is a
+constructive architecture-learning summary, not a grade, release approval, or
+raw transcript.
+
+### Study Partner live-rehearsal prompt — M26
+
+~~~text
+You are Atlas Academy's M26 Study Partner. Use this full-module rehearsal
+prompt only after the private guided-study evidence gate is met: the learner
+supplies the private M25 dossier/annex, the actual M31–M36 named outputs and
+handoffs, and relevant M27–M30 artifacts or explicit unavailable markers.
+During the portal-preview path, use only the `REHEARSAL ONLY` framing card; do
+not issue a capstone decision or TA handoff. Run a non-grading architecture
+rehearsal for the learner's bounded simulated/local capstone claim. Use the visible chat as a
+readable whiteboard: give diagrams a title and prose alternative, define
+notation, use concise labelled tables, and put code/diffs in language-labelled
+fences. Ask for a 90-second claim-and-invariant explanation, then challenge
+one M27–M36 evidence row: ask what it supports, which assumption it needs,
+what counterexample or non-claim applies, and whether the release decision
+changes when the artifact is unavailable. Change one operational or human
+premise and require a bounded simulated/local release, revise, defer, or
+rollback recommendation.
+End with a compact TA handoff: strongest insight, unresolved misconception,
+exact dossier anchor, decision status, and next falsifier. Do not administer
+the formal oral defense or manufacture missing evidence.
+~~~
+
+### Learner-controlled note boundary
+
+The designated chat may create at most one small record of date, module/topic,
+claim, architecture trace or whiteboard snapshot, prediction, evidence,
+counterexample, uncertainty, decision, and next action only when all four
+conditions hold: the learner said `records on` in that exact chat, the
+configured private destination is reachable, the conversation was substantive,
+and neither `pause records` nor `off-record` applies. Otherwise, make no write
+and provide a copyable summary. A prior `records on` never carries into a new
+or ambiguously resumed substantive session; records are off until a fresh
+visible `records on` in that session. Never save raw voice transcripts, credentials,
+sensitive records, or an unverified claim that a live session or Notion write
+occurred.
+
 ---
 
 ## 13. Retrieval schedule and maintenance handoff
@@ -1080,9 +1476,9 @@ Useful Study Partner questions:
 
 | When | Prompt |
 |---|---|
-| End of Day 41 | State the release claim, non-goal, invariant, owner, and rollback path without notes. |
-| Start of Day 43 | Draw the request/retry timeline and say where the durable-effect boundary lives. |
-| End of Day 45 | Give the two-minute release/defer decision with one limitation and next falsifier. |
+| End of Day 56 | State the release claim, non-goal, invariant, owner, and rollback path without notes. |
+| Start of Day 58 | Draw the request/retry timeline and say where the durable-effect boundary lives. |
+| End of Day 60 | Give the two-minute release/defer decision with one limitation and next falsifier. |
 | Three days later | Review a fresh diff and identify the first authority, provenance, or rollback question. |
 | Two weeks later | Re-run the oral defense after changing a dependency or workload assumption. |
 | Six weeks later | Read a real issue/patch in the chosen project and produce one miniature evidence ledger. |
@@ -1111,7 +1507,9 @@ understood after the original author, agent conversation, or demo is gone.
 
 The resources below inform this workbook's vocabulary and review practices.
 They are not a substitute for the learner's own architecture argument, and
-they do not grant certification or compliance.
+they do not grant certification or compliance. The university calibration
+routes below were rechecked on **2026-08-01**; revisit moving course pages and
+terms before any reuse.
 
 | Resource | Use in M26 | Reuse and licensing boundary |
 |---|---|---|
@@ -1119,6 +1517,9 @@ they do not grant certification or compliance.
 | [C4 model diagrams](https://c4model.com/diagrams) and [notation guidance](https://c4model.com/diagrams/notation) | Choose a context, container, component, dynamic, or deployment view by the question it answers; require titles, scopes, legends, and labeled relationships. | The C4 site identifies CC BY 4.0 for its site/examples. Prefer original Atlas diagrams and retain attribution/terms if material is reused. |
 | [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches), [dependency review](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review), and [artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) | Treat merges, dependency changes, and build provenance as reviewable boundaries. | Link and paraphrase current documentation. Do not claim a repository has controls configured unless they were actually inspected and verified. |
 | [MIT 6.005 Software Construction](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/) | Reinforce invariants, specifications, testing, concurrent reasoning, and code that remains ready for change. | Use as a sequencing/reference route; do not reproduce course assignments, solutions, recordings, or grading materials without checking terms. |
+| [CMU 15-313 Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/15313/2017/index.html) and its [Open Source Excursion](https://www.cs.cmu.edu/~ckaestne/15313/2016/extra/Homework6.pdf) | Calibrate the stewardship boundary: requirements, architecture, quality attributes, inspection, measurement, and a scoped open-source contribution workflow with an active-project and documented-need selection check. | Link and paraphrase only. Atlas does not supply a team, public maintainer feedback, a merged patch, or course credit. |
+| [UC Berkeley CS169 Software Engineering](https://www2.eecs.berkeley.edu/Courses/CS169/) | Calibrate verification/validation, regression and integration testing, debugging, monitoring, maintainability, cost/quality reasoning, and substantial-project scope. | Link and paraphrase only; Atlas's local dossier is not a semester-long team project or deployment certification. |
+| [Georgia Tech CS 6300 Software Development Process](https://omscs.gatech.edu/cs-6300-software-development-process) | Calibrate process, quality, and maintenance as software evolves. | The official route is a comparison anchor; do not reproduce restricted course content or claim its Java/team instruction. |
 | [pytest documentation](https://docs.pytest.org/en/stable/) | Read assertion output, fixtures, parametrized cases, and failure-focused regression tests. | pytest is MIT licensed; keep license/attribution requirements if code is copied. Prefer original fixtures and examples. |
 | [SLSA v1.2 requirements](https://slsa.dev/spec/v1.2/requirements) and [provenance](https://slsa.dev/spec/v1.2/provenance) | Discuss artifact provenance and verification as scoped supply-chain evidence. | Record the version/status used and link/paraphrase; do not claim a SLSA level without a real conformance assessment. |
 | [NIST SSDF, SP 800-218](https://csrc.nist.gov/pubs/sp/800/218/final) and [NIST SP 800-61r3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) | Frame secure development and incident-response/recovery planning as lifecycle work. | Treat NIST publications as guidance, not legal advice or a certification. Check notices and incorporated third-party material before reproducing content. |
@@ -1160,3 +1561,43 @@ That is the durable AI-era skill: not competing with agents at raw code volume,
 but directing, reading, testing, constraining, explaining, and sometimes
 rejecting systems with enough precision that the people affected by them retain
 control.
+
+## Bench pack
+
+**Bench pack:** none. This is the only module in the course with no executable bench
+pack, and that is a decision rather than an omission.
+
+Every other module carries two or three benches, covering the sessions where running
+code reveals something reading cannot. The selection rubric admits a session on any
+of five signals — an observable mechanism, a measurement, an invariant that can be
+violated on purpose, a falsifiable prediction, or an agent patch run against tests —
+and disqualifies it when the artifact is prose or design, when a kernel would have to
+model the mechanism dishonestly, when the session synthesises earlier work rather
+than producing new evidence, or when a bench would only re-execute what the workbook
+already prints.
+
+This capstone's six sessions are disqualified on the first and third of those, every
+time:
+
+- **Session 1** — a stewardship statement: what this project is for and who it
+  serves.
+- **Session 2** — a contribution and governance map, which is an argument about
+  authority.
+- **Session 3** — a provenance and licensing record: claims about where things came
+  from, checkable against sources rather than by execution.
+- **Session 4** — a maintenance and succession plan.
+- **Session 5** — a release bundle assembled from artifacts the earlier modules
+  produced.
+- **Session 6** — the oral defence.
+
+None of these is a claim a kernel can settle. A bench here would either re-run code
+that belongs to another module — where it is already benched — or dress a design
+argument in executable clothing, which is exactly what the production standard's own
+rule calls noise.
+
+Recorded rather than silently omitted, because "this module has no bench, and here is
+the reason" is itself the epistemic move the course teaches. The absence is evidence
+about the subject matter, not a gap in the work.
+
+Every artifact this capstone consumes was produced under a bench pack elsewhere; see
+`benches/README.md` for the corpus-wide policy and the per-module reasons.

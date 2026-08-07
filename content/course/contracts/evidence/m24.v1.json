@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m24",
+  "purpose": "Bind M24's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M24 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m24-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M24 workbook visibly places its M23 prerequisite and bounded M32 conceptual forward handoff in the connected learning route.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "1-position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "11-retrieval-schedule-and-handoff"}
+      ],
+      "limitations": ["Resolving route headings does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m24-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M24 declares six ordered sessions that progress from evidence before optimization through objects, cycles, allocation, runtime inspection, and controlled experiments.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "2-session-1--evidence-before-optimization"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "3-session-2--objects-aliases-and-lifetime"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "4-session-3--cycles-collection-and-resource-ownership"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "5-session-4--allocation-and-memory-lenses"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "6-session-5--source-code-object-frame-bytecode"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "7-session-6--experiment-and-ai-patch-review"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m24-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M24 visibly derives a claim ladder before treating a runtime observation as a portable performance conclusion.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "derive-the-claim-ladder"}
+      ],
+      "limitations": ["A named first-principles section does not prove performance correctness, instructional adequacy, or learner comprehension."]
+    },
+    {
+      "id": "m24-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M24 binds distinct visible sections for an object model, contract assumptions, a two-phase teaching derivation, measurement conditions, and a controlled experiment manifest as a candidate rigor bundle.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "first-principles-model"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "what-python-promises-and-what-it-does-not"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "derive-the-two-phase-teaching-model"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "warm-up-is-a-measurement-condition"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "build-the-experiment-manifest"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, counterexamples, experiments, or source claims."]
+    },
+    {
+      "id": "m24-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M24 includes separate code-reading, debugging investigation, and AI-patch review activities that make a runtime claim inspectable before a conclusion.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "code-reading-lab"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "debugging-investigation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "ai-patch-review"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a performance-sensitive system."]
+    },
+    {
+      "id": "m24-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M24 visibly asks for a runtime-evidence prediction before revealing the scoped measurement repair.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "prediction-exercise"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m24-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M24 includes a transfer task that carries the same evidence discipline to a new runtime claim while keeping its boundary explicit.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "transfer-task--new-runtime-claim-same-evidence-discipline"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
+    },
+    {
+      "id": "m24-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M24's workbook source route and its canonical source map and audit addendum expose a candidate source, reuse, and claim-linkage route.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "12-source-route-and-reuse-boundary"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module24_cpython_performance_memory_source_map.md", "locator": "primary-source-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md", "locator": "source-and-reuse-ledger"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m24-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M24 binds its Runtime Evidence Observatory course route, implementation surface, and module-specific rendered regression surface as candidate visual evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "8-runtime-evidence-observatory"},
+        {"kind": "file", "role": "source-code", "path": "app/RuntimeEvidenceObservatory.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m24-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M24 exposes confidence-aware diagnostic prompts and an evidence-lens misconception repair map rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "9-confidence-aware-diagnostic"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "misconception-map--evidence-lens-repairs"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m24-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M24 includes a visible retrieval schedule and handoff queue for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "11-retrieval-schedule-and-handoff"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m24-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M24 specifies a Runtime Evidence Dossier with a problem ladder and constructive acceptance rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "10-problem-ladder-and-atlas-project"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "project--runtime-evidence-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "acceptance-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m24-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M24 contains a conversational oral-defense protocol with a hint ladder, counterexample turn, transfer turn, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "conversational-oral-defense--m24"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "hint-ladder"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "counterexample-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "transfer-turn"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/24_cpython_performance_memory.md", "locator": "reflection-and-learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m24-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M24 companion binds a Teaching Assistant opening, artifact focus, and repair move to the runtime-evidence reasoning route.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m24.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m24-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M24 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m24.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m24-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M24 companion carries a bounded performance-evidence card into the graph's M32 conceptual handoff without creating a learner route.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m24.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M24, access to authoring-only M32, or authorization to bypass prerequisites."]
+    },
+    {
+      "id": "m24-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M24 binds its Runtime Evidence Observatory, explicit registry entry, bounded Python reference model, and module-specific behavioral teaching-model test.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/RuntimeEvidenceObservatory.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module24_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module24_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, runtime/performance correctness, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m24-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m24.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m24/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

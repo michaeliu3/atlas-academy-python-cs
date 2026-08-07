@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m07",
+  "purpose": "Bind M7's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M7 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m07-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M7 workbook connects its M6 representation prerequisite and earlier control, abstraction, proof, and cost foundations to a canonical M8 handoff without treating later conceptual connections as route authority.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "1-position-in-the-knowledge-graph"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "24-backward-and-forward-connections"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m07.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."
+      ]
+    },
+    {
+      "id": "m07-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M7 exposes six ordered sessions that move from restricted access laws through iterator and generator state to ownership, capacity scope, and a reviewed Atlas patch.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "session-1--access-constraints-create-behavior"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "session-2--the-iterator-protocol-exposes-demand"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "session-3--a-generator-is-a-resumable-computation"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "session-4--lazy-pipelines-and-ownership"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "session-5--capacity-and-backpressure-are-system-contracts"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "session-6--agent-directed-atlas-checkpoint"
+        }
+      ],
+      "limitations": [
+        "Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."
+      ]
+    },
+    {
+      "id": "m07-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M7 derives stack and queue order from restricted legal operations, then separates demand, ownership, capacity, and coordination claims before introducing implementation choices.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "3-first-principle-an-interface-can-remove-freedoms"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "derivation-and-proof-idea--restrictions-determine-removal-order"
+        }
+      ],
+      "limitations": [
+        "A named first-principles section does not prove conceptual adequacy, a correct derivation, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m07-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M7 exposes separate definition, assumption, derivation/proof idea, counterexample, and bounded request-count experiment locations for inspecting access and capacity claims.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "definition--access-demand-and-capacity"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "assumption--single-threaded-pull-scope"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "derivation-and-proof-idea--capacity-is-an-invariant-not-a-laziness-slogan"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "counterexample--lazy-construction-can-still-retain-input-sized-state"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "numerical-experiment--request-count-observation"
+        }
+      ],
+      "limitations": [
+        "These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical observations, or source claims."
+      ]
+    },
+    {
+      "id": "m07-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M7 contains distinct unfamiliar-patch reading, capacity/ownership debugging, and demand/batching/effect design work centred on a traceable Atlas ingestion path.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "15-code-and-architecture-reading-studio"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "debugging--isolate-capacity-and-ownership-before-rewriting"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "design--separate-demand-batching-and-effects"
+        }
+      ],
+      "limitations": [
+        "These prompts do not prove that a learner can independently read, debug, or design a demand-sensitive component."
+      ]
+    },
+    {
+      "id": "m07-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M7 asks the learner to predict construction and first-pull effects with confidence before revealing or changing the generator trace.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "prediction-before-reveal--construction-and-first-pull"
+        }
+      ],
+      "limitations": [
+        "A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."
+      ]
+    },
+    {
+      "id": "m07-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M7 asks the learner to transfer an explicit access, consumption, and retained-state model to Atlas and another CS layer without claiming later mechanisms.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "level-8--transfer-to-atlas-and-another-cs-layer"
+        }
+      ],
+      "limitations": [
+        "A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."
+      ]
+    },
+    {
+      "id": "m07-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M7 exposes a learner reading route plus a scoped canonical source map and module-specific source/reuse audit addendum.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "25-sources-and-further-study"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/arc_ii_source_map.md",
+          "locator": "module-7--stacks-queues-iteration-and-lazy-computation"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module7_stacks_queues_iteration_lazy_source_audit_addendum.md",
+          "locator": "source-and-reuse-ledger"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module7_stacks_queues_iteration_lazy_source_audit_addendum.md",
+          "locator": "claim-linkage-and-stopping-lines"
+        }
+      ],
+      "limitations": [
+        "Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."
+      ]
+    },
+    {
+      "id": "m07-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M7 binds its access-and-demand knowledge bridge to a concise text alternative, shared Mermaid reader, shared Arc II overview, and module accessibility regression surface without claiming a graph-bound dedicated studio.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "1-position-in-the-knowledge-graph"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "text-alternative--access-demand-and-bounded-handoff"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/ArcTwoStudio.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "A local scanner and renderer test do not replace screen-reader, keyboard, browser, shared-studio, or human-comprehension review."
+      ]
+    },
+    {
+      "id": "m07-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M7 exposes a confidence-aware understanding diagnostic and misconception routing rather than a pass/fail score.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "20-understanding-check--eight-confidence-aware-mcqs"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "interpretation"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "likely-misconceptions"
+        }
+      ],
+      "limitations": [
+        "The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."
+      ]
+    },
+    {
+      "id": "m07-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M7 includes a learner-controlled after-2-days, after-1-week, and after-3-weeks retrieval route tied to iterator, ownership, and backpressure evidence.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "scheduled-retrieval"
+        }
+      ],
+      "limitations": [
+        "A retrieval schedule does not prove that review occurred or that a learner retained the material."
+      ]
+    },
+    {
+      "id": "m07-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M7 specifies a constructive lazy-ingestion evidence dossier with discussion-ready acceptance criteria and an evidence rubric.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "22-atlas-milestone-7"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "project-acceptance-criteria"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "evidence-rubric"
+        }
+      ],
+      "limitations": [
+        "A project brief, acceptance criteria, and rubric do not prove learner work quality, portfolio review, or mastery."
+      ]
+    },
+    {
+      "id": "m07-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M7 contains an encouraging conversational oral-defense protocol with invitation, hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "supportive-oral-defense-protocol"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "hint-ladder--expose-one-boundary-at-a-time"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "changed-premise-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "transfer--connect-demand-to-the-m8-access-policy-bridge"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "invitation--trace-one-request-before-naming-the-abstraction"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "learner-controlled-evidence-summary"
+        }
+      ],
+      "limitations": [
+        "A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."
+      ]
+    },
+    {
+      "id": "m07-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M7 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated demand-and-capacity claim.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m07.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."
+      ]
+    },
+    {
+      "id": "m07-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M7 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m07.v1.json",
+          "locator": "/studyPartner"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."
+      ]
+    },
+    {
+      "id": "m07-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M7 companion carries a bounded access-and-demand card into the canonical M8 hashing and indexing handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m07.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A declared handoff does not establish learner readiness, completion of M7, or authorization to bypass M8 prerequisites."
+      ]
+    },
+    {
+      "id": "m07-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M7 binds the accessible Mermaid rendering surface, shared Arc II overview, and direct module accessibility test to its access-and-demand bridge; M7 declares no graph-bound dedicated studio or separate executable reference model.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/07_stacks_queues_iteration_lazy.md",
+          "locator": "1-position-in-the-knowledge-graph"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/ArcTwoStudio.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m07-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/evidence/preflight/m07.v1.json",
+          "locator": "/truthBoundary/release"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "provenance",
+          "path": "docs/module-evidence/m07/candidate-preflight.md",
+          "locator": "candidate-boundary"
+        }
+      ],
+      "limitations": [
+        "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."
+      ]
+    }
+  ]
+}

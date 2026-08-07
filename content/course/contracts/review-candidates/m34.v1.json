@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-hidden-review-candidate-selector",
+  "selectorVersion": "v1",
+  "moduleId": "m34",
+  "purpose": "Freeze the hidden M34 learner-material scope for a future qualified review without changing reader access, contract state, release, or learner evidence.",
+  "truthBoundary": {
+    "review": "This selector identifies a bounded review candidate; it is not a quality approval or human review record.",
+    "learnerDelivery": "The selected files remain hidden while M34 is authoring-only and do not create reader access, Core credit, or learner-delivery evidence.",
+    "release": "This selector records neither deployment nor release evidence, and it does not change M34's unrecorded release state or learner mastery."
+  },
+  "evidenceRecordPath": "content/course/contracts/evidence/m34.v1.json",
+  "workbookPath": "content/modules/34_classical_ai_search_constraints_decision.md",
+  "sourceLedgerPaths": [
+    "content/source-maps/module34_classical_ai_search_constraints_decision.md"
+  ],
+  "visualContentPaths": [
+    "content/modules/34_classical_ai_search_constraints_decision.md"
+  ]
+}

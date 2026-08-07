@@ -1,0 +1,1016 @@
+{
+  "schemaVersion": 1,
+  "ledgerVersion": "v1",
+  "kind": "atlas-prerequisite-session-bridge",
+  "purpose": "Plan exactly how each canonical academic prerequisite first enters the six connected sessions for authoring-only Modules 31–36. This is an authoring bridge and evidence checklist, not a publication contract, learner route, source map, or release record.",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
+  "truthBoundary": {
+    "asOf": "2026-08-01",
+    "moduleState": "All entries in this ledger are authoring-only plans. Nothing here changes course-graph lifecycle or availability, verifies candidate-workbook quality or release readiness, or permits a learner to bypass an academic prerequisite.",
+    "forwardLinkMeaning": "declaredForwardModuleId copies the graph handoff. It is not a replacement for academicPrerequisiteModuleIds and must not be interpreted as a prerequisite waiver."
+  },
+  "entryDefinitions": {
+    "inheritedConcept": "The narrow concept or practice the target module receives from the prerequisite; it is not a claim that the prerequisite established universal mastery.",
+    "retrievalCheck": "A short, observable pre-session check. acceptableEvidence describes what would count as a useful response, not a pass/fail score.",
+    "firstConsumingSessionId": "The earliest planned session that needs the prerequisite as part of its reasoning, design, trace, or evidence. It must name one session in the same module's sessionSpine.",
+    "likelyMisconception": "A tempting but materially wrong transfer that the author should surface with a counterexample, trace, or boundary case.",
+    "forwardArtifact": "A planned learner-produced artifact that carries the prerequisite into later sessions or downstream modules. It is not release evidence."
+  },
+  "validationRules": {
+    "requiredModuleIds": ["m31", "m32", "m33", "m34", "m35", "m36"],
+    "requireExactlySixSessionSpineEntries": true,
+    "requireOneBridgeForEveryGraphAcademicPrerequisite": true,
+    "requireFirstConsumingSessionInSameModuleSpine": true,
+    "requireAuthoringOnlyGraphState": true,
+    "forbidPublicationOrReleaseClaims": true
+  },
+  "modules": [
+    {
+      "moduleId": "m31",
+      "planningState": "authoring-only-plan",
+      "graph": {
+        "number": 31,
+        "slug": "31-optimization-information",
+        "title": "Optimization & Information",
+        "academicPrerequisiteModuleIds": ["m28", "m29", "m30"],
+        "declaredForwardModuleId": "m18"
+      },
+      "prerequisiteBridges": [
+        {
+          "prerequisiteModuleId": "m28",
+          "inheritedConcept": "Vectors, inner products, gradients as covectors represented in coordinates, PSD curvature, conditioning, and numerical-stability evidence.",
+          "retrievalCheck": {
+            "prompt": "For a quadratic objective, identify the gradient and Hessian, then explain what a poorly conditioned Hessian changes about an iterative method.",
+            "acceptableEvidence": "Distinguishes direction, curvature, and conditioning; does not treat a gradient expression as a convergence guarantee."
+          },
+          "firstConsumingSessionId": "m31-s01",
+          "likelyMisconception": "The negative gradient points directly to the minimizer, or a positive-semidefinite Hessian alone makes every optimization problem numerically easy.",
+          "forwardArtifact": {
+            "id": "m31-objective-geometry-sheet",
+            "description": "A labeled objective geometry sheet: variables, units, feasible set, gradient/Hessian interpretation, and conditioning risk.",
+            "intendedUse": "Carries into the convergence, algorithm-choice, and systems-accelerator discussions."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m29",
+          "inheritedConcept": "Differentiability assumptions, first- and second-order local tests, constrained extrema, sequences, and convergence claims with stated domains.",
+          "retrievalCheck": {
+            "prompt": "Give a stationary-point counterexample and state one regularity assumption needed before using a derivative-based local conclusion.",
+            "acceptableEvidence": "Separates stationarity from optimality and names the local/domain assumptions rather than relying on a graph or optimizer output."
+          },
+          "firstConsumingSessionId": "m31-s02",
+          "likelyMisconception": "A zero gradient proves a minimum, or Lagrange multipliers apply without a constraint qualification or feasibility check.",
+          "forwardArtifact": {
+            "id": "m31-stationarity-counterexample-ledger",
+            "description": "A stationarity, feasibility, curvature, and counterexample ledger for one constrained objective.",
+            "intendedUse": "Supports the proof-boundary and convergence sections of the optimization dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m30",
+          "inheritedConcept": "Expectation, variance, sampling error, likelihood/evidence criticism, entropy/information vocabulary, and uncertainty-aware experiment design.",
+          "retrievalCheck": {
+            "prompt": "Contrast a full-batch gradient estimate with a noisy mini-batch estimate, naming both the expectation claim and the evidence needed to assess variability.",
+            "acceptableEvidence": "Names estimator randomness and measurement uncertainty separately; does not infer convergence from one favorable run."
+          },
+          "firstConsumingSessionId": "m31-s05",
+          "likelyMisconception": "An unbiased stochastic gradient is automatically low variance or guarantees a useful finite-time result; entropy is simply a universal measure of intelligence.",
+          "forwardArtifact": {
+            "id": "m31-stochastic-information-experiment-card",
+            "description": "A reproducible experiment card with sampling rule, objective estimate, uncertainty display, information quantity, and stated limitation.",
+            "intendedUse": "Feeds the final optimization-information evidence dossier and downstream ML evaluation work."
+          }
+        }
+      ],
+      "sessionSpine": [
+        {
+          "id": "m31-s01",
+          "title": "Objectives, variables, constraints, and geometry",
+          "progression": "Translate a real decision into an objective and feasible set before choosing a solver; expose units, representation, curvature, and conditioning.",
+          "usesPrerequisiteModuleIds": ["m28"],
+          "plannedEvidence": "Objective-geometry sheet plus a prediction of which directions are ill-conditioned."
+        },
+        {
+          "id": "m31-s02",
+          "title": "Local reasoning: derivatives, stationarity, curvature, and feasibility",
+          "progression": "Derive what first- and second-order evidence can and cannot establish, including a constrained counterexample.",
+          "usesPrerequisiteModuleIds": ["m28", "m29"],
+          "plannedEvidence": "Stationarity-counterexample ledger."
+        },
+        {
+          "id": "m31-s03",
+          "title": "Convex structure, dual views, and certificates",
+          "progression": "Separate a structural property of an objective from a solver trace and practice reading a certificate or its missing assumptions.",
+          "usesPrerequisiteModuleIds": ["m28", "m29"],
+          "plannedEvidence": "Claim table distinguishing primal/dual feasibility, gap, and unresolved assumptions."
+        },
+        {
+          "id": "m31-s04",
+          "title": "Projected updates, method families, and bounded convergence evidence",
+          "progression": "Read projected-gradient, Newton/quasi-Newton, subgradient/proximal, coordinate, momentum, and adaptive updates as different contracts beside an exact-gradient rate card; separate their objective, oracle, state, and constraint assumptions, and explain why a finite trace, solver status, or one bound cannot transfer to another method.",
+          "usesPrerequisiteModuleIds": ["m28", "m29"],
+          "plannedEvidence": "Solver-selection rationale with a convergence-condition checklist."
+        },
+        {
+          "id": "m31-s05",
+          "title": "Stochastic optimization, sampling, and finite evidence",
+          "progression": "Make estimator and sampling assumptions explicit, inspect a bounded noisy trace and nonconvex counterexample, and record why one run is not a convergence or population claim. Information quantities begin in Session 6.",
+          "usesPrerequisiteModuleIds": ["m30"],
+          "plannedEvidence": "Stochastic-information experiment card with a counterexample to one-run reasoning."
+        },
+        {
+          "id": "m31-s06",
+          "title": "Optimization & information evidence defense",
+          "progression": "Integrate geometry, assumptions, algorithm trace, uncertainty, and an information trade-off into a defensible recommendation and oral explanation.",
+          "usesPrerequisiteModuleIds": ["m28", "m29", "m30"],
+          "plannedEvidence": "Optimization & Information Dossier and a learner-controlled oral-defense summary."
+        }
+      ],
+      "forwardHandoff": {
+        "declaredForwardModuleId": "m18",
+        "directAcademicConsumerModuleIds": ["m25", "m32", "m34", "m35", "m36"],
+        "handoffArtifact": "Objective/constraint/convergence claim sheet with experiment conditions, known limits, and a linkable evidence trail.",
+        "note": "The graph's declared forward handoff is retained verbatim. Direct academic consumers list every graph module whose prerequisites name M31, including gated synthesis preview M25."
+      },
+      "sourceBlockers": [
+        {
+          "id": "m31-source-map-null",
+          "status": "unmet",
+          "blockingReason": "The canonical graph currently has sourceMap: null. A candidate M31 source map and audit exist, but they must be selected, claim-reviewed, and release-bound as one canonical ledger covering optimization, convexity/duality, stochastic approximation, information quantities, and numerical experiments before publication review."
+        },
+        {
+          "id": "m31-source-boundaries-unreviewed",
+          "status": "unmet",
+          "blockingReason": "Each theorem, convergence rate, information interpretation, and copied/adapted figure or code path needs access date, license/reuse status, scope, and learner-facing stable link."
+        }
+      ],
+      "releaseBlockers": [
+        {
+          "id": "m31-learning-artifacts-unbuilt",
+          "status": "unmet",
+          "blockingReason": "A checked-in M31 candidate workbook, bounded authoring fixture, diagnostics, retrieval, dossier rubric, and oral prompts now exist, but this planning ledger does not review their delivery quality, select canonical learner material, or establish release evidence. Those checks remain required before publication."
+        },
+        {
+          "id": "m31-contract-and-provenance-unmet",
+          "status": "unmet",
+          "blockingReason": "M31 has authoring-only adapter and v3 registry records, but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+        }
+      ]
+    },
+    {
+      "moduleId": "m32",
+      "planningState": "authoring-only-plan",
+      "graph": {
+        "number": 32,
+        "slug": "32-systems-languages-scientific-python-accelerators",
+        "title": "Systems Languages, Scientific Python & Accelerators",
+        "academicPrerequisiteModuleIds": ["m12", "m17", "m19", "m24", "m28", "m31"],
+        "declaredForwardModuleId": "m33"
+      },
+      "prerequisiteBridges": [
+        {
+          "prerequisiteModuleId": "m12",
+          "inheritedConcept": "API contracts, type/interface boundaries, dependency direction, and the distinction between a component's public promise and implementation detail.",
+          "retrievalCheck": {
+            "prompt": "Draw the narrowest interface between a Python orchestration layer and a numerical-kernel layer, then identify what must not leak across it.",
+            "acceptableEvidence": "Names data ownership, failure behavior, and dependency direction rather than merely naming a library."
+          },
+          "firstConsumingSessionId": "m32-s01",
+          "likelyMisconception": "A foreign-function, array, or accelerator boundary is only a performance detail and therefore needs no explicit ownership or error contract.",
+          "forwardArtifact": {
+            "id": "m32-boundary-contract-map",
+            "description": "An interface and ownership map for orchestration, array representation, kernel, and result-validation layers.",
+            "intendedUse": "Anchors reproducibility and deployment constraints in the final systems dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m17",
+          "inheritedConcept": "Execution-stack tracing, memory hierarchy, locality, instruction-level contracts, and the difference between a Python-level observation and a machine-level explanation.",
+          "retrievalCheck": {
+            "prompt": "Trace one array operation from Python call through memory access and identify one claim that the trace cannot establish without measurement.",
+            "acceptableEvidence": "Separates layer-specific mechanism from a performance conclusion and names locality or transfer as a candidate cost."
+          },
+          "firstConsumingSessionId": "m32-s02",
+          "likelyMisconception": "Using a GPU automatically makes an operation faster, or a CPU/GPU execution trace can be inferred from source code alone.",
+          "forwardArtifact": {
+            "id": "m32-execution-transfer-trace",
+            "description": "A cross-layer trace of data allocation, transfer, dispatch, kernel execution, synchronization, and observation points.",
+            "intendedUse": "Supports later performance and reliability claims."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m19",
+          "inheritedConcept": "Concurrent histories, ownership, synchronization, progress, scheduling nondeterminism, and evidence for race or liveness claims.",
+          "retrievalCheck": {
+            "prompt": "For an asynchronous host-to-device pipeline, identify the owners of a buffer before and after launch and one ordering condition needed before reuse.",
+            "acceptableEvidence": "States a concrete ownership transfer and a synchronization/event condition; does not substitute 'parallel' for 'correct'."
+          },
+          "firstConsumingSessionId": "m32-s04",
+          "likelyMisconception": "Vectorization, parallelism, and asynchrony are interchangeable, or a successful run rules out a race or stale read.",
+          "forwardArtifact": {
+            "id": "m32-buffer-ownership-timeline",
+            "description": "A buffer-ownership and synchronization timeline with legal reuse points and failure probes.",
+            "intendedUse": "Carries into accelerator correctness and reproducibility review."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m24",
+          "inheritedConcept": "CPython object/layout evidence, profiling discipline, benchmark controls, allocation/lifetime reasoning, and portable-versus-implementation-specific claims.",
+          "retrievalCheck": {
+            "prompt": "Propose a benchmark that compares a Python loop and an array expression while controlling warm-up, input shape, and measurement noise.",
+            "acceptableEvidence": "Identifies the benchmark boundary and labels any CPython-specific inference as such."
+          },
+          "firstConsumingSessionId": "m32-s03",
+          "likelyMisconception": "A profiler percentage identifies the root cause, or an observed CPython behavior is guaranteed by Python semantics.",
+          "forwardArtifact": {
+            "id": "m32-performance-evidence-card",
+            "description": "A versioned benchmark card with environment, input layout, timing method, profile interpretation, and nonportable-claim labels.",
+            "intendedUse": "Becomes the performance appendix of the systems dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m28",
+          "inheritedConcept": "Array/tensor shape, stride-sensitive representation, matrix operations, conditioning, floating-point stability, and matrix-calculus notation.",
+          "retrievalCheck": {
+            "prompt": "Given two arrays with the same shape but different layout/stride behavior, predict one possible performance or correctness consequence and name the evidence needed.",
+            "acceptableEvidence": "Keeps shape, layout, dtype, and numerical conditioning distinct."
+          },
+          "firstConsumingSessionId": "m32-s03",
+          "likelyMisconception": "Equal shapes imply equal layout, cost, or numerical behavior; an accelerator array operation is exact because it is vectorized.",
+          "forwardArtifact": {
+            "id": "m32-array-layout-numerics-note",
+            "description": "A shape/layout/dtype/conditioning note tied to one measured kernel or array pipeline.",
+            "intendedUse": "Connects representation decisions to performance and numerical evidence."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m31",
+          "inheritedConcept": "Objectives, gradients, stochastic estimates, convergence conditions, and the separation of a loss trace from a warranted optimization claim.",
+          "retrievalCheck": {
+            "prompt": "Trace a scalar objective through a gradient update and name one reason a lower observed loss does not yet prove a reliable optimizer or model.",
+            "acceptableEvidence": "Connects objective, derivative path, sampling/precision, and convergence assumptions without overclaiming."
+          },
+          "firstConsumingSessionId": "m32-s05",
+          "likelyMisconception": "Automatic differentiation chooses a good objective or guarantees a correct, stable gradient under every mutation, dtype, or device transfer.",
+          "forwardArtifact": {
+            "id": "m32-autodiff-execution-trace",
+            "description": "An autodiff and kernel-execution trace showing values, shapes, gradients, mutation/aliasing boundaries, and validation checks.",
+            "intendedUse": "Handoffs to ML representation and reliable-learning systems work."
+          }
+        }
+      ],
+      "sessionSpine": [
+        {
+          "id": "m32-s01",
+          "title": "System boundaries: Python orchestration, native kernels, and scientific-array contracts",
+          "progression": "Map responsibility before performance: interfaces, ownership, errors, version boundaries, and reproducibility inputs.",
+          "usesPrerequisiteModuleIds": ["m12"],
+          "plannedEvidence": "Boundary-contract map."
+        },
+        {
+          "id": "m32-s02",
+          "title": "Execution and transfer: from Python request to CPU, device, and memory hierarchy",
+          "progression": "Trace where work and data actually move; predict bottlenecks before measuring them.",
+          "usesPrerequisiteModuleIds": ["m17"],
+          "plannedEvidence": "Execution-transfer trace with one falsifiable performance prediction."
+        },
+        {
+          "id": "m32-s03",
+          "title": "Array layout, vectorization, numerical behavior, and measurement",
+          "progression": "Connect shape, strides, dtype, allocation, vectorization, stability, and a controlled benchmark.",
+          "usesPrerequisiteModuleIds": ["m24", "m28"],
+          "plannedEvidence": "Layout-numerics note and performance-evidence card."
+        },
+        {
+          "id": "m32-s04",
+          "title": "Parallel execution, buffer ownership, and synchronization",
+          "progression": "Reason about data hazards and progress in host/device and multi-worker pipelines before trying to optimize them.",
+          "usesPrerequisiteModuleIds": ["m19"],
+          "plannedEvidence": "Buffer-ownership timeline and failure probe."
+        },
+        {
+          "id": "m32-s05",
+          "title": "Autodiff, kernels, precision, and optimization traces",
+          "progression": "Read an automatic-differentiation execution as a program with mathematical and systems assumptions, then test a narrow gradient claim.",
+          "usesPrerequisiteModuleIds": ["m28", "m31"],
+          "plannedEvidence": "Autodiff-execution trace with a numerical or finite-difference cross-check."
+        },
+        {
+          "id": "m32-s06",
+          "title": "Reproducible accelerator systems architecture defense",
+          "progression": "Defend a measured, bounded accelerator design with versioned inputs, constraints, observed results, and known unknowns.",
+          "usesPrerequisiteModuleIds": ["m12", "m17", "m19", "m24", "m28", "m31"],
+          "plannedEvidence": "Scientific Python & Accelerators Dossier and learner-controlled oral-defense summary."
+        }
+      ],
+      "forwardHandoff": {
+        "declaredForwardModuleId": "m33",
+        "directAcademicConsumerModuleIds": ["m35", "m36"],
+        "handoffArtifact": "Reproducible systems claim packet: boundary map, execution trace, benchmark card, environment record, and unresolved-risk list.",
+        "note": "M33 is the graph's declared forward handoff; M35 and M36 are the graph modules that name M32 as an academic prerequisite."
+      },
+      "sourceBlockers": [
+        {
+          "id": "m32-source-map-null",
+          "status": "unmet",
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M32 source research exists, but it must be selected, claim-reviewed, and release-bound as one version-aware canonical ledger for language/runtime boundaries, scientific arrays, accelerator execution, autodiff, and reproducibility."
+        },
+        {
+          "id": "m32-hardware-claim-boundaries-unreviewed",
+          "status": "unmet",
+          "blockingReason": "Hardware, driver, framework, compiler, and benchmark claims require exact environment scope and source/reuse review; source examples must not imply portable guarantees."
+        }
+      ],
+      "releaseBlockers": [
+        {
+          "id": "m32-learning-artifacts-unbuilt",
+          "status": "unmet",
+          "blockingReason": "A checked-in M32 candidate workbook, bounded teaching fixture, diagnostics, retrieval, dossier rubric, and accessible oral prompts now exist, but this planning ledger does not review their delivery quality, select canonical learner material, or establish release evidence. Those checks remain required before publication."
+        },
+        {
+          "id": "m32-contract-and-provenance-unmet",
+          "status": "unmet",
+          "blockingReason": "M32 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+        }
+      ]
+    },
+    {
+      "moduleId": "m33",
+      "planningState": "authoring-only-plan",
+      "graph": {
+        "number": 33,
+        "slug": "33-formal-languages-computability-complexity",
+        "title": "Formal Languages, Computability & Complexity",
+        "academicPrerequisiteModuleIds": ["m05", "m11", "m23", "m27"],
+        "declaredForwardModuleId": "m34"
+      },
+      "prerequisiteBridges": [
+        {
+          "prerequisiteModuleId": "m05",
+          "inheritedConcept": "Explicit cost models, asymptotic relations, recurrence reasoning, lower-bound caution, and the gap between a count and a real-system measurement.",
+          "retrievalCheck": {
+            "prompt": "State the model behind an O(n log n) claim and identify one resource it leaves out of that statement.",
+            "acceptableEvidence": "Names an input measure and operation/cost model; does not equate asymptotic notation with an observed runtime."
+          },
+          "firstConsumingSessionId": "m33-s05",
+          "likelyMisconception": "A polynomial-time classification means practically fast, or an exponential-looking benchmark proves a complexity class.",
+          "forwardArtifact": {
+            "id": "m33-complexity-claim-card",
+            "description": "A complexity claim card naming machine/input model, reduction or algorithm boundary, asymptotic conclusion, and practical non-claim.",
+            "intendedUse": "Feeds the formal-limits dossier and classical-AI search trade-off analysis."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m11",
+          "inheritedConcept": "Algorithm design choice, exhaustive search as executable specification, dynamic programming state graphs, correctness arguments, approximation boundaries, and reductions as structure-preserving reasoning.",
+          "retrievalCheck": {
+            "prompt": "Compare a brute-force recognizer with a dynamic-programming algorithm: what property must be specified before either complexity discussion is meaningful?",
+            "acceptableEvidence": "Names the problem/language or state specification and separates a method from a proof of the claimed property."
+          },
+          "firstConsumingSessionId": "m33-s04",
+          "likelyMisconception": "A reduction is a vague analogy, or using a hard subroutine transfers hardness without a computable, correctly directed transformation.",
+          "forwardArtifact": {
+            "id": "m33-reduction-proof-skeleton",
+            "description": "A directed reduction skeleton: source problem, target problem, computable transformation, iff proof obligations, and scope boundary.",
+            "intendedUse": "Carries into complexity and CSP-limit reasoning."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m23",
+          "inheritedConcept": "Syntax versus semantics, parsers and trees, environments/evaluation rules, bounded interpreters, and capability boundaries.",
+          "retrievalCheck": {
+            "prompt": "Give two strings with different syntax/parse status and explain why parser acceptance alone is not a semantic or authority decision.",
+            "acceptableEvidence": "Distinguishes grammar membership, program meaning, and permitted evaluation."
+          },
+          "firstConsumingSessionId": "m33-s01",
+          "likelyMisconception": "A grammar completely defines meaning, or a parser/interpreter can decide every semantic property simply by executing an input.",
+          "forwardArtifact": {
+            "id": "m33-language-machine-separation-sheet",
+            "description": "A syntax/semantics/machine/authority separation sheet for one small language.",
+            "intendedUse": "Provides notation discipline for automata, grammars, and undecidability arguments."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m27",
+          "inheritedConcept": "Definitions, quantified logic, proof and countermodel construction, induction/invariants, relations, counting, recurrences, graphs, and elementary number-theoretic structure.",
+          "retrievalCheck": {
+            "prompt": "Write the quantified statement for language recognition by a machine and supply either a proof plan or a countermodel to a too-strong claim.",
+            "acceptableEvidence": "Uses quantifiers with correct order and identifies the object being quantified over."
+          },
+          "firstConsumingSessionId": "m33-s02",
+          "likelyMisconception": "Testing finitely many strings proves a language class, or an induction proof automatically establishes a claim about all machine computations.",
+          "forwardArtifact": {
+            "id": "m33-formal-claim-countermodel-ledger",
+            "description": "A notation-checked ledger of definitions, witness/counterexample, proof obligation, and theorem-scope label.",
+            "intendedUse": "Used throughout the limits dossier and oral explanation."
+          }
+        }
+      ],
+      "sessionSpine": [
+        {
+          "id": "m33-s01",
+          "title": "Languages, syntax, semantics, and machine models",
+          "progression": "Establish what a formal language is and separate it from an interpreter, a semantic property, and an authority boundary.",
+          "usesPrerequisiteModuleIds": ["m23"],
+          "plannedEvidence": "Language-machine separation sheet."
+        },
+        {
+          "id": "m33-s02",
+          "title": "Finite automata, regularity, and proof by distinguishing behavior",
+          "progression": "Move from definitions to recognizers and non-regularity evidence with explicitly quantified witnesses.",
+          "usesPrerequisiteModuleIds": ["m27"],
+          "plannedEvidence": "Formal-claim countermodel ledger."
+        },
+        {
+          "id": "m33-s03",
+          "title": "Grammars, machines, decidability, and semantic limits",
+          "progression": "Compare expressive mechanisms and state carefully which decision question a machine/model can answer.",
+          "usesPrerequisiteModuleIds": ["m23", "m27"],
+          "plannedEvidence": "Machine/question/scope table with a halting-style boundary case."
+        },
+        {
+          "id": "m33-s04",
+          "title": "Reductions and undecidability as directed proof tools",
+          "progression": "Turn a familiar problem transformation into a directed, computable proof argument rather than a similarity claim.",
+          "usesPrerequisiteModuleIds": ["m11", "m27"],
+          "plannedEvidence": "Reduction-proof skeleton and a reversed-direction counterexample."
+        },
+        {
+          "id": "m33-s05",
+          "title": "Complexity classes, completeness, and practical limits",
+          "progression": "Layer formal resource classes over explicit cost models while preserving the distinction between worst-case theory and practical evidence.",
+          "usesPrerequisiteModuleIds": ["m05", "m11", "m27"],
+          "plannedEvidence": "Complexity-claim card with a stated model and non-claim."
+        },
+        {
+          "id": "m33-s06",
+          "title": "Formal limits dossier and oral defense",
+          "progression": "Defend a claim about expressibility, decidability, or complexity with definitions, proof structure, counterexamples, and a practical boundary.",
+          "usesPrerequisiteModuleIds": ["m05", "m11", "m23", "m27"],
+          "plannedEvidence": "Formal Languages, Computability & Complexity Dossier and learner-controlled oral-defense summary."
+        }
+      ],
+      "forwardHandoff": {
+        "declaredForwardModuleId": "m34",
+        "directAcademicConsumerModuleIds": ["m34", "m36"],
+        "handoffArtifact": "Limits claim packet: formal definitions, an annotated reduction or counterexample, cost-model boundary, and practical interpretation limit.",
+        "note": "M34 is both the graph's declared forward handoff and a direct academic consumer. M36 names M33 separately as an academic prerequisite."
+      },
+      "sourceBlockers": [
+        {
+          "id": "m33-source-map-null",
+          "status": "unmet",
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M33 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for automata, grammars, computability, reductions, complexity, and the exact scope of every theorem or historical claim."
+        },
+        {
+          "id": "m33-proof-source-boundaries-unreviewed",
+          "status": "unmet",
+          "blockingReason": "Use original explanations and checked proof fixtures; record stable source links and licenses before reusing course material, diagrams, proof text, or code."
+        }
+      ],
+      "releaseBlockers": [
+        {
+          "id": "m33-learning-artifacts-unbuilt",
+          "status": "unmet",
+          "blockingReason": "A checked-in M33 candidate workbook and bounded reference model now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
+        },
+        {
+          "id": "m33-contract-and-provenance-unmet",
+          "status": "unmet",
+          "blockingReason": "M33 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+        }
+      ]
+    },
+    {
+      "moduleId": "m34",
+      "planningState": "authoring-only-plan",
+      "graph": {
+        "number": 34,
+        "slug": "34-classical-ai-search-constraints-decision",
+        "title": "Classical AI: Search, Constraints & Decision",
+        "academicPrerequisiteModuleIds": ["m10", "m11", "m30", "m31", "m33"],
+        "declaredForwardModuleId": "m35"
+      },
+      "prerequisiteBridges": [
+        {
+          "prerequisiteModuleId": "m10",
+          "inheritedConcept": "Graph representations, reachability, traversal frontiers, shortest-path relaxation, dependency order, and network-model choices.",
+          "retrievalCheck": {
+            "prompt": "Model a small planning problem as a graph, label a state and action, and explain why two different frontier policies can return different evidence.",
+            "acceptableEvidence": "Makes the state/action/cost representation explicit and connects a frontier policy to a claim about reachability or optimality."
+          },
+          "firstConsumingSessionId": "m34-s01",
+          "likelyMisconception": "Every AI search problem is a shortest-path problem with a fixed graph, or visiting a state once is always sound.",
+          "forwardArtifact": {
+            "id": "m34-state-space-model-card",
+            "description": "A state/action/goal/cost/observation model with representation alternatives and failure cases.",
+            "intendedUse": "Drives search, CSP, and decision-model comparisons."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m11",
+          "inheritedConcept": "Search, greedy choice, dynamic programming, backtracking, approximation, randomized strategy, and proofs matched to algorithm structure.",
+          "retrievalCheck": {
+            "prompt": "For one planning objective, contrast exhaustive search, a heuristic search, and dynamic programming by their state assumptions and evidence obligations.",
+            "acceptableEvidence": "Names the optimization criterion and required proof/experiment boundary for each strategy."
+          },
+          "firstConsumingSessionId": "m34-s02",
+          "likelyMisconception": "A heuristic is an admissible guarantee by default, or a faster search trace establishes an optimal decision.",
+          "forwardArtifact": {
+            "id": "m34-search-strategy-evidence-table",
+            "description": "A comparison of strategy, state assumptions, heuristic/relaxation condition, completeness/optimality claim, and counterexample.",
+            "intendedUse": "Supports model-selection justification in the AI dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m30",
+          "inheritedConcept": "Probability models, conditional reasoning, expectation, uncertainty, estimation, experiment criticism, and decision evidence.",
+          "retrievalCheck": {
+            "prompt": "Given uncertain sensor evidence and two actions, state what probabilities, utilities/losses, and assumptions are needed before choosing by expected value.",
+            "acceptableEvidence": "Separates belief model from utility and acknowledges unmodeled outcomes or data limitations."
+          },
+          "firstConsumingSessionId": "m34-s05",
+          "likelyMisconception": "The most likely state always determines the best action, or a posterior is objective truth independent of model/prior assumptions.",
+          "forwardArtifact": {
+            "id": "m34-decision-under-uncertainty-card",
+            "description": "A belief/utility/action table with sensitivity analysis and a record of unmodeled consequences.",
+            "intendedUse": "Carries into ML evaluation and human-centered system boundaries."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m31",
+          "inheritedConcept": "Objectives, constraints, dual or relaxation views, search/optimization trade-offs, and convergence/approximation scope.",
+          "retrievalCheck": {
+            "prompt": "Write a constraint problem as a feasible-set/objective pair and identify one change that turns a hard optimization question into a different decision question.",
+            "acceptableEvidence": "Distinguishes feasibility, objective, relaxation, and evidence for a solution quality claim."
+          },
+          "firstConsumingSessionId": "m34-s03",
+          "likelyMisconception": "A valid relaxation's solution is automatically feasible for the original problem, or an optimization score alone captures all decision costs.",
+          "forwardArtifact": {
+            "id": "m34-constraint-objective-relaxation-sheet",
+            "description": "A constraint/objective/relaxation sheet that labels feasible solutions, bounds, and trade-offs.",
+            "intendedUse": "Feeds CSP and decision-analysis sections of the dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m33",
+          "inheritedConcept": "Formal problem statements, reductions, decidability and complexity limits, and theorem-scope discipline.",
+          "retrievalCheck": {
+            "prompt": "State one complexity or decidability claim about a planning/CSP encoding and identify why an encoding choice matters before transferring the claim.",
+            "acceptableEvidence": "Names the encoded problem, transformation direction, and the difference between worst-case classification and an instance outcome."
+          },
+          "firstConsumingSessionId": "m34-s04",
+          "likelyMisconception": "NP-complete means no useful solution is possible, or a solver timeout is proof that an instance has no solution.",
+          "forwardArtifact": {
+            "id": "m34-csp-limit-claim-card",
+            "description": "A CSP/planning encoding, claimed limit, solver evidence boundary, and a practical mitigation or non-claim.",
+            "intendedUse": "Makes computational limits visible before ML is introduced."
+          }
+        }
+      ],
+      "sessionSpine": [
+        {
+          "id": "m34-s01",
+          "title": "Problem formulation: states, actions, goals, costs, and observations",
+          "progression": "Convert a narrative problem into a state-space model before choosing search or learning machinery.",
+          "usesPrerequisiteModuleIds": ["m10"],
+          "plannedEvidence": "State-space model card."
+        },
+        {
+          "id": "m34-s02",
+          "title": "Search strategies, heuristics, and evidence of completeness or optimality",
+          "progression": "Select an uninformed, heuristic, dynamic, or backtracking strategy from structure and state its proof obligations.",
+          "usesPrerequisiteModuleIds": ["m10", "m11"],
+          "plannedEvidence": "Search-strategy evidence table."
+        },
+        {
+          "id": "m34-s03",
+          "title": "Constraints, optimization, relaxations, and explanation",
+          "progression": "Make feasibility and objective trade-offs visible; compare exact, relaxed, and approximate answers without hiding the objective.",
+          "usesPrerequisiteModuleIds": ["m11", "m31"],
+          "plannedEvidence": "Constraint-objective-relaxation sheet."
+        },
+        {
+          "id": "m34-s04",
+          "title": "Planning/CSP limits: encoding, reductions, and solver boundaries",
+          "progression": "Use formal limits to guide modeling and mitigation rather than treating worst-case complexity as a universal practical verdict.",
+          "usesPrerequisiteModuleIds": ["m33"],
+          "plannedEvidence": "CSP-limit claim card."
+        },
+        {
+          "id": "m34-s05",
+          "title": "Uncertainty, utility, and decision under incomplete information",
+          "progression": "Separate state belief, utility/loss, action constraint, and decision evidence; examine sensitivity to assumptions.",
+          "usesPrerequisiteModuleIds": ["m30", "m31"],
+          "plannedEvidence": "Decision-under-uncertainty card."
+        },
+        {
+          "id": "m34-s06",
+          "title": "Classical AI design dossier and oral defense",
+          "progression": "Defend one search/constraint/decision system with its formulation, algorithm, limits, uncertainty, and human-impact boundary.",
+          "usesPrerequisiteModuleIds": ["m10", "m11", "m30", "m31", "m33"],
+          "plannedEvidence": "Classical AI Search, Constraints & Decision Dossier and learner-controlled oral-defense summary."
+        }
+      ],
+      "forwardHandoff": {
+        "declaredForwardModuleId": "m35",
+        "directAcademicConsumerModuleIds": ["m25", "m35"],
+        "handoffArtifact": "Problem-formulation packet: state/representation, objective/constraints, search or solver rationale, uncertainty model, and limit/human-impact boundaries.",
+        "note": "M35 is the graph's declared forward handoff. M25 and M35 are its direct academic consumers; M25 remains gated by the canonical graph."
+      },
+      "sourceBlockers": [
+        {
+          "id": "m34-source-map-null",
+          "status": "unmet",
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M34 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for graph search, heuristics, CSP/planning, decision theory, and complexity boundaries before publication review."
+        },
+        {
+          "id": "m34-decision-claim-boundaries-unreviewed",
+          "status": "unmet",
+          "blockingReason": "Source and learner materials must distinguish optimization/decision models from real-world legitimacy, harm, utility elicitation, and authority to act."
+        }
+      ],
+      "releaseBlockers": [
+        {
+          "id": "m34-learning-artifacts-unbuilt",
+          "status": "unmet",
+          "blockingReason": "A checked-in M34 candidate workbook and bounded reference model now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
+        },
+        {
+          "id": "m34-contract-and-provenance-unmet",
+          "status": "unmet",
+          "blockingReason": "M34 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+        }
+      ]
+    },
+    {
+      "moduleId": "m35",
+      "planningState": "authoring-only-plan",
+      "graph": {
+        "number": 35,
+        "slug": "35-machine-learning-representation",
+        "title": "Machine Learning & Representation",
+        "academicPrerequisiteModuleIds": ["m13", "m22", "m28", "m30", "m31", "m32", "m34"],
+        "declaredForwardModuleId": "m36"
+      },
+      "prerequisiteBridges": [
+        {
+          "prerequisiteModuleId": "m13",
+          "inheritedConcept": "Specifications, test types, debugging as belief revision, observability, regression knowledge, and the limits of coverage.",
+          "retrievalCheck": {
+            "prompt": "Turn the claim 'this model works' into three observable, testable claims with a counterexample or failure probe for each.",
+            "acceptableEvidence": "Separates data, model, metric, and operational observations; does not present an aggregate score as a complete specification."
+          },
+          "firstConsumingSessionId": "m35-s05",
+          "likelyMisconception": "A passing training/evaluation pipeline proves correctness, or a benchmark score is a regression test for every population and use case.",
+          "forwardArtifact": {
+            "id": "m35-ml-claim-test-observability-matrix",
+            "description": "A matrix of ML claims, test/monitoring evidence, failure probes, slices, and response boundaries.",
+            "intendedUse": "Carries into reliable-learning systems and capstone evidence work."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m22",
+          "inheritedConcept": "Trust boundaries, data provenance, authority, privacy, security, release provenance, and human-impact analysis.",
+          "retrievalCheck": {
+            "prompt": "Trace one training datum from collection to a model-supported decision and identify an authority, privacy, or harm boundary that a metric cannot settle.",
+            "acceptableEvidence": "Separates data permission, model inference, human decision authority, and post-release accountability."
+          },
+          "firstConsumingSessionId": "m35-s06",
+          "likelyMisconception": "De-identification or a fairness metric alone resolves privacy, consent, bias, or the legitimacy of an automated decision.",
+          "forwardArtifact": {
+            "id": "m35-data-authority-impact-boundary-map",
+            "description": "A data/provenance/authority/human-impact map with explicit non-automated or human-review boundaries.",
+            "intendedUse": "Becomes a required limitation section in downstream reliable-ML and capstone artifacts."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m28",
+          "inheritedConcept": "Vector spaces, projections, matrix factorization, tensors, conditioning, representation loss, and stable numerical computation.",
+          "retrievalCheck": {
+            "prompt": "Explain how a representation can preserve performance on one task while discarding a direction or group-relevant distinction needed elsewhere.",
+            "acceptableEvidence": "Connects geometry and representation choices to task assumptions without assuming that low dimension is inherently better."
+          },
+          "firstConsumingSessionId": "m35-s01",
+          "likelyMisconception": "A higher-dimensional embedding necessarily contains more useful information, or PCA/SVD discovers the semantically correct features.",
+          "forwardArtifact": {
+            "id": "m35-representation-assumption-sheet",
+            "description": "A feature/embedding representation sheet documenting geometry, information discarded, numerical risks, and task alignment assumptions.",
+            "intendedUse": "Anchors model choice and error analysis."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m30",
+          "inheritedConcept": "Sampling, train/validation/test separation, estimation, uncertainty, calibration, missingness, resampling, robustness, and scientific inference limits.",
+          "retrievalCheck": {
+            "prompt": "Design a split and evaluation plan for data with time or entity dependence, then name one way a random split could overstate performance.",
+            "acceptableEvidence": "Identifies the target population/deployment relation and leakage or dependence risk."
+          },
+          "firstConsumingSessionId": "m35-s03",
+          "likelyMisconception": "A held-out test score is unbiased under any collection process, or statistical significance proves useful deployment performance.",
+          "forwardArtifact": {
+            "id": "m35-evaluation-and-shift-plan",
+            "description": "A split, metric, uncertainty, subgroup, shift, and stopping-rule plan with an explicit inference boundary.",
+            "intendedUse": "Feeds reliability evaluation and oral defense."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m31",
+          "inheritedConcept": "Objectives, regularization/trade-offs, gradient-based updates, stochastic optimization, convergence assumptions, and optimization versus evaluation evidence.",
+          "retrievalCheck": {
+            "prompt": "For a training objective, separate the optimization target, the deployment goal, the regularization choice, and the evidence needed before claiming either improved.",
+            "acceptableEvidence": "States a mismatch or trade-off instead of treating a loss decrease as task success."
+          },
+          "firstConsumingSessionId": "m35-s04",
+          "likelyMisconception": "Minimizing training loss necessarily minimizes generalization error, or an optimizer setting is a harmless implementation detail.",
+          "forwardArtifact": {
+            "id": "m35-objective-optimization-generalization-trace",
+            "description": "A trace linking objective, optimizer, regularization, gradient evidence, validation observation, and unresolved gap.",
+            "intendedUse": "Carries into statistical learning theory and reliable deep-learning analysis."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m32",
+          "inheritedConcept": "Scientific Python/accelerator boundaries, tensor layout, autodiff execution, precision, measurement, reproducibility, and versioned systems evidence.",
+          "retrievalCheck": {
+            "prompt": "List the execution and environment variables that could change a training result without changing the source file, then choose one reproduction probe.",
+            "acceptableEvidence": "Names data, seed, library/hardware, precision, scheduling, or nondeterminism boundary and avoids a blanket reproducibility claim."
+          },
+          "firstConsumingSessionId": "m35-s04",
+          "likelyMisconception": "Setting one random seed makes training fully reproducible, or a gradient computation's success says nothing about precision/layout/device effects.",
+          "forwardArtifact": {
+            "id": "m35-training-systems-reproducibility-card",
+            "description": "A training-system record with versions, data identity, seed policy, precision/device assumptions, and rerun comparison evidence.",
+            "intendedUse": "Supports a reliable-ML release packet."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m34",
+          "inheritedConcept": "Problem formulation, state/representation choices, search/constraint baselines, uncertainty/utility separation, computational limits, and explanation through a model.",
+          "retrievalCheck": {
+            "prompt": "Propose a non-ML search, rule, or constraint baseline for a learning problem and state what the comparison would teach rather than merely which score might win.",
+            "acceptableEvidence": "Uses the baseline to expose assumptions, feasibility, interpretability, cost, or decision constraints."
+          },
+          "firstConsumingSessionId": "m35-s02",
+          "likelyMisconception": "A learned representation makes explicit problem formulation obsolete, or ML is automatically preferable to a well-specified classical method.",
+          "forwardArtifact": {
+            "id": "m35-classical-learning-baseline-comparison",
+            "description": "A problem-formulation and baseline comparison with representation, objective, constraints, cost, and explanation differences.",
+            "intendedUse": "Prevents architecture-first model selection in the ML dossier."
+          }
+        }
+      ],
+      "sessionSpine": [
+        {
+          "id": "m35-s01",
+          "title": "Representation, inductive bias, and what a model can discard",
+          "progression": "Start from geometry and task assumptions; make a representation's retained and lost structure visible before fitting a model.",
+          "usesPrerequisiteModuleIds": ["m28"],
+          "plannedEvidence": "Representation-assumption sheet."
+        },
+        {
+          "id": "m35-s02",
+          "title": "Problem formulation and classical baselines before learned models",
+          "progression": "Use search, rules, constraints, and simple baselines to expose the learning problem's true objective and decision boundary.",
+          "usesPrerequisiteModuleIds": ["m28", "m34"],
+          "plannedEvidence": "Classical-learning baseline comparison."
+        },
+        {
+          "id": "m35-s03",
+          "title": "Data-generating process, splits, metrics, uncertainty, and shift",
+          "progression": "Turn a dataset into an evaluation claim with population, leakage, calibration, uncertainty, and future-shift limits made explicit.",
+          "usesPrerequisiteModuleIds": ["m30"],
+          "plannedEvidence": "Evaluation-and-shift plan."
+        },
+        {
+          "id": "m35-s04",
+          "title": "Learning dynamics: objectives, autodiff, optimization, and training systems",
+          "progression": "Read training as coupled mathematical and systems behavior: objective, gradients, precision, optimization trace, and reproducibility.",
+          "usesPrerequisiteModuleIds": ["m28", "m31", "m32"],
+          "plannedEvidence": "Objective-optimization-generalization trace and training-systems reproducibility card."
+        },
+        {
+          "id": "m35-s05",
+          "title": "ML debugging, observability, and evidence that can fail usefully",
+          "progression": "Specify data/model/metric/operation claims, design failure probes, and use observations to revise beliefs rather than chase a single score.",
+          "usesPrerequisiteModuleIds": ["m13", "m30"],
+          "plannedEvidence": "ML claim-test-observability matrix."
+        },
+        {
+          "id": "m35-s06",
+          "title": "Responsible ML representation dossier and oral defense",
+          "progression": "Defend a bounded ML design with representation, data authority, evaluation, systems evidence, uncertainty, and an explicit human-control boundary.",
+          "usesPrerequisiteModuleIds": ["m13", "m22", "m28", "m30", "m31", "m32", "m34"],
+          "plannedEvidence": "Machine Learning & Representation Dossier and learner-controlled oral-defense summary."
+        }
+      ],
+      "forwardHandoff": {
+        "declaredForwardModuleId": "m36",
+        "directAcademicConsumerModuleIds": ["m25", "m36"],
+        "handoffArtifact": "ML evidence packet: representation assumptions, baseline comparison, evaluation/shift plan, objective/training trace, reproducibility record, and data-authority boundary map.",
+        "note": "M36 is the graph's declared forward handoff. M25 and M36 are its direct academic consumers; M25 remains gated by the canonical graph."
+      },
+      "sourceBlockers": [
+        {
+          "id": "m35-source-map-null",
+          "status": "unmet",
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M35 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for representation, model families/baselines, evaluation, optimization, ML systems, uncertainty/shift, and responsible deployment claims."
+        },
+        {
+          "id": "m35-data-and-model-claim-boundaries-unreviewed",
+          "status": "unmet",
+          "blockingReason": "Training data provenance, benchmark terms, model weights, code, figures, and fairness/privacy claims need explicit license, authority, and scope review before learner-facing reuse."
+        }
+      ],
+      "releaseBlockers": [
+        {
+          "id": "m35-learning-artifacts-unbuilt",
+          "status": "unmet",
+          "blockingReason": "A checked-in M35 candidate workbook and bounded ML/reliability fixture now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
+        },
+        {
+          "id": "m35-contract-and-provenance-unmet",
+          "status": "unmet",
+          "blockingReason": "M35 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+        }
+      ]
+    },
+    {
+      "moduleId": "m36",
+      "planningState": "authoring-only-plan",
+      "graph": {
+        "number": 36,
+        "slug": "36-statistical-learning-theory-reliable-deep-learning",
+        "title": "Statistical Learning Theory & Reliable Deep-Learning Systems",
+        "academicPrerequisiteModuleIds": ["m29", "m30", "m31", "m32", "m33", "m35"],
+        "declaredForwardModuleId": "m25"
+      },
+      "prerequisiteBridges": [
+        {
+          "prerequisiteModuleId": "m29",
+          "inheritedConcept": "Limits, derivatives, multivariable change, continuity/smoothness assumptions, sequences, and convergence reasoning with stated domains.",
+          "retrievalCheck": {
+            "prompt": "For a loss family indexed by model parameters, identify one derivative/smoothness assumption and one limiting statement that must be qualified before using it in a learning claim.",
+            "acceptableEvidence": "Names the variable/domain and does not exchange limits, expectations, derivatives, or minima without conditions."
+          },
+          "firstConsumingSessionId": "m36-s01",
+          "likelyMisconception": "A differentiable loss makes the full learning pipeline smooth, or a limiting/large-sample argument directly explains finite-data behavior.",
+          "forwardArtifact": {
+            "id": "m36-assumption-scope-sheet",
+            "description": "A theorem/experiment assumption sheet identifying variables, regularity, limit regime, and where the model/system violates or leaves the scope unknown.",
+            "intendedUse": "Carries into every theory-to-system claim in the final dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m30",
+          "inheritedConcept": "A finite sample average is an estimator under a named law/sampling process, not automatically a population expectation or a generalization result.",
+          "retrievalCheck": {
+            "prompt": "For one finite average loss, name the target population relation, the sample/sampling rule, and the additional condition needed before treating the average as evidence about a population expectation.",
+            "acceptableEvidence": "Separates the recorded sample average from an expectation and names a sampling/distribution condition without claiming a theorem or deployment result."
+          },
+          "firstConsumingSessionId": "m36-s01",
+          "likelyMisconception": "A low finite average loss is already the population risk, or any sampling story automatically justifies a generalization claim.",
+          "forwardArtifact": {
+            "id": "m36-empirical-population-scope-card",
+            "description": "A compact card naming the finite average, target relation, sampling condition, and the inference still missing before a population claim.",
+            "intendedUse": "Keeps Session 1's empirical-versus-population distinction visible throughout the theory-to-system dossier."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m31",
+          "inheritedConcept": "Optimization objectives, stochastic gradients, algorithmic convergence conditions, objective trade-offs, and the distinction between optimization and generalization evidence.",
+          "retrievalCheck": {
+            "prompt": "Decompose an observed test error into at least an approximation/estimation/optimization or analogous evidence story, then state what cannot be inferred from training loss alone.",
+            "acceptableEvidence": "Separates an algorithm trace from a population-risk or reliability claim."
+          },
+          "firstConsumingSessionId": "m36-s02",
+          "likelyMisconception": "A converged optimizer proves generalization, or a generalization bound chooses the optimizer/hyperparameters for a real system.",
+          "forwardArtifact": {
+            "id": "m36-optimization-generalization-gap-ledger",
+            "description": "A ledger separating objective, algorithm, optimization evidence, generalization claim, conditions, and unmeasured gap.",
+            "intendedUse": "Supports trustworthy interpretation of deep-learning results."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m32",
+          "inheritedConcept": "Accelerator execution, numerical precision, autodiff, concurrency/transfer boundaries, benchmarking, reproducibility, and environment-scoped systems evidence.",
+          "retrievalCheck": {
+            "prompt": "Explain how precision, nondeterminism, data order, or device/kernel behavior could invalidate a claimed theory-to-experiment comparison, and choose one verification step.",
+            "acceptableEvidence": "Names a concrete systems variable and a bounded reproduction/validation action rather than promising bitwise identity."
+          },
+          "firstConsumingSessionId": "m36-s04",
+          "likelyMisconception": "A theorem is unaffected by its implementation, or a successful rerun on one accelerator establishes reproducibility across environments.",
+          "forwardArtifact": {
+            "id": "m36-theory-system-reproducibility-record",
+            "description": "A theory-to-system reproduction record with data/model/environment identity, numerical choices, observed variance, and nonportable boundaries.",
+            "intendedUse": "Becomes part of the release-quality evidence packet."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m33",
+          "inheritedConcept": "Formal definitions, theorem scope, reductions/limits, computability, complexity, and the discipline of identifying what a procedure cannot decide or guarantee.",
+          "retrievalCheck": {
+            "prompt": "State one learning-theoretic or computational limit as a quantified claim and name a misuse that would overextend it to a deployed system.",
+            "acceptableEvidence": "Makes the population/model/class/resource assumptions visible and names a non-conclusion."
+          },
+          "firstConsumingSessionId": "m36-s03",
+          "likelyMisconception": "A no-free-lunch or hardness result makes empirical work meaningless, or a formal bound is a complete safety guarantee.",
+          "forwardArtifact": {
+            "id": "m36-limit-and-nonclaim-card",
+            "description": "A formal limit card with quantifiers, assumptions, conclusion, practical interpretation, and an explicit non-claim.",
+            "intendedUse": "Prevents theorem-name dropping in reliability decisions."
+          }
+        },
+        {
+          "prerequisiteModuleId": "m35",
+          "inheritedConcept": "Representation, inductive bias, data splits/evaluation, calibration/shift, objective/training trace, ML observability, reproducibility, and data-authority boundaries.",
+          "retrievalCheck": {
+            "prompt": "Given a model card and a test score, identify the representation/data/evaluation/system questions still needed before making a reliability claim.",
+            "acceptableEvidence": "Produces a multi-layer evidence gap rather than a generic 'more data' answer."
+          },
+          "firstConsumingSessionId": "m36-s01",
+          "likelyMisconception": "A well-documented model card or benchmark alone establishes reliable performance under shift, misuse, or operational failure.",
+          "forwardArtifact": {
+            "id": "m36-reliable-learning-evidence-map",
+            "description": "An evidence map joining representation, data, evaluation, optimization, systems, monitoring, authority, and failure response.",
+            "intendedUse": "Handoffs to M25/M26 synthesis only after all prerequisite evidence is reviewed."
+          }
+        }
+      ],
+      "sessionSpine": [
+        {
+          "id": "m36-s01",
+          "title": "What learning claims mean: risk, representation, data, and assumptions",
+          "progression": "Translate a model result into population, hypothesis-class, representation, and regularity assumptions before reading a guarantee.",
+          "usesPrerequisiteModuleIds": ["m29", "m30", "m35"],
+          "plannedEvidence": "Empirical-population scope card, assumption-scope sheet, and a first reliable-learning evidence map."
+        },
+        {
+          "id": "m36-s02",
+          "title": "Optimization, estimation, and generalization are different gaps",
+          "progression": "Disentangle objective minimization, finite-sample estimation, approximation, and optimization evidence with counterexamples to loss-only reasoning.",
+          "usesPrerequisiteModuleIds": ["m29", "m31", "m35"],
+          "plannedEvidence": "Optimization-generalization gap ledger."
+        },
+        {
+          "id": "m36-s03",
+          "title": "Capacity, learnability, computational limits, and theorem scope",
+          "progression": "Read a capacity/learnability/limit statement as a precise formal claim and resist both theorem denial and theorem overreach.",
+          "usesPrerequisiteModuleIds": ["m33", "m35"],
+          "plannedEvidence": "Limit-and-nonclaim card."
+        },
+        {
+          "id": "m36-s04",
+          "title": "Reliable deep-learning systems: numerical, systems, and reproducibility evidence",
+          "progression": "Connect theory to a real execution environment while preserving precision, data, environment, and nondeterminism boundaries.",
+          "usesPrerequisiteModuleIds": ["m32", "m35"],
+          "plannedEvidence": "Theory-system reproducibility record."
+        },
+        {
+          "id": "m36-s05",
+          "title": "Shift, robustness, monitoring, and bounded human control",
+          "progression": "Turn a static model result into a lifecycle claim with shifts, failure detection, response thresholds, and authority boundaries made explicit.",
+          "usesPrerequisiteModuleIds": ["m31", "m32", "m35"],
+          "plannedEvidence": "Expanded reliable-learning evidence map with monitoring and intervention design."
+        },
+        {
+          "id": "m36-s06",
+          "title": "Reliable learning systems dossier and bridge to synthesis",
+          "progression": "Defend a bounded learning-system claim by joining mathematical assumptions, algorithm behavior, empirical evidence, systems constraints, and human-control limits.",
+          "usesPrerequisiteModuleIds": ["m29", "m31", "m32", "m33", "m35"],
+          "plannedEvidence": "Statistical Learning Theory & Reliable Deep-Learning Systems Dossier and learner-controlled oral-defense summary."
+        }
+      ],
+      "forwardHandoff": {
+        "declaredForwardModuleId": "m25",
+        "directAcademicConsumerModuleIds": ["m25"],
+        "handoffArtifact": "Synthesis-ready reliable-learning evidence packet: assumptions, gaps, theorem limits, reproducibility record, monitoring/authority boundary, and oral-defense reflection.",
+        "note": "The graph's declared forward handoff and direct academic consumer are M25. This ledger does not unlock M25/M26; their academic prerequisites and release evidence remain governed by the canonical graph and module contract."
+      },
+      "sourceBlockers": [
+        {
+          "id": "m36-source-map-null",
+          "status": "unmet",
+          "blockingReason": "The canonical graph currently has sourceMap: null. Candidate M36 source research exists, but it must be selected, claim-reviewed, and release-bound as one canonical ledger for statistical learning theory, optimization/generalization distinctions, capacity/limits, deep-learning reliability, reproducibility, and monitoring."
+        },
+        {
+          "id": "m36-theorem-to-system-boundaries-unreviewed",
+          "status": "unmet",
+          "blockingReason": "Every theorem, empirical benchmark, systems recommendation, figure, model/code artifact, and safety statement needs an explicit scope, access date, license/reuse status, and practical non-claim."
+        }
+      ],
+      "releaseBlockers": [
+        {
+          "id": "m36-learning-artifacts-unbuilt",
+          "status": "unmet",
+          "blockingReason": "A checked-in M36 candidate workbook and bounded ML/reliability fixture now exist, with its diagnostic, retrieval, dossier, and oral materials in the draft. This ledger does not review their delivery quality, select canonical learner material, or establish release evidence."
+        },
+        {
+          "id": "m36-contract-and-provenance-unmet",
+          "status": "unmet",
+          "blockingReason": "M36 has an authoring-only v3 registry record but no review-ready/verified learner-delivery record; graph release evidence remains planned and no CI/provenance record may be inferred."
+        }
+      ]
+    }
+  ]
+}

@@ -66,10 +66,12 @@ Each difficult idea appears in several forms:
 7. a bounded Atlas decision;
 8. an evidence claim to defend.
 
-Use the learner-facing HTML reader as the primary study surface when this draft
-is published. Use Notion for predictions, misconceptions, diagrams redrawn from
-memory, experiment records, and oral-defense notes. The workbook remains the
-auditable instructor source.
+Use the designated Teaching Assistant and Study Partner chats for guided
+learning, rehearsal, and the supportive oral defense. The learner-facing HTML
+reader is the visual/reference companion for traces, diagrams, and bounded
+interactive work. Use Notion for predictions, misconceptions, diagrams redrawn
+from memory, experiment records, and oral-defense notes. The workbook remains
+the auditable instructor source.
 
 ### The learner loop
 
@@ -141,15 +143,24 @@ processors, memory, files, and devices without receiving unrestricted control
 over one another.
 
 ```mermaid
-%% Figure 1. Module 17 hands an unresolved OS boundary to Module 18, which resolves local resource ownership before later modules add overlap, networks, distribution, and runtime internals.
+    %% atlas-diagram-id: m18-os-pressure-bridge
+    %% atlas-diagram-title: Operating-system pressure bridge
+    %% atlas-diagram-alt: Module 17 hands a machine and I/O boundary to Module 18, which explains processes, memory, files, and shutdown. Module 19 is the canonical forward handoff for concurrency, then Module 20 adds networking and Module 21 adds distribution. The dotted Module 24 link is a later conceptual runtime boundary, not reader navigation or an academic prerequisite.
+%% Figure 1. Module 17 hands an unresolved OS boundary to Module 18, which resolves local resource ownership before the canonical M19 concurrency handoff. The dotted runtime link is conceptual only.
 flowchart LR
     M17["M17<br/>machine state + I/O handoff"] --> PRESSURE["finite resources<br/>multiple programs<br/>failure"]
     PRESSURE --> M18["M18<br/>process + VM + files + shutdown"]
-    M18 --> M19["M19<br/>interleavings + synchronization"]
-    M18 --> M20["M20<br/>network protocols"]
+    M18 --> M19["M19 canonical forward handoff<br/>interleavings + synchronization"]
+    M19 --> M20["M20<br/>network protocols"]
     M20 --> M21["M21<br/>async + distribution"]
-    M18 --> M24["M24<br/>CPython memory + performance"]
+    M18 -.-> M24["M24 later conceptual boundary<br/>CPython memory + performance"]
 ```
+
+The graph separates academic foundations, reader narrative, and topic links.
+M18's sole academic prerequisite is M17. M31's reader-narrative placement is
+not an academic prerequisite; it resumes the 60-day route after the M28–M31
+mathematics arc. M19 is M18's only canonical forward handoff. The dotted M24
+edge is a conceptual stopping boundary, not learner navigation or a bypass.
 
 The bridge reuses five M17 disciplines:
 
@@ -257,6 +268,17 @@ Route misses:
 A confident miss receives a counterexample and a delayed transfer. A
 low-confidence correct answer receives an explanation prompt.
 
+### Prediction before reveal — one returned write, one named boundary
+
+Before opening a trace, choose a confidence level and complete this sentence:
+
+> “After `buffered.write(payload)` returns, the strongest claim I can make is
+> [claim], because [named owner and evidence]. I cannot yet claim [one lower
+> layer or durability fact].”
+
+Then compare the prediction with the Python, declared OS-model, platform, and
+artifact evidence that follow. A revision is useful evidence, not a penalty.
+
 ### 1.6 Module ownership and stopping rules
 
 Module 18 owns:
@@ -286,7 +308,7 @@ Stop at these boundaries:
 A process may contain threads; Windows schedules threads. That boundary fact is
 M18. Reasoning about their interleavings is M19.
 
-### 1.7 Mastery outcomes
+### 1.7 Learning outcomes
 
 At exit, Michael can:
 
@@ -350,6 +372,9 @@ not “provide convenient functions.” It is:
 Four responsibilities emerge.
 
 ```mermaid
+    %% atlas-diagram-id: m18-os-responsibilities
+    %% atlas-diagram-title: Four operating-system responsibilities
+    %% atlas-diagram-alt: Finite resources, multiple programs, and failure require an OS to virtualize abstractions, multiplex scarce service, protect authority, and preserve named state through process, scheduler, permission, and filesystem mechanisms.
 %% Figure 2. Finite resources and mutually untrusted programs force four connected OS responsibilities: virtualize, multiplex, protect, and preserve named state.
 flowchart TB
     PRESSURE["finite CPU + memory + devices<br/>many programs + failure"] --> V["virtualize<br/>useful private-looking abstractions"]
@@ -362,6 +387,17 @@ flowchart TB
     D --> FS["filesystem + sync + recovery"]
 ```
 
+### Visual text equivalent — why the mediator has four jobs
+
+Finite CPU, memory, devices, and named state meet multiple independent programs
+and possible failure. The OS therefore gives each program a useful
+private-looking process/address-space abstraction, allocates scarce service
+over time, checks which transitions an identity may request, and preserves or
+classifies named state after interruption. Process lifecycle, scheduling,
+permissions, files, synchronization, and recovery are not separate tricks:
+they are different consequences of the same finite-resource and authority
+problem.
+
 - **Virtualize:** present a process with a useful execution and address-space
   model.
 - **Multiplex:** share processors, memory, and I/O over time and space.
@@ -373,6 +409,23 @@ flowchart TB
 These are connected. A process is useful because it bundles execution,
 address-space, resource, and protection state. A file is useful because names,
 open lifetime, access rights, cached data, and persistence rules compose.
+
+### First-principles checkpoint — finite resources require mediated transitions
+
+Call a resource claim a statement that a named transition may consume, expose,
+or preserve a finite asset. If one declared CPU serves two runnable jobs, then at
+each teaching time slice the allocation count satisfies
+\(\operatorname{running}(t) \leq 1\). A schedule such as `A, B, A` is not a
+host observation; it is a tiny model that forces a policy, current state, and
+an ownership record into view. The derivation is simple: both jobs cannot hold
+the only CPU at the same instant, so an interface must mediate competing legal
+transitions rather than granting unrestricted control.
+
+**Counterexample.** If every caller could replace any named file without an
+operation-time authority check, one incorrect program could change another
+program's state. The useful abstraction and the protection claim would conflict.
+Record the capacity, policy, and unmodelled platform behavior before treating a
+trace as evidence.
 
 ### 2.2 User mode and kernel mode
 
@@ -388,6 +441,9 @@ More precisely:
 > request before returning a result or error.
 
 ```mermaid
+    %% atlas-diagram-id: m18-python-os-boundary
+    %% atlas-diagram-title: Python operation across the OS boundary
+    %% atlas-diagram-alt: Atlas code asks the Python runtime for an operation, which may make lower OS-interface requests; the kernel validates authority and state, optionally schedules resource work, and returns a value, error, or later completion.
 %% Figure 3. A high-level Python operation may reach a protected OS service through several owned layers; the diagram does not assert one call at each layer.
 sequenceDiagram
     participant A as "Atlas code"
@@ -430,6 +486,23 @@ Keep four questions separate:
 
 An OS course becomes confusing when a mechanism diagram is presented as a
 portable contract or a classroom policy is presented as a host observation.
+
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+For each code-reading claim, fill this small whiteboard before expanding the
+trace:
+
+```text
+owner → legal transition → claim label → observed evidence / unknown
+```
+
+For `save_note()`, Python owns acceptance of text characters; the open stream
+and OS resource own later I/O transitions; the code may claim a returned
+character count under the Python contract. It cannot claim one physical write,
+device persistence, or a universally portable OS sequence. The assumption is a
+named stream/platform contract; the counterexample is a buffered write or an
+exception during context exit. A numerical return value is therefore evidence
+about one layer, not a count of lower-layer operations.
 
 ### 2.4 Code-reading lab — one `write`, many owners
 
@@ -515,6 +588,9 @@ Precision:
 | Atlas job | application-defined unit of work | stable `run_id`; not the PID |
 
 ```mermaid
+    %% atlas-diagram-id: m18-process-resource-capsule
+    %% atlas-diagram-title: Process as a live resource capsule
+    %% atlas-diagram-alt: A program artifact and Atlas job together launch a live process containing execution state, virtual memory, open resources, environment, authority, and lifecycle data; exit status and artifact effects remain different evidence.
 %% Figure 4. A process is a live resource capsule, while a program artifact and an Atlas job remain distinct entities.
 flowchart LR
     PROGRAM["program artifact<br/>stored code + defaults"] -->|launch| PROC
@@ -566,6 +642,9 @@ Do not infer a universal native sequence from the Python surface.
 ### 3.3 Process lifecycle
 
 ```mermaid
+    %% atlas-diagram-id: m18-process-lifecycle
+    %% atlas-diagram-title: Portable process lifecycle
+    %% atlas-diagram-alt: A process is created, admitted, runnable, running, blocked or preempted, terminated, and finally collected when a caller waits for or releases its status object.
 %% Figure 5. The portable teaching lifecycle separates eligibility, execution, waiting, termination, and status collection.
 stateDiagram-v2
     [*] --> Created
@@ -705,6 +784,9 @@ If runnable work exceeds available execution capacity, a policy chooses which
 eligible work receives service.
 
 ```mermaid
+    %% atlas-diagram-id: m18-one-cpu-schedule
+    %% atlas-diagram-title: Declared one-CPU teaching schedule
+    %% atlas-diagram-alt: On one declared CPU, worker A runs, blocks, then runs again while worker B becomes runnable, runs during A's wait, and is runnable again; service order changes without changing either job's contract.
 %% Figure 6. A declared one-CPU scheduler model can change service order without changing either job's semantic contract.
 gantt
     title Declared one-CPU teaching schedule
@@ -860,6 +942,9 @@ The same virtual address in another process may map to another frame or be
 invalid.
 
 ```mermaid
+    %% atlas-diagram-id: m18-address-translation
+    %% atlas-diagram-title: Toy virtual-address translation
+    %% atlas-diagram-alt: A virtual address splits into virtual-page number and offset, uses a usable TLB entry or page-table lookup, checks mapping and permission state, then forms a physical address or reports a not-present, invalid, or protection fault.
 %% Figure 7. The toy translator separates virtual-page number and offset, checks mapping state and permissions, then either forms a physical address or raises a classified fault.
 flowchart LR
     VA["virtual address<br/>0x2A3F"] --> SPLIT["VPN 0x2A<br/>offset 0x3F"]
@@ -1004,6 +1089,9 @@ offset and which formulas change?
 ### 4.6 A fault decision tree
 
 ```mermaid
+    %% atlas-diagram-id: m18-page-fault-classification
+    %% atlas-diagram-title: Page-fault classification
+    %% atlas-diagram-alt: A virtual-memory access can fail because its mapping is invalid, its requested operation is disallowed, or its valid page is absent; an absent page either resolves and resumes or becomes a failure.
 %% Figure 8. A page fault is a classified event, not a single diagnosis: the mapping may be absent, disallowed, or temporarily not present and resolvable.
 flowchart TD
     ACCESS["virtual-memory access"] --> MAP{"mapping valid?"}
@@ -1091,6 +1179,9 @@ Precision:
 | Python file object | object adding mode, buffering, encoding, decoding, methods, cleanup | proof of physical I/O |
 
 ```mermaid
+    %% atlas-diagram-id: m18-names-and-open-resources
+    %% atlas-diagram-title: Names and open resources
+    %% atlas-diagram-alt: A pathname resolves through a directory entry to a filesystem object, while a process descriptor or handle resolves to an open resource with rights and state; both may reach the same object without being the same abstraction.
 %% Figure 9. A pathname reaches a directory binding while a process descriptor or handle reaches an open OS resource; both can lead toward stored data without becoming the same entity.
 flowchart LR
     BASE["resolution base<br/>root, cwd, or directory handle"] --> PATH["path components"]
@@ -1180,6 +1271,9 @@ model:
 ```
 
 ```mermaid
+    %% atlas-diagram-id: m18-atomic-replacement-reference
+    %% atlas-diagram-title: Atomic replacement and existing open references
+    %% atlas-diagram-alt: In the declared POSIX-like model, process A opens the old object, process B replaces the namespace binding with a new object, and A continues reading the old object through its pre-existing file descriptor until close.
 %% Figure 10. In the declared POSIX-like model, atomic name replacement changes the stable binding while a pre-existing open reference continues to the old object.
 sequenceDiagram
     participant N as "namespace"
@@ -1206,6 +1300,9 @@ other conditions. The transferable lesson is:
 ### 5.5 Python buffer, OS page cache, and device path
 
 ```mermaid
+    %% atlas-diagram-id: m18-python-to-storage-layers
+    %% atlas-diagram-title: Python text through storage layers
+    %% atlas-diagram-alt: Python text passes through encoding, buffering, raw-file, OS, page-cache, filesystem, and device layers; flush and synchronization requests strengthen different observations at different layers.
 %% Figure 11. Text encoding and Python buffering precede an OS-managed open resource and possible page-cache/filesystem/device work; each layer answers a different evidence question.
 flowchart TB
     TEXT["Python str"] --> ENC["TextIOWrapper<br/>encoding + newline"]
@@ -1311,6 +1408,9 @@ requesting process credentials or access token
 ```
 
 ```mermaid
+    %% atlas-diagram-id: m18-operation-authority
+    %% atlas-diagram-title: Operation-time authority decision
+    %% atlas-diagram-alt: An OS access decision combines process identity, requested right, resolved target, and platform rules at operation time, then either grants an open resource capability or returns a permission error.
 %% Figure 12. An access decision combines requester authority, requested operation, target protection state, and platform policy at operation time.
 flowchart LR
     WHO["process identity<br/>credentials or token"] --> DECIDE{"OS access decision"}
@@ -1466,6 +1566,9 @@ belong inside the handler.
 ### 7.2 Cooperative shutdown
 
 ```mermaid
+    %% atlas-diagram-id: m18-cooperative-shutdown
+    %% atlas-diagram-title: Cooperative shutdown protocol
+    %% atlas-diagram-alt: A cooperative stop request stops admission, reaches a declared safe point, then either finishes and publishes work or preserves a classified incomplete artifact before closing resources, exiting, and recording status.
 %% Figure 13. Cooperative shutdown is a fallible application protocol: request, stop admission, reach a safe unit boundary, reconcile artifacts, close resources, exit, and let the supervisor collect status.
 flowchart LR
     REQ["cooperative stop request"] --> ADMIT["stop accepting new work"]
@@ -1489,6 +1592,9 @@ conditions are recorded.
 ### 7.3 Wait, then escalate under a capability profile
 
 ```mermaid
+    %% atlas-diagram-id: m18-stop-escalation
+    %% atlas-diagram-title: Stop escalation and artifact classification
+    %% atlas-diagram-alt: A supervisor requests cooperative stop, waits to a deadline, escalates only through recorded terminate and kill capabilities, observes the child exit, then inspects artifacts before classification.
 %% Figure 14. The supervisor requests cooperative stop, waits to a deadline, then uses only recorded platform capabilities and always observes the child after escalation before classifying artifacts.
 stateDiagram-v2
     [*] --> Running
@@ -1661,6 +1767,9 @@ protocol, not a new canonical phase.
 ### 8.3 The publication sequence
 
 ```mermaid
+    %% atlas-diagram-id: m18-publication-phases
+    %% atlas-diagram-title: Atlas publication phases
+    %% atlas-diagram-alt: An admitted job moves through start, encoding, staging, validation, Python flush, file synchronization, close, replacement, optional directory synchronization, exit, and recovery classification, exposing crash cuts between phases.
 %% Figure 15. The exact Atlas publication phases expose a crash cut between every application and OS boundary while keeping exit evidence separate from artifact evidence.
 flowchart LR
     A["ADMITTED"] --> S["STARTED"]
@@ -1707,6 +1816,9 @@ false success.
 ### 8.4 Buffer-to-storage ladder
 
 ```mermaid
+    %% atlas-diagram-id: m18-buffer-to-storage-ladder
+    %% atlas-diagram-title: Buffer-to-storage claim ladder
+    %% atlas-diagram-alt: Python flush, file synchronization, name replacement, and optional directory synchronization support progressively different file and namespace claims, while hardware, filesystem, and failure assumptions remain.
 %% Figure 16. Python flush, native file synchronization, name replacement, and optional directory synchronization strengthen different claims and never create a universal power-loss guarantee by themselves.
 flowchart TB
     MEM["candidate bytes in process"] --> PY["Python staging buffer"]
@@ -2003,6 +2115,9 @@ The important architecture is the separation around this excerpt:
 ### 9.3 Required reference architecture
 
 ```mermaid
+    %% atlas-diagram-id: m18-reference-architecture
+    %% atlas-diagram-title: Reference architecture and external effects
+    %% atlas-diagram-alt: The supervisor owns worker creation, stop policy, recovery, and capability records; the worker combines a pure review packet with staged publication, while workspace, oracle, capabilities, and publication evidence feed one JSON dossier.
 %% Figure 17. The reference keeps the pure review-packet contract inward while supervisor, worker, platform capability, publication, and evidence adapters own external effects.
 flowchart LR
     CLI["scenario command"] --> SUP["supervisor"]
@@ -2131,7 +2246,7 @@ actually execute. A green summary alone is not the mastery artifact.
 The sessions are not six chapters. Each adds one missing state owner to the
 same shutdown incident.
 
-### Session 1 — Why a mediator exists
+## Session 1 — Why a mediator exists
 
 **Before**
 
@@ -2180,7 +2295,13 @@ In two minutes:
 > Why does a protected system-call interface make both resource sharing and
 > isolation possible, and why does it not reveal physical work?
 
-### Session 2 — Program, process, lifecycle, and scheduling
+### Session 1 output — ownership and privilege-boundary trace
+
+Produce a seven-row `write()` ownership table that labels the caller, the
+resource owner, the strongest supported claim, and one still-unknown lower
+layer for each transition.
+
+## Session 2 — Program, process, lifecycle, and scheduling
 
 **Before**
 
@@ -2235,7 +2356,12 @@ zero-exit/failed-publication incident.
 One state table distinguishing program, process, run, PID, lifecycle, exit
 status, and target state.
 
-### Session 3 — Virtual memory and fault classification
+### Session 2 output — lifecycle and scheduling state table
+
+Keep one labelled lifecycle trace plus one declared-policy schedule, with run
+identity separate from PID, exit status, and target-artifact state.
+
+## Session 3 — Virtual memory and fault classification
 
 **Before**
 
@@ -2292,7 +2418,12 @@ invalid mapping:
 storage I/O proved?:
 ```
 
-### Session 4 — Names, open resources, caches, and authority
+### Session 3 output — translation and fault-classification trace
+
+Submit a VPN/offset/PTE/TLB trace that separates a TLB miss, resolvable fault,
+protection fault, invalid mapping, and the storage I/O evidence that is absent.
+
+## Session 4 — Names, open resources, caches, and authority
 
 **Before**
 
@@ -2347,7 +2478,12 @@ survives; classify a permission denial without privilege escalation.
 Explain why the pathname can change while an open resource retains distinct
 state, and why this is not a universal Windows/POSIX outcome.
 
-### Session 5 — Shutdown as a fallible protocol
+### Session 4 output — name, open-resource, and authority card
+
+Create one declared-model card showing path, name binding, descriptor/handle,
+open resource, buffer/cache boundary, required right, and platform unknown.
+
+## Session 5 — Shutdown as a fallible protocol
 
 **Before**
 
@@ -2399,7 +2535,12 @@ graceful.
 Explain one scenario in which the child exits nonzero but the target is valid
 new output.
 
-### Session 6 — Publication, recovery, and evidence defense
+### Session 5 output — shutdown and recovery boundary
+
+Write one interruption timeline with cooperative, forced, and unknown cleanup
+paths, plus the artifact observation required before any recovery decision.
+
+## Session 6 — Publication, recovery, and evidence defense
 
 **Before**
 
@@ -2463,6 +2604,12 @@ packet, run focused tests, and defend accept/reject/split decisions.
 [EMPIRICAL OBSERVATION] ...
 [UNKNOWN + NEXT EVIDENCE] ...
 ```
+
+### Session 6 output — bounded operating-evidence dossier and M19 handoff
+
+Assemble the six labelled claim sentences, raw artifact observations, one
+falsification step, and one M19 question about what changes when a second
+worker may interleave with this lifecycle.
 
 ---
 
@@ -2960,8 +3107,7 @@ escalation state machine represent a missing distinct hard-kill rung?
 | correct with low confidence | one plain-language explanation plus changed-surface transfer |
 | correct with high confidence | one “does not establish” sentence |
 
-Mastery is the corrected model transferring to a new case. It is not an 8/8
-memorized score.
+A corrected model transfers to a new case. It is not an 8/8 memorized score.
 
 ---
 
@@ -3018,6 +3164,9 @@ model result.
 ### 13.3 Architecture to recover
 
 ```mermaid
+    %% atlas-diagram-id: m18-dossier-state-views
+    %% atlas-diagram-title: Independent state views in the evidence dossier
+    %% atlas-diagram-alt: Application job, supervisor, worker, publication phases, raw exit, artifacts, and platform capability remain separate state views that the recovery classifier joins into an evidence dossier without equating them.
 %% Figure 18. The Atlas dossier joins four independent state views—application job, process lifecycle, publication phases, and artifact classification—without letting one stand in for another.
 flowchart TB
     JOB["application job<br/>input + run_id + oracle"] --> WORK["worker process"]
@@ -3156,7 +3305,7 @@ Deliver:
 6. separate behavior/test/portability/schema/prose decisions;
 7. 700–1,000 word operating contract;
 8. five labeled final sentences;
-9. five-minute oral defense;
+9. learner-paced conversational defense;
 10. M19/M20/M21/M24 handoff map.
 
 **Gate:** agent summary and green test count never replace diff, test-coverage,
@@ -3402,7 +3551,7 @@ inferred from exit alone.
 Checkoff: forced termination is not graceful, recovery is artifact-driven, and
 claims remain version/platform scoped.
 
-### 13.18 Mastery gate
+### 13.18 Constructive next-step guide
 
 | Capability | Required evidence | Not enough |
 |---|---|---|
@@ -3422,7 +3571,8 @@ claims remain version/platform scoped.
 | communicate uncertainty | five labeled sentences and unknowns | “works locally” |
 | transfer | correct M19/M20/M21/M24 routing | “later topic” |
 
-Ready only when:
+Use the evidence above to choose a next bridge or repair—not to decide whether
+Michael passes. Check which of these claims has usable evidence:
 
 1. project acceptance invariants hold;
 2. S0–S9 have raw evidence or explicit safe capability-based skips;
@@ -3436,15 +3586,23 @@ Ready only when:
 
 Routing:
 
-| Result | Action |
+| Evidence pattern | Next bridge or repair |
 |---|---|
-| ready | proceed to M19 with the dossier |
-| concept ready, evidence weak | repeat only failure scenarios/defense |
-| process model weak | TA Studio A |
-| memory/file model weak | TA Studio B |
-| shutdown/platform model weak | TA Studio C |
-| repeated owner collapse | M17 evidence bridge |
-| publication collapse | M15 crash/publication bridge |
+| the project evidence and boundaries are coherent | continue with the M19 handoff and carry the dossier |
+| concept model is coherent but evidence is weak | repeat only the failure scenarios or defense |
+| process model is weak | TA Studio A |
+| memory/file model is weak | TA Studio B |
+| shutdown/platform model is weak | TA Studio C |
+| ownership repeatedly collapses | M17 evidence bridge |
+| publication reasoning collapses | M15 crash/publication bridge |
+
+Otherwise, start with the first missing state transition: rebuild the
+resource-owner timeline, classify one interruption without inferring a commit,
+or inspect the artifact table before choosing a recovery claim. Preserve an
+explicit platform limitation rather than inventing a guarantee, then bring the
+revised trace to the Teaching Assistant or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ### 13.19 Evidence packet and operating memo
 
@@ -3496,6 +3654,9 @@ End with exactly:
 One-page concept map:
 
 ```mermaid
+    %% atlas-diagram-id: m18-os-one-page-map
+    %% atlas-diagram-title: Operating-system mediation one-page map
+    %% atlas-diagram-alt: Finite resources and failure lead to OS mediation of process lifecycle, address translation, names and open resources, and authority; shutdown and publication lead to recovery evidence and later concurrency, network, distribution, and runtime modules.
 %% Figure 19. Module 18 consolidates local resource mediation around four independent state views and carries their boundaries forward.
 flowchart TD
     PRESS["finite resources + failure"] --> OS["OS mediation"]
@@ -3985,3 +4146,148 @@ Finish:
 > I can recover the OS-owned state, trace its lifecycle, name the source of each
 > guarantee, and design for interruption without claiming more than the
 > platform and evidence support.
+
+## Conversational oral defense — M18
+
+This is a supportive Teaching Assistant conversation, not a pass/fail exam,
+score, timed assessment, completion signal, or operating-systems certification
+claim. It is not a score, not timed, and does not produce a binary outcome.
+If the learner chooses GPT Live at a preferred High setting when available and
+their client renders the material, use the resource-owner map, lifecycle trace, translation table,
+publication phases, and Markdown/ASCII evidence ladder as a shared whiteboard.
+This workbook cannot control voice availability, quality settings, rendering,
+retention, or integrations. The same conversation protocol can instead use
+readable text with Markdown and an ASCII resource/lifecycle trace; the course
+cannot write Notion evidence automatically.
+
+### Invitation — separate an API return from OS state
+
+Start from one learner-selected artifact: an ownership table, process
+lifecycle, page translation, pathname/open-resource map, shutdown trace, or
+crash-cut matrix. Ask what changed, who owns the transition, which evidence
+supports it, how confident the learner is, and which lower-layer fact remains
+unknown before naming an API or guarantee.
+
+### Hint ladder — owner to recovery claim
+
+Offer only the smallest needed prompt:
+
+1. name the resource and current owner;
+2. draw the legal next state and one illegal edge;
+3. distinguish application invariant, declared model, platform contract,
+   observation, and unknown;
+4. inspect the shortest trace or artifact table;
+5. change one interruption or authority premise;
+6. state the narrowest recovery or non-claim.
+
+### Changed-premise counterexample
+
+Keep the application job fixed, then change exactly one premise: a permission
+denial, a forced stop, an uncollected child, a renamed pathname, a not-present
+page, a missing directory-sync capability, or a second worker. Predict which
+state transition, claim, and recovery rule change before seeing a trace. Use a
+small counterexample rather than turning an uncertainty into a failure.
+
+### Transfer turn — M19 concurrent histories
+
+Admit a second worker that can observe or modify the same name, resource, or
+publication protocol. Which M18 ownership and lifecycle facts remain useful,
+and which claims now require M19's interleavings, synchronization, progress,
+and race reasoning? Carry the unresolved question forward rather than claiming
+that a one-worker trace proves a concurrent guarantee.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a short summary: selected artifact, defended claim,
+confidence, changed premise, repaired misconception, observed evidence,
+remaining unknown, and M19 question. It is optional learner-controlled
+evidence, not a grade, transcript, automatic record, completion decision, or
+Notion write.
+
+## Guided Codex handoff — M18
+
+### Teaching Assistant — supportive oral defense
+
+Use the canonical conversational oral-defense protocol above. Start with:
+**“I am finishing M18. This resource is owned by [layer], this lifecycle trace
+is [trace], this authority/durability claim is [claim], and my confidence is
+[level].”** Ask for the resource-state timeline before naming an OS API.
+
+### Study Partner — lifecycle rehearsal
+
+Ask the learner to trace one file/resource through acquire, use, close,
+flush/sync, failure, and recovery. Change exactly one event and ask whether the
+result is a leak, a visibility difference, lost durability, or an authority
+failure. Preserve the unknown platform detail rather than inventing it.
+
+### Forward handoff — M19
+
+Carry the idea of an owned resource plus a legal lifecycle into **M19**.
+Concurrency makes the same ownership and timing reasoning explicit across
+multiple simultaneous histories.
+
+
+## Bench pack
+
+**Bench pack:** `m18` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 18 was initially excluded wholesale — an
+operating-systems module needs real processes, real scheduling, and real privilege,
+and a kernel that simulated them would model the mechanism dishonestly, which is
+this module's own subject. That verdict holds for four of the six sessions. It was
+wrong about two: address translation is **arithmetic over a declared geometry**,
+and path authority is a decision over strings and a directory this process owns.
+Neither needs a kernel, and neither claims one.
+
+### Bench 3 — translation and fault-classification trace
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** eight probes through a declared 16-bit, 256-byte-page table. Virtual
+address `0x0010` translates cleanly on **read** and raises `PROTECTION_FAULT` on
+**write** against the same entry — the permission belongs to the mapping, not the
+address. Four statuses are reachable, and the session's real work is telling them
+apart: `NOT_PRESENT` is the *mechanism* that makes demand paging and `mmap` work,
+`INVALID_MAPPING` is the segmentation fault, and `PROTECTION_FAULT` is genuinely
+ambiguous — the same status implements copy-on-write. "Page fault" names a hardware
+trap, not a diagnosis, so a fault count is not by itself evidence of a problem.
+**Cannot establish:** anything about this host. One page-table level where real
+hardware has four or five, no TLB, no huge pages — and it collapses never-mapped and
+explicitly-invalid into one status, which is a modelling choice rather than a fact.
+
+### Bench 4 — name, open-resource, and authority card
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** fourteen candidate names against a real temporary workspace, under
+two guards. A join-then-prefix check and the reference resolver disagree on eight,
+and the prefix check admits **five names that resolve outside the workspace** —
+including plain `"../escape.json"`, because `startswith` compares characters and
+the `..` is still sitting unresolved inside a string that satisfies the test. It
+fails the obvious cases, not just the subtle ones, and it fails silently by
+returning `True`. `"/etc/passwd"` is caught only by accident: `os.path.join`
+discards everything left of a leading separator, so the workspace is never applied.
+The resolver additionally refuses `""`, `"."`, and `".."` as not naming a member —
+a rule distinct from non-escape.
+**Cannot establish:** any operating-system permission check. No user identity, no
+capability, no privileged operation; the workspace is writable because this process
+created it. The symlink probe is *skipped rather than faked* on hosts that cannot
+create symlinks, and the time-of-check-to-time-of-use claim rests on argument, not
+on evidence gathered here.
+
+### Sessions without a bench
+
+- **Session 1** — ownership and privilege boundaries: real processes and real
+  identities.
+- **Session 2** — lifecycle and scheduling: a real scheduler, which a kernel cannot
+  model honestly in-process.
+- **Session 5** — shutdown and recovery: process death and durability, which this
+  process cannot inflict on itself truthfully.
+- **Session 6** — a dossier consuming Sessions 1–5. This was the plan's second pick
+  for the module; it was replaced by Session 4, because the selection rubric's own
+  A3 anti-signal disqualifies a synthesis artifact.
+
+### Bench pack completion record
+
+Records under `benches/records/m18-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

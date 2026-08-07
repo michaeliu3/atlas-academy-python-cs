@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "v1",
+  "kind": "atlas-module-preview-contract-packet",
+  "moduleId": "m26",
+  "packetId": "m26-systems-capstone-preview-boundary",
+  "packetState": "preview-only",
+  "humanReviewState": "not-reviewed",
+  "publicationEffect": "none",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
+  "canonicalExpectation": {
+    "academicPrerequisiteModuleIds": ["m25"],
+    "forwardModuleId": null,
+    "masteryGateId": "defense",
+    "studioId": "capstone-defense",
+    "availability": "preview",
+    "readerAccess": "preview",
+    "releaseState": "unrecorded"
+  },
+  "workbookPath": "content/modules/26_systems_capstone_open_source_stewardship.md",
+  "sourceMapPath": "content/source-maps/module26_systems_capstone_source_map.md",
+  "sessionSpine": [
+    {"sessionNumber": 1, "headingAnchor": "3-session-1--release-claims-begin-with-a-boundary"},
+    {"sessionNumber": 2, "headingAnchor": "4-session-2--architecture-is-a-traceable-set-of-responsibilities"},
+    {"sessionNumber": 3, "headingAnchor": "5-session-3--a-retry-is-a-systems-event-not-a-duplicate-line-of-code"},
+    {"sessionNumber": 4, "headingAnchor": "6-session-4--a-patch-is-a-supply-chain-and-ownership-proposal"},
+    {"sessionNumber": 5, "headingAnchor": "7-session-5--operational-evidence-is-scoped-evidence"},
+    {"sessionNumber": 6, "headingAnchor": "8-session-6--the-defense-tests-the-architecture-not-presentation-skill"}
+  ],
+  "coverage": [
+    {"criterionId": "prerequisite-forward-map", "anchors": ["11-the-prerequisite-and-forward-map", "12-the-forward-connection"]},
+    {"criterionId": "six-connected-sessions", "anchors": ["3-session-1--release-claims-begin-with-a-boundary", "4-session-2--architecture-is-a-traceable-set-of-responsibilities", "5-session-3--a-retry-is-a-systems-event-not-a-duplicate-line-of-code", "6-session-4--a-patch-is-a-supply-chain-and-ownership-proposal", "7-session-5--operational-evidence-is-scoped-evidence", "8-session-6--the-defense-tests-the-architecture-not-presentation-skill"]},
+    {"criterionId": "first-principles", "anchors": ["first-principle-a-release-is-a-controlled-promise"]},
+    {"criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments", "anchors": ["definition--a-scoped-release-claim-is-a-conjunction", "assumption-boundary--one-logical-event-and-one-atomic-boundary", "derivation--proof-idea--an-unsupported-conjunct-blocks-promotion", "counterexample--check-then-append-can-duplicate-an-effect", "numerical-experiment--two-attempts-and-one-durable-effect"]},
+    {"criterionId": "code-reading-debugging-design", "anchors": ["code-reading-lab--locate-the-hidden-promise", "debugging-lab--find-the-race", "patch-review-protocol"]},
+    {"criterionId": "prediction-before-reveal", "anchors": ["prediction-before-reveal-interaction-pattern"]},
+    {"criterionId": "transfer-task", "anchors": ["transfer-task--defend-the-same-logic-under-a-changed-constraint"]},
+    {"criterionId": "source-ledger", "anchors": ["14-source-route-rationale-and-reuse-boundary", "primary-source-ledger", "licensing-reuse-and-access-ledger"]},
+    {"criterionId": "accessible-visual-text-alternative", "anchors": ["diagram-and-accessibility-contract"]},
+    {"criterionId": "confidence-diagnostic-misconceptions", "anchors": ["10-confidence-aware-diagnostic", "diagnostic-routing"]},
+    {"criterionId": "retrieval-and-spaced-review", "anchors": ["13-retrieval-schedule-and-maintenance-handoff", "spaced-review"]},
+    {"criterionId": "project-and-evidence-rubric", "anchors": ["project--atlas-release-dossier--open-source-stewardship-track", "acceptance-rubric"]},
+    {"criterionId": "supportive-oral-defense", "anchors": ["teaching-assistant-oral-defense-prompt--m26", "supportive-hint-and-repair-ladder", "learner-controlled-evidence-summary"]},
+    {"criterionId": "ta-prompt", "anchors": ["ta-guide"]},
+    {"criterionId": "study-partner-prompt", "anchors": ["study-partner-routine"]},
+    {"criterionId": "forward-handoff", "anchors": ["maintenance-handoff-template"]}
+  ],
+  "privateReferenceInputs": [
+    {"path": "content/course/reference-models/module26_reference.py", "role": "bounded deterministic teaching model"},
+    {"path": "content/course/reference-models/test_module26_reference.py", "role": "local model behavior tests"}
+  ],
+  "publicSurface": {
+    "publicDownloadPaths": [],
+    "removedDownloadPaths": ["/downloads/module26_reference.py", "/downloads/test_module26_reference.py"],
+    "reason": "M26 is a preview. Its private reference inputs must not become a direct public download or imply release authority."
+  },
+  "truthBoundary": {
+    "structural": "This packet binds the preview workbook, graph state, teaching-model inputs, and visible contract anchors; it does not prove pedagogical quality or learner evidence.",
+    "release": "M26 remains preview-only and unrecorded. The model recommends outcomes in a synthetic fixture; it cannot deploy, publish, merge, access credentials, or authorize a release.",
+    "learner": "Preview reading and a private Codex conversation are orientation, not Core credit, certification, mastery, or a release decision."
+  }
+}

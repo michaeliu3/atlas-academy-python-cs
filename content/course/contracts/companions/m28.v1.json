@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m28",
+  "purpose": "Freeze a module-specific M28 Teaching Assistant, Study Partner, and M29 handoff context for future human review without changing M28's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/27",
+    "digest": "sha256:d69fc50f39e903794f7431522fd75ab92d6dd047cb831d134aa83cf4002b5bd9"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected linear-map claim. Ask for the domain, codomain, basis or coordinate convention, and the smallest exact or finite-precision trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one definition or hypothesis visible, reconstruct one least-squares, spectral, or PCA derivation or code/shape trace, name one conditioning or counterexample boundary, and distinguish what the evidence supports from what it cannot decide.",
+    "repairMove": "Ask for a prediction before correction; change exactly one rank, basis, scale, dtype, conditioning, solver, or loss premise; then offer the smallest hint or counterexample that lets the learner revise without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: define notation, render a short derivation or labelled code/shape trace, give a plain-language fallback, and rehearse one model-to-assumption-to-boundary chain at a time.",
+    "changedPremise": "Change one domain/codomain, rank, inner product, scale, condition number, dtype, solver, or reconstruction loss. Ask for a prediction before looking at a counterexample, trace, or theorem condition.",
+    "taHandoff": "End with the learner's selected map or matrix card, attempted derivation or trace, confidence, unresolved misconception, one conditioning or finite-precision limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m29",
+    "carryArtifact": "Carry a representation-and-stability evidence card: map, coordinates and units, assumptions, derivation or finite trace, conditioning/error boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before treating a linear approximation or gradient in M29 as continuous-change evidence, what domain, coordinates, differentiability assumption, conditioning or scale condition, and finite-precision boundary must become explicit?",
+    "boundary": "M29 is the only canonical forward handoff. References to M30–M36 or M25/M26 are later applications or synthesis connections, not a learner-navigation bypass or release claim."
+  }
+}

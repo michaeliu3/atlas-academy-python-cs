@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m14",
+  "purpose": "Bind M14's current workbook, source ledger, Mermaid reader surface, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark the module review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m14-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "M14 distinguishes M13 as its canonical academic prerequisite and M15 as its canonical forward handoff without treating conceptual connections as route authority.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "1-position-in-the-knowledge-graph"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "23-backward-and-forward-connections"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m14.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."
+      ]
+    },
+    {
+      "id": "m14-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M14 exposes six ordered sessions whose output anchors carry one connected evidence thread into M15.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "session-1--reconstruct-pressure-and-observable-behavior"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "session-2--compare-decompositions-by-change-axis"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "session-3--enforce-state-and-failure-boundaries"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "session-4--stage-a-compatible-refactor-in-the-git-graph"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "session-5--review-an-agent-patch-and-localize-a-regression"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "session-6--atlas-change-defense-and-handoff"
+        }
+      ],
+      "limitations": [
+        "Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."
+      ]
+    },
+    {
+      "id": "m14-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M14 begins from the stated system pressure and derives its decisions from observable boundaries rather than a memorized tool or pattern.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "4-begin-with-pressure-not-pattern"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "5-preserve-observations-before-moving-code"
+        }
+      ],
+      "limitations": [
+        "A named first-principles route does not prove conceptual adequacy, a correct derivation, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m14-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M14 structurally exposes responsibility definition, specification-relative refactoring equation, behavioral-subtyping counterexample, and bounded change/cost evidence.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "41-responsibility-means-ownership-of-a-decision"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "51-refactoring-is-specification-relative"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "72-inheritance-promises-substitutability"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "142-time-space-and-system-cost"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "143-deliberate-boundaries"
+        }
+      ],
+      "limitations": [
+        "These structural anchors do not substitute for qualified review of definitions, assumptions, proof ideas, counterexamples, numerical reasoning, or source claims."
+      ]
+    },
+    {
+      "id": "m14-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M14 contains distinct architecture reading, regression localization, and bounded design/delegation review.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "15-architecture-reading-studio"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "level-5--debug-and-defend-retry-duplicates-a-prefix"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "16-design-delegate-review-verify"
+        }
+      ],
+      "limitations": [
+        "These prompts do not prove that a learner can independently read, debug, or design the corresponding system."
+      ]
+    },
+    {
+      "id": "m14-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M14 asks for a confidence-aware prediction before the relevant mechanism or changed-premise contrast is revealed.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "prediction-before-reveal--one-change-one-preserved-observation"
+        }
+      ],
+      "limitations": [
+        "A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."
+      ]
+    },
+    {
+      "id": "m14-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M14 asks the learner to transfer its model to a document-approval workflow rather than a familiar Atlas patch.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "level-8--transfer-design-a-document-approval-workflow"
+        }
+      ],
+      "limitations": [
+        "A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."
+      ]
+    },
+    {
+      "id": "m14-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M14 exposes a learner-facing source route plus a scoped source/reuse ledger with claim linkage and stopping lines.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "24-primary-and-university-source-ledger"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/arc_iii_source_map.md",
+          "locator": "module-14--software-design-and-change"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+          "locator": "source-and-reuse-ledger"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+          "locator": "claim-linkage-and-stopping-lines"
+        }
+      ],
+      "limitations": [
+        "Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."
+      ]
+    },
+    {
+      "id": "m14-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M14 binds its knowledge-map diagrams to concise Mermaid alternatives, the shared reader, and a module-specific accessibility regression surface.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "22-consolidated-knowledge-map"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module14_software_design_change_source_audit_addendum.md",
+          "locator": "visual-and-text-alternative-review-boundary"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "The local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."
+      ]
+    },
+    {
+      "id": "m14-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M14 exposes confidence-aware diagnostics and a misconception map for design claims.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "19-confidence-aware-diagnostic-quiz"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "201-misconception-map"
+        }
+      ],
+      "limitations": [
+        "The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."
+      ]
+    },
+    {
+      "id": "m14-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M14 includes learner-controlled spaced retrieval tied to its central evidence artifacts.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "224-spaced-retrieval-schedule"
+        }
+      ],
+      "limitations": [
+        "A retrieval schedule does not prove that review occurred or that a learner retained the material."
+      ]
+    },
+    {
+      "id": "m14-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M14 specifies a change evidence packet and explicit rubric instead of a pass/fail exam.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "21-atlas-milestone-and-evidence-packet"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "212-required-evidence-packet"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "213-rubric"
+        }
+      ],
+      "limitations": [
+        "A project brief and rubric do not prove learner work quality, portfolio review, or mastery."
+      ]
+    },
+    {
+      "id": "m14-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M14 contains an encouraging conversational oral-defense route with invitation, visible artifact, adaptive hint, changed premise, transfer, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "conversational-oral-defense--m14"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "invitation--pressure-before-pattern"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "hint-ladder--observation-to-reversible-change"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "changed-premise-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "transfer-turn--m15-durable-boundary"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "reflection--learner-controlled-evidence-summary"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m14.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."
+      ]
+    },
+    {
+      "id": "m14-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M14 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated system claim.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m14.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."
+      ]
+    },
+    {
+      "id": "m14-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M14 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m14.v1.json",
+          "locator": "/studyPartner"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas or code, or saved a learner-authorized note."
+      ]
+    },
+    {
+      "id": "m14-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M14 companion carries a bounded evidence artifact into the canonical M15 handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m14.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A declared handoff does not establish learner readiness, completion of M14, or authorization to bypass M15 prerequisites."
+      ]
+    },
+    {
+      "id": "m14-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M14 binds its Mermaid architecture maps to the shared accessible reader and direct Mermaid regression; it declares no dedicated studio or executable reference model.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/14_software_design_and_change.md",
+          "locator": "22-consolidated-knowledge-map"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m14-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/evidence/preflight/m14.v1.json",
+          "locator": "/truthBoundary/release"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "provenance",
+          "path": "docs/module-evidence/m14/candidate-preflight.md",
+          "locator": "candidate-boundary"
+        }
+      ],
+      "limitations": [
+        "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m33",
+  "purpose": "Bind M33's checked-in authoring-only workbook candidate, instructor-facing source research, hidden session/output topology, module companion, and bounded formal-languages reference model into a non-promoting structural candidate package. This record neither changes M33's authoring-only/hidden graph state nor supplies a learner route, canonical learner-source-map binding, studio, review, CI, deployment, or release record.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs can show only that the declared authoring-only candidate files and locators exist in a checked Git candidate, including a hidden session/output topology and a bounded reference fixture. They do not establish that the instructor-facing source plan is canonical, that the hidden workbook is learner-ready, that a fixture proves a theorem, that an interaction is a learner-facing studio, or that the material is pedagogically, mathematically, visually, or operationally adequate.",
+    "humanReview": "This candidate record is not human approval, a source or license review, an oral-defense result, a learner grade, a mastery determination, or authorization to change M33's lifecycle.",
+    "release": "This candidate record is not CI, source-commit, security, private-deployment, release, publication, or GitHub provenance evidence. M33 remains authoring-only, hidden from the reader, and unreleased."
+  },
+  "evidence": [
+    {
+      "id": "m33-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The hidden M33 workbook directs prerequisite retrieval through M05, M11, M23, and M27, while its authoring bridge, hidden delivery map, and module-scoped companion preserve M34 as the existing canonical forward handoff; direct academic consumers remain contextual authoring connections rather than learner navigation.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prerequisite-retrieval" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/m31-m36-prerequisite-session-bridge.v1.json", "locator": "/modules/2" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/authoring-delivery/m33.v1.json", "locator": "/forwardHandoff" },
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m33.v1.json", "locator": "/forwardHandoff" }
+      ],
+      "limitations": ["These authoring connections do not prove that a learner met prerequisites, that M33 has a reader route, or that any advanced-module reference is approved navigation."]
+    },
+    {
+      "id": "m33-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "The hidden M33 candidate declares six ordered sessions from language/model separation through finite evidence, semantic limits, reductions, complexity boundaries, and a formal-limits defense; its authoring delivery map resolves typed visible local outputs in every session and binds prerequisite bridge artifacts to their first-consuming session.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "session-1--languages-are-objects-syntax-is-not-authority" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "session-2--finite-state-needs-finite-evidence" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "session-3--grammar-questions-and-semantic-limits-are-different-questions" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "session-4--a-reduction-is-a-directed-proof-not-a-resemblance" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "session-5--complexity-classes-classify-formal-families-not-one-run" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "session-6--defend-one-narrow-formal-claim" },
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/authoring-delivery/m33.v1.json", "locator": "/sessions" }
+      ],
+      "limitations": ["Six draft headings and their order do not establish a learner-visible progression, appropriate pace, delivery quality, or completion evidence."]
+    },
+    {
+      "id": "m33-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M33 begins by separating language, syntax, semantics, machine model, and authority before it asks a learner to name a formal conclusion or a limit.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "the-working-invariant" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "formal-model-ladder--choose-the-smallest-proven-scope" }
+      ],
+      "limitations": ["Visible first-principles framing does not prove that a learner can formulate or constrain a formal claim independently."]
+    },
+    {
+      "id": "m33-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "The candidate separates finite-state construction, distinguishability, a halting-style diagonal boundary, syntax-versus-semantics counterexample, a directed reduction, a reversed-direction counterexample, and a bounded numerical complexity observation.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "nfa-to-dfa-subset-construction--track-possible-states" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "a-distinguishability-proof-idea" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "a-halting-style-diagonal-boundary" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "a-computability-mapping-reduction--halting-becomes-acceptance" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "numerical-observation-boundary" }
+      ],
+      "limitations": ["These draft anchors do not substitute for mathematical, source, numerical, or pedagogical review of definitions, hypotheses, proof steps, counterexamples, or experiments."]
+    },
+    {
+      "id": "m33-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M33 includes recognizer code reading, an NFA-to-DFA trace, a formal-claim debugging probe, a reduction-proof skeleton inspection, and verifier-versus-search code reading.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "read-the-recognizer-not-its-name" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "debugging-probe" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "read-a-proof-skeleton" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "code-reading-task-verifier-versus-search" }
+      ],
+      "limitations": ["Draft prompts do not show that a learner can read unfamiliar code, locate a formal error, design a bounded model, or assess an AI-generated theory claim."]
+    },
+    {
+      "id": "m33-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "Each candidate session asks the learner to commit to a prediction about a model, construction, semantic claim, reduction direction, or complexity conclusion before the local correction or boundary is explained.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prediction-before-reveal" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prediction-before-reveal-1" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prediction-before-reveal-2" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prediction-before-reveal-3" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prediction-before-reveal-4" }
+      ],
+      "limitations": ["A written prediction prompt does not establish that a learner committed before revealing the explanation or revised a misconception."]
+    },
+    {
+      "id": "m33-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "The M33 dossier and forward handoff ask the learner to carry a narrow formal claim, its proof or countermodel, a cost-model boundary, and a practical non-claim into M34 rather than treating a theorem label as a decision.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "output-formal-limits-claim-packet" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "forward-handoff" }
+      ],
+      "limitations": ["A proposed handoff does not establish transfer, downstream readiness, or permission to navigate past academic prerequisites."]
+    },
+    {
+      "id": "m33-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M33's instructor-facing candidate source research exposes an official-source ledger, reuse boundary, definitions/proof/counterexample sheet, and six-session routing while the hidden workbook provides compact claim/source labels and learner-facing reading links.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md", "locator": "primaryofficial-source-ledger-and-reuse-boundary" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md", "locator": "likely-six-session-source-routing" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "claimsource-labels" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "source-and-reuse-boundary" }
+      ],
+      "limitations": ["These are instructor-facing candidate sources and draft learner links, not a canonical graph source-map binding or a completed learner-facing source/license review."]
+    },
+    {
+      "id": "m33-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "The hidden workbook presents a connected formal-model diagram with a concise prose alternative, while the focused authoring test checks the diagram metadata and alternative.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "how-this-module-stays-connected" },
+        { "kind": "file", "role": "test", "path": "tests/m33-formal-languages-reference-model.test.mjs", "locator": null }
+      ],
+      "limitations": ["A static authoring test and text alternative do not establish browser rendering, semantic diagram structure, keyboard behavior, screen-reader quality, or learner comprehension."]
+    },
+    {
+      "id": "m33-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "The candidate contains confidence-before-reveal multiple-choice diagnostics with explanations that repair syntax/semantics, finite evidence, reduction direction, and complexity-scope misconceptions.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "prediction-before-reveal" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md", "locator": "claim-assumption-and-counterexample-ledger" }
+      ],
+      "limitations": ["Candidate questions and explanations do not establish diagnostic validity, accessible interaction, stored confidence evidence, or learner calibration."]
+    },
+    {
+      "id": "m33-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "The hidden candidate specifies learner-controlled retrieval and changed-premise review for a formal claim, its assumptions, and its practical non-claim.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "confidence-aware-diagnostic-and-spaced-review" }
+      ],
+      "limitations": ["A proposed schedule is not an operational review queue, learner record, retention measure, or notification system."]
+    },
+    {
+      "id": "m33-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M33's candidate claim packet names bounded required evidence and a constructive acceptance rubric that distinguishes a definition, formal proof or countermodel, assumption, practical boundary, and transfer question.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "output-formal-limits-claim-packet" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "acceptance-rubric" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "forward-handoff" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md", "locator": "suggested-dossier-evidence-boundary" }
+      ],
+      "limitations": ["A candidate brief and rubric do not establish a reviewed project, an assessed portfolio, learner mastery, or authority for a real-world recommendation."]
+    },
+    {
+      "id": "m33-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "The candidate describes a constructive Teaching Assistant conversation with prediction, a hint ladder, counterexample and transfer questions, learner choice to pause or write, and a learner-controlled evidence summary; the Study Partner rehearses without grading.",
+      "inputs": [
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "supportive-oral-defense-and-live-learning-handoff" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "teaching-assistant-prompt--m33" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "hint-ladder" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "study-partner-prompt--m33" },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "learner-controlled-evidence-summary" },
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m33.v1.json", "locator": "/teachingAssistant" }
+      ],
+      "limitations": ["Draft prompts do not establish a live or text conversation, accessible voice/whiteboard behavior, a learner-controlled saved summary, or oral-defense quality."]
+    },
+    {
+      "id": "m33-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The module-scoped companion preserves the M33 Teaching Assistant's supportive formal-claim defense and its assumption-and-countermodel repair move.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m33.v1.json", "locator": "/teachingAssistant" }
+      ],
+      "limitations": ["A stored prompt does not prove chat creation, model capability, voice availability, equation/code rendering, or useful teaching behavior."]
+    },
+    {
+      "id": "m33-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The module-scoped companion preserves the M33 Study Partner's non-grading rehearsal, changed-premise discussion, readable-whiteboard, and Teaching Assistant handoff moves.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m33.v1.json", "locator": "/studyPartner" }
+      ],
+      "limitations": ["A stored prompt does not prove chat creation, model capability, voice availability, equation/code rendering, or useful study-partner behavior."]
+    },
+    {
+      "id": "m33-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The module-scoped companion preserves M34 as the canonical forward handoff and names the formal-limit claim packet to carry forward without treating later references as navigation or credit.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m33.v1.json", "locator": "/forwardHandoff" }
+      ],
+      "limitations": ["A forward-handoff prompt does not prove that a learner produced the packet, may navigate to M34, or satisfies M34 prerequisites."]
+    },
+    {
+      "id": "m33-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M33 binds a deterministic, bounded formal-languages reference model and its focused Node test so selected language, automaton, reduction, and cost-model traces are inspectable without claiming a learner-facing studio or a theorem oracle.",
+      "inputs": [
+        { "kind": "file", "role": "reference-model", "path": "lib/m33-formal-languages-reference-model.js", "locator": null },
+        { "kind": "file", "role": "test", "path": "tests/m33-formal-languages-reference-model.test.mjs", "locator": null },
+        { "kind": "markdown-heading", "role": "course-content", "path": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md", "locator": "bounded-reference-fixture--trace-before-claim" },
+        { "kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module33_formal_languages_computability_complexity_source_research.md", "locator": "bounded-implementation-use-a-debugger-not-a-theorem-oracle" }
+      ],
+      "limitations": ["A bounded fixture and focused Node test do not establish an interactive learner studio, browser behavior, a general theorem proof, CI completion, deployment, or mastery."]
+    },
+    {
+      "id": "m33-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only package and its documentation state their own non-release boundary: they do not bind or establish human review, exact-source-commit CI, a canonical learner source-map or learner-delivery binding, deployment, or publication evidence for hidden M33 material.",
+      "inputs": [
+        { "kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m33.v1.json", "locator": "/truthBoundary/release" },
+        { "kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m33/candidate-preflight.md", "locator": "authoring-candidate-boundary" }
+      ],
+      "limitations": ["This record does not bind a human review, canonical learner-delivery/source-map decision, CI run, source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

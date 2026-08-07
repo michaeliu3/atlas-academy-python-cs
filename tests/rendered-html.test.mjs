@@ -1,8 +1,18 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
+import { JSDOM } from "jsdom";
 import { diagnosticQuestions } from "../lib/diagnostic-model.js";
 import { extractTableOfContents } from "../lib/heading-ids.js";
+import {
+  buildTextDefenseEvidenceDraft,
+  canAdvanceTextDefenseStep,
+  canCopyTextDefenseEvidence,
+  canRevealTextDefenseHint,
+  createTextDefensePlan,
+  getTextDefenseHint,
+  textDefenseStepIds,
+} from "../lib/oral-defense-text-flow.js";
 
 async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -43,6 +53,25 @@ function extractFunctionSource(source, name) {
   );
 }
 
+function relativeLuminance(hex) {
+  const channel = (offset) => {
+    const value = Number.parseInt(hex.slice(offset, offset + 2), 16) / 255;
+    return value <= 0.04045
+      ? value / 12.92
+      : ((value + 0.055) / 1.055) ** 2.4;
+  };
+
+  return 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
+}
+
+function contrastRatio(foreground, background) {
+  const [lighter, darker] = [
+    relativeLuminance(foreground),
+    relativeLuminance(background),
+  ].sort((first, second) => second - first);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 function assertPredictionGated(componentSource, componentName) {
   const predictionGate = componentSource.indexOf("<PredictionGate");
   const revealBranch = componentSource.indexOf("!answer.revealed");
@@ -71,11 +100,755 @@ test("renders the Atlas Academy course portal", async () => {
   assert.match(html, /Less typing\. More ownership\./);
   assert.match(html, /Data structures/);
   assert.match(html, /Durable software/);
-  assert.match(html, /Course library/);
+  assert.match(html, /Lecture notes/);
   assert.match(html, /Begin the diagnostic/);
   assert.match(html, /href="\/diagnostic"/);
-  assert.match(html, /Thirteen multiple-choice investigations/);
+  assert.match(html, /href="\/route"/);
+  assert.match(html, /Interactive explorer/);
+  assert.match(html, /not this explorer—carry the learning sequence/);
+  assert.match(html, /Twenty multiple-choice investigations/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+});
+
+test("makes the full workbooks discoverable as lecture notes", async () => {
+  const response = await render("/modules");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(html, /<title>Lecture Notes · Atlas Academy<\/title>/i);
+  assert.match(readable, /Atlas lecture notes/i);
+  assert.match(readable, /These are the full authored workbooks—not summaries\./u);
+  assert.match(readable, /M31–M36 have ready private guided-study packs/i);
+  assert.match(html, /href="\/learning-partners"/u);
+});
+
+test("renders separate live-learning Teaching Assistant and Study Partner packages", async () => {
+  const response = await render("/learning-partners");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  const renderedText = new JSDOM(html).window.document.body.textContent ?? "";
+  assert.match(html, /Two separate chats\. Two different jobs\./);
+  assert.match(html, /Teaching Assistant/);
+  assert.match(html, /Study Partner/);
+  assert.match(html, /Copy Teaching Assistant startup prompt/);
+  assert.match(html, /Copy Study Partner startup prompt/);
+  assert.match(html, /Never give a bare pass\/fail verdict/);
+  assert.match(html, /visible chat an accessible whiteboard/);
+  assert.match(html, /Portable copied-chat record mode: keep local/);
+  assert.match(html, /automatic-after-substantive-session/);
+  assert.match(html, /at most one concise structured note for that session/);
+  assert.match(html, /say “records on”/);
+  assert.match(html, /Notion write unverified — local session note/);
+  assert.match(html, /names a module or learning topic/);
+  assert.match(html, /pause records/);
+  assert.match(readable, /configured private learning\s+record/i);
+  assert.match(readable, /after you say “records on” in that exact designated chat/i);
+  assert.match(readable, /designated Codex chats—not the portal/i);
+  assert.match(readable, /authorized to\s+automatically create one concise Notion session note/i);
+  assert.match(readable, /current\s+substantive learning conversation/i);
+  assert.match(renderedText, /say “end session” to close\s+automatic\s+session-summary authorization/i);
+  assert.match(renderedText, /correction\s+or deletion\s+request remains separately learner-authorized/i);
+  assert.match(readable, /successful write is recorded\s+only from direct evidence/i);
+  assert.match(html, /Reusable Session 1 launcher/);
+  assert.match(html, /Start Module \[NN\], Session 1/);
+  assert.match(html, /M1 · Values, State, and Execution/);
+  assert.match(html, /Start M01, Session 1 — The mystery of the changing record/);
+  assert.match(html, /href="\/modules\/01-values-state-execution"/);
+  assert.match(html, /The Teaching Assistant conducts the actual post-module oral defense/);
+  assert.match(html, /private advanced-study launch guide/);
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/michaeliu3\/atlas-academy-python-cs\/blob\/agent\/60-day-route\/docs\/PRIVATE_GUIDED_LEARNING_ROUTE\.md"/,
+  );
+  assert.match(html, /Those packs are ready for designated private guided learning/);
+  assert.match(
+    html,
+    /portal reader remains hidden, and they do not create Core\s+credit, a publication claim, or a record/,
+  );
+});
+
+test("renders synthesis previews as reference workbooks rather than completable Core modules", async () => {
+  for (const [slug, moduleNumber] of [
+    ["25-evidence-grounded-intelligent-systems", 25],
+    ["26-systems-capstone-open-source-stewardship", 26],
+  ]) {
+    const response = await render(`/modules/${slug}`);
+    assert.equal(response.status, 200, `${slug} renders`);
+    const document = new JSDOM(await response.text()).window.document;
+    const workbook = document.querySelector("#module-reading-article");
+    assert.equal(
+      workbook?.getAttribute("aria-label"),
+      `Module ${moduleNumber} reference preview workbook; not an unlocked Core step`,
+    );
+    assert.match(
+      document.body.textContent ?? "",
+      /Preview reading boundary/u,
+      `${slug} keeps its orientation boundary visible`,
+    );
+  }
+});
+
+test("gives every rendered workbook checklist item a descriptive read-only name", async () => {
+  const moduleSlugs = [
+    "15-files-serialization-packaging-delivery",
+    "16-relational-data-transactions",
+    "17-computer-architecture-execution-stack",
+    "18-operating-systems-resource-mediation",
+  ];
+
+  for (const slug of moduleSlugs) {
+    const response = await render(`/modules/${slug}`);
+    assert.equal(response.status, 200, `${slug} renders`);
+    const document = new JSDOM(await response.text()).window.document;
+    const checkboxes = [
+      ...document.querySelectorAll(".task-list-item > input[type='checkbox']"),
+    ];
+
+    assert.ok(checkboxes.length > 0, `${slug} includes a workbook checklist`);
+    for (const checkbox of checkboxes) {
+      assert.match(
+        checkbox.getAttribute("aria-label") ?? "",
+        /^Read-only workbook checklist item: \S/u,
+        `${slug} checklist control has a specific accessible name`,
+      );
+      assert.equal(checkbox.hasAttribute("readonly"), true);
+    }
+  }
+});
+
+test("keeps landing selection and legacy studio tabs keyboard-accessible", async () => {
+  const [portal, arcTwo, arcThree, capstone] = await Promise.all([
+    readFile(new URL("../app/CoursePortal.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ArcTwoStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ArcThreeStudio.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/CapstoneDefenseStudio.tsx", import.meta.url),
+      "utf8",
+    ),
+  ]);
+
+  assert.match(portal, /<a className="skip-link" href="#main-content">/);
+  assert.match(portal, /<main id="main-content" tabIndex=\{-1\}>/);
+  assert.match(portal, /aria-pressed=\{view === "path"\}/);
+  assert.match(portal, /aria-pressed=\{view === "arc4"\}/);
+  assert.match(portal, /role="status"/);
+  assert.match(portal, /aria-live="polite"/);
+
+  for (const [name, studio] of [
+    ["Arc II", arcTwo],
+    ["Arc III", arcThree],
+    ["capstone", capstone],
+  ]) {
+    assert.match(studio, /role="tablist"/, `${name} has a tablist`);
+    assert.match(studio, /role="tab"/, `${name} has tabs`);
+    assert.match(studio, /role="tabpanel"/, `${name} has a tabpanel`);
+    assert.match(studio, /aria-controls=/, `${name} connects tabs to panels`);
+    assert.match(studio, /aria-labelledby=/, `${name} labels each panel from its tab`);
+    assert.match(studio, /hidden=\{!selected\}/, `${name} retains inactive panels for tab relationships`);
+    assert.match(studio, /tabIndex=/, `${name} uses roving tab focus`);
+    assert.match(studio, /"ArrowRight"/, `${name} supports ArrowRight`);
+    assert.match(studio, /"ArrowLeft"/, `${name} supports ArrowLeft`);
+    assert.match(studio, /"Home"/, `${name} supports Home`);
+    assert.match(studio, /"End"/, `${name} supports End`);
+    assert.match(studio, /event\.preventDefault\(\)/, `${name} prevents native scrolling`);
+    assert.match(
+      studio,
+      /tabRefs\.current\[nextIndex\]\?\.focus\(\)/,
+      `${name} moves focus with the active tab`,
+    );
+  }
+});
+
+test("keeps the interactive explorer separate from Core route access and evidence", async () => {
+  const [portal, header, modulePage, navigation, route] = await Promise.all([
+    readFile(new URL("../app/CoursePortal.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/modules/CourseReaderHeader.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/page.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleNavigation.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(portal, /Interactive explorer · not the Core route/);
+  assert.match(portal, /separate Codex\s+learning chats—not this explorer—carry the learning sequence/u);
+  assert.match(portal, /href="\/learning-partners"/u);
+  assert.match(portal, />\s*Learning partners/u);
+  assert.doesNotMatch(portal, /Show learning path/u);
+  assert.match(header, />Interactive explorer</u);
+
+  assert.match(modulePage, /Reference access does not advance the Core\./u);
+  assert.match(modulePage, /does not mark academic prerequisites complete or advance the Core/u);
+  assert.match(navigation, /These links show planned sequence; they do not infer or record\s+prerequisite completion/u);
+  assert.match(navigation, /Locked\. Return to the route to review its prerequisites and release boundary\./u);
+  assert.match(navigation, /Reference preview—not an unlocked Core step\./u);
+
+  assert.match(route, /Atlas does not infer progress\s+from a click,\s+a scroll, or a studio interaction\./u);
+  assert.match(route, /Teaching Assistant for a supportive oral defense/u);
+  assert.match(route, /Reference preview—available for orientation, not Core progress/u);
+  assert.match(route, /entry\.state\.readerAccess !== "hidden"/u);
+});
+
+test("each open module reader keeps the supportive oral-defense route", async () => {
+  const [page, oralDefense, oralDefenseStyles, textDefense, oralGuide, companionPackage, companionGuides] = await Promise.all([
+    readFile(new URL("../app/modules/[slug]/page.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleOralDefense.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleOralDefense.module.css", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/modules/[slug]/ModuleTextOralDefense.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../lib/oral-defense-guide.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/module-companion-package-builder.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(page, /<ModuleOralDefense/);
+  assert.match(page, /companion=\{getModuleCompanionPackage\(courseModule\.number\)\}/);
+  assert.match(oralDefense, /Oral defense: a conversation, not a verdict\./);
+  assert.match(oralDefense, /voice-enabled Teaching Assistant chat/);
+  assert.match(oralDefense, /ModuleTextOralDefense/);
+  assert.match(oralDefense, /Copy Teaching Assistant context/);
+  assert.match(oralDefense, /Copy Study Partner context/);
+  assert.match(oralDefense, /Study Partner · rehearsal context/);
+  assert.match(oralDefense, /separate live-capable Study Partner chat/);
+  assert.match(oralDefense, /First time with this role\?/u);
+  assert.match(oralDefense, /href="\/learning-partners"/u);
+  assert.match(oralDefense, /Paste the role brief once before this module context\./u);
+  assert.match(
+    oralDefenseStyles,
+    /\.setupLink:focus-visible\s*\{[\s\S]*outline:\s*3px solid #f3dfc5/u,
+  );
+  assert.match(oralDefense, /Canonical forward handoff/);
+  assert.match(oralDefense, /companion: ModuleCompanionPackage/);
+  assert.doesNotMatch(oralDefense, /getModuleCompanionPackage/);
+  assert.doesNotMatch(oralDefense, /module-companion-guides|module-companion-package-builder/);
+  assert.match(companionPackage, /formative oral defense conversation, not a grade/);
+  assert.match(companionPackage, /Do not score, grade, or make a binary outcome judgment/);
+  assert.match(companionPackage, /prose or ASCII fallback/);
+  assert.match(companionPackage, /language-labelled fenced code/);
+  assert.match(companionPackage, /recordBoundary\.designatedChatMode/);
+  assert.match(companionPackage, /Canonical forward handoff/);
+  assert.match(textDefense, /Equivalent text conversation/);
+  assert.match(textDefense, /Work through one question at a time\./);
+  assert.match(textDefense, /Prediction before reveal/);
+  assert.match(textDefense, /Optional hint ladder/);
+  assert.match(textDefense, /aria-disabled=\{!canRevealHint\}/);
+  assert.match(textDefense, /role="status"/);
+  assert.match(textDefense, /checked=\{summaryApproved\}/);
+  assert.match(textDefense, /disabled=\{!summaryApproved\}/);
+  assert.match(textDefense, /Copy approved evidence summary/);
+  assert.match(textDefense, /does not\s+automatically store or export/);
+  assert.match(textDefense, /restartFocusRequested\.current = true/);
+  assert.match(
+    textDefense,
+    /activeStepIndex > 0 \|\| restartFocusRequested\.current/,
+  );
+  assert.doesNotMatch(textDefense, /localStorage|\bfetch\s*\(/);
+  assert.match(oralGuide, /moduleCompanionGuides/);
+  assert.match(companionGuides, /bindings, object identity, mutation, and frame-local state/);
+  assert.match(companionGuides, /a release argument joining architecture, invariant/);
+  assert.match(oralGuide, /formal definition and assumptions/);
+  assert.match(oralGuide, /system boundary, failure mode, evidence, tradeoff/);
+  assert.match(companionGuides, /linear maps, projections, rank, spectra, and conditioning/);
+  assert.match(companionGuides, /shape\/dtype\/solver path/);
+
+  const response = await render("/modules/04-logic-sets-relations-graphs-proof");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  const renderedText = new JSDOM(html).window.document.body.textContent ?? "";
+  assert.match(readable, /Post-module learning conversation/);
+  assert.match(readable, /Oral defense: a conversation, not a verdict\./);
+  assert.match(readable, /15–20 thoughtful minutes/);
+  assert.match(readable, /Equivalent text conversation/);
+  assert.match(readable, /Work through one question at a time\./);
+  assert.match(readable, /Question 1 of 5/);
+  assert.match(readable, /Your plain-language explanation/);
+  assert.match(renderedText, /Teaching Assistant · oral-defense context/);
+  assert.match(renderedText, /Study Partner · rehearsal context/);
+  assert.match(renderedText, /First time with this role\?/u);
+  assert.match(renderedText, /Paste the role brief once before this module context\./u);
+  assert.match(html, /href="\/learning-partners"/u);
+  assert.match(renderedText, /Canonical forward handoff/);
+  assert.match(renderedText, /Module 5: Cost Models and Algorithm Analysis/);
+  assert.match(renderedText, /automatic-after-substantive-session/);
+  assert.match(readable, /A small, learner-controlled record/);
+  assert.match(renderedText, /formative oral defense conversation, not a grade/i);
+});
+
+test("the M19-M24 candidate oral protocols keep their reader-visible repair anchors", async () => {
+  const expectedAnchorsByWorkbook = new Map([
+    [
+      "19_concurrency_parallelism.md",
+      [
+        "supportive-oral-defense-route",
+        "123-hint-ladder",
+        "level-8--transfer-to-m20-m21-and-m24",
+        "study-partner-rehearsal-and-ta-handoff",
+        "122-ta-response-loop",
+      ],
+    ],
+    [
+      "20_networks_application_protocols.md",
+      [
+        "supportive-oral-defense-protocol--adaptive-non-grading-and-learner-controlled",
+        "session-6-oral-defense",
+        "123-hint-ladder",
+        "level-8--transfer-without-overclaiming",
+        "122-ta-response-loop",
+      ],
+    ],
+    [
+      "21_async_distributed_systems.md",
+      [
+        "supportive-oral-defense-protocol",
+        "invitation-and-starting-evidence",
+        "hint-ladder",
+        "counterexample-repair",
+        "transfer-question",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+    [
+      "22_security_privacy_trust_boundaries.md",
+      [
+        "conversational-oral-defense--m22",
+        "hint-ladder",
+        "counterexample-turn",
+        "transfer-turn",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+    [
+      "23_programming_languages_interpreters.md",
+      [
+        "conversational-oral-defense--m23",
+        "hint-ladder",
+        "counterexample-turn",
+        "transfer-turn",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+    [
+      "24_cpython_performance_memory.md",
+      [
+        "conversational-oral-defense--m24",
+        "hint-ladder",
+        "counterexample-turn",
+        "transfer-turn",
+        "reflection-and-learner-controlled-evidence-summary",
+      ],
+    ],
+  ]);
+
+  for (const [filename, expectedAnchors] of expectedAnchorsByWorkbook) {
+    const markdown = await readFile(
+      new URL(`../content/modules/${filename}`, import.meta.url),
+      "utf8",
+    );
+    const anchors = new Set(extractTableOfContents(markdown).map(({ id }) => id));
+    for (const expectedAnchor of expectedAnchors) {
+      assert.ok(
+        anchors.has(expectedAnchor),
+        `${filename} keeps the reader-visible ${expectedAnchor} oral-repair anchor`,
+      );
+    }
+  }
+});
+
+test("the built browser bundle excludes authoring-only companion content", async () => {
+  const assetsDirectory = new URL("../dist/client/assets/", import.meta.url);
+  const assetNames = await readdir(assetsDirectory);
+  const browserSource = (
+    await Promise.all(
+      assetNames
+        .filter((assetName) => /\.(?:js|mjs)$/u.test(assetName))
+        .map((assetName) => readFile(new URL(`../dist/client/assets/${assetName}`, import.meta.url), "utf8")),
+    )
+  ).join("\n");
+
+  assert.doesNotMatch(
+    browserSource,
+    /an objective, constraints, geometry, convergence path, and information quantity with assumptions/u,
+    "M31's authoring-only guide must stay in the server-only reader path",
+  );
+  assert.doesNotMatch(
+    browserSource,
+    /reconstruct a generalization, regret, margin, or lower-bound proof idea/u,
+    "M36's authoring-only guide must stay in the server-only reader path",
+  );
+  assert.doesNotMatch(
+    browserSource,
+    /content\/authoring\/m3[1-6]_.*_workbook\.v1\.md/u,
+    "private workbook paths must not be shipped to the browser",
+  );
+  assert.doesNotMatch(
+    browserSource,
+    /workbookPath/u,
+    "the browser course graph must expose ready status, not private-pack metadata",
+  );
+});
+
+test("keeps every authored scrollable code region labelled and keyboard-focusable", async () => {
+  const labelledRegions = [
+    ["../app/CoursePortal.tsx", "Scrollable Python state-trace example"],
+    ["../app/ModuleTwoReader.tsx", "Scrollable recursive Python example"],
+    ["../app/CapstoneDefenseStudio.tsx", "Scrollable small proposed patch"],
+    ["../app/NetworkProtocolStudio.tsx", "Scrollable generated patch to audit"],
+    ["../app/NetworkProtocolStudio.tsx", "Scrollable scoped model evidence JSON"],
+    [
+      "../app/learning-partners/LearningPartnerPromptCards.tsx",
+      "Scrollable ${prompt.title} startup prompt",
+    ],
+    [
+      "../app/learning-partners/page.tsx",
+      "Reusable open-module Session 1 starter",
+    ],
+    [
+      "../app/learning-partners/page.tsx",
+      "Module 1 Session 1 starter",
+    ],
+    [
+      "../app/modules/[slug]/ModuleTextOralDefense.tsx",
+      "Scrollable concise oral-defense evidence draft",
+    ],
+    [
+      "../app/modules/[slug]/ModuleMarkdown.tsx",
+      "Scrollable lesson code example",
+    ],
+    [
+      "../app/modules/[slug]/MermaidDiagram.tsx",
+      "Scrollable technical Mermaid diagram source",
+    ],
+    [
+      "../app/modules/[slug]/ModuleOralDefense.tsx",
+      "Scrollable full Teaching Assistant context",
+    ],
+    [
+      "../app/modules/[slug]/ModuleOralDefense.tsx",
+      "Scrollable full Study Partner context",
+    ],
+    [
+      "../app/diagnostic/DiagnosticExperience.tsx",
+      'Scrollable ${question.codeLanguage ?? "code"} diagnostic example',
+    ],
+  ];
+
+  for (const [relativePath, label] of labelledRegions) {
+    const source = await readFile(
+      new URL(relativePath, import.meta.url),
+      "utf8",
+    );
+    assert.ok(
+      source.includes(label),
+      `${relativePath} keeps an explicit accessible name for its scrollable code`,
+    );
+    assert.match(
+      source,
+      /tabIndex=\{0\}/u,
+      `${relativePath} keeps its scrollable code keyboard-focusable`,
+    );
+  }
+});
+
+test("keeps the local text oral-defense route adaptive, prediction-gated, and learner-controlled", () => {
+  const guide = {
+    centralModel: "a representation invariant",
+    traceOrDerivation: "predict a short trace before seeing evidence",
+    misconception: "a plausible shortcut",
+    boundary: "what a finite observation does not establish",
+    transfer: "a new design decision that needs the same model",
+  };
+  const plan = createTextDefensePlan(guide);
+
+  assert.deepEqual(
+    plan.map((step) => step.id),
+    textDefenseStepIds,
+    "the text route keeps the Live brief's five learning moves in order",
+  );
+  assert.equal(plan[1].predictionBeforeReveal, true);
+  assert.equal(plan[1].requiresConfidence, true);
+  assert.match(plan[1].prompt, /what would change your mind/i);
+  assert.equal(
+    canAdvanceTextDefenseStep(plan[1], "I predict the invariant holds.", null),
+    false,
+    "a prediction alone cannot unlock the trace step",
+  );
+  assert.equal(
+    canRevealTextDefenseHint(plan[1], "", 2),
+    false,
+    "hints stay hidden until the learner has made a prediction and calibrated confidence",
+  );
+  assert.equal(
+    canRevealTextDefenseHint(plan[1], "I predict a shared alias changes.", 2),
+    true,
+  );
+  assert.match(
+    getTextDefenseHint(plan[1], 0, 1),
+    /smaller starting point/i,
+    "low confidence receives a smaller first hint",
+  );
+  assert.match(
+    getTextDefenseHint(plan[1], 0, 4),
+    /stress-test/i,
+    "higher confidence receives a boundary-checking first hint",
+  );
+  assert.match(plan[2].prompt, /finite observation/i);
+  assert.match(plan[3].prompt, /new design decision/i);
+  assert.match(plan[4].prompt, /fragile/i);
+  assert.match(plan[4].prompt, /retrieval/i);
+
+  const draft = buildTextDefenseEvidenceDraft({
+    moduleNumber: 4,
+    moduleTitle: "Logic",
+    guide,
+    answers: {
+      explain: "The invariant states what remains true.",
+      predict: "The trace should preserve the stated relation.",
+      boundary: "One example cannot prove the universal claim.",
+      transfer: "I would define the invariant before choosing an API.",
+      reflect: "I need to revisit quantifiers.",
+    },
+    confidence: 2,
+  });
+  assert.match(draft, /Module 4: Logic/);
+  assert.match(draft, /Fragile idea: I need to revisit quantifiers\./);
+  assert.match(draft, /Retrieval prompt:/);
+  assert.equal(canCopyTextDefenseEvidence(false), false);
+  assert.equal(canCopyTextDefenseEvidence(true), true);
+});
+
+test("renders the truthful prerequisite-first 60-day Atlas route", async () => {
+  const response = await render("/route");
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(readable, /60 days\./);
+  assert.match(readable, /full-time 35–45 focused-hours-per-week intensive/u);
+  assert.match(readable, /Day 1 is the placement diagnostic and learning contract\./);
+  assert.match(
+    readable,
+    /28 legacy-open \/ 0 published \/ 2 preview \/ 0 locked \/ 0 optional \/ 6 authoring-only/,
+  );
+  assert.match(readable, /legacy-open.*preview.*authoring-only/i);
+  assert.match(readable, /Days 2–9/);
+  assert.match(readable, /Days 56–60/);
+  assert.match(readable, /Module 27/);
+  assert.match(readable, /Module 28/);
+  assert.match(readable, /Module 29/);
+  assert.match(readable, /Module 30/);
+  assert.match(readable, /Open material · review pending/);
+  assert.match(readable, /Reference preview/);
+  assert.match(readable, /workbook delivered in the designated Teaching Assistant and Study Partner Codex chats/i);
+  assert.match(readable, /Read as reference—not an unlocked Core step/);
+  assert.match(
+    readable,
+    /Atlas does not infer progress from a click, a scroll, or a studio interaction\./,
+  );
+  assert.match(
+    readable,
+    /Primary guided learning happens in Codex\./,
+  );
+  assert.match(
+    readable,
+    /The portal is a reference companion;\s*the designated Codex Teaching Assistant and Study Partner chats are the course\./,
+  );
+  assert.match(readable, /Study this next: placement diagnostic/);
+  assert.match(readable, /Read the route and evidence boundaries/);
+  assert.match(readable, /M30 Probability, Statistics &amp; Scientific Inference/);
+  assert.match(readable, /Module 25/);
+  assert.match(readable, /Module 26/);
+  assert.match(
+    html,
+    /href="\/modules\/27-discrete-mathematics-proof-counting-structures"/,
+  );
+  assert.match(
+    html,
+    /href="\/modules\/28-linear-algebra-numerical-stability-representation"/,
+  );
+  assert.match(
+    html,
+    /href="\/modules\/29-calculus-real-analysis-continuous-change"/,
+  );
+  assert.match(
+    html,
+    /href="\/modules\/30-probability-statistics-scientific-inference"/,
+  );
+  assert.match(readable, /Scope Matrix: intended depth and current delivery/);
+  assert.match(
+    readable,
+    /A topic can be a Core target and still be authoring-only today\./,
+  );
+  assert.match(readable, /Level 1 · Mathematical foundations/);
+  assert.match(readable, /Level 9 · Deep specialization/);
+  assert.match(
+    readable,
+    /97 source targets.*are\s+calibrated to this level/is,
+  );
+  assert.match(readable, /Post-core extension routes \(design only\)/);
+  assert.match(readable, /Authoring-only — no learner reader route/);
+  assert.match(readable, /portal reader remains hidden and this is not portal completion or mastery evidence/i);
+  assert.match(readable, /Private-chat delivery/);
+  assert.match(
+    readable,
+    /workbook delivered in the designated Teaching Assistant and Study Partner Codex chats/i,
+  );
+
+  const scopeDocument = new JSDOM(html).window.document;
+  assert.ok(
+    scopeDocument.querySelector(
+      'a[href="/route/inventory#scope-inventory-level-1"]',
+    ),
+    "the full proof surface is available without placing all atomic rows in the normal route",
+  );
+  const scopeTopic = (label) =>
+    [...scopeDocument.querySelectorAll('[id^="scope-topic-"]')].find(
+      (topic) => topic.querySelector("h3")?.textContent === label,
+    );
+  const scopeTopics = [...scopeDocument.querySelectorAll('[id^="scope-topic-"]')];
+  assert.ok(scopeTopics.length > 0, "the concise route renders scope topics");
+  for (const topic of scopeTopics) {
+    const labels = new Set(
+      [...topic.querySelectorAll("dl > div > dt")].map((fact) => fact.textContent),
+    );
+    assert.ok(labels.has("Target depth"), "every scope topic states target depth");
+    assert.ok(labels.has("Current delivery"), "every scope topic states portal delivery");
+    assert.ok(labels.has("Private-chat delivery"), "every scope topic states private-chat delivery");
+  }
+  const currentDelivery = (topic) =>
+    [...(topic?.querySelectorAll("dl > div") ?? [])].find(
+      (fact) => fact.querySelector("dt")?.textContent === "Current delivery",
+    )?.querySelector("dd")?.textContent?.replace(/\s+/g, " ").trim() ?? "";
+
+  const interchangeDelivery = currentDelivery(
+    scopeTopic(
+      "Rigorous conditions for interchanging limits, derivatives, expectations, and integrals; measure theory and full real-analysis depth.",
+    ),
+  );
+  assert.match(
+    interchangeDelivery,
+    /Open material · review pending.*2 mapped anchors/i,
+    "a post-core topic still reports the current delivery of each open anchor",
+  );
+  assert.equal(
+    (interchangeDelivery.match(/Open material · review pending/gi) ?? []).length,
+    1,
+    "a single delivery state is not repeated inside one compact fact",
+  );
+  assert.match(
+    currentDelivery(
+      scopeTopic(
+        "Model misspecification, robust statistics, causal reasoning, nonparametrics, and high-dimensional estimation.",
+      ),
+    ),
+    /Mixed anchor delivery.*Open material · review pending.*Authoring-only — no learner reader route/is,
+    "mixed open and authoring-only anchors stay visible instead of being flattened into the scope label",
+  );
+  assert.match(readable, /Mathematical, Algorithms &amp; Theory Deepening/);
+  assert.match(readable, /MIT 6\.854 Advanced Algorithms/);
+  assert.match(readable, /Stanford CS224N NLP with Deep Learning/);
+  for (const trackId of [
+    "math-algorithms-theory",
+    "deep-learning-ml-systems",
+    "probabilistic-models-rl",
+    "foundation-models-nlp",
+  ]) {
+    const track = scopeDocument.querySelector(`#track-${trackId}`);
+    const cadence = [...(track?.querySelectorAll("dl > div") ?? [])].find(
+      (fact) => fact.querySelector("dt")?.textContent === "Recommended cadence",
+    )?.querySelector("dd")?.textContent?.replace(/\s+/g, " ").trim() ?? "";
+    assert.match(cadence, /90-day route/i, `${trackId} exposes a 90-day route`);
+    assert.match(cadence, /180-day route/i, `${trackId} exposes a 180-day route`);
+  }
+  assert.doesNotMatch(html, /href="\/modules\/31-/);
+});
+
+test("renders the on-demand Levels 1–9 atomic source crosswalk", async () => {
+  const response = await render("/route/inventory");
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  const readable = html.replaceAll("<!-- -->", "");
+  assert.match(readable, /Levels 1–9 target crosswalk/);
+  assert.match(readable, /all 362 learner-supplied learning targets/);
+  assert.match(readable, /Source target/);
+  assert.match(readable, /Atlas target/);
+  assert.match(readable, /Current delivery/);
+  assert.match(readable, /private guided-study pack ready; the designated pack remains hidden in the portal/i);
+  assert.match(readable, /Propositional and predicate logic/);
+  assert.match(readable, /Graduate master/);
+  assert.match(readable, /Also know/);
+
+  const document = new JSDOM(html).window.document;
+  const levelOne = document.querySelector("#scope-inventory-level-1");
+  const levelTwo = document.querySelector("#scope-inventory-level-2");
+  assert.ok(levelOne?.hasAttribute("open"), "the first evidence layer opens for orientation");
+  assert.equal(levelTwo?.hasAttribute("open"), false, "later levels remain collapsed by default");
+  assert.ok(
+    document.querySelector('a[href="/route#scope-topic-l1.proofs.logic-relations"]'),
+    "each source row points back to the concise route target and its delivery label",
+  );
+  const martingaleRow = [...document.querySelectorAll("li")].find(
+    (row) => row.textContent?.includes("Martingales at an introductory level"),
+  );
+  assert.match(
+    martingaleRow?.textContent ?? "",
+    /Mixed anchor delivery.*1 open legacy anchor.*1 authoring-only anchor/is,
+    "a mixed source target names each mapped delivery state instead of hiding it behind one label",
+  );
+  const proofSection = [...document.querySelectorAll("details")].find(
+    (section) => section.firstElementChild?.textContent?.includes("Proofs and discrete mathematics"),
+  );
+  assert.equal(
+    proofSection?.hasAttribute("open"),
+    false,
+    "a dense source section remains collapsed until the learner chooses to inspect it",
+  );
+});
+
+test("keeps availability status and route linkability aligned with the generated manifest", async () => {
+  const [routeSource, routePage, catalogSource, manifestSource] = await Promise.all([
+    readFile(new URL("../lib/atlas-core-route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/route/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/course-graph.v2.json", import.meta.url), "utf8"),
+    readFile(new URL("../content/modules/manifest.json", import.meta.url), "utf8"),
+  ]);
+  const graph = JSON.parse(catalogSource);
+  const manifest = JSON.parse(manifestSource);
+  const graphByNumber = new Map(graph.modules.map((courseModule) => [courseModule.number, courseModule]));
+  const manifestByNumber = new Map(
+    manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
+  );
+
+  assert.match(routeSource, /atlasCoreRoutePlan/);
+  assert.match(routePage, /entry\.state\.readerAccess === "preview"/);
+  assert.equal(graphByNumber.get(25).state.availability, "preview");
+  assert.equal(graphByNumber.get(26).state.availability, "preview");
+  assert.equal(graphByNumber.get(31).state.lifecycle, "authoring-only");
+  assert.equal(manifestByNumber.get(25).state.availability, "preview");
+  assert.equal(manifestByNumber.get(26).state.availability, "preview");
+  assert.equal(manifestByNumber.get(24).nextRouteNumber, 32);
+  assert.equal(manifestByNumber.get(24).nextSlug, null);
 });
 
 test("renders the accessible, confidence-aware Module 0 placement studio", async () => {
@@ -85,11 +858,11 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
 
   const html = await response.text();
   assert.match(html, /Module 0 Diagnostic · Atlas Academy/);
-  assert.match(html, /Module 0 · 13 reasoning probes/);
+  assert.match(html, /Module 0 · 20 reasoning probes/);
   assert.match(html, /Which pair is correct at the end\?/);
   assert.match(html, /Choose the model that best predicts the result/);
   assert.match(html, /No penalty for uncertainty/);
-  assert.match(html, /Restoring saved progress/);
+  assert.match(html, /Preparing optional local-only progress/);
   assert.match(html, /Answers remain in this browser/);
   assert.match(html, /type="radio"/);
   assert.match(html, /<fieldset/);
@@ -99,6 +872,94 @@ test("renders the accessible, confidence-aware Module 0 placement studio", async
   assert.match(html, /Reset all answers/);
   assert.doesNotMatch(html, /role="radiogroup"/);
   assert.doesNotMatch(html, /window\.confirm/);
+});
+
+test("keeps diagnostic route notes readable against their purpose-specific surfaces", async () => {
+  const globals = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const saffronBackground = globals.match(/--saffron-soft:\s*(#[0-9a-f]{6})/i)?.[1];
+  const plumBackground = globals.match(/--plum-soft:\s*(#[0-9a-f]{6})/i)?.[1];
+  const foreground = globals.match(
+    /\.diagnostic-extension-boundary,\s*\.diagnostic-prerequisite-note\s*\{[^}]*color:\s*(#[0-9a-f]{6})/i,
+  )?.[1];
+
+  assert.ok(saffronBackground, "the prerequisite note surface must declare a solid color");
+  assert.ok(plumBackground, "the extension note surface must declare a solid color");
+  assert.ok(foreground, "diagnostic route notes must declare a readable direct ink color");
+  assert.match(
+    globals,
+    /\.diagnostic-bridge-plan li > div > p:last-child:not\(\.diagnostic-extension-boundary\):not\(\.diagnostic-prerequisite-note\)\s*\{[^}]*color:\s*var\(--muted\)/,
+  );
+  assert.ok(
+    contrastRatio(foreground, saffronBackground) >= 4.5,
+    "diagnostic prerequisite notes need at least 4.5:1 normal-text contrast",
+  );
+  assert.ok(
+    contrastRatio(foreground, plumBackground) >= 4.5,
+    "diagnostic extension notes need at least 4.5:1 normal-text contrast",
+  );
+  assert.match(
+    globals,
+    /\.diagnostic-learning-partners-handoff\s*\{[^}]*color:\s*var\(--ink\)/,
+  );
+});
+
+test("diagnostic and M19 export actions require current learner approval before copying or printing", async () => {
+  const [diagnostic, studio] = await Promise.all([
+    readFile(new URL("../app/diagnostic/DiagnosticExperience.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ConcurrencyStudio.tsx", import.meta.url), "utf8"),
+  ]);
+  const evidence = extractFunctionSource(studio, "EvidenceAuditor");
+
+  assert.match(diagnostic, /canExportApprovedDraft/);
+  assert.match(diagnostic, /approvedLearningBrief/);
+  assert.match(
+    diagnostic,
+    /I reviewed this learning brief and approve copying or printing it myself\./,
+  );
+  assert.match(diagnostic, /disabled=\{!learningBriefApproved\}/);
+  assert.match(diagnostic, /Print approved brief/);
+  assert.match(diagnostic, /href="\/learning-partners"/);
+  assert.match(
+    diagnostic,
+    /After you approve and copy this brief, paste it into the designated Study Partner or Teaching Assistant chat\./,
+  );
+  assert.match(diagnostic, /Atlas does not transfer this brief or activate records\./);
+  assert.match(diagnostic, /only if you want its configured concise-note policy\./);
+  assert.doesNotMatch(diagnostic, /onClick=\{\(\) => window\.print\(\)\}/);
+  assert.match(diagnostic, /function setLearningBriefApproval\(approved: boolean\)/);
+  assert.match(diagnostic, /setLearningBriefApproval\(false\)/);
+  assert.match(diagnostic, /copyAttemptVersionRef\.current \+= 1/);
+  assert.match(diagnostic, /copyFailureVisible/);
+
+  assert.match(evidence, /canExportApprovedDraft\(approvedBrief, brief\)/);
+  assert.match(
+    evidence,
+    /I reviewed this concise, categorical brief and choose to copy it manually\./,
+  );
+  assert.match(evidence, /checked=\{briefApproved\}/);
+  assert.match(evidence, /disabled=\{!briefApproved\}/);
+  assert.match(evidence, /Copy approved instructor brief/);
+  assert.match(evidence, /setApprovedBrief\(event\.target\.checked \? brief : null\)/);
+});
+
+test("the diagnostic delegates bounded browser progress to its v3 codec", async () => {
+  const diagnostic = await readFile(
+    new URL("../app/diagnostic/DiagnosticExperience.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(diagnostic, /diagnostic-progress-codec/);
+  assert.match(diagnostic, /restoreDiagnosticProgress/);
+  assert.match(diagnostic, /persistDiagnosticProgress/);
+  assert.match(diagnostic, /clearDiagnosticProgress/);
+  assert.match(diagnostic, /getBrowserProgressStorage/);
+  assert.match(diagnostic, /Progress saved only in this browser/);
+  assert.doesNotMatch(diagnostic, /Saved on this device/);
+  assert.doesNotMatch(diagnostic, /JSON\.parse|JSON\.stringify/);
+  assert.doesNotMatch(
+    diagnostic,
+    /window\.localStorage\.(?:getItem|setItem|removeItem)/,
+  );
 });
 
 test("Module 18 OS studio preserves its canonical interactive contract", async () => {
@@ -186,10 +1047,17 @@ test("Module 18 OS studio preserves its canonical interactive contract", async (
   assert.doesNotMatch(studio, /sudden\s+power\s+loss\s+immediately\s+afterward/i);
   assert.match(studio, /No durability score is assigned/);
 
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /window\.localStorage\.removeItem/);
+  assert.match(studio, /module18-progress-codec/);
+  assert.match(studio, /restoreModule18Progress/);
+  assert.match(studio, /persistModule18Progress/);
+  assert.match(studio, /clearModule18Progress/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /parseBoundedHexadecimal/);
+  assert.doesNotMatch(studio, /JSON\.parse|JSON\.stringify/);
+  assert.doesNotMatch(
+    studio,
+    /window\.localStorage\.(?:getItem|setItem|removeItem)/,
+  );
   assert.match(studio, /useEffect\(\(\) => \{/);
   assert.match(studio, /Reset saved studio/);
   assert.match(studio, /const resetStudio = \(\) =>/);
@@ -198,16 +1066,41 @@ test("Module 18 OS studio preserves its canonical interactive contract", async (
 test("Module 19 preserves its invariant and six-view shell", async () => {
   const studioUrl = new URL("../app/ConcurrencyStudio.tsx", import.meta.url);
   const arcUrl = new URL("../app/ArcFourStudio.tsx", import.meta.url);
-  const [studio, arc] = await Promise.all([
+  const registryUrl = new URL("../lib/module-studio-registry.ts", import.meta.url);
+  const readerUrl = new URL("../app/ConcurrencyStudioReader.tsx", import.meta.url);
+  const [studio, arc, registry, reader] = await Promise.all([
     readFile(studioUrl, "utf8"),
     readFile(arcUrl, "utf8"),
+    readFile(registryUrl, "utf8"),
+    readFile(readerUrl, "utf8"),
   ]);
 
   const exactInvariant =
     "Every admitted Atlas partition reaches exactly one terminal classification—`COMMITTED`, `FAILED`, or `CANCELLED`. If Atlas publishes a new index, that index is the deterministic fold of all and only `COMMITTED` partial results, and publication is permitted only when every required partition is `COMMITTED`. Every worker-visible effect remains accounted for as a process-local operation, an OS-mediated resource transition, and one step in a declared concurrent history; each shared transition is justified by one named owner or synchronization protocol, every progress claim states its blocking and fairness assumptions, and neither a clean exit, a passing stress run, the GIL, nor observed speedup substitutes for safety, liveness, or model-fit evidence.";
   assert.ok(studio.includes(exactInvariant));
-  assert.match(arc, /<ConcurrencyStudio \/>/);
+  assert.match(arc, /<ConcurrencyStudioReader \/>/);
   assert.match(arc, /href: "\/modules\/19-concurrency-parallelism"/);
+  assert.match(registry, /concurrency:[\s\S]*?studioId: "concurrency"/);
+  assert.match(registry, /import\("@\/app\/ConcurrencyStudioReader"\)/);
+  assert.match(reader, /import\("@\/app\/ConcurrencyStudio"\)/);
+  assert.match(reader, /Open the concurrency observatory/);
+  assert.match(reader, /aria-expanded=\{isOpen\}/);
+  assert.match(reader, /concurrency-observatory-panel/);
+  assert.match(reader, /hidden=\{!isOpen\}/);
+  assert.match(reader, /hasLaunched \? <ConcurrencyObservatory \/> : null/);
+  const scrollableTables = [
+    ...studio.matchAll(/<div[\s\S]{0,240}className=\{styles\.tableScroll\}[\s\S]{0,240}>/gu),
+  ];
+  assert.equal(scrollableTables.length, 7);
+  assert.ok(
+    scrollableTables.every((match) =>
+      /aria-label=["'][^"']+["'][\s\S]*role=["']region["'][\s\S]*tabIndex=\{0\}/u.test(match[0]),
+    ),
+  );
+  assert.match(
+    studio,
+    /aria-label="Scrollable preterminal state progression"[\s\S]{0,160}tabIndex=\{0\}/,
+  );
 
   for (const viewLabel of [
     "History explorer",
@@ -272,8 +1165,7 @@ test("Module 20 preserves its invariant and six-view protocol observatory", asyn
   assert.ok(studio.includes(exactInvariant));
   assert.match(arc, /<NetworkProtocolStudio \/>/);
   assert.match(arc, /href: "\/modules\/20-networks-application-protocols"/);
-  assert.match(page, /slug === "20-networks-application-protocols"/);
-  assert.match(page, /<NetworkProtocolStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Name → candidate",
@@ -309,9 +1201,11 @@ test("Module 20 preserves its invariant and six-view protocol observatory", asyn
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /record\.revealed &&/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule20Progress/);
+  assert.match(studio, /persistModule20Progress/);
+  assert.match(studio, /clearModule20Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.match(studio, /declared length/);
   assert.match(studio, /UNKNOWN/);
@@ -336,8 +1230,7 @@ test("Module 21 preserves its async invariant and six-view run control room", as
   assert.ok(studio.includes(exactInvariant));
   assert.match(arc, /<AsyncDistributedStudio \/>/);
   assert.match(arc, /href: "\/modules\/21-async-distributed-systems"/);
-  assert.match(page, /slug === "21-async-distributed-systems"/);
-  assert.match(page, /<AsyncDistributedStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Coroutine → task",
@@ -374,9 +1267,11 @@ test("Module 21 preserves its async invariant and six-view run control room", as
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule21Progress/);
+  assert.match(studio, /persistModule21Progress/);
+  assert.match(studio, /clearModule21Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.match(studio, /TaskGroup/);
   assert.match(studio, /UNKNOWN_REMOTE/);
@@ -407,10 +1302,9 @@ test("Module 22 preserves its trust invariant, six-view control room, and latest
   assert.match(
     arc,
     /const \[activeModule, setActiveModule\] = useState\(5\)/,
-    "Arc IV should open its latest published module, Module 22",
+    "Arc IV should open its latest open module, Module 22",
   );
-  assert.match(page, /slug === "22-security-privacy-trust-boundaries"/);
-  assert.match(page, /<SecurityTrustStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Claim → boundary",
@@ -450,10 +1344,11 @@ test("Module 22 preserves its trust invariant, six-view control room, and latest
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /choiceIdsByView/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule22Progress/);
+  assert.match(studio, /persistModule22Progress/);
+  assert.match(studio, /clearModule22Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.match(studio, /trace label supports correlation/);
   assert.match(studio, /worker-99/);
@@ -475,9 +1370,7 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   const invariant =
     "Structure is data; authority is separate and explicit. A successful parse establishes only the declared grammar shape. Atlas checks a bounded contract, resource budget, and authorization decision before a fixed-scope capability can support one local model operation. The evaluator has no ambient Python authority.";
   assert.ok(studio.includes(invariant));
-  assert.match(page, /LanguageInterpreterStudio/);
-  assert.match(page, /slug === "23-programming-languages-interpreters"/);
-  assert.match(page, /<LanguageInterpreterStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Text → tree",
@@ -501,11 +1394,11 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="language-interpreter-studio-title"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isStudioRecord/);
-  assert.match(studio, /choiceIdsByView/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule23Progress/);
+  assert.match(studio, /persistModule23Progress/);
+  assert.match(studio, /clearModule23Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
@@ -514,11 +1407,6 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(
-    studio,
-    /\(!candidate\.revealed \|\| \(candidate\.choice !== null && candidate\.confidence !== null\)\)/,
-    "stored progress cannot reveal evidence without a recorded choice and confidence",
-  );
   assert.match(
     studio,
     /styles\.modeTabs} aria-label="Evaluation rule examples" role="group"/,
@@ -544,7 +1432,7 @@ test("Module 23 preserves its language-boundary invariant, six-view studio, and 
   assert.match(style, /focus-visible/);
 });
 
-test("Module 24 preserves its runtime-evidence invariant, six-view observatory, and safe local progress shape", async () => {
+test("Module 24 preserves its runtime-evidence invariant and six-view observatory", async () => {
   const studioUrl = new URL("../app/RuntimeEvidenceObservatory.tsx", import.meta.url);
   const styleUrl = new URL("../app/RuntimeEvidenceObservatory.module.css", import.meta.url);
   const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
@@ -559,9 +1447,7 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
       "An optimization is accepted only after semantic behavior, privacy/retention boundaries, implementation scope, and a controlled measurement are kept distinct.",
     ),
   );
-  assert.match(page, /RuntimeEvidenceObservatory/);
-  assert.match(page, /slug === "24-cpython-performance-memory"/);
-  assert.match(page, /<RuntimeEvidenceObservatory \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Contract → claim",
@@ -582,12 +1468,6 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="runtime-evidence-observatory-title"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isObservatoryRecord/);
-  assert.match(studio, /choiceIdsByView/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
     6,
@@ -595,11 +1475,6 @@ test("Module 24 preserves its runtime-evidence invariant, six-view observatory, 
   );
   assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
-  assert.match(
-    studio,
-    /!record\.revealed \|\| \(record\.choice !== null && record\.confidence !== null\)/,
-    "stored progress cannot reveal evidence without a recorded choice and confidence",
-  );
   assert.match(studio, /not a profiler,/);
   assert.match(studio, /not a CPython emulator,/);
   assert.match(studio, /not a license\s+to collect\s+private learner traces/);
@@ -626,9 +1501,7 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
       "A score never silently changes learner state, grants authority, proves truth, establishes causality, or turns feedback into ground truth.",
     ),
   );
-  assert.match(page, /EvidenceGroundedStudio/);
-  assert.match(page, /slug === "25-evidence-grounded-intelligent-systems"/);
-  assert.match(page, /<EvidenceGroundedStudio \/>/);
+  assert.match(page, /<ModuleInteraction[\s\S]*courseModule=\{courseModule\}/);
 
   for (const viewLabel of [
     "Purpose → boundary",
@@ -653,18 +1526,17 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(studio, /event\.key === "Home"/);
   assert.match(studio, /event\.key === "End"/);
   assert.match(studio, /aria-labelledby="evidence-grounded-studio-title"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isStudioRecord/);
-  assert.match(studio, /choiceIdsByView/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule25Progress/);
+  assert.match(studio, /persistModule25Progress/);
+  assert.match(studio, /clearModule25Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
   assert.match(studio, /storageReady/);
   assert.equal(
     [...studio.matchAll(/<PredictionGate\b/gu)].length,
     6,
     "each decision-support view has one confidence-aware prediction gate",
   );
-  assert.match(studio, /record\.choice !== null && record\.confidence !== null/);
   assert.match(studio, /!record\.revealed && <EvidenceLock \/>/);
   assert.match(studio, /<b>0<\/b> live learner records/);
   assert.match(studio, /Never alter a plan, calendar, or record/);
@@ -679,72 +1551,49 @@ test("Module 25 preserves its decision-support invariant, six-view studio, and s
   assert.match(style, /focus-visible/);
 });
 
-test("Module 26 preserves its evidence-first capstone flow and local-only boundary", async () => {
-  const studioUrl = new URL("../app/CapstoneDefenseStudio.tsx", import.meta.url);
-  const styleUrl = new URL("../app/CapstoneDefenseStudio.module.css", import.meta.url);
-  const pageUrl = new URL("../app/modules/[slug]/page.tsx", import.meta.url);
-  const [studio, style, page] = await Promise.all([
-    readFile(studioUrl, "utf8"),
-    readFile(styleUrl, "utf8"),
-    readFile(pageUrl, "utf8"),
-  ]);
+test("Module 26 renders an evidence-first capstone preview without opening its studio", async () => {
+  const response = await render(
+    "/modules/26-systems-capstone-open-source-stewardship",
+  );
+  assert.equal(response.status, 200);
 
-  const exactInvariant =
-    "A capstone release is a versioned evidence bundle, not a polished demo. Each consequential claim needs a named owner, representation or contract, appropriate test or observation, cost and failure boundary, security/privacy implication, human-impact evaluation, and explicit limitation. Agent-generated work remains an untrusted proposal until independently reviewed and verified.";
-  assert.ok(studio.includes(exactInvariant));
-  assert.match(page, /CapstoneDefenseStudio/);
-  assert.match(page, /slug === "26-systems-capstone-open-source-stewardship"/);
-  assert.match(page, /<CapstoneDefenseStudio \/>/);
-
-  const orderedViewIds = ["brief", "threads", "failure", "patch", "ledger", "board"];
-  for (const viewLabel of [
-    "Release Brief",
-    "System Threads",
-    "Failure Playback",
-    "Red-Team Patch Bay",
-    "Evidence Ledger",
-    "Release Board & Defense",
-  ]) {
-    assert.ok(studio.includes('label: "' + viewLabel + '"'), viewLabel);
-  }
-  for (const [index, viewId] of orderedViewIds.entries()) {
-    const nextViewId = orderedViewIds[index + 1];
-    if (nextViewId) {
-      assert.ok(
-        studio.indexOf('id: "' + viewId + '"') < studio.indexOf('id: "' + nextViewId + '"'),
-        "capstone view order keeps failure and repair before evidence synthesis",
-      );
-    }
-  }
-
-  assert.match(studio, /role="tablist"/);
-  assert.match(studio, /role="tab"/);
-  assert.match(studio, /role="tabpanel"/);
-  assert.match(studio, /aria-controls=\{`capstone-panel-\$\{view\.id\}`\}/);
-  assert.match(studio, /id=\{`capstone-panel-\$\{view\.id\}`\}/);
-  assert.match(studio, /hidden=\{!selected\}/);
-  assert.match(studio, /role="group"/);
-  assert.match(studio, /aria-pressed=\{selected\}/);
-  assert.doesNotMatch(studio, /role="radiogroup"/);
-  assert.match(studio, /"ArrowRight"/);
-  assert.match(studio, /"ArrowLeft"/);
-  assert.match(studio, /"Home"/);
-  assert.match(studio, /"End"/);
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /isStudioRecord/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /0<\/b> live learner records/);
-  assert.match(studio, /0<\/b> external calls/);
-  assert.match(studio, /never applies, merges, publishes, or deploys a patch/);
-  assert.doesNotMatch(studio, /window\.confirm/);
-  assert.doesNotMatch(studio, /<svg\b/i);
-  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
-  assert.match(style, /prefers-reduced-motion/);
-  assert.match(style, /focus-visible/);
+  const document = new JSDOM(await response.text()).window.document;
+  const article = document.querySelector("#module-reading-article");
+  assert.ok(article);
+  assert.match(
+    article.textContent ?? "",
+    /Atlas may be released only as a versioned, bounded capability/,
+  );
+  assert.match(article.textContent ?? "", /Release Brief/);
+  assert.match(
+    article.textContent ?? "",
+    /The defense tests the architecture, not presentation skill/,
+  );
+  assert.equal(
+    document.querySelector("#capstone-defense-studio-title"),
+    null,
+    "the preview must not mount a gated studio",
+  );
+  assert.equal(
+    document.querySelector("[aria-label='Post-module learning conversation']"),
+    null,
+    "the preview must not expose a gated oral-defense flow",
+  );
+  assert.doesNotMatch(
+    document.body.textContent ?? "",
+    /Teaching Assistant · oral-defense context|Study Partner · rehearsal context/u,
+    "the preview must not expose a module companion package",
+  );
+  const previewText = document.body.textContent ?? "";
+  assert.match(previewText, /Preview conversation—not an oral defense\./u);
+  assert.match(previewText, /REHEARSAL ONLY/u);
+  assert.match(previewText, /Teaching Assistant · clarification context/u);
+  assert.match(previewText, /Study Partner · orientation context/u);
+  assert.match(previewText, /Copy the concise evidence packet/u);
+  assert.match(previewText, /Next map: maintenance or specialization question/u);
 });
 
-test("release architecture keeps Notion capture manual and out of the portal runtime", async () => {
+test("release architecture keeps Notion capture out of the portal runtime", async () => {
   const architectureUrl = new URL("../docs/ARCHITECTURE.md", import.meta.url);
   const privacyUrl = new URL("../docs/PRIVACY.md", import.meta.url);
   const [architecture, privacy] = await Promise.all([
@@ -752,8 +1601,8 @@ test("release architecture keeps Notion capture manual and out of the portal run
     readFile(privacyUrl, "utf8"),
   ]);
 
-  assert.match(architecture, /manual, learner-controlled capture only/);
   assert.match(architecture, /no Notion runtime integration or automatic/);
+  assert.match(architecture, /designated external Codex learning/);
   assert.match(privacy, /Notion page exports, IDs, private notes, or learner journal content/);
 });
 
@@ -1003,141 +1852,65 @@ test("Module 19 evidence auditor uses the real fixture digest and per-axis patch
   assert.match(evidence, /record\.patchDecisions\[axis\.id\]/);
   assert.match(evidence, /\["accept", "reject", "split"\] as const/);
   assert.match(evidence, /aria-label="[^"]*patch[^"]*decision/i);
-  assert.match(evidence, /Copy instructor brief/i);
+  assert.match(evidence, /Copy approved instructor brief/i);
   assert.match(evidence, /What this proves/);
   assert.match(evidence, /What remains unknown/);
 });
 
-test("Module 19 persists the bounded learning record and resets view-specific simulators", async () => {
-  const studioUrl = new URL("../app/ConcurrencyStudio.tsx", import.meta.url);
-  const studio = await readFile(studioUrl, "utf8");
-  const root = extractFunctionSource(studio, "ConcurrencyStudio");
-
-  assert.match(studio, /STUDIO_STORAGE_KEY/);
-  assert.match(studio, /window\.localStorage\.getItem/);
-  assert.match(studio, /window\.localStorage\.setItem/);
-  assert.match(studio, /window\.localStorage\.removeItem/);
-  assert.match(studio, /function clearStoredStudio/);
-  assert.match(studio, /predictionSets\[view\.id\]\.options\.some/);
-  assert.match(studio, /savedPrediction !== null/);
-  assert.match(root, /useState<StudioRecord>\(initialRecord\)/);
-  assert.match(root, /setRecord\(sanitizeStudioRecord\(stored\.record\)\)/);
-  assert.match(root, /record,/);
-  assert.match(root, /misconceptions:\s*misconceptionLabels\(answers\)/);
-  assert.match(root, /activeView,/);
-  assert.match(root, /answers:\s*safeAnswers/);
-
-  const persistedAnswers = root.slice(
-    root.indexOf("const safeAnswers"),
-    root.indexOf("window.localStorage.setItem"),
-  );
-  assert.doesNotMatch(
-    persistedAnswers,
-    /revision/,
-    "free-form revision text must stay out of localStorage",
-  );
-
-  assert.match(studio, /Reset saved studio/);
-  assert.match(studio, /Reset this view/);
-  assert.match(root, /const resetView = \(\) =>/);
-  for (const viewState of [
-    "historySchedule",
-    "completedHistories",
-    "historyCheckpoint",
-    "historyCensusCheckpoint",
-    "linearizationPatch",
-    "protectedSteps",
-    "linearizationCheckpoint",
-    "coordinationInstrument",
-    "coordinationActions",
-    "coordinationPendingAction",
-    "coordinationCheckpoint",
-    "progressScenario",
-    "progressEdges",
-    "modelChoice",
-    "evidenceVariant",
-    "patchDecisions",
-  ]) {
-    assert.match(
-      root.slice(root.indexOf("const resetView"), root.indexOf("const resetStudio")),
-      new RegExp(`\\b${viewState}\\b`),
-      `view reset covers ${viewState}`,
-    );
-  }
-  assert.match(root, /setRecord\(initialRecord\(\)\)/);
-  assert.match(root, /setActiveView\("history"\)/);
-  assert.match(root, /<RuntimeProfilePlate \/>/);
-  assert.match(studio, /module19-concurrency-studio\.v2/);
-  assert.match(root, /stored\.version === 2/);
-});
-
-test("generated module manifest covers Modules 1–26 exactly once", async () => {
+test("generated module manifest projects the canonical graph without bypassing prerequisites", async () => {
   const manifestUrl = new URL("../content/modules/manifest.json", import.meta.url);
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
   const numbers = manifest.modules.map((courseModule) => courseModule.number);
-  const slugs = manifest.modules.map((courseModule) => courseModule.slug);
-
-  assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.moduleCount, 26);
-  assert.deepEqual(
-    numbers,
-    Array.from({ length: 26 }, (_, index) => index + 1),
+  const byNumber = new Map(
+    manifest.modules.map((courseModule) => [courseModule.number, courseModule]),
   );
-  assert.equal(new Set(slugs).size, 26);
-  assert.equal(manifest.arcs.length, 5);
 
-  const module16 = manifest.modules.find((courseModule) => courseModule.number === 16);
-  const module17 = manifest.modules.find((courseModule) => courseModule.number === 17);
-  const module18 = manifest.modules.find((courseModule) => courseModule.number === 18);
-  const module19 = manifest.modules.find((courseModule) => courseModule.number === 19);
-  const module20 = manifest.modules.find((courseModule) => courseModule.number === 20);
-  const module21 = manifest.modules.find((courseModule) => courseModule.number === 21);
-  const module22 = manifest.modules.find((courseModule) => courseModule.number === 22);
-  const module23 = manifest.modules.find((courseModule) => courseModule.number === 23);
-  const module24 = manifest.modules.find((courseModule) => courseModule.number === 24);
-  const module25 = manifest.modules.find((courseModule) => courseModule.number === 25);
-  const module26 = manifest.modules.find((courseModule) => courseModule.number === 26);
-  assert.equal(module17.arcId, "arc-iv");
-  assert.equal(module18.arcId, "arc-iv");
-  assert.equal(module19.arcId, "arc-iv");
-  assert.equal(module16.nextSlug, module17.slug);
-  assert.equal(module17.previousSlug, module16.slug);
-  assert.equal(module17.prerequisiteSlug, module16.slug);
-  assert.equal(module17.nextSlug, module18.slug);
-  assert.equal(module18.previousSlug, module17.slug);
-  assert.equal(module18.prerequisiteSlug, module17.slug);
-  assert.equal(module18.nextSlug, module19.slug);
-  assert.equal(module19.previousSlug, module18.slug);
-  assert.equal(module19.prerequisiteSlug, module18.slug);
-  assert.equal(module19.nextSlug, module20.slug);
-  assert.equal(module20.previousSlug, module19.slug);
-  assert.equal(module20.prerequisiteSlug, module19.slug);
-  assert.equal(module20.nextSlug, module21.slug);
-  assert.equal(module21.previousSlug, module20.slug);
-  assert.equal(module21.prerequisiteSlug, module20.slug);
-  assert.equal(module21.nextSlug, module22.slug);
-  assert.equal(module22.previousSlug, module21.slug);
-  assert.equal(module22.prerequisiteSlug, module21.slug);
-  assert.equal(module22.nextSlug, module23.slug);
-  assert.equal(module23.arcId, "arc-v");
-  assert.equal(module23.previousSlug, module22.slug);
-  assert.equal(module23.prerequisiteSlug, module22.slug);
-  assert.equal(module23.nextSlug, module24.slug);
-  assert.equal(module24.arcId, "arc-v");
-  assert.equal(module24.previousSlug, module23.slug);
-  assert.equal(module24.prerequisiteSlug, module23.slug);
-  assert.equal(module24.nextSlug, module25.slug);
-  assert.equal(module25.arcId, "arc-v");
-  assert.equal(module25.previousSlug, module24.slug);
-  assert.equal(module25.prerequisiteSlug, module24.slug);
+  assert.equal(manifest.schemaVersion, 5);
+  assert.equal(manifest.courseGraphSchemaVersion, 2);
+  assert.equal(manifest.routePlanId, "atlas-core-60");
+  assert.equal(manifest.definedModuleCount, 36);
+  assert.equal(manifest.readerVisibleModuleCount, 30);
+  assert.equal(manifest.legacyOpenModuleCount, 28);
+  assert.equal(manifest.publishedModuleCount, 0);
+  assert.equal(manifest.previewReaderModuleCount, 2);
+  assert.deepEqual(numbers, Array.from({ length: 30 }, (_, index) => index + 1));
+  assert.equal(manifest.arcs.length, 6);
+
+  const module5 = byNumber.get(5);
+  const module6 = byNumber.get(6);
+  const module17 = byNumber.get(17);
+  const module18 = byNumber.get(18);
+  const module24 = byNumber.get(24);
+  const module25 = byNumber.get(25);
+  const module26 = byNumber.get(26);
+  const module27 = byNumber.get(27);
+  const module28 = byNumber.get(28);
+  const module30 = byNumber.get(30);
+
+  assert.deepEqual(module18.prerequisiteNumbers, [17]);
+  assert.deepEqual(module18.prerequisiteSlugs, [module17.slug]);
+  assert.equal(module18.previousRouteNumber, 31);
+  assert.equal(module18.previousSlug, null);
+  assert.equal(module18.nextSlug, byNumber.get(19).slug);
+  assert.deepEqual(module6.prerequisiteNumbers, [5]);
+  assert.equal(module6.previousSlug, module27.slug);
+  assert.equal(module5.nextSlug, module27.slug);
+  assert.deepEqual(module28.prerequisiteNumbers, [17, 27]);
+  assert.deepEqual(module30.prerequisiteNumbers, [27, 29]);
+  assert.equal(module30.nextRouteNumber, 31);
+  assert.equal(module30.nextSlug, null);
+  assert.equal(module24.nextRouteNumber, 32);
+  assert.equal(module24.nextSlug, null);
+  assert.equal(module25.state.availability, "preview");
+  assert.deepEqual(module25.prerequisiteNumbers, [22, 24, 30, 31, 34, 35, 36]);
+  assert.equal(module25.previousRouteNumber, 36);
+  assert.equal(module25.previousSlug, null);
   assert.equal(module25.nextSlug, module26.slug);
-  assert.equal(module26.arcId, "arc-v");
+  assert.equal(module26.state.availability, "preview");
   assert.equal(module26.previousSlug, module25.slug);
-  assert.equal(module26.prerequisiteSlug, module25.slug);
-  assert.equal(module26.nextSlug, null);
 });
 
-test("module synchronization normalizes checkout line endings before fingerprinting content", async () => {
+test("module synchronization uses checked-in inputs and normalizes line endings before hashing", async () => {
   const syncUrl = new URL("../scripts/sync-modules.mjs", import.meta.url);
   const synchronizer = await readFile(syncUrl, "utf8");
 
@@ -1146,8 +1919,16 @@ test("module synchronization normalizes checkout line endings before fingerprint
   assert.match(synchronizer, /normalizeNewlines\(current\) === normalizedContent/);
   assert.match(
     synchronizer,
-    /const markdown = normalizeNewlines\(\s*await readFile\(join\(sourceDirectory, filename\), "utf8"\),\s*\);/,
+    /const moduleDirectory = resolve\(siteRoot, "content", "modules"\);/,
   );
+  assert.match(synchronizer, /const releaseInputsPath = resolve\(/);
+  assert.match(
+    synchronizer,
+    /const markdown = normalizeNewlines\(await readFile\(workbookPath, "utf8"\)\);/,
+  );
+  assert.doesNotMatch(synchronizer, /resolve\(siteRoot, "\.\.", "modules"\)/);
+  assert.doesNotMatch(synchronizer, /resolve\(siteRoot, "\.\.", "research"\)/);
+  assert.doesNotMatch(synchronizer, /resolve\(siteRoot, "\.\.", "work"\)/);
 });
 
 test("table-of-contents IDs account for lower-level heading collisions", () => {
@@ -1174,13 +1955,16 @@ test("table-of-contents IDs account for lower-level heading collisions", () => {
   ]);
 });
 
-test("renders the arc-grouped course library", async () => {
+test("renders the arc-grouped lecture notes", async () => {
   const response = await render("/modules");
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /One course\./);
+  assert.match(html, /Lecture notes\./);
   assert.match(html, /Every connection visible\./);
+  assert.match(html, /notes group the course by knowledge arc for reference browsing/);
+  assert.match(html, /href="\/route"/);
+  assert.match(html, /60-day route/);
   assert.match(html, /Computation &amp; reasoning/);
   assert.match(html, /Data &amp; algorithms/);
   assert.match(html, /Durable software/);
@@ -1198,7 +1982,13 @@ test("renders the arc-grouped course library", async () => {
   assert.match(html, /CPython, Performance &amp; Memory Evidence/);
   assert.match(html, /Evidence-Grounded Intelligent &amp; Human-Centered Systems/);
   assert.match(html, /Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense/);
-  assert.match(html, /<dt>26<\/dt>/);
+  assert.match(html, /Mathematical foundations/);
+  assert.match(html, /Discrete Mathematics, Proof, Counting &amp; Structures/);
+  assert.match(html, /Linear Algebra, Numerical Stability &amp; Representation/);
+  assert.match(html, /Calculus, Real Analysis &amp; Continuous Change/);
+  assert.match(html, /Probability, Statistics &amp; Scientific Inference/);
+  assert.match(html, /<dt>28<\/dt>/);
+  assert.match(html, /gated synthesis previews/);
 });
 
 test("renders a complete generated module reading route", async () => {
@@ -1209,22 +1999,40 @@ test("renders a complete generated module reading route", async () => {
   const html = await response.text();
   assert.match(html, /Module 1: Values, State, and Execution · Atlas Academy/);
   assert.match(html, /Complete Module 1 workbook/);
+  assert.match(html, /Open legacy reader/);
+  assert.match(html, /Opening, reading, or using a studio does not mark academic prerequisites complete/);
   assert.match(html, /Why this module comes first/);
   assert.match(html, /On this page/);
-  assert.match(html, /Foundation placement studio and learning brief/);
+  assert.match(html, /Foundation placement diagnostic and learning brief/);
   assert.match(html, /role="progressbar"/);
   assert.match(html, /aria-valuemin="0"/);
   assert.match(html, /aria-valuemax="100"/);
-  assert.match(html, /Diagram source and text fallback/);
+  assert.match(html, /Text alternative:/);
+  assert.match(
+    html,
+    /An expression is evaluated in an environment, objects are found or created/u,
+  );
+  assert.match(html, /m01-evaluation-binding-transition-alternative/);
+  assert.match(html, /Diagram source \(technical fallback\)/);
+  assert.doesNotMatch(html, /Diagram source and text fallback/);
   assert.match(html, /class="lesson-table-scroll"/);
   assert.doesNotMatch(html, /aria-label="Scrollable lesson table"/);
   assert.match(html, /Canonical workbook snapshot/);
   assert.match(html, /class="heading-anchor"/);
   assert.match(html, /aria-label="Link to this section"/);
+  assert.match(html, /Workbook-led interaction/);
+  assert.match(html, /This open workbook has no separate visual studio/);
+  assert.match(html, /no deletion is verified/u);
+  assert.match(html, /href="#oral-defense-1-title"/);
   assert.match(
     html,
     /aria-hidden="true" class="external-link-mark">↗<\/span>/,
   );
+});
+
+test("keeps authoring-only modules out of the learner reader", async () => {
+  const response = await render("/modules/31-optimization-information");
+  assert.equal(response.status, 404);
 });
 
 test("all generated lessons have valid internal links and math", async () => {
@@ -1253,7 +2061,7 @@ test("all generated lessons have valid internal links and math", async () => {
   }
 });
 
-test("every diagnostic learning route resolves to a published lesson section", async () => {
+test("every diagnostic learning route resolves to an open lesson section", async () => {
   const routesByPath = new Map();
   for (const question of diagnosticQuestions) {
     const route = new URL(question.route.href, "http://localhost");
@@ -1398,6 +2206,48 @@ test("renders the finalized operating-systems workbook", async () => {
   assert.match(referenceTests, /Module18ReferenceTests/);
 });
 
+test("renders the M12 and M13 bounded model packages as honest learner downloads", async () => {
+  const [module12Response, module13Response, module12Reference, module13Reference] = await Promise.all([
+    render("/modules/12-modules-apis-types-dependencies"),
+    render("/modules/13-specifications-testing-debugging-observability"),
+    readFile(new URL("../public/downloads/module12_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module13_reference.py", import.meta.url), "utf8"),
+  ]);
+  assert.equal(module12Response.status, 200);
+  assert.equal(module13Response.status, 200);
+
+  const [module12Html, module13Html] = await Promise.all([
+    module12Response.text(),
+    module13Response.text(),
+  ]);
+  assert.match(module12Html, /Bounded dependency-direction model package/);
+  assert.match(module12Html, /href="\/downloads\/module12_reference\.py"/);
+  assert.match(module12Html, /href="\/downloads\/test_module12_reference\.py"/);
+  assert.match(module12Html, /does not parse Python imports or prove runtime behavior/);
+  assert.match(module13Html, /Bounded terminal-signal model package/);
+  assert.match(module13Html, /href="\/downloads\/module13_reference\.py"/);
+  assert.match(module13Html, /href="\/downloads\/test_module13_reference\.py"/);
+  assert.match(module13Html, /does not execute an importer or prove remote completion/);
+
+  const prohibitedRuntimeImport =
+    /(?:^|\n)\s*(?:from|import)\s+(?:os|subprocess|socket|requests|urllib|http(?:\.client)?|pathlib|shutil|tempfile|asyncio|threading|multiprocessing|pickle|marshal|sqlite3|tarfile|zipfile)\b/;
+  assert.match(
+    "from socket import socket",
+    prohibitedRuntimeImport,
+    "the bounded-model import rule must recognize a prohibited runtime import",
+  );
+  assert.doesNotMatch(
+    module12Reference,
+    prohibitedRuntimeImport,
+    "M12's public model must remain a finite local reasoning aid",
+  );
+  assert.doesNotMatch(
+    module13Reference,
+    prohibitedRuntimeImport,
+    "M13's public model must remain a finite local reasoning aid",
+  );
+});
+
 test("renders the finalized concurrency-and-parallelism workbook", async () => {
   const response = await render("/modules/19-concurrency-parallelism");
   assert.equal(response.status, 200);
@@ -1474,6 +2324,10 @@ test("renders the finalized networks-and-application-protocols workbook", async 
   assert.match(html, /Atlas remote-publication protocol dossier/);
   assert.match(html, /href="\/downloads\/module20_reference\.py"/);
   assert.match(html, /href="\/downloads\/test_module20_reference\.py"/);
+  assert.match(html, /canonical checked-in learner source is/);
+  assert.match(html, /public\/downloads\/module20_reference\.py/);
+  assert.match(html, /Download-only path/);
+  assert.doesNotMatch(html, /work\/module20_reference\.py/);
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(
@@ -1710,7 +2564,7 @@ test("renders the finalized CPython-performance-and-memory-evidence workbook", a
   );
 });
 
-test("renders the finalized evidence-grounded-intelligent-systems workbook", async () => {
+test("renders M25 as a bounded evidence-synthesis preview", async () => {
   const response = await render("/modules/25-evidence-grounded-intelligent-systems");
   assert.equal(response.status, 200);
 
@@ -1719,15 +2573,35 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
     html,
     /Module 25: Evidence-Grounded Intelligent &amp; Human-Centered Systems · Atlas Academy/,
   );
-  assert.match(html, /Complete Module 25 workbook/);
-  assert.match(html, /Next-Step Evidence Studio/);
-  assert.match(html, /Purpose → boundary/);
-  assert.match(html, /Proposal → review/);
-  assert.match(html, /A score never silently changes learner state/);
+  assert.match(html, /Module 25 reference preview workbook; not an unlocked Core step/);
+  assert.match(html, /Reference access does not advance the Core\./);
+  assert.match(html, /open for orientation and comparison, not as an unlocked Core step/);
+  assert.match(html, /Reference preview · not an unlocked Core step/);
+  assert.match(html, /Read this as a map, not a mastered module/);
+  const m25PreviewText = new JSDOM(html).window.document.body.textContent ?? "";
+  assert.match(m25PreviewText, /Preview conversation—not an oral defense\./u);
+  assert.match(m25PreviewText, /PREVIEW ONLY/u);
+  assert.match(m25PreviewText, /Teaching Assistant · clarification context/u);
+  assert.match(m25PreviewText, /Study Partner · orientation context/u);
+  assert.match(m25PreviewText, /Copy the concise evidence packet/u);
+  assert.match(m25PreviewText, /Set up the Teaching Assistant chat first/u);
+  assert.match(m25PreviewText, /Set up the Study Partner chat first/u);
+  assert.match(m25PreviewText, /This preview card never grants record authority./u);
+  assert.match(html, /href="\/learning-partners"/u);
+  assert.match(m25PreviewText, /Future map: M26 capstone reasoning/u);
+  assert.doesNotMatch(
+    m25PreviewText,
+    /Teaching Assistant · oral-defense context|Study Partner · rehearsal context/u,
+    "the M25 preview must not expose a module companion package",
+  );
+  assert.match(
+    html,
+    /studio, project evidence, and oral-defense route remain unavailable/,
+  );
+  assert.doesNotMatch(html, /id="evidence-grounded-studio-title"/);
+  assert.doesNotMatch(html, /Post-module learning conversation/);
   assert.match(html, /Problem ladder and Atlas project/);
   assert.match(html, /Next-Step Evidence Dossier/);
-  assert.match(html, /href="\/downloads\/module25_reference\.py"/);
-  assert.match(html, /href="\/downloads\/test_module25_reference\.py"/);
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(
@@ -1760,7 +2634,137 @@ test("renders the finalized evidence-grounded-intelligent-systems workbook", asy
   );
 });
 
-test("renders the systems-capstone workbook and publishes its bounded model", async () => {
+test("renders reader-visible MCQ rationales behind local prediction gates", async () => {
+  const routes = [
+    {
+      pathname: "/modules/20-networks-application-protocols",
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 3,
+    },
+    {
+      pathname: "/modules/22-security-privacy-trust-boundaries",
+      expectedInteractiveAnswerGates: 10,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+    },
+    {
+      pathname: "/modules/23-programming-languages-interpreters",
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+    },
+    {
+      pathname: "/modules/24-cpython-performance-memory",
+      expectedInteractiveAnswerGates: 6,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 4,
+    },
+    {
+      pathname: "/modules/25-evidence-grounded-intelligent-systems",
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 1,
+      hiddenRationaleText: "It names the bounded task",
+    },
+    {
+      pathname: "/modules/26-systems-capstone-open-source-stewardship",
+      expectedInteractiveAnswerGates: 8,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+      hiddenRationaleText: "Tests, scans, and generated prose can be useful artifacts",
+    },
+    {
+      pathname: "/modules/27-discrete-mathematics-proof-counting-structures",
+      expectedInteractiveAnswerGates: 11,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 1,
+    },
+    {
+      pathname: "/modules/28-linear-algebra-numerical-stability-representation",
+      expectedInteractiveAnswerGates: 12,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 1,
+    },
+    {
+      pathname: "/modules/29-calculus-real-analysis-continuous-change",
+      // 1 -> 13. The module previously printed "**Correct.**" inline in every
+      // option list, so only its batch repair key was gated. Its twelve
+      // diagnostics now each reveal after the learner commits.
+      expectedInteractiveAnswerGates: 13,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+      hiddenRationaleText: "A reverses the quantifier responsibility",
+    },
+    {
+      pathname: "/modules/30-probability-statistics-scientific-inference",
+      expectedInteractiveAnswerGates: 1,
+      expectedNativeAnswerGates: 0,
+      expectedPredictionGates: 0,
+      hiddenRationaleText: "It names the observed denominator",
+    },
+  ];
+
+  for (const {
+    pathname,
+    expectedInteractiveAnswerGates,
+    expectedNativeAnswerGates,
+    expectedPredictionGates,
+    hiddenRationaleText,
+  } of routes) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} must render.`);
+
+    const document = new JSDOM(await response.text()).window.document;
+    const gates = [...document.querySelectorAll("details.lesson-details")];
+    const nativeAnswerGates = gates.filter(
+      ({ firstElementChild }) =>
+        firstElementChild?.textContent === "Reveal after recording your answer and confidence.",
+    );
+    const interactiveAnswerGates = [
+      ...document.querySelectorAll(".prediction-reveal-gate"),
+    ];
+    const predictionGates = gates.filter(
+      ({ firstElementChild }) =>
+        firstElementChild?.textContent === "Reveal after writing your prediction.",
+    );
+
+    assert.equal(
+      interactiveAnswerGates.length,
+      expectedInteractiveAnswerGates,
+      `${pathname} interactive answer-gate count changed.`,
+    );
+    assert.equal(
+      nativeAnswerGates.length,
+      expectedNativeAnswerGates,
+      `${pathname} native answer-gate count changed.`,
+    );
+    assert.equal(
+      predictionGates.length,
+      expectedPredictionGates,
+      `${pathname} prediction-gate count changed.`,
+    );
+    for (const gate of interactiveAnswerGates) {
+      assert.equal(
+        gate.querySelector("details"),
+        null,
+        `${pathname} exposes a rationale before a learner prediction.`,
+      );
+    }
+    for (const gate of [...nativeAnswerGates, ...predictionGates]) {
+      assert.equal(gate.hasAttribute("open"), false, `${pathname} exposes a reveal by default.`);
+    }
+    if (hiddenRationaleText) {
+      assert.doesNotMatch(
+        document.querySelector("main")?.textContent ?? "",
+        new RegExp(hiddenRationaleText, "u"),
+        `${pathname} exposes its repair key before a learner prediction.`,
+      );
+    }
+  }
+});
+
+test("renders M26 as a bounded capstone preview and retains its bounded model", async () => {
   const response = await render("/modules/26-systems-capstone-open-source-stewardship");
   assert.equal(response.status, 200);
 
@@ -1769,24 +2773,35 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
     html,
     /Module 26: Systems Capstone, Open-Source Stewardship &amp; Oral Architecture Defense · Atlas Academy/,
   );
-  assert.match(html, /Complete Module 26 workbook/);
-  assert.match(html, /Make the release argument\./);
-  assert.match(html, /Release Brief/);
-  assert.match(html, /Failure Playback/);
-  assert.match(html, /Red-Team Patch Bay/);
-  assert.match(html, /Evidence Ledger/);
-  assert.match(html, /A capstone release is a versioned evidence bundle/);
+  assert.match(html, /Module 26 reference preview workbook; not an unlocked Core step/);
+  assert.match(html, /Reference preview · not an unlocked Core step/);
+  assert.match(html, /Read this as a map, not a mastered module/);
+  const m26PreviewText = new JSDOM(html).window.document.body.textContent ?? "";
+  assert.match(m26PreviewText, /Preview conversation—not an oral defense\./u);
+  assert.match(m26PreviewText, /REHEARSAL ONLY/u);
+  assert.match(m26PreviewText, /Teaching Assistant · clarification context/u);
+  assert.match(m26PreviewText, /Study Partner · orientation context/u);
+  assert.match(m26PreviewText, /Copy the concise evidence packet/u);
+  assert.match(m26PreviewText, /Set up the Teaching Assistant chat first/u);
+  assert.match(m26PreviewText, /Set up the Study Partner chat first/u);
+  assert.match(m26PreviewText, /This preview card never grants record authority./u);
+  assert.match(html, /href="\/learning-partners"/u);
+  assert.match(m26PreviewText, /Next map: maintenance or specialization question/u);
+  assert.match(
+    html,
+    /studio, project evidence, and oral-defense route remain unavailable/,
+  );
+  assert.doesNotMatch(html, /id="capstone-defense-studio-title"/);
+  assert.doesNotMatch(html, /Post-module learning conversation/);
   assert.match(html, /Atlas Release Dossier \/ Open-Source Stewardship Track/);
-  assert.match(html, /href="\/downloads\/module26_reference\.py"/);
-  assert.match(html, /href="\/downloads\/test_module26_reference\.py"/);
   assert.doesNotMatch(html, /katex-error/);
 
   const referenceUrl = new URL(
-    "../public/downloads/module26_reference.py",
+    "../content/course/reference-models/module26_reference.py",
     import.meta.url,
   );
   const testsUrl = new URL(
-    "../public/downloads/test_module26_reference.py",
+    "../content/course/reference-models/test_module26_reference.py",
     import.meta.url,
   );
   const [reference, referenceTests] = await Promise.all([
@@ -1809,4 +2824,385 @@ test("renders the systems-capstone workbook and publishes its bounded model", as
   assert.match(referenceTests, /test_unknown_or_alias_external_action_is_a_hard_rejection/);
   assert.match(referenceTests, /test_stale_raw_claims_and_artifacts_cannot_support_the_candidate/);
   assert.match(referenceTests, /test_missing_raw_human_impact_record_requires_revision/);
+});
+
+test("renders the discrete mathematics proof workbook and its bounded teaching model", async () => {
+  const response = await render(
+    "/modules/27-discrete-mathematics-proof-counting-structures",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 27: Discrete Mathematics, Proof, Counting &amp; Structures · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 27 workbook/);
+  assert.match(html, /Proof &amp; Counterexample Workbench/);
+  assert.match(html, /Claim scope lab/);
+  assert.match(html, /Confidence-aware diagnostic/);
+  assert.match(html, /Proof, Counterexample &amp; Constraint Dossier/);
+  assert.match(html, /Conversational oral defense/);
+  assert.match(html, /Sources, licensing, and a responsible reading route/);
+  assert.match(html, /href="\/downloads\/module27_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module27_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const [studio, style, reference, referenceTests] = await Promise.all([
+    readFile(new URL("../app/DiscreteMathProofStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/DiscreteMathProofStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module27_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module27_reference.py", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.match(studio, /t1 can use r1 only; t2 can use r2 only/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each mathematical view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule27Progress/);
+  assert.match(studio, /persistModule27Progress/);
+  assert.match(studio, /clearModule27Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
+  assert.match(studio, /not a theorem prover/);
+  assert.match(studio, /Proof repair bench/);
+  assert.match(studio, /State and recurrence traceboard/);
+  assert.match(studio, /Counting and coefficient lab/);
+  assert.match(studio, /Graph and matching lab/);
+  assert.match(studio, /Order defense board/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module27-reference\/1"/);
+  assert.match(reference, /def classify_relation/);
+  assert.match(reference, /def transitive_closure/);
+  assert.match(reference, /def topological_order_or_cycle/);
+  assert.match(reference, /def analyze_bipartite_matching/);
+  assert.match(reference, /MAX_MATCHING_EDGES = 12/);
+  assert.match(reference, /def binomial_coefficient/);
+  assert.match(reference, /def linear_recurrence_terms/);
+  assert.match(reference, /def modular_inverse/);
+  assert.match(reference, /Finite teaching model only/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module27_reference as model/);
+  assert.match(referenceTests, /class RelationClassificationTests/);
+  assert.match(referenceTests, /class GraphReasoningTests/);
+  assert.match(referenceTests, /class MatchingTests/);
+  assert.match(referenceTests, /class CountingAndNumberTheoryTests/);
+  assert.match(referenceTests, /test_maximal_matching_can_still_fail_to_be_maximum/);
+});
+
+test("renders the linear algebra stability workbook and its bounded teaching model", async () => {
+  const response = await render(
+    "/modules/28-linear-algebra-numerical-stability-representation",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 28: Linear Algebra, Numerical Stability &amp; Representation · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 28 workbook/);
+  assert.match(html, /Linear Algebra &amp; Stability Studio/);
+  assert.match(html, /M28 working invariant/);
+  assert.match(html, /Coordinate contract/);
+  assert.match(html, /Confidence-aware diagnostic/);
+  assert.match(html, /Representation &amp; Stability Dossier/);
+  assert.match(html, /Conversational oral defense — M28/);
+  assert.match(html, /replaces a traditional coding or written exam/);
+  assert.match(html, /fully equivalent text conversation/);
+  assert.match(html, /href="\/downloads\/module28_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module28_reference\.py"/);
+  assert.doesNotMatch(html, /katex-error/);
+
+  const [studio, style, reference, referenceTests, companionGuides, sourceAudit] = await Promise.all([
+    readFile(new URL("../app/LinearAlgebraStabilityStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/LinearAlgebraStabilityStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module28_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module28_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module28_linear_algebra_source_audit_addendum.md", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.equal(
+    [...studio.matchAll(/<PredictionGate\b/gu)].length,
+    6,
+    "each M28 view has one confidence-aware prediction gate",
+  );
+  assert.match(studio, /A: R³ → R²/);
+  assert.match(studio, /Aε = \[\[1, 1\], \[1, 1001\/1000\]\]/);
+  assert.match(studio, /±\(1, 1\)\/√2/);
+  assert.ok(studio.includes("center: X_c = X − 1μᵀ"));
+  assert.ok(studio.includes("maximize vᵀX_cᵀX_cv / n"));
+  assert.ok(studio.includes("X_c = UΣVᵀ"));
+  assert.ok(studio.includes("minimize ‖X_c − (X_c)₁‖F"));
+  assert.doesNotMatch(studio, /<span>X = UΣVᵀ<\/span>/);
+  assert.match(studio, /aria-live="polite"/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule28Progress/);
+  assert.match(studio, /persistModule28Progress/);
+  assert.match(studio, /clearModule28Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
+  assert.match(studio, /not a theorem prover/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /forced-colors/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module28-reference\/1"/);
+  assert.match(reference, /def analyze_matrix/);
+  assert.match(reference, /def least_squares_projection/);
+  assert.match(reference, /def analyze_symmetric_psd/);
+  assert.match(reference, /def symmetric_eigendecomposition_2x2/);
+  assert.match(reference, /def pca_2d/);
+  assert.match(reference, /def condition_report_2x2/);
+  assert.match(reference, /def rhs_sensitivity_2x2/);
+  assert.match(reference, /def decimal_cancellation_demo/);
+  assert.match(reference, /Finite, deterministic reasoning aids/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module28_reference as model/);
+  assert.match(referenceTests, /class ExactMatrixSpaceTests/);
+  assert.match(referenceTests, /class ProjectionAndLeastSquaresTests/);
+  assert.match(referenceTests, /class SymmetricAndSpectralTests/);
+  assert.match(referenceTests, /class PCAAndNumericalBoundaryTests/);
+  assert.match(companionGuides, /"moduleId": "m28"/);
+  assert.match(companionGuides, /shape\/dtype\/solver path/);
+  assert.match(sourceAudit, /\| 4 — SVD, low-rank, conditioning, stability \|/);
+  assert.match(sourceAudit, /\| 5 — tensors, matrix calculus, code contract \|/);
+  assert.match(sourceAudit, /\| 6 — PCA dual derivation and dossier \|/);
+  assert.doesNotMatch(sourceAudit, /\| 5 — PCA and representations \|/);
+});
+
+test("renders the calculus continuous-change workbook and its bounded teaching model", async () => {
+  const response = await render(
+    "/modules/29-calculus-real-analysis-continuous-change",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 29: Calculus, Real Analysis &amp; Continuous Change · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 29 workbook/);
+  assert.match(html, /Limits, Change &amp; Convergence Studio/);
+  assert.match(html, /M29 working invariant/);
+  assert.match(html, /Intermediate Value Theorem/);
+  assert.match(html, /Partials are probes/);
+  assert.match(html, /Confidence-aware diagnostic/);
+  assert.match(html, /Continuous-Change Evidence Dossier/);
+  assert.match(html, /Conversational oral defense — M29/);
+  assert.match(html, /replaces a traditional coding or written exam/);
+  assert.match(html, /fully equivalent text conversation/);
+  assert.match(html, /Hint ladder/);
+  assert.match(html, /href="\/downloads\/module29_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module29_reference\.py"/);
+  assert.match(
+    html,
+    /href="\/downloads\/module29_calculus_real_analysis_continuous_change_source_map\.md"/,
+  );
+  assert.match(
+    html,
+    /href="\/downloads\/module29_calculus_real_analysis_source_audit_addendum\.md"/,
+  );
+  assert.doesNotMatch(html, /katex-error/);
+
+  const [studio, style, reference, referenceTests, companionGuides, sourceMap, sourceAudit] = await Promise.all([
+    readFile(new URL("../app/CalculusContinuousChangeStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CalculusContinuousChangeStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module29_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module29_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module29_calculus_real_analysis_continuous_change_source_map.md", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module29_calculus_real_analysis_source_audit_addendum.md", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.match(studio, /id: "limit"/);
+  assert.match(studio, /id: "trajectory"/);
+  assert.match(studio, /aria-live="polite"/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule29Progress/);
+  assert.match(studio, /persistModule29Progress/);
+  assert.match(studio, /clearModule29Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
+  assert.match(studio, /not a theorem prover/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /forced-colors/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module29-reference\/1"/);
+  assert.match(reference, /def affine_epsilon_delta_report/);
+  assert.match(reference, /def sine_taylor_report/);
+  assert.match(reference, /def quadratic_surface_report/);
+  assert.match(reference, /def affine_jacobian_report/);
+  assert.match(reference, /def affine_change_of_variables_rectangle_report/);
+  assert.match(reference, /def power_sequence_uniformity_report/);
+  assert.match(reference, /def composite_trapezoid_quadratic_report/);
+  assert.match(reference, /def euler_forced_quadratic_ode_report/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module29_reference as model/);
+  assert.match(referenceTests, /class EpsilonDeltaTests/);
+  assert.match(referenceTests, /class DifferentialAndJacobianTests/);
+  assert.match(referenceTests, /class ChangeOfVariablesAndSeriesTests/);
+  assert.match(referenceTests, /class PointwiseAndNumericalBoundaryTests/);
+  assert.match(companionGuides, /"moduleId": "m29"/);
+  assert.match(companionGuides, /shape, unit, dtype, step, tolerance, or solver trace/);
+  assert.match(sourceMap, /Module 29 .*Source Map/);
+  assert.match(sourceAudit, /Minimum source routing for the six connected sessions/);
+});
+
+test("renders the probability, statistics, and scientific-inference workbook and bounded model", async () => {
+  const response = await render(
+    "/modules/30-probability-statistics-scientific-inference",
+  );
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /Module 30: Probability, Statistics &amp; Scientific Inference · Atlas Academy/,
+  );
+  assert.match(html, /Complete Module 30 workbook/);
+  assert.match(html, /Probability &amp; Inference Studio/);
+  assert.match(html, /M30 working invariant/);
+  assert.match(html, /Hoeffding/);
+  assert.match(html, /Common distributions and the multivariate-Gaussian bridge/);
+  assert.match(html, /pairwise disjoint.*countable additivity/isu);
+  assert.match(html, /bivariate_normal_affine_report/);
+  assert.match(html, /unique boundary mode/);
+  assert.match(html, /Uncertainty &amp; Inference Evidence Dossier/);
+  assert.match(html, /Conversational oral defense — M30/);
+  assert.match(html, /replaces a traditional coding or written exam/);
+  assert.match(html, /fully equivalent text conversation/);
+  assert.match(html, /Hint ladder/);
+  assert.match(html, /href="\/downloads\/module30_reference\.py"/);
+  assert.match(html, /href="\/downloads\/test_module30_reference\.py"/);
+  assert.match(
+    html,
+    /href="\/downloads\/module30_probability_statistics_scientific_inference_source_map\.md"/,
+  );
+  assert.match(
+    html,
+    /href="\/downloads\/module30_probability_statistics_scientific_inference_source_audit_addendum\.md"/,
+  );
+  assert.doesNotMatch(html, /katex-error/);
+
+  const document = new JSDOM(html).window.document;
+  const emptyTableHeaders = [
+    ...document.querySelectorAll(".lesson-table-scroll th"),
+  ].filter((header) => !header.textContent?.trim());
+  assert.deepEqual(
+    emptyTableHeaders,
+    [],
+    "Module 30 tables must name every column and row-axis header.",
+  );
+
+  const [studio, style, reference, referenceTests, companionGuides, sourceMap, sourceAudit] = await Promise.all([
+    readFile(new URL("../app/ProbabilityInferenceStudio.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/ProbabilityInferenceStudio.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module30_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/test_module30_reference.py", import.meta.url), "utf8"),
+    readFile(new URL("../content/course/module-companion-guides.v1.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module30_probability_statistics_scientific_inference_source_map.md", import.meta.url), "utf8"),
+    readFile(new URL("../public/downloads/module30_probability_statistics_scientific_inference_source_audit_addendum.md", import.meta.url), "utf8"),
+  ]);
+  assert.match(studio, /role="tablist"/);
+  assert.match(studio, /role="tab"/);
+  assert.match(studio, /role="tabpanel"/);
+  assert.match(studio, /event\.key === "ArrowRight"/);
+  assert.match(studio, /event\.key === "ArrowLeft"/);
+  assert.match(studio, /event\.key === "ArrowDown"/);
+  assert.match(studio, /event\.key === "ArrowUp"/);
+  assert.match(studio, /event\.key === "Home"/);
+  assert.match(studio, /event\.key === "End"/);
+  assert.match(studio, /role="radiogroup"/);
+  assert.match(studio, /role="radio"/);
+  assert.match(studio, /id: "base-rate"/);
+  assert.match(studio, /id: "design"/);
+  assert.match(studio, /Text equivalent:/);
+  assert.match(studio, /p=3\/4[\s\S]*100%/);
+  assert.match(studio, /aria-live="polite"/);
+  assert.match(studio, /getBrowserProgressStorage/);
+  assert.match(studio, /restoreModule30Progress/);
+  assert.match(studio, /persistModule30Progress/);
+  assert.match(studio, /clearModule30Progress/);
+  assert.doesNotMatch(studio, /window\.localStorage/);
+  assert.match(studio, /not a theorem prover/);
+  assert.doesNotMatch(studio, /<svg\b/i);
+  assert.doesNotMatch(studio, /dangerouslySetInnerHTML/);
+  assert.match(style, /prefers-reduced-motion/);
+  assert.match(style, /forced-colors/);
+  assert.match(style, /focus-visible/);
+
+  assert.match(reference, /MODEL_VERSION = "atlas-module30-reference\/2"/);
+  assert.match(reference, /def finite_event_report/);
+  assert.match(reference, /def joint_distribution_report/);
+  assert.match(reference, /def bivariate_normal_affine_report/);
+  assert.match(reference, /def binary_bayes_report/);
+  assert.match(reference, /def markov_inequality_report/);
+  assert.match(reference, /def finite_markov_chain_report/);
+  assert.match(reference, /def beta_binomial_report/);
+  assert.match(reference, /def exact_permutation_mean_difference_report/);
+  assert.match(reference, /def multiple_testing_report/);
+  assert.match(reference, /def missingness_boundary_report/);
+  assert.doesNotMatch(
+    reference,
+    /(?:^|\n)\s*(?:from|import)\s+(?:socket|requests|urllib|http\.client|subprocess|pickle|marshal|sqlite3|tarfile|zipfile)\b/,
+  );
+  assert.match(referenceTests, /import module30_reference as model/);
+  assert.match(referenceTests, /class ProbabilityModelTests/);
+  assert.match(referenceTests, /class RepetitionAndStochasticProcessTests/);
+  assert.match(referenceTests, /class EstimationAndUncertaintyTests/);
+  assert.match(referenceTests, /class ModelingBoundaryTests/);
+  assert.match(companionGuides, /"moduleId": "m30"/);
+  assert.match(companionGuides, /probability models, conditional structure, inference/);
+  assert.match(sourceMap, /Module 30 .*Source Map/);
+  assert.match(sourceAudit, /M30 should teach one connected transformation/);
 });

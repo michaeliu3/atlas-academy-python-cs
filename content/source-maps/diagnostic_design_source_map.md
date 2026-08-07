@@ -1,6 +1,6 @@
 # Module 0 diagnostic — research and design boundary
 
-**Reviewed:** 2026-07-29  
+**Reviewed:** 2026-07-30  
 **Purpose:** support a short, low-stakes placement conversation for one learner
 inside the connected Atlas Academy curriculum.
 
@@ -23,6 +23,52 @@ A correct multiple-choice response is only one signal. High-confidence correct
 responses still receive a later transfer check; low-confidence correct
 responses receive explanation or retrieval; high-confidence incorrect
 responses receive priority counterexamples and delayed isomorphic retrieval.
+
+## Scope map for the 20-probe intake (v2)
+
+The diagnostic uses one deliberately chosen primary probe for each requested
+foundation, plus connected Python/CS probes that distinguish nearby
+misconceptions. Every learner-facing repair link below resolves to a published
+module. The last column is a release boundary, not an invitation to bypass it.
+
+| Foundation | Primary probe | Published bridge | Advanced-release boundary |
+| --- | --- | --- | --- |
+| Python | `python-state-aliasing` | M1 values, state, and execution | None; later Python probes remain connected evidence, not a waiver. |
+| Algorithms/data structures | `cost-hidden-membership` | M5 cost models | None; representation and graph questions retain their academic prerequisites. |
+| Systems | `memory-locality-cache-lines` | M17 memory hierarchy and locality | None; M18–M24 remain their own published, prerequisite-aware systems branch. |
+| Discrete mathematics | `quantifier-scope-countermodel` | M27 logic and countermodels | None; recursive proof questions offer an earlier related signal. |
+| Linear algebra | `linear-algebra-basis-coordinates` | M28 vectors, coordinates, and rank | None; a correct coordinate trace does not establish numerical-stability mastery. |
+| Calculus | `calculus-gradient-local-change` | M29 derivatives and local approximation | M31 is authoring-only; no M31 route is emitted. |
+| Probability | `probability-conditional-evidence` | M30 probability models | None; a Bayes trace is not broad inference mastery. |
+| Optimization | `optimization-feasible-descent` | M29 constrained extrema | M31 is authoring-only; the bridge names it as unavailable and begins in published mathematics. |
+| AI/ML | `ml-evaluation-leakage` | M30 design, criticism, and robustness | M35 is authoring-only; the bridge names it as unavailable and begins in published inference. |
+
+This mapping is a curriculum-design decision, not evidence that the 20 items
+form a validated concept inventory. Its item-level definitions, derivations,
+counterexamples, and published repair context are in the named Atlas modules;
+their source ledgers carry the subject-matter citations and reuse boundaries.
+
+## Subject-matter probe ledger (v2 additions)
+
+The following rows make the seven subject-matter additions independently
+auditable. The questions, feedback, diagrams, and examples remain original
+Atlas material; each external source is linked as a teaching/reference source,
+not copied into the portal. **Ledger review date:** 2026-07-30. The access date
+is the originating module source map's research snapshot, rather than a claim
+that this ledger freshly re-accessed every external asset.
+
+| Probe ID | Claim linkage and local evidence | Stable teaching source | Accessed | License / reuse decision | Claim boundary |
+| --- | --- | --- | --- | --- | --- |
+| `memory-locality-cache-lines` | M17 source map §3.2, cache unit 14; M17 locality/cost session material. Checks the reasoning that address-order traversal can reuse fetched cache lines. | [MIT 6.004, Caches and the Memory Hierarchy](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c14/) | 2026-07-29 | Link and attribute; use original Atlas trace/question wording. Do not copy slides, media, or substantial course assets without an asset-level license review. | A locality hypothesis, not cache-miss counts, wall-clock speed, or behavior on a particular CPU, runtime, or workload. |
+| `quantifier-scope-countermodel` | M27 source map §S05 and six-session route, Session 1. Checks that quantifier order changes witness dependency and that a finite countermodel can refute a universal claim. | [Open Logic Project, *Sets, Logic, Computation*](https://slc.openlogicproject.org/) · [license](https://openlogicproject.org/olp-license/) | 2026-07-30 | Website content is CC BY 4.0 unless noted; attribute and indicate changes if reused. Atlas uses original wording/examples and links to, but does not copy, GPLv3 proof-checker code. | Not evidence that an English requirement was formalized correctly or that a program satisfies the formal statement. |
+| `linear-algebra-basis-coordinates` | M28 source map §S02 and six-session route, Session 1. Checks the definition-level distinction between a vector and coordinates relative to a declared basis. | [Axler, *Linear Algebra Done Right*, fourth edition](https://linear.axler.net/LADR4e.pdf) | 2026-07-30 | The displayed PDF states CC BY-NC 4.0; default to link-only/original prose, diagrams, and questions. Do not import exercises or figures without specific reuse review. | Not numerical-stability evidence, an embedding semantics claim, or ML-performance evidence. |
+| `calculus-gradient-local-change` | M29 source map §S01 and six-session route, Session 2. Checks derivative as a local linear approximation and the exact quadratic-remainder calculation. | [MIT 18.01SC, Single Variable Calculus](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/) | 2026-07-30 | MIT OCW CC BY-NC-SA 4.0 baseline, subject to asset notices; link/cite and write original fixtures/questions. Do not copy exercises, exams, solutions, or figures. | A derivative at one point is not a global monotonicity or finite-step guarantee. |
+| `optimization-feasible-descent` | M29 source map §S02 and six-session route, Session 6. Checks that a proposed descent point must satisfy the declared feasible set before its objective value is compared. | [MIT 18.02SC, Partial Derivatives](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/2.-partial-derivatives/) | 2026-07-30 | Same MIT OCW link-only/original-material decision as above; the Atlas constraint example is original. | Not a convergence, KKT, global-optimality, or authoring-only M31 readiness claim. |
+| `probability-conditional-evidence` | M30 source map §S01 and six-session route, Session 1. Checks Bayes' denominator as the marginal probability of the observed positive under the declared model. | [MIT 18.600, Probability and Random Variables lecture notes](https://ocw.mit.edu/courses/18-600-probability-and-random-variables-fall-2019/pages/lecture-notes/) | 2026-07-30 | MIT OCW CC BY-NC-SA 4.0 baseline subject to asset notices; link/cite and create original explanations/visuals. | Not real clinical validity, posterior truth, independence, or a decision rule. |
+| `ml-evaluation-leakage` | M30 source map Session 6 and forward handoff; M30 source-audit addendum §S08 and sessions 5–6. Checks the need to declare deployment target, dependence, split, and leakage boundary before trusting a metric. | [NIST experimental-design overview](https://itl.nist.gov/div898/handbook/pri/section1/pri11.htm) · [NIST model/data-quality first steps](https://itl.nist.gov/div898/handbook/ppc/section4/ppc41.htm) | 2026-07-30 | Attribute NIST and inspect exact assets for notices. Atlas uses original prose/diagrams and does not imply NIST endorsement. | Not a quantified optimism estimate, proof of poor deployment performance, or replacement for later M35 evaluation material. |
+
+Every row is linked to a published repair module. The diagnostic does not link
+to, unlock, or simulate the authoring-only advanced modules.
 
 ## Evidence-to-design map
 

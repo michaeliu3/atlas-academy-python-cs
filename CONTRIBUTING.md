@@ -16,7 +16,11 @@ content or opaque automation.
 ## Change workflow
 
 1. Make a small, reviewable change with a clear objective.
-2. Run module sync, lint, portal tests, and relevant Python behavioral tests.
+2. Validate proportionately: for a text-only lesson repair, preview the edited
+   route, links, and a focused content check; for a meaningful 2–6 module or
+   interactive-behavior batch, run sync, generated-artifact, type/lint, and
+   relevant focused tests; for a GitHub push, private deployment, or substantial
+   portal change, rely on the full CI/browser and relevant Python model checks.
 3. Review the patch for unsupported claims, privacy leaks, hard-coded learner
    data, and source attribution.
 4. Explain what the change proves and what it does not prove in the PR or
@@ -27,3 +31,11 @@ content or opaque automation.
 AI-generated code or text needs the same or stronger review as human work.
 Provide the bounded task, constraints, acceptance evidence, and a human-written
 explanation of the resulting design.
+
+## History and release evidence
+
+Use additive commits with a narrow purpose, and preserve the full reviewable
+history on the private GitHub remote. Do not force-push, rewrite published
+commits, delete release evidence, or use a squash merge that loses the
+commit-level audit trail for release work. Record the intended Git commit, PR,
+CI run, review, limitations, and deployment result in the release ledger.

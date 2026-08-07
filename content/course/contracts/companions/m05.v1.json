@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m05",
+  "purpose": "Freeze a candidate-only M5 Teaching Assistant, Study Partner, and M27 handoff context for future human review without changing M5's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/4",
+    "digest": "sha256:8f639cb1e2c91da5d7b1825961d79b2bcd941071e268312c59ca386f398700f2"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected cost claim. Ask for the input family, counted resource, operation-cost assumption, case, predicted growth, and confidence before offering any correction.",
+    "artifactFocus": "Ask the learner to make one short code trace, exact sum, recurrence, cost card, raw-sample comparison, or representation-boundary diagram visible, then distinguish what the artifact establishes from what remains uncertain.",
+    "repairMove": "Ask for a prediction before correction; change exactly one workload, hidden operation, hash or string-cost assumption, adapter boundary, or timing setup; then offer the smallest counterexample or measurement repair without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: show one compact code trace, sum, recurrence, table, or cost card and give a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep public behavior fixed but make input all-distinct, remove an expected hash assumption, add string-length growth, or move a lookup across a network boundary. Ask for a prediction and confidence before comparing the model, trace, or measurement limit.",
+    "taHandoff": "End with the learner's selected M5 artifact, attempted cost claim, confidence, unresolved assumption, one changed premise, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m27",
+    "carryArtifact": "Carry a cost-and-evidence card: input family, counted operation, case, exact count or recurrence, bound idea, measurement boundary, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M27 strengthens the discrete proof bridge, which quantifiers, recurrence conditions, counterexample, or asymptotic relation would make this cost claim precise?",
+    "boundary": "M27 is the only canonical forward handoff. References to M6–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

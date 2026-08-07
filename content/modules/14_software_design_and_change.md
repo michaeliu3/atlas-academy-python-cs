@@ -98,6 +98,9 @@ The first Atlas prototype is one class that:
 It “works” for one route. But each new pressure crosses the same owner.
 
 ```mermaid
+%% atlas-diagram-id: m14-coupled-change-pressure
+%% atlas-diagram-title: Change pressures coupled in one application owner
+%% atlas-diagram-alt: Four independent requests converge on one coupled AtlasApplication, which also owns parsing, ranking, workflow, formatting, and error policy. This creates overlapping change pressure.
 flowchart LR
     R1["Add ranking policy"] --> A["Coupled AtlasApplication"]
     R2["Retry transient import"] --> A
@@ -292,6 +295,23 @@ For each request, predict touched responsibilities before reading the code:
 This matrix is not proof of future maintainability. It is a falsifiable design
 hypothesis: future patches should touch fewer unrelated owners.
 
+### First-principles checkpoint — derive an owner before choosing a pattern
+
+Start with one requested change, not a pattern name. For “add recency ranking,”
+make the causal path explicit:
+
+| Question | Working answer | What would disprove the boundary? |
+|---|---|---|
+| What observation must remain? | callers still receive ordered, unique `items` | an unchanged-input regression changes the result |
+| What decision varies independently? | the ordering rule | a source-format change also requires editing the ranker |
+| Who owns that decision? | `RankingPolicy` plus its composition choice | unrelated workflow or presentation code must change |
+| What stays outside the owner? | parsing grammar, transition legality, legacy field spelling | the new policy needs to inspect or mutate those details |
+
+This is the first-principles move: a boundary follows an independently changing
+decision and a preserved observation. It is not proof that a class hierarchy is
+good. Predict a smallest test that could falsify the proposed boundary, state
+your confidence, then inspect the patch.
+
 ### 4.3 A syntax-valid broken prototype
 
 Predict all policies hidden inside `plan`:
@@ -353,6 +373,9 @@ observations. It does **not** mean Python prevents clients from reading source o
 attributes.
 
 ```mermaid
+%% atlas-diagram-id: m14-planner-boundaries
+%% atlas-diagram-title: Planner boundaries and composition root
+%% atlas-diagram-alt: A client uses a compatibility facade and planner service. The service uses importer and ranker ports plus a workflow table, while the composition root chooses the concrete facade, importer, and ranker.
 flowchart LR
     Client["CLI / caller"] -->|"documented result + errors"| Facade["Compatibility façade"]
     Facade -->|"plan request"| Service["Planner service"]
@@ -390,6 +413,32 @@ This statement immediately forces questions:
 - Are side effects and partial results observed?
 
 Tests sample this relation; they do not prove it for all inputs.
+
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+Let \(P\) be the old program, \(P'\) the changed program, \(O\) the chosen
+observable behavior, and \(D_O\) the admitted inputs. The refactor claim is
+
+\[
+\forall x \in D_O,\quad O(P,x)=O(P',x).
+\]
+
+To reason about it, name the assumptions: which inputs are admitted, whether
+exception class/order/side effects count as observations, and which dependency
+or environment behavior is deliberately outside \(O\). The proof idea is to
+preserve each named observation through the changed owner; finite tests can
+refute the universal claim but cannot establish it for every \(x\).
+
+**Counterexample.** Two versions can return the same `items` while one changes
+an invalid-input exception into an empty result, reverses tied results, or sends
+an external request. They are not equivalent when that behavior is in \(O\).
+
+For the four pressures in the earlier matrix, record a local count
+\(C(r)\) of independently owned responsibilities predicted to change before
+and after the design. For example, a recency rule may move from
+\(C(r)=4\) coupled owners to \(C(r)=2\) (`RankingPolicy` and composition).
+That is a change-scope hypothesis—not a universal maintainability metric—and a
+later patch or regression can falsify it.
 
 ### 5.2 Observation ledger
 
@@ -577,6 +626,9 @@ TRANSITIONS = {
 The table makes illegal edges visible by absence.
 
 ```mermaid
+%% atlas-diagram-id: m14-plan-workflow-states
+%% atlas-diagram-title: Legal plan workflow transitions
+%% atlas-diagram-alt: A plan begins in DRAFT, can move to VALIDATED only when it has nonempty concepts, and can then move to PUBLISHED. No direct draft-to-published transition exists.
 stateDiagram-v2
     [*] --> DRAFT
     DRAFT --> VALIDATED: VALIDATE [nonempty concepts]
@@ -703,6 +755,9 @@ indirection without answering a pressure.
 ### 9.1 Intended dependency direction
 
 ```mermaid
+%% atlas-diagram-id: m14-dependency-direction
+%% atlas-diagram-title: Inward source dependencies and outer concrete choice
+%% atlas-diagram-alt: Ports depend on domain values; application depends on ports and domain; plugins depend on ports and domain; the presenter depends on application and domain; bootstrap selects all concrete outer components.
 flowchart TB
     Domain["domain: values + state invariants"]
     Ports["ports: importer/ranker capabilities"] --> Domain
@@ -785,6 +840,9 @@ or semantic knowledge encoded as strings.
 Before delegating, draw:
 
 ```mermaid
+%% atlas-diagram-id: m14-bounded-ranking-change
+%% atlas-diagram-title: Bounded recency-ranking change path
+%% atlas-diagram-alt: Adding recency ranking changes the RankingPolicy contract, a new plugin, composition root wiring, shared contract tests, and an end-to-end smoke test. Importer grammar, plan transitions, and legacy presentation must remain untouched.
 flowchart LR
     Change["Add recency ranking"] --> Contract["RankingPolicy contract"]
     Contract --> New["New plugin"]
@@ -830,6 +888,9 @@ and yielding again may duplicate the first event. The raw provider keeps Module
 before returning any event:
 
 ```mermaid
+%% atlas-diagram-id: m14-batch-retry-timeline
+%% atlas-diagram-title: Batch retry preserves all-or-nothing output
+%% atlas-diagram-alt: The planner asks a batch loader to read a source. The first importer attempt yields A then fails transiently before A is exposed; the second yields A and B, and only then does the loader return A and B to the planner.
 sequenceDiagram
     participant P as Planner
     participant R as Batch loader
@@ -948,6 +1009,9 @@ Content-addressed object IDs depend on object content. A branch is a movable
 reference to a commit.
 
 ```mermaid
+%% atlas-diagram-id: m14-refactor-commit-graph
+%% atlas-diagram-title: Refactor branch and merge history
+%% atlas-diagram-alt: Main begins with C0 and C1 characterization. A refactor branch adds a seam and moves the planner while main receives an urgent fix; the branches later merge at commit M.
 gitGraph
     commit id: "C0"
     commit id: "C1 characterize"
@@ -1992,9 +2056,11 @@ through a plugin patch.
 | Patch is reversible | isolated root switch + coherent commits | data/external consumers may add cost |
 | Performance acceptable | benchmark/profile in target environment | reference asymptotics are not latency |
 
-### 16.4 Oral defense
+### 16.4 Conversation rehearsal — use the canonical oral-defense flow below
 
-In four minutes, without code:
+Use this as an optional prompt bank for the single conversational oral-defense
+flow below. The learner may keep code or a visible sketch open, choose any
+subset, pause for a hint, and finish with an uncertainty rather than a verdict:
 
 1. name the four change pressures;
 2. draw the dependency and runtime-flow graphs separately;
@@ -2011,7 +2077,7 @@ In four minutes, without code:
 These meetings are one staged change. Each begins with retrieval, adds one
 abstraction jump, and leaves an artifact used by the next meeting.
 
-### Session 1 — Reconstruct pressure and observable behavior
+## Session 1 — Reconstruct pressure and observable behavior
 
 **Question:** What is expensive about the coupled prototype, and what must not
 change accidentally?
@@ -2041,12 +2107,26 @@ change accidentally?
 - write two independent expected results without calling production helpers;
 - explain why passing cases are evidence, not equivalence proof.
 
+### Prediction before reveal — one change, one preserved observation
+
+Before inspecting a proposed refactor, predict which public observation could
+change if the ranking policy is moved behind a new owner. State confidence and
+the smallest characterization or regression that would challenge the
+prediction; then compare the patch with that evidence rather than its style.
+
 **Artifact:** characterization matrix, pressure map, and uncertainty list.
+
+### Session 1 output — preservation ledger and pressure map
+
+Keep one compact record: the chosen public observations, the four change
+pressures, one invariant, one unresolved assumption, and the smallest test or
+trace that would expose a regression. Session 2 uses this record to judge
+decompositions rather than treating a pattern name as a design decision.
 
 **Exit check:** Michael can answer “relative to which observations?” whenever
 someone says “behavior-preserving.”
 
-### Session 2 — Compare decompositions by change axis
+## Session 2 — Compare decompositions by change axis
 
 **Question:** Which decisions should live together?
 
@@ -2076,10 +2156,17 @@ someone says “behavior-preserving.”
 
 **Artifact:** responsibility table and architecture decision draft.
 
+### Session 2 output — responsibility and decomposition decision
+
+Record the change axis, owner, dependency direction, selected decomposition,
+one rejected alternative, and the observable behavior that remains protected.
+Carry this decision into the state/failure boundary rather than starting a new
+architecture story.
+
 **Exit check:** every design choice names a pressure, invariant, and rejected
 alternative.
 
-### Session 3 — Enforce state and failure boundaries
+## Session 3 — Enforce state and failure boundaries
 
 **Question:** How do explicit transitions and composition prevent invalid
 behavior?
@@ -2108,9 +2195,15 @@ behavior?
 
 **Artifact:** state table, failure taxonomy, and retry evidence.
 
+### Session 3 output — state, failure, and retry boundary
+
+Preserve a legal-transition table, a failure classification, the retry
+atomicity boundary, its space/repeatability assumptions, and one adversarial
+trace. Session 4 treats this as a contract that staged commits must preserve.
+
 **Exit check:** Michael can explain both the safety and cost of atomic retry.
 
-### Session 4 — Stage a compatible refactor in the Git graph
+## Session 4 — Stage a compatible refactor in the Git graph
 
 **Question:** How should the change be divided so each step is understandable
 and reversible?
@@ -2139,10 +2232,16 @@ and reversible?
 
 **Artifact:** commit storyboard, compatibility window, and rollback preconditions.
 
+### Session 4 output — staged Git change and rollback conditions
+
+Write the coherent commit sequence, each commit's preserved observation, the
+compatibility window, reversal route, and the condition that would block a
+rollback. Session 5 reviews this evidence, not an isolated diff.
+
 **Exit check:** the story remains buildable and reviewable after every planned
 commit.
 
-### Session 5 — Review an agent patch and localize a regression
+## Session 5 — Review an agent patch and localize a regression
 
 **Question:** Does the patch implement the declared change model?
 
@@ -2171,10 +2270,16 @@ commit.
 
 **Artifact:** structured review, evidence gaps, and bisect predicate checklist.
 
+### Session 5 output — evidence-led review and bisect predicate
+
+Keep the ranked findings, consequence, missing evidence, smallest repair
+direction, and reproducible good/bad predicate. The final defense must say
+which green check still leaves uncertainty.
+
 **Exit check:** every blocking review comment has a concrete consequence and a
 resolution route.
 
-### Session 6 — Atlas change defense and handoff
+## Session 6 — Atlas change defense and handoff
 
 **Question:** Does the refactor deserve trust, and is it ready to cross a durable
 boundary in M15?
@@ -2190,7 +2295,8 @@ boundary in M15?
 2. Run reference, adversarial, compatibility, and architecture checks.
 3. Inspect the Git story and reversal route.
 4. Challenge operational and dynamic-dependency blind spots.
-5. Conduct the four-minute oral defense.
+5. Use the conversational oral-defense flow below; let the learner choose a
+   prompt, hint, and stopping point.
 6. Freeze handoff invariants for file/schema/package work.
 
 **Learner actions**
@@ -2202,6 +2308,13 @@ boundary in M15?
 - state the M15 handoff: in-memory text/dict is not yet durable or versioned.
 
 **Artifact:** Atlas Module 14 evidence packet and durable-boundary handoff.
+
+### Session 6 output — change defense and M15 durable-boundary handoff
+
+Package the pressure-to-contract story, architecture map, state/failure trace,
+review decision, reversal condition, residual uncertainty, and the M15
+question: which in-memory assumptions must become explicit bytes, schema,
+artifact, or rollback evidence?
 
 **Exit check:** Michael can reconstruct contracts, state transitions, dependency
 ownership, evidence, and reversal without relying on a pattern label.
@@ -2366,7 +2479,8 @@ Design:
 Finally connect it back to Atlas by identifying which M15 serialized observation
 would need versioning.
 
-**Deliverable:** architecture decision record plus a four-minute oral defense.
+**Deliverable:** architecture decision record plus a learner-selected
+conversation summary from the canonical oral-defense flow below.
 
 **Mastery evidence:** the learner transfers forces and invariants, not Atlas
 class names.
@@ -2731,7 +2845,9 @@ Refactor the coupled study-session planner while:
 10. **Compatibility plan:** expand/migrate/contract, removal condition, rollback
     preconditions.
 11. **Cost note:** time, space, latency, repeated work, CI/reviewer cost.
-12. **Oral defense:** four-minute recording or transcript.
+12. **Conversation summary:** learner-selected explanation, visible artifact,
+    confidence, and unresolved uncertainty from the canonical oral-defense
+    flow below; no recording or transcript is required.
 
 ### 21.3 Rubric
 
@@ -2785,6 +2901,9 @@ module pretend they are solved.
 ## 22. Consolidated knowledge map
 
 ```mermaid
+%% atlas-diagram-id: m14-design-change-knowledge-map
+%% atlas-diagram-title: Design and change from pressure to evidence
+%% atlas-diagram-alt: Change pressure identifies responsibility, cohesion, and coupling. Contracts and evidence define preserved observations; decomposition, dependency direction, state, staging, Git history, and migration lead to review, verification, oral defense, and handoff.
 flowchart TD
     Pressure["Change pressure"] --> Responsibility["Responsibility / ownership"]
     Responsibility --> Cohesion["Cohesion: changes together"]
@@ -2812,6 +2931,18 @@ flowchart TD
     Review --> Verification["Independent bounded evidence"]
     Verification --> Defense["Oral defense + handoff"]
 ```
+
+### Visual text equivalent — design and change from pressure to evidence
+
+Read the map as one causal route. A change pressure reveals a decision, which
+needs a named owner; cohesion keeps decisions that vary together there, while
+explicit coupling shows the remaining knowledge edges. M12 supplies the public
+contract and M13 supplies observations/evidence, so refactoring can preserve a
+defined behavior instead of merely moving lines. The chosen decomposition,
+dependency direction, and state invariants then constrain a staged change.
+Git records the reversible sequence; review compares the proposed model with
+the patch; bounded verification supports one carefully limited conclusion; the
+oral handoff names what remains unknown for M15.
 
 ### 22.1 One connected explanation
 
@@ -3099,3 +3230,146 @@ Then answer one final transfer:
 > If Module 15 serializes `PlanSnapshot`, which previously internal observations
 > become durable compatibility promises, and which migration evidence must exist
 > before renaming them?
+
+## Conversational oral defense — M14
+
+This is a supportive Teaching Assistant conversation, not a pass/fail exam.
+If the learner chooses GPT Live at a preferred setting and their client renders
+the material, use the selected contract, code fragment, equation, and diagram
+as a shared whiteboard. This workbook cannot control voice availability,
+quality settings, rendering, retention, or integrations. The same conversation
+protocol can instead use readable text with Markdown and a small ASCII
+dependency/state sketch. Do not infer a score, completion, or automatic note
+from the conversation.
+
+### Invitation — pressure before pattern
+
+Ask the learner to choose one change pressure and say: “This observable
+behavior must stay [claim]; I would move [decision] behind [owner]; my
+confidence is [level].” Draw source dependencies and runtime calls separately
+before naming a pattern.
+
+### Hint ladder — observation to reversible change
+
+If stuck, move one rung at a time: preserved observation → invariant → change
+axis → owner/dependency arrow → state/failure boundary → characterization or
+regression evidence → commit/reversal condition. Offer a hint or a tiny trace,
+not a verdict.
+
+### Changed-premise counterexample
+
+Keep the requested ranking feature but change one premise: the importer now
+has a non-idempotent side effect, or the old CLI field must persist for two
+releases. Ask which retry, boundary, test, compatibility, or rollback claim
+must change and what remains unproven.
+
+### Transfer turn — M15 durable boundary
+
+Ask which M14 observation becomes an on-disk or installed-artifact promise in
+M15, and which version/migration or artifact-inspection evidence would make
+that promise reviewable.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a short summary: selected pressure, preserved observation,
+diagram or trace, changed-premise repair, confidence, unresolved assumption,
+and one M15 question. Copy or export it only with the learner's approval.
+
+## Guided Codex handoff — M14
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M14. This change preserves [observable
+contract], moves this responsibility to [boundary], and my rollback evidence is
+[artifact].”** Ask the learner to draw the dependency direction and one
+before/after behavior before naming a pattern. Use this hint ladder: user
+observable → component responsibility → dependency arrow → migration/compatibility
+boundary → characterization/regression test → rollback decision. Change one
+premise (an old client, a partially migrated record, or a failed deploy) and
+ask which promise must remain stable.
+
+### Study Partner — change rehearsal
+
+Ask for a thirty-second explanation of one refactor without pattern names:
+what changes internally, what stays observable, and how a test would catch a
+regression. Then swap one responsibility or reverse one dependency arrow and
+ask which architecture rule breaks. Record the sharpest question for the TA.
+
+### Forward handoff — M15
+
+Carry the existing change-and-rollback card into **M15**: the M12 public
+promise and dependency arrow, the M13 contract clause/regression and missing
+observation, this module's commit or reversal condition, and one durability
+question. The next module makes that connected evidence durable across files,
+bytes, packages, and release artifacts.
+
+
+## Bench pack
+
+**Bench pack:** `m14` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 14 has no checked-in reference model, so
+both benches carry their own subject. Neither performs real I/O: a retry boundary and
+a bisect predicate are both decisions about *structure*, and structure is checkable
+without a network or a repository.
+
+### Bench 3 — state, failure, and retry boundary
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** the same four-step publish under two retry boundaries, with the same
+three-attempt policy and the same flaky third step. Wrapping the **whole operation**
+runs every step three times: three IDs reserved, three records written, and `pub-1`
+and `pub-2` left orphaned with nothing to clean them up. Moving the *identical*
+retry to wrap only the failing step leaves that step's attempt count unchanged at
+three while reducing reservations and writes to **one**.
+
+The retry boundary — not the retry policy — decides which side effects become
+plural. And the coarse version *works*: it returns a valid ID, passes every test
+asserting the record exists, and leaks silently. The review question is therefore
+"which steps are inside the boundary, and is each safe to repeat?" The bench's own
+audit finds that `notify_subscribers` is still not idempotent even after the fix,
+which is why an idempotency key has to reach the subscriber and not just the
+publisher.
+
+**Cannot establish:** anything about real retry behaviour. No backoff, jitter,
+timeout, or concurrent retry, and it does not exercise the worse case where the
+failure is not transient — three sets of side effects, then a raise anyway.
+
+### Bench 5 — evidence-led review and bisect predicate
+
+**Session:** 5. **Rungs:** review and verify, debug and defend.
+**Executes:** bisection over sixteen commits under three predicates. All three return
+a confident single integer, in the same number of probes, with output of identical
+shape. One is correct. The **fixed-then-reintroduced** history answers 12 against a
+first bad commit of 2 — a real boundary, and a correct answer to a question nobody
+asked. The **flaky** predicate (genuinely bad from commit 9, caught 40% of the time)
+answers 10; every probe was honest and the property searched for is not a function of
+the commit at all.
+
+Bisection is a binary search, and binary search does not check that its input is
+sorted. The two precondition failures need **two different guards**, and the bench
+shows each catching only its own: sampling commits across the range refutes
+monotonicity on the reintroduced history and is blind to the flake, while repeating a
+single probe refutes determinism on the flake and is blind to the reintroduction.
+
+**Cannot establish:** how often real histories are non-monotone. No repository is
+cloned and no test is run; it does not model git's bisect over a DAG with merges,
+where "the range" is a harder notion than an index interval. The sampling guard can
+refute monotonicity but never establish it.
+
+### Sessions without a bench
+
+- **Session 1** — a preservation ledger and pressure map: an argument about what
+  behaviour must be preserved and why.
+- **Session 2** — comparing decompositions by change axis, which is a design
+  judgement rather than an executable claim.
+- **Session 4** — staging a refactor in the Git graph: real commits, branches, and a
+  working tree this pack does not own.
+- **Session 6** — a change defence consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m14-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

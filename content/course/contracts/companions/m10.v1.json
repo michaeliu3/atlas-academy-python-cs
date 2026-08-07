@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m10",
+  "purpose": "Freeze a candidate-only M10 Teaching Assistant, Study Partner, and M11 handoff context for future human review without changing M10's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/9",
+    "digest": "sha256:fdf1780ef5a3dc96c410851bb4148b1501a936e24181601f3474144a2d98196f"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected graph request. Ask for vertices, directed/undirected edge meaning, weights or capacities, required witness, predicted frontier or residual transition, and confidence before naming BFS, DFS, Dijkstra, Prim, Kruskal, or an augmenting-path method.",
+    "artifactFocus": "Ask the learner to make one compact graph or source/sink flow sketch, frontier/residual-state trace, parent-path or cut witness, relaxation table, stale-entry trace, conservation check, or independent-verifier check visible, then distinguish the local conclusion from excluded data, representation, snapshot, or runtime claims.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as direction, a parallel edge, a negative edge, a capacity, conservation, reachability of a cycle, weight nonnegativity, residual reversibility, or a stale graph version; then offer the smallest counterexample or witness repair without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use a readable visible-chat whiteboard when available: draw one tiny weighted, unweighted, or capacity network beside a compact frontier/residual-state table or formula, and give a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the requested output fixed but reverse one edge, add a parallel route, make one edge negative, change one capacity, violate or restore conservation, disconnect a component, replace a FIFO queue with a heap, remove a reverse residual edge, or change the snapshot version. Ask for a prediction and confidence before separating the model, invariant, witness/certificate, and cost claims that changed from those that did not.",
+    "taHandoff": "End with the learner's selected M10 artifact, graph or flow contract, predicted state transition, confidence, changed premise, verified or missing witness/cut certificate, one unresolved assumption, and a constructive M11 question for the Teaching Assistant."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m11",
+    "carryArtifact": "Carry a graph-decision card: client question; vertices/edge/direction/multiplicity/weight or capacity policy; representation; frontier or residual schedule; state meanings; invariant; independently checkable path, forest, flow, or cut witness; qualified cost; snapshot/version boundary; confidence; and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M11 selects an algorithmic paradigm, which structural property, counterexample, recurrence state, exchange argument, or graph restriction makes a proposed strategy lawful rather than merely plausible?",
+    "boundary": "M9 is M10's only canonical academic prerequisite and M11 is its only canonical forward handoff. Earlier conceptual connections and later-module references are not route authorization, completion evidence, or permission to bypass M9."
+  }
+}

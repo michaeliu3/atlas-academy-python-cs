@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m11",
+  "purpose": "Bind M11's current workbook, source ledger, Mermaid reader surface, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M11 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m11-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M11 workbook and frozen companion distinguish M10 as the canonical academic prerequisite and M12 as the canonical forward handoff without treating conceptual connections as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "25-backward-and-forward-connections"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m11.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m11-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M11 exposes six ordered sessions that move from formulation and exhaustive evidence through decomposition, dynamic-programming state, pruning, streaming/randomized uncertainty, and an agent-directed strategy defense into M12.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-1--formulate-before-optimizing"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-2--decomposition-and-safe-commitment"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-3--dynamic-programming-as-a-state-dag"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-4--search-pruning-and-state-sufficiency"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-5--randomness-approximation-and-uncertainty"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-6--agent-directed-atlas-strategy-defense"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m11-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M11 derives algorithm selection from candidate space, feasibility, objective, structural assumptions, and evidence rather than from a remembered code template.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "4-first-principle-optimization-has-five-separate-layers"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "5-the-strategy-selection-sheet"}
+      ],
+      "limitations": ["A named first-principles route does not prove conceptual adequacy, a correct derivation, or learner comprehension."]
+    },
+    {
+      "id": "m11-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M11 exposes a candidate definition, explicit objective/tie assumptions, a streaming candidate guarantee, a correctness argument, a greedy counterexample, and bounded numerical comparisons.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "layer-2--candidate"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "layer-4--objective-and-tie-policy"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "correctness-argument"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "atlas-ratio-greedy-fails"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "numerical-experiment--compare-a-fixed-tiny-instance"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, proof ideas, counterexamples, numerical reasoning, or source claims."]
+    },
+    {
+      "id": "m11-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M11 contains distinct planner code-reading, five-handoff architecture-reading, insufficient-state debugging, and bounded agent task/patch-review work.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "16-read-the-planner-in-dependency-order"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "166-architecture-reading-dossier-five-m6m10-handoffs-2030-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "17-debugging-studio--when-a-smaller-state-is-too-small"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "18-bounded-agent-task-and-patch-review"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design an optimization component."]
+    },
+    {
+      "id": "m11-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M11 asks for a confidence-aware prediction about whether selected-set state remains sufficient under a changed premise before revealing the contrast.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "prediction-before-reveal--state-sufficiency-under-a-changed-premise"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m11-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M11 asks the learner to transfer the strategy-selection sheet to database planning and concurrent scheduling rather than merely recognize a named algorithm.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "level-8--transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m11-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M11 exposes learner-facing official reading links and a scoped source/reuse ledger with claim linkage and stopping lines.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "26-sources-and-synthesis-notes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "focused-official-reading-links"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "session-to-source-and-evidence-route"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/arc_ii_source_map.md", "locator": "module-11--algorithm-design-paradigms"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m11-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M11 binds its strategy-selection diagrams to concise Mermaid alternatives, the shared reader, and an M11-specific accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "arc-ii-synthesis-map"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md", "locator": "visual-and-text-alternative-review-boundary"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["The local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m11-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M11 exposes confidence-aware multiple-choice diagnostics, a misconception-repair route, and a constructive response to high-confidence errors.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "21-understanding-check--nine-confidence-aware-mcqs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "misconception-repair-map--claims-before-tactics"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m11-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M11 includes learner-controlled after-two-days, after-one-week, and after-three-weeks retrieval prompts tied to strategy evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "scheduled-retrieval"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m11-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M11 specifies a constructive strategy-defense dossier with a five-handoff architecture-reading page, mastery-evidence prompts, and an evidence rubric rather than a pass/fail exam.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "23-atlas-milestone-11--evidence-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "166-architecture-reading-dossier-five-m6m10-handoffs-2030-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "mastery-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "evidence-rubric--strategy-dossier"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m11-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M11 contains an encouraging conversational oral-defense route with invitation, visible artifact, adaptive hint, changed premise, transfer, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "conversational-oral-defense--m11"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "invitation-and-starting-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "hint-ladder--model-to-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "transfer-turn--m12-boundary"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "reflection--learner-controlled-evidence-summary"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m11.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m11-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M11 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated strategy claim.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m11.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m11-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M11 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m11.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas or code, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m11-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M11 companion carries a bounded strategy dossier into the canonical M12 modules/APIs/types/dependencies handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m11.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M11, or authorization to bypass M12 prerequisites."]
+    },
+    {
+      "id": "m11-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M11 binds its strategy-selection diagrams to the shared accessible Mermaid reader and M11-specific Mermaid accessibility regression; it declares no dedicated studio or executable reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/11_algorithm_design_paradigms.md", "locator": "arc-ii-synthesis-map"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m11-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m11.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m11/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

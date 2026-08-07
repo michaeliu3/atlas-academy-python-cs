@@ -1,0 +1,695 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-cumulative-arc-projects",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
+  "deliveryModel": "36 narrow module slices → six cumulative arc projects → M26 evidence-gated local capstone",
+  "projects": [
+    {
+      "id": "arc-i-project",
+      "title": "Stateful Atlas event ledger",
+      "moduleNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "moduleIds": [
+        "m01",
+        "m02",
+        "m03",
+        "m04",
+        "m05"
+      ],
+      "level": "upper-undergraduate-to-graduate-spine",
+      "premise": "Make a small event ledger explainable from binding to asymptotic cost.",
+      "architecture": "immutable event inputs → state transition functions → invariant checks → trace dossier",
+      "milestones": [
+        "Name values, bindings, frames, representations, and contracts before implementation.",
+        "Add an abstract data type with a proof/cost note and a falsifying test.",
+        "Compare two implementations and defend the smallest design choice."
+      ],
+      "deliveryLoop": [
+        "design brief and learner constraint",
+        "prediction plus confidence",
+        "architecture/state/data-flow sketch",
+        "visible incremental patch or derivation",
+        "test, trace, numerical experiment, or proof check",
+        "changed premise or failure injection",
+        "code review, learner explanation, and evidence card"
+      ],
+      "moduleSlices": [
+        {
+          "moduleId": "m01",
+          "number": 1,
+          "title": "Values, State, and Execution",
+          "scope": "One bounded implementation, trace, proof, or experiment for bindings, object identity, mutation, and frame-local state.",
+          "learnerArtifact": "A reviewed artifact in which you predict an aliasing or mutation trace before seeing the result, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "assignment copies an object or a function can only change its own local names",
+          "boundaryToName": "which behavior follows from Python's data model versus a CPython implementation detail",
+          "transferTarget": "debugging a shared configuration object without adding defensive copies blindly",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m02",
+          "number": 2,
+          "title": "Functions, Recursion, and Induction",
+          "scope": "One bounded implementation, trace, proof, or experiment for a recursive contract joined to its base case, inductive step, and termination measure.",
+          "learnerArtifact": "A reviewed artifact in which you reconstruct a recursive return trace and the corresponding induction argument, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a recursive call is justified merely because its input looks smaller",
+          "boundaryToName": "what fails when the measure does not decrease or the hypothesis is too weak",
+          "transferTarget": "choosing a safe recursive traversal for a tree-shaped input",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m03",
+          "number": 3,
+          "title": "Abstraction, Interfaces, and Abstract Data Types",
+          "scope": "One bounded implementation, trace, proof, or experiment for an abstract data type's behavioral contract separated from its representation invariant.",
+          "learnerArtifact": "A reviewed artifact in which you read one operation and explain how it preserves the invariant without exposing internals, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "public fields and incidental representation details are automatically part of an API",
+          "boundaryToName": "when a representation swap is safe and when an observable behavior breaks substitution",
+          "transferTarget": "designing an adapter around a storage implementation that may change later",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m04",
+          "number": 4,
+          "title": "Logic, Sets, Relations, Graphs, and Proof",
+          "scope": "One bounded implementation, trace, proof, or experiment for precise domains, quantifiers, relations, and proof obligations.",
+          "learnerArtifact": "A reviewed artifact in which you repair a short proof or construct a countermodel for a nearby false statement, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "several examples, a diagram, or a true converse establishes a universal implication",
+          "boundaryToName": "the exact hypothesis needed for the claim and the difference between a finite trace and a proof",
+          "transferTarget": "turning an informal program rule into a relation or invariant worth testing",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m05",
+          "number": 5,
+          "title": "Cost Models and Algorithm Analysis",
+          "scope": "One bounded implementation, trace, proof, or experiment for a cost model with an asymptotic claim, constants, and an input family.",
+          "learnerArtifact": "A reviewed artifact in which you derive a bound from counted operations and defend the model being counted, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "Big-O means approximately equal, or one benchmark establishes an asymptotic result",
+          "boundaryToName": "what a small timing observation cannot distinguish about two growth claims",
+          "transferTarget": "choosing a data representation for a workload with stated operations and limits",
+          "status": "derived-from-companion-guide"
+        }
+      ],
+      "acceptanceCriteria": [
+        "The learner states intent, constraints, and invariant before the patch or derivation.",
+        "Every generated patch, trace, or numerical result is visible and labelled as observed, simulated, assumed, or unverified.",
+        "At least one failure, counterexample, changed premise, or boundary is investigated.",
+        "The learner reviews the final artifact and explains the mechanism plus one remaining uncertainty."
+      ]
+    },
+    {
+      "id": "arc-ii-project",
+      "title": "Indexed retrieval and route planner",
+      "moduleNumbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "moduleIds": [
+        "m06",
+        "m07",
+        "m08",
+        "m09",
+        "m10",
+        "m11"
+      ],
+      "level": "upper-undergraduate-to-graduate-spine",
+      "premise": "Turn representation and algorithm choices into an inspectable retrieval system.",
+      "architecture": "records → sequence/index choices → priority/frontier structures → graph routes → measured trade-off",
+      "milestones": [
+        "Trace one representation through memory, iteration, and update operations.",
+        "Add an index and route strategy with stated invariants and cost bounds.",
+        "Inject an adversarial input and explain why a different strategy wins or loses."
+      ],
+      "deliveryLoop": [
+        "design brief and learner constraint",
+        "prediction plus confidence",
+        "architecture/state/data-flow sketch",
+        "visible incremental patch or derivation",
+        "test, trace, numerical experiment, or proof check",
+        "changed premise or failure injection",
+        "code review, learner explanation, and evidence card"
+      ],
+      "moduleSlices": [
+        {
+          "moduleId": "m06",
+          "number": 6,
+          "title": "Representation, Memory, Sequences, and Linked Structures",
+          "scope": "One bounded implementation, trace, proof, or experiment for the relationship between sequence meaning, concrete storage, locality, and operation cost.",
+          "learnerArtifact": "A reviewed artifact in which you trace a sequence operation through array or linked representation and its ownership changes, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "linked structures are inherently faster or memory representation is invisible to the API",
+          "boundaryToName": "which cost depends on access pattern, allocation, or implementation rather than the abstract ADT",
+          "transferTarget": "diagnosing an unexpected slow path in a queue-like service",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m07",
+          "number": 7,
+          "title": "Stacks, Queues, Iteration, and Lazy Computation",
+          "scope": "One bounded implementation, trace, proof, or experiment for restricted access, deferred computation, and the difference between producing and consuming work.",
+          "learnerArtifact": "A reviewed artifact in which you predict iterator or generator state across a short pull sequence, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a lazy pipeline has already done its work or can be replayed without a new source",
+          "boundaryToName": "when laziness changes memory behavior but not a source's side effects or termination",
+          "transferTarget": "reviewing a streaming ETL path for accidental repeated consumption",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m08",
+          "number": 8,
+          "title": "Hashing, Dictionaries, Sets, and Indexing",
+          "scope": "One bounded implementation, trace, proof, or experiment for equality, hashing, collision handling, and indexing under a workload.",
+          "learnerArtifact": "A reviewed artifact in which you trace lookup or insertion while stating the equality and hash contract, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "hashes uniquely identify values or mutable keys are always safe",
+          "boundaryToName": "the difference between expected lookup cost, adversarial behavior, and a correctness guarantee",
+          "transferTarget": "designing an index for records whose identity rules may evolve",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m09",
+          "number": 9,
+          "title": "Trees, Heaps, Sorting, and Ordered Search",
+          "scope": "One bounded implementation, trace, proof, or experiment for ordered invariants in trees and heaps, plus the property a sorting/search procedure preserves.",
+          "learnerArtifact": "A reviewed artifact in which you walk through one rotation, heap repair, or comparison sequence and state the invariant afterward, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a visually tree-shaped structure is ordered or a sorted output proves a stable/complete algorithm",
+          "boundaryToName": "which ordering property is required and what duplicates or comparator behavior change",
+          "transferTarget": "choosing an ordered structure for scheduling, nearest lookup, or ranked results",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m10",
+          "number": 10,
+          "title": "Graph Algorithms and Network Models",
+          "scope": "One bounded implementation, trace, proof, or experiment for a graph model of vertices, edges, reachability, and the question an algorithm actually answers.",
+          "learnerArtifact": "A reviewed artifact in which you predict a traversal or shortest-path state sequence from an edge list, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a path found by one traversal is automatically shortest, complete, or a flow solution",
+          "boundaryToName": "which edge weights, direction, and graph assumptions make the conclusion legal",
+          "transferTarget": "modeling a dependency, routing, or social-network question without confusing connection with causation",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m11",
+          "number": 11,
+          "title": "Algorithm Design Paradigms: Choosing a Strategy from Structure",
+          "scope": "One bounded implementation, trace, proof, or experiment for algorithm strategy chosen from structure, recurrence, exchange argument, or subproblem state.",
+          "learnerArtifact": "A reviewed artifact in which you reconstruct why greedy, divide-and-conquer, dynamic programming, or search fits one problem, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a strategy that works on examples is justified or dynamic programming just means caching",
+          "boundaryToName": "the structural property or counterexample that rules a tempting strategy in or out",
+          "transferTarget": "critiquing an AI-generated algorithm choice before implementation begins",
+          "status": "derived-from-companion-guide"
+        }
+      ],
+      "acceptanceCriteria": [
+        "The learner states intent, constraints, and invariant before the patch or derivation.",
+        "Every generated patch, trace, or numerical result is visible and labelled as observed, simulated, assumed, or unverified.",
+        "At least one failure, counterexample, changed premise, or boundary is investigated.",
+        "The learner reviews the final artifact and explains the mechanism plus one remaining uncertainty."
+      ]
+    },
+    {
+      "id": "arc-iii-project",
+      "title": "Durable evidence service",
+      "moduleNumbers": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "moduleIds": [
+        "m12",
+        "m13",
+        "m14",
+        "m15",
+        "m16"
+      ],
+      "level": "upper-undergraduate-to-graduate-spine",
+      "premise": "Make a small service evolvable, testable, observable, serializable, and transactional.",
+      "architecture": "typed boundary → domain contract → tests/telemetry → serialized artifact → transactional store",
+      "milestones": [
+        "Separate module/API direction from domain behavior and test seams.",
+        "Repair a seeded defect using an observable contract, not a blind patch.",
+        "Demonstrate one safe migration or transaction rollback and state the boundary."
+      ],
+      "deliveryLoop": [
+        "design brief and learner constraint",
+        "prediction plus confidence",
+        "architecture/state/data-flow sketch",
+        "visible incremental patch or derivation",
+        "test, trace, numerical experiment, or proof check",
+        "changed premise or failure injection",
+        "code review, learner explanation, and evidence card"
+      ],
+      "moduleSlices": [
+        {
+          "moduleId": "m12",
+          "number": 12,
+          "title": "Modules, APIs, Types, and Dependency Direction",
+          "scope": "One bounded implementation, trace, proof, or experiment for dependency direction, interface ownership, and what a module may know or call.",
+          "learnerArtifact": "A reviewed artifact in which you read an import/API path and identify the contract crossing each boundary, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a type annotation or package boundary alone creates a stable architecture",
+          "boundaryToName": "what change would leak through the boundary and which dependency is owned by whom",
+          "transferTarget": "reviewing a proposed integration without letting a UI concern invert the dependency graph",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m13",
+          "number": 13,
+          "title": "Specifications, Testing, Debugging, and Observability",
+          "scope": "One bounded implementation, trace, proof, or experiment for a specification as an observable contract supported by tests, debugging, and scoped observation.",
+          "learnerArtifact": "A reviewed artifact in which you trace a failing test to the claim it does and does not establish, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a green suite proves correctness or a debugger observation is the whole explanation",
+          "boundaryToName": "the missing input, invariant, environment, or regression condition",
+          "transferTarget": "turning an incident report into a minimal reproducer and a lasting test",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m14",
+          "number": 14,
+          "title": "Software Design and Change",
+          "scope": "One bounded implementation, trace, proof, or experiment for design boundaries that make likely change explicit without over-abstracting the present system.",
+          "learnerArtifact": "A reviewed artifact in which you compare two dependency designs and explain the change each makes cheap or risky, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "more layers, patterns, or classes automatically improve maintainability",
+          "boundaryToName": "the actual volatility and evidence that justify a new abstraction",
+          "transferTarget": "reviewing an AI-produced refactor for coupling, test seams, and reversibility",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m15",
+          "number": 15,
+          "title": "Files, Serialization, Packaging, and Delivery",
+          "scope": "One bounded implementation, trace, proof, or experiment for a versioned artifact crossing a serialization, packaging, or delivery boundary.",
+          "learnerArtifact": "A reviewed artifact in which you trace data from in-memory model through encoding, validation, and a consumer contract, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a successful parse proves compatibility or a package install proves reproducibility",
+          "boundaryToName": "the version, schema, environment, and rollback assumptions behind a delivery claim",
+          "transferTarget": "designing a backward-compatible change to a saved learner artifact",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m16",
+          "number": 16,
+          "title": "Relational Data and Transactions",
+          "scope": "One bounded implementation, trace, proof, or experiment for relational invariants, transaction boundaries, and concurrent changes to shared facts.",
+          "learnerArtifact": "A reviewed artifact in which you walk through a failed or retried transaction and name the invariant at each durable step, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a database automatically prevents every race or an application retry is harmless",
+          "boundaryToName": "the isolation, uniqueness, idempotency, and recovery assumptions needed for the claim",
+          "transferTarget": "designing a small enrollment or progress-record update that tolerates retries",
+          "status": "derived-from-companion-guide"
+        }
+      ],
+      "acceptanceCriteria": [
+        "The learner states intent, constraints, and invariant before the patch or derivation.",
+        "Every generated patch, trace, or numerical result is visible and labelled as observed, simulated, assumed, or unverified.",
+        "At least one failure, counterexample, changed premise, or boundary is investigated.",
+        "The learner reviews the final artifact and explains the mechanism plus one remaining uncertainty."
+      ]
+    },
+    {
+      "id": "arc-iv-project",
+      "title": "Failure-aware local protocol",
+      "moduleNumbers": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "moduleIds": [
+        "m17",
+        "m18",
+        "m19",
+        "m20",
+        "m21",
+        "m22"
+      ],
+      "level": "upper-undergraduate-to-graduate-spine",
+      "premise": "Connect machine execution, resources, concurrency, protocols, partial failure, and trust.",
+      "architecture": "process boundary → resource ownership → concurrent actors → framed protocol → failure/authority ledger",
+      "milestones": [
+        "Trace one request across stack, process, resource, and protocol boundaries.",
+        "Add concurrency or async behavior with a history and cancellation contract.",
+        "Threat-model one trust boundary and demonstrate a bounded failure recovery."
+      ],
+      "deliveryLoop": [
+        "design brief and learner constraint",
+        "prediction plus confidence",
+        "architecture/state/data-flow sketch",
+        "visible incremental patch or derivation",
+        "test, trace, numerical experiment, or proof check",
+        "changed premise or failure injection",
+        "code review, learner explanation, and evidence card"
+      ],
+      "moduleSlices": [
+        {
+          "moduleId": "m17",
+          "number": 17,
+          "title": "Computer Architecture and the Execution Stack",
+          "scope": "One bounded implementation, trace, proof, or experiment for the execution stack from source-level intent through machine-level representation and effects.",
+          "learnerArtifact": "A reviewed artifact in which you trace one Python operation across frames, calls, memory, and CPU-level constraints, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "source syntax directly determines one universal machine behavior",
+          "boundaryToName": "the difference between language semantics, a compiler/interpreter mechanism, and a hardware observation",
+          "transferTarget": "explaining why a performance or memory claim needs a named runtime and workload",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m18",
+          "number": 18,
+          "title": "Operating Systems and Resource Mediation",
+          "scope": "One bounded implementation, trace, proof, or experiment for operating-system mediation of processes, memory, files, interruption, and resource lifetime.",
+          "learnerArtifact": "A reviewed artifact in which you read an interruption trace and identify which resource state is durable, recoverable, or unknown, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a process exit, API return, or file close alone proves a complete published result",
+          "boundaryToName": "the ownership, flushing, and recovery evidence needed after failure",
+          "transferTarget": "designing a safe staged write that can be inspected after a crash",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m19",
+          "number": 19,
+          "title": "Concurrency and Parallelism",
+          "scope": "One bounded implementation, trace, proof, or experiment for concurrent histories, ownership, progress guarantees, and the difference between possible and observed schedules.",
+          "learnerArtifact": "A reviewed artifact in which you reconstruct a short interleaving and state the violated or preserved invariant, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a passing run rules out a race or parallelism is merely faster concurrency",
+          "boundaryToName": "what scheduling, visibility, and synchronization guarantees the reasoning needs",
+          "transferTarget": "reviewing a worker-pool change for lost updates or stuck progress",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m20",
+          "number": 20,
+          "title": "Networks and Application Protocols",
+          "scope": "One bounded implementation, trace, proof, or experiment for an application protocol as a sequence of scoped messages, states, and durability claims.",
+          "learnerArtifact": "A reviewed artifact in which you trace one request, response, retry, and timeout without inventing a remote fact, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a local send or HTTP success proves the receiver durably applied the intended effect",
+          "boundaryToName": "the protocol version, idempotency, ordering, and failure assumptions",
+          "transferTarget": "designing a reliable client-visible status for a delayed remote operation",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m21",
+          "number": 21,
+          "title": "Async and Distributed Systems",
+          "scope": "One bounded implementation, trace, proof, or experiment for partial failure, async coordination, and recovery without pretending a distributed system has global certainty.",
+          "learnerArtifact": "A reviewed artifact in which you walk through an event attempt and separate local completion, remote observation, and durable effect, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "retries guarantee delivery exactly once or an awaited call made the whole workflow atomic",
+          "boundaryToName": "the retry, ordering, timeout, and compensation assumptions behind the result",
+          "transferTarget": "choosing a bounded fallback when an external dependency becomes unavailable",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m22",
+          "number": 22,
+          "title": "Security, Privacy & Trust Boundaries",
+          "scope": "One bounded implementation, trace, proof, or experiment for trust boundaries among data, identity, authority, provenance, privacy, and human control.",
+          "learnerArtifact": "A reviewed artifact in which you follow one sensitive action through its actor, capability, data recipient, and audit evidence, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "authentication, encryption, or a trusted vendor automatically establishes authorization and safety",
+          "boundaryToName": "who may act, what is retained, what is reversible, and what evidence is still missing",
+          "transferTarget": "reviewing an agent proposal that requests a new tool or private data source",
+          "status": "derived-from-companion-guide"
+        }
+      ],
+      "acceptanceCriteria": [
+        "The learner states intent, constraints, and invariant before the patch or derivation.",
+        "Every generated patch, trace, or numerical result is visible and labelled as observed, simulated, assumed, or unverified.",
+        "At least one failure, counterexample, changed premise, or boundary is investigated.",
+        "The learner reviews the final artifact and explains the mechanism plus one remaining uncertainty."
+      ]
+    },
+    {
+      "id": "arc-v-project",
+      "title": "Inspectable language-and-evidence assistant",
+      "moduleNumbers": [
+        23,
+        24,
+        25,
+        26
+      ],
+      "moduleIds": [
+        "m23",
+        "m24",
+        "m25",
+        "m26"
+      ],
+      "level": "upper-undergraduate-to-graduate-spine",
+      "premise": "Build an evidence-grounded assistant whose language, runtime, and architectural claims can be defended.",
+      "architecture": "bounded language input → interpreter/runtime evidence → retrieval/claim ledger → human-facing decision surface",
+      "milestones": [
+        "Implement or inspect a bounded evaluator and distinguish language semantics from runtime facts.",
+        "Profile a narrow path and attach evidence to an intelligent-system claim.",
+        "Prepare the M26 capstone architecture defense and open-source stewardship plan."
+      ],
+      "deliveryLoop": [
+        "design brief and learner constraint",
+        "prediction plus confidence",
+        "architecture/state/data-flow sketch",
+        "visible incremental patch or derivation",
+        "test, trace, numerical experiment, or proof check",
+        "changed premise or failure injection",
+        "code review, learner explanation, and evidence card"
+      ],
+      "moduleSlices": [
+        {
+          "moduleId": "m23",
+          "number": 23,
+          "title": "Programming Languages, Interpreters & Bounded Evaluation",
+          "scope": "One bounded implementation, trace, proof, or experiment for the separation of text, syntax tree, evaluation, type/capability boundary, and authority.",
+          "learnerArtifact": "A reviewed artifact in which you parse and evaluate a small expression while naming the permitted language and environment, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "parsing validates safety or restricting syntax automatically controls capabilities",
+          "boundaryToName": "the language, evaluation, resource, and authority limits that must be independently enforced",
+          "transferTarget": "designing a bounded rule language for a learner-facing automation",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m24",
+          "number": 24,
+          "title": "CPython, Performance & Memory Evidence",
+          "scope": "One bounded implementation, trace, proof, or experiment for the boundary between a Python guarantee, CPython mechanism, and scoped benchmark observation.",
+          "learnerArtifact": "A reviewed artifact in which you read a measurement and reconstruct its workload, runtime, baseline, and limitation, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "one benchmark or profiler output proves a portable performance claim",
+          "boundaryToName": "which version, allocator, workload, hardware, and statistical limits prevent generalization",
+          "transferTarget": "reviewing an optimization proposal before approving it for the course portal",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m25",
+          "number": 25,
+          "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
+          "scope": "One bounded implementation, trace, proof, or experiment for an evidence-grounded decision that keeps model output, authority, uncertainty, and human control distinct.",
+          "learnerArtifact": "A reviewed artifact in which you trace one suggestion from input through model/evidence, display policy, and a reversible human decision, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a high score, agent explanation, or green evaluation creates permission to act",
+          "boundaryToName": "the data lineage, evaluation scope, owner, consent, and rollback evidence needed for release",
+          "transferTarget": "writing a bounded AI-assisted feature contract with a meaningful refusal or correction path",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m26",
+          "number": 26,
+          "title": "Systems Capstone, Open-Source Stewardship & Oral Architecture Defense",
+          "scope": "One bounded implementation, trace, proof, or experiment for a release argument joining architecture, invariant, test/observation, human impact, limitation, and rollback.",
+          "learnerArtifact": "A reviewed artifact in which you defend one architecture thread while a reviewer changes a premise or removes an evidence source, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a polished demo, CI pass, or agent-generated dossier is a release decision",
+          "boundaryToName": "the owner, recovery path, uncertainty, and changed constraint that should narrow, defer, or disable the release",
+          "transferTarget": "handing the system to a maintainer who did not build it and can still challenge its claims",
+          "status": "derived-from-companion-guide"
+        }
+      ],
+      "acceptanceCriteria": [
+        "The learner states intent, constraints, and invariant before the patch or derivation.",
+        "Every generated patch, trace, or numerical result is visible and labelled as observed, simulated, assumed, or unverified.",
+        "At least one failure, counterexample, changed premise, or boundary is investigated.",
+        "The learner reviews the final artifact and explains the mechanism plus one remaining uncertainty."
+      ]
+    },
+    {
+      "id": "arc-vi-vii-project",
+      "title": "Mathematical and reliable-learning notebook",
+      "moduleNumbers": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "moduleIds": [
+        "m27",
+        "m28",
+        "m29",
+        "m30",
+        "m31",
+        "m32",
+        "m33",
+        "m34",
+        "m35",
+        "m36"
+      ],
+      "level": "graduate-depth-scoped",
+      "premise": "Carry assumptions, representations, optimization, theory, learning, and reliability through one evidence notebook.",
+      "architecture": "formal object → numerical/algorithmic experiment → assumption ledger → learning claim → reliability boundary",
+      "milestones": [
+        "Derive a discrete, linear, continuous, probabilistic, and optimization claim with hypotheses.",
+        "Connect systems/theory/AI fixtures to one measurable representation or decision boundary.",
+        "Audit generalization, shift, reproducibility, and model-risk non-claims before synthesis."
+      ],
+      "deliveryLoop": [
+        "design brief and learner constraint",
+        "prediction plus confidence",
+        "architecture/state/data-flow sketch",
+        "visible incremental patch or derivation",
+        "test, trace, numerical experiment, or proof check",
+        "changed premise or failure injection",
+        "code review, learner explanation, and evidence card"
+      ],
+      "moduleSlices": [
+        {
+          "moduleId": "m27",
+          "number": 27,
+          "title": "Discrete Mathematics, Proof, Counting & Structures",
+          "scope": "One bounded implementation, trace, proof, or experiment for definitions, quantifiers, induction/invariants, counting structure, and a minimal counterexample.",
+          "learnerArtifact": "A reviewed artifact in which you reconstruct a proof or recurrence argument, then distinguish it from a finite Python trace, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "examples prove universals or a recurrence is complete without bases and a domain",
+          "boundaryToName": "the missing quantifier, base case, invariant, or hypothesis that makes a claim false",
+          "transferTarget": "using proof structure to audit a graph, scheduling, or AI-generated correctness claim",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m28",
+          "number": 28,
+          "title": "Linear Algebra, Numerical Stability & Representation",
+          "scope": "One bounded implementation, trace, proof, or experiment for linear maps, projections, rank, spectra, and conditioning as a model of representable information.",
+          "learnerArtifact": "A reviewed artifact in which you derive least squares, a projection, or PCA from its assumptions, then audit one shape/dtype/solver path and finite-precision boundary, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a matrix formula automatically yields a stable computation or PCA is merely an API call",
+          "boundaryToName": "the conditioning, scale, rank, and approximation assumptions behind the numerical result",
+          "transferTarget": "critiquing a representation-reduction choice in an ML or scientific workflow",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m29",
+          "number": 29,
+          "title": "Calculus, Real Analysis & Continuous Change",
+          "scope": "One bounded implementation, trace, proof, or experiment for a continuous-change claim joining domain/metric, local map or accumulation, and a named convergence or numerical-error condition.",
+          "learnerArtifact": "A reviewed artifact in which you derive a limit/Taylor/Jacobian/change-of-variables or convergence step, then audit one shape, unit, dtype, step, tolerance, or solver trace, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a pointwise limit is automatically uniform, a partial derivative proves differentiability, or a finite numerical trace licenses an operation exchange",
+          "boundaryToName": "the continuity, differentiability, region/injectivity, convergence, regularity, and finite-precision assumptions that can fail",
+          "transferTarget": "deciding whether a scientific simulation, optimization update, or expectation manipulation is justified in a new model",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m30",
+          "number": 30,
+          "title": "Probability, Statistics & Scientific Inference",
+          "scope": "One bounded implementation, trace, proof, or experiment for probability models, conditional structure, inference, uncertainty, and sampling assumptions.",
+          "learnerArtifact": "A reviewed artifact in which you derive a Bayes, likelihood, confidence, or concentration argument before simulating it, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a p-value, interval, posterior, or Monte Carlo output answers a stronger question than its model permits",
+          "boundaryToName": "the sampling, independence, missingness, misspecification, and multiple-testing assumptions",
+          "transferTarget": "designing an experiment or model evaluation with a credible uncertainty statement",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m31",
+          "number": 31,
+          "title": "Optimization & Information",
+          "scope": "One bounded implementation, trace, proof, or experiment for an objective, constraints, geometry, convergence path, and information quantity with assumptions.",
+          "learnerArtifact": "A reviewed artifact in which you derive a first-order/KKT or entropy/KL step and connect it to a computational consequence, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "an optimizer's decrease proves a good solution or information metrics are interchangeable scores",
+          "boundaryToName": "the convexity, smoothness, feasibility, scale, and numerical assumptions behind a convergence claim",
+          "transferTarget": "choosing a loss, constraint, or stopping rule for an evidence-bearing system",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m32",
+          "number": 32,
+          "title": "Systems Languages, Scientific Python & Accelerators",
+          "scope": "One bounded implementation, trace, proof, or experiment for cross-layer execution from array layout and lower-level code through autodiff, accelerators, and distributed work.",
+          "learnerArtifact": "A reviewed artifact in which you trace one scientific Python operation through memory layout, kernel work, precision, and reproducibility evidence, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "vectorization or a GPU automatically makes code faster, correct, or reproducible",
+          "boundaryToName": "the layout, transfer, precision, synchronization, and environment assumptions behind the observation",
+          "transferTarget": "reviewing an accelerator optimization without losing a numerical or testing boundary",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m33",
+          "number": 33,
+          "title": "Formal Languages, Computability & Complexity",
+          "scope": "One bounded implementation, trace, proof, or experiment for language recognition, computation models, reductions, and the boundary between solvable, efficient, and approximable.",
+          "learnerArtifact": "A reviewed artifact in which you classify a small language or reconstruct a reduction while preserving the yes/no relationship, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "NP means impossible, a parser solves every language question, or a hard instance proves a class claim",
+          "boundaryToName": "the computational model, input encoding, reduction direction, and resource definition",
+          "transferTarget": "rejecting an unrealistic claim about an AI agent, verifier, or optimization problem",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m34",
+          "number": 34,
+          "title": "Classical AI: Search, Constraints & Decision",
+          "scope": "One bounded implementation, trace, proof, or experiment for problem formulation before method: state, actions, constraints, uncertainty, utility, and heuristic assumptions.",
+          "learnerArtifact": "A reviewed artifact in which you defend an A*, CSP, planning, or decision step from the model and admissibility/independence assumptions, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a search algorithm's name determines correctness or a high-scoring plan is automatically optimal/safe",
+          "boundaryToName": "the state abstraction, heuristic, objective, and uncertainty assumptions that change the result",
+          "transferTarget": "formulating a real decision problem before selecting a solver or model",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m35",
+          "number": 35,
+          "title": "Machine Learning & Representation",
+          "scope": "One bounded implementation, trace, proof, or experiment for learning as a scoped empirical-risk and representation claim with data, evaluation, and deployment boundaries.",
+          "learnerArtifact": "A reviewed artifact in which you read a model/evaluation path and identify splits, baseline, objective, error pattern, and uncertainty, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a strong validation metric proves generalization, fairness, calibration, or causal usefulness",
+          "boundaryToName": "the leakage, shift, imbalance, label, selection, and deployment assumptions that can invalidate the result",
+          "transferTarget": "choosing an evaluation and error-analysis plan for a new prediction or representation task",
+          "status": "derived-from-companion-guide"
+        },
+        {
+          "moduleId": "m36",
+          "number": 36,
+          "title": "Statistical Learning Theory & Reliable Deep-Learning Systems",
+          "scope": "One bounded implementation, trace, proof, or experiment for a conditional finite-class or PAC generalization claim, or a scoped margin-bound reading, tied to a hypothesis class, assumptions, observable evidence, and system limits.",
+          "learnerArtifact": "A reviewed artifact in which you reconstruct a finite-class Hoeffding-plus-union-bound proof idea, PAC quantifier order, or margin-bound scope and its non-deployment consequence, with one assumption, one changed-premise result, and one non-claim.",
+          "misconceptionToRepair": "a theorem proves a deployed model will work or a benchmark score demonstrates the theorem's assumptions",
+          "boundaryToName": "the distribution, class, sample, optimization, and implementation assumptions that prevent overclaiming",
+          "transferTarget": "deciding whether a theoretical guarantee should change a model-release or monitoring decision",
+          "status": "derived-from-companion-guide"
+        }
+      ],
+      "acceptanceCriteria": [
+        "The learner states intent, constraints, and invariant before the patch or derivation.",
+        "Every generated patch, trace, or numerical result is visible and labelled as observed, simulated, assumed, or unverified.",
+        "At least one failure, counterexample, changed premise, or boundary is investigated.",
+        "The learner reviews the final artifact and explains the mechanism plus one remaining uncertainty."
+      ]
+    }
+  ],
+  "capstone": {
+    "id": "m26-local-capstone",
+    "moduleId": "m26",
+    "status": "evidence-gated-preview",
+    "title": "Atlas evidence-grounded learning system",
+    "premise": "Integrate the arc outputs into a local-first, auditable learning system and defend its architecture, evidence boundaries, privacy controls, and stewardship decisions.",
+    "requiredInputs": [
+      "arc-i-project",
+      "arc-ii-project",
+      "arc-iii-project",
+      "arc-iv-project",
+      "arc-v-project",
+      "arc-vi-vii-project"
+    ],
+    "definitionOfDone": [
+      "A reviewable architecture and data-flow map connects the arc outputs.",
+      "The learner can trace one claim from source or experiment to a bounded user-facing decision.",
+      "Privacy, accessibility, safety, provenance, and failure boundaries are explicit.",
+      "The learner conducts a constructive oral architecture defense and records uncertainty without a pass/fail label."
+    ]
+  }
+}

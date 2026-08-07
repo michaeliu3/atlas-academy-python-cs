@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m01",
+  "purpose": "Bind M1's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M1 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m01-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M1 workbook names its required reading prerequisites and its canonical M2 forward handoff without treating conceptual later-module connections as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "prerequisites"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "retrieval-ready-when-and-forward-handoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m01-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M1 exposes six ordered sessions that move from an aliasing trace through call environments, contracts, code reading, a supportive TA discussion, and an M2 handoff dossier.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "session-1--the-mystery-of-the-changing-record"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "session-2--evaluation-calls-and-environments"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "session-3--contracts-and-invariants"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "session-4--code-reading-and-investigation-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "session-5--ta-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "session-6--mastery-check-and-synthesis"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m01-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M1 begins from the distinction among objects, bindings, mutation, observation, and contracts before proposing a repair for shared state.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "first-principles-derivation--named-state-makes-behavior-inspectable"}
+      ],
+      "limitations": ["A named first-principles section does not prove conceptual adequacy, implementation correctness, or learner comprehension."]
+    },
+    {
+      "id": "m01-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M1 exposes separate definition, assumption, derivation/proof idea, counterexample, and bounded alias-count experiment locations for inspecting its state model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "definition--objects-names-bindings-and-state"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "assumption--what-one-trace-does-and-does-not-establish"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "derivation-and-proof-idea--why-aliases-matter"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "counterexample--equal-values-can-still-be-different-objects"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "numerical-experiment--count-aliases-not-speed"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical checks, or source claims."]
+    },
+    {
+      "id": "m01-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M1 contains distinct code-reading, delayed-alias debugging, and smallest-repair design tasks centred on three inspectable event-log implementations.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "code-reading--three-implementations-one-state-question"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "debugging--predict-a-delayed-failure-before-the-reveal"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "design--keep-the-smallest-repair-that-establishes-the-boundary"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a stateful program."]
+    },
+    {
+      "id": "m01-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M1 asks the learner to predict a lexical-scope trace and record confidence before opening the reveal.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "prediction-before-reveal--lexical-scope-is-a-binding-trace"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m01-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M1 asks the learner to transfer a read–compute–write state model into a later concurrency review without claiming the later module's mechanisms.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "question-8--patch-review-and-concurrency-transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m01-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M1 exposes a learner reading route plus a scoped canonical source map and module-specific source/reuse audit addendum.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "sources-and-further-study"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/python_curriculum_sources.md", "locator": "m1m5-learner-calibration-route"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module1_values_state_execution_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m01-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M1 binds its visual state-transition route to a concise text alternative and the shared Mermaid reader plus module-specific accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "visual-map-of-the-module"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "text-alternative--trace-the-state-transition-without-the-diagram"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m01-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M1 exposes a confidence-aware understanding check and a misconception routing map rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "understanding-check--eight-confidence-aware-questions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "misconception-routing"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m01-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M1 includes a learner-controlled +1, +7, and +21 day retrieval route tied to the M2 handoff evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "retrieval-ready-when-and-forward-handoff"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m01-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M1 specifies an event-log state dossier with a constructive evidence rubric and explicit acceptance criteria.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "atlas-milestone-1"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "project-acceptance-criteria"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "evidence-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m01-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M1 contains an encouraging conversational oral-defense protocol with invitation, hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "teaching-assistant--supportive-oral-defense"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "hint-ladder--repair-one-trace-at-a-time"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "transfer--from-one-event-log-to-a-later-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "invitation--name-your-current-model"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m01-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M1 companion binds a Teaching Assistant opening, artifact focus, and repair move to the object/binding and ownership boundary.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m01.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m01-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M1 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m01.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m01-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M1 companion carries a bounded state-evidence card into the canonical M2 call-frame handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m01.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M1, or authorization to bypass M2 prerequisites."]
+    },
+    {
+      "id": "m01-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M1 binds the accessible Mermaid rendering surface and its direct module accessibility test to the workbook's visual state-transition route; M1 declares no separate executable studio or reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/01_values_state_execution.md", "locator": "visual-map-of-the-module"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m01-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m01.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m01/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

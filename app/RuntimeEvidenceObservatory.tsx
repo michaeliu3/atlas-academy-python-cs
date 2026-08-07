@@ -6,6 +6,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule24Progress,
+  persistModule24Progress,
+  restoreModule24Progress,
+} from "@/lib/module24-progress-codec";
 import styles from "./RuntimeEvidenceObservatory.module.css";
 
 type ObservatoryView =
@@ -23,7 +29,6 @@ type ViewRecord = {
 };
 type ObservatoryRecord = Record<ObservatoryView, ViewRecord>;
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module24-runtime-observatory.v1";
 const CORE_RULE =
   "An optimization is accepted only after semantic behavior, privacy/retention boundaries, implementation scope, and a controlled measurement are kept distinct. A number is evidence only for the question and manifest that produced it.";
 
@@ -70,15 +75,6 @@ const views: ReadonlyArray<{
     question: "Should Atlas accept, reject, or defer the patch?",
   },
 ];
-
-const choiceIdsByView: Record<ObservatoryView, ReadonlyArray<string>> = {
-  contract: ["semantic", "timing", "global"],
-  graph: ["audit", "deleted", "address"],
-  cycle: ["model", "resource", "immediate"],
-  lens: ["traced", "rss", "all"],
-  runtime: ["pinned", "language", "speed"],
-  decision: ["defer", "accept", "ignore"],
-};
 
 const claimLayers = [
   {
@@ -162,35 +158,6 @@ function tabId(view: ObservatoryView) {
 
 function panelId(view: ObservatoryView) {
   return "runtime-observatory-panel-" + view;
-}
-
-function isViewRecord(value: unknown, view: ObservatoryView): value is ViewRecord {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
-  const record = value as Record<string, unknown>;
-  const allowed = ["choice", "confidence", "revealed"];
-  if (Object.keys(record).length !== allowed.length || Object.keys(record).some((key) => !allowed.includes(key))) {
-    return false;
-  }
-  const validChoice =
-    record.choice === null ||
-    (typeof record.choice === "string" && choiceIdsByView[view].includes(record.choice));
-  const validConfidence =
-    record.confidence === null || [1, 2, 3, 4].includes(record.confidence as number);
-  const validReveal =
-    typeof record.revealed === "boolean" &&
-    (!record.revealed || (record.choice !== null && record.confidence !== null));
-  return validChoice && validConfidence && validReveal;
-}
-
-function isObservatoryRecord(value: unknown): value is ObservatoryRecord {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
-  const record = value as Record<string, unknown>;
-  const ids = views.map((view) => view.id);
-  return (
-    Object.keys(record).length === ids.length &&
-    Object.keys(record).every((key) => ids.includes(key as ObservatoryView)) &&
-    views.every((view) => isViewRecord(record[view.id], view.id))
-  );
 }
 
 function EvidenceLock() {
@@ -567,7 +534,7 @@ function RuntimeView({
     source: ["trusted source", "A small bundled function is a language-level input to a compiler path; it is not learner-supplied code."],
     code: ["code object route", "A code object is an implementation bridge. Its representation is not the Python language specification."],
     frame: ["frame observation", "Frames make execution context inspectable in a scoped CPython/debugging setting, not a general safety boundary."],
-    bytecode: ["CPython 3.14.6 bytecode card", "Instruction names and adaptive behavior are version-pinned implementation evidence—not cross-VM law or a speed result."],
+    bytecode: ["CPython 3.14.6 illustrative bytecode card", "This static teaching sequence is illustrative, not a captured disassembly from the browser or learner runtime. A real bytecode observation needs recorded dis options, output, and implementation/version."],
     measurement: ["controlled measurement", "A timing/allocation conclusion needs a workload, build, warm-up, GC, samples, metric scope, and confounders."],
   } as const;
   const [title, copy] = stages[stage];
@@ -575,13 +542,13 @@ function RuntimeView({
     <div className={styles.viewStack}>
       <PredictionGate
         choices={[
-          { id: "pinned", label: "A bytecode card supports a version-pinned CPython observation whose speed effect still needs experiment evidence." },
+          { id: "pinned", label: "An illustrative bytecode card names the evidence a version-pinned CPython observation would need; its speed effect still needs experiment evidence." },
           { id: "language", label: "A bytecode instruction is Python-language semantics for all implementations." },
           { id: "speed", label: "A specialized instruction proves every workload is faster." },
         ]}
         id="runtime"
         onChange={onChange}
-        question="What does a version-labelled CPython bytecode observation establish?"
+        question="What would a version-labelled CPython bytecode observation establish once it is actually captured?"
         record={record}
       />
       {record.revealed && (
@@ -602,12 +569,12 @@ function RuntimeView({
             ))}
           </div>
           <div className={styles.runtimeReadout}>
-            <span>[{stage === "bytecode" ? "CPYTHON 3.14.6 OBSERVATION" : stage === "measurement" ? "MANIFEST REQUIRED" : "SCOPED ROUTE"}]</span>
+            <span>[{stage === "bytecode" ? "ILLUSTRATIVE CPYTHON 3.14.6 CARD" : stage === "measurement" ? "MANIFEST REQUIRED" : "SCOPED ROUTE"}]</span>
             <h4>{title}</h4>
             <p>{copy}</p>
             <code>
               {stage === "bytecode"
-                ? "RESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE"
+                ? "illustrative: RESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE (not captured output)"
                 : stage === "measurement"
                   ? "runtime + build + workload + warm-up + GC + metric + samples"
                   : "trusted source → compiler / interpreter implementation boundary"}
@@ -702,17 +669,18 @@ export function RuntimeEvidenceObservatory() {
     runtime: null,
     decision: null,
   });
+  const progressDirtyRef = useRef(false);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const parsed: unknown = JSON.parse(raw);
-          if (isObservatoryRecord(parsed)) setRecords(parsed);
+        const storage = getBrowserProgressStorage();
+        if (storage) {
+          const stored = restoreModule24Progress(storage);
+          if (stored) setRecords(stored as ObservatoryRecord);
         }
       } catch {
-        // Progress is optional and intentionally contains only answer/confidence state.
+        // Progress is optional and contains only allowlisted local prediction evidence.
       } finally {
         setStorageReady(true);
       }
@@ -721,15 +689,19 @@ export function RuntimeEvidenceObservatory() {
   }, []);
 
   useEffect(() => {
-    if (!storageReady) return;
+    if (!storageReady || !progressDirtyRef.current) return;
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(records));
+      const storage = getBrowserProgressStorage();
+      if (storage) persistModule24Progress(storage, records);
     } catch {
       // The observatory remains useful if local storage is unavailable.
+    } finally {
+      progressDirtyRef.current = false;
     }
   }, [records, storageReady]);
 
   const updateRecord = (view: ObservatoryView, next: Partial<ViewRecord>) => {
+    progressDirtyRef.current = true;
     setRecords((current) => ({
       ...current,
       [view]: { ...current[view], ...next },
@@ -737,9 +709,11 @@ export function RuntimeEvidenceObservatory() {
   };
 
   const resetProgress = () => {
+    progressDirtyRef.current = false;
     setRecords(emptyRecord());
     try {
-      window.localStorage.removeItem(STUDIO_STORAGE_KEY);
+      const storage = getBrowserProgressStorage();
+      if (storage) clearModule24Progress(storage);
     } catch {
       // Local persistence is optional.
     }
@@ -785,7 +759,14 @@ export function RuntimeEvidenceObservatory() {
         <div>
           <span>Exploration coverage: revealed runtime-evidence views</span>
           <strong>{revealed} / {views.length}</strong>
-          <div className={styles.coverageMeter} aria-label={"Exploration coverage: revealed runtime-evidence views " + revealed + " of " + views.length}>
+          <div
+            aria-label={"Exploration coverage: revealed runtime-evidence views " + revealed + " of " + views.length}
+            aria-valuemax={views.length}
+            aria-valuemin={0}
+            aria-valuenow={revealed}
+            className={styles.coverageMeter}
+            role="progressbar"
+          >
             <span style={{ width: (revealed / views.length) * 100 + "%" }} />
           </div>
         </div>
@@ -832,9 +813,10 @@ export function RuntimeEvidenceObservatory() {
 
       <footer className={styles.footer}>
         <p>
-          <strong>Hand off:</strong> Module 25 applies the same distinction
-          between model, measurement, policy, and human decision to
-          recommendations, scores, and AI-agent proposals.
+          <strong>Hand off:</strong> Module 32 is authoring-only, so this
+          runtime-evidence route ends here rather than unlocking a next Core
+          module. M25/M26 reuse this distinction only as later preview-only
+          synthesis after M31–M36; they are not a direct Module 24 path.
         </p>
         <a href="#module-reading-article">Read the complete Module 24 workbook</a>
       </footer>

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-08-05",
+  "outputPath": "docs/GOAL_COMPLIANCE_MATRIX.md",
+  "historyPath": "docs/GOAL_COMPLIANCE_HISTORY.md",
+  "truth": {
+    "lastFullGate": {
+      "state": "success",
+      "commit": "208d296d63793814906ee218876546e7736a829b",
+      "date": "2026-08-05",
+      "runId": "31009811465",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465",
+      "note": "Latest normal non-draft pull-request Course CI gate on commit 208d296; portal quality, 423/423 Node apparatus tests, Python 3.12/3.14 teaching models, and 63/63 Chromium accessibility routes passed. The pull-request head-SHA Actions correction and its regression test are covered by this gate. This is automated gate evidence, not module promotion, private deployment, or learner mastery."
+    },
+    "currentDraftContent": {
+      "state": "success",
+      "commit": "3e76de40980ecc6b76a8933b2fff53cd6487639f",
+      "date": "2026-08-05",
+      "runId": "30994244025",
+      "pass": 96,
+      "fail": 0,
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/30994244025",
+      "note": "Latest recorded content-bearing Draft evidence after the current dependency-alert and compliance-matrix refresh; the 96-test content suite passed. This is not a full-gate result; apparatus and browser jobs remain reserved for a non-draft gate."
+    },
+    "lastFullGateApparatus": {
+      "state": "success",
+      "pass": 423,
+      "fail": 0,
+      "runId": "31009811465",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465",
+      "note": "Latest recorded non-draft apparatus job passed all 423 tests on the 208d296 merge candidate. This is automated evidence, not module promotion or learner mastery."
+    },
+    "lastFullGateBrowser": {
+      "state": "success",
+      "pass": 63,
+      "fail": 0,
+      "runId": "31009811465",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31009811465",
+      "note": "Latest recorded non-draft Chromium/axe job passed all 63 audited routes on the 208d296 merge candidate; representative assistive-technology review remains waived for the build phase."
+    },
+    "reviewReadyRef": {
+      "state": "ready-for-review",
+      "commit": "9242f79d53b1ec5d4b49e0ee6b113624b2435cec",
+      "date": "2026-08-05",
+      "prNumber": 22,
+      "runId": "31012232860",
+      "checkState": "success",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/pull/22",
+      "note": "Current review-ready ref 9242f79 passed every required Course CI context in run 31012232860; this provenance-only successor used the explicit lightweight paths for unchanged apparatus, Python, and browser suites. The last full execution gate remains 208d296/run 31009811465."
+    },
+    "latestSuccessorCheck": {
+      "state": "success",
+      "commit": "dc5f84b32a90ab147e75e480a4c192f069e4150f",
+      "date": "2026-08-05",
+      "prNumber": 22,
+      "runId": "31023165133",
+      "checkState": "success",
+      "url": "https://github.com/michaeliu3/atlas-academy-python-cs/actions/runs/31023165133",
+      "note": "Latest audited PR #22 successor dc5f84b passed every required Course CI context in run 31023165133, including portal quality, 423/423 Node apparatus tests, both Python teaching-model legs, and the documented browser acceptance path. This is a successor check, not a complete Chromium execution, module promotion, deployment, or learner-mastery claim; the last complete full gate remains 208d296/run 31009811465."
+    },
+    "openRedTests": {
+      "count": 0,
+      "items": [],
+      "basis": "Latest recorded normal non-draft Course CI run 31009811465 passed the full 423-test Node apparatus suite. This does not promote legacy modules or prove learner outcomes."
+    },
+    "openAxeViolations": {
+      "count": 0,
+      "state": "none-detected",
+      "basis": "Latest recorded normal non-draft browser job in run 31009811465 passed 63/63 Chromium/axe routes. The current authored Mermaid scan reports 246/246 complete."
+    },
+    "openDependencyAlerts": {
+      "count": 2,
+      "branch": "main",
+      "asOf": "2026-08-05",
+      "evidence": "docs/DEPENDENCY_RISK_REGISTER.md; latest authenticated GitHub Dependabot API readback 2026-08-05 on main 33fadbd49b0e33900f21aba06ed40845c3cbd641 (2 open: 1 high, 1 medium; fast-uri and postcss)"
+    }
+  },
+  "requirements": [
+    {
+      "id": "delivery-boundary",
+      "requirement": "Portal is a reference companion; designated TA and Study Partner chats are the course.",
+      "state": "complete",
+      "evidence": "app/route/page.tsx; docs/LIVE_CODEX_LEARNING_WORKFLOW.md; tests/guided-route-handoffs.test.mjs; tests/rendered-html.test.mjs",
+      "openItem": "Recheck the first-screen wording whenever route copy changes."
+    },
+    {
+      "id": "canonical-route-truth",
+      "requirement": "One graph separates academic prerequisites, navigation, availability, and release state.",
+      "state": "complete",
+      "evidence": "content/course/course-graph.v2.json; scripts/course-graph.mjs; tests/canonical-projection-integrity.test.mjs; tests/course-graph.test.mjs; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
+      "openItem": "Manifest, route, generated-status, and rendered route parity pass deterministic checks; human visual/dashboard review is waived for this content/infrastructure goal."
+    },
+    {
+      "id": "module-contract",
+      "requirement": "Every declared study pack passes the authored-content contract; promotion/release evidence is a separate later boundary.",
+      "state": "complete",
+      "evidence": "content/course/contracts/module-contract-registry.v3.json; content/course/contracts/legacy-module-contract-audit.v1.json; docs/LEGACY_MODULE_CONTRACT_AUDIT.md; docs/CONTENT_AUTHORING.md; scripts/module-contract-registry.mjs; scripts/validate-course.mjs; tests/course-contract.test.mjs; tests/module-contract-registry.test.mjs; tests/math-candidate-preflight.test.mjs",
+      "openItem": "The focused authored-content gate passes all 36 packs across the first 16 instructional criteria, with only the intentional M25/M26 prerequisite-map ambiguities; optional studios and promotion/release evidence remain explicitly separate and are not claimed."
+    },
+    {
+      "id": "advanced-packs",
+      "requirement": "M31–M36 are complete private-chat teaching packs and remain hidden from the portal.",
+      "state": "complete",
+      "evidence": "content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; content/source-maps/; content/course/course-graph.v2.json; content/course/contracts/advanced-module-contracts.v1.json; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; tests/advanced-source-ledger-audit.test.mjs; docs/research/m31-m36-study-ready-gap-audit.md; tests/module35-36-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
+      "openItem": "The advanced source-ledger audit binds every planned source and claim marker for M31–M36 and preserves access/reuse boundaries; human visual/code-density review and module promotion are waived/out-of-scope here."
+    },
+    {
+      "id": "synthesis-boundary",
+      "requirement": "M25/M26 remain preview-only and unlock privately only on real upstream evidence.",
+      "state": "complete",
+      "evidence": "content/course/course-graph.v2.json; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md; tests/m25-m26-synthesis-receipts.test.mjs",
+      "openItem": "Structural re-entry, prerequisite, licensing, and versioning checks pass; M25/M26 remain preview-gated and later promotion is out-of-scope."
+    },
+    {
+      "id": "levels-1-9",
+      "requirement": "Levels 1–9 show target capability, portal delivery, and private-chat delivery as separate facts.",
+      "state": "complete",
+      "evidence": "content/course/course-graph.v2.json; content/course/levels-1-9-delivery-baseline.v1.json; app/route/ScopeMatrix.tsx; tests/levels-1-9-scope-matrix-integrity.test.mjs; tests/levels-1-9-coverage.test.mjs; tests/course-status-projection.test.mjs; tests/rendered-html.test.mjs",
+      "openItem": "Structural integrity of all 63 topic rows is automated, and the delivery baseline records reviewed coverage per level with machine-checkable absence probes. Structural anchoring overstates delivery at Levels 6–9, where every target is anchored to a reader-visible module but none of the subject is taught; the baseline records that gap explicitly. Levels 5–9 remain undelivered pending M37–M42 authoring."
+    },
+    {
+      "id": "mathematics-statistics",
+      "requirement": "M28–M31 cover the specified linear algebra, analysis, statistics, optimization, and information theory spine.",
+      "state": "complete",
+      "evidence": "content/modules/28_linear_algebra_numerical_stability_representation.md; content/modules/29_calculus_real_analysis_continuous_change.md; content/modules/30_probability_statistics_scientific_inference.md; content/authoring/m31_optimization_information_workbook.v1.md; content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md; content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md; content/source-maps/module30_probability_statistics_scientific_inference_source_map.md; content/source-maps/module31_optimization_information_source_map.md; tests/m28-m31-mathematical-spine.test.mjs; tests/m30-statistics-breadth.test.mjs",
+      "openItem": "The automated M28–M31 spine audit covers the named linear-algebra, calculus/analysis, probability/statistics, optimization, and information-theory topics, including data-processing, maximum-entropy, and coding interpretations; human theorem/derivation review is waived, and high-dimensional/robust depth remains explicitly in Extension 1."
+    },
+    {
+      "id": "theory-computation",
+      "requirement": "M33 teaches the named formal-language, computability, and complexity breadth.",
+      "state": "complete",
+      "evidence": "content/authoring/m33_formal_languages_computability_complexity_workbook.v1.md; tests/module33-breadth.test.mjs; tests/m31-m36-pedagogy.test.mjs",
+      "openItem": "Breadth, graduated ladder, and per-distractor repair checks pass structurally; human/source review and promotion evidence are waived/out-of-scope."
+    },
+    {
+      "id": "systems-ai-ml",
+      "requirement": "M32–M36 connect systems, classical AI, ML, and learning-theory reasoning with honest boundaries.",
+      "state": "complete",
+      "evidence": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md; content/authoring/m34_classical_ai_search_constraints_decision_workbook.v1.md; content/source-maps/module34_classical_ai_search_constraints_decision_source_research.md; content/course/contracts/advanced-module-contracts.v1.json; tests/advanced-source-ledger-audit.test.mjs; tests/m34-classical-ai-reference-fixture.test.mjs; tests/module34-primary-research.test.mjs; tests/module35-36-breadth.test.mjs",
+      "openItem": "M32 names lower-level Python/native boundaries, mixed precision, and distributed data-parallel contracts; M34 has bounded first-order resolution, Bayesian-network/HMM, POMDP, and game-theory cards with S34-20–S34-22 source routing. Source-ledger markers are structurally bound; human/source review and promotion evidence are waived/out-of-scope."
+    },
+    {
+      "id": "pedagogy",
+      "requirement": "M31–M36 have six connected sessions, problem ladders, per-distractor repair, code/visual work, and constructive oral defense.",
+      "state": "complete",
+      "evidence": "content/course/contracts/authoring-delivery/; content/authoring/; content/modules/31_optimization_information.md through content/modules/36_statistical_learning_theory_reliable_deep_learning.md; scripts/advanced-review-candidate-parity.mjs; tests/authoring-candidate-parity.test.mjs; docs/research/m31-m36-study-ready-gap-audit.md; tests/m31-m36-pedagogy.test.mjs; docs/PRIVATE_GUIDED_LEARNING_ROUTE.md",
+      "openItem": "Six-session progression, problem ladders, distractor repair, code/visual work, and constructive oral-defense structures pass automated checks; human pedagogical/accessibility review is waived."
+    },
+    {
+      "id": "calibration",
+      "requirement": "Official MIT, CMU, Stanford, Georgia Tech, Berkeley, and comparable materials calibrate claims without copied assets.",
+      "state": "complete",
+      "evidence": "docs/ACADEMIC_CALIBRATION.md; content/source-maps/; docs/research/; scripts/check-source-links.mjs; tests/source-link-audit.test.mjs",
+      "openItem": "The 2026-08-05 bounded audit checked all 1,068 source-map and calibration URLs (1,038 returned 200, 4 returned 202, 4 returned 206, 3 returned 401, and 19 returned 403); institutional records are pinned and access statuses are documented. Human citation, source-quality, and reuse review is waived."
+    },
+    {
+      "id": "chat-roles",
+      "requirement": "TA and Study Partner startup packages are distinct, reusable, and support text/voice whiteboard learning.",
+      "state": "complete",
+      "evidence": "docs/LIVE_CODEX_LEARNING_WORKFLOW.md; docs/LIVE_CODEX_ROLE_DELIVERY_2026-08-04.md; lib/learning-partner-prompts.ts; app/learning-partners/page.tsx",
+      "openItem": "Distinct TA and Study Partner role contracts, GPT Live High guidance, whiteboard rendering rules, text fallbacks, oral-defense flow, and handoffs are documented; live session and rendering observation is waived/out-of-scope."
+    },
+    {
+      "id": "notion-privacy",
+      "requirement": "Notion notes are learner-controlled, concise, consent-gated, and never raw transcripts.",
+      "state": "complete",
+      "evidence": "content/course/live-codex-learning-workflow.v2.json; docs/LEARNER_RECORD_WORKFLOW.md; docs/LIVE_CODEX_ROLE_DELIVERY_2026-08-04.md; tests/live-codex-learning-workflow.test.mjs",
+      "openItem": "The local-first Notion template and manual packet structure is documented with consent/off-record boundaries; real writes and pause/end/correction/deletion observations are waived/out-of-scope."
+    },
+    {
+      "id": "accessibility",
+      "requirement": "Instructional visuals, keyboard flows, screen-reader structure, and performance are accessible without reducing rigor.",
+      "state": "complete",
+      "evidence": "scripts/validate-mermaid-alternatives.mjs; e2e/accessibility.spec.ts; content/course/client-performance-budget.v1.json",
+      "openItem": "Current Chromium/axe acceptance passed 63/63 routes and Mermaid alternatives are complete; human assistive-technology and visual review is waived."
+    },
+    {
+      "id": "safety-privacy-build",
+      "requirement": "Local progress, sanitization, headers, deterministic inputs, typechecking, and dependency risks are truthfully bounded.",
+      "state": "complete",
+      "evidence": "lib/local-progress-codec.js; lib/http-security-headers.js; scripts/release-input-ledger.mjs; docs/DEPENDENCY_RISK_REGISTER.md; docs/DEPLOYMENT_HEADER_VERIFICATION.md; tests/http-security-headers.test.mjs; pnpm typecheck",
+      "openItem": "Local codec, sanitization, header behavior, deterministic inputs, typecheck, and bounded OS/process claims are tested/documented; live deployment headers are out-of-scope and the 2-alert Dependabot boundary remains explicitly unresolved, never security-clean."
+    },
+    {
+      "id": "actions-cost",
+      "requirement": "Actions usage is reduced without removing required tests or branch-protection checks.",
+      "state": "complete",
+      "evidence": ".github/workflows/ci.yml; docs/ACTIONS_COST_CONTROL.md; scripts/run-course-tests.mjs; scripts/module-evidence-preflight.mjs; tests/math-candidate-preflight.test.mjs",
+      "openItem": "The live 100-run readback and subsequent workflow readbacks identify repeated synchronize-driven volume, and the corrected classifier, portal-build reuse, draft/provenance-only lightweight paths, bounded worker cancellation, and superseded-run handling preserve every required branch-protection context. The last complete full gate remains 208d296/run 31009811465; release/deployment evidence is tracked separately and does not weaken this Actions-cost finding."
+    },
+    {
+      "id": "history-provenance",
+      "requirement": "GitHub history, commits, source refs, CI evidence, and release provenance remain additive and reviewable.",
+      "state": "complete",
+      "evidence": "docs/RELEASE_PROVENANCE.md; PR #22 (stacked on PR #21); git log",
+      "openItem": "The additive branch is preserved in ready-for-review PR #22 stacked on PR #21's lineage; the latest audited successor dc5f84b passed required checks in run 31023165133. Private deployment and human/learner evidence remain waived/out-of-scope."
+    },
+    {
+      "id": "final-audit",
+      "requirement": "The compact matrix and final audit agree with route, materials, chats, Notion, calibration, and full-gate evidence.",
+      "state": "complete",
+      "evidence": "docs/FINAL_AUDIT.md; docs/HUMAN_REQUIREMENTS_WAIVER_2026-08-05.md; docs/GOAL_COMPLIANCE_MATRIX.md; docs/GOAL_COMPLIANCE_HISTORY.md; scripts/generate-goal-compliance.mjs; tests/release-final-audit.test.mjs",
+      "openItem": "The current audit reconciles complete, waived, out-of-scope, deferred, and uncertain evidence; excluded human, live-platform, deployment, learner, and promotion observations are never represented as complete."
+    }
+  ]
+}

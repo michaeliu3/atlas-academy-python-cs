@@ -1,0 +1,4588 @@
+{
+  "schemaVersion": 2,
+  "course": {
+    "id": "atlas-core",
+    "title": "Atlas Academy Python, Computer Science, Mathematical Foundations, and AI-Era Reasoning",
+    "days": 60,
+    "focusedHoursPerWeek": "35–45",
+    "consolidation": "3–12 months"
+  },
+  "scopeMatrix": {
+    "schemaVersion": 4,
+    "benchmark": {
+      "id": "learner-levels-1-to-9-2026-08",
+      "title": "Levels 1–9 foundations-to-AI benchmark",
+      "accessedOn": "2026-08-02",
+      "sourceDigest": "sha256:1d8aa72a7084cc46a351a21be3c2e1e2dbf7ede24414d3eca50e25697cf701a2",
+      "sourceBoundary": "A line-by-line index of the learner-supplied inventory's Master/Study targets and explicit Level-2 AI-research additions. It preserves target wording and source-line locations, maps each target to an Atlas target, and excludes the inventory's reading lists. This calibration never claims current delivery, learner completion, or verified mastery.",
+      "inventoryCrosswalkPath": "content/course/levels-1-9-inventory-crosswalk.v1.json",
+      "items": [
+        {
+          "id": "l1-01-proofs-discrete-mathematics",
+          "level": 1,
+          "label": "Proofs and discrete mathematics",
+          "scopeTopicIds": [
+            "l1.proofs.logic-relations",
+            "l1.proofs.methods-invariants",
+            "l1.discrete.counting-recurrences",
+            "l1.discrete.graphs-orders-number-theory"
+          ]
+        },
+        {
+          "id": "l1-02-linear-algebra",
+          "level": 1,
+          "label": "Linear algebra",
+          "scopeTopicIds": [
+            "l1.linear.spaces-rank",
+            "l1.linear.geometry",
+            "l1.linear.spectral-pca",
+            "l1.linear.tensor-stability"
+          ]
+        },
+        {
+          "id": "l1-03-calculus-real-analysis",
+          "level": 1,
+          "label": "Calculus and real analysis",
+          "scopeTopicIds": [
+            "l1.calculus.change-derivatives",
+            "l1.analysis.limits-convergence",
+            "l1.analysis.interchange-and-measure"
+          ]
+        },
+        {
+          "id": "l1-04-probability",
+          "level": 1,
+          "label": "Probability",
+          "scopeTopicIds": [
+            "l1.probability.foundations",
+            "l1.probability.limits-concentration",
+            "l1.probability.stochastic-processes"
+          ]
+        },
+        {
+          "id": "l1-05-statistics",
+          "level": 1,
+          "label": "Statistics",
+          "scopeTopicIds": [
+            "l1.statistics.models-estimation",
+            "l1.statistics.inference-design",
+            "l1.statistics.robust-high-dimensional"
+          ]
+        },
+        {
+          "id": "l1-06-optimization",
+          "level": 1,
+          "label": "Optimization",
+          "scopeTopicIds": [
+            "l1.optimization.formulation-convexity",
+            "l1.optimization.methods-rates",
+            "l1.optimization.advanced-methods"
+          ]
+        },
+        {
+          "id": "l1-07-information-theory",
+          "level": 1,
+          "label": "Information theory",
+          "scopeTopicIds": [
+            "l1.information.measures-variational",
+            "l1.information.coding-principles"
+          ]
+        },
+        {
+          "id": "l2-08-programming-beyond-basic-python",
+          "level": 2,
+          "label": "Programming beyond basic Python",
+          "scopeTopicIds": [
+            "l2.programming.paradigms-abstraction",
+            "l2.programming.types-testing-debugging",
+            "l2.programming-shell-concurrency-data",
+            "l2.programming-lower-level-ml-runtime"
+          ]
+        },
+        {
+          "id": "l2-09-data-structures-algorithms",
+          "level": 2,
+          "label": "Data structures and algorithms",
+          "scopeTopicIds": [
+            "l2.dsa.structures",
+            "l2.dsa.graphs-and-paradigms",
+            "l2.dsa.advanced-analysis",
+            "l2.theory.formal-foundations"
+          ]
+        },
+        {
+          "id": "l2-10-theory-of-computation",
+          "level": 2,
+          "label": "Theory of computation",
+          "scopeTopicIds": [
+            "l2.theory.formal-foundations",
+            "l2.theory.advanced-complexity"
+          ]
+        },
+        {
+          "id": "l2-11-computer-systems",
+          "level": 2,
+          "label": "Computer systems",
+          "scopeTopicIds": [
+            "l2.systems.machine-os-network",
+            "l2.systems-data-distributed",
+            "l2.systems-accelerators"
+          ]
+        },
+        {
+          "id": "l2-12-software-engineering",
+          "level": 2,
+          "label": "Software engineering",
+          "scopeTopicIds": [
+            "l2.software-engineering-durable-systems"
+          ]
+        },
+        {
+          "id": "l3-13-classical-artificial-intelligence",
+          "level": 3,
+          "label": "Classical artificial intelligence",
+          "scopeTopicIds": [
+            "l3.ai.state-search",
+            "l3.ai.constraints-planning",
+            "l3.ai.logic-knowledge-representation",
+            "l3.ai.probabilistic-decision",
+            "l3.ai.partial-observability-multiagent"
+          ]
+        },
+        {
+          "id": "l4-14-supervised-learning",
+          "level": 4,
+          "label": "Supervised learning",
+          "scopeTopicIds": [
+            "l4.ml.erm-supervised-foundations",
+            "l4.ml.supervised-model-families"
+          ]
+        },
+        {
+          "id": "l4-15-unsupervised-representation-learning",
+          "level": 4,
+          "label": "Unsupervised and representation learning",
+          "scopeTopicIds": [
+            "l4.ml.unsupervised-representation"
+          ]
+        },
+        {
+          "id": "l4-16-generalization-model-selection",
+          "level": 4,
+          "label": "Generalization and model selection",
+          "scopeTopicIds": [
+            "l4.ml.generalization-selection-reliability"
+          ]
+        },
+        {
+          "id": "l4-17-statistical-learning-theory",
+          "level": 4,
+          "label": "Statistical learning theory",
+          "scopeTopicIds": [
+            "l4.ml.advanced-learning-theory"
+          ]
+        },
+        {
+          "id": "l5-18-neural-network-fundamentals",
+          "level": 5,
+          "label": "Neural-network fundamentals",
+          "scopeTopicIds": [
+            "l5.dl.computational-graphs-backprop"
+          ]
+        },
+        {
+          "id": "l5-19-major-architectures",
+          "level": 5,
+          "label": "Major architectures",
+          "scopeTopicIds": [
+            "l5.dl.architecture-families"
+          ]
+        },
+        {
+          "id": "l5-20-modern-training-methodology",
+          "level": 5,
+          "label": "Modern training methodology",
+          "scopeTopicIds": [
+            "l5.dl.modern-training-systems"
+          ]
+        },
+        {
+          "id": "l6-probabilistic-modeling-inference",
+          "level": 6,
+          "label": "Probabilistic modeling and inference",
+          "scopeTopicIds": [
+            "l6.pgm.structure-exact-inference",
+            "l6.pgm.monte-carlo-variational",
+            "l6.pgm.gaussian-processes-nonparametrics"
+          ]
+        },
+        {
+          "id": "l7-sequential-decision-making-rl",
+          "level": 7,
+          "label": "Sequential decision-making and reinforcement learning",
+          "scopeTopicIds": [
+            "l7.rl.bellman-dynamic-programming",
+            "l7.rl.value-policy-methods",
+            "l7.rl.advanced-control"
+          ]
+        },
+        {
+          "id": "l8-foundation-models-llms-generative-ai",
+          "level": 8,
+          "label": "Foundation models, LLMs, and generative AI",
+          "scopeTopicIds": [
+            "l8.fm.representations-transformers",
+            "l8.fm.alignment-and-preference",
+            "l8.fm.retrieval-tools-agents",
+            "l8.fm.reliability-security-evaluation",
+            "l8.fm.efficiency-multimodality"
+          ]
+        },
+        {
+          "id": "l9-deep-specialization-nlp-language-models",
+          "level": 9,
+          "label": "Deep specialization: NLP and language models",
+          "scopeTopicIds": [
+            "l9.nlp.linguistic-language-modeling",
+            "l9.nlp.tasks-retrieval-dialogue",
+            "l9.nlp.multilingual-specialty"
+          ]
+        }
+      ],
+      "sourceLists": [
+        {
+          "sectionId": "l1-01-proofs-discrete-mathematics",
+          "directive": "master",
+          "sourceLineStart": 9,
+          "sourceLineEnd": 19
+        },
+        {
+          "sectionId": "l1-02-linear-algebra",
+          "directive": "master",
+          "sourceLineStart": 33,
+          "sourceLineEnd": 46
+        },
+        {
+          "sectionId": "l1-03-calculus-real-analysis",
+          "directive": "master",
+          "sourceLineStart": 60,
+          "sourceLineEnd": 71
+        },
+        {
+          "sectionId": "l1-04-probability",
+          "directive": "master",
+          "sourceLineStart": 84,
+          "sourceLineEnd": 99
+        },
+        {
+          "sectionId": "l1-05-statistics",
+          "directive": "master",
+          "sourceLineStart": 110,
+          "sourceLineEnd": 127
+        },
+        {
+          "sectionId": "l1-06-optimization",
+          "directive": "master",
+          "sourceLineStart": 141,
+          "sourceLineEnd": 157
+        },
+        {
+          "sectionId": "l1-07-information-theory",
+          "directive": "master",
+          "sourceLineStart": 168,
+          "sourceLineEnd": 176
+        },
+        {
+          "sectionId": "l2-08-programming-beyond-basic-python",
+          "directive": "master",
+          "sourceLineStart": 186,
+          "sourceLineEnd": 199
+        },
+        {
+          "sectionId": "l2-08-programming-beyond-basic-python",
+          "directive": "also-know",
+          "sourceLineStart": 203,
+          "sourceLineEnd": 209
+        },
+        {
+          "sectionId": "l2-09-data-structures-algorithms",
+          "directive": "master",
+          "sourceLineStart": 214,
+          "sourceLineEnd": 231
+        },
+        {
+          "sectionId": "l2-10-theory-of-computation",
+          "directive": "master",
+          "sourceLineStart": 244,
+          "sourceLineEnd": 254
+        },
+        {
+          "sectionId": "l2-11-computer-systems",
+          "directive": "master",
+          "sourceLineStart": 263,
+          "sourceLineEnd": 277
+        },
+        {
+          "sectionId": "l2-12-software-engineering",
+          "directive": "master",
+          "sourceLineStart": 289,
+          "sourceLineEnd": 301
+        },
+        {
+          "sectionId": "l3-13-classical-artificial-intelligence",
+          "directive": "master",
+          "sourceLineStart": 311,
+          "sourceLineEnd": 327
+        },
+        {
+          "sectionId": "l4-14-supervised-learning",
+          "directive": "master",
+          "sourceLineStart": 339,
+          "sourceLineEnd": 355
+        },
+        {
+          "sectionId": "l4-15-unsupervised-representation-learning",
+          "directive": "master",
+          "sourceLineStart": 360,
+          "sourceLineEnd": 371
+        },
+        {
+          "sectionId": "l4-16-generalization-model-selection",
+          "directive": "master",
+          "sourceLineStart": 376,
+          "sourceLineEnd": 389
+        },
+        {
+          "sectionId": "l4-17-statistical-learning-theory",
+          "directive": "graduate-master",
+          "sourceLineStart": 394,
+          "sourceLineEnd": 407
+        },
+        {
+          "sectionId": "l5-18-neural-network-fundamentals",
+          "directive": "master",
+          "sourceLineStart": 419,
+          "sourceLineEnd": 432
+        },
+        {
+          "sectionId": "l5-19-major-architectures",
+          "directive": "master",
+          "sourceLineStart": 440,
+          "sourceLineEnd": 452
+        },
+        {
+          "sectionId": "l5-20-modern-training-methodology",
+          "directive": "master",
+          "sourceLineStart": 457,
+          "sourceLineEnd": 469
+        },
+        {
+          "sectionId": "l6-probabilistic-modeling-inference",
+          "directive": "master",
+          "sourceLineStart": 480,
+          "sourceLineEnd": 495
+        },
+        {
+          "sectionId": "l7-sequential-decision-making-rl",
+          "directive": "master",
+          "sourceLineStart": 507,
+          "sourceLineEnd": 525
+        },
+        {
+          "sectionId": "l8-foundation-models-llms-generative-ai",
+          "directive": "master",
+          "sourceLineStart": 538,
+          "sourceLineEnd": 563
+        },
+        {
+          "sectionId": "l9-deep-specialization-nlp-language-models",
+          "directive": "study",
+          "sourceLineStart": 575,
+          "sourceLineEnd": 586
+        }
+      ]
+    },
+    "scopeStates": [
+      "core-mastery",
+      "scoped-exposure",
+      "post-core-specialization",
+      "explicitly-deferred"
+    ],
+    "capabilities": [
+      "recognize",
+      "read",
+      "derive",
+      "debug",
+      "design",
+      "implement"
+    ],
+    "topics": [
+      {
+        "id": "l1.proofs.logic-relations",
+        "level": 1,
+        "label": "Propositional and predicate logic; sets, functions, relations, and equivalence relations.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m04",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m27",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m04",
+          "m27"
+        ],
+        "evidenceArtifact": "Formal claim, quantifier repair, and countermodel card.",
+        "trackId": null
+      },
+      {
+        "id": "l1.proofs.methods-invariants",
+        "level": 1,
+        "label": "Direct proof, contradiction, contrapositive, ordinary and structural induction, invariants, and extremal arguments.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m05",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m27",
+            "sessions": [
+              2,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m05",
+          "m27"
+        ],
+        "evidenceArtifact": "Proof-and-counterexample dossier with an invariant repair.",
+        "trackId": null
+      },
+      {
+        "id": "l1.discrete.counting-recurrences",
+        "level": 1,
+        "label": "Counting, permutations, combinations, recurrences, and generating functions.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m27",
+            "sessions": [
+              3,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m27"
+        ],
+        "evidenceArtifact": "Counting-model and recurrence-evidence sheet.",
+        "trackId": null
+      },
+      {
+        "id": "l1.discrete.graphs-orders-number-theory",
+        "level": 1,
+        "label": "Graphs, trees, connectivity, matchings, partial orders, lattices, asymptotic notation, and basic number theory.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m27",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m27"
+        ],
+        "evidenceArtifact": "Graph/order argument and asymptotic-claim boundary card.",
+        "trackId": null
+      },
+      {
+        "id": "l1.linear.spaces-rank",
+        "level": 1,
+        "label": "Vector spaces, subspaces, bases, dimension, linear independence, rank, null space, and column space.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
+        "evidenceArtifact": "Linear-map and rank-nullity reasoning trace.",
+        "trackId": null
+      },
+      {
+        "id": "l1.linear.geometry",
+        "level": 1,
+        "label": "Inner products, norms, orthogonality, projections, and least squares.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              2,
+              3
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
+        "evidenceArtifact": "Projection and least-squares evidence card.",
+        "trackId": null
+      },
+      {
+        "id": "l1.linear.spectral-pca",
+        "level": 1,
+        "label": "Eigenvalues, eigenvectors, diagonalization, symmetric and positive-semidefinite matrices, SVD, low-rank approximation, spectral theorem, and PCA from both variance and reconstruction.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              3,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
+        "evidenceArtifact": "Spectral/PCA derivation and low-rank reconstruction dossier.",
+        "trackId": null
+      },
+      {
+        "id": "l1.linear.tensor-stability",
+        "level": 1,
+        "label": "Matrix calculus, tensor operations, conditioning, and numerical stability.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28"
+        ],
+        "evidenceArtifact": "Shape/dtype/conditioning trace and numerical counterexample.",
+        "trackId": null
+      },
+      {
+        "id": "l1.calculus.change-derivatives",
+        "level": 1,
+        "label": "Single- and multivariable calculus; partial derivatives; gradients, Jacobians, Hessians; Taylor expansions; multiple integrals; change of variables; and constrained extrema.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m29",
+            "sessions": [
+              1,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m29"
+        ],
+        "evidenceArtifact": "Differential, Taylor-error, and constrained-extrema evidence sheet.",
+        "trackId": null
+      },
+      {
+        "id": "l1.analysis.limits-convergence",
+        "level": 1,
+        "label": "Limits, continuity, sequences and series, pointwise versus uniform convergence, and basic metric-space concepts.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m29",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m29"
+        ],
+        "evidenceArtifact": "Limit/convergence proof sketch with a finite numerical boundary.",
+        "trackId": null
+      },
+      {
+        "id": "l1.analysis.interchange-and-measure",
+        "level": 1,
+        "label": "Rigorous conditions for interchanging limits, derivatives, expectations, and integrals; measure theory and full real-analysis depth.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m29",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m30",
+            "sessions": [
+              2,
+              3
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m29",
+          "m30"
+        ],
+        "evidenceArtifact": "Hypothesis ledger for one interchange theorem and a counterexample.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l1.probability.foundations",
+        "level": 1,
+        "label": "Sample spaces and random variables; joint, marginal, and conditional distributions; Bayes' rule; independence; expectation, variance, covariance; transformations; common distributions; multivariate Gaussians; and conditional expectation.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
+        "evidenceArtifact": "Probability-model, conditional-independence, and transformation trace.",
+        "trackId": null
+      },
+      {
+        "id": "l1.probability.limits-concentration",
+        "level": 1,
+        "label": "Laws of large numbers, central limit theorem, Markov and Chebyshev inequalities, Chernoff/Hoeffding/Bernstein bounds, and Monte Carlo methods.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
+        "evidenceArtifact": "Finite-sample concentration and simulation-boundary report.",
+        "trackId": null
+      },
+      {
+        "id": "l1.probability.stochastic-processes",
+        "level": 1,
+        "label": "Martingales at an introductory level and finite Markov chains.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m34"
+        ],
+        "evidenceArtifact": "Finite-state transition and assumption card; not a stochastic-process specialization.",
+        "trackId": null
+      },
+      {
+        "id": "l1.statistics.models-estimation",
+        "level": 1,
+        "label": "Statistical models and sampling; bias, variance, consistency, efficiency; MLE, MAP, Bayesian inference; sufficient statistics; and exponential families.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              4,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
+        "evidenceArtifact": "Estimation-assumption and posterior-versus-likelihood dossier.",
+        "trackId": null
+      },
+      {
+        "id": "l1.statistics.inference-design",
+        "level": 1,
+        "label": "Confidence intervals, hypothesis testing, multiple testing, linear and generalized linear models, logistic regression, bootstrap and permutation tests, experimental design, statistical power, and missing data.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30"
+        ],
+        "evidenceArtifact": "Inference-and-design decision card with a falsifier.",
+        "trackId": null
+      },
+      {
+        "id": "l1.statistics.robust-high-dimensional",
+        "level": 1,
+        "label": "Model misspecification, robust statistics, causal reasoning, nonparametrics, and high-dimensional estimation.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m36"
+        ],
+        "evidenceArtifact": "Assumption stress test and uncertainty-source separation memo.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l1.optimization.formulation-convexity",
+        "level": 1,
+        "label": "Unconstrained and constrained optimization; convex sets/functions; first- and second-order conditions; Lagrange multipliers; duality; KKT conditions; regularization; nonconvexity; saddle points; and numerical stability.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              1,
+              3
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
+        "evidenceArtifact": "Optimization and Information Evidence Dossier with feasibility and stationarity checks.",
+        "trackId": null
+      },
+      {
+        "id": "l1.optimization.methods-rates",
+        "level": 1,
+        "label": "Gradient and stochastic-gradient methods, convergence-rate reasoning, and stopping evidence.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              3,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
+        "evidenceArtifact": "Descent/stochastic-assumption trace and stopping boundary.",
+        "trackId": null
+      },
+      {
+        "id": "l1.optimization.advanced-methods",
+        "level": 1,
+        "label": "Momentum, adaptive methods, learning-rate schedules, Newton and quasi-Newton methods, subgradients, proximal methods, coordinate descent, and broad nonlinear-optimization theory.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              2,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31",
+          "m36"
+        ],
+        "evidenceArtifact": "Optimizer comparison with assumptions, traces, and failure cases.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l1.information.measures-variational",
+        "level": 1,
+        "label": "Entropy, conditional entropy, cross-entropy, KL divergence, mutual information, rate-distortion intuition, and links to likelihood, representation learning, and variational inference.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
+        "evidenceArtifact": "Information-measure direction/support and ELBO boundary card.",
+        "trackId": null
+      },
+      {
+        "id": "l1.information.coding-principles",
+        "level": 1,
+        "label": "Data-processing inequality, maximum-entropy principles, coding interpretation, channel capacity, and coding-theorem depth.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31"
+        ],
+        "evidenceArtifact": "Information-theory proof/explanation packet with operational non-claims.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l1.degree-scale-mathematics",
+        "level": 1,
+        "label": "A full university-scale proof, numerical-linear-algebra, measure-theory, advanced-statistics, optimization, and information-theory sequence with term-long feedback cycles.",
+        "scope": "explicitly-deferred",
+        "targetCapabilities": [
+          "recognize"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m27",
+            "sessions": [
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m27",
+          "m36"
+        ],
+        "evidenceArtifact": "Scope boundary card; not a 60-day completion claim.",
+        "trackId": null
+      },
+      {
+        "id": "l2.programming.paradigms-abstraction",
+        "level": 2,
+        "label": "Data structures and algorithmic complexity; object-oriented, functional, and procedural styles; and abstraction/interface design.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m01",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m03",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m05",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m01",
+          "m03",
+          "m05"
+        ],
+        "evidenceArtifact": "State/abstraction trace and complexity-backed design review.",
+        "trackId": null
+      },
+      {
+        "id": "l2.programming.types-testing-debugging",
+        "level": 2,
+        "label": "Type systems and static analysis; testing, debugging, profiling; version control and code review; packaging, dependency management, and reproducible environments.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m12",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m13",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m15",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m24",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m12",
+          "m13",
+          "m15",
+          "m24"
+        ],
+        "evidenceArtifact": "Specification-to-regression trace and reproducible change dossier.",
+        "trackId": null
+      },
+      {
+        "id": "l2.programming-shell-concurrency-data",
+        "level": 2,
+        "label": "Linux shell and process management, networking basics, concurrency and asynchronous programming, memory layout/cache behavior, vectorization, and SQL.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m16",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m18",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m19",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m20",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m16",
+          "m18",
+          "m19",
+          "m20"
+        ],
+        "evidenceArtifact": "Process/network/data trace with a bounded performance claim.",
+        "trackId": null
+      },
+      {
+        "id": "l2.programming-lower-level-ml-runtime",
+        "level": 2,
+        "label": "Scoped lower-level-language reading; NumPy layout/broadcasting; JAX/PyTorch execution reasoning; automatic differentiation; GPU/precision/profiler evidence; and an explicit M35-led boundary for distributed data parallelism rather than replica/collective mastery.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m35"
+        ],
+        "evidenceArtifact": "Scientific Python & Accelerators Dossier plus an M35-led replica/collective boundary; no claimed C/C++/Rust, CUDA, framework, or distributed-data-parallel mastery.",
+        "trackId": null
+      },
+      {
+        "id": "l2.dsa.structures",
+        "level": 2,
+        "label": "Arrays, linked structures, stacks, queues, hash tables, trees, heaps, tries, union-find, sorting, selection, and graph representations.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m06",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m07",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m08",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m09",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m06",
+          "m07",
+          "m08",
+          "m09"
+        ],
+        "evidenceArtifact": "Representation/invariant/cost dossier for an unfamiliar implementation.",
+        "trackId": null
+      },
+      {
+        "id": "l2.dsa.graphs-and-paradigms",
+        "level": 2,
+        "label": "Breadth-first and depth-first search, shortest paths, minimum spanning trees, greedy algorithms, divide and conquer, dynamic programming, randomized algorithms, and approximation-algorithm reasoning.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m11",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m11"
+        ],
+        "evidenceArtifact": "Algorithm-choice justification and proof/counterexample trace.",
+        "trackId": null
+      },
+      {
+        "id": "l2.dsa.advanced-analysis",
+        "level": 2,
+        "label": "Network flow, advanced amortized analysis, online and streaming algorithms, and full approximation-algorithm analysis.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m11",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m33",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m11",
+          "m33"
+        ],
+        "evidenceArtifact": "Advanced algorithm proof and stress-input report.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l2.theory.formal-foundations",
+        "level": 2,
+        "label": "Finite automata and regular languages, context-free languages, Turing machines, decidability, reductions, complexity classes, and NP-completeness.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m33",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m33"
+        ],
+        "evidenceArtifact": "Formal Limits Claim Packet with a construction, reduction, and non-claim.",
+        "trackId": null
+      },
+      {
+        "id": "l2.theory.advanced-complexity",
+        "level": 2,
+        "label": "co-NP, PSPACE, randomized complexity, approximation hardness, and basic circuit complexity.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m33",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m33"
+        ],
+        "evidenceArtifact": "Complexity-class reduction and scope memo.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l2.systems.machine-os-network",
+        "level": 2,
+        "label": "Machine representation, assembly-level execution, memory hierarchy, virtual memory, processes and threads, synchronization/deadlocks, filesystems, scheduling, and networking fundamentals.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m17",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m18",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m19",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m20",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m17",
+          "m18",
+          "m19",
+          "m20"
+        ],
+        "evidenceArtifact": "Cross-layer execution trace and failure-boundary argument.",
+        "trackId": null
+      },
+      {
+        "id": "l2.systems-data-distributed",
+        "level": 2,
+        "label": "Databases and indexing, transactions and consistency, distributed systems, replication, fault tolerance, and failure recovery.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m16",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m21",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m26",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m16",
+          "m21",
+          "m26"
+        ],
+        "evidenceArtifact": "Consistency/retry/rollback evidence chain and release-boundary dossier.",
+        "trackId": null
+      },
+      {
+        "id": "l2.systems-accelerators",
+        "level": 2,
+        "label": "GPUs and accelerators, including performance, memory, and reproducibility boundaries.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              2,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32"
+        ],
+        "evidenceArtifact": "CPU-only layout/autodiff observation with explicit no-speedup and no-portability claims.",
+        "trackId": null
+      },
+      {
+        "id": "l2.software-engineering-durable-systems",
+        "level": 2,
+        "label": "Requirements and interface design, modular architecture, testing strategies, CI, observability, configuration, reproducible builds, API design, refactoring, performance engineering, secure coding, failure recovery, and technical documentation.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m12",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m13",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m14",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m15",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m26",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m12",
+          "m13",
+          "m14",
+          "m15",
+          "m26"
+        ],
+        "evidenceArtifact": "Architecture, regression, provenance, and maintenance-handoff dossier.",
+        "trackId": null
+      },
+      {
+        "id": "l3.ai.state-search",
+        "level": 3,
+        "label": "State-space formulation; breadth-first, depth-first, uniform-cost, bidirectional, and A* search; admissible heuristics; and local-search boundaries.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m10",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m10",
+          "m34"
+        ],
+        "evidenceArtifact": "Search-condition trace with a heuristic or cost-model counterexample.",
+        "trackId": null
+      },
+      {
+        "id": "l3.ai.constraints-planning",
+        "level": 3,
+        "label": "Constraint-satisfaction problems, propagation, planning, and model/relaxation boundaries.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m34",
+            "sessions": [
+              2,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m34"
+        ],
+        "evidenceArtifact": "Classical AI Search, Constraints & Decision Packet.",
+        "trackId": null
+      },
+      {
+        "id": "l3.ai.logic-knowledge-representation",
+        "level": 3,
+        "label": "Propositional and first-order logic, resolution and theorem proving, and richer knowledge representation.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m27",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m33",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              1,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m27",
+          "m33",
+          "m34"
+        ],
+        "evidenceArtifact": "Logic/representation proof packet with a resolution or model-checking boundary.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l3.ai.probabilistic-decision",
+        "level": 3,
+        "label": "Bayesian-network and hidden-Markov-model vocabulary, decision theory, Markov decision processes, and Bellman reasoning.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m34"
+        ],
+        "evidenceArtifact": "Finite-horizon decision trace; not a learned policy or full probabilistic-inference route.",
+        "trackId": null
+      },
+      {
+        "id": "l3.ai.partial-observability-multiagent",
+        "level": 3,
+        "label": "Partially observable MDPs, multi-agent reasoning, game theory, minimax, and alpha-beta pruning.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m34"
+        ],
+        "evidenceArtifact": "Changed-premise decision-policy defense with uncertainty and authority boundaries.",
+        "trackId": "probabilistic-models-rl"
+      },
+      {
+        "id": "l4.ml.erm-supervised-foundations",
+        "level": 4,
+        "label": "Empirical-risk minimization; train/validation/test separation; linear and logistic regression; generalized linear models; class imbalance; calibration; ranking; and error analysis.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              4
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m35"
+        ],
+        "evidenceArtifact": "Baseline/split/metric/calibration dossier with a failure slice.",
+        "trackId": null
+      },
+      {
+        "id": "l4.ml.supervised-model-families",
+        "level": 4,
+        "label": "k-nearest neighbors, naive Bayes, decision trees, random forests, gradient boosting, support-vector machines, kernel methods, neural networks, multilabel prediction, and structured prediction.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m35"
+        ],
+        "evidenceArtifact": "Model-family boundary map and baseline-choice rationale; not a full implementation survey.",
+        "trackId": null
+      },
+      {
+        "id": "l4.ml.unsupervised-representation",
+        "level": 4,
+        "label": "k-means and mixture models, hierarchical clustering, density estimation, PCA, matrix factorization, independent-component analysis, latent-variable models, manifold learning, autoencoders, contrastive/self-supervised learning, and representation evaluation.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              3,
+              5
+            ]
+          },
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28",
+          "m31",
+          "m35"
+        ],
+        "evidenceArtifact": "Representation/inductive-bias comparison and PCA/ELBO boundary card.",
+        "trackId": null
+      },
+      {
+        "id": "l4.ml.generalization-selection-reliability",
+        "level": 4,
+        "label": "Underfitting and overfitting, bias-variance, cross-validation, regularization, hyperparameter selection, data leakage, distribution shift, domain adaptation, OOD generalization, calibration/uncertainty, learning curves, baselines, and ablations.",
+        "scope": "core-mastery",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m35",
+          "m36"
+        ],
+        "evidenceArtifact": "Learning/evaluation/reliability evidence map with a monitored non-claim.",
+        "trackId": null
+      },
+      {
+        "id": "l4.ml.advanced-learning-theory",
+        "level": 4,
+        "label": "PAC learning, hypothesis classes, VC dimension, growth functions, uniform convergence, Rademacher complexity, algorithmic stability, margin bounds, online learning, regret, multi-armed bandits, no-free-lunch, minimax lower bounds, and information-theoretic lower bounds.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m36"
+        ],
+        "evidenceArtifact": "Theorem-scope, proof-reconstruction, and counterexample dossier.",
+        "trackId": "math-algorithms-theory"
+      },
+      {
+        "id": "l5.dl.computational-graphs-backprop",
+        "level": 5,
+        "label": "Computational graphs, backpropagation, automatic differentiation, initialization, activations, normalization, residual connections, regularization, dropout, loss design, clipping, optimization dynamics, vanishing/exploding gradients, scaling, and numerical stability.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              3,
+              5
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              5
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              3,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m35",
+          "m36"
+        ],
+        "evidenceArtifact": "Fixed-network forward/backward trace with numerical and reliability boundaries.",
+        "trackId": null
+      },
+      {
+        "id": "l5.dl.architecture-families",
+        "level": 5,
+        "label": "Multilayer perceptrons, convolutional networks, recurrent networks, LSTMs/GRUs, attention, transformers, graph neural networks, autoencoders, VAEs, autoregressive models, GANs, diffusion/flow models, and mixture-of-experts architectures.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              3,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              5
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              3,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m35",
+          "m36"
+        ],
+        "evidenceArtifact": "Architecture trade-off dossier with a bounded reference implementation.",
+        "trackId": "deep-learning-ml-systems"
+      },
+      {
+        "id": "l5.dl.modern-training-systems",
+        "level": 5,
+        "label": "Large- and small-batch optimization, warmup and schedules, weight decay, mixed precision, gradient accumulation, checkpointing, distributed data parallelism, tensor/pipeline parallelism, quantization, pruning, distillation, efficient inference, and memory-compute trade-offs.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m32",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m32",
+          "m36"
+        ],
+        "evidenceArtifact": "Reproducible training/inference systems dossier with measured-scope limits.",
+        "trackId": "deep-learning-ml-systems"
+      },
+      {
+        "id": "l6.pgm.structure-exact-inference",
+        "level": 6,
+        "label": "Directed and undirected graphical models, conditional independence, factor graphs, exact inference, variable elimination, belief propagation, and expectation-maximization.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m31",
+          "m34"
+        ],
+        "evidenceArtifact": "Graphical-model factorization/inference trace with an independence audit.",
+        "trackId": "probabilistic-models-rl"
+      },
+      {
+        "id": "l6.pgm.monte-carlo-variational",
+        "level": 6,
+        "label": "Monte Carlo estimation, importance sampling, Markov-chain Monte Carlo, Gibbs and Metropolis-Hastings sampling, variational inference, ELBO, and sequential Monte Carlo.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m31",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m31"
+        ],
+        "evidenceArtifact": "Inference-estimator comparison with support, variance, and convergence non-claims.",
+        "trackId": "probabilistic-models-rl"
+      },
+      {
+        "id": "l6.pgm.gaussian-processes-nonparametrics",
+        "level": 6,
+        "label": "Gaussian processes and introductory Bayesian nonparametrics.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              2,
+              5
+            ]
+          },
+          {
+            "moduleId": "m30",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28",
+          "m30"
+        ],
+        "evidenceArtifact": "Kernel/prior/posterior model card with a data-assumption stress test.",
+        "trackId": "probabilistic-models-rl"
+      },
+      {
+        "id": "l7.rl.bellman-dynamic-programming",
+        "level": 7,
+        "label": "Dynamic programming, Bellman equations, value iteration, policy iteration, and bounded decision-process reasoning.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "derive",
+          "debug"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m11",
+            "sessions": [
+              3,
+              5
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m11",
+          "m34"
+        ],
+        "evidenceArtifact": "Finite-horizon Bellman trace; not a general planner or trained agent.",
+        "trackId": null
+      },
+      {
+        "id": "l7.rl.value-policy-methods",
+        "level": 7,
+        "label": "Monte Carlo estimation, temporal-difference learning, Q-learning, SARSA, function approximation, policy gradients, actor-critic methods, exploration, contextual/multi-armed bandits, model-based RL, and offline RL.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              3,
+              4
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m34",
+          "m35"
+        ],
+        "evidenceArtifact": "Policy/evaluation experiment with reward, distribution, and safety limits.",
+        "trackId": "probabilistic-models-rl"
+      },
+      {
+        "id": "l7.rl.advanced-control",
+        "level": 7,
+        "label": "Imitation learning, inverse reinforcement learning, partial observability, multi-agent RL, control theory basics, stability, and reward misspecification.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m34",
+          "m36"
+        ],
+        "evidenceArtifact": "Changed-reward/changed-observation oral defense with stop-owner and rollback boundary.",
+        "trackId": "probabilistic-models-rl"
+      },
+      {
+        "id": "l8.fm.representations-transformers",
+        "level": 8,
+        "label": "Tokenization and embeddings, transformer internals, positional representations, pretraining objectives, autoregressive generation, masked modeling, scaling behavior, and data curation/deduplication.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m23",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m28",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m32",
+            "sessions": [
+              3,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m23",
+          "m28",
+          "m32",
+          "m35"
+        ],
+        "evidenceArtifact": "Tokenizer-to-attention trace and data/objective provenance card.",
+        "trackId": "foundation-models-nlp"
+      },
+      {
+        "id": "l8.fm.alignment-and-preference",
+        "level": 8,
+        "label": "Instruction tuning, preference learning, reward modeling, direct preference optimization, in-context learning, synthetic data, and alignment limits.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m31",
+            "sessions": [
+              3,
+              6
+            ]
+          },
+          {
+            "moduleId": "m34",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m31",
+          "m34",
+          "m35",
+          "m36"
+        ],
+        "evidenceArtifact": "Preference/objective/authority comparison with a reward-misspecification counterexample.",
+        "trackId": "foundation-models-nlp"
+      },
+      {
+        "id": "l8.fm.retrieval-tools-agents",
+        "level": 8,
+        "label": "Retrieval-augmented generation, tool use, agent architectures, long-context methods, and bounded human authority over an AI proposal.",
+        "scope": "scoped-exposure",
+        "targetCapabilities": [
+          "recognize",
+          "read",
+          "debug",
+          "design"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m22",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m25",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m26",
+            "sessions": [
+              1,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m22",
+          "m25",
+          "m26"
+        ],
+        "evidenceArtifact": "Evidence-grounded suggestion/authority trace; not an LLM trainer or production agent release.",
+        "trackId": null
+      },
+      {
+        "id": "l8.fm.reliability-security-evaluation",
+        "level": 8,
+        "label": "Evaluation contamination, hallucination and factuality, prompt injection and model security, behavioral/mechanistic interpretability, and long-lived model evaluation.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m22",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m25",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m22",
+          "m25",
+          "m36"
+        ],
+        "evidenceArtifact": "Model-evaluation and adversarial-boundary dossier with a monitoring plan.",
+        "trackId": "foundation-models-nlp"
+      },
+      {
+        "id": "l8.fm.efficiency-multimodality",
+        "level": 8,
+        "label": "Multimodal models, distillation and quantization, sparse and mixture-of-experts models, compute/data efficiency, and systems trade-offs.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m28",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m32",
+            "sessions": [
+              4,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m28",
+          "m32",
+          "m36"
+        ],
+        "evidenceArtifact": "Measured efficiency/quality trade-off report with hardware and data-scope limits.",
+        "trackId": "foundation-models-nlp"
+      },
+      {
+        "id": "l9.nlp.linguistic-language-modeling",
+        "level": 9,
+        "label": "Formal languages and linguistic structure, language modeling, parsing, sequence labeling, semantic representations, and neural language-model foundations.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m23",
+            "sessions": [
+              1,
+              4
+            ]
+          },
+          {
+            "moduleId": "m33",
+            "sessions": [
+              1,
+              3
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              1,
+              5
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m23",
+          "m33",
+          "m35"
+        ],
+        "evidenceArtifact": "Language-structure/model trace with an evaluation and data boundary.",
+        "trackId": "foundation-models-nlp"
+      },
+      {
+        "id": "l9.nlp.tasks-retrieval-dialogue",
+        "level": 9,
+        "label": "Machine translation, information extraction, question answering, retrieval, dialogue, and LLM training/evaluation.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m20",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m25",
+            "sessions": [
+              1,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m20",
+          "m25",
+          "m35"
+        ],
+        "evidenceArtifact": "Task/evaluation/retrieval dossier with data, metric, and human-override limits.",
+        "trackId": "foundation-models-nlp"
+      },
+      {
+        "id": "l9.nlp.multilingual-specialty",
+        "level": 9,
+        "label": "Multilingual learning and one research-level specialty with working competence in neighboring areas.",
+        "scope": "post-core-specialization",
+        "targetCapabilities": [
+          "read",
+          "derive",
+          "debug",
+          "design",
+          "implement"
+        ],
+        "anchors": [
+          {
+            "moduleId": "m30",
+            "sessions": [
+              5,
+              6
+            ]
+          },
+          {
+            "moduleId": "m35",
+            "sessions": [
+              2,
+              6
+            ]
+          },
+          {
+            "moduleId": "m36",
+            "sessions": [
+              4,
+              6
+            ]
+          }
+        ],
+        "sourceModuleIds": [
+          "m30",
+          "m35",
+          "m36"
+        ],
+        "evidenceArtifact": "One bounded specialty portfolio, oral defense, and limitation ledger; not candidacy or degree equivalence.",
+        "trackId": "foundation-models-nlp"
+      }
+    ],
+    "extensionTracks": [
+      {
+        "id": "math-algorithms-theory",
+        "title": "Mathematical, Algorithms & Theory Deepening",
+        "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Theory needs spaced proof reconstruction, counterexamples, and one revised argument—not a single compressed survey."
+        },
+        "prerequisiteModuleIds": [
+          "m26",
+          "m27",
+          "m28",
+          "m29",
+          "m30",
+          "m31",
+          "m33",
+          "m36"
+        ],
+        "calibrationUrls": [
+          "https://ocw.mit.edu/courses/6-854j-advanced-algorithms-fall-2005/",
+          "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/",
+          "https://omscs.gatech.edu/cs-6515-intro-graduate-algorithms"
+        ],
+        "project": "Prove, stress-test, and explain one advanced algorithm, theorem, or numerical/optimization claim with an explicit assumption ledger.",
+        "oralDefense": "Defend the model, quantifiers, reduction or derivation, counterexample, and the boundary between proof and experiment.",
+        "nonClaim": "Design-only extension; it does not represent a full mathematics/theory degree sequence, credit, or research qualification."
+      },
+      {
+        "id": "deep-learning-ml-systems",
+        "title": "Deep Learning & ML Systems",
+        "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Repeatable experiments need time to inspect systems evidence, revise the baseline, and explain resource and reliability limits."
+        },
+        "prerequisiteModuleIds": [
+          "m26",
+          "m28",
+          "m29",
+          "m30",
+          "m31",
+          "m32",
+          "m35",
+          "m36"
+        ],
+        "calibrationUrls": [
+          "https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/",
+          "https://web.stanford.edu/class/cs329s/",
+          "https://omscs.gatech.edu/cs-7643-deep-learning"
+        ],
+        "project": "Reproduce one bounded training/inference result with versioned data, metrics, resource observations, and a meaningful baseline.",
+        "oralDefense": "Explain the computation graph, optimization choices, system bottleneck, generalization limits, and rollback/monitoring plan.",
+        "nonClaim": "No GPU performance, framework fluency, distributed-scale capability, or production reliability is implied until directly observed."
+      },
+      {
+        "id": "probabilistic-models-rl",
+        "title": "Probabilistic Modeling, Sequential Decision-Making & RL",
+        "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Inference and decision claims need a separate calibration and revision cycle so a finite simulation is not mistaken for a policy guarantee."
+        },
+        "prerequisiteModuleIds": [
+          "m26",
+          "m29",
+          "m30",
+          "m31",
+          "m34",
+          "m35"
+        ],
+        "calibrationUrls": [
+          "https://www.cs.cmu.edu/~pradeepr/708/",
+          "https://rail.eecs.berkeley.edu/deeprlcourse/index.html",
+          "https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html"
+        ],
+        "project": "Build and compare a bounded inference or decision model with held-out evidence, uncertainty calibration, and explicit reward/utility assumptions.",
+        "oralDefense": "Trace an inference or Bellman claim, change one observation/reward premise, and state what becomes unknown or unsafe to automate.",
+        "nonClaim": "No general decision policy, control guarantee, safe RL claim, or real-world deployment authority follows from a bounded exercise."
+      },
+      {
+        "id": "foundation-models-nlp",
+        "title": "Foundation Models, Generative AI & NLP",
+        "status": "design-only",
+        "cadence": {
+          "firstPassDays": 90,
+          "recommendedDays": 180,
+          "rationale": "Model and data provenance, evaluation, red-teaming, and human-override reasoning need revision after the first dossier."
+        },
+        "prerequisiteModuleIds": [
+          "m26",
+          "m23",
+          "m28",
+          "m29",
+          "m30",
+          "m31",
+          "m32",
+          "m33",
+          "m35",
+          "m36"
+        ],
+        "calibrationUrls": [
+          "https://ocw.mit.edu/courses/6-s087-foundation-models-and-generative-ai-january-iap-2024/",
+          "https://web.stanford.edu/class/cs224n/",
+          "https://ocw.mit.edu/courses/6-7960-deep-learning-fall-2024/"
+        ],
+        "project": "Create one bounded language/model evaluation dossier that joins token/data provenance, task metric, retrieval or tool boundary, red team, and human override.",
+        "oralDefense": "Use a readable whiteboard to explain a model/data/evaluation trace, an adversarial or changed-premise failure, and the next falsifier.",
+        "nonClaim": "No claim of LLM training, alignment, mechanistic interpretability, model security, or NLP research specialization is made without direct project evidence."
+      }
+    ]
+  },
+  "availabilityStates": [
+    "legacy-open",
+    "published",
+    "preview",
+    "locked",
+    "optional",
+    "authoring-only"
+  ],
+  "lifecycleStates": [
+    "learner-material-ready",
+    "authoring-only"
+  ],
+  "readerAccessStates": [
+    "hidden",
+    "preview",
+    "full"
+  ],
+  "contractTracks": [
+    "legacy-v1",
+    "advanced-v1"
+  ],
+  "contractStates": [
+    "not-started",
+    "authoring-only",
+    "legacy-baseline",
+    "review-ready",
+    "verified"
+  ],
+  "releaseStates": [
+    "unrecorded",
+    "candidate-recorded",
+    "deployed-recorded"
+  ],
+  "knowledgeArcs": [
+    {
+      "id": "arc-i",
+      "numeral": "I",
+      "title": "Computation & reasoning",
+      "range": "Modules 1–5",
+      "description": "Build the execution, abstraction, proof, and cost models that every later system depends on."
+    },
+    {
+      "id": "arc-ii",
+      "numeral": "II",
+      "title": "Data & algorithms",
+      "range": "Modules 6–11",
+      "description": "Connect representation choices to operations, invariants, performance, and algorithmic strategy."
+    },
+    {
+      "id": "arc-iii",
+      "numeral": "III",
+      "title": "Durable software",
+      "range": "Modules 12–16",
+      "description": "Turn local reasoning into stable APIs, evidence, maintainable architecture, delivery, and transactions."
+    },
+    {
+      "id": "arc-iv",
+      "numeral": "IV",
+      "title": "Machine & network",
+      "range": "Modules 17–22",
+      "description": "Connect machine execution and OS mediation to concurrent histories, protocols, partial failure, and trust boundaries."
+    },
+    {
+      "id": "arc-v",
+      "numeral": "V",
+      "title": "Languages & intelligence",
+      "range": "Modules 23–26",
+      "description": "Derive language meaning and runtime evidence before human-centered intelligent systems and capstone defense."
+    },
+    {
+      "id": "arc-vi",
+      "numeral": "VI",
+      "title": "Mathematical foundations",
+      "range": "Modules 27–31",
+      "description": "Deepen proof, representation, continuous change, probability, optimization, and information."
+    },
+    {
+      "id": "arc-vii",
+      "numeral": "VII",
+      "title": "Theory & learning systems",
+      "range": "Modules 32–36",
+      "description": "Connect systems languages, computation limits, classical AI, machine learning, and reliable learning systems."
+    }
+  ],
+  "routePlans": [
+    {
+      "id": "atlas-core-60",
+      "days": 60,
+      "intakeDay": 1,
+      "phases": [
+        {
+          "id": "claims",
+          "number": "I",
+          "title": "Execution, claims, and discrete structure",
+          "premise": "Before a system can be designed or optimized, model state and make claims precise enough to prove or refute.",
+          "gate": "Defend one invariant, repair one flawed proof, construct a smallest counterexample, and name the cost model of the check.",
+          "moduleNumbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            27
+          ],
+          "schedule": {
+            "startDay": 2,
+            "endDay": 9
+          }
+        },
+        {
+          "id": "algorithms",
+          "number": "II",
+          "title": "Representation and algorithmic strategy",
+          "premise": "A representation decides which operations are cheap, which invariants are local, and which strategy the structure permits.",
+          "gate": "Read an unfamiliar data-structure implementation, recover its invariant, compare strategies, and defend a cost/evidence boundary.",
+          "moduleNumbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "schedule": {
+            "startDay": 10,
+            "endDay": 17
+          }
+        },
+        {
+          "id": "software",
+          "number": "III",
+          "title": "Durable software and shared data",
+          "premise": "Local algorithms become useful when contracts, tests, artifacts, and transactions preserve meaning over time.",
+          "gate": "Trace a claim through an interface, test, and data boundary; diagnose one failed change; defend a repair with regression evidence.",
+          "moduleNumbers": [
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "schedule": {
+            "startDay": 18,
+            "endDay": 25
+          }
+        },
+        {
+          "id": "mathematics",
+          "number": "IV",
+          "title": "Execution, numerical models, and evidence",
+          "premise": "Machine behavior, linear structure, continuous change, uncertainty, and optimization explain what a numerical or ML claim can mean.",
+          "gate": "Derive a projection or likelihood step, name a numerical/data assumption, reject an overclaim, and explain what evidence would change it.",
+          "moduleNumbers": [
+            17,
+            28,
+            29,
+            30,
+            31
+          ],
+          "schedule": {
+            "startDay": 26,
+            "endDay": 34
+          }
+        },
+        {
+          "id": "systems",
+          "number": "V",
+          "title": "Machine, network, and runtime boundaries",
+          "premise": "Applications live inside machines, processes, schedules, networks, and trust boundaries; each changes what can be known.",
+          "gate": "Read a trace across system layers, name an ownership/failure boundary, and reject a claim the observation cannot establish.",
+          "moduleNumbers": [
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ],
+          "schedule": {
+            "startDay": 35,
+            "endDay": 44
+          }
+        },
+        {
+          "id": "intelligence",
+          "number": "VI",
+          "title": "Formal theory, classical AI, and learning",
+          "premise": "AI joins language, search, decision, representation, statistics, execution limits, and evidence rather than a single model call.",
+          "gate": "Model a problem before selecting an algorithm or model; identify an assumption, data boundary, and transfer risk.",
+          "moduleNumbers": [
+            32,
+            33,
+            34,
+            35,
+            36
+          ],
+          "schedule": {
+            "startDay": 45,
+            "endDay": 53
+          }
+        },
+        {
+          "id": "evidence",
+          "number": "VII",
+          "title": "Evidence and human control",
+          "premise": "A model or agent is useful only when its assumptions, authority, feedback, and uncertainty remain inspectable and challengeable.",
+          "gate": "Produce an evidence-and-human-control packet naming the claim, limitation, owner, and next falsifier.",
+          "moduleNumbers": [
+            25
+          ],
+          "schedule": {
+            "startDay": 54,
+            "endDay": 55
+          }
+        },
+        {
+          "id": "defense",
+          "number": "VIII",
+          "title": "Capstone release and oral architecture defense",
+          "premise": "A maintained release must connect mathematical argument, implementation evidence, tests, security, human impact, and revisable decisions.",
+          "gate": "Defend a versioned evidence bundle: claim, trace, test/observation, human impact, limitation, rollback, and next reason to revise.",
+          "moduleNumbers": [
+            26
+          ],
+          "schedule": {
+            "startDay": 56,
+            "endDay": 60
+          }
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "m01",
+      "number": 1,
+      "slug": "01-values-state-execution",
+      "title": "Values, State, and Execution",
+      "shortTitle": "state",
+      "purpose": "Model what exists and changes while Python runs.",
+      "knowledgeArcId": "arc-i",
+      "academicPrerequisiteNumbers": [],
+      "forwardModuleNumber": 2,
+      "masteryGateId": "claims",
+      "routeRole": "required",
+      "referenceReadMinutes": 21,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "benchPackId": "m01",
+      "sequencePosition": 1,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m02",
+      "number": 2,
+      "slug": "02-functions-recursion-induction",
+      "title": "Functions, Recursion, and Induction",
+      "shortTitle": "recursion",
+      "purpose": "Connect executable recursion to a correctness argument.",
+      "knowledgeArcId": "arc-i",
+      "academicPrerequisiteNumbers": [
+        1
+      ],
+      "forwardModuleNumber": 3,
+      "masteryGateId": "claims",
+      "routeRole": "required",
+      "referenceReadMinutes": 46,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "benchPackId": "m02",
+      "sequencePosition": 2,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m03",
+      "number": 3,
+      "slug": "03-abstraction-interfaces-adts",
+      "title": "Abstraction, Interfaces, and Abstract Data Types",
+      "shortTitle": "abstraction",
+      "purpose": "Separate meaning from representation and preserve an invariant.",
+      "knowledgeArcId": "arc-i",
+      "academicPrerequisiteNumbers": [
+        2
+      ],
+      "forwardModuleNumber": 4,
+      "masteryGateId": "claims",
+      "routeRole": "required",
+      "referenceReadMinutes": 64,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "benchPackId": "m03",
+      "sequencePosition": 3,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m04",
+      "number": 4,
+      "slug": "04-logic-sets-relations-graphs-proof",
+      "title": "Logic, Sets, Relations, Graphs, and Proof",
+      "shortTitle": "logic",
+      "purpose": "Turn informal rules into claims that can be proved or tested.",
+      "knowledgeArcId": "arc-i",
+      "academicPrerequisiteNumbers": [
+        3
+      ],
+      "forwardModuleNumber": 5,
+      "masteryGateId": "claims",
+      "routeRole": "required",
+      "referenceReadMinutes": 25,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "benchPackId": "m04",
+      "sequencePosition": 4,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m05",
+      "number": 5,
+      "slug": "05-cost-models-algorithm-analysis",
+      "title": "Cost Models and Algorithm Analysis",
+      "shortTitle": "cost",
+      "purpose": "Make resource claims explicit before choosing an algorithm.",
+      "knowledgeArcId": "arc-i",
+      "academicPrerequisiteNumbers": [
+        4
+      ],
+      "forwardModuleNumber": 27,
+      "masteryGateId": "claims",
+      "routeRole": "required",
+      "referenceReadMinutes": 24,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "benchPackId": "m05",
+      "sequencePosition": 5,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m06",
+      "number": 6,
+      "slug": "06-representation-memory-sequences-linked",
+      "title": "Representation, Memory, Sequences, and Linked Structures",
+      "shortTitle": "representation",
+      "purpose": "Relate abstract sequence meaning to concrete storage and cost.",
+      "knowledgeArcId": "arc-ii",
+      "academicPrerequisiteNumbers": [
+        5
+      ],
+      "forwardModuleNumber": 7,
+      "masteryGateId": "algorithms",
+      "routeRole": "required",
+      "referenceReadMinutes": 58,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m06",
+      "sequencePosition": 7,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m07",
+      "number": 7,
+      "slug": "07-stacks-queues-iteration-lazy",
+      "title": "Stacks, Queues, Iteration, and Lazy Computation",
+      "shortTitle": "access",
+      "purpose": "Constrain access to make work, demand, and ownership visible.",
+      "knowledgeArcId": "arc-ii",
+      "academicPrerequisiteNumbers": [
+        6
+      ],
+      "forwardModuleNumber": 8,
+      "masteryGateId": "algorithms",
+      "routeRole": "required",
+      "referenceReadMinutes": 52,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m07",
+      "sequencePosition": 8,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m08",
+      "number": 8,
+      "slug": "08-hashing-dictionaries-sets-indexing",
+      "title": "Hashing, Dictionaries, Sets, and Indexing",
+      "shortTitle": "indexing",
+      "purpose": "Connect equality, hashing, probability, and lookup policy.",
+      "knowledgeArcId": "arc-ii",
+      "academicPrerequisiteNumbers": [
+        7
+      ],
+      "forwardModuleNumber": 9,
+      "masteryGateId": "algorithms",
+      "routeRole": "required",
+      "referenceReadMinutes": 52,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m08",
+      "sequencePosition": 9,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m09",
+      "number": 9,
+      "slug": "09-trees-heaps-sorting-ordered",
+      "title": "Trees, Heaps, Sorting, and Ordered Search",
+      "shortTitle": "order",
+      "purpose": "Use ordered structure to answer next, nearest, and priority questions.",
+      "knowledgeArcId": "arc-ii",
+      "academicPrerequisiteNumbers": [
+        8
+      ],
+      "forwardModuleNumber": 10,
+      "masteryGateId": "algorithms",
+      "routeRole": "required",
+      "referenceReadMinutes": 74,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m09",
+      "sequencePosition": 10,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m10",
+      "number": 10,
+      "slug": "10-graph-algorithms-network-models",
+      "title": "Graph Algorithms and Network Models",
+      "shortTitle": "graphs",
+      "purpose": "Make reachability, dependency, and connectivity executable.",
+      "knowledgeArcId": "arc-ii",
+      "academicPrerequisiteNumbers": [
+        9
+      ],
+      "forwardModuleNumber": 11,
+      "masteryGateId": "algorithms",
+      "routeRole": "required",
+      "referenceReadMinutes": 76,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m10",
+      "sequencePosition": 11,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m11",
+      "number": 11,
+      "slug": "11-algorithm-design-paradigms",
+      "title": "Algorithm Design Paradigms: Choosing a Strategy from Structure",
+      "shortTitle": "strategy",
+      "purpose": "Justify greedy, divide-and-conquer, dynamic, or search strategies from structure.",
+      "knowledgeArcId": "arc-ii",
+      "academicPrerequisiteNumbers": [
+        10
+      ],
+      "forwardModuleNumber": 12,
+      "masteryGateId": "algorithms",
+      "routeRole": "required",
+      "referenceReadMinutes": 63,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m11",
+      "sequencePosition": 12,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m12",
+      "number": 12,
+      "slug": "12-modules-apis-types-dependencies",
+      "title": "Modules, APIs, Types, and Dependency Direction",
+      "shortTitle": "boundaries",
+      "purpose": "Control what components may know, call, and change.",
+      "knowledgeArcId": "arc-iii",
+      "academicPrerequisiteNumbers": [
+        11
+      ],
+      "forwardModuleNumber": 13,
+      "masteryGateId": "software",
+      "routeRole": "required",
+      "referenceReadMinutes": 82,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": "dependency-direction",
+      "benchPackId": "m12",
+      "sequencePosition": 13,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m13",
+      "number": 13,
+      "slug": "13-specifications-testing-debugging-observability",
+      "title": "Specifications, Testing, Debugging, and Observability",
+      "shortTitle": "evidence",
+      "purpose": "Turn ambiguity into testable claims and failures into regression knowledge.",
+      "knowledgeArcId": "arc-iii",
+      "academicPrerequisiteNumbers": [
+        12
+      ],
+      "forwardModuleNumber": 14,
+      "masteryGateId": "software",
+      "routeRole": "required",
+      "referenceReadMinutes": 54,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": "specification-trace",
+      "benchPackId": "m13",
+      "sequencePosition": 14,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m14",
+      "number": 14,
+      "slug": "14-software-design-and-change",
+      "title": "Software Design and Change",
+      "shortTitle": "design",
+      "purpose": "Place likely change behind an intentional boundary.",
+      "knowledgeArcId": "arc-iii",
+      "academicPrerequisiteNumbers": [
+        13
+      ],
+      "forwardModuleNumber": 15,
+      "masteryGateId": "software",
+      "routeRole": "required",
+      "referenceReadMinutes": 69,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m14",
+      "sequencePosition": 15,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m15",
+      "number": 15,
+      "slug": "15-files-serialization-packaging-delivery",
+      "title": "Files, Serialization, Packaging, and Delivery",
+      "shortTitle": "artifacts",
+      "purpose": "Make boundary-crossing state explicit, compatible, and reviewable.",
+      "knowledgeArcId": "arc-iii",
+      "academicPrerequisiteNumbers": [
+        14
+      ],
+      "forwardModuleNumber": 16,
+      "masteryGateId": "software",
+      "routeRole": "required",
+      "referenceReadMinutes": 110,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          540,
+          660
+        ],
+        "deepDossier": [
+          660,
+          900
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m15",
+      "sequencePosition": 16,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m16",
+      "number": 16,
+      "slug": "16-relational-data-transactions",
+      "title": "Relational Data and Transactions",
+      "shortTitle": "transactions",
+      "purpose": "Represent relationships and coordinate invariant-preserving changes.",
+      "knowledgeArcId": "arc-iii",
+      "academicPrerequisiteNumbers": [
+        15
+      ],
+      "forwardModuleNumber": 17,
+      "masteryGateId": "software",
+      "routeRole": "required",
+      "referenceReadMinutes": 93,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "benchPackId": "m16",
+      "sequencePosition": 17,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m17",
+      "number": 17,
+      "slug": "17-computer-architecture-execution-stack",
+      "title": "Computer Architecture and the Execution Stack",
+      "shortTitle": "machine",
+      "purpose": "Trace a Python-level request through the execution stack.",
+      "knowledgeArcId": "arc-iv",
+      "academicPrerequisiteNumbers": [
+        16
+      ],
+      "forwardModuleNumber": 28,
+      "masteryGateId": "mathematics",
+      "routeRole": "required",
+      "referenceReadMinutes": 96,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/module17_architecture_execution_source_map.md",
+      "studioId": null,
+      "benchPackId": "m17",
+      "sequencePosition": 18,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m18",
+      "number": 18,
+      "slug": "18-operating-systems-resource-mediation",
+      "title": "Operating Systems and Resource Mediation",
+      "shortTitle": "operating systems",
+      "purpose": "Treat processes, files, memory, and interruption as controlled resources.",
+      "knowledgeArcId": "arc-iv",
+      "academicPrerequisiteNumbers": [
+        17
+      ],
+      "forwardModuleNumber": 19,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 97,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
+      "studioId": "operating-systems",
+      "benchPackId": "m18",
+      "sequencePosition": 23,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m19",
+      "number": 19,
+      "slug": "19-concurrency-parallelism",
+      "title": "Concurrency and Parallelism",
+      "shortTitle": "concurrency",
+      "purpose": "Make concurrent histories, ownership, progress, and evidence explicit.",
+      "knowledgeArcId": "arc-iv",
+      "academicPrerequisiteNumbers": [
+        18
+      ],
+      "forwardModuleNumber": 20,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 104,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          540,
+          660
+        ],
+        "deepDossier": [
+          660,
+          900
+        ]
+      },
+      "sourceMap": "content/source-maps/module19_concurrency_parallelism_source_map.md",
+      "studioId": "concurrency",
+      "benchPackId": "m19",
+      "sequencePosition": 24,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m20",
+      "number": 20,
+      "slug": "20-networks-application-protocols",
+      "title": "Networks and Application Protocols",
+      "shortTitle": "protocols",
+      "purpose": "Distinguish a local send from a remote, durable fact.",
+      "knowledgeArcId": "arc-iv",
+      "academicPrerequisiteNumbers": [
+        19
+      ],
+      "forwardModuleNumber": 21,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 72,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/module20_networks_protocols_source_map.md",
+      "studioId": "network-protocol",
+      "benchPackId": "m20",
+      "sequencePosition": 25,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m21",
+      "number": 21,
+      "slug": "21-async-distributed-systems",
+      "title": "Async and Distributed Systems",
+      "shortTitle": "distribution",
+      "purpose": "Coordinate partial work without inventing global certainty.",
+      "knowledgeArcId": "arc-iv",
+      "academicPrerequisiteNumbers": [
+        20
+      ],
+      "forwardModuleNumber": 22,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/module21_async_distributed_source_map.md",
+      "studioId": "async-distributed",
+      "benchPackId": "m21",
+      "sequencePosition": 26,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m22",
+      "number": 22,
+      "slug": "22-security-privacy-trust-boundaries",
+      "title": "Security, Privacy & Trust Boundaries",
+      "shortTitle": "trust",
+      "purpose": "Keep data, authority, provenance, and human impact distinct.",
+      "knowledgeArcId": "arc-iv",
+      "academicPrerequisiteNumbers": [
+        21
+      ],
+      "forwardModuleNumber": 23,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 31,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/module22_security_trust_source_map.md",
+      "studioId": "security-trust",
+      "benchPackId": "m22",
+      "sequencePosition": 27,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m23",
+      "number": 23,
+      "slug": "23-programming-languages-interpreters",
+      "title": "Programming Languages, Interpreters & Bounded Evaluation",
+      "shortTitle": "language",
+      "purpose": "Separate text, structure, evaluation, capability, and authority.",
+      "knowledgeArcId": "arc-v",
+      "academicPrerequisiteNumbers": [
+        22
+      ],
+      "forwardModuleNumber": 24,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 34,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceMap": "content/source-maps/module23_languages_interpreters_source_map.md",
+      "studioId": "language-interpreter",
+      "benchPackId": "m23",
+      "sequencePosition": 28,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m24",
+      "number": 24,
+      "slug": "24-cpython-performance-memory",
+      "title": "CPython, Performance & Memory Evidence",
+      "shortTitle": "runtime evidence",
+      "purpose": "Label interpreter facts, benchmark observations, and portable claims honestly.",
+      "knowledgeArcId": "arc-v",
+      "academicPrerequisiteNumbers": [
+        23
+      ],
+      "forwardModuleNumber": 32,
+      "masteryGateId": "systems",
+      "routeRole": "required",
+      "referenceReadMinutes": 21,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceMap": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+      "studioId": "runtime-evidence",
+      "benchPackId": "m24",
+      "sequencePosition": 29,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m25",
+      "number": 25,
+      "slug": "25-evidence-grounded-intelligent-systems",
+      "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
+      "shortTitle": "decision evidence",
+      "purpose": "Keep a score, suggestion, or agent proposal under human and evidence boundaries.",
+      "knowledgeArcId": "arc-v",
+      "academicPrerequisiteNumbers": [
+        22,
+        24,
+        30,
+        31,
+        34,
+        35,
+        36
+      ],
+      "forwardModuleNumber": 26,
+      "masteryGateId": "evidence",
+      "routeRole": "required",
+      "referenceReadMinutes": 36,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceMap": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+      "studioId": "evidence-grounded",
+      "benchPackId": "m25",
+      "sequencePosition": 35,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "preview",
+        "availability": "preview",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m26",
+      "number": 26,
+      "slug": "26-systems-capstone-open-source-stewardship",
+      "title": "Systems Capstone, Open-Source Stewardship & Oral Architecture Defense",
+      "shortTitle": "capstone defense",
+      "purpose": "Release and orally defend an evidence-backed system rather than a polished demo.",
+      "knowledgeArcId": "arc-v",
+      "academicPrerequisiteNumbers": [
+        25
+      ],
+      "forwardModuleNumber": null,
+      "masteryGateId": "defense",
+      "routeRole": "required",
+      "referenceReadMinutes": 38,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          600,
+          720
+        ],
+        "deepDossier": [
+          900,
+          1200
+        ]
+      },
+      "sourceMap": "content/source-maps/module26_systems_capstone_source_map.md",
+      "studioId": "capstone-defense",
+      "benchPackId": null,
+      "sequencePosition": 36,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "preview",
+        "availability": "preview",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m27",
+      "number": 27,
+      "slug": "27-discrete-mathematics-proof-counting-structures",
+      "title": "Discrete Mathematics, Proof, Counting & Structures",
+      "shortTitle": "proof depth",
+      "purpose": "Deepen induction, invariants, counting, recurrences, posets, matchings, and number-theoretic structure.",
+      "knowledgeArcId": "arc-vi",
+      "academicPrerequisiteNumbers": [
+        2,
+        4,
+        5
+      ],
+      "forwardModuleNumber": 6,
+      "masteryGateId": "claims",
+      "routeRole": "required",
+      "referenceReadMinutes": 48,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          780,
+          1020
+        ],
+        "deepDossier": [
+          1200,
+          1680
+        ]
+      },
+      "sourceMap": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "studioId": "discrete-math-proof",
+      "benchPackId": "m27",
+      "sequencePosition": 6,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m28",
+      "number": 28,
+      "slug": "28-linear-algebra-numerical-stability-representation",
+      "title": "Linear Algebra, Numerical Stability & Representation",
+      "shortTitle": "linear algebra",
+      "purpose": "Derive projection, low-rank structure, and PCA with conditioning in view.",
+      "knowledgeArcId": "arc-vi",
+      "academicPrerequisiteNumbers": [
+        17,
+        27
+      ],
+      "forwardModuleNumber": 29,
+      "masteryGateId": "mathematics",
+      "routeRole": "required",
+      "referenceReadMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          840,
+          1080
+        ],
+        "deepDossier": [
+          1380,
+          1920
+        ]
+      },
+      "sourceMap": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "studioId": "linear-algebra-stability",
+      "benchPackId": "m28",
+      "sequencePosition": 19,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m29",
+      "number": 29,
+      "slug": "29-calculus-real-analysis-continuous-change",
+      "title": "Calculus, Real Analysis & Continuous Change",
+      "shortTitle": "calculus",
+      "purpose": "Connect limits, local change, accumulation, and convergence to computational evidence.",
+      "knowledgeArcId": "arc-vi",
+      "academicPrerequisiteNumbers": [
+        27,
+        28
+      ],
+      "forwardModuleNumber": 30,
+      "masteryGateId": "mathematics",
+      "routeRole": "required",
+      "referenceReadMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
+      },
+      "sourceMap": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "studioId": "calculus-continuous-change",
+      "benchPackId": "m29",
+      "sequencePosition": 20,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m30",
+      "number": 30,
+      "slug": "30-probability-statistics-scientific-inference",
+      "title": "Probability, Statistics & Scientific Inference",
+      "shortTitle": "inference",
+      "purpose": "Separate randomness, estimation, uncertainty, and experimental evidence.",
+      "knowledgeArcId": "arc-vi",
+      "academicPrerequisiteNumbers": [
+        27,
+        29
+      ],
+      "forwardModuleNumber": 31,
+      "masteryGateId": "mathematics",
+      "routeRole": "required",
+      "referenceReadMinutes": 46,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
+      },
+      "sourceMap": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
+      "studioId": "probability-inference",
+      "benchPackId": "m30",
+      "sequencePosition": 21,
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      }
+    },
+    {
+      "id": "m31",
+      "number": 31,
+      "slug": "31-optimization-information",
+      "title": "Optimization & Information",
+      "shortTitle": "optimization",
+      "purpose": "Derive objective, constraint, convergence, and information trade-offs.",
+      "knowledgeArcId": "arc-vi",
+      "academicPrerequisiteNumbers": [
+        28,
+        29,
+        30
+      ],
+      "forwardModuleNumber": 18,
+      "masteryGateId": "mathematics",
+      "routeRole": "required",
+      "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          600,
+          840
+        ]
+      },
+      "sourceMap": null,
+      "studioId": null,
+      "benchPackId": "m31",
+      "sequencePosition": 22,
+      "state": {
+        "lifecycle": "authoring-only",
+        "readerAccess": "hidden",
+        "availability": "authoring-only",
+        "contract": {
+          "track": "advanced-v1",
+          "state": "authoring-only"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        },
+        "privateGuidedStudy": {
+          "status": "ready",
+          "delivery": "designated-codex-chats"
+        }
+      }
+    },
+    {
+      "id": "m32",
+      "number": 32,
+      "slug": "32-systems-languages-scientific-python-accelerators",
+      "title": "Systems Languages, Scientific Python & Accelerators",
+      "shortTitle": "accelerators",
+      "purpose": "Connect lower-level execution, array layout, autodiff, GPU work, and reproducibility.",
+      "knowledgeArcId": "arc-vii",
+      "academicPrerequisiteNumbers": [
+        12,
+        17,
+        19,
+        24,
+        28,
+        31
+      ],
+      "forwardModuleNumber": 33,
+      "masteryGateId": "intelligence",
+      "routeRole": "required",
+      "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          720,
+          960
+        ]
+      },
+      "sourceMap": null,
+      "studioId": null,
+      "benchPackId": "m32",
+      "sequencePosition": 30,
+      "state": {
+        "lifecycle": "authoring-only",
+        "readerAccess": "hidden",
+        "availability": "authoring-only",
+        "contract": {
+          "track": "advanced-v1",
+          "state": "authoring-only"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        },
+        "privateGuidedStudy": {
+          "status": "ready",
+          "delivery": "designated-codex-chats"
+        }
+      }
+    },
+    {
+      "id": "m33",
+      "number": 33,
+      "slug": "33-formal-languages-computability-complexity",
+      "title": "Formal Languages, Computability & Complexity",
+      "shortTitle": "limits",
+      "purpose": "Reason about what syntax, algorithms, and computation can or cannot decide.",
+      "knowledgeArcId": "arc-vii",
+      "academicPrerequisiteNumbers": [
+        5,
+        11,
+        23,
+        27
+      ],
+      "forwardModuleNumber": 34,
+      "masteryGateId": "intelligence",
+      "routeRole": "required",
+      "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          600,
+          840
+        ]
+      },
+      "sourceMap": null,
+      "studioId": null,
+      "benchPackId": "m33",
+      "sequencePosition": 31,
+      "state": {
+        "lifecycle": "authoring-only",
+        "readerAccess": "hidden",
+        "availability": "authoring-only",
+        "contract": {
+          "track": "advanced-v1",
+          "state": "authoring-only"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        },
+        "privateGuidedStudy": {
+          "status": "ready",
+          "delivery": "designated-codex-chats"
+        }
+      }
+    },
+    {
+      "id": "m34",
+      "number": 34,
+      "slug": "34-classical-ai-search-constraints-decision",
+      "title": "Classical AI: Search, Constraints & Decision",
+      "shortTitle": "classical AI",
+      "purpose": "Formulate state, search, constraints, uncertainty, and decisions before neural methods.",
+      "knowledgeArcId": "arc-vii",
+      "academicPrerequisiteNumbers": [
+        10,
+        11,
+        30,
+        31,
+        33
+      ],
+      "forwardModuleNumber": 35,
+      "masteryGateId": "intelligence",
+      "routeRole": "required",
+      "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          720,
+          960
+        ]
+      },
+      "sourceMap": null,
+      "studioId": null,
+      "benchPackId": "m34",
+      "sequencePosition": 32,
+      "state": {
+        "lifecycle": "authoring-only",
+        "readerAccess": "hidden",
+        "availability": "authoring-only",
+        "contract": {
+          "track": "advanced-v1",
+          "state": "authoring-only"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        },
+        "privateGuidedStudy": {
+          "status": "ready",
+          "delivery": "designated-codex-chats"
+        }
+      }
+    },
+    {
+      "id": "m35",
+      "number": 35,
+      "slug": "35-machine-learning-representation",
+      "title": "Machine Learning & Representation",
+      "shortTitle": "machine learning",
+      "purpose": "Tie learning methods to data splits, representation, evaluation, uncertainty, and shift.",
+      "knowledgeArcId": "arc-vii",
+      "academicPrerequisiteNumbers": [
+        13,
+        22,
+        28,
+        30,
+        31,
+        32,
+        34
+      ],
+      "forwardModuleNumber": 36,
+      "masteryGateId": "intelligence",
+      "routeRole": "required",
+      "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          720,
+          960
+        ]
+      },
+      "sourceMap": null,
+      "studioId": null,
+      "benchPackId": "m35",
+      "sequencePosition": 33,
+      "state": {
+        "lifecycle": "authoring-only",
+        "readerAccess": "hidden",
+        "availability": "authoring-only",
+        "contract": {
+          "track": "advanced-v1",
+          "state": "authoring-only"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        },
+        "privateGuidedStudy": {
+          "status": "ready",
+          "delivery": "designated-codex-chats"
+        }
+      }
+    },
+    {
+      "id": "m36",
+      "number": 36,
+      "slug": "36-statistical-learning-theory-reliable-deep-learning",
+      "title": "Statistical Learning Theory & Reliable Deep-Learning Systems",
+      "shortTitle": "learning theory",
+      "purpose": "Read guarantees and limits alongside implementation and deployment evidence.",
+      "knowledgeArcId": "arc-vii",
+      "academicPrerequisiteNumbers": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        35
+      ],
+      "forwardModuleNumber": 25,
+      "masteryGateId": "intelligence",
+      "routeRole": "required",
+      "referenceReadMinutes": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          840,
+          1080
+        ]
+      },
+      "sourceMap": null,
+      "studioId": null,
+      "benchPackId": "m36",
+      "sequencePosition": 34,
+      "state": {
+        "lifecycle": "authoring-only",
+        "readerAccess": "hidden",
+        "availability": "authoring-only",
+        "contract": {
+          "track": "advanced-v1",
+          "state": "authoring-only"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        },
+        "privateGuidedStudy": {
+          "status": "ready",
+          "delivery": "designated-codex-chats"
+        }
+      }
+    }
+  ]
+}

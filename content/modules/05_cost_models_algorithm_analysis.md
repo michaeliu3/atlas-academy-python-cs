@@ -11,6 +11,9 @@ This module asks:
 We derive analysis from the execution model in Module 1, recursive structure in Module 2, abstraction contracts in Module 3, and counting/proof language in Module 4.
 
 ```mermaid
+%% atlas-diagram-id: m05-analysis-knowledge-bridge
+%% atlas-diagram-title: Earlier execution, recursion, ADT, and proof ideas lead to algorithm analysis
+%% atlas-diagram-alt: Execution steps, recursion, ADT operations, and counting and proof supply a cost model, recurrence, operation costs, and a bound. The bound predicts growth, which is measured and explained before Module 27 strengthens the proof bridge for later data-structure and algorithm modules.
 flowchart LR
     EXEC["Execution steps<br/>Module 1"] --> MODEL["Choose a cost model"]
     REC["Recursion<br/>Module 2"] --> RECUR["Write a recurrence"]
@@ -22,10 +25,22 @@ flowchart LR
     BOUND --> PREDICT["Predict growth"]
     PREDICT --> MEASURE["Measure implementation"]
     MEASURE --> EXPLAIN["Explain agreement or mismatch"]
-    EXPLAIN --> DS["Modules 6–11<br/>data structures + algorithms"]
+    EXPLAIN --> M27["Module 27<br/>discrete proof bridge"]
+    M27 --> DS["Modules 6–11<br/>data structures + algorithms"]
 ```
 
 Analysis is a model of growth. Measurement is an observation of a particular implementation on a particular machine. We need both, and we must not confuse them.
+
+### Text alternative — analysis knowledge bridge
+
+Modules 1–4 contribute execution steps, recursive call structure, ADT
+operation contracts, and counting/proof language. M5 turns those into an
+explicit cost model, recurrence or operation count, and a qualified bound. The
+bound makes a growth prediction; measurement checks one implementation and
+workload; any disagreement sends the learner back to the model or assumptions.
+The canonical next route is M27, where the proof bridge is strengthened before
+the later data-structure and algorithm modules. References to M6–M36 here are
+conceptual connections, not permission to bypass that route.
 
 ## Prerequisite retrieval
 
@@ -37,7 +52,7 @@ Analysis is a model of growth. Measurement is an observation of a particular imp
 
 If question 2 or 3 is unclear, pause for a short proof/recursion bridge. Recurrences and asymptotic claims build directly on them.
 
-## Mastery outcomes
+## Learning outcomes
 
 By the end, Michael can:
 
@@ -103,6 +118,28 @@ This model hides string length. If topic strings can grow with the input, a bett
 
 There is no context-free complexity label. A claim is meaningful only with its model and input measure.
 
+### First-principles derivation — a growth claim begins with what is counted
+
+Start with a concrete execution trace, not a familiar label. Choose the input
+family, the resource, the operation whose repetitions matter, and the
+assumptions that make its cost comparable. Count that operation over the trace;
+only then simplify the resulting function into an asymptotic claim. A label
+without those choices is a conclusion with its evidence removed.
+
+### Definition — cost model and asymptotic claim
+
+A **cost model** is a deliberately bounded mapping from an input family to a
+resource count under named operation-cost assumptions. An **asymptotic claim**
+relates that resulting count to a comparison function for sufficiently large
+inputs; it does not report a universal elapsed time.
+
+### Assumption — stable primitive-operation model
+
+For a first analysis, treat each named primitive as constant cost only where
+the model says so. If string length, hash collisions, I/O, allocation, or a
+data-structure operation can grow with the input, add a parameter or revise the
+claim instead of silently keeping the old model.
+
 ### Machine-independent does not mean machine-true
 
 Counting abstract operations lets us reason across CPUs and Python versions. It deliberately ignores constants, cache behavior, interpreter overhead, allocation, and I/O. Later systems modules will reopen those layers.
@@ -133,6 +170,41 @@ Let `m = len(edges)`.
 Worst-case time in that model is `Θ(m)`. Auxiliary space is `Θ(1)` because the function allocates no collection that grows with `m`.
 
 If dictionary lookup is not assumed constant—for example, under adversarial collision behavior—the statement must change. The cost of an algorithm depends on the operations supplied by its data structures.
+
+### Derivation and proof idea — count before simplifying
+
+For all-distinct list-only deduplication, the membership scans contribute
+`0 + 1 + ... + (n - 1) = n(n - 1) / 2` equality checks. This exact count gives
+an upper and a lower constant-factor multiple of `n²` once `n` is large enough,
+which is the proof idea behind the tight `Θ(n²)` claim. The count comes
+first; the bound summarizes it.
+
+### Prediction and proof checkpoint — make `Θ` concrete
+
+Under the all-distinct, list-membership, equality-comparison model above, let
+`f(n) = n(n - 1) / 2`. Before revealing the bound, choose a lower constant,
+an upper constant, and a threshold that you think can witness `f ∈ Θ(n²)`.
+
+For every `n ≥ 2`, `n - 1 ≥ n / 2` and `n - 1 ≤ n`. Therefore:
+
+$$
+\frac{n^2}{4} \le \frac{n(n - 1)}{2} \le \frac{n^2}{2}.
+$$
+
+**Prose fallback:** once `n` is at least two, the exact comparison count is
+at least one quarter of `n²` and at most one half of `n²`.
+
+So `c₁ = 1/4`, `c₂ = 1/2`, and `n₀ = 2` witness both the lower and upper
+constant-factor bounds. Hence `f ∈ Θ(n²)` **for this stated operation model**.
+The proof does not claim a wall-clock bound, constant-time hash lookup, or a
+performance result for every Python runtime and input family.
+
+### Counterexample — one visible loop can hide quadratic membership
+
+`for topic in topics` looks like one pass, but `topic not in unique` can scan a
+growing list on every iteration. The all-distinct workload is a witness: the
+hidden membership costs accumulate quadratically even though the source shows
+only one explicit loop.
 
 ### Common loop shapes
 
@@ -175,6 +247,9 @@ If `f(n) = n`, then `f ∈ O(n²)` is true but weak. `Θ(n)` communicates the ti
 An `O(n log n)` implementation can be slower than an `O(n²)` one over small inputs due to constants and overhead. Asymptotic analysis predicts eventual growth, not a universal stopwatch ranking.
 
 ```mermaid
+%% atlas-diagram-id: m05-complexity-claim-components
+%% atlas-diagram-title: A complexity claim needs size, resource, case, operation costs, and bound kind
+%% atlas-diagram-alt: A complexity claim branches into five questions: what input size is used, which resource is counted, whether the case is best, worst, expected, or amortized, which operation costs are assumed, and whether the result is an upper, lower, or tight bound.
 flowchart TD
     CLAIM["Complexity claim"] --> SIZE["What is input size?"]
     CLAIM --> RESOURCE["What resource?"]
@@ -228,6 +303,9 @@ Adding the `n` ordinary writes gives total work below a constant multiple of `n`
 One individual append may still cost `Θ(n)`. Amortized constant time does not mean every call is constant time.
 
 ```mermaid
+%% atlas-diagram-id: m05-amortized-append-sequence
+%% atlas-diagram-title: Rare resize operations are distributed across many cheap appends
+%% atlas-diagram-alt: A sequence of cheap appends contains occasional expensive resize-and-append operations, then returns to cheap appends. The diagram explains why the aggregate cost can be constant amortized even though an individual resize can cost linear time.
 flowchart LR
     A1["append<br/>cheap"] --> A2["append<br/>cheap"]
     A2 --> A3["resize + append<br/>expensive"]
@@ -340,22 +418,41 @@ The best design depends on requirements and constraints. Complexity informs the 
 
 A benchmark tests whether observed scaling matches a prediction.
 
+### Prediction before reveal — write the scaling expectation
+
+Before running a timer, state which input parameter doubles, which resource is
+being modeled, and the expected direction of the timing ratio. For example,
+write whether moving from 1,000 to 2,000 all-distinct topics should approach a
+factor near two or four under the stated model, and record low, medium, or high
+confidence. Reveal measurements only after that prediction is visible.
+
 ```python
 from collections.abc import Callable
+from statistics import median
 from time import perf_counter
 
 
-def elapsed_seconds(
+def elapsed_samples(
     operation: Callable[[list[str]], object],
     data: list[str],
     repeats: int = 5,
-) -> float:
+) -> list[float]:
     samples: list[float] = []
     for _ in range(repeats):
         start = perf_counter()
         operation(data)
         samples.append(perf_counter() - start)
-    return min(samples)
+    return samples
+
+
+def summarize_samples(samples: list[float]) -> dict[str, float]:
+    if not samples:
+        raise ValueError("need at least one timing sample")
+    return {
+        "median_seconds": median(samples),
+        "minimum_seconds": min(samples),
+        "maximum_seconds": max(samples),
+    }
 ```
 
 This is an intentionally small teaching harness, not a production-grade benchmarking framework. A credible experiment also controls or reports:
@@ -369,6 +466,10 @@ This is an intentionally small teaching harness, not a production-grade benchmar
 - environment, Python version, and machine;
 - whether I/O, allocation, or garbage collection dominates.
 
+Keep the raw sample list in the dossier and report its median together with
+its minimum and maximum. The minimum can be a useful lower-noise observation,
+but it is not a defensible stand-in for typical performance or spread.
+
 ### Ratio test
 
 If time is approximately:
@@ -379,9 +480,20 @@ If time is approximately:
 
 Ratios are noisy evidence, not proof. A log-log plot can reveal slope, but any fitted line can mislead over a narrow range.
 
+### Numerical experiment — doubling checks a model, not a theorem
+
+Measure at several geometrically spaced sizes such as 1,000, 2,000, and 4,000
+with the same semantics and workload family. Compare raw repeated samples and
+their ratios with the prior prediction, then name a possible confounder when
+they differ. The experiment can expose a bad assumption or suggest a scaling
+story; it cannot by itself prove an asymptotic statement.
+
 ### The benchmark–analysis loop
 
 ```mermaid
+%% atlas-diagram-id: m05-benchmark-analysis-loop
+%% atlas-diagram-title: A measurement disagreement sends analysis back to its assumptions
+%% atlas-diagram-alt: State a model-based hypothesis, design inputs, measure repeatedly, and plot times and ratios. If results roughly match, report a range and uncertainty; if not, inspect constants, hidden operations, data distribution, or a wrong model and revise the hypothesis.
 flowchart LR
     H["State hypothesis<br/>with model"] --> D["Design inputs"]
     D --> M["Measure repeatedly"]
@@ -424,11 +536,28 @@ def missing_prerequisites(
 
 If `n = len(route)` and `m = len(edges)`, list membership can scan `n` items. Two scans per edge still give `Θ(mn)` worst-case time, not `Θ(m)` merely because there is one explicit loop.
 
+### Code-reading — recover the hidden operation
+
+Read the call sites as well as the loop: `dependent in route` and
+`prerequisite not in route` are list-membership operations whose model cost can
+grow with `n`. State the result as `Θ(mn)` only after naming the worst-case
+route and the list-membership assumption.
+
+### Debugging — isolate a cost-model mismatch
+
+When a timing result disagrees, first make a smallest reproducible workload and
+separate changed semantics, input construction, setup, data distribution, and
+hidden primitive costs. Repair the model or measurement boundary before
+changing the algorithm merely to fit a chart.
+
 ## 12. Architecture and performance boundaries
 
 Performance claims belong near the abstraction that controls the operations.
 
 ```mermaid
+%% atlas-diagram-id: m05-cost-boundary-architecture
+%% atlas-diagram-title: Algorithmic operation counts stay separate from adapter and system costs
+%% atlas-diagram-alt: A Route UI calls a planning use case, which uses a prerequisite domain and Graph Index ADT. A database adapter implements the graph index, while the domain asks only contracted operations such as neighbors and contains; their cost contract stays visible at the abstraction boundary.
 flowchart LR
     UI["Route UI"] --> USE["Plan route use case"]
     USE --> DOMAIN["Prerequisite domain"]
@@ -472,6 +601,13 @@ The purpose is to make the cost model visible. Once the mechanism is understood,
 
 ## 14. Agent direction and evidence review
 
+### Design — preserve semantics before optimizing
+
+Choose a representation only after stating the visible order, normalization,
+duplicate, memory, and workload requirements. A faster-looking implementation
+that changes first-seen order or equality semantics is a different program, not
+an optimization of the original one.
+
 Delegate this bounded task:
 
 > Add a benchmark study comparing the list-only and set-indexed Atlas deduplicators. Preserve first-seen order and identical normalization semantics. Generate deterministic all-distinct, all-equal, and mixed datasets over geometrically increasing sizes. Keep data generation outside timed regions, collect repeated samples, save machine-readable results, and produce one log-log chart. Do not change production behavior or add an optimization. In the report, distinguish worst-case, expected, and measured claims and state Python/hash assumptions.
@@ -495,7 +631,7 @@ Reject a polished chart when the experiment cannot support its caption.
 
 Each session begins with a prediction and ends with a claim whose assumptions Michael can defend. Measurement appears only after the analytic model exists.
 
-### Session 1 — Count what the program actually does
+## Session 1 — Count what the program actually does
 
 **Recall:** finite sets, sums, state transitions, and ADT operations.  
 **Launch:** read the list-only Atlas deduplicator and predict which input grows worst.  
@@ -503,7 +639,12 @@ Each session begins with a prediction and ends with a claim whose assumptions Mi
 **Learner action:** instrument equality checks for tiny inputs and compare observations with `n(n−1)/2`.  
 **Exit synthesis:** state why “one loop” does not establish linear time.
 
-### Session 2 — Bounds and cases
+### Output: explicit cost-model card
+
+One card names the input parameter, counted resource, primitive-operation
+assumption, worst-case witness, exact tiny-input count, and confidence.
+
+## Session 2 — Bounds and cases
 
 **Recall:** upper versus exact claims in ordinary language.  
 **Launch:** critique four underspecified performance statements from an agent.  
@@ -511,7 +652,12 @@ Each session begins with a prediction and ends with a claim whose assumptions Mi
 **Learner action:** strengthen a true-but-weak bound and name the distribution required by an expected claim.  
 **Exit synthesis:** give one case where asymptotically better code can be slower for the observed range.
 
-### Session 3 — Call shape becomes a recurrence
+### Output: bound-and-case claim
+
+One short claim distinguishes upper, lower, or tight bound; states its case and
+assumptions; and gives either a witness or a reason the statement is weak.
+
+## Session 3 — Call shape becomes a recurrence
 
 **Recall:** recursive frames, progress measures, and structural induction.  
 **Launch:** compare a chain traversal, merge sort, and naive Fibonacci.  
@@ -519,7 +665,12 @@ Each session begins with a prediction and ends with a claim whose assumptions Mi
 **Learner action:** draw the call tree before solving the recurrence and separate total calls from simultaneous frames.  
 **Exit synthesis:** explain why recursive syntax alone predicts neither linear nor exponential cost.
 
-### Session 4 — Amortized time and complete space accounts
+### Output: recurrence and recursion-tree trace
+
+One recurrence includes a base case, a call-tree or level-work trace, a bound
+idea, and a separate statement about active stack depth.
+
+## Session 4 — Amortized time and complete space accounts
 
 **Recall:** sequences of state transitions.  
 **Launch:** inspect one expensive dynamic-array resize within many cheap appends.  
@@ -527,7 +678,12 @@ Each session begins with a prediction and ends with a claim whose assumptions Mi
 **Learner action:** account for every copied element across doubling capacities and audit a recursive traversal’s memory claim.  
 **Exit synthesis:** distinguish “this append is expensive” from “append is amortized constant time.”
 
-### Session 5 — Measurement as a model check
+### Output: amortized and space account
+
+One account totals copied elements across a sequence and separately names
+output, auxiliary, stack, and retained space for the chosen operation.
+
+## Session 5 — Measurement as a model check
 
 **Recall:** the list-only and set-indexed analytic predictions.  
 **Launch:** inspect a benchmark that times data construction and reports one sample.  
@@ -535,12 +691,24 @@ Each session begins with a prediction and ends with a claim whose assumptions Mi
 **Learner action:** repair the experimental design, inspect raw samples, and explain a model–measurement mismatch without curve-fitting first.  
 **Exit synthesis:** state why a scaling plot is evidence rather than proof.
 
-### Session 6 — Architecture, delegation, and decision
+### Output: measurement-boundary report
+
+One report records the prior prediction, confidence, data distribution, timing
+boundary, repeated raw samples, environment, uncertainty, and one alternative
+explanation for a mismatch.
+
+## Session 6 — Architecture, delegation, and decision
 
 **Recall:** domain operation count versus adapter/system cost.  
 **Launch:** map a route planner whose graph lookup performs a database round trip.  
 **Learner action:** separate algorithmic and I/O claims, write the bounded benchmark brief, review the agent patch and chart, reject one unsupported conclusion, and choose a representation under explicit requirements.  
 **Exit synthesis:** defend the final decision in terms of semantics, time, space, uncertainty, and future change.
+
+### Output: representation decision dossier
+
+One dossier separates algorithmic-operation claims from adapter or I/O costs,
+preserves semantics, records evidence and uncertainty, and rejects one claim
+the evidence cannot support.
 
 ## 16. Problem ladder
 
@@ -600,11 +768,16 @@ B. `Θ(n)`
 C. `Θ(m + n)`  
 D. `Θ(mn)`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: D.** Each of `m` iterations may perform work proportional to `n`; the constant two does not change the growth class.
 
 - A treats membership as constant.
 - B ignores the edge loop.
 - C would fit separate full passes, not a scan nested through a costly operation.
+
+</details>
 
 ### Question 2
 
@@ -615,11 +788,16 @@ B. “The function is O(n).”
 C. “For `n` edges, it runs in worst-case `Θ(n)` dictionary operations under expected constant-time lookup and uses `Θ(1)` auxiliary space.”  
 D. “It took 2 ms on my laptop.”
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** It names input, case, tight bound, primitive-operation assumption, and space.
 
 - A has no model.
 - B leaves several dimensions unstated.
 - D is one measurement, not a growth claim.
+
+</details>
 
 ### Question 3
 
@@ -630,11 +808,16 @@ B. `f ∈ O(n²)`, but `Θ(n)` is tighter
 C. `f ∈ Θ(n²)`  
 D. Big O cannot compare these functions
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** `n²` is a valid asymptotic upper bound on `n`, but not a tight bound.
 
 - A denies a valid upper bound.
 - C incorrectly claims matching lower growth.
 - D is false.
+
+</details>
 
 ### Question 4
 
@@ -645,11 +828,16 @@ B. Amortized analysis measures only the fastest operation.
 C. Expected analysis is always worst-case.  
 D. They are two names for the same idea.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: A.**
 
 - B confuses amortized with best case.
 - C is contradictory.
 - D erases the source of each guarantee.
+
+</details>
 
 ### Question 5
 
@@ -660,11 +848,16 @@ B. Append has `Θ(1)` amortized time over a sequence.
 C. The expensive append did no work.  
 D. The array uses `Θ(1)` total memory for any size.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Occasional resizing costs can be spread across a sequence whose total work is linear.
 
 - A confuses per-operation worst case with amortized cost.
 - C denies the observed copy.
 - D ignores stored elements.
+
+</details>
 
 ### Question 6
 
@@ -675,11 +868,16 @@ B. `Θ(n)`
 C. `Θ(n log n)`  
 D. `Θ(2ⁿ)`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** There are `Θ(log n)` levels and `Θ(n)` total nonrecursive work per level.
 
 - A counts levels but not work per level.
 - B counts one level only.
 - D confuses two half-size calls with two calls on nearly full-size inputs.
+
+</details>
 
 ### Question 7
 
@@ -690,11 +888,16 @@ B. The observation is consistent with quadratic growth, but other models and con
 C. The implementation must contain exactly two nested loops.  
 D. Hardware no longer affects the result.
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: B.** Scaling ratios are empirical evidence, not a proof or source-code shape guarantee.
 
 - A overstates evidence.
 - C infers syntax from behavior.
 - D ignores constants and system effects.
+
+</details>
 
 ### Question 8
 
@@ -705,11 +908,16 @@ B. Time `Θ(log n)`, stack `Θ(n)`
 C. Time `Θ(|V|+|E|)`, stack `Θ(n)` in the chain case  
 D. Time `Θ(n²)`, stack `Θ(1)`
 
+<details>
+<summary>Reveal answer and reasoning</summary>
+
 **Answer: C.** Total visits are linear in represented graph size; maximum recursion depth is linear for a chain.
 
 - A ignores traversal.
 - B understates time.
 - D invents repeated work and ignores recursive frames.
+
+</details>
 
 ### Diagnostic interpretation
 
@@ -785,11 +993,34 @@ Produce:
 - an architecture diagram separating algorithmic and adapter costs;
 - a decision note that preserves semantics while choosing a representation.
 
-The milestone is mastered when Michael can predict, measure, explain, and challenge—not when the fastest line wins.
+Use the milestone evidence to choose a next bridge or repair: Michael predicts,
+measures, explains, and challenges rather than treating the fastest line as the
+whole result.
+
+### Project acceptance criteria
+
+Treat this as a constructive review list, not a pass/fail gate. A ready-to
+discuss dossier makes its semantics and workload explicit; includes a trace,
+count or recurrence, assumptions, and a bounded conclusion; retains raw timing
+evidence and uncertainty; separates algorithmic and system costs; and identifies
+one generated claim that the evidence does not establish. Missing evidence is a
+specific next repair, not a judgment about the learner.
+
+### Evidence rubric
+
+| Evidence | Evidence to carry forward | If a bridge is needed, repair by |
+| --- | --- | --- |
+| Semantic comparison | both implementations satisfy the same public behavior before timing begins | write an observer-based equivalence test or narrow the claim |
+| Analytic argument | size parameters, costly primitive, assumptions, and bound are named | count a tiny input and write the exact sum or recurrence first |
+| Reproducible measurement | raw samples, median/min/max, inputs, environment, and timing boundary are retained | rerun with setup outside the timed region and report the spread |
+| Honest decision | the recommendation distinguishes model result, observation, and uncertainty | remove any conclusion that the data or cost model cannot establish |
 
 ## 20. Consolidation
 
 ```mermaid
+%% atlas-diagram-id: m05-analysis-consolidation
+%% atlas-diagram-title: Analyze growth, compare it with evidence, then refine the cost model
+%% atlas-diagram-alt: A problem representation leads to size parameters, a counted resource, operation counts or a recurrence, and proved bounds. The resulting case and asymptotic class guides measurement and raw-evidence inspection; disagreement triggers a search for hidden operations or bad assumptions and returns to the cost model.
 flowchart TD
     PROBLEM["Problem representation"] --> SIZE["Choose size parameters"]
     SIZE --> COST["Choose counted resource"]
@@ -807,6 +1038,90 @@ flowchart TD
 Keep one sentence:
 
 > Complexity predicts how resource use grows under an explicit model; measurement checks how a particular implementation behaves within a real system.
+
+## 21. Bench pack
+
+**Bench pack:** `m05` — six benches, one per session. CPython 3.12 floor.
+
+This module and Module 9 were authored before the sparse bench policy existed and
+carry a bench for every session. Later modules carry two or three, covering only
+the sessions where running code reveals something reading cannot; the rest state
+why they have none. Six is not a target.
+**Emits:** one bench record per session, naming that session's declared output.
+
+The bench pack is where this module's session claims get executed. It carries no
+teaching prose: everything a bench needs is stated above, and a bench that
+re-explains a concept has become a second source of truth. Each bench opens with
+a prediction whose reveal stays locked until you commit an answer and a
+confidence, and closes by emitting the named session output as a record.
+
+### Bench operating rule
+
+A bench is evidence, not attainment. A record showing four checks passed and two
+not attempted is an honest record. A bench you have not run is not a gap in the
+module; it is a gap in your evidence for it. `emit()` refuses a record whose
+answers are still the blank template, so an unrun bench cannot look like a
+finished one.
+
+### Bench 1 — explicit cost-model card
+
+**Session:** 1. **Rungs:** recognize, trace.
+**Executes:** the list-only deduplicator under an operation counter, across three
+input families at five sizes, against the hand-derived exact count.
+**Cannot establish:** that the counted growth is the asymptotic bound. Five exact
+counts are consistent with infinitely many functions that agree at those sizes.
+
+### Bench 2 — bound-and-case claim
+
+**Session:** 2. **Rungs:** recognize, review and verify.
+**Executes:** four agent-written performance statements, each classified by its
+defect, plus a constructed crossover where asymptotically better code is slower
+over the measured range.
+**Cannot establish:** that a statement surviving all four checks is therefore
+true. Review finds defects; it does not confer correctness.
+
+### Bench 3 — recurrence and recursion-tree trace
+
+**Session:** 3. **Rungs:** trace, map.
+**Executes:** a chain traversal, merge sort, and naive Fibonacci under a frame
+counter that separates total calls from peak simultaneous frames.
+**Cannot establish:** any of the three bounds. One trace shows the shapes differ;
+the bounds follow from solving the recurrences.
+
+### Bench 4 — amortized and space account
+
+**Session:** 4. **Rungs:** modify, trace.
+**Executes:** the reallocation sequence behind 2,000 appends, totalling copied
+elements against the observed growth factor, plus peak-memory comparison of two
+deduplicators returning identical values.
+**Cannot establish:** any absolute memory claim. Traced allocation counts Python
+objects only, so the numbers compare two representations, not two programs.
+
+### Bench 5 — measurement-boundary report
+
+**Session:** 5. **Rungs:** debug and defend, trace.
+**Executes:** the ratio test over both deduplicators, then two string builders
+differing only by an unused assignment — which changes the measured growth class,
+because the assignment raises a reference count and disables an in-place
+optimisation.
+**Cannot establish:** the difference between linear and n-log-n growth. Over four
+doublings the logarithmic factor changes by about a tenth, which the ratio test
+cannot resolve.
+
+### Bench 6 — representation decision dossier
+
+**Session:** 6. **Rungs:** review and verify, design and delegate, transfer.
+**Executes:** a route planner against a latency-declaring adapter, separating
+counted operations from round trips, then audits four agent conclusions drawn
+from that run.
+**Cannot establish:** anything about a real database. The adapter is a fixed
+sleep with no batching, connection reuse, or variance.
+
+### Bench pack completion record
+
+Six records under `benches/records/m05-s*.json`. Each names its session output,
+carries at least one labelled claim, and states exactly one thing its evidence
+cannot support.
 
 ## Backward and forward connections
 
@@ -829,6 +1144,16 @@ Keep one sentence:
 - Module 19 adds work, span, contention, and scheduling overhead to the cost model.
 - Module 24 separates algorithmic improvements from CPython, allocation, and profiling effects.
 
+## Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–6: counted-operation model, bounds/cases, recurrence tree, amortized and space account, measurement reconciliation, and AI-claim review | [MIT 6.006 syllabus](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/syllabus/) builds from Python and discrete-math prerequisites into mathematical modeling and performance analysis. | **Aligned, adapted.** Atlas treats measurement as evidence rather than proof and carries assumptions across abstraction boundaries; 6.006's breadth and problem-set volume begin in M6 onward. |
+
+**Access and reuse.** Checked 2026-08-01. The syllabus is a link-only
+calibration source. Atlas retains original traces, experiments, diagnostics,
+and dossier prompts; do not copy course problems, solutions, figures, or prose.
+
 ## Sources and further study
 
 - [MIT 6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) — algorithmic modeling, asymptotics, recurrences, correctness, and Python-oriented problem solving.
@@ -837,6 +1162,97 @@ Keep one sentence:
 - [Python 3.14 `time` documentation](https://docs.python.org/3.14/library/time.html#time.perf_counter) — the high-resolution performance counter used in the teaching harness.
 - [Python 3.14 Time Complexity wiki](https://wiki.python.org/moin/TimeComplexity) — implementation-oriented reference for common container operations; treat it as a CPython-oriented guide rather than a language guarantee.
 
-## Instructor decision rule
+### Session-to-source-and-evidence route
 
-Advance when Michael can derive a bound from unfamiliar code, state every important assumption, separate analytic and empirical evidence, and reject a generated performance claim that the data or model does not support. Memorized complexity tables alone are not mastery.
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | input size, counted operation, and exact small-input count | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for algorithmic modeling context |
+| 2 | upper/lower/tight, case, and distribution-qualified claim | [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) for proof and asymptotic foundations |
+| 3 | recurrence, call tree, and stack/output-space separation | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) as a route to later algorithm work |
+| 4 | amortized aggregate account and retained-space audit | [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for the broader performance-analysis spine |
+| 5 | raw timing samples and uncertainty-aware chart | [Python `timeit`](https://docs.python.org/3.14/library/timeit.html) and [`perf_counter`](https://docs.python.org/3.14/library/time.html#time.perf_counter) for timing boundaries |
+| 6 | reviewed benchmark brief and representation decision | [Python Time Complexity wiki](https://wiki.python.org/moin/TimeComplexity) only as CPython-oriented context, never a language-wide proof |
+
+## Constructive next-step guide
+
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M27 handoff.
+That explanation should cover an unfamiliar program's input model, costly
+primitive, exact count or recurrence, analytic bound, measurement boundary,
+and unsupported generated claim. Otherwise, count a tiny input, state the
+missing assumption, and rebuild the raw-sample measurement record with the
+Teaching Assistant before retrying the claim.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+## Guided Codex handoff — M5
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M5. For this code, the input model is [model],
+the costly primitive is [operation], my predicted bound is [claim], and my
+confidence is [level].”** Ask for a trace before accepting a complexity label.
+Use this hint ladder: input size(s) → one loop/call cost → hidden operation →
+sum/recurrence → analytic versus measured evidence. Change one representation
+or workload distribution and ask which bound or constant-factor claim changes.
+End by asking what a timing experiment can establish and what it cannot.
+
+### Supportive oral-defense protocol
+
+Use an encouraging conversation, not a rigid exam. The Teaching Assistant asks
+for a learner-selected claim, waits for a prediction and confidence statement,
+then helps make the model visible before offering a repair. No response creates
+a score, grade, completion, or mastery result.
+
+### Invitation — name the claim and model
+
+Invite: “Show one short code trace, recurrence, or equation. What grows, what
+is counted, which case is this, and how confident are you?” The visible chat
+can act as a whiteboard for compact code and equations; provide a direct prose
+or ASCII alternative if that presentation is not useful.
+
+### Hint ladder — expose one cost assumption at a time
+
+Ask in order: input family; costly operation; number of executions; exact sum
+or recurrence; case/distribution; and what observation would test, rather than
+prove, the claim. Give only the next missing rung before a smallest example.
+
+### Changed-premise counterexample
+
+Keep the public behavior fixed but change one premise: make the route
+all-distinct, make a hash assumption unavailable, add string-length growth, or
+move a graph lookup across a network boundary. Ask what must change in the
+model, bound, or non-claim before comparing the trace.
+
+### Transfer — from local count to later data structure
+
+Ask the learner to carry the same cost card to an unfamiliar later structure:
+which operation contract, input measure, and proof obligation would be needed
+before choosing a heap, hash table, graph index, or optimization? This is a
+bridge question, not evidence that later prerequisites were completed.
+
+### Learner-controlled evidence summary
+
+At the learner's request, summarize the selected artifact, attempted claim,
+confidence, changed premise, remaining uncertainty, and next repair in a small
+copyable note. Do not automatically write a Notion page, retain a transcript,
+or claim that a GPT Live or text conversation occurred.
+
+### Study Partner — cost-model rehearsal
+
+Show one short loop with a hidden membership, allocation, or recursive cost.
+Ask the learner to name the unit of work, make a prediction, and choose the
+smallest scaling experiment that could falsify it. Keep the result as a
+question for the TA if the analytic and empirical stories disagree.
+
+### Retrieval, ready-when, and forward handoff
+
+At **+1, +7, and +21 days**, derive one bound from a fresh snippet and state
+one assumption that could invalidate it. The M5 evidence supports the M27
+handoff when the learner can give an input model, a tight-enough argument, and
+an evidence boundary—not just a Big-O label. Carry the representation/cost trade-off into **M27**, where counting, recurrence, and proof become explicit; then carry the same trade-off into **M6**.
+
+**Source and reuse note:** Atlas's diagnostic, traces, and dossier prompts are
+original course material; linked university and documentation sources are used
+as stable reading links and paraphrased conceptual references, not copied
+assignments or figures.

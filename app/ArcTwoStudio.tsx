@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 
 type ArcTwoStudioProps = {
   onOpenFoundation: () => void;
@@ -102,7 +106,29 @@ export function ArcTwoStudio({
   onOpenDiagnostic,
 }: ArcTwoStudioProps) {
   const [activeStage, setActiveStage] = useState(0);
-  const active = stages[activeStage];
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  function handleStageKeyDown(
+    event: ReactKeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    const key = event.key;
+    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(key)) {
+      return;
+    }
+
+    event.preventDefault();
+    const nextIndex =
+      key === "ArrowRight"
+        ? (index + 1) % stages.length
+        : key === "ArrowLeft"
+          ? (index - 1 + stages.length) % stages.length
+          : key === "Home"
+            ? 0
+            : stages.length - 1;
+    setActiveStage(nextIndex);
+    tabRefs.current[nextIndex]?.focus();
+  }
 
   return (
     <article className="arc-two">
@@ -156,12 +182,20 @@ export function ArcTwoStudio({
           {stages.map((stage, index) => (
             <button
               aria-selected={activeStage === index}
+              aria-controls={`arc-two-stage-panel-${stage.module}`}
               className={`${stage.accent} ${
                 activeStage === index ? "selected" : ""
               }`}
+              id={`arc-two-stage-tab-${stage.module}`}
               key={stage.module}
               onClick={() => setActiveStage(index)}
+              onKeyDown={(event) => handleStageKeyDown(event, index)}
               role="tab"
+              tabIndex={activeStage === index ? 0 : -1}
+              type="button"
+              ref={(element) => {
+                tabRefs.current[index] = element;
+              }}
             >
               <span>M{stage.module}</span>
               <strong>{stage.label}</strong>
@@ -170,39 +204,52 @@ export function ArcTwoStudio({
           ))}
         </div>
 
-        <div className={`stage-inspector ${active.accent}`} role="tabpanel">
-          <div className="stage-index">
-            <span>MODULE</span>
-            <strong>{active.module}</strong>
-          </div>
-          <div className="stage-story">
-            <p className="kicker">{active.label}</p>
-            <h3>{active.title}</h3>
-            <p>{active.need}</p>
-          </div>
-          <dl>
-            <div>
-              <dt>Required interface</dt>
-              <dd>{active.interface}</dd>
+        {stages.map((stage, index) => {
+          const selected = activeStage === index;
+          return (
+            <div
+              aria-labelledby={`arc-two-stage-tab-${stage.module}`}
+              className={`stage-inspector ${stage.accent}`}
+              hidden={!selected}
+              id={`arc-two-stage-panel-${stage.module}`}
+              key={stage.module}
+              role="tabpanel"
+              tabIndex={selected ? 0 : -1}
+            >
+              <div className="stage-index">
+                <span>MODULE</span>
+                <strong>{stage.module}</strong>
+              </div>
+              <div className="stage-story">
+                <p className="kicker">{stage.label}</p>
+                <h3>{stage.title}</h3>
+                <p>{stage.need}</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Required interface</dt>
+                  <dd>{stage.interface}</dd>
+                </div>
+                <div>
+                  <dt>Representation</dt>
+                  <dd>{stage.structure}</dd>
+                </div>
+                <div>
+                  <dt>Invariant</dt>
+                  <dd>{stage.invariant}</dd>
+                </div>
+                <div>
+                  <dt>Cost lens</dt>
+                  <dd>{stage.cost}</dd>
+                </div>
+                <div>
+                  <dt>Mastery evidence</dt>
+                  <dd>{stage.evidence}</dd>
+                </div>
+              </dl>
             </div>
-            <div>
-              <dt>Representation</dt>
-              <dd>{active.structure}</dd>
-            </div>
-            <div>
-              <dt>Invariant</dt>
-              <dd>{active.invariant}</dd>
-            </div>
-            <div>
-              <dt>Cost lens</dt>
-              <dd>{active.cost}</dd>
-            </div>
-            <div>
-              <dt>Mastery evidence</dt>
-              <dd>{active.evidence}</dd>
-            </div>
-          </dl>
-        </div>
+          );
+        })}
       </section>
 
       <section className="question-lens">

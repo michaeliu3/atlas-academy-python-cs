@@ -8,7 +8,7 @@
 
 **Documentation and source baseline:** Python 3.14.6; IETF RFCs and
 university material last audited 2026-07-30. The research, licensing, and
-claim map is [Module 20 source map](../research/module20_networks_protocols_source_map.md).
+claim map is [Module 20 source map](/downloads/module20_networks_protocols_source_map.md).
 
 **Executed production baseline:** the local-only reference and its test suite
 run on CPython 3.14.6 on Windows. They use only synthetic data and make no DNS
@@ -20,10 +20,24 @@ the Internet, a remote host, or a production service.
 and [behavioral tests](/downloads/test_module20_reference.py). These are
 downloadable evidence artifacts for inspection; they do not contact a network.
 
-**Primary learning surface:** use the visual HTML studio for prediction,
-stepping, comparison, and recording. This workbook is the complete accessible
-and auditable source: every visual has a text equivalent, every exercise has a
-stated observation boundary, and every source-backed claim names its owner.
+**Download-only path:** Save both downloaded files in the same local folder.
+From that folder, using a selected Python runtime, run:
+
+```powershell
+python test_module20_reference.py
+python module20_reference.py --scenario timeout_then_lookup
+```
+
+The model's evidence packet names the canonical repository-root command and its
+`canonical_command_base`; it does not need or record your actual local folder.
+
+**Learning route:** use the designated Teaching Assistant and Study Partner
+chats for guided teaching, discussion, rehearsal, and oral defense. Use the
+visual HTML studio as a visual/reference companion for prediction, stepping,
+comparison, and learner-controlled local progress. This workbook is the
+complete accessible and auditable source: every visual has a text equivalent,
+every exercise has a stated observation boundary, and every source-backed claim
+names its owner.
 
 **Learning record:** use the Module 20 Notion notebook for endpoint maps,
 frame traces, confidence ratings, timeout-history matrices, API contracts,
@@ -162,7 +176,10 @@ must model **what it knows**, rather than write a story it wants to be true.
 #### D1 — The new boundary
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-network-boundary
+    %% atlas-diagram-title: Local validation across a network boundary
+    %% atlas-diagram-alt: A deterministic M19 result becomes an M18 validated local candidate. The client crosses an uncontrolled name, endpoint, and transport boundary to a server that may or may not decide and respond; the client records only observed facts and may retain UNKNOWN.
+    flowchart LR
     M19["M19: deterministic local index"] --> M18["M18: validated local publication candidate"]
     M18 --> C["Atlas client\nlocal process facts"]
     C --> N["name + endpoint + transport\nuncontrolled boundary"]
@@ -286,7 +303,10 @@ entry exactly that long ([RFC 9499 §5](https://www.rfc-editor.org/rfc/rfc9499.h
 The mental model should be this:
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-name-resolution-candidates
+    %% atlas-diagram-title: Name resolution yields connection candidates
+    %% atlas-diagram-alt: The name atlas.example goes through a resolver and possible cache or queries to produce candidate address, family, and port endpoints. The client selects and attempts candidates; this does not establish reachability, stable machine identity, or authenticated Atlas service identity.
+    flowchart LR
     N["atlas.example\nname"] --> R["client resolver API"]
     R --> CACHE["possible cache"]
     CACHE --> Q["possible recursive/authoritative queries"]
@@ -359,6 +379,9 @@ Answer before reveal:
 3. Does `connect()` return prove that an Atlas HTTP request was parsed?
 4. What identity/security fact is still missing even after a connection?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal.** Python documents `getaddrinfo()` as address-information lookup and
 `create_connection()`/sockets as local connection APIs, not a remote business
 protocol ([Python `socket`](https://docs.python.org/3.14/library/socket.html)).
@@ -366,6 +389,8 @@ A defensible attempt record contains the target name, candidate family and
 address/port, attempt ordinal, local result/exception class, deadline policy,
 and correlation ID. It omits private/raw payloads and does not label the
 candidate “Atlas service verified.”
+
+</details>
 
 ### A small Atlas record
 
@@ -427,6 +452,10 @@ The next session starts **after** an endpoint is connected. It asks a new
 question: when bytes arrive, how does a receiver know where one request ends?
 
 ---
+
+### Session 1 output — name-to-candidate scope map
+
+One map separates a name, an address, a port, and an endpoint candidate, and states what a resolver observation does not establish.
 
 ## 3. Session 2 — Transport carries bytes, not your request
 
@@ -519,9 +548,10 @@ format.
 
 The complete local-only model is the
 [`module20_reference.py` download](/downloads/module20_reference.py). Its
-canonical workspace source is `work/module20_reference.py`; the portal exposes
-only the explicit downloadable copy. Read this core before relying on a library
-convenience method:
+canonical checked-in learner source is `public/downloads/module20_reference.py`,
+paired with `public/downloads/test_module20_reference.py`; the portal serves
+those exact tracked files. There is no separate `work/` source or generated
+mirror. Read this core before relying on a library convenience method:
 
 ```python
 class FrameDecoder:
@@ -596,8 +626,8 @@ Complete this table in your notebook.
 Then run the bounded test suite:
 
 ```powershell
-# From the course's `work/` directory, using the selected Python runtime:
-python test_module20_reference.py
+# From the course repository root, using the selected Python runtime:
+python public/downloads/test_module20_reference.py
 ```
 
 **[LOCAL REFERENCE RESULT]** The suite checks split frames, coalesced frames,
@@ -656,6 +686,10 @@ right decision.
 
 ---
 
+### Session 2 output — frame admission trace
+
+One trace shows when a receiver may emit an application frame, with the rule that admitted each one.
+
 ## 4. Session 3 — A response is evidence with a scope
 
 ### Pressure
@@ -677,7 +711,10 @@ unreceive, unparse, undecide, or delete operation at the service.
 #### D6 — Each rung answers a different question
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m20-evidence-ladder
+    %% atlas-diagram-title: Evidence ladder for a remote decision
+    %% atlas-diagram-alt: Local acceptance, transport byte receipt, framing, server validation and decision, server response bytes, and matching client parsing are separate rungs. Only matching response evidence binds the client's operation to a confirmed Atlas decision; earlier rungs do not imply it.
+    flowchart TB
     A["client accepted a local write"] --> B["transport peer accepted bytes"]
     B --> C["server reconstructed a complete frame"]
     C --> D["server validated and recorded decision"]
@@ -770,8 +807,8 @@ The model deliberately returns these two records in the timeout scenario:
 Run it locally:
 
 ```powershell
-# From the course's `work/` directory, using the selected Python runtime:
-python module20_reference.py `
+# From the course repository root, using the selected Python runtime:
+python public/downloads/module20_reference.py `
   --scenario timeout_then_lookup
 ```
 
@@ -810,11 +847,16 @@ Answer:
 3. What does `CONFIRMED` mean in this finite Atlas contract—and what does it
    still not mean?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal.** A response must bind to the operation the client intended and the
 canonical meaning that operation was declared to carry. Otherwise a stale,
 wrong, or miscorrelated response could falsely promote knowledge. The result
 confirms a stated server-local Atlas decision; it does not authenticate a
 network peer (Module 22) or prove global exactly-once processing (Module 21).
+
+</details>
 
 ### Incident board — classify, then choose the next observation
 
@@ -847,6 +889,10 @@ does not hand Atlas a free retry or idempotency policy.
 
 ---
 
+### Session 3 output — response evidence rung
+
+One rung assignment states what a received response establishes and names one compatible history it does not rule out.
+
 ## 5. Session 4 — HTTP gives semantics; Atlas still owns policy
 
 ### Pressure
@@ -863,7 +909,10 @@ or security model.
 #### D7 — Two contracts that must meet without being confused
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-http-atlas-contracts
+    %% atlas-diagram-title: HTTP and Atlas operation contracts
+    %% atlas-diagram-alt: HTTP supplies method, target, status, and representation semantics. Atlas adds a versioned schema, operation ID, and digest, then a server-local first, replay, or conflict ledger and a response or status lookup. HTTP does not itself provide that ledger.
+    flowchart LR
     H["HTTP semantics\nmethod, target, status, representation"] --> A["Atlas API contract\nversion, schema, operation ID, digest"]
     A --> L["Atlas decision ledger\nfirst / replay / conflict"]
     L --> R["declared response or status lookup"]
@@ -995,10 +1044,15 @@ Write a review that separates three kinds of absence:
 3. **Deferred security detail:** What cannot be inferred about identity,
    authorization, or trust merely from the route string?
 
+<details>
+<summary>Reveal after writing your prediction.</summary>
+
 **Reveal.** A framework can parse a route and serialize a response. It cannot
 invent an operation-ID/digest ledger, decide a safe retry budget, or
 authenticate a peer by itself. The smallest correct response is a narrower
 contract, not a bigger framework.
+
+</details>
 
 ### Contract sketch: response and problem shapes
 
@@ -1038,6 +1092,10 @@ new ID” by an evidence-preserving protocol.
 
 ---
 
+### Session 4 output — HTTP-and-policy contract table
+
+One table separates jobs HTTP semantics already perform from jobs Atlas must declare itself.
+
 ## 6. Session 5 — Retry is an epistemic problem before it is a loop
 
 ### Pressure
@@ -1057,7 +1115,10 @@ The repair begins with a question, not a loop:
 #### D8 — One ID is not merely a convenience string
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m20-operation-id-state-machine
+    %% atlas-diagram-title: Operation ID and digest state machine
+    %% atlas-diagram-alt: An absent operation ID is recorded only with a valid request and canonical digest. A later same-ID, same-digest request replays the recorded decision; a same-ID, different-digest request conflicts. The model is server-local and says nothing about response delivery or global agreement.
+    stateDiagram-v2
     [*] --> ABSENT
     ABSENT --> RECORDED: valid request\nID + canonical digest
     RECORDED --> REPLAYED: same ID + same digest
@@ -1175,7 +1236,10 @@ Client policy in this teaching model:
 #### D10 — Retry is a knowledge-preserving branch
 
 ```mermaid
-flowchart TD
+    %% atlas-diagram-id: m20-retry-knowledge-branch
+    %% atlas-diagram-title: Retry preserves what the client knows
+    %% atlas-diagram-alt: An initial operation either gets a matching response and is CONFIRMED, or a timeout, close, or error leaves the client's observation UNKNOWN. Policy may retry using the same ID and digest or use status lookup; only matching retained evidence can confirm it.
+    flowchart TD
     A["attempt op-0007 / digest A"] --> B{matching response?}
     B -- yes --> C["CONFIRMED\nmatching decision"]
     B -- no timeout/close/error --> U["UNKNOWN\nclient observation only"]
@@ -1191,6 +1255,41 @@ flowchart TD
 **Caption — D10.** A retry preserves the operation identity. It does not erase
 the unknown history. Status lookup can resolve only what the server's declared
 retention/status contract actually supplies.
+
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+**Definitions.** In this declared single-server model, the ledger maps an
+operation identity and canonical request digest to one decision:
+
+```text
+(operation_id, canonical_digest) -> decision
+```
+
+The client observation and the server's ledger are different evidence
+surfaces. A digest is an equality value for the declared request bytes, not an
+authentication token or a delivery guarantee.
+
+**Assumptions.** The model has one serialized ledger, deterministic
+canonicalization, a stated retention rule, and no replica-agreement or crash
+survival claim. A request is validated before it reaches the ledger.
+
+**Derivation / proof idea.** Case analysis over one operation ID gives the
+only three ledger outcomes: absent ID records a decision; the same ID with the
+same digest replays it; and the same ID with a different digest conflicts.
+Under the serialized-ledger assumption, one ID cannot bind two digests in this
+model. That does not prove that a response arrived or that another service
+agrees.
+
+**Counterexample.** Retrying the same declared request with a *new* ID can be
+a distinct operation, not a replay. Likewise, two uncoordinated ledgers could
+make incompatible decisions; this module does not model that distributed case.
+
+**Finite numerical experiment.** In D9, `op-0007` with digest `A` records one
+decision; the same ID/digest replay leaves ledger cardinality at one; and the
+same ID with digest `B` conflicts, still leaving cardinality at one. A new
+`op-0008` with digest `A` may create a second record. This is a finite
+server-local state check—not proof of response delivery, durability after a
+crash, or distributed exactly-once behavior.
 
 ### Code-reading lab L5 — Reject a false “exactly once” claim
 
@@ -1215,17 +1314,20 @@ identity/integrity conditions.
 
 ### Fault-injection lab L5b — Same observation, different histories
 
-Use the reference's named scenarios:
+From the course repository root, use the reference's named scenarios:
 
 ```powershell
-& $py '.\module20_reference.py' --scenario connection_error
-& $py '.\module20_reference.py' --scenario timeout_then_lookup
-& $py '.\module20_reference.py' --scenario matching_response
+python .\public\downloads\module20_reference.py --scenario connection_error
+python .\public\downloads\module20_reference.py --scenario timeout_then_lookup
+python .\public\downloads\module20_reference.py --scenario matching_response
 ```
 
-Set `$py` to the course's embedded Python executable only if it is present; the
-commands are examples of a local model run, not a requirement to install
-anything. For each output, identify:
+If `python` does not select your intended runtime, replace only the leading
+`python` command with that runtime's executable; keep the script path and
+scenario unchanged. These are examples of a local model run, not a requirement
+to install anything. If you save the paired downloads elsewhere, use that
+folder's bare filenames. Record the scenario, command form, runtime, and
+outcome—not a personal directory path. For each output, identify:
 
 | Scenario | Client attempt class | Server-local record in model | Status result | What remains outside scope |
 |---|---|---|---|---|
@@ -1260,6 +1362,10 @@ and teaches you how to review a patch that crosses the boundary incorrectly.
 
 ---
 
+### Session 5 output — ambiguous-outcome retry ledger
+
+One ledger enumerates the histories consistent with a timeout and states which retry preserves meaning under each.
+
 ## 7. Session 6 — Make network knowledge auditable
 
 ### Pressure
@@ -1277,7 +1383,10 @@ correlation-rich fields and a label for what remains unknown.
 #### D11 — Dependency direction and observation ownership
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m20-dependency-observation-ownership
+    %% atlas-diagram-title: Core and adapter dependency direction
+    %% atlas-diagram-alt: A synthetic snapshot feeds canonical request construction, replaceable resolver and transport seams, bounded framing, validation, idempotency ledger, response encoding, client classification, status lookup, and a scoped evidence view. The final evidence still uses the M18 local publication boundary.
+    flowchart LR
     F["synthetic snapshot fixture"] --> B["canonical request builder\ncore"]
     B --> R["resolver / endpoint-attempt seam\nadapter"]
     B --> T["transport seam\nadapter"]
@@ -1411,14 +1520,51 @@ Explain this in ninety seconds without using “it probably worked”:
 Your answer must contain `CLIENT_OBSERVATION`, `SERVER_OBSERVATION`,
 `UNKNOWN`, the same ID+digest rule, and one Module 21 or 22 boundary.
 
+### Supportive oral-defense protocol — adaptive, non-grading, and learner-controlled
+
+**Current candidate-only supplement.** This makes the existing Session 6
+defense a constructive teaching conversation. It is not evidence of review,
+release, or learner mastery.
+
+### Hint ladder, smallest repair, and learner evidence summary
+
+Begin with the learner's narrowest claim about one timeout history. Before a
+hint, they predict which facts are client-local, server-local, or still
+`UNKNOWN`, record confidence `1–4`, and name the next discriminating
+observation. The Teaching Assistant gives the smallest repair: a byte/frame
+trace, one compatible history, an ID+digest contrast, or a response-matching
+rule—not a broad solution.
+
+Then change one premise: a stream becomes concurrent fan-out (M21), an
+endpoint must become a trusted peer (M22), or a timing observation becomes a
+performance explanation (M24). End with the claim, its scope, the rejected
+overclaim, the next observation, and a learner-controlled evidence summary.
+
+Incomplete explanations select the smallest repair or retrieval step; the
+Teaching Assistant assigns neither a pass/fail result nor a mastery claim.
+
 ---
+
+### Session 6 output — remote-publication protocol dossier
+
+One dossier makes an Atlas publication auditable: operation identity, request digest, response scope, and the first inference the evidence cannot support.
 
 ## 8. Six-view interactive HTML studio
 
-The portal is the primary learning surface. It is a **protocol observatory**,
-not a slide deck: every control changes a small declared model; every visual
-has a text equivalent and reset; no colour, animation, or score is needed to
-understand a claim.
+The portal is a visual/reference companion, not the primary guided-learning
+surface. It is a **protocol observatory**, not a slide deck: every control
+changes a small declared model; every visual has a text equivalent and reset;
+no colour, animation, or score is needed to understand a claim.
+
+### Visual text equivalent — remote effect from intent to auditable knowledge
+
+Read the nonvisual route as a chain of narrower facts: resource intent becomes
+an endpoint candidate; a byte stream becomes a declared frame; a response
+becomes client- or server-scoped evidence; HTTP supplies semantics while Atlas
+owns policy; a stable ID plus digest governs retry; and the final architecture
+packet records both facts and unknowns. The adjacent prose, tables, and traces
+for each view are the complete text route—no connection animation, colour
+state, or interactive control establishes an extra fact.
 
 ### Studio operating rule
 
@@ -1602,8 +1748,8 @@ Save six short notes to Notion, not a screenshot-only completion mark:
 
 ## 9. Eight-level problem ladder
 
-The ladder moves from recognition to transfer. Advance only when the stated
-evidence exists; “I have seen the term” is not an exit condition.
+The ladder moves from recognition to transfer. Work through each level using
+the stated evidence; “I have seen the term” is not a useful stopping point.
 
 | Level | Learner action | Artifact | Exit evidence |
 |---|---|---|---|
@@ -1730,9 +1876,14 @@ is the strongest justified conclusion?
 - C. The client authenticated the service at both addresses.
 - D. Both candidates will process the same publication once.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** It is a local resolver/API observation. It does not establish
 reachability, one-to-one server identity, or authentication. Revisit View 1 if
 you chose A/C/D.
+
+</details>
 
 ### MCQ 2 — Byte-stream framing
 
@@ -1745,8 +1896,13 @@ conclude?
   request exists.
 - D. The sender's next `send()` creates a second message.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** TCP gives an ordered byte stream, not application-message
 boundaries. Revisit View 2 and RFC 9293 if you chose A/B/D.
+
+</details>
 
 ### MCQ 3 — `sendall()` and timeout
 
@@ -1759,8 +1915,13 @@ response. Which classification is correct?
   decision, or response receipt.
 - D. `RETRY_WITH_NEW_ID`, because the first operation definitely failed.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Local send completion and deadline leave multiple server
 histories compatible. Revisit View 3/5 if you chose another answer.
+
+</details>
 
 ### MCQ 4 — UDP versus business meaning
 
@@ -1772,8 +1933,13 @@ Which statement is accurate?
   validation and must handle delivery/order/duplicate limitations.
 - D. UDP is unsuitable for every application protocol.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Datagram boundary is not schema validity or an effect. Revisit
 Session 2 if you chose A/B/D.
+
+</details>
 
 ### MCQ 5 — HTTP and Atlas policy
 
@@ -1786,8 +1952,13 @@ Which is the most complete statement about `POST /v1/publications`?
   response/status correlation.
 - D. A `503 Retry-After` guarantees later success.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** The related key header draft is not a final universal standard,
 and retry timing is not outcome proof. Revisit Session 4.
+
+</details>
 
 ### MCQ 6 — Stable identity after timeout
 
@@ -1800,8 +1971,13 @@ operation under the Atlas model?
 - C. retry with `op-0007`, digest B to mark it fresh
 - D. omit both values because the server recognizes the JSON
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: B.** Same ID + same canonical meaning can replay one server-local
 decision. A is distinct; C conflicts; D loses the contract.
+
+</details>
 
 ### MCQ 7 — Response correlation
 
@@ -1814,8 +1990,13 @@ the pending request. What follows?
   operation.
 - D. `NOT_COMMITTED`, because the server must be broken.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** Response structure alone is not enough. The client needs same
 ID and digest binding. Revisit Session 3.
+
+</details>
 
 ### MCQ 8 — Boundary transfer
 
@@ -1827,8 +2008,13 @@ Which claim belongs primarily to Module 21 rather than Module 20?
   under partial failure.
 - D. A name/address/port does not authenticate a peer.
 
+<details>
+<summary>Reveal after recording your answer and confidence.</summary>
+
 **Answer: C.** A/B are Module 20; D is a Module 22 handoff. Module 21 owns the
 replica/partial-failure/distributed-system problem.
+
+</details>
 
 ### Quiz routing
 
@@ -1839,6 +2025,19 @@ replica/partial-failure/distributed-system problem.
 | 3 or 7 | local observation promotes remote knowledge | View 3 + timeout history matrix |
 | 5 | HTTP/header name replaces Atlas policy | View 4 contract builder |
 | 6 | retry may mint a new operation | View 5 ledger replay |
+
+### Misconception repair map
+
+**Current candidate-only supplement.** Use these labels to select a compact
+repair and later contrast, not to assign a verdict. This does not change the
+historical audit, review, release, or mastery state.
+
+| Misconception label | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| `endpoint-is-service-identity` | separate name, address, port, endpoint candidate, and authenticated service | add an untrusted forwarding header and state the M22 question |
+| `transport-is-application-effect` | split one byte stream into two receives and frame it explicitly | replace TCP with a delivered UDP datagram |
+| `timeout-proves-no-effect` | enumerate the compatible client/server histories | resolve one same-ID status lookup |
+| `header-name-is-retry-policy` | state Atlas's ID, digest, replay, conflict, and retention rules | change the digest under the same operation ID |
 
 ---
 
@@ -1888,7 +2087,10 @@ shared ledger races or scheduler/owner repair                           → Modu
 ### 11.2 Required architecture and dependency direction
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m20-reference-network-architecture
+    %% atlas-diagram-title: Reference network protocol architecture
+    %% atlas-diagram-alt: A synthetic snapshot becomes a canonical request and bounded length-prefixed frame sent through a scripted transport seam. Core framing, parsing, validation, one-owner ledger, response correlation, and status lookup yield scoped evidence that ends at M18's local publication boundary.
+    flowchart TB
     S["Synthetic snapshot\nfixture only"] --> C["canonical request\nmethod + target + version + ID + digest"]
     C --> E["length-prefixed\nrequest frame"]
     E --> T["scripted transport /\nendpoint-attempt seam"]
@@ -2080,7 +2282,8 @@ teaching contract, not a telemetry standard:
   "schema_version": "atlas.module20.evidence/1",
   "model_version": "...",
   "scenario": "timeout_then_lookup",
-  "command": "python module20_reference.py --scenario timeout_then_lookup",
+  "command": "python public/downloads/module20_reference.py --scenario timeout_then_lookup",
+  "canonical_command_base": "repository root",
   "runtime": {"implementation": "cpython", "python": "3.14.6"},
   "fixture_id": "snapshot-2026-07-30-a",
   "fixture_digest": "sha256:...",
@@ -2292,7 +2495,7 @@ fragmenting.
 
 ---
 
-## 13. Mastery gate and spaced retrieval
+## 13. Constructive evidence route and spaced retrieval
 
 ### 13.1 Capability matrix
 
@@ -2311,10 +2514,11 @@ Use `0 = cannot yet`, `1 = with notes`, `2 = independently`, and
 `3 = can teach/review`. The goal is not a perfect row on day one; it is an
 honest map that selects the next retrieval task.
 
-### 13.2 Mandatory gate conditions
+### 13.2 Constructive next-step guide
 
-You pass Module 20 only when you can do all of these without browsing your
-notes first:
+Use this evidence to choose the M21 bridge or a repair path, not to decide
+whether Michael passes. Consider whether you can do all of these without
+browsing your notes first:
 
 1. draw the name → candidate → bytes → frame → decision → response/unknown
    chain and give one non-equality per arrow;
@@ -2327,9 +2531,9 @@ ledger access;
 7. audit one evidence packet for scope/provenance/privacy; and
 8. state the exact thing Modules 21, 22, and 24 would add.
 
-A correct MCQ score alone is insufficient. You must produce a trace, a
-counterexample, and an oral defense because these detect different forms of
-understanding.
+With a clear, self-supported explanation across this evidence, continue with the M21 handoff. Otherwise, reopen the smallest relevant frame, timeout, or operation-ID trace; make one prediction; correct one artifact; and rehearse the repair with the TA or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. A correct MCQ score alone is insufficient; use a trace, a counterexample, and an oral defense because they detect different forms of understanding.
 
 ### 13.3 Consolidation artifacts
 
@@ -2366,7 +2570,7 @@ not restart the entire module.
 
 Use sources to answer a precise question, not as a substitute for a model.
 The full source/claim/licensing ledger lives in the
-[Module 20 source map](../research/module20_networks_protocols_source_map.md).
+[Module 20 source map](/downloads/module20_networks_protocols_source_map.md).
 
 ### 14.1 Three-source spine
 
@@ -2591,3 +2795,98 @@ That discipline makes the material more demanding—not less—but it also makes
 it learnable. You no longer memorize “TCP is reliable” or “just retry.” You
 read a system layer by layer, identify the exact missing contract, and build
 only the evidence that earns the next claim.
+
+## Guided Codex handoff — M20
+
+### Study Partner — network rehearsal and TA handoff
+
+Start with: **“I am finishing M20. This local observation is [fact], the
+remote claim I am tempted to make is [claim], and my confidence is [level].”**
+Ask for one request/response timeline with client, resolver, transport,
+application ledger, and timeout boundary. Change exactly one premise—duplicate
+delivery, delayed response, retry after an unknown outcome, stale name, or
+partition—and ask what the client can still know. End with a TA handoff:
+current claim, smallest trace, uncertainty, and a proposed next test.
+
+### Teaching Assistant — supportive oral defense
+
+Ask the learner to distinguish address/name, connection, bytes, parsed
+message, local decision, and remote effect before discussing “success.” Use
+this hint ladder: local event → protocol/framing boundary → request identity →
+timeout-compatible histories → reconciliation evidence → human/authority
+decision. Ask for a counterexample to “TCP/retry makes it safe,” then transfer
+the model to an unfamiliar API or distributed job. Finish with a
+learner-controlled evidence summary, never a score.
+
+### Forward handoff — M21
+
+Carry one local-versus-remote claim boundary, one idempotency or reconciliation
+rule, and one timeline into **M21**. The next module makes partial failure,
+cancellation, ordering, and distributed evidence explicit in asynchronous
+systems.
+
+
+## Bench pack
+
+**Bench pack:** `m20` — sparse, two benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Module 20 was initially excluded wholesale as a
+networking module, and that verdict judged the subject rather than the sessions.
+Two of them need no peer at all: `FrameDecoder` is a pure byte-stream state
+machine, and `classify_client_observation` is a decision procedure over a
+client-local observation. Both are exactly as real here as they would be over a
+socket. The four that genuinely need a network are not benched.
+
+### Bench 2 — frame admission trace
+
+**Session:** 2. **Rungs:** debug and defend, trace.
+**Executes:** three requests written two ways — 639 bytes of bare JSON and 651
+bytes of length-prefixed frames — each delivered under the same eight chunk
+patterns. The length-prefixed decoder recovers all three, **byte-identical, in all
+eight**. The one-chunk-one-message reader is correct in exactly **one**: the
+pattern where boundaries happen to align, which is the pattern you see in
+development. It then fails in two more directions than people guard against —
+two coalesced messages yield **1 parse and 1 logged error**, losing two entirely
+valid requests, and one-byte chunks yield **142 successful parses** from a
+three-message stream, because every lone digit in the payload is valid JSON. It
+can lose real messages while reporting an error, and invent messages while
+reporting none. Admission bounds are probed separately: an oversized declared
+length raises before the body is read, and a decoder error is terminal.
+**Cannot establish:** which chunk patterns a real network produces, or how often.
+The splits are constructed rather than observed — which is what makes the result
+exhaustive rather than sampled.
+
+### Bench 5 — ambiguous-outcome retry ledger
+
+**Session:** 5. **Rungs:** review and verify, debug and defend.
+**Executes:** every client-local failure through the reference classifier. Timeout,
+connection error, and malformed response **all classify as `UNKNOWN` with
+`decision=None`** — the model offers no value that would assert a remote
+non-effect, because no client-local observation could justify one. The connection
+error is the costly case: it feels like proof that nothing landed, and a connection
+can break after the server committed. The ledger then shows what makes a retry
+sound rather than merely repeated — an identical replay returns the *same*
+decision marked `replayed=True`, and reusing the operation ID for a different
+request raises `IdempotencyConflict` rather than guessing which operation was
+meant.
+**Cannot establish:** any real service's behaviour. The failure kinds are declared
+inputs, not observed outcomes, and the ledger is explicitly single-owner and
+sequential — a concurrent adapter must serialize the whole lookup-and-write
+transition, which Module 19 shows a dictionary does not do for you.
+
+### Sessions without a bench
+
+- **Session 1** — name resolution: resolvers, caches, and TTLs this process does
+  not own.
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — HTTP semantics: status codes, methods, and header policy. Without
+  a real server, a bench would restate the specification rather than test anything
+  against it.
+- **Session 6** — a publication-protocol dossier consuming the earlier sessions.
+
+### Bench pack completion record
+
+Records under `benches/records/m20-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

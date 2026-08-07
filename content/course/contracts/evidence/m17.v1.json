@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m17",
+  "purpose": "Bind M17's current workbook, source ledger, Mermaid reader surface, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark the module review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m17-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "M17 distinguishes M16 as its canonical academic prerequisite and M28 as its canonical forward handoff while preserving M18 as a separate open systems branch whose sole academic prerequisite is M17.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "1-position-in-the-knowledge-graph-and-problem-pressure"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "14-explicit-backward-and-forward-connections"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m17.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."
+      ]
+    },
+    {
+      "id": "m17-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M17 exposes six ordered sessions whose output anchors carry one connected architecture-evidence thread into M28.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "session-1--make-bits-earn-their-meaning"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "session-2--derive-remembered-state-from-current-input-logic"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "session-3--read-instructions-as-state-transitions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "session-4--explain-overlap-and-locality-without-promising-hardware"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "session-5--bridge-python-to-the-machine-one-owned-layer-at-a-time"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "session-6--review-the-incident-and-defend-a-bounded-claim"
+        }
+      ],
+      "limitations": [
+        "Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."
+      ]
+    },
+    {
+      "id": "m17-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M17 begins with representation and state pressures, then derives execution-layer distinctions rather than starting from a hardware label or performance story.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "2-bits-width-signedness-and-byte-order"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "3-from-boolean-transformation-to-clocked-state"
+        }
+      ],
+      "limitations": [
+        "A named first-principles route does not prove conceptual adequacy, a correct derivation, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m17-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M17 structurally exposes representation definitions, state assumptions, correctness reasoning, counterexamples, and declared numerical cache-model work.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "21-a-bit-pattern-is-not-yet-a-number"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "34-state-tables-force-hidden-assumptions-into-view"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "96-correctness-argument"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "65-sequential-and-deterministic-permutations-in-a-small-declared-model"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "64-hand-trace-an-item-index"
+        }
+      ],
+      "limitations": [
+        "These structural anchors do not substitute for qualified review of definitions, assumptions, proof ideas, counterexamples, numerical reasoning, or source claims."
+      ]
+    },
+    {
+      "id": "m17-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M17 contains distinct repository code reading, performance-incident debugging, and bounded evidence-packet design review.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "9-runnable-atlas-architecture-evidence-reference"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "level-5--debug-the-atlas-performance-incident"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "level-6--design-and-delegate-the-evidence-packet"
+        }
+      ],
+      "limitations": [
+        "These prompts do not prove that a learner can independently read, debug, or design the corresponding system."
+      ]
+    },
+    {
+      "id": "m17-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M17 asks for a confidence-aware representation prediction before the decoding contract is revealed.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "prediction-before-reveal--one-bit-pattern-one-named-interpretation"
+        }
+      ],
+      "limitations": [
+        "A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."
+      ]
+    },
+    {
+      "id": "m17-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M17 asks the learner to transfer its execution-boundary model across the I/O and OS handoff rather than stopping at a local machine model.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "level-8--transfer-across-the-io-and-os-handoff"
+        }
+      ],
+      "limitations": [
+        "A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."
+      ]
+    },
+    {
+      "id": "m17-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M17 exposes a learner-facing source route plus a scoped source/reuse ledger with claim linkage and stopping lines.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "15-source-ledger-licensing-claim-boundary-and-freshness"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module17_architecture_execution_source_map.md",
+          "locator": "10-source-use-and-licensing-policy"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+          "locator": "source-and-reuse-ledger"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+          "locator": "claim-linkage-and-stopping-lines"
+        }
+      ],
+      "limitations": [
+        "Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."
+      ]
+    },
+    {
+      "id": "m17-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M17 binds its execution-layer diagrams to concise Mermaid alternatives, the shared reader, and a module-specific accessibility regression surface.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "10-six-connected-teaching-sessions"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "source-ledger",
+          "path": "content/source-maps/module17_architecture_execution_source_audit_addendum.md",
+          "locator": "visual-and-text-alternative-review-boundary"
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "The local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."
+      ]
+    },
+    {
+      "id": "m17-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M17 exposes confidence-aware understanding checks and constructive routing for representation, state, execution, locality, and evidence claims.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "12-confidence-aware-understanding-check"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "diagnostic-routing"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "1316-constructive-next-step-guide"
+        }
+      ],
+      "limitations": [
+        "The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."
+      ]
+    },
+    {
+      "id": "m17-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M17 includes learner-controlled spaced retrieval tied to its central architecture-evidence artifacts.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "1318-consolidation-and-spaced-retrieval"
+        }
+      ],
+      "limitations": [
+        "A retrieval schedule does not prove that review occurred or that a learner retained the material."
+      ]
+    },
+    {
+      "id": "m17-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M17 specifies an architecture and performance evidence dossier with acceptance invariants instead of a pass/fail exam.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "131-project--atlas-architecture-and-performance-evidence-dossier"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "139-required-machine-readable-packet"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "1311-project-acceptance-invariants"
+        }
+      ],
+      "limitations": [
+        "A project brief and rubric do not prove learner work quality, portfolio review, or mastery."
+      ]
+    },
+    {
+      "id": "m17-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M17 contains an encouraging conversational oral-defense route with invitation, visible artifact, adaptive hint, changed premise, transfer, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "conversational-oral-defense--m17"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "invitation--separate-the-layers-before-naming-a-cause"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "hint-ladder--representation-to-bounded-evidence"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "changed-premise-counterexample"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "transfer-turn--m28-vector-and-numerical-model"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "reflection--learner-controlled-evidence-summary"
+        },
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m17.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."
+      ]
+    },
+    {
+      "id": "m17-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M17 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated architecture-evidence claim.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m17.v1.json",
+          "locator": "/teachingAssistant"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."
+      ]
+    },
+    {
+      "id": "m17-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M17 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m17.v1.json",
+          "locator": "/studyPartner"
+        }
+      ],
+      "limitations": [
+        "A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas or code, or saved a learner-authorized note."
+      ]
+    },
+    {
+      "id": "m17-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M17 companion carries a bounded architecture-evidence artifact into the canonical M28 handoff.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "learning-companion",
+          "path": "content/course/contracts/companions/m17.v1.json",
+          "locator": "/forwardHandoff"
+        }
+      ],
+      "limitations": [
+        "A declared handoff does not establish learner readiness, completion of M17, or authorization to bypass later prerequisites."
+      ]
+    },
+    {
+      "id": "m17-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M17 binds its runnable architecture reference and Mermaid execution-layer maps to the shared accessible reader, focused candidate test, and direct Mermaid regression.",
+      "inputs": [
+        {
+          "kind": "markdown-heading",
+          "role": "course-content",
+          "path": "content/modules/17_computer_architecture_execution_stack.md",
+          "locator": "9-runnable-atlas-architecture-evidence-reference"
+        },
+        {
+          "kind": "file",
+          "role": "reference-model",
+          "path": "public/downloads/module17_reference.py",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "public/downloads/test_module17_reference.py",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "source-code",
+          "path": "app/modules/[slug]/MermaidDiagram.tsx",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/m17-contract-candidate.test.mjs",
+          "locator": null
+        },
+        {
+          "kind": "file",
+          "role": "test",
+          "path": "tests/mermaid-accessibility.test.mjs",
+          "locator": null
+        }
+      ],
+      "limitations": [
+        "Static input resolution and local teaching tests do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."
+      ]
+    },
+    {
+      "id": "m17-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {
+          "kind": "json-pointer",
+          "role": "provenance",
+          "path": "content/course/contracts/evidence/preflight/m17.v1.json",
+          "locator": "/truthBoundary/release"
+        },
+        {
+          "kind": "markdown-heading",
+          "role": "provenance",
+          "path": "docs/module-evidence/m17/candidate-preflight.md",
+          "locator": "candidate-boundary"
+        }
+      ],
+      "limitations": [
+        "This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."
+      ]
+    }
+  ]
+}

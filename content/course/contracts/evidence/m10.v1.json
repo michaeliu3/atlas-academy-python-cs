@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m10",
+  "purpose": "Bind M10's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M10 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m10-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M10 workbook and frozen companion distinguish M9 as the canonical academic prerequisite and M11 as the canonical forward handoff without treating conceptual connections as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "backward-and-forward-connections"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m10.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m10-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M10 exposes six ordered sessions that move from graph modeling and representations through traversal, weighted-path selection, Dijkstra, and spanning-network/capacity-flow reasoning into an M11 handoff.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-1--turn-graph-questions-into-representations"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-2--fifo-layers-create-shortest-unweighted-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-3--dfs-finishing-state-exposes-cycles-and-order"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-4--relaxation-plus-graph-structure-selects-a-path-method"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-5--dijkstra-coordinates-heap-currency-and-finalization"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "session-6--connectivity-spanning-forests-and-atlas-defense"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "network-flow-bridge--conservation-residual-state-and-cut-evidence"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m10-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M10 begins with the client graph question and derives representation, frontier, state, invariant, witness, and cost choices from the requested output rather than from an algorithm name.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "1-start-with-the-graph-question"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "the-six-part-graph-question-sheet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "3-one-traversal-architecture-several-frontier-policies"}
+      ],
+      "limitations": ["A named first-principles route does not prove conceptual adequacy, a correct derivation, or learner comprehension."]
+    },
+    {
+      "id": "m10-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M10 exposes the mathematical graph definition, a representation invariant, a BFS proof idea, broken-algorithm counterexamples, and a bounded representation-aware numerical experiment.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "21-mathematical-model"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "assumption--one-stable-finite-graph-snapshot"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "44-representation-invariant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "45-why-the-path-is-shortest"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "46-intentionally-broken-bfs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "network-flow-bridge--conservation-residual-state-and-cut-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "max-flowmin-cut-proof-idea"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "numerical-experiment--representation-aware-cost-observation"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, proof ideas, counterexamples, measurements, or source claims."]
+    },
+    {
+      "id": "m10-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M10 contains a distinct code-reading and architecture-recovery studio, mechanism-defect diagnosis, and bounded graph-planner design/delegation work.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "22-code-reading-and-architecture-recovery-studio"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "code-reading-studio-the-state-transition"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "mechanism-defects"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "23-design-and-delegate-a-bounded-atlas-change"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a graph-sensitive component."]
+    },
+    {
+      "id": "m10-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M10 asks the learner to predict representation loss, traversal or weighted-path traces, and a residual augmenting transition before the corresponding state explanation is revealed.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "prediction-representation-loss"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "42-predict-before-running"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "residual-networks-make-earlier-choices-reversible"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m10-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M10 asks the learner to transfer graph and flow roles and evidence requirements to a new domain rather than merely recognize a named algorithm.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "level-8--transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m10-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M10 exposes learner-facing source wording and a scoped source/reuse ledger with claim linkage and stopping lines.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "sources-and-synthesis-notes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "source-wording-and-claim-boundary"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/arc_ii_source_map.md", "locator": "module-10--graph-algorithms-and-network-models"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m10-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M10 binds its graph-search knowledge bridge to a concise text alternative, the shared Mermaid reader, and the project-wide Mermaid accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "position-in-the-knowledge-system"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "text-alternative--graph-search-state-machine-bridge"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["The shared local scanner and renderer test do not replace an M10-specific executable regression, screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m10-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M10 exposes confidence-aware multiple-choice diagnostics, misconception routing, and a constructive response to high-confidence errors.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "26-understanding-check--nine-confidence-aware-mcqs"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "diagnostic-interpretation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "likely-misconceptions"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m10-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M10 includes a learner-controlled after-two-days, after-one-week, after-three-weeks, and M11 retrieval route tied to graph evidence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "spaced-retrieval"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m10-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M10 specifies a constructive graph-planner evidence packet with required artifacts, acceptance-style evidence, and a rubric rather than a pass/fail exam.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "28-atlas-milestone-10--evidence-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "required-artifacts"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "acceptance-criteria"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "evidence-rubric"}
+      ],
+      "limitations": ["A project brief, requirements, and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m10-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M10 contains an encouraging conversational oral-defense protocol with prediction, visible trace, adaptive hint, changed premise, counterexample, and learner-selected next evidence step.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "teaching-assistant--supportive-oral-defense"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "supportive-oral-defense-protocol"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "oral-hint-ladder--graph-semantics-to-witness"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "transfer--test-a-new-graph-question"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "reflection--name-the-next-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "learner-controlled-evidence-summary"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m10.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m10-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M10 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated graph claim.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m10.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m10-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M10 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m10.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m10-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M10 companion carries a bounded graph-decision card into the canonical M11 algorithm-strategy handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m10.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M10, or authorization to bypass M11 prerequisites."]
+    },
+    {
+      "id": "m10-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M10 binds its graph-search bridge to the shared accessible Mermaid rendering surface and a module-specific Mermaid accessibility regression; it declares no graph-bound dedicated studio or executable reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/10_graph_algorithms_network_models.md", "locator": "position-in-the-knowledge-system"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a shared local accessibility test do not prove M10-specific browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m10-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m10.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m10/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

@@ -7,6 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule23Progress,
+  persistModule23Progress,
+  restoreModule23Progress,
+} from "@/lib/module23-progress-codec";
 import styles from "./LanguageInterpreterStudio.module.css";
 
 type InterpreterView =
@@ -24,7 +30,6 @@ type ViewRecord = {
 };
 type StudioRecord = Record<InterpreterView, ViewRecord>;
 
-const STUDIO_STORAGE_KEY = "atlas-academy.module23-language-lab.v1";
 const CORE_RULE =
   "Structure is data; authority is separate and explicit. A successful parse establishes only the declared grammar shape. Atlas checks a bounded contract, resource budget, and authorization decision before a fixed-scope capability can support one local model operation. The evaluator has no ambient Python authority.";
 
@@ -71,15 +76,6 @@ const views: ReadonlyArray<{
     question: "What does CPython evidence support?",
   },
 ];
-
-const choiceIdsByView: Record<InterpreterView, ReadonlyArray<string>> = {
-  boundary: ["syntax", "permission", "execution"],
-  grammar: ["multiply", "add", "flat"],
-  environment: ["captured", "caller", "host"],
-  semantics: ["selected", "both", "missing"],
-  contract: ["named", "parse", "adapter"],
-  bridge: ["observation", "law", "benchmark"],
-};
 
 const boundaryStages = [
   {
@@ -327,9 +323,9 @@ const bridgeCards = [
   },
   {
     id: "dis",
-    label: "dis excerpt",
-    content: "RESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE",
-    detail: "Illustrative CPython-style instruction names can differ by Python release, build, and implementation. Read an actual listing as local evidence, not language law.",
+    label: "illustrative opcode-name card",
+    content: "[illustrative opcode names — not captured `dis` output]\nRESUME · LOAD_FAST · LOAD_CONST · BINARY_OP · RETURN_VALUE",
+    detail: "This fixed conceptual opcode-name list is not a captured disassembly. An actual listing is evidence only about the local Python implementation/version that produced it, not language law.",
   },
 ] as const;
 
@@ -356,41 +352,6 @@ function tabId(view: InterpreterView) {
 
 function panelId(view: InterpreterView) {
   return `language-interpreter-panel-${view}`;
-}
-
-function hasOnlyKeys(candidate: Record<string, unknown>, allowed: ReadonlyArray<string>) {
-  const keys = Object.keys(candidate);
-  return keys.length === allowed.length && keys.every((key) => allowed.includes(key));
-}
-
-function isViewRecord(value: unknown, view: InterpreterView): value is ViewRecord {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
-  const candidate = value as Record<string, unknown>;
-  if (!hasOnlyKeys(candidate, ["choice", "confidence", "revealed"])) return false;
-  const validChoice =
-    candidate.choice === null ||
-    (typeof candidate.choice === "string" && choiceIdsByView[view].includes(candidate.choice));
-  const validConfidence =
-    candidate.confidence === null || [1, 2, 3, 4].includes(candidate.confidence as number);
-  const validReveal =
-    typeof candidate.revealed === "boolean" &&
-    (!candidate.revealed || (candidate.choice !== null && candidate.confidence !== null));
-  return validChoice && validConfidence && validReveal;
-}
-
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
-  const candidate = value as Record<string, unknown>;
-  const ids = views.map((view) => view.id);
-  return hasOnlyKeys(candidate, ids) && views.every((view) => isViewRecord(candidate[view.id], view.id));
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // Local progress is optional; the learning studio stays useful without it.
-  }
 }
 
 function EvidenceLock() {
@@ -960,27 +921,29 @@ function BridgeLab({
     <div className={styles.viewStack}>
       <PredictionGate
         choices={[
-          { id: "observation", label: "A version-labelled CPython implementation observation that can motivate a later measurement question." },
+          { id: "observation", label: "A version-labelled local Python implementation observation that can motivate a later measurement question." },
           { id: "law", label: "A permanent, portable definition of Python language semantics." },
           { id: "benchmark", label: "Proof that this function is faster in every Python implementation and workload." },
         ]}
         id="bridge"
         onChange={onChange}
-        prompt="What is the strongest claim a `dis` listing for one trusted bundled Python snippet can support?"
+        prompt="What is the strongest claim version-labelled implementation evidence for one trusted bundled Python snippet can support?"
         record={record}
       />
       {record.revealed && (
         <section className={styles.revealCard} aria-live="polite">
           <div className={styles.revealHeader}>
-            <span className={styles.scopeTag}>TRUSTED CPYTHON COMPILATION BRIDGE</span>
+            <span className={styles.scopeTag}>TRUSTED PYTHON IMPLEMENTATION BRIDGE</span>
             <h3>Implementation evidence is useful precisely because its scope is labelled.</h3>
           </div>
           <p className={styles.bridgeWarning}>
-            <strong>CPython / Python-version-specific observation.</strong> This
-            view is a fixed code-reading bridge. It has no custom input, code
-            runner, external Atlas text, or executable action.
+            <strong>Local Python implementation/version-specific observation.</strong>
+            {" "}Call it CPython-specific only when a captured runtime label
+            reports <code>cpython</code>. This view is a fixed code-reading
+            bridge with no custom input, code runner, external Atlas text, or
+            executable action.
           </p>
-          <div className={styles.bridgeRail} aria-label="Trusted Python source to CPython observation path">
+          <div className={styles.bridgeRail} aria-label="Trusted Python source to local implementation observation path">
             {bridgeCards.map((item, index) => (
               <div key={item.id}>
                 <button
@@ -1003,7 +966,7 @@ function BridgeLab({
           </div>
           <div className={styles.claimOwners}>
             <article><span>language rule</span><p>Python language reference owns language semantics.</p></article>
-            <article><span>local observation</span><p>A particular CPython build can display particular implementation evidence.</p></article>
+            <article><span>local observation</span><p>A particular local Python implementation/build can display particular implementation evidence.</p></article>
             <article><span>performance claim</span><p>A controlled, reproducible measurement owns a speed or allocation conclusion.</p></article>
           </div>
           <div className={styles.nonClaimPlate}>
@@ -1014,9 +977,10 @@ function BridgeLab({
           <div className={styles.textEquivalent}>
             <strong>Text equivalent</strong>
             Follow the four fixed cards from trusted bundled source to AST
-            observation, compiler/code-object concept, and an illustrative
-            disassembly card. Each card is scoped implementation evidence; none
-            executes or authorizes a learner-provided query.
+            observation, compiler/code-object concept, and a conceptual
+            opcode-name card—not a captured <code>dis</code> listing. Each card
+            scopes an implementation idea; none executes or authorizes a
+            learner-provided query.
           </div>
         </section>
       )}
@@ -1036,19 +1000,21 @@ export function LanguageInterpreterStudio() {
   const [bridgeCard, setBridgeCard] = useState<BridgeCardId>("source");
   const [resetArmed, setResetArmed] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressDirtyRef = useRef(false);
   const revealedCount = views.filter((view) => record[view.id].revealed).length;
   const coverage = Math.round((revealedCount / views.length) * 100);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const raw = window.localStorage.getItem(STUDIO_STORAGE_KEY);
-        if (raw) {
-          const stored: unknown = JSON.parse(raw);
-          if (isStudioRecord(stored)) setRecord(stored);
+        const storage = getBrowserProgressStorage();
+        if (storage) {
+          const stored = restoreModule23Progress(storage);
+          if (stored) setRecord(stored as StudioRecord);
         }
       } catch {
-        // Ignore corrupt optional local progress. It contains no learning data.
+        // Optional local state contains only fixed choices, confidence, and
+        // reveal status; a storage error never blocks the lesson.
       } finally {
         setStorageReady(true);
       }
@@ -1057,16 +1023,19 @@ export function LanguageInterpreterStudio() {
   }, []);
 
   useEffect(() => {
-    if (!storageReady) return;
+    if (!storageReady || !progressDirtyRef.current) return;
     try {
-      // Persist exactly the whitelisted fixed-choice progress state.
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      const storage = getBrowserProgressStorage();
+      if (storage) persistModule23Progress(storage, record);
     } catch {
       // Progress storage is optional and never changes the instruction path.
+    } finally {
+      progressDirtyRef.current = false;
     }
   }, [record, storageReady]);
 
   const updateRecord = (view: InterpreterView, next: Partial<ViewRecord>) => {
+    progressDirtyRef.current = true;
     setRecord((current) => ({
       ...current,
       [view]: { ...current[view], ...next },
@@ -1108,7 +1077,13 @@ export function LanguageInterpreterStudio() {
       setResetArmed(true);
       return;
     }
-    clearStoredStudio();
+    try {
+      const storage = getBrowserProgressStorage();
+      if (storage) clearModule23Progress(storage);
+    } catch {
+      // Local progress is optional; reset the in-memory study state either way.
+    }
+    progressDirtyRef.current = false;
     setRecord(emptyRecord());
     setActiveView("boundary");
     setBoundaryStage("input");

@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m18",
+  "purpose": "Bind M18's current workbook, source ledgers, visual and bounded operating-systems model, and companion inputs into a candidate-only structural preflight without changing its legacy-baseline contract or release state.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, platform correctness, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M18 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m18-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "M18 distinguishes M17 as its sole academic prerequisite, M31 as reader narrative only, and M19 as its only canonical forward handoff without treating conceptual links as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "1-position-in-the-knowledge-graph"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "14-explicit-backward-and-forward-connections"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m18.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m18-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M18 exposes six ordered sessions whose outputs carry one resource-ownership, interruption, and recovery investigation into the M19 handoff.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "session-1--why-a-mediator-exists"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "session-2--program-process-lifecycle-and-scheduling"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "session-3--virtual-memory-and-fault-classification"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "session-4--names-open-resources-caches-and-authority"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "session-5--shutdown-as-a-fallible-protocol"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "session-6--publication-recovery-and-evidence-defense"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m18-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M18 derives operating-system mediation from finite resources, protection, multiplexing, and failure rather than beginning with an API catalog.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "2-finite-resources-force-a-mediator"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "1-position-in-the-knowledge-graph"}
+      ],
+      "limitations": ["A named first-principles route does not prove conceptual adequacy, a correct derivation, or learner comprehension."]
+    },
+    {
+      "id": "m18-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M18 structurally exposes OS definitions, declared scheduling and translation models, fault and durability counterexamples, and bounded crash-cut experiments.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "2-finite-resources-force-a-mediator"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "3-a-program-becomes-a-process"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "4-virtual-memory-the-private-address-space-illusion"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "5-files-are-names-open-resources-caches-and-persistence-protocols"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "8-atomic-visibility-is-not-durability"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical reasoning, or source claims."]
+    },
+    {
+      "id": "m18-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M18 contains distinct OS-boundary code reading, shutdown/debugging, and evidence-packet design work.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "24-code-reading-lab--one-write-many-owners"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "75-code-reading-lab--the-unsafe-shutdown-patch"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "level-6--design-and-delegate"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design the corresponding system."]
+    },
+    {
+      "id": "m18-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M18 asks for a confidence-aware claim about one returned write before later evidence is revealed.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "prediction-before-reveal--one-returned-write-one-named-boundary"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m18-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M18 asks the learner to transfer a one-worker resource/lifecycle model to later boundaries while preserving M19's concurrency ownership.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "level-8--transfer-across-later-boundaries"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m18-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M18 exposes a learner-facing source route plus canonical source-map and candidate addendum ledgers with claim linkage and stopping lines.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "15-source-ledger-licensing-claim-boundaries-and-freshness"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module18_operating_systems_source_map.md", "locator": "17-claim-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module18_operating_systems_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module18_operating_systems_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m18-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M18 binds its OS diagrams to concise Mermaid alternatives, its existing accessible studio, and a module-specific accessibility regression.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "10-six-connected-teaching-sessions"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module18_operating_systems_source_audit_addendum.md", "locator": "visual-and-text-alternative-review-boundary"},
+        {"kind": "file", "role": "source-code", "path": "app/OperatingSystemsStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["The local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m18-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M18 exposes confidence-aware understanding checks and constructive routing for process, memory, file, authority, shutdown, and durability claims.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "12-confidence-aware-understanding-check"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "diagnostic-routing"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "1318-constructive-next-step-guide"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m18-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M18 includes learner-controlled spaced retrieval tied to resource ownership, interruption, recovery, and the M19 handoff.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "1320-consolidation-and-spaced-retrieval"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m18-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M18 specifies a durable-worker evidence dossier, machine-readable packet, and acceptance invariants instead of a pass/fail exam.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "131-project--atlas-durable-worker-evidence-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "1311-required-machine-readable-packet"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "1313-project-acceptance-invariants"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m18-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M18 contains an encouraging conversational oral-defense route with invitation, adaptive hint, changed premise, M19 transfer, reflection, and learner-controlled evidence summary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "conversational-oral-defense--m18"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "invitation--separate-an-api-return-from-os-state"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "hint-ladder--owner-to-recovery-claim"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "transfer-turn--m19-concurrent-histories"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "reflection--learner-controlled-evidence-summary"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m18.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m18-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M18 companion binds a Teaching Assistant opening, artifact focus, and repair move to a stated operating-systems evidence claim.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m18.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m18-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M18 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m18.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas or code, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m18-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M18 companion carries a bounded operating-systems evidence artifact into the canonical M19 handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m18.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M18, or authorization to bypass later prerequisites."]
+    },
+    {
+      "id": "m18-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M18 binds its bounded operating-systems reference, behavioral test, accessible studio, focused candidate test, and Mermaid regression without describing the OS/process model as pure in-memory behavior.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/18_operating_systems_resource_mediation.md", "locator": "9-runnable-atlas-operating-systems-reference"},
+        {"kind": "file", "role": "source-code", "path": "app/OperatingSystemsStudio.tsx", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module18_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module18_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/m18-contract-candidate.test.mjs", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and local teaching tests do not prove browser interaction, OS behavior outside the declared lab scope, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m18-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m18.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m18/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

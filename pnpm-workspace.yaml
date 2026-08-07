@@ -1,6 +1,15 @@
 packages:
   - .
 
+# Keep advisory remediations scoped to their affected dependency paths.
+overrides:
+  "next>postcss": 8.5.24
+  "next>sharp": 0.35.2
+  # Keep advisory repairs within each declared compatible dependency family.
+  "minimatch@3>brace-expansion": 1.1.18
+  "minimatch@10>brace-expansion": 5.0.9
+  "ajv>fast-uri": 3.1.5
+
 # This private site deploys only reviewed, committed lockfile state.
 trustLockfile: true
 
@@ -9,3 +18,6 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+
+patchedDependencies:
+  vinext@0.0.50: patches/vinext@0.0.50.patch

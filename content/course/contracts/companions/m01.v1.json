@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m01",
+  "purpose": "Freeze a candidate-only M1 Teaching Assistant, Study Partner, and M2 handoff context for future human review without changing M1's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/0",
+    "digest": "sha256:c35da71b7430c219210e2c0a2339ddebb5360d3f2021189595a16b6349e8e9ef"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected object/binding claim. Ask for the shortest trace, the state before and after the critical line, and a confidence statement before offering any correction.",
+    "artifactFocus": "Ask the learner to make one alias graph, environment trace, ownership/frame condition, or delayed-mutation regression visible, then distinguish what the artifact shows from what remains unproven.",
+    "repairMove": "Ask for a prediction before correction; change exactly one binding, mutable nested value, snapshot boundary, or caller edit; then offer the smallest counterexample or regression test without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: put names and bindings beside objects and values, show a short code or state trace, and give a plain-language fallback before rehearsing one claim at a time.",
+    "changedPremise": "Change one operation from rebinding to mutation, or change one owned tuple back to a caller-owned list. Ask for a prediction and confidence before comparing the object graph or regression result.",
+    "taHandoff": "End with the learner's selected M1 artifact, attempted trace, confidence, unresolved misconception, one ownership boundary, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m02",
+    "carryArtifact": "Carry a state-evidence card: one object graph, one environment trace, one ownership/frame condition, one delayed-alias regression, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before calling a recursive program correct in M2, which changing bindings, call frames, base condition, and return relation must be visible in a trace?",
+    "boundary": "M2 is the only canonical forward handoff. References to later modules are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

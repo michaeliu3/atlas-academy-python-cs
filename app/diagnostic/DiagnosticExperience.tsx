@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
   useReducer,
   useRef,
@@ -10,21 +11,37 @@ import {
 } from "react";
 import {
   DIAGNOSTIC_ASSESSMENT_VERSION,
-  DIAGNOSTIC_STORAGE_KEY,
   buildDiagnosticResult,
   classifyResponse,
   confidenceLevels,
   createEmptyAttempt,
   diagnosticQuestions,
   diagnosticReducer,
-  parseStoredAttempt,
   toLearningBrief,
 } from "@/lib/diagnostic-model";
+import {
+  clearDiagnosticProgress,
+  persistDiagnosticProgress,
+  restoreDiagnosticProgress,
+} from "@/lib/diagnostic-progress-codec";
+import {
+  appendDiagnosticPaceDecision,
+  diagnosticPaceOptions,
+} from "@/lib/diagnostic-pace";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import { canExportApprovedDraft } from "@/lib/learner-controlled-export";
 
 type DiagnosticAttempt = ReturnType<typeof createEmptyAttempt>;
 type DiagnosticAction = Parameters<typeof diagnosticReducer>[1];
-type CopyState = "idle" | "copied" | "failed";
-type PersistenceState = "loading" | "saved" | "unavailable";
+type CopyState = "idle" | "approval-required" | "copied" | "printed" | "failed";
+type PersistenceState = "loading" | "ready" | "saved" | "unavailable";
+type AcademicPrerequisite = {
+  moduleNumber: number;
+  moduleTitle: string;
+  availability: string;
+  lifecycle: string;
+};
+const diagnosticProbeKicker = `Module 0 · ${diagnosticQuestions.length} reasoning probes`;
 
 function reduceDiagnostic(
   state: DiagnosticAttempt,
@@ -57,12 +74,15 @@ export function DiagnosticExperience() {
   const [persistence, setPersistence] =
     useState<PersistenceState>("loading");
   const [copyState, setCopyState] = useState<CopyState>("idle");
+  const [approvedLearningBrief, setApprovedLearningBrief] = useState<string | null>(null);
+  const [selectedPaceId, setSelectedPaceId] = useState<string | null>(null);
   const [resetArmed, setResetArmed] = useState(false);
   const [restoredProgress, setRestoredProgress] = useState(false);
-  const skipNextPersistence = useRef(false);
+  const [questionFocusVersion, setQuestionFocusVersion] = useState(0);
   const questionHeadingRef = useRef<HTMLHeadingElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const resultsHeadingRef = useRef<HTMLHeadingElement>(null);
+  const copyAttemptVersionRef = useRef(0);
 
   useEffect(() => {
     let active = true;
@@ -71,19 +91,21 @@ export function DiagnosticExperience() {
         return;
       }
       try {
-        const raw = window.localStorage.getItem(DIAGNOSTIC_STORAGE_KEY);
-        if (raw !== null) {
-          const stored = parseStoredAttempt(raw);
-          if (stored) {
-            dispatch({ type: "hydrate", attempt: stored });
-            setRestoredProgress(
-              Object.keys(stored.responsesByQuestionId).length > 0,
-            );
-          } else {
-            window.localStorage.removeItem(DIAGNOSTIC_STORAGE_KEY);
-          }
+        const storage = getBrowserProgressStorage();
+        if (!storage) {
+          setPersistence("unavailable");
+          return;
         }
-        setPersistence("saved");
+        const stored = restoreDiagnosticProgress(storage) as DiagnosticAttempt | null;
+        if (stored) {
+          dispatch({ type: "hydrate", attempt: stored });
+          setRestoredProgress(
+            Object.keys(stored.responsesByQuestionId).length > 0,
+          );
+          setPersistence("saved");
+        } else {
+          setPersistence("ready");
+        }
       } catch {
         setPersistence("unavailable");
       } finally {
@@ -99,15 +121,20 @@ export function DiagnosticExperience() {
     if (!hydrated) {
       return;
     }
-    if (skipNextPersistence.current) {
-      skipNextPersistence.current = false;
-      return;
-    }
     try {
-      window.localStorage.setItem(
-        DIAGNOSTIC_STORAGE_KEY,
-        JSON.stringify(attempt),
-      );
+      const storage = getBrowserProgressStorage();
+      if (!storage) {
+        window.queueMicrotask(() => setPersistence("unavailable"));
+        return;
+      }
+      const persisted = persistDiagnosticProgress(storage, attempt);
+      if (persisted) {
+        window.queueMicrotask(() => setPersistence("saved"));
+      } else if (Object.keys(attempt.responsesByQuestionId).length > 0) {
+        window.queueMicrotask(() => setPersistence("unavailable"));
+      } else {
+        window.queueMicrotask(() => setPersistence("ready"));
+      }
     } catch {
       window.queueMicrotask(() => setPersistence("unavailable"));
     }
@@ -137,11 +164,28 @@ export function DiagnosticExperience() {
     () => buildDiagnosticResult(attempt),
     [attempt],
   );
+  const learningBrief = useMemo(() => toLearningBrief(attempt), [attempt]);
+  const learningBriefWithPace = useMemo(
+    () => appendDiagnosticPaceDecision(learningBrief, selectedPaceId),
+    [learningBrief, selectedPaceId],
+  );
+  const learningBriefApproved = canExportApprovedDraft(
+    approvedLearningBrief,
+    learningBriefWithPace,
+  );
+  const copyFailureVisible = copyState === "failed" && learningBriefApproved;
+
+  useLayoutEffect(() => {
+    if (questionFocusVersion === 0) {
+      return;
+    }
+    questionHeadingRef.current?.focus();
+  }, [question.id, questionFocusVersion]);
 
   function goToQuestion(questionId: string) {
     setResetArmed(false);
+    setQuestionFocusVersion((version) => version + 1);
     dispatch({ type: "goTo", questionId });
-    window.requestAnimationFrame(() => questionHeadingRef.current?.focus());
   }
 
   function revealCurrentModel() {
@@ -153,19 +197,36 @@ export function DiagnosticExperience() {
     dispatch({ type: "complete" });
   }
 
+  function setLearningBriefApproval(approved: boolean) {
+    copyAttemptVersionRef.current += 1;
+    setApprovedLearningBrief(approved ? learningBriefWithPace : null);
+    setCopyState("idle");
+  }
+
+  function selectDiagnosticPace(paceId: string) {
+    copyAttemptVersionRef.current += 1;
+    setSelectedPaceId(paceId);
+    setApprovedLearningBrief(null);
+    setCopyState("idle");
+  }
+
   function resetDiagnostic() {
-    skipNextPersistence.current = true;
     try {
-      window.localStorage.removeItem(DIAGNOSTIC_STORAGE_KEY);
-      setPersistence("saved");
+      const storage = getBrowserProgressStorage();
+      if (!storage) {
+        setPersistence("unavailable");
+      } else {
+        setPersistence(clearDiagnosticProgress(storage) ? "ready" : "unavailable");
+      }
     } catch {
       setPersistence("unavailable");
     }
-    setCopyState("idle");
+    setLearningBriefApproval(false);
+    setSelectedPaceId(null);
     setResetArmed(false);
     setRestoredProgress(false);
+    setQuestionFocusVersion((version) => version + 1);
     dispatch({ type: "reset" });
-    window.requestAnimationFrame(() => questionHeadingRef.current?.focus());
   }
 
   function requestReset() {
@@ -177,13 +238,17 @@ export function DiagnosticExperience() {
   }
 
   async function copyLearningBrief() {
-    const brief = toLearningBrief(attempt);
+    if (!learningBriefApproved) {
+      setCopyState("approval-required");
+      return;
+    }
+    const copyAttemptVersion = copyAttemptVersionRef.current;
     try {
       if (window.navigator.clipboard?.writeText) {
-        await window.navigator.clipboard.writeText(brief);
+        await window.navigator.clipboard.writeText(learningBriefWithPace);
       } else {
         const transfer = document.createElement("textarea");
-        transfer.value = brief;
+        transfer.value = learningBriefWithPace;
         transfer.setAttribute("readonly", "");
         transfer.style.position = "fixed";
         transfer.style.opacity = "0";
@@ -195,10 +260,50 @@ export function DiagnosticExperience() {
           throw new Error("copy command was declined");
         }
       }
-      setCopyState("copied");
+      if (copyAttemptVersion === copyAttemptVersionRef.current) {
+        setCopyState("copied");
+      }
     } catch {
-      setCopyState("failed");
+      if (copyAttemptVersion === copyAttemptVersionRef.current) {
+        setCopyState("failed");
+      }
     }
+  }
+
+  function printLearningBrief() {
+    if (!learningBriefApproved) {
+      setCopyState("approval-required");
+      return;
+    }
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) {
+      setCopyState("failed");
+      return;
+    }
+    printWindow.opener = null;
+    const printDocument = printWindow.document;
+    printDocument.title = "Atlas Academy learning brief";
+    const main = printDocument.createElement("main");
+    const heading = printDocument.createElement("h1");
+    const boundary = printDocument.createElement("p");
+    const brief = printDocument.createElement("pre");
+    heading.textContent = "Atlas Academy learning brief";
+    boundary.textContent =
+      "Learner-approved, minimal summary. This page omits the full diagnostic ledger.";
+    brief.textContent = learningBriefWithPace;
+    main.appendChild(heading);
+    main.appendChild(boundary);
+    main.appendChild(brief);
+    printDocument.body.replaceChildren(main);
+    printDocument.body.style.cssText =
+      "color: #101322; font-family: system-ui, sans-serif; margin: 2rem;";
+    heading.style.cssText = "font-size: 1.4rem; margin: 0 0 0.5rem;";
+    boundary.style.cssText = "color: #3a4652; line-height: 1.5; margin: 0 0 1.5rem;";
+    brief.style.cssText =
+      "font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.78rem; line-height: 1.55; white-space: pre-wrap;";
+    printWindow.focus();
+    window.setTimeout(() => printWindow.print(), 0);
+    setCopyState("printed");
   }
 
   if (attempt.completed) {
@@ -269,16 +374,74 @@ export function DiagnosticExperience() {
         </div>
 
         <section
+          className="diagnostic-pace-choice"
+          aria-labelledby="diagnostic-pace-title"
+        >
+          <header>
+            <p className="kicker">Calendar, not a gate</p>
+            <h2 id="diagnostic-pace-title">Choose a temporary pace after seeing the repair work.</h2>
+            <p>
+              This is a temporary planning choice. It does not unlock a module or
+              create a record; it only adds your selected calendar to an
+              approved learning brief for a later Study Partner or Teaching
+              Assistant handoff.
+            </p>
+          </header>
+          <fieldset>
+            <legend>Which focused-time band is realistic for the next seven days?</legend>
+            <div className="diagnostic-pace-options">
+              {diagnosticPaceOptions.map((pace) => (
+                <label
+                  className="diagnostic-pace-option"
+                  data-selected={selectedPaceId === pace.id}
+                  key={pace.id}
+                >
+                  <input
+                    checked={selectedPaceId === pace.id}
+                    name="diagnostic-pace"
+                    onChange={() => selectDiagnosticPace(pace.id)}
+                    type="radio"
+                    value={pace.id}
+                  />
+                  <span>
+                    <strong>{pace.label}</strong>
+                    <small>{pace.weeklyHours}</small>
+                    <span>{pace.summary}</span>
+                    {pace.recommended ? (
+                      <em>Recommended starting point</em>
+                    ) : null}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <p className="diagnostic-pace-boundary">
+            Recalibrate after seven days. Keep proof/trace, prediction,
+            transfer, and oral reflection; change the calendar rather than
+            compressing the evidence. This selection stays in this results
+            view and is not saved with diagnostic progress.
+          </p>
+          <p className="diagnostic-pace-status" aria-live="polite">
+            {selectedPaceId
+              ? `Selected: ${diagnosticPaceOptions.find((pace) => pace.id === selectedPaceId)?.label}. This will appear in a newly approved learning brief.`
+              : "No pace is selected yet; your learning brief will not invent one."}
+          </p>
+        </section>
+
+        <section
           className="diagnostic-learning-route"
           aria-labelledby="learning-route-title"
         >
           <header>
             <p className="kicker">Connected next steps</p>
-            <h2 id="learning-route-title">Your evidence-led learning route</h2>
+            <h2 id="learning-route-title">Your evidence-led repair queue</h2>
             <p>
-              The sequence remains dependency ordered. A diagnostic can focus
-              attention; it cannot erase prerequisites without a transfer
-              check.
+              This prioritized queue sits inside, rather than replaces, the
+              canonical route. A diagnostic can focus attention; it cannot
+              erase prerequisites without a transfer check.
+            </p>
+            <p>
+              <Link href="/route">Open the canonical 60-day route</Link>
             </p>
           </header>
 
@@ -299,6 +462,25 @@ export function DiagnosticExperience() {
                     Open the exact section
                     <span aria-hidden="true"> ↗</span>
                   </Link>
+                  {route.academicPrerequisites.length > 0 ? (
+                    <p className="diagnostic-prerequisite-note">
+                      <strong>Keep the academic route intact:</strong>{" "}
+                      {route.academicPrerequisites.map(
+                        (
+                          prerequisite: AcademicPrerequisite,
+                          prerequisiteIndex: number,
+                        ) => (
+                          <span key={prerequisite.moduleNumber}>
+                            {prerequisiteIndex > 0 ? "; " : ""}
+                            Module {prerequisite.moduleNumber} —{" "}
+                            {prerequisite.moduleTitle}
+                          </span>
+                        ),
+                      )}{" "}
+                      must be secured before this section is treated as a
+                      repair target.
+                    </p>
+                  ) : null}
                 </li>
               ))}
             </ol>
@@ -313,6 +495,88 @@ export function DiagnosticExperience() {
               <Link href="/modules/01-values-state-execution">
                 Open Module 1 <span aria-hidden="true">→</span>
               </Link>
+            </div>
+          )}
+        </section>
+
+        <section
+          className="diagnostic-bridge-plan"
+          aria-labelledby="bridge-plan-title"
+        >
+          <header>
+            <p className="kicker">Adaptive foundation bridges</p>
+            <h2 id="bridge-plan-title">What to rebuild before moving faster</h2>
+            <p>
+              Each recommendation is tied to the reasoning signal that raised
+              it. It starts with an open foundation; a later extension is
+              named only when it is not yet available.
+            </p>
+          </header>
+
+          {result.bridgeRecommendations.length > 0 ? (
+            <ol>
+              {result.bridgeRecommendations.map((recommendation) => (
+                <li key={recommendation.area.id}>
+                  <div>
+                    <p className="diagnostic-bridge-area">
+                      {recommendation.area.label}
+                    </p>
+                    <h3>{recommendation.questionCategory}</h3>
+                    <p>{recommendation.area.whyItMatters}</p>
+                  </div>
+                  <div className="diagnostic-bridge-action">
+                    <p>
+                      Q{String(recommendation.questionNumber).padStart(2, "0")}
+                      {" · "}
+                      <strong>{recommendation.tier}</strong> signal
+                    </p>
+                    <Link href={recommendation.route.href}>
+                      Rebuild with open Module {recommendation.route.moduleNumber}
+                      <span aria-hidden="true"> ↗</span>
+                    </Link>
+                    {recommendation.route.academicPrerequisites.length > 0 ? (
+                      <p className="diagnostic-prerequisite-note">
+                        <strong>
+                          Direct academic prerequisite
+                          {recommendation.route.academicPrerequisites.length === 1
+                            ? ""
+                            : "s"}
+                          :
+                        </strong>{" "}
+                        {recommendation.route.academicPrerequisites.map(
+                          (
+                            prerequisite: AcademicPrerequisite,
+                            prerequisiteIndex: number,
+                          ) => (
+                            <span key={prerequisite.moduleNumber}>
+                              {prerequisiteIndex > 0 ? "; " : ""}
+                              Module {prerequisite.moduleNumber} —{" "}
+                              {prerequisite.moduleTitle}
+                            </span>
+                          ),
+                        )}{" "}
+                        This repair link does not waive that route.
+                      </p>
+                    ) : null}
+                    {recommendation.extension ? (
+                      <p className="diagnostic-extension-boundary">
+                        <strong>
+                          Future extension: Module {recommendation.extension.moduleNumber} {recommendation.extension.title} is {recommendation.extension.status}.
+                        </strong>{" "}
+                        {recommendation.extension.note}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <div className="diagnostic-transfer-note">
+              <strong>No foundation bridge needs automatic repair.</strong>
+              <p>
+                Use an instructor transfer conversation to test your ready
+                models in a new context. The connected route remains intact.
+              </p>
             </div>
           )}
         </section>
@@ -373,13 +637,43 @@ export function DiagnosticExperience() {
         </aside>
 
         <div className="diagnostic-result-actions">
-          <button type="button" onClick={copyLearningBrief}>
+          <fieldset className="diagnostic-export-consent">
+            <legend>Review before manual copy or print</legend>
+            <label>
+              <input
+                checked={learningBriefApproved}
+                onChange={(event) => setLearningBriefApproval(event.target.checked)}
+                type="checkbox"
+              />
+              <span>I reviewed this learning brief and approve copying or printing it myself.</span>
+            </label>
+            <p id="diagnostic-export-consent-note">
+              Only the concise learning brief is copied or printed. Your full results stay in this portal and local browser state.
+            </p>
+          </fieldset>
+          <button
+            aria-describedby="diagnostic-export-consent-note"
+            disabled={!learningBriefApproved}
+            type="button"
+            onClick={copyLearningBrief}
+          >
             Copy learning brief
           </button>
-          <button type="button" onClick={() => window.print()}>
-            Print or save as PDF
+          <button
+            aria-describedby="diagnostic-export-consent-note"
+            disabled={!learningBriefApproved}
+            type="button"
+            onClick={printLearningBrief}
+          >
+            Print approved brief
           </button>
-          <Link href="/modules">Open the course library</Link>
+          <Link href="/learning-partners">Continue with Learning Partners</Link>
+          <p className="diagnostic-learning-partners-handoff">
+            After you approve and copy this brief, paste it into the designated Study Partner or Teaching Assistant chat.
+            Atlas does not transfer this brief or activate records. Say <code>records on</code>{" "}
+            in that exact chat only if you want its configured concise-note policy.
+          </p>
+          <Link href="/modules">Open the lecture notes</Link>
           <button
             className="diagnostic-reset-action"
             type="button"
@@ -395,10 +689,27 @@ export function DiagnosticExperience() {
           <p className="diagnostic-copy-status" aria-live="polite">
             {copyState === "copied"
               ? "Learning brief copied."
-              : copyState === "failed"
-                ? "Copy was unavailable. Use Print or save as PDF instead."
+              : copyState === "printed"
+                ? "Printable learning brief opened."
+                : copyState === "approval-required"
+                ? "Review the current brief before copying or printing it."
+              : copyFailureVisible
+                ? "Copy or print was unavailable. The approved brief is below for manual selection."
                 : ""}
           </p>
+          {copyFailureVisible ? (
+            <div className="diagnostic-manual-copy-fallback">
+              <label htmlFor="diagnostic-manual-copy-fallback">
+                Approved learning brief for manual copy
+              </label>
+              <textarea
+                id="diagnostic-manual-copy-fallback"
+                readOnly
+                rows={12}
+                value={learningBriefWithPace}
+              />
+            </div>
+          ) : null}
         </div>
       </section>
     );
@@ -419,7 +730,7 @@ export function DiagnosticExperience() {
     >
       <header className="diagnostic-experience-hero">
         <div>
-          <p className="kicker">Module 0 · 13 reasoning probes</p>
+          <p className="kicker">{diagnosticProbeKicker}</p>
           <h1 id="diagnostic-title">
             Quick to answer.
             <em>Deep enough to route your learning.</em>
@@ -445,10 +756,12 @@ export function DiagnosticExperience() {
           </span>
           <span>
             {persistence === "loading"
-              ? "Restoring saved progress…"
+              ? "Preparing optional local-only progress…"
               : persistence === "saved"
-                ? "Saved on this device"
-                : "Browser storage unavailable"}
+                ? "Progress saved only in this browser"
+                : persistence === "ready"
+                  ? "Local-only progress is available"
+                  : "Browser storage unavailable"}
           </span>
         </div>
         <progress
@@ -543,7 +856,10 @@ export function DiagnosticExperience() {
               <figcaption>
                 Read before answering · {question.codeLanguage ?? "code"}
               </figcaption>
-              <pre>
+              <pre
+                aria-label={`Scrollable ${question.codeLanguage ?? "code"} diagnostic example`}
+                tabIndex={0}
+              >
                 <code>{question.code}</code>
               </pre>
             </figure>
@@ -630,9 +946,9 @@ export function DiagnosticExperience() {
                         confidence: level.id,
                       })
                     }
-                  />
-                  <strong>{level.label}</strong>
-                  <span>{level.description}</span>
+                    />
+                    <strong>{level.label}</strong>{" "}
+                    <span>{level.description}</span>
                 </label>
               ))}
             </div>

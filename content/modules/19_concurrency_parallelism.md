@@ -18,10 +18,12 @@ reported as host metadata. The compatibility suite was also run separately on
 CPython 3.12.13. No free-threaded runtime was installed or executed, so every
 free-threaded statement in this module is documentation-scoped.
 
-**Primary learning surface:** use the artistic, interactive HTML studio for
-prediction, stepping, reveal, and persistent learning records. This workbook is
-the complete accessible and auditable canonical source: it contains every
-contract, diagram text equivalent, lab, quiz rationale, project gate, and
+**Learning route:** use the designated Teaching Assistant and Study Partner
+chats for guided teaching, discussion, rehearsal, and oral defense. Use the
+artistic interactive HTML studio as the visual/reference companion for
+prediction, stepping, reveal, and learner-controlled local progress. This
+workbook is the complete accessible and auditable canonical source: it contains
+every contract, diagram text equivalent, lab, quiz rationale, project gate, and
 source boundary needed without animation, color, or JavaScript.
 
 **Learning record:** use the Module 19 Notion notebook for predictions,
@@ -161,7 +163,10 @@ begin before the first responds.
 #### D1 — The M18 → M19 pressure bridge
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-pressure-bridge
+    %% atlas-diagram-title: From M18 publishing to M19 concurrency
+    %% atlas-diagram-alt: A validated local result stays behind one publisher while throughput pressure admits partitions A and B with overlapping lifetimes. M19 orders and accounts for those lifetimes, and one reducer sends one candidate to the unchanged publisher.
+    flowchart LR
     M18["M18: one supervised worker"] --> SAFE["validated local result"]
     SAFE --> PUB["one M18 publisher"]
     PRESSURE["throughput pressure"] --> A["partition A admitted"]
@@ -209,7 +214,10 @@ designed to answer that question.
 #### D2 — Overlap and physical execution are different axes
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-overlap-execution-axes
+    %% atlas-diagram-title: Overlap and physical execution are different axes
+    %% atlas-diagram-alt: Two applications can have overlapping lifetimes while time-slicing on one physical resource, or execute at once on separate resources. Event history establishes overlap only; runtime, workload, and physical-execution evidence is required to establish parallel execution.
+    flowchart TB
     subgraph C["Concurrent, not established parallel"]
         C1["A: invoke ─ work ─ pause ─ work ─ respond"]
         C2["B:       invoke ─ work ─ pause ─ respond"]
@@ -281,7 +289,10 @@ Required specification properties:
 #### D3 — A legal concurrent history must refine the sequential operation
 
 ```mermaid
-sequenceDiagram
+    %% atlas-diagram-id: m19-deterministic-reducer-history
+    %% atlas-diagram-title: Concurrent completion with deterministic reducer order
+    %% atlas-diagram-alt: Workers A and B invoke work concurrently, and B returns first. A single reducer nevertheless validates and commits A before B in stable fold order, then returns responses. Completion order differs from the legal sequential order.
+    sequenceDiagram
     participant A as Worker A
     participant R as Single reducer
     participant B as Worker B
@@ -392,7 +403,10 @@ in the equivalent increment model used by the reference: its exact output is
 #### D4 — A lost update without container corruption
 
 ```mermaid
-sequenceDiagram
+    %% atlas-diagram-id: m19-lost-update-trace
+    %% atlas-diagram-title: Lost update from two stale snapshots
+    %% atlas-diagram-alt: Workers A and B both read shared graph state (1,), compute different valid additions, then write sequentially. B's stale write replaces A's contribution, leaving (1,3) rather than the sequential result (1,2,3).
+    sequenceDiagram
     participant A as Worker A
     participant S as shared["graph"]
     participant B as Worker B
@@ -436,7 +450,10 @@ race” for an explicitly scoped standard.
 #### D5 — Three questions, three proofs
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-history-property-proofs
+    %% atlas-diagram-title: Separate proofs for safety, liveness, and linearizability
+    %% atlas-diagram-alt: The same declared histories support three distinct questions. Safety uses invariants or counterexamples, liveness needs progress assumptions and ranking or cycle reasoning, and linearizability maps each operation to a legal sequential effect; none proves liveness alone.
+    flowchart LR
     H["declared histories"] --> S["Safety<br/>Is a forbidden state reachable?"]
     H --> L["Liveness<br/>Does a desired transition eventually occur?"]
     H --> Z["Linearizability<br/>Can each operation appear once in a legal sequential order?"]
@@ -552,6 +569,10 @@ many passing histories ≠ every allowed history
 
 ---
 
+### Session 1 output — interleaving history table
+
+One table lists the distinct histories two workers can produce for one shared transition, and marks which are legal.
+
 ## 3. Session 2 — Protect one logical transition
 
 ### Pressure
@@ -600,7 +621,10 @@ partials, and one reducer alone validates, folds, and updates the ledger.
 #### D6 — Three boundaries, only two defensible
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-ownership-boundaries
+    %% atlas-diagram-title: Lock scope and single-owner alternatives
+    %% atlas-diagram-alt: A write-only lock leaves read and computation stale. A whole-transition lock protects read, computation, validation, and write. Atlas instead gives workers immutable partials and one reducer ownership of validation, folding, and terminal commit.
+    flowchart TB
     N["narrow lock"] --> N1["read outside"]
     N1 --> N2["compute outside"]
     N2 --> N3["lock: write only"]
@@ -640,7 +664,10 @@ reading stale state or two locks acquired in a cycle.
 #### D7 — Lock ownership and its stopping lines
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m19-lock-ownership-states
+    %% atlas-diagram-title: Lock ownership states and stopping lines
+    %% atlas-diagram-alt: A or B may acquire an unlocked mutual-exclusion lock while the other waits. Release, including exceptional context-manager exit, allows the implementation to select a waiter; the state machine offers no FIFO, fairness, scope-correctness, or deadlock guarantee.
+    stateDiagram-v2
     [*] --> Unlocked
     Unlocked --> OwnedByA: A acquire succeeds
     Unlocked --> OwnedByB: B acquire succeeds
@@ -764,6 +791,10 @@ why owner-reducer is simpler:
 
 ---
 
+### Session 2 output — critical-section boundary note
+
+One note derives the critical section from the invariant it protects, not from the code that happens to be adjacent.
+
 ## 4. Session 3 — Predicates, permits, and item ownership
 
 ### Pressure
@@ -824,7 +855,10 @@ the durable fact and must be rechecked.
 #### D8 — Release, wake, reacquire, recheck
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-condition-recheck-loop
+    %% atlas-diagram-title: Condition wait requires a predicate recheck
+    %% atlas-diagram-alt: A consumer acquires a condition lock and checks a predicate. If false it releases and waits; after a notification it reacquires and rechecks. A producer changes guarded state, notifies, and releases, but notification alone does not reserve the state.
+    flowchart LR
     A["acquire condition lock"] --> C{"predicate true?"}
     C -- yes --> U["use guarded state"]
     C -- no --> W["wait: release lock + block"]
@@ -874,7 +908,10 @@ not prove each permit guarded the intended resource or that admission is fair.
 #### D9 — Permit accounting is not item transfer
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-semaphore-permit-accounting
+    %% atlas-diagram-title: Semaphore permits are not item transfer
+    %% atlas-diagram-alt: Starting with two permits, A and B acquire and C waits. After A releases, C can acquire, while B's unreleased permit leaves only one available. A bounded semaphore can detect an extra release but does not transfer work items or ensure fairness.
+    flowchart LR
     START["capacity = 2<br/>available = 2"] --> A["A acquire<br/>available = 1"]
     A --> B["B acquire<br/>available = 0"]
     B --> CW["C waits for a permit"]
@@ -922,7 +959,10 @@ queue empty
 #### D10 — Six independent progress surfaces
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-progress-surfaces
+    %% atlas-diagram-title: Independent surfaces of work progress
+    %% atlas-diagram-alt: Queue contents, worker-owned in-flight work, unfinished count, observed Future, terminal ledger, reduction completion, and M18 publication are distinct states. An empty queue, an unfinished count, or an observed Future alone cannot establish later publication.
+    flowchart LR
     Q["queue contents<br/>may be empty"] --> I["in-flight item<br/>worker owns it"]
     I --> U["unfinished count<br/>still positive"]
     U --> F["Future result/exception<br/>must be observed"]
@@ -945,7 +985,10 @@ alone establishes a later one.
 #### D11 — One terminal classification per admitted partition
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m19-terminal-classification-state-machine
+    %% atlas-diagram-title: One terminal classification for each admitted partition
+    %% atlas-diagram-alt: Admitted work may be enqueued, claimed, produce a partial, start commit, and commit; failures and cancellations arise at defined earlier paths. COMMITTED, FAILED, and CANCELLED are pairwise-exclusive terminal states with no outgoing transitions.
+    stateDiagram-v2
     [*] --> ADMITTED
     ADMITTED --> ENQUEUED
     ADMITTED --> CANCELLED
@@ -1072,6 +1115,10 @@ opens the Atlas publication gate.
 
 ---
 
+### Session 3 output — ownership and permit ledger
+
+One ledger records which component owns each item, which permit admits it, and what happens when a permit is unavailable.
+
 ## 5. Session 4 — Progress can fail
 
 ### Pressure
@@ -1114,7 +1161,10 @@ capacity-valued resource systems.
 #### D12 — Wait-for cycle and architectural repair
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-wait-for-cycle
+    %% atlas-diagram-title: Wait-for cycle and single-owner repair
+    %% atlas-diagram-alt: Worker A requests the index lock held by B, while B requests the ledger lock held by A. Under single-instance, non-preemptive locks the request-holder cycle witnesses deadlock. One reducer owning ledger and index removes these cross-owner wait edges.
+    flowchart LR
     A["worker A"] -- "requests" --> I["index_lock"]
     I -- "held by" --> B["worker B"]
     B -- "requests" --> L["ledger_lock"]
@@ -1168,7 +1218,10 @@ cycle can be constructed from those edges.
 #### D13 — Lock order as a topological constraint
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-lock-order-constraint
+    %% atlas-diagram-title: Lock order as an acyclic constraint
+    %% atlas-diagram-alt: The legal lock-order relation flows from ledger to index to publication, with ledger also preceding publication. A reverse publication-to-ledger acquisition is forbidden. Atlas prefers one reducer ownership and releases that state before calling the M18 publisher.
+    flowchart LR
     L["1 · ledger_lock"] --> I["2 · index_lock"]
     I --> P["3 · publication_lock"]
     L --> P
@@ -1302,6 +1355,10 @@ remaining unknown:
 
 ---
 
+### Session 4 output — liveness failure dossier
+
+One dossier separates a stalled system from a slow one, and names the progress condition that failed.
+
 ## 6. Session 5 — Choose the Python execution model from first principles
 
 ### Pressure
@@ -1330,7 +1387,10 @@ the worker, partition ledger, reducer commit, or publication record.
 #### D14 — Future state and Atlas state are separate machines
 
 ```mermaid
-stateDiagram-v2
+    %% atlas-diagram-id: m19-future-atlas-machines
+    %% atlas-diagram-title: Future and Atlas work state machines
+    %% atlas-diagram-alt: A Future can be pending, running, cancelled, or finish through result or exception. Atlas work independently moves from enqueued to claimed, partial ready, commit started, and committed, with defined failures and cancellation; a Future result only supplies a candidate for reducer commit.
+    stateDiagram-v2
     state Future {
         [*] --> PENDING
         PENDING --> RUNNING
@@ -1396,7 +1456,10 @@ Use this stop taxonomy:
 #### D15 — One interface over different execution boundaries
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-executor-boundaries
+    %% atlas-diagram-title: Execution boundaries behind one Future interface
+    %% atlas-diagram-alt: Thread, process, and interpreter executors share a submit/Future surface but have different object-sharing, isolation, transfer, startup, and failure boundaries. Each acceptable adapter sends immutable results to one reducer.
+    flowchart TB
     API["submit(callable, args) → Future"] --> T["ThreadPoolExecutor"]
     API --> P["ProcessPoolExecutor"]
     API --> I["InterpreterPoolExecutor<br/>3.14 capability; separate validation"]
@@ -1456,7 +1519,10 @@ Which observation?
 #### D16 — Build capability, live state, and application protocol
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-gil-capability-live-state
+    %% atlas-diagram-title: Build capability and live GIL state
+    %% atlas-diagram-alt: Python documentation describes an optional free-threaded build, while a standard build reports its own live GIL state. A free-thread-capable executable still needs a live probe and extension audit; every path needs Atlas ownership, synchronization, and result-equivalence evidence.
+    flowchart TB
     DOC["Python 3.14 documents optional free-threaded CPython"] --> BUILD{"Py_GIL_DISABLED build flag"}
     BUILD -- "0 in current executable" --> STD["standard build"]
     BUILD -- "1 in a separate executable" --> FT["free-thread-capable build"]
@@ -1546,12 +1612,51 @@ Observed elapsed time also contains startup, serialization, queueing,
 contention, imbalance, merge, publication, system load, and measurement noise.
 Attribution waits for Module 24.
 
+### Rigor card — definition, assumptions, derivation, counterexample, and numerical experiment
+
+**Definitions.** `W` is the total declared work, `S` is the longest declared
+dependency path (the span), `N` is the number of ideal workers, and `T_N` is
+the model's completion time with those workers. These are properties of a
+specified work graph—not measurements of a Python process or a host CPU.
+
+**Assumptions.** The work graph and sequential oracle are already fixed; every
+worker preserves the same semantic result; workers have equal abstract speed;
+and startup, communication, contention, cache effects, and scheduling noise
+are deliberately excluded. If any assumption changes, this card is no longer
+the right model.
+
+**Derivation / proof idea.** Any legal execution must perform `W` units across
+at most `N` workers, so it cannot finish in less than `W / N` abstract units.
+It must also preserve the dependency path of length `S`. Therefore:
+
+```text
+T_N >= max(W / N, S)
+```
+
+The inequality is a lower bound, not a promise that a program reaches it.
+The Amdahl ceiling adds a second constraint when a declared fraction `s` is
+serial: `1 / (s + (1 - s) / N)`.
+
+**Counterexample.** A correct four-worker program can finish far below either
+ceiling when serialization, uneven input, lock contention, or publication work
+dominates. A faster program whose final index no longer matches the sequential
+oracle is not a speedup of the same computation at all.
+
+**Finite numerical experiment.** For the fixed model `W=120`, `S=30`, `N=4`,
+and `s=0.25`, the work/span lower bound is `max(120 / 4, 30) = 30`; the Amdahl
+ceiling is `16 / 7`, about `2.286`; and the tighter combined ceiling is also
+`16 / 7`. This is arithmetic over declared values, not an observed speedup or
+a claim about CPython, Windows, or a particular machine.
+
 ### 6.5 Workload-first decision
 
 #### D17 — Refuse a model until meaning and ownership are known
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-workload-choice-gate
+    %% atlas-diagram-title: Workload-first concurrency choice
+    %% atlas-diagram-alt: A chooser first requires a sequential oracle and ownership map. It selects sequential, bounded threads, processes, isolated interpreters, or redesign based on proven workload and transfer constraints, then checks oracle equality and ledger evidence before timing; async fan-out routes to M21.
+    flowchart TB
     O{"Sequential oracle and<br/>state ownership supplied?"}
     O -- no --> REFUSE["refuse recommendation;<br/>recover meaning first"]
     O -- yes --> NEED{"Demonstrated need<br/>for overlap?"}
@@ -1657,6 +1762,10 @@ For each, state one fact or measurement that could reverse the decision.
 
 ---
 
+### Session 5 output — execution-model decision record
+
+One record chooses threads, processes, or an interpreter pool from the workload's blocking behaviour, and states the assumption that would reverse it.
+
 ## 7. Session 6 — Atlas multi-worker evidence defense
 
 ### Pressure
@@ -1679,7 +1788,10 @@ sequential meaning
 #### D18 — Atlas owner-reducer architecture
 
 ```mermaid
-flowchart LR
+    %% atlas-diagram-id: m19-owner-reducer-architecture
+    %% atlas-diagram-title: Atlas owner-reducer architecture
+    %% atlas-diagram-alt: Twelve immutable document partitions enter a bounded worker adapter. Workers return immutable partials or failures; one reducer validates, records terminal states, and folds. Only a fully committed oracle-equivalent result reaches one M18 publisher, which records ordered evidence.
+    flowchart LR
     DOC["12 synthetic immutable documents"] --> PART["stable immutable partitions"]
     PART --> BOUND["bounded submission<br/>1–4 workers"]
     BOUND --> W1["worker 1<br/>local state only"]
@@ -1869,7 +1981,10 @@ liveness, tests, portability, model fit, evidence, and prose.
 #### D19 — Each rung answers a narrower question
 
 ```mermaid
-flowchart TB
+    %% atlas-diagram-id: m19-evidence-ladder
+    %% atlas-diagram-title: Evidence ladder and forward boundaries
+    %% atlas-diagram-alt: Correctness proceeds from sequential specification through finite model, API or build contract, named runtime observation, and a constrained causal hypothesis to explicit unknowns. Unresolved network, async/distributed, and runtime-performance questions route to M20, M21, and M24.
+    flowchart TB
     SPEC["1 · sequential specification<br/>what counts as correct?"] --> MODEL["2 · finite model<br/>which declared histories pass/fail?"]
     MODEL --> CONTRACT["3 · Python/CPython contract<br/>what does this API/build promise?"]
     CONTRACT --> OBS["4 · runtime observation<br/>what happened in this named run?"]
@@ -1905,7 +2020,7 @@ one ordinary run
 
 Even the strongest row is scoped to its assumptions and abstraction map.
 
-### Session 6 oral defense
+### Supportive oral-defense route
 
 Answer the governing question in 300 words:
 
@@ -1927,15 +2042,42 @@ Then provide:
 
 Defend one accepted decision, one rejected patch, and one remaining unknown.
 
+**Adaptive protocol — non-grading and learner-controlled.**
+
+**Current candidate-only supplement.** This route makes the existing Session 6
+defense easier to conduct as a constructive conversation. It is not evidence of
+review, release, or learner mastery.
+
+### Hint ladder, smallest repair, and learner evidence summary
+
+Start with one learner-selected claim card: the sequential postcondition, one
+shared transition, a progress premise, or the execution-model choice. Before a
+hint, the learner predicts the next state or consequence, records confidence
+`1–4`, and names the observation that could falsify the claim. The Teaching
+Assistant then uses the smallest useful move: recover the invariant, expose one
+event, give a four-event counterexample, or complete a different micro-trace.
+
+Close by changing one premise—replace local queue ownership with a remote
+message (M20), an async task boundary (M21), or a runtime/performance claim
+(M24). The learner states what transfers, what does not, one remaining
+uncertainty, and the next evidence to collect in a learner-controlled summary.
+
+Incomplete explanations select the smallest repair or retrieval step; the
+Teaching Assistant assigns neither a pass/fail result nor a mastery claim.
+
 ---
+
+### Session 6 output — multi-worker correctness dossier
+
+One dossier defends a concurrent Atlas run with an interleaving argument, an injected failure, and one claim the evidence cannot support.
 
 ## 8. Six-view interactive HTML studio
 
-The HTML studio is the primary learning experience. It uses a woven execution
-score: workers occupy horizontal event rails; vertical crossings appear only at
-real ownership/synchronization boundaries; the reducer is a strong central
-spine; wait-for cycles tighten into a visible knot; terminal classifications
-have redundant words, icons, and border patterns.
+The HTML studio is a visual/reference companion, not the primary guided-learning
+surface. It uses a woven execution score: workers occupy horizontal event rails;
+vertical crossings appear only at real ownership/synchronization boundaries;
+the reducer is a strong central spine; wait-for cycles tighten into a visible
+knot; terminal classifications have redundant words, icons, and border patterns.
 
 All six views use the same fixture:
 
@@ -1964,6 +2106,16 @@ separate non-destructive view reset are available. It never stores raw private
 code, absolute paths, runtime secrets, or production data. Model results and
 empirical observations have distinct labels. The invariant and current runtime
 profile stay reachable from every view. Coverage is not labeled mastery.
+
+### Visual text equivalent — concurrency route from history to evidence
+
+Read the nonvisual route in this order: first reconstruct histories and the
+sequential specification (D1–D5); then identify ownership, predicates, and
+coordination (D6–D11); then separate progress from completion (D12–D13); then
+choose an execution model from workload and contracts (D14–D17); finally audit
+the evidence and the agent patch (D18–D19). Each group has an adjacent prose,
+trace, or table alternative that gives the complete reading path without a
+diagram, drag action, colour cue, or timing observation.
 
 ### View 1 — History explorer
 
@@ -2797,6 +2949,19 @@ evidence.
 | any two layer/owner collapses | smallest prerequisite bridge, then delayed retrieval |
 | high-confidence correct | still give one “does not establish” sentence |
 
+### Misconception repair map
+
+**Current candidate-only supplement.** Use this map to name a repair rather
+than treating a wrong choice as a verdict. It does not change the historical
+audit, review, release, or mastery state.
+
+| Misconception label | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| `local-step-is-atomic` | trace `A:R, B:R, A:W, B:W` and mark the violated sequential postcondition | move the same history to a cache-version update |
+| `notification-is-completion` | distinguish predicate truth, item ownership, and unfinished-work accounting | replace the queue with one remote response that may be absent |
+| `one-run-proves-progress` | draw the wait-for graph and state the missing fairness assumption | change one executor dependency or capacity bound |
+| `gil-or-speedup-proves-model-fit` | name workload, build, transfer, and measured boundary | compare a documented native call with pure-Python work |
+
 ---
 
 ## 11. Cumulative project — Atlas multi-worker correctness dossier
@@ -3335,6 +3500,25 @@ entire reasoning chain.
 11. save a misconception label;
 12. schedule delayed transfer.
 
+### Study Partner rehearsal and TA handoff
+
+**Current candidate-only supplement.** This is a module-specific,
+non-grading rehearsal route. It is a current unreviewed structural candidate,
+not a retrospective change to the legacy audit, review, release, or learner
+mastery record.
+
+Choose one schedule, owner map, wait-for graph, or execution-model card. The
+Study Partner asks for a prediction and confidence before inspecting the trace,
+then changes exactly one schedule edge, predicate, capacity, failure boundary,
+or runtime fact. The pair keeps the explanation visible: a labelled event
+trace, a small code fragment, or a plain-language invariant.
+
+Hand off only a compact learner-controlled card to the Teaching Assistant:
+claim, evidence inspected, confidence, smallest counterexample or repair,
+one M20/M21/M24 transfer, and one uncertainty. The Teaching Assistant uses
+that card to begin the supportive oral-defense route rather than repeating the
+entire session.
+
 ### 12.3 Hint ladder
 
 | Rung | TA action | Example |
@@ -3492,10 +3676,10 @@ evidence; neither an optional build nor speedup is inferred.
 
 ---
 
-## 13. Mastery gate and spaced retrieval
+## 13. Constructive evidence route and spaced retrieval
 
-Mastery means the exact invariant can move downward into mechanisms and upward
-into architecture:
+The evidence route asks whether the exact invariant can move downward into
+mechanisms and upward into architecture:
 
 > **Every admitted Atlas partition reaches exactly one terminal
 > classification—`COMMITTED`, `FAILED`, or `CANCELLED`. If Atlas publishes a
@@ -3506,21 +3690,22 @@ into architecture:
 > transition, and one step in a declared concurrent history; each shared
 > transition is justified by one named owner or synchronization protocol,
 > every progress claim states its blocking and fairness assumptions, and
-> neither a clean exit, a passing stress run, the GIL, nor observed speedup
+> neither a clean exit, a clean stress run, the GIL, nor observed speedup
 > substitutes for safety, liveness, or model-fit evidence.**
 
-### 13.1 Evidence weights
+### 13.1 Evidence lenses
 
-| Evidence | Weight | Demonstrates |
+| Evidence | Planning emphasis | Demonstrates |
 |---|---:|---|
-| history, code, and architecture walkthroughs | 25% | recovery of hidden state and ownership |
-| race/progress/debugging investigations | 20% | causal diagnosis from ordered evidence |
-| safety/liveness/linearization defense | 20% | specification-level reasoning |
-| model-choice and design brief | 15% | Python engineering judgment |
-| agent task and patch review | 15% | bounded delegation and independent verification |
-| targeted mechanisms | 5% | first-principles interleaving/graph understanding |
+| history, code, and architecture walkthroughs | primary | recovery of hidden state and ownership |
+| race/progress/debugging investigations | primary | causal diagnosis from ordered evidence |
+| safety/liveness/linearization defense | primary | specification-level reasoning |
+| model-choice and design brief | substantial | Python engineering judgment |
+| agent task and patch review | substantial | bounded delegation and independent verification |
+| targeted mechanisms | supporting | first-principles interleaving/graph understanding |
 
-MCQs route misconceptions. They are not an exam average.
+These lenses are intentionally non-additive: they guide attention and repair,
+not points, a score, or an exam average. MCQs route misconceptions.
 
 ### 13.2 Capability matrix
 
@@ -3529,7 +3714,7 @@ MCQs route misconceptions. They are not an exam average.
 | recover sequential spec | pure oracle, pre/postconditions, exact bytes | explain current implementation |
 | reason about histories | enabled-step trace and smallest counterexample | say “race” |
 | separate concurrency/parallelism | lifetimes plus runtime evidence boundary | multiple workers |
-| prove safety | invariant over transitions or exact finite-model scope | repeated passing run |
+| prove safety | invariant over transitions or exact finite-model scope | repeated green run |
 | state liveness | desired transition and named fairness/failure premises | no timeout |
 | reason about linearizability | operation mapping and justified point | one atomic statement |
 | choose lock scope | protected-state protocol and exceptional path | a lock exists |
@@ -3547,9 +3732,12 @@ MCQs route misconceptions. They are not an exam average.
 | review/verify | diff, raw events, exact tests, unknowns | summary/green check |
 | transfer | exact M20/M21/M24 boundary memo | “later” |
 
-### 13.3 Mandatory gate conditions
+### 13.3 Constructive next-step guide
 
-1. all project acceptance invariants pass;
+Use this evidence to choose the M20 bridge or a repair path, not to decide
+whether Michael passes. Consider whether you can:
+
+1. show direct evidence for every project acceptance invariant;
 2. S0–S16 have raw evidence or explicit capability-based skip;
 3. every confident MCQ miss has a repaired counterexample and later transfer;
 4. reproduce the invariant and core state machines without notes;
@@ -3566,20 +3754,24 @@ MCQs route misconceptions. They are not an exam average.
 11. separate agent-patch decisions by dimension;
 12. preserve the M20/M21/M24 boundaries.
 
-Routing:
+With a clear, self-supported explanation across this evidence, continue with the M20 handoff. Otherwise, use the smallest named repair route below before returning to the handoff.
 
-| Result | Next action |
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+### Suggested repair route
+
+| Evidence seam | Suggested repair |
 |---|---|
-| ready | proceed to M20 with the dossier |
+| integrated evidence | continue with the M20 handoff and carry the dossier |
 | spec/history weak | repeat the first TA studio and M3/M4 bridge |
 | coordination weak | repeat Session 3 microcases and the second TA studio |
 | progress weak | pure wait-for/executor graph repair |
 | runtime/model weak | M17/M18 boundary bridge, then the third TA studio |
-| correctness ready/evidence weak | rerun only missing negative/evidence cases |
+| correctness evidence available / evidence gap | rerun only missing negative/evidence cases |
 | publication collapse | return to M18 phase/evidence gate |
 | agent-review weak | a second, smaller constrained patch |
 
-No calendar deadline or quiz score substitutes for the gate.
+No calendar deadline or quiz score substitutes for explained evidence.
 
 ### 13.4 Consolidation artifacts
 
@@ -3629,7 +3821,7 @@ follows meaning, state, workload, transfer, runtime, and evidence.”
 
 External sources are authorities and reading targets. They are not the teaching
 order and are not copied course material. The detailed claim audit is in the
-[Module 19 source map](../research/module19_concurrency_parallelism_source_map.md).
+[Module 19 source map](/downloads/module19_concurrency_parallelism_source_map.md).
 All links below were checked on 2026-07-29.
 
 ### 14.1 The three-source spine
@@ -3669,7 +3861,7 @@ Optional breadth checks:
   for safety, liveness, linearizability, monitors, and testing coverage;
 - [Stanford CS111](https://web.stanford.edu/class/cs111/) for mixed
   code-reading and architecture reasoning;
-- [UC Berkeley CS162](https://www-inst.eecs.berkeley.edu/~cs162/) for
+- [UC Berkeley CS162](https://cs162.org/) for
   synchronization curriculum breadth;
 - [MIT 6.1810](https://pdos.csail.mit.edu/6.S081/2025/schedule.html) for a
   bounded lock/contention operating-system comparison;
@@ -3962,3 +4154,75 @@ terminally visible, and one Module 18 publisher receives a candidate only
 after the complete deterministic gate. That local certainty is the foundation
 for the network, async/distributed, and runtime questions that follow—not a
 shortcut around them.
+
+
+## Bench pack
+
+**Bench pack:** `m19` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Every bench here **imports and probes**
+`public/downloads/module19_reference.py` rather than reimplementing it. The
+reference explores a **declared** model in which one shared update is three
+application-level transitions — R, C, W — and this module's own text is explicit
+that those are not bytecodes. Every count below belongs to that model.
+
+None of these benches starts a thread. That is deliberate: a running thread would
+sample one schedule, and the whole argument of this module is that the sample is
+not the property.
+
+### Bench 1 — interleaving history table
+
+**Session:** 1. **Rungs:** trace, recognize.
+**Executes:** the complete enumeration the session derives on the page. Twenty
+legal schedules; **eighteen lose an update**; the two that do not are exactly the
+two in which one worker finishes entirely before the other begins. Correctness is
+the narrow window, not the race — which inverts the intuition that lets this defect
+survive review, and explains why the test passes anyway.
+**Cannot establish:** how often a real machine produces a wrong answer. No GIL, no
+switch interval, no scheduler — which is precisely the quantity the bench argues
+you should stop reasoning from.
+
+### Bench 2 — critical-section boundary note
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** three state spaces. No lock: 20 schedules, 18 violations. A lock
+spanning the whole read-compute-write transition: 20 collapses to **2**, zero
+violations, linearization events `('A:WRITE', 'B:WRITE')`. A lock acquired after
+the read — real mutual exclusion, protecting the write, the version a reviewer is
+most likely to call sufficient: **42 schedules and 36 violations**, worse by count
+than no lock at all, because acquire and release are themselves steps that
+interleave. Its linearization events are empty, which is the diagnosis: there is no
+instant at which either update takes effect atomically.
+**Cannot establish:** any real lock's cost. No reentrancy, fairness, priority
+inversion, or GIL; a finer step decomposition would give different numbers and the
+same verdict.
+
+### Bench 5 — execution-model decision record
+
+**Session:** 5. **Rungs:** review and verify, recognize.
+**Executes:** six workload profiles through `choose_execution_model`. The
+recommendation moves with the profile, two profiles return `redesign` with an
+**empty** candidate list rather than a least-bad guess, and every single one carries
+`measurement_required=True`. Then the ceiling: 100 work units, span 10, 20% serial,
+4 workers gives **2.5×**, not 4× — and a worker sweep reaches 4.71× at 64 and 4.92×
+at 256, converging on 1/0.2 = 5× and never arriving. The binding constraint is
+Amdahl's, not the worker count, so buying parallelism is the wrong move.
+**Cannot establish:** any actual speedup. Nothing was timed; these are upper bounds
+that ignore process startup, pickling, and memory bandwidth, and the serial fraction
+itself was declared rather than measured.
+
+### Sessions without a bench
+
+- **Session 3** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 4** — liveness: deadlock, livelock, starvation. The reference model's
+  lock-order and executor-wait analyses are static graph checks over declared
+  acquisitions, and bench 2 already carries a state-space exploration of the same
+  model. A second would be the same experiment in different clothing.
+- **Session 6** — a multi-worker correctness dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m19-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

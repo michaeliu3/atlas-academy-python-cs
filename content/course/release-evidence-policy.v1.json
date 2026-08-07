@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "v1",
+  "kind": "atlas-course-ci-evidence-policy",
+  "description": "A bounded local policy for structurally checking a normalized Course CI run snapshot against the intended repository, workflow, source branch head SHA, attempt, and required jobs. It is not a GitHub API query, proof of the generated pull-request merge ref, deployment proof, or release approval.",
+  "repository": "michaeliu3/atlas-academy-python-cs",
+  "courseCi": {
+    "workflowId": 323581527,
+    "workflowName": "Course CI",
+    "workflowPath": ".github/workflows/ci.yml",
+    "workflowSourceSha256": "ebc93e9048d7836a52a32f9b2d861a66df649e4723ff997fe1a1a959680f0e26",
+    "event": "pull_request",
+    "requiredJobNames": [
+      "Portal quality gate",
+      "Teaching models on Python 3.12",
+      "Teaching models on Python 3.14",
+      "Browser accessibility acceptance"
+    ]
+  },
+  "truthBoundary": {
+    "localVerification": "The verifier accepts only a supplied normalized run and job snapshot. It proves that the supplied values are mutually consistent with this local policy, not that GitHub returned them.",
+    "remoteVerification": "A later trusted remote verifier must obtain the run and jobs from GitHub independently, bind them to an immutable source head SHA, observed execution identity, and run attempt, and retain the observation record before this can support a release claim.",
+    "deployment": "Passing this local verifier does not prove a private deployment, deployed commit reachability, source review, or learner-facing release readiness."
+  }
+}

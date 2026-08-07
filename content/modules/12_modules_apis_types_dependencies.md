@@ -2,7 +2,7 @@
 
 > **Central idea:** a component boundary is a controlled promise about what may be known, called, and changed; Python modules and type annotations help express that boundary, but architecture determines whether it remains changeable.
 
-> **Mastery claim:** “I can recover a Python component graph from imports and calls, distinguish runtime loading from static typing, define a small public API, direct volatile implementations toward stable contracts, diagnose a real import cycle, and evolve a typed plugin boundary without trusting annotations or discovery metadata as behavioral proof.”
+> **Learning aim:** “I can recover a Python component graph from imports and calls, distinguish runtime loading from static typing, define a small public API, direct volatile implementations toward stable contracts, diagnose a real import cycle, and evolve a typed plugin boundary without trusting annotations or discovery metadata as behavioral proof.”
 
 Arc II taught Atlas to choose representations and algorithms from client operations. Atlas can now ingest, index, schedule, and plan. A new pressure appears: **different parts must change for different reasons**.
 
@@ -60,6 +60,9 @@ Keep four sentences visible:
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m12-prerequisites-component-boundaries
+%% atlas-diagram-title: Prerequisites converge on component boundaries
+%% atlas-diagram-alt: Modules 1, 3, 5, 8, 9, and 10 contribute execution, contracts, evidence, authority, composition, and graph reasoning to Module 12. Module 12 then supports Modules 13 through 16 on specifications, design, delivery, and persistence.
 flowchart LR
     M1["M1 · names, scopes,<br/>execution"] --> IMPORT["module namespaces<br/>and import execution"]
     M3["M3 · ADTs, contracts,<br/>Protocols"] --> API["component APIs"]
@@ -137,6 +140,9 @@ The architecture includes:
 - a real circular-import failure and a dependency-direction repair.
 
 ```mermaid
+%% atlas-diagram-id: m12-plugin-architecture-boundaries
+%% atlas-diagram-title: Atlas plugin architecture dependency boundaries
+%% atlas-diagram-alt: The composition root assembles application, concrete plugins, and domain values. Application and plugins depend on ports and domain; dashed arrows mark prohibited imports from application to concrete plugins and from domain to ports.
 flowchart TB
     ROOT["bootstrap.py<br/>composition root"] --> APP["application/<br/>plugin catalog + use cases"]
     ROOT --> BUILTIN["plugins/<br/>concrete importers + rankers"]
@@ -151,6 +157,23 @@ flowchart TB
 ```
 
 The dashed arrows are prohibited dependency directions.
+
+### Text equivalent — component boundaries from change pressure to evidence
+
+Read the architecture in this order. Earlier modules contribute execution,
+contracts, evidence discipline, authority, policy/mechanism separation, and
+dependency-graph reasoning. M12 uses those inputs to decide which behavior is
+public and which changes independently. The composition root is the only place
+that knows both the application and concrete plugins; application code and
+plugins may depend on shared ports and domain values, but application code must
+not import concrete plugins and domain values must not import ports.
+
+That direction keeps a public promise inspectable: static annotations offer
+one scoped signal, runtime validation protects external input, and contract
+tests provide separate behavioral evidence. The forward path is M13 testing
+and diagnosis, M14 change, M15 delivery, and M16 persistence. This is the
+complete text route for the two opening boundary diagrams, not a claim that a
+diagram or type checker proves architectural correctness.
 
 ### Backward connections
 
@@ -226,7 +249,7 @@ What is stronger evidence for an importer: “a checker accepts the class” or 
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -299,6 +322,9 @@ For Atlas:
 | composition root | deployment configuration changes | assemble a complete application |
 
 ```mermaid
+%% atlas-diagram-id: m12-change-pressure-to-evidence
+%% atlas-diagram-title: Change pressure leads to bounded component evidence
+%% atlas-diagram-alt: Independent reasons to change lead to cohesive decisions, a minimum contract, hidden mechanisms, dependencies toward stability, an explicit composition root, and layered evidence from contract tests, type checks, runtime validation, and review.
 flowchart LR
     CHANGE["Independent reasons to change"] --> GROUP["Group cohesive decisions"]
     GROUP --> CONTRACT["Expose minimum useful contract"]
@@ -354,6 +380,9 @@ Do not reduce this to “imports happen once.” Cache entries can be removed, d
 **[COURSE MODEL aligned with PYTHON 3.14]**
 
 ```mermaid
+%% atlas-diagram-id: m12-import-state-lifecycle
+%% atlas-diagram-title: Python import cache and execution lifecycle
+%% atlas-diagram-alt: An import checks the cache. A hit binds names; a miss searches, creates and caches a module before execution, then binds names on success. Search or execution failures raise, and an execution failure removes the failing cache entry; early caching exposes partial initialization during cycles.
 stateDiagram-v2
     [*] --> Cache: import requested by fully qualified name
     Cache --> ReturnCached: name exists in sys.modules
@@ -676,6 +705,9 @@ Real adversarial isolation requires a process, permission, or service boundary. 
 ### 8.1 Three layers that must not collapse
 
 ```mermaid
+%% atlas-diagram-id: m12-runtime-annotation-checker-validation
+%% atlas-diagram-title: Runtime, annotation, checker, and validation layers
+%% atlas-diagram-alt: Annotations feed a static checker, while runtime objects flow through validation. The dashed boundaries say that static checking does not execute the program and validation does not replace broad static analysis.
 flowchart TB
     RUN["Runtime layer<br/>objects have types<br/>operations execute or fail"]
     ANN["Annotation layer<br/>metadata/type expressions<br/>describe intended values"]
@@ -908,6 +940,9 @@ The bound permits `len` and preserves the chosen argument's inferred type relati
 Let `Cat` be a subtype of `Animal`.
 
 ```mermaid
+%% atlas-diagram-id: m12-variance-information-flow
+%% atlas-diagram-title: Variance follows read and write information flow
+%% atlas-diagram-alt: A producer of Cat can be read where an Animal producer is expected, and a consumer of Animal can be used where only Cats are sent. A mutable box both reads and writes its element, so neither substitution direction is generally safe.
 flowchart LR
     PRODUCER["Producer[Cat]<br/>only returns Cat"] -->|"safe where Animal is read"| COV["covariant intuition"]
     CONSUMER["Consumer[Animal]<br/>can accept any Animal"] -->|"safe where Cats are sent"| CONTRA["contravariant intuition"]
@@ -1073,6 +1108,9 @@ Import graphs reveal much, but not every dependency.
 Without inversion:
 
 ```mermaid
+%% atlas-diagram-id: m12-direct-policy-mechanism-dependency
+%% atlas-diagram-title: Direct policy-to-mechanism dependency
+%% atlas-diagram-alt: The application import-policy client directly depends on the low-level PipeImporter. Each additional mechanism therefore pressures the high-level policy module to change.
 flowchart LR
     APP["Application import-policy client<br/>high-level policy"] --> PIPE["PipeImporter<br/>low-level format mechanism"]
 ```
@@ -1082,6 +1120,9 @@ Every new mechanism pressures the policy module.
 With a domain/application-owned port:
 
 ```mermaid
+%% atlas-diagram-id: m12-inverted-plugin-dependency
+%% atlas-diagram-title: Inverted dependency through an EventImporter port
+%% atlas-diagram-alt: The application depends on an EventImporter port. PipeImporter and JsonImporter also depend on that port, while the composition root selects the application and both mechanisms. Stable policy therefore does not import concrete implementations.
 flowchart TB
     APP["Application import-policy client"] --> PORT["EventImporter port"]
     PIPE["PipeImporter"] --> PORT
@@ -1156,6 +1197,9 @@ DEFAULT_IMPORTERS: tuple[EventImporter, ...] = (PipeImporter(),)
 Importing `atlas.ports.plugins` produces this dependency cycle:
 
 ```mermaid
+%% atlas-diagram-id: m12-circular-import-partial-initialization
+%% atlas-diagram-title: Circular import reaches a partially initialized module
+%% atlas-diagram-alt: A client imports ports.plugins, which is cached early and imports plugins.defaults. Defaults asks for ports.plugins again, receives the partial module, and reads EventImporter before its class statement runs, causing a partial-initialization ImportError.
 sequenceDiagram
     participant U as importing client
     participant P as ports.plugins
@@ -1410,6 +1454,9 @@ Then feature negotiation is explicit. Alternatively introduce a new version and 
 ### 15.3 Evolution route
 
 ```mermaid
+%% atlas-diagram-id: m12-api-evolution-route
+%% atlas-diagram-title: Compatible public API evolution route
+%% atlas-diagram-alt: A new client need prompts an impact map, a compatible API or capability, an adapter or old re-export, a documented warning and deprecation, migration evidence, and only then a policy-controlled removal.
 flowchart LR
     NEED["new client need"] --> IMPACT["map callers + implementers<br/>import paths + behavior"]
     IMPACT --> ADD["add compatible API/capability"]
@@ -2169,6 +2216,25 @@ For the architecture:
 - public facade exports only documented names;
 - no import performs environment/network discovery.
 
+### 17.7 Bounded dependency-direction model package
+
+Use this small finite model to inspect a declared architecture graph before you
+mistake a sketch for evidence. [Download the bounded dependency-direction
+model](/downloads/module12_reference.py) and [its focused adversarial
+tests](/downloads/test_module12_reference.py), put them in one directory, and
+from that directory run:
+
+```bash
+python -m unittest -v test_module12_reference.py
+```
+
+The model accepts only named components, directed dependencies, and explicit
+concrete selections. It distinguishes a permitted port dependency from a
+concrete inward dependency, and it makes the composition root's choice visible.
+It does not parse Python imports or prove runtime behavior, plugin trust,
+substitutability, type-checker results, or production correctness. Read its
+scope statement before treating a green test as a wider architectural claim.
+
 ---
 
 ## 18. Code and architecture reading studio
@@ -2373,7 +2439,7 @@ Typing large amounts of boilerplate is deliberately absent. The learner predicts
 traces, explains, edits small seams, reviews generated patches, and defends
 architectural decisions.
 
-### Session 1 — From one script to an import graph
+## Session 1 — From one script to an import graph
 
 **Driving case:** Atlas has one working importer. A second importer and a CLI are
 requested. Where should each responsibility live, and what actually happens when
@@ -2425,10 +2491,18 @@ name is missing?” Do not accept “Python cannot do circular imports.” Pytho
 represent cycles; this particular execution order requested an attribute too
 early.
 
+### Session 1 output — import execution and dependency trace
+
+Produce a one-page trace table for the current cycle: requested module name,
+cache state, executing line, available attributes, and first forbidden
+dependency. Add a revised graph that places concrete selection in
+`bootstrap.py`; carry that graph into Session 2 when deciding which paths are
+now observable to clients.
+
 **Bridge to Session 2:** Once import paths are observable by clients, changing a
 package layout can break them even when runtime behavior is unchanged.
 
-### Session 2 — Public APIs as promises
+## Session 2 — Public APIs as promises
 
 **Driving case:** The Atlas team wants to reorganize folders without breaking the
 CLI, tests, or external plugins.
@@ -2481,11 +2555,18 @@ Ask the learner to give one example each of syntactic, semantic, temporal, and
 operational compatibility. Route a learner who equates API with function
 signature back to Section 7.
 
+### Session 2 output — public API observation card
+
+Produce a four-column card for one Atlas public path: supported import path,
+observable behavior, known client, and evolution policy. Mark every conclusion
+as a promise, a tested observation, or an open question; hand the card to
+Session 3 so its annotations do not silently become runtime guarantees.
+
 **Bridge to Session 3:** Once a public boundary exists, annotations can describe
 relationships at that boundary—but only if we understand what static evidence
 can and cannot establish.
 
-### Session 3 — Type relationships: narrowing, generics, and variance
+## Session 3 — Type relationships: narrowing, generics, and variance
 
 **Driving case:** Importers accept different sources and rankers preserve a
 relationship between candidates and scores. How can types make those
@@ -2553,10 +2634,18 @@ If the learner says “the type checker guarantees this value,” ask them to sh
 the runtime instruction that enforces it. If none exists, distinguish static
 compatibility from runtime validation.
 
+### Session 3 output — type-evidence boundary note
+
+Produce a small boundary note for an importer input: its union branches, the
+runtime predicate that narrows each branch, any generic relationship, and the
+separate owner of runtime validation. Include one rejected mutable-container
+assignment and the write that makes it unsound; take this note into Session 4
+when choosing the client-owned port.
+
 **Bridge to Session 4:** We can now express the minimum behavior a client needs.
 The next question is which component should own that expression.
 
-### Session 4 — Structural ports and dependency inversion
+## Session 4 — Structural ports and dependency inversion
 
 **Driving case:** Atlas should accept importer and ranking implementations that
 the application layer does not know by concrete class.
@@ -2581,6 +2670,9 @@ the application layer does not know by concrete class.
 For each edge in the following diagram, state what knowledge crosses it:
 
 ```mermaid
+%% atlas-diagram-id: m12-session-port-knowledge-map
+%% atlas-diagram-title: Session port map and knowledge crossings
+%% atlas-diagram-alt: CLI or bootstrap constructs PluginCatalog, PipeImporter, and LowConfidenceRanking. Concrete plugins satisfy importer and ranking ports; the catalog and ports use immutable domain values. Reversing a port-to-concrete dependency would make the abstraction know its mechanism.
 flowchart LR
     CLI["CLI / bootstrap"] --> App["PluginCatalog"]
     CLI --> Pipe["PipeImporter"]
@@ -2613,10 +2705,17 @@ through runtime contract tests. Explain why both forms of evidence are needed.
 Ask: “If this plugin is removed, which stable modules must change?” More than the
 composition root and deployment configuration usually signals a reversed edge.
 
+### Session 4 output — client-owned port map
+
+Produce one dependency map that labels each arrow with the knowledge it carries,
+then write the smallest `EventImporter`-style port and its behavioral clauses.
+Mark where assembly happens and name one semantic law a `Protocol` cannot prove;
+use this map in Session 5 to separate discovery from acceptance.
+
 **Bridge to Session 5:** A port makes extension possible; it does not decide how
 extensions are discovered, trusted, versioned, or isolated.
 
-### Session 5 — Plugin discovery, trust, and compatibility
+## Session 5 — Plugin discovery, trust, and compatibility
 
 **Driving case:** Atlas moves from two built-in plugins to third-party plugins
 installed independently.
@@ -2669,11 +2768,18 @@ Ask: “Which line first executes third-party code?” A learner who points to
 metadata enumeration needs to distinguish inspecting entry-point metadata from
 loading the referenced object.
 
+### Session 5 output — plugin boundary decision sheet
+
+Produce a staged boundary sheet—discover, load, accept, select, invoke—with one
+failure, owner, and required evidence at each stage. State the duplicate and
+version policy plus the process-isolation threshold; Session 6 uses the sheet to
+review an agent patch without treating discovery metadata as trust.
+
 **Bridge to Session 6:** The final session integrates import behavior, type
 evidence, graph direction, runtime validation, and compatibility into one
 defensible milestone.
 
-### Session 6 — Atlas checkpoint: read, review, defend
+## Session 6 — Atlas checkpoint: read, review, defend
 
 **Driving case:** A coding agent submits the Section 16 implementation and claims
 the plugin architecture is complete.
@@ -2724,7 +2830,141 @@ The learner is ready only if they can explain *why* the graph and contracts work
 predict a failure before running code, and bound what the evidence proves.
 Passing tests alone is insufficient.
 
+### Session 6 output — architecture review dossier
+
+Produce a concise dossier containing the import trace, public-API observation
+card, type-evidence boundary note, port map, plugin boundary sheet, and one
+AI-patch verdict with file/line evidence, minimal repair, and regression test.
+End with one unanswered question or uncertainty to carry forward to Module 13's
+specification, testing, debugging, and observability work.
+
+### Carry-forward boundary card — M12 → M13
+
+Attach one compact card to that existing dossier; it is not a new project or
+score. Name: (1) one public observation or behavioral law, (2) the dependency
+arrow that protects it, (3) the smallest contract test that could challenge it,
+and (4) one unresolved risk. Module 13 starts from this card rather than
+reconstructing the component boundary from import names alone.
+
 ---
+
+## Prediction before reveal — import-boundary experiment
+
+Before running a checker, test, or import, draw the smallest prediction card:
+
+| Prompt | Write before reveal |
+|---|---|
+| **Situation** | `ports.plugins` imports `plugins.defaults`, which reads `EventImporter` during initialization. |
+| **Prediction** | Name the first missing attribute or the first safe cache hit. |
+| **Reason** | State the cache, execution-order, or dependency-direction rule you used. |
+| **Confidence** | Low, medium, or high—and what evidence would change it. |
+| **Reveal and repair** | Run a fresh-process trace, then revise one sentence rather than hiding the mismatch. |
+
+Do not start with the answer. A wrong prediction is useful evidence about the
+current model; a correct prediction still needs a named boundary on what it
+does and does not establish.
+
+## Misconception repair map — repair the model, not the person
+
+Use the smallest contradictory observation, then reconnect it to a usable rule.
+
+| Tempting conclusion | Small counterexample or question | Repair rule | Next route |
+|---|---|---|---|
+| “Cached means fully initialized.” | Which attributes exist before the class statement runs? | The import cache can hold a module while its top-level code is still executing. | Session 1 trace; Section 13 |
+| “A `Protocol` proves a plugin is safe.” | Where does malformed output first get rejected? | A structural surface is not behavioral, validation, trust, or isolation evidence. | Session 4 port map; Session 5 boundary sheet |
+| “Green type checking validates production input.” | Which runtime instruction parses the external value? | Checker results are scoped static evidence; runtime validation has a separate owner. | Session 3 boundary note |
+| “A local import fixed the architecture.” | Which module still knows the concrete default? | Delaying an import can relieve timing without repairing dependency direction. | Session 1 graph; Section 12 |
+| “Discovery metadata can be trusted.” | Which line first runs third-party code? | Discovery, loading, acceptance, selection, and invocation are separate boundaries. | Session 5 decision sheet |
+
+## Transfer task — versioned payment adapter boundary
+
+Apply the same reasoning to a new domain. A billing service must accept both a
+legacy card adapter and a new bank-transfer adapter without letting business
+policy import either concrete class.
+
+Produce a one-page design note that includes:
+
+1. a narrow client-owned payment port and one behavioral law beyond its method signature;
+2. an import/dependency graph that names the composition root and forbidden edges;
+3. discovery, loading, acceptance, selection, invocation, and output-validation
+   boundaries for an optional third-party adapter;
+4. one compatibility route for the legacy adapter; and
+5. one falsifiable prediction and the smallest regression test that could
+   contradict it.
+
+The transfer is complete when its choices can be traced to the M12 rules—not
+when its names merely resemble the Atlas example.
+
+## Supportive oral-defense route — explain, test, revise
+
+This is a constructive Teaching Assistant conversation, not a pass/fail exam.
+The learner may pause, ask for a restatement, choose a smaller example, or say
+what remains uncertain. The Teaching Assistant asks for reasoning and evidence;
+it does not treat fluent language, speed, or memory as proof.
+
+### Invitation and starting evidence
+
+Invite the learner to choose one artifact from the architecture review dossier:
+the import trace, API observation card, type-evidence boundary note, port map,
+or plugin boundary sheet. Ask: “What does this artifact claim, what observation
+supports it, and what would it fail to prove?” Start with the learner's own
+diagram, table, fenced code block, or simple ASCII arrow sketch if visual
+rendering is uncertain.
+
+### Hint ladder
+
+Offer one hint at a time, stopping whenever the learner can continue:
+
+1. **Locate:** name the first import, boundary, or arrow in question.
+2. **Trace:** state cache state, executing code, or the value crossing the port.
+3. **Separate layers:** label the claim static, runtime, behavioral, trust, or
+   compatibility evidence.
+4. **Test the model:** propose the smallest counterexample or regression test.
+5. **Generalize:** state the rule in a different domain.
+
+### Changed-premise counterexample turn
+
+Change one premise: `plugins.defaults` now imports successfully, but an accepted
+third-party importer returns a non-finite confidence score. Ask whether the
+type surface, registry metadata, or a runtime domain constructor should reject
+it first, and why. If the answer changes after the premise changes, revise the
+dependency or validation rule rather than defending the earlier answer.
+
+### Transfer turn
+
+Ask the learner to apply the same port/validation/direction reasoning to the
+payment-adapter task. Ask for one concrete boundary, one failure owner, and one
+test that distinguishes a type claim from a runtime claim.
+
+### Reflection and learner-controlled evidence summary
+
+Close with: “What rule can you now explain, what evidence supports it, what
+misconception was repaired, and what is your next small action?” The learner
+chooses whether to keep a brief summary, what it says, or whether the
+conversation stays off-record. A summary should record uncertainty as well as
+the repaired rule; it is not a mastery or session-occurrence claim.
+
+## Study Partner rehearsal and TA handoff
+
+The Study Partner offers a non-grading rehearsal before the Teaching Assistant's
+oral-defense conversation. Its role is to help make reasoning visible, not to
+score, certify, or substitute for the TA's constructive defense.
+
+### Study Partner rehearsal
+
+Choose one claim from the dossier and rehearse this five-turn pattern: prediction,
+trace, smallest counterexample, repaired explanation, and transfer. Keep the
+whiteboard readable after the conversation: define notation, use language-labelled
+code fences, and add a plain-language or ASCII fallback for a diagram or equation
+when needed. End by identifying one question the learner wants the TA to probe.
+
+### TA handoff
+
+Offer the TA a concise, learner-approved handoff: selected artifact, prediction
+and confidence, observed contradiction, repaired rule, remaining uncertainty,
+and desired transfer question. The handoff is a prompt for the next conversation,
+not evidence that a voice session, live rendering, note write, or oral defense
+occurred.
 
 ## 21. Eight-level problem ladder
 
@@ -3137,6 +3377,9 @@ current model, expose the smallest contradiction, and help them rebuild the
 model. Use this sequence:
 
 ```mermaid
+%% atlas-diagram-id: m12-ta-prediction-repair-loop
+%% atlas-diagram-title: Prediction, counterexample, repair, and transfer loop
+%% atlas-diagram-alt: The TA asks for a prediction, makes the learner's model visible, runs the smallest counterexample, reconciles prediction with observation, transfers the idea to a new case, and records bounded evidence.
 flowchart LR
     P["Ask for a prediction"] --> M["Make the model visible"]
     M --> C["Run the smallest counterexample"]
@@ -3260,21 +3503,20 @@ Submit one coherent packet:
 
 ### 24.3 Rubric
 
-| Dimension | Weight | Production evidence |
-|---|---:|---|
-| First-principles model | 15 | Explains import state, API observations, type relations, and graph direction without slogans |
-| Dependency architecture | 20 | Inward stable dependencies, explicit composition root, no incidental loading |
-| Contract quality | 15 | Surface plus behavioral laws, failure/ordering/mutation/side-effect policy |
-| Static type reasoning | 10 | Sound narrowing and variance explanations; bounded checker claims |
-| Runtime correctness | 15 | Domain/output validation and adversarial contract tests |
-| Debugging and review | 10 | Reproduces root causes, reviews generated patches with evidence |
-| Compatibility and trust | 10 | Version/evolution strategy and honest in-process trust boundary |
-| Communication and transfer | 5 | Clear defense and valid application to a new domain |
+| Dimension | Evidence focus | Production evidence |
+|---|---|---|
+| First-principles model | core | Explains import state, API observations, type relations, and graph direction without slogans |
+| Dependency architecture | core | Inward stable dependencies, explicit composition root, no incidental loading |
+| Contract quality | core | Surface plus behavioral laws, failure/ordering/mutation/side-effect policy |
+| Static type reasoning | supporting | Sound narrowing and variance explanations; bounded checker claims |
+| Runtime correctness | core | Domain/output validation and adversarial contract tests |
+| Debugging and review | core | Reproduces root causes, reviews generated patches with evidence |
+| Compatibility and trust | core | Version/evolution strategy and honest in-process trust boundary |
+| Communication and transfer | transfer | Clear defense and valid application to a new domain |
 
-**Readiness threshold:** at least 80/100 overall, and at least half credit in every
-dimension. A high total cannot compensate for a reversed dependency graph,
-unvalidated external output, or an unsafe claim that in-process plugins are
-sandboxed.
+Use this map to choose the first repair to make visible. No aggregate total
+erases a reversed dependency graph, unvalidated external output, or an unsafe
+claim that in-process plugins are sandboxed.
 
 ### 24.4 Oral defense
 
@@ -3295,20 +3537,29 @@ The instructor may perturb one assumption—for example, two importers claim the
 same source, a ranker returns `nan`, or an old import path disappears. The learner
 must trace the consequence and propose evidence, not guess a patch.
 
-### 24.5 Instructor decision rule
+### 24.5 Constructive next-step guide
 
-- **Ready:** predicts behavior, explains causes, independently reviews code, and
-  states evidence limits.
-- **Ready with repair:** implementation works but one conceptual dependency needs
-  targeted retrieval and re-defense.
-- **Not yet:** relies on tool authority, cannot trace initialization, treats
-  annotations as validation, or cannot distinguish port from implementation.
+Use the import trace, API law, dependency arrow, adversarial contract evidence,
+and evidence limit to choose a next bridge or repair—not to decide whether
+Michael passes. If Michael predicts behavior, explains causes, independently
+reviews code, and states evidence limits, continue with the M13 handoff.
+
+Otherwise, repair the named weak point: trace initialization from one import
+when loading is opaque, redraw the client-owned port and dependency arrow when
+ownership reverses, or write one runtime validation and adversarial test when
+annotations are being treated as behavior. Rehearse that repaired explanation
+before asking the Teaching Assistant to change a premise.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ---
 
 ## 25. Consolidated knowledge map
 
 ```mermaid
+%% atlas-diagram-id: m12-component-boundaries-knowledge-map
+%% atlas-diagram-title: Connected map from change pressure to evidence review
+%% atlas-diagram-alt: Change pressure creates cohesive components, modules, imports, and APIs. Types and Protocols support ports; imports and ports determine dependency direction and composition. Plugin discovery through invocation needs runtime contracts and bounded evidence, which feed AI-assisted review and human defense.
 flowchart TD
     Change["Different reasons to change"] --> Components["Cohesive components"]
     Components --> Modules["Modules and packages"]
@@ -3529,11 +3780,11 @@ single document as the complete course design.
 
 ### 27.4 University-level software construction
 
-- [MIT 6.102: Abstract Data Types](https://web.mit.edu/6.102/www/sp25/classes/06-abstract-data-types/) —
+- [MIT 6.102: Abstract Data Types](https://web.mit.edu/6.102/www/sp26/classes/06-abstract-data-types/) —
   abstraction, representation independence, invariants, and client reasoning.
-- [MIT 6.102: Specifications](https://web.mit.edu/6.102/www/sp25/classes/04-specifications/) —
+- [MIT 6.102: Specifications](https://web.mit.edu/6.102/www/sp26/classes/04-specifications/) —
   behavioral contracts and under/over-specification.
-- [MIT 6.102: Code review](https://web.mit.edu/6.102/www/sp25/general/code-review.html) —
+- [MIT 6.102: Code review](https://web.mit.edu/6.102/www/sp26/general/code-review.html) —
   systematic human review practices.
 
 ### 27.5 Efficient reading route
@@ -3589,3 +3840,78 @@ Then answer three transfer questions:
 
 If any blank can be filled only with a memorized slogan, return to its minimal
 counterexample and rebuild the causal explanation.
+
+
+## Bench pack
+
+**Bench pack:** `m12` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Benches 4 and 6 **import and probe**
+`public/downloads/module12_reference.py`. Bench 1 does not use it, deliberately:
+the reference model inspects *declared* architecture, and Session 1's question is
+what the import machinery does with real files — so bench 1 writes real modules to
+a temporary directory and imports them for real.
+
+### Bench 1 — import execution and dependency trace
+
+**Session:** 1. **Rungs:** trace, debug and defend.
+**Executes:** five arrangements of the same two responsibilities, each written to
+disk and imported through the real machinery with a clean `sys.modules`. The
+mutual-import arrangement raises `ImportError: cannot import name 'REGISTRY' from
+partially initialized module`. Changing **only** how the dependency is named —
+`import atlas_registry` instead of `from atlas_registry import REGISTRY` — makes
+the identical cycle import successfully. Four arrangements import, all four produce
+byte-identical behaviour, and three of them still contain a cycle: which is why the
+session's grade is *symptom relief or graph repair*, and why watching the error
+disappear cannot decide it.
+**Cannot establish:** anything about packages, `__init__.py` ordering, namespace
+packages, import hooks, or reloaders — nor that a composition root is the right
+design for a given application, which is an argument about change pressure.
+
+### Bench 4 — client-owned port map
+
+**Session:** 4. **Rungs:** debug and defend, review and verify.
+**Executes:** four candidate implementations against a `@runtime_checkable`
+Protocol. **All four pass `isinstance`** — including one a parameter short, one
+returning a `str` where the port promises a `list`, and one whose `load` is a
+string rather than a method. A contract test that calls the operation accepts
+exactly one. Then the session's edge reversal: `inspect_architecture` accepts the
+designed graph and reports the reversed Ports-to-Pipe edge as a
+`forbidden-concrete-dependency` — the port would have to know which adapter exists.
+**Cannot establish:** how often the gap bites. Nothing here runs a static type
+checker, which would reject three of the four candidates before execution — an
+omission that is the point rather than a limitation.
+
+### Bench 6 — architecture review dossier
+
+**Session:** 6. **Rungs:** review and verify, recognize.
+**Executes:** an audit of the sentence *"no violations, so the architecture is
+sound and the modules are correctly decoupled."* The report is genuine and the
+conclusion is not: the clean report's own allowed-edge list **contains a cycle**,
+permitted because domain-policy may depend on domain-policy and cycle detection is
+not among the checks. Two more clauses are refused on the model's own authority —
+its `scope` string names runtime imports, trust, and substitutability as outside
+its reach — and benches 1 and 4 supply the evidence for those. Control graphs
+confirm the inspector does reject an application-to-adapter edge and a selection
+made outside the composition root, so the clean report is real evidence about
+exactly two things.
+**Cannot establish:** that cycles among domain values are harmful, or anything
+about other architecture tools, several of which do check acyclicity and would have
+reported this graph differently.
+
+### Sessions without a bench
+
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 3** — static type relationships: narrowing, generics, variance. A type
+  checker decides those before the code runs; a kernel that executes the code sees
+  only what survives to runtime, which is the wrong instrument for the question.
+- **Session 5** — plugin discovery and trust: entry points, third-party packages,
+  and whether loading one is safe. That needs a real package environment, and a
+  bench that faked one would be modelling the trust question dishonestly.
+
+### Bench pack completion record
+
+Records under `benches/records/m12-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

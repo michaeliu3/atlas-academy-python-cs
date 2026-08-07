@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-legacy-candidate-preflight-profiles",
+  "recordVersion": "v1",
+  "purpose": "Versioned, snapshot-bound module-specific inputs for non-promoting legacy-baseline candidate evidence preflights, including current retrofit cohorts that preserve the historical audit.",
+  "truthBoundary": {
+    "candidate": "A passing profile-backed preflight proves only that a listed legacy module's structural candidate inputs resolve from one Git-index snapshot.",
+    "publication": "This registry grants no review, verification, release, deployment, publication, or learner-mastery status. Those claims require their separately recorded evidence."
+  },
+  "candidates": [
+    {
+      "moduleId": "m01",
+      "packetId": "m01-values-state-execution-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m01/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:17c3f7f5c825c7e85530b67459a85188d5fa8348c928dbfbae36ee6d195bfa5f"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module1_values_state_execution_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m02",
+      "packetId": "m02-functions-recursion-induction-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m02/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:55a50dbe865292b4bd3733d0545ec0cb108e1ad20c45c41c370fbdc5c9a3e3e2"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module2_functions_recursion_induction_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m03",
+      "packetId": "m03-abstraction-interfaces-adts-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m03/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:73e13ff613862b86184de97bd1ec58dea14138d1183e64fbc74cf0c06dcc1f92"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module3_abstraction_interfaces_adts_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m04",
+      "packetId": "m04-logic-sets-relations-graphs-proof-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m04/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:7edd28b7907e06b1e27f23d37fe911d4a6f93aef5ae677bb970797dfa3d2f82a"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module4_logic_sets_relations_graphs_proof_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m05",
+      "packetId": "m05-cost-models-algorithm-analysis-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m05/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:2afdefe008f48f30d8ec884d810bade1988375e95b234e83a89313f0cb39fb54"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/python_curriculum_sources.md",
+        "content/source-maps/module5_cost_models_algorithm_analysis_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m06",
+      "packetId": "m06-representation-memory-sequences-linked-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m06/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:3e18992734cc71403274441c36b0b9aa01cdf1c30b7c76dc0f1f20a8685eb53a"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module6_representation_memory_sequences_linked_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m07",
+      "packetId": "m07-stacks-queues-iteration-lazy-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m07/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:69d8ccb56dd45b13cafcab693b6fd75c896a6661d73f8aec729eb6a950659774"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module7_stacks_queues_iteration_lazy_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m12",
+      "packetId": "m12-modules-apis-types-dependencies-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m12/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:81a1cc5b6d2e790bf74af81cb85be559a15399a508cd802edfd842f1f29a67ad"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module12_modules_apis_types_dependencies_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/DependencyDirectionStudio.tsx",
+      "visualTestPath": "e2e/accessibility.spec.ts",
+      "browserTestTitle": "M12 direct studio keeps tabs, prediction, confidence, and reveal keyboard-operable"
+    },
+    {
+      "moduleId": "m13",
+      "packetId": "m13-specifications-testing-debugging-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m13/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:359d0b5f4253f8fa70b1530588169b9cecf4b4d9d9163d2d49a7c3fa4d93013c"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module13_specifications_testing_debugging_observability_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/SpecificationTraceStudio.tsx",
+      "visualTestPath": "e2e/accessibility.spec.ts",
+      "browserTestTitle": "M13 direct studio keeps evidence prediction gated by confidence"
+    },
+    {
+      "moduleId": "m19",
+      "packetId": "m19-concurrency-parallelism-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m19/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:c3060c0aaaf282ab43896127358a0aed3c5067f157add35df3b29b64b1394b59"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module19_concurrency_parallelism_source_map.md",
+        "content/source-maps/module19_concurrency_parallelism_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/ConcurrencyStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m20",
+      "packetId": "m20-networks-protocols-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m20/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:2d01780e5486899e819957bb2acc0b758a9aa0791665d22399d00393da667574"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module20_networks_protocols_source_map.md",
+        "content/source-maps/module20_networks_protocols_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/NetworkProtocolStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m21",
+      "packetId": "m21-async-distributed-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m21/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:813688120ac8232dae6746a88ff32654ac883d3bc9877896ba86f6f3c661830e"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module21_async_distributed_source_map.md",
+        "content/source-maps/module21_async_distributed_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/AsyncDistributedStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m22",
+      "packetId": "m22-security-trust-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m22/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:58d955fad25d0ce7d1d3deec2c66c85d9187d468016f2fe14081aee59a487dec"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module22_security_trust_source_map.md",
+        "content/source-maps/module22_security_trust_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/SecurityTrustStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m23",
+      "packetId": "m23-languages-interpreters-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m23/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:1264ed22ed54b0dda31b2d0c510c46e923641d4fdb443f997b006157b4fb1f5d"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module23_languages_interpreters_source_map.md",
+        "content/source-maps/module23_languages_interpreters_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/LanguageInterpreterStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m24",
+      "packetId": "m24-cpython-performance-memory-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m24/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:d04661691ada7eeab20fcc9afeb52b49b8f7d0e7f8ab9364ef4a91230535efb1"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module24_cpython_performance_memory_source_map.md",
+        "content/source-maps/module24_cpython_performance_memory_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/RuntimeEvidenceObservatory.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m27",
+      "packetId": "m27-discrete-mathematics-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m27/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:6f9bd9ba141ea50bba93b82067c457cee82a85f78ad15c2d33b2bca0ad8c3ea1"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+        "content/source-maps/module27_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/DiscreteMathProofStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m28",
+      "packetId": "m28-linear-algebra-stability-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m28/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:314f03a31f15d27034444f47f54ccfc38c49e6b4bf893220bfac1c7f24344da4"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+        "content/source-maps/module28_linear_algebra_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/LinearAlgebraStabilityStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m29",
+      "packetId": "m29-continuous-change-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m29/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:e6a9ce6345b84696a063747ddfa0127ee620b281be6c6d4080aae11921e2917e"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md"
+      ],
+      "studioSourcePath": "app/CalculusContinuousChangeStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m30",
+      "packetId": "m30-probability-inference-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m30/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:18357b4822f5fefbcaf6b62e6c645e60aac556baddb032f7b590929ea580913b"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md"
+      ],
+      "studioSourcePath": "app/ProbabilityInferenceStudio.tsx",
+      "visualTestPath": "tests/rendered-html.test.mjs"
+    },
+    {
+      "moduleId": "m08",
+      "packetId": "m08-hashing-dictionaries-sets-indexing-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m08/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:08ccdf7a7b41b016d2d6b11d371c3b025d4f987669e9142eb24b734911cf59c2"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module8_hashing_dictionaries_sets_indexing_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m09",
+      "packetId": "m09-trees-heaps-sorting-ordered-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m09/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:56c0ce7f498d72cf025b0396d68d1df714cd964e0a8a4a597a220c26ad351903"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module9_trees_heaps_sorting_ordered_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m10",
+      "packetId": "m10-graph-algorithms-network-models-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m10/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:51d7036821803c748a71d695deafd25976089440e1544205c03c889bf916098a"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module10_graph_algorithms_network_models_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m11",
+      "packetId": "m11-algorithm-design-paradigms-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m11/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:b16967659862c82246cdba8dbecdf491320e74c53f88fc6a688ffe4ec8dea14e"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_ii_source_map.md",
+        "content/source-maps/module11_algorithm_design_paradigms_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m14",
+      "packetId": "m14-software-design-change-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m14/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:84a79259f6cbf0a78a3d7a9fdf07d6e4d354a02c1ba9c9494bd57d9ca0d8d0ae"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module14_software_design_change_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m15",
+      "packetId": "m15-files-serialization-packaging-delivery-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m15/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:7dddee05efbf3a6163630c0c5a55cae5da17b67cb1f56b13ace7a771a73be3d9"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module15_files_serialization_packaging_delivery_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m16",
+      "packetId": "m16-relational-data-transactions-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m16/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:127412e757027a626b51494b3243b1aeed9af8d745fd4eba7815f62eb04f7f97"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/arc_iii_source_map.md",
+        "content/source-maps/module16_relational_data_transactions_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m17",
+      "packetId": "m17-computer-architecture-execution-stack-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m17/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:755b1977971bfcba07b6939d74d626ae49f8245088daae4fec980163f3f30895"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module17_architecture_execution_source_map.md",
+        "content/source-maps/module17_architecture_execution_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/modules/[slug]/MermaidDiagram.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    },
+    {
+      "moduleId": "m18",
+      "packetId": "m18-operating-systems-resource-mediation-structural-candidate",
+      "candidateDocumentation": {
+        "path": "docs/module-evidence/m18/candidate-preflight.md",
+        "anchor": "candidate-boundary",
+        "digest": "sha256:b823bc40a7a0c97084aef5c90826c49f16c3ec34e608a88b19514dd02c084a25"
+      },
+      "sourceLedgerPaths": [
+        "content/source-maps/module18_operating_systems_source_map.md",
+        "content/source-maps/module18_operating_systems_source_audit_addendum.md"
+      ],
+      "studioSourcePath": "app/OperatingSystemsStudio.tsx",
+      "visualTestPath": "tests/mermaid-accessibility.test.mjs"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m34",
+  "purpose": "Freeze a module-specific M34 companion context for a future human-reviewed contract without making it learner-visible.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies live voice quality, model selection, equation or code rendering, microphone access, platform retention, or external integrations.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself save a Notion note, raw voice, transcript, credentials, or personal data.",
+    "mastery": "This authoring-only record is not a grade, oral-exam result, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/33",
+    "digest": "sha256:c3f6acb8ce81a730f1a53aa593b80bc4717823757203fbb5c73eaa49d125d8a1"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin from the learner's named state formulation, search obligations, and bounded decision evidence artifact rather than a score; ask which decision or claim it supports, whether a critical fact is model-false, unobserved, or unmodelled, and what remains unresolved.",
+    "artifactFocus": "Ask for one named assumption, one bounded trace or counterexample, one fact-status distinction (model-false, unobserved, or unmodelled), and the narrowest non-claim supported by the available evidence. For a diagnostic, request the learner's A–D choice and 0–100 confidence before revealing or rationalizing it.",
+    "repairMove": "Ask for a prediction before correction, then change one premise and use the smallest counterexample or hint that lets the learner restate a bounded claim in their own words. If prerequisite retrieval is fragile, name the M10/M11, M31, M30, or M33 bridge before continuing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Before Session 1, run the six retrieval checks: graph encoding, edge costs and duplicate policy, relaxation bounds, state-fact semantics, MAP versus maximum expected utility, and the named formal object. Route a fragile answer to M10/M11, M31, M30, or M33 as appropriate. Then lead one retrieval or trace at a time: separate definition, assumption, finite observation, implementation contract, and decision claim; for each diagnostic request an A–D choice and 0–100 confidence before explanation; treat an AI-generated answer as a proposal to inspect.",
+    "changedPremise": "Change exactly one declared premise or boundary, including turning a specified state fact into missing sensor evidence or an omitted variable; ask the learner to predict the consequence before checking it, and keep equations, code, and tables readable in the chat whiteboard.",
+    "taHandoff": "End with the current question, attempted reasoning, smallest named artifact, unresolved misconception, and suggested focus for the supportive Teaching Assistant defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m35",
+    "carryArtifact": "Carry the canonical Problem-formulation packet: state/representation, objective/constraints, search or solver rationale, uncertainty model, and limit/human-impact boundaries, with one remaining uncertainty; it is not a mastery claim.",
+    "targetQuestion": "Before using this packet in M35, which stated assumption, trace boundary, or counterexample must remain visible when the next module changes the problem?",
+    "boundary": "M35 is the only canonical forward handoff. Any other advanced-module reference is an authoring or direct-consumer connection, not learner navigation, release evidence, or credit."
+  }
+}

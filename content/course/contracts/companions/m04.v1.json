@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m04",
+  "purpose": "Freeze a candidate-only M4 Teaching Assistant, Study Partner, and M5 handoff context for future human review without changing M4's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/3",
+    "digest": "sha256:81420f0856e637d43f88919d83fc95fb075daff1d22ccf987d80e96204a9d813"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected quantified route claim. Ask for its finite domain, edge convention, plain-language reading, smallest witness or proof step, and a confidence statement before offering correction.",
+    "artifactFocus": "Ask the learner to make one predicate, countermodel, relation map, graph witness, proof obligation, or code-to-model trace visible, then distinguish what that artifact establishes from what remains unproven.",
+    "repairMove": "Ask for a prediction before correction; change exactly one quantifier order, edge convention, missing-concept policy, counterexample, or size assumption; then offer the smallest formal rewrite or regression without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: show a tiny route, set, relation, graph, formula, or code trace and give a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Swap a universal and an existential, reverse one prerequisite edge, make an immediate relation a transitive claim, or give one violating witness. Ask for a prediction and confidence before comparing the formal model, trace, or test result.",
+    "taHandoff": "End with the learner's selected M4 artifact, attempted formula or proof step, confidence, unresolved misconception, one hypothesis boundary, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m05",
+    "carryArtifact": "Carry a claim-and-cost card: one bounded domain, one relation or graph model, one proof or counterexample, one input-size assumption, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before attaching an M5 complexity label, what operation is counted, which input-size parameters matter, and which proof or counterexample establishes the algorithmic model?",
+    "boundary": "M5 is the only canonical forward handoff. References to later modules are conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

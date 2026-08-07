@@ -1,6 +1,12 @@
 {
-  "schemaVersion": 1,
-  "moduleCount": 26,
+  "schemaVersion": 5,
+  "courseGraphSchemaVersion": 2,
+  "routePlanId": "atlas-core-60",
+  "definedModuleCount": 36,
+  "readerVisibleModuleCount": 30,
+  "legacyOpenModuleCount": 28,
+  "publishedModuleCount": 0,
+  "previewReaderModuleCount": 2,
   "arcs": [
     {
       "id": "arc-i",
@@ -28,14 +34,21 @@
       "numeral": "IV",
       "title": "Machine & network",
       "range": "Modules 17–22",
-      "description": "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries."
+      "description": "Connect machine execution and OS mediation to concurrent histories, protocols, partial failure, and trust boundaries."
     },
     {
       "id": "arc-v",
       "numeral": "V",
       "title": "Languages & intelligence",
       "range": "Modules 23–26",
-      "description": "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense."
+      "description": "Derive language meaning and runtime evidence before human-centered intelligent systems and capstone defense."
+    },
+    {
+      "id": "arc-vi",
+      "numeral": "VI",
+      "title": "Mathematical foundations",
+      "range": "Modules 27–31",
+      "description": "Deepen proof, representation, continuous change, probability, optimization, and information."
     }
   ],
   "modules": [
@@ -46,11 +59,43 @@
       "title": "Values, State, and Execution",
       "summary": "Advanced Python, algorithms, databases, concurrency, and distributed systems all depend on one idea: a program transforms state according to rules. Bugs multiply when “variable,” “value,” “object,” and “memory” are treated as synonyms.",
       "arcId": "arc-i",
-      "wordCount": 4241,
+      "wordCount": 7093,
       "estimatedMinutes": 21,
-      "sourceHash": "443cab70556b30cd5dbc9042821235f8b5b28c9dbe159637047c211096d69dec",
-      "prerequisiteSlug": null,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceHash": "4bde5a5a5a0357ec0dd723da0efb03185b7d5b9f080e7d12235d19c50a38848d",
+      "id": "m01",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 1,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "prerequisiteNumbers": [],
+      "prerequisiteSlugs": [],
+      "previousRouteNumber": null,
       "previousSlug": null,
+      "nextRouteNumber": 2,
       "nextSlug": "02-functions-recursion-induction"
     },
     {
@@ -60,11 +105,47 @@
       "title": "Functions, Recursion, and Induction",
       "summary": "Central idea: a function gives a computation a boundary; recursion gives repeated structure an executable form; induction gives the same structure a correctness argument.",
       "arcId": "arc-i",
-      "wordCount": 9484,
+      "wordCount": 11890,
       "estimatedMinutes": 46,
-      "sourceHash": "dc5f938fe7b6e320b64314aba970f1d0aa3666ea014e47a87ea98bffdcdfcbce",
-      "prerequisiteSlug": "01-values-state-execution",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "ab3ef7b296d3079b50f4163a336b9d258658cc121e1250ee2d2ca3640ad6df98",
+      "id": "m02",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 2,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        1
+      ],
+      "prerequisiteSlugs": [
+        "01-values-state-execution"
+      ],
+      "previousRouteNumber": 1,
       "previousSlug": "01-values-state-execution",
+      "nextRouteNumber": 3,
       "nextSlug": "03-abstraction-interfaces-adts"
     },
     {
@@ -74,11 +155,47 @@
       "title": "Abstraction, Interfaces, and Abstract Data Types",
       "summary": "Central question: How can a client depend on what a component means without depending on how that component stores its data? Atlas transformation: a list owned by application code becomes a replaceable event store with one behavioral con…",
       "arcId": "arc-i",
-      "wordCount": 13281,
+      "wordCount": 15708,
       "estimatedMinutes": 64,
-      "sourceHash": "7b5860ad02f426a22c694f1725de82cbccb20776fe855ccee90d28b5ee125e00",
-      "prerequisiteSlug": "02-functions-recursion-induction",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "1e182effe1688c88a519b9134f074853cdadcd54cd80772dbd475382f45fc59d",
+      "id": "m03",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 3,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        2
+      ],
+      "prerequisiteSlugs": [
+        "02-functions-recursion-induction"
+      ],
+      "previousRouteNumber": 2,
       "previousSlug": "02-functions-recursion-induction",
+      "nextRouteNumber": 4,
       "nextSlug": "04-logic-sets-relations-graphs-proof"
     },
     {
@@ -88,11 +205,47 @@
       "title": "Logic, Sets, Relations, Graphs, and Proof",
       "summary": "Atlas can now represent events behind an abstraction boundary. The next problem is not mainly about Python syntax:",
       "arcId": "arc-i",
-      "wordCount": 5196,
+      "wordCount": 8237,
       "estimatedMinutes": 25,
-      "sourceHash": "1629d7061ac6f118342e7f5680dd9a9b76291e6aa2a9f222ea92756431fb7da6",
-      "prerequisiteSlug": "03-abstraction-interfaces-adts",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceHash": "c10d862a5399d3a831a137508c20ba10683ac6088282268872f9236dab059090",
+      "id": "m04",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 4,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        3
+      ],
+      "prerequisiteSlugs": [
+        "03-abstraction-interfaces-adts"
+      ],
+      "previousRouteNumber": 3,
       "previousSlug": "03-abstraction-interfaces-adts",
+      "nextRouteNumber": 5,
       "nextSlug": "05-cost-models-algorithm-analysis"
     },
     {
@@ -102,12 +255,48 @@
       "title": "Cost Models and Algorithm Analysis",
       "summary": "Module 4 gave Atlas a precise prerequisite model and a correctness condition. Correct output is necessary, but it is not sufficient. A route validator that works for 20 concepts may become unusable for 200,000 concepts.",
       "arcId": "arc-i",
-      "wordCount": 4951,
+      "wordCount": 8062,
       "estimatedMinutes": 24,
-      "sourceHash": "42b6174bcf6b21c9874e04ab360a1ff069408631f6d1bdda1c9dedecb4c3ba01",
-      "prerequisiteSlug": "04-logic-sets-relations-graphs-proof",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceHash": "8170d857ecee927dc599eea32a76571e390d8fdf9a0450307c49c1e09ce1bdbf",
+      "id": "m05",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 5,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/python_curriculum_sources.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        4
+      ],
+      "prerequisiteSlugs": [
+        "04-logic-sets-relations-graphs-proof"
+      ],
+      "previousRouteNumber": 4,
       "previousSlug": "04-logic-sets-relations-graphs-proof",
-      "nextSlug": "06-representation-memory-sequences-linked"
+      "nextRouteNumber": 27,
+      "nextSlug": "27-discrete-mathematics-proof-counting-structures"
     },
     {
       "number": 6,
@@ -116,11 +305,47 @@
       "title": "Representation, Memory, Sequences, and Linked Structures",
       "summary": "Central idea: an abstract history says what order means; a representation decides where references live, which paths connect them, and what each operation costs.",
       "arcId": "arc-ii",
-      "wordCount": 12119,
+      "wordCount": 15187,
       "estimatedMinutes": 58,
-      "sourceHash": "f272b9d5ff877e5bc0f316ea2340b22e53ddb2864b0482bb859a3ee3d366f949",
-      "prerequisiteSlug": "05-cost-models-algorithm-analysis",
-      "previousSlug": "05-cost-models-algorithm-analysis",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "e593bcef3e261532d2cd1c27835ed5582ab29ed8db8e552f5bd291271e3dbc2c",
+      "id": "m06",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 7,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        5
+      ],
+      "prerequisiteSlugs": [
+        "05-cost-models-algorithm-analysis"
+      ],
+      "previousRouteNumber": 27,
+      "previousSlug": "27-discrete-mathematics-proof-counting-structures",
+      "nextRouteNumber": 7,
       "nextSlug": "07-stacks-queues-iteration-lazy"
     },
     {
@@ -130,11 +355,47 @@
       "title": "Stacks, Queues, Iteration, and Lazy Computation",
       "summary": "Central idea: constrain how stored work may be accessed, then let demand—not accumulation—control when work is performed.",
       "arcId": "arc-ii",
-      "wordCount": 10734,
+      "wordCount": 13686,
       "estimatedMinutes": 52,
-      "sourceHash": "870d2e4579a1eb31937197ae038fe95dbb6d2c3e2a54d83380a2ec6283a6288f",
-      "prerequisiteSlug": "06-representation-memory-sequences-linked",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "7947df9d16d41d8ee6139bc5d5992f378bdf0194b5738ec6380bd5fdc8f77c12",
+      "id": "m07",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 8,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        6
+      ],
+      "prerequisiteSlugs": [
+        "06-representation-memory-sequences-linked"
+      ],
+      "previousRouteNumber": 6,
       "previousSlug": "06-representation-memory-sequences-linked",
+      "nextRouteNumber": 8,
       "nextSlug": "08-hashing-dictionaries-sets-indexing"
     },
     {
@@ -144,11 +405,47 @@
       "title": "Hashing, Dictionaries, Sets, and Indexing",
       "summary": "Atlas can now represent sequences, streams, contracts, graphs, and cost models. It still has a practical problem: a learner types hash collision, and Atlas must find matching notes without rereading every note.",
       "arcId": "arc-ii",
-      "wordCount": 10871,
+      "wordCount": 14316,
       "estimatedMinutes": 52,
-      "sourceHash": "8ac708034206cc526a441b0ced9878dd4fe956b4d31183e5ef652340960e3646",
-      "prerequisiteSlug": "07-stacks-queues-iteration-lazy",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "b868c84fff0cbab7844b17e0d0ba8e1c040787f870a46c928649aa8412d9d0e3",
+      "id": "m08",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 9,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        7
+      ],
+      "prerequisiteSlugs": [
+        "07-stacks-queues-iteration-lazy"
+      ],
+      "previousRouteNumber": 7,
       "previousSlug": "07-stacks-queues-iteration-lazy",
+      "nextRouteNumber": 9,
       "nextSlug": "09-trees-heaps-sorting-ordered"
     },
     {
@@ -158,11 +455,47 @@
       "title": "Trees, Heaps, Sorting, and Ordered Search",
       "summary": "Central idea: a hash index answers “which item has this exact identity?”; ordered structures answer “what comes first, next, nearest, or under this prefix?”",
       "arcId": "arc-ii",
-      "wordCount": 15438,
+      "wordCount": 18800,
       "estimatedMinutes": 74,
-      "sourceHash": "f2bd9e373cc47acab3fc586fcc98419d4941ec9c75ca09ebea8978e4b0403643",
-      "prerequisiteSlug": "08-hashing-dictionaries-sets-indexing",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "a6dec0e4588b9b76b0d6a570a34294601268834739e80c66c941f873a28de0c3",
+      "id": "m09",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 10,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        8
+      ],
+      "prerequisiteSlugs": [
+        "08-hashing-dictionaries-sets-indexing"
+      ],
+      "previousRouteNumber": 8,
       "previousSlug": "08-hashing-dictionaries-sets-indexing",
+      "nextRouteNumber": 10,
       "nextSlug": "10-graph-algorithms-network-models"
     },
     {
@@ -172,11 +505,47 @@
       "title": "Graph Algorithms and Network Models",
       "summary": "Atlas already stores events, processes streams, indexes notes, and schedules reviews. It also stores prerequisite claims such as:",
       "arcId": "arc-ii",
-      "wordCount": 15846,
+      "wordCount": 19694,
       "estimatedMinutes": 76,
-      "sourceHash": "cbfe82264548694c9436e4c3a40e0a01d79db7e3f1b1d589879f7b3cacff0312",
-      "prerequisiteSlug": "09-trees-heaps-sorting-ordered",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "78325122534bb00fd01f4abd368a3de22022f2fc15ecdb66b0a3025ce555d164",
+      "id": "m10",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 11,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        9
+      ],
+      "prerequisiteSlugs": [
+        "09-trees-heaps-sorting-ordered"
+      ],
+      "previousRouteNumber": 9,
       "previousSlug": "09-trees-heaps-sorting-ordered",
+      "nextRouteNumber": 11,
       "nextSlug": "11-algorithm-design-paradigms"
     },
     {
@@ -186,11 +555,47 @@
       "title": "Algorithm Design Paradigms: Choosing a Strategy from Structure",
       "summary": "Central idea: an algorithmic strategy is justified by a structural fact about the problem, not by resemblance to a familiar code template.",
       "arcId": "arc-ii",
-      "wordCount": 13178,
+      "wordCount": 17916,
       "estimatedMinutes": 63,
-      "sourceHash": "8fb4b8cec427bed7c8581b2f0edb8825d70774438b57df66dcd295079c213f92",
-      "prerequisiteSlug": "10-graph-algorithms-network-models",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "a6f55977d0c62e24e83a45d6a12a91b639323468dbf6545fd56ecd397530c92f",
+      "id": "m11",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 12,
+      "masteryGateId": "algorithms",
+      "sourceMap": "content/source-maps/arc_ii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        10
+      ],
+      "prerequisiteSlugs": [
+        "10-graph-algorithms-network-models"
+      ],
+      "previousRouteNumber": 10,
       "previousSlug": "10-graph-algorithms-network-models",
+      "nextRouteNumber": 12,
       "nextSlug": "12-modules-apis-types-dependencies"
     },
     {
@@ -200,11 +605,47 @@
       "title": "Modules, APIs, Types, and Dependency Direction",
       "summary": "Central idea: a component boundary is a controlled promise about what may be known, called, and changed; Python modules and type annotations help express that boundary, but architecture determines whether it remains changeable.",
       "arcId": "arc-iii",
-      "wordCount": 17016,
+      "wordCount": 19977,
       "estimatedMinutes": 82,
-      "sourceHash": "a1fc525a1eebea1f64c1abd4f0cf3e6a78c2777a9865c94b36ad4826c7bfea86",
-      "prerequisiteSlug": "11-algorithm-design-paradigms",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "34335fee635de3a4b3f1b760eddb2db32c6af9f2cb7a5c2351a935f22955be44",
+      "id": "m12",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 13,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": "dependency-direction",
+      "prerequisiteNumbers": [
+        11
+      ],
+      "prerequisiteSlugs": [
+        "11-algorithm-design-paradigms"
+      ],
+      "previousRouteNumber": 11,
       "previousSlug": "11-algorithm-design-paradigms",
+      "nextRouteNumber": 13,
       "nextSlug": "13-specifications-testing-debugging-observability"
     },
     {
@@ -214,11 +655,47 @@
       "title": "Specifications, Testing, Debugging, and Observability",
       "summary": "Central idea: ambiguity becomes a specification; a specification creates testable claims; finite evidence localizes failures; observability preserves the missing context; each confirmed defect becomes regression knowledge.",
       "arcId": "arc-iii",
-      "wordCount": 11291,
+      "wordCount": 13937,
       "estimatedMinutes": 54,
-      "sourceHash": "adc4c10a855320ae7ff391cef89dcf2d86e8596d1fb35684df501481f08d42ce",
-      "prerequisiteSlug": "12-modules-apis-types-dependencies",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "450dac6fc6129aedf385284e87beabd9f4eec6987fa9e077bb1f5d2a62b4e4c1",
+      "id": "m13",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 14,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": "specification-trace",
+      "prerequisiteNumbers": [
+        12
+      ],
+      "prerequisiteSlugs": [
+        "12-modules-apis-types-dependencies"
+      ],
+      "previousRouteNumber": 12,
       "previousSlug": "12-modules-apis-types-dependencies",
+      "nextRouteNumber": 14,
       "nextSlug": "14-software-design-and-change"
     },
     {
@@ -228,11 +705,47 @@
       "title": "Software Design and Change",
       "summary": "Arc III: Durable Software — pressure → contract → design → change → evidence A design is not “good” in the abstract. It is useful when it puts a likely change behind a boundary, keeps an invariant with its owner, and lets a reviewer tell…",
       "arcId": "arc-iii",
-      "wordCount": 14318,
+      "wordCount": 16624,
       "estimatedMinutes": 69,
-      "sourceHash": "1938fb2d7674a5951f0fe7e79e62cae154f17b7b7238c5306f3382dccc05147e",
-      "prerequisiteSlug": "13-specifications-testing-debugging-observability",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "0de7dc17ee67c4b7a08d2b9271d53403d01e1dbb909e66b3fd45c21180da7eee",
+      "id": "m14",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 15,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        13
+      ],
+      "prerequisiteSlugs": [
+        "13-specifications-testing-debugging-observability"
+      ],
+      "previousRouteNumber": 13,
       "previousSlug": "13-specifications-testing-debugging-observability",
+      "nextRouteNumber": 15,
       "nextSlug": "15-files-serialization-packaging-delivery"
     },
     {
@@ -242,11 +755,47 @@
       "title": "Files, Serialization, Packaging, and Delivery",
       "summary": "Central idea: crossing a boundary turns implicit process state into an explicit artifact; that artifact deserves a representation, schema, compatibility policy, trust model, failure model, and evidence record.",
       "arcId": "arc-iii",
-      "wordCount": 22984,
+      "wordCount": 25865,
       "estimatedMinutes": 110,
-      "sourceHash": "e97d4a794330d28cb7b7dcb8b3b9241735e3aa6daa0918f004b1f9442eabe113",
-      "prerequisiteSlug": "14-software-design-and-change",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          540,
+          660
+        ],
+        "deepDossier": [
+          660,
+          900
+        ]
+      },
+      "sourceHash": "8b8105a2a543008edbf23a4d2edec95a24dc9f05824fb28a3812ec22fbde91fe",
+      "id": "m15",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 16,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        14
+      ],
+      "prerequisiteSlugs": [
+        "14-software-design-and-change"
+      ],
+      "previousRouteNumber": 14,
       "previousSlug": "14-software-design-and-change",
+      "nextRouteNumber": 16,
       "nextSlug": "16-relational-data-transactions"
     },
     {
@@ -256,11 +805,47 @@
       "title": "Relational Data and Transactions",
       "summary": "Arc III: durable software — from a validated portable bundle to shared, constrained, transactional state A database is not “a faster file.” It is a system for representing relationships, enforcing invariants, coordinating operations, sel…",
       "arcId": "arc-iii",
-      "wordCount": 19335,
+      "wordCount": 21423,
       "estimatedMinutes": 93,
-      "sourceHash": "b80b7cee07b9d42e1afcf498feda08f7de5e4c6e1047911cba67df1be1e933c9",
-      "prerequisiteSlug": "15-files-serialization-packaging-delivery",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "bc965d312cfd4c4fd02a9473b86b70dadb7766f626d417ffd85acf2981d986b3",
+      "id": "m16",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 17,
+      "masteryGateId": "software",
+      "sourceMap": "content/source-maps/arc_iii_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        15
+      ],
+      "prerequisiteSlugs": [
+        "15-files-serialization-packaging-delivery"
+      ],
+      "previousRouteNumber": 15,
       "previousSlug": "15-files-serialization-packaging-delivery",
+      "nextRouteNumber": 17,
       "nextSlug": "17-computer-architecture-execution-stack"
     },
     {
@@ -270,12 +855,48 @@
       "title": "Computer Architecture and the Execution Stack",
       "summary": "Arc IV: machine, operating system, and network — from durable Atlas values to bounded explanations of how work becomes state change A Python operation is not a single machine action. It is a semantic request realized through several cont…",
       "arcId": "arc-iv",
-      "wordCount": 20151,
+      "wordCount": 22538,
       "estimatedMinutes": 96,
-      "sourceHash": "0c066a72c9f496046dee7bcab7bb0504e44dd0ea70e7a6fa44b49405188c5f07",
-      "prerequisiteSlug": "16-relational-data-transactions",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "6d1a73efd884faa74b6f5095455bd76a2602f7863ccbadaed498aa7571c8f5ec",
+      "id": "m17",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 18,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module17_architecture_execution_source_map.md",
+      "studioId": null,
+      "prerequisiteNumbers": [
+        16
+      ],
+      "prerequisiteSlugs": [
+        "16-relational-data-transactions"
+      ],
+      "previousRouteNumber": 16,
       "previousSlug": "16-relational-data-transactions",
-      "nextSlug": "18-operating-systems-resource-mediation"
+      "nextRouteNumber": 28,
+      "nextSlug": "28-linear-algebra-numerical-stability-representation"
     },
     {
       "number": 18,
@@ -284,11 +905,47 @@
       "title": "Operating Systems and Resource Mediation",
       "summary": "Arc IV: make the system legible — from an OS handoff to a supervised, recoverable Atlas worker An operating system does not make finite resources or failure disappear. It gives programs controlled abstractions for using them.",
       "arcId": "arc-iv",
-      "wordCount": 20336,
+      "wordCount": 23051,
       "estimatedMinutes": 97,
-      "sourceHash": "c8c1e3c4a17fe59f674fef1141693cc46b2a04be16b2b9be58b1267166054d06",
-      "prerequisiteSlug": "17-computer-architecture-execution-stack",
-      "previousSlug": "17-computer-architecture-execution-stack",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "72f8a89ee279890200f791823e74b990d2c2caa9e87c34f112916f60fe5e5661",
+      "id": "m18",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 23,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module18_operating_systems_source_map.md",
+      "studioId": "operating-systems",
+      "prerequisiteNumbers": [
+        17
+      ],
+      "prerequisiteSlugs": [
+        "17-computer-architecture-execution-stack"
+      ],
+      "previousRouteNumber": 31,
+      "previousSlug": null,
+      "nextRouteNumber": 19,
       "nextSlug": "19-concurrency-parallelism"
     },
     {
@@ -298,11 +955,47 @@
       "title": "Concurrency and Parallelism",
       "summary": "Arc IV: make overlapping work explainable One worker can be correct in isolation while two workers, each doing locally valid work, produce a globally invalid result. Concurrency begins at that seam.",
       "arcId": "arc-iv",
-      "wordCount": 21775,
+      "wordCount": 24406,
       "estimatedMinutes": 104,
-      "sourceHash": "62933e04a5308a992f6730365f7e0452bf9b8d2aa261b1e496ccce77ee861911",
-      "prerequisiteSlug": "18-operating-systems-resource-mediation",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          540,
+          660
+        ],
+        "deepDossier": [
+          660,
+          900
+        ]
+      },
+      "sourceHash": "5dd67cfb1bc6f8945adb4be689901c95218a2665e2f69fbabeb1a16741e35e02",
+      "id": "m19",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 24,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module19_concurrency_parallelism_source_map.md",
+      "studioId": "concurrency",
+      "prerequisiteNumbers": [
+        18
+      ],
+      "prerequisiteSlugs": [
+        "18-operating-systems-resource-mediation"
+      ],
+      "previousRouteNumber": 18,
       "previousSlug": "18-operating-systems-resource-mediation",
+      "nextRouteNumber": 20,
       "nextSlug": "20-networks-application-protocols"
     },
     {
@@ -312,11 +1005,47 @@
       "title": "Networks and Application Protocols",
       "summary": "Arc IV: carry a local result across an uncertain boundary A local program can know that it produced a valid value. The moment that value must cross a network, it must stop pretending that one local event is a remote fact.",
       "arcId": "arc-iv",
-      "wordCount": 15114,
+      "wordCount": 17386,
       "estimatedMinutes": 72,
-      "sourceHash": "ab4e96417238f6750aadbef0c61e7e54ae501bded7d7176bcffcc059c1cb4382",
-      "prerequisiteSlug": "19-concurrency-parallelism",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "4b08d55852f05ea14be105ae375537d4f691f330e61630e8fef682d2f8cebfa4",
+      "id": "m20",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 25,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module20_networks_protocols_source_map.md",
+      "studioId": "network-protocol",
+      "prerequisiteNumbers": [
+        19
+      ],
+      "prerequisiteSlugs": [
+        "19-concurrency-parallelism"
+      ],
+      "previousRouteNumber": 19,
       "previousSlug": "19-concurrency-parallelism",
+      "nextRouteNumber": 21,
       "nextSlug": "21-async-distributed-systems"
     },
     {
@@ -326,11 +1055,47 @@
       "title": "Async and Distributed Systems",
       "summary": "Arc IV: coordinate local work without inventing remote certainty A program can own a task. It cannot own every queue, clock, replica, or response path beyond its boundary. This module makes that distinction useful.",
       "arcId": "arc-iv",
-      "wordCount": 8180,
+      "wordCount": 9905,
       "estimatedMinutes": 39,
-      "sourceHash": "be2876930144329df5a236391bbb3093f79aae24dd8cab6f371ce7af89a4a315",
-      "prerequisiteSlug": "20-networks-application-protocols",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "6cb7d741b4cd350c9353541fdf2d18674716bafea39cefdf8eae595e159f459d",
+      "id": "m21",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 26,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module21_async_distributed_source_map.md",
+      "studioId": "async-distributed",
+      "prerequisiteNumbers": [
+        20
+      ],
+      "prerequisiteSlugs": [
+        "20-networks-application-protocols"
+      ],
+      "previousRouteNumber": 20,
       "previousSlug": "20-networks-application-protocols",
+      "nextRouteNumber": 22,
       "nextSlug": "22-security-privacy-trust-boundaries"
     },
     {
@@ -340,11 +1105,47 @@
       "title": "Security, Privacy & Trust Boundaries",
       "summary": "Arc IV — Machine, network, trust, and responsibility Bridge: Module 21 taught that asynchronous and distributed evidence can be incomplete. Module 22 asks a prior question: which input, identity, authority, and evidence may Atlas trust e…",
       "arcId": "arc-iv",
-      "wordCount": 6401,
+      "wordCount": 8926,
       "estimatedMinutes": 31,
-      "sourceHash": "9d81accad74792a864ad5c7faac2782da7e313a82de8a4facedd69b58b7000e1",
-      "prerequisiteSlug": "21-async-distributed-systems",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "be7cbb242e84c12033de41d9ebe1099be098a91e21a81afe7d38e0a7c4e971bd",
+      "id": "m22",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 27,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module22_security_trust_source_map.md",
+      "studioId": "security-trust",
+      "prerequisiteNumbers": [
+        21
+      ],
+      "prerequisiteSlugs": [
+        "21-async-distributed-systems"
+      ],
+      "previousRouteNumber": 21,
       "previousSlug": "21-async-distributed-systems",
+      "nextRouteNumber": 23,
       "nextSlug": "23-programming-languages-interpreters"
     },
     {
@@ -354,11 +1155,47 @@
       "title": "Programming Languages, Interpreters & Bounded Evaluation",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 22 established that incoming data does not become authority merely because it has a plausible shape. This module makes that principle operational: text can have syntax and s…",
       "arcId": "arc-v",
-      "wordCount": 7093,
+      "wordCount": 9094,
       "estimatedMinutes": 34,
-      "sourceHash": "d1b65fcc260a657c2c62fff8e0d818ba56cb836bcc7b1bcbab8e98369471d742",
-      "prerequisiteSlug": "22-security-privacy-trust-boundaries",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          420,
+          540
+        ],
+        "deepDossier": [
+          600,
+          780
+        ]
+      },
+      "sourceHash": "0a9afcfe8126cf20ff1cef36f9e80d10dee7ba5e0c7733f86e7ce0976c5be6d4",
+      "id": "m23",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 28,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module23_languages_interpreters_source_map.md",
+      "studioId": "language-interpreter",
+      "prerequisiteNumbers": [
+        22
+      ],
+      "prerequisiteSlugs": [
+        "22-security-privacy-trust-boundaries"
+      ],
+      "previousRouteNumber": 22,
       "previousSlug": "22-security-privacy-trust-boundaries",
+      "nextRouteNumber": 24,
       "nextSlug": "24-cpython-performance-memory"
     },
     {
@@ -368,12 +1205,48 @@
       "title": "CPython, Performance & Memory Evidence",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 23 gave a program a semantic path: source, structure, environment, evaluator, and bounded result. This module asks a different question: when a trusted Python program runs,…",
       "arcId": "arc-v",
-      "wordCount": 4380,
+      "wordCount": 6443,
       "estimatedMinutes": 21,
-      "sourceHash": "cb91a77feecab5bc25d6bf1c605baba338c5ac8ae2f588cf4c22589c4005ea73",
-      "prerequisiteSlug": "23-programming-languages-interpreters",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          540,
+          720
+        ]
+      },
+      "sourceHash": "cb692ef0d0f1a404758a7bffc5b58b222c4a6970115c4fa4c1b63c48b00df531",
+      "id": "m24",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 29,
+      "masteryGateId": "systems",
+      "sourceMap": "content/source-maps/module24_cpython_performance_memory_source_map.md",
+      "studioId": "runtime-evidence",
+      "prerequisiteNumbers": [
+        23
+      ],
+      "prerequisiteSlugs": [
+        "23-programming-languages-interpreters"
+      ],
+      "previousRouteNumber": 23,
       "previousSlug": "23-programming-languages-interpreters",
-      "nextSlug": "25-evidence-grounded-intelligent-systems"
+      "nextRouteNumber": 32,
+      "nextSlug": null
     },
     {
       "number": 25,
@@ -382,11 +1255,55 @@
       "title": "Evidence-Grounded Intelligent & Human-Centered Systems",
       "summary": "Arc V — Languages, intelligence, and integration Bridge: Module 24 taught a hard engineering habit: a benchmark, profile, or generated optimization is not an authority. This module applies the same habit to a score, model, retrieval resu…",
       "arcId": "arc-v",
-      "wordCount": 7189,
-      "estimatedMinutes": 35,
-      "sourceHash": "22d5d913da93c99a298f5e8a5b4237d1126a516f67b226c22b8e26f2b0c2bb51",
-      "prerequisiteSlug": "24-cpython-performance-memory",
-      "previousSlug": "24-cpython-performance-memory",
+      "wordCount": 12107,
+      "estimatedMinutes": 36,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          360,
+          480
+        ],
+        "deepDossier": [
+          480,
+          660
+        ]
+      },
+      "sourceHash": "df0ff7e7808d5dc4366a9d43d47d3aa9329fa0e74c14891cf8f6ee3179e4ad5d",
+      "id": "m25",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "preview",
+        "availability": "preview",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 35,
+      "masteryGateId": "evidence",
+      "sourceMap": "content/source-maps/module25_evidence_grounded_intelligent_systems_source_map.md",
+      "studioId": "evidence-grounded",
+      "prerequisiteNumbers": [
+        22,
+        24,
+        30,
+        31,
+        34,
+        35,
+        36
+      ],
+      "prerequisiteSlugs": [
+        "22-security-privacy-trust-boundaries",
+        "24-cpython-performance-memory",
+        "30-probability-statistics-scientific-inference"
+      ],
+      "previousRouteNumber": 36,
+      "previousSlug": null,
+      "nextRouteNumber": 26,
       "nextSlug": "26-systems-capstone-open-source-stewardship"
     },
     {
@@ -394,13 +1311,259 @@
       "slug": "26-systems-capstone-open-source-stewardship",
       "filename": "26_systems_capstone_open_source_stewardship.md",
       "title": "Systems Capstone, Open-Source Stewardship & Oral Architecture Defense",
-      "summary": "Bridge: Module 25 ended with a bounded decision-support feature and an evidence packet. This module asks the harder systems question: can that feature live inside a maintained product without borrowing authority from a demo, a green chec…",
+      "summary": "Intended bridge after prerequisite evidence exists: Module 25 ends with a bounded decision-support feature and an evidence packet. This module then asks the harder systems question: can that feature live inside a maintained product witho…",
       "arcId": "arc-v",
-      "wordCount": 7809,
+      "wordCount": 11994,
       "estimatedMinutes": 38,
-      "sourceHash": "2437873916c8efbc9cbdfdaae7e1303c4878e1bd8e3a9cb649c02e0a76cba2b2",
-      "prerequisiteSlug": "25-evidence-grounded-intelligent-systems",
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          600,
+          720
+        ],
+        "deepDossier": [
+          900,
+          1200
+        ]
+      },
+      "sourceHash": "1490d0eeae741fd743655bf37ec4e81b37cc82cbe5736df54a2efc01651052d4",
+      "id": "m26",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "preview",
+        "availability": "preview",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 36,
+      "masteryGateId": "defense",
+      "sourceMap": "content/source-maps/module26_systems_capstone_source_map.md",
+      "studioId": "capstone-defense",
+      "prerequisiteNumbers": [
+        25
+      ],
+      "prerequisiteSlugs": [
+        "25-evidence-grounded-intelligent-systems"
+      ],
+      "previousRouteNumber": 25,
       "previousSlug": "25-evidence-grounded-intelligent-systems",
+      "nextRouteNumber": null,
+      "nextSlug": null
+    },
+    {
+      "number": 27,
+      "slug": "27-discrete-mathematics-proof-counting-structures",
+      "filename": "27_discrete_mathematics_proof_counting_structures.md",
+      "title": "Discrete Mathematics, Proof, Counting & Structures",
+      "summary": "Bridge: Modules 1–5 taught you to trace Python state, write contracts, use an introductory proof vocabulary, and state a cost model. This module returns to those ideas at full mathematical resolution. It asks what must be true for a clai…",
+      "arcId": "arc-vi",
+      "wordCount": 11450,
+      "estimatedMinutes": 48,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          780,
+          1020
+        ],
+        "deepDossier": [
+          1200,
+          1680
+        ]
+      },
+      "sourceHash": "3628b56fdc972600acf09285279e7f1ea5587bee4fccfd701e34d138ae0889db",
+      "id": "m27",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 6,
+      "masteryGateId": "claims",
+      "sourceMap": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md",
+      "studioId": "discrete-math-proof",
+      "prerequisiteNumbers": [
+        2,
+        4,
+        5
+      ],
+      "prerequisiteSlugs": [
+        "02-functions-recursion-induction",
+        "04-logic-sets-relations-graphs-proof",
+        "05-cost-models-algorithm-analysis"
+      ],
+      "previousRouteNumber": 5,
+      "previousSlug": "05-cost-models-algorithm-analysis",
+      "nextRouteNumber": 6,
+      "nextSlug": "06-representation-memory-sequences-linked"
+    },
+    {
+      "number": 28,
+      "slug": "28-linear-algebra-numerical-stability-representation",
+      "filename": "28_linear_algebra_numerical_stability_representation.md",
+      "title": "Linear Algebra, Numerical Stability & Representation",
+      "summary": "Bridge: M27 made domains, definitions, proof obligations, witnesses, and evidence boundaries explicit. M28 asks a complementary question: when a program stores an observation as coordinates, what structure survives a change of coordinate…",
+      "arcId": "arc-vi",
+      "wordCount": 9762,
+      "estimatedMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          840,
+          1080
+        ],
+        "deepDossier": [
+          1380,
+          1920
+        ]
+      },
+      "sourceHash": "f1c9ef9dc4adf5ccdc60f9afd295e49006739e2502eed3400b563d82f48bbac0",
+      "id": "m28",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 19,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md",
+      "studioId": "linear-algebra-stability",
+      "prerequisiteNumbers": [
+        17,
+        27
+      ],
+      "prerequisiteSlugs": [
+        "17-computer-architecture-execution-stack",
+        "27-discrete-mathematics-proof-counting-structures"
+      ],
+      "previousRouteNumber": 17,
+      "previousSlug": "17-computer-architecture-execution-stack",
+      "nextRouteNumber": 29,
+      "nextSlug": "29-calculus-real-analysis-continuous-change"
+    },
+    {
+      "number": 29,
+      "slug": "29-calculus-real-analysis-continuous-change",
+      "filename": "29_calculus_real_analysis_continuous_change.md",
+      "title": "Calculus, Real Analysis & Continuous Change",
+      "summary": "Arc VI — Mathematical foundations for continuous, probabilistic, and learning systems",
+      "arcId": "arc-vi",
+      "wordCount": 9409,
+      "estimatedMinutes": 39,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
+      },
+      "sourceHash": "7021dc67640a6a85a056d75bfb97e39396f5a78356f637893754bc284ee4cc1a",
+      "id": "m29",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 20,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module29_calculus_real_analysis_continuous_change_source_map.md",
+      "studioId": "calculus-continuous-change",
+      "prerequisiteNumbers": [
+        27,
+        28
+      ],
+      "prerequisiteSlugs": [
+        "27-discrete-mathematics-proof-counting-structures",
+        "28-linear-algebra-numerical-stability-representation"
+      ],
+      "previousRouteNumber": 28,
+      "previousSlug": "28-linear-algebra-numerical-stability-representation",
+      "nextRouteNumber": 30,
+      "nextSlug": "30-probability-statistics-scientific-inference"
+    },
+    {
+      "number": 30,
+      "slug": "30-probability-statistics-scientific-inference",
+      "filename": "30_probability_statistics_scientific_inference.md",
+      "title": "Probability, Statistics & Scientific Inference",
+      "summary": "Arc VI — Mathematical foundations for uncertain, data-bearing, and learning systems",
+      "arcId": "arc-vi",
+      "wordCount": 11186,
+      "estimatedMinutes": 46,
+      "focusedStudyMinutes": {
+        "minimumEvidence": [
+          480,
+          600
+        ],
+        "deepDossier": [
+          660,
+          840
+        ]
+      },
+      "sourceHash": "4625d2150d9c9e23b3f20d782f314831084bcb70980ec3de08f85dc7e2a7e397",
+      "id": "m30",
+      "state": {
+        "lifecycle": "learner-material-ready",
+        "readerAccess": "full",
+        "availability": "legacy-open",
+        "contract": {
+          "track": "legacy-v1",
+          "state": "legacy-baseline"
+        },
+        "release": {
+          "state": "unrecorded",
+          "recordId": null
+        }
+      },
+      "routeRole": "required",
+      "routePosition": 21,
+      "masteryGateId": "mathematics",
+      "sourceMap": "content/source-maps/module30_probability_statistics_scientific_inference_source_map.md",
+      "studioId": "probability-inference",
+      "prerequisiteNumbers": [
+        27,
+        29
+      ],
+      "prerequisiteSlugs": [
+        "27-discrete-mathematics-proof-counting-structures",
+        "29-calculus-real-analysis-continuous-change"
+      ],
+      "previousRouteNumber": 29,
+      "previousSlug": "29-calculus-real-analysis-continuous-change",
+      "nextRouteNumber": 31,
       "nextSlug": null
     }
   ]

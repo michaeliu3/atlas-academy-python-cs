@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m28",
+  "purpose": "Bind M28's current workbook, source, visual, local-model, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M28 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m28-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M28 workbook visibly relates its proof and representation prerequisites to its canonical M29 forward handoff while marking later mathematics and synthesis as conceptual connections rather than route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "12-prerequisite-and-forward-map"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m28-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M28 declares six ordered sessions spanning vector spaces, projections, spectral reasoning, numerical stability, tensor/matrix calculus, and PCA representation design.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "3-session-1--vectors-spaces-coordinates-rank-and-lost-directions"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "4-session-2--inner-products-orthogonality-projection-and-least-squares"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "5-session-3--eigenstructure-symmetric-maps-psd-matrices-and-the-spectral-theorem"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "6-session-4--svd-low-rank-approximation-conditioning-and-stable-computation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "7-session-5--tensors-matrix-calculus-and-the-representation-to-computation-boundary"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "8-session-6--pca-from-variance-and-low-rank-approximation-representation-dossier"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m28-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M28 begins linear-algebra reasoning from the promise a vector space makes about allowed combinations rather than from an API or matrix formula.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "first-principle-a-vector-space-is-a-promise-about-allowed-combinations"}
+      ],
+      "limitations": ["A named first-principles section does not prove mathematical adequacy or learner comprehension."]
+    },
+    {
+      "id": "m28-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M28 binds separate visible locations for a definition, normal-equation assumption, least-squares derivation, counterexample, and conditioning/stability numerical experiment.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "31-definitions-span-independence-basis-and-dimension"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "65-the-normal-equations-amplification-boundary"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "43-least-squares-derives-from-residual-orthogonality"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "b-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "session-4-numerical-experiment"}
+      ],
+      "limitations": ["These structural anchors do not substitute for a qualified review of definitions, derivations, counterexamples, numerical procedures, or source claims."]
+    },
+    {
+      "id": "m28-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M28 includes distinct code-reading, debugging, and design tasks that require tracing a coordinate or finite-precision assumption before making a transfer claim.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "session-1-code-reading-task"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "f-debug"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "g-design"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a numerical system."]
+    },
+    {
+      "id": "m28-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M28 visibly asks for a projection prediction before revealing the residual and orthogonality analysis.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "session-2-prediction-before-reveal"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m28-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M28 includes a transfer task that asks the learner to carry a representation and stability judgment into a new model or system boundary.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "h-transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response or real-world decision authority."]
+    },
+    {
+      "id": "m28-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M28's canonical source map and bounded source-audit addendum expose session claim routing and recommended source cards, while its workbook makes the licensing and responsible-reading route visible to the learner.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module28_linear_algebra_numerical_stability_representation_source_map.md", "locator": "source-to-session-authoring-route"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module28_linear_algebra_source_audit_addendum.md", "locator": "recommended-source-set"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "16-sources-licensing-and-responsible-reading-route"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m28-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M28 binds its interactive stability studio to concise text alternatives and a module-specific rendered accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "accessible-visual-text-alternative"},
+        {"kind": "file", "role": "source-code", "path": "app/LinearAlgebraStabilityStudio.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/rendered-html.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and rendered test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m28-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M28 exposes confidence-aware diagnostic questions and a misconception-repair route rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "11-confidence-aware-diagnostic"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "interpretation-and-misconception-repair-route"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m28-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M28 includes a visible retrieval queue and representation/stability mastery gate for learner-controlled follow-up.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "retrieval-queue"}
+      ],
+      "limitations": ["A retrieval queue does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m28-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M28 specifies a representation and stability dossier with required evidence and a constructive multi-evidence rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "12-atlas-project--representation--stability-dossier"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "required-evidence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "rubric-multi-evidence-never-passfail"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m28-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M28 contains an encouraging conversational oral-defense protocol with hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "14-conversational-oral-defense--m28"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "teaching-assistant--derivation-and-numerical-review-clinic"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "misconception-repair-moments"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "h-transfer"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "invitation-and-agenda-1520-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/28_linear_algebra_numerical_stability_representation.md", "locator": "end-of-defense-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m28-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M28 companion binds a Teaching Assistant opening, artifact focus, and repair move to the module's representation and numerical-boundary work.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m28.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m28-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M28 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m28.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m28-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M28 companion carries a bounded representation-and-stability evidence card into the canonical M29 continuous-change handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m28.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M28, or authorization to bypass M29 prerequisites."]
+    },
+    {
+      "id": "m28-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M28 binds its interactive stability studio, explicit registry entry, bounded Python reference model, and exact CI-discovered behavioral teaching-model suite.",
+      "inputs": [
+        {"kind": "file", "role": "source-code", "path": "app/LinearAlgebraStabilityStudio.tsx", "locator": null},
+        {"kind": "file", "role": "source-code", "path": "lib/module-studio-registry.ts", "locator": null},
+        {"kind": "file", "role": "reference-model", "path": "public/downloads/module28_reference.py", "locator": null},
+        {"kind": "file", "role": "test", "path": "public/downloads/test_module28_reference.py", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local teaching-model suite do not prove browser interaction, theorem validity, CI success for this candidate, or a deployed studio."]
+    },
+    {
+      "id": "m28-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m28.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m28/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Source map for the integrated Python and computer science curriculum
 
-**Research cutoff:** 2026-07-29  
+**Research cutoff:** 2026-08-01  
 **Purpose:** identify authoritative, usable sources for a coached curriculum that begins with intermediate Python, develops advanced Python and software engineering, and then connects those skills to the core of an undergraduate computer science education.
 
 ## Executive recommendation
@@ -109,6 +109,24 @@ David Beazley’s [Advanced Python Mastery](https://github.com/dabeaz-course/pyt
 
 **Limitations:** CS41’s public presentation and topic mix vary by offering. Advanced Python Mastery largely reflects the Python 3.6 era and intentionally omits modern typing, structural pattern matching, and async programming; every language claim should be checked against the current Python reference.
 
+### M1–M5 learner calibration route
+
+These compact cards make the gateway's university calibration inspectable at
+the exact Atlas artifact, rather than turning the module into a reading pile.
+All sources below were checked **2026-08-01** and are link-only; Atlas retains
+original explanations, diagrams, code, prompts, diagnostics, and projects.
+
+| Module and Atlas artifact | Official calibration anchor | Outcome decision |
+| --- | --- | --- |
+| M1 object/binding trace and shared-state regression | [MIT 6.100L calendar](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/calendar/) | **Aligned, adapted:** execution, mutation, aliasing, debugging, and assertions; lower-level systems and institutional practice volume are deferred. |
+| M2 recursive contract, trace, proof, and cost ledger | [MIT 6.042J syllabus](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/) | **Aligned, adapted:** recursion, well-founded progress, induction, correctness, and termination; larger problem-set volume is optional depth. |
+| M3 EventStore contract and AF/RI evidence | [MIT 6.102 AF/RI notes](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) | **Aligned, adapted:** representation independence and implementation obligations are translated to Python mechanisms. |
+| M4 quantified-claim, relation/graph, and counterexample table | [MIT 6.042J readings](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/pages/readings/) | **Aligned, compressed:** proof and graph foundations are present; the full discrete-math term continues through M27. |
+| M5 cost-model and measurement-reconciliation dossier | [MIT 6.006 syllabus](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/syllabus/) | **Aligned, adapted:** modeling and analysis are present; the breadth of algorithms/data structures unfolds from M6 onward. |
+
+This records comparable conceptual rigor and evidence expectations—not
+enrollment, grading, faculty feedback, credit, or institutional equivalence.
+
 ## Current Python engineering sources
 
 Official documentation should supply canonical semantics and current APIs, while university material supplies sequencing and assignments.
@@ -150,7 +168,7 @@ For course reproducibility, pin one Python minor version—currently 3.14—and 
 
 [Berkeley CS61C](https://cs61c.org/sp26/) and its [course notes](https://notes.cs61c.org/) cover number representation, C and pointers, RISC-V, CPU design, caches, virtual memory, and parallelism. The official [Berkeley catalog description](https://www2.eecs.berkeley.edu/Courses/CS61C/) documents the course’s architecture and machine-structure scope.
 
-[CMU 15-213 Introduction to Computer Systems](https://csd.cs.cmu.edu/15213-introduction-to-computer-systems) offers a programmer’s view of machine code, data representation, optimization, memory, linking, processes, networking, and concurrency; the [Spring 2025 site](https://www.cs.cmu.edu/afs/cs/academic/class/15213-s25/www/) shows the teaching structure.
+[CMU 15-213 Introduction to Computer Systems](https://csd.cs.cmu.edu/course/15213/s26) offers a programmer’s view of machine code, data representation, optimization, memory, linking, processes, networking, and concurrency; the [Spring 2025 site](https://www.cs.cmu.edu/afs/cs/academic/class/15213-s25/www/) shows the teaching structure.
 
 **Connection:** choose one primary route. Berkeley is strongest for architecture and RISC-V labs; CMU is strongest for the programmer’s systems perspective. Python simulations can introduce caches, scheduling, and binary formats, but a bounded C/assembly component is indispensable.
 
@@ -241,5 +259,5 @@ If the curriculum must start with a small set of sources, use:
 4. [Python 3.14 documentation](https://docs.python.org/3.14/) plus [PyPA](https://packaging.python.org/), [pytest](https://docs.pytest.org/en/stable/), and the [typing specification](https://typing.python.org/en/latest/spec/) for modern engineering.
 5. [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/) and [MIT 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) for mathematical and algorithmic foundations.
 6. [MIT 6.031](https://web.mit.edu/6.031/www/fa21/) for software construction.
-7. One systems route—[Berkeley CS61C](https://cs61c.org/sp26/) or [CMU 15-213](https://csd.cs.cmu.edu/15213-introduction-to-computer-systems)—followed by selected OS, networking, database, security, and PL sources above.
+7. One systems route—[Berkeley CS61C](https://cs61c.org/sp26/) or [CMU 15-213](https://csd.cs.cmu.edu/course/15213/s26)—followed by selected OS, networking, database, security, and PL sources above.
 8. UW/Purdue/Stanford capstone guidance for the culminating project.

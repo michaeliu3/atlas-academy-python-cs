@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m30",
+  "purpose": "Freeze a module-specific M30 Teaching Assistant, Study Partner, and bounded M31 conceptual handoff for future human review without changing M30's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/29",
+    "digest": "sha256:293715f4a5221c3831e27f3bc422eb99c8d7f7dd65b076ea72a788964a5bb432"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected inference claim. Ask for its target population, random variables, conditioning direction, sampling or design assumption, and the smallest finite trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one estimand and assumption visible, reconstruct one conditional-expectation, likelihood, interval, test, or simulation trace, name one counterexample or sensitivity boundary, and distinguish what the evidence supports from what it cannot decide.",
+    "repairMove": "Ask for a prediction before correction; change exactly one population, prior, denominator, independence, missingness, multiplicity, sample-size, or model-fit premise; then offer the smallest hint or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: define notation, render a short probability derivation or labelled code trace, give a plain-language fallback, and rehearse one claim-to-assumption-to-uncertainty chain at a time.",
+    "changedPremise": "Change one target population, event definition, sampling rule, conditional direction, prior, dependence condition, missingness mechanism, or multiple-testing plan. Ask for a prediction before looking at a counterexample, trace, or theorem condition.",
+    "taHandoff": "End with the learner's selected inference card, attempted derivation or trace, confidence, unresolved misconception, one counterexample or finite-sample limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m31",
+    "carryArtifact": "Carry an uncertainty-and-inference evidence card: target, random variables, design and assumptions, procedure or finite trace, uncertainty/sensitivity boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before treating an M30 likelihood, expectation, or uncertainty calculation as an optimization or information objective in M31, what objective, feasible set, distributional assumption, scale, and convergence or finite-sample boundary must become explicit?",
+    "boundary": "M31 is the only conceptual forward handoff, but it remains authoring-only and hidden from the reader. This record does not create a learner route to M31, bypass prerequisites, assert M31 delivery, or make a release or publication claim."
+  }
+}

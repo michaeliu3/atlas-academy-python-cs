@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "v1",
+  "description": "Reviewable raw-byte limits for the emitted Atlas browser assets. A limit change is a deliberate architecture decision, not a substitute for real-user performance evidence.",
+  "measurement": {
+    "unit": "raw emitted file bytes from a local production build",
+    "includes": [
+      "every regular file under dist/client/assets",
+      "the Vite manifest browser-entry static import closure, including manifest-associated CSS",
+      "each named visual-studio entry and its static manifest import closure"
+    ],
+    "doesNotMeasure": [
+      "HTTP transfer compression, cache state, CDN behavior, or network latency",
+      "device CPU, rendering, interaction latency, memory use, or real-user Core Web Vitals",
+      "accessibility, correctness, learner comprehension, or the size of intentionally separate teaching downloads",
+      "the deferred ConcurrencyStudio payload requested only after a learner opens the progressive-disclosure observatory; total and single-asset limits still apply to that built payload"
+    ]
+  },
+  "output": {
+    "clientDirectory": "dist/client",
+    "assetDirectory": "assets",
+    "manifestPath": ".vite/manifest.json"
+  },
+  "limits": {
+    "maxClientAssetBytes": 7000000,
+    "maxClientAssetCount": 260,
+    "maxSingleAssetBytes": 750000,
+    "initialEntry": {
+      "manifestKey": "virtual:vinext-app-browser-entry",
+      "maxStaticClosureBytes": 400000
+    },
+    "studios": {
+      "maxOwnEntryBytes": 80000,
+      "maxStaticClosureBytes": 400000,
+      "entries": [
+        {
+          "studioId": "dependency-direction",
+          "manifestName": "DependencyDirectionStudio"
+        },
+        {
+          "studioId": "specification-trace",
+          "manifestName": "SpecificationTraceStudio"
+        },
+        {
+          "studioId": "operating-systems",
+          "manifestName": "OperatingSystemsStudio"
+        },
+        {
+          "studioId": "concurrency",
+          "manifestName": "ConcurrencyStudioReader"
+        },
+        {
+          "studioId": "network-protocol",
+          "manifestName": "NetworkProtocolStudio"
+        },
+        {
+          "studioId": "async-distributed",
+          "manifestName": "AsyncDistributedStudio"
+        },
+        {
+          "studioId": "security-trust",
+          "manifestName": "SecurityTrustStudio"
+        },
+        {
+          "studioId": "language-interpreter",
+          "manifestName": "LanguageInterpreterStudio"
+        },
+        {
+          "studioId": "runtime-evidence",
+          "manifestName": "RuntimeEvidenceObservatory"
+        },
+        {
+          "studioId": "evidence-grounded",
+          "manifestName": "EvidenceGroundedStudio"
+        },
+        {
+          "studioId": "capstone-defense",
+          "manifestName": "CapstoneDefenseStudio"
+        },
+        {
+          "studioId": "discrete-math-proof",
+          "manifestName": "DiscreteMathProofStudio"
+        },
+        {
+          "studioId": "linear-algebra-stability",
+          "manifestName": "LinearAlgebraStabilityStudio"
+        },
+        {
+          "studioId": "calculus-continuous-change",
+          "manifestName": "CalculusContinuousChangeStudio"
+        },
+        {
+          "studioId": "probability-inference",
+          "manifestName": "ProbabilityInferenceStudio"
+        }
+      ]
+    }
+  }
+}

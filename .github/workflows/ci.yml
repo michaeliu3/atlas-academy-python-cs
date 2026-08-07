@@ -1,11 +1,25 @@
 name: Course CI
 
+run-name: >-
+  atlas-course-ci-${{ github.event_name == 'pull_request' &&
+  (github.event.pull_request.draft && 'draft' || 'gate') || github.event_name }}
+
 on:
   push:
     branches:
       - main
   pull_request:
-  workflow_dispatch:
+    # Keep a reviewable, full-quality gate, but do not allocate hosted runners
+    # for each exploratory update while the pull request is explicitly Draft.
+    # `ready_for_review` launches the same four required checks before review.
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+      # Emit a skipped, zero-runner workflow when a PR returns to draft so the
+      # concurrency group cancels any now-obsolete full gate for that PR.
+      - converted_to_draft
+      - synchronize
 
 permissions:
   contents: read
@@ -15,41 +29,299 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  change-scope:
+    name: Classify changed files
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      content: ${{ steps.scope.outputs.content }}
+      apparatus: ${{ steps.scope.outputs.apparatus }}
+      sources: ${{ steps.scope.outputs.sources }}
+      portal: ${{ steps.scope.outputs.portal }}
+      browser: ${{ steps.scope.outputs.browser }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Classify content and apparatus changes
+        id: scope
+        shell: pwsh
+        env:
+          ATLAS_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          ATLAS_EVENT_ACTION: ${{ github.event_name == 'pull_request' && github.event.action || '' }}
+          ATLAS_BEFORE_SHA: ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.event.before || '' }}
+          # On pull_request events github.sha is GitHub's synthetic merge ref,
+          # not the contributor's branch head. Use the real PR head so an
+          # incremental synchronize diff cannot re-include the base branch.
+          ATLAS_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: |
+          $baseSha = $env:ATLAS_BASE_SHA
+          $headSha = $env:ATLAS_HEAD_SHA
+          if (
+            $env:ATLAS_EVENT_ACTION -eq 'synchronize' -and
+            $env:ATLAS_BEFORE_SHA -and
+            $env:ATLAS_BEFORE_SHA -notmatch '^0+$'
+          ) {
+            # A synchronize event represents an incremental PR-head update.
+            # Classify only that update so docs-only follow-ups do not rerun
+            # the entire draft branch's content feedback suite. If GitHub does
+            # not provide `before`, retain the conservative base-to-head range.
+            $baseSha = $env:ATLAS_BEFORE_SHA
+          }
+          if ($baseSha -match '^0+$') {
+            $baseSha = "$headSha^"
+          }
+          $changedFiles = @(git diff --name-only $baseSha $headSha)
+          if ($LASTEXITCODE -ne 0) {
+            throw "Could not classify the changed source range $baseSha..$headSha."
+          }
+          $contentChanged = $false
+          $apparatusChanged = $false
+          $sourcesChanged = $false
+          $portalChanged = $false
+          $browserChanged = $false
+          $provenanceOnlyPaths = @(
+            'content/course/goal-compliance.v1.json',
+            'content/course/release-inputs.v1.json'
+          )
+          foreach ($path in $changedFiles) {
+            $isProvenanceOnly = $provenanceOnlyPaths -contains $path
+            if ($isProvenanceOnly) {
+              # Current-truth/ledger metadata still needs the portal's
+              # structural and generated-artifact checks, but it cannot alter
+              # learner content or runtime behavior, so avoid the expensive
+              # apparatus/Python/Chromium fan-out.
+              $portalChanged = $true
+            }
+            if ($path -like 'content/*' -and -not $isProvenanceOnly) {
+              $contentChanged = $true
+              $portalChanged = $true
+              $browserChanged = $true
+            }
+            if (
+              ($path -like 'content/course/*' -and -not $isProvenanceOnly) -or
+              $path -like 'scripts/*' -or
+              $path -like 'tests/*' -or
+              $path -like 'package.json' -or
+              $path -like 'pnpm-lock.yaml' -or
+              $path -like '.github/workflows/ci.yml'
+            ) {
+              $apparatusChanged = $true
+              $portalChanged = $true
+            }
+            if ($path -like 'benches/*') {
+              # Benches are executable teaching apparatus, not portal content.
+              # Deliberately does NOT set contentChanged or browserChanged: a
+              # notebook edit must not trigger the Chromium acceptance run.
+              $apparatusChanged = $true
+            }
+            if ($path -like 'content/source-maps/*' -or $path -like 'docs/ACADEMIC_CALIBRATION.md' -or $path -like 'docs/research/*') {
+              $sourcesChanged = $true
+            }
+            if (
+              $path -like 'app/*' -or
+              $path -like 'components/*' -or
+              $path -like 'lib/*' -or
+              $path -like 'build/*' -or
+              $path -like 'public/*' -or
+              $path -like 'worker/*' -or
+              $path -like 'e2e/*' -or
+              $path -like 'tests/*' -or
+              $path -like '*.css' -or
+              $path -like 'package.json' -or
+              $path -like 'pnpm-lock.yaml' -or
+              $path -like 'tsconfig*.json' -or
+              $path -like 'vite.config.*' -or
+              $path -like '.github/workflows/ci.yml'
+            ) {
+              $portalChanged = $true
+            }
+            if (
+              $path -like 'app/*' -or
+              $path -like 'components/*' -or
+              ($path -like 'content/*' -and -not $isProvenanceOnly) -or
+              $path -like 'e2e/*' -or
+              $path -like 'public/*' -or
+              $path -like '*.css' -or
+              $path -like 'vite.config.*' -or
+              $path -like '.github/workflows/ci.yml'
+            ) {
+              $browserChanged = $true
+            }
+          }
+          "content=$($contentChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "apparatus=$($apparatusChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "sources=$($sourcesChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "portal=$($portalChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "browser=$($browserChanged.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
   portal:
     name: Portal quality gate
+    needs: change-scope
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - name: Satisfy required portal check for docs-only review
+        if: github.event_name == 'pull_request' && needs.change-scope.outputs.portal != 'true'
+        run: echo "No portal-affecting files changed; the required portal context is satisfied without a rebuild."
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@v4
+          fetch-depth: 0
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        uses: pnpm/action-setup@7088e561eb65bb68695d245aa206f005ef30921d # v4.1.0
         with:
           version: 11.9.0
-      - uses: actions/setup-node@v4
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Validate structural course contract and release inputs
+        run: pnpm validate:course:inputs
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Synchronize learner content from checked-in inputs
+        run: pnpm sync:modules
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Verify generated course artifacts are committed
+        run: pnpm check:generated
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Validate the bench registry against the graph and teaching packs
+        run: pnpm validate:benches
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Verify each bench still matches its workbook session
+        run: pnpm check:bench-sync
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Proofread the workbook bench sections against the registry
+        run: pnpm audit:bench-sections
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Verify generated goal-compliance matrix
+        run: pnpm check:goal-compliance
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Validate source URL shape and access-date freshness
+        run: pnpm check:source-links
+      - name: Check calibration URL liveness when source material changed
+        if: >-
+          (github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true') &&
+          needs.change-scope.outputs.sources == 'true'
+        run: pnpm check:source-links:live
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Verify generated Worker types
+        run: pnpm types:worker
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Strict TypeScript typecheck
+        run: pnpm typecheck
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Lint
+        run: pnpm lint
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Build portal
+        run: pnpm build
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Share the verified portal build with browser acceptance
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: atlas-portal-dist-${{ github.run_id }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
+        name: Run Node content tests
+        run: pnpm test:content
+
+  draft-content:
+    name: Draft content feedback
+    needs: change-scope
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == true &&
+      (needs.change-scope.outputs.content == 'true' ||
+      needs.change-scope.outputs.sources == 'true' ||
+      needs.change-scope.outputs.apparatus == 'true')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: pnpm/action-setup@7088e561eb65bb68695d245aa206f005ef30921d # v4.1.0
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.13.0
           cache: pnpm
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
-      - name: Synchronize learner content
+      - name: Validate structural course contract and release inputs
+        run: pnpm validate:course:inputs
+      - name: Synchronize learner content from checked-in inputs
         run: pnpm sync:modules
-      - name: Verify generated content is committed
-        shell: bash
-        run: |
-          if [[ -n "$(git status --porcelain=v1 --untracked-files=all -- content/modules content/source-maps public/downloads)" ]]; then
-            echo "Generated learner artifacts are stale or uncommitted:"
-            git status --short --untracked-files=all -- content/modules content/source-maps public/downloads
-            exit 1
-          fi
-      - name: Lint
-        run: pnpm lint
-      - name: Build and test portal
-        run: pnpm test
+      - name: Verify generated course artifacts are committed
+        run: pnpm check:generated
+      - name: Verify generated goal-compliance matrix
+        run: pnpm check:goal-compliance
+      - name: Validate source URL shape and access-date freshness
+        run: pnpm check:source-links
+      - name: Run the content-focused feedback suite
+        run: pnpm test:content
+
+  apparatus:
+    name: Node apparatus validation
+    needs: [change-scope, portal]
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Satisfy required apparatus check for docs-only review
+        if: github.event_name == 'pull_request' && needs.change-scope.outputs.apparatus != 'true'
+        run: echo "No apparatus-affecting files changed; the required apparatus context is satisfied without running the suite."
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        uses: pnpm/action-setup@7088e561eb65bb68695d245aa206f005ef30921d # v4.1.0
+        with:
+          version: 11.9.0
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Reuse the portal build for apparatus checks
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: atlas-portal-dist-${{ github.run_id }}
+          path: dist/
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Run Node apparatus tests
+        run: pnpm test:apparatus
 
   teaching-models:
     name: Teaching models on Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    needs: [change-scope, portal]
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.draft == false
     timeout-minutes: 15
     strategy:
       fail-fast: false
@@ -58,22 +330,144 @@ jobs:
           - "3.12"
           - "3.14"
     steps:
-      - uses: actions/checkout@v4
+      - name: Satisfy required teaching-model checks for docs-only review
+        if: github.event_name == 'pull_request' && needs.change-scope.outputs.apparatus != 'true'
+        run: echo "No apparatus-affecting files changed; required Python contexts are satisfied without running the suites."
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - uses: pnpm/action-setup@v4
+          # Portal has already checked the same source head. The Python-only
+          # verifier/model suites do not need historical Git ancestry.
+          fetch-depth: 1
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        # This job is otherwise Python-only. Node is here for one step: the
+        # session-hash suite shells out to `bench-session-hash.mjs` to compare
+        # the Python and Node hashers against each other. Declared explicitly
+        # rather than relying on the runner image happening to ship a node --
+        # that version is unpinned and could change without notice, and the
+        # test now fails rather than skips when node is absent, so an
+        # undeclared dependency would surface as a confusing red build.
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.13.0
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Test the runtime teaching-model exercise verifier
+        run: python -m unittest discover -s scripts -p "test_verify_teaching_model_exercises.py"
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Verify discovered teaching-model suites execute reference-model code
+        run: python scripts/verify_teaching_model_exercises.py
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Verify the bounded M32 NumPy authoring observation
+        run: |
+          python -m pip install --disable-pip-version-check --only-binary=:all: numpy==2.3.5
+          python scripts/test_m32_numpy_layout_observation.py
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Run deterministic local teaching models
+        run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Run private preview teaching model inputs
+        run: python -m unittest discover -s content/course/reference-models -p "test_module26_reference.py"
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Execute the bench packs
+        # Notebooks are generated in place so each bench keeps its pack directory
+        # on sys.path and can import its shared _fixture. Runs with exercises
+        # UNSOLVED by design: this gates the bench's machinery, not a learner's
+        # answers, so an unattempted check reports rather than fails.
+        run: |
+          python -m pip install --disable-pip-version-check --only-binary=:all: \
+            jupytext==1.19.* nbmake==1.5.* pytest matplotlib
+          python -m jupytext --to ipynb benches/src/m*/s*.py
+          MPLBACKEND=Agg python -m pytest --nbmake benches/src \
+            --nbmake-kernel=python3 --nbmake-timeout=300 -q
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Verify generated bench notebooks match their sources
+        # Must run in this job, after the jupytext step above. Notebooks are
+        # generated rather than committed, so in any job that has not generated
+        # them this finds nothing and exits 0 -- green because it did no work.
+        # It sat in the portal job, which never runs jupytext, and would have
+        # reported success on an empty set. The script now also fails when it
+        # sees fewer notebooks than sources, so that arrangement cannot recur
+        # quietly. Invoked through node directly: the script uses only node
+        # builtins, and this job has no pnpm install.
+        run: node scripts/check-bench-notebooks.mjs
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Check the Python and Node session hashers still agree
+        # Python writes `sessionSha256` into every bench record and
+        # `check:bench-sync` verifies it, so the two implementations must hash
+        # identical bytes. Both have broken silently: once on the heading form
+        # (`## 2. Session 1` vs `## Session 1`), once on which file is canonical
+        # (M31-M36 live under content/authoring/, with content/modules/ a mirror).
+        # Neither raised an error -- they returned a wrong answer that agreed with
+        # nothing, so only a cross-language comparison catches them.
+        run: MPLBACKEND=Agg python -m pytest benches/tests -q
+
+  browser-accessibility:
+    name: Browser accessibility acceptance
+    runs-on: ubuntu-latest
+    needs: [change-scope, portal]
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.draft == false
+    timeout-minutes: 25
+    steps:
+      - name: Satisfy required browser check for docs-only review
+        if: github.event_name == 'pull_request' && needs.change-scope.outputs.browser != 'true'
+        run: echo "No browser-affecting files changed; the required browser context is satisfied without Chromium."
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          # The portal gate has already verified history-dependent evidence.
+          # Browser acceptance only needs the exact checked-out source tree.
+          fetch-depth: 1
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        uses: pnpm/action-setup@7088e561eb65bb68695d245aa206f005ef30921d # v4.1.0
         with:
           version: 11.9.0
-      - uses: actions/setup-node@v4
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.13.0
           cache: pnpm
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install locked dependencies
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Install locked dependencies
         run: pnpm install --frozen-lockfile
-      - name: Synchronize local models
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Validate structural course contract and release inputs
+        run: pnpm validate:course:inputs
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Synchronize learner content from checked-in inputs
         run: pnpm sync:modules
-      - name: Run deterministic local teaching models
-        run: python -m unittest discover -s public/downloads -p "test_module*_reference.py"
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Verify generated course artifacts are committed
+        run: pnpm check:generated
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Verify generated goal-compliance matrix
+        run: pnpm check:goal-compliance
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Reuse the portal build from the quality gate
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: atlas-portal-dist-${{ github.run_id }}
+          path: dist/
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Install Chromium for browser acceptance
+        run: pnpm exec playwright install --with-deps chromium
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.browser == 'true'
+        name: Exercise the production portal in Chromium
+        run: pnpm test:browser:ci
+      - name: Upload browser acceptance evidence on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-browser-accessibility-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7

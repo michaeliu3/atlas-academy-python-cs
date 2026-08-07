@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m27",
+  "purpose": "Freeze a module-specific M27 Teaching Assistant, Study Partner, and canonical M06 handoff for future human review without changing M27's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/26",
+    "digest": "sha256:d443c81aa543601b2750512165e14e9f053fe48a190710b07c6adc210df12207"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected discrete claim. Ask for its domain, quantifier order or recurrence bases, and the smallest finite trace before asking for a proof or conclusion.",
+    "artifactFocus": "Ask the learner to make one definition and assumption visible, repair one proof or code trace, name one countermodel or enumeration boundary, and separate what the evidence supports from what it cannot decide.",
+    "repairMove": "Ask for a prediction before correction; change exactly one quantifier, base case, invariant, graph edge, matching variant, or modular precondition; then offer the smallest hint or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: define notation, render a short proof or labelled code trace, give a plain-language fallback, and rehearse one claim-to-assumption-to-boundary chain at a time.",
+    "changedPremise": "Change one domain, quantifier order, base case, invariant, recurrence condition, graph edge, or divisibility condition. Ask for a prediction before looking at a counterexample, finite enumeration, trace, or theorem condition.",
+    "taHandoff": "End with the learner's selected claim card, attempted proof or trace, confidence, unresolved misconception, one counterexample or finite limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m06",
+    "carryArtifact": "Carry a discrete reasoning card: domain, definition, assumptions, proof or finite trace, smallest counterexample boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before choosing an array, linked, stack, queue, iterator, or graph representation in M06, what invariant, equality rule, ownership boundary, operation model, and counterexample would make the claim testable?",
+    "boundary": "M06 is the only canonical forward handoff. References to M28–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

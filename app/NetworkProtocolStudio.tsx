@@ -7,6 +7,12 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { getBrowserProgressStorage } from "@/lib/browser-progress-storage";
+import {
+  clearModule20Progress,
+  persistModule20Progress,
+  restoreModule20Progress,
+} from "@/lib/module20-progress-codec";
 import styles from "./NetworkProtocolStudio.module.css";
 
 type ProtocolView =
@@ -27,7 +33,6 @@ type StudioRecord = Record<ProtocolView, ViewRecord>;
 
 const CENTRAL_INVARIANT =
   "Every Atlas remote publication operation has one stable operation ID and canonical request digest. The client records the name-resolution and endpoint-attempt boundary, sends only a complete declared request framing, and never infers remote receipt, parsing, decision, commit, or acknowledgement from a local send, connection close, timeout, or retry. The server admits a complete valid request, records one decision for the pair (operation ID, request digest) before returning a response, replays that decision for an identical duplicate, and rejects reuse of the operation ID with a different digest. Only a valid matching response or a subsequent declared status lookup can confirm the server's recorded decision; every ambiguous client outcome remains explicitly UNKNOWN until resolved.";
-const STUDIO_STORAGE_KEY = "atlas-academy.module20-protocol-studio.v1";
 
 const views: ReadonlyArray<{
   id: ProtocolView;
@@ -72,6 +77,42 @@ const views: ReadonlyArray<{
     question: "Can you catch the first unsupported claim?",
   },
 ];
+
+const predictionChoices: Record<
+  ProtocolView,
+  ReadonlyArray<{ id: string; label: string }>
+> = {
+  naming: [
+    { id: "candidate", label: "The local resolver API returned endpoint candidates the client may attempt." },
+    { id: "reachable", label: "Atlas is reachable at a verified server." },
+    { id: "identity", label: "The address and port authenticate the Atlas service." },
+  ],
+  framing: [
+    { id: "frame", label: "Emit only after the declared header and whole bounded body are present." },
+    { id: "chunk", label: "Treat each receive chunk as one request." },
+    { id: "eof", label: "Use EOF as the body delimiter for any partial frame." },
+  ],
+  evidence: [
+    { id: "unknown", label: "UNKNOWN: timeout without matching response leaves remote effect unresolved." },
+    { id: "rollback", label: "NOT_COMMITTED: no client response proves the server did nothing." },
+    { id: "published", label: "PUBLISHED: TCP reliability proves the domain decision." },
+  ],
+  http: [
+    { id: "atlas", label: "Atlas must define ID scope, digest binding, replay/conflict, retention, and correlation." },
+    { id: "post", label: "POST automatically makes duplicate operations safe." },
+    { id: "key", label: "A header name alone makes exactly-once universal." },
+  ],
+  retry: [
+    { id: "same", label: "Retry the same operation ID with the same canonical digest, or query declared status." },
+    { id: "new", label: "Create a new ID because the timeout proves no first operation occurred." },
+    { id: "changed", label: "Reuse the ID but change its digest so the server treats it as fresh." },
+  ],
+  audit: [
+    { id: "timeout", label: "“publish never reached the server” is unsupported after timeout/non-200." },
+    { id: "framework", label: "Using a client library is always an unsupported claim." },
+    { id: "boolean", label: "Returning a boolean is syntactically invalid Python." },
+  ],
+};
 
 const frameCases: Record<
   FrameCase,
@@ -190,32 +231,6 @@ function panelId(view: ProtocolView) {
   return `network-protocol-panel-${view}`;
 }
 
-function isStudioRecord(value: unknown): value is StudioRecord {
-  if (!value || typeof value !== "object") return false;
-  return views.every((view) => {
-    const candidate = (value as Record<string, unknown>)[view.id];
-    if (!candidate || typeof candidate !== "object") return false;
-    const entry = candidate as Record<string, unknown>;
-    return (
-      (entry.choice === null || typeof entry.choice === "string") &&
-      (entry.confidence === null ||
-        entry.confidence === 1 ||
-        entry.confidence === 2 ||
-        entry.confidence === 3 ||
-        entry.confidence === 4) &&
-      typeof entry.revealed === "boolean"
-    );
-  });
-}
-
-function clearStoredStudio() {
-  try {
-    window.localStorage.removeItem(STUDIO_STORAGE_KEY);
-  } catch {
-    // The observatory remains usable when browser storage is unavailable.
-  }
-}
-
 type PredictionGateProps = {
   id: ProtocolView;
   prompt: string;
@@ -325,11 +340,7 @@ function NamingLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "candidate", label: "The local resolver API returned endpoint candidates the client may attempt." },
-          { id: "reachable", label: "Atlas is reachable at a verified server." },
-          { id: "identity", label: "The address and port authenticate the Atlas service." },
-        ]}
+        choices={predictionChoices.naming}
         id="naming"
         onChange={onChange}
         prompt="A resolver returns two address/port candidates. What is the strongest justified conclusion?"
@@ -414,11 +425,7 @@ function FramingLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "frame", label: "Emit only after the declared header and whole bounded body are present." },
-          { id: "chunk", label: "Treat each receive chunk as one request." },
-          { id: "eof", label: "Use EOF as the body delimiter for any partial frame." },
-        ]}
+        choices={predictionChoices.framing}
         id="framing"
         onChange={onChange}
         prompt="What rule allows an Atlas parser to emit a payload from a TCP-like byte stream?"
@@ -531,11 +538,7 @@ function EvidenceLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "unknown", label: "UNKNOWN: timeout without matching response leaves remote effect unresolved." },
-          { id: "rollback", label: "NOT_COMMITTED: no client response proves the server did nothing." },
-          { id: "published", label: "PUBLISHED: TCP reliability proves the domain decision." },
-        ]}
+        choices={predictionChoices.evidence}
         id="evidence"
         onChange={onChange}
         prompt="A client deadline expires after a local send, before any valid matching response. What is the strongest outcome?"
@@ -585,11 +588,7 @@ function HttpLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "atlas", label: "Atlas must define ID scope, digest binding, replay/conflict, retention, and correlation." },
-          { id: "post", label: "POST automatically makes duplicate operations safe." },
-          { id: "key", label: "A header name alone makes exactly-once universal." },
-        ]}
+        choices={predictionChoices.http}
         id="http"
         onChange={onChange}
         prompt="HTTP gives method/status/representation semantics. What must Atlas still declare for a safe publication retry rule?"
@@ -648,11 +647,7 @@ function RetryLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "same", label: "Retry the same operation ID with the same canonical digest, or query declared status." },
-          { id: "new", label: "Create a new ID because the timeout proves no first operation occurred." },
-          { id: "changed", label: "Reuse the ID but change its digest so the server treats it as fresh." },
-        ]}
+        choices={predictionChoices.retry}
         id="retry"
         onChange={onChange}
         prompt="Atlas timed out after an ambiguous attempt. The intended request has not changed. What action preserves the original operation?"
@@ -703,11 +698,7 @@ function AuditLab({
   return (
     <div className={styles.viewStack}>
       <PredictionGate
-        choices={[
-          { id: "timeout", label: "“publish never reached the server” is unsupported after timeout/non-200." },
-          { id: "framework", label: "Using a client library is always an unsupported claim." },
-          { id: "boolean", label: "Returning a boolean is syntactically invalid Python." },
-        ]}
+        choices={predictionChoices.audit}
         id="audit"
         onChange={onChange}
         prompt="Which is the first unsupported inference in this generated patch?"
@@ -716,7 +707,7 @@ function AuditLab({
       {record.revealed && (
         <section className={styles.revealCard} aria-live="polite">
           <div className={styles.auditSplit}>
-            <pre aria-label="Generated patch to audit"><code>{`def publish(snapshot):
+            <pre aria-label="Scrollable generated patch to audit" tabIndex={0}><code>{`def publish(snapshot):
     response = requests.post(URL, json=snapshot, timeout=1)
     if response.status_code != 200:
         logger.error("publish never reached the server: %s", snapshot)
@@ -739,7 +730,7 @@ function AuditLab({
               <span>scope-labelled model evidence</span>
               <small>synthetic · no external connection</small>
             </header>
-            <pre><code>{`{
+            <pre aria-label="Scrollable scoped model evidence JSON" tabIndex={0}><code>{`{
   "attempt": {"classification": "UNKNOWN", "evidence_scope": "CLIENT_OBSERVATION"},
   "endpoint_attempt": {"candidate": "model://atlas-primary", "evidence_scope": "PROTOCOL_MODEL"},
   "server_local": {"decision": "PUBLISHED", "evidence_scope": "SERVER_DECISION"},
@@ -761,21 +752,19 @@ export function NetworkProtocolStudio() {
   const [resetArmed, setResetArmed] = useState(false);
   const [storageReady, setStorageReady] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const progressStorageRef = useRef<ReturnType<typeof getBrowserProgressStorage>>(null);
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => {
       try {
-        const stored = window.localStorage.getItem(STUDIO_STORAGE_KEY);
+        const storage = getBrowserProgressStorage();
+        progressStorageRef.current = storage;
+        const stored = storage ? restoreModule20Progress(storage) : null;
         if (stored) {
-          const parsed = JSON.parse(stored);
-          if (isStudioRecord(parsed)) {
-            setRecord(parsed);
-          } else {
-            clearStoredStudio();
-          }
+          setRecord(stored as StudioRecord);
         }
       } catch {
-        clearStoredStudio();
+        // Progress is optional; the protocol observatory remains usable in memory.
       } finally {
         setStorageReady(true);
       }
@@ -786,7 +775,8 @@ export function NetworkProtocolStudio() {
   useEffect(() => {
     if (!storageReady) return;
     try {
-      window.localStorage.setItem(STUDIO_STORAGE_KEY, JSON.stringify(record));
+      const storage = progressStorageRef.current;
+      if (storage) persistModule20Progress(storage, record);
     } catch {
       // Progress remains in memory when storage is unavailable or full.
     }
@@ -841,7 +831,9 @@ export function NetworkProtocolStudio() {
       return;
     }
     const fresh = emptyRecord();
-    clearStoredStudio();
+    const storage = progressStorageRef.current ?? getBrowserProgressStorage();
+    progressStorageRef.current = storage;
+    if (storage) clearModule20Progress(storage);
     setRecord(fresh);
     setFrameCase("split");
     setFrameStep(0);

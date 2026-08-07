@@ -31,11 +31,15 @@
   writing a small amount of code. They read a deliberately flawed patch and
   explain its authority escalation. They are not asked to construct exploits
   or a generic "sandbox."
-- **Safety boundary:** all exercises use short inert strings, deterministic
-  local fixtures, immutable records, and fake narrow capabilities. The module
-  performs no process, filesystem, shell, database, network, package,
-  credential, browser, or remote-code operation. It never executes
-  learner-supplied text as Python.
+- **Safety boundary:** the bounded evaluator and reference-model execution
+  path use short inert strings, deterministic local fixtures, immutable
+  records, and fake narrow capabilities. They perform no process, filesystem,
+  shell, database, network, package, credential, browser, or remote-code
+  operation, and never execute learner-supplied text as Python. A separate
+  downloadable test harness reads its checked-in model source for a static
+  prohibition check, and the optional fixed-scenario CLI writes bounded
+  help/result text to standard output. Those are bounded local test/CLI I/O,
+  not external effects; the CLI accepts no arbitrary query text.
 - **Copyright policy:** explanations, diagrams, language grammars, fixtures,
   code, diagnostics, and assessments are original. Link and paraphrase
   external sources; do not copy substantial prose, diagrams, slides,
@@ -44,6 +48,13 @@
 This is an authoring boundary, not the learner-facing workbook. It defines
 what Module 23 may claim, the evidence required for those claims, and the
 limits it must label explicitly.
+
+- **Delivery boundary:** this canonical map is a checked-in, hashable
+  authoring input, not a configured Module 23 learner `/downloads` artifact.
+  The current workbook exposes its local reference model, behavioral tests,
+  and selected primary-source links; it does not provide this detailed map as
+  a learner download. That packaging fact is not evidence of human review,
+  contract approval, release, deployment, or learner mastery.
 
 ---
 
@@ -81,8 +92,11 @@ The module has two deliberately connected languages:
    loops, reflection, serialization, file paths, URLs, commands, and host
    names. A successful parse is still only a shaped request. It can read one
    fixed metric vocabulary only after an authenticated/authorized request has
-   minted a fixed-scope `ReadLearningMetric` capability. The reference model
-   does not issue real capabilities or perform I/O.
+   minted a fixed-scope `ReadLearningMetric` capability. The evaluator reads
+   only its immutable fixture snapshot and does not issue real capabilities or
+   perform external I/O. Its fixed CLI emits a closed packet to standard
+   output, and its behavioral tests may read the checked-in source for a
+   structural check.
 
 The second language prevents a common pedagogical failure: teaching `eval`,
 `exec`, `compile`, or a filtered `__builtins__` dictionary as a convenient
@@ -335,11 +349,15 @@ reveal → explanation, not a passive slide deck.
    decide the earliest layer that rejects each local fixture. The capability
    cannot be named or selected by query text.
 6. **Trusted-source compilation bridge** — For a fixed, bundled Python
-   snippet only, align source → `ast` summary → `compile`/code-object idea →
-   a `dis` excerpt. Every panel carries `CPython / Python-version-specific
-   observation`, and a final card says bytecode is not portable language
-   semantics. No custom input, arbitrary Python evaluator, or runnable code
-   box exists in this view.
+   snippet only, align source → `ast` summary → code-object idea → a `dis`
+   observation. The downloadable bridge parses the fixed text, then inspects
+   a separately defined matching function's existing code object; it does not
+   compile the displayed source at bridge time. The static studio card is an
+   illustrative, not a captured, disassembly; an actual observation must name
+   its local Python implementation and version (and say CPython only when
+   that is the recorded implementation). A final card says bytecode is not
+   portable language semantics. No custom input, arbitrary Python evaluator,
+   or runnable code box exists in this view.
 
 ### Accessibility/reading requirements
 
@@ -408,7 +426,7 @@ valid.
 | [PEP 544 — Protocols](https://peps.python.org/pep-0544/) and [PEP 647 — User-Defined Type Guards](https://peps.python.org/pep-0647/) | Structural typing and static narrowing concepts used to explain contracts. | Neither makes an external runtime claim true or grants capability. |
 | Python 3.14 [`resource`](https://docs.python.org/3.14/library/resource.html) | OS-level resource measurement/limits exist, but availability/resources are system-dependent. | Do not make Unix-only `resource` calls a portable model requirement or claim logical fuel equals OS containment. |
 | Python 3.14 [`sys.addaudithook`](https://docs.python.org/3.14/library/sys.html#sys.addaudithook) and [PEP 578](https://peps.python.org/pep-0578/) | Audit hooks are visibility/monitoring tools; Python docs and PEP explicitly reject treating them as a general sandbox. | Do not build an audit-hook-based evaluator or rely on hooks as an enforcement boundary. |
-| [CPython grammar source](https://github.com/python/cpython/blob/main/Grammar/python.gram), [compiler entry point](https://github.com/python/cpython/blob/main/Python/bltinmodule.c), and [CPython `dis` docs source](https://github.com/python/cpython/blob/main/Doc/library/dis.rst) | Optional trusted code-reading bridge: grammar source and `compile` path show why actual implementation detail must be version-labelled. | Never require learners to infer behavior from main-branch source; pin excerpts to a cited revision/version or use public docs. |
+| [CPython grammar source, v3.14.6](https://github.com/python/cpython/blob/v3.14.6/Grammar/python.gram), [compiler entry point, v3.14.6](https://github.com/python/cpython/blob/v3.14.6/Python/bltinmodule.c), and [CPython `dis` docs source, v3.14.6](https://github.com/python/cpython/blob/v3.14.6/Doc/library/dis.rst) | Optional trusted code-reading bridge: grammar source and `compile` path show why actual implementation detail must be version-labelled. | Do not require learners to infer behavior from a moving branch; these links are pinned to the documented 3.14.6 snapshot, and any copied excerpt still needs a file-specific notice review. |
 
 ### University material: pedagogy and sequence only
 
@@ -437,7 +455,7 @@ valid.
 | L8 | `ast.literal_eval` avoids arbitrary Python code execution but can consume excessive memory/CPU or C stack; Python does not recommend it for untrusted data. | Python [`ast.literal_eval`](https://docs.python.org/3.14/library/ast.html#ast.literal_eval). | **Prohibition:** not the Atlas boundary; limits must precede our own parsing. |
 | L9 | Python type annotations are not runtime-enforced; type system aims primarily at static analysis and Python remains dynamically typed. | Python [`typing`](https://docs.python.org/3.14/library/typing.html), [type-system specification](https://typing.python.org/en/latest/spec/type-system.html). | Separate static communication from runtime contracts/policy. |
 | L9a | Annotation introspection can itself be an evaluation boundary in modern Python; annotations are not automatically inert comments. | Python [annotations reference](https://docs.python.org/3.14/reference/compound_stmts.html#annotations), [PEP 649](https://peps.python.org/pep-0649/), [PEP 749](https://peps.python.org/pep-0749/), and [`annotationlib`](https://docs.python.org/3.14/library/annotationlib.html). | Do not introspect/evaluate untrusted annotations in the reference model. |
-| L10 | CPython bytecode observed through `dis` is explicitly an implementation detail that can change across versions and VMs. | Python [`dis`](https://docs.python.org/3.14/library/dis.html). | **CPython/version-specific observation**; no bytecode-as-semantics claims. |
+| L10 | Bytecode observed through `dis` is explicitly an implementation detail that can change across versions and implementations. | Python [`dis`](https://docs.python.org/3.14/library/dis.html). | **Local implementation/version-specific observation**; say CPython only when the recorded runtime is CPython, and make no bytecode-as-semantics claim. |
 | L11 | OS resource limits are available through `resource` on Unix, are system-dependent, and differ from in-language logical budgets. | Python [`resource`](https://docs.python.org/3.14/library/resource.html). | Model fuel/depth/size independently; defer host enforcement to systems design. |
 | L12 | Python audit hooks support observation and may be bypassed/disabled by malicious code; documentation says they are not suitable as a sandbox. | Python [`sys.addaudithook`](https://docs.python.org/3.14/library/sys.html#sys.addaudithook), [PEP 578](https://peps.python.org/pep-0578/). | **Prohibition:** no audit-hook sandbox claim. |
 | L13 | An authenticator/policy decision from M22 must still be scoped to subject/action/resource/tenant/purpose; grammar acceptance adds no such fact. | Module 22 course invariant plus this module’s original evaluator contract. | **Atlas teaching contract**; use fake policy fixture only. |
@@ -484,9 +502,12 @@ fixed local request fixture
 
 ### Required reference-model seams
 
-The executable local model should be standard-library-light and deterministic.
-It should avoid all real I/O and side effects. A suitable public contract
-contains the following pure seams (names may differ):
+The executable query evaluator should be standard-library-light and
+deterministic. It uses immutable in-memory fixtures and has no external I/O or
+side effects. This constraint does not describe the surrounding CLI/test
+harness: the fixed CLI writes a closed evidence packet to standard output, and
+a structural test reads the checked-in model source. A suitable public
+evaluator contract contains the following pure seams (names may differ):
 
 | Seam | Input | Output | Non-negotiable invariant |
 |---|---|---|---|
@@ -514,8 +535,8 @@ The eventual model/tests should contain a compact but broad matrix such as:
 | Capability | A permitted request sees only its fixed scope/vocabulary; unsupported operation cannot choose a function/adapter through query text. | The evaluator receives narrow authority rather than discovering ambient authority. |
 | Resource bounds | Token count, AST node/depth, recursion/fuel, aggregate cardinality, and result rendering cap each produce distinct deterministic tagged outcomes. | Avoid a single opaque "safe" claim. |
 | Evidence | Every scenario emits a closed, redacted, version-labelled local evidence record without raw query/record/capability data. | Preserve privacy and epistemic limits. |
-| Static structural check | Model source contains no `eval(`, `exec(`, `compile(`, `ast.literal_eval`, `pickle`, `marshal`, `subprocess`, filesystem, socket/HTTP/database, import execution, or user-callable adapter path. | Fails closed against regression in the teaching model; not evidence about arbitrary production code. |
-| Compilation bridge | Trusted hard-coded source produces an AST/code/disassembly observation only with Python/CPython version label; tests do not assert exact opcode sequences across versions. | Reinforce language-spec versus implementation evidence. |
+| Static structural check | The test harness reads the checked-in model source and rejects `eval(`, `exec(`, `compile(`, `ast.literal_eval`, `pickle`, `marshal`, `subprocess`, filesystem, socket/HTTP/database, import execution, or user-callable adapter paths. | Fails closed against regression in the teaching model; not evidence about arbitrary production code. |
+| Compilation bridge | Fixed trusted text produces an AST observation, while a separately defined matching function supplies the code-object/`dis` observation; the bridge does not compile the displayed source at bridge time. Any actual instruction list names the local Python implementation/version; tests do not assert exact opcode sequences across versions. | Reinforce language-spec versus implementation evidence. |
 
 ### Completion criteria for the Atlas checkpoint
 
@@ -645,7 +666,8 @@ TA escalation clues:
   contract executable.
 - [ ] Type-hint material clearly says static analysis is primary and runtime
   checks are separate.
-- [ ] CPython bytecode cards include the exact Python version and caveat.
+- [ ] Actual bytecode cards include the exact local Python implementation and
+  version plus a caveat; illustrative cards say they are not captured output.
 - [ ] HTML visuals have keyboard, focus, contrast, motion, and text-equivalent
   support.
 - [ ] Links/licenses are verified and external sources are paraphrased rather

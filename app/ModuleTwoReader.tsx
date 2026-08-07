@@ -128,7 +128,7 @@ export function ModuleTwoReader({
       <section className="reader-section">
         <span className="margin-label">Trace</span>
         <h2>Calls descend. Results return.</h2>
-        <pre>
+        <pre aria-label="Scrollable recursive Python example" tabIndex={0}>
           <code>{`def total_minutes(note: Note) -> int:
     subtotal = note.minutes
     for child in note.children:

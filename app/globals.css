@@ -63,6 +63,17 @@ main {
   overflow: hidden;
 }
 
+.portal-view-status {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .site-header {
   align-items: center;
   backdrop-filter: blur(18px);
@@ -421,6 +432,7 @@ main {
   align-items: center;
   background: var(--saffron);
   border-radius: 50%;
+  color: var(--ink);
   display: flex;
   flex-direction: column;
   height: 8rem;
@@ -950,6 +962,11 @@ pre {
   margin: 2rem 0;
   overflow-x: auto;
   padding: 1.4rem;
+}
+
+pre:focus-visible {
+  outline: 3px solid #e7b271;
+  outline-offset: -3px;
 }
 
 .object-graph {
@@ -3942,6 +3959,33 @@ main.module-library-shell {
   max-width: 760px;
 }
 
+.library-boundary {
+  background: rgba(118, 84, 127, 0.08);
+  border-left: 3px solid var(--plum);
+  display: grid;
+  gap: 0.45rem;
+  line-height: 1.55;
+  margin: 2rem 0 -1.5rem;
+  max-width: 760px;
+  padding: 1rem 1.2rem;
+}
+
+.library-boundary strong {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.library-boundary span {
+  color: var(--muted);
+  font-family: var(--font-serif), serif;
+}
+
+.library-boundary a {
+  color: var(--cobalt);
+  font-weight: 700;
+}
+
 .library-measures {
   border-top: 1px solid var(--line);
   display: grid;
@@ -4391,6 +4435,150 @@ main.module-library-shell {
   text-transform: uppercase;
 }
 
+.module-effort-boundary {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0.85rem 0 0;
+  max-width: 48rem;
+}
+
+.module-availability-notice {
+  background: linear-gradient(135deg, rgba(49, 87, 164, 0.08), rgba(199, 124, 42, 0.11));
+  border: 1px solid rgba(49, 87, 164, 0.34);
+  margin: 2rem 0 0;
+  max-width: 54rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.module-availability-notice h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.module-availability-notice p:not(.kicker) {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 45rem;
+}
+
+.module-availability-notice a {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 750;
+  margin-top: 1rem;
+  text-underline-offset: 0.24em;
+}
+
+.module-interaction-route,
+.module-studio-loading {
+  border-left: 3px solid var(--saffron);
+  margin: 2rem 0 0;
+  max-width: 54rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.module-interaction-route {
+  background: rgba(199, 124, 42, 0.07);
+}
+
+.module-interaction-route h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.12;
+  margin: 0.35rem 0 0.55rem;
+}
+
+.module-interaction-route p:not(.kicker),
+.module-studio-loading p:not(.kicker) {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 44rem;
+}
+
+.module-interaction-route a {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 750;
+  margin-top: 0.8rem;
+  text-underline-offset: 0.24em;
+}
+
+.module-session-launches {
+  border-top: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+}
+
+.module-session-launches-intro {
+  color: var(--ink) !important;
+  font-size: 0.92rem;
+  max-width: 52rem !important;
+}
+
+.module-session-launches ol {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+}
+
+.module-session-launches li {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid color-mix(in srgb, var(--ink) 13%, transparent);
+  border-radius: 0.4rem;
+  min-width: 0;
+  padding: 0.7rem 0.75rem;
+}
+
+.module-session-launches li > a {
+  color: var(--ink);
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.module-session-launches li > a span {
+  color: var(--plum);
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.16rem;
+  text-transform: uppercase;
+}
+
+.module-session-launches li p {
+  color: var(--muted) !important;
+  font-size: 0.79rem;
+  line-height: 1.42;
+  margin: 0.46rem 0 0;
+}
+
+.module-session-launches li .module-session-output {
+  color: var(--ink) !important;
+}
+
+.module-session-start,
+.module-oral-defense-link {
+  margin-right: 1rem;
+}
+
+@media (max-width: 700px) {
+  .module-session-launches ol {
+    grid-template-columns: 1fr;
+  }
+}
+
 .module-sequence-nav {
   border-bottom: 1px solid var(--line);
   padding: 1.5rem 0;
@@ -4401,6 +4589,12 @@ main.module-library-shell {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.prerequisite-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
 }
 
 .prerequisite-link > span,
@@ -4416,6 +4610,25 @@ main.module-library-shell {
   color: var(--ink);
   font-size: 0.78rem;
   text-underline-offset: 0.24em;
+}
+
+.unavailable-course-reference {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.module-route-boundary {
+  border-left: 2px solid var(--saffron);
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+  max-width: 52rem;
+  padding-left: 0.8rem;
+}
+
+.module-route-boundary strong {
+  color: var(--ink);
 }
 
 .sequence-pair {
@@ -4445,6 +4658,12 @@ main.module-library-shell {
   font-family: var(--font-serif), serif;
   font-size: 0.92rem;
   font-weight: 540;
+}
+
+.sequence-link small {
+  color: var(--muted);
+  font-size: 0.64rem;
+  line-height: 1.35;
 }
 
 .sequence-next {
@@ -4499,12 +4718,18 @@ main.module-library-shell {
   margin: 0;
 }
 
+/*
+ * Navigation was set at 10–11px in `--muted`, whose contrast on this paper
+ * sits right at the 4.5:1 AA threshold — acceptable at body size, marginal at
+ * that scale. A larger size plus a darker resting colour keeps the hierarchy
+ * without relying on borderline contrast.
+ */
 .desktop-module-toc a,
 .mobile-module-toc a {
   border-left: 3px solid transparent;
-  color: var(--muted);
+  color: #4d564f;
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   line-height: 1.45;
   margin-left: -2px;
   padding: 0.42rem 0 0.42rem 0.8rem;
@@ -4513,7 +4738,7 @@ main.module-library-shell {
 
 .desktop-module-toc .toc-depth-3 a,
 .mobile-module-toc .toc-depth-3 a {
-  font-size: 0.62rem;
+  font-size: 0.74rem;
   padding-left: 1.55rem;
 }
 
@@ -4550,6 +4775,18 @@ main.module-library-shell {
   font-size: calc(1.08em * var(--reader-scale));
 }
 
+/*
+ * KaTeX ships its own fonts and depends on them for delimiter and radical
+ * metrics, so the family is left alone. What made formulas read as a foreign
+ * insert was optical size: KaTeX's 1.21em default sits noticeably larger than
+ * Newsreader's x-height. Inline math inherits the already-scaled font size of
+ * its paragraph, so only the ratio is corrected here — no second reader-scale
+ * multiplier, which would compound.
+ */
+.module-prose :is(p, li, dd, td, th, summary) .katex {
+  font-size: 1.04em;
+}
+
 .module-prose > :first-child {
   margin-top: 0;
 }
@@ -4563,26 +4800,33 @@ main.module-library-shell {
   scroll-margin-top: 155px;
 }
 
+/*
+ * Workbooks carry 14–46 `h2` and 61–154 `h3` each. At the previous display
+ * sizes (h2 up to 52px with an 88px top margin and a full-bleed rule) a module
+ * read as a stack of dividers rather than as continuous argument. These sizes
+ * still separate sections clearly at a 38rem measure without dominating it.
+ */
 .module-prose h2 {
   border-top: 1px solid var(--line);
-  font-size: calc(clamp(2.1rem, 4vw, 3.25rem) * var(--reader-scale));
-  font-weight: 470;
-  letter-spacing: -0.035em;
-  line-height: 1.03;
-  margin: 5.5rem 0 1.5rem;
-  padding-top: 1.5rem;
+  font-size: calc(clamp(1.75rem, 2.6vw, 2.25rem) * var(--reader-scale));
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 1.35rem;
 }
 
 .module-prose h3 {
-  font-size: calc(clamp(1.45rem, 2.5vw, 2rem) * var(--reader-scale));
-  font-weight: 520;
-  line-height: 1.15;
-  margin: 3.4rem 0 1.1rem;
+  font-size: calc(clamp(1.25rem, 1.9vw, 1.5rem) * var(--reader-scale));
+  font-weight: 560;
+  line-height: 1.25;
+  margin: 2.4rem 0 0.9rem;
 }
 
 .module-prose h4 {
-  font-size: calc(1.2rem * var(--reader-scale));
-  margin: 2.4rem 0 0.8rem;
+  font-size: calc(1.08rem * var(--reader-scale));
+  font-weight: 600;
+  margin: 1.9rem 0 0.7rem;
 }
 
 .module-prose h3.session-heading {
@@ -4616,13 +4860,27 @@ main.module-library-shell {
   opacity: 1;
 }
 
+/*
+ * Measure, not column width. The reading column stays wide enough for tables,
+ * code, and diagrams; running text is capped separately so a line lands near
+ * 70 characters instead of the ~90 a full-width 48rem column produced. The cap
+ * scales with the reader control so characters-per-line stays constant as the
+ * type grows.
+ */
+.module-prose p,
+.module-prose li,
+.module-prose dd,
+.module-prose blockquote {
+  max-width: calc(38rem * var(--reader-scale));
+}
+
 .module-prose p,
 .module-prose li,
 .module-prose dd {
   color: #38443d;
   font-family: var(--font-serif), serif;
-  font-size: calc(1.08rem * var(--reader-scale));
-  line-height: 1.76;
+  font-size: calc(1.12rem * var(--reader-scale));
+  line-height: 1.72;
 }
 
 .module-prose li + li {
@@ -4641,6 +4899,111 @@ main.module-library-shell {
 
 .module-prose strong {
   color: var(--ink);
+}
+
+/*
+ * Evidence labels — `**[THEOREM / PROOF]**`, `**[FINITE EXPERIMENT]**`,
+ * `**[AI PROPOSAL]**` — are the course's way of separating what a sentence
+ * establishes from what it asserts. Authors have coined ~118 distinct labels
+ * across ~300 uses, so the label text itself is not styled; each is classified
+ * into one of eight epistemic categories (see lib/evidence-label-taxonomy.mjs)
+ * and the category carries the colour. A newly coined label inherits a
+ * sensible treatment without a CSS change.
+ */
+.evidence-label {
+  background: var(--evidence-tint, var(--paper-deep));
+  border-left: 3px solid var(--evidence-accent, var(--ink));
+  border-radius: 0.2rem;
+  color: var(--evidence-ink, var(--ink));
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.66em;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  margin-right: 0.4em;
+  padding: 0.2em 0.5em;
+  vertical-align: 0.06em;
+}
+
+/* Established by argument from stated hypotheses. */
+.evidence-label-proof {
+  --evidence-accent: var(--moss);
+  --evidence-tint: var(--moss-soft);
+  --evidence-ink: #2f4636;
+}
+
+/* A declared construct: definition, model, hypothesis, mechanism. */
+.evidence-label-model {
+  --evidence-accent: var(--cobalt);
+  --evidence-tint: var(--cobalt-soft);
+  --evidence-ink: #1f3765;
+}
+
+/* Documented behaviour of something outside this course's control. */
+.evidence-label-contract {
+  --evidence-accent: var(--plum);
+  --evidence-tint: var(--plum-soft);
+  --evidence-ink: #4b3352;
+}
+
+/* Finite, situated evidence: it happened, under named conditions. */
+.evidence-label-observation {
+  --evidence-accent: var(--saffron);
+  --evidence-tint: var(--saffron-soft);
+  --evidence-ink: #6d4313;
+}
+
+/* A refutation. It should never read as one more supporting claim. */
+.evidence-label-counterexample {
+  --evidence-accent: var(--rose);
+  --evidence-tint: var(--rose-soft);
+  --evidence-ink: #713a3e;
+}
+
+/* A choice this project made, which could have been made differently. */
+.evidence-label-policy {
+  --evidence-accent: var(--ink);
+  --evidence-tint: var(--paper-deep);
+  --evidence-ink: #2b3630;
+}
+
+/* Unchecked machine output and declared gaps stay visibly provisional: a
+   dashed edge reads as "not settled" even in grayscale or at a glance. */
+.evidence-label-proposal {
+  --evidence-accent: var(--saffron);
+  --evidence-tint: transparent;
+  --evidence-ink: #6d4313;
+  border-left-style: dashed;
+  border-left-width: 3px;
+  box-shadow: inset 0 0 0 1px rgba(199, 124, 42, 0.35);
+}
+
+.evidence-label-unknown {
+  --evidence-accent: var(--muted);
+  --evidence-tint: transparent;
+  --evidence-ink: #4d564f;
+  border-left-style: dashed;
+  border-left-width: 3px;
+  box-shadow: inset 0 0 0 1px rgba(102, 112, 106, 0.3);
+}
+
+@media (forced-colors: active) {
+  .evidence-label {
+    border: 1px solid CanvasText;
+    border-left-width: 3px;
+  }
+}
+
+/*
+ * A claim/source pointer (`M32-C03 -> S32-03`) routes a claim to its entry in
+ * the module's research map. It is navigation, not an identifier and not an
+ * evidence label, so it gets a quieter treatment than either.
+ */
+.module-prose :not(pre) > code.claim-source-pointer {
+  background: transparent;
+  border: 1px dashed rgba(23, 33, 29, 0.28);
+  color: #4d564f;
+  font-size: 0.78em;
+  letter-spacing: 0.02em;
 }
 
 .module-prose a {
@@ -4700,10 +5063,10 @@ main.module-library-shell {
 
 .lesson-code figcaption {
   border-bottom: 1px solid rgba(244, 239, 228, 0.14);
-  color: #e7b271;
-  font-size: 0.6rem;
+  color: #eec08a;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   padding: 0.7rem 1.2rem;
   text-transform: uppercase;
 }
@@ -4715,7 +5078,7 @@ main.module-library-shell {
 }
 
 .lesson-code pre {
-  font-size: calc(0.78rem * var(--reader-scale));
+  font-size: calc(0.86rem * var(--reader-scale));
   max-height: 42rem;
 }
 
@@ -4734,9 +5097,15 @@ main.module-library-shell {
   outline-offset: 3px;
 }
 
+/*
+ * Tables are the primary teaching device in the mathematics and theory arc
+ * (10–18 per module, many carrying multi-sentence cells). They were set a
+ * quarter smaller than body prose, which put the densest content in the
+ * smallest type on the page.
+ */
 .module-prose table {
   border-collapse: collapse;
-  font-size: calc(0.82rem * var(--reader-scale));
+  font-size: calc(0.95rem * var(--reader-scale));
   min-width: 100%;
 }
 
@@ -4744,8 +5113,8 @@ main.module-library-shell {
 .module-prose td {
   border-bottom: 1px solid var(--line);
   border-right: 1px solid var(--line);
-  line-height: 1.55;
-  padding: 0.75rem 0.85rem;
+  line-height: 1.6;
+  padding: 0.7rem 0.8rem;
   text-align: left;
   vertical-align: top;
 }
@@ -4753,8 +5122,8 @@ main.module-library-shell {
 .module-prose th {
   background: var(--ink);
   color: var(--paper);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
+  font-size: calc(0.85rem * var(--reader-scale));
+  letter-spacing: 0.03em;
 }
 
 .module-prose tr:nth-child(even) td {
@@ -4791,12 +5160,223 @@ main.module-library-shell {
   margin-bottom: 1.2rem;
 }
 
-.mermaid-figure {
+.prediction-reveal-gate {
+  background: rgba(249, 242, 252, 0.7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--plum);
+  margin: 1.25rem 0 2.6rem;
+  padding: clamp(1rem, 3vw, 1.45rem);
+}
+
+.prediction-reveal-gate h4 {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  margin: 0.25rem 0 0.55rem;
+}
+
+.prediction-reveal-kicker {
+  color: var(--plum);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.prediction-reveal-gate fieldset {
+  border: 0;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.prediction-reveal-gate legend {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 0.55rem;
+}
+
+.prediction-choice-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prediction-choice-list label {
+  align-items: center;
+  background: rgba(255, 253, 247, 0.85);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  padding: 0.45rem 0.6rem;
+}
+
+.prediction-choice-list input {
+  accent-color: var(--plum);
+}
+
+.prediction-reveal-gate button {
+  margin-top: 0.35rem;
+}
+
+.prediction-reveal-gate button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.prediction-reveal-note {
+  color: var(--muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.prediction-reveal-gate .lesson-details {
+  margin-bottom: 0;
+  margin-top: 1.25rem;
+}
+
+.mermaid-figure,
+.atlas-figure {
   background: rgba(255, 253, 247, 0.72);
   border: 1px solid var(--line);
   border-radius: 1rem;
   margin: 2.5rem 0;
   overflow: hidden;
+}
+
+/*
+ * Atlas figures — plots, vector diagrams, and bar charts built from a
+ * declarative spec (lib/atlas-figure.mjs). Colour is carried by class rather
+ * than by presentation attributes so a figure inherits the course palette and
+ * stays legible under forced colours.
+ */
+.atlas-figure-canvas {
+  overflow-x: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.atlas-figure-canvas > p {
+  color: var(--rose);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.atlas-figure-canvas svg {
+  display: block;
+  font-family: var(--font-sans), sans-serif;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.atlas-figure-canvas svg text {
+  fill: var(--ink);
+}
+
+.atlas-figure-axis {
+  stroke: rgba(23, 33, 29, 0.55);
+  stroke-width: 1.25;
+}
+
+.atlas-figure-tick {
+  fill: #4d564f;
+  font-size: 12px;
+}
+
+.atlas-figure-axis-label {
+  fill: #38443d;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.atlas-figure-series-label,
+.atlas-figure-bar-value {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.atlas-figure-guide {
+  stroke: rgba(23, 33, 29, 0.4);
+  stroke-width: 1.25;
+}
+
+.atlas-figure-dashed {
+  stroke-dasharray: 5 4;
+}
+
+.atlas-figure-series {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.25;
+}
+
+.atlas-figure-series-fill {
+  opacity: 0.16;
+  stroke: none;
+}
+
+.atlas-figure-vector {
+  stroke-linecap: round;
+  stroke-width: 2.5;
+}
+
+.atlas-figure-point {
+  fill: var(--ink);
+}
+
+.atlas-figure-right-angle {
+  fill: none;
+  stroke: rgba(23, 33, 29, 0.7);
+  stroke-width: 1.5;
+}
+
+.atlas-figure-bar {
+  stroke: none;
+}
+
+/* Five tones, reused across every figure kind so a colour means the same thing
+   from one figure to the next. */
+.atlas-figure-tone-0 { stroke: var(--cobalt); }
+.atlas-figure-tone-1 { stroke: var(--saffron); }
+.atlas-figure-tone-2 { stroke: var(--moss); }
+.atlas-figure-tone-3 { stroke: var(--plum); }
+.atlas-figure-tone-4 { stroke: var(--rose); }
+
+.atlas-figure-vector-head.atlas-figure-tone-0,
+.atlas-figure-series-fill.atlas-figure-tone-0,
+.atlas-figure-bar.atlas-figure-tone-0 { fill: var(--cobalt); }
+.atlas-figure-vector-head.atlas-figure-tone-1,
+.atlas-figure-series-fill.atlas-figure-tone-1,
+.atlas-figure-bar.atlas-figure-tone-1 { fill: var(--saffron); }
+.atlas-figure-vector-head.atlas-figure-tone-2,
+.atlas-figure-series-fill.atlas-figure-tone-2,
+.atlas-figure-bar.atlas-figure-tone-2 { fill: var(--moss); }
+.atlas-figure-vector-head.atlas-figure-tone-3,
+.atlas-figure-series-fill.atlas-figure-tone-3,
+.atlas-figure-bar.atlas-figure-tone-3 { fill: var(--plum); }
+.atlas-figure-vector-head.atlas-figure-tone-4,
+.atlas-figure-series-fill.atlas-figure-tone-4,
+.atlas-figure-bar.atlas-figure-tone-4 { fill: var(--rose); }
+
+.atlas-figure-series-label.atlas-figure-tone-0 { fill: var(--cobalt); }
+.atlas-figure-series-label.atlas-figure-tone-1 { fill: #8a5415; }
+.atlas-figure-series-label.atlas-figure-tone-2 { fill: var(--moss); }
+.atlas-figure-series-label.atlas-figure-tone-3 { fill: var(--plum); }
+.atlas-figure-series-label.atlas-figure-tone-4 { fill: var(--rose); }
+
+.atlas-figure-vector-head,
+.atlas-figure-bar,
+.atlas-figure-series-fill {
+  stroke: none;
 }
 
 .diagram-canvas {
@@ -4813,10 +5393,44 @@ main.module-library-shell {
 }
 
 .diagram-canvas svg {
+  color: var(--ink);
   display: block;
+  font-family: var(--font-sans), sans-serif;
   height: auto;
   margin: 0 auto;
   max-width: 100%;
+  overflow: visible;
+}
+
+/* Mermaid's generated style block is intentionally removed before injection.
+   These fixed, app-owned rules preserve the core node/edge hierarchy without
+   letting authored diagram text introduce CSS or external URL loads. */
+.diagram-canvas svg .node rect,
+.diagram-canvas svg .node polygon,
+.diagram-canvas svg .node circle,
+.diagram-canvas svg .actor {
+  fill: var(--paper-deep);
+  stroke: var(--cobalt);
+  stroke-width: 1.25;
+}
+
+.diagram-canvas svg .edgePath .path,
+.diagram-canvas svg .flowchart-link,
+.diagram-canvas svg .messageLine0,
+.diagram-canvas svg .messageLine1 {
+  fill: none;
+  stroke: var(--plum);
+  stroke-width: 1.5;
+}
+
+.diagram-canvas svg marker path,
+.diagram-canvas svg marker polygon {
+  fill: var(--plum);
+  stroke: var(--plum);
+}
+
+.diagram-canvas svg text {
+  fill: var(--ink);
 }
 
 .mermaid-figure > figcaption {
@@ -4825,6 +5439,22 @@ main.module-library-shell {
   font-size: 0.65rem;
   line-height: 1.5;
   padding: 0.8rem 1rem;
+}
+
+.diagram-alternative {
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0.9rem 1rem;
+}
+
+.diagram-alternative strong {
+  color: var(--plum);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .diagram-source {
@@ -5626,7 +6256,7 @@ main.module-library-shell {
 
 .diagnostic-reveal-row button,
 .diagnostic-question-controls button:last-child,
-.diagnostic-result-actions > :not(.diagnostic-reset-action, p) {
+.diagnostic-result-actions > :not(.diagnostic-reset-action, p, .diagnostic-export-consent, .diagnostic-manual-copy-fallback) {
   background: var(--ink);
   border: 0;
   border-radius: 999px;
@@ -5641,7 +6271,7 @@ main.module-library-shell {
 
 .diagnostic-reveal-row button:hover:not(:disabled),
 .diagnostic-question-controls button:last-child:hover:not(:disabled),
-.diagnostic-result-actions > :not(.diagnostic-reset-action, p):hover {
+.diagnostic-result-actions > :not(.diagnostic-reset-action, p, .diagnostic-export-consent):hover {
   background: var(--cobalt);
 }
 
@@ -5851,18 +6481,152 @@ main.module-library-shell {
   line-height: 1.55;
 }
 
+.diagnostic-pace-choice {
+  background: linear-gradient(135deg, var(--plum-soft), rgb(255 255 255 / 48%));
+  border: 1px solid color-mix(in srgb, var(--plum) 32%, var(--line));
+  margin: 0 0 clamp(3.5rem, 7vw, 6rem);
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+}
+
+.diagnostic-pace-choice > header {
+  max-width: 48rem;
+}
+
+.diagnostic-pace-choice h2 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  font-weight: 540;
+  line-height: 1.08;
+  margin: 0.45rem 0 0.75rem;
+}
+
+.diagnostic-pace-choice > header > p:last-child,
+.diagnostic-pace-boundary,
+.diagnostic-pace-status {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  max-width: 52rem;
+}
+
+.diagnostic-pace-choice fieldset {
+  border: 0;
+  margin: 1.4rem 0 0;
+  padding: 0;
+}
+
+.diagnostic-pace-choice legend {
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 780;
+  line-height: 1.45;
+  max-width: 48rem;
+  padding: 0;
+}
+
+.diagnostic-pace-options {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.8rem;
+}
+
+.diagnostic-pace-option {
+  background: rgb(255 255 255 / 58%);
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  cursor: pointer;
+  display: flex;
+  gap: 0.65rem;
+  min-height: 12.5rem;
+  padding: 0.9rem;
+}
+
+.diagnostic-pace-option[data-selected="true"] {
+  background: var(--paper);
+  border-color: var(--plum);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--plum) 22%, transparent);
+}
+
+.diagnostic-pace-option:has(input:focus-visible) {
+  outline: 3px solid rgba(49, 87, 164, 0.5);
+  outline-offset: 3px;
+}
+
+.diagnostic-pace-option input {
+  accent-color: var(--plum);
+  flex: 0 0 auto;
+  margin: 0.2rem 0 0;
+}
+
+.diagnostic-pace-option > span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.diagnostic-pace-option strong {
+  font-family: var(--font-serif), serif;
+  font-size: 1.18rem;
+  font-weight: 560;
+  line-height: 1.1;
+}
+
+.diagnostic-pace-option small {
+  color: var(--plum);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 750;
+  line-height: 1.35;
+  margin-top: 0.38rem;
+  text-transform: uppercase;
+}
+
+.diagnostic-pace-option > span > span {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  margin-top: 0.8rem;
+}
+
+.diagnostic-pace-option em {
+  align-self: flex-start;
+  background: var(--plum);
+  color: var(--paper);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 780;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+  padding: 0.24rem 0.35rem;
+  text-transform: uppercase;
+}
+
+.diagnostic-pace-boundary {
+  border-top: 1px solid color-mix(in srgb, var(--ink) 15%, transparent);
+  margin: 1.1rem 0 0;
+  padding-top: 0.9rem;
+}
+
+.diagnostic-pace-status {
+  color: var(--ink);
+  font-weight: 680;
+  margin: 0.75rem 0 0;
+}
+
 .diagnostic-learning-route,
+.diagnostic-bridge-plan,
 .diagnostic-signal-ledger {
   border-top: 1px solid var(--line);
   padding: clamp(3.5rem, 7vw, 6rem) 0;
 }
 
 .diagnostic-learning-route > header,
+.diagnostic-bridge-plan > header,
 .diagnostic-signal-ledger > header {
   max-width: 760px;
 }
 
 .diagnostic-learning-route h2,
+.diagnostic-bridge-plan h2,
 .diagnostic-signal-ledger h2 {
   font-family: var(--font-serif), serif;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -5872,7 +6636,8 @@ main.module-library-shell {
   margin: 0.6rem 0 1rem;
 }
 
-.diagnostic-learning-route > header > p:last-child {
+.diagnostic-learning-route > header > p:last-child,
+.diagnostic-bridge-plan > header > p:last-child {
   color: var(--muted);
   font-family: var(--font-serif), serif;
   font-size: 1.05rem;
@@ -5880,6 +6645,7 @@ main.module-library-shell {
 }
 
 .diagnostic-learning-route ol,
+.diagnostic-bridge-plan ol,
 .diagnostic-signal-ledger > ol {
   list-style: none;
   margin: 2.5rem 0 0;
@@ -5915,11 +6681,90 @@ main.module-library-shell {
 }
 
 .diagnostic-learning-route li > a,
+.diagnostic-bridge-action > a,
 .diagnostic-transfer-note a {
   color: var(--ink);
   font-size: 0.7rem;
   font-weight: 780;
   text-underline-offset: 0.25em;
+}
+
+.diagnostic-bridge-plan > ol {
+  display: grid;
+  gap: 1rem;
+}
+
+.diagnostic-bridge-plan > ol > li {
+  align-items: start;
+  background: rgba(255, 253, 247, 0.72);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--plum);
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr);
+  padding: 1.25rem;
+}
+
+.diagnostic-bridge-area,
+.diagnostic-bridge-action > p:first-child {
+  color: var(--plum);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.63rem;
+  font-weight: 760;
+  letter-spacing: 0.06em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.diagnostic-bridge-plan h3 {
+  font-family: var(--font-serif), serif;
+  font-size: 1.28rem;
+  font-weight: 560;
+  line-height: 1.15;
+  margin: 0.45rem 0;
+}
+
+.diagnostic-bridge-plan li > div > p:last-child,
+.diagnostic-extension-boundary,
+.diagnostic-prerequisite-note {
+  font-size: 0.72rem;
+  line-height: 1.58;
+}
+
+.diagnostic-bridge-plan li > div > p:last-child:not(.diagnostic-extension-boundary):not(.diagnostic-prerequisite-note) {
+  color: var(--muted);
+}
+
+.diagnostic-extension-boundary,
+.diagnostic-prerequisite-note {
+  color: #4f5853;
+}
+
+.diagnostic-bridge-action {
+  border-left: 1px solid var(--line);
+  display: grid;
+  gap: 0.72rem;
+  padding-left: 1.15rem;
+}
+
+.diagnostic-bridge-action > a {
+  font-size: 0.72rem;
+  font-weight: 780;
+  text-underline-offset: 0.25em;
+}
+
+.diagnostic-extension-boundary {
+  background: var(--plum-soft);
+  border-left: 3px solid var(--plum);
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.diagnostic-prerequisite-note {
+  background: var(--saffron-soft);
+  border-left: 3px solid var(--saffron);
+  margin: 0;
+  padding: 0.75rem;
 }
 
 .diagnostic-transfer-note {
@@ -6049,10 +6894,57 @@ main.module-library-shell {
   gap: 0.75rem;
 }
 
-.diagnostic-result-actions > :not(p) {
+.diagnostic-result-actions > :not(p, .diagnostic-manual-copy-fallback) {
   align-items: center;
   display: inline-flex;
   justify-content: center;
+}
+
+.diagnostic-export-consent {
+  display: grid;
+  flex-basis: 100%;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: rgb(255 255 255 / 54%);
+}
+
+.diagnostic-export-consent legend {
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 820;
+  letter-spacing: 0.06em;
+  padding: 0 0.25rem;
+  text-transform: uppercase;
+}
+
+.diagnostic-export-consent label {
+  align-items: start;
+  display: flex;
+  gap: 0.65rem;
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.diagnostic-export-consent input {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
+}
+
+.diagnostic-export-consent p {
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.diagnostic-result-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
 }
 
 .diagnostic-result-actions .diagnostic-reset-action {
@@ -6073,6 +6965,41 @@ main.module-library-shell {
   font-size: 0.68rem;
   margin: 0.4rem 0 0;
   min-height: 1rem;
+}
+
+.diagnostic-learning-partners-handoff {
+  color: var(--ink);
+  flex-basis: 100%;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  margin: 0.2rem 0 0;
+}
+
+.diagnostic-manual-copy-fallback {
+  display: grid;
+  flex-basis: 100%;
+  gap: 0.45rem;
+  margin: 0.2rem 0 0;
+}
+
+.diagnostic-manual-copy-fallback label {
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.diagnostic-manual-copy-fallback textarea {
+  background: rgb(255 255 255 / 58%);
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  min-height: 11rem;
+  padding: 0.8rem;
+  resize: vertical;
+  width: 100%;
 }
 
 @media (max-width: 900px) {
@@ -6184,6 +7111,7 @@ main.module-library-shell {
 
   .diagnostic-confidence-fieldset > div,
   .diagnostic-tier-grid,
+  .diagnostic-pace-options,
   .diagnostic-signal-ledger dl {
     grid-template-columns: 1fr;
   }
@@ -6205,6 +7133,17 @@ main.module-library-shell {
   .diagnostic-learning-route li > a,
   .diagnostic-signal-heading > strong {
     grid-column: 2;
+  }
+
+  .diagnostic-bridge-plan > ol > li {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnostic-bridge-action {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 1rem;
   }
 
   .diagnostic-result-score {
@@ -6264,6 +7203,7 @@ main.module-library-shell {
 
   .diagnostic-tier-card,
   .diagnostic-learning-route li,
+  .diagnostic-bridge-plan > ol > li,
   .diagnostic-signal-ledger > ol > li,
   .diagnostic-result-caveat {
     background: transparent !important;
@@ -6275,6 +7215,249 @@ main.module-library-shell {
     content: " (" attr(href) ")";
     font-weight: 400;
     overflow-wrap: anywhere;
+  }
+
+  .diagnostic-bridge-action > a::after {
+    content: " (" attr(href) ")";
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Printable learner workbooks. The browser reader remains the canonical
+   accessible surface; these rules make its derived PDF legible and stable. */
+.print-module-shell {
+  background: #fff;
+  color: #17211d;
+  margin: 0 auto;
+  max-width: 920px;
+  padding: 2.5rem 3rem 4rem;
+}
+
+.print-module-header {
+  border-bottom: 2px solid #173d32;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+}
+
+.print-module-header h1 {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.print-module-meta {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.25rem 0 0;
+}
+
+.print-module-meta div {
+  border-left: 3px solid #d29b42;
+  padding-left: 0.7rem;
+}
+
+.print-module-meta dt {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.print-module-meta dd {
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.print-session-index {
+  background: #f1f7f4;
+  border: 1px solid #c6ded2;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+}
+
+.print-studio-companion {
+  background: #fff8ea;
+  border: 1px solid #e0c28f;
+  border-left: 4px solid #d29b42;
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+}
+
+.print-studio-companion h2 {
+  margin: 0.25rem 0 0.65rem;
+}
+
+.print-studio-companion p {
+  margin: 0.5rem 0;
+}
+
+.print-studio-companion ul {
+  margin-bottom: 0;
+}
+
+.print-handbook-section {
+  margin: 2rem 0;
+}
+
+.print-handbook-section h2 {
+  border-bottom: 1px solid #c9d6d0;
+  padding-bottom: 0.35rem;
+}
+
+.print-handbook-project-grid,
+.print-handbook-role-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.print-handbook-project-card,
+.print-handbook-role-card {
+  background: #f7faf8;
+  border: 1px solid #c9d6d0;
+  break-inside: avoid;
+  padding: 1rem;
+}
+
+.print-handbook-project-card h3,
+.print-handbook-role-card h3 {
+  margin-top: 0;
+}
+
+.print-handbook-project-card p,
+.print-handbook-role-card p {
+  margin: 0.45rem 0;
+}
+
+.print-handbook-boundary {
+  border-left: 4px solid #76547f;
+  padding-left: 1rem;
+}
+
+.print-session-index h2 {
+  margin-top: 0;
+}
+
+.print-session-index ol {
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.print-session-index li {
+  break-inside: avoid;
+  margin-bottom: 0.45rem;
+}
+
+.print-module-prose .lesson-code,
+.print-module-prose .mermaid-figure,
+.print-module-prose .lesson-callout,
+.print-module-prose table,
+.print-module-prose .lesson-details {
+  break-inside: avoid;
+}
+
+.print-module-prose .lesson-code pre,
+.print-module-prose .diagram-source pre {
+  max-height: none;
+  overflow: visible;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.print-module-prose .diagram-canvas {
+  min-height: 0;
+  overflow: visible;
+}
+
+.print-module-prose .diagram-canvas svg {
+  height: auto;
+  max-width: 100%;
+}
+
+.print-module-footer {
+  border-top: 1px solid #c9d6d0;
+  color: #43534c;
+  font-size: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 0.75rem;
+}
+
+@media print {
+  @page {
+    margin: 0.7in;
+    size: Letter;
+  }
+
+  .print-module-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .print-module-header,
+  .print-session-index,
+  .print-studio-companion,
+  .print-module-footer,
+  .print-module-prose .lesson-code,
+  .print-module-prose .mermaid-figure,
+  .print-module-prose .lesson-callout,
+  .print-module-prose table,
+  .print-module-prose .lesson-details {
+    break-inside: avoid;
+  }
+
+  .print-session-index {
+    background: #fff;
+  }
+
+  .print-session-index ol {
+    columns: 2;
+  }
+
+  .print-module-prose .diagram-source {
+    display: none;
+  }
+
+  .print-module-prose .heading-anchor {
+    display: none;
+  }
+
+  .print-module-prose a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .print-module-prose pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .print-module-prose th + th,
+  .print-module-prose td + td {
+    border-left: 1px solid #c9d6d0;
+  }
+
+  .print-module-prose td,
+  .print-module-prose th {
+    padding-left: 0.95rem;
+    padding-right: 0.95rem;
+  }
+
+  .print-handbook-project-grid,
+  .print-handbook-role-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .print-module-shell {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .print-module-meta,
+  .print-session-index ol {
+    columns: 1;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -6624,7 +7807,7 @@ main.module-library-shell {
   text-transform: uppercase;
 }
 
-.arc-four-module-rail button small.module-status-published {
+.arc-four-module-rail button small.module-status-open {
   color: var(--moss);
 }
 

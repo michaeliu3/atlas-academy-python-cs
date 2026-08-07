@@ -57,6 +57,9 @@ Do not measure success by number of tests, coverage percentage, log volume, or d
 ## 1. Position in the knowledge graph
 
 ```mermaid
+    %% atlas-diagram-id: m13-knowledge-graph
+    %% atlas-diagram-title: M13 prerequisites and forward connections
+    %% atlas-diagram-alt: Modules 3, 7, 10, 11, and 12 respectively supply behavioral contracts, partial-yield failure semantics, causal-path reasoning, finite independent evidence, and plugin boundaries to M13. M13 combines them into evidence and diagnosis, then connects forward to safe change, delivery contracts, repository suites, protocol observability, and async tracing.
 flowchart LR
     M3["M3 · contracts,<br/>pre/postconditions, invariants"] --> SPEC["behavioral specification"]
     M12["M12 · plugin API<br/>and dependency seam"] --> SPEC
@@ -75,6 +78,21 @@ flowchart LR
     M13 --> M20["M20 · protocol observability"]
     M13 --> M21["M21 · async failure and tracing"]
 ```
+
+### Text equivalent — specification to regression evidence loop
+
+Read the route from obligation to learning. M3 and M12 supply a behavioral
+contract and component seam; M7 determines what partial failure can escape;
+M10 supplies causal-path reasoning; and M11 supplies selected finite evidence
+and an independent verifier. M13 turns them into a precise specification,
+input/state partitions, a small evidence suite, a preserved symptom,
+competing hypotheses, the earliest justified repair, and a regression claim.
+
+The result then travels forward: M14 changes safely, M15 preserves delivery
+contracts, M16 tests durable boundaries, and M20/M21 extend observation to
+protocol and asynchronous failure. This is the complete nonvisual reading path
+for the knowledge graph; a passing test, trace, or log is still scoped evidence
+rather than a universal correctness verdict.
 
 ### The problem that forces this module
 
@@ -126,7 +144,7 @@ Turn the ambiguous importer into:
 
 ### Capabilities unlocked
 
-After mastery, Michael can:
+By the end, Michael can practice:
 
 - strengthen an ambiguous API into a precise, declarative contract;
 - compare stronger/weaker specifications by pre- and postconditions;
@@ -202,7 +220,7 @@ If five examples pass, what universal statement has been proved?
 
 ---
 
-## 3. Mastery outcomes
+## 3. Learning outcomes
 
 By the end, Michael can:
 
@@ -601,6 +619,9 @@ Do not collapse them.
 ### Investigation loop
 
 ```mermaid
+    %% atlas-diagram-id: m13-debugging-belief-revision-loop
+    %% atlas-diagram-title: Debugging as controlled belief revision
+    %% atlas-diagram-alt: A precise symptom leads to a minimal reliable reproduction, observations, ranked falsifiable hypotheses, and a discriminating experiment. If evidence does not change belief, return to the hypotheses. If it localizes a cause, make the smallest contract-preserving fix, add regression and missing-signal improvements, then record a failure dossier.
 flowchart TD
     S["Precise symptom"] --> R["Minimal reliable reproduction"]
     R --> O["Collect observations"]
@@ -823,6 +844,9 @@ Do not create a span per trivial field unless a concrete question justifies cost
 Conceptually:
 
 ```mermaid
+    %% atlas-diagram-id: m13-python-logging-pipeline
+    %% atlas-diagram-title: Python logging record and propagation path
+    %% atlas-diagram-alt: A logger call with structured fields creates a LogRecord. Logger filters and handlers, then handler filters and a formatter or structured encoder, lead to a stream, file, or export. The same record may also propagate to ancestor loggers, which can duplicate output when handlers are attached at more than one level.
 flowchart LR
     CALL["logger.info(..., extra=fields)"] --> REC["LogRecord"]
     REC --> LF["logger filters"]
@@ -919,6 +943,9 @@ Retries may estimate failure frequency or temporarily protect a pipeline, but �
 ## 14. Atlas checkpoint architecture
 
 ```mermaid
+    %% atlas-diagram-id: m13-importer-evidence-architecture
+    %% atlas-diagram-title: Importer contract, runner, signals, and evidence
+    %% atlas-diagram-alt: An immutable ImportSource enters the EventImporter contract, then either a PipeImporter or CommaImporter. One reusable contract suite checks both providers. An ObservableImportRunner calls the contract, sends signals through a SignalSink to either a memory fake or a production adapter, and returns valid events or a contextual error to the caller and regression evidence.
 flowchart TD
     SRC["ImportSource<br/>immutable text + opaque ID"] --> PORT["EventImporter contract<br/>from M12"]
     PORT --> P1["PipeImporter"]
@@ -1404,6 +1431,25 @@ Let `c` be input characters, `r` nonblank records, and `u` unique IDs before ter
 - signal recording is course-model `O(1)` for one attempt, excluding exporter/storage behavior;
 - telemetry cost, failures, and backpressure require measurement in the real adapter.
 
+### 15.1 Bounded terminal-signal model package
+
+The full reference above makes the importer case concrete. This smaller model
+isolates two reasoning moves that are easy to blur during debugging: a progress
+signal is not a terminal success, and the first analyst-marked contradiction is
+not necessarily the point where it was noticed. [Download the bounded
+terminal-signal model](/downloads/module13_reference.py) and [its focused
+tests](/downloads/test_module13_reference.py), put them in one directory, and
+from that directory run:
+
+```bash
+python -m unittest -v test_module13_reference.py
+```
+
+It does not execute an importer or prove remote completion, durable storage,
+telemetry delivery, exhaustive failure coverage, or causal correctness beyond
+the declared local trace. Treat a result as a prompt to inspect the named
+evidence path, not as permission to claim a broader repair.
+
 ---
 
 ## 16. Code and architecture reading studio
@@ -1660,7 +1706,7 @@ Residual uncertainty:
 
 Each session is 75–90 focused minutes. Every explanation is followed by prediction, trace, classification, design, or evidence. The sessions form one investigation.
 
-### Session 1 — Ambiguity becomes a behavioral contract
+## Session 1 — Ambiguity becomes a behavioral contract
 
 **Retrieve:** Module 3 pre/postconditions and Module 12 Protocol limits.
 
@@ -1678,9 +1724,45 @@ Each session is 75–90 focused minutes. Every explanation is followed by predic
 
 **Evidence:** one-page importer contract dossier.
 
-**TA gate:** return to Module 3 if the learner writes only examples or signatures.
+### Output: M13 importer contract dossier
 
-### Session 2 — Partition claims into finite evidence
+Write the caller obligations, provider obligations, order rule, duplicate rule,
+partial-yield rule, contextual failure rule, allowed effects, and one explicit
+non-goal for the importer. Carry this single declarative page into Session 2;
+it is a working specification, not a claim that an implementation already
+satisfies it.
+
+### Prediction before reveal — clause, evidence, and cause
+
+Before opening the reference model or the debugging case, read this source
+trace and record a prediction plus confidence from 1 to 4:
+
+```text
+e1 | graphs | 0.7
+e1 | trees | 0.2
+bad row
+```
+
+1. Which clause must decide what happens at the second `e1`?
+2. Which finite test would distinguish fail-fast from silently skipping the
+   malformed row?
+3. If a later ranking failure observes `NaN`, which earlier boundary is the
+   first hypothesis rather than the verdict?
+
+<details>
+<summary>Reveal only after committing a prediction</summary>
+
+The duplicate rule is an invariant or failure-policy decision, not a type
+signature. A contract test must state the selected duplicate and partial-yield
+semantics; it cannot infer them from one happy path. A downstream `NaN` frame
+is a detection site, so trace provenance toward the earliest boundary that
+accepted or transformed the invalid value.
+
+</details>
+
+**TA repair path:** return to Module 3 if the learner writes only examples or signatures.
+
+## Session 2 — Partition claims into finite evidence
 
 **Retrieve:** boundaries, equivalence classes, and independent verifier.
 
@@ -1698,9 +1780,16 @@ Each session is 75–90 focused minutes. Every explanation is followed by predic
 
 **Evidence:** claim-to-test matrix with omissions.
 
-**TA gate:** if cases are selected from code branches alone, return to the specification.
+### Output: M13 claim-to-test matrix
 
-### Session 3 — Provider substitution, fixtures, and controlled doubles
+Produce a matrix that links each chosen contract clause to one partition,
+test layer, oracle, observed result, and remaining blind spot. Carry it into
+Session 3 so provider substitution is evaluated against declared claims rather
+than test count or coverage alone.
+
+**TA repair path:** if cases are selected from code branches alone, return to the specification.
+
+## Session 3 — Provider substitution, fixtures, and controlled doubles
 
 **Retrieve:** M12 dependency direction and patch lookup/binding.
 
@@ -1718,9 +1807,16 @@ Each session is 75–90 focused minutes. Every explanation is followed by predic
 
 **Evidence:** reusable suite plus a test-double justification.
 
-**TA gate:** reject mocks that replace the behavior the test claims to verify.
+### Output: M13 provider-contract suite and double rationale
 
-### Session 4 — From traceback to causal mechanism
+Write the provider cases, the reusable contract clauses they share, the one
+behavior that stays real at each seam, and why each fake, stub, spy, or mock is
+appropriate. Carry this rationale into Session 4 when deciding whether an
+observation can discriminate a causal hypothesis.
+
+**TA repair path:** replace mocks that stand in for the behavior the test claims to verify.
+
+## Session 4 — From traceback to causal mechanism
 
 **Retrieve:** frames, data flow, invariants, and graph evidence paths.
 
@@ -1739,9 +1835,16 @@ Each session is 75–90 focused minutes. Every explanation is followed by predic
 
 **Evidence:** completed failure dossier and regression claim.
 
-**TA gate:** no fix until a reliable reproduction or an explicit production-observation plan exists.
+### Output: M13 failure dossier and regression claim
 
-### Session 5 — Observable without surveillance or noise
+Record the exact symptom, smallest reliable reproduction, competing
+hypotheses, discriminating observation, earliest violated invariant, justified
+repair boundary, and regression assertion. Carry its missing-observation note
+into Session 5 instead of treating the traceback as a causal verdict.
+
+**TA repair path:** establish a reliable reproduction or an explicit production-observation plan before proposing a fix.
+
+## Session 5 — Observable without surveillance or noise
 
 **Retrieve:** component boundaries, rate/cost models, and privacy thread.
 
@@ -1760,9 +1863,16 @@ Each session is 75–90 focused minutes. Every explanation is followed by predic
 
 **Evidence:** signal/privacy sheet and nondeterminism control plan.
 
-**TA gate:** “log everything” triggers a field-by-field purpose and retention review.
+### Output: M13 safe-signal and flake-control sheet
 
-### Session 6 — Agent-directed Atlas evidence defense
+Specify one log, metric, and trace field set with purpose, bounded cardinality,
+sensitivity, retention, and a nonclaim. Add the hidden input controlled for
+each flaky test. Carry this sheet into Session 6 so an agent patch cannot
+substitute noisy telemetry or retries for evidence.
+
+**TA repair path:** when “log everything” appears, do a field-by-field purpose and retention review.
+
+## Session 6 — Agent-directed Atlas evidence defense
 
 **Retrieve:** whole chain from spec to regression.
 
@@ -1780,7 +1890,15 @@ Each session is 75–90 focused minutes. Every explanation is followed by predic
 
 **Evidence:** disposition memo, commands/results, architecture diagram, and oral defense.
 
-**TA gate:** green tests without contract, privacy, failure, and scope review are insufficient.
+### Output: M13 evidence-defense disposition memo
+
+State accept, request changes, or reject; then bind the decision to the
+contract clauses, independently rerun evidence, privacy/cardinality review,
+unexpected-error behavior, unrequested changes, and residual uncertainty.
+This memo is the forward handoff to Module 14's reviewable change process, not
+a release or learner-mastery record.
+
+**TA repair path:** add contract, privacy, failure, and scope review when green tests stand alone.
 
 ---
 
@@ -1831,6 +1949,25 @@ ambiguous boundary → spec → layered evidence → failure dossier
 ```
 
 Then update Atlas’s evidence ledger and explain which parts remain invariant across the new technology.
+
+### Transfer task — one evidence chain, a different boundary
+
+A fictional Module 15 file decoder receives bytes from a local fixture and
+returns either records or a contextual decode error. Do not implement it.
+Instead, adapt the M13 chain on one labelled whiteboard:
+
+```text
+byte policy → decoder contract → partitions and oracle
+→ minimal failing fixture → competing hypotheses
+→ safe correlated observation → regression claim
+```
+
+For every arrow, state one caller/provider obligation or evidence limit. Then
+change exactly one premise: valid bytes contain a schema version the decoder
+does not support. Predict the earliest boundary that should decide the outcome
+and the observation that would distinguish a format-policy error from a later
+consumer defect. This transfer task is a design/reasoning exercise, not a
+claim about a real file, service, or deployment.
 
 ---
 
@@ -2043,6 +2180,22 @@ D. Increase retries until CI is green.
 
 The check routes instruction. It is not a grade.
 
+### Misconception repair map — claims, evidence, and causal paths
+
+**Current candidate-only supplement.** Use a response and its confidence to
+choose a smaller repair, not to assign a verdict. This reader-visible route is
+unreviewed structural material; it does not change the legacy audit,
+human-review, release, publication, live-chat, Notion, or learner-mastery
+state.
+
+| Tempting model | Smallest repair | Delayed changed-premise check |
+|---|---|---|
+| “A matching signature is the contract.” | Put two equal-signature importers beside one blank/duplicate/malformed source and name the first behavior on which they can differ. | Change only partial-yield policy; decide what a caller may observe before failure. |
+| “Coverage means the claim is proved.” | Read one fully executed branch with an absent or wrong assertion; name what actually ran. | Keep branches fixed but change the oracle; state what finite evidence remains. |
+| “The last traceback frame caused the defect.” | Freeze one value path and mark where the finiteness invariant first became false. | Move detection to a different consumer; explain why the causal boundary need not move. |
+| “A mock proves the integration.” | Replace the impossible mock behavior with a fake or a real controlled seam. | Change provider implementation while preserving the contract suite; name the evidence that must still be rerun. |
+| “More logs or retries repair uncertainty.” | Name one safe discriminating field and one hidden input that must be controlled. | Change only correlation cardinality or wall-clock dependence; state the new risk. |
+
 ---
 
 ## 22. TA guide
@@ -2182,7 +2335,8 @@ Produce:
 
 ### Mastery evidence
 
-Advance only when Michael can take an unfamiliar production-like failure and:
+Use an unfamiliar production-like failure to choose a next bridge or repair.
+Look for whether Michael can:
 
 - recover or strengthen the boundary specification;
 - choose tests by supported claim;
@@ -2205,6 +2359,81 @@ Advance only when Michael can take an unfamiliar production-like failure and:
 6. What exact observation falsified the losing hypothesis?
 7. Which behavior can change without breaking providers/clients?
 
+### Conversational oral defense — M13
+
+**Current candidate-only supplement.** The Teaching Assistant leads this
+supportive post-module conversation. The Study Partner may rehearse the same
+ideas but does **not** administer or grade the defense. Start from one
+learner-selected importer claim, a prediction, and confidence from 1 to 4.
+The purpose is constructive diagnosis and repair, never pass/fail.
+
+Use the visible chat as a readable whiteboard. For example:
+
+```text
+caller obligation → provider contract → selected finite evidence
+→ observed symptom → hypothesis → discriminating observation
+→ earliest causal boundary → regression claim
+```
+
+Label each arrow and state what it does not establish. If notation helps, use
+supported inline or display math, define symbols, and provide a plain-language
+or ASCII fallback. Put code, test, or state traces in a language-labelled
+fence and summarize their meaning in prose. Do not rely on speech, color, or
+an unlabelled diagram alone.
+
+### Invitation and starting evidence
+
+Invite the learner to choose one claim from the contract dossier, claim-to-test
+matrix, or failure dossier: “What would a caller be allowed to rely on, and
+what observation would most threaten that claim?” Let the learner choose the
+example and confidence before showing a counterexample or repair.
+
+### Hint ladder
+
+Offer one rung at a time: identify the caller/provider boundary; name the
+clause; choose the input partition; separate symptom from cause; freeze the
+smallest trace; ask for one discriminating observation; then locate the first
+violated invariant. Pause after each rung for the learner to revise the model
+rather than replacing it with a solution.
+
+### Changed-premise counterexample turn
+
+Change exactly one premise: a provider keeps the same signatures but skips a
+malformed row; a trace observes a downstream `NaN` after the source already
+crossed a boundary; or a metric gains a correlation-ID label. Ask which claim
+no longer follows, which evidence must be rerun, and what nonclaim remains.
+
+### Transfer turn
+
+Use the Module 15 decoder task above. The learner maps byte policy,
+specification, partitions, causal experiment, safe signal, and regression to
+the new boundary, then explains why a passing test or one log line does not
+settle the whole contract.
+
+### Reflection and learner-controlled evidence summary
+
+End with the learner's chosen claim, prediction/confidence, repaired model,
+smallest counterexample, one remaining uncertainty, and one next retrieval
+action. The learner controls whether to keep that compact summary. This
+workbook does not assert that a chat, voice session, platform rendering, or
+external record occurred.
+
+### Study Partner rehearsal and TA handoff
+
+The Study Partner conducts a non-grading rehearsal: request a prediction and
+confidence, read one labelled code or value trace, change one premise, and ask
+for a direct causal explanation. It may help make a concise learner-controlled
+handoff card for the Teaching Assistant: claim, evidence inspected,
+confidence, smallest repair or counterexample, one transfer, and one
+uncertainty. The Teaching Assistant uses that card to begin the supportive
+oral-defense conversation; this workbook does not claim automated delivery,
+Notion activity, or a completed session.
+
+If the learner carries the M12 boundary card, add its public observation and
+dependency arrow to this handoff alongside the chosen contract clause,
+regression, missing observation, and nonclaim. Module 14 must preserve that
+whole evidence chain while changing the implementation.
+
 ---
 
 ## 24. Consolidation
@@ -2212,6 +2441,9 @@ Advance only when Michael can take an unfamiliar production-like failure and:
 ### One-page mind map
 
 ```mermaid
+    %% atlas-diagram-id: m13-specification-to-regression-mind-map
+    %% atlas-diagram-title: From ambiguity to regression learning
+    %% atlas-diagram-alt: Ambiguity becomes a declarative specification and obligation clauses, which guide input partitions and finite unit, integration, contract, property-oriented, and regression evidence. An observed failure becomes a reproduction, competing hypotheses, discriminating observation, causal mechanism, and smallest repair. Safe signals and privacy constraints support diagnosis; regression knowledge loops back to strengthen the specification.
 flowchart TD
     AMB["Ambiguity"] --> SPEC["Declarative specification"]
     SPEC --> OBL["Pre · post · invariant<br/>failure · effects"]
@@ -2340,8 +2572,96 @@ External material supplies concepts and normative references. All Atlas examples
 
 ---
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Advance when Michael can receive an ambiguous boundary and a production-like failure, write the behavioral contract, select layered finite evidence, build or specify a reliable reproduction, localize the first violated invariant with a falsifiable experiment, design safe correlated observations, preserve the cause as regression learning, and independently accept or reject an agent patch.
+Use the behavioral contract, selected finite evidence, reproduction or
+observation plan, causal experiment, safe signal design, regression record,
+and patch review to choose a next bridge or repair—not to decide whether
+Michael passes. If Michael can receive an ambiguous boundary and a
+production-like failure, write the behavioral contract, select layered finite
+evidence, build or specify a reliable reproduction, localize the first violated
+invariant with a falsifiable experiment, design safe correlated observations,
+preserve the cause as regression learning, and independently accept or reject
+an agent patch, continue with the M14 handoff.
 
-Do not advance on test count, coverage percentage, log volume, debugger fluency, or a green agent summary alone.
+Otherwise, repair the first missing link: rewrite the unsupported claim as a
+contract clause, partition the input space, freeze the smallest reproduction,
+or choose one discriminating observation before changing code. A test count,
+coverage percentage, log volume, debugger fluency, or green agent summary does
+not replace that repair.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+
+## Bench pack
+
+**Bench pack:** `m13` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. Bench 4 **imports and probes**
+`public/downloads/module13_reference.py`; benches 2 and 3 carry their own subject,
+because mutation testing needs something to break and mutating the course's own
+published artifact would be breaking the wrong thing.
+
+### Bench 2 — M13 claim-to-test matrix
+
+**Session:** 2. **Rungs:** review and verify, recognize.
+**Executes:** a single happy-path test over a nine-line ranking function, measured
+two ways. Line coverage (`sys.settrace`, no third-party dependency) reports 100%.
+A bounded mutation run over the same code reports 57%: three of seven
+single-operator mutants survive, at the threshold boundary, the line-number guard,
+and the sort tie-break — which is two of the three blind spots the session names,
+derived by an instrument that never read the specification. Three tests chosen by
+reading the survivors take the mutation score to 100% while line coverage does not
+move. A NaN score is then silently dropped by every version, and no mutant detects
+it: mutation testing finds weak assertions, not input classes nobody thought of.
+**Cannot establish:** that a mutation score is a probability of catching real
+defects. Seven mutants from four operators on one function; 100% would not mean
+correct.
+
+### Bench 3 — M13 provider-contract suite and double rationale
+
+**Session:** 3. **Rungs:** debug and defend, review and verify.
+**Executes:** one three-clause suite against two providers of the same port. It
+passes against both — and the same four raw rows make one raise `ValueError` and
+the other return three rows with no exception and no count. Adding one cardinality
+clause separates them. Then the patch-target experiment: patching `providers.load`
+leaves the consumer calling the real implementation, while patching
+`consumer.load` substitutes the double. Both patches apply and revert without
+error, so a patch that does nothing is indistinguishable from one that works.
+**Cannot establish:** anything about a real provider. The patch result is specific
+to `from X import Y`; a consumer written `import X` would answer the opposite way,
+which is the lesson rather than an exception.
+
+### Bench 4 — M13 failure dossier and regression claim
+
+**Session:** 4. **Rungs:** trace, debug and defend.
+**Executes:** `locate_causal_repair_boundary` over a declared trace where the
+traceback points at the renderer and the earliest contract contradiction sits three
+steps and three owner boundaries upstream, at the parser — with nothing in between
+contradicting anything. Then the part the session grades: for four candidate
+observations, which hypotheses each could rule out. None separates all three, one
+separates none, and the finiteness assertion settles it outright when it fails while
+leaving two hypotheses when it holds — so the plan carries two observations even
+when a given run needs one. Finally `inspect_terminal_contract` rejects the
+renderer-guard repair's trace as a premature success.
+**Cannot establish:** a complete cause. `contradicts_contract` is analyst-supplied
+and the hypothesis predictions are declared, not measured; the reference model's own
+scope string says locating the earliest mark proves no universal repair.
+
+### Sessions without a bench
+
+- **Session 1** — turns an ambiguous request into a behavioural contract. The
+  artifact *is* the contract, and running code cannot check whether the ambiguity
+  was resolved well.
+- **Session 5** — production observability: sampling, rate and cost models, and a
+  privacy boundary. It needs a running service and real traffic; an in-process
+  kernel would model the cost question dishonestly.
+- **Session 6** — an agent-directed evidence defence, consuming Sessions 1–5 rather
+  than producing new evidence.
+
+### Bench pack completion record
+
+Records under `benches/records/m13-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

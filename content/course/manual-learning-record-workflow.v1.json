@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "workflowVersion": "v1",
+  "kind": "atlas-manual-learning-record-workflow",
+  "title": "Atlas Manual Learning Record Kit",
+  "purpose": "A connected, learner-owned record system for route decisions, reasoning evidence, repair, retrieval, oral defense, projects, and help handoffs. It makes useful learning evidence easy to carry forward without silently collecting or transmitting personal learning data.",
+  "delivery": {
+    "mode": "manual-copy-only",
+    "portalToNotionIntegration": "none",
+    "learnerGuidePath": "docs/LEARNER_RECORD_WORKFLOW.md"
+  },
+  "copyApproval": {
+    "requiredBeforeManualCopy": true,
+    "learnerControlled": true,
+    "approvalStatement": "I reviewed this minimal summary and choose to copy it manually."
+  },
+  "privacyBoundary": {
+    "minimumDataRule": "Keep only the smallest learner-approved summary that supports a future explanation, repair, retrieval, or project decision. Prefer a redacted evidence pointer over a transcript, private note, credential, or person-linked response.",
+    "excludedFromGit": [
+      "Notion page and database IDs",
+      "Notion API keys, integration tokens, or credentials",
+      "raw oral-defense transcripts",
+      "person-linked diagnostic responses",
+      "private learner notes"
+    ],
+    "prohibitedAutomation": [
+      "automatic portal-to-Notion writes",
+      "automatic portal exports",
+      "background learner-event tracking"
+    ]
+  },
+  "recordCategories": [
+    {
+      "id": "course-dashboard-current-route",
+      "title": "Course dashboard and current route",
+      "purpose": "Keep one small page that answers what you are studying now, why it is next, and what evidence would unlock the next bridge.",
+      "minimalFields": [
+        { "id": "route-plan", "label": "Route plan" },
+        { "id": "current-module", "label": "Current module" },
+        { "id": "current-session", "label": "Current session" },
+        { "id": "next-evidence", "label": "Next evidence to create" },
+        { "id": "next-review-date", "label": "Next review date" },
+        { "id": "consent-decision", "label": "Consent decision: local or manually copied" }
+      ],
+      "linksToRecordCategoryIds": [
+        "daily-learning-log",
+        "module-notebook",
+        "spaced-review-queue"
+      ]
+    },
+    {
+      "id": "daily-learning-log",
+      "title": "Daily learning log",
+      "purpose": "Capture one honest learning loop: a claim, evidence, confidence, repair, and the time to retrieve it again.",
+      "minimalFields": [
+        { "id": "date", "label": "Date" },
+        { "id": "module-session", "label": "Module and session" },
+        { "id": "claim-tested", "label": "Claim tested" },
+        { "id": "evidence-pointer", "label": "Evidence pointer" },
+        { "id": "confidence", "label": "Confidence" },
+        { "id": "repair-or-next-step", "label": "Repair or next step" },
+        { "id": "next-review-date", "label": "Next review date" }
+      ],
+      "linksToRecordCategoryIds": [
+        "course-dashboard-current-route",
+        "module-notebook",
+        "spaced-review-queue"
+      ]
+    },
+    {
+      "id": "module-notebook",
+      "title": "Module notebook",
+      "purpose": "Turn six sessions into one coherent explanation, not six disconnected notes.",
+      "minimalFields": [
+        { "id": "module", "label": "Module" },
+        { "id": "session", "label": "Session" },
+        { "id": "first-principle", "label": "First principle" },
+        { "id": "prediction-and-reveal", "label": "Prediction and reveal" },
+        { "id": "code-or-design-observation", "label": "Code or design observation" },
+        { "id": "counterexample-or-boundary", "label": "Counterexample or boundary" },
+        { "id": "transfer-task", "label": "Transfer task" },
+        { "id": "evidence-pointer", "label": "Evidence pointer" },
+        { "id": "forward-bridge", "label": "Forward bridge" }
+      ],
+      "linksToRecordCategoryIds": [
+        "misconceptions-debugging-log",
+        "proof-derivation-counterexample-numerical-experiment-notebook",
+        "math-ml-mastery-gates",
+        "oral-defense-evidence",
+        "projects-capstone-portfolio",
+        "ta-study-partner-handoffs"
+      ]
+    },
+    {
+      "id": "misconceptions-debugging-log",
+      "title": "Misconceptions and debugging log",
+      "purpose": "Preserve the repaired mental model and the reproduction or counterexample that changed it.",
+      "minimalFields": [
+        { "id": "misconception-or-bug", "label": "Misconception or bug" },
+        { "id": "trigger-or-reproduction", "label": "Trigger or reproduction" },
+        { "id": "repaired-model", "label": "Repaired model" },
+        { "id": "repair-experiment", "label": "Repair experiment" },
+        { "id": "next-retrieval-date", "label": "Next retrieval date" }
+      ],
+      "linksToRecordCategoryIds": [
+        "module-notebook",
+        "spaced-review-queue",
+        "ta-study-partner-handoffs"
+      ]
+    },
+    {
+      "id": "proof-derivation-counterexample-numerical-experiment-notebook",
+      "title": "Proof, derivation, counterexample, and numerical-experiment notebook",
+      "purpose": "Keep the assumptions, argument, counterexample, experiment, and limitation together so rigor travels with intuition.",
+      "minimalFields": [
+        { "id": "claim-or-theorem", "label": "Claim or theorem" },
+        { "id": "assumptions", "label": "Assumptions" },
+        { "id": "proof-or-derivation-idea", "label": "Proof or derivation idea" },
+        { "id": "counterexample-or-scope-boundary", "label": "Counterexample or scope boundary" },
+        { "id": "numerical-experiment", "label": "Numerical experiment" },
+        { "id": "result-and-limitation", "label": "Result and limitation" }
+      ],
+      "linksToRecordCategoryIds": [
+        "math-ml-mastery-gates",
+        "oral-defense-evidence",
+        "projects-capstone-portfolio"
+      ]
+    },
+    {
+      "id": "math-ml-mastery-gates",
+      "title": "Mathematics and ML mastery gates",
+      "purpose": "Record evidence for a gate as a definition, assumptions, model or derivation, test, uncertainty, and next bridge—not a score.",
+      "minimalFields": [
+        { "id": "module-and-gate", "label": "Module and gate" },
+        { "id": "definition", "label": "Definition" },
+        { "id": "assumptions", "label": "Assumptions" },
+        { "id": "derivation-or-model", "label": "Derivation or model" },
+        { "id": "test-or-evidence", "label": "Test or evidence" },
+        { "id": "uncertainty", "label": "Uncertainty" },
+        { "id": "next-gate", "label": "Next gate" }
+      ],
+      "linksToRecordCategoryIds": [
+        "spaced-review-queue",
+        "oral-defense-evidence",
+        "projects-capstone-portfolio"
+      ]
+    },
+    {
+      "id": "spaced-review-queue",
+      "title": "Spaced-review queue",
+      "purpose": "Schedule one retrieval prompt and its repair instead of repeatedly rereading a whole module.",
+      "minimalFields": [
+        { "id": "retrieval-prompt", "label": "Retrieval prompt" },
+        { "id": "last-attempt", "label": "Last attempt" },
+        { "id": "outcome", "label": "Outcome" },
+        { "id": "repair", "label": "Repair" },
+        { "id": "next-due-date", "label": "Next due date" }
+      ],
+      "linksToRecordCategoryIds": [
+        "course-dashboard-current-route",
+        "daily-learning-log",
+        "module-notebook"
+      ]
+    },
+    {
+      "id": "oral-defense-evidence",
+      "title": "Oral-defense evidence",
+      "purpose": "Store only a learner-approved synthesis of a constructive conversation, never the raw conversation transcript.",
+      "minimalFields": [
+        { "id": "module", "label": "Module" },
+        { "id": "claim-rehearsed", "label": "Claim rehearsed" },
+        { "id": "evidence-shown", "label": "Evidence shown" },
+        { "id": "hint-or-repair", "label": "Hint or repair" },
+        { "id": "transfer-question", "label": "Transfer question" },
+        { "id": "learner-approved-summary", "label": "Learner-approved summary" },
+        { "id": "next-question", "label": "Next question" }
+      ],
+      "linksToRecordCategoryIds": [
+        "module-notebook",
+        "ta-study-partner-handoffs",
+        "course-dashboard-current-route"
+      ]
+    },
+    {
+      "id": "projects-capstone-portfolio",
+      "title": "Projects and capstone portfolio",
+      "purpose": "Build a small, revisable portfolio of real decisions, evidence, limits, and next falsifiers.",
+      "minimalFields": [
+        { "id": "artifact", "label": "Artifact" },
+        { "id": "problem-and-stakeholder", "label": "Problem and stakeholder" },
+        { "id": "design-decision", "label": "Design decision" },
+        { "id": "evidence-and-test", "label": "Evidence and test" },
+        { "id": "known-limitation", "label": "Known limitation" },
+        { "id": "next-falsifier-or-revision", "label": "Next falsifier or revision" }
+      ],
+      "linksToRecordCategoryIds": [
+        "course-dashboard-current-route",
+        "ta-study-partner-handoffs"
+      ]
+    },
+    {
+      "id": "ta-study-partner-handoffs",
+      "title": "TA and Study Partner handoffs",
+      "purpose": "Carry a minimal, learner-approved question and evidence summary into a separate coaching conversation.",
+      "minimalFields": [
+        { "id": "role", "label": "Role: TA or Study Partner" },
+        { "id": "learner-question", "label": "Learner question" },
+        { "id": "learner-approved-context", "label": "Learner-approved context" },
+        { "id": "claim-and-evidence", "label": "Claim and evidence" },
+        { "id": "repair-or-recommendation", "label": "Repair or recommendation" },
+        { "id": "next-handoff", "label": "Next handoff" }
+      ],
+      "linksToRecordCategoryIds": [
+        "course-dashboard-current-route",
+        "module-notebook",
+        "spaced-review-queue"
+      ]
+    }
+  ]
+}

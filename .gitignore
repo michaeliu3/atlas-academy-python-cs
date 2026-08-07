@@ -12,6 +12,9 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/blob-report/
 
 # next.js
 /.next/
@@ -43,6 +46,7 @@ next-env.d.ts
 /dist/
 /.wrangler/
 /outputs/
+/output/
 /work/
 
 # Python local teaching-model artifacts
@@ -50,3 +54,11 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
+
+# Bench layer. Source of truth is benches/src/**/*.py (jupytext py:percent).
+# Notebooks are generated on demand; records are the learner's own evidence.
+/benches/.venv/
+/benches/build/
+/benches/records/
+benches/**/*.ipynb
+.ipynb_checkpoints/

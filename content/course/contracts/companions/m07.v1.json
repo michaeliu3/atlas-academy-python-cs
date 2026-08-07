@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m07",
+  "purpose": "Freeze a candidate-only M7 Teaching Assistant, Study Partner, and M8 handoff context for future human review without changing M7's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/6",
+    "digest": "sha256:6b0b8a6157cb2f4d7715164dd1be667df9e666f3786b3c565484bfd7548d440f"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected next request. Ask what source state changes, what is retained, what the learner predicts next, and how confident they are before naming iterator, generator, queue, or backpressure terminology.",
+    "artifactFocus": "Ask the learner to make one compact iterator state table, generator-suspension trace, demand-and-ownership map, capacity-scope card, or reviewed patch observation visible, then distinguish the local conclusion from excluded buffers, asynchronous behavior, cleanup, or retry claims.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as materializing output, adding a hidden prefetch, sharing a cursor, or replacing a synchronous pull with a background producer; then offer the smallest counterexample or trace repair without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: show one short next-call timeline, iterator state table, code trace, capacity inequality, or ownership map and give a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the observed values fixed but materialize the stream, make the iterator one-shot, let a source prefetch, or make batch capacity depend on input size. Ask for a prediction and confidence before separating the changed demand, retention, or safety claim from the unchanged one.",
+    "taHandoff": "End with the learner's selected M7 artifact, attempted demand/capacity claim, confidence, unresolved boundary, one changed premise, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m08",
+    "carryArtifact": "Carry an access-and-demand card: legal next-item rule, iterator/ownership trace, named retained buffer and capacity, request-count observation, confidence, and one remaining uncertainty—not a mastery claim.",
+    "targetQuestion": "Before M8 adds hashing and indexing, which iterator-consumption, access-policy, order, ownership, or retained-state assumption must be made explicit before a lookup result is trusted?",
+    "boundary": "M8 is the only canonical forward handoff. References to M9–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

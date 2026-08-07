@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m18",
+  "purpose": "Freeze a candidate-only M18 Teaching Assistant, Study Partner, and M19 handoff context for future human review without changing M18's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/17",
+    "digest": "sha256:5f7ca7f606f5bf1b01f37c02ff0539df821e9760719e345ad1a01b9a49e8aa07"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected operating-system or publication claim. Ask which process and resource own each state, what interruption point is being considered, and which artifact evidence is durable, recoverable, or still unknown before accepting an exit code, API return, or file-close conclusion.",
+    "artifactFocus": "Ask the learner to make a process/resource ownership map, lifecycle or shutdown trace, virtual-address boundary, file-name/handle timeline, staged-publication state table, or recovery classification visible. Separate a Python contract, OS model, platform-specific observation, and Atlas policy before drawing a conclusion.",
+    "repairMove": "Ask for a prediction before correction; change exactly one fault point, resource owner, flush/sync/close/replace boundary, signal or cancellation event, or recovery observation. Offer the smallest trace or counterexample and invite a narrower claim without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard when available: label process and resource states, draw a short interruption/publication timeline or code trace, and give a direct prose and ASCII fallback before rehearsing one owner-to-transition-to-evidence chain at a time.",
+    "changedPremise": "Keep the intended publication contract fixed but change one stop point, handle ownership rule, temporary-name condition, flush/sync/close/replace boundary, access decision, or recovery observation. Ask for a prediction and confidence before distinguishing a local action, OS-mediated state, durable artifact, and remaining unknown.",
+    "taHandoff": "End with the learner's selected OS evidence card, process/resource trace, confidence, changed premise, named scope and owner, observed artifact state, one unresolved recovery boundary, and a constructive M19 question for the Teaching Assistant."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m19",
+    "carryArtifact": "Carry an OS-mediated publication evidence card: process and resource owners; labelled lifecycle or interruption trace; file-name/handle and staged-publication states; declared platform/model scope; recovery classification; supported claim; and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before adding M19 interleavings or synchronization, which shared resource, ownership transfer, scheduling assumption, interruption point, and recovery invariant must be explicit so that one observed run is not mistaken for a concurrent guarantee?",
+    "boundary": "M17 is M18's sole academic prerequisite; the M31-to-M18 reader continuation is narrative reader order, not an academic prerequisite. M19 is the only canonical forward handoff. References to later modules are conceptual connections, not learner-navigation bypasses, completion, promotion, or release evidence."
+  }
+}

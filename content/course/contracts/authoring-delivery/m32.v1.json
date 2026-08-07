@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "deliveryMapVersion": "v1",
+  "kind": "atlas-advanced-authoring-delivery-map",
+  "moduleId": "m32",
+  "workbookPath": "content/authoring/m32_systems_languages_scientific_python_accelerators_workbook.v1.md",
+  "authoringSourcePlanPath": "content/source-maps/module32_systems_languages_scientific_python_accelerators_source_research.md",
+  "bridgePath": "content/course/m31-m36-prerequisite-session-bridge.v1.json",
+  "sessions": [
+    {
+      "id": "m32-s01",
+      "title": "System boundaries: Python orchestration, native kernels, and scientific-array contracts",
+      "sessionHeadingAnchor": "session-1--map-responsibility-before-optimizing-a-boundary",
+      "usesPrerequisiteModuleIds": [
+        "m12"
+      ],
+      "outputs": [
+        {
+          "id": "m32-boundary-contract-map",
+          "kind": "worksheet",
+          "headingAnchor": "output-boundary-contract-map",
+          "forwardArtifactId": "m32-boundary-contract-map"
+        }
+      ]
+    },
+    {
+      "id": "m32-s02",
+      "title": "Execution and transfer: from Python request to CPU, device, and memory hierarchy",
+      "sessionHeadingAnchor": "session-2--trace-work-before-timing-it",
+      "usesPrerequisiteModuleIds": [
+        "m17"
+      ],
+      "outputs": [
+        {
+          "id": "m32-execution-transfer-trace",
+          "kind": "worksheet",
+          "headingAnchor": "output-execution-transfer-trace",
+          "forwardArtifactId": "m32-execution-transfer-trace"
+        }
+      ]
+    },
+    {
+      "id": "m32-s03",
+      "title": "Array layout, vectorization, numerical behavior, and measurement",
+      "sessionHeadingAnchor": "session-3--treat-array-metadata-as-part-of-the-algorithm",
+      "usesPrerequisiteModuleIds": [
+        "m24",
+        "m28"
+      ],
+      "outputs": [
+        {
+          "id": "m32-array-layout-numerics-note",
+          "kind": "worksheet",
+          "headingAnchor": "output-layout-numerics-note",
+          "forwardArtifactId": "m32-array-layout-numerics-note"
+        },
+        {
+          "id": "m32-performance-evidence-card",
+          "kind": "experiment-card",
+          "headingAnchor": "output-performance-evidence-card",
+          "forwardArtifactId": "m32-performance-evidence-card"
+        }
+      ]
+    },
+    {
+      "id": "m32-s04",
+      "title": "Parallel execution, buffer ownership, and synchronization",
+      "sessionHeadingAnchor": "session-4--draw-ownership-before-claiming-parallelism",
+      "usesPrerequisiteModuleIds": [
+        "m19"
+      ],
+      "outputs": [
+        {
+          "id": "m32-buffer-ownership-timeline",
+          "kind": "worksheet",
+          "headingAnchor": "output-buffer-ownership-timeline",
+          "forwardArtifactId": "m32-buffer-ownership-timeline"
+        }
+      ]
+    },
+    {
+      "id": "m32-s05",
+      "title": "Autodiff, kernels, precision, and optimization traces",
+      "sessionHeadingAnchor": "session-5--read-autodiff-as-a-program-with-a-numerical-contract",
+      "usesPrerequisiteModuleIds": [
+        "m28",
+        "m31"
+      ],
+      "outputs": [
+        {
+          "id": "m32-autodiff-execution-trace",
+          "kind": "worksheet",
+          "headingAnchor": "output-autodiff-execution-trace",
+          "forwardArtifactId": "m32-autodiff-execution-trace"
+        }
+      ]
+    },
+    {
+      "id": "m32-s06",
+      "title": "Reproducible accelerator systems architecture defense",
+      "sessionHeadingAnchor": "session-6--defend-a-bounded-systems-claim",
+      "usesPrerequisiteModuleIds": [
+        "m12",
+        "m17",
+        "m19",
+        "m24",
+        "m28",
+        "m31"
+      ],
+      "outputs": [
+        {
+          "id": "m32-scientific-python-accelerators-dossier",
+          "kind": "dossier",
+          "headingAnchor": "output-scientific-python--accelerators-dossier",
+          "forwardArtifactId": null
+        }
+      ]
+    }
+  ],
+  "forwardHandoff": {
+    "declaredForwardModuleId": "m33",
+    "directAcademicConsumerModuleIds": [
+      "m35",
+      "m36"
+    ],
+    "handoffArtifact": "Reproducible systems claim packet: boundary map, execution trace, benchmark card, environment record, and unresolved-risk list.",
+    "note": "M33 is the graph's declared forward handoff; M35 and M36 are the graph modules that name M32 as an academic prerequisite."
+  },
+  "localForwardHandoffOutputId": "m32-scientific-python-accelerators-dossier",
+  "truthBoundary": "This hidden M32 authoring-candidate map proves only that the declared draft has six visible sessions and typed local output anchors connected to the canonical bridge. It does not select learner delivery, open a route, approve quality, record CI or deployment, or publish the module."
+}

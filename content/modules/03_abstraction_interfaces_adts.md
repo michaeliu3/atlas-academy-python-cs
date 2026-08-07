@@ -4,7 +4,7 @@
 >
 > **Atlas transformation:** a list owned by application code becomes a replaceable event store with one behavioral contract.
 >
-> **Mastery claim:** “I can recover an abstraction from code, state its laws and representation invariant, change its representation without changing clients, and verify an agent’s implementation against the contract.”
+> **Working capability claim:** “I can recover an abstraction from code, state its laws and representation invariant, change its representation without changing clients, and verify an agent’s implementation against the contract.”
 
 ## How to use this workbook
 
@@ -36,6 +36,9 @@ The default activity balance is:
 ### The dependency path
 
 ```mermaid
+%% atlas-diagram-id: m03-dependency-path
+%% atlas-diagram-title: Module 3 turns state and function contracts into abstraction boundaries
+%% atlas-diagram-alt: Module 1 feeds Modules 2 and 3, and Module 2 also feeds Module 3. Module 3 then supports data structures, APIs and types, testing and design, and transactions, so state and function contracts become reusable abstraction boundaries.
 flowchart LR
     M1["Module 1<br/>objects, aliases, state, invariants"]
     M2["Module 2<br/>functions, contracts, induction"]
@@ -116,7 +119,7 @@ Answer without notes. A weak answer is not a failure; it identifies the exact br
 
 </details>
 
-### Mastery outcomes
+### Learning outcomes
 
 By the end, Michael can:
 
@@ -190,6 +193,9 @@ It prints `0`. `history()` returned the mutable list that is also the representa
 </details>
 
 ```mermaid
+%% atlas-diagram-id: m03-representation-exposure-alias
+%% atlas-diagram-title: A returned alias lets a client clear EventLog state
+%% atlas-diagram-alt: The client name screen and EventLog.events point to the same mutable list holding a StudyEvent. Calling screen.clear mutates that list, so EventLog.events becomes empty; a public history operation exposed representation state.
 flowchart LR
     C["client name: screen"] --> L["one mutable list"]
     S["EventLog.events"] --> L
@@ -216,6 +222,15 @@ The lesson is not “always return a tuple.” The lesson is:
 ---
 
 ## 4. Deriving abstraction from first principles
+
+### First-principles derivation — observations before mechanisms
+
+Start with the client question, not the class: *which results, state changes,
+failures, and costs may a caller actually observe?* Those permitted
+observations define the behavioral promise. A representation is only one way
+to realize that promise. Once clients depend on a list field, chunk layout, or
+cache rather than the promise, the mechanism has accidentally become part of
+the contract and cannot be replaced safely.
 
 ### 4.1 Abstraction means selective dependence
 
@@ -263,9 +278,29 @@ The precise replacement for the analogy is the operation contract and the set of
 
 A class can implement an ADT, but an ADT is not the same thing as a class. The same ADT may have several classes as implementations; a module with functions and hidden state could implement one too.
 
+### Definition — abstract value, contract, and representation
+
+For this module, an **abstract value** is the ordered event history a client
+may observe. The **contract** says how `append`, `history`, and `len` change
+or reveal that value. The **representation** is the private list, tuple, or
+chunks that one implementation uses to realize it. Do not replace one noun
+with another: a field layout is not the value, and a method signature alone is
+not the contract.
+
+### Assumption — observations are only the stated contract
+
+The representation-independence argument assumes clients use only the
+documented operations and that their stated results, failures, ordering, and
+resource promises are the relevant observations. It does not claim that
+underscore naming prevents hostile reflection, that all Python objects are
+deeply immutable, or that an unstated performance property is preserved.
+
 ### 4.3 Concept map
 
 ```mermaid
+%% atlas-diagram-id: m03-adt-concept-map
+%% atlas-diagram-title: An ADT connects a behavioral contract to replaceable representations
+%% atlas-diagram-alt: A client problem leads to abstract values, operations, contracts, and an interface. Contracts also guide a representation, its RI and AF, implementation, and observable-behavior tests; comparing implementations supports representation independence. Representation exposure breaks the RI and couples clients to the representation.
 flowchart TD
     P["Client problem"] --> A["Choose abstract values"]
     A --> O["Choose a small adequate set of operations"]
@@ -282,6 +317,33 @@ flowchart TD
     X["Representation exposure"] -. "breaks" .-> RI
     X -. "couples clients to" .-> R
 ```
+
+### Text alternative — abstraction boundary concept map
+
+A client problem first selects the abstract event history and a small family
+of operations. The contracts for those operations constrain every valid
+representation. Each representation needs a legality predicate (RI) and a
+meaning map (AF); implementations are compared by client-visible behavior.
+Leaking a mutable representation gives a client an uncontracted path that can
+break the RI and ties that client to one implementation.
+
+### Derivation and proof idea — representation independence
+
+For each legal representation value, use the AF to identify its abstract
+history. Show that every operation maps legal reps to legal reps and produces
+the contract's promised observation or next abstract history. If two
+implementations produce the same contract-permitted observations for the same
+abstract history, a client that uses only that contract cannot distinguish the
+representations. This is a proof *idea*, not a substitute for checking every
+method, exception, alias path, and stated cost promise.
+
+### Counterexample — a matching interface can still break a law
+
+Two classes can both expose `append`, `history`, and `__len__`, while one
+returns events in reverse insertion order. Their method shapes match, but the
+second class violates the append-order law and is not a substitutable
+EventStore. Session 4 makes this smallest counterexample executable before
+discussing Python interface mechanisms.
 
 ### 4.4 Classifying operations
 
@@ -422,6 +484,9 @@ This equation is powerful but bounded. If performance, logging, persistence, or 
 ### 6.1 Two spaces, one meaning
 
 ```mermaid
+%% atlas-diagram-id: m03-ri-af-spaces
+%% atlas-diagram-title: Legal representations map to abstract histories through AF
+%% atlas-diagram-alt: Legal list representations [], [e1], and [e1, e2] map through the abstraction function to the empty sequence, e1, and e1 followed by e2. The list [e1, not an event] violates the representation invariant, so its abstraction function is undefined.
 flowchart LR
     subgraph R["Representation space R"]
         R1["[]"]
@@ -773,6 +838,9 @@ class TupleEventStore:
 Add `TupleEventStore` to both parameter lists. The client and the assertions stay unchanged.
 
 ```mermaid
+%% atlas-diagram-id: m03-list-tuple-equivalence
+%% atlas-diagram-title: List and tuple stores can denote the same abstract history
+%% atlas-diagram-alt: A ListEventStore uses a mutable list and a TupleEventStore uses an immutable tuple, but each representation maps through its own abstraction function to the same ordered history e1, e2, e3.
 flowchart TB
     subgraph Same["Same abstract history"]
         H["⟨e₁, e₂, e₃⟩"]
@@ -804,6 +872,16 @@ For \(n\) stored events:
 The current contract leaves these complexity differences open. That makes both implementations semantically substitutable, but it does not make them equally suitable for production.
 
 If Atlas later promises “append is amortized constant time,” `TupleEventStore` stops satisfying the enlarged contract. Resource guarantees are part of abstraction when clients are allowed to rely on them.
+
+### Numerical experiment — same law, different cost
+
+For a thought experiment with \(n = 1{,}000\) events, a tuple-style `append`
+must construct a new tuple containing roughly 1,001 references under this
+model, while a list-style `history()` must construct a tuple of roughly 1,000
+references to publish a snapshot. The public history can still be identical.
+This is a cost-model calculation, not a benchmark or a claim about a specific
+Python runtime; it becomes a contract obligation only if Atlas explicitly
+publishes such a bound.
 
 ### 7.6 Mutation of the rep is not automatically mutation of the abstract value
 
@@ -1211,6 +1289,9 @@ Use this evidence table:
 <summary>Recovered architecture</summary>
 
 ```mermaid
+%% atlas-diagram-id: m03-event-store-architecture
+%% atlas-diagram-title: The composition root keeps service policy separate from storage
+%% atlas-diagram-alt: main.py constructs and injects ListEventStore and constructs RecordingService. The service depends on the EventStore contract and StudyEvent values; ListEventStore stores StudyEvent values and structurally satisfies the contract. Contract tests target the contract and list implementation, while service tests target RecordingService.
 flowchart TB
     Main["main.py<br/>composition root"]
     Service["recording_service.py<br/>application policy"]
@@ -1560,7 +1641,7 @@ A plausible patch plus a confident summary is not evidence.
 
 Each session introduces at most one major abstraction jump. Do not compress sessions merely because the vocabulary seems familiar.
 
-### Session 1 — Discover the boundary (75 minutes)
+## Session 1 — Discover the boundary (75 minutes)
 
 **Launch:** the `screen.clear()` event-history failure.
 
@@ -1576,7 +1657,13 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 
 **Exit ticket:** explain representation exposure without using “private variable” as the whole explanation.
 
-### Session 2 — Define the abstract value (90 minutes)
+### Output: boundary-observation trace
+
+Carry one alias diagram that marks the unauthorized reference crossing, one
+client-visible observation, and one sentence distinguishing a conventionally
+private field from an actually protected ownership boundary.
+
+## Session 2 — Define the abstract value (90 minutes)
 
 **Instructor move:** erase Python fields and retain only an ordered sequence of events.
 
@@ -1590,7 +1677,12 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 
 **Exit ticket:** state why an ADT is not a class.
 
-### Session 3 — Connect rep to meaning (100 minutes)
+### Output: EventStore law card
+
+Carry an abstract-value sentence, four operation contracts, one non-guarantee,
+and the append-order law that a later implementation must preserve.
+
+## Session 3 — Connect rep to meaning (100 minutes)
 
 **Instructor move:** introduce \(R\), \(A\), \(RI\), and \(AF\) only after comparing the list and tuple states.
 
@@ -1604,7 +1696,13 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 
 **Exit ticket:** explain why RI talks about rep values while AF explains their abstract meaning.
 
-### Session 4 — Read Python interface mechanisms (90 minutes)
+### Output: AF/RI correspondence table
+
+Carry one legal and one illegal representation, its RI result, its AF meaning
+when legal, and the exact operation responsible for preserving or repairing
+the invariant.
+
+## Session 4 — Read Python interface mechanisms (90 minutes)
 
 **Instructor move:** compare duck typing, `Protocol`, `ABC`, and `__len__` against one need at a time.
 
@@ -1614,11 +1712,59 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 2. explain why a method signature cannot prove an ordering law;
 3. decide whether Atlas needs nominal inheritance;
 4. critique `@runtime_checkable` as “contract verification”;
-5. decide whether to add `__iter__` and defend the answer.
+5. decide whether to add `__iter__` and defend the answer;
+6. complete the required law-breaking `ReversingStore` trace below.
+
+### Required trace — right shape, wrong behavior
+
+Do not treat the following as an optional example. Before opening the reveal,
+predict the result of the assertion, name the violated EventStore law, and
+record **low / medium / high** confidence.
+
+```python
+class ReversingStore:
+    def __init__(self) -> None:
+        self._items: list[StudyEvent] = []
+
+    def append(self, event: StudyEvent) -> None:
+        self._items.append(event)
+
+    def history(self) -> tuple[StudyEvent, ...]:
+        return tuple(reversed(self._items))
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+
+first_event = StudyEvent("state", 25, ("binding",))
+second_event = StudyEvent("proof", 30, ("logic",))
+store = ReversingStore()
+store.append(first_event)
+store.append(second_event)
+assert store.history() == (first_event, second_event)
+```
+
+<details>
+<summary>Reveal after recording the observer sequence and confidence.</summary>
+
+The assertion must fail: the method surface can match `EventStore`, but the
+observer returns `(second_event, first_event)`. The violated law is append
+order: appending an event must leave all earlier events before it in the
+observable history. The smallest independent regression is the two-event
+observer sequence shown above. A `Protocol` can help establish a structural
+surface; it cannot establish this temporal behavioral law.
+
+</details>
 
 **Exit ticket:** give one fact each mechanism checks and one fact it cannot check.
 
-### Session 5 — Recover architecture and debug an invariant (120 minutes)
+### Output: structural-shape versus behavioral-law trace
+
+Carry the `ReversingStore` prediction, confidence, violated append-order law,
+and the smallest two-event regression that distinguishes a matching interface
+from a behavioral contract.
+
+## Session 5 — Recover architecture and debug an invariant (120 minutes)
 
 **Learner actions:**
 
@@ -1632,7 +1778,13 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 
 **Exit ticket:** name the exact mutator and RI clause involved in the bug.
 
-### Session 6 — Design, delegate, and review (120 minutes)
+### Output: architecture and invariant repair note
+
+Carry one dependency map, the authoritative and derived state, a falsifiable
+cache-failure claim, the smallest repair, and the regression that would fail
+again if the invariant were broken.
+
+## Session 6 — Design, delegate, and review (120 minutes)
 
 **Learner actions:**
 
@@ -1646,7 +1798,13 @@ Each session introduces at most one major abstraction jump. Do not compress sess
 
 **Exit ticket:** distinguish “the patch implements the methods” from “the patch satisfies the ADT.”
 
-### Session 7 — TA studio and consolidation (60 minutes)
+### Output: replaceable-store dossier
+
+Carry the bounded agent brief, a prioritized patch review, exact verification
+commands and results, one retained uncertainty, and the five-to-eight-minute
+oral-defense claim—not a score or completion declaration.
+
+### Optional Session 7 — TA studio and consolidation (60 minutes)
 
 Bring:
 
@@ -1712,6 +1870,8 @@ State the old abstraction, the new observation, and the contract clause that mus
 ---
 
 ## 15. Understanding diagnostic — eight multiple-choice investigations
+
+### Confidence before explanation
 
 This is a fast diagnostic, not an exam identity. For each question, record:
 
@@ -2057,7 +2217,7 @@ Return briefly to Module 2 when Michael cannot:
 - use base case plus preservation step;
 - distinguish a concrete example from a quantified law.
 
-The bridge is complete when the missing idea is demonstrated on a new example. Do not restart an entire module.
+Use one new example to demonstrate the repaired idea; do not restart an entire module.
 
 ### 16.6 Misconception log entry
 
@@ -2078,7 +2238,9 @@ Transfer result:
 
 ## 17. Mastery evidence and Atlas milestone
 
-Multiple-choice results inform teaching but cannot prove ownership. Mastery is a portfolio of connected evidence.
+Multiple-choice results inform teaching but cannot prove ownership. Treat this
+portfolio as connected evidence for choosing the next bridge or repair, not as
+a decision about whether Michael passes.
 
 ### Atlas milestone 3 — Replaceable event store
 
@@ -2094,9 +2256,17 @@ Deliver:
 8. **Tradeoff note:** semantic equivalence plus time, space, ownership, and change-cost differences.
 9. **Oral defense:** five to eight minutes, followed by unfamiliar counterexamples.
 
+### Project acceptance criteria
+
+The dossier is ready for constructive review when it makes the public
+observations, AF/RI, representation-exposure argument, shared behavioral
+tests, one repaired invariant failure, and one representation tradeoff
+inspectable. Missing evidence selects a next repair or retrieval activity; it
+does not produce a pass/fail result.
+
 ### Mastery rubric
 
-| Dimension | Not yet | Developing | Mastery evidence |
+| Dimension | Current bridge | Developing | Evidence to carry forward |
 |---|---|---|---|
 | Abstract model | names classes/fields as the ADT | separates rep from public methods | states abstract values, laws, and non-guarantees without naming a rep |
 | Contracts | gives happy-path examples | states some pre/postconditions | includes frame conditions, failures, temporal laws, and cost boundaries |
@@ -2108,9 +2278,9 @@ Deliver:
 | Patch review | trusts summary or style | finds obvious bug | reviews contract, rep, flow, failure, tests, and scope with prioritized findings |
 | Connections | recalls nearby terms | gives one analogy | transfers abstraction reasoning to a later CS layer and names the new observation |
 
-### Mastery gate
+### Evidence route
 
-Advance when Michael can, without implementation notes:
+Use the following rigorous criteria, without implementation notes:
 
 - explain the list and chunk implementations as the same ADT;
 - recover AF and RI from an unfamiliar small store;
@@ -2121,7 +2291,9 @@ Advance when Michael can, without implementation notes:
 - explain why `Protocol` is useful but insufficient;
 - defend one representation choice under a stated workload.
 
-The eight diagnostic questions must eventually be answered with explanations, and no high-confidence misconception may remain. A first-attempt percentage alone is neither necessary nor sufficient.
+Revisit the eight diagnostic questions with explanations. A high-confidence
+misconception signals its named repair before using this evidence for the next
+handoff; a first-attempt percentage alone is neither necessary nor sufficient.
 
 ### Oral-defense prompts
 
@@ -2190,6 +2362,9 @@ The eight diagnostic questions must eventually be answered with explanations, an
 ## 19. One-page consolidation
 
 ```mermaid
+%% atlas-diagram-id: m03-abstraction-consolidation
+%% atlas-diagram-title: An abstraction boundary makes storage replaceable without rewriting clients
+%% atlas-diagram-alt: The need to change storage leads to an abstract ordered history, operations, a behavioral contract, and a Protocol interface. RecordingService uses only that interface; list, tuple, and chunk representations run through shared observable-behavior tests, followed by human review and later work on data structures, APIs, transactions, and protocols.
 flowchart TB
     Need["Need: change storage<br/>without rewriting clients"]
     Abstract["Abstract value<br/>ordered event history"]
@@ -2247,7 +2422,17 @@ One later CS topic that now looks like the same problem at a larger scale is:
 
 ---
 
-## 20. Source synthesis and further study
+## 20. Official calibration card
+
+| Atlas evidence | Official calibration anchor | Decision |
+| --- | --- | --- |
+| Sessions 1–6: EventStore contract, representation change, abstraction function/representation invariant, rep-exposure debugging, and patch review | [MIT 6.102 — Abstraction Functions & Rep Invariants](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) defines AF/RI, documentation obligations, `checkRep`, and representation exposure. | **Aligned, adapted.** The intellectual obligations transfer to Python `Protocol` and runtime checks; full static-checking and team-review infrastructure come later. |
+
+**Access and reuse.** Checked 2026-08-01. This is a link-only calibration
+source. Atlas retains its own event-store story, code, diagrams, prompts, and
+diagnostics; do not copy course assets, exercises, or solutions.
+
+## 21. Source synthesis and further study
 
 This workbook is a synthesis, not a transcription. The event-store narrative, code, diagnostic distractors, studios, and agent-review materials are original to Atlas. Sources were used for distinct roles:
 
@@ -2275,6 +2460,17 @@ Use sources in this order:
 5. Read the Python `Protocol` and `abc` references only with the question “Which dependency does this mechanism express?”
 6. Return to the candidate patch and revise the review.
 
+### Session-to-source-and-evidence route
+
+| Session | Claim or learner artifact | Consult after your own attempt |
+| --- | --- | --- |
+| 1 | representation-exposure trace and observable client need | [Composing Programs §2.2](https://www.composingprograms.com/pages/22-data-abstraction.html) for abstraction barriers |
+| 2 | EventStore operations, laws, and client-visible contract | [MIT 6.102 ADTs](https://web.mit.edu/6.102/www/sp26/classes/06-abstract-data-types/) for operation-based abstraction |
+| 3 | AF, RI, and representation-exposure argument | [MIT 6.102 AF/RI](https://web.mit.edu/6.102/www/sp26/classes/07-abstraction-functions-rep-invariants/) for the formal model |
+| 4 | right-shape/wrong-law `ReversingStore` regression | [Python `typing.Protocol`](https://docs.python.org/3.14/library/typing.html#typing.Protocol) for the structural boundary it does and does not provide |
+| 5 | architecture map, failed invariant, and regression | the AF/RI source plus the Atlas trace; neither substitutes for the actual witness |
+| 6 | bounded design review and oral defense | this workbook’s contract, rubric, and learner evidence; linked sources are terminology checks |
+
 Do not assign all linked pages as undirected homework. Every reading has a question and an Atlas artifact.
 
 ### Technical cautions
@@ -2286,6 +2482,137 @@ Do not assign all linked pages as undirected homework. Every reading has a quest
 - Representation independence covers only observations included in the contract.
 - Source licenses and university academic-integrity rules still apply; link to original exercises rather than presenting them as Atlas originals.
 
-## Instructor decision rule
+## Constructive next-step guide
 
-Do not advance because Michael can define “ADT,” “Protocol,” and “representation invariant.” Advance when he can recover the abstraction from unfamiliar code, identify what clients may observe, trace a concrete rep through AF, expose a violated invariant with evidence, direct a bounded implementation, and reject a patch that satisfies method signatures but not behavioral laws.
+Evidence chooses the next bridge or repair; it does not decide whether Michael
+passes. With a clear, self-supported explanation, continue with the M4 handoff.
+That explanation should cover an unfamiliar ADT's public observations,
+abstraction function, representation invariant, exposure or cache failure,
+dependency direction, and behavioral patch review. Otherwise, perform the
+`ReversingStore` trace and stale-cache repair with the Teaching Assistant before
+returning to the same evidence.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
+
+## Guided Codex handoff — M3
+
+The existing TA/consolidation session is an **optional repair and synthesis
+session**, not a seventh required core session. The six-session spine remains
+the required progression.
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M3. This client-visible contract is [claim],
+this representation invariant protects it, and my confidence is [level].”** Ask
+the learner to trace one concrete representation through the abstraction
+function before discussing type annotations. Use this hint ladder: client
+observation → abstraction function → representation invariant → alias/owner →
+smallest failing test. Then change one implementation detail while preserving
+the contract and ask which test should still pass. End with a compact evidence
+summary, not a score.
+
+### Supportive oral-defense protocol
+
+Treat the conversation as a joint inspection, not a rigid exam. Invite one
+learner-selected claim and confidence level; ask for the shortest concrete
+trace before naming a correction; then adapt with a hint, counterexample, and
+transfer question. Keep formulas, code, and diagrams readable in the visible
+chat when available, and give a short prose or ASCII alternative when rich
+rendering is uncertain.
+
+### Invitation — name your current model
+
+Ask: “Which client-visible fact does your EventStore promise, which AF/RI pair
+supports it, and how confident are you in that explanation?” The learner may
+start with an uncertainty rather than a polished answer.
+
+### Hint ladder — recover observable behavior one link at a time
+
+Move only as needed: client observation → abstract history → operation law →
+AF → RI → owner/alias path → smallest failing regression. Pause after each
+link for a prediction rather than supplying a complete solution at once.
+
+### Changed-premise counterexample
+
+Keep the same method signatures, but let `history()` reverse insertion order
+or return an alias to mutable state. Ask which published observation changed,
+which law or RI argument now fails, and what the smallest independent test
+would reveal.
+
+### Transfer — from an EventStore to another boundary
+
+Ask the learner to choose one later boundary—a database cache, adapter,
+network protocol, or concurrent operation—and name the new observation that
+must become explicit without claiming that this module has taught the later
+mechanism.
+
+### Learner-controlled evidence summary
+
+End with the learner's own selected contract claim, trace or diagram,
+confidence, unresolved question, and proposed next step. Keep it in the chat
+or export it only through a learner-authorized workflow; do not claim a Notion
+write, transcript retention, oral-exam result, grade, or mastery decision.
+
+### Study Partner — abstraction rehearsal
+
+Show a short interface and ask: “What may a client assume, and what must stay
+hidden?” Then offer one tempting implementation leak such as list order, cached
+state, or a private field. Ask for the smallest counterexample that would reveal
+why treating it as public breaks representation independence.
+
+### Forward handoff — M4
+
+Carry an interface claim, one RI/AF trace, and one counterexample into **M4**.
+The next module supplies the logical language needed to state such contracts,
+quantifiers, and proof obligations precisely.
+
+## Bench pack
+
+**Bench pack:** `m03` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures, mirroring the `EventStore` protocol and
+the `_check_rep()` discipline in section 5.
+
+### Bench 3 — AF/RI correspondence table
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** a chunked store whose representation invariant is checked *during*
+a mutator, not only at its boundaries. It holds before, holds after, and is false
+in between — and an exception raised in that window leaves the object permanently
+invalid.
+**Cannot establish:** that every mutator has such a window, or that this store is
+otherwise correct. Concurrency makes the window observable for reasons Module 19
+owns.
+
+### Bench 4 — structural-shape versus behavioral-law trace
+
+**Session:** 4. **Rungs:** review and verify, recognize.
+**Executes:** one store that reverses history, put in front of three judges.
+`isinstance` under `@runtime_checkable` accepts it; a required-arity signature
+check accepts it; only a suite encoding the protocol's behavioural laws rejects it.
+**Cannot establish:** completeness of the law suite. It covers emptiness, order,
+snapshot stability, and append-only, and nothing about type rejection or
+persistence.
+
+### Bench 5 — architecture and invariant repair note
+
+**Session:** 5. **Rungs:** debug and defend, map.
+**Executes:** a memoised store with two mutators and an unwritten cross-field
+invariant. Checking it after each mutator locates the one that forgets to
+invalidate, without the reader having to guess.
+**Cannot establish:** that the structural repair survives concurrency, a
+mid-mutation exception, or a future mutator that bypasses the shared route.
+
+### Sessions without a bench
+
+- **Session 1** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 2** — defining the abstract value is a specification argument, not a run.
+- **Session 6** — a design-and-review dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m03-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

@@ -1,316 +1,134 @@
 import { createHash } from "node:crypto";
-import {
-  access,
-  mkdir,
-  readdir,
-  readFile,
-  rm,
-  writeFile,
-} from "node:fs/promises";
+import { access, lstat, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { advancedModuleBridgePath } from "./advanced-module-bridge.mjs";
+import {
+  applyCourseStatusSummary,
+  courseStatusProjectionPath,
+  courseStatusSurfaceRelativePaths,
+  renderCourseStatusProjection,
+} from "./course-status-projection.mjs";
+import {
+  advancedModuleContractPath,
+  loadAdvancedModuleContractRegistry,
+  validateAdvancedModuleContractRegistry,
+} from "./advanced-module-contract.mjs";
+import {
+  inventoryCrosswalkRelativePath,
+  loadCourseGraph,
+  projectReaderModules,
+} from "./course-graph.mjs";
+import {
+  legacyModuleContractAuditRelativePath,
+  loadLegacyModuleContractAudit,
+  renderLegacyModuleContractAuditReport,
+  validateLegacyModuleContractAudit,
+} from "./validate-legacy-module-contract-audit.mjs";
+import {
+  combineModuleContractPacketReports,
+  loadLegacyModuleContractPacketRegistry,
+  loadModuleContractCandidatePacketRegistry,
+  validateLegacyModuleContractPacketRegistry,
+  validateModuleContractCandidatePacketRegistry,
+} from "./legacy-module-contract-packet.mjs";
+import {
+  legacyCandidatePreflightProfilesPath,
+  loadLegacyCandidatePreflightProfiles,
+  validateLegacyCandidatePreflightProfiles,
+} from "./legacy-candidate-preflight-profiles.mjs";
+import {
+  loadReleaseInputPolicy,
+  releaseInputPolicyPath,
+} from "./release-input-policy.mjs";
+import {
+  loadReleaseEvidencePolicy,
+  releaseEvidencePolicyPath,
+} from "./release-evidence-verifier.mjs";
+import {
+  canonicalReleaseInputText,
+  releaseInputSha256,
+} from "./release-input-ledger.mjs";
+import {
+  loadManualLearningRecordWorkflow,
+  validateManualLearningRecordWorkflow,
+} from "./manual-learning-record-workflow.mjs";
+import {
+  loadLiveCodexLearningWorkflow,
+  validateLiveCodexLearningWorkflow,
+} from "./live-codex-learning-workflow.mjs";
+import {
+  loadModuleCompanionGuides,
+  validateModuleCompanionGuides,
+} from "./module-companion-guides.mjs";
+import {
+  loadModuleLearningCompanions,
+  validateModuleLearningCompanions,
+} from "./module-learning-companion.mjs";
+import {
+  loadBrowserProgressSurfacePolicy,
+  validateBrowserProgressSurfacePolicy,
+} from "./browser-progress-surface-policy.mjs";
+import {
+  loadModuleContractRegistry,
+  moduleContractRegistryPath,
+  validateModuleContractRegistry,
+} from "./module-contract-registry.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(scriptDirectory, "..");
-const canonicalSourceDirectory = resolve(siteRoot, "..", "modules");
-const outputDirectory = resolve(siteRoot, "content", "modules");
-const canonicalModule17Reference = resolve(
+const moduleDirectory = resolve(siteRoot, "content", "modules");
+const authoringDirectory = resolve(siteRoot, "content", "authoring");
+const contractPath = moduleContractRegistryPath(siteRoot);
+const m26PreviewContractPath = resolve(
   siteRoot,
-  "..",
-  "work",
-  "module17_reference_candidate.py",
+  "content",
+  "course",
+  "contracts",
+  "m26-preview-contract-packet.v1.json",
 );
-const publishedModule17Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module17_reference.py",
-);
-const canonicalModule18Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module18_reference.py",
-);
-const publishedModule18Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module18_reference.py",
-);
-const canonicalModule18Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module18_reference.py",
-);
-const publishedModule18Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module18_reference.py",
-);
-const canonicalModule19Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module19_reference.py",
-);
-const publishedModule19Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module19_reference.py",
-);
-const canonicalModule19Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module19_reference.py",
-);
-const publishedModule19Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module19_reference.py",
-);
-const canonicalModule20Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module20_reference.py",
-);
-const publishedModule20Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module20_reference.py",
-);
-const canonicalModule20Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module20_reference.py",
-);
-const publishedModule20Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module20_reference.py",
-);
-const canonicalModule21Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module21_reference.py",
-);
-const publishedModule21Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module21_reference.py",
-);
-const canonicalModule21Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module21_reference.py",
-);
-const publishedModule21Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module21_reference.py",
-);
-const canonicalModule22Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module22_reference.py",
-);
-const publishedModule22Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module22_reference.py",
-);
-const canonicalModule22Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module22_reference.py",
-);
-const publishedModule22Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module22_reference.py",
-);
-const canonicalModule23Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module23_reference.py",
-);
-const publishedModule23Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module23_reference.py",
-);
-const canonicalModule23Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module23_reference.py",
-);
-const publishedModule23Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module23_reference.py",
-);
-const canonicalModule24Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module24_reference.py",
-);
-const publishedModule24Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module24_reference.py",
-);
-const canonicalModule24Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module24_reference.py",
-);
-const publishedModule24Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module24_reference.py",
-);
-const canonicalModule25Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module25_reference.py",
-);
-const publishedModule25Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module25_reference.py",
-);
-const canonicalModule25Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module25_reference.py",
-);
-const publishedModule25Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module25_reference.py",
-);
-const canonicalModule26Reference = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "module26_reference.py",
-);
-const publishedModule26Reference = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "module26_reference.py",
-);
-const canonicalModule26Tests = resolve(
-  siteRoot,
-  "..",
-  "work",
-  "test_module26_reference.py",
-);
-const publishedModule26Tests = resolve(
-  siteRoot,
-  "public",
-  "downloads",
-  "test_module26_reference.py",
-);
-const canonicalResearchDirectory = resolve(siteRoot, "..", "research");
-const sourceMapOutputDirectory = resolve(siteRoot, "content", "source-maps");
-const sourceDirectory = await access(canonicalSourceDirectory)
-  .then(() => canonicalSourceDirectory)
-  .catch(() => outputDirectory);
-const sourceMapDirectory = await access(canonicalResearchDirectory)
-  .then(() => canonicalResearchDirectory)
-  .catch(() => sourceMapOutputDirectory);
-const publishedThrough = 26;
-const expectedNumbers = Array.from(
-  { length: publishedThrough },
-  (_, index) => index + 1,
-);
-
-const arcs = [
-  {
-    id: "arc-i",
-    numeral: "I",
-    title: "Computation & reasoning",
-    range: "Modules 1–5",
-    description:
-      "Build the execution, abstraction, proof, and cost models that every later system depends on.",
-    start: 1,
-    end: 5,
-  },
-  {
-    id: "arc-ii",
-    numeral: "II",
-    title: "Data & algorithms",
-    range: "Modules 6–11",
-    description:
-      "Connect representation choices to operations, invariants, performance, and algorithmic strategy.",
-    start: 6,
-    end: 11,
-  },
-  {
-    id: "arc-iii",
-    numeral: "III",
-    title: "Durable software",
-    range: "Modules 12–16",
-    description:
-      "Turn local reasoning into stable APIs, evidence, maintainable architecture, delivery, and transactions.",
-    start: 12,
-    end: 16,
-  },
-  {
-    id: "arc-iv",
-    numeral: "IV",
-    title: "Machine & network",
-    range: "Modules 17–22",
-    description:
-      "Modules 17–22 connect machine execution and OS mediation to explicit concurrent histories, bounded async ownership, evidence-aware protocols, partial failure, causal order, and then security, privacy, trust, and provenance boundaries.",
-    start: 17,
-    end: 22,
-  },
-  {
-    id: "arc-v",
-    numeral: "V",
-    title: "Languages & intelligence",
-    range: "Modules 23–26",
-    description:
-      "Derive language meaning and runtime evidence, then apply AI-era judgment and human-centered design in an integrated Atlas defense.",
-    start: 23,
-    end: 26,
-  },
+const m26PreviewReferencePaths = [
+  resolve(siteRoot, "content", "course", "reference-models", "module26_reference.py"),
+  resolve(siteRoot, "content", "course", "reference-models", "test_module26_reference.py"),
 ];
+const graphPath = resolve(siteRoot, "content", "course", "course-graph.v2.json");
+const inventoryCrosswalkPath = resolve(siteRoot, inventoryCrosswalkRelativePath);
+const synthesisPreviewConversationsPath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "synthesis-preview-conversations.v1.json",
+);
+const performanceBudgetPolicyPath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "client-performance-budget.v1.json",
+);
+const manifestPath = resolve(moduleDirectory, "manifest.json");
+const moduleContentPath = resolve(moduleDirectory, "module-content.ts");
+const authoringModuleContentPath = resolve(authoringDirectory, "module-authoring-content.ts");
+const releaseInputsPath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "release-inputs.v1.json",
+);
+const goalComplianceSourcePath = resolve(
+  siteRoot,
+  "content",
+  "course",
+  "goal-compliance.v1.json",
+);
+const legacyModuleContractAuditPath = resolve(siteRoot, legacyModuleContractAuditRelativePath);
+const legacyModuleContractAuditReportPath = resolve(
+  siteRoot,
+  "docs",
+  "LEGACY_MODULE_CONTRACT_AUDIT.md",
+);
 
 function moduleNumber(filename) {
-  const match = filename.match(/^(\d{2})_.+\.md$/);
+  const match = filename.match(/^(\d{2})_.+\.md$/u);
   return match ? Number(match[1]) : null;
 }
 
@@ -319,6 +137,10 @@ function moduleSlug(filename) {
     .replace(/\.md$/u, "")
     .replaceAll("_", "-")
     .toLowerCase();
+}
+
+function sha256(value) {
+  return createHash("sha256").update(value).digest("hex");
 }
 
 function plainText(value) {
@@ -365,383 +187,334 @@ function normalizeNewlines(value) {
   return value.replace(/\r\n?/gu, "\n");
 }
 
-function writeIfChanged(path, content) {
+async function writeIfChanged(path, content) {
   const normalizedContent = normalizeNewlines(content);
-  return readFile(path, "utf8")
-    .catch(() => null)
-    .then((current) =>
-      current !== null && normalizeNewlines(current) === normalizedContent
-        ? false
-        : writeFile(path, normalizedContent).then(() => true),
-    );
-}
-
-await mkdir(outputDirectory, { recursive: true });
-await mkdir(sourceMapOutputDirectory, { recursive: true });
-
-const sourceFiles = (await readdir(sourceDirectory))
-  .filter((filename) => moduleNumber(filename) !== null)
-  .sort((left, right) => moduleNumber(left) - moduleNumber(right));
-
-const selectedFiles = sourceFiles.filter((filename) =>
-  expectedNumbers.includes(moduleNumber(filename)),
-);
-const selectedNumbers = selectedFiles.map(moduleNumber);
-
-if (
-  selectedNumbers.length !== expectedNumbers.length ||
-  selectedNumbers.some((number, index) => number !== expectedNumbers[index])
-) {
-  throw new Error(
-    `Expected exactly Modules 1–${publishedThrough} in ${sourceDirectory}; found ${selectedNumbers.join(", ")}.`,
-  );
-}
-
-const existingDerived = (await readdir(outputDirectory)).filter((filename) =>
-  filename.endsWith(".md"),
-);
-const selectedSet = new Set(selectedFiles);
-for (const staleFilename of existingDerived) {
-  if (!selectedSet.has(staleFilename)) {
-    await rm(join(outputDirectory, staleFilename));
+  const current = await readFile(path, "utf8").catch(() => null);
+  if (current !== null && normalizeNewlines(current) === normalizedContent) {
+    return false;
   }
+  await writeFile(path, normalizedContent);
+  return true;
+}
+
+async function synchronizeCourseStatusSurfaces(courseGraph) {
+  const changes = [
+    writeIfChanged(
+      courseStatusProjectionPath(siteRoot),
+      renderCourseStatusProjection(courseGraph),
+    ),
+  ];
+  for (const surfacePath of courseStatusSurfaceRelativePaths) {
+    const path = resolve(siteRoot, surfacePath);
+    const content = await readFile(path, "utf8");
+    changes.push(writeIfChanged(path, applyCourseStatusSummary(content, courseGraph)));
+  }
+  return Promise.all(changes);
+}
+
+async function synchronizeSourceArtifactCopies(sourceArtifactCopies) {
+  let changed = 0;
+  for (const { canonicalPath, publicPath } of sourceArtifactCopies) {
+    await requireFile(canonicalPath, `Canonical source artifact ${repositoryPath(canonicalPath)}`);
+    const canonicalSource = await readFile(canonicalPath, "utf8");
+    if (await writeIfChanged(publicPath, canonicalSource)) {
+      changed += 1;
+    }
+  }
+  return changed;
+}
+
+function repositoryPath(path) {
+  return relative(siteRoot, path).replaceAll("\\", "/");
+}
+
+function compareRepositoryPaths(left, right) {
+  const leftPath = repositoryPath(left);
+  const rightPath = repositoryPath(right);
+  return leftPath < rightPath ? -1 : leftPath > rightPath ? 1 : 0;
+}
+
+async function requireFile(path, description) {
+  await access(path).catch(() => {
+    throw new Error(`${description} is missing: ${repositoryPath(path)}.`);
+  });
+  const stats = await lstat(path);
+  if (!stats.isFile() || stats.isSymbolicLink()) {
+    throw new Error(`${description} must be a regular file: ${repositoryPath(path)}.`);
+  }
+}
+
+async function releaseInputRecord(path) {
+  // All current allowlisted course inputs are UTF-8 source, workbook, map, or
+  // local teaching-model text. Canonicalize line endings so a Git checkout on
+  // Windows produces the same content-provenance ledger as Linux CI.
+  const content = canonicalReleaseInputText(await readFile(path, "utf8"));
+  return {
+    path: repositoryPath(path),
+    sha256: releaseInputSha256(content),
+  };
+}
+
+const courseGraph = await loadCourseGraph();
+const courseStatusChanges = await synchronizeCourseStatusSurfaces(courseGraph);
+const projectedModules = projectReaderModules(courseGraph);
+const graphByNumber = new Map(
+  courseGraph.modules.map((courseModule) => [courseModule.number, courseModule]),
+);
+const filenames = await readdir(moduleDirectory);
+const workbooksByNumber = new Map();
+
+for (const filename of filenames) {
+  const number = moduleNumber(filename);
+  if (number === null) {
+    continue;
+  }
+  const matching = workbooksByNumber.get(number) ?? [];
+  matching.push(filename);
+  workbooksByNumber.set(number, matching);
 }
 
 const modules = [];
 const importLines = [];
 const contentEntries = [];
-let changedFiles = 0;
-
-const sourceMapFiles = (await readdir(sourceMapDirectory))
-  .filter((filename) => filename.endsWith(".md"))
-  .sort();
-const sourceMapSet = new Set(sourceMapFiles);
-const existingSourceMaps = (await readdir(sourceMapOutputDirectory)).filter(
-  (filename) => filename.endsWith(".md"),
+const releaseInputPolicy = await loadReleaseInputPolicy(siteRoot);
+const releaseEvidencePolicy = await loadReleaseEvidencePolicy(siteRoot);
+const manualLearningRecordWorkflow = await loadManualLearningRecordWorkflow(siteRoot);
+const manualLearningRecordWorkflowReport = await validateManualLearningRecordWorkflow(
+  manualLearningRecordWorkflow,
+  { siteRoot },
 );
-for (const staleFilename of existingSourceMaps) {
-  if (!sourceMapSet.has(staleFilename)) {
-    await rm(join(sourceMapOutputDirectory, staleFilename));
-    changedFiles += 1;
+const liveCodexLearningWorkflow = await loadLiveCodexLearningWorkflow(siteRoot);
+const liveCodexLearningWorkflowReport = await validateLiveCodexLearningWorkflow(
+  liveCodexLearningWorkflow,
+  { siteRoot },
+);
+const moduleCompanionGuides = await loadModuleCompanionGuides(siteRoot);
+const moduleCompanionGuidesReport = await validateModuleCompanionGuides(
+  moduleCompanionGuides,
+  { graph: courseGraph, siteRoot },
+);
+const moduleLearningCompanions = await loadModuleLearningCompanions(siteRoot);
+const moduleLearningCompanionsReport = await validateModuleLearningCompanions(
+  moduleLearningCompanions,
+  { graph: courseGraph, siteRoot },
+);
+const browserProgressSurfacePolicy = await loadBrowserProgressSurfacePolicy(siteRoot);
+const browserProgressSurfacePolicyReport = await validateBrowserProgressSurfacePolicy(
+  browserProgressSurfacePolicy,
+  { siteRoot },
+);
+const legacyModuleContractAudit = await loadLegacyModuleContractAudit(siteRoot);
+const legacyModuleContractAuditReport = await validateLegacyModuleContractAudit(
+  legacyModuleContractAudit,
+  { siteRoot },
+);
+const legacyCandidatePreflightProfiles = await loadLegacyCandidatePreflightProfiles(siteRoot);
+const legacyCandidatePreflightProfilesReport = await validateLegacyCandidatePreflightProfiles(
+  legacyCandidatePreflightProfiles,
+  { siteRoot },
+);
+const releaseInputPaths = new Set([
+  graphPath,
+  inventoryCrosswalkPath,
+  goalComplianceSourcePath,
+  synthesisPreviewConversationsPath,
+  performanceBudgetPolicyPath,
+  contractPath,
+  m26PreviewContractPath,
+  advancedModuleBridgePath(siteRoot),
+  advancedModuleContractPath(siteRoot),
+  releaseInputPolicyPath(siteRoot),
+  releaseEvidencePolicyPath(siteRoot),
+  legacyModuleContractAuditPath,
+  legacyCandidatePreflightProfilesPath(siteRoot),
+]);
+releaseInputPaths.add(releaseEvidencePolicy.workflowPath);
+const sourceArtifactChanges = await synchronizeSourceArtifactCopies(
+  releaseInputPolicy.sourceArtifactCopies,
+);
+for (const { canonicalPath } of releaseInputPolicy.sourceArtifactCopies) {
+  releaseInputPaths.add(canonicalPath);
+}
+for (const path of manualLearningRecordWorkflowReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of liveCodexLearningWorkflowReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of moduleCompanionGuidesReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of moduleLearningCompanionsReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of browserProgressSurfacePolicyReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+for (const path of legacyCandidatePreflightProfilesReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+releaseInputPaths.add(m26PreviewContractPath);
+for (const path of m26PreviewReferencePaths) releaseInputPaths.add(path);
+
+for (const projectedModule of projectedModules) {
+  const candidates = workbooksByNumber.get(projectedModule.number) ?? [];
+  if (candidates.length !== 1) {
+    throw new Error(
+      `Reader-visible Module ${projectedModule.number} must have exactly one checked-in workbook; found ${candidates.length}.`,
+    );
   }
-}
-for (const filename of sourceMapFiles) {
-  const sourceMap = await readFile(join(sourceMapDirectory, filename), "utf8");
-  if (await writeIfChanged(join(sourceMapOutputDirectory, filename), sourceMap)) {
-    changedFiles += 1;
+
+  const filename = candidates[0];
+  const workbookPath = join(moduleDirectory, filename);
+  const graphModule = graphByNumber.get(projectedModule.number);
+  if (!graphModule) {
+    throw new Error(`Module ${projectedModule.number} is missing from the canonical course graph.`);
   }
-}
-
-await mkdir(dirname(publishedModule17Reference), { recursive: true });
-const module17ReferenceSource = await access(canonicalModule17Reference)
-  .then(() => canonicalModule17Reference)
-  .catch(() => publishedModule17Reference);
-const module17Reference = await readFile(module17ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule17Reference,
-    module17Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module18ReferenceSource = await access(canonicalModule18Reference)
-  .then(() => canonicalModule18Reference)
-  .catch(() => publishedModule18Reference);
-const module18Reference = await readFile(module18ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule18Reference,
-    module18Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module18TestsSource = await access(canonicalModule18Tests)
-  .then(() => canonicalModule18Tests)
-  .catch(() => publishedModule18Tests);
-const module18Tests = await readFile(module18TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule18Tests,
-    module18Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module19ReferenceSource = await access(canonicalModule19Reference)
-  .then(() => canonicalModule19Reference)
-  .catch(() => publishedModule19Reference);
-const module19Reference = await readFile(module19ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule19Reference,
-    module19Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module19TestsSource = await access(canonicalModule19Tests)
-  .then(() => canonicalModule19Tests)
-  .catch(() => publishedModule19Tests);
-const module19Tests = await readFile(module19TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule19Tests,
-    module19Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module20ReferenceSource = await access(canonicalModule20Reference)
-  .then(() => canonicalModule20Reference)
-  .catch(() => publishedModule20Reference);
-const module20Reference = await readFile(module20ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule20Reference,
-    module20Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module20TestsSource = await access(canonicalModule20Tests)
-  .then(() => canonicalModule20Tests)
-  .catch(() => publishedModule20Tests);
-const module20Tests = await readFile(module20TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule20Tests,
-    module20Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module21ReferenceSource = await access(canonicalModule21Reference)
-  .then(() => canonicalModule21Reference)
-  .catch(() => publishedModule21Reference);
-const module21Reference = await readFile(module21ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule21Reference,
-    module21Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module21TestsSource = await access(canonicalModule21Tests)
-  .then(() => canonicalModule21Tests)
-  .catch(() => publishedModule21Tests);
-const module21Tests = await readFile(module21TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule21Tests,
-    module21Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module22ReferenceSource = await access(canonicalModule22Reference)
-  .then(() => canonicalModule22Reference)
-  .catch(() => publishedModule22Reference);
-const module22Reference = await readFile(module22ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule22Reference,
-    module22Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module22TestsSource = await access(canonicalModule22Tests)
-  .then(() => canonicalModule22Tests)
-  .catch(() => publishedModule22Tests);
-const module22Tests = await readFile(module22TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule22Tests,
-    module22Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module23ReferenceSource = await access(canonicalModule23Reference)
-  .then(() => canonicalModule23Reference)
-  .catch(() => publishedModule23Reference);
-const module23Reference = await readFile(module23ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule23Reference,
-    module23Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module23TestsSource = await access(canonicalModule23Tests)
-  .then(() => canonicalModule23Tests)
-  .catch(() => publishedModule23Tests);
-const module23Tests = await readFile(module23TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule23Tests,
-    module23Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module24ReferenceSource = await access(canonicalModule24Reference)
-  .then(() => canonicalModule24Reference)
-  .catch(() => publishedModule24Reference);
-const module24Reference = await readFile(module24ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule24Reference,
-    module24Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module24TestsSource = await access(canonicalModule24Tests)
-  .then(() => canonicalModule24Tests)
-  .catch(() => publishedModule24Tests);
-const module24Tests = await readFile(module24TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule24Tests,
-    module24Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module25ReferenceSource = await access(canonicalModule25Reference)
-  .then(() => canonicalModule25Reference)
-  .catch(() => publishedModule25Reference);
-const module25Reference = await readFile(module25ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule25Reference,
-    module25Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module25TestsSource = await access(canonicalModule25Tests)
-  .then(() => canonicalModule25Tests)
-  .catch(() => publishedModule25Tests);
-const module25Tests = await readFile(module25TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule25Tests,
-    module25Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module26ReferenceSource = await access(canonicalModule26Reference)
-  .then(() => canonicalModule26Reference)
-  .catch(() => publishedModule26Reference);
-const module26Reference = await readFile(module26ReferenceSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule26Reference,
-    module26Reference,
-  )
-) {
-  changedFiles += 1;
-}
-
-const module26TestsSource = await access(canonicalModule26Tests)
-  .then(() => canonicalModule26Tests)
-  .catch(() => publishedModule26Tests);
-const module26Tests = await readFile(module26TestsSource, "utf8");
-if (
-  await writeIfChanged(
-    publishedModule26Tests,
-    module26Tests,
-  )
-) {
-  changedFiles += 1;
-}
-
-for (const filename of selectedFiles) {
-  const number = moduleNumber(filename);
-  const markdown = normalizeNewlines(
-    await readFile(join(sourceDirectory, filename), "utf8"),
-  );
+  const markdown = normalizeNewlines(await readFile(workbookPath, "utf8"));
   const heading = markdown.match(/^#\s+(.+)$/mu)?.[1]?.trim();
   if (!heading) {
     throw new Error(`${filename} has no level-one title.`);
   }
 
   const title =
-    heading.replace(new RegExp(`^Module\\s+${number}\\s+[—–-]\\s*`, "iu"), "").trim() ||
+    heading.replace(new RegExp(`^Module\\s+${graphModule.number}\\s+[—–-]\\s*`, "iu"), "").trim() ||
     heading;
   const slug = moduleSlug(filename);
-  const arc = arcs.find(({ start, end }) => number >= start && number <= end);
+  if (title !== graphModule.title) {
+    throw new Error(`Module ${graphModule.number} workbook title does not match the canonical course graph.`);
+  }
+  if (slug !== graphModule.slug) {
+    throw new Error(`Module ${graphModule.number} workbook slug does not match the canonical course graph.`);
+  }
+  if (!graphModule.sourceMap) {
+    throw new Error(`Reader-visible Module ${graphModule.number} must declare a source map.`);
+  }
+  const sourceMapPath = resolve(siteRoot, graphModule.sourceMap);
+  await requireFile(sourceMapPath, `Module ${graphModule.number} source map`);
+  releaseInputPaths.add(workbookPath);
+  releaseInputPaths.add(sourceMapPath);
+
+  const arc = courseGraph.knowledgeArcs.find(({ id }) => id === graphModule.knowledgeArcId);
   if (!arc) {
-    throw new Error(`No arc is configured for Module ${number}.`);
+    throw new Error(`No knowledge arc is configured for Module ${graphModule.number}.`);
   }
-
-  if (await writeIfChanged(join(outputDirectory, filename), markdown)) {
-    changedFiles += 1;
-  }
-
-  const previousFilename = selectedFiles[number - 2] ?? null;
-  const nextFilename = selectedFiles[number] ?? null;
-  const variableName = `module${String(number).padStart(2, "0")}`;
+  const variableName = `module${String(graphModule.number).padStart(2, "0")}`;
   importLines.push(`import ${variableName} from "./${filename}?raw";`);
   contentEntries.push(`  "${slug}": ${variableName},`);
-
   modules.push({
-    number,
+    number: graphModule.number,
     slug,
     filename,
     title,
     summary: firstSubstantialParagraph(markdown),
     arcId: arc.id,
     wordCount: markdown.trim().split(/\s+/u).length,
-    estimatedMinutes: Math.max(
-      1,
-      Math.ceil(markdown.trim().split(/\s+/u).length / 210),
-    ),
-    sourceHash: createHash("sha256").update(markdown).digest("hex"),
-    prerequisiteSlug: previousFilename ? moduleSlug(previousFilename) : null,
-    previousSlug: previousFilename ? moduleSlug(previousFilename) : null,
-    nextSlug: nextFilename ? moduleSlug(nextFilename) : null,
+    estimatedMinutes: graphModule.referenceReadMinutes,
+    focusedStudyMinutes: graphModule.focusedStudyMinutes ?? null,
+    sourceHash: sha256(markdown),
+    id: graphModule.id,
+    state: graphModule.state,
+    routeRole: graphModule.routeRole,
+    routePosition: projectedModule.routePosition,
+    masteryGateId: graphModule.masteryGateId,
+    sourceMap: graphModule.sourceMap,
+    studioId: graphModule.studioId,
+    prerequisiteNumbers: projectedModule.prerequisiteNumbers,
+    prerequisiteSlugs: projectedModule.prerequisiteSlugs,
+    previousRouteNumber: projectedModule.previousRouteNumber,
+    previousSlug: projectedModule.previousSlug,
+    nextRouteNumber: projectedModule.nextRouteNumber,
+    nextSlug: projectedModule.nextSlug,
   });
 }
 
+await requireFile(contractPath, "Module contract registry v3");
+await requireFile(m26PreviewContractPath, "M26 preview contract packet");
+for (const path of m26PreviewReferencePaths) {
+  await requireFile(path, "M26 private preview reference input");
+}
+await requireFile(synthesisPreviewConversationsPath, "Synthesis preview conversations");
+await requireFile(performanceBudgetPolicyPath, "Client performance-budget policy");
+await requireFile(advancedModuleBridgePath(siteRoot), "Advanced module prerequisite-session bridge");
+await requireFile(advancedModuleContractPath(siteRoot), "Lifecycle-aware advanced module contract");
+await requireFile(legacyModuleContractAuditPath, "Legacy module-contract audit input");
+await requireFile(releaseEvidencePolicy.path, "Release-evidence policy");
+await requireFile(releaseEvidencePolicy.workflowPath, "Pinned Course CI workflow");
+for (const path of releaseInputPolicy.downloadPaths) {
+  await requireFile(path, "Allowlisted local teaching artifact");
+  releaseInputPaths.add(path);
+}
+
 const manifest = {
-  schemaVersion: 1,
-  moduleCount: modules.length,
-  arcs: arcs.map((arc) => ({
-    id: arc.id,
-    numeral: arc.numeral,
-    title: arc.title,
-    range: arc.range,
-    description: arc.description,
-  })),
+  schemaVersion: 5,
+  courseGraphSchemaVersion: courseGraph.schemaVersion,
+  routePlanId: courseGraph.routePlan.id,
+  definedModuleCount: courseGraph.modules.length,
+  readerVisibleModuleCount: modules.length,
+  legacyOpenModuleCount: modules.filter(
+    ({ state }) => state.readerAccess === "full" && state.availability === "legacy-open",
+  ).length,
+  publishedModuleCount: modules.filter(
+    ({ state }) => state.readerAccess === "full" && state.availability === "published",
+  ).length,
+  previewReaderModuleCount: modules.filter(
+    ({ state }) => state.readerAccess === "preview",
+  ).length,
+  arcs: courseGraph.knowledgeArcs.filter((arc) => modules.some(({ arcId }) => arcId === arc.id)),
   modules,
 };
-
-const manifestContent = `${JSON.stringify(manifest, null, 2)}\n`;
+// During a publication promotion, the clean Git index still contains the
+// previous manifest until this synchronizer writes the new deterministic
+// projection. The narrowly scoped pre-write mode permits only that manifest
+// projection; promotion graph, registry, evidence, review, and selector facts
+// must still match one clean Git-index snapshot. validate-course.mjs then
+// verifies the generated manifest normally after it has been staged.
+const advancedModuleContractRegistry = await loadAdvancedModuleContractRegistry(siteRoot);
+const advancedModuleContractReport = await validateAdvancedModuleContractRegistry(
+  courseGraph,
+  advancedModuleContractRegistry,
+  {
+    siteRoot,
+    learnerManifest: manifest,
+    learnerReadableModuleIds: projectedModules.map(({ id }) => id),
+  },
+);
+for (const path of advancedModuleContractReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+const moduleContractRegistry = await loadModuleContractRegistry(siteRoot);
+const moduleContractRegistryReport = await validateModuleContractRegistry(
+  courseGraph,
+  moduleContractRegistry,
+  { siteRoot, manifest, manifestTruth: "pre-write-projection" },
+);
+for (const path of moduleContractRegistryReport.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
+const [legacyModuleContractPacketRegistry, currentModuleContractCandidatePacketRegistry] = await Promise.all([
+  loadLegacyModuleContractPacketRegistry(siteRoot),
+  loadModuleContractCandidatePacketRegistry(siteRoot),
+]);
+const [legacyModuleContractPacketReport, currentModuleContractCandidatePacketReport] = await Promise.all([
+  validateLegacyModuleContractPacketRegistry(
+    courseGraph,
+    legacyModuleContractPacketRegistry,
+    { siteRoot },
+  ),
+  validateModuleContractCandidatePacketRegistry(
+    courseGraph,
+    currentModuleContractCandidatePacketRegistry,
+    { siteRoot },
+  ),
+]);
+const moduleContractPacketCohort = combineModuleContractPacketReports([
+  legacyModuleContractPacketReport,
+  currentModuleContractCandidatePacketReport,
+]);
+for (const path of moduleContractPacketCohort.releaseInputPaths) {
+  releaseInputPaths.add(path);
+}
 const generatedModuleContent = `${[
   "/* This file is generated by scripts/sync-modules.mjs. Do not edit by hand. */",
   ...importLines,
@@ -751,34 +524,55 @@ const generatedModuleContent = `${[
   "};",
   "",
 ].join("\n")}`;
-
-if (await writeIfChanged(join(outputDirectory, "manifest.json"), manifestContent)) {
-  changedFiles += 1;
+const authoringFilenames = (await readdir(authoringDirectory))
+  .filter((filename) => /^m3[1-6]_.+\.md$/u.test(filename))
+  .sort(compareRepositoryPaths);
+const authoringImportLines = [];
+const authoringContentEntries = [];
+for (const filename of authoringFilenames) {
+  const number = Number(filename.slice(1, 3));
+  const graphModule = graphByNumber.get(number);
+  if (!graphModule || graphModule.state.availability !== "authoring-only") {
+    continue;
+  }
+  const workbookPath = join(authoringDirectory, filename);
+  await requireFile(workbookPath, `Private authoring workbook ${filename}`);
+  releaseInputPaths.add(workbookPath);
+  const variableName = `authoringModule${String(number).padStart(2, "0")}`;
+  authoringImportLines.push(`import ${variableName} from "./${filename}?raw";`);
+  authoringContentEntries.push(`  "${graphModule.slug}": ${variableName},`);
 }
-if (
-  await writeIfChanged(
-    join(outputDirectory, "module-content.ts"),
-    generatedModuleContent,
-  )
-) {
-  changedFiles += 1;
-}
+const generatedAuthoringModuleContent = `${[
+  "/* This file is generated by scripts/sync-modules.mjs. Do not edit by hand. */",
+  ...authoringImportLines,
+  "",
+  "export const authoringModuleMarkdownBySlug: Readonly<Record<string, string>> = {",
+  ...authoringContentEntries,
+  "};",
+  "",
+].join("\n")}`;
+const releaseInputs = {
+  schemaVersion: 1,
+  generatedBy: "scripts/sync-modules.mjs",
+  courseGraphSchemaVersion: courseGraph.schemaVersion,
+  contractVersion: "v3",
+  inputs: await Promise.all(
+    [...releaseInputPaths]
+      .sort(compareRepositoryPaths)
+      .map(releaseInputRecord),
+  ),
+};
 
-const sourceLabel = relative(siteRoot, sourceDirectory).replaceAll("\\", "/");
-const outputLabel = relative(siteRoot, outputDirectory).replaceAll("\\", "/");
-const sourceMapLabel = relative(siteRoot, sourceMapDirectory).replaceAll("\\", "/");
+const changed = await Promise.all([
+  writeIfChanged(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`),
+  writeIfChanged(moduleContentPath, generatedModuleContent),
+  writeIfChanged(authoringModuleContentPath, generatedAuthoringModuleContent),
+  writeIfChanged(releaseInputsPath, `${JSON.stringify(releaseInputs, null, 2)}\n`),
+  writeIfChanged(
+    legacyModuleContractAuditReportPath,
+    renderLegacyModuleContractAuditReport(legacyModuleContractAudit, legacyModuleContractAuditReport),
+  ),
+]);
 console.log(
-  "Synced " +
-    modules.length +
-    " modules from " +
-    sourceLabel +
-    " to " +
-    outputLabel +
-    "; " +
-    sourceMapFiles.length +
-    " source maps from " +
-    sourceMapLabel +
-    " (" +
-    changedFiles +
-    " files updated).",
+  `Synced ${modules.length} modules from checked-in content; ${releaseInputs.inputs.length} hashed release inputs (${changed.filter(Boolean).length + courseStatusChanges.filter(Boolean).length + sourceArtifactChanges} generated files updated).`,
 );

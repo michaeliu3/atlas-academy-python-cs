@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m17",
+  "purpose": "Freeze a candidate-only M17 Teaching Assistant, Study Partner, and M28 handoff context without changing M17's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/16",
+    "digest": "sha256:abbf64faeb25012e1133cd7c902408050b5cb88d3723be6a293e45208e443ba3"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected representation, state-transition, ISA, locality, runtime-observation, or bounded-performance claim. Ask for the visible trace, named owner/model/setup, confidence, and one uncertainty before accepting a cache, pipeline, bytecode, or hardware label.",
+    "artifactFocus": "Ask the learner to make a representation card, current/next-state table, PC/register/memory trace, toy-cache geometry, execution-stack map, raw-trial vector, or claim ladder visible. Separate Python semantics, CPython observation, toy model, ISA, host mechanism, and measurement claims.",
+    "repairMove": "Ask for a prediction before correction; change exactly one premise such as signedness, width, byte order, store instruction, cache geometry, permutation, runtime version, or missing trial. Offer the smallest counterexample or trace without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard when available: draw a value/bit/byte map, state table, PC/register/memory trace, cache-event table, or execution-layer ladder beside a small code fragment, and provide a plain-language or ASCII fallback before rehearsing one claim at a time.",
+    "changedPremise": "Keep the priority-code result contract fixed but change one representation, state, model, provenance, or experiment premise. Ask for a prediction and confidence before distinguishing semantics, implementation, declared model, observed result, hypothesis, and prohibited causal claim.",
+    "taHandoff": "End with the learner's selected M17 artifact, confidence, changed premise, owner/model/setup, observed evidence, one unresolved boundary, and a constructive M28 question for the Teaching Assistant."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m28",
+    "carryArtifact": "Carry a bounded architecture dossier: representation contract; state/ISA trace; declared pipeline/cache model; Python-to-observation ownership map; semantic oracle and raw-trial protocol; observation/model/hypothesis separation; falsification step; and an M28 mathematical question—not a mastery claim.",
+    "targetQuestion": "Which vector, matrix, continuous-change, uncertainty, or optimization model would make one current execution or performance claim precise without relabeling a toy or local observation as a universal mechanism?",
+    "boundary": "M16 is M17's only canonical academic prerequisite and M28 is its only canonical forward handoff. M18 is a separate open systems branch whose sole academic prerequisite is M17; the later M31-to-M18 reader continuation is narrative navigation, not an M18 prerequisite. M18 is not M17 navigation, a prerequisite bypass, completion claim, or release evidence."
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-evidence-record",
+  "recordVersion": "v1",
+  "moduleId": "m03",
+  "purpose": "Bind M3's current workbook, source, visual, and companion inputs into a candidate-only structural preflight. This record neither changes the legacy-baseline contract state nor supplies human review or release evidence.",
+  "truthBoundary": {
+    "structuralResolution": "Resolved inputs show only that the declared current local references and locators exist in this Git revision. They do not by themselves establish explanation quality, learner understanding, source authority, or implementation correctness.",
+    "humanReview": "This candidate record is not a human approval, oral-defense result, learner grade, mastery determination, or authorization to mark M3 review-ready.",
+    "release": "This candidate record is not a CI result, source-review record, deployment record, private release, security clearance, or publication claim."
+  },
+  "evidence": [
+    {
+      "id": "m03-prerequisite-forward-map",
+      "criterionId": "prerequisite-forward-map",
+      "claim": "The M3 workbook names its M1/M2 retrieval bridge and its canonical M4 forward connection without treating later conceptual connections as route authority.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "2-prerequisite-retrieval"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "18-backward-and-forward-connections"},
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m03.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A resolving map does not prove prerequisite mastery, route completion, or reviewer acceptance of the learning progression."]
+    },
+    {
+      "id": "m03-six-connected-sessions",
+      "criterionId": "six-connected-sessions",
+      "claim": "M3 exposes six ordered sessions that move from representation exposure through ADT laws, AF/RI, Python mechanisms, invariant debugging, and bounded design review.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "session-1--discover-the-boundary-75-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "session-2--define-the-abstract-value-90-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "session-3--connect-rep-to-meaning-100-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "session-4--read-python-interface-mechanisms-90-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "session-5--recover-architecture-and-debug-an-invariant-120-minutes"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "session-6--design-delegate-and-review-120-minutes"}
+      ],
+      "limitations": ["Heading resolution does not prove that the session progression is coherent, appropriately paced, or complete for every learner."]
+    },
+    {
+      "id": "m03-first-principles",
+      "criterionId": "first-principles",
+      "claim": "M3 begins with client-visible observations and derives a replaceable representation boundary before introducing Python interface mechanisms.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "first-principles-derivation--observations-before-mechanisms"}
+      ],
+      "limitations": ["A named first-principles section does not prove conceptual adequacy, implementation correctness, or learner comprehension."]
+    },
+    {
+      "id": "m03-rigor-bundle",
+      "criterionId": "rigor-definitions-assumptions-derivations-proofs-counterexamples-numerical-experiments",
+      "claim": "M3 exposes separate definition, assumption, derivation/proof idea, counterexample, and bounded cost-model experiment locations for inspecting abstraction and representation independence.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "definition--abstract-value-contract-and-representation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "assumption--observations-are-only-the-stated-contract"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "derivation-and-proof-idea--representation-independence"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "counterexample--a-matching-interface-can-still-break-a-law"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "numerical-experiment--same-law-different-cost"}
+      ],
+      "limitations": ["These structural anchors do not substitute for qualified review of definitions, assumptions, derivations, proof ideas, counterexamples, numerical checks, or source claims."]
+    },
+    {
+      "id": "m03-code-reading-debugging-design",
+      "criterionId": "code-reading-debugging-design",
+      "claim": "M3 contains distinct code-reading, invariant-debugging, and bounded design-review studios centred on recoverable EventStore behavior and architecture.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "9-worked-code-reading-studio-recover-a-chunked-representation"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "11-debugging-studio-a-cache-that-breaks-its-own-invariant"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "12-design-delegate-review-verify"}
+      ],
+      "limitations": ["These prompts do not prove that a learner can independently read, debug, or design a stateful component."]
+    },
+    {
+      "id": "m03-prediction-before-reveal",
+      "criterionId": "prediction-before-reveal",
+      "claim": "M3 asks the learner to predict the chunked representation before opening the explanation and to record confidence before reveal.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "predict-before-reading-the-explanation"}
+      ],
+      "limitations": ["A prompt does not prove that a learner made a prediction, recorded confidence, or received useful feedback."]
+    },
+    {
+      "id": "m03-transfer-task",
+      "criterionId": "transfer-task",
+      "claim": "M3 asks the learner to transfer a client/contract/representation boundary into a later storage, protocol, concurrency, or security context without claiming the later module's mechanisms.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "level-8--transfer"}
+      ],
+      "limitations": ["A written transfer prompt does not establish a correct transfer response, learner readiness, or authority to bypass later prerequisites."]
+    },
+    {
+      "id": "m03-source-ledger",
+      "criterionId": "source-ledger",
+      "claim": "M3 exposes a learner reading route plus a scoped canonical source map and module-specific source/reuse audit addendum.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "21-source-synthesis-and-further-study"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/python_curriculum_sources.md", "locator": "m1m5-learner-calibration-route"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module3_abstraction_interfaces_adts_source_audit_addendum.md", "locator": "source-and-reuse-ledger"},
+        {"kind": "markdown-heading", "role": "source-ledger", "path": "content/source-maps/module3_abstraction_interfaces_adts_source_audit_addendum.md", "locator": "claim-linkage-and-stopping-lines"}
+      ],
+      "limitations": ["Resolving source ledgers and links does not independently validate source quality, access, currentness, license interpretation, or claim correctness."]
+    },
+    {
+      "id": "m03-accessible-visual",
+      "criterionId": "accessible-visual-text-alternative",
+      "claim": "M3 binds its ADT concept map to a concise text alternative and the shared Mermaid reader plus module-specific accessibility regression surface.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "43-concept-map"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "text-alternative--abstraction-boundary-concept-map"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["A local scanner and renderer test do not replace screen-reader, keyboard, browser, or human-comprehension review."]
+    },
+    {
+      "id": "m03-confidence-diagnostic",
+      "criterionId": "confidence-diagnostic-misconceptions",
+      "claim": "M3 exposes a confidence-aware understanding diagnostic and misconception routing rather than a pass/fail score.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "15-understanding-diagnostic--eight-multiple-choice-investigations"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "diagnostic-profile"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "162-misconception-map"}
+      ],
+      "limitations": ["The visible diagnostic does not establish score validity, learner confidence calibration, or diagnostic accessibility quality."]
+    },
+    {
+      "id": "m03-retrieval-review",
+      "criterionId": "retrieval-and-spaced-review",
+      "claim": "M3 includes a learner-controlled +2, +7, and +21 day retrieval route tied to its abstraction and invariant artifacts.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "retrieval-schedule"}
+      ],
+      "limitations": ["A retrieval schedule does not prove that review occurred or that a learner retained the material."]
+    },
+    {
+      "id": "m03-project-rubric",
+      "criterionId": "project-and-evidence-rubric",
+      "claim": "M3 specifies a replaceable EventStore dossier with constructive acceptance criteria and an evidence rubric.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "atlas-milestone-3--replaceable-event-store"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "project-acceptance-criteria"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "mastery-rubric"}
+      ],
+      "limitations": ["A project brief and rubric do not prove learner work quality, portfolio review, or mastery."]
+    },
+    {
+      "id": "m03-supportive-oral-defense",
+      "criterionId": "supportive-oral-defense",
+      "claim": "M3 contains an encouraging conversational oral-defense protocol with invitation, hint, counterexample, transfer, reflection, and learner-controlled evidence-summary surfaces.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "supportive-oral-defense-protocol"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "hint-ladder--recover-observable-behavior-one-link-at-a-time"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "changed-premise-counterexample"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "transfer--from-an-eventstore-to-another-boundary"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "invitation--name-your-current-model"},
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "learner-controlled-evidence-summary"}
+      ],
+      "limitations": ["A protocol does not prove that a voice or text session occurred, rendered correctly, was psychologically safe in practice, or produced learner evidence."]
+    },
+    {
+      "id": "m03-ta-prompt",
+      "criterionId": "ta-prompt",
+      "claim": "The frozen M3 companion binds a Teaching Assistant opening, artifact focus, and repair move to the EventStore client/contract/representation boundary.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m03.v1.json", "locator": "/teachingAssistant"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Teaching Assistant received it, used GPT Live, rendered a whiteboard, or wrote a Notion note."]
+    },
+    {
+      "id": "m03-study-partner-prompt",
+      "criterionId": "study-partner-prompt",
+      "claim": "The frozen M3 companion binds a non-grading Study Partner rehearsal routine, changed-premise prompt, and Teaching Assistant handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m03.v1.json", "locator": "/studyPartner"}
+      ],
+      "limitations": ["A frozen prompt does not prove that the designated Codex Study Partner held a live discussion, rendered formulas, or saved a learner-authorized note."]
+    },
+    {
+      "id": "m03-forward-handoff",
+      "criterionId": "forward-handoff",
+      "claim": "The frozen M3 companion carries a bounded abstraction card into the canonical M4 logic and proof handoff.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "learning-companion", "path": "content/course/contracts/companions/m03.v1.json", "locator": "/forwardHandoff"}
+      ],
+      "limitations": ["A declared handoff does not establish learner readiness, completion of M3, or authorization to bypass M4 prerequisites."]
+    },
+    {
+      "id": "m03-interaction-model-tests",
+      "criterionId": "interaction-reference-model-and-teaching-tests",
+      "claim": "M3 binds the accessible Mermaid rendering surface and its direct module accessibility test to the workbook's ADT concept map; M3 declares no separate executable studio or reference model.",
+      "inputs": [
+        {"kind": "markdown-heading", "role": "course-content", "path": "content/modules/03_abstraction_interfaces_adts.md", "locator": "43-concept-map"},
+        {"kind": "file", "role": "source-code", "path": "app/modules/[slug]/MermaidDiagram.tsx", "locator": null},
+        {"kind": "file", "role": "test", "path": "tests/mermaid-accessibility.test.mjs", "locator": null}
+      ],
+      "limitations": ["Static input resolution and a local accessibility test do not prove browser interaction, CI success for this candidate, a deployed surface, or learner comprehension."]
+    },
+    {
+      "id": "m03-release-provenance-boundary",
+      "criterionId": "release-provenance-ci-and-deployment-evidence",
+      "claim": "This candidate-only preflight and its documentation state their own scope: they do not bind or establish human-review, source-commit CI, deployment, or release evidence from local files.",
+      "inputs": [
+        {"kind": "json-pointer", "role": "provenance", "path": "content/course/contracts/evidence/preflight/m03.v1.json", "locator": "/truthBoundary/release"},
+        {"kind": "markdown-heading", "role": "provenance", "path": "docs/module-evidence/m03/candidate-preflight.md", "locator": "candidate-boundary"}
+      ],
+      "limitations": ["This record does not itself bind a CI run, human source review, deployment record, release record, or publication evidence; the release criterion remains open."]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "contractVersion": "v2-draft",
+  "kind": "atlas-module-contract-evidence",
+  "purpose": "A bounded draft pointer map for two existing modules. It gives reviewers stable local starting points without representing full compliance.",
+  "canonicalCourseGraph": "content/course/course-graph.v2.json",
+  "truthBoundary": {
+    "pointerResolutionOnly": "A resolved pointer proves only that a Git-tracked local Markdown file and its visible heading anchor exist in this revision.",
+    "humanReview": "No human review, approval, accessibility judgment, source-claim judgment, or pedagogical judgment is recorded here.",
+    "publication": "This registry cannot change canonical reader access, route availability, v3 contract state, release evidence, or the strict release gate."
+  },
+  "pilotModuleIds": ["m21", "m27"],
+  "modules": [
+    {
+      "moduleId": "m21",
+      "track": "systems",
+      "draftState": "draft-pointer-map",
+      "reviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "pointers": [
+        {"id": "m21-course-map", "kind": "course-map", "label": "Knowledge-system position", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "1-position-in-the-knowledge-system", "sessionNumber": null},
+        {"id": "m21-session-1", "kind": "session", "label": "Session 1", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "2-session-1--await-releases-control-it-does-not-transfer-responsibility", "sessionNumber": 1},
+        {"id": "m21-session-2", "kind": "session", "label": "Session 2", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "3-session-2--structured-lifetime-gives-a-boundary-not-magic-rollback", "sessionNumber": 2},
+        {"id": "m21-session-3", "kind": "session", "label": "Session 3", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "4-session-3--bounded-admission-makes-overload-a-policy-decision", "sessionNumber": 3},
+        {"id": "m21-session-4", "kind": "session", "label": "Session 4", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "5-session-4--partial-failure-is-an-evidence-problem-before-it-is-retry-code", "sessionNumber": 4},
+        {"id": "m21-session-5", "kind": "session", "label": "Session 5", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "6-session-5--time-is-a-local-instrument-order-is-a-declared-relation", "sessionNumber": 5},
+        {"id": "m21-session-6", "kind": "session", "label": "Session 6", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "7-session-6--consistency-and-availability-are-choices-with-assumptions", "sessionNumber": 6},
+        {"id": "m21-first-principles", "kind": "first-principles", "label": "First-principles checkpoint", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "first-principles-checkpoint", "sessionNumber": null},
+        {"id": "m21-code-reading", "kind": "code-reading", "label": "Code-reading lab", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "code-reading-lab-a3--the-fake-bound", "sessionNumber": null},
+        {"id": "m21-visual-text-alternative", "kind": "visual-text-alternative", "label": "Visual studio text equivalent", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "8-the-atlas-run-control-room--visual-studio-text-equivalent", "sessionNumber": null},
+        {"id": "m21-source-ledger", "kind": "source-ledger", "label": "Claim-to-source matrix", "path": "content/source-maps/module21_async_distributed_source_map.md", "headingAnchor": "claim-to-source-matrix-for-authoring-and-ta-use", "sessionNumber": null},
+        {"id": "m21-diagnostic", "kind": "diagnostic", "label": "Confidence-aware diagnostic", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "10-confidence-aware-diagnostic--eight-fast-deep-checks", "sessionNumber": null},
+        {"id": "m21-retrieval", "kind": "retrieval", "label": "Retrieval schedule", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "retrieval-schedule", "sessionNumber": null},
+        {"id": "m21-project", "kind": "project", "label": "Cumulative evidence dossier", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "11-cumulative-project--atlas-async-collector-evidence-dossier", "sessionNumber": null},
+        {"id": "m21-rubric", "kind": "rubric", "label": "Project review rubric", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "review-rubric", "sessionNumber": null},
+        {"id": "m21-ta", "kind": "ta", "label": "TA studios", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "ta-studios", "sessionNumber": null},
+        {"id": "m21-study-partner", "kind": "study-partner", "label": "Study partner routine", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "study-partner-routine-2030-minutes", "sessionNumber": null},
+        {"id": "m21-handoff", "kind": "handoff", "label": "Forward handoff", "path": "content/modules/21_async_distributed_systems.md", "headingAnchor": "14-handoff-what-module-21-deliberately-leaves-open", "sessionNumber": null}
+      ]
+    },
+    {
+      "moduleId": "m27",
+      "track": "mathematics",
+      "draftState": "draft-pointer-map",
+      "reviewState": "not-reviewed",
+      "publicationEffect": "none",
+      "pointers": [
+        {"id": "m27-course-map", "kind": "course-map", "label": "Prerequisite and forward map", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "12-prerequisite-and-forward-map", "sessionNumber": null},
+        {"id": "m27-session-1", "kind": "session", "label": "Session 1", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "3-session-1--definitions-logic-and-countermodels", "sessionNumber": 1},
+        {"id": "m27-session-2", "kind": "session", "label": "Session 2", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "4-session-2--proof-construction-induction-invariants-and-extremal-choice", "sessionNumber": 2},
+        {"id": "m27-session-3", "kind": "session", "label": "Session 3", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "5-session-3--counting-recurrences-generating-functions-and-asymptotics", "sessionNumber": 3},
+        {"id": "m27-session-4", "kind": "session", "label": "Session 4", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "6-session-4--graphs-trees-connectivity-and-matchings", "sessionNumber": 4},
+        {"id": "m27-session-5", "kind": "session", "label": "Session 5", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "7-session-5--partial-orders-lattices-and-elementary-number-theory", "sessionNumber": 5},
+        {"id": "m27-session-6", "kind": "session", "label": "Session 6", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "8-session-6--integrate-the-models-proof-dossier-and-ai-review", "sessionNumber": 6},
+        {"id": "m27-first-principles", "kind": "first-principles", "label": "First-principles statement", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "first-principle-a-claim-needs-an-interpretation", "sessionNumber": null},
+        {"id": "m27-code-reading", "kind": "code-reading", "label": "Code-reading task", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "session-3-code-reading-task", "sessionNumber": null},
+        {"id": "m27-visual-text-alternative", "kind": "visual-text-alternative", "label": "Prerequisite-map text equivalent", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "12-prerequisite-and-forward-map", "sessionNumber": null},
+        {"id": "m27-source-ledger", "kind": "source-ledger", "label": "Source-to-session design", "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md", "headingAnchor": "source-to-session-design", "sessionNumber": null},
+        {"id": "m27-diagnostic", "kind": "diagnostic", "label": "Confidence-aware diagnostic", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "11-confidence-aware-diagnostic", "sessionNumber": null},
+        {"id": "m27-retrieval", "kind": "retrieval", "label": "Retrieval queue", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "retrieval-queue", "sessionNumber": null},
+        {"id": "m27-project", "kind": "project", "label": "Proof and constraint dossier", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "12-atlas-project--proof-counterexample--constraint-dossier", "sessionNumber": null},
+        {"id": "m27-rubric", "kind": "rubric", "label": "Multi-evidence rubric", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "rubric-multi-evidence-never-passfail", "sessionNumber": null},
+        {"id": "m27-oral-defense", "kind": "oral-defense", "label": "Conversational oral defense", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "14-conversational-oral-defense--m27", "sessionNumber": null},
+        {"id": "m27-ta", "kind": "ta", "label": "TA clinic", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "teaching-assistant--proof-and-derivation-clinic", "sessionNumber": null},
+        {"id": "m27-study-partner", "kind": "study-partner", "label": "Study partner rehearsal", "path": "content/modules/27_discrete_mathematics_proof_counting_structures.md", "headingAnchor": "study-partner--rehearsal-without-grading", "sessionNumber": null},
+        {"id": "m27-handoff", "kind": "handoff", "label": "Future-module handoff", "path": "content/source-maps/module27_discrete_mathematics_proof_counting_structures_source_map.md", "headingAnchor": "session-to-future-module-handoff", "sessionNumber": null}
+      ]
+    }
+  ]
+}

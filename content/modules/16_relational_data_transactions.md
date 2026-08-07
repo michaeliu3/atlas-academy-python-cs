@@ -127,6 +127,9 @@ problem is no longer “how do I encode a value?” It is:
 That pressure derives the relational and transaction models.
 
 ```mermaid
+    %% atlas-diagram-id: m16-relational-pressure
+    %% atlas-diagram-title: From validated events to transactional recovery
+    %% atlas-diagram-alt: Validated M15 events create identity and relational constraints, queries, physical plans, transactions, isolation schedules, and recovery assumptions.
 flowchart LR
     B["Validated M15 bundle<br/>ordered StudyEvent values"] --> I["Identity pressure<br/>which event, run, and concept?"]
     I --> R["Relations and keys<br/>facts separated by meaning"]
@@ -168,6 +171,9 @@ that existed earlier:
 The dependency direction is:
 
 ```mermaid
+    %% atlas-diagram-id: m16-repository-dependency-direction
+    %% atlas-diagram-title: Import repository dependency direction
+    %% atlas-diagram-alt: The import use case depends on an application-owned repository protocol, while the SQLite adapter and composition root provide the concrete implementation without making the planner depend on storage.
 flowchart LR
     BUNDLE["M15 validated values"] --> USE["ImportValidatedBundle"]
     USE --> PORT["EventRepository<br/>application-owned Protocol"]
@@ -239,7 +245,7 @@ This statement contains several owners:
 | failed attempt exposes no new committed rows | transaction implementation | injected failure and second-connection observation |
 | survives a named crash | engine + storage configuration + operations | documented guarantee and disposable crash/restore rehearsal |
 
-### 1.5 Mastery outcomes
+### 1.5 Learning outcomes
 
 At exit, Michael can:
 
@@ -477,6 +483,23 @@ They support derivation; they do not discover domain meaning for us.
 > Facts with different identities and change lifetimes should not be forced to
 > share one tuple identity.
 
+### First-principles checkpoint — facts before tables
+
+Before naming a table or normal form, write one card for each proposed fact:
+
+| Fact | Identity | Change lifetime | Legal-state invariant |
+|---|---|---|---|
+| imported event | `event_id` | one observed learning event | belongs to one admitted run |
+| concept | `concept_id` | survives any one event | can exist with no event |
+| prerequisite edge | `(concept_id, prerequisite_id)` | survives event deletion | two concept identities form one directed edge |
+
+Now try to falsify an FD with a legal instance. Two `loops` events can have
+different confidence, so `concept_id → confidence` is false even when a small
+sample happens to agree. In a flattened record with two prerequisite rows, an
+event-confidence correction can require two updates; in the separated event
+fact it requires one. That count is an anomaly demonstration, not a performance
+benchmark or proof that every decomposition is better.
+
 ### 2.8 Normal forms, one pressure at a time
 
 **First normal form (1NF).** Attribute values are atomic relative to the chosen
@@ -545,6 +568,9 @@ Prerequisites(Concept, Prerequisite)
 The resulting fact map is:
 
 ```mermaid
+    %% atlas-diagram-id: m16-atlas-relational-fact-map
+    %% atlas-diagram-title: Atlas relational fact map
+    %% atlas-diagram-alt: Import runs admit events, concepts classify events and relate prerequisites, and keys connect each event to its run and concept without duplicating independent facts.
 erDiagram
     IMPORT_RUNS ||--o{ EVENTS : admits
     CONCEPTS ||--o{ EVENTS : classifies
@@ -574,6 +600,16 @@ erDiagram
         text prerequisite_id PK,FK
     }
 ```
+
+### Linear text alternative — one event through the fact map
+
+An import run owns the source and bundle digest for one admitted attempt. Each
+event belongs to exactly one run and records its position, concept, and
+confidence. A concept remains a separate identity even when it has no events.
+Each prerequisite row is an independent directed edge from one concept to a
+required concept. This route explains fact ownership and why duplicated facts
+create anomalies; it does not by itself establish transaction visibility,
+constraint enforcement, or recovery behavior.
 
 The two relationships from `CONCEPTS` to `PREREQUISITES` have different roles:
 one edge leaves the learned concept and the other points to the required
@@ -728,7 +764,7 @@ Relational algebra states transformations over relations:
 | keep rows | selection \(\sigma_p(R)\) | `WHERE p` | three-valued predicates |
 | keep/derive attributes | projection \(\pi_A(R)\) | `SELECT A` | duplicates remain unless `DISTINCT` |
 | combine related tuples | join \(R \bowtie_p S\) | `JOIN ... ON p` | nulls and duplicate multiplicity matter |
-| all combinations | product \(R \times S\) | `CROSS JOIN` | usually large: \(|R||S|\) |
+| all combinations | product \(R \times S\) | `CROSS JOIN` | usually large: \(\lvert R\rvert\lvert S\rvert\) |
 | combine compatible sets | union \(R \cup S\) | `UNION` | `UNION` removes duplicates; `UNION ALL` does not |
 | remove members | difference \(R - S\) | `EXCEPT` | dialect/type/multiplicity rules matter |
 | summarize groups | extended algebra/grouping | `GROUP BY` | aggregation and null behavior require a precise contract |
@@ -968,6 +1004,9 @@ SQL lets the caller describe a desired result without fixing one procedure.
 The engine still performs physical work:
 
 ```mermaid
+    %% atlas-diagram-id: m16-sql-planning-pipeline
+    %% atlas-diagram-title: SQL planning and execution pipeline
+    %% atlas-diagram-alt: SQL with bound values is parsed into a logical tree, rewritten, compared as physical alternatives using statistics and access paths, then executed against pages and storage to return rows.
 flowchart LR
     SQL["SQL text + bound values"] --> PARSE["parse / resolve names"]
     PARSE --> LOGICAL["logical operator tree"]
@@ -1043,6 +1082,9 @@ plus table lookups when the index does not contain all required output.
 Every index is derived:
 
 ```mermaid
+    %% atlas-diagram-id: m16-index-derivation-and-read-validation
+    %% atlas-diagram-title: Index derivation and read validation
+    %% atlas-diagram-alt: Authoritative table rows and every write update derived ordered index entries; an index yields candidate locations or covered values, then remaining predicates and visibility are checked.
 flowchart TD
     TABLE["Authoritative table rows"] --> IDX["Ordered index entries"]
     WRITE["INSERT / UPDATE / DELETE"] --> TABLE
@@ -1260,6 +1302,9 @@ If each statement commits separately, every statement can be individually valid
 while the application operation is wrong.
 
 ```mermaid
+    %% atlas-diagram-id: m16-transaction-outcome-states
+    %% atlas-diagram-title: Transaction outcome states
+    %% atlas-diagram-alt: A transaction starts, performs reads and writes, then commits, rolls back, or fails; a failure requires reconciliation because its final effect may need inspection.
 stateDiagram-v2
     [*] --> NoTransaction
     NoTransaction --> Active: BEGIN / implicit start
@@ -1329,6 +1374,9 @@ Which line opens a transaction? In this example, none necessarily does.
 **[ATLAS POLICY]** M15 validation finishes before a short write transaction.
 
 ```mermaid
+    %% atlas-diagram-id: m16-import-transaction-visibility
+    %% atlas-diagram-title: Import transaction visibility boundary
+    %% atlas-diagram-alt: A validated M15 bundle is checked and applied through a repository and SQLite adapter; a second connection sees old state until commit, while any failed check rolls back and returns a classified failure.
 sequenceDiagram
     participant B as "M15 bundle boundary"
     participant U as "ImportValidatedBundle"
@@ -1580,6 +1628,9 @@ This principle does not imply identical file formats, concurrency models,
 checkpoint protocols, or operations.
 
 ```mermaid
+    %% atlas-diagram-id: m16-journal-recovery-path
+    %% atlas-diagram-title: Journal and recovery path
+    %% atlas-diagram-alt: Transaction changes create journal or WAL records, cross a named durability boundary, propagate database pages, and combine with restart recovery to produce a consistent state under stated assumptions.
 flowchart LR
     TX["transaction changes"] --> LOG["journal / WAL records"]
     LOG --> DURABLE["named durable boundary"]
@@ -3197,7 +3248,7 @@ Use one bundle throughout:
 Each session consumes the prior artifact. A session adds one abstraction jump,
 not a new toy system.
 
-### Session 1 — Derive relations from repeated facts, not table-shaped habit
+## Session 1 — Derive relations from repeated facts, not table-shaped habit
 
 **Consumes:** the validated bundle, representation independence, relations, and
 M15’s value/representation boundary.
@@ -3226,7 +3277,14 @@ counterexample, and explicit order decision.
 **Exit:** explain why normalization localizes invariants rather than
 ritualistically splitting tables.
 
-### Session 2 — Turn legal-state claims into constraints and a narrow port
+### Session 1 output — fact, FD, key, and order derivation
+
+Keep the ownership table, legal-state FDs, one false-FD counterexample,
+candidate-key/closure reasoning, lossless/preservation argument, and explicit
+order decision. Session 2 turns these claims into constraints and a narrow
+repository contract.
+
+## Session 2 — Turn legal-state claims into constraints and a narrow port
 
 **Consumes:** Session 1’s schema reasoning.
 
@@ -3258,7 +3316,13 @@ architecture map, and patch decision.
 **Exit:** name which illegality is schema-impossible, application-rejected, or
 configuration-dependent.
 
-### Session 3 — Specify query results before reading syntax
+### Session 2 output — constraint and repository contract
+
+Preserve annotated DDL, the invariant/constraint matrix, negative probes,
+dependency-versus-data-flow map, configuration assumption, and bounded patch
+decision. Session 3 must make result meaning explicit before it writes SQL.
+
+## Session 3 — Specify query results before reading syntax
 
 **Consumes:** constrained relations, repository port, explicit-order discipline.
 
@@ -3286,7 +3350,13 @@ row-mapping map, and tiny-oracle regressions.
 
 **Exit:** explain why a correct logical result does not determine physical work.
 
-### Session 4 — Treat indexes and plans as measured strategy choices
+### Session 3 output — result contract and query reasoning
+
+Keep columns, cardinality, bag/null/order rules, bound-value versus allowlisted
+structure decision, tiny oracle, and row-mapping trace. Session 4 compares
+physical plans only after these logical observations are fixed.
+
+## Session 4 — Treat indexes and plans as measured strategy choices
 
 **Consumes:** query contracts, M5 evidence, M8 indexing, M11 strategy choice.
 
@@ -3317,7 +3387,13 @@ measurement, and keep/remove index decision.
 
 **Exit:** defend adding or rejecting the index without “indexes are faster.”
 
-### Session 5 — Make import one transaction, then expose competition
+### Session 4 output — plan evidence and index decision
+
+Record version/configuration/data/statistics context, prediction, before/after
+plan evidence, logical-result comparison, write/space cost, and keep/remove
+decision. Session 5 preserves this evidence while adding transaction histories.
+
+## Session 5 — Make import one transaction, then expose competition
 
 **Consumes:** failure classification, architecture ownership, validated values,
 schema/query/plan artifacts.
@@ -3356,7 +3432,14 @@ table, idempotency record, and reviewed patch.
 
 **Exit:** distinguish atomicity, isolation, and idempotency in one minute.
 
-### Session 6 — Bound recovery; prove WAL is not backup
+### Session 5 output — transaction schedule and retry boundary
+
+Keep the owner/state map, same- and second-connection visibility trace,
+engine/mode assumptions, retry classification, idempotency identities, bounded
+attempt rule, and patch review. Session 6 asks what survives restart and what
+counts as independent restore evidence.
+
+## Session 6 — Bound recovery; prove WAL is not backup
 
 **Consumes:** commit/rollback/isolation evidence and M15 durability boundaries.
 
@@ -3387,6 +3470,13 @@ timeline, restore transcript, reconciliation, and bounded durability statement.
 
 **Exit:** “For this engine/version/configuration/storage/failure, evidence
 supports ___; it does not establish ___.”
+
+### Session 6 output — recovery, restore, and claim boundary
+
+Package the recovery-owner diagram, engine/configuration record, interruption
+timeline, independent restore/reconciliation transcript, cost/concurrency
+limit, and exact durability stopping line. Carry this bounded evidence into the
+M17 machine/OS layers rather than treating WAL as backup or a universal claim.
 
 ---
 
@@ -3726,6 +3816,15 @@ Most adapter boilerplate may be agent-generated. Michael owns the model,
 contract, failure analysis, task boundary, patch decision, evidence, and oral
 defense.
 
+### Upstream evidence chain — M12–M16
+
+At the top of the reconciliation dossier, preserve a five-link trail:
+**M12 boundary card → M13 claim/regression/evidence limit → M14
+change-and-rollback card → M15 artifact/toolchain/recovery receipt → M16
+transaction/reconciliation evidence.** Name the engine and configuration
+boundary beside the M16 link. These cards make assumptions inspectable; they
+do not turn earlier finite evidence into proof of the transaction claim.
+
 ### 11.2 Required deliverables
 
 1. pressure record: why the bundle remains interchange input but is not the
@@ -3753,8 +3852,10 @@ defense.
     focused verification, and accept/reject/split decision;
 13. architecture decision record with costs, rejected alternatives, limits, and
     revisit triggers;
-14. six-minute oral defense tracing one event, schema decision, transaction,
-    plan, retry, and recovery limit.
+14. learner-selected conversational explanation tracing one event, schema
+    decision, transaction, plan, retry, and recovery limit, with visible
+    artifact, confidence, and unresolved uncertainty; no duration, recording,
+    or score is required.
 
 ### 11.3 Acceptance invariants
 
@@ -3864,7 +3965,7 @@ Required regression evidence:
 End TA work with: collapsed distinction in plain language, smallest verified
 correction, regression/counterexample, ownership statement, retrieval date.
 
-### 11.7 Mastery gate
+### 11.7 Constructive next-step guide
 
 | Capability | Required evidence | Insufficient substitute |
 |---|---|---|
@@ -3879,10 +3980,19 @@ correction, regression/counterexample, ownership statement, retrieval date.
 | recovery | layered claim + restore evidence | WAL enabled |
 | agent stewardship | bounded brief + diff review + verification | agent summary |
 
-Advance only if Michael can reconstruct the entire boundary from unfamiliar
+Use the evidence table to choose a next bridge or repair—not to decide whether
+Michael passes. If Michael can reconstruct the entire boundary from unfamiliar
 code, prove all-or-nothing visibility, interpret a plan without universalizing
 it, defend uncertain-outcome reconciliation, preserve the prior public
-contracts, and state where the local model ends.
+contracts, and state where the local model ends, continue with the M17 handoff.
+
+Otherwise, repair the first named boundary: return to the FD/key worksheet for
+a modeling collapse, draw a two-connection schedule for an isolation claim,
+re-run the restore/reconciliation path for a recovery claim, or record the
+engine/configuration evidence before treating a plan as transferable. Bring the
+smallest revised trace to the Teaching Assistant or Study Partner.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration.
 
 ### 11.8 Evidence packet
 
@@ -3915,7 +4025,7 @@ evidence/module16/
     ├── responsibility-map.md
     ├── interruption-observation.txt
     ├── backup-restore-transcript.txt
-    └── oral-defense.md
+    └── conversation-summary.md
 ```
 
 ### 11.9 Consolidation and spaced retrieval
@@ -3923,6 +4033,9 @@ evidence/module16/
 One-page map:
 
 ```mermaid
+    %% atlas-diagram-id: m16-relational-one-page-map
+    %% atlas-diagram-title: Relational systems one-page map
+    %% atlas-diagram-alt: Facts and ownership lead through dependencies, normalization, constraints, query contracts, physical plans, transactions, isolation and recovery to an independently tested backup and restore path.
 flowchart TD
     FACT["facts + ownership"] --> FD["FDs + keys"]
     FD --> NF["lossless / preserving normalization"]
@@ -4186,3 +4299,145 @@ Without notes, explain:
 > reconciliation? Finally, what does the executed runtime/configuration prove,
 > and what remains for the machine, OS, network, security, and distributed
 > arcs?
+
+## Conversational oral defense — M16
+
+This is a constructive Teaching Assistant conversation, not a score, gate, or
+database-certification claim. If the learner chooses GPT Live at a preferred
+setting and their client renders the material, use the relation/FD notation,
+schema, SQL fragment, schedule, and recovery diagram as a shared whiteboard.
+This workbook cannot control voice availability, quality settings, rendering,
+retention, or integrations. The same conversation protocol can instead use
+readable text with Markdown and an ASCII schedule; the course cannot write
+Notion evidence automatically.
+
+### Invitation — draw the legal state before the mechanism
+
+Ask the learner to choose one invariant and say: “These facts determine
+[key/FD]; this transaction exposes [visible outcome]; my confidence is
+[level].” Have them draw rows and a two-connection timeline before naming an
+isolation level or engine mechanism.
+
+### Hint ladder — fact to recovery evidence
+
+Move one rung at a time: fact ownership → FD/key → constraint/result contract
+→ plan evidence → transaction owner → interleaving/observer trace → retry or
+reconciliation rule → recovery/restore evidence. Offer a small trace or
+counterexample without pass/fail framing.
+
+### Changed-premise counterexample
+
+Keep the import goal but change one premise: reuse a retry key with a different
+digest, remove `ORDER BY`, disable a per-connection foreign-key setting, or
+replace an independent restore with a WAL file. Ask which invariant, schedule,
+test, engine assumption, or operational claim must change.
+
+### Transfer turn — M17 execution layers
+
+Ask which plan, journal, or visibility claim is actually relying on pages,
+caches, system calls, storage ordering, or process mediation that M17/M18 must
+make explicit.
+
+### Reflection — learner-controlled evidence summary
+
+The learner may keep a compact record: chosen invariant, rows/schedule,
+prediction, changed-premise repair, observed engine/configuration evidence,
+confidence, unresolved limit, and one M17 question. Copy/export it only with
+the learner's approval.
+
+## Guided Codex handoff — M16
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M16. This relation/key or transaction invariant
+is [claim], this concurrent history is [trace], and my confidence is [level].”**
+Ask the learner to draw rows, keys, and a two-transaction timeline before
+naming an isolation level. Use this hint ladder: functional dependency →
+schema/key → query or constraint → transaction boundary → interleaving →
+observable outcome → retry/reconciliation rule. Change one premise (duplicate
+request ID, rollback, lost update, stale read, or backup restore) and ask which
+invariant/test must change.
+
+### Study Partner — transaction rehearsal
+
+Ask for the smallest history that distinguishes two isolation claims. Change
+only one read/write/commit event, then ask which observer can now see which
+state. Keep SQL syntax separate from the data contract and bring an unresolved
+history to the TA.
+
+### Forward handoff — M17
+
+Carry one representation invariant, one concurrency timeline, and one
+evidence boundary into **M17**. The next module explains the machine and
+execution layers beneath a high-level cost or concurrency story.
+
+
+## Bench pack
+
+**Bench pack:** `m16` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model, so
+the benches carry their own schema — the module's own domain (concepts, and events
+that reference them) reduced to the smallest shape that still has a foreign key, a
+one-to-many relationship, a domain constraint, and an ordering column. Everything
+runs against stdlib `sqlite3`.
+
+### Bench 2 — constraint and repository contract
+
+**Session:** 2. **Rungs:** debug and defend, review and verify.
+**Executes:** seven negative probes against two connections whose DDL text is
+byte-identical. The orphan insert is accepted on one and raises `IntegrityError` on
+the other, decided entirely by `PRAGMA foreign_keys` — which, issued inside a
+transaction, raises nothing and does nothing. Two more probes are accepted under
+both configurations and neither is stored as sent: a NaN confidence is converted to
+NULL, satisfying the `CHECK` on its `IS NULL` branch, and the string `'seven'`
+sits in an `INTEGER NOT NULL` column as text.
+**Cannot establish:** anything about an engine where foreign keys are enforced by
+default and column types are checked. Also does not test whether `STRICT` tables
+close the affinity gap.
+
+### Bench 3 — result contract and query reasoning
+
+**Session:** 3. **Rungs:** trace, recognize.
+**Executes:** the same `LEFT JOIN` with one predicate in `ON` and then in
+`WHERE`. The `WHERE` form drops the concept that has no events — `NULL > 0.5` is
+unknown, which `WHERE` discards — leaving every returned row correct and the row
+count wrong. Then an unordered query returns the same order on five consecutive
+runs and the exact reverse once a descending index exists, with `EXPLAIN QUERY PLAN`
+showing the scan become a search. Finally `avg(confidence)` returns 0.55 where
+`sum/count(*)` returns 0.3667.
+**Cannot establish:** which plan is faster. The specific row orders are artifacts of
+this planner on four rows; the ON/WHERE and NULL-aggregate rules are standard SQL.
+
+### Bench 5 — transaction schedule and retry boundary
+
+**Session:** 5. **Rungs:** review and verify, debug and defend.
+**Executes:** a four-event import failing on event three, under two implementations
+that raise the *same* `IntegrityError` — commit-per-event leaves a two-event prefix
+visible to a second connection, one transaction leaves nothing. Then the written
+`A1, B1, A2, B2` schedule against a named engine and mode: B's write is refused
+while A holds the write lock, B's read returns 0 until A commits. Then an identical,
+authorized replay of a committed import — safe when the event identity comes from
+the bundle content, and silently doubling the import when it comes from the run.
+**Cannot establish:** anything about durability or crash recovery, which needs a
+different apparatus. The schedule is executed in a fixed order, not raced, and WAL
+mode is untested.
+
+### Sessions without a bench
+
+- **Session 1** — the artifact is a derivation: facts, functional dependencies,
+  keys, and the argument for an ordering column. Running code would not check it.
+- **Session 4** — measures query plans. `EXPLAIN QUERY PLAN` already appears inside
+  bench 3, where it explains the row-order reversal; a separate timing bench on a
+  four-row fixture would report noise, and a fixture large enough to be honest
+  belongs to a performance harness this pack does not have.
+- **Session 6** — durability and restore: process death, fsync, and file-level
+  recovery. An in-process kernel cannot crash itself honestly, and a bench that
+  pretended to would model exactly the claim the session teaches you to refuse.
+
+### Bench pack completion record
+
+Records under `benches/records/m16-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

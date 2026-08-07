@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "atlas-module-learning-companion",
+  "recordVersion": "v1",
+  "moduleId": "m21",
+  "purpose": "Freeze a candidate-only M21 Teaching Assistant, Study Partner, and M22 handoff context for future human review without changing M21's legacy-baseline learner or release state.",
+  "truthBoundary": {
+    "platform": "This record neither controls nor verifies GPT Live quality, model selection, voice, microphone access, equation or code rendering, platform retention, or any external integration.",
+    "records": "This record defaults to learner-controlled local evidence and cannot itself write Notion notes, retain raw voice or transcripts, store credentials, or collect personal data.",
+    "mastery": "This candidate companion is not an oral-exam result, score, grade, publication, release, completion, or learner-mastery claim."
+  },
+  "guideBinding": {
+    "path": "content/course/module-companion-guides.v1.json",
+    "locator": "/guides/20",
+    "digest": "sha256:d38d617d669f429b9cf88f89f7c073ed53828a5589eb36a266f771856d0de58a"
+  },
+  "teachingAssistant": {
+    "role": "supportive-oral-defense",
+    "openingMove": "Begin with one learner-selected distributed-workflow claim. Ask which event is local, which is observed remotely, which effect is durable, and for the smallest failure-and-recovery trace before asking for a conclusion.",
+    "artifactFocus": "Ask the learner to make one retry, ordering, timeout, compensation, or idempotency assumption visible, reconstruct one labelled async event trace, name one partial-failure boundary, and distinguish a useful recovery policy from a claim of global certainty or exactly-once delivery.",
+    "repairMove": "Ask for a prediction before correction; change exactly one timeout, retry budget, ordering guarantee, compensation rule, durable write point, or dependency failure; then offer the smallest trace or counterexample without pass/fail framing."
+  },
+  "studyPartner": {
+    "role": "non-grading-rehearsal",
+    "rehearsalMove": "Use the visible chat as a readable whiteboard: label local, remote, and durable events, show a short async recovery trace, give a plain-language or ASCII fallback, and rehearse one partial-failure-to-policy-to-boundary chain at a time.",
+    "changedPremise": "Change one retry budget, timeout, ordering guarantee, compensation action, dependency availability, durable-write point, or idempotency rule. Ask for a prediction before looking at a trace, counterexample, or recovery condition.",
+    "taHandoff": "End with the learner's selected workflow card, attempted event trace, confidence, unresolved misconception, one partial-failure or recovery limitation, and a constructive focus for the Teaching Assistant's supportive oral defense."
+  },
+  "forwardHandoff": {
+    "targetModuleId": "m22",
+    "carryArtifact": "Carry a distributed-evidence card: actors and events, local/remote/durable distinctions, retry and recovery assumptions, labelled trace, one partial-failure boundary, and one uncertainty—not a mastery claim.",
+    "targetQuestion": "Before allowing a recovery workflow in M22 to act on data or a tool, which actor, capability, authority boundary, retained data, audit evidence, and reversible step must become explicit?",
+    "boundary": "M22 is the only canonical forward handoff. References to M23–M36 or M25/M26 are later conceptual connections, not learner-navigation bypasses, completion claims, or release evidence."
+  }
+}

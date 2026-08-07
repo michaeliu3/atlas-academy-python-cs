@@ -39,6 +39,9 @@ When a sentence has no label, it concerns the course’s Atlas design or follows
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m06-representation-knowledge-bridge
+%% atlas-diagram-title: Module 6 connects its prerequisites to later data-structure, systems, and CPython work
+%% atlas-diagram-alt: Modules 1, 3, and 5 feed into Module 6: object and reference reasoning, ADTs with invariants and ownership, and cost and amortization. Module 6 then supplies representation-and-memory foundations for Modules 7 through 10, 17, and 24.
 flowchart LR
     M1["Module 1<br/>objects, bindings, aliasing"] --> M6["Module 6<br/>representation and memory"]
     M3["Module 3<br/>ADTs, RI, AF, ownership"] --> M6
@@ -49,8 +52,21 @@ flowchart LR
     M6 --> M9["Module 9<br/>sorting and selection"]
     M6 --> M10["Module 10<br/>trees and graphs"]
     M6 --> M17["Module 17<br/>machine and memory hierarchy"]
-    M6 --> M24["Module 24<br/>CPython internals and profiling"]
+M6 --> M24["Module 24<br/>CPython internals and profiling"]
 ```
+
+### Text alternative — representation knowledge bridge
+
+Module 6 has one academic prerequisite: **M5**, whose cost model lets the
+learner name the work done by a representation. M1 and M3 are recalled
+foundations for object graphs, abstraction functions, invariants, and
+ownership; they are not additional route-authorizing prerequisites here. The
+canonical forward handoff is **M7**, where the changing rolling-history
+workload becomes a queue/deque question. Modules 8–10 reuse the same
+representation-and-cost reasoning. M17 supplies the later machine-memory
+model, and M24 supplies later CPython-internals work. A prior-reader route
+link from M27 does not add an M27 academic prerequisite or permit bypass of
+M5.
 
 ### The problem that forces this module
 
@@ -254,6 +270,9 @@ Suppose we need to store an ordered sequence \(S\) of \(n\) values.
 This gives the central dependency:
 
 ```mermaid
+%% atlas-diagram-id: m06-sequence-representation-decision
+%% atlas-diagram-title: A sequence contract drives a representation decision through invariants, algorithms, cost, and correctness
+%% atlas-diagram-alt: A sequence contract determines required operations, which motivate a representation. The representation defines an invariant and abstraction function; the invariant and abstraction function establish correctness, while algorithms yield time and retained-space costs. Correctness and cost together inform a requirement-aware decision.
 flowchart TD
     CONTRACT["Sequence contract<br/>what clients observe"] --> OPS["Required operations"]
     OPS --> REP["Representation choice"]
@@ -282,6 +301,54 @@ Consider `history[2]`.
 **[CPYTHON 3.14.6]** The pinned `PyListObject` source contains a pointer to a vector of element pointers, a used size, and an allocated capacity. This explains CPython’s constant-time indexing mechanism and over-allocation strategy, but an alternate Python implementation may realize the same language behavior differently.
 
 The three claims cooperate. None may impersonate another.
+
+### Definition — sequence value, representation, and invariant
+
+A **sequence value** is an ordered finite collection independent of storage.
+A **representation** is a concrete graph of slots, objects, and references
+chosen to denote that value. An **abstraction function** maps each legal
+representation to its sequence value. A **representation invariant** (RI)
+states which concrete states are legal: for example, a used array prefix is
+ordered and in bounds, or a linked path is finite, has the recorded size, and
+ends at the recorded tail.
+
+### Assumption — keep the model, language, and implementation separate
+
+The fixed-width-array derivation below assumes addressable slots, constant-time
+address arithmetic, and an in-bounds index. Python 3.14 specifies observable
+sequence behavior, not physical list layout or a complexity table. CPython
+3.14.6 source can explain one implementation observation; allocation,
+locality, cache behavior, and an alternate runtime remain outside that
+language guarantee. The machine model belongs in M17; deeper CPython evidence
+belongs in M24.
+
+### Derivation and proof idea — indexed access follows the invariant
+
+Under the stated array model, slot `i` starts at
+\(\text{base} + i \times \text{slot-width}\). For an index satisfying
+\(0 \leq i < n\), one address calculation and one slot read locate the
+reference; no predecessor path is required. The proof obligation is not merely
+the formula: bounds, the used-prefix order, and the abstraction function must
+still hold before and after each update. Thus the model yields constant-time
+indexing only for its stated representation and assumptions.
+
+### Counterexample — linked does not mean every insertion is constant
+
+In a singly linked sequence, inserting at a known node or at a stored tail can
+be constant-time after that location is available. Inserting at an unknown
+chronological position `i` still requires reaching its predecessor by following
+`i` links from `head`; that is \(\Theta(i)\) in this model. The phrase
+“linked lists are faster” therefore hides the operation, available reference,
+and workload that decide the claim.
+
+### Numerical experiment — a measurement checks one named setup
+
+Choose an input family, interpreter, machine, operation mix, and counted
+quantity before timing a contiguous-reference scan and a linked-node scan.
+Record raw repeated samples, the implementation label, and excluded work such
+as payload construction. A result can challenge a locality hypothesis for that
+setup; it neither proves an asymptotic theorem nor turns a CPython observation
+into a portable Python guarantee.
 
 ---
 
@@ -326,6 +393,9 @@ The call to `decode("ascii")` supplies the interpretation contract. Without an e
 **[MODEL]** Treat memory as an addressable sequence of bytes:
 
 ```mermaid
+%% atlas-diagram-id: m06-addressable-memory-model
+%% atlas-diagram-title: A simplified byte-address model places consecutive addresses next to one another
+%% atlas-diagram-alt: Under the deliberately simplified addressable-memory model, bytes at addresses 100, 101, 102, and 103 occupy consecutive positions and have shown bit patterns. This supports later base-plus-offset reasoning; it is not a diagram of Python object storage.
 flowchart LR
     A100["address 100<br/>00110110"] --- A101["address 101<br/>11000001"]
     A101 --- A102["address 102<br/>00001111"]
@@ -380,6 +450,9 @@ snapshot = history.copy()
 ```
 
 ```mermaid
+%% atlas-diagram-id: m06-shallow-copy-object-graph
+%% atlas-diagram-title: A shallow list copy creates a new outer list but shares event references
+%% atlas-diagram-alt: The names history and alias point to one list, while snapshot points to a distinct copied list. Both slots in each list, and the name event, reference the same one StudyEvent object, showing shallow copying and repeated aliases.
 flowchart LR
     H["name: history"] --> L["list object L"]
     A["name: alias"] --> L
@@ -441,6 +514,9 @@ assert outer == (["memory", "locality"],)
 ### 6.3 Reachability and lifetime
 
 ```mermaid
+%% atlas-diagram-id: m06-reachability-roots-and-cycle
+%% atlas-diagram-title: Reachability from live roots differs from an unreachable object cycle
+%% atlas-diagram-alt: Live runtime roots reach a history object, then its node or slot path and two event objects. A separate two-object cycle has no incoming live-root path; its eventual collection is implementation-dependent and must not be assumed immediate.
 flowchart LR
     R["live roots<br/>frames, modules, runtime"] --> H["History object"]
     H --> N1["node / slot"]
@@ -536,6 +612,9 @@ The same behavioral contract may survive the workload change while the best repr
 **[MODEL]** A static array contains \(n\) fixed-width consecutive slots.
 
 ```mermaid
+%% atlas-diagram-id: m06-contiguous-reference-array
+%% atlas-diagram-title: Contiguous array slots support offset indexing while referenced events can live elsewhere
+%% atlas-diagram-alt: A base location begins a run of adjacent array slots holding references A through D. For the illustrated selection at slot 2, base plus index times slot width selects the slot; the referenced event objects may reside elsewhere, so only references are contiguous.
 flowchart LR
     B["base"] --> S0["slot 0<br/>ref A"]
     S0 --- S1["slot 1<br/>ref B"]
@@ -593,6 +672,9 @@ slot       A      B      C      D
 Insert `X` at index `1` into a larger destination:
 
 ```mermaid
+%% atlas-diagram-id: m06-array-front-insertion-trace
+%% atlas-diagram-title: Front insertion preserves sequence order by moving later array entries
+%% atlas-diagram-alt: In one larger-destination insertion trace, A is copied to slot 0, X is written to slot 1, and B, C, and D are copied to slots 2, 3, and 4 in order. It illustrates why front insertion changes every later position, not a required allocation strategy.
 sequenceDiagram
     participant O as Old slots [A B C D]
     participant N as New/available slots [· · · · ·]
@@ -647,6 +729,9 @@ Capacity is deliberately absent from the abstract value. Clients can observe `n`
 ### 9.2 Append without and with growth
 
 ```mermaid
+%% atlas-diagram-id: m06-dynamic-array-append-branches
+%% atlas-diagram-title: Dynamic-array append either writes into capacity or grows, copies, and replaces storage
+%% atlas-diagram-alt: Dynamic-array append has two mutually exclusive preconditions. When n is less than capacity C, write x at A[n] and increment n. When n equals C, allocate a larger array, copy the used prefix, write x, replace A and C, then increment n.
 stateDiagram-v2
     [*] --> HasRoom: n < C
     HasRoom --> Written: A[n] = x
@@ -745,6 +830,9 @@ The annotation describes a recursive shape. It does not itself prevent cycles or
 ### 10.1 Representation
 
 ```mermaid
+%% atlas-diagram-id: m06-linked-history-representation
+%% atlas-diagram-title: A head-tail singly linked chain stores order in next references
+%% atlas-diagram-alt: Head references the first node and tail references the last. Each node holds one event reference and a next reference to its successor; the final node has next equal to None. The nodes need not be adjacent in memory, yet their links denote the event sequence.
 flowchart LR
     H["head"] --> N1["Node<br/>item ref | next"]
     N1 -->|"item"| A["event A"]
@@ -785,6 +873,9 @@ The RI contains more than a type checker can establish. `Node | None` permits a 
 There are two states, not one:
 
 ```mermaid
+%% atlas-diagram-id: m06-linked-append-invariant
+%% atlas-diagram-title: Linked-history append handles empty and nonempty states before restoring the invariant
+%% atlas-diagram-alt: Appending creates a node N. If size is zero, assign both head and tail to N; otherwise link the old tail to N before moving tail to N. In either case increment size, leaving a tail whose next is None and a reachable path whose length equals size.
 flowchart TD
     START["append(x): create node N"] --> EMPTY{"size == 0?"}
     EMPTY -- "yes" --> BOTH["head = tail = N"]
@@ -857,6 +948,9 @@ Modern machines move data through a memory hierarchy in blocks. Berkeley CS61C d
 - **spatial locality:** addresses near recently accessed data are likely to be accessed soon.
 
 ```mermaid
+%% atlas-diagram-id: m06-locality-model
+%% atlas-diagram-title: Contiguous reference slots may share a cache block while linked nodes may be scattered
+%% atlas-diagram-alt: In a simplified locality model, one fetched cache block may contain several neighboring array reference slots. A linked traversal follows logical next references through nodes whose physical locations may be scattered. This is a performance hypothesis, not a guarantee about Python objects or runtime.
 flowchart TB
     subgraph Contiguous["contiguous reference slots"]
         S0["ref 0"] --- S1["ref 1"] --- S2["ref 2"] --- S3["ref 3"]
@@ -1203,6 +1297,9 @@ record_study = RecordStudy(history, limit=100_000)
 ```
 
 ```mermaid
+%% atlas-diagram-id: m06-historybuffer-ports-and-adapters
+%% atlas-diagram-title: The use case depends on a history contract while the composition root selects an adapter
+%% atlas-diagram-alt: The UI invokes RecordStudy, which depends on the HistoryBuffer contract. ArrayHistory and LinkedHistory implement that contract; main.py composes RecordStudy with ArrayHistory in this example. Immutable StudyEvent is used by the use case and both adapters.
 flowchart LR
     UI["input / UI"] --> USE["RecordStudy use case"]
     USE --> PORT["HistoryBuffer contract"]
@@ -1254,6 +1351,30 @@ That is evidence that representation knowledge escaped into policy. Before accep
 - or reject the coupling.
 
 The goal is not maximal indirection. It is to keep facts that change together inside the same responsibility boundary.
+
+### Code reading — recover the sequence contract before fields
+
+Read `HistoryBuffer` and `RecordStudy` before choosing a favorite adapter.
+Write the observable order, exception, negative-index, snapshot, and rolling-
+limit commitments in one short contract card. Then draw the object graph and
+only then inspect slots or nodes. A field name such as `_tail` is not evidence
+that the public sequence contract is preserved.
+
+### Debugging — isolate a representation-invariant failure
+
+For the stale-tail candidate, start with the shortest transition
+`empty → one → empty → one`. Record the first illegal state, the reference
+write that caused it, the delayed observable failure, and the smallest
+regression test. Do not diagnose it as “a pointer bug” without naming the RI
+relation between `head`, `tail`, `size`, and the reachable path.
+
+### Design — preserve observations before replacing representation
+
+Keep `RecordStudy` dependent on the `HistoryBuffer` contract, put concrete
+adapter selection in `main.py`, and compare a replacement only after holding
+behavior fixed. The design question is whether a new representation satisfies
+the same order, failure, snapshot, ownership, and workload requirements—not
+whether an agent or benchmark calls it faster.
 
 ---
 
@@ -1483,7 +1604,7 @@ Require at least:
 
 Each session alternates explanation and learner action. No session advances on vocabulary recognition alone.
 
-### Session 1 — From values to bits without losing meaning
+## Session 1 — From values to bits without losing meaning
 
 **Recall:** identity, equality, binding, and mutation from Module 1.  
 **Launch:** interpret `01000001` three ways and explain why none is inherent in the bits.  
@@ -1492,7 +1613,13 @@ Each session alternates explanation and learner action. No session advances on v
 **Visual:** draw names, a list, repeated references, and payload objects.  
 **Exit synthesis:** explain why contiguous references do not imply contiguous event payloads.
 
-### Session 2 — Derive an array from indexed access
+### Output: object-graph and evidence-layer card
+
+One labeled object graph plus four claims classified as MODEL, PYTHON 3.14,
+CPYTHON 3.14.6, or unsupported; include one reason a contiguous reference
+region does not locate every payload.
+
+## Session 2 — Derive an array from indexed access
 
 **Recall:** sequence contract and valid indices.  
 **Launch:** ask how to locate item `i` without walking through prior items.  
@@ -1501,7 +1628,13 @@ Each session alternates explanation and learner action. No session advances on v
 **Broken case:** an operation exposes an unused slot as a valid element.  
 **Exit synthesis:** connect constant-time indexing and linear front insertion to the same representation choice.
 
-### Session 3 — Make growth visible
+### Output: array invariant and shift-count trace
+
+One used-prefix RI/AF card and a trace that counts reference moves for
+insertion at `0`, `n/2`, and `n`, with the fixed-width model assumptions
+written beside it.
+
+## Session 3 — Make growth visible
 
 **Recall:** worst-case versus amortized cost from Module 5.  
 **Launch:** inspect a capacity-4 array immediately before its fifth append.  
@@ -1510,7 +1643,13 @@ Each session alternates explanation and learner action. No session advances on v
 **Implementation close-up:** compare the model with pinned CPython 3.14.6 source labels.  
 **Exit synthesis:** state one portable list fact and one nonportable CPython fact.
 
-### Session 4 — Derive linked order and its invariants
+### Output: growth-and-capacity evidence card
+
+One capacity/used-slot/copy trace for `MiniDynamicArray`, its predicted next
+growth, the geometric-copy reasoning boundary, and one separately labeled
+CPython implementation observation.
+
+## Session 4 — Derive linked order and its invariants
 
 **Recall:** recursive structure and induction from Module 2; RI/AF from Module 3.  
 **Launch:** remove the need to shift the remaining sequence when the first item leaves.  
@@ -1519,7 +1658,13 @@ Each session alternates explanation and learner action. No session advances on v
 **Broken case:** stale tail after the sole node is evicted.  
 **Exit synthesis:** explain why “insertion is constant time” needs a known-node or end-position qualification.
 
-### Session 5 — Locality, memory, and architecture reading
+### Output: linked-invariant and boundary-transition trace
+
+One `empty → one → two → one → empty` node diagram with every head, tail, and
+`next` update, the linked RI, and the first counterexample to an unqualified
+constant-time insertion claim.
+
+## Session 5 — Locality, memory, and architecture reading
 
 **Recall:** asymptotic claims and representation independence.  
 **Launch:** compare two `Θ(n)` traversals and ask what the model intentionally hides.  
@@ -1528,13 +1673,25 @@ Each session alternates explanation and learner action. No session advances on v
 **Investigation:** use `sys.getsizeof` only after predicting what it excludes.  
 **Exit synthesis:** give a memory claim that names root, scope, interpreter, and excluded payloads.
 
-### Session 6 — Changing constraints, delegation, and defense
+### Output: memory-scope and architecture memo
+
+One five-pass repository memo plus a measurement card naming the root object,
+retained versus shared memory, exclusions, interpreter, workload, and one
+locality hypothesis rather than a performance promise.
+
+## Session 6 — Changing constraints, delegation, and defense
 
 **Recall:** operation-frequency vectors and the two representations.  
 **Launch:** change Atlas from indexed desktop history to a high-rate rolling window.  
 **Learner action:** complete the comparison record, identify when neither candidate is satisfactory, direct the bounded agent task, review the fragments, and demand regression evidence.  
 **Oral defense:** preserve behavior while arguing from invariants, operations, memory, locality hypotheses, and change risk.  
 **Exit synthesis:** state the decision trigger that leads into queue/deque designs in Module 7.
+
+### Output: representation-decision and M7 handoff dossier
+
+One operation-frequency decision record, bounded agent-review request,
+supporting invariant/cost evidence, and a question for M7 about a queue/deque
+representation. This is a next-step artifact, not a score or mastery claim.
 
 ---
 
@@ -1920,7 +2077,7 @@ For any history implementation, require:
 
 ### TA intervention rule
 
-Return the learner to a diagram when an explanation relies on “Python somehow moves it” or “the pointer just works.” Advance when the learner can name:
+Return the learner to a diagram when an explanation relies on “Python somehow moves it” or “the pointer just works.” When the evidence becomes explainable, continue to the next trace by naming:
 
 - the object or slot;
 - the reference that changes;
@@ -1947,9 +2104,19 @@ Produce a comprehension-and-design portfolio, not a typing portfolio.
 9. **Patch review:** at least one behavioral defect, one invariant defect, one dependency violation, and one unsupported claim.
 10. **Atlas decision record:** choose a representation for Round 1 and Round 2, then identify the trigger for moving to a queue/deque design.
 
+### Project acceptance criteria
+
+Use the portfolio as constructive evidence for the next conversation. It is
+ready to discuss when it makes the abstract sequence and representation
+separate, traces one empty/nonempty boundary transition, labels at least one
+MODEL/PYTHON/CPYTHON claim, derives a cost from named operations, gives a
+smallest counterexample, states a measurement boundary, and names the M7
+question that remains. Missing pieces identify the next smallest repair; they
+do not produce a pass/fail result.
+
 ### Evidence rubric
 
-| Dimension | Emerging | Ready to advance |
+| Dimension | Emerging | Evidence for next bridge |
 |---|---|---|
 | Representation | names fields | maps each legal rep to the abstract sequence |
 | Trace | predicts final output | records every reference/slot transition and first RI violation |
@@ -1961,9 +2128,9 @@ Produce a comprehension-and-design portfolio, not a typing portfolio.
 | AI collaboration | accepts generated patch | constrains, reviews, falsifies, and verifies it independently |
 | Decision | chooses a favorite structure | defends tradeoffs and names a reopening trigger |
 
-### Instructor decision rule
+### Constructive next-step guide
 
-Advance when Michael can take an unfamiliar sequence implementation and:
+Use this evidence to choose the next bridge, not to decide whether Michael passes. Consider whether you can take an unfamiliar sequence implementation and:
 
 1. recover the abstract value, RI, and AF;
 2. trace a boundary transition without execution;
@@ -1973,13 +2140,18 @@ Advance when Michael can take an unfamiliar sequence implementation and:
 6. defend a changing-constraints Atlas decision;
 7. review an agent patch with independent evidence.
 
-Memorizing an operation table or CPython growth sequence is not mastery.
+With a clear, self-supported explanation across the list, continue with the M7 handoff. Otherwise, choose one named repair: redraw the object graph, re-trace one boundary transition, construct a delayed-invariant counterexample, or ask the TA to challenge one unsupported evidence claim.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Memorizing an operation table or CPython growth sequence is not sufficient evidence.
 
 ---
 
 ## 21. Consolidation
 
 ```mermaid
+%% atlas-diagram-id: m06-representation-decision-loop
+%% atlas-diagram-title: Representation choices lead to evidence and are revisited when workload requirements change
+%% atlas-diagram-alt: An abstract sequence determines the contract and workload. That guides a choice between a dynamic array and a head-tail linked chain, each with its own invariant and cost mechanisms. Machine effects are checked through analysis, tests, and measurements; changed requirements return to workload analysis, otherwise the evidence is recorded.
 flowchart TD
     VALUE["Abstract ordered value"] --> CONTRACT["Sequence operations + laws"]
     CONTRACT --> WORKLOAD["Operation-frequency vector"]
@@ -2073,10 +2245,19 @@ Complete:
 
 The workbook’s narrative and Atlas examples are original. Sources provide authoritative facts, models, and exercise traditions; no single source supplies this integrated module.
 
+### Source wording and claim boundary
+
+The learner-facing links below are for verification after an Atlas attempt.
+They are linked and paraphrased only; Atlas does not import external lecture
+text, figures, assignments, solutions, or source code. The module-specific
+source-audit addendum records each link’s rationale, claim linkage, access
+date, license/reuse boundary, and stable URL. Language semantics, CPython
+implementation observations, and later systems explanations remain distinct.
+
 ### University foundations
 
 - [MIT 6.006 Lecture 2: Data Structures and Dynamic Arrays](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-2-data-structures-and-dynamic-arrays/) and [Recitation 2 notes](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/c08a3b63dfe5f6f6b32257d35f86ae63_MIT6_006S20_r02.pdf) — source for the interface-versus-data-structure distinction, Word-RAM bridge, static arrays, linked lists, dynamic arrays, operation tables, and geometric-growth analysis. This workbook adds Python object graphs, ownership, architecture review, and the changing Atlas contract.
-- [Carnegie Mellon 15-122: Principles of Imperative Computation](https://www.cs.cmu.edu/~15122/syllabus.shtml) — reinforces memory diagrams, linked-list invariants, unbounded arrays, amortized analysis, specification/implementation separation, and reasoning with contracts. We adopt its invariant discipline while keeping Python as the primary language.
+- [Carnegie Mellon 15-122: Principles of Imperative Computation](https://www.cs.cmu.edu/~15122/syllabus.shtml) — calibrates the course's specification, contract, invariant, and amortized-analysis discipline. The linked syllabus is not technical evidence for each Atlas memory-diagram or linked-structure claim; this workbook keeps Python as the primary language.
 - [UC Berkeley CS61C cache notes](https://notes.cs61c.org/content/caches-ii/) — source for temporal and spatial locality and cache-block intuition. We use it only to form a mechanism-level hypothesis; exact Python performance remains an empirical, interpreter- and machine-specific question.
 
 ### Python 3.14 language and library contracts
@@ -2089,7 +2270,7 @@ The workbook’s narrative and Atlas examples are original. Sources provide auth
 ### Pinned CPython implementation evidence
 
 - [CPython `v3.14.6` `Include/cpython/listobject.h`](https://github.com/python/cpython/blob/v3.14.6/Include/cpython/listobject.h) — pinned evidence for `ob_item`, used size, allocated capacity, and the implementation’s internal invariants.
-- [CPython `v3.14.6` `Objects/listobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/listobject.c#L90-L142) — pinned implementation evidence for resize and over-allocation. The exact source line range can move in GitHub’s rendered view; the tag and file are the authority. Search for `list_resize` and “The growth pattern is”.
+- [CPython `v3.14.6` `Objects/listobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/listobject.c) — pinned implementation evidence for resize and over-allocation. The tag and file are the authority; search for `list_resize` and “The growth pattern is”.
 
 ### Claim discipline
 
@@ -2100,6 +2281,21 @@ The source synthesis follows four rules:
 3. CPython claims are pinned to `v3.14.6` and explicitly labeled.
 4. Berkeley’s locality account explains a mechanism; only a controlled measurement can estimate its effect for Atlas on a named machine and interpreter.
 
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-02** and are linked or
+briefly paraphrased only. Atlas retains its original traces, code, diagrams,
+and prompts. The source type in each row is part of the claim boundary.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | model/Python/CPython classification and object/reference trace | [Python data model](https://docs.python.org/3.14/reference/datamodel.html#objects-values-and-types) for portable terms |
+| 2 | indexed-access derivation, array RI/AF, and shift count | [MIT 6.006 Lecture 2](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-2-data-structures-and-dynamic-arrays/) for the course model |
+| 3 | geometric-copy argument and capacity-versus-length observation | [CPython `v3.14.6` `listobject.c`](https://github.com/python/cpython/blob/v3.14.6/Objects/listobject.c) only for the named implementation reading |
+| 4 | linked RI/AF, splice trace, and qualified insertion claim | [CMU 15-122](https://www.cs.cmu.edu/~15122/syllabus.shtml) for invariant/specification calibration |
+| 5 | shallow-versus-retained-memory claim and locality hypothesis | [Python `sys.getsizeof`](https://docs.python.org/3.14/library/sys.html#sys.getsizeof) for its explicit limit; measurement is still required |
+| 6 | representation decision, patch review, and oral defense | the Atlas evidence dossier; university sources calibrate scope but do not establish the decision |
+
 ---
 
 ## Final self-explanation
@@ -2109,3 +2305,149 @@ Without notes, answer in five minutes:
 > Atlas stores the same abstract history first in a Python list and then in a head/tail linked structure. Explain what stays the same, what changes in the object graph, how each representation preserves order, which operation costs change, how memory and locality differ, why a tuple snapshot may safely share frozen events, which facts are Python guarantees versus CPython observations, and what new requirement would make you choose neither representation.
 
 If the answer naturally moves through contract → object graph → RI/AF → operation mechanics → cost → ownership → evidence layer → changing decision, the knowledge is connected.
+
+## Guided Codex handoff — M6
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M6. This sequence contract is [claim], this
+representation is [array/list/linked structure], and this operation preserves
+[invariant].”** Ask for an object graph or memory sketch before comparing
+costs. Use this hint ladder: client operation → representation/ownership →
+invariant → local update trace → cost/locality claim → test or measurement.
+Change one workload (append-heavy, random access, shared snapshot, or delete
+near a cursor) and ask whether the representation decision still holds.
+
+### Supportive oral-defense protocol
+
+This is an encouraging explanation-and-repair conversation, not a rigid
+written or coding exam. Begin from the learner’s chosen artifact and let the
+learner pause, ask for a smaller example, or keep an uncertainty open. The
+workbook cannot verify a particular chat, voice, rendering, retention, or
+platform setting; use a readable text, code-block, or ASCII sketch fallback
+when a visual whiteboard is unavailable.
+
+### Invitation — start from one observable behavior
+
+Ask: “Which sequence behavior must a client observe, and which one graph or
+trace makes you believe the current representation preserves it?” Request a
+prediction and confidence before any correction.
+
+### Oral hint ladder — expose one representation decision at a time
+
+Move only as needed: client operation → abstract sequence → object graph or
+slots/nodes → empty/nonempty RI → one local write or move → counted work →
+evidence label or measurement limit. Offer the smallest next sketch rather
+than supplying the completed answer.
+
+### Changed-premise counterexample
+
+Keep the public sequence behavior fixed, then remove the known predecessor,
+make indexed access frequent, make oldest eviction frequent, or make a payload
+mutable. Ask which invariant, cost, snapshot, or ownership claim changes and
+construct the shortest counterexample together.
+
+### Transfer — diagnose a queue-like slow path
+
+Present a history service that repeatedly calls `pop(0)` while a rolling limit
+is active. Ask the learner to locate the hidden work, separate it from the
+Python-language guarantee, and frame the M7 queue/deque question without
+claiming a final representation choice.
+
+### Reflection — name the next smallest evidence
+
+Close by asking which diagram, transition trace, source label, test, or bounded
+measurement would make the explanation more reliable. Treat a correction as a
+new investigation target, not a penalty.
+
+### Learner-controlled evidence summary
+
+The learner may retain a short summary containing the chosen claim, artifact,
+confidence, changed premise, correction, and next question. Do not assume an
+automatic note, transcript, voice recording, Notion write, or mastery result.
+
+### Study Partner — representation rehearsal
+
+Ask for two sketches that represent the same abstract history. Change one
+operation and ask which pointers, indices, aliases, or cached lengths move.
+Finish with one sentence separating a portable Python behavior from a
+CPython/locality observation.
+
+### Study Partner prompt — two models, one contract
+
+Use the visible conversation as a shared whiteboard when it is readable: place
+one small object graph, slot table, or `head → next` trace beside the same
+abstract sequence. Present equations or code in short labeled blocks and give
+a plain-language or ASCII alternative. Ask the learner to predict the next
+reference update and confidence before revealing a trace; this prompt does not
+guarantee a platform’s equation, code, voice, or live-chat rendering.
+
+### Changed-workload rehearsal
+
+Change exactly one condition—random inspection frequency, oldest eviction,
+payload mutability, or allocation locality—and ask which operation cost,
+ownership boundary, or RI must be reconsidered. Keep the answer bounded to
+the stated model, Python contract, or pinned CPython observation.
+
+### Teaching Assistant handoff
+
+Offer the learner’s selected object graph or transition trace, one labeled
+claim, confidence, changed premise, unresolved assumption, and the M7 question
+for a supportive Teaching Assistant conversation. The learner chooses whether
+to retain or export this summary; no automatic external write is assumed.
+
+### Forward handoff — M7
+
+Carry one sequence invariant, ownership boundary, and cost comparison into
+**M7**. The next module turns access order and demand timing into explicit
+stack, queue, iterator, and generator contracts.
+
+## Bench pack
+
+**Bench pack:** `m06` — sparse, three benches. CPython 3.12 floor.
+**Emits:** one bench record per benched session, naming that session's declared output.
+
+Bench packs are sparse by policy: a session gets a bench only where running code
+reveals something reading cannot. This module has no checked-in reference model,
+so the benches carry their own fixtures.
+
+### Bench 3 — growth-and-capacity evidence card
+
+**Session:** 3. **Rungs:** recognize, trace.
+**Executes:** the capacity ladder in pointer slots across 2,000 appends. Growth
+is geometric at a factor near 1.13 — not the doubling used to illustrate the
+amortized argument — and a modelled constant-bump policy needs many times more
+reallocations. Separates the portable guarantee from the interpreter's arithmetic.
+**Cannot establish:** that the factor is documented or stable. It is one build's
+tuning, and the slot conversion assumes 8-byte pointers.
+
+### Bench 4 — linked-invariant and boundary-transition trace
+
+**Session:** 4. **Rungs:** debug and defend, trace.
+**Executes:** a three-clause invariant checked after every boundary transition.
+The first failure is the tail pointer on emptying, with the other two clauses
+still true; the damage then propagates into the next append, which also breaks
+length agreement. The first violated clause names the cause; the rest are fallout.
+**Cannot establish:** correctness of the repair under every operation sequence,
+and it tests no concurrent access.
+
+### Bench 5 — memory-scope and architecture memo
+
+**Session:** 5. **Rungs:** trace, map.
+**Executes:** `sys.getsizeof` on a list of 10,000 objects — about 8.5 bytes per
+element, pointer-sized — against a sum one level deep that is roughly 19× larger.
+Then a contiguous scan against a pointer-chasing scan at the same complexity.
+**Cannot establish:** that the timing gap is cache behaviour. Locality, attribute
+lookup, and iteration machinery all vary at once, so the ratio is labelled a
+hypothesis rather than a measurement of locality.
+
+### Sessions without a bench
+
+- **Session 1** — the workbook walks the object graph through in print.
+- **Session 2** — qualifies on the rubric and ranked below this pack's cut.
+- **Session 6** — a decision-and-handoff dossier consuming Sessions 1–5.
+
+### Bench pack completion record
+
+Records under `benches/records/m06-s*.json`. Each names its session output, carries
+at least one labelled claim, and states exactly one thing its evidence cannot support.

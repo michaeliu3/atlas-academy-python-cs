@@ -48,6 +48,9 @@ Keep this boundary visible:
 ## 1. Position in the knowledge graph
 
 ```mermaid
+%% atlas-diagram-id: m09-knowledge-graph
+%% atlas-diagram-title: Module 9 connects prior foundations to ordered structures and later systems work
+%% atlas-diagram-alt: Modules 2, 3, 5, 6, 7, and 8 each provide a prerequisite idea to Module 9. Module 9 then supports Modules 10, 11, 16, and 24.
 flowchart LR
     M2["Module 2<br/>recursion + induction"] --> SHAPE["Recursive tree shape"]
     M3["Module 3<br/>ADTs + RI/AF"] --> OPS["Ordered operation contracts"]
@@ -68,6 +71,17 @@ flowchart LR
     M9 --> M16["Module 16<br/>database indexes"]
     M9 --> M24["Module 24<br/>CPython source + profiling"]
 ```
+
+### Text alternative — ordered-structure knowledge bridge
+
+M9 has one canonical academic prerequisite: **M8**, which supplies the
+identity-index and derived-state distinction that ordered operations do not
+replace. Modules 2–7 are retrieved foundations for recursion, abstraction,
+cost, representations, and access policies; they are not extra route
+authorizations here. M9 introduces ordered structure invariants, then carries
+one bounded scheduling/prefix-index dossier to **M10**, where a priority
+frontier becomes part of graph reasoning. References to M11, M16, M17, M19,
+M22, M24, and M25 are later conceptual connections, not navigation bypasses.
 
 ### The problem that forces this module
 
@@ -107,6 +121,9 @@ The checkpoint explicitly handles a difficult engineering fact:
 This checkpoint extends the Arc II pipeline rather than replacing it:
 
 ```mermaid
+%% atlas-diagram-id: m09-atlas-learning-flow
+%% atlas-diagram-title: Atlas data flow through ingestion, indexing, scheduling, and graph planning
+%% atlas-diagram-alt: History flows through lazy ingestion and an inverted index into a concept catalog. The catalog supplies a review heap and title trie, whose review and prefix results feed Module 10 planning.
 flowchart LR
     EVENTS["M6 history"] --> STREAM["M7 lazy ingestion"]
     STREAM --> TERMS["M8 inverted index"]
@@ -225,6 +242,69 @@ By the end, Michael can:
 
 Hashing from Module 8 creates a candidate region from equality-compatible keys. It does not maintain comparison order. Before choosing a structure, classify the client operation.
 
+### First-principles derivation — client operations constrain representations
+
+Start by naming what must be recovered: exact identity, one minimum, a
+successor or range, a whole sorted sequence, or a shared prefix. That question
+sets the smallest useful order: equality indexing, parent/child extremum order,
+ordered regions, a total sequence, or symbol paths. An invariant is then the
+local fact that preserves that order through updates; a drawn tree or familiar
+container name is not the invariant.
+
+```text
+client question -> comparison/policy -> minimum useful order
+-> representation invariant -> cost under stated structure assumptions
+```
+
+Change the question and the representation may change: a heap can answer
+`find_min()` without supporting successor, while a BST can support successor
+only under its ordered-region invariant. The next sections test this chain with
+definitions, assumptions, counterexamples, and a fixed workload—not a generic
+claim that one structure is best.
+
+### Definition — ordered operation, key, and invariant
+
+An **ordered operation** asks for a relation such as minimum, successor,
+range, prefix, or complete sequence rather than exact identity alone. A
+**key** maps a record to the values that define that relation. An
+**ordering invariant** is the local structural rule—such as left/right BST
+regions, parent/child heap order, or trie prefix paths—that lets a
+representation answer its declared operation without re-sorting everything.
+
+### Assumption — comparison, model, and policy stay separate
+
+The operation table uses stated course models: comparisons are coherent,
+key-transition lookup has its declared cost, and output work is counted. Python
+documents public `heapq`, `bisect`, and sorting behavior; pinned CPython source
+can illuminate one implementation only. Tie order, title normalization,
+revision currency, and compaction thresholds are Atlas policies, not universal
+properties of trees, heaps, or Python.
+
+### Derivation and proof idea — an operation constrains the useful order
+
+Start with the client request. Repeated minimum needs only an extremum proof,
+so a heap preserves parent/child order rather than a total sequence. Successor
+and range need path-elimination evidence, so a BST needs ordered regions.
+Prefix completion needs shared symbols, so a trie needs one path per prefix.
+Correctness follows by showing the invariant makes the requested candidate
+reachable and that every permitted update restores it.
+
+### Counterexample — a familiar shape does not answer every ordered question
+
+A valid min-heap can contain `[2, 5, 4, 11, 8, 9]`: `2` is globally minimal,
+but `5` and `4` show why it is not a sorted array or a binary-search target.
+Likewise, a tree without the BST invariant supplies a recursive shape, not a
+successor operation. Name the needed relation before choosing the drawing.
+
+### Numerical experiment — measure a declared workload, not a structure name
+
+For a fixed trace of inserts, equal-priority reschedules, cancellations, and
+prefix queries, record comparisons, heap pushes/pops, live and stale entries,
+prefix length, visited nodes, and emitted IDs. Compare the recorded model work
+with the stated operation mix. This can test one implementation and workload;
+it is not a universal timing result, a CPython guarantee, or proof of an
+asymptotic theorem.
+
 | Client question | Abstract operation | Important output/order |
 |---|---|---|
 | “Give me concept `c9`.” | `find(key)` | exact equality |
@@ -236,6 +316,9 @@ Hashing from Module 8 creates a candidate region from equality-compatible keys. 
 | “Sort this one snapshot.” | `sort(iterable)` | a new ordered sequence |
 
 ```mermaid
+%% atlas-diagram-id: m09-ordered-operation-selection
+%% atlas-diagram-title: Client operations choose an ordered representation family
+%% atlas-diagram-alt: Exact lookup favors hashing. Mostly-read collections favor a sorted array. Repeated minimum favors a heap, prefix lookup favors a trie, and other ordered operations motivate a balanced ordered-set structure.
 flowchart TD
     NEED["What does the client ask?"] --> EXACT{"Exact identity only?"}
     EXACT -- "yes" --> HASH["hash mapping<br/>Module 8"]
@@ -356,6 +439,9 @@ A **rooted tree** is either empty or consists of one root joined to disjoint chi
 State the edge-versus-node convention because some texts count height in nodes.
 
 ```mermaid
+%% atlas-diagram-id: m09-tree-vocabulary
+%% atlas-diagram-title: A small binary tree illustrates depth, height, path, and subtree
+%% atlas-diagram-alt: Root m has children f and t. f has children b and h; t has children p and z. The root has height two, its children height one, and leaves height zero.
 flowchart TD
     R["m · depth 0 · height 2"] --> F["f · depth 1 · height 1"]
     R --> T["t · depth 1 · height 1"]
@@ -454,6 +540,9 @@ For a BST with unique keys:
 The invariant makes one comparison discard an entire subtree:
 
 ```mermaid
+%% atlas-diagram-id: m09-bst-search-decision
+%% atlas-diagram-title: BST search chooses one subtree from a comparison
+%% atlas-diagram-alt: Search compares target key k with node key x. Equal keys return the value; a smaller key searches left and a larger key searches right, repeating the same decision.
 flowchart TD
     Q["find key k at node key x"] --> C{"compare k with x"}
     C -- "k == x" --> HIT["return value"]
@@ -567,6 +656,9 @@ Insert keys in this order:
 An ordinary BST becomes:
 
 ```mermaid
+%% atlas-diagram-id: m09-degenerate-bst
+%% atlas-diagram-title: Sorted insertion can turn a valid BST into a chain
+%% atlas-diagram-alt: Nodes 1 through 5 form a single rightward chain. The BST ordering remains valid, but height and search cost become linear in the number of nodes.
 flowchart TD
     A["1"] --> B["2"]
     B --> C["3"]
@@ -621,6 +713,9 @@ The height restriction yields `h = Θ(log n)`, so path operations remain logarit
 Before:
 
 ```mermaid
+%% atlas-diagram-id: m09-left-rotation-before
+%% atlas-diagram-title: Left rotation before state with ordered regions A, x, B, y, and C
+%% atlas-diagram-alt: Node x has left region A and right child y. y has left region B and right region C. All keys in A are less than x, B lies between x and y, and C is greater than y.
 flowchart TD
     X["x"] --> A["A<br/>keys &lt; x"]
     X --> Y["y<br/>x &lt; y"]
@@ -631,6 +726,9 @@ flowchart TD
 After rotating left at `x`:
 
 ```mermaid
+%% atlas-diagram-id: m09-left-rotation-after
+%% atlas-diagram-title: Left rotation after state preserving ordered regions A, x, B, y, and C
+%% atlas-diagram-alt: Node y becomes the parent, with x as its left child and C as its right region. x keeps A on the left and B on the right, preserving the same in-order key sequence.
 flowchart TD
     Y["y"] --> X["x"]
     Y --> C["C<br/>keys &gt; y"]
@@ -775,7 +873,76 @@ assert bisect_left(values, 20) == 1
 assert bisect_right(values, 20) == 4
 ```
 
-The half-open range `[1, 4)` identifies all entries equal to `20`. That same boundary idea supports ranges and prefix bounds in sorted text, though a trie supplies a different tradeoff.
+The half-open range `[1, 4)` identifies all entries equal to `20`. That same
+boundary idea supports ranges and prefix bounds in sorted text, though a trie
+supplies a different tradeoff.
+
+### First principles: derive the lower boundary
+
+`bisect_left` answers a boundary question, not merely “did I see an equal
+value?” Assume `a` is sorted in nondecreasing order under the same comparison
+as `x`. A lower-bound loop keeps the unclassified array slice half-open,
+`a[lo:hi]`, and must preserve these facts before each iteration:
+
+- every index before `lo` stores a value `< x`;
+- every index at or after `hi` stores a value `>= x`; and
+- the insertion **position** is still in the closed index interval `[lo, hi]`.
+
+The distinction matters: an insertion position may be `len(a)`, just beyond
+the final array index.
+
+**Trace before reveal.** For `values = [10, 20, 20, 20, 30]`, predict the
+lower boundary for `20`, `30`, and `35`. Which branch-preservation argument
+loses its justification if `values` were not sorted?
+
+```python
+def lower_bound(a: list[int], x: int) -> int:
+    lo, hi = 0, len(a)
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+```
+
+Why it works, step by step:
+
+| Observation at `mid` | Safe classification from sortedness | Next boundary |
+| --- | --- | --- |
+| `a[mid] < x` | Every index through `mid` is `< x`; the insertion position is after `mid`. | `lo = mid + 1` |
+| `a[mid] >= x` | Every index from `mid` onward is `>= x`; the insertion position is at or before `mid`. | `hi = mid` |
+
+When `lo < hi`, `lo <= mid < hi`. The first branch changes the width from
+`hi - lo` to `hi - (mid + 1)`; the second changes it to `mid - lo`. Either is
+strictly smaller, so a finite list reaches `lo == hi`. Then the two slice facts
+are exactly the `bisect_left` partition: values before `lo` are `< x`, and
+values at or after it are `>= x`.
+
+### Debug a boundary, not a result
+
+This tempting edit breaks the half-open invariant:
+
+```python
+def broken_lower_bound(a: list[int], x: int) -> int:
+    lo, hi = 0, len(a)
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid - 1  # BUG: skips `mid` as a possible boundary
+    return lo
+```
+
+With `a = [10, 20, 20, 20, 30]` and `x = 30`, the first comparison moves
+`lo` to `3`; the second sees `a[4] == 30` and sets `hi` to `3`. It returns
+`3`, even though the right slice begins with `20`, not a value `>= 30`.
+Diagnose the failure from the violated partition rather than from the returned
+number alone. If the comparison is deliberately changed from `<` to `<=`, the
+loop instead targets the `bisect_right` contract—an upper boundary after equal
+values—not a repaired lower boundary.
 
 ### Broken use
 
@@ -831,6 +998,9 @@ For zero-based index `i`:
 - parent for `i > 0`: `(i - 1) // 2`.
 
 ```mermaid
+%% atlas-diagram-id: m09-implicit-heap-tree
+%% atlas-diagram-title: A heap array encodes a complete binary tree by indices
+%% atlas-diagram-alt: Array index 0 holds key 2 and is parent of indices 1 and 2 holding 5 and 4. Those indices in turn parent indices 3 through 5, showing a complete binary-tree shape.
 flowchart TB
     A0["index 0 · key 2"] --> A1["index 1 · key 5"]
     A0 --> A2["index 2 · key 4"]
@@ -1302,6 +1472,9 @@ Assume:
 There are `n!` possible relative orders. Model a deterministic comparison sort as a binary decision tree:
 
 ```mermaid
+%% atlas-diagram-id: m09-comparison-decision-tree
+%% atlas-diagram-title: Comparison sorting distinguishes orders through binary decisions
+%% atlas-diagram-alt: Comparisons such as a less than b and b less than c branch into possible output orders. A correct comparison sort needs enough leaves to distinguish every input ordering.
 flowchart TD
     C1{"a < b?"} -->|yes| C2{"b < c?"}
     C1 -->|no| C3{"a < c?"}
@@ -1366,6 +1539,9 @@ Hash lookup answers whether the whole normalized title key exists. A prefix quer
 A **trie** represents a key as a path of symbols. Keys with a common prefix share the corresponding path.
 
 ```mermaid
+%% atlas-diagram-id: m09-trie-prefix-path
+%% atlas-diagram-title: A trie shares a common prefix across recursive and record keys
+%% atlas-diagram-alt: From the root, the letters r, e, and c form a shared prefix. One branch continues to recursive and another to record, so matching rec identifies both descendant keys.
 flowchart TD
     R["root"] --> R1["r"]
     R1 --> E["e"]
@@ -1496,6 +1672,9 @@ def complete(self, prefix: str) -> list[str]:
 ### 17.1 Architecture and authority
 
 ```mermaid
+%% atlas-diagram-id: m09-scheduler-authority
+%% atlas-diagram-title: Atlas scheduler separates authoritative catalog and active-review state from derived indexes
+%% atlas-diagram-alt: Catalog commands update the authoritative concept catalog and active-review map. A trie is rebuilt from catalog state and a candidate heap is rebuilt or compacted from active-review state; query and verifier components read all four structures.
 flowchart LR
     CMD["Catalog / scheduling commands"] --> CAT["ConceptCatalog<br/>authoritative identity + title"]
     CMD --> LIVE["ActiveReview map<br/>authoritative active priority"]
@@ -1636,6 +1815,13 @@ Lazy invalidation chooses:
 - a compaction policy to bound that debt.
 
 That is a representation tradeoff, not a workaround to hide.
+
+### Predict before revealing — scheduler generation trace
+
+Before inspecting the scheduler's explanation, predict which physical tuple is
+current after each update, whether the first old tuple may still be retained,
+and what a same-priority cancel/re-add needs beyond `concept_id` and priority.
+Record low, medium, or high confidence beside the trace.
 
 ### 17.7 Prediction trace
 
@@ -1899,7 +2085,7 @@ The agent must return:
 
 Each session is 75–90 focused minutes and has one abstraction jump. Every session begins with retrieval and ends with evidence Michael can explain without code completion.
 
-### Session 1 — Ordered questions force new operations
+## Session 1 — Ordered questions force new operations
 
 **Retrieve:** mapping/set interfaces from Module 8, sequence representations from Module 6, and qualified costs from Module 5.
 
@@ -1916,9 +2102,15 @@ Each session is 75–90 focused minutes and has one abstraction jump. Every sess
 
 **Evidence:** a decision ledger row for each query, including rejected alternatives and a reopening trigger.
 
+### Output: ordered-operation decision ledger
+
+One compact table mapping each Atlas request to its required operation, key,
+duplicate/tie policy, chosen representation, rejected alternative, cost
+parameter, confidence, and one condition that would reopen the decision.
+
 **TA checkpoint:** if a structure is selected from familiarity or syntax, return to Module 3's interface-before-representation rule.
 
-### Session 2 — Recursive shape becomes ordered search
+## Session 2 — Recursive shape becomes ordered search
 
 **Retrieve:** recursive definitions, structural induction, object graphs, RI, AF, and call-stack space.
 
@@ -1936,9 +2128,15 @@ Each session is 75–90 focused minutes and has one abstraction jump. Every sess
 
 **Evidence:** a five-minute explanation moving from abstract ordered mapping → object graph → BST invariant → path choice → height cost.
 
+### Output: BST path-and-proof trace
+
+One labeled tree/object graph, a search trace with eliminated key regions, the
+BST RI/AF and duplicate policy, a short path-correctness argument, and a
+height-qualified cost claim.
+
 **TA checkpoint:** if “tree means logarithmic” appears, build the ordered-insertion chain before continuing.
 
-### Session 3 — Balance is a repairable shape constraint
+## Session 3 — Balance is a repairable shape constraint
 
 **Retrieve:** tree height and Module 2's inductive proof pattern.
 
@@ -1956,9 +2154,15 @@ Each session is 75–90 focused minutes and has one abstraction jump. Every sess
 
 **Evidence:** before/after diagrams plus an order-preservation and node-preservation argument.
 
+### Output: rotation-preservation dossier
+
+One symbolic `A, x, B, y, C` before/after trace, each rewritten reference,
+an in-order and reachability preservation argument, height-refresh order, and
+one counterexample to an invalid local rewrite.
+
 **TA checkpoint:** if the learner memorizes “left-heavy means rotate right” without preserving regions, remove numeric keys and use symbolic intervals.
 
-### Session 4 — A complete tree becomes a priority mechanism
+## Session 4 — A complete tree becomes a priority mechanism
 
 **Retrieve:** array slot arithmetic, queue access discipline, and amortized versus worst-case reasoning.
 
@@ -1977,9 +2181,15 @@ Each session is 75–90 focused minutes and has one abstraction jump. Every sess
 
 **Evidence:** an invariant trace with changed indices highlighted and a qualified operation-cost table.
 
+### Output: heap invariant trace
+
+One array/tree correspondence, predicted push and pop trace, changed parent or
+child indices, root-min proof idea, qualified heapify argument, and one
+boundary between documented `heapq` behavior and a pinned implementation read.
+
 **TA checkpoint:** challenge “heap is sorted” with two valid heaps containing the same multiset but different sibling orders.
 
-### Session 5 — Sorting and prefix paths organize different evidence
+## Session 5 — Sorting and prefix paths organize different evidence
 
 **Retrieve:** recurrences, permutations, set equality, iterator materialization, and key stability.
 
@@ -1998,9 +2208,15 @@ Each session is 75–90 focused minutes and has one abstraction jump. Every sess
 
 **Evidence:** a comparison memo choosing Python's built-in sort, a heap, or a trie for three different client requests.
 
+### Output: ordering-contract comparison memo
+
+One memo separating sorting, priority, and prefix contracts; include a stable
+sort witness, comparison-bound assumption, trie prefix/output parameters, and
+one reason a valid output alone is insufficient evidence.
+
 **TA checkpoint:** if sorted order alone is treated as correctness, show a sorted output that duplicates one item and loses another.
 
-### Session 6 — Coordinate indexes, direct an agent, defend the system
+## Session 6 — Coordinate indexes, direct an agent, defend the system
 
 **Retrieve:** Module 8's authoritative-versus-derived state, heap currency, trie normalization, and all cost parameters.
 
@@ -2018,6 +2234,12 @@ Each session is 75–90 focused minutes and has one abstraction jump. Every sess
 8. walk one event from Module 7 ingestion through Module 8 indexing into Module 9 scheduling.
 
 **Evidence:** accepted/rejected patch review, test output, cost ledger, architecture diagram, and oral defense.
+
+### Output: ordered-index defense dossier
+
+One authority/derived-state diagram, same-priority stale-generation trace,
+heap/trie update policy, bounded agent brief, inspected patch decision,
+focused evidence list, cost ledger, confidence, and a question carried to M10.
 
 **TA checkpoint:** green tests are insufficient unless Michael can identify authoritative state, first possible failure, stale-entry policy, and evidence that survives a representation rewrite.
 
@@ -2535,9 +2757,18 @@ Produce one connected studio packet.
 13. **Verification bundle:** focused tests, model/property checks, physical/live metrics.
 14. **Oral defense:** one event from ingestion/indexing through scheduling and forward into graph planning.
 
+### Project acceptance criteria
+
+Treat the dossier as a discussion-ready evidence packet when it makes the
+client operation and ordering policy inspectable; contains an invariant plus a
+short correctness witness; names its height, stale, key, and output cost
+parameters; and includes one rejected or repaired counterexample with the
+smallest relevant test or trace. These are constructive quality targets, not a
+score, grade, publication decision, or mastery declaration.
+
 ### Evidence rubric
 
-| Capability | Emerging | Ready to advance |
+| Capability | Emerging | Evidence for next bridge |
 |---|---|---|
 | operation recovery | names a container | derives structure from client operations and constraints |
 | tree reasoning | labels nodes | states RI/AF and proves path/traversal behavior |
@@ -2567,9 +2798,9 @@ Produce one connected studio packet.
 11. Why must trie search include output work?
 12. Which Atlas facts are Python guarantees, course models, or product policies?
 
-### Instructor decision rule
+### Constructive next-step guide
 
-Advance when Michael can take unfamiliar ordered code and:
+Use this evidence to choose the M10 bridge or a repair path, not to decide whether Michael passes. Consider whether you can take unfamiliar ordered code and:
 
 1. recover the client operations and ordering policy;
 2. diagram representation and authoritative state;
@@ -2581,7 +2812,9 @@ Advance when Michael can take unfamiliar ordered code and:
 8. reject a plausible same-priority, stability, or output-cost defect;
 9. verify the repaired system with evidence that survives representation changes.
 
-Manual implementation speed and memorized operation tables are not mastery.
+With a clear, self-supported explanation across the list, continue with the M10 handoff. Otherwise, trace a same-priority or stale-entry counterexample, redraw authoritative versus derived state, or ask the TA to change one ordering assumption.
+
+This guide is not a score, grade, release approval, Core advance, or mastery declaration. Manual implementation speed and memorized operation tables are not sufficient evidence.
 
 ---
 
@@ -2590,6 +2823,9 @@ Manual implementation speed and memorized operation tables are not mastery.
 ### One-page concept map
 
 ```mermaid
+%% atlas-diagram-id: m09-consolidation-map
+%% atlas-diagram-title: Ordered client questions connect structures, invariants, and Atlas scheduling
+%% atlas-diagram-alt: Exact identity, ordering questions, and policy choices lead to sorting, heaps, BSTs, or tries. Heap, trie, and hash structures coordinate in Atlas, where a dictionary defines current state, revisions reject stale heap entries, and evidence feeds Module 10.
 flowchart TD
     HASH["M8 exact identity"] --> ORDER["Ordered client question"]
     ORDER --> KEY["key + direction<br/>duplicates + ties"]
@@ -2678,6 +2914,83 @@ Add:
 
 ---
 
+## 25. Bench pack
+
+**Bench pack:** `m09` — six benches, one per session. CPython 3.12 floor.
+
+This module and Module 5 were authored before the sparse bench policy existed and
+carry a bench for every session. Later modules carry two or three, covering only
+the sessions where running code reveals something reading cannot; the rest state
+why they have none. Six is not a target.
+**Emits:** one bench record per session, naming that session's declared output.
+
+The bench pack is where this module's session claims get executed. It carries no
+teaching prose: everything a bench needs is stated above, and a bench that
+re-explains a concept has become a second source of truth. Several benches adapt
+problem framings and test cases from an Apache-2.0 challenge collection; the
+narrative is this course's own, and provenance is recorded in the bench files and
+in `benches/BENCH_ATTRIBUTION.md`.
+
+### Bench operating rule
+
+A bench is evidence, not attainment. A record showing four checks passed and two
+not attempted is an honest record. `emit()` refuses a record whose answers are
+still the blank template, so an unrun bench cannot look like a finished one.
+
+### Bench 1 — ordered-operation decision ledger
+
+**Session:** 1. **Rungs:** recognize.
+**Executes:** five Atlas queries classified by the abstract operation each needs,
+and a tie resolved through the third element of the ordering key.
+**Cannot establish:** which representation to choose. Naming an operation does
+not select a structure; that needs the workload's operation mix.
+
+### Bench 2 — BST path-and-proof trace
+
+**Session:** 2. **Rungs:** debug and defend, trace.
+**Executes:** a representation-invariant checker against a tree whose violation
+is two levels deep, then an insert whose `else` branch silently admits equal keys.
+**Cannot establish:** anything about shape. A degenerate chain satisfies every
+clause of the invariant.
+
+### Bench 3 — rotation-preservation dossier
+
+**Session:** 3. **Rungs:** trace, map.
+**Executes:** ascending versus shuffled insertion at four sizes, then a rotation
+checked separately for what it preserves and what it changes.
+**Cannot establish:** that a rebalancing scheme terminates or restores a height
+bound. Those are properties of the policy choosing rotations.
+
+### Bench 4 — heap invariant trace
+
+**Session:** 4. **Rungs:** modify, trace.
+**Executes:** a min-heap scheduler over the review priority key, with the order
+invariant checked after every push and the drain order checked against the
+contract.
+**Cannot establish:** behaviour at depth. Five elements sift at most two levels.
+
+### Bench 5 — ordering-contract comparison memo
+
+**Session:** 5. **Rungs:** review and verify, map.
+**Executes:** a prefix index against the one-line filter it replaces, and audits
+four claims about which is better.
+**Cannot establish:** a comparative performance claim. Only the linear filter was
+measured; the trie's build time and memory were not.
+
+### Bench 6 — ordered-index defense dossier
+
+**Session:** 6. **Rungs:** design and delegate, transfer.
+**Executes:** a two-index coordinator whose removal opens a window where the
+scheduler and the id map disagree, reproduced in program order.
+**Cannot establish:** what concurrent readers observe. Closing this window does
+not make the coordinator thread-safe.
+
+### Bench pack completion record
+
+Six records under `benches/records/m09-s*.json`. Each names its session output,
+carries at least one labelled claim, and states exactly one thing its evidence
+cannot support.
+
 ## Backward and forward connections
 
 ### Backward
@@ -2740,6 +3053,21 @@ The teaching narrative, Atlas checkpoint, diagrams, quizzes, and review tasks ar
 4. Atlas policy owns normalization, ties, duplicate semantics, source of truth, compaction, and recovery.
 5. Every performance statement names height, key size, physical/live/stale counts, output, and model assumptions as applicable.
 
+### Session-to-source-and-evidence route
+
+**Access and reuse.** Sources were checked **2026-08-01** and are link/cite
+only. Atlas retains its original rotation, heap, scheduling, and patch-review
+traces; a pinned CPython source never becomes a general Python guarantee.
+
+| Session | Claim or learner artifact | Verify after your own attempt |
+| --- | --- | --- |
+| 1 | ordered-operation ledger and representation choice | [MIT 6.006 Lecture 3](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec3/) for ordered-set/sorting context |
+| 2 | BST invariant, path-elimination proof, and height-qualified cost | [MIT 6.006 Lecture 6](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec6/) for binary-tree model |
+| 3 | rotation trace and in-order/node-preservation argument | [MIT 6.006 Lecture 7](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec7/) for AVL reasoning |
+| 4 | heap invariant, heapify argument, and priority trace | [Python `heapq`](https://docs.python.org/3.14/library/heapq.html) for portable operations; [CPython `v3.14.6` `heapq.py`](https://github.com/python/cpython/blob/v3.14.6/Lib/heapq.py) for bounded code reading |
+| 5 | sorting/trie comparison, stability counterexample, and output-aware cost | [Python Sorting HOWTO](https://docs.python.org/3.14/howto/sorting.html) and [MIT 6.006 Lecture 5](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec5/) |
+| 6 | versioned heap/trie coordination, patch review, and defense | the Atlas dossier; source links support terms and model boundaries, not the final design choice |
+
 ---
 
 ## Final self-explanation
@@ -2749,3 +3077,83 @@ Without notes, answer in eight minutes:
 > Atlas already has a hash-based identity and term index. Explain why minimum, successor, sorted output, and prefix requests force new operation contracts. Derive a BST from ordered path choices, show why balance matters, preserve order through one rotation, derive a binary heap from complete shape, compare insertion/merge/heap sorting and the comparison lower bound, derive prefix search from trie paths, then defend why Atlas coordinates an authoritative dictionary with a versioned stale-entry heap and a rebuildable trie. State correctness, cost, failure, evidence, and Python-versus-CPython boundaries throughout.
 
 If the explanation naturally moves through **client question → key policy → interface → representation → invariant → correctness → cost → failure → coordinated architecture → evidence**, the knowledge is connected.
+
+## Guided Codex handoff — M9
+
+### Teaching Assistant — supportive oral defense
+
+Start with: **“I am finishing M9. The ordered-operation contract is [claim],
+this invariant is [BST/heap/trie rule], and I predict this update will
+[result].”** Ask for a small tree or heap trace before accepting a named
+algorithm. Use this hint ladder: client order question → representation shape
+→ local invariant → update path → witness/correctness argument → height/input
+cost assumptions. Change one premise (duplicate policy, stale entry, skewed
+tree, or prefix normalization) and ask how the contract and test change.
+
+### Supportive oral-defense protocol
+
+Use an encouraging explanatory conversation, not a rigid written or coding
+exam. The learner may choose text or voice, pause, ask for a smaller trace, or
+keep an uncertainty open. Make a tree, heap array, tuple comparison, equation,
+or code snippet readable in the visible chat, with a plain-language or ASCII
+fallback. This workbook does not configure or guarantee any platform, voice,
+equation/code rendering, retention, export, or Notion behavior.
+
+### Invitation — recover one ordered question before naming a structure
+
+Ask the learner to select one Atlas request, state the key and tie policy,
+predict the next local comparison or update, and name confidence before a
+correction. Start from an observable trace rather than the name of a data
+structure.
+
+### Hint ladder — expose one invariant at a time
+
+Move only as needed: client operation → key/tie policy → abstract contract →
+tree/heap/trie representation → local invariant → first possible failure →
+correctness witness → height, stale, key, or output cost. Offer the smallest
+counterexample or diagram that restores reasoning rather than declaring a
+verdict.
+
+### Changed-premise counterexample
+
+Change exactly one premise: make a BST skewed, use equal priorities, mutate an
+ordering field, replace a sorted snapshot with repeated minimum requests, or
+make a prefix return a million IDs. Ask which earlier claim no longer follows,
+what invariant or policy changes, and what evidence would now be required.
+
+### Transfer — carry a priority frontier into M10
+
+Ask how a graph frontier differs from a fully ordered map and why a stale
+tentative-distance heap entry must be checked against current state. This is a
+transfer question, not permission to bypass M10's prerequisites.
+
+### Reflection — name the next smallest evidence
+
+Close by asking which tree region, heap-generation trace, comparison witness,
+cost parameter, source label, or focused test would make the explanation more
+reliable. Treat a correction as the next investigation target, not a penalty.
+
+### Learner-controlled evidence summary
+
+The learner may retain a short self-selected summary: chosen operation,
+artifact, confidence, repaired misconception, changed premise, unresolved
+assumption, and question for the TA or Study Partner. Any note, transcript,
+voice recording, or external export remains the learner's separate choice;
+this protocol performs no write.
+
+### Study Partner — invariant rehearsal
+
+Give a three-node structure with one subtle violation. Ask the learner to
+locate the earliest broken invariant, predict one repair, and explain whether
+the result is a correct structure, a balanced structure, or both. Finish with
+one evidence artifact to bring to the TA. Use the visible conversation as a
+non-grading whiteboard when it is readable: show a compact tree, heap table,
+tuple order, code fragment, or equation with a short plain-text fallback. This
+prompt does not require voice access, platform rendering, or automatic record
+storage.
+
+### Forward handoff — M10
+
+Carry the habit of making a relation and its invariant explicit into **M10**.
+The next module generalizes ordered links into arbitrary graph edges, frontiers,
+and witnesses for reachability, paths, and network decisions.
