@@ -136,6 +136,23 @@ authoring workbooks — most recently just now, when four of the six had drifted
 That's the loop worth closing with the one command in §1; everything else here
 is advisory.
 
+## Update 2026-08-07 — the six studios are built
+
+`app/{OptimizationInformation,SystemsAccelerators,FormalLimits,ClassicalAIDecision,MachineLearningRepresentation,LearningTheoryReliability}Studio.tsx`
+now exist, sharing one stylesheet at `app/AdvancedStudio.module.css` rather than
+six near-identical copies. All six are registered in
+`lib/module-studio-registry.ts` and `content/course/client-performance-budget.v1.json`.
+Entries are 22.8–24.3 KB against the 80 KB limit; closures ~331 KB against 400 KB.
+
+**They deliberately have no progress codecs and no browser storage.**
+`scripts/browser-progress-surface-policy.mjs` pins the surface list at exactly
+14, and every declared surface belongs to a published or preview module. M31–M36
+are hidden, so a learner-progress surface for them would declare storage for a
+route that `resolveModuleStudio` returns `unavailable` for. The policy also
+rejects any client file importing the storage seam without a declared surface —
+which is how it caught the first attempt. Persistence belongs to the promotion
+transaction, not to this work.
+
 ## What I'm not doing
 
 I am not touching `course-graph.v2.json` module entries, the contract registry,

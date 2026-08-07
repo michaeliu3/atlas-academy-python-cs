@@ -62,3 +62,6 @@ __pycache__/
 /benches/records/
 benches/**/*.ipynb
 .ipynb_checkpoints/
+
+# Scratch output from audits and local servers; never release inputs.
+/tmp/
