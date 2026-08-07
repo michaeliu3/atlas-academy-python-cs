@@ -1521,7 +1521,7 @@
       "title": "Probability, Statistics & Scientific Inference",
       "summary": "Arc VI — Mathematical foundations for uncertain, data-bearing, and learning systems",
       "arcId": "arc-vi",
-      "wordCount": 11184,
+      "wordCount": 11186,
       "estimatedMinutes": 46,
       "focusedStudyMinutes": {
         "minimumEvidence": [
@@ -1533,7 +1533,7 @@
           840
         ]
       },
-      "sourceHash": "2801a22eaadaa97a7b01d7450fc44df9b64ecd00eeec6ad8de1962ff5f1bbe68",
+      "sourceHash": "4625d2150d9c9e23b3f20d782f314831084bcb70980ec3de08f85dc7e2a7e397",
       "id": "m30",
       "state": {
         "lifecycle": "learner-material-ready",
