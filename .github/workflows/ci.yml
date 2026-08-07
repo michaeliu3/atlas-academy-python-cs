@@ -204,9 +204,6 @@ jobs:
         name: Proofread the workbook bench sections against the registry
         run: pnpm audit:bench-sections
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
-        name: Verify generated bench notebooks match their sources
-        run: pnpm check:bench-notebooks
-      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
         name: Verify generated goal-compliance matrix
         run: pnpm check:goal-compliance
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.portal == 'true'
@@ -387,6 +384,17 @@ jobs:
           python -m jupytext --to ipynb benches/src/m*/s*.py
           MPLBACKEND=Agg python -m pytest --nbmake benches/src \
             --nbmake-kernel=python3 --nbmake-timeout=300 -q
+      - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
+        name: Verify generated bench notebooks match their sources
+        # Must run in this job, after the jupytext step above. Notebooks are
+        # generated rather than committed, so in any job that has not generated
+        # them this finds nothing and exits 0 -- green because it did no work.
+        # It sat in the portal job, which never runs jupytext, and would have
+        # reported success on an empty set. The script now also fails when it
+        # sees fewer notebooks than sources, so that arrangement cannot recur
+        # quietly. Invoked through node directly: the script uses only node
+        # builtins, and this job has no pnpm install.
+        run: node scripts/check-bench-notebooks.mjs
       - if: github.event_name != 'pull_request' || needs.change-scope.outputs.apparatus == 'true'
         name: Check the Python and Node session hashers still agree
         # Python writes `sessionSha256` into every bench record and

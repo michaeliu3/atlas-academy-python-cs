@@ -6,7 +6,7 @@
   "inputs": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "f674db3b2fba8adf10575350b8bf8979d90e653abfafe5199881f4bff93639a8"
+      "sha256": "ebc93e9048d7836a52a32f9b2d861a66df649e4723ff997fe1a1a959680f0e26"
     },
     {
       "path": "app/AsyncDistributedStudio.tsx",
@@ -558,7 +558,7 @@
     },
     {
       "path": "content/course/release-evidence-policy.v1.json",
-      "sha256": "a1bd1476235cf16dc4853ba5a95fe2b9b9aa7f7650e9833aec7550da28c73c09"
+      "sha256": "88f0ac96bdec8b1471645aaaaa5796e3b006fcaf9b1e7ac45813fab9f57d7d37"
     },
     {
       "path": "content/course/release-input-policy.v1.json",

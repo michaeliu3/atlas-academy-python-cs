@@ -79,6 +79,31 @@ for (const pack of packs) {
 console.log(
   JSON.stringify({ notebooksChecked: notebooks, findings: findings.length }, null, 2),
 );
+
+// Notebooks are generated, not committed (`benches/**/*.ipynb` is gitignored), so
+// a fresh checkout has none and this script would examine nothing and exit 0 --
+// a gate that reports green precisely when it cannot do its job. It was wired
+// into a CI job that never ran jupytext, which is exactly that case.
+//
+// Run it after generation, and make the empty run loud rather than reassuring.
+const sources = packs.reduce(
+  (total, pack) =>
+    total +
+    fs
+      .readdirSync(path.join(sourceRoot, pack))
+      .filter((file) => file.endsWith(".py") && /^s\d/u.test(file)).length,
+  0,
+);
+if (notebooks < sources) {
+  console.error(
+    `\nfound ${notebooks} notebook(s) for ${sources} bench source(s). Generate ` +
+      `them first:\n  python -m jupytext --to ipynb benches/src/m*/s*.py\n` +
+      `Checking fewer notebooks than sources cannot establish that the ` +
+      `artifacts CI executes match their sources.`,
+  );
+  process.exitCode = 1;
+}
+
 if (findings.length) {
   console.error("\nfindings:");
   for (const finding of findings) console.error(`  - ${finding}`);
